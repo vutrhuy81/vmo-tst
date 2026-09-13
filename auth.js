@@ -14,6 +14,12 @@ const VMOAuth = (() => {
       role: 'admin',
       name: 'Quản trị viên tối cao',
       createdAt: '2026-09-01T00:00:00.000Z'
+    },
+      username: 'hoangkien',
+      password: '123456',
+      role: 'admin',
+      name: 'Quản trị viên tối cao',
+      createdAt: '2026-09-01T00:00:00.000Z'
     }
   ];
 
