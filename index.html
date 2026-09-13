@@ -471,6 +471,9 @@
             display: flex;
             align-items: center;
             gap: 8px;
+            background-color: #eff6ff;
+            padding: 8px 12px;
+            border-radius: 6px;
         }
 
         .problem-item {
@@ -821,7 +824,7 @@
                         </div>
                     </article>
 
-                    <!-- CHƯƠNG 2 -->
+                    <!-- CHƯƠNG 2: CẬP NHẬT CHI TIẾT THEO YÊU CẦU -->
                     <article class="exam-card" id="dn-c2" data-search="dãy số giới hạn stolz cesaro nghiệm gián tiếp taylor">
                         <div class="exam-header">
                             <div class="exam-top-tags">
@@ -831,16 +834,60 @@
                             <h3 class="exam-title">Chương 2: Dãy Số & Giới Hạn Dãy Số</h3>
                         </div>
                         <div class="exam-body">
-                            <div class="problem-content">
-<strong>Tóm tắt công cụ:</strong>
-1. <em>Khoảng bất biến & Đơn điệu:</em> Xét $x_{n+1} = f(x_n)$. Tìm khoảng $I$ sao cho $f(I) \subset I$ và xét dấu $f(x) - x$. Nếu dãy đơn điệu và bị chặn thì hội tụ về nghiệm $L = f(L)$.
-2. <em>Định lý Stolz-Cesàro:</em> Nếu $(b_n)$ tăng ngặt tới $+\infty$, thì $\lim \frac{a_n}{b_n} = \lim \frac{a_{n+1}-a_n}{b_{n+1}-b_n}$.
-3. <em>Khai triển tiệm cận:</em> Sử dụng $\ln(1+t) = t - \frac{t^2}{2} + O(t^3)$, $e^t = 1 + t + \frac{t^2}{2} + O(t^3)$, $(1+t)^\alpha = 1 + \alpha t + O(t^2)$ khi $t \to 0$.
-4. <em>Dãy gián tiếp $F_n(x) = 0$:</em> Dùng đạo hàm chỉ ra nghiệm $a_n$ duy nhất, kẹp nghiệm và lấy logarit để xác định tốc độ hội tụ.
+                            
+                            <!-- Mục 2.1 -->
+                            <div class="day-block">
+                                <div class="day-title">2.1 Đơn điệu, bị chặn và điểm bất động</div>
+                                <div class="problem-content" style="margin-bottom: 12px;">
+                                    Cho $x_{n+1}=f(x_n)$. Muốn chứng minh hội tụ, hai hướng cơ bản là: 
+                                    1. Tìm một khoảng bất biến $I$ sao cho $x_1 \in I$ và $f(I) \subset I$. 
+                                    2. Chứng minh $(x_n)$ đơn điệu và bị chặn. Khi đó $x_n \to L$ và nếu $f$ liên tục tại $L$ thì $L=f(L)$.
+                                </div>
+                                <div class="problem-item">
+                                    <div class="problem-header"><div class="problem-id"><span>Ví dụ 1.1</span><span class="badge-topic">Truy hồi căn thức</span></div></div>
+                                    <div class="problem-content">Cho $x_1 = \sqrt{2}$ và $x_{n+1} = \sqrt{2 + x_n}$. Chứng minh $(x_n)$ hội tụ và tìm giới hạn.</div>
+                                    <div class="solution-box">
+                                        <button class="toggle-btn" onclick="toggleSolution(this)">👁️ Xem lời giải</button>
+                                        <div class="solution-content">
+Ta chứng minh $\sqrt{2} \le x_n < 2$. Đúng với $n=1$. Nếu $x_n < 2$ thì $x_{n+1} = \sqrt{2+x_n} < \sqrt{4} = 2$, và hiển nhiên $x_{n+1} > \sqrt{2}$. Vậy khoảng $[\sqrt{2}, 2)$ là bất biến.
+Mặt khác, với $x_n < 2$:
+$$x_{n+1} > x_n \iff 2 + x_n > x_n^2 \iff (2 - x_n)(x_n + 1) > 0.$$
+Do đó dãy tăng và bị chặn trên bởi 2, nên hội tụ. Gọi giới hạn là $L > 0$, ta có $L = \sqrt{2+L} \iff L^2 - L - 2 = 0 \implies L = 2$.
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="problem-item">
+                                    <div class="problem-header"><div class="problem-id"><span>Ví dụ 1.2</span><span class="badge-topic">Truy hồi hữu tỉ</span></div></div>
+                                    <div class="problem-content">Cho $0 < x_1 < 1$ và $x_{n+1} = \frac{2x_n}{1 + x_n}$. Chứng minh $x_n \to 1$.</div>
+                                    <div class="solution-box">
+                                        <button class="toggle-btn" onclick="toggleSolution(this)">👁️ Xem lời giải</button>
+                                        <div class="solution-content">
+Nếu $0 < x_n < 1$ thì $0 < x_{n+1} < 1$, vì $2x_n < 1 + x_n$. Đồng thời:
+$$x_{n+1} - x_n = \frac{x_n(1 - x_n)}{1 + x_n} > 0.$$
+Vậy $(x_n)$ tăng và bị chặn trên bởi 1, nên có giới hạn $L \in (0, 1]$. Từ $L = \frac{2L}{1+L}$ suy ra $L=0$ hoặc $L=1$. Do $x_n \ge x_1 > 0$, không thể có $L=0$, nên $L=1$.
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
 
-                            <div class="day-block" style="margin-top: 16px;">
-                                <div class="day-title">📌 Ví dụ minh họa có lời giải</div>
+                            <!-- Mục 2.2 -->
+                            <div class="day-block">
+                                <div class="day-title">2.2 Biến đổi truy hồi phi tuyến và tìm cấp tăng trưởng</div>
+                                <div class="problem-content" style="margin-bottom: 12px;">
+                                    Tìm đại lượng biến đổi đơn giản: $\frac{1}{x_{n+1}} - \frac{1}{x_n} = \text{hằng số}$, hoặc $x_{n+1}^2 - x_n^2 = \text{biểu thức đơn giản}$.
+                                </div>
+                                <div class="problem-item">
+                                    <div class="problem-header"><div class="problem-id"><span>Ví dụ 1.3</span><span class="badge-topic">Đổi biến nghịch đảo</span></div></div>
+                                    <div class="problem-content">Cho $x_1 > 0$ và $x_{n+1} = \frac{x_n}{1 + x_n}$. Tìm công thức $x_n$ và giới hạn của $n x_n$.</div>
+                                    <div class="solution-box">
+                                        <button class="toggle-btn" onclick="toggleSolution(this)">👁️ Xem lời giải</button>
+                                        <div class="solution-content">
+Lấy nghịch đảo: $\frac{1}{x_{n+1}} = \frac{1+x_n}{x_n} = \frac{1}{x_n} + 1$.
+Do đó $\frac{1}{x_n} = \frac{1}{x_1} + n - 1 \implies x_n = \frac{1}{n - 1 + 1/x_1}$.
+Suy ra $\lim_{n \to \infty} n x_n = \lim_{n \to \infty} \frac{n}{n - 1 + 1/x_1} = 1$.
+                                        </div>
+                                    </div>
+                                </div>
                                 <div class="problem-item">
                                     <div class="problem-header"><div class="problem-id"><span>Ví dụ 1.4</span><span class="badge-topic">Cấp tăng trưởng $\sqrt{n}$</span></div></div>
                                     <div class="problem-content">Cho $x_1 > 0$ và $x_{n+1} = x_n + \frac{1}{x_n}$. Chứng minh $\lim_{n \to \infty} \frac{x_n}{\sqrt{2n}} = 1$.</div>
@@ -855,16 +902,120 @@ $$\lim_{n \to \infty} \frac{x_n^2}{n} = \lim_{n \to \infty} (x_{n+1}^2 - x_n^2) 
                                         </div>
                                     </div>
                                 </div>
+                            </div>
 
+                            <!-- Mục 2.3 -->
+                            <div class="day-block">
+                                <div class="day-title">2.3 Định lý Stolz-Cesàro</div>
                                 <div class="problem-item">
-                                    <div class="problem-header"><div class="problem-id"><span>Ví dụ 1.9</span><span class="badge-topic">Dãy xác định qua nghiệm phương trình</span></div></div>
+                                    <div class="problem-header"><div class="problem-id"><span>Ví dụ 1.5</span><span class="badge-topic">Tổng điều hòa</span></div></div>
+                                    <div class="problem-content">Đặt $H_n = 1 + \frac{1}{2} + \dots + \frac{1}{n}$. Chứng minh $\lim_{n \to \infty} \frac{H_n}{\ln n} = 1$.</div>
+                                    <div class="solution-box">
+                                        <button class="toggle-btn" onclick="toggleSolution(this)">👁️ Xem lời giải</button>
+                                        <div class="solution-content">
+Dùng Stolz với $a_n = H_n$, $b_n = \ln n$. Khi đó:
+$$\frac{a_{n+1} - a_n}{b_{n+1} - b_n} = \frac{1/(n+1)}{\ln(1 + 1/n)} = \frac{n/(n+1)}{n \ln(1 + 1/n)} \longrightarrow \frac{1}{1} = 1.$$
+Vì $n \ln(1+1/n) \to 1$. Suy ra $H_n / \ln n \to 1$.
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="problem-item">
+                                    <div class="problem-header"><div class="problem-id"><span>Ví dụ 1.6</span><span class="badge-topic">Tổng lũy thừa phân số</span></div></div>
+                                    <div class="problem-content">Chứng minh $\lim_{n \to \infty} \frac{\sum_{k=1}^n \sqrt{k}}{n^{3/2}} = \frac{2}{3}$.</div>
+                                    <div class="solution-box">
+                                        <button class="toggle-btn" onclick="toggleSolution(this)">👁️ Xem lời giải</button>
+                                        <div class="solution-content">
+Đặt $A_n = \sum_{k=1}^n \sqrt{k}, B_n = n^{3/2}$. Theo Stolz:
+$$\lim \frac{A_n}{B_n} = \lim \frac{\sqrt{n+1}}{(n+1)^{3/2} - n^{3/2}} = \lim \frac{\sqrt{1+1/n}}{n((1+1/n)^{3/2} - 1)}.$$
+Dùng khai triển $(1+t)^{3/2} = 1 + \frac{3}{2}t + o(t)$, mẫu số tiến tới $3/2$ nên giới hạn bằng $2/3$.
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Mục 2.4 -->
+                            <div class="day-block">
+                                <div class="day-title">2.4 Khai triển tương đương và tốc độ hội tụ</div>
+                                <div class="problem-item">
+                                    <div class="problem-header"><div class="problem-id"><span>Ví dụ 1.7</span><span class="badge-topic">Hàm mũ</span></div></div>
+                                    <div class="problem-content">Tính $\lim_{n \to \infty} n^2 \left( e^{1/n} - 1 - \frac{1}{n} \right)$.</div>
+                                    <div class="solution-box">
+                                        <button class="toggle-btn" onclick="toggleSolution(this)">👁️ Xem lời giải</button>
+                                        <div class="solution-content">
+Với $t = 1/n$, ta có $e^t = 1 + t + \frac{t^2}{2} + O(t^3)$.
+Do đó: $e^{1/n} - 1 - \frac{1}{n} = \frac{1}{2n^2} + O\left(\frac{1}{n^3}\right)$.
+Nhân với $n^2$ ta được giới hạn $1/2$.
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="problem-item">
+                                    <div class="problem-header"><div class="problem-id"><span>Ví dụ 1.8</span><span class="badge-topic">Sai số của $(1+1/n)^n$</span></div></div>
+                                    <div class="problem-content">Tính $\lim_{n \to \infty} n \left( \frac{(1+1/n)^n}{e} - 1 \right)$.</div>
+                                    <div class="solution-box">
+                                        <button class="toggle-btn" onclick="toggleSolution(this)">👁️ Xem lời giải</button>
+                                        <div class="solution-content">
+Ta có $n \ln(1 + \frac{1}{n}) = n(1/n - \frac{1}{2n^2} + O(\frac{1}{n^3})) = 1 - \frac{1}{2n} + O(\frac{1}{n^2})$.
+Suy ra $\frac{(1+1/n)^n}{e} = \exp\left(-\frac{1}{2n} + O(\frac{1}{n^2})\right) = 1 - \frac{1}{2n} + O(\frac{1}{n^2})$.
+Nhân với $n$ ta được giới hạn bằng $-1/2$.
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Mục 2.5 -->
+                            <div class="day-block">
+                                <div class="day-title">2.5 Dãy xác định gián tiếp qua nghiệm của phương trình</div>
+                                <div class="problem-item">
+                                    <div class="problem-header"><div class="problem-id"><span>Ví dụ 1.9</span><span class="badge-topic">Nghiệm của $x^n = x + 1$</span></div></div>
                                     <div class="problem-content">Với $n \ge 2$, gọi $a_n > 1$ là nghiệm của $a_n^n = a_n + 1$. Chứng minh $a_n \to 1$ và $\lim_{n \to \infty} n(a_n - 1) = \ln 2$.</div>
                                     <div class="solution-box">
                                         <button class="toggle-btn" onclick="toggleSolution(this)">👁️ Xem lời giải</button>
                                         <div class="solution-content">
-Xét $g_n(x) = x^n - x - 1$ trên $[1, +\infty)$. Ta có $g_n(1) = -1 < 0, g_n(2) = 2^n - 3 > 0$ và $g_n'(x) = nx^{n-1} - 1 > 0$ với mọi $x \ge 1$. Do đó phương trình có nghiệm duy nhất $a_n \in (1, 2)$.
+Xét $g_n(x) = x^n - x - 1$ trên $[1, +\infty)$. Ta có $g_n(1) = -1 < 0, g_n(2) > 0$ và $g_n'(x) = nx^{n-1} - 1 > 0$ với mọi $x \ge 1$. Do đó phương trình có nghiệm duy nhất $a_n \in (1, 2)$.
 Mặt khác $a_n^n = a_n + 1 < 3 \implies 1 < a_n < 3^{1/n} \to 1$, vậy $\lim a_n = 1$.
 Lấy logarit tự nhiên hai vế: $n \ln a_n = \ln(a_n + 1) \to \ln 2$. Vì $a_n \to 1$ nên $\ln a_n \sim a_n - 1$, suy ra $\lim_{n \to \infty} n(a_n - 1) = \ln 2$.
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="problem-item">
+                                    <div class="problem-header"><div class="problem-id"><span>Ví dụ 1.10</span><span class="badge-topic">Thay đổi hệ số ở vế phải</span></div></div>
+                                    <div class="problem-content">Với $n > 4$, gọi $b_n > 1$ là nghiệm của $b_n^n = 3b_n + 1$. Chứng minh $\lim_{n \to \infty} n(b_n - 1) = \ln 4$.</div>
+                                    <div class="solution-box">
+                                        <button class="toggle-btn" onclick="toggleSolution(this)">👁️ Xem lời giải</button>
+                                        <div class="solution-content">
+Tương tự, hàm $h_n(x) = x^n - 3x - 1$ có nghiệm duy nhất $b_n \in (1, 2)$.
+Từ $b_n^n = 3b_n + 1 < 7 \implies b_n < 7^{1/n} \to 1$.
+Lấy logarit: $n \ln b_n = \ln(3b_n + 1) \to \ln 4$.
+Vì $b_n \sim b_n - 1$ nên $n(b_n - 1) \to \ln 4$.
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Mục 2.6 -->
+                            <div class="day-block">
+                                <div class="day-title">2.6 Tổng, tích và chuỗi liên quan đến dãy</div>
+                                <div class="problem-item">
+                                    <div class="problem-header"><div class="problem-id"><span>Ví dụ 1.11</span><span class="badge-topic">Tích rút gọn</span></div></div>
+                                    <div class="problem-content">Tính $\lim_{n \to \infty} \prod_{k=2}^n \left( 1 - \frac{1}{k^2} \right)$.</div>
+                                    <div class="solution-box">
+                                        <button class="toggle-btn" onclick="toggleSolution(this)">👁️ Xem lời giải</button>
+                                        <div class="solution-content">
+Ta phân tích: $1 - \frac{1}{k^2} = \frac{k-1}{k} \cdot \frac{k+1}{k}$.
+Do đó: $\prod_{k=2}^n \left( 1 - \frac{1}{k^2} \right) = \left( \frac{1}{2} \cdot \frac{2}{3} \dots \frac{n-1}{n} \right) \left( \frac{3}{2} \cdot \frac{4}{3} \dots \frac{n+1}{n} \right) = \frac{1}{n} \cdot \frac{n+1}{2} = \frac{n+1}{2n}$.
+Giới hạn bằng $1/2$.
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="problem-item">
+                                    <div class="problem-header"><div class="problem-id"><span>Ví dụ 1.12</span><span class="badge-topic">Chuỗi từ tương đương</span></div></div>
+                                    <div class="problem-content">Giả sử $x_n > 0$ và $x_n \sim \sqrt{2n}$. Xét tính hội tụ của chuỗi $\sum_{n=1}^\infty \frac{1}{x_n^p}$.</div>
+                                    <div class="solution-box">
+                                        <button class="toggle-btn" onclick="toggleSolution(this)">👁️ Xem lời giải</button>
+                                        <div class="solution-content">
+Từ $x_n \sim \sqrt{2n}$, ta có $\frac{1}{x_n^p} \sim \frac{1}{(2n)^{p/2}} = 2^{-p/2} n^{-p/2}$.
+Theo tiêu chuẩn so sánh giới hạn với chuỗi p-series, $\sum \frac{1}{n^{p/2}}$ hội tụ khi $p/2 > 1 \iff p > 2$.
+Với $p \le 2$ chuỗi phân kỳ.
                                         </div>
                                     </div>
                                 </div>
@@ -872,6 +1023,7 @@ Lấy logarit tự nhiên hai vế: $n \ln a_n = \ln(a_n + 1) \to \ln 2$. Vì $a
                         </div>
                     </article>
 
+                    <!-- CÁC CHƯƠNG LÝ THUYẾT KHÁC ĐƯỢC GIỮ NGUYÊN CẤU TRÚC -->
                     <!-- CHƯƠNG 3 -->
                     <article class="exam-card" id="dn-c3" data-search="phương trình hàm cauchy jensen song ánh đơn điệu">
                         <div class="exam-header">
