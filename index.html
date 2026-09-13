@@ -1,0 +1,1628 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tuyển Tập Đề Thi Chọn Đội Tuyển TST Toán Cấp Tỉnh (2026 - 2027)</title>
+    <!-- MathJax 3 với hỗ trợ $...$ và $$...$$ -->
+    <script>
+    window.MathJax = {
+        tex: {
+            inlineMath: [['$', '$'], ['\\(', '\\)']],
+            displayMath: [['$$', '$$'], ['\\[', '\\]']],
+            processEscapes: true
+        },
+        options: {
+            ignoreHtmlClass: 'tex2jax_ignore',
+            processHtmlClass: 'tex2jax_process'
+        }
+    };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #1e3a8a;
+            --primary-light: #3b82f6;
+            --primary-dark: #172554;
+            --accent: #d97706;
+            --accent-light: #fef3c7;
+            --bg: #f8fafc;
+            --card-bg: #ffffff;
+            --text-main: #0f172a;
+            --text-muted: #64748b;
+            --border: #e2e8f0;
+            --tag-bg: #f1f5f9;
+            --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+            --shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+            --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+            --radius: 12px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Be Vietnam Pro', -apple-system, BlinkMacSystemFont, sans-serif;
+            background-color: var(--bg);
+            color: var(--text-main);
+            line-height: 1.65;
+            padding-bottom: 80px;
+        }
+
+        /* HEADER HERO */
+        .hero {
+            background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 50%, #1d4ed8 100%);
+            color: white;
+            padding: 48px 24px 40px;
+            text-align: center;
+            position: relative;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(255,255,255,0.15);
+            backdrop-filter: blur(8px);
+            padding: 6px 16px;
+            border-radius: 9999px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 16px;
+            letter-spacing: 0.5px;
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .hero h1 {
+            font-size: 2.25rem;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+            margin-bottom: 12px;
+            line-height: 1.25;
+            max-width: 900px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .hero p {
+            font-size: 1.05rem;
+            color: #cbd5e1;
+            max-width: 760px;
+            margin: 0 auto 24px;
+        }
+
+        .hero-stats {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin-top: 10px;
+        }
+
+        .stat-chip {
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(6px);
+            padding: 8px 18px;
+            border-radius: 10px;
+            border: 1px solid rgba(255,255,255,0.15);
+            text-align: center;
+        }
+
+        .stat-chip .num {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #facc15;
+            display: block;
+        }
+
+        .stat-chip .label {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: #e2e8f0;
+        }
+
+        /* CONTROLS & FILTER BAR */
+        .controls-sticky {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border);
+            padding: 14px 24px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+        }
+
+        .controls-container {
+            max-width: 1240px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .search-row {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+        }
+
+        .search-box {
+            flex: 1;
+            position: relative;
+        }
+
+        .search-box input {
+            width: 100%;
+            padding: 10px 16px 10px 40px;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+            font-size: 0.95rem;
+            font-family: inherit;
+            background: var(--bg);
+            transition: all 0.2s;
+        }
+
+        .search-box input:focus {
+            outline: none;
+            border-color: var(--primary-light);
+            background: white;
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15);
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 14px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-muted);
+            pointer-events: none;
+        }
+
+        .btn-action {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: var(--primary);
+            color: white;
+            padding: 10px 18px;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            border: none;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-decoration: none;
+            white-space: nowrap;
+        }
+
+        .btn-action:hover {
+            background: var(--primary-light);
+        }
+
+        .btn-secondary {
+            background: #f1f5f9;
+            color: var(--text-main);
+            border: 1px solid var(--border);
+        }
+
+        .btn-secondary:hover {
+            background: #e2e8f0;
+        }
+
+        .filter-pills {
+            display: flex;
+            gap: 8px;
+            overflow-x: auto;
+            padding-bottom: 2px;
+            scrollbar-width: thin;
+        }
+
+        .pill {
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 0.82rem;
+            font-weight: 600;
+            background: #f1f5f9;
+            color: var(--text-muted);
+            border: 1px solid transparent;
+            cursor: pointer;
+            white-space: nowrap;
+            transition: all 0.15s;
+        }
+
+        .pill:hover {
+            background: #e2e8f0;
+            color: var(--text-main);
+        }
+
+        .pill.active {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+
+        /* MAIN CONTENT LAYOUT */
+        .layout-container {
+            max-width: 1240px;
+            margin: 28px auto;
+            padding: 0 20px;
+            display: grid;
+            grid-template-columns: 300px 1fr;
+            gap: 28px;
+            align-items: start;
+        }
+
+        @media (max-width: 950px) {
+            .layout-container {
+                grid-template-columns: 1fr;
+            }
+            .sidebar {
+                display: none;
+            }
+        }
+
+        /* SIDEBAR NAVIGATION */
+        .sidebar {
+            position: sticky;
+            top: 140px;
+            background: white;
+            border-radius: var(--radius);
+            border: 1px solid var(--border);
+            padding: 18px;
+            box-shadow: var(--shadow-sm);
+            max-height: calc(100vh - 160px);
+            overflow-y: auto;
+        }
+
+        .sidebar-title {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-weight: 700;
+            color: var(--text-muted);
+            margin-bottom: 12px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .nav-year-group {
+            margin-bottom: 16px;
+        }
+
+        .nav-year-title {
+            font-size: 0.9rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 6px;
+        }
+
+        .nav-link {
+            display: block;
+            padding: 6px 10px;
+            font-size: 0.83rem;
+            color: var(--text-muted);
+            text-decoration: none;
+            border-radius: 6px;
+            transition: all 0.15s;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .nav-link:hover {
+            background: #eff6ff;
+            color: var(--primary);
+            font-weight: 500;
+        }
+
+        /* EXAM CARDS */
+        .exam-feed {
+            display: flex;
+            flex-direction: column;
+            gap: 32px;
+        }
+
+        .year-section-heading {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-top: 10px;
+            margin-bottom: 6px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid var(--primary);
+        }
+
+        .year-section-heading h2 {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--primary);
+        }
+
+        .year-section-heading .badge-count {
+            background: #eff6ff;
+            color: var(--primary);
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            border: 1px solid #bfdbfe;
+        }
+
+        .exam-card {
+            background: var(--card-bg);
+            border-radius: var(--radius);
+            border: 1px solid var(--border);
+            box-shadow: var(--shadow);
+            overflow: hidden;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .exam-card:hover {
+            box-shadow: var(--shadow-lg);
+        }
+
+        .exam-header {
+            background: linear-gradient(to right, #f8fafc, #ffffff);
+            border-bottom: 1px solid var(--border);
+            padding: 20px 24px;
+        }
+
+        .exam-top-tags {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin-bottom: 10px;
+        }
+
+        .tag {
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            padding: 3px 10px;
+            border-radius: 6px;
+        }
+
+        .tag-year {
+            background: #eff6ff;
+            color: var(--primary);
+            border: 1px solid #bfdbfe;
+        }
+
+        .tag-province {
+            background: #fef3c7;
+            color: #b45309;
+            border: 1px solid #fde68a;
+        }
+
+        .tag-official {
+            background: #dcfce7;
+            color: #15803d;
+            border: 1px solid #bbf7d0;
+        }
+
+        .exam-title {
+            font-size: 1.35rem;
+            font-weight: 800;
+            color: var(--text-main);
+            margin-bottom: 6px;
+            line-height: 1.35;
+        }
+
+        .exam-meta {
+            font-size: 0.88rem;
+            color: var(--text-muted);
+            display: flex;
+            gap: 18px;
+            flex-wrap: wrap;
+            margin-top: 6px;
+        }
+
+        .meta-item {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .exam-body {
+            padding: 24px;
+        }
+
+        .day-block {
+            margin-bottom: 28px;
+        }
+
+        .day-block:last-child {
+            margin-bottom: 0;
+        }
+
+        .day-title {
+            font-size: 1.05rem;
+            font-weight: 700;
+            color: var(--primary-dark);
+            margin-bottom: 16px;
+            padding-bottom: 6px;
+            border-bottom: 1.5px dashed var(--border);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .problem-item {
+            background: #fafafa;
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 16px 18px;
+            margin-bottom: 16px;
+            position: relative;
+            transition: all 0.15s;
+        }
+
+        .problem-item:hover {
+            border-color: #cbd5e1;
+            background: #f8fafc;
+        }
+
+        .problem-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .problem-id {
+            font-weight: 800;
+            color: var(--primary);
+            font-size: 1rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .problem-meta-badges {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .badge-point {
+            background: #fee2e2;
+            color: #991b1b;
+            font-size: 0.75rem;
+            font-weight: 700;
+            padding: 2px 8px;
+            border-radius: 6px;
+        }
+
+        .badge-topic {
+            background: #e0f2fe;
+            color: #0369a1;
+            font-size: 0.75rem;
+            font-weight: 600;
+            padding: 2px 8px;
+            border-radius: 6px;
+        }
+
+        .btn-copy {
+            background: transparent;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            padding: 2px 8px;
+            font-size: 0.75rem;
+            cursor: pointer;
+            color: var(--text-muted);
+            transition: all 0.15s;
+        }
+
+        .btn-copy:hover {
+            background: #e2e8f0;
+            color: var(--text-main);
+        }
+
+        .problem-content {
+            font-size: 0.96rem;
+            color: #1e293b;
+            white-space: pre-wrap;
+            line-height: 1.7;
+        }
+
+        /* FOOTER */
+        footer {
+            background: #0f172a;
+            color: #94a3b8;
+            padding: 40px 24px;
+            text-align: center;
+            font-size: 0.9rem;
+            margin-top: 60px;
+        }
+
+        footer a {
+            color: #38bdf8;
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+        /* PRINT STYLES */
+        @media print {
+            .hero, .controls-sticky, .sidebar, .btn-copy, .btn-action, footer {
+                display: none !important;
+            }
+            .layout-container {
+                display: block;
+                padding: 0;
+                margin: 0;
+                max-width: 100%;
+            }
+            .exam-card {
+                box-shadow: none;
+                border: 1px solid #ccc;
+                page-break-inside: avoid;
+                margin-bottom: 24px;
+            }
+            body {
+                background: white;
+                color: black;
+            }
+        }
+    </style>
+</head>
+<body class="tex2jax_process">
+
+    <!-- HERO BANNER -->
+    <header class="hero">
+        <div class="hero-badge">
+            <span>🇻🇳 HỆ THỐNG DỮ LIỆU TST VMO TOÀN QUỐC</span>
+        </div>
+        <h1>TỔNG HỢP ĐỀ THI CHỌN ĐỘI TUYỂN TOÁN CẤP TỈNH (TST VMO 2026 - 2027)</h1>
+        <p>Tuyển tập đầy đủ các đề thi vòng Tỉnh chọn đội tuyển dự thi Học sinh giỏi Quốc gia THPT niên khóa 2026–2027 và các kỳ thi Toán trường hè, trại hè Olympic chọn lọc chuẩn nguồn Olympic Toán VN.</p>
+        
+        <div class="hero-stats">
+            <div class="stat-chip">
+                <span class="num">14</span>
+                <span class="label">Kỳ thi / Đơn vị</span>
+            </div>
+            <div class="stat-chip">
+                <span class="num">92</span>
+                <span class="label">Bài toán chuyên khảo</span>
+            </div>
+            <div class="stat-chip">
+                <span class="num">2026 - 2027</span>
+                <span class="label">Niên khóa trọng tâm</span>
+            </div>
+            <div class="stat-chip">
+                <span class="num">100%</span>
+                <span class="label">Chuẩn MathJax 3 & UI Thẻ</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- STICKY CONTROL & SEARCH -->
+    <div class="controls-sticky">
+        <div class="controls-container">
+            <div class="search-row">
+                <div class="search-box">
+                    <span class="search-icon">🔍</span>
+                    <input type="text" id="searchInput" placeholder="Tìm kiếm tỉnh thành, phương trình hàm, dãy số, hình học, số học, tổ hợp, đa thức...">
+                </div>
+                <button class="btn-action btn-secondary" onclick="window.print()">
+                    🖨️ In / Xuất PDF
+                </button>
+            </div>
+
+            <!-- FILTER PILLS -->
+            <div class="filter-pills" id="regionFilters">
+                <button class="pill active" data-filter="ALL">Tất cả đề thi (14)</button>
+                <button class="pill" data-filter="BAC">Miền Bắc</button>
+                <button class="pill" data-filter="TRUNG">Miền Trung</button>
+                <button class="pill" data-filter="NAM">Miền Nam</button>
+                <button class="pill" data-filter="OLYMPIC">Trại hè & Trường hè</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- MAIN BODY -->
+    <div class="layout-container">
+        <!-- SIDEBAR -->
+        <aside class="sidebar">
+            <div class="sidebar-title">Mục lục chuyển nhanh</div>
+            <div id="sidebarLinks">
+                <div class="nav-year-group">
+                    <div class="nav-year-title">📅 NIÊN KHÓA 2026 - 2027</div>
+                    <a class="nav-link" href="#tst-hung-vuong">01. Trại hè Hùng Vương XX</a>
+                    <a class="nav-link" href="#tst-truong-he-danang">02. Trường hè Toán học Đà Nẵng</a>
+                    <a class="nav-link" href="#tst-an-giang">03. Tỉnh An Giang</a>
+                    <a class="nav-link" href="#tst-ptnk">04. THPT Chuyên Năng Khiếu</a>
+                    <a class="nav-link" href="#tst-can-tho">05. TP. Cần Thơ</a>
+                    <a class="nav-link" href="#tst-hung-yen">06. Tỉnh Hưng Yên</a>
+                    <a class="nav-link" href="#tst-dong-nai">07. Tỉnh Đồng Nai</a>
+                    <a class="nav-link" href="#tst-lam-son">08. THPT Chuyên Lam Sơn</a>
+                    <a class="nav-link" href="#tst-ha-tinh">09. Tỉnh Hà Tĩnh</a>
+                    <a class="nav-link" href="#tst-dh-vinh">10. THPT Chuyên ĐH Vinh</a>
+                    <a class="nav-link" href="#tst-thai-nguyen">11. Tỉnh Thái Nguyên</a>
+                    <a class="nav-link" href="#tst-quang-ninh">12. Tỉnh Quảng Ninh</a>
+                    <a class="nav-link" href="#tst-nghe-an">13. Tỉnh Nghệ An</a>
+                    <a class="nav-link" href="#tst-khtn">14. THPT Chuyên KHTN Hà Nội</a>
+                </div>
+            </div>
+        </aside>
+
+        <!-- EXAM FEED -->
+        <main class="exam-feed" id="examFeed">
+            <div class="year-section-heading" data-section-year="2026 - 2027">
+                <h2>Tuyển Tập Đề Thi Vòng Tỉnh (TST 2026 - 2027)</h2>
+                <span class="badge-count">14 kỳ thi chính thức</span>
+            </div>
+
+            <!-- EXAM 1: TRẠI HÈ HÙNG VƯƠNG -->
+            <article class="exam-card" id="tst-hung-vuong" data-filter="OLYMPIC" data-search="trại hè hùng vương lần thứ xx lào cai phương trình hàm số học hình học tổ hợp">
+                <div class="exam-header">
+                    <div class="exam-top-tags">
+                        <span class="tag tag-year">Năm học 2026 - 2027</span>
+                        <span class="tag tag-province">TRẠI HÈ HÙNG VƯƠNG</span>
+                        <span class="tag tag-official">Kỳ thi Olympic</span>
+                    </div>
+                    <h3 class="exam-title">TRẠI HÈ HÙNG VƯƠNG LẦN THỨ XX – LÀO CAI 2026 — Kỳ thi Olympic Khối 11</h3>
+                    <div class="exam-meta">
+                        <span class="meta-item">🏫 <strong>Đơn vị:</strong> Các trường THPT Chuyên Trung du và Miền núi phía Bắc</span>
+                        <span class="meta-item">📅 <strong>Thời gian:</strong> 05/08/2026</span>
+                        <span class="meta-item">⏱️ <strong>Thời lượng:</strong> 180 phút (4 câu)</span>
+                    </div>
+                </div>
+                <div class="exam-body">
+                    <div class="day-block">
+                        <div class="day-title">📌 Đề thi Olympic Khối 11 (Chính thức)</div>
+                        <div class="problem-item">
+                            <div class="problem-header">
+                                <div class="problem-id">
+                                    <span>Câu 1</span>
+                                    <span class="badge-point">5,0 điểm</span>
+                                    <span class="badge-topic">Phương trình hàm</span>
+                                </div>
+                                <div class="problem-meta-badges">
+                                    <button class="btn-copy" onclick="copyText(this)">📋 Sao chép đề</button>
+                                </div>
+                            </div>
+                            <div class="problem-content">Xét hàm số $f : (0; +\infty) \to (0; +\infty)$ có $f(1) = 2$ và thoả mãn điều kiện:
+$$f(x+y)(f(xy) - f(x)f(y)) = 1 - f(x)f(y), \quad \forall x, y > 0$$
+a) Tính $f(2421)$. Chứng minh rằng $f(x) > \frac{n}{n+1}$ với mọi số nguyên dương $n$ và $f(x) > 1$ với mọi số thực dương $x$.
+b) Đặt $g(x) = \frac{1}{f(x) - 1}$, chứng minh rằng $g(2x) = 2g(x)$ với mọi số thực dương $x$ và từ đó, tìm tất cả các hàm số $f(x)$ thoả mãn yêu cầu bài toán.</div>
+                        </div>
+
+                        <div class="problem-item">
+                            <div class="problem-header">
+                                <div class="problem-id">
+                                    <span>Câu 2</span>
+                                    <span class="badge-point">5,0 điểm</span>
+                                    <span class="badge-topic">Số học / Dãy số</span>
+                                </div>
+                                <div class="problem-meta-badges">
+                                    <button class="btn-copy" onclick="copyText(this)">📋 Sao chép đề</button>
+                                </div>
+                            </div>
+                            <div class="problem-content">Ta gọi cặp số nguyên dương $(a; b)$ có thứ tự là "HV2026" nếu $ab \mid a^{24} + b^{24} + a$.
+a) Chứng minh rằng nếu $(a; b)$ là HV2026 thì $a$ là lũy thừa bậc 24 của một số nguyên dương và tồn tại các số nguyên dương $u, v$ là ước của $b$ sao cho $b \mid u^{480} + v^{24} + 1$.
+b) Xét dãy số $(u_n), (v_n)$ cho bởi: $u_1 = 1, v_1 = 2$, với mọi $n \ge 1$ thì $u_{n+1} = \frac{v_n^{24} + 1}{u_n}$ và $v_{n+1} = \frac{u_{n+1}^{480} + 1}{v_n}$. Chứng minh rằng với mọi $n \ge 1$, các số $u_n, v_n$ nguyên dương và $(u_n^{24}; u_n v_n)$ là HV2026.</div>
+                        </div>
+
+                        <div class="problem-item">
+                            <div class="problem-header">
+                                <div class="problem-id">
+                                    <span>Câu 3</span>
+                                    <span class="badge-point">5,0 điểm</span>
+                                    <span class="badge-topic">Hình học phẳng</span>
+                                </div>
+                                <div class="problem-meta-badges">
+                                    <button class="btn-copy" onclick="copyText(this)">📋 Sao chép đề</button>
+                                </div>
+                            </div>
+                            <div class="problem-content">Cho tứ giác $ABCD$ không phải hình thang và nội tiếp đường tròn $(O)$. Giả sử có $E, F$ lần lượt thuộc các đoạn $AB, CD$ sao cho đường tròn ngoại tiếp tam giác $ECD$ có tâm là điểm $I$ và tiếp xúc với $AB$, đường tròn ngoại tiếp tam giác $FAB$ có tâm là điểm $J$ và tiếp xúc với $CD$. Hai đường tròn $(I), (J)$ này cắt nhau tại $P, Q$. Gọi $M$ là giao điểm của $FA, DE$; $N$ là giao điểm của $FB, CE$ và $K$ là giao điểm của $IE, JF$.
+a) Chứng minh rằng $EF$ là trung trực của đoạn thẳng $MN$ và các đường thẳng $OK, EF, PQ$ đồng quy.
+b) Chứng minh rằng các điểm $M, N, P, Q$ cùng thuộc một đường tròn.</div>
+                        </div>
+
+                        <div class="problem-item">
+                            <div class="problem-header">
+                                <div class="problem-id">
+                                    <span>Câu 4</span>
+                                    <span class="badge-point">5,0 điểm</span>
+                                    <span class="badge-topic">Tổ hợp</span>
+                                </div>
+                                <div class="problem-meta-badges">
+                                    <button class="btn-copy" onclick="copyText(this)">📋 Sao chép đề</button>
+                                </div>
+                            </div>
+                            <div class="problem-content">Tại chương trình Trại hè Hùng Vương lần thứ XX năm 2026, Ban tổ chức sắp xếp 26 buổi giao lưu và nghe giảng bài của các cựu học sinh đạt huy chương IMO của Việt Nam. Biết rằng có tất cả $n$ học sinh môn Toán đăng ký và theo sắp xếp, mỗi buổi có đúng 20 học sinh tham gia và 2 học sinh bất kỳ tham gia chung không quá 1 buổi. Tìm giá trị nhỏ nhất của $n$ trong từng trường hợp:
+a) Mỗi học sinh được tham gia không quá 2 buổi.
+b) Có một số học sinh được tham gia nhiều hơn 2 buổi.</div>
+                        </div>
+                    </div>
+                </div>
+            </article>
+
+            <!-- EXAM 2: TRƯỜNG HÈ ĐÀ NẴNG -->
+            <article class="exam-card" id="tst-truong-he-danang" data-filter="OLYMPIC" data-search="trường hè toán học đà nẵng viasm an bình bàn cờ xâu nhị phân hình học">
+                <div class="exam-header">
+                    <div class="exam-top-tags">
+                        <span class="tag tag-year">Năm học 2026 - 2027</span>
+                        <span class="tag tag-province">TRƯỜNG HÈ ĐÀ NẴNG</span>
+                        <span class="tag tag-official">VIASM & Sở GD&ĐT</span>
+                    </div>
+                    <h3 class="exam-title">TRƯỜNG HÈ TOÁN HỌC ĐÀ NẴNG 2026 — Đề kiểm tra chuyên đề 2 ngày</h3>
+                    <div class="exam-meta">
+                        <span class="meta-item">🏫 <strong>Đơn vị:</strong> Viện Nghiên cứu cao cấp về Toán & Chuyên Lê Quý Đôn Đà Nẵng</span>
+                        <span class="meta-item">📅 <strong>Thời gian:</strong> 08/08/2026 – 09/08/2026</span>
+                        <span class="meta-item">⏱️ <strong>Thời lượng:</strong> 180 phút / ngày</span>
+                    </div>
+                </div>
+                <div class="exam-body">
+                    <div class="day-block">
+                        <div class="day-title">📌 Đề thi Ngày 1 (08/08/2026)</div>
+                        <div class="problem-item">
+                            <div class="problem-header">
+                                <div class="problem-id"><span>Bài 1</span><span class="badge-point">7,0 điểm</span><span class="badge-topic">Số học</span></div>
+                                <div class="problem-meta-badges"><button class="btn-copy" onclick="copyText(this)">📋 Sao chép đề</button></div>
+                            </div>
+                            <div class="problem-content">Tìm tất cả các nghiệm nguyên dương $(m, n)$ của phương trình:
+$$3^m + n^3 + 6 = m(m+1)(m+2)\cdots(m+n-1).$$</div>
+                        </div>
+
+                        <div class="problem-item">
+                            <div class="problem-header">
+                                <div class="problem-id"><span>Bài 2</span><span class="badge-point">7,0 điểm</span><span class="badge-topic">Dãy số / Đại số</span></div>
+                                <div class="problem-meta-badges"><button class="btn-copy" onclick="copyText(this)">📋 Sao chép đề</button></div>
+                            </div>
+                            <div class="problem-content">Các số thực $a_0, a_1, \dots, a_{100}$; $b_0, b_1, \dots, b_{100}$; $c_0, c_1, \dots, c_{99}$ thỏa mãn các điều kiện: $a_0 = b_0 = 0$ và với mọi $i = 0, 1, \dots, 99$ thì:
+$$a_{i+1} = \frac{3a_i + 4b_i - 5c_i}{5} \quad \text{và} \quad b_{i+1} = \frac{-4a_i + 3b_i + 5c_i}{5}.$$
+Biết rằng $a_{100}b_{100} \le -1$. Hỏi giá trị của $|c_0| + |c_1| + \dots + |c_{99}|$ nhỏ nhất có thể bằng bao nhiêu?</div>
+                        </div>
+
+                        <div class="problem-item">
+                            <div class="problem-header">
+                                <div class="problem-id"><span>Bài 3</span><span class="badge-point">7,0 điểm</span><span class="badge-topic">Tổ hợp / Trò chơi</span></div>
+                                <div class="problem-meta-badges"><button class="btn-copy" onclick="copyText(this)">📋 Sao chép đề</button></div>
+                            </div>
+                            <div class="problem-content">An và Bình chơi trò chơi trên bàn cờ gồm 2 hàng và $n$ cột. Đầu tiên, An xếp $n$ quân tốt trắng và $n$ quân tốt đen lên các ô của bàn cờ, mỗi ô đúng một quân. Mục tiêu của Bình là xếp lại các quân cờ sao cho tất cả các quân màu trắng nằm ở hàng dưới và các quân màu đen nằm ở hàng trên. Mỗi bước, Bình được phép: đổi chỗ hai quân cờ cạnh nhau ở hàng dưới; hoặc đổi chỗ hai quân cờ nằm trên cùng một cột.
+a) Chứng minh rằng An có cách xếp các quân cờ sao cho Bình cần ít nhất $\left[\left(\frac{n+1}{2}\right)^2\right]$ bước để có thể đạt được mục tiêu của mình.
+b) Chứng minh rằng với mọi cách xếp của An, Bình có thể đạt được mục tiêu của mình với số bước không quá $\left[\left(\frac{n+1}{2}\right)^2\right]$.</div>
+                        </div>
+                    </div>
+
+                    <div class="day-block">
+                        <div class="day-title">📌 Đề thi Ngày 2 (09/08/2026)</div>
+                        <div class="problem-item">
+                            <div class="problem-header">
+                                <div class="problem-id"><span>Bài 4</span><span class="badge-point">7,0 điểm</span><span class="badge-topic">Hình học phẳng</span></div>
+                                <div class="problem-meta-badges"><button class="btn-copy" onclick="copyText(this)">📋 Sao chép đề</button></div>
+                            </div>
+                            <div class="problem-content">Cho tam giác $ABC$ có đường tròn nội tiếp $(I)$ tiếp xúc với các cạnh $BC, CA, AB$ lần lượt tại $D, E, F$. Đường tròn ngoại tiếp tam giác $AEF$ cắt đường tròn ngoại tiếp tam giác $ABC$ tại điểm $K$ khác $A$. Đường thẳng $AK$ cắt $BC$ tại $Z$.
+a) Chứng minh rằng $ZI$ là tiếp tuyến của đường tròn ngoại tiếp của tam giác $AEF$.
+b) Đường thẳng $EF$ cắt $BC$ tại $X$ và cắt $AK$ tại $Y$. Gọi $M$ là trung điểm của $XZ$. Từ $Z$ kẻ tiếp tuyến $ZP$ với đường tròn $(I)$, trong đó $P \neq D$ là tiếp điểm. Đường thẳng $KP$ cắt $AD$ tại $Q$. Chứng minh rằng $MY \perp IQ$.</div>
+                        </div>
+
+                        <div class="problem-item">
+                            <div class="problem-header">
+                                <div class="problem-id"><span>Bài 5</span><span class="badge-point">7,0 điểm</span><span class="badge-topic">Tổ hợp / Xâu nhị phân</span></div>
+                                <div class="problem-meta-badges"><button class="btn-copy" onclick="copyText(this)">📋 Sao chép đề</button></div>
+                            </div>
+                            <div class="problem-content">Cho một xâu nhị phân có độ dài lẻ và chứa một số lẻ chữ số 1. Xét tất cả các xâu con liên tiếp của xâu đã cho mà số chữ số 1 trong xâu con là số lẻ. Tìm giá trị lớn nhất có thể của số lượng các xâu con như vậy.</div>
+                        </div>
+
+                        <div class="problem-item">
+                            <div class="problem-header">
+                                <div class="problem-id"><span>Bài 6</span><span class="badge-point">7,0 điểm</span><span class="badge-topic">Số học / Giải tích rời rạc</span></div>
+                                <div class="problem-meta-badges"><button class="btn-copy" onclick="copyText(this)">📋 Sao chép đề</button></div>
+                            </div>
+                            <div class="problem-content">Với mỗi số nguyên dương $n$, đặt:
+$$a_n = \sum_{i=1}^n \frac{1}{i}\left[\frac{n}{i}\right].$$
+a) Chứng minh rằng $n(a_n - a_{n-1})$ là một số nguyên.
+b) Tìm tất cả các số nguyên dương $n$ sao cho $a_n - \frac{1}{2}$ là một số nguyên.</div>
+                        </div>
+                    </div>
+                </div>
+            </article>
+
+            <!-- EXAM 3: AN GIANG -->
+            <article class="exam-card" id="tst-an-giang" data-filter="NAM" data-search="an giang huỳnh mẫn đạt thoại ngọc hầu dãy số kẹo tô màu bàn cờ">
+                <div class="exam-header">
+                    <div class="exam-top-tags">
+                        <span class="tag tag-year">Năm học 2026 - 2027</span>
+                        <span class="tag tag-province">TỈNH AN GIANG</span>
+                        <span class="tag tag-official">Đề thi Vòng 1</span>
+                    </div>
+                    <h3 class="exam-title">SỞ GD&ĐT AN GIANG — THPT CHUYÊN HUỲNH MẪN ĐẠT</h3>
+                    <div class="exam-meta">
+                        <span class="meta-item">🏫 <strong>Đơn vị:</strong> CLB Toán học, Trường THPT Chuyên Huỳnh Mẫn Đạt</span>
+                        <span class="meta-item">📅 <strong>Thời gian:</strong> 13/08/2026 – 14/08/2026</span>
+                        <span class="meta-item">⏱️ <strong>Thời lượng:</strong> 180 phút / ngày</span>
+                    </div>
+                </div>
+                <div class="exam-body">
+                    <div class="day-block">
+                        <div class="day-title">📌 Bài thi thứ nhất (13/08/2026)</div>
+                        <div class="problem-item">
+                            <div class="problem-header">
+                                <div class="problem-id"><span>Câu 1</span><span class="badge-point">5,0 điểm</span><span class="badge-topic">Dãy số & Giới hạn</span></div>
+                                <div class="problem-meta-badges"><button class="btn-copy" onclick="copyText(this)">📋 Sao chép đề</button></div>
+                            </div>
+                            <div class="problem-content">Chứng minh rằng, dãy số $(x_n)$ xác định bởi $x_1 = 2$ và:
+$$x_{n+1} = \frac{\sqrt{x_1 + 1} + \sqrt{x_2 + 1} + \dots + \sqrt{x_n + 1}}{n}, \quad \forall n \in \mathbb{N}^*$$
+có giới hạn hữu hạn. Tìm giới hạn đó.</div>
+                        </div>
+
+                        <div class="problem-item">
+                            <div class="problem-header">
+                                <div class="problem-id"><span>Câu 2</span><span class="badge-point">5,0 điểm</span><span class="badge-topic">Tổ hợp / Cực trị rời rạc</span></div>
+                                <div class="problem-meta-badges"><button class="btn-copy" onclick="copyText(this)">📋 Sao chép đề</button></div>
+                            </div>
+                            <div class="problem-content">Cho 99 cái đĩa xếp trên bàn tròn. Tìm số nguyên dương $n$ nhỏ nhất, thoả mãn có thể chia $n$ viên kẹo vào các đĩa sao cho tổng số viên kẹo ở 20 đĩa liên tiếp bất kỳ luôn không ít hơn 25.</div>
+                        </div>
+
+                        <div class="problem-item">
+                            <div class="problem-header">
+                                <div class="problem-id"><span>Câu 3</span><span class="badge-point">5,0 điểm</span><span class="badge-topic">Hình học phẳng</span></div>
+                                <div class="problem-meta-badges"><button class="btn-copy" onclick="copyText(this)">📋 Sao chép đề</button></div>
+                            </div>
+                            <div class="problem-content">Cho đường tròn $(O)$ và điểm $M$ nằm ngoài đường tròn $(O)$. Dựng hai tiếp tuyến $MA, MB$ của $(O)$ với $A, B$ là các tiếp điểm. Xét điểm $C$ thuộc $AM$, và điểm $D$ là giao điểm của $BC$ với $(O)$. Chứng minh rằng, nếu $D$ là trung điểm $BC$ thì $MD, MB$ theo thứ tự là tiếp tuyến của các đường tròn $(ACD)$ và $(MOD)$.</div>
+                        </div>
+
+                        <div class="problem-item">
+                            <div class="problem-header">
+                                <div class="problem-id"><span>Câu 4</span><span class="badge-point">5,0 điểm</span><span class="badge-topic">Số học / Dãy số</span></div>
+                                <div class="problem-meta-badges"><button class="btn-copy" onclick="copyText(this)">📋 Sao chép đề</button></div>
+                            </div>
+                            <div class="problem-content">Cho số nguyên dương $a$. Chứng minh rằng, dãy số $(x_n)$ xác định bởi các hệ thức sau chỉ có hữu hạn số hạng là hợp số:
+$$x_1 = a; \quad \forall n \in \mathbb{N}^* : x_{n+1} = \min\{s \in \mathbb{N}^* \mid s > x_n \land \gcd(s; x_1 x_2 \dots x_n) = 1\}.$$</div>
+                        </div>
+                    </div>
+
+                    <div class="day-block">
+                        <div class="day-title">📌 Bài thi thứ hai (14/08/2026)</div>
+                        <div class="problem-item">
+                            <div class="problem-header">
+                                <div class="problem-id"><span>Câu 5</span><span class="badge-point">5,0 điểm</span><span class="badge-topic">Số học / Hàm số</span></div>
+                                <div class="problem-meta-badges"><button class="btn-copy" onclick="copyText(this)">📋 Sao chép đề</button></div>
+                            </div>
+                            <div class="problem-content">Tìm tất cả dãy số nguyên dương tăng $(f_n)$, thỏa mãn mệnh đề sau là đúng:
+$$\forall n \in \mathbb{N}^* : (f_{3n} = f_n + 2n) \land (f_n \in \mathbb{P} \implies n \in \mathbb{P}).$$</div>
+                        </div>
+
+                        <div class="problem-item">
+                            <div class="problem-header">
+                                <div class="problem-id"><span>Câu 6</span><span class="badge-point">5,0 điểm</span><span class="badge-topic">Tổ hợp / Quá trình lưới</span></div>
+                                <div class="problem-meta-badges"><button class="btn-copy" onclick="copyText(this)">📋 Sao chép đề</button></div>
+                            </div>
+                            <div class="problem-content">Cho bảng ô vuông $8 \times 8$. Kanaya, một cô gái thích những trò chơi, sẽ thực hiện các thao tác sau trên bảng ô vuông đó: Mỗi một lần thực hiện, cô ta sẽ tìm các ô vuông kề nhau với ít nhất hai ô chưa được tô màu; nếu có ô như thế cô ta chọn một trong các ô vuông thoả mãn điều kiện trên và tô màu nó, nếu không có ô nào như thế cô ta sẽ dừng thao tác.
+Sau khi Kanaya thực hiện các thao tác như trên đến khi dừng, gọi $n$ là số ô vuông chưa tô màu trong bảng. Tìm giá trị lớn nhất và giá trị nhỏ nhất của $n$.</div>
+                        </div>
+
+                        <div class="problem-item">
+                            <div class="problem-header">
+                                <div class="problem-id"><span>Câu 7</span><span class="badge-point">5,0 điểm</span><span class="badge-topic">Hình học phẳng</span></div>
+                                <div class="problem-meta-badges"><button class="btn-copy" onclick="copyText(this)">📋 Sao chép đề</button></div>
+                            </div>
+                            <div class="problem-content">Cho tam giác nhọn $ABC$ có $BC$ là cạnh lớn nhất trong ba cạnh. Trên đoạn thẳng $BC$ lấy hai điểm $D, E$ thỏa mãn $\widehat{DAC} = \widehat{ABC}$ và $\widehat{EAB} = \widehat{ACB}$. Gọi $M, N$ theo thứ tự là trung điểm của $AD$ và $AE$. Đường tròn $(AMN)$ theo thứ tự cắt lại $AB, AC$ tại $P$ và $Q$. Gọi $T$ là giao điểm của $PM$ và $QN$. Chứng minh rằng, ba đường thẳng $AT, BN, CM$ đồng quy tại một điểm; và hơn nữa điểm này nằm trên đường nối tâm của hai đường tròn $(ABC)$ và $(ADE)$.</div>
+                        </div>
+                    </div>
+                </div>
+            </article>
+
+            <!-- EXAM 4: PTNK -->
+            <article class="exam-card" id="tst-ptnk" data-filter="NAM" data-search="ptnk phổ thông năng khiếu tphcm co cụm nút lưới số hoàn hảo đa thức p-tốt">
+                <div class="exam-header">
+                    <div class="exam-top-tags">
+                        <span class="tag tag-year">Năm học 2026 - 2027</span>
+                        <span class="tag tag-province">PTNK - ĐHQG TP.HCM</span>
+                        <span class="tag tag-official">Đề thi chọn đội tuyển</span>
+                    </div>
+                    <h3 class="exam-title">TRƯỜNG PHỔ THÔNG NĂNG KHIẾU — ĐHQG TP. HỒ CHÍ MINH</h3>
+                    <div class="exam-meta">
+                        <span class="meta-item">🏫 <strong>Đơn vị:</strong> Trường Phổ thông Năng khiếu</span>
+                        <span class="meta-item">📅 <strong>Thời gian:</strong> Năm học 2026 – 2027</span>
+                        <span class="meta-item">⏱️ <strong>Thời lượng:</strong> 180 phút / ngày</span>
+                    </div>
+                </div>
+                <div class="exam-body">
+                    <div class="day-block">
+                        <div class="day-title">📌 Ngày thi thứ nhất</div>
+                        <div class="problem-item">
+                            <div class="problem-header"><div class="problem-id"><span>Câu 1</span><span class="badge-point">5,0 điểm</span><span class="badge-topic">Dãy số & Đa thức</span></div><div class="problem-meta-badges"><button class="btn-copy" onclick="copyText(this)">📋 Sao chép đề</button></div></div>
+                            <div class="problem-content">Cho đa thức $P(x) = x^{2027} - x^{2026} + x$ và số thực $a_1 \in (0, 1)$. Dãy $(a_n)$ được xác định bởi $P(a_{n+1}) = a_n$. Chứng minh rằng dãy $(a_n)$ xác định duy nhất và có giới hạn hữu hạn là 1.</div>
+                        </div>
+                        <div class="problem-item">
+                            <div class="problem-header"><div class="problem-id"><span>Câu 2</span><span class="badge-point">5,0 điểm</span><span class="badge-topic">Hình học phẳng</span></div><div class="problem-meta-badges"><button class="btn-copy" onclick="copyText(this)">📋 Sao chép đề</button></div></div>
+                            <div class="problem-content">Cho tam giác nhọn $ABC$ với $AB < AC$. Đường tròn $(I)$ nội tiếp tam giác $ABC$ tiếp xúc với cạnh $BC$ tại $D$. Đường thẳng $AD$ cắt $(I)$ tại điểm $E$ khác $D$. Tiếp tuyến của $(I)$ tại $E$ cắt các đường thẳng $AB, AC$ lần lượt tại $M, N$. Đường thẳng vuông góc với $MN$ tại $N$ cắt $MI$ tại $P$. Đường thẳng vuông góc với $AC$ tại $N$ cắt $CI$ tại $Q$.
+a) Chứng minh rằng đường thẳng $BN$ vuông góc với $PQ$.
+b) Gọi $K$ là giao điểm của $BN$ với $CM$ và $L$ là trung điểm của đoạn $PQ$. Chứng minh rằng ba điểm $K, I, L$ thẳng hàng.</div>
+                        </div>
+                        <div class="problem-item">
+                            <div class="problem-header"><div class="problem-id"><span>Câu 3</span><span class="badge-point">5,0 điểm</span><span class="badge-topic">Số học</span></div><div class="problem-meta-badges"><button class="btn-copy" onclick="copyText(this)">📋 Sao chép đề</button></div></div>
+                            <div class="problem-content">a) Chứng minh rằng số nguyên dương chẵn $n$ là **số hoàn hảo** khi và chỉ khi $n$ có biểu diễn $n = 2^{m-1}(2^m - 1)$, trong đó $m$ là số nguyên dương lớn hơn 1 và $2^m - 1$ là số nguyên tố.
+b) Chứng minh không tồn tại số hoàn hảo lẻ có đúng 3 ước nguyên tố phân biệt.</div>
+                        </div>
+                        <div class="problem-item">
+                            <div class="problem-header"><div class="problem-id"><span>Câu 4</span><span class="badge-point">5,0 điểm</span><span class="badge-topic">Tổ hợp / Lưới nguyên</span></div><div class="problem-meta-badges"><button class="btn-copy" onclick="copyText(this)">📋 Sao chép đề</button></div></div>
+                            <div class="problem-content">Cho bảng vuông $n \times n$. Các giao điểm giữa các đoạn thẳng được gọi là các nút lưới. Đường đi ngắn nhất giữa 2 nút lưới là dãy cạnh nối giữa 2 đỉnh có độ dài ngắn nhất. Một tập tốt là tập các nút lưới thỏa mãn giữa 2 nút lưới bất kỳ, số đường đi ngắn nhất nối giữa chúng đều là số lẻ.
+a) $n$ là lũy thừa của 2. Hãy xây dựng tập tốt có $2n$ nút lưới.
+b) $n$ bất kỳ. Tìm số lượng lớn nhất các phần tử của một tập tốt.</div>
+                        </div>
+                    </div>
+
+                    <div class="day-block">
+                        <div class="day-title">📌 Ngày thi thứ hai</div>
+                        <div class="problem-item">
+                            <div class="problem-header"><div class="problem-id"><span>Câu 5</span><span class="badge-point">5,0 điểm</span><span class="badge-topic">Tổ hợp / Bất đẳng thức</span></div><div class="problem-meta-badges"><button class="btn-copy" onclick="copyText(this)">📋 Sao chép đề</button></div></div>
+                            <div class="problem-content">Một tập hợp $M$ gồm các số thực dương được gọi là *co cụm bậc 2* nếu tỉ số giữa phần tử lớn nhất và phần tử nhỏ nhất của $M$ không vượt quá 2.
+Cho 2000 số thực dương có tổng bằng 1, trong đó mỗi số không vượt quá $\frac{1}{100}$. Chứng minh rằng có thể chọn ra 51 số sao cho tập hợp gồm 51 số đó là co cụm bậc 2.</div>
+                        </div>
+                        <div class="problem-item">
+                            <div class="problem-header"><div class="problem-id"><span>Câu 6</span><span class="badge-point">5,0 điểm</span><span class="badge-topic">Hình học phẳng</span></div><div class="problem-meta-badges"><button class="btn-copy" onclick="copyText(this)">📋 Sao chép đề</button></div></div>
+                            <div class="problem-content">Cho tứ giác $ABCD$ nội tiếp đường tròn $(O)$, thỏa mãn $AB = AD$ và $\widehat{BAD} > 90^\circ$. Đường thẳng $CO$ cắt đường tròn $(BOD)$ tại điểm $G$ khác $O$. Lấy điểm $L$ trên đường thẳng $CA$ sao cho $\widehat{CGL} = 90^\circ$.
+a) Gọi $E, F$ lần lượt là các điểm đối xứng của $G$ qua $OB, OD$. Chứng minh rằng ba đường thẳng $GL, BD, EF$ đồng quy.
+b) Gọi $H, K$ lần lượt là hình chiếu vuông góc của $L$ lên $CB, CD$. Các đường thẳng $GH, GK$ cắt $CA$ lần lượt tại $M, N$. Chứng minh rằng $L$ có cùng phương tích đối với hai đường tròn $(GMN)$ và $(BOD)$.</div>
+                        </div>
+                        <div class="problem-content">
+                        <div class="problem-item">
+                            <div class="problem-header"><div class="problem-id"><span>Câu 7</span><span class="badge-point">5,0 điểm</span><span class="badge-topic">Đa thức / Số học</span></div><div class="problem-meta-badges"><button class="btn-copy" onclick="copyText(this)">📋 Sao chép đề</button></div></div>
+                            <div class="problem-content">Cho đa thức $P(x)$ có hệ số nguyên và số nguyên tố $p$. Ta gọi $P(x)$ là *$p$-tốt* nếu từ số 0, sau hữu hạn phép biến đổi, ta có thể thu được mọi số nguyên, trong đó tại mỗi bước, từ một số nguyên $a$ ta được phép thực hiện một trong hai phép biến đổi sau:
+i) Thay $a$ bởi $P(a)$;
+ii) Thay $a$ bởi một số nguyên $b$ thỏa mãn $P(b) \equiv a \pmod p$, nếu tồn tại số nguyên $b$ như vậy.
+a) Đếm số đa thức 3-tốt có bậc 99 mà tất cả các hệ số đều thuộc tập $\{1, 2, \dots, 99\}$.
+b) Cho $P(x)$ là một đa thức bậc 2 với hệ số nguyên. Chứng minh rằng tồn tại vô hạn số nguyên tố $p$ sao cho $P(x)$ không phải là đa thức $p$-tốt.</div>
+                        </div>
+                    </div>
+                </div>
+            </article>
+
+            <!-- EXAM 5: CẦN THƠ -->
+            <article class="exam-card" id="tst-can-tho" data-filter="NAM" data-search="cần thơ bất đẳng thức dãy số đa thức số học họp mặt hình học">
+                <div class="exam-header">
+                    <div class="exam-top-tags">
+                        <span class="tag tag-year">Năm học 2026 - 2027</span>
+                        <span class="tag tag-province">TP. CẦN THƠ</span>
+                        <span class="tag tag-official">Đề chính thức</span>
+                    </div>
+                    <h3 class="exam-title">SỞ GIÁO DỤC VÀ ĐÀO TẠO THÀNH PHỐ CẦN THƠ</h3>
+                    <div class="exam-meta">
+                        <span class="meta-item">🏫 <strong>Đơn vị:</strong> Sở GD&ĐT Cần Thơ</span>
+                        <span class="meta-item">📅 <strong>Thời gian:</strong> 20/08/2026</span>
+                        <span class="meta-item">⏱️ <strong>Thời lượng:</strong> 180 phút (6 câu)</span>
+                    </div>
+                </div>
+                <div class="exam-body">
+                    <div class="day-block">
+                        <div class="day-title">📌 Đề thi chính thức (20/08/2026)</div>
+                        <div class="problem-item">
+                            <div class="problem-header"><div class="problem-id"><span>Câu 1</span><span class="badge-point">3,0 điểm</span><span class="badge-topic">Bất đẳng thức</span></div><div class="problem-meta-badges"><button class="btn-copy" onclick="copyText(this)">📋 Sao chép đề</button></div></div>
+                            <div class="problem-content">Cho các số thực dương $a, b, c$ thỏa mãn $a + b + c = 1$. Chứng minh rằng:
+$$9\left(a^2b + b^2c + c^2a\right) + 1 \ge 4(ab + bc + ca).$$</div>
+                        </div>
+                        <div class="problem-item">
+                            <div class="problem-header"><div class="problem-id"><span>Câu 2</span><span class="badge-point">3,0 điểm</span><span class="badge-topic">Dãy số / Số học</span></div><div class="problem-meta-badges"><button class="btn-copy" onclick="copyText(this)">📋 Sao chép đề</button></div></div>
+                            <div class="problem-content">Cho dãy số $(x_n)$ xác định bởi: $x_0 = 0, x_1 = 1$ và $x_{n+2} = 5x_{n+1} - x_n, \forall n \in \mathbb{N}$.
+a) Chứng minh rằng biểu thức $\frac{x_{2n}}{x_n}$ là một số nguyên với mọi $n \in \mathbb{N}^*$ và $21x_n^2 + 4$ là một số chính phương với mọi số tự nhiên $n$.
+b) Tìm tất cả các số nguyên $n \ge 0$ sao cho biểu thức $B_n = 21x_n^2 + 3$ là một số nguyên tố.</div>
+                        </div>
+                        <div class="problem-item">
+                            <div class="problem-header"><div class="problem-id"><span>Câu 3</span><span class="badge-point">3,0 điểm</span><span class="badge-topic">Đa thức</span></div><div class="problem-meta-badges"><button class="btn-copy" onclick="copyText(this)">📋 Sao chép đề</button></div></div>
+                            <div class="problem-content">Cho đa thức $P(x) = x^n + a_1 x^{n-1} + \dots + a_{n-1}x + a_n$, với $a_1, a_2, \dots, a_n$ là các số thực và $n$ là số nguyên dương lẻ. Biết rằng $P(0) + P(1) = 0$ và $P(x)$ có $n$ nghiệm thực $r_1, r_2, \dots, r_n$ thuộc $[0; 1]$. Tìm giá trị lớn nhất của $Q = \prod_{i=1}^n r_i$ theo $n$.</div>
+                        </div>
+                        <div class="problem-item">
+                            <div class="problem-header"><div class="problem-id"><span>Câu 4</span><span class="badge-point">3,0 điểm</span><span class="badge-topic">Số học</span></div><div class="problem-meta-badges"><button class="btn-copy" onclick="copyText(this)">📋 Sao chép đề</button></div></div>
+                            <div class="problem-content">Cho số nguyên dương $a > 1$ thỏa mãn $(a-1)^3 + a^3 + (a+1)^3$ là lập phương một số nguyên. Chứng minh rằng $a$ chia hết cho 4.</div>
+                        </div>
+                        <div class="problem-item">
+                            <div class="problem-header"><div class="problem-id"><span>Câu 5</span><span class="badge-point">3,0 điểm</span><span class="badge-topic">Tổ hợp</span></div><div class="problem-meta-badges"><button class="btn-copy" onclick="copyText(this)">📋 Sao chép đề</button></div></div>
+                            <div class="problem-content">Sau khi thi tốt nghiệp THPT, các em học sinh khối 12 của trường THPT A hẹn nhau mỗi năm họp mặt một lần vào ngày hội trại của trường. Tuy nhiên qua 10 lần họp mặt nhận thấy mỗi lần họp mặt chỉ có đúng 20 thành viên tham dự và 2 lần họp mặt bất kỳ trong 10 lần không có chung quá 2 thành viên. Hỏi khối 12 năm học đó có ít nhất bao nhiêu học sinh?</div>
+                        </div>
+                        <div class="problem-item">
+                            <div class="problem-header"><div class="problem-id"><span>Câu 6</span><span class="badge-point">5,0 điểm</span><span class="badge-topic">Hình học phẳng</span></div><div class="problem-meta-badges"><button class="btn-copy" onclick="copyText(this)">📋 Sao chép đề</button></div></div>
+                            <div class="problem-content">Cho nửa đường tròn $(O)$, đường kính $AB$. $C$ thuộc nửa đường tròn sao cho $CA < CB$. Tiếp tuyến $Ax$ của $(O)$ cắt $BC$ tại $M$. Tiếp tuyến của $(O)$ tại $B, C$ cắt nhau tại $N$. Gọi $F = AN \cap BM$, $D$ là giao điểm thứ hai của $AN$ và $(O)$. Đường thẳng $d$ qua $M$ song song $AB$ cắt $OC$ tại $I$. Đường thẳng $d'$ qua $N$ song song $AB$ cắt $OD$ tại $J$. Gọi $E = MN \cap OF$.
+a) Chứng minh rằng $MD$ là tiếp tuyến của $(O)$ và ba điểm $I, J, E$ thẳng hàng.
+b) Chứng minh rằng $C, D, E, F$ cùng thuộc một đường tròn. Xác định tâm của đường tròn đó.</div>
+                        </div>
+                    </div>
+                </div>
+            </article>
+
+            <!-- EXAM 6: HƯNG YÊN -->
+            <article class="exam-card" id="tst-hung-yen" data-filter="BAC" data-search="hưng yên đa thức dãy số hình học lũy thừa cơ số trò chơi giải đố">
+                <div class="exam-header">
+                    <div class="exam-top-tags">
+                        <span class="tag tag-year">Năm học 2026 - 2027</span>
+                        <span class="tag tag-province">TỈNH HƯNG YÊN</span>
+                        <span class="tag tag-official">Đề thi chính thức</span>
+                    </div>
+                    <h3 class="exam-title">SỞ GIÁO DỤC VÀ ĐÀO TẠO TỈNH HƯNG YÊN</h3>
+                    <div class="exam-meta">
+                        <span class="meta-item">🏫 <strong>Đơn vị:</strong> Sở GD&ĐT Hưng Yên</span>
+                        <span class="meta-item">📅 <strong>Thời gian:</strong> Năm học 2026 – 2027</span>
+                        <span class="meta-item">⏱️ <strong>Thời lượng:</strong> 180 phút (5 câu)</span>
+                    </div>
+                </div>
+                <div class="exam-body">
+                    <div class="day-block">
+                        <div class="day-title">📌 Đề thi chính thức</div>
+                        <div class="problem-item">
+                            <div class="problem-header"><div class="problem-id"><span>Câu 1</span><span class="badge-point">5,0 điểm</span><span class="badge-topic">Đa thức</span></div><div class="problem-meta-badges"><button class="btn-copy" onclick="copyText(this)">📋 Sao chép đề</button></div></div>
+                            <div class="problem-content">Xét đa thức hệ số thực $P(x)$ thỏa mãn $P(1) = \sqrt{2}, P(-1) = -\sqrt{2}$ và:
+$$(P(x))^2 \le x^6 + 1, \quad \forall x \in \mathbb{R}.$$
+a) Chứng minh rằng đa thức $P(x)$ có nghiệm thực và có bậc nhỏ hơn 4.
+b) Tìm tất cả các đa thức $P(x)$ thỏa mãn đề bài.</div>
+                        </div>
+                        <div class="problem-item">
+                            <div class="problem-header"><div class="problem-id"><span>Câu 2</span><span class="badge-point">4,0 điểm</span><span class="badge-topic">Dãy số & Số học</span></div><div class="problem-meta-badges"><button class="btn-copy" onclick="copyText(this)">📋 Sao chép đề</button></div></div>
+                            <div class="problem-content">Cho dãy số nguyên $(u_n)$ được xác định bởi $u_1 = 3, u_2 = 7$ và $u_{n+2} = 3u_{n+1} - u_n, \forall n \ge 1$.
+Cho $N$ là hợp số lẻ không chia hết cho 3 và $u_N \equiv 3 \pmod N$. Đặt $M = \frac{u_N}{3}$.
+a) Chứng minh rằng $u_N$ chia hết cho 3 nhưng không chia hết cho 9.
+b) Chứng minh rằng $M \equiv 1 \pmod{4N}$ và $M$ là một hợp số.</div>
+                        </div>
+                        <div class="problem-item">
+                            <div class="problem-header"><div class="problem-id"><span>Câu 3</span><span class="badge-point">6,0 điểm</span><span class="badge-topic">Hình học phẳng</span></div><div class="problem-meta-badges"><button class="btn-copy" onclick="copyText(this)">📋 Sao chép đề</button></div></div>
+                            <div class="problem-content">Cho tam giác $ABC$ nội tiếp $(O)$. Lấy điểm $X$ cố định nằm trên cung $BC$ không chứa $A$ của $(O)$. Một đường thẳng $d$ chuyển động qua $X$. Các đường thẳng $d_A, d_B, d_C$ lần lượt đối xứng với $d$ qua $BC, CA, AB$. Gọi $A'$ là giao điểm của $d_B$ và $d_C$, $B'$ là giao điểm của $d_A$ và $d_C$, $C'$ là giao điểm của $d_A$ và $d_B$.
+a) Chứng minh rằng $AA', BB', CC'$ đồng quy tại một điểm nằm trên $(O)$.
+b) Chứng minh rằng đường tròn ngoại tiếp của tam giác $A'B'C'$ luôn đi qua một điểm cố định.</div>
+                        </div>
+                        <div class="problem-item">
+                            <div class="problem-header"><div class="problem-id"><span>Câu 4</span><span class="badge-point">2,0 điểm</span><span class="badge-topic">Số học / Tập hợp</span></div><div class="problem-meta-badges"><button class="btn-copy" onclick="copyText(this)">📋 Sao chép đề</button></div></div>
+                            <div class="problem-content">Cho số nguyên dương $n \ge 3$ và một số nguyên tố lẻ $p$. Với mỗi $S$ là tập hợp gồm $n$ số nguyên dương phân biệt, ta ký hiệu $l_p(S)$ là số các lũy thừa cơ số $p$ có thể biểu diễn dưới dạng tổng của ba phần tử đôi một khác nhau thuộc $S$. Hãy xác định giá trị lớn nhất có thể có của $l_p(S)$ theo $n, p$.</div>
+                        </div>
+                        <div class="problem-item">
+                            <div class="problem-header"><div class="problem-id"><span>Câu 5</span><span class="badge-point">3,0 điểm</span><span class="badge-topic">Tổ hợp / Bước ngẫu nhiên</span></div><div class="problem-meta-badges"><button class="btn-copy" onclick="copyText(this)">📋 Sao chép đề</button></div></div>
+                            <div class="problem-content">Cho số nguyên dương $n$. Hai bạn $A$ và $B$ cùng tham gia trò chơi gồm $n$ lượt giải đố độc lập. Đặt $c_A(i), c_B(i)$ lần lượt là tổng số câu đố mà $A, B$ giải được trong $i$ lượt đầu tiên. Hỏi có bao nhiêu kịch bản có thể xảy ra để $A$ đạt giải đặc biệt, nghĩa là sau $n$ lượt chơi: $c_A(n) > c_B(n)$, và $\forall i = 1, 2, \dots, n: c_B(i) - c_A(i) \le 1$?</div>
+                        </div>
+                    </div>
+                </div>
+            </article>
+
+            <!-- EXAM 7: ĐỒNG NAI -->
+            <article class="exam-card" id="tst-dong-nai" data-filter="NAM" data-search="đồng nai hàm số nguyên dãy phân thức cấp số nhân đa thức nghiệm hữu tỉ tập hợp cộng">
+                <div class="exam-header">
+                    <div class="exam-top-tags">
+                        <span class="tag tag-year">Năm học 2026 - 2027</span>
+                        <span class="tag tag-province">TỈNH ĐỒNG NAI</span>
+                        <span class="tag tag-official">Đề thi Vòng 1</span>
+                    </div>
+                    <h3 class="exam-title">SỞ GIÁO DỤC VÀ ĐÀO TẠO TỈNH ĐỒNG NAI</h3>
+                    <div class="exam-meta">
+                        <span class="meta-item">🏫 <strong>Đơn vị:</strong> Sở GD&ĐT Đồng Nai</span>
+                        <span class="meta-item">📅 <strong>Thời gian:</strong> 27/08/2026</span>
+                        <span class="meta-item">⏱️ <strong>Thời lượng:</strong> 180 phút (4 câu)</span>
+                    </div>
+                </div>
+                <div class="exam-body">
+                    <div class="day-block">
+                        <div class="day-title">📌 Ngày thi thứ nhất (27/08/2026)</div>
+                        <div class="problem-item">
+                            <div class="problem-header"><div class="problem-id"><span>Câu 1</span><span class="badge-point">4,0 điểm</span><span class="badge-topic">Phương trình hàm</span></div><div class="problem-meta-badges"><button class="btn-copy" onclick="copyText(this)">📋 Sao chép đề</button></div></div>
+                            <div class="problem-content">Tìm tất cả các hàm số $f : \mathbb{Z} \to \mathbb{Z}$ thỏa mãn:
+$$f(m + f(n)) = f(m) + 9n, \quad \forall m, n \in \mathbb{Z}.$$</div>
+                        </div>
+                        <div class="problem-item">
+                            <div class="problem-header"><div class="problem-id"><span>Câu 2</span><span class="badge-point">6,0 điểm</span><span class="badge-topic">Dãy số</span></div><div class="problem-meta-badges"><button class="btn-copy" onclick="copyText(this)">📋 Sao chép đề</button></div></div>
+                            <div class="problem-content">Cho dãy số $(u_n)$ xác định bởi $u_1 = 1$ và $u_{n+1} = \frac{u_n + 4}{u_n + 1}, \forall n \in \mathbb{N}^*$.
+a) Chứng minh dãy số đã cho có giới hạn hữu hạn và tính giới hạn đó.
+b) Chứng minh tồn tại hàm phân thức $f(x) = \frac{x+a}{x+b}$ ($a \neq b$) sao cho dãy $(f(u_n))$ lập thành một cấp số nhân.</div>
+                        </div>
+                        <div class="problem-item">
+                            <div class="problem-header"><div class="problem-id"><span>Câu 3</span><span class="badge-point">5,0 điểm</span><span class="badge-topic">Đa thức</span></div><div class="problem-meta-badges"><button class="btn-copy" onclick="copyText(this)">📋 Sao chép đề</button></div></div>
+                            <div class="problem-content">Đặt $A = 2026! + 1$ và xét đa thức $P(x) = Ax^{4050} + b_1 x^{4048} + b_2 x^{4046} + \dots + b_{2024} x^2 + A$, trong đó $b_1, \dots, b_{2024} \in \mathbb{Z}$. Chứng minh $P(x)$ không có nghiệm hữu tỉ trong mỗi trường hợp:
+a) $b_1 + b_2 + b_3 + \dots + b_{2024} = 2025$.
+b) $b_1 + b_3 + \dots + b_{2023} = 2025$ và $b_2 + b_4 + \dots + b_{2024} = 1$.</div>
+                        </div>
+                        <div class="problem-item">
+                            <div class="problem-header"><div class="problem-id"><span>Câu 4</span><span class="badge-point">5,0 điểm</span><span class="badge-topic">Tổ hợp / Xây dựng tập hợp</span></div><div class="problem-meta-badges"><button class="btn-copy" onclick="copyText(this)">📋 Sao chép đề</button></div></div>
+                            <div class="problem-content">Xét tập hợp $A$ gồm $n$ số tự nhiên $x_1, x_2, \dots, x_n$ thỏa mãn:
+i) $1 = x_1 < x_2 < \dots < x_n = 2026$.
+ii) Với mọi $k \in \{2, 3, \dots, n\}$, luôn tồn tại $i, j \in \mathbb{N}^*$ với $i < k, j < k$ sao cho $x_k = x_i + x_j$ ($x_i$ có thể bằng $x_j$).
+a) Chỉ ra một tập hợp $A$ với $n = 15$.
+b) Chứng minh $n \ge 13$.</div>
+                        </div>
+                    </div>
+                </div>
+            </article>
+
+            <!-- EXAM 8: LAM SƠN -->
+            <article class="exam-card" id="tst-lam-son" data-filter="BAC" data-search="thanh hóa lam sơn dãy số phương trình hàm phân giác quân cờ nhìn nhau lũy thừa 3 tâm đẳng phương">
+                <div class="exam-header">
+                    <div class="exam-top-tags">
+                        <span class="tag tag-year">Năm học 2026 - 2027</span>
+                        <span class="tag tag-province">THANH HÓA</span>
+                        <span class="tag tag-official">THPT Chuyên Lam Sơn</span>
+                    </div>
+                    <h3 class="exam-title">TRƯỜNG THPT CHUYÊN LAM SƠN – THANH HÓA</h3>
+                    <div class="exam-meta">
+                        <span class="meta-item">🏫 <strong>Đơn vị:</strong> THPT Chuyên Lam Sơn</span>
+                        <span class="meta-item">📅 <strong>Thời gian:</strong> 21/08/2026 – 22/08/2026</span>
+                        <span class="meta-item">⏱️ <strong>Thời lượng:</strong> 180 phút / ngày</span>
+                    </div>
+                </div>
+                <div class="exam-body">
+                    <div class="day-block">
+                        <div class="day-title">📌 Ngày thứ nhất (21/08/2026)</div>
+                        <div class="problem-item">
+                            <div class="problem-header"><div class="problem-id"><span>Câu 1</span><span class="badge-point">5,0 điểm</span><span class="badge-topic">Dãy số</span></div><div class="problem-meta-badges"><button class="btn-copy" onclick="copyText(this)">📋 Sao chép đề</button></div></div>
+                            <div class="problem-content">Xét dãy số $(x_n)_{n \ge 1}$ cho bởi $x_1 = \frac{3}{4}$, $(n+2)^2 x_{n+1} = n^2 x_n - (n+1)$ với mọi $n \ge 1$.
+a) Tìm giới hạn của dãy $(x_n)_{n \ge 1}$.
+b) Đặt $y_n = \frac{16}{4x_n + 1}$ với mọi $n \in \mathbb{N}^*$, tìm tất cả đa thức hệ số nguyên $P(x)$ thỏa mãn $\lim_{n \to \infty} (P(n) - y_n) = 0$.</div>
+                        </div>
+                        <div class="problem-item">
+                            <div class="problem-header"><div class="problem-id"><span>Câu 2</span><span class="badge-point">5,0 điểm</span><span class="badge-topic">Phương trình hàm</span></div><div class="problem-meta-badges"><button class="btn-copy" onclick="copyText(this)">📋 Sao chép đề</button></div></div>
+                            <div class="problem-content">Tìm tất cả các hàm số $f : \mathbb{R} \to \mathbb{R}$ thỏa mãn:
+$$xf(x + f(y)) = (x - y)f(f(-x)) \quad \text{với mọi } x, y \in \mathbb{R}.$$</div>
+                        </div>
+                        <div class="problem-item">
+                            <div class="problem-header"><div class="problem-id"><span>Câu 3</span><span class="badge-point">5,0 điểm</span><span class="badge-topic">Hình học phẳng</span></div><div class="problem-meta-badges"><button class="btn-copy" onclick="copyText(this)">📋 Sao chép đề</button></div></div>
+                            <div class="problem-content">Cho tam giác $ABC$ có góc $\widehat{B} > 90^\circ$, các đường phân giác trong $BE, CF$ cắt nhau tại $I$. Gọi $N$ là điểm trên đường tròn $(AEF)$ sao cho $\widehat{IAN} = 90^\circ$. Đường thẳng $NI$ cắt lại $(AEF)$ tại $L$. Gọi $K$ là tâm của đường tròn $(AIL)$.
+a) Chứng minh rằng $KA$ tiếp xúc với đường tròn $(AEF)$.
+b) Chứng minh rằng 3 điểm $K, B, C$ thẳng hàng.</div>
+                        </div>
+                        <div class="problem-item">
+                            <div class="problem-header"><div class="problem-id"><span>Câu 4</span><span class="badge-point">5,0 điểm</span><span class="badge-topic">Tổ hợp / Bảng ô vuông</span></div><div class="problem-meta-badges"><button class="btn-copy" onclick="copyText(this)">📋 Sao chép đề</button></div></div>
+                            <div class="problem-content">Cho bảng vuông kích thước $3n \times 3n$. Một quân cờ $T$ di chuyển: lên 1 ô, sang phải 1 ô, hoặc chéo xuống-trái 1 ô. Xuất phát từ 1 ô, $T$ đi qua các ô không lặp lại rồi quay trở lại ô ban đầu. Xác định số bước đi lớn nhất có thể của $T$.</div>
+                        </div>
+                    </div>
+
+                    <div class="day-block">
+                        <div class="day-title">📌 Ngày thứ hai (22/08/2026)</div>
+                        <div class="problem-item">
+                            <div class="problem-header"><div class="problem-id"><span>Câu 5</span><span class="badge-point">6,0 điểm</span><span class="badge-topic">Tổ hợp</span></div><div class="problem-meta-badges"><button class="btn-copy" onclick="copyText(this)">📋 Sao chép đề</button></div></div>
+                            <div class="problem-content">Trong bảng ô vuông $200 \times 200$, tại một số ô đặt các quân cờ đỏ hoặc xanh. Hai quân cờ "nhìn" nhau nếu cùng hàng hoặc cùng cột. Tìm số quân cờ lớn nhất có thể đặt để mỗi quân "nhìn" đúng 5 quân cờ có màu khác nó.</div>
+                        </div>
+                        <div class="problem-item">
+                            <div class="problem-header"><div class="problem-id"><span>Câu 6</span><span class="badge-point">7,0 điểm</span><span class="badge-topic">Số học</span></div><div class="problem-meta-badges"><button class="btn-copy" onclick="copyText(this)">📋 Sao chép đề</button></div></div>
+                            <div class="problem-content">Tìm tất cả các số nguyên dương $n$ thỏa mãn:
+(i) Số lượng các ước số dương của $n$ là một số chẵn;
+(ii) Tập tất cả các ước số dương của $n$ có thể chia thành từng cặp phân biệt sao cho tổng của hai số trong mỗi cặp là một lũy thừa của 3.</div>
+                        </div>
+                        <div class="problem-item">
+                            <div class="problem-header"><div class="problem-id"><span>Câu 7</span><span class="badge-point">7,0 điểm</span><span class="badge-topic">Hình học phẳng</span></div><div class="problem-meta-badges"><button class="btn-copy" onclick="copyText(this)">📋 Sao chép đề</button></div></div>
+                            <div class="problem-content">Cho tam giác $ABC$ có $\widehat{BAC} = 60^\circ$. Dựng tam giác đều $ABK, ACL$ ra phía ngoài tam giác. Gọi $T = BL \cap CK$, $S = AB \cap CK$, $R = AC \cap BL$. Chứng minh tâm đẳng phương của các đường tròn $(KSB), (BTC)$ và $(LRC)$ nằm trên đường trung tuyến xuất phát từ $A$ của tam giác $ABC$.</div>
+                        </div>
+                    </div>
+                </div>
+            </article>
+
+            <!-- EXAM 9: HÀ TĨNH -->
+            <article class="exam-card" id="tst-ha-tinh" data-filter="TRUNG" data-search="hà tĩnh ln x đa thức chia hết đường tròn bàng tiếp vườn cam bóng điện">
+                <div class="exam-header">
+                    <div class="exam-top-tags">
+                        <span class="tag tag-year">Năm học 2026 - 2027</span>
+                        <span class="tag tag-province">TỈNH HÀ TĨNH</span>
+                        <span class="tag tag-official">Đề thi chính thức</span>
+                    </div>
+                    <h3 class="exam-title">SỞ GIÁO DỤC VÀ ĐÀO TẠO HÀ TĨNH</h3>
+                    <div class="exam-meta">
+                        <span class="meta-item">🏫 <strong>Đơn vị:</strong> Sở GD&ĐT Hà Tĩnh</span>
+                        <span class="meta-item">📅 <strong>Thời gian:</strong> 19/08/2026 – 20/08/2026</span>
+                        <span class="meta-item">⏱️ <strong>Thời lượng:</strong> 180 phút / ngày</span>
+                    </div>
+                </div>
+                <div class="exam-body">
+                    <div class="day-block">
+                        <div class="day-title">📌 Ngày thi thứ nhất (19/08/2026)</div>
+                        <div class="problem-item">
+                            <div class="problem-header"><div class="problem-id"><span>Bài 1</span><span class="badge-point">5,0 điểm</span><span class="badge-topic">Dãy số</span></div><div class="problem-meta-badges"><button class="btn-copy" onclick="copyText(this)">📋 Sao chép đề</button></div></div>
+                            <div class="problem-content">Cho dãy số $(x_n)$, với $x_1 = a > 1$ và $x_{n+1} = x_n - \ln x_n, \forall n \in \mathbb{N}^*$.
+a) Chứng minh dãy $(x_n)$ có giới hạn hữu hạn. Tìm giới hạn đó.
+b) Đặt $S_n = \sum_{k=1}^{n-1} (n - k) \ln \sqrt{x_k}, \forall n = 2, 3, \dots$ Tính $\lim_{n \to +\infty} \frac{S_n}{n}$.</div>
+                        </div>
+                        <div class="problem-item">
+                            <div class="problem-header"><div class="problem-id"><span>Bài 2</span><span class="badge-point">5,0 điểm</span><span class="badge-topic">Đa thức</span></div><div class="problem-meta-badges"><button class="btn-copy" onclick="copyText(this)">📋 Sao chép đề</button></div></div>
+                            <div class="problem-content">Xét đa thức $P(x) = a_n x^n + \dots + a_0 \in \mathbb{Z}[x]$ ($n \ge 4, a_n \ne 0$) chia hết cho $x^2 - 2x - 1$. Tìm giá trị nhỏ nhất của $\max\{|a_0|, |a_1|, \dots, |a_{n-1}|\}$.</div>
+                        </div>
+                        <div class="problem-item">
+                            <div class="problem-header"><div class="problem-id"><span>Bài 3</span><span class="badge-point">5,0 điểm</span><span class="badge-topic">Hình học phẳng</span></div><div class="problem-meta-badges"><button class="btn-copy" onclick="copyText(this)">📋 Sao chép đề</button></div></div>
+                            <div class="problem-content">Cho đường tròn $(O)$, dây $BC$. Tiếp tuyến tại $M, B$ cắt nhau ở $D$. $CD$ cắt $(O)$ tại $E$. $F \in CE$ thỏa $\widehat{CMF} = \widehat{BCD}$. $I = MF \cap (BCF)$, $J = BF \cap (MCF)$.
+a) Chứng minh $I, J, O, F$ cùng thuộc một đường tròn.
+b) Gọi $P$ là tâm đường tròn ngoại tiếp tam giác $MBD$. Chứng minh $IJ \perp CP$.</div>
+                        </div>
+                        <div class="problem-item">
+                            <div class="problem-header"><div class="problem-id"><span>Bài 4</span><span class="badge-point">5,0 điểm</span><span class="badge-topic">Số học</span></div><div class="problem-meta-badges"><button class="btn-copy" onclick="copyText(this)">📋 Sao chép đề</button></div></div>
+                            <div class="problem-content">Tìm tất cả các số nguyên dương $n$ sao cho $\frac{10^n}{n^3 + n^2 + n + 1}$ là một số nguyên.</div>
+                        </div>
+                    </div>
+
+                    <div class="day-block">
+                        <div class="day-title">📌 Ngày thi thứ hai (20/08/2026)</div>
+                        <div class="problem-item">
+                            <div class="problem-header"><div class="problem-id"><span>Bài 5</span><span class="badge-point">6,0 điểm</span><span class="badge-topic">Số học / Hàm ước số</span></div><div class="problem-meta-badges"><button class="btn-copy" onclick="copyText(this)">📋 Sao chép đề</button></div></div>
+                            <div class="problem-content">Với mỗi số nguyên dương $n$, đặt $\tau(n)$ là số các ước nguyên dương của $n$.
+a) Chứng minh rằng $\tau(n) < 2\sqrt{n}$, với mọi số nguyên dương $n$.
+b) Tìm tất cả số nguyên dương $n$ sao cho dãy số $\tau(n), \tau(\tau(n)), \tau(\tau(\tau(n))), \dots$ không chứa bất kì số chính phương nào.</div>
+                        </div>
+                        <div class="problem-item">
+                            <div class="problem-header"><div class="problem-id"><span>Bài 6</span><span class="badge-point">7,0 điểm</span><span class="badge-topic">Hình học phẳng</span></div><div class="problem-meta-badges"><button class="btn-copy" onclick="copyText(this)">📋 Sao chép đề</button></div></div>
+                            <div class="problem-content">Cho tam giác $ABC$ nhọn có đường cao $AH$. Điểm $P$ thỏa mãn phân giác trong góc $\widehat{PBC}$ và $\widehat{PCB}$ cắt nhau tại $I \in AH$. $E = BI \cap AC, F = CI \cap AB, Q = EF \cap AH$. Lấy các đường thẳng đối xứng với $BC$ qua $AB, AC$, chúng cắt nhau tại $K$.
+a) Chứng minh đường tròn bàng tiếp góc $P$ của $\triangle PBC$ và đường tròn nội tiếp $\triangle KBC$ tiếp xúc $BC$ tại cùng một điểm.
+b) Chứng minh $P, Q, K$ thẳng hàng.</div>
+                        </div>
+                        <div class="problem-item">
+                            <div class="problem-header"><div class="problem-id"><span>Bài 7</span><span class="badge-point">7,0 điểm</span><span class="badge-topic">Tổ hợp / Phủ đỉnh lưới</span></div><div class="problem-meta-badges"><button class="btn-copy" onclick="copyText(this)">📋 Sao chép đề</button></div></div>
+                            <div class="problem-content">Một khu vườn trồng cam dạng bảng ô vuông $2025 \times 2026$. Đặt bóng điện ở các đỉnh mắt lưới sao cho mỗi bóng chiếu sáng các ô vuông có chung đỉnh đó.
+a) Cần ít nhất bao nhiêu bóng điện để chiếu sáng toàn bộ khu vườn?
+b) Cần ít nhất bao nhiêu bóng điện nếu có 1 bóng bất kỳ bị cháy?
+c) Nếu mở rộng vườn thành $2026 \times 2026$, số bóng ít nhất để thỏa mãn điều kiện ở câu b là bao nhiêu?</div>
+                        </div>
+                    </div>
+                </div>
+            </article>
+
+            <!-- EXAM 10: ĐẠI HỌC VINH -->
+            <article class="exam-card" id="tst-dh-vinh" data-filter="TRUNG" data-search="đại học vinh phương trình hàm đa thức vắng mặt số học lte bất đẳng thức quân cờ">
+                <div class="exam-header">
+                    <div class="exam-top-tags">
+                        <span class="tag tag-year">Năm học 2026 - 2027</span>
+                        <span class="tag tag-province">ĐẠI HỌC VINH</span>
+                        <span class="tag tag-official">THPT Chuyên ĐH Vinh</span>
+                    </div>
+                    <h3 class="exam-title">TRƯỜNG ĐẠI HỌC VINH — TRƯỜNG THPT CHUYÊN</h3>
+                    <div class="exam-meta">
+                        <span class="meta-item">🏫 <strong>Đơn vị:</strong> Trường THPT Chuyên Đại học Vinh</span>
+                        <span class="meta-item">📅 <strong>Thời gian:</strong> Năm học 2026 – 2027</span>
+                        <span class="meta-item">⏱️ <strong>Thời lượng:</strong> 180 phút / ngày</span>
+                    </div>
+                </div>
+                <div class="exam-body">
+                    <div class="day-block">
+                        <div class="day-title">📌 Ngày thi thứ nhất</div>
+                        <div class="problem-item">
+                            <div class="problem-header"><div class="problem-id"><span>Bài 1</span><span class="badge-point">5,0 điểm</span><span class="badge-topic">Phương trình hàm</span></div><div class="problem-meta-badges"><button class="btn-copy" onclick="copyText(this)">📋 Sao chép đề</button></div></div>
+                            <div class="problem-content">Tìm tất cả các số thực $a, b$ để tồn tại hàm $f : \mathbb{R} \to \mathbb{R}$ khác hằng và thỏa mãn:
+$$f(ax^3 + y^2) = f(by^3 + x^2), \quad \forall x, y \in \mathbb{R}.$$</div>
+                        </div>
+                        <div class="problem-item">
+                            <div class="problem-header"><div class="problem-id"><span>Bài 2</span><span class="badge-point">5,0 điểm</span><span class="badge-topic">Đa thức</span></div><div class="problem-meta-badges"><button class="btn-copy" onclick="copyText(this)">📋 Sao chép đề</button></div></div>
+                            <div class="problem-content">Cho số nguyên dương $n$. Tìm tất cả các đa thức $P(x) \in \mathbb{R}[x]$ khác hằng, chỉ có nghiệm thực và thỏa mãn:
+$$16^n P\left(\frac{x^3 + 3x}{4}\right) = \left(x^4 + 7x^2 + 16\right)^n P(x), \quad \forall x \in \mathbb{R}.$$</div>
+                        </div>
+                        <div class="problem-item">
+                            <div class="problem-header"><div class="problem-id"><span>Bài 3</span><span class="badge-point">5,0 điểm</span><span class="badge-topic">Tổ hợp / Đếm kép</span></div><div class="problem-meta-badges"><button class="btn-copy" onclick="copyText(this)">📋 Sao chép đề</button></div></div>
+                            <div class="problem-content">Có 30 học sinh tham dự khóa học 100 tiết. Học ít hơn 56 tiết sẽ bị cấm thi. Biết trong mỗi tiết có nhiều hơn một nửa số học sinh vắng mặt.
+a) Chứng minh có ít nhất một học sinh bị cấm thi.
+b) Tìm số nguyên $N$ lớn nhất sao cho chắc chắn có ít nhất $N$ học sinh không được dự thi.</div>
+                        </div>
+                        <div class="problem-item">
+                            <div class="problem-header"><div class="problem-id"><span>Bài 4</span><span class="badge-point">5,0 điểm</span><span class="badge-topic">Số học</span></div><div class="problem-meta-badges"><button class="btn-copy" onclick="copyText(this)">📋 Sao chép đề</button></div></div>
+                            <div class="problem-content">a) Giả sử $a \in \mathbb{N}^*, p \in \mathbb{P}$. Chứng minh: $a^{p-1} \equiv 1 \pmod{p^2} \iff a^{(p-1)^2} \equiv 1 \pmod{p^2}$.
+b) Tìm tất cả các số nguyên dương $x, y$ và số nguyên tố $p$ thỏa mãn đồng thời:
+i) $5^{(p-1)^2} - 1$ không chia hết cho $p^2$;
+ii) $p^x + 5 = y^p$.</div>
+                        </div>
+                    </div>
+
+                    <div class="day-block">
+                        <div class="day-title">📌 Ngày thi thứ hai</div>
+                        <div class="problem-item">
+                            <div class="problem-header"><div class="problem-id"><span>Bài 5</span><span class="badge-point">6,0 điểm</span><span class="badge-topic">Bất đẳng thức</span></div><div class="problem-meta-badges"><button class="btn-copy" onclick="copyText(this)">📋 Sao chép đề</button></div></div>
+                            <div class="problem-content">Tìm số thực dương $k$ lớn nhất sao cho bất đẳng thức:
+$$\sqrt{a^3 + ka} + \sqrt{b^3 + kb} + \sqrt{c^3 + kc} \ge \sqrt{3(k + 1)(a + b + c)}$$
+đúng với mọi bộ ba số thực dương $(a, b, c)$ thỏa mãn điều kiện $ab + bc + ca = 3$.</div>
+                        </div>
+                        <div class="problem-item">
+                            <div class="problem-header"><div class="problem-id"><span>Bài 6</span><span class="badge-point">7,0 điểm</span><span class="badge-topic">Hình học phẳng</span></div><div class="problem-meta-badges"><button class="btn-copy" onclick="copyText(this)">📋 Sao chép đề</button></div></div>
+                            <div class="problem-content">Cho tam giác nhọn $ABC$ nội tiếp $(O)$, $M$ là trung điểm $AB$. Đường kính $CD$ cắt $AB$ tại $E$. Tiếp tuyến tại $A, B$ cắt nhau ở $T$, $CT$ cắt $(O)$ tại $S$. Gọi $I$ là tâm của $(CME)$.
+a) Chứng minh rằng các đường thẳng $CD, TI, SM$ đồng quy.
+b) Đường tròn $(CME)$ cắt $(O)$ tại $K$, $MK$ cắt $CE$ tại $F$. Chứng minh $(EFM), (DFS), (ABF)$ cùng đi qua một điểm khác $F$.</div>
+                        </div>
+                        <div class="problem-item">
+                            <div class="problem-header"><div class="problem-id"><span>Bài 7</span><span class="badge-point">7,0 điểm</span><span class="badge-topic">Tổ hợp / Trò chơi bàn cờ</span></div><div class="problem-meta-badges"><button class="btn-copy" onclick="copyText(this)">📋 Sao chép đề</button></div></div>
+                            <div class="problem-content">Bé An có 32 quân cờ đặt lên bàn cờ $n \times n$. Một ô gọi là *hợp lệ* nếu ô đó chưa có cờ và tổng số quân cờ trên hàng và cột qua nó là số chẵn.
+a) Với $n = 8$, chứng minh An có thể đặt hết 32 quân cờ vào 32 ô trắng của bàn cờ vua tiêu chuẩn.
+b) Với $n = 8$, chứng minh nếu mỗi bước chọn ngẫu nhiên một ô hợp lệ thì luôn đặt được cả 32 quân cờ.
+c) Với $n = 7$, điều này còn đúng không? Vì sao?</div>
+                        </div>
+                    </div>
+                </div>
+            </article>
+
+            <!-- EXAM 11: THÁI NGUYÊN -->
+            <article class="exam-card" id="tst-thai-nguyen" data-filter="BAC" data-search="thái nguyên bất đẳng thức phân thức dãy số lcm chia hết nguyên tố 14">
+                <div class="exam-header">
+                    <div class="exam-top-tags">
+                        <span class="tag tag-year">Năm học 2026 - 2027</span>
+                        <span class="tag tag-province">TỈNH THÁI NGUYÊN</span>
+                        <span class="tag tag-official">Đề thi chính thức</span>
+                    </div>
+                    <h3 class="exam-title">SỞ GIÁO DỤC VÀ ĐÀO TẠO TỈNH THÁI NGUYÊN</h3>
+                    <div class="exam-meta">
+                        <span class="meta-item">🏫 <strong>Đơn vị:</strong> Sở GD&ĐT Thái Nguyên</span>
+                        <span class="meta-item">📅 <strong>Thời gian:</strong> 10/09/2026</span>
+                        <span class="meta-item">⏱️ <strong>Thời lượng:</strong> 180 phút (6 câu)</span>
+                    </div>
+                </div>
+                <div class="exam-body">
+                    <div class="day-block">
+                        <div class="day-title">📌 Đề thi chính thức (10/09/2026)</div>
+                        <div class="problem-item">
+                            <div class="problem-header"><div class="problem-id"><span>Câu 1</span><span class="badge-point">3,0 điểm</span><span class="badge-topic">Bất đẳng thức</span></div><div class="problem-meta-badges"><button class="btn-copy" onclick="copyText(this)">📋 Sao chép đề</button></div></div>
+                            <div class="problem-content">Cho ba số thực dương $a, b, c$ thỏa mãn $a + b + c = 3$. Chứng minh rằng:
+$$\frac{1}{b+c+1} + \frac{1}{c+a+1} + \frac{1}{a+b+1} \ge 2\left(\frac{1}{a+5} + \frac{1}{b+5} + \frac{1}{c+5}\right).$$</div>
+                        </div>
+                        <div class="problem-item">
+                            <div class="problem-header"><div class="problem-id"><span>Câu 2</span><span class="badge-point">3,0 điểm</span><span class="badge-topic">Dãy số</span></div><div class="problem-meta-badges"><button class="btn-copy" onclick="copyText(this)">📋 Sao chép đề</button></div></div>
+                            <div class="problem-content">Cho dãy số $(a_n)$: $a_1 = 2026; n a_n = a_{n-1} + 1, \forall n \ge 2$. Xác định giá trị nhỏ nhất của số nguyên dương $k$ sao cho $2026 a_k < 1$.</div>
+                        </div>
+                        <div class="problem-item">
+                            <div class="problem-header"><div class="problem-id"><span>Câu 3</span><span class="badge-point">4,0 điểm</span><span class="badge-topic">Phương trình hàm</span></div><div class="problem-meta-badges"><button class="btn-copy" onclick="copyText(this)">📋 Sao chép đề</button></div></div>
+                            <div class="problem-content">Tìm tất cả các hàm số $f : \mathbb{R} \to \mathbb{R}$ thỏa mãn:
+$$f(yf(x+y) + f(x)) = 4x + 2yf(x+y), \quad \forall x, y \in \mathbb{R}.$$</div>
+                        </div>
+                        <div class="problem-item">
+                            <div class="problem-header"><div class="problem-id"><span>Câu 4</span><span class="badge-point">3,0 điểm</span><span class="badge-topic">Số học / Đa thức</span></div><div class="problem-meta-badges"><button class="btn-copy" onclick="copyText(this)">📋 Sao chép đề</button></div></div>
+                            <div class="problem-content">Cho $n$ số nguyên dương đôi một phân biệt $a_1, \dots, a_n$. Đặt $b_i = \prod_{j \neq i} (a_i - a_j)$. Chứng minh rằng $(n-1)!$ là ước của $\text{lcm}(b_1, \dots, b_n)$.</div>
+                        </div>
+                        <div class="problem-item">
+                            <div class="problem-header"><div class="problem-id"><span>Câu 5</span><span class="badge-point">4,0 điểm</span><span class="badge-topic">Hình học phẳng</span></div><div class="problem-meta-badges"><button class="btn-copy" onclick="copyText(this)">📋 Sao chép đề</button></div></div>
+                            <div class="problem-content">Cho tam giác $ABC$ nhọn không cân nội tiếp $(O)$. Phân giác $\widehat{BAC}$ cắt $BC$ tại $E$ và $(O)$ tại $M$. Đường tròn $(E; EM)$ cắt $(O)$ và tia $MO$ tại $D, Q$. Điểm $P \in AD$ thỏa $\widehat{ABP} = \widehat{ACP}$.
+a) Chứng minh rằng bốn điểm $A, E, Q, D$ đồng viên.
+b) Gọi $K = AM \cap BP, L = AM \cap CP$. Chứng minh rằng $OP$ là đường trung trực của đoạn thẳng $KL$.</div>
+                        </div>
+                        <div class="problem-item">
+                            <div class="problem-header"><div class="problem-id"><span>Câu 6</span><span class="badge-point">3,0 điểm</span><span class="badge-topic">Tổ hợp / Số học</span></div><div class="problem-meta-badges"><button class="btn-copy" onclick="copyText(this)">📋 Sao chép đề</button></div></div>
+                            <div class="problem-content">Cho tập hợp $A$ gồm $60n + 1$ số nguyên dương không vượt quá $210n$ và nguyên tố cùng nhau với $14$. Chứng minh trong $A$ luôn tồn tại hai số mà một số chia hết cho ba lần số còn lại.</div>
+                        </div>
+                    </div>
+                </div>
+            </article>
+
+            <!-- EXAM 12: QUẢNG NINH -->
+            <article class="exam-card" id="tst-quang-ninh" data-filter="BAC" data-search="quảng ninh bất đẳng thức đa thức nghiệm thực tập con tốt hàm mũ dãy nguyên tiếp xúc">
+                <div class="exam-header">
+                    <div class="exam-top-tags">
+                        <span class="tag tag-year">Năm học 2026 - 2027</span>
+                        <span class="tag tag-province">TỈNH QUẢNG NINH</span>
+                        <span class="tag tag-official">Đề thi chính thức</span>
+                    </div>
+                    <h3 class="exam-title">SỞ GIÁO DỤC VÀ ĐÀO TẠO TỈNH QUẢNG NINH</h3>
+                    <div class="exam-meta">
+                        <span class="meta-item">🏫 <strong>Đơn vị:</strong> Sở GD&ĐT Quảng Ninh</span>
+                        <span class="meta-item">📅 <strong>Thời gian:</strong> 11/09/2026 – 12/09/2026</span>
+                        <span class="meta-item">⏱️ <strong>Thời lượng:</strong> 180 phút / ngày</span>
+                    </div>
+                </div>
+                <div class="exam-body">
+                    <div class="day-block">
+                        <div class="day-title">📌 Ngày thi thứ nhất (11/09/2026)</div>
+                        <div class="problem-item">
+                            <div class="problem-header"><div class="problem-id"><span>Bài 1</span><span class="badge-point">5,0 điểm</span><span class="badge-topic">Bất đẳng thức</span></div><div class="problem-meta-badges"><button class="btn-copy" onclick="copyText(this)">📋 Sao chép đề</button></div></div>
+                            <div class="problem-content">Cho $a, b, c$ là các số thực dương, chứng minh rằng:
+$$\sqrt{a^4 + b^4 + c^4} + \sqrt{a^2b^2 + b^2c^2 + c^2a^2} \ge \sqrt{a^3b + b^3c + c^3a} + \sqrt{ab^3 + bc^3 + ca^3}.$$</div>
+                        </div>
+                        <div class="problem-item">
+                            <div class="problem-header"><div class="problem-id"><span>Bài 2</span><span class="badge-point">5,0 điểm</span><span class="badge-topic">Đa thức / Dãy số</span></div><div class="problem-meta-badges"><button class="btn-copy" onclick="copyText(this)">📋 Sao chép đề</button></div></div>
+                            <div class="problem-content">Cho $P(x)$ là đa thức hệ số thực bậc 2026 monic.
+a) Chứng minh tồn tại $n_0$ để với mọi $n \ge n_0$, phương trình $P(x) = 2027^n$ có duy nhất một nghiệm thực dương $x_n$.
+b) Chứng minh rằng dãy $y_n = x_{n+2026} - 2027x_n$ ($n \ge n_0$) có giới hạn hữu hạn.</div>
+                        </div>
+                        <div class="problem-item">
+                            <div class="problem-header"><div class="problem-id"><span>Bài 3</span><span class="badge-point">5,0 điểm</span><span class="badge-topic">Hình học phẳng</span></div><div class="problem-meta-badges"><button class="btn-copy" onclick="copyText(this)">📋 Sao chép đề</button></div></div>
+                            <div class="problem-content">Cho tam giác nhọn $ABC$ nội tiếp $(O)$. $(\omega)$ qua $B, C$ cắt $AB, AC$ tại $T, S$. $H = BS \cap CT$. Đường thẳng qua $H$ cắt $AB, AC$ tại $L, K$. Đường qua $K$ song song $BS$ cắt $AB$ tại $F$; đường qua $L$ song song $CT$ cắt $AC$ tại $E$.
+a) Chứng minh rằng $\frac{TS}{KL} = \frac{BC}{EF}$.
+b) $R = KF \cap BC, Q = LE \cap BC, P = KF \cap LE$. Chứng minh $(PQR)$ tiếp xúc với $(O)$.</div>
+                        </div>
+                        <div class="problem-item">
+                            <div class="problem-header"><div class="problem-id"><span>Bài 4</span><span class="badge-point">5,0 điểm</span><span class="badge-topic">Tổ hợp / Số học</span></div><div class="problem-meta-badges"><button class="btn-copy" onclick="copyText(this)">📋 Sao chép đề</button></div></div>
+                            <div class="problem-content">Một tập con của $\mathbb{N}^*$ gọi là *tốt* nếu không chứa hai số $a, b$ sao cho $a/b = 3^k$ ($k \in \mathbb{N}^*$).
+a) Tìm số các tập con tốt của $S = \{1; 2; 3; 4; 5; 6\}$.
+b) Một tập con tốt của $X = \{1; 2; \dots; 2187\}$ có nhiều nhất bao nhiêu phần tử?
+c) Có bao nhiêu tập con tốt của $X$ đạt số phần tử nhiều nhất?</div>
+                        </div>
+                    </div>
+
+                    <div class="day-block">
+                        <div class="day-title">📌 Ngày thi thứ hai (12/09/2026)</div>
+                        <div class="problem-item">
+                            <div class="problem-header"><div class="problem-id"><span>Bài 5</span><span class="badge-point">7,0 điểm</span><span class="badge-topic">Phương trình hàm</span></div><div class="problem-meta-badges"><button class="btn-copy" onclick="copyText(this)">📋 Sao chép đề</button></div></div>
+                            <div class="problem-content">Xét tất cả các hàm số $f : (0; +\infty) \to \mathbb{R}$ thỏa mãn:
+(1) $f\left(\sqrt{x^2 + y^2}\right) = f(x)f(y), \forall x, y > 0$;
+(2) $f(x)f(y) \ge f(xy)f(1), \forall x, y \ge 1$.
+a) Chứng minh nếu $f$ không là hàm hằng thì $f(x) > 0, \forall x > 0$.
+b) Tìm tất cả các hàm số $f$ thỏa mãn đề bài.</div>
+                        </div>
+                        <div class="problem-item">
+                            <div class="problem-header"><div class="problem-id"><span>Bài 6</span><span class="badge-point">7,0 điểm</span><span class="badge-topic">Dãy số nguyên / Số học</span></div><div class="problem-meta-badges"><button class="btn-copy" onclick="copyText(this)">📋 Sao chép đề</button></div></div>
+                            <div class="problem-content">Cho hai dãy số nguyên: $x_0 = 0, x_1 = 2, x_{n+1} = 6x_n - x_{n-1}$ và $y_1 = 17, y_{n+1} = 2y_n^2 - 1$.
+a) Chứng minh với mọi số nguyên tố $p$ lẻ thì $p \mid x_{p-1}x_{p+1}$.
+b) Cho trước $a, b \in \mathbb{N}^*$ ($b > a+2$). Chứng minh chỉ có hữu hạn cặp $(c; n)$ để $(c+a)(c+b) \mid y_n$.</div>
+                        </div>
+                        <div class="problem-item">
+                            <div class="problem-header"><div class="problem-id"><span>Bài 7</span><span class="badge-point">6,0 điểm</span><span class="badge-topic">Hình học phẳng</span></div><div class="problem-meta-badges"><button class="btn-copy" onclick="copyText(this)">📋 Sao chép đề</button></div></div>
+                            <div class="problem-content">Cho tam giác $ABC$ nội tiếp $(O)$ có phân giác trong $AK$. $H$ là trực tâm; $E = BH \cap AK, F = CH \cap AK$. Đường tròn $(KBE)$ cắt $AB$ tại $G$; $(KCF)$ cắt $AC$ tại $L$.
+a) Chứng minh rằng $AG = AL = \frac{AB^2 + AC^2 - BC^2}{AB + AC}$.
+b) Gọi $Q = GL \cap BC, S = BL \cap CG$. Chứng minh đường thẳng $QS$ luôn đi qua một điểm cố định khi $A$ di động.</div>
+                        </div>
+                    </div>
+                </div>
+            </article>
+
+            <!-- EXAM 13: NGHỆ AN -->
+            <article class="exam-card" id="tst-nghe-an" data-filter="TRUNG" data-search="nghệ an phan bội châu đa thức đạo hàm phương trình hàm số tốt euler đèn lễ hội">
+                <div class="exam-header">
+                    <div class="exam-top-tags">
+                        <span class="tag tag-year">Năm học 2026 - 2027</span>
+                        <span class="tag tag-province">TỈNH NGHỆ AN</span>
+                        <span class="tag tag-official">Đề thi chính thức</span>
+                    </div>
+                    <h3 class="exam-title">SỞ GIÁO DỤC VÀ ĐÀO TẠO NGHỆ AN</h3>
+                    <div class="exam-meta">
+                        <span class="meta-item">🏫 <strong>Đơn vị:</strong> THPT Chuyên Phan Bội Châu</span>
+                        <span class="meta-item">📅 <strong>Thời gian:</strong> Năm học 2026 – 2027</span>
+                        <span class="meta-item">⏱️ <strong>Thời lượng:</strong> 180 phút / ngày</span>
+                    </div>
+                </div>
+                <div class="exam-body">
+                    <div class="day-block">
+                        <div class="day-title">📌 Ngày thi thứ nhất</div>
+                        <div class="problem-item">
+                            <div class="problem-header"><div class="problem-id"><span>Câu 1</span><span class="badge-point">5,0 điểm</span><span class="badge-topic">Đa thức & Giới hạn dãy số</span></div><div class="problem-meta-badges"><button class="btn-copy" onclick="copyText(this)">📋 Sao chép đề</button></div></div>
+                            <div class="problem-content">Cho đa thức monic $P(x)$ bậc $d \ge 5$ và $P'(x) > 0, \forall x \ge 1$. Dãy $(x_n)$ có $x_1 = 1, x_{n+1} = \frac{P'(n)}{P(n+1) - P(n)} x_n$.
+a) Đặt $y_n = n \left(\frac{P(n+1) - P(n)}{P'(n)} - 1\right)$. Chứng minh $(x_n), (y_n)$ hội tụ và tìm giới hạn.
+b) Đặt $z_n = \sum_{i=1}^n x_i$. Chứng minh dãy $(z_n)$ hội tụ.</div>
+                        </div>
+                        <div class="problem-item">
+                            <div class="problem-header"><div class="problem-id"><span>Câu 2</span><span class="badge-point">5,0 điểm</span><span class="badge-topic">Phương trình hàm</span></div><div class="problem-meta-badges"><button class="btn-copy" onclick="copyText(this)">📋 Sao chép đề</button></div></div>
+                            <div class="problem-content">Cho hàm số $f : \mathbb{R}^+ \to \mathbb{R}^+$ thỏa mãn $f(1) = 1$ và:
+$$f(x) + f(y) + f(z) + f(t) \le f(x+y+z+t) \le 4 \max\{f(x), f(y), f(z), f(t)\}$$
+với mọi $x, y, z, t > 0$.
+a) Chứng minh $f$ tăng ngặt và $f(2026) = 2026$.
+b) Tìm tất cả hàm số $f$ thỏa mãn bài toán.</div>
+                        </div>
+                        <div class="problem-item">
+                            <div class="problem-header"><div class="problem-id"><span>Câu 3</span><span class="badge-point">5,0 điểm</span><span class="badge-topic">Hình học phẳng</span></div><div class="problem-meta-badges"><button class="btn-copy" onclick="copyText(this)">📋 Sao chép đề</button></div></div>
+                            <div class="problem-content">Cho tam giác $ABC$ nhọn nội tiếp $(O)$, trực tâm $H$. Điểm $P$ di động trên đường thẳng $BC$. $OP$ cắt $AC, AB$ tại $Q, R$. $Y, Z$ là hình chiếu của $Q, R$ lên $AB, AC$.
+a) Chứng minh rằng $YZ$ luôn đi qua một điểm cố định khi $P$ thay đổi.
+b) $S = QY \cap RZ, X = SH \cap YZ$. Chứng minh rằng $XA \perp XP$.</div>
+                        </div>
+                        <div class="problem-item">
+                            <div class="problem-header"><div class="problem-id"><span>Câu 4</span><span class="badge-point">5,0 điểm</span><span class="badge-topic">Số học</span></div><div class="problem-meta-badges"><button class="btn-copy" onclick="copyText(this)">📋 Sao chép đề</button></div></div>
+                            <div class="problem-content">Cho $k > 1$. Gọi $\sigma_k(n) = \sum_{d \mid n} d^k$. Số $n$ là tốt nếu $n \mid \sigma_k(n)$.
+a) Chứng minh $\sigma_k(n)$ nhân tính và tồn tại dãy vô hạn các số tốt $n_1 < n_2 < \dots$ sao cho $n_i \mid n_{i+1}$.
+b) Chứng minh với mọi $r \in \mathbb{N}^*$, tồn tại một số tốt có ít nhất $r$ ước nguyên tố phân biệt.</div>
+                        </div>
+                    </div>
+
+                    <div class="day-block">
+                        <div class="day-title">📌 Ngày thi thứ hai</div>
+                        <div class="problem-item">
+                            <div class="problem-header"><div class="problem-id"><span>Câu 5</span><span class="badge-point">7,0 điểm</span><span class="badge-topic">Hình học phẳng</span></div><div class="problem-meta-badges"><button class="btn-copy" onclick="copyText(this)">📋 Sao chép đề</button></div></div>
+                            <div class="problem-content">Cho $\triangle ABC$ ngoại tiếp $(I)$ tiếp xúc $BC, CA, AB$ tại $D, E, F$. Gọi $K$ là trực tâm của tam giác $BIC$.
+a) $S = CK \cap DE, T = BK \cap DF, R = ST \cap EF$. Chứng minh rằng $IR \perp AK$.
+b) Chứng minh rằng $AK, BC$ và đường thẳng Euler của tam giác $KBC$ đồng quy hoặc đôi một song song.</div>
+                        </div>
+                        <div class="problem-item">
+                            <div class="problem-header"><div class="problem-id"><span>Câu 6</span><span class="badge-point">7,0 điểm</span><span class="badge-topic">Đa thức có nghiệm thực</span></div><div class="problem-meta-badges"><button class="btn-copy" onclick="copyText(this)">📋 Sao chép đề</button></div></div>
+                            <div class="problem-content">Cho đa thức monic $P(x) = x^n + a_{n-1}x^{n-1} + \dots + a_0$ ($n > 2$) có tất cả các nghiệm đều là số thực và khác 0.
+a) Chứng minh rằng $2026a_k^2 + 2027a_{k+1}^2 > 0$ với mọi $k = 0, 1, \dots, n-2$.
+b) Hỏi số lượng hệ số khác 0 của đa thức $P(x)$ nhỏ nhất là bao nhiêu?</div>
+                        </div>
+                        <div class="problem-item">
+                            <div class="problem-header"><div class="problem-id"><span>Câu 7</span><span class="badge-point">6,0 điểm</span><span class="badge-topic">Tổ hợp / Vòng tròn</span></div><div class="problem-meta-badges"><button class="btn-copy" onclick="copyText(this)">📋 Sao chép đề</button></div></div>
+                            <div class="problem-content">Có $n$ ngọn đèn quanh vòng tròn. Người ghi đi theo chiều kim đồng hồ, tại đèn $i$ ghi số đèn sáng trong $k$ đèn liên tiếp ($s_i$). Thu được bản ghi $(s_1, \dots, s_n)$.
+a) Xác định điều kiện của $n, k$ để bản ghi xác định duy nhất trạng thái ban đầu của các đèn.
+b) Xác định số bản ghi $(s_1, \dots, s_n)$ phân biệt có thể thu được.</div>
+                        </div>
+                    </div>
+                </div>
+            </article>
+
+            <!-- EXAM 14: KHTN -->
+            <article class="exam-card" id="tst-khtn" data-filter="BAC" data-search="khtn đại học quốc gia hà nội dãy số nguyên chính phương phương trình hàm hữu tỉ trục đẳng phương">
+                <div class="exam-header">
+                    <div class="exam-top-tags">
+                        <span class="tag tag-year">Năm học 2026 - 2027</span>
+                        <span class="tag tag-province">CHUYÊN KHTN HÀ NỘI</span>
+                        <span class="tag tag-official">Đề thi Vòng 1</span>
+                    </div>
+                    <h3 class="exam-title">TRƯỜNG ĐẠI HỌC KHOA HỌC TỰ NHIÊN — ĐHQG HÀ NỘI</h3>
+                    <div class="exam-meta">
+                        <span class="meta-item">🏫 <strong>Đơn vị:</strong> THPT Chuyên Khoa học Tự nhiên</span>
+                        <span class="meta-item">📅 <strong>Thời gian:</strong> Năm học 2026 – 2027</span>
+                        <span class="meta-item">⏱️ <strong>Thời lượng:</strong> 180 phút (3 câu)</span>
+                    </div>
+                </div>
+                <div class="exam-body">
+                    <div class="day-block">
+                        <div class="day-title">📌 Ngày thi thứ nhất</div>
+                        <div class="problem-item">
+                            <div class="problem-header"><div class="problem-id"><span>Câu 1</span><span class="badge-point">7,0 điểm</span><span class="badge-topic">Dãy số nguyên & Số học</span></div><div class="problem-meta-badges"><button class="btn-copy" onclick="copyText(this)">📋 Sao chép đề</button></div></div>
+                            <div class="problem-content">Cho dãy số nguyên $(x_n)$ xác định bởi $x_1 = x_2 = 1$ và:
+$$x_{n+2} = 3x_{n+1} + 2x_n, \quad \forall n \in \mathbb{N}^*.$$
+a) Tìm các số nguyên dương $n$ sao cho $17x_n^2 - (-2)^{n+2}$ là số chính phương.
+b) Chứng minh rằng tồn tại vô số số nguyên tố $p$ sao cho $p \nmid x_n$ với mọi $n \in \mathbb{N}^*$.</div>
+                        </div>
+                        <div class="problem-item">
+                            <div class="problem-header"><div class="problem-id"><span>Câu 2</span><span class="badge-point">7,0 điểm</span><span class="badge-topic">Phương trình hàm trên Q+</span></div><div class="problem-meta-badges"><button class="btn-copy" onclick="copyText(this)">📋 Sao chép đề</button></div></div>
+                            <div class="problem-content">Tìm tất cả các hàm số $f : \mathbb{Q}^+ \to \mathbb{Q}^+$ thỏa mãn:
+$$f(xy) + 2026f(x+y) = f(xf(y) + 2026f(y)), \quad \forall x, y \in \mathbb{Q}^+.$$</div>
+                        </div>
+                        <div class="problem-item">
+                            <div class="problem-header"><div class="problem-id"><span>Câu 3</span><span class="badge-point">6,0 điểm</span><span class="badge-topic">Hình học phẳng (Trục đẳng phương)</span></div><div class="problem-meta-badges"><button class="btn-copy" onclick="copyText(this)">📋 Sao chép đề</button></div></div>
+                            <div class="problem-content">Cho tam giác $ABC$ nhọn, không cân. Điểm $D$ nằm trên cạnh $BC$ sao cho $AD \not\perp BC$. Lấy hai điểm $E, F$ lần lượt thuộc $AB, AC$ sao cho $EF \parallel BC$. Qua $E, F$, lần lượt kẻ các đường thẳng song song với $AD$, cắt $BC$ tại $H, G$. Gọi $Q$ là giao điểm của $AD$ và đường trung trực của $BC$; điểm $P$ nằm trên tia $AQ$ sao cho $AP \cdot AQ = AD^2$.
+a) Chứng minh rằng $Q$ nằm trên trục đẳng phương của $(BHE)$ và $(CGF)$.
+b) Chứng minh rằng $P$ nằm trên trục đẳng phương của $(BHF)$ và $(CGE)$.</div>
+                        </div>
+                    </div>
+                </div>
+            </article>
+
+        </main>
+    </div>
+
+    <!-- FOOTER -->
+    <footer>
+        <p>© 2026 – 2027 HỆ THỐNG DỮ LIỆU TST VMO TOÀN QUỐC</p>
+        <p style="margin-top: 6px; font-size: 0.8rem; color: #64748b;">Dữ liệu được biên soạn và số hóa phục vụ công tác bồi dưỡng đội tuyển HSGQG môn Toán.</p>
+    </footer>
+
+    <!-- SCRIPT TƯƠNG TÁC TÌM KIẾM VÀ COPY -->
+    <script>
+        // Chức năng Copy đề bài
+        function copyText(btn) {
+            const card = btn.closest('.problem-item');
+            const id = card.querySelector('.problem-id span:first-child').innerText;
+            const content = card.querySelector('.problem-content').innerText;
+            const textToCopy = `${id}:\n${content}`;
+            
+            navigator.clipboard.writeText(textToCopy).then(() => {
+                const originalText = btn.innerHTML;
+                btn.innerHTML = '✅ Đã sao chép';
+                btn.style.borderColor = '#10b981';
+                btn.style.color = '#10b981';
+                setTimeout(() => {
+                    btn.innerHTML = originalText;
+                    btn.style.borderColor = '';
+                    btn.style.color = '';
+                }, 1800);
+            });
+        }
+
+        // Chức năng Tìm kiếm Live Search
+        const searchInput = document.getElementById('searchInput');
+        const cards = document.querySelectorAll('.exam-card');
+
+        searchInput.addEventListener('input', function(e) {
+            const val = e.target.value.toLowerCase().trim();
+            cards.forEach(card => {
+                const text = (card.getAttribute('data-search') + ' ' + card.innerText).toLowerCase();
+                if (text.includes(val)) {
+                    card.style.display = '';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        });
+
+        // Chức năng Lọc theo vùng miền (Filter Pills)
+        const pills = document.querySelectorAll('.filter-pills .pill');
+        pills.forEach(pill => {
+            pill.addEventListener('click', function() {
+                pills.forEach(p => p.classList.remove('active'));
+                this.classList.add('active');
+                
+                const filter = this.getAttribute('data-filter');
+                cards.forEach(card => {
+                    if (filter === 'ALL' || card.getAttribute('data-filter') === filter) {
+                        card.style.display = '';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
