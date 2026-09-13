@@ -15,8 +15,14 @@ const VMOAuth = (() => {
       name: 'Quản trị viên tối cao',
       createdAt: '2026-09-01T00:00:00.000Z'
     },
-      username: 'hoangkien',
+    { username: 'hoangkien',
       password: '123456',
+      role: 'admin',
+      name: 'Quản trị viên tối cao',
+      createdAt: '2026-09-01T00:00:00.000Z'
+    },
+    { username: 'test1',
+      password: 'password@123',
       role: 'admin',
       name: 'Quản trị viên tối cao',
       createdAt: '2026-09-01T00:00:00.000Z'
