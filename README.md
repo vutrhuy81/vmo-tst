@@ -1,13 +1,27 @@
-# VMO Đà Nẵng 2026–2027 — Website tĩnh
+# VMO Đà Nẵng 2026–2027 — Website
 
-Website không cần bước build. Có thể public trực tiếp trên Vercel.
+Website tĩnh hoàn chỉnh để deploy trực tiếp lên Vercel.
 
 ## Cấu trúc
-- `index.html`: nội dung đầy đủ của tài liệu + ngân hàng TST hiện có
-- `styles.css`: giao diện responsive, print, dark mode
-- `app.js`: tab, tìm kiếm, bộ lọc, thu gọn lời giải
-- `assets/On_luyen_VMO_Da_Nang_2026_2027.pdf`: PDF gốc để mở/tải từ website
-- `vercel.json`: cấu hình static hosting
+- `index.html`: nội dung tài liệu VMO 85 trang + ngân hàng đề TST.
+- `styles.css`: giao diện responsive, print và dark mode.
+- `app.js`: điều hướng, tìm kiếm, bộ lọc, ẩn/hiện lời giải.
+- `assets/On_luyen_VMO_Da_Nang_2026_2027.pdf`: PDF nguồn.
+- `vercel.json`: cấu hình triển khai Vercel.
+
+## MathJax
+Cấu hình đã sửa delimiter đúng chuẩn JavaScript:
+- inline: `\\(...\\)` và `$...$`
+- display: `\\[...\\]` và `$$...$$`
+
+MathJax dùng jsDelivr và có fallback sang cdnjs nếu CDN chính lỗi.
 
 ## Deploy Vercel
-Import thư mục này vào Vercel hoặc chạy `vercel --prod` tại thư mục dự án. Không cần framework và không cần lệnh build.
+1. Giải nén toàn bộ project.
+2. Import thư mục vào Vercel hoặc push lên GitHub rồi import repository.
+3. Framework Preset: **Other**.
+4. Build Command: để trống.
+5. Output Directory: để trống.
+6. Deploy.
+
+Nếu đang cập nhật một deployment cũ, tạo deployment mới hoặc redeploy để Vercel phục vụ `index.html` đã sửa.
