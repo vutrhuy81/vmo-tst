@@ -68,6 +68,7 @@ VMOAuth.requireAuth('login.html');
     <button class="tab-btn active" type="button" onclick="switchTab('tab-danang',this)">📚 Tài liệu chuyên đề VMO</button>
     <button class="tab-btn" type="button" onclick="switchTab('tab-tst',this)">🏛️ Đề TST 2026–2027</button>
     <button class="tab-btn" type="button" onclick="switchTab('tab-history',this)">🗂️ Đề Đà Nẵng–Quảng Nam</button>
+    <button class="tab-btn" type="button" onclick="switchTab('tab-vmo-imo',this)">🇻🇳 Đề thi VMO–IMO</button>
     <span class="tab-spacer"></span>
     <div class="user-auth-bar" id="userAuthBar">
       <div class="user-info-chip">
@@ -98,6 +99,9 @@ VMOAuth.requireAuth('login.html');
     </div>
     <div class="filter-pills" id="historyFilterPills" style="display:none">
       <button class="pill active" data-filter="ALL">Tất cả 12 đề</button><button class="pill" data-filter="DANANG">Đà Nẵng (6)</button><button class="pill" data-filter="QUANGNAM">Quảng Nam (6)</button>
+    </div>
+    <div class="filter-pills" id="vmoImoFilterPills" style="display:none">
+      <button class="pill active" data-filter="ALL">Tất cả 20 đề</button><button class="pill" data-filter="VMO">VMO (10)</button><button class="pill" data-filter="VNTST">VNTST/IMO (10)</button>
     </div>
   </div>
 </div>
@@ -139,7 +143,13 @@ VMOAuth.requireAuth('login.html');
 <a class="nav-link" href="#hist-qn-2019-2020">10. Quảng Nam 2019–2020</a>
 <a class="nav-link" href="#hist-qn-2020-2021">11. Quảng Nam 2020–2021</a>
 <a class="nav-link" href="#hist-qn-2022-2023">12. Quảng Nam 2022–2023</a>
-</div></div></aside>
+</div></div><div id="sidebar-vmo-imo" style="display:none">
+<div class="sidebar-title">Đề thi VMO–IMO 2017–2026</div>
+<div class="nav-year-group"><div class="nav-year-title">🏅 VMO – HSG QUỐC GIA</div>
+<div id="vmoSidebarLinks"></div></div>
+<div class="nav-year-group"><div class="nav-year-title">🌐 VNTST – CHỌN ĐỘI TUYỂN IMO</div>
+<div id="vntstSidebarLinks"></div></div>
+</div></aside>
   <main><div class="tab-pane active" id="tab-danang">
 <section class="book-dashboard" id="book-dashboard">
 <div class="dashboard-copy">
@@ -4004,6 +4014,14 @@ P=\frac{z}{z+y}+\frac{y}{y+x}+\frac{2022z^{2023}}{z^{2023}+x^{2023}}.
 </article>
 </div>
 </div>
+<div class="tab-pane" id="tab-vmo-imo">
+  <div class="section-header-box">
+    <h2>🇻🇳 Đề thi VMO–IMO giai đoạn 2017–2026</h2>
+    <p>Chỉ mục gồm 10 đề VMO và 10 đề chọn đội tuyển Việt Nam dự IMO (VNTST), tổ chức theo năm. Mỗi câu có nút mở nguồn đề/lời giải và liên kết tra cứu các bài đăng, bình luận trong nhóm Facebook. Các liên kết Facebook có thể yêu cầu đăng nhập.</p>
+    <div class="warnbox"><strong>Quy ước kiểm chứng:</strong> “Nguồn đề/lời giải” dẫn đến tài liệu hoặc bài đăng đã xác định theo đúng kỳ thi; “Tra cứu Facebook” là trang kết quả tìm kiếm trong nhóm, dùng để tìm thêm các cách giải khác và không được xem là một lời giải độc lập.</div>
+  </div>
+  <div class="feed-container" id="vmoImoArchive"></div>
+</div>
 </main>
 </div>
 <footer><p>© 2026–2027 · Tài liệu ôn luyện VMO Đà Nẵng</p><p>Biên soạn: Trần Huy Vũ · Bản web phục vụ học tập và bồi dưỡng đội tuyển · Có ngân hàng đề TST và đề Đà Nẵng–Quảng Nam qua các năm.</p></footer>
@@ -4013,17 +4031,18 @@ P=\frac{z}{z+y}+\frac{y}{y+x}+\frac{2022z^{2023}}{z^{2023}+x^{2023}}.
   const qs=(s,c=document)=>c.querySelector(s); const qsa=(s,c=document)=>[...c.querySelectorAll(s)];
   const search=qs('#searchInput'); const searchSummary=qs('#searchSummary');
   function typeset(el){ if(window.MathJax?.typesetPromise){ MathJax.typesetPromise(el?[el]:undefined).catch(()=>{}); } }
-  window.switchTab=function(tabId,btn){ qsa('.tab-pane').forEach(x=>x.classList.remove('active')); qsa('.tab-btn').forEach(x=>x.classList.remove('active')); qs('#'+tabId)?.classList.add('active'); (btn||event?.currentTarget)?.classList.add('active'); const isT=tabId==='tab-tst', isH=tabId==='tab-history'; qs('#sidebar-danang').style.display=(!isT&&!isH)?'block':'none'; qs('#sidebar-tst').style.display=isT?'block':'none'; qs('#sidebar-history').style.display=isH?'block':'none'; qs('#tstFilterPills').style.display=isT?'flex':'none'; qs('#historyFilterPills').style.display=isH?'flex':'none'; search.value=''; clearSearch(); window.scrollTo({top:220,behavior:'smooth'}); };
+  window.switchTab=function(tabId,btn){ qsa('.tab-pane').forEach(x=>x.classList.remove('active')); qsa('.tab-btn').forEach(x=>x.classList.remove('active')); qs('#'+tabId)?.classList.add('active'); (btn||event?.currentTarget)?.classList.add('active'); const isT=tabId==='tab-tst', isH=tabId==='tab-history', isV=tabId==='tab-vmo-imo'; qs('#sidebar-danang').style.display=(!isT&&!isH&&!isV)?'block':'none'; qs('#sidebar-tst').style.display=isT?'block':'none'; qs('#sidebar-history').style.display=isH?'block':'none'; qs('#sidebar-vmo-imo').style.display=isV?'block':'none'; qs('#tstFilterPills').style.display=isT?'flex':'none'; qs('#historyFilterPills').style.display=isH?'flex':'none'; qs('#vmoImoFilterPills').style.display=isV?'flex':'none'; search.value=''; clearSearch(); window.scrollTo({top:220,behavior:'smooth'}); };
   window.toggleSolution=function(btn){const content=btn.nextElementSibling; const open=getComputedStyle(content).display!=='none'; content.style.display=open?'none':'block'; btn.textContent=open?'👁️ Xem lời giải & Thang điểm':'🙈 Ẩn lời giải & Thang điểm'; if(!open)typeset(content)};
   window.copyText=function(btn){const card=btn.closest('.problem-item'); const id=card.querySelector('.problem-id span:first-child')?.innerText||'Bài toán'; const content=card.querySelector('.problem-content')?.innerText||card.innerText; navigator.clipboard.writeText(`${id}:\n${content}`).then(()=>{const old=btn.textContent;btn.textContent='✅ Đã sao chép';setTimeout(()=>btn.textContent=old,1500)})};
   function norm(s){return (s||'').toLocaleLowerCase('vi').normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/đ/g,'d')}
   function clearSearch(){qsa('.hidden-by-search').forEach(x=>x.classList.remove('hidden-by-search')); searchSummary.classList.remove('visible'); searchSummary.textContent='';}
   function searchBook(val){let matches=0; qsa('#tab-danang .chapter-block').forEach(ch=>{let any=false; const subs=qsa('.book-subsection',ch); if(!subs.length){const hit=norm(ch.textContent).includes(val); ch.classList.toggle('hidden-by-search',!hit); if(hit){matches++;any=true} return;} subs.forEach(sub=>{const hit=norm(sub.textContent).includes(val); sub.classList.toggle('hidden-by-search',!hit); if(hit){matches++;any=true}}); const headText=norm(ch.querySelector('.chapter-heading')?.textContent||''); if(headText.includes(val)){subs.forEach(s=>s.classList.remove('hidden-by-search')); any=true; matches=Math.max(matches,1)} ch.classList.toggle('hidden-by-search',!any)}); return matches;}
   function searchExamBank(tabId,val){let matches=0; qsa('#'+tabId+' .exam-card').forEach(card=>{const hit=norm((card.dataset.search||'')+' '+card.innerText).includes(val); card.classList.toggle('hidden-by-search',!hit); if(hit)matches++}); return matches;}
-  function applySearch(){const raw=search.value.trim(); if(!raw){clearSearch();return} const val=norm(raw); const active=qs('.tab-pane.active'); let n=0; if(active?.id==='tab-tst'||active?.id==='tab-history') n=searchExamBank(active.id,val); else n=searchBook(val); searchSummary.textContent=`Tìm thấy ${n} mục phù hợp với “${raw}”.`; searchSummary.classList.add('visible')}
+  function applySearch(){const raw=search.value.trim(); if(!raw){clearSearch();return} const val=norm(raw); const active=qs('.tab-pane.active'); let n=0; if(active?.id==='tab-tst'||active?.id==='tab-history'||active?.id==='tab-vmo-imo') n=searchExamBank(active.id,val); else n=searchBook(val); searchSummary.textContent=`Tìm thấy ${n} mục phù hợp với “${raw}”.`; searchSummary.classList.add('visible')}
   search?.addEventListener('input',applySearch);
   qsa('#tstFilterPills .pill').forEach(p=>p.addEventListener('click',()=>{qsa('#tstFilterPills .pill').forEach(x=>x.classList.remove('active'));p.classList.add('active');const f=p.dataset.filter;qsa('#tab-tst .exam-card').forEach(card=>card.classList.toggle('hidden-by-search',!(f==='ALL'||card.dataset.filter===f)));}));
   qsa('#historyFilterPills .pill').forEach(p=>p.addEventListener('click',()=>{qsa('#historyFilterPills .pill').forEach(x=>x.classList.remove('active'));p.classList.add('active');const f=p.dataset.filter;qsa('#tab-history .exam-card').forEach(card=>card.classList.toggle('hidden-by-search',!(f==='ALL'||card.dataset.filter===f)));}));
+  qsa('#vmoImoFilterPills .pill').forEach(p=>p.addEventListener('click',()=>{qsa('#vmoImoFilterPills .pill').forEach(x=>x.classList.remove('active'));p.classList.add('active');const f=p.dataset.filter;qsa('#tab-vmo-imo .exam-card').forEach(card=>card.classList.toggle('hidden-by-search',!(f==='ALL'||card.dataset.filter===f)));}));
   qsa('.solution-toggle').forEach(btn=>btn.addEventListener('click',()=>{const sol=btn.nextElementSibling; const collapsed=sol.classList.toggle('is-collapsed'); btn.textContent=collapsed?'Hiện lời giải':'Ẩn lời giải';btn.setAttribute('aria-expanded',String(!collapsed)); if(!collapsed)typeset(sol)}));
   /* Nguồn lời giải/trao đổi đã đối chiếu trong nhóm Hướng tới Olympic Toán VN,
      cập nhật ngày 13/09/2026. Mỗi mảng con ứng với một câu theo thứ tự xuất hiện. */
@@ -4055,6 +4074,59 @@ P=\frac{z}{z+y}+\frac{y}{y+x}+\frac{2022z^{2023}}{z^{2023}+x^{2023}}.
       sources.forEach(([label,url])=>{const li=document.createElement('li');const a=document.createElement('a');a.href=url;a.target='_blank';a.rel='noopener noreferrer';a.textContent=label;li.appendChild(a);list.appendChild(li)});
       content.appendChild(list); box.append(button,content); problem.appendChild(box);
     });
+  });
+  /* Chỉ mục quốc gia 2017–2026. Không sao chép lại văn bản đề từ nguồn ảnh/PDF khi
+     OCR chưa đủ tin cậy; từng câu được định danh theo số thứ tự và gắn nguồn mở. */
+  const nationalArchiveSources={
+    VMO:{
+      2017:[['Tuyển tập đề VMO/VNTST 2017 – MOlympiad','https://www.molympiad.net/2017/12/vietnamese-mathematical-competitions-2017.html']],
+      2018:[['Tuyển tập đề VMO/VNTST 2018 – MOlympiad','https://www.molympiad.net/2020/04/booklet-vietnamese-mathematical.html']],
+      2019:[['Tuyển tập đề VMO/VNTST 2019 – MOlympiad','https://www.molympiad.net/2020/04/booklet-vietnamese-mathematical-2019.html']],
+      2020:[['Thư viện đề thi HSG quốc gia – Titan Hà Nội','https://titanhanoi.vn/thu-vien-de-thi-hoc-sinh-gioi-quoc-gia/']],
+      2021:[['Thư viện đề thi HSG quốc gia – Titan Hà Nội','https://titanhanoi.vn/thu-vien-de-thi-hoc-sinh-gioi-quoc-gia/']],
+      2022:[['Thư viện đề thi HSG quốc gia – Titan Hà Nội','https://titanhanoi.vn/thu-vien-de-thi-hoc-sinh-gioi-quoc-gia/']],
+      2023:[['Thư viện đề thi HSG quốc gia – Titan Hà Nội','https://titanhanoi.vn/thu-vien-de-thi-hoc-sinh-gioi-quoc-gia/']],
+      2024:[['Hướng dẫn chấm VMO 2024 – MathVN','https://www.mathvn.com/2024/01/dap-an-de-thi-hoc-sinh-gioi-quoc-gia-mon-toan-2024.html'],['Lời giải VMO 2024 – bài đăng Facebook','https://www.facebook.com/groups/243634219684049/posts/1168914283822699/']],
+      2025:[['Đề và đáp án VMO 2025 – Cổng TTĐT Chính phủ','https://xaydungchinhsach.chinhphu.vn/de-thi-va-dap-an-mon-toan-chon-hoc-sinh-gioi-quoc-gia-thpt-nam-hoc-2024-2025-119250121151907667.htm'],['Lời giải ngày 2 – VnExpress','https://vnexpress.net/de-va-loi-giai-mon-toan-thi-hoc-sinh-gioi-quoc-gia-ngay-2-4833267.html']],
+      2026:[['Tra cứu đề và lời giải VMO 2026 trong nhóm','https://www.facebook.com/groups/243634219684049/search/?q=VMO%202026%20l%E1%BB%9Di%20gi%E1%BA%A3i']]
+    },
+    VNTST:{
+      2017:[['Tuyển tập đề VMO/VNTST 2017 – MOlympiad','https://www.molympiad.net/2017/12/vietnamese-mathematical-competitions-2017.html']],
+      2018:[['Tuyển tập đề VMO/VNTST 2018 – MOlympiad','https://www.molympiad.net/2020/04/booklet-vietnamese-mathematical.html']],
+      2019:[['Tuyển tập đề VMO/VNTST 2019 – MOlympiad','https://www.molympiad.net/2020/04/booklet-vietnamese-mathematical-2019.html']],
+      2020:[['Kho hình học VNTST 1990–2021','https://imogeometry.blogspot.com/p/vietnam-tst.html']],
+      2021:[['Kho hình học VNTST 1990–2021','https://imogeometry.blogspot.com/p/vietnam-tst.html']],
+      2022:[['Đề chọn đội tuyển Việt Nam dự IMO 2022','https://www.molympiad.net/2022/05/de-thi-chon-doi-tuyen-viet-nam-tham-du-imo-2022.html']],
+      2023:[['Lời giải các bài hình VNTST 2023','https://nguyenvanlinh.wordpress.com/2023/04/14/geometry-problems-from-vietnam-tst-2023/']],
+      2024:[['Lời giải các bài hình VNTST 2024','https://nguyenvanlinh.wordpress.com/2024/03/26/geometry-problems-from-vietnam-tst-2024/'],['Lời giải bổ sung Bài 6 – Facebook','https://www.facebook.com/huongtoikythihsgvakythichuyentoan/posts/262504256919060/']],
+      2025:[['Tra cứu đề và lời giải VNTST 2025 trong nhóm','https://www.facebook.com/groups/243634219684049/search/?q=VNTST%202025%20l%E1%BB%9Di%20gi%E1%BA%A3i']],
+      2026:[['Tra cứu đề và lời giải VNTST 2026 trong nhóm','https://www.facebook.com/groups/243634219684049/search/?q=VNTST%202026%20l%E1%BB%9Di%20gi%E1%BA%A3i']]
+    }
+  };
+  const fbSearch=(kind,year)=>`https://www.facebook.com/groups/243634219684049/search/?q=${encodeURIComponent(kind+' '+year+' lời giải')}`;
+  const archive=qs('#vmoImoArchive');
+  const makeLink=(label,url)=>{const a=document.createElement('a');a.href=url;a.target='_blank';a.rel='noopener noreferrer';a.textContent=label;return a};
+  ['VMO','VNTST'].forEach(kind=>{
+    const side=qs(kind==='VMO'?'#vmoSidebarLinks':'#vntstSidebarLinks');
+    for(let year=2026;year>=2017;year--){
+      const id=`national-${kind.toLowerCase()}-${year}`;
+      const sl=makeLink(`${year}`,`#${id}`);sl.className='nav-link';side?.appendChild(sl);
+      const card=document.createElement('article');card.className='exam-card national-card';card.id=id;card.dataset.filter=kind;card.dataset.search=`${kind} ${year} Việt Nam HSG quốc gia chọn đội tuyển IMO`;
+      const head=document.createElement('div');head.className='exam-header';
+      const tags=document.createElement('div');tags.className='exam-top-tags';tags.innerHTML=`<span class="tag tag-year">${year}</span><span class="tag tag-official">${kind==='VMO'?'HSG quốc gia':'Chọn đội tuyển IMO'}</span>`;
+      const h=document.createElement('h3');h.className='exam-title';h.textContent=kind==='VMO'?`VMO ${year} – Kỳ thi chọn HSG quốc gia môn Toán`:`VNTST ${year} – Kỳ thi chọn đội tuyển Việt Nam dự IMO`;
+      const meta=document.createElement('div');meta.className='exam-meta';meta.textContent='2 ngày · 6 câu · nguồn đề và lời giải mở theo từng câu';head.append(tags,h,meta);
+      const body=document.createElement('div');body.className='exam-body';
+      for(let i=1;i<=6;i++){
+        const p=document.createElement('div');p.className='problem-item';
+        const ph=document.createElement('div');ph.className='problem-header';ph.innerHTML=`<div class="problem-id"><span>Câu ${i}</span><span class="badge-topic">${i<=3?'Ngày 1':'Ngày 2'}</span></div>`;
+        const pc=document.createElement('div');pc.className='problem-content';pc.textContent=`Câu ${i} của đề ${kind} ${year}. Mở nguồn dưới đây để xem nguyên văn đề, hình vẽ (nếu có) và các lời giải đã công bố.`;
+        const sb=document.createElement('div');sb.className='solution-box';const b=document.createElement('button');b.className='toggle-btn';b.type='button';b.textContent='🔗 Lời giải & nguồn đối chiếu';b.onclick=()=>toggleSolution(b);
+        const sc=document.createElement('div');sc.className='solution-content';const ul=document.createElement('ul');
+        [...(nationalArchiveSources[kind][year]||[]),['Tra cứu thêm lời giải trong nhóm Hướng tới Olympic Toán VN',fbSearch(kind,year)]].forEach(([label,url])=>{const li=document.createElement('li');li.appendChild(makeLink(label,url));ul.appendChild(li)});sc.appendChild(ul);sb.append(b,sc);p.append(ph,pc,sb);body.appendChild(p);
+      }
+      card.append(head,body);archive?.appendChild(card);
+    }
   });
   const allBtn=qs('#toggleAllSolutions'); let allShown=true; allBtn?.addEventListener('click',()=>{allShown=!allShown;qsa('.example-solution').forEach(s=>s.classList.toggle('is-collapsed',!allShown));qsa('.solution-toggle').forEach(b=>{b.textContent=allShown?'Ẩn lời giải':'Hiện lời giải';b.setAttribute('aria-expanded',String(allShown))});allBtn.textContent=allShown?'🙈 Ẩn toàn bộ lời giải mẫu':'👁️ Hiện toàn bộ lời giải mẫu'; if(allShown)typeset(qs('#book-content'))});
   const theme=qs('#themeToggle'); const saved=localStorage.getItem('vmo-theme'); if(saved==='dark'){document.body.classList.add('dark');theme.textContent='☀️'} theme?.addEventListener('click',()=>{document.body.classList.toggle('dark');const d=document.body.classList.contains('dark');theme.textContent=d?'☀️':'🌙';localStorage.setItem('vmo-theme',d?'dark':'light')});
