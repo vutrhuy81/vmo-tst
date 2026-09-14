@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="Tài liệu ôn luyện chọn đội tuyển HSG Quốc gia môn Toán Đà Nẵng 2026–2027: đầy đủ lý thuyết, 78 ví dụ có lời giải, 2 bộ thi thử 2 ngày, ngân hàng TST 2026–2027 và 12 đề Đà Nẵng–Quảng Nam qua các năm.">
+<meta name="theme-color" content="#173b64">
+<title>Ôn luyện VMO Đà Nẵng 2026–2027 | Tài liệu đầy đủ & TST</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<script>
+window.MathJax = {
+  tex: {
+    inlineMath: [['$', '$'], ['\\(', '\\)']],
+    displayMath: [['$$', '$$'], ['\\[', '\\]']],
+    processEscapes: true
+  },
+  options: {
+    ignoreHtmlClass: 'tex2jax_ignore',
+    processHtmlClass: 'tex2jax_process'
+  },
+  startup: {
+    typeset: true,
+    ready: () => {
+      MathJax.startup.defaultReady();
+      MathJax.startup.promise.then(() => {
+        document.documentElement.classList.add('mathjax-ready');
+      });
+    }
+  }
+};
+</script>
+<script id="MathJax-script" defer
+        src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"
+        onerror="this.onerror=null;this.src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.min.js';"></script>
+
+<!-- Stylesheets tách biệt, tối ưu bộ nhớ đệm -->
+<link rel="stylesheet" href="styles.css?v=20260914_4">
+<link rel="stylesheet" href="auth.css?v=20260914_4">
+<link rel="stylesheet" href="ai_guide.css?v=20260914_4">
+<link rel="stylesheet" href="i18n.css?v=20260914_4">
+
+<!-- Synchronous Auth Gate: Chặn truy cập nếu chưa đăng nhập -->
+<script src="auth.js?v=20260914_4"></script>
+<script>
+VMOAuth.requireAuth('login.html');
+</script>
+
+<script type="module" src="firebase-config.js?v=20260914_4"></script>
+<script src="account_mgmt.js?v=20260914_4" defer></script>
+<script src="tst-sources.js?v=20260914_4" defer></script>
+<script src="ai_guide_engine.js?v=20260914_4" defer></script>
+<script src="i18n.js?v=20260914_4" defer></script>
+<script src="app.js?v=20260914_4" defer></script>
+</head>
+<body class="tex2jax_process">
+<a href="#main-content" class="skip-link">Bỏ qua đến nội dung chính</a>
+<header class="hero">
+  <div class="hero-badge">🇻🇳 VMO ĐÀ NẴNG 2026–2027 · TÀI LIỆU CHUYÊN SÂU</div>
+  <h1>ÔN LUYỆN CHỌN ĐỘI TUYỂN HỌC SINH GIỎI QUỐC GIA MÔN TOÁN</h1>
+  <p>Người biên soạn - Trần Hoàng Kiên.</p>
+  <p>Trường THPT - Phan Châu Trình - Tp Đà Nẵng.</p>
+  <div class="hero-stats">
+    <div class="stat-chip"><span class="num">13</span><span class="label">Chương tài liệu</span></div>
+    <div class="stat-chip"><span class="num">39</span><span class="label">Mục lý thuyết</span></div>
+    <div class="stat-chip"><span class="num">78</span><span class="label">Ví dụ có lời giải</span></div>
+    <div class="stat-chip"><span class="num">2 × 2</span><span class="label">Đề thi thử / ngày</span></div>
+    <div class="stat-chip"><span class="num">12</span><span class="label">Đề ĐN–QN lưu trữ</span></div>
+  </div>
+</header>
+<div class="nav-tabs-wrapper">
+  <div class="nav-tabs">
+    <button class="tab-btn active" id="tab-btn-danang" type="button" onclick="switchTab('tab-danang',this)">📚 Tài liệu chuyên đề VMO</button>
+    <button class="tab-btn" id="tab-btn-mock" type="button" onclick="switchTab('tab-mock',this)">🎯 Bộ đề thi thử VMO</button>
+    <button class="tab-btn" id="tab-btn-tst" type="button" onclick="switchTab('tab-tst',this)">🏛️ Đề TST 2026–2027</button>
+    <button class="tab-btn" id="tab-btn-history" type="button" onclick="switchTab('tab-history',this)">🗂️ Đề Đà Nẵng–Quảng Nam</button>
+    <span class="tab-spacer"></span>
+    <div class="user-auth-bar" id="userAuthBar">
+      <div class="user-info-chip" title="Phiên bảo mật: Tự động đăng xuất sau 5 phút không hoạt động">
+        <span class="user-idle-dot" title="Trạng thái: Đang hoạt động (Tự động bảo vệ sau 5 phút)"></span>
+        <span id="userAvatarContainer"><span>👤</span></span>
+        <span class="user-name" id="currentUserName">admin</span>
+        <span class="user-role-badge role-admin" id="currentUserRole">Admin</span>
+      </div>
+      <button id="btnOpenUserMgmt" class="btn-auth-action btn-manage" type="button" title="Quản lý tài khoản">
+        ⚙️ Quản lý tài khoản
+      </button>
+      <button id="btnLogout" class="btn-auth-action btn-logout" type="button" title="Đăng xuất khỏi hệ thống" onclick="VMOAuth.logout('user_action')">
+        🚪 Đăng xuất
+      </button>
+    </div>
+    <div class="lang-switch-wrap" id="mainLangSwitcher" role="group" aria-label="Ngôn ngữ / Language">
+      <button type="button" class="lang-switch-btn active" data-lang="vi" onclick="setLanguage('vi')" title="Chuyển sang Tiếng Việt">🇻🇳 VI</button>
+      <button type="button" class="lang-switch-btn" data-lang="en" onclick="setLanguage('en')" title="Switch to English">🇬🇧 EN</button>
+    </div>
+    <button id="themeToggle" class="theme-btn" type="button" aria-label="Đổi giao diện sáng tối">🌙</button>
+  </div>
+</div>
+<div class="controls-sticky">
+  <div class="controls-container">
+    <div class="search-row">
+      <div class="search-box"><span class="search-icon">🔎</span><input id="searchInput" type="search" placeholder="Tìm Stolz, LTE, Miquel, nội suy, bất biến, Chebyshev..." autocomplete="off"></div>
+      <a class="btn-action" href="assets/On_luyen_VMO_Da_Nang_2026_2027.pdf" target="_blank" rel="noopener">📄 PDF</a>
+      <button class="btn-secondary" type="button" onclick="window.print()">🖨️ In</button>
+    </div>
+    <div id="searchSummary" class="search-summary" aria-live="polite"></div>
+    <div class="filter-pills" id="mockFilterPills" style="display:none">
+      <button class="pill active" data-filter="ALL">Tất cả đề thử (4 buổi)</button><button class="pill" data-filter="MOCK1">Bộ số 1 (Đà Nẵng)</button><button class="pill" data-filter="MOCK2">Bộ số 2 (Đà Nẵng)</button>
+    </div>
+    <div class="filter-pills" id="tstFilterPills" style="display:none">
+      <button class="pill active" data-filter="ALL">Tất cả đề</button><button class="pill" data-filter="BAC">Miền Bắc</button><button class="pill" data-filter="TRUNG">Miền Trung</button><button class="pill" data-filter="NAM">Miền Nam</button><button class="pill" data-filter="OLYMPIC">Trường hè / Trại hè</button>
+    </div>
+    <div class="filter-pills" id="historyFilterPills" style="display:none">
+      <button class="pill active" data-filter="ALL">Tất cả 12 đề</button><button class="pill" data-filter="DANANG">Đà Nẵng (6)</button><button class="pill" data-filter="QUANGNAM">Quảng Nam (6)</button>
+    </div>
+  </div>
+</div>
+<div class="layout-container" id="main-content">
+  <aside class="sidebar">
+    <!-- INJECT:SIDEBAR_DANANG -->
+    <!-- INJECT:SIDEBAR_MOCK -->
+    <!-- INJECT:SIDEBAR_TST -->
+    <!-- INJECT:SIDEBAR_HISTORY -->
+  </aside>
+  <main>
+    <!-- INJECT:TAB_DANANG -->
+    <!-- INJECT:TAB_MOCK -->
+    <!-- INJECT:TAB_TST -->
+    <!-- INJECT:TAB_HISTORY -->
+  </main>
+</div>
+<footer>
+  <p>© 2026–2027 · Tài liệu ôn luyện VMO Đà Nẵng</p>
+  <p>Biên soạn: Trần Hoàng Kiên · Bản web phục vụ học tập và bồi dưỡng đội tuyển · Có ngân hàng đề TST và đề Đà Nẵng–Quảng Nam qua các năm.</p>
+</footer>
+<button id="backToTop" class="back-to-top" type="button" aria-label="Về đầu trang">↑</button>
+
+<!-- INJECT:ACCOUNT_MODAL -->
+</body>
+</html>

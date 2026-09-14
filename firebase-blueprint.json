@@ -1,0 +1,26 @@
+{
+  "entities": {
+    "UserProfile": {
+      "title": "UserProfile",
+      "description": "Thông tin người dùng hệ thống VMO Đà Nẵng",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string", "description": "Mã định danh người dùng Firebase UID" },
+        "email": { "type": "string", "description": "Email người dùng" },
+        "displayName": { "type": "string", "description": "Họ và tên hiển thị" },
+        "photoURL": { "type": "string", "description": "Ảnh đại diện người dùng" },
+        "role": { "type": "string", "enum": ["admin", "user", "teacher", "student"], "description": "Vai trò tài khoản" },
+        "authProvider": { "type": "string", "description": "Phương thức xác thực (google hoặc password)" },
+        "createdAt": { "type": "string", "description": "Thời điểm tạo tài khoản" },
+        "lastLoginAt": { "type": "string", "description": "Thời điểm đăng nhập gần nhất" }
+      },
+      "required": ["uid", "email", "role"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": "UserProfile",
+      "description": "Hồ sơ cá nhân và phân quyền của từng người dùng"
+    }
+  }
+}
