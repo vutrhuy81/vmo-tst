@@ -33,15 +33,17 @@ module.exports = async function handler(req, res) {
         const sub = await submissions.insertOne({ ...payload, submittedAt: new Date() });
         return res.status(201).json({ success: true, submissionId: sub.insertedId });
       }
-      return res.status(400).json({ error: 'Invalid type' });
+      return res.status(400).json({ error: 'Loại yêu cầu không hợp lệ' });
     }
 
     return res.status(405).json({ error: 'Method not allowed' });
   } catch (err) {
-    console.error('Lỗi Database:', err);
-    return res.status(500).json({ 
-      error: 'Database connection or query failed',
-      details: err.message 
+    console.error('LỖI THỰC THI DB:', err);
+    // Trả mã lỗi 200 kèm chi tiết để lệnh curl hiển thị thẳng nguyên nhân ra màn hình
+    return res.status(200).json({ 
+      success: false,
+      error_message: err.message,
+      error_name: err.name
     });
   }
 };
