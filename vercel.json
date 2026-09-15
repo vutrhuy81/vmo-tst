@@ -26,5 +26,12 @@
       "src": "/((?!api/).*)",
       "dest": "/$1"
     }
+  ],
+  "cleanUrls": true,
+  "rewrites": [
+    {
+      "source": "/((?!api/|assets/|.*\\..*).*)",
+      "destination": "/index.html"
+    }
   ]
 }
