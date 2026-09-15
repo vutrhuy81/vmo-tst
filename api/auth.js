@@ -12,11 +12,15 @@ module.exports = async function handler(req, res) {
   try {
     const db = await getDb();
     const users = db.collection('users');
-    const { action, username, password, fullName } = req.body;
+    const { action, username, password, fullName } = req.body || {};
+
+    if (!username || !password) {
+      return res.status(400).json({ error: 'Vui lòng nhập tên đăng nhập và mật khẩu' });
+    }
 
     if (action === 'register') {
       const exist = await users.findOne({ username });
-      if (exist) return res.status(400).json({ error: 'Tài khoản đã tồn tại' });
+      if (exist) return res.status(400).json({ error: 'Tên tài khoản đã tồn tại' });
 
       const hashedPassword = await bcrypt.hash(password, 10);
       await users.insertOne({
@@ -43,7 +47,11 @@ module.exports = async function handler(req, res) {
     }
 
     return res.status(400).json({ error: 'Hành động không hợp lệ' });
-  } catch (e) {
-    return res.status(500).json({ error: e.message });
+  } catch (err) {
+    console.error('Lỗi Auth:', err);
+    return res.status(500).json({ 
+      error: 'Auth operation failed',
+      details: err.message 
+    });
   }
 };
