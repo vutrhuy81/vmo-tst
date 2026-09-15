@@ -1,34 +1,30 @@
 {
-  "outputDirectory": ".",
-  "cleanUrls": true,
-  "headers": [
+  "version": 2,
+  "builds": [
     {
-      "source": "/(.*)",
-      "headers": [
-        {
-          "key": "X-Content-Type-Options",
-          "value": "nosniff"
-        },
-        {
-          "key": "Referrer-Policy",
-          "value": "strict-origin-when-cross-origin"
-        }
-      ]
+      "src": "api/*.js",
+      "use": "@vercel/node"
     },
     {
-      "source": "/assets/(.*)",
-      "headers": [
-        {
-          "key": "Cache-Control",
-          "value": "public, max-age=86400"
-        }
-      ]
+      "src": "{index.html,login.html,styles.css,auth.css,ai_guide.css,i18n.css,app.js,auth.js,account_mgmt.js,ai_guide_engine.js,i18n.js,tst-sources.js,build.js,firebase-config.js,assets/**,src/**}",
+      "use": "@vercel/static"
     }
   ],
-  "rewrites": [
+  "routes": [
     {
-      "source": "/((?!api/.*).*)",
-      "destination": "/index.html"
+      "src": "/api/(.*)",
+      "dest": "/api/$1"
+    },
+    {
+      "src": "/assets/(.*)",
+      "headers": {
+        "cache-control": "public, max-age=86400"
+      },
+      "dest": "/assets/$1"
+    },
+    {
+      "src": "/((?!api/).*)",
+      "dest": "/$1"
     }
   ]
 }
