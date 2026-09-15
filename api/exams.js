@@ -8,27 +8,23 @@ module.exports = async function handler(req, res) {
 
   if (req.method === 'OPTIONS') return res.status(200).end();
 
-  const db = await getDb();
-  const exams = db.collection('exams');
-  const submissions = db.collection('submissions');
+  try {
+    const db = await getDb();
+    const exams = db.collection('exams');
+    const submissions = db.collection('submissions');
 
-  if (req.method === 'GET') {
-    try {
+    if (req.method === 'GET') {
       const { id } = req.query;
       if (id) {
         const item = await exams.findOne({ _id: new ObjectId(id) });
-        return res.status(200).json(item);
+        return res.status(200).json(item || {});
       }
       const list = await exams.find({}).project({ questions: 0 }).toArray();
       return res.status(200).json(list);
-    } catch (err) {
-      return res.status(500).json({ error: err.message });
     }
-  }
 
-  if (req.method === 'POST') {
-    const { type, payload } = req.body;
-    try {
+    if (req.method === 'POST') {
+      const { type, payload } = req.body || {};
       if (type === 'create_exam') {
         const doc = await exams.insertOne({ ...payload, createdAt: new Date() });
         return res.status(201).json({ success: true, id: doc.insertedId });
@@ -37,11 +33,15 @@ module.exports = async function handler(req, res) {
         const sub = await submissions.insertOne({ ...payload, submittedAt: new Date() });
         return res.status(201).json({ success: true, submissionId: sub.insertedId });
       }
-      return res.status(400).json({ error: 'Loại yêu cầu không hợp lệ' });
-    } catch (err) {
-      return res.status(500).json({ error: err.message });
+      return res.status(400).json({ error: 'Invalid type' });
     }
-  }
 
-  return res.status(405).json({ error: 'Method not allowed' });
+    return res.status(405).json({ error: 'Method not allowed' });
+  } catch (err) {
+    console.error('Lỗi Database:', err);
+    return res.status(500).json({ 
+      error: 'Database connection or query failed',
+      details: err.message 
+    });
+  }
 };
