@@ -1,9 +1,30 @@
 {
-  "cleanUrls": true,
-  "rewrites": [
+  "version": 2,
+  "builds": [
     {
-      "source": "/((?!api/|assets/|.*\\..*).*)",
-      "destination": "/index.html"
+      "src": "api/*.js",
+      "use": "@vercel/node"
+    },
+    {
+      "src": "{index.html,login.html,styles.css,auth.css,ai_guide.css,i18n.css,app.js,auth.js,account_mgmt.js,ai_guide_engine.js,i18n.js,tst-sources.js,build.js,firebase-config.js,assets/**,src/**}",
+      "use": "@vercel/static"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/api/(.*)",
+      "dest": "/api/$1"
+    },
+    {
+      "src": "/assets/(.*)",
+      "headers": {
+        "cache-control": "public, max-age=86400"
+      },
+      "dest": "/assets/$1"
+    },
+    {
+      "src": "/((?!api/).*)",
+      "dest": "/$1"
     }
   ]
 }
