@@ -323,7 +323,7 @@
             <span style="font-size: 0.8rem; font-weight: 500; color: #64748b; margin-left: 4px;">• ${topic || guideData.branch || defaultTopic}</span>
           </div>
           <div class="ai-guide-actions">
-            <button type="button" class="btn-guide-action" id="btn-save-ai-${problemId}" onclick="saveAIGuideToFirestore('${problemId}', '${(topic || guideData.branch || defaultTopic).replace(/'/g, "\\'")}')" title="Lưu hướng dẫn giải này vào Database Firestore" style="color: #0284c7; font-weight: 600;">
+            <button type="button" class="btn-guide-action" id="btn-save-ai-${problemId}" onclick="saveAIGuideToDatabase('${problemId}', '${(topic || guideData.branch || defaultTopic).replace(/'/g, "\\'")}')" title="Lưu hướng dẫn giải này vào MongoDB" style="color: #0284c7; font-weight: 600;">
               🚀 Lưu bài giải lên Firestore
             </button>
             <button type="button" class="btn-guide-action" onclick="copyAIGuideText('${problemId}')" title="${copyTitle}">
@@ -518,8 +518,8 @@
     }
   };
 
-  // Lưu hướng dẫn giải của AI / Lời giải vào Firestore Database
-  window.saveAIGuideToFirestore = async function(problemId, topic) {
+  // Lưu hướng dẫn giải của AI / Lời giải vào MongoDB thông qua API
+  window.saveAIGuideToDatabase = async function(problemId, topic) {
     const btn = document.getElementById(`btn-save-ai-${problemId}`);
     const body = document.getElementById(`ai-body-${problemId}`);
     if (!body) return;
@@ -532,28 +532,28 @@
 
     if (btn) {
       btn.disabled = true;
-      btn.innerHTML = '⏳ Đang lưu Firestore...';
+      btn.innerHTML = '⏳ Đang lưu MongoDB...';
     }
 
     try {
       if (window.VMODataService && window.VMODataService.submitSolution) {
         await window.VMODataService.submitSolution(problemId, `AI Hướng dẫn - ${topic || 'Bài toán VMO'}`, solutionText);
         if (btn) {
-          btn.innerHTML = '✅ Đã lưu vào Firestore!';
+          btn.innerHTML = '✅ Đã lưu vào MongoDB!';
           btn.style.color = '#16a34a';
         }
         if (typeof window.showVMOToast === 'function') {
-          window.showVMOToast('Đã lưu bài giải thành công lên cơ sở dữ liệu Firestore!', true);
+          window.showVMOToast('Đã lưu bài giải thành công lên MongoDB!', true);
         } else {
-          alert('Đã lưu bài giải thành công lên cơ sở dữ liệu Firestore!');
+          alert('Đã lưu bài giải thành công lên MongoDB!');
         }
       } else {
         throw new Error('Dịch vụ VMODataService chưa sẵn sàng.');
       }
     } catch (err) {
-      console.error('Lỗi khi lưu bài giải AI vào Firestore:', err);
+      console.error('Lỗi khi lưu bài giải AI vào MongoDB:', err);
       if (btn) {
-        btn.innerHTML = '⚠️ Lỗi lưu Firestore';
+        btn.innerHTML = '⚠️ Lỗi lưu MongoDB';
         btn.style.color = '#dc2626';
       }
       alert('Lỗi lưu bài giải: ' + (err.message || 'Không thể ghi vào database'));
@@ -561,7 +561,7 @@
       if (btn) {
         setTimeout(() => {
           btn.disabled = false;
-          btn.innerHTML = '🚀 Lưu bài giải lên Firestore';
+          btn.innerHTML = '🚀 Lưu bài giải lên MongoDB';
           btn.style.color = '#0284c7';
         }, 3500);
       }

@@ -67,3 +67,13 @@ Database mặc định là `vmo_tst`. Ứng dụng sử dụng các collection:
 - `events`: lịch thi và sự kiện.
 
 Trình duyệt chỉ gọi `/api/auth` và `/api/data`; không kết nối trực tiếp MongoDB. Chỉ quản trị viên được thêm/xóa dữ liệu quản trị. Học viên chỉ được nộp bài và đọc bài nộp của chính mình; quản trị viên có thể xem toàn bộ bài nộp.
+
+## API AI trên Vercel
+
+Ba Vercel Functions yêu cầu phiên đăng nhập hợp lệ và biến môi trường `GEMINI_API_KEY`:
+
+- `/api/ai-guide`: sinh hướng dẫn và lời giải Olympic;
+- `/api/ai-evaluate-solution`: chấm bài dạng văn bản hoặc ảnh;
+- `/api/ai-ocr-math`: nhận diện công thức từ ảnh JPEG, PNG hoặc WEBP.
+
+API key chỉ được đọc ở server và không được gửi xuống trình duyệt. Các endpoint có giới hạn tần suất theo tài khoản và giới hạn kích thước nội dung đầu vào.
