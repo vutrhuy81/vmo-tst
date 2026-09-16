@@ -56,7 +56,6 @@ window.MathJax = {
 VMOAuth.requireAuth('login.html');
 </script>
 
-<script type="module" src="firebase-config.js?v=20260915_2"></script>
 <script type="module" src="vmo_data_service.js?v=20260915_2"></script>
 <script src="vmo_db_ui.js?v=20260915_2" defer></script>
 <script src="account_mgmt.js?v=20260915_2" defer></script>
@@ -101,7 +100,7 @@ VMOAuth.requireAuth('login.html');
             <span class="user-name" id="currentUserName">admin</span>
             <span class="user-role-badge role-admin" id="currentUserRole">Admin</span>
           </div>
-          <button id="btnOpenDataMgmt" class="btn-auth-action btn-database-hub" type="button" onclick="window.openDataHubModal ? window.openDataHubModal() : null" title="Quản lý kho dữ liệu Firestore" style="background:#0284c7; color:#ffffff; font-weight:600; display:inline-flex; align-items:center; gap:5px; cursor:pointer;">
+          <button id="btnOpenDataMgmt" class="btn-auth-action btn-database-hub" type="button" onclick="window.openDataHubModal ? window.openDataHubModal() : null" title="Quản lý kho dữ liệu MongoDB Atlas" style="background:#0284c7; color:#ffffff; font-weight:600; display:inline-flex; align-items:center; gap:5px; cursor:pointer;">
             🗄️ Database Hub
           </button>
           <button id="btnOpenUserMgmt" class="btn-auth-action btn-manage" type="button" title="Quản lý tài khoản">
