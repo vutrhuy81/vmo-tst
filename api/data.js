@@ -128,12 +128,20 @@ export default async function handler(req, res) {
           const [sets, problems] = await Promise.all([
             db.collection('content_sets').find({}, { projection: { status: 1 } }).toArray(),
             db.collection('problems').find({}, { projection: {
-              contentKey: 1, setId: 1, status: 1, allowSubmission: 1, allowAiEvaluation: 1
+              contentKey: 1, setId: 1, setTitle: 1, title: 1, shortLabel: 1,
+              topic: 1, maxScore: 1, order: 1, status: 1,
+              allowSubmission: 1, allowAiEvaluation: 1
             } }).limit(1000).toArray()
           ]);
           const setStatus = new Map(sets.map(item => [String(item._id), item.status]));
           const items = problems.map(item => ({
             contentKey: item.contentKey,
+            setTitle: item.setTitle,
+            title: item.title,
+            shortLabel: item.shortLabel,
+            topic: item.topic,
+            maxScore: item.maxScore,
+            order: item.order,
             published: item.status === 'published' && setStatus.get(String(item.setId)) === 'published',
             allowSubmission: item.allowSubmission !== false,
             allowAiEvaluation: item.allowAiEvaluation !== false
@@ -455,17 +463,41 @@ export default async function handler(req, res) {
       if (Object.prototype.hasOwnProperty.call(payload, 'order')) {
         changes.order = cleanNumber(payload.order, 0, 0, 10000);
       }
+      if (Object.prototype.hasOwnProperty.call(payload, 'title')) {
+        const title = cleanText(payload.title, 500);
+        if (!title) return res.status(400).json({ success: false, error: 'Tiêu đề không được để trống' });
+        changes.title = title;
+      }
+      if (itemType === 'set') {
+        if (Object.prototype.hasOwnProperty.call(payload, 'year')) changes.year = cleanText(payload.year, 40);
+        if (Object.prototype.hasOwnProperty.call(payload, 'province')) changes.province = cleanText(payload.province, 120);
+      }
       if (itemType === 'problem') {
+        if (Object.prototype.hasOwnProperty.call(payload, 'shortLabel')) changes.shortLabel = cleanText(payload.shortLabel, 120);
+        if (Object.prototype.hasOwnProperty.call(payload, 'topic')) changes.topic = cleanText(payload.topic, 120);
+        if (Object.prototype.hasOwnProperty.call(payload, 'maxScore')) {
+          changes.maxScore = cleanNumber(payload.maxScore, 5, 0, 20);
+        }
         if (typeof payload.allowSubmission === 'boolean') changes.allowSubmission = payload.allowSubmission;
         if (typeof payload.allowAiEvaluation === 'boolean') changes.allowAiEvaluation = payload.allowAiEvaluation;
       }
 
+      const update = { $set: changes };
+      if (itemType === 'problem' && ['title', 'shortLabel', 'topic', 'maxScore'].some(field => Object.prototype.hasOwnProperty.call(payload, field))) {
+        update.$inc = { version: 1 };
+      }
       const result = await db.collection(collectionName).findOneAndUpdate(
         { _id: id },
-        { $set: changes },
+        update,
         { returnDocument: 'after' }
       );
       if (!result) return res.status(404).json({ success: false, error: 'Không tìm thấy mục catalog' });
+      if (itemType === 'set' && changes.title) {
+        await db.collection('problems').updateMany(
+          { setId: id },
+          { $set: { setTitle: changes.title, updatedBy: session.username, updatedAt: now } }
+        );
+      }
       return res.status(200).json({ success: true, item: result });
     }
 
