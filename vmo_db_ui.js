@@ -581,7 +581,8 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
       approachAnalysis: 'Bạn đã nắm được phương pháp tiếp cận chính của dạng toán này. Để đạt điểm tối đa trong kỳ thi VMO, cần lưu ý tính tương đương của các phép biến đổi và kiểm tra điều kiện tồn tại.',
       stepByStep: '1. **Bước đặt ẩn & tập xác định**: Đã xác định hướng biến đổi chính.<br>2. **Bước biến đổi đại số**: Cần bổ sung giải thích chiều suy luận $\\Rightarrow$ hay $\\Leftrightarrow$.<br>3. **Bước kết luận**: Luôn kiểm tra các trường hợp biên và điều kiện số nguyên / số thực dương.',
       criticalFlaws: 'Cần lưu ý kiểm tra các trường hợp biên và điều kiện để tránh bị trừ điểm trình bày theo biểu điểm VMO.',
-      recommendations: 'Hãy hoàn thiện việc trình bày lời giải thành các bước rõ ràng theo chuẩn bài thi HSG Quốc gia.'
+      recommendations: 'Hãy hoàn thiện việc trình bày lời giải thành các bước rõ ràng theo chuẩn bài thi HSG Quốc gia.',
+      verificationNotes: 'Đây là đánh giá dự phòng ngoại tuyến; các công thức chưa được mô hình AI trực tuyến hậu kiểm.'
     };
     window.currentEvaluationResult = offlineData;
     displayEvaluationResult(offlineData);
@@ -723,6 +724,7 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
         <div class="card"><div class="title">3. Rà soát chi tiết từng bước:</div><div>${formatMathMarkdown(evalData.stepByStep || '')}</div></div>
         <div class="card"><div class="title">4. Lỗ hổng logic / Lưu ý:</div><div>${formatMathMarkdown(evalData.criticalFlaws || '')}</div></div>
         <div class="card"><div class="title">5. Lời khuyên của Chuyên gia:</div><div>${formatMathMarkdown(evalData.recommendations || '')}</div></div>
+        <div class="card"><div class="title">6. Hậu kiểm công thức:</div><div>${formatMathMarkdown(evalData.verificationNotes || '')}</div></div>
       </body>
       </html>
     `);
@@ -804,6 +806,16 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
           </h5>
           <div style="color: #065f46; background: #ecfdf5; padding: 12px 16px; border-radius: 6px; border: 1px solid #a7f3d0;">
             ${formatMathMarkdown(evalData.recommendations || evalData.optimalSuggestions || 'Tiếp tục phát huy!')}
+          </div>
+        </div>
+
+        <!-- 6. Hậu kiểm công thức của giám khảo AI -->
+        <div style="margin-bottom: 20px;">
+          <h5 style="margin: 0 0 6px 0; color: #4338ca; font-size: 0.95rem; display: flex; align-items: center; gap: 6px;">
+            <span>✅</span> <strong>Hậu kiểm công thức của Giám khảo AI:</strong>
+          </h5>
+          <div style="color: #3730a3; background: #eef2ff; padding: 12px 16px; border-radius: 6px; border: 1px solid #c7d2fe;">
+            ${formatMathMarkdown(evalData.verificationNotes || 'Chưa có ghi chú hậu kiểm.')}
           </div>
         </div>
 
