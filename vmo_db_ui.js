@@ -22,15 +22,18 @@
 
   function headingTextWithoutActions(heading) {
     if (!heading) return '';
+    const cleanHeading = value => String(value || '')
+      .replace(/\s*✍[\s\S]*$/u, '')
+      .replace(/\s+/g, ' ')
+      .trim();
     const directText = Array.from(heading.childNodes)
       .filter(node => node.nodeType === Node.TEXT_NODE)
       .map(node => node.textContent || '')
       .join(' ')
-      .replace(/\s+/g, ' ')
       .trim();
-    if (directText) return directText;
+    if (directText) return cleanHeading(directText);
 
-    return Array.from(heading.childNodes)
+    return cleanHeading(Array.from(heading.childNodes)
       .filter(node => {
         if (node.nodeType !== Node.ELEMENT_NODE) return false;
         return !node.matches('button, .ai-guide-panel, .btn-submit-solution')
@@ -38,8 +41,7 @@
       })
       .map(node => node.textContent || '')
       .join(' ')
-      .replace(/\s+/g, ' ')
-      .trim();
+    );
   }
 
   function getProblemIdentity(problemCard, fallbackTitle = '') {
