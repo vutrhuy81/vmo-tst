@@ -2,7 +2,9 @@ import { ObjectId } from 'mongodb';
 import { getDb } from './lib/db.js';
 import { getSession } from './lib/session.js';
 
-const ALLOWED_RESOURCES = new Set(['documents', 'exams', 'problems', 'submissions', 'submission_image', 'events']);
+const ALLOWED_RESOURCES = new Set(['documents', 'exams', 'content_sets', 'problems', 'submissions', 'submission_image', 'events']);
+const CONTENT_TYPES = new Set(['specialty_chapter', 'mock_exam', 'tst_exam', 'regional_exam']);
+const SOURCE_TYPES = new Set(['specialty_example', 'mock_exam_question', 'tst_question', 'regional_question']);
 const MAX_SOLUTION_IMAGE_CHARS = 3_000_000;
 
 function parseBody(req) {
@@ -25,6 +27,36 @@ function cleanSolutionImage(value) {
 
 function objectId(value) {
   return ObjectId.isValid(value) ? new ObjectId(value) : null;
+}
+
+function cleanKey(value, max = 180) {
+  return cleanText(value, max)
+    .toLowerCase()
+    .replace(/[^a-z0-9._:-]+/g, '-')
+    .replace(/^-+|-+$/g, '');
+}
+
+function cleanNumber(value, fallback = 0, min = 0, max = 10000) {
+  const parsed = Number(value);
+  return Number.isFinite(parsed) ? Math.max(min, Math.min(max, parsed)) : fallback;
+}
+
+function problemSnapshot(problem) {
+  if (!problem) return null;
+  return {
+    contentKey: problem.contentKey,
+    title: problem.title,
+    setTitle: problem.setTitle,
+    sourceType: problem.sourceType,
+    sourceGroup: problem.sourceGroup,
+    questionNumber: problem.questionNumber,
+    chapterNumber: problem.chapterNumber,
+    day: problem.day,
+    maxScore: problem.maxScore,
+    topic: problem.topic,
+    content: problem.content,
+    version: problem.version || 1
+  };
 }
 
 function requireAdmin(session, res) {
@@ -74,7 +106,22 @@ export default async function handler(req, res) {
       }
 
       const filter = {};
-      if (resource === 'problems' && req.query?.examId) filter.examId = cleanText(req.query.examId, 120);
+      if (resource === 'content_sets') {
+        if (req.query?.group) filter.group = cleanText(req.query.group, 80);
+        if (req.query?.key) filter.key = cleanKey(req.query.key);
+        if (session.role !== 'admin') filter.status = 'published';
+      }
+      if (resource === 'problems') {
+        if (req.query?.examId) filter.examId = cleanText(req.query.examId, 120);
+        if (req.query?.setId) {
+          const setId = objectId(cleanText(req.query.setId, 80));
+          if (!setId) return res.status(400).json({ success: false, error: 'Mã nhóm nội dung không hợp lệ' });
+          filter.setId = setId;
+        }
+        if (req.query?.sourceGroup) filter.sourceGroup = cleanText(req.query.sourceGroup, 80);
+        if (req.query?.contentKey) filter.contentKey = cleanKey(req.query.contentKey);
+        if (session.role !== 'admin') filter.status = 'published';
+      }
       if (resource === 'exams' && req.query?.category && req.query.category !== 'all') {
         filter.category = cleanText(req.query.category, 80);
       }
@@ -83,13 +130,22 @@ export default async function handler(req, res) {
       }
       if (resource === 'submissions') {
         if (session.role !== 'admin') filter.userId = String(session.sub);
-        if (req.query?.problemId) filter.problemId = cleanText(req.query.problemId, 180);
+        if (req.query?.problemId) {
+          const requestedProblem = cleanText(req.query.problemId, 180);
+          filter.$or = [
+            { problemId: requestedProblem },
+            { problemKey: requestedProblem },
+            { legacyProblemId: requestedProblem }
+          ];
+        }
+        if (req.query?.problemKey) filter.problemKey = cleanKey(req.query.problemKey);
+        if (req.query?.setId) filter.setId = cleanText(req.query.setId, 80);
       }
 
       const sort = resource === 'events'
         ? { startDate: 1 }
-        : resource === 'problems'
-          ? { orderNumber: 1 }
+        : resource === 'content_sets' || resource === 'problems'
+          ? { order: 1, orderNumber: 1 }
           : { createdAt: -1 };
       const items = await db.collection(resource).find(filter).sort(sort).limit(500).toArray();
       return res.status(200).json({ success: true, items });
@@ -102,19 +158,43 @@ export default async function handler(req, res) {
     const now = new Date();
 
     if (action === 'submit_solution') {
-      const problemId = cleanText(payload.problemId, 180);
+      const submittedProblemId = cleanText(payload.problemId, 180);
+      const submittedProblemKey = cleanKey(payload.problemKey || submittedProblemId);
       const solutionContent = cleanText(payload.solutionContent, 50000);
       const solutionImage = cleanSolutionImage(payload.solutionImage);
       if (solutionImage === null) {
         return res.status(413).json({ success: false, error: 'Ảnh không hợp lệ hoặc vượt quá giới hạn 3 MB' });
       }
-      if (!problemId || (!solutionContent && !solutionImage)) {
+      if (!submittedProblemId || (!solutionContent && !solutionImage)) {
         return res.status(400).json({ success: false, error: 'Thiếu mã bài toán hoặc nội dung bài giải/ảnh bài làm' });
       }
+      const submittedObjectId = objectId(submittedProblemId);
+      const problemFilters = [];
+      if (submittedObjectId) problemFilters.push({ _id: submittedObjectId });
+      if (submittedProblemKey) problemFilters.push({ contentKey: submittedProblemKey });
+      problemFilters.push({ id: submittedProblemId });
+      const registeredProblem = await db.collection('problems').findOne({ $or: problemFilters });
+      const registeredProblemId = registeredProblem ? String(registeredProblem._id) : submittedProblemId;
+      const registeredProblemKey = registeredProblem?.contentKey || submittedProblemKey || submittedProblemId;
       const evaluation = payload.evaluation && typeof payload.evaluation === 'object' ? payload.evaluation : null;
       const doc = {
-        problemId,
-        problemTitle: cleanText(payload.problemTitle, 500),
+        problemId: registeredProblemId,
+        problemKey: registeredProblemKey,
+        legacyProblemId: submittedProblemId !== registeredProblemId ? submittedProblemId : undefined,
+        setId: registeredProblem?.setId ? String(registeredProblem.setId) : cleanText(payload.setId, 80),
+        sourceType: registeredProblem?.sourceType || cleanText(payload.sourceType, 80),
+        sourceGroup: registeredProblem?.sourceGroup || cleanText(payload.sourceGroup, 80),
+        problemTitle: registeredProblem?.title || cleanText(payload.problemTitle, 500),
+        problemSnapshot: problemSnapshot(registeredProblem) || {
+          contentKey: registeredProblemKey,
+          title: cleanText(payload.problemTitle, 500),
+          setTitle: cleanText(payload.setTitle, 500),
+          sourceType: cleanText(payload.sourceType, 80),
+          sourceGroup: cleanText(payload.sourceGroup, 80),
+          topic: cleanText(payload.topic, 120),
+          content: cleanText(payload.problemContent, 50000),
+          version: 1
+        },
         userId: String(session.sub),
         username: session.username,
         authorName: session.fullName || session.username,
@@ -142,6 +222,115 @@ export default async function handler(req, res) {
     }
 
     if (!requireAdmin(session, res)) return;
+
+    if (action === 'upsert_content_catalog') {
+      const sets = Array.isArray(payload.sets) ? payload.sets.slice(0, 200) : [];
+      const problems = Array.isArray(payload.problems) ? payload.problems.slice(0, 1000) : [];
+      if (!sets.length || !problems.length) {
+        return res.status(400).json({ success: false, error: 'Catalog phải có nhóm nội dung và câu hỏi' });
+      }
+
+      const setIds = new Map();
+      for (const raw of sets) {
+        const key = cleanKey(raw.key);
+        const contentType = cleanText(raw.contentType, 80);
+        if (!key || !CONTENT_TYPES.has(contentType)) continue;
+        const doc = {
+          key,
+          contentType,
+          title: cleanText(raw.title, 500),
+          group: cleanText(raw.group, 80),
+          year: cleanText(raw.year, 40),
+          province: cleanText(raw.province, 120),
+          region: cleanText(raw.region, 80),
+          order: cleanNumber(raw.order),
+          status: raw.status === 'draft' ? 'draft' : 'published',
+          updatedBy: session.username,
+          updatedAt: now
+        };
+        const result = await db.collection('content_sets').findOneAndUpdate(
+          { key },
+          { $set: doc, $setOnInsert: { createdAt: now } },
+          { upsert: true, returnDocument: 'after' }
+        );
+        if (result?._id) setIds.set(key, result._id);
+      }
+
+      let problemCount = 0;
+      for (const raw of problems) {
+        const contentKey = cleanKey(raw.contentKey);
+        const setKey = cleanKey(raw.setKey);
+        const sourceType = cleanText(raw.sourceType, 80);
+        const setId = setIds.get(setKey);
+        if (!contentKey || !setId || !SOURCE_TYPES.has(sourceType)) continue;
+        const doc = {
+          contentKey,
+          setId,
+          setKey,
+          setTitle: cleanText(raw.setTitle, 500),
+          sourceType,
+          sourceGroup: cleanText(raw.sourceGroup, 80),
+          title: cleanText(raw.title, 500),
+          shortLabel: cleanText(raw.shortLabel, 120),
+          chapterNumber: cleanNumber(raw.chapterNumber),
+          questionNumber: cleanNumber(raw.questionNumber),
+          day: cleanText(raw.day, 80),
+          order: cleanNumber(raw.order),
+          maxScore: cleanNumber(raw.maxScore, 5, 0, 20),
+          topic: cleanText(raw.topic, 120),
+          difficulty: cleanText(raw.difficulty, 40),
+          content: cleanText(raw.content, 50000),
+          referenceSolution: cleanText(raw.referenceSolution, 100000),
+          contentFormat: 'html-latex',
+          frontendAnchor: cleanText(raw.frontendAnchor, 180),
+          legacyIds: Array.isArray(raw.legacyIds) ? raw.legacyIds.map(v => cleanText(v, 180)).filter(Boolean).slice(0, 10) : [],
+          allowSubmission: raw.allowSubmission !== false,
+          allowAiEvaluation: raw.allowAiEvaluation !== false,
+          status: raw.status === 'draft' ? 'draft' : 'published',
+          version: Math.max(1, cleanNumber(raw.version, 1, 1, 100000)),
+          updatedBy: session.username,
+          updatedAt: now
+        };
+        const savedProblem = await db.collection('problems').findOneAndUpdate(
+          { contentKey },
+          { $set: doc, $setOnInsert: { createdAt: now } },
+          { upsert: true, returnDocument: 'after' }
+        );
+        if (savedProblem?._id && doc.legacyIds.length) {
+          await db.collection('submissions').updateMany(
+            {
+              $or: [
+                { problemId: { $in: doc.legacyIds } },
+                { legacyProblemId: { $in: doc.legacyIds } }
+              ]
+            },
+            {
+              $set: {
+                problemId: String(savedProblem._id),
+                problemKey: contentKey,
+                setId: String(setId),
+                sourceType: doc.sourceType,
+                sourceGroup: doc.sourceGroup,
+                problemTitle: doc.title,
+                problemSnapshot: problemSnapshot(savedProblem),
+                updatedAt: now
+              }
+            }
+          );
+        }
+        problemCount += 1;
+      }
+
+      await Promise.all([
+        db.collection('content_sets').createIndex({ key: 1 }, { unique: true }),
+        db.collection('problems').createIndex({ contentKey: 1 }, { unique: true }),
+        db.collection('problems').createIndex({ setId: 1, order: 1 }),
+        db.collection('submissions').createIndex({ userId: 1, problemKey: 1, createdAt: -1 }),
+        db.collection('submission_images').createIndex({ submissionId: 1 }, { unique: true })
+      ]);
+
+      return res.status(200).json({ success: true, item: { setCount: setIds.size, problemCount } });
+    }
 
     if (action === 'add_document') {
       const title = cleanText(payload.title, 300);
