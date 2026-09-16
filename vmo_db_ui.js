@@ -2081,6 +2081,11 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
               📷 Xem ảnh
             </button>
           ` : '';
+          const deleteBtn = isCurrentUserAdmin() ? `
+            <button type="button" onclick="deleteSubmissionItem('${s.id || s._id}')" style="background:#fff1f2; border:1px solid #fecdd3; color:#be123c; border-radius:4px; padding:5px 9px; font-size:0.75rem; cursor:pointer; font-weight:700;">
+              🗑️ Xóa bài nộp
+            </button>
+          ` : '';
           return `
             <div style="background:#f8fafc; border:1px solid #e2e8f0; border-radius:8px; padding:10px 14px; margin-bottom:8px;">
               <div style="font-size:0.72rem; color:#4338ca; font-weight:800; text-transform:uppercase; letter-spacing:.04em; margin-bottom:3px;">${escapeHtmlText(sourceLabel)}</div>
@@ -2094,10 +2099,11 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
                 ${score ? ` | 🎯 Điểm AI: <strong>${escapeHtmlText(score)}</strong>` : ''}
               </div>
               <div style="background:#ffffff; border:1px solid #e2e8f0; border-radius:6px; padding:8px; font-family:monospace; font-size:0.85rem; color:#334155; white-space:pre-wrap;">${escapeHtmlText(preview)}</div>
-              ${(evaluationBtn || imageBtn) ? `
+              ${(evaluationBtn || imageBtn || deleteBtn) ? `
                 <div style="display:flex; flex-wrap:wrap; gap:6px; margin-top:8px;">
                   ${evaluationBtn}
                   ${imageBtn}
+                  ${deleteBtn}
                 </div>
               ` : ''}
             </div>
@@ -2108,6 +2114,18 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
       }
     } catch (e) {
       el.innerHTML = '<div style="color:#dc2626; padding:10px;">Lỗi tải bài nộp: ' + e.message + '</div>';
+    }
+  };
+
+  window.deleteSubmissionItem = async function(id) {
+    if (!requireAdminUiAction()) return;
+    if (!confirm('Bạn có chắc chắn muốn xóa vĩnh viễn bài nộp này và ảnh bài làm liên quan khỏi Database?')) return;
+    try {
+      await window.VMODataService.deleteSubmission(id);
+      showToast('Đã xóa bài nộp và ảnh liên quan khỏi database.', true);
+      await loadAllSubmissions();
+    } catch (err) {
+      showToast('Không thể xóa bài nộp: ' + (err?.message || 'Lỗi không xác định'), false);
     }
   };
 

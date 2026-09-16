@@ -267,6 +267,14 @@ export async function getAllSubmissions() {
   return normalizeList(await request('submissions'));
 }
 
+export async function deleteSubmission(id) {
+  const cleanId = normalizeId(id).trim();
+  if (!cleanId) {
+    throw createServiceError('Thiếu mã bài nộp', 0, 'VALIDATION_ERROR');
+  }
+  return mutate('delete_submission', { id: cleanId });
+}
+
 export async function getEvents() {
   return normalizeList(await request('events'));
 }
@@ -296,6 +304,7 @@ const VMODataService = Object.freeze({
   getSubmissionImage,
   getSubmissionsForProblem,
   getAllSubmissions,
+  deleteSubmission,
   getEvents,
   addEvent,
   deleteEvent
