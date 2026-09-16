@@ -11,15 +11,7 @@ const VMOAuth = (() => {
   const LAST_ACTIVITY_KEY = 'vmo_last_activity_time';
 
   // Khởi tạo tài khoản mặc định nội bộ
-  const DEFAULT_USERS = [
-    {
-      username: 'admin',
-      password: '123456',
-      role: 'admin',
-      name: 'Quản trị viên tối cao',
-      createdAt: '2026-09-01T00:00:00.000Z'
-    }
-  ];
+  const DEFAULT_USERS = [];
 
   function initStorage() {
     try {
@@ -71,7 +63,7 @@ const VMOAuth = (() => {
     const sessionData = {
       username: user.username,
       role: user.role || 'user',
-      name: user.name || user.username,
+      name: user.fullName || user.name || user.username,
       photoURL: user.photoURL || '',
       uid: user.uid || '',
       provider: user.provider || 'local',
@@ -103,8 +95,7 @@ const VMOAuth = (() => {
     } catch (e) {}
   }
 
-  function login(username, password, remember = true) {
-    initStorage();
+  async function login(username, password, remember = true) {
     const uClean = (username || '').trim().toLowerCase();
     const pClean = (password || '').trim();
 
@@ -112,15 +103,16 @@ const VMOAuth = (() => {
       return { success: false, message: 'Vui lòng nhập đầy đủ tên đăng nhập và mật khẩu!' };
     }
 
-    const users = getUsers();
-    const found = users.find(u => u.username.toLowerCase() === uClean && u.password === pClean);
-
-    if (found) {
-      setSession(found, remember);
-      return { success: true, user: found };
-    } else {
-      return { success: false, message: 'Tên đăng nhập hoặc mật khẩu không chính xác!' };
-    }
+    try {
+      const response = await fetch('/api/auth', {
+        method: 'POST', headers: { 'Content-Type': 'application/json' }, credentials: 'same-origin',
+        body: JSON.stringify({ action: 'login', username: uClean, password: pClean })
+      });
+      const data = await response.json();
+      if (!response.ok || !data.success) return { success: false, message: data.error || 'Đăng nhập thất bại!' };
+      setSession(data.user, remember);
+      return { success: true, user: data.user };
+    } catch { return { success: false, message: 'Không thể kết nối máy chủ xác thực.' }; }
   }
 
   async function logout(reason = '') {
@@ -130,6 +122,10 @@ const VMOAuth = (() => {
 
     // Xóa session cục bộ ngay lập tức để không bị kẹt phiên
     clearSession();
+    try {
+      await fetch('/api/auth', { method: 'POST', headers: { 'Content-Type': 'application/json' },
+        credentials: 'same-origin', body: JSON.stringify({ action: 'logout' }) });
+    } catch (e) { console.warn('Không thể thông báo đăng xuất đến máy chủ:', e); }
 
     // Đăng xuất khỏi Firebase nếu đã kết nối (chạy song song có timeout an toàn)
     try {

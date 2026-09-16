@@ -45,26 +45,26 @@ window.MathJax = {
         onerror="this.onerror=null;this.src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.min.js';"></script>
 
 <!-- Stylesheets tách biệt, tối ưu bộ nhớ đệm -->
-<link rel="stylesheet" href="styles.css?v=1789527075031">
-<link rel="stylesheet" href="auth.css?v=1789527075031">
-<link rel="stylesheet" href="ai_guide.css?v=1789527075031">
-<link rel="stylesheet" href="i18n.css?v=1789527075031">
+<link rel="stylesheet" href="styles.css?v=1789546527619">
+<link rel="stylesheet" href="auth.css?v=1789546527619">
+<link rel="stylesheet" href="ai_guide.css?v=1789546527619">
+<link rel="stylesheet" href="i18n.css?v=1789546527619">
 
 <!-- Synchronous Auth Gate: Chặn truy cập nếu chưa đăng nhập -->
-<script src="auth.js?v=1789527075031"></script>
+<script src="auth.js?v=1789546527619"></script>
 <script>
 VMOAuth.requireAuth('login.html');
 </script>
 
-<script type="module" src="firebase-config.js?v=1789527075031"></script>
-<script type="module" src="vmo_data_service.js?v=1789527075031"></script>
-<script src="vmo_db_ui.js?v=1789527075031" defer></script>
-<script src="account_mgmt.js?v=1789527075031" defer></script>
-<script src="tst-sources.js?v=1789527075031" defer></script>
-<script src="history-sources.js?v=1789527075031" defer></script>
-<script src="ai_guide_engine.js?v=1789527075031" defer></script>
-<script src="i18n.js?v=1789527075031" defer></script>
-<script src="app.js?v=1789527075031" defer></script>
+<script type="module" src="firebase-config.js?v=1789546527619"></script>
+<script type="module" src="vmo_data_service.js?v=1789546527619"></script>
+<script src="vmo_db_ui.js?v=1789546527619" defer></script>
+<script src="account_mgmt.js?v=1789546527619" defer></script>
+<script src="tst-sources.js?v=1789546527619" defer></script>
+<script src="history-sources.js?v=1789546527619" defer></script>
+<script src="ai_guide_engine.js?v=1789546527619" defer></script>
+<script src="i18n.js?v=1789546527619" defer></script>
+<script src="app.js?v=1789546527619" defer></script>
 </head>
 <body class="tex2jax_process">
 <a href="#main-content" class="skip-link">Bỏ qua đến nội dung chính</a>
@@ -74,11 +74,12 @@ VMOAuth.requireAuth('login.html');
   <p>Người biên soạn - Trần Hoàng Kiên.</p>
   <p>Trường THPT - Phan Châu Trình - Tp Đà Nẵng.</p>
   <div class="hero-stats">
-    <div class="stat-chip"><span class="num">13</span><span class="label">Chương tài liệu</span></div>
+    <div class="stat-chip"><span class="num">25</span><span class="label">Bộ đề thi các Tỉnh/Tp</span></div>
+    <div class="stat-chip"><span class="num">15</span><span class="label">Đề ĐN–QN</span></div>
+    <div class="stat-chip"><span class="num">09</span><span class="label">Chương tài liệu</span></div>
     <div class="stat-chip"><span class="num">39</span><span class="label">Mục lý thuyết</span></div>
     <div class="stat-chip"><span class="num">78</span><span class="label">Ví dụ có lời giải</span></div>
-    <div class="stat-chip"><span class="num">2 × 2</span><span class="label">Đề thi thử / ngày</span></div>
-    <div class="stat-chip"><span class="num">12</span><span class="label">Đề ĐN–QN lưu trữ</span></div>
+    <div class="stat-chip"><span class="num">2 × 2</span><span class="label">Đề thi thử / ngày</span></div>    
   </div>
 </header>
 <div class="nav-tabs-wrapper">
@@ -201,6 +202,8 @@ VMOAuth.requireAuth('login.html');
 <a class="nav-link" href="#tst-lam-dong">21. Tỉnh Lâm Đồng</a>
 <a class="nav-link" href="#tst-csp">22. Chuyên ĐHSP Hà Nội</a>
 <a class="nav-link" href="#tst-bac-ninh">23. Tỉnh Bắc Ninh</a>
+<a class="nav-link" href="#tst-lao-cai">24. Tỉnh Lào Cai</a>
+<a class="nav-link" href="#tst-ca-mau">25. Tỉnh Cà Mau</a>
 </div>
 </div>
     <div id="sidebar-history" style="display:none">
@@ -234,9 +237,9 @@ VMOAuth.requireAuth('login.html');
 <p>Nội dung được: định hướng ôn tập, sáu khối kiến thức, kế hoạch ôn luyện, hai bộ thi thử 2 ngày, lời giải chi tiết và thang điểm.</p>
 </div>
 <div class="dashboard-stats">
-<div><strong>15</strong><span>Bộ đề thi TST các Tỉnh/Tp</span></div>
-<div><strong>13</strong><span>chương</span></div>
-<div><strong>39</strong><span>mục lý thuyết</span></div>
+<div><strong>25</strong><span>Bộ đề thi TST các Tỉnh/Tp</span></div>
+<div><strong>15</strong><span>Bộ đề thi Quảng Nam & Đà Nẵng</span></div>
+<div><strong>09</strong><span>Chương</span></div>
 <div><strong>78</strong><span>ví dụ có lời giải</span></div>
 <div><strong>2</strong><span>bộ thi thử 2 ngày</span></div>
 </div>
@@ -275,7 +278,7 @@ GD&amp;ĐT ban hành. Việc ôn thi cần kết hợp với chương trình chu
 Toán, chương trình bồi dưỡng HSG Quốc gia và hướng dẫn của giáo viên phụ
 trách đội tuyển.</p>
 </div></section><section class="chapter-block" data-chapter="1" data-search="Chương 1 Định hướng và chiến lược ôn luyện 1.1 Cấu trúc đề và trọng số Ngày Câu Điểm Nội dung 1 1 5 Dãy số và giới hạn dãy số 1 2 5 Phương trình hàm 1 3 5 Số học, dãy số học 1 4 5 Hình học phẳng 2 5 7 Đa thức 2 6 6 Hình học phẳng 2 7 7 Tổ hợp Hình học chiếm \(11/40=27.5\%\) tổng điểm hai ngày; đa thức và tổ hợp mỗi mảng chiếm \(7/40=17.5\%\) . Vì vậy, chiến lược hợp lý là: không để mất trắng bất kỳ câu nào của ngày 1; đồng thời phải có ít nhất một mảng sở trường trong ba bài ngày 2. 1.2 Những xu hướng kỹ thuật cần đặc biệt chú ý Qua hệ thống đề Đà Nẵng–Quảng Nam và các đề chọn đội tuyển 2026–2027, các kỹ thuật sau có tần suất và giá trị phân loại cao: Dãy truy hồi phi tuyến, đánh giá tốc độ hội tụ, Stolz–Cesàro, khai triển tương đương. Phương trình hàm ép tính đơn ánh/toàn ánh, phép lặp \(f(f(x))\) , tính cộng hoặc tính nhân. Số học kết hợp dãy nguyên: đồng dư, \(\gcd\) , cấp modulo, LTE, dãy Lucas/Fibonacci. Hình học đường tròn nhiều tầng: công suất, trục đẳng phương, Miquel, đồng dạng xoắn, Simson, đẳng giác–đối trung, nghịch đảo, cực–đối cực. Đa thức: chia hết, sai phân, nội suy, phương trình hàm đa thức, quỹ đạo nghiệm, nghiệm phức có môđun cực đại. Tổ hợp: Dirichlet, bất biến–đơn biến, parity, đếm kép, đồ thị, lưới và đại số trên \(\mathbb{F}_2\) . Cách sử dụng tài liệu Với mỗi mục: (1) đọc phần lý thuyết và tự chứng minh lại các mệnh đề chính; (2) che lời giải, tự làm hai ví dụ; (3) viết lại lời giải hoàn chỉnh; (4) sau 48 giờ, giải lại không xem tài liệu. Mục tiêu của tuyển đội tuyển không phải nhận dạng bài quen, mà là nhận dạng cấu trúc và chọn công cụ phù hợp."><h1 class="chapter-heading" id="định-hướng-và-chiến-lược-ôn-luyện"><span class="chapter-kicker">Chương 1</span>Định hướng và chiến lược ôn
-luyện</h1><section class="book-subsection" data-search="1.1 Cấu trúc đề và trọng số Ngày Câu Điểm Nội dung 1 1 5 Dãy số và giới hạn dãy số 1 2 5 Phương trình hàm 1 3 5 Số học, dãy số học 1 4 5 Hình học phẳng 2 5 7 Đa thức 2 6 6 Hình học phẳng 2 7 7 Tổ hợp Hình học chiếm \(11/40=27.5\%\) tổng điểm hai ngày; đa thức và tổ hợp mỗi mảng chiếm \(7/40=17.5\%\) . Vì vậy, chiến lược hợp lý là: không để mất trắng bất kỳ câu nào của ngày 1; đồng thời phải có ít nhất một mảng sở trường trong ba bài ngày 2."><h2 class="section-heading" id="cấu-trúc-đề-và-trọng-số"><span class="section-number">1.1</span>Cấu trúc đề và trọng số</h2><div class="center">
+luyện</h1><section class="book-subsection" data-search="1.1 Cấu trúc đề và trọng số Ngày Câu Điểm Nội dung 1 1 5 Dãy số và giới hạn dãy số 1 2 5 Phương trình hàm 1 3 5 Số học, dãy số học 1 4 5 Hình học phẳng 2 5 7 Đa thức 2 6 6 Hình học phẳng 2 7 7 Tổ hợp Hình học chiếm \(11/40=27.5\%\) tổng điểm hai ngày; đa thức và tổ hợp mỗi mảng chiếm \(7/40=17.5\%\) . Vì vậy, chiến lược hợp lý là: không để mất trắng bất kỳ câu nào của ngày 1; đồng thời phải có ít nhất một mảng sở trường trong ba bài ngày 2."><h2 class="section-heading" id="cấu-trúc-đề-và-trọng-số"><span class="section-number">1.1</span> Cấu trúc đề và trọng số</h2><div class="center">
 <table>
 <thead>
 <tr class="header">
@@ -340,8 +343,8 @@ luyện</h1><section class="book-subsection" data-search="1.1 Cấu trúc đề 
 </table>
 </div><p>Hình học chiếm <span class="math inline">\(11/40=27.5\%\)</span> tổng
 điểm hai ngày; đa thức và tổ hợp mỗi mảng chiếm <span class="math inline">\(7/40=17.5\%\)</span>. Vì vậy, chiến lược hợp lý
-là: không để mất trắng bất kỳ câu nào của ngày 1; đồng thời phải có ít
-nhất một mảng sở trường trong ba bài ngày 2.</p></section><section class="book-subsection" data-search="1.2 Những xu hướng kỹ thuật cần đặc biệt chú ý Qua hệ thống đề Đà Nẵng–Quảng Nam và các đề chọn đội tuyển 2026–2027, các kỹ thuật sau có tần suất và giá trị phân loại cao: Dãy truy hồi phi tuyến, đánh giá tốc độ hội tụ, Stolz–Cesàro, khai triển tương đương. Phương trình hàm ép tính đơn ánh/toàn ánh, phép lặp \(f(f(x))\) , tính cộng hoặc tính nhân. Số học kết hợp dãy nguyên: đồng dư, \(\gcd\) , cấp modulo, LTE, dãy Lucas/Fibonacci. Hình học đường tròn nhiều tầng: công suất, trục đẳng phương, Miquel, đồng dạng xoắn, Simson, đẳng giác–đối trung, nghịch đảo, cực–đối cực. Đa thức: chia hết, sai phân, nội suy, phương trình hàm đa thức, quỹ đạo nghiệm, nghiệm phức có môđun cực đại. Tổ hợp: Dirichlet, bất biến–đơn biến, parity, đếm kép, đồ thị, lưới và đại số trên \(\mathbb{F}_2\) . Cách sử dụng tài liệu Với mỗi mục: (1) đọc phần lý thuyết và tự chứng minh lại các mệnh đề chính; (2) che lời giải, tự làm hai ví dụ; (3) viết lại lời giải hoàn chỉnh; (4) sau 48 giờ, giải lại không xem tài liệu. Mục tiêu của tuyển đội tuyển không phải nhận dạng bài quen, mà là nhận dạng cấu trúc và chọn công cụ phù hợp."><h2 class="section-heading" id="những-xu-hướng-kỹ-thuật-cần-đặc-biệt-chú-ý"><span class="section-number">1.2</span>Những xu hướng kỹ
+là: không để mất trắng bấtNhững xu hướng kỹ thuật cần đặc biệt chú ý kỳ câu nào của ngày 1; đồng thời phải có ít
+nhất một mảng sở trường trong ba bài ngày 2.</p></section><section class="book-subsection" data-search="1.2  Qua hệ thống đề Đà Nẵng–Quảng Nam và các đề chọn đội tuyển 2026–2027, các kỹ thuật sau có tần suất và giá trị phân loại cao: Dãy truy hồi phi tuyến, đánh giá tốc độ hội tụ, Stolz–Cesàro, khai triển tương đương. Phương trình hàm ép tính đơn ánh/toàn ánh, phép lặp \(f(f(x))\) , tính cộng hoặc tính nhân. Số học kết hợp dãy nguyên: đồng dư, \(\gcd\) , cấp modulo, LTE, dãy Lucas/Fibonacci. Hình học đường tròn nhiều tầng: công suất, trục đẳng phương, Miquel, đồng dạng xoắn, Simson, đẳng giác–đối trung, nghịch đảo, cực–đối cực. Đa thức: chia hết, sai phân, nội suy, phương trình hàm đa thức, quỹ đạo nghiệm, nghiệm phức có môđun cực đại. Tổ hợp: Dirichlet, bất biến–đơn biến, parity, đếm kép, đồ thị, lưới và đại số trên \(\mathbb{F}_2\) . Cách sử dụng tài liệu Với mỗi mục: (1) đọc phần lý thuyết và tự chứng minh lại các mệnh đề chính; (2) che lời giải, tự làm hai ví dụ; (3) viết lại lời giải hoàn chỉnh; (4) sau 48 giờ, giải lại không xem tài liệu. Mục tiêu của tuyển đội tuyển không phải nhận dạng bài quen, mà là nhận dạng cấu trúc và chọn công cụ phù hợp."><h2 class="section-heading" id="những-xu-hướng-kỹ-thuật-cần-đặc-biệt-chú-ý"><span class="section-number">1.2</span> Những xu hướng kỹ
 thuật cần đặc biệt chú ý</h2><p>Qua hệ thống đề Đà Nẵng–Quảng Nam và các đề chọn đội tuyển 2026–2027,
 các kỹ thuật sau có tần suất và giá trị phân loại cao:</p><ul>
 <li><p>Dãy truy hồi phi tuyến, đánh giá tốc độ hội tụ, Stolz–Cesàro,
@@ -5522,14 +5525,14 @@ b) Chứng minh $PK$ là đường phân giác của góc $\widehat{MPN}$.</div>
 </article>
 
 <!-- 19. NINH BÌNH -->
-<article class="exam-card" data-filter="BAC" data-search="ninh bình 2026 2027 dãy số vô tỉ phương trình hàm hình học tổ hợp bảng ô vuông" id="tst-ninh-binh">
+<article class="exam-card" data-filter="BAC" data-search="ninh bình 2026 2027 dãy số vô tỉ phương trình hàm hình học tổ hợp bảng ô vuông sigma ước số phi số học" id="tst-ninh-binh">
 <div class="exam-header">
-<div class="exam-top-tags"><span class="tag tag-year">2026 - 2027</span><span class="tag tag-province">NINH BÌNH</span><span class="tag tag-official">Ngày 1 · Đề chính thức</span></div>
+<div class="exam-top-tags"><span class="tag tag-year">2026 - 2027</span><span class="tag tag-province">NINH BÌNH</span><span class="tag tag-official">Đề 2 Ngày</span></div>
 <h3 class="exam-title">SỞ GIÁO DỤC VÀ ĐÀO TẠO TỈNH NINH BÌNH — KỲ THI CHỌN HỌC SINH GIỎI THPT CẤP TỈNH VÀ CHỌN ĐỘI TUYỂN DỰ THI HSG QUỐC GIA NĂM HỌC 2026–2027</h3>
 <div class="exam-meta">
-<span class="meta-item">📅 Ngày thi thứ nhất: 15/09/2026</span>
-<span class="meta-item">⏱️ 180 phút</span>
-<span class="meta-item">📝 Đề thi gồm 04 bài, trong 01 trang</span>
+<span class="meta-item">📅 15/09 – 16/09/2026</span>
+<span class="meta-item">⏱️ 180 phút / ngày</span>
+<span class="meta-item">📝 Đề chính thức · 2 ngày thi</span>
 </div>
 </div>
 
@@ -5613,6 +5616,80 @@ $
 3m\times 6n
 $
 (gồm $3m$ hàng và $6n$ cột). Trên bảng đó một số ô có màu trắng và các ô còn lại màu đỏ. Gọi $T$ là số bộ ba $(C_1,C_2,C_3)$ gồm các ô, trong đó hai ô đầu tiên nằm trên cùng một hàng và hai ô cuối cùng nằm trên cùng một cột, với $C_1$ và $C_3$ là ô trắng còn $C_2$ là ô đỏ. Tìm giá trị lớn nhất của $T$.</div>
+</div>
+
+</div>
+
+<div class="day-block">
+<div class="day-title">📌 Ngày thi thứ hai — 16/09/2026</div>
+
+<div class="problem-item">
+<div class="problem-header">
+<div class="problem-id"><span>Bài 5</span><span class="badge-point"> (6,0đ) </span><span class="badge-topic">Tổ hợp – Bất đẳng thức</span></div>
+<button class="btn-copy" onclick="copyText(this)">📋 Sao chép</button>
+</div>
+<div class="problem-content">Cho số nguyên dương $n$. Xét các số thực $x_1,x_2,\ldots,x_n$ thỏa mãn
+$
+|x_i|\le1,\qquad \forall i=1,2,\ldots,n,
+$
+và
+$
+x_1+x_2+\cdots+x_n=0.
+$
+Với mỗi $k\in\{1,2,\ldots,n\}$, đặt
+$
+S_k=x_1+2x_2+\cdots+kx_k.
+$
+
+a) Chứng minh rằng tồn tại các số $p,q\in\{1,2,\ldots,n\}$ (không nhất thiết phân biệt) sao cho
+$
+S_p\le0
+$
+và
+$
+|S_q|\le\frac{2q+1}{4}.
+$
+
+b) Khi $n\ge3$, chứng minh rằng tồn tại các số thực $x_1,x_2,\ldots,x_n$ thỏa mãn các điều kiện của bài toán sao cho với mọi $k\in\{1,2,\ldots,n\}$ ta đều có
+$
+|S_k|\ge\frac{2k+1}{4}.
+$</div>
+</div>
+
+<div class="problem-item">
+<div class="problem-header">
+<div class="problem-id"><span>Bài 6</span><span class="badge-point"> (7,0đ) </span><span class="badge-topic">Số học</span></div>
+<button class="btn-copy" onclick="copyText(this)">📋 Sao chép</button>
+</div>
+<div class="problem-content">a) Với mỗi số nguyên dương $n$, gọi $\sigma(n)$ là tổng các ước dương của $n$. Chứng minh rằng tồn tại vô hạn số nguyên dương $n$ sao cho $n$ là ước của
+$
+2^{\sigma(n)}-1.
+$
+
+b) Cho dãy số nguyên dương $(a_n)_{n\ge1}$ và dãy các số nguyên tố $(p_n)_{n\ge1}$ thỏa mãn với mỗi $n\in\mathbb N^*$, ta có
+$
+p_n\mid a_n
+$
+và
+$
+a_{n+1}=\frac{a_n}{p_n}\left(p_n^{1013}-1\right).
+$
+Chứng minh rằng tồn tại số nguyên dương $m$ sao cho $a_m$ chia hết cho $2026$.</div>
+</div>
+
+<div class="problem-item">
+<div class="problem-header">
+<div class="problem-id"><span>Bài 7</span><span class="badge-point"> (7,0đ) </span><span class="badge-topic">Hình học</span></div>
+<button class="btn-copy" onclick="copyText(this)">📋 Sao chép</button>
+</div>
+<div class="problem-content">Cho tam giác $ABC$ nhọn, không cân, nội tiếp đường tròn $(O)$, có ba đường cao $AD,BE,CF$ đồng quy tại $H$. Gọi $G$ là trọng tâm tam giác $ABC$. Các đoạn thẳng $AG,BG,CG$ theo thứ tự cắt đường tròn $(DEF)$ tại $I,J,K$. Các đường tròn $(AID),(BJE),(CKF)$ cắt lại đường tròn $(O)$ tại các điểm thứ hai tương ứng là $X,Y,Z$.
+
+a) Chứng minh rằng ba đường thẳng $AX,BY,CZ$ đồng quy tại một điểm trên đường thẳng $OH$.
+
+b) Đường thẳng $AC$ cắt đường tròn $(AHB)$ tại điểm thứ hai là $N$; đường thẳng $AB$ cắt đường tròn $(AHC)$ tại điểm thứ hai là $M$. Đường tròn $(HMN)$ cắt lại các đường thẳng $AB,AC$ tại các điểm thứ hai tương ứng là $S,T$. Chứng minh rằng
+$
+ST\perp OH.
+$</div>
 </div>
 
 </div>
@@ -6137,6 +6214,368 @@ và cặp số $a_n,b_n$ nguyên tố cùng nhau.
 \frac{b_{2n}}{2}
 \]
 là số nguyên nhưng không là số chính phương.</div>
+</div>
+
+</div>
+</article>
+
+<!-- 24. LÀO CAI -->
+<article class="exam-card" data-filter="BAC" data-search="lào cai 2026 2027 đa thức hình học hoán vị tốt phương trình hàm dãy số phi euler" id="tst-lao-cai">
+<div class="exam-header">
+<div class="exam-top-tags">
+<span class="tag tag-year">2026 - 2027</span>
+<span class="tag tag-province">LÀO CAI</span>
+<span class="tag tag-official">Đề 2 Ngày</span>
+</div>
+<h3 class="exam-title">SỞ GIÁO DỤC VÀ ĐÀO TẠO TỈNH LÀO CAI — KỲ THI CHỌN ĐỘI TUYỂN DỰ THI HSG QUỐC GIA NĂM HỌC 2026–2027</h3>
+<div class="exam-meta">
+<span class="meta-item">📅 15/09 – 16/09/2026</span>
+<span class="meta-item">⏱️ 180 phút / ngày</span>
+<span class="meta-item">📝 Đề chính thức · 06 câu</span>
+</div>
+</div>
+
+<div class="exam-body">
+
+<div class="day-block">
+<div class="day-title">📌 Ngày thi thứ nhất — 15/09/2026</div>
+
+<div class="problem-item">
+<div class="problem-header">
+<div class="problem-id"><span>Câu 1</span><span class="badge-point"> (7,0đ) </span><span class="badge-topic">Đa thức</span></div>
+<button class="btn-copy" onclick="copyText(this)">📋 Sao chép</button>
+</div>
+<div class="problem-content">Giả sử $a,b,c$ là ba trong bốn nghiệm của đa thức
+\[
+f(x)=x^4-4x^3+2x^2+4x-2.
+\]
+
+<strong>a)</strong> Chứng minh rằng $abc$ là nghiệm của đa thức
+\[
+g(x)=x^4+4x^3-4x^2-16x-8.
+\]
+
+<strong>b)</strong> Chứng minh rằng $ab$ là nghiệm của đa thức
+\[
+h(x)=x^6-2x^5-14x^4+8x^3+28x^2-8x-8.
+\]</div>
+</div>
+
+<div class="problem-item">
+<div class="problem-header">
+<div class="problem-id"><span>Câu 2</span><span class="badge-point"> (7,0đ) </span><span class="badge-topic">Hình học</span></div>
+<button class="btn-copy" onclick="copyText(this)">📋 Sao chép</button>
+</div>
+<div class="problem-content">Cho tam giác $ABC$ $(AB&lt;AC)$ có đường tròn nội tiếp $(I)$ tiếp xúc với $BC,CA,AB$ lần lượt tại $D,E,F$. Gọi $H$ là giao điểm của $AI$ và $BC$; $K,L$ lần lượt là hình chiếu vuông góc của $H$ trên $IB$ và $IC$. Qua $D$ kẻ đường thẳng vuông góc với $AI$ cắt $IB,IC$ lần lượt tại $X$ và $Y$. Gọi $M,N,P$ lần lượt là trung điểm của $DE,DF$ và $EF$.
+
+<strong>a)</strong> Chứng minh rằng $KL\parallel BC$ và bốn điểm $K,L,X,Y$ cùng thuộc một đường tròn.
+
+<strong>b)</strong> Gọi $O_1,O_2$ lần lượt là tâm của hai đường tròn $(MKL)$ và $(DIP)$. Chứng minh rằng giao điểm của $(MKL)$ và $(DIP)$ thuộc đường tròn đường kính $O_1O_2$.</div>
+</div>
+
+<div class="problem-item">
+<div class="problem-header">
+<div class="problem-id"><span>Câu 3</span><span class="badge-point"> (6,0đ) </span><span class="badge-topic">Tổ hợp – Số học</span></div>
+<button class="btn-copy" onclick="copyText(this)">📋 Sao chép</button>
+</div>
+<div class="problem-content">Với mỗi số nguyên dương $n$, ta gọi một hoán vị
+\[
+(a_0,a_1,\ldots,a_{n-1})
+\]
+của các số
+\[
+0,1,\ldots,n-1
+\]
+là <em>tốt</em> nếu $a_i+i$ là số chính phương với mọi
+\[
+i=0,1,\ldots,n-1.
+\]
+
+<strong>a)</strong> Chứng minh rằng với $n=2026$, trong một hoán vị tốt
+\[
+(a_0,a_1,\ldots,a_{2025}),
+\]
+luôn tồn tại ít nhất một chỉ số $i$ sao cho $a_i+i$ chia hết cho $9$.
+
+<strong>b)</strong> Chứng minh rằng với mọi số nguyên dương $n$, luôn tồn tại ít nhất một hoán vị tốt.</div>
+</div>
+
+</div>
+
+<div class="day-block">
+<div class="day-title">📌 Ngày thi thứ hai — 16/09/2026</div>
+
+<div class="problem-item">
+<div class="problem-header">
+<div class="problem-id"><span>Câu 4</span><span class="badge-point"> (6,0đ) </span><span class="badge-topic">Phương trình hàm</span></div>
+<button class="btn-copy" onclick="copyText(this)">📋 Sao chép</button>
+</div>
+<div class="problem-content">Tìm tất cả các hàm số $f:\mathbb R\to\mathbb R$ thỏa mãn
+\[
+x f(2x+xy)
+=
+y f(x)+f(x^2)f(y+1),
+\qquad \forall x,y\in\mathbb R.
+\]</div>
+</div>
+
+<div class="problem-item">
+<div class="problem-header">
+<div class="problem-id"><span>Câu 5</span><span class="badge-point"> (7,0đ) </span><span class="badge-topic">Dãy số – Số học</span></div>
+<button class="btn-copy" onclick="copyText(this)">📋 Sao chép</button>
+</div>
+<div class="problem-content">Xét dãy số $(a_n)$ xác định bởi
+\[
+a_0=0,\qquad a_1=1,\qquad a_2=2,\qquad a_3=6
+\]
+và
+\[
+a_{n+4}=2a_{n+3}+a_{n+2}-2a_{n+1}-a_n,
+\qquad \text{với mọi } n\ge0.
+\]
+
+<strong>a)</strong> Chứng minh rằng $a_n$ chia hết cho $n$ với mọi số nguyên dương $n$.
+
+<strong>b)</strong> Với mỗi số nguyên dương $m$, kí hiệu $\varphi(m)$ là số các số nguyên dương không vượt quá $m$ và nguyên tố cùng nhau với $m$. Chứng minh rằng
+\[
+\varphi\!\left(\frac{a_{2027}}{2027}\right)
+\]
+là một số chia hết cho $4$.</div>
+</div>
+
+<div class="problem-item">
+<div class="problem-header">
+<div class="problem-id"><span>Câu 6</span><span class="badge-point"> (7,0đ) </span><span class="badge-topic">Hình học</span></div>
+<button class="btn-copy" onclick="copyText(this)">📋 Sao chép</button>
+</div>
+<div class="problem-content">Cho tứ giác $ABCD$ không phải hình thang, nội tiếp đường tròn tâm $O$. Gọi $M$ là trung điểm của $CD$; $F$ là giao điểm của $AD$ và $BC$. Các tiếp tuyến tại $C$ và $D$ của đường tròn $(FCD)$ cắt nhau tại $S$. Gọi $P$ là giao điểm $SF$ và $CD$; $E$ là giao điểm của $AC$ và $BD$; $H$ là hình chiếu của $E$ trên $SF$; $K$ là giao điểm thứ hai của hai đường tròn $(ABE)$ và $(CDE)$.
+
+<strong>a)</strong> Chứng minh rằng các điểm $K,P,M,H$ cùng nằm trên một đường tròn, kí hiệu là $(\omega)$.
+
+<strong>b)</strong> Tiếp tuyến tại $P$ của đường tròn $(\omega)$ cắt đường tròn $(CDE)$ tại $X,Y$. Gọi $Q$ là giao điểm thứ hai của $KP$ với đường tròn $(CDE)$. Chứng minh rằng $EQ$ là tia phân giác của
+\[
+\widehat{XEY}.
+\]</div>
+</div>
+
+</div>
+
+</div>
+</article>
+
+<!-- 25. CÀ MAU -->
+<article class="exam-card" data-filter="NAM" data-search="cà mau 2026 2027 phương trình hàm dãy lặp cực trị số học đồng dư hình học trò chơi đa thức monic valuation" id="tst-ca-mau">
+<div class="exam-header">
+<div class="exam-top-tags">
+<span class="tag tag-year">2026 - 2027</span>
+<span class="tag tag-province">CÀ MAU</span>
+<span class="tag tag-official">Đề 2 Ngày</span>
+</div>
+<h3 class="exam-title">CHỌN ĐỘI TUYỂN QUỐC GIA CÀ MAU 2026</h3>
+<div class="exam-meta">
+<span class="meta-item">📅 2 ngày thi</span>
+<span class="meta-item">🧮 07 bài toán</span>
+<span class="meta-item">📚 Nguồn: LIM Olympic – Cà Mau TST</span>
+</div>
+</div>
+
+<div class="exam-body">
+
+<div class="day-block">
+<div class="day-title">📌 Ngày thi thứ nhất</div>
+
+<div class="problem-item">
+<div class="problem-header">
+<div class="problem-id"><span>Câu 1</span><span class="badge-topic"> Phương trình hàm – Dãy lặp</span></div>
+<button class="btn-copy" onclick="copyText(this)">📋 Sao chép</button>
+</div>
+<div class="problem-content">Cho hàm số $f:\mathbb R\to\mathbb R$ liên tục, khác hằng và thỏa mãn
+\[
+f(x^3)+1=\bigl(xf(x)+2x^2-1\bigr)^2,\qquad \forall x\in\mathbb R.
+\]
+
+Xét dãy số thực $(u_n)$ xác định bởi
+\[
+u_1=m\in\mathbb R
+\]
+và
+\[
+u_{n+1}=f(u_n),\qquad \forall n\ge1.
+\]
+
+<strong>1)</strong> Chứng minh rằng tồn tại số thực $m&gt;1$ sao cho dãy $(u_n)$ là dãy hằng.
+
+<strong>2)</strong> Giả sử $f$ là đa thức khác hằng, hỏi có bao nhiêu số thực
+\[
+m\in(-1,3)
+\]
+để
+\[
+u_{2027}=1?
+\]</div>
+</div>
+
+<div class="problem-item">
+<div class="problem-header">
+<div class="problem-id"><span>Câu 2</span><span class="badge-topic"> Cực trị – Tổ hợp</span></div>
+<button class="btn-copy" onclick="copyText(this)">📋 Sao chép</button>
+</div>
+<div class="problem-content">Với $n$ nguyên dương, xét các số thực thay đổi
+\[
+x_1,x_2,\ldots,x_n\in[-1,1].
+\]
+Quy ước
+\[
+x_0=x_n
+\]
+và
+\[
+x_{n+1}=x_1.
+\]
+Kí hiệu
+\[
+T=\max_{1\le k\le n}\left\{x_k(x_{k-1}+x_{k+1})\right\}
+\]
+là số lớn nhất trong $n$ số
+\[
+x_1(x_0+x_2),\;
+x_2(x_1+x_3),\;
+\ldots,\;
+x_n(x_{n-1}+x_{n+1}).
+\]
+
+<strong>1)</strong> Khi $n=2026$, tìm giá trị nhỏ nhất của $T$.
+
+<strong>2)</strong> Khi $n=2027$, chứng minh rằng
+\[
+T\ge-\frac14
+\]
+và tìm một bộ
+\[
+x_1,x_2,\ldots,x_n\in[-1,1]
+\]
+để dấu bằng xảy ra.</div>
+</div>
+
+<div class="problem-item">
+<div class="problem-header">
+<div class="problem-id"><span>Câu 3</span><span class="badge-topic"> Số học – Đồng dư</span></div>
+<button class="btn-copy" onclick="copyText(this)">📋 Sao chép</button>
+</div>
+<div class="problem-content">Với mỗi cặp số nguyên dương $a$ và $b$, kí hiệu
+\[
+f(a,b)=11a+6b+8ab.
+\]
+
+<strong>1)</strong> Chứng minh rằng với $a,b,c,d\in\mathbb Z^+$ và $m&gt;1$ là lũy thừa của $2$, nếu
+\[
+f(a,b)\equiv f(c,d)\pmod m
+\]
+và
+\[
+f(b,a)\equiv f(d,c)\pmod m
+\]
+thì $a-c$ và $b-d$ đều chia hết cho $m$.
+
+Hỏi kết luận có còn đúng không nếu $m$ có ước nguyên tố lẻ?
+
+<strong>2)</strong> Chứng minh rằng $k=2$ là số tự nhiên nhỏ nhất sao cho
+\[
+f(a,b)+k
+\]
+không là số chính phương
+\[
+\forall a,b\in\mathbb Z^+.
+\]</div>
+</div>
+
+<div class="problem-item">
+<div class="problem-header">
+<div class="problem-id"><span>Câu 4</span><span class="badge-topic"> Hình học</span></div>
+<button class="btn-copy" onclick="copyText(this)">📋 Sao chép</button>
+</div>
+<div class="problem-content">Cho hai đường tròn $(O_1),(O_2)$ có bán kính khác nhau và cắt nhau tại hai điểm $A,B$. Kẻ tiếp tuyến chung $CD$ của hai đường tròn (gần $B$ hơn) với $C\in(O_1)$; $D\in(O_2)$. Dựng điểm $H$ sao cho tam giác $HCD$ nhận $B$ làm trực tâm. Kẻ đường kính $CR$ của $(O_1)$ và đường kính $DS$ của $(O_2)$. Biết rằng $BR$ cắt $HC$ ở $P$ và $BS$ cắt $HD$ ở $Q$. Dựng các điểm $I,J$ sao cho các đoạn thẳng $HI,HJ$ lần lượt nhận $P,Q$ là trung điểm. Chứng minh rằng hai tam giác $AIC$ và $AJD$ có cùng bán kính đường tròn ngoại tiếp.</div>
+</div>
+
+</div>
+
+<div class="day-block">
+<div class="day-title">📌 Ngày thi thứ hai</div>
+
+<div class="problem-item">
+<div class="problem-header">
+<div class="problem-id"><span>Câu 5</span><span class="badge-topic"> Tổ hợp – Trò chơi</span></div>
+<button class="btn-copy" onclick="copyText(this)">📋 Sao chép</button>
+</div>
+<div class="problem-content">Trên mặt phẳng tọa độ giả lập cho một trò chơi điện tử, Bảo Long và Châu Mai cùng điều khiển một chiếc xe. Ban đầu, xe ở gốc tọa độ và hướng về chiều dương của trục $Ox$. Xe có thể đi theo một trong bốn hướng: lên, xuống, trái, phải. Hai bạn chơi luân phiên thực hiện các lượt đi như sau:
+
+- Long cho xe đi thẳng theo hướng hiện tại với độ dài đường đi là số nguyên tùy ý từ $1$ đến $10$.
+- Mai không di chuyển mà quay xe một góc $90^\circ$ cùng chiều hoặc ngược chiều kim đồng hồ.
+
+Biết rằng Long đi trước và thực hiện tổng cộng $k$ lượt. Sau mỗi lượt của Long, hệ thống ghi nhận lại vị trí dừng xe. Nếu có một vị trí dừng nào trùng với vị trí được ghi nhận trước đó (kể cả gốc tọa độ) thì Mai thắng, nếu không thì Long thắng. Hãy xác định người có chiến thuật thắng nếu:
+
+<strong>1)</strong> $k=20$.
+
+<strong>2)</strong> $k=400$.</div>
+</div>
+
+<div class="problem-item">
+<div class="problem-header">
+<div class="problem-id"><span>Câu 6</span><span class="badge-topic"> Hình học</span></div>
+<button class="btn-copy" onclick="copyText(this)">📋 Sao chép</button>
+</div>
+<div class="problem-content">Cho tam giác $ABC$ nhọn, không cân, nội tiếp đường tròn $(O)$ và có tâm đường tròn nội tiếp $I$. Kẻ phân giác $BB',CC'$ của tam giác $ABC$, trong đó $B',C'\in(O)$. Gọi $d$ là đường thẳng qua $I$, vuông góc $OI$. Giả sử $d$ cắt các đoạn thẳng $AB,BC,B'C'$ lần lượt ở $E,D,H$ và cắt tia đối của tia $AC$ ở $F$. Trên $(O)$ lấy điểm $L$ sao cho $AL$ song song với $d$. Gọi $A'$ là trung điểm của cung lớn $BC$ của $(O)$ và $A'I$ cắt lại $(O)$ tại $K$.
+
+<strong>1)</strong> Chứng minh rằng
+\[
+AH=HI=ID=DL=DK.
+\]
+
+<strong>2)</strong> Gọi $J$ là tâm của đường tròn ngoại tiếp tam giác $AEF$. Lấy điểm $G$ trên $(O)$ sao cho $HG$ vuông góc $IJ$ và lấy các điểm $R,S$ trên $(O)$ sao cho
+\[
+GI=GR=GS.
+\]
+Giả sử rằng $A,G$ nằm khác phía nhau so với đường thẳng $RS$. Chứng minh rằng $AG,RS$ cắt nhau tại một điểm trên $(J)$.</div>
+</div>
+
+<div class="problem-item">
+<div class="problem-header">
+<div class="problem-id"><span>Câu 7</span><span class="badge-topic"> Đa thức – Số học</span></div>
+<button class="btn-copy" onclick="copyText(this)">📋 Sao chép</button>
+</div>
+<div class="problem-content">Gọi một đa thức hệ số thực là <em>monic</em> nếu nó có hệ số của bậc cao nhất bằng $1$.
+
+<strong>1)</strong> Xây dựng đa thức $f(x)$ có hệ số nguyên, bậc $29$, monic,
+\[
+2026\mid f(0)
+\]
+sao cho: với mọi $n\in\mathbb Z^+$ mà
+\[
+3\mid f(n)
+\]
+thì đều có
+\[
+3^{42}\mid f(n).
+\]
+
+<strong>2)</strong> Cho số nguyên dương $k&gt;1$ và số nguyên tố $p$ lẻ. Chứng minh rằng
+\[
+k+v_p(k!)
+\]
+là giá trị lớn nhất của số nguyên dương $m$ sao cho tồn tại đa thức $f(x)$ hệ số nguyên bậc $k$, monic,
+\[
+p\mid f(0)
+\]
+và thỏa mãn: với mọi $n\in\mathbb Z^+$ mà
+\[
+p\mid f(n)
+\]
+thì đều có
+\[
+p^m\mid f(n).
+\]</div>
+</div>
+
 </div>
 
 </div>

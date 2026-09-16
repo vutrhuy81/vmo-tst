@@ -473,7 +473,7 @@
     }
 
     // Xử lý Đăng nhập bằng Mật khẩu nội bộ
-    loginForm.addEventListener('submit', (e) => {
+    loginForm.addEventListener('submit', async (e) => {
       e.preventDefault();
       const u = usernameInput.value.trim();
       const p = passwordInput.value.trim();
@@ -487,8 +487,8 @@
       btnLogin.disabled = true;
       btnLogin.innerHTML = '<span>Đang xác thực...</span>';
 
-      setTimeout(() => {
-        const res = VMOAuth.login(u, p, remember);
+      try {
+        const res = await VMOAuth.login(u, p, remember);
         if (res.success) {
           showAlert('✅ Đăng nhập thành công! Đang chuyển hướng vào trang chính...', true);
           setTimeout(() => {
@@ -500,7 +500,11 @@
           btnLogin.innerHTML = '<span>Đăng nhập hệ thống</span><span>→</span>';
           passwordInput.focus();
         }
-      }, 300);
+      } catch (error) {
+        showAlert('Không thể kết nối máy chủ xác thực!');
+        btnLogin.disabled = false;
+        btnLogin.innerHTML = '<span>Đăng nhập hệ thống</span><span>→</span>';
+      }
     });
   </script>
   <script src="i18n.js?v=20260914_3"></script>
