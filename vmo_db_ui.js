@@ -676,6 +676,28 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
       .replace(/'/g, '&#39;');
   }
 
+  function sanitizeCatalogHtml(value) {
+    const template = document.createElement('template');
+    template.innerHTML = String(value || '');
+    template.content.querySelectorAll('script,style,iframe,object,embed,link,meta').forEach(node => node.remove());
+    template.content.querySelectorAll('*').forEach(node => {
+      Array.from(node.attributes).forEach(attribute => {
+        const name = attribute.name.toLowerCase();
+        const val = attribute.value.trim().toLowerCase();
+        if (name.startsWith('on') || ((name === 'href' || name === 'src') && val.startsWith('javascript:'))) {
+          node.removeAttribute(attribute.name);
+        }
+      });
+    });
+    return template.innerHTML;
+  }
+
+  function htmlToPlainText(value) {
+    const template = document.createElement('template');
+    template.innerHTML = sanitizeCatalogHtml(value);
+    return (template.content.textContent || '').trim();
+  }
+
   // Chỉ chuẩn hóa nội dung bên trong một token Math đã có delimiter.
   // Không tự bọc thêm dấu $ để tránh tạo $...$ lồng nhau gây Math input error.
   function normalizeDelimitedMath(token) {
@@ -1301,6 +1323,25 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
     window.currentUploadedImage = null;
     window.currentEvaluationResult = null;
 
+    // Nạp riêng câu hỏi đang mở để dùng nội dung MongoDB mới nhất mà không
+    // phải tải toàn bộ phần đề bài và lời giải của catalog ở lần mở trang.
+    window.VMODataService?.getCatalogProblems?.({ contentKey: identity.problemKey })
+      .then(items => {
+        const latest = items?.[0];
+        if (!latest || window.currentSubmissionData?.problemKey !== identity.problemKey) return;
+        window.currentSubmissionData.problemId = latest.id || latest._id || problemId;
+        window.currentSubmissionData.problemTitle = latest.title || problemTitle;
+        window.currentSubmissionData.problemContent = htmlToPlainText(latest.content || problemContentForAi || problemTitle);
+        window.currentSubmissionData.topic = latest.topic || topic;
+        window.currentSubmissionData.examTitle = latest.setTitle || examTitle;
+        const currentTitle = document.getElementById('subProblemName');
+        if (currentTitle) currentTitle.textContent = latest.title || problemTitle;
+        const currentStatement = document.getElementById('subProblemStatementBox');
+        if (currentStatement && latest.content) currentStatement.innerHTML = sanitizeCatalogHtml(latest.content);
+        if (window.MathJax?.typesetPromise && currentStatement) window.MathJax.typesetPromise([currentStatement]).catch(() => {});
+      })
+      .catch(err => console.warn('Không nạp được nội dung mới nhất từ catalog:', err?.message || err));
+
     const titleEl = document.getElementById('subProblemName');
     if (titleEl) titleEl.textContent = problemTitle;
 
@@ -1886,6 +1927,7 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
       <div id="hubCatalogList" style="max-height:420px;overflow:auto;"><em>Đang tải catalog...</em></div>`;
     body.appendChild(panel);
     ensureCatalogEditModal();
+    ensureCatalogContentModal();
     panel.querySelector('#hubCatalogSearch').addEventListener('input', renderCatalogManagement);
     panel.querySelector('#hubCatalogGroup').addEventListener('change', renderCatalogManagement);
   }
@@ -1951,6 +1993,7 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
       <div style="display:flex;gap:5px;flex-wrap:wrap;justify-content:flex-end;">
         <button type="button" onclick="toggleCatalogStatus('problem','${id}','${problem.status === 'draft' ? 'published' : 'draft'}')" style="padding:4px 7px;border:1px solid #cbd5e1;border-radius:5px;background:white;cursor:pointer;">${problem.status === 'draft' ? '👁️ Hiện' : '🙈 Ẩn'}</button>
         <button type="button" onclick="editCatalogItem('problem','${id}')" style="padding:4px 7px;border:1px solid #bfdbfe;border-radius:5px;background:#eff6ff;color:#1d4ed8;cursor:pointer;">✏️ Sửa</button>
+        <button type="button" onclick="editCatalogContent('${id}')" style="padding:4px 7px;border:1px solid #c4b5fd;border-radius:5px;background:#f5f3ff;color:#6d28d9;cursor:pointer;">📝 Nội dung</button>
         <button type="button" onclick="toggleCatalogPermission('${id}','allowSubmission',${problem.allowSubmission === false})" style="padding:4px 7px;border:1px solid #cbd5e1;border-radius:5px;background:${problem.allowSubmission === false ? '#fff1f2' : '#f0fdf4'};cursor:pointer;">✍️ ${problem.allowSubmission === false ? 'Đang khóa' : 'Cho nộp'}</button>
         <button type="button" onclick="toggleCatalogPermission('${id}','allowAiEvaluation',${problem.allowAiEvaluation === false})" style="padding:4px 7px;border:1px solid #cbd5e1;border-radius:5px;background:${problem.allowAiEvaluation === false ? '#fff1f2' : '#eef2ff'};cursor:pointer;">🤖 ${problem.allowAiEvaluation === false ? 'Đang khóa' : 'Cho AI'}</button>
       </div>
@@ -2076,6 +2119,107 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
       showToast('Đã cập nhật metadata catalog.', true);
       await window.loadCatalogManagement();
     } catch (err) { showToast(err?.message || 'Không lưu được metadata', false); }
+  };
+
+  function ensureCatalogContentModal() {
+    if (document.getElementById('catalogContentModal')) return;
+    const modal = document.createElement('div');
+    modal.id = 'catalogContentModal';
+    modal.className = 'vmo-modal-overlay';
+    modal.style.zIndex = '10030';
+    modal.innerHTML = `
+      <div class="vmo-modal-container" style="max-width:900px;max-height:94vh;display:flex;flex-direction:column;">
+        <div class="vmo-modal-header" style="background:#4c1d95;color:white;">
+          <div class="vmo-modal-title" style="color:white;">📝 Nội dung câu hỏi và lịch sử phiên bản</div>
+          <button type="button" class="vmo-modal-close" onclick="closeCatalogContentModal()" style="color:white;">✕</button>
+        </div>
+        <div class="vmo-modal-body" style="overflow:auto;">
+          <form id="catalogContentForm" onsubmit="saveCatalogContent(event)">
+            <input id="catalogContentId" type="hidden"><input id="catalogContentVersion" type="hidden">
+            <div id="catalogContentKey" style="padding:8px 10px;margin-bottom:10px;background:#f1f5f9;border-radius:6px;font-family:monospace;font-size:.8rem;"></div>
+            <label style="display:block;font-weight:700;margin-bottom:4px;">Nội dung đề bài (HTML/LaTeX) *</label>
+            <textarea id="catalogProblemContent" required maxlength="50000" rows="9" style="width:100%;box-sizing:border-box;padding:9px;border:1px solid #cbd5e1;border-radius:6px;font-family:monospace;"></textarea>
+            <label style="display:block;font-weight:700;margin:10px 0 4px;">Lời giải tham khảo (HTML/LaTeX)</label>
+            <textarea id="catalogReferenceSolution" maxlength="100000" rows="9" style="width:100%;box-sizing:border-box;padding:9px;border:1px solid #cbd5e1;border-radius:6px;font-family:monospace;"></textarea>
+            <label style="display:block;font-weight:700;margin:10px 0 4px;">Ghi chú thay đổi</label>
+            <input id="catalogChangeNote" maxlength="500" placeholder="Ví dụ: Sửa lỗi dấu ở giả thiết" style="width:100%;box-sizing:border-box;padding:8px;border:1px solid #cbd5e1;border-radius:6px;">
+            <div style="display:flex;justify-content:flex-end;gap:8px;margin-top:12px;">
+              <button type="button" onclick="closeCatalogContentModal()" style="padding:7px 12px;border:1px solid #cbd5e1;border-radius:6px;background:white;">Đóng</button>
+              <button type="submit" style="padding:7px 14px;border:0;border-radius:6px;background:#6d28d9;color:white;font-weight:700;">Lưu phiên bản mới</button>
+            </div>
+          </form>
+          <hr style="margin:18px 0;border:0;border-top:1px solid #e2e8f0;">
+          <h4 style="margin:0 0 8px;">Lịch sử phiên bản</h4>
+          <div id="catalogRevisionList"><em>Chưa tải lịch sử.</em></div>
+        </div>
+      </div>`;
+    document.body.appendChild(modal);
+  }
+
+  window.editCatalogContent = async function(id) {
+    if (!requireAdminUiAction()) return;
+    const item = (window.catalogManagementData?.problems || []).find(entry => String(entry.id || entry._id) === String(id));
+    if (!item) return showToast('Không tìm thấy câu hỏi cần chỉnh sửa.', false);
+    ensureCatalogContentModal();
+    document.getElementById('catalogContentId').value = id;
+    document.getElementById('catalogContentVersion').value = Number(item.version) || 1;
+    document.getElementById('catalogContentKey').textContent = `Khóa: ${item.contentKey} · Phiên bản hiện tại: ${Number(item.version) || 1}`;
+    document.getElementById('catalogProblemContent').value = item.content || '';
+    document.getElementById('catalogReferenceSolution').value = item.referenceSolution || '';
+    document.getElementById('catalogChangeNote').value = '';
+    const modal = document.getElementById('catalogContentModal');
+    modal.classList.add('active');
+    modal.style.display = 'flex';
+    await loadCatalogRevisions(id);
+  };
+
+  window.closeCatalogContentModal = function() {
+    const modal = document.getElementById('catalogContentModal');
+    if (modal) { modal.classList.remove('active'); modal.style.display = 'none'; }
+  };
+
+  async function loadCatalogRevisions(problemId) {
+    const list = document.getElementById('catalogRevisionList');
+    if (!list) return;
+    list.innerHTML = '<em>Đang tải lịch sử phiên bản...</em>';
+    try {
+      const revisions = await window.VMODataService.getContentRevisions(problemId);
+      list.innerHTML = revisions.length ? revisions.map(revision => `
+        <div style="display:flex;justify-content:space-between;align-items:center;gap:10px;padding:8px;border:1px solid #e2e8f0;border-radius:6px;margin-bottom:6px;">
+          <div><strong>Phiên bản ${Number(revision.version) || 1}</strong> · ${escapeHtmlText(new Date(revision.createdAt).toLocaleString('vi-VN'))}<br><small>${escapeHtmlText(revision.changeNote || revision.action || '')} — ${escapeHtmlText(revision.createdBy || '')}</small></div>
+          <button type="button" onclick="restoreCatalogRevision('${revision.id || revision._id}')" style="padding:5px 9px;border:1px solid #f59e0b;border-radius:5px;background:#fffbeb;color:#92400e;cursor:pointer;">↩ Khôi phục</button>
+        </div>`).join('') : '<div style="color:#64748b;">Chưa có phiên bản cũ.</div>';
+    } catch (err) { list.innerHTML = `<div style="color:#b91c1c;">${escapeHtmlText(err?.message || 'Không tải được lịch sử')}</div>`; }
+  }
+
+  window.saveCatalogContent = async function(event) {
+    event.preventDefault();
+    if (!requireAdminUiAction()) return;
+    const id = document.getElementById('catalogContentId').value;
+    const content = document.getElementById('catalogProblemContent').value.trim();
+    const referenceSolution = document.getElementById('catalogReferenceSolution').value.trim();
+    const changeNote = document.getElementById('catalogChangeNote').value.trim();
+    const expectedVersion = Number(document.getElementById('catalogContentVersion').value) || 1;
+    if (!content) return showToast('Nội dung đề bài không được để trống.', false);
+    if (!window.confirm('Lưu phiên bản nội dung mới? Bản hiện tại sẽ được đưa vào lịch sử để có thể khôi phục.')) return;
+    try {
+      const result = await window.VMODataService.updateCatalogContent(id, { content, referenceSolution, changeNote, expectedVersion });
+      showToast(`Đã lưu phiên bản ${result?.version || expectedVersion + 1}.`, true);
+      await window.loadCatalogManagement();
+      await window.editCatalogContent(id);
+    } catch (err) { showToast(err?.message || 'Không lưu được nội dung', false); }
+  };
+
+  window.restoreCatalogRevision = async function(revisionId) {
+    if (!requireAdminUiAction()) return;
+    if (!window.confirm('Khôi phục phiên bản này? Nội dung hiện tại vẫn được sao lưu trước khi khôi phục.')) return;
+    try {
+      const id = document.getElementById('catalogContentId').value;
+      await window.VMODataService.restoreCatalogRevision(revisionId);
+      showToast('Đã khôi phục nội dung và tạo một phiên bản mới.', true);
+      await window.loadCatalogManagement();
+      await window.editCatalogContent(id);
+    } catch (err) { showToast(err?.message || 'Không khôi phục được phiên bản', false); }
   };
 
   function ensureSubmissionFilterUi(modal, isAdmin) {

@@ -230,6 +230,18 @@ export async function updateCatalogItem(itemType, id, changes = {}) {
   return normalize(await mutate('update_catalog_item', { itemType, id, ...changes }));
 }
 
+export async function getContentRevisions(problemId) {
+  return normalizeList(await request('content_revisions', { problemId }));
+}
+
+export async function updateCatalogContent(id, contentData = {}) {
+  return normalize(await mutate('update_catalog_content', { id, ...contentData }));
+}
+
+export async function restoreCatalogRevision(revisionId) {
+  return normalize(await mutate('restore_catalog_revision', { revisionId }));
+}
+
 export async function saveProblem(problemData) {
   return normalize(await mutate('save_problem', problemData));
 }
@@ -335,6 +347,9 @@ const VMODataService = Object.freeze({
   getCatalogRules,
   upsertContentCatalog,
   updateCatalogItem,
+  getContentRevisions,
+  updateCatalogContent,
+  restoreCatalogRevision,
   saveProblem,
   submitSolution,
   getSubmissionImage,
