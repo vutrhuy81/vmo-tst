@@ -1,0 +1,82 @@
+let client;
+const calls = new Map();
+
+function parseJson(text) {
+  const cleaned = String(text || '').trim().replace(/^```(?:json)?\s*/i, '').replace(/\s*```$/i, '');
+  const start = cleaned.indexOf('{');
+  const end = cleaned.lastIndexOf('}');
+  if (start < 0 || end <= start) return null;
+  try { return JSON.parse(cleaned.slice(start, end + 1)); } catch { return null; }
+}
+
+export function checkRateLimit(username, limit = 12, windowMs = 60_000) {
+  const key = String(username || 'anonymous');
+  const now = Date.now();
+  const recent = (calls.get(key) || []).filter(time => now - time < windowMs);
+  if (recent.length >= limit) return false;
+  recent.push(now);
+  calls.set(key, recent);
+  return true;
+}
+
+export function text(value, max = 50_000) {
+  return String(value ?? '').trim().slice(0, max);
+}
+
+export function parseBody(req) {
+  if (typeof req.body !== 'string') return req.body || {};
+  try { return JSON.parse(req.body); } catch { return null; }
+}
+
+export async function generateJson({ contents, schema, systemInstruction, temperature = 0.15 }) {
+  if (!process.env.GEMINI_API_KEY) {
+    const error = new Error('GEMINI_API_KEY chưa được cấu hình trên Vercel');
+    error.code = 'AI_NOT_CONFIGURED';
+    throw error;
+  }
+  if (!client) {
+    const { GoogleGenAI } = await import('@google/genai');
+    client = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY });
+  }
+
+  const models = ['gemini-2.5-flash', 'gemini-flash-latest'];
+  let lastError;
+  for (const model of models) {
+    try {
+      const response = await Promise.race([
+        client.models.generateContent({
+          model,
+          contents,
+          config: {
+            systemInstruction,
+            responseMimeType: 'application/json',
+            responseJsonSchema: schema,
+            temperature
+          }
+        }),
+        new Promise((_, reject) => setTimeout(() => reject(new Error('AI_TIMEOUT')), 25_000))
+      ]);
+      const data = parseJson(response?.text);
+      if (data) return { data, model };
+      lastError = new Error('AI trả về JSON không hợp lệ');
+    } catch (error) {
+      lastError = error;
+    }
+  }
+  throw lastError || new Error('Không nhận được phản hồi AI');
+}
+
+export function prepare(res) {
+  res.setHeader('Access-Control-Allow-Methods', 'POST,OPTIONS');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+  res.setHeader('Cache-Control', 'no-store');
+}
+
+export function handleAiError(res, error) {
+  console.error('[AI API]', error);
+  const notConfigured = error?.code === 'AI_NOT_CONFIGURED';
+  return res.status(notConfigured ? 503 : 502).json({
+    success: false,
+    error: notConfigured ? error.message : 'Dịch vụ AI tạm thời không phản hồi'
+  });
+}
