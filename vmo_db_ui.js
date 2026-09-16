@@ -931,6 +931,20 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
       showToast('Bài nộp này chưa có dữ liệu đánh giá chi tiết của AI.', false);
       return;
     }
+
+    // Hàm này được dùng ở cả lịch sử trong cửa sổ nộp bài và Database Hub.
+    // Khi gọi từ Database Hub, cần đóng Hub và chủ động mở submissionModal;
+    // nếu không, dữ liệu AI đã được nạp nhưng người dùng không nhìn thấy.
+    if (typeof window.closeDataHubModal === 'function') {
+      window.closeDataHubModal();
+    }
+    const submissionModal = document.getElementById('submissionModal');
+    if (submissionModal) {
+      submissionModal.classList.add('active');
+      submissionModal.style.display = 'flex';
+      document.body.style.overflow = 'hidden';
+    }
+
     displayEvaluationResult(sub.evaluation);
     if (typeof window.switchSubmissionTab === 'function') {
       window.switchSubmissionTab('eval');
