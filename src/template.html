@@ -23,6 +23,15 @@ window.MathJax = {
   startup: {
     typeset: true,
     ready: () => {
+      // Sao lưu mã nguồn chứa LaTeX nguyên bản trước khi MathJax biến đổi DOM
+      try {
+        document.querySelectorAll('.problem-content, .examplebox').forEach(el => {
+          if (!el.getAttribute('data-raw-math')) {
+            el.setAttribute('data-raw-math', el.innerHTML);
+          }
+        });
+      } catch (e) {}
+
       MathJax.startup.defaultReady();
       MathJax.startup.promise.then(() => {
         document.documentElement.classList.add('mathjax-ready');
@@ -36,23 +45,26 @@ window.MathJax = {
         onerror="this.onerror=null;this.src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.min.js';"></script>
 
 <!-- Stylesheets tách biệt, tối ưu bộ nhớ đệm -->
-<link rel="stylesheet" href="styles.css?v=20260914_4">
-<link rel="stylesheet" href="auth.css?v=20260914_4">
-<link rel="stylesheet" href="ai_guide.css?v=20260914_4">
-<link rel="stylesheet" href="i18n.css?v=20260914_4">
+<link rel="stylesheet" href="styles.css?v=20260915_2">
+<link rel="stylesheet" href="auth.css?v=20260915_2">
+<link rel="stylesheet" href="ai_guide.css?v=20260915_2">
+<link rel="stylesheet" href="i18n.css?v=20260915_2">
 
 <!-- Synchronous Auth Gate: Chặn truy cập nếu chưa đăng nhập -->
-<script src="auth.js?v=20260914_4"></script>
+<script src="auth.js?v=20260915_2"></script>
 <script>
 VMOAuth.requireAuth('login.html');
 </script>
 
-<script type="module" src="firebase-config.js?v=20260914_4"></script>
-<script src="account_mgmt.js?v=20260914_4" defer></script>
-<script src="tst-sources.js?v=20260914_4" defer></script>
-<script src="ai_guide_engine.js?v=20260914_4" defer></script>
-<script src="i18n.js?v=20260914_4" defer></script>
-<script src="app.js?v=20260914_4" defer></script>
+<script type="module" src="firebase-config.js?v=20260915_2"></script>
+<script type="module" src="vmo_data_service.js?v=20260915_2"></script>
+<script src="vmo_db_ui.js?v=20260915_2" defer></script>
+<script src="account_mgmt.js?v=20260915_2" defer></script>
+<script src="tst-sources.js?v=20260915_2" defer></script>
+<script src="history-sources.js?v=20260915_2" defer></script>
+<script src="ai_guide_engine.js?v=20260915_2" defer></script>
+<script src="i18n.js?v=20260915_2" defer></script>
+<script src="app.js?v=20260915_2" defer></script>
 </head>
 <body class="tex2jax_process">
 <a href="#main-content" class="skip-link">Bỏ qua đến nội dung chính</a>
@@ -62,39 +74,66 @@ VMOAuth.requireAuth('login.html');
   <p>Người biên soạn - Trần Hoàng Kiên.</p>
   <p>Trường THPT - Phan Châu Trình - Tp Đà Nẵng.</p>
   <div class="hero-stats">
-    <div class="stat-chip"><span class="num">13</span><span class="label">Chương tài liệu</span></div>
+    <div class="stat-chip"><span class="num">25</span><span class="label">Bộ đề thi các Tỉnh/Tp</span></div>
+    <div class="stat-chip"><span class="num">15</span><span class="label">Đề ĐN–QN</span></div>
+    <div class="stat-chip"><span class="num">09</span><span class="label">Chương tài liệu</span></div>
     <div class="stat-chip"><span class="num">39</span><span class="label">Mục lý thuyết</span></div>
     <div class="stat-chip"><span class="num">78</span><span class="label">Ví dụ có lời giải</span></div>
-    <div class="stat-chip"><span class="num">2 × 2</span><span class="label">Đề thi thử / ngày</span></div>
-    <div class="stat-chip"><span class="num">12</span><span class="label">Đề ĐN–QN lưu trữ</span></div>
+    <div class="stat-chip"><span class="num">2 × 2</span><span class="label">Đề thi thử / ngày</span></div>    
   </div>
 </header>
 <div class="nav-tabs-wrapper">
-  <div class="nav-tabs">
-    <button class="tab-btn active" id="tab-btn-danang" type="button" onclick="switchTab('tab-danang',this)">📚 Tài liệu chuyên đề VMO</button>
-    <button class="tab-btn" id="tab-btn-mock" type="button" onclick="switchTab('tab-mock',this)">🎯 Bộ đề thi thử VMO</button>
-    <button class="tab-btn" id="tab-btn-tst" type="button" onclick="switchTab('tab-tst',this)">🏛️ Đề TST 2026–2027</button>
-    <button class="tab-btn" id="tab-btn-history" type="button" onclick="switchTab('tab-history',this)">🗂️ Đề Đà Nẵng–Quảng Nam</button>
-    <span class="tab-spacer"></span>
-    <div class="user-auth-bar" id="userAuthBar">
-      <div class="user-info-chip" title="Phiên bảo mật: Tự động đăng xuất sau 5 phút không hoạt động">
-        <span class="user-idle-dot" title="Trạng thái: Đang hoạt động (Tự động bảo vệ sau 5 phút)"></span>
-        <span id="userAvatarContainer"><span>👤</span></span>
-        <span class="user-name" id="currentUserName">admin</span>
-        <span class="user-role-badge role-admin" id="currentUserRole">Admin</span>
+  <!-- TẦNG 1: THANH ĐIỀU HÀNH & TIỆN ÍCH HỆ THỐNG (Top Utility & Account Bar) -->
+  <div class="app-topbar">
+    <div class="app-topbar-inner">
+      <div class="app-topbar-brand">
+        <span class="brand-flag">🇻🇳</span>
+        <span class="brand-title">VMO ĐÀ NẴNG</span>
+        <span class="brand-tag">2026–2027</span>
       </div>
-      <button id="btnOpenUserMgmt" class="btn-auth-action btn-manage" type="button" title="Quản lý tài khoản">
-        ⚙️ Quản lý tài khoản
-      </button>
-      <button id="btnLogout" class="btn-auth-action btn-logout" type="button" title="Đăng xuất khỏi hệ thống" onclick="VMOAuth.logout('user_action')">
-        🚪 Đăng xuất
-      </button>
+
+      <div class="app-topbar-actions">
+        <!-- Cụm Người dùng & Quản trị hệ thống -->
+        <div class="user-auth-bar" id="userAuthBar">
+          <div class="user-info-chip" title="Phiên bảo mật: Tự động đăng xuất sau 5 phút không hoạt động">
+            <span class="user-idle-dot" title="Trạng thái: Đang hoạt động (Tự động bảo vệ sau 5 phút)"></span>
+            <span id="userAvatarContainer"><span>👤</span></span>
+            <span class="user-name" id="currentUserName">admin</span>
+            <span class="user-role-badge role-admin" id="currentUserRole">Admin</span>
+          </div>
+          <button id="btnOpenDataMgmt" class="btn-auth-action btn-database-hub" type="button" onclick="window.openDataHubModal ? window.openDataHubModal() : null" title="Quản lý kho dữ liệu Firestore" style="background:#0284c7; color:#ffffff; font-weight:600; display:inline-flex; align-items:center; gap:5px; cursor:pointer;">
+            🗄️ Database Hub
+          </button>
+          <button id="btnOpenUserMgmt" class="btn-auth-action btn-manage" type="button" title="Quản lý tài khoản">
+            ⚙️ Quản lý tài khoản
+          </button>
+          <button id="btnLogout" class="btn-auth-action btn-logout" type="button" title="Đăng xuất khỏi hệ thống" onclick="VMOAuth.logout('user_action')">
+            🚪 Đăng xuất
+          </button>
+        </div>
+
+        <div class="topbar-divider"></div>
+
+        <!-- Bộ chuyển đổi ngôn ngữ -->
+        <div class="lang-switch-wrap" id="mainLangSwitcher" role="group" aria-label="Ngôn ngữ / Language">
+          <button type="button" class="lang-switch-btn active" data-lang="vi" onclick="setLanguage('vi')" title="Chuyển sang Tiếng Việt">🇻🇳 VI</button>
+          <button type="button" class="lang-switch-btn" data-lang="en" onclick="setLanguage('en')" title="Switch to English">🇬🇧 EN</button>
+        </div>
+
+        <!-- Chuyển đổi Giao diện Sáng/Tối -->
+        <button id="themeToggle" class="theme-btn" type="button" aria-label="Đổi giao diện sáng tối" title="Chuyển đổi giao diện Sáng / Tối">🌙</button>
+      </div>
     </div>
-    <div class="lang-switch-wrap" id="mainLangSwitcher" role="group" aria-label="Ngôn ngữ / Language">
-      <button type="button" class="lang-switch-btn active" data-lang="vi" onclick="setLanguage('vi')" title="Chuyển sang Tiếng Việt">🇻🇳 VI</button>
-      <button type="button" class="lang-switch-btn" data-lang="en" onclick="setLanguage('en')" title="Switch to English">🇬🇧 EN</button>
-    </div>
-    <button id="themeToggle" class="theme-btn" type="button" aria-label="Đổi giao diện sáng tối">🌙</button>
+  </div>
+
+  <!-- TẦNG 2: THANH TAB ĐIỀU HƯỚNG NỘI DUNG TOÁN HỌC (Academic Navigation Tabs) -->
+  <div class="nav-tabs-container">
+    <nav class="nav-tabs" aria-label="Phân loại tài liệu và đề thi">
+      <button class="tab-btn active" id="tab-btn-danang" type="button" onclick="switchTab('tab-danang',this)">📚 Tài liệu chuyên đề VMO</button>
+      <button class="tab-btn" id="tab-btn-mock" type="button" onclick="switchTab('tab-mock',this)">🎯 Bộ đề thi thử VMO</button>
+      <button class="tab-btn" id="tab-btn-tst" type="button" onclick="switchTab('tab-tst',this)">🏛️ Đề TST 2026–2027</button>
+      <button class="tab-btn" id="tab-btn-history" type="button" onclick="switchTab('tab-history',this)">🗂️ Đề Đà Nẵng–Quảng Nam</button>
+    </nav>
   </div>
 </div>
 <div class="controls-sticky">
@@ -137,5 +176,6 @@ VMOAuth.requireAuth('login.html');
 <button id="backToTop" class="back-to-top" type="button" aria-label="Về đầu trang">↑</button>
 
 <!-- INJECT:ACCOUNT_MODAL -->
+<!-- INJECT:DATA_HUB_MODAL -->
 </body>
 </html>

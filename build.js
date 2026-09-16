@@ -25,6 +25,10 @@ export function build() {
 
   let html = fs.readFileSync(templatePath, 'utf8');
 
+  // Tạo mã version timestamp động mới cho mỗi lần build để chống triệt để trình duyệt cache script cũ
+  const buildVersion = Date.now();
+  html = html.replace(/\?v=[a-zA-Z0-9_-]+/g, `?v=${buildVersion}`);
+
   // Bản đồ các khối module thành phần
   const injections = [
     { tag: '<!-- INJECT:SIDEBAR_DANANG -->', file: 'sidebars/sidebar-danang.html' },
@@ -35,7 +39,8 @@ export function build() {
     { tag: '<!-- INJECT:TAB_MOCK -->', file: 'content/tab-mock.html' },
     { tag: '<!-- INJECT:TAB_TST -->', file: 'content/tab-tst.html' },
     { tag: '<!-- INJECT:TAB_HISTORY -->', file: 'content/tab-history.html' },
-    { tag: '<!-- INJECT:ACCOUNT_MODAL -->', file: 'modals/account-modal.html' }
+    { tag: '<!-- INJECT:ACCOUNT_MODAL -->', file: 'modals/account-modal.html' },
+    { tag: '<!-- INJECT:DATA_HUB_MODAL -->', file: 'modals/data-hub-modal.html' }
   ];
 
   for (const item of injections) {

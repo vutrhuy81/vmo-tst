@@ -234,6 +234,19 @@ const VMOAuth = (() => {
 
     users.push(newUser);
     saveUsers(users);
+
+    // Đồng bộ hồ sơ tài khoản lên Firestore nếu có
+    if (window.VMODataService && window.VMODataService.syncUserProfile) {
+      window.VMODataService.syncUserProfile({
+        uid: 'user_' + uClean.toLowerCase(),
+        email: uClean.includes('@') ? uClean : `${uClean}@vmo.danang.edu.vn`,
+        displayName: nClean || uClean,
+        username: uClean,
+        role: role === 'admin' ? 'admin' : 'student',
+        authProvider: 'password'
+      }).catch(err => console.warn('Lỗi đồng bộ user lên Firestore:', err));
+    }
+
     return { success: true, message: `Tạo tài khoản "${uClean}" thành công!`, user: newUser };
   }
 

@@ -302,7 +302,23 @@
     ['Nguồn gốc', 'Origin'],
     ['Tài liệu lưu hành nội bộ', 'Internal training material'],
     ['Đội tuyển Học sinh Giỏi', 'National Olympiad Team'],
-    ['Bản quyền nội dung thuộc về Nhóm chuyên môn', 'Content copyright by Mathematics Academic Group']
+    ['Bản quyền nội dung thuộc về Nhóm chuyên môn', 'Content copyright by Mathematics Academic Group'],
+
+    // Nhãn chủ đề và tag đề thi
+    ['Dãy số – Giới hạn', 'Sequences & Limits'],
+    ['Dãy số & Giới hạn', 'Sequences & Limits'],
+    ['Dãy số', 'Sequences'],
+    ['Hệ phương trình', 'Systems of Equations'],
+    ['Phương trình', 'Equations'],
+    ['Hình học & Tổ hợp', 'Geometry & Combinatorics'],
+    ['Hình học', 'Geometry'],
+    ['Số học', 'Number Theory'],
+    ['Bất đẳng thức', 'Inequalities'],
+    ['Xem ảnh đề gốc', 'View original exam image'],
+    ['Xem bài đăng & lời giải gốc', 'View original post & solutions'],
+    ['Đề lưu trữ · 2 ngày', 'Archived Exam · 2 Days'],
+    ['Đề lưu trữ · 1 ngày', 'Archived Exam · 1 Day'],
+    ['Đề chính thức', 'Official Exam']
   ];
 
   // Helper hàm lưu trữ văn bản gốc tiếng Việt
@@ -492,11 +508,22 @@
 
     // 8. Các nút trên toàn bộ trang
     document.querySelectorAll('.toggle-btn').forEach(btn => {
-      const isOpen = btn.textContent.includes('Ẩn') || btn.textContent.includes('Hide');
-      btn.textContent = isOpen ? UI_TRANSLATIONS.en.btnHideSolution : UI_TRANSLATIONS.en.btnViewSolution;
-      if (!isEn) {
-        btn.textContent = isOpen ? '🙈 Ẩn lời giải & Thang điểm' : '👁️ Xem lời giải & Thang điểm';
+      const isSourceBox = !!btn.closest('.source-solution-box');
+      const isExpanded = btn.getAttribute('aria-expanded') === 'true' || btn.textContent.includes('Ẩn') || btn.textContent.includes('Hide');
+      if (isSourceBox) {
+        btn.textContent = isExpanded
+          ? (isEn ? '🙈 Hide Reference Solutions' : '🙈 Ẩn lời giải tham khảo')
+          : (isEn ? '🔗 Reference Solutions' : '🔗 Lời giải tham khảo');
+      } else {
+        btn.textContent = isExpanded
+          ? (isEn ? UI_TRANSLATIONS.en.btnHideSolution : '🙈 Ẩn lời giải & Thang điểm')
+          : (isEn ? UI_TRANSLATIONS.en.btnViewSolution : '👁️ Xem lời giải & Thang điểm');
       }
+    });
+
+    document.querySelectorAll('.source-solution-box strong').forEach(el => {
+      if (el._origViText === undefined) el._origViText = el.textContent;
+      el.textContent = isEn ? 'Solution Sources:' : el._origViText;
     });
 
     document.querySelectorAll('.solution-toggle').forEach(btn => {
@@ -505,7 +532,8 @@
     });
 
     document.querySelectorAll('.btn-copy').forEach(btn => {
-      setNodeText(btn, '📋 Sao chép đề', UI_TRANSLATIONS.en.btnCopyProblem, isEn);
+      if (btn._origViText === undefined) btn._origViText = btn.textContent.trim();
+      btn.textContent = isEn ? UI_TRANSLATIONS.en.btnCopyProblem : btn._origViText;
     });
 
     document.querySelectorAll('.btn-ai-guide').forEach(btn => {
@@ -515,22 +543,37 @@
         : (isOpened ? `<span class="guide-sparkle">🙈</span> Ẩn hướng dẫn` : `<span class="guide-sparkle">✨</span> AI Hướng dẫn giải`);
     });
 
-    // 9. Day titles & Problem IDs
+    // 9. Day titles & Problem IDs (Hoàn nguyên 2 chiều chuẩn xác giữa VI và EN)
     document.querySelectorAll('.day-title').forEach(el => {
-      const text = el.textContent.trim();
-      if (text.includes('Ngày thứ nhất') || text.includes('Ngày 1')) {
-        setNodeText(el, text, text.replace('Ngày thứ nhất', 'Day One').replace('Ngày 1', 'Day 1'), isEn);
-      } else if (text.includes('Ngày thứ hai') || text.includes('Ngày 2')) {
-        setNodeText(el, text, text.replace('Ngày thứ hai', 'Day Two').replace('Ngày 2', 'Day 2'), isEn);
+      if (el._origViText === undefined) {
+        el._origViText = el.textContent;
+      }
+      if (isEn) {
+        let text = el._origViText;
+        text = text.replace('Ngày thứ nhất', 'Day One')
+                   .replace('Ngày 1', 'Day 1')
+                   .replace('Ngày thi thứ nhất', 'First Competition Day')
+                   .replace('Ngày thứ hai', 'Day Two')
+                   .replace('Ngày 2', 'Day 2')
+                   .replace('Ngày thi thứ hai', 'Second Competition Day');
+        el.textContent = text;
+      } else {
+        el.textContent = el._origViText;
       }
     });
 
-    // Problem ID label replacement (e.g. Câu 1: -> Problem 1:)
+    // Problem ID label replacement (e.g. Câu 1 <-> Problem 1, Bài 1 <-> Problem 1)
     document.querySelectorAll('.problem-id span:first-child').forEach(el => {
-      const text = el.textContent.trim();
-      if (text.startsWith('Câu') || text.startsWith('Bài')) {
-        const enId = text.replace(/^(Câu|Bài)\s*(\d+)/i, 'Problem $2');
-        setNodeText(el, text, enId, isEn);
+      if (el._origViText === undefined) {
+        el._origViText = el.textContent;
+      }
+      if (isEn) {
+        const text = el._origViText;
+        if (/^(Câu|Bài)\s*(\d+)/i.test(text.trim())) {
+          el.textContent = text.replace(/^(Câu|Bài)\s*(\d+)/i, 'Problem $2');
+        }
+      } else {
+        el.textContent = el._origViText;
       }
     });
 
@@ -590,6 +633,8 @@
       '.box-heading',
       '.exam-title',
       '.tag',
+      '.badge-topic',
+      '.archive-link',
       'h3.unnumbered',
       '.section-header-box h2'
     ];

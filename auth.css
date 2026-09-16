@@ -83,6 +83,16 @@ body.dark .user-role-badge.role-user {
   white-space: nowrap;
 }
 
+.btn-database-hub {
+  background: #0284c7;
+  color: #ffffff;
+}
+
+.btn-database-hub:hover {
+  background: #0369a1;
+  transform: translateY(-1px);
+}
+
 .btn-manage {
   background: #1e3a8a;
   color: #ffffff;
@@ -157,6 +167,18 @@ body.dark .btn-logout:hover {
   display: flex;
   flex-direction: column;
   animation: modalScaleUp 0.25s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+#submissionModal .vmo-modal-container {
+  overflow: hidden !important;
+  max-height: 92vh;
+}
+
+#submissionModal .vmo-modal-body {
+  overflow-y: auto !important;
+  flex: 1 1 auto;
+  min-height: 0;
+  scroll-behavior: smooth;
 }
 
 body.dark .vmo-modal-container {

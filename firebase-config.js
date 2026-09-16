@@ -34,7 +34,7 @@ const firebaseConfig = {
 // Khởi tạo Firebase App, Auth & Firestore
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
-const db = getFirestore(app);
+const db = getFirestore(app, firebaseConfig.firestoreDatabaseId);
 
 // Cấu hình duy trì phiên đăng nhập cục bộ
 setPersistence(auth, browserLocalPersistence).catch(err => {

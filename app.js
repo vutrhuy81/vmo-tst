@@ -59,8 +59,11 @@
 
     window.scrollTo({ top: 0, behavior: 'smooth' });
 
-    // Đồng bộ lại các nút AI Hướng dẫn giải nếu cần
+    // Đồng bộ lại các nút AI Hướng dẫn giải & Nút Nộp bài Database nếu cần
     window.reinitAIGuide?.();
+    window.reinitDatabaseUI?.();
+    if (isT) window.injectTstSources?.();
+    if (isH) window.injectHistorySources?.();
 
     // Render công thức toán nếu tab vừa mở chưa được biên dịch
     if (isM && window.MathJax && window.MathJax.typesetPromise) {
@@ -74,11 +77,20 @@
     if (!content) return;
     const open = getComputedStyle(content).display !== 'none';
     content.style.display = open ? 'none' : 'block';
+    btn.setAttribute('aria-expanded', open ? 'false' : 'true');
 
     const isEn = (window.currentLang === 'en');
-    btn.textContent = open
-      ? (isEn ? '👁️ View Solution & Rubric' : '👁️ Xem lời giải & Thang điểm')
-      : (isEn ? '🙈 Hide Solution & Rubric' : '🙈 Ẩn lời giải & Thang điểm');
+    const isSourceBox = !!btn.closest('.source-solution-box');
+
+    if (isSourceBox) {
+      btn.textContent = open
+        ? (isEn ? '🔗 Reference Solutions' : '🔗 Lời giải tham khảo')
+        : (isEn ? '🙈 Hide Reference Solutions' : '🙈 Ẩn lời giải tham khảo');
+    } else {
+      btn.textContent = open
+        ? (isEn ? '👁️ View Solution & Rubric' : '👁️ Xem lời giải & Thang điểm')
+        : (isEn ? '🙈 Hide Solution & Rubric' : '🙈 Ẩn lời giải & Thang điểm');
+    }
 
     if (!open) typeset(content);
   };
@@ -221,6 +233,7 @@
   // 7. Gắn nguồn tham khảo TST từ tstSources
   function injectTstSources() {
     const sources = window.tstSources || {};
+    const isEn = (window.currentLang === 'en');
     Object.entries(sources).forEach(([cardId, cfg]) => {
       const card = qs('#' + cardId);
       if (!card) return;
@@ -235,7 +248,7 @@
         const button = document.createElement('button');
         button.className = 'toggle-btn';
         button.type = 'button';
-        button.textContent = '🔗 Lời giải tham khảo';
+        button.textContent = isEn ? '🔗 Reference Solutions' : '🔗 Lời giải tham khảo';
         button.setAttribute('aria-expanded', 'false');
         button.onclick = () => toggleSolution(button);
 
@@ -243,7 +256,7 @@
         content.className = 'solution-content';
 
         const heading = document.createElement('strong');
-        heading.textContent = 'Nguồn lời giải:';
+        heading.textContent = isEn ? 'Solution Sources:' : 'Nguồn lời giải:';
         content.appendChild(heading);
 
         const list = document.createElement('ul');
@@ -265,8 +278,66 @@
     });
   }
 
-  // Chạy gắn nguồn tham khảo TST
+  // 8. Gắn nguồn tham khảo History từ historySources
+  function injectHistorySources() {
+    const sources = window.historySources || {};
+    const isEn = (window.currentLang === 'en');
+    Object.entries(sources).forEach(([cardId, cfg]) => {
+      const card = qs('#' + cardId);
+      if (!card) return;
+      qsa('.problem-item', card).forEach((problem, i) => {
+        if (problem.querySelector('.source-solution-box')) return; // Tránh trùng lặp
+        const sList = cfg.byIndex?.[i] || cfg.all;
+        if (!sList?.length) return;
+
+        const box = document.createElement('div');
+        box.className = 'solution-box source-solution-box';
+
+        const button = document.createElement('button');
+        button.className = 'toggle-btn';
+        button.type = 'button';
+        button.textContent = isEn ? '🔗 Reference Solutions' : '🔗 Lời giải tham khảo';
+        button.setAttribute('aria-expanded', 'false');
+        button.onclick = () => toggleSolution(button);
+
+        const content = document.createElement('div');
+        content.className = 'solution-content';
+
+        const heading = document.createElement('strong');
+        heading.textContent = isEn ? 'Solution Sources:' : 'Nguồn lời giải:';
+        content.appendChild(heading);
+
+        const list = document.createElement('ul');
+        sList.forEach(([label, url]) => {
+          const li = document.createElement('li');
+          const a = document.createElement('a');
+          a.href = url;
+          a.target = '_blank';
+          a.rel = 'noopener noreferrer';
+          a.textContent = label;
+          li.appendChild(a);
+          list.appendChild(li);
+        });
+
+        content.appendChild(list);
+        box.append(button, content);
+        problem.appendChild(box);
+      });
+    });
+  }
+
+  window.injectTstSources = injectTstSources;
+  window.injectHistorySources = injectHistorySources;
+
+  // Chạy gắn nguồn tham khảo TST & History
   injectTstSources();
+  injectHistorySources();
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', () => {
+      injectTstSources();
+      injectHistorySources();
+    });
+  }
 
   // 8. Chế độ Giao diện Sáng / Tối (Theme Mode)
   const theme = qs('#themeToggle');

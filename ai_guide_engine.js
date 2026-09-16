@@ -323,6 +323,9 @@
             <span style="font-size: 0.8rem; font-weight: 500; color: #64748b; margin-left: 4px;">• ${topic || guideData.branch || defaultTopic}</span>
           </div>
           <div class="ai-guide-actions">
+            <button type="button" class="btn-guide-action" id="btn-save-ai-${problemId}" onclick="saveAIGuideToFirestore('${problemId}', '${(topic || guideData.branch || defaultTopic).replace(/'/g, "\\'")}')" title="Lưu hướng dẫn giải này vào Database Firestore" style="color: #0284c7; font-weight: 600;">
+              🚀 Lưu bài giải lên Firestore
+            </button>
             <button type="button" class="btn-guide-action" onclick="copyAIGuideText('${problemId}')" title="${copyTitle}">
               ${copyBtn}
             </button>
@@ -512,6 +515,56 @@
       btn.classList.remove('active');
       const isEn = (window.currentLang === 'en');
       btn.innerHTML = isEn ? '<span class="guide-sparkle">✨</span> AI Solution Guide' : '<span class="guide-sparkle">✨</span> AI Hướng dẫn giải';
+    }
+  };
+
+  // Lưu hướng dẫn giải của AI / Lời giải vào Firestore Database
+  window.saveAIGuideToFirestore = async function(problemId, topic) {
+    const btn = document.getElementById(`btn-save-ai-${problemId}`);
+    const body = document.getElementById(`ai-body-${problemId}`);
+    if (!body) return;
+
+    const solutionText = body.innerText.trim();
+    if (!solutionText) {
+      alert('Không tìm thấy nội dung lời giải để lưu!');
+      return;
+    }
+
+    if (btn) {
+      btn.disabled = true;
+      btn.innerHTML = '⏳ Đang lưu Firestore...';
+    }
+
+    try {
+      if (window.VMODataService && window.VMODataService.submitSolution) {
+        await window.VMODataService.submitSolution(problemId, `AI Hướng dẫn - ${topic || 'Bài toán VMO'}`, solutionText);
+        if (btn) {
+          btn.innerHTML = '✅ Đã lưu vào Firestore!';
+          btn.style.color = '#16a34a';
+        }
+        if (typeof window.showVMOToast === 'function') {
+          window.showVMOToast('Đã lưu bài giải thành công lên cơ sở dữ liệu Firestore!', true);
+        } else {
+          alert('Đã lưu bài giải thành công lên cơ sở dữ liệu Firestore!');
+        }
+      } else {
+        throw new Error('Dịch vụ VMODataService chưa sẵn sàng.');
+      }
+    } catch (err) {
+      console.error('Lỗi khi lưu bài giải AI vào Firestore:', err);
+      if (btn) {
+        btn.innerHTML = '⚠️ Lỗi lưu Firestore';
+        btn.style.color = '#dc2626';
+      }
+      alert('Lỗi lưu bài giải: ' + (err.message || 'Không thể ghi vào database'));
+    } finally {
+      if (btn) {
+        setTimeout(() => {
+          btn.disabled = false;
+          btn.innerHTML = '🚀 Lưu bài giải lên Firestore';
+          btn.style.color = '#0284c7';
+        }, 3500);
+      }
     }
   };
 
