@@ -191,6 +191,25 @@ export async function getProblemsByExam(examId) {
   return normalizeList(await request('problems', { examId }));
 }
 
+export async function getContentSets(group = null) {
+  return normalizeList(await request('content_sets', { group }));
+}
+
+export async function getCatalogProblems(filters = {}) {
+  return normalizeList(await request('problems', {
+    setId: filters.setId,
+    sourceGroup: filters.sourceGroup,
+    contentKey: filters.contentKey
+  }));
+}
+
+export async function upsertContentCatalog(catalog) {
+  return mutate('upsert_content_catalog', {
+    sets: Array.isArray(catalog?.sets) ? catalog.sets : [],
+    problems: Array.isArray(catalog?.problems) ? catalog.problems : []
+  });
+}
+
 export async function saveProblem(problemData) {
   return normalize(await mutate('save_problem', problemData));
 }
@@ -200,7 +219,8 @@ export async function submitSolution(
   problemTitle,
   solutionContent,
   evaluation = null,
-  solutionImage = ''
+  solutionImage = '',
+  problemContext = {}
 ) {
   const cleanProblemId = String(problemId ?? '').trim();
   const cleanSolution = String(solutionContent ?? '').trim();
@@ -216,6 +236,13 @@ export async function submitSolution(
 
   return normalize(await mutate('submit_solution', {
     problemId: cleanProblemId,
+    problemKey: String(problemContext?.problemKey ?? cleanProblemId).trim(),
+    setId: normalizeId(problemContext?.setId).trim(),
+    setTitle: String(problemContext?.setTitle ?? '').trim(),
+    sourceType: String(problemContext?.sourceType ?? '').trim(),
+    sourceGroup: String(problemContext?.sourceGroup ?? '').trim(),
+    topic: String(problemContext?.topic ?? '').trim(),
+    problemContent: String(problemContext?.problemContent ?? '').trim(),
     problemTitle: String(problemTitle ?? '').trim(),
     solutionContent: cleanSolution,
     evaluation: evaluation && typeof evaluation === 'object' ? evaluation : null,
@@ -261,6 +288,9 @@ const VMODataService = Object.freeze({
   getExams,
   addExam,
   getProblemsByExam,
+  getContentSets,
+  getCatalogProblems,
+  upsertContentCatalog,
   saveProblem,
   submitSolution,
   getSubmissionImage,

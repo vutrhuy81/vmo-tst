@@ -4,6 +4,64 @@
  */
 
 (() => {
+  const CONTENT_SOURCE_CONFIG = Object.freeze({
+    'tab-mock': { sourceGroup: 'mock_exam', sourceType: 'mock_exam_question', contentType: 'mock_exam' },
+    'tab-tst': { sourceGroup: 'tst', sourceType: 'tst_question', contentType: 'tst_exam' },
+    'tab-history': { sourceGroup: 'danang_quangnam', sourceType: 'regional_question', contentType: 'regional_exam' }
+  });
+
+  function stableKey(value) {
+    return String(value || '')
+      .normalize('NFD')
+      .replace(/[\u0300-\u036f]/g, '')
+      .toLowerCase()
+      .replace(/đ/g, 'd')
+      .replace(/[^a-z0-9._:-]+/g, '-')
+      .replace(/^-+|-+$/g, '');
+  }
+
+  function getProblemIdentity(problemCard, fallbackTitle = '') {
+    if (problemCard?.classList?.contains('examplebox')) {
+      const chapter = problemCard.closest('.chapter-block');
+      const chapterNumber = chapter?.dataset?.chapter || 'meta';
+      const examples = chapter ? Array.from(chapter.querySelectorAll('.examplebox')) : [];
+      const exampleNumber = Math.max(1, examples.indexOf(problemCard) + 1);
+      const setKey = `specialty:chapter-${stableKey(chapterNumber)}`;
+      return {
+        problemKey: `${setKey}:example-${exampleNumber}`,
+        setKey,
+        setTitle: (chapter?.querySelector('.chapter-heading')?.textContent || 'Tài liệu chuyên đề VMO').trim(),
+        sourceGroup: 'specialty',
+        sourceType: 'specialty_example',
+        contentType: 'specialty_chapter',
+        chapterNumber: Number(chapterNumber) || 0,
+        questionNumber: exampleNumber,
+        frontendAnchor: chapter?.querySelector('.chapter-heading')?.id || '',
+        legacyProblemId: 'vd-' + fallbackTitle.replace(/[^a-zA-Z0-9]/g, '_')
+      };
+    }
+
+    const tab = problemCard?.closest?.('.tab-pane');
+    const config = CONTENT_SOURCE_CONFIG[tab?.id] || CONTENT_SOURCE_CONFIG['tab-tst'];
+    const examCard = problemCard?.closest?.('.exam-card, .paper-card');
+    const examId = examCard?.id || 'exam-unknown';
+    const questions = examCard ? Array.from(examCard.querySelectorAll('.problem-item')) : [];
+    const questionNumber = Math.max(1, questions.indexOf(problemCard) + 1);
+    const setKey = `${config.sourceGroup}:${stableKey(examId)}`;
+    return {
+      problemKey: `${setKey}:question-${questionNumber}`,
+      setKey,
+      setTitle: (examCard?.querySelector('.exam-title')?.textContent || examId).trim(),
+      sourceGroup: config.sourceGroup,
+      sourceType: config.sourceType,
+      contentType: config.contentType,
+      chapterNumber: 0,
+      questionNumber,
+      frontendAnchor: problemCard?.id || examId,
+      legacyProblemId: `${examId}-${fallbackTitle.replace(/[^a-zA-Z0-9]/g, '_')}`
+    };
+  }
+
   // Hàm hiển thị thông báo Toast nhanh
   function showToast(message, isSuccess = true) {
     let toast = document.getElementById('vmoToast');
@@ -53,9 +111,8 @@
 
       const problemIdEl = header.querySelector('.problem-id');
       const problemTitle = problemIdEl ? (problemIdEl.innerText || problemIdEl.textContent || '').trim() : 'Câu hỏi';
-      const examCard = item.closest('.exam-card') || item.closest('.paper-card');
-      const examId = examCard ? (examCard.id || 'exam-unknown') : 'exam-unknown';
-      const problemUniqueId = `${examId}-${problemTitle.replace(/[^a-zA-Z0-9]/g, '_')}`;
+      const identity = getProblemIdentity(item, problemTitle);
+      item.dataset.contentKey = identity.problemKey;
 
       const btn = document.createElement('button');
       btn.type = 'button';
@@ -77,7 +134,7 @@
       `;
       btn.innerHTML = `✍️ ${isEn ? 'Submit Solution' : 'Nộp bài giải'}`;
       btn.title = isEn ? 'Submit your own solution to database' : 'Nộp lời giải cá nhân của bạn lên cơ sở dữ liệu';
-      btn.onclick = () => openSubmissionModal(problemUniqueId, problemTitle, item);
+      btn.onclick = () => openSubmissionModal(identity.problemKey, problemTitle, item);
 
       const aiBtn = header.querySelector('.btn-ai-guide');
       if (aiBtn) {
@@ -95,7 +152,8 @@
       const headingClone = heading.cloneNode(true);
       headingClone.querySelectorAll('button, .ai-guide-panel').forEach(node => node.remove());
       const title = (headingClone.textContent || '').trim();
-      const uniqueId = 'vd-' + title.replace(/[^a-zA-Z0-9]/g, '_');
+      const identity = getProblemIdentity(box, title);
+      box.dataset.contentKey = identity.problemKey;
 
       const btn = document.createElement('button');
       btn.type = 'button';
@@ -115,7 +173,7 @@
         margin-left: 8px;
       `;
       btn.innerHTML = `✍️ ${isEn ? 'Submit' : 'Nộp bài giải'}`;
-      btn.onclick = () => openSubmissionModal(uniqueId, title, box);
+      btn.onclick = () => openSubmissionModal(identity.problemKey, title, box);
 
       const aiBtn = box.querySelector('.btn-ai-guide');
       if (aiBtn) {
@@ -126,13 +184,119 @@
     });
   }
 
+  function rawContent(element) {
+    if (!element) return '';
+    return (element.getAttribute('data-raw-math') || element.innerHTML || element.textContent || '').trim();
+  }
+
+  window.buildContentCatalog = function() {
+    const setsByKey = new Map();
+    const problems = [];
+
+    document.querySelectorAll('.examplebox, .problem-item').forEach(card => {
+      const heading = card.classList.contains('examplebox')
+        ? card.querySelector('.box-heading')
+        : card.querySelector('.problem-id');
+      if (!heading) return;
+
+      const headingClone = heading.cloneNode(true);
+      headingClone.querySelectorAll('button, .ai-guide-panel').forEach(node => node.remove());
+      const title = (headingClone.textContent || '').trim();
+      const identity = getProblemIdentity(card, title);
+      if (!identity.problemKey || !identity.setKey) return;
+
+      const examCard = card.closest('.exam-card, .paper-card');
+      const chapter = card.closest('.chapter-block');
+      const tab = card.closest('.tab-pane');
+      const topic = (card.querySelector('.badge-topic')?.textContent || title).trim();
+      const pointText = card.querySelector('.badge-point')?.textContent || '';
+      const scoreMatch = pointText.replace(',', '.').match(/([0-9]+(?:\.[0-9]+)?)/);
+      const problemContent = card.classList.contains('examplebox')
+        ? Array.from(card.querySelectorAll(':scope > p')).map(rawContent).join('\n\n')
+        : rawContent(card.querySelector('.problem-content'));
+      const solution = rawContent(card.querySelector('.example-solution, .solution, .solution-content'));
+
+      if (!setsByKey.has(identity.setKey)) {
+        const year = (examCard?.querySelector('.tag-year')?.textContent || '2026-2027').trim();
+        const province = (examCard?.querySelector('.tag-province')?.textContent || '').trim();
+        setsByKey.set(identity.setKey, {
+          key: identity.setKey,
+          contentType: identity.contentType,
+          title: identity.setTitle,
+          group: identity.sourceGroup,
+          year,
+          province,
+          region: examCard?.dataset?.filter || '',
+          order: setsByKey.size + 1,
+          status: 'published'
+        });
+      }
+
+      problems.push({
+        contentKey: identity.problemKey,
+        setKey: identity.setKey,
+        setTitle: identity.setTitle,
+        sourceType: identity.sourceType,
+        sourceGroup: identity.sourceGroup,
+        title,
+        shortLabel: title.slice(0, 120),
+        chapterNumber: identity.chapterNumber,
+        questionNumber: identity.questionNumber,
+        day: (examCard?.querySelector('.tag-day')?.textContent || '').trim(),
+        order: identity.questionNumber,
+        maxScore: scoreMatch ? Number(scoreMatch[1]) : 5,
+        topic,
+        content: problemContent,
+        referenceSolution: solution,
+        frontendAnchor: identity.frontendAnchor || tab?.id || chapter?.id || '',
+        legacyIds: [identity.legacyProblemId].filter(Boolean),
+        allowSubmission: true,
+        allowAiEvaluation: true,
+        status: 'published',
+        version: 1
+      });
+    });
+
+    return { sets: Array.from(setsByKey.values()), problems };
+  };
+
+  window.syncContentCatalogToDatabase = async function() {
+    if (!requireAdminUiAction()) return;
+    const button = document.getElementById('btnSyncContentCatalog');
+    const originalText = button?.innerHTML;
+    if (button) {
+      button.disabled = true;
+      button.innerHTML = '⏳ Đang đồng bộ...';
+    }
+    try {
+      if (!window.VMODataService?.upsertContentCatalog) {
+        throw new Error('Dịch vụ đồng bộ catalog chưa sẵn sàng');
+      }
+      const catalog = window.buildContentCatalog();
+      const result = await window.VMODataService.upsertContentCatalog(catalog);
+      showToast(`Đã đồng bộ ${result?.setCount || 0} nhóm và ${result?.problemCount || 0} câu hỏi/ví dụ.`, true);
+    } catch (err) {
+      showToast('Không thể đồng bộ nội dung: ' + (err?.message || 'Lỗi không xác định'), false);
+    } finally {
+      if (button) {
+        button.disabled = false;
+        button.innerHTML = originalText || '🔄 Đồng bộ ngân hàng câu hỏi';
+      }
+    }
+  };
+
   // 2. MODAL NỘP BÀI GIẢI CHO HỌC SINH (HỖ TRỢ ẢNH VIẾT TAY + ĐÁNH GIÁ AI CHUYÊN GIA TOÁN)
   window.currentSubmissionData = {
     problemId: '',
     problemTitle: '',
     problemContent: '',
     topic: '',
-    examTitle: ''
+    examTitle: '',
+    problemKey: '',
+    setKey: '',
+    setTitle: '',
+    sourceType: '',
+    sourceGroup: ''
   };
   window.currentUploadedImage = null;
   window.currentEvaluationResult = null;
@@ -1050,8 +1214,15 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
       problemContentForAi = (tmpDiv.innerText || tmpDiv.textContent || '').trim();
     }
 
+    const identity = getProblemIdentity(problemCard, problemTitle);
     window.currentSubmissionData = {
       problemId,
+      problemKey: identity.problemKey,
+      legacyProblemId: identity.legacyProblemId,
+      setKey: identity.setKey,
+      setTitle: identity.setTitle || examTitle,
+      sourceType: identity.sourceType,
+      sourceGroup: identity.sourceGroup,
       problemTitle,
       problemContent: problemContentForAi || problemTitle,
       topic,
@@ -1132,7 +1303,15 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
               problemTitle,
               text,
               window.currentEvaluationResult,
-              window.currentUploadedImage || ''
+              window.currentUploadedImage || '',
+              {
+                problemKey: window.currentSubmissionData?.problemKey || problemId,
+                setTitle: window.currentSubmissionData?.setTitle || examTitle,
+                sourceType: window.currentSubmissionData?.sourceType || '',
+                sourceGroup: window.currentSubmissionData?.sourceGroup || '',
+                topic,
+                problemContent: window.currentSubmissionData?.problemContent || ''
+              }
             );
             if (!savedSubmission) {
               throw new Error('Máy chủ không trả về bản ghi vừa lưu');
@@ -1574,6 +1753,17 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
       modal.querySelectorAll(
         '[onclick="toggleAddEventForm()"], [onclick="toggleAddDocForm()"], [onclick="toggleAddExamForm()"], #formAddEvent, #formAddDoc, #formAddExam'
       ).forEach(el => { el.style.display = 'none'; });
+    } else if (!modal.querySelector('#btnSyncContentCatalog')) {
+      const tabs = modal.querySelector('.hub-tabs, [class*="hub-tabs"]');
+      if (tabs) {
+        const syncButton = document.createElement('button');
+        syncButton.id = 'btnSyncContentCatalog';
+        syncButton.type = 'button';
+        syncButton.innerHTML = '🔄 Đồng bộ ngân hàng câu hỏi';
+        syncButton.style.cssText = 'margin-left:auto;padding:7px 12px;border:1px solid #a5b4fc;border-radius:7px;background:#eef2ff;color:#4338ca;font-weight:700;cursor:pointer;';
+        syncButton.onclick = window.syncContentCatalogToDatabase;
+        tabs.appendChild(syncButton);
+      }
     }
   }
 
@@ -1839,6 +2029,17 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
         el.innerHTML = subs.map((s, idx) => {
           const dateStr = s.createdAt ? new Date(s.createdAt).toLocaleString('vi-VN') : '';
           const preview = s.solutionContent ? s.solutionContent.slice(0, 150) + (s.solutionContent.length > 150 ? '...' : '') : '';
+          const snapshot = s.problemSnapshot || {};
+          const sourceLabels = {
+            specialty_example: 'Tài liệu chuyên đề VMO',
+            mock_exam_question: 'Bộ đề thi thử VMO',
+            tst_question: 'Đề TST 2026–2027',
+            regional_question: 'Đề Đà Nẵng–Quảng Nam'
+          };
+          const sourceLabel = sourceLabels[s.sourceType || snapshot.sourceType] || 'Ngân hàng bài toán VMO';
+          const setTitle = snapshot.setTitle || s.setTitle || '';
+          const problemTitle = snapshot.title || s.problemTitle || s.problemKey || s.problemId || 'Bài toán VMO';
+          const score = s.score || s.evaluation?.estimatedScore || '';
           const evaluationBtn = s.evaluation ? `
             <button type="button" onclick="viewSubEvaluationDetail(${idx})" style="background:#eef2ff; border:1px solid #c7d2fe; color:#4338ca; border-radius:4px; padding:5px 9px; font-size:0.75rem; cursor:pointer; font-weight:600;">
               👁️ Xem nhận xét AI
@@ -1851,14 +2052,17 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
           ` : '';
           return `
             <div style="background:#f8fafc; border:1px solid #e2e8f0; border-radius:8px; padding:10px 14px; margin-bottom:8px;">
+              <div style="font-size:0.72rem; color:#4338ca; font-weight:800; text-transform:uppercase; letter-spacing:.04em; margin-bottom:3px;">${escapeHtmlText(sourceLabel)}</div>
               <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:4px;">
-                <strong style="color:#0f172a; font-size:0.95rem;">${s.problemTitle || s.problemId || 'Bài toán VMO'}</strong>
-                <span style="background:#e0f2fe; color:#0369a1; padding:2px 8px; border-radius:4px; font-size:0.75rem; font-weight:600;">${s.authorName || 'Học sinh'}</span>
+                <strong style="color:#0f172a; font-size:0.95rem;">${escapeHtmlText(problemTitle)}</strong>
+                <span style="background:#e0f2fe; color:#0369a1; padding:2px 8px; border-radius:4px; font-size:0.75rem; font-weight:600;">${escapeHtmlText(s.authorName || 'Học sinh')}</span>
               </div>
+              ${setTitle ? `<div style="font-size:0.82rem;color:#475569;margin-bottom:5px;">📚 ${escapeHtmlText(setTitle)}</div>` : ''}
               <div style="font-size:0.8rem; color:#64748b; margin-bottom:6px;">
-                📅 Thời gian: ${dateStr} | 👤 Tài khoản: ${s.authorEmail || s.userId || 'Ẩn danh'}
+                📅 Thời gian: ${escapeHtmlText(dateStr)} | 👤 Tài khoản: ${escapeHtmlText(s.username || s.authorEmail || s.userId || 'Ẩn danh')}
+                ${score ? ` | 🎯 Điểm AI: <strong>${escapeHtmlText(score)}</strong>` : ''}
               </div>
-              <div style="background:#ffffff; border:1px solid #e2e8f0; border-radius:6px; padding:8px; font-family:monospace; font-size:0.85rem; color:#334155; white-space:pre-wrap;">${preview}</div>
+              <div style="background:#ffffff; border:1px solid #e2e8f0; border-radius:6px; padding:8px; font-family:monospace; font-size:0.85rem; color:#334155; white-space:pre-wrap;">${escapeHtmlText(preview)}</div>
               ${(evaluationBtn || imageBtn) ? `
                 <div style="display:flex; flex-wrap:wrap; gap:6px; margin-top:8px;">
                   ${evaluationBtn}
