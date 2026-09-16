@@ -115,16 +115,65 @@ function initAccountMgmt() {
     modalAlert.style.display = 'none';
   }
 
-  // 6. Hiển thị danh sách Người dùng trong bảng
-  let showPlainPasswords = false;
-  window.togglePasswordVisibilityInTable = function() {
-    showPlainPasswords = !showPlainPasswords;
-    renderUsers();
-  };
+  function escapeHtml(value) {
+    return String(value ?? '')
+      .replaceAll('&', '&amp;')
+      .replaceAll('<', '&lt;')
+      .replaceAll('>', '&gt;')
+      .replaceAll('"', '&quot;')
+      .replaceAll("'", '&#039;');
+  }
 
-  function renderUsers() {
+  function requestNewPassword(targetUsername) {
+    return new Promise((resolve) => {
+      const dialog = document.createElement('dialog');
+      dialog.style.cssText = 'border:0;border-radius:14px;padding:0;max-width:420px;width:calc(100% - 32px);box-shadow:0 24px 60px rgba(15,23,42,.35);';
+      dialog.innerHTML = `
+        <form method="dialog" style="padding:24px;display:flex;flex-direction:column;gap:14px;">
+          <h3 style="margin:0;color:#0f172a;font-size:1.05rem;"></h3>
+          <label style="font-size:.86rem;font-weight:600;color:#334155;">Mật khẩu mới (tối thiểu 8 ký tự)</label>
+          <input type="password" minlength="8" maxlength="128" required autocomplete="new-password"
+            style="padding:11px 12px;border:1px solid #cbd5e1;border-radius:8px;font:inherit;">
+          <div style="display:flex;justify-content:flex-end;gap:10px;margin-top:4px;">
+            <button type="button" data-action="cancel" style="padding:9px 14px;border:1px solid #cbd5e1;border-radius:8px;background:#fff;cursor:pointer;">Hủy</button>
+            <button type="submit" style="padding:9px 14px;border:0;border-radius:8px;background:#1d4ed8;color:#fff;font-weight:700;cursor:pointer;">Cập nhật</button>
+          </div>
+        </form>`;
+      dialog.querySelector('h3').textContent = `Đổi mật khẩu: ${targetUsername}`;
+      const form = dialog.querySelector('form');
+      const input = dialog.querySelector('input');
+      const finish = (value) => {
+        if (dialog.open) dialog.close();
+        dialog.remove();
+        resolve(value);
+      };
+      dialog.querySelector('[data-action="cancel"]').addEventListener('click', () => finish(null));
+      dialog.addEventListener('cancel', (event) => {
+        event.preventDefault();
+        finish(null);
+      });
+      form.addEventListener('submit', (event) => {
+        event.preventDefault();
+        if (!form.reportValidity()) return;
+        finish(input.value);
+      });
+      document.body.appendChild(dialog);
+      dialog.showModal();
+      input.focus();
+    });
+  }
+
+  // 6. Tải và hiển thị danh sách người dùng từ MongoDB
+  async function renderUsers() {
     if (!usersTableBody) return;
-    const users = VMOAuth.getUsers();
+    usersTableBody.innerHTML = '<tr><td colspan="5" style="text-align:center; padding:20px; color:#64748b;">Đang tải dữ liệu MongoDB...</td></tr>';
+    const result = await VMOAuth.listUsers();
+    if (!result.success) {
+      usersTableBody.innerHTML = '<tr><td colspan="5" style="text-align:center; padding:20px; color:#b91c1c;">Không thể tải danh sách tài khoản.</td></tr>';
+      showAlert(result.message, false);
+      return;
+    }
+    const users = Array.isArray(result.users) ? result.users : [];
 
     if (totalUsersCount) totalUsersCount.textContent = users.length;
     if (adminUsersCount) {
@@ -142,23 +191,17 @@ function initAccountMgmt() {
 
       const tr = document.createElement('tr');
 
-      // Password display
-      const pwDisplay = showPlainPasswords ? u.password : '••••••••';
-
       tr.innerHTML = `
         <td style="text-align:center; font-weight:600;">${idx + 1}</td>
         <td>
-          <strong>${u.username}</strong>
+          <strong>${escapeHtml(u.username)}</strong>
           ${isCurrent ? `<span style="font-size:0.75rem; color:#16a34a; margin-left:4px;">${isEn ? '(You)' : '(Bạn)'}</span>` : ''}
-          ${u.name && u.name !== u.username ? `<br><small style="color:#64748b;">${u.name}</small>` : ''}
+          ${u.fullName && u.fullName !== u.username ? `<br><small style="color:#64748b;">${escapeHtml(u.fullName)}</small>` : ''}
         </td>
         <td>
           <span class="user-role-badge ${isAdminRole ? 'role-admin' : 'role-user'}">
             ${isAdminRole ? 'Admin' : (isEn ? 'Member' : 'Thành viên')}
           </span>
-        </td>
-        <td class="user-pw-cell">
-          <span>${pwDisplay}</span>
         </td>
         <td style="font-size:0.8rem; color:#64748b;">${createdDate}</td>
         <td style="text-align:right;">
@@ -177,20 +220,14 @@ function initAccountMgmt() {
   }
 
   // 7. Xử lý Đổi Mật khẩu
-  window.handleChangePassword = function(targetUsername) {
-    let newPw = null;
-    try {
-      newPw = prompt(`Nhập mật khẩu mới cho tài khoản "${targetUsername}" (tối thiểu 4 ký tự):`);
-    } catch (e) {
-      newPw = null;
-    }
+  window.handleChangePassword = async function(targetUsername) {
+    const newPw = await requestNewPassword(targetUsername);
     if (newPw === null) return;
-    const cleanPw = newPw.trim();
-    if (cleanPw.length < 4) {
-      showAlert('Mật khẩu mới phải có độ dài từ 4 ký tự trở lên!', false);
+    if (newPw.length < 8) {
+      showAlert('Mật khẩu mới phải có độ dài từ 8 ký tự trở lên!', false);
       return;
     }
-    const res = VMOAuth.updatePassword(targetUsername, cleanPw);
+    const res = await VMOAuth.updatePassword(targetUsername, newPw);
     if (res.success) {
       showAlert(res.message, true);
       renderUsers();
@@ -200,7 +237,7 @@ function initAccountMgmt() {
   };
 
   // 8. Xử lý Xóa Tài khoản
-  window.handleDeleteUser = function(targetUsername) {
+  window.handleDeleteUser = async function(targetUsername) {
     let confirmed = true;
     try {
       confirmed = confirm(`Bạn có chắc chắn muốn xóa tài khoản "${targetUsername}" không?`);
@@ -209,7 +246,7 @@ function initAccountMgmt() {
     }
     if (!confirmed) return;
 
-    const res = VMOAuth.deleteUser(targetUsername);
+    const res = await VMOAuth.deleteUser(targetUsername);
     if (res.success) {
       showAlert(res.message, true);
       renderUsers();
@@ -220,14 +257,17 @@ function initAccountMgmt() {
 
   // 9. Xử lý Tạo Tài khoản Mới
   if (addUserForm) {
-    addUserForm.addEventListener('submit', (e) => {
+    addUserForm.addEventListener('submit', async (e) => {
       e.preventDefault();
       const u = document.getElementById('newUsername').value.trim();
-      const p = document.getElementById('newPassword').value.trim();
+      const p = document.getElementById('newPassword').value;
       const r = document.getElementById('newRole').value;
       const n = document.getElementById('newName').value.trim();
 
-      const res = VMOAuth.createUser(u, p, r, n);
+      const submitButton = addUserForm.querySelector('button[type="submit"]');
+      if (submitButton) submitButton.disabled = true;
+      const res = await VMOAuth.createUser(u, p, r, n);
+      if (submitButton) submitButton.disabled = false;
       if (res.success) {
         showAlert(res.message, true);
         addUserForm.reset();

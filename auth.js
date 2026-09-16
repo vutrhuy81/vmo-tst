@@ -1,51 +1,13 @@
 /**
  * Hệ thống Xác thực & Quản lý Tài khoản VMO Đà Nẵng 2026 - 2027
  * Tích hợp:
- * - Local & Firebase Google Authentication
+ * - MongoDB password authentication & Firebase Google Authentication
  * - Giám sát tương tác & Tự động Đăng xuất sau 5 phút không hoạt động (Auto-Logout Idle Tracker)
  * - Đồng bộ phiên đa tab thời gian thực
  */
 const VMOAuth = (() => {
-  const USERS_KEY = 'vmo_auth_users';
   const SESSION_KEY = 'vmo_auth_session';
   const LAST_ACTIVITY_KEY = 'vmo_last_activity_time';
-
-  // Khởi tạo tài khoản mặc định nội bộ
-  const DEFAULT_USERS = [];
-
-  function initStorage() {
-    try {
-      const existing = localStorage.getItem(USERS_KEY);
-      if (!existing) {
-        localStorage.setItem(USERS_KEY, JSON.stringify(DEFAULT_USERS));
-      }
-    } catch (e) {
-      console.warn('LocalStorage init warning:', e);
-    }
-  }
-
-  initStorage();
-
-  function getUsers() {
-    try {
-      initStorage();
-      const raw = localStorage.getItem(USERS_KEY);
-      const list = raw ? JSON.parse(raw) : DEFAULT_USERS;
-      return Array.isArray(list) ? list : DEFAULT_USERS;
-    } catch (e) {
-      return DEFAULT_USERS;
-    }
-  }
-
-  function saveUsers(users) {
-    try {
-      localStorage.setItem(USERS_KEY, JSON.stringify(users));
-      return true;
-    } catch (e) {
-      console.error('Không thể lưu danh sách người dùng:', e);
-      return false;
-    }
-  }
 
   function getSession() {
     try {
@@ -97,7 +59,7 @@ const VMOAuth = (() => {
 
   async function login(username, password, remember = true) {
     const uClean = (username || '').trim().toLowerCase();
-    const pClean = (password || '').trim();
+    const pClean = password || '';
 
     if (!uClean || !pClean) {
       return { success: false, message: 'Vui lòng nhập đầy đủ tên đăng nhập và mật khẩu!' };
@@ -149,6 +111,40 @@ const VMOAuth = (() => {
     } catch {
       return { success: false, message: 'Không thể kết nối máy chủ xác thực.' };
     }
+  }
+
+  async function adminRequest(action, payload = {}) {
+    try {
+      const response = await fetch('/api/auth', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        credentials: 'same-origin',
+        body: JSON.stringify({ action, ...payload })
+      });
+      const data = await response.json();
+      if (!response.ok || !data.success) {
+        return { success: false, message: data.error || 'Thao tác quản trị thất bại.' };
+      }
+      return data;
+    } catch {
+      return { success: false, message: 'Không thể kết nối máy chủ quản lý tài khoản.' };
+    }
+  }
+
+  function listUsers() {
+    return adminRequest('list_users');
+  }
+
+  function createUser(username, password, role = 'student', fullName = '') {
+    return adminRequest('create_user', { username, password, role, fullName });
+  }
+
+  function deleteUser(targetUsername) {
+    return adminRequest('delete_user', { targetUsername });
+  }
+
+  function updatePassword(targetUsername, newPassword) {
+    return adminRequest('update_password', { targetUsername, newPassword });
   }
 
   async function logout(reason = '') {
@@ -230,129 +226,14 @@ const VMOAuth = (() => {
     return true;
   }
 
-  function createUser(username, password, role = 'user', name = '') {
-    const currentSession = getSession();
-    if (!currentSession || currentSession.role !== 'admin') {
-      return { success: false, message: 'Chỉ tài khoản Admin mới có quyền tạo người dùng!' };
-    }
-
-    const uClean = (username || '').trim();
-    const pClean = (password || '').trim();
-    const nClean = (name || '').trim() || uClean;
-
-    if (uClean.length < 3) {
-      return { success: false, message: 'Tên đăng nhập phải có ít nhất 3 ký tự!' };
-    }
-    if (!/^[a-zA-Z0-9_.-]+$/.test(uClean)) {
-      return { success: false, message: 'Tên đăng nhập chỉ được chứa chữ cái, số, gạch dưới, gạch ngang!' };
-    }
-    if (pClean.length < 4) {
-      return { success: false, message: 'Mật khẩu phải có ít nhất 4 ký tự!' };
-    }
-
-    const users = getUsers();
-    const exists = users.some(u => u.username.toLowerCase() === uClean.toLowerCase());
-    if (exists) {
-      return { success: false, message: `Tài khoản "${uClean}" đã tồn tại trên hệ thống!` };
-    }
-
-    const newUser = {
-      username: uClean,
-      password: pClean,
-      role: role === 'admin' ? 'admin' : 'user',
-      name: nClean,
-      createdAt: new Date().toISOString()
-    };
-
-    users.push(newUser);
-    saveUsers(users);
-
-    // Đồng bộ hồ sơ tài khoản lên Firestore nếu có
-    if (window.VMODataService && window.VMODataService.syncUserProfile) {
-      window.VMODataService.syncUserProfile({
-        uid: 'user_' + uClean.toLowerCase(),
-        email: uClean.includes('@') ? uClean : `${uClean}@vmo.danang.edu.vn`,
-        displayName: nClean || uClean,
-        username: uClean,
-        role: role === 'admin' ? 'admin' : 'student',
-        authProvider: 'password'
-      }).catch(err => console.warn('Lỗi đồng bộ user lên Firestore:', err));
-    }
-
-    return { success: true, message: `Tạo tài khoản "${uClean}" thành công!`, user: newUser };
-  }
-
-  function deleteUser(usernameToDelete) {
-    const currentSession = getSession();
-    if (!currentSession || currentSession.role !== 'admin') {
-      return { success: false, message: 'Chỉ tài khoản Admin mới có quyền xóa người dùng!' };
-    }
-
-    const uTarget = (usernameToDelete || '').trim().toLowerCase();
-    if (uTarget === currentSession.username.toLowerCase()) {
-      return { success: false, message: 'Bạn không thể tự xóa tài khoản của chính mình đang đăng nhập!' };
-    }
-
-    const users = getUsers();
-    const target = users.find(u => u.username.toLowerCase() === uTarget);
-    if (!target) {
-      return { success: false, message: 'Không tìm thấy tài khoản cần xóa!' };
-    }
-
-    if (target.role === 'admin') {
-      const adminCount = users.filter(u => u.role === 'admin').length;
-      if (adminCount <= 1) {
-        return { success: false, message: 'Không thể xóa Admin duy nhất còn lại của hệ thống!' };
-      }
-    }
-
-    const remaining = users.filter(u => u.username.toLowerCase() !== uTarget);
-    saveUsers(remaining);
-    return { success: true, message: `Đã xóa thành công tài khoản "${usernameToDelete}"!` };
-  }
-
-  function updatePassword(username, newPassword) {
-    const currentSession = getSession();
-    if (!currentSession) {
-      return { success: false, message: 'Vui lòng đăng nhập!' };
-    }
-
-    const uTarget = (username || '').trim().toLowerCase();
-    const isSelf = currentSession.username.toLowerCase() === uTarget;
-    const isAdmin = currentSession.role === 'admin';
-
-    if (!isSelf && !isAdmin) {
-      return { success: false, message: 'Bạn không có quyền đổi mật khẩu của tài khoản khác!' };
-    }
-
-    const pClean = (newPassword || '').trim();
-    if (pClean.length < 4) {
-      return { success: false, message: 'Mật khẩu mới phải có ít nhất 4 ký tự!' };
-    }
-
-    const users = getUsers();
-    const userIndex = users.findIndex(u => u.username.toLowerCase() === uTarget);
-    if (userIndex === -1) {
-      return { success: false, message: 'Không tìm thấy tài khoản!' };
-    }
-
-    users[userIndex].password = pClean;
-    users[userIndex].updatedAt = new Date().toISOString();
-    saveUsers(users);
-
-    return { success: true, message: `Đã cập nhật mật khẩu cho tài khoản "${users[userIndex].username}"!` };
-  }
-
   return {
-    initStorage,
-    getUsers,
-    saveUsers,
     getSession,
     setSession,
     clearSession,
     login,
     getBootstrapStatus,
     bootstrapAdmin,
+    listUsers,
     logout,
     requireAuth,
     redirectIfLoggedIn,
