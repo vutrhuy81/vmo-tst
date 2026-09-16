@@ -45,26 +45,25 @@ window.MathJax = {
         onerror="this.onerror=null;this.src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.min.js';"></script>
 
 <!-- Stylesheets tách biệt, tối ưu bộ nhớ đệm -->
-<link rel="stylesheet" href="styles.css?v=1789549924636">
-<link rel="stylesheet" href="auth.css?v=1789549924636">
-<link rel="stylesheet" href="ai_guide.css?v=1789549924636">
-<link rel="stylesheet" href="i18n.css?v=1789549924636">
+<link rel="stylesheet" href="styles.css?v=1789550819615">
+<link rel="stylesheet" href="auth.css?v=1789550819615">
+<link rel="stylesheet" href="ai_guide.css?v=1789550819615">
+<link rel="stylesheet" href="i18n.css?v=1789550819615">
 
 <!-- Synchronous Auth Gate: Chặn truy cập nếu chưa đăng nhập -->
-<script src="auth.js?v=1789549924636"></script>
+<script src="auth.js?v=1789550819615"></script>
 <script>
 VMOAuth.requireAuth('login.html');
 </script>
 
-<script type="module" src="firebase-config.js?v=1789549924636"></script>
-<script type="module" src="vmo_data_service.js?v=1789549924636"></script>
-<script src="vmo_db_ui.js?v=1789549924636" defer></script>
-<script src="account_mgmt.js?v=1789549924636" defer></script>
-<script src="tst-sources.js?v=1789549924636" defer></script>
-<script src="history-sources.js?v=1789549924636" defer></script>
-<script src="ai_guide_engine.js?v=1789549924636" defer></script>
-<script src="i18n.js?v=1789549924636" defer></script>
-<script src="app.js?v=1789549924636" defer></script>
+<script type="module" src="vmo_data_service.js?v=1789550819615"></script>
+<script src="vmo_db_ui.js?v=1789550819615" defer></script>
+<script src="account_mgmt.js?v=1789550819615" defer></script>
+<script src="tst-sources.js?v=1789550819615" defer></script>
+<script src="history-sources.js?v=1789550819615" defer></script>
+<script src="ai_guide_engine.js?v=1789550819615" defer></script>
+<script src="i18n.js?v=1789550819615" defer></script>
+<script src="app.js?v=1789550819615" defer></script>
 </head>
 <body class="tex2jax_process">
 <a href="#main-content" class="skip-link">Bỏ qua đến nội dung chính</a>
@@ -101,7 +100,7 @@ VMOAuth.requireAuth('login.html');
             <span class="user-name" id="currentUserName">admin</span>
             <span class="user-role-badge role-admin" id="currentUserRole">Admin</span>
           </div>
-          <button id="btnOpenDataMgmt" class="btn-auth-action btn-database-hub" type="button" onclick="window.openDataHubModal ? window.openDataHubModal() : null" title="Quản lý kho dữ liệu Firestore" style="background:#0284c7; color:#ffffff; font-weight:600; display:inline-flex; align-items:center; gap:5px; cursor:pointer;">
+          <button id="btnOpenDataMgmt" class="btn-auth-action btn-database-hub" type="button" onclick="window.openDataHubModal ? window.openDataHubModal() : null" title="Quản lý kho dữ liệu MongoDB Atlas" style="background:#0284c7; color:#ffffff; font-weight:600; display:inline-flex; align-items:center; gap:5px; cursor:pointer;">
             🗄️ Database Hub
           </button>
           <button id="btnOpenUserMgmt" class="btn-auth-action btn-manage" type="button" title="Quản lý tài khoản">

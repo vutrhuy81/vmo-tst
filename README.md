@@ -30,6 +30,8 @@ Hệ thống web tài liệu chuyên sâu bồi dưỡng đội tuyển VMO Đà
 ├── tst-sources.js                     # Cơ sở dữ liệu link nguồn tham khảo các đề TST
 ├── auth.js & auth.css                 # Hệ thống xác thực và phân quyền (RBAC)
 ├── account_mgmt.js                    # Quản lý tài khoản người dùng & mật khẩu
+├── vmo_data_service.js                 # Giao tiếp API MongoDB từ trình duyệt
+├── api/data.js                         # API dữ liệu có xác thực/phân quyền trên Vercel
 ├── ai_guide_engine.js & ai_guide.css  # AI Hướng dẫn giải toán chuyên sâu
 ├── i18n.js & i18n.css                 # Chuyển đổi ngôn ngữ Tiếng Việt / English
 ├── server.js                          # Máy chủ Express & API Gemini (tự động build khi start/request)
@@ -50,3 +52,18 @@ Khi cần cập nhật nội dung, **thầy cô/lập trình viên không cần 
 ### Quy trình chạy:
 - **Biên dịch thủ công:** Chạy lệnh `node build.js` hoặc `npm run build`.
 - **Chạy môi trường phát triển (Dev/Server):** Chạy `node server.js` hoặc `npm run dev`. Máy chủ sẽ tự động gọi `build()` khi khởi động và tự động cập nhật ngay lập tức.
+
+## MongoDB Atlas và phân quyền dữ liệu
+
+Vercel phải có hai biến môi trường bắt buộc: `MONGODB_URI` và `JWT_SECRET` (tối thiểu 32 ký tự). Không đưa giá trị thật của hai biến này vào GitHub.
+
+Database mặc định là `vmo_tst`. Ứng dụng sử dụng các collection:
+
+- `users`: tài khoản, vai trò và mật khẩu đã băm bằng bcrypt;
+- `documents`: tài liệu do quản trị viên thêm;
+- `exams`: thông tin đề thi;
+- `problems`: nội dung câu hỏi và lời giải chính thức;
+- `submissions`: bài làm, kết quả và nhận xét chấm của học sinh;
+- `events`: lịch thi và sự kiện.
+
+Trình duyệt chỉ gọi `/api/auth` và `/api/data`; không kết nối trực tiếp MongoDB. Chỉ quản trị viên được thêm/xóa dữ liệu quản trị. Học viên chỉ được nộp bài và đọc bài nộp của chính mình; quản trị viên có thể xem toàn bộ bài nộp.

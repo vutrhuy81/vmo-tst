@@ -1,6 +1,6 @@
 /**
  * VMO DATABASE MANAGER & UI INTEGRATION
- * Quản lý giao diện nộp bài giải học sinh, quản lý kho tài liệu, đề thi, sự kiện và đồng bộ Firestore
+ * Quản lý giao diện nộp bài giải học sinh, tài liệu, đề thi, sự kiện và đồng bộ MongoDB Atlas
  */
 
 (() => {
@@ -1791,7 +1791,7 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
     if (f) f.style.display = (f.style.display === 'none') ? 'block' : 'none';
   };
 
-  // Nạp dữ liệu các tab từ Firestore
+  // Nạp dữ liệu các tab từ MongoDB Atlas qua API đã xác thực
   async function loadHubEvents() {
     const el = document.getElementById('hubEventsList');
     if (!el) return;

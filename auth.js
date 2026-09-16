@@ -1,7 +1,7 @@
 /**
  * Hệ thống Xác thực & Quản lý Tài khoản VMO Đà Nẵng 2026 - 2027
  * Tích hợp:
- * - MongoDB password authentication & Firebase Google Authentication
+ * - MongoDB password authentication qua cookie phiên HttpOnly
  * - Giám sát tương tác & Tự động Đăng xuất sau 5 phút không hoạt động (Auto-Logout Idle Tracker)
  * - Đồng bộ phiên đa tab thời gian thực
  */
@@ -158,18 +158,6 @@ const VMOAuth = (() => {
       await fetch('/api/auth', { method: 'POST', headers: { 'Content-Type': 'application/json' },
         credentials: 'same-origin', body: JSON.stringify({ action: 'logout' }) });
     } catch (e) { console.warn('Không thể thông báo đăng xuất đến máy chủ:', e); }
-
-    // Đăng xuất khỏi Firebase nếu đã kết nối (chạy song song có timeout an toàn)
-    try {
-      if (window.VMOFirebase && typeof window.VMOFirebase.signOutGoogle === 'function') {
-        await Promise.race([
-          window.VMOFirebase.signOutGoogle(),
-          new Promise(resolve => setTimeout(resolve, 400))
-        ]);
-      }
-    } catch (e) {
-      console.warn('Lỗi khi đăng xuất Firebase:', e);
-    }
 
     let targetUrl = 'login.html';
     if (reason) {
