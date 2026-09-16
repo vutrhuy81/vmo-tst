@@ -323,6 +323,27 @@
   window.currentUploadedImage = null;
   window.currentEvaluationResult = null;
   window.lastLoadedSubmissions = [];
+  window.catalogAccessRules = new Map();
+
+  async function applyCatalogAccessRules() {
+    if (isCurrentUserAdmin() || !window.VMODataService?.getCatalogRules) return;
+    try {
+      const rules = await window.VMODataService.getCatalogRules();
+      window.catalogAccessRules = new Map(rules.map(rule => [rule.contentKey, rule]));
+      document.querySelectorAll('.problem-item[data-content-key], .examplebox[data-content-key]').forEach(card => {
+        const rule = window.catalogAccessRules.get(card.dataset.contentKey);
+        if (!rule) return;
+        card.hidden = rule.published === false;
+        const submitButton = card.querySelector('.btn-submit-solution');
+        if (submitButton) {
+          submitButton.hidden = rule.allowSubmission === false;
+          submitButton.disabled = rule.allowSubmission === false;
+        }
+      });
+    } catch (err) {
+      console.warn('Không áp dụng được quy tắc catalog, giữ nguyên giao diện tĩnh:', err?.message || err);
+    }
+  }
 
   // Xử lý nén và tải ảnh từ File / Clipboard
   function processImageFile(file) {
@@ -580,6 +601,7 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
     try {
       const payload = {
         problemId: window.currentSubmissionData?.problemId || 'vmo-prob',
+        problemKey: window.currentSubmissionData?.problemKey || '',
         problemTitle: window.currentSubmissionData?.problemTitle || 'Bài toán VMO',
         problemContent: window.currentSubmissionData?.problemContent || '',
         topic: window.currentSubmissionData?.topic || '',
@@ -1291,6 +1313,10 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
     // Gán trực tiếp sự kiện cho nút Đánh giá AI và Điền mẫu để bảo đảm luôn kích hoạt
     const evalBtn = document.getElementById('btnEvaluateSolution');
     if (evalBtn) {
+      const accessRule = window.catalogAccessRules.get(identity.problemKey);
+      const aiAllowed = !accessRule || (accessRule.published !== false && accessRule.allowAiEvaluation !== false);
+      evalBtn.disabled = !aiAllowed;
+      evalBtn.style.display = aiAllowed ? '' : 'none';
       evalBtn.onclick = (e) => {
         if (e) e.preventDefault();
         window.evaluateStudentSolution();
@@ -1776,6 +1802,9 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
     }
 
     if (!isAdmin) {
+      modal.querySelector('#btnSyncContentCatalog')?.remove();
+      modal.querySelector('#hub-tab-catalog')?.remove();
+      modal.querySelector('#hub-panel-catalog')?.remove();
       modal.querySelectorAll(
         '[onclick="toggleAddEventForm()"], [onclick="toggleAddDocForm()"], [onclick="toggleAddExamForm()"], #formAddEvent, #formAddDoc, #formAddExam'
       ).forEach(el => { el.style.display = 'none'; });
@@ -1797,8 +1826,132 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
       }
     }
 
+    ensureCatalogManagementUi(modal, isAdmin);
     ensureSubmissionFilterUi(modal, isAdmin);
   }
+
+  function ensureCatalogManagementUi(modal, isAdmin) {
+    if (!isAdmin || modal.querySelector('#hub-panel-catalog')) return;
+    const firstTabButton = modal.querySelector('.hub-tab-btn, #hub-tab-events');
+    const tabs = modal.querySelector('.hub-tabs, [class*="hub-tabs"]') || firstTabButton?.parentElement;
+    const body = modal.querySelector('.vmo-modal-body');
+    if (!tabs || !body) return;
+
+    const button = document.createElement('button');
+    button.type = 'button';
+    button.className = 'hub-tab-btn';
+    button.id = 'hub-tab-catalog';
+    button.textContent = '🧭 Danh mục nội dung';
+    button.onclick = () => window.switchHubTab('catalog');
+    const syncButton = tabs.querySelector('#btnSyncContentCatalog');
+    tabs.insertBefore(button, syncButton || null);
+
+    const panel = document.createElement('div');
+    panel.id = 'hub-panel-catalog';
+    panel.className = 'hub-panel';
+    panel.style.display = 'none';
+    panel.innerHTML = `
+      <div style="display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:10px;">
+        <div><h4 style="margin:0;color:#1e293b;">Quản trị danh mục câu hỏi</h4><small style="color:#64748b;">Ẩn/hiện và phân quyền nộp bài, đánh giá AI. Không thay đổi khóa liên kết lịch sử.</small></div>
+        <button type="button" onclick="loadCatalogManagement()" style="padding:7px 11px;border:0;border-radius:6px;background:#0284c7;color:white;cursor:pointer;">🔄 Làm mới</button>
+      </div>
+      <div style="display:flex;gap:8px;margin-bottom:10px;flex-wrap:wrap;">
+        <input id="hubCatalogSearch" type="search" placeholder="Tìm bộ đề hoặc câu hỏi..." style="flex:1;min-width:220px;padding:7px 9px;border:1px solid #cbd5e1;border-radius:6px;">
+        <select id="hubCatalogGroup" style="padding:7px;border:1px solid #cbd5e1;border-radius:6px;">
+          <option value="">Tất cả nguồn</option><option value="specialty">Chuyên đề</option><option value="mock_exam">Thi thử</option><option value="tst">TST</option><option value="danang_quangnam">Đà Nẵng–Quảng Nam</option>
+        </select>
+      </div>
+      <div id="hubCatalogList" style="max-height:420px;overflow:auto;"><em>Đang tải catalog...</em></div>`;
+    body.appendChild(panel);
+    panel.querySelector('#hubCatalogSearch').addEventListener('input', renderCatalogManagement);
+    panel.querySelector('#hubCatalogGroup').addEventListener('change', renderCatalogManagement);
+  }
+
+  window.catalogManagementData = { sets: [], problems: [] };
+
+  window.loadCatalogManagement = async function() {
+    if (!requireAdminUiAction()) return;
+    const list = document.getElementById('hubCatalogList');
+    if (!list) return;
+    list.innerHTML = '<em>Đang tải danh mục từ MongoDB...</em>';
+    try {
+      const [sets, problems] = await Promise.all([
+        window.VMODataService.getContentSets(),
+        window.VMODataService.getCatalogProblems()
+      ]);
+      window.catalogManagementData = { sets, problems };
+      renderCatalogManagement();
+    } catch (err) {
+      list.innerHTML = `<div style="color:#b91c1c;padding:12px;">${escapeHtmlText(err?.message || 'Không tải được catalog')}</div>`;
+    }
+  };
+
+  function renderCatalogManagement() {
+    const list = document.getElementById('hubCatalogList');
+    if (!list) return;
+    const query = (document.getElementById('hubCatalogSearch')?.value || '').trim().toLowerCase();
+    const group = document.getElementById('hubCatalogGroup')?.value || '';
+    const data = window.catalogManagementData || { sets: [], problems: [] };
+    const sets = data.sets.filter(set => (!group || set.group === group) && (!query || `${set.title} ${set.key}`.toLowerCase().includes(query) || data.problems.some(p => String(p.setId) === String(set.id || set._id) && `${p.title} ${p.contentKey}`.toLowerCase().includes(query))));
+    if (!sets.length) {
+      list.innerHTML = '<div style="padding:16px;text-align:center;color:#64748b;">Không tìm thấy nội dung phù hợp.</div>';
+      return;
+    }
+    list.innerHTML = sets.map(set => {
+      const setId = String(set.id || set._id);
+      const problems = data.problems.filter(p => String(p.setId) === setId && (!query || `${p.title} ${p.contentKey}`.toLowerCase().includes(query)));
+      return `<details style="border:1px solid #e2e8f0;border-radius:8px;margin-bottom:8px;background:white;" ${query ? 'open' : ''}>
+        <summary style="padding:10px;cursor:pointer;background:#f8fafc;"><strong>${escapeHtmlText(set.title || set.key)}</strong> <span style="color:#64748b;">(${problems.length} câu)</span> ${catalogStatusBadge(set.status)}</summary>
+        <div style="padding:8px;">
+          <div style="display:flex;gap:7px;align-items:center;margin-bottom:8px;">
+            <button type="button" onclick="toggleCatalogStatus('set','${setId}','${set.status === 'draft' ? 'published' : 'draft'}')" style="padding:5px 9px;border:1px solid #cbd5e1;border-radius:5px;background:white;cursor:pointer;">${set.status === 'draft' ? '👁️ Xuất bản bộ' : '🙈 Ẩn bộ'}</button>
+            <small style="color:#64748b;">Mã: ${escapeHtmlText(set.key)}</small>
+          </div>
+          ${problems.map(p => catalogProblemRow(p)).join('') || '<small>Không có câu hỏi phù hợp.</small>'}
+        </div>
+      </details>`;
+    }).join('');
+  }
+
+  function catalogStatusBadge(status) {
+    return status === 'draft'
+      ? '<span style="color:#9a3412;font-size:.75rem;">● Đang ẩn</span>'
+      : '<span style="color:#15803d;font-size:.75rem;">● Công khai</span>';
+  }
+
+  function catalogProblemRow(problem) {
+    const id = String(problem.id || problem._id);
+    return `<div style="border-top:1px solid #e2e8f0;padding:8px 2px;display:flex;justify-content:space-between;gap:8px;align-items:center;">
+      <div style="min-width:0;"><strong style="font-size:.86rem;">${escapeHtmlText(problem.title || problem.contentKey)}</strong><br><small style="color:#64748b;">${escapeHtmlText(problem.contentKey)}</small></div>
+      <div style="display:flex;gap:5px;flex-wrap:wrap;justify-content:flex-end;">
+        <button type="button" onclick="toggleCatalogStatus('problem','${id}','${problem.status === 'draft' ? 'published' : 'draft'}')" style="padding:4px 7px;border:1px solid #cbd5e1;border-radius:5px;background:white;cursor:pointer;">${problem.status === 'draft' ? '👁️ Hiện' : '🙈 Ẩn'}</button>
+        <button type="button" onclick="toggleCatalogPermission('${id}','allowSubmission',${problem.allowSubmission === false})" style="padding:4px 7px;border:1px solid #cbd5e1;border-radius:5px;background:${problem.allowSubmission === false ? '#fff1f2' : '#f0fdf4'};cursor:pointer;">✍️ ${problem.allowSubmission === false ? 'Đang khóa' : 'Cho nộp'}</button>
+        <button type="button" onclick="toggleCatalogPermission('${id}','allowAiEvaluation',${problem.allowAiEvaluation === false})" style="padding:4px 7px;border:1px solid #cbd5e1;border-radius:5px;background:${problem.allowAiEvaluation === false ? '#fff1f2' : '#eef2ff'};cursor:pointer;">🤖 ${problem.allowAiEvaluation === false ? 'Đang khóa' : 'Cho AI'}</button>
+      </div>
+    </div>`;
+  }
+
+  window.toggleCatalogStatus = async function(itemType, id, status) {
+    if (!requireAdminUiAction()) return;
+    const actionLabel = status === 'draft' ? 'ẩn nội dung này' : 'xuất bản nội dung này';
+    if (!window.confirm(`Xác nhận ${actionLabel}? Khóa liên kết lịch sử bài nộp sẽ được giữ nguyên.`)) return;
+    try {
+      await window.VMODataService.updateCatalogItem(itemType, id, { status });
+      showToast(status === 'draft' ? 'Đã chuyển nội dung sang trạng thái ẩn.' : 'Đã xuất bản nội dung.', true);
+      await window.loadCatalogManagement();
+    } catch (err) { showToast(err?.message || 'Không cập nhật được trạng thái', false); }
+  };
+
+  window.toggleCatalogPermission = async function(id, field, enabled) {
+    if (!requireAdminUiAction()) return;
+    const featureLabel = field === 'allowSubmission' ? 'nộp bài' : 'đánh giá AI';
+    if (!window.confirm(`Xác nhận ${enabled ? 'mở' : 'khóa'} chức năng ${featureLabel} cho câu hỏi này?`)) return;
+    try {
+      await window.VMODataService.updateCatalogItem('problem', id, { [field]: enabled });
+      showToast('Đã cập nhật quyền của câu hỏi.', true);
+      await window.loadCatalogManagement();
+    } catch (err) { showToast(err?.message || 'Không cập nhật được quyền', false); }
+  };
 
   function ensureSubmissionFilterUi(modal, isAdmin) {
     const panel = modal?.querySelector('#hub-panel-subs');
@@ -2070,7 +2223,7 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
   };
 
   window.switchHubTab = function(tabName) {
-    ['events', 'docs', 'exams', 'subs'].forEach(t => {
+    ['events', 'docs', 'exams', 'catalog', 'subs'].forEach(t => {
       const btn = document.getElementById('hub-tab-' + t);
       const panel = document.getElementById('hub-panel-' + t);
       if (btn) btn.classList.toggle('active', t === tabName);
@@ -2080,6 +2233,7 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
     if (tabName === 'events') loadHubEvents();
     if (tabName === 'docs') loadHubDocs();
     if (tabName === 'exams') loadHubExams();
+    if (tabName === 'catalog') loadCatalogManagement();
     if (tabName === 'subs') loadAllSubmissions();
   };
 
@@ -2446,6 +2600,7 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
     setupModalEvents();
     injectSubmissionButtons();
     injectDataManagementButton();
+    applyCatalogAccessRules();
   }
 
   if (document.readyState === 'loading') {
@@ -2457,11 +2612,13 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
   // Lắng nghe đổi tab hoặc đổi ngôn ngữ để gắn lại nút
   window.addEventListener('langchange', () => {
     injectSubmissionButtons();
+    applyCatalogAccessRules();
   });
 
   window.reinitDatabaseUI = function() {
     injectSubmissionButtons();
     injectDataManagementButton();
+    applyCatalogAccessRules();
   };
 
 })();
