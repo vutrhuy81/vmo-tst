@@ -3,6 +3,7 @@ import bcrypt from 'bcryptjs';
 import { clearSessionCookie, getSession, setSessionCookie, signSession } from './lib/session.js';
 
 export default async function handler(req, res) {
+  res.setHeader('Cache-Control', 'no-store');
   res.setHeader('Access-Control-Allow-Methods', 'POST,OPTIONS');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type,Authorization');
 
@@ -24,7 +25,7 @@ export default async function handler(req, res) {
       }
     }
 
-    const { action, username, password, fullName } = body || {};
+    const { action, username, password, fullName, role, targetUsername, newPassword } = body || {};
 
     if (action === 'me') {
       const session = getSession(req);
@@ -44,18 +45,118 @@ export default async function handler(req, res) {
       return res.status(200).json({ success: true, needsBootstrap: userCount === 0 });
     }
 
-    if (!username || !password) {
+    const db = await getDb();
+    const users = db.collection('users');
+
+    // Các thao tác quản trị luôn được kiểm tra bằng cookie phiên ở phía server.
+    const adminActions = new Set(['list_users', 'create_user', 'update_password', 'delete_user']);
+    if (adminActions.has(action)) {
+      const session = getSession(req);
+      if (!session) {
+        return res.status(401).json({ success: false, error: 'Phiên đăng nhập không hợp lệ hoặc đã hết hạn' });
+      }
+      if (session.role !== 'admin') {
+        return res.status(403).json({ success: false, error: 'Chỉ quản trị viên mới có quyền thực hiện thao tác này' });
+      }
+
+      if (action === 'list_users') {
+        const list = await users.find({}, {
+          projection: { password: 0 }
+        }).sort({ createdAt: 1, username: 1 }).toArray();
+        return res.status(200).json({
+          success: true,
+          users: list.map(user => ({
+            id: String(user._id),
+            username: user.username,
+            fullName: user.fullName || user.username,
+            role: user.role || 'student',
+            createdAt: user.createdAt || null,
+            updatedAt: user.updatedAt || null
+          }))
+        });
+      }
+
+      if (action === 'create_user') {
+        const cleanNewUsername = String(username || '').trim().toLowerCase();
+        const cleanFullName = String(fullName || '').trim();
+        const cleanRole = role === 'admin' ? 'admin' : 'student';
+
+        if (!/^[a-z0-9_.-]{3,64}$/.test(cleanNewUsername)) {
+          return res.status(400).json({ success: false, error: 'Tên đăng nhập phải có 3–64 ký tự: chữ thường, số, dấu chấm, gạch dưới hoặc gạch ngang' });
+        }
+        if (typeof password !== 'string' || password.length < 8 || password.length > 128) {
+          return res.status(400).json({ success: false, error: 'Mật khẩu phải có từ 8 đến 128 ký tự' });
+        }
+        if (cleanFullName.length > 120) {
+          return res.status(400).json({ success: false, error: 'Họ và tên không được vượt quá 120 ký tự' });
+        }
+
+        await users.createIndex({ username: 1 }, { unique: true });
+        const exists = await users.findOne({ username: cleanNewUsername }, { projection: { _id: 1 } });
+        if (exists) {
+          return res.status(409).json({ success: false, error: 'Tên tài khoản đã tồn tại' });
+        }
+
+        await users.insertOne({
+          username: cleanNewUsername,
+          password: await bcrypt.hash(password, 12),
+          fullName: cleanFullName || cleanNewUsername,
+          role: cleanRole,
+          createdAt: new Date(),
+          createdBy: session.username
+        });
+        return res.status(201).json({ success: true, message: `Đã tạo tài khoản "${cleanNewUsername}"` });
+      }
+
+      const cleanTarget = String(targetUsername || '').trim().toLowerCase();
+      if (!cleanTarget) {
+        return res.status(400).json({ success: false, error: 'Thiếu tên tài khoản cần thao tác' });
+      }
+      const target = await users.findOne({ username: cleanTarget });
+      if (!target) {
+        return res.status(404).json({ success: false, error: 'Không tìm thấy tài khoản' });
+      }
+
+      if (action === 'update_password') {
+        if (typeof newPassword !== 'string' || newPassword.length < 8 || newPassword.length > 128) {
+          return res.status(400).json({ success: false, error: 'Mật khẩu mới phải có từ 8 đến 128 ký tự' });
+        }
+        await users.updateOne({ _id: target._id }, {
+          $set: {
+            password: await bcrypt.hash(newPassword, 12),
+            updatedAt: new Date(),
+            updatedBy: session.username
+          }
+        });
+        return res.status(200).json({ success: true, message: `Đã cập nhật mật khẩu cho "${cleanTarget}"` });
+      }
+
+      if (cleanTarget === session.username) {
+        return res.status(400).json({ success: false, error: 'Không thể xóa tài khoản đang đăng nhập' });
+      }
+      if (target.role === 'admin') {
+        const adminCount = await users.countDocuments({ role: 'admin' }, { limit: 2 });
+        if (adminCount <= 1) {
+          return res.status(400).json({ success: false, error: 'Không thể xóa quản trị viên duy nhất' });
+        }
+      }
+      await users.deleteOne({ _id: target._id });
+      return res.status(200).json({ success: true, message: `Đã xóa tài khoản "${cleanTarget}"` });
+    }
+
+    if (typeof username !== 'string' || typeof password !== 'string' || !username.trim() || !password) {
       return res.status(400).json({ success: false, error: 'Vui lòng nhập tên đăng nhập và mật khẩu' });
     }
 
     const cleanUsername = String(username).trim().toLowerCase();
-    const db = await getDb();
-    const users = db.collection('users');
+    if (!/^[a-z0-9_.-]{3,64}$/.test(cleanUsername)) {
+      return res.status(400).json({ success: false, error: 'Tên đăng nhập không hợp lệ' });
+    }
 
     // Khởi tạo quản trị viên duy nhất khi database hoàn toàn chưa có người dùng.
     // Sau lần tạo đầu tiên, hành động này tự động bị khóa.
     if (action === 'bootstrap_admin') {
-      if (String(password).length < 8) {
+      if (password.length < 8 || password.length > 128) {
         return res.status(400).json({ success: false, error: 'Mật khẩu phải có ít nhất 8 ký tự' });
       }
 
@@ -90,15 +191,15 @@ export default async function handler(req, res) {
 
     // Đăng ký tài khoản
     if (action === 'register') {
-      if (String(password).length < 8) {
-        return res.status(400).json({ success: false, error: 'Mật khẩu phải có ít nhất 8 ký tự' });
+      if (password.length < 8 || password.length > 128) {
+        return res.status(400).json({ success: false, error: 'Mật khẩu phải có từ 8 đến 128 ký tự' });
       }
       const exist = await users.findOne({ username: cleanUsername });
       if (exist) {
         return res.status(400).json({ success: false, error: 'Tên tài khoản đã tồn tại' });
       }
 
-      const hashedPassword = await bcrypt.hash(password, 10);
+      const hashedPassword = await bcrypt.hash(password, 12);
       await users.insertOne({
         username: cleanUsername,
         password: hashedPassword,
