@@ -1,7 +1,7 @@
-const { getDb } = require('./lib/db');
-const { ObjectId } = require('mongodb');
+import { ObjectId } from 'mongodb';
+import { getDb } from './lib/db.js';
 
-module.exports = async function handler(req, res) {
+export default async function handler(req, res) {
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'GET,POST,OPTIONS');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type,Authorization');
