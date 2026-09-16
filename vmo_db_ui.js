@@ -20,6 +20,21 @@
       .replace(/^-+|-+$/g, '');
   }
 
+  function headingTextWithoutActions(heading) {
+    if (!heading) return '';
+    return Array.from(heading.childNodes)
+      .filter(node => {
+        if (node.nodeType === Node.TEXT_NODE) return true;
+        if (node.nodeType !== Node.ELEMENT_NODE) return false;
+        return !node.matches('button, .ai-guide-panel, .btn-submit-solution')
+          && !node.querySelector('button, .ai-guide-panel, .btn-submit-solution');
+      })
+      .map(node => node.textContent || '')
+      .join(' ')
+      .replace(/\s+/g, ' ')
+      .trim();
+  }
+
   function getProblemIdentity(problemCard, fallbackTitle = '') {
     if (problemCard?.classList?.contains('examplebox')) {
       const chapter = problemCard.closest('.chapter-block');
@@ -30,7 +45,9 @@
       return {
         problemKey: `${setKey}:example-${exampleNumber}`,
         setKey,
-        setTitle: (chapter?.querySelector('.chapter-heading')?.textContent || 'Tài liệu chuyên đề VMO').trim(),
+        setTitle: (chapter?.querySelector('.chapter-heading')?.innerText
+          || chapter?.querySelector('.chapter-heading')?.textContent
+          || 'Tài liệu chuyên đề VMO').replace(/\s+/g, ' ').trim(),
         sourceGroup: 'specialty',
         sourceType: 'specialty_example',
         contentType: 'specialty_chapter',
@@ -149,9 +166,7 @@
     exampleBoxes.forEach(box => {
       const heading = box.querySelector('.box-heading');
       if (!heading || box.querySelector('.btn-submit-solution')) return;
-      const headingClone = heading.cloneNode(true);
-      headingClone.querySelectorAll('button, .ai-guide-panel').forEach(node => node.remove());
-      const title = (headingClone.textContent || '').trim();
+      const title = headingTextWithoutActions(heading);
       const identity = getProblemIdentity(box, title);
       box.dataset.contentKey = identity.problemKey;
 
@@ -199,9 +214,7 @@
         : card.querySelector('.problem-id');
       if (!heading) return;
 
-      const headingClone = heading.cloneNode(true);
-      headingClone.querySelectorAll('button, .ai-guide-panel').forEach(node => node.remove());
-      const title = (headingClone.textContent || '').trim();
+      const title = headingTextWithoutActions(heading);
       const identity = getProblemIdentity(card, title);
       if (!identity.problemKey || !identity.setKey) return;
 
