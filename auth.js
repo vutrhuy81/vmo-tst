@@ -115,6 +115,42 @@ const VMOAuth = (() => {
     } catch { return { success: false, message: 'Không thể kết nối máy chủ xác thực.' }; }
   }
 
+  async function getBootstrapStatus() {
+    try {
+      const response = await fetch('/api/auth', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        credentials: 'same-origin',
+        body: JSON.stringify({ action: 'bootstrap_status' })
+      });
+      const data = await response.json();
+      return response.ok && data.success
+        ? { success: true, needsBootstrap: Boolean(data.needsBootstrap) }
+        : { success: false, needsBootstrap: false };
+    } catch {
+      return { success: false, needsBootstrap: false };
+    }
+  }
+
+  async function bootstrapAdmin(fullName, username, password, remember = true) {
+    try {
+      const response = await fetch('/api/auth', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        credentials: 'same-origin',
+        body: JSON.stringify({ action: 'bootstrap_admin', fullName, username, password })
+      });
+      const data = await response.json();
+      if (!response.ok || !data.success) {
+        return { success: false, message: data.error || 'Không thể khởi tạo quản trị viên.' };
+      }
+      setSession(data.user, remember);
+      return { success: true, user: data.user };
+    } catch {
+      return { success: false, message: 'Không thể kết nối máy chủ xác thực.' };
+    }
+  }
+
   async function logout(reason = '') {
     if (window.VMOIdleTracker) {
       window.VMOIdleTracker.stop();
@@ -315,6 +351,8 @@ const VMOAuth = (() => {
     setSession,
     clearSession,
     login,
+    getBootstrapStatus,
+    bootstrapAdmin,
     logout,
     requireAuth,
     redirectIfLoggedIn,

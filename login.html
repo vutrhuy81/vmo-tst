@@ -249,6 +249,32 @@
       transform: translateY(0);
     }
 
+    .bootstrap-panel {
+      display: none;
+      margin-bottom: 20px;
+      padding: 16px;
+      border: 1px solid #fbbf24;
+      border-radius: 12px;
+      background: #fffbeb;
+    }
+
+    .bootstrap-panel h2 {
+      color: #92400e;
+      font-size: 1rem;
+      margin-bottom: 6px;
+    }
+
+    .bootstrap-panel p {
+      color: #78350f;
+      font-size: 0.8rem;
+      line-height: 1.5;
+      margin-bottom: 12px;
+    }
+
+    .bootstrap-panel .login-form {
+      gap: 12px;
+    }
+
     /* ERROR & SUCCESS ALERTS */
     .alert-box {
       display: none;
@@ -348,6 +374,37 @@
 
       <div id="alertBox" class="alert-box"></div>
 
+      <section id="bootstrapPanel" class="bootstrap-panel" aria-live="polite">
+        <h2>Khởi tạo quản trị viên đầu tiên</h2>
+        <p>Database chưa có tài khoản. Biểu mẫu này chỉ hoạt động một lần và sẽ tự khóa sau khi quản trị viên được tạo.</p>
+        <form id="bootstrapForm" class="login-form" autocomplete="off">
+          <div class="input-group">
+            <label for="bootstrapFullName">Họ và tên</label>
+            <div class="input-wrapper">
+              <span class="input-icon">🪪</span>
+              <input type="text" id="bootstrapFullName" placeholder="Nhập họ và tên" required>
+            </div>
+          </div>
+          <div class="input-group">
+            <label for="bootstrapUsername">Tên đăng nhập quản trị</label>
+            <div class="input-wrapper">
+              <span class="input-icon">👤</span>
+              <input type="text" id="bootstrapUsername" placeholder="Tối thiểu 3 ký tự" required>
+            </div>
+          </div>
+          <div class="input-group">
+            <label for="bootstrapPassword">Mật khẩu quản trị</label>
+            <div class="input-wrapper">
+              <span class="input-icon">🔒</span>
+              <input type="password" id="bootstrapPassword" placeholder="Tối thiểu 8 ký tự" minlength="8" required>
+            </div>
+          </div>
+          <button type="submit" id="btnBootstrap" class="btn-login">
+            <span>Tạo quản trị viên đầu tiên</span>
+          </button>
+        </form>
+      </section>
+
       <!-- Đăng nhập & Đăng ký nhanh bằng Google qua Firebase -->
       <div style="margin-bottom: 6px;">
         <button type="button" id="btnGoogleLogin" class="btn-google-auth" title="Đăng nhập hoặc đăng ký tài khoản mới bằng Google">
@@ -413,12 +470,47 @@
     const btnLogin = document.getElementById('btnLogin');
     const btnGoogleLogin = document.getElementById('btnGoogleLogin');
     const googleBtnText = document.getElementById('googleBtnText');
+    const bootstrapPanel = document.getElementById('bootstrapPanel');
+    const bootstrapForm = document.getElementById('bootstrapForm');
+    const btnBootstrap = document.getElementById('btnBootstrap');
 
     function showAlert(msg, isSuccess = false) {
       alertBox.textContent = msg;
       alertBox.className = 'alert-box ' + (isSuccess ? 'alert-success' : 'alert-error');
       alertBox.style.display = 'flex';
     }
+
+    // Chỉ hiển thị biểu mẫu khởi tạo khi MongoDB chưa có bất kỳ tài khoản nào.
+    VMOAuth.getBootstrapStatus().then((status) => {
+      if (status.success && status.needsBootstrap) {
+        bootstrapPanel.style.display = 'block';
+      }
+    });
+
+    bootstrapForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const fullName = document.getElementById('bootstrapFullName').value.trim();
+      const username = document.getElementById('bootstrapUsername').value.trim();
+      const password = document.getElementById('bootstrapPassword').value;
+
+      if (username.length < 3 || password.length < 8) {
+        showAlert('Tên đăng nhập phải có ít nhất 3 ký tự và mật khẩu ít nhất 8 ký tự.');
+        return;
+      }
+
+      btnBootstrap.disabled = true;
+      btnBootstrap.textContent = 'Đang khởi tạo...';
+      const result = await VMOAuth.bootstrapAdmin(fullName, username, password, true);
+      if (result.success) {
+        showAlert('✅ Đã tạo quản trị viên. Đang chuyển vào hệ thống...', true);
+        setTimeout(() => window.location.replace('index.html'), 500);
+        return;
+      }
+
+      showAlert(result.message || 'Không thể tạo quản trị viên.');
+      btnBootstrap.disabled = false;
+      btnBootstrap.textContent = 'Tạo quản trị viên đầu tiên';
+    });
 
     // Kiểm tra thông báo lý do chuyển hướng (ví dụ tự động đăng xuất sau 5 phút)
     const urlParams = new URLSearchParams(window.location.search);
