@@ -2,7 +2,7 @@ import { ObjectId } from 'mongodb';
 import { getDb } from './lib/db.js';
 import { getSession } from './lib/session.js';
 
-const ALLOWED_RESOURCES = new Set(['documents', 'exams', 'content_sets', 'problems', 'submissions', 'submission_image', 'events']);
+const ALLOWED_RESOURCES = new Set(['documents', 'exams', 'content_sets', 'problems', 'content_revisions', 'submissions', 'submission_image', 'events']);
 const CONTENT_TYPES = new Set(['specialty_chapter', 'mock_exam', 'tst_exam', 'regional_exam']);
 const SOURCE_TYPES = new Set(['specialty_example', 'mock_exam_question', 'tst_question', 'regional_question']);
 const MAX_SOLUTION_IMAGE_CHARS = 3_000_000;
@@ -107,6 +107,18 @@ export default async function handler(req, res) {
           { projection: { _id: 0, image: 1, mimeType: 1, createdAt: 1 } }
         );
         return res.status(200).json({ success: true, items: stored ? [stored] : [] });
+      }
+
+      if (resource === 'content_revisions') {
+        if (!requireAdmin(session, res)) return;
+        const problemId = objectId(cleanText(req.query?.problemId, 80));
+        if (!problemId) return res.status(400).json({ success: false, error: 'Mã câu hỏi không hợp lệ' });
+        const items = await db.collection('content_revisions')
+          .find({ problemId })
+          .sort({ createdAt: -1 })
+          .limit(50)
+          .toArray();
+        return res.status(200).json({ success: true, items });
       }
 
       const filter = {};
@@ -499,6 +511,76 @@ export default async function handler(req, res) {
         );
       }
       return res.status(200).json({ success: true, item: result });
+    }
+
+    if (action === 'update_catalog_content') {
+      const id = objectId(cleanText(payload.id, 80));
+      const content = cleanText(payload.content, 50000);
+      const referenceSolution = cleanText(payload.referenceSolution, 100000);
+      const changeNote = cleanText(payload.changeNote, 500);
+      if (!id || !content) {
+        return res.status(400).json({ success: false, error: 'Thiếu câu hỏi hoặc nội dung đề bài' });
+      }
+      const current = await db.collection('problems').findOne({ _id: id });
+      if (!current) return res.status(404).json({ success: false, error: 'Không tìm thấy câu hỏi' });
+      const expectedVersion = cleanNumber(payload.expectedVersion, 0, 0, 1000000);
+      if (expectedVersion && Number(current.version || 1) !== expectedVersion) {
+        return res.status(409).json({ success: false, error: 'Nội dung đã được người khác cập nhật. Hãy tải lại trước khi lưu.' });
+      }
+
+      await db.collection('content_revisions').insertOne({
+        problemId: id,
+        contentKey: current.contentKey,
+        version: Number(current.version || 1),
+        title: current.title,
+        content: current.content || '',
+        referenceSolution: current.referenceSolution || '',
+        changeNote: changeNote || 'Bản tự động trước khi chỉnh sửa',
+        action: 'edit',
+        createdBy: session.username,
+        createdAt: now
+      });
+      const nextVersion = Number(current.version || 1) + 1;
+      await db.collection('problems').updateOne(
+        { _id: id },
+        { $set: { content, referenceSolution, version: nextVersion, updatedBy: session.username, updatedAt: now } }
+      );
+      await db.collection('content_revisions').createIndex({ problemId: 1, createdAt: -1 });
+      return res.status(200).json({ success: true, item: { id: String(id), version: nextVersion } });
+    }
+
+    if (action === 'restore_catalog_revision') {
+      const revisionId = objectId(cleanText(payload.revisionId, 80));
+      if (!revisionId) return res.status(400).json({ success: false, error: 'Phiên bản khôi phục không hợp lệ' });
+      const revision = await db.collection('content_revisions').findOne({ _id: revisionId });
+      if (!revision) return res.status(404).json({ success: false, error: 'Không tìm thấy phiên bản' });
+      const current = await db.collection('problems').findOne({ _id: revision.problemId });
+      if (!current) return res.status(404).json({ success: false, error: 'Không tìm thấy câu hỏi gốc' });
+
+      await db.collection('content_revisions').insertOne({
+        problemId: current._id,
+        contentKey: current.contentKey,
+        version: Number(current.version || 1),
+        title: current.title,
+        content: current.content || '',
+        referenceSolution: current.referenceSolution || '',
+        changeNote: `Bản tự động trước khi khôi phục phiên bản ${revision.version}`,
+        action: 'restore_backup',
+        createdBy: session.username,
+        createdAt: now
+      });
+      const nextVersion = Number(current.version || 1) + 1;
+      await db.collection('problems').updateOne(
+        { _id: current._id },
+        { $set: {
+          content: revision.content || '',
+          referenceSolution: revision.referenceSolution || '',
+          version: nextVersion,
+          updatedBy: session.username,
+          updatedAt: now
+        } }
+      );
+      return res.status(200).json({ success: true, item: { id: String(current._id), version: nextVersion } });
     }
 
     if (action === 'add_document') {
