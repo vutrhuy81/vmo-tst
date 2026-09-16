@@ -41,6 +41,10 @@ function cleanNumber(value, fallback = 0, min = 0, max = 10000) {
   return Number.isFinite(parsed) ? Math.max(min, Math.min(max, parsed)) : fallback;
 }
 
+function escapeRegex(value) {
+  return String(value || '').replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+}
+
 function problemSnapshot(problem) {
   if (!problem) return null;
   return {
@@ -140,6 +144,43 @@ export default async function handler(req, res) {
         }
         if (req.query?.problemKey) filter.problemKey = cleanKey(req.query.problemKey);
         if (req.query?.setId) filter.setId = cleanText(req.query.setId, 80);
+
+        if (req.query?.paged === '1') {
+          if (req.query?.sourceGroup) filter.sourceGroup = cleanText(req.query.sourceGroup, 80);
+          if (session.role === 'admin' && req.query?.username) {
+            filter.username = { $regex: escapeRegex(cleanText(req.query.username, 80)), $options: 'i' };
+          }
+          if (req.query?.evaluation === 'yes') filter.evaluation = { $type: 'object' };
+          if (req.query?.evaluation === 'no') filter.evaluation = null;
+
+          const from = req.query?.dateFrom ? new Date(cleanText(req.query.dateFrom, 40)) : null;
+          const to = req.query?.dateTo ? new Date(cleanText(req.query.dateTo, 40)) : null;
+          if ((from && !Number.isNaN(from.getTime())) || (to && !Number.isNaN(to.getTime()))) {
+            filter.createdAt = {};
+            if (from && !Number.isNaN(from.getTime())) filter.createdAt.$gte = from;
+            if (to && !Number.isNaN(to.getTime())) {
+              to.setUTCHours(23, 59, 59, 999);
+              filter.createdAt.$lte = to;
+            }
+          }
+
+          const keyword = cleanText(req.query?.q, 120);
+          if (keyword) {
+            const search = { $regex: escapeRegex(keyword), $options: 'i' };
+            filter.$and = [
+              ...(filter.$or ? [{ $or: filter.$or }] : []),
+              { $or: [
+                { username: search },
+                { authorName: search },
+                { problemTitle: search },
+                { 'problemSnapshot.title': search },
+                { 'problemSnapshot.setTitle': search },
+                { solutionContent: search }
+              ] }
+            ];
+            delete filter.$or;
+          }
+        }
       }
 
       const sort = resource === 'events'
@@ -147,6 +188,25 @@ export default async function handler(req, res) {
         : resource === 'content_sets' || resource === 'problems'
           ? { order: 1, orderNumber: 1 }
           : { createdAt: -1 };
+      if (resource === 'submissions' && req.query?.paged === '1') {
+        const page = cleanNumber(req.query?.page, 1, 1, 100000);
+        const limit = cleanNumber(req.query?.limit, 10, 5, 50);
+        const total = await db.collection(resource).countDocuments(filter);
+        const pages = Math.max(1, Math.ceil(total / limit));
+        const safePage = Math.min(page, pages);
+        const items = await db.collection(resource)
+          .find(filter)
+          .sort(sort)
+          .skip((safePage - 1) * limit)
+          .limit(limit)
+          .toArray();
+        return res.status(200).json({
+          success: true,
+          items,
+          pagination: { page: safePage, limit, total, pages }
+        });
+      }
+
       const items = await db.collection(resource).find(filter).sort(sort).limit(500).toArray();
       return res.status(200).json({ success: true, items });
     }
