@@ -1815,6 +1815,9 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
     try {
       if (window.VMODataService && window.VMODataService.getAllSubmissions) {
         const subs = await window.VMODataService.getAllSubmissions();
+        // Dùng cùng nguồn dữ liệu với cửa sổ lịch sử để các nút xem chi tiết
+        // có thể mở đúng nhận xét AI của bản ghi đang hiển thị trong Database Hub.
+        window.lastLoadedSubmissions = subs || [];
         if (!subs || subs.length === 0) {
           el.innerHTML = '<div style="padding:14px; text-align:center; color:#94a3b8; font-style:italic;">Chưa có bài giải nào được lưu trên hệ thống database. Học sinh hoặc giáo viên có thể nhấn "✍️ Nộp bài giải" hoặc "🚀 Lưu bài giải lên database" ở từng câu hỏi để lưu vào đây!</div>';
           return;
@@ -1822,6 +1825,16 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
         el.innerHTML = subs.map((s, idx) => {
           const dateStr = s.createdAt ? new Date(s.createdAt).toLocaleString('vi-VN') : '';
           const preview = s.solutionContent ? s.solutionContent.slice(0, 150) + (s.solutionContent.length > 150 ? '...' : '') : '';
+          const evaluationBtn = s.evaluation ? `
+            <button type="button" onclick="viewSubEvaluationDetail(${idx})" style="background:#eef2ff; border:1px solid #c7d2fe; color:#4338ca; border-radius:4px; padding:5px 9px; font-size:0.75rem; cursor:pointer; font-weight:600;">
+              👁️ Xem nhận xét AI
+            </button>
+          ` : '';
+          const imageBtn = s.hasImage ? `
+            <button type="button" onclick="viewSubmissionImage('${s.id || s._id}')" style="background:#ecfeff; border:1px solid #a5f3fc; color:#0e7490; border-radius:4px; padding:5px 9px; font-size:0.75rem; cursor:pointer; font-weight:600;">
+              📷 Xem ảnh
+            </button>
+          ` : '';
           return `
             <div style="background:#f8fafc; border:1px solid #e2e8f0; border-radius:8px; padding:10px 14px; margin-bottom:8px;">
               <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:4px;">
@@ -1832,6 +1845,12 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
                 📅 Thời gian: ${dateStr} | 👤 Tài khoản: ${s.authorEmail || s.userId || 'Ẩn danh'}
               </div>
               <div style="background:#ffffff; border:1px solid #e2e8f0; border-radius:6px; padding:8px; font-family:monospace; font-size:0.85rem; color:#334155; white-space:pre-wrap;">${preview}</div>
+              ${(evaluationBtn || imageBtn) ? `
+                <div style="display:flex; flex-wrap:wrap; gap:6px; margin-top:8px;">
+                  ${evaluationBtn}
+                  ${imageBtn}
+                </div>
+              ` : ''}
             </div>
           `;
         }).join('');
