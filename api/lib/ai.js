@@ -9,6 +9,21 @@ function parseJson(text) {
   try { return JSON.parse(cleaned.slice(start, end + 1)); } catch { return null; }
 }
 
+function normalizeMathOutput(value) {
+  if (typeof value === 'string') {
+    return value
+      .replace(/\\begin\{(?:itemize|enumerate)\}/g, '\n')
+      .replace(/\\end\{(?:itemize|enumerate)\}/g, '\n')
+      .replace(/\\item\s*/g, '\n- ')
+      .replace(/\\textbf\{([^{}]*)\}/g, '**$1**');
+  }
+  if (Array.isArray(value)) return value.map(normalizeMathOutput);
+  if (value && typeof value === 'object') {
+    return Object.fromEntries(Object.entries(value).map(([key, item]) => [key, normalizeMathOutput(item)]));
+  }
+  return value;
+}
+
 export function checkRateLimit(username, limit = 12, windowMs = 60_000) {
   const key = String(username || 'anonymous');
   const now = Date.now();
@@ -57,7 +72,7 @@ export async function generateJson({ contents, schema, systemInstruction, temper
         new Promise((_, reject) => setTimeout(() => reject(new Error('AI_TIMEOUT')), 25_000))
       ]);
       const data = parseJson(response?.text);
-      if (data) return { data, model };
+      if (data) return { data: normalizeMathOutput(data), model };
       lastError = new Error('AI trả về JSON không hợp lệ');
     } catch (error) {
       lastError = error;
