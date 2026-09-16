@@ -372,6 +372,17 @@ export default async function handler(req, res) {
       return res.status(201).json({ success: true, item: { _id: result.insertedId, ...doc } });
     }
 
+    if (action === 'delete_submission') {
+      const id = objectId(payload.id);
+      if (!id) return res.status(400).json({ success: false, error: 'ID bài nộp không hợp lệ' });
+      const result = await db.collection('submissions').deleteOne({ _id: id });
+      if (!result.deletedCount) {
+        return res.status(404).json({ success: false, error: 'Không tìm thấy bài nộp' });
+      }
+      await db.collection('submission_images').deleteMany({ submissionId: id });
+      return res.status(200).json({ success: true, deletedId: String(id) });
+    }
+
     const deletions = { delete_document: 'documents', delete_event: 'events' };
     if (deletions[action]) {
       const id = objectId(payload.id);
