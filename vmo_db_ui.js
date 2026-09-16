@@ -1536,6 +1536,33 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
   }
 
   // 4. MODAL "DATABASE HUB" TRỰC QUAN
+  function isCurrentUserAdmin() {
+    return window.VMOAuth?.getSession?.()?.role === 'admin';
+  }
+
+  function requireAdminUiAction() {
+    if (isCurrentUserAdmin()) return true;
+    showToast('Chức năng này chỉ dành cho quản trị viên.', false);
+    return false;
+  }
+
+  function applyDataHubPermissions(modal) {
+    if (!modal) return;
+    const isAdmin = isCurrentUserAdmin();
+    const heading = modal.querySelector('#hubModalHeading, .vmo-modal-title span:last-child');
+    if (heading) {
+      heading.textContent = isAdmin
+        ? 'Trung tâm Quản trị Dữ liệu (VMO Database Hub)'
+        : 'Kho dữ liệu học tập (VMO Database Hub)';
+    }
+
+    if (!isAdmin) {
+      modal.querySelectorAll(
+        '[onclick="toggleAddEventForm()"], [onclick="toggleAddDocForm()"], [onclick="toggleAddExamForm()"], #formAddEvent, #formAddDoc, #formAddExam'
+      ).forEach(el => { el.style.display = 'none'; });
+    }
+  }
+
   window.openDataHubModal = function() {
     let modal = document.getElementById('dataHubModal');
     if (!modal) {
@@ -1736,6 +1763,7 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
       document.head.appendChild(style);
     }
 
+    applyDataHubPermissions(modal);
     switchHubTab('events');
     modal.classList.add('active');
     modal.style.display = 'flex';
@@ -1816,14 +1844,17 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
   };
 
   window.toggleAddEventForm = function() {
+    if (!requireAdminUiAction()) return;
     const f = document.getElementById('formAddEvent');
     if (f) f.style.display = (f.style.display === 'none') ? 'block' : 'none';
   };
   window.toggleAddDocForm = function() {
+    if (!requireAdminUiAction()) return;
     const f = document.getElementById('formAddDoc');
     if (f) f.style.display = (f.style.display === 'none') ? 'block' : 'none';
   };
   window.toggleAddExamForm = function() {
+    if (!requireAdminUiAction()) return;
     const f = document.getElementById('formAddExam');
     if (f) f.style.display = (f.style.display === 'none') ? 'block' : 'none';
   };
@@ -1847,9 +1878,7 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
             </div>
             ${e.description ? `<div style="font-size:0.8rem; color:#475569; margin-top:4px;">${e.description}</div>` : ''}
           </div>
-          <button type="button" onclick="deleteEventItem('${e.id}')" style="background:#fee2e2; border:none; color:#dc2626; padding:6px 10px; border-radius:6px; cursor:pointer; font-size:0.8rem;">
-            🗑️ Xóa
-          </button>
+          ${isCurrentUserAdmin() ? `<button type="button" onclick="deleteEventItem('${e.id}')" style="background:#fee2e2; border:none; color:#dc2626; padding:6px 10px; border-radius:6px; cursor:pointer; font-size:0.8rem;">🗑️ Xóa</button>` : ''}
         </div>
       `).join('');
     } catch (err) {
@@ -1875,9 +1904,7 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
             </div>
             ${d.fileUrl ? `<a href="${d.fileUrl}" target="_blank" rel="noreferrer" style="font-size:0.8rem; color:#0284c7; text-decoration:underline;">🔗 Mở tài liệu</a>` : ''}
           </div>
-          <button type="button" onclick="deleteDocItem('${d.id}')" style="background:#fee2e2; border:none; color:#dc2626; padding:6px 10px; border-radius:6px; cursor:pointer; font-size:0.8rem;">
-            🗑️ Xóa
-          </button>
+          ${isCurrentUserAdmin() ? `<button type="button" onclick="deleteDocItem('${d.id}')" style="background:#fee2e2; border:none; color:#dc2626; padding:6px 10px; border-radius:6px; cursor:pointer; font-size:0.8rem;">🗑️ Xóa</button>` : ''}
         </div>
       `).join('');
     } catch (err) {
@@ -1910,6 +1937,7 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
   // Handlers tạo mới
   window.handleCreateEvent = async function(e) {
     e.preventDefault();
+    if (!requireAdminUiAction()) return;
     const title = document.getElementById('evtTitle').value.trim();
     const eventType = document.getElementById('evtType').value;
     const startDate = document.getElementById('evtStartDate').value;
@@ -1928,6 +1956,7 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
 
   window.handleCreateDocument = async function(e) {
     e.preventDefault();
+    if (!requireAdminUiAction()) return;
     const title = document.getElementById('docTitle').value.trim();
     const topic = document.getElementById('docTopic').value;
     const author = document.getElementById('docAuthor').value.trim();
@@ -1945,6 +1974,7 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
 
   window.handleCreateExam = async function(e) {
     e.preventDefault();
+    if (!requireAdminUiAction()) return;
     const title = document.getElementById('examTitle').value.trim();
     const category = document.getElementById('examCategory').value;
     const province = document.getElementById('examProvince').value.trim();
@@ -1962,6 +1992,7 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
   };
 
   window.deleteEventItem = async function(id) {
+    if (!requireAdminUiAction()) return;
     if (!confirm('Bạn có chắc chắn muốn xóa sự kiện này khỏi Database?')) return;
     try {
       await window.VMODataService.deleteEvent(id);
@@ -1973,6 +2004,7 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
   };
 
   window.deleteDocItem = async function(id) {
+    if (!requireAdminUiAction()) return;
     if (!confirm('Bạn có chắc chắn muốn xóa tài liệu này khỏi Database?')) return;
     try {
       await window.VMODataService.deleteDocument(id);
