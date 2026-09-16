@@ -1796,6 +1796,46 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
         tabs.appendChild(syncButton);
       }
     }
+
+    ensureSubmissionFilterUi(modal, isAdmin);
+  }
+
+  function ensureSubmissionFilterUi(modal, isAdmin) {
+    const panel = modal?.querySelector('#hub-panel-subs');
+    const list = modal?.querySelector('#hubSubsList');
+    if (!panel || !list || panel.querySelector('#hubSubmissionFilters')) return;
+    const filters = document.createElement('div');
+    filters.id = 'hubSubmissionFilters';
+    filters.style.cssText = 'display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:7px;margin-bottom:10px;padding:10px;background:#f8fafc;border:1px solid #e2e8f0;border-radius:8px;';
+    filters.innerHTML = `
+      <input id="hubSubSearch" type="search" placeholder="Tìm câu hỏi, bộ đề, lời giải..." style="min-width:0;padding:7px 9px;border:1px solid #cbd5e1;border-radius:6px;">
+      ${isAdmin ? '<input id="hubSubUsername" type="search" placeholder="Tài khoản" style="min-width:0;padding:7px 9px;border:1px solid #cbd5e1;border-radius:6px;">' : '<span></span>'}
+      <select id="hubSubSource" style="min-width:0;padding:7px;border:1px solid #cbd5e1;border-radius:6px;">
+        <option value="">Tất cả nguồn</option><option value="specialty">Chuyên đề</option><option value="mock_exam">Thi thử</option><option value="tst">TST</option><option value="danang_quangnam">Đà Nẵng–Quảng Nam</option>
+      </select>
+      <select id="hubSubEvaluation" style="min-width:0;padding:7px;border:1px solid #cbd5e1;border-radius:6px;">
+        <option value="">Mọi trạng thái AI</option><option value="yes">Có đánh giá AI</option><option value="no">Chưa đánh giá AI</option>
+      </select>
+      <input id="hubSubDateFrom" type="date" title="Từ ngày" style="min-width:0;padding:7px;border:1px solid #cbd5e1;border-radius:6px;">
+      <button type="button" onclick="applySubmissionFilters()" style="padding:7px 12px;border:0;border-radius:6px;background:#0369a1;color:white;font-weight:700;cursor:pointer;">Lọc</button>
+      <input id="hubSubDateTo" type="date" title="Đến ngày" style="min-width:0;padding:7px;border:1px solid #cbd5e1;border-radius:6px;">
+      <select id="hubSubPageSize" title="Số bài mỗi trang" style="min-width:0;padding:7px;border:1px solid #cbd5e1;border-radius:6px;">
+        <option value="5">5 bài/trang</option><option value="10" selected>10 bài/trang</option><option value="20">20 bài/trang</option><option value="50">50 bài/trang</option>
+      </select>
+      <button type="button" onclick="resetSubmissionFilters()" style="padding:7px 12px;border:1px solid #cbd5e1;border-radius:6px;background:white;color:#475569;font-weight:600;cursor:pointer;">Đặt lại</button>
+    `;
+    list.before(filters);
+    filters.querySelectorAll('input').forEach(field => {
+      field.addEventListener('keydown', event => {
+        if (event.key === 'Enter') {
+          event.preventDefault();
+          window.applySubmissionFilters();
+        }
+      });
+    });
+    filters.querySelector('#hubSubPageSize')?.addEventListener('change', () => {
+      window.applySubmissionFilters();
+    });
   }
 
   window.openDataHubModal = function() {
@@ -2043,13 +2083,59 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
     if (tabName === 'subs') loadAllSubmissions();
   };
 
+  window.hubSubmissionState = { page: 1, limit: 10, total: 0, pages: 1 };
+
+  function readSubmissionFilters() {
+    return {
+      page: window.hubSubmissionState.page,
+      limit: Number(document.getElementById('hubSubPageSize')?.value) || 10,
+      q: document.getElementById('hubSubSearch')?.value?.trim() || '',
+      username: document.getElementById('hubSubUsername')?.value?.trim() || '',
+      sourceGroup: document.getElementById('hubSubSource')?.value || '',
+      evaluation: document.getElementById('hubSubEvaluation')?.value || '',
+      dateFrom: document.getElementById('hubSubDateFrom')?.value || '',
+      dateTo: document.getElementById('hubSubDateTo')?.value || ''
+    };
+  }
+
+  window.applySubmissionFilters = function() {
+    window.hubSubmissionState.page = 1;
+    window.loadAllSubmissions();
+  };
+
+  window.resetSubmissionFilters = function() {
+    ['hubSubSearch', 'hubSubUsername', 'hubSubSource', 'hubSubEvaluation', 'hubSubDateFrom', 'hubSubDateTo']
+      .forEach(id => {
+        const field = document.getElementById(id);
+        if (field) field.value = '';
+      });
+    const pageSize = document.getElementById('hubSubPageSize');
+    if (pageSize) pageSize.value = '10';
+    window.hubSubmissionState = { page: 1, limit: 10, total: 0, pages: 1 };
+    window.loadAllSubmissions();
+  };
+
+  window.changeSubmissionPage = function(page) {
+    const requested = Math.max(1, Math.min(Number(page) || 1, window.hubSubmissionState.pages || 1));
+    if (requested === window.hubSubmissionState.page) return;
+    window.hubSubmissionState.page = requested;
+    window.loadAllSubmissions();
+  };
+
   window.loadAllSubmissions = async function() {
     const el = document.getElementById('hubSubsList');
     if (!el) return;
     el.innerHTML = '<em>Đang tải danh sách bài nộp từ database...</em>';
     try {
-      if (window.VMODataService && window.VMODataService.getAllSubmissions) {
-        const subs = await window.VMODataService.getAllSubmissions();
+      if (window.VMODataService && window.VMODataService.getSubmissionsPage) {
+        const result = await window.VMODataService.getSubmissionsPage(readSubmissionFilters());
+        const subs = result.items || [];
+        window.hubSubmissionState = {
+          page: result.pagination?.page || 1,
+          limit: result.pagination?.limit || 10,
+          total: result.pagination?.total || 0,
+          pages: result.pagination?.pages || 1
+        };
         // Dùng cùng nguồn dữ liệu với cửa sổ lịch sử để các nút xem chi tiết
         // có thể mở đúng nhận xét AI của bản ghi đang hiển thị trong Database Hub.
         window.lastLoadedSubmissions = subs || [];
@@ -2057,7 +2143,7 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
           el.innerHTML = '<div style="padding:14px; text-align:center; color:#94a3b8; font-style:italic;">Chưa có bài giải nào được lưu trên hệ thống database. Học sinh hoặc giáo viên có thể nhấn "✍️ Nộp bài giải" hoặc "🚀 Lưu bài giải lên database" ở từng câu hỏi để lưu vào đây!</div>';
           return;
         }
-        el.innerHTML = subs.map((s, idx) => {
+        const cardsHtml = subs.map((s, idx) => {
           const dateStr = s.createdAt ? new Date(s.createdAt).toLocaleString('vi-VN') : '';
           const preview = s.solutionContent ? s.solutionContent.slice(0, 150) + (s.solutionContent.length > 150 ? '...' : '') : '';
           const snapshot = s.problemSnapshot || {};
@@ -2109,6 +2195,16 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
             </div>
           `;
         }).join('');
+        const state = window.hubSubmissionState;
+        const pagerHtml = `
+          <div style="position:sticky;bottom:0;display:flex;justify-content:space-between;align-items:center;gap:10px;padding:9px 10px;background:#fff;border:1px solid #e2e8f0;border-radius:7px;box-shadow:0 -2px 8px rgba(15,23,42,.06);">
+            <span style="font-size:.8rem;color:#475569;">Tổng <strong>${state.total}</strong> bài · Trang <strong>${state.page}/${state.pages}</strong></span>
+            <div style="display:flex;gap:6px;">
+              <button type="button" onclick="changeSubmissionPage(${state.page - 1})" ${state.page <= 1 ? 'disabled' : ''} style="padding:5px 10px;border:1px solid #cbd5e1;border-radius:5px;background:#fff;cursor:pointer;">← Trước</button>
+              <button type="button" onclick="changeSubmissionPage(${state.page + 1})" ${state.page >= state.pages ? 'disabled' : ''} style="padding:5px 10px;border:1px solid #cbd5e1;border-radius:5px;background:#fff;cursor:pointer;">Sau →</button>
+            </div>
+          </div>`;
+        el.innerHTML = cardsHtml + pagerHtml;
       } else {
         el.innerHTML = '<div style="color:#dc2626;">Dịch vụ VMODataService chưa sẵn sàng.</div>';
       }

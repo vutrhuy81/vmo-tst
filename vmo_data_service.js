@@ -106,6 +106,18 @@ async function request(resource, params = {}) {
   return Array.isArray(data.items) ? data.items : [];
 }
 
+async function requestPage(resource, params = {}) {
+  const query = new URLSearchParams({ resource });
+  Object.entries(params).forEach(([key, value]) => {
+    if (value !== null && value !== undefined && value !== '') query.set(key, String(value));
+  });
+  const data = await apiFetch(`${DATA_API_URL}?${query.toString()}`);
+  return {
+    items: normalizeList(Array.isArray(data.items) ? data.items : []),
+    pagination: data.pagination || { page: 1, limit: 10, total: 0, pages: 1 }
+  };
+}
+
 async function mutate(action, payload = {}) {
   const data = await apiFetch(DATA_API_URL, {
     method: 'POST',
@@ -267,6 +279,20 @@ export async function getAllSubmissions() {
   return normalizeList(await request('submissions'));
 }
 
+export async function getSubmissionsPage(filters = {}) {
+  return requestPage('submissions', {
+    paged: 1,
+    page: filters.page || 1,
+    limit: filters.limit || 10,
+    q: filters.q,
+    username: filters.username,
+    sourceGroup: filters.sourceGroup,
+    evaluation: filters.evaluation,
+    dateFrom: filters.dateFrom,
+    dateTo: filters.dateTo
+  });
+}
+
 export async function deleteSubmission(id) {
   const cleanId = normalizeId(id).trim();
   if (!cleanId) {
@@ -304,6 +330,7 @@ const VMODataService = Object.freeze({
   getSubmissionImage,
   getSubmissionsForProblem,
   getAllSubmissions,
+  getSubmissionsPage,
   deleteSubmission,
   getEvents,
   addEvent,
