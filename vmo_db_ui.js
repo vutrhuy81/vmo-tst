@@ -92,7 +92,9 @@
     exampleBoxes.forEach(box => {
       const heading = box.querySelector('.box-heading');
       if (!heading || box.querySelector('.btn-submit-solution')) return;
-      const title = (heading.innerText || heading.textContent || '').trim();
+      const headingClone = heading.cloneNode(true);
+      headingClone.querySelectorAll('button, .ai-guide-panel').forEach(node => node.remove());
+      const title = (headingClone.textContent || '').trim();
       const uniqueId = 'vd-' + title.replace(/[^a-zA-Z0-9]/g, '_');
 
       const btn = document.createElement('button');
@@ -977,7 +979,7 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
           if (chHeading) examTitle = (chHeading.innerText || chHeading.textContent || '').trim();
         }
 
-        const pEls = Array.from(problemCard.querySelectorAll('p')).filter(p => !p.closest('.example-solution'));
+        const pEls = Array.from(problemCard.querySelectorAll('p')).filter(p => !p.closest('.example-solution') && !p.closest('.ai-guide-panel'));
         problemContentRaw = pEls.map(p => p.getAttribute('data-raw-math') || p.innerHTML).join('<br><br>');
         problemContentDisplay = problemContentRaw;
       } else {

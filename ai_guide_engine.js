@@ -324,7 +324,7 @@
           </div>
           <div class="ai-guide-actions">
             <button type="button" class="btn-guide-action" id="btn-save-ai-${problemId}" onclick="saveAIGuideToDatabase('${problemId}', '${(topic || guideData.branch || defaultTopic).replace(/'/g, "\\'")}')" title="Lưu hướng dẫn giải này vào MongoDB" style="color: #0284c7; font-weight: 600;">
-              🚀 Lưu bài giải lên Firestore
+              🚀 Lưu bài giải lên MongoDB
             </button>
             <button type="button" class="btn-guide-action" onclick="copyAIGuideText('${problemId}')" title="${copyTitle}">
               ${copyBtn}
@@ -381,6 +381,22 @@
   }
 
   // Xử lý mở/đóng AI Hướng dẫn giải
+  function cleanElementText(element) {
+    if (!element) return '';
+    const clone = element.cloneNode(true);
+    clone.querySelectorAll('button, .ai-guide-panel, .btn-submit-solution, .btn-ai-guide').forEach(node => node.remove());
+    return (clone.textContent || '').trim();
+  }
+
+  function extractMathText(element) {
+    if (!element) return '';
+    const raw = element.getAttribute('data-raw-math') || element.innerHTML || '';
+    const holder = document.createElement('div');
+    holder.innerHTML = raw;
+    holder.querySelectorAll('button, .ai-guide-panel').forEach(node => node.remove());
+    return (holder.textContent || '').trim();
+  }
+
   window.openAIGuide = async function(btn) {
     const card = btn.closest('.problem-item') || btn.closest('.examplebox') || btn.closest('.book-subsection') || btn.closest('article');
     if (!card) return;
@@ -392,10 +408,12 @@
     const examCard = card.closest('.exam-card');
     const examTitleEl = examCard ? examCard.querySelector('.exam-title') : null;
 
-    const problemId = (card.id || (idEl ? idEl.innerText : 'cau-hoi')).replace(/[^a-zA-Z0-9_-]/g, '-').toLowerCase() + '-' + Math.abs(hashCode(contentEl ? contentEl.innerText.slice(0, 50) : 'vmo'));
-    const problemTitle = idEl ? idEl.innerText : 'Bài toán Olympic';
+    const sourceText = extractMathText(contentEl) || cleanElementText(card);
+    const cleanTitle = cleanElementText(idEl) || 'Bài toán Olympic';
+    const problemId = (card.id || cleanTitle).replace(/[^a-zA-Z0-9_-]/g, '-').toLowerCase() + '-' + Math.abs(hashCode(sourceText.slice(0, 50) || 'vmo'));
+    const problemTitle = cleanTitle;
     const problemTopic = topicEl ? topicEl.innerText : '';
-    const problemContent = contentEl ? contentEl.innerText : card.innerText;
+    const problemContent = sourceText;
     const examTitle = examTitleEl ? examTitleEl.innerText : 'Ôn luyện VMO Đà Nẵng 2026 - 2027';
 
     // Kiểm tra xem panel đã tồn tại chưa
