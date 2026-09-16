@@ -1,9 +1,9 @@
 /**
- * VMO DATA SERVICE â€” MongoDB Atlas qua Vercel API.
+ * VMO DATA SERVICE — MongoDB Atlas qua Vercel API.
  *
- * TrÃ¬nh duyá»‡t chá»‰ giao tiáº¿p vá»›i /api/data. Má»i kiá»ƒm tra phiÃªn Ä‘Äƒng nháº­p,
- * phÃ¢n quyá»n vÃ  truy cáº­p MongoDB Ä‘á»u Ä‘Æ°á»£c thá»±c hiá»‡n táº¡i server.
- * File nÃ y khÃ´ng sá»­ dá»¥ng Firebase/Firestore.
+ * Trình duyệt chỉ giao tiếp với /api/data. Mọi kiểm tra phiên đăng nhập,
+ * phân quyền và truy cập MongoDB đều được thực hiện tại server.
+ * File này không sử dụng Firebase/Firestore.
  */
 
 const DATA_API_URL = '/api/data';
@@ -23,7 +23,7 @@ async function parseResponse(response) {
   if (!contentType.includes('application/json')) {
     const text = await response.text().catch(() => '');
     throw createServiceError(
-      text || `MÃ¡y chá»§ tráº£ vá» dá»¯ liá»‡u khÃ´ng há»£p lá»‡ (HTTP ${response.status})`,
+      text || `Máy chủ trả về dữ liệu không hợp lệ (HTTP ${response.status})`,
       response.status,
       'INVALID_RESPONSE'
     );
@@ -32,7 +32,7 @@ async function parseResponse(response) {
   const data = await response.json().catch(() => null);
   if (!data || typeof data !== 'object') {
     throw createServiceError(
-      `KhÃ´ng Ä‘á»c Ä‘Æ°á»£c pháº£n há»“i tá»« mÃ¡y chá»§ (HTTP ${response.status})`,
+      `Không đọc được phản hồi từ máy chủ (HTTP ${response.status})`,
       response.status,
       'INVALID_JSON'
     );
@@ -46,7 +46,7 @@ async function parseResponse(response) {
         : 'API_ERROR';
 
     throw createServiceError(
-      data.error || data.message || `YÃªu cáº§u tháº¥t báº¡i (HTTP ${response.status})`,
+      data.error || data.message || `Yêu cầu thất bại (HTTP ${response.status})`,
       response.status,
       code
     );
@@ -75,7 +75,7 @@ async function apiFetch(url, options = {}) {
   } catch (error) {
     if (error?.name === 'AbortError') {
       throw createServiceError(
-        'MÃ¡y chá»§ pháº£n há»“i quÃ¡ cháº­m. Vui lÃ²ng thá»­ láº¡i.',
+        'Máy chủ phản hồi quá chậm. Vui lòng thử lại.',
         0,
         'TIMEOUT'
       );
@@ -84,7 +84,7 @@ async function apiFetch(url, options = {}) {
     if (error?.name === 'VMODataServiceError') throw error;
 
     throw createServiceError(
-      error?.message || 'KhÃ´ng thá»ƒ káº¿t ná»‘i tá»›i API MongoDB',
+      error?.message || 'Không thể kết nối tới API MongoDB',
       0,
       'NETWORK_ERROR'
     );
@@ -139,8 +139,8 @@ function normalizeList(items) {
 }
 
 /**
- * Há»“ sÆ¡ ngÆ°á»i dÃ¹ng Ä‘Æ°á»£c quáº£n lÃ½ qua /api/auth.
- * HÃ m nÃ y Ä‘Æ°á»£c giá»¯ láº¡i Ä‘á»ƒ tÆ°Æ¡ng thÃ­ch vá»›i mÃ£ giao diá»‡n cÅ©.
+ * Hồ sơ người dùng được quản lý qua /api/auth.
+ * Hàm này được giữ lại để tương thích với mã giao diện cũ.
  */
 export async function syncUserProfile(user) {
   return user || null;
@@ -149,7 +149,7 @@ export async function syncUserProfile(user) {
 export async function getAllUsers() {
   if (!window.VMOAuth?.listUsers) {
     throw createServiceError(
-      'Dá»‹ch vá»¥ quáº£n lÃ½ tÃ i khoáº£n chÆ°a sáºµn sÃ ng',
+      'Dịch vụ quản lý tài khoản chưa sẵn sàng',
       0,
       'AUTH_SERVICE_UNAVAILABLE'
     );
@@ -158,7 +158,7 @@ export async function getAllUsers() {
   const result = await window.VMOAuth.listUsers();
   if (!result?.success) {
     throw createServiceError(
-      result?.message || result?.error || 'KhÃ´ng thá»ƒ Ä‘á»c danh sÃ¡ch tÃ i khoáº£n',
+      result?.message || result?.error || 'Không thể đọc danh sách tài khoản',
       result?.status || 0,
       'USER_LIST_ERROR'
     );
@@ -206,11 +206,11 @@ export async function submitSolution(
   const cleanSolution = String(solutionContent ?? '').trim();
 
   if (!cleanProblemId) {
-    throw createServiceError('Thiáº¿u mÃ£ bÃ i toÃ¡n', 0, 'VALIDATION_ERROR');
+    throw createServiceError('Thiếu mã bài toán', 0, 'VALIDATION_ERROR');
   }
 
   if (!cleanSolution) {
-    throw createServiceError('Ná»™i dung bÃ i giáº£i khÃ´ng Ä‘Æ°á»£c Ä‘á»ƒ trá»‘ng', 0, 'VALIDATION_ERROR');
+    throw createServiceError('Nội dung bài giải không được để trống', 0, 'VALIDATION_ERROR');
   }
 
   return normalize(await mutate('submit_solution', {
@@ -262,4 +262,4 @@ const VMODataService = Object.freeze({
 
 window.VMODataService = VMODataService;
 
-console.info('[VMODataService] MongoDB Atlas API Ä‘Ã£ sáºµn sÃ ng');
+console.info('[VMODataService] MongoDB Atlas API đã sẵn sàng');
