@@ -2,7 +2,8 @@ import { ObjectId } from 'mongodb';
 import { getDb } from './lib/db.js';
 import { getSession } from './lib/session.js';
 
-const ALLOWED_RESOURCES = new Set(['documents', 'exams', 'problems', 'submissions', 'events']);
+const ALLOWED_RESOURCES = new Set(['documents', 'exams', 'problems', 'submissions', 'submission_image', 'events']);
+const MAX_SOLUTION_IMAGE_CHARS = 3_000_000;
 
 function parseBody(req) {
   if (typeof req.body !== 'string') return req.body || {};
@@ -11,6 +12,15 @@ function parseBody(req) {
 
 function cleanText(value, max = 5000) {
   return String(value ?? '').trim().slice(0, max);
+}
+
+function cleanSolutionImage(value) {
+  if (!value) return '';
+  const image = String(value).trim();
+  if (image.length > MAX_SOLUTION_IMAGE_CHARS) return null;
+  return /^data:image\/(?:jpeg|png|webp);base64,[A-Za-z0-9+/=\r\n]+$/.test(image)
+    ? image
+    : null;
 }
 
 function objectId(value) {
@@ -39,6 +49,28 @@ export default async function handler(req, res) {
       const resource = cleanText(req.query?.resource, 30);
       if (!ALLOWED_RESOURCES.has(resource)) {
         return res.status(400).json({ success: false, error: 'Loại dữ liệu không hợp lệ' });
+      }
+
+      if (resource === 'submission_image') {
+        const submissionId = objectId(cleanText(req.query?.submissionId, 80));
+        if (!submissionId) {
+          return res.status(400).json({ success: false, error: 'Mã bài nộp không hợp lệ' });
+        }
+
+        const submission = await db.collection('submissions').findOne(
+          { _id: submissionId },
+          { projection: { userId: 1, hasImage: 1 } }
+        );
+        if (!submission) return res.status(404).json({ success: false, error: 'Không tìm thấy bài nộp' });
+        if (session.role !== 'admin' && String(submission.userId) !== String(session.sub)) {
+          return res.status(403).json({ success: false, error: 'Bạn không có quyền xem ảnh này' });
+        }
+
+        const stored = await db.collection('submission_images').findOne(
+          { submissionId },
+          { projection: { _id: 0, image: 1, mimeType: 1, createdAt: 1 } }
+        );
+        return res.status(200).json({ success: true, items: stored ? [stored] : [] });
       }
 
       const filter = {};
@@ -72,8 +104,12 @@ export default async function handler(req, res) {
     if (action === 'submit_solution') {
       const problemId = cleanText(payload.problemId, 180);
       const solutionContent = cleanText(payload.solutionContent, 50000);
-      if (!problemId || !solutionContent) {
-        return res.status(400).json({ success: false, error: 'Thiếu mã bài toán hoặc nội dung bài giải' });
+      const solutionImage = cleanSolutionImage(payload.solutionImage);
+      if (solutionImage === null) {
+        return res.status(413).json({ success: false, error: 'Ảnh không hợp lệ hoặc vượt quá giới hạn 3 MB' });
+      }
+      if (!problemId || (!solutionContent && !solutionImage)) {
+        return res.status(400).json({ success: false, error: 'Thiếu mã bài toán hoặc nội dung bài giải/ảnh bài làm' });
       }
       const evaluation = payload.evaluation && typeof payload.evaluation === 'object' ? payload.evaluation : null;
       const doc = {
@@ -83,7 +119,7 @@ export default async function handler(req, res) {
         username: session.username,
         authorName: session.fullName || session.username,
         solutionContent,
-        hasImage: Boolean(payload.hasImage),
+        hasImage: Boolean(solutionImage),
         status: evaluation?.verdict || 'submitted',
         verdictLabel: cleanText(evaluation?.verdictLabel, 500),
         score: evaluation?.estimatedScore ?? null,
@@ -92,6 +128,16 @@ export default async function handler(req, res) {
         updatedAt: now
       };
       const result = await db.collection('submissions').insertOne(doc);
+      if (solutionImage) {
+        const mimeType = solutionImage.slice(5, solutionImage.indexOf(';'));
+        await db.collection('submission_images').insertOne({
+          submissionId: result.insertedId,
+          userId: String(session.sub),
+          image: solutionImage,
+          mimeType,
+          createdAt: now
+        });
+      }
       return res.status(201).json({ success: true, item: { _id: result.insertedId, ...doc } });
     }
 
