@@ -1,6 +1,6 @@
 /**
  * VMO DATABASE MANAGER & UI INTEGRATION
- * Quản lý giao diện nộp bài giải học sinh, tài liệu, đề thi, sự kiện và đồng bộ MongoDB Atlas
+ * Quáº£n lÃ½ giao diá»‡n ná»™p bÃ i giáº£i há»c sinh, tÃ i liá»‡u, Ä‘á» thi, sá»± kiá»‡n vÃ  Ä‘á»“ng bá»™ MongoDB Atlas
  */
 
 (() => {
@@ -15,7 +15,7 @@
       .normalize('NFD')
       .replace(/[\u0300-\u036f]/g, '')
       .toLowerCase()
-      .replace(/đ/g, 'd')
+      .replace(/Ä‘/g, 'd')
       .replace(/[^a-z0-9._:-]+/g, '-')
       .replace(/^-+|-+$/g, '');
   }
@@ -30,7 +30,7 @@
       return {
         problemKey: `${setKey}:example-${exampleNumber}`,
         setKey,
-        setTitle: (chapter?.querySelector('.chapter-heading')?.textContent || 'Tài liệu chuyên đề VMO').trim(),
+        setTitle: (chapter?.querySelector('.chapter-heading')?.textContent || 'TÃ i liá»‡u chuyÃªn Ä‘á» VMO').trim(),
         sourceGroup: 'specialty',
         sourceType: 'specialty_example',
         contentType: 'specialty_chapter',
@@ -62,7 +62,7 @@
     };
   }
 
-  // Hàm hiển thị thông báo Toast nhanh
+  // HÃ m hiá»ƒn thá»‹ thÃ´ng bÃ¡o Toast nhanh
   function showToast(message, isSuccess = true) {
     let toast = document.getElementById('vmoToast');
     if (!toast) {
@@ -89,7 +89,7 @@
       document.body.appendChild(toast);
     }
     toast.style.borderLeft = isSuccess ? '4px solid #16a34a' : '4px solid #dc2626';
-    toast.innerHTML = `<span>${isSuccess ? '✅' : '⚠️'}</span> <span>${message}</span>`;
+    toast.innerHTML = `<span>${isSuccess ? 'âœ…' : 'âš ï¸'}</span> <span>${message}</span>`;
     toast.style.transform = 'translateY(0)';
     toast.style.opacity = '1';
 
@@ -99,18 +99,18 @@
     }, 4000);
   }
 
-  // 1. GẮN NÚT "NỘP BÀI GIẢI CỦA BẠN" VÀO TỪNG BÀI TOÁN
+  // 1. Gáº®N NÃšT "Ná»˜P BÃ€I GIáº¢I Cá»¦A Báº N" VÃ€O Tá»ªNG BÃ€I TOÃN
   function injectSubmissionButtons() {
     const isEn = (window.currentLang === 'en');
 
-    // 1.1 Thẻ .problem-item (TST, Đề thi thử, Đề Đà Nẵng - Quảng Nam)
+    // 1.1 Tháº» .problem-item (TST, Äá» thi thá»­, Äá» ÄÃ  Náºµng - Quáº£ng Nam)
     const problemItems = document.querySelectorAll('.problem-item');
     problemItems.forEach(item => {
       const header = item.querySelector('.problem-header');
       if (!header || item.querySelector('.btn-submit-solution')) return;
 
       const problemIdEl = header.querySelector('.problem-id');
-      const problemTitle = problemIdEl ? (problemIdEl.innerText || problemIdEl.textContent || '').trim() : 'Câu hỏi';
+      const problemTitle = problemIdEl ? (problemIdEl.innerText || problemIdEl.textContent || '').trim() : 'CÃ¢u há»i';
       const identity = getProblemIdentity(item, problemTitle);
       item.dataset.contentKey = identity.problemKey;
 
@@ -132,8 +132,8 @@
         transition: all 0.2s;
         margin-left: 6px;
       `;
-      btn.innerHTML = `✍️ ${isEn ? 'Submit Solution' : 'Nộp bài giải'}`;
-      btn.title = isEn ? 'Submit your own solution to database' : 'Nộp lời giải cá nhân của bạn lên cơ sở dữ liệu';
+      btn.innerHTML = `âœï¸ ${isEn ? 'Submit Solution' : 'Ná»™p bÃ i giáº£i'}`;
+      btn.title = isEn ? 'Submit your own solution to database' : 'Ná»™p lá»i giáº£i cÃ¡ nhÃ¢n cá»§a báº¡n lÃªn cÆ¡ sá»Ÿ dá»¯ liá»‡u';
       btn.onclick = () => openSubmissionModal(identity.problemKey, problemTitle, item);
 
       const aiBtn = header.querySelector('.btn-ai-guide');
@@ -144,7 +144,7 @@
       }
     });
 
-    // 1.2 Thẻ ví dụ chuyên đề (.examplebox)
+    // 1.2 Tháº» vÃ­ dá»¥ chuyÃªn Ä‘á» (.examplebox)
     const exampleBoxes = document.querySelectorAll('.examplebox');
     exampleBoxes.forEach(box => {
       const heading = box.querySelector('.box-heading');
@@ -172,7 +172,7 @@
         cursor: pointer;
         margin-left: 8px;
       `;
-      btn.innerHTML = `✍️ ${isEn ? 'Submit' : 'Nộp bài giải'}`;
+      btn.innerHTML = `âœï¸ ${isEn ? 'Submit' : 'Ná»™p bÃ i giáº£i'}`;
       btn.onclick = () => openSubmissionModal(identity.problemKey, title, box);
 
       const aiBtn = box.querySelector('.btn-ai-guide');
@@ -266,26 +266,26 @@
     const originalText = button?.innerHTML;
     if (button) {
       button.disabled = true;
-      button.innerHTML = '⏳ Đang đồng bộ...';
+      button.innerHTML = 'â³ Äang Ä‘á»“ng bá»™...';
     }
     try {
       if (!window.VMODataService?.upsertContentCatalog) {
-        throw new Error('Dịch vụ đồng bộ catalog chưa sẵn sàng');
+        throw new Error('Dá»‹ch vá»¥ Ä‘á»“ng bá»™ catalog chÆ°a sáºµn sÃ ng');
       }
       const catalog = window.buildContentCatalog();
       const result = await window.VMODataService.upsertContentCatalog(catalog);
-      showToast(`Đã đồng bộ ${result?.setCount || 0} nhóm và ${result?.problemCount || 0} câu hỏi/ví dụ.`, true);
+      showToast(`ÄÃ£ Ä‘á»“ng bá»™ ${result?.setCount || 0} nhÃ³m vÃ  ${result?.problemCount || 0} cÃ¢u há»i/vÃ­ dá»¥.`, true);
     } catch (err) {
-      showToast('Không thể đồng bộ nội dung: ' + (err?.message || 'Lỗi không xác định'), false);
+      showToast('KhÃ´ng thá»ƒ Ä‘á»“ng bá»™ ná»™i dung: ' + (err?.message || 'Lá»—i khÃ´ng xÃ¡c Ä‘á»‹nh'), false);
     } finally {
       if (button) {
         button.disabled = false;
-        button.innerHTML = originalText || '🔄 Đồng bộ ngân hàng câu hỏi';
+        button.innerHTML = originalText || 'ðŸ”„ Äá»“ng bá»™ ngÃ¢n hÃ ng cÃ¢u há»i';
       }
     }
   };
 
-  // 2. MODAL NỘP BÀI GIẢI CHO HỌC SINH (HỖ TRỢ ẢNH VIẾT TAY + ĐÁNH GIÁ AI CHUYÊN GIA TOÁN)
+  // 2. MODAL Ná»˜P BÃ€I GIáº¢I CHO Há»ŒC SINH (Há»– TRá»¢ áº¢NH VIáº¾T TAY + ÄÃNH GIÃ AI CHUYÃŠN GIA TOÃN)
   window.currentSubmissionData = {
     problemId: '',
     problemTitle: '',
@@ -302,17 +302,17 @@
   window.currentEvaluationResult = null;
   window.lastLoadedSubmissions = [];
 
-  // Xử lý nén và tải ảnh từ File / Clipboard
+  // Xá»­ lÃ½ nÃ©n vÃ  táº£i áº£nh tá»« File / Clipboard
   function processImageFile(file) {
     if (!file || !file.type.startsWith('image/')) {
-      showToast('Vui lòng chọn một tệp hình ảnh hợp lệ (PNG, JPG, WEBP)!', false);
+      showToast('Vui lÃ²ng chá»n má»™t tá»‡p hÃ¬nh áº£nh há»£p lá»‡ (PNG, JPG, WEBP)!', false);
       return;
     }
     const reader = new FileReader();
     reader.onload = function(evt) {
       const img = new Image();
       img.onload = function() {
-        // Giới hạn độ phân giải hợp lý để giữ độ sắc nét của chữ viết tay
+        // Giá»›i háº¡n Ä‘á»™ phÃ¢n giáº£i há»£p lÃ½ Ä‘á»ƒ giá»¯ Ä‘á»™ sáº¯c nÃ©t cá»§a chá»¯ viáº¿t tay
         let width = img.width;
         let height = img.height;
         const maxDimension = 2000;
@@ -334,18 +334,18 @@
         const compressedDataUrl = canvas.toDataURL('image/jpeg', 0.88);
         window.currentUploadedImage = compressedDataUrl;
 
-        // Cập nhật UI Preview
+        // Cáº­p nháº­t UI Preview
         const previewContainer = document.getElementById('subImagePreviewContainer');
         const previewImg = document.getElementById('subImagePreview');
         const fileNameEl = document.getElementById('subImageFileName');
         if (previewContainer && previewImg) {
           previewImg.src = compressedDataUrl;
           if (fileNameEl) {
-            fileNameEl.textContent = `📷 ${file.name || 'Ảnh bài giải viết tay'} (${Math.round(compressedDataUrl.length / 1024)} KB)`;
+            fileNameEl.textContent = `ðŸ“· ${file.name || 'áº¢nh bÃ i giáº£i viáº¿t tay'} (${Math.round(compressedDataUrl.length / 1024)} KB)`;
           }
           previewContainer.style.display = 'block';
         }
-        showToast('Đã tải ảnh bài giải thành công!', true);
+        showToast('ÄÃ£ táº£i áº£nh bÃ i giáº£i thÃ nh cÃ´ng!', true);
       };
       img.src = evt.target.result;
     };
@@ -368,7 +368,7 @@
     if (previewImg) previewImg.src = '';
     const mathBox = document.getElementById('subImageMathPreviewBox');
     if (mathBox) mathBox.style.display = 'none';
-    if (!silent) showToast('Đã hủy ảnh bài giải đã chọn.', true);
+    if (!silent) showToast('ÄÃ£ há»§y áº£nh bÃ i giáº£i Ä‘Ã£ chá»n.', true);
   };
 
   window.toggleProblemStatement = function() {
@@ -377,13 +377,13 @@
     if (!box) return;
     const isHidden = (box.style.display === 'none' || !box.style.display);
     box.style.display = isHidden ? 'block' : 'none';
-    if (btn) btn.textContent = isHidden ? '🔼 Ẩn nội dung đề bài' : '📖 Xem nội dung đề bài';
+    if (btn) btn.textContent = isHidden ? 'ðŸ”¼ áº¨n ná»™i dung Ä‘á» bÃ i' : 'ðŸ“– Xem ná»™i dung Ä‘á» bÃ i';
     if (isHidden && window.MathJax?.typesetPromise) {
       window.MathJax.typesetPromise([box]).catch(() => {});
     }
   };
 
-  // Lắng nghe sự kiện Paste (Ctrl+V) dán ảnh bài giải trực tiếp từ clipboard
+  // Láº¯ng nghe sá»± kiá»‡n Paste (Ctrl+V) dÃ¡n áº£nh bÃ i giáº£i trá»±c tiáº¿p tá»« clipboard
   document.addEventListener('paste', function(e) {
     const modal = document.getElementById('submissionModal');
     if (!modal || !modal.classList.contains('active')) return;
@@ -395,7 +395,7 @@
           const file = item.getAsFile();
           if (file) {
             processImageFile(file);
-            showToast('📋 Đã nhận diện ảnh dán từ Clipboard!', true);
+            showToast('ðŸ“‹ ÄÃ£ nháº­n diá»‡n áº£nh dÃ¡n tá»« Clipboard!', true);
             e.preventDefault();
             break;
           }
@@ -404,7 +404,7 @@
     }
   });
 
-  // Kéo thả ảnh vào Dropzone
+  // KÃ©o tháº£ áº£nh vÃ o Dropzone
   function setupImageDropzone() {
     const dropzone = document.getElementById('subImageDropzone');
     if (!dropzone || dropzone.dataset.initialized) return;
@@ -437,20 +437,20 @@
     });
   }
 
-  // Điền bài giải mẫu chuẩn Olympic để kiểm thử nhanh tính năng AI
+  // Äiá»n bÃ i giáº£i máº«u chuáº©n Olympic Ä‘á»ƒ kiá»ƒm thá»­ nhanh tÃ­nh nÄƒng AI
   window.fillSampleSolution = function(autoRun = false) {
     const textArea = document.getElementById('subSolutionText');
     if (!textArea) return;
 
-    const sample = `Đặt ẩn phụ và xét biến đổi:
-Ta có $u_{n+1}^2 = \\left(u_n + \\frac{1}{u_n}\\right)^2 = u_n^2 + 2 + \\frac{1}{u_n^2} > u_n^2 + 2$.
-Bằng quy nạp toán học suy ra:
+    const sample = `Äáº·t áº©n phá»¥ vÃ  xÃ©t biáº¿n Ä‘á»•i:
+Ta cÃ³ $u_{n+1}^2 = \\left(u_n + \\frac{1}{u_n}\\right)^2 = u_n^2 + 2 + \\frac{1}{u_n^2} > u_n^2 + 2$.
+Báº±ng quy náº¡p toÃ¡n há»c suy ra:
 $u_n^2 > u_1^2 + 2(n-1) = 2n - 1 \\implies \\lim_{n \\to +\\infty} u_n = +\\infty$.
-Áp dụng Định lý Stolz-Cesaro cho hai dãy $(u_n^2)$ và $(n)$:
+Ãp dá»¥ng Äá»‹nh lÃ½ Stolz-Cesaro cho hai dÃ£y $(u_n^2)$ vÃ  $(n)$:
 $$\\lim_{n \\to \\infty} \\frac{u_n^2}{n} = \\lim_{n \\to \\infty} \\frac{u_{n+1}^2 - u_n^2}{(n+1) - n} = \\lim_{n \\to \\infty} \\left(2 + \\frac{1}{u_n^2}\\right) = 2 + 0 = 2.$$
-Do $u_n > 0$, lấy căn bậc hai hai vế ta được:
+Do $u_n > 0$, láº¥y cÄƒn báº­c hai hai váº¿ ta Ä‘Æ°á»£c:
 $$\\lim_{n \\to \\infty} \\frac{u_n}{\\sqrt{n}} = \\sqrt{2}.$$
-Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
+Váº­y giá»›i háº¡n cáº§n tÃ¬m lÃ  $\\sqrt{2}$.`;
 
     textArea.value = sample;
     textArea.style.borderColor = '#6366f1';
@@ -462,7 +462,7 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
     const emptyAlert = document.getElementById('aiEvaluationEmptyAlert');
     if (emptyAlert) emptyAlert.style.display = 'none';
 
-    showToast('Đã điền lời giải mẫu VMO chuẩn vào ô nhập liệu!', true);
+    showToast('ÄÃ£ Ä‘iá»n lá»i giáº£i máº«u VMO chuáº©n vÃ o Ã´ nháº­p liá»‡u!', true);
 
     if (autoRun) {
       setTimeout(() => {
@@ -471,7 +471,7 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
     }
   };
 
-  // Đánh giá bài giải của học sinh bằng AI Chuyên gia Toán học
+  // ÄÃ¡nh giÃ¡ bÃ i giáº£i cá»§a há»c sinh báº±ng AI ChuyÃªn gia ToÃ¡n há»c
   window.evaluateStudentSolution = async function() {
     const text = (document.getElementById('subSolutionText')?.value || '').trim();
     const image = window.currentUploadedImage;
@@ -504,7 +504,7 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
           }
         }, 3000);
       }
-      showToast('Vui lòng nhập nội dung lời giải hoặc tải lên ảnh bài làm để AI đánh giá!', false);
+      showToast('Vui lÃ²ng nháº­p ná»™i dung lá»i giáº£i hoáº·c táº£i lÃªn áº£nh bÃ i lÃ m Ä‘á»ƒ AI Ä‘Ã¡nh giÃ¡!', false);
       return;
     }
 
@@ -514,10 +514,10 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
     const origBtnHtml = btn ? btn.innerHTML : '';
     if (btn) {
       btn.disabled = true;
-      btn.innerHTML = '⏳ <span>AI Giáo sư Toán đang phân tích...</span>';
+      btn.innerHTML = 'â³ <span>AI GiÃ¡o sÆ° ToÃ¡n Ä‘ang phÃ¢n tÃ­ch...</span>';
     }
 
-    // Hiển thị hộp loading trực quan ngay trong modal với các bước sinh động
+    // Hiá»ƒn thá»‹ há»™p loading trá»±c quan ngay trong modal vá»›i cÃ¡c bÆ°á»›c sinh Ä‘á»™ng
     const loadingBox = document.getElementById('aiEvaluationLoadingBox');
     const resultBox = document.getElementById('aiEvaluationResultBox');
     if (resultBox) resultBox.style.display = 'none';
@@ -529,9 +529,9 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
       loadingBox.style.display = 'block';
       const subtitleEl = document.getElementById('aiLoadingSubtitle');
       const messages = [
-        'Đang thẩm định tính chính xác, rà soát từng bước suy luận và kiểm tra lỗ hổng logic toán học...',
-        'AI đang đối chiếu các bổ đề, công thức và tính tương đương của các phép biến đổi...',
-        'Đang tổng hợp nhận xét chuyên gia, tính toán điểm số ước tính theo thang VMO...'
+        'Äang tháº©m Ä‘á»‹nh tÃ­nh chÃ­nh xÃ¡c, rÃ  soÃ¡t tá»«ng bÆ°á»›c suy luáº­n vÃ  kiá»ƒm tra lá»— há»•ng logic toÃ¡n há»c...',
+        'AI Ä‘ang Ä‘á»‘i chiáº¿u cÃ¡c bá»• Ä‘á», cÃ´ng thá»©c vÃ  tÃ­nh tÆ°Æ¡ng Ä‘Æ°Æ¡ng cá»§a cÃ¡c phÃ©p biáº¿n Ä‘á»•i...',
+        'Äang tá»•ng há»£p nháº­n xÃ©t chuyÃªn gia, tÃ­nh toÃ¡n Ä‘iá»ƒm sá»‘ Æ°á»›c tÃ­nh theo thang VMO...'
       ];
       let msgIdx = 0;
       if (subtitleEl) subtitleEl.textContent = messages[0];
@@ -553,12 +553,12 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
       }
     }
 
-    showToast('🤖 AI Giáo sư Toán Olympic đang đọc và rà soát logic bài giải của bạn...', true);
+    showToast('ðŸ¤– AI GiÃ¡o sÆ° ToÃ¡n Olympic Ä‘ang Ä‘á»c vÃ  rÃ  soÃ¡t logic bÃ i giáº£i cá»§a báº¡n...', true);
 
     try {
       const payload = {
         problemId: window.currentSubmissionData?.problemId || 'vmo-prob',
-        problemTitle: window.currentSubmissionData?.problemTitle || 'Bài toán VMO',
+        problemTitle: window.currentSubmissionData?.problemTitle || 'BÃ i toÃ¡n VMO',
         problemContent: window.currentSubmissionData?.problemContent || '',
         topic: window.currentSubmissionData?.topic || '',
         examTitle: window.currentSubmissionData?.examTitle || '',
@@ -573,24 +573,24 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
       });
 
       if (!res.ok) {
-        throw new Error(`Máy chủ phản hồi mã lỗi HTTP ${res.status}`);
+        throw new Error(`MÃ¡y chá»§ pháº£n há»“i mÃ£ lá»—i HTTP ${res.status}`);
       }
 
       const json = await res.json();
       if (!json || !json.data) {
-        throw new Error(json?.message || 'Không nhận được dữ liệu đánh giá từ máy chủ.');
+        throw new Error(json?.message || 'KhÃ´ng nháº­n Ä‘Æ°á»£c dá»¯ liá»‡u Ä‘Ã¡nh giÃ¡ tá»« mÃ¡y chá»§.');
       }
 
       const evalData = json.data;
       window.currentEvaluationResult = evalData;
       if (loadingBox) loadingBox.style.display = 'none';
       displayEvaluationResult(evalData);
-      showToast('Đã hoàn tất phân tích & đánh giá bài giải!', true);
+      showToast('ÄÃ£ hoÃ n táº¥t phÃ¢n tÃ­ch & Ä‘Ã¡nh giÃ¡ bÃ i giáº£i!', true);
     } catch (err) {
-      console.error('Lỗi khi đánh giá bài giải:', err);
+      console.error('Lá»—i khi Ä‘Ã¡nh giÃ¡ bÃ i giáº£i:', err);
       if (loadingBox) loadingBox.style.display = 'none';
-      displayEvaluationError(err.message || 'Không thể kết nối máy chủ AI');
-      showToast('Lỗi đánh giá: ' + (err.message || 'Không thể kết nối máy chủ AI'), false);
+      displayEvaluationError(err.message || 'KhÃ´ng thá»ƒ káº¿t ná»‘i mÃ¡y chá»§ AI');
+      showToast('Lá»—i Ä‘Ã¡nh giÃ¡: ' + (err.message || 'KhÃ´ng thá»ƒ káº¿t ná»‘i mÃ¡y chá»§ AI'), false);
     } finally {
       if (loadingInterval) clearInterval(loadingInterval);
       if (btn) {
@@ -600,7 +600,7 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
     }
   };
 
-  // Escape toàn bộ HTML không tin cậy trước khi chèn vào innerHTML.
+  // Escape toÃ n bá»™ HTML khÃ´ng tin cáº­y trÆ°á»›c khi chÃ¨n vÃ o innerHTML.
   function escapeHtmlText(value) {
     return String(value ?? '')
       .replace(/&/g, '&amp;')
@@ -610,25 +610,25 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
       .replace(/'/g, '&#39;');
   }
 
-  // Chỉ chuẩn hóa nội dung bên trong một token Math đã có delimiter.
-  // Không tự bọc thêm dấu $ để tránh tạo $...$ lồng nhau gây Math input error.
+  // Chá»‰ chuáº©n hÃ³a ná»™i dung bÃªn trong má»™t token Math Ä‘Ã£ cÃ³ delimiter.
+  // KhÃ´ng tá»± bá»c thÃªm dáº¥u $ Ä‘á»ƒ trÃ¡nh táº¡o $...$ lá»“ng nhau gÃ¢y Math input error.
   function normalizeDelimitedMath(token) {
     return escapeHtmlText(
       String(token || '')
-        .replace(/≥/g, '\\ge ')
-        .replace(/≤/g, '\\le ')
-        .replace(/≠/g, '\\ne ')
-        .replace(/∈/g, '\\in ')
-        .replace(/∉/g, '\\notin ')
-        .replace(/→/g, '\\to ')
-        .replace(/⇒/g, '\\Rightarrow ')
-        .replace(/⇔/g, '\\Leftrightarrow ')
+        .replace(/â‰¥/g, '\\ge ')
+        .replace(/â‰¤/g, '\\le ')
+        .replace(/â‰ /g, '\\ne ')
+        .replace(/âˆˆ/g, '\\in ')
+        .replace(/âˆ‰/g, '\\notin ')
+        .replace(/â†’/g, '\\to ')
+        .replace(/â‡’/g, '\\Rightarrow ')
+        .replace(/â‡”/g, '\\Leftrightarrow ')
         .replace(/\\begin\{align\*?\}/g, '\\begin{aligned}')
         .replace(/\\end\{align\*?\}/g, '\\end{aligned}')
     );
   }
 
-  // Định dạng Markdown an toàn và giữ nguyên các khối MathJax hợp lệ.
+  // Äá»‹nh dáº¡ng Markdown an toÃ n vÃ  giá»¯ nguyÃªn cÃ¡c khá»‘i MathJax há»£p lá»‡.
   function formatMathMarkdown(val) {
     if (val == null) return '';
     if (Array.isArray(val)) {
@@ -643,34 +643,34 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
     let raw = String(val).trim();
     if (!raw) return '';
 
-    // Chuẩn hóa ký tự vô hình và các thẻ xuống dòng có thể do AI trả về.
+    // Chuáº©n hÃ³a kÃ½ tá»± vÃ´ hÃ¬nh vÃ  cÃ¡c tháº» xuá»‘ng dÃ²ng cÃ³ thá»ƒ do AI tráº£ vá».
     raw = raw
       .replace(/[\u200B-\u200D\uFEFF]/g, '')
       .replace(/\u00A0/g, ' ')
       .replace(/<br\s*\/?>/gi, '\n');
 
-    // Tách và bảo vệ những khối Math đã có delimiter trước mọi xử lý văn bản.
+    // TÃ¡ch vÃ  báº£o vá»‡ nhá»¯ng khá»‘i Math Ä‘Ã£ cÃ³ delimiter trÆ°á»›c má»i xá»­ lÃ½ vÄƒn báº£n.
     const mathTokens = [];
     let text = raw.replace(/(\$\$[\s\S]+?\$\$|\\\[[\s\S]+?\\\]|\$(?:\\.|[^$\n])+?\$|\\\([\s\S]+?\\\))/g, (match) => {
       mathTokens.push(match);
       return `@@VMO_MATH_${mathTokens.length - 1}@@`;
     });
 
-    // Từ đây chỉ xử lý văn bản thuần đã được escape.
+    // Tá»« Ä‘Ã¢y chá»‰ xá»­ lÃ½ vÄƒn báº£n thuáº§n Ä‘Ã£ Ä‘Æ°á»£c escape.
     text = escapeHtmlText(text);
 
-    // Tách các mục đánh số bị dính liền thành các đoạn riêng biệt.
-    // Chỉ dùng lớp ký tự ASCII trong regex để file không lỗi khi CDN/proxy
-    // diễn giải encoding khác nhau. Nội dung tiếng Việt vẫn được giữ nguyên.
+    // TÃ¡ch cÃ¡c má»¥c Ä‘Ã¡nh sá»‘ bá»‹ dÃ­nh liá»n thÃ nh cÃ¡c Ä‘oáº¡n riÃªng biá»‡t.
+    // Chá»‰ dÃ¹ng lá»›p kÃ½ tá»± ASCII trong regex Ä‘á»ƒ file khÃ´ng lá»—i khi CDN/proxy
+    // diá»…n giáº£i encoding khÃ¡c nhau. Ná»™i dung tiáº¿ng Viá»‡t váº«n Ä‘Æ°á»£c giá»¯ nguyÃªn.
     text = text.replace(/([.!?])\s+(\d+[.)]\s+(?=\S))/g, '$1\n\n$2');
     text = text.replace(/(?<!\n)(\b\d+[.)]\s+(?=\S))/g, '\n$1');
 
-    // Markdown cơ bản được chuyển sau khi escape nên không thể chèn HTML tùy ý.
+    // Markdown cÆ¡ báº£n Ä‘Æ°á»£c chuyá»ƒn sau khi escape nÃªn khÃ´ng thá»ƒ chÃ¨n HTML tÃ¹y Ã½.
     text = text
       .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
       .replace(/\*(.*?)\*/g, '<em>$1</em>');
 
-    // Định dạng danh sách đánh số.
+    // Äá»‹nh dáº¡ng danh sÃ¡ch Ä‘Ã¡nh sá»‘.
     const paragraphs = text.split(/\n\s*\n/);
     text = paragraphs.map(p => {
       let trimmed = p.trim();
@@ -685,7 +685,7 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
       return `<div style="margin-bottom: 8px; line-height: 1.65;">${trimmed.replace(/\n/g, '<br>')}</div>`;
     }).filter(Boolean).join('');
 
-    // Khôi phục đúng một lần; không chạy regex tạo công thức lần thứ hai.
+    // KhÃ´i phá»¥c Ä‘Ãºng má»™t láº§n; khÃ´ng cháº¡y regex táº¡o cÃ´ng thá»©c láº§n thá»© hai.
     text = text.replace(/@@VMO_MATH_(\d+)@@/g, (match, idx) => {
       return normalizeDelimitedMath(mathTokens[Number(idx)] || '');
     });
@@ -693,7 +693,7 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
     return text;
   }
 
-  // Hiển thị thông báo lỗi đánh giá ngay trong modal và cho phép thử lại
+  // Hiá»ƒn thá»‹ thÃ´ng bÃ¡o lá»—i Ä‘Ã¡nh giÃ¡ ngay trong modal vÃ  cho phÃ©p thá»­ láº¡i
   function displayEvaluationError(errorMsg) {
     let resultBox = document.getElementById('aiEvaluationResultBox');
     if (!resultBox) return;
@@ -702,20 +702,20 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
     resultBox.innerHTML = `
       <div style="padding: 16px 20px;">
         <div style="display: flex; align-items: flex-start; gap: 12px; margin-bottom: 12px;">
-          <span style="font-size: 1.6rem;">⚠️</span>
+          <span style="font-size: 1.6rem;">âš ï¸</span>
           <div>
-            <h4 style="margin: 0 0 4px 0; color: #991b1b; font-size: 1rem;">Không thể hoàn tất đánh giá trực tuyến</h4>
+            <h4 style="margin: 0 0 4px 0; color: #991b1b; font-size: 1rem;">KhÃ´ng thá»ƒ hoÃ n táº¥t Ä‘Ã¡nh giÃ¡ trá»±c tuyáº¿n</h4>
             <p style="margin: 0; color: #7f1d1d; font-size: 0.88rem; line-height: 1.5;">
-              ${escapeHtmlText(errorMsg || 'Kết nối tới dịch vụ AI gặp trục trặc hoặc model quá tải.')}
+              ${escapeHtmlText(errorMsg || 'Káº¿t ná»‘i tá»›i dá»‹ch vá»¥ AI gáº·p trá»¥c tráº·c hoáº·c model quÃ¡ táº£i.')}
             </p>
           </div>
         </div>
         <div style="display: flex; gap: 10px; flex-wrap: wrap;">
           <button type="button" onclick="evaluateStudentSolution()" style="padding: 8px 16px; border-radius: 6px; background: #dc2626; color: #fff; border: none; font-weight: 600; font-size: 0.85rem; cursor: pointer; display: inline-flex; align-items: center; gap: 6px;">
-            <span>🔄</span> <span>Thử lại ngay</span>
+            <span>ðŸ”„</span> <span>Thá»­ láº¡i ngay</span>
           </button>
           <button type="button" onclick="runOfflineEvaluation()" style="padding: 8px 16px; border-radius: 6px; background: #e0e7ff; color: #3730a3; border: 1px solid #c7d2fe; font-weight: 600; font-size: 0.85rem; cursor: pointer; display: inline-flex; align-items: center; gap: 6px;">
-            <span>⚡</span> <span>Phân tích bằng bộ Chuyên gia dự phòng</span>
+            <span>âš¡</span> <span>PhÃ¢n tÃ­ch báº±ng bá»™ ChuyÃªn gia dá»± phÃ²ng</span>
           </button>
         </div>
       </div>
@@ -732,28 +732,28 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
     }
   }
 
-  // Bộ phân tích chuyên gia dự phòng hoạt động tức thì khi mạng gặp sự cố
+  // Bá»™ phÃ¢n tÃ­ch chuyÃªn gia dá»± phÃ²ng hoáº¡t Ä‘á»™ng tá»©c thÃ¬ khi máº¡ng gáº·p sá»± cá»‘
   window.runOfflineEvaluation = function() {
     const text = (document.getElementById('subSolutionText')?.value || '').trim();
     const fallbackVerdict = text && text.length > 80 ? 'RIGHT_DIRECTION_INACCURATE' : 'MISSING_CONDITIONS';
     const offlineData = {
       verdict: fallbackVerdict,
-      verdictLabel: fallbackVerdict === 'RIGHT_DIRECTION_INACCURATE' ? 'Đúng hướng đi nhưng cần kiểm tra kỹ lại chi tiết' : 'Thiếu điều kiện / Cần bổ sung lập luận',
+      verdictLabel: fallbackVerdict === 'RIGHT_DIRECTION_INACCURATE' ? 'ÄÃºng hÆ°á»›ng Ä‘i nhÆ°ng cáº§n kiá»ƒm tra ká»¹ láº¡i chi tiáº¿t' : 'Thiáº¿u Ä‘iá»u kiá»‡n / Cáº§n bá»• sung láº­p luáº­n',
       verdictColor: '#d97706',
-      estimatedScore: '3.5/5.0đ (Đánh giá dự phòng)',
-      summary: 'Hệ thống đã phân tích cấu trúc bài giải của bạn. Hướng tiếp cận có căn cứ chuyên môn, tuy nhiên cần kiểm tra chặt chẽ các bước biến đổi trung gian và thử lại nghiệm.',
-      approachAnalysis: 'Bạn đã nắm được phương pháp tiếp cận chính của dạng toán này. Để đạt điểm tối đa trong kỳ thi VMO, cần lưu ý tính tương đương của các phép biến đổi và kiểm tra điều kiện tồn tại.',
-      stepByStep: '1. **Bước đặt ẩn & tập xác định**: Đã xác định hướng biến đổi chính.<br>2. **Bước biến đổi đại số**: Cần bổ sung giải thích chiều suy luận $\\Rightarrow$ hay $\\Leftrightarrow$.<br>3. **Bước kết luận**: Luôn kiểm tra các trường hợp biên và điều kiện số nguyên / số thực dương.',
-      criticalFlaws: 'Cần lưu ý kiểm tra các trường hợp biên và điều kiện để tránh bị trừ điểm trình bày theo biểu điểm VMO.',
-      recommendations: 'Hãy hoàn thiện việc trình bày lời giải thành các bước rõ ràng theo chuẩn bài thi HSG Quốc gia.',
-      verificationNotes: 'Đây là đánh giá dự phòng ngoại tuyến; các công thức chưa được mô hình AI trực tuyến hậu kiểm.'
+      estimatedScore: '3.5/5.0Ä‘ (ÄÃ¡nh giÃ¡ dá»± phÃ²ng)',
+      summary: 'Há»‡ thá»‘ng Ä‘Ã£ phÃ¢n tÃ­ch cáº¥u trÃºc bÃ i giáº£i cá»§a báº¡n. HÆ°á»›ng tiáº¿p cáº­n cÃ³ cÄƒn cá»© chuyÃªn mÃ´n, tuy nhiÃªn cáº§n kiá»ƒm tra cháº·t cháº½ cÃ¡c bÆ°á»›c biáº¿n Ä‘á»•i trung gian vÃ  thá»­ láº¡i nghiá»‡m.',
+      approachAnalysis: 'Báº¡n Ä‘Ã£ náº¯m Ä‘Æ°á»£c phÆ°Æ¡ng phÃ¡p tiáº¿p cáº­n chÃ­nh cá»§a dáº¡ng toÃ¡n nÃ y. Äá»ƒ Ä‘áº¡t Ä‘iá»ƒm tá»‘i Ä‘a trong ká»³ thi VMO, cáº§n lÆ°u Ã½ tÃ­nh tÆ°Æ¡ng Ä‘Æ°Æ¡ng cá»§a cÃ¡c phÃ©p biáº¿n Ä‘á»•i vÃ  kiá»ƒm tra Ä‘iá»u kiá»‡n tá»“n táº¡i.',
+      stepByStep: '1. **BÆ°á»›c Ä‘áº·t áº©n & táº­p xÃ¡c Ä‘á»‹nh**: ÄÃ£ xÃ¡c Ä‘á»‹nh hÆ°á»›ng biáº¿n Ä‘á»•i chÃ­nh.<br>2. **BÆ°á»›c biáº¿n Ä‘á»•i Ä‘áº¡i sá»‘**: Cáº§n bá»• sung giáº£i thÃ­ch chiá»u suy luáº­n $\\Rightarrow$ hay $\\Leftrightarrow$.<br>3. **BÆ°á»›c káº¿t luáº­n**: LuÃ´n kiá»ƒm tra cÃ¡c trÆ°á»ng há»£p biÃªn vÃ  Ä‘iá»u kiá»‡n sá»‘ nguyÃªn / sá»‘ thá»±c dÆ°Æ¡ng.',
+      criticalFlaws: 'Cáº§n lÆ°u Ã½ kiá»ƒm tra cÃ¡c trÆ°á»ng há»£p biÃªn vÃ  Ä‘iá»u kiá»‡n Ä‘á»ƒ trÃ¡nh bá»‹ trá»« Ä‘iá»ƒm trÃ¬nh bÃ y theo biá»ƒu Ä‘iá»ƒm VMO.',
+      recommendations: 'HÃ£y hoÃ n thiá»‡n viá»‡c trÃ¬nh bÃ y lá»i giáº£i thÃ nh cÃ¡c bÆ°á»›c rÃµ rÃ ng theo chuáº©n bÃ i thi HSG Quá»‘c gia.',
+      verificationNotes: 'ÄÃ¢y lÃ  Ä‘Ã¡nh giÃ¡ dá»± phÃ²ng ngoáº¡i tuyáº¿n; cÃ¡c cÃ´ng thá»©c chÆ°a Ä‘Æ°á»£c mÃ´ hÃ¬nh AI trá»±c tuyáº¿n háº­u kiá»ƒm.'
     };
     window.currentEvaluationResult = offlineData;
     displayEvaluationResult(offlineData);
-    showToast('Đã hiển thị đánh giá từ bộ phân tích chuyên gia dự phòng!', true);
+    showToast('ÄÃ£ hiá»ƒn thá»‹ Ä‘Ã¡nh giÃ¡ tá»« bá»™ phÃ¢n tÃ­ch chuyÃªn gia dá»± phÃ²ng!', true);
   };
 
-  // Kích hoạt MathJax typeset an toàn và chống cache lỗi cho container
+  // KÃ­ch hoáº¡t MathJax typeset an toÃ n vÃ  chá»‘ng cache lá»—i cho container
   function triggerMathJaxRenderForElement(container) {
     if (!container || !window.MathJax) return;
     try {
@@ -772,7 +772,7 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
     }
   }
 
-  // Hệ thống chuyển đổi Tab thông minh trong Submission Modal
+  // Há»‡ thá»‘ng chuyá»ƒn Ä‘á»•i Tab thÃ´ng minh trong Submission Modal
   window.switchSubmissionTab = function(tabName) {
     const tabBtnComposer = document.getElementById('tabBtnSubComposer');
     const tabBtnEval = document.getElementById('tabBtnSubEvaluation');
@@ -822,7 +822,7 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
     }
   };
 
-  // Hàm chuyển hướng nhanh đến kết quả đánh giá (hỗ trợ cả cuộn và chuyển tab)
+  // HÃ m chuyá»ƒn hÆ°á»›ng nhanh Ä‘áº¿n káº¿t quáº£ Ä‘Ã¡nh giÃ¡ (há»— trá»£ cáº£ cuá»™n vÃ  chuyá»ƒn tab)
   window.scrollToEvaluationResult = function() {
     window.switchSubmissionTab('eval');
     const resultBox = document.getElementById('aiEvaluationResultBox');
@@ -849,17 +849,17 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
     }
   };
 
-  // In / Xuất báo cáo thẩm định của Giáo sư
+  // In / Xuáº¥t bÃ¡o cÃ¡o tháº©m Ä‘á»‹nh cá»§a GiÃ¡o sÆ°
   window.printEvaluationReport = function() {
     const evalData = window.currentEvaluationResult;
     const subData = window.currentSubmissionData || {};
     if (!evalData) {
-      alert('Chưa có dữ liệu đánh giá để in báo cáo!');
+      alert('ChÆ°a cÃ³ dá»¯ liá»‡u Ä‘Ã¡nh giÃ¡ Ä‘á»ƒ in bÃ¡o cÃ¡o!');
       return;
     }
     const printWin = window.open('', '_blank');
     if (!printWin) {
-      alert('Vui lòng cho phép popup để in báo cáo kết quả!');
+      alert('Vui lÃ²ng cho phÃ©p popup Ä‘á»ƒ in bÃ¡o cÃ¡o káº¿t quáº£!');
       return;
     }
     printWin.document.write(`
@@ -867,7 +867,7 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
       <html>
       <head>
         <meta charset="utf-8">
-        <title>Báo cáo thẩm định bài giải VMO - ${escapeHtmlText(subData.problemTitle || 'Bài toán')}</title>
+        <title>BÃ¡o cÃ¡o tháº©m Ä‘á»‹nh bÃ i giáº£i VMO - ${escapeHtmlText(subData.problemTitle || 'BÃ i toÃ¡n')}</title>
         <style>
           body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; line-height: 1.6; color: #1e293b; padding: 30px; max-width: 800px; margin: 0 auto; }
           h2 { color: #0f172a; border-bottom: 2px solid #0284c7; padding-bottom: 8px; }
@@ -877,18 +877,18 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
         </style>
       </head>
       <body>
-        <h2>BÁO CÁO THẨM ĐỊNH BÀI GIẢI TOÁN OLYMPIC (AI VMO)</h2>
-        <p><strong>Bài toán:</strong> ${escapeHtmlText(subData.problemTitle || 'Bài tập VMO')}</p>
+        <h2>BÃO CÃO THáº¨M Äá»ŠNH BÃ€I GIáº¢I TOÃN OLYMPIC (AI VMO)</h2>
+        <p><strong>BÃ i toÃ¡n:</strong> ${escapeHtmlText(subData.problemTitle || 'BÃ i táº­p VMO')}</p>
         <div class="banner">
-          <p><strong>Kết luận:</strong> ${escapeHtmlText(evalData.verdictLabel || evalData.verdict || 'Hoàn tất')}</p>
-          <p><strong>Điểm ước lượng:</strong> ${escapeHtmlText(evalData.estimatedScore ?? '5.0/5.0đ')}</p>
+          <p><strong>Káº¿t luáº­n:</strong> ${escapeHtmlText(evalData.verdictLabel || evalData.verdict || 'HoÃ n táº¥t')}</p>
+          <p><strong>Äiá»ƒm Æ°á»›c lÆ°á»£ng:</strong> ${escapeHtmlText(evalData.estimatedScore ?? '5.0/5.0Ä‘')}</p>
         </div>
-        <div class="card"><div class="title">1. Nhận định tổng quan:</div><div>${formatMathMarkdown(evalData.summary || '')}</div></div>
-        <div class="card"><div class="title">2. Hướng tiếp cận &amp; Phương pháp:</div><div>${formatMathMarkdown(evalData.approachAnalysis || '')}</div></div>
-        <div class="card"><div class="title">3. Rà soát chi tiết từng bước:</div><div>${formatMathMarkdown(evalData.stepByStep || '')}</div></div>
-        <div class="card"><div class="title">4. Lỗ hổng logic / Lưu ý:</div><div>${formatMathMarkdown(evalData.criticalFlaws || '')}</div></div>
-        <div class="card"><div class="title">5. Lời khuyên của Chuyên gia:</div><div>${formatMathMarkdown(evalData.recommendations || '')}</div></div>
-        <div class="card"><div class="title">6. Hậu kiểm công thức:</div><div>${formatMathMarkdown(evalData.verificationNotes || '')}</div></div>
+        <div class="card"><div class="title">1. Nháº­n Ä‘á»‹nh tá»•ng quan:</div><div>${formatMathMarkdown(evalData.summary || '')}</div></div>
+        <div class="card"><div class="title">2. HÆ°á»›ng tiáº¿p cáº­n &amp; PhÆ°Æ¡ng phÃ¡p:</div><div>${formatMathMarkdown(evalData.approachAnalysis || '')}</div></div>
+        <div class="card"><div class="title">3. RÃ  soÃ¡t chi tiáº¿t tá»«ng bÆ°á»›c:</div><div>${formatMathMarkdown(evalData.stepByStep || '')}</div></div>
+        <div class="card"><div class="title">4. Lá»— há»•ng logic / LÆ°u Ã½:</div><div>${formatMathMarkdown(evalData.criticalFlaws || '')}</div></div>
+        <div class="card"><div class="title">5. Lá»i khuyÃªn cá»§a ChuyÃªn gia:</div><div>${formatMathMarkdown(evalData.recommendations || '')}</div></div>
+        <div class="card"><div class="title">6. Háº­u kiá»ƒm cÃ´ng thá»©c:</div><div>${formatMathMarkdown(evalData.verificationNotes || '')}</div></div>
       </body>
       </html>
     `);
@@ -897,7 +897,7 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
     setTimeout(() => { printWin.print(); }, 500);
   };
 
-  // Tạo khung HTML hoàn chỉnh cho báo cáo thẩm định
+  // Táº¡o khung HTML hoÃ n chá»‰nh cho bÃ¡o cÃ¡o tháº©m Ä‘á»‹nh
   function generateEvaluationReportHtml(evalData, isFullView = false) {
     const fallbackVerdictBg = evalData.verdict === 'CORRECT'
       ? '#16a34a'
@@ -909,112 +909,112 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
       : fallbackVerdictBg;
 
     return `
-      <!-- Banner Kết luận Tổng quan & Điểm số -->
+      <!-- Banner Káº¿t luáº­n Tá»•ng quan & Äiá»ƒm sá»‘ -->
       <div style="padding: 16px 20px; background: ${verdictBg}; color: #ffffff; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; border-radius: 10px 10px 0 0;">
         <div>
-          <div style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.5px; opacity: 0.95; margin-bottom: 2px;">Kết luận chuyên môn của Giáo sư Toán:</div>
+          <div style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.5px; opacity: 0.95; margin-bottom: 2px;">Káº¿t luáº­n chuyÃªn mÃ´n cá»§a GiÃ¡o sÆ° ToÃ¡n:</div>
           <div style="font-size: 1.15rem; font-weight: 800; text-shadow: 0 1px 2px rgba(0,0,0,0.2);">
-            ${escapeHtmlText(evalData.verdictLabel || evalData.verdict || 'ĐÚNG HOÀN TOÀN (TỐI ƯU)')}
+            ${escapeHtmlText(evalData.verdictLabel || evalData.verdict || 'ÄÃšNG HOÃ€N TOÃ€N (Tá»I Æ¯U)')}
           </div>
         </div>
         <div style="background: rgba(255,255,255,0.25); border: 1.5px solid rgba(255,255,255,0.5); border-radius: 8px; padding: 6px 16px; font-weight: 800; font-size: 1.15rem; box-shadow: 0 2px 8px rgba(0,0,0,0.15);">
-          Điểm: ${escapeHtmlText(evalData.estimatedScore ?? '5.0/5.0đ')}
+          Äiá»ƒm: ${escapeHtmlText(evalData.estimatedScore ?? '5.0/5.0Ä‘')}
         </div>
       </div>
 
       <div style="padding: 20px; font-size: 0.92rem; line-height: 1.7; color: #1e293b; background: #ffffff; border-radius: 0 0 10px 10px;">
-        <!-- 1. Tóm tắt -->
+        <!-- 1. TÃ³m táº¯t -->
         <div style="margin-bottom: 16px;">
           <h5 style="margin: 0 0 6px 0; color: #0f172a; font-size: 0.95rem; display: flex; align-items: center; gap: 6px;">
-            <span>📝</span> <strong>Nhận định tổng quan của Chuyên gia:</strong>
+            <span>ðŸ“</span> <strong>Nháº­n Ä‘á»‹nh tá»•ng quan cá»§a ChuyÃªn gia:</strong>
           </h5>
           <div style="color: #1e293b; background: #f8fafc; padding: 12px 16px; border-radius: 6px; border-left: 4px solid #0284c7; font-size: 0.92rem;">
-            ${formatMathMarkdown(evalData.summary || 'Lời giải đã được thẩm định.')}
+            ${formatMathMarkdown(evalData.summary || 'Lá»i giáº£i Ä‘Ã£ Ä‘Æ°á»£c tháº©m Ä‘á»‹nh.')}
           </div>
         </div>
 
-        <!-- 2. Hướng tiếp cận -->
+        <!-- 2. HÆ°á»›ng tiáº¿p cáº­n -->
         <div style="margin-bottom: 16px;">
           <h5 style="margin: 0 0 6px 0; color: #0f172a; font-size: 0.95rem; display: flex; align-items: center; gap: 6px;">
-            <span>🎯</span> <strong>Phân tích hướng tiếp cận &amp; Phương pháp toán:</strong>
+            <span>ðŸŽ¯</span> <strong>PhÃ¢n tÃ­ch hÆ°á»›ng tiáº¿p cáº­n &amp; PhÆ°Æ¡ng phÃ¡p toÃ¡n:</strong>
           </h5>
           <div style="color: #334155; padding: 2px 4px;">
-            ${formatMathMarkdown(evalData.approachAnalysis || 'Đã áp dụng đúng phương pháp cốt lõi.')}
+            ${formatMathMarkdown(evalData.approachAnalysis || 'ÄÃ£ Ã¡p dá»¥ng Ä‘Ãºng phÆ°Æ¡ng phÃ¡p cá»‘t lÃµi.')}
           </div>
         </div>
 
-        <!-- 3. Rà soát từng bước -->
+        <!-- 3. RÃ  soÃ¡t tá»«ng bÆ°á»›c -->
         <div style="margin-bottom: 16px;">
           <h5 style="margin: 0 0 6px 0; color: #0f172a; font-size: 0.95rem; display: flex; align-items: center; gap: 6px;">
-            <span>🔍</span> <strong>Rà soát chi tiết từng bước lập luận:</strong>
+            <span>ðŸ”</span> <strong>RÃ  soÃ¡t chi tiáº¿t tá»«ng bÆ°á»›c láº­p luáº­n:</strong>
           </h5>
           <div style="color: #334155; background: #fafafa; padding: 14px; border-radius: 6px; border: 1px solid #e2e8f0;">
-            ${formatMathMarkdown(evalData.stepByStep || 'Các bước lập luận hoàn chỉnh.')}
+            ${formatMathMarkdown(evalData.stepByStep || 'CÃ¡c bÆ°á»›c láº­p luáº­n hoÃ n chá»‰nh.')}
           </div>
         </div>
 
-        <!-- 4. Lỗ hổng logic / Thiếu sót -->
+        <!-- 4. Lá»— há»•ng logic / Thiáº¿u sÃ³t -->
         <div style="margin-bottom: 16px;">
           <h5 style="margin: 0 0 6px 0; color: #b91c1c; font-size: 0.95rem; display: flex; align-items: center; gap: 6px;">
-            <span>⚠️</span> <strong>Lỗ hổng logic / Điều kiện thiếu sót (nếu có):</strong>
+            <span>âš ï¸</span> <strong>Lá»— há»•ng logic / Äiá»u kiá»‡n thiáº¿u sÃ³t (náº¿u cÃ³):</strong>
           </h5>
           <div style="color: #991b1b; background: #fff1f2; padding: 12px 16px; border-radius: 6px; border: 1px solid #fecdd3;">
-            ${formatMathMarkdown(evalData.criticalFlaws || 'Không phát hiện sai sót logic nghiêm trọng.')}
+            ${formatMathMarkdown(evalData.criticalFlaws || 'KhÃ´ng phÃ¡t hiá»‡n sai sÃ³t logic nghiÃªm trá»ng.')}
           </div>
         </div>
 
-        <!-- 5. Lời khuyên & Hướng giải tối ưu -->
+        <!-- 5. Lá»i khuyÃªn & HÆ°á»›ng giáº£i tá»‘i Æ°u -->
         <div style="margin-bottom: 20px;">
           <h5 style="margin: 0 0 6px 0; color: #047857; font-size: 0.95rem; display: flex; align-items: center; gap: 6px;">
-            <span>💡</span> <strong>Lời khuyên của Giáo sư &amp; Hướng giải tối ưu:</strong>
+            <span>ðŸ’¡</span> <strong>Lá»i khuyÃªn cá»§a GiÃ¡o sÆ° &amp; HÆ°á»›ng giáº£i tá»‘i Æ°u:</strong>
           </h5>
           <div style="color: #065f46; background: #ecfdf5; padding: 12px 16px; border-radius: 6px; border: 1px solid #a7f3d0;">
-            ${formatMathMarkdown(evalData.recommendations || evalData.optimalSuggestions || 'Tiếp tục phát huy!')}
+            ${formatMathMarkdown(evalData.recommendations || evalData.optimalSuggestions || 'Tiáº¿p tá»¥c phÃ¡t huy!')}
           </div>
         </div>
 
-        <!-- 6. Hậu kiểm công thức của giám khảo AI -->
+        <!-- 6. Háº­u kiá»ƒm cÃ´ng thá»©c cá»§a giÃ¡m kháº£o AI -->
         <div style="margin-bottom: 20px;">
           <h5 style="margin: 0 0 6px 0; color: #4338ca; font-size: 0.95rem; display: flex; align-items: center; gap: 6px;">
-            <span>✅</span> <strong>Hậu kiểm công thức của Giám khảo AI:</strong>
+            <span>âœ…</span> <strong>Háº­u kiá»ƒm cÃ´ng thá»©c cá»§a GiÃ¡m kháº£o AI:</strong>
           </h5>
           <div style="color: #3730a3; background: #eef2ff; padding: 12px 16px; border-radius: 6px; border: 1px solid #c7d2fe;">
-            ${formatMathMarkdown(evalData.verificationNotes || 'Chưa có ghi chú hậu kiểm.')}
+            ${formatMathMarkdown(evalData.verificationNotes || 'ChÆ°a cÃ³ ghi chÃº háº­u kiá»ƒm.')}
           </div>
         </div>
 
-        <!-- Hàng nút hành động bổ trợ -->
+        <!-- HÃ ng nÃºt hÃ nh Ä‘á»™ng bá»• trá»£ -->
         <div style="display: flex; justify-content: space-between; align-items: center; gap: 10px; flex-wrap: wrap; padding-top: 14px; border-top: 1px dashed #cbd5e1;">
           <div style="display: flex; gap: 8px;">
             <button type="button" onclick="switchSubmissionTab('composer')" style="padding: 7px 14px; background: #f1f5f9; border: 1px solid #cbd5e1; border-radius: 6px; font-weight: 600; font-size: 0.85rem; color: #334155; cursor: pointer; display: inline-flex; align-items: center; gap: 6px;">
-              <span>✍️</span> <span>Quay lại sửa bài</span>
+              <span>âœï¸</span> <span>Quay láº¡i sá»­a bÃ i</span>
             </button>
             <button type="button" onclick="window.printEvaluationReport()" style="padding: 7px 14px; background: #ffffff; border: 1px solid #cbd5e1; border-radius: 6px; font-weight: 600; font-size: 0.85rem; color: #475569; cursor: pointer; display: inline-flex; align-items: center; gap: 6px;">
-              <span>🖨️</span> <span>In báo cáo</span>
+              <span>ðŸ–¨ï¸</span> <span>In bÃ¡o cÃ¡o</span>
             </button>
           </div>
           <button type="button" onclick="document.getElementById('btnConfirmSubmit')?.click()" style="padding: 7px 18px; background: #0284c7; border: none; border-radius: 6px; font-weight: 700; font-size: 0.88rem; color: #ffffff; cursor: pointer; display: inline-flex; align-items: center; gap: 6px; box-shadow: 0 2px 8px rgba(2,132,199,0.3);">
-            <span>🚀</span> <span>Lưu bài vào Database</span>
+            <span>ðŸš€</span> <span>LÆ°u bÃ i vÃ o Database</span>
           </button>
         </div>
       </div>
     `;
   }
 
-  // Hiển thị kết quả đánh giá lên giao diện (đồng bộ cả 2 tab)
+  // Hiá»ƒn thá»‹ káº¿t quáº£ Ä‘Ã¡nh giÃ¡ lÃªn giao diá»‡n (Ä‘á»“ng bá»™ cáº£ 2 tab)
   function displayEvaluationResult(evalData) {
     if (!evalData) return;
-    console.log('[AI Eval] Hiển thị kết quả đánh giá:', evalData);
+    console.log('[AI Eval] Hiá»ƒn thá»‹ káº¿t quáº£ Ä‘Ã¡nh giÃ¡:', evalData);
 
     const reportHtml = generateEvaluationReportHtml(evalData);
 
-    // 1. Điền vào Tab Kết quả thẩm định (Tab 2)
+    // 1. Äiá»n vÃ o Tab Káº¿t quáº£ tháº©m Ä‘á»‹nh (Tab 2)
     const tabMainContent = document.getElementById('tabEvaluationMainContent');
     if (tabMainContent) {
       tabMainContent.innerHTML = reportHtml;
     }
 
-    // 2. Điền vào Khung kết quả inline ở Tab Soạn bài (Tab 1)
+    // 2. Äiá»n vÃ o Khung káº¿t quáº£ inline á»Ÿ Tab Soáº¡n bÃ i (Tab 1)
     let resultBox = document.getElementById('aiEvaluationResultBox');
     const modalBody = document.querySelector('#submissionModal .vmo-modal-body');
     if (!resultBox && modalBody) {
@@ -1035,16 +1035,16 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
       resultBox.innerHTML = reportHtml;
     }
 
-    // 3. Cập nhật Badge trên nút Tab 2
+    // 3. Cáº­p nháº­t Badge trÃªn nÃºt Tab 2
     const evalBadge = document.getElementById('subTabEvalBadge');
     if (evalBadge) {
-      evalBadge.textContent = evalData.estimatedScore || 'Hoàn tất';
+      evalBadge.textContent = evalData.estimatedScore || 'HoÃ n táº¥t';
       evalBadge.style.display = 'inline-block';
       const verdictBg = evalData.verdictColor || (evalData.verdict === 'CORRECT' ? '#16a34a' : (evalData.verdict === 'LOGICAL_GAP' ? '#ea580c' : '#6366f1'));
       evalBadge.style.background = verdictBg;
     }
 
-    // 4. Cập nhật thanh thông báo thành công ở Tab 1 với nút xem chi tiết trực tiếp
+    // 4. Cáº­p nháº­t thanh thÃ´ng bÃ¡o thÃ nh cÃ´ng á»Ÿ Tab 1 vá»›i nÃºt xem chi tiáº¿t trá»±c tiáº¿p
     const noticeId = 'aiEvalSuccessNoticeBar';
     let noticeEl = document.getElementById(noticeId);
     if (!noticeEl) {
@@ -1059,19 +1059,19 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
       noticeEl.style.cssText = 'margin-bottom: 14px; padding: 10px 14px; background: #ecfdf5; border: 1.5px solid #10b981; border-radius: 8px; color: #065f46; font-size: 0.88rem; display: flex; justify-content: space-between; align-items: center; gap: 10px; flex-wrap: wrap; box-shadow: 0 2px 8px rgba(16,185,129,0.15);';
       noticeEl.innerHTML = `
         <div style="display: flex; align-items: center; gap: 8px;">
-          <span style="font-size: 1.25rem;">✅</span>
+          <span style="font-size: 1.25rem;">âœ…</span>
           <div>
-            <strong>Đã có kết quả thẩm định:</strong>
-            <span>${escapeHtmlText(evalData.verdictLabel || 'Đã phân tích xong')} (${escapeHtmlText(evalData.estimatedScore ?? '')})</span>
+            <strong>ÄÃ£ cÃ³ káº¿t quáº£ tháº©m Ä‘á»‹nh:</strong>
+            <span>${escapeHtmlText(evalData.verdictLabel || 'ÄÃ£ phÃ¢n tÃ­ch xong')} (${escapeHtmlText(evalData.estimatedScore ?? '')})</span>
           </div>
         </div>
         <button type="button" onclick="window.switchSubmissionTab('eval')" style="padding: 6px 14px; background: #059669; color: #fff; border: none; border-radius: 6px; font-weight: 700; font-size: 0.84rem; cursor: pointer; display: inline-flex; align-items: center; gap: 5px; box-shadow: 0 2px 6px rgba(5,150,105,0.3); transition: all 0.2s;">
-          <span>Xem kết quả chi tiết</span> <span>→</span>
+          <span>Xem káº¿t quáº£ chi tiáº¿t</span> <span>â†’</span>
         </button>
       `;
     }
 
-    // 5. TỰ ĐỘNG CHUYỂN NGAY SANG TAB KẾT QUẢ ĐÁNH GIÁ (HIỂN THỊ TRỌN VẸN TỪ ĐỈNH TRANG)
+    // 5. Tá»° Äá»˜NG CHUYá»‚N NGAY SANG TAB Káº¾T QUáº¢ ÄÃNH GIÃ (HIá»‚N THá»Š TRá»ŒN Váº¸N Tá»ª Äá»ˆNH TRANG)
     setTimeout(() => {
       window.switchSubmissionTab('eval');
       const evalContent = document.getElementById('tabEvaluationMainContent');
@@ -1079,26 +1079,26 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
       if (resultBox) triggerMathJaxRenderForElement(resultBox);
     }, 150);
 
-    // Kích hoạt MathJax ngay cho resultBox nếu có hiển thị ở Tab 1
+    // KÃ­ch hoáº¡t MathJax ngay cho resultBox náº¿u cÃ³ hiá»ƒn thá»‹ á»Ÿ Tab 1
     if (resultBox) {
       triggerMathJaxRenderForElement(resultBox);
     }
   }
 
-  // Xuất hàm ra phạm vi toàn cục để luôn có thể gọi được
+  // Xuáº¥t hÃ m ra pháº¡m vi toÃ n cá»¥c Ä‘á»ƒ luÃ´n cÃ³ thá»ƒ gá»i Ä‘Æ°á»£c
   window.displayEvaluationResult = displayEvaluationResult;
 
-  // Xem lại chi tiết đánh giá từ bài nộp cũ trong lịch sử
+  // Xem láº¡i chi tiáº¿t Ä‘Ã¡nh giÃ¡ tá»« bÃ i ná»™p cÅ© trong lá»‹ch sá»­
   window.viewSubEvaluationDetail = function(index) {
     const sub = window.lastLoadedSubmissions && window.lastLoadedSubmissions[index];
     if (!sub || !sub.evaluation) {
-      showToast('Bài nộp này chưa có dữ liệu đánh giá chi tiết của AI.', false);
+      showToast('BÃ i ná»™p nÃ y chÆ°a cÃ³ dá»¯ liá»‡u Ä‘Ã¡nh giÃ¡ chi tiáº¿t cá»§a AI.', false);
       return;
     }
 
-    // Hàm này được dùng ở cả lịch sử trong cửa sổ nộp bài và Database Hub.
-    // Khi gọi từ Database Hub, cần đóng Hub và chủ động mở submissionModal;
-    // nếu không, dữ liệu AI đã được nạp nhưng người dùng không nhìn thấy.
+    // HÃ m nÃ y Ä‘Æ°á»£c dÃ¹ng á»Ÿ cáº£ lá»‹ch sá»­ trong cá»­a sá»• ná»™p bÃ i vÃ  Database Hub.
+    // Khi gá»i tá»« Database Hub, cáº§n Ä‘Ã³ng Hub vÃ  chá»§ Ä‘á»™ng má»Ÿ submissionModal;
+    // náº¿u khÃ´ng, dá»¯ liá»‡u AI Ä‘Ã£ Ä‘Æ°á»£c náº¡p nhÆ°ng ngÆ°á»i dÃ¹ng khÃ´ng nhÃ¬n tháº¥y.
     if (typeof window.closeDataHubModal === 'function') {
       window.closeDataHubModal();
     }
@@ -1113,7 +1113,7 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
     if (typeof window.switchSubmissionTab === 'function') {
       window.switchSubmissionTab('eval');
     }
-    showToast('Đã mở lại nhận xét của Chuyên gia cho bài nộp #' + (window.lastLoadedSubmissions.length - index), true);
+    showToast('ÄÃ£ má»Ÿ láº¡i nháº­n xÃ©t cá»§a ChuyÃªn gia cho bÃ i ná»™p #' + (window.lastLoadedSubmissions.length - index), true);
   };
 
   window.openSubmissionModal = function(problemId, problemTitle, problemCard) {
@@ -1121,7 +1121,7 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
     let modal = document.getElementById('submissionModal');
     if (!modal) return;
 
-    // Reset về Tab Soạn bài và làm sạch trạng thái đánh giá cũ
+    // Reset vá» Tab Soáº¡n bÃ i vÃ  lÃ m sáº¡ch tráº¡ng thÃ¡i Ä‘Ã¡nh giÃ¡ cÅ©
     if (typeof window.switchSubmissionTab === 'function') {
       window.switchSubmissionTab('composer');
     }
@@ -1131,19 +1131,19 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
     if (tabMainContent) {
       tabMainContent.innerHTML = `
         <div style="text-align: center; padding: 40px 20px; color: #64748b;">
-          <div style="font-size: 2.5rem; margin-bottom: 10px;">🤖</div>
-          <div style="font-weight: 600; font-size: 1.05rem; margin-bottom: 6px; color: #1e293b;">Chưa có kết quả thẩm định</div>
+          <div style="font-size: 2.5rem; margin-bottom: 10px;">ðŸ¤–</div>
+          <div style="font-weight: 600; font-size: 1.05rem; margin-bottom: 6px; color: #1e293b;">ChÆ°a cÃ³ káº¿t quáº£ tháº©m Ä‘á»‹nh</div>
           <div style="font-size: 0.88rem; max-width: 460px; margin: 0 auto 16px auto;">
-            Hãy nhập lời giải hoặc tải ảnh bài làm viết tay ở Tab <strong>"Soạn bài &amp; Tải lên"</strong> rồi nhấn nút <strong>"Đánh giá bài giải"</strong>.
+            HÃ£y nháº­p lá»i giáº£i hoáº·c táº£i áº£nh bÃ i lÃ m viáº¿t tay á»Ÿ Tab <strong>"Soáº¡n bÃ i &amp; Táº£i lÃªn"</strong> rá»“i nháº¥n nÃºt <strong>"ÄÃ¡nh giÃ¡ bÃ i giáº£i"</strong>.
           </div>
           <button type="button" onclick="switchSubmissionTab('composer')" style="padding: 8px 18px; background: #4f46e5; color: #fff; border: none; border-radius: 6px; font-weight: 600; cursor: pointer;">
-            ✍️ Đến trang Soạn bài
+            âœï¸ Äáº¿n trang Soáº¡n bÃ i
           </button>
         </div>
       `;
     }
 
-    // Trích xuất thông tin chi tiết bài toán & bảo toàn công thức toán học LaTeX nguyên bản
+    // TrÃ­ch xuáº¥t thÃ´ng tin chi tiáº¿t bÃ i toÃ¡n & báº£o toÃ n cÃ´ng thá»©c toÃ¡n há»c LaTeX nguyÃªn báº£n
     let problemContentRaw = '';
     let problemContentDisplay = '';
     let topic = '';
@@ -1152,7 +1152,7 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
     if (problemCard) {
       if (problemCard.classList.contains('examplebox')) {
         const headingEl = problemCard.querySelector('.box-heading');
-        topic = headingEl ? (headingEl.innerText || headingEl.textContent || '').trim() : 'Ví dụ chuyên đề';
+        topic = headingEl ? (headingEl.innerText || headingEl.textContent || '').trim() : 'VÃ­ dá»¥ chuyÃªn Ä‘á»';
         const chBlock = problemCard.closest('.chapter-block');
         if (chBlock) {
           const chHeading = chBlock.querySelector('.chapter-heading');
@@ -1173,10 +1173,10 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
         }
 
         if (contentEl) {
-          // Ưu tiên 1: Đọc data-raw-math đã được lưu tự động lúc tải trang (chứa $ và $$ nguyên bản)
+          // Æ¯u tiÃªn 1: Äá»c data-raw-math Ä‘Ã£ Ä‘Æ°á»£c lÆ°u tá»± Ä‘á»™ng lÃºc táº£i trang (chá»©a $ vÃ  $$ nguyÃªn báº£n)
           problemContentRaw = contentEl.getAttribute('data-raw-math') || '';
 
-          // Ưu tiên 2: Nếu chưa có data-raw-math, khôi phục từ MathJax MathItems nếu có
+          // Æ¯u tiÃªn 2: Náº¿u chÆ°a cÃ³ data-raw-math, khÃ´i phá»¥c tá»« MathJax MathItems náº¿u cÃ³
           if (!problemContentRaw && window.MathJax?.startup?.document) {
             try {
               const mathItems = window.MathJax.startup.document.getMathItemsWithin(contentEl);
@@ -1192,11 +1192,11 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
                 problemContentRaw = clone.innerHTML;
               }
             } catch (err) {
-              console.warn('Lỗi trích xuất MathItems:', err);
+              console.warn('Lá»—i trÃ­ch xuáº¥t MathItems:', err);
             }
           }
 
-          // Ưu tiên 3: Nếu vẫn chưa có, lấy innerHTML
+          // Æ¯u tiÃªn 3: Náº¿u váº«n chÆ°a cÃ³, láº¥y innerHTML
           if (!problemContentRaw) {
             problemContentRaw = contentEl.innerHTML;
           }
@@ -1206,7 +1206,7 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
       }
     }
 
-    // Làm sạch text để gửi cho AI (giữ nguyên LaTeX, bỏ tag HTML thừa)
+    // LÃ m sáº¡ch text Ä‘á»ƒ gá»­i cho AI (giá»¯ nguyÃªn LaTeX, bá» tag HTML thá»«a)
     let problemContentForAi = problemTitle;
     if (problemContentRaw) {
       const tmpDiv = document.createElement('div');
@@ -1236,11 +1236,11 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
 
     const stmtBox = document.getElementById('subProblemStatementBox');
     if (stmtBox) {
-      stmtBox.innerHTML = problemContentDisplay ? problemContentDisplay : '<em>Đang nạp đề bài...</em>';
+      stmtBox.innerHTML = problemContentDisplay ? problemContentDisplay : '<em>Äang náº¡p Ä‘á» bÃ i...</em>';
       stmtBox.style.display = 'none';
     }
     const toggleStmtBtn = document.getElementById('btnToggleProblemStatement');
-    if (toggleStmtBtn) toggleStmtBtn.textContent = '📖 Xem nội dung đề bài';
+    if (toggleStmtBtn) toggleStmtBtn.textContent = 'ðŸ“– Xem ná»™i dung Ä‘á» bÃ i';
 
     // Reset input text & preview
     const textArea = document.getElementById('subSolutionText');
@@ -1248,11 +1248,11 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
     const mathBox = document.getElementById('subMathPreviewBox');
     if (mathBox) mathBox.style.display = 'none';
 
-    // Reset ảnh
+    // Reset áº£nh
     window.removeSelectedImage();
     setupImageDropzone();
 
-    // Ẩn hộp kết quả đánh giá AI cũ, cảnh báo rỗng và loading
+    // áº¨n há»™p káº¿t quáº£ Ä‘Ã¡nh giÃ¡ AI cÅ©, cáº£nh bÃ¡o rá»—ng vÃ  loading
     const evalResultBox = document.getElementById('aiEvaluationResultBox');
     if (evalResultBox) evalResultBox.style.display = 'none';
     const emptyAlert = document.getElementById('aiEvaluationEmptyAlert');
@@ -1262,7 +1262,7 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
     const noticeEl = document.getElementById('aiEvalSuccessNoticeBar');
     if (noticeEl) noticeEl.remove();
 
-    // Gán trực tiếp sự kiện cho nút Đánh giá AI và Điền mẫu để bảo đảm luôn kích hoạt
+    // GÃ¡n trá»±c tiáº¿p sá»± kiá»‡n cho nÃºt ÄÃ¡nh giÃ¡ AI vÃ  Äiá»n máº«u Ä‘á»ƒ báº£o Ä‘áº£m luÃ´n kÃ­ch hoáº¡t
     const evalBtn = document.getElementById('btnEvaluateSolution');
     if (evalBtn) {
       evalBtn.onclick = (e) => {
@@ -1278,10 +1278,10 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
       };
     }
 
-    // Nạp lịch sử các bài đã nộp cho câu hỏi này từ Database
+    // Náº¡p lá»‹ch sá»­ cÃ¡c bÃ i Ä‘Ã£ ná»™p cho cÃ¢u há»i nÃ y tá»« Database
     loadSubHistory(problemId);
 
-    // Gán sự kiện cho nút Lưu bài giải
+    // GÃ¡n sá»± kiá»‡n cho nÃºt LÆ°u bÃ i giáº£i
     const submitBtn = document.getElementById('btnConfirmSubmit');
     if (submitBtn) {
       submitBtn.onclick = async () => {
@@ -1289,12 +1289,12 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
         const hasImg = Boolean(window.currentUploadedImage);
 
         if (!text && !hasImg) {
-          alert(isEn ? 'Please upload a handwritten solution image or enter solution text!' : 'Vui lòng tải ảnh bài giải viết tay hoặc nhập nội dung lời giải trước khi lưu!');
+          alert(isEn ? 'Please upload a handwritten solution image or enter solution text!' : 'Vui lÃ²ng táº£i áº£nh bÃ i giáº£i viáº¿t tay hoáº·c nháº­p ná»™i dung lá»i giáº£i trÆ°á»›c khi lÆ°u!');
           return;
         }
 
         submitBtn.disabled = true;
-        submitBtn.innerHTML = '⏳ Đang lưu vào database...';
+        submitBtn.innerHTML = 'â³ Äang lÆ°u vÃ o database...';
 
         try {
           if (window.VMODataService && window.VMODataService.submitSolution) {
@@ -1314,25 +1314,25 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
               }
             );
             if (!savedSubmission) {
-              throw new Error('Máy chủ không trả về bản ghi vừa lưu');
+              throw new Error('MÃ¡y chá»§ khÃ´ng tráº£ vá» báº£n ghi vá»«a lÆ°u');
             }
-            showToast(isEn ? 'Solution saved successfully to database!' : 'Đã lưu bài giải và kết quả đánh giá vào Cơ sở dữ liệu!', true);
+            showToast(isEn ? 'Solution saved successfully to database!' : 'ÄÃ£ lÆ°u bÃ i giáº£i vÃ  káº¿t quáº£ Ä‘Ã¡nh giÃ¡ vÃ o CÆ¡ sá»Ÿ dá»¯ liá»‡u!', true);
             await loadSubHistory(problemId);
           } else {
-            showToast('Dịch vụ lưu trữ database chưa sẵn sàng. Vui lòng kiểm tra kết nối!', false);
+            showToast('Dá»‹ch vá»¥ lÆ°u trá»¯ database chÆ°a sáºµn sÃ ng. Vui lÃ²ng kiá»ƒm tra káº¿t ná»‘i!', false);
           }
         } catch (err) {
-          console.error('Lỗi nộp bài giải:', err);
-          let saveError = err?.message || 'Không thể ghi vào database';
+          console.error('Lá»—i ná»™p bÃ i giáº£i:', err);
+          let saveError = err?.message || 'KhÃ´ng thá»ƒ ghi vÃ o database';
           if (err?.status === 401 || err?.code === 'AUTH_REQUIRED') {
-            saveError = 'Phiên đăng nhập đã hết hạn. Vui lòng đăng nhập lại rồi thử lưu.';
+            saveError = 'PhiÃªn Ä‘Äƒng nháº­p Ä‘Ã£ háº¿t háº¡n. Vui lÃ²ng Ä‘Äƒng nháº­p láº¡i rá»“i thá»­ lÆ°u.';
           } else if (err?.status === 403 || err?.code === 'FORBIDDEN') {
-            saveError = 'Tài khoản hiện tại không có quyền thực hiện thao tác này.';
+            saveError = 'TÃ i khoáº£n hiá»‡n táº¡i khÃ´ng cÃ³ quyá»n thá»±c hiá»‡n thao tÃ¡c nÃ y.';
           }
-          showToast('Lỗi lưu bài giải: ' + saveError, false);
+          showToast('Lá»—i lÆ°u bÃ i giáº£i: ' + saveError, false);
         } finally {
           submitBtn.disabled = false;
-          submitBtn.innerHTML = '🚀 Lưu bài giải';
+          submitBtn.innerHTML = 'ðŸš€ LÆ°u bÃ i giáº£i';
         }
       };
     }
@@ -1341,7 +1341,7 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
     modal.style.display = 'flex';
     document.body.style.overflow = 'hidden';
 
-    // Đảm bảo nút đóng và click backdrop luôn hoạt động
+    // Äáº£m báº£o nÃºt Ä‘Ã³ng vÃ  click backdrop luÃ´n hoáº¡t Ä‘á»™ng
     const closeBtn = document.getElementById('submissionModalClose') || modal.querySelector('.vmo-modal-close');
     if (closeBtn) {
       closeBtn.onclick = (e) => {
@@ -1360,34 +1360,34 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
     document.body.style.overflow = '';
   };
 
-  // BỘ BIÊN DỊCH & CHUẨN HÓA CÔNG THỨC TOÁN HỌC MATHJAX CHỐNG LỖI 100%
+  // Bá»˜ BIÃŠN Dá»ŠCH & CHUáº¨N HÃ“A CÃ”NG THá»¨C TOÃN Há»ŒC MATHJAX CHá»NG Lá»–I 100%
   window.safeRenderMathJaxToElement = function(containerEl, rawContent) {
     if (!containerEl) return;
     if (!rawContent || !String(rawContent).trim()) {
-      containerEl.innerHTML = '<span style="color:#94a3b8; font-style:italic;">(Chưa có nội dung công thức)</span>';
+      containerEl.innerHTML = '<span style="color:#94a3b8; font-style:italic;">(ChÆ°a cÃ³ ná»™i dung cÃ´ng thá»©c)</span>';
       return;
     }
 
     let text = String(rawContent).trim();
 
-    // 1. Loại bỏ các ký tự vô hình/zero-width và chuẩn hóa khoảng trắng
+    // 1. Loáº¡i bá» cÃ¡c kÃ½ tá»± vÃ´ hÃ¬nh/zero-width vÃ  chuáº©n hÃ³a khoáº£ng tráº¯ng
     text = text.replace(/[\u200B-\u200D\uFEFF]/g, '').replace(/\u00A0/g, ' ');
 
-    // 2. Chuẩn hóa môi trường align/align* -> aligned để tương thích tuyệt đối với MathJax 3
+    // 2. Chuáº©n hÃ³a mÃ´i trÆ°á»ng align/align* -> aligned Ä‘á»ƒ tÆ°Æ¡ng thÃ­ch tuyá»‡t Ä‘á»‘i vá»›i MathJax 3
     text = text.replace(/\\begin\{align\*?\}/g, '\\begin{aligned}');
     text = text.replace(/\\end\{align\*?\}/g, '\\end{aligned}');
 
-    // 3. Tự động bọc $$ ... $$ nếu phát hiện khối \begin{aligned} nằm trần ngoài delimiters
+    // 3. Tá»± Ä‘á»™ng bá»c $$ ... $$ náº¿u phÃ¡t hiá»‡n khá»‘i \begin{aligned} náº±m tráº§n ngoÃ i delimiters
     text = text.replace(/(?<!\$\$|\\\[)\s*(\\begin\{aligned\}[\s\S]*?\\end\{aligned\})\s*(?!\$\$|\\\])/g, '\n$$\n$1\n$$\n');
 
-    // 4. Kiểm tra và cân bằng dấu $ nếu bị lẻ
+    // 4. Kiá»ƒm tra vÃ  cÃ¢n báº±ng dáº¥u $ náº¿u bá»‹ láº»
     const unescapedDollars = text.match(/(?<!\\)\$/g) || [];
     if (unescapedDollars.length % 2 !== 0) {
       text += ' $';
     }
 
-    // 5. Tách thành các token Toán học (Math) và Văn bản (Text) để xử lý riêng biệt
-    // Giúp text thường được bẻ dòng <br> và escape HTML, còn khối TeX giữ nguyên cấu trúc không bị chèn <br> làm vỡ MathJax
+    // 5. TÃ¡ch thÃ nh cÃ¡c token ToÃ¡n há»c (Math) vÃ  VÄƒn báº£n (Text) Ä‘á»ƒ xá»­ lÃ½ riÃªng biá»‡t
+    // GiÃºp text thÆ°á»ng Ä‘Æ°á»£c báº» dÃ²ng <br> vÃ  escape HTML, cÃ²n khá»‘i TeX giá»¯ nguyÃªn cáº¥u trÃºc khÃ´ng bá»‹ chÃ¨n <br> lÃ m vá»¡ MathJax
     const mathTokenRegex = /(\$\$(?:\\.|[^\$])+\$\$|\\\[[\s\S]+?\\\]|\$(?:\\.|[^\$])+\$|\\\([\s\S]+?\\\))/g;
 
     let lastIndex = 0;
@@ -1406,18 +1406,18 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
       }
 
       let mathPart = match[0];
-      // Chuẩn hóa ký tự Unicode toán học trong TeX block
+      // Chuáº©n hÃ³a kÃ½ tá»± Unicode toÃ¡n há»c trong TeX block
       mathPart = mathPart
-        .replace(/≤/g, '\\le ')
-        .replace(/≥/g, '\\ge ')
-        .replace(/∈/g, '\\in ')
-        .replace(/∉/g, '\\notin ')
-        .replace(/≠/g, '\\ne ')
-        .replace(/×/g, '\\times ')
-        .replace(/±/g, '\\pm ')
-        .replace(/→/g, '\\to ')
-        .replace(/⇒/g, '\\Rightarrow ')
-        .replace(/⇔/g, '\\Leftrightarrow ');
+        .replace(/â‰¤/g, '\\le ')
+        .replace(/â‰¥/g, '\\ge ')
+        .replace(/âˆˆ/g, '\\in ')
+        .replace(/âˆ‰/g, '\\notin ')
+        .replace(/â‰ /g, '\\ne ')
+        .replace(/Ã—/g, '\\times ')
+        .replace(/Â±/g, '\\pm ')
+        .replace(/â†’/g, '\\to ')
+        .replace(/â‡’/g, '\\Rightarrow ')
+        .replace(/â‡”/g, '\\Leftrightarrow ');
 
       safeHtml += mathPart;
       lastIndex = match.index + match[0].length;
@@ -1435,7 +1435,7 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
 
     containerEl.innerHTML = safeHtml;
 
-    // Kích hoạt MathJax typeset an toàn
+    // KÃ­ch hoáº¡t MathJax typeset an toÃ n
     const runTypeset = () => {
       if (window.MathJax) {
         try {
@@ -1462,21 +1462,21 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
     }
   };
 
-  // Xem trước MathJax cho ô văn bản
+  // Xem trÆ°á»›c MathJax cho Ã´ vÄƒn báº£n
   window.previewMathJaxSolution = function() {
     const text = (document.getElementById('subSolutionText')?.value || '').trim();
     const box = document.getElementById('subMathPreviewBox');
     const content = document.getElementById('subMathPreviewContent');
     if (!text) {
-      showToast('Vui lòng nhập văn bản lời giải để xem trước!', false);
+      showToast('Vui lÃ²ng nháº­p vÄƒn báº£n lá»i giáº£i Ä‘á»ƒ xem trÆ°á»›c!', false);
       return;
     }
     if (box) box.style.display = 'block';
     window.safeRenderMathJaxToElement(content, text);
-    showToast('Đang hiển thị bản xem trước MathJax!', true);
+    showToast('Äang hiá»ƒn thá»‹ báº£n xem trÆ°á»›c MathJax!', true);
   };
 
-  // Xem trước MathJax khi tải ảnh bài giải lên (Nhận diện chữ viết tay & công thức sang MathJax)
+  // Xem trÆ°á»›c MathJax khi táº£i áº£nh bÃ i giáº£i lÃªn (Nháº­n diá»‡n chá»¯ viáº¿t tay & cÃ´ng thá»©c sang MathJax)
   window.previewMathJaxFromImage = async function() {
     const image = window.currentUploadedImage;
     const box = document.getElementById('subImageMathPreviewBox');
@@ -1485,7 +1485,7 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
     const summaryBox = document.getElementById('subImageMathSummary');
 
     if (!image) {
-      showToast('Vui lòng chọn hoặc dán ảnh bài giải viết tay trước khi xem trước MathJax!', false);
+      showToast('Vui lÃ²ng chá»n hoáº·c dÃ¡n áº£nh bÃ i giáº£i viáº¿t tay trÆ°á»›c khi xem trÆ°á»›c MathJax!', false);
       const dropzone = document.getElementById('subImageDropzone');
       if (dropzone) {
         dropzone.style.borderColor = '#ef4444';
@@ -1503,26 +1503,26 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
     box.style.display = 'block';
     box.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
 
-    // Nếu ảnh này đã từng được phân tích OCR, lấy lại ngay từ bộ nhớ đệm
+    // Náº¿u áº£nh nÃ y Ä‘Ã£ tá»«ng Ä‘Æ°á»£c phÃ¢n tÃ­ch OCR, láº¥y láº¡i ngay tá»« bá»™ nhá»› Ä‘á»‡m
     if (window.currentUploadedImageOcrResult && window.currentUploadedImageOcrResult.img === image) {
       if (loading) loading.style.display = 'none';
       if (summaryBox) {
         if (window.currentUploadedImageOcrResult.summary) {
-          summaryBox.textContent = `💡 ${window.currentUploadedImageOcrResult.summary}`;
+          summaryBox.textContent = `ðŸ’¡ ${window.currentUploadedImageOcrResult.summary}`;
           summaryBox.style.display = 'block';
         } else {
           summaryBox.style.display = 'none';
         }
       }
       window.safeRenderMathJaxToElement(content, window.currentUploadedImageOcrResult.latexText);
-      showToast('Đã tải lại bản xem trước MathJax từ bộ nhớ đệm.', true);
+      showToast('ÄÃ£ táº£i láº¡i báº£n xem trÆ°á»›c MathJax tá»« bá»™ nhá»› Ä‘á»‡m.', true);
       return;
     }
 
-    // Hiển thị trạng thái đang phân tích
+    // Hiá»ƒn thá»‹ tráº¡ng thÃ¡i Ä‘ang phÃ¢n tÃ­ch
     if (loading) loading.style.display = 'block';
     if (summaryBox) summaryBox.style.display = 'none';
-    content.innerHTML = '<div style="color: #64748b; font-style: italic; text-align: center; padding: 10px;">Đang đọc và phân tích các công thức toán học từ ảnh...</div>';
+    content.innerHTML = '<div style="color: #64748b; font-style: italic; text-align: center; padding: 10px;">Äang Ä‘á»c vÃ  phÃ¢n tÃ­ch cÃ¡c cÃ´ng thá»©c toÃ¡n há»c tá»« áº£nh...</div>';
 
     const subData = window.currentSubmissionData || {};
 
@@ -1552,59 +1552,59 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
         };
 
         if (summaryBox && summary) {
-          summaryBox.textContent = `💡 ${summary}`;
+          summaryBox.textContent = `ðŸ’¡ ${summary}`;
           summaryBox.style.display = 'block';
         }
 
         window.safeRenderMathJaxToElement(content, latex);
-        showToast('Đã nhận diện công thức toán và hiển thị MathJax thành công!', true);
+        showToast('ÄÃ£ nháº­n diá»‡n cÃ´ng thá»©c toÃ¡n vÃ  hiá»ƒn thá»‹ MathJax thÃ nh cÃ´ng!', true);
       } else {
-        throw new Error(resJson?.message || 'Không thể nhận diện công thức');
+        throw new Error(resJson?.message || 'KhÃ´ng thá»ƒ nháº­n diá»‡n cÃ´ng thá»©c');
       }
     } catch (err) {
       if (loading) loading.style.display = 'none';
       console.warn('[OCR Math Fallback]:', err);
 
-      const fallbackText = `Đã tiếp nhận ảnh bài làm. Các công thức toán nhận diện được:\n$$\\text{Bài làm cho câu: } ${subData.problemTitle || 'Bài toán VMO'}\$$\n$$x_1 = 2026, \\quad x_{n+1} = \\frac{x_n^2 + 2}{2x_n} = \\frac{x_n}{2} + \\frac{1}{x_n}$$\n$$\\lim_{n \\to \\infty} x_n = \\sqrt{2}$$`;
+      const fallbackText = `ÄÃ£ tiáº¿p nháº­n áº£nh bÃ i lÃ m. CÃ¡c cÃ´ng thá»©c toÃ¡n nháº­n diá»‡n Ä‘Æ°á»£c:\n$$\\text{BÃ i lÃ m cho cÃ¢u: } ${subData.problemTitle || 'BÃ i toÃ¡n VMO'}\$$\n$$x_1 = 2026, \\quad x_{n+1} = \\frac{x_n^2 + 2}{2x_n} = \\frac{x_n}{2} + \\frac{1}{x_n}$$\n$$\\lim_{n \\to \\infty} x_n = \\sqrt{2}$$`;
       window.currentUploadedImageOcrResult = {
         img: image,
         latexText: fallbackText,
-        summary: 'Bản xem trước công thức mẫu từ ảnh bài giải'
+        summary: 'Báº£n xem trÆ°á»›c cÃ´ng thá»©c máº«u tá»« áº£nh bÃ i giáº£i'
       };
       window.safeRenderMathJaxToElement(content, fallbackText);
-      showToast('Đã tải bản xem trước MathJax cho bài toán.', true);
+      showToast('ÄÃ£ táº£i báº£n xem trÆ°á»›c MathJax cho bÃ i toÃ¡n.', true);
     }
   };
 
-  // Đóng khung xem trước MathJax từ ảnh
+  // ÄÃ³ng khung xem trÆ°á»›c MathJax tá»« áº£nh
   window.closeImageMathPreview = function() {
     const box = document.getElementById('subImageMathPreviewBox');
     if (box) box.style.display = 'none';
   };
 
-  // Sao chép toàn bộ mã LaTeX nhận diện được vào clipboard
+  // Sao chÃ©p toÃ n bá»™ mÃ£ LaTeX nháº­n diá»‡n Ä‘Æ°á»£c vÃ o clipboard
   window.copyImageMathLatex = function() {
     const latex = window.currentUploadedImageOcrResult?.latexText;
     if (!latex) {
-      showToast('Chưa có nội dung LaTeX để sao chép!', false);
+      showToast('ChÆ°a cÃ³ ná»™i dung LaTeX Ä‘á»ƒ sao chÃ©p!', false);
       return;
     }
     if (navigator.clipboard && navigator.clipboard.writeText) {
       navigator.clipboard.writeText(latex).then(() => {
-        showToast('Đã sao chép toàn bộ mã LaTeX vào bộ nhớ tạm!', true);
+        showToast('ÄÃ£ sao chÃ©p toÃ n bá»™ mÃ£ LaTeX vÃ o bá»™ nhá»› táº¡m!', true);
       }).catch(() => {
-        showToast('Không thể truy cập bộ nhớ tạm!', false);
+        showToast('KhÃ´ng thá»ƒ truy cáº­p bá»™ nhá»› táº¡m!', false);
       });
     } else {
-      showToast('Trình duyệt không hỗ trợ sao chép tự động.', false);
+      showToast('TrÃ¬nh duyá»‡t khÃ´ng há»— trá»£ sao chÃ©p tá»± Ä‘á»™ng.', false);
     }
   };
 
-  // Chuyển toàn bộ nội dung LaTeX vào ô văn bản để học sinh tùy chỉnh
+  // Chuyá»ƒn toÃ n bá»™ ná»™i dung LaTeX vÃ o Ã´ vÄƒn báº£n Ä‘á»ƒ há»c sinh tÃ¹y chá»‰nh
   window.applyImageMathToTextarea = function() {
     const latex = window.currentUploadedImageOcrResult?.latexText;
     if (!latex) {
-      showToast('Chưa có nội dung LaTeX để chuyển!', false);
+      showToast('ChÆ°a cÃ³ ná»™i dung LaTeX Ä‘á»ƒ chuyá»ƒn!', false);
       return;
     }
     const textArea = document.getElementById('subSolutionText');
@@ -1616,7 +1616,7 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
       }
       textArea.focus();
       textArea.scrollTop = textArea.scrollHeight;
-      showToast('Đã chuyển nội dung toán học vào ô Lời giải văn bản!', true);
+      showToast('ÄÃ£ chuyá»ƒn ná»™i dung toÃ¡n há»c vÃ o Ã´ Lá»i giáº£i vÄƒn báº£n!', true);
     }
   };
 
@@ -1628,29 +1628,29 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
         const subs = await window.VMODataService.getSubmissionsForProblem(problemId);
         window.lastLoadedSubmissions = subs || [];
         if (!subs || subs.length === 0) {
-          listEl.innerHTML = '<span style="color:#94a3b8; font-style:italic;">Bạn chưa có bài nộp nào cho câu này trên cơ sở dữ liệu.</span>';
+          listEl.innerHTML = '<span style="color:#94a3b8; font-style:italic;">Báº¡n chÆ°a cÃ³ bÃ i ná»™p nÃ o cho cÃ¢u nÃ y trÃªn cÆ¡ sá»Ÿ dá»¯ liá»‡u.</span>';
           return;
         }
         listEl.innerHTML = subs.map((s, idx) => {
           const dateStr = s.createdAt ? new Date(s.createdAt).toLocaleString('vi-VN') : '';
-          const preview = s.solutionContent ? s.solutionContent.slice(0, 100) + '...' : (s.hasImage ? '📷 (Bài nộp có ảnh chụp viết tay)' : '');
+          const preview = s.solutionContent ? s.solutionContent.slice(0, 100) + '...' : (s.hasImage ? 'ðŸ“· (BÃ i ná»™p cÃ³ áº£nh chá»¥p viáº¿t tay)' : '');
           const scoreBadge = s.score ? `<span style="background:#e0f2fe; color:#0369a1; border-radius:4px; padding:2px 6px; font-weight:600; font-size:0.75rem;">${s.score}</span>` : '';
-          const verdictLabel = s.verdictLabel || (s.evaluation && s.evaluation.verdictLabel) || (s.status === 'submitted' ? 'Đã nộp' : s.status);
+          const verdictLabel = s.verdictLabel || (s.evaluation && s.evaluation.verdictLabel) || (s.status === 'submitted' ? 'ÄÃ£ ná»™p' : s.status);
           const hasEvalBtn = s.evaluation ? `
             <button type="button" onclick="viewSubEvaluationDetail(${idx})" style="background:#eef2ff; border:1px solid #c7d2fe; color:#4338ca; border-radius:4px; padding:2px 8px; font-size:0.75rem; cursor:pointer; font-weight:600; margin-left:6px;">
-              👁️ Xem nhận xét AI
+              ðŸ‘ï¸ Xem nháº­n xÃ©t AI
             </button>
           ` : '';
           const imageBtn = s.hasImage ? `
             <button type="button" onclick="viewSubmissionImage('${s.id || s._id}')" style="background:#ecfeff; border:1px solid #a5f3fc; color:#0e7490; border-radius:4px; padding:2px 8px; font-size:0.75rem; cursor:pointer; font-weight:600; margin-left:6px;">
-              📷 Xem ảnh
+              ðŸ“· Xem áº£nh
             </button>
           ` : '';
 
           return `
             <div style="background:#f8fafc; border:1px solid #e2e8f0; border-radius:6px; padding:8px 10px; margin-bottom:6px;">
               <div style="display:flex; justify-content:space-between; align-items:center; font-weight:600; color:#334155; margin-bottom:4px; flex-wrap:wrap; gap:6px;">
-                <span>#${subs.length - idx} · ${dateStr}</span>
+                <span>#${subs.length - idx} Â· ${dateStr}</span>
                 <div style="display:flex; align-items:center;">
                   ${scoreBadge}
                   <span style="color:#0284c7; font-size:0.78rem; margin-left:6px;">${verdictLabel}</span>
@@ -1663,32 +1663,32 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
           `;
         }).join('');
       } else {
-        listEl.innerHTML = '<span style="color:#94a3b8;">Dữ liệu cục bộ.</span>';
+        listEl.innerHTML = '<span style="color:#94a3b8;">Dá»¯ liá»‡u cá»¥c bá»™.</span>';
       }
     } catch (e) {
-      listEl.innerHTML = '<span style="color:#dc2626;">Lỗi tải dữ liệu lịch sử.</span>';
+      listEl.innerHTML = '<span style="color:#dc2626;">Lá»—i táº£i dá»¯ liá»‡u lá»‹ch sá»­.</span>';
     }
   }
 
   window.viewSubmissionImage = async function(submissionId) {
     try {
       if (!window.VMODataService?.getSubmissionImage) {
-        throw new Error('Dịch vụ đọc ảnh chưa sẵn sàng');
+        throw new Error('Dá»‹ch vá»¥ Ä‘á»c áº£nh chÆ°a sáºµn sÃ ng');
       }
       const stored = await window.VMODataService.getSubmissionImage(submissionId);
-      if (!stored?.image) throw new Error('Không tìm thấy ảnh đã lưu');
+      if (!stored?.image) throw new Error('KhÃ´ng tÃ¬m tháº¥y áº£nh Ä‘Ã£ lÆ°u');
 
       const viewer = window.open('', '_blank');
-      if (!viewer) throw new Error('Trình duyệt đang chặn cửa sổ xem ảnh');
+      if (!viewer) throw new Error('TrÃ¬nh duyá»‡t Ä‘ang cháº·n cá»­a sá»• xem áº£nh');
       viewer.opener = null;
-      viewer.document.write(`<!doctype html><html lang="vi"><head><meta charset="utf-8"><title>Ảnh bài giải</title><style>body{margin:0;background:#0f172a;display:grid;place-items:center;min-height:100vh}img{max-width:96vw;max-height:96vh;object-fit:contain;background:white}</style></head><body><img alt="Ảnh bài giải" src="${stored.image}"></body></html>`);
+      viewer.document.write(`<!doctype html><html lang="vi"><head><meta charset="utf-8"><title>áº¢nh bÃ i giáº£i</title><style>body{margin:0;background:#0f172a;display:grid;place-items:center;min-height:100vh}img{max-width:96vw;max-height:96vh;object-fit:contain;background:white}</style></head><body><img alt="áº¢nh bÃ i giáº£i" src="${stored.image}"></body></html>`);
       viewer.document.close();
     } catch (err) {
-      showToast('Không thể mở ảnh bài giải: ' + (err?.message || 'Lỗi không xác định'), false);
+      showToast('KhÃ´ng thá»ƒ má»Ÿ áº£nh bÃ i giáº£i: ' + (err?.message || 'Lá»—i khÃ´ng xÃ¡c Ä‘á»‹nh'), false);
     }
   };
 
-  // 3. DIALOG QUẢN LÝ DỮ LIỆU TẬP TRUNG (ADMIN & TEACHER): TÀI LIỆU, ĐỀ THI, SỰ KIỆN
+  // 3. DIALOG QUáº¢N LÃ Dá»® LIá»†U Táº¬P TRUNG (ADMIN & TEACHER): TÃ€I LIá»†U, Äá»€ THI, Sá»° KIá»†N
   function injectDataManagementButton() {
     const authBar = document.getElementById('userAuthBar');
     const existingStaticBtn = document.getElementById('btnOpenDataMgmt');
@@ -1715,11 +1715,11 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
       font-size: 0.85rem;
       transition: background 0.2s;
     `;
-    btn.innerHTML = `🗄️ Database Hub`;
-    btn.title = 'Quản lý Tài liệu, Đề thi và Sự kiện trên Database';
+    btn.innerHTML = `ðŸ—„ï¸ Database Hub`;
+    btn.title = 'Quáº£n lÃ½ TÃ i liá»‡u, Äá» thi vÃ  Sá»± kiá»‡n trÃªn Database';
     btn.onclick = () => window.openDataHubModal();
 
-    // Chèn trước nút Đăng xuất
+    // ChÃ¨n trÆ°á»›c nÃºt ÄÄƒng xuáº¥t
     const logoutBtn = document.getElementById('btnLogout');
     if (logoutBtn) {
       authBar.insertBefore(btn, logoutBtn);
@@ -1728,14 +1728,14 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
     }
   }
 
-  // 4. MODAL "DATABASE HUB" TRỰC QUAN
+  // 4. MODAL "DATABASE HUB" TRá»°C QUAN
   function isCurrentUserAdmin() {
     return window.VMOAuth?.getSession?.()?.role === 'admin';
   }
 
   function requireAdminUiAction() {
     if (isCurrentUserAdmin()) return true;
-    showToast('Chức năng này chỉ dành cho quản trị viên.', false);
+    showToast('Chá»©c nÄƒng nÃ y chá»‰ dÃ nh cho quáº£n trá»‹ viÃªn.', false);
     return false;
   }
 
@@ -1745,8 +1745,8 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
     const heading = modal.querySelector('#hubModalHeading, .vmo-modal-title span:last-child');
     if (heading) {
       heading.textContent = isAdmin
-        ? 'Trung tâm Quản trị Dữ liệu (VMO Database Hub)'
-        : 'Kho dữ liệu học tập (VMO Database Hub)';
+        ? 'Trung tÃ¢m Quáº£n trá»‹ Dá»¯ liá»‡u (VMO Database Hub)'
+        : 'Kho dá»¯ liá»‡u há»c táº­p (VMO Database Hub)';
     }
 
     if (!isAdmin) {
@@ -1754,12 +1754,17 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
         '[onclick="toggleAddEventForm()"], [onclick="toggleAddDocForm()"], [onclick="toggleAddExamForm()"], #formAddEvent, #formAddDoc, #formAddExam'
       ).forEach(el => { el.style.display = 'none'; });
     } else if (!modal.querySelector('#btnSyncContentCatalog')) {
-      const tabs = modal.querySelector('.hub-tabs, [class*="hub-tabs"]');
+      // Modal cÃ³ thá»ƒ Ä‘Æ°á»£c khai bÃ¡o sáºµn trong src/modals/data-hub-modal.html
+      // hoáº·c Ä‘Æ°á»£c táº¡o Ä‘á»™ng bÃªn dÆ°á»›i. KhÃ´ng pháº£i phiÃªn báº£n nÃ o cÅ©ng gáº¯n class
+      // `hub-tabs`, vÃ¬ váº­y dÃ¹ng nÃºt tab Ä‘áº§u tiÃªn Ä‘á»ƒ xÃ¡c Ä‘á»‹nh chÃ­nh xÃ¡c hÃ ng tab.
+      const firstTabButton = modal.querySelector('.hub-tab-btn, #hub-tab-events');
+      const tabs = modal.querySelector('.hub-tabs, [class*="hub-tabs"]')
+        || firstTabButton?.parentElement;
       if (tabs) {
         const syncButton = document.createElement('button');
         syncButton.id = 'btnSyncContentCatalog';
         syncButton.type = 'button';
-        syncButton.innerHTML = '🔄 Đồng bộ ngân hàng câu hỏi';
+        syncButton.innerHTML = 'ðŸ”„ Äá»“ng bá»™ ngÃ¢n hÃ ng cÃ¢u há»i';
         syncButton.style.cssText = 'margin-left:auto;padding:7px 12px;border:1px solid #a5b4fc;border-radius:7px;background:#eef2ff;color:#4338ca;font-weight:700;cursor:pointer;';
         syncButton.onclick = window.syncContentCatalogToDatabase;
         tabs.appendChild(syncButton);
@@ -1777,166 +1782,166 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
         <div class="vmo-modal-container" style="max-width: 800px;">
           <div class="vmo-modal-header" style="background:#0f172a; color:#fff;">
             <div class="vmo-modal-title" style="color:#fff;">
-              <span>🗄️</span>
-              <span>Trung tâm Quản trị Dữ liệu database (VMO Database Hub)</span>
+              <span>ðŸ—„ï¸</span>
+              <span>Trung tÃ¢m Quáº£n trá»‹ Dá»¯ liá»‡u database (VMO Database Hub)</span>
             </div>
-            <button type="button" class="vmo-modal-close" style="color:#fff;" onclick="closeDataHubModal()">✕</button>
+            <button type="button" class="vmo-modal-close" style="color:#fff;" onclick="closeDataHubModal()">âœ•</button>
           </div>
           <div class="vmo-modal-body">
             <!-- Navigation Sub-tabs trong Modal -->
             <div style="display:flex; gap:8px; border-bottom:2px solid #e2e8f0; margin-bottom:16px; padding-bottom:8px;">
-              <button type="button" class="hub-tab-btn active" id="hub-tab-events" onclick="switchHubTab('events')">📅 Sự kiện & Lịch thi</button>
-              <button type="button" class="hub-tab-btn" id="hub-tab-docs" onclick="switchHubTab('docs')">📚 Tài liệu & Kỷ yếu</button>
-              <button type="button" class="hub-tab-btn" id="hub-tab-exams" onclick="switchHubTab('exams')">📑 Đề thi mới</button>
+              <button type="button" class="hub-tab-btn active" id="hub-tab-events" onclick="switchHubTab('events')">ðŸ“… Sá»± kiá»‡n & Lá»‹ch thi</button>
+              <button type="button" class="hub-tab-btn" id="hub-tab-docs" onclick="switchHubTab('docs')">ðŸ“š TÃ i liá»‡u & Ká»· yáº¿u</button>
+              <button type="button" class="hub-tab-btn" id="hub-tab-exams" onclick="switchHubTab('exams')">ðŸ“‘ Äá» thi má»›i</button>
             </div>
 
-            <!-- Panel 1: SỰ KIỆN & LỊCH THI -->
+            <!-- Panel 1: Sá»° KIá»†N & Lá»ŠCH THI -->
             <div id="hub-panel-events" class="hub-panel">
               <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
-                <h4 style="margin:0; font-size:1rem; color:#1e293b;">Lịch thi & Hoạt động tập huấn Đội tuyển</h4>
+                <h4 style="margin:0; font-size:1rem; color:#1e293b;">Lá»‹ch thi & Hoáº¡t Ä‘á»™ng táº­p huáº¥n Äá»™i tuyá»ƒn</h4>
                 <button type="button" class="btn-icon-action" onclick="toggleAddEventForm()" style="background:#0284c7; color:#fff; border:none; padding:6px 12px; border-radius:6px; cursor:pointer;">
-                  ➕ Thêm sự kiện mới
+                  âž• ThÃªm sá»± kiá»‡n má»›i
                 </button>
               </div>
 
-              <!-- Form thêm sự kiện -->
+              <!-- Form thÃªm sá»± kiá»‡n -->
               <form id="formAddEvent" style="display:none; background:#f8fafc; border:1px solid #cbd5e1; border-radius:8px; padding:12px; margin-bottom:14px;" onsubmit="handleCreateEvent(event)">
                 <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-bottom:10px;">
                   <div>
-                    <label style="display:block; font-size:0.8rem; font-weight:600; margin-bottom:4px;">Tên sự kiện / Lịch thi *</label>
-                    <input type="text" id="evtTitle" placeholder="vd: Thi thử VMO đợt 1" required style="width:100%; box-sizing:border-box; padding:6px 10px; border:1px solid #cbd5e1; border-radius:6px;">
+                    <label style="display:block; font-size:0.8rem; font-weight:600; margin-bottom:4px;">TÃªn sá»± kiá»‡n / Lá»‹ch thi *</label>
+                    <input type="text" id="evtTitle" placeholder="vd: Thi thá»­ VMO Ä‘á»£t 1" required style="width:100%; box-sizing:border-box; padding:6px 10px; border:1px solid #cbd5e1; border-radius:6px;">
                   </div>
                   <div>
-                    <label style="display:block; font-size:0.8rem; font-weight:600; margin-bottom:4px;">Phân loại *</label>
+                    <label style="display:block; font-size:0.8rem; font-weight:600; margin-bottom:4px;">PhÃ¢n loáº¡i *</label>
                     <select id="evtType" style="width:100%; box-sizing:border-box; padding:6px 10px; border:1px solid #cbd5e1; border-radius:6px;">
-                      <option value="exam">Thi thử / Chọn Đội tuyển</option>
-                      <option value="seminar">Hội thảo / Chuyên đề</option>
-                      <option value="training">Tập huấn nâng cao</option>
-                      <option value="deadline">Hạn nộp bài tập</option>
+                      <option value="exam">Thi thá»­ / Chá»n Äá»™i tuyá»ƒn</option>
+                      <option value="seminar">Há»™i tháº£o / ChuyÃªn Ä‘á»</option>
+                      <option value="training">Táº­p huáº¥n nÃ¢ng cao</option>
+                      <option value="deadline">Háº¡n ná»™p bÃ i táº­p</option>
                     </select>
                   </div>
                 </div>
                 <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-bottom:10px;">
                   <div>
-                    <label style="display:block; font-size:0.8rem; font-weight:600; margin-bottom:4px;">Ngày bắt đầu *</label>
+                    <label style="display:block; font-size:0.8rem; font-weight:600; margin-bottom:4px;">NgÃ y báº¯t Ä‘áº§u *</label>
                     <input type="date" id="evtStartDate" required style="width:100%; box-sizing:border-box; padding:6px 10px; border:1px solid #cbd5e1; border-radius:6px;">
                   </div>
                   <div>
-                    <label style="display:block; font-size:0.8rem; font-weight:600; margin-bottom:4px;">Địa điểm tổ chức</label>
-                    <input type="text" id="evtLocation" placeholder="vd: THPT Phan Châu Trinh, Đà Nẵng" style="width:100%; box-sizing:border-box; padding:6px 10px; border:1px solid #cbd5e1; border-radius:6px;">
+                    <label style="display:block; font-size:0.8rem; font-weight:600; margin-bottom:4px;">Äá»‹a Ä‘iá»ƒm tá»• chá»©c</label>
+                    <input type="text" id="evtLocation" placeholder="vd: THPT Phan ChÃ¢u Trinh, ÄÃ  Náºµng" style="width:100%; box-sizing:border-box; padding:6px 10px; border:1px solid #cbd5e1; border-radius:6px;">
                   </div>
                 </div>
                 <div style="margin-bottom:10px;">
-                  <label style="display:block; font-size:0.8rem; font-weight:600; margin-bottom:4px;">Ghi chú chi tiết</label>
-                  <input type="text" id="evtDesc" placeholder="Nội dung chuyên đề, tài liệu mang theo..." style="width:100%; box-sizing:border-box; padding:6px 10px; border:1px solid #cbd5e1; border-radius:6px;">
+                  <label style="display:block; font-size:0.8rem; font-weight:600; margin-bottom:4px;">Ghi chÃº chi tiáº¿t</label>
+                  <input type="text" id="evtDesc" placeholder="Ná»™i dung chuyÃªn Ä‘á», tÃ i liá»‡u mang theo..." style="width:100%; box-sizing:border-box; padding:6px 10px; border:1px solid #cbd5e1; border-radius:6px;">
                 </div>
                 <div style="text-align:right;">
-                  <button type="button" onclick="toggleAddEventForm()" style="margin-right:8px; padding:6px 12px; border:1px solid #cbd5e1; border-radius:6px; background:#fff; cursor:pointer;">Hủy</button>
-                  <button type="submit" style="background:#16a34a; color:#fff; border:none; padding:6px 14px; border-radius:6px; font-weight:600; cursor:pointer;">Lưu vào database</button>
+                  <button type="button" onclick="toggleAddEventForm()" style="margin-right:8px; padding:6px 12px; border:1px solid #cbd5e1; border-radius:6px; background:#fff; cursor:pointer;">Há»§y</button>
+                  <button type="submit" style="background:#16a34a; color:#fff; border:none; padding:6px 14px; border-radius:6px; font-weight:600; cursor:pointer;">LÆ°u vÃ o database</button>
                 </div>
               </form>
 
               <div id="hubEventsList" style="max-height:300px; overflow-y:auto;">
-                <em>Đang nạp danh sách sự kiện từ database...</em>
+                <em>Äang náº¡p danh sÃ¡ch sá»± kiá»‡n tá»« database...</em>
               </div>
             </div>
 
-            <!-- Panel 2: TÀI LIỆU & KỶ YẾU -->
+            <!-- Panel 2: TÃ€I LIá»†U & Ká»¶ Yáº¾U -->
             <div id="hub-panel-docs" class="hub-panel" style="display:none;">
               <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
-                <h4 style="margin:0; font-size:1rem; color:#1e293b;">Kho Tài liệu & Chuyên đề Chuyên Toán</h4>
+                <h4 style="margin:0; font-size:1rem; color:#1e293b;">Kho TÃ i liá»‡u & ChuyÃªn Ä‘á» ChuyÃªn ToÃ¡n</h4>
                 <button type="button" class="btn-icon-action" onclick="toggleAddDocForm()" style="background:#0284c7; color:#fff; border:none; padding:6px 12px; border-radius:6px; cursor:pointer;">
-                  ➕ Thêm tài liệu mới
+                  âž• ThÃªm tÃ i liá»‡u má»›i
                 </button>
               </div>
 
-              <!-- Form thêm tài liệu -->
+              <!-- Form thÃªm tÃ i liá»‡u -->
               <form id="formAddDoc" style="display:none; background:#f8fafc; border:1px solid #cbd5e1; border-radius:8px; padding:12px; margin-bottom:14px;" onsubmit="handleCreateDocument(event)">
                 <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-bottom:10px;">
                   <div>
-                    <label style="display:block; font-size:0.8rem; font-weight:600; margin-bottom:4px;">Tên tài liệu / Kỷ yếu *</label>
-                    <input type="text" id="docTitle" placeholder="vd: Kỷ yếu Trại hè Hùng Vương 2026" required style="width:100%; box-sizing:border-box; padding:6px 10px; border:1px solid #cbd5e1; border-radius:6px;">
+                    <label style="display:block; font-size:0.8rem; font-weight:600; margin-bottom:4px;">TÃªn tÃ i liá»‡u / Ká»· yáº¿u *</label>
+                    <input type="text" id="docTitle" placeholder="vd: Ká»· yáº¿u Tráº¡i hÃ¨ HÃ¹ng VÆ°Æ¡ng 2026" required style="width:100%; box-sizing:border-box; padding:6px 10px; border:1px solid #cbd5e1; border-radius:6px;">
                   </div>
                   <div>
-                    <label style="display:block; font-size:0.8rem; font-weight:600; margin-bottom:4px;">Phân môn chuyên đề *</label>
+                    <label style="display:block; font-size:0.8rem; font-weight:600; margin-bottom:4px;">PhÃ¢n mÃ´n chuyÃªn Ä‘á» *</label>
                     <select id="docTopic" style="width:100%; box-sizing:border-box; padding:6px 10px; border:1px solid #cbd5e1; border-radius:6px;">
-                      <option value="Đại số & Giải tích">Đại số & Giải tích</option>
-                      <option value="Hình học phẳng">Hình học phẳng</option>
-                      <option value="Số học">Số học</option>
-                      <option value="Tổ hợp">Tổ hợp</option>
-                      <option value="Tổng hợp">Đề thi & Kỷ yếu tổng hợp</option>
+                      <option value="Äáº¡i sá»‘ & Giáº£i tÃ­ch">Äáº¡i sá»‘ & Giáº£i tÃ­ch</option>
+                      <option value="HÃ¬nh há»c pháº³ng">HÃ¬nh há»c pháº³ng</option>
+                      <option value="Sá»‘ há»c">Sá»‘ há»c</option>
+                      <option value="Tá»• há»£p">Tá»• há»£p</option>
+                      <option value="Tá»•ng há»£p">Äá» thi & Ká»· yáº¿u tá»•ng há»£p</option>
                     </select>
                   </div>
                 </div>
                 <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-bottom:10px;">
                   <div>
-                    <label style="display:block; font-size:0.8rem; font-weight:600; margin-bottom:4px;">Tác giả / Ban chuyên môn</label>
-                    <input type="text" id="docAuthor" placeholder="vd: Tổ Toán VMO Đà Nẵng" style="width:100%; box-sizing:border-box; padding:6px 10px; border:1px solid #cbd5e1; border-radius:6px;">
+                    <label style="display:block; font-size:0.8rem; font-weight:600; margin-bottom:4px;">TÃ¡c giáº£ / Ban chuyÃªn mÃ´n</label>
+                    <input type="text" id="docAuthor" placeholder="vd: Tá»• ToÃ¡n VMO ÄÃ  Náºµng" style="width:100%; box-sizing:border-box; padding:6px 10px; border:1px solid #cbd5e1; border-radius:6px;">
                   </div>
                   <div>
-                    <label style="display:block; font-size:0.8rem; font-weight:600; margin-bottom:4px;">Link tải / Xem PDF</label>
+                    <label style="display:block; font-size:0.8rem; font-weight:600; margin-bottom:4px;">Link táº£i / Xem PDF</label>
                     <input type="url" id="docUrl" placeholder="https://..." style="width:100%; box-sizing:border-box; padding:6px 10px; border:1px solid #cbd5e1; border-radius:6px;">
                   </div>
                 </div>
                 <div style="text-align:right;">
-                  <button type="button" onclick="toggleAddDocForm()" style="margin-right:8px; padding:6px 12px; border:1px solid #cbd5e1; border-radius:6px; background:#fff; cursor:pointer;">Hủy</button>
-                  <button type="submit" style="background:#16a34a; color:#fff; border:none; padding:6px 14px; border-radius:6px; font-weight:600; cursor:pointer;">Lưu tài liệu vào database</button>
+                  <button type="button" onclick="toggleAddDocForm()" style="margin-right:8px; padding:6px 12px; border:1px solid #cbd5e1; border-radius:6px; background:#fff; cursor:pointer;">Há»§y</button>
+                  <button type="submit" style="background:#16a34a; color:#fff; border:none; padding:6px 14px; border-radius:6px; font-weight:600; cursor:pointer;">LÆ°u tÃ i liá»‡u vÃ o database</button>
                 </div>
               </form>
 
               <div id="hubDocsList" style="max-height:300px; overflow-y:auto;">
-                <em>Đang nạp danh sách tài liệu từ database...</em>
+                <em>Äang náº¡p danh sÃ¡ch tÃ i liá»‡u tá»« database...</em>
               </div>
             </div>
 
-            <!-- Panel 3: ĐỀ THI MỚI -->
+            <!-- Panel 3: Äá»€ THI Má»šI -->
             <div id="hub-panel-exams" class="hub-panel" style="display:none;">
               <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
-                <h4 style="margin:0; font-size:1rem; color:#1e293b;">Ngân hàng Đề thi Đội tuyển</h4>
+                <h4 style="margin:0; font-size:1rem; color:#1e293b;">NgÃ¢n hÃ ng Äá» thi Äá»™i tuyá»ƒn</h4>
                 <button type="button" class="btn-icon-action" onclick="toggleAddExamForm()" style="background:#0284c7; color:#fff; border:none; padding:6px 12px; border-radius:6px; cursor:pointer;">
-                  ➕ Thêm đề thi mới
+                  âž• ThÃªm Ä‘á» thi má»›i
                 </button>
               </div>
 
-              <!-- Form thêm đề thi -->
+              <!-- Form thÃªm Ä‘á» thi -->
               <form id="formAddExam" style="display:none; background:#f8fafc; border:1px solid #cbd5e1; border-radius:8px; padding:12px; margin-bottom:14px;" onsubmit="handleCreateExam(event)">
                 <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-bottom:10px;">
                   <div>
-                    <label style="display:block; font-size:0.8rem; font-weight:600; margin-bottom:4px;">Tên đề thi / Kỳ thi *</label>
-                    <input type="text" id="examTitle" placeholder="vd: Đề chọn Đội tuyển Chuyên Lê Quý Đôn 2026" required style="width:100%; box-sizing:border-box; padding:6px 10px; border:1px solid #cbd5e1; border-radius:6px;">
+                    <label style="display:block; font-size:0.8rem; font-weight:600; margin-bottom:4px;">TÃªn Ä‘á» thi / Ká»³ thi *</label>
+                    <input type="text" id="examTitle" placeholder="vd: Äá» chá»n Äá»™i tuyá»ƒn ChuyÃªn LÃª QuÃ½ ÄÃ´n 2026" required style="width:100%; box-sizing:border-box; padding:6px 10px; border:1px solid #cbd5e1; border-radius:6px;">
                   </div>
                   <div>
-                    <label style="display:block; font-size:0.8rem; font-weight:600; margin-bottom:4px;">Phân nhóm đề *</label>
+                    <label style="display:block; font-size:0.8rem; font-weight:600; margin-bottom:4px;">PhÃ¢n nhÃ³m Ä‘á» *</label>
                     <select id="examCategory" style="width:100%; box-sizing:border-box; padding:6px 10px; border:1px solid #cbd5e1; border-radius:6px;">
-                      <option value="vmo-danang">VMO Đà Nẵng</option>
-                      <option value="mock">Đề thi thử VMO</option>
-                      <option value="tst-national">Đề TST Toàn quốc 2026-2027</option>
-                      <option value="history-dn-qn">Đề truyền thống ĐN-QN</option>
+                      <option value="vmo-danang">VMO ÄÃ  Náºµng</option>
+                      <option value="mock">Äá» thi thá»­ VMO</option>
+                      <option value="tst-national">Äá» TST ToÃ n quá»‘c 2026-2027</option>
+                      <option value="history-dn-qn">Äá» truyá»n thá»‘ng ÄN-QN</option>
                     </select>
                   </div>
                 </div>
                 <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:10px; margin-bottom:10px;">
                   <div>
-                    <label style="display:block; font-size:0.8rem; font-weight:600; margin-bottom:4px;">Tỉnh / Đơn vị</label>
-                    <input type="text" id="examProvince" placeholder="vd: Đà Nẵng" style="width:100%; box-sizing:border-box; padding:6px 10px; border:1px solid #cbd5e1; border-radius:6px;">
+                    <label style="display:block; font-size:0.8rem; font-weight:600; margin-bottom:4px;">Tá»‰nh / ÄÆ¡n vá»‹</label>
+                    <input type="text" id="examProvince" placeholder="vd: ÄÃ  Náºµng" style="width:100%; box-sizing:border-box; padding:6px 10px; border:1px solid #cbd5e1; border-radius:6px;">
                   </div>
                   <div>
-                    <label style="display:block; font-size:0.8rem; font-weight:600; margin-bottom:4px;">Năm học</label>
+                    <label style="display:block; font-size:0.8rem; font-weight:600; margin-bottom:4px;">NÄƒm há»c</label>
                     <input type="text" id="examYear" value="2026-2027" style="width:100%; box-sizing:border-box; padding:6px 10px; border:1px solid #cbd5e1; border-radius:6px;">
                   </div>
                   <div>
-                    <label style="display:block; font-size:0.8rem; font-weight:600; margin-bottom:4px;">Thời gian (phút)</label>
+                    <label style="display:block; font-size:0.8rem; font-weight:600; margin-bottom:4px;">Thá»i gian (phÃºt)</label>
                     <input type="number" id="examDuration" value="180" style="width:100%; box-sizing:border-box; padding:6px 10px; border:1px solid #cbd5e1; border-radius:6px;">
                   </div>
                 </div>
                 <div style="text-align:right;">
-                  <button type="button" onclick="toggleAddExamForm()" style="margin-right:8px; padding:6px 12px; border:1px solid #cbd5e1; border-radius:6px; background:#fff; cursor:pointer;">Hủy</button>
-                  <button type="submit" style="background:#16a34a; color:#fff; border:none; padding:6px 14px; border-radius:6px; font-weight:600; cursor:pointer;">Lưu đề thi vào database</button>
+                  <button type="button" onclick="toggleAddExamForm()" style="margin-right:8px; padding:6px 12px; border:1px solid #cbd5e1; border-radius:6px; background:#fff; cursor:pointer;">Há»§y</button>
+                  <button type="submit" style="background:#16a34a; color:#fff; border:none; padding:6px 14px; border-radius:6px; font-weight:600; cursor:pointer;">LÆ°u Ä‘á» thi vÃ o database</button>
                 </div>
               </form>
 
               <div id="hubExamsList" style="max-height:300px; overflow-y:auto;">
-                <em>Đang nạp danh sách đề thi từ database...</em>
+                <em>Äang náº¡p danh sÃ¡ch Ä‘á» thi tá»« database...</em>
               </div>
             </div>
 
@@ -1945,7 +1950,7 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
       `;
       document.body.appendChild(modal);
 
-      // Thêm style cho tab trong hub modal
+      // ThÃªm style cho tab trong hub modal
       const style = document.createElement('style');
       style.textContent = `
         .hub-tab-btn {
@@ -1973,7 +1978,7 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
     modal.style.display = 'flex';
     document.body.style.overflow = 'hidden';
 
-    // Đảm bảo nút đóng và click backdrop luôn hoạt động
+    // Äáº£m báº£o nÃºt Ä‘Ã³ng vÃ  click backdrop luÃ´n hoáº¡t Ä‘á»™ng
     const closeBtns = modal.querySelectorAll('.vmo-modal-close, #dataHubModalClose');
     closeBtns.forEach(btn => {
       btn.onclick = (e) => {
@@ -2015,15 +2020,15 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
   window.loadAllSubmissions = async function() {
     const el = document.getElementById('hubSubsList');
     if (!el) return;
-    el.innerHTML = '<em>Đang tải danh sách bài nộp từ database...</em>';
+    el.innerHTML = '<em>Äang táº£i danh sÃ¡ch bÃ i ná»™p tá»« database...</em>';
     try {
       if (window.VMODataService && window.VMODataService.getAllSubmissions) {
         const subs = await window.VMODataService.getAllSubmissions();
-        // Dùng cùng nguồn dữ liệu với cửa sổ lịch sử để các nút xem chi tiết
-        // có thể mở đúng nhận xét AI của bản ghi đang hiển thị trong Database Hub.
+        // DÃ¹ng cÃ¹ng nguá»“n dá»¯ liá»‡u vá»›i cá»­a sá»• lá»‹ch sá»­ Ä‘á»ƒ cÃ¡c nÃºt xem chi tiáº¿t
+        // cÃ³ thá»ƒ má»Ÿ Ä‘Ãºng nháº­n xÃ©t AI cá»§a báº£n ghi Ä‘ang hiá»ƒn thá»‹ trong Database Hub.
         window.lastLoadedSubmissions = subs || [];
         if (!subs || subs.length === 0) {
-          el.innerHTML = '<div style="padding:14px; text-align:center; color:#94a3b8; font-style:italic;">Chưa có bài giải nào được lưu trên hệ thống database. Học sinh hoặc giáo viên có thể nhấn "✍️ Nộp bài giải" hoặc "🚀 Lưu bài giải lên database" ở từng câu hỏi để lưu vào đây!</div>';
+          el.innerHTML = '<div style="padding:14px; text-align:center; color:#94a3b8; font-style:italic;">ChÆ°a cÃ³ bÃ i giáº£i nÃ o Ä‘Æ°á»£c lÆ°u trÃªn há»‡ thá»‘ng database. Há»c sinh hoáº·c giÃ¡o viÃªn cÃ³ thá»ƒ nháº¥n "âœï¸ Ná»™p bÃ i giáº£i" hoáº·c "ðŸš€ LÆ°u bÃ i giáº£i lÃªn database" á»Ÿ tá»«ng cÃ¢u há»i Ä‘á»ƒ lÆ°u vÃ o Ä‘Ã¢y!</div>';
           return;
         }
         el.innerHTML = subs.map((s, idx) => {
@@ -2031,23 +2036,23 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
           const preview = s.solutionContent ? s.solutionContent.slice(0, 150) + (s.solutionContent.length > 150 ? '...' : '') : '';
           const snapshot = s.problemSnapshot || {};
           const sourceLabels = {
-            specialty_example: 'Tài liệu chuyên đề VMO',
-            mock_exam_question: 'Bộ đề thi thử VMO',
-            tst_question: 'Đề TST 2026–2027',
-            regional_question: 'Đề Đà Nẵng–Quảng Nam'
+            specialty_example: 'TÃ i liá»‡u chuyÃªn Ä‘á» VMO',
+            mock_exam_question: 'Bá»™ Ä‘á» thi thá»­ VMO',
+            tst_question: 'Äá» TST 2026â€“2027',
+            regional_question: 'Äá» ÄÃ  Náºµngâ€“Quáº£ng Nam'
           };
-          const sourceLabel = sourceLabels[s.sourceType || snapshot.sourceType] || 'Ngân hàng bài toán VMO';
+          const sourceLabel = sourceLabels[s.sourceType || snapshot.sourceType] || 'NgÃ¢n hÃ ng bÃ i toÃ¡n VMO';
           const setTitle = snapshot.setTitle || s.setTitle || '';
-          const problemTitle = snapshot.title || s.problemTitle || s.problemKey || s.problemId || 'Bài toán VMO';
+          const problemTitle = snapshot.title || s.problemTitle || s.problemKey || s.problemId || 'BÃ i toÃ¡n VMO';
           const score = s.score || s.evaluation?.estimatedScore || '';
           const evaluationBtn = s.evaluation ? `
             <button type="button" onclick="viewSubEvaluationDetail(${idx})" style="background:#eef2ff; border:1px solid #c7d2fe; color:#4338ca; border-radius:4px; padding:5px 9px; font-size:0.75rem; cursor:pointer; font-weight:600;">
-              👁️ Xem nhận xét AI
+              ðŸ‘ï¸ Xem nháº­n xÃ©t AI
             </button>
           ` : '';
           const imageBtn = s.hasImage ? `
             <button type="button" onclick="viewSubmissionImage('${s.id || s._id}')" style="background:#ecfeff; border:1px solid #a5f3fc; color:#0e7490; border-radius:4px; padding:5px 9px; font-size:0.75rem; cursor:pointer; font-weight:600;">
-              📷 Xem ảnh
+              ðŸ“· Xem áº£nh
             </button>
           ` : '';
           return `
@@ -2055,12 +2060,12 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
               <div style="font-size:0.72rem; color:#4338ca; font-weight:800; text-transform:uppercase; letter-spacing:.04em; margin-bottom:3px;">${escapeHtmlText(sourceLabel)}</div>
               <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:4px;">
                 <strong style="color:#0f172a; font-size:0.95rem;">${escapeHtmlText(problemTitle)}</strong>
-                <span style="background:#e0f2fe; color:#0369a1; padding:2px 8px; border-radius:4px; font-size:0.75rem; font-weight:600;">${escapeHtmlText(s.authorName || 'Học sinh')}</span>
+                <span style="background:#e0f2fe; color:#0369a1; padding:2px 8px; border-radius:4px; font-size:0.75rem; font-weight:600;">${escapeHtmlText(s.authorName || 'Há»c sinh')}</span>
               </div>
-              ${setTitle ? `<div style="font-size:0.82rem;color:#475569;margin-bottom:5px;">📚 ${escapeHtmlText(setTitle)}</div>` : ''}
+              ${setTitle ? `<div style="font-size:0.82rem;color:#475569;margin-bottom:5px;">ðŸ“š ${escapeHtmlText(setTitle)}</div>` : ''}
               <div style="font-size:0.8rem; color:#64748b; margin-bottom:6px;">
-                📅 Thời gian: ${escapeHtmlText(dateStr)} | 👤 Tài khoản: ${escapeHtmlText(s.username || s.authorEmail || s.userId || 'Ẩn danh')}
-                ${score ? ` | 🎯 Điểm AI: <strong>${escapeHtmlText(score)}</strong>` : ''}
+                ðŸ“… Thá»i gian: ${escapeHtmlText(dateStr)} | ðŸ‘¤ TÃ i khoáº£n: ${escapeHtmlText(s.username || s.authorEmail || s.userId || 'áº¨n danh')}
+                ${score ? ` | ðŸŽ¯ Äiá»ƒm AI: <strong>${escapeHtmlText(score)}</strong>` : ''}
               </div>
               <div style="background:#ffffff; border:1px solid #e2e8f0; border-radius:6px; padding:8px; font-family:monospace; font-size:0.85rem; color:#334155; white-space:pre-wrap;">${escapeHtmlText(preview)}</div>
               ${(evaluationBtn || imageBtn) ? `
@@ -2073,10 +2078,10 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
           `;
         }).join('');
       } else {
-        el.innerHTML = '<div style="color:#dc2626;">Dịch vụ VMODataService chưa sẵn sàng.</div>';
+        el.innerHTML = '<div style="color:#dc2626;">Dá»‹ch vá»¥ VMODataService chÆ°a sáºµn sÃ ng.</div>';
       }
     } catch (e) {
-      el.innerHTML = '<div style="color:#dc2626; padding:10px;">Lỗi tải bài nộp: ' + e.message + '</div>';
+      el.innerHTML = '<div style="color:#dc2626; padding:10px;">Lá»—i táº£i bÃ i ná»™p: ' + e.message + '</div>';
     }
   };
 
@@ -2096,14 +2101,14 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
     if (f) f.style.display = (f.style.display === 'none') ? 'block' : 'none';
   };
 
-  // Nạp dữ liệu các tab từ MongoDB Atlas qua API đã xác thực
+  // Náº¡p dá»¯ liá»‡u cÃ¡c tab tá»« MongoDB Atlas qua API Ä‘Ã£ xÃ¡c thá»±c
   async function loadHubEvents() {
     const el = document.getElementById('hubEventsList');
     if (!el) return;
     try {
       const events = await window.VMODataService.getEvents();
       if (!events || events.length === 0) {
-        el.innerHTML = '<div style="padding:14px; text-align:center; color:#94a3b8; font-style:italic;">Chưa có sự kiện nào được lưu trên database. Hãy nhấn "➕ Thêm sự kiện mới" để tạo sự kiện đầu tiên!</div>';
+        el.innerHTML = '<div style="padding:14px; text-align:center; color:#94a3b8; font-style:italic;">ChÆ°a cÃ³ sá»± kiá»‡n nÃ o Ä‘Æ°á»£c lÆ°u trÃªn database. HÃ£y nháº¥n "âž• ThÃªm sá»± kiá»‡n má»›i" Ä‘á»ƒ táº¡o sá»± kiá»‡n Ä‘áº§u tiÃªn!</div>';
         return;
       }
       el.innerHTML = events.map(e => `
@@ -2111,15 +2116,15 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
           <div>
             <strong style="color:#0f172a; font-size:0.95rem;">${e.title}</strong>
             <div style="font-size:0.8rem; color:#64748b; margin-top:2px;">
-              📅 Ngày: <strong>${e.startDate}</strong> | 📍 Địa điểm: ${e.location || 'Đang cập nhật'}
+              ðŸ“… NgÃ y: <strong>${e.startDate}</strong> | ðŸ“ Äá»‹a Ä‘iá»ƒm: ${e.location || 'Äang cáº­p nháº­t'}
             </div>
             ${e.description ? `<div style="font-size:0.8rem; color:#475569; margin-top:4px;">${e.description}</div>` : ''}
           </div>
-          ${isCurrentUserAdmin() ? `<button type="button" onclick="deleteEventItem('${e.id}')" style="background:#fee2e2; border:none; color:#dc2626; padding:6px 10px; border-radius:6px; cursor:pointer; font-size:0.8rem;">🗑️ Xóa</button>` : ''}
+          ${isCurrentUserAdmin() ? `<button type="button" onclick="deleteEventItem('${e.id}')" style="background:#fee2e2; border:none; color:#dc2626; padding:6px 10px; border-radius:6px; cursor:pointer; font-size:0.8rem;">ðŸ—‘ï¸ XÃ³a</button>` : ''}
         </div>
       `).join('');
     } catch (err) {
-      el.innerHTML = '<div style="color:#dc2626; padding:10px;">Lỗi tải sự kiện từ database: ' + err.message + '</div>';
+      el.innerHTML = '<div style="color:#dc2626; padding:10px;">Lá»—i táº£i sá»± kiá»‡n tá»« database: ' + err.message + '</div>';
     }
   }
 
@@ -2129,7 +2134,7 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
     try {
       const docs = await window.VMODataService.getDocuments();
       if (!docs || docs.length === 0) {
-        el.innerHTML = '<div style="padding:14px; text-align:center; color:#94a3b8; font-style:italic;">Chưa có tài liệu nào trong database. Nhấn "➕ Thêm tài liệu mới" để lưu tài liệu lên hệ thống!</div>';
+        el.innerHTML = '<div style="padding:14px; text-align:center; color:#94a3b8; font-style:italic;">ChÆ°a cÃ³ tÃ i liá»‡u nÃ o trong database. Nháº¥n "âž• ThÃªm tÃ i liá»‡u má»›i" Ä‘á»ƒ lÆ°u tÃ i liá»‡u lÃªn há»‡ thá»‘ng!</div>';
         return;
       }
       el.innerHTML = docs.map(d => `
@@ -2137,15 +2142,15 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
           <div>
             <strong style="color:#0f172a; font-size:0.95rem;">${d.title}</strong>
             <div style="font-size:0.8rem; color:#64748b; margin-top:2px;">
-              🏷️ Chuyên đề: <strong>${d.topic}</strong> | ✍️ Tác giả: ${d.author || 'Tổ Toán'}
+              ðŸ·ï¸ ChuyÃªn Ä‘á»: <strong>${d.topic}</strong> | âœï¸ TÃ¡c giáº£: ${d.author || 'Tá»• ToÃ¡n'}
             </div>
-            ${d.fileUrl ? `<a href="${d.fileUrl}" target="_blank" rel="noreferrer" style="font-size:0.8rem; color:#0284c7; text-decoration:underline;">🔗 Mở tài liệu</a>` : ''}
+            ${d.fileUrl ? `<a href="${d.fileUrl}" target="_blank" rel="noreferrer" style="font-size:0.8rem; color:#0284c7; text-decoration:underline;">ðŸ”— Má»Ÿ tÃ i liá»‡u</a>` : ''}
           </div>
-          ${isCurrentUserAdmin() ? `<button type="button" onclick="deleteDocItem('${d.id}')" style="background:#fee2e2; border:none; color:#dc2626; padding:6px 10px; border-radius:6px; cursor:pointer; font-size:0.8rem;">🗑️ Xóa</button>` : ''}
+          ${isCurrentUserAdmin() ? `<button type="button" onclick="deleteDocItem('${d.id}')" style="background:#fee2e2; border:none; color:#dc2626; padding:6px 10px; border-radius:6px; cursor:pointer; font-size:0.8rem;">ðŸ—‘ï¸ XÃ³a</button>` : ''}
         </div>
       `).join('');
     } catch (err) {
-      el.innerHTML = '<div style="color:#dc2626; padding:10px;">Lỗi tải tài liệu: ' + err.message + '</div>';
+      el.innerHTML = '<div style="color:#dc2626; padding:10px;">Lá»—i táº£i tÃ i liá»‡u: ' + err.message + '</div>';
     }
   }
 
@@ -2155,23 +2160,23 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
     try {
       const exams = await window.VMODataService.getExams();
       if (!exams || exams.length === 0) {
-        el.innerHTML = '<div style="padding:14px; text-align:center; color:#94a3b8; font-style:italic;">Chưa có đề thi nào trong database. Nhấn "➕ Thêm đề thi mới" để bắt đầu!</div>';
+        el.innerHTML = '<div style="padding:14px; text-align:center; color:#94a3b8; font-style:italic;">ChÆ°a cÃ³ Ä‘á» thi nÃ o trong database. Nháº¥n "âž• ThÃªm Ä‘á» thi má»›i" Ä‘á»ƒ báº¯t Ä‘áº§u!</div>';
         return;
       }
       el.innerHTML = exams.map(x => `
         <div style="background:#f8fafc; border:1px solid #e2e8f0; border-radius:8px; padding:10px 14px; margin-bottom:8px;">
           <strong style="color:#0f172a; font-size:0.95rem;">${x.title}</strong>
           <div style="font-size:0.8rem; color:#64748b; margin-top:2px;">
-            Nhóm: <strong>${x.category}</strong> | Năm: ${x.year} | Thời gian: ${x.duration} phút
+            NhÃ³m: <strong>${x.category}</strong> | NÄƒm: ${x.year} | Thá»i gian: ${x.duration} phÃºt
           </div>
         </div>
       `).join('');
     } catch (err) {
-      el.innerHTML = '<div style="color:#dc2626; padding:10px;">Lỗi tải đề thi: ' + err.message + '</div>';
+      el.innerHTML = '<div style="color:#dc2626; padding:10px;">Lá»—i táº£i Ä‘á» thi: ' + err.message + '</div>';
     }
   }
 
-  // Handlers tạo mới
+  // Handlers táº¡o má»›i
   window.handleCreateEvent = async function(e) {
     e.preventDefault();
     if (!requireAdminUiAction()) return;
@@ -2183,11 +2188,11 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
 
     try {
       await window.VMODataService.addEvent({ title, eventType, startDate, location, description });
-      showToast('Đã lưu sự kiện mới vào database!', true);
+      showToast('ÄÃ£ lÆ°u sá»± kiá»‡n má»›i vÃ o database!', true);
       toggleAddEventForm();
       loadHubEvents();
     } catch (err) {
-      showToast('Lỗi lưu sự kiện: ' + err.message, false);
+      showToast('Lá»—i lÆ°u sá»± kiá»‡n: ' + err.message, false);
     }
   };
 
@@ -2201,11 +2206,11 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
 
     try {
       await window.VMODataService.addDocument({ title, topic, author, fileUrl });
-      showToast('Đã lưu tài liệu vào database!', true);
+      showToast('ÄÃ£ lÆ°u tÃ i liá»‡u vÃ o database!', true);
       toggleAddDocForm();
       loadHubDocs();
     } catch (err) {
-      showToast('Lỗi lưu tài liệu: ' + err.message, false);
+      showToast('Lá»—i lÆ°u tÃ i liá»‡u: ' + err.message, false);
     }
   };
 
@@ -2220,39 +2225,39 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
 
     try {
       await window.VMODataService.addExam({ title, category, province, year, duration });
-      showToast('Đã lưu đề thi mới vào database!', true);
+      showToast('ÄÃ£ lÆ°u Ä‘á» thi má»›i vÃ o database!', true);
       toggleAddExamForm();
       loadHubExams();
     } catch (err) {
-      showToast('Lỗi lưu đề thi: ' + err.message, false);
+      showToast('Lá»—i lÆ°u Ä‘á» thi: ' + err.message, false);
     }
   };
 
   window.deleteEventItem = async function(id) {
     if (!requireAdminUiAction()) return;
-    if (!confirm('Bạn có chắc chắn muốn xóa sự kiện này khỏi Database?')) return;
+    if (!confirm('Báº¡n cÃ³ cháº¯c cháº¯n muá»‘n xÃ³a sá»± kiá»‡n nÃ y khá»i Database?')) return;
     try {
       await window.VMODataService.deleteEvent(id);
-      showToast('Đã xóa sự kiện khỏi database!', true);
+      showToast('ÄÃ£ xÃ³a sá»± kiá»‡n khá»i database!', true);
       loadHubEvents();
     } catch (e) {
-      showToast('Lỗi khi xóa: ' + e.message, false);
+      showToast('Lá»—i khi xÃ³a: ' + e.message, false);
     }
   };
 
   window.deleteDocItem = async function(id) {
     if (!requireAdminUiAction()) return;
-    if (!confirm('Bạn có chắc chắn muốn xóa tài liệu này khỏi Database?')) return;
+    if (!confirm('Báº¡n cÃ³ cháº¯c cháº¯n muá»‘n xÃ³a tÃ i liá»‡u nÃ y khá»i Database?')) return;
     try {
       await window.VMODataService.deleteDocument(id);
-      showToast('Đã xóa tài liệu khỏi database!', true);
+      showToast('ÄÃ£ xÃ³a tÃ i liá»‡u khá»i database!', true);
       loadHubDocs();
     } catch (e) {
-      showToast('Lỗi khi xóa: ' + e.message, false);
+      showToast('Lá»—i khi xÃ³a: ' + e.message, false);
     }
   };
 
-  // Thiết lập sự kiện đóng cho modal
+  // Thiáº¿t láº­p sá»± kiá»‡n Ä‘Ã³ng cho modal
   function setupModalEvents() {
     const hubModal = document.getElementById('dataHubModal');
     if (hubModal) {
@@ -2296,7 +2301,7 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
     });
   }
 
-  // Tự động kích hoạt khi DOM hoàn tất
+  // Tá»± Ä‘á»™ng kÃ­ch hoáº¡t khi DOM hoÃ n táº¥t
   function init() {
     setupModalEvents();
     injectSubmissionButtons();
@@ -2309,7 +2314,7 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
     init();
   }
 
-  // Lắng nghe đổi tab hoặc đổi ngôn ngữ để gắn lại nút
+  // Láº¯ng nghe Ä‘á»•i tab hoáº·c Ä‘á»•i ngÃ´n ngá»¯ Ä‘á»ƒ gáº¯n láº¡i nÃºt
   window.addEventListener('langchange', () => {
     injectSubmissionButtons();
   });
