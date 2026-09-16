@@ -22,9 +22,16 @@
 
   function headingTextWithoutActions(heading) {
     if (!heading) return '';
+    const directText = Array.from(heading.childNodes)
+      .filter(node => node.nodeType === Node.TEXT_NODE)
+      .map(node => node.textContent || '')
+      .join(' ')
+      .replace(/\s+/g, ' ')
+      .trim();
+    if (directText) return directText;
+
     return Array.from(heading.childNodes)
       .filter(node => {
-        if (node.nodeType === Node.TEXT_NODE) return true;
         if (node.nodeType !== Node.ELEMENT_NODE) return false;
         return !node.matches('button, .ai-guide-panel, .btn-submit-solution')
           && !node.querySelector('button, .ai-guide-panel, .btn-submit-solution');
@@ -1133,6 +1140,10 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
     const isEn = (window.currentLang === 'en');
     let modal = document.getElementById('submissionModal');
     if (!modal) return;
+
+    if (problemCard?.classList?.contains('examplebox')) {
+      problemTitle = headingTextWithoutActions(problemCard.querySelector('.box-heading')) || problemTitle;
+    }
 
     // Reset về Tab Soạn bài và làm sạch trạng thái đánh giá cũ
     if (typeof window.switchSubmissionTab === 'function') {
