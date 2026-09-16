@@ -36,6 +36,14 @@ export default async function handler(req, res) {
       return res.status(200).json({ success: true });
     }
 
+    // Cho phép giao diện kiểm tra hệ thống đã có tài khoản hay chưa.
+    // Không trả về thông tin người dùng hoặc dữ liệu nhạy cảm.
+    if (action === 'bootstrap_status') {
+      const db = await getDb();
+      const userCount = await db.collection('users').countDocuments({}, { limit: 1 });
+      return res.status(200).json({ success: true, needsBootstrap: userCount === 0 });
+    }
+
     if (!username || !password) {
       return res.status(400).json({ success: false, error: 'Vui lòng nhập tên đăng nhập và mật khẩu' });
     }
@@ -43,6 +51,42 @@ export default async function handler(req, res) {
     const cleanUsername = String(username).trim().toLowerCase();
     const db = await getDb();
     const users = db.collection('users');
+
+    // Khởi tạo quản trị viên duy nhất khi database hoàn toàn chưa có người dùng.
+    // Sau lần tạo đầu tiên, hành động này tự động bị khóa.
+    if (action === 'bootstrap_admin') {
+      if (String(password).length < 8) {
+        return res.status(400).json({ success: false, error: 'Mật khẩu phải có ít nhất 8 ký tự' });
+      }
+
+      const existingUser = await users.findOne({}, { projection: { _id: 1 } });
+      if (existingUser) {
+        return res.status(409).json({ success: false, error: 'Hệ thống đã được khởi tạo' });
+      }
+
+      await users.createIndex({ username: 1 }, { unique: true });
+      const hashedPassword = await bcrypt.hash(password, 12);
+      const adminUser = {
+        username: cleanUsername,
+        password: hashedPassword,
+        fullName: fullName ? String(fullName).trim() : cleanUsername,
+        role: 'admin',
+        createdAt: new Date(),
+        bootstrapAdmin: true
+      };
+      await users.insertOne(adminUser);
+
+      setSessionCookie(res, signSession(adminUser));
+      return res.status(201).json({
+        success: true,
+        message: 'Khởi tạo quản trị viên thành công',
+        user: {
+          username: adminUser.username,
+          fullName: adminUser.fullName,
+          role: adminUser.role
+        }
+      });
+    }
 
     // Đăng ký tài khoản
     if (action === 'register') {
