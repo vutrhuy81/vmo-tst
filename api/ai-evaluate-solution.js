@@ -28,7 +28,8 @@ export default async function handler(req, res) {
 Đề: ${text(body.problemContent)}
 Bài làm: ${solutionText || '(xem ảnh đính kèm)'}
 Phân loại verdict chỉ dùng: CORRECT_OPTIMAL, CORRECT_SUBOPTIMAL, RIGHT_DIRECTION_INACCURATE, MISSING_CONDITIONS, LOGICAL_GAP, INCORRECT.
-Nêu điểm, đánh giá hướng tiếp cận, rà soát từng bước, lỗi logic và khuyến nghị. Dùng LaTeX MathJax.`;
+Nêu điểm, đánh giá hướng tiếp cận, rà soát từng bước, lỗi logic và khuyến nghị. Dùng LaTeX MathJax.
+Không dùng các môi trường LaTeX itemize, enumerate, align hoặc lệnh textbf; dùng Markdown và công thức $...$, $$...$$.`;
   let contents = prompt;
   if (solutionImage) {
     const match = solutionImage.match(/^data:(image\/(?:jpeg|png|webp));base64,(.+)$/s);

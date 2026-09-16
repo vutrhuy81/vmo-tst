@@ -27,7 +27,8 @@ Kỳ thi: ${text(body.examTitle, 300)}
 Câu: ${text(body.problemId, 120)} - ${text(body.problemTitle, 500)}
 Chuyên đề: ${text(body.topic, 200)}
 Đề bài: ${problemContent}
-Trả về knowledge (định lý/công cụ), intuition (ý tưởng), solution (lời giải từng bước, LaTeX MathJax), pitfalls (lỗi thường gặp).`;
+Trả về knowledge (định lý/công cụ), intuition (ý tưởng), solution (lời giải từng bước, LaTeX MathJax), pitfalls (lỗi thường gặp).
+Không dùng các môi trường LaTeX itemize, enumerate, align hoặc lệnh textbf; dùng Markdown và công thức $...$, $$...$$.`;
   try {
     const result = await generateJson({ contents: prompt, schema, systemInstruction: 'Bạn là huấn luyện viên đội tuyển VMO/IMO. Không bịa dữ kiện; mọi kết luận phải được chứng minh.' });
     return res.status(200).json({ success: true, source: 'gemini', model: result.model, data: result.data });
