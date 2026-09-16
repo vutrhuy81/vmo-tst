@@ -1,8 +1,8 @@
 import { ObjectId } from 'mongodb';
 import { getDb } from './lib/db.js';
+import { getSession } from './lib/session.js';
 
 export default async function handler(req, res) {
-  res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'GET,POST,OPTIONS');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type,Authorization');
 
@@ -39,6 +39,8 @@ export default async function handler(req, res) {
 
     // POST /api/exams
     if (req.method === 'POST') {
+      const session = getSession(req);
+      if (!session) return res.status(401).json({ success: false, error: 'Vui lòng đăng nhập' });
       let body = req.body;
       if (typeof body === 'string') {
         try {
@@ -51,10 +53,13 @@ export default async function handler(req, res) {
       const { type, payload } = body || {};
 
       if (type === 'create_exam') {
+        if (session.role !== 'admin') {
+          return res.status(403).json({ success: false, error: 'Chỉ Admin được tạo đề thi' });
+        }
         if (!payload || typeof payload !== 'object') {
           return res.status(400).json({ success: false, error: 'Thiếu dữ liệu payload đề thi' });
         }
-        const doc = await exams.insertOne({ ...payload, createdAt: new Date() });
+        const doc = await exams.insertOne({ ...payload, createdBy: session.username, createdAt: new Date() });
         return res.status(201).json({ success: true, id: doc.insertedId });
       }
 
@@ -62,7 +67,7 @@ export default async function handler(req, res) {
         if (!payload || typeof payload !== 'object') {
           return res.status(400).json({ success: false, error: 'Thiếu dữ liệu bài nộp' });
         }
-        const sub = await submissions.insertOne({ ...payload, submittedAt: new Date() });
+        const sub = await submissions.insertOne({ ...payload, userId: session.sub, username: session.username, submittedAt: new Date() });
         return res.status(201).json({ success: true, submissionId: sub.insertedId });
       }
 

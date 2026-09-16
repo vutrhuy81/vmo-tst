@@ -1,8 +1,8 @@
 import { getDb } from './lib/db.js';
 import bcrypt from 'bcryptjs';
+import { clearSessionCookie, getSession, setSessionCookie, signSession } from './lib/session.js';
 
 export default async function handler(req, res) {
-  res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'POST,OPTIONS');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type,Authorization');
 
@@ -15,9 +15,6 @@ export default async function handler(req, res) {
   }
 
   try {
-    const db = await getDb();
-    const users = db.collection('users');
-
     let body = req.body;
     if (typeof body === 'string') {
       try {
@@ -29,14 +26,29 @@ export default async function handler(req, res) {
 
     const { action, username, password, fullName } = body || {};
 
+    if (action === 'me') {
+      const session = getSession(req);
+      return session ? res.status(200).json({ success: true, user: session })
+        : res.status(401).json({ success: false, error: 'Chưa đăng nhập' });
+    }
+    if (action === 'logout') {
+      clearSessionCookie(res);
+      return res.status(200).json({ success: true });
+    }
+
     if (!username || !password) {
       return res.status(400).json({ success: false, error: 'Vui lòng nhập tên đăng nhập và mật khẩu' });
     }
 
     const cleanUsername = String(username).trim().toLowerCase();
+    const db = await getDb();
+    const users = db.collection('users');
 
     // Đăng ký tài khoản
     if (action === 'register') {
+      if (String(password).length < 8) {
+        return res.status(400).json({ success: false, error: 'Mật khẩu phải có ít nhất 8 ký tự' });
+      }
       const exist = await users.findOne({ username: cleanUsername });
       if (exist) {
         return res.status(400).json({ success: false, error: 'Tên tài khoản đã tồn tại' });
@@ -66,6 +78,7 @@ export default async function handler(req, res) {
         return res.status(400).json({ success: false, error: 'Sai tài khoản hoặc mật khẩu' });
       }
 
+      setSessionCookie(res, signSession(user));
       return res.status(200).json({
         success: true,
         user: { 
