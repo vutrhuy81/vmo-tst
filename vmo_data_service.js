@@ -200,17 +200,18 @@ export async function submitSolution(
   problemTitle,
   solutionContent,
   evaluation = null,
-  hasImage = false
+  solutionImage = ''
 ) {
   const cleanProblemId = String(problemId ?? '').trim();
   const cleanSolution = String(solutionContent ?? '').trim();
+  const cleanImage = String(solutionImage ?? '').trim();
 
   if (!cleanProblemId) {
     throw createServiceError('Thiếu mã bài toán', 0, 'VALIDATION_ERROR');
   }
 
-  if (!cleanSolution) {
-    throw createServiceError('Nội dung bài giải không được để trống', 0, 'VALIDATION_ERROR');
+  if (!cleanSolution && !cleanImage) {
+    throw createServiceError('Vui lòng nhập nội dung hoặc tải ảnh bài giải', 0, 'VALIDATION_ERROR');
   }
 
   return normalize(await mutate('submit_solution', {
@@ -218,8 +219,17 @@ export async function submitSolution(
     problemTitle: String(problemTitle ?? '').trim(),
     solutionContent: cleanSolution,
     evaluation: evaluation && typeof evaluation === 'object' ? evaluation : null,
-    hasImage: Boolean(hasImage)
+    solutionImage: cleanImage
   }));
+}
+
+export async function getSubmissionImage(submissionId) {
+  const cleanId = normalizeId(submissionId).trim();
+  if (!cleanId) {
+    throw createServiceError('Thiếu mã bài nộp', 0, 'VALIDATION_ERROR');
+  }
+  const items = await request('submission_image', { submissionId: cleanId });
+  return items[0] || null;
 }
 
 export async function getSubmissionsForProblem(problemId) {
@@ -253,6 +263,7 @@ const VMODataService = Object.freeze({
   getProblemsByExam,
   saveProblem,
   submitSolution,
+  getSubmissionImage,
   getSubmissionsForProblem,
   getAllSubmissions,
   getEvents,

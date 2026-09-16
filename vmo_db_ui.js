@@ -1118,7 +1118,7 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
               problemTitle,
               text,
               window.currentEvaluationResult,
-              hasImg
+              window.currentUploadedImage || ''
             );
             if (!savedSubmission) {
               throw new Error('Máy chủ không trả về bản ghi vừa lưu');
@@ -1448,6 +1448,11 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
               👁️ Xem nhận xét AI
             </button>
           ` : '';
+          const imageBtn = s.hasImage ? `
+            <button type="button" onclick="viewSubmissionImage('${s.id || s._id}')" style="background:#ecfeff; border:1px solid #a5f3fc; color:#0e7490; border-radius:4px; padding:2px 8px; font-size:0.75rem; cursor:pointer; font-weight:600; margin-left:6px;">
+              📷 Xem ảnh
+            </button>
+          ` : '';
 
           return `
             <div style="background:#f8fafc; border:1px solid #e2e8f0; border-radius:6px; padding:8px 10px; margin-bottom:6px;">
@@ -1457,6 +1462,7 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
                   ${scoreBadge}
                   <span style="color:#0284c7; font-size:0.78rem; margin-left:6px;">${verdictLabel}</span>
                   ${hasEvalBtn}
+                  ${imageBtn}
                 </div>
               </div>
               <div style="color:#475569; font-size:0.8rem; font-family:monospace; white-space:pre-wrap;">${preview}</div>
@@ -1470,6 +1476,24 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
       listEl.innerHTML = '<span style="color:#dc2626;">Lỗi tải dữ liệu lịch sử.</span>';
     }
   }
+
+  window.viewSubmissionImage = async function(submissionId) {
+    try {
+      if (!window.VMODataService?.getSubmissionImage) {
+        throw new Error('Dịch vụ đọc ảnh chưa sẵn sàng');
+      }
+      const stored = await window.VMODataService.getSubmissionImage(submissionId);
+      if (!stored?.image) throw new Error('Không tìm thấy ảnh đã lưu');
+
+      const viewer = window.open('', '_blank');
+      if (!viewer) throw new Error('Trình duyệt đang chặn cửa sổ xem ảnh');
+      viewer.opener = null;
+      viewer.document.write(`<!doctype html><html lang="vi"><head><meta charset="utf-8"><title>Ảnh bài giải</title><style>body{margin:0;background:#0f172a;display:grid;place-items:center;min-height:100vh}img{max-width:96vw;max-height:96vh;object-fit:contain;background:white}</style></head><body><img alt="Ảnh bài giải" src="${stored.image}"></body></html>`);
+      viewer.document.close();
+    } catch (err) {
+      showToast('Không thể mở ảnh bài giải: ' + (err?.message || 'Lỗi không xác định'), false);
+    }
+  };
 
   // 3. DIALOG QUẢN LÝ DỮ LIỆU TẬP TRUNG (ADMIN & TEACHER): TÀI LIỆU, ĐỀ THI, SỰ KIỆN
   function injectDataManagementButton() {
