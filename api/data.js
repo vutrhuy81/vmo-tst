@@ -148,7 +148,8 @@ export default async function handler(req, res) {
         if (req.query?.paged === '1') {
           if (req.query?.sourceGroup) filter.sourceGroup = cleanText(req.query.sourceGroup, 80);
           if (session.role === 'admin' && req.query?.username) {
-            filter.username = { $regex: escapeRegex(cleanText(req.query.username, 80)), $options: 'i' };
+            const username = cleanText(req.query.username, 80);
+            filter.username = { $regex: `^${escapeRegex(username)}$`, $options: 'i' };
           }
           if (req.query?.evaluation === 'yes') filter.evaluation = { $type: 'object' };
           if (req.query?.evaluation === 'no') filter.evaluation = null;
