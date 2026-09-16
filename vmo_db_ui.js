@@ -334,10 +334,32 @@
         const rule = window.catalogAccessRules.get(card.dataset.contentKey);
         if (!rule) return;
         card.hidden = rule.published === false;
+        if (rule.published !== false) {
+          const examTitle = card.closest('.exam-card, .paper-card')?.querySelector('.exam-title');
+          if (examTitle && rule.setTitle) examTitle.textContent = rule.setTitle;
+          if (card.classList.contains('problem-item')) {
+            const problemId = card.querySelector('.problem-id');
+            const label = problemId?.querySelector('span:first-child');
+            const topicBadge = problemId?.querySelector('.badge-topic');
+            if (label && (rule.shortLabel || rule.title)) label.textContent = rule.shortLabel || rule.title;
+            if (topicBadge && rule.topic) topicBadge.textContent = ` ${rule.topic}`;
+          } else if (card.classList.contains('examplebox') && rule.title) {
+            const heading = card.querySelector('.box-heading');
+            const textNode = heading && Array.from(heading.childNodes).find(node => node.nodeType === Node.TEXT_NODE && node.textContent.trim());
+            if (textNode) textNode.textContent = `${rule.title} `;
+          }
+        }
         const submitButton = card.querySelector('.btn-submit-solution');
         if (submitButton) {
           submitButton.hidden = rule.allowSubmission === false;
           submitButton.disabled = rule.allowSubmission === false;
+          if (rule.allowSubmission !== false) {
+            submitButton.onclick = () => window.openSubmissionModal(
+              card.dataset.contentKey,
+              rule.title || rule.shortLabel || card.dataset.contentKey,
+              card
+            );
+          }
         }
       });
     } catch (err) {
@@ -1863,6 +1885,7 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
       </div>
       <div id="hubCatalogList" style="max-height:420px;overflow:auto;"><em>Đang tải catalog...</em></div>`;
     body.appendChild(panel);
+    ensureCatalogEditModal();
     panel.querySelector('#hubCatalogSearch').addEventListener('input', renderCatalogManagement);
     panel.querySelector('#hubCatalogGroup').addEventListener('change', renderCatalogManagement);
   }
@@ -1899,12 +1922,14 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
     }
     list.innerHTML = sets.map(set => {
       const setId = String(set.id || set._id);
-      const problems = data.problems.filter(p => String(p.setId) === setId && (!query || `${p.title} ${p.contentKey}`.toLowerCase().includes(query)));
+      const setMatchesQuery = !query || `${set.title} ${set.key}`.toLowerCase().includes(query);
+      const problems = data.problems.filter(p => String(p.setId) === setId && (setMatchesQuery || `${p.title} ${p.contentKey}`.toLowerCase().includes(query)));
       return `<details style="border:1px solid #e2e8f0;border-radius:8px;margin-bottom:8px;background:white;" ${query ? 'open' : ''}>
         <summary style="padding:10px;cursor:pointer;background:#f8fafc;"><strong>${escapeHtmlText(set.title || set.key)}</strong> <span style="color:#64748b;">(${problems.length} câu)</span> ${catalogStatusBadge(set.status)}</summary>
         <div style="padding:8px;">
           <div style="display:flex;gap:7px;align-items:center;margin-bottom:8px;">
             <button type="button" onclick="toggleCatalogStatus('set','${setId}','${set.status === 'draft' ? 'published' : 'draft'}')" style="padding:5px 9px;border:1px solid #cbd5e1;border-radius:5px;background:white;cursor:pointer;">${set.status === 'draft' ? '👁️ Xuất bản bộ' : '🙈 Ẩn bộ'}</button>
+            <button type="button" onclick="editCatalogItem('set','${setId}')" style="padding:5px 9px;border:1px solid #bfdbfe;border-radius:5px;background:#eff6ff;color:#1d4ed8;cursor:pointer;">✏️ Sửa metadata</button>
             <small style="color:#64748b;">Mã: ${escapeHtmlText(set.key)}</small>
           </div>
           ${problems.map(p => catalogProblemRow(p)).join('') || '<small>Không có câu hỏi phù hợp.</small>'}
@@ -1925,6 +1950,7 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
       <div style="min-width:0;"><strong style="font-size:.86rem;">${escapeHtmlText(problem.title || problem.contentKey)}</strong><br><small style="color:#64748b;">${escapeHtmlText(problem.contentKey)}</small></div>
       <div style="display:flex;gap:5px;flex-wrap:wrap;justify-content:flex-end;">
         <button type="button" onclick="toggleCatalogStatus('problem','${id}','${problem.status === 'draft' ? 'published' : 'draft'}')" style="padding:4px 7px;border:1px solid #cbd5e1;border-radius:5px;background:white;cursor:pointer;">${problem.status === 'draft' ? '👁️ Hiện' : '🙈 Ẩn'}</button>
+        <button type="button" onclick="editCatalogItem('problem','${id}')" style="padding:4px 7px;border:1px solid #bfdbfe;border-radius:5px;background:#eff6ff;color:#1d4ed8;cursor:pointer;">✏️ Sửa</button>
         <button type="button" onclick="toggleCatalogPermission('${id}','allowSubmission',${problem.allowSubmission === false})" style="padding:4px 7px;border:1px solid #cbd5e1;border-radius:5px;background:${problem.allowSubmission === false ? '#fff1f2' : '#f0fdf4'};cursor:pointer;">✍️ ${problem.allowSubmission === false ? 'Đang khóa' : 'Cho nộp'}</button>
         <button type="button" onclick="toggleCatalogPermission('${id}','allowAiEvaluation',${problem.allowAiEvaluation === false})" style="padding:4px 7px;border:1px solid #cbd5e1;border-radius:5px;background:${problem.allowAiEvaluation === false ? '#fff1f2' : '#eef2ff'};cursor:pointer;">🤖 ${problem.allowAiEvaluation === false ? 'Đang khóa' : 'Cho AI'}</button>
       </div>
@@ -1951,6 +1977,105 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
       showToast('Đã cập nhật quyền của câu hỏi.', true);
       await window.loadCatalogManagement();
     } catch (err) { showToast(err?.message || 'Không cập nhật được quyền', false); }
+  };
+
+  function ensureCatalogEditModal() {
+    if (document.getElementById('catalogEditModal')) return;
+    const modal = document.createElement('div');
+    modal.id = 'catalogEditModal';
+    modal.className = 'vmo-modal-overlay';
+    modal.style.zIndex = '10020';
+    modal.innerHTML = `
+      <div class="vmo-modal-container" style="max-width:620px;">
+        <div class="vmo-modal-header" style="background:#1e3a8a;color:white;">
+          <div class="vmo-modal-title" style="color:white;">✏️ Chỉnh sửa metadata catalog</div>
+          <button type="button" class="vmo-modal-close" onclick="closeCatalogEditModal()" style="color:white;">✕</button>
+        </div>
+        <form id="catalogEditForm" class="vmo-modal-body" onsubmit="saveCatalogMetadata(event)">
+          <input id="catalogEditType" type="hidden"><input id="catalogEditId" type="hidden">
+          <div id="catalogImmutableKey" style="padding:8px 10px;margin-bottom:10px;background:#f1f5f9;border-radius:6px;color:#475569;font-family:monospace;font-size:.8rem;"></div>
+          <label style="display:block;font-weight:700;margin-bottom:4px;">Tiêu đề *</label>
+          <input id="catalogEditTitle" required maxlength="500" style="width:100%;box-sizing:border-box;padding:8px;border:1px solid #cbd5e1;border-radius:6px;margin-bottom:10px;">
+          <div id="catalogSetFields" style="display:grid;grid-template-columns:1fr 1fr 100px;gap:8px;">
+            <div><label>Năm học</label><input id="catalogEditYear" maxlength="40" style="width:100%;box-sizing:border-box;padding:7px;border:1px solid #cbd5e1;border-radius:6px;"></div>
+            <div><label>Tỉnh/đơn vị</label><input id="catalogEditProvince" maxlength="120" style="width:100%;box-sizing:border-box;padding:7px;border:1px solid #cbd5e1;border-radius:6px;"></div>
+            <div><label>Thứ tự</label><input id="catalogEditSetOrder" type="number" min="0" max="10000" style="width:100%;box-sizing:border-box;padding:7px;border:1px solid #cbd5e1;border-radius:6px;"></div>
+          </div>
+          <div id="catalogProblemFields" style="display:none;grid-template-columns:1fr 1fr 90px 90px;gap:8px;">
+            <div><label>Nhãn ngắn</label><input id="catalogEditShortLabel" maxlength="120" style="width:100%;box-sizing:border-box;padding:7px;border:1px solid #cbd5e1;border-radius:6px;"></div>
+            <div><label>Chuyên đề</label><input id="catalogEditTopic" maxlength="120" style="width:100%;box-sizing:border-box;padding:7px;border:1px solid #cbd5e1;border-radius:6px;"></div>
+            <div><label>Điểm</label><input id="catalogEditMaxScore" type="number" min="0" max="20" step="0.25" style="width:100%;box-sizing:border-box;padding:7px;border:1px solid #cbd5e1;border-radius:6px;"></div>
+            <div><label>Thứ tự</label><input id="catalogEditProblemOrder" type="number" min="0" max="10000" style="width:100%;box-sizing:border-box;padding:7px;border:1px solid #cbd5e1;border-radius:6px;"></div>
+          </div>
+          <p style="font-size:.78rem;color:#64748b;">Các khóa liên kết và snapshot của bài nộp cũ không bị thay đổi.</p>
+          <div style="display:flex;justify-content:flex-end;gap:8px;margin-top:12px;">
+            <button type="button" onclick="closeCatalogEditModal()" style="padding:7px 12px;border:1px solid #cbd5e1;border-radius:6px;background:white;">Hủy</button>
+            <button type="submit" style="padding:7px 14px;border:0;border-radius:6px;background:#1d4ed8;color:white;font-weight:700;">Lưu metadata</button>
+          </div>
+        </form>
+      </div>`;
+    document.body.appendChild(modal);
+  }
+
+  window.editCatalogItem = function(itemType, id) {
+    if (!requireAdminUiAction()) return;
+    const data = window.catalogManagementData || { sets: [], problems: [] };
+    const source = itemType === 'set' ? data.sets : data.problems;
+    const item = source.find(entry => String(entry.id || entry._id) === String(id));
+    if (!item) return showToast('Không tìm thấy mục catalog cần sửa.', false);
+    ensureCatalogEditModal();
+    document.getElementById('catalogEditType').value = itemType;
+    document.getElementById('catalogEditId').value = id;
+    document.getElementById('catalogEditTitle').value = item.title || '';
+    document.getElementById('catalogImmutableKey').textContent = `Khóa liên kết (chỉ đọc): ${itemType === 'set' ? item.key : item.contentKey}`;
+    const setFields = document.getElementById('catalogSetFields');
+    const problemFields = document.getElementById('catalogProblemFields');
+    setFields.style.display = itemType === 'set' ? 'grid' : 'none';
+    problemFields.style.display = itemType === 'problem' ? 'grid' : 'none';
+    if (itemType === 'set') {
+      document.getElementById('catalogEditYear').value = item.year || '';
+      document.getElementById('catalogEditProvince').value = item.province || '';
+      document.getElementById('catalogEditSetOrder').value = Number(item.order) || 0;
+    } else {
+      document.getElementById('catalogEditShortLabel').value = item.shortLabel || '';
+      document.getElementById('catalogEditTopic').value = item.topic || '';
+      document.getElementById('catalogEditMaxScore').value = Number(item.maxScore) || 0;
+      document.getElementById('catalogEditProblemOrder').value = Number(item.order) || 0;
+    }
+    const modal = document.getElementById('catalogEditModal');
+    modal.classList.add('active');
+    modal.style.display = 'flex';
+  };
+
+  window.closeCatalogEditModal = function() {
+    const modal = document.getElementById('catalogEditModal');
+    if (modal) { modal.classList.remove('active'); modal.style.display = 'none'; }
+  };
+
+  window.saveCatalogMetadata = async function(event) {
+    event.preventDefault();
+    if (!requireAdminUiAction()) return;
+    const itemType = document.getElementById('catalogEditType').value;
+    const id = document.getElementById('catalogEditId').value;
+    const changes = { title: document.getElementById('catalogEditTitle').value.trim() };
+    if (itemType === 'set') {
+      changes.year = document.getElementById('catalogEditYear').value.trim();
+      changes.province = document.getElementById('catalogEditProvince').value.trim();
+      changes.order = Number(document.getElementById('catalogEditSetOrder').value) || 0;
+    } else {
+      changes.shortLabel = document.getElementById('catalogEditShortLabel').value.trim();
+      changes.topic = document.getElementById('catalogEditTopic').value.trim();
+      changes.maxScore = Number(document.getElementById('catalogEditMaxScore').value) || 0;
+      changes.order = Number(document.getElementById('catalogEditProblemOrder').value) || 0;
+    }
+    if (!changes.title) return showToast('Tiêu đề không được để trống.', false);
+    if (!window.confirm('Lưu metadata mới vào MongoDB? Khóa liên kết lịch sử sẽ được giữ nguyên.')) return;
+    try {
+      await window.VMODataService.updateCatalogItem(itemType, id, changes);
+      window.closeCatalogEditModal();
+      showToast('Đã cập nhật metadata catalog.', true);
+      await window.loadCatalogManagement();
+    } catch (err) { showToast(err?.message || 'Không lưu được metadata', false); }
   };
 
   function ensureSubmissionFilterUi(modal, isAdmin) {
