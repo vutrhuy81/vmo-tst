@@ -296,13 +296,20 @@ export default async function handler(req, res) {
           { $set: doc, $setOnInsert: { createdAt: now } },
           { upsert: true, returnDocument: 'after' }
         );
-        if (savedProblem?._id && doc.legacyIds.length) {
+        if (savedProblem?._id) {
+          const submissionLinks = [
+            { problemKey: contentKey },
+            { problemId: String(savedProblem._id) }
+          ];
+          if (doc.legacyIds.length) {
+            submissionLinks.push(
+              { problemId: { $in: doc.legacyIds } },
+              { legacyProblemId: { $in: doc.legacyIds } }
+            );
+          }
           await db.collection('submissions').updateMany(
             {
-              $or: [
-                { problemId: { $in: doc.legacyIds } },
-                { legacyProblemId: { $in: doc.legacyIds } }
-              ]
+              $or: submissionLinks
             },
             {
               $set: {
