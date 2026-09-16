@@ -1,17 +1,13 @@
-const { MongoClient } = require('mongodb');
-
-const uri = process.env.MONGODB_URI;
-
-if (!uri) {
-  console.warn('CẢNH BÁO: Chưa có biến MONGODB_URI trong môi trường!');
-}
+import { MongoClient } from 'mongodb';
 
 let cachedClient = null;
 let cachedPromise = null;
 
-async function getDb(dbName = 'vmo_tst') {
-  if (!process.env.MONGODB_URI) {
-    throw new Error('Biến môi trường MONGODB_URI chưa được thiết lập trên Vercel!');
+export async function getDb(dbName = 'vmo_tst') {
+  const uri = process.env.MONGODB_URI;
+
+  if (!uri) {
+    throw new Error('MONGODB_URI chưa được thiết lập');
   }
 
   if (cachedClient) {
@@ -19,21 +15,18 @@ async function getDb(dbName = 'vmo_tst') {
   }
 
   if (!cachedPromise) {
-    const client = new MongoClient(process.env.MONGODB_URI, {
+    const client = new MongoClient(uri, {
       serverSelectionTimeoutMS: 5000,
       connectTimeoutMS: 10000,
-      maxPoolSize: 10,
+      maxPoolSize: 10
     });
 
-    cachedPromise = client.connect().then((connectedClient) => {
+    cachedPromise = client.connect().then(connectedClient => {
       cachedClient = connectedClient;
-      return cachedClient;
+      return connectedClient;
     });
   }
 
   const client = await cachedPromise;
-  // Ưu tiên database khai báo trong URI, nếu không có sẽ lấy fallback dbName ('vmo_tst')
-  return client.db(client.options.dbName || dbName);
+  return client.db(dbName);
 }
-
-module.exports = { getDb };
