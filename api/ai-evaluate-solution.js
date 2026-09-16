@@ -1,3 +1,5 @@
+import { ObjectId } from 'mongodb';
+import { getDb } from './lib/db.js';
 import { getSession } from './lib/session.js';
 import { checkRateLimit, generateJson, handleAiError, parseBody, prepare, text } from './lib/ai.js';
 
@@ -72,6 +74,27 @@ export default async function handler(req, res) {
   const solutionText = text(body.solutionText);
   const solutionImage = text(body.solutionImage, 4_000_000);
   if (!solutionText && !solutionImage) return res.status(400).json({ success: false, error: 'Cần có văn bản hoặc ảnh bài giải' });
+
+  if (session.role !== 'admin') {
+    const problemRef = text(body.problemKey || body.problemId, 180);
+    if (problemRef) {
+      const filters = [{ contentKey: problemRef }, { id: problemRef }];
+      if (ObjectId.isValid(problemRef)) filters.unshift({ _id: new ObjectId(problemRef) });
+      const db = await getDb();
+      const registeredProblem = await db.collection('problems').findOne({ $or: filters });
+      if (registeredProblem) {
+        const registeredSet = registeredProblem.setId
+          ? await db.collection('content_sets').findOne({ _id: registeredProblem.setId }, { projection: { status: 1 } })
+          : null;
+        if (registeredProblem.status !== 'published' || registeredSet?.status !== 'published') {
+          return res.status(403).json({ success: false, error: 'Câu hỏi hiện chưa được công khai' });
+        }
+        if (registeredProblem.allowAiEvaluation === false) {
+          return res.status(403).json({ success: false, error: 'Câu hỏi hiện tạm khóa chức năng đánh giá AI' });
+        }
+      }
+    }
+  }
 
   const prompt = `Chấm bài giải Olympic THPT theo thang 5 điểm.
 

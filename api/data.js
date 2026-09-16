@@ -124,7 +124,36 @@ export default async function handler(req, res) {
         }
         if (req.query?.sourceGroup) filter.sourceGroup = cleanText(req.query.sourceGroup, 80);
         if (req.query?.contentKey) filter.contentKey = cleanKey(req.query.contentKey);
-        if (session.role !== 'admin') filter.status = 'published';
+        if (req.query?.catalogRules === '1' && session.role !== 'admin') {
+          const [sets, problems] = await Promise.all([
+            db.collection('content_sets').find({}, { projection: { status: 1 } }).toArray(),
+            db.collection('problems').find({}, { projection: {
+              contentKey: 1, setId: 1, status: 1, allowSubmission: 1, allowAiEvaluation: 1
+            } }).limit(1000).toArray()
+          ]);
+          const setStatus = new Map(sets.map(item => [String(item._id), item.status]));
+          const items = problems.map(item => ({
+            contentKey: item.contentKey,
+            published: item.status === 'published' && setStatus.get(String(item.setId)) === 'published',
+            allowSubmission: item.allowSubmission !== false,
+            allowAiEvaluation: item.allowAiEvaluation !== false
+          }));
+          return res.status(200).json({ success: true, items });
+        }
+        if (session.role !== 'admin') {
+          filter.status = 'published';
+          const publishedSets = await db.collection('content_sets')
+            .find({ status: 'published' }, { projection: { _id: 1 } })
+            .toArray();
+          const publishedSetIds = publishedSets.map(item => item._id);
+          if (filter.setId) {
+            if (!publishedSetIds.some(id => String(id) === String(filter.setId))) {
+              return res.status(200).json({ success: true, items: [] });
+            }
+          } else {
+            filter.setId = { $in: publishedSetIds };
+          }
+        }
       }
       if (resource === 'exams' && req.query?.category && req.query.category !== 'all') {
         filter.category = cleanText(req.query.category, 80);
@@ -235,6 +264,17 @@ export default async function handler(req, res) {
       if (submittedProblemKey) problemFilters.push({ contentKey: submittedProblemKey });
       problemFilters.push({ id: submittedProblemId });
       const registeredProblem = await db.collection('problems').findOne({ $or: problemFilters });
+      if (registeredProblem && session.role !== 'admin') {
+        const registeredSet = registeredProblem.setId
+          ? await db.collection('content_sets').findOne({ _id: registeredProblem.setId }, { projection: { status: 1 } })
+          : null;
+        if (registeredProblem.status !== 'published' || registeredSet?.status !== 'published') {
+          return res.status(403).json({ success: false, error: 'Câu hỏi hiện chưa được công khai' });
+        }
+        if (registeredProblem.allowSubmission === false) {
+          return res.status(403).json({ success: false, error: 'Câu hỏi hiện tạm khóa chức năng nộp bài' });
+        }
+      }
       const registeredProblemId = registeredProblem ? String(registeredProblem._id) : submittedProblemId;
       const registeredProblemKey = registeredProblem?.contentKey || submittedProblemKey || submittedProblemId;
       const evaluation = payload.evaluation && typeof payload.evaluation === 'object' ? payload.evaluation : null;
@@ -398,6 +438,35 @@ export default async function handler(req, res) {
       ]);
 
       return res.status(200).json({ success: true, item: { setCount: setIds.size, problemCount } });
+    }
+
+    if (action === 'update_catalog_item') {
+      const itemType = cleanText(payload.itemType, 20);
+      const id = objectId(cleanText(payload.id, 80));
+      if (!id || !['set', 'problem'].includes(itemType)) {
+        return res.status(400).json({ success: false, error: 'Mục catalog không hợp lệ' });
+      }
+
+      const collectionName = itemType === 'set' ? 'content_sets' : 'problems';
+      const changes = { updatedBy: session.username, updatedAt: now };
+      if (Object.prototype.hasOwnProperty.call(payload, 'status')) {
+        changes.status = payload.status === 'draft' ? 'draft' : 'published';
+      }
+      if (Object.prototype.hasOwnProperty.call(payload, 'order')) {
+        changes.order = cleanNumber(payload.order, 0, 0, 10000);
+      }
+      if (itemType === 'problem') {
+        if (typeof payload.allowSubmission === 'boolean') changes.allowSubmission = payload.allowSubmission;
+        if (typeof payload.allowAiEvaluation === 'boolean') changes.allowAiEvaluation = payload.allowAiEvaluation;
+      }
+
+      const result = await db.collection(collectionName).findOneAndUpdate(
+        { _id: id },
+        { $set: changes },
+        { returnDocument: 'after' }
+      );
+      if (!result) return res.status(404).json({ success: false, error: 'Không tìm thấy mục catalog' });
+      return res.status(200).json({ success: true, item: result });
     }
 
     if (action === 'add_document') {
