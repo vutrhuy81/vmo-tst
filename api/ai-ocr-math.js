@@ -13,6 +13,8 @@ function normalizeOcrLatex(value) {
   let text = String(value || '').replace(/[\u200B-\u200D\uFEFF]/g, '').trim();
   if (!text) return text;
   text = text.replace(/\\\$/g, '$');
+  // Một số phản hồi OCR mã hóa xuống dòng thành hai ký tự "\\n".
+  text = text.replace(/\\n(?!(?:e)(?:\s|$|[,.;:]))(?=[A-Za-z\\])/g, '\n');
   text = text.replace(/\\begin\{align\*?\}/g, '\\begin{aligned}')
     .replace(/\\end\{align\*?\}/g, '\\end{aligned}')
     .replace(/(?<!\$\$|\\\[)\s*(\\begin\{aligned\}[\s\S]*?\\end\{aligned\})\s*(?!\$\$|\\\])/g, (_, block) => `\n$$\n${block}\n$$\n`);
@@ -23,6 +25,10 @@ function normalizeOcrLatex(value) {
   });
   // Văn bản OCR như \\text{Giải.} phải nằm ngoài LaTeX math.
   text = text.replace(/\\text(?:bf|it|rm)?\{((?:[^{}]|\{[^{}]*\})*)\}/g, '$1');
+  // Khôi phục tập hợp/ngoặc bị OCR escape khi chúng nằm ngoài math.
+  text = text.replace(/\b([A-Za-z](?:_[A-Za-z0-9]+)?)\s*\\(?:in|notin)\s*\\\{([^{}\n]+)\\\}/g,
+    (_, lhs, values) => `$${lhs} \\in \\lbrace ${values} \\rbrace$`);
+  text = text.replace(/\\\{/g, '{').replace(/\\\}/g, '}');
   text = text
     .replace(/\\(ne|le|ge|in|notin|to|Rightarrow|Leftrightarrow|cdot|times|pm)\b/g,
       (_, command) => ({ ne: '≠', le: '≤', ge: '≥', in: '∈', notin: '∉', to: '→', Rightarrow: '⇒', Leftrightarrow: '⇔', cdot: '·', times: '×', pm: '±' }[command] || command))
