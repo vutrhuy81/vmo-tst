@@ -23,9 +23,9 @@ export async function generateOpenAIJson({
   schema,
   systemInstruction,
   model = process.env.OPENAI_VERIFY_MODEL || 'gpt-5.6-terra',
-  timeoutMs = 32_000,
-  maxOutputTokens = 12_000,
-  reasoningEffort = 'medium'
+  timeoutMs = 40_000,
+  maxOutputTokens = 8_000,
+  reasoningEffort = 'low'
 }) {
   if (!process.env.OPENAI_API_KEY) {
     const error = new Error('OPENAI_API_KEY chưa được cấu hình trên Vercel');
@@ -33,7 +33,7 @@ export async function generateOpenAIJson({
     throw error;
   }
   const controller = new AbortController();
-  const timer = setTimeout(() => controller.abort(), Math.max(5_000, Math.min(45_000, Number(timeoutMs) || 32_000)));
+  const timer = setTimeout(() => controller.abort(), Math.max(5_000, Math.min(45_000, Number(timeoutMs) || 40_000)));
   let response;
   try {
     response = await fetch('https://api.openai.com/v1/responses', {
@@ -49,7 +49,7 @@ export async function generateOpenAIJson({
           { role: 'user', content: text(input, 180_000) }
         ],
         reasoning: { effort: reasoningEffort },
-        max_output_tokens: Math.max(2_000, Math.min(24_000, Number(maxOutputTokens) || 12_000)),
+        max_output_tokens: Math.max(2_000, Math.min(16_000, Number(maxOutputTokens) || 8_000)),
         text: {
           format: {
             type: 'json_schema',
