@@ -57,7 +57,7 @@ export async function generateJson({ contents, schema, systemInstruction, temper
   // Dùng model hiện hành hỗ trợ ảnh và structured JSON. Có thể ghi đè model
   // qua tham số `models` ở từng chức năng khi cần.
   const modelList = Array.isArray(models) && models.length ? models.map(value => text(value, 80)).filter(Boolean).slice(0, 3) : ['gemini-3.5-flash-lite'];
-  const requestTimeout = Math.max(5_000, Math.min(45_000, Number(timeoutMs) || 22_000));
+  const requestTimeout = Math.max(5_000, Math.min(50_000, Number(timeoutMs) || 22_000));
   let lastError;
   for (const model of modelList) {
     try {
