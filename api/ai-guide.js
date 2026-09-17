@@ -1,6 +1,7 @@
 import { getDb } from './lib/db.js';
 import { getSession } from './lib/session.js';
-import { checkRateLimit, generateJson, handleAiError, parseBody, prepare, text } from './lib/ai.js';
+import { checkRateLimit, generateJson, parseBody, prepare, text } from './lib/ai.js';
+import { generateOpenAIJson } from './lib/openai.js';
 
 const stringArray = { type: 'array', items: { type: 'string' } };
 const guideSchema = { type: 'object', properties: {
@@ -14,9 +15,12 @@ const verifierSchema = { type: 'object', properties: {
   rigorous: { type: 'boolean' }, noExtraAssumptions: { type: 'boolean' }, equalityCasesChecked: { type: 'boolean' },
   matchesVerifiedReference: { type: 'boolean' }, summary: { type: 'string' }, criticalIssues: stringArray,
   correctedApproved: { type: 'boolean' }, correctedScore: { type: 'number' }, correctedKnowledge: { type: 'string' },
+  correctedAllPartsCorrect: { type: 'boolean' }, correctedRigorous: { type: 'boolean' },
+  correctedNoExtraAssumptions: { type: 'boolean' }, correctedEqualityCasesChecked: { type: 'boolean' },
+  correctedMatchesVerifiedReference: { type: 'boolean' },
   correctedIntuition: { type: 'string' }, correctedSolution: { type: 'string' }, correctedPitfalls: { type: 'string' },
   correctedFinalAnswers: stringArray, correctedEqualityCases: stringArray, correctedVerificationChecks: stringArray
-}, required: ['approved', 'score', 'allPartsCorrect', 'rigorous', 'noExtraAssumptions', 'equalityCasesChecked', 'matchesVerifiedReference', 'summary', 'criticalIssues', 'correctedApproved', 'correctedScore', 'correctedKnowledge', 'correctedIntuition', 'correctedSolution', 'correctedPitfalls', 'correctedFinalAnswers', 'correctedEqualityCases', 'correctedVerificationChecks'] };
+}, required: ['approved', 'score', 'allPartsCorrect', 'rigorous', 'noExtraAssumptions', 'equalityCasesChecked', 'matchesVerifiedReference', 'summary', 'criticalIssues', 'correctedApproved', 'correctedScore', 'correctedKnowledge', 'correctedAllPartsCorrect', 'correctedRigorous', 'correctedNoExtraAssumptions', 'correctedEqualityCasesChecked', 'correctedMatchesVerifiedReference', 'correctedIntuition', 'correctedSolution', 'correctedPitfalls', 'correctedFinalAnswers', 'correctedEqualityCases', 'correctedVerificationChecks'], additionalProperties: false };
 
 const genericPatterns = [/thực hiện các phép thế thích hợp/i, /xây dựng một ví dụ cụ thể/i, /thiết lập (?:một )?đánh giá phù hợp/i, /apply appropriate substitutions/i, /construct a suitable example/i, /derive an appropriate estimate/i];
 const scoreOf = value => Number.isFinite(Number(value)) ? Math.max(0, Math.min(5, Number(value))) : 0;
@@ -32,7 +36,7 @@ function substantive(solution, finalAnswers, requiredParts) {
 }
 
 function accepted(data, corrected = false) {
-  if (corrected) return data.correctedApproved === true && scoreOf(data.correctedScore) >= 4.5;
+  if (corrected) return data.correctedApproved === true && scoreOf(data.correctedScore) >= 4.5 && data.correctedAllPartsCorrect === true && data.correctedRigorous === true && data.correctedNoExtraAssumptions === true && data.correctedEqualityCasesChecked === true && data.correctedMatchesVerifiedReference === true;
   return data.approved === true && scoreOf(data.score) >= 4.5 && data.allPartsCorrect === true && data.rigorous === true && data.noExtraAssumptions === true && data.equalityCasesChecked === true && data.matchesVerifiedReference === true;
 }
 
@@ -69,15 +73,15 @@ export default async function handler(req, res) {
       contents: `Produce a complete high-school Mathematical Olympiad solution in ${outputLanguage}.\n${common}\nFirst enumerate every requested part. Give exact final results and every equality case. Check boundary cases, indices, signs and quantifiers. The reference is evidence, not permission to copy an error. Use Markdown and MathJax $...$ or $$...$$; do not use itemize, enumerate, align or textbf.`,
       schema: guideSchema,
       systemInstruction: `You are the primary VMO/IMO solver. Be explicit and rigorous. Never replace proof steps with generic advice. Write entirely in ${outputLanguage}.`,
-      // Flash-Lite tạo bản nháp nhanh; tầng giám khảo Flash bên dưới mới là
-      // nguồn quyết định cuối cùng và có quyền viết lại toàn bộ lời giải.
       models: ['gemini-2.5-flash-lite'], timeoutMs: 20_000, temperature: 0.08
     });
-    const verified = await generateJson({
-      contents: `Independently solve and audit the candidate below. Score 0.0-5.0. Approval requires every requested part correct, a rigorous derivation, no unstated assumptions, and all extremal/equality cases proved. When no trusted reference exists, matchesVerifiedReference means independent cross-check passed. If anything is weak, provide a fully corrected guide in corrected* fields; this is the single repair pass. Leave no generic placeholders.\n\n${common}\n\nCANDIDATE JSON:\n${JSON.stringify(solved.data)}`,
+    const verified = await generateOpenAIJson({
+      input: `Independently solve and audit the candidate below. Score 0.0-5.0. Approval requires every requested part correct, a rigorous derivation, no unstated assumptions, and all extremal/equality cases proved. When no trusted reference exists, matchesVerifiedReference means independent cross-check passed. If anything is weak, provide a fully corrected guide in the corrected* fields. Leave no generic placeholders.\n\n${common}\n\nGEMINI CANDIDATE JSON:\n${JSON.stringify(solved.data)}`,
       schema: verifierSchema,
-      systemInstruction: `You are an adversarial VMO jury verifier. Recompute the mathematics instead of trusting the candidate. Correct it in ${outputLanguage} when needed. A score of 5.0 means publication-ready and fully rigorous.`,
-      models: ['gemini-2.5-flash'], timeoutMs: 28_000, temperature: 0.02
+      systemInstruction: `You are an independent adversarial VMO/IMO jury. Recompute the problem instead of trusting Gemini. Correct the guide in ${outputLanguage} when needed. A score of 5.0 means publication-ready and fully rigorous. Return only the required structured result.`,
+      timeoutMs: 32_000,
+      maxOutputTokens: 12_000,
+      reasoningEffort: 'medium'
     });
     const requiredParts = partCount(problemContent);
     let data; let score; let repaired = false;
@@ -89,7 +93,21 @@ export default async function handler(req, res) {
     } else {
       return res.status(422).json({ success: false, error: 'AI chưa tạo được lời giải đạt chuẩn kiểm định. Vui lòng thử lại; hệ thống không hiển thị lời giải chung chung hoặc chưa chắc chắn.', quality: { score: Math.max(scoreOf(verified.data.score), scoreOf(verified.data.correctedScore)), summary: text(verified.data.summary, 1000) } });
     }
-    data.quality = { verified: true, score: `${score.toFixed(1)}/5.0`, repaired, usedTrustedReference: Boolean(reference?.content), referenceOrigin: reference?.origin || '', summary: text(verified.data.summary, 1000) };
-    return res.status(200).json({ success: true, source: 'gemini_verified', model: `${solved.model}+${verified.model}`, data });
-  } catch (error) { return handleAiError(res, error); }
+    data.quality = { verified: true, score: `${score.toFixed(1)}/5.0`, repaired, solverProvider: 'google', verifierProvider: 'openai', usedTrustedReference: Boolean(reference?.content), referenceOrigin: reference?.origin || '', summary: text(verified.data.summary, 1000) };
+    return res.status(200).json({
+      success: true,
+      source: 'gemini_openai_verified',
+      model: `${solved.model}+${verified.model}`,
+      providers: { solver: 'google', verifier: 'openai' },
+      data
+    });
+  } catch (error) {
+    console.error('[AI GUIDE]', error);
+    const openAiMissing = error?.code === 'OPENAI_NOT_CONFIGURED';
+    const geminiMissing = error?.code === 'AI_NOT_CONFIGURED';
+    return res.status(openAiMissing || geminiMissing ? 503 : 502).json({
+      success: false,
+      error: openAiMissing || geminiMissing ? error.message : 'Pipeline Gemini–GPT tạm thời không phản hồi'
+    });
+  }
 }
