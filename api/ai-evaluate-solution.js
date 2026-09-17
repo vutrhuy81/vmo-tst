@@ -106,10 +106,20 @@ async function trustedReference(problemRef) {
     : null;
 }
 
-function verifierApproved(data) {
-  return data?.approved === true && data?.allClaimsChecked === true && data?.mathCorrect === true
-    && data?.scoreConsistent === true && data?.noInventedStudentWork === true
-    && data?.referenceMatched === true;
+function verifierChecks(data, hasTrustedReference) {
+  return {
+    allClaimsChecked: data?.allClaimsChecked === true,
+    mathCorrect: data?.mathCorrect === true,
+    scoreConsistent: data?.scoreConsistent === true,
+    noInventedStudentWork: data?.noInventedStudentWork === true,
+    // Không có nguồn admin xác minh thì GPT phải tự giải độc lập; không được
+    // biến một cờ "không có gì để đối chiếu" thành lỗi chặn toàn bộ kết quả.
+    referenceMatched: !hasTrustedReference || data?.referenceMatched === true
+  };
+}
+
+function verifierApproved(data, hasTrustedReference) {
+  return Object.values(verifierChecks(data, hasTrustedReference)).every(Boolean);
 }
 
 export default async function handler(req, res) {
@@ -238,12 +248,25 @@ YÊU CẦU KIỂM ĐỊNH
       reasoningEffort: 'low'
     });
 
-    if (!verifierApproved(verified.data)) {
+    const hasTrustedReference = Boolean(reference?.content);
+    const checks = verifierChecks(verified.data, hasTrustedReference);
+    if (!verifierApproved(verified.data, hasTrustedReference)) {
+      const failedChecks = Object.entries(checks).filter(([, passed]) => !passed).map(([name]) => name);
+      console.warn('[AI EVALUATE QUALITY_REJECTED]', {
+        problemRef: text(body.problemKey || body.problemId, 180),
+        hasTrustedReference,
+        approvedFlag: verified.data?.approved === true,
+        failedChecks,
+        criticalIssueCount: Array.isArray(verified.data?.criticalIssues) ? verified.data.criticalIssues.length : 0
+      });
       return res.status(422).json({
         success: false,
         error: 'Kết quả chấm chưa vượt qua kiểm định độc lập Gemini–GPT.',
         code: 'QUALITY_REJECTED',
-        quality: { criticalIssues: Array.isArray(verified.data?.criticalIssues) ? verified.data.criticalIssues.slice(0, 10) : [] }
+        quality: {
+          failedChecks,
+          criticalIssues: Array.isArray(verified.data?.criticalIssues) ? verified.data.criticalIssues.slice(0, 10) : []
+        }
       });
     }
 
@@ -254,7 +277,7 @@ YÊU CẦU KIỂM ĐỊNH
       pipeline: 'gemini_openai',
       graderProvider: 'google',
       verifierProvider: 'openai',
-      usedTrustedReference: Boolean(reference?.content),
+      usedTrustedReference: hasTrustedReference,
       referenceOrigin: reference?.origin || '',
       criticalIssues: Array.isArray(verified.data.criticalIssues) ? verified.data.criticalIssues.slice(0, 10) : []
     };
