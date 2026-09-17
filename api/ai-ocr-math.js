@@ -16,7 +16,7 @@ function normalizeOcrLatex(value) {
   const mathParts = [];
   text = text.replace(/(\$\$[\s\S]*?\$\$|\\\[[\s\S]*?\\\]|\\\([\s\S]*?\\\)|\$(?:\\.|[^$])+\$)/g, match => {
     mathParts.push(match);
-    return `___OCR_MATH_PART_${mathParts.length - 1}___`;
+    return `\uE000${mathParts.length - 1}\uE001`;
   });
   // Văn bản OCR như \\text{Giải.} phải nằm ngoài LaTeX math.
   text = text.replace(/\\text(?:bf|it|rm)?\{((?:[^{}]|\{[^{}]*\})*)\}/g, '$1');
@@ -25,7 +25,7 @@ function normalizeOcrLatex(value) {
       (_, command) => ({ ne: '≠', le: '≤', ge: '≥', in: '∈', notin: '∉', to: '→', Rightarrow: '⇒', Leftrightarrow: '⇔', cdot: '·', times: '×', pm: '±' }[command] || command))
     .replace(/(\\frac\{[^{}]+\}\{[^{}]+\}|\\sqrt\{[^{}]+\})/g, '$$$1$$')
     .replace(/([A-Za-z](?:_\{[^{}]+\}|\^[^{}]+|_[A-Za-z0-9]+|\^[A-Za-z0-9]+))/g, '$$$1$$');
-  text = text.replace(/___OCR_MATH_PART_(\d+)___/g, (_, index) => mathParts[Number(index)] || '');
+  text = text.replace(/\uE000(\d+)\uE001/g, (_, index) => mathParts[Number(index)] || '');
   const lines = text.split(/\r?\n/);
   return lines.map((line) => {
     const trimmed = line.trim();
