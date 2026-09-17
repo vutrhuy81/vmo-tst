@@ -6,6 +6,9 @@
     },
     "api/ai-guide.js": {
       "maxDuration": 180
+    },
+    "api/ai-evaluate-solution.js": {
+      "maxDuration": 180
     }
   },
   "rewrites": [

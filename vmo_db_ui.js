@@ -1059,6 +1059,9 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
     const verdictBg = /^#[0-9a-f]{6}$/i.test(String(evalData.verdictColor || ''))
       ? String(evalData.verdictColor)
       : fallbackVerdictBg;
+    const verificationBadge = evalData.quality?.verified
+      ? `<div style="display:inline-flex;align-items:center;gap:5px;margin-top:6px;padding:3px 9px;border-radius:999px;background:rgba(255,255,255,.2);border:1px solid rgba(255,255,255,.45);font-size:.75rem;font-weight:700;">✓ Đã kiểm định độc lập Gemini–GPT${evalData.quality.corrected ? ' · GPT đã hiệu chỉnh' : ''}</div>`
+      : '';
 
     return `
       <!-- Banner Kết luận Tổng quan & Điểm số -->
@@ -1068,6 +1071,7 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
           <div style="font-size: 1.15rem; font-weight: 800; text-shadow: 0 1px 2px rgba(0,0,0,0.2);">
             ${escapeHtmlText(evalData.verdictLabel || evalData.verdict || 'ĐÚNG HOÀN TOÀN (TỐI ƯU)')}
           </div>
+          ${verificationBadge}
         </div>
         <div style="background: rgba(255,255,255,0.25); border: 1.5px solid rgba(255,255,255,0.5); border-radius: 8px; padding: 6px 16px; font-weight: 800; font-size: 1.15rem; box-shadow: 0 2px 8px rgba(0,0,0,0.15);">
           Điểm: ${escapeHtmlText(evalData.estimatedScore ?? '5.0/5.0đ')}
