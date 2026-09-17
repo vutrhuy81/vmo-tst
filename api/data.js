@@ -25,6 +25,16 @@ function cleanSolutionImage(value) {
     : null;
 }
 
+function cleanReferenceLinks(value) {
+  if (!Array.isArray(value)) return [];
+  return value.slice(0, 20).map(item => {
+    const label = cleanText(Array.isArray(item) ? item[0] : item?.label, 300);
+    const url = cleanText(Array.isArray(item) ? item[1] : item?.url, 2000);
+    if (!label || !/^https?:\/\//i.test(url)) return null;
+    return { label, url };
+  }).filter(Boolean);
+}
+
 function objectId(value) {
   return ObjectId.isValid(value) ? new ObjectId(value) : null;
 }
@@ -460,6 +470,9 @@ export default async function handler(req, res) {
           updatedBy: session.username,
           updatedAt: now
         };
+        if (Object.prototype.hasOwnProperty.call(raw, 'referenceLinks')) {
+          doc.referenceLinks = cleanReferenceLinks(raw.referenceLinks);
+        }
         const savedProblem = await db.collection('problems').findOneAndUpdate(
           { contentKey },
           { $set: doc, $setOnInsert: { createdAt: now } },
@@ -565,6 +578,7 @@ export default async function handler(req, res) {
       const id = objectId(cleanText(payload.id, 80));
       const content = cleanText(payload.content, 50000);
       const referenceSolution = cleanText(payload.referenceSolution, 100000);
+      const referenceLinks = cleanReferenceLinks(payload.referenceLinks);
       const changeNote = cleanText(payload.changeNote, 500);
       if (!id || !content) {
         return res.status(400).json({ success: false, error: 'Thiếu câu hỏi hoặc nội dung đề bài' });
@@ -583,6 +597,7 @@ export default async function handler(req, res) {
         title: current.title,
         content: current.content || '',
         referenceSolution: current.referenceSolution || '',
+        referenceLinks: cleanReferenceLinks(current.referenceLinks),
         changeNote: changeNote || 'Bản tự động trước khi chỉnh sửa',
         action: 'edit',
         createdBy: session.username,
@@ -591,10 +606,50 @@ export default async function handler(req, res) {
       const nextVersion = Number(current.version || 1) + 1;
       await db.collection('problems').updateOne(
         { _id: id },
-        { $set: { content, referenceSolution, version: nextVersion, updatedBy: session.username, updatedAt: now } }
+        { $set: { content, referenceSolution, referenceLinks, version: nextVersion, updatedBy: session.username, updatedAt: now } }
       );
       await db.collection('content_revisions').createIndex({ problemId: 1, createdAt: -1 });
       return res.status(200).json({ success: true, item: { id: String(id), version: nextVersion } });
+    }
+
+    if (action === 'migrate_tst_reference_links') {
+      const sourceMap = payload.sourceMap && typeof payload.sourceMap === 'object' ? payload.sourceMap : {};
+      const cardIds = Object.keys(sourceMap).map(value => cleanKey(value, 180)).filter(Boolean).slice(0, 100);
+      if (!cardIds.length) return res.status(400).json({ success: false, error: 'Không có nguồn TST để migration' });
+
+      let matchedProblems = 0;
+      let updatedProblems = 0;
+      const unmatchedCardIds = [];
+      for (const cardId of cardIds) {
+        const config = sourceMap[cardId] || {};
+        const problems = await db.collection('problems').find({
+          sourceGroup: 'tst',
+          $or: [
+            { frontendAnchor: cardId },
+            { setKey: { $regex: `^tst:${escapeRegex(cardId)}(?::day-[0-9]+)?$` } }
+          ]
+        }).sort({ order: 1, questionNumber: 1, createdAt: 1 }).toArray();
+        if (!problems.length) {
+          unmatchedCardIds.push(cardId);
+          continue;
+        }
+        matchedProblems += problems.length;
+        const allLinks = cleanReferenceLinks(config.all);
+        const byIndex = config.byIndex && typeof config.byIndex === 'object' ? config.byIndex : {};
+        for (const [index, problem] of problems.entries()) {
+          const rawLinks = Object.prototype.hasOwnProperty.call(byIndex, index) ? byIndex[index] : allLinks;
+          const referenceLinks = cleanReferenceLinks(rawLinks);
+          await db.collection('problems').updateOne(
+            { _id: problem._id },
+            { $set: { referenceLinks, referenceLinksUpdatedBy: session.username, referenceLinksUpdatedAt: now } }
+          );
+          updatedProblems += 1;
+        }
+      }
+      return res.status(200).json({
+        success: true,
+        item: { cardCount: cardIds.length, matchedProblems, updatedProblems, unmatchedCardIds }
+      });
     }
 
     if (action === 'restore_catalog_revision') {
@@ -623,6 +678,7 @@ export default async function handler(req, res) {
         { $set: {
           content: revision.content || '',
           referenceSolution: revision.referenceSolution || '',
+          referenceLinks: cleanReferenceLinks(revision.referenceLinks),
           version: nextVersion,
           updatedBy: session.username,
           updatedAt: now
@@ -769,7 +825,7 @@ export default async function handler(req, res) {
         };
         const saved = await db.collection('problems').findOneAndUpdate(
           { contentKey },
-          { $set: problemDoc, $setOnInsert: { createdAt: now } },
+          { $set: problemDoc, $setOnInsert: { createdAt: now, referenceLinks: [] } },
           { upsert: true, returnDocument: 'after' }
         );
         if (saved?._id) savedQuestions.push(saved);
