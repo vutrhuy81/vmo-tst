@@ -341,8 +341,20 @@
             const problemId = card.querySelector('.problem-id');
             const label = problemId?.querySelector('span:first-child');
             const topicBadge = problemId?.querySelector('.badge-topic');
-            if (label && (rule.shortLabel || rule.title)) label.textContent = rule.shortLabel || rule.title;
-            if (topicBadge && rule.topic) topicBadge.textContent = ` ${rule.topic}`;
+            const topicText = String(rule.topic || topicBadge?.textContent || '').trim();
+            if (label && (rule.shortLabel || rule.title)) {
+              // Catalog title thường đã bao gồm cả nhãn câu hỏi và topic.
+              // Không gán nguyên title vào span nhãn rồi giữ lại topicBadge,
+              // nếu không thành viên sẽ thấy: "Câu 1 ... – topic – topic".
+              let displayLabel = String(rule.shortLabel || rule.title).trim();
+              if (topicText && displayLabel.endsWith(topicText)) {
+                displayLabel = displayLabel.slice(0, -topicText.length).trim();
+              }
+              displayLabel = displayLabel.replace(/\s*\(\s*\d+(?:[.,]\d+)?\s*đ\s*\)\s*/gi, ' ').trim();
+              const questionLabel = displayLabel.match(/^(?:Câu|Bài)\s*\d+/i)?.[0];
+              label.textContent = questionLabel || displayLabel;
+            }
+            if (topicBadge) topicBadge.textContent = topicText ? ` ${topicText}` : '';
           } else if (card.classList.contains('examplebox') && rule.title) {
             const heading = card.querySelector('.box-heading');
             const textNode = heading && Array.from(heading.childNodes).find(node => node.nodeType === Node.TEXT_NODE && node.textContent.trim());
