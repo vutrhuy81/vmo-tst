@@ -637,8 +637,20 @@
 
   function normalizeBareGuideMath(value) {
     const protectedMath = [];
+    const wrapInlineMath = (prefix, formula) => {
+      let body = String(formula || '').trim();
+      let suffix = '';
+      const punctuation = body.match(/[.,;:]+$/)?.[0] || '';
+      if (punctuation) { body = body.slice(0, -punctuation.length); suffix = punctuation + suffix; }
+      const opens = (body.match(/\(/g) || []).length;
+      const closes = (body.match(/\)/g) || []).length;
+      if (body.endsWith(')') && closes > opens) { body = body.slice(0, -1); suffix = ')' + suffix; }
+      return body ? `${prefix}$${body}$${suffix}` : `${prefix}${formula}`;
+    };
     let text = String(value || '')
       .replace(/[\u200B-\u200D\uFEFF]/g, '')
+      // JSON có thể giữ lại hai dấu gạch chéo trước delimiter MathJax.
+      .replace(/\\\\([\[\]()])/g, '\\$1')
       .replace(/(\$\$[\s\S]*?\$\$|\\\[[\s\S]*?\\\]|\\\([\s\S]*?\\\)|\$(?:\\.|[^$\n])+\$)/g, match => {
         protectedMath.push(match);
         return `\uE100${protectedMath.length - 1}\uE101`;
@@ -650,23 +662,43 @@
       const trimmed = line.trim();
       if (!trimmed || /\uE100\d+\uE101/.test(trimmed)) return line;
       const hasLatex = /\\(?:frac|sqrt|sum|prod|lim|tag|infty|to|cdot|times|ge|le|ne|in|forall|Rightarrow|Leftrightarrow)\b/.test(trimmed);
-      const startsAsMath = /^(?:\\(?:frac|sqrt|sum|prod|lim|boxed)\b|[A-Za-z](?:_\{?[^\s=]+\}?|\^\{?[^\s=]+\}?)?\s*(?:=|>|<|\\(?:ge|le|ne)\b))/.test(trimmed);
+      const startsAsMath = /^(?:\\(?:frac|sqrt|sum|prod|lim|boxed)\b|[+\-]?(?:\d+)?[A-Za-z](?:[A-Za-z0-9_{}^+\-*/.]|\\[A-Za-z]+)*\s*(?:=|>|<|\\(?:ge|le|ne)\b))/.test(trimmed);
       const hasRelation = /(?:=|>|<|\\tag\{|\\to\b|→|≥|≤|≠)/.test(trimmed);
-      if ((hasLatex && hasRelation) || startsAsMath) return `\\[${trimmed}\\]`;
+      const hasProse = /[À-ỹ]/.test(trimmed) || /\b(?:therefore|hence|since|because|suppose|then|thus|where|for)\b/i.test(trimmed);
+      if (!hasProse && hasRelation && (hasLatex || startsAsMath || /[_^]/.test(trimmed))) return `\\[${trimmed}\\]`;
       return line;
     }).join('\n');
 
-    // Bọc các công thức ngắn nằm trong câu văn, ví dụ u_n>0, L>=1/2.
-    text = text.replace(/(^|[\s(,;:])((?:\d+\/)?[A-Za-z](?:_\{[^{}]+\}|_[A-Za-z0-9]+|\^\{[^{}]+\}|\^[A-Za-z0-9]+)?(?:\([^\n)]*\))?(?:\s*(?:=|>|<|≥|≤|≠|→|\\to\b|\\ge\b|\\le\b|\\ne\b)\s*[+\-]?(?:\d+\/)?[A-Za-z0-9](?:[A-Za-z0-9_{}^+\-*/.]|\\[A-Za-z]+)*)+)/g,
-      (_, prefix, formula) => `${prefix}$${formula.trim()}$`);
+    // Quan hệ dùng lệnh TeX trong câu văn: n\ge1, u_n\to+\infty, x\ne0.
+    text = text.replace(/(^|[\s(,;:])([A-Za-z](?:_\{[^{}]+\}|_[A-Za-z0-9]+|\^\{[^{}]+\}|\^[A-Za-z0-9]+)?\s*\\(?:ge|le|ne|to)\s*[+\-]?(?:\\infty|[A-Za-z0-9](?:[A-Za-z0-9_{}^+\-*/.]|\\[A-Za-z]+)*))(?=$|[\s),;:.])/g,
+      (_, prefix, formula) => wrapInlineMath(prefix, formula));
+
+    // Danh sách chỉ số có \ldots thường xuất hiện trong phần lời dẫn.
+    text = text.replace(/(^|[\s(])((?:\d+\s*,\s*)+\\ldots\s*,\s*[A-Za-z0-9_{}^+\-]+)(?=$|[\s),;:.])/g,
+      (_, prefix, formula) => wrapInlineMath(prefix, formula));
+
+    // Bọc các công thức nằm trong câu văn, gồm cả hai vế nhiều hạng tử.
+    text = text.replace(/(^|[\s(,;:])((?:\\(?:frac|sqrt)\{[^\n]+|[+\-]?(?:\d+\/)?[A-Za-z0-9](?:[A-Za-z0-9_{}^+\-*/().]|\\[A-Za-z]+)*)(?:\s*(?:=|>|<|≥|≤|≠|→|\\to\b|\\ge\b|\\le\b|\\ne\b)\s*(?:\\(?:frac|sqrt)\{[^\n]+|[+\-]?(?:\d+\/)?[A-Za-z0-9](?:[A-Za-z0-9_{}^+\-*/().]|\\[A-Za-z]+)*))+)(?=$|[\s,;:])/g,
+      (_, prefix, formula) => wrapInlineMath(prefix, formula));
+
+    // Các biểu thức chỉ số/số mũ đứng độc lập, ví dụ u_n, u_{n+1}^2.
+    text = text.replace(/(^|[\s(,;:])((?:\d+\/)?[A-Za-z](?:_\{[^{}]+\}|_[A-Za-z0-9]+|\^\{[^{}]+\}|\^[A-Za-z0-9]+)(?:[A-Za-z0-9_{}^+\-*/.]|\\[A-Za-z]+)*)(?=$|[\s),;:.])/g,
+      (_, prefix, formula) => wrapInlineMath(prefix, formula));
 
     return text.replace(/\uE100(\d+)\uE101/g, (_, index) => protectedMath[Number(index)] || '');
   }
 
   function formatMarkdownToHtml(text) {
     if (!text) return '';
-    // Nếu text đã chứa thẻ HTML
-    if (text.includes('<p>') || text.includes('<div>') || text.includes('<br/>') || text.includes('<b>')) return text;
+    // Chuẩn hóa HTML đơn giản do AI đôi khi trả lẫn với Markdown. Không bỏ qua
+    // bước sửa MathJax chỉ vì phản hồi có một thẻ <p> hoặc <br>.
+    text = String(text)
+      .replace(/<br\s*\/?\s*>/gi, '\n')
+      .replace(/<\/p\s*>/gi, '\n\n')
+      .replace(/<p(?:\s[^>]*)?>/gi, '')
+      .replace(/<(?:strong|b)>/gi, '**').replace(/<\/(?:strong|b)>/gi, '**')
+      .replace(/<(?:em|i)>/gi, '*').replace(/<\/(?:em|i)>/gi, '*')
+      .replace(/<\/?(?:div|span|ul|ol|li)(?:\s[^>]*)?>/gi, '\n');
     text = normalizeBareGuideMath(text);
     // Chuyển markdown **bold** thành <strong>
     let formatted = text
