@@ -749,19 +749,35 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
   // Chỉ chuẩn hóa nội dung bên trong một token Math đã có delimiter.
   // Không tự bọc thêm dấu $ để tránh tạo $...$ lồng nhau gây Math input error.
   function normalizeDelimitedMath(token) {
-    return escapeHtmlText(
-      String(token || '')
-        .replace(/≥/g, '\\ge ')
-        .replace(/≤/g, '\\le ')
-        .replace(/≠/g, '\\ne ')
-        .replace(/∈/g, '\\in ')
-        .replace(/∉/g, '\\notin ')
-        .replace(/→/g, '\\to ')
-        .replace(/⇒/g, '\\Rightarrow ')
-        .replace(/⇔/g, '\\Leftrightarrow ')
-        .replace(/\\begin\{align\*?\}/g, '\\begin{aligned}')
-        .replace(/\\end\{align\*?\}/g, '\\end{aligned}')
+    let normalized = String(token || '')
+      // Sửa các lệnh TeX bắt đầu bằng \t, \f, \r, \b nếu JSON đã diễn
+      // giải nhầm chúng thành tab/form-feed/carriage-return/backspace.
+      .replace(/\t(o|ext|ag|heta|imes|au)\b/g, '\\t$1')
+      .replace(/\f(rac)\b/g, '\\f$1')
+      .replace(/\r(ight|ho)\b/g, '\\r$1')
+      .replace(/\x08(egin|eta|inom)\b/g, '\\b$1')
+      .replace(/≥/g, '\\ge ')
+      .replace(/≤/g, '\\le ')
+      .replace(/≠/g, '\\ne ')
+      .replace(/∈/g, '\\in ')
+      .replace(/∉/g, '\\notin ')
+      .replace(/→/g, '\\to ')
+      .replace(/⇒/g, '\\Rightarrow ')
+      .replace(/⇔/g, '\\Leftrightarrow ')
+      .replace(/\\begin\{align\*?\}/g, '\\begin{aligned}')
+      .replace(/\\end\{align\*?\}/g, '\\end{aligned}');
+
+    // MathJax không cho phép \tag nằm bên trong aligned/alignedat.
+    // Giữ nhãn phương trình dưới dạng văn bản toán học tương đương.
+    normalized = normalized.replace(
+      /\\begin\{(aligned\*?|alignedat\*?)\}([\s\S]*?)\\end\{\1\}/g,
+      (_, environment, body) => {
+        const safeBody = body.replace(/\\tag\*?\{([^{}]*)\}/g, (_, label) => `\\qquad\\text{(${label})}`);
+        return `\\begin{${environment}}${safeBody}\\end{${environment}}`;
+      }
     );
+
+    return escapeHtmlText(normalized);
   }
 
   // Định dạng Markdown an toàn và giữ nguyên các khối MathJax hợp lệ.
