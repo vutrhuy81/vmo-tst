@@ -13,6 +13,9 @@ function normalizeOcrLatex(value) {
   let text = String(value || '').replace(/[\u200B-\u200D\uFEFF]/g, '').trim();
   if (!text) return text;
   text = text.replace(/\\\$/g, '$');
+  text = text.replace(/\\begin\{align\*?\}/g, '\\begin{aligned}')
+    .replace(/\\end\{align\*?\}/g, '\\end{aligned}')
+    .replace(/(?<!\$\$|\\\[)\s*(\\begin\{aligned\}[\s\S]*?\\end\{aligned\})\s*(?!\$\$|\\\])/g, (_, block) => `\n$$\n${block}\n$$\n`);
   const mathParts = [];
   text = text.replace(/(\$\$[\s\S]*?\$\$|\\\[[\s\S]*?\\\]|\\\([\s\S]*?\\\)|\$(?:\\.|[^$])+\$)/g, match => {
     mathParts.push(match);
@@ -31,7 +34,7 @@ function normalizeOcrLatex(value) {
     const trimmed = line.trim();
     if (!trimmed || /^\$\$|^\$|^\\\[|^\\\(/.test(trimmed)) return line;
     // Các dòng chỉ chứa một biểu thức TeX phải là display math.
-    if (/^\\(?:boxed|fbox|begin|end|frac|sqrt|sum|prod|lim|left|right|text)\b/.test(trimmed)) {
+    if (/^\\(?:boxed|fbox|frac|sqrt|sum|prod|lim|left|right|text)\b/.test(trimmed)) {
       return `$$\n${trimmed}\n$$`;
     }
     return line;
