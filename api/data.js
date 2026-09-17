@@ -2,7 +2,7 @@ import { ObjectId } from 'mongodb';
 import { getDb } from './lib/db.js';
 import { getSession } from './lib/session.js';
 
-const ALLOWED_RESOURCES = new Set(['documents', 'exams', 'content_sets', 'problems', 'content_revisions', 'submissions', 'submission_image', 'events']);
+const ALLOWED_RESOURCES = new Set(['documents', 'exams', 'exam_catalog', 'exam_image', 'content_sets', 'problems', 'content_revisions', 'submissions', 'submission_image', 'events']);
 const CONTENT_TYPES = new Set(['specialty_chapter', 'mock_exam', 'tst_exam', 'regional_exam']);
 const SOURCE_TYPES = new Set(['specialty_example', 'mock_exam_question', 'tst_question', 'regional_question']);
 const MAX_SOLUTION_IMAGE_CHARS = 3_000_000;
@@ -33,6 +33,16 @@ function cleanKey(value, max = 180) {
   return cleanText(value, max)
     .toLowerCase()
     .replace(/[^a-z0-9._:-]+/g, '-')
+    .replace(/^-+|-+$/g, '');
+}
+
+function slugKey(value, max = 120) {
+  return cleanText(value, max)
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .replace(/đ/gi, match => match === 'Đ' ? 'D' : 'd')
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, '-')
     .replace(/^-+|-+$/g, '');
 }
 
@@ -109,6 +119,22 @@ export default async function handler(req, res) {
         return res.status(200).json({ success: true, items: stored ? [stored] : [] });
       }
 
+      if (resource === 'exam_image') {
+        const examId = objectId(cleanText(req.query?.examId, 80));
+        const pageNumber = Math.max(1, Number(req.query?.pageNumber) || 1);
+        if (!examId) return res.status(400).json({ success: false, error: 'Mã đề thi không hợp lệ' });
+        const exam = await db.collection('exams').findOne({ _id: examId }, { projection: { status: 1 } });
+        if (!exam) return res.status(404).json({ success: false, error: 'Không tìm thấy đề thi' });
+        if (session.role !== 'admin' && exam.status !== 'published') {
+          return res.status(403).json({ success: false, error: 'Đề thi chưa được công khai' });
+        }
+        const stored = await db.collection('exam_images').findOne(
+          { examId, pageNumber },
+          { projection: { _id: 0, image: 1, mimeType: 1, pageNumber: 1, createdAt: 1 } }
+        );
+        return res.status(200).json({ success: true, items: stored ? [stored] : [] });
+      }
+
       if (resource === 'content_revisions') {
         if (!requireAdmin(session, res)) return;
         const problemId = objectId(cleanText(req.query?.problemId, 80));
@@ -119,6 +145,28 @@ export default async function handler(req, res) {
           .limit(50)
           .toArray();
         return res.status(200).json({ success: true, items });
+      }
+
+      if (resource === 'exam_catalog') {
+        const examFilter = { category: cleanText(req.query?.category, 80) || 'tst-national' };
+        if (session.role !== 'admin') examFilter.status = 'published';
+        const exams = await db.collection('exams').find(examFilter).sort({ provinceOrder: 1, dayNumber: 1, createdAt: 1 }).limit(200).toArray();
+        const examIds = exams.map(item => String(item._id));
+        const problemFilter = { examId: { $in: examIds } };
+        if (session.role !== 'admin') problemFilter.status = 'published';
+        const problems = examIds.length
+          ? await db.collection('problems').find(problemFilter).sort({ orderNumber: 1, questionNumber: 1 }).limit(1000).toArray()
+          : [];
+        const grouped = new Map();
+        problems.forEach(problem => {
+          const key = String(problem.examId || '');
+          if (!grouped.has(key)) grouped.set(key, []);
+          grouped.get(key).push(problem);
+        });
+        return res.status(200).json({
+          success: true,
+          items: exams.map(exam => ({ ...exam, problems: grouped.get(String(exam._id)) || [] }))
+        });
       }
 
       const filter = {};
@@ -597,6 +645,186 @@ export default async function handler(req, res) {
       const doc = { title, category: cleanText(payload.category, 80) || 'vmo-danang', year: cleanText(payload.year, 30) || '2026-2027', day: cleanText(payload.day, 40) || 'Ngày 1', province: cleanText(payload.province, 100) || 'Đà Nẵng', duration: Math.max(1, Math.min(600, Number(payload.duration) || 180)), description: cleanText(payload.description, 5000), sourceUrl: cleanText(payload.sourceUrl, 2000), createdBy: session.username, createdAt: now };
       const result = await db.collection('exams').insertOne(doc);
       return res.status(201).json({ success: true, item: { _id: result.insertedId, ...doc } });
+    }
+
+    if (action === 'create_exam_from_ocr') {
+      const province = cleanText(payload.province, 120);
+      const targetAnchor = cleanKey(payload.targetAnchor, 180);
+      const dayNumber = Math.max(1, Math.min(2, Number(payload.dayNumber) || 1));
+      const year = cleanText(payload.year, 40) || '2026-2027';
+      const questions = Array.isArray(payload.questions) ? payload.questions.slice(0, 10) : [];
+      if (!province || !/^tst-[a-z0-9._:-]+$/.test(targetAnchor) || !questions.length) {
+        return res.status(400).json({ success: false, error: 'Thiếu tỉnh/thành phố, vị trí frontend hoặc danh sách câu hỏi' });
+      }
+
+      const provinceSlug = slugKey(province);
+      const yearSlug = slugKey(year);
+      const examKey = `tst:${provinceSlug}:${yearSlug}:day-${dayNumber}`;
+      // Một tỉnh có thể có hai đề với các số câu trùng nhau. Ngày thi phải
+      // thuộc khóa ổn định để ngày 2 không ghi đè câu hỏi/lịch sử của ngày 1.
+      const setKey = `tst:${targetAnchor}:day-${dayNumber}`;
+      const title = cleanText(payload.title, 500) || `Đề thi lập đội tuyển ${province} — Ngày ${dayNumber}`;
+      const status = payload.status === 'draft' ? 'draft' : 'published';
+      const existingExam = await db.collection('exams').findOne({ examKey }, { projection: { _id: 1 } });
+      if (existingExam && payload.replaceExisting !== true) {
+        return res.status(409).json({
+          success: false,
+          error: `Đề ngày ${dayNumber} của ${province} đã tồn tại. Cần xác nhận trước khi cập nhật.`
+        });
+      }
+
+      const normalizedQuestions = [];
+      const seenQuestionNumbers = new Set();
+      for (const [index, raw] of questions.entries()) {
+        const questionNumber = Math.max(1, Math.min(99, Number(raw?.questionNumber) || index + 1));
+        const content = cleanText(raw?.content, 50000);
+        if (!content) continue;
+        if (seenQuestionNumbers.has(questionNumber)) {
+          return res.status(400).json({ success: false, error: `Số câu ${questionNumber} bị lặp trong kết quả OCR` });
+        }
+        seenQuestionNumbers.add(questionNumber);
+        normalizedQuestions.push({ raw, questionNumber, content });
+      }
+      if (!normalizedQuestions.length) {
+        return res.status(400).json({ success: false, error: 'Không có câu hỏi hợp lệ để lưu' });
+      }
+      const examDoc = {
+        examKey,
+        title,
+        category: 'tst-national',
+        year,
+        day: `Ngày ${dayNumber}`,
+        dayNumber,
+        province,
+        provinceOrder: cleanNumber(payload.provinceOrder, 0, 0, 1000),
+        duration: Math.max(1, Math.min(600, Number(payload.duration) || 180)),
+        examDate: cleanText(payload.examDate, 20),
+        description: cleanText(payload.description, 5000),
+        targetAnchor,
+        sourceImageCount: cleanNumber(payload.sourceImageCount, 1, 1, 20),
+        ocrConfidence: cleanText(payload.ocrConfidence, 40),
+        status,
+        updatedBy: session.username,
+        updatedAt: now
+      };
+      const savedExam = await db.collection('exams').findOneAndUpdate(
+        { examKey },
+        { $set: examDoc, $setOnInsert: { createdBy: session.username, createdAt: now } },
+        { upsert: true, returnDocument: 'after' }
+      );
+      if (!savedExam?._id) return res.status(500).json({ success: false, error: 'Không thể tạo đề thi' });
+
+      const setDoc = {
+        key: setKey,
+        contentType: 'tst_exam',
+        title,
+        group: 'tst',
+        year,
+        province,
+        region: cleanText(payload.region, 80),
+        order: cleanNumber(payload.provinceOrder),
+        status,
+        updatedBy: session.username,
+        updatedAt: now
+      };
+      const savedSet = await db.collection('content_sets').findOneAndUpdate(
+        { key: setKey },
+        { $set: setDoc, $setOnInsert: { createdAt: now } },
+        { upsert: true, returnDocument: 'after' }
+      );
+      if (!savedSet?._id) return res.status(500).json({ success: false, error: 'Không thể tạo nhóm nội dung đề thi' });
+
+      const savedQuestions = [];
+      for (const { raw, questionNumber, content } of normalizedQuestions) {
+        const contentKey = `${setKey}:question-${questionNumber}`;
+        const problemDoc = {
+          contentKey,
+          setId: savedSet._id,
+          setKey,
+          setTitle: title,
+          examId: String(savedExam._id),
+          examKey,
+          sourceType: 'tst_question',
+          sourceGroup: 'tst',
+          title: cleanText(raw?.title, 500) || `Câu ${questionNumber}`,
+          shortLabel: `Câu ${questionNumber}`,
+          questionNumber,
+          day: `Ngày ${dayNumber}`,
+          dayNumber,
+          order: dayNumber * 100 + questionNumber,
+          orderNumber: questionNumber,
+          maxScore: cleanNumber(raw?.maxScore, 0, 0, 20),
+          topic: cleanText(raw?.topic, 120) || 'Toán Olympic',
+          content,
+          referenceSolution: '',
+          contentFormat: 'html-latex',
+          frontendAnchor: targetAnchor,
+          legacyIds: [`${targetAnchor}-day-${dayNumber}-Cau_${questionNumber}`],
+          allowSubmission: true,
+          allowAiEvaluation: true,
+          status,
+          version: 1,
+          updatedBy: session.username,
+          updatedAt: now
+        };
+        const saved = await db.collection('problems').findOneAndUpdate(
+          { contentKey },
+          { $set: problemDoc, $setOnInsert: { createdAt: now } },
+          { upsert: true, returnDocument: 'after' }
+        );
+        if (saved?._id) savedQuestions.push(saved);
+      }
+      if (!savedQuestions.length) return res.status(500).json({ success: false, error: 'Không thể lưu câu hỏi của đề thi' });
+
+      // Khi admin OCR lại đúng đề/ngày, loại các câu cũ không còn trong bản
+      // đã duyệt. Không đụng tới đề của ngày khác và không xóa submissions.
+      const keptContentKeys = savedQuestions.map(item => item.contentKey);
+      await db.collection('problems').deleteMany({
+        examId: String(savedExam._id),
+        contentKey: { $nin: keptContentKeys }
+      });
+
+      const sourceImageCount = cleanNumber(payload.sourceImageCount, 1, 1, 20);
+      await db.collection('exam_images').deleteMany({
+        examId: savedExam._id,
+        pageNumber: { $gt: sourceImageCount }
+      });
+
+      await Promise.all([
+        db.collection('exams').createIndex(
+          { examKey: 1 },
+          { unique: true, partialFilterExpression: { examKey: { $type: 'string' } } }
+        ),
+        db.collection('problems').createIndex({ contentKey: 1 }, { unique: true }),
+        db.collection('problems').createIndex({ examId: 1, orderNumber: 1 })
+      ]);
+      return res.status(201).json({
+        success: true,
+        item: { ...savedExam, problems: savedQuestions, problemCount: savedQuestions.length }
+      });
+    }
+
+    if (action === 'save_exam_image') {
+      const examId = objectId(cleanText(payload.examId, 80));
+      const pageNumber = Math.max(1, Math.min(20, Number(payload.pageNumber) || 1));
+      const image = cleanSolutionImage(payload.image);
+      if (!examId || !image) {
+        return res.status(image === null ? 413 : 400).json({ success: false, error: 'Ảnh đề thi không hợp lệ hoặc vượt quá 3 MB' });
+      }
+      const exam = await db.collection('exams').findOne({ _id: examId });
+      if (!exam) return res.status(404).json({ success: false, error: 'Không tìm thấy đề thi' });
+      const mimeType = image.slice(5, image.indexOf(';'));
+      await db.collection('exam_images').updateOne(
+        { examId, pageNumber },
+        { $set: { image, mimeType, updatedBy: session.username, updatedAt: now }, $setOnInsert: { createdAt: now } },
+        { upsert: true }
+      );
+      await db.collection('exams').updateOne(
+        { _id: examId },
+        { $set: { hasImages: true, sourceImageCount: Math.max(Number(exam.sourceImageCount) || 0, pageNumber), updatedAt: now } }
+      );
+      await db.collection('exam_images').createIndex({ examId: 1, pageNumber: 1 }, { unique: true });
+      return res.status(200).json({ success: true, item: { examId: String(examId), pageNumber, hasImage: true } });
     }
 
     if (action === 'save_problem') {
