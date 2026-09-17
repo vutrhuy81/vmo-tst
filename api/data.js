@@ -473,6 +473,11 @@ export default async function handler(req, res) {
         if (Object.prototype.hasOwnProperty.call(raw, 'referenceLinks')) {
           doc.referenceLinks = cleanReferenceLinks(raw.referenceLinks);
         }
+        if (Object.prototype.hasOwnProperty.call(raw, 'referenceSolutionVerified')) {
+          doc.referenceSolutionVerified = raw.referenceSolutionVerified === true && Boolean(doc.referenceSolution);
+          doc.referenceSolutionVerifiedBy = doc.referenceSolutionVerified ? session.username : '';
+          doc.referenceSolutionVerifiedAt = doc.referenceSolutionVerified ? now : null;
+        }
         const savedProblem = await db.collection('problems').findOneAndUpdate(
           { contentKey },
           { $set: doc, $setOnInsert: { createdAt: now } },
@@ -578,6 +583,7 @@ export default async function handler(req, res) {
       const id = objectId(cleanText(payload.id, 80));
       const content = cleanText(payload.content, 50000);
       const referenceSolution = cleanText(payload.referenceSolution, 100000);
+      const referenceSolutionVerified = payload.referenceSolutionVerified === true && Boolean(referenceSolution);
       const referenceLinks = cleanReferenceLinks(payload.referenceLinks);
       const changeNote = cleanText(payload.changeNote, 500);
       if (!id || !content) {
@@ -597,6 +603,7 @@ export default async function handler(req, res) {
         title: current.title,
         content: current.content || '',
         referenceSolution: current.referenceSolution || '',
+        referenceSolutionVerified: current.referenceSolutionVerified === true,
         referenceLinks: cleanReferenceLinks(current.referenceLinks),
         changeNote: changeNote || 'Bản tự động trước khi chỉnh sửa',
         action: 'edit',
@@ -606,7 +613,12 @@ export default async function handler(req, res) {
       const nextVersion = Number(current.version || 1) + 1;
       await db.collection('problems').updateOne(
         { _id: id },
-        { $set: { content, referenceSolution, referenceLinks, version: nextVersion, updatedBy: session.username, updatedAt: now } }
+        { $set: {
+          content, referenceSolution, referenceLinks, referenceSolutionVerified,
+          referenceSolutionVerifiedBy: referenceSolutionVerified ? session.username : '',
+          referenceSolutionVerifiedAt: referenceSolutionVerified ? now : null,
+          version: nextVersion, updatedBy: session.username, updatedAt: now
+        } }
       );
       await db.collection('content_revisions').createIndex({ problemId: 1, createdAt: -1 });
       return res.status(200).json({ success: true, item: { id: String(id), version: nextVersion } });
@@ -686,6 +698,8 @@ export default async function handler(req, res) {
         title: current.title,
         content: current.content || '',
         referenceSolution: current.referenceSolution || '',
+        referenceSolutionVerified: current.referenceSolutionVerified === true,
+        referenceLinks: cleanReferenceLinks(current.referenceLinks),
         changeNote: `Bản tự động trước khi khôi phục phiên bản ${revision.version}`,
         action: 'restore_backup',
         createdBy: session.username,
@@ -697,6 +711,9 @@ export default async function handler(req, res) {
         { $set: {
           content: revision.content || '',
           referenceSolution: revision.referenceSolution || '',
+          referenceSolutionVerified: revision.referenceSolutionVerified === true && Boolean(revision.referenceSolution),
+          referenceSolutionVerifiedBy: revision.referenceSolutionVerified === true ? session.username : '',
+          referenceSolutionVerifiedAt: revision.referenceSolutionVerified === true ? now : null,
           referenceLinks: cleanReferenceLinks(revision.referenceLinks),
           version: nextVersion,
           updatedBy: session.username,
