@@ -1490,6 +1490,23 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
     // JSON/OCR cũ đôi khi escape delimiter thành \\$...\\$.
     text = text.replace(/\\\$/g, '$');
 
+    // OCR có thể đặt cả văn bản tiếng Việt trong \\text{...} nhưng lại để
+    // nằm ngoài vùng toán học. MathJax chỉ xử lý \\text bên trong $...$;
+    // vì vậy loại lệnh bao ngoài này, đồng thời bảo toàn \\text bên trong
+    // các delimiter toán học.
+    const mathParts = [];
+    text = text.replace(/(\$\$[\s\S]*?\$\$|\\\[[\s\S]*?\\\]|\\\([\s\S]*?\\\)|\$(?:\\.|[^$])+\$)/g, match => {
+      mathParts.push(match);
+      return `___OCR_MATH_PART_${mathParts.length - 1}___`;
+    });
+    text = text.replace(/\\text(?:bf|it|rm)?\{((?:[^{}]|\{[^{}]*\})*)\}/g, '$1');
+    text = text
+      .replace(/\\(ne|le|ge|in|notin|to|Rightarrow|Leftrightarrow|cdot|times|pm)\b/g,
+        (_, command) => ({ ne: '≠', le: '≤', ge: '≥', in: '∈', notin: '∉', to: '→', Rightarrow: '⇒', Leftrightarrow: '⇔', cdot: '·', times: '×', pm: '±' }[command] || command))
+      .replace(/(\\frac\{[^{}]+\}\{[^{}]+\}|\\sqrt\{[^{}]+\})/g, '$$$1$$')
+      .replace(/([A-Za-z](?:_\{[^{}]+\}|\^[^{}]+|_[A-Za-z0-9]+|\^[A-Za-z0-9]+))/g, '$$$1$$');
+    text = text.replace(/___OCR_MATH_PART_(\d+)___/g, (_, index) => mathParts[Number(index)] || '');
+
     // Một số kết quả OCR cũ có dòng TeX thuần như \\boxed{...} không có
     // delimiter. Bọc các dòng này trước khi đưa vào MathJax để không hiển thị
     // mã LaTeX thô cho người dùng.
