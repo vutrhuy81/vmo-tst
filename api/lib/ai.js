@@ -43,7 +43,7 @@ export function parseBody(req) {
   try { return JSON.parse(req.body); } catch { return null; }
 }
 
-export async function generateJson({ contents, schema, systemInstruction, temperature = 0.15, models = ['gemini-2.5-flash', 'gemini-2.5-flash-lite'], timeoutMs = 22_000 }) {
+export async function generateJson({ contents, schema, systemInstruction, temperature = 0.15, models = ['gemini-3.5-flash-lite'], timeoutMs = 22_000 }) {
   if (!process.env.GEMINI_API_KEY) {
     const error = new Error('GEMINI_API_KEY chưa được cấu hình trên Vercel');
     error.code = 'AI_NOT_CONFIGURED';
@@ -54,9 +54,9 @@ export async function generateJson({ contents, schema, systemInstruction, temper
     client = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY });
   }
 
-  // Dùng các endpoint ổn định, hỗ trợ ảnh và structured JSON. Flash-Lite là
-  // phương án dự phòng nhanh khi Flash quá tải hoặc phản hồi chậm.
-  const modelList = Array.isArray(models) && models.length ? models.map(value => text(value, 80)).filter(Boolean).slice(0, 3) : ['gemini-2.5-flash', 'gemini-2.5-flash-lite'];
+  // Dùng model hiện hành hỗ trợ ảnh và structured JSON. Có thể ghi đè model
+  // qua tham số `models` ở từng chức năng khi cần.
+  const modelList = Array.isArray(models) && models.length ? models.map(value => text(value, 80)).filter(Boolean).slice(0, 3) : ['gemini-3.5-flash-lite'];
   const requestTimeout = Math.max(5_000, Math.min(45_000, Number(timeoutMs) || 22_000));
   let lastError;
   for (const model of modelList) {
