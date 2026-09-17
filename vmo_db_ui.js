@@ -3220,9 +3220,13 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
     if (!list.children.length) return;
     content.appendChild(list);
     button.onclick = () => {
-      const expanded = button.getAttribute('aria-expanded') === 'true';
-      button.setAttribute('aria-expanded', String(!expanded));
-      content.classList.toggle('show', !expanded);
+      if (typeof window.toggleSolution === 'function') {
+        window.toggleSolution(button);
+        return;
+      }
+      const open = content.style.display !== 'none' && getComputedStyle(content).display !== 'none';
+      content.style.display = open ? 'none' : 'block';
+      button.setAttribute('aria-expanded', open ? 'false' : 'true');
     };
     box.append(button, content);
     problem.appendChild(box);
