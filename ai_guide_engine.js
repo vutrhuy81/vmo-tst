@@ -635,10 +635,39 @@
     return hash;
   }
 
+  function normalizeBareGuideMath(value) {
+    const protectedMath = [];
+    let text = String(value || '')
+      .replace(/[\u200B-\u200D\uFEFF]/g, '')
+      .replace(/(\$\$[\s\S]*?\$\$|\\\[[\s\S]*?\\\]|\\\([\s\S]*?\\\)|\$(?:\\.|[^$\n])+\$)/g, match => {
+        protectedMath.push(match);
+        return `\uE100${protectedMath.length - 1}\uE101`;
+      });
+
+    // Gemini đôi khi trả TeX đúng cú pháp nhưng quên delimiter MathJax.
+    // Bọc nguyên dòng đối với các phép biến đổi/công thức độc lập.
+    text = text.split('\n').map(line => {
+      const trimmed = line.trim();
+      if (!trimmed || /\uE100\d+\uE101/.test(trimmed)) return line;
+      const hasLatex = /\\(?:frac|sqrt|sum|prod|lim|tag|infty|to|cdot|times|ge|le|ne|in|forall|Rightarrow|Leftrightarrow)\b/.test(trimmed);
+      const startsAsMath = /^(?:\\(?:frac|sqrt|sum|prod|lim|boxed)\b|[A-Za-z](?:_\{?[^\s=]+\}?|\^\{?[^\s=]+\}?)?\s*(?:=|>|<|\\(?:ge|le|ne)\b))/.test(trimmed);
+      const hasRelation = /(?:=|>|<|\\tag\{|\\to\b|→|≥|≤|≠)/.test(trimmed);
+      if ((hasLatex && hasRelation) || startsAsMath) return `\\[${trimmed}\\]`;
+      return line;
+    }).join('\n');
+
+    // Bọc các công thức ngắn nằm trong câu văn, ví dụ u_n>0, L>=1/2.
+    text = text.replace(/(^|[\s(,;:])((?:\d+\/)?[A-Za-z](?:_\{[^{}]+\}|_[A-Za-z0-9]+|\^\{[^{}]+\}|\^[A-Za-z0-9]+)?(?:\([^\n)]*\))?(?:\s*(?:=|>|<|≥|≤|≠|→|\\to\b|\\ge\b|\\le\b|\\ne\b)\s*[+\-]?(?:\d+\/)?[A-Za-z0-9](?:[A-Za-z0-9_{}^+\-*/.]|\\[A-Za-z]+)*)+)/g,
+      (_, prefix, formula) => `${prefix}$${formula.trim()}$`);
+
+    return text.replace(/\uE100(\d+)\uE101/g, (_, index) => protectedMath[Number(index)] || '');
+  }
+
   function formatMarkdownToHtml(text) {
     if (!text) return '';
     // Nếu text đã chứa thẻ HTML
     if (text.includes('<p>') || text.includes('<div>') || text.includes('<br/>') || text.includes('<b>')) return text;
+    text = normalizeBareGuideMath(text);
     // Chuyển markdown **bold** thành <strong>
     let formatted = text
       .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
