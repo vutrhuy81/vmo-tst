@@ -263,6 +263,10 @@ export async function migrateTstReferenceLinks(sourceMap = {}) {
   return normalize(await mutate('migrate_tst_reference_links', { sourceMap }));
 }
 
+export async function updateProblemReferenceLinks(contentKey, referenceLinks = []) {
+  return normalize(await mutate('update_problem_reference_links', { contentKey, referenceLinks }));
+}
+
 export async function restoreCatalogRevision(revisionId) {
   return normalize(await mutate('restore_catalog_revision', { revisionId }));
 }
@@ -379,6 +383,7 @@ const VMODataService = Object.freeze({
   getContentRevisions,
   updateCatalogContent,
   migrateTstReferenceLinks,
+  updateProblemReferenceLinks,
   restoreCatalogRevision,
   saveProblem,
   submitSolution,

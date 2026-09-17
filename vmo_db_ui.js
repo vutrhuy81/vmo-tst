@@ -3191,6 +3191,111 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
     return card;
   }
 
+  function ensureReferenceLinksModal() {
+    if (document.getElementById('referenceLinksAdminModal')) return;
+    const modal = document.createElement('div');
+    modal.id = 'referenceLinksAdminModal';
+    modal.className = 'vmo-modal-overlay';
+    modal.style.zIndex = '10040';
+    modal.innerHTML = `
+      <div class="vmo-modal-container" style="max-width:780px;max-height:92vh;display:flex;flex-direction:column;">
+        <div class="vmo-modal-header" style="background:#155e75;color:white;">
+          <div class="vmo-modal-title" style="color:white;">🔗 Quản lý lời giải tham khảo</div>
+          <button type="button" class="vmo-modal-close" onclick="closeReferenceLinksManager()" style="color:white;">✕</button>
+        </div>
+        <div class="vmo-modal-body" style="overflow:auto;">
+          <div id="referenceLinksProblemKey" style="padding:8px 10px;background:#f1f5f9;border-radius:6px;font-family:monospace;font-size:.8rem;margin-bottom:10px;"></div>
+          <div id="referenceLinksRows"></div>
+          <button type="button" onclick="addReferenceLinkRow()" style="padding:7px 11px;border:1px solid #0891b2;border-radius:6px;background:#ecfeff;color:#155e75;font-weight:700;cursor:pointer;">＋ Thêm link</button>
+          <div style="display:flex;justify-content:flex-end;gap:8px;margin-top:14px;">
+            <button type="button" onclick="closeReferenceLinksManager()" style="padding:7px 12px;border:1px solid #cbd5e1;border-radius:6px;background:white;">Hủy</button>
+            <button type="button" onclick="saveReferenceLinksManager()" style="padding:7px 14px;border:0;border-radius:6px;background:#0e7490;color:white;font-weight:700;">Lưu vào MongoDB</button>
+          </div>
+        </div>
+      </div>`;
+    modal.addEventListener('click', event => { if (event.target === modal) window.closeReferenceLinksManager(); });
+    document.body.appendChild(modal);
+  }
+
+  window.addReferenceLinkRow = function(link = {}) {
+    const rows = document.getElementById('referenceLinksRows');
+    if (!rows) return;
+    const row = document.createElement('div');
+    row.className = 'reference-link-edit-row';
+    row.style.cssText = 'display:grid;grid-template-columns:minmax(180px,1fr) minmax(260px,1.5fr) auto;gap:7px;margin-bottom:8px;align-items:center;';
+    const label = document.createElement('input');
+    label.className = 'reference-link-label';
+    label.maxLength = 300;
+    label.placeholder = 'Nhãn nguồn tham khảo';
+    label.value = link.label || '';
+    label.style.cssText = 'min-width:0;padding:8px;border:1px solid #cbd5e1;border-radius:6px;';
+    const url = document.createElement('input');
+    url.className = 'reference-link-url';
+    url.type = 'url';
+    url.maxLength = 2000;
+    url.placeholder = 'https://...';
+    url.value = link.url || '';
+    url.style.cssText = label.style.cssText;
+    const remove = document.createElement('button');
+    remove.type = 'button';
+    remove.textContent = '🗑️ Xóa';
+    remove.style.cssText = 'padding:7px 9px;border:1px solid #fecaca;border-radius:6px;background:#fff1f2;color:#b91c1c;cursor:pointer;';
+    remove.onclick = () => row.remove();
+    row.append(label, url, remove);
+    rows.appendChild(row);
+  };
+
+  window.openReferenceLinksManager = function(contentKey) {
+    if (!requireAdminUiAction()) return;
+    ensureReferenceLinksModal();
+    const modal = document.getElementById('referenceLinksAdminModal');
+    modal.dataset.contentKey = contentKey;
+    document.getElementById('referenceLinksProblemKey').textContent = `Câu hỏi: ${contentKey}`;
+    document.getElementById('referenceLinksRows').replaceChildren();
+    const links = window.mongoProblemReferenceLinks?.get(contentKey) || [];
+    links.forEach(link => window.addReferenceLinkRow(link));
+    if (!links.length) window.addReferenceLinkRow();
+    modal.classList.add('active');
+    modal.style.display = 'flex';
+  };
+
+  window.closeReferenceLinksManager = function() {
+    const modal = document.getElementById('referenceLinksAdminModal');
+    if (modal) { modal.classList.remove('active'); modal.style.display = 'none'; }
+  };
+
+  window.saveReferenceLinksManager = async function() {
+    if (!requireAdminUiAction()) return;
+    const modal = document.getElementById('referenceLinksAdminModal');
+    const contentKey = modal?.dataset.contentKey || '';
+    const links = Array.from(document.querySelectorAll('#referenceLinksRows .reference-link-edit-row')).map(row => ({
+      label: row.querySelector('.reference-link-label')?.value.trim() || '',
+      url: row.querySelector('.reference-link-url')?.value.trim() || ''
+    })).filter(link => link.label || link.url);
+    const invalid = links.find(link => !link.label || !/^https?:\/\//i.test(link.url));
+    if (invalid) return showToast('Mỗi nguồn phải có nhãn và URL bắt đầu bằng http:// hoặc https://.', false);
+    try {
+      const updated = await window.VMODataService.updateProblemReferenceLinks(contentKey, links);
+      window.mongoProblemReferenceLinks.set(contentKey, updated?.referenceLinks || links);
+      window.closeReferenceLinksManager();
+      applyMongoReferenceLinks();
+      showToast(`Đã lưu ${links.length} link tham khảo vào MongoDB.`, true);
+    } catch (error) { showToast(error?.message || 'Không lưu được nguồn tham khảo.', false); }
+  };
+
+  function ensureReferenceLinksAdminButton(problem) {
+    if (!isCurrentUserAdmin() || problem.querySelector('.btn-manage-reference-links')) return;
+    const contentKey = problem.dataset.contentKey;
+    if (!contentKey) return;
+    const button = document.createElement('button');
+    button.type = 'button';
+    button.className = 'btn-manage-reference-links';
+    button.textContent = '⚙️ Quản lý nguồn';
+    button.style.cssText = 'margin-left:6px;padding:4px 8px;border:1px solid #67e8f9;border-radius:6px;background:#ecfeff;color:#155e75;font-size:.75rem;cursor:pointer;';
+    button.onclick = () => window.openReferenceLinksManager(contentKey);
+    (problem.querySelector('.problem-header') || problem).appendChild(button);
+  }
+
   function renderMongoReferenceLinks(problem, links) {
     if (!problem || !Array.isArray(links) || !links.length) return;
     problem.querySelectorAll('.source-solution-box').forEach(node => node.remove());
@@ -3235,8 +3340,11 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
   function applyMongoReferenceLinks(root = document) {
     const sourceMap = window.mongoProblemReferenceLinks || new Map();
     root.querySelectorAll?.('.problem-item[data-content-key], .examplebox[data-content-key]').forEach(problem => {
-      const links = sourceMap.get(problem.dataset.contentKey);
+      const contentKey = problem.dataset.contentKey;
+      const links = sourceMap.get(contentKey);
       if (links?.length) renderMongoReferenceLinks(problem, links);
+      else if (sourceMap.has(contentKey)) problem.querySelectorAll('.source-solution-box[data-reference-source="mongodb"]').forEach(node => node.remove());
+      ensureReferenceLinksAdminButton(problem);
     });
   }
 
