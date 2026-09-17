@@ -1487,6 +1487,20 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
 
     // 1. Loại bỏ các ký tự vô hình/zero-width và chuẩn hóa khoảng trắng
     text = text.replace(/[\u200B-\u200D\uFEFF]/g, '').replace(/\u00A0/g, ' ');
+    // JSON/OCR cũ đôi khi escape delimiter thành \\$...\\$.
+    text = text.replace(/\\\$/g, '$');
+
+    // Một số kết quả OCR cũ có dòng TeX thuần như \\boxed{...} không có
+    // delimiter. Bọc các dòng này trước khi đưa vào MathJax để không hiển thị
+    // mã LaTeX thô cho người dùng.
+    text = text.split('\n').map(line => {
+      const trimmed = line.trim();
+      if (!trimmed || /^\$\$|^\$|^\\\[|^\\\(/.test(trimmed)) return line;
+      if (/^\\(?:boxed|fbox|begin|end|frac|sqrt|sum|prod|lim|left|right|text)\b/.test(trimmed)) {
+        return `$$\n${trimmed}\n$$`;
+      }
+      return line;
+    }).join('\n');
 
     // 2. Chuẩn hóa môi trường align/align* -> aligned để tương thích tuyệt đối với MathJax 3
     text = text.replace(/\\begin\{align\*?\}/g, '\\begin{aligned}');
@@ -1549,6 +1563,7 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
     }
 
     containerEl.innerHTML = safeHtml;
+    containerEl.classList.add('tex2jax_process');
 
     // Kích hoạt MathJax typeset an toàn
     const runTypeset = () => {
