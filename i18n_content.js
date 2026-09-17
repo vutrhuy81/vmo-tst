@@ -6,7 +6,7 @@
  * through the authenticated backend, while preserving MathJax/LaTeX exactly.
  */
 (() => {
-  const CACHE_KEY = 'vmo_i18n_math_cache_v1';
+  const CACHE_KEY = 'vmo_i18n_math_cache_v2';
   const CACHE_LIMIT = 2500;
   const MAX_BATCH_ITEMS = 6;
   const MAX_BATCH_CHARS = 10_000;
@@ -45,7 +45,7 @@
 
   function hashText(value) {
     let hash = 2166136261;
-    const input = `v1\n${value}`;
+    const input = `v2\n${value}`;
     for (let index = 0; index < input.length; index += 1) {
       hash ^= input.charCodeAt(index);
       hash = Math.imul(hash, 16777619);
@@ -56,6 +56,10 @@
   function containsVietnamese(value) {
     return /[ăâđêôơưĂÂĐÊÔƠƯáàảãạấầẩẫậắằẳẵặéèẻẽẹếềểễệíìỉĩịóòỏõọốồổỗộớờởỡợúùủũụứừửữựýỳỷỹỵ]/i.test(value)
       || /\b(?:cho|chứng minh|tìm|bài toán|câu|ngày thi|lời giải|thỏa mãn|giả sử|suy ra|do đó|với mọi)\b/i.test(value);
+  }
+
+  function hasUntranslatedVietnamese(value) {
+    return /\b(?:cho|chứng minh|tìm tất cả|tính giới hạn|thỏa mãn|với mọi|suy ra|do đó|giả sử|bài toán|lời giải|câu hỏi|ngày thứ|nộp bài|xem lời giải|thời gian|tổng điểm)\b/i.test(String(value || ''));
   }
 
   function protectMath(value) {
@@ -228,7 +232,7 @@
     }
     const byId = new Map((payload.translations || []).map(item => [item.id, item.text]));
     const results = batch.map((entry, index) => ({ entry, translated: byId.get(`item-${index}`) || '' }));
-    if (results.some(result => !result.translated)) {
+    if (results.some(result => !result.translated || hasUntranslatedVietnamese(result.translated))) {
       const error = new Error('INCOMPLETE_TRANSLATION_BATCH');
       error.code = 'INCOMPLETE_TRANSLATION_BATCH';
       throw error;
@@ -260,7 +264,7 @@
 
     entries.forEach(entry => {
       const cached = cache[entry.key];
-      if (cached && sameMathTokens(cached, entry.fragments.length)) {
+      if (cached && sameMathTokens(cached, entry.fragments.length) && !hasUntranslatedVietnamese(cached)) {
         entry.nodes.forEach(node => applyTranslated(node, cached, entry.fragments));
       } else {
         pending.push(entry);
@@ -280,7 +284,7 @@
       for (const batch of makeBatches(pending)) {
         const results = await requestBatchAdaptive(batch);
         results.forEach(({ entry, translated }) => {
-          if (!translated || !sameMathTokens(translated, entry.fragments.length)) return;
+          if (!translated || !sameMathTokens(translated, entry.fragments.length) || hasUntranslatedVietnamese(translated)) return;
           cache[entry.key] = translated;
           cacheDirty = true;
           if (thisRun === runId && window.currentLang === 'en') {
