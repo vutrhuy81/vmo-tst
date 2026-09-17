@@ -686,11 +686,20 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
         body: JSON.stringify(payload)
       });
 
+      let json = null;
+      try {
+        json = await res.json();
+      } catch (parseError) {
+        // Phản hồi không phải JSON (ví dụ lỗi hạ tầng Vercel).
+      }
       if (!res.ok) {
-        throw new Error(`Máy chủ phản hồi mã lỗi HTTP ${res.status}`);
+        const issues = Array.isArray(json?.quality?.criticalIssues)
+          ? json.quality.criticalIssues.filter(Boolean).slice(0, 3)
+          : [];
+        const details = issues.length ? `\n• ${issues.join('\n• ')}` : '';
+        throw new Error(`${json?.error || `Máy chủ phản hồi mã lỗi HTTP ${res.status}`}${details}`);
       }
 
-      const json = await res.json();
       if (!json || !json.data) {
         throw new Error(json?.message || 'Không nhận được dữ liệu đánh giá từ máy chủ.');
       }
