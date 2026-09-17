@@ -1497,7 +1497,7 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
     const mathParts = [];
     text = text.replace(/(\$\$[\s\S]*?\$\$|\\\[[\s\S]*?\\\]|\\\([\s\S]*?\\\)|\$(?:\\.|[^$])+\$)/g, match => {
       mathParts.push(match);
-      return `___OCR_MATH_PART_${mathParts.length - 1}___`;
+      return `\uE000${mathParts.length - 1}\uE001`;
     });
     text = text.replace(/\\text(?:bf|it|rm)?\{((?:[^{}]|\{[^{}]*\})*)\}/g, '$1');
     text = text
@@ -1505,7 +1505,7 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
         (_, command) => ({ ne: '≠', le: '≤', ge: '≥', in: '∈', notin: '∉', to: '→', Rightarrow: '⇒', Leftrightarrow: '⇔', cdot: '·', times: '×', pm: '±' }[command] || command))
       .replace(/(\\frac\{[^{}]+\}\{[^{}]+\}|\\sqrt\{[^{}]+\})/g, '$$$1$$')
       .replace(/([A-Za-z](?:_\{[^{}]+\}|\^[^{}]+|_[A-Za-z0-9]+|\^[A-Za-z0-9]+))/g, '$$$1$$');
-    text = text.replace(/___OCR_MATH_PART_(\d+)___/g, (_, index) => mathParts[Number(index)] || '');
+    text = text.replace(/\uE000(\d+)\uE001/g, (_, index) => mathParts[Number(index)] || '');
 
     // Một số kết quả OCR cũ có dòng TeX thuần như \\boxed{...} không có
     // delimiter. Bọc các dòng này trước khi đưa vào MathJax để không hiển thị
