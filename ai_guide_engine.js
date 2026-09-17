@@ -479,7 +479,8 @@
           problemTitle,
           problemContent,
           topic: problemTopic,
-          examTitle
+          examTitle,
+          lang: window.currentLang === 'en' ? 'en' : 'vi'
         })
       });
 

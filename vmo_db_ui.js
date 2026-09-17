@@ -640,6 +640,7 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
         problemContent: window.currentSubmissionData?.problemContent || '',
         topic: window.currentSubmissionData?.topic || '',
         examTitle: window.currentSubmissionData?.examTitle || '',
+        lang: window.currentLang === 'en' ? 'en' : 'vi',
         solutionText: text,
         solutionImage: image
       };
@@ -1833,7 +1834,7 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
                   ${imageBtn}
                 </div>
               </div>
-              <div style="color:#475569; font-size:0.8rem; font-family:monospace; white-space:pre-wrap;">${preview}</div>
+              <div data-no-i18n="true" style="color:#475569; font-size:0.8rem; font-family:monospace; white-space:pre-wrap;">${preview}</div>
             </div>
           `;
         }).join('');
@@ -2667,7 +2668,7 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
                 📅 Thời gian: ${escapeHtmlText(dateStr)} | 👤 Tài khoản: ${escapeHtmlText(s.username || s.authorEmail || s.userId || 'Ẩn danh')}
                 ${score ? ` | 🎯 Điểm AI: <strong>${escapeHtmlText(score)}</strong>` : ''}
               </div>
-              <div style="background:#ffffff; border:1px solid #e2e8f0; border-radius:6px; padding:8px; font-family:monospace; font-size:0.85rem; color:#334155; white-space:pre-wrap;">${escapeHtmlText(preview)}</div>
+              <div data-no-i18n="true" style="background:#ffffff; border:1px solid #e2e8f0; border-radius:6px; padding:8px; font-family:monospace; font-size:0.85rem; color:#334155; white-space:pre-wrap;">${escapeHtmlText(preview)}</div>
               ${(evaluationBtn || imageBtn || deleteBtn) ? `
                 <div style="display:flex; flex-wrap:wrap; gap:6px; margin-top:8px;">
                   ${evaluationBtn}

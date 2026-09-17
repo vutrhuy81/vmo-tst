@@ -15,6 +15,7 @@
       'heroBadge': '🇻🇳 VMO DA NANG 2026–2027 · ADVANCED MATHEMATICAL OLYMPIAD',
       'heroTitle': 'NATIONAL MATHEMATICAL OLYMPIAD TEAM SELECTION & TRAINING',
       'heroAuthor': 'Compiled by Tran Hoang Kien.',
+      'heroSchool': 'Phan Chau Trinh High School — Da Nang City.',
       'statChapters': 'Chapters',
       'statSections': 'Theory Sections',
       'statExamples': 'Solved Examples',
@@ -127,7 +128,15 @@
       'loginPasswordPlaceholder': 'Enter your password',
       'loginRemember': 'Remember login',
       'loginBtn': 'LOG IN TO SYSTEM',
-      'loginFooter': 'Internal distribution - Da Nang Math Olympiad Team 2026–2027'
+      'loginFooter': '© 2026–2027 National Mathematical Olympiad Training Data System',
+      'loginCompiler': 'Compiled by Tran Hoang Kien — Phan Chau Trinh High School, Da Nang',
+      'loginAddress': '154 Le Loi Street — Hai Chau District — Da Nang',
+      'bootstrapTitle': 'Create the First Administrator',
+      'bootstrapDesc': 'The database contains no accounts. This one-time form is disabled permanently after the first administrator is created.',
+      'bootstrapFullName': 'Full name',
+      'bootstrapUsername': 'Administrator username',
+      'bootstrapPassword': 'Administrator password',
+      'bootstrapCreate': 'Create the first administrator'
     }
   };
 
@@ -349,17 +358,19 @@
     const heroH1 = document.querySelector('.hero h1');
     if (heroH1) setNodeText(heroH1, 'ÔN LUYỆN CHỌN ĐỘI TUYỂN HỌC SINH GIỎI QUỐC GIA MÔN TOÁN', UI_TRANSLATIONS.en.heroTitle, isEn);
 
-    const heroP = document.querySelector('.hero p');
-    if (heroP) setNodeText(heroP, 'Người biên soạn - Trần Hoàng Kiên.', UI_TRANSLATIONS.en.heroAuthor, isEn);
+    const heroParagraphs = document.querySelectorAll('.hero > p');
+    if (heroParagraphs[0]) setNodeText(heroParagraphs[0], 'Người biên soạn - Trần Hoàng Kiên.', UI_TRANSLATIONS.en.heroAuthor, isEn);
+    if (heroParagraphs[1]) setNodeText(heroParagraphs[1], 'Trường THPT - Phan Châu Trình - Tp Đà Nẵng.', UI_TRANSLATIONS.en.heroSchool, isEn);
 
     // Thống kê Hero Chips
     const statLabels = document.querySelectorAll('.hero-stats .stat-chip .label');
     const heroStatEn = [
-      UI_TRANSLATIONS.en.statChapters,
+      'Provincial/City Exam Sets',
+      'Da Nang–Quang Nam Exams',
+      'Material Chapters',
       UI_TRANSLATIONS.en.statSections,
       UI_TRANSLATIONS.en.statExamples,
-      UI_TRANSLATIONS.en.statMocks,
-      UI_TRANSLATIONS.en.statArchive
+      UI_TRANSLATIONS.en.statMocks
     ];
     statLabels.forEach((el, idx) => {
       if (heroStatEn[idx]) {
@@ -605,20 +616,54 @@
     const passwordInput = document.getElementById('password');
     if (passwordInput) passwordInput.placeholder = isEn ? UI_TRANSLATIONS.en.loginPasswordPlaceholder : 'Nhập mật khẩu';
 
+    const togglePassword = document.getElementById('btnTogglePw');
+    if (togglePassword) togglePassword.title = isEn ? 'Show/Hide password' : 'Hiện/Ẩn mật khẩu';
+
     const rememberLabelSpan = document.querySelector('.remember-label span');
     if (rememberLabelSpan) setNodeText(rememberLabelSpan, 'Ghi nhớ đăng nhập', UI_TRANSLATIONS.en.loginRemember, isEn);
 
     const btnLoginSpan = document.querySelector('#btnLogin span:first-child');
     if (btnLoginSpan) setNodeText(btnLoginSpan, 'Đăng nhập hệ thống', UI_TRANSLATIONS.en.loginBtn, isEn);
 
-    const loginFooter = document.querySelector('.login-footer p');
-    if (loginFooter) setNodeText(loginFooter, 'Tài liệu chuyên đề - Đội tuyển Học sinh Giỏi Toán Đà Nẵng 2026–2027', UI_TRANSLATIONS.en.loginFooter, isEn);
+    const loginFooterLines = document.querySelectorAll('.login-footer p');
+    if (loginFooterLines[0]) setNodeText(loginFooterLines[0], '© 2026 - 2027 Hệ thống Dữ liệu Bồi dưỡng Học sinh Giỏi Toán Quốc gia', UI_TRANSLATIONS.en.loginFooter, isEn);
+    if (loginFooterLines[1]) setNodeText(loginFooterLines[1], 'Biên soạn: Trần Hoàng Kiên - THPT Phan Châu Trinh - Tp Đà Nẵng', UI_TRANSLATIONS.en.loginCompiler, isEn);
+    if (loginFooterLines[2]) setNodeText(loginFooterLines[2], '154 Lê Lợi - Hải Châu - Tp Đà Nẵng', UI_TRANSLATIONS.en.loginAddress, isEn);
+
+    const bootstrapTitle = document.querySelector('#bootstrapPanel h2');
+    if (bootstrapTitle) setNodeText(bootstrapTitle, 'Khởi tạo quản trị viên đầu tiên', UI_TRANSLATIONS.en.bootstrapTitle, isEn);
+    const bootstrapDesc = document.querySelector('#bootstrapPanel > p');
+    if (bootstrapDesc) setNodeText(bootstrapDesc, 'Database chưa có tài khoản. Biểu mẫu này chỉ hoạt động một lần và sẽ tự khóa sau khi quản trị viên được tạo.', UI_TRANSLATIONS.en.bootstrapDesc, isEn);
+    const bootstrapFullNameLabel = document.querySelector('label[for="bootstrapFullName"]');
+    if (bootstrapFullNameLabel) setNodeText(bootstrapFullNameLabel, 'Họ và tên', UI_TRANSLATIONS.en.bootstrapFullName, isEn);
+    const bootstrapUsernameLabel = document.querySelector('label[for="bootstrapUsername"]');
+    if (bootstrapUsernameLabel) setNodeText(bootstrapUsernameLabel, 'Tên đăng nhập quản trị', UI_TRANSLATIONS.en.bootstrapUsername, isEn);
+    const bootstrapPasswordLabel = document.querySelector('label[for="bootstrapPassword"]');
+    if (bootstrapPasswordLabel) setNodeText(bootstrapPasswordLabel, 'Mật khẩu quản trị', UI_TRANSLATIONS.en.bootstrapPassword, isEn);
+    const bootstrapFullNameInput = document.getElementById('bootstrapFullName');
+    if (bootstrapFullNameInput) bootstrapFullNameInput.placeholder = isEn ? 'Enter full name' : 'Nhập họ và tên';
+    const bootstrapUsernameInput = document.getElementById('bootstrapUsername');
+    if (bootstrapUsernameInput) bootstrapUsernameInput.placeholder = isEn ? 'At least 3 characters' : 'Tối thiểu 3 ký tự';
+    const bootstrapPasswordInput = document.getElementById('bootstrapPassword');
+    if (bootstrapPasswordInput) bootstrapPasswordInput.placeholder = isEn ? 'At least 8 characters' : 'Tối thiểu 8 ký tự';
+    const bootstrapButton = document.querySelector('#btnBootstrap span');
+    if (bootstrapButton) setNodeText(bootstrapButton, 'Tạo quản trị viên đầu tiên', UI_TRANSLATIONS.en.bootstrapCreate, isEn);
+
+    if (document.querySelector('.login-card')) {
+      document.title = isEn
+        ? 'Login | VMO Da Nang 2026–2027 & National TST'
+        : 'Đăng nhập | Ôn luyện VMO Đà Nẵng 2026 - 2027 & TST Toàn Quốc';
+    }
 
     // 11. Duyệt qua từ điển cụm từ để dịch các tiêu đề, đề mục và nội dung
     translateDocumentText(isEn);
 
     // 12. Bắn sự kiện thay đổi ngôn ngữ để các engine khác đồng bộ
     window.dispatchEvent(new CustomEvent('langchange', { detail: { lang } }));
+
+    // Dịch toàn bộ phần nội dung dài/dữ liệu động sau khi các module khác đã
+    // đồng bộ nút và modal. Công thức LaTeX được i18n_content.js bảo vệ riêng.
+    window.VMOContentI18n?.apply(lang);
   }
 
   // Thuật toán quét và dịch các khối văn bản chuyên môn
@@ -644,7 +689,7 @@
         // Bỏ qua nếu có công thức MathJax phức tạp đang render
         if (el.querySelector('.MathJax') || el.querySelector('mjx-container')) return;
 
-        if (!el._origViText) {
+        if (el._origViText === undefined) {
           el._origViText = el.textContent.trim();
         }
 
@@ -654,7 +699,7 @@
 
           for (const [viPhrase, enPhrase] of PHRASE_DICTIONARY) {
             if (currentText === viPhrase) {
-              el.textContent = enPhrase;
+              currentText = enPhrase;
               matched = true;
               break;
             } else if (currentText.includes(viPhrase)) {
@@ -678,6 +723,12 @@
     if (lang !== 'vi' && lang !== 'en') return;
     localStorage.setItem('vmo_lang', lang);
     applyLanguage(lang);
+  };
+
+  // Nội dung TST/History/MongoDB được chèn động khi đổi tab. Các module khác
+  // gọi hàm này để áp dụng lại đúng ngôn ngữ hiện tại.
+  window.applyCurrentLanguage = function() {
+    applyLanguage(window.currentLang || currentLang);
   };
 
   // Tự động chèn thanh gạt ngôn ngữ nếu chưa có

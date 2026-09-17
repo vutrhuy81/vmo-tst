@@ -454,8 +454,12 @@
     const bootstrapForm = document.getElementById('bootstrapForm');
     const btnBootstrap = document.getElementById('btnBootstrap');
 
-    function showAlert(msg, isSuccess = false) {
-      alertBox.textContent = msg;
+    function loginText(vietnamese, english) {
+      return localStorage.getItem('vmo_lang') === 'en' ? english : vietnamese;
+    }
+
+    function showAlert(msg, isSuccess = false, englishMessage = '') {
+      alertBox.textContent = localStorage.getItem('vmo_lang') === 'en' && englishMessage ? englishMessage : msg;
       alertBox.className = 'alert-box ' + (isSuccess ? 'alert-success' : 'alert-error');
       alertBox.style.display = 'flex';
     }
@@ -474,31 +478,31 @@
       const password = document.getElementById('bootstrapPassword').value;
 
       if (username.length < 3 || password.length < 8) {
-        showAlert('Tên đăng nhập phải có ít nhất 3 ký tự và mật khẩu ít nhất 8 ký tự.');
+        showAlert('Tên đăng nhập phải có ít nhất 3 ký tự và mật khẩu ít nhất 8 ký tự.', false, 'The username must contain at least 3 characters and the password at least 8 characters.');
         return;
       }
 
       btnBootstrap.disabled = true;
-      btnBootstrap.textContent = 'Đang khởi tạo...';
+      btnBootstrap.textContent = loginText('Đang khởi tạo...', 'Creating administrator…');
       const result = await VMOAuth.bootstrapAdmin(fullName, username, password, true);
       if (result.success) {
-        showAlert('✅ Đã tạo quản trị viên. Đang chuyển vào hệ thống...', true);
+        showAlert('✅ Đã tạo quản trị viên. Đang chuyển vào hệ thống...', true, '✅ Administrator created. Redirecting to the system…');
         setTimeout(() => window.location.replace('index.html'), 500);
         return;
       }
 
-      showAlert(result.message || 'Không thể tạo quản trị viên.');
+      showAlert(result.message || 'Không thể tạo quản trị viên.', false, 'Unable to create the administrator.');
       btnBootstrap.disabled = false;
-      btnBootstrap.textContent = 'Tạo quản trị viên đầu tiên';
+      btnBootstrap.textContent = loginText('Tạo quản trị viên đầu tiên', 'Create the first administrator');
     });
 
     // Kiểm tra thông báo lý do chuyển hướng (ví dụ tự động đăng xuất sau 5 phút)
     const urlParams = new URLSearchParams(window.location.search);
     const reason = urlParams.get('reason');
     if (reason === 'idle_timeout') {
-      showAlert('⏱️ Phiên làm việc đã tự động kết thúc sau 5 phút không hoạt động để bảo vệ an toàn tài khoản. Vui lòng đăng nhập lại.');
+      showAlert('⏱️ Phiên làm việc đã tự động kết thúc sau 5 phút không hoạt động để bảo vệ an toàn tài khoản. Vui lòng đăng nhập lại.', false, '⏱️ Your session ended automatically after 5 minutes of inactivity. Please sign in again.');
     } else if (reason === 'user_action') {
-      showAlert('✅ Bạn đã đăng xuất thành công khỏi hệ thống.', true);
+      showAlert('✅ Bạn đã đăng xuất thành công khỏi hệ thống.', true, '✅ You have signed out successfully.');
     }
 
     // Toggle show/hide password
@@ -516,30 +520,30 @@
       const remember = rememberMeCheckbox.checked;
 
       if (!u || !p) {
-        showAlert('Vui lòng nhập đầy đủ tên đăng nhập và mật khẩu!');
+        showAlert('Vui lòng nhập đầy đủ tên đăng nhập và mật khẩu!', false, 'Please enter both your username and password.');
         return;
       }
 
       btnLogin.disabled = true;
-      btnLogin.innerHTML = '<span>Đang xác thực...</span>';
+      btnLogin.innerHTML = `<span>${loginText('Đang xác thực...', 'Authenticating…')}</span>`;
 
       try {
         const res = await VMOAuth.login(u, p, remember);
         if (res.success) {
-          showAlert('✅ Đăng nhập thành công! Đang chuyển hướng vào trang chính...', true);
+          showAlert('✅ Đăng nhập thành công! Đang chuyển hướng vào trang chính...', true, '✅ Login successful. Redirecting to the main page…');
           setTimeout(() => {
             window.location.replace('index.html');
           }, 400);
         } else {
-          showAlert(res.message || 'Tên đăng nhập hoặc mật khẩu không đúng!');
+          showAlert(res.message || 'Tên đăng nhập hoặc mật khẩu không đúng!', false, 'Incorrect username or password.');
           btnLogin.disabled = false;
-          btnLogin.innerHTML = '<span>Đăng nhập hệ thống</span><span>→</span>';
+          btnLogin.innerHTML = `<span>${loginText('Đăng nhập hệ thống', 'LOG IN TO SYSTEM')}</span><span>→</span>`;
           passwordInput.focus();
         }
       } catch (error) {
-        showAlert('Không thể kết nối máy chủ xác thực!');
+        showAlert('Không thể kết nối máy chủ xác thực!', false, 'Unable to connect to the authentication server.');
         btnLogin.disabled = false;
-        btnLogin.innerHTML = '<span>Đăng nhập hệ thống</span><span>→</span>';
+        btnLogin.innerHTML = `<span>${loginText('Đăng nhập hệ thống', 'LOG IN TO SYSTEM')}</span><span>→</span>`;
       }
     });
   </script>

@@ -64,6 +64,7 @@
     window.reinitDatabaseUI?.();
     if (isT) window.injectTstSources?.();
     if (isH) window.injectHistorySources?.();
+    window.applyCurrentLanguage?.();
 
     // Render công thức toán nếu tab vừa mở chưa được biên dịch
     if (isM && window.MathJax && window.MathJax.typesetPromise) {
@@ -233,7 +234,6 @@
   // 7. Gắn nguồn tham khảo TST từ tstSources
   function injectTstSources() {
     const sources = window.tstSources || {};
-    const isEn = (window.currentLang === 'en');
     Object.entries(sources).forEach(([cardId, cfg]) => {
       const card = qs('#' + cardId);
       if (!card) return;
@@ -248,7 +248,7 @@
         const button = document.createElement('button');
         button.className = 'toggle-btn';
         button.type = 'button';
-        button.textContent = isEn ? '🔗 Reference Solutions' : '🔗 Lời giải tham khảo';
+        button.textContent = '🔗 Lời giải tham khảo';
         button.setAttribute('aria-expanded', 'false');
         button.onclick = () => toggleSolution(button);
 
@@ -256,7 +256,7 @@
         content.className = 'solution-content';
 
         const heading = document.createElement('strong');
-        heading.textContent = isEn ? 'Solution Sources:' : 'Nguồn lời giải:';
+        heading.textContent = 'Nguồn lời giải:';
         content.appendChild(heading);
 
         const list = document.createElement('ul');
@@ -281,7 +281,6 @@
   // 8. Gắn nguồn tham khảo History từ historySources
   function injectHistorySources() {
     const sources = window.historySources || {};
-    const isEn = (window.currentLang === 'en');
     Object.entries(sources).forEach(([cardId, cfg]) => {
       const card = qs('#' + cardId);
       if (!card) return;
@@ -296,7 +295,7 @@
         const button = document.createElement('button');
         button.className = 'toggle-btn';
         button.type = 'button';
-        button.textContent = isEn ? '🔗 Reference Solutions' : '🔗 Lời giải tham khảo';
+        button.textContent = '🔗 Lời giải tham khảo';
         button.setAttribute('aria-expanded', 'false');
         button.onclick = () => toggleSolution(button);
 
@@ -304,7 +303,7 @@
         content.className = 'solution-content';
 
         const heading = document.createElement('strong');
-        heading.textContent = isEn ? 'Solution Sources:' : 'Nguồn lời giải:';
+        heading.textContent = 'Nguồn lời giải:';
         content.appendChild(heading);
 
         const list = document.createElement('ul');
@@ -336,6 +335,7 @@
     document.addEventListener('DOMContentLoaded', () => {
       injectTstSources();
       injectHistorySources();
+      window.applyCurrentLanguage?.();
     });
   }
 

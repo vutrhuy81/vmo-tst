@@ -7,7 +7,7 @@
     "dev": "node server.js",
     "start": "node server.js",
     "build": "node build.js",
-    "lint": "node -c server.js && node -c build.js && node -c app.js && node -c api/data.js && node -c api/ai-guide.js && node -c api/ai-evaluate-solution.js && node -c api/ai-ocr-math.js && node -c api/lib/ai.js"
+    "lint": "node -c server.js && node -c build.js && node -c app.js && node -c i18n.js && node -c i18n_content.js && node -c api/data.js && node -c api/translate-content.js && node -c api/ai-guide.js && node -c api/ai-evaluate-solution.js && node -c api/ai-ocr-math.js && node -c api/lib/ai.js"
   },
   "dependencies": {
     "@google/genai": "^2.22.0",

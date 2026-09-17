@@ -3,6 +3,7 @@ import path from 'path';
 import compression from 'compression';
 import { fileURLToPath } from 'url';
 import { build } from './build.js';
+import translateContentHandler from './api/translate-content.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -23,6 +24,9 @@ app.use(express.urlencoded({ extended: true, limit: '25mb' }));
 
 // Enable gzip/deflate compression for fast asset delivery
 app.use(compression());
+
+// Keep local development behavior aligned with the Vercel serverless route.
+app.all('/api/translate-content', translateContentHandler);
 
 // Model Cooldown Tracker for transient 503/429/overload errors
 const modelCooldownMap = new Map();
@@ -147,7 +151,8 @@ function parseMathJSON(raw) {
 
 // API Hướng dẫn giải toán chuyên sâu từ AI Giáo sư Toán
 app.post('/api/ai-guide', async (req, res) => {
-  const { problemId, problemTitle, problemContent, topic, examTitle } = req.body || {};
+  const { problemId, problemTitle, problemContent, topic, examTitle, lang } = req.body || {};
+  const outputLanguage = lang === 'en' ? 'English' : 'Vietnamese';
 
   try {
     const aiInstance = await getGeminiModel();
@@ -156,6 +161,8 @@ app.post('/api/ai-guide', async (req, res) => {
 
       const prompt = `Bạn là một Giáo sư Toán học, Chuyên gia đầu ngành bồi dưỡng Học sinh Giỏi Quốc gia môn Toán (VMO) và Tuyển chọn Đội tuyển Quốc tế (TST/IMO).
 Hãy phân tích và viết bài giải toán học đỉnh cao, chuẩn mực Olympic cho bài toán sau:
+
+NGÔN NGỮ ĐẦU RA BẮT BUỘC: Viết toàn bộ nội dung bằng ${outputLanguage}, sử dụng văn phong toán học chuẩn mực. Không trộn lẫn hai ngôn ngữ.
 
 [KỲ THI/NGUỒN]: ${examTitle || 'Đề thi HSGQG / TST'}
 [CÂU HỎI]: ${problemId || ''} - ${problemTitle || ''}
@@ -186,7 +193,7 @@ YÊU CẦU BẮT BUỘC CHO TỪNG PHẦN:
         ai,
         contents: prompt,
         config: {
-          systemInstruction: 'Bạn là Giáo sư - Huấn luyện viên trưởng Đội tuyển Olympic Toán học Quốc tế (IMO) và Quốc gia (VMO). Bạn có năng lực tư duy logic đỉnh cao, giải quyết triệt để mọi bài toán Olympic THPT Chuyên. Bạn luôn viết lời giải thật sự chi tiết từng bước đến tận cùng, không bao giờ phác thảo chung chung, và luôn tính ra kết quả cuối cùng cụ thể đối với các bài toán hỏi giá trị.',
+          systemInstruction: `Bạn là Giáo sư - Huấn luyện viên trưởng Đội tuyển Olympic Toán học Quốc tế (IMO) và Quốc gia (VMO). Bạn có năng lực tư duy logic đỉnh cao, giải quyết triệt để mọi bài toán Olympic THPT Chuyên. Bạn luôn viết lời giải thật sự chi tiết từng bước đến tận cùng, không bao giờ phác thảo chung chung, và luôn tính ra kết quả cuối cùng cụ thể đối với các bài toán hỏi giá trị. Viết toàn bộ phản hồi bằng ${outputLanguage}.`,
           responseMimeType: 'application/json',
           responseSchema: Type ? {
             type: Type.OBJECT,
@@ -223,7 +230,9 @@ YÊU CẦU BẮT BUỘC CHO TỪNG PHẦN:
   res.json({
     success: false,
     source: 'fallback',
-    message: 'Chuyển sang cơ sở dữ liệu phân tích chuyên gia toán học tích hợp sẵn.'
+    message: lang === 'en'
+      ? 'Switching to the built-in mathematical expert analysis database.'
+      : 'Chuyển sang cơ sở dữ liệu phân tích chuyên gia toán học tích hợp sẵn.'
   });
 });
 
@@ -304,8 +313,10 @@ app.post('/api/ai-evaluate-solution', async (req, res) => {
     topic,
     examTitle,
     solutionText,
-    solutionImage
+    solutionImage,
+    lang
   } = req.body || {};
+  const outputLanguage = lang === 'en' ? 'English' : 'Vietnamese';
 
   if (!solutionText && !solutionImage) {
     return res.status(400).json({
@@ -321,6 +332,8 @@ app.post('/api/ai-evaluate-solution', async (req, res) => {
 
       const promptText = `Bạn là Giáo sư Toán học, Giám khảo Chấm thi và Huấn luyện viên trưởng Đội tuyển Olympic Toán học Quốc gia (VMO) và Quốc tế (TST/IMO).
 Nhiệm vụ của bạn là thẩm định, chấm thi và phân tích bài giải của học sinh cho bài toán sau:
+
+NGÔN NGỮ ĐẦU RA BẮT BUỘC: Viết toàn bộ báo cáo bằng ${outputLanguage}, sử dụng văn phong toán học chuẩn mực. Không trộn lẫn hai ngôn ngữ.
 
 [KỲ THI/NGUỒN]: ${examTitle || 'Kỳ thi Học sinh Giỏi VMO / TST'}
 [BÀI TOÁN]: ${problemId || ''} - ${problemTitle || ''}
@@ -401,7 +414,7 @@ QUY TẮC CÔNG THỨC TOÁN HỌC LATEX BẮT BUỘC (MATHJAX COMPLIANT):
         ai,
         contents: contentsPayload,
         config: {
-          systemInstruction: 'Bạn là Giáo sư Toán học, Giám khảo Chấm thi và Huấn luyện viên trưởng Đội tuyển Olympic Toán học Quốc gia (VMO) và Quốc tế (TST/IMO). Bạn có tư duy toán học chuẩn xác, đọc và nhận diện thành thạo chữ viết tay toán học trong ảnh. Bạn luôn phân tích khách quan, chỉ rõ chính xác từng lỗi logic, từng bước thiếu điều kiện hoặc khẳng định bài giải tối ưu.',
+          systemInstruction: `Bạn là Giáo sư Toán học, Giám khảo Chấm thi và Huấn luyện viên trưởng Đội tuyển Olympic Toán học Quốc gia (VMO) và Quốc tế (TST/IMO). Bạn có tư duy toán học chuẩn xác, đọc và nhận diện thành thạo chữ viết tay toán học trong ảnh. Bạn luôn phân tích khách quan, chỉ rõ chính xác từng lỗi logic, từng bước thiếu điều kiện hoặc khẳng định bài giải tối ưu. Viết toàn bộ phản hồi bằng ${outputLanguage}.`,
           responseMimeType: 'application/json',
           responseSchema: Type ? {
             type: Type.OBJECT,
@@ -491,14 +504,26 @@ QUY TẮC CÔNG THỨC TOÁN HỌC LATEX BẮT BUỘC (MATHJAX COMPLIANT):
     source: 'local_expert_engine',
     data: {
       verdict: fallbackVerdict,
-      verdictLabel: fallbackVerdict === 'RIGHT_DIRECTION_INACCURATE' ? 'Đúng hướng đi nhưng cần kiểm tra kỹ lại chi tiết' : 'Thiếu điều kiện / Cần bổ sung lập luận',
+      verdictLabel: lang === 'en'
+        ? (fallbackVerdict === 'RIGHT_DIRECTION_INACCURATE' ? 'Correct direction, but details require verification' : 'Missing conditions / Additional justification required')
+        : (fallbackVerdict === 'RIGHT_DIRECTION_INACCURATE' ? 'Đúng hướng đi nhưng cần kiểm tra kỹ lại chi tiết' : 'Thiếu điều kiện / Cần bổ sung lập luận'),
       verdictColor: '#d97706',
-      estimatedScore: '3.0/5.0đ (Ước lượng sơ bộ)',
-      summary: 'Hệ thống đã tiếp nhận bài giải của bạn. Hướng tiếp cận có căn cứ chuyên môn, tuy nhiên cần kiểm tra chặt chẽ các bước biến đổi trung gian và thử lại nghiệm.',
-      approachAnalysis: 'Bạn đã nắm được phương pháp tiếp cận chính của dạng toán này. Để đạt điểm tối đa trong kỳ thi VMO, cần lưu ý tính tương đương của các phép biến đổi.',
-      stepByStep: '1. Bước đặt ẩn phụ và xác định tập xác định: Cần nêu rõ điều kiện ràng buộc.<br>2. Bước biến đổi đại số: Các phép suy luận cần ghi rõ chiều $\\Rightarrow$ hay $\\Leftrightarrow$.<br>3. Bước kết luận: Luôn thử lại nghiệm hoặc kiểm tra tính duy nhất.',
-      criticalFlaws: 'Cần lưu ý kiểm tra các trường hợp biên và điều kiện số nguyên/số thực dương để tránh mất điểm logic.',
-      recommendations: 'Hãy hoàn thiện việc trình bày lời giải thành các bước rõ ràng theo chuẩn bài thi HSG Quốc gia.'
+      estimatedScore: lang === 'en' ? '3.0/5.0 (Preliminary estimate)' : '3.0/5.0đ (Ước lượng sơ bộ)',
+      summary: lang === 'en'
+        ? 'The solution has been received. The approach has mathematical merit, but the intermediate transformations and candidate solutions must be checked rigorously.'
+        : 'Hệ thống đã tiếp nhận bài giải của bạn. Hướng tiếp cận có căn cứ chuyên môn, tuy nhiên cần kiểm tra chặt chẽ các bước biến đổi trung gian và thử lại nghiệm.',
+      approachAnalysis: lang === 'en'
+        ? 'You have identified the principal method for this problem type. To earn full VMO credit, state clearly which transformations are equivalences.'
+        : 'Bạn đã nắm được phương pháp tiếp cận chính của dạng toán này. Để đạt điểm tối đa trong kỳ thi VMO, cần lưu ý tính tương đương của các phép biến đổi.',
+      stepByStep: lang === 'en'
+        ? '1. Substitution and domain: State all constraints explicitly.<br>2. Algebraic transformations: Distinguish $\\Rightarrow$ from $\\Leftrightarrow$.<br>3. Conclusion: Verify every candidate solution and, where required, prove uniqueness.'
+        : '1. Bước đặt ẩn phụ và xác định tập xác định: Cần nêu rõ điều kiện ràng buộc.<br>2. Bước biến đổi đại số: Các phép suy luận cần ghi rõ chiều $\\Rightarrow$ hay $\\Leftrightarrow$.<br>3. Bước kết luận: Luôn thử lại nghiệm hoặc kiểm tra tính duy nhất.',
+      criticalFlaws: lang === 'en'
+        ? 'Check boundary cases and all integer or positivity constraints to avoid losing marks through a logical gap.'
+        : 'Cần lưu ý kiểm tra các trường hợp biên và điều kiện số nguyên/số thực dương để tránh mất điểm logic.',
+      recommendations: lang === 'en'
+        ? 'Present the proof as a sequence of explicit, rigorously justified steps in standard Olympiad style.'
+        : 'Hãy hoàn thiện việc trình bày lời giải thành các bước rõ ràng theo chuẩn bài thi HSG Quốc gia.'
     }
   });
 });
@@ -680,4 +705,3 @@ app.use((req, res) => {
 app.listen(PORT, '0.0.0.0', () => {
   console.log(`VMO Da Nang production server running on port ${PORT}`);
 });
-
