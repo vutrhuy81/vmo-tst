@@ -74,6 +74,7 @@ export default async function handler(req, res) {
   const solutionText = text(body.solutionText);
   const solutionImage = text(body.solutionImage, 4_000_000);
   if (!solutionText && !solutionImage) return res.status(400).json({ success: false, error: 'Cần có văn bản hoặc ảnh bài giải' });
+  const outputLanguage = body.lang === 'en' ? 'English' : 'Vietnamese';
 
   if (session.role !== 'admin') {
     const problemRef = text(body.problemKey || body.problemId, 180);
@@ -96,7 +97,7 @@ export default async function handler(req, res) {
     }
   }
 
-  const prompt = `Chấm bài giải Olympic THPT theo thang 5 điểm.
+  const prompt = `Chấm bài giải Olympic THPT theo thang 5 điểm. Viết TOÀN BỘ báo cáo bằng ${outputLanguage}, với văn phong toán học chuẩn mực.
 
 THÔNG TIN BÀI TOÁN
 - Kỳ thi: ${text(body.examTitle, 300)}
@@ -133,7 +134,7 @@ QUY TRÌNH CHẤM BẮT BUỘC
       contents,
       schema,
       temperature: 0,
-      systemInstruction: `Bạn là giám khảo VMO/IMO nghiêm túc và thận trọng.
+      systemInstruction: `Bạn là giám khảo VMO/IMO nghiêm túc và thận trọng. Toàn bộ nội dung phải được viết bằng ${outputLanguage}.
 Ưu tiên tính đúng đắn hơn độ dài. Không bịa dữ kiện hoặc lỗi.
 Mọi phép biến đổi đại số do bạn nêu phải được tự kiểm tra độc lập trước khi trả kết quả JSON.`
     });

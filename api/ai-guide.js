@@ -21,16 +21,21 @@ export default async function handler(req, res) {
   if (!body) return res.status(400).json({ success: false, error: 'JSON không hợp lệ' });
   const problemContent = text(body.problemContent);
   if (!problemContent) return res.status(400).json({ success: false, error: 'Thiếu nội dung bài toán' });
+  const outputLanguage = body.lang === 'en' ? 'English' : 'Vietnamese';
 
-  const prompt = `Hãy giải bài toán Olympic THPT sau bằng tiếng Việt, chặt chẽ và đến kết quả cuối cùng.
-Kỳ thi: ${text(body.examTitle, 300)}
-Câu: ${text(body.problemId, 120)} - ${text(body.problemTitle, 500)}
-Chuyên đề: ${text(body.topic, 200)}
-Đề bài: ${problemContent}
-Trả về knowledge (định lý/công cụ), intuition (ý tưởng), solution (lời giải từng bước, LaTeX MathJax), pitfalls (lỗi thường gặp).
-Không dùng các môi trường LaTeX itemize, enumerate, align hoặc lệnh textbf; dùng Markdown và công thức $...$, $$...$$.`;
+  const prompt = `Solve the following high-school Mathematical Olympiad problem rigorously and completely in ${outputLanguage}.
+Exam: ${text(body.examTitle, 300)}
+Problem: ${text(body.problemId, 120)} - ${text(body.problemTitle, 500)}
+Topic: ${text(body.topic, 200)}
+Statement: ${problemContent}
+Return knowledge (theorems/tools), intuition (key idea), solution (a rigorous step-by-step solution using MathJax LaTeX), and pitfalls (common errors).
+Do not use the LaTeX environments itemize, enumerate, align, or the command textbf. Use Markdown and formulas delimited by $...$ or $$...$$.`;
   try {
-    const result = await generateJson({ contents: prompt, schema, systemInstruction: 'Bạn là huấn luyện viên đội tuyển VMO/IMO. Không bịa dữ kiện; mọi kết luận phải được chứng minh.' });
+    const result = await generateJson({
+      contents: prompt,
+      schema,
+      systemInstruction: `You are a VMO/IMO team coach. Write the entire response in ${outputLanguage}. Do not invent assumptions; prove every conclusion.`
+    });
     return res.status(200).json({ success: true, source: 'gemini', model: result.model, data: result.data });
   } catch (error) { return handleAiError(res, error); }
 }
