@@ -8,8 +8,8 @@
 (() => {
   const CACHE_KEY = 'vmo_i18n_math_cache_v1';
   const CACHE_LIMIT = 2500;
-  const MAX_BATCH_ITEMS = 16;
-  const MAX_BATCH_CHARS = 24_000;
+  const MAX_BATCH_ITEMS = 6;
+  const MAX_BATCH_CHARS = 10_000;
   const nodeState = new WeakMap();
   const trackedNodes = new Set();
   let runId = 0;
@@ -221,9 +221,31 @@
       })
     });
     const payload = await response.json().catch(() => ({}));
-    if (!response.ok || !payload.success) throw new Error(payload.error || `HTTP ${response.status}`);
+    if (!response.ok || !payload.success) {
+      const error = new Error(payload.error || `HTTP ${response.status}`);
+      error.status = response.status;
+      throw error;
+    }
     const byId = new Map((payload.translations || []).map(item => [item.id, item.text]));
-    return batch.map((entry, index) => ({ entry, translated: byId.get(`item-${index}`) || '' }));
+    const results = batch.map((entry, index) => ({ entry, translated: byId.get(`item-${index}`) || '' }));
+    if (results.some(result => !result.translated)) {
+      const error = new Error('INCOMPLETE_TRANSLATION_BATCH');
+      error.code = 'INCOMPLETE_TRANSLATION_BATCH';
+      throw error;
+    }
+    return results;
+  }
+
+  async function requestBatchAdaptive(batch) {
+    try {
+      return await requestBatch(batch);
+    } catch (error) {
+      if (error?.code !== 'INCOMPLETE_TRANSLATION_BATCH' || batch.length <= 1) throw error;
+      const middle = Math.ceil(batch.length / 2);
+      const left = await requestBatchAdaptive(batch.slice(0, middle));
+      const right = await requestBatchAdaptive(batch.slice(middle));
+      return [...left, ...right];
+    }
   }
 
   async function translateEnglish() {
@@ -245,14 +267,18 @@
       }
     });
 
-    if (!pending.length) return;
+    if (!pending.length) {
+      const status = document.getElementById('vmoTranslationStatus');
+      if (status) status.style.display = 'none';
+      return;
+    }
     isTranslating = true;
     rerunRequested = false;
     showStatus('Translating mathematical content into English…');
 
     try {
       for (const batch of makeBatches(pending)) {
-        const results = await requestBatch(batch);
+        const results = await requestBatchAdaptive(batch);
         results.forEach(({ entry, translated }) => {
           if (!translated || !sameMathTokens(translated, entry.fragments.length)) return;
           cache[entry.key] = translated;

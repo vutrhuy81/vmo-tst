@@ -653,6 +653,10 @@
       document.title = isEn
         ? 'Login | VMO Da Nang 2026–2027 & National TST'
         : 'Đăng nhập | Ôn luyện VMO Đà Nẵng 2026 - 2027 & TST Toàn Quốc';
+    } else {
+      document.title = isEn
+        ? 'VMO Da Nang 2026–2027 | Complete Materials & TST'
+        : 'Ôn luyện VMO Đà Nẵng 2026–2027 | Tài liệu đầy đủ & TST';
     }
 
     // 11. Duyệt qua từ điển cụm từ để dịch các tiêu đề, đề mục và nội dung
