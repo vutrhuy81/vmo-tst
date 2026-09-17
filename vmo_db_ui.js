@@ -45,6 +45,25 @@
   }
 
   function getProblemIdentity(problemCard, fallbackTitle = '') {
+    // Câu hỏi được nạp động từ MongoDB đã có khóa chuẩn chứa cả ngày thi.
+    // Luôn ưu tiên khóa này; việc tính lại theo vị trí DOM có thể liên kết
+    // nhầm bài nộp khi một tỉnh có cả ngày 1 và ngày 2.
+    if (problemCard?.dataset?.contentKey && problemCard.dataset.databaseProblem === 'true') {
+      const examCard = problemCard.closest?.('.exam-card, .paper-card');
+      return {
+        problemKey: problemCard.dataset.contentKey,
+        setKey: problemCard.dataset.setKey || '',
+        setTitle: problemCard.dataset.setTitle || examCard?.querySelector('.exam-title')?.textContent?.trim() || '',
+        sourceGroup: problemCard.dataset.sourceGroup || 'tst',
+        sourceType: problemCard.dataset.sourceType || 'tst_question',
+        contentType: problemCard.dataset.contentType || 'tst_exam',
+        chapterNumber: 0,
+        questionNumber: Number(problemCard.dataset.questionNumber) || 0,
+        frontendAnchor: examCard?.id || '',
+        legacyProblemId: problemCard.dataset.legacyProblemId || ''
+      };
+    }
+
     if (problemCard?.classList?.contains('examplebox')) {
       const chapter = problemCard.closest('.chapter-block');
       const chapterNumber = chapter?.dataset?.chapter || 'meta';
@@ -1954,6 +1973,32 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
     ensureSubmissionFilterUi(modal, isAdmin);
   }
 
+  function ensureExamOcrForm(modal) {
+    const form = modal?.querySelector('#formAddExam');
+    if (!form || form.querySelector('#examTargetAnchor')) return;
+    form.innerHTML = `
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px;">
+        <div><label style="display:block;font-size:.8rem;font-weight:600;margin-bottom:4px;">Tỉnh/Thành phố trên frontend *</label><select id="examTargetAnchor" required onchange="syncExamProvinceFromTarget()" style="width:100%;box-sizing:border-box;padding:6px 10px;border:1px solid #cbd5e1;border-radius:6px;"></select></div>
+        <div><label style="display:block;font-size:.8rem;font-weight:600;margin-bottom:4px;">Ngày thi *</label><select id="examDayNumber" required style="width:100%;box-sizing:border-box;padding:6px 10px;border:1px solid #cbd5e1;border-radius:6px;"><option value="1">Ngày thi thứ nhất</option><option value="2">Ngày thi thứ hai</option></select></div>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px;">
+        <div><label style="display:block;font-size:.8rem;font-weight:600;margin-bottom:4px;">Tỉnh / Đơn vị *</label><input type="text" id="examProvince" required placeholder="vd: Bắc Ninh" style="width:100%;box-sizing:border-box;padding:6px 10px;border:1px solid #cbd5e1;border-radius:6px;"></div>
+        <div><label style="display:block;font-size:.8rem;font-weight:600;margin-bottom:4px;">Tên đề thi</label><input type="text" id="examTitle" placeholder="Có thể để trống để lấy từ OCR" style="width:100%;box-sizing:border-box;padding:6px 10px;border:1px solid #cbd5e1;border-radius:6px;"></div>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:10px;">
+        <div><label style="display:block;font-size:.8rem;font-weight:600;margin-bottom:4px;">Năm học</label><input type="text" id="examYear" value="2026-2027" style="width:100%;box-sizing:border-box;padding:6px 10px;border:1px solid #cbd5e1;border-radius:6px;"></div>
+        <div><label style="display:block;font-size:.8rem;font-weight:600;margin-bottom:4px;">Ngày tổ chức</label><input type="date" id="examDate" style="width:100%;box-sizing:border-box;padding:6px 10px;border:1px solid #cbd5e1;border-radius:6px;"></div>
+        <div><label style="display:block;font-size:.8rem;font-weight:600;margin-bottom:4px;">Thời gian (phút)</label><input type="number" id="examDuration" value="180" min="1" max="600" style="width:100%;box-sizing:border-box;padding:6px 10px;border:1px solid #cbd5e1;border-radius:6px;"></div>
+      </div>
+      <div style="margin-bottom:10px;padding:10px;background:#fff;border:1px dashed #94a3b8;border-radius:7px;">
+        <label style="display:block;font-size:.82rem;font-weight:700;margin-bottom:6px;">Ảnh đề thi (JPEG/PNG/WEBP, có thể chọn nhiều trang) *</label>
+        <input type="file" id="examImages" accept="image/jpeg,image/png,image/webp" multiple required onchange="resetExamOcrPreview()" style="width:100%;">
+        <div style="display:flex;align-items:center;gap:8px;margin-top:9px;"><button type="button" id="examOcrButton" onclick="runExamOcr()" style="background:#7c3aed;color:#fff;border:none;padding:7px 13px;border-radius:6px;font-weight:700;cursor:pointer;">🔎 OCR đề thi & tạo MathJax</button><span id="examOcrStatus" style="font-size:.8rem;color:#64748b;">Chưa xử lý ảnh.</span></div>
+      </div>
+      <div id="examOcrPreview" style="display:none;margin-bottom:10px;padding:10px;background:#fff;border:1px solid #cbd5e1;border-radius:7px;"></div>
+      <div style="text-align:right;"><button type="button" onclick="toggleAddExamForm()" style="margin-right:8px;padding:6px 12px;border:1px solid #cbd5e1;border-radius:6px;background:#fff;cursor:pointer;">Hủy</button><button type="submit" id="examSaveButton" disabled style="background:#16a34a;color:#fff;border:none;padding:6px 14px;border-radius:6px;font-weight:600;cursor:pointer;">Lưu đề thi & câu hỏi vào MongoDB</button></div>`;
+  }
+
   function ensureCatalogManagementUi(modal, isAdmin) {
     if (!isAdmin || modal.querySelector('#hub-panel-catalog')) return;
     const firstTabButton = modal.querySelector('.hub-tab-btn, #hub-tab-events');
@@ -2452,40 +2497,57 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
                 </button>
               </div>
 
-              <!-- Form thêm đề thi -->
+              <!-- Form OCR và thêm đề thi -->
               <form id="formAddExam" style="display:none; background:#f8fafc; border:1px solid #cbd5e1; border-radius:8px; padding:12px; margin-bottom:14px;" onsubmit="handleCreateExam(event)">
                 <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-bottom:10px;">
                   <div>
-                    <label style="display:block; font-size:0.8rem; font-weight:600; margin-bottom:4px;">Tên đề thi / Kỳ thi *</label>
-                    <input type="text" id="examTitle" placeholder="vd: Đề chọn Đội tuyển Chuyên Lê Quý Đôn 2026" required style="width:100%; box-sizing:border-box; padding:6px 10px; border:1px solid #cbd5e1; border-radius:6px;">
+                    <label style="display:block; font-size:0.8rem; font-weight:600; margin-bottom:4px;">Tỉnh/Thành phố trên frontend *</label>
+                    <select id="examTargetAnchor" required onchange="syncExamProvinceFromTarget()" style="width:100%; box-sizing:border-box; padding:6px 10px; border:1px solid #cbd5e1; border-radius:6px;"></select>
                   </div>
                   <div>
-                    <label style="display:block; font-size:0.8rem; font-weight:600; margin-bottom:4px;">Phân nhóm đề *</label>
-                    <select id="examCategory" style="width:100%; box-sizing:border-box; padding:6px 10px; border:1px solid #cbd5e1; border-radius:6px;">
-                      <option value="vmo-danang">VMO Đà Nẵng</option>
-                      <option value="mock">Đề thi thử VMO</option>
-                      <option value="tst-national">Đề TST Toàn quốc 2026-2027</option>
-                      <option value="history-dn-qn">Đề truyền thống ĐN-QN</option>
+                    <label style="display:block; font-size:0.8rem; font-weight:600; margin-bottom:4px;">Ngày thi *</label>
+                    <select id="examDayNumber" required style="width:100%; box-sizing:border-box; padding:6px 10px; border:1px solid #cbd5e1; border-radius:6px;">
+                      <option value="1">Ngày thi thứ nhất</option>
+                      <option value="2">Ngày thi thứ hai</option>
                     </select>
+                  </div>
+                </div>
+                <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-bottom:10px;">
+                  <div>
+                    <label style="display:block; font-size:0.8rem; font-weight:600; margin-bottom:4px;">Tỉnh / Đơn vị *</label>
+                    <input type="text" id="examProvince" placeholder="vd: Bắc Ninh" required style="width:100%; box-sizing:border-box; padding:6px 10px; border:1px solid #cbd5e1; border-radius:6px;">
+                  </div>
+                  <div>
+                    <label style="display:block; font-size:0.8rem; font-weight:600; margin-bottom:4px;">Tên đề thi</label>
+                    <input type="text" id="examTitle" placeholder="Có thể để trống để lấy từ OCR" style="width:100%; box-sizing:border-box; padding:6px 10px; border:1px solid #cbd5e1; border-radius:6px;">
                   </div>
                 </div>
                 <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:10px; margin-bottom:10px;">
                   <div>
-                    <label style="display:block; font-size:0.8rem; font-weight:600; margin-bottom:4px;">Tỉnh / Đơn vị</label>
-                    <input type="text" id="examProvince" placeholder="vd: Đà Nẵng" style="width:100%; box-sizing:border-box; padding:6px 10px; border:1px solid #cbd5e1; border-radius:6px;">
-                  </div>
-                  <div>
                     <label style="display:block; font-size:0.8rem; font-weight:600; margin-bottom:4px;">Năm học</label>
                     <input type="text" id="examYear" value="2026-2027" style="width:100%; box-sizing:border-box; padding:6px 10px; border:1px solid #cbd5e1; border-radius:6px;">
+                  </div>
+                  <div>
+                    <label style="display:block; font-size:0.8rem; font-weight:600; margin-bottom:4px;">Ngày tổ chức</label>
+                    <input type="date" id="examDate" style="width:100%; box-sizing:border-box; padding:6px 10px; border:1px solid #cbd5e1; border-radius:6px;">
                   </div>
                   <div>
                     <label style="display:block; font-size:0.8rem; font-weight:600; margin-bottom:4px;">Thời gian (phút)</label>
                     <input type="number" id="examDuration" value="180" style="width:100%; box-sizing:border-box; padding:6px 10px; border:1px solid #cbd5e1; border-radius:6px;">
                   </div>
                 </div>
+                <div style="margin-bottom:10px;padding:10px;background:#fff;border:1px dashed #94a3b8;border-radius:7px;">
+                  <label style="display:block;font-size:.82rem;font-weight:700;margin-bottom:6px;">Ảnh đề thi (JPEG/PNG/WEBP, có thể chọn nhiều trang) *</label>
+                  <input type="file" id="examImages" accept="image/jpeg,image/png,image/webp" multiple required onchange="resetExamOcrPreview()" style="width:100%;">
+                  <div style="display:flex;align-items:center;gap:8px;margin-top:9px;">
+                    <button type="button" id="examOcrButton" onclick="runExamOcr()" style="background:#7c3aed;color:#fff;border:none;padding:7px 13px;border-radius:6px;font-weight:700;cursor:pointer;">🔎 OCR đề thi & tạo MathJax</button>
+                    <span id="examOcrStatus" style="font-size:.8rem;color:#64748b;">Chưa xử lý ảnh.</span>
+                  </div>
+                </div>
+                <div id="examOcrPreview" style="display:none;margin-bottom:10px;padding:10px;background:#fff;border:1px solid #cbd5e1;border-radius:7px;"></div>
                 <div style="text-align:right;">
                   <button type="button" onclick="toggleAddExamForm()" style="margin-right:8px; padding:6px 12px; border:1px solid #cbd5e1; border-radius:6px; background:#fff; cursor:pointer;">Hủy</button>
-                  <button type="submit" style="background:#16a34a; color:#fff; border:none; padding:6px 14px; border-radius:6px; font-weight:600; cursor:pointer;">Lưu đề thi vào database</button>
+                  <button type="submit" id="examSaveButton" disabled style="background:#16a34a; color:#fff; border:none; padding:6px 14px; border-radius:6px; font-weight:600; cursor:pointer;">Lưu đề thi & câu hỏi vào MongoDB</button>
                 </div>
               </form>
 
@@ -2521,6 +2583,7 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
       document.head.appendChild(style);
     }
 
+    ensureExamOcrForm(modal);
     applyDataHubPermissions(modal);
     switchHubTab('events');
     modal.classList.add('active');
@@ -2719,10 +2782,169 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
     const f = document.getElementById('formAddDoc');
     if (f) f.style.display = (f.style.display === 'none') ? 'block' : 'none';
   };
+  window.pendingExamOcrQuestions = [];
+  window.pendingExamOcrConfidence = '';
+  window.pendingExamSourceImages = [];
+
+  function populateExamTargetOptions() {
+    const select = document.getElementById('examTargetAnchor');
+    if (!select) return;
+    const previous = select.value;
+    const cards = Array.from(document.querySelectorAll('#tab-tst .exam-card[id]'));
+    select.innerHTML = cards.map((card, index) => {
+      const province = (card.querySelector('.tag-province')?.textContent || card.querySelector('.exam-title')?.textContent || card.id).trim();
+      const sidebar = document.querySelector(`#sidebar-tst a[href="#${CSS.escape(card.id)}"]`)?.textContent?.trim();
+      return `<option value="${escapeHtmlText(card.id)}" data-province="${escapeHtmlText(province)}" data-order="${index + 1}">${escapeHtmlText(sidebar || `${index + 1}. ${province}`)}</option>`;
+    }).join('');
+    if (previous && cards.some(card => card.id === previous)) select.value = previous;
+    window.syncExamProvinceFromTarget();
+  }
+
+  window.syncExamProvinceFromTarget = function() {
+    const select = document.getElementById('examTargetAnchor');
+    const province = document.getElementById('examProvince');
+    if (select?.selectedOptions?.[0] && province) {
+      province.value = select.selectedOptions[0].dataset.province || province.value;
+    }
+  };
+
+  window.resetExamOcrPreview = function() {
+    window.pendingExamOcrQuestions = [];
+    window.pendingExamOcrConfidence = '';
+    window.pendingExamSourceImages = [];
+    const preview = document.getElementById('examOcrPreview');
+    const save = document.getElementById('examSaveButton');
+    const status = document.getElementById('examOcrStatus');
+    if (preview) { preview.innerHTML = ''; preview.style.display = 'none'; }
+    if (save) save.disabled = true;
+    if (status) status.textContent = 'Ảnh đã thay đổi; cần chạy OCR lại.';
+  };
+
+  async function examImageDataUrl(file) {
+    if (!file || !/^image\/(jpeg|png|webp)$/.test(file.type)) throw new Error('Chỉ hỗ trợ ảnh JPEG, PNG hoặc WEBP');
+    const original = await new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onload = () => resolve(String(reader.result || ''));
+      reader.onerror = () => reject(new Error('Không đọc được ảnh đề thi'));
+      reader.readAsDataURL(file);
+    });
+    const image = await new Promise((resolve, reject) => {
+      const element = new Image();
+      element.onload = () => resolve(element);
+      element.onerror = () => reject(new Error('Ảnh đề thi không hợp lệ'));
+      element.src = original;
+    });
+    const maxSide = 2200;
+    const scale = Math.min(1, maxSide / Math.max(image.width, image.height));
+    const canvas = document.createElement('canvas');
+    canvas.width = Math.max(1, Math.round(image.width * scale));
+    canvas.height = Math.max(1, Math.round(image.height * scale));
+    canvas.getContext('2d', { alpha: false }).drawImage(image, 0, 0, canvas.width, canvas.height);
+    let quality = 0.9;
+    let output = canvas.toDataURL('image/jpeg', quality);
+    while (output.length > 2_800_000 && quality > 0.55) {
+      quality -= 0.08;
+      output = canvas.toDataURL('image/jpeg', quality);
+    }
+    if (output.length > 3_000_000) throw new Error('Ảnh quá lớn sau khi nén; vui lòng chụp/cắt rõ từng trang');
+    return output;
+  }
+
+  function renderExamOcrEditor() {
+    const preview = document.getElementById('examOcrPreview');
+    const questions = window.pendingExamOcrQuestions || [];
+    if (!preview) return;
+    preview.style.display = 'block';
+    preview.innerHTML = `<div style="font-weight:800;color:#1e293b;margin-bottom:8px;">Bản OCR — kiểm tra và chỉnh sửa trước khi lưu (${questions.length} câu)</div>` + questions.map((item, index) => `
+      <div class="exam-ocr-question" data-index="${index}" style="border-top:1px solid #e2e8f0;padding-top:10px;margin-top:10px;">
+        <div style="display:grid;grid-template-columns:90px 1fr 90px;gap:8px;margin-bottom:7px;">
+          <input class="exam-ocr-number" type="number" min="1" max="99" value="${Number(item.questionNumber) || index + 1}" aria-label="Số câu" style="padding:6px;border:1px solid #cbd5e1;border-radius:5px;">
+          <input class="exam-ocr-topic" value="${escapeHtmlText(item.topic || 'Toán Olympic')}" aria-label="Chuyên đề" style="padding:6px;border:1px solid #cbd5e1;border-radius:5px;">
+          <input class="exam-ocr-score" type="number" min="0" max="20" step="0.25" value="${Number(item.maxScore) || 0}" aria-label="Điểm" style="padding:6px;border:1px solid #cbd5e1;border-radius:5px;">
+        </div>
+        <textarea class="exam-ocr-content" rows="7" style="width:100%;box-sizing:border-box;padding:8px;border:1px solid #cbd5e1;border-radius:5px;font-family:monospace;">${escapeHtmlText(item.content || '')}</textarea>
+        <div class="exam-ocr-math-preview" data-no-i18n="true" style="margin-top:7px;padding:9px;border:1px solid #e2e8f0;border-radius:5px;line-height:1.65;"></div>
+      </div>`).join('');
+    preview.querySelectorAll('.exam-ocr-question').forEach((row, index) => {
+      window.safeRenderMathJaxToElement?.(row.querySelector('.exam-ocr-math-preview'), questions[index]?.content || '');
+      row.querySelector('.exam-ocr-content')?.addEventListener('input', event => {
+        window.safeRenderMathJaxToElement?.(row.querySelector('.exam-ocr-math-preview'), event.target.value);
+      });
+    });
+  }
+
+  window.runExamOcr = async function() {
+    if (!requireAdminUiAction()) return;
+    const input = document.getElementById('examImages');
+    const files = Array.from(input?.files || []);
+    if (!files.length) return showToast('Vui lòng chọn ít nhất một ảnh đề thi.', false);
+    const button = document.getElementById('examOcrButton');
+    const status = document.getElementById('examOcrStatus');
+    const province = document.getElementById('examProvince')?.value?.trim() || '';
+    const year = document.getElementById('examYear')?.value?.trim() || '2026-2027';
+    const dayNumber = Number(document.getElementById('examDayNumber')?.value) || 1;
+    if (!province) return showToast('Vui lòng chọn tỉnh/thành phố.', false);
+    if (button) button.disabled = true;
+    window.pendingExamOcrQuestions = [];
+    window.pendingExamSourceImages = [];
+    try {
+      const byNumber = new Map();
+      for (let index = 0; index < files.length; index += 1) {
+        if (status) status.textContent = `Đang OCR ảnh ${index + 1}/${files.length}...`;
+        const image = await examImageDataUrl(files[index]);
+        window.pendingExamSourceImages.push(image);
+        const response = await fetch('/api/ai-ocr-exam', {
+          method: 'POST',
+          credentials: 'same-origin',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ image, province, year, dayNumber })
+        });
+        const payload = await response.json().catch(() => ({}));
+        if (!response.ok || !payload.success) throw new Error(payload.error || `OCR thất bại (HTTP ${response.status})`);
+        const data = payload.data || {};
+        (data.questions || []).forEach(question => byNumber.set(Number(question.questionNumber), question));
+        window.pendingExamOcrConfidence = data.confidence || window.pendingExamOcrConfidence;
+        const titleInput = document.getElementById('examTitle');
+        const dateInput = document.getElementById('examDate');
+        const durationInput = document.getElementById('examDuration');
+        if (titleInput && !titleInput.value.trim() && data.examTitle) titleInput.value = data.examTitle;
+        if (dateInput && !dateInput.value && /^\d{4}-\d{2}-\d{2}$/.test(data.examDate || '')) dateInput.value = data.examDate;
+        if (durationInput && data.duration) durationInput.value = data.duration;
+      }
+      window.pendingExamOcrQuestions = Array.from(byNumber.values()).sort((a, b) => Number(a.questionNumber) - Number(b.questionNumber));
+      renderExamOcrEditor();
+      if (status) status.textContent = `Đã OCR ${files.length} ảnh, nhận dạng ${window.pendingExamOcrQuestions.length} câu.`;
+      const save = document.getElementById('examSaveButton');
+      if (save) save.disabled = !window.pendingExamOcrQuestions.length;
+      showToast('OCR hoàn tất. Hãy rà soát công thức MathJax trước khi lưu.', true);
+    } catch (error) {
+      if (status) status.textContent = error?.message || 'OCR thất bại.';
+      showToast('Lỗi OCR đề thi: ' + (error?.message || 'Không xác định'), false);
+    } finally {
+      if (button) button.disabled = false;
+    }
+  };
+
+  function collectExamOcrQuestions() {
+    return Array.from(document.querySelectorAll('#examOcrPreview .exam-ocr-question')).map((row, index) => {
+      const questionNumber = Math.max(1, Number(row.querySelector('.exam-ocr-number')?.value) || index + 1);
+      return {
+        questionNumber,
+        title: `Câu ${questionNumber}`,
+        topic: row.querySelector('.exam-ocr-topic')?.value?.trim() || 'Toán Olympic',
+        maxScore: Math.max(0, Number(row.querySelector('.exam-ocr-score')?.value) || 0),
+        content: row.querySelector('.exam-ocr-content')?.value?.trim() || ''
+      };
+    }).filter(item => item.content);
+  }
+
   window.toggleAddExamForm = function() {
     if (!requireAdminUiAction()) return;
     const f = document.getElementById('formAddExam');
-    if (f) f.style.display = (f.style.display === 'none') ? 'block' : 'none';
+    if (f) {
+      f.style.display = (f.style.display === 'none') ? 'block' : 'none';
+      if (f.style.display === 'block') populateExamTargetOptions();
+    }
   };
 
   // Nạp dữ liệu các tab từ MongoDB Atlas qua API đã xác thực
@@ -2842,18 +3064,58 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
     e.preventDefault();
     if (!requireAdminUiAction()) return;
     const title = document.getElementById('examTitle').value.trim();
-    const category = document.getElementById('examCategory').value;
     const province = document.getElementById('examProvince').value.trim();
     const year = document.getElementById('examYear').value.trim();
-    const duration = document.getElementById('examDuration').value;
+    const duration = Number(document.getElementById('examDuration').value) || 180;
+    const examDate = document.getElementById('examDate')?.value || '';
+    const dayNumber = Number(document.getElementById('examDayNumber')?.value) || 1;
+    const targetSelect = document.getElementById('examTargetAnchor');
+    const targetAnchor = targetSelect?.value || '';
+    const provinceOrder = Number(targetSelect?.selectedOptions?.[0]?.dataset?.order) || 0;
+    const sourceImageCount = document.getElementById('examImages')?.files?.length || 0;
+    const questions = collectExamOcrQuestions();
+    const sourceImages = Array.from(window.pendingExamSourceImages || []);
+    if (!questions.length) return showToast('Vui lòng OCR và rà soát nội dung câu hỏi trước khi lưu.', false);
+    if (!targetAnchor || !sourceImages.length) return showToast('Vui lòng chọn tỉnh/thành phố và ảnh đề thi.', false);
 
+    const saveButton = document.getElementById('examSaveButton');
+    const originalSaveLabel = saveButton?.textContent || 'Lưu đề thi & câu hỏi vào MongoDB';
+    const saveExam = replaceExisting => window.VMODataService.createExamFromOcr({
+        title, province, year, duration, examDate, dayNumber, targetAnchor,
+        provinceOrder, sourceImageCount, ocrConfidence: window.pendingExamOcrConfidence,
+        status: 'published', replaceExisting, questions
+      });
     try {
-      await window.VMODataService.addExam({ title, category, province, year, duration });
-      showToast('Đã lưu đề thi mới vào database!', true);
+      if (saveButton) {
+        saveButton.disabled = true;
+        saveButton.textContent = 'Đang lưu đề thi...';
+      }
+      let saved;
+      try {
+        saved = await saveExam(false);
+      } catch (error) {
+        if (error?.status !== 409) throw error;
+        const accepted = confirm(`${error.message}\n\nBạn có muốn thay thế nội dung của đúng đề/ngày này không? Lịch sử bài nộp vẫn được giữ nguyên.`);
+        if (!accepted) return;
+        saved = await saveExam(true);
+      }
+      for (let index = 0; index < sourceImages.length; index += 1) {
+        if (saveButton) saveButton.textContent = `Đang lưu ảnh ${index + 1}/${sourceImages.length}...`;
+        await window.VMODataService.saveExamImage(saved.id || saved._id, index + 1, sourceImages[index]);
+      }
+      showToast(`Đã lưu đề thi và ${saved?.problemCount || questions.length} câu hỏi vào MongoDB!`, true);
+      e.target.reset();
+      window.resetExamOcrPreview();
       toggleAddExamForm();
       loadHubExams();
+      await loadDatabaseTstExams(true);
     } catch (err) {
       showToast('Lỗi lưu đề thi: ' + err.message, false);
+    } finally {
+      if (saveButton && document.body.contains(saveButton)) {
+        saveButton.disabled = !(window.pendingExamOcrQuestions || []).length;
+        saveButton.textContent = originalSaveLabel;
+      }
     }
   };
 
@@ -2878,6 +3140,102 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
       loadHubDocs();
     } catch (e) {
       showToast('Lỗi khi xóa: ' + e.message, false);
+    }
+  };
+
+  function createDatabaseExamCard(exam) {
+    const card = document.createElement('article');
+    card.className = 'exam-card db-exam-card';
+    card.id = exam.targetAnchor;
+    card.dataset.filter = exam.region || 'BAC';
+    card.dataset.search = `${exam.province || ''} ${exam.year || ''}`.toLowerCase();
+    card.innerHTML = `<div class="exam-header"><div class="exam-top-tags"><span class="tag tag-year">${escapeHtmlText(exam.year || '2026-2027')}</span><span class="tag tag-province">${escapeHtmlText(exam.province || '')}</span><span class="tag tag-official">Đề từ database</span></div><h3 class="exam-title">${escapeHtmlText(exam.title || `Đề TST ${exam.province || ''}`)}</h3></div><div class="exam-body"></div>`;
+    document.getElementById('tab-tst')?.appendChild(card);
+    return card;
+  }
+
+  function renderDatabaseExam(exam) {
+    if (!exam?.targetAnchor || !Array.isArray(exam.problems) || !exam.problems.length) return;
+    let card = document.getElementById(exam.targetAnchor);
+    if (!card) card = createDatabaseExamCard(exam);
+    const body = card?.querySelector('.exam-body') || card;
+    if (!body) return;
+    body.querySelectorAll(`.db-exam-day[data-exam-key="${CSS.escape(exam.examKey || exam.id || '')}"]`).forEach(node => node.remove());
+
+    const newProblems = exam.problems.filter(problem => {
+      const key = problem.contentKey || '';
+      return key && !card.querySelector(`.problem-item[data-content-key="${CSS.escape(key)}"]`);
+    });
+    if (!newProblems.length) return;
+
+    const section = document.createElement('section');
+    section.className = 'db-exam-day';
+    section.dataset.examKey = exam.examKey || exam.id || '';
+    section.style.cssText = 'border-top:3px solid #0ea5e9;margin-top:20px;padding-top:14px;';
+    const meta = document.createElement('div');
+    meta.className = 'exam-day-header';
+    meta.style.cssText = 'display:flex;flex-wrap:wrap;gap:12px;align-items:center;background:#eff6ff;padding:10px 12px;border-radius:8px;margin-bottom:12px;color:#0f172a;';
+    const imageCount = Math.max(0, Math.min(20, Number(exam.sourceImageCount) || (exam.hasImages ? 1 : 0)));
+    const imageButtons = Array.from({ length: imageCount }, (_, index) => `<button type="button" onclick="openExamSourceImage('${escapeHtmlText(exam.id || exam._id)}',${index + 1})" style="border:1px solid #93c5fd;background:#fff;color:#1d4ed8;padding:4px 9px;border-radius:5px;cursor:pointer;">🖼️ Ảnh ${index + 1}</button>`).join('');
+    meta.innerHTML = `<strong>📌 Ngày thi thứ ${Number(exam.dayNumber) || 1}</strong><span>📅 ${escapeHtmlText(exam.examDate || 'Đang cập nhật')}</span><span>⏱️ ${Number(exam.duration) || 180} phút</span><span>🗄️ MongoDB</span>${imageButtons}`;
+    section.appendChild(meta);
+
+    newProblems.sort((a, b) => Number(a.questionNumber) - Number(b.questionNumber)).forEach(problem => {
+      const item = document.createElement('div');
+      item.className = 'problem-item';
+      item.dataset.contentKey = problem.contentKey;
+      item.dataset.databaseProblem = 'true';
+      item.dataset.setKey = problem.setKey || '';
+      item.dataset.setTitle = problem.setTitle || exam.title || '';
+      item.dataset.sourceGroup = problem.sourceGroup || 'tst';
+      item.dataset.sourceType = problem.sourceType || 'tst_question';
+      item.dataset.contentType = 'tst_exam';
+      item.dataset.questionNumber = String(Number(problem.questionNumber) || 0);
+      item.dataset.legacyProblemId = Array.isArray(problem.legacyIds) ? (problem.legacyIds[0] || '') : '';
+      item.innerHTML = `<div class="problem-header"><div class="problem-id"><span>${escapeHtmlText(problem.shortLabel || problem.title || `Câu ${problem.questionNumber}`)}</span><span class="badge-point"> (${String(Number(problem.maxScore) || 0).replace('.', ',')}đ) </span><span class="badge-topic">${escapeHtmlText(problem.topic || 'Toán Olympic')}</span></div><button class="btn-copy" onclick="copyText(this)">📋 Sao chép</button></div><div class="problem-content" data-no-i18n="true"></div>`;
+      section.appendChild(item);
+      const content = item.querySelector('.problem-content');
+      content.setAttribute('data-raw-math', problem.content || '');
+      if (window.safeRenderMathJaxToElement) window.safeRenderMathJaxToElement(content, problem.content || '');
+      else content.textContent = problem.content || '';
+    });
+    body.appendChild(section);
+  }
+
+  async function loadDatabaseTstExams(force = false) {
+    if (!window.VMODataService?.getExamCatalog) {
+      if (!force) setTimeout(() => loadDatabaseTstExams(true), 500);
+      return;
+    }
+    try {
+      const exams = await window.VMODataService.getExamCatalog('tst-national');
+      exams.forEach(renderDatabaseExam);
+      injectSubmissionButtons();
+      window.reinitAIGuide?.();
+      await applyCatalogAccessRules();
+      if (window.MathJax?.typesetPromise) {
+        window.MathJax.typesetPromise([document.getElementById('tab-tst')]).catch(() => {});
+      }
+    } catch (error) {
+      console.warn('Không tải được đề thi động từ MongoDB:', error?.message || error);
+    }
+  }
+
+  window.loadDatabaseTstExams = loadDatabaseTstExams;
+
+  window.openExamSourceImage = async function(examId, pageNumber = 1) {
+    const viewer = window.open('', '_blank');
+    try {
+      if (!viewer) throw new Error('Trình duyệt đang chặn cửa sổ xem ảnh');
+      viewer.document.write('<!doctype html><html lang="vi"><body style="font-family:system-ui;padding:24px">Đang tải ảnh đề thi...</body></html>');
+      const stored = await window.VMODataService.getExamImage(examId, pageNumber);
+      if (!stored?.image) throw new Error('Không tìm thấy ảnh đề thi');
+      viewer.document.open();
+      viewer.document.write(`<!doctype html><html lang="vi"><head><meta charset="utf-8"><title>Ảnh đề thi gốc</title><style>body{margin:0;background:#0f172a;display:grid;place-items:center;min-height:100vh}img{max-width:96vw;max-height:96vh;object-fit:contain;background:#fff}</style></head><body><img alt="Ảnh đề thi gốc" src="${stored.image}"></body></html>`);
+      viewer.document.close();
+    } catch (error) {
+      if (viewer && !viewer.closed) viewer.close();
+      showToast(error?.message || 'Không mở được ảnh đề thi.', false);
     }
   };
 
@@ -2931,6 +3289,7 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
     injectSubmissionButtons();
     injectDataManagementButton();
     applyCatalogAccessRules();
+    loadDatabaseTstExams();
   }
 
   if (document.readyState === 'loading') {
@@ -2949,6 +3308,7 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
     injectSubmissionButtons();
     injectDataManagementButton();
     applyCatalogAccessRules();
+    loadDatabaseTstExams(true);
   };
 
 })();

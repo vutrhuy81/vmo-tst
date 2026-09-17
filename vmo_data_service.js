@@ -199,6 +199,27 @@ export async function addExam(examData) {
   return normalize(await mutate('add_exam', examData));
 }
 
+export async function createExamFromOcr(examData) {
+  return normalize(await mutate('create_exam_from_ocr', examData));
+}
+
+export async function getExamCatalog(category = 'tst-national') {
+  const exams = normalizeList(await request('exam_catalog', { category }));
+  return exams.map(exam => ({
+    ...exam,
+    problems: normalizeList(Array.isArray(exam.problems) ? exam.problems : [])
+  }));
+}
+
+export async function saveExamImage(examId, pageNumber, image) {
+  return normalize(await mutate('save_exam_image', { examId: normalizeId(examId), pageNumber, image }));
+}
+
+export async function getExamImage(examId, pageNumber = 1) {
+  const items = await request('exam_image', { examId: normalizeId(examId), pageNumber });
+  return items[0] || null;
+}
+
 export async function getProblemsByExam(examId) {
   return normalizeList(await request('problems', { examId }));
 }
@@ -341,6 +362,10 @@ const VMODataService = Object.freeze({
   deleteDocument,
   getExams,
   addExam,
+  createExamFromOcr,
+  getExamCatalog,
+  saveExamImage,
+  getExamImage,
   getProblemsByExam,
   getContentSets,
   getCatalogProblems,
