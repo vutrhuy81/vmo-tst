@@ -5,7 +5,7 @@
       "maxDuration": 60
     },
     "api/ai-guide.js": {
-      "maxDuration": 60
+      "maxDuration": 120
     }
   },
   "rewrites": [
