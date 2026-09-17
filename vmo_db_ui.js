@@ -326,6 +326,22 @@
     }
   };
 
+  window.migrateTstReferenceLinksToDatabase = async function() {
+    if (!requireAdminUiAction()) return;
+    if (!window.VMODataService?.migrateTstReferenceLinks) return showToast('Dịch vụ migration chưa sẵn sàng.', false);
+    if (!window.tstSources || !Object.keys(window.tstSources).length) return showToast('Không tìm thấy dữ liệu tst-sources.js.', false);
+    if (!window.confirm('Lưu nguồn tham khảo từ tst-sources.js vào từng document problems? Chỉ trường referenceLinks được cập nhật.')) return;
+    try {
+      const result = await window.VMODataService.migrateTstReferenceLinks(window.tstSources);
+      showToast(`Đã cập nhật nguồn cho ${result?.updatedProblems || 0} câu hỏi.`, true);
+      await loadMongoReferenceLinks(true);
+      return result;
+    } catch (error) {
+      showToast(error?.message || 'Migration nguồn tham khảo thất bại.', false);
+      throw error;
+    }
+  };
+
   // 2. MODAL NỘP BÀI GIẢI CHO HỌC SINH (HỖ TRỢ ẢNH VIẾT TAY + ĐÁNH GIÁ AI CHUYÊN GIA TOÁN)
   window.currentSubmissionData = {
     problemId: '',
@@ -1946,6 +1962,7 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
 
     if (!isAdmin) {
       modal.querySelector('#btnSyncContentCatalog')?.remove();
+      modal.querySelector('#btnMigrateTstSources')?.remove();
       modal.querySelector('#hub-tab-catalog')?.remove();
       modal.querySelector('#hub-panel-catalog')?.remove();
       modal.querySelectorAll(
@@ -1966,6 +1983,19 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
         syncButton.style.cssText = 'margin-left:auto;padding:7px 12px;border:1px solid #a5b4fc;border-radius:7px;background:#eef2ff;color:#4338ca;font-weight:700;cursor:pointer;';
         syncButton.onclick = window.syncContentCatalogToDatabase;
         tabs.appendChild(syncButton);
+      }
+    }
+    if (isAdmin && !modal.querySelector('#btnMigrateTstSources')) {
+      const tabs = modal.querySelector('.hub-tabs, [class*="hub-tabs"]')
+        || modal.querySelector('.hub-tab-btn, #hub-tab-events')?.parentElement;
+      if (tabs) {
+        const migrateButton = document.createElement('button');
+        migrateButton.id = 'btnMigrateTstSources';
+        migrateButton.type = 'button';
+        migrateButton.innerHTML = '🔗 Lưu nguồn TST vào MongoDB';
+        migrateButton.style.cssText = 'padding:7px 12px;border:1px solid #67e8f9;border-radius:7px;background:#ecfeff;color:#155e75;font-weight:700;cursor:pointer;';
+        migrateButton.onclick = window.migrateTstReferenceLinksToDatabase;
+        tabs.appendChild(migrateButton);
       }
     }
 
@@ -2247,6 +2277,8 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
             <textarea id="catalogProblemContent" required maxlength="50000" rows="9" style="width:100%;box-sizing:border-box;padding:9px;border:1px solid #cbd5e1;border-radius:6px;font-family:monospace;"></textarea>
             <label style="display:block;font-weight:700;margin:10px 0 4px;">Lời giải tham khảo (HTML/LaTeX)</label>
             <textarea id="catalogReferenceSolution" maxlength="100000" rows="9" style="width:100%;box-sizing:border-box;padding:9px;border:1px solid #cbd5e1;border-radius:6px;font-family:monospace;"></textarea>
+            <label style="display:block;font-weight:700;margin:10px 0 4px;">Nguồn tham khảo (mỗi dòng: Nhãn | URL)</label>
+            <textarea id="catalogReferenceLinks" maxlength="20000" rows="4" placeholder="Lời giải tham khảo | https://..." style="width:100%;box-sizing:border-box;padding:9px;border:1px solid #cbd5e1;border-radius:6px;font-family:monospace;"></textarea>
             <label style="display:block;font-weight:700;margin:10px 0 4px;">Ghi chú thay đổi</label>
             <input id="catalogChangeNote" maxlength="500" placeholder="Ví dụ: Sửa lỗi dấu ở giả thiết" style="width:100%;box-sizing:border-box;padding:8px;border:1px solid #cbd5e1;border-radius:6px;">
             <div style="display:flex;justify-content:flex-end;gap:8px;margin-top:12px;">
@@ -2272,6 +2304,7 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
     document.getElementById('catalogContentKey').textContent = `Khóa: ${item.contentKey} · Phiên bản hiện tại: ${Number(item.version) || 1}`;
     document.getElementById('catalogProblemContent').value = item.content || '';
     document.getElementById('catalogReferenceSolution').value = item.referenceSolution || '';
+    document.getElementById('catalogReferenceLinks').value = (item.referenceLinks || []).map(link => `${link.label} | ${link.url}`).join('\n');
     document.getElementById('catalogChangeNote').value = '';
     const modal = document.getElementById('catalogContentModal');
     modal.classList.add('active');
@@ -2304,12 +2337,16 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
     const id = document.getElementById('catalogContentId').value;
     const content = document.getElementById('catalogProblemContent').value.trim();
     const referenceSolution = document.getElementById('catalogReferenceSolution').value.trim();
+    const referenceLinks = document.getElementById('catalogReferenceLinks').value.split(/\r?\n/).map(line => {
+      const separator = line.indexOf('|');
+      return separator < 0 ? null : { label: line.slice(0, separator).trim(), url: line.slice(separator + 1).trim() };
+    }).filter(link => link?.label && /^https?:\/\//i.test(link.url));
     const changeNote = document.getElementById('catalogChangeNote').value.trim();
     const expectedVersion = Number(document.getElementById('catalogContentVersion').value) || 1;
     if (!content) return showToast('Nội dung đề bài không được để trống.', false);
     if (!window.confirm('Lưu phiên bản nội dung mới? Bản hiện tại sẽ được đưa vào lịch sử để có thể khôi phục.')) return;
     try {
-      const result = await window.VMODataService.updateCatalogContent(id, { content, referenceSolution, changeNote, expectedVersion });
+      const result = await window.VMODataService.updateCatalogContent(id, { content, referenceSolution, referenceLinks, changeNote, expectedVersion });
       showToast(`Đã lưu phiên bản ${result?.version || expectedVersion + 1}.`, true);
       await window.loadCatalogManagement();
       await window.editCatalogContent(id);
@@ -3154,6 +3191,66 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
     return card;
   }
 
+  function renderMongoReferenceLinks(problem, links) {
+    if (!problem || !Array.isArray(links) || !links.length) return;
+    problem.querySelectorAll('.source-solution-box').forEach(node => node.remove());
+    const box = document.createElement('div');
+    box.className = 'solution-box source-solution-box';
+    box.dataset.referenceSource = 'mongodb';
+    const button = document.createElement('button');
+    button.className = 'toggle-btn';
+    button.type = 'button';
+    button.textContent = '🔗 Lời giải tham khảo';
+    button.setAttribute('aria-expanded', 'false');
+    const content = document.createElement('div');
+    content.className = 'solution-content';
+    content.appendChild(Object.assign(document.createElement('strong'), { textContent: 'Nguồn lời giải:' }));
+    const list = document.createElement('ul');
+    links.forEach(link => {
+      if (!link?.label || !/^https?:\/\//i.test(link?.url || '')) return;
+      const anchor = document.createElement('a');
+      anchor.href = link.url;
+      anchor.target = '_blank';
+      anchor.rel = 'noopener noreferrer';
+      anchor.textContent = link.label;
+      const item = document.createElement('li');
+      item.appendChild(anchor);
+      list.appendChild(item);
+    });
+    if (!list.children.length) return;
+    content.appendChild(list);
+    button.onclick = () => {
+      const expanded = button.getAttribute('aria-expanded') === 'true';
+      button.setAttribute('aria-expanded', String(!expanded));
+      content.classList.toggle('show', !expanded);
+    };
+    box.append(button, content);
+    problem.appendChild(box);
+  }
+
+  function applyMongoReferenceLinks(root = document) {
+    const sourceMap = window.mongoProblemReferenceLinks || new Map();
+    root.querySelectorAll?.('.problem-item[data-content-key], .examplebox[data-content-key]').forEach(problem => {
+      const links = sourceMap.get(problem.dataset.contentKey);
+      if (links?.length) renderMongoReferenceLinks(problem, links);
+    });
+  }
+
+  async function loadMongoReferenceLinks(force = false) {
+    if (!window.VMODataService?.getCatalogProblems) return;
+    if (!force && window.mongoProblemReferenceLinks instanceof Map) {
+      applyMongoReferenceLinks();
+      return;
+    }
+    try {
+      const problems = await window.VMODataService.getCatalogProblems({ sourceGroup: 'tst' });
+      window.mongoProblemReferenceLinks = new Map(problems.map(problem => [problem.contentKey, problem.referenceLinks || []]));
+      applyMongoReferenceLinks();
+    } catch (error) {
+      console.warn('Không tải được nguồn tham khảo MongoDB:', error?.message || error);
+    }
+  }
+
   function renderDatabaseExam(exam) {
     if (!exam?.targetAnchor || !Array.isArray(exam.problems) || !exam.problems.length) return;
     let card = document.getElementById(exam.targetAnchor);
@@ -3210,11 +3307,10 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
     try {
       const exams = await window.VMODataService.getExamCatalog('tst-national');
       exams.forEach(renderDatabaseExam);
-      // Gắn lời giải tham khảo sau khi câu hỏi MongoDB đã xuất hiện
-      window.injectTstSources?.();
       injectSubmissionButtons();
       window.reinitAIGuide?.();
       await applyCatalogAccessRules();
+      applyMongoReferenceLinks(document.getElementById('tab-tst'));
       if (window.MathJax?.typesetPromise) {
         window.MathJax.typesetPromise([document.getElementById('tab-tst')]).catch(() => {});
       }
@@ -3292,6 +3388,7 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
     injectDataManagementButton();
     applyCatalogAccessRules();
     loadDatabaseTstExams();
+    loadMongoReferenceLinks();
   }
 
   if (document.readyState === 'loading') {
@@ -3311,6 +3408,7 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
     injectDataManagementButton();
     applyCatalogAccessRules();
     loadDatabaseTstExams(true);
+    loadMongoReferenceLinks(true);
   };
 
 })();
