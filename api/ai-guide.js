@@ -73,15 +73,15 @@ export default async function handler(req, res) {
       contents: `Produce a complete high-school Mathematical Olympiad solution in ${outputLanguage}.\n${common}\nFirst enumerate every requested part. Give exact final results and every equality case. Check boundary cases, indices, signs and quantifiers. The reference is evidence, not permission to copy an error. Use Markdown and MathJax $...$ or $$...$$; do not use itemize, enumerate, align or textbf.`,
       schema: guideSchema,
       systemInstruction: `You are the primary VMO/IMO solver. Be explicit and rigorous. Never replace proof steps with generic advice. Write entirely in ${outputLanguage}.`,
-      models: [process.env.GEMINI_SOLVER_MODEL || 'gemini-3.5-flash-lite'], timeoutMs: 20_000, temperature: 0.08
+      models: [process.env.GEMINI_SOLVER_MODEL || 'gemini-3.5-flash-lite'], timeoutMs: 15_000, temperature: 0.08
     });
     const verified = await generateOpenAIJson({
       input: `Independently solve and audit the candidate below. Score 0.0-5.0. Approval requires every requested part correct, a rigorous derivation, no unstated assumptions, and all extremal/equality cases proved. When no trusted reference exists, matchesVerifiedReference means independent cross-check passed. If anything is weak, provide a fully corrected guide in the corrected* fields. Leave no generic placeholders.\n\n${common}\n\nGEMINI CANDIDATE JSON:\n${JSON.stringify(solved.data)}`,
       schema: verifierSchema,
       systemInstruction: `You are an independent adversarial VMO/IMO jury. Recompute the problem instead of trusting Gemini. Correct the guide in ${outputLanguage} when needed. A score of 5.0 means publication-ready and fully rigorous. Return only the required structured result.`,
-      timeoutMs: 32_000,
-      maxOutputTokens: 12_000,
-      reasoningEffort: 'medium'
+      timeoutMs: 40_000,
+      maxOutputTokens: 8_000,
+      reasoningEffort: 'low'
     });
     const requiredParts = partCount(problemContent);
     let data; let score; let repaired = false;
@@ -105,9 +105,13 @@ export default async function handler(req, res) {
     console.error('[AI GUIDE]', error);
     const openAiMissing = error?.code === 'OPENAI_NOT_CONFIGURED';
     const geminiMissing = error?.code === 'AI_NOT_CONFIGURED';
-    return res.status(openAiMissing || geminiMissing ? 503 : 502).json({
+    const openAiTimeout = error?.code === 'OPENAI_TIMEOUT';
+    return res.status(openAiTimeout ? 504 : (openAiMissing || geminiMissing ? 503 : 502)).json({
       success: false,
-      error: openAiMissing || geminiMissing ? error.message : 'Pipeline Gemini–GPT tạm thời không phản hồi'
+      error: openAiTimeout
+        ? 'Gemini đã tạo lời giải nhưng GPT kiểm định quá thời gian. Vui lòng thử lại.'
+        : (openAiMissing || geminiMissing ? error.message : 'Pipeline Gemini–GPT tạm thời không phản hồi'),
+      code: text(error?.code, 80) || 'AI_PIPELINE_ERROR'
     });
   }
 }
