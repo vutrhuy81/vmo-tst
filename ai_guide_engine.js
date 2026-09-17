@@ -637,6 +637,13 @@
 
   function normalizeBareGuideMath(value) {
     const protectedMath = [];
+    const normalizeAlignedTags = math => String(math || '').replace(
+      /\\begin\{(aligned\*?|alignedat\*?)\}([\s\S]*?)\\end\{\1\}/g,
+      (_, environment, body) => {
+        const safeBody = body.replace(/\\tag\*?\{([^{}]*)\}/g, (_, label) => `\\qquad\\text{(${label})}`);
+        return `\\begin{${environment}}${safeBody}\\end{${environment}}`;
+      }
+    );
     const wrapInlineMath = (prefix, formula) => {
       let body = String(formula || '').trim();
       let suffix = '';
@@ -652,7 +659,7 @@
       // JSON có thể giữ lại hai dấu gạch chéo trước delimiter MathJax.
       .replace(/\\\\([\[\]()])/g, '\\$1')
       .replace(/(\$\$[\s\S]*?\$\$|\\\[[\s\S]*?\\\]|\\\([\s\S]*?\\\)|\$(?:\\.|[^$\n])+\$)/g, match => {
-        protectedMath.push(match);
+        protectedMath.push(normalizeAlignedTags(match));
         return `\uE100${protectedMath.length - 1}\uE101`;
       });
 
