@@ -3,7 +3,7 @@ import { getDb } from './lib/db.js';
 import { getSession } from './lib/session.js';
 import { checkRateLimit, generateJson, handleAiError, parseBody, prepare, text } from './lib/ai.js';
 
-const TRANSLATION_VERSION = 'vmo-math-en-v1';
+const TRANSLATION_VERSION = 'vmo-math-en-v3';
 const MAX_ITEMS = 18;
 const MAX_ITEM_CHARS = 8_000;
 const MAX_TOTAL_CHARS = 32_000;
@@ -38,6 +38,18 @@ function preservesMath(source, translated) {
   const before = mathTokens(source).sort();
   const after = mathTokens(translated).sort();
   return before.length === after.length && before.every((token, index) => token === after[index]);
+}
+
+function hasUntranslatedVietnamese(value) {
+  const output = String(value || '');
+  return /[ăâđêôơưĂÂĐÊÔƠƯáàảãạấầẩẫậắằẳẵặéèẻẽẹếềểễệíìỉĩịóòỏõọốồổỗộớờởỡợúùủũụứừửữựýỳỷỹỵ]/i.test(output)
+    || /\b(?:cho|chung minh|tim tat ca|tinh gioi han|thoa man|voi moi|suy ra|do do|gia su|bai toan|loi giai|cau hoi|ngay thu|nop bai|xem loi giai|thoi gian|tong diem)\b/i.test(output);
+}
+
+function validEnglishTranslation(source, translated) {
+  return Boolean(translated)
+    && preservesMath(source, translated)
+    && !hasUntranslatedVietnamese(translated);
 }
 
 function normalizeItems(body) {
@@ -88,7 +100,7 @@ export default async function handler(req, res) {
 
   for (const item of items) {
     const cached = cache.get(item.hash);
-    if (cached && preservesMath(item.source, cached)) output.set(item.id, cached);
+    if (cached && validEnglishTranslation(item.source, cached)) output.set(item.id, cached);
     else missing.push(item);
   }
 
@@ -104,7 +116,7 @@ Context: National Mathematical Olympiad (VMO/TST/IMO) training materials, proble
 
 Requirements:
 1. Use standard, concise mathematical English. Prefer "Let", "Prove that", "Find all", "It follows that", "if and only if", and established Olympiad terminology.
-2. Preserve proper names, years, numbering, punctuation structure, line breaks, Markdown, and emojis when present.
+2. Preserve years, numbering, punctuation structure, line breaks, Markdown, and emojis. Render every Vietnamese personal name, place name, and institution name without Vietnamese diacritics in its established English/ASCII form, for example Tran Hoang Kien, Da Nang, and Quang Nam.
 3. Every token of the form __VMO_MATH_n__ represents an immutable mathematical formula. Copy each such token exactly once, unchanged and in the same logical position.
 4. Do not add explanations, solve problems, or change mathematical meaning.
 5. Return one translation for every id and no extra fields.
@@ -128,7 +140,7 @@ ${JSON.stringify(payload)}`;
       const writes = [];
       for (const item of missing) {
         const translated = translatedById.get(item.id);
-        if (!translated || !preservesMath(item.source, translated)) continue;
+        if (!validEnglishTranslation(item.source, translated)) continue;
         output.set(item.id, translated);
         if (db) {
           writes.push({
