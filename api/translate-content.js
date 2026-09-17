@@ -3,7 +3,7 @@ import { getDb } from './lib/db.js';
 import { getSession } from './lib/session.js';
 import { checkRateLimit, generateJson, handleAiError, parseBody, prepare, text } from './lib/ai.js';
 
-const TRANSLATION_VERSION = 'vmo-math-en-v3';
+const TRANSLATION_VERSION = 'vmo-math-en-v4';
 const MAX_ITEMS = 18;
 const MAX_ITEM_CHARS = 8_000;
 const MAX_TOTAL_CHARS = 32_000;
@@ -78,6 +78,7 @@ export default async function handler(req, res) {
   const body = parseBody(req);
   if (!body) return res.status(400).json({ success: false, error: 'JSON không hợp lệ' });
   const items = normalizeItems(body);
+  const strict = body.strict === true;
   if (!items.length) return res.status(400).json({ success: false, error: 'Không có nội dung hợp lệ để dịch' });
 
   let db;
@@ -110,6 +111,13 @@ export default async function handler(req, res) {
     }
 
     const payload = missing.map(item => ({ id: item.id, text: item.source }));
+    const strictInstructions = strict ? `
+STRICT RETRY MODE:
+- A previous translation attempt left Vietnamese words or Vietnamese diacritics in the output.
+- Translate every non-mathematical Vietnamese word. The final text must contain no Vietnamese letters with diacritics.
+- Transliterate every proper name and place name to ASCII. Never copy a Vietnamese sentence unchanged.
+- Before returning JSON, silently verify every output is entirely English except immutable __VMO_MATH_n__ tokens.` : '';
+
     const prompt = `Translate every item in the JSON array below from Vietnamese into polished English.
 
 Context: National Mathematical Olympiad (VMO/TST/IMO) training materials, problem statements, proofs, scoring rubrics, and application interface text.
@@ -120,6 +128,7 @@ Requirements:
 3. Every token of the form __VMO_MATH_n__ represents an immutable mathematical formula. Copy each such token exactly once, unchanged and in the same logical position.
 4. Do not add explanations, solve problems, or change mathematical meaning.
 5. Return one translation for every id and no extra fields.
+${strictInstructions}
 
 INPUT:
 ${JSON.stringify(payload)}`;
