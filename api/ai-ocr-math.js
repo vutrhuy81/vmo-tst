@@ -25,6 +25,10 @@ function normalizeOcrLatex(value) {
   });
   // Văn bản OCR như \\text{Giải.} phải nằm ngoài LaTeX math.
   text = text.replace(/\\text(?:bf|it|rm)?\{((?:[^{}]|\{[^{}]*\})*)\}/g, '$1');
+  text = text.replace(/\\textcircled\{(\d{1,2})\}/g, (_, value) => {
+    const number = Number(value);
+    return number >= 1 && number <= 20 ? String.fromCodePoint(0x2460 + number - 1) : `(${value})`;
+  });
   // Khôi phục tập hợp/ngoặc bị OCR escape khi chúng nằm ngoài math.
   text = text.replace(/\b([A-Za-z](?:_[A-Za-z0-9]+)?)\s*\\(?:in|notin)\s*\\\{([^{}\n]+)\\\}/g,
     (_, lhs, values) => `$${lhs} \\in \\lbrace ${values} \\rbrace$`);
