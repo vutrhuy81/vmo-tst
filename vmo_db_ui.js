@@ -3210,6 +3210,8 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
     try {
       const exams = await window.VMODataService.getExamCatalog('tst-national');
       exams.forEach(renderDatabaseExam);
+      // Gắn lời giải tham khảo sau khi câu hỏi MongoDB đã xuất hiện
+      window.injectTstSources?.();
       injectSubmissionButtons();
       window.reinitAIGuide?.();
       await applyCatalogAccessRules();
