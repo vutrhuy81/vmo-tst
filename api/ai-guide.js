@@ -79,7 +79,7 @@ export default async function handler(req, res) {
       input: `Independently solve and audit the candidate below. Score 0.0-5.0. Approval requires every requested part correct, a rigorous derivation, no unstated assumptions, and all extremal/equality cases proved. When no trusted reference exists, matchesVerifiedReference means independent cross-check passed. If anything is weak, provide a fully corrected guide in the corrected* fields. Leave no generic placeholders.\n\n${common}\n\nGEMINI CANDIDATE JSON:\n${JSON.stringify(solved.data)}`,
       schema: verifierSchema,
       systemInstruction: `You are an independent adversarial VMO/IMO jury. Recompute the problem instead of trusting Gemini. Correct the guide in ${outputLanguage} when needed. A score of 5.0 means publication-ready and fully rigorous. Return only the required structured result.`,
-      timeoutMs: 65_000,
+      timeoutMs: 120_000,
       maxOutputTokens: 8_000,
       reasoningEffort: 'low'
     });
