@@ -308,6 +308,10 @@
     const closeTitle = isEn ? 'Collapse guide' : 'Thu gọn hướng dẫn';
     const closeBtn = isEn ? '✕ Collapse' : '✕ Thu gọn';
     const defaultTopic = isEn ? 'Gifted Math' : 'Toán THPT Chuyên';
+    const qualityScore = /^\d(?:\.\d)?\/5\.0$/.test(String(guideData.quality?.score || '')) ? guideData.quality.score : '';
+    const qualityBadge = guideData.quality?.verified && qualityScore
+      ? `<span class="prof-badge" style="background:#dcfce7;color:#166534;">✓ ${isEn ? 'Independently verified' : 'Đã kiểm định độc lập'} ${qualityScore}</span>`
+      : '';
 
     const sec1 = isEn ? '🎯 1. Essential Theorems & Lemmas' : '🎯 1. Kiến thức & Bổ đề Chuyên toán cần nắm vững';
     const sec2 = isEn ? '💡 2. Key Insights & Professor\'s Analysis' : '💡 2. Ý tưởng then chốt & Phân tích của Giáo sư Toán';
@@ -320,6 +324,7 @@
           <div class="ai-guide-title">
             <span>${headerTitle}</span>
             <span class="prof-badge">${profBadge}</span>
+            ${qualityBadge}
             <span style="font-size: 0.8rem; font-weight: 500; color: #64748b; margin-left: 4px;">• ${topic || guideData.branch || defaultTopic}</span>
           </div>
           <div class="ai-guide-actions">
@@ -420,6 +425,12 @@
     let existingPanel = card.querySelector('.ai-guide-panel');
 
     if (existingPanel) {
+      if (existingPanel.dataset.guideError === 'true') {
+        existingPanel.remove();
+        existingPanel = null;
+      }
+    }
+    if (existingPanel) {
       const isVisible = existingPanel.style.display !== 'none';
       existingPanel.style.display = isVisible ? 'none' : 'block';
       btn.classList.toggle('active', !isVisible);
@@ -458,16 +469,7 @@
       card.appendChild(tempPanel);
     }
 
-    // Thử tìm dữ liệu chuyên sâu tĩnh trước
     let guideData = null;
-
-    // Tra cứu trong thư viện câu hỏi chuyên sâu
-    for (const key in SPECIALIZED_GUIDES) {
-      if (problemId.includes(key) || (card.closest('#' + key) !== null)) {
-        guideData = SPECIALIZED_GUIDES[key];
-        break;
-      }
-    }
 
     // Nếu có API Server hỗ trợ Gemini AI, gửi request đến máy chủ
     try {
@@ -478,6 +480,7 @@
           problemId,
           problemTitle,
           problemContent,
+          contentKey: card.dataset.contentKey || '',
           topic: problemTopic,
           examTitle,
           lang: window.currentLang === 'en' ? 'en' : 'vi'
@@ -492,23 +495,30 @@
             knowledge: formatMarkdownToHtml(result.data.knowledge),
             intuition: formatMarkdownToHtml(result.data.intuition),
             solution: formatMarkdownToHtml(result.data.solution),
-            pitfalls: formatMarkdownToHtml(result.data.pitfalls)
+            pitfalls: formatMarkdownToHtml(result.data.pitfalls),
+            quality: result.data.quality || null
           };
+        } else {
+          throw new Error(result.error || 'AI chưa tạo được lời giải đạt chuẩn');
         }
+      } else {
+        const result = await resp.json().catch(() => ({}));
+        throw new Error(result.error || `Dịch vụ AI trả về lỗi ${resp.status}`);
       }
     } catch (err) {
-      console.log('Sử dụng cơ sở tri thức toán học nội bộ:', err.message);
+      const isEn = window.currentLang === 'en';
+      tempPanel.dataset.guideError = 'true';
+      tempPanel.innerHTML = `<div class="ai-guide-header"><div class="ai-guide-title"><span>⚠️ ${isEn ? 'Guide not displayed' : 'Chưa hiển thị lời giải'}</span></div></div><div style="padding:18px;color:#991b1b;background:#fff7ed;"><strong>${isEn ? 'Quality gate rejected this result.' : 'Kết quả chưa vượt qua kiểm định chất lượng.'}</strong><div style="margin-top:8px;">${String(err.message || '').replace(/[<>&]/g, '')}</div><div style="margin-top:8px;color:#475569;">${isEn ? 'Click the AI Solution Guide button again to retry.' : 'Bấm lại nút AI Hướng dẫn giải để thử lại.'}</div></div>`;
+      btn.classList.remove('active');
+      btn.innerHTML = isEn ? '<span class="guide-sparkle">🔄</span> Retry AI Guide' : '<span class="guide-sparkle">🔄</span> Thử lại AI Hướng dẫn giải';
+      return;
     }
 
-    // Nếu không có API Gemini trực tuyến, sinh phân tích toán học sư phạm từ kiến thức chuyên sâu
     if (!guideData) {
-      guideData = generateExpertPedagogicalGuide({
-        title: problemTitle,
-        id: problemId,
-        content: problemContent,
-        topic: problemTopic,
-        examTitle
-      });
+      tempPanel.dataset.guideError = 'true';
+      btn.classList.remove('active');
+      btn.innerHTML = '<span class="guide-sparkle">🔄</span> Thử lại AI Hướng dẫn giải';
+      return;
     }
 
     // Render HTML hoàn chỉnh

@@ -2277,6 +2277,10 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
             <textarea id="catalogProblemContent" required maxlength="50000" rows="9" style="width:100%;box-sizing:border-box;padding:9px;border:1px solid #cbd5e1;border-radius:6px;font-family:monospace;"></textarea>
             <label style="display:block;font-weight:700;margin:10px 0 4px;">Lời giải tham khảo (HTML/LaTeX)</label>
             <textarea id="catalogReferenceSolution" maxlength="100000" rows="9" style="width:100%;box-sizing:border-box;padding:9px;border:1px solid #cbd5e1;border-radius:6px;font-family:monospace;"></textarea>
+            <label style="display:flex;align-items:center;gap:8px;margin:8px 0 4px;padding:8px 10px;background:#ecfdf5;border:1px solid #a7f3d0;border-radius:6px;cursor:pointer;">
+              <input id="catalogReferenceSolutionVerified" type="checkbox">
+              <span><strong>Đã được admin kiểm chứng</strong> — cho phép AI dùng làm đáp án đối chiếu</span>
+            </label>
             <label style="display:block;font-weight:700;margin:10px 0 4px;">Nguồn tham khảo (mỗi dòng: Nhãn | URL)</label>
             <textarea id="catalogReferenceLinks" maxlength="20000" rows="4" placeholder="Lời giải tham khảo | https://..." style="width:100%;box-sizing:border-box;padding:9px;border:1px solid #cbd5e1;border-radius:6px;font-family:monospace;"></textarea>
             <label style="display:block;font-weight:700;margin:10px 0 4px;">Ghi chú thay đổi</label>
@@ -2304,6 +2308,7 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
     document.getElementById('catalogContentKey').textContent = `Khóa: ${item.contentKey} · Phiên bản hiện tại: ${Number(item.version) || 1}`;
     document.getElementById('catalogProblemContent').value = item.content || '';
     document.getElementById('catalogReferenceSolution').value = item.referenceSolution || '';
+    document.getElementById('catalogReferenceSolutionVerified').checked = item.referenceSolutionVerified === true;
     document.getElementById('catalogReferenceLinks').value = (item.referenceLinks || []).map(link => `${link.label} | ${link.url}`).join('\n');
     document.getElementById('catalogChangeNote').value = '';
     const modal = document.getElementById('catalogContentModal');
@@ -2337,6 +2342,7 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
     const id = document.getElementById('catalogContentId').value;
     const content = document.getElementById('catalogProblemContent').value.trim();
     const referenceSolution = document.getElementById('catalogReferenceSolution').value.trim();
+    const referenceSolutionVerified = Boolean(referenceSolution) && document.getElementById('catalogReferenceSolutionVerified').checked;
     const referenceLinks = document.getElementById('catalogReferenceLinks').value.split(/\r?\n/).map(line => {
       const separator = line.indexOf('|');
       return separator < 0 ? null : { label: line.slice(0, separator).trim(), url: line.slice(separator + 1).trim() };
@@ -2346,7 +2352,7 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
     if (!content) return showToast('Nội dung đề bài không được để trống.', false);
     if (!window.confirm('Lưu phiên bản nội dung mới? Bản hiện tại sẽ được đưa vào lịch sử để có thể khôi phục.')) return;
     try {
-      const result = await window.VMODataService.updateCatalogContent(id, { content, referenceSolution, referenceLinks, changeNote, expectedVersion });
+      const result = await window.VMODataService.updateCatalogContent(id, { content, referenceSolution, referenceSolutionVerified, referenceLinks, changeNote, expectedVersion });
       showToast(`Đã lưu phiên bản ${result?.version || expectedVersion + 1}.`, true);
       await window.loadCatalogManagement();
       await window.editCatalogContent(id);
