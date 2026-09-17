@@ -15,6 +15,8 @@
   let runId = 0;
   let refreshTimer = 0;
   let cacheDirty = false;
+  let isTranslating = false;
+  let rerunRequested = false;
 
   function loadCache() {
     try {
@@ -146,7 +148,7 @@
       document.body.appendChild(status);
     }
     status.style.background = isError ? '#991b1b' : '#0f172a';
-    status.textContent = message;
+    if (status.textContent !== message) status.textContent = message;
     status.style.display = 'block';
     clearTimeout(status._hideTimer);
     if (!isError) status._hideTimer = setTimeout(() => { status.style.display = 'none'; }, 1400);
@@ -225,6 +227,11 @@
   }
 
   async function translateEnglish() {
+    if (isTranslating) {
+      rerunRequested = true;
+      return;
+    }
+
     const thisRun = ++runId;
     const entries = createEntries(collectNodes());
     const pending = [];
@@ -239,6 +246,8 @@
     });
 
     if (!pending.length) return;
+    isTranslating = true;
+    rerunRequested = false;
     showStatus('Translating mathematical content into English…');
 
     try {
@@ -260,6 +269,12 @@
       if (thisRun === runId && window.currentLang === 'en') {
         showStatus('Some English content could not be translated. Please try again.', true);
       }
+    } finally {
+      isTranslating = false;
+      if (rerunRequested && window.currentLang === 'en') {
+        rerunRequested = false;
+        scheduleRefresh();
+      }
     }
   }
 
@@ -278,7 +293,17 @@
     if (!document.body || window.__vmoI18nObserver) return;
     window.__vmoI18nObserver = new MutationObserver(mutations => {
       if (window.currentLang !== 'en') return;
-      const relevant = mutations.some(mutation => mutation.type === 'childList' && mutation.addedNodes.length);
+      const relevant = mutations.some(mutation => {
+        if (mutation.type !== 'childList' || !mutation.addedNodes.length) return false;
+        const target = mutation.target.nodeType === Node.ELEMENT_NODE
+          ? mutation.target
+          : mutation.target.parentElement;
+        if (target?.closest?.('[data-no-i18n], #vmoTranslationStatus')) return false;
+        return [...mutation.addedNodes].some(added => {
+          const element = added.nodeType === Node.ELEMENT_NODE ? added : added.parentElement;
+          return !element?.closest?.('[data-no-i18n], #vmoTranslationStatus');
+        });
+      });
       if (relevant) scheduleRefresh();
     });
     window.__vmoI18nObserver.observe(document.body, { childList: true, subtree: true });
