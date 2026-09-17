@@ -652,6 +652,25 @@ export default async function handler(req, res) {
       });
     }
 
+    if (action === 'update_problem_reference_links') {
+      const contentKey = cleanKey(payload.contentKey, 180);
+      if (!contentKey) return res.status(400).json({ success: false, error: 'Khóa câu hỏi không hợp lệ' });
+      const referenceLinks = cleanReferenceLinks(payload.referenceLinks);
+      const result = await db.collection('problems').findOneAndUpdate(
+        { contentKey },
+        { $set: {
+          referenceLinks,
+          referenceLinksUpdatedBy: session.username,
+          referenceLinksUpdatedAt: now,
+          updatedBy: session.username,
+          updatedAt: now
+        } },
+        { returnDocument: 'after' }
+      );
+      if (!result) return res.status(404).json({ success: false, error: 'Không tìm thấy câu hỏi trong MongoDB' });
+      return res.status(200).json({ success: true, item: result });
+    }
+
     if (action === 'restore_catalog_revision') {
       const revisionId = objectId(cleanText(payload.revisionId, 80));
       if (!revisionId) return res.status(400).json({ success: false, error: 'Phiên bản khôi phục không hợp lệ' });
