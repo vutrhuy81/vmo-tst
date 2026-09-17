@@ -6,7 +6,7 @@
  * through the authenticated backend, while preserving MathJax/LaTeX exactly.
  */
 (() => {
-  const CACHE_KEY = 'vmo_i18n_math_cache_v3';
+  const CACHE_KEY = 'vmo_i18n_math_cache_v4';
   const CACHE_LIMIT = 2500;
   const MAX_BATCH_ITEMS = 6;
   const MAX_BATCH_CHARS = 10_000;
@@ -45,7 +45,7 @@
 
   function hashText(value) {
     let hash = 2166136261;
-    const input = `v3\n${value}`;
+    const input = `v4\n${value}`;
     for (let index = 0; index < input.length; index += 1) {
       hash ^= input.charCodeAt(index);
       hash = Math.imul(hash, 16777619);
@@ -216,13 +216,14 @@
     return batches;
   }
 
-  async function requestBatch(batch) {
+  async function requestBatch(batch, strict = false) {
     const response = await fetch('/api/translate-content', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         source: 'vi',
         target: 'en',
+        strict,
         items: batch.map((entry, index) => ({ id: `item-${index}`, text: entry.text }))
       })
     });
@@ -234,24 +235,30 @@
     }
     const byId = new Map((payload.translations || []).map(item => [item.id, item.text]));
     const results = batch.map((entry, index) => ({ entry, translated: byId.get(`item-${index}`) || '' }));
-    if (results.some(result => !result.translated || hasUntranslatedVietnamese(result.translated))) {
-      const error = new Error('INCOMPLETE_TRANSLATION_BATCH');
-      error.code = 'INCOMPLETE_TRANSLATION_BATCH';
-      throw error;
-    }
-    return results;
+    return {
+      valid: results.filter(result => result.translated && !hasUntranslatedVietnamese(result.translated)),
+      invalid: results.filter(result => !result.translated || hasUntranslatedVietnamese(result.translated)).map(result => result.entry)
+    };
   }
 
-  async function requestBatchAdaptive(batch) {
-    try {
-      return await requestBatch(batch);
-    } catch (error) {
-      if (error?.code !== 'INCOMPLETE_TRANSLATION_BATCH' || batch.length <= 1) throw error;
-      const middle = Math.ceil(batch.length / 2);
-      const left = await requestBatchAdaptive(batch.slice(0, middle));
-      const right = await requestBatchAdaptive(batch.slice(middle));
-      return [...left, ...right];
+  async function requestBatchAdaptive(batch, depth = 0) {
+    const first = await requestBatch(batch, depth > 0 || batch.length === 1);
+    if (!first.invalid.length) return { results: first.valid, failed: [] };
+
+    // Keep every valid translation. Only retry the entries that Gemini left in
+    // Vietnamese; one stubborn item must never abort the rest of the page.
+    if (first.invalid.length === 1) {
+      const retry = await requestBatch(first.invalid, true);
+      return { results: [...first.valid, ...retry.valid], failed: retry.invalid };
     }
+
+    const middle = Math.ceil(first.invalid.length / 2);
+    const left = await requestBatchAdaptive(first.invalid.slice(0, middle), depth + 1);
+    const right = await requestBatchAdaptive(first.invalid.slice(middle), depth + 1);
+    return {
+      results: [...first.valid, ...left.results, ...right.results],
+      failed: [...left.failed, ...right.failed]
+    };
   }
 
   async function translateEnglish() {
@@ -283,8 +290,11 @@
     showStatus('Translating mathematical content into English…');
 
     try {
+      const failed = [];
       for (const batch of makeBatches(pending)) {
-        const results = await requestBatchAdaptive(batch);
+        const outcome = await requestBatchAdaptive(batch);
+        const results = outcome.results;
+        failed.push(...outcome.failed);
         results.forEach(({ entry, translated }) => {
           if (!translated || !sameMathTokens(translated, entry.fragments.length) || hasUntranslatedVietnamese(translated)) return;
           cache[entry.key] = translated;
@@ -295,7 +305,14 @@
         });
       }
       saveCache();
-      if (thisRun === runId && window.currentLang === 'en') showStatus('English mathematical translation is ready.');
+      if (failed.length) {
+        console.warn('[i18n] Entries still awaiting strict English translation:', failed.length);
+        if (thisRun === runId && window.currentLang === 'en') {
+          showStatus(`${failed.length} English passage(s) could not be translated. Please retry.`, true);
+        }
+      } else if (thisRun === runId && window.currentLang === 'en') {
+        showStatus('English mathematical translation is ready.');
+      }
     } catch (error) {
       console.error('[i18n] Full-content translation failed:', error);
       if (thisRun === runId && window.currentLang === 'en') {
