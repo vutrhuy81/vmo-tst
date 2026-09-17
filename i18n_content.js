@@ -6,7 +6,7 @@
  * through the authenticated backend, while preserving MathJax/LaTeX exactly.
  */
 (() => {
-  const CACHE_KEY = 'vmo_i18n_math_cache_v2';
+  const CACHE_KEY = 'vmo_i18n_math_cache_v3';
   const CACHE_LIMIT = 2500;
   const MAX_BATCH_ITEMS = 6;
   const MAX_BATCH_CHARS = 10_000;
@@ -45,7 +45,7 @@
 
   function hashText(value) {
     let hash = 2166136261;
-    const input = `v2\n${value}`;
+    const input = `v3\n${value}`;
     for (let index = 0; index < input.length; index += 1) {
       hash ^= input.charCodeAt(index);
       hash = Math.imul(hash, 16777619);
@@ -59,7 +59,9 @@
   }
 
   function hasUntranslatedVietnamese(value) {
-    return /\b(?:cho|chứng minh|tìm tất cả|tính giới hạn|thỏa mãn|với mọi|suy ra|do đó|giả sử|bài toán|lời giải|câu hỏi|ngày thứ|nộp bài|xem lời giải|thời gian|tổng điểm)\b/i.test(String(value || ''));
+    const output = String(value || '');
+    return /[ăâđêôơưĂÂĐÊÔƠƯáàảãạấầẩẫậắằẳẵặéèẻẽẹếềểễệíìỉĩịóòỏõọốồổỗộớờởỡợúùủũụứừửữựýỳỷỹỵ]/i.test(output)
+      || /\b(?:cho|chung minh|tim tat ca|tinh gioi han|thoa man|voi moi|suy ra|do do|gia su|bai toan|loi giai|cau hoi|ngay thu|nop bai|xem loi giai|thoi gian|tong diem)\b/i.test(output);
   }
 
   function protectMath(value) {
