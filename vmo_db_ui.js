@@ -1489,6 +1489,8 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
     text = text.replace(/[\u200B-\u200D\uFEFF]/g, '').replace(/\u00A0/g, ' ');
     // JSON/OCR cũ đôi khi escape delimiter thành \\$...\\$.
     text = text.replace(/\\\$/g, '$');
+    // Một số phản hồi OCR mã hóa xuống dòng thành hai ký tự "\\n".
+    text = text.replace(/\\n(?!(?:e)(?:\s|$|[,.;:]))(?=[A-Za-z\\])/g, '\n');
     // Chuẩn hóa và bọc toàn bộ môi trường aligned trước các bước xử lý
     // chỉ số/công thức inline; nếu xử lý từng dòng riêng lẻ MathJax sẽ báo
     // "Missing \\begin{aligned}" hoặc "Missing \\end{aligned}".
@@ -1506,6 +1508,10 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
       return `\uE000${mathParts.length - 1}\uE001`;
     });
     text = text.replace(/\\text(?:bf|it|rm)?\{((?:[^{}]|\{[^{}]*\})*)\}/g, '$1');
+    // Khôi phục tập hợp/ngoặc bị OCR escape khi chúng nằm ngoài math.
+    text = text.replace(/\b([A-Za-z](?:_[A-Za-z0-9]+)?)\s*\\(?:in|notin)\s*\\\{([^{}\n]+)\\\}/g,
+      (_, lhs, values) => `$${lhs} \\in \\lbrace ${values} \\rbrace$`);
+    text = text.replace(/\\\{/g, '{').replace(/\\\}/g, '}');
     text = text
       .replace(/\\(ne|le|ge|in|notin|to|Rightarrow|Leftrightarrow|cdot|times|pm)\b/g,
         (_, command) => ({ ne: '≠', le: '≤', ge: '≥', in: '∈', notin: '∉', to: '→', Rightarrow: '⇒', Leftrightarrow: '⇔', cdot: '·', times: '×', pm: '±' }[command] || command))
