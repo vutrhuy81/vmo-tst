@@ -1489,6 +1489,12 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
     text = text.replace(/[\u200B-\u200D\uFEFF]/g, '').replace(/\u00A0/g, ' ');
     // JSON/OCR cũ đôi khi escape delimiter thành \\$...\\$.
     text = text.replace(/\\\$/g, '$');
+    // Chuẩn hóa và bọc toàn bộ môi trường aligned trước các bước xử lý
+    // chỉ số/công thức inline; nếu xử lý từng dòng riêng lẻ MathJax sẽ báo
+    // "Missing \\begin{aligned}" hoặc "Missing \\end{aligned}".
+    text = text.replace(/\\begin\{align\*?\}/g, '\\begin{aligned}')
+      .replace(/\\end\{align\*?\}/g, '\\end{aligned}')
+      .replace(/(?<!\$\$|\\\[)\s*(\\begin\{aligned\}[\s\S]*?\\end\{aligned\})\s*(?!\$\$|\\\])/g, (_, block) => `\n$$\n${block}\n$$\n`);
 
     // OCR có thể đặt cả văn bản tiếng Việt trong \\text{...} nhưng lại để
     // nằm ngoài vùng toán học. MathJax chỉ xử lý \\text bên trong $...$;
@@ -1513,7 +1519,7 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
     text = text.split('\n').map(line => {
       const trimmed = line.trim();
       if (!trimmed || /^\$\$|^\$|^\\\[|^\\\(/.test(trimmed)) return line;
-      if (/^\\(?:boxed|fbox|begin|end|frac|sqrt|sum|prod|lim|left|right|text)\b/.test(trimmed)) {
+      if (/^\\(?:boxed|fbox|frac|sqrt|sum|prod|lim|left|right|text)\b/.test(trimmed)) {
         return `$$\n${trimmed}\n$$`;
       }
       return line;
