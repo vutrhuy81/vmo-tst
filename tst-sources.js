@@ -109,7 +109,33 @@ window.tstSources = {
     all: [['Hướng tới Olympic Toán VN - Nguyễn Nhất Huy', 'https://www.facebook.com/groups/olympictoan.vn/permalink/1983230302391090/']]
   },
   'tst-bac-ninh': {
-    all: [['Hướng tới Olympic Toán VN - TheDarknessKing2010', 'https://www.facebook.com/groups/olympictoan.vn/permalink/1983254362388684/']]
+    all: [
+      [
+        'Hướng tới Olympic Toán VN - TheDarknessKing2010',
+        'https://www.facebook.com/groups/olympictoan.vn/permalink/1983254362388684/'
+      ]
+    ],
+  
+    q5: [
+      [
+        'Lời giải tham khảo – Bắc Ninh ngày 2',
+        'https://www.facebook.com/photo?fbid=2222825504951566&set=pcb.1983962472317873'
+      ]
+    ],
+  
+    q6: [
+      [
+        'Lời giải tham khảo – Bắc Ninh ngày 2',
+        'https://www.facebook.com/photo?fbid=2222825504951566&set=pcb.1983962472317873'
+      ]
+    ],
+  
+    q7: [
+      [
+        'Lời giải tham khảo – Bắc Ninh ngày 2',
+        'https://www.facebook.com/photo?fbid=2222825504951566&set=pcb.1983962472317873'
+      ]
+    ]
   },
   'tst-lao-cai': {
     all: [['Hướng tới Olympic Toán VN - Lê Phúc Lữ', 'https://www.facebook.com/groups/olympictoan.vn/permalink/1983938595653594/']]
