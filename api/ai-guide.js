@@ -69,13 +69,15 @@ export default async function handler(req, res) {
       contents: `Produce a complete high-school Mathematical Olympiad solution in ${outputLanguage}.\n${common}\nFirst enumerate every requested part. Give exact final results and every equality case. Check boundary cases, indices, signs and quantifiers. The reference is evidence, not permission to copy an error. Use Markdown and MathJax $...$ or $$...$$; do not use itemize, enumerate, align or textbf.`,
       schema: guideSchema,
       systemInstruction: `You are the primary VMO/IMO solver. Be explicit and rigorous. Never replace proof steps with generic advice. Write entirely in ${outputLanguage}.`,
-      models: ['gemini-2.5-flash'], timeoutMs: 25_000, temperature: 0.08
+      // Flash-Lite tạo bản nháp nhanh; tầng giám khảo Flash bên dưới mới là
+      // nguồn quyết định cuối cùng và có quyền viết lại toàn bộ lời giải.
+      models: ['gemini-2.5-flash-lite'], timeoutMs: 20_000, temperature: 0.08
     });
     const verified = await generateJson({
       contents: `Independently solve and audit the candidate below. Score 0.0-5.0. Approval requires every requested part correct, a rigorous derivation, no unstated assumptions, and all extremal/equality cases proved. When no trusted reference exists, matchesVerifiedReference means independent cross-check passed. If anything is weak, provide a fully corrected guide in corrected* fields; this is the single repair pass. Leave no generic placeholders.\n\n${common}\n\nCANDIDATE JSON:\n${JSON.stringify(solved.data)}`,
       schema: verifierSchema,
       systemInstruction: `You are an adversarial VMO jury verifier. Recompute the mathematics instead of trusting the candidate. Correct it in ${outputLanguage} when needed. A score of 5.0 means publication-ready and fully rigorous.`,
-      models: ['gemini-2.5-flash-lite'], timeoutMs: 24_000, temperature: 0.02
+      models: ['gemini-2.5-flash'], timeoutMs: 28_000, temperature: 0.02
     });
     const requiredParts = partCount(problemContent);
     let data; let score; let repaired = false;
