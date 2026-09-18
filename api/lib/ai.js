@@ -43,7 +43,16 @@ export function parseBody(req) {
   try { return JSON.parse(req.body); } catch { return null; }
 }
 
-export async function generateJson({ contents, schema, systemInstruction, temperature = 0.15, models = ['gemini-3.5-flash-lite'], timeoutMs = 22_000 }) {
+export async function generateJson({
+  contents,
+  schema,
+  systemInstruction,
+  temperature = 0.15,
+  models = ['gemini-3.5-flash-lite'],
+  timeoutMs = 22_000,
+  maxOutputTokens,
+  thinkingLevel
+}) {
   if (!process.env.GEMINI_API_KEY) {
     const error = new Error('GEMINI_API_KEY chưa được cấu hình trên Vercel');
     error.code = 'AI_NOT_CONFIGURED';
@@ -56,8 +65,17 @@ export async function generateJson({ contents, schema, systemInstruction, temper
 
   // Dùng model hiện hành hỗ trợ ảnh và structured JSON. Có thể ghi đè model
   // qua tham số `models` ở từng chức năng khi cần.
-  const modelList = Array.isArray(models) && models.length ? models.map(value => text(value, 80)).filter(Boolean).slice(0, 3) : ['gemini-3.5-flash-lite'];
-  const requestTimeout = Math.max(5_000, Math.min(50_000, Number(timeoutMs) || 22_000));
+  const requestedModels = Array.isArray(models) && models.length
+    ? models.map(value => text(value, 80)).filter(Boolean)
+    : ['gemini-3.5-flash-lite'];
+  const modelList = [...new Set(requestedModels)].slice(0, 3);
+  const requestTimeout = Math.max(5_000, Math.min(120_000, Number(timeoutMs) || 22_000));
+  const outputTokenLimit = Number.isFinite(Number(maxOutputTokens))
+    ? Math.max(2_000, Math.min(64_000, Number(maxOutputTokens)))
+    : null;
+  const normalizedThinkingLevel = ['MINIMAL', 'LOW', 'MEDIUM', 'HIGH'].includes(String(thinkingLevel || '').toUpperCase())
+    ? String(thinkingLevel).toUpperCase()
+    : '';
   let lastError;
   for (const model of modelList) {
     try {
@@ -69,7 +87,11 @@ export async function generateJson({ contents, schema, systemInstruction, temper
             systemInstruction,
             responseMimeType: 'application/json',
             responseJsonSchema: schema,
-            temperature
+            temperature,
+            ...(outputTokenLimit ? { maxOutputTokens: outputTokenLimit } : {}),
+            ...(normalizedThinkingLevel
+              ? { thinkingConfig: { thinkingLevel: normalizedThinkingLevel } }
+              : {})
           }
         }),
         new Promise((_, reject) => setTimeout(() => reject(new Error('AI_TIMEOUT')), requestTimeout))
