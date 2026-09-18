@@ -23,8 +23,8 @@ export async function generateOpenAIJson({
   schema,
   systemInstruction,
   model = process.env.OPENAI_VERIFY_MODEL || 'gpt-5.6-terra',
-  timeoutMs = 150_000,
-  maxOutputTokens = 8_000,
+  timeoutMs = 160_000,
+  maxOutputTokens = 12_000,
   reasoningEffort = 'low'
 }) {
   if (!process.env.OPENAI_API_KEY) {
@@ -33,7 +33,7 @@ export async function generateOpenAIJson({
     throw error;
   }
   const controller = new AbortController();
-  const timer = setTimeout(() => controller.abort(), Math.max(5_000, Math.min(150_000, Number(timeoutMs) || 150_000)));
+  const timer = setTimeout(() => controller.abort(), Math.max(5_000, Math.min(160_000, Number(timeoutMs) || 160_000)));
   let response;
   try {
     response = await fetch('https://api.openai.com/v1/responses', {
