@@ -5,10 +5,10 @@
       "maxDuration": 60
     },
     "api/ai-guide.js": {
-      "maxDuration": 250
+      "maxDuration": 270
     },
     "api/ai-evaluate-solution.js": {
-      "maxDuration": 250
+      "maxDuration": 270
     }
   },
   "headers": [
