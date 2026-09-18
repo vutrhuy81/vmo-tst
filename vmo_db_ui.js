@@ -3235,16 +3235,24 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
     modal.innerHTML = `
       <div class="vmo-modal-container" style="max-width:780px;max-height:92vh;display:flex;flex-direction:column;">
         <div class="vmo-modal-header" style="background:#155e75;color:white;">
-          <div class="vmo-modal-title" style="color:white;">🔗 Quản lý lời giải tham khảo</div>
+          <div class="vmo-modal-title" style="color:white;">⚙️ Quản lý nguồn và nội dung câu hỏi</div>
           <button type="button" class="vmo-modal-close" onclick="closeReferenceLinksManager()" style="color:white;">✕</button>
         </div>
         <div class="vmo-modal-body" style="overflow:auto;">
           <div id="referenceLinksProblemKey" style="padding:8px 10px;background:#f1f5f9;border-radius:6px;font-family:monospace;font-size:.8rem;margin-bottom:10px;"></div>
+          <label for="referenceManagerProblemContent" style="display:block;font-weight:700;margin-bottom:4px;">Nội dung câu hỏi (HTML/LaTeX) *</label>
+          <textarea id="referenceManagerProblemContent" required maxlength="50000" rows="9" style="width:100%;box-sizing:border-box;padding:9px;border:1px solid #cbd5e1;border-radius:6px;font-family:monospace;margin-bottom:12px;" placeholder="Nhập nội dung câu hỏi..."></textarea>
+          <div style="display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:8px;">
+            <strong>🔗 Lời giải tham khảo</strong>
+            <span style="font-size:.75rem;color:#64748b;">Mỗi nguồn gồm nhãn hiển thị và URL</span>
+          </div>
           <div id="referenceLinksRows"></div>
           <button type="button" onclick="addReferenceLinkRow()" style="padding:7px 11px;border:1px solid #0891b2;border-radius:6px;background:#ecfeff;color:#155e75;font-weight:700;cursor:pointer;">＋ Thêm link</button>
+          <label for="referenceManagerChangeNote" style="display:block;font-weight:700;margin:12px 0 4px;">Ghi chú thay đổi</label>
+          <input id="referenceManagerChangeNote" maxlength="500" placeholder="Ví dụ: Sửa giả thiết và cập nhật nguồn lời giải" style="width:100%;box-sizing:border-box;padding:8px;border:1px solid #cbd5e1;border-radius:6px;">
           <div style="display:flex;justify-content:flex-end;gap:8px;margin-top:14px;">
             <button type="button" onclick="closeReferenceLinksManager()" style="padding:7px 12px;border:1px solid #cbd5e1;border-radius:6px;background:white;">Hủy</button>
-            <button type="button" onclick="saveReferenceLinksManager()" style="padding:7px 14px;border:0;border-radius:6px;background:#0e7490;color:white;font-weight:700;">Lưu vào MongoDB</button>
+            <button id="saveReferenceLinksManagerButton" type="button" onclick="saveReferenceLinksManager()" style="padding:7px 14px;border:0;border-radius:6px;background:#0e7490;color:white;font-weight:700;">Lưu thay đổi</button>
           </div>
         </div>
       </div>`;
@@ -3280,18 +3288,44 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
     rows.appendChild(row);
   };
 
-  window.openReferenceLinksManager = function(contentKey) {
+  window.openReferenceLinksManager = async function(contentKey) {
     if (!requireAdminUiAction()) return;
     ensureReferenceLinksModal();
     const modal = document.getElementById('referenceLinksAdminModal');
     modal.dataset.contentKey = contentKey;
-    document.getElementById('referenceLinksProblemKey').textContent = `Câu hỏi: ${contentKey}`;
+    delete modal.dataset.problemId;
+    delete modal.dataset.problemVersion;
+    document.getElementById('referenceLinksProblemKey').textContent = `Câu hỏi: ${contentKey} · Đang tải dữ liệu mới nhất...`;
+    const contentInput = document.getElementById('referenceManagerProblemContent');
+    const noteInput = document.getElementById('referenceManagerChangeNote');
+    const saveButton = document.getElementById('saveReferenceLinksManagerButton');
+    contentInput.value = '';
+    contentInput.disabled = true;
+    noteInput.value = '';
+    if (saveButton) saveButton.disabled = true;
     document.getElementById('referenceLinksRows').replaceChildren();
-    const links = window.mongoProblemReferenceLinks?.get(contentKey) || [];
-    links.forEach(link => window.addReferenceLinkRow(link));
-    if (!links.length) window.addReferenceLinkRow();
     modal.classList.add('active');
     modal.style.display = 'flex';
+    try {
+      const items = await window.VMODataService.getCatalogProblems({ contentKey });
+      const problem = items?.[0];
+      if (!problem) throw new Error('Không tìm thấy câu hỏi trong MongoDB');
+      if (modal.dataset.contentKey !== contentKey) return;
+      window.mongoProblemsByContentKey ||= new Map();
+      window.mongoProblemsByContentKey.set(contentKey, problem);
+      modal.dataset.problemId = problem.id || problem._id || '';
+      modal.dataset.problemVersion = String(Number(problem.version) || 1);
+      document.getElementById('referenceLinksProblemKey').textContent = `Câu hỏi: ${contentKey} · Phiên bản ${Number(problem.version) || 1}`;
+      contentInput.value = problem.content || '';
+      contentInput.disabled = false;
+      const links = Array.isArray(problem.referenceLinks) ? problem.referenceLinks : [];
+      links.forEach(link => window.addReferenceLinkRow(link));
+      if (!links.length) window.addReferenceLinkRow();
+      if (saveButton) saveButton.disabled = false;
+    } catch (error) {
+      document.getElementById('referenceLinksProblemKey').textContent = `Câu hỏi: ${contentKey} · Không tải được dữ liệu`;
+      showToast(error?.message || 'Không tải được nội dung câu hỏi.', false);
+    }
   };
 
   window.closeReferenceLinksManager = function() {
@@ -3303,19 +3337,49 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
     if (!requireAdminUiAction()) return;
     const modal = document.getElementById('referenceLinksAdminModal');
     const contentKey = modal?.dataset.contentKey || '';
+    const problemId = modal?.dataset.problemId || '';
+    const expectedVersion = Number(modal?.dataset.problemVersion) || 1;
+    const content = document.getElementById('referenceManagerProblemContent')?.value.trim() || '';
+    const changeNote = document.getElementById('referenceManagerChangeNote')?.value.trim() || '';
     const links = Array.from(document.querySelectorAll('#referenceLinksRows .reference-link-edit-row')).map(row => ({
       label: row.querySelector('.reference-link-label')?.value.trim() || '',
       url: row.querySelector('.reference-link-url')?.value.trim() || ''
     })).filter(link => link.label || link.url);
+    if (!problemId) return showToast('Chưa tải được định danh câu hỏi. Vui lòng đóng và mở lại cửa sổ.', false);
+    if (!content) return showToast('Nội dung câu hỏi không được để trống.', false);
     const invalid = links.find(link => !link.label || !/^https?:\/\//i.test(link.url));
     if (invalid) return showToast('Mỗi nguồn phải có nhãn và URL bắt đầu bằng http:// hoặc https://.', false);
+    const problem = window.mongoProblemsByContentKey?.get(contentKey);
+    if (!problem) return showToast('Không tìm thấy dữ liệu gốc của câu hỏi. Vui lòng mở lại cửa sổ.', false);
+    if (!window.confirm('Lưu nội dung câu hỏi và các nguồn lời giải tham khảo? Phiên bản hiện tại sẽ được lưu vào lịch sử để có thể khôi phục.')) return;
+    const saveButton = document.getElementById('saveReferenceLinksManagerButton');
+    const originalLabel = saveButton?.textContent || 'Lưu thay đổi';
+    if (saveButton) { saveButton.disabled = true; saveButton.textContent = 'Đang lưu...'; }
     try {
-      const updated = await window.VMODataService.updateProblemReferenceLinks(contentKey, links);
-      window.mongoProblemReferenceLinks.set(contentKey, updated?.referenceLinks || links);
+      const updated = await window.VMODataService.updateCatalogContent(problemId, {
+        content,
+        referenceSolution: problem.referenceSolution || '',
+        referenceSolutionVerified: problem.referenceSolutionVerified === true,
+        referenceLinks: links,
+        changeNote: changeNote || 'Cập nhật từ chức năng Quản lý nguồn',
+        expectedVersion
+      });
+      const nextVersion = Number(updated?.version) || expectedVersion + 1;
+      const nextProblem = { ...problem, content, referenceLinks: links, version: nextVersion };
+      window.mongoProblemsByContentKey.set(contentKey, nextProblem);
+      window.mongoProblemReferenceLinks ||= new Map();
+      window.mongoProblemReferenceLinks.set(contentKey, links);
       window.closeReferenceLinksManager();
       applyMongoReferenceLinks();
-      showToast(`Đã lưu ${links.length} link tham khảo vào MongoDB.`, true);
-    } catch (error) { showToast(error?.message || 'Không lưu được nguồn tham khảo.', false); }
+      showToast(`Đã lưu phiên bản ${nextVersion}: nội dung câu hỏi và ${links.length} nguồn tham khảo.`, true);
+    } catch (error) {
+      showToast(error?.message || 'Không lưu được nội dung và nguồn tham khảo.', false);
+    } finally {
+      if (saveButton && document.body.contains(saveButton)) {
+        saveButton.disabled = false;
+        saveButton.textContent = originalLabel;
+      }
+    }
   };
 
   function ensureReferenceLinksAdminButton(problem) {
@@ -3372,10 +3436,31 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
     problem.appendChild(box);
   }
 
+  function renderMongoProblemContent(problem, content) {
+    if (!problem || !content) return;
+    let target = problem.querySelector('.problem-content');
+    if (!target && problem.classList.contains('examplebox')) {
+      const paragraphs = Array.from(problem.querySelectorAll(':scope > p'));
+      target = paragraphs[0];
+      if (!target) {
+        target = document.createElement('p');
+        const heading = problem.querySelector('.box-heading');
+        heading?.after(target);
+      }
+      paragraphs.slice(1).forEach(paragraph => { paragraph.style.display = 'none'; });
+    }
+    if (!target) return;
+    target.setAttribute('data-raw-math', content);
+    if (window.safeRenderMathJaxToElement) window.safeRenderMathJaxToElement(target, content);
+    else target.innerHTML = sanitizeCatalogHtml(content);
+  }
+
   function applyMongoReferenceLinks(root = document) {
     const sourceMap = window.mongoProblemReferenceLinks || new Map();
     root.querySelectorAll?.('.problem-item[data-content-key], .examplebox[data-content-key]').forEach(problem => {
       const contentKey = problem.dataset.contentKey;
+      const problemData = window.mongoProblemsByContentKey?.get(contentKey);
+      if (problemData?.content) renderMongoProblemContent(problem, problemData.content);
       const links = sourceMap.get(contentKey);
       if (links?.length) renderMongoReferenceLinks(problem, links);
       else if (sourceMap.has(contentKey)) problem.querySelectorAll('.source-solution-box[data-reference-source="mongodb"]').forEach(node => node.remove());
@@ -3390,7 +3475,8 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
       return;
     }
     try {
-      const problems = await window.VMODataService.getCatalogProblems({ sourceGroup: 'tst' });
+      const problems = await window.VMODataService.getCatalogProblems();
+      window.mongoProblemsByContentKey = new Map(problems.map(problem => [problem.contentKey, problem]));
       window.mongoProblemReferenceLinks = new Map(problems.map(problem => [problem.contentKey, problem.referenceLinks || []]));
       applyMongoReferenceLinks();
     } catch (error) {
