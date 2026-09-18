@@ -180,6 +180,7 @@ export default async function handler(req, res) {
       }
 
       const filter = {};
+      let projection;
       if (resource === 'content_sets') {
         if (req.query?.group) filter.group = cleanText(req.query.group, 80);
         if (req.query?.key) filter.key = cleanKey(req.query.key);
@@ -194,6 +195,17 @@ export default async function handler(req, res) {
         }
         if (req.query?.sourceGroup) filter.sourceGroup = cleanText(req.query.sourceGroup, 80);
         if (req.query?.contentKey) filter.contentKey = cleanKey(req.query.contentKey);
+        if (req.query?.view === 'runtime') {
+          projection = {
+            contentKey: 1,
+            content: 1,
+            referenceLinks: 1,
+            title: 1,
+            topic: 1,
+            setTitle: 1,
+            version: 1
+          };
+        }
         if (req.query?.catalogRules === '1' && session.role !== 'admin') {
           const [sets, problems] = await Promise.all([
             db.collection('content_sets').find({}, { projection: { status: 1 } }).toArray(),
@@ -315,7 +327,11 @@ export default async function handler(req, res) {
         });
       }
 
-      const items = await db.collection(resource).find(filter).sort(sort).limit(500).toArray();
+      const items = await db.collection(resource)
+        .find(filter, projection ? { projection } : undefined)
+        .sort(sort)
+        .limit(500)
+        .toArray();
       return res.status(200).json({ success: true, items });
     }
 
