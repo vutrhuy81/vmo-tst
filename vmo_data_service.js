@@ -332,6 +332,10 @@ export async function submitSolution(
     sourceGroup: String(problemContext?.sourceGroup ?? '').trim(),
     topic: String(problemContext?.topic ?? '').trim(),
     problemContent: String(problemContext?.problemContent ?? '').trim(),
+    submissionKind: String(problemContext?.submissionKind ?? 'student_solution').trim(),
+    aiGuide: problemContext?.aiGuide && typeof problemContext.aiGuide === 'object'
+      ? problemContext.aiGuide
+      : null,
     problemTitle: String(problemTitle ?? '').trim(),
     solutionContent: cleanSolution,
     evaluation: evaluation && typeof evaluation === 'object' ? evaluation : null,
@@ -350,6 +354,16 @@ export async function getSubmissionImage(submissionId) {
 
 export async function getSubmissionsForProblem(problemId) {
   return normalizeList(await request('submissions', { problemId }));
+}
+
+export async function getLatestAiGuide(problemId) {
+  const items = normalizeList(await request('submissions', {
+    problemId,
+    submissionKind: 'ai_guide',
+    own: 1,
+    latest: 1
+  }));
+  return items[0] || null;
 }
 
 export async function getAllSubmissions() {
@@ -417,6 +431,7 @@ const VMODataService = Object.freeze({
   submitSolution,
   getSubmissionImage,
   getSubmissionsForProblem,
+  getLatestAiGuide,
   getAllSubmissions,
   getSubmissionsPage,
   deleteSubmission,

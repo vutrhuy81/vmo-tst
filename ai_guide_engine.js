@@ -5,6 +5,7 @@
  */
 
 (() => {
+  const aiGuideContexts = new Map();
   // Kho dữ liệu phân tích chuyên sâu cho các kỳ thi tiêu biểu và mẫu cấu trúc
   const SPECIALIZED_GUIDES = {
     // 1. Trại hè Hùng Vương XX - Câu 1 (PTH)
@@ -312,6 +313,9 @@
     const qualityBadge = guideData.quality?.verified && qualityScore
       ? `<span class="prof-badge" style="background:#dcfce7;color:#166534;">✓ ${isEn ? 'Independently verified' : 'Đã kiểm định độc lập'} ${qualityScore}</span>`
       : '';
+    const persistedBadge = guideData.persisted
+      ? `<span class="prof-badge" style="background:#e0f2fe;color:#075985;">☁ ${isEn ? 'Loaded from MongoDB' : 'Đã tải từ MongoDB'}</span>`
+      : '';
 
     const sec1 = isEn ? '🎯 1. Essential Theorems & Lemmas' : '🎯 1. Kiến thức & Bổ đề Chuyên toán cần nắm vững';
     const sec2 = isEn ? '💡 2. Key Insights & Professor\'s Analysis' : '💡 2. Ý tưởng then chốt & Phân tích của Giáo sư Toán';
@@ -325,6 +329,7 @@
             <span>${headerTitle}</span>
             <span class="prof-badge">${profBadge}</span>
             ${qualityBadge}
+            ${persistedBadge}
             <span style="font-size: 0.8rem; font-weight: 500; color: #64748b; margin-left: 4px;">• ${topic || guideData.branch || defaultTopic}</span>
           </div>
           <div class="ai-guide-actions">
@@ -420,6 +425,7 @@
     const problemTopic = topicEl ? topicEl.innerText : '';
     const problemContent = sourceText;
     const examTitle = examTitleEl ? examTitleEl.innerText : 'Ôn luyện VMO Đà Nẵng 2026 - 2027';
+    const problemKey = card.dataset.contentKey || problemId;
 
     // Kiểm tra xem panel đã tồn tại chưa
     let existingPanel = card.querySelector('.ai-guide-panel');
@@ -470,9 +476,31 @@
     }
 
     let guideData = null;
+    let rawGuide = null;
+
+    // Ưu tiên khôi phục hướng dẫn mà người dùng đã chủ động lưu trước đó.
+    if (window.VMODataService?.getLatestAiGuide) {
+      try {
+        const saved = await window.VMODataService.getLatestAiGuide(problemKey);
+        if (saved?.aiGuide?.solution) {
+          rawGuide = saved.aiGuide;
+          guideData = {
+            branch: rawGuide.branch || problemTopic || 'Toán THPT Chuyên',
+            knowledge: formatMarkdownToHtml(rawGuide.knowledge || ''),
+            intuition: formatMarkdownToHtml(rawGuide.intuition || ''),
+            solution: formatMarkdownToHtml(rawGuide.solution || ''),
+            pitfalls: formatMarkdownToHtml(rawGuide.pitfalls || ''),
+            quality: rawGuide.quality || null,
+            persisted: true
+          };
+        }
+      } catch (error) {
+        console.warn('Không đọc được AI Guide đã lưu, chuyển sang tạo mới:', error?.message || error);
+      }
+    }
 
     // Nếu có API Server hỗ trợ Gemini AI, gửi request đến máy chủ
-    try {
+    if (!guideData) try {
       const resp = await fetch('/api/ai-guide', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -490,6 +518,14 @@
       if (resp.ok) {
         const result = await resp.json();
         if (result.success && result.data) {
+          rawGuide = {
+            branch: problemTopic || 'Toán THPT Chuyên',
+            knowledge: result.data.knowledge || '',
+            intuition: result.data.intuition || '',
+            solution: result.data.solution || '',
+            pitfalls: result.data.pitfalls || '',
+            quality: result.data.quality || null
+          };
           guideData = {
             branch: problemTopic || 'Toán THPT Chuyên',
             knowledge: formatMarkdownToHtml(result.data.knowledge),
@@ -520,6 +556,19 @@
       btn.innerHTML = '<span class="guide-sparkle">🔄</span> Thử lại AI Hướng dẫn giải';
       return;
     }
+
+    aiGuideContexts.set(problemId, {
+      problemKey,
+      problemTitle,
+      problemContent,
+      examTitle,
+      topic: problemTopic,
+      setId: card.dataset.setId || '',
+      setTitle: card.dataset.setTitle || examTitle,
+      sourceType: card.dataset.sourceType || '',
+      sourceGroup: card.dataset.sourceGroup || '',
+      rawGuide
+    });
 
     // Render HTML hoàn chỉnh
     tempPanel.outerHTML = renderAIGuideHtml(problemId, guideData, problemTopic);
@@ -566,7 +615,26 @@
 
     try {
       if (window.VMODataService && window.VMODataService.submitSolution) {
-        await window.VMODataService.submitSolution(problemId, `AI Hướng dẫn - ${topic || 'Bài toán VMO'}`, solutionText);
+        const context = aiGuideContexts.get(problemId) || {};
+        const stableProblemKey = context.problemKey || problemId;
+        await window.VMODataService.submitSolution(
+          stableProblemKey,
+          context.problemTitle || `AI Hướng dẫn - ${topic || 'Bài toán VMO'}`,
+          solutionText,
+          null,
+          '',
+          {
+            problemKey: stableProblemKey,
+            setId: context.setId || '',
+            setTitle: context.setTitle || context.examTitle || '',
+            sourceType: context.sourceType || '',
+            sourceGroup: context.sourceGroup || '',
+            topic: context.topic || topic || '',
+            problemContent: context.problemContent || '',
+            submissionKind: 'ai_guide',
+            aiGuide: context.rawGuide || null
+          }
+        );
         if (btn) {
           btn.innerHTML = '✅ Đã lưu vào MongoDB!';
           btn.style.color = '#16a34a';
