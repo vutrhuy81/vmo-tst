@@ -2049,14 +2049,15 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
 
   function ensureExamOcrForm(modal) {
     const form = modal?.querySelector('#formAddExam');
-    if (!form || form.querySelector('#examTargetAnchor')) return;
+    if (!form || (form.querySelector('#examTargetAnchor') && form.querySelector('#examRegion'))) return;
     form.innerHTML = `
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px;">
-        <div><label style="display:block;font-size:.8rem;font-weight:600;margin-bottom:4px;">Tỉnh/Thành phố trên frontend *</label><select id="examTargetAnchor" required onchange="syncExamProvinceFromTarget()" style="width:100%;box-sizing:border-box;padding:6px 10px;border:1px solid #cbd5e1;border-radius:6px;"></select></div>
+        <div><label style="display:block;font-size:.8rem;font-weight:600;margin-bottom:4px;">Tỉnh/Thành phố hoặc trường chuyên *</label><select id="examTargetAnchor" required onchange="syncExamProvinceFromTarget()" style="width:100%;box-sizing:border-box;padding:6px 10px;border:1px solid #cbd5e1;border-radius:6px;"></select></div>
         <div><label style="display:block;font-size:.8rem;font-weight:600;margin-bottom:4px;">Ngày thi *</label><select id="examDayNumber" required style="width:100%;box-sizing:border-box;padding:6px 10px;border:1px solid #cbd5e1;border-radius:6px;"><option value="1">Ngày thi thứ nhất</option><option value="2">Ngày thi thứ hai</option></select></div>
       </div>
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px;">
-        <div><label style="display:block;font-size:.8rem;font-weight:600;margin-bottom:4px;">Tỉnh / Đơn vị *</label><input type="text" id="examProvince" required placeholder="vd: Bắc Ninh" style="width:100%;box-sizing:border-box;padding:6px 10px;border:1px solid #cbd5e1;border-radius:6px;"></div>
+      <div style="display:grid;grid-template-columns:1fr .55fr 1fr;gap:10px;margin-bottom:10px;">
+        <div><label style="display:block;font-size:.8rem;font-weight:600;margin-bottom:4px;">Tỉnh / Đơn vị *</label><input type="text" id="examProvince" required readonly style="width:100%;box-sizing:border-box;padding:6px 10px;border:1px solid #cbd5e1;border-radius:6px;background:#f8fafc;"></div>
+        <div><label style="display:block;font-size:.8rem;font-weight:600;margin-bottom:4px;">Vùng (tự động)</label><input type="hidden" id="examRegion"><input type="text" id="examRegionDisplay" readonly style="width:100%;box-sizing:border-box;padding:6px 10px;border:1px solid #cbd5e1;border-radius:6px;background:#f8fafc;"></div>
         <div><label style="display:block;font-size:.8rem;font-weight:600;margin-bottom:4px;">Tên đề thi</label><input type="text" id="examTitle" placeholder="Có thể để trống để lấy từ OCR" style="width:100%;box-sizing:border-box;padding:6px 10px;border:1px solid #cbd5e1;border-radius:6px;"></div>
       </div>
       <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:10px;">
@@ -2877,22 +2878,62 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
     const select = document.getElementById('examTargetAnchor');
     if (!select) return;
     const previous = select.value;
+    const canonical = Array.isArray(window.VMO_TST_LOCATIONS)
+      ? window.VMO_TST_LOCATIONS.map(item => ({ ...item }))
+      : [];
+    const knownAnchors = new Set(canonical.map(item => item.anchor));
     const cards = Array.from(document.querySelectorAll('#tab-tst .exam-card[id]'));
-    select.innerHTML = cards.map((card, index) => {
+    const legacy = cards.filter(card => !knownAnchors.has(card.id)).map((card, index) => {
       const province = (card.querySelector('.tag-province')?.textContent || card.querySelector('.exam-title')?.textContent || card.id).trim();
       const sidebar = document.querySelector(`#sidebar-tst a[href="#${CSS.escape(card.id)}"]`)?.textContent?.trim();
-      return `<option value="${escapeHtmlText(card.id)}" data-province="${escapeHtmlText(province)}" data-order="${index + 1}">${escapeHtmlText(sidebar || `${index + 1}. ${province}`)}</option>`;
-    }).join('');
-    if (previous && cards.some(card => card.id === previous)) select.value = previous;
+      return {
+        name: sidebar || province,
+        province,
+        anchor: card.id,
+        region: card.dataset.filter || 'BAC',
+        type: 'legacy',
+        order: 201 + index
+      };
+    });
+
+    select.replaceChildren();
+    const groups = [
+      ['34 tỉnh/thành phố', canonical.filter(item => item.type === 'province')],
+      ['Trường chuyên trực thuộc đại học', canonical.filter(item => item.type === 'university_school')],
+      ['Đơn vị hiện có khác', legacy]
+    ];
+    groups.forEach(([label, items]) => {
+      if (!items.length) return;
+      const group = document.createElement('optgroup');
+      group.label = label;
+      items.forEach(item => {
+        const option = document.createElement('option');
+        option.value = item.anchor;
+        option.textContent = item.name;
+        option.dataset.province = item.province || item.name;
+        option.dataset.region = item.region;
+        option.dataset.order = String(item.order || 0);
+        option.dataset.type = item.type;
+        group.appendChild(option);
+      });
+      select.appendChild(group);
+    });
+    if (previous && Array.from(select.options).some(option => option.value === previous)) select.value = previous;
     window.syncExamProvinceFromTarget();
   }
 
   window.syncExamProvinceFromTarget = function() {
     const select = document.getElementById('examTargetAnchor');
     const province = document.getElementById('examProvince');
-    if (select?.selectedOptions?.[0] && province) {
-      province.value = select.selectedOptions[0].dataset.province || province.value;
-    }
+    const region = document.getElementById('examRegion');
+    const regionDisplay = document.getElementById('examRegionDisplay');
+    const option = select?.selectedOptions?.[0];
+    if (!option) return;
+    const regionCode = ['BAC', 'TRUNG', 'NAM'].includes(option.dataset.region) ? option.dataset.region : 'BAC';
+    const regionLabels = { BAC: 'Miền Bắc', TRUNG: 'Miền Trung', NAM: 'Miền Nam' };
+    if (province) province.value = option.dataset.province || option.textContent || '';
+    if (region) region.value = regionCode;
+    if (regionDisplay) regionDisplay.value = regionLabels[regionCode];
   };
 
   window.resetExamOcrPreview = function() {
@@ -3159,6 +3200,8 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
     const targetSelect = document.getElementById('examTargetAnchor');
     const targetAnchor = targetSelect?.value || '';
     const provinceOrder = Number(targetSelect?.selectedOptions?.[0]?.dataset?.order) || 0;
+    const selectedRegion = document.getElementById('examRegion')?.value || targetSelect?.selectedOptions?.[0]?.dataset?.region;
+    const region = ['BAC', 'TRUNG', 'NAM'].includes(selectedRegion) ? selectedRegion : 'BAC';
     const sourceImageCount = document.getElementById('examImages')?.files?.length || 0;
     const questions = collectExamOcrQuestions();
     const sourceImages = Array.from(window.pendingExamSourceImages || []);
@@ -3168,7 +3211,7 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
     const saveButton = document.getElementById('examSaveButton');
     const originalSaveLabel = saveButton?.textContent || 'Lưu đề thi & câu hỏi vào MongoDB';
     const saveExam = replaceExisting => window.VMODataService.createExamFromOcr({
-        title, province, year, duration, examDate, dayNumber, targetAnchor,
+        title, province, year, duration, examDate, dayNumber, targetAnchor, region,
         provinceOrder, sourceImageCount, ocrConfidence: window.pendingExamOcrConfidence,
         status: 'published', replaceExisting, questions
       });
@@ -3238,7 +3281,21 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
     card.dataset.search = `${exam.province || ''} ${exam.year || ''}`.toLowerCase();
     card.innerHTML = `<div class="exam-header"><div class="exam-top-tags"><span class="tag tag-year">${escapeHtmlText(exam.year || '2026-2027')}</span><span class="tag tag-province">${escapeHtmlText(exam.province || '')}</span><span class="tag tag-official">Đề từ database</span></div><h3 class="exam-title">${escapeHtmlText(exam.title || `Đề TST ${exam.province || ''}`)}</h3></div><div class="exam-body"></div>`;
     document.getElementById('tab-tst')?.appendChild(card);
+    ensureDatabaseExamSidebar(exam);
     return card;
+  }
+
+  function ensureDatabaseExamSidebar(exam) {
+    if (!exam?.targetAnchor) return;
+    const sidebar = document.querySelector('#sidebar-tst .nav-year-group') || document.getElementById('sidebar-tst');
+    if (!sidebar || sidebar.querySelector(`a[href="#${CSS.escape(exam.targetAnchor)}"]`)) return;
+    const link = document.createElement('a');
+    link.className = 'nav-link db-exam-sidebar-link';
+    link.href = `#${exam.targetAnchor}`;
+    link.dataset.region = ['BAC', 'TRUNG', 'NAM'].includes(exam.region) ? exam.region : 'BAC';
+    link.dataset.order = String(Number(exam.provinceOrder) || 0);
+    link.textContent = `📍 ${exam.province || exam.title || 'Đề thi mới'}`;
+    sidebar.appendChild(link);
   }
 
   function ensureReferenceLinksModal() {
@@ -3513,6 +3570,7 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
 
   function renderDatabaseExam(exam) {
     if (!exam?.targetAnchor || !Array.isArray(exam.problems) || !exam.problems.length) return;
+    ensureDatabaseExamSidebar(exam);
     let card = document.getElementById(exam.targetAnchor);
     if (!card) card = createDatabaseExamCard(exam);
     const body = card?.querySelector('.exam-body') || card;
