@@ -35,6 +35,25 @@ function cleanReferenceLinks(value) {
   }).filter(Boolean);
 }
 
+function cleanAiGuide(value) {
+  if (!value || typeof value !== 'object') return null;
+  const quality = value.quality && typeof value.quality === 'object'
+    ? {
+        verified: value.quality.verified === true,
+        score: cleanText(value.quality.score, 20),
+        verifier: cleanText(value.quality.verifier, 120)
+      }
+    : null;
+  return {
+    branch: cleanText(value.branch, 300),
+    knowledge: cleanText(value.knowledge, 50000),
+    intuition: cleanText(value.intuition, 50000),
+    solution: cleanText(value.solution, 100000),
+    pitfalls: cleanText(value.pitfalls, 50000),
+    quality
+  };
+}
+
 function objectId(value) {
   return ObjectId.isValid(value) ? new ObjectId(value) : null;
 }
@@ -252,7 +271,10 @@ export default async function handler(req, res) {
         filter.topic = cleanText(req.query.topic, 120);
       }
       if (resource === 'submissions') {
-        if (session.role !== 'admin') filter.userId = String(session.sub);
+        if (session.role !== 'admin' || req.query?.own === '1') filter.userId = String(session.sub);
+        if (req.query?.submissionKind) {
+          filter.submissionKind = cleanText(req.query.submissionKind, 40);
+        }
         if (req.query?.problemId) {
           const requestedProblem = cleanText(req.query.problemId, 180);
           filter.$or = [
@@ -330,7 +352,7 @@ export default async function handler(req, res) {
       const items = await db.collection(resource)
         .find(filter, projection ? { projection } : undefined)
         .sort(sort)
-        .limit(500)
+        .limit(req.query?.latest === '1' ? 1 : 500)
         .toArray();
       return res.status(200).json({ success: true, items });
     }
@@ -372,6 +394,8 @@ export default async function handler(req, res) {
       const registeredProblemId = registeredProblem ? String(registeredProblem._id) : submittedProblemId;
       const registeredProblemKey = registeredProblem?.contentKey || submittedProblemKey || submittedProblemId;
       const evaluation = payload.evaluation && typeof payload.evaluation === 'object' ? payload.evaluation : null;
+      const submissionKind = payload.submissionKind === 'ai_guide' ? 'ai_guide' : 'student_solution';
+      const aiGuide = submissionKind === 'ai_guide' ? cleanAiGuide(payload.aiGuide) : null;
       const doc = {
         problemId: registeredProblemId,
         problemKey: registeredProblemKey,
@@ -399,9 +423,28 @@ export default async function handler(req, res) {
         verdictLabel: cleanText(evaluation?.verdictLabel, 500),
         score: evaluation?.estimatedScore ?? null,
         evaluation,
+        submissionKind,
+        aiGuide,
         createdAt: now,
         updatedAt: now
       };
+      if (submissionKind === 'ai_guide') {
+        const aiGuideDoc = { ...doc };
+        delete aiGuideDoc.createdAt;
+        const savedGuide = await db.collection('submissions').findOneAndUpdate(
+          {
+            userId: String(session.sub),
+            problemKey: registeredProblemKey,
+            submissionKind: 'ai_guide'
+          },
+          {
+            $set: aiGuideDoc,
+            $setOnInsert: { createdAt: now }
+          },
+          { upsert: true, returnDocument: 'after' }
+        );
+        return res.status(200).json({ success: true, item: savedGuide });
+      }
       const result = await db.collection('submissions').insertOne(doc);
       if (solutionImage) {
         const mimeType = solutionImage.slice(5, solutionImage.indexOf(';'));
