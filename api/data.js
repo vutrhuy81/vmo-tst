@@ -5,6 +5,7 @@ import { getSession } from './lib/session.js';
 const ALLOWED_RESOURCES = new Set(['documents', 'exams', 'exam_catalog', 'exam_image', 'content_sets', 'problems', 'content_revisions', 'submissions', 'submission_image', 'events']);
 const CONTENT_TYPES = new Set(['specialty_chapter', 'mock_exam', 'tst_exam', 'regional_exam']);
 const SOURCE_TYPES = new Set(['specialty_example', 'mock_exam_question', 'tst_question', 'regional_question']);
+const TST_REGIONS = new Set(['BAC', 'TRUNG', 'NAM']);
 const MAX_SOLUTION_IMAGE_CHARS = 3_000_000;
 
 function parseBody(req) {
@@ -801,6 +802,8 @@ export default async function handler(req, res) {
     if (action === 'create_exam_from_ocr') {
       const province = cleanText(payload.province, 120);
       const targetAnchor = cleanKey(payload.targetAnchor, 180);
+      const requestedRegion = cleanText(payload.region, 20).toUpperCase();
+      const region = TST_REGIONS.has(requestedRegion) ? requestedRegion : 'BAC';
       const dayNumber = Math.max(1, Math.min(2, Number(payload.dayNumber) || 1));
       const year = cleanText(payload.year, 40) || '2026-2027';
       const questions = Array.isArray(payload.questions) ? payload.questions.slice(0, 10) : [];
@@ -847,6 +850,7 @@ export default async function handler(req, res) {
         day: `Ngày ${dayNumber}`,
         dayNumber,
         province,
+        region,
         provinceOrder: cleanNumber(payload.provinceOrder, 0, 0, 1000),
         duration: Math.max(1, Math.min(600, Number(payload.duration) || 180)),
         examDate: cleanText(payload.examDate, 20),
@@ -872,7 +876,7 @@ export default async function handler(req, res) {
         group: 'tst',
         year,
         province,
-        region: cleanText(payload.region, 80),
+        region,
         order: cleanNumber(payload.provinceOrder),
         status,
         updatedBy: session.username,
