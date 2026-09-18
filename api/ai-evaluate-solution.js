@@ -40,10 +40,14 @@ const stringArray = { type: 'array', items: { type: 'string' } };
 const verifierSchema = {
   type: 'object',
   properties: {
-    approved: { type: 'boolean' }, corrected: { type: 'boolean' },
-    allClaimsChecked: { type: 'boolean' }, mathCorrect: { type: 'boolean' },
-    scoreConsistent: { type: 'boolean' }, noInventedStudentWork: { type: 'boolean' },
-    referenceMatched: { type: 'boolean' }, criticalIssues: stringArray,
+    approved: { type: 'boolean', description: 'True when the final verifier report is complete and publishable, even if the student solution is wrong or incomplete.' },
+    corrected: { type: 'boolean', description: 'True when the verifier corrected any part of the preliminary Gemini report.' },
+    allClaimsChecked: { type: 'boolean', description: 'True when every material claim in the final report has been checked; this does not mean every student claim is correct.' },
+    mathCorrect: { type: 'boolean', description: 'True when the mathematics in the final verifier report is correct; this flag describes the report, not the student solution.' },
+    scoreConsistent: { type: 'boolean', description: 'True when the final score is consistent with the actual degree of completion of the student solution.' },
+    noInventedStudentWork: { type: 'boolean', description: 'True when the final report attributes only steps that the student actually wrote.' },
+    referenceMatched: { type: 'boolean', description: 'True when the final report is consistent with the trusted reference, or with an independent solution when no trusted reference exists.' },
+    criticalIssues: stringArray,
     verdict: { type: 'string', enum: VERDICTS }, verdictLabel: { type: 'string' },
     estimatedScore: { type: 'string' }, summary: { type: 'string' }, approachAnalysis: { type: 'string' },
     stepByStep: { type: 'string' }, criticalFlaws: { type: 'string' }, recommendations: { type: 'string' },
@@ -201,9 +205,17 @@ QUY TRÌNH CHẤM BẮT BUỘC
     const provisional = await generateJson({
       contents,
       schema,
-      temperature: 0,
-      models: [process.env.GEMINI_EVALUATION_MODEL || process.env.GEMINI_SOLVER_MODEL || 'gemini-3.5-flash-lite'],
-      timeoutMs: 45_000,
+      // Gemini 3.x is optimized for its default temperature of 1.0. Lowering it
+      // can degrade complex mathematical reasoning.
+      temperature: 1,
+      models: [
+        process.env.GEMINI_EVALUATION_MODEL,
+        'gemini-3.8-flash',
+        'gemini-3.5-flash'
+      ],
+      timeoutMs: 120_000,
+      maxOutputTokens: 16_000,
+      thinkingLevel: 'HIGH',
       systemInstruction: `Bạn là giám khảo VMO/IMO nghiêm túc và thận trọng. Toàn bộ nội dung phải được viết bằng ${outputLanguage}.
 Ưu tiên tính đúng đắn hơn độ dài. Không bịa dữ kiện hoặc lỗi.
 Mọi phép biến đổi đại số do bạn nêu phải được tự kiểm tra độc lập trước khi trả kết quả JSON.`
@@ -240,12 +252,14 @@ YÊU CẦU KIỂM ĐỊNH
 4. Trả về một báo cáo CUỐI CÙNG hoàn chỉnh trong các trường nội dung. Nếu Gemini sai, hãy sửa trực tiếp và đặt corrected=true.
 5. approved chỉ được true khi báo cáo cuối cùng có thể công bố; mọi cờ kiểm định phải phản ánh báo cáo cuối cùng sau hiệu chỉnh.
 6. Khi không có nguồn tham khảo, referenceMatched=true chỉ khi đã tự giải và đối chiếu độc lập.
-7. Dùng MathJax $...$ hoặc $$...$$; không dùng align, aligned, tag, itemize, enumerate hoặc textbf.`,
+7. mathCorrect đánh giá tính đúng đắn của BÁO CÁO CUỐI, không phải tính đúng đắn của bài học sinh. Bài học sinh sai hoặc chưa hoàn thành vẫn phải được chấm và có thể cho mathCorrect=true nếu báo cáo cuối phân tích đúng lỗi đó.
+8. allClaimsChecked đánh giá mức độ kiểm tra của báo cáo cuối; không đặt false chỉ vì học sinh bỏ dở hoặc thiếu chứng minh.
+9. Dùng MathJax $...$ hoặc $$...$$; không dùng align, aligned, tag, itemize, enumerate hoặc textbf.`,
       schema: verifierSchema,
       systemInstruction: `Bạn là giám khảo phản biện VMO/IMO độc lập. Hãy kiểm tra bài làm gốc và báo cáo Gemini bằng ${outputLanguage}. Ưu tiên tính đúng đắn; không bịa nội dung học sinh. Trả về đúng structured JSON.`,
       timeoutMs: 120_000,
-      maxOutputTokens: 8_000,
-      reasoningEffort: 'low'
+      maxOutputTokens: 16_000,
+      reasoningEffort: 'high'
     });
 
     const hasTrustedReference = Boolean(reference?.content);
