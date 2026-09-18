@@ -21,20 +21,23 @@ window.MathJax = {
     processHtmlClass: 'tex2jax_process'
   },
   startup: {
-    typeset: true,
+    // Chỉ render công thức của tab đang hiển thị, không xử lý cả bốn kho lúc khởi động.
+    typeset: false,
     ready: () => {
-      // Sao lưu mã nguồn chứa LaTeX nguyên bản trước khi MathJax biến đổi DOM
-      try {
-        document.querySelectorAll('.problem-content, .examplebox').forEach(el => {
-          if (!el.getAttribute('data-raw-math')) {
-            el.setAttribute('data-raw-math', el.innerHTML);
-          }
-        });
-      } catch (e) {}
-
       MathJax.startup.defaultReady();
+      const renderedRoots = new WeakSet();
+      window.renderMathInContainer = async (root, force = false) => {
+        if (!root || (!force && renderedRoots.has(root))) return;
+        root.querySelectorAll?.('.problem-content, .examplebox').forEach(el => {
+          if (!el.getAttribute('data-raw-math')) el.setAttribute('data-raw-math', el.innerHTML);
+        });
+        await MathJax.typesetPromise([root]);
+        renderedRoots.add(root);
+      };
       MathJax.startup.promise.then(() => {
         document.documentElement.classList.add('mathjax-ready');
+        const activeTab = document.querySelector('.tab-pane.active');
+        if (activeTab) window.renderMathInContainer(activeTab).catch(() => {});
       });
     }
   }
@@ -141,7 +144,7 @@ VMOAuth.requireAuth('login.html');
     <div class="search-row">
       <div class="search-box"><span class="search-icon">🔎</span><input id="searchInput" type="search" placeholder="Tìm Stolz, LTE, Miquel, nội suy, bất biến, Chebyshev..." autocomplete="off"></div>
       <a class="btn-action" href="assets/On_luyen_VMO_Da_Nang_2026_2027.pdf" target="_blank" rel="noopener">📄 PDF</a>
-      <button class="btn-secondary" type="button" onclick="window.print()">🖨️ In</button>
+      <button class="btn-secondary" type="button" onclick="window.printVMODocument ? window.printVMODocument() : window.print()">🖨️ In</button>
     </div>
     <div id="searchSummary" class="search-summary" aria-live="polite"></div>
     <div class="filter-pills" id="mockFilterPills" style="display:none">
