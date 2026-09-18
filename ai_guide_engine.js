@@ -717,9 +717,9 @@
   }
 
   // TỰ ĐỘNG GẮN NÚT "AI HƯỚNG DẪN GIẢI" VÀO TẤT CẢ CÁC CÂU HỎI TRONG ĐỀ THI
-  function injectAIGuideButtons() {
+  function injectAIGuideButtons(root = document) {
     // 1. Quét tất cả các bài tập trong thẻ .problem-item (TST và Đề Đà Nẵng - Quảng Nam)
-    const problemHeaders = document.querySelectorAll('.problem-item .problem-header');
+    const problemHeaders = root.querySelectorAll?.('.problem-item .problem-header') || [];
     problemHeaders.forEach(header => {
       if (!header.querySelector('.btn-ai-guide')) {
         const btn = document.createElement('button');
@@ -739,7 +739,7 @@
     });
 
     // 2. Quét các câu hỏi trong ví dụ của chuyên đề VMO (.examplebox)
-    const exampleBoxes = document.querySelectorAll('.examplebox');
+    const exampleBoxes = root.querySelectorAll?.('.examplebox') || [];
     exampleBoxes.forEach(box => {
       const heading = box.querySelector('.box-heading');
       if (heading && !box.querySelector('.btn-ai-guide')) {
@@ -762,7 +762,7 @@
     });
 
     // 3. Quét các câu hỏi trong đề thi thử Chương 10, 11, 12, 13
-    const unnumberedQuestions = document.querySelectorAll('.book-subsection h3.unnumbered');
+    const unnumberedQuestions = root.querySelectorAll?.('.book-subsection h3.unnumbered') || [];
     unnumberedQuestions.forEach(h3 => {
       const parentSub = h3.closest('.book-subsection');
       if (parentSub && !h3.nextElementSibling?.classList?.contains('ai-btn-wrapper')) {
@@ -827,9 +827,9 @@
 
   // Khởi chạy ngay khi nạp trang
   if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', injectAIGuideButtons);
+    document.addEventListener('DOMContentLoaded', () => injectAIGuideButtons(document.querySelector('.tab-pane.active') || document));
   } else {
-    injectAIGuideButtons();
+    injectAIGuideButtons(document.querySelector('.tab-pane.active') || document);
   }
 
   // Hỗ trợ tái khởi tạo nếu chuyển tab hoặc thay đổi nội dung

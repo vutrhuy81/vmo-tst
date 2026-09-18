@@ -41,4 +41,9 @@ body.dark{--bg:#0d1420;--card:#111b2a;--text:#e4ebf3;--muted:#9facba;--border:#2
 #subImageMathPreviewContent mjx-container,#subMathPreviewContent mjx-container{max-width:100%!important;overflow-x:auto!important;overflow-y:hidden!important;padding:2px 0}
 #subImageMathPreviewContent mjx-container[display="true"],#subMathPreviewContent mjx-container[display="true"]{margin:0.7em 0!important;display:block}
 
+.tab-loading,.tab-load-error{background:#fff;border:1px solid var(--border);border-radius:12px;padding:28px;text-align:center;color:var(--muted);box-shadow:var(--shadow)}
+.tab-loading:before{content:"";display:inline-block;width:18px;height:18px;margin-right:9px;vertical-align:-4px;border:2px solid #cbd5e1;border-top-color:var(--primary);border-radius:50%;animation:vmo-tab-spin .75s linear infinite}
+.tab-load-error{color:#991b1b;background:#fff7ed;border-color:#fed7aa}
+@keyframes vmo-tab-spin{to{transform:rotate(360deg)}}
+
 @media print{.hero,.nav-tabs-wrapper,.controls-sticky,.sidebar,.book-dashboard,.solution-toggle,.back-to-top,footer{display:none!important}.layout-container{display:block;max-width:none;margin:0;padding:0}.tab-pane{display:block!important}.chapter-block,.document-cover{box-shadow:none;border:0;page-break-before:auto}.example-solution{display:block!important}.exam-card{box-shadow:none}.tab-pane#tab-tst,.tab-pane#tab-history{display:none!important}body{background:white;color:black}.book-content h1,.book-content h2,.book-content h3{color:black}}

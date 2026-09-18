@@ -8,6 +8,9 @@
 
 const DATA_API_URL = '/api/data';
 const REQUEST_TIMEOUT_MS = 30_000;
+const READ_CACHE_TTL_MS = 5 * 60_000;
+const readCache = new Map();
+const inflightReads = new Map();
 
 function createServiceError(message, status = 0, code = '') {
   const error = new Error(message);
@@ -93,6 +96,27 @@ async function apiFetch(url, options = {}) {
   }
 }
 
+function invalidateReadCache() {
+  readCache.clear();
+  inflightReads.clear();
+}
+
+async function cachedApiFetch(url, ttlMs = READ_CACHE_TTL_MS) {
+  const now = Date.now();
+  const cached = readCache.get(url);
+  if (cached && now - cached.storedAt < ttlMs) return cached.data;
+  if (inflightReads.has(url)) return inflightReads.get(url);
+
+  const pending = apiFetch(url)
+    .then(data => {
+      readCache.set(url, { data, storedAt: Date.now() });
+      return data;
+    })
+    .finally(() => inflightReads.delete(url));
+  inflightReads.set(url, pending);
+  return pending;
+}
+
 async function request(resource, params = {}) {
   const query = new URLSearchParams({ resource });
 
@@ -102,7 +126,7 @@ async function request(resource, params = {}) {
     }
   });
 
-  const data = await apiFetch(`${DATA_API_URL}?${query.toString()}`);
+  const data = await cachedApiFetch(`${DATA_API_URL}?${query.toString()}`);
   return Array.isArray(data.items) ? data.items : [];
 }
 
@@ -124,6 +148,9 @@ async function mutate(action, payload = {}) {
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ action, payload })
   });
+
+  // Mutation thành công có thể làm thay đổi catalog hoặc dữ liệu quản trị.
+  invalidateReadCache();
 
   return data.item ?? true;
 }
@@ -232,7 +259,8 @@ export async function getCatalogProblems(filters = {}) {
   return normalizeList(await request('problems', {
     setId: filters.setId,
     sourceGroup: filters.sourceGroup,
-    contentKey: filters.contentKey
+    contentKey: filters.contentKey,
+    view: filters.runtime ? 'runtime' : ''
   }));
 }
 
@@ -398,5 +426,6 @@ const VMODataService = Object.freeze({
 });
 
 window.VMODataService = VMODataService;
+window.invalidateVMODataCache = invalidateReadCache;
 
 console.info('[VMODataService] MongoDB Atlas API đã sẵn sàng');

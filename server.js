@@ -664,22 +664,29 @@ Chuyển qua giới hạn trong hệ thức truy hồi ta tìm được $L = \\s
   });
 });
 
-// Set security and cross-origin headers that permit Firebase Auth popup and external CDNs
+// Security headers. Chính sách cache được đặt theo từng loại static asset ở bên dưới.
 app.use((req, res, next) => {
   res.setHeader('X-Content-Type-Options', 'nosniff');
   res.setHeader('X-Frame-Options', 'SAMEORIGIN');
   res.setHeader('X-XSS-Protection', '1; mode=block');
-  // Chống cache triệt để để trình duyệt luôn lấy mã nguồn JS/CSS mới nhất sau mỗi lần cập nhật
-  res.setHeader('Cache-Control', 'no-store, no-cache, must-revalidate, proxy-revalidate, max-age=0');
-  res.setHeader('Pragma', 'no-cache');
-  res.setHeader('Expires', '0');
-  res.setHeader('Surrogate-Control', 'no-store');
   next();
 });
 
 // Serve static assets from root directory
 app.use(express.static(__dirname, {
-  extensions: ['html', 'htm']
+  extensions: ['html', 'htm'],
+  setHeaders(res, filePath) {
+    const normalized = filePath.replaceAll('\\', '/');
+    if (normalized.includes('/src/content/') && normalized.endsWith('.html')) {
+      res.setHeader('Cache-Control', 'public, max-age=31536000, immutable');
+    } else if (/\.(?:js|css)$/i.test(normalized)) {
+      res.setHeader('Cache-Control', 'public, max-age=31536000, immutable');
+    } else if (normalized.includes('/assets/')) {
+      res.setHeader('Cache-Control', 'public, max-age=86400, stale-while-revalidate=604800');
+    } else if (/\.html?$/i.test(normalized)) {
+      res.setHeader('Cache-Control', 'public, max-age=0, must-revalidate');
+    }
+  }
 }));
 
 // Route for root /
@@ -689,16 +696,19 @@ app.get('/', (req, res) => {
   } catch (err) {
     console.warn('[Build Warning]:', err.message);
   }
+  res.setHeader('Cache-Control', 'public, max-age=0, must-revalidate');
   res.sendFile(path.join(__dirname, 'index.html'));
 });
 
 // Route for login
 app.get('/login', (req, res) => {
+  res.setHeader('Cache-Control', 'public, max-age=0, must-revalidate');
   res.sendFile(path.join(__dirname, 'login.html'));
 });
 
 // Fallback for clean URLs
 app.use((req, res) => {
+  res.setHeader('Cache-Control', 'public, max-age=0, must-revalidate');
   res.sendFile(path.join(__dirname, 'index.html'));
 });
 

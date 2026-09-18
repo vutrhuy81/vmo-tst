@@ -145,11 +145,11 @@
   }
 
   // 1. GẮN NÚT "NỘP BÀI GIẢI CỦA BẠN" VÀO TỪNG BÀI TOÁN
-  function injectSubmissionButtons() {
+  function injectSubmissionButtons(root = document) {
     const isEn = (window.currentLang === 'en');
 
     // 1.1 Thẻ .problem-item (TST, Đề thi thử, Đề Đà Nẵng - Quảng Nam)
-    const problemItems = document.querySelectorAll('.problem-item');
+    const problemItems = root.querySelectorAll?.('.problem-item') || [];
     problemItems.forEach(item => {
       const header = item.querySelector('.problem-header');
       if (!header || item.querySelector('.btn-submit-solution')) return;
@@ -190,7 +190,7 @@
     });
 
     // 1.2 Thẻ ví dụ chuyên đề (.examplebox)
-    const exampleBoxes = document.querySelectorAll('.examplebox');
+    const exampleBoxes = root.querySelectorAll?.('.examplebox') || [];
     exampleBoxes.forEach(box => {
       const heading = box.querySelector('.box-heading');
       if (!heading || box.querySelector('.btn-submit-solution')) return;
@@ -359,13 +359,28 @@
   window.currentEvaluationResult = null;
   window.lastLoadedSubmissions = [];
   window.catalogAccessRules = new Map();
+  let catalogRulesLoaded = false;
+  let catalogRulesPromise = null;
 
-  async function applyCatalogAccessRules() {
+  async function applyCatalogAccessRules(root = document, force = false) {
     if (isCurrentUserAdmin() || !window.VMODataService?.getCatalogRules) return;
     try {
-      const rules = await window.VMODataService.getCatalogRules();
-      window.catalogAccessRules = new Map(rules.map(rule => [rule.contentKey, rule]));
-      document.querySelectorAll('.problem-item[data-content-key], .examplebox[data-content-key]').forEach(card => {
+      if (force) {
+        catalogRulesLoaded = false;
+        window.invalidateVMODataCache?.();
+      }
+      if (!catalogRulesLoaded) {
+        if (!catalogRulesPromise) {
+          catalogRulesPromise = window.VMODataService.getCatalogRules()
+            .then(rules => {
+              window.catalogAccessRules = new Map(rules.map(rule => [rule.contentKey, rule]));
+              catalogRulesLoaded = true;
+            })
+            .finally(() => { catalogRulesPromise = null; });
+        }
+        await catalogRulesPromise;
+      }
+      root.querySelectorAll?.('.problem-item[data-content-key], .examplebox[data-content-key]').forEach(card => {
         const rule = window.catalogAccessRules.get(card.dataset.contentKey);
         if (!rule) return;
         card.hidden = rule.published === false;
@@ -3468,17 +3483,29 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
     });
   }
 
-  async function loadMongoReferenceLinks(force = false) {
+  let mongoReferenceLinksPromise = null;
+
+  async function loadMongoReferenceLinks(force = false, root = document) {
     if (!window.VMODataService?.getCatalogProblems) return;
     if (!force && window.mongoProblemReferenceLinks instanceof Map) {
-      applyMongoReferenceLinks();
+      applyMongoReferenceLinks(root);
       return;
     }
     try {
-      const problems = await window.VMODataService.getCatalogProblems();
-      window.mongoProblemsByContentKey = new Map(problems.map(problem => [problem.contentKey, problem]));
-      window.mongoProblemReferenceLinks = new Map(problems.map(problem => [problem.contentKey, problem.referenceLinks || []]));
-      applyMongoReferenceLinks();
+      if (force) {
+        window.invalidateVMODataCache?.();
+        mongoReferenceLinksPromise = null;
+      }
+      if (!mongoReferenceLinksPromise) {
+        mongoReferenceLinksPromise = window.VMODataService.getCatalogProblems({ runtime: true })
+          .then(problems => {
+            window.mongoProblemsByContentKey = new Map(problems.map(problem => [problem.contentKey, problem]));
+            window.mongoProblemReferenceLinks = new Map(problems.map(problem => [problem.contentKey, problem.referenceLinks || []]));
+          })
+          .finally(() => { mongoReferenceLinksPromise = null; });
+      }
+      await mongoReferenceLinksPromise;
+      applyMongoReferenceLinks(root);
     } catch (error) {
       console.warn('Không tải được nguồn tham khảo MongoDB:', error?.message || error);
     }
@@ -3532,24 +3559,38 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
     body.appendChild(section);
   }
 
+  let databaseTstLoaded = false;
+  let databaseTstPromise = null;
+
   async function loadDatabaseTstExams(force = false) {
     if (!window.VMODataService?.getExamCatalog) {
       if (!force) setTimeout(() => loadDatabaseTstExams(true), 500);
       return;
     }
-    try {
-      const exams = await window.VMODataService.getExamCatalog('tst-national');
-      exams.forEach(renderDatabaseExam);
-      injectSubmissionButtons();
-      window.reinitAIGuide?.();
-      await applyCatalogAccessRules();
-      applyMongoReferenceLinks(document.getElementById('tab-tst'));
-      if (window.MathJax?.typesetPromise) {
-        window.MathJax.typesetPromise([document.getElementById('tab-tst')]).catch(() => {});
+    if (databaseTstLoaded && !force) return;
+    if (databaseTstPromise) return databaseTstPromise;
+    if (force) window.invalidateVMODataCache?.();
+
+    databaseTstPromise = (async () => {
+      try {
+        const exams = await window.VMODataService.getExamCatalog('tst-national');
+        exams.forEach(renderDatabaseExam);
+        const tstRoot = document.getElementById('tab-tst');
+        injectSubmissionButtons(tstRoot || document);
+        window.reinitAIGuide?.(tstRoot || document);
+        await applyCatalogAccessRules(tstRoot || document);
+        applyMongoReferenceLinks(tstRoot || document);
+        if (tstRoot && window.renderMathInContainer) {
+          window.renderMathInContainer(tstRoot, true).catch(() => {});
+        }
+        databaseTstLoaded = true;
+      } catch (error) {
+        console.warn('Không tải được đề thi động từ MongoDB:', error?.message || error);
+      } finally {
+        databaseTstPromise = null;
       }
-    } catch (error) {
-      console.warn('Không tải được đề thi động từ MongoDB:', error?.message || error);
-    }
+    })();
+    return databaseTstPromise;
   }
 
   window.loadDatabaseTstExams = loadDatabaseTstExams;
@@ -3616,12 +3657,13 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
 
   // Tự động kích hoạt khi DOM hoàn tất
   function init() {
+    const activeRoot = document.querySelector('.tab-pane.active') || document;
     setupModalEvents();
-    injectSubmissionButtons();
+    injectSubmissionButtons(activeRoot);
     injectDataManagementButton();
-    applyCatalogAccessRules();
-    loadDatabaseTstExams();
-    loadMongoReferenceLinks();
+    applyCatalogAccessRules(activeRoot);
+    loadMongoReferenceLinks(false, activeRoot);
+    if (activeRoot.id === 'tab-tst') loadDatabaseTstExams();
   }
 
   if (document.readyState === 'loading') {
@@ -3636,12 +3678,12 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
     applyCatalogAccessRules();
   });
 
-  window.reinitDatabaseUI = function() {
-    injectSubmissionButtons();
+  window.reinitDatabaseUI = function(root = document.querySelector('.tab-pane.active') || document) {
+    injectSubmissionButtons(root);
     injectDataManagementButton();
-    applyCatalogAccessRules();
-    loadDatabaseTstExams(true);
-    loadMongoReferenceLinks(true);
+    applyCatalogAccessRules(root);
+    loadMongoReferenceLinks(false, root);
+    if (root.id === 'tab-tst') loadDatabaseTstExams();
   };
 
 })();

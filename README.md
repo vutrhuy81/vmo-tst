@@ -24,7 +24,7 @@ Hệ thống web tài liệu chuyên sâu bồi dưỡng đội tuyển VMO Đà
 │   └── modals/
 │       └── account-modal.html         # Hộp thoại Quản lý tài khoản & Phân quyền Admin
 │
-├── build.js                           # Trình biên dịch siêu tốc (<35ms) ghép src/ thành index.html
+├── build.js                           # Build shell + tab mặc định; 3 kho còn lại lazy-load từ src/content
 ├── styles.css                         # CSS giao diện, Dark mode, Print, Responsive
 ├── app.js                             # Logic tương tác chính (Tabs, Tìm kiếm, Bộ lọc, Copy, Lời giải)
 ├── tst-sources.js                     # Cơ sở dữ liệu link nguồn tham khảo các đề TST
@@ -35,7 +35,7 @@ Hệ thống web tài liệu chuyên sâu bồi dưỡng đội tuyển VMO Đà
 ├── ai_guide_engine.js & ai_guide.css  # AI Hướng dẫn giải toán chuyên sâu
 ├── i18n.js & i18n.css                 # Chuyển đổi ngôn ngữ Tiếng Việt / English
 ├── server.js                          # Máy chủ Express & API Gemini (tự động build khi start/request)
-└── index.html                         # Tệp biên dịch hoàn chỉnh sẵn sàng phục vụ trình duyệt
+└── index.html                         # Application shell + nội dung chuyên đề mặc định
 ```
 
 ---
@@ -52,6 +52,14 @@ Khi cần cập nhật nội dung, **thầy cô/lập trình viên không cần 
 ### Quy trình chạy:
 - **Biên dịch thủ công:** Chạy lệnh `node build.js` hoặc `npm run build`.
 - **Chạy môi trường phát triển (Dev/Server):** Chạy `node server.js` hoặc `npm run dev`. Máy chủ sẽ tự động gọi `build()` khi khởi động và tự động cập nhật ngay lập tức.
+
+### Tối ưu hiệu năng
+
+- `tab-mock`, `tab-tst` và `tab-history` chỉ được tải khi người dùng mở tab lần đầu.
+- MathJax chỉ typeset tab đang hiển thị và không xử lý lại tab đã hoàn tất.
+- Các GET catalog giống nhau được dùng chung Promise và cache trong bộ nhớ 5 phút; mutation thành công tự xóa cache.
+- Dữ liệu TST động chỉ được tải khi mở tab TST. Đổi tab không cưỡng bức tải lại MongoDB.
+- JS/CSS và fragment nội dung có cache dài hạn theo phiên bản build; HTML shell luôn được xác thực lại.
 
 ## MongoDB Atlas và phân quyền dữ liệu
 

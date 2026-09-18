@@ -36,9 +36,9 @@ export function build() {
     { tag: '<!-- INJECT:SIDEBAR_TST -->', file: 'sidebars/sidebar-tst.html' },
     { tag: '<!-- INJECT:SIDEBAR_HISTORY -->', file: 'sidebars/sidebar-history.html' },
     { tag: '<!-- INJECT:TAB_DANANG -->', file: 'content/tab-danang.html' },
-    { tag: '<!-- INJECT:TAB_MOCK -->', file: 'content/tab-mock.html' },
-    { tag: '<!-- INJECT:TAB_TST -->', file: 'content/tab-tst.html' },
-    { tag: '<!-- INJECT:TAB_HISTORY -->', file: 'content/tab-history.html' },
+    { tag: '<!-- INJECT:TAB_MOCK -->', file: 'content/tab-mock.html', lazyTab: 'tab-mock' },
+    { tag: '<!-- INJECT:TAB_TST -->', file: 'content/tab-tst.html', lazyTab: 'tab-tst' },
+    { tag: '<!-- INJECT:TAB_HISTORY -->', file: 'content/tab-history.html', lazyTab: 'tab-history' },
     { tag: '<!-- INJECT:ACCOUNT_MODAL -->', file: 'modals/account-modal.html' },
     { tag: '<!-- INJECT:DATA_HUB_MODAL -->', file: 'modals/data-hub-modal.html' }
   ];
@@ -48,7 +48,9 @@ export function build() {
     if (!fs.existsSync(filePath)) {
       throw new Error(`Thiếu khối module: ${item.file} tại ${filePath}`);
     }
-    const content = fs.readFileSync(filePath, 'utf8');
+    const content = item.lazyTab
+      ? `<div class="tab-pane lazy-tab" id="${item.lazyTab}" data-fragment-url="src/${item.file}?v=${buildVersion}"><div class="tab-loading" role="status">Đang tải nội dung…</div></div>`
+      : fs.readFileSync(filePath, 'utf8');
     if (!html.includes(item.tag)) {
       console.warn(`[Build Cảnh báo] Thẻ ${item.tag} không tìm thấy trong template.html`);
     }

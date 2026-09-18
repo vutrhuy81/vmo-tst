@@ -9,20 +9,56 @@
 
   const search = qs('#searchInput');
   const searchSummary = qs('#searchSummary');
+  const tabLoadPromises = new Map();
+
+  async function ensureTabContent(tabId) {
+    let pane = qs('#' + tabId);
+    const fragmentUrl = pane?.dataset?.fragmentUrl;
+    if (!pane || !fragmentUrl) return pane;
+    if (tabLoadPromises.has(tabId)) return tabLoadPromises.get(tabId);
+
+    const pending = fetch(fragmentUrl, { credentials: 'same-origin', cache: 'force-cache' })
+      .then(response => {
+        if (!response.ok) throw new Error(`HTTP ${response.status}`);
+        return response.text();
+      })
+      .then(html => {
+        const parsed = new DOMParser().parseFromString(html, 'text/html');
+        const loadedPane = parsed.getElementById(tabId);
+        if (!loadedPane) throw new Error(`Fragment không chứa #${tabId}`);
+        if (pane.classList.contains('active')) loadedPane.classList.add('active');
+        pane.replaceWith(loadedPane);
+        pane = loadedPane;
+        return loadedPane;
+      })
+      .catch(error => {
+        pane.innerHTML = `<div class="tab-load-error" role="alert">Không tải được nội dung. Vui lòng tải lại trang. (${String(error.message || error).replace(/[<>&]/g, '')})</div>`;
+        throw error;
+      })
+      .finally(() => tabLoadPromises.delete(tabId));
+
+    tabLoadPromises.set(tabId, pending);
+    return pending;
+  }
 
   // Khởi động MathJax typeset an toàn
   function typeset(el) {
+    if (el && window.renderMathInContainer) {
+      window.renderMathInContainer(el).catch(() => {});
+      return;
+    }
     if (window.MathJax && window.MathJax.typesetPromise) {
-      MathJax.typesetPromise(el ? [el] : undefined).catch(() => {});
+      const target = el || qs('.tab-pane.active');
+      if (target) MathJax.typesetPromise([target]).catch(() => {});
     }
   }
 
   // 1. Chuyển đổi Tab nội dung chính & đồng bộ Sidebar tương ứng
-  window.switchTab = function (tabId, btn) {
+  window.switchTab = async function (tabId, btn) {
     qsa('.tab-pane').forEach(x => x.classList.remove('active'));
     qsa('.tab-btn').forEach(x => x.classList.remove('active'));
 
-    const targetPane = qs('#' + tabId);
+    let targetPane = qs('#' + tabId);
     if (targetPane) targetPane.classList.add('active');
 
     const targetBtn = btn || (window.event && window.event.currentTarget) || qs(`.tab-btn[onclick*="${tabId}"]`);
@@ -59,17 +95,22 @@
 
     window.scrollTo({ top: 0, behavior: 'smooth' });
 
+    try {
+      targetPane = await ensureTabContent(tabId);
+      targetPane?.classList.add('active');
+    } catch {
+      return;
+    }
+
     // Đồng bộ lại các nút AI Hướng dẫn giải & Nút Nộp bài Database nếu cần
-    window.reinitAIGuide?.();
-    window.reinitDatabaseUI?.();
+    window.reinitAIGuide?.(targetPane);
+    window.reinitDatabaseUI?.(targetPane);
     if (isT) window.injectTstSources?.();
     if (isH) window.injectHistorySources?.();
     window.applyCurrentLanguage?.();
 
     // Render công thức toán nếu tab vừa mở chưa được biên dịch
-    if (isM && window.MathJax && window.MathJax.typesetPromise) {
-      MathJax.typesetPromise([qs('#tab-mock')]).catch(() => {});
-    }
+    typeset(targetPane);
   };
 
   // 2. Hiện / Ẩn lời giải và barem điểm từng bài
@@ -328,16 +369,22 @@
   window.injectTstSources = injectTstSources;
   window.injectHistorySources = injectHistorySources;
 
-  // Chạy gắn nguồn tham khảo TST & History
-  injectTstSources();
-  injectHistorySources();
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', () => {
-      injectTstSources();
-      injectHistorySources();
-      window.applyCurrentLanguage?.();
-    });
-  }
+  // Nguồn tham khảo của các kho đề được gắn khi tab tương ứng được mở.
+  const initialPane = qs('.tab-pane.active');
+  if (initialPane?.id === 'tab-tst') injectTstSources();
+  if (initialPane?.id === 'tab-history') injectHistorySources();
+
+  window.printVMODocument = async function() {
+    try {
+      const mockPane = await ensureTabContent('tab-mock');
+      window.reinitAIGuide?.(mockPane);
+      window.reinitDatabaseUI?.(mockPane);
+      typeset(mockPane);
+    } catch (error) {
+      console.warn('Không thể chuẩn bị toàn bộ nội dung để in:', error);
+    }
+    window.print();
+  };
 
   // 8. Chế độ Giao diện Sáng / Tối (Theme Mode)
   const theme = qs('#themeToggle');
