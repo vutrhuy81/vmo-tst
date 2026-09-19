@@ -1,7 +1,7 @@
-import { getDb } from './lib/db.js';
-import { getSession } from './lib/session.js';
-import { checkRateLimit, generateJson, parseBody, prepare, text } from './lib/ai.js';
-import { generateOpenAIJson } from './lib/openai.js';
+import { getDb } from '../lib/db.js';
+import { getSession } from '../lib/session.js';
+import { checkRateLimit, generateJson, parseBody, prepare, text } from '../lib/ai.js';
+import { generateOpenAIJson } from '../lib/openai.js';
 
 const stringArray = { type: 'array', items: { type: 'string' } };
 const guideSchema = { type: 'object', properties: {

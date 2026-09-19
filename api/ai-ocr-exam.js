@@ -1,5 +1,5 @@
-import { getSession } from './lib/session.js';
-import { checkRateLimit, generateJson, handleAiError, parseBody, prepare, text } from './lib/ai.js';
+import { getSession } from '../lib/session.js';
+import { checkRateLimit, generateJson, handleAiError, parseBody, prepare, text } from '../lib/ai.js';
 
 const schema = {
   type: 'object',

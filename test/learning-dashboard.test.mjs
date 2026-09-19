@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import { JSDOM } from 'jsdom';
-import { learningScope, recordActivity, summarizeLearning } from '../api/lib/learning.js';
+import { learningScope, recordActivity, summarizeLearning } from '../lib/learning.js';
 
 const member = { sub: 'member-id', username: 'hoangkien', role: 'student' };
 const admin = { sub: 'admin-id', username: 'admin', role: 'admin' };

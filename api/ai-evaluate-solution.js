@@ -1,8 +1,8 @@
 import { ObjectId } from 'mongodb';
-import { getDb } from './lib/db.js';
-import { getSession } from './lib/session.js';
-import { checkRateLimit, generateJson, handleAiError, parseBody, prepare, text } from './lib/ai.js';
-import { generateOpenAIJson } from './lib/openai.js';
+import { getDb } from '../lib/db.js';
+import { getSession } from '../lib/session.js';
+import { checkRateLimit, generateJson, handleAiError, parseBody, prepare, text } from '../lib/ai.js';
+import { generateOpenAIJson } from '../lib/openai.js';
 
 const VERDICTS = [
   'CORRECT_OPTIMAL',
