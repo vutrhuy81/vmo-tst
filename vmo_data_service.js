@@ -384,6 +384,21 @@ export async function getSubmissionsPage(filters = {}) {
   });
 }
 
+export async function getActivityFeed(filters = {}) {
+  return requestPage('activity_feed', {
+    page: filters.page || 1,
+    limit: filters.limit || 20,
+    username: filters.username || ''
+  });
+}
+
+export async function getLearningOverview(username = '') {
+  const query = new URLSearchParams({ resource: 'learning_overview' });
+  if (username) query.set('username', username);
+  const data = await apiFetch(`${DATA_API_URL}?${query}`);
+  return { overview: data.overview, accounts: Array.isArray(data.accounts) ? data.accounts : [] };
+}
+
 export async function deleteSubmission(id) {
   const cleanId = normalizeId(id).trim();
   if (!cleanId) {
@@ -434,6 +449,8 @@ const VMODataService = Object.freeze({
   getLatestAiGuide,
   getAllSubmissions,
   getSubmissionsPage,
+  getActivityFeed,
+  getLearningOverview,
   deleteSubmission,
   getEvents,
   addEvent,

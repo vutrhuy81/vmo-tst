@@ -1,8 +1,9 @@
 import { ObjectId } from 'mongodb';
 import { getDb } from './lib/db.js';
 import { getSession } from './lib/session.js';
+import { learningScope, recordActivity, summarizeLearning } from './lib/learning.js';
 
-const ALLOWED_RESOURCES = new Set(['documents', 'exams', 'exam_catalog', 'exam_image', 'content_sets', 'problems', 'content_revisions', 'submissions', 'submission_image', 'events']);
+const ALLOWED_RESOURCES = new Set(['documents', 'exams', 'exam_catalog', 'exam_image', 'content_sets', 'problems', 'content_revisions', 'submissions', 'submission_image', 'events', 'activity_feed', 'learning_overview']);
 const CONTENT_TYPES = new Set(['specialty_chapter', 'mock_exam', 'tst_exam', 'regional_exam']);
 const SOURCE_TYPES = new Set(['specialty_example', 'mock_exam_question', 'tst_question', 'regional_question']);
 const TST_REGIONS = new Set(['BAC', 'TRUNG', 'NAM']);
@@ -93,6 +94,7 @@ function problemSnapshot(problem) {
     setTitle: problem.setTitle,
     sourceType: problem.sourceType,
     sourceGroup: problem.sourceGroup,
+    frontendAnchor: problem.frontendAnchor,
     questionNumber: problem.questionNumber,
     chapterNumber: problem.chapterNumber,
     day: problem.day,
@@ -125,6 +127,49 @@ export default async function handler(req, res) {
       const resource = cleanText(req.query?.resource, 30);
       if (!ALLOWED_RESOURCES.has(resource)) {
         return res.status(400).json({ success: false, error: 'Loại dữ liệu không hợp lệ' });
+      }
+
+      if (resource === 'activity_feed' || resource === 'learning_overview') {
+        const scope = learningScope(session, cleanText(req.query?.username, 64));
+        if (!scope) return res.status(403).json({ success: false, error: 'Bạn chỉ được xem dữ liệu của tài khoản mình' });
+        let userFilter = { ...scope };
+        if (session.role === 'admin' && scope.username) {
+          const account = await db.collection('users').findOne({ username: scope.username }, { projection: { _id: 1 } });
+          if (!account) return res.status(404).json({ success: false, error: 'Không tìm thấy tài khoản' });
+          userFilter = { userId: String(account._id) };
+        }
+        if (resource === 'activity_feed') {
+          const page = cleanNumber(req.query?.page, 1, 1, 100000);
+          const limit = cleanNumber(req.query?.limit, 20, 5, 50);
+          const events = db.collection('activity_events');
+          const total = await events.countDocuments(userFilter);
+          const pages = Math.max(1, Math.ceil(total / limit));
+          const safePage = Math.min(page, pages);
+          const items = await events.find(userFilter, { projection: {
+            userId: 1, username: 1, action: 1, details: 1, createdAt: 1
+          } }).sort({ createdAt: -1, _id: -1 }).skip((safePage - 1) * limit).limit(limit).toArray();
+          return res.status(200).json({ success: true, items, pagination: { page: safePage, limit, total, pages } });
+        }
+        const [users, rows] = await Promise.all([
+          db.collection('users').find(session.role === 'admin' ? {} : { _id: objectId(String(session.sub)) }, {
+            projection: { username: 1, fullName: 1, role: 1 }
+          }).sort({ username: 1 }).toArray(),
+          db.collection('submissions').find({ ...userFilter, $or: [
+            { submissionKind: 'ai_guide', solutionContent: { $type: 'string', $ne: '' } },
+            { submissionKind: { $ne: 'ai_guide' }, evaluation: { $type: 'object' } }
+          ] }, { projection: {
+            userId: 1, username: 1, authorName: 1, problemId: 1, problemKey: 1,
+            problemTitle: 1, 'problemSnapshot.title': 1, 'problemSnapshot.setTitle': 1,
+            'problemSnapshot.sourceGroup': 1, 'problemSnapshot.frontendAnchor': 1,
+            setTitle: 1, sourceGroup: 1, submissionKind: 1,
+            'evaluation.estimatedScore': 1, score: 1, createdAt: 1, updatedAt: 1
+          } }).toArray()
+        ]);
+        const selectedUsers = userFilter.userId ? users.filter(user => String(user._id) === userFilter.userId) : users;
+        const overview = summarizeLearning(rows, selectedUsers, scope.username || '');
+        return res.status(200).json({ success: true, overview, accounts: users.map(user => ({
+          username: user.username, fullName: user.fullName || user.username, role: user.role || 'student'
+        })) });
       }
 
       if (resource === 'submission_image') {
@@ -444,6 +489,12 @@ export default async function handler(req, res) {
           },
           { upsert: true, returnDocument: 'after' }
         );
+        if (!savedGuide?._id) return res.status(500).json({ success: false, error: 'Không thể lưu AI hướng dẫn giải' });
+        await recordActivity(db, session, 'guide.saved', {
+          submissionId: savedGuide._id, problemKey: registeredProblemKey,
+          problemTitle: doc.problemTitle, setTitle: doc.problemSnapshot?.setTitle,
+          sourceGroup: doc.sourceGroup
+        });
         return res.status(200).json({ success: true, item: savedGuide });
       }
       const result = await db.collection('submissions').insertOne(doc);
@@ -457,6 +508,13 @@ export default async function handler(req, res) {
           createdAt: now
         });
       }
+      const activityDetails = {
+        submissionId: result.insertedId, problemKey: registeredProblemKey,
+        problemTitle: doc.problemTitle, setTitle: doc.problemSnapshot?.setTitle,
+        sourceGroup: doc.sourceGroup, score: evaluation?.estimatedScore
+      };
+      await recordActivity(db, session, 'solution.saved', activityDetails);
+      if (evaluation) await recordActivity(db, session, 'evaluation.saved', activityDetails);
       return res.status(201).json({ success: true, item: { _id: result.insertedId, ...doc } });
     }
 
@@ -586,6 +644,7 @@ export default async function handler(req, res) {
         db.collection('submission_images').createIndex({ submissionId: 1 }, { unique: true })
       ]);
 
+      await recordActivity(db, session, 'catalog.synced', { itemTitle: `${problemCount} câu hỏi/ví dụ` });
       return res.status(200).json({ success: true, item: { setCount: setIds.size, problemCount } });
     }
 
@@ -639,6 +698,7 @@ export default async function handler(req, res) {
           { $set: { setTitle: changes.title, updatedBy: session.username, updatedAt: now } }
         );
       }
+      await recordActivity(db, session, 'catalog.updated', { itemTitle: result.title || result.key || result.contentKey });
       return res.status(200).json({ success: true, item: result });
     }
 
@@ -684,6 +744,7 @@ export default async function handler(req, res) {
         } }
       );
       await db.collection('content_revisions').createIndex({ problemId: 1, createdAt: -1 });
+      await recordActivity(db, session, 'catalog.updated', { problemKey: current.contentKey, itemTitle: current.title });
       return res.status(200).json({ success: true, item: { id: String(id), version: nextVersion } });
     }
 
@@ -721,6 +782,7 @@ export default async function handler(req, res) {
           updatedProblems += 1;
         }
       }
+      await recordActivity(db, session, 'catalog.updated', { itemTitle: `${updatedProblems} nguồn TST` });
       return res.status(200).json({
         success: true,
         item: { cardCount: cardIds.length, matchedProblems, updatedProblems, unmatchedCardIds }
@@ -743,6 +805,7 @@ export default async function handler(req, res) {
         { returnDocument: 'after' }
       );
       if (!result) return res.status(404).json({ success: false, error: 'Không tìm thấy câu hỏi trong MongoDB' });
+      await recordActivity(db, session, 'catalog.updated', { problemKey: contentKey, itemTitle: result.title });
       return res.status(200).json({ success: true, item: result });
     }
 
@@ -783,6 +846,7 @@ export default async function handler(req, res) {
           updatedAt: now
         } }
       );
+      await recordActivity(db, session, 'catalog.updated', { problemKey: current.contentKey, itemTitle: current.title });
       return res.status(200).json({ success: true, item: { id: String(current._id), version: nextVersion } });
     }
 
@@ -791,6 +855,7 @@ export default async function handler(req, res) {
       if (!title) return res.status(400).json({ success: false, error: 'Tên tài liệu là bắt buộc' });
       const doc = { title, topic: cleanText(payload.topic, 120) || 'Tổng hợp', author: cleanText(payload.author, 200) || 'Tổ Toán VMO Đà Nẵng', description: cleanText(payload.description, 5000), fileUrl: cleanText(payload.fileUrl, 2000), chapter: cleanText(payload.chapter, 200), createdBy: session.username, createdAt: now };
       const result = await db.collection('documents').insertOne(doc);
+      await recordActivity(db, session, 'document.added', { itemTitle: title });
       return res.status(201).json({ success: true, item: { _id: result.insertedId, ...doc } });
     }
 
@@ -799,6 +864,7 @@ export default async function handler(req, res) {
       if (!title) return res.status(400).json({ success: false, error: 'Tên đề thi là bắt buộc' });
       const doc = { title, category: cleanText(payload.category, 80) || 'vmo-danang', year: cleanText(payload.year, 30) || '2026-2027', day: cleanText(payload.day, 40) || 'Ngày 1', province: cleanText(payload.province, 100) || 'Đà Nẵng', duration: Math.max(1, Math.min(600, Number(payload.duration) || 180)), description: cleanText(payload.description, 5000), sourceUrl: cleanText(payload.sourceUrl, 2000), createdBy: session.username, createdAt: now };
       const result = await db.collection('exams').insertOne(doc);
+      await recordActivity(db, session, 'exam.added', { itemTitle: title });
       return res.status(201).json({ success: true, item: { _id: result.insertedId, ...doc } });
     }
 
@@ -956,6 +1022,7 @@ export default async function handler(req, res) {
         db.collection('problems').createIndex({ contentKey: 1 }, { unique: true }),
         db.collection('problems').createIndex({ examId: 1, orderNumber: 1 })
       ]);
+      await recordActivity(db, session, 'exam.added', { itemTitle: title });
       return res.status(201).json({
         success: true,
         item: { ...savedExam, problems: savedQuestions, problemCount: savedQuestions.length }
@@ -982,6 +1049,7 @@ export default async function handler(req, res) {
         { $set: { hasImages: true, sourceImageCount: Math.max(Number(exam.sourceImageCount) || 0, pageNumber), updatedAt: now } }
       );
       await db.collection('exam_images').createIndex({ examId: 1, pageNumber: 1 }, { unique: true });
+      await recordActivity(db, session, 'exam.image_saved', { itemTitle: `${exam.title || 'Đề thi'} – trang ${pageNumber}` });
       return res.status(200).json({ success: true, item: { examId: String(examId), pageNumber, hasImage: true } });
     }
 
@@ -991,6 +1059,7 @@ export default async function handler(req, res) {
       if (!id || !examId || !cleanText(payload.content, 50000)) return res.status(400).json({ success: false, error: 'Thiếu mã, đề thi hoặc nội dung bài toán' });
       const doc = { id, examId, orderNumber: Math.max(1, Number(payload.orderNumber) || 1), title: cleanText(payload.title, 500), topic: cleanText(payload.topic, 120) || 'Đại số', content: cleanText(payload.content, 50000), officialSolution: cleanText(payload.officialSolution, 100000), maxScore: Math.max(0, Math.min(20, Number(payload.maxScore) || 5)), updatedBy: session.username, updatedAt: now };
       await db.collection('problems').updateOne({ id }, { $set: doc, $setOnInsert: { createdAt: now } }, { upsert: true });
+      await recordActivity(db, session, 'catalog.updated', { itemTitle: doc.title });
       return res.status(200).json({ success: true, item: doc });
     }
 
@@ -999,6 +1068,7 @@ export default async function handler(req, res) {
       if (!title || !cleanText(payload.startDate, 80)) return res.status(400).json({ success: false, error: 'Tên và ngày bắt đầu là bắt buộc' });
       const doc = { title, eventType: cleanText(payload.eventType, 80) || 'exam', startDate: cleanText(payload.startDate, 80), endDate: cleanText(payload.endDate, 80), location: cleanText(payload.location, 300) || 'THPT Chuyên Lê Quý Đôn - Đà Nẵng', description: cleanText(payload.description, 5000), targetAudience: cleanText(payload.targetAudience, 300) || 'Đội tuyển HSG QG Toán', createdBy: session.username, createdAt: now };
       const result = await db.collection('events').insertOne(doc);
+      await recordActivity(db, session, 'event.added', { itemTitle: title });
       return res.status(201).json({ success: true, item: { _id: result.insertedId, ...doc } });
     }
 
@@ -1010,6 +1080,7 @@ export default async function handler(req, res) {
         return res.status(404).json({ success: false, error: 'Không tìm thấy bài nộp' });
       }
       await db.collection('submission_images').deleteMany({ submissionId: id });
+      await recordActivity(db, session, 'submission.deleted', { submissionId: id });
       return res.status(200).json({ success: true, deletedId: String(id) });
     }
 
@@ -1018,6 +1089,7 @@ export default async function handler(req, res) {
       const id = objectId(payload.id);
       if (!id) return res.status(400).json({ success: false, error: 'ID không hợp lệ' });
       const result = await db.collection(deletions[action]).deleteOne({ _id: id });
+      if (result.deletedCount) await recordActivity(db, session, action === 'delete_document' ? 'document.deleted' : 'event.deleted', { itemTitle: String(id) });
       return res.status(result.deletedCount ? 200 : 404).json({ success: Boolean(result.deletedCount), error: result.deletedCount ? undefined : 'Không tìm thấy dữ liệu' });
     }
 
