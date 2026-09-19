@@ -2332,7 +2332,7 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
           <div class="vmo-modal-title" style="color:white;">📝 Nội dung câu hỏi và lịch sử phiên bản</div>
           <button type="button" class="vmo-modal-close" onclick="closeCatalogContentModal()" style="color:white;">✕</button>
         </div>
-        <div class="vmo-modal-body" style="overflow:auto;">
+        <div class="vmo-modal-body" style="flex:1 1 auto;min-height:0;overflow-y:auto;">
           <form id="catalogContentForm" onsubmit="saveCatalogContent(event)">
             <input id="catalogContentId" type="hidden"><input id="catalogContentVersion" type="hidden">
             <div id="catalogContentKey" style="padding:8px 10px;margin-bottom:10px;background:#f1f5f9;border-radius:6px;font-family:monospace;font-size:.8rem;"></div>
@@ -3387,7 +3387,7 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
         <div class="vmo-modal-body" style="overflow:auto;">
           <div id="referenceLinksProblemKey" style="padding:8px 10px;background:#f1f5f9;border-radius:6px;font-family:monospace;font-size:.8rem;margin-bottom:10px;"></div>
           <label for="referenceManagerProblemContent" style="display:block;font-weight:700;margin-bottom:4px;">Nội dung câu hỏi (HTML/LaTeX) *</label>
-          <textarea id="referenceManagerProblemContent" required maxlength="50000" rows="9" style="width:100%;box-sizing:border-box;padding:9px;border:1px solid #cbd5e1;border-radius:6px;font-family:monospace;margin-bottom:12px;" placeholder="Nhập nội dung câu hỏi..."></textarea>
+          <textarea id="referenceManagerProblemContent" required maxlength="50000" rows="16" style="flex:0 0 auto;width:100%;box-sizing:border-box;min-height:clamp(260px,42vh,420px);padding:12px;border:1px solid #cbd5e1;border-radius:6px;font-family:monospace;line-height:1.5;resize:vertical;overflow:auto;margin-bottom:12px;" placeholder="Nhập nội dung câu hỏi..."></textarea>
           <div style="display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:8px;">
             <strong>🔗 Lời giải tham khảo</strong>
             <span style="font-size:.75rem;color:#64748b;">Mỗi nguồn gồm nhãn hiển thị và URL</span>
