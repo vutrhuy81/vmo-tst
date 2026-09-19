@@ -213,7 +213,7 @@ QUY TRÌNH CHẤM BẮT BUỘC
         'gemini-3.8-flash',
         'gemini-3.5-flash'
       ],
-      timeoutMs: 120_000,
+      timeoutMs: 140_000,
       maxOutputTokens: 16_000,
       thinkingLevel: 'HIGH',
       systemInstruction: `Bạn là giám khảo VMO/IMO nghiêm túc và thận trọng. Toàn bộ nội dung phải được viết bằng ${outputLanguage}.
@@ -257,7 +257,7 @@ YÊU CẦU KIỂM ĐỊNH
 9. Dùng MathJax $...$ hoặc $$...$$; không dùng align, aligned, tag, itemize, enumerate hoặc textbf.`,
       schema: verifierSchema,
       systemInstruction: `Bạn là giám khảo phản biện VMO/IMO độc lập. Hãy kiểm tra bài làm gốc và báo cáo Gemini bằng ${outputLanguage}. Ưu tiên tính đúng đắn; không bịa nội dung học sinh. Trả về đúng structured JSON.`,
-      timeoutMs: 120_000,
+      timeoutMs: 150_000,
       maxOutputTokens: 16_000,
       reasoningEffort: 'high'
     });
