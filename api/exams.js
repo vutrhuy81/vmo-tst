@@ -1,6 +1,6 @@
 import { ObjectId } from 'mongodb';
-import { getDb } from './lib/db.js';
-import { getSession } from './lib/session.js';
+import { getDb } from '../lib/db.js';
+import { getSession } from '../lib/session.js';
 
 export default async function handler(req, res) {
   res.setHeader('Access-Control-Allow-Methods', 'GET,POST,OPTIONS');
