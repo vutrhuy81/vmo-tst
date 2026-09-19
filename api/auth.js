@@ -1,7 +1,7 @@
-import { getDb } from './lib/db.js';
+import { getDb } from '../lib/db.js';
 import bcrypt from 'bcryptjs';
-import { clearSessionCookie, getSession, setSessionCookie, signSession } from './lib/session.js';
-import { recordActivity } from './lib/learning.js';
+import { clearSessionCookie, getSession, setSessionCookie, signSession } from '../lib/session.js';
+import { recordActivity } from '../lib/learning.js';
 
 export default async function handler(req, res) {
   res.setHeader('Cache-Control', 'no-store');

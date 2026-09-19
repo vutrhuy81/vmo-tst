@@ -1,7 +1,7 @@
 import crypto from 'node:crypto';
-import { getDb } from './lib/db.js';
-import { getSession } from './lib/session.js';
-import { checkRateLimit, generateJson, handleAiError, parseBody, prepare, text } from './lib/ai.js';
+import { getDb } from '../lib/db.js';
+import { getSession } from '../lib/session.js';
+import { checkRateLimit, generateJson, handleAiError, parseBody, prepare, text } from '../lib/ai.js';
 
 const TRANSLATION_VERSION = 'vmo-math-en-v4';
 const MAX_ITEMS = 18;

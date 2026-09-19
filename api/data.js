@@ -1,7 +1,7 @@
 import { ObjectId } from 'mongodb';
-import { getDb } from './lib/db.js';
-import { getSession } from './lib/session.js';
-import { learningScope, recordActivity, summarizeLearning } from './lib/learning.js';
+import { getDb } from '../lib/db.js';
+import { getSession } from '../lib/session.js';
+import { learningScope, recordActivity, summarizeLearning } from '../lib/learning.js';
 
 const ALLOWED_RESOURCES = new Set(['documents', 'exams', 'exam_catalog', 'exam_image', 'content_sets', 'problems', 'content_revisions', 'submissions', 'submission_image', 'events', 'activity_feed', 'learning_overview']);
 const CONTENT_TYPES = new Set(['specialty_chapter', 'mock_exam', 'tst_exam', 'regional_exam']);
