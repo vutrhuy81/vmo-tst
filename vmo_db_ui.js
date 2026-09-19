@@ -2054,6 +2054,7 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
 
     ensureCatalogManagementUi(modal, isAdmin);
     ensureSubmissionFilterUi(modal, isAdmin);
+    ensureLearningDashboardUi(modal, isAdmin);
   }
 
   function ensureExamOcrForm(modal) {
@@ -2463,6 +2464,169 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
     });
   }
 
+  const learningDashboard = { overview: null, accounts: [], account: '', page: 1, requestId: 0, activityRequestId: 0 };
+  const learningActionNames = {
+    login: 'Đăng nhập', logout: 'Đăng xuất',
+    'solution.saved': 'Lưu bài giải', 'evaluation.saved': 'Lưu AI đánh giá',
+    'guide.saved': 'Lưu AI hướng dẫn giải', 'submission.deleted': 'Xóa bài nộp',
+    'account.created': 'Tạo tài khoản', 'account.updated': 'Cập nhật tài khoản', 'account.deleted': 'Xóa tài khoản',
+    'document.added': 'Thêm tài liệu', 'document.deleted': 'Xóa tài liệu',
+    'exam.added': 'Thêm đề thi', 'exam.image_saved': 'Lưu ảnh đề thi', 'exam.deleted': 'Xóa đề thi',
+    'event.added': 'Thêm lịch thi', 'event.deleted': 'Xóa lịch thi',
+    'catalog.updated': 'Cập nhật catalog', 'catalog.synced': 'Đồng bộ catalog'
+  };
+
+  function ensureLearningDashboardUi(modal, isAdmin) {
+    const tabs = modal.querySelector('#hub-tab-events')?.parentElement;
+    const body = modal.querySelector('.vmo-modal-body');
+    if (!tabs || !body) return;
+    if (!modal.querySelector('#hub-tab-progress')) {
+      const button = document.createElement('button');
+      button.type = 'button';
+      button.className = 'hub-tab-btn';
+      button.id = 'hub-tab-progress';
+      button.textContent = '📊 Hoạt động & kết quả';
+      button.onclick = () => window.switchHubTab('progress');
+      tabs.appendChild(button);
+    }
+    tabs.style.flexWrap = 'wrap';
+    let panel = modal.querySelector('#hub-panel-progress');
+    if (!panel) {
+      panel = document.createElement('div');
+      panel.id = 'hub-panel-progress';
+      panel.className = 'hub-panel';
+      panel.style.display = 'none';
+      body.appendChild(panel);
+    }
+    if (!panel.querySelector('#hubLearningSummary')) panel.innerHTML = `
+      <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-bottom:12px;">
+        <h4 style="margin:0;color:#173b64;">Hoạt động và kết quả học tập</h4>
+        <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;">
+          <label for="hubLearningAccount" style="font-size:.8rem;font-weight:700;">Tài khoản</label>
+          <select id="hubLearningAccount" style="padding:7px;border:1px solid #cbd5e1;border-radius:6px;"><option value="">Tất cả thành viên</option></select>
+          <button type="button" id="hubLearningRefresh" style="padding:7px 11px;background:#0369a1;color:white;border:0;border-radius:6px;cursor:pointer;">🔄 Làm mới</button>
+        </div>
+      </div>
+      <div id="hubLearningSummary" aria-live="polite">Đang tải thống kê...</div>
+      <div id="hubLearningMembers"></div>
+      <details open style="margin-top:12px;"><summary style="cursor:pointer;font-weight:700;">✨ Câu hỏi/ví dụ đã lưu AI Hướng dẫn giải</summary><div id="hubLearningGuides"></div></details>
+      <details open style="margin-top:12px;"><summary style="cursor:pointer;font-weight:700;">🤖 Câu hỏi/ví dụ đã lưu AI đánh giá và điểm</summary><div id="hubLearningEvaluations"></div></details>
+      <div style="display:flex;align-items:center;justify-content:space-between;margin:16px 0 8px;gap:8px;">
+        <strong>🕒 Nhật ký hoạt động</strong><span id="hubActivityPage" style="font-size:.8rem;color:#64748b;"></span>
+      </div>
+      <div id="hubActivityList" aria-live="polite"></div>
+      <div id="hubActivityPager" style="display:flex;justify-content:flex-end;gap:6px;margin-top:8px;"></div>
+      <p style="font-size:.75rem;color:#64748b;margin-top:12px;">Thống kê tính từ các bài đã lưu trong MongoDB; nhật ký bắt đầu từ khi chức năng được triển khai. Mỗi câu tính một lần cho mỗi tài khoản; tổng hệ thống là tổng theo tài khoản. Điểm dùng lần đánh giá đã lưu gần nhất theo thang AI.</p>`;
+    const selector = panel.querySelector('#hubLearningAccount');
+    selector.parentElement.style.display = isAdmin ? 'flex' : 'none';
+    selector.onchange = () => {
+      learningDashboard.account = selector.value;
+      learningDashboard.page = 1;
+      renderLearningOverview();
+      window.loadLearningActivities();
+    };
+    panel.querySelector('#hubLearningRefresh').onclick = () => window.loadLearningDashboard();
+  }
+
+  function learningDate(value) {
+    const date = value ? new Date(value) : null;
+    return date && !Number.isNaN(date.getTime()) ? date.toLocaleString('vi-VN') : 'Chưa rõ thời gian';
+  }
+
+  function learningList(items, withScores) {
+    if (!items.length) return '<p style="color:#64748b;">Chưa có câu hỏi/ví dụ đã lưu.</p>';
+    return `<div style="max-height:300px;overflow:auto;margin-top:8px;">${items.map(item => `
+      <div style="padding:9px 11px;border:1px solid #e2e8f0;border-radius:7px;margin-bottom:6px;background:#fff;">
+        <strong>${escapeHtmlText(item.problemTitle)}</strong>
+        ${withScores ? `<span style="float:right;font-weight:800;color:#0e7490;">${escapeHtmlText(item.score || 'Chưa có điểm chuẩn')}</span>` : ''}
+        <div style="font-size:.8rem;color:#475569;">📚 ${escapeHtmlText(item.setTitle)} · ${escapeHtmlText(item.username)} · ${escapeHtmlText(learningDate(item.savedAt))}</div>
+      </div>`).join('')}</div>`;
+  }
+
+  function renderLearningOverview() {
+    const data = learningDashboard.overview;
+    if (!data) return;
+    const account = learningDashboard.account;
+    const members = account ? data.members.filter(member => member.username === account) : data.members;
+    const guides = account ? data.guides.filter(item => item.username === account) : data.guides;
+    const evaluations = account ? data.evaluations.filter(item => item.username === account) : data.evaluations;
+    const totals = members.reduce((sum, member) => ({
+      guideCount: sum.guideCount + member.guideCount, evaluationCount: sum.evaluationCount + member.evaluationCount,
+      scoreEarned: sum.scoreEarned + member.scoreEarned, scoreMaximum: sum.scoreMaximum + member.scoreMaximum
+    }), { guideCount: 0, evaluationCount: 0, scoreEarned: 0, scoreMaximum: 0 });
+    const score = value => Number(value || 0).toLocaleString('vi-VN', { maximumFractionDigits: 2 });
+    document.getElementById('hubLearningSummary').innerHTML = `
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(145px,1fr));gap:8px;">
+        <div style="padding:10px;border-radius:8px;background:#eff6ff;"><strong style="display:block;font-size:1.25rem;">${totals.guideCount}</strong>Ví dụ/câu đã lưu hướng dẫn AI</div>
+        <div style="padding:10px;border-radius:8px;background:#ecfdf5;"><strong style="display:block;font-size:1.25rem;">${totals.evaluationCount}</strong>Ví dụ/câu đã lưu đánh giá AI</div>
+        <div style="padding:10px;border-radius:8px;background:#fff7ed;"><strong style="display:block;font-size:1.25rem;">${score(totals.scoreEarned)} / ${score(totals.scoreMaximum)}</strong>Tổng điểm AI / điểm tối đa</div>
+      </div>`;
+    document.getElementById('hubLearningMembers').innerHTML = isCurrentUserAdmin() ? `
+      <div style="overflow:auto;max-height:220px;margin-top:12px;"><table style="width:100%;border-collapse:collapse;font-size:.82rem;">
+        <thead><tr><th style="text-align:left;">Thành viên</th><th>Hướng dẫn</th><th>Đánh giá</th><th>Điểm AI</th></tr></thead>
+        <tbody>${members.map(member => `<tr style="border-top:1px solid #e2e8f0;"><td>${escapeHtmlText(member.fullName)} <small>(${escapeHtmlText(member.username)})</small></td><td style="text-align:center;">${member.guideCount}</td><td style="text-align:center;">${member.evaluationCount}</td><td style="text-align:center;">${score(member.scoreEarned)} / ${score(member.scoreMaximum)}</td></tr>`).join('')}</tbody>
+      </table></div>` : '';
+    document.getElementById('hubLearningGuides').innerHTML = learningList(guides, false);
+    document.getElementById('hubLearningEvaluations').innerHTML = learningList(evaluations, true);
+  }
+
+  window.loadLearningActivities = async function(page = learningDashboard.page) {
+    const list = document.getElementById('hubActivityList');
+    if (!list) return;
+    const requestId = ++learningDashboard.activityRequestId;
+    learningDashboard.page = page;
+    list.textContent = 'Đang tải hoạt động...';
+    try {
+      const result = await window.VMODataService.getActivityFeed({
+        page, limit: 20, username: isCurrentUserAdmin() ? learningDashboard.account : ''
+      });
+      if (requestId !== learningDashboard.activityRequestId) return;
+      const pagination = result.pagination || { page: 1, pages: 1, total: 0 };
+      learningDashboard.page = pagination.page;
+      list.innerHTML = result.items.length ? result.items.map(event => {
+        const details = event.details || {};
+        const subject = details.problemTitle || details.itemTitle || '';
+        return `<div style="padding:8px 10px;border:1px solid #e2e8f0;border-radius:7px;margin-bottom:5px;font-size:.82rem;">
+          <strong>${escapeHtmlText(learningActionNames[event.action] || event.action)}</strong> · ${escapeHtmlText(event.username || '')}
+          <span style="color:#64748b;float:right;">${escapeHtmlText(learningDate(event.createdAt))}</span>
+          ${subject ? `<div style="clear:both;color:#475569;">${escapeHtmlText(subject)}${details.setTitle ? ` · ${escapeHtmlText(details.setTitle)}` : ''}${details.score ? ` · Điểm ${escapeHtmlText(details.score)}` : ''}</div>` : ''}
+        </div>`;
+      }).join('') : '<p style="color:#64748b;">Chưa có hoạt động được ghi nhận.</p>';
+      document.getElementById('hubActivityPage').textContent = `${pagination.total} sự kiện · Trang ${pagination.page}/${pagination.pages}`;
+      const pager = document.getElementById('hubActivityPager');
+      pager.innerHTML = `<button type="button" id="hubActivityPrev" ${pagination.page <= 1 ? 'disabled' : ''}>← Trước</button><button type="button" id="hubActivityNext" ${pagination.page >= pagination.pages ? 'disabled' : ''}>Sau →</button>`;
+      pager.querySelector('#hubActivityPrev').onclick = () => window.loadLearningActivities(pagination.page - 1);
+      pager.querySelector('#hubActivityNext').onclick = () => window.loadLearningActivities(pagination.page + 1);
+    } catch (error) {
+      if (requestId === learningDashboard.activityRequestId) list.textContent = error?.message || 'Không tải được hoạt động.';
+    }
+  };
+
+  window.loadLearningDashboard = async function() {
+    const summary = document.getElementById('hubLearningSummary');
+    if (!summary) return;
+    const requestId = ++learningDashboard.requestId;
+    summary.textContent = 'Đang tính thống kê từ MongoDB...';
+    try {
+      const result = await window.VMODataService.getLearningOverview();
+      if (requestId !== learningDashboard.requestId) return;
+      learningDashboard.overview = result.overview;
+      learningDashboard.accounts = result.accounts;
+      const selector = document.getElementById('hubLearningAccount');
+      if (isCurrentUserAdmin()) {
+        const previous = learningDashboard.account;
+        selector.replaceChildren(new Option('Tất cả thành viên', ''));
+        result.accounts.forEach(account => selector.add(new Option(`${account.fullName} (${account.username})`, account.username)));
+        learningDashboard.account = result.accounts.some(account => account.username === previous) ? previous : '';
+        selector.value = learningDashboard.account;
+      } else learningDashboard.account = '';
+      renderLearningOverview();
+      await window.loadLearningActivities(1);
+    } catch (error) {
+      if (requestId === learningDashboard.requestId) summary.textContent = error?.message || 'Không tải được thống kê.';
+    }
+  };
+
   window.openDataHubModal = function() {
     let modal = document.getElementById('dataHubModal');
     if (!modal) {
@@ -2713,7 +2877,7 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
   };
 
   window.switchHubTab = function(tabName) {
-    ['events', 'docs', 'exams', 'catalog', 'subs'].forEach(t => {
+    ['events', 'docs', 'exams', 'catalog', 'subs', 'progress'].forEach(t => {
       const btn = document.getElementById('hub-tab-' + t);
       const panel = document.getElementById('hub-panel-' + t);
       if (btn) btn.classList.toggle('active', t === tabName);
@@ -2725,6 +2889,7 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
     if (tabName === 'exams') loadHubExams();
     if (tabName === 'catalog') loadCatalogManagement();
     if (tabName === 'subs') loadAllSubmissions();
+    if (tabName === 'progress') window.loadLearningDashboard();
   };
 
   window.hubSubmissionState = { page: 1, limit: 10, total: 0, pages: 1 };

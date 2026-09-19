@@ -1,6 +1,7 @@
 import { getDb } from './lib/db.js';
 import bcrypt from 'bcryptjs';
 import { clearSessionCookie, getSession, setSessionCookie, signSession } from './lib/session.js';
+import { recordActivity } from './lib/learning.js';
 
 export default async function handler(req, res) {
   res.setHeader('Cache-Control', 'no-store');
@@ -33,7 +34,12 @@ export default async function handler(req, res) {
         : res.status(401).json({ success: false, error: 'Chưa đăng nhập' });
     }
     if (action === 'logout') {
+      const session = getSession(req);
       clearSessionCookie(res);
+      if (session) {
+        try { await recordActivity(await getDb(), session, 'logout'); }
+        catch (error) { console.error('[Logout activity]', error); }
+      }
       return res.status(200).json({ success: true });
     }
 
@@ -97,14 +103,16 @@ export default async function handler(req, res) {
           return res.status(409).json({ success: false, error: 'Tên tài khoản đã tồn tại' });
         }
 
-        await users.insertOne({
+        const createdUser = {
           username: cleanNewUsername,
           password: await bcrypt.hash(password, 12),
           fullName: cleanFullName || cleanNewUsername,
           role: cleanRole,
           createdAt: new Date(),
           createdBy: session.username
-        });
+        };
+        await users.insertOne(createdUser);
+        await recordActivity(db, session, 'account.created', { itemTitle: cleanNewUsername });
         return res.status(201).json({ success: true, message: `Đã tạo tài khoản "${cleanNewUsername}"` });
       }
 
@@ -128,6 +136,7 @@ export default async function handler(req, res) {
             updatedBy: session.username
           }
         });
+        await recordActivity(db, session, 'account.updated', { itemTitle: cleanTarget });
         return res.status(200).json({ success: true, message: `Đã cập nhật mật khẩu cho "${cleanTarget}"` });
       }
 
@@ -141,6 +150,7 @@ export default async function handler(req, res) {
         }
       }
       await users.deleteOne({ _id: target._id });
+      await recordActivity(db, session, 'account.deleted', { itemTitle: cleanTarget });
       return res.status(200).json({ success: true, message: `Đã xóa tài khoản "${cleanTarget}"` });
     }
 
@@ -175,9 +185,10 @@ export default async function handler(req, res) {
         createdAt: new Date(),
         bootstrapAdmin: true
       };
-      await users.insertOne(adminUser);
+      const adminInsert = await users.insertOne(adminUser);
 
       setSessionCookie(res, signSession(adminUser));
+      await recordActivity(db, { sub: String(adminInsert.insertedId), username: adminUser.username }, 'login');
       return res.status(201).json({
         success: true,
         message: 'Khởi tạo quản trị viên thành công',
@@ -200,13 +211,15 @@ export default async function handler(req, res) {
       }
 
       const hashedPassword = await bcrypt.hash(password, 12);
-      await users.insertOne({
+      const newUser = {
         username: cleanUsername,
         password: hashedPassword,
         fullName: fullName ? String(fullName).trim() : cleanUsername,
         role: 'student',
         createdAt: new Date()
-      });
+      };
+      const newUserInsert = await users.insertOne(newUser);
+      await recordActivity(db, { sub: String(newUserInsert.insertedId), username: cleanUsername }, 'account.created');
 
       return res.status(201).json({ success: true, message: 'Đăng ký thành công' });
     }
@@ -224,6 +237,7 @@ export default async function handler(req, res) {
       }
 
       setSessionCookie(res, signSession(user));
+      await recordActivity(db, { sub: String(user._id), username: user.username }, 'login');
       return res.status(200).json({
         success: true,
         user: { 
