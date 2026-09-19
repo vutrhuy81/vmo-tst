@@ -15,7 +15,7 @@ const entries = [
   { _id: 'a2', userId: 'member-id', username: 'hoangkien', problemKey: 'specialty:1', submissionKind: 'ai_guide', solutionContent: 'Lời giải mới', problemSnapshot: { title: 'Ví dụ 1', setTitle: 'Chuyên đề dãy số' }, updatedAt: '2026-09-18T00:00:00Z' },
   { _id: 'a3', userId: 'member-id', username: 'hoangkien', problemKey: 'specialty:1', evaluation: { estimatedScore: '2.5/5.0' }, problemSnapshot: { title: 'Ví dụ 1', setTitle: 'Chuyên đề dãy số' }, updatedAt: '2026-09-17T00:00:00Z' },
   { _id: 'a4', userId: 'member-id', username: 'hoangkien', problemKey: 'specialty:1', evaluation: { estimatedScore: '4.0/5.0' }, problemSnapshot: { title: 'Ví dụ 1', setTitle: 'Chuyên đề dãy số' }, updatedAt: '2026-09-19T00:00:00Z' },
-  { _id: 'b1', userId: 'other-id', username: 'otheruser', problemKey: 'tst:quang-ngai:1', evaluation: { estimatedScore: '3.5/5.0' }, problemSnapshot: { title: 'Câu 1', setTitle: 'Đề Quảng Ngãi' }, updatedAt: '2026-09-18T00:00:00Z' },
+  { _id: 'b1', userId: 'other-id', username: 'otheruser', problemKey: 'tst:quang-ngai:1', evaluation: { estimatedScore: '3.5/5.0đ (Đánh giá dự phòng)' }, problemSnapshot: { title: 'Câu 1', setTitle: 'Đề Quảng Ngãi' }, updatedAt: '2026-09-18T00:00:00Z' },
   { _id: 'b2', userId: 'other-id', username: 'otheruser', problemKey: 'tst:quang-ngai:2', solutionContent: 'Chưa chấm', updatedAt: '2026-09-18T00:00:00Z' }
 ];
 const users = [
@@ -26,6 +26,7 @@ const all = summarizeLearning(entries, users);
 assert.deepEqual(all.totals, { guideCount: 1, evaluationCount: 2, scoreEarned: 7.5, scoreMaximum: 10 });
 assert.equal(all.guides.length, 1);
 assert.equal(all.evaluations.find(item => item.username === 'hoangkien').score, '4/5');
+assert.equal(all.evaluations.find(item => item.username === 'otheruser').score, '3.5/5');
 assert.equal(all.evaluations.find(item => item.username === 'hoangkien').setTitle, 'Chuyên đề dãy số');
 const own = summarizeLearning(entries.filter(row => row.userId === learningScope(member).userId), [users[0]]);
 assert.deepEqual(own.totals, { guideCount: 1, evaluationCount: 1, scoreEarned: 4, scoreMaximum: 5 });
