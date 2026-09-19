@@ -869,24 +869,27 @@ export default async function handler(req, res) {
     }
 
     if (action === 'create_exam_from_ocr') {
+      const isMock = payload.destination === 'mock';
+      if (payload.destination && !['mock', 'tst'].includes(payload.destination)) return res.status(400).json({ success: false, error: 'Loại đề thi không hợp lệ' });
       const province = cleanText(payload.province, 120);
       const targetAnchor = cleanKey(payload.targetAnchor, 180);
       const requestedRegion = cleanText(payload.region, 20).toUpperCase();
       const region = TST_REGIONS.has(requestedRegion) ? requestedRegion : 'BAC';
-      const dayNumber = Math.max(1, Math.min(2, Number(payload.dayNumber) || 1));
+      const dayNumber = Number(payload.dayNumber);
+      const setNumber = Number(payload.setNumber);
       const year = cleanText(payload.year, 40) || '2026-2027';
       const questions = Array.isArray(payload.questions) ? payload.questions.slice(0, 10) : [];
-      if (!province || !/^tst-[a-z0-9._:-]+$/.test(targetAnchor) || !questions.length) {
+      if (!province || !(isMock ? /^mock-set\d+-day[12]$/.test(targetAnchor) && Number.isInteger(setNumber) && setNumber >= 3 && setNumber <= 100 && targetAnchor === `mock-set${setNumber}-day${dayNumber}` : /^tst-[a-z0-9._:-]+$/.test(targetAnchor)) || !Number.isInteger(dayNumber) || dayNumber < 1 || dayNumber > (isMock ? 2 : 4) || !questions.length) {
         return res.status(400).json({ success: false, error: 'Thiếu tỉnh/thành phố, vị trí frontend hoặc danh sách câu hỏi' });
       }
 
       const provinceSlug = slugKey(province);
       const yearSlug = slugKey(year);
-      const examKey = `tst:${provinceSlug}:${yearSlug}:day-${dayNumber}`;
+      const examKey = isMock ? `mock:set-${setNumber}:${yearSlug}:day-${dayNumber}` : `tst:${provinceSlug}:${yearSlug}:day-${dayNumber}`;
       // Một tỉnh có thể có hai đề với các số câu trùng nhau. Ngày thi phải
       // thuộc khóa ổn định để ngày 2 không ghi đè câu hỏi/lịch sử của ngày 1.
-      const setKey = `tst:${targetAnchor}:day-${dayNumber}`;
-      const title = cleanText(payload.title, 500) || `Đề thi lập đội tuyển ${province} — Ngày ${dayNumber}`;
+      const setKey = isMock ? `mock:${targetAnchor}` : `tst:${targetAnchor}:day-${dayNumber}`;
+      const title = cleanText(payload.title, 500) || (isMock ? `Bộ đề thi thử VMO số ${setNumber} — Ngày ${dayNumber}` : `Đề thi lập đội tuyển ${province} — Ngày ${dayNumber}`);
       const status = payload.status === 'draft' ? 'draft' : 'published';
       const existingExam = await db.collection('exams').findOne({ examKey }, { projection: { _id: 1 } });
       if (existingExam && payload.replaceExisting !== true) {
@@ -914,7 +917,8 @@ export default async function handler(req, res) {
       const examDoc = {
         examKey,
         title,
-        category: 'tst-national',
+        category: isMock ? 'vmo-mock' : 'tst-national',
+        setNumber: isMock ? setNumber : undefined,
         year,
         day: `Ngày ${dayNumber}`,
         dayNumber,
@@ -940,9 +944,9 @@ export default async function handler(req, res) {
 
       const setDoc = {
         key: setKey,
-        contentType: 'tst_exam',
+        contentType: isMock ? 'mock_exam' : 'tst_exam',
         title,
-        group: 'tst',
+        group: isMock ? 'mock_exam' : 'tst',
         year,
         province,
         region,
@@ -968,8 +972,8 @@ export default async function handler(req, res) {
           setTitle: title,
           examId: String(savedExam._id),
           examKey,
-          sourceType: 'tst_question',
-          sourceGroup: 'tst',
+          sourceType: isMock ? 'mock_exam_question' : 'tst_question',
+          sourceGroup: isMock ? 'mock_exam' : 'tst',
           title: cleanText(raw?.title, 500) || `Câu ${questionNumber}`,
           shortLabel: `Câu ${questionNumber}`,
           questionNumber,

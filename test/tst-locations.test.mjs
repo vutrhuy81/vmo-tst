@@ -8,12 +8,15 @@ const locationsSource = fs.readFileSync(new URL('tst-locations.js', root), 'utf8
 const uiSource = fs.readFileSync(new URL('vmo_db_ui.js', root), 'utf8');
 
 const dom = new JSDOM(`<!doctype html><html><body>
-  <div id="sidebar-tst"><div class="nav-year-group"><div class="nav-year-title">TST</div></div></div>
-  <div id="tab-tst"></div>
+  <div id="sidebar-tst"><div class="nav-year-group"><div class="nav-year-title">TST</div>${Array.from({ length: 25 }, (_, index) => `<a class="nav-link" href="#tst-existing-${index}">${String(index+1).padStart(2, '0')}. Tỉnh mẫu</a>`).join('')}</div></div>
+  <div id="sidebar-mock"><nav class="book-toc"><div class="nav-year-group"><a class="nav-link" href="#mock-set1-day1">01. Bộ 1</a><a class="nav-link" href="#mock-set2-day2">06. Bộ 2</a></div></nav></div>
+  <div id="tab-mock"><div class="feed-container"></div></div>
+  <div id="tab-tst"><div class="feed-container"></div></div>
   <div id="dataHubModal">
     <div class="vmo-modal-body">
       <div class="hub-tabs"><button class="hub-tab-btn" id="hub-tab-events"></button></div>
       <div id="hub-panel-events"><div id="hubEventsList"></div></div>
+      <form id="formAddDoc" style="display:none"></form>
       <form id="formAddExam" style="display:none"></form>
     </div>
   </div>
@@ -31,7 +34,11 @@ window.VMODataService = {
   getEvents: async () => [],
   getDocuments: async () => [],
   getExams: async () => [],
-  getExamCatalog: async () => [{
+  getExamCatalog: async category => category === 'vmo-mock' ? [{
+    id: 'mock-example', examKey: 'mock:set-3:2026-2027:day-1',
+    targetAnchor: 'mock-set3-day1', setNumber: 3, province: 'Đà Nẵng', year: '2026-2027', dayNumber: 1, title: 'Bộ 3',
+    problems: [{ contentKey: 'mock:mock-set3-day1:question-1', questionNumber: 1, content: 'Đề thử' }]
+  }] : [{
     id: 'exam-quang-tri', examKey: 'tst:quang-tri:2026-2027:day-1',
     targetAnchor: 'tst-quang-tri', province: 'Quảng Trị', provinceOrder: 21,
     region: 'TRUNG', title: 'Đề TST Quảng Trị', year: '2026-2027', dayNumber: 1,
@@ -46,8 +53,12 @@ assert.equal(window.VMO_TST_LOCATIONS.filter(item => item.type === 'province').l
 assert.equal(window.VMO_TST_LOCATIONS.filter(item => item.type === 'university_school').length, 4);
 
 window.openDataHubModal();
+window.toggleAddDocForm();
+const select = window.document.getElementById('docTargetAnchor');
+assert.equal(window.document.getElementById('docDayNumber').options.length, 4);
 window.toggleAddExamForm();
-const select = window.document.getElementById('examTargetAnchor');
+assert.equal(window.document.getElementById('examDayNumber').options.length, 2);
+assert.equal(window.document.getElementById('examSetNumber').value, '3');
 assert.equal(select.options.length, 38, 'Dropdown phải đủ 34 tỉnh/thành và 4 trường chuyên đại học');
 assert.deepEqual(Array.from(select.querySelectorAll('optgroup')).map(group => group.label), [
   '34 tỉnh/thành phố',
@@ -55,15 +66,20 @@ assert.deepEqual(Array.from(select.querySelectorAll('optgroup')).map(group => gr
 ]);
 
 select.value = 'tst-quang-tri';
-window.syncExamProvinceFromTarget();
-assert.equal(window.document.getElementById('examProvince').value, 'Quảng Trị');
-assert.equal(window.document.getElementById('examRegion').value, 'TRUNG');
-assert.equal(window.document.getElementById('examRegionDisplay').value, 'Miền Trung');
+window.syncExamProvinceFromTarget('doc');
+assert.equal(window.document.getElementById('docProvince').value, 'Quảng Trị');
+assert.equal(window.document.getElementById('docRegion').value, 'TRUNG');
+assert.equal(window.document.getElementById('docRegionDisplay').value, 'Miền Trung');
 
 await window.loadDatabaseTstExams(true);
 const newCard = window.document.getElementById('tst-quang-tri');
 assert.ok(newCard, 'Đề của tỉnh mới phải tự tạo card frontend');
 assert.equal(newCard.dataset.filter, 'TRUNG');
-assert.ok(window.document.querySelector('#sidebar-tst a[href="#tst-quang-tri"]'), 'Tỉnh mới phải tự sinh liên kết sidebar');
+assert.match(window.document.querySelector('#sidebar-tst a[href="#tst-quang-tri"]').textContent, /^26\. Tỉnh Quảng Trị$/, 'Tỉnh mới phải theo số thứ tự 25');
+await window.loadDatabaseTstExams(true);
+assert.equal(window.document.querySelectorAll('#sidebar-tst a[href="#tst-quang-tri"]').length, 1);
+await window.loadDatabaseMockExams(true);
+assert.ok(window.document.getElementById('mock-set3-day1'));
+assert.ok(window.document.querySelector('#sidebar-mock a[href="#mock-set3-day1"]'));
 
 console.log('TST locations smoke test: OK');

@@ -57,7 +57,7 @@ export default async function handler(req, res) {
   const context = {
     province: text(body?.province, 120),
     year: text(body?.year, 40) || '2026-2027',
-    dayNumber: Math.max(1, Math.min(2, Number(body?.dayNumber) || 1))
+    dayNumber: Math.max(1, Math.min(body?.destination === 'tst' ? 4 : 2, Number(body?.dayNumber) || 1))
   };
   const prompt = `Nhận dạng chính xác đề thi Olympic Toán tiếng Việt trong ảnh và tách thành từng câu hỏi.
 
@@ -107,7 +107,7 @@ Quy tắc bắt buộc:
         examTitle: text(data.examTitle, 500),
         examDate: text(data.examDate, 20),
         duration: Math.max(1, Math.min(600, Number(data.duration) || 180)),
-        dayNumber: Math.max(1, Math.min(2, Number(data.dayNumber) || context.dayNumber)),
+        dayNumber: Math.max(1, Math.min(body?.destination === 'tst' ? 4 : 2, Number(data.dayNumber) || context.dayNumber)),
         confidence: text(data.confidence, 40) || 'unknown',
         questions
       }
