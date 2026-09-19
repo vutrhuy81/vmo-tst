@@ -31,6 +31,10 @@ window.MathJax = {
         root.querySelectorAll?.('.problem-content, .examplebox').forEach(el => {
           if (!el.getAttribute('data-raw-math')) el.setAttribute('data-raw-math', el.innerHTML);
         });
+        // Lưu bản HTML/LaTeX gốc của ví dụ trước khi MathJax thêm mjx-container.
+        root.querySelectorAll?.('.examplebox > p, .examplebox .example-solution').forEach(el => {
+          if (el._catalogSourceHtml === undefined) el._catalogSourceHtml = el.innerHTML;
+        });
         await MathJax.typesetPromise([root]);
         renderedRoots.add(root);
       };

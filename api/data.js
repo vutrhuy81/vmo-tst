@@ -468,6 +468,9 @@ export default async function handler(req, res) {
       if (!sets.length || !problems.length) {
         return res.status(400).json({ success: false, error: 'Catalog phải có nhóm nội dung và câu hỏi' });
       }
+      if (problems.some(item => /(?:<|&lt;)mjx-[a-z-]+\b|class=["'][^"']*\bMathJax\b/i.test(String(item?.content || '')))) {
+        return res.status(400).json({ success: false, error: 'Catalog chứa HTML do MathJax tạo ra; vui lòng tải lại trang trước khi đồng bộ' });
+      }
 
       const setIds = new Map();
       for (const raw of sets) {

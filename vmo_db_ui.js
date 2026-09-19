@@ -229,10 +229,19 @@
 
   function rawContent(element) {
     if (!element) return '';
-    return (element.getAttribute('data-raw-math') || element.innerHTML || element.textContent || '').trim();
+    return (element._catalogSourceHtml ?? element.getAttribute('data-raw-math') ?? element.innerHTML ?? element.textContent ?? '').trim();
+  }
+
+  function captureExampleCatalogSource(root = document) {
+    root.querySelectorAll?.('#tab-danang .examplebox > p, #tab-danang .examplebox .example-solution').forEach(element => {
+      if (element._catalogSourceHtml === undefined) {
+        element._catalogSourceHtml = element.innerHTML;
+      }
+    });
   }
 
   window.buildContentCatalog = function() {
+    captureExampleCatalogSource();
     const setsByKey = new Map();
     const problems = [];
 
@@ -3510,6 +3519,9 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
 
   function renderMongoProblemContent(problem, content) {
     if (!problem || !content) return;
+    // Bản đồng bộ cũ có thể chứa DOM MathJax đã typeset. Đây là mã hiển thị,
+    // không phải đề bài; giữ nguyên bản ví dụ tĩnh khi gặp dữ liệu đó.
+    if (/(?:<|&lt;)mjx-[a-z-]+\b|class=["'][^"']*\bMathJax\b/i.test(content)) return;
     let target = problem.querySelector('.problem-content');
     if (!target && problem.classList.contains('examplebox')) {
       const paragraphs = Array.from(problem.querySelectorAll(':scope > p'));
@@ -3522,9 +3534,18 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
       paragraphs.slice(1).forEach(paragraph => { paragraph.style.display = 'none'; });
     }
     if (!target) return;
+    if (target._renderedMongoContent === content) return;
     target.setAttribute('data-raw-math', content);
-    if (window.safeRenderMathJaxToElement) window.safeRenderMathJaxToElement(target, content);
-    else target.innerHTML = sanitizeCatalogHtml(content);
+    if (/<\/?[a-z][\w:-]*(?:\s[^<>]*)?>/i.test(content)) {
+      if (window.MathJax?.typesetClear) window.MathJax.typesetClear([target]);
+      target.innerHTML = sanitizeCatalogHtml(content);
+      if (window.MathJax?.typesetPromise) window.MathJax.typesetPromise([target]).catch(() => {});
+    } else if (window.safeRenderMathJaxToElement) {
+      window.safeRenderMathJaxToElement(target, content);
+    } else {
+      target.textContent = content;
+    }
+    target._renderedMongoContent = content;
   }
 
   function applyMongoReferenceLinks(root = document) {
@@ -3716,6 +3737,7 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
   // Tự động kích hoạt khi DOM hoàn tất
   function init() {
     const activeRoot = document.querySelector('.tab-pane.active') || document;
+    captureExampleCatalogSource();
     setupModalEvents();
     injectSubmissionButtons(activeRoot);
     injectDataManagementButton();

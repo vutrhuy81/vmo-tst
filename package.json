@@ -7,7 +7,7 @@
     "dev": "node server.js",
     "start": "node server.js",
     "build": "node build.js",
-    "test": "node tests/tst-locations.test.mjs",
+    "test": "node test/tst-locations.test.mjs && node test/specialty-content.test.mjs",
     "lint": "node -c server.js && node -c build.js && node -c app.js && node -c tst-locations.js && node -c vmo_db_ui.js && node -c i18n.js && node -c i18n_content.js && node -c api/data.js && node -c api/translate-content.js && node -c api/ai-guide.js && node -c api/ai-evaluate-solution.js && node -c api/ai-ocr-math.js && node -c api/ai-ocr-exam.js && node -c api/lib/ai.js && node -c api/lib/openai.js"
   },
   "dependencies": {
