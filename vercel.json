@@ -4,6 +4,9 @@
     "api/ai-ocr-exam.js": {
       "maxDuration": 60
     },
+    "api/ai-predict-exam.js": {
+      "maxDuration": 120
+    },
     "api/ai-guide.js": {
       "maxDuration": 300
     },
