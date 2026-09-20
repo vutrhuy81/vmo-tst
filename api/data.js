@@ -947,7 +947,11 @@ export default async function handler(req, res) {
           actualYears: (Array.isArray(payload.predictionInfo?.actualYears) ? payload.predictionInfo.actualYears : []).slice(0, 15).map(value => cleanText(value, 20)),
           ownExamCount: cleanNumber(payload.predictionInfo?.ownExamCount, 0, 0, 200),
           peerExamCount: cleanNumber(payload.predictionInfo?.peerExamCount, 0, 0, 200),
-          model: cleanText(payload.predictionInfo?.model, 80)
+          model: cleanText(payload.predictionInfo?.model, 80),
+          verifierModel: cleanText(payload.predictionInfo?.verifierModel, 80),
+          verificationScore: cleanNumber(payload.predictionInfo?.verificationScore, 0, 0, 5),
+          verificationSummary: cleanText(payload.predictionInfo?.verificationSummary, 1000),
+          verified: payload.predictionInfo?.verified === true
         } : null,
         ocrConfidence: cleanText(payload.ocrConfidence, 40),
         status,
