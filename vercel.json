@@ -5,7 +5,7 @@
       "maxDuration": 60
     },
     "api/ai-predict-exam.js": {
-      "maxDuration": 120
+      "maxDuration": 300
     },
     "api/ai-guide.js": {
       "maxDuration": 300

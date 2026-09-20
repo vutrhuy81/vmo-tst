@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import { JSDOM } from 'jsdom';
-import { examStructure, predictionStructure, predictionSettings, selectPredictionEvidence } from '../lib/exam-prediction.js';
+import { approvedPrediction, examStructure, predictionStructure, predictionSettings, selectPredictionEvidence } from '../lib/exam-prediction.js';
 import { historicalExams } from '../data/exam-prediction-history.js';
 
 const projectRoot = new URL('../', import.meta.url);
@@ -29,6 +29,14 @@ assert.ok(evidence.peerExamCount > 0, 'Dùng xu hướng TST 2026–2027');
 const vmo = selectPredictionEvidence(predictionSettings({ targetType: 'vmo', year: '2027-2028', dayNumber: 2, lookback: 10 }));
 assert.equal(vmo.ownExamCount, 0, 'Không nhầm đề thi thử với kho đề VMO chính thức');
 assert.throws(() => predictionSettings({ targetType: 'tst', targetAnchor: 'tst-da-nang', year: '2027-2031', dayNumber: 1, lookback: 10 }));
+const reviewed = { approved: true, score: 4.8, structureCorrect: true, allProblemsWellPosed: true,
+  mathematicalConsistency: true, originalEnough: true, topicAndScoresMatch: true,
+  criticalIssues: [], questionChecks: [{ questionNumber: 1, valid: true }, { questionNumber: 2, valid: true }] };
+const sampleQuestions = [{ questionNumber: 1 }, { questionNumber: 2 }];
+assert.equal(approvedPrediction(reviewed, sampleQuestions), true);
+assert.equal(approvedPrediction({ ...reviewed, questionChecks: [{ questionNumber: 1, valid: true }] }, sampleQuestions), false, 'Không bỏ sót câu');
+assert.equal(approvedPrediction({ ...reviewed, criticalIssues: ['Giả thiết mâu thuẫn'] }, sampleQuestions), false, 'Lỗi nghiêm trọng phải chặn lưu');
+assert.equal(approvedPrediction({ ...reviewed, score: 4.4 }, sampleQuestions), false, 'Điểm dưới ngưỡng phải bị từ chối');
 
 const dom = new JSDOM(`<!doctype html><html><body>
   <div id="sidebar-mock"><nav class="book-toc"><div class="nav-year-group"><a class="nav-link" href="#mock-set1-day1">01. Bộ 1</a><a class="nav-link" href="#mock-set2-day2">06. Bộ 2</a></div></nav></div>
@@ -70,6 +78,7 @@ window.fetch = async (_, options) => {
   request = JSON.parse(options.body);
   return { ok: true, json: async () => ({ success: true, data: {
     title: 'Đề dự đoán thử', model: 'test', reasoning: 'Có 3 năm nguồn.',
+    quality: { verified: true, score: 4.8, verifierModel: 'gpt-test', summary: 'Đạt', questionChecks: [] },
     evidence: { requestedYears: 10, years: ['2026-2027'], ownExamCount: 1, peerExamCount: 24, trendYear: '2026-2027', sources: [] },
     questions: examStructure[2].map(item => ({ ...item, content: `Xét bài toán mới ở câu ${item.questionNumber}: chứng minh kết luận này.` }))
   } }) };
@@ -92,4 +101,6 @@ assert.equal(stored.sourceImageCount, 0);
 assert.equal(stored.year, '2027-2028');
 assert.equal(stored.questions.length, 3);
 assert.equal(stored.predictionInfo.actualYears.length, 1);
+assert.equal(stored.predictionInfo.verifierModel, 'gpt-test');
+assert.equal(stored.predictionInfo.verificationScore, 4.8);
 console.log('Exam prediction evidence and form: OK');

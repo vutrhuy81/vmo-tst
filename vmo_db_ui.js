@@ -3111,7 +3111,7 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
     ocrStates.exam.prediction = null;
     if (report) report.replaceChildren();
     if (button) button.disabled = true;
-    if (status) status.textContent = 'Đang tổng hợp đề nguồn và soạn bản dự đoán...';
+    if (status) status.textContent = 'Gemini đang soạn đề; GPT sẽ kiểm định độc lập từng câu (có thể mất gần 5 phút)...';
     try {
       const response = await fetch('/api/ai-predict-exam', {
         method: 'POST', credentials: 'same-origin', headers: { 'Content-Type': 'application/json' },
@@ -3126,8 +3126,11 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
       if (!response.ok || !payload.success) throw new Error(payload.error || `Không tạo được đề dự đoán (HTTP ${response.status})`);
       if (requestKey !== predictionInputKey()) throw new Error('Thông số đã thay đổi trong lúc tạo đề; vui lòng tạo lại.');
       const data = payload.data;
+      if (data?.quality?.verified !== true) throw new Error('Đề chưa vượt kiểm định GPT; không thể lưu bản dự đoán.');
       ocrStates.exam.questions = data.questions;
       ocrStates.exam.prediction = { key: requestKey, evidence: data.evidence, model: data.model,
+        quality: data.quality, verifiedQuestions: data.questions.map(question => ({ questionNumber: question.questionNumber,
+          topic: question.topic, maxScore: question.maxScore, content: question.content })),
         targetType, targetAnchor: targetType === 'vmo' ? 'vmo-official' : target.value };
       document.getElementById('examTitle').value = data.title;
       renderExamOcrEditor('exam');
@@ -3137,13 +3140,21 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
         const summary = document.createElement('p');
         summary.textContent = `Tham chiếu thực tế: ${evidence.ownExamCount || 0} đề / ${evidence.years?.length || 0} năm của đơn vị (${(evidence.years || []).join(', ') || 'chưa có'}), ${evidence.peerExamCount || 0} đề TST cùng kỳ ${evidence.trendYear || ''}. ${data.reasoning || ''}`;
         report.appendChild(summary);
+        const review = document.createElement('p');
+        review.textContent = `Kiểm định GPT: ${data.quality.score}/5. ${data.quality.summary || ''}`;
+        report.appendChild(review);
+        (data.quality.questionChecks || []).forEach(check => {
+          const item = document.createElement('div');
+          item.textContent = `Câu ${check.questionNumber}: ${check.reason || 'Đã kiểm tra'}`;
+          report.appendChild(item);
+        });
         (evidence.sources || []).slice(0, 10).forEach(source => {
           const item = document.createElement('div');
           item.textContent = `${source.year} · ${source.title} · ${source.source}`;
           report.appendChild(item);
         });
       }
-      if (status) status.textContent = 'Đã tạo bản dự đoán. Hãy rà soát và chỉnh sửa từng câu trước khi lưu.';
+      if (status) status.textContent = 'Gemini đã soạn, GPT đã duyệt bản gốc. Hãy rà soát từng câu; nội dung chỉnh sửa sau kiểm định cần admin tự kiểm tra.';
     } catch (error) {
       if (status) status.textContent = error.message;
       showToast(error.message, false);
@@ -3418,6 +3429,7 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
     const prediction = !tst && field('CreationMode')?.value === 'prediction';
     if (!questions.length || (!prediction && !sourceImages.length)) return showToast('Vui lòng tạo và rà soát nội dung câu hỏi trước khi lưu.', false);
     if (prediction && (!state.prediction || state.prediction.key !== predictionInputKey())) return showToast('Thông số dự đoán đã thay đổi. Hãy tạo bản dự đoán mới trước khi lưu.', false);
+    if (prediction && state.prediction.quality?.verified !== true) return showToast('Đề chưa vượt kiểm định GPT.', false);
     if (prediction && (questions.length < 2 || questions.length > 6 || Math.abs(questions.reduce((total, question) => total + question.maxScore, 0) - 20) > 0.001)) return showToast('Đề dự đoán cần 2–6 câu và tổng điểm đúng 20.', false);
     const dayNumber = Number(field('DayNumber')?.value) || 1;
     const setNumber = Number(field('SetNumber')?.value) || 0;
@@ -3441,7 +3453,13 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
         actualYears: state.prediction.evidence?.years,
         ownExamCount: state.prediction.evidence?.ownExamCount,
         peerExamCount: state.prediction.evidence?.peerExamCount,
-        model: state.prediction.model
+        model: state.prediction.model,
+        verifierModel: state.prediction.quality.verifierModel,
+        verificationScore: state.prediction.quality.score,
+        verificationSummary: state.prediction.quality.summary,
+        verified: state.prediction.verifiedQuestions.length === questions.length &&
+          questions.every((question, index) => ['questionNumber', 'topic', 'maxScore', 'content'].every(field =>
+            question[field] === state.prediction.verifiedQuestions[index][field]))
       } : undefined
     };
     try {
