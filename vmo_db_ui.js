@@ -2492,7 +2492,7 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
   const learningActionNames = {
     login: 'Đăng nhập', logout: 'Đăng xuất',
     'solution.saved': 'Lưu bài giải', 'evaluation.saved': 'Lưu AI đánh giá',
-    'guide.saved': 'Lưu AI hướng dẫn giải', 'submission.deleted': 'Xóa bài nộp',
+    'guide.saved': 'Lưu AI hướng dẫn giải', 'guide.deleted': 'Xóa AI hướng dẫn giải', 'submission.deleted': 'Xóa bài nộp',
     'account.created': 'Tạo tài khoản', 'account.updated': 'Cập nhật tài khoản', 'account.deleted': 'Xóa tài khoản',
     'document.added': 'Thêm tài liệu', 'document.deleted': 'Xóa tài liệu',
     'exam.added': 'Thêm đề thi', 'exam.image_saved': 'Lưu ảnh đề thi', 'exam.deleted': 'Xóa đề thi',
@@ -2557,13 +2557,15 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
     return date && !Number.isNaN(date.getTime()) ? date.toLocaleString('vi-VN') : 'Chưa rõ thời gian';
   }
 
-  function learningList(items, withScores) {
+  function learningList(items, withScores, showDelete = false) {
     if (!items.length) return '<p style="color:#64748b;">Chưa có câu hỏi/ví dụ đã lưu.</p>';
     return `<div style="max-height:300px;overflow:auto;margin-top:8px;">${items.map(item => `
       <div style="padding:9px 11px;border:1px solid #e2e8f0;border-radius:7px;margin-bottom:6px;background:#fff;">
         <strong>${escapeHtmlText(item.problemTitle)}</strong>
         ${withScores ? `<span style="float:right;font-weight:800;color:#0e7490;">${escapeHtmlText(item.score || 'Chưa có điểm chuẩn')}</span>` : ''}
         <div style="font-size:.8rem;color:#475569;">📚 ${escapeHtmlText(item.setTitle)} · ${escapeHtmlText(item.username)} · ${escapeHtmlText(learningDate(item.savedAt))}</div>
+        ${showDelete && /^[a-f\d]{24}$/i.test(String(item.submissionId || ''))
+          ? `<button type="button" data-delete-ai-guide="${item.submissionId}" style="margin-top:7px;padding:5px 8px;border:1px solid #fecdd3;background:#fff1f2;color:#be123c;border-radius:5px;cursor:pointer;">🗑️ Xóa lời giải AI đã lưu</button>` : ''}
       </div>`).join('')}</div>`;
   }
 
@@ -2590,9 +2592,32 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
         <thead><tr><th style="text-align:left;">Thành viên</th><th>Hướng dẫn</th><th>Đánh giá</th><th>Điểm AI</th></tr></thead>
         <tbody>${members.map(member => `<tr style="border-top:1px solid #e2e8f0;"><td>${escapeHtmlText(member.fullName)} <small>(${escapeHtmlText(member.username)})</small></td><td style="text-align:center;">${member.guideCount}</td><td style="text-align:center;">${member.evaluationCount}</td><td style="text-align:center;">${score(member.scoreEarned)} / ${score(member.scoreMaximum)}</td></tr>`).join('')}</tbody>
       </table></div>` : '';
-    document.getElementById('hubLearningGuides').innerHTML = learningList(guides, false);
+    const guideList = document.getElementById('hubLearningGuides');
+    guideList.innerHTML = learningList(guides, false, isCurrentUserAdmin());
+    guideList.querySelectorAll('[data-delete-ai-guide]').forEach(button => {
+      button.onclick = () => window.deleteLearningAiGuide(button.dataset.deleteAiGuide);
+    });
     document.getElementById('hubLearningEvaluations').innerHTML = learningList(evaluations, true);
   }
+
+  window.deleteLearningAiGuide = async function(submissionId) {
+    if (!requireAdminUiAction()) return;
+    const guide = learningDashboard.overview?.guides?.find(item => item.submissionId === submissionId);
+    if (!guide || !/^[a-f\d]{24}$/i.test(submissionId)) return;
+    if (!window.confirm(`Xóa vĩnh viễn AI Hướng dẫn giải đã lưu cho "${guide.problemTitle}" của ${guide.username}? Bài nộp và đánh giá AI được giữ nguyên.`)) return;
+    const button = Array.from(document.querySelectorAll('[data-delete-ai-guide]'))
+      .find(item => item.dataset.deleteAiGuide === submissionId);
+    if (button) button.disabled = true;
+    try {
+      await window.VMODataService.deleteAiGuide(submissionId);
+      window.onAIGuideDeleted?.(submissionId);
+      showToast('Đã xóa AI Hướng dẫn giải đã lưu trong MongoDB.', true);
+      await window.loadLearningDashboard();
+    } catch (error) {
+      if (button) button.disabled = false;
+      showToast(error?.message || 'Không xóa được lời giải AI.', false);
+    }
+  };
 
   window.loadLearningActivities = async function(page = learningDashboard.page) {
     const list = document.getElementById('hubActivityList');
@@ -2613,7 +2638,7 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
         return `<div style="padding:8px 10px;border:1px solid #e2e8f0;border-radius:7px;margin-bottom:5px;font-size:.82rem;">
           <strong>${escapeHtmlText(learningActionNames[event.action] || event.action)}</strong> · ${escapeHtmlText(event.username || '')}
           <span style="color:#64748b;float:right;">${escapeHtmlText(learningDate(event.createdAt))}</span>
-          ${subject ? `<div style="clear:both;color:#475569;">${escapeHtmlText(subject)}${details.setTitle ? ` · ${escapeHtmlText(details.setTitle)}` : ''}${details.score ? ` · Điểm ${escapeHtmlText(details.score)}` : ''}</div>` : ''}
+          ${subject ? `<div style="clear:both;color:#475569;">${escapeHtmlText(subject)}${details.setTitle ? ` · ${escapeHtmlText(details.setTitle)}` : ''}${details.ownerUsername ? ` · ${escapeHtmlText(details.ownerUsername)}` : ''}${details.score ? ` · Điểm ${escapeHtmlText(details.score)}` : ''}</div>` : ''}
         </div>`;
       }).join('') : '<p style="color:#64748b;">Chưa có hoạt động được ghi nhận.</p>';
       document.getElementById('hubActivityPage').textContent = `${pagination.total} sự kiện · Trang ${pagination.page}/${pagination.pages}`;

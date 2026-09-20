@@ -316,6 +316,8 @@
     const persistedBadge = guideData.persisted
       ? `<span class="prof-badge" style="background:#e0f2fe;color:#075985;">☁ ${isEn ? 'Loaded from MongoDB' : 'Đã tải từ MongoDB'}</span>`
       : '';
+    const canDeleteSaved = guideData.persisted && /^[a-f\d]{24}$/i.test(String(guideData.savedGuideId || '')) &&
+      window.VMOAuth?.getSession?.()?.role === 'admin';
 
     const sec1 = isEn ? '🎯 1. Essential Theorems & Lemmas' : '🎯 1. Kiến thức & Bổ đề Chuyên toán cần nắm vững';
     const sec2 = isEn ? '💡 2. Key Insights & Professor\'s Analysis' : '💡 2. Ý tưởng then chốt & Phân tích của Giáo sư Toán';
@@ -336,6 +338,7 @@
             <button type="button" class="btn-guide-action" id="btn-save-ai-${problemId}" onclick="saveAIGuideToDatabase('${problemId}', '${(topic || guideData.branch || defaultTopic).replace(/'/g, "\\'")}')" title="Lưu hướng dẫn giải này vào MongoDB" style="color: #0284c7; font-weight: 600;">
               🚀 Lưu bài giải lên MongoDB
             </button>
+            ${canDeleteSaved ? `<button type="button" class="btn-guide-action btn-ai-guide-delete" onclick="deleteSavedAIGuide('${problemId}')" style="color:#be123c;" title="Xóa lời giải AI đã lưu trong MongoDB">${isEn ? '🗑️ Delete saved guide' : '🗑️ Xóa lời giải đã lưu'}</button>` : ''}
             <button type="button" class="btn-guide-action" onclick="copyAIGuideText('${problemId}')" title="${copyTitle}">
               ${copyBtn}
             </button>
@@ -491,7 +494,8 @@
             solution: formatMarkdownToHtml(rawGuide.solution || ''),
             pitfalls: formatMarkdownToHtml(rawGuide.pitfalls || ''),
             quality: rawGuide.quality || null,
-            persisted: true
+            persisted: true,
+            savedGuideId: saved.id || saved._id
           };
         }
       } catch (error) {
@@ -567,7 +571,8 @@
       setTitle: card.dataset.setTitle || examTitle,
       sourceType: card.dataset.sourceType || '',
       sourceGroup: card.dataset.sourceGroup || '',
-      rawGuide
+      rawGuide,
+      savedGuideId: guideData.savedGuideId || ''
     });
 
     // Render HTML hoàn chỉnh
@@ -617,7 +622,7 @@
       if (window.VMODataService && window.VMODataService.submitSolution) {
         const context = aiGuideContexts.get(problemId) || {};
         const stableProblemKey = context.problemKey || problemId;
-        await window.VMODataService.submitSolution(
+        const saved = await window.VMODataService.submitSolution(
           stableProblemKey,
           context.problemTitle || `AI Hướng dẫn - ${topic || 'Bài toán VMO'}`,
           solutionText,
@@ -635,6 +640,21 @@
             aiGuide: context.rawGuide || null
           }
         );
+        const savedId = String(saved?.id || saved?._id || '');
+        if (savedId && window.VMOAuth?.getSession?.()?.role === 'admin') {
+          const context = aiGuideContexts.get(problemId);
+          if (context) context.savedGuideId = savedId;
+          const actions = document.getElementById(`ai-panel-${problemId}`)?.querySelector('.ai-guide-actions');
+          if (actions && !actions.querySelector('.btn-ai-guide-delete')) {
+            const deleteButton = document.createElement('button');
+            deleteButton.type = 'button';
+            deleteButton.className = 'btn-guide-action btn-ai-guide-delete';
+            deleteButton.style.color = '#be123c';
+            deleteButton.textContent = window.currentLang === 'en' ? '🗑️ Delete saved guide' : '🗑️ Xóa lời giải đã lưu';
+            deleteButton.onclick = () => window.deleteSavedAIGuide(problemId);
+            actions.appendChild(deleteButton);
+          }
+        }
         if (btn) {
           btn.innerHTML = '✅ Đã lưu vào MongoDB!';
           btn.style.color = '#16a34a';
@@ -665,6 +685,41 @@
     }
   };
 
+  window.onAIGuideDeleted = function(savedId) {
+    for (const [problemId, context] of aiGuideContexts) {
+      if (String(context.savedGuideId) !== String(savedId)) continue;
+      const panel = document.getElementById(`ai-panel-${problemId}`);
+      const button = panel?.closest('.problem-item, .examplebox, .book-subsection, article')?.querySelector('.btn-ai-guide');
+      panel?.remove();
+      aiGuideContexts.delete(problemId);
+      if (button) {
+        button.classList.remove('active');
+        button.innerHTML = window.currentLang === 'en'
+          ? '<span class="guide-sparkle">✨</span> AI Solution Guide'
+          : '<span class="guide-sparkle">✨</span> AI Hướng dẫn giải';
+      }
+    }
+  };
+
+  window.deleteSavedAIGuide = async function(problemId) {
+    if (window.VMOAuth?.getSession?.()?.role !== 'admin') return;
+    const context = aiGuideContexts.get(problemId);
+    const savedId = String(context?.savedGuideId || '');
+    if (!/^[a-f\d]{24}$/i.test(savedId)) return;
+    if (!window.confirm('Xóa vĩnh viễn AI Hướng dẫn giải đã lưu trong MongoDB cho câu hỏi này? Bài nộp và đánh giá AI của thành viên được giữ nguyên.')) return;
+    const button = document.getElementById(`ai-panel-${problemId}`)?.querySelector('.btn-ai-guide-delete');
+    if (button) button.disabled = true;
+    try {
+      await window.VMODataService.deleteAiGuide(savedId);
+      window.onAIGuideDeleted(savedId);
+      window.loadLearningDashboard?.();
+      window.showVMOToast?.('Đã xóa AI Hướng dẫn giải đã lưu khỏi MongoDB.', true);
+    } catch (error) {
+      if (button) button.disabled = false;
+      window.showVMOToast?.(error?.message || 'Không xóa được lời giải AI.', false);
+    }
+  };
+
   // Sao chép nội dung hướng dẫn
   window.copyAIGuideText = function(problemId) {
     const body = document.getElementById(`ai-body-${problemId}`);
@@ -672,7 +727,7 @@
     const text = body.innerText;
     const isEn = (window.currentLang === 'en');
     const panel = document.getElementById(`ai-panel-${problemId}`);
-    const copyBtn = panel ? panel.querySelector('.btn-guide-action') : null;
+    const copyBtn = panel ? panel.querySelector('button[onclick^="copyAIGuideText"]') : null;
     navigator.clipboard.writeText(text).then(() => {
       if (copyBtn) {
         const origHtml = copyBtn.innerHTML;
@@ -873,8 +928,10 @@
       const profBadge = panel.querySelector('.prof-badge');
       if (profBadge) profBadge.textContent = isEn ? 'VMO Math Professor' : 'Giáo sư Toán học VMO';
 
-      const copyBtn = panel.querySelector('.btn-guide-action:first-child');
+      const copyBtn = panel.querySelector('button[onclick^="copyAIGuideText"]');
       if (copyBtn) copyBtn.textContent = isEn ? '📋 Copy Guide' : '📋 Sao chép hướng dẫn';
+      const deleteBtn = panel.querySelector('.btn-ai-guide-delete');
+      if (deleteBtn) deleteBtn.textContent = isEn ? '🗑️ Delete saved guide' : '🗑️ Xóa lời giải đã lưu';
 
       const closeBtn = panel.querySelector('.btn-guide-action:last-child');
       if (closeBtn) closeBtn.textContent = isEn ? '✕ Collapse' : '✕ Thu gọn';
