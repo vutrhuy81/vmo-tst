@@ -3126,7 +3126,10 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
       if (!response.ok || !payload.success) throw new Error(payload.error || `Không tạo được đề dự đoán (HTTP ${response.status})`);
       if (requestKey !== predictionInputKey()) throw new Error('Thông số đã thay đổi trong lúc tạo đề; vui lòng tạo lại.');
       const data = payload.data;
-      if (data?.quality?.verified !== true) throw new Error('Đề chưa vượt kiểm định GPT; không thể lưu bản dự đoán.');
+      if (!Array.isArray(data?.questions) || !Array.isArray(data?.quality?.questionChecks) ||
+          data.quality.questionChecks.length !== data.questions.length) {
+        throw new Error('Thiếu nội dung đề hoặc nhận xét GPT theo từng câu; chưa thể lưu bản dự đoán.');
+      }
       ocrStates.exam.questions = data.questions;
       ocrStates.exam.prediction = { key: requestKey, evidence: data.evidence, model: data.model,
         quality: data.quality, verifiedQuestions: data.questions.map(question => ({ questionNumber: question.questionNumber,
@@ -3141,11 +3144,17 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
         summary.textContent = `Tham chiếu thực tế: ${evidence.ownExamCount || 0} đề / ${evidence.years?.length || 0} năm của đơn vị (${(evidence.years || []).join(', ') || 'chưa có'}), ${evidence.peerExamCount || 0} đề TST cùng kỳ ${evidence.trendYear || ''}. ${data.reasoning || ''}`;
         report.appendChild(summary);
         const review = document.createElement('p');
-        review.textContent = `Kiểm định GPT: ${data.quality.score}/5. ${data.quality.summary || ''}`;
+        review.textContent = `Kiểm định GPT: ${data.quality.verified ? 'Đã duyệt' : 'Chưa duyệt — lưu để admin sửa'} (${data.quality.score}/5). ${data.quality.summary || ''}`;
         report.appendChild(review);
+        (data.quality.criticalIssues || []).forEach(issue => {
+          const item = document.createElement('p');
+          item.style.color = '#b91c1c';
+          item.textContent = `⚠️ ${issue}`;
+          report.appendChild(item);
+        });
         (data.quality.questionChecks || []).forEach(check => {
           const item = document.createElement('div');
-          item.textContent = `Câu ${check.questionNumber}: ${check.reason || 'Đã kiểm tra'}`;
+          item.textContent = `Câu ${check.questionNumber} · ${check.approved ? 'Đã duyệt' : 'Cần sửa'}: ${[check.reason, ...(check.issues || [])].filter(Boolean).join(' · ') || 'GPT chưa nêu đủ lý do.'}`;
           report.appendChild(item);
         });
         (evidence.sources || []).slice(0, 10).forEach(source => {
@@ -3154,7 +3163,9 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
           report.appendChild(item);
         });
       }
-      if (status) status.textContent = 'Gemini đã soạn, GPT đã duyệt bản gốc. Hãy rà soát từng câu; nội dung chỉnh sửa sau kiểm định cần admin tự kiểm tra.';
+      if (status) status.textContent = data.quality.verified
+        ? 'Gemini đã soạn, GPT đã duyệt bản gốc. Hãy rà soát từng câu trước khi lưu.'
+        : 'Đề chưa được GPT duyệt. Có thể lưu vào MongoDB; câu bị bác sẽ ẩn với thành viên cho đến khi admin sửa và xác nhận.';
     } catch (error) {
       if (status) status.textContent = error.message;
       showToast(error.message, false);
@@ -3225,6 +3236,8 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
     preview.style.display = 'block';
     preview.innerHTML = `<div style="font-weight:800;color:#1e293b;margin-bottom:8px;">${kind === 'exam' && ocrStates.exam.prediction ? 'Bản đề dự đoán (AI) — kiểm tra tính đúng đắn và chỉnh sửa trước khi lưu' : 'Bản OCR — kiểm tra và chỉnh sửa trước khi lưu'} (${questions.length} câu)</div>` + questions.map((item, index) => `
       <div class="exam-ocr-question" data-index="${index}" style="border-top:1px solid #e2e8f0;padding-top:10px;margin-top:10px;">
+        ${kind === 'exam' && ocrStates.exam.prediction?.quality?.questionChecks?.[index]?.approved === false
+          ? `<div style="padding:9px;margin-bottom:8px;border:1px solid #fca5a5;background:#fef2f2;border-radius:6px;color:#991b1b;white-space:pre-wrap;"><strong>⚠️ GPT chưa duyệt Câu ${Number(item.questionNumber) || index + 1}</strong><br>${escapeHtmlText([ocrStates.exam.prediction.quality.questionChecks[index].reason, ...(ocrStates.exam.prediction.quality.questionChecks[index].issues || [])].filter(Boolean).join('\n'))}</div>` : ''}
         <div style="display:grid;grid-template-columns:90px 1fr 90px;gap:8px;margin-bottom:7px;">
           <input class="exam-ocr-number" type="number" min="1" max="99" value="${Number(item.questionNumber) || index + 1}" aria-label="Số câu" style="padding:6px;border:1px solid #cbd5e1;border-radius:5px;">
           <input class="exam-ocr-topic" value="${escapeHtmlText(item.topic || 'Toán Olympic')}" aria-label="Chuyên đề" style="padding:6px;border:1px solid #cbd5e1;border-radius:5px;">
@@ -3429,7 +3442,7 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
     const prediction = !tst && field('CreationMode')?.value === 'prediction';
     if (!questions.length || (!prediction && !sourceImages.length)) return showToast('Vui lòng tạo và rà soát nội dung câu hỏi trước khi lưu.', false);
     if (prediction && (!state.prediction || state.prediction.key !== predictionInputKey())) return showToast('Thông số dự đoán đã thay đổi. Hãy tạo bản dự đoán mới trước khi lưu.', false);
-    if (prediction && state.prediction.quality?.verified !== true) return showToast('Đề chưa vượt kiểm định GPT.', false);
+    if (prediction && !Array.isArray(state.prediction.quality?.questionChecks)) return showToast('Chưa có nhận xét GPT cho đề dự đoán.', false);
     if (prediction && (questions.length < 2 || questions.length > 6 || Math.abs(questions.reduce((total, question) => total + question.maxScore, 0) - 20) > 0.001)) return showToast('Đề dự đoán cần 2–6 câu và tổng điểm đúng 20.', false);
     const dayNumber = Number(field('DayNumber')?.value) || 1;
     const setNumber = Number(field('SetNumber')?.value) || 0;
@@ -3445,7 +3458,17 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
       dayNumber, setNumber, targetAnchor, region: field('Region')?.value || 'BAC',
       provinceOrder: tst ? Number(field('TargetAnchor')?.selectedOptions?.[0]?.dataset.order) || 0 : setNumber,
       sourceImageCount: sourceImages.length, ocrConfidence: state.confidence,
-      status: 'published', questions,
+      status: 'published', questions: prediction ? questions.map(question => {
+        const original = state.prediction.verifiedQuestions.find(item => item.questionNumber === question.questionNumber);
+        const unchanged = original && ['questionNumber', 'topic', 'maxScore', 'content'].every(field =>
+          question[field] === original[field]);
+        const review = state.prediction.quality.questionChecks.find(check => check.questionNumber === question.questionNumber);
+        return { ...question, predictionReview: {
+          questionNumber: question.questionNumber, approved: unchanged && review?.approved === true,
+          reason: review?.reason || 'Câu này chưa được GPT kiểm định.',
+          issues: [...(review?.issues || []), ...(!unchanged ? ['Nội dung đã thay đổi sau kiểm định GPT; cần admin kiểm tra và xác nhận.'] : [])]
+        } };
+      }) : questions,
       origin: prediction ? 'prediction' : 'ocr',
       predictionInfo: prediction ? {
         targetType: state.prediction.targetType, targetAnchor: state.prediction.targetAnchor,
@@ -3457,13 +3480,17 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
         verifierModel: state.prediction.quality.verifierModel,
         verificationScore: state.prediction.quality.score,
         verificationSummary: state.prediction.quality.summary,
-        verified: state.prediction.verifiedQuestions.length === questions.length &&
+        criticalIssues: state.prediction.quality.criticalIssues,
+        verified: state.prediction.quality.verified === true &&
+          state.prediction.verifiedQuestions.length === questions.length &&
           questions.every((question, index) => ['questionNumber', 'topic', 'maxScore', 'content'].every(field =>
             question[field] === state.prediction.verifiedQuestions[index][field]))
       } : undefined
     };
     try {
-      if (prediction && !confirm('Đây là đề DỰ ĐOÁN do AI soạn, cần kiểm tra tính đúng đắn từng câu. Xác nhận công khai bản đã biên tập trong Bộ đề thi thử VMO?')) return;
+      if (prediction && !confirm(state.prediction.quality.verified
+        ? 'Đây là đề DỰ ĐOÁN do AI soạn. Xác nhận lưu bản đã biên tập trong Bộ đề thi thử VMO?'
+        : 'GPT đã bác ít nhất một câu. Vẫn lưu đề vào MongoDB; các câu chưa duyệt sẽ ẩn với thành viên và chờ admin chỉnh sửa trong ⚙️ Quản lý nguồn. Xác nhận lưu?')) return;
       if (saveButton) { saveButton.disabled = true; saveButton.textContent = 'Đang lưu đề thi...'; }
       let saved;
       try { saved = await window.VMODataService.createExamFromOcr(payload); }
@@ -3557,6 +3584,8 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
         </div>
         <div class="vmo-modal-body" style="overflow:auto;">
           <div id="referenceLinksProblemKey" style="padding:8px 10px;background:#f1f5f9;border-radius:6px;font-family:monospace;font-size:.8rem;margin-bottom:10px;"></div>
+          <div id="referenceManagerPredictionReview" style="display:none;white-space:pre-wrap;padding:10px;margin-bottom:12px;border:1px solid #fca5a5;background:#fef2f2;border-radius:6px;color:#991b1b;"></div>
+          <label id="referenceManagerResolveWrap" style="display:none;padding:8px;margin-bottom:12px;border:1px solid #fbbf24;background:#fffbeb;border-radius:6px;"><input id="referenceManagerResolve" type="checkbox"> Tôi đã sửa nội dung và kiểm tra toán học; công bố câu hỏi này cho thành viên.</label>
           <label for="referenceManagerProblemContent" style="display:block;font-weight:700;margin-bottom:4px;">Nội dung câu hỏi (HTML/LaTeX) *</label>
           <textarea id="referenceManagerProblemContent" required maxlength="50000" rows="16" style="flex:0 0 auto;width:100%;box-sizing:border-box;min-height:clamp(260px,42vh,420px);padding:12px;border:1px solid #cbd5e1;border-radius:6px;font-family:monospace;line-height:1.5;resize:vertical;overflow:auto;margin-bottom:12px;" placeholder="Nhập nội dung câu hỏi..."></textarea>
           <div style="display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:8px;">
@@ -3618,6 +3647,9 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
     const saveButton = document.getElementById('saveReferenceLinksManagerButton');
     contentInput.value = '';
     contentInput.disabled = true;
+    document.getElementById('referenceManagerPredictionReview').style.display = 'none';
+    document.getElementById('referenceManagerResolveWrap').style.display = 'none';
+    document.getElementById('referenceManagerResolve').checked = false;
     noteInput.value = '';
     if (saveButton) saveButton.disabled = true;
     document.getElementById('referenceLinksRows').replaceChildren();
@@ -3635,6 +3667,13 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
       document.getElementById('referenceLinksProblemKey').textContent = `Câu hỏi: ${contentKey} · Phiên bản ${Number(problem.version) || 1}`;
       contentInput.value = problem.content || '';
       contentInput.disabled = false;
+      if (problem.predictionReview?.status === 'gpt_rejected') {
+        const review = document.getElementById('referenceManagerPredictionReview');
+        review.textContent = `⚠️ GPT chưa duyệt câu hỏi này.\n${[problem.predictionReview.reason,
+          ...(problem.predictionReview.issues || [])].filter(Boolean).join('\n\n') || 'Chưa có nhận xét chi tiết.'}`;
+        review.style.display = 'block';
+        document.getElementById('referenceManagerResolveWrap').style.display = 'block';
+      }
       const links = Array.isArray(problem.referenceLinks) ? problem.referenceLinks : [];
       links.forEach(link => window.addReferenceLinkRow(link));
       if (!links.length) window.addReferenceLinkRow();
@@ -3668,6 +3707,11 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
     if (invalid) return showToast('Mỗi nguồn phải có nhãn và URL bắt đầu bằng http:// hoặc https://.', false);
     const problem = window.mongoProblemsByContentKey?.get(contentKey);
     if (!problem) return showToast('Không tìm thấy dữ liệu gốc của câu hỏi. Vui lòng mở lại cửa sổ.', false);
+    const resolvePredictionReview = problem.predictionReview?.status === 'gpt_rejected' &&
+      document.getElementById('referenceManagerResolve').checked;
+    if (resolvePredictionReview && content === problem.content?.trim()) {
+      return showToast('Cần sửa nội dung câu hỏi trước khi xác nhận đã khắc phục nhận xét GPT.', false);
+    }
     if (!window.confirm('Lưu nội dung câu hỏi và các nguồn lời giải tham khảo? Phiên bản hiện tại sẽ được lưu vào lịch sử để có thể khôi phục.')) return;
     const saveButton = document.getElementById('saveReferenceLinksManagerButton');
     const originalLabel = saveButton?.textContent || 'Lưu thay đổi';
@@ -3679,13 +3723,26 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
         referenceSolutionVerified: problem.referenceSolutionVerified === true,
         referenceLinks: links,
         changeNote: changeNote || 'Cập nhật từ chức năng Quản lý nguồn',
+        resolvePredictionReview,
         expectedVersion
       });
       const nextVersion = Number(updated?.version) || expectedVersion + 1;
-      const nextProblem = { ...problem, content, referenceLinks: links, version: nextVersion };
+      const nextProblem = { ...problem, content, referenceLinks: links, version: nextVersion,
+        ...(resolvePredictionReview ? { predictionReview: { ...problem.predictionReview, status: 'admin_corrected' },
+          status: 'published', allowSubmission: true, allowAiEvaluation: true } : {}) };
       window.mongoProblemsByContentKey.set(contentKey, nextProblem);
       window.mongoProblemReferenceLinks ||= new Map();
       window.mongoProblemReferenceLinks.set(contentKey, links);
+      document.querySelectorAll('.problem-item[data-content-key]').forEach(item => {
+        if (item.dataset.contentKey !== contentKey) return;
+        const displayed = item.querySelector('.problem-content');
+        if (displayed) {
+          displayed.setAttribute('data-raw-math', content);
+          if (window.safeRenderMathJaxToElement) window.safeRenderMathJaxToElement(displayed, content);
+          else displayed.textContent = content;
+        }
+        if (resolvePredictionReview) item.querySelector('.prediction-review-warning')?.remove();
+      });
       window.closeReferenceLinksManager();
       applyMongoReferenceLinks();
       showToast(`Đã lưu phiên bản ${nextVersion}: nội dung câu hỏi và ${links.length} nguồn tham khảo.`, true);
@@ -3870,6 +3927,20 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
       content.setAttribute('data-raw-math', problem.content || '');
       if (window.safeRenderMathJaxToElement) window.safeRenderMathJaxToElement(content, problem.content || '');
       else content.textContent = problem.content || '';
+      if (isCurrentUserAdmin() && problem.predictionReview?.status === 'gpt_rejected') {
+        const warning = document.createElement('div');
+        warning.className = 'prediction-review-warning';
+        warning.style.cssText = 'white-space:pre-wrap;margin:10px 0;padding:10px;border:1px solid #fca5a5;background:#fef2f2;color:#991b1b;border-radius:6px;';
+        warning.textContent = `⚠️ GPT chưa duyệt, câu hỏi đang ẩn với thành viên.\n${[problem.predictionReview.reason,
+          ...(problem.predictionReview.issues || [])].filter(Boolean).join('\n\n')}`;
+        const edit = document.createElement('button');
+        edit.type = 'button';
+        edit.textContent = '⚙️ Sửa câu hỏi trong Quản lý nguồn';
+        edit.onclick = () => window.openReferenceLinksManager(problem.contentKey);
+        warning.appendChild(document.createElement('br'));
+        warning.appendChild(edit);
+        item.appendChild(warning);
+      }
     });
     body.appendChild(section);
   }
