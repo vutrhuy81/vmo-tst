@@ -1,7 +1,7 @@
 import { ObjectId } from 'mongodb';
 import { getDb } from '../lib/db.js';
 import { getSession } from '../lib/session.js';
-import { learningScope, recordActivity, summarizeLearning } from '../lib/learning.js';
+import { deleteAiGuideRecord, learningScope, recordActivity, summarizeLearning } from '../lib/learning.js';
 
 const ALLOWED_RESOURCES = new Set(['documents', 'exams', 'exam_catalog', 'exam_image', 'content_sets', 'problems', 'content_revisions', 'submissions', 'submission_image', 'events', 'activity_feed', 'learning_overview']);
 const CONTENT_TYPES = new Set(['specialty_chapter', 'mock_exam', 'tst_exam', 'regional_exam']);
@@ -519,6 +519,14 @@ export default async function handler(req, res) {
     }
 
     if (!requireAdmin(session, res)) return;
+
+    if (action === 'delete_ai_guide') {
+      const id = objectId(cleanText(payload.id, 80));
+      if (!id) return res.status(400).json({ success: false, error: 'ID lời giải AI không hợp lệ' });
+      const deleted = await deleteAiGuideRecord(db, session, id);
+      if (!deleted) return res.status(404).json({ success: false, error: 'Không tìm thấy AI Hướng dẫn giải đã lưu' });
+      return res.status(200).json({ success: true, deletedId: String(id) });
+    }
 
     if (action === 'upsert_content_catalog') {
       const sets = Array.isArray(payload.sets) ? payload.sets.slice(0, 200) : [];

@@ -407,6 +407,14 @@ export async function deleteSubmission(id) {
   return mutate('delete_submission', { id: cleanId });
 }
 
+export async function deleteAiGuide(id) {
+  const cleanId = normalizeId(id).trim();
+  if (!/^[a-f0-9]{24}$/i.test(cleanId)) {
+    throw createServiceError('ID lời giải AI không hợp lệ', 0, 'VALIDATION_ERROR');
+  }
+  return mutate('delete_ai_guide', { id: cleanId });
+}
+
 export async function getEvents() {
   return normalizeList(await request('events'));
 }
@@ -452,6 +460,7 @@ const VMODataService = Object.freeze({
   getActivityFeed,
   getLearningOverview,
   deleteSubmission,
+  deleteAiGuide,
   getEvents,
   addEvent,
   deleteEvent
