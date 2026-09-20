@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import { JSDOM } from 'jsdom';
-import { approvedPrediction, examStructure, predictionStructure, predictionSettings, selectPredictionEvidence } from '../lib/exam-prediction.js';
+import { approvedPrediction, predictionQuestionReviews, examStructure, predictionStructure, predictionSettings, selectPredictionEvidence } from '../lib/exam-prediction.js';
 import { historicalExams } from '../data/exam-prediction-history.js';
 
 const projectRoot = new URL('../', import.meta.url);
@@ -37,6 +37,16 @@ assert.equal(approvedPrediction(reviewed, sampleQuestions), true);
 assert.equal(approvedPrediction({ ...reviewed, questionChecks: [{ questionNumber: 1, valid: true }] }, sampleQuestions), false, 'Không bỏ sót câu');
 assert.equal(approvedPrediction({ ...reviewed, criticalIssues: ['Giả thiết mâu thuẫn'] }, sampleQuestions), false, 'Lỗi nghiêm trọng phải chặn lưu');
 assert.equal(approvedPrediction({ ...reviewed, score: 4.4 }, sampleQuestions), false, 'Điểm dưới ngưỡng phải bị từ chối');
+const rejected = { ...reviewed, approved: false, score: 3.5, allProblemsWellPosed: false,
+  criticalIssues: ['Câu 2(c) sai: phản ví dụ có tọa độ cụ thể.'],
+  questionChecks: [{ questionNumber: 1, valid: true, reason: 'Đúng' },
+    { questionNumber: 2, valid: false, reason: 'Mệnh đề đồng viên sai' }] };
+const checks = predictionQuestionReviews(rejected, sampleQuestions);
+assert.equal(checks[0].approved, true, 'Câu được duyệt vẫn có thể công bố');
+assert.equal(checks[1].approved, false, 'Câu sai phải ở trạng thái chờ sửa');
+assert.match(checks[1].issues[0], /phản ví dụ/);
+assert.ok(predictionQuestionReviews({ ...rejected, criticalIssues: ['Cấu trúc đề sai.'] }, sampleQuestions)
+  .every(check => !check.approved), 'Lỗi toàn đề phải giữ mọi câu ở trạng thái chờ sửa');
 
 const dom = new JSDOM(`<!doctype html><html><body>
   <div id="sidebar-mock"><nav class="book-toc"><div class="nav-year-group"><a class="nav-link" href="#mock-set1-day1">01. Bộ 1</a><a class="nav-link" href="#mock-set2-day2">06. Bộ 2</a></div></nav></div>
@@ -74,11 +84,13 @@ assert.equal(byId('examRegion').value, 'TRUNG');
 byId('examPredictionYear').value = '2027-2028';
 byId('examDayNumber').value = '2';
 let request;
+let responseQuality = { verified: true, score: 4.8, verifierModel: 'gpt-test', summary: 'Đạt',
+  questionChecks: examStructure[2].map(item => ({ questionNumber: item.questionNumber, approved: true, reason: 'Đã kiểm tra', issues: [] })) };
 window.fetch = async (_, options) => {
   request = JSON.parse(options.body);
   return { ok: true, json: async () => ({ success: true, data: {
     title: 'Đề dự đoán thử', model: 'test', reasoning: 'Có 3 năm nguồn.',
-    quality: { verified: true, score: 4.8, verifierModel: 'gpt-test', summary: 'Đạt', questionChecks: [] },
+    quality: responseQuality,
     evidence: { requestedYears: 10, years: ['2026-2027'], ownExamCount: 1, peerExamCount: 24, trendYear: '2026-2027', sources: [] },
     questions: examStructure[2].map(item => ({ ...item, content: `Xét bài toán mới ở câu ${item.questionNumber}: chứng minh kết luận này.` }))
   } }) };
@@ -103,4 +115,37 @@ assert.equal(stored.questions.length, 3);
 assert.equal(stored.predictionInfo.actualYears.length, 1);
 assert.equal(stored.predictionInfo.verifierModel, 'gpt-test');
 assert.equal(stored.predictionInfo.verificationScore, 4.8);
+responseQuality = { verified: false, score: 3.3, verifierModel: 'gpt-test', summary: 'Câu 7 sai.',
+  criticalIssues: ['Câu 7(c) sai: phản ví dụ cụ thể.'],
+  questionChecks: examStructure[2].map(item => ({ questionNumber: item.questionNumber,
+    approved: item.questionNumber !== 7, reason: item.questionNumber === 7 ? 'Kết luận không đồng viên' : 'Đã kiểm tra',
+    issues: item.questionNumber === 7 ? ['Câu 7(c) sai: phản ví dụ cụ thể.'] : [] })) };
+byId('examCreationMode').value = 'prediction';
+window.syncExamCreationMode();
+byId('examPredictionTarget').value = 'tst-da-nang';
+byId('examPredictionYear').value = '2027-2028';
+byId('examDayNumber').value = '2';
+await window.runPredictExam();
+assert.equal(byId('examSaveButton').disabled, false, 'Đề bị GPT bác vẫn mở nút lưu cho admin');
+assert.match(byId('examOcrPreview').textContent, /Câu 7\(c\) sai/);
+await window.handleCreateExam({ preventDefault() {}, target: byId('formAddExam') });
+assert.equal(stored.predictionInfo.verified, false);
+assert.equal(stored.questions.find(item => item.questionNumber === 7).predictionReview.approved, false);
+assert.match(stored.questions.find(item => item.questionNumber === 7).predictionReview.issues[0], /phản ví dụ/);
+const rejectedQuestion = stored.questions.find(item => item.questionNumber === 7);
+let correction;
+window.VMODataService.getCatalogProblems = async () => [{
+  id: '507f1f77bcf86cd799439011', contentKey: 'mock:mock-set3-day2:question-7',
+  content: rejectedQuestion.content, version: 1, predictionReview: {
+    status: 'gpt_rejected', reason: rejectedQuestion.predictionReview.reason,
+    issues: rejectedQuestion.predictionReview.issues
+  }
+}];
+window.VMODataService.updateCatalogContent = async (_, payload) => { correction = payload; return { version: 2 }; };
+await window.openReferenceLinksManager('mock:mock-set3-day2:question-7');
+assert.match(byId('referenceManagerPredictionReview').textContent, /phản ví dụ/);
+byId('referenceManagerProblemContent').value += ' Bổ sung giả thiết cần thiết.';
+byId('referenceManagerResolve').checked = true;
+await window.saveReferenceLinksManager();
+assert.equal(correction.resolvePredictionReview, true, 'Admin có thể sửa và xác nhận lại câu bị bác');
 console.log('Exam prediction evidence and form: OK');

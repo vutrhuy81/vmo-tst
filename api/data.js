@@ -673,6 +673,12 @@ export default async function handler(req, res) {
         if (Object.prototype.hasOwnProperty.call(payload, 'province')) changes.province = cleanText(payload.province, 120);
       }
       if (itemType === 'problem') {
+        if (changes.status === 'published' || payload.allowSubmission === true || payload.allowAiEvaluation === true) {
+          const pending = await db.collection('problems').findOne({ _id: id }, { projection: { predictionReview: 1 } });
+          if (pending?.predictionReview?.status === 'gpt_rejected') {
+            return res.status(409).json({ success: false, error: 'Câu bị GPT bác cần sửa nội dung và xác nhận trong ⚙️ Quản lý nguồn trước khi công bố.' });
+          }
+        }
         if (Object.prototype.hasOwnProperty.call(payload, 'shortLabel')) changes.shortLabel = cleanText(payload.shortLabel, 120);
         if (Object.prototype.hasOwnProperty.call(payload, 'topic')) changes.topic = cleanText(payload.topic, 120);
         if (Object.prototype.hasOwnProperty.call(payload, 'maxScore')) {
@@ -714,6 +720,11 @@ export default async function handler(req, res) {
       }
       const current = await db.collection('problems').findOne({ _id: id });
       if (!current) return res.status(404).json({ success: false, error: 'Không tìm thấy câu hỏi' });
+      const resolvePredictionReview = payload.resolvePredictionReview === true &&
+        current.origin === 'prediction' && current.predictionReview?.status === 'gpt_rejected';
+      if (resolvePredictionReview && content === current.content) {
+        return res.status(400).json({ success: false, error: 'Cần sửa nội dung câu hỏi trước khi xác nhận đã khắc phục nhận xét GPT.' });
+      }
       const expectedVersion = cleanNumber(payload.expectedVersion, 0, 0, 1000000);
       if (expectedVersion && Number(current.version || 1) !== expectedVersion) {
         return res.status(409).json({ success: false, error: 'Nội dung đã được người khác cập nhật. Hãy tải lại trước khi lưu.' });
@@ -728,6 +739,7 @@ export default async function handler(req, res) {
         referenceSolution: current.referenceSolution || '',
         referenceSolutionVerified: current.referenceSolutionVerified === true,
         referenceLinks: cleanReferenceLinks(current.referenceLinks),
+        predictionReview: current.predictionReview || null,
         changeNote: changeNote || 'Bản tự động trước khi chỉnh sửa',
         action: 'edit',
         createdBy: session.username,
@@ -740,7 +752,12 @@ export default async function handler(req, res) {
           content, referenceSolution, referenceLinks, referenceSolutionVerified,
           referenceSolutionVerifiedBy: referenceSolutionVerified ? session.username : '',
           referenceSolutionVerifiedAt: referenceSolutionVerified ? now : null,
-          version: nextVersion, updatedBy: session.username, updatedAt: now
+          version: nextVersion, updatedBy: session.username, updatedAt: now,
+          ...(resolvePredictionReview ? {
+            predictionReview: { ...current.predictionReview, status: 'admin_corrected',
+              correctedBy: session.username, correctedAt: now, correctionNote: changeNote },
+            status: 'published', allowSubmission: true, allowAiEvaluation: true
+          } : {})
         } }
       );
       await db.collection('content_revisions').createIndex({ problemId: 1, createdAt: -1 });
@@ -951,7 +968,9 @@ export default async function handler(req, res) {
           verifierModel: cleanText(payload.predictionInfo?.verifierModel, 80),
           verificationScore: cleanNumber(payload.predictionInfo?.verificationScore, 0, 0, 5),
           verificationSummary: cleanText(payload.predictionInfo?.verificationSummary, 1000),
-          verified: payload.predictionInfo?.verified === true
+          verified: payload.predictionInfo?.verified === true,
+          criticalIssues: (Array.isArray(payload.predictionInfo?.criticalIssues) ? payload.predictionInfo.criticalIssues : [])
+            .slice(0, 12).map(issue => cleanText(issue, 3000)).filter(Boolean)
         } : null,
         ocrConfidence: cleanText(payload.ocrConfidence, 40),
         status,
@@ -989,6 +1008,16 @@ export default async function handler(req, res) {
       const savedQuestions = [];
       for (const { raw, questionNumber, content } of normalizedQuestions) {
         const contentKey = `${setKey}:question-${questionNumber}`;
+        const review = isPrediction ? {
+          status: raw?.predictionReview?.approved === true ? 'gpt_approved' : 'gpt_rejected',
+          approved: raw?.predictionReview?.approved === true,
+          reason: cleanText(raw?.predictionReview?.reason, 3000),
+          issues: (Array.isArray(raw?.predictionReview?.issues) ? raw.predictionReview.issues : [])
+            .slice(0, 12).map(issue => cleanText(issue, 3000)).filter(Boolean),
+          verifierModel: cleanText(payload.predictionInfo?.verifierModel, 80),
+          reviewedAt: now
+        } : null;
+        const pendingReview = isPrediction && !review.approved;
         const problemDoc = {
           contentKey,
           setId: savedSet._id,
@@ -1009,13 +1038,14 @@ export default async function handler(req, res) {
           maxScore: cleanNumber(raw?.maxScore, 0, 0, 20),
           topic: cleanText(raw?.topic, 120) || 'Toán Olympic',
           content,
+          predictionReview: review,
           referenceSolution: '',
           contentFormat: 'html-latex',
           frontendAnchor: targetAnchor,
           legacyIds: [`${targetAnchor}-day-${dayNumber}-Cau_${questionNumber}`],
-          allowSubmission: true,
-          allowAiEvaluation: true,
-          status,
+          allowSubmission: !pendingReview,
+          allowAiEvaluation: !pendingReview,
+          status: pendingReview ? 'draft' : status,
           version: 1,
           updatedBy: session.username,
           updatedAt: now
