@@ -878,6 +878,10 @@ export default async function handler(req, res) {
       const dayNumber = Number(payload.dayNumber);
       const setNumber = Number(payload.setNumber);
       const year = cleanText(payload.year, 40) || '2026-2027';
+      const isPrediction = isMock && payload.origin === 'prediction';
+      if (payload.origin === 'prediction' && !isMock) return res.status(400).json({ success: false, error: 'Đề dự đoán phải được lưu trong bộ thi thử' });
+      const imageCount = cleanNumber(payload.sourceImageCount, 0, 0, 20);
+      if (!isPrediction && imageCount < 1) return res.status(400).json({ success: false, error: 'Đề OCR cần ít nhất một ảnh nguồn' });
       const questions = Array.isArray(payload.questions) ? payload.questions.slice(0, 10) : [];
       if (!province || !(isMock ? /^mock-set\d+-day[12]$/.test(targetAnchor) && Number.isInteger(setNumber) && setNumber >= 3 && setNumber <= 100 && targetAnchor === `mock-set${setNumber}-day${dayNumber}` : /^tst-[a-z0-9._:-]+$/.test(targetAnchor)) || !Number.isInteger(dayNumber) || dayNumber < 1 || dayNumber > (isMock ? 2 : 4) || !questions.length) {
         return res.status(400).json({ success: false, error: 'Thiếu tỉnh/thành phố, vị trí frontend hoặc danh sách câu hỏi' });
@@ -914,6 +918,10 @@ export default async function handler(req, res) {
       if (!normalizedQuestions.length) {
         return res.status(400).json({ success: false, error: 'Không có câu hỏi hợp lệ để lưu' });
       }
+      if (isPrediction && (normalizedQuestions.length < 2 || normalizedQuestions.length > 6 ||
+          Math.abs(normalizedQuestions.reduce((total, item) => total + Number(item.raw?.maxScore || 0), 0) - 20) > 0.001)) {
+        return res.status(400).json({ success: false, error: 'Đề dự đoán phải có 2–6 câu và tổng điểm đúng 20' });
+      }
       const examDoc = {
         examKey,
         title,
@@ -929,7 +937,18 @@ export default async function handler(req, res) {
         examDate: cleanText(payload.examDate, 20),
         description: cleanText(payload.description, 5000),
         targetAnchor,
-        sourceImageCount: cleanNumber(payload.sourceImageCount, 1, 1, 20),
+        sourceImageCount: imageCount,
+        hasImages: imageCount > 0,
+        origin: isPrediction ? 'prediction' : 'ocr',
+        predictionInfo: isPrediction ? {
+          targetType: ['tst', 'vmo'].includes(payload.predictionInfo?.targetType) ? payload.predictionInfo.targetType : '',
+          targetAnchor: cleanKey(payload.predictionInfo?.targetAnchor, 100),
+          requestedYears: cleanNumber(payload.predictionInfo?.requestedYears, 0, 0, 15),
+          actualYears: (Array.isArray(payload.predictionInfo?.actualYears) ? payload.predictionInfo.actualYears : []).slice(0, 15).map(value => cleanText(value, 20)),
+          ownExamCount: cleanNumber(payload.predictionInfo?.ownExamCount, 0, 0, 200),
+          peerExamCount: cleanNumber(payload.predictionInfo?.peerExamCount, 0, 0, 200),
+          model: cleanText(payload.predictionInfo?.model, 80)
+        } : null,
         ocrConfidence: cleanText(payload.ocrConfidence, 40),
         status,
         updatedBy: session.username,
@@ -947,6 +966,7 @@ export default async function handler(req, res) {
         contentType: isMock ? 'mock_exam' : 'tst_exam',
         title,
         group: isMock ? 'mock_exam' : 'tst',
+        origin: isPrediction ? 'prediction' : 'ocr',
         year,
         province,
         region,
@@ -974,6 +994,7 @@ export default async function handler(req, res) {
           examKey,
           sourceType: isMock ? 'mock_exam_question' : 'tst_question',
           sourceGroup: isMock ? 'mock_exam' : 'tst',
+          origin: isPrediction ? 'prediction' : 'ocr',
           title: cleanText(raw?.title, 500) || `Câu ${questionNumber}`,
           shortLabel: `Câu ${questionNumber}`,
           questionNumber,
@@ -1012,7 +1033,7 @@ export default async function handler(req, res) {
         contentKey: { $nin: keptContentKeys }
       });
 
-      const sourceImageCount = cleanNumber(payload.sourceImageCount, 1, 1, 20);
+      const sourceImageCount = imageCount;
       await db.collection('exam_images').deleteMany({
         examId: savedExam._id,
         pageNumber: { $gt: sourceImageCount }

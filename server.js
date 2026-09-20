@@ -4,6 +4,7 @@ import compression from 'compression';
 import { fileURLToPath } from 'url';
 import { build } from './build.js';
 import translateContentHandler from './api/translate-content.js';
+import predictExamHandler from './api/ai-predict-exam.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -27,6 +28,7 @@ app.use(compression());
 
 // Keep local development behavior aligned with the Vercel serverless route.
 app.all('/api/translate-content', translateContentHandler);
+app.all('/api/ai-predict-exam', predictExamHandler);
 
 // Model Cooldown Tracker for transient 503/429/overload errors
 const modelCooldownMap = new Map();

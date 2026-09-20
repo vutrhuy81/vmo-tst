@@ -2063,12 +2063,14 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
     if (!docForm || !examForm) return;
     if (!docForm.querySelector('#docTargetAnchor')) docForm.innerHTML = buildOcrForm('doc');
     if (!examForm.querySelector('#examSetNumber')) examForm.innerHTML = buildOcrForm('exam');
+    populatePredictionTargets();
   }
 
   function buildOcrForm(kind) {
     const tst = kind === 'doc';
     const days = tst ? 4 : 2;
     return `
+      ${tst ? '' : `<div style="margin-bottom:12px;"><label for="examCreationMode" style="font-weight:700;">Phương thức tạo đề</label><select id="examCreationMode" onchange="syncExamCreationMode()" style="display:block;width:100%;padding:8px;margin-top:5px;"><option value="ocr">Ảnh đề do admin biên soạn (OCR)</option><option value="prediction">Dự đoán đề từ dữ liệu tham chiếu</option></select></div>`}
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px;">
         <div>${tst ? `<label>Tỉnh/Thành phố hoặc trường chuyên *</label><select id="docTargetAnchor" required onchange="syncExamProvinceFromTarget('doc')" style="width:100%;padding:7px;"></select>` : `<label>Bộ đề thi thử số *</label><input id="examSetNumber" type="number" min="3" max="100" value="3" required style="width:100%;box-sizing:border-box;padding:7px;">`}</div>
         <div><label>Ngày thi *</label><select id="${kind}DayNumber" required style="width:100%;padding:7px;">${['nhất','hai','ba','tư'].slice(0,days).map((label,index) => `<option value="${index+1}">Ngày thi thứ ${label}</option>`).join('')}</select></div>
@@ -2083,7 +2085,21 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
         <div><label>Ngày tổ chức</label><input type="date" id="${kind}Date" style="width:100%;box-sizing:border-box;padding:7px;"></div>
         <div><label>Thời gian (phút)</label><input type="number" id="${kind}Duration" value="180" min="1" max="600" style="width:100%;box-sizing:border-box;padding:7px;"></div>
       </div>
-      <div style="margin-bottom:10px;padding:10px;background:#fff;border:1px dashed #94a3b8;border-radius:7px;">
+      ${tst ? '' : `<div id="examPredictionPanel" style="display:none;margin-bottom:10px;padding:12px;background:#eff6ff;border:1px solid #93c5fd;border-radius:8px;">
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px;">
+          <div><label>Loại đề cần dự đoán *</label><select id="examPredictionType" onchange="syncExamPredictionTarget()" style="width:100%;padding:7px;"><option value="tst">TST của tỉnh/thành hoặc trường chuyên</option><option value="vmo">VMO — chọn đội tuyển Việt Nam dự IMO</option></select></div>
+          <div><label>Tỉnh/thành hoặc trường chuyên *</label><select id="examPredictionTarget" onchange="syncExamPredictionTarget()" style="width:100%;padding:7px;"></select></div>
+          <div><label>Năm học dự đoán *</label><select id="examPredictionYear" onchange="syncExamPredictionYear()" style="width:100%;padding:7px;">${Array.from({length:15}, (_, i) => `<option value="${2026+i}-${2027+i}">${2026+i}–${2027+i}</option>`).join('')}</select></div>
+          <div><label>Số năm dữ liệu tham chiếu (1–15) *</label><input type="number" id="examPredictionLookback" min="1" max="15" value="10" style="width:100%;box-sizing:border-box;padding:7px;"></div>
+        </div>
+        <label for="examPredictionOutline">Khung câu hỏi (để trống dùng mẫu Đà Nẵng 2026–2027; mỗi dòng: số câu | điểm | chuyên đề)</label><textarea id="examPredictionOutline" rows="3" style="display:block;width:100%;box-sizing:border-box;margin:5px 0 10px;padding:7px;resize:vertical;" placeholder="1 | 5 | Dãy số và giới hạn\n2 | 5 | Phương trình hàm\n3 | 5 | Số học\n4 | 5 | Hình học phẳng"></textarea>
+        <label for="examPredictionStructure">Quy định hoặc định hướng bổ sung</label><textarea id="examPredictionStructure" rows="3" style="display:block;width:100%;box-sizing:border-box;margin:5px 0 10px;padding:7px;resize:vertical;" placeholder="Ví dụ: hạn chế trùng chuyên đề với năm trước; ưu tiên bài toán chứng minh..."></textarea>
+        <label for="examPredictionNotes">Tư liệu lịch sử bổ sung (nêu rõ năm và nguồn nếu có)</label><textarea id="examPredictionNotes" maxlength="12000" rows="4" style="display:block;width:100%;box-sizing:border-box;margin:5px 0 10px;padding:7px;resize:vertical;" placeholder="Dán tóm tắt các đề lịch sử VMO/TST chưa có trong hệ thống. Không có dữ liệu thì hệ thống sẽ báo thiếu nguồn."></textarea>
+        <div style="font-size:.8rem;color:#475569;margin-bottom:9px;">Số năm tham chiếu là giới hạn tìm kiếm; kết quả sẽ ghi rõ số năm thực sự có dữ liệu. Đề AI chỉ là bản dự đoán cần admin rà soát.</div>
+        <button type="button" id="examPredictButton" onclick="runPredictExam()" style="background:#1d4ed8;color:#fff;border:0;border-radius:6px;padding:8px 12px;font-weight:700;cursor:pointer;">🔮 Dự đoán &amp; soạn đề</button>
+        <span id="examPredictionStatus" role="status" style="margin-left:8px;font-size:.8rem;"></span><div id="examPredictionEvidence" style="font-size:.8rem;margin-top:8px;"></div>
+      </div>`}
+      <div id="${kind}ImageBox" style="margin-bottom:10px;padding:10px;background:#fff;border:1px dashed #94a3b8;border-radius:7px;">
         <label style="display:block;font-size:.82rem;font-weight:700;margin-bottom:6px;">Ảnh đề thi (JPEG/PNG/WEBP, có thể chọn nhiều trang) *</label>
         <input type="file" id="${kind}Images" accept="image/jpeg,image/png,image/webp" multiple required onchange="resetExamOcrPreview('${kind}')" style="width:100%;">
         <div style="display:flex;align-items:center;gap:8px;margin-top:9px;"><button type="button" id="${kind}OcrButton" onclick="runExamOcr('${kind}')" style="background:#7c3aed;color:#fff;border:none;padding:7px 13px;border-radius:6px;font-weight:700;cursor:pointer;">🔎 OCR đề thi & tạo MathJax</button><span id="${kind}OcrStatus" style="font-size:.8rem;color:#64748b;">Chưa xử lý ảnh.</span></div>
@@ -3013,6 +3029,127 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
     window.syncExamProvinceFromTarget('doc');
   }
 
+  function populatePredictionTargets() {
+    const select = document.getElementById('examPredictionTarget');
+    if (!select || select.options.length) return;
+    (window.VMO_TST_LOCATIONS || []).forEach(item => {
+      const option = document.createElement('option');
+      option.value = item.anchor;
+      option.textContent = item.name;
+      option.dataset.province = item.name;
+      option.dataset.region = item.region;
+      select.appendChild(option);
+    });
+    const danang = Array.from(select.options).find(item => item.value === 'tst-da-nang');
+    if (danang) select.value = danang.value;
+  }
+
+  window.syncExamCreationMode = function() {
+    const prediction = document.getElementById('examCreationMode')?.value === 'prediction';
+    const panel = document.getElementById('examPredictionPanel');
+    const imageBox = document.getElementById('examImageBox');
+    const input = document.getElementById('examImages');
+    if (panel) panel.style.display = prediction ? 'block' : 'none';
+    if (imageBox) imageBox.style.display = prediction ? 'none' : 'block';
+    if (input) { input.required = !prediction; if (prediction) input.value = ''; }
+    const province = document.getElementById('examProvince');
+    const year = document.getElementById('examYear');
+    if (province) { province.readOnly = prediction; if (!prediction) province.value = 'Đà Nẵng'; }
+    if (year) { year.readOnly = prediction; if (!prediction) year.value = '2026-2027'; }
+    window.resetExamOcrPreview('exam');
+    ocrStates.exam.prediction = null;
+    if (prediction) window.syncExamPredictionTarget();
+  };
+
+  window.syncExamPredictionTarget = function() {
+    const isVmo = document.getElementById('examPredictionType')?.value === 'vmo';
+    const select = document.getElementById('examPredictionTarget');
+    if (select) select.disabled = isVmo;
+    const option = select?.selectedOptions?.[0];
+    const region = isVmo ? 'BAC' : option?.dataset.region || 'BAC';
+    const province = document.getElementById('examProvince');
+    const regionInput = document.getElementById('examRegion');
+    const display = document.getElementById('examRegionDisplay');
+    if (province) province.value = isVmo ? 'VMO – Bộ GDĐT' : option?.dataset.province || '';
+    if (regionInput) regionInput.value = region;
+    if (display) display.value = isVmo ? 'Toàn quốc' : { BAC: 'Miền Bắc', TRUNG: 'Miền Trung', NAM: 'Miền Nam' }[region];
+  };
+
+  window.syncExamPredictionYear = function() {
+    const year = document.getElementById('examYear');
+    const selected = document.getElementById('examPredictionYear');
+    if (year && selected) year.value = selected.value;
+  };
+
+  function predictionInputKey() {
+    return JSON.stringify([
+      document.getElementById('examCreationMode')?.value,
+      document.getElementById('examPredictionType')?.value,
+      document.getElementById('examPredictionTarget')?.value,
+      document.getElementById('examPredictionYear')?.value,
+      document.getElementById('examPredictionLookback')?.value,
+      document.getElementById('examDayNumber')?.value,
+      document.getElementById('examPredictionOutline')?.value,
+      document.getElementById('examPredictionStructure')?.value,
+      document.getElementById('examPredictionNotes')?.value
+    ]);
+  }
+
+  window.runPredictExam = async function() {
+    if (!requireAdminUiAction()) return;
+    const button = document.getElementById('examPredictButton');
+    const status = document.getElementById('examPredictionStatus');
+    const report = document.getElementById('examPredictionEvidence');
+    const targetType = document.getElementById('examPredictionType')?.value;
+    const target = document.getElementById('examPredictionTarget');
+    const lookback = Number(document.getElementById('examPredictionLookback')?.value);
+    if (!Number.isInteger(lookback) || lookback < 1 || lookback > 15) return showToast('Số năm tham chiếu phải từ 1 đến 15.', false);
+    window.syncExamPredictionYear();
+    window.syncExamPredictionTarget();
+    const requestKey = predictionInputKey();
+    window.resetExamOcrPreview('exam');
+    ocrStates.exam.prediction = null;
+    if (report) report.replaceChildren();
+    if (button) button.disabled = true;
+    if (status) status.textContent = 'Đang tổng hợp đề nguồn và soạn bản dự đoán...';
+    try {
+      const response = await fetch('/api/ai-predict-exam', {
+        method: 'POST', credentials: 'same-origin', headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ targetType, targetAnchor: targetType === 'vmo' ? 'vmo-official' : target?.value,
+          province: document.getElementById('examProvince')?.value, year: document.getElementById('examPredictionYear')?.value,
+          dayNumber: Number(document.getElementById('examDayNumber')?.value), lookback,
+          outline: document.getElementById('examPredictionOutline')?.value,
+          historicalNotes: document.getElementById('examPredictionNotes')?.value,
+          structureNotes: document.getElementById('examPredictionStructure')?.value })
+      });
+      const payload = await response.json().catch(() => ({}));
+      if (!response.ok || !payload.success) throw new Error(payload.error || `Không tạo được đề dự đoán (HTTP ${response.status})`);
+      if (requestKey !== predictionInputKey()) throw new Error('Thông số đã thay đổi trong lúc tạo đề; vui lòng tạo lại.');
+      const data = payload.data;
+      ocrStates.exam.questions = data.questions;
+      ocrStates.exam.prediction = { key: requestKey, evidence: data.evidence, model: data.model,
+        targetType, targetAnchor: targetType === 'vmo' ? 'vmo-official' : target.value };
+      document.getElementById('examTitle').value = data.title;
+      renderExamOcrEditor('exam');
+      document.getElementById('examSaveButton').disabled = false;
+      const evidence = data.evidence || {};
+      if (report) {
+        const summary = document.createElement('p');
+        summary.textContent = `Tham chiếu thực tế: ${evidence.ownExamCount || 0} đề / ${evidence.years?.length || 0} năm của đơn vị (${(evidence.years || []).join(', ') || 'chưa có'}), ${evidence.peerExamCount || 0} đề TST cùng kỳ ${evidence.trendYear || ''}. ${data.reasoning || ''}`;
+        report.appendChild(summary);
+        (evidence.sources || []).slice(0, 10).forEach(source => {
+          const item = document.createElement('div');
+          item.textContent = `${source.year} · ${source.title} · ${source.source}`;
+          report.appendChild(item);
+        });
+      }
+      if (status) status.textContent = 'Đã tạo bản dự đoán. Hãy rà soát và chỉnh sửa từng câu trước khi lưu.';
+    } catch (error) {
+      if (status) status.textContent = error.message;
+      showToast(error.message, false);
+    } finally { if (button) button.disabled = false; }
+  };
+
   window.syncExamProvinceFromTarget = function(kind = 'doc') {
     const option = document.getElementById(`${kind}TargetAnchor`)?.selectedOptions?.[0];
     if (!option) return;
@@ -3031,6 +3168,7 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
     state.questions = [];
     state.images = [];
     state.confidence = '';
+    if (kind === 'exam') state.prediction = null;
     const preview = document.getElementById(`${kind}OcrPreview`);
     const save = document.getElementById(`${kind}SaveButton`);
     const status = document.getElementById(`${kind}OcrStatus`);
@@ -3074,7 +3212,7 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
     const questions = ocrStates[kind].questions || [];
     if (!preview) return;
     preview.style.display = 'block';
-    preview.innerHTML = `<div style="font-weight:800;color:#1e293b;margin-bottom:8px;">Bản OCR — kiểm tra và chỉnh sửa trước khi lưu (${questions.length} câu)</div>` + questions.map((item, index) => `
+    preview.innerHTML = `<div style="font-weight:800;color:#1e293b;margin-bottom:8px;">${kind === 'exam' && ocrStates.exam.prediction ? 'Bản đề dự đoán (AI) — kiểm tra tính đúng đắn và chỉnh sửa trước khi lưu' : 'Bản OCR — kiểm tra và chỉnh sửa trước khi lưu'} (${questions.length} câu)</div>` + questions.map((item, index) => `
       <div class="exam-ocr-question" data-index="${index}" style="border-top:1px solid #e2e8f0;padding-top:10px;margin-top:10px;">
         <div style="display:grid;grid-template-columns:90px 1fr 90px;gap:8px;margin-bottom:7px;">
           <input class="exam-ocr-number" type="number" min="1" max="99" value="${Number(item.questionNumber) || index + 1}" aria-label="Số câu" style="padding:6px;border:1px solid #cbd5e1;border-radius:5px;">
@@ -3164,6 +3302,7 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
       if (f.style.display === 'block') {
         const used = Array.from(document.querySelectorAll('#sidebar-mock a[href^="#mock-set"]')).map(link => Number(link.getAttribute('href')?.match(/^#mock-set(\d+)-/)?.[1]) || 0);
         document.getElementById('examSetNumber').value = Math.max(3, ...used) + (Math.max(...used) >= 3 ? 1 : 0);
+        window.syncExamCreationMode();
       }
     }
   };
@@ -3236,7 +3375,7 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
         <div style="background:#f8fafc; border:1px solid #e2e8f0; border-radius:8px; padding:10px 14px; margin-bottom:8px;">
           <strong style="color:#0f172a; font-size:0.95rem;">${escapeHtmlText(x.title)}</strong>
           <div style="font-size:0.8rem; color:#64748b; margin-top:2px;">
-            Bộ ${Number(x.setNumber) || ''} · Ngày ${Number(x.dayNumber) || 1} | Năm: ${escapeHtmlText(x.year || '')} | Thời gian: ${Number(x.duration) || 180} phút
+            ${x.origin === 'prediction' ? '🔮 Đề dự đoán AI · ' : ''}Bộ ${Number(x.setNumber) || ''} · Ngày ${Number(x.dayNumber) || 1} | Năm: ${escapeHtmlText(x.year || '')} | Thời gian: ${Number(x.duration) || 180} phút
           </div>
         </div>
       `).join('');
@@ -3276,7 +3415,10 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
     const state = ocrStates[kind];
     const questions = collectExamOcrQuestions(kind);
     const sourceImages = Array.from(state.images);
-    if (!questions.length || !sourceImages.length) return showToast('Vui lòng OCR và rà soát câu hỏi trước khi lưu.', false);
+    const prediction = !tst && field('CreationMode')?.value === 'prediction';
+    if (!questions.length || (!prediction && !sourceImages.length)) return showToast('Vui lòng tạo và rà soát nội dung câu hỏi trước khi lưu.', false);
+    if (prediction && (!state.prediction || state.prediction.key !== predictionInputKey())) return showToast('Thông số dự đoán đã thay đổi. Hãy tạo bản dự đoán mới trước khi lưu.', false);
+    if (prediction && (questions.length < 2 || questions.length > 6 || Math.abs(questions.reduce((total, question) => total + question.maxScore, 0) - 20) > 0.001)) return showToast('Đề dự đoán cần 2–6 câu và tổng điểm đúng 20.', false);
     const dayNumber = Number(field('DayNumber')?.value) || 1;
     const setNumber = Number(field('SetNumber')?.value) || 0;
     if (!tst && (!Number.isInteger(setNumber) || setNumber < 3 || setNumber > 100)) return showToast('Bộ đề thi thử phải có số từ 3 đến 100.', false);
@@ -3291,9 +3433,19 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
       dayNumber, setNumber, targetAnchor, region: field('Region')?.value || 'BAC',
       provinceOrder: tst ? Number(field('TargetAnchor')?.selectedOptions?.[0]?.dataset.order) || 0 : setNumber,
       sourceImageCount: sourceImages.length, ocrConfidence: state.confidence,
-      status: 'published', questions
+      status: 'published', questions,
+      origin: prediction ? 'prediction' : 'ocr',
+      predictionInfo: prediction ? {
+        targetType: state.prediction.targetType, targetAnchor: state.prediction.targetAnchor,
+        requestedYears: state.prediction.evidence?.requestedYears,
+        actualYears: state.prediction.evidence?.years,
+        ownExamCount: state.prediction.evidence?.ownExamCount,
+        peerExamCount: state.prediction.evidence?.peerExamCount,
+        model: state.prediction.model
+      } : undefined
     };
     try {
+      if (prediction && !confirm('Đây là đề DỰ ĐOÁN do AI soạn, cần kiểm tra tính đúng đắn từng câu. Xác nhận công khai bản đã biên tập trong Bộ đề thi thử VMO?')) return;
       if (saveButton) { saveButton.disabled = true; saveButton.textContent = 'Đang lưu đề thi...'; }
       let saved;
       try { saved = await window.VMODataService.createExamFromOcr(payload); }
@@ -3309,6 +3461,7 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
       showToast(`Đã lưu ${tst ? 'đề TST' : 'đề thi thử'} và ${saved?.problemCount || questions.length} câu hỏi vào MongoDB!`, true);
       e.target.reset();
       window.resetExamOcrPreview(kind);
+      if (prediction) window.syncExamCreationMode();
       if (tst) { window.toggleAddDocForm(); await loadDatabaseTstExams(true); }
       else { window.toggleAddExamForm(); await loadDatabaseMockExams(true); }
       await loadHubExams();
@@ -3709,7 +3862,7 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
     card.id = exam.targetAnchor;
     card.dataset.filter = `MOCK${Number(exam.setNumber) || 3}`;
     card.dataset.search = `${exam.title || ''} ${exam.province || ''} ${exam.year || ''}`.toLowerCase();
-    card.innerHTML = `<div class="exam-header"><div class="exam-top-tags"><span class="tag tag-year">${escapeHtmlText(exam.year || '')}</span><span class="tag tag-province">${escapeHtmlText(exam.province || '')}</span><span class="tag tag-official">Bộ thi thử số ${Number(exam.setNumber) || 3} · Ngày ${Number(exam.dayNumber) || 1}</span></div><h3 class="exam-title">${escapeHtmlText(exam.title || '')}</h3></div><div class="exam-body"></div>`;
+    card.innerHTML = `<div class="exam-header"><div class="exam-top-tags"><span class="tag tag-year">${escapeHtmlText(exam.year || '')}</span><span class="tag tag-province">${escapeHtmlText(exam.province || '')}</span><span class="tag tag-official">${exam.origin === 'prediction' ? '🔮 Đề dự đoán (AI) · ' : ''}Bộ thi thử số ${Number(exam.setNumber) || 3} · Ngày ${Number(exam.dayNumber) || 1}</span></div><h3 class="exam-title">${escapeHtmlText(exam.title || '')}</h3></div><div class="exam-body"></div>`;
     (document.querySelector('#tab-mock .feed-container') || document.getElementById('tab-mock'))?.appendChild(card);
     return card;
   }
