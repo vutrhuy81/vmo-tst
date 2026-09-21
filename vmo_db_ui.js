@@ -1554,6 +1554,7 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
     }
 
     modal.classList.add('active');
+    setTrendPracticeChildModal(modal, true);
     modal.style.display = 'flex';
     document.body.style.overflow = 'hidden';
 
@@ -1571,9 +1572,11 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
     const modal = document.getElementById('submissionModal');
     if (modal) {
       modal.classList.remove('active');
+      setTrendPracticeChildModal(modal, false);
       modal.style.display = 'none';
     }
-    document.body.style.overflow = '';
+    document.body.style.overflow = document.getElementById('trendPracticeModal')?.classList.contains('active')
+      ? 'hidden' : '';
   };
 
   // BỘ BIÊN DỊCH & CHUẨN HÓA CÔNG THỨC TOÁN HỌC MATHJAX CHỐNG LỖI 100%
@@ -2624,6 +2627,17 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
     return modal;
   }
 
+  function setTrendPracticeChildModal(modal, active) {
+    if (!modal) return;
+    const practiceOpen = document.getElementById('trendPracticeModal')?.classList.contains('active');
+    modal.classList.toggle('trend-practice-child-modal', Boolean(active && practiceOpen));
+  }
+
+  function trendPracticeEvidenceIds(method = {}) {
+    const practiceIds = Array.isArray(method.practiceEvidenceIds) ? method.practiceEvidenceIds : [];
+    return [...new Set(practiceIds.length ? practiceIds : (method.evidenceIds || []))];
+  }
+
   window.closeTrendPractice = function() {
     const modal = document.getElementById('trendPracticeModal');
     if (!modal) return;
@@ -2689,7 +2703,7 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
     const topic = data?.report?.topicTrends?.[Number(topicIndex)];
     const method = topic?.frequentMethods?.[Number(methodIndex)];
     if (!topic || !method) return showToast('Không tìm thấy vi chủ đề trong báo cáo.', false);
-    const evidence = [...new Set(method.evidenceIds || [])].map(parseTrendEvidenceId).filter(Boolean);
+    const evidence = trendPracticeEvidenceIds(method).map(parseTrendEvidenceId).filter(Boolean);
     if (!evidence.length) return showToast('Vi chủ đề này chưa có câu hỏi truy nguyên được.', false);
 
     const modal = ensureTrendPracticeModal();
@@ -2772,7 +2786,7 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
     const report = data.report;
     examTrendState.rendered = data;
     const methods = (item, topicIndex) => (item.frequentMethods || []).length
-      ? `<ul style="margin:7px 0 0;padding-left:20px;">${item.frequentMethods.map((method, methodIndex) => `<li><button type="button" class="trend-practice-button" data-topic-index="${topicIndex}" data-method-index="${methodIndex}" ${method.evidenceIds?.length ? '' : 'disabled'}><strong>${escapeHtmlText(method.name)}</strong><span>📚 Luyện ${(method.evidenceIds || []).length} câu</span></button>${method.note ? `: ${escapeHtmlText(method.note)}` : ''}<div style="font-size:.72rem;color:#64748b;">Bằng chứng: ${escapeHtmlText((method.evidenceIds || []).join(', ') || 'chưa xác định')}</div></li>`).join('')}</ul>`
+      ? `<ul style="margin:7px 0 0;padding-left:20px;">${item.frequentMethods.map((method, methodIndex) => { const practiceIds = trendPracticeEvidenceIds(method); return `<li><button type="button" class="trend-practice-button" data-topic-index="${topicIndex}" data-method-index="${methodIndex}" ${practiceIds.length ? '' : 'disabled'}><strong>${escapeHtmlText(method.name)}</strong><span>📚 Luyện ${practiceIds.length} câu</span></button>${method.note ? `: ${escapeHtmlText(method.note)}` : ''}<div style="font-size:.72rem;color:#64748b;">Bằng chứng phân tích: ${escapeHtmlText((method.evidenceIds || []).join(', ') || 'chưa xác định')}</div></li>`; }).join('')}</ul>`
       : '<p style="color:#64748b;margin:7px 0 0;">Chưa đủ dữ liệu để xác định phương pháp lặp lại.</p>';
     target.innerHTML = `
       <article style="border:1px solid #cbd5e1;border-radius:10px;background:white;padding:14px;">
@@ -4066,6 +4080,7 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
     if (saveButton) saveButton.disabled = true;
     document.getElementById('referenceLinksRows').replaceChildren();
     modal.classList.add('active');
+    setTrendPracticeChildModal(modal, true);
     modal.style.display = 'flex';
     try {
       const items = await window.VMODataService.getCatalogProblems({ contentKey });
@@ -4098,7 +4113,11 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
 
   window.closeReferenceLinksManager = function() {
     const modal = document.getElementById('referenceLinksAdminModal');
-    if (modal) { modal.classList.remove('active'); modal.style.display = 'none'; }
+    if (modal) {
+      modal.classList.remove('active');
+      setTrendPracticeChildModal(modal, false);
+      modal.style.display = 'none';
+    }
   };
 
   window.saveReferenceLinksManager = async function() {
