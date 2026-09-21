@@ -3,10 +3,14 @@ import { getDb } from '../lib/db.js';
 import { getSession } from '../lib/session.js';
 import { deleteAiGuideRecord, learningScope, recordActivity, summarizeLearning } from '../lib/learning.js';
 
-const ALLOWED_RESOURCES = new Set(['documents', 'exams', 'exam_catalog', 'exam_image', 'content_sets', 'problems', 'content_revisions', 'submissions', 'submission_image', 'events', 'activity_feed', 'learning_overview']);
+const ALLOWED_RESOURCES = new Set(['documents', 'exams', 'exam_catalog', 'exam_image', 'content_sets', 'problems', 'content_revisions', 'submissions', 'submission_image', 'events', 'activity_feed', 'learning_overview', 'exam_trend_reports']);
 const CONTENT_TYPES = new Set(['specialty_chapter', 'mock_exam', 'tst_exam', 'regional_exam']);
 const SOURCE_TYPES = new Set(['specialty_example', 'mock_exam_question', 'tst_question', 'regional_question']);
 const TST_REGIONS = new Set(['BAC', 'TRUNG', 'NAM']);
+const EXAM_TREND_TOPICS = [
+  'Dãy số và Giới hạn dãy số', 'Phương trình hàm', 'Số học và dãy số',
+  'Hình học phẳng', 'Đa thức', 'Tổ hợp'
+];
 const MAX_SOLUTION_IMAGE_CHARS = 3_000_000;
 
 function parseBody(req) {
@@ -53,6 +57,80 @@ function cleanAiGuide(value) {
     solution: cleanText(value.solution, 100000),
     pitfalls: cleanText(value.pitfalls, 50000),
     quality
+  };
+}
+
+function cleanStringList(value, limit = 20, max = 2500) {
+  return (Array.isArray(value) ? value : []).slice(0, limit)
+    .map(item => cleanText(item, max)).filter(Boolean);
+}
+
+function cleanExamTrendReport(payload) {
+  const settings = payload?.settings && typeof payload.settings === 'object' ? payload.settings : {};
+  const evidence = payload?.evidence && typeof payload.evidence === 'object' ? payload.evidence : {};
+  const report = payload?.report && typeof payload.report === 'object' ? payload.report : {};
+  const quality = payload?.quality && typeof payload.quality === 'object' ? payload.quality : {};
+  const topicTrends = (Array.isArray(report.topicTrends) ? report.topicTrends : []).slice(0, 6).map(item => ({
+    topic: cleanText(item?.topic, 120),
+    questionCount: cleanNumber(item?.questionCount, 0, 0, 10000),
+    prevalencePercent: cleanNumber(item?.prevalencePercent, 0, 0, 100),
+    trendLevel: cleanText(item?.trendLevel, 80),
+    observations: cleanText(item?.observations, 4000),
+    frequentMethods: (Array.isArray(item?.frequentMethods) ? item.frequentMethods : []).slice(0, 12).map(method => ({
+      name: cleanText(method?.name, 240), frequency: cleanNumber(method?.frequency, 0, 0, 10000),
+      evidenceIds: cleanStringList(method?.evidenceIds, 12, 180), note: cleanText(method?.note, 1600)
+    })).filter(method => method.name)
+  })).filter(item => item.topic);
+  if (topicTrends.length !== 6 || topicTrends.some((item, index) => item.topic !== EXAM_TREND_TOPICS[index])) return null;
+  const qualityStatus = ['approved', 'rejected', 'unavailable'].includes(quality.status) ? quality.status : 'unavailable';
+  return {
+    settings: {
+      mode: settings.mode === 'year' ? 'year' : settings.mode === 'target' ? 'target' : '',
+      year: cleanText(settings.year, 20), targetType: settings.targetType === 'vmo' ? 'vmo' : 'tst',
+      lookback: cleanNumber(settings.lookback, 0, 0, 15),
+      anchor: cleanKey(settings.anchor, 100), province: cleanText(settings.province, 120)
+    },
+    evidence: {
+      years: cleanStringList(evidence.years, 15, 20),
+      examCount: cleanNumber(evidence.examCount, 0, 0, 1000),
+      questionCount: cleanNumber(evidence.questionCount, 0, 0, 10000),
+      otherQuestionCount: cleanNumber(evidence.otherQuestionCount, 0, 0, 10000),
+      unitCount: cleanNumber(evidence.unitCount, 0, 0, 1000),
+      sources: (Array.isArray(evidence.sources) ? evidence.sources : []).slice(0, 80).map(item => ({
+        year: cleanText(item?.year, 20), unit: cleanText(item?.unit, 120), title: cleanText(item?.title, 300),
+        source: cleanText(item?.source, 1000), questionCount: cleanNumber(item?.questionCount, 0, 0, 100)
+      })),
+      samples: (Array.isArray(evidence.samples) ? evidence.samples : []).slice(0, 160).map(item => ({
+        sourceId: cleanText(item?.sourceId, 180), year: cleanText(item?.year, 20),
+        unit: cleanText(item?.unit, 120), title: cleanText(item?.title, 300),
+        questionNumber: cleanNumber(item?.questionNumber, 0, 0, 100), rawTopic: cleanText(item?.rawTopic, 120),
+        criterion: cleanText(item?.criterion, 120), excerpt: cleanText(item?.excerpt, 600)
+      })).filter(item => item.sourceId)
+    },
+    report: {
+      title: cleanText(report.title, 300), executiveSummary: cleanText(report.executiveSummary, 6000), topicTrends,
+      recurringPatterns: (Array.isArray(report.recurringPatterns) ? report.recurringPatterns : []).slice(0, 20).map(item => ({
+        pattern: cleanText(item?.pattern, 300), frequency: cleanNumber(item?.frequency, 0, 0, 10000),
+        evidenceIds: cleanStringList(item?.evidenceIds, 15, 180), analysis: cleanText(item?.analysis, 2400)
+      })).filter(item => item.pattern),
+      unitInsights: (Array.isArray(report.unitInsights) ? report.unitInsights : []).slice(0, 50).map(item => ({
+        unit: cleanText(item?.unit, 160), dominantTopics: cleanStringList(item?.dominantTopics, 6, 160),
+        note: cleanText(item?.note, 2000)
+      })).filter(item => item.unit),
+      limitations: cleanStringList(report.limitations, 15, 1200), conclusion: cleanText(report.conclusion, 5000)
+    },
+    quality: {
+      status: qualityStatus,
+      verified: qualityStatus === 'approved' && quality.verified === true,
+      score: quality.score !== null && quality.score !== '' && Number.isFinite(Number(quality.score))
+        ? cleanNumber(quality.score, 0, 0, 5) : null,
+      summary: cleanText(quality.summary, 4000), criticalIssues: cleanStringList(quality.criticalIssues, 20, 2500),
+      corrections: cleanStringList(quality.corrections, 20, 2500),
+      topicChecks: (Array.isArray(quality.topicChecks) ? quality.topicChecks : []).slice(0, 6).map(item => ({
+        topic: cleanText(item?.topic, 120), valid: item?.valid === true, reason: cleanText(item?.reason, 2000)
+      })), verifierModel: cleanText(quality.verifierModel, 100), pipeline: 'Gemini → GPT'
+    },
+    model: cleanText(payload?.model, 100), generatedAt: cleanText(payload?.generatedAt, 50)
   };
 }
 
@@ -219,6 +297,15 @@ export default async function handler(req, res) {
           .sort({ createdAt: -1 })
           .limit(50)
           .toArray();
+        return res.status(200).json({ success: true, items });
+      }
+
+      if (resource === 'exam_trend_reports') {
+        if (!requireAdmin(session, res)) return;
+        // Mẫu bằng chứng chi tiết vẫn được lưu để kiểm toán, nhưng không tải lại
+        // trong danh sách nhằm tránh làm nặng Database Hub khi đã có nhiều báo cáo.
+        const items = await db.collection('exam_trend_reports').find({}, { projection: { 'evidence.samples': 0 } })
+          .sort({ createdAt: -1, _id: -1 }).limit(100).toArray();
         return res.status(200).json({ success: true, items });
       }
 
@@ -519,6 +606,20 @@ export default async function handler(req, res) {
     }
 
     if (!requireAdmin(session, res)) return;
+
+    if (action === 'save_exam_trend_report') {
+      const cleaned = cleanExamTrendReport(payload);
+      if (!cleaned || !cleaned.settings.mode || !cleaned.settings.year || !cleaned.report.title) {
+        return res.status(400).json({ success: false, error: 'Báo cáo xu hướng không hợp lệ hoặc thiếu 6 chuyên đề' });
+      }
+      const doc = { ...cleaned, createdBy: session.username, createdAt: now, updatedAt: now };
+      const result = await db.collection('exam_trend_reports').insertOne(doc);
+      await recordActivity(db, session, 'trend_report.saved', {
+        itemTitle: doc.report.title, reportId: result.insertedId, year: doc.settings.year,
+        verifierStatus: doc.quality.status
+      });
+      return res.status(201).json({ success: true, item: { _id: result.insertedId, ...doc } });
+    }
 
     if (action === 'delete_ai_guide') {
       const id = objectId(cleanText(payload.id, 80));

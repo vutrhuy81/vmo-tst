@@ -399,6 +399,17 @@ export async function getLearningOverview(username = '') {
   return { overview: data.overview, accounts: Array.isArray(data.accounts) ? data.accounts : [] };
 }
 
+export async function getExamTrendReports() {
+  return normalizeList(await request('exam_trend_reports'));
+}
+
+export async function saveExamTrendReport(reportData) {
+  if (!reportData || typeof reportData !== 'object') {
+    throw createServiceError('Báo cáo xu hướng không hợp lệ', 0, 'VALIDATION_ERROR');
+  }
+  return normalize(await mutate('save_exam_trend_report', reportData));
+}
+
 export async function deleteSubmission(id) {
   const cleanId = normalizeId(id).trim();
   if (!cleanId) {
@@ -459,6 +470,8 @@ const VMODataService = Object.freeze({
   getSubmissionsPage,
   getActivityFeed,
   getLearningOverview,
+  getExamTrendReports,
+  saveExamTrendReport,
   deleteSubmission,
   deleteAiGuide,
   getEvents,

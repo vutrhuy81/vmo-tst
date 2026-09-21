@@ -7,6 +7,9 @@
     "api/ai-predict-exam.js": {
       "maxDuration": 300
     },
+    "api/ai-exam-trends.js": {
+      "maxDuration": 300
+    },
     "api/ai-guide.js": {
       "maxDuration": 300
     },
