@@ -130,8 +130,12 @@ export default async function handler(req, res) {
     const scope = settings.mode === 'year'
       ? `toàn bộ các tỉnh/thành và trường chuyên TST trong năm ${settings.year}`
       : `${settings.targetType === 'vmo' ? 'Bộ Giáo dục (VMO)' : settings.province} trong ${settings.lookback} năm trước ${settings.year}`;
+    const mergerScope = evidence.mergedProvinceHistory
+      ? `Địa giới hiện hành ${evidence.historyCurrentProvince} bao gồm dữ liệu lịch sử của: ${evidence.historyMembers.join(', ')}.`
+      : '';
     const generated = await generateJson({
       contents: `Phân tích xu hướng ra đề cho ${scope}.
+${mergerScope}
 Số liệu định lượng do hệ thống tính, bắt buộc giữ nguyên: ${JSON.stringify({
   examCount: evidence.examCount, questionCount: evidence.questionCount, unitCount: evidence.unitCount,
   years: evidence.years, topicStats: evidence.topicStats, otherQuestionCount: evidence.otherQuestionCount

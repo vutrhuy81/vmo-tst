@@ -2604,7 +2604,7 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
           <div><h3 style="margin:0 0 5px;color:#0f172a;">${escapeHtmlText(report.title)}</h3><div style="font-size:.78rem;color:#64748b;">${saved ? 'Báo cáo đã lưu' : `Gemini: ${escapeHtmlText(data.model || 'không rõ model')}`} · ${escapeHtmlText(learningDate(data.createdAt || data.generatedAt))}</div></div>
           <span style="padding:6px 9px;border-radius:999px;background:${qualityBackground};color:${qualityColor};font-size:.78rem;font-weight:800;">${qualityLabel}${quality.score !== null && quality.score !== undefined ? ` · ${escapeHtmlText(quality.score)}/5` : ''}</span>
         </div>
-        <div style="margin:11px 0;padding:10px;background:#eff6ff;border-radius:7px;color:#1e3a8a;font-size:.82rem;"><strong>Phạm vi dữ liệu:</strong> ${Number(evidence.examCount) || 0} đề · ${Number(evidence.questionCount) || 0} câu · ${Number(evidence.unitCount) || 0} đơn vị · ${escapeHtmlText((evidence.years || []).join(', ') || data.settings?.year || '')}${Number(evidence.otherQuestionCount) ? ` · ${Number(evidence.otherQuestionCount)} câu ngoài 6 tiêu chí` : ''}</div>
+        <div style="margin:11px 0;padding:10px;background:#eff6ff;border-radius:7px;color:#1e3a8a;font-size:.82rem;"><strong>Phạm vi dữ liệu:</strong> ${Number(evidence.examCount) || 0} đề · ${Number(evidence.questionCount) || 0} câu · ${Number(evidence.unitCount) || 0} đơn vị · ${escapeHtmlText((evidence.years || []).join(', ') || data.settings?.year || '')}${Number(evidence.otherQuestionCount) ? ` · ${Number(evidence.otherQuestionCount)} câu ngoài 6 tiêu chí` : ''}${evidence.mergedProvinceHistory ? `<div style="margin-top:5px;"><strong>Địa giới hiện hành:</strong> ${escapeHtmlText((evidence.historyMembers || []).join(' + '))} → ${escapeHtmlText(evidence.historyCurrentProvince || '')}</div>` : ''}</div>
         <p style="white-space:pre-wrap;line-height:1.55;">${escapeHtmlText(report.executiveSummary || '')}</p>
         <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:9px;">${(report.topicTrends || []).map(item => `
           <section style="border:1px solid #e2e8f0;border-radius:8px;padding:10px;background:#f8fafc;">
@@ -3369,7 +3369,10 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
       const evidence = data.evidence || {};
       if (report) {
         const summary = document.createElement('p');
-        summary.textContent = `Tham chiếu thực tế: ${evidence.ownExamCount || 0} đề / ${evidence.years?.length || 0} năm của đơn vị (${(evidence.years || []).join(', ') || 'chưa có'}), ${evidence.peerExamCount || 0} đề TST cùng kỳ ${evidence.trendYear || ''}. ${data.reasoning || ''}`;
+        const mergerText = evidence.mergedProvinceHistory
+          ? ` Đã hợp nhất lịch sử ${evidence.historyMembers?.join(' + ')} vào ${evidence.historyCurrentProvince}.`
+          : '';
+        summary.textContent = `Tham chiếu thực tế: ${evidence.ownExamCount || 0} đề / ${evidence.years?.length || 0} năm của đơn vị (${(evidence.years || []).join(', ') || 'chưa có'}), ${evidence.peerExamCount || 0} đề TST cùng kỳ ${evidence.trendYear || ''}.${mergerText} ${data.reasoning || ''}`;
         report.appendChild(summary);
         const review = document.createElement('p');
         review.textContent = `Kiểm định GPT: ${data.quality.verified ? 'Đã duyệt' : 'Chưa duyệt — lưu để admin sửa'} (${data.quality.score}/5). ${data.quality.summary || ''}`;
@@ -3387,7 +3390,7 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
         });
         (evidence.sources || []).slice(0, 10).forEach(source => {
           const item = document.createElement('div');
-          item.textContent = `${source.year} · ${source.title} · ${source.source}`;
+          item.textContent = `${source.year} · ${source.unit || source.title} · ${source.title} · ${source.source}`;
           report.appendChild(item);
         });
       }
@@ -3704,6 +3707,8 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
         actualYears: state.prediction.evidence?.years,
         ownExamCount: state.prediction.evidence?.ownExamCount,
         peerExamCount: state.prediction.evidence?.peerExamCount,
+        historyCurrentProvince: state.prediction.evidence?.historyCurrentProvince,
+        historyMembers: state.prediction.evidence?.historyMembers,
         model: state.prediction.model,
         verifierModel: state.prediction.quality.verifierModel,
         verificationScore: state.prediction.quality.score,

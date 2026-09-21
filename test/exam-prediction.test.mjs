@@ -23,6 +23,11 @@ const settings = predictionSettings({ targetType: 'tst', targetAnchor: 'tst-da-n
 settings.province = 'Đà Nẵng';
 const evidence = selectPredictionEvidence(settings);
 assert.ok(evidence.ownExamCount > 0, 'Đà Nẵng có đề lưu trữ trong 10 năm');
+assert.deepEqual(evidence.historyMembers, ['Quảng Nam', 'Đà Nẵng']);
+assert.deepEqual(new Set(evidence.sources.map(item => item.unit)), new Set(['ĐÀ NẴNG', 'QUẢNG NAM']),
+  'Dự đoán Đà Nẵng phải học cả dữ liệu Đà Nẵng và Quảng Nam');
+assert.deepEqual(new Set(evidence.examples.map(item => item.unit)), new Set(['ĐÀ NẴNG', 'QUẢNG NAM']),
+  'Đoạn đề mẫu phải được lấy cân bằng từ cả hai địa phương cũ');
 assert.ok(evidence.years.length < 10, 'Phải báo số năm có dữ liệu thực thay vì giả định đủ 10 năm');
 assert.ok(evidence.years.every(year => Number(year.slice(0, 4)) < 2027 && Number(year.slice(0, 4)) >= 2017));
 assert.ok(evidence.peerExamCount > 0, 'Dùng xu hướng TST 2026–2027');
@@ -91,7 +96,9 @@ window.fetch = async (_, options) => {
   return { ok: true, json: async () => ({ success: true, data: {
     title: 'Đề dự đoán thử', model: 'test', reasoning: 'Có 3 năm nguồn.',
     quality: responseQuality,
-    evidence: { requestedYears: 10, years: ['2026-2027'], ownExamCount: 1, peerExamCount: 24, trendYear: '2026-2027', sources: [] },
+    evidence: { requestedYears: 10, years: ['2026-2027'], ownExamCount: 1, peerExamCount: 24,
+      trendYear: '2026-2027', sources: [], historyCurrentProvince: 'Đà Nẵng',
+      historyMembers: ['Quảng Nam', 'Đà Nẵng'], mergedProvinceHistory: true },
     questions: examStructure[2].map(item => ({ ...item, content: `Xét bài toán mới ở câu ${item.questionNumber}: chứng minh kết luận này.` }))
   } }) };
 };
@@ -115,6 +122,7 @@ assert.equal(stored.questions.length, 3);
 assert.equal(stored.predictionInfo.actualYears.length, 1);
 assert.equal(stored.predictionInfo.verifierModel, 'gpt-test');
 assert.equal(stored.predictionInfo.verificationScore, 4.8);
+assert.deepEqual(stored.predictionInfo.historyMembers, ['Quảng Nam', 'Đà Nẵng']);
 responseQuality = { verified: false, score: 3.3, verifierModel: 'gpt-test', summary: 'Câu 7 sai.',
   criticalIssues: ['Câu 7(c) sai: phản ví dụ cụ thể.'],
   questionChecks: examStructure[2].map(item => ({ questionNumber: item.questionNumber,
