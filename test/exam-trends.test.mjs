@@ -36,15 +36,23 @@ assert.ok(targetEvidence.years.every(year => Number(year.slice(0, 4)) < 2026 && 
 assert.throws(() => trendAnalysisSettings({ mode: 'target', year: '2026-2027', targetType: 'tst', lookback: 10 }));
 assert.throws(() => trendAnalysisSettings({ mode: 'year', year: '2026-2030' }));
 
+const practiceSample = yearEvidence.samples.find(item => item.criterion === 'Dãy số và Giới hạn dãy số');
+assert.ok(practiceSample, 'Cần có câu nguồn để kiểm thử chế độ luyện tập');
 const rawReport = {
   title: 'Xu hướng thử', executiveSummary: 'Tóm tắt',
   topicTrends: TREND_TOPICS.map(topic => ({ topic, questionCount: 999, prevalencePercent: 999,
-    trendLevel: 'Cao', observations: 'Nhận xét', frequentMethods: [] })),
+    trendLevel: 'Cao', observations: 'Nhận xét', frequentMethods: topic === practiceSample.criterion ? [{
+      name: 'Dãy số xác định bởi nghiệm duy nhất của dãy phương trình', frequency: 99,
+      evidenceIds: [practiceSample.sourceId, practiceSample.sourceId, 'khong-ton-tai:2026-2027:0:1'], note: 'Luyện tập'
+    }] : [] })),
   recurringPatterns: [], unitInsights: [], limitations: [], conclusion: 'Kết luận'
 };
 const normalizedReport = normalizeTrendReport(rawReport, yearEvidence);
 assert.deepEqual(normalizedReport.topicTrends.map(item => item.questionCount), yearEvidence.topicStats.map(item => item.questionCount),
   'Số liệu do server tính phải ghi đè số liệu AI');
+const normalizedMethod = normalizedReport.topicTrends.find(item => item.topic === practiceSample.criterion).frequentMethods[0];
+assert.deepEqual(normalizedMethod.evidenceIds, [practiceSample.sourceId], 'Phải bỏ mã trùng và mã không tồn tại');
+assert.equal(normalizedMethod.frequency, 1, 'Tần suất phải bằng số câu truy nguyên được');
 const validReview = {
   approved: true, score: 4.6, countsConsistent: true, evidenceFaithful: true,
   sixTopicsCovered: true, noUnsupportedClaims: true, criticalIssues: [],
@@ -100,6 +108,34 @@ assert.equal(requestBody.year, '2026-2027');
 assert.equal(byId('trendSaveButton').disabled, false, 'GPT bác vẫn phải cho admin lưu báo cáo Gemini');
 assert.match(byId('trendResult').textContent, /GPT chưa duyệt/);
 assert.match(byId('trendResult').textContent, /Tần suất phương pháp A/);
+const parsedPracticeId = practiceSample.sourceId.split(':');
+const practiceQuestionNumber = Number(parsedPracticeId.pop());
+parsedPracticeId.pop();
+parsedPracticeId.pop();
+const practiceAnchor = parsedPracticeId.join(':');
+const sourceRoot = window.document.createElement('div');
+sourceRoot.id = 'tab-tst';
+sourceRoot.className = 'tab-pane';
+sourceRoot.innerHTML = `<article class="exam-card" id="${practiceAnchor}"><div class="exam-header"><div class="exam-top-tags"><span class="tag tag-year">2026-2027</span><span class="tag tag-province">ĐƠN VỊ THỬ</span></div><h3 class="exam-title">ĐỀ NGUỒN THỬ</h3></div><div class="exam-body">${Array.from({ length: practiceQuestionNumber }, (_, index) => `<div class="problem-item"><div class="problem-header"><div class="problem-id"><span>Câu ${index + 1}</span><span class="badge-topic">Dãy số</span></div><button class="btn-copy">📋 Sao chép</button></div><div class="problem-content">Nội dung đầy đủ câu ${index + 1}</div>${index + 1 === practiceQuestionNumber ? '<div class="solution-box source-solution-box"><button class="toggle-btn">🔗 Lời giải tham khảo</button><div class="solution-content"><a href="https://example.test/solution">Nguồn thử</a></div></div>' : ''}</div>`).join('')}</div></article>`;
+window.document.body.appendChild(sourceRoot);
+window.ensureVMOTabContent = async () => sourceRoot;
+window.injectTstSources = () => {};
+window.toggleSolution = () => {};
+window.renderMathInContainer = async () => {};
+window.reinitAIGuide = rootElement => rootElement.querySelectorAll('.problem-header').forEach(header => {
+  if (!header.querySelector('.btn-ai-guide')) header.insertAdjacentHTML('beforeend', '<button class="btn-ai-guide">AI Hướng dẫn giải</button>');
+});
+const practiceButton = byId('trendResult').querySelector('.trend-practice-button');
+assert.ok(practiceButton, 'Vi chủ đề phải có nút luyện tập');
+practiceButton.click();
+await new Promise(resolve => setTimeout(resolve, 20));
+const practiceModal = byId('trendPracticeModal');
+assert.ok(practiceModal.classList.contains('active'));
+assert.match(practiceModal.textContent, /Nội dung đầy đủ câu/);
+assert.ok(practiceModal.querySelector('.btn-ai-guide'), 'Phải giữ AI Hướng dẫn giải');
+assert.ok(practiceModal.querySelector('.btn-submit-solution'), 'Phải giữ Nộp bài giải');
+assert.ok(practiceModal.querySelector('.source-solution-box'), 'Phải giữ Lời giải tham khảo');
+assert.ok(practiceModal.querySelector('.btn-manage-reference-links'), 'Admin phải có Quản lý nguồn');
 await window.saveExamTrendReport();
 assert.equal(savedPayload.quality.status, 'rejected');
 assert.equal(savedPayload.report.topicTrends.length, 6);
