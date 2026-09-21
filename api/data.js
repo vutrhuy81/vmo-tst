@@ -78,7 +78,7 @@ function cleanExamTrendReport(payload) {
     observations: cleanText(item?.observations, 4000),
     frequentMethods: (Array.isArray(item?.frequentMethods) ? item.frequentMethods : []).slice(0, 12).map(method => ({
       name: cleanText(method?.name, 240), frequency: cleanNumber(method?.frequency, 0, 0, 10000),
-      evidenceIds: cleanStringList(method?.evidenceIds, 12, 180), note: cleanText(method?.note, 1600)
+      evidenceIds: cleanStringList(method?.evidenceIds, 240, 180), note: cleanText(method?.note, 1600)
     })).filter(method => method.name)
   })).filter(item => item.topic);
   if (topicTrends.length !== 6 || topicTrends.some((item, index) => item.topic !== EXAM_TREND_TOPICS[index])) return null;
@@ -104,7 +104,7 @@ function cleanExamTrendReport(payload) {
         historicalUnit: cleanText(item?.historicalUnit, 120), title: cleanText(item?.title, 300),
         source: cleanText(item?.source, 1000), questionCount: cleanNumber(item?.questionCount, 0, 0, 100)
       })),
-      samples: (Array.isArray(evidence.samples) ? evidence.samples : []).slice(0, 160).map(item => ({
+      samples: (Array.isArray(evidence.samples) ? evidence.samples : []).slice(0, 240).map(item => ({
         sourceId: cleanText(item?.sourceId, 180), year: cleanText(item?.year, 20),
         unit: cleanText(item?.unit, 120), historicalUnit: cleanText(item?.historicalUnit, 120),
         title: cleanText(item?.title, 300),
@@ -116,7 +116,7 @@ function cleanExamTrendReport(payload) {
       title: cleanText(report.title, 300), executiveSummary: cleanText(report.executiveSummary, 6000), topicTrends,
       recurringPatterns: (Array.isArray(report.recurringPatterns) ? report.recurringPatterns : []).slice(0, 20).map(item => ({
         pattern: cleanText(item?.pattern, 300), frequency: cleanNumber(item?.frequency, 0, 0, 10000),
-        evidenceIds: cleanStringList(item?.evidenceIds, 15, 180), analysis: cleanText(item?.analysis, 2400)
+        evidenceIds: cleanStringList(item?.evidenceIds, 240, 180), analysis: cleanText(item?.analysis, 2400)
       })).filter(item => item.pattern),
       unitInsights: (Array.isArray(report.unitInsights) ? report.unitInsights : []).slice(0, 50).map(item => ({
         unit: cleanText(item?.unit, 160), dominantTopics: cleanStringList(item?.dominantTopics, 6, 160),
