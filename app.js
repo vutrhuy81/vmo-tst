@@ -41,6 +41,10 @@
     return pending;
   }
 
+  // Cho các chế độ xem theo ngữ cảnh (ví dụ: luyện tập từ báo cáo xu hướng)
+  // nạp kho đề theo yêu cầu mà không phải chuyển tab đang xem.
+  window.ensureVMOTabContent = ensureTabContent;
+
   // Khởi động MathJax typeset an toàn
   function typeset(el) {
     if (el && window.renderMathInContainer) {
