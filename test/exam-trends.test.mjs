@@ -3,7 +3,7 @@ import fs from 'node:fs';
 import { JSDOM } from 'jsdom';
 import {
   TREND_TOPICS, approvedTrendReview, classifyTrendTopic, normalizeTrendReport,
-  selectTrendEvidence, trendAnalysisSettings
+  selectTrendEvidence, selectTrendPracticeEvidence, trendAnalysisSettings
 } from '../lib/exam-trends.js';
 
 assert.equal(classifyTrendTopic('Phương trình hàm – Cauchy'), 'Phương trình hàm');
@@ -36,22 +36,36 @@ assert.ok(targetEvidence.years.every(year => Number(year.slice(0, 4)) < 2026 && 
 assert.throws(() => trendAnalysisSettings({ mode: 'target', year: '2026-2027', targetType: 'tst', lookback: 10 }));
 assert.throws(() => trendAnalysisSettings({ mode: 'year', year: '2026-2030' }));
 
-const practiceSample = yearEvidence.samples.find(item => item.criterion === 'Dãy số và Giới hạn dãy số');
+const practiceEvidence = selectTrendPracticeEvidence();
+const sharedPracticeTopic = TREND_TOPICS.find(topic =>
+  practiceEvidence.samples.some(item => item.criterion === topic && item.sourceId.startsWith('hist-')) &&
+  practiceEvidence.samples.some(item => item.criterion === topic && !item.sourceId.startsWith('hist-')));
+assert.ok(sharedPracticeTopic, 'Kho luyện tập phải có ít nhất một chủ đề chung giữa TST và lịch sử');
+const practiceSample = yearEvidence.samples.find(item => item.criterion === sharedPracticeTopic);
 assert.ok(practiceSample, 'Cần có câu nguồn để kiểm thử chế độ luyện tập');
+const tstPracticeSample = practiceEvidence.samples.find(item =>
+  item.criterion === sharedPracticeTopic && !item.sourceId.startsWith('hist-'));
+const historyPracticeSample = practiceEvidence.samples.find(item =>
+  item.criterion === sharedPracticeTopic && item.sourceId.startsWith('hist-'));
+assert.ok(tstPracticeSample && historyPracticeSample, 'Phải có câu luyện tập từ cả hai kho');
 const rawReport = {
   title: 'Xu hướng thử', executiveSummary: 'Tóm tắt',
   topicTrends: TREND_TOPICS.map(topic => ({ topic, questionCount: 999, prevalencePercent: 999,
     trendLevel: 'Cao', observations: 'Nhận xét', frequentMethods: topic === practiceSample.criterion ? [{
       name: 'Dãy số xác định bởi nghiệm duy nhất của dãy phương trình', frequency: 99,
-      evidenceIds: [practiceSample.sourceId, practiceSample.sourceId, 'khong-ton-tai:2026-2027:0:1'], note: 'Luyện tập'
+      evidenceIds: [practiceSample.sourceId, practiceSample.sourceId, 'khong-ton-tai:2026-2027:0:1'],
+      practiceEvidenceIds: [tstPracticeSample.sourceId, historyPracticeSample.sourceId,
+        historyPracticeSample.sourceId, 'khong-ton-tai:2026-2027:0:1'], note: 'Luyện tập'
     }] : [] })),
   recurringPatterns: [], unitInsights: [], limitations: [], conclusion: 'Kết luận'
 };
-const normalizedReport = normalizeTrendReport(rawReport, yearEvidence);
+const normalizedReport = normalizeTrendReport(rawReport, yearEvidence, practiceEvidence);
 assert.deepEqual(normalizedReport.topicTrends.map(item => item.questionCount), yearEvidence.topicStats.map(item => item.questionCount),
   'Số liệu do server tính phải ghi đè số liệu AI');
 const normalizedMethod = normalizedReport.topicTrends.find(item => item.topic === practiceSample.criterion).frequentMethods[0];
 assert.deepEqual(normalizedMethod.evidenceIds, [practiceSample.sourceId], 'Phải bỏ mã trùng và mã không tồn tại');
+assert.deepEqual(normalizedMethod.practiceEvidenceIds, [tstPracticeSample.sourceId, historyPracticeSample.sourceId],
+  'Kho luyện tập phải giữ câu hợp lệ của cả TST và Đà Nẵng–Quảng Nam');
 assert.equal(normalizedMethod.frequency, 1, 'Tần suất phải bằng số câu truy nguyên được');
 const validReview = {
   approved: true, score: 4.6, countsConsistent: true, evidenceFaithful: true,
@@ -108,17 +122,22 @@ assert.equal(requestBody.year, '2026-2027');
 assert.equal(byId('trendSaveButton').disabled, false, 'GPT bác vẫn phải cho admin lưu báo cáo Gemini');
 assert.match(byId('trendResult').textContent, /GPT chưa duyệt/);
 assert.match(byId('trendResult').textContent, /Tần suất phương pháp A/);
-const parsedPracticeId = practiceSample.sourceId.split(':');
-const practiceQuestionNumber = Number(parsedPracticeId.pop());
-parsedPracticeId.pop();
-parsedPracticeId.pop();
-const practiceAnchor = parsedPracticeId.join(':');
-const sourceRoot = window.document.createElement('div');
-sourceRoot.id = 'tab-tst';
-sourceRoot.className = 'tab-pane';
-sourceRoot.innerHTML = `<article class="exam-card" id="${practiceAnchor}"><div class="exam-header"><div class="exam-top-tags"><span class="tag tag-year">2026-2027</span><span class="tag tag-province">ĐƠN VỊ THỬ</span></div><h3 class="exam-title">ĐỀ NGUỒN THỬ</h3></div><div class="exam-body">${Array.from({ length: practiceQuestionNumber }, (_, index) => `<div class="problem-item"><div class="problem-header"><div class="problem-id"><span>Câu ${index + 1}</span><span class="badge-topic">Dãy số</span></div><button class="btn-copy">📋 Sao chép</button></div><div class="problem-content">Nội dung đầy đủ câu ${index + 1}</div>${index + 1 === practiceQuestionNumber ? '<div class="solution-box source-solution-box"><button class="toggle-btn">🔗 Lời giải tham khảo</button><div class="solution-content"><a href="https://example.test/solution">Nguồn thử</a></div></div>' : ''}</div>`).join('')}</div></article>`;
-window.document.body.appendChild(sourceRoot);
-window.ensureVMOTabContent = async () => sourceRoot;
+function practiceSource(sample, tabId, label) {
+  const parts = sample.sourceId.split(':');
+  const questionNumber = Number(parts.pop());
+  parts.pop();
+  parts.pop();
+  const anchor = parts.join(':');
+  const rootElement = window.document.createElement('div');
+  rootElement.id = tabId;
+  rootElement.className = 'tab-pane';
+  rootElement.innerHTML = `<article class="exam-card" id="${anchor}"><div class="exam-header"><div class="exam-top-tags"><span class="tag tag-year">${sample.year}</span><span class="tag tag-province">${label}</span></div><h3 class="exam-title">ĐỀ NGUỒN ${label}</h3></div><div class="exam-body">${Array.from({ length: questionNumber }, (_, index) => `<div class="problem-item"><div class="problem-header"><div class="problem-id"><span>Câu ${index + 1}</span><span class="badge-topic">${sharedPracticeTopic}</span></div><button class="btn-copy">📋 Sao chép</button></div><div class="problem-content">Nội dung ${label} câu ${index + 1}</div>${index + 1 === questionNumber ? '<div class="solution-box source-solution-box"><button class="toggle-btn">🔗 Lời giải tham khảo</button><div class="solution-content"><a href="https://example.test/solution">Nguồn thử</a></div></div>' : ''}</div>`).join('')}</div></article>`;
+  window.document.body.appendChild(rootElement);
+  return rootElement;
+}
+const tstSourceRoot = practiceSource(tstPracticeSample, 'tab-tst', 'TST');
+const historySourceRoot = practiceSource(historyPracticeSample, 'tab-history', 'ĐÀ NẴNG–QUẢNG NAM');
+window.ensureVMOTabContent = async tabId => tabId === 'tab-history' ? historySourceRoot : tstSourceRoot;
 window.injectTstSources = () => {};
 window.toggleSolution = () => {};
 window.renderMathInContainer = async () => {};
@@ -131,11 +150,29 @@ practiceButton.click();
 await new Promise(resolve => setTimeout(resolve, 20));
 const practiceModal = byId('trendPracticeModal');
 assert.ok(practiceModal.classList.contains('active'));
-assert.match(practiceModal.textContent, /Nội dung đầy đủ câu/);
+assert.match(practiceModal.textContent, /Nguồn: Đề TST 2026–2027/);
+assert.match(practiceModal.textContent, /Nguồn: Đề Đà Nẵng–Quảng Nam/);
+assert.equal(practiceModal.querySelectorAll('.trend-practice-exam').length, 2,
+  'Phải hiển thị câu luyện tập của cả hai kho');
 assert.ok(practiceModal.querySelector('.btn-ai-guide'), 'Phải giữ AI Hướng dẫn giải');
 assert.ok(practiceModal.querySelector('.btn-submit-solution'), 'Phải giữ Nộp bài giải');
 assert.ok(practiceModal.querySelector('.source-solution-box'), 'Phải giữ Lời giải tham khảo');
 assert.ok(practiceModal.querySelector('.btn-manage-reference-links'), 'Admin phải có Quản lý nguồn');
+const submissionModal = window.document.createElement('div');
+submissionModal.id = 'submissionModal';
+submissionModal.className = 'vmo-modal-overlay';
+submissionModal.innerHTML = '<button id="submissionModalClose" class="vmo-modal-close"></button>';
+window.document.body.appendChild(submissionModal);
+window.openSubmissionModal('test-problem', 'Câu thử', practiceModal.querySelector('.problem-item'));
+assert.ok(submissionModal.classList.contains('trend-practice-child-modal'),
+  'Giao diện Nộp bài phải nằm trên giao diện luyện tập');
+window.closeSubmissionModal();
+assert.equal(window.document.body.style.overflow, 'hidden',
+  'Đóng giao diện con vẫn phải khóa cuộn khi giao diện luyện tập còn mở');
+await window.openReferenceLinksManager('test-problem');
+assert.ok(byId('referenceLinksAdminModal').classList.contains('trend-practice-child-modal'),
+  'Giao diện Quản lý nguồn phải nằm trên giao diện luyện tập');
+window.closeReferenceLinksManager();
 await window.saveExamTrendReport();
 assert.equal(savedPayload.quality.status, 'rejected');
 assert.equal(savedPayload.report.topicTrends.length, 6);
