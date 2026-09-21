@@ -2055,6 +2055,7 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
     ensureCatalogManagementUi(modal, isAdmin);
     ensureSubmissionFilterUi(modal, isAdmin);
     ensureLearningDashboardUi(modal, isAdmin);
+    ensureExamTrendUi(modal, isAdmin);
   }
 
   function ensureExamOcrForm(modal) {
@@ -2497,7 +2498,208 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
     'document.added': 'Thêm tài liệu', 'document.deleted': 'Xóa tài liệu',
     'exam.added': 'Thêm đề thi', 'exam.image_saved': 'Lưu ảnh đề thi', 'exam.deleted': 'Xóa đề thi',
     'event.added': 'Thêm lịch thi', 'event.deleted': 'Xóa lịch thi',
-    'catalog.updated': 'Cập nhật catalog', 'catalog.synced': 'Đồng bộ catalog'
+    'catalog.updated': 'Cập nhật catalog', 'catalog.synced': 'Đồng bộ catalog',
+    'trend_report.saved': 'Lưu phân tích xu hướng đề'
+  };
+
+  const examTrendState = { current: null, saved: [], loaded: false, running: false };
+
+  function ensureExamTrendUi(modal, isAdmin) {
+    if (!isAdmin) {
+      modal.querySelector('#hub-tab-trends')?.remove();
+      modal.querySelector('#hub-panel-trends')?.remove();
+      return;
+    }
+    const tabs = modal.querySelector('#hub-tab-events')?.parentElement;
+    const body = modal.querySelector('.vmo-modal-body');
+    if (!tabs || !body || modal.querySelector('#hub-tab-trends')) return;
+    const button = document.createElement('button');
+    button.type = 'button';
+    button.className = 'hub-tab-btn';
+    button.id = 'hub-tab-trends';
+    button.textContent = '📈 AI xu hướng đề';
+    button.onclick = () => window.switchHubTab('trends');
+    tabs.appendChild(button);
+    tabs.style.flexWrap = 'wrap';
+
+    const panel = document.createElement('div');
+    panel.id = 'hub-panel-trends';
+    panel.className = 'hub-panel';
+    panel.style.display = 'none';
+    panel.innerHTML = `
+      <div style="margin-bottom:12px;">
+        <h4 style="margin:0;color:#173b64;">AI Phân tích xu hướng ra đề</h4>
+        <small style="color:#64748b;">Gemini phân tích dữ liệu đề đã lưu → GPT kiểm định độc lập. Chỉ dành cho quản trị viên.</small>
+      </div>
+      <div style="background:#f8fafc;border:1px solid #cbd5e1;border-radius:9px;padding:12px;margin-bottom:14px;">
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(205px,1fr));gap:10px;">
+          <div><label for="trendMode" style="display:block;font-weight:700;font-size:.82rem;margin-bottom:4px;">Phạm vi phân tích *</label><select id="trendMode" style="width:100%;padding:8px;border:1px solid #cbd5e1;border-radius:6px;"><option value="year">Các tỉnh/thành trong một năm</option><option value="target">Lịch sử của một đơn vị/VMO</option></select></div>
+          <div><label for="trendYear" style="display:block;font-weight:700;font-size:.82rem;margin-bottom:4px;">Năm học *</label><select id="trendYear" style="width:100%;padding:8px;border:1px solid #cbd5e1;border-radius:6px;">${Array.from({ length: 15 }, (_, index) => `<option value="${2026 + index}-${2027 + index}">${2026 + index}–${2027 + index}</option>`).join('')}</select></div>
+          <div class="trend-target-field"><label for="trendTargetType" style="display:block;font-weight:700;font-size:.82rem;margin-bottom:4px;">Nguồn đề *</label><select id="trendTargetType" style="width:100%;padding:8px;border:1px solid #cbd5e1;border-radius:6px;"><option value="tst">Tỉnh/thành hoặc trường chuyên (TST)</option><option value="vmo">Bộ Giáo dục (VMO)</option></select></div>
+          <div class="trend-target-field" id="trendTargetWrap"><label for="trendTarget" style="display:block;font-weight:700;font-size:.82rem;margin-bottom:4px;">Đơn vị TST *</label><select id="trendTarget" style="width:100%;padding:8px;border:1px solid #cbd5e1;border-radius:6px;"></select></div>
+          <div class="trend-target-field"><label for="trendLookback" style="display:block;font-weight:700;font-size:.82rem;margin-bottom:4px;">Số năm quá khứ (1–15) *</label><input id="trendLookback" type="number" min="1" max="15" value="10" style="width:100%;box-sizing:border-box;padding:8px;border:1px solid #cbd5e1;border-radius:6px;"></div>
+        </div>
+        <p id="trendScopeHelp" style="margin:9px 0;color:#475569;font-size:.79rem;"></p>
+        <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;">
+          <button type="button" id="trendRunButton" style="padding:9px 13px;border:0;border-radius:6px;background:#1d4ed8;color:white;font-weight:700;cursor:pointer;">✨ Gemini phân tích → GPT kiểm định</button>
+          <button type="button" id="trendSaveButton" disabled style="padding:9px 13px;border:0;border-radius:6px;background:#16a34a;color:white;font-weight:700;cursor:pointer;">💾 Lưu báo cáo vào MongoDB</button>
+          <span id="trendStatus" role="status" style="font-size:.8rem;color:#475569;"></span>
+        </div>
+      </div>
+      <div id="trendResult" aria-live="polite"></div>
+      <details style="margin-top:16px;" open><summary style="font-weight:800;color:#173b64;cursor:pointer;">🗃️ Báo cáo đã lưu</summary><div id="trendSavedReports" style="margin-top:9px;"><em>Chưa tải dữ liệu.</em></div></details>`;
+    body.appendChild(panel);
+
+    const target = panel.querySelector('#trendTarget');
+    (window.VMO_TST_LOCATIONS || []).forEach(item => {
+      const option = document.createElement('option');
+      option.value = item.anchor;
+      option.textContent = item.name;
+      option.dataset.province = item.name;
+      target.appendChild(option);
+    });
+    if (Array.from(target.options).some(option => option.value === 'tst-da-nang')) target.value = 'tst-da-nang';
+    panel.querySelector('#trendMode').onchange = syncExamTrendForm;
+    panel.querySelector('#trendYear').onchange = syncExamTrendForm;
+    panel.querySelector('#trendTargetType').onchange = syncExamTrendForm;
+    panel.querySelector('#trendRunButton').onclick = window.runExamTrendAnalysis;
+    panel.querySelector('#trendSaveButton').onclick = window.saveExamTrendReport;
+    syncExamTrendForm();
+  }
+
+  function syncExamTrendForm() {
+    const mode = document.getElementById('trendMode')?.value || 'year';
+    const type = document.getElementById('trendTargetType')?.value || 'tst';
+    document.querySelectorAll('#hub-panel-trends .trend-target-field').forEach(field => {
+      field.style.display = mode === 'target' ? 'block' : 'none';
+    });
+    const targetWrap = document.getElementById('trendTargetWrap');
+    if (targetWrap) targetWrap.style.display = mode === 'target' && type === 'tst' ? 'block' : 'none';
+    const help = document.getElementById('trendScopeHelp');
+    const year = document.getElementById('trendYear')?.value || '2026-2027';
+    if (help) help.textContent = mode === 'year'
+      ? `Phân tích tất cả đề TST đã công khai trong năm ${year}.`
+      : `Phân tích tối đa số năm đã chọn trước ${year}; hệ thống sẽ ghi rõ số năm thực có dữ liệu.`;
+  }
+
+  function trendStatusLabel(quality = {}) {
+    if (quality.status === 'approved') return ['✅ GPT đã duyệt', '#166534', '#dcfce7'];
+    if (quality.status === 'rejected') return ['⚠️ GPT chưa duyệt', '#991b1b', '#fee2e2'];
+    return ['⏳ GPT chưa kiểm định được', '#92400e', '#fef3c7'];
+  }
+
+  function renderExamTrendReport(data, saved = false) {
+    const target = document.getElementById('trendResult');
+    if (!target || !data?.report) return;
+    const quality = data.quality || {};
+    const [qualityLabel, qualityColor, qualityBackground] = trendStatusLabel(quality);
+    const evidence = data.evidence || {};
+    const report = data.report;
+    const methods = item => (item.frequentMethods || []).length
+      ? `<ul style="margin:7px 0 0;padding-left:20px;">${item.frequentMethods.map(method => `<li><strong>${escapeHtmlText(method.name)}</strong> — ${Number(method.frequency) || 0} lần${method.note ? `: ${escapeHtmlText(method.note)}` : ''}<div style="font-size:.72rem;color:#64748b;">Bằng chứng: ${escapeHtmlText((method.evidenceIds || []).join(', ') || 'chưa xác định')}</div></li>`).join('')}</ul>`
+      : '<p style="color:#64748b;margin:7px 0 0;">Chưa đủ dữ liệu để xác định phương pháp lặp lại.</p>';
+    target.innerHTML = `
+      <article style="border:1px solid #cbd5e1;border-radius:10px;background:white;padding:14px;">
+        <div style="display:flex;justify-content:space-between;gap:9px;align-items:flex-start;flex-wrap:wrap;">
+          <div><h3 style="margin:0 0 5px;color:#0f172a;">${escapeHtmlText(report.title)}</h3><div style="font-size:.78rem;color:#64748b;">${saved ? 'Báo cáo đã lưu' : `Gemini: ${escapeHtmlText(data.model || 'không rõ model')}`} · ${escapeHtmlText(learningDate(data.createdAt || data.generatedAt))}</div></div>
+          <span style="padding:6px 9px;border-radius:999px;background:${qualityBackground};color:${qualityColor};font-size:.78rem;font-weight:800;">${qualityLabel}${quality.score !== null && quality.score !== undefined ? ` · ${escapeHtmlText(quality.score)}/5` : ''}</span>
+        </div>
+        <div style="margin:11px 0;padding:10px;background:#eff6ff;border-radius:7px;color:#1e3a8a;font-size:.82rem;"><strong>Phạm vi dữ liệu:</strong> ${Number(evidence.examCount) || 0} đề · ${Number(evidence.questionCount) || 0} câu · ${Number(evidence.unitCount) || 0} đơn vị · ${escapeHtmlText((evidence.years || []).join(', ') || data.settings?.year || '')}${Number(evidence.otherQuestionCount) ? ` · ${Number(evidence.otherQuestionCount)} câu ngoài 6 tiêu chí` : ''}</div>
+        <p style="white-space:pre-wrap;line-height:1.55;">${escapeHtmlText(report.executiveSummary || '')}</p>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:9px;">${(report.topicTrends || []).map(item => `
+          <section style="border:1px solid #e2e8f0;border-radius:8px;padding:10px;background:#f8fafc;">
+            <div style="display:flex;justify-content:space-between;gap:7px;"><strong>${escapeHtmlText(item.topic)}</strong><span style="white-space:nowrap;color:#0369a1;font-weight:800;">${Number(item.questionCount) || 0} câu · ${Number(item.prevalencePercent) || 0}%</span></div>
+            <div style="font-size:.76rem;color:#7c3aed;margin:4px 0;">${escapeHtmlText(item.trendLevel || '')}</div>
+            <div style="white-space:pre-wrap;font-size:.84rem;line-height:1.45;">${escapeHtmlText(item.observations || '')}</div>${methods(item)}
+          </section>`).join('')}</div>
+        ${(report.recurringPatterns || []).length ? `<details open style="margin-top:12px;"><summary style="font-weight:800;cursor:pointer;">Các mô-típ lặp lại nổi bật</summary><ul>${report.recurringPatterns.map(item => `<li><strong>${escapeHtmlText(item.pattern)}</strong> (${Number(item.frequency) || 0} lần): ${escapeHtmlText(item.analysis || '')}<div style="font-size:.72rem;color:#64748b;">${escapeHtmlText((item.evidenceIds || []).join(', '))}</div></li>`).join('')}</ul></details>` : ''}
+        ${(report.unitInsights || []).length ? `<details style="margin-top:10px;"><summary style="font-weight:800;cursor:pointer;">Đặc trưng theo đơn vị</summary>${report.unitInsights.map(item => `<p><strong>${escapeHtmlText(item.unit)}:</strong> ${escapeHtmlText((item.dominantTopics || []).join(', '))}. ${escapeHtmlText(item.note || '')}</p>`).join('')}</details>` : ''}
+        <div style="margin-top:12px;padding:10px;border-radius:7px;background:${qualityBackground};color:${qualityColor};white-space:pre-wrap;"><strong>${qualityLabel}:</strong> ${escapeHtmlText(quality.summary || 'Chưa có nhận xét.')}${(quality.criticalIssues || []).length ? `<ul>${quality.criticalIssues.map(item => `<li>${escapeHtmlText(item)}</li>`).join('')}</ul>` : ''}${(quality.topicChecks || []).some(item => item.valid === false) ? `<strong>Kiểm tra theo chuyên đề:</strong><ul>${quality.topicChecks.filter(item => item.valid === false).map(item => `<li><strong>${escapeHtmlText(item.topic)}:</strong> ${escapeHtmlText(item.reason || '')}</li>`).join('')}</ul>` : ''}${(quality.corrections || []).length ? `<strong>Đề nghị hiệu chỉnh:</strong><ul>${quality.corrections.map(item => `<li>${escapeHtmlText(item)}</li>`).join('')}</ul>` : ''}</div>
+        ${(report.limitations || []).length ? `<details style="margin-top:10px;"><summary style="font-weight:700;cursor:pointer;">Giới hạn dữ liệu</summary><ul>${report.limitations.map(item => `<li>${escapeHtmlText(item)}</li>`).join('')}</ul></details>` : ''}
+        ${report.conclusion ? `<p style="margin-bottom:0;white-space:pre-wrap;"><strong>Kết luận:</strong> ${escapeHtmlText(report.conclusion)}</p>` : ''}
+      </article>`;
+  }
+
+  window.runExamTrendAnalysis = async function() {
+    if (!requireAdminUiAction() || examTrendState.running) return;
+    const status = document.getElementById('trendStatus');
+    const button = document.getElementById('trendRunButton');
+    const save = document.getElementById('trendSaveButton');
+    const mode = document.getElementById('trendMode')?.value || 'year';
+    const selected = document.getElementById('trendTarget')?.selectedOptions?.[0];
+    const payload = {
+      mode, year: document.getElementById('trendYear')?.value,
+      targetType: document.getElementById('trendTargetType')?.value,
+      targetAnchor: selected?.value || '', province: selected?.dataset?.province || selected?.textContent || '',
+      lookback: Number(document.getElementById('trendLookback')?.value)
+    };
+    examTrendState.running = true;
+    examTrendState.current = null;
+    if (save) save.disabled = true;
+    if (button) button.disabled = true;
+    if (status) status.textContent = 'Gemini đang phân tích; sau đó GPT sẽ kiểm định (tối đa khoảng 290 giây)...';
+    const controller = new AbortController();
+    const timer = setTimeout(() => controller.abort(), 295_000);
+    try {
+      const response = await fetch('/api/ai-exam-trends', {
+        method: 'POST', credentials: 'same-origin', headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload), signal: controller.signal
+      });
+      const result = await response.json().catch(() => null);
+      if (!response.ok || !result?.success) throw new Error(result?.error || `Phân tích thất bại (HTTP ${response.status})`);
+      examTrendState.current = result.data;
+      renderExamTrendReport(result.data);
+      if (save) save.disabled = false;
+      if (status) status.textContent = result.data.quality?.verified
+        ? 'Hoàn tất: GPT đã duyệt báo cáo.'
+        : 'Hoàn tất: đã giữ kết quả Gemini kèm nhận xét/trạng thái GPT.';
+    } catch (error) {
+      if (status) status.textContent = error?.name === 'AbortError'
+        ? 'Yêu cầu vượt quá thời gian chờ 295 giây.' : (error?.message || 'Không thể phân tích xu hướng.');
+      showToast(status?.textContent || 'Không thể phân tích xu hướng.', false);
+    } finally {
+      clearTimeout(timer);
+      examTrendState.running = false;
+      if (button) button.disabled = false;
+    }
+  };
+
+  window.saveExamTrendReport = async function() {
+    if (!requireAdminUiAction() || !examTrendState.current) return;
+    const button = document.getElementById('trendSaveButton');
+    const status = document.getElementById('trendStatus');
+    if (button) button.disabled = true;
+    try {
+      const saved = await window.VMODataService.saveExamTrendReport(examTrendState.current);
+      examTrendState.current = { ...examTrendState.current, id: saved.id, createdAt: saved.createdAt };
+      if (status) status.textContent = 'Đã lưu báo cáo xu hướng vào MongoDB.';
+      showToast('Đã lưu báo cáo xu hướng vào MongoDB!', true);
+      await window.loadExamTrendReports(true);
+    } catch (error) {
+      if (button) button.disabled = false;
+      if (status) status.textContent = error?.message || 'Không thể lưu báo cáo.';
+      showToast(status?.textContent, false);
+    }
+  };
+
+  window.loadExamTrendReports = async function(force = false) {
+    if (!requireAdminUiAction()) return;
+    const list = document.getElementById('trendSavedReports');
+    if (!list || (examTrendState.loaded && !force)) return;
+    list.innerHTML = '<em>Đang tải báo cáo từ MongoDB...</em>';
+    try {
+      examTrendState.saved = await window.VMODataService.getExamTrendReports();
+      examTrendState.loaded = true;
+      list.innerHTML = examTrendState.saved.length ? examTrendState.saved.map((item, index) => {
+        const [label, color, background] = trendStatusLabel(item.quality || {});
+        return `<button type="button" data-trend-report="${index}" style="display:block;width:100%;text-align:left;padding:9px 11px;margin-bottom:6px;border:1px solid #cbd5e1;border-radius:7px;background:white;cursor:pointer;"><strong>${escapeHtmlText(item.report?.title || 'Báo cáo xu hướng')}</strong><span style="float:right;color:${color};background:${background};padding:2px 6px;border-radius:999px;font-size:.7rem;">${label}</span><div style="font-size:.76rem;color:#64748b;">${escapeHtmlText(item.settings?.year || '')} · ${escapeHtmlText(item.createdBy || '')} · ${escapeHtmlText(learningDate(item.createdAt))}</div></button>`;
+      }).join('') : '<p style="color:#64748b;">Chưa có báo cáo xu hướng đã lưu.</p>';
+      list.querySelectorAll('[data-trend-report]').forEach(button => {
+        button.onclick = () => renderExamTrendReport(examTrendState.saved[Number(button.dataset.trendReport)], true);
+      });
+    } catch (error) {
+      list.innerHTML = `<p style="color:#b91c1c;">${escapeHtmlText(error?.message || 'Không tải được báo cáo.')}</p>`;
+    }
   };
 
   function ensureLearningDashboardUi(modal, isAdmin) {
@@ -2848,7 +3050,7 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
   };
 
   window.switchHubTab = function(tabName) {
-    ['events', 'docs', 'exams', 'catalog', 'subs', 'progress'].forEach(t => {
+    ['events', 'docs', 'exams', 'catalog', 'subs', 'progress', 'trends'].forEach(t => {
       const btn = document.getElementById('hub-tab-' + t);
       const panel = document.getElementById('hub-panel-' + t);
       if (btn) btn.classList.toggle('active', t === tabName);
@@ -2861,6 +3063,7 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
     if (tabName === 'catalog') loadCatalogManagement();
     if (tabName === 'subs') loadAllSubmissions();
     if (tabName === 'progress') window.loadLearningDashboard();
+    if (tabName === 'trends') window.loadExamTrendReports();
   };
 
   window.hubSubmissionState = { page: 1, limit: 10, total: 0, pages: 1 };

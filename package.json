@@ -7,8 +7,8 @@
     "dev": "node server.js",
     "start": "node server.js",
     "build": "node build.js",
-    "test": "node test/tst-locations.test.mjs && node test/exam-prediction.test.mjs && node test/specialty-content.test.mjs && node test/learning-dashboard.test.mjs && node test/vercel-function-limit.test.mjs",
-    "lint": "node -c server.js && node -c build.js && node -c app.js && node -c tst-locations.js && node -c vmo_db_ui.js && node -c vmo_data_service.js && node -c i18n.js && node -c i18n_content.js && node -c api/auth.js && node -c api/data.js && node -c lib/learning.js && node -c lib/exam-prediction.js && node -c api/translate-content.js && node -c api/ai-guide.js && node -c api/ai-evaluate-solution.js && node -c api/ai-ocr-math.js && node -c api/ai-ocr-exam.js && node -c api/ai-predict-exam.js && node -c lib/ai.js && node -c lib/openai.js"
+    "test": "node test/tst-locations.test.mjs && node test/exam-prediction.test.mjs && node test/exam-trends.test.mjs && node test/specialty-content.test.mjs && node test/learning-dashboard.test.mjs && node test/vercel-function-limit.test.mjs",
+    "lint": "node -c server.js && node -c build.js && node -c app.js && node -c tst-locations.js && node -c vmo_db_ui.js && node -c vmo_data_service.js && node -c i18n.js && node -c i18n_content.js && node -c api/auth.js && node -c api/data.js && node -c lib/learning.js && node -c lib/exam-prediction.js && node -c lib/exam-trends.js && node -c api/translate-content.js && node -c api/ai-guide.js && node -c api/ai-evaluate-solution.js && node -c api/ai-ocr-math.js && node -c api/ai-ocr-exam.js && node -c api/ai-predict-exam.js && node -c api/ai-exam-trends.js && node -c lib/ai.js && node -c lib/openai.js"
   },
   "dependencies": {
     "@google/genai": "^2.22.0",
