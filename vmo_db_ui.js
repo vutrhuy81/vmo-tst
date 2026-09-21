@@ -2588,6 +2588,181 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
     return ['⏳ GPT chưa kiểm định được', '#92400e', '#fef3c7'];
   }
 
+  function parseTrendEvidenceId(value) {
+    const parts = String(value || '').split(':');
+    if (parts.length < 4) return null;
+    const questionNumber = Number(parts.pop());
+    const dayNumber = Number(parts.pop());
+    const year = parts.pop() || '';
+    const anchor = parts.join(':');
+    if (!anchor || !/^\d{4}-\d{4}$/.test(year) || !Number.isInteger(dayNumber) || dayNumber < 0 ||
+      !Number.isInteger(questionNumber) || questionNumber < 1) return null;
+    return { value: String(value), anchor, year, dayNumber, questionNumber };
+  }
+
+  function ensureTrendPracticeModal() {
+    let modal = document.getElementById('trendPracticeModal');
+    if (modal) return modal;
+    modal = document.createElement('div');
+    modal.id = 'trendPracticeModal';
+    modal.className = 'trend-practice-modal';
+    modal.setAttribute('role', 'dialog');
+    modal.setAttribute('aria-modal', 'true');
+    modal.setAttribute('aria-labelledby', 'trendPracticeTitle');
+    modal.innerHTML = `
+      <div class="trend-practice-shell">
+        <header class="trend-practice-header">
+          <div><div class="trend-practice-kicker">📚 LUYỆN TẬP THEO XU HƯỚNG ĐỀ</div><h2 id="trendPracticeTitle"></h2><p id="trendPracticeSubtitle"></p></div>
+          <button type="button" class="trend-practice-close" aria-label="Đóng">×</button>
+        </header>
+        <div id="trendPracticeNotice" class="trend-practice-notice"></div>
+        <main id="trendPracticeBody" class="trend-practice-body"></main>
+      </div>`;
+    modal.querySelector('.trend-practice-close').onclick = () => window.closeTrendPractice();
+    modal.addEventListener('click', event => { if (event.target === modal) window.closeTrendPractice(); });
+    document.body.appendChild(modal);
+    return modal;
+  }
+
+  window.closeTrendPractice = function() {
+    const modal = document.getElementById('trendPracticeModal');
+    if (!modal) return;
+    modal.classList.remove('active');
+    document.body.classList.remove('trend-practice-open');
+  };
+
+  async function prepareTrendPracticeSource(tabId) {
+    const root = window.ensureVMOTabContent
+      ? await window.ensureVMOTabContent(tabId)
+      : document.getElementById(tabId);
+    if (!root) throw new Error(`Không tải được kho ${tabId === 'tab-history' ? 'Đà Nẵng–Quảng Nam' : 'TST'}.`);
+    window.reinitAIGuide?.(root);
+    window.reinitDatabaseUI?.(root);
+    if (tabId === 'tab-tst') {
+      await window.loadDatabaseTstExams?.();
+      window.injectTstSources?.();
+    } else {
+      window.injectHistorySources?.();
+    }
+    return root;
+  }
+
+  function findTrendEvidenceProblem(root, evidence) {
+    const card = root.querySelector(`#${CSS.escape(evidence.anchor)}`);
+    if (!card) return null;
+    if (evidence.dayNumber > 0) {
+      const section = card.querySelector(`.db-exam-day[data-day-number="${evidence.dayNumber}"]`);
+      if (section) {
+        return Array.from(section.querySelectorAll('.problem-item')).find(item =>
+          Number(item.dataset.questionNumber) === evidence.questionNumber) || null;
+      }
+    }
+    const staticProblems = Array.from(card.querySelectorAll('.problem-item'))
+      .filter(item => !item.closest('.db-exam-day'));
+    return staticProblems[evidence.questionNumber - 1] || null;
+  }
+
+  function cloneTrendPracticeProblem(problem, evidence) {
+    const title = headingTextWithoutActions(problem.querySelector('.problem-id')) || `Câu ${evidence.questionNumber}`;
+    const identity = getProblemIdentity(problem, title);
+    const clone = problem.cloneNode(true);
+    clone.querySelectorAll('.btn-ai-guide, .btn-submit-solution, .btn-manage-reference-links, .ai-guide-panel')
+      .forEach(node => node.remove());
+    clone.dataset.contentKey = identity.problemKey;
+    clone.dataset.databaseProblem = 'true';
+    clone.dataset.setKey = identity.setKey;
+    clone.dataset.setTitle = identity.setTitle;
+    clone.dataset.sourceGroup = identity.sourceGroup;
+    clone.dataset.sourceType = identity.sourceType;
+    clone.dataset.contentType = identity.contentType;
+    clone.dataset.questionNumber = String(identity.questionNumber || evidence.questionNumber);
+    clone.dataset.legacyProblemId = identity.legacyProblemId || '';
+    clone.dataset.trendEvidenceId = evidence.value;
+    clone.querySelectorAll('.source-solution-box .toggle-btn').forEach(button => {
+      button.onclick = () => window.toggleSolution?.(button);
+    });
+    return clone;
+  }
+
+  window.openTrendPractice = async function(topicIndex, methodIndex) {
+    const data = examTrendState.rendered;
+    const topic = data?.report?.topicTrends?.[Number(topicIndex)];
+    const method = topic?.frequentMethods?.[Number(methodIndex)];
+    if (!topic || !method) return showToast('Không tìm thấy vi chủ đề trong báo cáo.', false);
+    const evidence = [...new Set(method.evidenceIds || [])].map(parseTrendEvidenceId).filter(Boolean);
+    if (!evidence.length) return showToast('Vi chủ đề này chưa có câu hỏi truy nguyên được.', false);
+
+    const modal = ensureTrendPracticeModal();
+    const body = modal.querySelector('#trendPracticeBody');
+    const notice = modal.querySelector('#trendPracticeNotice');
+    modal.querySelector('#trendPracticeTitle').textContent = method.name;
+    modal.querySelector('#trendPracticeSubtitle').textContent = `${topic.topic} · ${evidence.length} câu đã được AI truy nguyên`;
+    notice.textContent = data.quality?.status === 'approved'
+      ? '✅ Danh sách vi chủ đề đã được GPT kiểm định.'
+      : '⚠️ Báo cáo Gemini chưa được GPT duyệt hoàn toàn; hãy xem đây là danh sách luyện tập tham khảo.';
+    notice.className = `trend-practice-notice ${data.quality?.status === 'approved' ? 'approved' : 'warning'}`;
+    body.innerHTML = '<div class="trend-practice-loading">Đang đối chiếu và tải đầy đủ câu hỏi từ hai kho đề…</div>';
+    modal.classList.add('active');
+    document.body.classList.add('trend-practice-open');
+
+    try {
+      const tabIds = [...new Set(evidence.map(item => item.anchor.startsWith('hist-') ? 'tab-history' : 'tab-tst'))];
+      const roots = new Map((await Promise.all(tabIds.map(async tabId => [tabId, await prepareTrendPracticeSource(tabId)]))));
+      const resolved = [];
+      const missing = [];
+      evidence.forEach(item => {
+        const tabId = item.anchor.startsWith('hist-') ? 'tab-history' : 'tab-tst';
+        const problem = findTrendEvidenceProblem(roots.get(tabId), item);
+        if (problem) resolved.push({ item, problem, tabId });
+        else missing.push(item.value);
+      });
+      if (!resolved.length) throw new Error('Không đối chiếu được câu hỏi gốc. Hãy tạo lại báo cáo xu hướng sau khi đồng bộ ngân hàng câu hỏi.');
+
+      body.replaceChildren();
+      const groups = new Map();
+      resolved.forEach(entry => {
+        const key = `${entry.tabId}:${entry.item.anchor}:${entry.item.dayNumber}`;
+        if (!groups.has(key)) groups.set(key, []);
+        groups.get(key).push(entry);
+      });
+      groups.forEach(entries => {
+        const first = entries[0];
+        const sourceCard = first.problem.closest('.exam-card');
+        const card = document.createElement('article');
+        card.className = 'exam-card trend-practice-exam';
+        const header = sourceCard?.querySelector('.exam-header')?.cloneNode(true) || document.createElement('div');
+        header.classList.add('exam-header');
+        const sourceLabel = document.createElement('div');
+        sourceLabel.className = 'trend-practice-source';
+        sourceLabel.textContent = first.tabId === 'tab-history' ? '🗂️ Nguồn: Đề Đà Nẵng–Quảng Nam' : '🏛️ Nguồn: Đề TST 2026–2027';
+        header.appendChild(sourceLabel);
+        const cardBody = document.createElement('div');
+        cardBody.className = 'exam-body';
+        if (first.item.dayNumber > 0) {
+          const dayHeader = sourceCard?.querySelector(`.db-exam-day[data-day-number="${first.item.dayNumber}"] .exam-day-header`)?.cloneNode(true);
+          if (dayHeader) cardBody.appendChild(dayHeader);
+        }
+        entries.sort((a, b) => a.item.questionNumber - b.item.questionNumber).forEach(entry =>
+          cardBody.appendChild(cloneTrendPracticeProblem(entry.problem, entry.item)));
+        card.append(header, cardBody);
+        body.appendChild(card);
+      });
+      if (missing.length) {
+        const warning = document.createElement('div');
+        warning.className = 'trend-practice-missing';
+        warning.textContent = `Có ${missing.length} mã cũ chưa đối chiếu được: ${missing.join(', ')}. Hãy tạo lại báo cáo để cập nhật ánh xạ.`;
+        body.prepend(warning);
+      }
+      window.reinitAIGuide?.(body);
+      window.reinitDatabaseUI?.(body);
+      window.applyCurrentLanguage?.();
+      if (window.renderMathInContainer) await window.renderMathInContainer(body, true).catch(() => {});
+      notice.textContent += ` Đã tải ${resolved.length}/${evidence.length} câu đầy đủ.`;
+    } catch (error) {
+      body.innerHTML = `<div class="trend-practice-error">${escapeHtmlText(error?.message || 'Không tải được danh sách luyện tập.')}</div>`;
+    }
+  };
+
   function renderExamTrendReport(data, saved = false) {
     const target = document.getElementById('trendResult');
     if (!target || !data?.report) return;
@@ -2595,8 +2770,9 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
     const [qualityLabel, qualityColor, qualityBackground] = trendStatusLabel(quality);
     const evidence = data.evidence || {};
     const report = data.report;
-    const methods = item => (item.frequentMethods || []).length
-      ? `<ul style="margin:7px 0 0;padding-left:20px;">${item.frequentMethods.map(method => `<li><strong>${escapeHtmlText(method.name)}</strong> — ${Number(method.frequency) || 0} lần${method.note ? `: ${escapeHtmlText(method.note)}` : ''}<div style="font-size:.72rem;color:#64748b;">Bằng chứng: ${escapeHtmlText((method.evidenceIds || []).join(', ') || 'chưa xác định')}</div></li>`).join('')}</ul>`
+    examTrendState.rendered = data;
+    const methods = (item, topicIndex) => (item.frequentMethods || []).length
+      ? `<ul style="margin:7px 0 0;padding-left:20px;">${item.frequentMethods.map((method, methodIndex) => `<li><button type="button" class="trend-practice-button" data-topic-index="${topicIndex}" data-method-index="${methodIndex}" ${method.evidenceIds?.length ? '' : 'disabled'}><strong>${escapeHtmlText(method.name)}</strong><span>📚 Luyện ${(method.evidenceIds || []).length} câu</span></button>${method.note ? `: ${escapeHtmlText(method.note)}` : ''}<div style="font-size:.72rem;color:#64748b;">Bằng chứng: ${escapeHtmlText((method.evidenceIds || []).join(', ') || 'chưa xác định')}</div></li>`).join('')}</ul>`
       : '<p style="color:#64748b;margin:7px 0 0;">Chưa đủ dữ liệu để xác định phương pháp lặp lại.</p>';
     target.innerHTML = `
       <article style="border:1px solid #cbd5e1;border-radius:10px;background:white;padding:14px;">
@@ -2606,11 +2782,11 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
         </div>
         <div style="margin:11px 0;padding:10px;background:#eff6ff;border-radius:7px;color:#1e3a8a;font-size:.82rem;"><strong>Phạm vi dữ liệu:</strong> ${Number(evidence.examCount) || 0} đề · ${Number(evidence.questionCount) || 0} câu · ${Number(evidence.unitCount) || 0} đơn vị · ${escapeHtmlText((evidence.years || []).join(', ') || data.settings?.year || '')}${Number(evidence.otherQuestionCount) ? ` · ${Number(evidence.otherQuestionCount)} câu ngoài 6 tiêu chí` : ''}${evidence.mergedProvinceHistory ? `<div style="margin-top:5px;"><strong>Địa giới hiện hành:</strong> ${escapeHtmlText((evidence.historyMembers || []).join(' + '))} → ${escapeHtmlText(evidence.historyCurrentProvince || '')}</div>` : ''}</div>
         <p style="white-space:pre-wrap;line-height:1.55;">${escapeHtmlText(report.executiveSummary || '')}</p>
-        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:9px;">${(report.topicTrends || []).map(item => `
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:9px;">${(report.topicTrends || []).map((item, topicIndex) => `
           <section style="border:1px solid #e2e8f0;border-radius:8px;padding:10px;background:#f8fafc;">
             <div style="display:flex;justify-content:space-between;gap:7px;"><strong>${escapeHtmlText(item.topic)}</strong><span style="white-space:nowrap;color:#0369a1;font-weight:800;">${Number(item.questionCount) || 0} câu · ${Number(item.prevalencePercent) || 0}%</span></div>
             <div style="font-size:.76rem;color:#7c3aed;margin:4px 0;">${escapeHtmlText(item.trendLevel || '')}</div>
-            <div style="white-space:pre-wrap;font-size:.84rem;line-height:1.45;">${escapeHtmlText(item.observations || '')}</div>${methods(item)}
+            <div style="white-space:pre-wrap;font-size:.84rem;line-height:1.45;">${escapeHtmlText(item.observations || '')}</div>${methods(item, topicIndex)}
           </section>`).join('')}</div>
         ${(report.recurringPatterns || []).length ? `<details open style="margin-top:12px;"><summary style="font-weight:800;cursor:pointer;">Các mô-típ lặp lại nổi bật</summary><ul>${report.recurringPatterns.map(item => `<li><strong>${escapeHtmlText(item.pattern)}</strong> (${Number(item.frequency) || 0} lần): ${escapeHtmlText(item.analysis || '')}<div style="font-size:.72rem;color:#64748b;">${escapeHtmlText((item.evidenceIds || []).join(', '))}</div></li>`).join('')}</ul></details>` : ''}
         ${(report.unitInsights || []).length ? `<details style="margin-top:10px;"><summary style="font-weight:800;cursor:pointer;">Đặc trưng theo đơn vị</summary>${report.unitInsights.map(item => `<p><strong>${escapeHtmlText(item.unit)}:</strong> ${escapeHtmlText((item.dominantTopics || []).join(', '))}. ${escapeHtmlText(item.note || '')}</p>`).join('')}</details>` : ''}
@@ -2618,6 +2794,9 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
         ${(report.limitations || []).length ? `<details style="margin-top:10px;"><summary style="font-weight:700;cursor:pointer;">Giới hạn dữ liệu</summary><ul>${report.limitations.map(item => `<li>${escapeHtmlText(item)}</li>`).join('')}</ul></details>` : ''}
         ${report.conclusion ? `<p style="margin-bottom:0;white-space:pre-wrap;"><strong>Kết luận:</strong> ${escapeHtmlText(report.conclusion)}</p>` : ''}
       </article>`;
+    target.querySelectorAll('.trend-practice-button').forEach(button => {
+      button.onclick = () => window.openTrendPractice(button.dataset.topicIndex, button.dataset.methodIndex);
+    });
   }
 
   window.runExamTrendAnalysis = async function() {
@@ -4133,6 +4312,7 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
     const section = document.createElement('section');
     section.className = 'db-exam-day';
     section.dataset.examKey = exam.examKey || exam.id || '';
+    section.dataset.dayNumber = String(Number(exam.dayNumber) || 1);
     section.style.cssText = 'border-top:3px solid #0ea5e9;margin-top:20px;padding-top:14px;';
     const meta = document.createElement('div');
     meta.className = 'exam-day-header';
@@ -4341,6 +4521,7 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
       if (e.key === 'Escape') {
         window.closeDataHubModal();
         if (typeof window.closeSubmissionModal === 'function') window.closeSubmissionModal();
+        if (typeof window.closeTrendPractice === 'function') window.closeTrendPractice();
       }
     });
   }
