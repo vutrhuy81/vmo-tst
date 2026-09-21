@@ -96,13 +96,18 @@ function cleanExamTrendReport(payload) {
       questionCount: cleanNumber(evidence.questionCount, 0, 0, 10000),
       otherQuestionCount: cleanNumber(evidence.otherQuestionCount, 0, 0, 10000),
       unitCount: cleanNumber(evidence.unitCount, 0, 0, 1000),
+      historyCurrentProvince: cleanText(evidence.historyCurrentProvince, 120),
+      historyMembers: cleanStringList(evidence.historyMembers, 5, 120),
+      mergedProvinceHistory: evidence.mergedProvinceHistory === true,
       sources: (Array.isArray(evidence.sources) ? evidence.sources : []).slice(0, 80).map(item => ({
-        year: cleanText(item?.year, 20), unit: cleanText(item?.unit, 120), title: cleanText(item?.title, 300),
+        year: cleanText(item?.year, 20), unit: cleanText(item?.unit, 120),
+        historicalUnit: cleanText(item?.historicalUnit, 120), title: cleanText(item?.title, 300),
         source: cleanText(item?.source, 1000), questionCount: cleanNumber(item?.questionCount, 0, 0, 100)
       })),
       samples: (Array.isArray(evidence.samples) ? evidence.samples : []).slice(0, 160).map(item => ({
         sourceId: cleanText(item?.sourceId, 180), year: cleanText(item?.year, 20),
-        unit: cleanText(item?.unit, 120), title: cleanText(item?.title, 300),
+        unit: cleanText(item?.unit, 120), historicalUnit: cleanText(item?.historicalUnit, 120),
+        title: cleanText(item?.title, 300),
         questionNumber: cleanNumber(item?.questionNumber, 0, 0, 100), rawTopic: cleanText(item?.rawTopic, 120),
         criterion: cleanText(item?.criterion, 120), excerpt: cleanText(item?.excerpt, 600)
       })).filter(item => item.sourceId)
@@ -1078,6 +1083,8 @@ export default async function handler(req, res) {
           verificationScore: cleanNumber(payload.predictionInfo?.verificationScore, 0, 0, 5),
           verificationSummary: cleanText(payload.predictionInfo?.verificationSummary, 1000),
           verified: payload.predictionInfo?.verified === true,
+          historyCurrentProvince: cleanText(payload.predictionInfo?.historyCurrentProvince, 120),
+          historyMembers: cleanStringList(payload.predictionInfo?.historyMembers, 5, 120),
           criticalIssues: (Array.isArray(payload.predictionInfo?.criticalIssues) ? payload.predictionInfo.criticalIssues : [])
             .slice(0, 12).map(issue => cleanText(issue, 3000)).filter(Boolean)
         } : null,

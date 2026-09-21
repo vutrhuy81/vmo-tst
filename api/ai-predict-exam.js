@@ -86,6 +86,7 @@ export default async function handler(req, res) {
 Đơn vị: ${settings.type === 'vmo' ? 'Bộ Giáo dục và Đào tạo – tuyển chọn đội tuyển Việt Nam dự IMO' : settings.province}.
 Năm học dự đoán: ${settings.year}. Ngày thi thứ ${settings.dayNumber}. Số năm tham chiếu do admin chọn: ${settings.lookback}.
 Số liệu thực có: ${evidence.ownExamCount} đề của đúng đơn vị trong ${evidence.years.length} năm (${evidence.years.join(', ') || 'không có'}); ${evidence.peerExamCount} đề TST cùng giai đoạn ${evidence.trendYear} của các đơn vị khác.
+Phạm vi lịch sử theo địa giới hiện hành: ${evidence.mergedProvinceHistory ? `${evidence.historyMembers.join(' + ')} được hợp nhất vào ${evidence.historyCurrentProvince}` : evidence.historyCurrentProvince || 'không áp dụng'}.
 Thống kê chuyên đề đúng đơn vị: ${JSON.stringify(evidence.ownTopics)}.
 Xu hướng TST cùng năm tham chiếu: ${JSON.stringify(evidence.peerTopics)}.
 Nguồn đúng đơn vị: ${JSON.stringify(evidence.sources)}.
@@ -126,6 +127,8 @@ Hãy viết đúng ${slots.length} BÀI TOÁN MỚI, có giả thiết đủ, k�
       reasoning: text(raw.reasoning, 2000), questions,
       evidence: { requestedYears: evidence.requestedYears, years: evidence.years, ownExamCount: evidence.ownExamCount,
         peerExamCount: evidence.peerExamCount, trendYear: evidence.trendYear, sources: evidence.sources,
+        historyCurrentProvince: evidence.historyCurrentProvince, historyMembers: evidence.historyMembers,
+        mergedProvinceHistory: evidence.mergedProvinceHistory,
         adminNotes: Boolean(historicalNotes) }, model: generated.model,
       quality: { verified, score: checked.data.score, summary: text(checked.data.summary, 3000),
         criticalIssues: (checked.data.criticalIssues || []).slice(0, 12).map(issue => text(issue, 3000)),

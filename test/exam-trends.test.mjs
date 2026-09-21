@@ -28,6 +28,10 @@ const targetSettings = trendAnalysisSettings({
 });
 const targetEvidence = selectTrendEvidence(targetSettings);
 assert.ok(targetEvidence.examCount >= 5, 'Có dữ liệu lịch sử Đà Nẵng để phân tích');
+assert.deepEqual(targetEvidence.historyMembers, ['Quảng Nam', 'Đà Nẵng']);
+assert.deepEqual(new Set(targetEvidence.sources.map(item => item.historicalUnit)), new Set(['ĐÀ NẴNG', 'QUẢNG NAM']),
+  'Phân tích Đà Nẵng phải bao gồm dữ liệu lịch sử Quảng Nam');
+assert.equal(targetEvidence.unitCount, 1, 'Đà Nẵng và Quảng Nam phải được quy về một đơn vị hiện hành');
 assert.ok(targetEvidence.years.every(year => Number(year.slice(0, 4)) < 2026 && Number(year.slice(0, 4)) >= 2016));
 assert.throws(() => trendAnalysisSettings({ mode: 'target', year: '2026-2027', targetType: 'tst', lookback: 10 }));
 assert.throws(() => trendAnalysisSettings({ mode: 'year', year: '2026-2030' }));
