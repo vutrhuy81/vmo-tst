@@ -2,6 +2,7 @@ import { ObjectId } from 'mongodb';
 import { getDb } from '../lib/db.js';
 import { getSession } from '../lib/session.js';
 import { deleteAiGuideRecord, learningScope, recordActivity, summarizeLearning } from '../lib/learning.js';
+import { buildSubmissionVerificationUpdate } from '../lib/submission-verification.js';
 
 const ALLOWED_RESOURCES = new Set(['documents', 'exams', 'exam_catalog', 'exam_image', 'content_sets', 'problems', 'content_revisions', 'submissions', 'submission_image', 'events', 'activity_feed', 'learning_overview', 'exam_trend_reports']);
 const CONTENT_TYPES = new Set(['specialty_chapter', 'mock_exam', 'tst_exam', 'regional_exam']);
@@ -432,6 +433,8 @@ export default async function handler(req, res) {
           }
           if (req.query?.evaluation === 'yes') filter.evaluation = { $type: 'object' };
           if (req.query?.evaluation === 'no') filter.evaluation = null;
+          if (req.query?.adminVerified === 'yes') filter.adminVerified = true;
+          if (req.query?.adminVerified === 'no') filter.adminVerified = { $ne: true };
 
           const from = req.query?.dateFrom ? new Date(cleanText(req.query.dateFrom, 40)) : null;
           const to = req.query?.dateTo ? new Date(cleanText(req.query.dateTo, 40)) : null;
@@ -755,6 +758,7 @@ export default async function handler(req, res) {
         db.collection('problems').createIndex({ contentKey: 1 }, { unique: true }),
         db.collection('problems').createIndex({ setId: 1, order: 1 }),
         db.collection('submissions').createIndex({ userId: 1, problemKey: 1, createdAt: -1 }),
+        db.collection('submissions').createIndex({ problemKey: 1, adminVerified: 1, updatedAt: -1 }),
         db.collection('submission_images').createIndex({ submissionId: 1 }, { unique: true })
       ]);
 
@@ -1257,6 +1261,35 @@ export default async function handler(req, res) {
       await db.collection('submission_images').deleteMany({ submissionId: id });
       await recordActivity(db, session, 'submission.deleted', { submissionId: id });
       return res.status(200).json({ success: true, deletedId: String(id) });
+    }
+
+    if (action === 'verify_submission') {
+      const id = objectId(payload.id);
+      if (!id) return res.status(400).json({ success: false, error: 'ID bài nộp không hợp lệ' });
+      const submission = await db.collection('submissions').findOne({ _id: id });
+      let change;
+      try {
+        change = buildSubmissionVerificationUpdate(session, submission, {
+          verified: payload.verified,
+          note: cleanText(payload.note, 1000)
+        }, now);
+      } catch (error) {
+        return res.status(error.status || 400).json({ success: false, error: error.message });
+      }
+      const updated = await db.collection('submissions').findOneAndUpdate(
+        { _id: id }, change.update, { returnDocument: 'after' }
+      );
+      if (!updated) return res.status(404).json({ success: false, error: 'Không tìm thấy bài nộp' });
+      await db.collection('submissions').createIndex({ problemKey: 1, adminVerified: 1, updatedAt: -1 });
+      await recordActivity(db, session,
+        change.verified ? 'submission.verified' : 'submission.verification_revoked', {
+          submissionId: id,
+          problemKey: updated.problemKey,
+          problemTitle: updated.problemSnapshot?.title || updated.problemTitle,
+          setTitle: updated.problemSnapshot?.setTitle,
+          ownerUsername: updated.username
+        });
+      return res.status(200).json({ success: true, item: updated });
     }
 
     const deletions = { delete_document: 'documents', delete_event: 'events' };
