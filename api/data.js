@@ -2,7 +2,7 @@ import { ObjectId } from 'mongodb';
 import { getDb } from '../lib/db.js';
 import { getSession } from '../lib/session.js';
 import { deleteAiGuideRecord, learningScope, recordActivity, summarizeLearning } from '../lib/learning.js';
-import { buildSubmissionVerificationUpdate } from '../lib/submission-verification.js';
+import { buildSubmissionContentUpdate, buildSubmissionVerificationUpdate } from '../lib/submission-verification.js';
 
 const ALLOWED_RESOURCES = new Set(['documents', 'exams', 'exam_catalog', 'exam_image', 'content_sets', 'problems', 'content_revisions', 'submissions', 'submission_image', 'events', 'activity_feed', 'learning_overview', 'exam_trend_reports']);
 const CONTENT_TYPES = new Set(['specialty_chapter', 'mock_exam', 'tst_exam', 'regional_exam']);
@@ -1261,6 +1261,36 @@ export default async function handler(req, res) {
       await db.collection('submission_images').deleteMany({ submissionId: id });
       await recordActivity(db, session, 'submission.deleted', { submissionId: id });
       return res.status(200).json({ success: true, deletedId: String(id) });
+    }
+
+    if (action === 'update_submission_content') {
+      const id = objectId(payload.id);
+      if (!id) return res.status(400).json({ success: false, error: 'ID bài nộp không hợp lệ' });
+      const submission = await db.collection('submissions').findOne({ _id: id });
+      let change;
+      try {
+        change = buildSubmissionContentUpdate(session, submission, {
+          solutionContent: cleanText(payload.solutionContent, 50_000)
+        }, now);
+      } catch (error) {
+        return res.status(error.status || 400).json({ success: false, error: error.message });
+      }
+      const updated = await db.collection('submissions').findOneAndUpdate(
+        { _id: id }, change.update, { returnDocument: 'after' }
+      );
+      if (!updated) return res.status(404).json({ success: false, error: 'Không tìm thấy bài nộp' });
+      await recordActivity(db, session, 'submission.content_updated', {
+        submissionId: id,
+        problemKey: updated.problemKey,
+        problemTitle: updated.problemSnapshot?.title || updated.problemTitle,
+        setTitle: updated.problemSnapshot?.setTitle,
+        ownerUsername: updated.username
+      });
+      return res.status(200).json({
+        success: true,
+        item: updated,
+        verificationRevoked: change.revokedVerification
+      });
     }
 
     if (action === 'verify_submission') {
