@@ -379,6 +379,7 @@ export async function getSubmissionsPage(filters = {}) {
     username: filters.username,
     sourceGroup: filters.sourceGroup,
     evaluation: filters.evaluation,
+    adminVerified: filters.adminVerified,
     dateFrom: filters.dateFrom,
     dateTo: filters.dateTo
   });
@@ -416,6 +417,21 @@ export async function deleteSubmission(id) {
     throw createServiceError('Thiếu mã bài nộp', 0, 'VALIDATION_ERROR');
   }
   return mutate('delete_submission', { id: cleanId });
+}
+
+export async function verifySubmission(id, verified, note = '') {
+  const cleanId = normalizeId(id).trim();
+  if (!/^[a-f0-9]{24}$/i.test(cleanId)) {
+    throw createServiceError('ID bài nộp không hợp lệ', 0, 'VALIDATION_ERROR');
+  }
+  if (typeof verified !== 'boolean') {
+    throw createServiceError('Trạng thái xác minh không hợp lệ', 0, 'VALIDATION_ERROR');
+  }
+  return normalize(await mutate('verify_submission', {
+    id: cleanId,
+    verified,
+    note: String(note || '').trim().slice(0, 1000)
+  }));
 }
 
 export async function deleteAiGuide(id) {
@@ -473,6 +489,7 @@ const VMODataService = Object.freeze({
   getExamTrendReports,
   saveExamTrendReport,
   deleteSubmission,
+  verifySubmission,
   deleteAiGuide,
   getEvents,
   addEvent,

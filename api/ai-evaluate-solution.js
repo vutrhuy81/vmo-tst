@@ -103,7 +103,7 @@ async function trustedReference(problemRef) {
   }
   const submission = await db.collection('submissions').findOne(
     { problemKey: problemRef, adminVerified: true, solutionContent: { $type: 'string', $ne: '' } },
-    { sort: { updatedAt: -1, createdAt: -1 }, projection: { solutionContent: 1 } }
+    { sort: { adminVerifiedAt: -1, updatedAt: -1, createdAt: -1 }, projection: { solutionContent: 1 } }
   );
   return submission
     ? { content: text(submission.solutionContent, 100_000), origin: 'admin_verified_submission' }

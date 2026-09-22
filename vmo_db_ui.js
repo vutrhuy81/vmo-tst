@@ -1903,6 +1903,9 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
           const preview = s.solutionContent ? s.solutionContent.slice(0, 100) + '...' : (s.hasImage ? '📷 (Bài nộp có ảnh chụp viết tay)' : '');
           const scoreBadge = s.score ? `<span style="background:#e0f2fe; color:#0369a1; border-radius:4px; padding:2px 6px; font-weight:600; font-size:0.75rem;">${s.score}</span>` : '';
           const verdictLabel = s.verdictLabel || (s.evaluation && s.evaluation.verdictLabel) || (s.status === 'submitted' ? 'Đã nộp' : s.status);
+          const verifiedBadge = s.adminVerified === true
+            ? `<span title="Được xác minh bởi ${escapeHtmlText(s.adminVerifiedBy || 'admin')}" style="background:#dcfce7;color:#166534;border:1px solid #86efac;border-radius:4px;padding:2px 6px;font-weight:700;font-size:.72rem;">✅ Admin đã xác minh</span>`
+            : '';
           const hasEvalBtn = s.evaluation ? `
             <button type="button" onclick="viewSubEvaluationDetail(${idx})" style="background:#eef2ff; border:1px solid #c7d2fe; color:#4338ca; border-radius:4px; padding:2px 8px; font-size:0.75rem; cursor:pointer; font-weight:600; margin-left:6px;">
               👁️ Xem nhận xét AI
@@ -1920,6 +1923,7 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
                 <span>#${subs.length - idx} · ${dateStr}</span>
                 <div style="display:flex; align-items:center;">
                   ${scoreBadge}
+                  ${verifiedBadge}
                   <span style="color:#0284c7; font-size:0.78rem; margin-left:6px;">${verdictLabel}</span>
                   ${hasEvalBtn}
                   ${imageBtn}
@@ -2470,6 +2474,9 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
       <select id="hubSubEvaluation" style="min-width:0;padding:7px;border:1px solid #cbd5e1;border-radius:6px;">
         <option value="">Mọi trạng thái AI</option><option value="yes">Có đánh giá AI</option><option value="no">Chưa đánh giá AI</option>
       </select>
+      ${isAdmin ? `<select id="hubSubVerified" style="min-width:0;padding:7px;border:1px solid #cbd5e1;border-radius:6px;">
+        <option value="">Mọi trạng thái xác minh</option><option value="yes">Admin đã xác minh</option><option value="no">Chưa xác minh</option>
+      </select>` : '<span></span>'}
       <input id="hubSubDateFrom" type="date" title="Từ ngày" style="min-width:0;padding:7px;border:1px solid #cbd5e1;border-radius:6px;">
       <button type="button" onclick="applySubmissionFilters()" style="padding:7px 12px;border:0;border-radius:6px;background:#0369a1;color:white;font-weight:700;cursor:pointer;">Lọc</button>
       <input id="hubSubDateTo" type="date" title="Đến ngày" style="min-width:0;padding:7px;border:1px solid #cbd5e1;border-radius:6px;">
@@ -2497,6 +2504,7 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
     login: 'Đăng nhập', logout: 'Đăng xuất',
     'solution.saved': 'Lưu bài giải', 'evaluation.saved': 'Lưu AI đánh giá',
     'guide.saved': 'Lưu AI hướng dẫn giải', 'guide.deleted': 'Xóa AI hướng dẫn giải', 'submission.deleted': 'Xóa bài nộp',
+    'submission.verified': 'Admin xác minh bài nộp', 'submission.verification_revoked': 'Admin hủy xác minh bài nộp',
     'account.created': 'Tạo tài khoản', 'account.updated': 'Cập nhật tài khoản', 'account.deleted': 'Xóa tài khoản',
     'document.added': 'Thêm tài liệu', 'document.deleted': 'Xóa tài liệu',
     'exam.added': 'Thêm đề thi', 'exam.image_saved': 'Lưu ảnh đề thi', 'exam.deleted': 'Xóa đề thi',
@@ -3269,6 +3277,7 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
       username: document.getElementById('hubSubUsername')?.value?.trim() || '',
       sourceGroup: document.getElementById('hubSubSource')?.value || '',
       evaluation: document.getElementById('hubSubEvaluation')?.value || '',
+      adminVerified: document.getElementById('hubSubVerified')?.value || '',
       dateFrom: document.getElementById('hubSubDateFrom')?.value || '',
       dateTo: document.getElementById('hubSubDateTo')?.value || ''
     };
@@ -3280,7 +3289,7 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
   };
 
   window.resetSubmissionFilters = function() {
-    ['hubSubSearch', 'hubSubUsername', 'hubSubSource', 'hubSubEvaluation', 'hubSubDateFrom', 'hubSubDateTo']
+    ['hubSubSearch', 'hubSubUsername', 'hubSubSource', 'hubSubEvaluation', 'hubSubVerified', 'hubSubDateFrom', 'hubSubDateTo']
       .forEach(id => {
         const field = document.getElementById(id);
         if (field) field.value = '';
@@ -3333,6 +3342,12 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
           const setTitle = snapshot.setTitle || s.setTitle || '';
           const problemTitle = snapshot.title || s.problemTitle || s.problemKey || s.problemId || 'Bài toán VMO';
           const score = s.score || s.evaluation?.estimatedScore || '';
+          const submissionId = String(s.id || s._id || '');
+          const verified = s.adminVerified === true;
+          const verifiedDate = s.adminVerifiedAt ? new Date(s.adminVerifiedAt).toLocaleString('vi-VN') : '';
+          const verificationBadge = verified
+            ? `<span style="display:inline-flex;align-items:center;gap:4px;background:#dcfce7;color:#166534;border:1px solid #86efac;border-radius:999px;padding:3px 8px;font-size:.72rem;font-weight:800;">✅ Admin đã xác minh</span>`
+            : `<span style="display:inline-flex;align-items:center;gap:4px;background:#f1f5f9;color:#64748b;border:1px solid #cbd5e1;border-radius:999px;padding:3px 8px;font-size:.72rem;font-weight:700;">⏳ Chưa xác minh</span>`;
           const evaluationBtn = s.evaluation ? `
             <button type="button" onclick="viewSubEvaluationDetail(${idx})" style="background:#eef2ff; border:1px solid #c7d2fe; color:#4338ca; border-radius:4px; padding:5px 9px; font-size:0.75rem; cursor:pointer; font-weight:600;">
               👁️ Xem nhận xét AI
@@ -3344,8 +3359,13 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
             </button>
           ` : '';
           const deleteBtn = isCurrentUserAdmin() ? `
-            <button type="button" onclick="deleteSubmissionItem('${s.id || s._id}')" style="background:#fff1f2; border:1px solid #fecdd3; color:#be123c; border-radius:4px; padding:5px 9px; font-size:0.75rem; cursor:pointer; font-weight:700;">
+            <button type="button" onclick="deleteSubmissionItem('${submissionId}')" style="background:#fff1f2; border:1px solid #fecdd3; color:#be123c; border-radius:4px; padding:5px 9px; font-size:0.75rem; cursor:pointer; font-weight:700;">
               🗑️ Xóa bài nộp
+            </button>
+          ` : '';
+          const verificationBtn = isCurrentUserAdmin() && /^[a-f\d]{24}$/i.test(submissionId) ? `
+            <button type="button" onclick="setSubmissionVerification('${submissionId}', ${verified ? 'false' : 'true'})" ${!verified && !String(s.solutionContent || '').trim() ? 'disabled title="Bài chỉ có ảnh, chưa có lời giải văn bản để AI đối chiếu"' : ''} style="background:${verified ? '#fff7ed' : '#ecfdf5'};border:1px solid ${verified ? '#fdba74' : '#86efac'};color:${verified ? '#c2410c' : '#166534'};border-radius:4px;padding:5px 9px;font-size:.75rem;cursor:pointer;font-weight:700;">
+              ${verified ? '↩️ Hủy xác minh' : '✅ Xác minh bài nộp'}
             </button>
           ` : '';
           return `
@@ -3360,11 +3380,13 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
                 📅 Thời gian: ${escapeHtmlText(dateStr)} | 👤 Tài khoản: ${escapeHtmlText(s.username || s.authorEmail || s.userId || 'Ẩn danh')}
                 ${score ? ` | 🎯 Điểm AI: <strong>${escapeHtmlText(score)}</strong>` : ''}
               </div>
+              <div style="display:flex;align-items:center;gap:7px;flex-wrap:wrap;margin-bottom:6px;">${verificationBadge}${verified ? `<span style="font-size:.72rem;color:#64748b;">Bởi ${escapeHtmlText(s.adminVerifiedBy || 'admin')}${verifiedDate ? ` · ${escapeHtmlText(verifiedDate)}` : ''}${s.adminVerificationNote ? ` · ${escapeHtmlText(s.adminVerificationNote)}` : ''}</span>` : ''}</div>
               <div data-no-i18n="true" style="background:#ffffff; border:1px solid #e2e8f0; border-radius:6px; padding:8px; font-family:monospace; font-size:0.85rem; color:#334155; white-space:pre-wrap;">${escapeHtmlText(preview)}</div>
-              ${(evaluationBtn || imageBtn || deleteBtn) ? `
+              ${(evaluationBtn || imageBtn || verificationBtn || deleteBtn) ? `
                 <div style="display:flex; flex-wrap:wrap; gap:6px; margin-top:8px;">
                   ${evaluationBtn}
                   ${imageBtn}
+                  ${verificationBtn}
                   ${deleteBtn}
                 </div>
               ` : ''}
@@ -3398,6 +3420,26 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
       await loadAllSubmissions();
     } catch (err) {
       showToast('Không thể xóa bài nộp: ' + (err?.message || 'Lỗi không xác định'), false);
+    }
+  };
+
+  window.setSubmissionVerification = async function(id, verified) {
+    if (!requireAdminUiAction()) return;
+    const actionLabel = verified ? 'xác minh' : 'hủy xác minh';
+    const warning = verified
+      ? 'Sau khi xác minh, lời giải này có thể được dùng làm nguồn tham khảo tin cậy cho AI Hướng dẫn giải và AI Đánh giá bài. Chỉ tiếp tục nếu đã kiểm tra đầy đủ tính đúng đắn toán học.'
+      : 'Sau khi hủy xác minh, lời giải này sẽ không còn được dùng làm nguồn tham khảo tin cậy cho các pipeline AI.';
+    if (!window.confirm(`${warning}\n\nTiếp tục ${actionLabel} bài nộp này?`)) return;
+    const note = window.prompt(verified
+      ? 'Ghi chú xác minh (khuyến nghị nêu phạm vi đã kiểm tra):'
+      : 'Lý do hủy xác minh:', '') ?? null;
+    if (note === null) return;
+    try {
+      await window.VMODataService.verifySubmission(id, verified, note);
+      showToast(verified ? 'Đã xác minh bài nộp. Lời giải có thể được AI dùng làm nguồn tin cậy.' : 'Đã hủy xác minh bài nộp.', true);
+      await loadAllSubmissions();
+    } catch (err) {
+      showToast(`Không thể ${actionLabel} bài nộp: ${err?.message || 'Lỗi không xác định'}`, false);
     }
   };
 
