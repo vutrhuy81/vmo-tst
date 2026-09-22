@@ -729,6 +729,20 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
       }
 
       const evalData = json.data;
+      const verifiedTranscription = String(evalData.studentWorkTranscription || '').trim();
+      if (verifiedTranscription) {
+        const solutionTextArea = document.getElementById('subSolutionText');
+        if (solutionTextArea && !solutionTextArea.value.trim()) {
+          solutionTextArea.value = verifiedTranscription;
+        }
+        if (image) {
+          window.currentUploadedImageOcrResult = {
+            img: image,
+            latexText: verifiedTranscription,
+            summary: 'Bản chép bài làm đã được Gemini đọc và GPT dùng để kiểm định'
+          };
+        }
+      }
       window.currentEvaluationResult = evalData;
       if (loadingBox) loadingBox.style.display = 'none';
       displayEvaluationResult(evalData);
@@ -1501,8 +1515,14 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
     const submitBtn = document.getElementById('btnConfirmSubmit');
     if (submitBtn) {
       submitBtn.onclick = async () => {
-        const text = (document.getElementById('subSolutionText')?.value || '').trim();
+        const textArea = document.getElementById('subSolutionText');
+        const typedText = (textArea?.value || '').trim();
+        const verifiedTranscription = String(window.currentEvaluationResult?.studentWorkTranscription || '').trim();
+        const previewTranscription = String(window.currentUploadedImageOcrResult?.latexText || '').trim();
+        const text = typedText || verifiedTranscription || previewTranscription;
         const hasImg = Boolean(window.currentUploadedImage);
+
+        if (!typedText && textArea && text) textArea.value = text;
 
         if (!text && !hasImg) {
           alert(isEn ? 'Please upload a handwritten solution image or enter solution text!' : 'Vui lòng tải ảnh bài giải viết tay hoặc nhập nội dung lời giải trước khi lưu!');
@@ -2505,6 +2525,7 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
     'solution.saved': 'Lưu bài giải', 'evaluation.saved': 'Lưu AI đánh giá',
     'guide.saved': 'Lưu AI hướng dẫn giải', 'guide.deleted': 'Xóa AI hướng dẫn giải', 'submission.deleted': 'Xóa bài nộp',
     'submission.verified': 'Admin xác minh bài nộp', 'submission.verification_revoked': 'Admin hủy xác minh bài nộp',
+    'submission.content_updated': 'Admin cập nhật nội dung MathJax',
     'account.created': 'Tạo tài khoản', 'account.updated': 'Cập nhật tài khoản', 'account.deleted': 'Xóa tài khoản',
     'document.added': 'Thêm tài liệu', 'document.deleted': 'Xóa tài liệu',
     'exam.added': 'Thêm đề thi', 'exam.image_saved': 'Lưu ảnh đề thi', 'exam.deleted': 'Xóa đề thi',
@@ -3344,6 +3365,7 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
           const score = s.score || s.evaluation?.estimatedScore || '';
           const submissionId = String(s.id || s._id || '');
           const verified = s.adminVerified === true;
+          const hasSolutionText = Boolean(String(s.solutionContent || '').trim());
           const verifiedDate = s.adminVerifiedAt ? new Date(s.adminVerifiedAt).toLocaleString('vi-VN') : '';
           const verificationBadge = verified
             ? `<span style="display:inline-flex;align-items:center;gap:4px;background:#dcfce7;color:#166534;border:1px solid #86efac;border-radius:999px;padding:3px 8px;font-size:.72rem;font-weight:800;">✅ Admin đã xác minh</span>`
@@ -3363,9 +3385,14 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
               🗑️ Xóa bài nộp
             </button>
           ` : '';
+          const editContentBtn = isCurrentUserAdmin() && /^[a-f\d]{24}$/i.test(submissionId) ? `
+            <button type="button" onclick="openSubmissionContentEditor('${submissionId}', ${idx})" style="background:#f5f3ff;border:1px solid #c4b5fd;color:#6d28d9;border-radius:4px;padding:5px 9px;font-size:.75rem;cursor:pointer;font-weight:700;">
+              ✏️ Sửa MathJax
+            </button>
+          ` : '';
           const verificationBtn = isCurrentUserAdmin() && /^[a-f\d]{24}$/i.test(submissionId) ? `
-            <button type="button" onclick="setSubmissionVerification('${submissionId}', ${verified ? 'false' : 'true'})" ${!verified && !String(s.solutionContent || '').trim() ? 'disabled title="Bài chỉ có ảnh, chưa có lời giải văn bản để AI đối chiếu"' : ''} style="background:${verified ? '#fff7ed' : '#ecfdf5'};border:1px solid ${verified ? '#fdba74' : '#86efac'};color:${verified ? '#c2410c' : '#166534'};border-radius:4px;padding:5px 9px;font-size:.75rem;cursor:pointer;font-weight:700;">
-              ${verified ? '↩️ Hủy xác minh' : '✅ Xác minh bài nộp'}
+            <button type="button" onclick="setSubmissionVerification('${submissionId}', ${verified ? 'false' : 'true'})" ${!verified && !hasSolutionText ? 'disabled title="Bài chỉ có ảnh, chưa có lời giải văn bản để AI đối chiếu"' : ''} style="background:${verified ? '#fff7ed' : '#ecfdf5'};border:1px solid ${verified ? '#fdba74' : (!hasSolutionText ? '#cbd5e1' : '#86efac')};color:${verified ? '#c2410c' : (!hasSolutionText ? '#64748b' : '#166534')};border-radius:4px;padding:5px 9px;font-size:.75rem;cursor:${!verified && !hasSolutionText ? 'not-allowed' : 'pointer'};font-weight:700;opacity:${!verified && !hasSolutionText ? '.72' : '1'};">
+              ${verified ? '↩️ Hủy xác minh' : (hasSolutionText ? '✅ Xác minh bài nộp' : '🔒 Thiếu lời giải văn bản')}
             </button>
           ` : '';
           return `
@@ -3386,6 +3413,7 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
                 <div style="display:flex; flex-wrap:wrap; gap:6px; margin-top:8px;">
                   ${evaluationBtn}
                   ${imageBtn}
+                  ${editContentBtn}
                   ${verificationBtn}
                   ${deleteBtn}
                 </div>
@@ -3440,6 +3468,155 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
       await loadAllSubmissions();
     } catch (err) {
       showToast(`Không thể ${actionLabel} bài nộp: ${err?.message || 'Lỗi không xác định'}`, false);
+    }
+  };
+
+  function ensureSubmissionContentEditorModal() {
+    let modal = document.getElementById('submissionContentEditorModal');
+    if (modal) return modal;
+    modal = document.createElement('div');
+    modal.id = 'submissionContentEditorModal';
+    modal.style.cssText = 'display:none;position:fixed;inset:0;z-index:10060;background:rgba(15,23,42,.68);align-items:center;justify-content:center;padding:18px;';
+    modal.innerHTML = `
+      <div role="dialog" aria-modal="true" aria-labelledby="submissionContentEditorTitle" style="width:min(960px,96vw);max-height:94vh;overflow:auto;background:#fff;border-radius:12px;box-shadow:0 24px 70px rgba(15,23,42,.38);">
+        <div style="position:sticky;top:0;z-index:2;display:flex;justify-content:space-between;align-items:center;gap:12px;padding:14px 18px;background:#0f766e;color:#fff;border-radius:12px 12px 0 0;">
+          <div>
+            <div id="submissionContentEditorTitle" style="font-size:1.05rem;font-weight:800;">✏️ Chỉnh sửa lời giải MathJax</div>
+            <div id="submissionContentEditorMeta" style="font-size:.78rem;opacity:.9;margin-top:2px;"></div>
+          </div>
+          <button type="button" onclick="closeSubmissionContentEditor()" aria-label="Đóng" style="background:transparent;border:0;color:#fff;font-size:1.4rem;cursor:pointer;">✕</button>
+        </div>
+        <div style="padding:16px 18px;">
+          <div id="submissionContentEditorWarning" style="display:none;margin-bottom:10px;padding:9px 11px;border:1px solid #fdba74;border-radius:7px;background:#fff7ed;color:#9a3412;font-size:.82rem;"></div>
+          <label for="submissionContentEditorText" style="display:block;margin-bottom:6px;font-weight:750;color:#1e293b;">Nội dung lời giải (văn bản/LaTeX MathJax)</label>
+          <textarea id="submissionContentEditorText" rows="14" maxlength="50000" spellcheck="false" style="width:100%;box-sizing:border-box;min-height:280px;padding:11px;border:1.5px solid #94a3b8;border-radius:8px;resize:vertical;font:14px/1.55 ui-monospace,SFMono-Regular,Menlo,monospace;"></textarea>
+          <div style="display:flex;gap:8px;flex-wrap:wrap;margin:10px 0;">
+            <button id="submissionContentEditorOcr" type="button" onclick="ocrStoredSubmissionImage()" style="display:none;padding:7px 11px;border:1px solid #67e8f9;border-radius:6px;background:#ecfeff;color:#0e7490;font-weight:700;cursor:pointer;">🔍 OCR lại từ ảnh đã lưu</button>
+            <button type="button" onclick="previewSubmissionContentEditor()" style="padding:7px 11px;border:1px solid #93c5fd;border-radius:6px;background:#eff6ff;color:#1d4ed8;font-weight:700;cursor:pointer;">👁️ Xem trước MathJax</button>
+          </div>
+          <div id="submissionContentEditorPreviewBox" style="display:none;margin-top:10px;padding:12px;border:1px dashed #0284c7;border-radius:8px;background:#f8fafc;">
+            <strong style="display:block;margin-bottom:7px;color:#0369a1;">Bản xem trước sau chỉnh sửa</strong>
+            <div id="submissionContentEditorPreview" style="min-height:48px;padding:10px;background:#fff;border:1px solid #e2e8f0;border-radius:6px;line-height:1.7;overflow:auto;"></div>
+          </div>
+          <div style="display:flex;justify-content:flex-end;gap:8px;margin-top:14px;padding-top:12px;border-top:1px solid #e2e8f0;">
+            <button type="button" onclick="closeSubmissionContentEditor()" style="padding:8px 14px;border:1px solid #cbd5e1;border-radius:6px;background:#fff;cursor:pointer;">Hủy</button>
+            <button id="submissionContentEditorSave" type="button" onclick="saveSubmissionContentEditor()" style="padding:8px 14px;border:0;border-radius:6px;background:#0f766e;color:#fff;font-weight:800;cursor:pointer;">💾 Lưu nội dung</button>
+          </div>
+        </div>
+      </div>`;
+    modal.addEventListener('click', event => {
+      if (event.target === modal) window.closeSubmissionContentEditor();
+    });
+    document.body.appendChild(modal);
+    return modal;
+  }
+
+  window.openSubmissionContentEditor = function(id, index) {
+    if (!requireAdminUiAction()) return;
+    const submission = (window.lastLoadedSubmissions || []).find(item => String(item.id || item._id || '') === String(id))
+      || window.lastLoadedSubmissions?.[index];
+    if (!submission) {
+      showToast('Không tìm thấy bản ghi bài nộp để chỉnh sửa.', false);
+      return;
+    }
+    const modal = ensureSubmissionContentEditorModal();
+    window.editingSubmissionContentRecord = submission;
+    modal.dataset.submissionId = String(id);
+    const title = submission.problemSnapshot?.title || submission.problemTitle || 'Bài toán VMO';
+    const setTitle = submission.problemSnapshot?.setTitle || submission.setTitle || '';
+    document.getElementById('submissionContentEditorMeta').textContent = [title, setTitle, submission.username].filter(Boolean).join(' · ');
+    document.getElementById('submissionContentEditorText').value = String(submission.solutionContent || '');
+    const warning = document.getElementById('submissionContentEditorWarning');
+    warning.style.display = submission.adminVerified === true ? 'block' : 'none';
+    warning.textContent = submission.adminVerified === true
+      ? 'Bài này đang được xác minh. Khi lưu nội dung mới, hệ thống sẽ tự hủy xác minh và yêu cầu admin kiểm tra lại.'
+      : 'Hãy kiểm tra bản xem trước MathJax trước khi lưu. Sau khi có nội dung văn bản, nút “Xác minh bài nộp” sẽ được mở.';
+    const ocrBtn = document.getElementById('submissionContentEditorOcr');
+    ocrBtn.style.display = submission.hasImage ? '' : 'none';
+    document.getElementById('submissionContentEditorPreviewBox').style.display = 'none';
+    modal.style.display = 'flex';
+    document.body.style.overflow = 'hidden';
+  };
+
+  window.closeSubmissionContentEditor = function() {
+    const modal = document.getElementById('submissionContentEditorModal');
+    if (modal) modal.style.display = 'none';
+    window.editingSubmissionContentRecord = null;
+    document.body.style.overflow = document.getElementById('dataHubModal')?.classList.contains('active') ? 'hidden' : '';
+  };
+
+  window.previewSubmissionContentEditor = function() {
+    const text = String(document.getElementById('submissionContentEditorText')?.value || '').trim();
+    if (!text) {
+      showToast('Vui lòng nhập hoặc OCR nội dung lời giải trước khi xem MathJax.', false);
+      return;
+    }
+    const box = document.getElementById('submissionContentEditorPreviewBox');
+    box.style.display = 'block';
+    window.safeRenderMathJaxToElement(document.getElementById('submissionContentEditorPreview'), text);
+  };
+
+  window.ocrStoredSubmissionImage = async function() {
+    const submission = window.editingSubmissionContentRecord;
+    const button = document.getElementById('submissionContentEditorOcr');
+    if (!submission?.hasImage || !window.VMODataService?.getSubmissionImage) {
+      showToast('Bản ghi này không có ảnh bài giải để OCR.', false);
+      return;
+    }
+    const original = button.innerHTML;
+    button.disabled = true;
+    button.innerHTML = '⏳ Đang OCR...';
+    try {
+      const stored = await window.VMODataService.getSubmissionImage(submission.id || submission._id);
+      if (!stored?.image) throw new Error('Không tìm thấy ảnh bài giải đã lưu');
+      const response = await fetch('/api/ai-ocr-math', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          image: stored.image,
+          problemId: submission.problemId || '',
+          problemTitle: submission.problemSnapshot?.title || submission.problemTitle || '',
+          problemContent: submission.problemSnapshot?.content || ''
+        })
+      });
+      const data = await response.json().catch(() => null);
+      if (!response.ok || !data?.success || !data?.data?.latexText) {
+        throw new Error(data?.error || data?.message || 'Không thể OCR ảnh bài giải');
+      }
+      document.getElementById('submissionContentEditorText').value = String(data.data.latexText).trim();
+      window.previewSubmissionContentEditor();
+      showToast('Đã OCR lại ảnh. Admin có thể chỉnh sửa công thức trước khi lưu.', true);
+    } catch (error) {
+      showToast('Không thể OCR ảnh đã lưu: ' + (error?.message || 'Lỗi không xác định'), false);
+    } finally {
+      button.disabled = false;
+      button.innerHTML = original;
+    }
+  };
+
+  window.saveSubmissionContentEditor = async function() {
+    if (!requireAdminUiAction()) return;
+    const modal = document.getElementById('submissionContentEditorModal');
+    const id = String(modal?.dataset.submissionId || '');
+    const content = String(document.getElementById('submissionContentEditorText')?.value || '').trim();
+    if (!content) {
+      showToast('Nội dung lời giải văn bản không được để trống.', false);
+      return;
+    }
+    const button = document.getElementById('submissionContentEditorSave');
+    const original = button.innerHTML;
+    button.disabled = true;
+    button.innerHTML = '⏳ Đang lưu...';
+    try {
+      await window.VMODataService.updateSubmissionContent(id, content);
+      window.closeSubmissionContentEditor();
+      showToast('Đã cập nhật nội dung MathJax. Vui lòng xác minh lại sau khi kiểm tra.', true);
+      await window.loadAllSubmissions();
+    } catch (error) {
+      showToast('Không thể cập nhật nội dung: ' + (error?.message || 'Lỗi không xác định'), false);
+    } finally {
+      button.disabled = false;
+      button.innerHTML = original;
     }
   };
 

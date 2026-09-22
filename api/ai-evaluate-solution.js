@@ -285,6 +285,10 @@ YÊU CẦU KIỂM ĐỊNH
     }
 
     const finalData = normalizeEvaluation(verified.data);
+    // Bảo toàn bản OCR/văn bản thực tế đã được Gemini đọc và GPT dùng để
+    // kiểm định. Frontend lưu trường này vào solutionContent để bài đánh giá
+    // từ ảnh có thể được admin chỉnh sửa, xem MathJax và xác minh về sau.
+    finalData.studentWorkTranscription = text(observedStudentWork, 50_000);
     finalData.quality = {
       verified: true,
       corrected: verified.data.corrected === true,

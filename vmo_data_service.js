@@ -434,6 +434,21 @@ export async function verifySubmission(id, verified, note = '') {
   }));
 }
 
+export async function updateSubmissionContent(id, solutionContent) {
+  const cleanId = normalizeId(id).trim();
+  const cleanContent = String(solutionContent || '').trim();
+  if (!/^[a-f0-9]{24}$/i.test(cleanId)) {
+    throw createServiceError('ID bài nộp không hợp lệ', 0, 'VALIDATION_ERROR');
+  }
+  if (!cleanContent) {
+    throw createServiceError('Nội dung lời giải văn bản không được để trống', 0, 'VALIDATION_ERROR');
+  }
+  return normalize(await mutate('update_submission_content', {
+    id: cleanId,
+    solutionContent: cleanContent.slice(0, 50_000)
+  }));
+}
+
 export async function deleteAiGuide(id) {
   const cleanId = normalizeId(id).trim();
   if (!/^[a-f0-9]{24}$/i.test(cleanId)) {
@@ -490,6 +505,7 @@ const VMODataService = Object.freeze({
   saveExamTrendReport,
   deleteSubmission,
   verifySubmission,
+  updateSubmissionContent,
   deleteAiGuide,
   getEvents,
   addEvent,
