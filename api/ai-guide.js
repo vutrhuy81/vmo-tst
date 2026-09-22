@@ -47,7 +47,7 @@ async function trustedReference(contentKey) {
   if (!problem) return null;
   if (problem.status === 'draft' || problem.allowAiEvaluation === false) return { blocked: true };
   if (problem.referenceSolutionVerified === true && text(problem.referenceSolution, 100000)) return { content: text(problem.referenceSolution, 100000), origin: 'admin_verified_problem_reference' };
-  const submission = await db.collection('submissions').findOne({ problemKey: contentKey, adminVerified: true, solutionContent: { $type: 'string', $ne: '' } }, { sort: { updatedAt: -1, createdAt: -1 }, projection: { solutionContent: 1 } });
+  const submission = await db.collection('submissions').findOne({ problemKey: contentKey, adminVerified: true, solutionContent: { $type: 'string', $ne: '' } }, { sort: { adminVerifiedAt: -1, updatedAt: -1, createdAt: -1 }, projection: { solutionContent: 1 } });
   return submission ? { content: text(submission.solutionContent, 100000), origin: 'admin_verified_submission' } : null;
 }
 
