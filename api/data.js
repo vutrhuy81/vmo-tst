@@ -4,7 +4,7 @@ import { getSession } from '../lib/session.js';
 import { deleteAiGuideRecord, learningScope, recordActivity, summarizeLearning } from '../lib/learning.js';
 import { buildSubmissionContentUpdate, buildSubmissionVerificationUpdate } from '../lib/submission-verification.js';
 
-const ALLOWED_RESOURCES = new Set(['documents', 'exams', 'exam_catalog', 'exam_image', 'content_sets', 'problems', 'content_revisions', 'submissions', 'submission_image', 'events', 'activity_feed', 'learning_overview', 'exam_trend_reports']);
+const ALLOWED_RESOURCES = new Set(['documents', 'exams', 'exam_catalog', 'home_stats', 'exam_image', 'content_sets', 'problems', 'content_revisions', 'submissions', 'submission_image', 'events', 'activity_feed', 'learning_overview', 'exam_trend_reports']);
 const CONTENT_TYPES = new Set(['specialty_chapter', 'mock_exam', 'tst_exam', 'regional_exam']);
 const SOURCE_TYPES = new Set(['specialty_example', 'mock_exam_question', 'tst_question', 'regional_question']);
 const TST_REGIONS = new Set(['BAC', 'TRUNG', 'NAM']);
@@ -313,6 +313,40 @@ export default async function handler(req, res) {
         const items = await db.collection('exam_trend_reports').find({}, { projection: { 'evidence.samples': 0 } })
           .sort({ createdAt: -1, _id: -1 }).limit(100).toArray();
         return res.status(200).json({ success: true, items });
+      }
+
+      if (resource === 'home_stats') {
+        // Chỉ lấy khóa định danh cần thiết để hợp nhất với catalog tĩnh trên
+        // frontend. Không tải problems/nội dung đề, nên request này vẫn nhẹ.
+        const homeExamFilter = {
+          category: { $in: ['tst-national', 'history-dn-qn', 'vmo-mock'] }
+        };
+        const homeExampleFilter = {
+          sourceType: 'specialty_example',
+          referenceSolution: { $type: 'string', $ne: '' }
+        };
+        // Đồng nhất với catalog: admin thấy toàn bộ dữ liệu, thành viên chỉ
+        // thấy nội dung đã công khai.
+        if (session.role !== 'admin') {
+          homeExamFilter.status = 'published';
+          homeExampleFilter.status = 'published';
+        }
+        const [exams, specialtyExamples] = await Promise.all([
+          db.collection('exams').find(
+            homeExamFilter,
+            {
+              projection: {
+                _id: 0,
+                category: 1,
+                targetAnchor: 1,
+                setNumber: 1,
+                dayNumber: 1
+              }
+            }
+          ).limit(500).toArray(),
+          db.collection('problems').countDocuments(homeExampleFilter)
+        ]);
+        return res.status(200).json({ success: true, items: [{ exams, specialtyExamples }] });
       }
 
       if (resource === 'exam_catalog') {

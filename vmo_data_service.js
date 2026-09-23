@@ -151,6 +151,9 @@ async function mutate(action, payload = {}) {
 
   // Mutation thành công có thể làm thay đổi catalog hoặc dữ liệu quản trị.
   invalidateReadCache();
+  if (action === 'create_exam_from_ocr') {
+    window.dispatchEvent(new CustomEvent('vmo:data-changed', { detail: { action } }));
+  }
 
   return data.item ?? true;
 }
@@ -236,6 +239,11 @@ export async function getExamCatalog(category = 'tst-national') {
     ...exam,
     problems: normalizeList(Array.isArray(exam.problems) ? exam.problems : [])
   }));
+}
+
+export async function getHomeStats() {
+  const items = normalizeList(await request('home_stats'));
+  return items[0] || { exams: [] };
 }
 
 export async function saveExamImage(examId, pageNumber, image) {
@@ -479,6 +487,7 @@ const VMODataService = Object.freeze({
   addExam,
   createExamFromOcr,
   getExamCatalog,
+  getHomeStats,
   saveExamImage,
   getExamImage,
   getProblemsByExam,
@@ -514,5 +523,6 @@ const VMODataService = Object.freeze({
 
 window.VMODataService = VMODataService;
 window.invalidateVMODataCache = invalidateReadCache;
+window.dispatchEvent(new CustomEvent('vmo:data-service-ready'));
 
 console.info('[VMODataService] MongoDB Atlas API đã sẵn sàng');
