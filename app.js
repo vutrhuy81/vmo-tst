@@ -11,6 +11,93 @@
   const searchSummary = qs('#searchSummary');
   const tabLoadPromises = new Map();
 
+  function hrefKeys(selector, pattern) {
+    return new Set(qsa(selector)
+      .map(link => String(link.getAttribute('href') || '').replace(/^#/, ''))
+      .filter(key => pattern.test(key)));
+  }
+
+  function formatCount(value) {
+    return String(Math.max(0, Number(value) || 0)).padStart(2, '0');
+  }
+
+  function renderCatalogStats(values) {
+    Object.entries(values).forEach(([key, value]) => {
+      qsa(`[data-catalog-stat="${key}"]`).forEach(node => {
+        node.textContent = String(value);
+      });
+    });
+  }
+
+  function staticCatalogStats() {
+    return {
+      tstTargets: hrefKeys('#sidebar-tst a.nav-link[href^="#tst-"]', /^tst-/),
+      regionalTargets: hrefKeys('#sidebar-history a.nav-link[href^="#hist-"]', /^hist-(?:dn|qn)-/),
+      mockEntries: hrefKeys('#sidebar-mock a.nav-link[href*="-day"]', /^mock-set\d+-day\d+$/),
+      chapters: qsa('#book-content .chapter-block[data-chapter]:not([data-chapter="meta"])').length,
+      theory: qsa('#book-content .theorybox').length,
+      examples: qsa('#book-content .examplebox .example-solution').length
+    };
+  }
+
+  function mockDimensions(entries) {
+    const sets = new Set();
+    const days = new Set();
+    entries.forEach(key => {
+      const match = String(key).match(/^mock-set(\d+)-day(\d+)$/);
+      if (!match) return;
+      sets.add(match[1]);
+      days.add(match[2]);
+    });
+    return { sets: sets.size, days: days.size };
+  }
+
+  window.refreshVMOCatalogStats = async function() {
+    const stats = staticCatalogStats();
+    const apply = () => {
+      const mock = mockDimensions(stats.mockEntries);
+      renderCatalogStats({
+        tst: formatCount(stats.tstTargets.size),
+        regional: formatCount(stats.regionalTargets.size),
+        chapters: formatCount(stats.chapters),
+        theory: formatCount(stats.theory),
+        examples: formatCount(stats.databaseExamples ?? stats.examples),
+        mock: formatCount(mock.sets),
+        mockSets: formatCount(mock.sets)
+      });
+    };
+
+    // Hiển thị ngay số liệu từ catalog tĩnh, không chờ mạng/MongoDB.
+    apply();
+    if (!window.VMODataService?.getHomeStats) return;
+
+    try {
+      const databaseStats = await window.VMODataService.getHomeStats();
+      if (Number.isInteger(Number(databaseStats?.specialtyExamples))) {
+        stats.databaseExamples = Math.max(0, Number(databaseStats.specialtyExamples));
+      }
+      (Array.isArray(databaseStats?.exams) ? databaseStats.exams : []).forEach(exam => {
+        const target = String(exam?.targetAnchor || '');
+        if (exam?.category === 'tst-national' && target) stats.tstTargets.add(target);
+        if (exam?.category === 'history-dn-qn' && target) stats.regionalTargets.add(target);
+        if (exam?.category !== 'vmo-mock') return;
+
+        const setNumber = Math.max(0,
+          Number(exam.setNumber) || Number(target.match(/^mock-set(\d+)/)?.[1]) || 0);
+        const dayNumber = Math.max(0,
+          Number(exam.dayNumber) || Number(target.match(/-day(\d+)$/)?.[1]) || 0);
+        if (setNumber && dayNumber) stats.mockEntries.add(`mock-set${setNumber}-day${dayNumber}`);
+      });
+      apply();
+    } catch (error) {
+      console.warn('Không tải được thống kê catalog từ MongoDB:', error?.message || error);
+    }
+  };
+
+  window.addEventListener('vmo:data-service-ready', () => window.refreshVMOCatalogStats());
+  window.addEventListener('vmo:data-changed', () => window.refreshVMOCatalogStats());
+  window.refreshVMOCatalogStats();
+
   async function ensureTabContent(tabId) {
     let pane = qs('#' + tabId);
     const fragmentUrl = pane?.dataset?.fragmentUrl;
