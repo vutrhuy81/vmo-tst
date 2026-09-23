@@ -1,16 +1,16 @@
 import { getSession } from '../lib/session.js';
 import { checkRateLimit, generateJson, handleAiError, parseBody, prepare, text } from '../lib/ai.js';
+import { generateOpenAIJson } from '../lib/openai.js';
 
-const OCR_ATTEMPT_TIMEOUT_MS = 70_000;
-const OCR_TOTAL_TIMEOUT_MS = 108_000;
+const OCR_ATTEMPT_TIMEOUT_MS = 40_000;
+const OCR_TOTAL_TIMEOUT_MS = 48_000;
+const OCR_OPENAI_TIMEOUT_MS = 60_000;
 const OCR_MAX_OUTPUT_TOKENS = 24_000;
 
 function ocrModels() {
   return [
     process.env.GEMINI_OCR_MODEL,
-    'gemini-3.5-flash-lite',
-    process.env.GEMINI_SOLVER_MODEL,
-    'gemini-3.5-flash'
+    'gemini-3.5-flash-lite'
   ];
 }
 
@@ -38,8 +38,10 @@ const schema = {
       }
     }
   },
-  required: ['province', 'examTitle', 'examDate', 'duration', 'dayNumber', 'confidence', 'questions']
+  required: ['province', 'examTitle', 'examDate', 'duration', 'dayNumber', 'confidence', 'questions'],
+  additionalProperties: false
 };
+schema.properties.questions.items.additionalProperties = false;
 
 function normalizeMath(value) {
   return String(value || '')
@@ -87,24 +89,42 @@ Quy tắc bắt buộc:
 8. Trả đúng JSON theo schema, không Markdown và không văn bản ngoài JSON.`;
 
   try {
-    const result = await generateJson({
-      contents: {
-        parts: [
-          { inlineData: { mimeType: match[1], data: match[2] } },
-          { text: prompt }
-        ]
-      },
-      schema,
-      temperature: 0,
-      // GEMINI_OCR_MODEL là tùy chọn. Nếu chưa khai báo trên Vercel, OCR dùng
-      // model Flash Lite chuyên cho tác vụ trích xuất trước khi thử model solver.
-      models: ocrModels(),
-      timeoutMs: OCR_ATTEMPT_TIMEOUT_MS,
-      totalTimeoutMs: OCR_TOTAL_TIMEOUT_MS,
-      maxOutputTokens: OCR_MAX_OUTPUT_TOKENS,
-      thinkingLevel: 'MINIMAL',
-      systemInstruction: 'Bạn là chuyên gia biên tập đề thi Olympic Toán Việt Nam. Nhiệm vụ duy nhất là OCR chính xác và tạo LaTeX tương thích MathJax.'
-    });
+    let source = 'gemini';
+    let result;
+    try {
+      // Giữ nguyên đường OCR Gemini đã ổn định ở chức năng TST: ảnh + prompt,
+      // structured JSON, temperature 0 và không ép thinkingLevel.
+      result = await generateJson({
+        contents: {
+          parts: [
+            { inlineData: { mimeType: match[1], data: match[2] } },
+            { text: prompt }
+          ]
+        },
+        schema,
+        temperature: 0,
+        models: ocrModels(),
+        timeoutMs: OCR_ATTEMPT_TIMEOUT_MS,
+        totalTimeoutMs: OCR_TOTAL_TIMEOUT_MS,
+        maxOutputTokens: OCR_MAX_OUTPUT_TOKENS,
+        systemInstruction: 'Bạn là chuyên gia biên tập đề thi Olympic Toán Việt Nam. Nhiệm vụ duy nhất là OCR chính xác và tạo LaTeX tương thích MathJax.'
+      });
+    } catch (geminiError) {
+      console.warn('[Exam OCR Gemini fallback]', {
+        code: geminiError?.code || 'UNKNOWN', finishReason: geminiError?.finishReason || ''
+      });
+      result = await generateOpenAIJson({
+        input: prompt,
+        imageDataUrl: image,
+        schema,
+        model: process.env.OPENAI_OCR_MODEL || process.env.OPENAI_VERIFY_MODEL || 'gpt-5.6-terra',
+        timeoutMs: OCR_OPENAI_TIMEOUT_MS,
+        maxOutputTokens: 16_000,
+        reasoningEffort: 'low',
+        systemInstruction: 'Bạn là chuyên gia OCR đề thi Olympic Toán Việt Nam. Chỉ trích xuất trung thực nội dung trong ảnh người dùng cung cấp và trả JSON đúng schema.'
+      });
+      source = 'openai-fallback';
+    }
     const data = result.data || {};
     const questions = (Array.isArray(data.questions) ? data.questions : [])
       .slice(0, 10)
@@ -120,7 +140,7 @@ Quy tắc bắt buộc:
 
     return res.status(200).json({
       success: true,
-      source: 'gemini',
+      source,
       model: result.model,
       data: {
         province: text(data.province, 120) || context.province,
