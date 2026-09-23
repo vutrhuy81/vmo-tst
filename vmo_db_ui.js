@@ -3942,20 +3942,23 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
     const province = document.getElementById(`${kind}Province`)?.value?.trim() || '';
     const year = document.getElementById(`${kind}Year`)?.value?.trim() || '2026-2027';
     const dayNumber = Number(document.getElementById(`${kind}DayNumber`)?.value) || 1;
+    const destination = kind === 'doc'
+      ? (document.getElementById('docDestination')?.value || 'tst')
+      : 'mock';
     if (!province) return showToast('Vui lòng chọn tỉnh/thành phố.', false);
     window.resetExamOcrPreview(kind);
     if (button) button.disabled = true;
     try {
       const byNumber = new Map();
       for (let index = 0; index < files.length; index += 1) {
-        if (status) status.textContent = `Đang OCR ảnh ${index + 1}/${files.length}...`;
+        if (status) status.textContent = `Đang OCR ảnh ${index + 1}/${files.length} (có thể mất đến 2 phút)...`;
         const image = await examImageDataUrl(files[index]);
         ocrStates[kind].images.push(image);
         const response = await fetch('/api/ai-ocr-exam', {
           method: 'POST',
           credentials: 'same-origin',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ image, province, year, dayNumber, destination: kind === 'doc' ? 'tst' : 'mock' })
+          body: JSON.stringify({ image, province, year, dayNumber, destination })
         });
         const payload = await response.json().catch(() => ({}));
         if (!response.ok || !payload.success) throw new Error(payload.error || `OCR thất bại (HTTP ${response.status})`);

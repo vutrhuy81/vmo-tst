@@ -1,6 +1,9 @@
 import { getSession } from '../lib/session.js';
 import { checkRateLimit, generateJson, handleAiError, parseBody, prepare, text } from '../lib/ai.js';
 
+const OCR_TIMEOUT_MS = 100_000;
+const OCR_MAX_OUTPUT_TOKENS = 24_000;
+
 const schema = {
   type: 'object',
   properties: {
@@ -57,7 +60,7 @@ export default async function handler(req, res) {
   const context = {
     province: text(body?.province, 120),
     year: text(body?.year, 40) || '2026-2027',
-    dayNumber: Math.max(1, Math.min(body?.destination === 'tst' ? 4 : 2, Number(body?.dayNumber) || 1))
+    dayNumber: Math.max(1, Math.min(['tst', 'regional'].includes(body?.destination) ? 4 : 2, Number(body?.dayNumber) || 1))
   };
   const prompt = `Nhận dạng chính xác đề thi Olympic Toán tiếng Việt trong ảnh và tách thành từng câu hỏi.
 
@@ -83,6 +86,10 @@ Quy tắc bắt buộc:
       },
       schema,
       temperature: 0,
+      models: [process.env.GEMINI_OCR_MODEL || process.env.GEMINI_SOLVER_MODEL || 'gemini-3.5-flash'],
+      timeoutMs: OCR_TIMEOUT_MS,
+      maxOutputTokens: OCR_MAX_OUTPUT_TOKENS,
+      thinkingLevel: 'MINIMAL',
       systemInstruction: 'Bạn là chuyên gia biên tập đề thi Olympic Toán Việt Nam. Nhiệm vụ duy nhất là OCR chính xác và tạo LaTeX tương thích MathJax.'
     });
     const data = result.data || {};
@@ -107,12 +114,20 @@ Quy tắc bắt buộc:
         examTitle: text(data.examTitle, 500),
         examDate: text(data.examDate, 20),
         duration: Math.max(1, Math.min(600, Number(data.duration) || 180)),
-        dayNumber: Math.max(1, Math.min(body?.destination === 'tst' ? 4 : 2, Number(data.dayNumber) || context.dayNumber)),
+        dayNumber: Math.max(1, Math.min(['tst', 'regional'].includes(body?.destination) ? 4 : 2, Number(data.dayNumber) || context.dayNumber)),
         confidence: text(data.confidence, 40) || 'unknown',
         questions
       }
     });
   } catch (error) {
+    if (error?.code === 'AI_TIMEOUT') {
+      console.error('[Exam OCR timeout]', { province: context.province, year: context.year, dayNumber: context.dayNumber });
+      return res.status(504).json({ success: false, error: 'OCR đề thi quá thời gian xử lý. Vui lòng thử lại với ảnh rõ hơn hoặc tách thành từng trang.' });
+    }
+    if (error?.code === 'AI_INVALID_JSON') {
+      console.error('[Exam OCR invalid JSON]', { finishReason: error.finishReason });
+      return res.status(502).json({ success: false, error: 'Gemini chưa trả về cấu trúc đề thi hợp lệ. Vui lòng thử lại ảnh này.' });
+    }
     return handleAiError(res, error);
   }
 }
