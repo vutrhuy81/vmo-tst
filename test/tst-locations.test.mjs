@@ -10,8 +10,10 @@ const uiSource = fs.readFileSync(new URL('vmo_db_ui.js', root), 'utf8');
 const dom = new JSDOM(`<!doctype html><html><body>
   <div id="sidebar-tst"><div class="nav-year-group"><div class="nav-year-title">TST</div>${Array.from({ length: 25 }, (_, index) => `<a class="nav-link" href="#tst-existing-${index}">${String(index+1).padStart(2, '0')}. Tỉnh mẫu</a>`).join('')}</div></div>
   <div id="sidebar-mock"><nav class="book-toc"><div class="nav-year-group"><a class="nav-link" href="#mock-set1-day1">01. Bộ 1</a><a class="nav-link" href="#mock-set2-day2">06. Bộ 2</a></div></nav></div>
+  <div id="sidebar-history"><div class="nav-year-group"><div class="nav-year-title">📘 ĐÀ NẴNG</div><a class="nav-link" href="#hist-dn-2025-2026">01. Đà Nẵng 2025–2026</a></div><div class="nav-year-group"><div class="nav-year-title">📙 QUẢNG NAM</div><a class="nav-link" href="#hist-qn-2022-2023">02. Quảng Nam 2022–2023</a></div></div>
   <div id="tab-mock"><div class="feed-container"></div></div>
   <div id="tab-tst"><div class="feed-container"></div></div>
+  <div id="tab-history"><div class="feed-container"></div></div>
   <div id="dataHubModal">
     <div class="vmo-modal-body">
       <div class="hub-tabs"><button class="hub-tab-btn" id="hub-tab-events"></button></div>
@@ -38,6 +40,12 @@ window.VMODataService = {
     id: 'mock-example', examKey: 'mock:set-3:2026-2027:day-1',
     targetAnchor: 'mock-set3-day1', setNumber: 3, province: 'Đà Nẵng', year: '2026-2027', dayNumber: 1, title: 'Bộ 3',
     problems: [{ contentKey: 'mock:mock-set3-day1:question-1', questionNumber: 1, content: 'Đề thử' }]
+  }] : category === 'history-dn-qn' ? [{
+    id: 'exam-danang-history', examKey: 'regional:da-nang:2026-2027:day-1',
+    targetAnchor: 'hist-dn-2026-2027', province: 'Đà Nẵng', provinceOrder: 1,
+    region: 'TRUNG', title: 'Đề Đà Nẵng 2026–2027', year: '2026-2027', dayNumber: 1,
+    problems: [{ contentKey: 'danang_quangnam:hist-dn-2026-2027:day-1:question-1', questionNumber: 1,
+      sourceGroup: 'danang_quangnam', sourceType: 'regional_question', content: 'Bài toán Đà Nẵng' }]
   }] : [{
     id: 'exam-quang-tri', examKey: 'tst:quang-tri:2026-2027:day-1',
     targetAnchor: 'tst-quang-tri', province: 'Quảng Trị', provinceOrder: 21,
@@ -56,6 +64,17 @@ window.openDataHubModal();
 window.toggleAddDocForm();
 const select = window.document.getElementById('docTargetAnchor');
 assert.equal(window.document.getElementById('docDayNumber').options.length, 4);
+assert.deepEqual(Array.from(window.document.getElementById('docDestination').options).map(option => option.value), ['tst', 'regional']);
+window.document.getElementById('docDestination').value = 'regional';
+window.syncDocumentDestination();
+assert.equal(window.document.getElementById('docRegionalTargetWrap').style.display, 'block');
+assert.equal(select.required, false);
+window.document.getElementById('docRegionalUnit').value = 'qn';
+window.syncRegionalExamTarget();
+assert.equal(window.document.getElementById('docProvince').value, 'Quảng Nam');
+assert.equal(window.document.getElementById('docRegion').value, 'TRUNG');
+window.document.getElementById('docDestination').value = 'tst';
+window.syncDocumentDestination();
 window.toggleAddExamForm();
 assert.equal(window.document.getElementById('examDayNumber').options.length, 2);
 assert.equal(window.document.getElementById('examSetNumber').value, '3');
@@ -81,5 +100,12 @@ assert.equal(window.document.querySelectorAll('#sidebar-tst a[href="#tst-quang-t
 await window.loadDatabaseMockExams(true);
 assert.ok(window.document.getElementById('mock-set3-day1'));
 assert.ok(window.document.querySelector('#sidebar-mock a[href="#mock-set3-day1"]'));
+await window.loadDatabaseRegionalExams(true);
+const regionalCard = window.document.getElementById('hist-dn-2026-2027');
+assert.ok(regionalCard, 'Đề lưu trữ mới phải tự tạo card trong tab Đà Nẵng–Quảng Nam');
+assert.equal(regionalCard.dataset.filter, 'DANANG');
+assert.equal(regionalCard.querySelector('.problem-item').dataset.sourceType, 'regional_question');
+assert.match(window.document.querySelector('#sidebar-history a[href="#hist-dn-2026-2027"]').textContent, /^02\. Đà Nẵng 2026–2027$/);
+assert.match(window.document.querySelector('#sidebar-history a[href="#hist-qn-2022-2023"]').textContent, /^03\. Quảng Nam 2022–2023$/);
 
-console.log('TST locations smoke test: OK');
+console.log('TST and Đà Nẵng–Quảng Nam dynamic exam smoke test: OK');

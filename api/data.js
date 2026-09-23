@@ -1005,7 +1005,8 @@ export default async function handler(req, res) {
 
     if (action === 'create_exam_from_ocr') {
       const isMock = payload.destination === 'mock';
-      if (payload.destination && !['mock', 'tst'].includes(payload.destination)) return res.status(400).json({ success: false, error: 'Loại đề thi không hợp lệ' });
+      const isRegional = payload.destination === 'regional';
+      if (payload.destination && !['mock', 'tst', 'regional'].includes(payload.destination)) return res.status(400).json({ success: false, error: 'Loại đề thi không hợp lệ' });
       const province = cleanText(payload.province, 120);
       const targetAnchor = cleanKey(payload.targetAnchor, 180);
       const requestedRegion = cleanText(payload.region, 20).toUpperCase();
@@ -1018,16 +1019,25 @@ export default async function handler(req, res) {
       const imageCount = cleanNumber(payload.sourceImageCount, 0, 0, 20);
       if (!isPrediction && imageCount < 1) return res.status(400).json({ success: false, error: 'Đề OCR cần ít nhất một ảnh nguồn' });
       const questions = Array.isArray(payload.questions) ? payload.questions.slice(0, 10) : [];
-      if (!province || !(isMock ? /^mock-set\d+-day[12]$/.test(targetAnchor) && Number.isInteger(setNumber) && setNumber >= 3 && setNumber <= 100 && targetAnchor === `mock-set${setNumber}-day${dayNumber}` : /^tst-[a-z0-9._:-]+$/.test(targetAnchor)) || !Number.isInteger(dayNumber) || dayNumber < 1 || dayNumber > (isMock ? 2 : 4) || !questions.length) {
+      const validTarget = isMock
+        ? /^mock-set\d+-day[12]$/.test(targetAnchor) && Number.isInteger(setNumber) && setNumber >= 3 && setNumber <= 100 && targetAnchor === `mock-set${setNumber}-day${dayNumber}`
+        : (isRegional ? /^hist-(dn|qn)-[a-z0-9._:-]+$/.test(targetAnchor) : /^tst-[a-z0-9._:-]+$/.test(targetAnchor));
+      if (!province || !validTarget || !Number.isInteger(dayNumber) || dayNumber < 1 || dayNumber > (isMock ? 2 : 4) || !questions.length) {
         return res.status(400).json({ success: false, error: 'Thiếu tỉnh/thành phố, vị trí frontend hoặc danh sách câu hỏi' });
       }
 
       const provinceSlug = slugKey(province);
       const yearSlug = slugKey(year);
-      const examKey = isMock ? `mock:set-${setNumber}:${yearSlug}:day-${dayNumber}` : `tst:${provinceSlug}:${yearSlug}:day-${dayNumber}`;
+      if (isRegional) {
+        const expectedUnit = targetAnchor.startsWith('hist-qn-') ? 'quang-nam' : 'da-nang';
+        if (provinceSlug !== expectedUnit) {
+          return res.status(400).json({ success: false, error: 'Đơn vị lưu trữ không khớp kho Đà Nẵng–Quảng Nam' });
+        }
+      }
+      const examKey = isMock ? `mock:set-${setNumber}:${yearSlug}:day-${dayNumber}` : `${isRegional ? 'regional' : 'tst'}:${provinceSlug}:${yearSlug}:day-${dayNumber}`;
       // Một tỉnh có thể có hai đề với các số câu trùng nhau. Ngày thi phải
       // thuộc khóa ổn định để ngày 2 không ghi đè câu hỏi/lịch sử của ngày 1.
-      const setKey = isMock ? `mock:${targetAnchor}` : `tst:${targetAnchor}:day-${dayNumber}`;
+      const setKey = isMock ? `mock:${targetAnchor}` : `${isRegional ? 'danang_quangnam' : 'tst'}:${targetAnchor}:day-${dayNumber}`;
       const title = cleanText(payload.title, 500) || (isMock ? `Bộ đề thi thử VMO số ${setNumber} — Ngày ${dayNumber}` : `Đề thi lập đội tuyển ${province} — Ngày ${dayNumber}`);
       const status = payload.status === 'draft' ? 'draft' : 'published';
       const existingExam = await db.collection('exams').findOne({ examKey }, { projection: { _id: 1 } });
@@ -1060,7 +1070,7 @@ export default async function handler(req, res) {
       const examDoc = {
         examKey,
         title,
-        category: isMock ? 'vmo-mock' : 'tst-national',
+        category: isMock ? 'vmo-mock' : (isRegional ? 'history-dn-qn' : 'tst-national'),
         setNumber: isMock ? setNumber : undefined,
         year,
         day: `Ngày ${dayNumber}`,
@@ -1106,9 +1116,9 @@ export default async function handler(req, res) {
 
       const setDoc = {
         key: setKey,
-        contentType: isMock ? 'mock_exam' : 'tst_exam',
+        contentType: isMock ? 'mock_exam' : (isRegional ? 'regional_exam' : 'tst_exam'),
         title,
-        group: isMock ? 'mock_exam' : 'tst',
+        group: isMock ? 'mock_exam' : (isRegional ? 'danang_quangnam' : 'tst'),
         origin: isPrediction ? 'prediction' : 'ocr',
         year,
         province,
@@ -1145,8 +1155,8 @@ export default async function handler(req, res) {
           setTitle: title,
           examId: String(savedExam._id),
           examKey,
-          sourceType: isMock ? 'mock_exam_question' : 'tst_question',
-          sourceGroup: isMock ? 'mock_exam' : 'tst',
+          sourceType: isMock ? 'mock_exam_question' : (isRegional ? 'regional_question' : 'tst_question'),
+          sourceGroup: isMock ? 'mock_exam' : (isRegional ? 'danang_quangnam' : 'tst'),
           origin: isPrediction ? 'prediction' : 'ocr',
           title: cleanText(raw?.title, 500) || `Câu ${questionNumber}`,
           shortLabel: `Câu ${questionNumber}`,
