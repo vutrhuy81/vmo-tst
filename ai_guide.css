@@ -190,6 +190,31 @@
   margin-bottom: 5px;
 }
 
+.ai-guide-source-editor {
+  display: block;
+  width: 100%;
+  min-height: 190px;
+  resize: vertical;
+  box-sizing: border-box;
+  border: 1px solid #94a3b8;
+  border-radius: 6px;
+  padding: 12px 14px;
+  background: #ffffff;
+  color: #0f172a;
+  font: 0.86rem/1.55 "JetBrains Mono", Consolas, monospace;
+  tab-size: 2;
+}
+
+.ai-section-solution .ai-guide-source-editor {
+  min-height: 340px;
+}
+
+.ai-guide-source-editor:focus {
+  outline: 2px solid #7c3aed;
+  outline-offset: 1px;
+  border-color: #7c3aed;
+}
+
 /* Hộp công thức nổi bật */
 .ai-formula-box {
   background: #f8fafc;
@@ -286,6 +311,12 @@ body.dark .ai-section-notes .ai-section-title {
 
 body.dark .ai-section-content {
   color: #cbd5e1;
+}
+
+body.dark .ai-guide-source-editor {
+  background: #0f172a;
+  border-color: #64748b;
+  color: #e2e8f0;
 }
 
 body.dark .ai-formula-box {

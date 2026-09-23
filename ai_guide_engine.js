@@ -311,13 +311,17 @@
     const defaultTopic = isEn ? 'Gifted Math' : 'Toán THPT Chuyên';
     const qualityScore = /^\d(?:\.\d)?\/5\.0$/.test(String(guideData.quality?.score || '')) ? guideData.quality.score : '';
     const qualityBadge = guideData.quality?.verified && qualityScore
-      ? `<span class="prof-badge" style="background:#dcfce7;color:#166534;">✓ ${isEn ? 'Independently verified' : 'Đã kiểm định độc lập'} ${qualityScore}</span>`
+      ? `<span class="prof-badge ai-guide-quality-badge" style="background:#dcfce7;color:#166534;">✓ ${isEn ? 'Independently verified' : 'Đã kiểm định độc lập'} ${qualityScore}</span>`
+      : '';
+    const adminEditedBadge = guideData.adminEdited
+      ? `<span class="prof-badge ai-guide-admin-edited-badge" style="background:#f3e8ff;color:#6b21a8;">✏️ ${isEn ? 'Admin edited' : 'Admin đã chỉnh sửa'}</span>`
       : '';
     const persistedBadge = guideData.persisted
-      ? `<span class="prof-badge" style="background:#e0f2fe;color:#075985;">☁ ${isEn ? 'Loaded from MongoDB' : 'Đã tải từ MongoDB'}</span>`
+      ? `<span class="prof-badge ai-guide-persisted-badge" style="background:#e0f2fe;color:#075985;">☁ ${isEn ? 'Loaded from MongoDB' : 'Đã tải từ MongoDB'}</span>`
       : '';
     const canDeleteSaved = guideData.persisted && /^[a-f\d]{24}$/i.test(String(guideData.savedGuideId || '')) &&
       window.VMOAuth?.getSession?.()?.role === 'admin';
+    const canEditGuide = window.VMOAuth?.getSession?.()?.role === 'admin';
 
     const sec1 = isEn ? '🎯 1. Essential Theorems & Lemmas' : '🎯 1. Kiến thức & Bổ đề Chuyên toán cần nắm vững';
     const sec2 = isEn ? '💡 2. Key Insights & Professor\'s Analysis' : '💡 2. Ý tưởng then chốt & Phân tích của Giáo sư Toán';
@@ -331,13 +335,17 @@
             <span>${headerTitle}</span>
             <span class="prof-badge">${profBadge}</span>
             ${qualityBadge}
+            ${adminEditedBadge}
             ${persistedBadge}
             <span style="font-size: 0.8rem; font-weight: 500; color: #64748b; margin-left: 4px;">• ${topic || guideData.branch || defaultTopic}</span>
           </div>
           <div class="ai-guide-actions">
             <button type="button" class="btn-guide-action" id="btn-save-ai-${problemId}" onclick="saveAIGuideToDatabase('${problemId}', '${(topic || guideData.branch || defaultTopic).replace(/'/g, "\\'")}')" title="Lưu hướng dẫn giải này vào MongoDB" style="color: #0284c7; font-weight: 600;">
-              🚀 Lưu bài giải lên MongoDB
+              ${guideData.persisted ? '💾 Cập nhật lời giải MongoDB' : '🚀 Lưu bài giải lên MongoDB'}
             </button>
+            ${canEditGuide ? `<button type="button" class="btn-guide-action btn-ai-guide-edit" onclick="editAIGuideContent('${problemId}')" style="color:#7c3aed;font-weight:600;" title="Chỉnh sửa bốn phần nội dung Markdown/LaTeX trước hoặc sau khi lưu">✏️ Chỉnh sửa nội dung</button>` : ''}
+            ${canEditGuide ? `<button type="button" class="btn-guide-action btn-ai-guide-apply" onclick="applyAIGuideEdits('${problemId}')" style="display:none;color:#047857;font-weight:600;">👁️ Áp dụng & xem trước</button>` : ''}
+            ${canEditGuide ? `<button type="button" class="btn-guide-action btn-ai-guide-cancel" onclick="cancelAIGuideEdits('${problemId}')" style="display:none;">↩️ Hủy chỉnh sửa</button>` : ''}
             ${canDeleteSaved ? `<button type="button" class="btn-guide-action btn-ai-guide-delete" onclick="deleteSavedAIGuide('${problemId}')" style="color:#be123c;" title="Xóa lời giải AI đã lưu trong MongoDB">${isEn ? '🗑️ Delete saved guide' : '🗑️ Xóa lời giải đã lưu'}</button>` : ''}
             <button type="button" class="btn-guide-action" onclick="copyAIGuideText('${problemId}')" title="${copyTitle}">
               ${copyBtn}
@@ -350,7 +358,7 @@
 
         <div class="ai-guide-body" id="ai-body-${problemId}">
           <!-- Phần 1: Kiến thức Toán THPT Chuyên cốt lõi -->
-          <div class="ai-section ai-section-knowledge">
+          <div class="ai-section ai-section-knowledge" data-guide-field="knowledge">
             <div class="ai-section-title">
               <span>${sec1}</span>
             </div>
@@ -360,7 +368,7 @@
           </div>
 
           <!-- Phần 2: Phương pháp tư duy & Ý tưởng then chốt -->
-          <div class="ai-section ai-section-idea">
+          <div class="ai-section ai-section-idea" data-guide-field="intuition">
             <div class="ai-section-title">
               <span>${sec2}</span>
             </div>
@@ -370,7 +378,7 @@
           </div>
 
           <!-- Phần 3: Lời giải chi tiết chuẩn Olympic -->
-          <div class="ai-section ai-section-solution">
+          <div class="ai-section ai-section-solution" data-guide-field="solution">
             <div class="ai-section-title">
               <span>${sec3}</span>
             </div>
@@ -380,7 +388,7 @@
           </div>
 
           <!-- Phần 4: Lưu ý sư phạm & Sai lầm thường gặp -->
-          <div class="ai-section ai-section-notes">
+          <div class="ai-section ai-section-notes" data-guide-field="pitfalls">
             <div class="ai-section-title">
               <span>${sec4}</span>
             </div>
@@ -494,6 +502,7 @@
             solution: formatMarkdownToHtml(rawGuide.solution || ''),
             pitfalls: formatMarkdownToHtml(rawGuide.pitfalls || ''),
             quality: rawGuide.quality || null,
+            adminEdited: saved.aiGuideAdminEdited === true,
             persisted: true,
             savedGuideId: saved.id || saved._id
           };
@@ -572,7 +581,8 @@
       sourceType: card.dataset.sourceType || '',
       sourceGroup: card.dataset.sourceGroup || '',
       rawGuide,
-      savedGuideId: guideData.savedGuideId || ''
+      savedGuideId: guideData.savedGuideId || '',
+      adminEdited: false
     });
 
     // Render HTML hoàn chỉnh
@@ -601,11 +611,116 @@
     }
   };
 
+  const GUIDE_EDIT_FIELDS = ['knowledge', 'intuition', 'solution', 'pitfalls'];
+
+  function isAdminGuideEditor() {
+    return window.VMOAuth?.getSession?.()?.role === 'admin';
+  }
+
+  function setGuideEditorState(panel, editing) {
+    if (!panel) return;
+    panel.dataset.guideEditing = editing ? 'true' : 'false';
+    const edit = panel.querySelector('.btn-ai-guide-edit');
+    const apply = panel.querySelector('.btn-ai-guide-apply');
+    const cancel = panel.querySelector('.btn-ai-guide-cancel');
+    if (edit) edit.style.display = editing ? 'none' : '';
+    if (apply) apply.style.display = editing ? '' : 'none';
+    if (cancel) cancel.style.display = editing ? '' : 'none';
+  }
+
+  function renderGuideFields(problemId, guide) {
+    const panel = document.getElementById(`ai-panel-${problemId}`);
+    if (!panel) return;
+    if (window.MathJax?.typesetClear) {
+      try { window.MathJax.typesetClear([panel]); } catch (_) {}
+    }
+    GUIDE_EDIT_FIELDS.forEach(field => {
+      const content = panel.querySelector(`[data-guide-field="${field}"] .ai-section-content`);
+      if (content) content.innerHTML = formatMarkdownToHtml(guide?.[field] || '');
+    });
+    setGuideEditorState(panel, false);
+    if (window.MathJax?.typesetPromise) window.MathJax.typesetPromise([panel]).catch(() => {});
+  }
+
+  window.editAIGuideContent = function(problemId) {
+    if (!isAdminGuideEditor()) return;
+    const panel = document.getElementById(`ai-panel-${problemId}`);
+    const context = aiGuideContexts.get(problemId);
+    if (!panel || !context?.rawGuide || panel.dataset.guideEditing === 'true') return;
+
+    if (window.MathJax?.typesetClear) {
+      try { window.MathJax.typesetClear([panel]); } catch (_) {}
+    }
+    GUIDE_EDIT_FIELDS.forEach(field => {
+      const content = panel.querySelector(`[data-guide-field="${field}"] .ai-section-content`);
+      if (!content) return;
+      const editor = document.createElement('textarea');
+      editor.className = 'ai-guide-source-editor';
+      editor.dataset.guideEditor = field;
+      editor.setAttribute('aria-label', `Chỉnh sửa ${field}`);
+      editor.value = String(context.rawGuide[field] || '');
+      content.replaceChildren(editor);
+    });
+    setGuideEditorState(panel, true);
+    panel.querySelector('.ai-guide-source-editor')?.focus();
+  };
+
+  window.applyAIGuideEdits = function(problemId, options = {}) {
+    if (!isAdminGuideEditor()) return false;
+    const panel = document.getElementById(`ai-panel-${problemId}`);
+    const context = aiGuideContexts.get(problemId);
+    if (!panel || !context?.rawGuide) return false;
+    if (panel.dataset.guideEditing !== 'true') return true;
+
+    const edited = {};
+    for (const field of GUIDE_EDIT_FIELDS) {
+      const editor = panel.querySelector(`[data-guide-editor="${field}"]`);
+      edited[field] = String(editor?.value || '').trim();
+      if (!edited[field]) {
+        editor?.focus();
+        window.showVMOToast?.('Bốn phần nội dung AI hướng dẫn giải không được để trống.', false);
+        return false;
+      }
+    }
+
+    context.rawGuide = {
+      ...context.rawGuide,
+      ...edited,
+      quality: context.rawGuide.quality
+        ? { ...context.rawGuide.quality, verified: false, score: '' }
+        : null
+    };
+    context.adminEdited = true;
+    renderGuideFields(problemId, context.rawGuide);
+    panel.querySelector('.ai-guide-quality-badge')?.remove();
+    if (!panel.querySelector('.ai-guide-admin-edited-badge')) {
+      const badge = document.createElement('span');
+      badge.className = 'prof-badge ai-guide-admin-edited-badge';
+      badge.style.cssText = 'background:#f3e8ff;color:#6b21a8;';
+      badge.textContent = '✏️ Admin đã chỉnh sửa';
+      panel.querySelector('.ai-guide-title')?.appendChild(badge);
+    }
+    if (!options.silent) {
+      window.showVMOToast?.('Đã áp dụng nội dung chỉnh sửa. Kiểm tra MathJax rồi lưu MongoDB.', true);
+    }
+    return true;
+  };
+
+  window.cancelAIGuideEdits = function(problemId) {
+    if (!isAdminGuideEditor()) return;
+    const context = aiGuideContexts.get(problemId);
+    if (!context?.rawGuide) return;
+    renderGuideFields(problemId, context.rawGuide);
+  };
+
   // Lưu hướng dẫn giải của AI / Lời giải vào MongoDB thông qua API
   window.saveAIGuideToDatabase = async function(problemId, topic) {
     const btn = document.getElementById(`btn-save-ai-${problemId}`);
     const body = document.getElementById(`ai-body-${problemId}`);
     if (!body) return;
+
+    if (body.closest('.ai-guide-panel')?.dataset.guideEditing === 'true' &&
+        !window.applyAIGuideEdits(problemId, { silent: true })) return;
 
     const solutionText = body.innerText.trim();
     if (!solutionText) {
@@ -622,24 +737,28 @@
       if (window.VMODataService && window.VMODataService.submitSolution) {
         const context = aiGuideContexts.get(problemId) || {};
         const stableProblemKey = context.problemKey || problemId;
-        const saved = await window.VMODataService.submitSolution(
-          stableProblemKey,
-          context.problemTitle || `AI Hướng dẫn - ${topic || 'Bài toán VMO'}`,
-          solutionText,
-          null,
-          '',
-          {
-            problemKey: stableProblemKey,
-            setId: context.setId || '',
-            setTitle: context.setTitle || context.examTitle || '',
-            sourceType: context.sourceType || '',
-            sourceGroup: context.sourceGroup || '',
-            topic: context.topic || topic || '',
-            problemContent: context.problemContent || '',
-            submissionKind: 'ai_guide',
-            aiGuide: context.rawGuide || null
-          }
-        );
+        const hasSavedGuide = /^[a-f\d]{24}$/i.test(String(context.savedGuideId || ''));
+        const saved = hasSavedGuide && context.adminEdited && isAdminGuideEditor() && window.VMODataService.updateAiGuide
+          ? await window.VMODataService.updateAiGuide(context.savedGuideId, context.rawGuide, solutionText)
+          : await window.VMODataService.submitSolution(
+            stableProblemKey,
+            context.problemTitle || `AI Hướng dẫn - ${topic || 'Bài toán VMO'}`,
+            solutionText,
+            null,
+            '',
+            {
+              problemKey: stableProblemKey,
+              setId: context.setId || '',
+              setTitle: context.setTitle || context.examTitle || '',
+              sourceType: context.sourceType || '',
+              sourceGroup: context.sourceGroup || '',
+              topic: context.topic || topic || '',
+              problemContent: context.problemContent || '',
+              submissionKind: 'ai_guide',
+              aiGuide: context.rawGuide || null,
+              aiGuideAdminEdited: context.adminEdited === true
+            }
+          );
         const savedId = String(saved?.id || saved?._id || '');
         if (savedId && window.VMOAuth?.getSession?.()?.role === 'admin') {
           const context = aiGuideContexts.get(problemId);
@@ -654,6 +773,16 @@
             deleteButton.onclick = () => window.deleteSavedAIGuide(problemId);
             actions.appendChild(deleteButton);
           }
+        }
+        context.adminEdited = false;
+        const panel = document.getElementById(`ai-panel-${problemId}`);
+        const persistedBadge = panel?.querySelector('.ai-guide-title .ai-guide-persisted-badge');
+        if (!persistedBadge && panel) {
+          const badge = document.createElement('span');
+          badge.className = 'prof-badge ai-guide-persisted-badge';
+          badge.style.cssText = 'background:#e0f2fe;color:#075985;';
+          badge.textContent = '☁ Đã lưu MongoDB';
+          panel.querySelector('.ai-guide-title')?.appendChild(badge);
         }
         if (btn) {
           btn.innerHTML = '✅ Đã lưu vào MongoDB!';
@@ -678,7 +807,10 @@
       if (btn) {
         setTimeout(() => {
           btn.disabled = false;
-          btn.innerHTML = '🚀 Lưu bài giải lên MongoDB';
+          const context = aiGuideContexts.get(problemId);
+          btn.innerHTML = /^[a-f\d]{24}$/i.test(String(context?.savedGuideId || ''))
+            ? '💾 Cập nhật lời giải MongoDB'
+            : '🚀 Lưu bài giải lên MongoDB';
           btn.style.color = '#0284c7';
         }, 3500);
       }

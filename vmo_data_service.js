@@ -344,6 +344,7 @@ export async function submitSolution(
     aiGuide: problemContext?.aiGuide && typeof problemContext.aiGuide === 'object'
       ? problemContext.aiGuide
       : null,
+    aiGuideAdminEdited: problemContext?.aiGuideAdminEdited === true,
     problemTitle: String(problemTitle ?? '').trim(),
     solutionContent: cleanSolution,
     evaluation: evaluation && typeof evaluation === 'object' ? evaluation : null,
@@ -457,6 +458,22 @@ export async function updateSubmissionContent(id, solutionContent) {
   }));
 }
 
+export async function updateAiGuide(id, aiGuide, solutionContent) {
+  const cleanId = normalizeId(id).trim();
+  const cleanContent = String(solutionContent || '').trim();
+  if (!/^[a-f0-9]{24}$/i.test(cleanId)) {
+    throw createServiceError('ID lời giải AI không hợp lệ', 0, 'VALIDATION_ERROR');
+  }
+  if (!aiGuide || typeof aiGuide !== 'object' || !String(aiGuide.solution || '').trim() || !cleanContent) {
+    throw createServiceError('Nội dung AI hướng dẫn giải không hợp lệ', 0, 'VALIDATION_ERROR');
+  }
+  return normalize(await mutate('update_ai_guide', {
+    id: cleanId,
+    aiGuide,
+    solutionContent: cleanContent.slice(0, 50_000)
+  }));
+}
+
 export async function deleteAiGuide(id) {
   const cleanId = normalizeId(id).trim();
   if (!/^[a-f0-9]{24}$/i.test(cleanId)) {
@@ -515,6 +532,7 @@ const VMODataService = Object.freeze({
   deleteSubmission,
   verifySubmission,
   updateSubmissionContent,
+  updateAiGuide,
   deleteAiGuide,
   getEvents,
   addEvent,
