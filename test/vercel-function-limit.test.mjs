@@ -21,14 +21,24 @@ assert.ok(vercelConfig.functions?.['api/ai-ocr-exam.js']?.maxDuration >= 120,
   'OCR đề thi cần đủ thời gian xử lý ảnh và sinh JSON nhiều câu');
 const examOcrSource = await readFile(new URL('api/ai-ocr-exam.js', projectRoot), 'utf8');
 const databaseUiSource = await readFile(new URL('vmo_db_ui.js', projectRoot), 'utf8');
-assert.match(examOcrSource, /const OCR_ATTEMPT_TIMEOUT_MS = 70_000/,
+const aiSource = await readFile(new URL('lib/ai.js', projectRoot), 'utf8');
+const openAiSource = await readFile(new URL('lib/openai.js', projectRoot), 'utf8');
+assert.match(examOcrSource, /const OCR_ATTEMPT_TIMEOUT_MS = 40_000/,
   'Mỗi lần thử OCR phải có đủ thời gian nhưng vẫn chừa ngân sách cho fallback');
-assert.match(examOcrSource, /const OCR_TOTAL_TIMEOUT_MS = 108_000/,
+assert.match(examOcrSource, /const OCR_TOTAL_TIMEOUT_MS = 48_000/,
   'Tổng thời gian OCR phải nằm dưới maxDuration của Vercel');
-assert.match(examOcrSource, /process\.env\.GEMINI_OCR_MODEL,[\s\S]*'gemini-3\.5-flash-lite',[\s\S]*process\.env\.GEMINI_SOLVER_MODEL/,
-  'OCR phải có model chuyên dụng/mặc định và model dự phòng thực sự');
+assert.match(examOcrSource, /process\.env\.GEMINI_OCR_MODEL,[\s\S]*'gemini-3\.5-flash-lite'/,
+  'OCR phải giữ model chuyên dụng và model Flash Lite ổn định của TST');
 assert.match(examOcrSource, /totalTimeoutMs: OCR_TOTAL_TIMEOUT_MS/,
   'OCR phải áp dụng ngân sách thời gian tổng khi thử nhiều model');
+assert.doesNotMatch(examOcrSource, /thinkingLevel:/,
+  'OCR không được ép thinkingLevel vì model TST ổn định không hỗ trợ đồng nhất');
+assert.match(examOcrSource, /generateOpenAIJson\([\s\S]*imageDataUrl: image/,
+  'OCR phải chuyển sang vision fallback khi Gemini chặn RECITATION');
+assert.match(aiSource, /finishReason === 'RECITATION' \? 'AI_RECITATION'/,
+  'Gemini RECITATION phải được phân loại riêng, không giả dạng lỗi JSON');
+assert.match(openAiSource, /type: 'input_image',[\s\S]*image_url:/,
+  'OpenAI fallback phải nhận ảnh gốc thay vì chỉ nhận prompt văn bản');
 assert.match(examOcrSource, /\['tst', 'regional'\]\.includes\(body\?\.destination\)/,
   'TST và Đà Nẵng–Quảng Nam phải cùng hỗ trợ tối đa bốn ngày thi');
 assert.match(databaseUiSource, /document\.getElementById\('docDestination'\)\?\.value \|\| 'tst'/,
