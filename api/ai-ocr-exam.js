@@ -1,8 +1,18 @@
 import { getSession } from '../lib/session.js';
 import { checkRateLimit, generateJson, handleAiError, parseBody, prepare, text } from '../lib/ai.js';
 
-const OCR_TIMEOUT_MS = 100_000;
+const OCR_ATTEMPT_TIMEOUT_MS = 70_000;
+const OCR_TOTAL_TIMEOUT_MS = 108_000;
 const OCR_MAX_OUTPUT_TOKENS = 24_000;
+
+function ocrModels() {
+  return [
+    process.env.GEMINI_OCR_MODEL,
+    'gemini-3.5-flash-lite',
+    process.env.GEMINI_SOLVER_MODEL,
+    'gemini-3.5-flash'
+  ];
+}
 
 const schema = {
   type: 'object',
@@ -86,8 +96,11 @@ Quy tắc bắt buộc:
       },
       schema,
       temperature: 0,
-      models: [process.env.GEMINI_OCR_MODEL || process.env.GEMINI_SOLVER_MODEL || 'gemini-3.5-flash'],
-      timeoutMs: OCR_TIMEOUT_MS,
+      // GEMINI_OCR_MODEL là tùy chọn. Nếu chưa khai báo trên Vercel, OCR dùng
+      // model Flash Lite chuyên cho tác vụ trích xuất trước khi thử model solver.
+      models: ocrModels(),
+      timeoutMs: OCR_ATTEMPT_TIMEOUT_MS,
+      totalTimeoutMs: OCR_TOTAL_TIMEOUT_MS,
       maxOutputTokens: OCR_MAX_OUTPUT_TOKENS,
       thinkingLevel: 'MINIMAL',
       systemInstruction: 'Bạn là chuyên gia biên tập đề thi Olympic Toán Việt Nam. Nhiệm vụ duy nhất là OCR chính xác và tạo LaTeX tương thích MathJax.'
