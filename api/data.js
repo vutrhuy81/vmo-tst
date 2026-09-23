@@ -571,6 +571,14 @@ export default async function handler(req, res) {
       const evaluation = payload.evaluation && typeof payload.evaluation === 'object' ? payload.evaluation : null;
       const submissionKind = payload.submissionKind === 'ai_guide' ? 'ai_guide' : 'student_solution';
       const aiGuide = submissionKind === 'ai_guide' ? cleanAiGuide(payload.aiGuide) : null;
+      const aiGuideAdminEdited = submissionKind === 'ai_guide' && payload.aiGuideAdminEdited === true;
+      if (aiGuideAdminEdited && session.role !== 'admin') {
+        return res.status(403).json({ success: false, error: 'Chỉ admin được chỉnh sửa nội dung AI hướng dẫn giải' });
+      }
+      if (aiGuideAdminEdited && aiGuide?.quality) {
+        aiGuide.quality.verified = false;
+        aiGuide.quality.score = '';
+      }
       const doc = {
         problemId: registeredProblemId,
         problemKey: registeredProblemKey,
@@ -600,6 +608,9 @@ export default async function handler(req, res) {
         evaluation,
         submissionKind,
         aiGuide,
+        aiGuideAdminEdited,
+        aiGuideEditedBy: aiGuideAdminEdited ? session.username : '',
+        aiGuideEditedAt: aiGuideAdminEdited ? now : null,
         createdAt: now,
         updatedAt: now
       };
@@ -648,6 +659,41 @@ export default async function handler(req, res) {
     }
 
     if (!requireAdmin(session, res)) return;
+
+    if (action === 'update_ai_guide') {
+      const id = objectId(payload.id);
+      if (!id) return res.status(400).json({ success: false, error: 'ID lời giải AI không hợp lệ' });
+      const guide = cleanAiGuide(payload.aiGuide);
+      const solutionContent = cleanText(payload.solutionContent, 50_000);
+      if (!guide || !guide.knowledge || !guide.intuition || !guide.solution || !guide.pitfalls || !solutionContent) {
+        return res.status(400).json({ success: false, error: 'Bốn phần nội dung AI hướng dẫn giải không được để trống' });
+      }
+      if (guide.quality) {
+        guide.quality.verified = false;
+        guide.quality.score = '';
+      }
+      const updated = await db.collection('submissions').findOneAndUpdate(
+        { _id: id, submissionKind: 'ai_guide' },
+        { $set: {
+          aiGuide: guide,
+          solutionContent,
+          aiGuideAdminEdited: true,
+          aiGuideEditedBy: session.username,
+          aiGuideEditedAt: now,
+          updatedAt: now
+        } },
+        { returnDocument: 'after' }
+      );
+      if (!updated) return res.status(404).json({ success: false, error: 'Không tìm thấy AI hướng dẫn giải đã lưu' });
+      await recordActivity(db, session, 'guide.updated', {
+        submissionId: id,
+        problemKey: updated.problemKey,
+        problemTitle: updated.problemSnapshot?.title || updated.problemTitle,
+        setTitle: updated.problemSnapshot?.setTitle,
+        ownerUsername: updated.username
+      });
+      return res.status(200).json({ success: true, item: updated });
+    }
 
     if (action === 'save_exam_trend_report') {
       const cleaned = cleanExamTrendReport(payload);
