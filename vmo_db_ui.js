@@ -2524,7 +2524,7 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
   const learningActionNames = {
     login: 'Đăng nhập', logout: 'Đăng xuất',
     'solution.saved': 'Lưu bài giải', 'evaluation.saved': 'Lưu AI đánh giá',
-    'guide.saved': 'Lưu AI hướng dẫn giải', 'guide.deleted': 'Xóa AI hướng dẫn giải', 'submission.deleted': 'Xóa bài nộp',
+    'guide.saved': 'Lưu AI hướng dẫn giải', 'guide.updated': 'Sửa AI hướng dẫn giải', 'guide.deleted': 'Xóa AI hướng dẫn giải', 'submission.deleted': 'Xóa bài nộp',
     'submission.verified': 'Admin xác minh bài nộp', 'submission.verification_revoked': 'Admin hủy xác minh bài nộp',
     'submission.content_updated': 'Admin cập nhật nội dung MathJax',
     'account.created': 'Tạo tài khoản', 'account.updated': 'Cập nhật tài khoản', 'account.deleted': 'Xóa tài khoản',
