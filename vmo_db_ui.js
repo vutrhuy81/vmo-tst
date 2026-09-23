@@ -2099,8 +2099,9 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
     const days = tst ? 4 : 2;
     return `
       ${tst ? '' : `<div style="margin-bottom:12px;"><label for="examCreationMode" style="font-weight:700;">Phương thức tạo đề</label><select id="examCreationMode" onchange="syncExamCreationMode()" style="display:block;width:100%;padding:8px;margin-top:5px;"><option value="ocr">Ảnh đề do admin biên soạn (OCR)</option><option value="prediction">Dự đoán đề từ dữ liệu tham chiếu</option></select></div>`}
+      ${tst ? `<div style="margin-bottom:12px;"><label for="docDestination" style="font-weight:700;">Kho hiển thị tài liệu *</label><select id="docDestination" required onchange="syncDocumentDestination(true)" style="display:block;width:100%;padding:8px;margin-top:5px;"><option value="tst">🏛️ Đề TST 2026–2027</option><option value="regional">🗂️ Đề Đà Nẵng–Quảng Nam</option></select><small id="docDestinationHint" style="display:block;margin-top:5px;color:#64748b;">Đề sẽ được lưu và hiển thị trong kho TST.</small></div>` : ''}
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px;">
-        <div>${tst ? `<label>Tỉnh/Thành phố hoặc trường chuyên *</label><select id="docTargetAnchor" required onchange="syncExamProvinceFromTarget('doc')" style="width:100%;padding:7px;"></select>` : `<label>Bộ đề thi thử số *</label><input id="examSetNumber" type="number" min="3" max="100" value="3" required style="width:100%;box-sizing:border-box;padding:7px;">`}</div>
+        <div>${tst ? `<div id="docTstTargetWrap"><label>Tỉnh/Thành phố hoặc trường chuyên *</label><select id="docTargetAnchor" required onchange="syncExamProvinceFromTarget('doc')" style="width:100%;padding:7px;"></select></div><div id="docRegionalTargetWrap" style="display:none;"><label>Đơn vị lưu trữ *</label><select id="docRegionalUnit" onchange="syncRegionalExamTarget()" style="width:100%;padding:7px;"><option value="dn">Đà Nẵng</option><option value="qn">Quảng Nam</option></select></div>` : `<label>Bộ đề thi thử số *</label><input id="examSetNumber" type="number" min="3" max="100" value="3" required style="width:100%;box-sizing:border-box;padding:7px;">`}</div>
         <div><label>Ngày thi *</label><select id="${kind}DayNumber" required style="width:100%;padding:7px;">${['nhất','hai','ba','tư'].slice(0,days).map((label,index) => `<option value="${index+1}">Ngày thi thứ ${label}</option>`).join('')}</select></div>
       </div>
       <div style="display:grid;grid-template-columns:1fr .55fr 1fr;gap:10px;margin-bottom:10px;">
@@ -3630,7 +3631,10 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
     const f = document.getElementById('formAddDoc');
     if (f) {
       f.style.display = (f.style.display === 'none') ? 'block' : 'none';
-      if (f.style.display === 'block') populateExamTargetOptions();
+      if (f.style.display === 'block') {
+        populateExamTargetOptions();
+        window.syncDocumentDestination();
+      }
     }
   };
   const ocrStates = { doc: { questions: [], images: [], confidence: '' }, exam: { questions: [], images: [], confidence: '' } };
@@ -3668,6 +3672,37 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
     if (previous && Array.from(select.options).some(option => option.value === previous)) select.value = previous;
     window.syncExamProvinceFromTarget('doc');
   }
+
+  window.syncDocumentDestination = function(resetPreview = false) {
+    const regional = document.getElementById('docDestination')?.value === 'regional';
+    const tstWrap = document.getElementById('docTstTargetWrap');
+    const regionalWrap = document.getElementById('docRegionalTargetWrap');
+    const tstTarget = document.getElementById('docTargetAnchor');
+    const regionalTarget = document.getElementById('docRegionalUnit');
+    const hint = document.getElementById('docDestinationHint');
+    const save = document.getElementById('docSaveButton');
+    if (tstWrap) tstWrap.style.display = regional ? 'none' : 'block';
+    if (regionalWrap) regionalWrap.style.display = regional ? 'block' : 'none';
+    if (tstTarget) tstTarget.required = !regional;
+    if (regionalTarget) regionalTarget.required = regional;
+    if (hint) hint.textContent = regional
+      ? 'Đề sẽ được lưu và hiển thị trong kho Đề Đà Nẵng–Quảng Nam.'
+      : 'Đề sẽ được lưu và hiển thị trong kho TST.';
+    if (save) save.textContent = `Lưu ${regional ? 'đề Đà Nẵng–Quảng Nam' : 'đề TST'} & câu hỏi vào MongoDB`;
+    if (regional) window.syncRegionalExamTarget();
+    else window.syncExamProvinceFromTarget('doc');
+    if (resetPreview) window.resetExamOcrPreview('doc');
+  };
+
+  window.syncRegionalExamTarget = function() {
+    const unit = document.getElementById('docRegionalUnit')?.value === 'qn' ? 'Quảng Nam' : 'Đà Nẵng';
+    const province = document.getElementById('docProvince');
+    const region = document.getElementById('docRegion');
+    const display = document.getElementById('docRegionDisplay');
+    if (province) province.value = unit;
+    if (region) region.value = 'TRUNG';
+    if (display) display.value = 'Miền Trung';
+  };
 
   function populatePredictionTargets() {
     const select = document.getElementById('examPredictionTarget');
@@ -4005,14 +4040,15 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
     const el = document.getElementById('hubDocsList');
     if (!el) return;
     try {
-      const [docs, tstExams] = await Promise.all([
-        window.VMODataService.getDocuments(), window.VMODataService.getExamCatalog('tst-national')
+      const [docs, tstExams, regionalExams] = await Promise.all([
+        window.VMODataService.getDocuments(), window.VMODataService.getExamCatalog('tst-national'),
+        window.VMODataService.getExamCatalog('history-dn-qn')
       ]);
-      if (!docs.length && !tstExams.length) {
-        el.innerHTML = '<div style="padding:14px;text-align:center;color:#94a3b8;">Chưa có đề TST nào trong database.</div>';
+      if (!docs.length && !tstExams.length && !regionalExams.length) {
+        el.innerHTML = '<div style="padding:14px;text-align:center;color:#94a3b8;">Chưa có tài liệu hoặc đề lưu trữ nào trong database.</div>';
         return;
       }
-      el.innerHTML = tstExams.map(exam => `<div style="padding:10px 14px;margin-bottom:8px;background:#eff6ff;border-radius:8px;"><strong>${escapeHtmlText(exam.title || exam.province)}</strong><div style="font-size:.8rem;color:#475569;">${escapeHtmlText(exam.province || '')} · Ngày ${Number(exam.dayNumber) || 1} · ${exam.problems?.length || 0} câu · TST</div></div>`).join('') + docs.map(d => `
+      el.innerHTML = [...tstExams.map(exam => ({ ...exam, catalogLabel: 'TST' })), ...regionalExams.map(exam => ({ ...exam, catalogLabel: 'Đà Nẵng–Quảng Nam' }))].map(exam => `<div style="padding:10px 14px;margin-bottom:8px;background:#eff6ff;border-radius:8px;"><strong>${escapeHtmlText(exam.title || exam.province)}</strong><div style="font-size:.8rem;color:#475569;">${escapeHtmlText(exam.province || '')} · Ngày ${Number(exam.dayNumber) || 1} · ${exam.problems?.length || 0} câu · ${exam.catalogLabel}</div></div>`).join('') + docs.map(d => `
         <div style="background:#f8fafc; border:1px solid #e2e8f0; border-radius:8px; padding:10px 14px; margin-bottom:8px; display:flex; justify-content:space-between; align-items:center;">
           <div>
             <strong style="color:#0f172a; font-size:0.95rem;">${d.title}</strong>
@@ -4087,19 +4123,24 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
     if (prediction && (!state.prediction || state.prediction.key !== predictionInputKey())) return showToast('Thông số dự đoán đã thay đổi. Hãy tạo bản dự đoán mới trước khi lưu.', false);
     if (prediction && !Array.isArray(state.prediction.quality?.questionChecks)) return showToast('Chưa có nhận xét GPT cho đề dự đoán.', false);
     if (prediction && (questions.length < 2 || questions.length > 6 || Math.abs(questions.reduce((total, question) => total + question.maxScore, 0) - 20) > 0.001)) return showToast('Đề dự đoán cần 2–6 câu và tổng điểm đúng 20.', false);
+    const destination = tst && field('Destination')?.value === 'regional' ? 'regional' : (tst ? 'tst' : 'mock');
+    const regional = destination === 'regional';
     const dayNumber = Number(field('DayNumber')?.value) || 1;
     const setNumber = Number(field('SetNumber')?.value) || 0;
     if (!tst && (!Number.isInteger(setNumber) || setNumber < 3 || setNumber > 100)) return showToast('Bộ đề thi thử phải có số từ 3 đến 100.', false);
-    const targetAnchor = tst ? field('TargetAnchor')?.value : `mock-set${setNumber}-day${dayNumber}`;
+    const regionalUnit = field('RegionalUnit')?.value === 'qn' ? 'qn' : 'dn';
+    const targetAnchor = regional
+      ? `hist-${regionalUnit}-${stableKey(field('Year')?.value || '2026-2027')}`
+      : (tst ? field('TargetAnchor')?.value : `mock-set${setNumber}-day${dayNumber}`);
     if (!targetAnchor) return showToast('Vui lòng chọn tỉnh/thành phố.', false);
     const saveButton = field('SaveButton');
     const originalLabel = saveButton?.textContent || 'Lưu vào MongoDB';
     const payload = {
-      destination: tst ? 'tst' : 'mock', title: field('Title')?.value.trim(),
+      destination, title: field('Title')?.value.trim(),
       province: field('Province')?.value.trim(), year: field('Year')?.value.trim(),
       duration: Number(field('Duration')?.value) || 180, examDate: field('Date')?.value || '',
       dayNumber, setNumber, targetAnchor, region: field('Region')?.value || 'BAC',
-      provinceOrder: tst ? Number(field('TargetAnchor')?.selectedOptions?.[0]?.dataset.order) || 0 : setNumber,
+      provinceOrder: regional ? (regionalUnit === 'dn' ? 1 : 2) : (tst ? Number(field('TargetAnchor')?.selectedOptions?.[0]?.dataset.order) || 0 : setNumber),
       sourceImageCount: sourceImages.length, ocrConfidence: state.confidence,
       status: 'published', questions: prediction ? questions.map(question => {
         const original = state.prediction.verifiedQuestions.find(item => item.questionNumber === question.questionNumber);
@@ -4148,13 +4189,19 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
         if (saveButton) saveButton.textContent = `Đang lưu ảnh ${index + 1}/${sourceImages.length}...`;
         await window.VMODataService.saveExamImage(saved.id || saved._id, index + 1, sourceImages[index]);
       }
-      showToast(`Đã lưu ${tst ? 'đề TST' : 'đề thi thử'} và ${saved?.problemCount || questions.length} câu hỏi vào MongoDB!`, true);
+      const savedType = regional ? 'đề Đà Nẵng–Quảng Nam' : (tst ? 'đề TST' : 'đề thi thử');
+      showToast(`Đã lưu ${savedType} và ${saved?.problemCount || questions.length} câu hỏi vào MongoDB!`, true);
       e.target.reset();
       window.resetExamOcrPreview(kind);
       if (prediction) window.syncExamCreationMode();
-      if (tst) { window.toggleAddDocForm(); await loadDatabaseTstExams(true); }
+      if (tst) {
+        window.toggleAddDocForm();
+        if (regional) await loadDatabaseRegionalExams(true);
+        else await loadDatabaseTstExams(true);
+      }
       else { window.toggleAddExamForm(); await loadDatabaseMockExams(true); }
-      await loadHubExams();
+      if (tst) await loadHubDocs();
+      else await loadHubExams();
     } catch (error) { showToast('Lỗi lưu đề thi: ' + (error?.message || 'Không xác định'), false); }
     finally {
       if (saveButton && document.body.contains(saveButton)) {
@@ -4198,6 +4245,36 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
     (document.querySelector('#tab-tst .feed-container') || document.getElementById('tab-tst'))?.appendChild(card);
     ensureDatabaseExamSidebar(exam);
     return card;
+  }
+
+  function createDatabaseRegionalCard(exam) {
+    const card = document.createElement('article');
+    const isQuangNam = String(exam.province || '').toLowerCase().includes('quảng nam');
+    card.className = 'exam-card history-card db-exam-card';
+    card.id = exam.targetAnchor;
+    card.dataset.filter = isQuangNam ? 'QUANGNAM' : 'DANANG';
+    card.dataset.search = `${exam.province || ''} ${exam.year || ''} ${exam.title || ''}`.toLowerCase();
+    card.innerHTML = `<div class="exam-header"><div class="exam-top-tags"><span class="tag tag-year">${escapeHtmlText(exam.year || '')}</span><span class="tag tag-province">${escapeHtmlText(exam.province || '')}</span><span class="tag tag-official">Đề lưu trữ từ database</span></div><h3 class="exam-title">${escapeHtmlText(exam.title || `Đề ${exam.province || ''} ${exam.year || ''}`)}</h3></div><div class="exam-body"></div>`;
+    (document.querySelector('#tab-history .feed-container') || document.getElementById('tab-history'))?.appendChild(card);
+    ensureDatabaseRegionalNavigation(exam);
+    return card;
+  }
+
+  function ensureDatabaseRegionalNavigation(exam) {
+    if (!exam?.targetAnchor) return;
+    const sidebar = document.getElementById('sidebar-history');
+    if (!sidebar || sidebar.querySelector(`a[href="#${CSS.escape(exam.targetAnchor)}"]`)) return;
+    const isQuangNam = String(exam.province || '').toLowerCase().includes('quảng nam');
+    const groups = Array.from(sidebar.querySelectorAll('.nav-year-group'));
+    const group = groups.find(item => item.querySelector('.nav-year-title')?.textContent.includes(isQuangNam ? 'QUẢNG NAM' : 'ĐÀ NẴNG')) || groups[0] || sidebar;
+    const link = document.createElement('a');
+    link.className = 'nav-link db-exam-sidebar-link';
+    link.href = `#${exam.targetAnchor}`;
+    link.textContent = `${exam.province || 'Đà Nẵng'} ${String(exam.year || '').replace('-', '–')}`;
+    group.appendChild(link);
+    Array.from(sidebar.querySelectorAll('a.nav-link')).forEach((item, index) => {
+      item.textContent = `${String(index + 1).padStart(2, '0')}. ${item.textContent.replace(/^\s*\d+\.\s*/, '')}`;
+    });
   }
 
   function ensureDatabaseExamSidebar(exam) {
@@ -4535,8 +4612,9 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
   function renderDatabaseExam(exam, kind = 'tst') {
     if (!exam?.targetAnchor || !Array.isArray(exam.problems) || !exam.problems.length) return;
     if (kind === 'tst') ensureDatabaseExamSidebar(exam);
+    if (kind === 'regional') ensureDatabaseRegionalNavigation(exam);
     let card = document.getElementById(exam.targetAnchor);
-    if (!card) card = kind === 'tst' ? createDatabaseExamCard(exam) : createDatabaseMockCard(exam);
+    if (!card) card = kind === 'tst' ? createDatabaseExamCard(exam) : (kind === 'regional' ? createDatabaseRegionalCard(exam) : createDatabaseMockCard(exam));
     const body = card?.querySelector('.exam-body') || card;
     if (!body) return;
     body.querySelectorAll(`.db-exam-day[data-exam-key="${CSS.escape(exam.examKey || exam.id || '')}"]`).forEach(node => node.remove());
@@ -4567,9 +4645,9 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
       item.dataset.databaseProblem = 'true';
       item.dataset.setKey = problem.setKey || '';
       item.dataset.setTitle = problem.setTitle || exam.title || '';
-      item.dataset.sourceGroup = problem.sourceGroup || (kind === 'tst' ? 'tst' : 'mock_exam');
-      item.dataset.sourceType = problem.sourceType || (kind === 'tst' ? 'tst_question' : 'mock_exam_question');
-      item.dataset.contentType = kind === 'tst' ? 'tst_exam' : 'mock_exam';
+      item.dataset.sourceGroup = problem.sourceGroup || (kind === 'tst' ? 'tst' : (kind === 'regional' ? 'danang_quangnam' : 'mock_exam'));
+      item.dataset.sourceType = problem.sourceType || (kind === 'tst' ? 'tst_question' : (kind === 'regional' ? 'regional_question' : 'mock_exam_question'));
+      item.dataset.contentType = kind === 'tst' ? 'tst_exam' : (kind === 'regional' ? 'regional_exam' : 'mock_exam');
       item.dataset.questionNumber = String(Number(problem.questionNumber) || 0);
       item.dataset.legacyProblemId = Array.isArray(problem.legacyIds) ? (problem.legacyIds[0] || '') : '';
       item.innerHTML = `<div class="problem-header"><div class="problem-id"><span>${escapeHtmlText(problem.shortLabel || problem.title || `Câu ${problem.questionNumber}`)}</span><span class="badge-point"> (${String(Number(problem.maxScore) || 0).replace('.', ',')}đ) </span><span class="badge-topic">${escapeHtmlText(problem.topic || 'Toán Olympic')}</span></div><button class="btn-copy" onclick="copyText(this)">📋 Sao chép</button></div><div class="problem-content" data-no-i18n="true"></div>`;
@@ -4703,6 +4781,34 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
 
   window.loadDatabaseTstExams = loadDatabaseTstExams;
 
+  let databaseRegionalLoaded = false;
+  let databaseRegionalPromise = null;
+
+  async function loadDatabaseRegionalExams(force = false) {
+    if (!window.VMODataService?.getExamCatalog) return;
+    if (databaseRegionalLoaded && !force) return;
+    if (databaseRegionalPromise) return databaseRegionalPromise;
+    if (force) window.invalidateVMODataCache?.();
+    databaseRegionalPromise = (async () => {
+      try {
+        await window.ensureVMOTabContent?.('tab-history');
+        const exams = await window.VMODataService.getExamCatalog('history-dn-qn');
+        exams.forEach(exam => renderDatabaseExam(exam, 'regional'));
+        const root = document.getElementById('tab-history');
+        injectSubmissionButtons(root || document);
+        window.reinitAIGuide?.(root || document);
+        await applyCatalogAccessRules(root || document);
+        applyMongoReferenceLinks(root || document);
+        if (root && window.renderMathInContainer) window.renderMathInContainer(root, true).catch(() => {});
+        databaseRegionalLoaded = true;
+      } catch (error) {
+        console.warn('Không tải được đề Đà Nẵng–Quảng Nam từ MongoDB:', error?.message || error);
+      } finally { databaseRegionalPromise = null; }
+    })();
+    return databaseRegionalPromise;
+  }
+  window.loadDatabaseRegionalExams = loadDatabaseRegionalExams;
+
   window.openExamSourceImage = async function(examId, pageNumber = 1) {
     const viewer = window.open('', '_blank');
     try {
@@ -4775,6 +4881,7 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
     loadMongoReferenceLinks(false, activeRoot);
     if (activeRoot.id === 'tab-tst') loadDatabaseTstExams();
     if (activeRoot.id === 'tab-mock') loadDatabaseMockExams();
+    if (activeRoot.id === 'tab-history') loadDatabaseRegionalExams();
   }
 
   if (document.readyState === 'loading') {
@@ -4796,6 +4903,7 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
     loadMongoReferenceLinks(false, root);
     if (root.id === 'tab-tst') loadDatabaseTstExams();
     if (root.id === 'tab-mock') loadDatabaseMockExams();
+    if (root.id === 'tab-history') loadDatabaseRegionalExams();
   };
 
 })();
