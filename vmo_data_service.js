@@ -263,6 +263,10 @@ export async function getContentSets(group = null) {
   return normalizeList(await request('content_sets', { group }));
 }
 
+export async function getContentBlocks(group = null) {
+  return normalizeList(await request('content_blocks', { group }));
+}
+
 export async function getCatalogProblems(filters = {}) {
   return normalizeList(await request('problems', {
     setId: filters.setId,
@@ -509,6 +513,7 @@ const VMODataService = Object.freeze({
   getExamImage,
   getProblemsByExam,
   getContentSets,
+  getContentBlocks,
   getCatalogProblems,
   getCatalogRules,
   upsertContentCatalog,

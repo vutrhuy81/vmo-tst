@@ -4,7 +4,7 @@ import { getSession } from '../lib/session.js';
 import { deleteAiGuideRecord, learningScope, recordActivity, summarizeLearning } from '../lib/learning.js';
 import { buildSubmissionContentUpdate, buildSubmissionVerificationUpdate } from '../lib/submission-verification.js';
 
-const ALLOWED_RESOURCES = new Set(['documents', 'exams', 'exam_catalog', 'home_stats', 'exam_image', 'content_sets', 'problems', 'content_revisions', 'submissions', 'submission_image', 'events', 'activity_feed', 'learning_overview', 'exam_trend_reports']);
+const ALLOWED_RESOURCES = new Set(['documents', 'exams', 'exam_catalog', 'home_stats', 'exam_image', 'content_sets', 'content_blocks', 'problems', 'content_revisions', 'submissions', 'submission_image', 'events', 'activity_feed', 'learning_overview', 'exam_trend_reports']);
 const CONTENT_TYPES = new Set(['specialty_chapter', 'mock_exam', 'tst_exam', 'regional_exam']);
 const SOURCE_TYPES = new Set(['specialty_example', 'mock_exam_question', 'tst_question', 'regional_question']);
 const TST_REGIONS = new Set(['BAC', 'TRUNG', 'NAM']);
@@ -378,6 +378,11 @@ export default async function handler(req, res) {
         if (req.query?.key) filter.key = cleanKey(req.query.key);
         if (session.role !== 'admin') filter.status = 'published';
       }
+      if (resource === 'content_blocks') {
+        if (req.query?.group) filter.group = cleanText(req.query.group, 80);
+        if (req.query?.blockKey) filter.blockKey = cleanKey(req.query.blockKey);
+        if (session.role !== 'admin') filter.status = 'published';
+      }
       if (resource === 'problems') {
         if (req.query?.examId) filter.examId = cleanText(req.query.examId, 120);
         if (req.query?.setId) {
@@ -502,7 +507,7 @@ export default async function handler(req, res) {
 
       const sort = resource === 'events'
         ? { startDate: 1 }
-        : resource === 'content_sets' || resource === 'problems'
+        : resource === 'content_sets' || resource === 'content_blocks' || resource === 'problems'
           ? { order: 1, orderNumber: 1 }
           : { createdAt: -1 };
       if (resource === 'submissions' && req.query?.paged === '1') {

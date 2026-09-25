@@ -4617,7 +4617,23 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
     if (kind === 'tst') ensureDatabaseExamSidebar(exam);
     if (kind === 'regional') ensureDatabaseRegionalNavigation(exam);
     let card = document.getElementById(exam.targetAnchor);
-    if (!card) card = kind === 'tst' ? createDatabaseExamCard(exam) : (kind === 'regional' ? createDatabaseRegionalCard(exam) : createDatabaseMockCard(exam));
+
+// MongoDB là nguồn chuẩn sau migration.
+// Nếu card hiện tại đến từ HTML tĩnh, loại bỏ để Atlas thay thế.
+if (card && card.dataset.databaseCard !== 'true') {
+  card.remove();
+  card = null;
+}
+
+if (!card) {
+  card = kind === 'tst'
+    ? createDatabaseExamCard(exam)
+    : (kind === 'regional'
+        ? createDatabaseRegionalCard(exam)
+        : createDatabaseMockCard(exam));
+}
+
+if (card) card.dataset.databaseCard = 'true';
     const body = card?.querySelector('.exam-body') || card;
     if (!body) return;
     body.querySelectorAll(`.db-exam-day[data-exam-key="${CSS.escape(exam.examKey || exam.id || '')}"]`).forEach(node => node.remove());
