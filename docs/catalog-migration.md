@@ -85,6 +85,12 @@ Quy tắc ưu tiên: khi câu trong Atlas đã tồn tại, nội dung Atlas là
 nguồn chuẩn; thay đổi manifest chỉ dùng để chuẩn hóa nguồn và điền
 nội dung thực sự thiếu, không sửa nội dung câu đã lưu ở Atlas.
 
+Có thể chạy `npm run catalog:plan -- catalog-report.json` để tạo kế
+hoạch ánh xạ chỉ đọc từ báo cáo dry-run. Công cụ yêu cầu đầy đủ ứng viên,
+kiểm tra ánh xạ câu 1:1 và xuất các nhóm/đề chung cần tách theo ngày.
+Kế hoạch này không sửa Atlas, không xác nhận hai câu tương đương và
+không thay thế dry-run mới sau khi manifest được sửa.
+
 ## Chạy kiểm kê
 
 1. Tạo bản sao lưu Atlas của `exams`, `content_sets`, `problems`, `content_blocks`
