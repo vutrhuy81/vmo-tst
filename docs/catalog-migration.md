@@ -30,6 +30,25 @@ không chứng minh rằng các bản ghi cũ đều có liên kết. Bản scri
 chỉ xuất 100 xung đột đầu; từ phiên bản này báo cáo xuất đủ để đối chiếu.
 Tuyệt đối chưa chạy apply với báo cáo này.
 
+### Đối chiếu 423 ứng viên từ báo cáo tiếp theo
+
+Báo cáo `reportVersion: 2` có 423 `candidates`, tương ứng 5 đề,
+64 nhóm và 354 câu. Trong 354 cặp câu, 151 cặp có `contentEqual: true`,
+203 cặp khác HTML (78 chuyên đề, 8 đề thử VMO, 113 TST, 4 lịch sử
+Đà Nẵng–Quảng Nam). Có 20 khóa nhóm Atlas đang là nhóm chung cho hai
+ngày trong manifest; không được ánh xạ hai nhóm ngày về cùng một `_id`.
+Bốn khóa đề Atlas là đích của năm ứng viên; riêng hai ngày KHTN cùng
+trỏ đến một đề Atlas ngày 3, không thể tự động coi là cùng đề.
+Toàn bộ 354 ứng viên câu có `existingExamId` rỗng. Đây là thống kê
+trên các cặp ứng viên, không phải kết luận về cả collection `problems`.
+
+Trước khi ghi, cần so 203 cặp khác HTML với nội dung thực tế, tách
+nhóm theo ngày, xác minh khóa đề và `examId`; giữ nguyên `_id` của câu
+Atlas để không làm đứt liên kết bài nộp và giữ nội dung Admin đã sửa.
+151 cặp trùng HTML chỉ là bằng chứng về trường `content`, vẫn cần
+kiểm tra `setId`, lời giải, nguồn tham khảo và trạng thái. Không chạy
+`catalog:apply` hiện tại: chế độ này vẫn chủ động chặn toàn bộ xung đột.
+
 ## Chạy kiểm kê
 
 1. Tạo bản sao lưu Atlas của `exams`, `content_sets`, `problems`, `content_blocks`
