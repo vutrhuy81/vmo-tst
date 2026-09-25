@@ -1,5 +1,6 @@
 import fs from 'node:fs';
 import path from 'node:path';
+import { createHash } from 'node:crypto';
 import { fileURLToPath } from 'node:url';
 import { MongoClient } from 'mongodb';
 import { assertManifest, manifestSummary } from '../lib/catalog-manifest.js';
@@ -32,12 +33,14 @@ try {
   const existing = Object.fromEntries(await Promise.all(collections.map(async ([name]) =>
     [name, await db.collection(name).find({}, {
       projection: name === 'problems'
-        ? { contentKey: 1, setKey: 1, setId: 1, examId: 1, frontendAnchor: 1, legacyIds: 1, shortLabel: 1, order: 1, status: 1 }
-        : name === 'exams' ? { examKey: 1, targetAnchor: 1, category: 1 }
+        ? { contentKey: 1, setKey: 1, setId: 1, examId: 1, frontendAnchor: 1, legacyIds: 1, shortLabel: 1, order: 1, status: 1, content: 1 }
+        : name === 'exams' ? { examKey: 1, targetAnchor: 1, category: 1, title: 1 }
         : name === 'content_sets' ? { key: 1, examKey: 1, examId: 1, group: 1, title: 1 } : { blockKey: 1 }
     }).toArray()] )));
   const plan = {};
   const conflicts = [];
+  const candidates = [];
+  const digest = value => typeof value === 'string' ? createHash('sha256').update(value).digest('hex') : null;
   for (const [name, source, field] of collections) {
     const current = existing[name];
     duplicateKeys(current, field).forEach(key => conflicts.push(`${name}: khóa trùng trong Atlas ${key}`));
@@ -52,7 +55,11 @@ try {
     if (name === 'exams') {
       missing.forEach(item => {
         const collision = current.find(x => x.category === item.category && x.targetAnchor === item.targetAnchor);
-        if (collision) conflicts.push(`exams: anchor ${item.targetAnchor} đã thuộc ${collision.examKey || collision._id}`);
+        if (collision) {
+          conflicts.push(`exams: anchor ${item.targetAnchor} đã thuộc ${collision.examKey || collision._id}`);
+          candidates.push({ collection: name, sourceKey: item.examKey, existingKey: collision.examKey,
+            reason: 'category+anchor', sourceTitle: item.title, existingTitle: collision.title });
+        }
       });
     }
     if (name === 'content_sets') {
@@ -63,7 +70,13 @@ try {
         ];
         const collision = current.find(x => aliases.includes(x.key) ||
           (x.group === item.group && x.title === item.title));
-        if (collision) conflicts.push(`content_sets: ${item.key} có thể trùng nhóm ${collision.key || collision._id}`);
+        if (collision) {
+          conflicts.push(`content_sets: ${item.key} có thể trùng nhóm ${collision.key || collision._id}`);
+          candidates.push({ collection: name, sourceKey: item.key, existingKey: collision.key,
+            reason: aliases.includes(collision.key) ? 'alias' : 'group+title',
+            sourceTitle: item.title, existingTitle: collision.title,
+            existingExamKey: collision.examKey, existingExamId: String(collision.examId || '') });
+        }
       });
     }
     if (name === 'problems') {
@@ -84,7 +97,14 @@ try {
             String(x.shortLabel || '').trim().toLocaleLowerCase('vi') ===
             String(item.shortLabel || '').trim().toLocaleLowerCase('vi');
         });
-        if (collision) conflicts.push(`problems: ${item.contentKey} có thể trùng bản ghi ${collision.contentKey || collision._id}; cần đối chiếu trước khi nhập`);
+        if (collision) {
+          conflicts.push(`problems: ${item.contentKey} có thể trùng bản ghi ${collision.contentKey || collision._id}; cần đối chiếu trước khi nhập`);
+          candidates.push({ collection: name, sourceKey: item.contentKey, existingKey: collision.contentKey,
+            sourceSetKey: item.setKey, existingSetKey: collision.setKey,
+            sourceContentHash: digest(item.content), existingContentHash: digest(collision.content),
+            contentEqual: typeof collision.content === 'string' && item.content === collision.content,
+            existingSetId: String(collision.setId || ''), existingExamId: String(collision.examId || '') });
+        }
       });
     }
   }
@@ -93,7 +113,7 @@ try {
   manifest.problems.forEach(p => { if (!setKeys.has(p.setKey)) conflicts.push(`problem thiếu set ${p.contentKey}`); });
   manifest.contentSets.filter(x => x.examKey).forEach(x => { if (!examKeys.has(x.examKey)) conflicts.push(`set thiếu exam ${x.key}`); });
   const report = { reportVersion: 2, mode: apply ? 'apply' : 'dry-run', database: 'vmo_tst', manifest: manifestSummary(manifest),
-    plan, conflicts, conflictCount: conflicts.length, writes: 0 };
+    plan, conflicts, conflictCount: conflicts.length, candidates, writes: 0 };
   const outputReport = () => {
     const json = JSON.stringify(report, null, 2);
     if (reportPath) fs.writeFileSync(path.resolve(reportPath), json + '\n', 'utf8');
