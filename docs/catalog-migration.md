@@ -91,6 +91,13 @@ kiểm tra ánh xạ câu 1:1 và xuất các nhóm/đề chung cần tách theo
 Kế hoạch này không sửa Atlas, không xác nhận hai câu tương đương và
 không thay thế dry-run mới sau khi manifest được sửa.
 
+Để xác định quan hệ theo ngày trước khi xây migration có ghi, đặt
+`$env:CATALOG_RELATIONS_PATH='catalog-relations.json'` rồi chạy lại
+`npm run catalog:dry-run`. File riêng này chỉ có `_id`, khóa, metadata
+và liên kết hiện có của đề/nhóm/câu; không chứa nguyên văn câu hỏi
+hoặc chuỗi kết nối. Nó giúp kiểm tra 20 nhóm dùng chung, 5 đề va
+chạm và các câu chưa có `examId`. Không thêm file vào Git.
+
 ## Chạy kiểm kê
 
 1. Tạo bản sao lưu Atlas của `exams`, `content_sets`, `problems`, `content_blocks`
