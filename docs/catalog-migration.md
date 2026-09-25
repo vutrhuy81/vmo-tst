@@ -18,6 +18,8 @@ giao diện vẫn dùng HTML cho đến khi kiểm chứng xong và phát hành 
 4. Đối chiếu `manifest`, `plan`, `conflicts` và tổng số bản ghi trong Atlas.
    Mọi xung đột khóa hoặc anchor đều chặn ghi. Đối chiếu riêng các câu có
    cùng nội dung nhưng khác khóa; công cụ không thể tự kết luận chúng trùng.
+   Nếu `matchedWithoutSetId` hoặc `matchedWithoutExamId` khác 0, phải đối chiếu
+   và bổ sung liên kết các bản ghi cũ trước khi giao diện chỉ đọc qua API.
 5. Khi báo cáo không còn xung đột và bản sao lưu đã hoàn tất, chạy
    `CATALOG_APPLY=YES npm run catalog:apply` bằng user có quyền ghi.
    Chạy lại dry-run để xác nhận số `insert` bằng 0.
