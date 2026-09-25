@@ -8,6 +8,16 @@ Script chỉ bổ sung những khóa còn thiếu. Bản ghi MongoDB đã tồn 
 nội dung do Admin chỉnh sửa, không bị ghi đè. Đây là giai đoạn nhập dữ liệu;
 giao diện vẫn dùng HTML cho đến khi kiểm chứng xong và phát hành API-only.
 
+### Kết quả kiểm kê Atlas ngày 25/9/2026
+
+Data Explorer hiển thị 28 `exams`, 78 `content_sets`, 456 `problems` và chưa có
+`content_blocks`. Truy vấn `{ sourceGroup: 'tst', examId: { $exists: false } }`
+trả 158 bản ghi. Ví dụ `specialty:chapter-2:example-1` đã tồn tại nhưng manifest
+dùng khóa `specialty:chapter-2:example-1-1`; đề Hùng Vương hiện dùng tiền tố
+`tst:` trong khi manifest dùng `tst-national:`. Vì vậy các khóa không khớp
+không đồng nghĩa với nội dung còn thiếu. Dry-run sẽ báo xung đột và chặn nhập;
+cần lập ánh xạ khóa cũ–mới, giữ `_id`, bài nộp và nội dung Admin đã chỉnh sửa.
+
 ## Chạy kiểm kê
 
 1. Tạo bản sao lưu Atlas của `exams`, `content_sets`, `problems`, `content_blocks`
