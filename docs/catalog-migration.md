@@ -37,6 +37,11 @@ Tuyệt đối chưa chạy apply với báo cáo này.
 2. Đặt `MONGODB_URI` trong môi trường máy cục bộ, chỉ rõ database `/vmo_tst`.
    Không đưa URI vào Git, nhật ký hoặc nội dung trao đổi.
 3. Chạy `npm ci`, rồi `npm run catalog:dry-run`.
+   Trên PowerShell, có thể xuất JSON riêng, không trộn stderr với stdout:
+   `$env:CATALOG_REPORT_PATH='catalog-report.json'; npm run catalog:dry-run`.
+   Báo cáo đúng phiên bản có `reportVersion: 2` và số phần tử trong
+   `conflicts` bằng `conflictCount`. File này chỉ chứa khóa/metadata,
+   không chứa chuỗi kết nối; đừng thêm file báo cáo vào Git.
 4. Đối chiếu `manifest`, `plan`, `conflicts` và tổng số bản ghi trong Atlas.
    Mọi xung đột khóa hoặc anchor đều chặn ghi. Đối chiếu riêng các câu có
    cùng nội dung nhưng khác khóa; công cụ không thể tự kết luận chúng trùng.
