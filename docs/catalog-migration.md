@@ -30,6 +30,12 @@ không chứng minh rằng các bản ghi cũ đều có liên kết. Bản scri
 chỉ xuất 100 xung đột đầu; từ phiên bản này báo cáo xuất đủ để đối chiếu.
 Tuyệt đối chưa chạy apply với báo cáo này.
 
+Nếu cần so chính xác 203 cặp khác HTML, đặt thêm
+`$env:CATALOG_REVIEW_PATH='catalog-review.json'` trước khi chạy dry-run.
+File này chứa nguyên văn nội dung câu ở manifest và Atlas, chỉ tạo khi
+đặt biến trên; không đưa vào Git. Rà soát và chia sẻ file theo quyền
+truy cập phù hợp vì có thể chứa nội dung đã được Admin chỉnh sửa.
+
 ### Đối chiếu 423 ứng viên từ báo cáo tiếp theo
 
 Báo cáo `reportVersion: 2` có 423 `candidates`, tương ứng 5 đề,
