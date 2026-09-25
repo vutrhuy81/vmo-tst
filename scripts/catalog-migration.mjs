@@ -9,6 +9,7 @@ const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const manifest = assertManifest(JSON.parse(fs.readFileSync(path.join(root, 'data/static-catalog-manifest.json'), 'utf8')));
 const apply = process.argv.includes('--apply');
 const reportPath = process.env.CATALOG_REPORT_PATH;
+const reviewPath = process.env.CATALOG_REVIEW_PATH;
 const uri = process.env.MONGODB_URI;
 if (!uri) throw new Error('Thiếu MONGODB_URI. Dùng tài khoản Atlas có quyền đọc cho dry-run.');
 if (new URL(uri).pathname.slice(1) !== 'vmo_tst') throw new Error('MONGODB_URI phải ghi rõ /vmo_tst.');
@@ -40,6 +41,7 @@ try {
   const plan = {};
   const conflicts = [];
   const candidates = [];
+  const reviewPairs = [];
   const digest = value => typeof value === 'string' ? createHash('sha256').update(value).digest('hex') : null;
   for (const [name, source, field] of collections) {
     const current = existing[name];
@@ -104,6 +106,11 @@ try {
             sourceContentHash: digest(item.content), existingContentHash: digest(collision.content),
             contentEqual: typeof collision.content === 'string' && item.content === collision.content,
             existingSetId: String(collision.setId || ''), existingExamId: String(collision.examId || '') });
+          if (item.content !== collision.content) reviewPairs.push({
+            sourceKey: item.contentKey, existingKey: collision.contentKey,
+            sourceSetKey: item.setKey, existingSetKey: collision.setKey,
+            sourceContent: item.content, existingContent: collision.content ?? null
+          });
         }
       });
     }
@@ -117,6 +124,10 @@ try {
   const outputReport = () => {
     const json = JSON.stringify(report, null, 2);
     if (reportPath) fs.writeFileSync(path.resolve(reportPath), json + '\n', 'utf8');
+    if (reviewPath) fs.writeFileSync(path.resolve(reviewPath), JSON.stringify({
+      database: 'vmo_tst', mode: 'read-only-review', count: reviewPairs.length,
+      pairs: reviewPairs
+    }, null, 2) + '\n', 'utf8');
     console.log(json);
   };
   if (conflicts.length) {
