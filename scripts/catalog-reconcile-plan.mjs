@@ -1,8 +1,13 @@
 import fs from 'node:fs';
+import { fileURLToPath } from 'node:url';
+import path from 'node:path';
 
 const input = process.argv[2];
 if (!input) throw new Error('Dùng: npm run catalog:plan -- <catalog-report.json>');
 const report = JSON.parse(fs.readFileSync(input, 'utf8'));
+const relationsPath = process.argv[3];
+const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
+const manifest = JSON.parse(fs.readFileSync(path.join(root, 'data/static-catalog-manifest.json'), 'utf8'));
 if (report.reportVersion !== 2 || report.mode !== 'dry-run' || report.writes !== 0 ||
     report.candidates?.length !== report.conflictCount) {
   throw new Error('Báo cáo không đầy đủ hoặc không phải dry-run chỉ đọc.');
@@ -44,4 +49,40 @@ const plan = {
   ],
   writes: 0
 };
+if (relationsPath) {
+  const relations = JSON.parse(fs.readFileSync(relationsPath, 'utf8'));
+  if (relations.database !== report.database || relations.mode !== 'read-only-relations') {
+    throw new Error('Snapshot quan hệ không cùng database hoặc không phải chỉ đọc.');
+  }
+  const atlasProblems = new Map(relations.problems.map(p => [p.contentKey, p]));
+  const atlasSets = new Map(relations.contentSets.map(s => [s.id, s]));
+  const sourceProblems = new Map(manifest.problems.map(p => [p.contentKey, p]));
+  const sourceSets = new Map(manifest.contentSets.map(s => [s.key, s]));
+  const sourceExams = new Map(manifest.exams.map(e => [e.examKey, e]));
+  const links = problems.map(alias => {
+    const old = atlasProblems.get(alias.existingKey);
+    const source = sourceProblems.get(alias.sourceKey);
+    const sourceSet = sourceSets.get(source?.setKey);
+    const oldSet = atlasSets.get(old?.setId);
+    if (!old || !source || !sourceSet || !oldSet || oldSet.key !== alias.existingSetKey ||
+        old.contentKey !== alias.existingKey || sourceSet.examKey && !sourceExams.has(sourceSet.examKey)) {
+      throw new Error(`Không xác minh được liên kết: ${alias.sourceKey}`);
+    }
+    if (old.examId) throw new Error(`Câu cũ đã có examId, cần kiểm tra lại: ${alias.existingKey}`);
+    return { atlasId: old.id, atlasKey: old.contentKey, atlasSetId: old.setId,
+      destinationSetKey: source.setKey, destinationExamKey: sourceSet.examKey || null };
+  });
+  const migratedIds = new Set(links.map(x => x.atlasId));
+  if (migratedIds.size !== links.length) throw new Error('Một câu Atlas xuất hiện nhiều lần trong kế hoạch.');
+  plan.relationships = {
+    relinkExistingProblems: links.length,
+    attachExam: links.filter(x => x.destinationExamKey).length,
+    specialtyWithoutExam: links.filter(x => !x.destinationExamKey).length,
+    untouchedDynamicProblems: relations.problems.filter(x => !migratedIds.has(x.id)).length,
+    createExams: manifest.exams.filter(x => !relations.exams.some(e => e.examKey === x.examKey)).length,
+    createContentSets: manifest.contentSets.filter(x => !relations.contentSets.some(s => s.key === x.key)).length,
+    createContentBlocks: manifest.contentBlocks.length,
+    links
+  };
+}
 console.log(JSON.stringify(plan, null, 2));
