@@ -98,6 +98,32 @@ và liên kết hiện có của đề/nhóm/câu; không chứa nguyên văn c�
 hoặc chuỗi kết nối. Nó giúp kiểm tra 20 nhóm dùng chung, 5 đề va
 chạm và các câu chưa có `examId`. Không thêm file vào Git.
 
+Chạy `npm run catalog:plan -- catalog-report.json catalog-relations.json`
+để kiểm tra ánh xạ câu 1:1 trên snapshot quan hệ. Với snapshot đã
+nhận ngày 25/9, kết quả là 354 câu cũ cần gắn lại nhóm (276 câu gắn
+đề, 78 ví dụ chuyên đề không gắn đề); 102 câu động giữ nguyên.
+Kế hoạch tạo 64 đề, 69 nhóm và 12 khối mới, giữ 456 `_id` câu cũ.
+102 câu động hiện trỏ tới `examId` và `setId` hợp lệ. Snapshot này
+không tự kiểm tra việc Admin sửa nội dung sau ngày chụp; phải chạy lại
+dry-run/preflight với Atlas ngay trước bất kỳ thao tác ghi nào.
+
+`catalog:reconcile-dry-run` kiểm tra trực tiếp Atlas với hai snapshot:
+
+```powershell
+$env:CATALOG_REPORT_PATH = 'catalog-report.json'
+$env:CATALOG_RELATIONS_PATH = 'catalog-relations.json'
+npm run catalog:reconcile-dry-run
+```
+
+Công cụ so `_id`, khóa, `setId` và SHA-256 của nội dung câu với snapshot,
+kiểm tra 102 câu động còn trỏ đúng đề/nhóm, và dừng nếu dữ liệu đã
+thay đổi. Bản kế hoạch có chế độ ghi riêng nhưng chưa được chạy trong
+môi trường Atlas ở PR này. Khi được kiểm thử và bật, nó tạo bản sao
+EJSON độc quyền trước khi bắt đầu transaction, tạo đề/nhóm/khối mới,
+gắn lại các câu cũ mà không thay `contentKey`, `_id`, `content`, lời giải
+hay tham chiếu. Nếu điều kiện kiểm tra hoặc transaction lỗi, sẽ không
+phát hành frontend API-only.
+
 ## Chạy kiểm kê
 
 1. Tạo bản sao lưu Atlas của `exams`, `content_sets`, `problems`, `content_blocks`
