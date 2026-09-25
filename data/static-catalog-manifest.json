@@ -8038,7 +8038,7 @@
       "order": 1,
       "maxScore": 5,
       "topic": "Dãy số",
-      "content": "Cho dãy số $(a_n)$ được xác định bởi\n$$\na_1=24^{24},\\qquad a_2=25^{25},\\qquad a_3=26^{26},\n$$\nvà\n$$\na_n=|a_{n-1}-a_{n-2}|+|a_{n-2}-a_{n-3}|.\n$$\nTính giá trị của\n$$\na_{2727}.\n$$",
+      "content": "Cho dãy số $(a_n)$ được xác định bởi\n$$\na_1=24^{24},\\qquad a_2=25^{25},\\qquad a_3=26^{26},\n$$\nvà\n$$\na_n=|a_{n-1}-a_{n-2}|+|a_{n-2}-a_{n-3}|.\n$$\nTính giá trị của\n$$\na_{27^{27}}.\n$$",
       "referenceSolution": "",
       "frontendAnchor": "tst-csp",
       "legacyIds": [
@@ -9244,7 +9244,7 @@
       "order": 7,
       "maxScore": 5,
       "topic": "Tổ hợp",
-      "content": "Cho tập $S=\\{1,2,\\ldots,2017\\}$ và $A_1,A_2,\\ldots,A_k$ là các tập con của $S$ sao cho với mọi $1\\le i<j\\le k$=\"\" có=\"\" đúng=\"\" một=\"\" trong=\"\" các=\"\" tập=\"\" \\[=\"\" a_i\\cap=\"\" a_j,\\qquad=\"\" a_i^c\\cap=\"\" a_j^c,\\qquad=\"\" a_j^c=\"\" \\]=\"\" là=\"\" rỗng.=\"\" tìm=\"\" giá=\"\" trị=\"\" lớn=\"\" nhất=\"\" thể=\"\" của=\"\" $k$=\"\" (với=\"\" $a^c=\"S\\setminus\" a$).<=\"\" div=\"\">\n</j\\le>",
+      "content": "Cho tập $S=\\{1,2,\\ldots,2017\\}$ và $A_1,A_2,\\ldots,A_k$ là các tập con của $S$ sao cho với mọi $1\\le i&lt;j\\le k$ có đúng một trong các tập\n\\[\nA_i\\cap A_j,\\qquad A_i^c\\cap A_j,\\qquad A_i\\cap A_j^c,\\qquad A_i^c\\cap A_j^c\n\\]\nlà tập rỗng. Tìm giá trị lớn nhất có thể có của $k$ (với $A^c=S\\setminus A$).",
       "referenceSolution": "",
       "frontendAnchor": "hist-dn-2017-2018",
       "legacyIds": [
@@ -10913,7 +10913,7 @@
       "order": 3,
       "maxScore": 5,
       "topic": "Hình học",
-      "content": "Cho tam giác $ABC$ nhọn, không cân $AB<ac$, nội=\"\" tiếp=\"\" đường=\"\" tròn=\"\" tâm=\"\" $o$=\"\" và=\"\" ngoại=\"\" $i$.=\"\" Đường=\"\" thẳng=\"\" qua=\"\" $i$=\"\" vuông=\"\" góc=\"\" với=\"\" $ai$=\"\" cắt=\"\" $bc$=\"\" tại=\"\" $s$.=\"\" gọi=\"\" $m$=\"\" là=\"\" trung=\"\" điểm=\"\" $bc$,=\"\" $d$=\"\" chính=\"\" giữa=\"\" cung=\"\" nhỏ=\"\" của=\"\" $(o)$=\"\" $j$=\"\" đối=\"\" xứng=\"\" $o$.=\"\" <strong=\"\">a) Chứng minh tam giác $DBI$ cân và tam giác $DSJ$ vuông.\n\n<strong>b)</strong> Gọi $X$ là hình chiếu của điểm $S$ trên đường thẳng $OI$ và $Y$ là giao điểm thứ hai của $MI$ và đường tròn ngoại tiếp tam giác $OMS$. Chứng minh ba điểm $A,X,Y$ thẳng hàng.</ac$,>",
+      "content": "Cho tam giác $ABC$ nhọn, không cân $AB&lt;AC$, nội tiếp đường tròn tâm $O$ và ngoại tiếp đường tròn tâm $I$. Đường thẳng qua $I$ vuông góc với $AI$ cắt đường thẳng $BC$ tại $S$. Gọi $M$ là trung điểm $BC$, $D$ là điểm chính giữa cung nhỏ $BC$ của đường tròn $(O)$ và $J$ là điểm đối xứng với $I$ qua $O$.\n\n<strong>a)</strong> Chứng minh tam giác $DBI$ cân và tam giác $DSJ$ vuông.\n\n<strong>b)</strong> Gọi $X$ là hình chiếu của điểm $S$ trên đường thẳng $OI$ và $Y$ là giao điểm thứ hai của $MI$ và đường tròn ngoại tiếp tam giác $OMS$. Chứng minh ba điểm $A,X,Y$ thẳng hàng.",
       "referenceSolution": "",
       "frontendAnchor": "hist-qn-2020-2021",
       "legacyIds": [
