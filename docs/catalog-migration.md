@@ -18,6 +18,18 @@ dùng khóa `specialty:chapter-2:example-1-1`; đề Hùng Vương hiện dùng 
 không đồng nghĩa với nội dung còn thiếu. Dry-run sẽ báo xung đột và chặn nhập;
 cần lập ánh xạ khóa cũ–mới, giữ `_id`, bài nộp và nội dung Admin đã chỉnh sửa.
 
+### Dry-run thực tế do người vận hành cung cấp
+
+Báo cáo cho thấy 64 đề, 75 nhóm, 354 câu và 12 khối trong manifest;
+Atlas có 28 đề, 78 nhóm, 456 câu và 0 khối. Chỉ 6 nhóm khớp khóa;
+0 đề và 0 câu khớp khóa. Script báo 423 xung đột và `writes: 0`.
+Các số `insert` (64/69/354/12) chỉ là **số khóa thiếu**, không phải
+số bản ghi được phép nhập: đề và câu đã tồn tại dưới khóa cũ. Cặp
+`matchedWithoutSetId` và `matchedWithoutExamId` bằng 0 vì chưa khớp khóa;
+không chứng minh rằng các bản ghi cũ đều có liên kết. Bản script trước
+chỉ xuất 100 xung đột đầu; từ phiên bản này báo cáo xuất đủ để đối chiếu.
+Tuyệt đối chưa chạy apply với báo cáo này.
+
 ## Chạy kiểm kê
 
 1. Tạo bản sao lưu Atlas của `exams`, `content_sets`, `problems`, `content_blocks`
