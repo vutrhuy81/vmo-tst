@@ -70,11 +70,20 @@ Hai câu lịch sử trong manifest có markup hỏng sau trích xuất HTML:
 vẫn cần kiểm tra cú pháp. Cần khôi phục hai câu từ đề gốc/nguồn đã
 xác minh và sửa bộ trích xuất trước khi chuyển sang API-only.
 
+Đã sửa hai bất đẳng thức chứa dấu `<` trong HTML nguồn để DOM parser
+không hiểu nhầm thành thẻ, tái tạo hai câu trong manifest và thêm kiểm
+tra chặn mẫu HTML hỏng. Đã sửa chỉ số CSP trong HTML và manifest thành
+`a_{27^{27}}` theo bản Atlas được xác nhận là đúng. Các thay đổi nguồn
+không ghi đè bản ghi Atlas.
+
 Chiến lược hòa giải: giữ `_id`, các lời giải và phần chỉnh sửa Admin
 trong bản Atlas; ánh xạ khóa cũ–mới chỉ sau khi xác nhận từng cặp;
 tạo đề/nhóm riêng theo ngày cho các nhóm Atlas đang gộp; bổ sung
 `examId`/`setId` theo quan hệ đã kiểm chứng. Cần chạy đối chiếu sau
 migration và kiểm tra frontend/API trên Preview trước khi phát hành.
+Quy tắc ưu tiên: khi câu trong Atlas đã tồn tại, nội dung Atlas là
+nguồn chuẩn; thay đổi manifest chỉ dùng để chuẩn hóa nguồn và điền
+nội dung thực sự thiếu, không sửa nội dung câu đã lưu ở Atlas.
 
 ## Chạy kiểm kê
 
