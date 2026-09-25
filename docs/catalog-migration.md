@@ -55,6 +55,27 @@ Atlas để không làm đứt liên kết bài nộp và giữ nội dung Admin
 kiểm tra `setId`, lời giải, nguồn tham khảo và trạng thái. Không chạy
 `catalog:apply` hiện tại: chế độ này vẫn chủ động chặn toàn bộ xung đột.
 
+### Kiểm tra nguyên văn 203 cặp khác HTML
+
+Đã đối chiếu file `catalog-review.json` (203/203 cặp): 113 câu TST
+khác HTML nhưng có độ giống văn bản rất cao; điều đó **không** đủ
+chứng minh tương đương toán học. Ví dụ câu CSP ngày 2 về dãy số hỏi
+`a_{2727}` trong manifest, trong khi bản Atlas hỏi `a_{27^{27}}`.
+Không được thay bản Atlas bằng manifest hoặc coi cặp này trùng nội dung.
+
+Hai câu lịch sử trong manifest có markup hỏng sau trích xuất HTML:
+`history-dn-qn:hist-dn-2017-2018:question-7` và
+`history-dn-qn:hist-qn-2020-2021:question-3`. Câu thứ hai có thể
+đang trùng bản Atlas hỏng, nên cả những cặp `contentEqual: true`
+vẫn cần kiểm tra cú pháp. Cần khôi phục hai câu từ đề gốc/nguồn đã
+xác minh và sửa bộ trích xuất trước khi chuyển sang API-only.
+
+Chiến lược hòa giải: giữ `_id`, các lời giải và phần chỉnh sửa Admin
+trong bản Atlas; ánh xạ khóa cũ–mới chỉ sau khi xác nhận từng cặp;
+tạo đề/nhóm riêng theo ngày cho các nhóm Atlas đang gộp; bổ sung
+`examId`/`setId` theo quan hệ đã kiểm chứng. Cần chạy đối chiếu sau
+migration và kiểm tra frontend/API trên Preview trước khi phát hành.
+
 ## Chạy kiểm kê
 
 1. Tạo bản sao lưu Atlas của `exams`, `content_sets`, `problems`, `content_blocks`
