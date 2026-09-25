@@ -42,6 +42,11 @@ Tuyệt đối chưa chạy apply với báo cáo này.
    Báo cáo đúng phiên bản có `reportVersion: 2` và số phần tử trong
    `conflicts` bằng `conflictCount`. File này chỉ chứa khóa/metadata,
    không chứa chuỗi kết nối; đừng thêm file báo cáo vào Git.
+   `candidates` liệt kê khóa manifest và khóa Atlas có thể tương ứng;
+   với câu hỏi có thêm SHA-256 nội dung và `contentEqual`. Hash không
+   chứng minh hai câu cùng nghĩa khi HTML khác, và script không tự hợp nhất.
+   Đối chiếu riêng cặp nhiều nguồn cùng trỏ một bản ghi, liên kết
+   `setId`/`examId` và các nội dung đã sửa trước khi lập ánh xạ chính thức.
 4. Đối chiếu `manifest`, `plan`, `conflicts` và tổng số bản ghi trong Atlas.
    Mọi xung đột khóa hoặc anchor đều chặn ghi. Đối chiếu riêng các câu có
    cùng nội dung nhưng khác khóa; công cụ không thể tự kết luận chúng trùng.
