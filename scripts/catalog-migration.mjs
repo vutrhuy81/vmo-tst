@@ -92,7 +92,7 @@ try {
   manifest.problems.forEach(p => { if (!setKeys.has(p.setKey)) conflicts.push(`problem thiếu set ${p.contentKey}`); });
   manifest.contentSets.filter(x => x.examKey).forEach(x => { if (!examKeys.has(x.examKey)) conflicts.push(`set thiếu exam ${x.key}`); });
   const report = { mode: apply ? 'apply' : 'dry-run', database: 'vmo_tst', manifest: manifestSummary(manifest),
-    plan, conflicts: conflicts.slice(0, 100), conflictCount: conflicts.length, writes: 0 };
+    plan, conflicts, conflictCount: conflicts.length, writes: 0 };
   if (conflicts.length) {
     console.log(JSON.stringify(report, null, 2));
     throw new Error('Phát hiện xung đột; chưa ghi bất kỳ bản ghi nào.');
