@@ -10,6 +10,7 @@ const manifest = assertManifest(JSON.parse(fs.readFileSync(path.join(root, 'data
 const apply = process.argv.includes('--apply');
 const reportPath = process.env.CATALOG_REPORT_PATH;
 const reviewPath = process.env.CATALOG_REVIEW_PATH;
+const relationsPath = process.env.CATALOG_RELATIONS_PATH;
 const uri = process.env.MONGODB_URI;
 if (!uri) throw new Error('Thiếu MONGODB_URI. Dùng tài khoản Atlas có quyền đọc cho dry-run.');
 if (new URL(uri).pathname.slice(1) !== 'vmo_tst') throw new Error('MONGODB_URI phải ghi rõ /vmo_tst.');
@@ -34,9 +35,11 @@ try {
   const existing = Object.fromEntries(await Promise.all(collections.map(async ([name]) =>
     [name, await db.collection(name).find({}, {
       projection: name === 'problems'
-        ? { contentKey: 1, setKey: 1, setId: 1, examId: 1, frontendAnchor: 1, legacyIds: 1, shortLabel: 1, order: 1, status: 1, content: 1 }
-        : name === 'exams' ? { examKey: 1, targetAnchor: 1, category: 1, title: 1 }
-        : name === 'content_sets' ? { key: 1, examKey: 1, examId: 1, group: 1, title: 1 } : { blockKey: 1 }
+        ? { contentKey: 1, setKey: 1, setId: 1, examId: 1, sourceGroup: 1, sourceType: 1,
+            frontendAnchor: 1, legacyIds: 1, shortLabel: 1, order: 1, questionNumber: 1,
+            status: 1, content: 1 }
+        : name === 'exams' ? { examKey: 1, targetAnchor: 1, category: 1, title: 1, dayNumber: 1, province: 1, year: 1, status: 1 }
+        : name === 'content_sets' ? { key: 1, examKey: 1, examId: 1, group: 1, title: 1, order: 1, status: 1 } : { blockKey: 1 }
     }).toArray()] )));
   const plan = {};
   const conflicts = [];
@@ -127,6 +130,16 @@ try {
     if (reviewPath) fs.writeFileSync(path.resolve(reviewPath), JSON.stringify({
       database: 'vmo_tst', mode: 'read-only-review', count: reviewPairs.length,
       pairs: reviewPairs
+    }, null, 2) + '\n', 'utf8');
+    if (relationsPath) fs.writeFileSync(path.resolve(relationsPath), JSON.stringify({
+      database: 'vmo_tst', mode: 'read-only-relations',
+      exams: existing.exams.map(({ _id, ...fields }) => ({ id: String(_id), ...fields })),
+      contentSets: existing.content_sets.map(({ _id, examId, ...fields }) => ({
+        id: String(_id), examId: String(examId || ''), ...fields
+      })),
+      problems: existing.problems.map(({ _id, setId, examId, content, ...fields }) => ({
+        id: String(_id), setId: String(setId || ''), examId: String(examId || ''), ...fields
+      }))
     }, null, 2) + '\n', 'utf8');
     console.log(json);
   };
