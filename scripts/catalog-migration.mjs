@@ -7,6 +7,7 @@ import { assertManifest, manifestSummary } from '../lib/catalog-manifest.js';
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const manifest = assertManifest(JSON.parse(fs.readFileSync(path.join(root, 'data/static-catalog-manifest.json'), 'utf8')));
 const apply = process.argv.includes('--apply');
+const reportPath = process.env.CATALOG_REPORT_PATH;
 const uri = process.env.MONGODB_URI;
 if (!uri) throw new Error('Thiếu MONGODB_URI. Dùng tài khoản Atlas có quyền đọc cho dry-run.');
 if (new URL(uri).pathname.slice(1) !== 'vmo_tst') throw new Error('MONGODB_URI phải ghi rõ /vmo_tst.');
@@ -91,13 +92,18 @@ try {
   const examKeys = new Set([...existing.exams.map(x => x.examKey), ...manifest.exams.map(x => x.examKey)]);
   manifest.problems.forEach(p => { if (!setKeys.has(p.setKey)) conflicts.push(`problem thiếu set ${p.contentKey}`); });
   manifest.contentSets.filter(x => x.examKey).forEach(x => { if (!examKeys.has(x.examKey)) conflicts.push(`set thiếu exam ${x.key}`); });
-  const report = { mode: apply ? 'apply' : 'dry-run', database: 'vmo_tst', manifest: manifestSummary(manifest),
+  const report = { reportVersion: 2, mode: apply ? 'apply' : 'dry-run', database: 'vmo_tst', manifest: manifestSummary(manifest),
     plan, conflicts, conflictCount: conflicts.length, writes: 0 };
+  const outputReport = () => {
+    const json = JSON.stringify(report, null, 2);
+    if (reportPath) fs.writeFileSync(path.resolve(reportPath), json + '\n', 'utf8');
+    console.log(json);
+  };
   if (conflicts.length) {
-    console.log(JSON.stringify(report, null, 2));
+    outputReport();
     throw new Error('Phát hiện xung đột; chưa ghi bất kỳ bản ghi nào.');
   }
-  if (!apply) { console.log(JSON.stringify(report, null, 2)); }
+  if (!apply) { outputReport(); }
   else {
     // Insert only: dữ liệu đã tồn tại, nhất là các sửa chữa của Admin, luôn được giữ nguyên.
     for (const [name, source, field] of collections) {
@@ -126,6 +132,6 @@ try {
         if (result.upsertedCount) report.writes++;
       }
     }
-    console.log(JSON.stringify(report, null, 2));
+    outputReport();
   }
 } finally { await client.close(); }
