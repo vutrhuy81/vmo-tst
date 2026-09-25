@@ -55,6 +55,12 @@ try {
       });
     }
     if (name === 'problems') {
+      const manifestByKey = new Map(source.map(item => [item.contentKey, item]));
+      plan[name].matchedWithoutSetId = current.filter(x => manifestByKey.has(x.contentKey) && !x.setId).length;
+      plan[name].matchedWithoutExamId = current.filter(x => {
+        const sourceProblem = manifestByKey.get(x.contentKey);
+        return sourceProblem && sourceProblem.sourceGroup !== 'specialty' && !x.examId;
+      }).length;
       missing.forEach(item => {
         const collision = current.find(x => x.setKey === item.setKey && x.frontendAnchor === item.frontendAnchor &&
           (x.legacyIds || []).some(id => (item.legacyIds || []).includes(id)));
