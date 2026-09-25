@@ -33,7 +33,7 @@ try {
       projection: name === 'problems'
         ? { contentKey: 1, setKey: 1, setId: 1, examId: 1, frontendAnchor: 1, legacyIds: 1, shortLabel: 1, order: 1, status: 1 }
         : name === 'exams' ? { examKey: 1, targetAnchor: 1, category: 1 }
-          : name === 'content_sets' ? { key: 1, examKey: 1, examId: 1 } : { blockKey: 1 }
+        : name === 'content_sets' ? { key: 1, examKey: 1, examId: 1, group: 1, title: 1 } : { blockKey: 1 }
     }).toArray()] )));
   const plan = {};
   const conflicts = [];
@@ -54,6 +54,17 @@ try {
         if (collision) conflicts.push(`exams: anchor ${item.targetAnchor} đã thuộc ${collision.examKey || collision._id}`);
       });
     }
+    if (name === 'content_sets') {
+      missing.forEach(item => {
+        const aliases = [
+          item.key.replace(/^tst-national:/, 'tst:'),
+          item.key.replace(/^history-dn-qn:/, 'danang_quangnam:')
+        ];
+        const collision = current.find(x => aliases.includes(x.key) ||
+          (x.group === item.group && x.title === item.title));
+        if (collision) conflicts.push(`content_sets: ${item.key} có thể trùng nhóm ${collision.key || collision._id}`);
+      });
+    }
     if (name === 'problems') {
       const manifestByKey = new Map(source.map(item => [item.contentKey, item]));
       plan[name].matchedWithoutSetId = current.filter(x => manifestByKey.has(x.contentKey) && !x.setId).length;
@@ -63,11 +74,12 @@ try {
       }).length;
       missing.forEach(item => {
         const collision = current.find(x => {
-          if (x.setKey !== item.setKey) return false;
           const aliases = new Set([item.contentKey, ...(item.legacyIds || [])]);
           if (aliases.has(x.contentKey) || (x.legacyIds || []).some(id => aliases.has(id))) return true;
           // Một số bản đồng bộ cũ đã đổi khóa và chỉ giữ lại thứ tự/nhãn câu.
-          return Number.isInteger(item.order) && Number(x.order) === item.order &&
+          return x.sourceGroup === item.sourceGroup && item.frontendAnchor &&
+            x.frontendAnchor === item.frontendAnchor && Number.isInteger(item.order) &&
+            Number(x.order) === item.order &&
             String(x.shortLabel || '').trim().toLocaleLowerCase('vi') ===
             String(item.shortLabel || '').trim().toLocaleLowerCase('vi');
         });
