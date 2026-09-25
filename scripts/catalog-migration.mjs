@@ -31,7 +31,7 @@ try {
   const existing = Object.fromEntries(await Promise.all(collections.map(async ([name]) =>
     [name, await db.collection(name).find({}, {
       projection: name === 'problems'
-        ? { contentKey: 1, setKey: 1, setId: 1, examId: 1, frontendAnchor: 1, legacyIds: 1, status: 1 }
+        ? { contentKey: 1, setKey: 1, setId: 1, examId: 1, frontendAnchor: 1, legacyIds: 1, shortLabel: 1, order: 1, status: 1 }
         : name === 'exams' ? { examKey: 1, targetAnchor: 1, category: 1 }
           : name === 'content_sets' ? { key: 1, examKey: 1, examId: 1 } : { blockKey: 1 }
     }).toArray()] )));
@@ -62,9 +62,16 @@ try {
         return sourceProblem && sourceProblem.sourceGroup !== 'specialty' && !x.examId;
       }).length;
       missing.forEach(item => {
-        const collision = current.find(x => x.setKey === item.setKey && x.frontendAnchor === item.frontendAnchor &&
-          (x.legacyIds || []).some(id => (item.legacyIds || []).includes(id)));
-        if (collision) conflicts.push(`problems: câu ${item.contentKey} trùng legacy ID với ${collision.contentKey || collision._id}`);
+        const collision = current.find(x => {
+          if (x.setKey !== item.setKey) return false;
+          const aliases = new Set([item.contentKey, ...(item.legacyIds || [])]);
+          if (aliases.has(x.contentKey) || (x.legacyIds || []).some(id => aliases.has(id))) return true;
+          // Một số bản đồng bộ cũ đã đổi khóa và chỉ giữ lại thứ tự/nhãn câu.
+          return Number.isInteger(item.order) && Number(x.order) === item.order &&
+            String(x.shortLabel || '').trim().toLocaleLowerCase('vi') ===
+            String(item.shortLabel || '').trim().toLocaleLowerCase('vi');
+        });
+        if (collision) conflicts.push(`problems: ${item.contentKey} có thể trùng bản ghi ${collision.contentKey || collision._id}; cần đối chiếu trước khi nhập`);
       });
     }
   }
