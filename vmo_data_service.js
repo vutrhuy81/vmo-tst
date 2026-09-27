@@ -247,8 +247,9 @@ export async function getExamCatalogSummary(category = 'tst-national') {
 
 export async function getExamCatalogDetail(category, anchor) {
   const exams = normalizeList(await request('exam_catalog', { category, view: 'detail', anchor }));
-  const exam = exams[0];
-  return exam ? { ...exam, problems: normalizeList(Array.isArray(exam.problems) ? exam.problems : []) } : null;
+  return exams.map(exam => ({
+    ...exam, problems: normalizeList(Array.isArray(exam.problems) ? exam.problems : [])
+  }));
 }
 
 export async function searchExamCatalog(category, query) {

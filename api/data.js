@@ -389,13 +389,22 @@ export default async function handler(req, res) {
         if (view === 'detail') {
           const anchor = cleanText(req.query?.anchor, 120);
           if (!anchor) return res.status(400).json({ success: false, error: 'Thiếu mã đề thi' });
-          const exam = await db.collection('exams').findOne({ ...examFilter, targetAnchor: anchor });
-          if (!exam) return res.status(404).json({ success: false, error: 'Không tìm thấy đề thi' });
-          const problemFilter = { examId: String(exam._id) };
+          const exams = await db.collection('exams').find({ ...examFilter, targetAnchor: anchor })
+            .sort({ dayNumber: 1, createdAt: 1 }).limit(20).toArray();
+          if (!exams.length) return res.status(404).json({ success: false, error: 'Không tìm thấy đề thi' });
+          const problemFilter = { examId: { $in: exams.map(exam => String(exam._id)) } };
           if (session.role !== 'admin') problemFilter.status = 'published';
           const problems = await db.collection('problems').find(problemFilter)
-            .sort({ orderNumber: 1, questionNumber: 1 }).limit(100).toArray();
-          return res.status(200).json({ success: true, items: [{ ...exam, problems }] });
+            .sort({ orderNumber: 1, questionNumber: 1 }).limit(500).toArray();
+          const byExam = new Map();
+          problems.forEach(problem => {
+            const key = String(problem.examId);
+            if (!byExam.has(key)) byExam.set(key, []);
+            byExam.get(key).push(problem);
+          });
+          return res.status(200).json({ success: true, items: exams.map(exam => ({
+            ...exam, problems: byExam.get(String(exam._id)) || []
+          })) });
         }
         if (view === 'search') {
           const query = cleanText(req.query?.q, 100);

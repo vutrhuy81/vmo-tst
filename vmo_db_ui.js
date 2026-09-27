@@ -4821,13 +4821,16 @@ if (card) card.dataset.databaseCard = 'true';
     const card = document.getElementById(anchor);
     const pending = (async () => {
       try {
-        const exam = await window.VMODataService.getExamCatalogDetail(category, anchor);
-        if (!exam) throw new Error('Không tìm thấy đề thi');
-        renderDatabaseExam(exam, category === 'tst-national' ? 'tst' : category === 'vmo-mock' ? 'mock' : 'regional');
-        if (category === 'vmo-mock') ensureDatabaseMockNavigation(exam);
+        const exams = await window.VMODataService.getExamCatalogDetail(category, anchor);
+        if (!Array.isArray(exams) || !exams.length) throw new Error('Không tìm thấy đề thi');
+        exams.sort((a, b) => Number(a.dayNumber) - Number(b.dayNumber));
+        exams.forEach(exam => {
+          renderDatabaseExam(exam, category === 'tst-national' ? 'tst' : category === 'vmo-mock' ? 'mock' : 'regional');
+          if (category === 'vmo-mock') ensureDatabaseMockNavigation(exam);
+        });
         if (!(window.mongoProblemReferenceLinks instanceof Map)) window.mongoProblemReferenceLinks = new Map();
         if (!(window.mongoProblemsByContentKey instanceof Map)) window.mongoProblemsByContentKey = new Map();
-        exam.problems.forEach(problem => {
+        exams.flatMap(exam => exam.problems).forEach(problem => {
           window.mongoProblemReferenceLinks.set(problem.contentKey, problem.referenceLinks || []);
           window.mongoProblemsByContentKey.set(problem.contentKey, problem);
         });

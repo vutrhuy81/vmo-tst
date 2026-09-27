@@ -86,7 +86,7 @@ window.VMODataService.getExamCatalogSummary = async category =>
   }));
 window.VMODataService.getExamCatalogDetail = async (category, anchor) => {
   detailRequests.push(`${category}:${anchor}`);
-  return (await window.VMODataService.getExamCatalog(category)).find(exam => exam.targetAnchor === anchor);
+  return (await window.VMODataService.getExamCatalog(category)).filter(exam => exam.targetAnchor === anchor);
 };
 window.eval(locationsSource);
 window.eval(uiSource);
@@ -183,6 +183,28 @@ assert.equal(window.document.querySelector('#sidebar-history a[href="#hist-dn-20
   '03. Đà Nẵng 2026–2027');
 await window.loadDatabaseRegionalExams(true);
 assert.equal(window.document.querySelectorAll('#sidebar-history a.nav-link').length, 5);
+const initialCatalog = window.VMODataService.getExamCatalog;
+window.VMODataService.getExamCatalog = async category => category === 'tst-national'
+  ? [...await initialCatalog(category), ...[
+    ['tst-ptnk', 'PTNK TP.HCM', [1, 2]],
+    ['tst-truong-he-danang', 'TRƯỜNG HÈ ĐÀ NẴNG', [1, 2]],
+    ['tst-khtn', 'CHUYÊN KHTN HÀ NỘI', [1, 2, 3, 4]]
+  ].flatMap(([anchor, province, days]) => days.map(dayNumber => ({
+    id: `${anchor}-${dayNumber}`, examKey: `tst-national:${anchor}:day-${dayNumber}`,
+    targetAnchor: anchor, province, dayNumber, region: 'BAC', title: province,
+    problems: [{ contentKey: `tst:${anchor}:day-${dayNumber}:question-1`,
+      questionNumber: 1, content: `Đề ngày ${dayNumber}` }]
+  })))] : initialCatalog(category);
+await window.loadDatabaseTstExams(true);
+for (const [anchor, expectedDays] of [
+  ['tst-ptnk', [1, 2]], ['tst-truong-he-danang', [1, 2]], ['tst-khtn', [1, 2, 3, 4]]
+]) {
+  await window.loadDatabaseExamDetail('tst-national', anchor);
+  assert.deepEqual(Array.from(window.document.querySelectorAll(`#${anchor} .db-exam-day`),
+    section => Number(section.dataset.dayNumber)), expectedDays, `${anchor} phải có đủ ngày theo thứ tự`);
+  assert.equal(window.document.querySelectorAll(`#sidebar-tst a[href="#${anchor}"]`).length, 1,
+    'Mỗi địa phương chỉ có một liên kết sidebar');
+}
 assert.equal(fullTabTypesets, 0, 'loader MongoDB không được typeset lại toàn bộ tab');
 
 const mathPreview = window.document.createElement('div');
