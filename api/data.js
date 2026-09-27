@@ -170,6 +170,21 @@ function escapeRegex(value) {
   return String(value || '').replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 }
 
+function accentInsensitiveRegex(value) {
+  const variants = {
+    a: '[aàáảãạăằắẳẵặâầấẩẫậ]',
+    e: '[eèéẻẽẹêềếểễệ]',
+    i: '[iìíỉĩị]',
+    o: '[oòóỏõọôồốổỗộơờớởỡợ]',
+    u: '[uùúủũụưừứửữự]',
+    y: '[yỳýỷỹỵ]',
+    d: '[dđ]'
+  };
+  return String(value).normalize('NFD').replace(/[\u0300-\u036f]/g, '')
+    .toLocaleLowerCase('vi').replace(/đ/g, 'd').split('')
+    .map(char => variants[char] || escapeRegex(char)).join('');
+}
+
 function problemSnapshot(problem) {
   if (!problem) return null;
   return {
@@ -388,7 +403,7 @@ export default async function handler(req, res) {
           const exams = await db.collection('exams').find(examFilter, { projection: { _id: 1, targetAnchor: 1 } })
             .limit(200).toArray();
           const anchorById = new Map(exams.map(exam => [String(exam._id), exam.targetAnchor]));
-          const regex = { $regex: escapeRegex(query), $options: 'i' };
+          const regex = { $regex: accentInsensitiveRegex(query), $options: 'i' };
           const problemFilter = {
             examId: { $in: [...anchorById.keys()] },
             $or: [{ content: regex }, { title: regex }, { shortLabel: regex }, { topic: regex }]
