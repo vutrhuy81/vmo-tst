@@ -227,114 +227,6 @@
     });
   }
 
-  function rawContent(element) {
-    if (!element) return '';
-    return (element._catalogSourceHtml ?? element.getAttribute('data-raw-math') ?? element.innerHTML ?? element.textContent ?? '').trim();
-  }
-
-  function captureExampleCatalogSource(root = document) {
-    root.querySelectorAll?.('#tab-danang .examplebox > p, #tab-danang .examplebox .example-solution').forEach(element => {
-      if (element._catalogSourceHtml === undefined) {
-        element._catalogSourceHtml = element.innerHTML;
-      }
-    });
-  }
-
-  window.buildContentCatalog = function() {
-    captureExampleCatalogSource();
-    const setsByKey = new Map();
-    const problems = [];
-
-    document.querySelectorAll('.examplebox, .problem-item').forEach(card => {
-      const heading = card.classList.contains('examplebox')
-        ? card.querySelector('.box-heading')
-        : card.querySelector('.problem-id');
-      if (!heading) return;
-
-      const title = headingTextWithoutActions(heading);
-      const identity = getProblemIdentity(card, title);
-      if (!identity.problemKey || !identity.setKey) return;
-
-      const examCard = card.closest('.exam-card, .paper-card');
-      const chapter = card.closest('.chapter-block');
-      const tab = card.closest('.tab-pane');
-      const topic = (card.querySelector('.badge-topic')?.textContent || title).trim();
-      const pointText = card.querySelector('.badge-point')?.textContent || '';
-      const scoreMatch = pointText.replace(',', '.').match(/([0-9]+(?:\.[0-9]+)?)/);
-      const problemContent = card.classList.contains('examplebox')
-        ? Array.from(card.querySelectorAll(':scope > p')).map(rawContent).join('\n\n')
-        : rawContent(card.querySelector('.problem-content'));
-      const solution = rawContent(card.querySelector('.example-solution, .solution, .solution-content'));
-
-      if (!setsByKey.has(identity.setKey)) {
-        const year = (examCard?.querySelector('.tag-year')?.textContent || '2026-2027').trim();
-        const province = (examCard?.querySelector('.tag-province')?.textContent || '').trim();
-        setsByKey.set(identity.setKey, {
-          key: identity.setKey,
-          contentType: identity.contentType,
-          title: identity.setTitle,
-          group: identity.sourceGroup,
-          year,
-          province,
-          region: examCard?.dataset?.filter || '',
-          order: setsByKey.size + 1,
-          status: 'published'
-        });
-      }
-
-      problems.push({
-        contentKey: identity.problemKey,
-        setKey: identity.setKey,
-        setTitle: identity.setTitle,
-        sourceType: identity.sourceType,
-        sourceGroup: identity.sourceGroup,
-        title,
-        shortLabel: title.slice(0, 120),
-        chapterNumber: identity.chapterNumber,
-        questionNumber: identity.questionNumber,
-        day: (examCard?.querySelector('.tag-day')?.textContent || '').trim(),
-        order: identity.questionNumber,
-        maxScore: scoreMatch ? Number(scoreMatch[1]) : 5,
-        topic,
-        content: problemContent,
-        referenceSolution: solution,
-        frontendAnchor: identity.frontendAnchor || tab?.id || chapter?.id || '',
-        legacyIds: [identity.legacyProblemId].filter(Boolean),
-        allowSubmission: true,
-        allowAiEvaluation: true,
-        status: 'published',
-        version: 1
-      });
-    });
-
-    return { sets: Array.from(setsByKey.values()), problems };
-  };
-
-  window.syncContentCatalogToDatabase = async function() {
-    if (!requireAdminUiAction()) return;
-    const button = document.getElementById('btnSyncContentCatalog');
-    const originalText = button?.innerHTML;
-    if (button) {
-      button.disabled = true;
-      button.innerHTML = '⏳ Đang đồng bộ...';
-    }
-    try {
-      if (!window.VMODataService?.upsertContentCatalog) {
-        throw new Error('Dịch vụ đồng bộ catalog chưa sẵn sàng');
-      }
-      const catalog = window.buildContentCatalog();
-      const result = await window.VMODataService.upsertContentCatalog(catalog);
-      showToast(`Đã đồng bộ ${result?.setCount || 0} nhóm và ${result?.problemCount || 0} câu hỏi/ví dụ.`, true);
-    } catch (err) {
-      showToast('Không thể đồng bộ nội dung: ' + (err?.message || 'Lỗi không xác định'), false);
-    } finally {
-      if (button) {
-        button.disabled = false;
-        button.innerHTML = originalText || '🔄 Đồng bộ ngân hàng câu hỏi';
-      }
-    }
-  };
-
   window.migrateTstReferenceLinksToDatabase = async function() {
     if (!requireAdminUiAction()) return;
     if (!window.VMODataService?.migrateTstReferenceLinks) return showToast('Dịch vụ migration chưa sẵn sàng.', false);
@@ -2056,29 +1948,12 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
     }
 
     if (!isAdmin) {
-      modal.querySelector('#btnSyncContentCatalog')?.remove();
       modal.querySelector('#btnMigrateTstSources')?.remove();
       modal.querySelector('#hub-tab-catalog')?.remove();
       modal.querySelector('#hub-panel-catalog')?.remove();
       modal.querySelectorAll(
         '[onclick="toggleAddEventForm()"], [onclick="toggleAddDocForm()"], [onclick="toggleAddExamForm()"], #formAddEvent, #formAddDoc, #formAddExam'
       ).forEach(el => { el.style.display = 'none'; });
-    } else if (!modal.querySelector('#btnSyncContentCatalog')) {
-      // Modal có thể được khai báo sẵn trong src/modals/data-hub-modal.html
-      // hoặc được tạo động bên dưới. Không phải phiên bản nào cũng gắn class
-      // `hub-tabs`, vì vậy dùng nút tab đầu tiên để xác định chính xác hàng tab.
-      const firstTabButton = modal.querySelector('.hub-tab-btn, #hub-tab-events');
-      const tabs = modal.querySelector('.hub-tabs, [class*="hub-tabs"]')
-        || firstTabButton?.parentElement;
-      if (tabs) {
-        const syncButton = document.createElement('button');
-        syncButton.id = 'btnSyncContentCatalog';
-        syncButton.type = 'button';
-        syncButton.innerHTML = '🔄 Đồng bộ ngân hàng câu hỏi';
-        syncButton.style.cssText = 'margin-left:auto;padding:7px 12px;border:1px solid #a5b4fc;border-radius:7px;background:#eef2ff;color:#4338ca;font-weight:700;cursor:pointer;';
-        syncButton.onclick = window.syncContentCatalogToDatabase;
-        tabs.appendChild(syncButton);
-      }
     }
     ensureCatalogManagementUi(modal, isAdmin);
     ensureSubmissionFilterUi(modal, isAdmin);
@@ -2151,8 +2026,7 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
     button.id = 'hub-tab-catalog';
     button.textContent = '🧭 Danh mục nội dung';
     button.onclick = () => window.switchHubTab('catalog');
-    const syncButton = tabs.querySelector('#btnSyncContentCatalog');
-    tabs.insertBefore(button, syncButton || null);
+    tabs.appendChild(button);
 
     const panel = document.createElement('div');
     panel.id = 'hub-panel-catalog';
@@ -5318,7 +5192,6 @@ if (card) card.dataset.databaseCard = 'true';
   // Tự động kích hoạt khi DOM hoàn tất
   function init() {
     const activeRoot = document.querySelector('.tab-pane.active') || document;
-    captureExampleCatalogSource();
     setupModalEvents();
     injectSubmissionButtons(activeRoot);
     injectDataManagementButton();

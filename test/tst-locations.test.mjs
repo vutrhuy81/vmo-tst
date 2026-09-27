@@ -100,6 +100,8 @@ assert.equal(window.VMO_TST_LOCATIONS.filter(item => item.type === 'province').l
 assert.equal(window.VMO_TST_LOCATIONS.filter(item => item.type === 'university_school').length, 4);
 
 window.openDataHubModal();
+assert.equal(window.document.getElementById('btnSyncContentCatalog'), null);
+assert.equal(window.syncContentCatalogToDatabase, undefined);
 window.toggleAddDocForm();
 const select = window.document.getElementById('docTargetAnchor');
 assert.equal(window.document.getElementById('docDayNumber').options.length, 4);

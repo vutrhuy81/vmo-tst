@@ -311,13 +311,6 @@ export async function getCatalogRules() {
   return normalizeList(await request('problems', { catalogRules: 1 }));
 }
 
-export async function upsertContentCatalog(catalog) {
-  return mutate('upsert_content_catalog', {
-    sets: Array.isArray(catalog?.sets) ? catalog.sets : [],
-    problems: Array.isArray(catalog?.problems) ? catalog.problems : []
-  });
-}
-
 export async function updateCatalogItem(itemType, id, changes = {}) {
   return normalize(await mutate('update_catalog_item', { itemType, id, ...changes }));
 }
@@ -554,7 +547,6 @@ const VMODataService = Object.freeze({
   getContentBlocks,
   getCatalogProblems,
   getCatalogRules,
-  upsertContentCatalog,
   updateCatalogItem,
   getContentRevisions,
   updateCatalogContent,
