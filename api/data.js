@@ -4,7 +4,7 @@ import { getSession } from '../lib/session.js';
 import { deleteAiGuideRecord, learningScope, recordActivity, summarizeLearning } from '../lib/learning.js';
 import { buildSubmissionContentUpdate, buildSubmissionVerificationUpdate } from '../lib/submission-verification.js';
 
-const ALLOWED_RESOURCES = new Set(['documents', 'exams', 'exam_catalog', 'home_stats', 'exam_image', 'content_sets', 'problems', 'content_revisions', 'submissions', 'submission_image', 'events', 'activity_feed', 'learning_overview', 'exam_trend_reports']);
+const ALLOWED_RESOURCES = new Set(['documents', 'exams', 'exam_catalog', 'home_stats', 'exam_image', 'content_sets', 'content_blocks', 'problems', 'content_revisions', 'submissions', 'submission_image', 'events', 'activity_feed', 'learning_overview', 'exam_trend_reports']);
 const CONTENT_TYPES = new Set(['specialty_chapter', 'mock_exam', 'tst_exam', 'regional_exam']);
 const SOURCE_TYPES = new Set(['specialty_example', 'mock_exam_question', 'tst_question', 'regional_question']);
 const TST_REGIONS = new Set(['BAC', 'TRUNG', 'NAM']);
@@ -170,6 +170,21 @@ function escapeRegex(value) {
   return String(value || '').replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 }
 
+function accentInsensitiveRegex(value) {
+  const variants = {
+    a: '[aàáảãạăằắẳẵặâầấẩẫậ]',
+    e: '[eèéẻẽẹêềếểễệ]',
+    i: '[iìíỉĩị]',
+    o: '[oòóỏõọôồốổỗộơờớởỡợ]',
+    u: '[uùúủũụưừứửữự]',
+    y: '[yỳýỷỹỵ]',
+    d: '[dđ]'
+  };
+  return String(value).normalize('NFD').replace(/[\u0300-\u036f]/g, '')
+    .toLocaleLowerCase('vi').replace(/đ/g, 'd').split('')
+    .map(char => variants[char] || escapeRegex(char)).join('');
+}
+
 function problemSnapshot(problem) {
   if (!problem) return null;
   return {
@@ -316,8 +331,8 @@ export default async function handler(req, res) {
       }
 
       if (resource === 'home_stats') {
-        // Chỉ lấy khóa định danh cần thiết để hợp nhất với catalog tĩnh trên
-        // frontend. Không tải problems/nội dung đề, nên request này vẫn nhẹ.
+        // Chỉ lấy khóa định danh và số ví dụ từ MongoDB để hiển thị thống kê.
+        // Không tải problems/nội dung đề, nên request này vẫn nhẹ.
         const homeExamFilter = {
           category: { $in: ['tst-national', 'history-dn-qn', 'vmo-mock'] }
         };
@@ -352,6 +367,54 @@ export default async function handler(req, res) {
       if (resource === 'exam_catalog') {
         const examFilter = { category: cleanText(req.query?.category, 80) || 'tst-national' };
         if (session.role !== 'admin') examFilter.status = 'published';
+        const view = cleanText(req.query?.view, 20);
+        if (view === 'summary') {
+          const projection = {
+            examKey: 1, targetAnchor: 1, category: 1, title: 1, province: 1,
+            provinceOrder: 1, region: 1, year: 1, setNumber: 1, dayNumber: 1,
+            examDate: 1, duration: 1, status: 1, origin: 1, sourceImageCount: 1
+          };
+          const exams = await db.collection('exams').find(examFilter, { projection })
+            .sort({ provinceOrder: 1, dayNumber: 1, createdAt: 1 }).limit(200).toArray();
+          const problemFilter = { examId: { $in: exams.map(exam => String(exam._id)) } };
+          if (session.role !== 'admin') problemFilter.status = 'published';
+          const counts = exams.length ? await db.collection('problems').aggregate([
+            { $match: problemFilter }, { $group: { _id: '$examId', count: { $sum: 1 } } }
+          ]).toArray() : [];
+          const countByExam = new Map(counts.map(item => [String(item._id), item.count]));
+          return res.status(200).json({ success: true, items: exams.map(exam => ({
+            ...exam, problemCount: countByExam.get(String(exam._id)) || 0
+          })) });
+        }
+        if (view === 'detail') {
+          const anchor = cleanText(req.query?.anchor, 120);
+          if (!anchor) return res.status(400).json({ success: false, error: 'Thiếu mã đề thi' });
+          const exam = await db.collection('exams').findOne({ ...examFilter, targetAnchor: anchor });
+          if (!exam) return res.status(404).json({ success: false, error: 'Không tìm thấy đề thi' });
+          const problemFilter = { examId: String(exam._id) };
+          if (session.role !== 'admin') problemFilter.status = 'published';
+          const problems = await db.collection('problems').find(problemFilter)
+            .sort({ orderNumber: 1, questionNumber: 1 }).limit(100).toArray();
+          return res.status(200).json({ success: true, items: [{ ...exam, problems }] });
+        }
+        if (view === 'search') {
+          const query = cleanText(req.query?.q, 100);
+          if (query.length < 2) return res.status(200).json({ success: true, items: [] });
+          const exams = await db.collection('exams').find(examFilter, { projection: { _id: 1, targetAnchor: 1 } })
+            .limit(200).toArray();
+          const anchorById = new Map(exams.map(exam => [String(exam._id), exam.targetAnchor]));
+          const regex = { $regex: accentInsensitiveRegex(query), $options: 'i' };
+          const problemFilter = {
+            examId: { $in: [...anchorById.keys()] },
+            $or: [{ content: regex }, { title: regex }, { shortLabel: regex }, { topic: regex }]
+          };
+          if (session.role !== 'admin') problemFilter.status = 'published';
+          const matches = exams.length ? await db.collection('problems').find(problemFilter, {
+            projection: { _id: 0, examId: 1 }
+          }).limit(1000).toArray() : [];
+          return res.status(200).json({ success: true, items: [...new Set(matches
+            .map(problem => anchorById.get(String(problem.examId))).filter(Boolean))].map(targetAnchor => ({ targetAnchor })) });
+        }
         const exams = await db.collection('exams').find(examFilter).sort({ provinceOrder: 1, dayNumber: 1, createdAt: 1 }).limit(200).toArray();
         const examIds = exams.map(item => String(item._id));
         const problemFilter = { examId: { $in: examIds } };
@@ -376,6 +439,11 @@ export default async function handler(req, res) {
       if (resource === 'content_sets') {
         if (req.query?.group) filter.group = cleanText(req.query.group, 80);
         if (req.query?.key) filter.key = cleanKey(req.query.key);
+        if (session.role !== 'admin') filter.status = 'published';
+      }
+      if (resource === 'content_blocks') {
+        if (req.query?.group) filter.group = cleanText(req.query.group, 80);
+        if (req.query?.blockKey) filter.blockKey = cleanKey(req.query.blockKey);
         if (session.role !== 'admin') filter.status = 'published';
       }
       if (resource === 'problems') {
@@ -502,7 +570,7 @@ export default async function handler(req, res) {
 
       const sort = resource === 'events'
         ? { startDate: 1 }
-        : resource === 'content_sets' || resource === 'problems'
+        : resource === 'content_sets' || resource === 'content_blocks' || resource === 'problems'
           ? { order: 1, orderNumber: 1 }
           : { createdAt: -1 };
       if (resource === 'submissions' && req.query?.paged === '1') {

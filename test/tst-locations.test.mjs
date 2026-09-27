@@ -8,9 +8,9 @@ const locationsSource = fs.readFileSync(new URL('tst-locations.js', root), 'utf8
 const uiSource = fs.readFileSync(new URL('vmo_db_ui.js', root), 'utf8');
 
 const dom = new JSDOM(`<!doctype html><html><body>
-  <div id="sidebar-tst"><div class="nav-year-group"><div class="nav-year-title">TST</div>${Array.from({ length: 25 }, (_, index) => `<a class="nav-link" href="#tst-existing-${index}">${String(index+1).padStart(2, '0')}. Tỉnh mẫu</a>`).join('')}</div></div>
-  <div id="sidebar-mock"><nav class="book-toc"><div class="nav-year-group"><a class="nav-link" href="#mock-set1-day1">01. Bộ 1</a><a class="nav-link" href="#mock-set2-day2">06. Bộ 2</a></div></nav></div>
-  <div id="sidebar-history"><div class="nav-year-group"><div class="nav-year-title">📘 ĐÀ NẴNG</div><a class="nav-link" href="#hist-dn-2025-2026">01. Đà Nẵng 2025–2026</a></div><div class="nav-year-group"><div class="nav-year-title">📙 QUẢNG NAM</div><a class="nav-link" href="#hist-qn-2022-2023">02. Quảng Nam 2022–2023</a></div></div>
+  <div id="sidebar-tst"><div class="nav-year-group"><div class="nav-year-title">TST</div></div></div>
+  <div id="sidebar-mock"><nav class="book-toc"></nav></div>
+  <div id="sidebar-history"><div class="nav-year-group"><div class="nav-year-title">📙 QUẢNG NAM</div></div><div class="nav-year-group"><div class="nav-year-title">📘 ĐÀ NẴNG</div></div></div>
   <div id="tab-mock"><div class="feed-container"></div></div>
   <div id="tab-tst"><div class="feed-container"></div></div>
   <div id="tab-history"><div class="feed-container"></div></div>
@@ -40,22 +40,59 @@ window.VMODataService = {
     id: 'mock-example', examKey: 'mock:set-3:2026-2027:day-1',
     targetAnchor: 'mock-set3-day1', setNumber: 3, province: 'Đà Nẵng', year: '2026-2027', dayNumber: 1, title: 'Bộ 3',
     problems: [{ contentKey: 'mock:mock-set3-day1:question-1', questionNumber: 1, content: 'Đề thử' }]
-  }] : category === 'history-dn-qn' ? [{
+  }, ...[[2, 2], [5, 1], [1, 2], [2, 1], [1, 1], [4, 1], [3, 2]].map(([setNumber, dayNumber]) => ({
+    id: `mock-${setNumber}-${dayNumber}`, targetAnchor: `mock-set${setNumber}-day${dayNumber}`,
+    setNumber, dayNumber, title: `Bộ ${setNumber}`,
+    problems: [{ questionNumber: 1, content: 'Đề thử' }]
+  }))] : category === 'history-dn-qn' ? [{
     id: 'exam-danang-history', examKey: 'regional:da-nang:2026-2027:day-1',
     targetAnchor: 'hist-dn-2026-2027', province: 'Đà Nẵng', provinceOrder: 1,
     region: 'TRUNG', title: 'Đề Đà Nẵng 2026–2027', year: '2026-2027', dayNumber: 1,
     problems: [{ contentKey: 'danang_quangnam:hist-dn-2026-2027:day-1:question-1', questionNumber: 1,
       sourceGroup: 'danang_quangnam', sourceType: 'regional_question', content: 'Bài toán Đà Nẵng' }]
-  }] : [{
+  }, ...[['Quảng Nam', '2017-2018', 'qn'], ['Đà Nẵng', '2015-2016', 'dn'],
+    ['Quảng Nam', '2015-2016', 'qn'], ['Đà Nẵng', '2014-2015', 'dn']].map(([province, year, short]) => ({
+    id: `regional-${short}-${year}`, targetAnchor: `hist-${short}-${year}`,
+    province, year, region: 'TRUNG', title: `Đề ${province} ${year}`,
+    problems: [{ questionNumber: 1, content: 'Đề thử' }]
+  }))] : [{
     id: 'exam-quang-tri', examKey: 'tst:quang-tri:2026-2027:day-1',
     targetAnchor: 'tst-quang-tri', province: 'Quảng Trị', provinceOrder: 21,
     region: 'TRUNG', title: 'Đề TST Quảng Trị', year: '2026-2027', dayNumber: 1,
-    problems: [{ contentKey: 'tst:tst-quang-tri:day-1:question-1', questionNumber: 1, content: 'Bài toán thử nghiệm' }]
+    problems: [
+      { contentKey: 'tst:tst-quang-tri:day-1:question-1', questionNumber: 1, content: 'Bài toán thử nghiệm',
+        shortLabel: 'Câu 1 Đa thức – Dãy số', topic: 'Đa thức – Dãy số', maxScore: 5 },
+      { contentKey: 'tst:tst-quang-tri:day-1:question-2', questionNumber: 2, content: 'Bài toán khác',
+        shortLabel: 'Câu 2 (5,0đ) Phương trình hàm', topic: 'Phương trình hàm (5đ) Phương trình hàm' }
+    ]
+  }, {
+    id: 'exam-thai-nguyen', examKey: 'tst:thai-nguyen:2026-2027:day-1',
+    targetAnchor: 'tst-thai-nguyen', province: 'Tỉnh THÁI NGUYÊN', provinceOrder: 10,
+    region: 'BAC', title: 'Đề Thái Nguyên', problems: [{ questionNumber: 1, content: 'Đề thử' }]
+  }, {
+    id: 'exam-chuyen-khtn', examKey: 'tst:chuyen-khtn:2026-2027:day-1',
+    targetAnchor: 'tst-chuyen-khtn', province: 'Tỉnh CHUYÊN KHTN HÀ NỘI', provinceOrder: 26,
+    region: 'BAC', title: 'Đề Chuyên KHTN', problems: [{ questionNumber: 1, content: 'Đề thử' }]
+  }, {
+    id: 'exam-hung-yen', examKey: 'tst:hung-yen:2026-2027:day-1',
+    targetAnchor: 'tst-hung-yen', province: 'Tỉnh Hưng Yên', provinceOrder: 14,
+    region: 'BAC', title: 'Đề Hưng Yên', problems: [{ contentKey: 'tst:tst-hung-yen:question-1', questionNumber: 1, content: 'Đề thử' }]
   }]
+};
+const detailRequests = [];
+window.VMODataService.getExamCatalogSummary = async category =>
+  (await window.VMODataService.getExamCatalog(category)).map(({ problems, ...exam }) => ({
+    ...exam, problemCount: problems.length
+  }));
+window.VMODataService.getExamCatalogDetail = async (category, anchor) => {
+  detailRequests.push(`${category}:${anchor}`);
+  return (await window.VMODataService.getExamCatalog(category)).find(exam => exam.targetAnchor === anchor);
 };
 window.eval(locationsSource);
 window.eval(uiSource);
 window.document.dispatchEvent(new window.Event('DOMContentLoaded'));
+let fullTabTypesets = 0;
+window.renderMathInContainer = async () => { fullTabTypesets += 1; };
 
 assert.equal(window.VMO_TST_LOCATIONS.filter(item => item.type === 'province').length, 34);
 assert.equal(window.VMO_TST_LOCATIONS.filter(item => item.type === 'university_school').length, 4);
@@ -91,21 +128,75 @@ assert.equal(window.document.getElementById('docRegion').value, 'TRUNG');
 assert.equal(window.document.getElementById('docRegionDisplay').value, 'Miền Trung');
 
 await window.loadDatabaseTstExams(true);
+assert.deepEqual(detailRequests, ['tst-national:tst-quang-tri'], 'Lần mở tab chỉ tải chi tiết đề đầu tiên');
 const newCard = window.document.getElementById('tst-quang-tri');
 assert.ok(newCard, 'Đề của tỉnh mới phải tự tạo card frontend');
 assert.equal(newCard.dataset.filter, 'TRUNG');
-assert.match(window.document.querySelector('#sidebar-tst a[href="#tst-quang-tri"]').textContent, /^26\. Tỉnh Quảng Trị$/, 'Tỉnh mới phải theo số thứ tự 25');
+const [firstQuestion, secondQuestion] = newCard.querySelectorAll('.problem-item');
+assert.equal(firstQuestion.querySelector('.problem-id span:first-child').textContent, 'Câu 1 Đa thức – Dãy số');
+assert.equal(firstQuestion.querySelector('.badge-topic').textContent, 'Đa thức – Dãy số');
+assert.equal(firstQuestion.querySelector('.badge-topic').style.display, 'none', 'ẩn chuyên đề đã có trong nhãn');
+assert.equal(firstQuestion.querySelector('.problem-header').textContent.match(/Đa thức – Dãy số/g).length, 2,
+  'DOM giữ metadata chuyên đề cho AI');
+assert.equal(secondQuestion.querySelector('.problem-id span:first-child').textContent, 'Câu 2 Phương trình hàm');
+assert.equal(secondQuestion.querySelector('.badge-point').textContent.trim(), '(5đ)');
+assert.equal(secondQuestion.querySelector('.badge-topic').textContent, 'Phương trình hàm');
+assert.equal(secondQuestion.querySelector('.badge-topic').style.display, 'none');
+assert.deepEqual(Array.from(window.document.querySelectorAll('#sidebar-tst a.nav-link'), link => link.textContent), [
+  '01. CHUYÊN KHTN HÀ NỘI', '02. Hưng Yên', '03. Quảng Trị', '04. THÁI NGUYÊN'
+], 'Tên bỏ tiền tố Tỉnh, sắp theo chữ cái tiếng Việt và đánh số lại');
+assert.equal(window.document.querySelector('#tst-hung-yen .problem-item'), null, 'Đề khác chỉ có metadata');
+const hungYenPlaceholder = window.document.getElementById('tst-hung-yen');
+await window.loadDatabaseExamDetail('tst-national', 'tst-hung-yen');
+assert.equal(window.document.getElementById('tst-hung-yen'), hungYenPlaceholder, 'Chi tiết được gắn vào card đã hiện');
+assert.ok(window.document.querySelector('#tst-hung-yen .problem-item'), 'Chọn đề sẽ tải câu hỏi');
+await window.loadDatabaseExamDetail('tst-national', 'tst-hung-yen');
+assert.equal(detailRequests.filter(key => key === 'tst-national:tst-hung-yen').length, 1, 'Chi tiết đã tải được tái sử dụng');
 await window.loadDatabaseTstExams(true);
 assert.equal(window.document.querySelectorAll('#sidebar-tst a[href="#tst-quang-tri"]').length, 1);
+assert.equal(window.document.querySelector('#sidebar-tst a[href="#tst-quang-tri"]').textContent, '03. Quảng Trị');
 await window.loadDatabaseMockExams(true);
+assert.equal(detailRequests.filter(key => key.startsWith('vmo-mock:')).length, 1,
+  'Mở tab thi thử chỉ lấy chi tiết một đề');
 assert.ok(window.document.getElementById('mock-set3-day1'));
 assert.ok(window.document.querySelector('#sidebar-mock a[href="#mock-set3-day1"]'));
+assert.deepEqual(Array.from(window.document.querySelectorAll('#sidebar-mock .nav-year-title'), x => x.textContent),
+  [1, 2, 3, 4, 5].map(n => `🎯 BỘ THI THỬ SỐ ${n}`));
+assert.deepEqual(Array.from(window.document.querySelectorAll('#sidebar-mock a.nav-link'), x => x.getAttribute('href')),
+  ['#mock-set1-day1', '#mock-set1-day2', '#mock-set2-day1', '#mock-set2-day2',
+    '#mock-set3-day1', '#mock-set3-day2', '#mock-set4-day1', '#mock-set5-day1']);
+await window.loadDatabaseMockExams(true);
+assert.equal(window.document.querySelectorAll('#sidebar-mock a.nav-link').length, 8);
 await window.loadDatabaseRegionalExams(true);
+assert.equal(detailRequests.filter(key => key.startsWith('history-dn-qn:')).length, 1,
+  'Mở tab khu vực chỉ lấy chi tiết một đề');
 const regionalCard = window.document.getElementById('hist-dn-2026-2027');
 assert.ok(regionalCard, 'Đề lưu trữ mới phải tự tạo card trong tab Đà Nẵng–Quảng Nam');
 assert.equal(regionalCard.dataset.filter, 'DANANG');
 assert.equal(regionalCard.querySelector('.problem-item').dataset.sourceType, 'regional_question');
-assert.match(window.document.querySelector('#sidebar-history a[href="#hist-dn-2026-2027"]').textContent, /^02\. Đà Nẵng 2026–2027$/);
-assert.match(window.document.querySelector('#sidebar-history a[href="#hist-qn-2022-2023"]').textContent, /^03\. Quảng Nam 2022–2023$/);
+assert.deepEqual(Array.from(window.document.querySelectorAll('#sidebar-history .nav-year-title'), x => x.textContent),
+  ['📘 ĐÀ NẴNG', '📙 QUẢNG NAM']);
+assert.deepEqual(Array.from(window.document.querySelectorAll('#sidebar-history a.nav-link'), x => x.getAttribute('href')),
+  ['#hist-dn-2014-2015', '#hist-dn-2015-2016', '#hist-dn-2026-2027',
+    '#hist-qn-2015-2016', '#hist-qn-2017-2018']);
+assert.equal(window.document.querySelector('#sidebar-history a[href="#hist-dn-2026-2027"]').textContent,
+  '03. Đà Nẵng 2026–2027');
+await window.loadDatabaseRegionalExams(true);
+assert.equal(window.document.querySelectorAll('#sidebar-history a.nav-link').length, 5);
+assert.equal(fullTabTypesets, 0, 'loader MongoDB không được typeset lại toàn bộ tab');
+
+const mathPreview = window.document.createElement('div');
+window.document.body.appendChild(mathPreview);
+window.MathJax = {
+  typesetClear: () => {},
+  typesetPromise: async nodes => {
+    nodes[0].innerHTML = '<mjx-merror>Math input error</mjx-merror>';
+  }
+};
+const rawFormula = 'Câu hỏi gốc: $\\badcommand{x}$';
+window.safeRenderMathJaxToElement(mathPreview, rawFormula);
+await new Promise(resolve => setTimeout(resolve, 0));
+assert.equal(mathPreview.textContent, rawFormula, 'công thức lỗi phải hiển thị nguyên bản gốc');
+assert.ok(mathPreview.classList.contains('tex2jax_ignore'), 'fallback không bị typeset lại');
 
 console.log('TST and Đà Nẵng–Quảng Nam dynamic exam smoke test: OK');

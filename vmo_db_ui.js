@@ -1722,7 +1722,19 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
     containerEl.innerHTML = safeHtml;
     containerEl.classList.add('tex2jax_process');
 
-    // Kích hoạt MathJax typeset an toàn
+    // Nếu MathJax không biên dịch được, giữ nguyên nội dung gốc để người đọc đối chiếu.
+    const renderOriginalContent = () => {
+      containerEl.textContent = String(rawContent);
+      containerEl.style.whiteSpace = 'pre-wrap';
+      containerEl.classList.remove('tex2jax_process');
+      containerEl.classList.add('tex2jax_ignore');
+    };
+    const checkMathError = () => {
+      if (containerEl.querySelector('mjx-merror, .mjx-error') ||
+          /Math input error|MathJax error/i.test(containerEl.textContent || '')) {
+        renderOriginalContent();
+      }
+    };
     const runTypeset = () => {
       if (window.MathJax) {
         try {
@@ -1730,20 +1742,23 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
             window.MathJax.typesetClear([containerEl]);
           }
           if (window.MathJax.typesetPromise) {
-            window.MathJax.typesetPromise([containerEl]).catch(err => {
+            window.MathJax.typesetPromise([containerEl]).then(checkMathError).catch(err => {
               console.warn('[MathJax Typeset Handled]:', err);
+              renderOriginalContent();
             });
           } else if (window.MathJax.typeset) {
             window.MathJax.typeset([containerEl]);
+            checkMathError();
           }
         } catch (e) {
           console.warn('[MathJax Exception]:', e);
+          renderOriginalContent();
         }
       }
     };
 
     if (window.MathJax?.startup?.promise) {
-      window.MathJax.startup.promise.then(runTypeset).catch(() => {});
+      window.MathJax.startup.promise.then(runTypeset).catch(() => renderOriginalContent());
     } else {
       runTypeset();
     }
@@ -2065,20 +2080,6 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
         tabs.appendChild(syncButton);
       }
     }
-    if (isAdmin && !modal.querySelector('#btnMigrateTstSources')) {
-      const tabs = modal.querySelector('.hub-tabs, [class*="hub-tabs"]')
-        || modal.querySelector('.hub-tab-btn, #hub-tab-events')?.parentElement;
-      if (tabs) {
-        const migrateButton = document.createElement('button');
-        migrateButton.id = 'btnMigrateTstSources';
-        migrateButton.type = 'button';
-        migrateButton.innerHTML = '🔗 Lưu nguồn TST vào MongoDB';
-        migrateButton.style.cssText = 'padding:7px 12px;border:1px solid #67e8f9;border-radius:7px;background:#ecfeff;color:#155e75;font-weight:700;cursor:pointer;';
-        migrateButton.onclick = window.migrateTstReferenceLinksToDatabase;
-        tabs.appendChild(migrateButton);
-      }
-    }
-
     ensureCatalogManagementUi(modal, isAdmin);
     ensureSubmissionFilterUi(modal, isAdmin);
     ensureLearningDashboardUi(modal, isAdmin);
@@ -2684,9 +2685,8 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
     window.reinitDatabaseUI?.(root);
     if (tabId === 'tab-tst') {
       await window.loadDatabaseTstExams?.();
-      window.injectTstSources?.();
     } else {
-      window.injectHistorySources?.();
+      await window.loadDatabaseRegionalExams?.();
     }
     return root;
   }
@@ -2752,6 +2752,13 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
     try {
       const tabIds = [...new Set(evidence.map(item => item.anchor.startsWith('hist-') ? 'tab-history' : 'tab-tst'))];
       const roots = new Map((await Promise.all(tabIds.map(async tabId => [tabId, await prepareTrendPracticeSource(tabId)]))));
+      await Promise.all([...new Set(evidence.map(item => `${item.anchor.startsWith('hist-') ? 'history-dn-qn' : 'tst-national'}:${item.anchor}`))]
+        .map(async key => {
+          const separator = key.indexOf(':');
+          if (window.VMODataService?.getExamCatalogDetail) {
+            await window.loadDatabaseExamDetail?.(key.slice(0, separator), key.slice(separator + 1));
+          }
+        }));
       const resolved = [];
       const missing = [];
       evidence.forEach(item => {
@@ -4242,6 +4249,7 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
     const card = document.createElement('article');
     card.className = 'exam-card db-exam-card';
     card.id = exam.targetAnchor;
+    card.dataset.databaseCard = 'true';
     card.dataset.filter = exam.region || 'BAC';
     card.dataset.search = `${exam.province || ''} ${exam.year || ''}`.toLowerCase();
     card.innerHTML = `<div class="exam-header"><div class="exam-top-tags"><span class="tag tag-year">${escapeHtmlText(exam.year || '2026-2027')}</span><span class="tag tag-province">${escapeHtmlText(exam.province || '')}</span><span class="tag tag-official">Đề từ database</span></div><h3 class="exam-title">${escapeHtmlText(exam.title || `Đề TST ${exam.province || ''}`)}</h3></div><div class="exam-body"></div>`;
@@ -4255,6 +4263,7 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
     const isQuangNam = String(exam.province || '').toLowerCase().includes('quảng nam');
     card.className = 'exam-card history-card db-exam-card';
     card.id = exam.targetAnchor;
+    card.dataset.databaseCard = 'true';
     card.dataset.filter = isQuangNam ? 'QUANGNAM' : 'DANANG';
     card.dataset.search = `${exam.province || ''} ${exam.year || ''} ${exam.title || ''}`.toLowerCase();
     card.innerHTML = `<div class="exam-header"><div class="exam-top-tags"><span class="tag tag-year">${escapeHtmlText(exam.year || '')}</span><span class="tag tag-province">${escapeHtmlText(exam.province || '')}</span><span class="tag tag-official">Đề lưu trữ từ database</span></div><h3 class="exam-title">${escapeHtmlText(exam.title || `Đề ${exam.province || ''} ${exam.year || ''}`)}</h3></div><div class="exam-body"></div>`;
@@ -4266,15 +4275,27 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
   function ensureDatabaseRegionalNavigation(exam) {
     if (!exam?.targetAnchor) return;
     const sidebar = document.getElementById('sidebar-history');
-    if (!sidebar || sidebar.querySelector(`a[href="#${CSS.escape(exam.targetAnchor)}"]`)) return;
+    if (!sidebar) return;
     const isQuangNam = String(exam.province || '').toLowerCase().includes('quảng nam');
     const groups = Array.from(sidebar.querySelectorAll('.nav-year-group'));
     const group = groups.find(item => item.querySelector('.nav-year-title')?.textContent.includes(isQuangNam ? 'QUẢNG NAM' : 'ĐÀ NẴNG')) || groups[0] || sidebar;
-    const link = document.createElement('a');
-    link.className = 'nav-link db-exam-sidebar-link';
-    link.href = `#${exam.targetAnchor}`;
+    let link = sidebar.querySelector(`a[href="#${CSS.escape(exam.targetAnchor)}"]`);
+    if (!link) {
+      link = document.createElement('a');
+      link.className = 'nav-link db-exam-sidebar-link';
+      link.href = `#${exam.targetAnchor}`;
+    }
     link.textContent = `${exam.province || 'Đà Nẵng'} ${String(exam.year || '').replace('-', '–')}`;
     group.appendChild(link);
+    groups.sort((a, b) => a.querySelector('.nav-year-title').textContent.replace(/^[^\p{L}]+/u, '').localeCompare(
+      b.querySelector('.nav-year-title').textContent.replace(/^[^\p{L}]+/u, ''), 'vi', { sensitivity: 'base' }));
+    groups.forEach(item => {
+      const links = Array.from(item.querySelectorAll('a.nav-link'));
+      links.sort((a, b) => a.textContent.replace(/^\s*\d+\.\s*/, '').localeCompare(
+        b.textContent.replace(/^\s*\d+\.\s*/, ''), 'vi', { numeric: true, sensitivity: 'base' }));
+      links.forEach(child => item.appendChild(child));
+      sidebar.appendChild(item);
+    });
     Array.from(sidebar.querySelectorAll('a.nav-link')).forEach((item, index) => {
       item.textContent = `${String(index + 1).padStart(2, '0')}. ${item.textContent.replace(/^\s*\d+\.\s*/, '')}`;
     });
@@ -4283,16 +4304,25 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
   function ensureDatabaseExamSidebar(exam) {
     if (!exam?.targetAnchor) return;
     const sidebar = document.querySelector('#sidebar-tst .nav-year-group') || document.getElementById('sidebar-tst');
-    if (!sidebar || sidebar.querySelector(`a[href="#${CSS.escape(exam.targetAnchor)}"]`)) return;
-    const link = document.createElement('a');
-    link.className = 'nav-link db-exam-sidebar-link';
-    link.href = `#${exam.targetAnchor}`;
+    if (!sidebar) return;
+    let link = sidebar.querySelector(`a[href="#${CSS.escape(exam.targetAnchor)}"]`);
+    if (!link) {
+      link = document.createElement('a');
+      link.className = 'nav-link db-exam-sidebar-link';
+      link.href = `#${exam.targetAnchor}`;
+      sidebar.appendChild(link);
+    }
     link.dataset.region = ['BAC', 'TRUNG', 'NAM'].includes(exam.region) ? exam.region : 'BAC';
     link.dataset.order = String(Number(exam.provinceOrder) || 0);
-    const numbers = Array.from(sidebar.querySelectorAll('a.nav-link')).map(item => Number(item.textContent.match(/^\s*(\d+)\./)?.[1]) || 0);
-    const next = Math.max(0, ...numbers) + 1;
-    link.textContent = `${String(next).padStart(2, '0')}. ${exam.province?.startsWith('Chuyên ') ? '' : 'Tỉnh '}${exam.province || exam.title || 'Đề thi mới'}`;
-    sidebar.appendChild(link);
+    link.dataset.name = String(exam.province || exam.title || 'Đề thi mới').replace(/^\s*Tỉnh\s+/i, '').trim();
+    const links = Array.from(sidebar.querySelectorAll('a.nav-link'));
+    links.sort((a, b) => a.dataset.name.localeCompare(b.dataset.name, 'vi', { sensitivity: 'base' })
+      || Number(a.dataset.order) - Number(b.dataset.order)
+      || a.getAttribute('href').localeCompare(b.getAttribute('href')));
+    links.forEach((item, index) => {
+      item.textContent = `${String(index + 1).padStart(2, '0')}. ${item.dataset.name}`;
+      sidebar.appendChild(item);
+    });
   }
 
   function ensureReferenceLinksModal() {
@@ -4585,10 +4615,11 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
   }
 
   let mongoReferenceLinksPromise = null;
+  let specialtyReferencesLoaded = false;
 
   async function loadMongoReferenceLinks(force = false, root = document) {
     if (!window.VMODataService?.getCatalogProblems) return;
-    if (!force && window.mongoProblemReferenceLinks instanceof Map) {
+    if (!force && specialtyReferencesLoaded) {
       applyMongoReferenceLinks(root);
       return;
     }
@@ -4596,12 +4627,20 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
       if (force) {
         window.invalidateVMODataCache?.();
         mongoReferenceLinksPromise = null;
+        specialtyReferencesLoaded = false;
       }
       if (!mongoReferenceLinksPromise) {
-        mongoReferenceLinksPromise = window.VMODataService.getCatalogProblems({ runtime: true })
+        mongoReferenceLinksPromise = window.VMODataService.getCatalogProblems({ runtime: true, sourceGroup: 'specialty' })
           .then(problems => {
-            window.mongoProblemsByContentKey = new Map(problems.map(problem => [problem.contentKey, problem]));
-            window.mongoProblemReferenceLinks = new Map(problems.map(problem => [problem.contentKey, problem.referenceLinks || []]));
+            const contentMap = window.mongoProblemsByContentKey instanceof Map ? window.mongoProblemsByContentKey : new Map();
+            const referenceMap = window.mongoProblemReferenceLinks instanceof Map ? window.mongoProblemReferenceLinks : new Map();
+            problems.forEach(problem => {
+              contentMap.set(problem.contentKey, problem);
+              referenceMap.set(problem.contentKey, problem.referenceLinks || []);
+            });
+            window.mongoProblemsByContentKey = contentMap;
+            window.mongoProblemReferenceLinks = referenceMap;
+            specialtyReferencesLoaded = true;
           })
           .finally(() => { mongoReferenceLinksPromise = null; });
       }
@@ -4617,7 +4656,23 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
     if (kind === 'tst') ensureDatabaseExamSidebar(exam);
     if (kind === 'regional') ensureDatabaseRegionalNavigation(exam);
     let card = document.getElementById(exam.targetAnchor);
-    if (!card) card = kind === 'tst' ? createDatabaseExamCard(exam) : (kind === 'regional' ? createDatabaseRegionalCard(exam) : createDatabaseMockCard(exam));
+
+// MongoDB là nguồn chuẩn sau migration.
+// Nếu card hiện tại đến từ HTML tĩnh, loại bỏ để Atlas thay thế.
+if (card && card.dataset.databaseCard !== 'true') {
+  card.remove();
+  card = null;
+}
+
+if (!card) {
+  card = kind === 'tst'
+    ? createDatabaseExamCard(exam)
+    : (kind === 'regional'
+        ? createDatabaseRegionalCard(exam)
+        : createDatabaseMockCard(exam));
+}
+
+if (card) card.dataset.databaseCard = 'true';
     const body = card?.querySelector('.exam-body') || card;
     if (!body) return;
     body.querySelectorAll(`.db-exam-day[data-exam-key="${CSS.escape(exam.examKey || exam.id || '')}"]`).forEach(node => node.remove());
@@ -4653,12 +4708,22 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
       item.dataset.contentType = kind === 'tst' ? 'tst_exam' : (kind === 'regional' ? 'regional_exam' : 'mock_exam');
       item.dataset.questionNumber = String(Number(problem.questionNumber) || 0);
       item.dataset.legacyProblemId = Array.isArray(problem.legacyIds) ? (problem.legacyIds[0] || '') : '';
-      item.innerHTML = `<div class="problem-header"><div class="problem-id"><span>${escapeHtmlText(problem.shortLabel || problem.title || `Câu ${problem.questionNumber}`)}</span><span class="badge-point"> (${String(Number(problem.maxScore) || 0).replace('.', ',')}đ) </span><span class="badge-topic">${escapeHtmlText(problem.topic || 'Toán Olympic')}</span></div><button class="btn-copy" onclick="copyText(this)">📋 Sao chép</button></div><div class="problem-content" data-no-i18n="true"></div>`;
+      const rawLabel = String(problem.shortLabel || problem.title || `Câu ${problem.questionNumber}`);
+      const scoreInLabel = rawLabel.match(/\(\s*(\d+(?:[.,]\d+)?)\s*đ\s*\)/i);
+      const label = rawLabel.replace(/\s*\(\s*\d+(?:[.,]\d+)?\s*đ\s*\)/gi, '').trim();
+      const rawTopic = String(problem.topic || 'Toán Olympic')
+        .replace(/\s*\(\s*\d+(?:[.,]\d+)?\s*đ\s*\)/gi, ' ').replace(/\s+/g, ' ').trim();
+      const repeatedTopic = rawTopic.match(/^(.+?)\s+\1$/i);
+      const topic = repeatedTopic ? repeatedTopic[1] : rawTopic;
+      const topicAlreadyInLabel = topic && label.toLocaleLowerCase('vi').includes(topic.toLocaleLowerCase('vi'));
+      const score = Number(problem.maxScore) || Number(scoreInLabel?.[1]?.replace(',', '.')) || 0;
+      item.innerHTML = `<div class="problem-header"><div class="problem-id"><span>${escapeHtmlText(label)}</span><span class="badge-point"> (${String(score).replace('.', ',')}đ) </span><span class="badge-topic"${topicAlreadyInLabel ? ' style="display:none" aria-hidden="true"' : ''}>${escapeHtmlText(topic)}</span></div><button class="btn-copy" onclick="copyText(this)">📋 Sao chép</button></div><div class="problem-content" data-no-i18n="true"></div>`;
       section.appendChild(item);
       const content = item.querySelector('.problem-content');
       content.setAttribute('data-raw-math', problem.content || '');
       if (window.safeRenderMathJaxToElement) window.safeRenderMathJaxToElement(content, problem.content || '');
       else content.textContent = problem.content || '';
+      content._renderedMongoContent = problem.content || '';
       if (isCurrentUserAdmin() && problem.predictionReview?.status === 'gpt_rejected') {
         const warning = document.createElement('div');
         warning.className = 'prediction-review-warning';
@@ -4681,6 +4746,7 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
     const card = document.createElement('article');
     card.className = 'exam-card db-exam-card';
     card.id = exam.targetAnchor;
+    card.dataset.databaseCard = 'true';
     card.dataset.filter = `MOCK${Number(exam.setNumber) || 3}`;
     card.dataset.search = `${exam.title || ''} ${exam.province || ''} ${exam.year || ''}`.toLowerCase();
     card.innerHTML = `<div class="exam-header"><div class="exam-top-tags"><span class="tag tag-year">${escapeHtmlText(exam.year || '')}</span><span class="tag tag-province">${escapeHtmlText(exam.province || '')}</span><span class="tag tag-official">${exam.origin === 'prediction' ? '🔮 Đề dự đoán (AI) · ' : ''}Bộ thi thử số ${Number(exam.setNumber) || 3} · Ngày ${Number(exam.dayNumber) || 1}</span></div><h3 class="exam-title">${escapeHtmlText(exam.title || '')}</h3></div><div class="exam-body"></div>`;
@@ -4690,9 +4756,9 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
 
   function ensureDatabaseMockNavigation(exam) {
     const setNumber = Number(exam.setNumber);
-    if (!Number.isInteger(setNumber) || setNumber < 3) return;
+    if (!Number.isInteger(setNumber) || setNumber < 1) return;
     const sidebar = document.querySelector('#sidebar-mock .book-toc');
-    if (sidebar && !sidebar.querySelector(`a[href="#${CSS.escape(exam.targetAnchor)}"]`)) {
+    if (sidebar && exam.targetAnchor) {
       let group = sidebar.querySelector(`[data-mock-set="${setNumber}"]`);
       if (!group) {
         group = document.createElement('div');
@@ -4701,12 +4767,29 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
         group.innerHTML = `<div class="nav-year-title">🎯 BỘ THI THỬ SỐ ${setNumber}</div>`;
         sidebar.appendChild(group);
       }
-      const link = document.createElement('a');
-      link.className = 'nav-link';
-      link.href = `#${exam.targetAnchor}`;
-      const number = sidebar.querySelectorAll('a.nav-link').length + 1;
-      link.textContent = `${String(number).padStart(2, '0')}. Bộ ${setNumber} — Ngày thứ ${['', 'nhất', 'hai'][Number(exam.dayNumber)] || exam.dayNumber} (${exam.problems.length} câu)`;
+      let link = sidebar.querySelector(`a[href="#${CSS.escape(exam.targetAnchor)}"]`);
+      if (!link) {
+        link = document.createElement('a');
+        link.className = 'nav-link';
+        link.href = `#${exam.targetAnchor}`;
+      }
+      link.dataset.day = String(Number(exam.dayNumber) || 1);
+      const count = Array.isArray(exam.problems) ? exam.problems.length : Number(exam.problemCount) || 0;
+      link.textContent = `Bộ ${setNumber} — Ngày thứ ${['', 'nhất', 'hai'][Number(exam.dayNumber)] || exam.dayNumber} (${count} câu)`;
       group.appendChild(link);
+      const groups = Array.from(sidebar.querySelectorAll('.nav-year-group'));
+      groups.sort((a, b) => Number(a.dataset.mockSet || a.querySelector('.nav-year-title')?.textContent.match(/\d+/)?.[0])
+        - Number(b.dataset.mockSet || b.querySelector('.nav-year-title')?.textContent.match(/\d+/)?.[0]));
+      groups.forEach(item => {
+        const links = Array.from(item.querySelectorAll('a.nav-link'));
+        links.sort((a, b) => Number(a.dataset.day || a.getAttribute('href')?.match(/day(\d+)/)?.[1] || 999)
+          - Number(b.dataset.day || b.getAttribute('href')?.match(/day(\d+)/)?.[1] || 999));
+        links.forEach(child => item.appendChild(child));
+        sidebar.appendChild(item);
+      });
+      Array.from(sidebar.querySelectorAll('a.nav-link')).forEach((item, index) => {
+        item.textContent = `${String(index + 1).padStart(2, '0')}. ${item.textContent.replace(/^\s*\d+\.\s*/, '')}`;
+      });
     }
     const pills = document.getElementById('mockFilterPills');
     if (pills && !pills.querySelector(`[data-filter="MOCK${setNumber}"]`)) {
@@ -4725,23 +4808,147 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
 
   let databaseMockLoaded = false;
   let databaseMockPromise = null;
+  const examCategories = { 'tab-tst': 'tst-national', 'tab-mock': 'vmo-mock', 'tab-history': 'history-dn-qn' };
+  const loadedDetails = new Set();
+  const detailPromises = new Map();
+  const detailKey = (category, anchor) => `${category}:${anchor}`;
+
+  window.loadDatabaseExamDetail = async function(category, anchor) {
+    if (!Object.values(examCategories).includes(category) || !anchor) return;
+    const key = detailKey(category, anchor);
+    if (loadedDetails.has(key)) return;
+    if (detailPromises.has(key)) return detailPromises.get(key);
+    const card = document.getElementById(anchor);
+    const pending = (async () => {
+      try {
+        const exam = await window.VMODataService.getExamCatalogDetail(category, anchor);
+        if (!exam) throw new Error('Không tìm thấy đề thi');
+        renderDatabaseExam(exam, category === 'tst-national' ? 'tst' : category === 'vmo-mock' ? 'mock' : 'regional');
+        if (category === 'vmo-mock') ensureDatabaseMockNavigation(exam);
+        if (!(window.mongoProblemReferenceLinks instanceof Map)) window.mongoProblemReferenceLinks = new Map();
+        if (!(window.mongoProblemsByContentKey instanceof Map)) window.mongoProblemsByContentKey = new Map();
+        exam.problems.forEach(problem => {
+          window.mongoProblemReferenceLinks.set(problem.contentKey, problem.referenceLinks || []);
+          window.mongoProblemsByContentKey.set(problem.contentKey, problem);
+        });
+        injectSubmissionButtons(card || document);
+        window.reinitAIGuide?.(card || document);
+        await applyCatalogAccessRules(card || document);
+        applyMongoReferenceLinks(card || document);
+        card?.querySelector('.db-exam-loading')?.remove();
+        loadedDetails.add(key);
+      } catch (error) {
+        const notice = card?.querySelector('.db-exam-loading');
+        if (notice) notice.textContent = 'Không tải được đề thi. Chọn lại mục lục để thử lại.';
+        throw error;
+      } finally { detailPromises.delete(key); }
+    })();
+    detailPromises.set(key, pending);
+    return pending;
+  };
+
+  let catalogObserver = null;
+  function observeExamCard(card, category) {
+    if (!card || !('IntersectionObserver' in window)) return;
+    if (!catalogObserver) catalogObserver = new IntersectionObserver(entries => {
+      entries.filter(entry => entry.isIntersecting).forEach(entry => {
+        if (entry.target.classList.contains('hidden-by-search')) return;
+        catalogObserver.unobserve(entry.target);
+        window.loadDatabaseExamDetail(entry.target.dataset.catalogCategory, entry.target.id)
+          .catch(error => console.warn('Không tải được chi tiết đề thi:', error?.message || error));
+      });
+    }, { rootMargin: '150px' });
+    card.dataset.catalogCategory = category;
+    catalogObserver.observe(card);
+  }
+
+  async function renderExamSummaries(exams, category) {
+    const kind = category === 'tst-national' ? 'tst' : category === 'vmo-mock' ? 'mock' : 'regional';
+    exams.forEach(exam => {
+      if (!exam.targetAnchor || (!Number(exam.problemCount) && !exam.problems?.length)) return;
+      let card = document.getElementById(exam.targetAnchor);
+      if (!card) card = kind === 'tst' ? createDatabaseExamCard(exam)
+        : kind === 'regional' ? createDatabaseRegionalCard(exam) : createDatabaseMockCard(exam);
+      if (kind === 'tst') ensureDatabaseExamSidebar(exam);
+      if (kind === 'regional') ensureDatabaseRegionalNavigation(exam);
+      if (kind === 'mock') ensureDatabaseMockNavigation(exam);
+      if (Array.isArray(exam.problems)) {
+        renderDatabaseExam(exam, kind);
+        loadedDetails.add(detailKey(category, exam.targetAnchor));
+      } else if (!loadedDetails.has(detailKey(category, exam.targetAnchor))) {
+        const body = card.querySelector('.exam-body') || card;
+        if (!body.querySelector('.db-exam-loading')) {
+          const notice = document.createElement('p');
+          notice.className = 'db-exam-loading';
+          notice.textContent = 'Chọn đề để tải câu hỏi từ MongoDB.';
+          body.appendChild(notice);
+        }
+        observeExamCard(card, category);
+      }
+    });
+    const root = document.getElementById(kind === 'tst' ? 'tab-tst' : kind === 'mock' ? 'tab-mock' : 'tab-history');
+    showDatabaseCatalogState(root, exams);
+    const first = Array.from(root?.querySelectorAll('.exam-card') || [])
+      .find(card => !card.classList.contains('hidden-by-search') && !loadedDetails.has(detailKey(category, card.id)));
+    if (first && window.VMODataService?.getExamCatalogDetail) {
+      await window.loadDatabaseExamDetail(category, first.id).catch(error =>
+        console.warn('Không tải được đề đầu tiên:', error?.message || error));
+    }
+  }
+
+  function resetExamCategory(tabId) {
+    const category = examCategories[tabId];
+    document.querySelectorAll(`#${tabId} .db-exam-card`).forEach(card => {
+      catalogObserver?.unobserve(card);
+      card.remove();
+    });
+    for (const key of loadedDetails) if (key.startsWith(`${category}:`)) loadedDetails.delete(key);
+  }
+
+  document.addEventListener('click', event => {
+    const link = event.target.closest?.('#sidebar-tst a[href^="#"], #sidebar-mock a[href^="#"], #sidebar-history a[href^="#"]');
+    if (!link || !window.VMODataService?.getExamCatalogDetail) return;
+    const tab = { 'sidebar-tst': 'tab-tst', 'sidebar-mock': 'tab-mock', 'sidebar-history': 'tab-history' }
+      [link.closest('#sidebar-tst, #sidebar-mock, #sidebar-history')?.id];
+    const category = examCategories[tab];
+    const anchor = link.getAttribute('href')?.slice(1);
+    if (category && anchor) window.loadDatabaseExamDetail(category, anchor).catch(error =>
+      console.warn('Không tải được đề được chọn:', error?.message || error));
+  });
+
+  function showDatabaseCatalogState(root, exams, error = null) {
+    const feed = root?.querySelector('.feed-container');
+    if (!feed) return;
+    feed.querySelector('.db-catalog-state')?.remove();
+    if (!error && exams.some(exam => Number(exam.problemCount) > 0 || (Array.isArray(exam.problems) && exam.problems.length))) return;
+    const state = document.createElement('p');
+    state.className = 'db-catalog-state';
+    state.setAttribute('role', error ? 'alert' : 'status');
+    state.textContent = error
+      ? 'Không tải được dữ liệu đề thi từ MongoDB Atlas. Vui lòng thử lại sau.'
+      : 'Chưa có đề thi liên kết với câu hỏi trong MongoDB Atlas.';
+    feed.appendChild(state);
+  }
   async function loadDatabaseMockExams(force = false) {
     if (!window.VMODataService?.getExamCatalog) return;
     if (databaseMockLoaded && !force) return;
     if (databaseMockPromise) return databaseMockPromise;
-    if (force) window.invalidateVMODataCache?.();
+    if (force) { window.invalidateVMODataCache?.(); resetExamCategory('tab-mock'); }
     databaseMockPromise = (async () => {
       try {
-        const exams = await window.VMODataService.getExamCatalog('vmo-mock');
-        exams.forEach(exam => { renderDatabaseExam(exam, 'mock'); ensureDatabaseMockNavigation(exam); });
+        const exams = await (window.VMODataService.getExamCatalogSummary || window.VMODataService.getExamCatalog)('vmo-mock');
+        await renderExamSummaries(exams, 'vmo-mock');
         const root = document.getElementById('tab-mock');
+        showDatabaseCatalogState(root, exams);
         injectSubmissionButtons(root || document);
         window.reinitAIGuide?.(root || document);
         await applyCatalogAccessRules(root || document);
         applyMongoReferenceLinks(root || document);
-        if (root && window.renderMathInContainer) window.renderMathInContainer(root, true).catch(() => {});
         databaseMockLoaded = true;
-      } catch (error) { console.warn('Không tải được đề thi thử từ MongoDB:', error?.message || error); }
+      } catch (error) {
+        showDatabaseCatalogState(document.getElementById('tab-mock'), [], error);
+        console.warn('Không tải được đề thi thử từ MongoDB:', error?.message || error);
+      }
       finally { databaseMockPromise = null; }
     })();
     return databaseMockPromise;
@@ -4758,22 +4965,21 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
     }
     if (databaseTstLoaded && !force) return;
     if (databaseTstPromise) return databaseTstPromise;
-    if (force) window.invalidateVMODataCache?.();
+    if (force) { window.invalidateVMODataCache?.(); resetExamCategory('tab-tst'); }
 
     databaseTstPromise = (async () => {
       try {
-        const exams = await window.VMODataService.getExamCatalog('tst-national');
-        exams.forEach(exam => renderDatabaseExam(exam, 'tst'));
+        const exams = await (window.VMODataService.getExamCatalogSummary || window.VMODataService.getExamCatalog)('tst-national');
+        await renderExamSummaries(exams, 'tst-national');
         const tstRoot = document.getElementById('tab-tst');
+        showDatabaseCatalogState(tstRoot, exams);
         injectSubmissionButtons(tstRoot || document);
         window.reinitAIGuide?.(tstRoot || document);
         await applyCatalogAccessRules(tstRoot || document);
         applyMongoReferenceLinks(tstRoot || document);
-        if (tstRoot && window.renderMathInContainer) {
-          window.renderMathInContainer(tstRoot, true).catch(() => {});
-        }
         databaseTstLoaded = true;
       } catch (error) {
+        showDatabaseCatalogState(document.getElementById('tab-tst'), [], error);
         console.warn('Không tải được đề thi động từ MongoDB:', error?.message || error);
       } finally {
         databaseTstPromise = null;
@@ -4791,20 +4997,21 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
     if (!window.VMODataService?.getExamCatalog) return;
     if (databaseRegionalLoaded && !force) return;
     if (databaseRegionalPromise) return databaseRegionalPromise;
-    if (force) window.invalidateVMODataCache?.();
+    if (force) { window.invalidateVMODataCache?.(); resetExamCategory('tab-history'); }
     databaseRegionalPromise = (async () => {
       try {
         await window.ensureVMOTabContent?.('tab-history');
-        const exams = await window.VMODataService.getExamCatalog('history-dn-qn');
-        exams.forEach(exam => renderDatabaseExam(exam, 'regional'));
+        const exams = await (window.VMODataService.getExamCatalogSummary || window.VMODataService.getExamCatalog)('history-dn-qn');
+        await renderExamSummaries(exams, 'history-dn-qn');
         const root = document.getElementById('tab-history');
+        showDatabaseCatalogState(root, exams);
         injectSubmissionButtons(root || document);
         window.reinitAIGuide?.(root || document);
         await applyCatalogAccessRules(root || document);
         applyMongoReferenceLinks(root || document);
-        if (root && window.renderMathInContainer) window.renderMathInContainer(root, true).catch(() => {});
         databaseRegionalLoaded = true;
       } catch (error) {
+        showDatabaseCatalogState(document.getElementById('tab-history'), [], error);
         console.warn('Không tải được đề Đà Nẵng–Quảng Nam từ MongoDB:', error?.message || error);
       } finally { databaseRegionalPromise = null; }
     })();
@@ -4881,7 +5088,7 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
     injectSubmissionButtons(activeRoot);
     injectDataManagementButton();
     applyCatalogAccessRules(activeRoot);
-    loadMongoReferenceLinks(false, activeRoot);
+    if (activeRoot.id === 'tab-danang') loadMongoReferenceLinks(false, activeRoot);
     if (activeRoot.id === 'tab-tst') loadDatabaseTstExams();
     if (activeRoot.id === 'tab-mock') loadDatabaseMockExams();
     if (activeRoot.id === 'tab-history') loadDatabaseRegionalExams();
@@ -4903,7 +5110,8 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
     injectSubmissionButtons(root);
     injectDataManagementButton();
     applyCatalogAccessRules(root);
-    loadMongoReferenceLinks(false, root);
+    if (root.id === 'tab-danang') loadMongoReferenceLinks(false, root);
+    else applyMongoReferenceLinks(root);
     if (root.id === 'tab-tst') loadDatabaseTstExams();
     if (root.id === 'tab-mock') loadDatabaseMockExams();
     if (root.id === 'tab-history') loadDatabaseRegionalExams();

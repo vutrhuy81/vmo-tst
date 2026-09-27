@@ -9,13 +9,6 @@
 
   const search = qs('#searchInput');
   const searchSummary = qs('#searchSummary');
-  const tabLoadPromises = new Map();
-
-  function hrefKeys(selector, pattern) {
-    return new Set(qsa(selector)
-      .map(link => String(link.getAttribute('href') || '').replace(/^#/, ''))
-      .filter(key => pattern.test(key)));
-  }
 
   function formatCount(value) {
     return String(Math.max(0, Number(value) || 0)).padStart(2, '0');
@@ -31,12 +24,12 @@
 
   function staticCatalogStats() {
     return {
-      tstTargets: hrefKeys('#sidebar-tst a.nav-link[href^="#tst-"]', /^tst-/),
-      regionalTargets: hrefKeys('#sidebar-history a.nav-link[href^="#hist-"]', /^hist-(?:dn|qn)-/),
-      mockEntries: hrefKeys('#sidebar-mock a.nav-link[href*="-day"]', /^mock-set\d+-day\d+$/),
+      tstTargets: new Set(),
+      regionalTargets: new Set(),
+      mockEntries: new Set(),
       chapters: qsa('#book-content .chapter-block[data-chapter]:not([data-chapter="meta"])').length,
       theory: qsa('#book-content .theorybox').length,
-      examples: qsa('#book-content .examplebox .example-solution').length
+      examples: 0
     };
   }
 
@@ -67,7 +60,7 @@
       });
     };
 
-    // Hiển thị ngay số liệu từ catalog tĩnh, không chờ mạng/MongoDB.
+    // Các chỉ số đề thi và ví dụ chỉ lấy từ MongoDB; số 0 cho biết API chưa sẵn sàng.
     apply();
     if (!window.VMODataService?.getHomeStats) return;
 
@@ -99,33 +92,7 @@
   window.refreshVMOCatalogStats();
 
   async function ensureTabContent(tabId) {
-    let pane = qs('#' + tabId);
-    const fragmentUrl = pane?.dataset?.fragmentUrl;
-    if (!pane || !fragmentUrl) return pane;
-    if (tabLoadPromises.has(tabId)) return tabLoadPromises.get(tabId);
-
-    const pending = fetch(fragmentUrl, { credentials: 'same-origin', cache: 'force-cache' })
-      .then(response => {
-        if (!response.ok) throw new Error(`HTTP ${response.status}`);
-        return response.text();
-      })
-      .then(html => {
-        const parsed = new DOMParser().parseFromString(html, 'text/html');
-        const loadedPane = parsed.getElementById(tabId);
-        if (!loadedPane) throw new Error(`Fragment không chứa #${tabId}`);
-        if (pane.classList.contains('active')) loadedPane.classList.add('active');
-        pane.replaceWith(loadedPane);
-        pane = loadedPane;
-        return loadedPane;
-      })
-      .catch(error => {
-        pane.innerHTML = `<div class="tab-load-error" role="alert">Không tải được nội dung. Vui lòng tải lại trang. (${String(error.message || error).replace(/[<>&]/g, '')})</div>`;
-        throw error;
-      })
-      .finally(() => tabLoadPromises.delete(tabId));
-
-    tabLoadPromises.set(tabId, pending);
-    return pending;
+    return qs('#' + tabId);
   }
 
   // Cho các chế độ xem theo ngữ cảnh (ví dụ: luyện tập từ báo cáo xu hướng)
@@ -196,12 +163,10 @@
     // Đồng bộ lại các nút AI Hướng dẫn giải & Nút Nộp bài Database nếu cần
     window.reinitAIGuide?.(targetPane);
     window.reinitDatabaseUI?.(targetPane);
-    if (isT) window.injectTstSources?.();
-    if (isH) window.injectHistorySources?.();
     window.applyCurrentLanguage?.();
 
     // Render công thức toán nếu tab vừa mở chưa được biên dịch
-    typeset(targetPane);
+    if (!isM && !isT && !isH) typeset(targetPane);
   };
 
   // 2. Hiện / Ẩn lời giải và barem điểm từng bài
@@ -297,7 +262,12 @@
     return matches;
   }
 
+  let catalogSearchTimer = null;
+  let catalogSearchVersion = 0;
+
   function applySearch() {
+    clearTimeout(catalogSearchTimer);
+    const version = ++catalogSearchVersion;
     const raw = search ? search.value.trim() : '';
     if (!raw) {
       clearSearch();
@@ -314,6 +284,26 @@
     if (searchSummary) {
       searchSummary.textContent = `Tìm thấy ${n} mục phù hợp với “${raw}”.`;
       searchSummary.classList.add('visible');
+    }
+    const category = { 'tab-tst': 'tst-national', 'tab-mock': 'vmo-mock', 'tab-history': 'history-dn-qn' }[active?.id];
+    if (category && raw.length >= 2 && window.VMODataService?.searchExamCatalog) {
+      catalogSearchTimer = setTimeout(async () => {
+        try {
+          const matches = await window.VMODataService.searchExamCatalog(category, raw);
+          if (version !== catalogSearchVersion || document.querySelector('.tab-pane.active')?.id !== active.id) return;
+          const anchors = new Set(matches.map(item => item.targetAnchor));
+          let count = 0;
+          qsa(`#${active.id} .exam-card`).forEach(card => {
+            const local = norm((card.dataset.search || '') + ' ' + card.innerText).includes(val);
+            const hit = local || anchors.has(card.id);
+            card.classList.toggle('hidden-by-search', !hit);
+            if (hit) count++;
+          });
+          if (searchSummary) searchSummary.textContent = `Tìm thấy ${count} mục phù hợp với “${raw}”.`;
+        } catch (error) {
+          console.warn('Không tìm kiếm được nội dung đề từ MongoDB:', error?.message || error);
+        }
+      }, 300);
     }
   }
 
@@ -362,108 +352,6 @@
     allBtn.textContent = allShown ? '🙈 Ẩn toàn bộ lời giải mẫu' : '👁️ Hiện toàn bộ lời giải mẫu';
     if (allShown) typeset(qs('#book-content'));
   });
-
-  // 7. Gắn nguồn tham khảo TST từ tstSources
-  function injectTstSources() {
-    const sources = window.tstSources || {};
-    Object.entries(sources).forEach(([cardId, cfg]) => {
-      const card = qs('#' + cardId);
-      if (!card) return;
-      qsa('.problem-item', card).forEach((problem, i) => {
-        if (problem.querySelector('.source-solution-box')) return; // Tránh trùng lặp
-        const sList = cfg.byIndex?.[i] || cfg.all;
-        if (!sList?.length) return;
-
-        const box = document.createElement('div');
-        box.className = 'solution-box source-solution-box';
-
-        const button = document.createElement('button');
-        button.className = 'toggle-btn';
-        button.type = 'button';
-        button.textContent = '🔗 Lời giải tham khảo';
-        button.setAttribute('aria-expanded', 'false');
-        button.onclick = () => toggleSolution(button);
-
-        const content = document.createElement('div');
-        content.className = 'solution-content';
-
-        const heading = document.createElement('strong');
-        heading.textContent = 'Nguồn lời giải:';
-        content.appendChild(heading);
-
-        const list = document.createElement('ul');
-        sList.forEach(([label, url]) => {
-          const li = document.createElement('li');
-          const a = document.createElement('a');
-          a.href = url;
-          a.target = '_blank';
-          a.rel = 'noopener noreferrer';
-          a.textContent = label;
-          li.appendChild(a);
-          list.appendChild(li);
-        });
-
-        content.appendChild(list);
-        box.append(button, content);
-        problem.appendChild(box);
-      });
-    });
-  }
-
-  // 8. Gắn nguồn tham khảo History từ historySources
-  function injectHistorySources() {
-    const sources = window.historySources || {};
-    Object.entries(sources).forEach(([cardId, cfg]) => {
-      const card = qs('#' + cardId);
-      if (!card) return;
-      qsa('.problem-item', card).forEach((problem, i) => {
-        if (problem.querySelector('.source-solution-box')) return; // Tránh trùng lặp
-        const sList = cfg.byIndex?.[i] || cfg.all;
-        if (!sList?.length) return;
-
-        const box = document.createElement('div');
-        box.className = 'solution-box source-solution-box';
-
-        const button = document.createElement('button');
-        button.className = 'toggle-btn';
-        button.type = 'button';
-        button.textContent = '🔗 Lời giải tham khảo';
-        button.setAttribute('aria-expanded', 'false');
-        button.onclick = () => toggleSolution(button);
-
-        const content = document.createElement('div');
-        content.className = 'solution-content';
-
-        const heading = document.createElement('strong');
-        heading.textContent = 'Nguồn lời giải:';
-        content.appendChild(heading);
-
-        const list = document.createElement('ul');
-        sList.forEach(([label, url]) => {
-          const li = document.createElement('li');
-          const a = document.createElement('a');
-          a.href = url;
-          a.target = '_blank';
-          a.rel = 'noopener noreferrer';
-          a.textContent = label;
-          li.appendChild(a);
-          list.appendChild(li);
-        });
-
-        content.appendChild(list);
-        box.append(button, content);
-        problem.appendChild(box);
-      });
-    });
-  }
-
-  window.injectTstSources = injectTstSources;
-  window.injectHistorySources = injectHistorySources;
-
-  // Nguồn tham khảo của các kho đề được gắn khi tab tương ứng được mở.
-  const initialPane = qs('.tab-pane.active');
-  if (initialPane?.id === 'tab-tst') injectTstSources();
-  if (initialPane?.id === 'tab-history') injectHistorySources();
 
   window.printVMODocument = async function() {
     try {
