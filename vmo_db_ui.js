@@ -4908,15 +4908,33 @@ if (card) card.dataset.databaseCard = 'true';
     for (const key of loadedDetails) if (key.startsWith(`${category}:`)) loadedDetails.delete(key);
   }
 
-  document.addEventListener('click', event => {
+  let sidebarNavigationToken = 0;
+  document.addEventListener('click', async event => {
     const link = event.target.closest?.('#sidebar-tst a[href^="#"], #sidebar-mock a[href^="#"], #sidebar-history a[href^="#"]');
-    if (!link || !window.VMODataService?.getExamCatalogDetail) return;
+    if (!link || !window.VMODataService?.getExamCatalogDetail || event.defaultPrevented ||
+        event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
     const tab = { 'sidebar-tst': 'tab-tst', 'sidebar-mock': 'tab-mock', 'sidebar-history': 'tab-history' }
       [link.closest('#sidebar-tst, #sidebar-mock, #sidebar-history')?.id];
     const category = examCategories[tab];
     const anchor = link.getAttribute('href')?.slice(1);
-    if (category && anchor) window.loadDatabaseExamDetail(category, anchor).catch(error =>
-      console.warn('Không tải được đề được chọn:', error?.message || error));
+    if (!category || !anchor) return;
+    event.preventDefault();
+    const token = ++sidebarNavigationToken;
+    try {
+      await window.loadDatabaseExamDetail(category, anchor);
+      if (token !== sidebarNavigationToken) return;
+      const card = document.getElementById(anchor);
+      if (!card) return;
+      card.classList.remove('hidden-by-search');
+      // Cuộn sau khi nội dung thay thế placeholder và browser hoàn tất bố cục.
+      await new Promise(resolve => window.requestAnimationFrame(resolve));
+      await new Promise(resolve => window.requestAnimationFrame(resolve));
+      if (token !== sidebarNavigationToken) return;
+      window.history.pushState(null, '', `#${anchor}`);
+      card.scrollIntoView({ behavior: 'auto', block: 'start' });
+    } catch (error) {
+      console.warn('Không tải được đề được chọn:', error?.message || error);
+    }
   });
 
   function showDatabaseCatalogState(root, exams, error = null) {

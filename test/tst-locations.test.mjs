@@ -205,6 +205,40 @@ for (const [anchor, expectedDays] of [
   assert.equal(window.document.querySelectorAll(`#sidebar-tst a[href="#${anchor}"]`).length, 1,
     'Mỗi địa phương chỉ có một liên kết sidebar');
 }
+const scrollTargets = [];
+window.HTMLElement.prototype.scrollIntoView = function() { scrollTargets.push(this.id); };
+window.requestAnimationFrame = callback => setTimeout(callback, 0);
+const originalDetail = window.VMODataService.getExamCatalogDetail;
+let releaseThaiNguyen;
+const thaiNguyenGate = new Promise(resolve => { releaseThaiNguyen = resolve; });
+window.VMODataService.getExamCatalogDetail = async (category, anchor) => {
+  if (anchor === 'tst-thai-nguyen') await thaiNguyenGate;
+  return originalDetail(category, anchor);
+};
+const thaiNguyenLink = window.document.querySelector('#sidebar-tst a[href="#tst-thai-nguyen"]');
+const firstClick = new window.MouseEvent('click', { bubbles: true, cancelable: true, button: 0 });
+thaiNguyenLink.dispatchEvent(firstClick);
+assert.equal(firstClick.defaultPrevented, true, 'Ngăn browser cuộn vào placeholder trước khi tải');
+assert.deepEqual(scrollTargets, [], 'Không cuộn trước khi dữ liệu về');
+releaseThaiNguyen();
+await new Promise(resolve => setTimeout(resolve, 20));
+assert.deepEqual(scrollTargets, ['tst-thai-nguyen'], 'Một lần nhấp cuộn đúng đề sau khi tải');
+assert.equal(window.location.hash, '#tst-thai-nguyen');
+thaiNguyenLink.click();
+await new Promise(resolve => setTimeout(resolve, 20));
+assert.deepEqual(scrollTargets, ['tst-thai-nguyen', 'tst-thai-nguyen'], 'Nhấp lại đề đã tải vẫn cuộn đúng');
+let releaseHungYen;
+const hungYenGate = new Promise(resolve => { releaseHungYen = resolve; });
+window.VMODataService.getExamCatalogDetail = async (category, anchor) => {
+  if (anchor === 'tst-hung-yen') await hungYenGate;
+  return originalDetail(category, anchor);
+};
+window.document.querySelector('#sidebar-tst a[href="#tst-hung-yen"]').click();
+window.document.querySelector('#sidebar-tst a[href="#tst-ptnk"]').click();
+releaseHungYen();
+await new Promise(resolve => setTimeout(resolve, 25));
+assert.equal(scrollTargets.at(-1), 'tst-ptnk', 'Nhấp liên tiếp ưu tiên mục mới nhất');
+assert.equal(window.location.hash, '#tst-ptnk');
 assert.equal(fullTabTypesets, 0, 'loader MongoDB không được typeset lại toàn bộ tab');
 
 const mathPreview = window.document.createElement('div');
