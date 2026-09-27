@@ -314,6 +314,27 @@ window.switchHubTab('exams');
 await new Promise(resolve => setTimeout(resolve, 20));
 assert.ok(window.document.querySelector('#hubExamsList button[onclick*="editManagedExam"]'),
   'Admin có nút quản lý bộ đề thi thử');
+let newQuestion;
+let removedQuestion;
+window.VMODataService.getProblemsByExam = async () => [{
+  id: 'cccccccccccccccccccccccc', questionNumber: 1, title: 'Câu hiện có'
+}];
+window.VMODataService.addExamQuestion = async (examId, fields) => { newQuestion = { examId, ...fields }; return newQuestion; };
+window.VMODataService.deleteExamQuestion = async (examId, problemId) => { removedQuestion = { examId, problemId }; return true; };
+await window.manageExamQuestions('bbbbbbbbbbbbbbbbbbbbbbbb');
+const questionPanel = window.document.getElementById('managedQuestionsEditor');
+assert.ok(questionPanel.querySelector('.managed-questions-list').textContent.includes('Câu hiện có'));
+const addQuestionForm = questionPanel.querySelector('.add-exam-question');
+addQuestionForm.elements.questionNumber.value = '2';
+addQuestionForm.elements.content.value = 'Nội dung câu 2';
+addQuestionForm.dispatchEvent(new window.Event('submit', { bubbles: true, cancelable: true }));
+await new Promise(resolve => setTimeout(resolve, 30));
+assert.equal(newQuestion.examId, 'bbbbbbbbbbbbbbbbbbbbbbbb');
+assert.equal(newQuestion.questionNumber, 2);
+questionPanel.querySelector('.managed-questions-list button').click();
+await new Promise(resolve => setTimeout(resolve, 30));
+assert.equal(removedQuestion.problemId, 'cccccccccccccccccccccccc');
+assert.equal(removedQuestion.examId, 'bbbbbbbbbbbbbbbbbbbbbbbb');
 
 const mathPreview = window.document.createElement('div');
 window.document.body.appendChild(mathPreview);

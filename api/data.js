@@ -742,6 +742,71 @@ export default async function handler(req, res) {
 
     if (!requireAdmin(session, res)) return;
 
+    if (action === 'add_exam_question' || action === 'delete_exam_question') {
+      const examId = objectId(cleanText(payload.examId, 80));
+      if (!examId) return res.status(400).json({ success: false, error: 'ID đề thi không hợp lệ' });
+      const exam = await db.collection('exams').findOne({ _id: examId, status: { $ne: 'deleted' } });
+      if (!exam || !['tst-national', 'history-dn-qn', 'vmo-mock'].includes(exam.category) || !exam.targetAnchor) {
+        return res.status(404).json({ success: false, error: 'Không tìm thấy đề thi trong catalog' });
+      }
+      const examIdText = String(examId);
+      if (action === 'delete_exam_question') {
+        const problemId = objectId(cleanText(payload.problemId, 80));
+        if (!problemId) return res.status(400).json({ success: false, error: 'ID câu hỏi không hợp lệ' });
+        const problem = await db.collection('problems').findOne({
+          _id: problemId, examId: examIdText, status: { $ne: 'deleted' }
+        });
+        if (!problem) return res.status(404).json({ success: false, error: 'Câu hỏi không thuộc đề đã chọn' });
+        await db.collection('problems').updateOne({ _id: problemId, examId: examIdText },
+          { $set: { status: 'deleted', deletedBy: session.username, deletedAt: now, updatedAt: now } });
+        await recordActivity(db, session, 'exam.question_deleted', {
+          itemTitle: problem.title, problemKey: problem.contentKey, examId: examIdText
+        });
+        return res.status(200).json({ success: true, item: { id: String(problemId) } });
+      }
+      const questionNumber = Number(payload.questionNumber);
+      const content = cleanText(payload.content, 50000);
+      if (!Number.isInteger(questionNumber) || questionNumber < 1 || questionNumber > 99 || !content) {
+        return res.status(400).json({ success: false, error: 'Cần số câu từ 1–99 và nội dung câu hỏi' });
+      }
+      const active = await db.collection('problems').findOne({
+        examId: examIdText, questionNumber, status: { $ne: 'deleted' }
+      });
+      if (active) return res.status(409).json({ success: false, error: `Câu ${questionNumber} đã có trong đề này` });
+      const isMock = exam.category === 'vmo-mock';
+      const isRegional = exam.category === 'history-dn-qn';
+      const day = Number(exam.dayNumber) || 1;
+      const setKey = isMock ? `mock:${exam.targetAnchor}`
+        : `${isRegional ? 'danang_quangnam' : 'tst'}:${exam.targetAnchor}:day-${day}`;
+      const contentKey = `${setKey}:question-${questionNumber}`;
+      const existingKey = await db.collection('problems').findOne({ contentKey });
+      if (existingKey && (existingKey.examId !== examIdText || existingKey.status !== 'deleted')) {
+        return res.status(409).json({ success: false, error: 'Khóa câu hỏi đã tồn tại trong MongoDB' });
+      }
+      const group = isMock ? 'mock_exam' : isRegional ? 'danang_quangnam' : 'tst';
+      const savedSet = await db.collection('content_sets').findOneAndUpdate({ key: setKey },
+        { $setOnInsert: { key: setKey, contentType: isMock ? 'mock_exam' : isRegional ? 'regional_exam' : 'tst_exam',
+          title: exam.title, group, year: exam.year, province: exam.province, status: 'published', createdAt: now } },
+        { upsert: true, returnDocument: 'after' });
+      const title = cleanText(payload.title, 500) || `Câu ${questionNumber}`;
+      const saved = await db.collection('problems').findOneAndUpdate({ contentKey },
+        { $set: {
+          examId: examIdText, examKey: exam.examKey || '', setId: savedSet._id, setKey, setTitle: exam.title,
+          sourceGroup: group, sourceType: isMock ? 'mock_exam_question' : isRegional ? 'regional_question' : 'tst_question',
+          title, shortLabel: `Câu ${questionNumber}`, questionNumber, dayNumber: day, day: `Ngày ${day}`,
+          order: day * 100 + questionNumber, orderNumber: questionNumber,
+          topic: cleanText(payload.topic, 120) || 'Toán Olympic', maxScore: cleanNumber(payload.maxScore, 0, 0, 20),
+          content, contentFormat: 'html-latex', frontendAnchor: exam.targetAnchor,
+          status: exam.status === 'draft' ? 'draft' : 'published', allowSubmission: true, allowAiEvaluation: true,
+          updatedBy: session.username, updatedAt: now
+        }, $setOnInsert: { contentKey, version: 1, referenceLinks: [], createdAt: now } },
+        { upsert: true, returnDocument: 'after' });
+      await recordActivity(db, session, 'exam.question_added', {
+        itemTitle: title, problemKey: contentKey, examId: examIdText
+      });
+      return res.status(201).json({ success: true, item: saved });
+    }
+
     if (action === 'update_exam' || action === 'delete_exam') {
       const id = objectId(cleanText(payload.id, 80));
       if (!id) return res.status(400).json({ success: false, error: 'ID đề thi không hợp lệ' });

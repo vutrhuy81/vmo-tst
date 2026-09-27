@@ -237,6 +237,14 @@ export async function deleteExam(id) {
   return mutate('delete_exam', { id: normalizeId(id) });
 }
 
+export async function addExamQuestion(examId, question) {
+  return normalize(await mutate('add_exam_question', { examId: normalizeId(examId), ...question }));
+}
+
+export async function deleteExamQuestion(examId, problemId) {
+  return mutate('delete_exam_question', { examId: normalizeId(examId), problemId: normalizeId(problemId) });
+}
+
 export async function createExamFromOcr(examData) {
   return normalize(await mutate('create_exam_from_ocr', examData));
 }
@@ -531,6 +539,8 @@ const VMODataService = Object.freeze({
   addExam,
   updateExam,
   deleteExam,
+  addExamQuestion,
+  deleteExamQuestion,
   createExamFromOcr,
   getExamCatalog,
   getExamCatalogSummary,

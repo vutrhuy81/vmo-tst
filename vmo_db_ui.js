@@ -4105,8 +4105,81 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
   function examActions(exam) {
     const id = exam.id || exam._id;
     if (!isCurrentUserAdmin() || !/^[a-f\d]{24}$/i.test(String(id || ''))) return '';
-    return `<div style="margin-top:8px;display:flex;gap:8px;"><button type="button" onclick="editManagedExam('${id}')">✏️ Chỉnh sửa đề</button><button type="button" onclick="deleteManagedExam('${id}')">🗑️ Xóa đề</button></div>`;
+    return `<div style="margin-top:8px;display:flex;gap:8px;flex-wrap:wrap;"><button type="button" onclick="editManagedExam('${id}')">✏️ Chỉnh sửa đề</button><button type="button" onclick="manageExamQuestions('${id}')">📝 Quản lý câu hỏi</button><button type="button" onclick="deleteManagedExam('${id}')">🗑️ Xóa đề</button></div>`;
   }
+
+  window.manageExamQuestions = async function(id) {
+    if (!requireAdminUiAction()) return;
+    const exam = managedExams.get(id);
+    if (!exam) return;
+    document.getElementById('managedQuestionsEditor')?.remove();
+    const panel = document.createElement('section');
+    panel.id = 'managedQuestionsEditor';
+    panel.style.cssText = 'padding:14px;margin:12px 0;background:#fff;border:1px solid #94a3b8;border-radius:8px;max-height:65vh;overflow:auto;';
+    panel.innerHTML = `<strong>📝 ${escapeHtmlText(exam.title || exam.province || 'Đề thi')} · Ngày ${Number(exam.dayNumber) || 1}</strong>
+      <button type="button" class="close-questions" style="float:right">Đóng</button>
+      <div class="managed-questions-list">Đang tải câu hỏi...</div>
+      <form class="add-exam-question" style="display:grid;gap:8px;margin-top:12px;">
+        <strong>➕ Thêm câu hỏi</strong>
+        <label>Số câu <input name="questionNumber" type="number" min="1" max="99" required></label>
+        <label>Tiêu đề <input name="title" maxlength="500" placeholder="Câu 9"></label>
+        <label>Chủ đề <input name="topic" maxlength="120" placeholder="Toán Olympic"></label>
+        <label>Điểm tối đa <input name="maxScore" type="number" min="0" max="20" step="0.1" value="0"></label>
+        <label>Nội dung HTML/LaTeX <textarea name="content" required rows="8" maxlength="50000" style="width:100%"></textarea></label>
+        <button type="submit">Lưu câu hỏi vào MongoDB</button>
+      </form>`;
+    panel.querySelector('.close-questions').onclick = () => panel.remove();
+    (exam.category === 'vmo-mock' ? document.getElementById('hubExamsList') : document.getElementById('hubDocsList'))?.before(panel);
+    async function reloadQuestions() {
+      const list = panel.querySelector('.managed-questions-list');
+      const problems = await window.VMODataService.getProblemsByExam(id);
+      if (!panel.isConnected) return;
+      list.replaceChildren();
+      if (!problems.length) list.textContent = 'Đề chưa có câu hỏi.';
+      problems.sort((a, b) => Number(a.questionNumber) - Number(b.questionNumber)).forEach(problem => {
+        const row = document.createElement('div');
+        row.style.cssText = 'padding:8px;border-bottom:1px solid #e2e8f0;display:flex;gap:10px;justify-content:space-between;';
+        const label = document.createElement('span');
+        label.textContent = `Câu ${Number(problem.questionNumber) || 0}: ${problem.title || problem.topic || ''}`;
+        const remove = document.createElement('button');
+        remove.type = 'button';
+        remove.textContent = '🗑️ Xóa câu';
+        remove.onclick = async () => {
+          if (!requireAdminUiAction() || !confirm(`Xóa câu ${problem.questionNumber} khỏi đề “${exam.title}”? Bài nộp vẫn được lưu.`)) return;
+          remove.disabled = true;
+          try {
+            await window.VMODataService.deleteExamQuestion(id, problem.id || problem._id);
+            await reloadQuestions();
+            await refreshManagedExams(exam);
+            showToast('Đã xóa câu hỏi khỏi đề.', true);
+          } catch (error) { showToast('Lỗi xóa câu hỏi: ' + error.message, false); remove.disabled = false; }
+        };
+        row.append(label, remove);
+        list.appendChild(row);
+      });
+    }
+    panel.querySelector('.add-exam-question').onsubmit = async event => {
+      event.preventDefault();
+      if (!requireAdminUiAction()) return;
+      const form = event.currentTarget;
+      const button = form.querySelector('[type="submit"]');
+      button.disabled = true;
+      try {
+        await window.VMODataService.addExamQuestion(id, {
+          questionNumber: Number(form.elements.questionNumber.value), title: form.elements.title.value,
+          topic: form.elements.topic.value, maxScore: Number(form.elements.maxScore.value),
+          content: form.elements.content.value
+        });
+        form.reset();
+        await reloadQuestions();
+        await refreshManagedExams(exam);
+        showToast('Đã thêm câu hỏi vào đề.', true);
+      } catch (error) { showToast('Lỗi thêm câu hỏi: ' + error.message, false); }
+      finally { button.disabled = false; }
+    };
+    try { await reloadQuestions(); }
+    catch (error) { panel.querySelector('.managed-questions-list').textContent = `Lỗi tải câu hỏi: ${error.message}`; }
+  };
 
   window.editManagedExam = function(id) {
     if (!requireAdminUiAction()) return;
