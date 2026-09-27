@@ -4060,7 +4060,7 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
       }
       const catalogExams = [...tstExams.map(exam => ({ ...exam, catalogLabel: 'TST' })), ...regionalExams.map(exam => ({ ...exam, catalogLabel: 'Đà Nẵng–Quảng Nam' }))];
       catalogExams.forEach(exam => managedExams.set(exam.id || exam._id, exam));
-      el.innerHTML = catalogExams.map(exam => `<div style="padding:10px 14px;margin-bottom:8px;background:#eff6ff;border-radius:8px;"><strong>${escapeHtmlText(exam.title || exam.province)}</strong><div style="font-size:.8rem;color:#475569;">${escapeHtmlText(exam.province || '')} · Ngày ${Number(exam.dayNumber) || 1} · ${Number(exam.problemCount) || exam.problems?.length || 0} câu · ${exam.catalogLabel}</div>${examActions(exam)}</div>`).join('') + docs.map(d => `
+      el.innerHTML = catalogExams.map(exam => `<div class="hub-managed-exam" style="padding:10px 14px;margin-bottom:8px;background:#eff6ff;border-radius:8px;"><strong>${escapeHtmlText(exam.title || exam.province)}</strong><div style="font-size:.8rem;color:#475569;">${escapeHtmlText(exam.province || '')} · Ngày ${Number(exam.dayNumber) || 1} · ${Number(exam.problemCount) || exam.problems?.length || 0} câu · ${exam.catalogLabel}</div>${examActions(exam)}</div>`).join('') + docs.map(d => `
         <div style="background:#f8fafc; border:1px solid #e2e8f0; border-radius:8px; padding:10px 14px; margin-bottom:8px; display:flex; justify-content:space-between; align-items:center;">
           <div>
             <strong style="color:#0f172a; font-size:0.95rem;">${d.title}</strong>
@@ -4072,6 +4072,7 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
           ${isCurrentUserAdmin() ? `<button type="button" onclick="deleteDocItem('${d.id}')" style="background:#fee2e2; border:none; color:#dc2626; padding:6px 10px; border-radius:6px; cursor:pointer; font-size:0.8rem;">🗑️ Xóa</button>` : ''}
         </div>
       `).join('');
+      attachExamSearch('docs', catalogExams);
     } catch (err) {
       el.innerHTML = '<div style="color:#dc2626; padding:10px;">Lỗi tải tài liệu: ' + err.message + '</div>';
     }
@@ -4088,7 +4089,7 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
         return;
       }
       el.innerHTML = exams.map(x => `
-        <div style="background:#f8fafc; border:1px solid #e2e8f0; border-radius:8px; padding:10px 14px; margin-bottom:8px;">
+        <div class="hub-managed-exam" style="background:#f8fafc; border:1px solid #e2e8f0; border-radius:8px; padding:10px 14px; margin-bottom:8px;">
           <strong style="color:#0f172a; font-size:0.95rem;">${escapeHtmlText(x.title)}</strong>
           <div style="font-size:0.8rem; color:#64748b; margin-top:2px;">
             ${x.origin === 'prediction' ? '🔮 Đề dự đoán AI · ' : ''}Bộ ${Number(x.setNumber) || ''} · Ngày ${Number(x.dayNumber) || 1} | Năm: ${escapeHtmlText(x.year || '')} | Thời gian: ${Number(x.duration) || 180} phút
@@ -4096,12 +4097,58 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
           ${examActions(x)}
         </div>
       `).join('');
+      attachExamSearch('exams', exams);
     } catch (err) {
       el.innerHTML = '<div style="color:#dc2626; padding:10px;">Lỗi tải đề thi: ' + err.message + '</div>';
     }
   }
 
   const managedExams = new Map();
+  function attachExamSearch(kind, exams) {
+    const list = document.getElementById(kind === 'docs' ? 'hubDocsList' : 'hubExamsList');
+    if (!list) return;
+    const filterId = kind === 'docs' ? 'hubDocsExamFilter' : 'hubMockExamFilter';
+    let filter = document.getElementById(filterId);
+    if (!filter) {
+      filter = document.createElement('div');
+      filter.id = filterId;
+      filter.style.cssText = 'display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin:10px 0;';
+      filter.innerHTML = `<label>Tìm đề <input type="search" class="exam-query" placeholder="Tên, tỉnh/trường, năm, bộ số..." aria-label="Tìm đề thi" style="padding:7px;min-width:230px;"></label>
+        ${kind === 'docs' ? '<label>Kho <select class="exam-category"><option value="">Tất cả</option><option value="tst-national">TST</option><option value="history-dn-qn">Đà Nẵng–Quảng Nam</option></select></label>' : ''}
+        <label>Ngày <select class="exam-day"><option value="">Tất cả</option>${[1, 2, 3, 4].map(day => `<option value="${day}">${day}</option>`).join('')}</select></label>
+        <small class="exam-count" role="status"></small>`;
+      list.before(filter);
+      filter.addEventListener('input', () => applyExamFilter(kind));
+      filter.addEventListener('change', () => applyExamFilter(kind));
+    }
+    const rows = Array.from(list.querySelectorAll('.hub-managed-exam'));
+    rows.forEach((row, index) => {
+      const exam = exams[index];
+      row.dataset.examCategory = exam.category || '';
+      row.dataset.examDay = String(Number(exam.dayNumber) || 1);
+      row.dataset.examSearch = `${exam.title || ''} ${exam.province || ''} ${exam.year || ''} bộ ${exam.setNumber || ''}`;
+    });
+    applyExamFilter(kind);
+  }
+
+  function applyExamFilter(kind) {
+    const filter = document.getElementById(kind === 'docs' ? 'hubDocsExamFilter' : 'hubMockExamFilter');
+    const list = document.getElementById(kind === 'docs' ? 'hubDocsList' : 'hubExamsList');
+    if (!filter || !list) return;
+    const normalize = value => String(value || '').normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/đ/gi, 'd').toLocaleLowerCase('vi');
+    const query = normalize(filter.querySelector('.exam-query').value.trim());
+    const category = filter.querySelector('.exam-category')?.value || '';
+    const day = filter.querySelector('.exam-day').value;
+    const rows = Array.from(list.querySelectorAll('.hub-managed-exam'));
+    let count = 0;
+    rows.forEach(row => {
+      const match = (!query || normalize(row.dataset.examSearch).includes(query)) &&
+        (!category || row.dataset.examCategory === category) && (!day || row.dataset.examDay === day);
+      row.style.display = match ? '' : 'none';
+      if (match) count++;
+    });
+    filter.querySelector('.exam-count').textContent = `${count}/${rows.length} đề`;
+  }
   function examActions(exam) {
     const id = exam.id || exam._id;
     if (!isCurrentUserAdmin() || !/^[a-f\d]{24}$/i.test(String(id || ''))) return '';

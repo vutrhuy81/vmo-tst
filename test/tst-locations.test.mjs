@@ -300,6 +300,18 @@ window.switchHubTab('docs');
 await new Promise(resolve => setTimeout(resolve, 20));
 assert.ok(window.document.querySelector('#hubDocsList button[onclick*="editManagedExam"]'),
   'Admin có nút chỉnh sửa đề trong danh sách TST/Đà Nẵng–Quảng Nam');
+const docsFilter = window.document.getElementById('hubDocsExamFilter');
+docsFilter.querySelector('.exam-query').value = 'quang nam';
+docsFilter.querySelector('.exam-query').dispatchEvent(new window.Event('input', { bubbles: true }));
+assert.equal(Array.from(window.document.querySelectorAll('#hubDocsList .hub-managed-exam'))
+  .filter(row => row.style.display !== 'none').length, 2, 'Tìm kiếm không dấu lọc đúng đề Quảng Nam');
+docsFilter.querySelector('.exam-query').value = '';
+docsFilter.querySelector('.exam-category').value = 'tst-national';
+docsFilter.querySelector('.exam-category').dispatchEvent(new window.Event('change', { bubbles: true }));
+assert.ok(Array.from(window.document.querySelectorAll('#hubDocsList .hub-managed-exam'))
+  .filter(row => row.style.display !== 'none').every(row => row.dataset.examCategory === 'tst-national'));
+docsFilter.querySelector('.exam-category').value = '';
+docsFilter.querySelector('.exam-category').dispatchEvent(new window.Event('change', { bubbles: true }));
 window.editManagedExam('aaaaaaaaaaaaaaaaaaaaaaaa');
 const examEditor = window.document.getElementById('managedExamEditor');
 assert.ok(examEditor);
@@ -314,6 +326,22 @@ window.switchHubTab('exams');
 await new Promise(resolve => setTimeout(resolve, 20));
 assert.ok(window.document.querySelector('#hubExamsList button[onclick*="editManagedExam"]'),
   'Admin có nút quản lý bộ đề thi thử');
+const mockFilter = window.document.getElementById('hubMockExamFilter');
+mockFilter.querySelector('.exam-query').value = 'bo 3';
+mockFilter.querySelector('.exam-query').dispatchEvent(new window.Event('input', { bubbles: true }));
+assert.equal(Array.from(window.document.querySelectorAll('#hubExamsList .hub-managed-exam'))
+  .filter(row => row.style.display !== 'none').length, 2, 'Tìm bộ số 3 sau khi bỏ dấu');
+mockFilter.querySelector('.exam-day').value = '2';
+mockFilter.querySelector('.exam-day').dispatchEvent(new window.Event('change', { bubbles: true }));
+assert.equal(Array.from(window.document.querySelectorAll('#hubExamsList .hub-managed-exam'))
+  .filter(row => row.style.display !== 'none').length, 1);
+window.switchHubTab('exams');
+await new Promise(resolve => setTimeout(resolve, 20));
+assert.equal(Array.from(window.document.querySelectorAll('#hubExamsList .hub-managed-exam'))
+  .filter(row => row.style.display !== 'none').length, 1, 'Giữ bộ lọc sau khi nạp lại danh sách');
+mockFilter.querySelector('.exam-query').value = '';
+mockFilter.querySelector('.exam-day').value = '';
+mockFilter.querySelector('.exam-day').dispatchEvent(new window.Event('change', { bubbles: true }));
 let newQuestion;
 let removedQuestion;
 window.VMODataService.getProblemsByExam = async () => [{
