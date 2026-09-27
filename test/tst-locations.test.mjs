@@ -206,7 +206,7 @@ for (const [anchor, expectedDays] of [
     'Mỗi địa phương chỉ có một liên kết sidebar');
 }
 const scrollTargets = [];
-window.HTMLElement.prototype.scrollIntoView = function() { scrollTargets.push(this.id); };
+window.HTMLElement.prototype.scrollIntoView = function(options) { scrollTargets.push({ id: this.id, options }); };
 window.requestAnimationFrame = callback => setTimeout(callback, 0);
 const originalDetail = window.VMODataService.getExamCatalogDetail;
 let releaseThaiNguyen;
@@ -222,11 +222,12 @@ assert.equal(firstClick.defaultPrevented, true, 'Ngăn browser cuộn vào place
 assert.deepEqual(scrollTargets, [], 'Không cuộn trước khi dữ liệu về');
 releaseThaiNguyen();
 await new Promise(resolve => setTimeout(resolve, 20));
-assert.deepEqual(scrollTargets, ['tst-thai-nguyen'], 'Một lần nhấp cuộn đúng đề sau khi tải');
+assert.deepEqual(scrollTargets.map(target => target.id), ['tst-thai-nguyen'], 'Một lần nhấp cuộn đúng đề sau khi tải');
+assert.equal(scrollTargets[0].options.behavior, 'instant', 'Cuộn tức thời, không kế thừa smooth scrolling');
 assert.equal(window.location.hash, '#tst-thai-nguyen');
 thaiNguyenLink.click();
 await new Promise(resolve => setTimeout(resolve, 20));
-assert.deepEqual(scrollTargets, ['tst-thai-nguyen', 'tst-thai-nguyen'], 'Nhấp lại đề đã tải vẫn cuộn đúng');
+assert.deepEqual(scrollTargets.map(target => target.id), ['tst-thai-nguyen', 'tst-thai-nguyen'], 'Nhấp lại đề đã tải vẫn cuộn đúng');
 let releaseHungYen;
 const hungYenGate = new Promise(resolve => { releaseHungYen = resolve; });
 window.VMODataService.getExamCatalogDetail = async (category, anchor) => {
@@ -237,8 +238,36 @@ window.document.querySelector('#sidebar-tst a[href="#tst-hung-yen"]').click();
 window.document.querySelector('#sidebar-tst a[href="#tst-ptnk"]').click();
 releaseHungYen();
 await new Promise(resolve => setTimeout(resolve, 25));
-assert.equal(scrollTargets.at(-1), 'tst-ptnk', 'Nhấp liên tiếp ưu tiên mục mới nhất');
+assert.equal(scrollTargets.at(-1).id, 'tst-ptnk', 'Nhấp liên tiếp ưu tiên mục mới nhất');
 assert.equal(window.location.hash, '#tst-ptnk');
+for (const [sidebar, category, anchor] of [
+  ['sidebar-history', 'history-dn-qn', 'hist-qn-2017-2018'],
+  ['sidebar-mock', 'vmo-mock', 'mock-set5-day1']
+]) {
+  let releaseDetail;
+  const detailGate = new Promise(resolve => { releaseDetail = resolve; });
+  window.VMODataService.getExamCatalogDetail = async (requestedCategory, requestedAnchor) => {
+    if (requestedCategory === category && requestedAnchor === anchor) await detailGate;
+    return originalDetail(requestedCategory, requestedAnchor);
+  };
+  const link = window.document.querySelector(`#${sidebar} a[href="#${anchor}"]`);
+  assert.ok(link, `Sidebar ${sidebar} có liên kết ${anchor}`);
+  const priorScrolls = scrollTargets.length;
+  const click = new window.MouseEvent('click', { bubbles: true, cancelable: true, button: 0 });
+  link.dispatchEvent(click);
+  assert.equal(click.defaultPrevented, true, `${sidebar}: chặn cuộn vào placeholder`);
+  assert.equal(scrollTargets.length, priorScrolls, `${sidebar}: chờ dữ liệu trước khi cuộn`);
+  releaseDetail();
+  await new Promise(resolve => setTimeout(resolve, 25));
+  assert.equal(scrollTargets.length, priorScrolls + 1, `${sidebar}: cuộn đúng một lần`);
+  assert.equal(scrollTargets.at(-1).id, anchor);
+  assert.equal(scrollTargets.at(-1).options.behavior, 'instant');
+  assert.equal(scrollTargets.at(-1).options.block, 'start');
+  assert.equal(window.location.hash, `#${anchor}`);
+  link.click();
+  await new Promise(resolve => setTimeout(resolve, 20));
+  assert.equal(scrollTargets.at(-1).id, anchor, `${sidebar}: nhấp lại vẫn cuộn đúng`);
+}
 assert.equal(fullTabTypesets, 0, 'loader MongoDB không được typeset lại toàn bộ tab');
 
 const mathPreview = window.document.createElement('div');

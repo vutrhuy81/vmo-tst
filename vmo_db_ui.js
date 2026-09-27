@@ -4931,7 +4931,9 @@ if (card) card.dataset.databaseCard = 'true';
       await new Promise(resolve => window.requestAnimationFrame(resolve));
       if (token !== sidebarNavigationToken) return;
       window.history.pushState(null, '', `#${anchor}`);
-      card.scrollIntoView({ behavior: 'auto', block: 'start' });
+      // `auto` inherits the page's smooth scrolling and can land on an earlier
+      // position while lazy cards above the target finish rendering.
+      card.scrollIntoView({ behavior: 'instant', block: 'start' });
     } catch (error) {
       console.warn('Không tải được đề được chọn:', error?.message || error);
     }
