@@ -4821,13 +4821,16 @@ if (card) card.dataset.databaseCard = 'true';
     const card = document.getElementById(anchor);
     const pending = (async () => {
       try {
-        const exam = await window.VMODataService.getExamCatalogDetail(category, anchor);
-        if (!exam) throw new Error('Không tìm thấy đề thi');
-        renderDatabaseExam(exam, category === 'tst-national' ? 'tst' : category === 'vmo-mock' ? 'mock' : 'regional');
-        if (category === 'vmo-mock') ensureDatabaseMockNavigation(exam);
+        const exams = await window.VMODataService.getExamCatalogDetail(category, anchor);
+        if (!Array.isArray(exams) || !exams.length) throw new Error('Không tìm thấy đề thi');
+        exams.sort((a, b) => Number(a.dayNumber) - Number(b.dayNumber));
+        exams.forEach(exam => {
+          renderDatabaseExam(exam, category === 'tst-national' ? 'tst' : category === 'vmo-mock' ? 'mock' : 'regional');
+          if (category === 'vmo-mock') ensureDatabaseMockNavigation(exam);
+        });
         if (!(window.mongoProblemReferenceLinks instanceof Map)) window.mongoProblemReferenceLinks = new Map();
         if (!(window.mongoProblemsByContentKey instanceof Map)) window.mongoProblemsByContentKey = new Map();
-        exam.problems.forEach(problem => {
+        exams.flatMap(exam => exam.problems).forEach(problem => {
           window.mongoProblemReferenceLinks.set(problem.contentKey, problem.referenceLinks || []);
           window.mongoProblemsByContentKey.set(problem.contentKey, problem);
         });
@@ -4905,15 +4908,35 @@ if (card) card.dataset.databaseCard = 'true';
     for (const key of loadedDetails) if (key.startsWith(`${category}:`)) loadedDetails.delete(key);
   }
 
-  document.addEventListener('click', event => {
+  let sidebarNavigationToken = 0;
+  document.addEventListener('click', async event => {
     const link = event.target.closest?.('#sidebar-tst a[href^="#"], #sidebar-mock a[href^="#"], #sidebar-history a[href^="#"]');
-    if (!link || !window.VMODataService?.getExamCatalogDetail) return;
+    if (!link || !window.VMODataService?.getExamCatalogDetail || event.defaultPrevented ||
+        event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
     const tab = { 'sidebar-tst': 'tab-tst', 'sidebar-mock': 'tab-mock', 'sidebar-history': 'tab-history' }
       [link.closest('#sidebar-tst, #sidebar-mock, #sidebar-history')?.id];
     const category = examCategories[tab];
     const anchor = link.getAttribute('href')?.slice(1);
-    if (category && anchor) window.loadDatabaseExamDetail(category, anchor).catch(error =>
-      console.warn('Không tải được đề được chọn:', error?.message || error));
+    if (!category || !anchor) return;
+    event.preventDefault();
+    const token = ++sidebarNavigationToken;
+    try {
+      await window.loadDatabaseExamDetail(category, anchor);
+      if (token !== sidebarNavigationToken) return;
+      const card = document.getElementById(anchor);
+      if (!card) return;
+      card.classList.remove('hidden-by-search');
+      // Cuộn sau khi nội dung thay thế placeholder và browser hoàn tất bố cục.
+      await new Promise(resolve => window.requestAnimationFrame(resolve));
+      await new Promise(resolve => window.requestAnimationFrame(resolve));
+      if (token !== sidebarNavigationToken) return;
+      window.history.pushState(null, '', `#${anchor}`);
+      // `auto` inherits the page's smooth scrolling and can land on an earlier
+      // position while lazy cards above the target finish rendering.
+      card.scrollIntoView({ behavior: 'instant', block: 'start' });
+    } catch (error) {
+      console.warn('Không tải được đề được chọn:', error?.message || error);
+    }
   });
 
   function showDatabaseCatalogState(root, exams, error = null) {

@@ -86,7 +86,7 @@ window.VMODataService.getExamCatalogSummary = async category =>
   }));
 window.VMODataService.getExamCatalogDetail = async (category, anchor) => {
   detailRequests.push(`${category}:${anchor}`);
-  return (await window.VMODataService.getExamCatalog(category)).find(exam => exam.targetAnchor === anchor);
+  return (await window.VMODataService.getExamCatalog(category)).filter(exam => exam.targetAnchor === anchor);
 };
 window.eval(locationsSource);
 window.eval(uiSource);
@@ -183,6 +183,91 @@ assert.equal(window.document.querySelector('#sidebar-history a[href="#hist-dn-20
   '03. Đà Nẵng 2026–2027');
 await window.loadDatabaseRegionalExams(true);
 assert.equal(window.document.querySelectorAll('#sidebar-history a.nav-link').length, 5);
+const initialCatalog = window.VMODataService.getExamCatalog;
+window.VMODataService.getExamCatalog = async category => category === 'tst-national'
+  ? [...await initialCatalog(category), ...[
+    ['tst-ptnk', 'PTNK TP.HCM', [1, 2]],
+    ['tst-truong-he-danang', 'TRƯỜNG HÈ ĐÀ NẴNG', [1, 2]],
+    ['tst-khtn', 'CHUYÊN KHTN HÀ NỘI', [1, 2, 3, 4]]
+  ].flatMap(([anchor, province, days]) => days.map(dayNumber => ({
+    id: `${anchor}-${dayNumber}`, examKey: `tst-national:${anchor}:day-${dayNumber}`,
+    targetAnchor: anchor, province, dayNumber, region: 'BAC', title: province,
+    problems: [{ contentKey: `tst:${anchor}:day-${dayNumber}:question-1`,
+      questionNumber: 1, content: `Đề ngày ${dayNumber}` }]
+  })))] : initialCatalog(category);
+await window.loadDatabaseTstExams(true);
+for (const [anchor, expectedDays] of [
+  ['tst-ptnk', [1, 2]], ['tst-truong-he-danang', [1, 2]], ['tst-khtn', [1, 2, 3, 4]]
+]) {
+  await window.loadDatabaseExamDetail('tst-national', anchor);
+  assert.deepEqual(Array.from(window.document.querySelectorAll(`#${anchor} .db-exam-day`),
+    section => Number(section.dataset.dayNumber)), expectedDays, `${anchor} phải có đủ ngày theo thứ tự`);
+  assert.equal(window.document.querySelectorAll(`#sidebar-tst a[href="#${anchor}"]`).length, 1,
+    'Mỗi địa phương chỉ có một liên kết sidebar');
+}
+const scrollTargets = [];
+window.HTMLElement.prototype.scrollIntoView = function(options) { scrollTargets.push({ id: this.id, options }); };
+window.requestAnimationFrame = callback => setTimeout(callback, 0);
+const originalDetail = window.VMODataService.getExamCatalogDetail;
+let releaseThaiNguyen;
+const thaiNguyenGate = new Promise(resolve => { releaseThaiNguyen = resolve; });
+window.VMODataService.getExamCatalogDetail = async (category, anchor) => {
+  if (anchor === 'tst-thai-nguyen') await thaiNguyenGate;
+  return originalDetail(category, anchor);
+};
+const thaiNguyenLink = window.document.querySelector('#sidebar-tst a[href="#tst-thai-nguyen"]');
+const firstClick = new window.MouseEvent('click', { bubbles: true, cancelable: true, button: 0 });
+thaiNguyenLink.dispatchEvent(firstClick);
+assert.equal(firstClick.defaultPrevented, true, 'Ngăn browser cuộn vào placeholder trước khi tải');
+assert.deepEqual(scrollTargets, [], 'Không cuộn trước khi dữ liệu về');
+releaseThaiNguyen();
+await new Promise(resolve => setTimeout(resolve, 20));
+assert.deepEqual(scrollTargets.map(target => target.id), ['tst-thai-nguyen'], 'Một lần nhấp cuộn đúng đề sau khi tải');
+assert.equal(scrollTargets[0].options.behavior, 'instant', 'Cuộn tức thời, không kế thừa smooth scrolling');
+assert.equal(window.location.hash, '#tst-thai-nguyen');
+thaiNguyenLink.click();
+await new Promise(resolve => setTimeout(resolve, 20));
+assert.deepEqual(scrollTargets.map(target => target.id), ['tst-thai-nguyen', 'tst-thai-nguyen'], 'Nhấp lại đề đã tải vẫn cuộn đúng');
+let releaseHungYen;
+const hungYenGate = new Promise(resolve => { releaseHungYen = resolve; });
+window.VMODataService.getExamCatalogDetail = async (category, anchor) => {
+  if (anchor === 'tst-hung-yen') await hungYenGate;
+  return originalDetail(category, anchor);
+};
+window.document.querySelector('#sidebar-tst a[href="#tst-hung-yen"]').click();
+window.document.querySelector('#sidebar-tst a[href="#tst-ptnk"]').click();
+releaseHungYen();
+await new Promise(resolve => setTimeout(resolve, 25));
+assert.equal(scrollTargets.at(-1).id, 'tst-ptnk', 'Nhấp liên tiếp ưu tiên mục mới nhất');
+assert.equal(window.location.hash, '#tst-ptnk');
+for (const [sidebar, category, anchor] of [
+  ['sidebar-history', 'history-dn-qn', 'hist-qn-2017-2018'],
+  ['sidebar-mock', 'vmo-mock', 'mock-set5-day1']
+]) {
+  let releaseDetail;
+  const detailGate = new Promise(resolve => { releaseDetail = resolve; });
+  window.VMODataService.getExamCatalogDetail = async (requestedCategory, requestedAnchor) => {
+    if (requestedCategory === category && requestedAnchor === anchor) await detailGate;
+    return originalDetail(requestedCategory, requestedAnchor);
+  };
+  const link = window.document.querySelector(`#${sidebar} a[href="#${anchor}"]`);
+  assert.ok(link, `Sidebar ${sidebar} có liên kết ${anchor}`);
+  const priorScrolls = scrollTargets.length;
+  const click = new window.MouseEvent('click', { bubbles: true, cancelable: true, button: 0 });
+  link.dispatchEvent(click);
+  assert.equal(click.defaultPrevented, true, `${sidebar}: chặn cuộn vào placeholder`);
+  assert.equal(scrollTargets.length, priorScrolls, `${sidebar}: chờ dữ liệu trước khi cuộn`);
+  releaseDetail();
+  await new Promise(resolve => setTimeout(resolve, 25));
+  assert.equal(scrollTargets.length, priorScrolls + 1, `${sidebar}: cuộn đúng một lần`);
+  assert.equal(scrollTargets.at(-1).id, anchor);
+  assert.equal(scrollTargets.at(-1).options.behavior, 'instant');
+  assert.equal(scrollTargets.at(-1).options.block, 'start');
+  assert.equal(window.location.hash, `#${anchor}`);
+  link.click();
+  await new Promise(resolve => setTimeout(resolve, 20));
+  assert.equal(scrollTargets.at(-1).id, anchor, `${sidebar}: nhấp lại vẫn cuộn đúng`);
+}
 assert.equal(fullTabTypesets, 0, 'loader MongoDB không được typeset lại toàn bộ tab');
 
 const mathPreview = window.document.createElement('div');
