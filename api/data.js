@@ -334,7 +334,8 @@ export default async function handler(req, res) {
         // Chỉ lấy khóa định danh và số ví dụ từ MongoDB để hiển thị thống kê.
         // Không tải problems/nội dung đề, nên request này vẫn nhẹ.
         const homeExamFilter = {
-          category: { $in: ['tst-national', 'history-dn-qn', 'vmo-mock'] }
+          category: { $in: ['tst-national', 'history-dn-qn', 'vmo-mock'] },
+          status: { $ne: 'deleted' }
         };
         const homeExampleFilter = {
           sourceType: 'specialty_example',
@@ -365,18 +366,18 @@ export default async function handler(req, res) {
       }
 
       if (resource === 'exam_catalog') {
-        const examFilter = { category: cleanText(req.query?.category, 80) || 'tst-national' };
+        const examFilter = { category: cleanText(req.query?.category, 80) || 'tst-national', status: { $ne: 'deleted' } };
         if (session.role !== 'admin') examFilter.status = 'published';
         const view = cleanText(req.query?.view, 20);
         if (view === 'summary') {
           const projection = {
             examKey: 1, targetAnchor: 1, category: 1, title: 1, province: 1,
             provinceOrder: 1, region: 1, year: 1, setNumber: 1, dayNumber: 1,
-            examDate: 1, duration: 1, status: 1, origin: 1, sourceImageCount: 1
+            examDate: 1, duration: 1, description: 1, status: 1, origin: 1, sourceImageCount: 1
           };
           const exams = await db.collection('exams').find(examFilter, { projection })
             .sort({ provinceOrder: 1, dayNumber: 1, createdAt: 1 }).limit(200).toArray();
-          const problemFilter = { examId: { $in: exams.map(exam => String(exam._id)) } };
+          const problemFilter = { examId: { $in: exams.map(exam => String(exam._id)) }, status: { $ne: 'deleted' } };
           if (session.role !== 'admin') problemFilter.status = 'published';
           const counts = exams.length ? await db.collection('problems').aggregate([
             { $match: problemFilter }, { $group: { _id: '$examId', count: { $sum: 1 } } }
@@ -392,7 +393,7 @@ export default async function handler(req, res) {
           const exams = await db.collection('exams').find({ ...examFilter, targetAnchor: anchor })
             .sort({ dayNumber: 1, createdAt: 1 }).limit(20).toArray();
           if (!exams.length) return res.status(404).json({ success: false, error: 'Không tìm thấy đề thi' });
-          const problemFilter = { examId: { $in: exams.map(exam => String(exam._id)) } };
+          const problemFilter = { examId: { $in: exams.map(exam => String(exam._id)) }, status: { $ne: 'deleted' } };
           if (session.role !== 'admin') problemFilter.status = 'published';
           const problems = await db.collection('problems').find(problemFilter)
             .sort({ orderNumber: 1, questionNumber: 1 }).limit(500).toArray();
@@ -414,6 +415,7 @@ export default async function handler(req, res) {
           const anchorById = new Map(exams.map(exam => [String(exam._id), exam.targetAnchor]));
           const regex = { $regex: accentInsensitiveRegex(query), $options: 'i' };
           const problemFilter = {
+            status: { $ne: 'deleted' },
             examId: { $in: [...anchorById.keys()] },
             $or: [{ content: regex }, { title: regex }, { shortLabel: regex }, { topic: regex }]
           };
@@ -426,7 +428,7 @@ export default async function handler(req, res) {
         }
         const exams = await db.collection('exams').find(examFilter).sort({ provinceOrder: 1, dayNumber: 1, createdAt: 1 }).limit(200).toArray();
         const examIds = exams.map(item => String(item._id));
-        const problemFilter = { examId: { $in: examIds } };
+        const problemFilter = { examId: { $in: examIds }, status: { $ne: 'deleted' } };
         if (session.role !== 'admin') problemFilter.status = 'published';
         const problems = examIds.length
           ? await db.collection('problems').find(problemFilter).sort({ orderNumber: 1, questionNumber: 1 }).limit(1000).toArray()
@@ -516,6 +518,9 @@ export default async function handler(req, res) {
       }
       if (resource === 'exams' && req.query?.category && req.query.category !== 'all') {
         filter.category = cleanText(req.query.category, 80);
+      }
+      if (resource === 'exams' || resource === 'problems') {
+        filter.status = session.role === 'admin' ? { $ne: 'deleted' } : 'published';
       }
       if (resource === 'documents' && req.query?.topic && req.query.topic !== 'all') {
         filter.topic = cleanText(req.query.topic, 120);
@@ -736,6 +741,36 @@ export default async function handler(req, res) {
     }
 
     if (!requireAdmin(session, res)) return;
+
+    if (action === 'update_exam' || action === 'delete_exam') {
+      const id = objectId(cleanText(payload.id, 80));
+      if (!id) return res.status(400).json({ success: false, error: 'ID đề thi không hợp lệ' });
+      const exam = await db.collection('exams').findOne({ _id: id, status: { $ne: 'deleted' } });
+      if (!exam) return res.status(404).json({ success: false, error: 'Không tìm thấy đề thi' });
+      if (action === 'update_exam') {
+        const title = cleanText(payload.title, 500);
+        const duration = Number(payload.duration);
+        const examDate = cleanText(payload.examDate, 20);
+        if (!title || !Number.isInteger(duration) || duration < 1 || duration > 600 ||
+            (examDate && !/^\d{4}-\d{2}-\d{2}$/.test(examDate))) {
+          return res.status(400).json({ success: false, error: 'Tên đề, ngày thi hoặc thời lượng không hợp lệ' });
+        }
+        const updated = await db.collection('exams').findOneAndUpdate({ _id: id },
+          { $set: { title, duration, examDate, description: cleanText(payload.description, 5000), updatedBy: session.username, updatedAt: now } },
+          { returnDocument: 'after' });
+        await db.collection('problems').updateMany({ examId: String(id) },
+          { $set: { setTitle: title, updatedBy: session.username, updatedAt: now } });
+        await recordActivity(db, session, 'exam.updated', { itemTitle: title, examId: String(id) });
+        return res.status(200).json({ success: true, item: updated });
+      }
+      // Giữ bản ghi và bài nộp để có thể đối soát, ẩn đề và câu hỏi khỏi catalog.
+      await db.collection('exams').updateOne({ _id: id },
+        { $set: { status: 'deleted', deletedBy: session.username, deletedAt: now, updatedAt: now } });
+      await db.collection('problems').updateMany({ examId: String(id) },
+        { $set: { status: 'deleted', updatedBy: session.username, updatedAt: now } });
+      await recordActivity(db, session, 'exam.deleted', { itemTitle: exam.title, examId: String(id) });
+      return res.status(200).json({ success: true, item: { id: String(id) } });
+    }
 
     if (action === 'update_ai_guide') {
       const id = objectId(payload.id);

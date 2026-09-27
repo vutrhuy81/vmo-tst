@@ -18,6 +18,8 @@ const dom = new JSDOM(`<!doctype html><html><body>
     <div class="vmo-modal-body">
       <div class="hub-tabs"><button class="hub-tab-btn" id="hub-tab-events"></button></div>
       <div id="hub-panel-events"><div id="hubEventsList"></div></div>
+      <div id="hub-panel-docs"><div id="hubDocsList"></div></div>
+      <div id="hub-panel-exams"><div id="hubExamsList"></div></div>
       <form id="formAddDoc" style="display:none"></form>
       <form id="formAddExam" style="display:none"></form>
     </div>
@@ -37,7 +39,7 @@ window.VMODataService = {
   getDocuments: async () => [],
   getExams: async () => [],
   getExamCatalog: async category => category === 'vmo-mock' ? [{
-    id: 'mock-example', examKey: 'mock:set-3:2026-2027:day-1',
+    id: 'bbbbbbbbbbbbbbbbbbbbbbbb', examKey: 'mock:set-3:2026-2027:day-1',
     targetAnchor: 'mock-set3-day1', setNumber: 3, province: 'Đà Nẵng', year: '2026-2027', dayNumber: 1, title: 'Bộ 3',
     problems: [{ contentKey: 'mock:mock-set3-day1:question-1', questionNumber: 1, content: 'Đề thử' }]
   }, ...[[2, 2], [5, 1], [1, 2], [2, 1], [1, 1], [4, 1], [3, 2]].map(([setNumber, dayNumber]) => ({
@@ -45,7 +47,7 @@ window.VMODataService = {
     setNumber, dayNumber, title: `Bộ ${setNumber}`,
     problems: [{ questionNumber: 1, content: 'Đề thử' }]
   }))] : category === 'history-dn-qn' ? [{
-    id: 'exam-danang-history', examKey: 'regional:da-nang:2026-2027:day-1',
+    id: 'aaaaaaaaaaaaaaaaaaaaaaaa', examKey: 'regional:da-nang:2026-2027:day-1',
     targetAnchor: 'hist-dn-2026-2027', province: 'Đà Nẵng', provinceOrder: 1,
     region: 'TRUNG', title: 'Đề Đà Nẵng 2026–2027', year: '2026-2027', dayNumber: 1,
     problems: [{ contentKey: 'danang_quangnam:hist-dn-2026-2027:day-1:question-1', questionNumber: 1,
@@ -286,6 +288,32 @@ for (const [sidebar, category, anchor] of [
   assert.equal(scrollTargets.at(-1).id, anchor, `${sidebar}: nhấp lại vẫn cuộn đúng`);
 }
 assert.equal(fullTabTypesets, 0, 'loader MongoDB không được typeset lại toàn bộ tab');
+
+let updatedExam;
+let deletedExam;
+window.VMODataService.updateExam = async (id, fields) => { updatedExam = { id, ...fields }; return updatedExam; };
+window.VMODataService.deleteExam = async id => { deletedExam = id; return true; };
+window.VMODataService.getExamCatalogSummary = async category =>
+  (await window.VMODataService.getExamCatalog(category)).map(({ problems, ...exam }) => ({ ...exam, problemCount: problems.length }));
+window.VMODataService.getExams = category => window.VMODataService.getExamCatalog(category);
+window.switchHubTab('docs');
+await new Promise(resolve => setTimeout(resolve, 20));
+assert.ok(window.document.querySelector('#hubDocsList button[onclick*="editManagedExam"]'),
+  'Admin có nút chỉnh sửa đề trong danh sách TST/Đà Nẵng–Quảng Nam');
+window.editManagedExam('aaaaaaaaaaaaaaaaaaaaaaaa');
+const examEditor = window.document.getElementById('managedExamEditor');
+assert.ok(examEditor);
+examEditor.elements.title.value = 'Đề Đà Nẵng đã sửa';
+examEditor.dispatchEvent(new window.Event('submit', { bubbles: true, cancelable: true }));
+await new Promise(resolve => setTimeout(resolve, 30));
+assert.equal(updatedExam.title, 'Đề Đà Nẵng đã sửa');
+assert.equal(updatedExam.id, 'aaaaaaaaaaaaaaaaaaaaaaaa');
+await window.deleteManagedExam('aaaaaaaaaaaaaaaaaaaaaaaa');
+assert.equal(deletedExam, 'aaaaaaaaaaaaaaaaaaaaaaaa');
+window.switchHubTab('exams');
+await new Promise(resolve => setTimeout(resolve, 20));
+assert.ok(window.document.querySelector('#hubExamsList button[onclick*="editManagedExam"]'),
+  'Admin có nút quản lý bộ đề thi thử');
 
 const mathPreview = window.document.createElement('div');
 window.document.body.appendChild(mathPreview);

@@ -4051,14 +4051,16 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
     if (!el) return;
     try {
       const [docs, tstExams, regionalExams] = await Promise.all([
-        window.VMODataService.getDocuments(), window.VMODataService.getExamCatalog('tst-national'),
-        window.VMODataService.getExamCatalog('history-dn-qn')
+        window.VMODataService.getDocuments(), window.VMODataService.getExamCatalogSummary('tst-national'),
+        window.VMODataService.getExamCatalogSummary('history-dn-qn')
       ]);
       if (!docs.length && !tstExams.length && !regionalExams.length) {
         el.innerHTML = '<div style="padding:14px;text-align:center;color:#94a3b8;">Chưa có tài liệu hoặc đề lưu trữ nào trong database.</div>';
         return;
       }
-      el.innerHTML = [...tstExams.map(exam => ({ ...exam, catalogLabel: 'TST' })), ...regionalExams.map(exam => ({ ...exam, catalogLabel: 'Đà Nẵng–Quảng Nam' }))].map(exam => `<div style="padding:10px 14px;margin-bottom:8px;background:#eff6ff;border-radius:8px;"><strong>${escapeHtmlText(exam.title || exam.province)}</strong><div style="font-size:.8rem;color:#475569;">${escapeHtmlText(exam.province || '')} · Ngày ${Number(exam.dayNumber) || 1} · ${exam.problems?.length || 0} câu · ${exam.catalogLabel}</div></div>`).join('') + docs.map(d => `
+      const catalogExams = [...tstExams.map(exam => ({ ...exam, catalogLabel: 'TST' })), ...regionalExams.map(exam => ({ ...exam, catalogLabel: 'Đà Nẵng–Quảng Nam' }))];
+      catalogExams.forEach(exam => managedExams.set(exam.id || exam._id, exam));
+      el.innerHTML = catalogExams.map(exam => `<div style="padding:10px 14px;margin-bottom:8px;background:#eff6ff;border-radius:8px;"><strong>${escapeHtmlText(exam.title || exam.province)}</strong><div style="font-size:.8rem;color:#475569;">${escapeHtmlText(exam.province || '')} · Ngày ${Number(exam.dayNumber) || 1} · ${Number(exam.problemCount) || exam.problems?.length || 0} câu · ${exam.catalogLabel}</div>${examActions(exam)}</div>`).join('') + docs.map(d => `
         <div style="background:#f8fafc; border:1px solid #e2e8f0; border-radius:8px; padding:10px 14px; margin-bottom:8px; display:flex; justify-content:space-between; align-items:center;">
           <div>
             <strong style="color:#0f172a; font-size:0.95rem;">${d.title}</strong>
@@ -4080,6 +4082,7 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
     if (!el) return;
     try {
       const exams = await window.VMODataService.getExams('vmo-mock');
+      exams.forEach(exam => managedExams.set(exam.id || exam._id, exam));
       if (!exams || exams.length === 0) {
         el.innerHTML = '<div style="padding:14px; text-align:center; color:#94a3b8; font-style:italic;">Chưa có đề thi nào trong database. Nhấn "➕ Thêm đề thi mới" để bắt đầu!</div>';
         return;
@@ -4090,11 +4093,77 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
           <div style="font-size:0.8rem; color:#64748b; margin-top:2px;">
             ${x.origin === 'prediction' ? '🔮 Đề dự đoán AI · ' : ''}Bộ ${Number(x.setNumber) || ''} · Ngày ${Number(x.dayNumber) || 1} | Năm: ${escapeHtmlText(x.year || '')} | Thời gian: ${Number(x.duration) || 180} phút
           </div>
+          ${examActions(x)}
         </div>
       `).join('');
     } catch (err) {
       el.innerHTML = '<div style="color:#dc2626; padding:10px;">Lỗi tải đề thi: ' + err.message + '</div>';
     }
+  }
+
+  const managedExams = new Map();
+  function examActions(exam) {
+    const id = exam.id || exam._id;
+    if (!isCurrentUserAdmin() || !/^[a-f\d]{24}$/i.test(String(id || ''))) return '';
+    return `<div style="margin-top:8px;display:flex;gap:8px;"><button type="button" onclick="editManagedExam('${id}')">✏️ Chỉnh sửa đề</button><button type="button" onclick="deleteManagedExam('${id}')">🗑️ Xóa đề</button></div>`;
+  }
+
+  window.editManagedExam = function(id) {
+    if (!requireAdminUiAction()) return;
+    const exam = managedExams.get(id);
+    if (!exam) return;
+    document.getElementById('managedExamEditor')?.remove();
+    const form = document.createElement('form');
+    form.id = 'managedExamEditor';
+    form.style.cssText = 'padding:14px;margin:12px 0;background:#fff;border:1px solid #94a3b8;border-radius:8px;';
+    form.innerHTML = `<strong>Chỉnh sửa đề · ${escapeHtmlText(exam.province || '')} · Ngày ${Number(exam.dayNumber) || 1}</strong>
+      <label style="display:block">Tên đề<input name="title" required maxlength="500" style="width:100%"></label>
+      <label style="display:block">Ngày thi<input name="examDate" type="date" style="width:100%"></label>
+      <label style="display:block">Thời lượng (phút)<input name="duration" type="number" min="1" max="600" required style="width:100%"></label>
+      <label style="display:block">Mô tả<textarea name="description" maxlength="5000" style="width:100%"></textarea></label>
+      <button type="submit">Lưu thay đổi</button> <button type="button" onclick="this.closest('form').remove()">Hủy</button>`;
+    form.elements.title.value = exam.title || '';
+    form.elements.examDate.value = /^\d{4}-\d{2}-\d{2}/.test(exam.examDate || '') ? exam.examDate.slice(0, 10) : '';
+    form.elements.duration.value = Number(exam.duration) || 180;
+    form.elements.description.value = exam.description || '';
+    form.onsubmit = async event => {
+      event.preventDefault();
+      if (!requireAdminUiAction()) return;
+      const button = form.querySelector('[type="submit"]');
+      button.disabled = true;
+      try {
+        await window.VMODataService.updateExam(id, {
+          title: form.elements.title.value, examDate: form.elements.examDate.value,
+          duration: Number(form.elements.duration.value), description: form.elements.description.value
+        });
+        form.remove();
+        showToast('Đã cập nhật đề thi.', true);
+        await refreshManagedExams(exam);
+      } catch (error) { showToast('Lỗi chỉnh sửa đề: ' + error.message, false); button.disabled = false; }
+    };
+    (exam.category === 'vmo-mock' ? document.getElementById('hubExamsList') : document.getElementById('hubDocsList'))?.before(form);
+  };
+
+  window.deleteManagedExam = async function(id) {
+    if (!requireAdminUiAction()) return;
+    const exam = managedExams.get(id);
+    if (!exam || !confirm(`Xóa đề “${exam.title}” (Ngày ${Number(exam.dayNumber) || 1}) khỏi catalog? Câu hỏi của đề sẽ bị ẩn; bài nộp vẫn được lưu.`)) return;
+    try {
+      await window.VMODataService.deleteExam(id);
+      managedExams.delete(id);
+      showToast('Đã xóa đề khỏi catalog.', true);
+      await refreshManagedExams(exam);
+    } catch (error) { showToast('Lỗi xóa đề: ' + error.message, false); }
+  };
+
+  async function refreshManagedExams(exam) {
+    if (exam.category === 'vmo-mock') { await loadHubExams(); await loadDatabaseMockExams(true); }
+    else {
+      await loadHubDocs();
+      if (exam.category === 'tst-national') await loadDatabaseTstExams(true);
+      else if (exam.category === 'history-dn-qn') await loadDatabaseRegionalExams(true);
+    }
+    window.refreshVMOCatalogStats?.();
   }
 
   // Handlers tạo mới
@@ -4921,6 +4990,13 @@ if (card) card.dataset.databaseCard = 'true';
       catalogObserver?.unobserve(card);
       card.remove();
     });
+    const sidebarId = { 'tab-tst': 'sidebar-tst', 'tab-mock': 'sidebar-mock', 'tab-history': 'sidebar-history' }[tabId];
+    document.querySelectorAll(`#${sidebarId} a.nav-link`).forEach(link => link.remove());
+    if (tabId === 'tab-mock') {
+      document.querySelectorAll('#sidebar-mock .nav-year-group').forEach(group => group.remove());
+      document.querySelectorAll('#mockFilterPills .pill[data-filter^="MOCK"]').forEach(pill => pill.remove());
+      document.querySelector('#mockFilterPills .pill[data-filter="ALL"]')?.classList.add('active');
+    }
     for (const key of loadedDetails) if (key.startsWith(`${category}:`)) loadedDetails.delete(key);
   }
 

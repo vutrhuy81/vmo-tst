@@ -229,6 +229,14 @@ export async function addExam(examData) {
   return normalize(await mutate('add_exam', examData));
 }
 
+export async function updateExam(id, fields) {
+  return normalize(await mutate('update_exam', { id: normalizeId(id), ...fields }));
+}
+
+export async function deleteExam(id) {
+  return mutate('delete_exam', { id: normalizeId(id) });
+}
+
 export async function createExamFromOcr(examData) {
   return normalize(await mutate('create_exam_from_ocr', examData));
 }
@@ -521,6 +529,8 @@ const VMODataService = Object.freeze({
   deleteDocument,
   getExams,
   addExam,
+  updateExam,
+  deleteExam,
   createExamFromOcr,
   getExamCatalog,
   getExamCatalogSummary,
