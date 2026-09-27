@@ -4283,16 +4283,25 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
   function ensureDatabaseExamSidebar(exam) {
     if (!exam?.targetAnchor) return;
     const sidebar = document.querySelector('#sidebar-tst .nav-year-group') || document.getElementById('sidebar-tst');
-    if (!sidebar || sidebar.querySelector(`a[href="#${CSS.escape(exam.targetAnchor)}"]`)) return;
-    const link = document.createElement('a');
-    link.className = 'nav-link db-exam-sidebar-link';
-    link.href = `#${exam.targetAnchor}`;
+    if (!sidebar) return;
+    let link = sidebar.querySelector(`a[href="#${CSS.escape(exam.targetAnchor)}"]`);
+    if (!link) {
+      link = document.createElement('a');
+      link.className = 'nav-link db-exam-sidebar-link';
+      link.href = `#${exam.targetAnchor}`;
+      sidebar.appendChild(link);
+    }
     link.dataset.region = ['BAC', 'TRUNG', 'NAM'].includes(exam.region) ? exam.region : 'BAC';
     link.dataset.order = String(Number(exam.provinceOrder) || 0);
-    const numbers = Array.from(sidebar.querySelectorAll('a.nav-link')).map(item => Number(item.textContent.match(/^\s*(\d+)\./)?.[1]) || 0);
-    const next = Math.max(0, ...numbers) + 1;
-    link.textContent = `${String(next).padStart(2, '0')}. ${exam.province?.startsWith('Chuyên ') ? '' : 'Tỉnh '}${exam.province || exam.title || 'Đề thi mới'}`;
-    sidebar.appendChild(link);
+    link.dataset.name = String(exam.province || exam.title || 'Đề thi mới').replace(/^\s*Tỉnh\s+/i, '').trim();
+    const links = Array.from(sidebar.querySelectorAll('a.nav-link'));
+    links.sort((a, b) => a.dataset.name.localeCompare(b.dataset.name, 'vi', { sensitivity: 'base' })
+      || Number(a.dataset.order) - Number(b.dataset.order)
+      || a.getAttribute('href').localeCompare(b.getAttribute('href')));
+    links.forEach((item, index) => {
+      item.textContent = `${String(index + 1).padStart(2, '0')}. ${item.dataset.name}`;
+      sidebar.appendChild(item);
+    });
   }
 
   function ensureReferenceLinksModal() {

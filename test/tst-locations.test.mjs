@@ -8,7 +8,7 @@ const locationsSource = fs.readFileSync(new URL('tst-locations.js', root), 'utf8
 const uiSource = fs.readFileSync(new URL('vmo_db_ui.js', root), 'utf8');
 
 const dom = new JSDOM(`<!doctype html><html><body>
-  <div id="sidebar-tst"><div class="nav-year-group"><div class="nav-year-title">TST</div>${Array.from({ length: 25 }, (_, index) => `<a class="nav-link" href="#tst-existing-${index}">${String(index+1).padStart(2, '0')}. Tỉnh mẫu</a>`).join('')}</div></div>
+  <div id="sidebar-tst"><div class="nav-year-group"><div class="nav-year-title">TST</div></div></div>
   <div id="sidebar-mock"><nav class="book-toc"><div class="nav-year-group"><a class="nav-link" href="#mock-set1-day1">01. Bộ 1</a><a class="nav-link" href="#mock-set2-day2">06. Bộ 2</a></div></nav></div>
   <div id="sidebar-history"><div class="nav-year-group"><div class="nav-year-title">📘 ĐÀ NẴNG</div><a class="nav-link" href="#hist-dn-2025-2026">01. Đà Nẵng 2025–2026</a></div><div class="nav-year-group"><div class="nav-year-title">📙 QUẢNG NAM</div><a class="nav-link" href="#hist-qn-2022-2023">02. Quảng Nam 2022–2023</a></div></div>
   <div id="tab-mock"><div class="feed-container"></div></div>
@@ -56,6 +56,18 @@ window.VMODataService = {
       { contentKey: 'tst:tst-quang-tri:day-1:question-2', questionNumber: 2, content: 'Bài toán khác',
         shortLabel: 'Câu 2 (5,0đ) Phương trình hàm', topic: 'Phương trình hàm (5đ) Phương trình hàm' }
     ]
+  }, {
+    id: 'exam-thai-nguyen', examKey: 'tst:thai-nguyen:2026-2027:day-1',
+    targetAnchor: 'tst-thai-nguyen', province: 'Tỉnh THÁI NGUYÊN', provinceOrder: 10,
+    region: 'BAC', title: 'Đề Thái Nguyên', problems: [{ questionNumber: 1, content: 'Đề thử' }]
+  }, {
+    id: 'exam-chuyen-khtn', examKey: 'tst:chuyen-khtn:2026-2027:day-1',
+    targetAnchor: 'tst-chuyen-khtn', province: 'Tỉnh CHUYÊN KHTN HÀ NỘI', provinceOrder: 26,
+    region: 'BAC', title: 'Đề Chuyên KHTN', problems: [{ questionNumber: 1, content: 'Đề thử' }]
+  }, {
+    id: 'exam-hung-yen', examKey: 'tst:hung-yen:2026-2027:day-1',
+    targetAnchor: 'tst-hung-yen', province: 'Tỉnh Hưng Yên', provinceOrder: 14,
+    region: 'BAC', title: 'Đề Hưng Yên', problems: [{ questionNumber: 1, content: 'Đề thử' }]
   }]
 };
 window.eval(locationsSource);
@@ -111,9 +123,12 @@ assert.equal(secondQuestion.querySelector('.problem-id span:first-child').textCo
 assert.equal(secondQuestion.querySelector('.badge-point').textContent.trim(), '(5đ)');
 assert.equal(secondQuestion.querySelector('.badge-topic').textContent, 'Phương trình hàm');
 assert.equal(secondQuestion.querySelector('.badge-topic').style.display, 'none');
-assert.match(window.document.querySelector('#sidebar-tst a[href="#tst-quang-tri"]').textContent, /^26\. Tỉnh Quảng Trị$/, 'Tỉnh mới phải theo số thứ tự 25');
+assert.deepEqual(Array.from(window.document.querySelectorAll('#sidebar-tst a.nav-link'), link => link.textContent), [
+  '01. CHUYÊN KHTN HÀ NỘI', '02. Hưng Yên', '03. Quảng Trị', '04. THÁI NGUYÊN'
+], 'Tên bỏ tiền tố Tỉnh, sắp theo chữ cái tiếng Việt và đánh số lại');
 await window.loadDatabaseTstExams(true);
 assert.equal(window.document.querySelectorAll('#sidebar-tst a[href="#tst-quang-tri"]').length, 1);
+assert.equal(window.document.querySelector('#sidebar-tst a[href="#tst-quang-tri"]').textContent, '03. Quảng Trị');
 await window.loadDatabaseMockExams(true);
 assert.ok(window.document.getElementById('mock-set3-day1'));
 assert.ok(window.document.querySelector('#sidebar-mock a[href="#mock-set3-day1"]'));
