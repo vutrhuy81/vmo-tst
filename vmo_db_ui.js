@@ -4266,15 +4266,27 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
   function ensureDatabaseRegionalNavigation(exam) {
     if (!exam?.targetAnchor) return;
     const sidebar = document.getElementById('sidebar-history');
-    if (!sidebar || sidebar.querySelector(`a[href="#${CSS.escape(exam.targetAnchor)}"]`)) return;
+    if (!sidebar) return;
     const isQuangNam = String(exam.province || '').toLowerCase().includes('quảng nam');
     const groups = Array.from(sidebar.querySelectorAll('.nav-year-group'));
     const group = groups.find(item => item.querySelector('.nav-year-title')?.textContent.includes(isQuangNam ? 'QUẢNG NAM' : 'ĐÀ NẴNG')) || groups[0] || sidebar;
-    const link = document.createElement('a');
-    link.className = 'nav-link db-exam-sidebar-link';
-    link.href = `#${exam.targetAnchor}`;
+    let link = sidebar.querySelector(`a[href="#${CSS.escape(exam.targetAnchor)}"]`);
+    if (!link) {
+      link = document.createElement('a');
+      link.className = 'nav-link db-exam-sidebar-link';
+      link.href = `#${exam.targetAnchor}`;
+    }
     link.textContent = `${exam.province || 'Đà Nẵng'} ${String(exam.year || '').replace('-', '–')}`;
     group.appendChild(link);
+    groups.sort((a, b) => a.querySelector('.nav-year-title').textContent.replace(/^[^\p{L}]+/u, '').localeCompare(
+      b.querySelector('.nav-year-title').textContent.replace(/^[^\p{L}]+/u, ''), 'vi', { sensitivity: 'base' }));
+    groups.forEach(item => {
+      const links = Array.from(item.querySelectorAll('a.nav-link'));
+      links.sort((a, b) => a.textContent.replace(/^\s*\d+\.\s*/, '').localeCompare(
+        b.textContent.replace(/^\s*\d+\.\s*/, ''), 'vi', { numeric: true, sensitivity: 'base' }));
+      links.forEach(child => item.appendChild(child));
+      sidebar.appendChild(item);
+    });
     Array.from(sidebar.querySelectorAll('a.nav-link')).forEach((item, index) => {
       item.textContent = `${String(index + 1).padStart(2, '0')}. ${item.textContent.replace(/^\s*\d+\.\s*/, '')}`;
     });
@@ -4726,7 +4738,7 @@ if (card) card.dataset.databaseCard = 'true';
     const setNumber = Number(exam.setNumber);
     if (!Number.isInteger(setNumber) || setNumber < 1) return;
     const sidebar = document.querySelector('#sidebar-mock .book-toc');
-    if (sidebar && !sidebar.querySelector(`a[href="#${CSS.escape(exam.targetAnchor)}"]`)) {
+    if (sidebar && exam.targetAnchor) {
       let group = sidebar.querySelector(`[data-mock-set="${setNumber}"]`);
       if (!group) {
         group = document.createElement('div');
@@ -4735,12 +4747,28 @@ if (card) card.dataset.databaseCard = 'true';
         group.innerHTML = `<div class="nav-year-title">🎯 BỘ THI THỬ SỐ ${setNumber}</div>`;
         sidebar.appendChild(group);
       }
-      const link = document.createElement('a');
-      link.className = 'nav-link';
-      link.href = `#${exam.targetAnchor}`;
-      const number = sidebar.querySelectorAll('a.nav-link').length + 1;
-      link.textContent = `${String(number).padStart(2, '0')}. Bộ ${setNumber} — Ngày thứ ${['', 'nhất', 'hai'][Number(exam.dayNumber)] || exam.dayNumber} (${exam.problems.length} câu)`;
+      let link = sidebar.querySelector(`a[href="#${CSS.escape(exam.targetAnchor)}"]`);
+      if (!link) {
+        link = document.createElement('a');
+        link.className = 'nav-link';
+        link.href = `#${exam.targetAnchor}`;
+      }
+      link.dataset.day = String(Number(exam.dayNumber) || 1);
+      link.textContent = `Bộ ${setNumber} — Ngày thứ ${['', 'nhất', 'hai'][Number(exam.dayNumber)] || exam.dayNumber} (${exam.problems.length} câu)`;
       group.appendChild(link);
+      const groups = Array.from(sidebar.querySelectorAll('.nav-year-group'));
+      groups.sort((a, b) => Number(a.dataset.mockSet || a.querySelector('.nav-year-title')?.textContent.match(/\d+/)?.[0])
+        - Number(b.dataset.mockSet || b.querySelector('.nav-year-title')?.textContent.match(/\d+/)?.[0]));
+      groups.forEach(item => {
+        const links = Array.from(item.querySelectorAll('a.nav-link'));
+        links.sort((a, b) => Number(a.dataset.day || a.getAttribute('href')?.match(/day(\d+)/)?.[1] || 999)
+          - Number(b.dataset.day || b.getAttribute('href')?.match(/day(\d+)/)?.[1] || 999));
+        links.forEach(child => item.appendChild(child));
+        sidebar.appendChild(item);
+      });
+      Array.from(sidebar.querySelectorAll('a.nav-link')).forEach((item, index) => {
+        item.textContent = `${String(index + 1).padStart(2, '0')}. ${item.textContent.replace(/^\s*\d+\.\s*/, '')}`;
+      });
     }
     const pills = document.getElementById('mockFilterPills');
     if (pills && !pills.querySelector(`[data-filter="MOCK${setNumber}"]`)) {

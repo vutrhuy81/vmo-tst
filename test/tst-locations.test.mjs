@@ -9,8 +9,8 @@ const uiSource = fs.readFileSync(new URL('vmo_db_ui.js', root), 'utf8');
 
 const dom = new JSDOM(`<!doctype html><html><body>
   <div id="sidebar-tst"><div class="nav-year-group"><div class="nav-year-title">TST</div></div></div>
-  <div id="sidebar-mock"><nav class="book-toc"><div class="nav-year-group"><a class="nav-link" href="#mock-set1-day1">01. Bộ 1</a><a class="nav-link" href="#mock-set2-day2">06. Bộ 2</a></div></nav></div>
-  <div id="sidebar-history"><div class="nav-year-group"><div class="nav-year-title">📘 ĐÀ NẴNG</div><a class="nav-link" href="#hist-dn-2025-2026">01. Đà Nẵng 2025–2026</a></div><div class="nav-year-group"><div class="nav-year-title">📙 QUẢNG NAM</div><a class="nav-link" href="#hist-qn-2022-2023">02. Quảng Nam 2022–2023</a></div></div>
+  <div id="sidebar-mock"><nav class="book-toc"></nav></div>
+  <div id="sidebar-history"><div class="nav-year-group"><div class="nav-year-title">📙 QUẢNG NAM</div></div><div class="nav-year-group"><div class="nav-year-title">📘 ĐÀ NẴNG</div></div></div>
   <div id="tab-mock"><div class="feed-container"></div></div>
   <div id="tab-tst"><div class="feed-container"></div></div>
   <div id="tab-history"><div class="feed-container"></div></div>
@@ -40,13 +40,22 @@ window.VMODataService = {
     id: 'mock-example', examKey: 'mock:set-3:2026-2027:day-1',
     targetAnchor: 'mock-set3-day1', setNumber: 3, province: 'Đà Nẵng', year: '2026-2027', dayNumber: 1, title: 'Bộ 3',
     problems: [{ contentKey: 'mock:mock-set3-day1:question-1', questionNumber: 1, content: 'Đề thử' }]
-  }] : category === 'history-dn-qn' ? [{
+  }, ...[[2, 2], [5, 1], [1, 2], [2, 1], [1, 1], [4, 1], [3, 2]].map(([setNumber, dayNumber]) => ({
+    id: `mock-${setNumber}-${dayNumber}`, targetAnchor: `mock-set${setNumber}-day${dayNumber}`,
+    setNumber, dayNumber, title: `Bộ ${setNumber}`,
+    problems: [{ questionNumber: 1, content: 'Đề thử' }]
+  }))] : category === 'history-dn-qn' ? [{
     id: 'exam-danang-history', examKey: 'regional:da-nang:2026-2027:day-1',
     targetAnchor: 'hist-dn-2026-2027', province: 'Đà Nẵng', provinceOrder: 1,
     region: 'TRUNG', title: 'Đề Đà Nẵng 2026–2027', year: '2026-2027', dayNumber: 1,
     problems: [{ contentKey: 'danang_quangnam:hist-dn-2026-2027:day-1:question-1', questionNumber: 1,
       sourceGroup: 'danang_quangnam', sourceType: 'regional_question', content: 'Bài toán Đà Nẵng' }]
-  }] : [{
+  }, ...[['Quảng Nam', '2017-2018', 'qn'], ['Đà Nẵng', '2015-2016', 'dn'],
+    ['Quảng Nam', '2015-2016', 'qn'], ['Đà Nẵng', '2014-2015', 'dn']].map(([province, year, short]) => ({
+    id: `regional-${short}-${year}`, targetAnchor: `hist-${short}-${year}`,
+    province, year, region: 'TRUNG', title: `Đề ${province} ${year}`,
+    problems: [{ questionNumber: 1, content: 'Đề thử' }]
+  }))] : [{
     id: 'exam-quang-tri', examKey: 'tst:quang-tri:2026-2027:day-1',
     targetAnchor: 'tst-quang-tri', province: 'Quảng Trị', provinceOrder: 21,
     region: 'TRUNG', title: 'Đề TST Quảng Trị', year: '2026-2027', dayNumber: 1,
@@ -132,13 +141,27 @@ assert.equal(window.document.querySelector('#sidebar-tst a[href="#tst-quang-tri"
 await window.loadDatabaseMockExams(true);
 assert.ok(window.document.getElementById('mock-set3-day1'));
 assert.ok(window.document.querySelector('#sidebar-mock a[href="#mock-set3-day1"]'));
+assert.deepEqual(Array.from(window.document.querySelectorAll('#sidebar-mock .nav-year-title'), x => x.textContent),
+  [1, 2, 3, 4, 5].map(n => `🎯 BỘ THI THỬ SỐ ${n}`));
+assert.deepEqual(Array.from(window.document.querySelectorAll('#sidebar-mock a.nav-link'), x => x.getAttribute('href')),
+  ['#mock-set1-day1', '#mock-set1-day2', '#mock-set2-day1', '#mock-set2-day2',
+    '#mock-set3-day1', '#mock-set3-day2', '#mock-set4-day1', '#mock-set5-day1']);
+await window.loadDatabaseMockExams(true);
+assert.equal(window.document.querySelectorAll('#sidebar-mock a.nav-link').length, 8);
 await window.loadDatabaseRegionalExams(true);
 const regionalCard = window.document.getElementById('hist-dn-2026-2027');
 assert.ok(regionalCard, 'Đề lưu trữ mới phải tự tạo card trong tab Đà Nẵng–Quảng Nam');
 assert.equal(regionalCard.dataset.filter, 'DANANG');
 assert.equal(regionalCard.querySelector('.problem-item').dataset.sourceType, 'regional_question');
-assert.match(window.document.querySelector('#sidebar-history a[href="#hist-dn-2026-2027"]').textContent, /^02\. Đà Nẵng 2026–2027$/);
-assert.match(window.document.querySelector('#sidebar-history a[href="#hist-qn-2022-2023"]').textContent, /^03\. Quảng Nam 2022–2023$/);
+assert.deepEqual(Array.from(window.document.querySelectorAll('#sidebar-history .nav-year-title'), x => x.textContent),
+  ['📘 ĐÀ NẴNG', '📙 QUẢNG NAM']);
+assert.deepEqual(Array.from(window.document.querySelectorAll('#sidebar-history a.nav-link'), x => x.getAttribute('href')),
+  ['#hist-dn-2014-2015', '#hist-dn-2015-2016', '#hist-dn-2026-2027',
+    '#hist-qn-2015-2016', '#hist-qn-2017-2018']);
+assert.equal(window.document.querySelector('#sidebar-history a[href="#hist-dn-2026-2027"]').textContent,
+  '03. Đà Nẵng 2026–2027');
+await window.loadDatabaseRegionalExams(true);
+assert.equal(window.document.querySelectorAll('#sidebar-history a.nav-link').length, 5);
 assert.equal(fullTabTypesets, 0, 'loader MongoDB không được typeset lại toàn bộ tab');
 
 const mathPreview = window.document.createElement('div');
