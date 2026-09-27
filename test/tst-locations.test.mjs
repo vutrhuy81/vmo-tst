@@ -156,6 +156,8 @@ await window.loadDatabaseTstExams(true);
 assert.equal(window.document.querySelectorAll('#sidebar-tst a[href="#tst-quang-tri"]').length, 1);
 assert.equal(window.document.querySelector('#sidebar-tst a[href="#tst-quang-tri"]').textContent, '03. Quảng Trị');
 await window.loadDatabaseMockExams(true);
+assert.equal(detailRequests.filter(key => key.startsWith('vmo-mock:')).length, 1,
+  'Mở tab thi thử chỉ lấy chi tiết một đề');
 assert.ok(window.document.getElementById('mock-set3-day1'));
 assert.ok(window.document.querySelector('#sidebar-mock a[href="#mock-set3-day1"]'));
 assert.deepEqual(Array.from(window.document.querySelectorAll('#sidebar-mock .nav-year-title'), x => x.textContent),
@@ -166,6 +168,8 @@ assert.deepEqual(Array.from(window.document.querySelectorAll('#sidebar-mock a.na
 await window.loadDatabaseMockExams(true);
 assert.equal(window.document.querySelectorAll('#sidebar-mock a.nav-link').length, 8);
 await window.loadDatabaseRegionalExams(true);
+assert.equal(detailRequests.filter(key => key.startsWith('history-dn-qn:')).length, 1,
+  'Mở tab khu vực chỉ lấy chi tiết một đề');
 const regionalCard = window.document.getElementById('hist-dn-2026-2027');
 assert.ok(regionalCard, 'Đề lưu trữ mới phải tự tạo card trong tab Đà Nẵng–Quảng Nam');
 assert.equal(regionalCard.dataset.filter, 'DANANG');
