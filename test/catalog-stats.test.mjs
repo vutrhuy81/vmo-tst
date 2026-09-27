@@ -55,13 +55,13 @@ window.eval(appSource);
 await window.refreshVMOCatalogStats();
 
 const value = key => window.document.querySelector(`[data-catalog-stat="${key}"]`).textContent;
-assert.equal(value('tst'), '32', 'phải hợp nhất 25 TST tĩnh + 7 TST MongoDB và loại trùng');
-assert.equal(value('regional'), '16', 'phải hợp nhất 15 ĐN–QN tĩnh + 1 đề MongoDB và loại trùng');
+assert.equal(value('tst'), '08', 'chỉ đếm 8 đề TST từ MongoDB, không tính 25 link HTML');
+assert.equal(value('regional'), '02', 'chỉ đếm 2 đề ĐN–QN từ MongoDB, không tính 15 link HTML');
 assert.equal(value('chapters'), '09', 'không tính khối metadata là chương');
 assert.equal(value('theory'), '39', 'phải đếm đúng mục lý thuyết thực tế');
 assert.equal(value('examples'), '78', 'số ví dụ có lời giải trên MongoDB phải là nguồn chính thức');
-assert.equal(value('mock'), '05', 'phải tính năm bộ đề thử duy nhất từ các khóa đề');
-assert.equal(value('mockSets'), '05', 'dashboard phải dùng số bộ đề thi thử thực tế');
+assert.equal(value('mock'), '04', 'chỉ đếm bốn bộ đề thử từ MongoDB, không tính link HTML');
+assert.equal(value('mockSets'), '04', 'dashboard phải dùng số bộ đề thi thử trong MongoDB');
 
 const apiSource = fs.readFileSync(path.join(root, 'api/data.js'), 'utf8');
 assert.match(apiSource, /resource === 'home_stats'/, 'API phải có tài nguyên thống kê nhẹ');

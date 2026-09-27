@@ -11,12 +11,6 @@
   const searchSummary = qs('#searchSummary');
   const tabLoadPromises = new Map();
 
-  function hrefKeys(selector, pattern) {
-    return new Set(qsa(selector)
-      .map(link => String(link.getAttribute('href') || '').replace(/^#/, ''))
-      .filter(key => pattern.test(key)));
-  }
-
   function formatCount(value) {
     return String(Math.max(0, Number(value) || 0)).padStart(2, '0');
   }
@@ -31,12 +25,12 @@
 
   function staticCatalogStats() {
     return {
-      tstTargets: hrefKeys('#sidebar-tst a.nav-link[href^="#tst-"]', /^tst-/),
-      regionalTargets: hrefKeys('#sidebar-history a.nav-link[href^="#hist-"]', /^hist-(?:dn|qn)-/),
-      mockEntries: hrefKeys('#sidebar-mock a.nav-link[href*="-day"]', /^mock-set\d+-day\d+$/),
+      tstTargets: new Set(),
+      regionalTargets: new Set(),
+      mockEntries: new Set(),
       chapters: qsa('#book-content .chapter-block[data-chapter]:not([data-chapter="meta"])').length,
       theory: qsa('#book-content .theorybox').length,
-      examples: qsa('#book-content .examplebox .example-solution').length
+      examples: 0
     };
   }
 
@@ -67,7 +61,7 @@
       });
     };
 
-    // Hiển thị ngay số liệu từ catalog tĩnh, không chờ mạng/MongoDB.
+    // Các chỉ số đề thi và ví dụ chỉ lấy từ MongoDB; số 0 cho biết API chưa sẵn sàng.
     apply();
     if (!window.VMODataService?.getHomeStats) return;
 

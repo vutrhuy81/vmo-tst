@@ -316,8 +316,8 @@ export default async function handler(req, res) {
       }
 
       if (resource === 'home_stats') {
-        // Chỉ lấy khóa định danh cần thiết để hợp nhất với catalog tĩnh trên
-        // frontend. Không tải problems/nội dung đề, nên request này vẫn nhẹ.
+        // Chỉ lấy khóa định danh và số ví dụ từ MongoDB để hiển thị thống kê.
+        // Không tải problems/nội dung đề, nên request này vẫn nhẹ.
         const homeExamFilter = {
           category: { $in: ['tst-national', 'history-dn-qn', 'vmo-mock'] }
         };
