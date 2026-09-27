@@ -4669,7 +4669,16 @@ if (card) card.dataset.databaseCard = 'true';
       item.dataset.contentType = kind === 'tst' ? 'tst_exam' : (kind === 'regional' ? 'regional_exam' : 'mock_exam');
       item.dataset.questionNumber = String(Number(problem.questionNumber) || 0);
       item.dataset.legacyProblemId = Array.isArray(problem.legacyIds) ? (problem.legacyIds[0] || '') : '';
-      item.innerHTML = `<div class="problem-header"><div class="problem-id"><span>${escapeHtmlText(problem.shortLabel || problem.title || `Câu ${problem.questionNumber}`)}</span><span class="badge-point"> (${String(Number(problem.maxScore) || 0).replace('.', ',')}đ) </span><span class="badge-topic">${escapeHtmlText(problem.topic || 'Toán Olympic')}</span></div><button class="btn-copy" onclick="copyText(this)">📋 Sao chép</button></div><div class="problem-content" data-no-i18n="true"></div>`;
+      const rawLabel = String(problem.shortLabel || problem.title || `Câu ${problem.questionNumber}`);
+      const scoreInLabel = rawLabel.match(/\(\s*(\d+(?:[.,]\d+)?)\s*đ\s*\)/i);
+      const label = rawLabel.replace(/\s*\(\s*\d+(?:[.,]\d+)?\s*đ\s*\)/gi, '').trim();
+      const rawTopic = String(problem.topic || 'Toán Olympic')
+        .replace(/\s*\(\s*\d+(?:[.,]\d+)?\s*đ\s*\)/gi, ' ').replace(/\s+/g, ' ').trim();
+      const repeatedTopic = rawTopic.match(/^(.+?)\s+\1$/i);
+      const topic = repeatedTopic ? repeatedTopic[1] : rawTopic;
+      const topicAlreadyInLabel = topic && label.toLocaleLowerCase('vi').includes(topic.toLocaleLowerCase('vi'));
+      const score = Number(problem.maxScore) || Number(scoreInLabel?.[1]?.replace(',', '.')) || 0;
+      item.innerHTML = `<div class="problem-header"><div class="problem-id"><span>${escapeHtmlText(label)}</span><span class="badge-point"> (${String(score).replace('.', ',')}đ) </span><span class="badge-topic"${topicAlreadyInLabel ? ' style="display:none" aria-hidden="true"' : ''}>${escapeHtmlText(topic)}</span></div><button class="btn-copy" onclick="copyText(this)">📋 Sao chép</button></div><div class="problem-content" data-no-i18n="true"></div>`;
       section.appendChild(item);
       const content = item.querySelector('.problem-content');
       content.setAttribute('data-raw-math', problem.content || '');

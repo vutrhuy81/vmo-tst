@@ -50,7 +50,12 @@ window.VMODataService = {
     id: 'exam-quang-tri', examKey: 'tst:quang-tri:2026-2027:day-1',
     targetAnchor: 'tst-quang-tri', province: 'Quảng Trị', provinceOrder: 21,
     region: 'TRUNG', title: 'Đề TST Quảng Trị', year: '2026-2027', dayNumber: 1,
-    problems: [{ contentKey: 'tst:tst-quang-tri:day-1:question-1', questionNumber: 1, content: 'Bài toán thử nghiệm' }]
+    problems: [
+      { contentKey: 'tst:tst-quang-tri:day-1:question-1', questionNumber: 1, content: 'Bài toán thử nghiệm',
+        shortLabel: 'Câu 1 Đa thức – Dãy số', topic: 'Đa thức – Dãy số', maxScore: 5 },
+      { contentKey: 'tst:tst-quang-tri:day-1:question-2', questionNumber: 2, content: 'Bài toán khác',
+        shortLabel: 'Câu 2 (5,0đ) Phương trình hàm', topic: 'Phương trình hàm (5đ) Phương trình hàm' }
+    ]
   }]
 };
 window.eval(locationsSource);
@@ -96,6 +101,16 @@ await window.loadDatabaseTstExams(true);
 const newCard = window.document.getElementById('tst-quang-tri');
 assert.ok(newCard, 'Đề của tỉnh mới phải tự tạo card frontend');
 assert.equal(newCard.dataset.filter, 'TRUNG');
+const [firstQuestion, secondQuestion] = newCard.querySelectorAll('.problem-item');
+assert.equal(firstQuestion.querySelector('.problem-id span:first-child').textContent, 'Câu 1 Đa thức – Dãy số');
+assert.equal(firstQuestion.querySelector('.badge-topic').textContent, 'Đa thức – Dãy số');
+assert.equal(firstQuestion.querySelector('.badge-topic').style.display, 'none', 'ẩn chuyên đề đã có trong nhãn');
+assert.equal(firstQuestion.querySelector('.problem-header').textContent.match(/Đa thức – Dãy số/g).length, 2,
+  'DOM giữ metadata chuyên đề cho AI');
+assert.equal(secondQuestion.querySelector('.problem-id span:first-child').textContent, 'Câu 2 Phương trình hàm');
+assert.equal(secondQuestion.querySelector('.badge-point').textContent.trim(), '(5đ)');
+assert.equal(secondQuestion.querySelector('.badge-topic').textContent, 'Phương trình hàm');
+assert.equal(secondQuestion.querySelector('.badge-topic').style.display, 'none');
 assert.match(window.document.querySelector('#sidebar-tst a[href="#tst-quang-tri"]').textContent, /^26\. Tỉnh Quảng Trị$/, 'Tỉnh mới phải theo số thứ tự 25');
 await window.loadDatabaseTstExams(true);
 assert.equal(window.document.querySelectorAll('#sidebar-tst a[href="#tst-quang-tri"]').length, 1);
