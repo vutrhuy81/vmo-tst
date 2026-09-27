@@ -4813,6 +4813,23 @@ if (card) card.dataset.databaseCard = 'true';
   const detailPromises = new Map();
   const detailKey = (category, anchor) => `${category}:${anchor}`;
 
+  function consolidateExamDays(exams, category) {
+    if (category !== 'tst-national') return exams;
+    const days = new Map();
+    exams.forEach(exam => {
+      const day = Number(exam.dayNumber) || 1;
+      const current = days.get(day);
+      if (!current) { days.set(day, exam); return; }
+      const primary = (exam.problems?.length || 0) > (current.problems?.length || 0) ? exam : current;
+      const secondary = primary === exam ? current : exam;
+      const seenNumbers = new Set((primary.problems || []).map(problem => Number(problem.questionNumber)));
+      const extra = (secondary.problems || []).filter(problem => !seenNumbers.has(Number(problem.questionNumber)));
+      days.set(day, { ...primary, problems: [...(primary.problems || []), ...extra] });
+      console.warn(`Trùng đề ngày ${day} tại ${exam.targetAnchor}; chỉ hiển thị một ngày thi.`);
+    });
+    return [...days.values()].sort((a, b) => Number(a.dayNumber) - Number(b.dayNumber));
+  }
+
   window.loadDatabaseExamDetail = async function(category, anchor) {
     if (!Object.values(examCategories).includes(category) || !anchor) return;
     const key = detailKey(category, anchor);
@@ -4823,8 +4840,7 @@ if (card) card.dataset.databaseCard = 'true';
       try {
         const exams = await window.VMODataService.getExamCatalogDetail(category, anchor);
         if (!Array.isArray(exams) || !exams.length) throw new Error('Không tìm thấy đề thi');
-        exams.sort((a, b) => Number(a.dayNumber) - Number(b.dayNumber));
-        exams.forEach(exam => {
+        consolidateExamDays(exams, category).forEach(exam => {
           renderDatabaseExam(exam, category === 'tst-national' ? 'tst' : category === 'vmo-mock' ? 'mock' : 'regional');
           if (category === 'vmo-mock') ensureDatabaseMockNavigation(exam);
         });

@@ -194,8 +194,25 @@ window.VMODataService.getExamCatalog = async category => category === 'tst-natio
     targetAnchor: anchor, province, dayNumber, region: 'BAC', title: province,
     problems: [{ contentKey: `tst:${anchor}:day-${dayNumber}:question-1`,
       questionNumber: 1, content: `Đề ngày ${dayNumber}` }]
-  })))] : initialCatalog(category);
+  }))), {
+    id: 'hanoi-full', examKey: 'tst:hanoi:2026-2027:day-1',
+    targetAnchor: 'tst-ha-noi', province: 'HÀ NỘI', dayNumber: 1, region: 'BAC',
+    problems: Array.from({ length: 8 }, (_, index) => ({
+      contentKey: `tst:hanoi:full:${index + 1}`, questionNumber: index + 1, content: `Câu ${index + 1}`
+    }))
+  }, {
+    id: 'hanoi-extra', examKey: 'tst:hanoi:duplicate:day-1',
+    targetAnchor: 'tst-ha-noi', province: 'HÀ NỘI', dayNumber: 1, region: 'BAC',
+    problems: [6, 7].map(number => ({
+      contentKey: `tst:hanoi:extra:${number}`, questionNumber: number, content: `Câu trùng ${number}`
+    }))
+  }] : initialCatalog(category);
 await window.loadDatabaseTstExams(true);
+await window.loadDatabaseExamDetail('tst-national', 'tst-ha-noi');
+assert.equal(window.document.querySelectorAll('#tst-ha-noi .db-exam-day').length, 1,
+  'Hà Nội chỉ hiển thị một khối ngày thứ 1 dù Atlas có hai bản ghi');
+assert.deepEqual(Array.from(window.document.querySelectorAll('#tst-ha-noi .problem-item'),
+  item => Number(item.dataset.questionNumber)), [1, 2, 3, 4, 5, 6, 7, 8]);
 for (const [anchor, expectedDays] of [
   ['tst-ptnk', [1, 2]], ['tst-truong-he-danang', [1, 2]], ['tst-khtn', [1, 2, 3, 4]]
 ]) {
