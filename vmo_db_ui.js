@@ -1722,7 +1722,19 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
     containerEl.innerHTML = safeHtml;
     containerEl.classList.add('tex2jax_process');
 
-    // Kích hoạt MathJax typeset an toàn
+    // Nếu MathJax không biên dịch được, giữ nguyên nội dung gốc để người đọc đối chiếu.
+    const renderOriginalContent = () => {
+      containerEl.textContent = String(rawContent);
+      containerEl.style.whiteSpace = 'pre-wrap';
+      containerEl.classList.remove('tex2jax_process');
+      containerEl.classList.add('tex2jax_ignore');
+    };
+    const checkMathError = () => {
+      if (containerEl.querySelector('mjx-merror, .mjx-error') ||
+          /Math input error|MathJax error/i.test(containerEl.textContent || '')) {
+        renderOriginalContent();
+      }
+    };
     const runTypeset = () => {
       if (window.MathJax) {
         try {
@@ -1730,20 +1742,23 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
             window.MathJax.typesetClear([containerEl]);
           }
           if (window.MathJax.typesetPromise) {
-            window.MathJax.typesetPromise([containerEl]).catch(err => {
+            window.MathJax.typesetPromise([containerEl]).then(checkMathError).catch(err => {
               console.warn('[MathJax Typeset Handled]:', err);
+              renderOriginalContent();
             });
           } else if (window.MathJax.typeset) {
             window.MathJax.typeset([containerEl]);
+            checkMathError();
           }
         } catch (e) {
           console.warn('[MathJax Exception]:', e);
+          renderOriginalContent();
         }
       }
     };
 
     if (window.MathJax?.startup?.promise) {
-      window.MathJax.startup.promise.then(runTypeset).catch(() => {});
+      window.MathJax.startup.promise.then(runTypeset).catch(() => renderOriginalContent());
     } else {
       runTypeset();
     }
@@ -2065,20 +2080,6 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
         tabs.appendChild(syncButton);
       }
     }
-    if (isAdmin && !modal.querySelector('#btnMigrateTstSources')) {
-      const tabs = modal.querySelector('.hub-tabs, [class*="hub-tabs"]')
-        || modal.querySelector('.hub-tab-btn, #hub-tab-events')?.parentElement;
-      if (tabs) {
-        const migrateButton = document.createElement('button');
-        migrateButton.id = 'btnMigrateTstSources';
-        migrateButton.type = 'button';
-        migrateButton.innerHTML = '🔗 Lưu nguồn TST vào MongoDB';
-        migrateButton.style.cssText = 'padding:7px 12px;border:1px solid #67e8f9;border-radius:7px;background:#ecfeff;color:#155e75;font-weight:700;cursor:pointer;';
-        migrateButton.onclick = window.migrateTstReferenceLinksToDatabase;
-        tabs.appendChild(migrateButton);
-      }
-    }
-
     ensureCatalogManagementUi(modal, isAdmin);
     ensureSubmissionFilterUi(modal, isAdmin);
     ensureLearningDashboardUi(modal, isAdmin);
@@ -2684,9 +2685,8 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
     window.reinitDatabaseUI?.(root);
     if (tabId === 'tab-tst') {
       await window.loadDatabaseTstExams?.();
-      window.injectTstSources?.();
     } else {
-      window.injectHistorySources?.();
+      await window.loadDatabaseRegionalExams?.();
     }
     return root;
   }
@@ -4706,7 +4706,7 @@ if (card) card.dataset.databaseCard = 'true';
 
   function ensureDatabaseMockNavigation(exam) {
     const setNumber = Number(exam.setNumber);
-    if (!Number.isInteger(setNumber) || setNumber < 3) return;
+    if (!Number.isInteger(setNumber) || setNumber < 1) return;
     const sidebar = document.querySelector('#sidebar-mock .book-toc');
     if (sidebar && !sidebar.querySelector(`a[href="#${CSS.escape(exam.targetAnchor)}"]`)) {
       let group = sidebar.querySelector(`[data-mock-set="${setNumber}"]`);
@@ -4741,6 +4741,19 @@ if (card) card.dataset.databaseCard = 'true';
 
   let databaseMockLoaded = false;
   let databaseMockPromise = null;
+  function showDatabaseCatalogState(root, exams, error = null) {
+    const feed = root?.querySelector('.feed-container');
+    if (!feed) return;
+    feed.querySelector('.db-catalog-state')?.remove();
+    if (!error && exams.some(exam => Array.isArray(exam.problems) && exam.problems.length)) return;
+    const state = document.createElement('p');
+    state.className = 'db-catalog-state';
+    state.setAttribute('role', error ? 'alert' : 'status');
+    state.textContent = error
+      ? 'Không tải được dữ liệu đề thi từ MongoDB Atlas. Vui lòng thử lại sau.'
+      : 'Chưa có đề thi liên kết với câu hỏi trong MongoDB Atlas.';
+    feed.appendChild(state);
+  }
   async function loadDatabaseMockExams(force = false) {
     if (!window.VMODataService?.getExamCatalog) return;
     if (databaseMockLoaded && !force) return;
@@ -4751,13 +4764,16 @@ if (card) card.dataset.databaseCard = 'true';
         const exams = await window.VMODataService.getExamCatalog('vmo-mock');
         exams.forEach(exam => { renderDatabaseExam(exam, 'mock'); ensureDatabaseMockNavigation(exam); });
         const root = document.getElementById('tab-mock');
+        showDatabaseCatalogState(root, exams);
         injectSubmissionButtons(root || document);
         window.reinitAIGuide?.(root || document);
         await applyCatalogAccessRules(root || document);
         applyMongoReferenceLinks(root || document);
-        if (root && window.renderMathInContainer) window.renderMathInContainer(root, true).catch(() => {});
         databaseMockLoaded = true;
-      } catch (error) { console.warn('Không tải được đề thi thử từ MongoDB:', error?.message || error); }
+      } catch (error) {
+        showDatabaseCatalogState(document.getElementById('tab-mock'), [], error);
+        console.warn('Không tải được đề thi thử từ MongoDB:', error?.message || error);
+      }
       finally { databaseMockPromise = null; }
     })();
     return databaseMockPromise;
@@ -4781,15 +4797,14 @@ if (card) card.dataset.databaseCard = 'true';
         const exams = await window.VMODataService.getExamCatalog('tst-national');
         exams.forEach(exam => renderDatabaseExam(exam, 'tst'));
         const tstRoot = document.getElementById('tab-tst');
+        showDatabaseCatalogState(tstRoot, exams);
         injectSubmissionButtons(tstRoot || document);
         window.reinitAIGuide?.(tstRoot || document);
         await applyCatalogAccessRules(tstRoot || document);
         applyMongoReferenceLinks(tstRoot || document);
-        if (tstRoot && window.renderMathInContainer) {
-          window.renderMathInContainer(tstRoot, true).catch(() => {});
-        }
         databaseTstLoaded = true;
       } catch (error) {
+        showDatabaseCatalogState(document.getElementById('tab-tst'), [], error);
         console.warn('Không tải được đề thi động từ MongoDB:', error?.message || error);
       } finally {
         databaseTstPromise = null;
@@ -4814,13 +4829,14 @@ if (card) card.dataset.databaseCard = 'true';
         const exams = await window.VMODataService.getExamCatalog('history-dn-qn');
         exams.forEach(exam => renderDatabaseExam(exam, 'regional'));
         const root = document.getElementById('tab-history');
+        showDatabaseCatalogState(root, exams);
         injectSubmissionButtons(root || document);
         window.reinitAIGuide?.(root || document);
         await applyCatalogAccessRules(root || document);
         applyMongoReferenceLinks(root || document);
-        if (root && window.renderMathInContainer) window.renderMathInContainer(root, true).catch(() => {});
         databaseRegionalLoaded = true;
       } catch (error) {
+        showDatabaseCatalogState(document.getElementById('tab-history'), [], error);
         console.warn('Không tải được đề Đà Nẵng–Quảng Nam từ MongoDB:', error?.message || error);
       } finally { databaseRegionalPromise = null; }
     })();

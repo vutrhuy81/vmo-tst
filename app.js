@@ -9,7 +9,6 @@
 
   const search = qs('#searchInput');
   const searchSummary = qs('#searchSummary');
-  const tabLoadPromises = new Map();
 
   function formatCount(value) {
     return String(Math.max(0, Number(value) || 0)).padStart(2, '0');
@@ -93,33 +92,7 @@
   window.refreshVMOCatalogStats();
 
   async function ensureTabContent(tabId) {
-    let pane = qs('#' + tabId);
-    const fragmentUrl = pane?.dataset?.fragmentUrl;
-    if (!pane || !fragmentUrl) return pane;
-    if (tabLoadPromises.has(tabId)) return tabLoadPromises.get(tabId);
-
-    const pending = fetch(fragmentUrl, { credentials: 'same-origin', cache: 'force-cache' })
-      .then(response => {
-        if (!response.ok) throw new Error(`HTTP ${response.status}`);
-        return response.text();
-      })
-      .then(html => {
-        const parsed = new DOMParser().parseFromString(html, 'text/html');
-        const loadedPane = parsed.getElementById(tabId);
-        if (!loadedPane) throw new Error(`Fragment không chứa #${tabId}`);
-        if (pane.classList.contains('active')) loadedPane.classList.add('active');
-        pane.replaceWith(loadedPane);
-        pane = loadedPane;
-        return loadedPane;
-      })
-      .catch(error => {
-        pane.innerHTML = `<div class="tab-load-error" role="alert">Không tải được nội dung. Vui lòng tải lại trang. (${String(error.message || error).replace(/[<>&]/g, '')})</div>`;
-        throw error;
-      })
-      .finally(() => tabLoadPromises.delete(tabId));
-
-    tabLoadPromises.set(tabId, pending);
-    return pending;
+    return qs('#' + tabId);
   }
 
   // Cho các chế độ xem theo ngữ cảnh (ví dụ: luyện tập từ báo cáo xu hướng)
@@ -190,12 +163,10 @@
     // Đồng bộ lại các nút AI Hướng dẫn giải & Nút Nộp bài Database nếu cần
     window.reinitAIGuide?.(targetPane);
     window.reinitDatabaseUI?.(targetPane);
-    if (isT) window.injectTstSources?.();
-    if (isH) window.injectHistorySources?.();
     window.applyCurrentLanguage?.();
 
     // Render công thức toán nếu tab vừa mở chưa được biên dịch
-    typeset(targetPane);
+    if (!isM && !isT && !isH) typeset(targetPane);
   };
 
   // 2. Hiện / Ẩn lời giải và barem điểm từng bài
@@ -356,108 +327,6 @@
     allBtn.textContent = allShown ? '🙈 Ẩn toàn bộ lời giải mẫu' : '👁️ Hiện toàn bộ lời giải mẫu';
     if (allShown) typeset(qs('#book-content'));
   });
-
-  // 7. Gắn nguồn tham khảo TST từ tstSources
-  function injectTstSources() {
-    const sources = window.tstSources || {};
-    Object.entries(sources).forEach(([cardId, cfg]) => {
-      const card = qs('#' + cardId);
-      if (!card) return;
-      qsa('.problem-item', card).forEach((problem, i) => {
-        if (problem.querySelector('.source-solution-box')) return; // Tránh trùng lặp
-        const sList = cfg.byIndex?.[i] || cfg.all;
-        if (!sList?.length) return;
-
-        const box = document.createElement('div');
-        box.className = 'solution-box source-solution-box';
-
-        const button = document.createElement('button');
-        button.className = 'toggle-btn';
-        button.type = 'button';
-        button.textContent = '🔗 Lời giải tham khảo';
-        button.setAttribute('aria-expanded', 'false');
-        button.onclick = () => toggleSolution(button);
-
-        const content = document.createElement('div');
-        content.className = 'solution-content';
-
-        const heading = document.createElement('strong');
-        heading.textContent = 'Nguồn lời giải:';
-        content.appendChild(heading);
-
-        const list = document.createElement('ul');
-        sList.forEach(([label, url]) => {
-          const li = document.createElement('li');
-          const a = document.createElement('a');
-          a.href = url;
-          a.target = '_blank';
-          a.rel = 'noopener noreferrer';
-          a.textContent = label;
-          li.appendChild(a);
-          list.appendChild(li);
-        });
-
-        content.appendChild(list);
-        box.append(button, content);
-        problem.appendChild(box);
-      });
-    });
-  }
-
-  // 8. Gắn nguồn tham khảo History từ historySources
-  function injectHistorySources() {
-    const sources = window.historySources || {};
-    Object.entries(sources).forEach(([cardId, cfg]) => {
-      const card = qs('#' + cardId);
-      if (!card) return;
-      qsa('.problem-item', card).forEach((problem, i) => {
-        if (problem.querySelector('.source-solution-box')) return; // Tránh trùng lặp
-        const sList = cfg.byIndex?.[i] || cfg.all;
-        if (!sList?.length) return;
-
-        const box = document.createElement('div');
-        box.className = 'solution-box source-solution-box';
-
-        const button = document.createElement('button');
-        button.className = 'toggle-btn';
-        button.type = 'button';
-        button.textContent = '🔗 Lời giải tham khảo';
-        button.setAttribute('aria-expanded', 'false');
-        button.onclick = () => toggleSolution(button);
-
-        const content = document.createElement('div');
-        content.className = 'solution-content';
-
-        const heading = document.createElement('strong');
-        heading.textContent = 'Nguồn lời giải:';
-        content.appendChild(heading);
-
-        const list = document.createElement('ul');
-        sList.forEach(([label, url]) => {
-          const li = document.createElement('li');
-          const a = document.createElement('a');
-          a.href = url;
-          a.target = '_blank';
-          a.rel = 'noopener noreferrer';
-          a.textContent = label;
-          li.appendChild(a);
-          list.appendChild(li);
-        });
-
-        content.appendChild(list);
-        box.append(button, content);
-        problem.appendChild(box);
-      });
-    });
-  }
-
-  window.injectTstSources = injectTstSources;
-  window.injectHistorySources = injectHistorySources;
-
-  // Nguồn tham khảo của các kho đề được gắn khi tab tương ứng được mở.
-  const initialPane = qs('.tab-pane.active');
-  if (initialPane?.id === 'tab-tst') injectTstSources();
-  if (initialPane?.id === 'tab-history') injectHistorySources();
 
   window.printVMODocument = async function() {
     try {

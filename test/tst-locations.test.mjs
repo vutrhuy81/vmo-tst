@@ -56,6 +56,8 @@ window.VMODataService = {
 window.eval(locationsSource);
 window.eval(uiSource);
 window.document.dispatchEvent(new window.Event('DOMContentLoaded'));
+let fullTabTypesets = 0;
+window.renderMathInContainer = async () => { fullTabTypesets += 1; };
 
 assert.equal(window.VMO_TST_LOCATIONS.filter(item => item.type === 'province').length, 34);
 assert.equal(window.VMO_TST_LOCATIONS.filter(item => item.type === 'university_school').length, 4);
@@ -107,5 +109,20 @@ assert.equal(regionalCard.dataset.filter, 'DANANG');
 assert.equal(regionalCard.querySelector('.problem-item').dataset.sourceType, 'regional_question');
 assert.match(window.document.querySelector('#sidebar-history a[href="#hist-dn-2026-2027"]').textContent, /^02\. Đà Nẵng 2026–2027$/);
 assert.match(window.document.querySelector('#sidebar-history a[href="#hist-qn-2022-2023"]').textContent, /^03\. Quảng Nam 2022–2023$/);
+assert.equal(fullTabTypesets, 0, 'loader MongoDB không được typeset lại toàn bộ tab');
+
+const mathPreview = window.document.createElement('div');
+window.document.body.appendChild(mathPreview);
+window.MathJax = {
+  typesetClear: () => {},
+  typesetPromise: async nodes => {
+    nodes[0].innerHTML = '<mjx-merror>Math input error</mjx-merror>';
+  }
+};
+const rawFormula = 'Câu hỏi gốc: $\\badcommand{x}$';
+window.safeRenderMathJaxToElement(mathPreview, rawFormula);
+await new Promise(resolve => setTimeout(resolve, 0));
+assert.equal(mathPreview.textContent, rawFormula, 'công thức lỗi phải hiển thị nguyên bản gốc');
+assert.ok(mathPreview.classList.contains('tex2jax_ignore'), 'fallback không bị typeset lại');
 
 console.log('TST and Đà Nẵng–Quảng Nam dynamic exam smoke test: OK');

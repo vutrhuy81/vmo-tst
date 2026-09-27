@@ -32,13 +32,19 @@ export function build() {
   // Bản đồ các khối module thành phần
   const injections = [
     { tag: '<!-- INJECT:SIDEBAR_DANANG -->', file: 'sidebars/sidebar-danang.html' },
-    { tag: '<!-- INJECT:SIDEBAR_MOCK -->', file: 'sidebars/sidebar-mock.html' },
-    { tag: '<!-- INJECT:SIDEBAR_TST -->', file: 'sidebars/sidebar-tst.html' },
-    { tag: '<!-- INJECT:SIDEBAR_HISTORY -->', file: 'sidebars/sidebar-history.html' },
+    { tag: '<!-- INJECT:SIDEBAR_MOCK -->', file: 'sidebars/sidebar-mock.html',
+      apiShell: '<div id="sidebar-mock" style="display:none"><div class="sidebar-title">Bộ Đề Thi Thử VMO</div><nav class="book-toc" aria-label="Mục lục bộ đề thi thử"></nav></div>' },
+    { tag: '<!-- INJECT:SIDEBAR_TST -->', file: 'sidebars/sidebar-tst.html',
+      apiShell: '<div id="sidebar-tst" style="display:none"><div class="sidebar-title">Mục Lục Đề TST 2026-2027</div><div class="nav-year-group"><div class="nav-year-title">🏛️ CÁC TỈNH &amp; TRƯỜNG CHUYÊN</div></div></div>' },
+    { tag: '<!-- INJECT:SIDEBAR_HISTORY -->', file: 'sidebars/sidebar-history.html',
+      apiShell: '<div id="sidebar-history" style="display:none"><div class="sidebar-title">Đề Đà Nẵng – Quảng Nam</div><div class="nav-year-group"><div class="nav-year-title">📘 ĐÀ NẴNG</div></div><div class="nav-year-group"><div class="nav-year-title">📙 QUẢNG NAM</div></div></div>' },
     { tag: '<!-- INJECT:TAB_DANANG -->', file: 'content/tab-danang.html' },
-    { tag: '<!-- INJECT:TAB_MOCK -->', file: 'content/tab-mock.html', lazyTab: 'tab-mock' },
-    { tag: '<!-- INJECT:TAB_TST -->', file: 'content/tab-tst.html', lazyTab: 'tab-tst' },
-    { tag: '<!-- INJECT:TAB_HISTORY -->', file: 'content/tab-history.html', lazyTab: 'tab-history' },
+    { tag: '<!-- INJECT:TAB_MOCK -->', file: 'content/tab-mock.html', apiTab: 'tab-mock',
+      title: 'BỘ ĐỀ THI THỬ VMO' },
+    { tag: '<!-- INJECT:TAB_TST -->', file: 'content/tab-tst.html', apiTab: 'tab-tst',
+      title: 'TUYỂN TẬP ĐỀ THI CHỌN ĐỘI TUYỂN HSGQG (TST 2026 - 2027)' },
+    { tag: '<!-- INJECT:TAB_HISTORY -->', file: 'content/tab-history.html', apiTab: 'tab-history',
+      title: 'NGÂN HÀNG ĐỀ ĐÀ NẴNG – QUẢNG NAM QUA CÁC NĂM' },
     { tag: '<!-- INJECT:ACCOUNT_MODAL -->', file: 'modals/account-modal.html' },
     { tag: '<!-- INJECT:DATA_HUB_MODAL -->', file: 'modals/data-hub-modal.html' }
   ];
@@ -48,9 +54,9 @@ export function build() {
     if (!fs.existsSync(filePath)) {
       throw new Error(`Thiếu khối module: ${item.file} tại ${filePath}`);
     }
-    const content = item.lazyTab
-      ? `<div class="tab-pane lazy-tab" id="${item.lazyTab}" data-fragment-url="src/${item.file}?v=${buildVersion}"><div class="tab-loading" role="status">Đang tải nội dung…</div></div>`
-      : fs.readFileSync(filePath, 'utf8');
+    const content = item.apiShell || (item.apiTab
+      ? `<div class="tab-pane" id="${item.apiTab}"><div class="feed-container"><div class="section-header-box"><h2>${item.title}</h2></div></div></div>`
+      : fs.readFileSync(filePath, 'utf8'));
     if (!html.includes(item.tag)) {
       console.warn(`[Build Cảnh báo] Thẻ ${item.tag} không tìm thấy trong template.html`);
     }
