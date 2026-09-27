@@ -76,8 +76,17 @@ window.VMODataService = {
   }, {
     id: 'exam-hung-yen', examKey: 'tst:hung-yen:2026-2027:day-1',
     targetAnchor: 'tst-hung-yen', province: 'Tỉnh Hưng Yên', provinceOrder: 14,
-    region: 'BAC', title: 'Đề Hưng Yên', problems: [{ questionNumber: 1, content: 'Đề thử' }]
+    region: 'BAC', title: 'Đề Hưng Yên', problems: [{ contentKey: 'tst:tst-hung-yen:question-1', questionNumber: 1, content: 'Đề thử' }]
   }]
+};
+const detailRequests = [];
+window.VMODataService.getExamCatalogSummary = async category =>
+  (await window.VMODataService.getExamCatalog(category)).map(({ problems, ...exam }) => ({
+    ...exam, problemCount: problems.length
+  }));
+window.VMODataService.getExamCatalogDetail = async (category, anchor) => {
+  detailRequests.push(`${category}:${anchor}`);
+  return (await window.VMODataService.getExamCatalog(category)).find(exam => exam.targetAnchor === anchor);
 };
 window.eval(locationsSource);
 window.eval(uiSource);
@@ -119,6 +128,7 @@ assert.equal(window.document.getElementById('docRegion').value, 'TRUNG');
 assert.equal(window.document.getElementById('docRegionDisplay').value, 'Miền Trung');
 
 await window.loadDatabaseTstExams(true);
+assert.deepEqual(detailRequests, ['tst-national:tst-quang-tri'], 'Lần mở tab chỉ tải chi tiết đề đầu tiên');
 const newCard = window.document.getElementById('tst-quang-tri');
 assert.ok(newCard, 'Đề của tỉnh mới phải tự tạo card frontend');
 assert.equal(newCard.dataset.filter, 'TRUNG');
@@ -135,6 +145,13 @@ assert.equal(secondQuestion.querySelector('.badge-topic').style.display, 'none')
 assert.deepEqual(Array.from(window.document.querySelectorAll('#sidebar-tst a.nav-link'), link => link.textContent), [
   '01. CHUYÊN KHTN HÀ NỘI', '02. Hưng Yên', '03. Quảng Trị', '04. THÁI NGUYÊN'
 ], 'Tên bỏ tiền tố Tỉnh, sắp theo chữ cái tiếng Việt và đánh số lại');
+assert.equal(window.document.querySelector('#tst-hung-yen .problem-item'), null, 'Đề khác chỉ có metadata');
+const hungYenPlaceholder = window.document.getElementById('tst-hung-yen');
+await window.loadDatabaseExamDetail('tst-national', 'tst-hung-yen');
+assert.equal(window.document.getElementById('tst-hung-yen'), hungYenPlaceholder, 'Chi tiết được gắn vào card đã hiện');
+assert.ok(window.document.querySelector('#tst-hung-yen .problem-item'), 'Chọn đề sẽ tải câu hỏi');
+await window.loadDatabaseExamDetail('tst-national', 'tst-hung-yen');
+assert.equal(detailRequests.filter(key => key === 'tst-national:tst-hung-yen').length, 1, 'Chi tiết đã tải được tái sử dụng');
 await window.loadDatabaseTstExams(true);
 assert.equal(window.document.querySelectorAll('#sidebar-tst a[href="#tst-quang-tri"]').length, 1);
 assert.equal(window.document.querySelector('#sidebar-tst a[href="#tst-quang-tri"]').textContent, '03. Quảng Trị');

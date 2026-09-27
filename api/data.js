@@ -352,6 +352,54 @@ export default async function handler(req, res) {
       if (resource === 'exam_catalog') {
         const examFilter = { category: cleanText(req.query?.category, 80) || 'tst-national' };
         if (session.role !== 'admin') examFilter.status = 'published';
+        const view = cleanText(req.query?.view, 20);
+        if (view === 'summary') {
+          const projection = {
+            examKey: 1, targetAnchor: 1, category: 1, title: 1, province: 1,
+            provinceOrder: 1, region: 1, year: 1, setNumber: 1, dayNumber: 1,
+            examDate: 1, duration: 1, status: 1, origin: 1, sourceImageCount: 1
+          };
+          const exams = await db.collection('exams').find(examFilter, { projection })
+            .sort({ provinceOrder: 1, dayNumber: 1, createdAt: 1 }).limit(200).toArray();
+          const problemFilter = { examId: { $in: exams.map(exam => String(exam._id)) } };
+          if (session.role !== 'admin') problemFilter.status = 'published';
+          const counts = exams.length ? await db.collection('problems').aggregate([
+            { $match: problemFilter }, { $group: { _id: '$examId', count: { $sum: 1 } } }
+          ]).toArray() : [];
+          const countByExam = new Map(counts.map(item => [String(item._id), item.count]));
+          return res.status(200).json({ success: true, items: exams.map(exam => ({
+            ...exam, problemCount: countByExam.get(String(exam._id)) || 0
+          })) });
+        }
+        if (view === 'detail') {
+          const anchor = cleanText(req.query?.anchor, 120);
+          if (!anchor) return res.status(400).json({ success: false, error: 'Thiếu mã đề thi' });
+          const exam = await db.collection('exams').findOne({ ...examFilter, targetAnchor: anchor });
+          if (!exam) return res.status(404).json({ success: false, error: 'Không tìm thấy đề thi' });
+          const problemFilter = { examId: String(exam._id) };
+          if (session.role !== 'admin') problemFilter.status = 'published';
+          const problems = await db.collection('problems').find(problemFilter)
+            .sort({ orderNumber: 1, questionNumber: 1 }).limit(100).toArray();
+          return res.status(200).json({ success: true, items: [{ ...exam, problems }] });
+        }
+        if (view === 'search') {
+          const query = cleanText(req.query?.q, 100);
+          if (query.length < 2) return res.status(200).json({ success: true, items: [] });
+          const exams = await db.collection('exams').find(examFilter, { projection: { _id: 1, targetAnchor: 1 } })
+            .limit(200).toArray();
+          const anchorById = new Map(exams.map(exam => [String(exam._id), exam.targetAnchor]));
+          const regex = { $regex: escapeRegex(query), $options: 'i' };
+          const problemFilter = {
+            examId: { $in: [...anchorById.keys()] },
+            $or: [{ content: regex }, { title: regex }, { shortLabel: regex }, { topic: regex }]
+          };
+          if (session.role !== 'admin') problemFilter.status = 'published';
+          const matches = exams.length ? await db.collection('problems').find(problemFilter, {
+            projection: { _id: 0, examId: 1 }
+          }).limit(1000).toArray() : [];
+          return res.status(200).json({ success: true, items: [...new Set(matches
+            .map(problem => anchorById.get(String(problem.examId))).filter(Boolean))].map(targetAnchor => ({ targetAnchor })) });
+        }
         const exams = await db.collection('exams').find(examFilter).sort({ provinceOrder: 1, dayNumber: 1, createdAt: 1 }).limit(200).toArray();
         const examIds = exams.map(item => String(item._id));
         const problemFilter = { examId: { $in: examIds } };

@@ -262,7 +262,12 @@
     return matches;
   }
 
+  let catalogSearchTimer = null;
+  let catalogSearchVersion = 0;
+
   function applySearch() {
+    clearTimeout(catalogSearchTimer);
+    const version = ++catalogSearchVersion;
     const raw = search ? search.value.trim() : '';
     if (!raw) {
       clearSearch();
@@ -279,6 +284,26 @@
     if (searchSummary) {
       searchSummary.textContent = `Tìm thấy ${n} mục phù hợp với “${raw}”.`;
       searchSummary.classList.add('visible');
+    }
+    const category = { 'tab-tst': 'tst-national', 'tab-mock': 'vmo-mock', 'tab-history': 'history-dn-qn' }[active?.id];
+    if (category && raw.length >= 2 && window.VMODataService?.searchExamCatalog) {
+      catalogSearchTimer = setTimeout(async () => {
+        try {
+          const matches = await window.VMODataService.searchExamCatalog(category, raw);
+          if (version !== catalogSearchVersion || document.querySelector('.tab-pane.active')?.id !== active.id) return;
+          const anchors = new Set(matches.map(item => item.targetAnchor));
+          let count = 0;
+          qsa(`#${active.id} .exam-card`).forEach(card => {
+            const local = norm((card.dataset.search || '') + ' ' + card.innerText).includes(val);
+            const hit = local || anchors.has(card.id);
+            card.classList.toggle('hidden-by-search', !hit);
+            if (hit) count++;
+          });
+          if (searchSummary) searchSummary.textContent = `Tìm thấy ${count} mục phù hợp với “${raw}”.`;
+        } catch (error) {
+          console.warn('Không tìm kiếm được nội dung đề từ MongoDB:', error?.message || error);
+        }
+      }, 300);
     }
   }
 

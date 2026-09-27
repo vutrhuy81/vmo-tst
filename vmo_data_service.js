@@ -241,6 +241,20 @@ export async function getExamCatalog(category = 'tst-national') {
   }));
 }
 
+export async function getExamCatalogSummary(category = 'tst-national') {
+  return normalizeList(await request('exam_catalog', { category, view: 'summary' }));
+}
+
+export async function getExamCatalogDetail(category, anchor) {
+  const exams = normalizeList(await request('exam_catalog', { category, view: 'detail', anchor }));
+  const exam = exams[0];
+  return exam ? { ...exam, problems: normalizeList(Array.isArray(exam.problems) ? exam.problems : []) } : null;
+}
+
+export async function searchExamCatalog(category, query) {
+  return normalizeList(await request('exam_catalog', { category, view: 'search', q: query }));
+}
+
 export async function getHomeStats() {
   const items = normalizeList(await request('home_stats'));
   return items[0] || { exams: [] };
@@ -508,6 +522,9 @@ const VMODataService = Object.freeze({
   addExam,
   createExamFromOcr,
   getExamCatalog,
+  getExamCatalogSummary,
+  getExamCatalogDetail,
+  searchExamCatalog,
   getHomeStats,
   saveExamImage,
   getExamImage,

@@ -2752,6 +2752,13 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
     try {
       const tabIds = [...new Set(evidence.map(item => item.anchor.startsWith('hist-') ? 'tab-history' : 'tab-tst'))];
       const roots = new Map((await Promise.all(tabIds.map(async tabId => [tabId, await prepareTrendPracticeSource(tabId)]))));
+      await Promise.all([...new Set(evidence.map(item => `${item.anchor.startsWith('hist-') ? 'history-dn-qn' : 'tst-national'}:${item.anchor}`))]
+        .map(async key => {
+          const separator = key.indexOf(':');
+          if (window.VMODataService?.getExamCatalogDetail) {
+            await window.loadDatabaseExamDetail?.(key.slice(0, separator), key.slice(separator + 1));
+          }
+        }));
       const resolved = [];
       const missing = [];
       evidence.forEach(item => {
@@ -4242,6 +4249,7 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
     const card = document.createElement('article');
     card.className = 'exam-card db-exam-card';
     card.id = exam.targetAnchor;
+    card.dataset.databaseCard = 'true';
     card.dataset.filter = exam.region || 'BAC';
     card.dataset.search = `${exam.province || ''} ${exam.year || ''}`.toLowerCase();
     card.innerHTML = `<div class="exam-header"><div class="exam-top-tags"><span class="tag tag-year">${escapeHtmlText(exam.year || '2026-2027')}</span><span class="tag tag-province">${escapeHtmlText(exam.province || '')}</span><span class="tag tag-official">Đề từ database</span></div><h3 class="exam-title">${escapeHtmlText(exam.title || `Đề TST ${exam.province || ''}`)}</h3></div><div class="exam-body"></div>`;
@@ -4255,6 +4263,7 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
     const isQuangNam = String(exam.province || '').toLowerCase().includes('quảng nam');
     card.className = 'exam-card history-card db-exam-card';
     card.id = exam.targetAnchor;
+    card.dataset.databaseCard = 'true';
     card.dataset.filter = isQuangNam ? 'QUANGNAM' : 'DANANG';
     card.dataset.search = `${exam.province || ''} ${exam.year || ''} ${exam.title || ''}`.toLowerCase();
     card.innerHTML = `<div class="exam-header"><div class="exam-top-tags"><span class="tag tag-year">${escapeHtmlText(exam.year || '')}</span><span class="tag tag-province">${escapeHtmlText(exam.province || '')}</span><span class="tag tag-official">Đề lưu trữ từ database</span></div><h3 class="exam-title">${escapeHtmlText(exam.title || `Đề ${exam.province || ''} ${exam.year || ''}`)}</h3></div><div class="exam-body"></div>`;
@@ -4606,10 +4615,11 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
   }
 
   let mongoReferenceLinksPromise = null;
+  let specialtyReferencesLoaded = false;
 
   async function loadMongoReferenceLinks(force = false, root = document) {
     if (!window.VMODataService?.getCatalogProblems) return;
-    if (!force && window.mongoProblemReferenceLinks instanceof Map) {
+    if (!force && specialtyReferencesLoaded) {
       applyMongoReferenceLinks(root);
       return;
     }
@@ -4617,12 +4627,20 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
       if (force) {
         window.invalidateVMODataCache?.();
         mongoReferenceLinksPromise = null;
+        specialtyReferencesLoaded = false;
       }
       if (!mongoReferenceLinksPromise) {
-        mongoReferenceLinksPromise = window.VMODataService.getCatalogProblems({ runtime: true })
+        mongoReferenceLinksPromise = window.VMODataService.getCatalogProblems({ runtime: true, sourceGroup: 'specialty' })
           .then(problems => {
-            window.mongoProblemsByContentKey = new Map(problems.map(problem => [problem.contentKey, problem]));
-            window.mongoProblemReferenceLinks = new Map(problems.map(problem => [problem.contentKey, problem.referenceLinks || []]));
+            const contentMap = window.mongoProblemsByContentKey instanceof Map ? window.mongoProblemsByContentKey : new Map();
+            const referenceMap = window.mongoProblemReferenceLinks instanceof Map ? window.mongoProblemReferenceLinks : new Map();
+            problems.forEach(problem => {
+              contentMap.set(problem.contentKey, problem);
+              referenceMap.set(problem.contentKey, problem.referenceLinks || []);
+            });
+            window.mongoProblemsByContentKey = contentMap;
+            window.mongoProblemReferenceLinks = referenceMap;
+            specialtyReferencesLoaded = true;
           })
           .finally(() => { mongoReferenceLinksPromise = null; });
       }
@@ -4705,6 +4723,7 @@ if (card) card.dataset.databaseCard = 'true';
       content.setAttribute('data-raw-math', problem.content || '');
       if (window.safeRenderMathJaxToElement) window.safeRenderMathJaxToElement(content, problem.content || '');
       else content.textContent = problem.content || '';
+      content._renderedMongoContent = problem.content || '';
       if (isCurrentUserAdmin() && problem.predictionReview?.status === 'gpt_rejected') {
         const warning = document.createElement('div');
         warning.className = 'prediction-review-warning';
@@ -4727,6 +4746,7 @@ if (card) card.dataset.databaseCard = 'true';
     const card = document.createElement('article');
     card.className = 'exam-card db-exam-card';
     card.id = exam.targetAnchor;
+    card.dataset.databaseCard = 'true';
     card.dataset.filter = `MOCK${Number(exam.setNumber) || 3}`;
     card.dataset.search = `${exam.title || ''} ${exam.province || ''} ${exam.year || ''}`.toLowerCase();
     card.innerHTML = `<div class="exam-header"><div class="exam-top-tags"><span class="tag tag-year">${escapeHtmlText(exam.year || '')}</span><span class="tag tag-province">${escapeHtmlText(exam.province || '')}</span><span class="tag tag-official">${exam.origin === 'prediction' ? '🔮 Đề dự đoán (AI) · ' : ''}Bộ thi thử số ${Number(exam.setNumber) || 3} · Ngày ${Number(exam.dayNumber) || 1}</span></div><h3 class="exam-title">${escapeHtmlText(exam.title || '')}</h3></div><div class="exam-body"></div>`;
@@ -4754,7 +4774,8 @@ if (card) card.dataset.databaseCard = 'true';
         link.href = `#${exam.targetAnchor}`;
       }
       link.dataset.day = String(Number(exam.dayNumber) || 1);
-      link.textContent = `Bộ ${setNumber} — Ngày thứ ${['', 'nhất', 'hai'][Number(exam.dayNumber)] || exam.dayNumber} (${exam.problems.length} câu)`;
+      const count = Array.isArray(exam.problems) ? exam.problems.length : Number(exam.problemCount) || 0;
+      link.textContent = `Bộ ${setNumber} — Ngày thứ ${['', 'nhất', 'hai'][Number(exam.dayNumber)] || exam.dayNumber} (${count} câu)`;
       group.appendChild(link);
       const groups = Array.from(sidebar.querySelectorAll('.nav-year-group'));
       groups.sort((a, b) => Number(a.dataset.mockSet || a.querySelector('.nav-year-title')?.textContent.match(/\d+/)?.[0])
@@ -4787,11 +4808,119 @@ if (card) card.dataset.databaseCard = 'true';
 
   let databaseMockLoaded = false;
   let databaseMockPromise = null;
+  const examCategories = { 'tab-tst': 'tst-national', 'tab-mock': 'vmo-mock', 'tab-history': 'history-dn-qn' };
+  const loadedDetails = new Set();
+  const detailPromises = new Map();
+  const detailKey = (category, anchor) => `${category}:${anchor}`;
+
+  window.loadDatabaseExamDetail = async function(category, anchor) {
+    if (!Object.values(examCategories).includes(category) || !anchor) return;
+    const key = detailKey(category, anchor);
+    if (loadedDetails.has(key)) return;
+    if (detailPromises.has(key)) return detailPromises.get(key);
+    const card = document.getElementById(anchor);
+    const pending = (async () => {
+      try {
+        const exam = await window.VMODataService.getExamCatalogDetail(category, anchor);
+        if (!exam) throw new Error('Không tìm thấy đề thi');
+        renderDatabaseExam(exam, category === 'tst-national' ? 'tst' : category === 'vmo-mock' ? 'mock' : 'regional');
+        if (category === 'vmo-mock') ensureDatabaseMockNavigation(exam);
+        if (!(window.mongoProblemReferenceLinks instanceof Map)) window.mongoProblemReferenceLinks = new Map();
+        if (!(window.mongoProblemsByContentKey instanceof Map)) window.mongoProblemsByContentKey = new Map();
+        exam.problems.forEach(problem => {
+          window.mongoProblemReferenceLinks.set(problem.contentKey, problem.referenceLinks || []);
+          window.mongoProblemsByContentKey.set(problem.contentKey, problem);
+        });
+        injectSubmissionButtons(card || document);
+        window.reinitAIGuide?.(card || document);
+        await applyCatalogAccessRules(card || document);
+        applyMongoReferenceLinks(card || document);
+        card?.querySelector('.db-exam-loading')?.remove();
+        loadedDetails.add(key);
+      } catch (error) {
+        const notice = card?.querySelector('.db-exam-loading');
+        if (notice) notice.textContent = 'Không tải được đề thi. Chọn lại mục lục để thử lại.';
+        throw error;
+      } finally { detailPromises.delete(key); }
+    })();
+    detailPromises.set(key, pending);
+    return pending;
+  };
+
+  let catalogObserver = null;
+  function observeExamCard(card, category) {
+    if (!card || !('IntersectionObserver' in window)) return;
+    if (!catalogObserver) catalogObserver = new IntersectionObserver(entries => {
+      entries.filter(entry => entry.isIntersecting).forEach(entry => {
+        if (entry.target.classList.contains('hidden-by-search')) return;
+        catalogObserver.unobserve(entry.target);
+        window.loadDatabaseExamDetail(entry.target.dataset.catalogCategory, entry.target.id)
+          .catch(error => console.warn('Không tải được chi tiết đề thi:', error?.message || error));
+      });
+    }, { rootMargin: '150px' });
+    card.dataset.catalogCategory = category;
+    catalogObserver.observe(card);
+  }
+
+  async function renderExamSummaries(exams, category) {
+    const kind = category === 'tst-national' ? 'tst' : category === 'vmo-mock' ? 'mock' : 'regional';
+    exams.forEach(exam => {
+      if (!exam.targetAnchor || (!Number(exam.problemCount) && !exam.problems?.length)) return;
+      let card = document.getElementById(exam.targetAnchor);
+      if (!card) card = kind === 'tst' ? createDatabaseExamCard(exam)
+        : kind === 'regional' ? createDatabaseRegionalCard(exam) : createDatabaseMockCard(exam);
+      if (kind === 'tst') ensureDatabaseExamSidebar(exam);
+      if (kind === 'regional') ensureDatabaseRegionalNavigation(exam);
+      if (kind === 'mock') ensureDatabaseMockNavigation(exam);
+      if (Array.isArray(exam.problems)) {
+        renderDatabaseExam(exam, kind);
+        loadedDetails.add(detailKey(category, exam.targetAnchor));
+      } else if (!loadedDetails.has(detailKey(category, exam.targetAnchor))) {
+        const body = card.querySelector('.exam-body') || card;
+        if (!body.querySelector('.db-exam-loading')) {
+          const notice = document.createElement('p');
+          notice.className = 'db-exam-loading';
+          notice.textContent = 'Chọn đề để tải câu hỏi từ MongoDB.';
+          body.appendChild(notice);
+        }
+        observeExamCard(card, category);
+      }
+    });
+    const root = document.getElementById(kind === 'tst' ? 'tab-tst' : kind === 'mock' ? 'tab-mock' : 'tab-history');
+    showDatabaseCatalogState(root, exams);
+    const first = Array.from(root?.querySelectorAll('.exam-card') || [])
+      .find(card => !card.classList.contains('hidden-by-search') && !loadedDetails.has(detailKey(category, card.id)));
+    if (first && window.VMODataService?.getExamCatalogDetail) {
+      await window.loadDatabaseExamDetail(category, first.id).catch(error =>
+        console.warn('Không tải được đề đầu tiên:', error?.message || error));
+    }
+  }
+
+  function resetExamCategory(tabId) {
+    const category = examCategories[tabId];
+    document.querySelectorAll(`#${tabId} .db-exam-card`).forEach(card => {
+      catalogObserver?.unobserve(card);
+      card.remove();
+    });
+    for (const key of loadedDetails) if (key.startsWith(`${category}:`)) loadedDetails.delete(key);
+  }
+
+  document.addEventListener('click', event => {
+    const link = event.target.closest?.('#sidebar-tst a[href^="#"], #sidebar-mock a[href^="#"], #sidebar-history a[href^="#"]');
+    if (!link || !window.VMODataService?.getExamCatalogDetail) return;
+    const tab = { 'sidebar-tst': 'tab-tst', 'sidebar-mock': 'tab-mock', 'sidebar-history': 'tab-history' }
+      [link.closest('#sidebar-tst, #sidebar-mock, #sidebar-history')?.id];
+    const category = examCategories[tab];
+    const anchor = link.getAttribute('href')?.slice(1);
+    if (category && anchor) window.loadDatabaseExamDetail(category, anchor).catch(error =>
+      console.warn('Không tải được đề được chọn:', error?.message || error));
+  });
+
   function showDatabaseCatalogState(root, exams, error = null) {
     const feed = root?.querySelector('.feed-container');
     if (!feed) return;
     feed.querySelector('.db-catalog-state')?.remove();
-    if (!error && exams.some(exam => Array.isArray(exam.problems) && exam.problems.length)) return;
+    if (!error && exams.some(exam => Number(exam.problemCount) > 0 || (Array.isArray(exam.problems) && exam.problems.length))) return;
     const state = document.createElement('p');
     state.className = 'db-catalog-state';
     state.setAttribute('role', error ? 'alert' : 'status');
@@ -4804,11 +4933,11 @@ if (card) card.dataset.databaseCard = 'true';
     if (!window.VMODataService?.getExamCatalog) return;
     if (databaseMockLoaded && !force) return;
     if (databaseMockPromise) return databaseMockPromise;
-    if (force) window.invalidateVMODataCache?.();
+    if (force) { window.invalidateVMODataCache?.(); resetExamCategory('tab-mock'); }
     databaseMockPromise = (async () => {
       try {
-        const exams = await window.VMODataService.getExamCatalog('vmo-mock');
-        exams.forEach(exam => { renderDatabaseExam(exam, 'mock'); ensureDatabaseMockNavigation(exam); });
+        const exams = await (window.VMODataService.getExamCatalogSummary || window.VMODataService.getExamCatalog)('vmo-mock');
+        await renderExamSummaries(exams, 'vmo-mock');
         const root = document.getElementById('tab-mock');
         showDatabaseCatalogState(root, exams);
         injectSubmissionButtons(root || document);
@@ -4836,12 +4965,12 @@ if (card) card.dataset.databaseCard = 'true';
     }
     if (databaseTstLoaded && !force) return;
     if (databaseTstPromise) return databaseTstPromise;
-    if (force) window.invalidateVMODataCache?.();
+    if (force) { window.invalidateVMODataCache?.(); resetExamCategory('tab-tst'); }
 
     databaseTstPromise = (async () => {
       try {
-        const exams = await window.VMODataService.getExamCatalog('tst-national');
-        exams.forEach(exam => renderDatabaseExam(exam, 'tst'));
+        const exams = await (window.VMODataService.getExamCatalogSummary || window.VMODataService.getExamCatalog)('tst-national');
+        await renderExamSummaries(exams, 'tst-national');
         const tstRoot = document.getElementById('tab-tst');
         showDatabaseCatalogState(tstRoot, exams);
         injectSubmissionButtons(tstRoot || document);
@@ -4868,12 +4997,12 @@ if (card) card.dataset.databaseCard = 'true';
     if (!window.VMODataService?.getExamCatalog) return;
     if (databaseRegionalLoaded && !force) return;
     if (databaseRegionalPromise) return databaseRegionalPromise;
-    if (force) window.invalidateVMODataCache?.();
+    if (force) { window.invalidateVMODataCache?.(); resetExamCategory('tab-history'); }
     databaseRegionalPromise = (async () => {
       try {
         await window.ensureVMOTabContent?.('tab-history');
-        const exams = await window.VMODataService.getExamCatalog('history-dn-qn');
-        exams.forEach(exam => renderDatabaseExam(exam, 'regional'));
+        const exams = await (window.VMODataService.getExamCatalogSummary || window.VMODataService.getExamCatalog)('history-dn-qn');
+        await renderExamSummaries(exams, 'history-dn-qn');
         const root = document.getElementById('tab-history');
         showDatabaseCatalogState(root, exams);
         injectSubmissionButtons(root || document);
@@ -4959,7 +5088,7 @@ if (card) card.dataset.databaseCard = 'true';
     injectSubmissionButtons(activeRoot);
     injectDataManagementButton();
     applyCatalogAccessRules(activeRoot);
-    loadMongoReferenceLinks(false, activeRoot);
+    if (activeRoot.id === 'tab-danang') loadMongoReferenceLinks(false, activeRoot);
     if (activeRoot.id === 'tab-tst') loadDatabaseTstExams();
     if (activeRoot.id === 'tab-mock') loadDatabaseMockExams();
     if (activeRoot.id === 'tab-history') loadDatabaseRegionalExams();
@@ -4981,7 +5110,8 @@ if (card) card.dataset.databaseCard = 'true';
     injectSubmissionButtons(root);
     injectDataManagementButton();
     applyCatalogAccessRules(root);
-    loadMongoReferenceLinks(false, root);
+    if (root.id === 'tab-danang') loadMongoReferenceLinks(false, root);
+    else applyMongoReferenceLinks(root);
     if (root.id === 'tab-tst') loadDatabaseTstExams();
     if (root.id === 'tab-mock') loadDatabaseMockExams();
     if (root.id === 'tab-history') loadDatabaseRegionalExams();
