@@ -41,4 +41,17 @@ assert.equal(document.getElementById('userAuthBar').classList.contains('mobile-o
 await window.switchTab('tab-tst', document.getElementById('tab-btn-tst'));
 assert.equal(document.getElementById('userAuthBar').classList.contains('mobile-open'), false);
 assert.equal(document.getElementById('sidebar-tst').style.display, 'block');
+
+const translatedPage = new JSDOM(`<!doctype html><html><body><div class="controls-sticky">
+<button id="mobileTocToggle" class="btn-secondary" aria-expanded="false">☰ Mục lục</button>
+<button id="printDocumentButton" class="btn-secondary">🖨️ In</button>
+</div></body></html>`, { url: 'https://example.test/', runScripts: 'outside-only' });
+translatedPage.window.eval(fs.readFileSync(new URL('../i18n.js', import.meta.url), 'utf8'));
+const translatedToc = translatedPage.window.document.getElementById('mobileTocToggle');
+const translatedPrint = translatedPage.window.document.getElementById('printDocumentButton');
+for (const language of ['vi', 'en', 'vi']) {
+  translatedPage.window.setLanguage(language);
+  assert.equal(translatedToc.textContent, '☰ Mục lục', 'chuyển ngôn ngữ không ghi đè nút mở mục lục');
+  assert.equal(translatedPrint.textContent, language === 'en' ? '🖨️ Print' : '🖨️ In');
+}
 console.log('Responsive navigation: OK');

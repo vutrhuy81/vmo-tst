@@ -149,7 +149,7 @@ VMOAuth.requireAuth('login.html');
       <div class="search-box"><span class="search-icon">🔎</span><input id="searchInput" type="search" aria-label="Tìm trong tab hiện tại" placeholder="Tìm Stolz, LTE, Miquel, nội suy, bất biến, Chebyshev..." autocomplete="off"></div>
       <button id="mobileTocToggle" class="btn-secondary mobile-toc-toggle" type="button" aria-controls="mainSidebar" aria-expanded="false">☰ Mục lục</button>
       <a class="btn-action" href="assets/On_luyen_VMO_Da_Nang_2026_2027.pdf" target="_blank" rel="noopener">📄 PDF</a>
-      <button class="btn-secondary" type="button" onclick="window.printVMODocument ? window.printVMODocument() : window.print()">🖨️ In</button>
+      <button id="printDocumentButton" class="btn-secondary" type="button" onclick="window.printVMODocument ? window.printVMODocument() : window.print()">🖨️ In</button>
     </div>
     <div id="searchSummary" class="search-summary" aria-live="polite"></div>
     <div class="filter-pills" id="mockFilterPills" style="display:none">
