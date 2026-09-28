@@ -26,6 +26,8 @@
       'tabDanang': '📚 VMO Topic Materials',
       'tabMock': '🎯 VMO Mock Exams',
       'tabTst': '🏛️ TST 2026–2027 Exams',
+      'tabVmo': '🇻🇳 VMO Exams',
+      'tabOlympic': '🌐 IMO–Olympiad Exams',
       'tabHistory': '🗂️ Da Nang–Quang Nam Archive',
 
       // 3. User Auth Bar
@@ -388,6 +390,10 @@
     if (btnDanang) setNodeText(btnDanang, '📚 Tài liệu chuyên đề VMO', UI_TRANSLATIONS.en.tabDanang, isEn);
     if (btnMock) setNodeText(btnMock, '🎯 Bộ đề thi thử VMO', UI_TRANSLATIONS.en.tabMock, isEn);
     if (btnTst) setNodeText(btnTst, '🏛️ Đề TST 2026–2027', UI_TRANSLATIONS.en.tabTst, isEn);
+    const btnVmo = document.getElementById('tab-btn-vmo');
+    const btnOlympic = document.getElementById('tab-btn-olympic');
+    if (btnVmo) setNodeText(btnVmo, '🇻🇳 Đề VMO', UI_TRANSLATIONS.en.tabVmo, isEn);
+    if (btnOlympic) setNodeText(btnOlympic, '🌐 Đề IMO–Olympic', UI_TRANSLATIONS.en.tabOlympic, isEn);
     if (btnHistory) setNodeText(btnHistory, '🗂️ Đề Đà Nẵng–Quảng Nam', UI_TRANSLATIONS.en.tabHistory, isEn);
 
     // 4. User Auth Bar

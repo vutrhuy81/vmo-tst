@@ -139,6 +139,8 @@ VMOAuth.requireAuth('login.html');
       <button class="tab-btn active" id="tab-btn-danang" type="button" onclick="switchTab('tab-danang',this)">📚 Tài liệu chuyên đề VMO</button>
       <button class="tab-btn" id="tab-btn-mock" type="button" onclick="switchTab('tab-mock',this)">🎯 Bộ đề thi thử VMO</button>
       <button class="tab-btn" id="tab-btn-tst" type="button" onclick="switchTab('tab-tst',this)">🏛️ Đề TST 2026–2027</button>
+      <button class="tab-btn" id="tab-btn-vmo" type="button" onclick="switchTab('tab-vmo',this)">🇻🇳 Đề VMO</button>
+      <button class="tab-btn" id="tab-btn-olympic" type="button" onclick="switchTab('tab-olympic',this)">🌐 Đề IMO–Olympic</button>
       <button class="tab-btn" id="tab-btn-history" type="button" onclick="switchTab('tab-history',this)">🗂️ Đề Đà Nẵng–Quảng Nam</button>
     </nav>
   </div>
@@ -158,6 +160,8 @@ VMOAuth.requireAuth('login.html');
     <div class="filter-pills" id="tstFilterPills" style="display:none">
       <button class="pill active" data-filter="ALL">Tất cả đề</button><button class="pill" data-filter="BAC">Miền Bắc</button><button class="pill" data-filter="TRUNG">Miền Trung</button><button class="pill" data-filter="NAM">Miền Nam</button><button class="pill" data-filter="OLYMPIC">Trường hè / Trại hè</button>
     </div>
+    <div class="filter-pills" id="vmoFilterPills" style="display:none"><button class="pill active" data-filter="ALL">Tất cả đề VMO</button></div>
+    <div class="filter-pills" id="olympicFilterPills" style="display:none"><button class="pill active" data-filter="ALL">Tất cả đề IMO–Olympic</button></div>
     <div class="filter-pills" id="historyFilterPills" style="display:none">
       <button class="pill active" data-filter="ALL">Tất cả đề</button><button class="pill" data-filter="DANANG">Đà Nẵng</button><button class="pill" data-filter="QUANGNAM">Quảng Nam</button>
     </div>
@@ -170,12 +174,16 @@ VMOAuth.requireAuth('login.html');
     <!-- INJECT:SIDEBAR_DANANG -->
     <!-- INJECT:SIDEBAR_MOCK -->
     <!-- INJECT:SIDEBAR_TST -->
+    <div id="sidebar-vmo" style="display:none"><div class="sidebar-title">Đề VMO</div><div class="nav-year-group"><div class="nav-year-title">🇻🇳 ĐỀ VMO</div></div></div>
+    <div id="sidebar-olympic" style="display:none"><div class="sidebar-title">Đề IMO–Olympic</div><div class="nav-year-group"><div class="nav-year-title">🌐 CÁC KỲ THI OLYMPIC</div></div></div>
     <!-- INJECT:SIDEBAR_HISTORY -->
   </aside>
   <main>
     <!-- INJECT:TAB_DANANG -->
     <!-- INJECT:TAB_MOCK -->
     <!-- INJECT:TAB_TST -->
+    <!-- INJECT:TAB_VMO -->
+    <!-- INJECT:TAB_OLYMPIC -->
     <!-- INJECT:TAB_HISTORY -->
   </main>
 </div>

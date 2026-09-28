@@ -43,6 +43,8 @@ export function build() {
       title: 'BỘ ĐỀ THI THỬ VMO' },
     { tag: '<!-- INJECT:TAB_TST -->', file: 'content/tab-tst.html', apiTab: 'tab-tst',
       title: 'TUYỂN TẬP ĐỀ THI CHỌN ĐỘI TUYỂN HSGQG (TST 2026 - 2027)' },
+    { tag: '<!-- INJECT:TAB_VMO -->', file: 'content/tab-tst.html', apiTab: 'tab-vmo', title: 'NGÂN HÀNG ĐỀ VMO' },
+    { tag: '<!-- INJECT:TAB_OLYMPIC -->', file: 'content/tab-tst.html', apiTab: 'tab-olympic', title: 'NGÂN HÀNG ĐỀ IMO–OLYMPIC' },
     { tag: '<!-- INJECT:TAB_HISTORY -->', file: 'content/tab-history.html', apiTab: 'tab-history',
       title: 'NGÂN HÀNG ĐỀ ĐÀ NẴNG – QUẢNG NAM QUA CÁC NĂM' },
     { tag: '<!-- INJECT:ACCOUNT_MODAL -->', file: 'modals/account-modal.html' },
