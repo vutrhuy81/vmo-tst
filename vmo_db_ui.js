@@ -2549,6 +2549,19 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
     return [...new Set(practiceIds.length ? practiceIds : (method.evidenceIds || []))];
   }
 
+  function trendEvidenceTab(item) {
+    if (item.anchor.startsWith('hist-')) return 'tab-history';
+    if (item.anchor.startsWith('imo-') || item.anchor.startsWith('olympic-')) return 'tab-olympic';
+    if (item.anchor.startsWith('vmo-')) return 'tab-vmo';
+    return 'tab-tst';
+  }
+  const trendEvidenceCategory = { 'tab-tst': 'tst-national', 'tab-history': 'history-dn-qn',
+    'tab-vmo': 'vmo-official', 'tab-olympic': 'imo-olympic' };
+  function trendEvidenceDisplayAnchor(item) {
+    return trendEvidenceTab(item) === 'tab-tst' && item.year !== '2026-2027'
+      ? `${item.anchor}--year-${item.year}` : item.anchor;
+  }
+
   window.closeTrendPractice = function() {
     const modal = document.getElementById('trendPracticeModal');
     if (!modal) return;
@@ -2560,20 +2573,21 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
     const root = window.ensureVMOTabContent
       ? await window.ensureVMOTabContent(tabId)
       : document.getElementById(tabId);
-    if (!root) throw new Error(`Không tải được kho ${tabId === 'tab-history' ? 'Đà Nẵng–Quảng Nam' : 'TST'}.`);
+    if (!root) throw new Error(`Không tải được kho ${tabId}.`);
     window.reinitAIGuide?.(root);
     window.reinitDatabaseUI?.(root);
     if (tabId === 'tab-tst') {
       await window.loadDatabaseTstExams?.();
-    } else {
+    } else if (tabId === 'tab-history') {
       await window.loadDatabaseRegionalExams?.();
+    } else {
+      await window.loadDatabaseCompetitionExams?.(tabId);
     }
     return root;
   }
 
   function findTrendEvidenceProblem(root, evidence) {
-    const displayAnchor = evidence.anchor.startsWith('hist-') || evidence.year === '2026-2027'
-      ? evidence.anchor : `${evidence.anchor}--year-${evidence.year}`;
+    const displayAnchor = trendEvidenceDisplayAnchor(evidence);
     const card = root.querySelector(`#${CSS.escape(displayAnchor)}`);
     if (!card) return null;
     if (evidence.dayNumber > 0) {
@@ -2613,41 +2627,43 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
   window.openTrendPractice = async function(topicIndex, methodIndex) {
     const data = examTrendState.rendered;
     const topic = data?.report?.topicTrends?.[Number(topicIndex)];
-    const method = topic?.frequentMethods?.[Number(methodIndex)];
-    if (!topic || !method) return showToast('Không tìm thấy vi chủ đề trong báo cáo.', false);
-    const evidence = trendPracticeEvidenceIds(method).map(parseTrendEvidenceId).filter(Boolean);
+    const isTopic = methodIndex === undefined || methodIndex === null;
+    const method = isTopic ? null : topic?.frequentMethods?.[Number(methodIndex)];
+    if (!topic || (!isTopic && !method)) return showToast('Không tìm thấy chủ đề trong báo cáo.', false);
+    const evidence = (isTopic ? topic.evidenceIds || [] : trendPracticeEvidenceIds(method))
+      .map(parseTrendEvidenceId).filter(Boolean);
     if (!evidence.length) return showToast('Vi chủ đề này chưa có câu hỏi truy nguyên được.', false);
 
     const modal = ensureTrendPracticeModal();
     const body = modal.querySelector('#trendPracticeBody');
     const notice = modal.querySelector('#trendPracticeNotice');
-    modal.querySelector('#trendPracticeTitle').textContent = method.name;
-    modal.querySelector('#trendPracticeSubtitle').textContent = `${topic.topic} · ${evidence.length} câu đã được AI truy nguyên`;
+    modal.querySelector('#trendPracticeTitle').textContent = isTopic ? topic.topic : method.name;
+    modal.querySelector('#trendPracticeSubtitle').textContent = `${topic.topic} · ${evidence.length} câu từ Atlas`;
     notice.textContent = data.quality?.status === 'approved'
       ? '✅ Danh sách vi chủ đề đã được GPT kiểm định.'
       : '⚠️ Báo cáo Gemini chưa được GPT duyệt hoàn toàn; hãy xem đây là danh sách luyện tập tham khảo.';
     notice.className = `trend-practice-notice ${data.quality?.status === 'approved' ? 'approved' : 'warning'}`;
-    body.innerHTML = '<div class="trend-practice-loading">Đang đối chiếu và tải đầy đủ câu hỏi từ hai kho đề…</div>';
+    body.innerHTML = '<div class="trend-practice-loading">Đang đối chiếu và tải câu hỏi từ kho đề…</div>';
     modal.classList.add('active');
     document.body.classList.add('trend-practice-open');
 
     try {
-      const tabIds = [...new Set(evidence.map(item => item.anchor.startsWith('hist-') ? 'tab-history' : 'tab-tst'))];
+      const tabIds = [...new Set(evidence.map(trendEvidenceTab))];
       const roots = new Map((await Promise.all(tabIds.map(async tabId => [tabId, await prepareTrendPracticeSource(tabId)]))));
-      await Promise.all([...new Set(evidence.map(item => {
-        const displayAnchor = item.anchor.startsWith('hist-') || item.year === '2026-2027'
-          ? item.anchor : `${item.anchor}--year-${item.year}`;
-        return `${item.anchor.startsWith('hist-') ? 'history-dn-qn' : 'tst-national'}:${displayAnchor}`;
-      }))].map(async key => {
+      const keys = [...new Set(evidence.map(item =>
+        `${trendEvidenceCategory[trendEvidenceTab(item)]}:${trendEvidenceDisplayAnchor(item)}`))];
+      for (let index = 0; index < keys.length; index += 6) {
+        await Promise.all(keys.slice(index, index + 6).map(async key => {
           const separator = key.indexOf(':');
           if (window.VMODataService?.getExamCatalogDetail) {
             await window.loadDatabaseExamDetail?.(key.slice(0, separator), key.slice(separator + 1));
           }
         }));
+      }
       const resolved = [];
       const missing = [];
       evidence.forEach(item => {
-        const tabId = item.anchor.startsWith('hist-') ? 'tab-history' : 'tab-tst';
+        const tabId = trendEvidenceTab(item);
         const problem = findTrendEvidenceProblem(roots.get(tabId), item);
         if (problem) resolved.push({ item, problem, tabId });
         else missing.push(item.value);
@@ -2670,7 +2686,9 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
         header.classList.add('exam-header');
         const sourceLabel = document.createElement('div');
         sourceLabel.className = 'trend-practice-source';
-        sourceLabel.textContent = first.tabId === 'tab-history' ? '🗂️ Nguồn: Đề Đà Nẵng–Quảng Nam' : '🏛️ Nguồn: Đề TST';
+        sourceLabel.textContent = ({ 'tab-history': '🗂️ Nguồn: Đề Đà Nẵng–Quảng Nam',
+          'tab-tst': '🏛️ Nguồn: Đề TST', 'tab-vmo': '🇻🇳 Nguồn: Đề VMO',
+          'tab-olympic': '🌐 Nguồn: Đề IMO–Olympic' })[first.tabId];
         header.appendChild(sourceLabel);
         const cardBody = document.createElement('div');
         cardBody.className = 'exam-body';
@@ -2720,7 +2738,7 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
         <p style="white-space:pre-wrap;line-height:1.55;">${escapeHtmlText(report.executiveSummary || '')}</p>
         <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:9px;">${(report.topicTrends || []).map((item, topicIndex) => `
           <section style="border:1px solid #e2e8f0;border-radius:8px;padding:10px;background:#f8fafc;">
-            <div style="display:flex;justify-content:space-between;gap:7px;"><strong>${escapeHtmlText(item.topic)}</strong><span style="white-space:nowrap;color:#0369a1;font-weight:800;">${Number(item.questionCount) || 0} câu · ${Number(item.prevalencePercent) || 0}%</span></div>
+            <div style="display:flex;justify-content:space-between;gap:7px;"><strong>${escapeHtmlText(item.topic)}</strong><button type="button" class="trend-topic-practice-button" data-topic-index="${topicIndex}" ${item.evidenceIds?.length ? '' : 'disabled'} style="white-space:nowrap;color:#0369a1;font-weight:800;cursor:pointer;background:none;border:0;">${Number(item.questionCount) || 0} câu · ${Number(item.prevalencePercent) || 0}%</button></div>
             <div style="font-size:.76rem;color:#7c3aed;margin:4px 0;">${escapeHtmlText(item.trendLevel || '')}</div>
             <div style="white-space:pre-wrap;font-size:.84rem;line-height:1.45;">${escapeHtmlText(item.observations || '')}</div>${methods(item, topicIndex)}
           </section>`).join('')}</div>
@@ -2732,6 +2750,9 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
       </article>`;
     target.querySelectorAll('.trend-practice-button').forEach(button => {
       button.onclick = () => window.openTrendPractice(button.dataset.topicIndex, button.dataset.methodIndex);
+    });
+    target.querySelectorAll('.trend-topic-practice-button').forEach(button => {
+      button.onclick = () => window.openTrendPractice(button.dataset.topicIndex);
     });
   }
 
