@@ -5,6 +5,7 @@ import {
   TREND_TOPICS, approvedTrendReview, classifyTrendTopic, normalizeTrendReport,
   selectTrendEvidence, selectTrendPracticeEvidence, trendAnalysisSettings
 } from '../lib/exam-trends.js';
+import { historicalExams } from '../data/exam-prediction-history.js';
 
 assert.equal(classifyTrendTopic('Phương trình hàm – Cauchy'), 'Phương trình hàm');
 assert.equal(classifyTrendTopic('Số học – Dãy số nguyên'), 'Số học và dãy số');
@@ -15,8 +16,9 @@ assert.equal(classifyTrendTopic('Tổ hợp – Trò chơi'), 'Tổ hợp');
 assert.equal(classifyTrendTopic('Bất đẳng thức'), '');
 
 const yearSettings = trendAnalysisSettings({ mode: 'year', year: '2026-2027' });
-const yearEvidence = selectTrendEvidence(yearSettings);
-assert.equal(yearEvidence.examCount, 25, 'Phân tích theo năm phải dùng đủ 25 đề TST tĩnh');
+const yearEvidence = selectTrendEvidence(yearSettings, historicalExams);
+assert.equal(yearEvidence.examCount, 25, 'Tập kiểm thử gồm đủ 25 đề TST');
+assert.equal(selectTrendEvidence(yearSettings).examCount, 0, 'Không tự đọc HTML ở chế độ sản phẩm');
 assert.equal(yearEvidence.topicStats.length, 6);
 assert.equal(yearEvidence.topicStats.reduce((sum, item) => sum + item.questionCount, 0) + yearEvidence.otherQuestionCount,
   yearEvidence.questionCount, 'Mỗi câu phải được tính đúng một lần hoặc nằm ngoài 6 tiêu chí');
@@ -26,17 +28,18 @@ const targetSettings = trendAnalysisSettings({
   mode: 'target', year: '2026-2027', targetType: 'tst', targetAnchor: 'tst-da-nang',
   province: 'Đà Nẵng', lookback: 10
 });
-const targetEvidence = selectTrendEvidence(targetSettings);
+const targetEvidence = selectTrendEvidence(targetSettings, historicalExams);
 assert.ok(targetEvidence.examCount >= 5, 'Có dữ liệu lịch sử Đà Nẵng để phân tích');
 assert.deepEqual(targetEvidence.historyMembers, ['Quảng Nam', 'Đà Nẵng']);
 assert.deepEqual(new Set(targetEvidence.sources.map(item => item.historicalUnit)), new Set(['ĐÀ NẴNG', 'QUẢNG NAM']),
   'Phân tích Đà Nẵng phải bao gồm dữ liệu lịch sử Quảng Nam');
+assert.ok(targetEvidence.missingYears.length > 0);
 assert.equal(targetEvidence.unitCount, 1, 'Đà Nẵng và Quảng Nam phải được quy về một đơn vị hiện hành');
 assert.ok(targetEvidence.years.every(year => Number(year.slice(0, 4)) < 2026 && Number(year.slice(0, 4)) >= 2016));
 assert.throws(() => trendAnalysisSettings({ mode: 'target', year: '2026-2027', targetType: 'tst', lookback: 10 }));
 assert.throws(() => trendAnalysisSettings({ mode: 'year', year: '2026-2030' }));
 
-const practiceEvidence = selectTrendPracticeEvidence();
+const practiceEvidence = selectTrendPracticeEvidence(historicalExams);
 const sharedPracticeTopic = TREND_TOPICS.find(topic =>
   practiceEvidence.samples.some(item => item.criterion === topic && item.sourceId.startsWith('hist-')) &&
   practiceEvidence.samples.some(item => item.criterion === topic && !item.sourceId.startsWith('hist-')));
@@ -103,6 +106,14 @@ assert.ok(window.document.getElementById('hub-tab-trends'), 'Admin phải thấy
 window.switchHubTab('trends');
 const byId = id => window.document.getElementById(id);
 assert.equal(byId('trendTarget').options.length, 38);
+window.fetch = async (_, options) => {
+  assert.equal(JSON.parse(options.body).preview, true);
+  return { ok: true, json: async () => ({ success: true, data: {
+    examCount: 1, questionCount: 3, years: ['2025-2026'], missingYears: ['2024-2025']
+  } }) };
+};
+await window.previewExamTrendEvidence();
+assert.match(byId('trendStatus').textContent, /năm thiếu: 2024-2025/);
 const resultData = {
   settings: yearSettings, evidence: yearEvidence, report: normalizedReport, model: 'gemini-test',
   generatedAt: new Date().toISOString(), quality: {

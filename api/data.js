@@ -91,6 +91,12 @@ function cleanExamTrendReport(payload) {
     },
     evidence: {
       years: cleanStringList(evidence.years, 15, 20),
+      missingYears: cleanStringList(evidence.missingYears, 15, 20),
+      sampleCount: cleanNumber(evidence.sampleCount, 0, 0, 10000),
+      yearCounts: (Array.isArray(evidence.yearCounts) ? evidence.yearCounts : []).slice(0, 15).map(item => ({
+        year: cleanText(item?.year, 20), examCount: cleanNumber(item?.examCount, 0, 0, 1000),
+        questionCount: cleanNumber(item?.questionCount, 0, 0, 10000)
+      })),
       examCount: cleanNumber(evidence.examCount, 0, 0, 1000),
       questionCount: cleanNumber(evidence.questionCount, 0, 0, 10000),
       otherQuestionCount: cleanNumber(evidence.otherQuestionCount, 0, 0, 10000),

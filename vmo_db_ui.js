@@ -1994,15 +1994,16 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
       </div>
       ${tst ? '' : `<div id="examPredictionPanel" style="display:none;margin-bottom:10px;padding:12px;background:#eff6ff;border:1px solid #93c5fd;border-radius:8px;">
         <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px;">
-          <div><label>Loại đề cần dự đoán *</label><select id="examPredictionType" onchange="syncExamPredictionTarget()" style="width:100%;padding:7px;"><option value="tst">TST của tỉnh/thành hoặc trường chuyên</option><option value="vmo">VMO — chọn đội tuyển Việt Nam dự IMO</option></select></div>
+          <div><label>Loại đề cần dự đoán *</label><select id="examPredictionType" onchange="syncExamPredictionTarget()" style="width:100%;padding:7px;"><option value="tst">TST của tỉnh/thành hoặc trường chuyên</option><option value="vmo">VMO — học sinh giỏi quốc gia môn Toán</option></select></div>
           <div><label>Tỉnh/thành hoặc trường chuyên *</label><select id="examPredictionTarget" onchange="syncExamPredictionTarget()" style="width:100%;padding:7px;"></select></div>
           <div><label>Năm học dự đoán *</label><select id="examPredictionYear" onchange="syncExamPredictionYear()" style="width:100%;padding:7px;">${Array.from({length:15}, (_, i) => `<option value="${2026+i}-${2027+i}">${2026+i}–${2027+i}</option>`).join('')}</select></div>
           <div><label>Số năm dữ liệu tham chiếu (1–15) *</label><input type="number" id="examPredictionLookback" min="1" max="15" value="10" style="width:100%;box-sizing:border-box;padding:7px;"></div>
         </div>
-        <label for="examPredictionOutline">Khung câu hỏi (để trống dùng mẫu Đà Nẵng 2026–2027; mỗi dòng: số câu | điểm | chuyên đề)</label><textarea id="examPredictionOutline" rows="3" style="display:block;width:100%;box-sizing:border-box;margin:5px 0 10px;padding:7px;resize:vertical;" placeholder="1 | 5 | Dãy số và giới hạn\n2 | 5 | Phương trình hàm\n3 | 5 | Số học\n4 | 5 | Hình học phẳng"></textarea>
+        <label for="examPredictionOutline">Khung câu hỏi (VMO bắt buộc nhập; TST để trống dùng mẫu Đà Nẵng; mỗi dòng: số câu | điểm | chuyên đề)</label><textarea id="examPredictionOutline" rows="3" style="display:block;width:100%;box-sizing:border-box;margin:5px 0 10px;padding:7px;resize:vertical;" placeholder="1 | 5 | Dãy số và giới hạn\n2 | 5 | Phương trình hàm\n3 | 5 | Số học\n4 | 5 | Hình học phẳng"></textarea>
         <label for="examPredictionStructure">Quy định hoặc định hướng bổ sung</label><textarea id="examPredictionStructure" rows="3" style="display:block;width:100%;box-sizing:border-box;margin:5px 0 10px;padding:7px;resize:vertical;" placeholder="Ví dụ: hạn chế trùng chuyên đề với năm trước; ưu tiên bài toán chứng minh..."></textarea>
-        <label for="examPredictionNotes">Tư liệu lịch sử bổ sung (nêu rõ năm và nguồn nếu có)</label><textarea id="examPredictionNotes" maxlength="12000" rows="4" style="display:block;width:100%;box-sizing:border-box;margin:5px 0 10px;padding:7px;resize:vertical;" placeholder="Dán tóm tắt các đề lịch sử VMO/TST chưa có trong hệ thống. Không có dữ liệu thì hệ thống sẽ báo thiếu nguồn."></textarea>
+        <label for="examPredictionNotes">Ghi chú lịch sử bổ sung (không thay thế đề nguồn trong Atlas)</label><textarea id="examPredictionNotes" maxlength="12000" rows="4" style="display:block;width:100%;box-sizing:border-box;margin:5px 0 10px;padding:7px;resize:vertical;" placeholder="Ghi chú bối cảnh có năm và nguồn; cần ít nhất một đề quá khứ đã lưu trên Atlas."></textarea>
         <div style="font-size:.8rem;color:#475569;margin-bottom:9px;">Số năm tham chiếu là giới hạn tìm kiếm; kết quả sẽ ghi rõ số năm thực sự có dữ liệu. Đề AI chỉ là bản dự đoán cần admin rà soát.</div>
+        <button type="button" id="examPreviewButton" onclick="previewExamPredictionEvidence()">🔎 Kiểm tra nguồn Atlas</button>
         <button type="button" id="examPredictButton" onclick="runPredictExam()" style="background:#1d4ed8;color:#fff;border:0;border-radius:6px;padding:8px 12px;font-weight:700;cursor:pointer;">🔮 Dự đoán &amp; soạn đề</button>
         <span id="examPredictionStatus" role="status" style="margin-left:8px;font-size:.8rem;"></span><div id="examPredictionEvidence" style="font-size:.8rem;margin-top:8px;"></div>
       </div>`}
@@ -2451,6 +2452,7 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
         </div>
         <p id="trendScopeHelp" style="margin:9px 0;color:#475569;font-size:.79rem;"></p>
         <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;">
+          <button type="button" id="trendPreviewButton">🔎 Kiểm tra nguồn Atlas</button>
           <button type="button" id="trendRunButton" style="padding:9px 13px;border:0;border-radius:6px;background:#1d4ed8;color:white;font-weight:700;cursor:pointer;">✨ Gemini phân tích → GPT kiểm định</button>
           <button type="button" id="trendSaveButton" disabled style="padding:9px 13px;border:0;border-radius:6px;background:#16a34a;color:white;font-weight:700;cursor:pointer;">💾 Lưu báo cáo vào MongoDB</button>
           <span id="trendStatus" role="status" style="font-size:.8rem;color:#475569;"></span>
@@ -2473,6 +2475,7 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
     panel.querySelector('#trendYear').onchange = syncExamTrendForm;
     panel.querySelector('#trendTargetType').onchange = syncExamTrendForm;
     panel.querySelector('#trendRunButton').onclick = window.runExamTrendAnalysis;
+    panel.querySelector('#trendPreviewButton').onclick = window.previewExamTrendEvidence;
     panel.querySelector('#trendSaveButton').onclick = window.saveExamTrendReport;
     syncExamTrendForm();
   }
@@ -2707,7 +2710,7 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
           <div><h3 style="margin:0 0 5px;color:#0f172a;">${escapeHtmlText(report.title)}</h3><div style="font-size:.78rem;color:#64748b;">${saved ? 'Báo cáo đã lưu' : `Gemini: ${escapeHtmlText(data.model || 'không rõ model')}`} · ${escapeHtmlText(learningDate(data.createdAt || data.generatedAt))}</div></div>
           <span style="padding:6px 9px;border-radius:999px;background:${qualityBackground};color:${qualityColor};font-size:.78rem;font-weight:800;">${qualityLabel}${quality.score !== null && quality.score !== undefined ? ` · ${escapeHtmlText(quality.score)}/5` : ''}</span>
         </div>
-        <div style="margin:11px 0;padding:10px;background:#eff6ff;border-radius:7px;color:#1e3a8a;font-size:.82rem;"><strong>Phạm vi dữ liệu:</strong> ${Number(evidence.examCount) || 0} đề · ${Number(evidence.questionCount) || 0} câu · ${Number(evidence.unitCount) || 0} đơn vị · ${escapeHtmlText((evidence.years || []).join(', ') || data.settings?.year || '')}${Number(evidence.otherQuestionCount) ? ` · ${Number(evidence.otherQuestionCount)} câu ngoài 6 tiêu chí` : ''}${evidence.mergedProvinceHistory ? `<div style="margin-top:5px;"><strong>Địa giới hiện hành:</strong> ${escapeHtmlText((evidence.historyMembers || []).join(' + '))} → ${escapeHtmlText(evidence.historyCurrentProvince || '')}</div>` : ''}</div>
+        <div style="margin:11px 0;padding:10px;background:#eff6ff;border-radius:7px;color:#1e3a8a;font-size:.82rem;"><strong>Nguồn Atlas:</strong> ${Number(evidence.examCount) || 0} đề · ${Number(evidence.questionCount) || 0} câu · ${Number(evidence.unitCount) || 0} đơn vị · ${escapeHtmlText((evidence.years || []).join(', ') || data.settings?.year || '')} · thiếu ${Number(evidence.missingYears?.length) || 0} năm · AI đọc ${Number(evidence.sampleCount) || evidence.samples?.length || 0} câu mẫu${Number(evidence.otherQuestionCount) ? ` · ${Number(evidence.otherQuestionCount)} câu ngoài 6 tiêu chí` : ''}${evidence.mergedProvinceHistory ? `<div style="margin-top:5px;"><strong>Địa giới hiện hành:</strong> ${escapeHtmlText((evidence.historyMembers || []).join(' + '))} → ${escapeHtmlText(evidence.historyCurrentProvince || '')}</div>` : ''}<div style="margin-top:5px;">Tỷ lệ chủ đề tính theo câu; tần suất vi chủ đề dựa trên câu mẫu được dẫn.</div></div>
         <p style="white-space:pre-wrap;line-height:1.55;">${escapeHtmlText(report.executiveSummary || '')}</p>
         <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:9px;">${(report.topicTrends || []).map((item, topicIndex) => `
           <section style="border:1px solid #e2e8f0;border-radius:8px;padding:10px;background:#f8fafc;">
@@ -2725,6 +2728,30 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
       button.onclick = () => window.openTrendPractice(button.dataset.topicIndex, button.dataset.methodIndex);
     });
   }
+
+  window.previewExamTrendEvidence = async function() {
+    if (!requireAdminUiAction()) return;
+    const button = document.getElementById('trendPreviewButton');
+    const status = document.getElementById('trendStatus');
+    const selected = document.getElementById('trendTarget')?.selectedOptions?.[0];
+    button.disabled = true;
+    if (status) status.textContent = 'Đang kiểm tra kho đề Atlas...';
+    try {
+      const response = await fetch('/api/ai-exam-trends', { method: 'POST', credentials: 'same-origin',
+        headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({
+          preview: true, mode: document.getElementById('trendMode')?.value,
+          year: document.getElementById('trendYear')?.value,
+          targetType: document.getElementById('trendTargetType')?.value,
+          targetAnchor: selected?.value, province: selected?.dataset?.province || selected?.textContent,
+          lookback: Number(document.getElementById('trendLookback')?.value)
+        }) });
+      const result = await response.json();
+      if (!response.ok || !result.success) throw new Error(result.error || 'Không kiểm tra được nguồn.');
+      const data = result.data;
+      if (status) status.textContent = `Atlas: ${data.examCount} đề, ${data.questionCount} câu; năm có dữ liệu: ${data.years.join(', ') || 'không có'}; năm thiếu: ${data.missingYears.join(', ') || 'không có'}.`;
+    } catch (error) { if (status) status.textContent = error.message; }
+    finally { button.disabled = false; }
+  };
 
   window.runExamTrendAnalysis = async function() {
     if (!requireAdminUiAction() || examTrendState.running) return;
@@ -3659,6 +3686,31 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
     ]);
   }
 
+  window.previewExamPredictionEvidence = async function() {
+    if (!requireAdminUiAction()) return;
+    const button = document.getElementById('examPreviewButton');
+    const status = document.getElementById('examPredictionStatus');
+    const targetType = document.getElementById('examPredictionType')?.value;
+    const target = document.getElementById('examPredictionTarget')?.selectedOptions?.[0];
+    button.disabled = true;
+    if (status) status.textContent = 'Đang kiểm tra kho đề Atlas...';
+    try {
+      const response = await fetch('/api/ai-predict-exam', { method: 'POST', credentials: 'same-origin',
+        headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({
+          preview: true, targetType, targetAnchor: targetType === 'vmo' ? 'vmo-official' : target?.value,
+          province: targetType === 'vmo' ? 'VMO' : target?.dataset?.province,
+          year: document.getElementById('examPredictionYear')?.value,
+          dayNumber: Number(document.getElementById('examDayNumber')?.value),
+          lookback: Number(document.getElementById('examPredictionLookback')?.value)
+        }) });
+      const result = await response.json();
+      if (!response.ok || !result.success) throw new Error(result.error || 'Không kiểm tra được nguồn.');
+      const data = result.data;
+      if (status) status.textContent = `Atlas: ${data.ownExamCount} đề của đơn vị (${data.years.join(', ') || 'chưa có'}); thiếu ${data.missingYears.length} năm; ${data.peerExamCount} đề TST đối chiếu.`;
+    } catch (error) { if (status) status.textContent = error.message; }
+    finally { button.disabled = false; }
+  };
+
   window.runPredictExam = async function() {
     if (!requireAdminUiAction()) return;
     const button = document.getElementById('examPredictButton');
@@ -3708,7 +3760,7 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
         const mergerText = evidence.mergedProvinceHistory
           ? ` Đã hợp nhất lịch sử ${evidence.historyMembers?.join(' + ')} vào ${evidence.historyCurrentProvince}.`
           : '';
-        summary.textContent = `Tham chiếu thực tế: ${evidence.ownExamCount || 0} đề / ${evidence.years?.length || 0} năm của đơn vị (${(evidence.years || []).join(', ') || 'chưa có'}), ${evidence.peerExamCount || 0} đề TST cùng kỳ ${evidence.trendYear || ''}.${mergerText} ${data.reasoning || ''}`;
+        summary.textContent = `Nguồn Atlas: ${evidence.ownExamCount || 0} đề / ${evidence.years?.length || 0} năm của đơn vị (${(evidence.years || []).join(', ') || 'chưa có'}); thiếu ${evidence.missingYears?.length || 0} năm trong phạm vi yêu cầu. ${evidence.peerExamCount || 0} đề TST cùng kỳ ${evidence.trendYear || ''}.${mergerText} ${data.reasoning || ''}`;
         report.appendChild(summary);
         const review = document.createElement('p');
         review.textContent = `Kiểm định GPT: ${data.quality.verified ? 'Đã duyệt' : 'Chưa duyệt — lưu để admin sửa'} (${data.quality.score}/5). ${data.quality.summary || ''}`;
