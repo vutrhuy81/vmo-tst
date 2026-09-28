@@ -9,6 +9,79 @@
 
   const search = qs('#searchInput');
   const searchSummary = qs('#searchSummary');
+  const sidebar = qs('#mainSidebar');
+  const tocToggle = qs('#mobileTocToggle');
+  const tocClose = qs('#mobileTocClose');
+  const tocBackdrop = qs('#sidebarBackdrop');
+  const accountToggle = qs('#accountMenuToggle');
+  const accountBar = qs('#userAuthBar');
+  const mobileWidth = window.matchMedia?.('(max-width: 680px)') || { matches: false };
+  let focusBeforeToc = null;
+
+  function syncStickyOffset() {
+    const navHeight = qs('.nav-tabs-wrapper')?.getBoundingClientRect().height || 0;
+    const controlsHeight = qs('.controls-sticky')?.getBoundingClientRect().height || 0;
+    document.documentElement.style.setProperty('--nav-height', `${Math.ceil(navHeight)}px`);
+    document.documentElement.style.setProperty('--content-offset', `${Math.ceil(navHeight + controlsHeight + 12)}px`);
+  }
+  if (window.ResizeObserver) {
+    const observer = new ResizeObserver(syncStickyOffset);
+    ['.nav-tabs-wrapper', '.controls-sticky'].forEach(selector => {
+      const node = qs(selector);
+      if (node) observer.observe(node);
+    });
+  }
+  window.addEventListener('resize', syncStickyOffset);
+  syncStickyOffset();
+
+  function closeToc(restoreFocus = true) {
+    if (!sidebar?.classList.contains('mobile-open')) return;
+    sidebar.classList.remove('mobile-open');
+    tocBackdrop?.classList.remove('visible');
+    tocToggle?.setAttribute('aria-expanded', 'false');
+    sidebar.removeAttribute('role');
+    sidebar.removeAttribute('aria-modal');
+    document.body.classList.remove('toc-open');
+    if (restoreFocus) (focusBeforeToc || tocToggle)?.focus();
+  }
+  tocToggle?.addEventListener('click', () => {
+    if (!mobileWidth.matches) return;
+    focusBeforeToc = document.activeElement;
+    closeAccountMenu();
+    sidebar.classList.add('mobile-open');
+    sidebar.setAttribute('role', 'dialog');
+    sidebar.setAttribute('aria-modal', 'true');
+    tocBackdrop?.classList.add('visible');
+    tocToggle.setAttribute('aria-expanded', 'true');
+    document.body.classList.add('toc-open');
+    tocClose?.focus();
+  });
+  tocClose?.addEventListener('click', () => closeToc());
+  tocBackdrop?.addEventListener('click', () => closeToc());
+  sidebar?.addEventListener('click', event => {
+    if (mobileWidth.matches && event.target.closest('a[href^="#"]')) closeToc();
+  });
+  function closeAccountMenu() {
+    accountBar?.classList.remove('mobile-open');
+    accountToggle?.setAttribute('aria-expanded', 'false');
+  }
+  accountToggle?.addEventListener('click', () => {
+    const open = accountBar?.classList.toggle('mobile-open');
+    accountToggle.setAttribute('aria-expanded', String(!!open));
+    if (open) accountBar.querySelector('button:not([style*="display: none"])')?.focus();
+  });
+  document.addEventListener('click', event => {
+    if (!event.target.closest('.app-topbar-actions')) closeAccountMenu();
+  });
+  document.addEventListener('keydown', event => {
+    if (event.key === 'Escape') { closeToc(); closeAccountMenu(); return; }
+    if (event.key !== 'Tab' || !sidebar?.classList.contains('mobile-open')) return;
+    const items = [tocClose, ...sidebar.querySelectorAll('a[href], button:not([disabled]), summary')].filter(Boolean);
+    const first = items[0], last = items[items.length - 1];
+    if (event.shiftKey && document.activeElement === first) { event.preventDefault(); last.focus(); }
+    else if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); first.focus(); }
+  });
+  mobileWidth.addEventListener?.('change', () => { closeToc(false); closeAccountMenu(); });
 
   function formatCount(value) {
     return String(Math.max(0, Number(value) || 0)).padStart(2, '0');
@@ -113,6 +186,8 @@
 
   // 1. Chuyển đổi Tab nội dung chính & đồng bộ Sidebar tương ứng
   window.switchTab = async function (tabId, btn) {
+    closeToc(false);
+    closeAccountMenu();
     qsa('.tab-pane').forEach(x => x.classList.remove('active'));
     qsa('.tab-btn').forEach(x => x.classList.remove('active'));
 
