@@ -9,10 +9,16 @@ const uiSource = fs.readFileSync(new URL('vmo_db_ui.js', root), 'utf8');
 
 const dom = new JSDOM(`<!doctype html><html><body>
   <div id="sidebar-tst"><div class="nav-year-group"><div class="nav-year-title">TST</div></div></div>
+  <div id="sidebar-vmo"><div class="nav-year-group"><div class="nav-year-title">VMO</div></div></div>
+  <div id="sidebar-olympic"><div class="nav-year-group"><div class="nav-year-title">IMO–Olympic</div></div></div>
   <div id="sidebar-mock"><nav class="book-toc"></nav></div>
   <div id="sidebar-history"><div class="nav-year-group"><div class="nav-year-title">📙 QUẢNG NAM</div></div><div class="nav-year-group"><div class="nav-year-title">📘 ĐÀ NẴNG</div></div></div>
   <div id="tab-mock"><div class="feed-container"></div></div>
   <div id="tab-tst"><div class="feed-container"></div></div>
+  <div id="tab-vmo"><div class="feed-container"></div></div>
+  <div id="tab-olympic"><div class="feed-container"></div></div>
+  <div id="vmoFilterPills"><button class="pill" data-filter="ALL"></button></div>
+  <div id="olympicFilterPills"><button class="pill" data-filter="ALL"></button></div>
   <div id="tab-history"><div class="feed-container"></div></div>
   <div id="mockFilterPills"><button class="pill" data-filter="ALL"></button></div>
   <div id="historyFilterPills"><button class="pill" data-filter="ALL"></button><button class="pill" data-filter="DANANG"></button><button class="pill" data-filter="QUANGNAM"></button></div>
@@ -40,7 +46,14 @@ window.VMODataService = {
   getEvents: async () => [],
   getDocuments: async () => [],
   getExams: async () => [],
-  getExamCatalog: async category => category === 'vmo-mock' ? [{
+  getExamCatalog: async category => ['vmo-official', 'imo-olympic'].includes(category) ? [{
+    id: category === 'vmo-official' ? 'vmo-exam' : 'olympic-exam',
+    examKey: `${category}:2026-2027:day-1`, category,
+    targetAnchor: category === 'vmo-official' ? 'vmo-vmo-2026-2027' : 'olympic-imo-2026-2027',
+    province: category === 'vmo-official' ? 'VMO' : 'IMO', year: '2026-2027', dayNumber: 1,
+    title: category === 'vmo-official' ? 'Đề VMO' : 'Đề IMO',
+    problems: [{ contentKey: `${category}:question-1`, questionNumber: 1, content: 'Bài toán Olympic' }]
+  }] : category === 'vmo-mock' ? [{
     id: 'bbbbbbbbbbbbbbbbbbbbbbbb', examKey: 'mock:set-3:2026-2027:day-1',
     targetAnchor: 'mock-set3-day1', setNumber: 3, province: 'Đà Nẵng', year: '2026-2027', dayNumber: 1, title: 'Bộ 3',
     problems: [{ contentKey: 'mock:mock-set3-day1:question-1', questionNumber: 1, content: 'Đề thử' }]
@@ -107,7 +120,15 @@ assert.equal(window.syncContentCatalogToDatabase, undefined);
 window.toggleAddDocForm();
 const select = window.document.getElementById('docTargetAnchor');
 assert.equal(window.document.getElementById('docDayNumber').options.length, 4);
-assert.deepEqual(Array.from(window.document.getElementById('docDestination').options).map(option => option.value), ['tst', 'regional']);
+assert.deepEqual(Array.from(window.document.getElementById('docDestination').options).map(option => option.value), ['tst', 'vmo', 'olympic', 'regional']);
+for (const destination of ['vmo', 'olympic']) {
+  window.document.getElementById('docDestination').value = destination;
+  window.syncDocumentDestination(true);
+  assert.equal(window.document.getElementById('docCompetitionWrap').style.display, 'block');
+  assert.equal(window.document.getElementById('docCompetition').required, true);
+  assert.equal(window.document.getElementById('docTargetAnchor').required, false);
+  assert.equal(window.document.getElementById('docProvince').value, destination === 'vmo' ? 'VMO' : 'IMO');
+}
 window.document.getElementById('docDestination').value = 'regional';
 window.syncDocumentDestination();
 assert.equal(window.document.getElementById('docRegionalTargetWrap').style.display, 'block');
@@ -135,6 +156,13 @@ assert.equal(window.document.getElementById('docRegionDisplay').value, 'Miền T
 
 await window.loadDatabaseTstExams(true);
 assert.deepEqual(detailRequests, ['tst-national:tst-quang-tri'], 'Lần mở tab chỉ tải chi tiết đề đầu tiên');
+await window.loadDatabaseCompetitionExams('tab-vmo');
+await window.loadDatabaseCompetitionExams('tab-olympic');
+for (const [category, tab, anchor] of [['vmo-official', 'vmo', 'vmo-vmo-2026-2027'], ['imo-olympic', 'olympic', 'olympic-imo-2026-2027']]) {
+  assert.ok(window.document.querySelector(`#tab-${tab} #${anchor} .problem-item`), `${category} tải câu hỏi từ MongoDB`);
+  assert.ok(window.document.querySelector(`#sidebar-${tab} a[href="#${anchor}"]`), `${category} có mục lục`);
+  assert.ok(detailRequests.includes(`${category}:${anchor}`));
+}
 const newCard = window.document.getElementById('tst-quang-tri');
 assert.ok(newCard, 'Đề của tỉnh mới phải tự tạo card frontend');
 assert.equal(newCard.dataset.filter, 'TRUNG');
@@ -323,9 +351,12 @@ window.editManagedExam('aaaaaaaaaaaaaaaaaaaaaaaa');
 const examEditor = window.document.getElementById('managedExamEditor');
 assert.ok(examEditor);
 examEditor.elements.title.value = 'Đề Đà Nẵng đã sửa';
+assert.equal(examEditor.elements.year.value, '2026-2027');
+examEditor.elements.year.value = '2024-2025';
 examEditor.dispatchEvent(new window.Event('submit', { bubbles: true, cancelable: true }));
 await new Promise(resolve => setTimeout(resolve, 30));
 assert.equal(updatedExam.title, 'Đề Đà Nẵng đã sửa');
+assert.equal(updatedExam.year, '2024-2025');
 assert.equal(updatedExam.id, 'aaaaaaaaaaaaaaaaaaaaaaaa');
 await window.deleteManagedExam('aaaaaaaaaaaaaaaaaaaaaaaa');
 assert.equal(deletedExam, 'aaaaaaaaaaaaaaaaaaaaaaaa');

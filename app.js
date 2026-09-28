@@ -200,6 +200,8 @@
     const isM = (tabId === 'tab-mock');
     const isT = (tabId === 'tab-tst');
     const isH = (tabId === 'tab-history');
+    const isV = (tabId === 'tab-vmo');
+    const isO = (tabId === 'tab-olympic');
 
     // Cập nhật hiển thị Sidebar
     const sbDanang = qs('#sidebar-danang');
@@ -207,10 +209,12 @@
     const sbTst = qs('#sidebar-tst');
     const sbHistory = qs('#sidebar-history');
 
-    if (sbDanang) sbDanang.style.display = (!isM && !isT && !isH) ? 'block' : 'none';
+    if (sbDanang) sbDanang.style.display = (!isM && !isT && !isH && !isV && !isO) ? 'block' : 'none';
     if (sbMock) sbMock.style.display = isM ? 'block' : 'none';
     if (sbTst) sbTst.style.display = isT ? 'block' : 'none';
     if (sbHistory) sbHistory.style.display = isH ? 'block' : 'none';
+    if (qs('#sidebar-vmo')) qs('#sidebar-vmo').style.display = isV ? 'block' : 'none';
+    if (qs('#sidebar-olympic')) qs('#sidebar-olympic').style.display = isO ? 'block' : 'none';
 
     // Cập nhật thanh lọc vùng miền / bộ đề
     const pillsMock = qs('#mockFilterPills');
@@ -220,6 +224,8 @@
     if (pillsMock) pillsMock.style.display = isM ? 'flex' : 'none';
     if (pillsTst) pillsTst.style.display = isT ? 'flex' : 'none';
     if (pillsHist) pillsHist.style.display = isH ? 'flex' : 'none';
+    if (qs('#vmoFilterPills')) qs('#vmoFilterPills').style.display = isV ? 'flex' : 'none';
+    if (qs('#olympicFilterPills')) qs('#olympicFilterPills').style.display = isO ? 'flex' : 'none';
 
     if (search) {
       search.value = '';
@@ -241,7 +247,7 @@
     window.applyCurrentLanguage?.();
 
     // Render công thức toán nếu tab vừa mở chưa được biên dịch
-    if (!isM && !isT && !isH) typeset(targetPane);
+    if (!isM && !isT && !isH && !isV && !isO) typeset(targetPane);
   };
 
   // 2. Hiện / Ẩn lời giải và barem điểm từng bài
@@ -351,7 +357,7 @@
     const val = norm(raw);
     const active = qs('.tab-pane.active');
     let n = 0;
-    if (active?.id === 'tab-mock' || active?.id === 'tab-tst' || active?.id === 'tab-history') {
+    if (['tab-mock', 'tab-tst', 'tab-history', 'tab-vmo', 'tab-olympic'].includes(active?.id)) {
       n = searchExamBank(active.id, val);
     } else {
       n = searchBook(val);
@@ -360,7 +366,7 @@
       searchSummary.textContent = `Tìm thấy ${n} mục phù hợp với “${raw}”.`;
       searchSummary.classList.add('visible');
     }
-    const category = { 'tab-tst': 'tst-national', 'tab-mock': 'vmo-mock', 'tab-history': 'history-dn-qn' }[active?.id];
+    const category = { 'tab-tst': 'tst-national', 'tab-mock': 'vmo-mock', 'tab-history': 'history-dn-qn', 'tab-vmo': 'vmo-official', 'tab-olympic': 'imo-olympic' }[active?.id];
     if (category && raw.length >= 2 && window.VMODataService?.searchExamCatalog) {
       catalogSearchTimer = setTimeout(async () => {
         try {
@@ -401,6 +407,8 @@
   setupPills('mockFilterPills', 'tab-mock');
   setupPills('tstFilterPills', 'tab-tst');
   setupPills('historyFilterPills', 'tab-history');
+  setupPills('vmoFilterPills', 'tab-vmo');
+  setupPills('olympicFilterPills', 'tab-olympic');
 
   // 6. Lời giải mẫu trong tài liệu chuyên đề
   qsa('.solution-toggle').forEach(btn => {

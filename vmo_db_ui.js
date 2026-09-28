@@ -7,6 +7,8 @@
   const CONTENT_SOURCE_CONFIG = Object.freeze({
     'tab-mock': { sourceGroup: 'mock_exam', sourceType: 'mock_exam_question', contentType: 'mock_exam' },
     'tab-tst': { sourceGroup: 'tst', sourceType: 'tst_question', contentType: 'tst_exam' },
+    'tab-vmo': { sourceGroup: 'vmo_official', sourceType: 'vmo_official_question', contentType: 'vmo_official_exam' },
+    'tab-olympic': { sourceGroup: 'imo_olympic', sourceType: 'imo_olympic_question', contentType: 'imo_olympic_exam' },
     'tab-history': { sourceGroup: 'danang_quangnam', sourceType: 'regional_question', contentType: 'regional_exam' }
   });
 
@@ -1975,9 +1977,9 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
     const days = tst ? 4 : 2;
     return `
       ${tst ? '' : `<div style="margin-bottom:12px;"><label for="examCreationMode" style="font-weight:700;">Phương thức tạo đề</label><select id="examCreationMode" onchange="syncExamCreationMode()" style="display:block;width:100%;padding:8px;margin-top:5px;"><option value="ocr">Ảnh đề do admin biên soạn (OCR)</option><option value="prediction">Dự đoán đề từ dữ liệu tham chiếu</option></select></div>`}
-      ${tst ? `<div style="margin-bottom:12px;"><label for="docDestination" style="font-weight:700;">Kho hiển thị tài liệu *</label><select id="docDestination" required onchange="syncDocumentDestination(true)" style="display:block;width:100%;padding:8px;margin-top:5px;"><option value="tst">🏛️ Đề TST 2026–2027</option><option value="regional">🗂️ Đề Đà Nẵng–Quảng Nam</option></select><small id="docDestinationHint" style="display:block;margin-top:5px;color:#64748b;">Đề sẽ được lưu và hiển thị trong kho TST.</small></div>` : ''}
+      ${tst ? `<div style="margin-bottom:12px;"><label for="docDestination" style="font-weight:700;">Kho hiển thị tài liệu *</label><select id="docDestination" required onchange="syncDocumentDestination(true)" style="display:block;width:100%;padding:8px;margin-top:5px;"><option value="tst">🏛️ Đề TST 2026–2027</option><option value="vmo">🇻🇳 Đề VMO</option><option value="olympic">🌐 Đề IMO–Olympic</option><option value="regional">🗂️ Đề Đà Nẵng–Quảng Nam</option></select><small id="docDestinationHint" style="display:block;margin-top:5px;color:#64748b;">Đề sẽ được lưu và hiển thị trong kho TST.</small></div>` : ''}
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px;">
-        <div>${tst ? `<div id="docTstTargetWrap"><label>Tỉnh/Thành phố hoặc trường chuyên *</label><select id="docTargetAnchor" required onchange="syncExamProvinceFromTarget('doc')" style="width:100%;padding:7px;"></select></div><div id="docRegionalTargetWrap" style="display:none;"><label>Đơn vị lưu trữ *</label><select id="docRegionalUnit" onchange="syncRegionalExamTarget()" style="width:100%;padding:7px;"><option value="dn">Đà Nẵng</option><option value="qn">Quảng Nam</option></select></div>` : `<label>Bộ đề thi thử số *</label><input id="examSetNumber" type="number" min="3" max="100" value="3" required style="width:100%;box-sizing:border-box;padding:7px;">`}</div>
+        <div>${tst ? `<div id="docTstTargetWrap"><label>Tỉnh/Thành phố hoặc trường chuyên *</label><select id="docTargetAnchor" required onchange="syncExamProvinceFromTarget('doc')" style="width:100%;padding:7px;"></select></div><div id="docRegionalTargetWrap" style="display:none;"><label>Đơn vị lưu trữ *</label><select id="docRegionalUnit" onchange="syncRegionalExamTarget()" style="width:100%;padding:7px;"><option value="dn">Đà Nẵng</option><option value="qn">Quảng Nam</option></select></div><div id="docCompetitionWrap" style="display:none;"><label for="docCompetition">Kỳ thi / đơn vị *</label><input id="docCompetition" maxlength="120" placeholder="VMO hoặc IMO" oninput="syncDocumentDestination()" style="width:100%;box-sizing:border-box;padding:7px;"></div>` : `<label>Bộ đề thi thử số *</label><input id="examSetNumber" type="number" min="3" max="100" value="3" required style="width:100%;box-sizing:border-box;padding:7px;">`}</div>
         <div><label>Ngày thi *</label><select id="${kind}DayNumber" required style="width:100%;padding:7px;">${['nhất','hai','ba','tư'].slice(0,days).map((label,index) => `<option value="${index+1}">Ngày thi thứ ${label}</option>`).join('')}</select></div>
       </div>
       <div style="display:grid;grid-template-columns:1fr .55fr 1fr;gap:10px;margin-bottom:10px;">
@@ -3555,22 +3557,28 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
   }
 
   window.syncDocumentDestination = function(resetPreview = false) {
-    const regional = document.getElementById('docDestination')?.value === 'regional';
+    const destination = document.getElementById('docDestination')?.value || 'tst';
+    const regional = destination === 'regional';
+    const competition = destination === 'vmo' || destination === 'olympic';
     const tstWrap = document.getElementById('docTstTargetWrap');
     const regionalWrap = document.getElementById('docRegionalTargetWrap');
+    const competitionWrap = document.getElementById('docCompetitionWrap');
+    const competitionInput = document.getElementById('docCompetition');
     const tstTarget = document.getElementById('docTargetAnchor');
     const regionalTarget = document.getElementById('docRegionalUnit');
     const hint = document.getElementById('docDestinationHint');
     const save = document.getElementById('docSaveButton');
-    if (tstWrap) tstWrap.style.display = regional ? 'none' : 'block';
+    if (tstWrap) tstWrap.style.display = destination === 'tst' ? 'block' : 'none';
     if (regionalWrap) regionalWrap.style.display = regional ? 'block' : 'none';
-    if (tstTarget) tstTarget.required = !regional;
+    if (competitionWrap) competitionWrap.style.display = competition ? 'block' : 'none';
+    if (competitionInput) { competitionInput.required = competition; if (resetPreview) competitionInput.value = destination === 'vmo' ? 'VMO' : destination === 'olympic' ? 'IMO' : ''; }
+    if (tstTarget) tstTarget.required = destination === 'tst';
     if (regionalTarget) regionalTarget.required = regional;
-    if (hint) hint.textContent = regional
-      ? 'Đề sẽ được lưu và hiển thị trong kho Đề Đà Nẵng–Quảng Nam.'
-      : 'Đề sẽ được lưu và hiển thị trong kho TST.';
-    if (save) save.textContent = `Lưu ${regional ? 'đề Đà Nẵng–Quảng Nam' : 'đề TST'} & câu hỏi vào MongoDB`;
+    const label = { tst: 'TST', regional: 'Đà Nẵng–Quảng Nam', vmo: 'VMO', olympic: 'IMO–Olympic' }[destination];
+    if (hint) hint.textContent = `Đề sẽ được lưu và hiển thị trong kho ${label}.`;
+    if (save) save.textContent = `Lưu đề ${label} & câu hỏi vào MongoDB`;
     if (regional) window.syncRegionalExamTarget();
+    else if (competition) { const province = document.getElementById('docProvince'); if (province) province.value = competitionInput?.value.trim() || ''; }
     else window.syncExamProvinceFromTarget('doc');
     if (resetPreview) window.resetExamOcrPreview('doc');
   };
@@ -3924,15 +3932,17 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
     const el = document.getElementById('hubDocsList');
     if (!el) return;
     try {
-      const [docs, tstExams, regionalExams] = await Promise.all([
+      const [docs, tstExams, regionalExams, vmoExams, olympicExams] = await Promise.all([
         window.VMODataService.getDocuments(), window.VMODataService.getExamCatalogSummary('tst-national'),
-        window.VMODataService.getExamCatalogSummary('history-dn-qn')
+        window.VMODataService.getExamCatalogSummary('history-dn-qn'),
+        window.VMODataService.getExamCatalogSummary('vmo-official'),
+        window.VMODataService.getExamCatalogSummary('imo-olympic')
       ]);
-      if (!docs.length && !tstExams.length && !regionalExams.length) {
+      if (!docs.length && !tstExams.length && !regionalExams.length && !vmoExams.length && !olympicExams.length) {
         el.innerHTML = '<div style="padding:14px;text-align:center;color:#94a3b8;">Chưa có tài liệu hoặc đề lưu trữ nào trong database.</div>';
         return;
       }
-      const catalogExams = [...tstExams.map(exam => ({ ...exam, catalogLabel: 'TST' })), ...regionalExams.map(exam => ({ ...exam, catalogLabel: 'Đà Nẵng–Quảng Nam' }))];
+      const catalogExams = [...tstExams.map(exam => ({ ...exam, catalogLabel: 'TST' })), ...regionalExams.map(exam => ({ ...exam, catalogLabel: 'Đà Nẵng–Quảng Nam' })), ...vmoExams.map(exam => ({ ...exam, catalogLabel: 'VMO' })), ...olympicExams.map(exam => ({ ...exam, catalogLabel: 'IMO–Olympic' }))];
       catalogExams.forEach(exam => managedExams.set(exam.id || exam._id, exam));
       el.innerHTML = catalogExams.map(exam => `<div class="hub-managed-exam" style="padding:10px 14px;margin-bottom:8px;background:#eff6ff;border-radius:8px;"><strong>${escapeHtmlText(exam.title || exam.province)}</strong><div style="font-size:.8rem;color:#475569;">${escapeHtmlText(exam.province || '')} · Ngày ${Number(exam.dayNumber) || 1} · ${Number(exam.problemCount) || exam.problems?.length || 0} câu · ${exam.catalogLabel}</div>${examActions(exam)}</div>`).join('') + docs.map(d => `
         <div style="background:#f8fafc; border:1px solid #e2e8f0; border-radius:8px; padding:10px 14px; margin-bottom:8px; display:flex; justify-content:space-between; align-items:center;">
@@ -3988,7 +3998,7 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
       filter.id = filterId;
       filter.style.cssText = 'display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin:10px 0;';
       filter.innerHTML = `<label>Tìm đề <input type="search" class="exam-query" placeholder="Tên, tỉnh/trường, năm, bộ số..." aria-label="Tìm đề thi" style="padding:7px;min-width:230px;"></label>
-        ${kind === 'docs' ? '<label>Kho <select class="exam-category"><option value="">Tất cả</option><option value="tst-national">TST</option><option value="history-dn-qn">Đà Nẵng–Quảng Nam</option></select></label>' : ''}
+        ${kind === 'docs' ? '<label>Kho <select class="exam-category"><option value="">Tất cả</option><option value="tst-national">TST</option><option value="history-dn-qn">Đà Nẵng–Quảng Nam</option><option value="vmo-official">VMO</option><option value="imo-olympic">IMO–Olympic</option></select></label>' : ''}
         <label>Ngày <select class="exam-day"><option value="">Tất cả</option>${[1, 2, 3, 4].map(day => `<option value="${day}">${day}</option>`).join('')}</select></label>
         <small class="exam-count" role="status"></small>`;
       list.before(filter);
@@ -4112,11 +4122,13 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
     form.style.cssText = 'padding:14px;margin:12px 0;background:#fff;border:1px solid #94a3b8;border-radius:8px;';
     form.innerHTML = `<strong>Chỉnh sửa đề · ${escapeHtmlText(exam.province || '')} · Ngày ${Number(exam.dayNumber) || 1}</strong>
       <label style="display:block">Tên đề<input name="title" required maxlength="500" style="width:100%"></label>
+      <label style="display:block">Năm học<input name="year" required maxlength="9" pattern="[0-9]{4}-[0-9]{4}" placeholder="2024-2025" style="width:100%"></label>
       <label style="display:block">Ngày thi<input name="examDate" type="date" style="width:100%"></label>
       <label style="display:block">Thời lượng (phút)<input name="duration" type="number" min="1" max="600" required style="width:100%"></label>
       <label style="display:block">Mô tả<textarea name="description" maxlength="5000" style="width:100%"></textarea></label>
       <button type="submit">Lưu thay đổi</button> <button type="button" onclick="this.closest('form').remove()">Hủy</button>`;
     form.elements.title.value = exam.title || '';
+    form.elements.year.value = exam.year || '';
     form.elements.examDate.value = /^\d{4}-\d{2}-\d{2}/.test(exam.examDate || '') ? exam.examDate.slice(0, 10) : '';
     form.elements.duration.value = Number(exam.duration) || 180;
     form.elements.description.value = exam.description || '';
@@ -4127,7 +4139,7 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
       button.disabled = true;
       try {
         await window.VMODataService.updateExam(id, {
-          title: form.elements.title.value, examDate: form.elements.examDate.value,
+          title: form.elements.title.value, year: form.elements.year.value.trim(), examDate: form.elements.examDate.value,
           duration: Number(form.elements.duration.value), description: form.elements.description.value
         });
         form.remove();
@@ -4156,6 +4168,7 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
       await loadHubDocs();
       if (exam.category === 'tst-national') await loadDatabaseTstExams(true);
       else if (exam.category === 'history-dn-qn') await loadDatabaseRegionalExams(true);
+      else if (competitionTabs[exam.category]) await loadDatabaseCompetitionExams(competitionTabs[exam.category], true);
     }
     window.refreshVMOCatalogStats?.();
   }
@@ -4196,7 +4209,7 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
     if (prediction && (!state.prediction || state.prediction.key !== predictionInputKey())) return showToast('Thông số dự đoán đã thay đổi. Hãy tạo bản dự đoán mới trước khi lưu.', false);
     if (prediction && !Array.isArray(state.prediction.quality?.questionChecks)) return showToast('Chưa có nhận xét GPT cho đề dự đoán.', false);
     if (prediction && (questions.length < 2 || questions.length > 6 || Math.abs(questions.reduce((total, question) => total + question.maxScore, 0) - 20) > 0.001)) return showToast('Đề dự đoán cần 2–6 câu và tổng điểm đúng 20.', false);
-    const destination = tst && field('Destination')?.value === 'regional' ? 'regional' : (tst ? 'tst' : 'mock');
+    const destination = tst ? (field('Destination')?.value || 'tst') : 'mock';
     const regional = destination === 'regional';
     const dayNumber = Number(field('DayNumber')?.value) || 1;
     const setNumber = Number(field('SetNumber')?.value) || 0;
@@ -4204,7 +4217,9 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
     const regionalUnit = field('RegionalUnit')?.value === 'qn' ? 'qn' : 'dn';
     const targetAnchor = regional
       ? `hist-${regionalUnit}-${stableKey(field('Year')?.value || '2026-2027')}`
-      : (tst ? field('TargetAnchor')?.value : `mock-set${setNumber}-day${dayNumber}`);
+      : (destination === 'vmo' || destination === 'olympic')
+        ? `${destination === 'vmo' ? 'vmo' : 'olympic'}-${stableKey(field('Province')?.value)}-${stableKey(field('Year')?.value || '2026-2027')}`
+        : (tst ? field('TargetAnchor')?.value : `mock-set${setNumber}-day${dayNumber}`);
     if (!targetAnchor) return showToast('Vui lòng chọn tỉnh/thành phố.', false);
     const saveButton = field('SaveButton');
     const originalLabel = saveButton?.textContent || 'Lưu vào MongoDB';
@@ -4213,7 +4228,7 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
       province: field('Province')?.value.trim(), year: field('Year')?.value.trim(),
       duration: Number(field('Duration')?.value) || 180, examDate: field('Date')?.value || '',
       dayNumber, setNumber, targetAnchor, region: field('Region')?.value || 'BAC',
-      provinceOrder: regional ? (regionalUnit === 'dn' ? 1 : 2) : (tst ? Number(field('TargetAnchor')?.selectedOptions?.[0]?.dataset.order) || 0 : setNumber),
+      provinceOrder: regional ? (regionalUnit === 'dn' ? 1 : 2) : (destination === 'tst' ? Number(field('TargetAnchor')?.selectedOptions?.[0]?.dataset.order) || 0 : setNumber),
       sourceImageCount: sourceImages.length, ocrConfidence: state.confidence,
       status: 'published', questions: prediction ? questions.map(question => {
         const original = state.prediction.verifiedQuestions.find(item => item.questionNumber === question.questionNumber);
@@ -4262,7 +4277,7 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
         if (saveButton) saveButton.textContent = `Đang lưu ảnh ${index + 1}/${sourceImages.length}...`;
         await window.VMODataService.saveExamImage(saved.id || saved._id, index + 1, sourceImages[index]);
       }
-      const savedType = regional ? 'đề Đà Nẵng–Quảng Nam' : (tst ? 'đề TST' : 'đề thi thử');
+      const savedType = { tst: 'đề TST', regional: 'đề Đà Nẵng–Quảng Nam', vmo: 'đề VMO', olympic: 'đề IMO–Olympic', mock: 'đề thi thử' }[destination];
       showToast(`Đã lưu ${savedType} và ${saved?.problemCount || questions.length} câu hỏi vào MongoDB!`, true);
       e.target.reset();
       window.resetExamOcrPreview(kind);
@@ -4270,6 +4285,7 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
       if (tst) {
         window.toggleAddDocForm();
         if (regional) await loadDatabaseRegionalExams(true);
+        else if (destination === 'vmo' || destination === 'olympic') await loadDatabaseCompetitionExams(destination === 'vmo' ? 'tab-vmo' : 'tab-olympic', true);
         else await loadDatabaseTstExams(true);
       }
       else { window.toggleAddExamForm(); await loadDatabaseMockExams(true); }
@@ -4319,6 +4335,33 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
     (document.querySelector('#tab-tst .feed-container') || document.getElementById('tab-tst'))?.appendChild(card);
     ensureDatabaseExamSidebar(exam);
     return card;
+  }
+
+  const competitionTabs = { 'vmo-official': 'tab-vmo', 'imo-olympic': 'tab-olympic' };
+  function createCompetitionCard(exam) {
+    const tabId = competitionTabs[exam.category];
+    const card = document.createElement('article');
+    card.className = 'exam-card db-exam-card';
+    card.id = exam.targetAnchor;
+    card.dataset.databaseCard = 'true';
+    card.dataset.filter = 'ALL';
+    card.dataset.search = `${exam.province || ''} ${exam.year || ''} ${exam.title || ''}`;
+    card.innerHTML = `<div class="exam-header"><div class="exam-top-tags"><span class="tag tag-year">${escapeHtmlText(exam.year || '')}</span><span class="tag tag-province">${escapeHtmlText(exam.province || '')}</span><span class="tag tag-official">Đề từ database</span></div><h3 class="exam-title">${escapeHtmlText(exam.title || exam.province || 'Đề thi')}</h3></div><div class="exam-body"></div>`;
+    (document.querySelector(`#${tabId} .feed-container`) || document.getElementById(tabId))?.appendChild(card);
+    ensureCompetitionSidebar(exam);
+    return card;
+  }
+
+  function ensureCompetitionSidebar(exam) {
+    const tabId = competitionTabs[exam.category];
+    const sidebar = document.querySelector(`#sidebar-${tabId?.slice(4)} .nav-year-group`);
+    if (!sidebar || !exam.targetAnchor) return;
+    let link = Array.from(sidebar.querySelectorAll('a.nav-link')).find(item => item.getAttribute('href') === `#${exam.targetAnchor}`);
+    if (!link) { link = document.createElement('a'); link.className = 'nav-link db-exam-sidebar-link'; link.href = `#${exam.targetAnchor}`; sidebar.appendChild(link); }
+    link.dataset.name = `${exam.province || 'Đề thi'} ${exam.year || ''}`.trim();
+    const links = Array.from(sidebar.querySelectorAll('a.nav-link'));
+    links.sort((a, b) => a.dataset.name.localeCompare(b.dataset.name, 'vi', { numeric: true, sensitivity: 'base' }));
+    links.forEach((item, index) => { item.textContent = `${String(index + 1).padStart(2, '0')}. ${item.dataset.name}`; sidebar.appendChild(item); });
   }
 
   function createDatabaseRegionalCard(exam) {
@@ -4718,6 +4761,7 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
     if (!exam?.targetAnchor || !Array.isArray(exam.problems) || !exam.problems.length) return;
     if (kind === 'tst') ensureDatabaseExamSidebar(exam);
     if (kind === 'regional') ensureDatabaseRegionalNavigation(exam);
+    if (kind === 'competition') ensureCompetitionSidebar(exam);
     let card = document.getElementById(exam.targetAnchor);
 
 // MongoDB là nguồn chuẩn sau migration.
@@ -4728,11 +4772,9 @@ if (card && card.dataset.databaseCard !== 'true') {
 }
 
 if (!card) {
-  card = kind === 'tst'
-    ? createDatabaseExamCard(exam)
-    : (kind === 'regional'
-        ? createDatabaseRegionalCard(exam)
-        : createDatabaseMockCard(exam));
+  card = kind === 'tst' ? createDatabaseExamCard(exam)
+    : kind === 'regional' ? createDatabaseRegionalCard(exam)
+    : kind === 'competition' ? createCompetitionCard(exam) : createDatabaseMockCard(exam);
 }
 
 if (card) card.dataset.databaseCard = 'true';
@@ -4766,9 +4808,10 @@ if (card) card.dataset.databaseCard = 'true';
       item.dataset.databaseProblem = 'true';
       item.dataset.setKey = problem.setKey || '';
       item.dataset.setTitle = problem.setTitle || exam.title || '';
-      item.dataset.sourceGroup = problem.sourceGroup || (kind === 'tst' ? 'tst' : (kind === 'regional' ? 'danang_quangnam' : 'mock_exam'));
-      item.dataset.sourceType = problem.sourceType || (kind === 'tst' ? 'tst_question' : (kind === 'regional' ? 'regional_question' : 'mock_exam_question'));
-      item.dataset.contentType = kind === 'tst' ? 'tst_exam' : (kind === 'regional' ? 'regional_exam' : 'mock_exam');
+      const sourceConfig = CONTENT_SOURCE_CONFIG[competitionTabs[exam.category]];
+      item.dataset.sourceGroup = problem.sourceGroup || sourceConfig?.sourceGroup || (kind === 'tst' ? 'tst' : (kind === 'regional' ? 'danang_quangnam' : 'mock_exam'));
+      item.dataset.sourceType = problem.sourceType || sourceConfig?.sourceType || (kind === 'tst' ? 'tst_question' : (kind === 'regional' ? 'regional_question' : 'mock_exam_question'));
+      item.dataset.contentType = sourceConfig?.contentType || (kind === 'tst' ? 'tst_exam' : (kind === 'regional' ? 'regional_exam' : 'mock_exam'));
       item.dataset.questionNumber = String(Number(problem.questionNumber) || 0);
       item.dataset.legacyProblemId = Array.isArray(problem.legacyIds) ? (problem.legacyIds[0] || '') : '';
       const rawLabel = String(problem.shortLabel || problem.title || `Câu ${problem.questionNumber}`);
@@ -4871,13 +4914,13 @@ if (card) card.dataset.databaseCard = 'true';
 
   let databaseMockLoaded = false;
   let databaseMockPromise = null;
-  const examCategories = { 'tab-tst': 'tst-national', 'tab-mock': 'vmo-mock', 'tab-history': 'history-dn-qn' };
+  const examCategories = { 'tab-tst': 'tst-national', 'tab-mock': 'vmo-mock', 'tab-history': 'history-dn-qn', 'tab-vmo': 'vmo-official', 'tab-olympic': 'imo-olympic' };
   const loadedDetails = new Set();
   const detailPromises = new Map();
   const detailKey = (category, anchor) => `${category}:${anchor}`;
 
   function consolidateExamDays(exams, category) {
-    if (category !== 'tst-national') return exams;
+    if (category !== 'tst-national' && !competitionTabs[category]) return exams;
     const days = new Map();
     exams.forEach(exam => {
       const day = Number(exam.dayNumber) || 1;
@@ -4904,7 +4947,7 @@ if (card) card.dataset.databaseCard = 'true';
         const exams = await window.VMODataService.getExamCatalogDetail(category, anchor);
         if (!Array.isArray(exams) || !exams.length) throw new Error('Không tìm thấy đề thi');
         consolidateExamDays(exams, category).forEach(exam => {
-          renderDatabaseExam(exam, category === 'tst-national' ? 'tst' : category === 'vmo-mock' ? 'mock' : 'regional');
+          renderDatabaseExam(exam, competitionTabs[category] ? 'competition' : category === 'tst-national' ? 'tst' : category === 'vmo-mock' ? 'mock' : 'regional');
           if (category === 'vmo-mock') ensureDatabaseMockNavigation(exam);
         });
         if (!(window.mongoProblemReferenceLinks instanceof Map)) window.mongoProblemReferenceLinks = new Map();
@@ -4945,15 +4988,17 @@ if (card) card.dataset.databaseCard = 'true';
   }
 
   async function renderExamSummaries(exams, category) {
-    const kind = category === 'tst-national' ? 'tst' : category === 'vmo-mock' ? 'mock' : 'regional';
+    const kind = competitionTabs[category] ? 'competition' : category === 'tst-national' ? 'tst' : category === 'vmo-mock' ? 'mock' : 'regional';
     exams.forEach(exam => {
       if (!exam.targetAnchor || (!Number(exam.problemCount) && !exam.problems?.length)) return;
       let card = document.getElementById(exam.targetAnchor);
       if (!card) card = kind === 'tst' ? createDatabaseExamCard(exam)
-        : kind === 'regional' ? createDatabaseRegionalCard(exam) : createDatabaseMockCard(exam);
+        : kind === 'regional' ? createDatabaseRegionalCard(exam)
+        : kind === 'competition' ? createCompetitionCard(exam) : createDatabaseMockCard(exam);
       if (kind === 'tst') ensureDatabaseExamSidebar(exam);
       if (kind === 'regional') ensureDatabaseRegionalNavigation(exam);
       if (kind === 'mock') ensureDatabaseMockNavigation(exam);
+      if (kind === 'competition') ensureCompetitionSidebar(exam);
       if (Array.isArray(exam.problems)) {
         renderDatabaseExam(exam, kind);
         loadedDetails.add(detailKey(category, exam.targetAnchor));
@@ -4968,7 +5013,7 @@ if (card) card.dataset.databaseCard = 'true';
         observeExamCard(card, category);
       }
     });
-    const root = document.getElementById(kind === 'tst' ? 'tab-tst' : kind === 'mock' ? 'tab-mock' : 'tab-history');
+    const root = document.getElementById(kind === 'competition' ? competitionTabs[category] : kind === 'tst' ? 'tab-tst' : kind === 'mock' ? 'tab-mock' : 'tab-history');
     showDatabaseCatalogState(root, exams);
     const first = Array.from(root?.querySelectorAll('.exam-card') || [])
       .find(card => !card.classList.contains('hidden-by-search') && !loadedDetails.has(detailKey(category, card.id)));
@@ -4984,7 +5029,7 @@ if (card) card.dataset.databaseCard = 'true';
       catalogObserver?.unobserve(card);
       card.remove();
     });
-    const sidebarId = { 'tab-tst': 'sidebar-tst', 'tab-mock': 'sidebar-mock', 'tab-history': 'sidebar-history' }[tabId];
+    const sidebarId = { 'tab-tst': 'sidebar-tst', 'tab-mock': 'sidebar-mock', 'tab-history': 'sidebar-history', 'tab-vmo': 'sidebar-vmo', 'tab-olympic': 'sidebar-olympic' }[tabId];
     document.querySelectorAll(`#${sidebarId} a.nav-link`).forEach(link => link.remove());
     if (tabId === 'tab-mock') {
       document.querySelectorAll('#sidebar-mock .nav-year-group').forEach(group => group.remove());
@@ -4997,11 +5042,11 @@ if (card) card.dataset.databaseCard = 'true';
   let sidebarNavigationToken = 0;
   let stopSidebarAlignment = null;
   document.addEventListener('click', async event => {
-    const link = event.target.closest?.('#sidebar-tst a[href^="#"], #sidebar-mock a[href^="#"], #sidebar-history a[href^="#"]');
+    const link = event.target.closest?.('#sidebar-tst a[href^="#"], #sidebar-mock a[href^="#"], #sidebar-history a[href^="#"], #sidebar-vmo a[href^="#"], #sidebar-olympic a[href^="#"]');
     if (!link || !window.VMODataService?.getExamCatalogDetail || event.defaultPrevented ||
         event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
-    const tab = { 'sidebar-tst': 'tab-tst', 'sidebar-mock': 'tab-mock', 'sidebar-history': 'tab-history' }
-      [link.closest('#sidebar-tst, #sidebar-mock, #sidebar-history')?.id];
+    const tab = { 'sidebar-tst': 'tab-tst', 'sidebar-mock': 'tab-mock', 'sidebar-history': 'tab-history', 'sidebar-vmo': 'tab-vmo', 'sidebar-olympic': 'tab-olympic' }
+      [link.closest('#sidebar-tst, #sidebar-mock, #sidebar-history, #sidebar-vmo, #sidebar-olympic')?.id];
     const category = examCategories[tab];
     const anchor = link.getAttribute('href')?.slice(1);
     if (!category || !anchor) return;
@@ -5132,6 +5177,38 @@ if (card) card.dataset.databaseCard = 'true';
 
   window.loadDatabaseTstExams = loadDatabaseTstExams;
 
+  const competitionLoads = new Map();
+  const competitionLoaded = new Set();
+  async function loadDatabaseCompetitionExams(tabId, force = false) {
+    const category = examCategories[tabId];
+    if (!competitionTabs[category] || !window.VMODataService?.getExamCatalogSummary) return;
+    if (competitionLoaded.has(tabId) && !force) return;
+    if (competitionLoads.has(tabId)) return competitionLoads.get(tabId);
+    if (force) { window.invalidateVMODataCache?.(); resetExamCategory(tabId); competitionLoaded.delete(tabId); }
+    const pending = (async () => {
+      try {
+        const exams = await window.VMODataService.getExamCatalogSummary(category);
+        await renderExamSummaries(exams, category);
+        const root = document.getElementById(tabId);
+        const count = root?.querySelectorAll('.db-exam-card').length || 0;
+        const pill = document.querySelector(`#${tabId === 'tab-vmo' ? 'vmo' : 'olympic'}FilterPills .pill[data-filter="ALL"]`);
+        if (pill) pill.textContent = `Tất cả ${count} đề`;
+        showDatabaseCatalogState(root, exams);
+        injectSubmissionButtons(root || document);
+        window.reinitAIGuide?.(root || document);
+        await applyCatalogAccessRules(root || document);
+        applyMongoReferenceLinks(root || document);
+        competitionLoaded.add(tabId);
+      } catch (error) {
+        showDatabaseCatalogState(document.getElementById(tabId), [], error);
+        console.warn('Không tải được đề VMO/IMO từ MongoDB:', error?.message || error);
+      } finally { competitionLoads.delete(tabId); }
+    })();
+    competitionLoads.set(tabId, pending);
+    return pending;
+  }
+  window.loadDatabaseCompetitionExams = loadDatabaseCompetitionExams;
+
   let databaseRegionalLoaded = false;
   let databaseRegionalPromise = null;
 
@@ -5243,6 +5320,7 @@ if (card) card.dataset.databaseCard = 'true';
     if (activeRoot.id === 'tab-tst') loadDatabaseTstExams();
     if (activeRoot.id === 'tab-mock') loadDatabaseMockExams();
     if (activeRoot.id === 'tab-history') loadDatabaseRegionalExams();
+    if (activeRoot.id === 'tab-vmo' || activeRoot.id === 'tab-olympic') loadDatabaseCompetitionExams(activeRoot.id);
   }
 
   if (document.readyState === 'loading') {
@@ -5266,6 +5344,7 @@ if (card) card.dataset.databaseCard = 'true';
     if (root.id === 'tab-tst') loadDatabaseTstExams();
     if (root.id === 'tab-mock') loadDatabaseMockExams();
     if (root.id === 'tab-history') loadDatabaseRegionalExams();
+    if (root.id === 'tab-vmo' || root.id === 'tab-olympic') loadDatabaseCompetitionExams(root.id);
   };
 
 })();

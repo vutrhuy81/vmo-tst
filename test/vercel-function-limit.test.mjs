@@ -39,8 +39,8 @@ assert.match(aiSource, /finishReason === 'RECITATION' \? 'AI_RECITATION'/,
   'Gemini RECITATION phải được phân loại riêng, không giả dạng lỗi JSON');
 assert.match(openAiSource, /type: 'input_image',[\s\S]*image_url:/,
   'OpenAI fallback phải nhận ảnh gốc thay vì chỉ nhận prompt văn bản');
-assert.match(examOcrSource, /\['tst', 'regional'\]\.includes\(body\?\.destination\)/,
-  'TST và Đà Nẵng–Quảng Nam phải cùng hỗ trợ tối đa bốn ngày thi');
+assert.match(examOcrSource, /\['tst', 'regional', 'vmo', 'olympic'\]\.includes\(body\?\.destination\)/,
+  'TST, VMO, IMO–Olympic và Đà Nẵng–Quảng Nam phải cùng hỗ trợ tối đa bốn ngày thi');
 assert.match(databaseUiSource, /document\.getElementById\('docDestination'\)\?\.value \|\| 'tst'/,
   'Frontend phải gửi đúng kho đích khi OCR đề Đà Nẵng–Quảng Nam');
 console.log(`Vercel function limit: OK (${count}/12)`);
