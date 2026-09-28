@@ -227,114 +227,6 @@
     });
   }
 
-  function rawContent(element) {
-    if (!element) return '';
-    return (element._catalogSourceHtml ?? element.getAttribute('data-raw-math') ?? element.innerHTML ?? element.textContent ?? '').trim();
-  }
-
-  function captureExampleCatalogSource(root = document) {
-    root.querySelectorAll?.('#tab-danang .examplebox > p, #tab-danang .examplebox .example-solution').forEach(element => {
-      if (element._catalogSourceHtml === undefined) {
-        element._catalogSourceHtml = element.innerHTML;
-      }
-    });
-  }
-
-  window.buildContentCatalog = function() {
-    captureExampleCatalogSource();
-    const setsByKey = new Map();
-    const problems = [];
-
-    document.querySelectorAll('.examplebox, .problem-item').forEach(card => {
-      const heading = card.classList.contains('examplebox')
-        ? card.querySelector('.box-heading')
-        : card.querySelector('.problem-id');
-      if (!heading) return;
-
-      const title = headingTextWithoutActions(heading);
-      const identity = getProblemIdentity(card, title);
-      if (!identity.problemKey || !identity.setKey) return;
-
-      const examCard = card.closest('.exam-card, .paper-card');
-      const chapter = card.closest('.chapter-block');
-      const tab = card.closest('.tab-pane');
-      const topic = (card.querySelector('.badge-topic')?.textContent || title).trim();
-      const pointText = card.querySelector('.badge-point')?.textContent || '';
-      const scoreMatch = pointText.replace(',', '.').match(/([0-9]+(?:\.[0-9]+)?)/);
-      const problemContent = card.classList.contains('examplebox')
-        ? Array.from(card.querySelectorAll(':scope > p')).map(rawContent).join('\n\n')
-        : rawContent(card.querySelector('.problem-content'));
-      const solution = rawContent(card.querySelector('.example-solution, .solution, .solution-content'));
-
-      if (!setsByKey.has(identity.setKey)) {
-        const year = (examCard?.querySelector('.tag-year')?.textContent || '2026-2027').trim();
-        const province = (examCard?.querySelector('.tag-province')?.textContent || '').trim();
-        setsByKey.set(identity.setKey, {
-          key: identity.setKey,
-          contentType: identity.contentType,
-          title: identity.setTitle,
-          group: identity.sourceGroup,
-          year,
-          province,
-          region: examCard?.dataset?.filter || '',
-          order: setsByKey.size + 1,
-          status: 'published'
-        });
-      }
-
-      problems.push({
-        contentKey: identity.problemKey,
-        setKey: identity.setKey,
-        setTitle: identity.setTitle,
-        sourceType: identity.sourceType,
-        sourceGroup: identity.sourceGroup,
-        title,
-        shortLabel: title.slice(0, 120),
-        chapterNumber: identity.chapterNumber,
-        questionNumber: identity.questionNumber,
-        day: (examCard?.querySelector('.tag-day')?.textContent || '').trim(),
-        order: identity.questionNumber,
-        maxScore: scoreMatch ? Number(scoreMatch[1]) : 5,
-        topic,
-        content: problemContent,
-        referenceSolution: solution,
-        frontendAnchor: identity.frontendAnchor || tab?.id || chapter?.id || '',
-        legacyIds: [identity.legacyProblemId].filter(Boolean),
-        allowSubmission: true,
-        allowAiEvaluation: true,
-        status: 'published',
-        version: 1
-      });
-    });
-
-    return { sets: Array.from(setsByKey.values()), problems };
-  };
-
-  window.syncContentCatalogToDatabase = async function() {
-    if (!requireAdminUiAction()) return;
-    const button = document.getElementById('btnSyncContentCatalog');
-    const originalText = button?.innerHTML;
-    if (button) {
-      button.disabled = true;
-      button.innerHTML = '⏳ Đang đồng bộ...';
-    }
-    try {
-      if (!window.VMODataService?.upsertContentCatalog) {
-        throw new Error('Dịch vụ đồng bộ catalog chưa sẵn sàng');
-      }
-      const catalog = window.buildContentCatalog();
-      const result = await window.VMODataService.upsertContentCatalog(catalog);
-      showToast(`Đã đồng bộ ${result?.setCount || 0} nhóm và ${result?.problemCount || 0} câu hỏi/ví dụ.`, true);
-    } catch (err) {
-      showToast('Không thể đồng bộ nội dung: ' + (err?.message || 'Lỗi không xác định'), false);
-    } finally {
-      if (button) {
-        button.disabled = false;
-        button.innerHTML = originalText || '🔄 Đồng bộ ngân hàng câu hỏi';
-      }
-    }
-  };
-
   window.migrateTstReferenceLinksToDatabase = async function() {
     if (!requireAdminUiAction()) return;
     if (!window.VMODataService?.migrateTstReferenceLinks) return showToast('Dịch vụ migration chưa sẵn sàng.', false);
@@ -2056,29 +1948,12 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
     }
 
     if (!isAdmin) {
-      modal.querySelector('#btnSyncContentCatalog')?.remove();
       modal.querySelector('#btnMigrateTstSources')?.remove();
       modal.querySelector('#hub-tab-catalog')?.remove();
       modal.querySelector('#hub-panel-catalog')?.remove();
       modal.querySelectorAll(
         '[onclick="toggleAddEventForm()"], [onclick="toggleAddDocForm()"], [onclick="toggleAddExamForm()"], #formAddEvent, #formAddDoc, #formAddExam'
       ).forEach(el => { el.style.display = 'none'; });
-    } else if (!modal.querySelector('#btnSyncContentCatalog')) {
-      // Modal có thể được khai báo sẵn trong src/modals/data-hub-modal.html
-      // hoặc được tạo động bên dưới. Không phải phiên bản nào cũng gắn class
-      // `hub-tabs`, vì vậy dùng nút tab đầu tiên để xác định chính xác hàng tab.
-      const firstTabButton = modal.querySelector('.hub-tab-btn, #hub-tab-events');
-      const tabs = modal.querySelector('.hub-tabs, [class*="hub-tabs"]')
-        || firstTabButton?.parentElement;
-      if (tabs) {
-        const syncButton = document.createElement('button');
-        syncButton.id = 'btnSyncContentCatalog';
-        syncButton.type = 'button';
-        syncButton.innerHTML = '🔄 Đồng bộ ngân hàng câu hỏi';
-        syncButton.style.cssText = 'margin-left:auto;padding:7px 12px;border:1px solid #a5b4fc;border-radius:7px;background:#eef2ff;color:#4338ca;font-weight:700;cursor:pointer;';
-        syncButton.onclick = window.syncContentCatalogToDatabase;
-        tabs.appendChild(syncButton);
-      }
     }
     ensureCatalogManagementUi(modal, isAdmin);
     ensureSubmissionFilterUi(modal, isAdmin);
@@ -2151,8 +2026,7 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
     button.id = 'hub-tab-catalog';
     button.textContent = '🧭 Danh mục nội dung';
     button.onclick = () => window.switchHubTab('catalog');
-    const syncButton = tabs.querySelector('#btnSyncContentCatalog');
-    tabs.insertBefore(button, syncButton || null);
+    tabs.appendChild(button);
 
     const panel = document.createElement('div');
     panel.id = 'hub-panel-catalog';
@@ -4051,14 +3925,16 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
     if (!el) return;
     try {
       const [docs, tstExams, regionalExams] = await Promise.all([
-        window.VMODataService.getDocuments(), window.VMODataService.getExamCatalog('tst-national'),
-        window.VMODataService.getExamCatalog('history-dn-qn')
+        window.VMODataService.getDocuments(), window.VMODataService.getExamCatalogSummary('tst-national'),
+        window.VMODataService.getExamCatalogSummary('history-dn-qn')
       ]);
       if (!docs.length && !tstExams.length && !regionalExams.length) {
         el.innerHTML = '<div style="padding:14px;text-align:center;color:#94a3b8;">Chưa có tài liệu hoặc đề lưu trữ nào trong database.</div>';
         return;
       }
-      el.innerHTML = [...tstExams.map(exam => ({ ...exam, catalogLabel: 'TST' })), ...regionalExams.map(exam => ({ ...exam, catalogLabel: 'Đà Nẵng–Quảng Nam' }))].map(exam => `<div style="padding:10px 14px;margin-bottom:8px;background:#eff6ff;border-radius:8px;"><strong>${escapeHtmlText(exam.title || exam.province)}</strong><div style="font-size:.8rem;color:#475569;">${escapeHtmlText(exam.province || '')} · Ngày ${Number(exam.dayNumber) || 1} · ${exam.problems?.length || 0} câu · ${exam.catalogLabel}</div></div>`).join('') + docs.map(d => `
+      const catalogExams = [...tstExams.map(exam => ({ ...exam, catalogLabel: 'TST' })), ...regionalExams.map(exam => ({ ...exam, catalogLabel: 'Đà Nẵng–Quảng Nam' }))];
+      catalogExams.forEach(exam => managedExams.set(exam.id || exam._id, exam));
+      el.innerHTML = catalogExams.map(exam => `<div class="hub-managed-exam" style="padding:10px 14px;margin-bottom:8px;background:#eff6ff;border-radius:8px;"><strong>${escapeHtmlText(exam.title || exam.province)}</strong><div style="font-size:.8rem;color:#475569;">${escapeHtmlText(exam.province || '')} · Ngày ${Number(exam.dayNumber) || 1} · ${Number(exam.problemCount) || exam.problems?.length || 0} câu · ${exam.catalogLabel}</div>${examActions(exam)}</div>`).join('') + docs.map(d => `
         <div style="background:#f8fafc; border:1px solid #e2e8f0; border-radius:8px; padding:10px 14px; margin-bottom:8px; display:flex; justify-content:space-between; align-items:center;">
           <div>
             <strong style="color:#0f172a; font-size:0.95rem;">${d.title}</strong>
@@ -4070,6 +3946,7 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
           ${isCurrentUserAdmin() ? `<button type="button" onclick="deleteDocItem('${d.id}')" style="background:#fee2e2; border:none; color:#dc2626; padding:6px 10px; border-radius:6px; cursor:pointer; font-size:0.8rem;">🗑️ Xóa</button>` : ''}
         </div>
       `).join('');
+      attachExamSearch('docs', catalogExams);
     } catch (err) {
       el.innerHTML = '<div style="color:#dc2626; padding:10px;">Lỗi tải tài liệu: ' + err.message + '</div>';
     }
@@ -4080,21 +3957,207 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
     if (!el) return;
     try {
       const exams = await window.VMODataService.getExams('vmo-mock');
+      exams.forEach(exam => managedExams.set(exam.id || exam._id, exam));
       if (!exams || exams.length === 0) {
         el.innerHTML = '<div style="padding:14px; text-align:center; color:#94a3b8; font-style:italic;">Chưa có đề thi nào trong database. Nhấn "➕ Thêm đề thi mới" để bắt đầu!</div>';
         return;
       }
       el.innerHTML = exams.map(x => `
-        <div style="background:#f8fafc; border:1px solid #e2e8f0; border-radius:8px; padding:10px 14px; margin-bottom:8px;">
+        <div class="hub-managed-exam" style="background:#f8fafc; border:1px solid #e2e8f0; border-radius:8px; padding:10px 14px; margin-bottom:8px;">
           <strong style="color:#0f172a; font-size:0.95rem;">${escapeHtmlText(x.title)}</strong>
           <div style="font-size:0.8rem; color:#64748b; margin-top:2px;">
             ${x.origin === 'prediction' ? '🔮 Đề dự đoán AI · ' : ''}Bộ ${Number(x.setNumber) || ''} · Ngày ${Number(x.dayNumber) || 1} | Năm: ${escapeHtmlText(x.year || '')} | Thời gian: ${Number(x.duration) || 180} phút
           </div>
+          ${examActions(x)}
         </div>
       `).join('');
+      attachExamSearch('exams', exams);
     } catch (err) {
       el.innerHTML = '<div style="color:#dc2626; padding:10px;">Lỗi tải đề thi: ' + err.message + '</div>';
     }
+  }
+
+  const managedExams = new Map();
+  function attachExamSearch(kind, exams) {
+    const list = document.getElementById(kind === 'docs' ? 'hubDocsList' : 'hubExamsList');
+    if (!list) return;
+    const filterId = kind === 'docs' ? 'hubDocsExamFilter' : 'hubMockExamFilter';
+    let filter = document.getElementById(filterId);
+    if (!filter) {
+      filter = document.createElement('div');
+      filter.id = filterId;
+      filter.style.cssText = 'display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin:10px 0;';
+      filter.innerHTML = `<label>Tìm đề <input type="search" class="exam-query" placeholder="Tên, tỉnh/trường, năm, bộ số..." aria-label="Tìm đề thi" style="padding:7px;min-width:230px;"></label>
+        ${kind === 'docs' ? '<label>Kho <select class="exam-category"><option value="">Tất cả</option><option value="tst-national">TST</option><option value="history-dn-qn">Đà Nẵng–Quảng Nam</option></select></label>' : ''}
+        <label>Ngày <select class="exam-day"><option value="">Tất cả</option>${[1, 2, 3, 4].map(day => `<option value="${day}">${day}</option>`).join('')}</select></label>
+        <small class="exam-count" role="status"></small>`;
+      list.before(filter);
+      filter.addEventListener('input', () => applyExamFilter(kind));
+      filter.addEventListener('change', () => applyExamFilter(kind));
+    }
+    const rows = Array.from(list.querySelectorAll('.hub-managed-exam'));
+    rows.forEach((row, index) => {
+      const exam = exams[index];
+      row.dataset.examCategory = exam.category || '';
+      row.dataset.examDay = String(Number(exam.dayNumber) || 1);
+      row.dataset.examSearch = `${exam.title || ''} ${exam.province || ''} ${exam.year || ''} bộ ${exam.setNumber || ''}`;
+    });
+    applyExamFilter(kind);
+  }
+
+  function applyExamFilter(kind) {
+    const filter = document.getElementById(kind === 'docs' ? 'hubDocsExamFilter' : 'hubMockExamFilter');
+    const list = document.getElementById(kind === 'docs' ? 'hubDocsList' : 'hubExamsList');
+    if (!filter || !list) return;
+    const normalize = value => String(value || '').normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/đ/gi, 'd').toLocaleLowerCase('vi');
+    const query = normalize(filter.querySelector('.exam-query').value.trim());
+    const category = filter.querySelector('.exam-category')?.value || '';
+    const day = filter.querySelector('.exam-day').value;
+    const rows = Array.from(list.querySelectorAll('.hub-managed-exam'));
+    let count = 0;
+    rows.forEach(row => {
+      const match = (!query || normalize(row.dataset.examSearch).includes(query)) &&
+        (!category || row.dataset.examCategory === category) && (!day || row.dataset.examDay === day);
+      row.style.display = match ? '' : 'none';
+      if (match) count++;
+    });
+    filter.querySelector('.exam-count').textContent = `${count}/${rows.length} đề`;
+  }
+  function examActions(exam) {
+    const id = exam.id || exam._id;
+    if (!isCurrentUserAdmin() || !/^[a-f\d]{24}$/i.test(String(id || ''))) return '';
+    return `<div style="margin-top:8px;display:flex;gap:8px;flex-wrap:wrap;"><button type="button" onclick="editManagedExam('${id}')">✏️ Chỉnh sửa đề</button><button type="button" onclick="manageExamQuestions('${id}')">📝 Quản lý câu hỏi</button><button type="button" onclick="deleteManagedExam('${id}')">🗑️ Xóa đề</button></div>`;
+  }
+
+  window.manageExamQuestions = async function(id) {
+    if (!requireAdminUiAction()) return;
+    const exam = managedExams.get(id);
+    if (!exam) return;
+    document.getElementById('managedQuestionsEditor')?.remove();
+    const panel = document.createElement('section');
+    panel.id = 'managedQuestionsEditor';
+    panel.style.cssText = 'padding:14px;margin:12px 0;background:#fff;border:1px solid #94a3b8;border-radius:8px;max-height:65vh;overflow:auto;';
+    panel.innerHTML = `<strong>📝 ${escapeHtmlText(exam.title || exam.province || 'Đề thi')} · Ngày ${Number(exam.dayNumber) || 1}</strong>
+      <button type="button" class="close-questions" style="float:right">Đóng</button>
+      <div class="managed-questions-list">Đang tải câu hỏi...</div>
+      <form class="add-exam-question" style="display:grid;gap:8px;margin-top:12px;">
+        <strong>➕ Thêm câu hỏi</strong>
+        <label>Số câu <input name="questionNumber" type="number" min="1" max="99" required></label>
+        <label>Tiêu đề <input name="title" maxlength="500" placeholder="Câu 9"></label>
+        <label>Chủ đề <input name="topic" maxlength="120" placeholder="Toán Olympic"></label>
+        <label>Điểm tối đa <input name="maxScore" type="number" min="0" max="20" step="0.1" value="0"></label>
+        <label>Nội dung HTML/LaTeX <textarea name="content" required rows="8" maxlength="50000" style="width:100%"></textarea></label>
+        <button type="submit">Lưu câu hỏi vào MongoDB</button>
+      </form>`;
+    panel.querySelector('.close-questions').onclick = () => panel.remove();
+    (exam.category === 'vmo-mock' ? document.getElementById('hubExamsList') : document.getElementById('hubDocsList'))?.before(panel);
+    async function reloadQuestions() {
+      const list = panel.querySelector('.managed-questions-list');
+      const problems = await window.VMODataService.getProblemsByExam(id);
+      if (!panel.isConnected) return;
+      list.replaceChildren();
+      if (!problems.length) list.textContent = 'Đề chưa có câu hỏi.';
+      problems.sort((a, b) => Number(a.questionNumber) - Number(b.questionNumber)).forEach(problem => {
+        const row = document.createElement('div');
+        row.style.cssText = 'padding:8px;border-bottom:1px solid #e2e8f0;display:flex;gap:10px;justify-content:space-between;';
+        const label = document.createElement('span');
+        label.textContent = `Câu ${Number(problem.questionNumber) || 0}: ${problem.title || problem.topic || ''}`;
+        const remove = document.createElement('button');
+        remove.type = 'button';
+        remove.textContent = '🗑️ Xóa câu';
+        remove.onclick = async () => {
+          if (!requireAdminUiAction() || !confirm(`Xóa câu ${problem.questionNumber} khỏi đề “${exam.title}”? Bài nộp vẫn được lưu.`)) return;
+          remove.disabled = true;
+          try {
+            await window.VMODataService.deleteExamQuestion(id, problem.id || problem._id);
+            await reloadQuestions();
+            await refreshManagedExams(exam);
+            showToast('Đã xóa câu hỏi khỏi đề.', true);
+          } catch (error) { showToast('Lỗi xóa câu hỏi: ' + error.message, false); remove.disabled = false; }
+        };
+        row.append(label, remove);
+        list.appendChild(row);
+      });
+    }
+    panel.querySelector('.add-exam-question').onsubmit = async event => {
+      event.preventDefault();
+      if (!requireAdminUiAction()) return;
+      const form = event.currentTarget;
+      const button = form.querySelector('[type="submit"]');
+      button.disabled = true;
+      try {
+        await window.VMODataService.addExamQuestion(id, {
+          questionNumber: Number(form.elements.questionNumber.value), title: form.elements.title.value,
+          topic: form.elements.topic.value, maxScore: Number(form.elements.maxScore.value),
+          content: form.elements.content.value
+        });
+        form.reset();
+        await reloadQuestions();
+        await refreshManagedExams(exam);
+        showToast('Đã thêm câu hỏi vào đề.', true);
+      } catch (error) { showToast('Lỗi thêm câu hỏi: ' + error.message, false); }
+      finally { button.disabled = false; }
+    };
+    try { await reloadQuestions(); }
+    catch (error) { panel.querySelector('.managed-questions-list').textContent = `Lỗi tải câu hỏi: ${error.message}`; }
+  };
+
+  window.editManagedExam = function(id) {
+    if (!requireAdminUiAction()) return;
+    const exam = managedExams.get(id);
+    if (!exam) return;
+    document.getElementById('managedExamEditor')?.remove();
+    const form = document.createElement('form');
+    form.id = 'managedExamEditor';
+    form.style.cssText = 'padding:14px;margin:12px 0;background:#fff;border:1px solid #94a3b8;border-radius:8px;';
+    form.innerHTML = `<strong>Chỉnh sửa đề · ${escapeHtmlText(exam.province || '')} · Ngày ${Number(exam.dayNumber) || 1}</strong>
+      <label style="display:block">Tên đề<input name="title" required maxlength="500" style="width:100%"></label>
+      <label style="display:block">Ngày thi<input name="examDate" type="date" style="width:100%"></label>
+      <label style="display:block">Thời lượng (phút)<input name="duration" type="number" min="1" max="600" required style="width:100%"></label>
+      <label style="display:block">Mô tả<textarea name="description" maxlength="5000" style="width:100%"></textarea></label>
+      <button type="submit">Lưu thay đổi</button> <button type="button" onclick="this.closest('form').remove()">Hủy</button>`;
+    form.elements.title.value = exam.title || '';
+    form.elements.examDate.value = /^\d{4}-\d{2}-\d{2}/.test(exam.examDate || '') ? exam.examDate.slice(0, 10) : '';
+    form.elements.duration.value = Number(exam.duration) || 180;
+    form.elements.description.value = exam.description || '';
+    form.onsubmit = async event => {
+      event.preventDefault();
+      if (!requireAdminUiAction()) return;
+      const button = form.querySelector('[type="submit"]');
+      button.disabled = true;
+      try {
+        await window.VMODataService.updateExam(id, {
+          title: form.elements.title.value, examDate: form.elements.examDate.value,
+          duration: Number(form.elements.duration.value), description: form.elements.description.value
+        });
+        form.remove();
+        showToast('Đã cập nhật đề thi.', true);
+        await refreshManagedExams(exam);
+      } catch (error) { showToast('Lỗi chỉnh sửa đề: ' + error.message, false); button.disabled = false; }
+    };
+    (exam.category === 'vmo-mock' ? document.getElementById('hubExamsList') : document.getElementById('hubDocsList'))?.before(form);
+  };
+
+  window.deleteManagedExam = async function(id) {
+    if (!requireAdminUiAction()) return;
+    const exam = managedExams.get(id);
+    if (!exam || !confirm(`Xóa đề “${exam.title}” (Ngày ${Number(exam.dayNumber) || 1}) khỏi catalog? Câu hỏi của đề sẽ bị ẩn; bài nộp vẫn được lưu.`)) return;
+    try {
+      await window.VMODataService.deleteExam(id);
+      managedExams.delete(id);
+      showToast('Đã xóa đề khỏi catalog.', true);
+      await refreshManagedExams(exam);
+    } catch (error) { showToast('Lỗi xóa đề: ' + error.message, false); }
+  };
+
+  async function refreshManagedExams(exam) {
+    if (exam.category === 'vmo-mock') { await loadHubExams(); await loadDatabaseMockExams(true); }
+    else {
+      await loadHubDocs();
+      if (exam.category === 'tst-national') await loadDatabaseTstExams(true);
+      else if (exam.category === 'history-dn-qn') await loadDatabaseRegionalExams(true);
+    }
+    window.refreshVMOCatalogStats?.();
   }
 
   // Handlers tạo mới
@@ -4813,6 +4876,23 @@ if (card) card.dataset.databaseCard = 'true';
   const detailPromises = new Map();
   const detailKey = (category, anchor) => `${category}:${anchor}`;
 
+  function consolidateExamDays(exams, category) {
+    if (category !== 'tst-national') return exams;
+    const days = new Map();
+    exams.forEach(exam => {
+      const day = Number(exam.dayNumber) || 1;
+      const current = days.get(day);
+      if (!current) { days.set(day, exam); return; }
+      const primary = (exam.problems?.length || 0) > (current.problems?.length || 0) ? exam : current;
+      const secondary = primary === exam ? current : exam;
+      const seenNumbers = new Set((primary.problems || []).map(problem => Number(problem.questionNumber)));
+      const extra = (secondary.problems || []).filter(problem => !seenNumbers.has(Number(problem.questionNumber)));
+      days.set(day, { ...primary, problems: [...(primary.problems || []), ...extra] });
+      console.warn(`Trùng đề ngày ${day} tại ${exam.targetAnchor}; chỉ hiển thị một ngày thi.`);
+    });
+    return [...days.values()].sort((a, b) => Number(a.dayNumber) - Number(b.dayNumber));
+  }
+
   window.loadDatabaseExamDetail = async function(category, anchor) {
     if (!Object.values(examCategories).includes(category) || !anchor) return;
     const key = detailKey(category, anchor);
@@ -4823,8 +4903,7 @@ if (card) card.dataset.databaseCard = 'true';
       try {
         const exams = await window.VMODataService.getExamCatalogDetail(category, anchor);
         if (!Array.isArray(exams) || !exams.length) throw new Error('Không tìm thấy đề thi');
-        exams.sort((a, b) => Number(a.dayNumber) - Number(b.dayNumber));
-        exams.forEach(exam => {
+        consolidateExamDays(exams, category).forEach(exam => {
           renderDatabaseExam(exam, category === 'tst-national' ? 'tst' : category === 'vmo-mock' ? 'mock' : 'regional');
           if (category === 'vmo-mock') ensureDatabaseMockNavigation(exam);
         });
@@ -4905,6 +4984,13 @@ if (card) card.dataset.databaseCard = 'true';
       catalogObserver?.unobserve(card);
       card.remove();
     });
+    const sidebarId = { 'tab-tst': 'sidebar-tst', 'tab-mock': 'sidebar-mock', 'tab-history': 'sidebar-history' }[tabId];
+    document.querySelectorAll(`#${sidebarId} a.nav-link`).forEach(link => link.remove());
+    if (tabId === 'tab-mock') {
+      document.querySelectorAll('#sidebar-mock .nav-year-group').forEach(group => group.remove());
+      document.querySelectorAll('#mockFilterPills .pill[data-filter^="MOCK"]').forEach(pill => pill.remove());
+      document.querySelector('#mockFilterPills .pill[data-filter="ALL"]')?.classList.add('active');
+    }
     for (const key of loadedDetails) if (key.startsWith(`${category}:`)) loadedDetails.delete(key);
   }
 
@@ -5106,7 +5192,6 @@ if (card) card.dataset.databaseCard = 'true';
   // Tự động kích hoạt khi DOM hoàn tất
   function init() {
     const activeRoot = document.querySelector('.tab-pane.active') || document;
-    captureExampleCatalogSource();
     setupModalEvents();
     injectSubmissionButtons(activeRoot);
     injectDataManagementButton();

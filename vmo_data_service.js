@@ -229,6 +229,22 @@ export async function addExam(examData) {
   return normalize(await mutate('add_exam', examData));
 }
 
+export async function updateExam(id, fields) {
+  return normalize(await mutate('update_exam', { id: normalizeId(id), ...fields }));
+}
+
+export async function deleteExam(id) {
+  return mutate('delete_exam', { id: normalizeId(id) });
+}
+
+export async function addExamQuestion(examId, question) {
+  return normalize(await mutate('add_exam_question', { examId: normalizeId(examId), ...question }));
+}
+
+export async function deleteExamQuestion(examId, problemId) {
+  return mutate('delete_exam_question', { examId: normalizeId(examId), problemId: normalizeId(problemId) });
+}
+
 export async function createExamFromOcr(examData) {
   return normalize(await mutate('create_exam_from_ocr', examData));
 }
@@ -293,13 +309,6 @@ export async function getCatalogProblems(filters = {}) {
 
 export async function getCatalogRules() {
   return normalizeList(await request('problems', { catalogRules: 1 }));
-}
-
-export async function upsertContentCatalog(catalog) {
-  return mutate('upsert_content_catalog', {
-    sets: Array.isArray(catalog?.sets) ? catalog.sets : [],
-    problems: Array.isArray(catalog?.problems) ? catalog.problems : []
-  });
 }
 
 export async function updateCatalogItem(itemType, id, changes = {}) {
@@ -521,6 +530,10 @@ const VMODataService = Object.freeze({
   deleteDocument,
   getExams,
   addExam,
+  updateExam,
+  deleteExam,
+  addExamQuestion,
+  deleteExamQuestion,
   createExamFromOcr,
   getExamCatalog,
   getExamCatalogSummary,
@@ -534,7 +547,6 @@ const VMODataService = Object.freeze({
   getContentBlocks,
   getCatalogProblems,
   getCatalogRules,
-  upsertContentCatalog,
   updateCatalogItem,
   getContentRevisions,
   updateCatalogContent,

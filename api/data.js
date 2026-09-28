@@ -5,8 +5,6 @@ import { deleteAiGuideRecord, learningScope, recordActivity, summarizeLearning }
 import { buildSubmissionContentUpdate, buildSubmissionVerificationUpdate } from '../lib/submission-verification.js';
 
 const ALLOWED_RESOURCES = new Set(['documents', 'exams', 'exam_catalog', 'home_stats', 'exam_image', 'content_sets', 'content_blocks', 'problems', 'content_revisions', 'submissions', 'submission_image', 'events', 'activity_feed', 'learning_overview', 'exam_trend_reports']);
-const CONTENT_TYPES = new Set(['specialty_chapter', 'mock_exam', 'tst_exam', 'regional_exam']);
-const SOURCE_TYPES = new Set(['specialty_example', 'mock_exam_question', 'tst_question', 'regional_question']);
 const TST_REGIONS = new Set(['BAC', 'TRUNG', 'NAM']);
 const EXAM_TREND_TOPICS = [
   'Dãy số và Giới hạn dãy số', 'Phương trình hàm', 'Số học và dãy số',
@@ -334,7 +332,8 @@ export default async function handler(req, res) {
         // Chỉ lấy khóa định danh và số ví dụ từ MongoDB để hiển thị thống kê.
         // Không tải problems/nội dung đề, nên request này vẫn nhẹ.
         const homeExamFilter = {
-          category: { $in: ['tst-national', 'history-dn-qn', 'vmo-mock'] }
+          category: { $in: ['tst-national', 'history-dn-qn', 'vmo-mock'] },
+          status: { $ne: 'deleted' }
         };
         const homeExampleFilter = {
           sourceType: 'specialty_example',
@@ -365,18 +364,18 @@ export default async function handler(req, res) {
       }
 
       if (resource === 'exam_catalog') {
-        const examFilter = { category: cleanText(req.query?.category, 80) || 'tst-national' };
+        const examFilter = { category: cleanText(req.query?.category, 80) || 'tst-national', status: { $ne: 'deleted' } };
         if (session.role !== 'admin') examFilter.status = 'published';
         const view = cleanText(req.query?.view, 20);
         if (view === 'summary') {
           const projection = {
             examKey: 1, targetAnchor: 1, category: 1, title: 1, province: 1,
             provinceOrder: 1, region: 1, year: 1, setNumber: 1, dayNumber: 1,
-            examDate: 1, duration: 1, status: 1, origin: 1, sourceImageCount: 1
+            examDate: 1, duration: 1, description: 1, status: 1, origin: 1, sourceImageCount: 1
           };
           const exams = await db.collection('exams').find(examFilter, { projection })
             .sort({ provinceOrder: 1, dayNumber: 1, createdAt: 1 }).limit(200).toArray();
-          const problemFilter = { examId: { $in: exams.map(exam => String(exam._id)) } };
+          const problemFilter = { examId: { $in: exams.map(exam => String(exam._id)) }, status: { $ne: 'deleted' } };
           if (session.role !== 'admin') problemFilter.status = 'published';
           const counts = exams.length ? await db.collection('problems').aggregate([
             { $match: problemFilter }, { $group: { _id: '$examId', count: { $sum: 1 } } }
@@ -392,7 +391,7 @@ export default async function handler(req, res) {
           const exams = await db.collection('exams').find({ ...examFilter, targetAnchor: anchor })
             .sort({ dayNumber: 1, createdAt: 1 }).limit(20).toArray();
           if (!exams.length) return res.status(404).json({ success: false, error: 'Không tìm thấy đề thi' });
-          const problemFilter = { examId: { $in: exams.map(exam => String(exam._id)) } };
+          const problemFilter = { examId: { $in: exams.map(exam => String(exam._id)) }, status: { $ne: 'deleted' } };
           if (session.role !== 'admin') problemFilter.status = 'published';
           const problems = await db.collection('problems').find(problemFilter)
             .sort({ orderNumber: 1, questionNumber: 1 }).limit(500).toArray();
@@ -414,6 +413,7 @@ export default async function handler(req, res) {
           const anchorById = new Map(exams.map(exam => [String(exam._id), exam.targetAnchor]));
           const regex = { $regex: accentInsensitiveRegex(query), $options: 'i' };
           const problemFilter = {
+            status: { $ne: 'deleted' },
             examId: { $in: [...anchorById.keys()] },
             $or: [{ content: regex }, { title: regex }, { shortLabel: regex }, { topic: regex }]
           };
@@ -426,7 +426,7 @@ export default async function handler(req, res) {
         }
         const exams = await db.collection('exams').find(examFilter).sort({ provinceOrder: 1, dayNumber: 1, createdAt: 1 }).limit(200).toArray();
         const examIds = exams.map(item => String(item._id));
-        const problemFilter = { examId: { $in: examIds } };
+        const problemFilter = { examId: { $in: examIds }, status: { $ne: 'deleted' } };
         if (session.role !== 'admin') problemFilter.status = 'published';
         const problems = examIds.length
           ? await db.collection('problems').find(problemFilter).sort({ orderNumber: 1, questionNumber: 1 }).limit(1000).toArray()
@@ -516,6 +516,9 @@ export default async function handler(req, res) {
       }
       if (resource === 'exams' && req.query?.category && req.query.category !== 'all') {
         filter.category = cleanText(req.query.category, 80);
+      }
+      if (resource === 'exams' || resource === 'problems') {
+        filter.status = session.role === 'admin' ? { $ne: 'deleted' } : 'published';
       }
       if (resource === 'documents' && req.query?.topic && req.query.topic !== 'all') {
         filter.topic = cleanText(req.query.topic, 120);
@@ -737,6 +740,101 @@ export default async function handler(req, res) {
 
     if (!requireAdmin(session, res)) return;
 
+    if (action === 'add_exam_question' || action === 'delete_exam_question') {
+      const examId = objectId(cleanText(payload.examId, 80));
+      if (!examId) return res.status(400).json({ success: false, error: 'ID đề thi không hợp lệ' });
+      const exam = await db.collection('exams').findOne({ _id: examId, status: { $ne: 'deleted' } });
+      if (!exam || !['tst-national', 'history-dn-qn', 'vmo-mock'].includes(exam.category) || !exam.targetAnchor) {
+        return res.status(404).json({ success: false, error: 'Không tìm thấy đề thi trong catalog' });
+      }
+      const examIdText = String(examId);
+      if (action === 'delete_exam_question') {
+        const problemId = objectId(cleanText(payload.problemId, 80));
+        if (!problemId) return res.status(400).json({ success: false, error: 'ID câu hỏi không hợp lệ' });
+        const problem = await db.collection('problems').findOne({
+          _id: problemId, examId: examIdText, status: { $ne: 'deleted' }
+        });
+        if (!problem) return res.status(404).json({ success: false, error: 'Câu hỏi không thuộc đề đã chọn' });
+        await db.collection('problems').updateOne({ _id: problemId, examId: examIdText },
+          { $set: { status: 'deleted', deletedBy: session.username, deletedAt: now, updatedAt: now } });
+        await recordActivity(db, session, 'exam.question_deleted', {
+          itemTitle: problem.title, problemKey: problem.contentKey, examId: examIdText
+        });
+        return res.status(200).json({ success: true, item: { id: String(problemId) } });
+      }
+      const questionNumber = Number(payload.questionNumber);
+      const content = cleanText(payload.content, 50000);
+      if (!Number.isInteger(questionNumber) || questionNumber < 1 || questionNumber > 99 || !content) {
+        return res.status(400).json({ success: false, error: 'Cần số câu từ 1–99 và nội dung câu hỏi' });
+      }
+      const active = await db.collection('problems').findOne({
+        examId: examIdText, questionNumber, status: { $ne: 'deleted' }
+      });
+      if (active) return res.status(409).json({ success: false, error: `Câu ${questionNumber} đã có trong đề này` });
+      const isMock = exam.category === 'vmo-mock';
+      const isRegional = exam.category === 'history-dn-qn';
+      const day = Number(exam.dayNumber) || 1;
+      const setKey = isMock ? `mock:${exam.targetAnchor}`
+        : `${isRegional ? 'danang_quangnam' : 'tst'}:${exam.targetAnchor}:day-${day}`;
+      const contentKey = `${setKey}:question-${questionNumber}`;
+      const existingKey = await db.collection('problems').findOne({ contentKey });
+      if (existingKey && (existingKey.examId !== examIdText || existingKey.status !== 'deleted')) {
+        return res.status(409).json({ success: false, error: 'Khóa câu hỏi đã tồn tại trong MongoDB' });
+      }
+      const group = isMock ? 'mock_exam' : isRegional ? 'danang_quangnam' : 'tst';
+      const savedSet = await db.collection('content_sets').findOneAndUpdate({ key: setKey },
+        { $setOnInsert: { key: setKey, contentType: isMock ? 'mock_exam' : isRegional ? 'regional_exam' : 'tst_exam',
+          title: exam.title, group, year: exam.year, province: exam.province, status: 'published', createdAt: now } },
+        { upsert: true, returnDocument: 'after' });
+      const title = cleanText(payload.title, 500) || `Câu ${questionNumber}`;
+      const saved = await db.collection('problems').findOneAndUpdate({ contentKey },
+        { $set: {
+          examId: examIdText, examKey: exam.examKey || '', setId: savedSet._id, setKey, setTitle: exam.title,
+          sourceGroup: group, sourceType: isMock ? 'mock_exam_question' : isRegional ? 'regional_question' : 'tst_question',
+          title, shortLabel: `Câu ${questionNumber}`, questionNumber, dayNumber: day, day: `Ngày ${day}`,
+          order: day * 100 + questionNumber, orderNumber: questionNumber,
+          topic: cleanText(payload.topic, 120) || 'Toán Olympic', maxScore: cleanNumber(payload.maxScore, 0, 0, 20),
+          content, contentFormat: 'html-latex', frontendAnchor: exam.targetAnchor,
+          status: exam.status === 'draft' ? 'draft' : 'published', allowSubmission: true, allowAiEvaluation: true,
+          updatedBy: session.username, updatedAt: now
+        }, $setOnInsert: { contentKey, version: 1, referenceLinks: [], createdAt: now } },
+        { upsert: true, returnDocument: 'after' });
+      await recordActivity(db, session, 'exam.question_added', {
+        itemTitle: title, problemKey: contentKey, examId: examIdText
+      });
+      return res.status(201).json({ success: true, item: saved });
+    }
+
+    if (action === 'update_exam' || action === 'delete_exam') {
+      const id = objectId(cleanText(payload.id, 80));
+      if (!id) return res.status(400).json({ success: false, error: 'ID đề thi không hợp lệ' });
+      const exam = await db.collection('exams').findOne({ _id: id, status: { $ne: 'deleted' } });
+      if (!exam) return res.status(404).json({ success: false, error: 'Không tìm thấy đề thi' });
+      if (action === 'update_exam') {
+        const title = cleanText(payload.title, 500);
+        const duration = Number(payload.duration);
+        const examDate = cleanText(payload.examDate, 20);
+        if (!title || !Number.isInteger(duration) || duration < 1 || duration > 600 ||
+            (examDate && !/^\d{4}-\d{2}-\d{2}$/.test(examDate))) {
+          return res.status(400).json({ success: false, error: 'Tên đề, ngày thi hoặc thời lượng không hợp lệ' });
+        }
+        const updated = await db.collection('exams').findOneAndUpdate({ _id: id },
+          { $set: { title, duration, examDate, description: cleanText(payload.description, 5000), updatedBy: session.username, updatedAt: now } },
+          { returnDocument: 'after' });
+        await db.collection('problems').updateMany({ examId: String(id) },
+          { $set: { setTitle: title, updatedBy: session.username, updatedAt: now } });
+        await recordActivity(db, session, 'exam.updated', { itemTitle: title, examId: String(id) });
+        return res.status(200).json({ success: true, item: updated });
+      }
+      // Giữ bản ghi và bài nộp để có thể đối soát, ẩn đề và câu hỏi khỏi catalog.
+      await db.collection('exams').updateOne({ _id: id },
+        { $set: { status: 'deleted', deletedBy: session.username, deletedAt: now, updatedAt: now } });
+      await db.collection('problems').updateMany({ examId: String(id) },
+        { $set: { status: 'deleted', updatedBy: session.username, updatedAt: now } });
+      await recordActivity(db, session, 'exam.deleted', { itemTitle: exam.title, examId: String(id) });
+      return res.status(200).json({ success: true, item: { id: String(id) } });
+    }
+
     if (action === 'update_ai_guide') {
       const id = objectId(payload.id);
       if (!id) return res.status(400).json({ success: false, error: 'ID lời giải AI không hợp lệ' });
@@ -792,135 +890,6 @@ export default async function handler(req, res) {
       const deleted = await deleteAiGuideRecord(db, session, id);
       if (!deleted) return res.status(404).json({ success: false, error: 'Không tìm thấy AI Hướng dẫn giải đã lưu' });
       return res.status(200).json({ success: true, deletedId: String(id) });
-    }
-
-    if (action === 'upsert_content_catalog') {
-      const sets = Array.isArray(payload.sets) ? payload.sets.slice(0, 200) : [];
-      const problems = Array.isArray(payload.problems) ? payload.problems.slice(0, 1000) : [];
-      if (!sets.length || !problems.length) {
-        return res.status(400).json({ success: false, error: 'Catalog phải có nhóm nội dung và câu hỏi' });
-      }
-      if (problems.some(item => /(?:<|&lt;)mjx-[a-z-]+\b|class=["'][^"']*\bMathJax\b/i.test(String(item?.content || '')))) {
-        return res.status(400).json({ success: false, error: 'Catalog chứa HTML do MathJax tạo ra; vui lòng tải lại trang trước khi đồng bộ' });
-      }
-
-      const setIds = new Map();
-      for (const raw of sets) {
-        const key = cleanKey(raw.key);
-        const contentType = cleanText(raw.contentType, 80);
-        if (!key || !CONTENT_TYPES.has(contentType)) continue;
-        const doc = {
-          key,
-          contentType,
-          title: cleanText(raw.title, 500),
-          group: cleanText(raw.group, 80),
-          year: cleanText(raw.year, 40),
-          province: cleanText(raw.province, 120),
-          region: cleanText(raw.region, 80),
-          order: cleanNumber(raw.order),
-          status: raw.status === 'draft' ? 'draft' : 'published',
-          updatedBy: session.username,
-          updatedAt: now
-        };
-        const result = await db.collection('content_sets').findOneAndUpdate(
-          { key },
-          { $set: doc, $setOnInsert: { createdAt: now } },
-          { upsert: true, returnDocument: 'after' }
-        );
-        if (result?._id) setIds.set(key, result._id);
-      }
-
-      let problemCount = 0;
-      for (const raw of problems) {
-        const contentKey = cleanKey(raw.contentKey);
-        const setKey = cleanKey(raw.setKey);
-        const sourceType = cleanText(raw.sourceType, 80);
-        const setId = setIds.get(setKey);
-        if (!contentKey || !setId || !SOURCE_TYPES.has(sourceType)) continue;
-        const doc = {
-          contentKey,
-          setId,
-          setKey,
-          setTitle: cleanText(raw.setTitle, 500),
-          sourceType,
-          sourceGroup: cleanText(raw.sourceGroup, 80),
-          title: cleanText(raw.title, 500),
-          shortLabel: cleanText(raw.shortLabel, 120),
-          chapterNumber: cleanNumber(raw.chapterNumber),
-          questionNumber: cleanNumber(raw.questionNumber),
-          day: cleanText(raw.day, 80),
-          order: cleanNumber(raw.order),
-          maxScore: cleanNumber(raw.maxScore, 5, 0, 20),
-          topic: cleanText(raw.topic, 120),
-          difficulty: cleanText(raw.difficulty, 40),
-          content: cleanText(raw.content, 50000),
-          referenceSolution: cleanText(raw.referenceSolution, 100000),
-          contentFormat: 'html-latex',
-          frontendAnchor: cleanText(raw.frontendAnchor, 180),
-          legacyIds: Array.isArray(raw.legacyIds) ? raw.legacyIds.map(v => cleanText(v, 180)).filter(Boolean).slice(0, 10) : [],
-          allowSubmission: raw.allowSubmission !== false,
-          allowAiEvaluation: raw.allowAiEvaluation !== false,
-          status: raw.status === 'draft' ? 'draft' : 'published',
-          version: Math.max(1, cleanNumber(raw.version, 1, 1, 100000)),
-          updatedBy: session.username,
-          updatedAt: now
-        };
-        if (Object.prototype.hasOwnProperty.call(raw, 'referenceLinks')) {
-          doc.referenceLinks = cleanReferenceLinks(raw.referenceLinks);
-        }
-        if (Object.prototype.hasOwnProperty.call(raw, 'referenceSolutionVerified')) {
-          doc.referenceSolutionVerified = raw.referenceSolutionVerified === true && Boolean(doc.referenceSolution);
-          doc.referenceSolutionVerifiedBy = doc.referenceSolutionVerified ? session.username : '';
-          doc.referenceSolutionVerifiedAt = doc.referenceSolutionVerified ? now : null;
-        }
-        const savedProblem = await db.collection('problems').findOneAndUpdate(
-          { contentKey },
-          { $set: doc, $setOnInsert: { createdAt: now } },
-          { upsert: true, returnDocument: 'after' }
-        );
-        if (savedProblem?._id) {
-          const submissionLinks = [
-            { problemKey: contentKey },
-            { problemId: String(savedProblem._id) }
-          ];
-          if (doc.legacyIds.length) {
-            submissionLinks.push(
-              { problemId: { $in: doc.legacyIds } },
-              { legacyProblemId: { $in: doc.legacyIds } }
-            );
-          }
-          await db.collection('submissions').updateMany(
-            {
-              $or: submissionLinks
-            },
-            {
-              $set: {
-                problemId: String(savedProblem._id),
-                problemKey: contentKey,
-                setId: String(setId),
-                sourceType: doc.sourceType,
-                sourceGroup: doc.sourceGroup,
-                problemTitle: doc.title,
-                problemSnapshot: problemSnapshot(savedProblem),
-                updatedAt: now
-              }
-            }
-          );
-        }
-        problemCount += 1;
-      }
-
-      await Promise.all([
-        db.collection('content_sets').createIndex({ key: 1 }, { unique: true }),
-        db.collection('problems').createIndex({ contentKey: 1 }, { unique: true }),
-        db.collection('problems').createIndex({ setId: 1, order: 1 }),
-        db.collection('submissions').createIndex({ userId: 1, problemKey: 1, createdAt: -1 }),
-        db.collection('submissions').createIndex({ problemKey: 1, adminVerified: 1, updatedAt: -1 }),
-        db.collection('submission_images').createIndex({ submissionId: 1 }, { unique: true })
-      ]);
-
-      await recordActivity(db, session, 'catalog.synced', { itemTitle: `${problemCount} câu hỏi/ví dụ` });
-      return res.status(200).json({ success: true, item: { setCount: setIds.size, problemCount } });
     }
 
     if (action === 'update_catalog_item') {
