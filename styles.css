@@ -67,7 +67,7 @@ html { scroll-padding-top: var(--content-offset, 155px); }
 .book-content img, .problem-content img, .solution-content img { max-width: 100%; height: auto; }
 .problem-content table, .solution-content table { max-width: 100%; }
 .problem-content mjx-container, .solution-content mjx-container { max-width: 100%; overflow-x: auto; overflow-y: hidden; }
-.chapter-block, .exam-card, .day-block, .problem-item { scroll-margin-top: var(--content-offset, 155px); }
+/* The root scroll-padding already reserves the sticky controls. Adding scroll-margin here doubles the gap. */
 .responsive-icon-button { min-width: 44px; min-height: 44px; border: 1px solid var(--border); border-radius: 9px; color: var(--text); background: var(--card, #fff); cursor: pointer; }
 .account-menu-toggle, .mobile-toc-toggle, .mobile-sidebar-header, .sidebar-backdrop { display: none; }
 :where(button, a, input, summary, select, textarea):focus-visible { outline: 3px solid #f59e0b; outline-offset: 2px; }
