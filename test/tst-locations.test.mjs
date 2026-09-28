@@ -383,14 +383,26 @@ mockFilter.querySelector('.exam-day').value = '';
 mockFilter.querySelector('.exam-day').dispatchEvent(new window.Event('change', { bubbles: true }));
 let newQuestion;
 let removedQuestion;
+let editedQuestion;
 window.VMODataService.getProblemsByExam = async () => [{
-  id: 'cccccccccccccccccccccccc', questionNumber: 1, title: 'Câu hiện có'
+  id: 'cccccccccccccccccccccccc', questionNumber: 1, title: 'Câu hiện có', topic: 'Phương trình hàm', maxScore: 5
 }];
 window.VMODataService.addExamQuestion = async (examId, fields) => { newQuestion = { examId, ...fields }; return newQuestion; };
 window.VMODataService.deleteExamQuestion = async (examId, problemId) => { removedQuestion = { examId, problemId }; return true; };
+window.VMODataService.updateExamQuestionMetadata = async (examId, problemId, fields) => {
+  editedQuestion = { examId, problemId, ...fields }; return editedQuestion;
+};
 await window.manageExamQuestions('bbbbbbbbbbbbbbbbbbbbbbbb');
 const questionPanel = window.document.getElementById('managedQuestionsEditor');
-assert.ok(questionPanel.querySelector('.managed-questions-list').textContent.includes('Câu hiện có'));
+assert.match(questionPanel.querySelector('.managed-questions-list').textContent, /Câu 1 \(5,0đ\) Phương trình hàm/);
+questionPanel.querySelector('.managed-questions-list button').click();
+const metadataForm = questionPanel.querySelector('.edit-exam-question');
+metadataForm.elements.maxScore.value = '4.5';
+metadataForm.elements.topic.value = 'Số học';
+metadataForm.dispatchEvent(new window.Event('submit', { bubbles: true, cancelable: true }));
+await new Promise(resolve => setTimeout(resolve, 30));
+assert.deepEqual(editedQuestion, { examId: 'bbbbbbbbbbbbbbbbbbbbbbbb',
+  problemId: 'cccccccccccccccccccccccc', topic: 'Số học', maxScore: 4.5 });
 const addQuestionForm = questionPanel.querySelector('.add-exam-question');
 addQuestionForm.elements.questionNumber.value = '2';
 addQuestionForm.elements.content.value = 'Nội dung câu 2';
@@ -398,7 +410,7 @@ addQuestionForm.dispatchEvent(new window.Event('submit', { bubbles: true, cancel
 await new Promise(resolve => setTimeout(resolve, 30));
 assert.equal(newQuestion.examId, 'bbbbbbbbbbbbbbbbbbbbbbbb');
 assert.equal(newQuestion.questionNumber, 2);
-questionPanel.querySelector('.managed-questions-list button').click();
+questionPanel.querySelector('.managed-questions-list button:last-of-type').click();
 await new Promise(resolve => setTimeout(resolve, 30));
 assert.equal(removedQuestion.problemId, 'cccccccccccccccccccccccc');
 assert.equal(removedQuestion.examId, 'bbbbbbbbbbbbbbbbbbbbbbbb');

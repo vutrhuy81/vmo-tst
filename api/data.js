@@ -753,7 +753,7 @@ export default async function handler(req, res) {
 
     if (!requireAdmin(session, res)) return;
 
-    if (action === 'add_exam_question' || action === 'delete_exam_question') {
+    if (action === 'add_exam_question' || action === 'delete_exam_question' || action === 'update_exam_question_metadata') {
       const examId = objectId(cleanText(payload.examId, 80));
       if (!examId) return res.status(400).json({ success: false, error: 'ID đề thi không hợp lệ' });
       const exam = await db.collection('exams').findOne({ _id: examId, status: { $ne: 'deleted' } });
@@ -761,6 +761,31 @@ export default async function handler(req, res) {
         return res.status(404).json({ success: false, error: 'Không tìm thấy đề thi trong catalog' });
       }
       const examIdText = String(examId);
+      if (action === 'update_exam_question_metadata') {
+        const problemId = objectId(cleanText(payload.problemId, 80));
+        const topic = cleanText(payload.topic, 120);
+        const score = Number(payload.maxScore);
+        if (!problemId || !topic || typeof payload.maxScore === 'boolean' || payload.maxScore === '' ||
+            !Number.isFinite(score) || score < 0 || score > 20 ||
+            Math.abs(score * 100 - Math.round(score * 100)) > 1e-8) {
+          return res.status(400).json({ success: false, error: 'Chuyên đề hoặc điểm (0–20, tối đa hai chữ số thập phân) không hợp lệ' });
+        }
+        const problem = await db.collection('problems').findOne({
+          _id: problemId, examId: examIdText, status: { $ne: 'deleted' }
+        });
+        if (!problem) return res.status(404).json({ success: false, error: 'Câu hỏi không thuộc đề đã chọn' });
+        const updated = await db.collection('problems').findOneAndUpdate(
+          { _id: problemId, examId: examIdText, status: { $ne: 'deleted' } },
+          { $set: { topic, maxScore: score, shortLabel: `Câu ${Number(problem.questionNumber) || 1}`,
+            updatedBy: session.username, updatedAt: now }, $inc: { version: 1 } },
+          { returnDocument: 'after' }
+        );
+        await recordActivity(db, session, 'exam.question_updated', {
+          examId: examIdText, problemKey: problem.contentKey, itemTitle: problem.title,
+          topic, maxScore: score
+        });
+        return res.status(200).json({ success: true, item: updated });
+      }
       if (action === 'delete_exam_question') {
         const problemId = objectId(cleanText(payload.problemId, 80));
         if (!problemId) return res.status(400).json({ success: false, error: 'ID câu hỏi không hợp lệ' });

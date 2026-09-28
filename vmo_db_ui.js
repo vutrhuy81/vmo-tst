@@ -4218,9 +4218,49 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
       if (!problems.length) list.textContent = 'Đề chưa có câu hỏi.';
       problems.sort((a, b) => Number(a.questionNumber) - Number(b.questionNumber)).forEach(problem => {
         const row = document.createElement('div');
-        row.style.cssText = 'padding:8px;border-bottom:1px solid #e2e8f0;display:flex;gap:10px;justify-content:space-between;';
+        row.style.cssText = 'padding:8px;border-bottom:1px solid #e2e8f0;display:flex;gap:10px;align-items:center;flex-wrap:wrap;';
         const label = document.createElement('span');
-        label.textContent = `Câu ${Number(problem.questionNumber) || 0}: ${problem.title || problem.topic || ''}`;
+        label.style.cssText = 'flex:1;min-width:180px;';
+        const score = Number(problem.maxScore) || 0;
+        label.textContent = `Câu ${Number(problem.questionNumber) || 0} (${String(score).replace('.', ',')}${Number.isInteger(score) ? ',0' : ''}đ) ${problem.topic || 'Chưa phân loại'}`;
+        const edit = document.createElement('button');
+        edit.type = 'button';
+        edit.textContent = '✏️ Sửa điểm/chuyên đề';
+        edit.onclick = () => {
+          row.querySelector('.edit-exam-question')?.remove();
+          const form = document.createElement('form');
+          form.className = 'edit-exam-question';
+          form.style.cssText = 'display:flex;gap:8px;flex-wrap:wrap;width:100%;align-items:end;';
+          form.innerHTML = `<label>Điểm <input name="maxScore" type="number" min="0" max="20" step="0.01" required style="width:80px;"></label>
+            <label>Chuyên đề <input name="topic" maxlength="120" required style="min-width:180px;"></label>
+            <button type="submit">💾 Lưu</button><button type="button" class="cancel-question-edit">Hủy</button><span role="status"></span>`;
+          form.elements.maxScore.value = String(score);
+          form.elements.topic.value = problem.topic || '';
+          form.querySelector('.cancel-question-edit').onclick = () => form.remove();
+          form.onsubmit = async event => {
+            event.preventDefault();
+            if (!requireAdminUiAction()) return;
+            const value = Number(form.elements.maxScore.value);
+            const topic = form.elements.topic.value.trim();
+            if (!topic || form.elements.maxScore.value === '' || !Number.isFinite(value) || value < 0 || value > 20) {
+              form.querySelector('[role="status"]').textContent = 'Kiểm tra lại điểm và chuyên đề.';
+              return;
+            }
+            const submit = form.querySelector('[type="submit"]');
+            submit.disabled = true;
+            try {
+              await window.VMODataService.updateExamQuestionMetadata(id, problem.id || problem._id,
+                { topic, maxScore: value });
+              await reloadQuestions();
+              await refreshManagedExams(exam);
+              showToast('Đã cập nhật điểm và chuyên đề.', true);
+            } catch (error) {
+              form.querySelector('[role="status"]').textContent = error.message || 'Không lưu được câu hỏi.';
+              submit.disabled = false;
+            }
+          };
+          row.appendChild(form);
+        };
         const remove = document.createElement('button');
         remove.type = 'button';
         remove.textContent = '🗑️ Xóa câu';
@@ -4234,7 +4274,7 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
             showToast('Đã xóa câu hỏi khỏi đề.', true);
           } catch (error) { showToast('Lỗi xóa câu hỏi: ' + error.message, false); remove.disabled = false; }
         };
-        row.append(label, remove);
+        row.append(label, edit, remove);
         list.appendChild(row);
       });
     }

@@ -290,6 +290,15 @@ export async function getProblemsByExam(examId) {
   return normalizeList(await request('problems', { examId }));
 }
 
+export async function updateExamQuestionMetadata(examId, problemId, changes) {
+  const cleanExamId = normalizeId(examId).trim();
+  const cleanProblemId = normalizeId(problemId).trim();
+  if (!cleanExamId || !cleanProblemId) throw createServiceError('Thiếu mã đề hoặc câu hỏi', 0, 'VALIDATION_ERROR');
+  return normalize(await mutate('update_exam_question_metadata', {
+    examId: cleanExamId, problemId: cleanProblemId, topic: changes.topic, maxScore: changes.maxScore
+  }));
+}
+
 export async function getContentSets(group = null) {
   return normalizeList(await request('content_sets', { group }));
 }
@@ -555,6 +564,7 @@ const VMODataService = Object.freeze({
   saveExamImage,
   getExamImage,
   getProblemsByExam,
+  updateExamQuestionMetadata,
   getContentSets,
   getContentBlocks,
   getCatalogProblems,
