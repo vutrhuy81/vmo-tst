@@ -73,11 +73,14 @@ function cleanExamTrendReport(payload) {
     topic: cleanText(item?.topic, 120),
     questionCount: cleanNumber(item?.questionCount, 0, 0, 10000),
     prevalencePercent: cleanNumber(item?.prevalencePercent, 0, 0, 100),
+    evidenceIds: cleanStringList(item?.evidenceIds, 4000, 180),
     trendLevel: cleanText(item?.trendLevel, 80),
     observations: cleanText(item?.observations, 4000),
     frequentMethods: (Array.isArray(item?.frequentMethods) ? item.frequentMethods : []).slice(0, 12).map(method => ({
       name: cleanText(method?.name, 240), frequency: cleanNumber(method?.frequency, 0, 0, 10000),
-      evidenceIds: cleanStringList(method?.evidenceIds, 240, 180), note: cleanText(method?.note, 1600)
+      evidenceIds: cleanStringList(method?.evidenceIds, 4000, 180),
+      practiceEvidenceIds: cleanStringList(method?.practiceEvidenceIds, 4000, 180),
+      note: cleanText(method?.note, 1600)
     })).filter(method => method.name)
   })).filter(item => item.topic);
   if (topicTrends.length !== 6 || topicTrends.some((item, index) => item.topic !== EXAM_TREND_TOPICS[index])) return null;
@@ -330,7 +333,7 @@ export default async function handler(req, res) {
         if (!requireAdmin(session, res)) return;
         // Mẫu bằng chứng chi tiết vẫn được lưu để kiểm toán, nhưng không tải lại
         // trong danh sách nhằm tránh làm nặng Database Hub khi đã có nhiều báo cáo.
-        const items = await db.collection('exam_trend_reports').find({}, { projection: { 'evidence.samples': 0 } })
+        const items = await db.collection('exam_trend_reports').find({ deletedAt: { $exists: false } }, { projection: { 'evidence.samples': 0, revisions: 0 } })
           .sort({ createdAt: -1, _id: -1 }).limit(100).toArray();
         return res.status(200).json({ success: true, items });
       }
@@ -903,6 +906,45 @@ export default async function handler(req, res) {
         verifierStatus: doc.quality.status
       });
       return res.status(201).json({ success: true, item: { _id: result.insertedId, ...doc } });
+    }
+
+    if (action === 'update_exam_trend_report' || action === 'delete_exam_trend_report') {
+      const id = objectId(cleanText(payload.id, 80));
+      if (!id) return res.status(400).json({ success: false, error: 'ID báo cáo không hợp lệ' });
+      const collection = db.collection('exam_trend_reports');
+      const previous = await collection.findOne({ _id: id, deletedAt: { $exists: false } });
+      if (!previous) return res.status(404).json({ success: false, error: 'Không tìm thấy báo cáo' });
+      if (action === 'delete_exam_trend_report') {
+        await collection.updateOne({ _id: id, deletedAt: { $exists: false } },
+          { $set: { deletedAt: now, deletedBy: session.username, updatedAt: now } });
+        await recordActivity(db, session, 'trend_report.deleted', { reportId: String(id), itemTitle: previous.report?.title });
+        return res.status(200).json({ success: true, item: { id: String(id) } });
+      }
+      const edits = payload.edits || {};
+      const title = cleanText(edits.title, 300);
+      const executiveSummary = cleanText(edits.executiveSummary, 6000);
+      const conclusion = cleanText(edits.conclusion, 5000);
+      const observations = edits.observations;
+      if (!title || !Array.isArray(observations) || observations.length !== 6 ||
+          observations.some(value => typeof value !== 'string' || value.length > 4000) ||
+          previous.report?.topicTrends?.length !== 6) {
+        return res.status(400).json({ success: false, error: 'Tiêu đề hoặc nội dung sáu chuyên đề không hợp lệ' });
+      }
+      const revisedTopics = previous.report.topicTrends.map((topic, index) => ({
+        ...topic, observations: cleanText(observations[index], 4000)
+      }));
+      const revision = { report: previous.report, quality: previous.quality,
+        editedAt: now, editedBy: session.username };
+      const updated = await collection.findOneAndUpdate({ _id: id, deletedAt: { $exists: false } }, {
+        $set: { 'report.title': title, 'report.executiveSummary': executiveSummary,
+          'report.conclusion': conclusion, 'report.topicTrends': revisedTopics,
+          'quality.status': 'unavailable', 'quality.verified': false, 'quality.score': null,
+          'quality.summary': 'Nội dung đã được Admin chỉnh sửa; cần kiểm định lại nếu sử dụng như báo cáo AI đã duyệt.',
+          updatedAt: now, updatedBy: session.username },
+        $push: { revisions: { $each: [revision], $slice: -20 } }
+      }, { returnDocument: 'after' });
+      await recordActivity(db, session, 'trend_report.updated', { reportId: String(id), itemTitle: title });
+      return res.status(200).json({ success: true, item: updated });
     }
 
     if (action === 'delete_ai_guide') {

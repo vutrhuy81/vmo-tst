@@ -2410,7 +2410,8 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
     'exam.added': 'Thêm đề thi', 'exam.image_saved': 'Lưu ảnh đề thi', 'exam.deleted': 'Xóa đề thi',
     'event.added': 'Thêm lịch thi', 'event.deleted': 'Xóa lịch thi',
     'catalog.updated': 'Cập nhật catalog', 'catalog.synced': 'Đồng bộ catalog',
-    'trend_report.saved': 'Lưu phân tích xu hướng đề'
+    'trend_report.saved': 'Lưu phân tích xu hướng đề',
+    'trend_report.updated': 'Sửa báo cáo xu hướng đề', 'trend_report.deleted': 'Xóa báo cáo xu hướng đề'
   };
 
   const examTrendState = { current: null, saved: [], loaded: false, running: false };
@@ -2854,14 +2855,81 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
       examTrendState.loaded = true;
       list.innerHTML = examTrendState.saved.length ? examTrendState.saved.map((item, index) => {
         const [label, color, background] = trendStatusLabel(item.quality || {});
-        return `<button type="button" data-trend-report="${index}" style="display:block;width:100%;text-align:left;padding:9px 11px;margin-bottom:6px;border:1px solid #cbd5e1;border-radius:7px;background:white;cursor:pointer;"><strong>${escapeHtmlText(item.report?.title || 'Báo cáo xu hướng')}</strong><span style="float:right;color:${color};background:${background};padding:2px 6px;border-radius:999px;font-size:.7rem;">${label}</span><div style="font-size:.76rem;color:#64748b;">${escapeHtmlText(item.settings?.year || '')} · ${escapeHtmlText(item.createdBy || '')} · ${escapeHtmlText(learningDate(item.createdAt))}</div></button>`;
+        return `<div style="padding:9px 11px;margin-bottom:6px;border:1px solid #cbd5e1;border-radius:7px;background:white;"><button type="button" data-trend-report="${index}" style="display:block;width:100%;text-align:left;border:0;background:none;cursor:pointer;"><strong>${escapeHtmlText(item.report?.title || 'Báo cáo xu hướng')}</strong><span style="float:right;color:${color};background:${background};padding:2px 6px;border-radius:999px;font-size:.7rem;">${label}</span><div style="font-size:.76rem;color:#64748b;">${escapeHtmlText(item.settings?.year || '')} · ${escapeHtmlText(item.createdBy || '')} · ${escapeHtmlText(learningDate(item.createdAt))}${item.updatedBy ? ` · sửa bởi ${escapeHtmlText(item.updatedBy)}` : ''}</div></button><div style="display:flex;gap:8px;margin-top:7px;"><button type="button" data-trend-edit="${index}">✏️ Chỉnh sửa</button><button type="button" data-trend-delete="${index}">🗑️ Xóa</button></div></div>`;
       }).join('') : '<p style="color:#64748b;">Chưa có báo cáo xu hướng đã lưu.</p>';
       list.querySelectorAll('[data-trend-report]').forEach(button => {
         button.onclick = () => renderExamTrendReport(examTrendState.saved[Number(button.dataset.trendReport)], true);
       });
+      list.querySelectorAll('[data-trend-edit]').forEach(button => {
+        button.onclick = () => window.editExamTrendReport(Number(button.dataset.trendEdit));
+      });
+      list.querySelectorAll('[data-trend-delete]').forEach(button => {
+        button.onclick = () => window.deleteExamTrendReport(Number(button.dataset.trendDelete));
+      });
     } catch (error) {
       list.innerHTML = `<p style="color:#b91c1c;">${escapeHtmlText(error?.message || 'Không tải được báo cáo.')}</p>`;
     }
+  };
+
+  window.editExamTrendReport = function(index) {
+    if (!requireAdminUiAction()) return;
+    const item = examTrendState.saved[index];
+    if (!item?.id) return;
+    let editor = document.getElementById('trendReportEditor');
+    if (!editor) {
+      editor = document.createElement('div');
+      editor.id = 'trendReportEditor';
+      editor.style.cssText = 'border:1px solid #94a3b8;border-radius:8px;padding:12px;margin:12px 0;background:#f8fafc;';
+      document.getElementById('trendSavedReports')?.before(editor);
+    }
+    editor.innerHTML = `<h4>✏️ Chỉnh sửa báo cáo đã lưu</h4><p>Chỉ sửa phần diễn giải. Số câu, tỷ lệ và bằng chứng vẫn giữ nguyên. Báo cáo sửa sẽ cần kiểm định lại.</p>
+      <form id="trendReportEditForm"><label>Tiêu đề<input name="title" maxlength="300" required style="display:block;width:100%;box-sizing:border-box;"></label>
+      <label>Tóm tắt<textarea name="executiveSummary" maxlength="6000" rows="5" style="display:block;width:100%;box-sizing:border-box;"></textarea></label>
+      ${item.report.topicTrends.map((topic, topicIndex) => `<label style="display:block;margin-top:8px;">${escapeHtmlText(topic.topic)}<textarea data-trend-observation="${topicIndex}" maxlength="4000" rows="4" style="display:block;width:100%;box-sizing:border-box;"></textarea></label>`).join('')}
+      <label>Kết luận<textarea name="conclusion" maxlength="5000" rows="4" style="display:block;width:100%;box-sizing:border-box;"></textarea></label>
+      <div style="display:flex;gap:8px;"><button type="submit">💾 Lưu chỉnh sửa</button><button type="button" id="trendEditCancel">Hủy</button></div><p role="status" id="trendEditStatus"></p></form>`;
+    const form = editor.querySelector('form');
+    form.elements.title.value = item.report.title || '';
+    form.elements.executiveSummary.value = item.report.executiveSummary || '';
+    form.elements.conclusion.value = item.report.conclusion || '';
+    form.querySelectorAll('[data-trend-observation]').forEach(field => {
+      field.value = item.report.topicTrends[Number(field.dataset.trendObservation)]?.observations || '';
+    });
+    editor.querySelector('#trendEditCancel').onclick = () => editor.remove();
+    form.onsubmit = async event => {
+      event.preventDefault();
+      if (!requireAdminUiAction()) return;
+      const submit = form.querySelector('[type="submit"]');
+      submit.disabled = true;
+      try {
+        await window.VMODataService.updateExamTrendReport(item.id, {
+          title: form.elements.title.value, executiveSummary: form.elements.executiveSummary.value,
+          conclusion: form.elements.conclusion.value,
+          observations: Array.from(form.querySelectorAll('[data-trend-observation]'), field => field.value)
+        });
+        editor.remove();
+        document.getElementById('trendResult').replaceChildren();
+        await window.loadExamTrendReports(true);
+        showToast('Đã cập nhật báo cáo.', true);
+      } catch (error) {
+        submit.disabled = false;
+        form.querySelector('#trendEditStatus').textContent = error.message || 'Không thể cập nhật báo cáo.';
+      }
+    };
+    editor.scrollIntoView?.({ behavior: 'smooth', block: 'nearest' });
+  };
+
+  window.deleteExamTrendReport = async function(index) {
+    if (!requireAdminUiAction()) return;
+    const item = examTrendState.saved[index];
+    if (!item?.id || !window.confirm(`Xóa báo cáo “${item.report?.title || 'Báo cáo xu hướng'}” khỏi danh sách đã lưu?`)) return;
+    try {
+      await window.VMODataService.deleteExamTrendReport(item.id);
+      document.getElementById('trendReportEditor')?.remove();
+      document.getElementById('trendResult')?.replaceChildren();
+      await window.loadExamTrendReports(true);
+      showToast('Đã xóa báo cáo khỏi danh sách.', true);
+    } catch (error) { showToast(error?.message || 'Không thể xóa báo cáo.', false); }
   };
 
   function ensureLearningDashboardUi(modal, isAdmin) {

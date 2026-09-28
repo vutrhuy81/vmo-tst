@@ -109,11 +109,29 @@ window.VMOAuth = { getSession: () => ({ username: 'admin', role: 'admin' }) };
 window.confirm = () => true;
 window.alert = () => {};
 let savedPayload;
+let storedReports = [];
 window.VMODataService = {
   getCatalogProblems: async () => [], getContentSets: async () => [], getEvents: async () => [],
   getDocuments: async () => [], getExams: async () => [], getExamCatalog: async () => [],
-  getExamTrendReports: async () => [], saveExamTrendReport: async payload => {
-    savedPayload = payload; return { id: '507f1f77bcf86cd799439011', createdAt: new Date().toISOString() };
+  getExamTrendReports: async () => storedReports,
+  saveExamTrendReport: async payload => {
+    savedPayload = payload;
+    storedReports = [{ ...payload, id: '507f1f77bcf86cd799439011', createdAt: new Date().toISOString() }];
+    return storedReports[0];
+  },
+  updateExamTrendReport: async (id, edits) => {
+    assert.equal(id, storedReports[0].id);
+    storedReports[0] = { ...storedReports[0], report: { ...storedReports[0].report,
+      title: edits.title, executiveSummary: edits.executiveSummary, conclusion: edits.conclusion,
+      topicTrends: storedReports[0].report.topicTrends.map((topic, index) => ({
+        ...topic, observations: edits.observations[index]
+      })) }, updatedBy: 'admin' };
+    return storedReports[0];
+  },
+  deleteExamTrendReport: async id => {
+    assert.equal(id, storedReports[0].id);
+    storedReports = [];
+    return { id };
   }
 };
 const root = new URL('../', import.meta.url);
@@ -209,6 +227,17 @@ window.closeReferenceLinksManager();
 await window.saveExamTrendReport();
 assert.equal(savedPayload.quality.status, 'rejected');
 assert.equal(savedPayload.report.topicTrends.length, 6);
+assert.ok(byId('trendSavedReports').querySelector('[data-trend-edit]'));
+byId('trendSavedReports').querySelector('[data-trend-edit]').click();
+const editForm = byId('trendReportEditForm');
+editForm.elements.title.value = 'Báo cáo đã sửa';
+editForm.dispatchEvent(new window.Event('submit', { bubbles: true, cancelable: true }));
+await new Promise(resolve => setTimeout(resolve, 20));
+assert.equal(storedReports[0].report.title, 'Báo cáo đã sửa');
+assert.match(byId('trendSavedReports').textContent, /Báo cáo đã sửa/);
+byId('trendSavedReports').querySelector('[data-trend-delete]').click();
+await new Promise(resolve => setTimeout(resolve, 20));
+assert.equal(storedReports.length, 0, 'Admin xóa báo cáo khỏi danh sách');
 const sourceRoots = Object.fromEntries(['tab-tst', 'tab-history', 'tab-vmo', 'tab-olympic']
   .map((tab, index) => [tab, practiceSource(fourPractice.samples[index], tab, tab)]));
 window.ensureVMOTabContent = async tabId => sourceRoots[tabId];

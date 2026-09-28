@@ -448,6 +448,18 @@ export async function saveExamTrendReport(reportData) {
   return normalize(await mutate('save_exam_trend_report', reportData));
 }
 
+export async function updateExamTrendReport(id, edits) {
+  const cleanId = normalizeId(id).trim();
+  if (!cleanId) throw createServiceError('Thiếu mã báo cáo', 0, 'VALIDATION_ERROR');
+  return normalize(await mutate('update_exam_trend_report', { id: cleanId, edits }));
+}
+
+export async function deleteExamTrendReport(id) {
+  const cleanId = normalizeId(id).trim();
+  if (!cleanId) throw createServiceError('Thiếu mã báo cáo', 0, 'VALIDATION_ERROR');
+  return normalize(await mutate('delete_exam_trend_report', { id: cleanId }));
+}
+
 export async function deleteSubmission(id) {
   const cleanId = normalizeId(id).trim();
   if (!cleanId) {
@@ -564,6 +576,8 @@ const VMODataService = Object.freeze({
   getLearningOverview,
   getExamTrendReports,
   saveExamTrendReport,
+  updateExamTrendReport,
+  deleteExamTrendReport,
   deleteSubmission,
   verifySubmission,
   updateSubmissionContent,
