@@ -414,8 +414,8 @@
       searchInput.placeholder = isEn ? UI_TRANSLATIONS.en.searchPlaceholder : 'Tìm Stolz, LTE, Miquel, nội suy, bất biến, Chebyshev...';
     }
 
-    const btnSecondary = document.querySelector('.controls-sticky .btn-secondary');
-    if (btnSecondary) setNodeText(btnSecondary, '🖨️ In', UI_TRANSLATIONS.en.btnPrint, isEn);
+    const printButton = document.getElementById('printDocumentButton');
+    if (printButton) setNodeText(printButton, '🖨️ In', UI_TRANSLATIONS.en.btnPrint, isEn);
 
     // Filter pills
     const mockPills = document.querySelectorAll('#mockFilterPills .pill');

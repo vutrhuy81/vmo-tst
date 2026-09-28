@@ -99,6 +99,7 @@ VMOAuth.requireAuth('login.html');
       </div>
 
       <div class="app-topbar-actions">
+        <button id="accountMenuToggle" class="responsive-icon-button account-menu-toggle" type="button" aria-label="Mở menu tài khoản" aria-controls="userAuthBar" aria-expanded="false">👤 <span>Tài khoản</span></button>
         <!-- Cụm Người dùng & Quản trị hệ thống -->
         <div class="user-auth-bar" id="userAuthBar">
           <div class="user-info-chip" title="Phiên bảo mật: Tự động đăng xuất sau 5 phút không hoạt động">
@@ -145,24 +146,27 @@ VMOAuth.requireAuth('login.html');
 <div class="controls-sticky">
   <div class="controls-container">
     <div class="search-row">
-      <div class="search-box"><span class="search-icon">🔎</span><input id="searchInput" type="search" placeholder="Tìm Stolz, LTE, Miquel, nội suy, bất biến, Chebyshev..." autocomplete="off"></div>
+      <div class="search-box"><span class="search-icon">🔎</span><input id="searchInput" type="search" aria-label="Tìm trong tab hiện tại" placeholder="Tìm Stolz, LTE, Miquel, nội suy, bất biến, Chebyshev..." autocomplete="off"></div>
+      <button id="mobileTocToggle" class="btn-secondary mobile-toc-toggle" type="button" aria-controls="mainSidebar" aria-expanded="false">☰ Mục lục</button>
       <a class="btn-action" href="assets/On_luyen_VMO_Da_Nang_2026_2027.pdf" target="_blank" rel="noopener">📄 PDF</a>
-      <button class="btn-secondary" type="button" onclick="window.printVMODocument ? window.printVMODocument() : window.print()">🖨️ In</button>
+      <button id="printDocumentButton" class="btn-secondary" type="button" onclick="window.printVMODocument ? window.printVMODocument() : window.print()">🖨️ In</button>
     </div>
     <div id="searchSummary" class="search-summary" aria-live="polite"></div>
     <div class="filter-pills" id="mockFilterPills" style="display:none">
-      <button class="pill active" data-filter="ALL">Tất cả đề thử (4 buổi)</button><button class="pill" data-filter="MOCK1">Bộ số 1 (Đà Nẵng)</button><button class="pill" data-filter="MOCK2">Bộ số 2 (Đà Nẵng)</button>
+      <button class="pill active" data-filter="ALL">Tất cả đề thử</button><button class="pill" data-filter="MOCK1">Bộ số 1 (Đà Nẵng)</button><button class="pill" data-filter="MOCK2">Bộ số 2 (Đà Nẵng)</button>
     </div>
     <div class="filter-pills" id="tstFilterPills" style="display:none">
       <button class="pill active" data-filter="ALL">Tất cả đề</button><button class="pill" data-filter="BAC">Miền Bắc</button><button class="pill" data-filter="TRUNG">Miền Trung</button><button class="pill" data-filter="NAM">Miền Nam</button><button class="pill" data-filter="OLYMPIC">Trường hè / Trại hè</button>
     </div>
     <div class="filter-pills" id="historyFilterPills" style="display:none">
-      <button class="pill active" data-filter="ALL">Tất cả 12 đề</button><button class="pill" data-filter="DANANG">Đà Nẵng (6)</button><button class="pill" data-filter="QUANGNAM">Quảng Nam (6)</button>
+      <button class="pill active" data-filter="ALL">Tất cả đề</button><button class="pill" data-filter="DANANG">Đà Nẵng</button><button class="pill" data-filter="QUANGNAM">Quảng Nam</button>
     </div>
   </div>
 </div>
+<div id="sidebarBackdrop" class="sidebar-backdrop" aria-hidden="true"></div>
 <div class="layout-container" id="main-content">
-  <aside class="sidebar">
+  <aside class="sidebar" id="mainSidebar" aria-label="Mục lục đề và tài liệu">
+    <div class="mobile-sidebar-header"><strong>Mục lục</strong><button id="mobileTocClose" class="responsive-icon-button" type="button" aria-label="Đóng mục lục">✕</button></div>
     <!-- INJECT:SIDEBAR_DANANG -->
     <!-- INJECT:SIDEBAR_MOCK -->
     <!-- INJECT:SIDEBAR_TST -->

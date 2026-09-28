@@ -4995,6 +4995,7 @@ if (card) card.dataset.databaseCard = 'true';
   }
 
   let sidebarNavigationToken = 0;
+  let stopSidebarAlignment = null;
   document.addEventListener('click', async event => {
     const link = event.target.closest?.('#sidebar-tst a[href^="#"], #sidebar-mock a[href^="#"], #sidebar-history a[href^="#"]');
     if (!link || !window.VMODataService?.getExamCatalogDetail || event.defaultPrevented ||
@@ -5006,6 +5007,8 @@ if (card) card.dataset.databaseCard = 'true';
     if (!category || !anchor) return;
     event.preventDefault();
     const token = ++sidebarNavigationToken;
+    stopSidebarAlignment?.();
+    stopSidebarAlignment = null;
     try {
       await window.loadDatabaseExamDetail(category, anchor);
       if (token !== sidebarNavigationToken) return;
@@ -5017,9 +5020,37 @@ if (card) card.dataset.databaseCard = 'true';
       await new Promise(resolve => window.requestAnimationFrame(resolve));
       if (token !== sidebarNavigationToken) return;
       window.history.pushState(null, '', `#${anchor}`);
-      // `auto` inherits the page's smooth scrolling and can land on an earlier
-      // position while lazy cards above the target finish rendering.
+      // The root scroll-padding reserves the sticky controls. A short-lived
+      // observer keeps the selected card aligned if nearby lazy cards expand.
       card.scrollIntoView({ behavior: 'instant', block: 'start' });
+      if (typeof window.ResizeObserver === 'function') {
+        const feed = card.closest('.feed-container');
+        if (feed) {
+          let active = true;
+          const stop = () => {
+            if (!active) return;
+            active = false;
+            observer.disconnect();
+            clearTimeout(expiry);
+            window.removeEventListener('wheel', stop);
+            window.removeEventListener('touchstart', stop);
+            window.removeEventListener('keydown', stop);
+          };
+          const align = () => {
+            if (!active || token !== sidebarNavigationToken) return stop();
+            const offset = parseFloat(getComputedStyle(document.documentElement).scrollPaddingTop) || 0;
+            const delta = card.getBoundingClientRect().top - offset;
+            if (Math.abs(delta) > 3) window.scrollTo({ top: Math.max(0, window.scrollY + delta), behavior: 'instant' });
+          };
+          const observer = new ResizeObserver(() => window.requestAnimationFrame(align));
+          observer.observe(feed);
+          const expiry = setTimeout(stop, 1600);
+          window.addEventListener('wheel', stop, { passive: true, once: true });
+          window.addEventListener('touchstart', stop, { passive: true, once: true });
+          window.addEventListener('keydown', stop, { once: true });
+          stopSidebarAlignment = stop;
+        }
+      }
     } catch (error) {
       console.warn('Không tải được đề được chọn:', error?.message || error);
     }
@@ -5048,6 +5079,8 @@ if (card) card.dataset.databaseCard = 'true';
         const exams = await (window.VMODataService.getExamCatalogSummary || window.VMODataService.getExamCatalog)('vmo-mock');
         await renderExamSummaries(exams, 'vmo-mock');
         const root = document.getElementById('tab-mock');
+        const allMockPill = document.querySelector('#mockFilterPills .pill[data-filter="ALL"]');
+        if (allMockPill) allMockPill.textContent = `Tất cả đề thử (${root?.querySelectorAll('.db-exam-card').length || 0} buổi)`;
         showDatabaseCatalogState(root, exams);
         injectSubmissionButtons(root || document);
         window.reinitAIGuide?.(root || document);
@@ -5113,6 +5146,16 @@ if (card) card.dataset.databaseCard = 'true';
         const exams = await (window.VMODataService.getExamCatalogSummary || window.VMODataService.getExamCatalog)('history-dn-qn');
         await renderExamSummaries(exams, 'history-dn-qn');
         const root = document.getElementById('tab-history');
+        const cards = Array.from(root?.querySelectorAll('.db-exam-card') || []);
+        const labels = {
+          ALL: `Tất cả ${cards.length} đề`,
+          DANANG: `Đà Nẵng (${cards.filter(card => card.dataset.filter === 'DANANG').length})`,
+          QUANGNAM: `Quảng Nam (${cards.filter(card => card.dataset.filter === 'QUANGNAM').length})`
+        };
+        Object.entries(labels).forEach(([filter, label]) => {
+          const pill = document.querySelector(`#historyFilterPills .pill[data-filter="${filter}"]`);
+          if (pill) pill.textContent = label;
+        });
         showDatabaseCatalogState(root, exams);
         injectSubmissionButtons(root || document);
         window.reinitAIGuide?.(root || document);
