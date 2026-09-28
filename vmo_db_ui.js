@@ -1977,7 +1977,7 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
     const days = tst ? 4 : 2;
     return `
       ${tst ? '' : `<div style="margin-bottom:12px;"><label for="examCreationMode" style="font-weight:700;">Phương thức tạo đề</label><select id="examCreationMode" onchange="syncExamCreationMode()" style="display:block;width:100%;padding:8px;margin-top:5px;"><option value="ocr">Ảnh đề do admin biên soạn (OCR)</option><option value="prediction">Dự đoán đề từ dữ liệu tham chiếu</option></select></div>`}
-      ${tst ? `<div style="margin-bottom:12px;"><label for="docDestination" style="font-weight:700;">Kho hiển thị tài liệu *</label><select id="docDestination" required onchange="syncDocumentDestination(true)" style="display:block;width:100%;padding:8px;margin-top:5px;"><option value="tst">🏛️ Đề TST 2026–2027</option><option value="vmo">🇻🇳 Đề VMO</option><option value="olympic">🌐 Đề IMO–Olympic</option><option value="regional">🗂️ Đề Đà Nẵng–Quảng Nam</option></select><small id="docDestinationHint" style="display:block;margin-top:5px;color:#64748b;">Đề sẽ được lưu và hiển thị trong kho TST.</small></div>` : ''}
+      ${tst ? `<div style="margin-bottom:12px;"><label for="docDestination" style="font-weight:700;">Kho hiển thị tài liệu *</label><select id="docDestination" required onchange="syncDocumentDestination(true)" style="display:block;width:100%;padding:8px;margin-top:5px;"><option value="tst">🏛️ Đề TST</option><option value="vmo">🇻🇳 Đề VMO</option><option value="olympic">🌐 Đề IMO–Olympic</option><option value="regional">🗂️ Đề Đà Nẵng–Quảng Nam</option></select><small id="docDestinationHint" style="display:block;margin-top:5px;color:#64748b;">Đề sẽ được lưu và hiển thị trong kho TST.</small></div>` : ''}
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px;">
         <div>${tst ? `<div id="docTstTargetWrap"><label>Tỉnh/Thành phố hoặc trường chuyên *</label><select id="docTargetAnchor" required onchange="syncExamProvinceFromTarget('doc')" style="width:100%;padding:7px;"></select></div><div id="docRegionalTargetWrap" style="display:none;"><label>Đơn vị lưu trữ *</label><select id="docRegionalUnit" onchange="syncRegionalExamTarget()" style="width:100%;padding:7px;"><option value="dn">Đà Nẵng</option><option value="qn">Quảng Nam</option></select></div><div id="docCompetitionWrap" style="display:none;"><label for="docCompetition">Kỳ thi / đơn vị *</label><input id="docCompetition" maxlength="120" placeholder="VMO hoặc IMO" oninput="syncDocumentDestination()" style="width:100%;box-sizing:border-box;padding:7px;"></div>` : `<label>Bộ đề thi thử số *</label><input id="examSetNumber" type="number" min="3" max="100" value="3" required style="width:100%;box-sizing:border-box;padding:7px;">`}</div>
         <div><label>Ngày thi *</label><select id="${kind}DayNumber" required style="width:100%;padding:7px;">${['nhất','hai','ba','tư'].slice(0,days).map((label,index) => `<option value="${index+1}">Ngày thi thứ ${label}</option>`).join('')}</select></div>
@@ -2450,6 +2450,7 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
           <div class="trend-target-field" id="trendTargetWrap"><label for="trendTarget" style="display:block;font-weight:700;font-size:.82rem;margin-bottom:4px;">Đơn vị TST *</label><select id="trendTarget" style="width:100%;padding:8px;border:1px solid #cbd5e1;border-radius:6px;"></select></div>
           <div class="trend-target-field"><label for="trendLookback" style="display:block;font-weight:700;font-size:.82rem;margin-bottom:4px;">Số năm quá khứ (1–15) *</label><input id="trendLookback" type="number" min="1" max="15" value="10" style="width:100%;box-sizing:border-box;padding:8px;border:1px solid #cbd5e1;border-radius:6px;"></div>
         </div>
+        <label class="trend-target-field" style="display:block;margin-top:9px;"><input id="trendIncludeCurrentYear" type="checkbox" checked onchange="syncExamTrendForm()"> Bao gồm đề của năm học đang chọn (ngoài số năm quá khứ)</label>
         <p id="trendScopeHelp" style="margin:9px 0;color:#475569;font-size:.79rem;"></p>
         <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;">
           <button type="button" id="trendPreviewButton">🔎 Kiểm tra nguồn Atlas</button>
@@ -2492,7 +2493,7 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
     const year = document.getElementById('trendYear')?.value || '2026-2027';
     if (help) help.textContent = mode === 'year'
       ? `Phân tích tất cả đề TST đã công khai trong năm ${year}.`
-      : `Phân tích tối đa số năm đã chọn trước ${year}; hệ thống sẽ ghi rõ số năm thực có dữ liệu.`;
+      : `Phân tích tối đa số năm đã chọn trước ${year}${document.getElementById('trendIncludeCurrentYear')?.checked ? ` và năm ${year}` : ''}; hệ thống sẽ ghi rõ số năm thực có dữ liệu.`;
   }
 
   function trendStatusLabel(quality = {}) {
@@ -2571,7 +2572,9 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
   }
 
   function findTrendEvidenceProblem(root, evidence) {
-    const card = root.querySelector(`#${CSS.escape(evidence.anchor)}`);
+    const displayAnchor = evidence.anchor.startsWith('hist-') || evidence.year === '2026-2027'
+      ? evidence.anchor : `${evidence.anchor}--year-${evidence.year}`;
+    const card = root.querySelector(`#${CSS.escape(displayAnchor)}`);
     if (!card) return null;
     if (evidence.dayNumber > 0) {
       const section = card.querySelector(`.db-exam-day[data-day-number="${evidence.dayNumber}"]`);
@@ -2631,8 +2634,11 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
     try {
       const tabIds = [...new Set(evidence.map(item => item.anchor.startsWith('hist-') ? 'tab-history' : 'tab-tst'))];
       const roots = new Map((await Promise.all(tabIds.map(async tabId => [tabId, await prepareTrendPracticeSource(tabId)]))));
-      await Promise.all([...new Set(evidence.map(item => `${item.anchor.startsWith('hist-') ? 'history-dn-qn' : 'tst-national'}:${item.anchor}`))]
-        .map(async key => {
+      await Promise.all([...new Set(evidence.map(item => {
+        const displayAnchor = item.anchor.startsWith('hist-') || item.year === '2026-2027'
+          ? item.anchor : `${item.anchor}--year-${item.year}`;
+        return `${item.anchor.startsWith('hist-') ? 'history-dn-qn' : 'tst-national'}:${displayAnchor}`;
+      }))].map(async key => {
           const separator = key.indexOf(':');
           if (window.VMODataService?.getExamCatalogDetail) {
             await window.loadDatabaseExamDetail?.(key.slice(0, separator), key.slice(separator + 1));
@@ -2651,7 +2657,7 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
       body.replaceChildren();
       const groups = new Map();
       resolved.forEach(entry => {
-        const key = `${entry.tabId}:${entry.item.anchor}:${entry.item.dayNumber}`;
+        const key = `${entry.tabId}:${entry.item.anchor}:${entry.item.year}:${entry.item.dayNumber}`;
         if (!groups.has(key)) groups.set(key, []);
         groups.get(key).push(entry);
       });
@@ -2664,7 +2670,7 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
         header.classList.add('exam-header');
         const sourceLabel = document.createElement('div');
         sourceLabel.className = 'trend-practice-source';
-        sourceLabel.textContent = first.tabId === 'tab-history' ? '🗂️ Nguồn: Đề Đà Nẵng–Quảng Nam' : '🏛️ Nguồn: Đề TST 2026–2027';
+        sourceLabel.textContent = first.tabId === 'tab-history' ? '🗂️ Nguồn: Đề Đà Nẵng–Quảng Nam' : '🏛️ Nguồn: Đề TST';
         header.appendChild(sourceLabel);
         const cardBody = document.createElement('div');
         cardBody.className = 'exam-body';
@@ -2743,7 +2749,8 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
           year: document.getElementById('trendYear')?.value,
           targetType: document.getElementById('trendTargetType')?.value,
           targetAnchor: selected?.value, province: selected?.dataset?.province || selected?.textContent,
-          lookback: Number(document.getElementById('trendLookback')?.value)
+          lookback: Number(document.getElementById('trendLookback')?.value),
+          includeCurrentYear: document.getElementById('trendIncludeCurrentYear')?.checked === true
         }) });
       const result = await response.json();
       if (!response.ok || !result.success) throw new Error(result.error || 'Không kiểm tra được nguồn.');
@@ -2764,7 +2771,8 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
       mode, year: document.getElementById('trendYear')?.value,
       targetType: document.getElementById('trendTargetType')?.value,
       targetAnchor: selected?.value || '', province: selected?.dataset?.province || selected?.textContent || '',
-      lookback: Number(document.getElementById('trendLookback')?.value)
+      lookback: Number(document.getElementById('trendLookback')?.value),
+      includeCurrentYear: document.getElementById('trendIncludeCurrentYear')?.checked === true
     };
     examTrendState.running = true;
     examTrendState.current = null;
@@ -3267,7 +3275,7 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
           const sourceLabels = {
             specialty_example: 'Tài liệu chuyên đề VMO',
             mock_exam_question: 'Bộ đề thi thử VMO',
-            tst_question: 'Đề TST 2026–2027',
+            tst_question: 'Đề TST',
             regional_question: 'Đề Đà Nẵng–Quảng Nam'
           };
           const sourceLabel = sourceLabels[s.sourceType || snapshot.sourceType] || 'Ngân hàng bài toán VMO';
@@ -4376,10 +4384,16 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
     }
   };
 
+  const normalizedExamYear = year => String(year || '2026-2027').replace(/[–—]/g, '-');
+  const tstDisplayAnchor = exam => normalizedExamYear(exam.year) === '2026-2027'
+    ? exam.targetAnchor : `${exam.targetAnchor}--year-${normalizedExamYear(exam.year)}`;
+
   function createDatabaseExamCard(exam) {
     const card = document.createElement('article');
     card.className = 'exam-card db-exam-card';
-    card.id = exam.targetAnchor;
+    card.id = tstDisplayAnchor(exam);
+    card.dataset.catalogAnchor = exam.targetAnchor;
+    card.dataset.catalogYear = normalizedExamYear(exam.year);
     card.dataset.databaseCard = 'true';
     card.dataset.filter = exam.region || 'BAC';
     card.dataset.search = `${exam.province || ''} ${exam.year || ''}`.toLowerCase();
@@ -4461,13 +4475,26 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
 
   function ensureDatabaseExamSidebar(exam) {
     if (!exam?.targetAnchor) return;
-    const sidebar = document.querySelector('#sidebar-tst .nav-year-group') || document.getElementById('sidebar-tst');
+    const root = document.getElementById('sidebar-tst');
+    if (!root) return;
+    const year = normalizedExamYear(exam.year);
+    let sidebar = Array.from(root.querySelectorAll('.nav-year-group')).find(group => group.dataset.year === year);
+    if (!sidebar) {
+      sidebar = root.querySelector('.nav-year-group:not([data-year])') || document.createElement('div');
+      sidebar.className = 'nav-year-group';
+      sidebar.dataset.year = year;
+      let title = sidebar.querySelector('.nav-year-title');
+      if (!title) { title = document.createElement('div'); title.className = 'nav-year-title'; sidebar.prepend(title); }
+      title.textContent = `🏛️ NĂM HỌC ${year}`;
+      root.appendChild(sidebar);
+    }
     if (!sidebar) return;
-    let link = sidebar.querySelector(`a[href="#${CSS.escape(exam.targetAnchor)}"]`);
+    const displayAnchor = tstDisplayAnchor(exam);
+    let link = sidebar.querySelector(`a[href="#${CSS.escape(displayAnchor)}"]`);
     if (!link) {
       link = document.createElement('a');
       link.className = 'nav-link db-exam-sidebar-link';
-      link.href = `#${exam.targetAnchor}`;
+      link.href = `#${displayAnchor}`;
       sidebar.appendChild(link);
     }
     link.dataset.region = ['BAC', 'TRUNG', 'NAM'].includes(exam.region) ? exam.region : 'BAC';
@@ -4481,6 +4508,8 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
       item.textContent = `${String(index + 1).padStart(2, '0')}. ${item.dataset.name}`;
       sidebar.appendChild(item);
     });
+    Array.from(root.querySelectorAll('.nav-year-group[data-year]'))
+      .sort((a, b) => b.dataset.year.localeCompare(a.dataset.year)).forEach(group => root.appendChild(group));
   }
 
   function ensureReferenceLinksModal() {
@@ -4814,7 +4843,7 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
     if (kind === 'tst') ensureDatabaseExamSidebar(exam);
     if (kind === 'regional') ensureDatabaseRegionalNavigation(exam);
     if (kind === 'competition') ensureCompetitionSidebar(exam);
-    let card = document.getElementById(exam.targetAnchor);
+    let card = document.getElementById(kind === 'tst' ? tstDisplayAnchor(exam) : exam.targetAnchor);
 
 // MongoDB là nguồn chuẩn sau migration.
 // Nếu card hiện tại đến từ HTML tĩnh, loại bỏ để Atlas thay thế.
@@ -4994,9 +5023,11 @@ if (card) card.dataset.databaseCard = 'true';
     if (loadedDetails.has(key)) return;
     if (detailPromises.has(key)) return detailPromises.get(key);
     const card = document.getElementById(anchor);
+    const sourceAnchor = category === 'tst-national' ? card?.dataset.catalogAnchor || anchor : anchor;
+    const sourceYear = category === 'tst-national' ? card?.dataset.catalogYear || '' : '';
     const pending = (async () => {
       try {
-        const exams = await window.VMODataService.getExamCatalogDetail(category, anchor);
+        const exams = await window.VMODataService.getExamCatalogDetail(category, sourceAnchor, sourceYear);
         if (!Array.isArray(exams) || !exams.length) throw new Error('Không tìm thấy đề thi');
         consolidateExamDays(exams, category).forEach(exam => {
           renderDatabaseExam(exam, competitionTabs[category] ? 'competition' : category === 'tst-national' ? 'tst' : category === 'vmo-mock' ? 'mock' : 'regional');
@@ -5041,9 +5072,14 @@ if (card) card.dataset.databaseCard = 'true';
 
   async function renderExamSummaries(exams, category) {
     const kind = competitionTabs[category] ? 'competition' : category === 'tst-national' ? 'tst' : category === 'vmo-mock' ? 'mock' : 'regional';
+    if (kind === 'tst') exams = [...exams].sort((a, b) =>
+      normalizedExamYear(b.year).localeCompare(normalizedExamYear(a.year)) ||
+      String(a.province || '').replace(/^Tỉnh\s+/i, '').localeCompare(String(b.province || '').replace(/^Tỉnh\s+/i, ''), 'vi', { sensitivity: 'base' }) ||
+      Number(a.dayNumber) - Number(b.dayNumber));
     exams.forEach(exam => {
       if (!exam.targetAnchor || (!Number(exam.problemCount) && !exam.problems?.length)) return;
-      let card = document.getElementById(exam.targetAnchor);
+      const displayAnchor = kind === 'tst' ? tstDisplayAnchor(exam) : exam.targetAnchor;
+      let card = document.getElementById(displayAnchor);
       if (!card) card = kind === 'tst' ? createDatabaseExamCard(exam)
         : kind === 'regional' ? createDatabaseRegionalCard(exam)
         : kind === 'competition' ? createCompetitionCard(exam) : createDatabaseMockCard(exam);
@@ -5053,8 +5089,8 @@ if (card) card.dataset.databaseCard = 'true';
       if (kind === 'competition') ensureCompetitionSidebar(exam);
       if (Array.isArray(exam.problems)) {
         renderDatabaseExam(exam, kind);
-        loadedDetails.add(detailKey(category, exam.targetAnchor));
-      } else if (!loadedDetails.has(detailKey(category, exam.targetAnchor))) {
+        loadedDetails.add(detailKey(category, displayAnchor));
+      } else if (!loadedDetails.has(detailKey(category, displayAnchor))) {
         const body = card.querySelector('.exam-body') || card;
         if (!body.querySelector('.db-exam-loading')) {
           const notice = document.createElement('p');
@@ -5083,6 +5119,7 @@ if (card) card.dataset.databaseCard = 'true';
     });
     const sidebarId = { 'tab-tst': 'sidebar-tst', 'tab-mock': 'sidebar-mock', 'tab-history': 'sidebar-history', 'tab-vmo': 'sidebar-vmo', 'tab-olympic': 'sidebar-olympic' }[tabId];
     document.querySelectorAll(`#${sidebarId} a.nav-link`).forEach(link => link.remove());
+    if (tabId === 'tab-tst') document.querySelectorAll('#sidebar-tst .nav-year-group[data-year]').forEach(group => group.remove());
     if (tabId === 'tab-mock') {
       document.querySelectorAll('#sidebar-mock .nav-year-group').forEach(group => group.remove());
       document.querySelectorAll('#mockFilterPills .pill[data-filter^="MOCK"]').forEach(pill => pill.remove());

@@ -25,7 +25,7 @@
       // 2. Navigation Tabs
       'tabDanang': '📚 VMO Topic Materials',
       'tabMock': '🎯 VMO Mock Exams',
-      'tabTst': '🏛️ TST 2026–2027 Exams',
+      'tabTst': '🏛️ TST Exams',
       'tabVmo': '🇻🇳 VMO Exams',
       'tabOlympic': '🌐 IMO–Olympiad Exams',
       'tabHistory': '🗂️ Da Nang–Quang Nam Archive',
@@ -51,7 +51,7 @@
 
       // 5. Sidebars
       'sidebarDanangTitle': 'TABLE OF CONTENTS (85 PAGES)',
-      'sidebarTstTitle': 'TST 2026-2027 EXAM INDEX',
+      'sidebarTstTitle': 'TST EXAM INDEX',
       'sidebarHistoryTitle': 'DA NANG & QUANG NAM EXAM ARCHIVE',
       'tocCover': 'Document Information',
       'tocChapterIntro': 'Chapter Overview',
@@ -389,7 +389,7 @@
 
     if (btnDanang) setNodeText(btnDanang, '📚 Tài liệu chuyên đề VMO', UI_TRANSLATIONS.en.tabDanang, isEn);
     if (btnMock) setNodeText(btnMock, '🎯 Bộ đề thi thử VMO', UI_TRANSLATIONS.en.tabMock, isEn);
-    if (btnTst) setNodeText(btnTst, '🏛️ Đề TST 2026–2027', UI_TRANSLATIONS.en.tabTst, isEn);
+    if (btnTst) setNodeText(btnTst, '🏛️ Đề TST', UI_TRANSLATIONS.en.tabTst, isEn);
     const btnVmo = document.getElementById('tab-btn-vmo');
     const btnOlympic = document.getElementById('tab-btn-olympic');
     if (btnVmo) setNodeText(btnVmo, '🇻🇳 Đề VMO', UI_TRANSLATIONS.en.tabVmo, isEn);
@@ -459,7 +459,7 @@
     if (sbMockTitle) setNodeText(sbMockTitle, 'Bộ Đề Thi Thử VMO', 'VMO MOCK EXAMS', isEn);
 
     const sbTstTitle = document.querySelector('#sidebar-tst .sidebar-title');
-    if (sbTstTitle) setNodeText(sbTstTitle, 'Mục Lục Đề TST 2026-2027', UI_TRANSLATIONS.en.sidebarTstTitle, isEn);
+    if (sbTstTitle) setNodeText(sbTstTitle, 'Mục Lục Đề TST', UI_TRANSLATIONS.en.sidebarTstTitle, isEn);
 
     const sbHistTitle = document.querySelector('#sidebar-history .sidebar-title');
     if (sbHistTitle) setNodeText(sbHistTitle, 'Đề Đà Nẵng – Quảng Nam', UI_TRANSLATIONS.en.sidebarHistoryTitle, isEn);

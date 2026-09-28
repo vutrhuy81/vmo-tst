@@ -108,6 +108,7 @@ const byId = id => window.document.getElementById(id);
 assert.equal(byId('trendTarget').options.length, 38);
 window.fetch = async (_, options) => {
   assert.equal(JSON.parse(options.body).preview, true);
+  assert.equal(JSON.parse(options.body).includeCurrentYear, true);
   return { ok: true, json: async () => ({ success: true, data: {
     examCount: 1, questionCount: 3, years: ['2025-2026'], missingYears: ['2024-2025']
   } }) };
@@ -130,6 +131,7 @@ window.fetch = async (_, options) => {
 await window.runExamTrendAnalysis();
 assert.equal(requestBody.mode, 'year');
 assert.equal(requestBody.year, '2026-2027');
+assert.equal(requestBody.includeCurrentYear, true);
 assert.equal(byId('trendSaveButton').disabled, false, 'GPT bác vẫn phải cho admin lưu báo cáo Gemini');
 assert.match(byId('trendResult').textContent, /GPT chưa duyệt/);
 assert.match(byId('trendResult').textContent, /Tần suất phương pháp A/);
@@ -161,7 +163,7 @@ practiceButton.click();
 await new Promise(resolve => setTimeout(resolve, 20));
 const practiceModal = byId('trendPracticeModal');
 assert.ok(practiceModal.classList.contains('active'));
-assert.match(practiceModal.textContent, /Nguồn: Đề TST 2026–2027/);
+assert.match(practiceModal.textContent, /Nguồn: Đề TST/);
 assert.match(practiceModal.textContent, /Nguồn: Đề Đà Nẵng–Quảng Nam/);
 assert.equal(practiceModal.querySelectorAll('.trend-practice-exam').length, 2,
   'Phải hiển thị câu luyện tập của cả hai kho');

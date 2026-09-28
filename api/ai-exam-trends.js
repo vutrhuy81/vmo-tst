@@ -54,10 +54,10 @@ const verifierSchema = {
 
 function yearsFor(settings) {
   if (settings.mode === 'year') return [settings.year];
-  return Array.from({ length: settings.lookback }, (_, index) => {
+  return [...(settings.includeCurrentYear ? [settings.year] : []), ...Array.from({ length: settings.lookback }, (_, index) => {
     const start = settings.start - index - 1;
     return `${start}-${start + 1}`;
-  });
+  })];
 }
 
 async function databaseEvidence(db, settings) {
@@ -115,7 +115,7 @@ export default async function handler(req, res) {
 
     const scope = settings.mode === 'year'
       ? `toàn bộ các tỉnh/thành và trường chuyên TST trong năm ${settings.year}`
-      : `${settings.targetType === 'vmo' ? 'Bộ Giáo dục (VMO)' : settings.province} trong ${settings.lookback} năm trước ${settings.year}`;
+      : `${settings.targetType === 'vmo' ? 'Bộ Giáo dục (VMO)' : settings.province} trong ${settings.lookback} năm trước ${settings.year}${settings.includeCurrentYear ? ` và năm ${settings.year}` : ''}`;
     const mergerScope = evidence.mergedProvinceHistory
       ? `Địa giới hiện hành ${evidence.historyCurrentProvince} bao gồm dữ liệu lịch sử của: ${evidence.historyMembers.join(', ')}.`
       : '';

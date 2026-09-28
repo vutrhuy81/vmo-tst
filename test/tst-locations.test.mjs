@@ -155,7 +155,7 @@ assert.equal(window.document.getElementById('docRegion').value, 'TRUNG');
 assert.equal(window.document.getElementById('docRegionDisplay').value, 'Miền Trung');
 
 await window.loadDatabaseTstExams(true);
-assert.deepEqual(detailRequests, ['tst-national:tst-quang-tri'], 'Lần mở tab chỉ tải chi tiết đề đầu tiên');
+assert.deepEqual(detailRequests, ['tst-national:tst-chuyen-khtn'], 'Lần mở tab chỉ tải chi tiết đề đầu tiên theo thứ tự');
 await window.loadDatabaseCompetitionExams('tab-vmo');
 await window.loadDatabaseCompetitionExams('tab-olympic');
 for (const [category, tab, anchor] of [['vmo-official', 'vmo', 'vmo-vmo-2026-2027'], ['imo-olympic', 'olympic', 'olympic-imo-2026-2027']]) {
@@ -166,6 +166,7 @@ for (const [category, tab, anchor] of [['vmo-official', 'vmo', 'vmo-vmo-2026-202
 const newCard = window.document.getElementById('tst-quang-tri');
 assert.ok(newCard, 'Đề của tỉnh mới phải tự tạo card frontend');
 assert.equal(newCard.dataset.filter, 'TRUNG');
+await window.loadDatabaseExamDetail('tst-national', 'tst-quang-tri');
 const [firstQuestion, secondQuestion] = newCard.querySelectorAll('.problem-item');
 assert.equal(firstQuestion.querySelector('.problem-id span:first-child').textContent, 'Câu 1 Đa thức – Dãy số');
 assert.equal(firstQuestion.querySelector('.badge-topic').textContent, 'Đa thức – Dãy số');
@@ -415,5 +416,30 @@ window.safeRenderMathJaxToElement(mathPreview, rawFormula);
 await new Promise(resolve => setTimeout(resolve, 0));
 assert.equal(mathPreview.textContent, rawFormula, 'công thức lỗi phải hiển thị nguyên bản gốc');
 assert.ok(mathPreview.classList.contains('tex2jax_ignore'), 'fallback không bị typeset lại');
+
+const originalSummary = window.VMODataService.getExamCatalogSummary;
+const detailBeforeYearTest = window.VMODataService.getExamCatalogDetail;
+const historicalTst = {
+  id: 'historic-hung-yen', category: 'tst-national', targetAnchor: 'tst-hung-yen',
+  province: 'Hưng Yên', year: '2025-2026', dayNumber: 1, region: 'BAC',
+  examKey: 'tst:hung-yen:2025-2026:day-1', title: 'Đề Hưng Yên 2025–2026',
+  problems: [{ contentKey: 'tst:tst-hung-yen:2025-2026:question-1', questionNumber: 1,
+    content: 'Đề của năm cũ' }]
+};
+window.VMODataService.getExamCatalogSummary = async category => {
+  const exams = await originalSummary(category);
+  return category === 'tst-national' ? [...exams, { ...historicalTst, problemCount: 1, problems: undefined }] : exams;
+};
+window.VMODataService.getExamCatalogDetail = async (category, anchor, year) =>
+  category === 'tst-national' && anchor === 'tst-hung-yen' && year === '2025-2026'
+    ? [historicalTst] : detailBeforeYearTest(category, anchor);
+await window.loadDatabaseTstExams(true);
+assert.deepEqual(Array.from(window.document.querySelectorAll('#sidebar-tst .nav-year-group[data-year]'),
+  group => group.dataset.year), ['2026-2027', '2025-2026']);
+assert.ok(window.document.querySelector('#sidebar-tst a[href="#tst-hung-yen--year-2025-2026"]'));
+assert.ok(window.document.getElementById('tst-hung-yen--year-2025-2026'));
+await window.loadDatabaseExamDetail('tst-national', 'tst-hung-yen--year-2025-2026');
+assert.match(window.document.getElementById('tst-hung-yen--year-2025-2026').textContent, /Đề của năm cũ/);
+assert.ok(window.document.getElementById('tst-hung-yen'), 'Đề năm hiện tại giữ anchor cũ');
 
 console.log('TST and Đà Nẵng–Quảng Nam dynamic exam smoke test: OK');
