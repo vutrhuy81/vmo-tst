@@ -813,15 +813,25 @@ export default async function handler(req, res) {
       if (!exam) return res.status(404).json({ success: false, error: 'Không tìm thấy đề thi' });
       if (action === 'update_exam') {
         const title = cleanText(payload.title, 500);
+        const year = cleanText(payload.year, 40);
         const duration = Number(payload.duration);
         const examDate = cleanText(payload.examDate, 20);
-        if (!title || !Number.isInteger(duration) || duration < 1 || duration > 600 ||
+        if (!title || !/^\d{4}-\d{4}$/.test(year) || Number(year.slice(5)) !== Number(year.slice(0, 4)) + 1 ||
+            !Number.isInteger(duration) || duration < 1 || duration > 600 ||
             (examDate && !/^\d{4}-\d{2}-\d{2}$/.test(examDate))) {
-          return res.status(400).json({ success: false, error: 'Tên đề, ngày thi hoặc thời lượng không hợp lệ' });
+          return res.status(400).json({ success: false, error: 'Tên đề, năm học (YYYY-YYYY), ngày thi hoặc thời lượng không hợp lệ' });
         }
         const updated = await db.collection('exams').findOneAndUpdate({ _id: id },
-          { $set: { title, duration, examDate, description: cleanText(payload.description, 5000), updatedBy: session.username, updatedAt: now } },
+          { $set: { title, year, duration, examDate, description: cleanText(payload.description, 5000), updatedBy: session.username, updatedAt: now } },
           { returnDocument: 'after' });
+        if (exam.targetAnchor) {
+          const group = { 'vmo-official': 'vmo_official', 'imo-olympic': 'imo_olympic',
+            'history-dn-qn': 'danang_quangnam' }[exam.category] || 'tst';
+          const setKey = exam.category === 'vmo-mock' ? `mock:${exam.targetAnchor}`
+            : `${group}:${exam.targetAnchor}:day-${Number(exam.dayNumber) || 1}`;
+          await db.collection('content_sets').updateOne({ key: setKey },
+            { $set: { title, year, updatedBy: session.username, updatedAt: now } });
+        }
         await db.collection('problems').updateMany({ examId: String(id) },
           { $set: { setTitle: title, updatedBy: session.username, updatedAt: now } });
         await recordActivity(db, session, 'exam.updated', { itemTitle: title, examId: String(id) });

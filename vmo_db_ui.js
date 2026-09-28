@@ -4122,11 +4122,13 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
     form.style.cssText = 'padding:14px;margin:12px 0;background:#fff;border:1px solid #94a3b8;border-radius:8px;';
     form.innerHTML = `<strong>Chỉnh sửa đề · ${escapeHtmlText(exam.province || '')} · Ngày ${Number(exam.dayNumber) || 1}</strong>
       <label style="display:block">Tên đề<input name="title" required maxlength="500" style="width:100%"></label>
+      <label style="display:block">Năm học<input name="year" required maxlength="9" pattern="[0-9]{4}-[0-9]{4}" placeholder="2024-2025" style="width:100%"></label>
       <label style="display:block">Ngày thi<input name="examDate" type="date" style="width:100%"></label>
       <label style="display:block">Thời lượng (phút)<input name="duration" type="number" min="1" max="600" required style="width:100%"></label>
       <label style="display:block">Mô tả<textarea name="description" maxlength="5000" style="width:100%"></textarea></label>
       <button type="submit">Lưu thay đổi</button> <button type="button" onclick="this.closest('form').remove()">Hủy</button>`;
     form.elements.title.value = exam.title || '';
+    form.elements.year.value = exam.year || '';
     form.elements.examDate.value = /^\d{4}-\d{2}-\d{2}/.test(exam.examDate || '') ? exam.examDate.slice(0, 10) : '';
     form.elements.duration.value = Number(exam.duration) || 180;
     form.elements.description.value = exam.description || '';
@@ -4137,7 +4139,7 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
       button.disabled = true;
       try {
         await window.VMODataService.updateExam(id, {
-          title: form.elements.title.value, examDate: form.elements.examDate.value,
+          title: form.elements.title.value, year: form.elements.year.value.trim(), examDate: form.elements.examDate.value,
           duration: Number(form.elements.duration.value), description: form.elements.description.value
         });
         form.remove();
