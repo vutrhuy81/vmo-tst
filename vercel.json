@@ -10,6 +10,9 @@
     "api/ai-exam-trends.js": {
       "maxDuration": 300
     },
+    "api/ai-trend-theory.js": {
+      "maxDuration": 300
+    },
     "api/ai-guide.js": {
       "maxDuration": 300
     },

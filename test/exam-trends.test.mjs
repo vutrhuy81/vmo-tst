@@ -173,6 +173,37 @@ assert.equal(byId('trendSaveButton').disabled, false, 'GPT bác vẫn phải cho
 assert.match(byId('trendResult').textContent, /GPT chưa duyệt/);
 assert.match(byId('trendResult').textContent, /Tần suất phương pháp A/);
 assert.equal(byId('trendResult').querySelectorAll('.trend-topic-practice-button').length, 6);
+assert.ok(byId('trendResult').querySelector('.trend-collapse-report'), 'Báo cáo có nút thu gọn');
+assert.ok(byId('trendResult').querySelector('.trend-theory-button'), 'Vi chủ đề có nút cơ sở lý thuyết');
+let theoryRequests = 0;
+window.fetch = async (url, options) => {
+  assert.equal(url, '/api/ai-trend-theory');
+  assert.equal(JSON.parse(options.body).method, normalizedMethod.name);
+  theoryRequests++;
+  return { ok: true, json: async () => ({ success: true, data: {
+    theory: { introduction: 'Tổng quan $a_n$', definitions: [], theorems: [{
+      name: 'Định lý', statement: 'Phát biểu', assumptions: 'Giả thiết', proof: 'Chứng minh', application: 'Ứng dụng'
+    }], workedExample: 'Ví dụ', pitfalls: 'Lưu ý' },
+    quality: { score: 4.8, summary: 'Đã kiểm định' }
+  } }) };
+};
+byId('trendResult').querySelector('.trend-theory-button').click();
+await new Promise(resolve => setTimeout(resolve, 20));
+assert.match(byId('trendTheoryModal').textContent, /Tổng quan/);
+assert.match(byId('trendTheoryModal').textContent, /Định lý/);
+window.closeTrendTheory();
+byId('trendResult').querySelector('.trend-theory-button').click();
+await new Promise(resolve => setTimeout(resolve, 10));
+assert.equal(theoryRequests, 1, 'Bản đã kiểm định được dùng lại trong phiên');
+window.closeTrendTheory();
+byId('trendResult').querySelector('.trend-collapse-report').click();
+assert.equal(byId('trendResult').textContent, '', 'Thu gọn trả lại danh sách báo cáo');
+requestBody = null;
+window.fetch = async (_, options) => {
+  requestBody = JSON.parse(options.body);
+  return { ok: true, json: async () => ({ success: true, data: resultData }) };
+};
+await window.runExamTrendAnalysis();
 function practiceSource(sample, tabId, label) {
   const parts = sample.sourceId.split(':');
   const questionNumber = Number(parts.pop());
@@ -228,6 +259,10 @@ await window.saveExamTrendReport();
 assert.equal(savedPayload.quality.status, 'rejected');
 assert.equal(savedPayload.report.topicTrends.length, 6);
 assert.ok(byId('trendSavedReports').querySelector('[data-trend-edit]'));
+byId('trendSavedReports').querySelector('[data-trend-report]').click();
+assert.match(byId('trendResult').textContent, /Báo cáo đã lưu/);
+byId('trendSavedReports').querySelector('[data-trend-report]').click();
+assert.equal(byId('trendResult').textContent, '', 'Nhấp lại báo cáo đang chọn sẽ đóng nội dung');
 byId('trendSavedReports').querySelector('[data-trend-edit]').click();
 const editForm = byId('trendReportEditForm');
 editForm.elements.title.value = 'Báo cáo đã sửa';

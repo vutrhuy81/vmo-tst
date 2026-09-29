@@ -2415,6 +2415,7 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
   };
 
   const examTrendState = { current: null, saved: [], loaded: false, running: false };
+  const trendTheoryCache = new Map();
 
   function ensureExamTrendUi(modal, isAdmin) {
     if (!isAdmin) {
@@ -2549,6 +2550,93 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
     const practiceIds = Array.isArray(method.practiceEvidenceIds) ? method.practiceEvidenceIds : [];
     return [...new Set(practiceIds.length ? practiceIds : (method.evidenceIds || []))];
   }
+
+  window.closeTrendTheory = function() {
+    document.getElementById('trendTheoryModal')?.classList.remove('active');
+    if (!document.getElementById('trendPracticeModal')?.classList.contains('active')) {
+      document.body.classList.remove('trend-practice-open');
+    }
+  };
+
+  function ensureTrendTheoryModal() {
+    let modal = document.getElementById('trendTheoryModal');
+    if (modal) return modal;
+    modal = document.createElement('div');
+    modal.id = 'trendTheoryModal';
+    modal.className = 'trend-practice-modal';
+    modal.style.zIndex = '12200';
+    modal.setAttribute('role', 'dialog');
+    modal.setAttribute('aria-modal', 'true');
+    modal.setAttribute('aria-labelledby', 'trendTheoryTitle');
+    modal.innerHTML = `<div class="trend-practice-shell"><header class="trend-practice-header">
+      <div><div class="trend-practice-kicker">📐 CƠ SỞ LÝ THUYẾT TOÁN NÂNG CAO</div><h2 id="trendTheoryTitle"></h2><p id="trendTheorySubtitle"></p></div>
+      <button type="button" class="trend-practice-close" aria-label="Đóng lý thuyết">×</button></header>
+      <main class="trend-practice-body" id="trendTheoryBody" aria-live="polite"></main></div>`;
+    modal.querySelector('.trend-practice-close').onclick = window.closeTrendTheory;
+    modal.addEventListener('click', event => { if (event.target === modal) window.closeTrendTheory(); });
+    document.body.appendChild(modal);
+    return modal;
+  }
+
+  function renderTrendTheory(data, container) {
+    const theory = data.theory || {};
+    container.replaceChildren();
+    const status = document.createElement('p');
+    status.textContent = `✅ GPT kiểm định độc lập: ${data.quality?.score}/5 · ${data.quality?.summary || ''}`;
+    container.appendChild(status);
+    const addSection = (heading, content) => {
+      if (!content) return;
+      const section = document.createElement('section');
+      section.style.cssText = 'margin:16px 0;padding:14px;border:1px solid #cbd5e1;border-radius:8px;background:#fff;';
+      const title = document.createElement('h3'); title.textContent = heading;
+      const body = document.createElement('div');
+      body.style.whiteSpace = 'pre-wrap';
+      section.append(title, body); container.appendChild(section);
+      window.safeRenderMathJaxToElement?.(body, content);
+      if (!window.safeRenderMathJaxToElement) body.textContent = content;
+    };
+    addSection('Tổng quan', theory.introduction);
+    (theory.definitions || []).forEach((item, index) => addSection(`Định nghĩa ${index + 1}: ${item.name}`,
+      `${item.statement}\nGiả thiết: ${item.assumptions}\nGiải thích: ${item.proof}\nỨng dụng: ${item.application}`));
+    (theory.theorems || []).forEach((item, index) => addSection(`Định lý/Bổ đề ${index + 1}: ${item.name}`,
+      `Phát biểu: ${item.statement}\nGiả thiết: ${item.assumptions}\nChứng minh: ${item.proof}\nVận dụng: ${item.application}`));
+    addSection('Phương pháp nâng cao', theory.techniques);
+    addSection('Ví dụ có lời giải', theory.workedExample);
+    addSection('Sai lầm thường gặp', theory.pitfalls);
+    addSection('Liên hệ mở rộng', theory.furtherConnections);
+  }
+
+  window.openTrendTheory = async function(topicIndex, methodIndex) {
+    if (!requireAdminUiAction()) return;
+    const topic = examTrendState.rendered?.report?.topicTrends?.[Number(topicIndex)];
+    const method = topic?.frequentMethods?.[Number(methodIndex)];
+    if (!topic || !method) return showToast('Không tìm thấy vi chủ đề.', false);
+    const modal = ensureTrendTheoryModal();
+    const body = modal.querySelector('#trendTheoryBody');
+    modal.querySelector('#trendTheoryTitle').textContent = method.name;
+    modal.querySelector('#trendTheorySubtitle').textContent = topic.topic;
+    modal.classList.add('active');
+    document.body.classList.add('trend-practice-open');
+    const key = `${topic.topic}\n${method.name}`;
+    if (trendTheoryCache.has(key)) return renderTrendTheory(trendTheoryCache.get(key), body);
+    body.textContent = 'Gemini đang biên soạn cơ sở lý thuyết; GPT sẽ kiểm định độc lập…';
+    const controller = new AbortController();
+    const timer = setTimeout(() => controller.abort(), 295_000);
+    try {
+      const response = await fetch('/api/ai-trend-theory', { method: 'POST', credentials: 'same-origin',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ topic: topic.topic, method: method.name }), signal: controller.signal });
+      const result = await response.json().catch(() => null);
+      if (!response.ok || !result?.success) throw new Error(result?.error || `Lỗi HTTP ${response.status}`);
+      trendTheoryCache.set(key, result.data);
+      if (modal.classList.contains('active') && modal.querySelector('#trendTheoryTitle').textContent === method.name) {
+        renderTrendTheory(result.data, body);
+      }
+    } catch (error) {
+      if (modal.classList.contains('active')) body.textContent = error.name === 'AbortError'
+        ? 'Quá thời gian chờ kiểm định. Hãy thử lại.' : (error.message || 'Không tạo được cơ sở lý thuyết.');
+    } finally { clearTimeout(timer); }
+  };
 
   function trendEvidenceTab(item) {
     if (item.anchor.startsWith('hist-')) return 'tab-history';
@@ -2727,13 +2815,13 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
     const report = data.report;
     examTrendState.rendered = data;
     const methods = (item, topicIndex) => (item.frequentMethods || []).length
-      ? `<ul style="margin:7px 0 0;padding-left:20px;">${item.frequentMethods.map((method, methodIndex) => { const practiceIds = trendPracticeEvidenceIds(method); return `<li><button type="button" class="trend-practice-button" data-topic-index="${topicIndex}" data-method-index="${methodIndex}" ${practiceIds.length ? '' : 'disabled'}><strong>${escapeHtmlText(method.name)}</strong><span>📚 Luyện ${practiceIds.length} câu</span></button>${method.note ? `: ${escapeHtmlText(method.note)}` : ''}<div style="font-size:.72rem;color:#64748b;">Bằng chứng phân tích: ${escapeHtmlText((method.evidenceIds || []).join(', ') || 'chưa xác định')}</div></li>`; }).join('')}</ul>`
+      ? `<ul style="margin:7px 0 0;padding-left:20px;">${item.frequentMethods.map((method, methodIndex) => { const practiceIds = trendPracticeEvidenceIds(method); return `<li><button type="button" class="trend-theory-button" data-topic-index="${topicIndex}" data-method-index="${methodIndex}" style="border:0;background:none;padding:0;text-align:left;font-weight:800;color:#173b64;cursor:pointer;">${escapeHtmlText(method.name)}</button><div style="display:flex;gap:6px;flex-wrap:wrap;"><button type="button" class="trend-theory-button" data-topic-index="${topicIndex}" data-method-index="${methodIndex}">📐 Cơ sở lý thuyết</button><button type="button" class="trend-practice-button" data-topic-index="${topicIndex}" data-method-index="${methodIndex}" ${practiceIds.length ? '' : 'disabled'}>📚 Luyện ${practiceIds.length} câu</button></div>${method.note ? `: ${escapeHtmlText(method.note)}` : ''}<div style="font-size:.72rem;color:#64748b;">Bằng chứng phân tích: ${escapeHtmlText((method.evidenceIds || []).join(', ') || 'chưa xác định')}</div></li>`; }).join('')}</ul>`
       : '<p style="color:#64748b;margin:7px 0 0;">Chưa đủ dữ liệu để xác định phương pháp lặp lại.</p>';
     target.innerHTML = `
       <article style="border:1px solid #cbd5e1;border-radius:10px;background:white;padding:14px;">
         <div style="display:flex;justify-content:space-between;gap:9px;align-items:flex-start;flex-wrap:wrap;">
           <div><h3 style="margin:0 0 5px;color:#0f172a;">${escapeHtmlText(report.title)}</h3><div style="font-size:.78rem;color:#64748b;">${saved ? 'Báo cáo đã lưu' : `Gemini: ${escapeHtmlText(data.model || 'không rõ model')}`} · ${escapeHtmlText(learningDate(data.createdAt || data.generatedAt))}</div></div>
-          <span style="padding:6px 9px;border-radius:999px;background:${qualityBackground};color:${qualityColor};font-size:.78rem;font-weight:800;">${qualityLabel}${quality.score !== null && quality.score !== undefined ? ` · ${escapeHtmlText(quality.score)}/5` : ''}</span>
+          <div><span style="padding:6px 9px;border-radius:999px;background:${qualityBackground};color:${qualityColor};font-size:.78rem;font-weight:800;">${qualityLabel}${quality.score !== null && quality.score !== undefined ? ` · ${escapeHtmlText(quality.score)}/5` : ''}</span> <button type="button" class="trend-collapse-report" aria-label="Thu gọn báo cáo">▲ Thu gọn</button></div>
         </div>
         <div style="margin:11px 0;padding:10px;background:#eff6ff;border-radius:7px;color:#1e3a8a;font-size:.82rem;"><strong>Nguồn Atlas:</strong> ${Number(evidence.examCount) || 0} đề · ${Number(evidence.questionCount) || 0} câu · ${Number(evidence.unitCount) || 0} đơn vị · ${escapeHtmlText((evidence.years || []).join(', ') || data.settings?.year || '')} · thiếu ${Number(evidence.missingYears?.length) || 0} năm · AI đọc ${Number(evidence.sampleCount) || evidence.samples?.length || 0} câu mẫu${Number(evidence.otherQuestionCount) ? ` · ${Number(evidence.otherQuestionCount)} câu ngoài 6 tiêu chí` : ''}${evidence.mergedProvinceHistory ? `<div style="margin-top:5px;"><strong>Địa giới hiện hành:</strong> ${escapeHtmlText((evidence.historyMembers || []).join(' + '))} → ${escapeHtmlText(evidence.historyCurrentProvince || '')}</div>` : ''}<div style="margin-top:5px;">Tỷ lệ chủ đề tính theo câu; tần suất vi chủ đề dựa trên câu mẫu được dẫn.</div></div>
         <p style="white-space:pre-wrap;line-height:1.55;">${escapeHtmlText(report.executiveSummary || '')}</p>
@@ -2755,6 +2843,14 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
     target.querySelectorAll('.trend-topic-practice-button').forEach(button => {
       button.onclick = () => window.openTrendPractice(button.dataset.topicIndex);
     });
+    target.querySelectorAll('.trend-theory-button').forEach(button => {
+      button.onclick = () => window.openTrendTheory(button.dataset.topicIndex, button.dataset.methodIndex);
+    });
+    target.querySelector('.trend-collapse-report').onclick = () => {
+      target.replaceChildren();
+      examTrendState.rendered = null;
+      document.getElementById('trendSavedReports')?.scrollIntoView?.({ block: 'nearest' });
+    };
   }
 
   window.previewExamTrendEvidence = async function() {
@@ -2858,7 +2954,13 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
         return `<div style="padding:9px 11px;margin-bottom:6px;border:1px solid #cbd5e1;border-radius:7px;background:white;"><button type="button" data-trend-report="${index}" style="display:block;width:100%;text-align:left;border:0;background:none;cursor:pointer;"><strong>${escapeHtmlText(item.report?.title || 'Báo cáo xu hướng')}</strong><span style="float:right;color:${color};background:${background};padding:2px 6px;border-radius:999px;font-size:.7rem;">${label}</span><div style="font-size:.76rem;color:#64748b;">${escapeHtmlText(item.settings?.year || '')} · ${escapeHtmlText(item.createdBy || '')} · ${escapeHtmlText(learningDate(item.createdAt))}${item.updatedBy ? ` · sửa bởi ${escapeHtmlText(item.updatedBy)}` : ''}</div></button><div style="display:flex;gap:8px;margin-top:7px;"><button type="button" data-trend-edit="${index}">✏️ Chỉnh sửa</button><button type="button" data-trend-delete="${index}">🗑️ Xóa</button></div></div>`;
       }).join('') : '<p style="color:#64748b;">Chưa có báo cáo xu hướng đã lưu.</p>';
       list.querySelectorAll('[data-trend-report]').forEach(button => {
-        button.onclick = () => renderExamTrendReport(examTrendState.saved[Number(button.dataset.trendReport)], true);
+        button.onclick = () => {
+          const item = examTrendState.saved[Number(button.dataset.trendReport)];
+          if (examTrendState.rendered?.id === item.id) {
+            document.getElementById('trendResult')?.replaceChildren();
+            examTrendState.rendered = null;
+          } else renderExamTrendReport(item, true);
+        };
       });
       list.querySelectorAll('[data-trend-edit]').forEach(button => {
         button.onclick = () => window.editExamTrendReport(Number(button.dataset.trendEdit));
