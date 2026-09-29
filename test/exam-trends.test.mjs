@@ -5,7 +5,8 @@ import {
   TREND_TOPICS, approvedTrendReview, classifyTrendTopic, normalizeTrendReport,
   selectTrendEvidence, selectTrendPracticeEvidence, trendAnalysisSettings
 } from '../lib/exam-trends.js';
-import { assessTrendTheoryReview } from '../api/ai-trend-theory.js';
+import { assessTrendTheory } from '../api/ai-trend-theory.js';
+import { trendTheorySources } from '../lib/trend-theory-sources.js';
 import { historicalExams } from '../data/exam-prediction-history.js';
 
 assert.equal(classifyTrendTopic('Phương trình hàm – Cauchy'), 'Phương trình hàm');
@@ -98,16 +99,14 @@ const validReview = {
 assert.equal(approvedTrendReview(validReview), true);
 assert.equal(approvedTrendReview({ ...validReview, criticalIssues: ['Dẫn chứng sai'] }), false);
 assert.equal(approvedTrendReview({ ...validReview, topicChecks: validReview.topicChecks.slice(0, 5) }), false);
-const theoryReview = { approved: true, score: 4.7, mathematicallyCorrect: true,
-  proofsRigorous: true, assumptionsExplicit: true, exampleVerified: true,
-  topicRelevant: true, criticalIssues: [] };
-assert.equal(assessTrendTheoryReview(theoryReview, { theorems: [
-  { statement: 'Mệnh đề 1', proof: 'Theo định nghĩa.' },
-  { statement: 'Mệnh đề 2', proof: 'Áp dụng bổ đề.' }
-] }).approved, true, 'Không bác chứng minh chỉ vì độ dài ký tự khi GPT đã kiểm tra tính chặt chẽ');
-assert.equal(assessTrendTheoryReview({ ...theoryReview, proofsRigorous: false }, {
-  theorems: [{}, {}]
-}).approved, false, 'GPT không duyệt tính chặt chẽ thì phải chặn hiển thị');
+const reference = trendTheorySources('Dãy số và Giới hạn dãy số')[0];
+const theorySample = { introduction: 'Dãy hội tụ', workedExample: 'a_n=1/n', selfCheck: 'Thế n=1,2',
+  definitions: [], theorems: [{ statement: 'Dãy đơn điệu bị chặn hội tụ', assumptions: 'Dãy thực',
+    proof: 'Dựa trên tính đầy đủ của số thực.', sourceIds: [reference.id], sourceScope: 'Định lý hội tụ đơn điệu' }] };
+assert.equal(assessTrendTheory(theorySample, [reference]).approved, true);
+assert.equal(assessTrendTheory({ ...theorySample, theorems: [{ ...theorySample.theorems[0],
+  sourceIds: ['FAKE-URL'] }] }, [reference]).approved, false, 'Không chấp nhận mã tài liệu do model bịa');
+assert.equal(assessTrendTheory({ ...theorySample, workedExample: '' }, [reference]).approved, false);
 
 const dom = new JSDOM(`<!doctype html><html><body>
   <div id="dataHubModal"><div class="vmo-modal-container"><div class="vmo-modal-title"><span></span><span></span></div><div class="vmo-modal-body"><div class="hub-tabs"><button class="hub-tab-btn" id="hub-tab-events"></button></div><div id="hub-panel-events"></div>
@@ -193,15 +192,17 @@ window.fetch = async (url, options) => {
   theoryRequests++;
   return { ok: true, json: async () => ({ success: true, data: {
     theory: { introduction: 'Tổng quan $a_n$', definitions: [], theorems: [{
-      name: 'Định lý', statement: 'Phát biểu', assumptions: 'Giả thiết', proof: 'Chứng minh', application: 'Ứng dụng'
-    }], workedExample: 'Ví dụ', pitfalls: 'Lưu ý' },
-    quality: { score: 4.8, summary: 'Đã kiểm định' }
+      name: 'Định lý', statement: 'Phát biểu', assumptions: 'Giả thiết', proof: 'Chứng minh', application: 'Ứng dụng', sourceIds: [reference.id], sourceScope: 'Kiến thức nền'
+    }], workedExample: 'Ví dụ', pitfalls: 'Lưu ý', selfCheck: 'Đã tự kiểm tra' },
+    sources: [reference], quality: { summary: 'GPT biên soạn và tự kiểm tra' }
   } }) };
 };
 byId('trendResult').querySelector('.trend-theory-button').click();
 await new Promise(resolve => setTimeout(resolve, 20));
 assert.match(byId('trendTheoryModal').textContent, /Tổng quan/);
 assert.match(byId('trendTheoryModal').textContent, /Định lý/);
+assert.equal(byId('trendTheoryModal').querySelector('a').href, reference.url);
+assert.match(byId('trendTheoryModal').textContent, /tự kiểm tra/);
 window.closeTrendTheory();
 byId('trendResult').querySelector('.trend-theory-button').click();
 await new Promise(resolve => setTimeout(resolve, 10));

@@ -2582,9 +2582,27 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
     const theory = data.theory || {};
     container.replaceChildren();
     const status = document.createElement('p');
-    status.textContent = `✅ GPT kiểm định độc lập: ${data.quality?.score}/5 · ${data.quality?.summary || ''}`;
+    status.textContent = data.quality?.summary || 'GPT biên soạn và tự kiểm tra; đối chiếu tài liệu nền bên dưới.';
     container.appendChild(status);
-    const addSection = (heading, content) => {
+    const sources = new Map((data.sources || []).map(source => [source.id, source]));
+    const addReferences = (section, item) => {
+      const references = (item.sourceIds || []).map(id => sources.get(id)).filter(Boolean);
+      if (!references.length) return;
+      const note = document.createElement('p');
+      note.textContent = `Phạm vi tham khảo: ${item.sourceScope || 'kiến thức nền'}`;
+      section.appendChild(note);
+      for (const source of references) {
+        if (!/^https:\/\/(ocw\.mit\.edu|mathcs\.clarku\.edu)\//.test(source.url)) continue;
+        const link = document.createElement('a');
+        link.href = source.url;
+        link.target = '_blank';
+        link.rel = 'noopener noreferrer';
+        link.textContent = `📖 ${source.title} (${source.id})`;
+        link.style.cssText = 'display:block;margin:5px 0;overflow-wrap:anywhere;';
+        section.appendChild(link);
+      }
+    };
+    const addSection = (heading, content, item) => {
       if (!content) return;
       const section = document.createElement('section');
       section.style.cssText = 'margin:16px 0;padding:14px;border:1px solid #cbd5e1;border-radius:8px;background:#fff;';
@@ -2594,16 +2612,18 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
       section.append(title, body); container.appendChild(section);
       window.safeRenderMathJaxToElement?.(body, content);
       if (!window.safeRenderMathJaxToElement) body.textContent = content;
+      if (item) addReferences(section, item);
     };
     addSection('Tổng quan', theory.introduction);
     (theory.definitions || []).forEach((item, index) => addSection(`Định nghĩa ${index + 1}: ${item.name}`,
-      `${item.statement}\nGiả thiết: ${item.assumptions}\nGiải thích: ${item.proof}\nỨng dụng: ${item.application}`));
+      `${item.statement}\nGiả thiết: ${item.assumptions}\nGiải thích: ${item.proof}\nỨng dụng: ${item.application}`, item));
     (theory.theorems || []).forEach((item, index) => addSection(`Định lý/Bổ đề ${index + 1}: ${item.name}`,
-      `Phát biểu: ${item.statement}\nGiả thiết: ${item.assumptions}\nChứng minh: ${item.proof}\nVận dụng: ${item.application}`));
+      `Phát biểu: ${item.statement}\nGiả thiết: ${item.assumptions}\nChứng minh: ${item.proof}\nVận dụng: ${item.application}`, item));
     addSection('Phương pháp nâng cao', theory.techniques);
     addSection('Ví dụ có lời giải', theory.workedExample);
     addSection('Sai lầm thường gặp', theory.pitfalls);
     addSection('Liên hệ mở rộng', theory.furtherConnections);
+    addSection('Tự kiểm tra và giới hạn', theory.selfCheck);
   }
 
   window.openTrendTheory = async function(topicIndex, methodIndex) {
@@ -2619,7 +2639,7 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
     document.body.classList.add('trend-practice-open');
     const key = `${topic.topic}\n${method.name}`;
     if (trendTheoryCache.has(key)) return renderTrendTheory(trendTheoryCache.get(key), body);
-    body.textContent = 'Gemini đang biên soạn cơ sở lý thuyết; GPT sẽ kiểm định độc lập…';
+    body.textContent = 'GPT đang biên soạn, tự kiểm tra và gắn tài liệu nền…';
     const controller = new AbortController();
     const timer = setTimeout(() => controller.abort(), 295_000);
     try {
@@ -2640,7 +2660,7 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
       if (modal.classList.contains('active')) {
         body.style.whiteSpace = 'pre-wrap';
         body.textContent = error.name === 'AbortError'
-        ? 'Quá thời gian chờ kiểm định. Hãy thử lại.' : (error.message || 'Không tạo được cơ sở lý thuyết.');
+        ? 'Quá thời gian chờ biên soạn. Hãy thử lại.' : (error.message || 'Không tạo được cơ sở lý thuyết.');
       }
     } finally { clearTimeout(timer); }
   };
