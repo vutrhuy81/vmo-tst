@@ -85,7 +85,7 @@ function cleanExamTrendReport(payload) {
     })).filter(method => method.name)
   })).filter(item => item.topic);
   if (topicTrends.length !== 6 || topicTrends.some((item, index) => item.topic !== EXAM_TREND_TOPICS[index])) return null;
-  const qualityStatus = ['approved', 'rejected', 'unavailable'].includes(quality.status) ? quality.status : 'unavailable';
+  const qualityStatus = ['approved', 'rejected', 'unavailable', 'checked', 'limited'].includes(quality.status) ? quality.status : 'unavailable';
   return {
     settings: {
       mode: settings.mode === 'year' ? 'year' : settings.mode === 'target' ? 'target' : '',

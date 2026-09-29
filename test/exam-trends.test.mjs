@@ -6,6 +6,7 @@ import {
   selectTrendEvidence, selectTrendPracticeEvidence, trendAnalysisSettings
 } from '../lib/exam-trends.js';
 import { assessTrendTheory } from '../api/ai-trend-theory.js';
+import { auditTrendReport } from '../api/ai-exam-trends.js';
 import { trendTheorySources } from '../lib/trend-theory-sources.js';
 import { cleanTrendTheory } from '../lib/trend-theory-storage.js';
 import { historicalExams } from '../data/exam-prediction-history.js';
@@ -101,6 +102,24 @@ assert.equal(approvedTrendReview(validReview), true);
 assert.equal(approvedTrendReview({ ...validReview, criticalIssues: ['Dẫn chứng sai'] }), false);
 assert.equal(approvedTrendReview({ ...validReview, topicChecks: validReview.topicChecks.slice(0, 5) }), false);
 const reference = trendTheorySources('Dãy số và Giới hạn dãy số')[0];
+const auditEvidence = { questionCount: 2, otherQuestionCount: 0,
+  topicStats: TREND_TOPICS.map((topic, index) => ({ topic, questionCount: index ? 0 : 2,
+    prevalencePercent: index ? 0 : 100 })) };
+const auditSamples = [{ sourceId: 'q1', criterion: TREND_TOPICS[0] }];
+const auditRaw = { topicTrends: TREND_TOPICS.map((topic, index) => ({ topic,
+  questionCount: index ? 0 : 2, prevalencePercent: index ? 0 : 100,
+  frequentMethods: index ? [] : [{ name: 'Phương pháp A', frequency: 1,
+    evidenceIds: ['q1'], practiceEvidenceIds: ['q1'] }] })), recurringPatterns: [] };
+const auditNormalized = { topicTrends: auditRaw.topicTrends };
+assert.deepEqual(auditTrendReport(auditRaw, auditNormalized, auditEvidence, auditSamples, auditSamples), []);
+assert.ok(auditTrendReport({ ...auditRaw, topicTrends: auditRaw.topicTrends.map((item, index) =>
+  index ? item : { ...item, frequentMethods: [{ ...item.frequentMethods[0], evidenceIds: ['fake'] }] }) },
+  auditNormalized, auditEvidence, auditSamples, auditSamples).length,
+'Mã dẫn không có trong mẫu Atlas phải bị phát hiện');
+assert.ok(auditTrendReport({ ...auditRaw, topicTrends: auditRaw.topicTrends.slice(0, 5) },
+  auditNormalized, auditEvidence, auditSamples, auditSamples).length,
+'Báo cáo thiếu một chủ đề phải bị phát hiện');
+
 const theorySample = { introduction: 'Dãy hội tụ', workedExample: 'a_n=1/n', selfCheck: 'Thế n=1,2',
   definitions: [], theorems: [{ statement: 'Dãy đơn điệu bị chặn hội tụ', assumptions: 'Dãy thực',
     proof: 'Dựa trên tính đầy đủ của số thực.', sourceIds: [reference.id], sourceScope: 'Định lý hội tụ đơn điệu' }] };

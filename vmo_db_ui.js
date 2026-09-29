@@ -2442,7 +2442,7 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
     panel.innerHTML = `
       <div style="margin-bottom:12px;">
         <h4 style="margin:0;color:#173b64;">AI Phân tích xu hướng ra đề</h4>
-        <small style="color:#64748b;">Gemini phân tích dữ liệu đề đã lưu → GPT kiểm định độc lập. Chỉ dành cho quản trị viên.</small>
+        <small style="color:#64748b;">GPT phân tích dữ liệu Atlas; hệ thống đối chiếu số liệu và mã dẫn. Chỉ dành cho quản trị viên.</small>
       </div>
       <div style="background:#f8fafc;border:1px solid #cbd5e1;border-radius:9px;padding:12px;margin-bottom:14px;">
         <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(205px,1fr));gap:10px;">
@@ -2456,7 +2456,7 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
         <p id="trendScopeHelp" style="margin:9px 0;color:#475569;font-size:.79rem;"></p>
         <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;">
           <button type="button" id="trendPreviewButton">🔎 Kiểm tra nguồn Atlas</button>
-          <button type="button" id="trendRunButton" style="padding:9px 13px;border:0;border-radius:6px;background:#1d4ed8;color:white;font-weight:700;cursor:pointer;">✨ Gemini phân tích → GPT kiểm định</button>
+          <button type="button" id="trendRunButton" style="padding:9px 13px;border:0;border-radius:6px;background:#1d4ed8;color:white;font-weight:700;cursor:pointer;">✨ GPT phân tích · đối chiếu Atlas</button>
           <button type="button" id="trendSaveButton" disabled style="padding:9px 13px;border:0;border-radius:6px;background:#16a34a;color:white;font-weight:700;cursor:pointer;">💾 Lưu báo cáo vào MongoDB</button>
           <span id="trendStatus" role="status" style="font-size:.8rem;color:#475569;"></span>
         </div>
@@ -2499,6 +2499,8 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
   }
 
   function trendStatusLabel(quality = {}) {
+    if (quality.status === 'checked') return ['✅ Đã đối chiếu Atlas', '#166534', '#dcfce7'];
+    if (quality.status === 'limited') return ['⚠️ Cần rà soát nhận định', '#92400e', '#fef3c7'];
     if (quality.status === 'approved') return ['✅ GPT đã duyệt', '#166534', '#dcfce7'];
     if (quality.status === 'rejected') return ['⚠️ GPT chưa duyệt', '#991b1b', '#fee2e2'];
     return ['⏳ GPT chưa kiểm định được', '#92400e', '#fef3c7'];
@@ -2864,10 +2866,11 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
     const notice = modal.querySelector('#trendPracticeNotice');
     modal.querySelector('#trendPracticeTitle').textContent = isTopic ? topic.topic : method.name;
     modal.querySelector('#trendPracticeSubtitle').textContent = `${topic.topic} · ${evidence.length} câu từ Atlas`;
-    notice.textContent = data.quality?.status === 'approved'
-      ? '✅ Danh sách vi chủ đề đã được GPT kiểm định.'
-      : '⚠️ Báo cáo Gemini chưa được GPT duyệt hoàn toàn; hãy xem đây là danh sách luyện tập tham khảo.';
-    notice.className = `trend-practice-notice ${data.quality?.status === 'approved' ? 'approved' : 'warning'}`;
+    notice.textContent = data.quality?.status === 'checked'
+      ? '✅ Số liệu và mã câu đã được đối chiếu Atlas; nhận định do GPT tự rà soát.'
+      : data.quality?.status === 'approved' ? '✅ Danh sách vi chủ đề đã được GPT kiểm định.'
+      : '⚠️ Hãy rà soát các nhận định và giới hạn mẫu trước khi sử dụng.';
+    notice.className = `trend-practice-notice ${['approved', 'checked'].includes(data.quality?.status) ? 'approved' : 'warning'}`;
     body.innerHTML = '<div class="trend-practice-loading">Đang đối chiếu và tải câu hỏi từ kho đề…</div>';
     modal.classList.add('active');
     document.body.classList.add('trend-practice-open');
@@ -2956,7 +2959,7 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
     target.innerHTML = `
       <article style="border:1px solid #cbd5e1;border-radius:10px;background:white;padding:14px;">
         <div style="display:flex;justify-content:space-between;gap:9px;align-items:flex-start;flex-wrap:wrap;">
-          <div><h3 style="margin:0 0 5px;color:#0f172a;">${escapeHtmlText(report.title)}</h3><div style="font-size:.78rem;color:#64748b;">${saved ? 'Báo cáo đã lưu' : `Gemini: ${escapeHtmlText(data.model || 'không rõ model')}`} · ${escapeHtmlText(learningDate(data.createdAt || data.generatedAt))}</div></div>
+          <div><h3 style="margin:0 0 5px;color:#0f172a;">${escapeHtmlText(report.title)}</h3><div style="font-size:.78rem;color:#64748b;">${saved ? 'Báo cáo đã lưu' : `GPT: ${escapeHtmlText(data.model || 'không rõ model')}`} · ${escapeHtmlText(learningDate(data.createdAt || data.generatedAt))}</div></div>
           <div><span style="padding:6px 9px;border-radius:999px;background:${qualityBackground};color:${qualityColor};font-size:.78rem;font-weight:800;">${qualityLabel}${quality.score !== null && quality.score !== undefined ? ` · ${escapeHtmlText(quality.score)}/5` : ''}</span> <button type="button" class="trend-collapse-report" aria-label="Thu gọn báo cáo">▲ Thu gọn</button></div>
         </div>
         <div style="margin:11px 0;padding:10px;background:#eff6ff;border-radius:7px;color:#1e3a8a;font-size:.82rem;"><strong>Nguồn Atlas:</strong> ${Number(evidence.examCount) || 0} đề · ${Number(evidence.questionCount) || 0} câu · ${Number(evidence.unitCount) || 0} đơn vị · ${escapeHtmlText((evidence.years || []).join(', ') || data.settings?.year || '')} · thiếu ${Number(evidence.missingYears?.length) || 0} năm · AI đọc ${Number(evidence.sampleCount) || evidence.samples?.length || 0} câu mẫu${Number(evidence.otherQuestionCount) ? ` · ${Number(evidence.otherQuestionCount)} câu ngoài 6 tiêu chí` : ''}${evidence.mergedProvinceHistory ? `<div style="margin-top:5px;"><strong>Địa giới hiện hành:</strong> ${escapeHtmlText((evidence.historyMembers || []).join(' + '))} → ${escapeHtmlText(evidence.historyCurrentProvince || '')}</div>` : ''}<div style="margin-top:5px;">Tỷ lệ chủ đề tính theo câu; tần suất vi chủ đề dựa trên câu mẫu được dẫn.</div></div>
@@ -3032,7 +3035,7 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
     examTrendState.current = null;
     if (save) save.disabled = true;
     if (button) button.disabled = true;
-    if (status) status.textContent = 'Gemini đang phân tích; sau đó GPT sẽ kiểm định (tối đa khoảng 290 giây)...';
+    if (status) status.textContent = 'GPT đang phân tích và hệ thống sẽ đối chiếu dữ liệu Atlas…';
     const controller = new AbortController();
     const timer = setTimeout(() => controller.abort(), 295_000);
     try {
@@ -3045,9 +3048,9 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
       examTrendState.current = result.data;
       renderExamTrendReport(result.data);
       if (save) save.disabled = false;
-      if (status) status.textContent = result.data.quality?.verified
-        ? 'Hoàn tất: GPT đã duyệt báo cáo.'
-        : 'Hoàn tất: đã giữ kết quả Gemini kèm nhận xét/trạng thái GPT.';
+      if (status) status.textContent = result.data.quality?.status === 'checked'
+        ? 'Hoàn tất: số liệu và mã dẫn đã đối chiếu Atlas.'
+        : 'Hoàn tất: xem các giới hạn và mã dẫn cần rà soát.';
     } catch (error) {
       if (status) status.textContent = error?.name === 'AbortError'
         ? 'Yêu cầu vượt quá thời gian chờ 295 giây.' : (error?.message || 'Không thể phân tích xu hướng.');
