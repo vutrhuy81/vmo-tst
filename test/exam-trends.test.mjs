@@ -5,6 +5,7 @@ import {
   TREND_TOPICS, approvedTrendReview, classifyTrendTopic, normalizeTrendReport,
   selectTrendEvidence, selectTrendPracticeEvidence, trendAnalysisSettings
 } from '../lib/exam-trends.js';
+import { historicalExams } from '../data/exam-prediction-history.js';
 
 assert.equal(classifyTrendTopic('Phương trình hàm – Cauchy'), 'Phương trình hàm');
 assert.equal(classifyTrendTopic('Số học – Dãy số nguyên'), 'Số học và dãy số');
@@ -15,8 +16,9 @@ assert.equal(classifyTrendTopic('Tổ hợp – Trò chơi'), 'Tổ hợp');
 assert.equal(classifyTrendTopic('Bất đẳng thức'), '');
 
 const yearSettings = trendAnalysisSettings({ mode: 'year', year: '2026-2027' });
-const yearEvidence = selectTrendEvidence(yearSettings);
-assert.equal(yearEvidence.examCount, 25, 'Phân tích theo năm phải dùng đủ 25 đề TST tĩnh');
+const yearEvidence = selectTrendEvidence(yearSettings, historicalExams);
+assert.equal(yearEvidence.examCount, 25, 'Tập kiểm thử gồm đủ 25 đề TST');
+assert.equal(selectTrendEvidence(yearSettings).examCount, 0, 'Không tự đọc HTML ở chế độ sản phẩm');
 assert.equal(yearEvidence.topicStats.length, 6);
 assert.equal(yearEvidence.topicStats.reduce((sum, item) => sum + item.questionCount, 0) + yearEvidence.otherQuestionCount,
   yearEvidence.questionCount, 'Mỗi câu phải được tính đúng một lần hoặc nằm ngoài 6 tiêu chí');
@@ -26,21 +28,36 @@ const targetSettings = trendAnalysisSettings({
   mode: 'target', year: '2026-2027', targetType: 'tst', targetAnchor: 'tst-da-nang',
   province: 'Đà Nẵng', lookback: 10
 });
-const targetEvidence = selectTrendEvidence(targetSettings);
+const targetEvidence = selectTrendEvidence(targetSettings, historicalExams);
 assert.ok(targetEvidence.examCount >= 5, 'Có dữ liệu lịch sử Đà Nẵng để phân tích');
 assert.deepEqual(targetEvidence.historyMembers, ['Quảng Nam', 'Đà Nẵng']);
 assert.deepEqual(new Set(targetEvidence.sources.map(item => item.historicalUnit)), new Set(['ĐÀ NẴNG', 'QUẢNG NAM']),
   'Phân tích Đà Nẵng phải bao gồm dữ liệu lịch sử Quảng Nam');
+assert.ok(targetEvidence.missingYears.length > 0);
 assert.equal(targetEvidence.unitCount, 1, 'Đà Nẵng và Quảng Nam phải được quy về một đơn vị hiện hành');
 assert.ok(targetEvidence.years.every(year => Number(year.slice(0, 4)) < 2026 && Number(year.slice(0, 4)) >= 2016));
 assert.throws(() => trendAnalysisSettings({ mode: 'target', year: '2026-2027', targetType: 'tst', lookback: 10 }));
 assert.throws(() => trendAnalysisSettings({ mode: 'year', year: '2026-2030' }));
 
-const practiceEvidence = selectTrendPracticeEvidence();
+const practiceEvidence = selectTrendPracticeEvidence(historicalExams);
 const sharedPracticeTopic = TREND_TOPICS.find(topic =>
   practiceEvidence.samples.some(item => item.criterion === topic && item.sourceId.startsWith('hist-')) &&
   practiceEvidence.samples.some(item => item.criterion === topic && !item.sourceId.startsWith('hist-')));
 assert.ok(sharedPracticeTopic, 'Kho luyện tập phải có ít nhất một chủ đề chung giữa TST và lịch sử');
+const fourSources = ['tst', 'regional', 'vmo', 'olympic'].map((category, index) => ({
+  category, anchor: ['tst-thu', 'hist-dn-thu', 'vmo-thu', 'olympic-thu'][index],
+  province: 'Đơn vị thử', year: '2026-2027', dayNumber: 1, title: 'Đề thử',
+  problems: [{ number: 1, topic: 'Dãy số – Giới hạn', content: 'Câu thử' }]
+}));
+const fourPractice = selectTrendPracticeEvidence(fourSources);
+assert.equal(fourPractice.questionCount, 4);
+assert.deepEqual([fourPractice.tstQuestionCount, fourPractice.historyQuestionCount,
+  fourPractice.vmoQuestionCount, fourPractice.olympicQuestionCount], [1, 1, 1, 1]);
+const fourReport = normalizeTrendReport({ topicTrends: [{ topic: TREND_TOPICS[0], frequentMethods: [{
+  name: 'Giới hạn', practiceEvidenceIds: [fourPractice.samples[0].sourceId]
+}] }] }, yearEvidence, fourPractice);
+assert.equal(fourReport.topicTrends[0].frequentMethods[0].practiceEvidenceIds.length, 4,
+  'Một nhãn vi chủ đề chi tiết phải lấy đủ câu từ bốn kho');
 const practiceSample = yearEvidence.samples.find(item => item.criterion === sharedPracticeTopic);
 assert.ok(practiceSample, 'Cần có câu nguồn để kiểm thử chế độ luyện tập');
 const tstPracticeSample = practiceEvidence.samples.find(item =>
@@ -64,8 +81,13 @@ assert.deepEqual(normalizedReport.topicTrends.map(item => item.questionCount), y
   'Số liệu do server tính phải ghi đè số liệu AI');
 const normalizedMethod = normalizedReport.topicTrends.find(item => item.topic === practiceSample.criterion).frequentMethods[0];
 assert.deepEqual(normalizedMethod.evidenceIds, [practiceSample.sourceId], 'Phải bỏ mã trùng và mã không tồn tại');
-assert.deepEqual(normalizedMethod.practiceEvidenceIds, [tstPracticeSample.sourceId, historyPracticeSample.sourceId],
-  'Kho luyện tập phải giữ câu hợp lệ của cả TST và Đà Nẵng–Quảng Nam');
+assert.ok(normalizedMethod.practiceEvidenceIds.includes(tstPracticeSample.sourceId) &&
+  normalizedMethod.practiceEvidenceIds.includes(historyPracticeSample.sourceId) &&
+  normalizedMethod.practiceEvidenceIds.length > 2,
+  'Kho luyện tập phải mở rộng tới mọi câu cùng nhãn chi tiết thay vì chỉ hai mã AI đã dẫn');
+assert.equal(normalizedReport.topicTrends.find(item => item.topic === sharedPracticeTopic).evidenceIds.length,
+  yearEvidence.topicStats.find(item => item.topic === sharedPracticeTopic).questionCount,
+  'Số câu ở cấp chủ đề phải có đủ mã để mở toàn bộ câu trong phạm vi thống kê');
 assert.equal(normalizedMethod.frequency, 1, 'Tần suất phải bằng số câu truy nguyên được');
 const validReview = {
   approved: true, score: 4.6, countsConsistent: true, evidenceFaithful: true,
@@ -87,11 +109,29 @@ window.VMOAuth = { getSession: () => ({ username: 'admin', role: 'admin' }) };
 window.confirm = () => true;
 window.alert = () => {};
 let savedPayload;
+let storedReports = [];
 window.VMODataService = {
   getCatalogProblems: async () => [], getContentSets: async () => [], getEvents: async () => [],
   getDocuments: async () => [], getExams: async () => [], getExamCatalog: async () => [],
-  getExamTrendReports: async () => [], saveExamTrendReport: async payload => {
-    savedPayload = payload; return { id: '507f1f77bcf86cd799439011', createdAt: new Date().toISOString() };
+  getExamTrendReports: async () => storedReports,
+  saveExamTrendReport: async payload => {
+    savedPayload = payload;
+    storedReports = [{ ...payload, id: '507f1f77bcf86cd799439011', createdAt: new Date().toISOString() }];
+    return storedReports[0];
+  },
+  updateExamTrendReport: async (id, edits) => {
+    assert.equal(id, storedReports[0].id);
+    storedReports[0] = { ...storedReports[0], report: { ...storedReports[0].report,
+      title: edits.title, executiveSummary: edits.executiveSummary, conclusion: edits.conclusion,
+      topicTrends: storedReports[0].report.topicTrends.map((topic, index) => ({
+        ...topic, observations: edits.observations[index]
+      })) }, updatedBy: 'admin' };
+    return storedReports[0];
+  },
+  deleteExamTrendReport: async id => {
+    assert.equal(id, storedReports[0].id);
+    storedReports = [];
+    return { id };
   }
 };
 const root = new URL('../', import.meta.url);
@@ -103,6 +143,15 @@ assert.ok(window.document.getElementById('hub-tab-trends'), 'Admin phải thấy
 window.switchHubTab('trends');
 const byId = id => window.document.getElementById(id);
 assert.equal(byId('trendTarget').options.length, 38);
+window.fetch = async (_, options) => {
+  assert.equal(JSON.parse(options.body).preview, true);
+  assert.equal(JSON.parse(options.body).includeCurrentYear, true);
+  return { ok: true, json: async () => ({ success: true, data: {
+    examCount: 1, questionCount: 3, years: ['2025-2026'], missingYears: ['2024-2025']
+  } }) };
+};
+await window.previewExamTrendEvidence();
+assert.match(byId('trendStatus').textContent, /năm thiếu: 2024-2025/);
 const resultData = {
   settings: yearSettings, evidence: yearEvidence, report: normalizedReport, model: 'gemini-test',
   generatedAt: new Date().toISOString(), quality: {
@@ -119,9 +168,11 @@ window.fetch = async (_, options) => {
 await window.runExamTrendAnalysis();
 assert.equal(requestBody.mode, 'year');
 assert.equal(requestBody.year, '2026-2027');
+assert.equal(requestBody.includeCurrentYear, true);
 assert.equal(byId('trendSaveButton').disabled, false, 'GPT bác vẫn phải cho admin lưu báo cáo Gemini');
 assert.match(byId('trendResult').textContent, /GPT chưa duyệt/);
 assert.match(byId('trendResult').textContent, /Tần suất phương pháp A/);
+assert.equal(byId('trendResult').querySelectorAll('.trend-topic-practice-button').length, 6);
 function practiceSource(sample, tabId, label) {
   const parts = sample.sourceId.split(':');
   const questionNumber = Number(parts.pop());
@@ -150,7 +201,7 @@ practiceButton.click();
 await new Promise(resolve => setTimeout(resolve, 20));
 const practiceModal = byId('trendPracticeModal');
 assert.ok(practiceModal.classList.contains('active'));
-assert.match(practiceModal.textContent, /Nguồn: Đề TST 2026–2027/);
+assert.match(practiceModal.textContent, /Nguồn: Đề TST/);
 assert.match(practiceModal.textContent, /Nguồn: Đề Đà Nẵng–Quảng Nam/);
 assert.equal(practiceModal.querySelectorAll('.trend-practice-exam').length, 2,
   'Phải hiển thị câu luyện tập của cả hai kho');
@@ -176,4 +227,34 @@ window.closeReferenceLinksManager();
 await window.saveExamTrendReport();
 assert.equal(savedPayload.quality.status, 'rejected');
 assert.equal(savedPayload.report.topicTrends.length, 6);
+assert.ok(byId('trendSavedReports').querySelector('[data-trend-edit]'));
+byId('trendSavedReports').querySelector('[data-trend-edit]').click();
+const editForm = byId('trendReportEditForm');
+editForm.elements.title.value = 'Báo cáo đã sửa';
+editForm.dispatchEvent(new window.Event('submit', { bubbles: true, cancelable: true }));
+await new Promise(resolve => setTimeout(resolve, 20));
+assert.equal(storedReports[0].report.title, 'Báo cáo đã sửa');
+assert.match(byId('trendSavedReports').textContent, /Báo cáo đã sửa/);
+byId('trendSavedReports').querySelector('[data-trend-delete]').click();
+await new Promise(resolve => setTimeout(resolve, 20));
+assert.equal(storedReports.length, 0, 'Admin xóa báo cáo khỏi danh sách');
+const sourceRoots = Object.fromEntries(['tab-tst', 'tab-history', 'tab-vmo', 'tab-olympic']
+  .map((tab, index) => [tab, practiceSource(fourPractice.samples[index], tab, tab)]));
+window.ensureVMOTabContent = async tabId => sourceRoots[tabId];
+window.loadDatabaseCompetitionExams = async () => {};
+resultData.report = fourReport;
+await window.runExamTrendAnalysis();
+byId('trendResult').querySelector('.trend-practice-button').click();
+await new Promise(resolve => setTimeout(resolve, 20));
+assert.equal(practiceModal.querySelectorAll('.trend-practice-exam').length, 4,
+  'Luyện tập vi chủ đề phải mở câu từ cả TST, khu vực, VMO và IMO');
+assert.match(practiceModal.textContent, /Nguồn: Đề VMO/);
+assert.match(practiceModal.textContent, /Nguồn: Đề IMO–Olympic/);
+const topicButton = byId('trendResult').querySelector('.trend-topic-practice-button');
+assert.ok(topicButton && !topicButton.disabled, 'Số câu thống kê chủ đề phải bấm được');
+resultData.report.topicTrends[0].evidenceIds = [fourPractice.samples[0].sourceId];
+topicButton.click();
+await new Promise(resolve => setTimeout(resolve, 20));
+assert.equal(practiceModal.querySelectorAll('.trend-practice-exam').length, 1,
+  'Nút số câu chủ đề phải mở các câu thuộc phạm vi phân tích năm TST');
 console.log('Exam trend analysis and admin UI: OK');

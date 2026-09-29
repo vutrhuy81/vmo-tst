@@ -21,7 +21,7 @@ assert.throws(() => predictionStructure('1 | 10 | Đại số\n2 | 5 | Hình h�
 
 const settings = predictionSettings({ targetType: 'tst', targetAnchor: 'tst-da-nang', year: '2027-2028', dayNumber: 1, lookback: 10 });
 settings.province = 'Đà Nẵng';
-const evidence = selectPredictionEvidence(settings);
+const evidence = selectPredictionEvidence(settings, historicalExams);
 assert.ok(evidence.ownExamCount > 0, 'Đà Nẵng có đề lưu trữ trong 10 năm');
 assert.deepEqual(evidence.historyMembers, ['Quảng Nam', 'Đà Nẵng']);
 assert.deepEqual(new Set(evidence.sources.map(item => item.unit)), new Set(['ĐÀ NẴNG', 'QUẢNG NAM']),
@@ -31,7 +31,9 @@ assert.deepEqual(new Set(evidence.examples.map(item => item.unit)), new Set(['Đ
 assert.ok(evidence.years.length < 10, 'Phải báo số năm có dữ liệu thực thay vì giả định đủ 10 năm');
 assert.ok(evidence.years.every(year => Number(year.slice(0, 4)) < 2027 && Number(year.slice(0, 4)) >= 2017));
 assert.ok(evidence.peerExamCount > 0, 'Dùng xu hướng TST 2026–2027');
-const vmo = selectPredictionEvidence(predictionSettings({ targetType: 'vmo', year: '2027-2028', dayNumber: 2, lookback: 10 }));
+assert.ok(evidence.missingYears.length > 0, 'Nêu các năm thiếu dữ liệu');
+assert.equal(selectPredictionEvidence(settings).ownExamCount, 0, 'Không tự đọc dữ liệu HTML trong sản phẩm');
+const vmo = selectPredictionEvidence(predictionSettings({ targetType: 'vmo', year: '2027-2028', dayNumber: 2, lookback: 10 }), historicalExams);
 assert.equal(vmo.ownExamCount, 0, 'Không nhầm đề thi thử với kho đề VMO chính thức');
 assert.throws(() => predictionSettings({ targetType: 'tst', targetAnchor: 'tst-da-nang', year: '2027-2031', dayNumber: 1, lookback: 10 }));
 const reviewed = { approved: true, score: 4.8, structureCorrect: true, allProblemsWellPosed: true,
@@ -88,6 +90,15 @@ window.syncExamPredictionTarget();
 assert.equal(byId('examRegion').value, 'TRUNG');
 byId('examPredictionYear').value = '2027-2028';
 byId('examDayNumber').value = '2';
+window.fetch = async (_, options) => {
+  const payload = JSON.parse(options.body);
+  assert.equal(payload.preview, true);
+  return { ok: true, json: async () => ({ success: true, data: {
+    ownExamCount: 1, peerExamCount: 2, years: ['2026-2027'], missingYears: ['2025-2026']
+  } }) };
+};
+await window.previewExamPredictionEvidence();
+assert.match(byId('examPredictionStatus').textContent, /thiếu 1 năm/);
 let request;
 let responseQuality = { verified: true, score: 4.8, verifierModel: 'gpt-test', summary: 'Đạt',
   questionChecks: examStructure[2].map(item => ({ questionNumber: item.questionNumber, approved: true, reason: 'Đã kiểm tra', issues: [] })) };

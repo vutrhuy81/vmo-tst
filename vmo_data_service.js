@@ -261,8 +261,8 @@ export async function getExamCatalogSummary(category = 'tst-national') {
   return normalizeList(await request('exam_catalog', { category, view: 'summary' }));
 }
 
-export async function getExamCatalogDetail(category, anchor) {
-  const exams = normalizeList(await request('exam_catalog', { category, view: 'detail', anchor }));
+export async function getExamCatalogDetail(category, anchor, year = '') {
+  const exams = normalizeList(await request('exam_catalog', { category, view: 'detail', anchor, ...(year ? { year } : {}) }));
   return exams.map(exam => ({
     ...exam, problems: normalizeList(Array.isArray(exam.problems) ? exam.problems : [])
   }));
@@ -288,6 +288,15 @@ export async function getExamImage(examId, pageNumber = 1) {
 
 export async function getProblemsByExam(examId) {
   return normalizeList(await request('problems', { examId }));
+}
+
+export async function updateExamQuestionMetadata(examId, problemId, changes) {
+  const cleanExamId = normalizeId(examId).trim();
+  const cleanProblemId = normalizeId(problemId).trim();
+  if (!cleanExamId || !cleanProblemId) throw createServiceError('Thiếu mã đề hoặc câu hỏi', 0, 'VALIDATION_ERROR');
+  return normalize(await mutate('update_exam_question_metadata', {
+    examId: cleanExamId, problemId: cleanProblemId, topic: changes.topic, maxScore: changes.maxScore
+  }));
 }
 
 export async function getContentSets(group = null) {
@@ -448,6 +457,18 @@ export async function saveExamTrendReport(reportData) {
   return normalize(await mutate('save_exam_trend_report', reportData));
 }
 
+export async function updateExamTrendReport(id, edits) {
+  const cleanId = normalizeId(id).trim();
+  if (!cleanId) throw createServiceError('Thiếu mã báo cáo', 0, 'VALIDATION_ERROR');
+  return normalize(await mutate('update_exam_trend_report', { id: cleanId, edits }));
+}
+
+export async function deleteExamTrendReport(id) {
+  const cleanId = normalizeId(id).trim();
+  if (!cleanId) throw createServiceError('Thiếu mã báo cáo', 0, 'VALIDATION_ERROR');
+  return normalize(await mutate('delete_exam_trend_report', { id: cleanId }));
+}
+
 export async function deleteSubmission(id) {
   const cleanId = normalizeId(id).trim();
   if (!cleanId) {
@@ -543,6 +564,7 @@ const VMODataService = Object.freeze({
   saveExamImage,
   getExamImage,
   getProblemsByExam,
+  updateExamQuestionMetadata,
   getContentSets,
   getContentBlocks,
   getCatalogProblems,
@@ -564,6 +586,8 @@ const VMODataService = Object.freeze({
   getLearningOverview,
   getExamTrendReports,
   saveExamTrendReport,
+  updateExamTrendReport,
+  deleteExamTrendReport,
   deleteSubmission,
   verifySubmission,
   updateSubmissionContent,

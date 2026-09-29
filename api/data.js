@@ -73,11 +73,14 @@ function cleanExamTrendReport(payload) {
     topic: cleanText(item?.topic, 120),
     questionCount: cleanNumber(item?.questionCount, 0, 0, 10000),
     prevalencePercent: cleanNumber(item?.prevalencePercent, 0, 0, 100),
+    evidenceIds: cleanStringList(item?.evidenceIds, 4000, 180),
     trendLevel: cleanText(item?.trendLevel, 80),
     observations: cleanText(item?.observations, 4000),
     frequentMethods: (Array.isArray(item?.frequentMethods) ? item.frequentMethods : []).slice(0, 12).map(method => ({
       name: cleanText(method?.name, 240), frequency: cleanNumber(method?.frequency, 0, 0, 10000),
-      evidenceIds: cleanStringList(method?.evidenceIds, 240, 180), note: cleanText(method?.note, 1600)
+      evidenceIds: cleanStringList(method?.evidenceIds, 4000, 180),
+      practiceEvidenceIds: cleanStringList(method?.practiceEvidenceIds, 4000, 180),
+      note: cleanText(method?.note, 1600)
     })).filter(method => method.name)
   })).filter(item => item.topic);
   if (topicTrends.length !== 6 || topicTrends.some((item, index) => item.topic !== EXAM_TREND_TOPICS[index])) return null;
@@ -87,10 +90,17 @@ function cleanExamTrendReport(payload) {
       mode: settings.mode === 'year' ? 'year' : settings.mode === 'target' ? 'target' : '',
       year: cleanText(settings.year, 20), targetType: settings.targetType === 'vmo' ? 'vmo' : 'tst',
       lookback: cleanNumber(settings.lookback, 0, 0, 15),
+      includeCurrentYear: settings.includeCurrentYear === true,
       anchor: cleanKey(settings.anchor, 100), province: cleanText(settings.province, 120)
     },
     evidence: {
       years: cleanStringList(evidence.years, 15, 20),
+      missingYears: cleanStringList(evidence.missingYears, 15, 20),
+      sampleCount: cleanNumber(evidence.sampleCount, 0, 0, 10000),
+      yearCounts: (Array.isArray(evidence.yearCounts) ? evidence.yearCounts : []).slice(0, 15).map(item => ({
+        year: cleanText(item?.year, 20), examCount: cleanNumber(item?.examCount, 0, 0, 1000),
+        questionCount: cleanNumber(item?.questionCount, 0, 0, 10000)
+      })),
       examCount: cleanNumber(evidence.examCount, 0, 0, 1000),
       questionCount: cleanNumber(evidence.questionCount, 0, 0, 10000),
       otherQuestionCount: cleanNumber(evidence.otherQuestionCount, 0, 0, 10000),
@@ -323,7 +333,7 @@ export default async function handler(req, res) {
         if (!requireAdmin(session, res)) return;
         // Mẫu bằng chứng chi tiết vẫn được lưu để kiểm toán, nhưng không tải lại
         // trong danh sách nhằm tránh làm nặng Database Hub khi đã có nhiều báo cáo.
-        const items = await db.collection('exam_trend_reports').find({}, { projection: { 'evidence.samples': 0 } })
+        const items = await db.collection('exam_trend_reports').find({ deletedAt: { $exists: false } }, { projection: { 'evidence.samples': 0, revisions: 0 } })
           .sort({ createdAt: -1, _id: -1 }).limit(100).toArray();
         return res.status(200).json({ success: true, items });
       }
@@ -388,7 +398,10 @@ export default async function handler(req, res) {
         if (view === 'detail') {
           const anchor = cleanText(req.query?.anchor, 120);
           if (!anchor) return res.status(400).json({ success: false, error: 'Thiếu mã đề thi' });
-          const exams = await db.collection('exams').find({ ...examFilter, targetAnchor: anchor })
+          const year = cleanText(req.query?.year, 20);
+          if (year && !/^20\d{2}-20\d{2}$/.test(year)) return res.status(400).json({ success: false, error: 'Năm học không hợp lệ' });
+          const yearFilter = year ? { year: { $in: [year, year.replace('-', '–'), year.replace('-', '—')] } } : {};
+          const exams = await db.collection('exams').find({ ...examFilter, targetAnchor: anchor, ...yearFilter })
             .sort({ dayNumber: 1, createdAt: 1 }).limit(20).toArray();
           if (!exams.length) return res.status(404).json({ success: false, error: 'Không tìm thấy đề thi' });
           const problemFilter = { examId: { $in: exams.map(exam => String(exam._id)) }, status: { $ne: 'deleted' } };
@@ -740,7 +753,7 @@ export default async function handler(req, res) {
 
     if (!requireAdmin(session, res)) return;
 
-    if (action === 'add_exam_question' || action === 'delete_exam_question') {
+    if (action === 'add_exam_question' || action === 'delete_exam_question' || action === 'update_exam_question_metadata') {
       const examId = objectId(cleanText(payload.examId, 80));
       if (!examId) return res.status(400).json({ success: false, error: 'ID đề thi không hợp lệ' });
       const exam = await db.collection('exams').findOne({ _id: examId, status: { $ne: 'deleted' } });
@@ -748,6 +761,31 @@ export default async function handler(req, res) {
         return res.status(404).json({ success: false, error: 'Không tìm thấy đề thi trong catalog' });
       }
       const examIdText = String(examId);
+      if (action === 'update_exam_question_metadata') {
+        const problemId = objectId(cleanText(payload.problemId, 80));
+        const topic = cleanText(payload.topic, 120);
+        const score = Number(payload.maxScore);
+        if (!problemId || !topic || typeof payload.maxScore === 'boolean' || payload.maxScore === '' ||
+            !Number.isFinite(score) || score < 0 || score > 20 ||
+            Math.abs(score * 100 - Math.round(score * 100)) > 1e-8) {
+          return res.status(400).json({ success: false, error: 'Chuyên đề hoặc điểm (0–20, tối đa hai chữ số thập phân) không hợp lệ' });
+        }
+        const problem = await db.collection('problems').findOne({
+          _id: problemId, examId: examIdText, status: { $ne: 'deleted' }
+        });
+        if (!problem) return res.status(404).json({ success: false, error: 'Câu hỏi không thuộc đề đã chọn' });
+        const updated = await db.collection('problems').findOneAndUpdate(
+          { _id: problemId, examId: examIdText, status: { $ne: 'deleted' } },
+          { $set: { topic, maxScore: score, shortLabel: `Câu ${Number(problem.questionNumber) || 1}`,
+            updatedBy: session.username, updatedAt: now }, $inc: { version: 1 } },
+          { returnDocument: 'after' }
+        );
+        await recordActivity(db, session, 'exam.question_updated', {
+          examId: examIdText, problemKey: problem.contentKey, itemTitle: problem.title,
+          topic, maxScore: score
+        });
+        return res.status(200).json({ success: true, item: updated });
+      }
       if (action === 'delete_exam_question') {
         const problemId = objectId(cleanText(payload.problemId, 80));
         if (!problemId) return res.status(400).json({ success: false, error: 'ID câu hỏi không hợp lệ' });
@@ -775,8 +813,8 @@ export default async function handler(req, res) {
       const isRegional = exam.category === 'history-dn-qn';
       const categoryGroup = { 'vmo-official': 'vmo_official', 'imo-olympic': 'imo_olympic' }[exam.category];
       const day = Number(exam.dayNumber) || 1;
-      const setKey = isMock ? `mock:${exam.targetAnchor}`
-        : `${categoryGroup || (isRegional ? 'danang_quangnam' : 'tst')}:${exam.targetAnchor}:day-${day}`;
+      const setKey = exam.setKey || (isMock ? `mock:${exam.targetAnchor}`
+        : `${categoryGroup || (isRegional ? 'danang_quangnam' : 'tst')}:${exam.targetAnchor}:day-${day}${!isRegional && !categoryGroup && exam.year !== '2026-2027' ? `:year-${slugKey(exam.year)}` : ''}`);
       const contentKey = `${setKey}:question-${questionNumber}`;
       const existingKey = await db.collection('problems').findOne({ contentKey });
       if (existingKey && (existingKey.examId !== examIdText || existingKey.status !== 'deleted')) {
@@ -827,8 +865,8 @@ export default async function handler(req, res) {
         if (exam.targetAnchor) {
           const group = { 'vmo-official': 'vmo_official', 'imo-olympic': 'imo_olympic',
             'history-dn-qn': 'danang_quangnam' }[exam.category] || 'tst';
-          const setKey = exam.category === 'vmo-mock' ? `mock:${exam.targetAnchor}`
-            : `${group}:${exam.targetAnchor}:day-${Number(exam.dayNumber) || 1}`;
+          const setKey = exam.setKey || (exam.category === 'vmo-mock' ? `mock:${exam.targetAnchor}`
+            : `${group}:${exam.targetAnchor}:day-${Number(exam.dayNumber) || 1}${group === 'tst' && exam.year !== '2026-2027' ? `:year-${slugKey(exam.year)}` : ''}`);
           await db.collection('content_sets').updateOne({ key: setKey },
             { $set: { title, year, updatedBy: session.username, updatedAt: now } });
         }
@@ -893,6 +931,45 @@ export default async function handler(req, res) {
         verifierStatus: doc.quality.status
       });
       return res.status(201).json({ success: true, item: { _id: result.insertedId, ...doc } });
+    }
+
+    if (action === 'update_exam_trend_report' || action === 'delete_exam_trend_report') {
+      const id = objectId(cleanText(payload.id, 80));
+      if (!id) return res.status(400).json({ success: false, error: 'ID báo cáo không hợp lệ' });
+      const collection = db.collection('exam_trend_reports');
+      const previous = await collection.findOne({ _id: id, deletedAt: { $exists: false } });
+      if (!previous) return res.status(404).json({ success: false, error: 'Không tìm thấy báo cáo' });
+      if (action === 'delete_exam_trend_report') {
+        await collection.updateOne({ _id: id, deletedAt: { $exists: false } },
+          { $set: { deletedAt: now, deletedBy: session.username, updatedAt: now } });
+        await recordActivity(db, session, 'trend_report.deleted', { reportId: String(id), itemTitle: previous.report?.title });
+        return res.status(200).json({ success: true, item: { id: String(id) } });
+      }
+      const edits = payload.edits || {};
+      const title = cleanText(edits.title, 300);
+      const executiveSummary = cleanText(edits.executiveSummary, 6000);
+      const conclusion = cleanText(edits.conclusion, 5000);
+      const observations = edits.observations;
+      if (!title || !Array.isArray(observations) || observations.length !== 6 ||
+          observations.some(value => typeof value !== 'string' || value.length > 4000) ||
+          previous.report?.topicTrends?.length !== 6) {
+        return res.status(400).json({ success: false, error: 'Tiêu đề hoặc nội dung sáu chuyên đề không hợp lệ' });
+      }
+      const revisedTopics = previous.report.topicTrends.map((topic, index) => ({
+        ...topic, observations: cleanText(observations[index], 4000)
+      }));
+      const revision = { report: previous.report, quality: previous.quality,
+        editedAt: now, editedBy: session.username };
+      const updated = await collection.findOneAndUpdate({ _id: id, deletedAt: { $exists: false } }, {
+        $set: { 'report.title': title, 'report.executiveSummary': executiveSummary,
+          'report.conclusion': conclusion, 'report.topicTrends': revisedTopics,
+          'quality.status': 'unavailable', 'quality.verified': false, 'quality.score': null,
+          'quality.summary': 'Nội dung đã được Admin chỉnh sửa; cần kiểm định lại nếu sử dụng như báo cáo AI đã duyệt.',
+          updatedAt: now, updatedBy: session.username },
+        $push: { revisions: { $each: [revision], $slice: -20 } }
+      }, { returnDocument: 'after' });
+      await recordActivity(db, session, 'trend_report.updated', { reportId: String(id), itemTitle: title });
+      return res.status(200).json({ success: true, item: updated });
     }
 
     if (action === 'delete_ai_guide') {
@@ -1175,7 +1252,7 @@ export default async function handler(req, res) {
       const examKey = isMock ? `mock:set-${setNumber}:${yearSlug}:day-${dayNumber}` : `${catalogDestination?.group || (isRegional ? 'regional' : 'tst')}:${provinceSlug}:${yearSlug}:day-${dayNumber}`;
       // Một tỉnh có thể có hai đề với các số câu trùng nhau. Ngày thi phải
       // thuộc khóa ổn định để ngày 2 không ghi đè câu hỏi/lịch sử của ngày 1.
-      const setKey = isMock ? `mock:${targetAnchor}` : `${catalogDestination?.group || (isRegional ? 'danang_quangnam' : 'tst')}:${targetAnchor}:day-${dayNumber}`;
+      const setKey = isMock ? `mock:${targetAnchor}` : `${catalogDestination?.group || (isRegional ? 'danang_quangnam' : 'tst')}:${targetAnchor}:day-${dayNumber}${!isRegional && !catalogDestination && year !== '2026-2027' ? `:year-${yearSlug}` : ''}`;
       const title = cleanText(payload.title, 500) || (isMock ? `Bộ đề thi thử VMO số ${setNumber} — Ngày ${dayNumber}` : catalogDestination ? `Đề ${province} ${year} — Ngày ${dayNumber}` : `Đề thi lập đội tuyển ${province} — Ngày ${dayNumber}`);
       const status = payload.status === 'draft' ? 'draft' : 'published';
       const existingExam = await db.collection('exams').findOne({ examKey }, { projection: { _id: 1 } });
@@ -1207,6 +1284,7 @@ export default async function handler(req, res) {
       }
       const examDoc = {
         examKey,
+        setKey,
         title,
         category: isMock ? 'vmo-mock' : (catalogDestination?.category || (isRegional ? 'history-dn-qn' : 'tst-national')),
         setNumber: isMock ? setNumber : undefined,
