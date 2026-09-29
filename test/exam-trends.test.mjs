@@ -5,6 +5,7 @@ import {
   TREND_TOPICS, approvedTrendReview, classifyTrendTopic, normalizeTrendReport,
   selectTrendEvidence, selectTrendPracticeEvidence, trendAnalysisSettings
 } from '../lib/exam-trends.js';
+import { assessTrendTheoryReview } from '../api/ai-trend-theory.js';
 import { historicalExams } from '../data/exam-prediction-history.js';
 
 assert.equal(classifyTrendTopic('Phương trình hàm – Cauchy'), 'Phương trình hàm');
@@ -97,6 +98,16 @@ const validReview = {
 assert.equal(approvedTrendReview(validReview), true);
 assert.equal(approvedTrendReview({ ...validReview, criticalIssues: ['Dẫn chứng sai'] }), false);
 assert.equal(approvedTrendReview({ ...validReview, topicChecks: validReview.topicChecks.slice(0, 5) }), false);
+const theoryReview = { approved: true, score: 4.7, mathematicallyCorrect: true,
+  proofsRigorous: true, assumptionsExplicit: true, exampleVerified: true,
+  topicRelevant: true, criticalIssues: [] };
+assert.equal(assessTrendTheoryReview(theoryReview, { theorems: [
+  { statement: 'Mệnh đề 1', proof: 'Theo định nghĩa.' },
+  { statement: 'Mệnh đề 2', proof: 'Áp dụng bổ đề.' }
+] }).approved, true, 'Không bác chứng minh chỉ vì độ dài ký tự khi GPT đã kiểm tra tính chặt chẽ');
+assert.equal(assessTrendTheoryReview({ ...theoryReview, proofsRigorous: false }, {
+  theorems: [{}, {}]
+}).approved, false, 'GPT không duyệt tính chặt chẽ thì phải chặn hiển thị');
 
 const dom = new JSDOM(`<!doctype html><html><body>
   <div id="dataHubModal"><div class="vmo-modal-container"><div class="vmo-modal-title"><span></span><span></span></div><div class="vmo-modal-body"><div class="hub-tabs"><button class="hub-tab-btn" id="hub-tab-events"></button></div><div id="hub-panel-events"></div>

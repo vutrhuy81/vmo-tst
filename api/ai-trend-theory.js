@@ -22,6 +22,22 @@ const reviewSchema = { type: 'object', properties: {
 }, required: ['approved', 'score', 'mathematicallyCorrect', 'proofsRigorous',
   'assumptionsExplicit', 'exampleVerified', 'topicRelevant', 'summary', 'criticalIssues'], additionalProperties: false };
 
+export function assessTrendTheoryReview(review, theory) {
+  const issues = Array.isArray(review?.criticalIssues) ? review.criticalIssues : [];
+  const required = ['mathematicallyCorrect', 'proofsRigorous', 'assumptionsExplicit',
+    'exampleVerified', 'topicRelevant'];
+  const failedChecks = required.filter(key => review?.[key] !== true);
+  if (!Array.isArray(theory?.theorems) || theory.theorems.length < 2 ||
+      theory.theorems.some(item => !text(item?.statement) || !text(item?.proof))) {
+    failedChecks.push('minimumTheorems');
+  }
+  return {
+    approved: review?.approved === true && Number(review.score) >= 4.5 &&
+      failedChecks.length === 0 && issues.length === 0,
+    failedChecks, issues
+  };
+}
+
 export default async function handler(req, res) {
   prepare(res);
   if (req.method === 'OPTIONS') return res.status(200).end();
@@ -40,7 +56,7 @@ export default async function handler(req, res) {
   }
   try {
     const generated = await generateJson({
-      contents: `Viết tài liệu cơ sở lý thuyết Toán Olympic nâng cao bằng tiếng Việt cho vi chủ đề ${JSON.stringify(method)} thuộc ${JSON.stringify(topic)}. Định nghĩa chính xác; nêu đầy đủ giả thiết, kết luận và chứng minh từng định lý/bổ đề thật sự cần thiết. Nếu một định lý sâu không thể chứng minh ngắn gọn, hãy trình bày trường hợp có chứng minh đầy đủ thay vì khẳng định thiếu căn cứ. Có ít nhất hai định lý hoặc bổ đề và một ví dụ có lời giải được kiểm tra. Phân biệt giới hạn, điều kiện đủ và điều kiện cần; không suy diễn từ tên chuyên đề. Dùng Markdown và công thức $...$ hoặc $$...$$. Không dùng môi trường align, eqnarray. Chỉ trả JSON đúng schema.`,
+      contents: `Viết tài liệu cơ sở lý thuyết Toán Olympic nâng cao bằng tiếng Việt cho vi chủ đề ${JSON.stringify(method)} thuộc ${JSON.stringify(topic)}. Giới hạn phạm vi vào 2–3 định lý/bổ đề cốt lõi có chứng minh hoàn chỉnh. Định nghĩa chính xác; trong mỗi định lý ghi rõ giả thiết, kết luận, từng bước chứng minh và phạm vi áp dụng. Không khẳng định định lý sâu nếu không chứng minh được; thay bằng hệ quả cụ thể có chứng minh. Ví dụ phải nêu dữ kiện cụ thể, lời giải và kiểm tra kết quả. Phân biệt điều kiện đủ/cần, không suy diễn từ tên chuyên đề. Dùng Markdown và công thức $...$ hoặc $$...$$. Không dùng môi trường align, eqnarray. Chỉ trả JSON đúng schema.`,
       schema: theorySchema, temperature: 0.2,
       models: [process.env.GEMINI_TREND_THEORY_MODEL || process.env.GEMINI_SOLVER_MODEL || 'gemini-3.5-flash'],
       timeoutMs: 135_000, maxOutputTokens: 16_000, thinkingLevel: 'LOW',
@@ -53,15 +69,17 @@ export default async function handler(req, res) {
       systemInstruction: 'Bạn là giám khảo Toán Olympic độc lập. Kiểm tra nội dung thay vì tin kết luận Gemini. Trả JSON kiểm định chính xác.'
     });
     const review = checked.data;
-    const approved = review.approved === true && Number(review.score) >= 4.5 &&
-      review.mathematicallyCorrect === true && review.proofsRigorous === true &&
-      review.assumptionsExplicit === true && review.exampleVerified === true &&
-      review.topicRelevant === true && Array.isArray(review.criticalIssues) && !review.criticalIssues.length &&
-      Array.isArray(generated.data.theorems) && generated.data.theorems.length >= 2 &&
-      generated.data.theorems.every(item => text(item.proof, 10000).length >= 80);
-    if (!approved) return res.status(422).json({ success: false,
-      error: 'Cơ sở lý thuyết chưa vượt qua kiểm định độc lập Gemini–GPT. Vui lòng thử lại.',
-      quality: { summary: text(review.summary, 1000), issues: review.criticalIssues || [] } });
+    const assessment = assessTrendTheoryReview(review, generated.data);
+    if (!assessment.approved) {
+      console.warn('[AI TREND THEORY] Rejected', { score: Number(review.score),
+        approved: review.approved, failedChecks: assessment.failedChecks,
+        issues: assessment.issues.map(value => text(value, 200)) });
+      return res.status(422).json({ success: false,
+        error: 'Cơ sở lý thuyết chưa vượt qua kiểm định độc lập Gemini–GPT.',
+        quality: { score: Number(review.score), summary: text(review.summary, 1000),
+          issues: assessment.issues.map(value => text(value, 500)),
+          failedChecks: assessment.failedChecks } });
+    }
     return res.status(200).json({ success: true, data: {
       topic, method, theory: generated.data,
       quality: { verified: true, score: Number(review.score), summary: text(review.summary, 1000),

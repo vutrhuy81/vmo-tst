@@ -2627,14 +2627,21 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ topic: topic.topic, method: method.name }), signal: controller.signal });
       const result = await response.json().catch(() => null);
-      if (!response.ok || !result?.success) throw new Error(result?.error || `Lỗi HTTP ${response.status}`);
+      if (!response.ok || !result?.success) {
+        const details = [result?.quality?.summary, ...(result?.quality?.issues || [])]
+          .map(value => String(value || '').trim()).filter(Boolean).slice(0, 4).join('\n• ');
+        throw new Error(`${result?.error || `Lỗi HTTP ${response.status}`}${details ? `\n${details}` : ''}`);
+      }
       trendTheoryCache.set(key, result.data);
       if (modal.classList.contains('active') && modal.querySelector('#trendTheoryTitle').textContent === method.name) {
         renderTrendTheory(result.data, body);
       }
     } catch (error) {
-      if (modal.classList.contains('active')) body.textContent = error.name === 'AbortError'
+      if (modal.classList.contains('active')) {
+        body.style.whiteSpace = 'pre-wrap';
+        body.textContent = error.name === 'AbortError'
         ? 'Quá thời gian chờ kiểm định. Hãy thử lại.' : (error.message || 'Không tạo được cơ sở lý thuyết.');
+      }
     } finally { clearTimeout(timer); }
   };
 
