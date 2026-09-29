@@ -2624,6 +2624,107 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
     addSection('Sai lầm thường gặp', theory.pitfalls);
     addSection('Liên hệ mở rộng', theory.furtherConnections);
     addSection('Tự kiểm tra và giới hạn', theory.selfCheck);
+    const controls = document.createElement('div');
+    controls.style.cssText = 'display:flex;gap:8px;flex-wrap:wrap;margin:16px 0;';
+    const button = (label, callback) => {
+      const node = document.createElement('button');
+      node.type = 'button'; node.textContent = label; node.onclick = callback;
+      controls.appendChild(node);
+    };
+    button('✏️ Chỉnh sửa nội dung', () => editTrendTheory(data, container));
+    if (data.id) button('🗑️ Xóa bản đã lưu', () => deleteTrendTheory(data, container));
+    else button('💾 Lưu vào MongoDB', () => saveTrendTheory(data, container));
+    container.appendChild(controls);
+  }
+
+  function trendTheoryKey(data) { return `${data.topic}\n${data.method}`; }
+
+  async function saveTrendTheory(data, container) {
+    try {
+      const saved = await window.VMODataService.saveTrendTheory(data);
+      trendTheoryCache.set(trendTheoryKey(saved), saved);
+      renderTrendTheory(saved, container);
+      showToast('Đã lưu cơ sở lý thuyết vào MongoDB.', true);
+    } catch (error) { showToast(error.message || 'Không lưu được tài liệu.', false); }
+  }
+
+  async function deleteTrendTheory(data, container) {
+    if (!window.confirm(`Xóa cơ sở lý thuyết đã lưu: ${data.method}?`)) return;
+    try {
+      await window.VMODataService.deleteTrendTheory(data.topic, data.method);
+      trendTheoryCache.delete(trendTheoryKey(data));
+      container.textContent = 'Đã xóa bản lưu. Bấm lại 📐 Cơ sở lý thuyết để tạo bản mới.';
+      showToast('Đã xóa cơ sở lý thuyết.', true);
+    } catch (error) { showToast(error.message || 'Không xóa được tài liệu.', false); }
+  }
+
+  function editTrendTheory(data, container) {
+    const draft = JSON.parse(JSON.stringify(data.theory));
+    container.replaceChildren();
+    const form = document.createElement('form');
+    const heading = document.createElement('h3'); heading.textContent = '✏️ Chỉnh sửa cơ sở lý thuyết';
+    form.appendChild(heading);
+    const addField = (parent, label, value, onChange) => {
+      const wrapper = document.createElement('label');
+      wrapper.style.cssText = 'display:block;margin:10px 0;font-weight:600;';
+      wrapper.append(document.createTextNode(label));
+      const field = document.createElement('textarea');
+      field.rows = 4; field.value = value || '';
+      field.style.cssText = 'display:block;width:100%;box-sizing:border-box;margin-top:4px;font-weight:400;';
+      field.addEventListener('input', () => onChange(field.value));
+      wrapper.appendChild(field); parent.appendChild(wrapper);
+    };
+    const names = { introduction: 'Tổng quan', techniques: 'Phương pháp nâng cao',
+      workedExample: 'Ví dụ có lời giải', pitfalls: 'Sai lầm thường gặp',
+      furtherConnections: 'Liên hệ mở rộng', selfCheck: 'Tự kiểm tra và giới hạn' };
+    addField(form, names.introduction, draft.introduction, value => { draft.introduction = value; });
+    const renderItems = kind => {
+      const group = document.createElement('fieldset');
+      const title = document.createElement('legend'); title.textContent = kind === 'definitions' ? 'Định nghĩa' : 'Định lý/Bổ đề';
+      group.appendChild(title);
+      draft[kind].forEach((item, index) => {
+        const row = document.createElement('div');
+        row.style.cssText = 'border:1px solid #cbd5e1;padding:10px;margin:8px 0;';
+        for (const [field, label] of Object.entries({ name: 'Tên', statement: 'Phát biểu', assumptions: 'Giả thiết',
+          proof: 'Giải thích/Chứng minh', application: 'Ứng dụng', sourceScope: 'Phạm vi nguồn tham khảo' })) {
+          addField(row, label, item[field], value => { item[field] = value; });
+        }
+        const remove = document.createElement('button'); remove.type = 'button';
+        remove.textContent = 'Xóa mục này'; remove.onclick = () => { draft[kind].splice(index, 1); refresh(); };
+        row.appendChild(remove); group.appendChild(row);
+      });
+      const add = document.createElement('button'); add.type = 'button'; add.textContent = '+ Thêm mục';
+      add.onclick = () => {
+        draft[kind].push({ name: '', statement: '', assumptions: '', proof: '', application: '',
+          sourceIds: data.sources?.[0] ? [data.sources[0].id] : [], sourceScope: 'Tài liệu nền' });
+        refresh();
+      };
+      group.appendChild(add); form.appendChild(group);
+    };
+    const refresh = () => editTrendTheory({ ...data, theory: draft }, container);
+    renderItems('definitions'); renderItems('theorems');
+    for (const name of ['techniques', 'workedExample', 'pitfalls', 'furtherConnections', 'selfCheck']) {
+      addField(form, names[name], draft[name], value => { draft[name] = value; });
+    }
+    const submit = document.createElement('button'); submit.type = 'submit'; submit.textContent = data.id ? '💾 Lưu chỉnh sửa' : '✓ Áp dụng bản nháp';
+    const cancel = document.createElement('button'); cancel.type = 'button'; cancel.textContent = 'Hủy';
+    cancel.onclick = () => renderTrendTheory(data, container);
+    form.append(submit, cancel); container.appendChild(form);
+    form.onsubmit = async event => {
+      event.preventDefault(); submit.disabled = true;
+      if (!draft.introduction.trim() || !draft.workedExample.trim() || !draft.theorems.length ||
+          [...draft.definitions, ...draft.theorems].some(item => !item.name.trim() || !item.statement.trim() || !item.proof.trim())) {
+        showToast('Cần có tổng quan, ví dụ và ít nhất một định lý với tên, phát biểu, chứng minh.', false);
+        submit.disabled = false; return;
+      }
+      try {
+        const updated = data.id ? await window.VMODataService.updateTrendTheory({ topic: data.topic, method: data.method, theory: draft })
+          : { ...data, theory: draft, quality: { summary: 'Bản nháp đã được Admin chỉnh sửa; chưa kiểm định độc lập.' } };
+        trendTheoryCache.set(trendTheoryKey(updated), updated);
+        renderTrendTheory(updated, container);
+        if (data.id) showToast('Đã cập nhật tài liệu trên MongoDB.', true);
+      } catch (error) { showToast(error.message || 'Không lưu được chỉnh sửa.', false); submit.disabled = false; }
+    };
   }
 
   window.openTrendTheory = async function(topicIndex, methodIndex) {
@@ -2638,6 +2739,14 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
     modal.classList.add('active');
     document.body.classList.add('trend-practice-open');
     const key = `${topic.topic}\n${method.name}`;
+    body.textContent = 'Đang kiểm tra tài liệu đã lưu trên MongoDB…';
+    try {
+      const saved = await window.VMODataService.getTrendTheory(topic.topic, method.name);
+      if (saved) { trendTheoryCache.set(key, saved); return renderTrendTheory(saved, body); }
+    } catch (error) {
+      body.textContent = error.message || 'Không thể tải cơ sở lý thuyết đã lưu.';
+      return;
+    }
     if (trendTheoryCache.has(key)) return renderTrendTheory(trendTheoryCache.get(key), body);
     body.textContent = 'GPT đang biên soạn, tự kiểm tra và gắn tài liệu nền…';
     const controller = new AbortController();

@@ -446,6 +446,23 @@ export async function getLearningOverview(username = '') {
   return { overview: data.overview, accounts: Array.isArray(data.accounts) ? data.accounts : [] };
 }
 
+export async function getTrendTheory(topic, method) {
+  const items = normalizeList(await request('trend_theories', { topic, method }));
+  return items[0] || null;
+}
+
+export async function saveTrendTheory(data) {
+  return normalize(await mutate('save_trend_theory', data));
+}
+
+export async function updateTrendTheory(data) {
+  return normalize(await mutate('update_trend_theory', data));
+}
+
+export async function deleteTrendTheory(topic, method) {
+  return normalize(await mutate('delete_trend_theory', { topic, method }));
+}
+
 export async function getExamTrendReports() {
   return normalizeList(await request('exam_trend_reports'));
 }
@@ -584,6 +601,10 @@ const VMODataService = Object.freeze({
   getSubmissionsPage,
   getActivityFeed,
   getLearningOverview,
+  getTrendTheory,
+  saveTrendTheory,
+  updateTrendTheory,
+  deleteTrendTheory,
   getExamTrendReports,
   saveExamTrendReport,
   updateExamTrendReport,
