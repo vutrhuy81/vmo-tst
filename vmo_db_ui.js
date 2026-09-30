@@ -1000,6 +1000,8 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
     const verdictBg = /^#[0-9a-f]{6}$/i.test(String(evalData.verdictColor || ''))
       ? String(evalData.verdictColor)
       : fallbackVerdictBg;
+    const rag = evalData.quality?.retrieval;
+    const ragNotice = rag ? `<div style="padding:8px;margin:8px 0;font-size:.8rem;">📚 Tham chiếu: ${escapeHtmlText(rag.mode || 'none')} · ${escapeHtmlText((rag.sources || []).map(item => `${item.matchType}: ${item.problemKey}`).join('; ') || 'AI tự giải độc lập')}</div>` : '';
     const verificationBadge = evalData.quality?.verified
       ? `<div style="display:inline-flex;align-items:center;gap:5px;margin-top:6px;padding:3px 9px;border-radius:999px;background:rgba(255,255,255,.2);border:1px solid rgba(255,255,255,.45);font-size:.75rem;font-weight:700;">✓ Đã kiểm định độc lập Gemini–GPT${evalData.quality.corrected ? ' · GPT đã hiệu chỉnh' : ''}</div>`
       : '';
@@ -1012,7 +1014,7 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
           <div style="font-size: 1.15rem; font-weight: 800; text-shadow: 0 1px 2px rgba(0,0,0,0.2);">
             ${escapeHtmlText(evalData.verdictLabel || evalData.verdict || 'ĐÚNG HOÀN TOÀN (TỐI ƯU)')}
           </div>
-          ${verificationBadge}
+          ${verificationBadge}${ragNotice}
         </div>
         <div style="background: rgba(255,255,255,0.25); border: 1.5px solid rgba(255,255,255,0.5); border-radius: 8px; padding: 6px 16px; font-weight: 800; font-size: 1.15rem; box-shadow: 0 2px 8px rgba(0,0,0,0.15);">
           Điểm: ${escapeHtmlText(evalData.estimatedScore ?? '5.0/5.0đ')}
@@ -2463,6 +2465,43 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
       </div>
       <div id="trendResult" aria-live="polite"></div>
       <details style="margin-top:16px;" open><summary style="font-weight:800;color:#173b64;cursor:pointer;">🗃️ Báo cáo đã lưu</summary><div id="trendSavedReports" style="margin-top:9px;"><em>Chưa tải dữ liệu.</em></div></details>`;
+    const ragPanel = document.createElement('details');
+    ragPanel.innerHTML = `<summary style="font-weight:700;cursor:pointer;margin:14px 0;">📚 Kho tham chiếu đã xác minh (RAG)</summary>
+      <p>Chỉ lời giải được Admin xác minh và khớp phiên bản đề mới được dùng làm nguồn.</p>
+      <div style="display:flex;gap:8px;flex-wrap:wrap;"><button type="button" data-rag-action="refresh">↻ Trạng thái</button>
+      <button type="button" data-rag-action="rag_setup">Thiết lập chỉ mục</button>
+      <button type="button" data-rag-action="rag_backfill">Đưa nguồn đã xác minh vào hàng đợi</button>
+      <button type="button" data-rag-action="rag_process">Lập chỉ mục 3 nguồn tiếp theo</button></div>
+      <p data-rag-status role="status"></p><div data-rag-summary></div><div data-rag-logs></div>`;
+    let after = '';
+    ragPanel.querySelectorAll('[data-rag-action]').forEach(button => {
+      button.onclick = async () => {
+        const status = ragPanel.querySelector('[data-rag-status]');
+        button.disabled = true; status.textContent = 'Đang xử lý…';
+        try {
+          if (button.dataset.ragAction !== 'refresh') {
+            const result = await window.VMODataService.manageRag(button.dataset.ragAction, { after });
+            if (button.dataset.ragAction === 'rag_backfill') {
+              after = result.hasMore ? result.after : '';
+              status.textContent = `Đã đưa ${result.queued} nguồn vào hàng đợi.${result.hasMore ? ' Bấm tiếp để lấy trang sau.' : ''}`;
+            } else status.textContent = button.dataset.ragAction === 'rag_process'
+              ? (result.results || []).map(item => `${item.sourceId}: ${item.status}${item.error ? ` (${item.error})` : ''}`).join(' · ') || 'Không có nguồn chờ xử lý.'
+              : 'Đã yêu cầu tạo chỉ mục. Chờ Atlas báo sẵn sàng.';
+          } else status.textContent = '';
+          const data = await window.VMODataService.getRagStatus();
+          ragPanel.querySelector('[data-rag-summary]').textContent = `Nguồn: ${(data.knowledge || []).map(item => `${item._id}: ${item.count}`).join(', ') || '0'} · Hàng đợi: ${(data.jobs || []).map(item => `${item._id}: ${item.count}`).join(', ') || '0'} · Chỉ mục: ${(data.indexes || []).map(item => `${item.name}: ${item.status}`).join(', ') || data.indexError || 'chưa tạo'} · Embedding: ${data.embeddingConfigured ? 'đã cấu hình' : 'chưa cấu hình'}`;
+          const logs = await window.VMODataService.getRagLogs();
+          const list = ragPanel.querySelector('[data-rag-logs]'); list.replaceChildren();
+          logs.forEach(log => {
+            const row = document.createElement('p');
+            row.textContent = `${learningDate(log.createdAt)} · ${log.purpose} · ${log.mode} · ${log.elapsedMs} ms · ${(log.sources || []).map(item => `${item.matchType}: ${item.sourceId}`).join(', ') || 'không có nguồn'} · ${log.embeddingTokens || 0} embedding tokens · ${log.estimatedUsd === null ? 'chi phí chưa cấu hình' : `${log.estimatedUsd || 0} USD`}${log.warnings?.length ? ` · ${log.warnings.join(', ')}` : ''}`;
+            list.appendChild(row);
+          });
+        } catch (error) { status.textContent = error.message || 'Không tải được trạng thái RAG.'; }
+        finally { button.disabled = false; }
+      };
+    });
+    panel.appendChild(ragPanel);
     body.appendChild(panel);
 
     const target = panel.querySelector('#trendTarget');

@@ -1,4 +1,4 @@
-import { getDb } from '../lib/db.js';
+import { retrieveVerifiedContext } from '../lib/rag-retrieval.js';
 import { getSession } from '../lib/session.js';
 import { checkRateLimit, generateJson, parseBody, prepare, text } from '../lib/ai.js';
 import { generateOpenAIJson } from '../lib/openai.js';
@@ -40,17 +40,6 @@ function accepted(data, corrected = false) {
   return data.approved === true && scoreOf(data.score) >= 4.5 && data.allPartsCorrect === true && data.rigorous === true && data.noExtraAssumptions === true && data.equalityCasesChecked === true && data.matchesVerifiedReference === true;
 }
 
-async function trustedReference(contentKey) {
-  if (!contentKey) return null;
-  const db = await getDb();
-  const problem = await db.collection('problems').findOne({ contentKey }, { projection: { status: 1, allowAiEvaluation: 1, referenceSolution: 1, referenceSolutionVerified: 1 } });
-  if (!problem) return null;
-  if (problem.status === 'draft' || problem.allowAiEvaluation === false) return { blocked: true };
-  if (problem.referenceSolutionVerified === true && text(problem.referenceSolution, 100000)) return { content: text(problem.referenceSolution, 100000), origin: 'admin_verified_problem_reference' };
-  const submission = await db.collection('submissions').findOne({ problemKey: contentKey, adminVerified: true, solutionContent: { $type: 'string', $ne: '' } }, { sort: { adminVerifiedAt: -1, updatedAt: -1, createdAt: -1 }, projection: { solutionContent: 1 } });
-  return submission ? { content: text(submission.solutionContent, 100000), origin: 'admin_verified_submission' } : null;
-}
-
 export default async function handler(req, res) {
   prepare(res);
   if (req.method === 'OPTIONS') return res.status(200).end();
@@ -60,26 +49,28 @@ export default async function handler(req, res) {
   if (!checkRateLimit(`${session.username}:guide`, 6)) return res.status(429).json({ success: false, error: 'Bạn đang gửi yêu cầu quá nhanh' });
   const body = parseBody(req);
   if (!body) return res.status(400).json({ success: false, error: 'JSON không hợp lệ' });
-  const problemContent = text(body.problemContent);
+  let problemContent = text(body.problemContent);
   if (!problemContent) return res.status(400).json({ success: false, error: 'Thiếu nội dung bài toán' });
   const outputLanguage = body.lang === 'en' ? 'English' : 'Vietnamese';
 
   try {
-    const reference = await trustedReference(text(body.contentKey, 180));
+    const reference = await retrieveVerifiedContext({ problemRef: text(body.contentKey || body.problemKey || body.problemId, 180),
+      statement: problemContent, topic: text(body.topic, 200), session, purpose: 'guide' });
     if (reference?.blocked) return res.status(403).json({ success: false, error: 'Câu hỏi này chưa được phép sử dụng AI Hướng dẫn giải' });
-    const referenceBlock = reference?.content ? `TRUSTED ADMIN-VERIFIED REFERENCE SOLUTION:\n${reference.content}` : 'No admin-verified reference is available. Solve and verify independently.';
-    const common = `Exam: ${text(body.examTitle, 300)}\nProblem: ${text(body.problemId, 120)} - ${text(body.problemTitle, 500)}\nTopic: ${text(body.topic, 200)}\nSTATEMENT:\n${problemContent}\n\n${referenceBlock}`;
+    problemContent = text(reference.statement, 100000);
+    const referenceBlock = reference.block;
+    const common = `Exam: ${text(body.examTitle, 300)}\nProblem: ${text(body.problemId, 120)} - ${text(body.problemTitle, 500)}\nTopic: ${text(reference.topic || body.topic, 200)}\nSTATEMENT:\n${problemContent}\n\n${referenceBlock}`;
     const solved = await generateJson({
       contents: `Produce a complete high-school Mathematical Olympiad solution in ${outputLanguage}.\n${common}\nFirst enumerate every requested part. Give exact final results and every equality case. Check boundary cases, indices, signs and quantifiers. The reference is evidence, not permission to copy an error. Use Markdown and MathJax $...$ or $$...$$; do not use itemize, enumerate, align or textbf.`,
       schema: guideSchema,
       systemInstruction: `You are the primary VMO/IMO solver. Be explicit and rigorous. Never replace proof steps with generic advice. Write entirely in ${outputLanguage}.`,
-      models: [process.env.GEMINI_SOLVER_MODEL || 'gemini-3.5-flash'], timeoutMs: 140_000, temperature: 1
+      models: [process.env.GEMINI_SOLVER_MODEL || 'gemini-3.5-flash'], timeoutMs: 130_000, totalTimeoutMs: 130_000, temperature: 1
     });
     const verified = await generateOpenAIJson({
-      input: `Independently solve and audit the candidate below. Score 0.0-5.0. Approval requires every requested part correct, a rigorous derivation, no unstated assumptions, and all extremal/equality cases proved. When no trusted reference exists, matchesVerifiedReference means independent cross-check passed. If anything is weak, provide a fully corrected guide in the corrected* fields. Leave no generic placeholders.\n\n${common}\n\nGEMINI CANDIDATE JSON:\n${JSON.stringify(solved.data)}`,
+      input: `Independently solve and audit the candidate below. Score 0.0-5.0. Approval requires every requested part correct, a rigorous derivation, no unstated assumptions, and all extremal/equality cases proved. When no EXACT reference exists (including SIMILAR-only sources), matchesVerifiedReference means independent cross-check passed. Never require the new answer to equal the answer of a similar problem. If anything is weak, provide a fully corrected guide in the corrected* fields. Leave no generic placeholders.\n\n${common}\n\nGEMINI CANDIDATE JSON:\n${JSON.stringify(solved.data)}`,
       schema: verifierSchema,
       systemInstruction: `You are an independent adversarial VMO/IMO jury. Recompute the problem instead of trusting Gemini. Correct the guide in ${outputLanguage} when needed. A score of 5.0 means publication-ready and fully rigorous. Return only the required structured result.`,
-      timeoutMs: 150_000,
+      timeoutMs: 140_000,
       maxOutputTokens: 12_000,
       reasoningEffort: 'low'
     });
@@ -93,7 +84,7 @@ export default async function handler(req, res) {
     } else {
       return res.status(422).json({ success: false, error: 'AI chưa tạo được lời giải đạt chuẩn kiểm định. Vui lòng thử lại; hệ thống không hiển thị lời giải chung chung hoặc chưa chắc chắn.', quality: { score: Math.max(scoreOf(verified.data.score), scoreOf(verified.data.correctedScore)), summary: text(verified.data.summary, 1000) } });
     }
-    data.quality = { verified: true, score: `${score.toFixed(1)}/5.0`, repaired, solverProvider: 'google', verifierProvider: 'openai', usedTrustedReference: Boolean(reference?.content), referenceOrigin: reference?.origin || '', summary: text(verified.data.summary, 1000) };
+    data.quality = { verified: true, score: `${score.toFixed(1)}/5.0`, repaired, solverProvider: 'google', verifierProvider: 'openai', usedTrustedReference: Boolean(reference?.content), referenceOrigin: reference?.origin || '', retrieval: reference.retrieval, summary: text(verified.data.summary, 1000) };
     return res.status(200).json({
       success: true,
       source: 'gemini_openai_verified',

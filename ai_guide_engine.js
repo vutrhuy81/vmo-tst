@@ -313,6 +313,9 @@
     const qualityBadge = guideData.quality?.verified && qualityScore
       ? `<span class="prof-badge ai-guide-quality-badge" style="background:#dcfce7;color:#166534;">✓ ${isEn ? 'Independently verified' : 'Đã kiểm định độc lập'} ${qualityScore}</span>`
       : '';
+    const rag = guideData.quality?.retrieval;
+    const safeRagText = value => String(value || '').replace(/[&<>"']/g, char => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[char]));
+    const ragBadge = rag ? `<span class="prof-badge">📚 RAG ${safeRagText(rag.mode)} · ${safeRagText((rag.sources || []).map(item => `${item.matchType}: ${item.problemKey}`).join('; ') || 'Tự giải độc lập')}</span>` : '';
     const adminEditedBadge = guideData.adminEdited
       ? `<span class="prof-badge ai-guide-admin-edited-badge" style="background:#f3e8ff;color:#6b21a8;">✏️ ${isEn ? 'Admin edited' : 'Admin đã chỉnh sửa'}</span>`
       : '';
@@ -334,7 +337,7 @@
           <div class="ai-guide-title">
             <span>${headerTitle}</span>
             <span class="prof-badge">${profBadge}</span>
-            ${qualityBadge}
+            ${qualityBadge}${ragBadge}
             ${adminEditedBadge}
             ${persistedBadge}
             <span style="font-size: 0.8rem; font-weight: 500; color: #64748b; margin-left: 4px;">• ${topic || guideData.branch || defaultTopic}</span>
