@@ -96,6 +96,7 @@ export function cases() {
     { name: 'revoked', key: 'p4', expected: [], mutate: data => { data.submissions[1].adminVerified = false; } },
     { name: 'deleted', key: 'p4', expected: [], mutate: data => { data.submissions.splice(1, 1); } },
     { name: 'changed-solution', key: 'p4', expected: [], mutate: data => { data.submissions[1].solutionContent = 'Lời giải đã sửa chưa được xác minh lại.'; } },
+    { name: 'changed-topic', key: 'p4', expected: [], mutate: data => { data.problems[2].topic = 'Hình học'; } },
     { name: 'private-source', key: 'p4', expected: [], mutate: data => { data.problems[2].status = 'draft'; } }
   ];
 }

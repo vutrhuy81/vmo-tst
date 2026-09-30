@@ -58,7 +58,7 @@ Thay embedding model/dimensions cần tạo lại index vector tương ứng và
 
 `npm test`: có trường hợp đúng khóa, đổi đề a_2727 → a_(27^27), khác giả thiết nhọn, thu hồi, xóa, sửa lời giải và nguồn chưa công khai. Có kiểm tra prompt chấp nhận phương pháp khác, không phải kiểm thử một model thực chấm phương pháp đó.
 
-`npm run rag:benchmark`: 8 fixtures, mock candidate search, không gọi Atlas/embedding/model thật. Kết quả docs/rag-benchmark-offline.json chỉ đánh giá orchestration và kiểm tra nguồn. p50/p95 là thời gian mock trong bộ nhớ; không đại diện thời gian mạng. Baseline mô phỏng exact theo problemKey cũ, không đo lại toàn pipeline AI cũ.
+`npm run rag:benchmark`: 9 fixtures, mock candidate search, không gọi Atlas/embedding/model thật. Kết quả docs/rag-benchmark-offline.json chỉ đánh giá orchestration và kiểm tra nguồn. p50/p95 là thời gian mock trong bộ nhớ; không đại diện thời gian mạng. Baseline mô phỏng exact theo problemKey cũ, không đo lại toàn pipeline AI cũ.
 
 Đo thật:
 
@@ -67,3 +67,11 @@ Thay embedding model/dimensions cần tạo lại index vector tương ứng và
 Corpus: mảng {name, problemRef, expectedSourceIds: [submissionId...]}; cần Admin gán nhãn độc lập. Tối thiểu nên có 50–100 bài đa chuyên đề, nhiều bài gần giống khác giả thiết và bài không có nguồn. Script đo Recall@3, precision, p50/p95 và token/chi phí embedding. Chưa đo chi phí sinh/chấm AI. Thực hiện riêng thử nghiệm chấm cặp lời giải cùng bài theo hai phương pháp đúng; đánh giá điểm, lỗi và chênh lệch bởi Admin.
 
 Không xem điểm RRF là xác suất đúng. Chưa đủ điều kiện merge chỉ dựa trên benchmark mock; phải kiểm tra live Atlas và chất lượng Gemini/GPT trước khi merge.
+
+## Preview và trạng thái nghiệm thu
+
+PR nháp: https://github.com/vutrhuy81/vmo-tst/pull/31
+
+Preview: https://vmo-tst-git-feature-two-stage-h-96cf89-vutrhuy81-6018s-projects.vercel.app/login.html
+
+Vercel bot báo Ready. Phiên triển khai này chưa truy cập được nội dung preview do kết nối Vercel trả 403 cho project/team. Workspace không có MONGODB_URI hoặc OPENAI_API_KEY để chạy lập chỉ mục và benchmark thật. Cần cấp kết nối Vercel đúng team, xác nhận cấu hình preview, rồi chạy các bước Atlas và kiểm thử live trước merge.
