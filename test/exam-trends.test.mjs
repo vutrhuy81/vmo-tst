@@ -5,6 +5,10 @@ import {
   TREND_TOPICS, approvedTrendReview, classifyTrendTopic, normalizeTrendReport,
   selectTrendEvidence, selectTrendPracticeEvidence, trendAnalysisSettings
 } from '../lib/exam-trends.js';
+import { assessTrendTheory } from '../api/ai-trend-theory.js';
+import { auditTrendReport } from '../api/ai-exam-trends.js';
+import { trendTheorySources } from '../lib/trend-theory-sources.js';
+import { cleanTrendTheory } from '../lib/trend-theory-storage.js';
 import { historicalExams } from '../data/exam-prediction-history.js';
 
 assert.equal(classifyTrendTopic('Phương trình hàm – Cauchy'), 'Phương trình hàm');
@@ -97,6 +101,38 @@ const validReview = {
 assert.equal(approvedTrendReview(validReview), true);
 assert.equal(approvedTrendReview({ ...validReview, criticalIssues: ['Dẫn chứng sai'] }), false);
 assert.equal(approvedTrendReview({ ...validReview, topicChecks: validReview.topicChecks.slice(0, 5) }), false);
+const reference = trendTheorySources('Dãy số và Giới hạn dãy số')[0];
+const auditEvidence = { questionCount: 2, otherQuestionCount: 0,
+  topicStats: TREND_TOPICS.map((topic, index) => ({ topic, questionCount: index ? 0 : 2,
+    prevalencePercent: index ? 0 : 100 })) };
+const auditSamples = [{ sourceId: 'q1', criterion: TREND_TOPICS[0] }];
+const auditRaw = { topicTrends: TREND_TOPICS.map((topic, index) => ({ topic,
+  questionCount: index ? 0 : 2, prevalencePercent: index ? 0 : 100,
+  frequentMethods: index ? [] : [{ name: 'Phương pháp A', frequency: 1,
+    evidenceIds: ['q1'], practiceEvidenceIds: ['q1'] }] })), recurringPatterns: [] };
+const auditNormalized = { topicTrends: auditRaw.topicTrends };
+assert.deepEqual(auditTrendReport(auditRaw, auditNormalized, auditEvidence, auditSamples, auditSamples), []);
+assert.ok(auditTrendReport({ ...auditRaw, topicTrends: auditRaw.topicTrends.map((item, index) =>
+  index ? item : { ...item, frequentMethods: [{ ...item.frequentMethods[0], evidenceIds: ['fake'] }] }) },
+  auditNormalized, auditEvidence, auditSamples, auditSamples).length,
+'Mã dẫn không có trong mẫu Atlas phải bị phát hiện');
+assert.ok(auditTrendReport({ ...auditRaw, topicTrends: auditRaw.topicTrends.slice(0, 5) },
+  auditNormalized, auditEvidence, auditSamples, auditSamples).length,
+'Báo cáo thiếu một chủ đề phải bị phát hiện');
+
+const theorySample = { introduction: 'Dãy hội tụ', workedExample: 'a_n=1/n', selfCheck: 'Thế n=1,2',
+  definitions: [], theorems: [{ statement: 'Dãy đơn điệu bị chặn hội tụ', assumptions: 'Dãy thực',
+    proof: 'Dựa trên tính đầy đủ của số thực.', sourceIds: [reference.id], sourceScope: 'Định lý hội tụ đơn điệu' }] };
+assert.equal(assessTrendTheory(theorySample, [reference]).approved, true);
+assert.equal(assessTrendTheory({ ...theorySample, theorems: [{ ...theorySample.theorems[0],
+  sourceIds: ['FAKE-URL'] }] }, [reference]).approved, false, 'Không chấp nhận mã tài liệu do model bịa');
+assert.equal(assessTrendTheory({ ...theorySample, workedExample: '' }, [reference]).approved, false);
+const cleanTheory = cleanTrendTheory({ topic: 'Dãy số và Giới hạn dãy số', method: 'Khảo sát dãy đơn điệu',
+  theory: { ...theorySample, theorems: [{ ...theorySample.theorems[0], name: 'Hội tụ', sourceIds: [reference.id, 'FAKE'] }] } });
+assert.deepEqual(cleanTheory.theory.theorems[0].sourceIds, [reference.id]);
+assert.equal(cleanTrendTheory({ topic: 'Tổ hợp', method: 'abcde', theory: theorySample }), null,
+  'Bản thiếu tên định lý phải bị từ chối khi lưu');
+
 
 const dom = new JSDOM(`<!doctype html><html><body>
   <div id="dataHubModal"><div class="vmo-modal-container"><div class="vmo-modal-title"><span></span><span></span></div><div class="vmo-modal-body"><div class="hub-tabs"><button class="hub-tab-btn" id="hub-tab-events"></button></div><div id="hub-panel-events"></div>
@@ -110,10 +146,15 @@ window.confirm = () => true;
 window.alert = () => {};
 let savedPayload;
 let storedReports = [];
+let storedTheory = null;
 window.VMODataService = {
   getCatalogProblems: async () => [], getContentSets: async () => [], getEvents: async () => [],
   getDocuments: async () => [], getExams: async () => [], getExamCatalog: async () => [],
   getExamTrendReports: async () => storedReports,
+  getTrendTheory: async () => storedTheory,
+  saveTrendTheory: async data => (storedTheory = { ...data, id: '507f1f77bcf86cd799439012' }),
+  updateTrendTheory: async data => (storedTheory = { ...storedTheory, theory: data.theory }),
+  deleteTrendTheory: async () => { storedTheory = null; },
   saveExamTrendReport: async payload => {
     savedPayload = payload;
     storedReports = [{ ...payload, id: '507f1f77bcf86cd799439011', createdAt: new Date().toISOString() }];
@@ -173,6 +214,61 @@ assert.equal(byId('trendSaveButton').disabled, false, 'GPT bác vẫn phải cho
 assert.match(byId('trendResult').textContent, /GPT chưa duyệt/);
 assert.match(byId('trendResult').textContent, /Tần suất phương pháp A/);
 assert.equal(byId('trendResult').querySelectorAll('.trend-topic-practice-button').length, 6);
+assert.ok(byId('trendResult').querySelector('.trend-collapse-report'), 'Báo cáo có nút thu gọn');
+assert.ok(byId('trendResult').querySelector('.trend-theory-button'), 'Vi chủ đề có nút cơ sở lý thuyết');
+let theoryRequests = 0;
+window.fetch = async (url, options) => {
+  assert.equal(url, '/api/ai-trend-theory');
+  assert.equal(JSON.parse(options.body).method, normalizedMethod.name);
+  theoryRequests++;
+  return { ok: true, json: async () => ({ success: true, data: {
+    theory: { introduction: 'Tổng quan $a_n$', definitions: [], theorems: [{
+      name: 'Định lý', statement: 'Phát biểu', assumptions: 'Giả thiết', proof: 'Chứng minh', application: 'Ứng dụng', sourceIds: [reference.id], sourceScope: 'Kiến thức nền'
+    }], workedExample: 'Ví dụ', pitfalls: 'Lưu ý', selfCheck: 'Đã tự kiểm tra' },
+    sources: [reference], quality: { summary: 'GPT biên soạn và tự kiểm tra' }
+  } }) };
+};
+byId('trendResult').querySelector('.trend-theory-button').click();
+await new Promise(resolve => setTimeout(resolve, 20));
+assert.match(byId('trendTheoryModal').textContent, /Tổng quan/);
+assert.match(byId('trendTheoryModal').textContent, /Định lý/);
+assert.equal(byId('trendTheoryModal').querySelector('a').href, reference.url);
+assert.match(byId('trendTheoryModal').textContent, /tự kiểm tra/);
+const theoryBody = byId('trendTheoryBody');
+[...theoryBody.querySelectorAll('button')].find(button => button.textContent.includes('Chỉnh sửa')).click();
+assert.ok(theoryBody.querySelector('form'), 'Cho phép sửa trước khi lưu');
+theoryBody.querySelector('form textarea').value = 'Tổng quan đã sửa';
+theoryBody.querySelector('form textarea').dispatchEvent(new window.Event('input'));
+theoryBody.querySelector('form').dispatchEvent(new window.Event('submit', { bubbles: true, cancelable: true }));
+await new Promise(resolve => setTimeout(resolve, 10));
+assert.match(theoryBody.textContent, /Tổng quan đã sửa/);
+[...theoryBody.querySelectorAll('button')].find(button => button.textContent.includes('MongoDB')).click();
+await new Promise(resolve => setTimeout(resolve, 10));
+assert.equal(storedTheory.theory.introduction, 'Tổng quan đã sửa');
+[...theoryBody.querySelectorAll('button')].find(button => button.textContent.includes('Chỉnh sửa')).click();
+theoryBody.querySelector('form textarea').value = 'Sau khi lưu';
+theoryBody.querySelector('form textarea').dispatchEvent(new window.Event('input'));
+theoryBody.querySelector('form').dispatchEvent(new window.Event('submit', { bubbles: true, cancelable: true }));
+await new Promise(resolve => setTimeout(resolve, 10));
+assert.equal(storedTheory.theory.introduction, 'Sau khi lưu');
+
+window.closeTrendTheory();
+byId('trendResult').querySelector('.trend-theory-button').click();
+await new Promise(resolve => setTimeout(resolve, 10));
+assert.equal(theoryRequests, 1, 'Bản lưu được mở lại, không gọi GPT lần nữa');
+assert.match(theoryBody.textContent, /Sau khi lưu/);
+[...theoryBody.querySelectorAll('button')].find(button => button.textContent.includes('Xóa bản')).click();
+await new Promise(resolve => setTimeout(resolve, 10));
+assert.equal(storedTheory, null);
+window.closeTrendTheory();
+byId('trendResult').querySelector('.trend-collapse-report').click();
+assert.equal(byId('trendResult').textContent, '', 'Thu gọn trả lại danh sách báo cáo');
+requestBody = null;
+window.fetch = async (_, options) => {
+  requestBody = JSON.parse(options.body);
+  return { ok: true, json: async () => ({ success: true, data: resultData }) };
+};
+await window.runExamTrendAnalysis();
 function practiceSource(sample, tabId, label) {
   const parts = sample.sourceId.split(':');
   const questionNumber = Number(parts.pop());
@@ -228,6 +324,10 @@ await window.saveExamTrendReport();
 assert.equal(savedPayload.quality.status, 'rejected');
 assert.equal(savedPayload.report.topicTrends.length, 6);
 assert.ok(byId('trendSavedReports').querySelector('[data-trend-edit]'));
+byId('trendSavedReports').querySelector('[data-trend-report]').click();
+assert.match(byId('trendResult').textContent, /Báo cáo đã lưu/);
+byId('trendSavedReports').querySelector('[data-trend-report]').click();
+assert.equal(byId('trendResult').textContent, '', 'Nhấp lại báo cáo đang chọn sẽ đóng nội dung');
 byId('trendSavedReports').querySelector('[data-trend-edit]').click();
 const editForm = byId('trendReportEditForm');
 editForm.elements.title.value = 'Báo cáo đã sửa';

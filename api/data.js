@@ -2,9 +2,10 @@ import { ObjectId } from 'mongodb';
 import { getDb } from '../lib/db.js';
 import { getSession } from '../lib/session.js';
 import { deleteAiGuideRecord, learningScope, recordActivity, summarizeLearning } from '../lib/learning.js';
+import { cleanTrendTheory } from '../lib/trend-theory-storage.js';
 import { buildSubmissionContentUpdate, buildSubmissionVerificationUpdate } from '../lib/submission-verification.js';
 
-const ALLOWED_RESOURCES = new Set(['documents', 'exams', 'exam_catalog', 'home_stats', 'exam_image', 'content_sets', 'content_blocks', 'problems', 'content_revisions', 'submissions', 'submission_image', 'events', 'activity_feed', 'learning_overview', 'exam_trend_reports']);
+const ALLOWED_RESOURCES = new Set(['documents', 'exams', 'exam_catalog', 'home_stats', 'exam_image', 'content_sets', 'content_blocks', 'problems', 'content_revisions', 'submissions', 'submission_image', 'events', 'activity_feed', 'learning_overview', 'exam_trend_reports', 'trend_theories']);
 const TST_REGIONS = new Set(['BAC', 'TRUNG', 'NAM']);
 const EXAM_TREND_TOPICS = [
   'Dãy số và Giới hạn dãy số', 'Phương trình hàm', 'Số học và dãy số',
@@ -84,7 +85,7 @@ function cleanExamTrendReport(payload) {
     })).filter(method => method.name)
   })).filter(item => item.topic);
   if (topicTrends.length !== 6 || topicTrends.some((item, index) => item.topic !== EXAM_TREND_TOPICS[index])) return null;
-  const qualityStatus = ['approved', 'rejected', 'unavailable'].includes(quality.status) ? quality.status : 'unavailable';
+  const qualityStatus = ['approved', 'rejected', 'unavailable', 'checked', 'limited'].includes(quality.status) ? quality.status : 'unavailable';
   return {
     settings: {
       mode: settings.mode === 'year' ? 'year' : settings.mode === 'target' ? 'target' : '',
@@ -327,6 +328,15 @@ export default async function handler(req, res) {
           .limit(50)
           .toArray();
         return res.status(200).json({ success: true, items });
+      }
+
+      if (resource === 'trend_theories') {
+        if (!requireAdmin(session, res)) return;
+        const topic = cleanText(req.query?.topic, 120);
+        const method = cleanText(req.query?.method, 240);
+        if (!topic || !method) return res.status(400).json({ success: false, error: 'Thiếu chuyên đề' });
+        const item = await db.collection('trend_theories').findOne({ topic, method, deletedAt: { $exists: false } });
+        return res.status(200).json({ success: true, items: item ? [item] : [] });
       }
 
       if (resource === 'exam_trend_reports') {
@@ -916,6 +926,43 @@ export default async function handler(req, res) {
         setTitle: updated.problemSnapshot?.setTitle,
         ownerUsername: updated.username
       });
+      return res.status(200).json({ success: true, item: updated });
+    }
+
+    if (action === 'save_trend_theory' || action === 'update_trend_theory' || action === 'delete_trend_theory') {
+      const collection = db.collection('trend_theories');
+      const topic = cleanText(payload.topic, 120);
+      const method = cleanText(payload.method, 240);
+      if (!EXAM_TREND_TOPICS.includes(topic) || method.length < 5) {
+        return res.status(400).json({ success: false, error: 'Chuyên đề không hợp lệ' });
+      }
+      const key = { topic, method, deletedAt: { $exists: false } };
+      const previous = await collection.findOne(key);
+      if (action === 'delete_trend_theory') {
+        if (!previous) return res.status(404).json({ success: false, error: 'Không tìm thấy tài liệu đã lưu' });
+        await collection.updateOne({ _id: previous._id, deletedAt: { $exists: false } },
+          { $set: { deletedAt: now, deletedBy: session.username, updatedAt: now } });
+        await recordActivity(db, session, 'theory.deleted', { itemTitle: method, theoryId: String(previous._id) });
+        return res.status(200).json({ success: true, item: { id: String(previous._id) } });
+      }
+      const cleaned = cleanTrendTheory(payload);
+      if (!cleaned) return res.status(400).json({ success: false, error: 'Nội dung lý thuyết không hợp lệ' });
+      if (action === 'save_trend_theory') {
+        if (previous) return res.status(409).json({ success: false, error: 'Tài liệu đã được lưu; hãy mở lại để chỉnh sửa' });
+        const doc = { ...cleaned, quality: { method: 'admin-edited', summary: 'Nội dung do Admin lưu; chưa kiểm định độc lập.' },
+          createdAt: now, createdBy: session.username, updatedAt: now };
+        const result = await collection.insertOne(doc);
+        await recordActivity(db, session, 'theory.saved', { itemTitle: method, theoryId: String(result.insertedId) });
+        return res.status(201).json({ success: true, item: { ...doc, _id: result.insertedId } });
+      }
+      if (!previous) return res.status(404).json({ success: false, error: 'Không tìm thấy tài liệu đã lưu' });
+      const updated = await collection.findOneAndUpdate({ _id: previous._id, deletedAt: { $exists: false } },
+        { $set: { theory: cleaned.theory, sources: cleaned.sources,
+          quality: { method: 'admin-edited', summary: 'Nội dung do Admin chỉnh sửa; chưa kiểm định độc lập.' },
+          updatedAt: now, updatedBy: session.username },
+          $push: { revisions: { $each: [{ theory: previous.theory, editedAt: now, editedBy: session.username }], $slice: -10 } } },
+        { returnDocument: 'after' });
+      await recordActivity(db, session, 'theory.updated', { itemTitle: method, theoryId: String(previous._id) });
       return res.status(200).json({ success: true, item: updated });
     }
 

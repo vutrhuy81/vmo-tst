@@ -2415,6 +2415,7 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
   };
 
   const examTrendState = { current: null, saved: [], loaded: false, running: false };
+  const trendTheoryCache = new Map();
 
   function ensureExamTrendUi(modal, isAdmin) {
     if (!isAdmin) {
@@ -2441,7 +2442,7 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
     panel.innerHTML = `
       <div style="margin-bottom:12px;">
         <h4 style="margin:0;color:#173b64;">AI Phân tích xu hướng ra đề</h4>
-        <small style="color:#64748b;">Gemini phân tích dữ liệu đề đã lưu → GPT kiểm định độc lập. Chỉ dành cho quản trị viên.</small>
+        <small style="color:#64748b;">GPT phân tích dữ liệu Atlas; hệ thống đối chiếu số liệu và mã dẫn. Chỉ dành cho quản trị viên.</small>
       </div>
       <div style="background:#f8fafc;border:1px solid #cbd5e1;border-radius:9px;padding:12px;margin-bottom:14px;">
         <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(205px,1fr));gap:10px;">
@@ -2455,7 +2456,7 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
         <p id="trendScopeHelp" style="margin:9px 0;color:#475569;font-size:.79rem;"></p>
         <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;">
           <button type="button" id="trendPreviewButton">🔎 Kiểm tra nguồn Atlas</button>
-          <button type="button" id="trendRunButton" style="padding:9px 13px;border:0;border-radius:6px;background:#1d4ed8;color:white;font-weight:700;cursor:pointer;">✨ Gemini phân tích → GPT kiểm định</button>
+          <button type="button" id="trendRunButton" style="padding:9px 13px;border:0;border-radius:6px;background:#1d4ed8;color:white;font-weight:700;cursor:pointer;">✨ GPT phân tích · đối chiếu Atlas</button>
           <button type="button" id="trendSaveButton" disabled style="padding:9px 13px;border:0;border-radius:6px;background:#16a34a;color:white;font-weight:700;cursor:pointer;">💾 Lưu báo cáo vào MongoDB</button>
           <span id="trendStatus" role="status" style="font-size:.8rem;color:#475569;"></span>
         </div>
@@ -2498,6 +2499,8 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
   }
 
   function trendStatusLabel(quality = {}) {
+    if (quality.status === 'checked') return ['✅ Đã đối chiếu Atlas', '#166534', '#dcfce7'];
+    if (quality.status === 'limited') return ['⚠️ Cần rà soát nhận định', '#92400e', '#fef3c7'];
     if (quality.status === 'approved') return ['✅ GPT đã duyệt', '#166534', '#dcfce7'];
     if (quality.status === 'rejected') return ['⚠️ GPT chưa duyệt', '#991b1b', '#fee2e2'];
     return ['⏳ GPT chưa kiểm định được', '#92400e', '#fef3c7'];
@@ -2549,6 +2552,229 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
     const practiceIds = Array.isArray(method.practiceEvidenceIds) ? method.practiceEvidenceIds : [];
     return [...new Set(practiceIds.length ? practiceIds : (method.evidenceIds || []))];
   }
+
+  window.closeTrendTheory = function() {
+    document.getElementById('trendTheoryModal')?.classList.remove('active');
+    if (!document.getElementById('trendPracticeModal')?.classList.contains('active')) {
+      document.body.classList.remove('trend-practice-open');
+    }
+  };
+
+  function ensureTrendTheoryModal() {
+    let modal = document.getElementById('trendTheoryModal');
+    if (modal) return modal;
+    modal = document.createElement('div');
+    modal.id = 'trendTheoryModal';
+    modal.className = 'trend-practice-modal';
+    modal.style.zIndex = '12200';
+    modal.setAttribute('role', 'dialog');
+    modal.setAttribute('aria-modal', 'true');
+    modal.setAttribute('aria-labelledby', 'trendTheoryTitle');
+    modal.innerHTML = `<div class="trend-practice-shell"><header class="trend-practice-header">
+      <div><div class="trend-practice-kicker">📐 CƠ SỞ LÝ THUYẾT TOÁN NÂNG CAO</div><h2 id="trendTheoryTitle"></h2><p id="trendTheorySubtitle"></p></div>
+      <button type="button" class="trend-practice-close" aria-label="Đóng lý thuyết">×</button></header>
+      <main class="trend-practice-body" id="trendTheoryBody" aria-live="polite"></main></div>`;
+    modal.querySelector('.trend-practice-close').onclick = window.closeTrendTheory;
+    modal.addEventListener('click', event => { if (event.target === modal) window.closeTrendTheory(); });
+    document.body.appendChild(modal);
+    return modal;
+  }
+
+  function renderTrendTheory(data, container) {
+    const theory = data.theory || {};
+    container.replaceChildren();
+    const status = document.createElement('p');
+    status.textContent = data.quality?.summary || 'GPT biên soạn và tự kiểm tra; đối chiếu tài liệu nền bên dưới.';
+    container.appendChild(status);
+    const sources = new Map((data.sources || []).map(source => [source.id, source]));
+    const addReferences = (section, item) => {
+      const references = (item.sourceIds || []).map(id => sources.get(id)).filter(Boolean);
+      if (!references.length) return;
+      const note = document.createElement('p');
+      note.textContent = `Phạm vi tham khảo: ${item.sourceScope || 'kiến thức nền'}`;
+      section.appendChild(note);
+      for (const source of references) {
+        if (!/^https:\/\/(ocw\.mit\.edu|mathcs\.clarku\.edu)\//.test(source.url)) continue;
+        const link = document.createElement('a');
+        link.href = source.url;
+        link.target = '_blank';
+        link.rel = 'noopener noreferrer';
+        link.textContent = `📖 ${source.title} (${source.id})`;
+        link.style.cssText = 'display:block;margin:5px 0;overflow-wrap:anywhere;';
+        section.appendChild(link);
+      }
+    };
+    const addSection = (heading, content, item) => {
+      if (!content) return;
+      const section = document.createElement('section');
+      section.style.cssText = 'margin:16px 0;padding:14px;border:1px solid #cbd5e1;border-radius:8px;background:#fff;';
+      const title = document.createElement('h3'); title.textContent = heading;
+      const body = document.createElement('div');
+      body.style.whiteSpace = 'pre-wrap';
+      section.append(title, body); container.appendChild(section);
+      window.safeRenderMathJaxToElement?.(body, content);
+      if (!window.safeRenderMathJaxToElement) body.textContent = content;
+      if (item) addReferences(section, item);
+    };
+    addSection('Tổng quan', theory.introduction);
+    (theory.definitions || []).forEach((item, index) => addSection(`Định nghĩa ${index + 1}: ${item.name}`,
+      `${item.statement}\nGiả thiết: ${item.assumptions}\nGiải thích: ${item.proof}\nỨng dụng: ${item.application}`, item));
+    (theory.theorems || []).forEach((item, index) => addSection(`Định lý/Bổ đề ${index + 1}: ${item.name}`,
+      `Phát biểu: ${item.statement}\nGiả thiết: ${item.assumptions}\nChứng minh: ${item.proof}\nVận dụng: ${item.application}`, item));
+    addSection('Phương pháp nâng cao', theory.techniques);
+    addSection('Ví dụ có lời giải', theory.workedExample);
+    addSection('Sai lầm thường gặp', theory.pitfalls);
+    addSection('Liên hệ mở rộng', theory.furtherConnections);
+    addSection('Tự kiểm tra và giới hạn', theory.selfCheck);
+    const controls = document.createElement('div');
+    controls.style.cssText = 'display:flex;gap:8px;flex-wrap:wrap;margin:16px 0;';
+    const button = (label, callback) => {
+      const node = document.createElement('button');
+      node.type = 'button'; node.textContent = label; node.onclick = callback;
+      controls.appendChild(node);
+    };
+    button('✏️ Chỉnh sửa nội dung', () => editTrendTheory(data, container));
+    if (data.id) button('🗑️ Xóa bản đã lưu', () => deleteTrendTheory(data, container));
+    else button('💾 Lưu vào MongoDB', () => saveTrendTheory(data, container));
+    container.appendChild(controls);
+  }
+
+  function trendTheoryKey(data) { return `${data.topic}\n${data.method}`; }
+
+  async function saveTrendTheory(data, container) {
+    try {
+      const saved = await window.VMODataService.saveTrendTheory(data);
+      trendTheoryCache.set(trendTheoryKey(saved), saved);
+      renderTrendTheory(saved, container);
+      showToast('Đã lưu cơ sở lý thuyết vào MongoDB.', true);
+    } catch (error) { showToast(error.message || 'Không lưu được tài liệu.', false); }
+  }
+
+  async function deleteTrendTheory(data, container) {
+    if (!window.confirm(`Xóa cơ sở lý thuyết đã lưu: ${data.method}?`)) return;
+    try {
+      await window.VMODataService.deleteTrendTheory(data.topic, data.method);
+      trendTheoryCache.delete(trendTheoryKey(data));
+      container.textContent = 'Đã xóa bản lưu. Bấm lại 📐 Cơ sở lý thuyết để tạo bản mới.';
+      showToast('Đã xóa cơ sở lý thuyết.', true);
+    } catch (error) { showToast(error.message || 'Không xóa được tài liệu.', false); }
+  }
+
+  function editTrendTheory(data, container) {
+    const draft = JSON.parse(JSON.stringify(data.theory));
+    container.replaceChildren();
+    const form = document.createElement('form');
+    const heading = document.createElement('h3'); heading.textContent = '✏️ Chỉnh sửa cơ sở lý thuyết';
+    form.appendChild(heading);
+    const addField = (parent, label, value, onChange) => {
+      const wrapper = document.createElement('label');
+      wrapper.style.cssText = 'display:block;margin:10px 0;font-weight:600;';
+      wrapper.append(document.createTextNode(label));
+      const field = document.createElement('textarea');
+      field.rows = 4; field.value = value || '';
+      field.style.cssText = 'display:block;width:100%;box-sizing:border-box;margin-top:4px;font-weight:400;';
+      field.addEventListener('input', () => onChange(field.value));
+      wrapper.appendChild(field); parent.appendChild(wrapper);
+    };
+    const names = { introduction: 'Tổng quan', techniques: 'Phương pháp nâng cao',
+      workedExample: 'Ví dụ có lời giải', pitfalls: 'Sai lầm thường gặp',
+      furtherConnections: 'Liên hệ mở rộng', selfCheck: 'Tự kiểm tra và giới hạn' };
+    addField(form, names.introduction, draft.introduction, value => { draft.introduction = value; });
+    const renderItems = kind => {
+      const group = document.createElement('fieldset');
+      const title = document.createElement('legend'); title.textContent = kind === 'definitions' ? 'Định nghĩa' : 'Định lý/Bổ đề';
+      group.appendChild(title);
+      draft[kind].forEach((item, index) => {
+        const row = document.createElement('div');
+        row.style.cssText = 'border:1px solid #cbd5e1;padding:10px;margin:8px 0;';
+        for (const [field, label] of Object.entries({ name: 'Tên', statement: 'Phát biểu', assumptions: 'Giả thiết',
+          proof: 'Giải thích/Chứng minh', application: 'Ứng dụng', sourceScope: 'Phạm vi nguồn tham khảo' })) {
+          addField(row, label, item[field], value => { item[field] = value; });
+        }
+        const remove = document.createElement('button'); remove.type = 'button';
+        remove.textContent = 'Xóa mục này'; remove.onclick = () => { draft[kind].splice(index, 1); refresh(); };
+        row.appendChild(remove); group.appendChild(row);
+      });
+      const add = document.createElement('button'); add.type = 'button'; add.textContent = '+ Thêm mục';
+      add.onclick = () => {
+        draft[kind].push({ name: '', statement: '', assumptions: '', proof: '', application: '',
+          sourceIds: data.sources?.[0] ? [data.sources[0].id] : [], sourceScope: 'Tài liệu nền' });
+        refresh();
+      };
+      group.appendChild(add); form.appendChild(group);
+    };
+    const refresh = () => editTrendTheory({ ...data, theory: draft }, container);
+    renderItems('definitions'); renderItems('theorems');
+    for (const name of ['techniques', 'workedExample', 'pitfalls', 'furtherConnections', 'selfCheck']) {
+      addField(form, names[name], draft[name], value => { draft[name] = value; });
+    }
+    const submit = document.createElement('button'); submit.type = 'submit'; submit.textContent = data.id ? '💾 Lưu chỉnh sửa' : '✓ Áp dụng bản nháp';
+    const cancel = document.createElement('button'); cancel.type = 'button'; cancel.textContent = 'Hủy';
+    cancel.onclick = () => renderTrendTheory(data, container);
+    form.append(submit, cancel); container.appendChild(form);
+    form.onsubmit = async event => {
+      event.preventDefault(); submit.disabled = true;
+      if (!draft.introduction.trim() || !draft.workedExample.trim() || !draft.theorems.length ||
+          [...draft.definitions, ...draft.theorems].some(item => !item.name.trim() || !item.statement.trim() || !item.proof.trim())) {
+        showToast('Cần có tổng quan, ví dụ và ít nhất một định lý với tên, phát biểu, chứng minh.', false);
+        submit.disabled = false; return;
+      }
+      try {
+        const updated = data.id ? await window.VMODataService.updateTrendTheory({ topic: data.topic, method: data.method, theory: draft })
+          : { ...data, theory: draft, quality: { summary: 'Bản nháp đã được Admin chỉnh sửa; chưa kiểm định độc lập.' } };
+        trendTheoryCache.set(trendTheoryKey(updated), updated);
+        renderTrendTheory(updated, container);
+        if (data.id) showToast('Đã cập nhật tài liệu trên MongoDB.', true);
+      } catch (error) { showToast(error.message || 'Không lưu được chỉnh sửa.', false); submit.disabled = false; }
+    };
+  }
+
+  window.openTrendTheory = async function(topicIndex, methodIndex) {
+    if (!requireAdminUiAction()) return;
+    const topic = examTrendState.rendered?.report?.topicTrends?.[Number(topicIndex)];
+    const method = topic?.frequentMethods?.[Number(methodIndex)];
+    if (!topic || !method) return showToast('Không tìm thấy vi chủ đề.', false);
+    const modal = ensureTrendTheoryModal();
+    const body = modal.querySelector('#trendTheoryBody');
+    modal.querySelector('#trendTheoryTitle').textContent = method.name;
+    modal.querySelector('#trendTheorySubtitle').textContent = topic.topic;
+    modal.classList.add('active');
+    document.body.classList.add('trend-practice-open');
+    const key = `${topic.topic}\n${method.name}`;
+    body.textContent = 'Đang kiểm tra tài liệu đã lưu trên MongoDB…';
+    try {
+      const saved = await window.VMODataService.getTrendTheory(topic.topic, method.name);
+      if (saved) { trendTheoryCache.set(key, saved); return renderTrendTheory(saved, body); }
+    } catch (error) {
+      body.textContent = error.message || 'Không thể tải cơ sở lý thuyết đã lưu.';
+      return;
+    }
+    if (trendTheoryCache.has(key)) return renderTrendTheory(trendTheoryCache.get(key), body);
+    body.textContent = 'GPT đang biên soạn, tự kiểm tra và gắn tài liệu nền…';
+    const controller = new AbortController();
+    const timer = setTimeout(() => controller.abort(), 295_000);
+    try {
+      const response = await fetch('/api/ai-trend-theory', { method: 'POST', credentials: 'same-origin',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ topic: topic.topic, method: method.name }), signal: controller.signal });
+      const result = await response.json().catch(() => null);
+      if (!response.ok || !result?.success) {
+        const details = [result?.quality?.summary, ...(result?.quality?.issues || [])]
+          .map(value => String(value || '').trim()).filter(Boolean).slice(0, 4).join('\n• ');
+        throw new Error(`${result?.error || `Lỗi HTTP ${response.status}`}${details ? `\n${details}` : ''}`);
+      }
+      trendTheoryCache.set(key, result.data);
+      if (modal.classList.contains('active') && modal.querySelector('#trendTheoryTitle').textContent === method.name) {
+        renderTrendTheory(result.data, body);
+      }
+    } catch (error) {
+      if (modal.classList.contains('active')) {
+        body.style.whiteSpace = 'pre-wrap';
+        body.textContent = error.name === 'AbortError'
+        ? 'Quá thời gian chờ biên soạn. Hãy thử lại.' : (error.message || 'Không tạo được cơ sở lý thuyết.');
+      }
+    } finally { clearTimeout(timer); }
+  };
 
   function trendEvidenceTab(item) {
     if (item.anchor.startsWith('hist-')) return 'tab-history';
@@ -2640,10 +2866,11 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
     const notice = modal.querySelector('#trendPracticeNotice');
     modal.querySelector('#trendPracticeTitle').textContent = isTopic ? topic.topic : method.name;
     modal.querySelector('#trendPracticeSubtitle').textContent = `${topic.topic} · ${evidence.length} câu từ Atlas`;
-    notice.textContent = data.quality?.status === 'approved'
-      ? '✅ Danh sách vi chủ đề đã được GPT kiểm định.'
-      : '⚠️ Báo cáo Gemini chưa được GPT duyệt hoàn toàn; hãy xem đây là danh sách luyện tập tham khảo.';
-    notice.className = `trend-practice-notice ${data.quality?.status === 'approved' ? 'approved' : 'warning'}`;
+    notice.textContent = data.quality?.status === 'checked'
+      ? '✅ Số liệu và mã câu đã được đối chiếu Atlas; nhận định do GPT tự rà soát.'
+      : data.quality?.status === 'approved' ? '✅ Danh sách vi chủ đề đã được GPT kiểm định.'
+      : '⚠️ Hãy rà soát các nhận định và giới hạn mẫu trước khi sử dụng.';
+    notice.className = `trend-practice-notice ${['approved', 'checked'].includes(data.quality?.status) ? 'approved' : 'warning'}`;
     body.innerHTML = '<div class="trend-practice-loading">Đang đối chiếu và tải câu hỏi từ kho đề…</div>';
     modal.classList.add('active');
     document.body.classList.add('trend-practice-open');
@@ -2727,13 +2954,13 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
     const report = data.report;
     examTrendState.rendered = data;
     const methods = (item, topicIndex) => (item.frequentMethods || []).length
-      ? `<ul style="margin:7px 0 0;padding-left:20px;">${item.frequentMethods.map((method, methodIndex) => { const practiceIds = trendPracticeEvidenceIds(method); return `<li><button type="button" class="trend-practice-button" data-topic-index="${topicIndex}" data-method-index="${methodIndex}" ${practiceIds.length ? '' : 'disabled'}><strong>${escapeHtmlText(method.name)}</strong><span>📚 Luyện ${practiceIds.length} câu</span></button>${method.note ? `: ${escapeHtmlText(method.note)}` : ''}<div style="font-size:.72rem;color:#64748b;">Bằng chứng phân tích: ${escapeHtmlText((method.evidenceIds || []).join(', ') || 'chưa xác định')}</div></li>`; }).join('')}</ul>`
+      ? `<ul style="margin:7px 0 0;padding-left:20px;">${item.frequentMethods.map((method, methodIndex) => { const practiceIds = trendPracticeEvidenceIds(method); return `<li><button type="button" class="trend-theory-button" data-topic-index="${topicIndex}" data-method-index="${methodIndex}" style="border:0;background:none;padding:0;text-align:left;font-weight:800;color:#173b64;cursor:pointer;">${escapeHtmlText(method.name)}</button><div style="display:flex;gap:6px;flex-wrap:wrap;"><button type="button" class="trend-theory-button" data-topic-index="${topicIndex}" data-method-index="${methodIndex}">📐 Cơ sở lý thuyết</button><button type="button" class="trend-practice-button" data-topic-index="${topicIndex}" data-method-index="${methodIndex}" ${practiceIds.length ? '' : 'disabled'}>📚 Luyện ${practiceIds.length} câu</button></div>${method.note ? `: ${escapeHtmlText(method.note)}` : ''}<div style="font-size:.72rem;color:#64748b;">Bằng chứng phân tích: ${escapeHtmlText((method.evidenceIds || []).join(', ') || 'chưa xác định')}</div></li>`; }).join('')}</ul>`
       : '<p style="color:#64748b;margin:7px 0 0;">Chưa đủ dữ liệu để xác định phương pháp lặp lại.</p>';
     target.innerHTML = `
       <article style="border:1px solid #cbd5e1;border-radius:10px;background:white;padding:14px;">
         <div style="display:flex;justify-content:space-between;gap:9px;align-items:flex-start;flex-wrap:wrap;">
-          <div><h3 style="margin:0 0 5px;color:#0f172a;">${escapeHtmlText(report.title)}</h3><div style="font-size:.78rem;color:#64748b;">${saved ? 'Báo cáo đã lưu' : `Gemini: ${escapeHtmlText(data.model || 'không rõ model')}`} · ${escapeHtmlText(learningDate(data.createdAt || data.generatedAt))}</div></div>
-          <span style="padding:6px 9px;border-radius:999px;background:${qualityBackground};color:${qualityColor};font-size:.78rem;font-weight:800;">${qualityLabel}${quality.score !== null && quality.score !== undefined ? ` · ${escapeHtmlText(quality.score)}/5` : ''}</span>
+          <div><h3 style="margin:0 0 5px;color:#0f172a;">${escapeHtmlText(report.title)}</h3><div style="font-size:.78rem;color:#64748b;">${saved ? 'Báo cáo đã lưu' : `GPT: ${escapeHtmlText(data.model || 'không rõ model')}`} · ${escapeHtmlText(learningDate(data.createdAt || data.generatedAt))}</div></div>
+          <div><span style="padding:6px 9px;border-radius:999px;background:${qualityBackground};color:${qualityColor};font-size:.78rem;font-weight:800;">${qualityLabel}${quality.score !== null && quality.score !== undefined ? ` · ${escapeHtmlText(quality.score)}/5` : ''}</span> <button type="button" class="trend-collapse-report" aria-label="Thu gọn báo cáo">▲ Thu gọn</button></div>
         </div>
         <div style="margin:11px 0;padding:10px;background:#eff6ff;border-radius:7px;color:#1e3a8a;font-size:.82rem;"><strong>Nguồn Atlas:</strong> ${Number(evidence.examCount) || 0} đề · ${Number(evidence.questionCount) || 0} câu · ${Number(evidence.unitCount) || 0} đơn vị · ${escapeHtmlText((evidence.years || []).join(', ') || data.settings?.year || '')} · thiếu ${Number(evidence.missingYears?.length) || 0} năm · AI đọc ${Number(evidence.sampleCount) || evidence.samples?.length || 0} câu mẫu${Number(evidence.otherQuestionCount) ? ` · ${Number(evidence.otherQuestionCount)} câu ngoài 6 tiêu chí` : ''}${evidence.mergedProvinceHistory ? `<div style="margin-top:5px;"><strong>Địa giới hiện hành:</strong> ${escapeHtmlText((evidence.historyMembers || []).join(' + '))} → ${escapeHtmlText(evidence.historyCurrentProvince || '')}</div>` : ''}<div style="margin-top:5px;">Tỷ lệ chủ đề tính theo câu; tần suất vi chủ đề dựa trên câu mẫu được dẫn.</div></div>
         <p style="white-space:pre-wrap;line-height:1.55;">${escapeHtmlText(report.executiveSummary || '')}</p>
@@ -2755,6 +2982,14 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
     target.querySelectorAll('.trend-topic-practice-button').forEach(button => {
       button.onclick = () => window.openTrendPractice(button.dataset.topicIndex);
     });
+    target.querySelectorAll('.trend-theory-button').forEach(button => {
+      button.onclick = () => window.openTrendTheory(button.dataset.topicIndex, button.dataset.methodIndex);
+    });
+    target.querySelector('.trend-collapse-report').onclick = () => {
+      target.replaceChildren();
+      examTrendState.rendered = null;
+      document.getElementById('trendSavedReports')?.scrollIntoView?.({ block: 'nearest' });
+    };
   }
 
   window.previewExamTrendEvidence = async function() {
@@ -2800,7 +3035,7 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
     examTrendState.current = null;
     if (save) save.disabled = true;
     if (button) button.disabled = true;
-    if (status) status.textContent = 'Gemini đang phân tích; sau đó GPT sẽ kiểm định (tối đa khoảng 290 giây)...';
+    if (status) status.textContent = 'GPT đang phân tích và hệ thống sẽ đối chiếu dữ liệu Atlas…';
     const controller = new AbortController();
     const timer = setTimeout(() => controller.abort(), 295_000);
     try {
@@ -2813,9 +3048,9 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
       examTrendState.current = result.data;
       renderExamTrendReport(result.data);
       if (save) save.disabled = false;
-      if (status) status.textContent = result.data.quality?.verified
-        ? 'Hoàn tất: GPT đã duyệt báo cáo.'
-        : 'Hoàn tất: đã giữ kết quả Gemini kèm nhận xét/trạng thái GPT.';
+      if (status) status.textContent = result.data.quality?.status === 'checked'
+        ? 'Hoàn tất: số liệu và mã dẫn đã đối chiếu Atlas.'
+        : 'Hoàn tất: xem các giới hạn và mã dẫn cần rà soát.';
     } catch (error) {
       if (status) status.textContent = error?.name === 'AbortError'
         ? 'Yêu cầu vượt quá thời gian chờ 295 giây.' : (error?.message || 'Không thể phân tích xu hướng.');
@@ -2858,7 +3093,13 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
         return `<div style="padding:9px 11px;margin-bottom:6px;border:1px solid #cbd5e1;border-radius:7px;background:white;"><button type="button" data-trend-report="${index}" style="display:block;width:100%;text-align:left;border:0;background:none;cursor:pointer;"><strong>${escapeHtmlText(item.report?.title || 'Báo cáo xu hướng')}</strong><span style="float:right;color:${color};background:${background};padding:2px 6px;border-radius:999px;font-size:.7rem;">${label}</span><div style="font-size:.76rem;color:#64748b;">${escapeHtmlText(item.settings?.year || '')} · ${escapeHtmlText(item.createdBy || '')} · ${escapeHtmlText(learningDate(item.createdAt))}${item.updatedBy ? ` · sửa bởi ${escapeHtmlText(item.updatedBy)}` : ''}</div></button><div style="display:flex;gap:8px;margin-top:7px;"><button type="button" data-trend-edit="${index}">✏️ Chỉnh sửa</button><button type="button" data-trend-delete="${index}">🗑️ Xóa</button></div></div>`;
       }).join('') : '<p style="color:#64748b;">Chưa có báo cáo xu hướng đã lưu.</p>';
       list.querySelectorAll('[data-trend-report]').forEach(button => {
-        button.onclick = () => renderExamTrendReport(examTrendState.saved[Number(button.dataset.trendReport)], true);
+        button.onclick = () => {
+          const item = examTrendState.saved[Number(button.dataset.trendReport)];
+          if (examTrendState.rendered?.id === item.id) {
+            document.getElementById('trendResult')?.replaceChildren();
+            examTrendState.rendered = null;
+          } else renderExamTrendReport(item, true);
+        };
       });
       list.querySelectorAll('[data-trend-edit]').forEach(button => {
         button.onclick = () => window.editExamTrendReport(Number(button.dataset.trendEdit));
