@@ -75,3 +75,34 @@ PR nháp: https://github.com/vutrhuy81/vmo-tst/pull/31
 Preview: https://vmo-tst-git-feature-two-stage-h-96cf89-vutrhuy81-6018s-projects.vercel.app/login.html
 
 Vercel bot báo Ready. Phiên triển khai này chưa truy cập được nội dung preview do kết nối Vercel trả 403 cho project/team. Workspace không có MONGODB_URI hoặc OPENAI_API_KEY để chạy lập chỉ mục và benchmark thật. Cần cấp kết nối Vercel đúng team, xác nhận cấu hình preview, rồi chạy các bước Atlas và kiểm thử live trước merge.
+
+## Sửa đổi sau kiểm thử Atlas — 2026-10-01
+
+- `RAG_VERSION=2` là phiên bản metadata/retrieval; `EMBEDDING_VERSION=1` vẫn giữ định dạng embedding cũ. Chuẩn hóa chữ Đ trước khi phân loại; nhận diện Đại số và thêm thẻ khái niệm/phương pháp. Không suy ra tương đương toán học từ cùng chuyên đề.
+- Hybrid yêu cầu ít nhất một thẻ cụ thể khớp và ngưỡng overlap. “Đường tròn”, “phương trình hàm”, “bất đẳng thức”, “tổ hợp”, “quy nạp” đơn lẻ không đủ. Không trả phí embedding khi không có nguồn đáp ứng thẻ. Đây là lựa chọn bảo thủ về precision; có thể giảm recall, cần corpus đa chuyên đề để hiệu chỉnh.
+- Cache `rag_query_embeddings`: SHA-256 của input/model/dimensions, TTL 24 giờ, single-flight trong từng instance. Cache chỉ lưu vector; mỗi lần vẫn tìm và kiểm tra nguồn hiện tại, nội dung, xác minh và quyền truy cập. Log phân biệt miss/hit/shared/bypass; token/chi phí trên hit là 0 cho embedding, không phải toàn request AI.
+- Chỉ chuẩn hóa khoảng trắng quanh một số quan hệ TeX (`\\ne`, `\\le`, …), bảo toàn số mũ/chỉ số và chuyển HTML sup/sub thành ký hiệu tương ứng. Không đơn giản hóa công thức hay coi hai giả thiết khác nhau là một.
+- Gemini/GPT phải ghi kiểm tra suy biến cụ thể. Gate không chấp nhận kết quả thiếu kiểm tra; GPT phải approved=true khi công bố báo cáo đánh giá. Hướng dẫn dùng reasoning medium; model vẫn lấy từ cấu hình hiện hành. Gate là kiểm tra cấu trúc/cờ tự báo cáo, không thay cho chứng minh hình thức hay phản biện của giáo viên.
+
+### Nâng cấp Atlas sau khi deployment preview sẵn sàng
+
+1. Xác nhận preview có các biến môi trường đúng và xác định preview có dùng chung DB production hay không. Các thao tác thiết lập/backfill/process ghi metadata/chỉ mục, không sửa đề hoặc bài nộp. Nếu cùng DB, thực hiện trong khung kiểm thử. Nguồn v1 còn hợp lệ được giữ active khi chỉ nâng metadata; v2 chưa dùng nguồn đó cho đến khi metadata sẵn sàng. Nguồn có nội dung/verification không còn khớp vẫn bị loại ngay.
+2. Admin → Database Hub → AI xu hướng đề → Kho tham chiếu đã xác minh → Thiết lập chỉ mục. Nâng cấp cộng thêm trường vào `rag_vector_v1` và `rag_text_v1`, giữ các trường cũ; không tạo thêm hai Search indexes vượt giới hạn Free cluster. Chờ READY/queryable.
+3. Đưa nguồn đã xác minh vào hàng đợi, hết từng trang 100. Process từng batch 3. Input/model/dimensions giống hệt record cũ thì tái sử dụng vector; thay nội dung mới gọi provider. Nguồn bị thu hồi/xóa/đổi đề vẫn bị loại.
+4. Xác nhận số nguồn Metadata v2 sẵn sàng, không còn pending/processing/failed; kiểm tra log token thực tế. Các phiên bản ứng dụng cũ vẫn sử dụng embedding version 1, nhưng metadata/hashes đã nâng cấp nên rollback cần kiểm tra nguồn lại; không tuyên bố rollback Atlas là hoàn toàn không ảnh hưởng.
+5. Dùng cấu trúc `docs/rag-live-acceptance-template.json`, thay các placeholder bằng khóa/ID do Admin nhập trực tiếp trong giao diện; không commit corpus Atlas thật lên GitHub. Thêm 50–100 ca, các nguồn đúng khác phương pháp, và gán nhãn độc lập. Nhãn vắng mặt thì chỉ tính hiệu năng; forbiddenSourceIds kiểm tra riêng nguồn phải bị loại. Ca nguồn đã xóa được kiểm tra hồi quy mock; kiểm thử live dùng dữ liệu test riêng, không xóa bài thật.
+6. Đo cả cache bật và bypass, lặp nhiều lần, xen kẽ thứ tự baseline/RAG. UI có pacing dưới 30 ca/phút, dừng sau ca hiện tại và giữ kết quả nếu lỗi. Không vô hiệu hóa timeout đăng nhập 5 phút; phiên benchmark dài cần tương tác thật của Admin. Không coi p95 của vài ca là p95 production.
+
+### Benchmark qua browser và CLI
+
+Benchmark nằm trong panel RAG hiện có, POST `api/data.js` action `rag_benchmark`, chỉ Admin, mỗi request một ca bounded. Không thêm function Vercel mới. Kết quả chỉ chứa ID nguồn/provenance và metrics; không sinh/chấm AI, không lưu bài nộp thử. Nhãn vắng mặt: metrics Recall/precision null. `expectedSourceIds: []`: ca không có nguồn phù hợp. `forbiddenSourceIds`: các nguồn bị thu hồi/đổi đề phải không được chọn.
+
+Baseline tái hiện lookup reference của AI Guide trước RAG, gồm problem.referenceSolution và submission mới nhất theo problemKey. Không đưa baseline yếu này vào model. Thời gian baseline/RAG được đo trên cùng DB, bao gồm resolve problem; riêng RAG gồm ghi log. Không phải đối chứng toàn pipeline AI cũ.
+
+CLI: `npm run rag:benchmark:live -- /secure/local/labelled-cases.json` (cần MONGODB_URI và khóa embedding khi phải gọi provider); thêm `--bypass-cache` để đo cold embedding. UI dùng phiên Admin, không yêu cầu nhập khóa DB/API lên frontend.
+
+Đơn giá mặc định cho text-embedding-3-small: $0.02/1M token (Standard, kiểm tra 2026-10-01: https://developers.openai.com/api/docs/models/text-embedding-3-small). RAG_EMBEDDING_USD_PER_MILLION ghi đè khi hợp đồng/đơn giá khác. Model chưa biết giá giữ null. Đây là ước tính embedding, không gồm Atlas và chi phí Gemini/GPT.
+
+### Trạng thái nghiệm thu
+
+Kiểm thử live trước sửa đổi đã xác nhận luồng exact, Hybrid và chấp nhận phương pháp khác. Đây KHÔNG phải nghiệm thu deployment v2. Chi tiết corpus và log Atlas không xuất vào repository; Admin giữ trong phiên kiểm thử. Kiểm thử local/mock kiểm tra orchestration và gate; cần ghi riêng kết quả Atlas/AI trên preview mới trước merge.

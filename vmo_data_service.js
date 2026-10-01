@@ -449,7 +449,7 @@ export async function getLearningOverview(username = '') {
 export async function getRagStatus() { return (await apiFetch(`${DATA_API_URL}?resource=rag_status`)).items?.[0]; }
 export async function getRagLogs() { return normalizeList((await apiFetch(`${DATA_API_URL}?resource=rag_logs`)).items || []); }
 export async function manageRag(action, payload = {}) {
-  if (!['rag_setup', 'rag_backfill', 'rag_process'].includes(action)) throw new Error('Thao tác không hợp lệ');
+  if (!['rag_setup', 'rag_backfill', 'rag_process', 'rag_benchmark'].includes(action)) throw new Error('Thao tác không hợp lệ');
   return mutate(action, payload);
 }
 

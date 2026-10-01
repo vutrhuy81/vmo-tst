@@ -1,3 +1,4 @@
+import { mathematicalAuditInstruction, auditEvidence } from '../lib/math-audit.js';
 import { retrieveVerifiedContext } from '../lib/rag-retrieval.js';
 import { ObjectId } from 'mongodb';
 import { getDb } from '../lib/db.js';
@@ -63,6 +64,9 @@ const verifierSchema = {
   additionalProperties: false
 };
 
+Object.assign(verifierSchema.properties, { degeneraciesChecked: { type: 'boolean' }, degeneracyChecks: stringArray });
+verifierSchema.required.push('degeneraciesChecked', 'degeneracyChecks');
+
 function normalizeEvaluation(value) {
   const data = value && typeof value === 'object' ? value : {};
   const verdict = VERDICTS.includes(data.verdict) ? data.verdict : 'LOGICAL_GAP';
@@ -90,8 +94,9 @@ function normalizeEvaluation(value) {
   };
 }
 
-function verifierChecks(data, hasTrustedReference) {
+export function verifierChecks(data, hasTrustedReference) {
   return {
+    degeneraciesChecked: data?.degeneraciesChecked === true && auditEvidence(data?.degeneracyChecks),
     allClaimsChecked: data?.allClaimsChecked === true,
     mathCorrect: data?.mathCorrect === true,
     scoreConsistent: data?.scoreConsistent === true,
@@ -102,8 +107,8 @@ function verifierChecks(data, hasTrustedReference) {
   };
 }
 
-function verifierApproved(data, hasTrustedReference) {
-  return Object.values(verifierChecks(data, hasTrustedReference)).every(Boolean);
+export function verifierApproved(data, hasTrustedReference) {
+  return data?.approved === true && Object.values(verifierChecks(data, hasTrustedReference)).every(Boolean);
 }
 
 export default async function handler(req, res) {
@@ -164,7 +169,7 @@ THÔNG TIN BÀI TOÁN
 BÀI LÀM THÍ SINH
 ${solutionText || '(xem ảnh đính kèm)'}
 
-QUY TRÌNH CHẤM BẮT BUỘC
+${mathematicalAuditInstruction}\n\nQUY TRÌNH CHẤM BẮT BUỘC
 1. Tự giải hoặc thiết lập một lời giải chuẩn ngắn gọn trước khi nhận xét bài làm.
 2. Đối chiếu từng khẳng định của thí sinh với đề bài; không suy diễn nội dung thí sinh chưa viết.
 3. Trước khi kết luận một phép biến đổi đúng hoặc sai, phải tự tính lại độc lập. Với mỗi đẳng thức, hãy khai triển hoặc thế ngược để kiểm tra dấu, hệ số và điều kiện.
@@ -234,7 +239,7 @@ ${referenceBlock}
 BÁO CÁO SƠ BỘ CỦA GEMINI
 ${JSON.stringify(provisionalData)}
 
-YÊU CẦU KIỂM ĐỊNH
+${mathematicalAuditInstruction}\n\nYÊU CẦU KIỂM ĐỊNH
 1. Đối chiếu từng nhận xét với đúng nội dung học sinh đã viết; tuyệt đối không gán cho học sinh bước họ không viết.
 2. Tự tính lại mọi đẳng thức, giới hạn, điều kiện và trường hợp biên.
 3. Kiểm tra verdict và điểm trên thang 5.0; điểm phải phù hợp mức độ hoàn thành thực tế.

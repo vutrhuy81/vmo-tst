@@ -34,6 +34,7 @@ assert.equal((await processRagJobs(indexDb, 1, embedStub)).results[0].status, 'r
 assert.equal(indexDb.data.verified_knowledge[0].status, 'active');
 indexDb.data.verified_knowledge[0].status = 'pending';
 await queueSource(indexDb, indexDb.data.submissions[0]._id);
+delete indexDb.data.verified_knowledge[0].embedding; // Force a paid call for the race test.
 const changed = await processRagJobs(indexDb, 1, async () => {
   indexDb.data.submissions[0].adminVerified = false;
   return embedStub();

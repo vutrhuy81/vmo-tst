@@ -2472,6 +2472,13 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
       <button type="button" data-rag-action="rag_setup">Thiết lập chỉ mục</button>
       <button type="button" data-rag-action="rag_backfill">Đưa nguồn đã xác minh vào hàng đợi</button>
       <button type="button" data-rag-action="rag_process">Lập chỉ mục 3 nguồn tiếp theo</button></div>
+      <details><summary>⏱️ Benchmark retrieval Atlas (Admin)</summary>
+      <p>Mỗi ca so sánh luồng chọn nguồn cũ và RAG mới. Không sinh/chấm bằng AI, không lưu bài giải thử. Chỉ các ca có expectedSourceIds được tính Recall/precision; [] nghĩa là không có nguồn phù hợp.</p>
+      <label>Ca kiểm thử (mảng JSON, tối đa 100 ca)<textarea data-rag-cases rows="6" style="width:100%;box-sizing:border-box;" placeholder='[{"name":"Đúng khóa","problemRef":"khóa đề Atlas","expectedSourceIds":["ID nguồn 24 ký tự hex"]}]'></textarea></label>
+      <label>Số lần lặp mỗi ca <select data-rag-repeats><option value="1">1</option><option value="3">3</option><option value="5">5</option></select></label>
+      <label><input type="checkbox" data-rag-bypass> Bỏ qua cache embedding để đo lần gọi provider</label>
+      <button type="button" data-rag-benchmark>Chạy benchmark Atlas</button><button type="button" data-rag-stop disabled>Dừng sau ca hiện tại</button>
+      <p data-rag-benchmark-status role="status"></p><pre data-rag-benchmark-results style="white-space:pre-wrap;overflow-wrap:anywhere;"></pre></details>
       <p data-rag-status role="status"></p><div data-rag-summary></div><div data-rag-logs></div>`;
     let after = '';
     ragPanel.querySelectorAll('[data-rag-action]').forEach(button => {
@@ -2489,18 +2496,77 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
               : 'Đã yêu cầu tạo chỉ mục. Chờ Atlas báo sẵn sàng.';
           } else status.textContent = '';
           const data = await window.VMODataService.getRagStatus();
-          ragPanel.querySelector('[data-rag-summary]').textContent = `Nguồn: ${(data.knowledge || []).map(item => `${item._id}: ${item.count}`).join(', ') || '0'} · Hàng đợi: ${(data.jobs || []).map(item => `${item._id}: ${item.count}`).join(', ') || '0'} · Chỉ mục: ${(data.indexes || []).map(item => `${item.name}: ${item.status}`).join(', ') || data.indexError || 'chưa tạo'} · Embedding: ${data.embeddingConfigured ? 'đã cấu hình' : 'chưa cấu hình'}`;
+          ragPanel.querySelector('[data-rag-summary]').textContent = `Nguồn: ${(data.knowledge || []).map(item => `${item._id}: ${item.count}`).join(', ') || '0'} · Hàng đợi: ${(data.jobs || []).map(item => `${item._id}: ${item.count}`).join(', ') || '0'} · Chỉ mục: ${(data.indexes || []).map(item => `${item.name}: ${item.status}`).join(', ') || data.indexError || 'chưa tạo'} · Metadata v${data.metadataVersion || 1}: ${data.currentMetadataSources || 0} nguồn sẵn sàng · Embedding: ${data.embeddingConfigured ? 'đã cấu hình' : 'chưa cấu hình'}`;
           const logs = await window.VMODataService.getRagLogs();
           const list = ragPanel.querySelector('[data-rag-logs]'); list.replaceChildren();
           logs.forEach(log => {
             const row = document.createElement('p');
-            row.textContent = `${learningDate(log.createdAt)} · ${log.purpose} · ${log.mode} · ${log.elapsedMs} ms · ${(log.sources || []).map(item => `${item.matchType}: ${item.sourceId}`).join(', ') || 'không có nguồn'} · ${log.embeddingTokens || 0} embedding tokens · ${log.estimatedUsd === null ? 'chi phí chưa cấu hình' : `${log.estimatedUsd || 0} USD`}${log.warnings?.length ? ` · ${log.warnings.join(', ')}` : ''}`;
+            row.textContent = `${learningDate(log.createdAt)} · ${log.purpose} · ${log.mode} · ${log.elapsedMs} ms · ${(log.sources || []).map(item => `${item.matchType}: ${item.sourceId}`).join(', ') || 'không có nguồn'} · cache ${log.embeddingCache || "không dùng"} · ${log.embeddingTokens || 0} embedding tokens · ${log.estimatedUsd === null ? 'chi phí chưa cấu hình' : `${log.estimatedUsd || 0} USD`}${log.warnings?.length ? ` · ${log.warnings.join(', ')}` : ''}`;
             list.appendChild(row);
           });
         } catch (error) { status.textContent = error.message || 'Không tải được trạng thái RAG.'; }
         finally { button.disabled = false; }
       };
     });
+    let stopBenchmark = false;
+    const runBenchmark = ragPanel.querySelector('[data-rag-benchmark]');
+    const stopButton = ragPanel.querySelector('[data-rag-stop]');
+    stopButton.onclick = () => { stopBenchmark = true; stopButton.disabled = true; };
+    runBenchmark.onclick = async () => {
+      const status = ragPanel.querySelector('[data-rag-benchmark-status]');
+      const results = ragPanel.querySelector('[data-rag-benchmark-results]');
+      const observations = [];
+      const errors = [];
+      let cases;
+      try {
+        cases = JSON.parse(ragPanel.querySelector('[data-rag-cases]').value);
+        if (!Array.isArray(cases) || !cases.length || cases.length > 100) throw new Error('Cần mảng JSON từ 1 đến 100 ca.');
+      } catch (error) { status.textContent = error.message; return; }
+      stopBenchmark = false; runBenchmark.disabled = true; stopButton.disabled = false;
+      const controls = [...ragPanel.querySelectorAll('[data-rag-cases], [data-rag-repeats], [data-rag-bypass]')];
+      controls.forEach(control => { control.disabled = true; });
+      const repeats = Number(ragPanel.querySelector('[data-rag-repeats]').value);
+      const bypassEmbeddingCache = ragPanel.querySelector('[data-rag-bypass]').checked;
+      const summarize = () => Object.fromEntries(['baseline', 'rag'].map(mode => {
+        const rows = observations.filter(row => row.mode === mode);
+        const labelled = rows.filter(row => Array.isArray(row.expectedSourceIds));
+        const hits = labelled.reduce((n,row) => n+row.sourceIds.filter(id => row.expectedSourceIds.includes(id)).length,0);
+        const relevant = labelled.reduce((n,row) => n+row.expectedSourceIds.length,0);
+        const selected = labelled.reduce((n,row) => n+row.sourceIds.length,0);
+        const empty = labelled.filter(row => !row.expectedSourceIds.length);
+        const safety = rows.filter(row => row.forbiddenSourceIds?.length);
+        const times = rows.map(row => row.elapsedMs).sort((a,b) => a-b);
+        return [mode, { samples: rows.length, labelledSamples: labelled.length,
+          recallAt3: relevant ? hits/relevant : null, precisionAt3: selected ? hits/selected : null,
+          noSourceAccuracy: empty.length ? empty.filter(row => !row.sourceIds.length).length/empty.length : null,
+          forbiddenSourceSafety: safety.length ? safety.filter(row => !row.forbiddenHits?.length).length/safety.length : null,
+          p50Ms: times.length ? times[Math.ceil(times.length*.5)-1] : null,
+          p95Ms: times.length ? times[Math.ceil(times.length*.95)-1] : null,
+          embeddingTokens: rows.reduce((n,row) => n+(row.embeddingTokens || 0),0),
+          estimatedUsd: rows.some(row => row.estimatedUsd === null) ? null : rows.reduce((n,row) => n+(row.estimatedUsd || 0),0) }];
+      }));
+      try {
+        let completed = 0; let previousCallAt = 0;
+        for (const test of cases) {
+          for (let repeat = 0; repeat < repeats && !stopBenchmark; repeat++) {
+            status.textContent = `Đang chạy ${completed + 1}/${cases.length * repeats}: ${test.name || test.problemRef || 'bài chưa đăng ký'}…`;
+            try {
+              const pause = Math.max(0, 2100 - (Date.now() - previousCallAt));
+              if (pause) await new Promise(resolve => setTimeout(resolve, pause));
+              if (stopBenchmark) break;
+              previousCallAt = Date.now();
+              const report = await window.VMODataService.manageRag('rag_benchmark', { ...test, bypassEmbeddingCache, ragFirst: completed % 2 === 1 });
+              observations.push(...report.observations);
+            } catch (error) { errors.push({ name: test.name || test.problemRef, error: error.message }); stopBenchmark = true; }
+            completed++;
+            results.textContent = JSON.stringify({ environment: 'LIVE ATLAS; không gồm thời gian/chi phí sinh hoặc chấm AI',
+              metrics: summarize(), observations, errors }, null, 2);
+          }
+          if (stopBenchmark) break;
+        }
+        status.textContent = `${stopBenchmark ? 'Đã dừng' : 'Hoàn tất'}: ${completed} ca chạy. Kết quả ít mẫu không đại diện p95 sản xuất.`;
+      } finally { runBenchmark.disabled = false; stopButton.disabled = true; controls.forEach(control => { control.disabled = false; }); }
+    };
     panel.appendChild(ragPanel);
     body.appendChild(panel);
 
