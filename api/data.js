@@ -1,3 +1,5 @@
+import { queueSource, setupRag, backfillSources, processRagJobs } from '../lib/rag-store.js';
+import { embeddingConfig } from '../lib/rag-embedding.js';
 import { ObjectId } from 'mongodb';
 import { getDb } from '../lib/db.js';
 import { getSession } from '../lib/session.js';
@@ -5,7 +7,7 @@ import { deleteAiGuideRecord, learningScope, recordActivity, summarizeLearning }
 import { cleanTrendTheory } from '../lib/trend-theory-storage.js';
 import { buildSubmissionContentUpdate, buildSubmissionVerificationUpdate } from '../lib/submission-verification.js';
 
-const ALLOWED_RESOURCES = new Set(['documents', 'exams', 'exam_catalog', 'home_stats', 'exam_image', 'content_sets', 'content_blocks', 'problems', 'content_revisions', 'submissions', 'submission_image', 'events', 'activity_feed', 'learning_overview', 'exam_trend_reports', 'trend_theories']);
+const ALLOWED_RESOURCES = new Set(['documents', 'exams', 'exam_catalog', 'home_stats', 'exam_image', 'content_sets', 'content_blocks', 'problems', 'content_revisions', 'submissions', 'submission_image', 'events', 'activity_feed', 'learning_overview', 'exam_trend_reports', 'trend_theories', 'rag_status', 'rag_logs']);
 const TST_REGIONS = new Set(['BAC', 'TRUNG', 'NAM']);
 const EXAM_TREND_TOPICS = [
   'Dãy số và Giới hạn dãy số', 'Phương trình hàm', 'Số học và dãy số',
@@ -41,13 +43,23 @@ function cleanReferenceLinks(value) {
   }).filter(Boolean);
 }
 
+function cleanRagProvenance(value) {
+  if (!value || typeof value !== 'object') return null;
+  return { id: cleanText(value.id, 80), mode: ['exact', 'hybrid', 'none'].includes(value.mode) ? value.mode : 'none',
+    sources: (Array.isArray(value.sources) ? value.sources : []).slice(0, 3).map(item => ({
+      sourceId: cleanText(item.sourceId, 80), problemKey: cleanText(item.problemKey, 180),
+      matchType: item.matchType === 'exact' ? 'exact' : 'similar', problemContentHash: cleanText(item.problemContentHash, 80)
+    })) };
+}
+
 function cleanAiGuide(value) {
   if (!value || typeof value !== 'object') return null;
   const quality = value.quality && typeof value.quality === 'object'
     ? {
         verified: value.quality.verified === true,
         score: cleanText(value.quality.score, 20),
-        verifier: cleanText(value.quality.verifier, 120)
+        verifier: cleanText(value.quality.verifier, 120),
+        retrieval: cleanRagProvenance(value.quality.retrieval)
       }
     : null;
   return {
@@ -219,6 +231,11 @@ function requireAdmin(session, res) {
   return false;
 }
 
+async function refreshRagSource(db, id) {
+  try { await queueSource(db, id); }
+  catch (error) { console.error('[RAG QUEUE]', String(id), error.message); }
+}
+
 export default async function handler(req, res) {
   res.setHeader('Access-Control-Allow-Methods', 'GET,POST,OPTIONS');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
@@ -328,6 +345,23 @@ export default async function handler(req, res) {
           .limit(50)
           .toArray();
         return res.status(200).json({ success: true, items });
+      }
+
+      if (resource === 'rag_status' || resource === 'rag_logs') {
+        if (!requireAdmin(session, res)) return;
+        if (resource === 'rag_logs') {
+          const items = await db.collection('rag_retrieval_logs').find({}).sort({ createdAt: -1 }).limit(30).toArray();
+          return res.status(200).json({ success: true, items });
+        }
+        const knowledge = await db.collection('verified_knowledge').aggregate([
+          { $group: { _id: '$status', count: { $sum: 1 }, tokens: { $sum: '$embeddingTokens' },
+            estimatedUsd: { $sum: '$estimatedUsd' } } }]).toArray();
+        const jobs = await db.collection('rag_index_jobs').aggregate([{ $group: { _id: '$status', count: { $sum: 1 } } }]).toArray();
+        let indexes = [], indexError = '';
+        try { indexes = (await db.collection('verified_knowledge').listSearchIndexes().toArray()).map(item => ({ name: item.name, status: item.status, queryable: item.queryable })); }
+        catch (error) { indexError = String(error.message).slice(0, 150); }
+        return res.status(200).json({ success: true, items: [{ knowledge, jobs, indexes, indexError,
+          embeddingConfigured: Boolean(process.env.OPENAI_API_KEY), config: embeddingConfig() }] });
       }
 
       if (resource === 'trend_theories') {
@@ -718,7 +752,7 @@ export default async function handler(req, res) {
         updatedAt: now
       };
       if (submissionKind === 'ai_guide') {
-        const aiGuideDoc = { ...doc };
+        const aiGuideDoc = { ...doc, adminVerified: false, adminVerifiedAt: null };
         delete aiGuideDoc.createdAt;
         const savedGuide = await db.collection('submissions').findOneAndUpdate(
           {
@@ -733,6 +767,7 @@ export default async function handler(req, res) {
           { upsert: true, returnDocument: 'after' }
         );
         if (!savedGuide?._id) return res.status(500).json({ success: false, error: 'Không thể lưu AI hướng dẫn giải' });
+        await refreshRagSource(db, savedGuide._id);
         await recordActivity(db, session, 'guide.saved', {
           submissionId: savedGuide._id, problemKey: registeredProblemKey,
           problemTitle: doc.problemTitle, setTitle: doc.problemSnapshot?.setTitle,
@@ -762,6 +797,10 @@ export default async function handler(req, res) {
     }
 
     if (!requireAdmin(session, res)) return;
+
+    if (action === 'rag_setup') return res.status(200).json({ success: true, item: await setupRag(db) });
+    if (action === 'rag_backfill') return res.status(200).json({ success: true, item: await backfillSources(db, 100, cleanText(payload.after, 80)) });
+    if (action === 'rag_process') return res.status(200).json({ success: true, item: await processRagJobs(db, 3) });
 
     if (action === 'add_exam_question' || action === 'delete_exam_question' || action === 'update_exam_question_metadata') {
       const examId = objectId(cleanText(payload.examId, 80));
@@ -914,11 +953,13 @@ export default async function handler(req, res) {
           aiGuideAdminEdited: true,
           aiGuideEditedBy: session.username,
           aiGuideEditedAt: now,
+          adminVerified: false, adminVerifiedAt: null,
           updatedAt: now
         } },
         { returnDocument: 'after' }
       );
       if (!updated) return res.status(404).json({ success: false, error: 'Không tìm thấy AI hướng dẫn giải đã lưu' });
+      await refreshRagSource(db, id);
       await recordActivity(db, session, 'guide.updated', {
         submissionId: id,
         problemKey: updated.problemKey,
@@ -1024,6 +1065,7 @@ export default async function handler(req, res) {
       if (!id) return res.status(400).json({ success: false, error: 'ID lời giải AI không hợp lệ' });
       const deleted = await deleteAiGuideRecord(db, session, id);
       if (!deleted) return res.status(404).json({ success: false, error: 'Không tìm thấy AI Hướng dẫn giải đã lưu' });
+      await refreshRagSource(db, id);
       return res.status(200).json({ success: true, deletedId: String(id) });
     }
 
@@ -1532,6 +1574,7 @@ export default async function handler(req, res) {
         return res.status(404).json({ success: false, error: 'Không tìm thấy bài nộp' });
       }
       await db.collection('submission_images').deleteMany({ submissionId: id });
+      await refreshRagSource(db, id);
       await recordActivity(db, session, 'submission.deleted', { submissionId: id });
       return res.status(200).json({ success: true, deletedId: String(id) });
     }
@@ -1552,6 +1595,7 @@ export default async function handler(req, res) {
         { _id: id }, change.update, { returnDocument: 'after' }
       );
       if (!updated) return res.status(404).json({ success: false, error: 'Không tìm thấy bài nộp' });
+      await refreshRagSource(db, id);
       await recordActivity(db, session, 'submission.content_updated', {
         submissionId: id,
         problemKey: updated.problemKey,
@@ -1584,6 +1628,7 @@ export default async function handler(req, res) {
       );
       if (!updated) return res.status(404).json({ success: false, error: 'Không tìm thấy bài nộp' });
       await db.collection('submissions').createIndex({ problemKey: 1, adminVerified: 1, updatedAt: -1 });
+      await refreshRagSource(db, id);
       await recordActivity(db, session,
         change.verified ? 'submission.verified' : 'submission.verification_revoked', {
           submissionId: id,

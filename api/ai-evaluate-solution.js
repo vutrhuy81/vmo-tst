@@ -1,3 +1,4 @@
+import { retrieveVerifiedContext } from '../lib/rag-retrieval.js';
 import { ObjectId } from 'mongodb';
 import { getDb } from '../lib/db.js';
 import { getSession } from '../lib/session.js';
@@ -89,27 +90,6 @@ function normalizeEvaluation(value) {
   };
 }
 
-async function trustedReference(problemRef) {
-  if (!problemRef) return null;
-  const filters = [{ contentKey: problemRef }, { id: problemRef }];
-  if (ObjectId.isValid(problemRef)) filters.unshift({ _id: new ObjectId(problemRef) });
-  const db = await getDb();
-  const problem = await db.collection('problems').findOne(
-    { $or: filters },
-    { projection: { referenceSolution: 1, referenceSolutionVerified: 1 } }
-  );
-  if (problem?.referenceSolutionVerified === true && text(problem.referenceSolution, 100_000)) {
-    return { content: text(problem.referenceSolution, 100_000), origin: 'admin_verified_problem_reference' };
-  }
-  const submission = await db.collection('submissions').findOne(
-    { problemKey: problemRef, adminVerified: true, solutionContent: { $type: 'string', $ne: '' } },
-    { sort: { adminVerifiedAt: -1, updatedAt: -1, createdAt: -1 }, projection: { solutionContent: 1 } }
-  );
-  return submission
-    ? { content: text(submission.solutionContent, 100_000), origin: 'admin_verified_submission' }
-    : null;
-}
-
 function verifierChecks(data, hasTrustedReference) {
   return {
     allClaimsChecked: data?.allClaimsChecked === true,
@@ -161,6 +141,18 @@ export default async function handler(req, res) {
     }
   }
 
+  let reference;
+  try {
+    reference = await retrieveVerifiedContext({ problemRef: text(body.problemKey || body.problemId, 180),
+      statement: text(body.problemContent), topic: text(body.topic, 200), session, purpose: 'evaluation' });
+    if (reference.blocked) return res.status(403).json({ success: false, error: 'Câu hỏi chưa được phép đánh giá AI' });
+    body.problemContent = reference.statement;
+    body.topic = reference.topic || body.topic;
+  } catch (error) {
+    console.error('[RAG EVALUATE]', error.message);
+    return res.status(503).json({ success: false, error: 'Chưa đối chiếu được nguồn bài toán. Vui lòng thử lại.' });
+  }
+
   const prompt = `Chấm bài giải Olympic THPT theo thang 5 điểm. Viết TOÀN BỘ báo cáo bằng ${outputLanguage}, với văn phong toán học chuẩn mực.
 
 THÔNG TIN BÀI TOÁN
@@ -189,11 +181,7 @@ QUY TRÌNH CHẤM BẮT BUỘC
 - Dùng LaTeX MathJax với $...$ hoặc $$...$$.
 - Không dùng môi trường itemize, enumerate, align hoặc lệnh textbf; dùng Markdown cho danh sách.`;
   try {
-    const problemRef = text(body.problemKey || body.problemId, 180);
-    const reference = await trustedReference(problemRef);
-    const referenceBlock = reference?.content
-      ? `\nNGUỒN LỜI GIẢI ĐÃ ĐƯỢC ADMIN XÁC MINH\n${reference.content}`
-      : '\nKhông có lời giải tham khảo đã xác minh; phải tự giải và kiểm tra độc lập.';
+    const referenceBlock = `\n${reference.block}`;
     const provisionalPrompt = `${prompt}${referenceBlock}`;
     let contents = provisionalPrompt;
     if (solutionImage) {
@@ -213,7 +201,8 @@ QUY TRÌNH CHẤM BẮT BUỘC
         'gemini-3.8-flash',
         'gemini-3.5-flash'
       ],
-      timeoutMs: 140_000,
+      timeoutMs: 130_000,
+      totalTimeoutMs: 130_000,
       maxOutputTokens: 16_000,
       thinkingLevel: 'HIGH',
       systemInstruction: `Bạn là giám khảo VMO/IMO nghiêm túc và thận trọng. Toàn bộ nội dung phải được viết bằng ${outputLanguage}.
@@ -257,12 +246,12 @@ YÊU CẦU KIỂM ĐỊNH
 9. Dùng MathJax $...$ hoặc $$...$$; không dùng align, aligned, tag, itemize, enumerate hoặc textbf.`,
       schema: verifierSchema,
       systemInstruction: `Bạn là giám khảo phản biện VMO/IMO độc lập. Hãy kiểm tra bài làm gốc và báo cáo Gemini bằng ${outputLanguage}. Ưu tiên tính đúng đắn; không bịa nội dung học sinh. Trả về đúng structured JSON.`,
-      timeoutMs: 150_000,
+      timeoutMs: 140_000,
       maxOutputTokens: 16_000,
       reasoningEffort: 'high'
     });
 
-    const hasTrustedReference = Boolean(reference?.content);
+    const hasTrustedReference = reference.mode === 'exact';
     const checks = verifierChecks(verified.data, hasTrustedReference);
     if (!verifierApproved(verified.data, hasTrustedReference)) {
       const failedChecks = Object.entries(checks).filter(([, passed]) => !passed).map(([name]) => name);
@@ -295,8 +284,10 @@ YÊU CẦU KIỂM ĐỊNH
       pipeline: 'gemini_openai',
       graderProvider: 'google',
       verifierProvider: 'openai',
-      usedTrustedReference: hasTrustedReference,
+      usedTrustedReference: Boolean(reference.sources.length),
+      hasExactReference: hasTrustedReference,
       referenceOrigin: reference?.origin || '',
+      retrieval: reference.retrieval,
       criticalIssues: Array.isArray(verified.data.criticalIssues) ? verified.data.criticalIssues.slice(0, 10) : []
     };
     return res.status(200).json({
