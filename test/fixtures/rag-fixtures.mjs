@@ -1,5 +1,5 @@
 import { ObjectId } from 'mongodb';
-import { contentHash, mathTags, topicOf, constraints } from '../../lib/rag-core.js';
+import { contentHash, mathTags, topicOf, constraints, RAG_VERSION, EMBEDDING_VERSION } from '../../lib/rag-core.js';
 const same = (a, b) => String(a) === String(b);
 function matches(row, filter) {
   return Object.entries(filter || {}).every(([key, value]) => {
@@ -48,7 +48,8 @@ export class FakeDb {
       },
       createIndex: async () => 'mock_index',
       listSearchIndexes: () => new Cursor(this.data.searchIndexes || []),
-      createSearchIndex: async value => { (this.data.searchIndexes ||= []).push(value); return value.name; },
+      createSearchIndex: async value => { (this.data.searchIndexes ||= []).push({ ...value, latestDefinition: value.definition }); return value.name; },
+      updateSearchIndex: async (name, definition) => { const index = this.data.searchIndexes.find(item => item.name === name); index.latestDefinition = definition; },
       insertOne: async value => { rows.push(value); return { insertedId: value._id }; },
       aggregate: pipeline => {
         const search = pipeline[0].$search;
@@ -82,7 +83,7 @@ export function fixtures() {
       source: 'admin_verified', status: 'active', problemId: problem._id, problemKey: problem.contentKey,
       problemContentHash: contentHash(problem.content), solutionContentHash: contentHash(submission.solutionContent),
       verifiedAt: submission.adminVerifiedAt, topic: topicOf(problem.topic), mathTags: mathTags(problem.content),
-      constraints: constraints(problem.content), embeddingModel: 'text-embedding-3-small', embeddingVersion: 1,
+      constraints: constraints(problem.content), embeddingModel: 'text-embedding-3-small', embeddingVersion: EMBEDDING_VERSION, metadataVersion: RAG_VERSION,
       embeddingDimensions: 1536, embedding: Array(1536).fill(0.01) };
   });
   return { problems, submissions, verified_knowledge: knowledge };

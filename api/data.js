@@ -1,3 +1,6 @@
+import { runBenchmarkCase, validateBenchmarkCase } from '../lib/rag-benchmark.js';
+import { checkRateLimit } from '../lib/ai.js';
+import { RAG_VERSION } from '../lib/rag-core.js';
 import { queueSource, setupRag, backfillSources, processRagJobs } from '../lib/rag-store.js';
 import { embeddingConfig } from '../lib/rag-embedding.js';
 import { ObjectId } from 'mongodb';
@@ -357,11 +360,12 @@ export default async function handler(req, res) {
           { $group: { _id: '$status', count: { $sum: 1 }, tokens: { $sum: '$embeddingTokens' },
             estimatedUsd: { $sum: '$estimatedUsd' } } }]).toArray();
         const jobs = await db.collection('rag_index_jobs').aggregate([{ $group: { _id: '$status', count: { $sum: 1 } } }]).toArray();
+        const currentMetadataSources = await db.collection('verified_knowledge').countDocuments({ status: 'active', metadataVersion: RAG_VERSION });
         let indexes = [], indexError = '';
         try { indexes = (await db.collection('verified_knowledge').listSearchIndexes().toArray()).map(item => ({ name: item.name, status: item.status, queryable: item.queryable })); }
         catch (error) { indexError = String(error.message).slice(0, 150); }
         return res.status(200).json({ success: true, items: [{ knowledge, jobs, indexes, indexError,
-          embeddingConfigured: Boolean(process.env.OPENAI_API_KEY), config: embeddingConfig() }] });
+          embeddingConfigured: Boolean(process.env.OPENAI_API_KEY), metadataVersion: RAG_VERSION, currentMetadataSources, config: embeddingConfig() }] });
       }
 
       if (resource === 'trend_theories') {
@@ -798,6 +802,12 @@ export default async function handler(req, res) {
 
     if (!requireAdmin(session, res)) return;
 
+    if (action === 'rag_benchmark') {
+      if (!checkRateLimit(`${session.username}:rag-benchmark`, 30)) return res.status(429).json({ success: false, error: 'Tối đa 30 ca benchmark/phút.' });
+      try { validateBenchmarkCase(payload); }
+      catch (error) { return res.status(400).json({ success: false, error: error.message }); }
+      return res.status(200).json({ success: true, item: await runBenchmarkCase(db, payload, session) });
+    }
     if (action === 'rag_setup') return res.status(200).json({ success: true, item: await setupRag(db) });
     if (action === 'rag_backfill') return res.status(200).json({ success: true, item: await backfillSources(db, 100, cleanText(payload.after, 80)) });
     if (action === 'rag_process') return res.status(200).json({ success: true, item: await processRagJobs(db, 3) });
