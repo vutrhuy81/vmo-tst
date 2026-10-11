@@ -202,6 +202,11 @@
     const isH = (tabId === 'tab-history');
     const isV = (tabId === 'tab-vmo');
     const isO = (tabId === 'tab-olympic');
+    const isGradeCatalog = ['tab-olympic30', 'tab-duyenhai'].includes(tabId);
+    ['olympic30', 'duyenhai'].forEach(key => {
+      if (qs('#sidebar-' + key)) qs('#sidebar-' + key).style.display = tabId === 'tab-' + key ? 'block' : 'none';
+      if (qs('#' + key + 'FilterPills')) qs('#' + key + 'FilterPills').style.display = tabId === 'tab-' + key ? 'flex' : 'none';
+    });
 
     // Cập nhật hiển thị Sidebar
     const sbDanang = qs('#sidebar-danang');
@@ -209,7 +214,7 @@
     const sbTst = qs('#sidebar-tst');
     const sbHistory = qs('#sidebar-history');
 
-    if (sbDanang) sbDanang.style.display = (!isM && !isT && !isH && !isV && !isO) ? 'block' : 'none';
+    if (sbDanang) sbDanang.style.display = (!isM && !isT && !isH && !isV && !isO && !isGradeCatalog) ? 'block' : 'none';
     if (sbMock) sbMock.style.display = isM ? 'block' : 'none';
     if (sbTst) sbTst.style.display = isT ? 'block' : 'none';
     if (sbHistory) sbHistory.style.display = isH ? 'block' : 'none';
@@ -247,7 +252,7 @@
     window.applyCurrentLanguage?.();
 
     // Render công thức toán nếu tab vừa mở chưa được biên dịch
-    if (!isM && !isT && !isH && !isV && !isO) typeset(targetPane);
+    if (!isM && !isT && !isH && !isV && !isO && !isGradeCatalog) typeset(targetPane);
   };
 
   // 2. Hiện / Ẩn lời giải và barem điểm từng bài
@@ -300,6 +305,7 @@
 
   function clearSearch() {
     qsa('.hidden-by-search').forEach(x => x.classList.remove('hidden-by-search'));
+    ['tab-olympic30', 'tab-duyenhai'].forEach(id => window.refreshGradeCatalogFilter?.(id));
     if (searchSummary) {
       searchSummary.classList.remove('visible');
       searchSummary.textContent = '';
@@ -336,7 +342,7 @@
   function searchExamBank(tabId, val) {
     let matches = 0;
     qsa('#' + tabId + ' .exam-card').forEach(card => {
-      const hit = norm((card.dataset.search || '') + ' ' + card.innerText).includes(val);
+      const hit = norm((card.dataset.search || '') + ' ' + card.innerText).includes(val) && gradeMatches(card);
       card.classList.toggle('hidden-by-search', !hit);
       if (hit) matches++;
     });
@@ -357,7 +363,7 @@
     const val = norm(raw);
     const active = qs('.tab-pane.active');
     let n = 0;
-    if (['tab-mock', 'tab-tst', 'tab-history', 'tab-vmo', 'tab-olympic'].includes(active?.id)) {
+    if (['tab-mock', 'tab-tst', 'tab-history', 'tab-vmo', 'tab-olympic', 'tab-olympic30', 'tab-duyenhai'].includes(active?.id)) {
       n = searchExamBank(active.id, val);
     } else {
       n = searchBook(val);
@@ -366,7 +372,7 @@
       searchSummary.textContent = `Tìm thấy ${n} mục phù hợp với “${raw}”.`;
       searchSummary.classList.add('visible');
     }
-    const category = { 'tab-tst': 'tst-national', 'tab-mock': 'vmo-mock', 'tab-history': 'history-dn-qn', 'tab-vmo': 'vmo-official', 'tab-olympic': 'imo-olympic' }[active?.id];
+    const category = { 'tab-tst': 'tst-national', 'tab-mock': 'vmo-mock', 'tab-history': 'history-dn-qn', 'tab-vmo': 'vmo-official', 'tab-olympic': 'imo-olympic', 'tab-olympic30': 'olympic-30-4', 'tab-duyenhai': 'duyen-hai-bac' }[active?.id];
     if (category && raw.length >= 2 && window.VMODataService?.searchExamCatalog) {
       catalogSearchTimer = setTimeout(async () => {
         try {
@@ -376,7 +382,7 @@
           let count = 0;
           qsa(`#${active.id} .exam-card`).forEach(card => {
             const local = norm((card.dataset.search || '') + ' ' + card.innerText).includes(val);
-            const hit = local || anchors.has(card.id);
+            const hit = (local || anchors.has(card.id)) && gradeMatches(card);
             card.classList.toggle('hidden-by-search', !hit);
             if (hit) count++;
           });
@@ -390,12 +396,27 @@
 
   search?.addEventListener('input', applySearch);
 
+  function gradeMatches(card) {
+    const id = card.closest('.tab-pane')?.id;
+    if (!['tab-olympic30', 'tab-duyenhai'].includes(id)) return true;
+    const filter = qs(`#${id.slice(4)}FilterPills .pill.active`)?.dataset.filter || 'ALL';
+    return filter === 'ALL' || card.dataset.filter === filter;
+  }
+  window.refreshGradeCatalogFilter = function(id) {
+    qsa(`#${id} .exam-card`).forEach(card => card.classList.toggle('hidden-by-search', !gradeMatches(card)));
+  };
+
   // 5. Thanh lọc theo bộ đề / vùng miền
   function setupPills(containerId, tabId) {
     qsa(`#${containerId} .pill`).forEach(p => {
       p.addEventListener('click', () => {
         qsa(`#${containerId} .pill`).forEach(x => x.classList.remove('active'));
         p.classList.add('active');
+        if (['tab-olympic30', 'tab-duyenhai'].includes(tabId)) {
+          window.refreshGradeCatalogFilter(tabId);
+          if (search?.value.trim()) applySearch();
+          return;
+        }
         const f = p.dataset.filter;
         qsa(`#${tabId} .exam-card`).forEach(card => {
           card.classList.toggle('hidden-by-search', !(f === 'ALL' || card.dataset.filter === f));
@@ -409,6 +430,8 @@
   setupPills('historyFilterPills', 'tab-history');
   setupPills('vmoFilterPills', 'tab-vmo');
   setupPills('olympicFilterPills', 'tab-olympic');
+  setupPills('olympic30FilterPills', 'tab-olympic30');
+  setupPills('duyenhaiFilterPills', 'tab-duyenhai');
 
   // 6. Lời giải mẫu trong tài liệu chuyên đề
   qsa('.solution-toggle').forEach(btn => {

@@ -120,7 +120,7 @@ assert.equal(window.syncContentCatalogToDatabase, undefined);
 window.toggleAddDocForm();
 const select = window.document.getElementById('docTargetAnchor');
 assert.equal(window.document.getElementById('docDayNumber').options.length, 4);
-assert.deepEqual(Array.from(window.document.getElementById('docDestination').options).map(option => option.value), ['tst', 'vmo', 'olympic', 'regional']);
+assert.deepEqual(Array.from(window.document.getElementById('docDestination').options).map(option => option.value), ['tst', 'vmo', 'olympic', 'olympic30', 'duyenhai', 'regional']);
 for (const destination of ['vmo', 'olympic']) {
   window.document.getElementById('docDestination').value = destination;
   window.syncDocumentDestination(true);
@@ -455,3 +455,39 @@ assert.match(window.document.getElementById('tst-hung-yen--year-2025-2026').text
 assert.ok(window.document.getElementById('tst-hung-yen'), 'Đề năm hiện tại giữ anchor cũ');
 
 console.log('TST and Đà Nẵng–Quảng Nam dynamic exam smoke test: OK');
+
+window.eval(fs.readFileSync(new URL('ai_guide_engine.js', root), 'utf8'));
+// Two grades in the same year remain separate through summary/detail rendering.
+for (const [destination, category, label] of [['olympic30', 'olympic-30-4', 'Olympic 30/4'], ['duyenhai', 'duyen-hai-bac', 'Duyên hải miền Bắc']]) {
+  const pane = window.document.createElement('div');
+  pane.id = `tab-${destination}`;
+  pane.className = 'tab-pane';
+  pane.innerHTML = '<div class="feed-container"></div>';
+  window.document.body.append(pane);
+  const sidebar = window.document.createElement('div');
+  sidebar.id = `sidebar-${destination}`;
+  sidebar.innerHTML = [10, 11].map(grade => `<div class="nav-year-group" data-grade="${grade}"></div>`).join('');
+  window.document.body.append(sidebar);
+  const exams = [10, 11].map(grade => ({ id: `${destination}-${grade}`, category, grade, year: '2026-2027', province: label,
+    targetAnchor: `${destination}-2026-2027-grade-${grade}`, title: label, dayNumber: 1, problemCount: 1,
+    problems: [{ contentKey: `${destination}:grade-${grade}:question-1`, questionNumber: 1, content: `Bài toán Lớp ${grade}` }] }));
+  window.VMODataService.getExamCatalogSummary = async requested => requested === category ? exams.map(({problems, ...exam}) => exam) : [];
+  window.VMODataService.getExamCatalogDetail = async (requested, anchor) => requested === category ? exams.filter(exam => exam.targetAnchor === anchor) : [];
+  await window.loadDatabaseCompetitionExams(pane.id);
+  for (const exam of exams) {
+    await window.loadDatabaseExamDetail(category, exam.targetAnchor);
+    const card = window.document.getElementById(exam.targetAnchor);
+    assert.equal(card.dataset.filter, `GRADE${exam.grade}`);
+    assert.match(card.textContent, new RegExp(`Lớp ${exam.grade}`));
+    assert.ok(sidebar.querySelector(`[data-grade="${exam.grade}"] a[href="#${exam.targetAnchor}"]`));
+    assert.equal(card.querySelector('.problem-item').dataset.sourceGroup, destination === 'olympic30' ? 'olympic_30_4' : 'duyen_hai_bac');
+    assert.ok(card.querySelector('.btn-submit-solution'), 'Uses existing submission flow');
+    assert.ok(card.querySelector('.btn-ai-guide'), 'Uses existing AI guide flow');
+  }
+  window.document.getElementById('docDestination').value = destination;
+  window.syncDocumentDestination(true);
+  assert.equal(window.document.getElementById('docGradeWrap').style.display, 'block');
+  assert.equal(window.document.getElementById('docGrade').required, true);
+  assert.equal(window.document.getElementById('docProvince').value, label);
+}
+console.log('Olympic 30/4 and Northern Coastal grade catalogs: OK');

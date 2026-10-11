@@ -424,11 +424,16 @@ export default async function handler(req, res) {
       if (resource === 'exam_catalog') {
         const examFilter = { category: cleanText(req.query?.category, 80) || 'tst-national', status: { $ne: 'deleted' } };
         if (session.role !== 'admin') examFilter.status = 'published';
+        if (req.query?.grade != null && ['olympic-30-4', 'duyen-hai-bac'].includes(examFilter.category)) {
+          const grade = Number(req.query.grade);
+          if (![10, 11].includes(grade)) return res.status(400).json({ success: false, error: 'Khối lớp không hợp lệ' });
+          examFilter.grade = grade;
+        }
         const view = cleanText(req.query?.view, 20);
         if (view === 'summary') {
           const projection = {
             examKey: 1, targetAnchor: 1, category: 1, title: 1, province: 1,
-            provinceOrder: 1, region: 1, year: 1, setNumber: 1, dayNumber: 1,
+            provinceOrder: 1, region: 1, year: 1, grade: 1, setNumber: 1, dayNumber: 1,
             examDate: 1, duration: 1, description: 1, status: 1, origin: 1, sourceImageCount: 1
           };
           const exams = await db.collection('exams').find(examFilter, { projection })
@@ -444,7 +449,7 @@ export default async function handler(req, res) {
           })) });
         }
         if (view === 'detail') {
-          const anchor = cleanText(req.query?.anchor, 120);
+          const anchor = cleanText(req.query?.anchor, 220);
           if (!anchor) return res.status(400).json({ success: false, error: 'Thiếu mã đề thi' });
           const year = cleanText(req.query?.year, 20);
           if (year && !/^20\d{2}-20\d{2}$/.test(year)) return res.status(400).json({ success: false, error: 'Năm học không hợp lệ' });
@@ -816,7 +821,7 @@ export default async function handler(req, res) {
       const examId = objectId(cleanText(payload.examId, 80));
       if (!examId) return res.status(400).json({ success: false, error: 'ID đề thi không hợp lệ' });
       const exam = await db.collection('exams').findOne({ _id: examId, status: { $ne: 'deleted' } });
-      if (!exam || !['tst-national', 'history-dn-qn', 'vmo-mock', 'vmo-official', 'imo-olympic'].includes(exam.category) || !exam.targetAnchor) {
+      if (!exam || !['tst-national', 'history-dn-qn', 'vmo-mock', 'vmo-official', 'imo-olympic', 'olympic-30-4', 'duyen-hai-bac'].includes(exam.category) || !exam.targetAnchor) {
         return res.status(404).json({ success: false, error: 'Không tìm thấy đề thi trong catalog' });
       }
       const examIdText = String(examId);
@@ -870,7 +875,7 @@ export default async function handler(req, res) {
       if (active) return res.status(409).json({ success: false, error: `Câu ${questionNumber} đã có trong đề này` });
       const isMock = exam.category === 'vmo-mock';
       const isRegional = exam.category === 'history-dn-qn';
-      const categoryGroup = { 'vmo-official': 'vmo_official', 'imo-olympic': 'imo_olympic' }[exam.category];
+      const categoryGroup = { 'vmo-official': 'vmo_official', 'imo-olympic': 'imo_olympic', 'olympic-30-4': 'olympic_30_4', 'duyen-hai-bac': 'duyen_hai_bac' }[exam.category];
       const day = Number(exam.dayNumber) || 1;
       const setKey = exam.setKey || (isMock ? `mock:${exam.targetAnchor}`
         : `${categoryGroup || (isRegional ? 'danang_quangnam' : 'tst')}:${exam.targetAnchor}:day-${day}${!isRegional && !categoryGroup && exam.year !== '2026-2027' ? `:year-${slugKey(exam.year)}` : ''}`);
@@ -882,12 +887,12 @@ export default async function handler(req, res) {
       const group = categoryGroup || (isMock ? 'mock_exam' : isRegional ? 'danang_quangnam' : 'tst');
       const savedSet = await db.collection('content_sets').findOneAndUpdate({ key: setKey },
         { $setOnInsert: { key: setKey, contentType: categoryGroup ? `${categoryGroup}_exam` : isMock ? 'mock_exam' : isRegional ? 'regional_exam' : 'tst_exam',
-          title: exam.title, group, year: exam.year, province: exam.province, status: 'published', createdAt: now } },
+          title: exam.title, group, ...(exam.grade ? { grade: exam.grade } : {}), year: exam.year, province: exam.province, status: 'published', createdAt: now } },
         { upsert: true, returnDocument: 'after' });
       const title = cleanText(payload.title, 500) || `Câu ${questionNumber}`;
       const saved = await db.collection('problems').findOneAndUpdate({ contentKey },
         { $set: {
-          examId: examIdText, examKey: exam.examKey || '', setId: savedSet._id, setKey, setTitle: exam.title,
+          ...(exam.grade ? { grade: exam.grade } : {}), examId: examIdText, examKey: exam.examKey || '', setId: savedSet._id, setKey, setTitle: exam.title,
           sourceGroup: group, sourceType: categoryGroup ? `${categoryGroup}_question` : isMock ? 'mock_exam_question' : isRegional ? 'regional_question' : 'tst_question',
           title, shortLabel: `Câu ${questionNumber}`, questionNumber, dayNumber: day, day: `Ngày ${day}`,
           order: day * 100 + questionNumber, orderNumber: questionNumber,
@@ -922,7 +927,7 @@ export default async function handler(req, res) {
           { $set: { title, year, duration, examDate, description: cleanText(payload.description, 5000), updatedBy: session.username, updatedAt: now } },
           { returnDocument: 'after' });
         if (exam.targetAnchor) {
-          const group = { 'vmo-official': 'vmo_official', 'imo-olympic': 'imo_olympic',
+          const group = { 'vmo-official': 'vmo_official', 'imo-olympic': 'imo_olympic', 'olympic-30-4': 'olympic_30_4', 'duyen-hai-bac': 'duyen_hai_bac',
             'history-dn-qn': 'danang_quangnam' }[exam.category] || 'tst';
           const setKey = exam.setKey || (exam.category === 'vmo-mock' ? `mock:${exam.targetAnchor}`
             : `${group}:${exam.targetAnchor}:day-${Number(exam.dayNumber) || 1}${group === 'tst' && exam.year !== '2026-2027' ? `:year-${slugKey(exam.year)}` : ''}`);
@@ -1319,10 +1324,13 @@ export default async function handler(req, res) {
     if (action === 'create_exam_from_ocr') {
       const isMock = payload.destination === 'mock';
       const isRegional = payload.destination === 'regional';
-      const catalogDestination = { vmo: { category: 'vmo-official', prefix: 'vmo-', group: 'vmo_official' }, olympic: { category: 'imo-olympic', prefix: 'olympic-', group: 'imo_olympic' } }[payload.destination];
-      if (payload.destination && !['mock', 'tst', 'regional', 'vmo', 'olympic'].includes(payload.destination)) return res.status(400).json({ success: false, error: 'Loại đề thi không hợp lệ' });
+      const catalogDestination = { vmo: { category: 'vmo-official', prefix: 'vmo-', group: 'vmo_official' }, olympic: { category: 'imo-olympic', prefix: 'olympic-', group: 'imo_olympic' }, olympic30: { category: 'olympic-30-4', prefix: 'olympic30-', group: 'olympic_30_4', graded: true }, duyenhai: { category: 'duyen-hai-bac', prefix: 'duyenhai-', group: 'duyen_hai_bac', graded: true } }[payload.destination];
+      if (payload.destination && !['mock', 'tst', 'regional', 'vmo', 'olympic', 'olympic30', 'duyenhai'].includes(payload.destination)) return res.status(400).json({ success: false, error: 'Loại đề thi không hợp lệ' });
+      const grade = Number(payload.grade);
+      if (catalogDestination?.graded && ![10, 11].includes(grade)) return res.status(400).json({ success: false, error: 'Vui lòng chọn Lớp 10 hoặc Lớp 11' });
+      const gradeMetadata = catalogDestination?.graded ? { grade } : {};
       const province = cleanText(payload.province, 120);
-      const targetAnchor = cleanKey(payload.targetAnchor, 180);
+      const targetAnchor = cleanKey(payload.targetAnchor, 220);
       const requestedRegion = cleanText(payload.region, 20).toUpperCase();
       const region = TST_REGIONS.has(requestedRegion) ? requestedRegion : 'BAC';
       const dayNumber = Number(payload.dayNumber);
@@ -1342,13 +1350,14 @@ export default async function handler(req, res) {
 
       const provinceSlug = slugKey(province);
       const yearSlug = slugKey(year);
+      if (catalogDestination?.graded && targetAnchor !== `${catalogDestination.prefix}${provinceSlug}-${yearSlug}-grade-${grade}`) return res.status(400).json({ success: false, error: 'Mã đề không khớp kỳ thi, năm và khối lớp' });
       if (isRegional) {
         const expectedUnit = targetAnchor.startsWith('hist-qn-') ? 'quang-nam' : 'da-nang';
         if (provinceSlug !== expectedUnit) {
           return res.status(400).json({ success: false, error: 'Đơn vị lưu trữ không khớp kho Đà Nẵng–Quảng Nam' });
         }
       }
-      const examKey = isMock ? `mock:set-${setNumber}:${yearSlug}:day-${dayNumber}` : `${catalogDestination?.group || (isRegional ? 'regional' : 'tst')}:${provinceSlug}:${yearSlug}:day-${dayNumber}`;
+      const examKey = isMock ? `mock:set-${setNumber}:${yearSlug}:day-${dayNumber}` : `${catalogDestination?.group || (isRegional ? 'regional' : 'tst')}:${provinceSlug}:${yearSlug}${catalogDestination?.graded ? `:grade-${grade}` : ''}:day-${dayNumber}`;
       // Một tỉnh có thể có hai đề với các số câu trùng nhau. Ngày thi phải
       // thuộc khóa ổn định để ngày 2 không ghi đè câu hỏi/lịch sử của ngày 1.
       const setKey = isMock ? `mock:${targetAnchor}` : `${catalogDestination?.group || (isRegional ? 'danang_quangnam' : 'tst')}:${targetAnchor}:day-${dayNumber}${!isRegional && !catalogDestination && year !== '2026-2027' ? `:year-${yearSlug}` : ''}`;
@@ -1382,6 +1391,7 @@ export default async function handler(req, res) {
         return res.status(400).json({ success: false, error: 'Đề dự đoán phải có 2–6 câu và tổng điểm đúng 20' });
       }
       const examDoc = {
+        ...gradeMetadata,
         examKey,
         setKey,
         title,
@@ -1430,6 +1440,7 @@ export default async function handler(req, res) {
       if (!savedExam?._id) return res.status(500).json({ success: false, error: 'Không thể tạo đề thi' });
 
       const setDoc = {
+        ...gradeMetadata,
         key: setKey,
         contentType: catalogDestination ? `${catalogDestination.group}_exam` : isMock ? 'mock_exam' : (isRegional ? 'regional_exam' : 'tst_exam'),
         title,
@@ -1464,6 +1475,7 @@ export default async function handler(req, res) {
         } : null;
         const pendingReview = isPrediction && !review.approved;
         const problemDoc = {
+          ...gradeMetadata,
           contentKey,
           setId: savedSet._id,
           setKey,
