@@ -141,6 +141,8 @@ VMOAuth.requireAuth('login.html');
       <button class="tab-btn" id="tab-btn-tst" type="button" onclick="switchTab('tab-tst',this)">🏛️ Đề TST</button>
       <button class="tab-btn" id="tab-btn-vmo" type="button" onclick="switchTab('tab-vmo',this)">🇻🇳 Đề VMO</button>
       <button class="tab-btn" id="tab-btn-olympic" type="button" onclick="switchTab('tab-olympic',this)">🌐 Đề IMO–Olympic</button>
+      <button class="tab-btn" id="tab-btn-olympic30" type="button" onclick="switchTab('tab-olympic30',this)">🏅 Đề Olympic 30/4</button>
+      <button class="tab-btn" id="tab-btn-duyenhai" type="button" onclick="switchTab('tab-duyenhai',this)">🌊 Đề Duyên hải miền Bắc</button>
       <button class="tab-btn" id="tab-btn-history" type="button" onclick="switchTab('tab-history',this)">🗂️ Đề Đà Nẵng–Quảng Nam</button>
     </nav>
   </div>
@@ -162,6 +164,8 @@ VMOAuth.requireAuth('login.html');
     </div>
     <div class="filter-pills" id="vmoFilterPills" style="display:none"><button class="pill active" data-filter="ALL">Tất cả đề VMO</button></div>
     <div class="filter-pills" id="olympicFilterPills" style="display:none"><button class="pill active" data-filter="ALL">Tất cả đề IMO–Olympic</button></div>
+    <div class="filter-pills" id="olympic30FilterPills" style="display:none"><button class="pill active" data-filter="ALL">Tất cả đề</button><button class="pill" data-filter="GRADE10">Lớp 10</button><button class="pill" data-filter="GRADE11">Lớp 11</button></div>
+    <div class="filter-pills" id="duyenhaiFilterPills" style="display:none"><button class="pill active" data-filter="ALL">Tất cả đề</button><button class="pill" data-filter="GRADE10">Lớp 10</button><button class="pill" data-filter="GRADE11">Lớp 11</button></div>
     <div class="filter-pills" id="historyFilterPills" style="display:none">
       <button class="pill active" data-filter="ALL">Tất cả đề</button><button class="pill" data-filter="DANANG">Đà Nẵng</button><button class="pill" data-filter="QUANGNAM">Quảng Nam</button>
     </div>
@@ -176,6 +180,8 @@ VMOAuth.requireAuth('login.html');
     <!-- INJECT:SIDEBAR_TST -->
     <div id="sidebar-vmo" style="display:none"><div class="sidebar-title">Đề VMO</div><div class="nav-year-group"><div class="nav-year-title">🇻🇳 ĐỀ VMO</div></div></div>
     <div id="sidebar-olympic" style="display:none"><div class="sidebar-title">Đề IMO–Olympic</div><div class="nav-year-group"><div class="nav-year-title">🌐 CÁC KỲ THI OLYMPIC</div></div></div>
+    <div id="sidebar-olympic30" style="display:none"><div class="sidebar-title">Đề Olympic 30/4</div><div class="nav-year-group" data-grade="10"><div class="nav-year-title">LỚP 10</div></div><div class="nav-year-group" data-grade="11"><div class="nav-year-title">LỚP 11</div></div></div>
+    <div id="sidebar-duyenhai" style="display:none"><div class="sidebar-title">Đề Duyên hải miền Bắc</div><div class="nav-year-group" data-grade="10"><div class="nav-year-title">LỚP 10</div></div><div class="nav-year-group" data-grade="11"><div class="nav-year-title">LỚP 11</div></div></div>
     <!-- INJECT:SIDEBAR_HISTORY -->
   </aside>
   <main>
@@ -184,6 +190,8 @@ VMOAuth.requireAuth('login.html');
     <!-- INJECT:TAB_TST -->
     <!-- INJECT:TAB_VMO -->
     <!-- INJECT:TAB_OLYMPIC -->
+    <!-- INJECT:TAB_OLYMPIC30 -->
+    <!-- INJECT:TAB_DUYENHAI -->
     <!-- INJECT:TAB_HISTORY -->
   </main>
 </div>

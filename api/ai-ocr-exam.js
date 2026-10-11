@@ -65,6 +65,9 @@ export default async function handler(req, res) {
   }
 
   const body = parseBody(req);
+  if (['olympic30', 'duyenhai'].includes(body?.destination) && ![10, 11].includes(Number(body?.grade))) {
+    return res.status(400).json({ success: false, error: 'Vui lòng chọn Lớp 10 hoặc Lớp 11' });
+  }
   const image = text(body?.image, 4_000_000);
   const match = image.match(/^data:(image\/(?:jpeg|png|webp));base64,(.+)$/s);
   if (!match) return res.status(400).json({ success: false, error: 'Thiếu ảnh JPEG, PNG hoặc WEBP hợp lệ' });
@@ -72,11 +75,11 @@ export default async function handler(req, res) {
   const context = {
     province: text(body?.province, 120),
     year: text(body?.year, 40) || '2026-2027',
-    dayNumber: Math.max(1, Math.min(['tst', 'regional', 'vmo', 'olympic'].includes(body?.destination) ? 4 : 2, Number(body?.dayNumber) || 1))
+    dayNumber: Math.max(1, Math.min(['tst', 'regional', 'vmo', 'olympic', 'olympic30', 'duyenhai'].includes(body?.destination) ? 4 : 2, Number(body?.dayNumber) || 1))
   };
   const prompt = `Nhận dạng chính xác đề thi Olympic Toán tiếng Việt trong ảnh và tách thành từng câu hỏi.
 
-Ngữ cảnh do quản trị viên cung cấp: tỉnh/thành phố "${context.province}", năm học "${context.year}", ngày thi thứ ${context.dayNumber}.
+Ngữ cảnh do quản trị viên cung cấp: tỉnh/thành phố "${context.province}", năm học "${context.year}", ngày thi thứ ${context.dayNumber}.${['olympic30', 'duyenhai'].includes(body?.destination) && [10, 11].includes(Number(body?.grade)) ? ` Khối lớp: Lớp ${Number(body.grade)}.` : ''}
 
 Quy tắc bắt buộc:
 1. Chỉ chép nội dung nhìn thấy; không giải bài, không bổ sung giả thiết và không suy diễn phần bị khuất.
@@ -147,7 +150,7 @@ Quy tắc bắt buộc:
         examTitle: text(data.examTitle, 500),
         examDate: text(data.examDate, 20),
         duration: Math.max(1, Math.min(600, Number(data.duration) || 180)),
-        dayNumber: Math.max(1, Math.min(['tst', 'regional', 'vmo', 'olympic'].includes(body?.destination) ? 4 : 2, Number(data.dayNumber) || context.dayNumber)),
+        dayNumber: Math.max(1, Math.min(['tst', 'regional', 'vmo', 'olympic', 'olympic30', 'duyenhai'].includes(body?.destination) ? 4 : 2, Number(data.dayNumber) || context.dayNumber)),
         confidence: text(data.confidence, 40) || 'unknown',
         questions
       }

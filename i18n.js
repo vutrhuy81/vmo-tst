@@ -392,6 +392,8 @@
     if (btnTst) setNodeText(btnTst, '🏛️ Đề TST', UI_TRANSLATIONS.en.tabTst, isEn);
     const btnVmo = document.getElementById('tab-btn-vmo');
     const btnOlympic = document.getElementById('tab-btn-olympic');
+    if (document.getElementById('tab-btn-olympic30')) setNodeText(document.getElementById('tab-btn-olympic30'), '🏅 Đề Olympic 30/4', '🏅 April 30 Olympiad', isEn);
+    if (document.getElementById('tab-btn-duyenhai')) setNodeText(document.getElementById('tab-btn-duyenhai'), '🌊 Đề Duyên hải miền Bắc', '🌊 Northern Coastal Olympiad', isEn);
     if (btnVmo) setNodeText(btnVmo, '🇻🇳 Đề VMO', UI_TRANSLATIONS.en.tabVmo, isEn);
     if (btnOlympic) setNodeText(btnOlympic, '🌐 Đề IMO–Olympic', UI_TRANSLATIONS.en.tabOlympic, isEn);
     if (btnHistory) setNodeText(btnHistory, '🗂️ Đề Đà Nẵng–Quảng Nam', UI_TRANSLATIONS.en.tabHistory, isEn);
