@@ -92,21 +92,41 @@
       byId('supportPrevious').disabled = state.page <= 1; byId('supportNext').disabled = state.page >= state.pages;
     } catch (error) { if (token === state.loadToken) status('supportListStatus', error.message || 'Không tải được bài toán. Hãy bấm Tải lại.'); }
   };
+  async function loadImage(file) {
+    if (state.busy) return;
+    if (file && !/^image\/(jpeg|png|webp)$/.test(file.type)) {
+      status('supportUploadStatus', 'Vui lòng chọn hoặc dán ảnh JPEG, PNG hoặc WEBP.'); return;
+    }
+    if (file && file.size > 20 * 1024 * 1024) {
+      status('supportUploadStatus', 'Ảnh gốc quá lớn. Vui lòng chọn ảnh dưới 20 MB.'); return;
+    }
+    // Prepare before replacing the current draft, so a failed image keeps its OCR.
+    busy(true, 'Đang chuẩn bị ảnh bài toán...');
+    try {
+      const image = file ? await window.prepareMathSupportImage(file) : '';
+      state.image = image; state.uploadKey = image ? crypto.randomUUID() : ''; state.confidence = '';
+      byId('supportContent').value = ''; byId('supportOcrEditor').hidden = true;
+      byId('supportMathPreview').replaceChildren();
+      byId('supportImagePreview').hidden = !image;
+      if (image) byId('supportImagePreview').src = image;
+      else byId('supportImagePreview').removeAttribute('src');
+      status('supportUploadStatus', image ? 'Ảnh đã sẵn sàng. Bấm OCR bài toán để nhận diện.' : '');
+    } catch (error) { status('supportUploadStatus', error.message || 'Không đọc được ảnh.'); }
+    finally { busy(false); }
+  }
   function init() {
     if (!byId('mathSupportForm')) return;
-    byId('supportImage').addEventListener('change', async event => {
-      state.image = ''; state.uploadKey = ''; byId('supportContent').value = ''; byId('supportOcrEditor').hidden = true;
-      byId('supportImagePreview').hidden = true;
-      const file = event.target.files?.[0];
-      if (!file) { busy(false); status('supportUploadStatus', ''); return; }
-      if (file.size > 20 * 1024 * 1024) { busy(false); status('supportUploadStatus', 'Ảnh gốc quá lớn. Vui lòng chọn ảnh dưới 20 MB.'); return; }
-      busy(true, 'Đang chuẩn bị ảnh bài toán...');
-      try {
-        state.image = await window.prepareMathSupportImage(file); state.uploadKey = crypto.randomUUID();
-        byId('supportImagePreview').src = state.image; byId('supportImagePreview').hidden = false;
-        status('supportUploadStatus', 'Ảnh đã sẵn sàng. Bấm OCR bài toán để nhận diện.');
-      } catch (error) { status('supportUploadStatus', error.message || 'Không đọc được ảnh.'); }
-      finally { busy(false); }
+    byId('supportImage').addEventListener('change', event => loadImage(event.target.files?.[0]));
+    document.addEventListener('paste', event => {
+      if (event.defaultPrevented || !byId('tab-support').classList.contains('active') ||
+          document.querySelector('.modal.active, .vmo-modal.active, #submissionModal.active, .trend-practice-modal.active')) return;
+      const item = Array.from(event.clipboardData?.items || []).find(item => item.type.startsWith('image/'));
+      const file = item?.getAsFile();
+      if (!file) return; // Ordinary text paste remains native, including in the OCR editor.
+      event.preventDefault();
+      if (state.busy) return;
+      byId('supportImage').value = '';
+      loadImage(file);
     });
     byId('supportOcrButton').addEventListener('click', ocr);
     byId('mathSupportForm').addEventListener('submit', save);

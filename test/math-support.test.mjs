@@ -174,14 +174,53 @@ window.safeRenderMathJaxToElement(safePreview, '$<img src=x onerror=alert(1)>$')
 assert.equal(safePreview.querySelector('img'), null, 'Math delimiters must not allow HTML injection');
 window.prepareMathSupportImage = async () => image;
 const fileInput = window.document.getElementById('supportImage');
-Object.defineProperty(fileInput, 'files', { value: [new window.File(['png'], 'math.png', { type: 'image/png' })] });
 const tick = () => new Promise(resolve => setTimeout(resolve, 5));
-fileInput.dispatchEvent(new window.Event('change')); await tick();
+const png = new window.File(['png'], 'math.png', { type: 'image/png' });
+function paste(file, target = window.document) {
+  const event = new window.Event('paste', { bubbles: true, cancelable: true });
+  Object.defineProperty(event, 'clipboardData', { value: { items: file ? [{ type: file.type, getAsFile: () => file }] : [{ type: 'text/plain' }] } });
+  target.dispatchEvent(event); return event;
+}
+const supportTab = window.document.getElementById('tab-support');
+supportTab.classList.remove('active');
+assert.equal(paste(png).defaultPrevented, false, 'Other tabs retain their paste behavior');
+supportTab.classList.add('active');
+assert.equal(paste(null).defaultPrevented, false, 'Text paste remains native');
+window.document.body.insertAdjacentHTML('beforeend', '<div class="vmo-modal active" id="pasteTestModal"></div>');
+assert.equal(paste(png).defaultPrevented, false, 'Open modals retain their own image paste behavior');
+window.document.getElementById('pasteTestModal').remove();
+assert.equal(paste(png, window.document.getElementById('supportPasteHint')).defaultPrevented, true);
+await tick();
+assert.equal(fileInput.files.length, 0, 'Pasted image does not require a file picker selection');
+assert.equal(fileInput.required, false, 'Browser validation must allow saving a pasted image');
+assert.equal(window.document.getElementById('supportImagePreview').hidden, false);
+// Replacing a draft clears stale OCR; invalid/failed replacements retain the good draft.
+window.document.getElementById('supportOcrButton').click(); await tick();
+assert.equal(window.document.getElementById('supportContent').value, payload.content);
+paste(new window.File(['gif'], 'bad.gif', { type: 'image/gif' })); await tick();
+assert.match(window.document.getElementById('supportUploadStatus').textContent, /JPEG, PNG/);
+assert.equal(window.document.getElementById('supportContent').value, payload.content);
+const oversized = new window.File(['png'], 'big.png', { type: 'image/png' });
+Object.defineProperty(oversized, 'size', { value: 21 * 1024 * 1024 });
+paste(oversized); await tick();
+assert.match(window.document.getElementById('supportUploadStatus').textContent, /20 MB/);
+window.prepareMathSupportImage = async () => { throw new Error('Ảnh hỏng'); };
+paste(png); await tick();
+assert.equal(window.document.getElementById('supportContent').value, payload.content);
+let finishImage, prepareCalls = 0;
+window.prepareMathSupportImage = () => { prepareCalls++; return new Promise(resolve => { finishImage = resolve; }); };
+paste(png);
+paste(png); // A second paste while preparing must not start a racing image load.
+assert.equal(prepareCalls, 1, 'Busy state prevents concurrent image preparation');
+finishImage(image); await tick();
+assert.equal(window.document.getElementById('supportContent').value, '');
+assert.equal(window.document.getElementById('supportOcrEditor').hidden, true);
+window.prepareMathSupportImage = async () => image;
 window.document.getElementById('supportOcrButton').click(); await tick();
 assert.equal(window.document.getElementById('supportContent').value, payload.content);
 assert.equal(window.document.getElementById('supportOcrEditor').hidden, false);
 window.document.getElementById('supportContent').value = 'Đề đã được kiểm tra $a+b$.';
-window.document.getElementById('mathSupportForm').reportValidity = () => true;
+assert.equal(window.document.getElementById('mathSupportForm').checkValidity(), true, 'Pasted draft passes native form validation');
 window.document.getElementById('mathSupportForm').dispatchEvent(new window.Event('submit', { cancelable: true })); await tick(); await tick();
 assert.match(window.document.getElementById('supportUploadStatus').textContent, /Đã lưu bài toán/);
 const card = window.document.querySelector('#supportProblems .problem-item');
@@ -198,5 +237,10 @@ let clipboardText = '';
 Object.defineProperty(window.navigator, 'clipboard', { value: { writeText: async value => { clipboardText = value; } } });
 card.querySelector('.btn-copy').click(); await tick();
 assert.ok(clipboardText.includes('$a-b$'), 'Copy preserves source LaTeX instead of MathJax visual fragments');
+// File selection continues to use the same preparation path after clipboard support.
+Object.defineProperty(fileInput, 'files', { value: [png] });
+fileInput.dispatchEvent(new window.Event('change')); await tick();
+assert.equal(window.document.getElementById('supportImagePreview').hidden, false);
+assert.equal(window.document.getElementById('supportOcrButton').disabled, false);
 window.close();
 console.log('Math support: OCR -> client service -> route -> DB -> actions, owner isolation, revisions, pagination and retry safety: OK');

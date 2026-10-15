@@ -3,7 +3,8 @@
     <div class="section-header-box"><h2>HỖ TRỢ GIẢI TOÁN</h2><p>Tải ảnh một bài toán, nhận diện OCR và kiểm tra nội dung trước khi lưu. Bài toán của bạn được lưu riêng theo tài khoản.</p></div>
     <form id="mathSupportForm" class="math-support-form">
       <label for="supportImage">Ảnh bài toán (JPEG, PNG hoặc WEBP)</label>
-      <input id="supportImage" type="file" accept="image/jpeg,image/png,image/webp" required>
+      <input id="supportImage" type="file" accept="image/jpeg,image/png,image/webp" aria-describedby="supportPasteHint">
+      <div id="supportPasteHint" class="tipbox" tabindex="0">📋 Sao chép ảnh bài toán, bấm vào đây rồi nhấn <kbd>Ctrl+V</kbd> (Mac: <kbd>⌘+V</kbd>) để dán ảnh. Bạn cũng có thể chọn tệp ở trên.</div>
       <img id="supportImagePreview" alt="Ảnh bài toán được chọn" hidden>
       <button id="supportOcrButton" class="btn-secondary" type="button" disabled>🔎 OCR bài toán</button>
       <div id="supportOcrEditor" hidden>
