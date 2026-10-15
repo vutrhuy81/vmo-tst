@@ -133,7 +133,7 @@ html { scroll-padding-top: var(--content-offset, 155px); }
 /* Standalone problem upload and saved cards. */
 .math-support-form { padding: 20px; margin-bottom: 24px; background: var(--card-bg, #f8fafc); border: 1px solid #94a3b8; border-radius: 12px; }
 .math-support-form label { display: block; font-weight: 600; margin: 8px 0; }
-.math-support-form input:not([type=file]), .math-support-form textarea, #supportSearch { width: 100%; box-sizing: border-box; padding: 9px; border: 1px solid #94a3b8; border-radius: 6px; }
+.math-support-form input:not([type=file]), .math-support-form textarea, .math-support-form select, #supportSearch { width: 100%; box-sizing: border-box; padding: 9px; border: 1px solid #94a3b8; border-radius: 6px; }
 .math-support-form textarea { font: 14px/1.6 ui-monospace, monospace; resize: vertical; }
 .math-support-form button { margin: 8px 6px 8px 0; }
 .math-support-fields { display: grid; grid-template-columns: 2fr 2fr 1fr; gap: 12px; }

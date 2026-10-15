@@ -24,6 +24,9 @@
       const content = String(data?.latexText || '').trim();
       if (!content || content.length > 50000) throw new Error('OCR chưa có nội dung hợp lệ. Vui lòng thử ảnh rõ hơn.');
       state.confidence = String(data.confidence || '');
+      const topicSelect = byId('supportTopic');
+      topicSelect.value = Array.from(topicSelect.options).some(option => option.value === data.topic) ? data.topic : '';
+      status('supportTopicHint', topicSelect.value ? 'Đã tự động phân loại chuyên đề. Bạn có thể điều chỉnh trước khi lưu.' : 'Chưa xác định được chuyên đề trong sáu nhóm. Vui lòng chọn chuyên đề phù hợp trước khi lưu.');
       byId('supportContent').value = content;
       byId('supportOcrEditor').hidden = false;
       preview();
@@ -105,6 +108,7 @@
     try {
       const image = file ? await window.prepareMathSupportImage(file) : '';
       state.image = image; state.uploadKey = image ? crypto.randomUUID() : ''; state.confidence = '';
+      byId('supportTopic').value = '';
       byId('supportContent').value = ''; byId('supportOcrEditor').hidden = true;
       byId('supportMathPreview').replaceChildren();
       byId('supportImagePreview').hidden = !image;

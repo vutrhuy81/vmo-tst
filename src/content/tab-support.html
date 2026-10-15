@@ -10,9 +10,18 @@
       <div id="supportOcrEditor" hidden>
         <div class="math-support-fields">
           <label for="supportTitle">Tên bài toán<input id="supportTitle" maxlength="200" value="Bài toán riêng lẻ" required></label>
-          <label for="supportTopic">Chuyên đề<input id="supportTopic" maxlength="120" value="Toán Olympic"></label>
+          <label for="supportTopic">Chuyên đề<select id="supportTopic" required aria-describedby="supportTopicHint">
+            <option value="">— Chọn chuyên đề —</option>
+            <option>Dãy số và Giới hạn dãy số</option>
+            <option>Phương trình hàm</option>
+            <option>Số học và dãy số</option>
+            <option>Hình học phẳng</option>
+            <option>Đa thức</option>
+            <option>Tổ hợp</option>
+          </select></label>
           <label for="supportScore">Điểm tối đa<input id="supportScore" type="number" min="0.1" max="20" step="0.1" value="5" required></label>
         </div>
+        <p id="supportTopicHint">Chuyên đề được tự động đề xuất sau OCR; hãy kiểm tra và điều chỉnh trước khi lưu.</p>
         <label for="supportContent">Nội dung OCR — kiểm tra, chỉnh sửa trước khi lưu</label>
         <textarea id="supportContent" rows="10" maxlength="50000" spellcheck="false" required></textarea>
         <button id="supportPreviewButton" class="btn-secondary" type="button">👁️ Xem trước công thức</button>
