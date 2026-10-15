@@ -26,7 +26,7 @@
       state.confidence = String(data.confidence || '');
       const topicSelect = byId('supportTopic');
       topicSelect.value = Array.from(topicSelect.options).some(option => option.value === data.topic) ? data.topic : '';
-      status('supportTopicHint', topicSelect.value ? 'Đã tự động phân loại chuyên đề. Bạn có thể điều chỉnh trước khi lưu.' : 'Chưa xác định được chuyên đề trong sáu nhóm. Vui lòng chọn chuyên đề phù hợp trước khi lưu.');
+      status('supportTopicHint', topicSelect.value ? 'Đã tự động phân loại chuyên đề. Bạn có thể điều chỉnh trước khi lưu.' : 'Chưa xác định được chuyên đề trong bảy nhóm. Vui lòng chọn chuyên đề phù hợp trước khi lưu.');
       byId('supportContent').value = content;
       byId('supportOcrEditor').hidden = false;
       preview();

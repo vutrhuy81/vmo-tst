@@ -1,4 +1,4 @@
-import { TREND_TOPICS } from '../lib/exam-trends.js';
+import { MATH_SUPPORT_TOPICS } from '../lib/math-support-topics.js';
 import { normalizeStandaloneMath } from '../lib/ocr-normalization.js';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
@@ -23,21 +23,22 @@ for (const statement of [String.raw`$x$$y$`, String.raw`Cho $a,b\in\mathbb R$. C
 
 const ocrSource = fs.readFileSync(new URL('../api/ai-ocr-math.js', import.meta.url), 'utf8')
   .replace(/^import .*;\n/gm, '').replace('export default async function handler', 'async function handler');
-let ocrTopic = TREND_TOPICS[0], ocrOptions;
-const ocrRoute = new Function('TREND_TOPICS', 'normalizeStandaloneMath', 'getSession', 'checkRateLimit', 'prepare', 'parseBody', 'text', 'generateJson', 'handleAiError', `${ocrSource}\nreturn handler;`)(
-  TREND_TOPICS, normalizeStandaloneMath, () => ({ username: 'tester' }), () => true, () => {}, req => req.body,
+let ocrTopic = MATH_SUPPORT_TOPICS[0], ocrOptions;
+const ocrRoute = new Function('MATH_SUPPORT_TOPICS', 'normalizeStandaloneMath', 'getSession', 'checkRateLimit', 'prepare', 'parseBody', 'text', 'generateJson', 'handleAiError', `${ocrSource}\nreturn handler;`)(
+  MATH_SUPPORT_TOPICS, normalizeStandaloneMath, () => ({ username: 'tester' }), () => true, () => {}, req => req.body,
   value => String(value || ''), async options => { ocrOptions = options; return { model: 'fixture', data: { latexText: malformedLiveOcr, summary: 'test', confidence: 'high', topic: ocrTopic } }; }, () => { throw new Error('Unexpected OCR error'); });
 const ocrResponse = { status(n) { this.code = n; return this; }, json(body) { this.body = body; return this; } };
 await ocrRoute({ method: 'POST', body: { image: 'data:image/png;base64,iVBORw0KGgo=', purpose: 'standalone_problem' } }, ocrResponse);
 assert.equal(ocrResponse.code, 200); assert.equal(ocrResponse.body.data.latexText, repairedOcr);
 
-for (const topic of [...TREND_TOPICS, 'Đại số', undefined]) {
+for (const topic of [...MATH_SUPPORT_TOPICS, 'Đại số', undefined]) {
   ocrTopic = topic;
   await ocrRoute({ method: 'POST', body: { image: 'data:image/png;base64,iVBORw0KGgo=', purpose: 'standalone_problem' } }, ocrResponse);
-  assert.equal(ocrResponse.body.data.topic, TREND_TOPICS.includes(topic) ? topic : '');
-  assert.deepEqual(ocrOptions.schema.properties.topic.enum, [...TREND_TOPICS, '']);
+  assert.equal(ocrResponse.body.data.topic, MATH_SUPPORT_TOPICS.includes(topic) ? topic : '');
+  assert.deepEqual(ocrOptions.schema.properties.topic.enum, [...MATH_SUPPORT_TOPICS, '']);
   assert.ok(ocrOptions.schema.required.includes('topic'));
   assert.match(ocrOptions.contents.parts[1].text, /đồng dư/);
+  assert.match(ocrOptions.contents.parts[1].text, /Cauchy–Schwarz/);
 }
 await ocrRoute({ method: 'POST', body: { image: 'data:image/png;base64,iVBORw0KGgo=' } }, ocrResponse);
 assert.equal(ocrOptions.schema.properties.topic, undefined, 'Submission OCR keeps its original response schema');
@@ -96,11 +97,14 @@ async function call({ action, payload, query } = {}) {
   return res;
 }
 const image = 'data:image/png;base64,iVBORw0KGgo=';
-const payload = { uploadKey: randomUUID(), title: 'Bất đẳng thức', topic: 'Đa thức', maxScore: 5, image, content: 'Chứng minh $a^2+b^2\\ge 2ab$.' };
+const payload = { uploadKey: randomUUID(), title: 'Bất đẳng thức', topic: 'Bất đẳng thức', maxScore: 5, image, content: 'Chứng minh $a^2+b^2\\ge 2ab$.' };
 const create = value => call({ action: 'create_math_support', payload: value });
 const first = await create({ ...payload, ownerId: other.sub });
 assert.equal(first.code, 201); assert.equal(first.body.item.ownerId, owner.sub, 'Ownership is taken from signed session');
 assert.equal(first.body.item.referenceSolutionVerified, false);
+assert.equal(first.body.item.topic, 'Bất đẳng thức', 'Inequality topic is accepted and stored verbatim');
+assert.equal(MATH_SUPPORT_TOPICS.length, 7);
+assert.equal(new Set(MATH_SUPPORT_TOPICS).size, 7);
 assert.equal((await create({ ...payload, content: 'Retry cannot overwrite saved statement' })).body.item.content, payload.content);
 assert.equal(rows.get('problems').length, 1, 'Saving twice does not duplicate the problem');
 assert.equal(rows.get('math_support_images').length, 1);
@@ -160,7 +164,7 @@ window.VMOAuth = { getSession: () => ({ username: owner.username, role: owner.ro
 window.confirm = () => true; window.alert = () => {};
 window.matchMedia = () => ({ matches: false, addEventListener() {} });
 window.scrollTo = () => {};
-let clientOcrTopic = TREND_TOPICS[2];
+let clientOcrTopic = MATH_SUPPORT_TOPICS[6];
 window.fetch = async (url, options = {}) => {
   let res;
   if (String(url).startsWith('/api/ai-ocr-math')) {
@@ -206,7 +210,7 @@ window.document.getElementById('pasteTestModal').remove();
 assert.equal(paste(png, window.document.getElementById('supportPasteHint')).defaultPrevented, true);
 await tick();
 assert.equal(fileInput.files.length, 0, 'Pasted image does not require a file picker selection');
-assert.deepEqual(Array.from(window.document.getElementById('supportTopic').options).slice(1).map(option => option.value), [...TREND_TOPICS], 'UI topics exactly match the shared catalog taxonomy');
+assert.deepEqual(Array.from(window.document.getElementById('supportTopic').options).slice(1).map(option => option.value), [...MATH_SUPPORT_TOPICS], 'UI topics exactly match the shared catalog taxonomy');
 assert.equal(fileInput.required, false, 'Browser validation must allow saving a pasted image');
 assert.equal(window.document.getElementById('supportImagePreview').hidden, false);
 // Replacing a draft clears stale OCR; invalid/failed replacements retain the good draft.
@@ -242,17 +246,17 @@ window.document.getElementById('supportOcrButton').click(); await tick();
 assert.equal(topicSelect.value, '', 'Unknown labels do not retain a stale topic');
 assert.equal(window.document.getElementById('mathSupportForm').checkValidity(), false, 'Unclassified drafts require a manual choice');
 assert.match(window.document.getElementById('supportTopicHint').textContent, /Chưa xác định/);
-clientOcrTopic = TREND_TOPICS[2];
+clientOcrTopic = MATH_SUPPORT_TOPICS[2];
 window.document.getElementById('supportOcrButton').click(); await tick();
-assert.equal(topicSelect.value, TREND_TOPICS[2]);
-topicSelect.value = TREND_TOPICS[4]; // User can correct the OCR suggestion.
+assert.equal(topicSelect.value, MATH_SUPPORT_TOPICS[2]);
+topicSelect.value = MATH_SUPPORT_TOPICS[6]; // User can correct the OCR suggestion.
 window.document.getElementById('supportContent').value = 'Đề đã được kiểm tra $a+b$.';
 assert.equal(window.document.getElementById('mathSupportForm').checkValidity(), true, 'Pasted draft passes native form validation');
 window.document.getElementById('mathSupportForm').dispatchEvent(new window.Event('submit', { cancelable: true })); await tick(); await tick();
 assert.match(window.document.getElementById('supportUploadStatus').textContent, /Đã lưu bài toán/);
 const card = window.document.querySelector('#supportProblems .problem-item');
 assert.ok(card); assert.equal(card.dataset.sourceGroup, 'math_support');
-assert.equal(card.querySelector('.badge-topic').textContent, TREND_TOPICS[4], 'Manual correction is persisted and rendered');
+assert.equal(card.querySelector('.badge-topic').textContent, MATH_SUPPORT_TOPICS[6], 'Manual correction is persisted and rendered');
 assert.ok(card.querySelector('.btn-copy')); assert.ok(card.querySelector('.btn-submit-solution'));
 assert.ok(card.querySelector('.btn-ai-guide')); assert.ok(card.querySelector('.btn-manage-reference-links'), 'Regular uploader has source manager');
 assert.match(card.querySelector('.problem-content').textContent, /Đề đã được kiểm tra/);
