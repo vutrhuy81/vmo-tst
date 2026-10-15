@@ -194,5 +194,9 @@ assert.equal(window.document.getElementById('referenceManagerProblemContent').va
 window.document.getElementById('referenceManagerProblemContent').value = 'Đề được sửa trong Quản lý nguồn $a-b$.';
 await window.saveReferenceLinksManager();
 assert.match(card.querySelector('.problem-content').textContent, /Đề được sửa trong Quản lý nguồn/);
+let clipboardText = '';
+Object.defineProperty(window.navigator, 'clipboard', { value: { writeText: async value => { clipboardText = value; } } });
+card.querySelector('.btn-copy').click(); await tick();
+assert.ok(clipboardText.includes('$a-b$'), 'Copy preserves source LaTeX instead of MathJax visual fragments');
 window.close();
 console.log('Math support: OCR -> client service -> route -> DB -> actions, owner isolation, revisions, pagination and retry safety: OK');

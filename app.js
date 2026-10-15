@@ -288,7 +288,9 @@
     if (!card) return;
     const isEn = (window.currentLang === 'en');
     const id = card.querySelector('.problem-id span:first-child')?.innerText || (isEn ? 'Problem' : 'Bài toán');
-    const content = card.querySelector('.problem-content')?.innerText || card.innerText;
+    const rawMath = card.dataset.sourceGroup === 'math_support'
+      ? card.querySelector('.problem-content')?.getAttribute('data-raw-math') : '';
+    const content = rawMath || card.querySelector('.problem-content')?.innerText || card.innerText;
 
     navigator.clipboard.writeText(`${id}:\n${content}`).then(() => {
       const old = btn.textContent;
