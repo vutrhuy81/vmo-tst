@@ -338,7 +338,7 @@ export async function getMathSupportImage(problemId) {
   return data.item;
 }
 export async function ocrMathSupport(image) {
-  const data = await apiFetch('/api/ai-ocr-math', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ image }) });
+  const data = await apiFetch('/api/ai-ocr-math', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ image, purpose: 'standalone_problem' }) });
   return data.data;
 }
 

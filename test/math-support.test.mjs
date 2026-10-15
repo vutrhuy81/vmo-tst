@@ -1,3 +1,4 @@
+import { normalizeStandaloneMath } from '../lib/ocr-normalization.js';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import { randomUUID } from 'node:crypto';
@@ -7,6 +8,22 @@ import { handleMathSupport } from '../lib/math-support.js';
 import { canAccessProblem, supportVisibility } from '../lib/problem-access.js';
 import { retrieveVerifiedContext } from '../lib/rag-retrieval.js';
 import { sourceFresh } from '../lib/rag-core.js';
+
+const malformedLiveOcr = String.raw`BÀI TOÁN KIỂM THỬ MATHAPP\\\\Cho hai số thực a và b. Chứng minh rằng:\$$a^2 + b^2 \ge 2ab.$-\\\-Khi nào đẳng thức xảy ra?`;
+const repairedOcr = normalizeStandaloneMath(malformedLiveOcr);
+assert.equal(repairedOcr, 'BÀI TOÁN KIỂM THỬ MATHAPP\nCho hai số thực a và b. Chứng minh rằng:$$a^2 + b^2 \\ge 2ab.$$\nKhi nào đẳng thức xảy ra?');
+for (const statement of [String.raw`$x$$y$`, String.raw`Cho $a,b\in\mathbb R$. Chứng minh $$a^2+b^2\ge2ab.$$`, String.raw`$$\begin{aligned}a&=b\\c&=d\end{aligned}$$`]) {
+  assert.equal(normalizeStandaloneMath(statement), statement, 'Preserve already balanced math and aligned line breaks');
+}
+
+const ocrSource = fs.readFileSync(new URL('../api/ai-ocr-math.js', import.meta.url), 'utf8')
+  .replace(/^import .*;\n/gm, '').replace('export default async function handler', 'async function handler');
+const ocrRoute = new Function('normalizeStandaloneMath', 'getSession', 'checkRateLimit', 'prepare', 'parseBody', 'text', 'generateJson', 'handleAiError', `${ocrSource}\nreturn handler;`)(
+  normalizeStandaloneMath, () => ({ username: 'tester' }), () => true, () => {}, req => req.body,
+  value => String(value || ''), async () => ({ model: 'fixture', data: { latexText: malformedLiveOcr, summary: 'test', confidence: 'high' } }), () => { throw new Error('Unexpected OCR error'); });
+const ocrResponse = { status(n) { this.code = n; return this; }, json(body) { this.body = body; return this; } };
+await ocrRoute({ method: 'POST', body: { image: 'data:image/png;base64,iVBORw0KGgo=', purpose: 'standalone_problem' } }, ocrResponse);
+assert.equal(ocrResponse.code, 200); assert.equal(ocrResponse.body.data.latexText, repairedOcr);
 
 // Isolated database with real BSON identities and the operators used by the routes.
 const rows = new Map();
