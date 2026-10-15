@@ -5,6 +5,7 @@
 
 (() => {
   const CONTENT_SOURCE_CONFIG = Object.freeze({
+    'tab-support': { sourceGroup: 'math_support', sourceType: 'standalone_question', contentType: 'standalone_problem' },
     'tab-mock': { sourceGroup: 'mock_exam', sourceType: 'mock_exam_question', contentType: 'mock_exam' },
     'tab-tst': { sourceGroup: 'tst', sourceType: 'tst_question', contentType: 'tst_exam' },
     'tab-vmo': { sourceGroup: 'vmo_official', sourceType: 'vmo_official_question', contentType: 'vmo_official_exam' },
@@ -290,6 +291,7 @@
         await catalogRulesPromise;
       }
       root.querySelectorAll?.('.problem-item[data-content-key], .examplebox[data-content-key]').forEach(card => {
+        if (card.dataset.sourceGroup === 'math_support') return;
         const rule = window.catalogAccessRules.get(card.dataset.contentKey);
         if (!rule) return;
         card.hidden = rule.published === false;
@@ -1607,7 +1609,7 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
         .replace(/⇒/g, '\\Rightarrow ')
         .replace(/⇔/g, '\\Leftrightarrow ');
 
-      safeHtml += mathPart;
+      safeHtml += mathPart.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
       lastIndex = match.index + match[0].length;
     }
 
@@ -2051,7 +2053,7 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
       <div style="display:flex;gap:8px;margin-bottom:10px;flex-wrap:wrap;">
         <input id="hubCatalogSearch" type="search" placeholder="Tìm bộ đề hoặc câu hỏi..." style="flex:1;min-width:220px;padding:7px 9px;border:1px solid #cbd5e1;border-radius:6px;">
         <select id="hubCatalogGroup" style="padding:7px;border:1px solid #cbd5e1;border-radius:6px;">
-          <option value="">Tất cả nguồn</option><option value="specialty">Chuyên đề</option><option value="mock_exam">Thi thử</option><option value="tst">TST</option><option value="danang_quangnam">Đà Nẵng–Quảng Nam</option><option value="vmo_official">VMO</option><option value="imo_olympic">IMO–Olympic</option><option value="olympic_30_4">Olympic 30/4</option><option value="duyen_hai_bac">Duyên hải miền Bắc</option>
+          <option value="">Tất cả nguồn</option><option value="specialty">Chuyên đề</option><option value="mock_exam">Thi thử</option><option value="tst">TST</option><option value="danang_quangnam">Đà Nẵng–Quảng Nam</option><option value="vmo_official">VMO</option><option value="imo_olympic">IMO–Olympic</option><option value="olympic_30_4">Olympic 30/4</option><option value="duyen_hai_bac">Duyên hải miền Bắc</option><option value="math_support">Hỗ trợ giải toán</option>
         </select>
       </div>
       <div id="hubCatalogList" style="max-height:420px;overflow:auto;"><em>Đang tải catalog...</em></div>`;
@@ -2376,7 +2378,7 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
       <input id="hubSubSearch" type="search" placeholder="Tìm câu hỏi, bộ đề, lời giải..." style="min-width:0;padding:7px 9px;border:1px solid #cbd5e1;border-radius:6px;">
       ${isAdmin ? '<input id="hubSubUsername" type="search" placeholder="Tài khoản" style="min-width:0;padding:7px 9px;border:1px solid #cbd5e1;border-radius:6px;">' : '<span></span>'}
       <select id="hubSubSource" style="min-width:0;padding:7px;border:1px solid #cbd5e1;border-radius:6px;">
-        <option value="">Tất cả nguồn</option><option value="specialty">Chuyên đề</option><option value="mock_exam">Thi thử</option><option value="tst">TST</option><option value="danang_quangnam">Đà Nẵng–Quảng Nam</option><option value="vmo_official">VMO</option><option value="imo_olympic">IMO–Olympic</option><option value="olympic_30_4">Olympic 30/4</option><option value="duyen_hai_bac">Duyên hải miền Bắc</option>
+        <option value="">Tất cả nguồn</option><option value="specialty">Chuyên đề</option><option value="mock_exam">Thi thử</option><option value="tst">TST</option><option value="danang_quangnam">Đà Nẵng–Quảng Nam</option><option value="vmo_official">VMO</option><option value="imo_olympic">IMO–Olympic</option><option value="olympic_30_4">Olympic 30/4</option><option value="duyen_hai_bac">Duyên hải miền Bắc</option><option value="math_support">Hỗ trợ giải toán</option>
       </select>
       <select id="hubSubEvaluation" style="min-width:0;padding:7px;border:1px solid #cbd5e1;border-radius:6px;">
         <option value="">Mọi trạng thái AI</option><option value="yes">Có đánh giá AI</option><option value="no">Chưa đánh giá AI</option>
@@ -4302,6 +4304,8 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
     return output;
   }
 
+  window.prepareMathSupportImage = examImageDataUrl;
+
   function renderExamOcrEditor(kind = 'exam') {
     const preview = document.getElementById(`${kind}OcrPreview`);
     const questions = ocrStates[kind].questions || [];
@@ -5070,8 +5074,14 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
     rows.appendChild(row);
   };
 
+  function canManageProblemSource(contentKey) {
+    const problem = window.mongoProblemsByContentKey?.get(contentKey);
+    const session = window.VMOAuth?.getSession?.();
+    return isCurrentUserAdmin() || (problem?.sourceGroup === 'math_support' && session?.username && problem.createdBy === session.username);
+  }
+
   window.openReferenceLinksManager = async function(contentKey) {
-    if (!requireAdminUiAction()) return;
+    if (!canManageProblemSource(contentKey)) return;
     ensureReferenceLinksModal();
     const modal = document.getElementById('referenceLinksAdminModal');
     modal.dataset.contentKey = contentKey;
@@ -5131,9 +5141,9 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
   };
 
   window.saveReferenceLinksManager = async function() {
-    if (!requireAdminUiAction()) return;
     const modal = document.getElementById('referenceLinksAdminModal');
     const contentKey = modal?.dataset.contentKey || '';
+    if (!canManageProblemSource(contentKey)) return;
     const problemId = modal?.dataset.problemId || '';
     const expectedVersion = Number(modal?.dataset.problemVersion) || 1;
     const content = document.getElementById('referenceManagerProblemContent')?.value.trim() || '';
@@ -5198,7 +5208,7 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
   };
 
   function ensureReferenceLinksAdminButton(problem) {
-    if (!isCurrentUserAdmin() || problem.querySelector('.btn-manage-reference-links')) return;
+    if (!canManageProblemSource(problem.dataset.contentKey) || problem.querySelector('.btn-manage-reference-links')) return;
     const contentKey = problem.dataset.contentKey;
     if (!contentKey) return;
     const button = document.createElement('button');
@@ -5209,6 +5219,19 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
     button.onclick = () => window.openReferenceLinksManager(contentKey);
     (problem.querySelector('.problem-header') || problem).appendChild(button);
   }
+
+  window.enhanceMathSupportProblems = async function(root, problems) {
+    window.mongoProblemsByContentKey ||= new Map();
+    window.mongoProblemReferenceLinks ||= new Map();
+    problems.forEach(problem => {
+      window.mongoProblemsByContentKey.set(problem.contentKey, problem);
+      window.mongoProblemReferenceLinks.set(problem.contentKey, problem.referenceLinks || []);
+    });
+    applyMongoReferenceLinks(root);
+    injectSubmissionButtons(root);
+    window.reinitAIGuide?.(root);
+    await applyCatalogAccessRules(root);
+  };
 
   function renderMongoReferenceLinks(problem, links) {
     if (!problem || !Array.isArray(links) || !links.length) return;

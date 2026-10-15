@@ -1,3 +1,5 @@
+import { canAccessProblem, supportVisibility } from '../lib/problem-access.js';
+import { handleMathSupport } from '../lib/math-support.js';
 import { runBenchmarkCase, validateBenchmarkCase } from '../lib/rag-benchmark.js';
 import { checkRateLimit } from '../lib/ai.js';
 import { RAG_VERSION } from '../lib/rag-core.js';
@@ -10,7 +12,7 @@ import { deleteAiGuideRecord, learningScope, recordActivity, summarizeLearning }
 import { cleanTrendTheory } from '../lib/trend-theory-storage.js';
 import { buildSubmissionContentUpdate, buildSubmissionVerificationUpdate } from '../lib/submission-verification.js';
 
-const ALLOWED_RESOURCES = new Set(['documents', 'exams', 'exam_catalog', 'home_stats', 'exam_image', 'content_sets', 'content_blocks', 'problems', 'content_revisions', 'submissions', 'submission_image', 'events', 'activity_feed', 'learning_overview', 'exam_trend_reports', 'trend_theories', 'rag_status', 'rag_logs']);
+const ALLOWED_RESOURCES = new Set(['math_support', 'math_support_image', 'documents', 'exams', 'exam_catalog', 'home_stats', 'exam_image', 'content_sets', 'content_blocks', 'problems', 'content_revisions', 'submissions', 'submission_image', 'events', 'activity_feed', 'learning_overview', 'exam_trend_reports', 'trend_theories', 'rag_status', 'rag_logs']);
 const TST_REGIONS = new Set(['BAC', 'TRUNG', 'NAM']);
 const EXAM_TREND_TOPICS = [
   'Dãy số và Giới hạn dãy số', 'Phương trình hàm', 'Số học và dãy số',
@@ -250,6 +252,7 @@ export default async function handler(req, res) {
 
   try {
     const db = await getDb();
+    if (await handleMathSupport({ db, req, res, session })) return;
 
     if (req.method === 'GET') {
       const resource = cleanText(req.query?.resource, 30);
@@ -509,7 +512,7 @@ export default async function handler(req, res) {
         });
       }
 
-      const filter = {};
+      const filter = ['problems', 'content_sets'].includes(resource) ? supportVisibility(session, resource === 'content_sets' ? 'group' : 'sourceGroup') : {};
       let projection;
       if (resource === 'content_sets') {
         if (req.query?.group) filter.group = cleanText(req.query.group, 80);
@@ -543,8 +546,8 @@ export default async function handler(req, res) {
         }
         if (req.query?.catalogRules === '1' && session.role !== 'admin') {
           const [sets, problems] = await Promise.all([
-            db.collection('content_sets').find({}, { projection: { status: 1 } }).toArray(),
-            db.collection('problems').find({}, { projection: {
+            db.collection('content_sets').find(supportVisibility(session, 'group'), { projection: { status: 1 } }).toArray(),
+            db.collection('problems').find(supportVisibility(session), { projection: {
               contentKey: 1, setId: 1, setTitle: 1, title: 1, shortLabel: 1,
               topic: 1, maxScore: 1, order: 1, status: 1,
               allowSubmission: 1, allowAiEvaluation: 1
@@ -568,7 +571,7 @@ export default async function handler(req, res) {
         if (session.role !== 'admin') {
           filter.status = 'published';
           const publishedSets = await db.collection('content_sets')
-            .find({ status: 'published' }, { projection: { _id: 1 } })
+            .find({ status: 'published', ...supportVisibility(session, 'group') }, { projection: { _id: 1 } })
             .toArray();
           const publishedSetIds = publishedSets.map(item => item._id);
           if (filter.setId) {
@@ -683,6 +686,7 @@ export default async function handler(req, res) {
     if (!body) return res.status(400).json({ success: false, error: 'JSON không hợp lệ' });
     const { action, payload = {} } = body;
     const now = new Date();
+    if (await handleMathSupport({ db, req, res, session, action, payload })) return;
 
     if (action === 'submit_solution') {
       const submittedProblemId = cleanText(payload.problemId, 180);
@@ -701,6 +705,7 @@ export default async function handler(req, res) {
       if (submittedProblemKey) problemFilters.push({ contentKey: submittedProblemKey });
       problemFilters.push({ id: submittedProblemId });
       const registeredProblem = await db.collection('problems').findOne({ $or: problemFilters });
+      if (registeredProblem && !canAccessProblem(registeredProblem, session)) return res.status(403).json({ success: false, error: 'Bạn không có quyền truy cập bài toán này' });
       if (registeredProblem && session.role !== 'admin') {
         const registeredSet = registeredProblem.setId
           ? await db.collection('content_sets').findOne({ _id: registeredProblem.setId }, { projection: { status: 1 } })
@@ -805,7 +810,11 @@ export default async function handler(req, res) {
       return res.status(201).json({ success: true, item: { _id: result.insertedId, ...doc } });
     }
 
-    if (!requireAdmin(session, res)) return;
+    if (action === 'update_catalog_content' && session.role !== 'admin') {
+      const id = objectId(cleanText(payload.id, 80));
+      const problem = id ? await db.collection('problems').findOne({ _id: id }) : null;
+      if (!problem || problem.sourceGroup !== 'math_support' || !canAccessProblem(problem, session)) return res.status(403).json({ success: false, error: 'Chỉ được chỉnh sửa bài toán của bạn' });
+    } else if (!requireAdmin(session, res)) return;
 
     if (action === 'rag_benchmark') {
       if (!checkRateLimit(`${session.username}:rag-benchmark`, 30)) return res.status(429).json({ success: false, error: 'Tối đa 30 ca benchmark/phút.' });
@@ -1148,7 +1157,7 @@ export default async function handler(req, res) {
       const id = objectId(cleanText(payload.id, 80));
       const content = cleanText(payload.content, 50000);
       const referenceSolution = cleanText(payload.referenceSolution, 100000);
-      const referenceSolutionVerified = payload.referenceSolutionVerified === true && Boolean(referenceSolution);
+      const referenceSolutionVerified = session.role === 'admin' && payload.referenceSolutionVerified === true && Boolean(referenceSolution);
       const referenceLinks = cleanReferenceLinks(payload.referenceLinks);
       const changeNote = cleanText(payload.changeNote, 500);
       if (!id || !content) {
@@ -1156,7 +1165,7 @@ export default async function handler(req, res) {
       }
       const current = await db.collection('problems').findOne({ _id: id });
       if (!current) return res.status(404).json({ success: false, error: 'Không tìm thấy câu hỏi' });
-      const resolvePredictionReview = payload.resolvePredictionReview === true &&
+      const resolvePredictionReview = session.role === 'admin' && payload.resolvePredictionReview === true &&
         current.origin === 'prediction' && current.predictionReview?.status === 'gpt_rejected';
       if (resolvePredictionReview && content === current.content) {
         return res.status(400).json({ success: false, error: 'Cần sửa nội dung câu hỏi trước khi xác nhận đã khắc phục nhận xét GPT.' });
@@ -1182,8 +1191,8 @@ export default async function handler(req, res) {
         createdAt: now
       });
       const nextVersion = Number(current.version || 1) + 1;
-      await db.collection('problems').updateOne(
-        { _id: id },
+      const changed = await db.collection('problems').updateOne(
+        { _id: id, version: current.version ?? { $exists: false } },
         { $set: {
           content, referenceSolution, referenceLinks, referenceSolutionVerified,
           referenceSolutionVerifiedBy: referenceSolutionVerified ? session.username : '',
@@ -1196,6 +1205,7 @@ export default async function handler(req, res) {
           } : {})
         } }
       );
+      if (!changed.matchedCount) return res.status(409).json({ success: false, error: 'Nội dung đã thay đổi. Vui lòng tải lại.' });
       await db.collection('content_revisions').createIndex({ problemId: 1, createdAt: -1 });
       await recordActivity(db, session, 'catalog.updated', { problemKey: current.contentKey, itemTitle: current.title });
       return res.status(200).json({ success: true, item: { id: String(id), version: nextVersion } });

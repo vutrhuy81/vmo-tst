@@ -328,6 +328,20 @@ export async function getContentRevisions(problemId) {
   return normalizeList(await request('content_revisions', { problemId }));
 }
 
+export async function getMathSupportProblems(page = 1, q = '') {
+  const data = await apiFetch(`${DATA_API_URL}?${new URLSearchParams({ resource: 'math_support', page: String(page), q })}`);
+  return { items: normalizeList(data.items), pagination: data.pagination };
+}
+export async function createMathSupport(payload) { return normalize(await mutate('create_math_support', payload)); }
+export async function getMathSupportImage(problemId) {
+  const data = await apiFetch(`${DATA_API_URL}?${new URLSearchParams({ resource: 'math_support_image', problemId })}`);
+  return data.item;
+}
+export async function ocrMathSupport(image) {
+  const data = await apiFetch('/api/ai-ocr-math', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ image }) });
+  return data.data;
+}
+
 export async function updateCatalogContent(id, contentData = {}) {
   return normalize(await mutate('update_catalog_content', { id, ...contentData }));
 }
@@ -596,6 +610,7 @@ const VMODataService = Object.freeze({
   updateCatalogItem,
   getContentRevisions,
   updateCatalogContent,
+  getMathSupportProblems, createMathSupport, getMathSupportImage, ocrMathSupport,
   migrateTstReferenceLinks,
   updateProblemReferenceLinks,
   restoreCatalogRevision,
