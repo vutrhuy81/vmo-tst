@@ -47,6 +47,7 @@ export function build() {
     { tag: '<!-- INJECT:TAB_OLYMPIC30 -->', file: 'content/tab-tst.html', apiTab: 'tab-olympic30', title: 'NGÂN HÀNG ĐỀ OLYMPIC 30/4 — LỚP 10, LỚP 11' },
     { tag: '<!-- INJECT:TAB_DUYENHAI -->', file: 'content/tab-tst.html', apiTab: 'tab-duyenhai', title: 'NGÂN HÀNG ĐỀ DUYÊN HẢI MIỀN BẮC — LỚP 10, LỚP 11' },
     { tag: '<!-- INJECT:TAB_OLYMPIC -->', file: 'content/tab-tst.html', apiTab: 'tab-olympic', title: 'NGÂN HÀNG ĐỀ IMO–OLYMPIC' },
+    { tag: '<!-- INJECT:TAB_SUPPORT -->', file: 'content/tab-support.html' },
     { tag: '<!-- INJECT:TAB_HISTORY -->', file: 'content/tab-history.html', apiTab: 'tab-history',
       title: 'NGÂN HÀNG ĐỀ ĐÀ NẴNG – QUẢNG NAM QUA CÁC NĂM' },
     { tag: '<!-- INJECT:ACCOUNT_MODAL -->', file: 'modals/account-modal.html' },

@@ -1,3 +1,5 @@
+import { MATH_SUPPORT_TOPICS } from '../lib/math-support-topics.js';
+import { normalizeStandaloneMath } from '../lib/ocr-normalization.js';
 import { getSession } from '../lib/session.js';
 import { checkRateLimit, generateJson, handleAiError, parseBody, prepare, text } from '../lib/ai.js';
 
@@ -62,11 +64,15 @@ export default async function handler(req, res) {
   const image = text(body?.image || body?.solutionImage, 4_000_000);
   const match = image.match(/^data:(image\/(?:jpeg|png|webp));base64,(.+)$/s);
   if (!match) return res.status(400).json({ success: false, error: 'Thiếu ảnh JPEG, PNG hoặc WEBP dạng base64' });
+  const standalone = body?.purpose === 'standalone_problem';
+  const ocrSchema = standalone ? { ...schema, properties: { ...schema.properties, topic: { type: 'string', enum: [...MATH_SUPPORT_TOPICS, ''] } }, required: [...schema.required, 'topic'] } : schema;
+  const topicPrompt = ` Phân loại chuyên đề chính của ĐỀ BÀI dựa trên nội dung, không chỉ dựa vào từ khóa, và trả topic đúng một nhãn: ${MATH_SUPPORT_TOPICS.join('; ')}. Dãy số thực, hội tụ, giới hạn thuộc Dãy số và Giới hạn dãy số; dãy số nguyên với chia hết, đồng dư, số nguyên tố thuộc Số học và dãy số. Bài xác định hàm thỏa đẳng thức với mọi biến thuộc Phương trình hàm; bài nghiên cứu nghiệm, hệ số của đa thức thuộc Đa thức. Hình học tam giác, đường tròn thuộc Hình học phẳng; đếm, đồ thị, tô màu, trò chơi thuộc Tổ hợp. Nếu ảnh không rõ hoặc bài không thuộc bảy nhóm trên, trả topic rỗng để người dùng chọn; Bài chứng minh bất đẳng thức, tìm giá trị lớn nhất/nhỏ nhất của biểu thức đại số, AM-GM, Cauchy–Schwarz, Jensen thuộc Bất đẳng thức; không nhầm với Đa thức chỉ vì có số mũ hoặc biểu thức đa thức.`;
   const prompt = `Đọc chính xác toàn bộ bài toán/bài giải viết tay trong ảnh. Trả về latexText để hiển thị trực tiếp bằng MathJax.
-Quy tắc bắt buộc: công thức nội dòng phải đặt trong $...$; công thức riêng dòng phải đặt trong $$...$$; không được để \\boxed, \\frac, chỉ số, số mũ hoặc lệnh LaTeX trần ngoài delimiter; không dùng align/align* (dùng aligned); dùng \\le, \\ge, \\in, \\ne, \\to; chữ tiếng Việt nằm ngoài công thức hoặc trong \\text{...}. Giữ nguyên nội dung nhìn thấy, không tự suy diễn. Trả summary ngắn và confidence.`;
+Quy tắc bắt buộc: công thức nội dòng phải đặt trong $...$; công thức riêng dòng phải đặt trong $$...$$; không được để \\boxed, \\frac, chỉ số, số mũ hoặc lệnh LaTeX trần ngoài delimiter; không dùng align/align* (dùng aligned); dùng \\le, \\ge, \\in, \\ne, \\to; chữ tiếng Việt nằm ngoài công thức hoặc trong \\text{...}. Giữ nguyên nội dung nhìn thấy, không tự suy diễn. Trả summary ngắn và confidence.${standalone ? ' Đây là ảnh một đề bài riêng lẻ, không giải bài toán. Văn bản tiếng Việt đặt ngoài công thức. Dùng ký tự xuống dòng thật giữa các đoạn; không dùng lệnh LaTeX xuống dòng trong văn bản, không thêm gạch đầu dòng ngoài ảnh. Mỗi công thức phải có cặp delimiter cân bằng: $...$ hoặc $$...$$.' + topicPrompt : ''}`;
   try {
-    const result = await generateJson({ contents: { parts: [{ inlineData: { mimeType: match[1], data: match[2] } }, { text: prompt }] }, schema, systemInstruction: 'Bạn là chuyên gia OCR công thức toán tiếng Việt.' });
-    const data = { ...result.data, latexText: normalizeOcrLatex(result.data?.latexText) };
+    const result = await generateJson({ contents: { parts: [{ inlineData: { mimeType: match[1], data: match[2] } }, { text: prompt }] }, schema: ocrSchema, systemInstruction: 'Bạn là chuyên gia OCR công thức toán tiếng Việt.' });
+    const data = { ...result.data, latexText: normalizeOcrLatex(standalone ? normalizeStandaloneMath(result.data?.latexText) : result.data?.latexText) };
+    if (standalone) data.topic = MATH_SUPPORT_TOPICS.includes(data.topic) ? data.topic : '';
     return res.status(200).json({ success: true, source: 'gemini', model: result.model, data });
   } catch (error) { return handleAiError(res, error); }
 }

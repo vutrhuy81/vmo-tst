@@ -202,6 +202,8 @@
     const isH = (tabId === 'tab-history');
     const isV = (tabId === 'tab-vmo');
     const isO = (tabId === 'tab-olympic');
+    const isSupport = tabId === 'tab-support';
+    if (qs('#sidebar-support')) qs('#sidebar-support').style.display = isSupport ? 'block' : 'none';
     const isGradeCatalog = ['tab-olympic30', 'tab-duyenhai'].includes(tabId);
     ['olympic30', 'duyenhai'].forEach(key => {
       if (qs('#sidebar-' + key)) qs('#sidebar-' + key).style.display = tabId === 'tab-' + key ? 'block' : 'none';
@@ -214,7 +216,7 @@
     const sbTst = qs('#sidebar-tst');
     const sbHistory = qs('#sidebar-history');
 
-    if (sbDanang) sbDanang.style.display = (!isM && !isT && !isH && !isV && !isO && !isGradeCatalog) ? 'block' : 'none';
+    if (sbDanang) sbDanang.style.display = (!isM && !isT && !isH && !isV && !isO && !isGradeCatalog && !isSupport) ? 'block' : 'none';
     if (sbMock) sbMock.style.display = isM ? 'block' : 'none';
     if (sbTst) sbTst.style.display = isT ? 'block' : 'none';
     if (sbHistory) sbHistory.style.display = isH ? 'block' : 'none';
@@ -247,12 +249,13 @@
     }
 
     // Đồng bộ lại các nút AI Hướng dẫn giải & Nút Nộp bài Database nếu cần
+    if (isSupport) await window.loadMathSupportProblems?.();
     window.reinitAIGuide?.(targetPane);
     window.reinitDatabaseUI?.(targetPane);
     window.applyCurrentLanguage?.();
 
     // Render công thức toán nếu tab vừa mở chưa được biên dịch
-    if (!isM && !isT && !isH && !isV && !isO && !isGradeCatalog) typeset(targetPane);
+    if (!isM && !isT && !isH && !isV && !isO && !isGradeCatalog && !isSupport) typeset(targetPane);
   };
 
   // 2. Hiện / Ẩn lời giải và barem điểm từng bài
@@ -285,7 +288,9 @@
     if (!card) return;
     const isEn = (window.currentLang === 'en');
     const id = card.querySelector('.problem-id span:first-child')?.innerText || (isEn ? 'Problem' : 'Bài toán');
-    const content = card.querySelector('.problem-content')?.innerText || card.innerText;
+    const rawMath = card.dataset.sourceGroup === 'math_support'
+      ? card.querySelector('.problem-content')?.getAttribute('data-raw-math') : '';
+    const content = rawMath || card.querySelector('.problem-content')?.innerText || card.innerText;
 
     navigator.clipboard.writeText(`${id}:\n${content}`).then(() => {
       const old = btn.textContent;
