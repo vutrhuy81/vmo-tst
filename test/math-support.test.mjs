@@ -11,6 +11,10 @@ import { sourceFresh } from '../lib/rag-core.js';
 
 const malformedLiveOcr = String.raw`BÀI TOÁN KIỂM THỬ MATHAPP\\\\Cho hai số thực a và b. Chứng minh rằng:\$$a^2 + b^2 \ge 2ab.$-\\\-Khi nào đẳng thức xảy ra?`;
 const repairedOcr = normalizeStandaloneMath(malformedLiveOcr);
+const escapedNewlines = String.raw`BÀI TOÁN KIỂM THỬ MATHAPP\n` + '\nCho hai số thực $a$ và $b$. Chứng minh rằng:\n' + String.raw`\n$$a^2 + b^2 \ge 2ab.$$\n` + '\nKhi nào đẳng thức xảy ra?';
+const repairedNewlines = normalizeStandaloneMath(escapedNewlines);
+assert.equal(repairedNewlines.includes(String.raw`\n`), false, 'Live OCR literal newline escapes must become real line breaks');
+assert.match(repairedNewlines, /\$\$a\^2/);
 assert.equal(repairedOcr, 'BÀI TOÁN KIỂM THỬ MATHAPP\nCho hai số thực a và b. Chứng minh rằng:$$a^2 + b^2 \\ge 2ab.$$\nKhi nào đẳng thức xảy ra?');
 for (const statement of [String.raw`$x$$y$`, String.raw`Cho $a,b\in\mathbb R$. Chứng minh $$a^2+b^2\ge2ab.$$`, String.raw`$$\begin{aligned}a&=b\\c&=d\end{aligned}$$`]) {
   assert.equal(normalizeStandaloneMath(statement), statement, 'Preserve already balanced math and aligned line breaks');
