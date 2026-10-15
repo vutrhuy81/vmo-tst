@@ -416,9 +416,12 @@
     if (!element) return '';
     const raw = element.getAttribute('data-raw-math') || element.innerHTML || '';
     const holder = document.createElement('div');
-    holder.innerHTML = raw;
+    const math = [];
+    holder.innerHTML = raw.replace(guideMathPattern(), formula => {
+      math.push(formula); return `\uE120${math.length - 1}\uE121`;
+    });
     holder.querySelectorAll('button, .ai-guide-panel').forEach(node => node.remove());
-    return (holder.textContent || '').trim();
+    return (holder.textContent || '').replace(/\uE120(\d+)\uE121/g, (_, index) => math[Number(index)]).trim();
   }
 
   window.openAIGuide = async function(btn) {
@@ -893,8 +896,20 @@
     return hash;
   }
 
+  // Keep TeX opaque to Markdown and HTML formatting, including multiline displays.
+  function guideMathPattern() {
+    return /(?<!\\)\$\$[\s\S]*?(?<!\\)\$\$|\\\[[\s\S]*?\\\]|\\\([\s\S]*?\\\)|(?<!\\)\$(?!\$)(?:\\[\s\S]|[^$])+?(?<!\\)\$/g;
+  }
+  function escapeGuideHtml(value) {
+    return String(value).replace(/[&<>"']/g, char => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[char]));
+  }
+
   function normalizeBareGuideMath(value) {
     const protectedMath = [];
+    const protect = math => {
+      protectedMath.push(normalizeAlignedTags(math));
+      return `\uE100${protectedMath.length - 1}\uE101`;
+    };
     const normalizeAlignedTags = math => String(math || '').replace(
       /\\begin\{(aligned\*?|alignedat\*?)\}([\s\S]*?)\\end\{\1\}/g,
       (_, environment, body) => {
@@ -910,16 +925,15 @@
       const opens = (body.match(/\(/g) || []).length;
       const closes = (body.match(/\)/g) || []).length;
       if (body.endsWith(')') && closes > opens) { body = body.slice(0, -1); suffix = ')' + suffix; }
-      return body ? `${prefix}$${body}$${suffix}` : `${prefix}${formula}`;
+      return body ? `${prefix}${protect(`$${body}$`)}${suffix}` : `${prefix}${formula}`;
     };
     let text = String(value || '')
       .replace(/[\u200B-\u200D\uFEFF]/g, '')
       // JSON có thể giữ lại hai dấu gạch chéo trước delimiter MathJax.
       .replace(/\\\\([\[\]()])/g, '\\$1')
-      .replace(/(\$\$[\s\S]*?\$\$|\\\[[\s\S]*?\\\]|\\\([\s\S]*?\\\)|\$(?:\\.|[^$\n])+\$)/g, match => {
-        protectedMath.push(normalizeAlignedTags(match));
-        return `\uE100${protectedMath.length - 1}\uE101`;
-      });
+      .replace(guideMathPattern(), protect)
+      .replace(/\\begin\{(aligned\*?|alignedat\*?|cases|gathered|matrix|pmatrix|bmatrix)\}([\s\S]*?)\\end\{\1\}/g,
+        block => protect(`$$${block}$$`));
 
     // Gemini đôi khi trả TeX đúng cú pháp nhưng quên delimiter MathJax.
     // Bọc nguyên dòng đối với các phép biến đổi/công thức độc lập.
@@ -930,7 +944,7 @@
       const startsAsMath = /^(?:\\(?:frac|sqrt|sum|prod|lim|boxed)\b|[+\-]?(?:\d+)?[A-Za-z](?:[A-Za-z0-9_{}^+\-*/.]|\\[A-Za-z]+)*\s*(?:=|>|<|\\(?:ge|le|ne)\b))/.test(trimmed);
       const hasRelation = /(?:=|>|<|\\tag\{|\\to\b|→|≥|≤|≠)/.test(trimmed);
       const hasProse = /[À-ỹ]/.test(trimmed) || /\b(?:therefore|hence|since|because|suppose|then|thus|where|for)\b/i.test(trimmed);
-      if (!hasProse && hasRelation && (hasLatex || startsAsMath || /[_^]/.test(trimmed))) return `\\[${trimmed}\\]`;
+      if (!hasProse && hasRelation && (hasLatex || startsAsMath || /[_^]/.test(trimmed))) return protect(`\\[${trimmed}\\]`);
       return line;
     }).join('\n');
 
@@ -955,23 +969,28 @@
 
   function formatMarkdownToHtml(text) {
     if (!text) return '';
-    // Chuẩn hóa HTML đơn giản do AI đôi khi trả lẫn với Markdown. Không bỏ qua
-    // bước sửa MathJax chỉ vì phản hồi có một thẻ <p> hoặc <br>.
-    text = String(text)
+    const math = [];
+    const protect = formula => { math.push(formula); return `\uE110${math.length - 1}\uE111`; };
+    const restore = value => value.replace(/\uE110(\d+)\uE111/g, (_, index) => math[Number(index)]);
+    // First preserve formulas while translating legacy prose HTML into Markdown.
+    text = String(text).replace(guideMathPattern(), protect)
       .replace(/<br\s*\/?\s*>/gi, '\n')
       .replace(/<\/p\s*>/gi, '\n\n')
       .replace(/<p(?:\s[^>]*)?>/gi, '')
       .replace(/<(?:strong|b)>/gi, '**').replace(/<\/(?:strong|b)>/gi, '**')
       .replace(/<(?:em|i)>/gi, '*').replace(/<\/(?:em|i)>/gi, '*')
       .replace(/<\/?(?:div|span|ul|ol|li)(?:\s[^>]*)?>/gi, '\n');
-    text = normalizeBareGuideMath(text);
-    // Chuyển markdown **bold** thành <strong>
-    let formatted = text
+    const decoded = document.createElement('textarea');
+    decoded.innerHTML = text;
+    text = normalizeBareGuideMath(restore(decoded.value));
+    math.length = 0;
+    // Tokenize again after recovering bare TeX. Restore only AFTER all prose transforms.
+    text = text.replace(guideMathPattern(), protect);
+    const formatted = escapeGuideHtml(text)
       .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
       .replace(/\*(.*?)\*/g, '<em>$1</em>');
-    // Chuyển dòng đôi thành <p>
-    const paragraphs = formatted.split(/\n\n+/);
-    return paragraphs.map(p => `<p>${p.replace(/\n/g, '<br>')}</p>`).join('');
+    const html = formatted.split(/\n\n+/).map(p => `<p>${p.replace(/\n/g, '<br>')}</p>`).join('');
+    return html.replace(/\uE110(\d+)\uE111/g, (_, index) => escapeGuideHtml(math[Number(index)]));
   }
 
   // TỰ ĐỘNG GẮN NÚT "AI HƯỚNG DẪN GIẢI" VÀO TẤT CẢ CÁC CÂU HỎI TRONG ĐỀ THI
