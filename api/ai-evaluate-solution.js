@@ -1,3 +1,4 @@
+import { canAccessProblem } from '../lib/problem-access.js';
 import { mathematicalAuditInstruction, auditEvidence } from '../lib/math-audit.js';
 import { retrieveVerifiedContext } from '../lib/rag-retrieval.js';
 import { ObjectId } from 'mongodb';
@@ -132,6 +133,7 @@ export default async function handler(req, res) {
       if (ObjectId.isValid(problemRef)) filters.unshift({ _id: new ObjectId(problemRef) });
       const db = await getDb();
       const registeredProblem = await db.collection('problems').findOne({ $or: filters });
+      if (registeredProblem && !canAccessProblem(registeredProblem, session)) return res.status(403).json({ success: false, error: 'Bạn không có quyền truy cập bài toán này' });
       if (registeredProblem) {
         const registeredSet = registeredProblem.setId
           ? await db.collection('content_sets').findOne({ _id: registeredProblem.setId }, { projection: { status: 1 } })

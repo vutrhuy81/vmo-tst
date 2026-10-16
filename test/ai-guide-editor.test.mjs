@@ -13,7 +13,7 @@ const originalGuide = {
   quality: { verified: true, score: '5.0/5.0', verifier: 'GPT' }
 };
 
-async function createHarness({ role = 'admin', persisted = true } = {}) {
+async function createHarness({ role = 'admin', persisted = true, guide = originalGuide, support = false, statement = '' } = {}) {
   const dom = new JSDOM(`<!doctype html><html><body><div class="tab-pane active">
     <article class="exam-card"><h3 class="exam-title">Đề kiểm thử</h3>
       <div class="problem-item" id="question-2" data-content-key="tst:tst-da-nang:day-1:question-2"
@@ -36,14 +36,17 @@ async function createHarness({ role = 'admin', persisted = true } = {}) {
   window.showVMOToast = () => {};
   window.alert = () => {};
   window.setTimeout = callback => { callback(); return 1; };
-  window.fetch = async () => ({
+  const guideRequests = [];
+  window.fetch = async (url, options) => {
+    guideRequests.push(JSON.parse(options.body));
+    return ({
     ok: true,
-    json: async () => ({ success: true, data: originalGuide })
-  });
+    json: async () => ({ success: true, data: guide })
+  }); };
   window.VMODataService = {
     getLatestAiGuide: async () => persisted ? {
       _id: savedId,
-      aiGuide: originalGuide,
+      aiGuide: guide,
       aiGuideAdminEdited: false
     } : null,
     updateAiGuide: async (...args) => {
@@ -57,10 +60,17 @@ async function createHarness({ role = 'admin', persisted = true } = {}) {
   };
   window.eval(engineSource);
   window.document.dispatchEvent(new window.Event('DOMContentLoaded'));
+  if (support) {
+    const card = window.document.querySelector('.problem-item');
+    card.dataset.sourceGroup = 'math_support';
+    card.dataset.sourceType = 'standalone_question';
+    card.dataset.contentKey = 'math_support:owner:clipboard-question';
+  }
+  if (statement) window.document.querySelector('.problem-content').setAttribute('data-raw-math', statement);
   const button = window.document.querySelector('.btn-ai-guide');
   await window.openAIGuide(button);
   const panel = window.document.querySelector('.ai-guide-panel');
-  return { window, panel, problemId: panel.id.replace('ai-panel-', ''), updateCalls, submitCalls };
+  return { window, panel, problemId: panel.id.replace('ai-panel-', ''), updateCalls, submitCalls, guideRequests };
 }
 
 const saved = await createHarness({ role: 'admin', persisted: true });
@@ -98,4 +108,51 @@ assert.match(apiSource, /if \(action === 'update_ai_guide'\)[\s\S]*submissionKin
 assert.match(apiSource, /if \(!requireAdmin\(session, res\)\) return;[\s\S]*action === 'update_ai_guide'/,
   'API cập nhật AI Guide phải nằm sau cổng quyền admin');
 
-console.log('Admin AI Guide content editor: OK');
+// Reproduce guide rendering on standalone uploads, both fresh and restored from DB.
+const mathGuide = {
+  ...originalGuide,
+  knowledge: String.raw`**Bổ đề.** Cho $a*b*c$ và $x<y<z$.`,
+  intuition: String.raw`Xét \(u_{n+1}=u_n^2\) và \[x^2+y^2\ge2xy.\]`,
+  solution: String.raw`Ta có:
+$$\begin{aligned}
+a_1&=1\\
+
+ a_{n+1}&=a_n+1\tag{1}
+\end{aligned}$$
+Do đó $a_n=n$.`,
+  pitfalls: String.raw`Với n\ge1, ta có u_n\to+\infty. Không dùng <img src=x onerror="alert(1)">.`
+};
+for (const persisted of [false, true]) {
+  const h = await createHarness({ guide: mathGuide, support: true, persisted, statement: String.raw`Cho $x<y<z$. Tính $a*b*c$.` });
+  if (!persisted) assert.equal(h.guideRequests[0].problemContent, String.raw`Cho $x<y<z$. Tính $a*b*c$.`, 'Raw problem math reaches the AI unchanged');
+  const field = name => h.panel.querySelector(`[data-guide-field="${name}"] .ai-section-content`);
+  assert.ok(field('knowledge').textContent.includes('$a*b*c$'), 'Markdown must not consume multiplication stars in math');
+  assert.ok(field('knowledge').textContent.includes('$x<y<z$'), 'HTML parsing must not consume inequalities or delimiters');
+  assert.equal(field('knowledge').querySelector('em'), null, 'No emphasis tags inside math');
+  assert.ok(field('knowledge').querySelector('strong'), 'Prose Markdown still renders');
+  assert.ok(field('intuition').textContent.includes(String.raw`\(u_{n+1}=u_n^2\)`));
+  assert.match(field('solution').textContent, /\$\$\\begin\{aligned\}[\s\S]*\\end\{aligned\}\$\$/);
+  assert.ok(field('solution').textContent.includes(String.raw`a_1&=1\\`), 'Aligned rows and ampersands remain TeX');
+  assert.equal(field('solution').querySelectorAll('p').length, 1, 'Blank lines inside display math cannot split paragraphs');
+  assert.equal(field('pitfalls').querySelector('img'), null, 'AI HTML is not executable markup');
+  assert.ok(field('pitfalls').textContent.includes('$n\\ge1$'), 'Bare formula recovery remains available');
+  h.window.editAIGuideContent(h.problemId);
+  assert.equal(h.panel.querySelector('[data-guide-editor="solution"]').value, mathGuide.solution, 'Source is preserved for editing/saving');
+  h.window.applyAIGuideEdits(h.problemId);
+  assert.ok(field('knowledge').textContent.includes('$a*b*c$'), 'Admin edits use the same safe formatter');
+  h.window.close();
+}
+const bare = await createHarness({ support: true, guide: {
+  ...originalGuide,
+  knowledge: '<p><strong>Bổ đề</strong>: $x<y<z$.</p>',
+  solution: String.raw`\begin{aligned}a_1&=1\\a_{n+1}&=a_n+1\end{aligned}`,
+  pitfalls: String.raw`Ta có u_n^2=1. Với n\ge1, ta có u_n\to+\infty.`
+} });
+const bareSolution = bare.panel.querySelector('[data-guide-field="solution"] .ai-section-content');
+assert.equal(bareSolution.textContent.trim(), String.raw`$$\begin{aligned}a_1&=1\\a_{n+1}&=a_n+1\end{aligned}$$`, 'Bare multiline environments get one complete display delimiter');
+assert.ok(bare.panel.querySelector('[data-guide-field="knowledge"] strong'), 'Saved prose HTML remains readable');
+const recovered = bare.panel.querySelector('[data-guide-field="pitfalls"] .ai-section-content').textContent;
+assert.ok(recovered.includes('$u_n^2=1$'), 'Newly recovered formulas must not receive nested delimiters');
+assert.ok(!/[\uE100\uE101\uE110\uE111]/.test(bare.panel.textContent), 'No internal placeholders reach the UI');
+bare.window.close();
+console.log('Admin AI Guide editor and standalone LaTeX rendering: OK');

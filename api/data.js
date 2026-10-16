@@ -1,3 +1,6 @@
+import { canAccessProblem, supportVisibility } from '../lib/problem-access.js';
+import { handleMathSupport } from '../lib/math-support.js';
+import { specializedSchool } from '../lib/specialized-schools.js';
 import { runBenchmarkCase, validateBenchmarkCase } from '../lib/rag-benchmark.js';
 import { checkRateLimit } from '../lib/ai.js';
 import { RAG_VERSION } from '../lib/rag-core.js';
@@ -10,7 +13,7 @@ import { deleteAiGuideRecord, learningScope, recordActivity, summarizeLearning }
 import { cleanTrendTheory } from '../lib/trend-theory-storage.js';
 import { buildSubmissionContentUpdate, buildSubmissionVerificationUpdate } from '../lib/submission-verification.js';
 
-const ALLOWED_RESOURCES = new Set(['documents', 'exams', 'exam_catalog', 'home_stats', 'exam_image', 'content_sets', 'content_blocks', 'problems', 'content_revisions', 'submissions', 'submission_image', 'events', 'activity_feed', 'learning_overview', 'exam_trend_reports', 'trend_theories', 'rag_status', 'rag_logs']);
+const ALLOWED_RESOURCES = new Set(['math_support', 'math_support_image', 'documents', 'exams', 'exam_catalog', 'home_stats', 'exam_image', 'content_sets', 'content_blocks', 'problems', 'content_revisions', 'submissions', 'submission_image', 'events', 'activity_feed', 'learning_overview', 'exam_trend_reports', 'trend_theories', 'rag_status', 'rag_logs']);
 const TST_REGIONS = new Set(['BAC', 'TRUNG', 'NAM']);
 const EXAM_TREND_TOPICS = [
   'Dãy số và Giới hạn dãy số', 'Phương trình hàm', 'Số học và dãy số',
@@ -250,6 +253,7 @@ export default async function handler(req, res) {
 
   try {
     const db = await getDb();
+    if (await handleMathSupport({ db, req, res, session })) return;
 
     if (req.method === 'GET') {
       const resource = cleanText(req.query?.resource, 30);
@@ -433,7 +437,7 @@ export default async function handler(req, res) {
         if (view === 'summary') {
           const projection = {
             examKey: 1, targetAnchor: 1, category: 1, title: 1, province: 1,
-            provinceOrder: 1, region: 1, year: 1, grade: 1, setNumber: 1, dayNumber: 1,
+            schoolId: 1, schoolName: 1, schoolAuthority: 1, provinceId: 1, provinceOrder: 1, region: 1, year: 1, grade: 1, setNumber: 1, dayNumber: 1,
             examDate: 1, duration: 1, description: 1, status: 1, origin: 1, sourceImageCount: 1
           };
           const exams = await db.collection('exams').find(examFilter, { projection })
@@ -509,7 +513,7 @@ export default async function handler(req, res) {
         });
       }
 
-      const filter = {};
+      const filter = ['problems', 'content_sets'].includes(resource) ? supportVisibility(session, resource === 'content_sets' ? 'group' : 'sourceGroup') : {};
       let projection;
       if (resource === 'content_sets') {
         if (req.query?.group) filter.group = cleanText(req.query.group, 80);
@@ -543,8 +547,8 @@ export default async function handler(req, res) {
         }
         if (req.query?.catalogRules === '1' && session.role !== 'admin') {
           const [sets, problems] = await Promise.all([
-            db.collection('content_sets').find({}, { projection: { status: 1 } }).toArray(),
-            db.collection('problems').find({}, { projection: {
+            db.collection('content_sets').find(supportVisibility(session, 'group'), { projection: { status: 1 } }).toArray(),
+            db.collection('problems').find(supportVisibility(session), { projection: {
               contentKey: 1, setId: 1, setTitle: 1, title: 1, shortLabel: 1,
               topic: 1, maxScore: 1, order: 1, status: 1,
               allowSubmission: 1, allowAiEvaluation: 1
@@ -568,7 +572,7 @@ export default async function handler(req, res) {
         if (session.role !== 'admin') {
           filter.status = 'published';
           const publishedSets = await db.collection('content_sets')
-            .find({ status: 'published' }, { projection: { _id: 1 } })
+            .find({ status: 'published', ...supportVisibility(session, 'group') }, { projection: { _id: 1 } })
             .toArray();
           const publishedSetIds = publishedSets.map(item => item._id);
           if (filter.setId) {
@@ -683,6 +687,7 @@ export default async function handler(req, res) {
     if (!body) return res.status(400).json({ success: false, error: 'JSON không hợp lệ' });
     const { action, payload = {} } = body;
     const now = new Date();
+    if (await handleMathSupport({ db, req, res, session, action, payload })) return;
 
     if (action === 'submit_solution') {
       const submittedProblemId = cleanText(payload.problemId, 180);
@@ -701,6 +706,7 @@ export default async function handler(req, res) {
       if (submittedProblemKey) problemFilters.push({ contentKey: submittedProblemKey });
       problemFilters.push({ id: submittedProblemId });
       const registeredProblem = await db.collection('problems').findOne({ $or: problemFilters });
+      if (registeredProblem && !canAccessProblem(registeredProblem, session)) return res.status(403).json({ success: false, error: 'Bạn không có quyền truy cập bài toán này' });
       if (registeredProblem && session.role !== 'admin') {
         const registeredSet = registeredProblem.setId
           ? await db.collection('content_sets').findOne({ _id: registeredProblem.setId }, { projection: { status: 1 } })
@@ -805,7 +811,11 @@ export default async function handler(req, res) {
       return res.status(201).json({ success: true, item: { _id: result.insertedId, ...doc } });
     }
 
-    if (!requireAdmin(session, res)) return;
+    if (action === 'update_catalog_content' && session.role !== 'admin') {
+      const id = objectId(cleanText(payload.id, 80));
+      const problem = id ? await db.collection('problems').findOne({ _id: id }) : null;
+      if (!problem || problem.sourceGroup !== 'math_support' || !canAccessProblem(problem, session)) return res.status(403).json({ success: false, error: 'Chỉ được chỉnh sửa bài toán của bạn' });
+    } else if (!requireAdmin(session, res)) return;
 
     if (action === 'rag_benchmark') {
       if (!checkRateLimit(`${session.username}:rag-benchmark`, 30)) return res.status(429).json({ success: false, error: 'Tối đa 30 ca benchmark/phút.' });
@@ -821,7 +831,7 @@ export default async function handler(req, res) {
       const examId = objectId(cleanText(payload.examId, 80));
       if (!examId) return res.status(400).json({ success: false, error: 'ID đề thi không hợp lệ' });
       const exam = await db.collection('exams').findOne({ _id: examId, status: { $ne: 'deleted' } });
-      if (!exam || !['tst-national', 'history-dn-qn', 'vmo-mock', 'vmo-official', 'imo-olympic', 'olympic-30-4', 'duyen-hai-bac'].includes(exam.category) || !exam.targetAnchor) {
+      if (!exam || !['tst-national', 'history-dn-qn', 'vmo-mock', 'vmo-official', 'imo-olympic', 'olympic-30-4', 'duyen-hai-bac', 'specialized-admission'].includes(exam.category) || !exam.targetAnchor) {
         return res.status(404).json({ success: false, error: 'Không tìm thấy đề thi trong catalog' });
       }
       const examIdText = String(examId);
@@ -875,7 +885,7 @@ export default async function handler(req, res) {
       if (active) return res.status(409).json({ success: false, error: `Câu ${questionNumber} đã có trong đề này` });
       const isMock = exam.category === 'vmo-mock';
       const isRegional = exam.category === 'history-dn-qn';
-      const categoryGroup = { 'vmo-official': 'vmo_official', 'imo-olympic': 'imo_olympic', 'olympic-30-4': 'olympic_30_4', 'duyen-hai-bac': 'duyen_hai_bac' }[exam.category];
+      const categoryGroup = { 'vmo-official': 'vmo_official', 'imo-olympic': 'imo_olympic', 'olympic-30-4': 'olympic_30_4', 'duyen-hai-bac': 'duyen_hai_bac', 'specialized-admission': 'specialized_admission' }[exam.category];
       const day = Number(exam.dayNumber) || 1;
       const setKey = exam.setKey || (isMock ? `mock:${exam.targetAnchor}`
         : `${categoryGroup || (isRegional ? 'danang_quangnam' : 'tst')}:${exam.targetAnchor}:day-${day}${!isRegional && !categoryGroup && exam.year !== '2026-2027' ? `:year-${slugKey(exam.year)}` : ''}`);
@@ -927,7 +937,7 @@ export default async function handler(req, res) {
           { $set: { title, year, duration, examDate, description: cleanText(payload.description, 5000), updatedBy: session.username, updatedAt: now } },
           { returnDocument: 'after' });
         if (exam.targetAnchor) {
-          const group = { 'vmo-official': 'vmo_official', 'imo-olympic': 'imo_olympic', 'olympic-30-4': 'olympic_30_4', 'duyen-hai-bac': 'duyen_hai_bac',
+          const group = { 'vmo-official': 'vmo_official', 'imo-olympic': 'imo_olympic', 'olympic-30-4': 'olympic_30_4', 'duyen-hai-bac': 'duyen_hai_bac', 'specialized-admission': 'specialized_admission',
             'history-dn-qn': 'danang_quangnam' }[exam.category] || 'tst';
           const setKey = exam.setKey || (exam.category === 'vmo-mock' ? `mock:${exam.targetAnchor}`
             : `${group}:${exam.targetAnchor}:day-${Number(exam.dayNumber) || 1}${group === 'tst' && exam.year !== '2026-2027' ? `:year-${slugKey(exam.year)}` : ''}`);
@@ -1148,7 +1158,7 @@ export default async function handler(req, res) {
       const id = objectId(cleanText(payload.id, 80));
       const content = cleanText(payload.content, 50000);
       const referenceSolution = cleanText(payload.referenceSolution, 100000);
-      const referenceSolutionVerified = payload.referenceSolutionVerified === true && Boolean(referenceSolution);
+      const referenceSolutionVerified = session.role === 'admin' && payload.referenceSolutionVerified === true && Boolean(referenceSolution);
       const referenceLinks = cleanReferenceLinks(payload.referenceLinks);
       const changeNote = cleanText(payload.changeNote, 500);
       if (!id || !content) {
@@ -1156,7 +1166,7 @@ export default async function handler(req, res) {
       }
       const current = await db.collection('problems').findOne({ _id: id });
       if (!current) return res.status(404).json({ success: false, error: 'Không tìm thấy câu hỏi' });
-      const resolvePredictionReview = payload.resolvePredictionReview === true &&
+      const resolvePredictionReview = session.role === 'admin' && payload.resolvePredictionReview === true &&
         current.origin === 'prediction' && current.predictionReview?.status === 'gpt_rejected';
       if (resolvePredictionReview && content === current.content) {
         return res.status(400).json({ success: false, error: 'Cần sửa nội dung câu hỏi trước khi xác nhận đã khắc phục nhận xét GPT.' });
@@ -1182,8 +1192,8 @@ export default async function handler(req, res) {
         createdAt: now
       });
       const nextVersion = Number(current.version || 1) + 1;
-      await db.collection('problems').updateOne(
-        { _id: id },
+      const changed = await db.collection('problems').updateOne(
+        { _id: id, version: current.version ?? { $exists: false } },
         { $set: {
           content, referenceSolution, referenceLinks, referenceSolutionVerified,
           referenceSolutionVerifiedBy: referenceSolutionVerified ? session.username : '',
@@ -1196,6 +1206,7 @@ export default async function handler(req, res) {
           } : {})
         } }
       );
+      if (!changed.matchedCount) return res.status(409).json({ success: false, error: 'Nội dung đã thay đổi. Vui lòng tải lại.' });
       await db.collection('content_revisions').createIndex({ problemId: 1, createdAt: -1 });
       await recordActivity(db, session, 'catalog.updated', { problemKey: current.contentKey, itemTitle: current.title });
       return res.status(200).json({ success: true, item: { id: String(id), version: nextVersion } });
@@ -1324,15 +1335,19 @@ export default async function handler(req, res) {
     if (action === 'create_exam_from_ocr') {
       const isMock = payload.destination === 'mock';
       const isRegional = payload.destination === 'regional';
-      const catalogDestination = { vmo: { category: 'vmo-official', prefix: 'vmo-', group: 'vmo_official' }, olympic: { category: 'imo-olympic', prefix: 'olympic-', group: 'imo_olympic' }, olympic30: { category: 'olympic-30-4', prefix: 'olympic30-', group: 'olympic_30_4', graded: true }, duyenhai: { category: 'duyen-hai-bac', prefix: 'duyenhai-', group: 'duyen_hai_bac', graded: true } }[payload.destination];
-      if (payload.destination && !['mock', 'tst', 'regional', 'vmo', 'olympic', 'olympic30', 'duyenhai'].includes(payload.destination)) return res.status(400).json({ success: false, error: 'Loại đề thi không hợp lệ' });
+      const catalogDestination = { admission: { category: 'specialized-admission', prefix: 'admission-', group: 'specialized_admission' }, vmo: { category: 'vmo-official', prefix: 'vmo-', group: 'vmo_official' }, olympic: { category: 'imo-olympic', prefix: 'olympic-', group: 'imo_olympic' }, olympic30: { category: 'olympic-30-4', prefix: 'olympic30-', group: 'olympic_30_4', graded: true }, duyenhai: { category: 'duyen-hai-bac', prefix: 'duyenhai-', group: 'duyen_hai_bac', graded: true } }[payload.destination];
+      if (payload.destination && !['mock', 'tst', 'regional', 'vmo', 'olympic', 'olympic30', 'duyenhai', 'admission'].includes(payload.destination)) return res.status(400).json({ success: false, error: 'Loại đề thi không hợp lệ' });
       const grade = Number(payload.grade);
       if (catalogDestination?.graded && ![10, 11].includes(grade)) return res.status(400).json({ success: false, error: 'Vui lòng chọn Lớp 10 hoặc Lớp 11' });
-      const gradeMetadata = catalogDestination?.graded ? { grade } : {};
+      const admission = payload.destination === 'admission';
+      const school = admission ? specializedSchool(cleanText(payload.schoolId, 150)) : null;
+      if (admission && !school) return res.status(400).json({ success: false, error: 'Vui lòng chọn trường trong danh mục trường chuyên' });
+      const schoolMetadata = school ? { schoolId: school.id, schoolName: school.name, schoolAuthority: school.authority, provinceId: school.provinceId } : {};
+      const gradeMetadata = { ...(catalogDestination?.graded ? { grade } : {}), ...schoolMetadata };
       const province = cleanText(payload.province, 120);
       const targetAnchor = cleanKey(payload.targetAnchor, 220);
       const requestedRegion = cleanText(payload.region, 20).toUpperCase();
-      const region = TST_REGIONS.has(requestedRegion) ? requestedRegion : 'BAC';
+      const region = school?.region || (TST_REGIONS.has(requestedRegion) ? requestedRegion : 'BAC');
       const dayNumber = Number(payload.dayNumber);
       const setNumber = Number(payload.setNumber);
       const year = cleanText(payload.year, 40) || '2026-2027';
@@ -1348,6 +1363,7 @@ export default async function handler(req, res) {
         return res.status(400).json({ success: false, error: 'Thiếu tỉnh/thành phố, vị trí frontend hoặc danh sách câu hỏi' });
       }
 
+      if (admission && (province !== school.province || targetAnchor !== `admission-${school.id}-${slugKey(year)}` || !/^20\d{2}-20\d{2}$/.test(year) || Number(year.slice(5)) !== Number(year.slice(0, 4)) + 1)) return res.status(400).json({ success: false, error: 'Trường, tỉnh/thành, năm học và mã đề không khớp' });
       const provinceSlug = slugKey(province);
       const yearSlug = slugKey(year);
       if (catalogDestination?.graded && targetAnchor !== `${catalogDestination.prefix}${provinceSlug}-${yearSlug}-grade-${grade}`) return res.status(400).json({ success: false, error: 'Mã đề không khớp kỳ thi, năm và khối lớp' });
@@ -1357,11 +1373,11 @@ export default async function handler(req, res) {
           return res.status(400).json({ success: false, error: 'Đơn vị lưu trữ không khớp kho Đà Nẵng–Quảng Nam' });
         }
       }
-      const examKey = isMock ? `mock:set-${setNumber}:${yearSlug}:day-${dayNumber}` : `${catalogDestination?.group || (isRegional ? 'regional' : 'tst')}:${provinceSlug}:${yearSlug}${catalogDestination?.graded ? `:grade-${grade}` : ''}:day-${dayNumber}`;
+      const examKey = isMock ? `mock:set-${setNumber}:${yearSlug}:day-${dayNumber}` : `${catalogDestination?.group || (isRegional ? 'regional' : 'tst')}:${school?.id || provinceSlug}:${yearSlug}${catalogDestination?.graded ? `:grade-${grade}` : ''}:day-${dayNumber}`;
       // Một tỉnh có thể có hai đề với các số câu trùng nhau. Ngày thi phải
       // thuộc khóa ổn định để ngày 2 không ghi đè câu hỏi/lịch sử của ngày 1.
       const setKey = isMock ? `mock:${targetAnchor}` : `${catalogDestination?.group || (isRegional ? 'danang_quangnam' : 'tst')}:${targetAnchor}:day-${dayNumber}${!isRegional && !catalogDestination && year !== '2026-2027' ? `:year-${yearSlug}` : ''}`;
-      const title = cleanText(payload.title, 500) || (isMock ? `Bộ đề thi thử VMO số ${setNumber} — Ngày ${dayNumber}` : catalogDestination ? `Đề ${province} ${year} — Ngày ${dayNumber}` : `Đề thi lập đội tuyển ${province} — Ngày ${dayNumber}`);
+      const title = cleanText(payload.title, 500) || (isMock ? `Bộ đề thi thử VMO số ${setNumber} — Ngày ${dayNumber}` : catalogDestination ? `Đề ${school?.name || province} ${year} — Ngày ${dayNumber}` : `Đề thi lập đội tuyển ${province} — Ngày ${dayNumber}`);
       const status = payload.status === 'draft' ? 'draft' : 'published';
       const existingExam = await db.collection('exams').findOne({ examKey }, { projection: { _id: 1 } });
       if (existingExam && payload.replaceExisting !== true) {

@@ -391,6 +391,7 @@
     if (btnMock) setNodeText(btnMock, '🎯 Bộ đề thi thử VMO', UI_TRANSLATIONS.en.tabMock, isEn);
     if (btnTst) setNodeText(btnTst, '🏛️ Đề TST', UI_TRANSLATIONS.en.tabTst, isEn);
     const btnVmo = document.getElementById('tab-btn-vmo');
+    if (document.getElementById('tab-btn-support')) setNodeText(document.getElementById('tab-btn-support'), '🧩 Hỗ trợ giải toán', '🧩 Math Problem Support', isEn);
     const btnOlympic = document.getElementById('tab-btn-olympic');
     if (document.getElementById('tab-btn-olympic30')) setNodeText(document.getElementById('tab-btn-olympic30'), '🏅 Đề Olympic 30/4', '🏅 April 30 Olympiad', isEn);
     if (document.getElementById('tab-btn-duyenhai')) setNodeText(document.getElementById('tab-btn-duyenhai'), '🌊 Đề Duyên hải miền Bắc', '🌊 Northern Coastal Olympiad', isEn);
