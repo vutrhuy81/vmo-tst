@@ -25,6 +25,9 @@ export function build() {
 
   let html = fs.readFileSync(templatePath, 'utf8');
 
+  const schoolRegistry = fs.readFileSync(path.join(__dirname, 'data/specialized-schools.json'), 'utf8');
+  html = html.replace('<!-- INJECT:SPECIALIZED_SCHOOL_REGISTRY -->', `<script id="specialized-school-registry" type="application/json">${schoolRegistry.replace(/</g, '\\u003c')}</script>`);
+
   // Tạo mã version timestamp động mới cho mỗi lần build để chống triệt để trình duyệt cache script cũ
   const buildVersion = Date.now();
   html = html.replace(/\?v=[a-zA-Z0-9_-]+/g, `?v=${buildVersion}`);
@@ -44,6 +47,7 @@ export function build() {
     { tag: '<!-- INJECT:TAB_TST -->', file: 'content/tab-tst.html', apiTab: 'tab-tst',
       title: 'TUYỂN TẬP ĐỀ THI CHỌN ĐỘI TUYỂN HSGQG (TST QUA CÁC NĂM)' },
     { tag: '<!-- INJECT:TAB_VMO -->', file: 'content/tab-tst.html', apiTab: 'tab-vmo', title: 'NGÂN HÀNG ĐỀ VMO' },
+    { tag: '<!-- INJECT:TAB_ADMISSION -->', file: 'content/tab-tst.html', apiTab: 'tab-admission', title: 'NGÂN HÀNG ĐỀ THI VÀO LỚP 10 CHUYÊN' },
     { tag: '<!-- INJECT:TAB_OLYMPIC30 -->', file: 'content/tab-tst.html', apiTab: 'tab-olympic30', title: 'NGÂN HÀNG ĐỀ OLYMPIC 30/4 — LỚP 10, LỚP 11' },
     { tag: '<!-- INJECT:TAB_DUYENHAI -->', file: 'content/tab-tst.html', apiTab: 'tab-duyenhai', title: 'NGÂN HÀNG ĐỀ DUYÊN HẢI MIỀN BẮC — LỚP 10, LỚP 11' },
     { tag: '<!-- INJECT:TAB_OLYMPIC -->', file: 'content/tab-tst.html', apiTab: 'tab-olympic', title: 'NGÂN HÀNG ĐỀ IMO–OLYMPIC' },

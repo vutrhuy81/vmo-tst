@@ -129,3 +129,10 @@ html { scroll-padding-top: var(--content-offset, 155px); }
   .layout-container .sidebar, .tab-btn, .vmo-modal-container { transition-duration: 0s; animation-duration: 0s; }
 }
 @media print { .mobile-toc-toggle, .account-menu-toggle, .mobile-sidebar-header, .sidebar-backdrop { display: none !important; } }
+
+/* Specialized grade-10 admissions directory. */
+.admission-province > summary { cursor:pointer; padding:9px 4px; font-weight:750; color:var(--primary); }
+.admission-school { margin-left:10px; }
+.admission-school > summary { cursor:pointer; padding:7px 4px; font-size:.8rem; overflow-wrap:anywhere; }
+.admission-school .admission-empty { display:block; padding:4px 10px; color:var(--muted); }
+#admissionSchoolSearch { box-sizing:border-box; font:inherit; padding:8px; border:1px solid var(--border); border-radius:6px; }
