@@ -120,7 +120,7 @@ assert.equal(window.syncContentCatalogToDatabase, undefined);
 window.toggleAddDocForm();
 const select = window.document.getElementById('docTargetAnchor');
 assert.equal(window.document.getElementById('docDayNumber').options.length, 4);
-assert.deepEqual(Array.from(window.document.getElementById('docDestination').options).map(option => option.value), ['tst', 'vmo', 'olympic', 'olympic30', 'duyenhai', 'regional']);
+assert.deepEqual(Array.from(window.document.getElementById('docDestination').options).map(option => option.value), ['tst', 'vmo', 'olympic', 'olympic30', 'duyenhai', 'admission', 'regional']);
 for (const destination of ['vmo', 'olympic']) {
   window.document.getElementById('docDestination').value = destination;
   window.syncDocumentDestination(true);
