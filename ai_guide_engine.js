@@ -350,6 +350,7 @@
             ${canEditGuide ? `<button type="button" class="btn-guide-action btn-ai-guide-apply" onclick="applyAIGuideEdits('${problemId}')" style="display:none;color:#047857;font-weight:600;">👁️ Áp dụng & xem trước</button>` : ''}
             ${canEditGuide ? `<button type="button" class="btn-guide-action btn-ai-guide-cancel" onclick="cancelAIGuideEdits('${problemId}')" style="display:none;">↩️ Hủy chỉnh sửa</button>` : ''}
             ${canDeleteSaved ? `<button type="button" class="btn-guide-action btn-ai-guide-delete" onclick="deleteSavedAIGuide('${problemId}')" style="color:#be123c;" title="Xóa lời giải AI đã lưu trong MongoDB">${isEn ? '🗑️ Delete saved guide' : '🗑️ Xóa lời giải đã lưu'}</button>` : ''}
+            <button type="button" class="btn-guide-action btn-ai-guide-print" onclick="printAIGuide('${problemId}')" title="${isEn ? 'Print or save as PDF' : 'In hoặc lưu kết quả dưới dạng PDF'}">${isEn ? '🖨️ Print / Export PDF' : '🖨️ In / Xuất PDF'}</button>
             <button type="button" class="btn-guide-action" onclick="copyAIGuideText('${problemId}')" title="${copyTitle}">
               ${copyBtn}
             </button>
@@ -600,6 +601,106 @@
     const finalPanel = document.getElementById(`ai-panel-${problemId}`);
     if (finalPanel && window.MathJax?.typesetPromise) {
       window.MathJax.typesetPromise([finalPanel]).catch(() => {});
+    }
+  };
+
+  // Render from source in an isolated root, then copy the finished MathJax output.
+  // No second AI request, no database write, and no fixed-delay print race.
+  window.printAIGuide = async function(problemId) {
+    const context = aiGuideContexts.get(problemId);
+    const panel = document.getElementById(`ai-panel-${problemId}`);
+    if (!context?.rawGuide || !panel) return false;
+    const button = panel.querySelector('.btn-ai-guide-print');
+    if (button?.disabled) return false;
+    const isEn = window.currentLang === 'en';
+    // Open synchronously in the click handler so browsers do not block an awaited popup.
+    const printWindow = window.open('', '_blank');
+    if (!printWindow) {
+      alert(isEn ? 'Allow popups to print or save this guide as PDF.' : 'Vui lòng cho phép cửa sổ bật lên để in hoặc lưu PDF.');
+      return false;
+    }
+    if (button) button.disabled = true;
+    const output = printWindow.document;
+    let root;
+    try {
+      output.open();
+      output.write('<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"></head><body><p role="status"></p></body></html>');
+      output.close();
+      output.documentElement.lang = isEn ? 'en' : 'vi';
+      output.title = `${isEn ? 'AI Solution Guide' : 'AI Hướng dẫn giải'} - ${context.problemTitle || 'MathApp'}`;
+      output.querySelector('[role="status"]').textContent = isEn ? 'Preparing equations for printing…' : 'Đang chuẩn bị công thức để in…';
+      const style = output.createElement('style');
+      style.textContent = `
+        @page { size: A4; margin: 18mm 16mm; }
+        * { box-sizing: border-box; }
+        body { margin: 0; color: #111827; background: white; font: 11pt/1.65 "Times New Roman", Times, serif; }
+        main { max-width: 178mm; margin: 20px auto; padding: 0 8px; overflow-wrap: anywhere; }
+        h1 { font-size: 18pt; text-align: center; margin: 0 0 12pt; }
+        h2 { font-size: 13pt; margin: 16pt 0 6pt; break-after: avoid; page-break-after: avoid; }
+        p { margin: 5pt 0; orphans: 3; widows: 3; }
+        .guide-meta { color: #374151; font-size: 10pt; }
+        mjx-container { max-width: 100%; }
+        mjx-container[display="true"] { overflow: visible !important; break-inside: avoid; page-break-inside: avoid; }
+        .print-tools { padding: 12px; background: #eff6ff; font: 14px/1.5 system-ui, sans-serif; }
+        button { padding: 8px 12px; cursor: pointer; }
+        @media print { main { max-width: none; margin: 0; padding: 0; } .print-tools { display: none !important; } }
+      `;
+      output.head.append(style);
+      root = document.createElement('main');
+      root.className = 'tex2jax_process';
+      root.style.cssText = 'position:absolute;left:-100000px;top:0;width:178mm;background:white;color:black;';
+      const title = document.createElement('h1'); title.textContent = isEn ? 'AI SOLUTION GUIDE' : 'AI HƯỚNG DẪN GIẢI'; root.append(title);
+      const metadata = document.createElement('p'); metadata.className = 'guide-meta';
+      metadata.textContent = [context.examTitle, context.problemTitle, context.topic].filter(Boolean).join(' · '); root.append(metadata);
+      const statement = document.createElement('section');
+      const statementTitle = document.createElement('h2'); statementTitle.textContent = isEn ? 'Problem statement' : 'Đề bài';
+      const statementBody = document.createElement('div'); statementBody.innerHTML = formatMarkdownToHtml(context.problemContent);
+      statement.append(statementTitle, statementBody); root.append(statement);
+      for (const field of GUIDE_EDIT_FIELDS) {
+        const section = document.createElement('section'); section.dataset.guideField = field;
+        const heading = document.createElement('h2');
+        heading.textContent = panel.querySelector(`[data-guide-field="${field}"] .ai-section-title`)?.textContent.trim() || field;
+        const body = document.createElement('div');
+        const editor = panel.querySelector(`[data-guide-editor="${field}"]`);
+        body.innerHTML = formatMarkdownToHtml(editor ? editor.value : context.rawGuide[field]);
+        section.append(heading, body); root.append(section);
+      }
+      document.body.append(root);
+      if (window.MathJax?.startup?.promise) await window.MathJax.startup.promise;
+      if (!window.MathJax?.typesetPromise) throw new Error(isEn ? 'MathJax is not ready. Please try again.' : 'MathJax chưa sẵn sàng. Vui lòng thử lại.');
+      await window.MathJax.typesetPromise([root]);
+      if (root.querySelector('mjx-merror, [data-mjx-error]')) throw new Error(isEn ? 'Please correct invalid equations before printing.' : 'Có công thức chưa hợp lệ. Vui lòng kiểm tra trước khi in.');
+      if (printWindow.closed) return false;
+      // CHTML fonts/styles are generated in the source document by MathJax.
+      document.querySelectorAll('style[id^="MJX-"], link[id^="MJX-"]').forEach(node => output.head.append(output.importNode(node, true)));
+      const base = output.createElement('base'); base.href = new URL('.', document.baseURI).href; output.head.prepend(base);
+      const tools = output.createElement('div'); tools.className = 'print-tools';
+      const retry = output.createElement('button'); retry.type = 'button'; retry.textContent = isEn ? 'Print / Save as PDF' : 'In / Lưu PDF';
+      retry.onclick = () => printWindow.print();
+      const hint = output.createElement('span'); hint.textContent = isEn ? ' Choose “Save as PDF” in the print dialog.' : ' Chọn “Lưu dưới dạng PDF” trong hộp thoại in.';
+      tools.append(retry, hint);
+      const copy = output.importNode(root, true); copy.removeAttribute('style');
+      output.body.replaceChildren(tools, copy);
+      // Force layout so font requests start before waiting for document.fonts.ready.
+      copy.getBoundingClientRect();
+      if (output.fonts?.ready) await output.fonts.ready;
+      if (printWindow.closed) return false;
+      printWindow.focus(); printWindow.print();
+      return true;
+    } catch (error) {
+      if (!printWindow.closed) {
+        output.body.replaceChildren();
+        const message = output.createElement('p'); message.setAttribute('role', 'alert');
+        message.textContent = error.message || (isEn ? 'Unable to prepare the printout.' : 'Chưa chuẩn bị được bản in.'); output.body.append(message);
+      }
+      window.showVMOToast?.(error.message || 'Chưa chuẩn bị được bản in.', false);
+      return false;
+    } finally {
+      if (root) {
+        try { window.MathJax?.typesetClear?.([root]); } catch (_) {}
+        root.remove();
+      }
+      if (button) button.disabled = false;
     }
   };
 
