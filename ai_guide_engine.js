@@ -544,7 +544,9 @@
             intuition: result.data.intuition || '',
             solution: result.data.solution || '',
             pitfalls: result.data.pitfalls || '',
-            quality: result.data.quality || null
+            quality: result.data.quality || null,
+            geometry: window.MathAppGeometry?.clean(result.data.geometry) || null,
+            geometryRequested: result.data.geometryRequested === true
           };
           guideData = {
             branch: problemTopic || 'Toán THPT Chuyên',
@@ -599,6 +601,7 @@
 
     // Typeset LaTeX bằng MathJax
     const finalPanel = document.getElementById(`ai-panel-${problemId}`);
+    mountGuideGeometry(finalPanel, rawGuide);
     if (finalPanel && window.MathJax?.typesetPromise) {
       window.MathJax.typesetPromise([finalPanel]).catch(() => {});
     }
@@ -663,7 +666,12 @@
         const body = document.createElement('div');
         const editor = panel.querySelector(`[data-guide-editor="${field}"]`);
         body.innerHTML = formatMarkdownToHtml(editor ? editor.value : context.rawGuide[field]);
-        section.append(heading, body); root.append(section);
+        section.append(heading, body);
+        if (field === 'solution') {
+          const changed = GUIDE_EDIT_FIELDS.some(key => { const draft = panel.querySelector(`[data-guide-editor="${key}"]`); return draft && draft.value !== context.rawGuide[key]; });
+          appendGuideGeometry(section, changed ? { ...context.rawGuide, geometry: null, geometryRequested: context.rawGuide.geometryRequested || Boolean(context.rawGuide.geometry) } : context.rawGuide, isEn);
+        }
+        root.append(section);
       }
       document.body.append(root);
       if (window.MathJax?.startup?.promise) await window.MathJax.startup.promise;
@@ -733,7 +741,62 @@
     if (edit) edit.style.display = editing ? 'none' : '';
     if (apply) apply.style.display = editing ? '' : 'none';
     if (cancel) cancel.style.display = editing ? '' : 'none';
+    const diagramButton = panel.querySelector('.ai-geometry-generate');
+    if (diagramButton) diagramButton.disabled = editing;
   }
+
+  function appendGuideGeometry(container, guide, isEn, onGenerate) {
+    const figure = window.MathAppGeometry?.figure(document, guide?.geometry, isEn);
+    if (figure) container.append(figure);
+    else if (guide?.geometryRequested || /hình học|geometry/i.test(guide?.branch || '')) {
+      const notice = document.createElement('p'); notice.className = 'ai-geometry-unavailable';
+      notice.textContent = isEn ? 'No validated diagram is available for this guide.' : 'Chưa có hình vẽ hợp lệ cho hướng dẫn giải này.';
+      container.append(notice);
+      if (onGenerate) {
+        const button = document.createElement('button'); button.type = 'button'; button.className = 'btn-guide-action ai-geometry-generate';
+        button.textContent = isEn ? 'Create / retry diagram' : 'Tạo / Thử lại hình vẽ';
+        button.onclick = onGenerate; container.append(button);
+      }
+    }
+  }
+
+  function mountGuideGeometry(panel, guide) {
+    const section = panel?.querySelector('[data-guide-field="solution"]');
+    if (!section) return;
+    section.querySelectorAll('.ai-geometry-figure, .ai-geometry-unavailable, .ai-geometry-generate').forEach(node => node.remove());
+    appendGuideGeometry(section, guide, window.currentLang === 'en', () => window.generateAIGuideDiagram(panel.id.replace('ai-panel-', '')));
+  }
+
+  window.generateAIGuideDiagram = async function(problemId) {
+    const context = aiGuideContexts.get(problemId), panel = document.getElementById(`ai-panel-${problemId}`);
+    if (!context || !panel || context.diagramBusy || panel.dataset.guideEditing === 'true') return false;
+    const button = panel.querySelector('.ai-geometry-generate');
+    const guideAtStart = context.rawGuide;
+    const solution = guideAtStart.solution;
+    context.diagramBusy = true;
+    if (button) { button.disabled = true; button.textContent = window.currentLang === 'en' ? 'Drawing…' : 'Đang dựng và kiểm tra hình…'; }
+    try {
+      const response = await fetch('/api/ai-guide', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({
+        mode: 'diagram', contentKey: context.problemKey, problemId, problemTitle: context.problemTitle,
+        problemContent: context.problemContent, topic: context.topic, examTitle: context.examTitle,
+        solution, lang: window.currentLang === 'en' ? 'en' : 'vi'
+      }) });
+      const result = await response.json();
+      const geometry = window.MathAppGeometry?.clean(result.data?.geometry);
+      if (!response.ok || !result.success || !geometry) throw new Error(result.error || (window.currentLang === 'en' ? 'No validated diagram is available.' : 'Chưa có hình vẽ hợp lệ.'));
+      if (context.rawGuide !== guideAtStart || panel.dataset.guideEditing === 'true') throw new Error(window.currentLang === 'en' ? 'The solution changed. Please retry the diagram.' : 'Lời giải đã thay đổi. Vui lòng dựng lại hình.');
+      context.rawGuide = { ...context.rawGuide, geometry, geometryRequested: true };
+      mountGuideGeometry(panel, context.rawGuide);
+      return true;
+    } catch (error) {
+      const notice = panel.querySelector('.ai-geometry-unavailable');
+      if (notice) notice.textContent = error.message;
+      return false;
+    } finally {
+      context.diagramBusy = false;
+      if (button) { button.disabled = false; button.textContent = window.currentLang === 'en' ? 'Create / retry diagram' : 'Tạo / Thử lại hình vẽ'; }
+    }
+  };
 
   function renderGuideFields(problemId, guide) {
     const panel = document.getElementById(`ai-panel-${problemId}`);
@@ -745,6 +808,7 @@
       const content = panel.querySelector(`[data-guide-field="${field}"] .ai-section-content`);
       if (content) content.innerHTML = formatMarkdownToHtml(guide?.[field] || '');
     });
+    mountGuideGeometry(panel, guide);
     setGuideEditorState(panel, false);
     if (window.MathJax?.typesetPromise) window.MathJax.typesetPromise([panel]).catch(() => {});
   }
@@ -793,6 +857,8 @@
     context.rawGuide = {
       ...context.rawGuide,
       ...edited,
+      geometry: GUIDE_EDIT_FIELDS.some(field => edited[field] !== context.rawGuide[field]) ? null : context.rawGuide.geometry,
+      geometryRequested: context.rawGuide.geometryRequested || Boolean(context.rawGuide.geometry),
       quality: context.rawGuide.quality
         ? { ...context.rawGuide.quality, verified: false, score: '' }
         : null
@@ -829,7 +895,11 @@
     if (body.closest('.ai-guide-panel')?.dataset.guideEditing === 'true' &&
         !window.applyAIGuideEdits(problemId, { silent: true })) return;
 
-    const solutionText = body.innerText.trim();
+    // Save source math without SVG labels, captions or diagram action buttons.
+    const guideSource = aiGuideContexts.get(problemId)?.rawGuide;
+    const solutionText = guideSource
+      ? GUIDE_EDIT_FIELDS.map(field => String(guideSource[field] || '')).join('\n\n').trim()
+      : body.innerText.trim();
     if (!solutionText) {
       alert('Không tìm thấy nội dung lời giải để lưu!');
       return;
