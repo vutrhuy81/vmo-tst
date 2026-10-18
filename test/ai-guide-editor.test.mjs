@@ -13,7 +13,7 @@ const originalGuide = {
   quality: { verified: true, score: '5.0/5.0', verifier: 'GPT' }
 };
 
-async function createHarness({ role = 'admin', persisted = true } = {}) {
+async function createHarness({ role = 'admin', persisted = true, guide = originalGuide, support = false, statement = '' } = {}) {
   const dom = new JSDOM(`<!doctype html><html><body><div class="tab-pane active">
     <article class="exam-card"><h3 class="exam-title">Đề kiểm thử</h3>
       <div class="problem-item" id="question-2" data-content-key="tst:tst-da-nang:day-1:question-2"
@@ -36,14 +36,17 @@ async function createHarness({ role = 'admin', persisted = true } = {}) {
   window.showVMOToast = () => {};
   window.alert = () => {};
   window.setTimeout = callback => { callback(); return 1; };
-  window.fetch = async () => ({
+  const guideRequests = [];
+  window.fetch = async (url, options) => {
+    guideRequests.push(JSON.parse(options.body));
+    return ({
     ok: true,
-    json: async () => ({ success: true, data: originalGuide })
-  });
+    json: async () => ({ success: true, data: guide })
+  }); };
   window.VMODataService = {
     getLatestAiGuide: async () => persisted ? {
       _id: savedId,
-      aiGuide: originalGuide,
+      aiGuide: guide,
       aiGuideAdminEdited: false
     } : null,
     updateAiGuide: async (...args) => {
@@ -57,10 +60,17 @@ async function createHarness({ role = 'admin', persisted = true } = {}) {
   };
   window.eval(engineSource);
   window.document.dispatchEvent(new window.Event('DOMContentLoaded'));
+  if (support) {
+    const card = window.document.querySelector('.problem-item');
+    card.dataset.sourceGroup = 'math_support';
+    card.dataset.sourceType = 'standalone_question';
+    card.dataset.contentKey = 'math_support:owner:clipboard-question';
+  }
+  if (statement) window.document.querySelector('.problem-content').setAttribute('data-raw-math', statement);
   const button = window.document.querySelector('.btn-ai-guide');
   await window.openAIGuide(button);
   const panel = window.document.querySelector('.ai-guide-panel');
-  return { window, panel, problemId: panel.id.replace('ai-panel-', ''), updateCalls, submitCalls };
+  return { window, panel, problemId: panel.id.replace('ai-panel-', ''), updateCalls, submitCalls, guideRequests };
 }
 
 const saved = await createHarness({ role: 'admin', persisted: true });
@@ -98,4 +108,115 @@ assert.match(apiSource, /if \(action === 'update_ai_guide'\)[\s\S]*submissionKin
 assert.match(apiSource, /if \(!requireAdmin\(session, res\)\) return;[\s\S]*action === 'update_ai_guide'/,
   'API cập nhật AI Guide phải nằm sau cổng quyền admin');
 
-console.log('Admin AI Guide content editor: OK');
+// Reproduce guide rendering on standalone uploads, both fresh and restored from DB.
+const mathGuide = {
+  ...originalGuide,
+  knowledge: String.raw`**Bổ đề.** Cho $a*b*c$ và $x<y<z$.`,
+  intuition: String.raw`Xét \(u_{n+1}=u_n^2\) và \[x^2+y^2\ge2xy.\]`,
+  solution: String.raw`Ta có:
+$$\begin{aligned}
+a_1&=1\\
+
+ a_{n+1}&=a_n+1\tag{1}
+\end{aligned}$$
+Do đó $a_n=n$.`,
+  pitfalls: String.raw`Với n\ge1, ta có u_n\to+\infty. Không dùng <img src=x onerror="alert(1)">.`
+};
+for (const persisted of [false, true]) {
+  const h = await createHarness({ guide: mathGuide, support: true, persisted, statement: String.raw`Cho $x<y<z$. Tính $a*b*c$.` });
+  if (!persisted) assert.equal(h.guideRequests[0].problemContent, String.raw`Cho $x<y<z$. Tính $a*b*c$.`, 'Raw problem math reaches the AI unchanged');
+  const field = name => h.panel.querySelector(`[data-guide-field="${name}"] .ai-section-content`);
+  assert.ok(field('knowledge').textContent.includes('$a*b*c$'), 'Markdown must not consume multiplication stars in math');
+  assert.ok(field('knowledge').textContent.includes('$x<y<z$'), 'HTML parsing must not consume inequalities or delimiters');
+  assert.equal(field('knowledge').querySelector('em'), null, 'No emphasis tags inside math');
+  assert.ok(field('knowledge').querySelector('strong'), 'Prose Markdown still renders');
+  assert.ok(field('intuition').textContent.includes(String.raw`\(u_{n+1}=u_n^2\)`));
+  assert.match(field('solution').textContent, /\$\$\\begin\{aligned\}[\s\S]*\\end\{aligned\}\$\$/);
+  assert.ok(field('solution').textContent.includes(String.raw`a_1&=1\\`), 'Aligned rows and ampersands remain TeX');
+  assert.equal(field('solution').querySelectorAll('p').length, 1, 'Blank lines inside display math cannot split paragraphs');
+  assert.equal(field('pitfalls').querySelector('img'), null, 'AI HTML is not executable markup');
+  assert.ok(field('pitfalls').textContent.includes('$n\\ge1$'), 'Bare formula recovery remains available');
+  h.window.editAIGuideContent(h.problemId);
+  assert.equal(h.panel.querySelector('[data-guide-editor="solution"]').value, mathGuide.solution, 'Source is preserved for editing/saving');
+  h.window.applyAIGuideEdits(h.problemId);
+  assert.ok(field('knowledge').textContent.includes('$a*b*c$'), 'Admin edits use the same safe formatter');
+  h.window.close();
+}
+const bare = await createHarness({ support: true, guide: {
+  ...originalGuide,
+  knowledge: '<p><strong>Bổ đề</strong>: $x<y<z$.</p>',
+  solution: String.raw`\begin{aligned}a_1&=1\\a_{n+1}&=a_n+1\end{aligned}`,
+  pitfalls: String.raw`Ta có u_n^2=1. Với n\ge1, ta có u_n\to+\infty.`
+} });
+const bareSolution = bare.panel.querySelector('[data-guide-field="solution"] .ai-section-content');
+assert.equal(bareSolution.textContent.trim(), String.raw`$$\begin{aligned}a_1&=1\\a_{n+1}&=a_n+1\end{aligned}$$`, 'Bare multiline environments get one complete display delimiter');
+assert.ok(bare.panel.querySelector('[data-guide-field="knowledge"] strong'), 'Saved prose HTML remains readable');
+const recovered = bare.panel.querySelector('[data-guide-field="pitfalls"] .ai-section-content').textContent;
+assert.ok(recovered.includes('$u_n^2=1$'), 'Newly recovered formulas must not receive nested delimiters');
+assert.ok(!/[\uE100\uE101\uE110\uE111]/.test(bare.panel.textContent), 'No internal placeholders reach the UI');
+bare.window.close();
+
+// Printing is available to members, and covers fresh, saved and edited guides.
+for (const persisted of [false, true]) {
+  const h = await createHarness({ role: 'student', persisted, support: true, guide: mathGuide });
+  assert.ok(h.panel.querySelector('.btn-ai-guide-print'));
+  const popup = new JSDOM('<!doctype html><html><head></head><body></body></html>', { url: 'https://example.test/print', runScripts: 'outside-only' });
+  let prints = 0, focused = false, releaseMath, releaseFonts, renderSource;
+  const order = [];
+  h.window.open = (url, target) => { assert.equal(url, ''); assert.equal(target, '_blank'); order.push('open'); return popup.window; };
+  popup.window.focus = () => { focused = true; };
+  popup.window.print = () => { prints++; order.push('print'); };
+  Object.defineProperty(popup.window.document, 'fonts', { configurable: true, value: {ready: new Promise(resolve => { releaseFonts = resolve; })} });
+  h.window.MathJax.typesetPromise = async ([root]) => {
+    renderSource = root.innerHTML;
+    await new Promise(resolve => { releaseMath = resolve; });
+    const equation = h.window.document.createElement('mjx-container'); equation.textContent = 'Rendered math'; root.append(equation);
+    const css = h.window.document.createElement('style'); css.id = 'MJX-CHTML-styles'; css.textContent = 'mjx-container{display:inline-block}'; h.window.document.head.append(css);
+    order.push('math');
+  };
+  const pending = h.window.printAIGuide(h.problemId);
+  assert.equal(h.panel.querySelector('.btn-ai-guide-print').disabled, true);
+  assert.equal(prints, 0, 'Do not print before MathJax completes');
+  assert.ok(renderSource.includes('$a*b*c$'));
+  assert.ok(renderSource.includes('$x&lt;y&lt;z$'));
+  assert.ok(renderSource.includes('Đề bài'));
+  releaseMath();
+  await new Promise(resolve => setTimeout(resolve, 0));
+  assert.equal(prints, 0, 'Wait for print-document fonts after math');
+  releaseFonts(); assert.equal(await pending, true);
+  assert.equal(prints, 1); assert.equal(focused, true);
+  assert.deepEqual(order, ['open', 'math', 'print']);
+  const out = popup.window.document;
+  assert.equal(out.querySelectorAll('section[data-guide-field]').length, 4);
+  assert.ok(out.querySelector('mjx-container'));
+  assert.ok(out.getElementById('MJX-CHTML-styles'));
+  assert.equal(out.querySelector('main').hasAttribute('style'), false, 'Offscreen source styles never leak into the printout');
+  assert.equal(out.querySelectorAll('.ai-guide-actions, textarea, script, img').length, 0);
+  assert.ok(out.querySelector('style').textContent.includes('@page'));
+  assert.ok(out.body.textContent.includes('Lưu dưới dạng PDF'));
+  assert.equal(h.window.document.querySelector('main.tex2jax_process'), null, 'Temporary math root is cleaned up');
+  assert.equal(h.panel.querySelector('.btn-ai-guide-print').disabled, false);
+  assert.equal(h.submitCalls.length + h.updateCalls.length, 0, 'Printing never writes the guide to the database');
+  popup.window.close(); h.window.close();
+}
+const draftPrint = await createHarness();
+draftPrint.window.editAIGuideContent(draftPrint.problemId);
+draftPrint.panel.querySelector('[data-guide-editor="solution"]').value = 'Bản đang sửa $x<y$.';
+const draftPopup = new JSDOM('<!doctype html><html><body></body></html>', { runScripts:'outside-only' });
+draftPrint.window.open = () => draftPopup.window; draftPopup.window.focus = () => {}; draftPopup.window.print = () => {};
+assert.equal(await draftPrint.window.printAIGuide(draftPrint.problemId), true);
+assert.ok(draftPopup.window.document.body.textContent.includes('Bản đang sửa $x<y$.'));
+assert.equal(draftPrint.panel.dataset.guideEditing, 'true', 'Printing preserves the active editor');
+assert.equal(draftPrint.updateCalls.length + draftPrint.submitCalls.length, 0);
+draftPrint.window.open = () => null;
+let popupNotice = '';
+draftPrint.window.alert = value => { popupNotice = value; };
+assert.equal(await draftPrint.window.printAIGuide(draftPrint.problemId), false);
+assert.match(popupNotice, /cửa sổ bật lên/);
+draftPrint.window.open = () => draftPopup.window;
+draftPrint.window.MathJax.typesetPromise = async () => { throw new Error('TeX render failed'); };
+assert.equal(await draftPrint.window.printAIGuide(draftPrint.problemId), false);
+assert.match(draftPopup.window.document.querySelector('[role="alert"]').textContent, /TeX render failed/);
+assert.equal(draftPrint.panel.querySelector('.btn-ai-guide-print').disabled, false);
+draftPopup.window.close(); draftPrint.window.close();
+console.log('Admin AI Guide editor, standalone LaTeX and print/PDF readiness: OK');
