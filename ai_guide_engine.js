@@ -783,7 +783,11 @@
       }) });
       const result = await response.json();
       const geometry = window.MathAppGeometry?.clean(result.data?.geometry);
-      if (!response.ok || !result.success || !geometry) throw new Error(result.error || (window.currentLang === 'en' ? 'No validated diagram is available.' : 'Chưa có hình vẽ hợp lệ.'));
+      if (!response.ok || !result.success || !geometry) {
+        const details = [result.reason, ...(Array.isArray(result.details) ? result.details.map(item => item?.message) : [])].filter(item => typeof item === 'string' && item.trim()).join(' ').slice(0, 1500);
+        const summary = result.error || (window.currentLang === 'en' ? 'No validated diagram is available.' : 'Chưa có hình vẽ hợp lệ.');
+        throw new Error([summary, result.code ? `[${result.code}]` : '', details].filter(Boolean).join(' '));
+      }
       if (context.rawGuide !== guideAtStart || panel.dataset.guideEditing === 'true') throw new Error(window.currentLang === 'en' ? 'The solution changed. Please retry the diagram.' : 'Lời giải đã thay đổi. Vui lòng dựng lại hình.');
       context.rawGuide = { ...context.rawGuide, geometry, geometryRequested: true };
       mountGuideGeometry(panel, context.rawGuide);

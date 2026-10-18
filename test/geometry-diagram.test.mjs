@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import { JSDOM } from 'jsdom';
-import { cleanGeometryDiagram as clean, geometrySchema, geometryInstruction, selectGuideGeometry } from '../lib/geometry-diagram.js';
+import { cleanGeometryDiagram as clean, geometrySchema, geometryInstruction, selectGuideGeometry, inspectGeometryDiagram } from '../lib/geometry-diagram.js';
 
 const triangle = {
   isGeometry: true, caption: 'Tam giác ABC, M là trung điểm BC; AH vuông góc BC.',
@@ -44,8 +44,9 @@ const routeSource=fs.readFileSync(new URL('../api/ai-guide.js',import.meta.url),
 const { mathematicalAuditInstruction, auditEvidence }=await import('../lib/math-audit.js');
 let signedIn=true, blocked=false, approval=true, diagram=triangle;
 const calls=[];
-const route=new Function('geometrySchema','geometryInstruction','selectGuideGeometry','cleanGeometryDiagram','mathematicalAuditInstruction','auditEvidence','retrieveVerifiedContext','getSession','checkRateLimit','generateJson','parseBody','prepare','text','generateOpenAIJson',routeSource+';return handler;')(
-  geometrySchema,geometryInstruction,selectGuideGeometry,clean,mathematicalAuditInstruction,auditEvidence,
+const { generateGuideDiagram } = await import('../lib/guide-diagram.js');
+const route=new Function('generateGuideDiagram', 'inspectGeometryDiagram', 'geometrySchema','geometryInstruction','selectGuideGeometry','cleanGeometryDiagram','mathematicalAuditInstruction','auditEvidence','retrieveVerifiedContext','getSession','checkRateLimit','generateJson','parseBody','prepare','text','generateOpenAIJson',routeSource+';return handler;')(
+  generateGuideDiagram,inspectGeometryDiagram,geometrySchema,geometryInstruction,selectGuideGeometry,clean,mathematicalAuditInstruction,auditEvidence,
   async()=>({blocked,statement:'CANONICAL triangle ABC',topic:'Hình học phẳng',block:'No reference'}),()=>signedIn?{username:'student'}:null,()=>true,
   async args=>{calls.push(args);return{data:triangle,model:'solver'}}, req=>req.body,()=>{},(v,max=50000)=>String(v??'').slice(0,max),
   async args=>{calls.push(args);return{data:{approved:approval,geometry:diagram},model:'reviewer'}}
@@ -89,9 +90,9 @@ assert.equal(requested.mode,'diagram');assert.equal(requested.solution,guide.sol
 assert.equal(old.updateCalls.length,0,'Diagram generation does not silently update the saved guide');old.window.close();
 const invalid=await createHarness({guide:{...guide,geometry:mutate(v=>v.constraints=[])}});
 assert.equal(invalid.panel.querySelectorAll('svg').length,0);
-invalid.window.fetch=async()=>({ok:false,json:async()=>({success:false,error:'Hình không hợp lệ'})});
+invalid.window.fetch=async()=>({ok:false,json:async()=>({success:false,error:'Hình không hợp lệ',code:'GEOMETRY_CONSTRAINT_MISMATCH',reason:'Cần dựng lại hình chiếu.',details:[{message:'perpendicular(P, X, B, C)'}]})});
 assert.equal(await invalid.window.generateAIGuideDiagram(invalid.problemId),false);
-assert.match(invalid.panel.textContent,/Hình không hợp lệ/);assert.equal(invalid.panel.querySelector('.ai-geometry-generate').disabled,false);invalid.window.close();
+assert.match(invalid.panel.textContent,/Hình không hợp lệ/);assert.match(invalid.panel.textContent,/GEOMETRY_CONSTRAINT_MISMATCH/);assert.match(invalid.panel.textContent,/Cần dựng lại hình chiếu/);assert.equal(invalid.panel.querySelector('.ai-geometry-generate').disabled,false);invalid.window.close();
 const racing=await createHarness({guide:{...guide,geometry:null}});
 let releaseDiagram;const gate=new Promise(resolve=>{releaseDiagram=resolve});
 racing.window.fetch=async()=>{await gate;return{ok:true,json:async()=>({success:true,data:{geometry:triangle}})}};
