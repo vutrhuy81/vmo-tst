@@ -892,7 +892,7 @@ export default async function handler(req, res) {
       const contentKey = `${setKey}:question-${questionNumber}`;
       const existingKey = await db.collection('problems').findOne({ contentKey });
       if (existingKey && (existingKey.examId !== examIdText || existingKey.status !== 'deleted')) {
-        return res.status(409).json({ success: false, error: 'Khóa câu hỏi đã tồn tại trong MongoDB' });
+        return res.status(409).json({ success: false, error: 'Khóa câu hỏi đã tồn tại trong cơ sở dữ liệu' });
       }
       const group = categoryGroup || (isMock ? 'mock_exam' : isRegional ? 'danang_quangnam' : 'tst');
       const savedSet = await db.collection('content_sets').findOneAndUpdate({ key: setKey },
@@ -1122,7 +1122,7 @@ export default async function handler(req, res) {
         if (changes.status === 'published' || payload.allowSubmission === true || payload.allowAiEvaluation === true) {
           const pending = await db.collection('problems').findOne({ _id: id }, { projection: { predictionReview: 1 } });
           if (pending?.predictionReview?.status === 'gpt_rejected') {
-            return res.status(409).json({ success: false, error: 'Câu bị GPT bác cần sửa nội dung và xác nhận trong ⚙️ Quản lý nguồn trước khi công bố.' });
+            return res.status(409).json({ success: false, error: 'Câu chưa được Gia sư Toán AI duyệt cần sửa nội dung và xác nhận trong ⚙️ Quản lý nguồn trước khi công bố.' });
           }
         }
         if (Object.prototype.hasOwnProperty.call(payload, 'shortLabel')) changes.shortLabel = cleanText(payload.shortLabel, 120);
@@ -1169,7 +1169,7 @@ export default async function handler(req, res) {
       const resolvePredictionReview = session.role === 'admin' && payload.resolvePredictionReview === true &&
         current.origin === 'prediction' && current.predictionReview?.status === 'gpt_rejected';
       if (resolvePredictionReview && content === current.content) {
-        return res.status(400).json({ success: false, error: 'Cần sửa nội dung câu hỏi trước khi xác nhận đã khắc phục nhận xét GPT.' });
+        return res.status(400).json({ success: false, error: 'Cần sửa nội dung câu hỏi trước khi xác nhận đã khắc phục nhận xét của Gia sư Toán AI.' });
       }
       const expectedVersion = cleanNumber(payload.expectedVersion, 0, 0, 1000000);
       if (expectedVersion && Number(current.version || 1) !== expectedVersion) {
@@ -1268,7 +1268,7 @@ export default async function handler(req, res) {
         } },
         { returnDocument: 'after' }
       );
-      if (!result) return res.status(404).json({ success: false, error: 'Không tìm thấy câu hỏi trong MongoDB' });
+      if (!result) return res.status(404).json({ success: false, error: 'Không tìm thấy câu hỏi trong cơ sở dữ liệu' });
       await recordActivity(db, session, 'catalog.updated', { problemKey: contentKey, itemTitle: result.title });
       return res.status(200).json({ success: true, item: result });
     }
@@ -1690,6 +1690,6 @@ export default async function handler(req, res) {
     return res.status(400).json({ success: false, error: 'Thao tác không hợp lệ' });
   } catch (error) {
     console.error('[API data]', error);
-    return res.status(500).json({ success: false, error: 'Không thể xử lý dữ liệu MongoDB' });
+    return res.status(500).json({ success: false, error: 'Không thể xử lý dữ liệu cơ sở dữ liệu' });
   }
 }

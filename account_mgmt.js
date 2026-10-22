@@ -166,7 +166,7 @@ function initAccountMgmt() {
   // 6. Tải và hiển thị danh sách người dùng từ MongoDB
   async function renderUsers() {
     if (!usersTableBody) return;
-    usersTableBody.innerHTML = '<tr><td colspan="5" style="text-align:center; padding:20px; color:#64748b;">Đang tải dữ liệu MongoDB...</td></tr>';
+    usersTableBody.innerHTML = '<tr><td colspan="5" style="text-align:center; padding:20px; color:#64748b;">Đang tải dữ liệu cơ sở dữ liệu...</td></tr>';
     const result = await VMOAuth.listUsers();
     if (!result.success) {
       usersTableBody.innerHTML = '<tr><td colspan="5" style="text-align:center; padding:20px; color:#b91c1c;">Không thể tải danh sách tài khoản.</td></tr>';
