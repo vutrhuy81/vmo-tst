@@ -136,19 +136,38 @@ VMOAuth.requireAuth('login.html');
     </div>
   </div>
 
-  <!-- TẦNG 2: THANH TAB ĐIỀU HƯỚNG NỘI DUNG TOÁN HỌC (Academic Navigation Tabs) -->
-  <div class="nav-tabs-container">
-    <nav class="nav-tabs" aria-label="Phân loại tài liệu và đề thi">
-      <button class="tab-btn active" id="tab-btn-danang" type="button" onclick="switchTab('tab-danang',this)">📚 Tài liệu chuyên đề VMO</button>
-      <button class="tab-btn" id="tab-btn-mock" type="button" onclick="switchTab('tab-mock',this)">🎯 Bộ đề thi thử VMO</button>
-      <button class="tab-btn" id="tab-btn-tst" type="button" onclick="switchTab('tab-tst',this)">🏛️ Đề TST</button>
-      <button class="tab-btn" id="tab-btn-vmo" type="button" onclick="switchTab('tab-vmo',this)">🇻🇳 Đề VMO</button>
-      <button class="tab-btn" id="tab-btn-olympic" type="button" onclick="switchTab('tab-olympic',this)">🌐 Đề IMO–Olympic</button>
-      <button class="tab-btn" id="tab-btn-olympic30" type="button" onclick="switchTab('tab-olympic30',this)">🏅 Đề Olympic 30/4</button>
-      <button class="tab-btn" id="tab-btn-duyenhai" type="button" onclick="switchTab('tab-duyenhai',this)">🌊 Đề Duyên hải miền Bắc</button>
-      <button class="tab-btn" id="tab-btn-support" type="button" onclick="switchTab('tab-support',this)">🧩 Hỗ trợ giải toán</button>
-      <button class="tab-btn" id="tab-btn-admission" type="button" onclick="switchTab('tab-admission',this)">🎓 Đề thi vào lớp 10 chuyên</button>
-      <button class="tab-btn" id="tab-btn-history" type="button" onclick="switchTab('tab-history',this)">🗂️ Đề Đà Nẵng–Quảng Nam</button>
+  <!-- Content navigation: all modules visible on desktop; one disclosure on small screens. -->
+  <div class="nav-tabs-container module-navigation-shell">
+    <button id="moduleNavigationToggle" class="module-navigation-toggle" type="button" aria-controls="moduleNavigation" aria-expanded="false">
+      <span class="module-navigation-summary"><span class="module-navigation-caption" id="moduleNavigationCaption">Đang xem</span><span id="activeModuleLabel">📚 Tài liệu chuyên đề VMO</span></span>
+      <span class="module-navigation-action"><span id="moduleNavigationAction">Chọn mục</span><span class="module-navigation-chevron" aria-hidden="true">⌄</span></span>
+    </button>
+    <nav class="nav-tabs module-navigation" id="moduleNavigation" aria-label="Phân loại tài liệu và đề thi">
+      <div class="navigation-group" role="group" aria-labelledby="navGroupLearning">
+        <span class="navigation-group-title" id="navGroupLearning">Học tập &amp; luyện tập</span>
+        <div class="navigation-group-items">
+          <button class="tab-btn active" id="tab-btn-danang" type="button" aria-current="page" onclick="switchTab('tab-danang',this)">📚 Tài liệu chuyên đề VMO</button>
+          <button class="tab-btn" id="tab-btn-mock" type="button" onclick="switchTab('tab-mock',this)">🎯 Bộ đề thi thử VMO</button>
+          <button class="tab-btn" id="tab-btn-support" type="button" onclick="switchTab('tab-support',this)">🧩 Hỗ trợ giải toán</button>
+        </div>
+      </div>
+      <div class="navigation-group" role="group" aria-labelledby="navGroupNational">
+        <span class="navigation-group-title" id="navGroupNational">Đề thi trong nước</span>
+        <div class="navigation-group-items">
+          <button class="tab-btn" id="tab-btn-admission" type="button" onclick="switchTab('tab-admission',this)">🎓 Đề thi vào lớp 10 chuyên</button>
+          <button class="tab-btn" id="tab-btn-tst" type="button" onclick="switchTab('tab-tst',this)">🏛️ Đề TST</button>
+          <button class="tab-btn" id="tab-btn-vmo" type="button" onclick="switchTab('tab-vmo',this)">🇻🇳 Đề VMO</button>
+          <button class="tab-btn" id="tab-btn-history" type="button" onclick="switchTab('tab-history',this)">🗂️ Đề Đà Nẵng–Quảng Nam</button>
+        </div>
+      </div>
+      <div class="navigation-group" role="group" aria-labelledby="navGroupOlympic">
+        <span class="navigation-group-title" id="navGroupOlympic">Olympic &amp; giao lưu</span>
+        <div class="navigation-group-items">
+          <button class="tab-btn" id="tab-btn-olympic" type="button" onclick="switchTab('tab-olympic',this)">🌐 Đề IMO–Olympic</button>
+          <button class="tab-btn" id="tab-btn-olympic30" type="button" onclick="switchTab('tab-olympic30',this)">🏅 Đề Olympic 30/4</button>
+          <button class="tab-btn" id="tab-btn-duyenhai" type="button" onclick="switchTab('tab-duyenhai',this)">🌊 Đề Duyên hải miền Bắc</button>
+        </div>
+      </div>
     </nav>
   </div>
 </div>

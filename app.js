@@ -15,6 +15,10 @@
   const tocBackdrop = qs('#sidebarBackdrop');
   const accountToggle = qs('#accountMenuToggle');
   const accountBar = qs('#userAuthBar');
+  const moduleNavigation = qs('#moduleNavigation');
+  const moduleToggle = qs('#moduleNavigationToggle');
+  const compactNavigation = window.matchMedia?.('(max-width: 960px)') || { matches: false };
+  let tabSwitchVersion = 0;
   const mobileWidth = window.matchMedia?.('(max-width: 680px)') || { matches: false };
   let focusBeforeToc = null;
 
@@ -82,6 +86,64 @@
     else if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); first.focus(); }
   });
   mobileWidth.addEventListener?.('change', () => { closeToc(false); closeAccountMenu(); });
+
+  function closeModuleNavigation(restoreFocus = false) {
+    if (!moduleNavigation || !moduleToggle) return;
+    const focusWasInside = moduleNavigation.contains(document.activeElement);
+    moduleToggle.setAttribute('aria-expanded', 'false');
+    moduleNavigation.hidden = compactNavigation.matches;
+    if (compactNavigation.matches && restoreFocus && focusWasInside) moduleToggle.focus();
+  }
+
+  window.refreshModuleNavigation = function() {
+    if (!moduleNavigation) return;
+    const active = moduleNavigation.querySelector('.tab-btn.active');
+    moduleNavigation.querySelectorAll('.tab-btn').forEach(button => {
+      const selected = button === active;
+      if (selected) button.setAttribute('aria-current', 'page');
+      else button.removeAttribute('aria-current');
+      const paneId = button.id.replace('tab-btn-', 'tab-');
+      button.setAttribute('aria-controls', paneId);
+      document.getElementById(paneId)?.setAttribute('aria-labelledby', button.id);
+    });
+    const summary = qs('#activeModuleLabel');
+    if (summary && active) summary.textContent = active.textContent.trim();
+  };
+  if (moduleNavigation && moduleToggle) {
+    document.documentElement.classList.add('navigation-ready');
+    closeModuleNavigation();
+    window.refreshModuleNavigation();
+    moduleToggle.addEventListener('click', () => {
+      if (!compactNavigation.matches) return;
+      const open = moduleToggle.getAttribute('aria-expanded') !== 'true';
+      closeToc(false); closeAccountMenu();
+      moduleToggle.setAttribute('aria-expanded', String(open));
+      moduleNavigation.hidden = !open;
+    });
+    moduleToggle.addEventListener('keydown', event => {
+      if (event.key !== 'ArrowDown' || !compactNavigation.matches) return;
+      event.preventDefault();
+      moduleToggle.setAttribute('aria-expanded', 'true'); moduleNavigation.hidden = false;
+      (moduleNavigation.querySelector('.tab-btn.active') || moduleNavigation.querySelector('.tab-btn'))?.focus();
+    });
+    document.addEventListener('click', event => {
+      if (!event.target.closest('.module-navigation-shell')) closeModuleNavigation();
+    });
+    document.addEventListener('focusin', event => {
+      if (!event.target.closest('.module-navigation-shell')) closeModuleNavigation();
+    });
+    document.addEventListener('keydown', event => {
+      if (event.key === 'Escape' && moduleToggle.getAttribute('aria-expanded') === 'true') {
+        event.preventDefault(); closeModuleNavigation(true);
+      }
+    });
+    compactNavigation.addEventListener?.('change', () => {
+      const focusWasToggle = document.activeElement === moduleToggle;
+      closeModuleNavigation(true);
+      if (!compactNavigation.matches && focusWasToggle) moduleNavigation.querySelector('.tab-btn.active')?.focus();
+      syncStickyOffset();
+    });
+  }
 
   function formatCount(value) {
     return String(Math.max(0, Number(value) || 0)).padStart(2, '0');
@@ -186,6 +248,9 @@
 
   // 1. Chuyển đổi Tab nội dung chính & đồng bộ Sidebar tương ứng
   window.switchTab = async function (tabId, btn) {
+    if (!qs('#' + tabId)) return;
+    const version = ++tabSwitchVersion;
+    closeModuleNavigation(true);
     closeToc(false);
     closeAccountMenu();
     qsa('.tab-pane').forEach(x => x.classList.remove('active'));
@@ -196,6 +261,7 @@
 
     const targetBtn = btn || (window.event && window.event.currentTarget) || qs(`.tab-btn[onclick*="${tabId}"]`);
     if (targetBtn) targetBtn.classList.add('active');
+    window.refreshModuleNavigation();
 
     const isM = (tabId === 'tab-mock');
     const isT = (tabId === 'tab-tst');
@@ -242,10 +308,15 @@
       clearSearch();
     }
 
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    syncStickyOffset();
+    const readingRoot = qs('#main-content');
+    const offset = parseFloat(document.documentElement.style.getPropertyValue('--content-offset')) || 0;
+    const targetTop = readingRoot ? window.scrollY + readingRoot.getBoundingClientRect().top - offset : 0;
+    window.scrollTo({ top: Math.max(0, targetTop), behavior: window.matchMedia?.('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth' });
 
     try {
       targetPane = await ensureTabContent(tabId);
+      if (version !== tabSwitchVersion) return;
       targetPane?.classList.add('active');
     } catch {
       return;
@@ -253,6 +324,7 @@
 
     // Đồng bộ lại các nút AI Hướng dẫn giải & Nút Nộp bài Database nếu cần
     if (isSupport) await window.loadMathSupportProblems?.();
+    if (version !== tabSwitchVersion) return;
     window.reinitAIGuide?.(targetPane);
     window.reinitDatabaseUI?.(targetPane);
     window.applyCurrentLanguage?.();
