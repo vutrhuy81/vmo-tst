@@ -180,27 +180,45 @@
     return { sets: sets.size, days: days.size };
   }
 
+  let catalogStatsVersion = 0;
   window.refreshVMOCatalogStats = async function() {
+    const version = ++catalogStatsVersion;
     const stats = staticCatalogStats();
     const apply = () => {
       const mock = mockDimensions(stats.mockEntries);
       renderCatalogStats({
-        tst: formatCount(stats.tstTargets.size),
-        regional: formatCount(stats.regionalTargets.size),
+        tst: formatCount(stats.examCounts?.['tst-national'] ?? stats.tstTargets.size),
+        regional: formatCount(stats.examCounts?.['history-dn-qn'] ?? stats.regionalTargets.size),
         chapters: formatCount(stats.chapters),
         theory: formatCount(stats.theory),
         examples: formatCount(stats.databaseExamples ?? stats.examples),
-        mock: formatCount(mock.sets),
+        mock: formatCount(stats.examCounts?.['vmo-mock'] ?? mock.sets),
+        support: formatCount(stats.standaloneProblems),
+        vmo: formatCount(stats.examCounts?.['vmo-official']),
+        olympic: formatCount(stats.examCounts?.['imo-olympic']),
+        olympic30: formatCount(stats.examCounts?.['olympic-30-4']),
+        duyenhai: formatCount(stats.examCounts?.['duyen-hai-bac']),
         mockSets: formatCount(mock.sets)
       });
     };
 
-    // Các chỉ số đề thi và ví dụ chỉ lấy từ MongoDB; số 0 cho biết API chưa sẵn sàng.
-    apply();
-    if (!window.VMODataService?.getHomeStats) return;
+    // A dash means unavailable/loading; zero is reserved for a successful count.
+    qs('.hero-stats')?.setAttribute('aria-busy', 'true');
+    const databaseKeys = ['mock', 'support', 'tst', 'vmo', 'olympic', 'regional', 'olympic30', 'duyenhai', 'mockSets', 'examples'];
+    renderCatalogStats(Object.fromEntries(databaseKeys.map(key => [key, '—'])));
+    renderCatalogStats({ chapters: formatCount(stats.chapters), theory: formatCount(stats.theory) });
+    if (!window.VMODataService?.getHomeStats) { qs('.hero-stats')?.setAttribute('aria-busy', 'false'); return; }
 
     try {
       const databaseStats = await window.VMODataService.getHomeStats();
+      if (version !== catalogStatsVersion) return;
+      stats.examCounts = databaseStats?.examCounts;
+      stats.standaloneProblems = databaseStats?.standaloneProblems;
+      const supportCount = qs('.hero-stats [data-catalog-stat="support"]');
+      if (supportCount) supportCount.dataset.scope = databaseStats?.supportScope === 'all' ? 'all' : 'own';
+      const scopeNote = qs('#supportStatsScope');
+      const all = databaseStats?.supportScope === 'all';
+      if (scopeNote) scopeNote.textContent = window.currentLang === 'en' ? (all ? 'Standalone problems: all accounts.' : 'Standalone problems: your account.') : (all ? 'Bài toán riêng lẻ: toàn hệ thống.' : 'Bài toán riêng lẻ: của bạn.');
       if (Number.isInteger(Number(databaseStats?.specialtyExamples))) {
         stats.databaseExamples = Math.max(0, Number(databaseStats.specialtyExamples));
       }
@@ -219,6 +237,8 @@
       apply();
     } catch (error) {
       console.warn('Không tải được thống kê catalog từ MongoDB:', error?.message || error);
+    } finally {
+      if (version === catalogStatsVersion) qs('.hero-stats')?.setAttribute('aria-busy', 'false');
     }
   };
 

@@ -1,3 +1,4 @@
+import { getCatalogTotals } from '../lib/home-stats.js';
 import { canAccessProblem, supportVisibility } from '../lib/problem-access.js';
 import { handleMathSupport } from '../lib/math-support.js';
 import { specializedSchool } from '../lib/specialized-schools.js';
@@ -407,7 +408,7 @@ export default async function handler(req, res) {
           homeExamFilter.status = 'published';
           homeExampleFilter.status = 'published';
         }
-        const [exams, specialtyExamples] = await Promise.all([
+        const [exams, specialtyExamples, totals] = await Promise.all([
           db.collection('exams').find(
             homeExamFilter,
             {
@@ -420,9 +421,10 @@ export default async function handler(req, res) {
               }
             }
           ).limit(500).toArray(),
-          db.collection('problems').countDocuments(homeExampleFilter)
+          db.collection('problems').countDocuments(homeExampleFilter),
+          getCatalogTotals(db, session)
         ]);
-        return res.status(200).json({ success: true, items: [{ exams, specialtyExamples }] });
+        return res.status(200).json({ success: true, items: [{ exams, specialtyExamples, ...totals }] });
       }
 
       if (resource === 'exam_catalog') {

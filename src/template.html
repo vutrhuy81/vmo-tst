@@ -3,9 +3,9 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="description" content="Tài liệu ôn luyện chọn đội tuyển HSG Quốc gia môn Toán Đà Nẵng 2026–2027: đầy đủ lý thuyết, 78 ví dụ có lời giải, 2 bộ thi thử 2 ngày, ngân hàng TST qua các năm và 12 đề Đà Nẵng–Quảng Nam qua các năm.">
+<meta name="description" content="MathApp: Nền tảng Toán chuyên cùng Gia sư Toán AI. Khám phá tài liệu chuyên đề, kho đề VMO, TST, Olympic và hỗ trợ giải toán chuyên sâu.">
 <meta name="theme-color" content="#173b64">
-<title>Ôn luyện VMO Đà Nẵng 2026–2027 | Tài liệu đầy đủ & TST</title>
+<title>MathApp | Chinh phục Toán chuyên cùng Gia sư AI</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -78,27 +78,29 @@ VMOAuth.requireAuth('login.html');
 <body class="tex2jax_process">
 <a href="#main-content" class="skip-link">Bỏ qua đến nội dung chính</a>
 <header class="hero">
-  <div class="hero-badge">🇻🇳 VMO ĐÀ NẴNG 2026–2027 · TÀI LIỆU CHUYÊN SÂU</div>
-  <h1>ÔN LUYỆN CHỌN ĐỘI TUYỂN HỌC SINH GIỎI QUỐC GIA MÔN TOÁN</h1>
-  <p>Người biên soạn - Trần Hoàng Kiên.</p>
-  <p>Trường THPT - Phan Châu Trình - Tp Đà Nẵng.</p>
-  <div class="hero-stats">
-    <div class="stat-chip"><span class="num" data-catalog-stat="tst">—</span><span class="label">Bộ đề thi các Tỉnh/Tp</span></div>
-    <div class="stat-chip"><span class="num" data-catalog-stat="regional">—</span><span class="label">Đề ĐN–QN</span></div>
-    <div class="stat-chip"><span class="num" data-catalog-stat="chapters">—</span><span class="label">Chương tài liệu</span></div>
-    <div class="stat-chip"><span class="num" data-catalog-stat="theory">—</span><span class="label">Mục lý thuyết</span></div>
-    <div class="stat-chip"><span class="num" data-catalog-stat="examples">—</span><span class="label">Ví dụ có lời giải</span></div>
-    <div class="stat-chip"><span class="num" data-catalog-stat="mock">—</span><span class="label">Bộ đề thi thử</span></div>
+  <div class="hero-badge">MATHAPP · NỀN TẢNG TOÁN CHUYÊN &amp; OLYMPIC</div>
+  <h1>Chinh phục Toán chuyên cùng Gia sư AI</h1>
+  <p class="hero-slogan">Hiểu sâu bản chất · Rèn tư duy sắc bén · Vững bước đến kỳ thi lớn.</p>
+  <div class="hero-stats" aria-label="Thống kê kho đề và bài toán" aria-busy="true">
+    <div class="stat-chip"><span class="label" data-hero-stat-label="mock">🎯 Bộ đề thi thử VMO</span><span class="stat-value"><span class="num" data-catalog-stat="mock">—</span><span class="stat-unit" data-stat-unit="mock">đề</span></span></div>
+    <div class="stat-chip"><span class="label" data-hero-stat-label="support">🧩 Hỗ trợ giải toán</span><span class="stat-value"><span class="num" data-catalog-stat="support">—</span><span class="stat-unit" data-stat-unit="support">bài toán</span></span></div>
+    <div class="stat-chip"><span class="label" data-hero-stat-label="tst">🏛️ Đề TST</span><span class="stat-value"><span class="num" data-catalog-stat="tst">—</span><span class="stat-unit" data-stat-unit="tst">đề</span></span></div>
+    <div class="stat-chip"><span class="label" data-hero-stat-label="vmo">🇻🇳 Đề VMO</span><span class="stat-value"><span class="num" data-catalog-stat="vmo">—</span><span class="stat-unit" data-stat-unit="vmo">đề</span></span></div>
+    <div class="stat-chip"><span class="label" data-hero-stat-label="olympic">🌐 Đề IMO–Olympic</span><span class="stat-value"><span class="num" data-catalog-stat="olympic">—</span><span class="stat-unit" data-stat-unit="olympic">đề</span></span></div>
+    <div class="stat-chip"><span class="label" data-hero-stat-label="regional">🗂️ Đề Đà Nẵng–Quảng Nam</span><span class="stat-value"><span class="num" data-catalog-stat="regional">—</span><span class="stat-unit" data-stat-unit="regional">đề</span></span></div>
+    <div class="stat-chip"><span class="label" data-hero-stat-label="olympic30">🏅 Đề Olympic 30/4</span><span class="stat-value"><span class="num" data-catalog-stat="olympic30">—</span><span class="stat-unit" data-stat-unit="olympic30">đề</span></span></div>
+    <div class="stat-chip"><span class="label" data-hero-stat-label="duyenhai">🌊 Đề Duyên hải miền Bắc</span><span class="stat-value"><span class="num" data-catalog-stat="duyenhai">—</span><span class="stat-unit" data-stat-unit="duyenhai">đề</span></span></div>
   </div>
+  <p class="hero-stat-note">Mỗi đề/ngày thi được tính là một đề. <span id="supportStatsScope">Bài toán riêng lẻ theo quyền truy cập.</span></p>
 </header>
 <div class="nav-tabs-wrapper">
   <!-- TẦNG 1: THANH ĐIỀU HÀNH & TIỆN ÍCH HỆ THỐNG (Top Utility & Account Bar) -->
   <div class="app-topbar">
     <div class="app-topbar-inner">
       <div class="app-topbar-brand">
-        <span class="brand-flag">🇻🇳</span>
-        <span class="brand-title">VMO ĐÀ NẴNG</span>
-        <span class="brand-tag">2026–2027</span>
+        <span class="brand-flag" aria-hidden="true">✦</span>
+        <span class="brand-title">MathApp</span>
+        <span class="brand-tag">Toán chuyên &amp; Olympic</span>
       </div>
 
       <div class="app-topbar-actions">

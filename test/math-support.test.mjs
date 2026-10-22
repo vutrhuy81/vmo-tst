@@ -9,6 +9,7 @@ import { handleMathSupport } from '../lib/math-support.js';
 import { canAccessProblem, supportVisibility } from '../lib/problem-access.js';
 import { retrieveVerifiedContext } from '../lib/rag-retrieval.js';
 import { sourceFresh } from '../lib/rag-core.js';
+import { getCatalogTotals } from '../lib/home-stats.js';
 
 const malformedLiveOcr = String.raw`BÀI TOÁN KIỂM THỬ MATHAPP\\\\Cho hai số thực a và b. Chứng minh rằng:\$$a^2 + b^2 \ge 2ab.$-\\\-Khi nào đẳng thức xảy ra?`;
 const repairedOcr = normalizeStandaloneMath(malformedLiveOcr);
@@ -75,6 +76,13 @@ const db = { collection(name) {
     Object.assign(row, changes.$set); return row;
   }
   return {
+    aggregate: pipeline => {
+      const counts = new Map();
+      for (const item of items.filter(row => match(row, pipeline[0].$match))) {
+        counts.set(item.category, (counts.get(item.category) || 0) + 1);
+      }
+      return cursor([...counts].map(([_id, count]) => ({ _id, count })));
+    },
     createIndex: async () => {}, find: query => cursor(items.filter(item => match(item, query))),
     findOne: async query => items.find(item => match(item, query)) || null,
     countDocuments: async query => items.filter(item => match(item, query)).length,
@@ -89,8 +97,8 @@ const db = { collection(name) {
 let session = { sub: 'owner-1', username: 'student1', role: 'student' };
 const owner = { ...session }, other = { sub: 'owner-2', username: 'student2', role: 'student' }, admin = { sub: 'admin-1', username: 'admin', role: 'admin' };
 const routeSource = fs.readFileSync(new URL('../api/data.js', import.meta.url), 'utf8').replace(/^import .*;\n/gm, '').replace('export default async function handler', 'async function handler');
-const handler = new Function('getDb','getSession','ObjectId','recordActivity','handleMathSupport','canAccessProblem','supportVisibility', `${routeSource}\nreturn handler;`)(
-  async () => db, () => session, ObjectId, async () => {}, handleMathSupport, canAccessProblem, supportVisibility);
+const handler = new Function('getDb','getSession','ObjectId','recordActivity','handleMathSupport','canAccessProblem','supportVisibility','getCatalogTotals', `${routeSource}\nreturn handler;`)(
+  async () => db, () => session, ObjectId, async () => {}, handleMathSupport, canAccessProblem, supportVisibility, getCatalogTotals);
 async function call({ action, payload, query } = {}) {
   const res = { code: 0, setHeader() {}, status(n) { this.code = n; return this; }, json(body) { this.body = JSON.parse(JSON.stringify(body)); return this; } };
   await handler({ method: action ? 'POST' : 'GET', query, body: { action, payload } }, res);
@@ -274,5 +282,15 @@ Object.defineProperty(fileInput, 'files', { value: [png] });
 fileInput.dispatchEvent(new window.Event('change')); await tick();
 assert.equal(window.document.getElementById('supportImagePreview').hidden, false);
 assert.equal(window.document.getElementById('supportOcrButton').disabled, false);
+session = owner;
+const ownStats = await call({ query: { resource: 'home_stats' } });
+assert.equal(ownStats.code, 200);
+assert.equal(ownStats.body.items[0].supportScope, 'own');
+assert.equal(ownStats.body.items[0].standaloneProblems, rows.get('problems').filter(row => row.sourceGroup === 'math_support' && row.status === 'published' && row.ownerId === owner.sub).length);
+session = admin;
+const systemStats = await call({ query: { resource: 'home_stats' } });
+assert.equal(systemStats.code, 200);
+assert.equal(systemStats.body.items[0].supportScope, 'all');
+assert.equal(systemStats.body.items[0].standaloneProblems, rows.get('problems').filter(row => row.sourceGroup === 'math_support' && row.status === 'published').length);
 window.close();
 console.log('Math support: OCR -> client service -> route -> DB -> actions, owner isolation, revisions, pagination and retry safety: OK');
