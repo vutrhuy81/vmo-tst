@@ -65,7 +65,7 @@ export function auditTrendReport(raw, normalized, evidence, analysisSample, prac
     const stat = expected.get(topic.topic);
     if (!stat || Number(topic.questionCount) !== stat.questionCount ||
         Math.abs(Number(topic.prevalencePercent) - stat.prevalencePercent) > 0.05) {
-      issues.push(`Số liệu chuyên đề ${index + 1} không khớp Atlas.`);
+      issues.push(`Số liệu chuyên đề ${index + 1} không khớp cơ sở dữ liệu.`);
     }
     for (const method of topic.frequentMethods || []) {
       const ids = method.evidenceIds || [];
@@ -79,10 +79,10 @@ export function auditTrendReport(raw, normalized, evidence, analysisSample, prac
     }
   }
   for (const pattern of raw?.recurringPatterns || []) {
-    if ((pattern.evidenceIds || []).some(id => !sample.has(id))) issues.push('Mẫu lặp lại có mã dẫn ngoài mẫu Atlas.');
+    if ((pattern.evidenceIds || []).some(id => !sample.has(id))) issues.push('Mẫu lặp lại có mã dẫn ngoài mẫu trong cơ sở dữ liệu.');
   }
   const total = normalized.topicTrends.reduce((count, item) => count + item.questionCount, evidence.otherQuestionCount);
-  if (total !== evidence.questionCount) issues.push('Tổng số câu không khớp Atlas.');
+  if (total !== evidence.questionCount) issues.push('Tổng số câu không khớp cơ sở dữ liệu.');
   return [...new Set(issues)];
 }
 
@@ -150,15 +150,15 @@ Chỉ nêu vi chủ đề có mã dẫn thực sự phù hợp trong mẫu; mỗ
       { ...evidence, samples: analysisSample }, { ...practiceEvidence, samples: practiceSample });
     const issues = auditTrendReport(generated.data, reviewedReport, evidence, analysisSample, practiceSample);
     if (issues.some(issue => issue.includes('sáu chuyên đề') || issue.includes('Tổng số câu'))) {
-      return res.status(422).json({ success: false, error: 'Báo cáo thiếu cấu trúc hoặc số liệu Atlas không khớp. Vui lòng thử lại.' });
+      return res.status(422).json({ success: false, error: 'Báo cáo thiếu cấu trúc hoặc số liệu trong cơ sở dữ liệu không khớp. Vui lòng thử lại.' });
     }
     // Mã không có trong Atlas đã bị normalizeTrendReport loại; bỏ các phương pháp
     // không còn câu dẫn để tránh gợi ý luyện tập không thể truy nguyên.
     const quality = {
       status: issues.length ? 'limited' : 'checked', verified: false, score: null,
       summary: issues.length
-        ? 'Số liệu do Atlas tính; một số mã hoặc tần suất GPT nêu chưa khớp mẫu. Kiểm tra phần hạn chế bên dưới.'
-        : 'Số liệu và mã dẫn đã được hệ thống đối chiếu với Atlas; nhận định diễn giải do một GPT tạo và tự rà soát.',
+        ? 'Số liệu được tính từ cơ sở dữ liệu; một số mã hoặc tần suất Gia sư Toán AI nêu chưa khớp mẫu. Kiểm tra phần hạn chế bên dưới.'
+        : 'Số liệu và mã dẫn đã được hệ thống đối chiếu với cơ sở dữ liệu; nhận định diễn giải do Gia sư Toán AI tạo và tự rà soát.',
       criticalIssues: issues.slice(0, 20), corrections: [], topicChecks: [],
       verifierModel: '', pipeline: 'GPT + kiểm tra dữ liệu Atlas'
     };
@@ -184,9 +184,9 @@ Chỉ nêu vi chủ đề có mã dẫn thực sự phù hợp trong mẫu; mỗ
     if (error?.message === 'EXAM_EVIDENCE_LIMIT') return res.status(422).json({ success: false,
       error: 'Kho đề tham chiếu vượt giới hạn xử lý; chưa phân tích từ tập dữ liệu không đầy đủ.' });
     if (error?.code === 'OPENAI_TIMEOUT') return res.status(504).json({ success: false,
-      error: 'GPT đã vượt quá thời gian chờ nên chưa tạo được bản phân tích.' });
+      error: 'Gia sư Toán AI đã vượt quá thời gian chờ nên chưa tạo được bản phân tích.' });
     if (error?.code === 'OPENAI_INVALID_JSON' || error?.code === 'OPENAI_INCOMPLETE') return res.status(502).json({ success: false,
-      error: 'GPT chưa trả về bản phân tích ở định dạng hợp lệ. Vui lòng thử lại.' });
+      error: 'Gia sư Toán AI chưa trả về bản phân tích ở định dạng hợp lệ. Vui lòng thử lại.' });
     return handleAiError(res, error);
   }
 }

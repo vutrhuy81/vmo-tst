@@ -70,7 +70,7 @@
       'btnAiGuideHide': '🙈 Hide Guide',
       'btnAiGuideCopy': '📋 Copy Guide',
       'btnAiGuideClose': '✕ Collapse',
-      'profBadge': 'VMO Math Professor',
+      'profBadge': 'AI Math Tutor',
 
       // 7. Book Dashboard & Cover
       'coverEyebrow': 'ADVANCED TRAINING MATERIAL FOR OLYMPIAD TEAMS',
@@ -297,7 +297,7 @@
     ['Bình luận', 'Commentary'],
     ['Nhận xét sau khi làm bài', 'Post-exam Analysis'],
     ['Kiến thức & Bổ đề Chuyên toán cần nắm vững', 'Essential Theorems & Lemmas'],
-    ['Ý tưởng then chốt & Phân tích của Giáo sư Toán', 'Key Insights & Professor\'s Analysis'],
+    ['Ý tưởng then chốt & Phân tích của Gia sư Toán AI', 'Key Insights & AI Math Tutor\'s Analysis'],
     ['Lời giải chi tiết từng bước (Chuẩn thi HSG Quốc gia)', 'Step-by-Step Rigorous Solution (VMO Standard)'],
     ['Sai lầm phổ biến & Lưu ý khi chấm thi', 'Common Pitfalls & Scoring Notes'],
     ['Bài toán', 'Problem'],

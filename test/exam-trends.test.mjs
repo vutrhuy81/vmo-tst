@@ -211,7 +211,7 @@ assert.equal(requestBody.mode, 'year');
 assert.equal(requestBody.year, '2026-2027');
 assert.equal(requestBody.includeCurrentYear, true);
 assert.equal(byId('trendSaveButton').disabled, false, 'GPT bác vẫn phải cho admin lưu báo cáo Gemini');
-assert.match(byId('trendResult').textContent, /GPT chưa duyệt/);
+assert.match(byId('trendResult').textContent, /Gia sư Toán AI chưa duyệt/);
 assert.match(byId('trendResult').textContent, /Tần suất phương pháp A/);
 assert.equal(byId('trendResult').querySelectorAll('.trend-topic-practice-button').length, 6);
 assert.ok(byId('trendResult').querySelector('.trend-collapse-report'), 'Báo cáo có nút thu gọn');
@@ -242,7 +242,7 @@ theoryBody.querySelector('form textarea').dispatchEvent(new window.Event('input'
 theoryBody.querySelector('form').dispatchEvent(new window.Event('submit', { bubbles: true, cancelable: true }));
 await new Promise(resolve => setTimeout(resolve, 10));
 assert.match(theoryBody.textContent, /Tổng quan đã sửa/);
-[...theoryBody.querySelectorAll('button')].find(button => button.textContent.includes('MongoDB')).click();
+[...theoryBody.querySelectorAll('button')].find(button => button.textContent.includes('cơ sở dữ liệu')).click();
 await new Promise(resolve => setTimeout(resolve, 10));
 assert.equal(storedTheory.theory.introduction, 'Tổng quan đã sửa');
 [...theoryBody.querySelectorAll('button')].find(button => button.textContent.includes('Chỉnh sửa')).click();

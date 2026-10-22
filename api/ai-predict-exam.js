@@ -69,7 +69,7 @@ export default async function handler(req, res) {
     if (settings.type === 'vmo' && !String(body?.outline || '').trim()) return res.status(400).json({ success: false,
       error: 'Vui lòng nhập khung câu hỏi và điểm cho VMO; mẫu mặc định Đà Nẵng không áp dụng cho VMO.' });
     if (!evidence.ownExamCount) {
-      return res.status(422).json({ success: false, error: 'Atlas chưa có đề quá khứ đã công bố của đơn vị này trong phạm vi năm đã chọn. Hãy nhập đề nguồn vào kho trước khi dự đoán.' });
+      return res.status(422).json({ success: false, error: 'Cơ sở dữ liệu chưa có đề quá khứ đã công bố của đơn vị này trong phạm vi năm đã chọn. Hãy nhập đề nguồn vào kho trước khi dự đoán.' });
     }
     const prompt = `Soạn một ĐỀ DỰ ĐOÁN để quản trị viên biên tập, không phải đề thi chính thức và không phải khẳng định đề sẽ ra.
 Đơn vị: ${settings.type === 'vmo' ? 'Kỳ thi VMO (HSG quốc gia môn Toán), không đồng nhất với kỳ tuyển chọn đội tuyển IMO' : settings.province}.
@@ -132,18 +132,18 @@ Hãy viết đúng ${slots.length} BÀI TOÁN MỚI, có giả thiết đủ, k�
     if (['AI_TIMEOUT', 'OPENAI_TIMEOUT'].includes(error?.code)) {
       console.error('[AI prediction timeout]', error.code);
       return res.status(504).json({ success: false, error: error.code === 'AI_TIMEOUT'
-        ? 'Gemini đã vượt quá 140 giây. Chưa có đề được kiểm định hoặc lưu; vui lòng thử lại.'
-        : 'GPT đã vượt quá 150 giây. Đề chưa được kiểm định hoặc lưu; vui lòng thử lại.' });
+        ? 'Gia sư Toán AI đã vượt quá 140 giây. Chưa có đề được kiểm định hoặc lưu; vui lòng thử lại.'
+        : 'Gia sư Toán AI đã vượt quá 150 giây. Đề chưa được kiểm định hoặc lưu; vui lòng thử lại.' });
     }
-    if (error?.code === 'OPENAI_NOT_CONFIGURED') return res.status(503).json({ success: false, error: error.message });
+    if (error?.code === 'OPENAI_NOT_CONFIGURED') return res.status(503).json({ success: false, error: 'Gia sư Toán AI tạm thời chưa sẵn sàng. Vui lòng thử lại sau.' });
     if (error?.code === 'AI_INVALID_JSON') return res.status(502).json({ success: false,
       error: error.finishReason === 'MAX_TOKENS'
-        ? 'Gemini đã hết ngân sách đầu ra khi soạn đề; đề chưa được kiểm định. Hãy thử lại với cấu trúc ngắn hơn.'
-        : 'Gemini chưa trả về đề ở định dạng hợp lệ; đề chưa được kiểm định. Vui lòng thử lại.' });
+        ? 'Gia sư Toán AI đã vượt giới hạn độ dài phản hồi khi soạn đề; đề chưa được kiểm định. Hãy thử lại với cấu trúc ngắn hơn.'
+        : 'Gia sư Toán AI chưa trả về đề ở định dạng hợp lệ; đề chưa được kiểm định. Vui lòng thử lại.' });
     if (error?.code === 'OPENAI_INCOMPLETE') return res.status(502).json({ success: false,
       error: error.reason === 'max_output_tokens'
-        ? 'GPT chưa hoàn tất kiểm định vì hết ngân sách đầu ra; đề chưa được duyệt. Vui lòng thử lại với cấu trúc ngắn hơn.'
-        : 'GPT chưa hoàn tất kiểm định; đề chưa được duyệt. Vui lòng thử lại.' });
+        ? 'Gia sư Toán AI chưa hoàn tất kiểm định vì vượt giới hạn độ dài phản hồi; đề chưa được duyệt. Vui lòng thử lại với cấu trúc ngắn hơn.'
+        : 'Gia sư Toán AI chưa hoàn tất kiểm định; đề chưa được duyệt. Vui lòng thử lại.' });
     return handleAiError(res, error);
   }
 }
