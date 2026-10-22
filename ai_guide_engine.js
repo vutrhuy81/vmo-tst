@@ -752,15 +752,16 @@
   function appendGuideGeometry(container, guide, isEn, onGenerate) {
     const figure = window.MathAppGeometry?.figure(document, guide?.geometry, isEn);
     if (figure) container.append(figure);
-    else if (guide?.geometryRequested || /hình học|geometry/i.test(guide?.branch || '')) {
+    const eligible = figure || guide?.geometryRequested || /hình học|geometry/i.test(guide?.branch || '');
+    if (!figure && eligible) {
       const notice = document.createElement('p'); notice.className = 'ai-geometry-unavailable';
       notice.textContent = isEn ? 'No validated diagram is available for this guide.' : 'Chưa có hình vẽ hợp lệ cho hướng dẫn giải này.';
       container.append(notice);
-      if (onGenerate) {
-        const button = document.createElement('button'); button.type = 'button'; button.className = 'btn-guide-action ai-geometry-generate';
-        button.textContent = isEn ? 'Create / retry diagram' : 'Tạo / Thử lại hình vẽ';
-        button.onclick = onGenerate; container.append(button);
-      }
+    }
+    if (eligible && onGenerate) {
+      const button = document.createElement('button'); button.type = 'button'; button.className = 'btn-guide-action ai-geometry-generate';
+      button.textContent = figure ? (isEn ? 'Redraw diagram' : 'Vẽ lại hình') : (isEn ? 'Create / retry diagram' : 'Tạo / Thử lại hình vẽ');
+      button.onclick = onGenerate; container.append(button);
     }
   }
 
@@ -776,6 +777,7 @@
     if (!context || !panel || context.diagramBusy || panel.dataset.guideEditing === 'true') return false;
     const button = panel.querySelector('.ai-geometry-generate');
     const guideAtStart = context.rawGuide;
+    const originalButtonText = button?.textContent;
     const solution = guideAtStart.solution;
     context.diagramBusy = true;
     if (button) { button.disabled = true; button.textContent = window.currentLang === 'en' ? 'Drawing…' : 'Đang dựng và kiểm tra hình…'; }
@@ -797,12 +799,16 @@
       mountGuideGeometry(panel, context.rawGuide);
       return true;
     } catch (error) {
-      const notice = panel.querySelector('.ai-geometry-unavailable');
-      if (notice) notice.textContent = error.message;
+      let notice = panel.querySelector('.ai-geometry-unavailable');
+      if (!notice) {
+        notice = document.createElement('p'); notice.className = 'ai-geometry-unavailable';
+        panel.querySelector('[data-guide-field="solution"]')?.append(notice);
+      }
+      notice.textContent = error.message;
       return false;
     } finally {
       context.diagramBusy = false;
-      if (button) { button.disabled = false; button.textContent = window.currentLang === 'en' ? 'Create / retry diagram' : 'Tạo / Thử lại hình vẽ'; }
+      if (button) { button.disabled = false; button.textContent = originalButtonText || (window.currentLang === 'en' ? 'Create / retry diagram' : 'Tạo / Thử lại hình vẽ'); }
     }
   };
 
@@ -1284,6 +1290,8 @@
 
       const s4 = panel.querySelector('.ai-section-notes .ai-section-title span');
       if (s4) s4.textContent = isEn ? '⚠️ 4. Common Pitfalls & Scoring Notes' : '⚠️ 4. Sai lầm phổ biến & Lưu ý khi chấm thi';
+      const context = aiGuideContexts.get(panel.id.replace('ai-panel-', ''));
+      if (context?.rawGuide && !context.diagramBusy && panel.dataset.guideEditing !== 'true') mountGuideGeometry(panel, context.rawGuide);
     });
   });
 

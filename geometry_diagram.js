@@ -70,7 +70,7 @@
     }
     const origin = value.points[0], scale = Math.max(1e-6, ...value.points.map(p => distance(origin, p)));
     const known = new Map(value.points.map(p => [p.id, { x: (p.x - origin.x) / scale, y: (p.y - origin.y) / scale }]));
-    const points = value.points.map(p => ({ id: p.id, x: p.x, y: p.y }));
+    const points = value.points.map(p => ({ id: p.id, x: p.x, y: p.y, auxiliary: p.auxiliary === true }));
     let pending = [...instructions];
     while (pending.length) {
       const next = [];
@@ -79,7 +79,7 @@
         let result;
         try { result = construct(op.type, op.points.map(id => known.get(id)), op.parameter); }
         catch (error) { error.message = `${op.id}: ${error.message}`; throw error; }
-        const point = { id: op.id, x: origin.x + result.x * scale, y: origin.y + result.y * scale };
+        const point = { id: op.id, x: origin.x + result.x * scale, y: origin.y + result.y * scale, auxiliary: op.auxiliary === true };
         if (!finitePoint(point)) fail('INVALID_POINT', `${op.id}: constructed coordinates are outside the supported range.`);
         known.set(op.id, result); points.push(point);
       }
@@ -101,7 +101,7 @@
     const points = [], byId = new Map();
     for (const p of value.points) {
       if (!p || typeof p.id !== 'string' || !/^[A-Za-z][A-Za-z0-9_']{0,15}$/.test(p.id) || byId.has(p.id) || typeof p.x !== 'number' || typeof p.y !== 'number' || !Number.isFinite(p.x) || !Number.isFinite(p.y) || Math.max(Math.abs(p.x), Math.abs(p.y)) > 10000) fail('INVALID_POINT', 'Invalid point label or coordinates.');
-      const point = { id: p.id, x: p.x, y: p.y }; points.push(point); byId.set(p.id, point);
+      const point = { id: p.id, x: p.x, y: p.y, auxiliary: p.auxiliary === true }; points.push(point); byId.set(p.id, point);
     }
     const span = Math.max(...['x', 'y'].map(axis => Math.max(...points.map(p => p[axis])) - Math.min(...points.map(p => p[axis]))));
     if (span < 1e-6) fail('DEGENERATE_GEOMETRY', 'All points coincide.');
@@ -143,9 +143,10 @@
   function figure(doc, value, english = false) {
     const data = clean(value);
     if (!data) return null;
+    const auxiliaryColor = '#dc2626';
     const ns = 'http://www.w3.org/2000/svg';
     const node = (tag, attrs) => { const el = doc.createElementNS(ns, tag); for (const [key, val] of Object.entries(attrs)) el.setAttribute(key, String(val)); return el; };
-    const figure = doc.createElement('figure'); figure.className = 'ai-geometry-figure'; figure.style.cssText = 'margin:16px 0;padding:12px;border:1px solid #cbd5e1;border-radius:10px;background:#fff;color:#0f172a;break-inside:avoid;';
+    const figure = doc.createElement('figure'); figure.className = 'ai-geometry-figure'; figure.style.cssText = 'margin:16px 0;padding:12px;border:1px solid #cbd5e1;border-radius:10px;background:#fff;color:#0f172a;break-inside:avoid;print-color-adjust:exact;-webkit-print-color-adjust:exact;';
     const title = english ? 'Geometry diagram' : 'Hình vẽ bài toán';
     const heading = doc.createElement('strong'); heading.textContent = title; figure.append(heading);
     const svg = node('svg', { viewBox: '0 0 760 500', role: 'img', 'aria-label': title, preserveAspectRatio: 'xMidYMid meet' });
@@ -157,13 +158,20 @@
     const minX = Math.min(...xs), maxX = Math.max(...xs), minY = Math.min(...ys), maxY = Math.max(...ys);
     const scale = Math.min(660 / Math.max(maxX - minX, 1e-6), 400 / Math.max(maxY - minY, 1e-6));
     const pos = p => ({ x: 380 + (p.x - (minX + maxX) / 2) * scale, y: 250 - (p.y - (minY + maxY) / 2) * scale });
-    for (const c of data.circles) { const o = map.get(c.center), p = pos(o); svg.append(node('circle', { cx: p.x, cy: p.y, r: distance(o, map.get(c.through)) * scale, fill: 'none', stroke: '#334155', 'stroke-width': 1.8, 'stroke-dasharray': c.auxiliary ? '6 4' : 'none' })); }
-    for (const s of data.segments) { const a = pos(map.get(s.from)), b = pos(map.get(s.to)); svg.append(node('line', { x1: a.x, y1: a.y, x2: b.x, y2: b.y, stroke: s.auxiliary ? '#64748b' : '#0f172a', 'stroke-width': 1.8, 'stroke-dasharray': s.auxiliary ? '6 4' : 'none' })); }
+    for (const c of data.circles) { const o = map.get(c.center), p = pos(o); svg.append(node('circle', { cx: p.x, cy: p.y, r: distance(o, map.get(c.through)) * scale, fill: 'none', stroke: c.auxiliary ? auxiliaryColor : '#334155', 'stroke-width': 1.8, 'stroke-dasharray': c.auxiliary ? '6 4' : 'none' })); }
+    for (const s of data.segments) { const a = pos(map.get(s.from)), b = pos(map.get(s.to)); svg.append(node('line', { x1: a.x, y1: a.y, x2: b.x, y2: b.y, stroke: s.auxiliary ? auxiliaryColor : '#0f172a', 'stroke-width': 1.8, 'stroke-dasharray': s.auxiliary ? '6 4' : 'none' })); }
     for (const p of data.points) {
-      const a = pos(p); svg.append(node('circle', { cx: a.x, cy: a.y, r: 3, fill: '#0f172a' }));
-      const label = node('text', { x: a.x + (a.x > 380 ? -7 : 7), y: a.y - 9, 'text-anchor': a.x > 380 ? 'end' : 'start', fill: '#0f172a', 'font-size': 16, 'font-family': 'serif', 'font-style': 'italic', stroke: '#fff', 'stroke-width': 3, 'paint-order': 'stroke' }); label.textContent = p.id; svg.append(label);
+      const a = pos(p), color = p.auxiliary ? auxiliaryColor : '#0f172a';
+      svg.append(node('circle', { cx: a.x, cy: a.y, r: 3, fill: color }));
+      const label = node('text', { x: a.x + (a.x > 380 ? -7 : 7), y: a.y - 9, 'text-anchor': a.x > 380 ? 'end' : 'start', fill: color, 'font-size': 16, 'font-family': 'serif', 'font-style': 'italic', stroke: '#fff', 'stroke-width': 3, 'paint-order': 'stroke' }); label.textContent = p.id; svg.append(label);
     }
     figure.append(svg);
+    if (data.points.some(p => p.auxiliary) || data.segments.some(s => s.auxiliary) || data.circles.some(c => c.auxiliary)) {
+      const legend = doc.createElement('p'); legend.className = 'ai-geometry-legend';
+      legend.style.cssText = 'font-size:0.85em;margin:6px 0;color:#dc2626;';
+      legend.textContent = english ? 'Red points and dashed red lines: auxiliary elements added in the solution.' : 'Điểm đỏ và đường đỏ nét đứt: phần dựng thêm trong lời giải.';
+      figure.append(legend);
+    }
     const caption = doc.createElement('figcaption'); caption.style.cssText = 'font-size:0.9em;color:#475569;';
     caption.textContent = (data.caption ? data.caption + ' — ' : '') + (english ? 'Illustration of one configuration; the proof covers all cases.' : 'Hình minh họa một cấu hình; kết luận phải dựa trên chứng minh.'); figure.append(caption);
     return figure;

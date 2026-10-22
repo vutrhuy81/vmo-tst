@@ -17,6 +17,12 @@ const simson={isGeometry:true,caption:'Hình kiểm thử đường Simson',
     {type:'collinear',points:['X','Y','Z']},{type:'collinear',points:['X1','Y1','Z1']},{type:'collinear',points:['X1','Y1','H']},{type:'midpoint',points:['M','B','C']}]
 };
 const exact=clean(simson);assert.ok(exact,JSON.stringify(inspect(simson).issues));
+const tagged = structuredClone(simson);
+tagged.constructions.find(point => point.id === 'M').auxiliary = true;
+const classified = clean(tagged);
+assert.equal(classified.points.find(point => point.id === 'M').auxiliary, true, 'Auxiliary classification survives coordinate construction');
+assert.equal(classified.points.find(point => point.id === 'O').auxiliary, false, 'Constructed points defined in the statement do not become auxiliary automatically');
+assert.deepEqual(clean(classified), classified, 'Auxiliary classifications survive persistence sanitization');
 const point=(diagram,id)=>diagram.points.find(p=>p.id===id);
 assert.ok(Math.abs(point(exact,'O').x-1)<1e-12);assert.ok(Math.abs(point(exact,'O').y-0.125)<1e-12);
 assert.ok(Math.abs(point(exact,'H').y-3.75)<1e-12);

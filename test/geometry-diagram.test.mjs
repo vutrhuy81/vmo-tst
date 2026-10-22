@@ -10,7 +10,7 @@ for (const path of ['../src/template.html', '../index.html']) {
 
 const triangle = {
   isGeometry: true, caption: 'Tam giác ABC, M là trung điểm BC; AH vuông góc BC.',
-  points: [{ id:'A',x:0,y:3 }, { id:'B',x:-2,y:0 }, { id:'C',x:4,y:0 }, { id:'M',x:1,y:0 }, { id:'H',x:0,y:0 }, { id:'O',x:1,y:1/6 }],
+  points: [{ id:'A',x:0,y:3,auxiliary:false }, { id:'B',x:-2,y:0,auxiliary:false }, { id:'C',x:4,y:0,auxiliary:false }, { id:'M',x:1,y:0,auxiliary:false }, { id:'H',x:0,y:0,auxiliary:true }, { id:'O',x:1,y:1/6,auxiliary:true }],
   segments: [['A','B'],['B','C'],['C','A'],['A','M'],['A','H']].map(([from,to],i)=>({from,to,auxiliary:i>2})),
   circles: [{center:'O',through:'A',auxiliary:true}],
   constraints: [{type:'midpoint',points:['M','B','C']},{type:'perpendicular',points:['A','H','B','C']},{type:'collinear',points:['B','H','C']}, ...['B','C'].map(id=>({type:'onCircle',points:[id,'O','A']}))]
@@ -41,6 +41,13 @@ const figure = globalThis.MathAppGeometry.figure(doc,mutate(v=>v.caption='<img s
 assert.equal(figure.querySelectorAll('line').length,5); assert.equal(figure.querySelectorAll('svg text').length,6);
 assert.equal(figure.querySelectorAll('script,img,a,foreignObject').length,0);
 assert.ok(figure.textContent.includes('<img'));assert.equal(figure.querySelector('svg').getAttribute('role'),'img');
+assert.equal(figure.querySelectorAll('svg line[stroke="#dc2626"]').length, 2);
+assert.equal(figure.querySelector('svg circle[fill="none"]').getAttribute('stroke'), '#dc2626');
+assert.equal(figure.querySelectorAll('svg circle[r="3"][fill="#dc2626"]').length, 2);
+const pointLabel = id => [...figure.querySelectorAll('svg text')].find(label => label.textContent === id);
+assert.equal(pointLabel('H').getAttribute('fill'), '#dc2626');
+assert.equal(pointLabel('M').getAttribute('fill'), '#0f172a', 'A point given in the statement stays dark even when joined by an auxiliary segment');
+assert.match(figure.querySelector('.ai-geometry-legend').textContent, /dựng thêm/);
 for(const el of figure.querySelectorAll('line,circle,text'))for(const attr of el.attributes)assert.doesNotMatch(attr.value,/NaN|Infinity/);
 
 // Exercise the actual route with provider doubles: permissions precede generation,
@@ -69,9 +76,18 @@ const guide={branch:'Hình học phẳng',knowledge:'Tam giác',intuition:'Dựn
 for(const persisted of [false,true])for(const support of [false,true]){
   const h=await createHarness({persisted,support,guide});
   assert.equal(h.panel.querySelectorAll('[data-guide-field="solution"] .ai-geometry-figure').length,1);
+  assert.equal(h.panel.querySelector('.ai-geometry-generate').textContent, 'Vẽ lại hình');
+  assert.equal(await h.window.generateAIGuideDiagram(h.problemId), true, 'Existing diagrams can be redrawn to refresh auxiliary classifications');
+  assert.equal(h.updateCalls.length + h.submitCalls.length, 0, 'Redrawing requires an explicit save to persist');
+  h.window.currentLang = 'en'; h.window.dispatchEvent(new h.window.CustomEvent('langchange', { detail: { lang: 'en' } }));
+  assert.equal(h.panel.querySelector('.ai-geometry-generate').textContent, 'Redraw diagram');
+  assert.match(h.panel.querySelector('.ai-geometry-legend').textContent, /auxiliary elements/);
+  h.window.currentLang = 'vi'; h.window.dispatchEvent(new h.window.CustomEvent('langchange', { detail: { lang: 'vi' } }));
   const popup=new JSDOM('<!doctype html>');h.window.open=()=>popup.window;popup.window.focus=()=>{};popup.window.print=()=>{};
   assert.equal(await h.window.printAIGuide(h.problemId),true);
   assert.equal(popup.window.document.querySelectorAll('svg line').length,5,'PDF/print retains vector diagram');
+  assert.equal(popup.window.document.querySelectorAll('svg line[stroke="#dc2626"]').length, 2, 'PDF/print preserves red auxiliary lines');
+  assert.equal(popup.window.document.querySelectorAll('svg circle[r="3"][fill="#dc2626"]').length, 2, 'PDF/print preserves red auxiliary points');
   assert.equal(popup.window.document.querySelectorAll('.ai-geometry-generate').length,0);
   await h.window.saveAIGuideToDatabase(h.problemId,'Hình học phẳng');
   const stored=h.updateCalls[0]?.[1] || h.submitCalls[0][5].aiGuide;

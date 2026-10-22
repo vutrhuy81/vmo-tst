@@ -97,3 +97,9 @@ Hướng dẫn cho bài hình học phẳng có thêm hình SVG gồm các đi�
 - Dữ liệu hình được tính và kiểm tra trước khi gửi GPT; kết quả GPT trả về được tính/kiểm tra lại. Cho phép một lượt hiệu chỉnh theo lỗi cụ thể trong thời hạn yêu cầu. Nếu vẫn không vượt qua kiểm tra, giao diện và log trả mã lỗi phân biệt lỗi tọa độ/ràng buộc với lỗi kiểm định nội dung; lời giải vẫn hiển thị cùng thông báo và nút thử lại. Khi sửa nội dung hướng dẫn, hình cũ bị loại bỏ để dựng lại; bản in của nội dung đang sửa cũng không dùng hình cũ.
 
 Hình biểu diễn một cấu hình minh họa, không phải chứng minh hình học. Kiểm tra số học chỉ kiểm tra các quan hệ đã khai báo; độ đầy đủ và sự phù hợp với đề bài còn phụ thuộc bước kiểm định AI. Phiên bản này hỗ trợ hình học phẳng, chưa dựng hình không gian hay các đường cong tổng quát. Chạy `node test/geometry-constructions.test.mjs` và `node test/geometry-diagram.test.mjs` để kiểm tra hình học, API với mô hình giả lập, lưu dữ liệu, giao diện và bản in.
+
+### Màu sắc phần dựng thêm trong lời giải
+
+- Điểm, nhãn điểm, đoạn thẳng và đường tròn bổ sung ngoài đề bài có `auxiliary: true`: hiển thị màu đỏ; đường phụ vẫn dùng nét đứt để phân biệt trên bản in đen trắng. Các đối tượng được đề bài định nghĩa giữ màu gốc, kể cả khi tọa độ được tính bằng phép dựng.
+- Nhãn `auxiliary` của điểm được bảo toàn khi tính tọa độ, kiểm định, lưu/tải lại và in/PDF. Mô hình sinh và mô hình kiểm định đều đối chiếu phân loại với đề bài và lời giải.
+- Hình cũ vẫn đọc được. Các đường đã có cờ phụ chuyển sang đỏ ngay; điểm cũ thiếu thông tin phân loại không bị tự động suy đoán. Bấm **Vẽ lại hình** rồi lưu hướng dẫn để cập nhật phân loại điểm theo lời giải.
