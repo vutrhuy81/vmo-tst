@@ -303,7 +303,7 @@
   function renderAIGuideHtml(problemId, guideData, topic) {
     const isEn = (window.currentLang === 'en');
     const headerTitle = isEn ? '🎓 AI Solution Guide' : '🎓 AI Hướng dẫn giải';
-    const profBadge = isEn ? 'VMO Math Professor' : 'Giáo sư Toán học VMO';
+    const profBadge = isEn ? 'AI Math Tutor' : 'Gia sư Toán AI';
     const copyTitle = isEn ? 'Copy full guide & solution' : 'Sao chép toàn bộ lời giải và kiến thức';
     const copyBtn = isEn ? '📋 Copy Guide' : '📋 Sao chép hướng dẫn';
     const closeTitle = isEn ? 'Collapse guide' : 'Thu gọn hướng dẫn';
@@ -315,19 +315,20 @@
       : '';
     const rag = guideData.quality?.retrieval;
     const safeRagText = value => String(value || '').replace(/[&<>"']/g, char => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[char]));
-    const ragBadge = rag ? `<span class="prof-badge">📚 RAG ${safeRagText(rag.mode)} · ${safeRagText((rag.sources || []).map(item => `${item.matchType}: ${item.problemKey}`).join('; ') || 'Tự giải độc lập')}</span>` : '';
+    const referenceKeys = (rag?.sources || []).map(item => item.problemKey).filter(Boolean);
+    const ragBadge = rag ? `<span class="prof-badge ai-guide-reference-badge">📚 <span class="ai-guide-reference-label">${isEn ? 'Solution references:' : 'Tham chiếu lời giải:'}</span> ${referenceKeys.length ? `<strong>${safeRagText(referenceKeys.join('; '))}</strong>` : `<span class="ai-guide-reference-empty">${isEn ? 'AI Math Tutor generated this solution independently' : 'Gia sư Toán AI tự xây dựng lời giải'}</span>`}</span>` : '';
     const adminEditedBadge = guideData.adminEdited
       ? `<span class="prof-badge ai-guide-admin-edited-badge" style="background:#f3e8ff;color:#6b21a8;">✏️ ${isEn ? 'Admin edited' : 'Admin đã chỉnh sửa'}</span>`
       : '';
     const persistedBadge = guideData.persisted
-      ? `<span class="prof-badge ai-guide-persisted-badge" style="background:#e0f2fe;color:#075985;">☁ ${isEn ? 'Loaded from MongoDB' : 'Đã tải từ MongoDB'}</span>`
+      ? `<span class="prof-badge ai-guide-persisted-badge" style="background:#e0f2fe;color:#075985;">☁ ${isEn ? 'Loaded from the database' : 'Đã tải từ cơ sở dữ liệu'}</span>`
       : '';
     const canDeleteSaved = guideData.persisted && /^[a-f\d]{24}$/i.test(String(guideData.savedGuideId || '')) &&
       window.VMOAuth?.getSession?.()?.role === 'admin';
     const canEditGuide = window.VMOAuth?.getSession?.()?.role === 'admin';
 
     const sec1 = isEn ? '🎯 1. Essential Theorems & Lemmas' : '🎯 1. Kiến thức & Bổ đề Chuyên toán cần nắm vững';
-    const sec2 = isEn ? '💡 2. Key Insights & Professor\'s Analysis' : '💡 2. Ý tưởng then chốt & Phân tích của Giáo sư Toán';
+    const sec2 = isEn ? '💡 2. Key Insights & AI Math Tutor\'s Analysis' : '💡 2. Ý tưởng then chốt & Phân tích của Gia sư Toán AI';
     const sec3 = isEn ? '📝 3. Step-by-Step Rigorous Solution (VMO Standard)' : '📝 3. Lời giải chi tiết từng bước (Chuẩn thi HSG Quốc gia)';
     const sec4 = isEn ? '⚠️ 4. Common Pitfalls & Scoring Notes' : '⚠️ 4. Sai lầm phổ biến & Lưu ý khi chấm thi';
 
@@ -343,13 +344,13 @@
             <span style="font-size: 0.8rem; font-weight: 500; color: #64748b; margin-left: 4px;">• ${topic || guideData.branch || defaultTopic}</span>
           </div>
           <div class="ai-guide-actions">
-            <button type="button" class="btn-guide-action" id="btn-save-ai-${problemId}" onclick="saveAIGuideToDatabase('${problemId}', '${(topic || guideData.branch || defaultTopic).replace(/'/g, "\\'")}')" title="Lưu hướng dẫn giải này vào MongoDB" style="color: #0284c7; font-weight: 600;">
-              ${guideData.persisted ? '💾 Cập nhật lời giải MongoDB' : '🚀 Lưu bài giải lên MongoDB'}
+            <button type="button" class="btn-guide-action" id="btn-save-ai-${problemId}" onclick="saveAIGuideToDatabase('${problemId}', '${(topic || guideData.branch || defaultTopic).replace(/'/g, "\\'")}')" title="Lưu hướng dẫn giải này vào cơ sở dữ liệu" style="color: #0284c7; font-weight: 600;">
+              ${guideData.persisted ? '💾 Cập nhật lời giải đã lưu' : '🚀 Lưu bài giải vào cơ sở dữ liệu'}
             </button>
             ${canEditGuide ? `<button type="button" class="btn-guide-action btn-ai-guide-edit" onclick="editAIGuideContent('${problemId}')" style="color:#7c3aed;font-weight:600;" title="Chỉnh sửa bốn phần nội dung Markdown/LaTeX trước hoặc sau khi lưu">✏️ Chỉnh sửa nội dung</button>` : ''}
             ${canEditGuide ? `<button type="button" class="btn-guide-action btn-ai-guide-apply" onclick="applyAIGuideEdits('${problemId}')" style="display:none;color:#047857;font-weight:600;">👁️ Áp dụng & xem trước</button>` : ''}
             ${canEditGuide ? `<button type="button" class="btn-guide-action btn-ai-guide-cancel" onclick="cancelAIGuideEdits('${problemId}')" style="display:none;">↩️ Hủy chỉnh sửa</button>` : ''}
-            ${canDeleteSaved ? `<button type="button" class="btn-guide-action btn-ai-guide-delete" onclick="deleteSavedAIGuide('${problemId}')" style="color:#be123c;" title="Xóa lời giải AI đã lưu trong MongoDB">${isEn ? '🗑️ Delete saved guide' : '🗑️ Xóa lời giải đã lưu'}</button>` : ''}
+            ${canDeleteSaved ? `<button type="button" class="btn-guide-action btn-ai-guide-delete" onclick="deleteSavedAIGuide('${problemId}')" style="color:#be123c;" title="Xóa lời giải AI đã lưu trong cơ sở dữ liệu">${isEn ? '🗑️ Delete saved guide' : '🗑️ Xóa lời giải đã lưu'}</button>` : ''}
             <button type="button" class="btn-guide-action btn-ai-guide-print" onclick="printAIGuide('${problemId}')" title="${isEn ? 'Print or save as PDF' : 'In hoặc lưu kết quả dưới dạng PDF'}">${isEn ? '🖨️ Print / Export PDF' : '🖨️ In / Xuất PDF'}</button>
             <button type="button" class="btn-guide-action" onclick="copyAIGuideText('${problemId}')" title="${copyTitle}">
               ${copyBtn}
@@ -477,12 +478,12 @@
       <div class="ai-guide-header">
         <div class="ai-guide-title">
           <span>🎓 AI Hướng dẫn giải</span>
-          <span class="prof-badge">Giáo sư Toán học VMO</span>
+          <span class="prof-badge">Gia sư Toán AI</span>
         </div>
       </div>
       <div class="ai-loading-state">
         <div class="ai-spinner"></div>
-        <div style="font-weight: 500;">Giáo sư Toán học đang phân tích bản chất bài toán và tổng hợp định lý...</div>
+        <div style="font-weight: 500;">Gia sư Toán AI đang phân tích bản chất bài toán và tổng hợp định lý...</div>
       </div>
     `;
 
@@ -501,7 +502,10 @@
       try {
         const saved = await window.VMODataService.getLatestAiGuide(problemKey);
         if (saved?.aiGuide?.solution) {
-          rawGuide = saved.aiGuide;
+          rawGuide = { ...saved.aiGuide,
+            branch: saved.aiGuide.branch || problemTopic || 'Toán THPT Chuyên',
+            geometryRequested: saved.aiGuide.geometryRequested === true || /hình học|geometry/i.test(problemTopic || '')
+          };
           guideData = {
             branch: rawGuide.branch || problemTopic || 'Toán THPT Chuyên',
             knowledge: formatMarkdownToHtml(rawGuide.knowledge || ''),
@@ -878,7 +882,7 @@
       panel.querySelector('.ai-guide-title')?.appendChild(badge);
     }
     if (!options.silent) {
-      window.showVMOToast?.('Đã áp dụng nội dung chỉnh sửa. Kiểm tra MathJax rồi lưu MongoDB.', true);
+      window.showVMOToast?.('Đã áp dụng nội dung chỉnh sửa. Kiểm tra hiển thị công thức rồi lưu vào cơ sở dữ liệu.', true);
     }
     return true;
   };
@@ -911,7 +915,7 @@
 
     if (btn) {
       btn.disabled = true;
-      btn.innerHTML = '⏳ Đang lưu MongoDB...';
+      btn.innerHTML = '⏳ Đang lưu vào cơ sở dữ liệu...';
     }
 
     try {
@@ -962,36 +966,36 @@
           const badge = document.createElement('span');
           badge.className = 'prof-badge ai-guide-persisted-badge';
           badge.style.cssText = 'background:#e0f2fe;color:#075985;';
-          badge.textContent = '☁ Đã lưu MongoDB';
+          badge.textContent = '☁ Đã lưu vào cơ sở dữ liệu';
           panel.querySelector('.ai-guide-title')?.appendChild(badge);
         }
         if (btn) {
-          btn.innerHTML = '✅ Đã lưu vào MongoDB!';
+          btn.innerHTML = '✅ Đã lưu vào cơ sở dữ liệu!';
           btn.style.color = '#16a34a';
         }
         if (typeof window.showVMOToast === 'function') {
-          window.showVMOToast('Đã lưu bài giải thành công lên MongoDB!', true);
+          window.showVMOToast('Đã lưu bài giải thành công vào cơ sở dữ liệu!', true);
         } else {
-          alert('Đã lưu bài giải thành công lên MongoDB!');
+          alert('Đã lưu bài giải thành công vào cơ sở dữ liệu!');
         }
       } else {
-        throw new Error('Dịch vụ VMODataService chưa sẵn sàng.');
+        throw new Error('Dịch vụ lưu trữ chưa sẵn sàng. Vui lòng thử lại sau.');
       }
     } catch (err) {
       console.error('Lỗi khi lưu bài giải AI vào MongoDB:', err);
       if (btn) {
-        btn.innerHTML = '⚠️ Lỗi lưu MongoDB';
+        btn.innerHTML = '⚠️ Lỗi lưu vào cơ sở dữ liệu';
         btn.style.color = '#dc2626';
       }
-      alert('Lỗi lưu bài giải: ' + (err.message || 'Không thể ghi vào database'));
+      alert('Lỗi lưu bài giải: ' + (err.message || 'Không thể ghi vào cơ sở dữ liệu'));
     } finally {
       if (btn) {
         setTimeout(() => {
           btn.disabled = false;
           const context = aiGuideContexts.get(problemId);
           btn.innerHTML = /^[a-f\d]{24}$/i.test(String(context?.savedGuideId || ''))
-            ? '💾 Cập nhật lời giải MongoDB'
-            : '🚀 Lưu bài giải lên MongoDB';
+            ? '💾 Cập nhật lời giải đã lưu'
+            : '🚀 Lưu bài giải vào cơ sở dữ liệu';
           btn.style.color = '#0284c7';
         }, 3500);
       }
@@ -1019,14 +1023,14 @@
     const context = aiGuideContexts.get(problemId);
     const savedId = String(context?.savedGuideId || '');
     if (!/^[a-f\d]{24}$/i.test(savedId)) return;
-    if (!window.confirm('Xóa vĩnh viễn AI Hướng dẫn giải đã lưu trong MongoDB cho câu hỏi này? Bài nộp và đánh giá AI của thành viên được giữ nguyên.')) return;
+    if (!window.confirm('Xóa vĩnh viễn AI Hướng dẫn giải đã lưu trong cơ sở dữ liệu cho câu hỏi này? Bài nộp và đánh giá AI của thành viên được giữ nguyên.')) return;
     const button = document.getElementById(`ai-panel-${problemId}`)?.querySelector('.btn-ai-guide-delete');
     if (button) button.disabled = true;
     try {
       await window.VMODataService.deleteAiGuide(savedId);
       window.onAIGuideDeleted(savedId);
       window.loadLearningDashboard?.();
-      window.showVMOToast?.('Đã xóa AI Hướng dẫn giải đã lưu khỏi MongoDB.', true);
+      window.showVMOToast?.('Đã xóa AI Hướng dẫn giải đã lưu khỏi cơ sở dữ liệu.', true);
     } catch (error) {
       if (button) button.disabled = false;
       window.showVMOToast?.(error?.message || 'Không xóa được lời giải AI.', false);
@@ -1255,7 +1259,11 @@
       if (titleSpan) titleSpan.textContent = isEn ? '🎓 AI Solution Guide' : '🎓 AI Hướng dẫn giải';
 
       const profBadge = panel.querySelector('.prof-badge');
-      if (profBadge) profBadge.textContent = isEn ? 'VMO Math Professor' : 'Giáo sư Toán học VMO';
+      if (profBadge) profBadge.textContent = isEn ? 'AI Math Tutor' : 'Gia sư Toán AI';
+      const referenceLabel = panel.querySelector('.ai-guide-reference-label');
+      if (referenceLabel) referenceLabel.textContent = isEn ? 'Solution references:' : 'Tham chiếu lời giải:';
+      const referenceEmpty = panel.querySelector('.ai-guide-reference-empty');
+      if (referenceEmpty) referenceEmpty.textContent = isEn ? 'AI Math Tutor generated this solution independently' : 'Gia sư Toán AI tự xây dựng lời giải';
 
       const copyBtn = panel.querySelector('button[onclick^="copyAIGuideText"]');
       if (copyBtn) copyBtn.textContent = isEn ? '📋 Copy Guide' : '📋 Sao chép hướng dẫn';
@@ -1269,7 +1277,7 @@
       if (s1) s1.textContent = isEn ? '🎯 1. Essential Theorems & Lemmas' : '🎯 1. Kiến thức & Bổ đề Chuyên toán cần nắm vững';
 
       const s2 = panel.querySelector('.ai-section-idea .ai-section-title span');
-      if (s2) s2.textContent = isEn ? '💡 2. Key Insights & Professor\'s Analysis' : '💡 2. Ý tưởng then chốt & Phân tích của Giáo sư Toán';
+      if (s2) s2.textContent = isEn ? '💡 2. Key Insights & AI Math Tutor\'s Analysis' : '💡 2. Ý tưởng then chốt & Phân tích của Gia sư Toán AI';
 
       const s3 = panel.querySelector('.ai-section-solution .ai-section-title span');
       if (s3) s3.textContent = isEn ? '📝 3. Step-by-Step Rigorous Solution (VMO Standard)' : '📝 3. Lời giải chi tiết từng bước (Chuẩn thi HSG Quốc gia)';

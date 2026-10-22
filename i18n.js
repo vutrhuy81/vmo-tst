@@ -12,10 +12,9 @@
   const UI_TRANSLATIONS = {
     en: {
       // 1. Header & Hero
-      'heroBadge': '🇻🇳 VMO DA NANG 2026–2027 · ADVANCED MATHEMATICAL OLYMPIAD',
-      'heroTitle': 'NATIONAL MATHEMATICAL OLYMPIAD TEAM SELECTION & TRAINING',
-      'heroAuthor': 'Compiled by Tran Hoang Kien.',
-      'heroSchool': 'Phan Chau Trinh High School — Da Nang City.',
+      'heroBadge': 'MATHAPP · ADVANCED MATHEMATICS & OLYMPIADS',
+      'heroTitle': 'Master Advanced Mathematics with Your AI Tutor',
+      'heroSlogan': 'Understand deeply · Think sharply · Prepare for your next challenge.',
       'statChapters': 'Chapters',
       'statSections': 'Theory Sections',
       'statExamples': 'Solved Examples',
@@ -70,7 +69,7 @@
       'btnAiGuideHide': '🙈 Hide Guide',
       'btnAiGuideCopy': '📋 Copy Guide',
       'btnAiGuideClose': '✕ Collapse',
-      'profBadge': 'VMO Math Professor',
+      'profBadge': 'AI Math Tutor',
 
       // 7. Book Dashboard & Cover
       'coverEyebrow': 'ADVANCED TRAINING MATERIAL FOR OLYMPIAD TEAMS',
@@ -297,7 +296,7 @@
     ['Bình luận', 'Commentary'],
     ['Nhận xét sau khi làm bài', 'Post-exam Analysis'],
     ['Kiến thức & Bổ đề Chuyên toán cần nắm vững', 'Essential Theorems & Lemmas'],
-    ['Ý tưởng then chốt & Phân tích của Giáo sư Toán', 'Key Insights & Professor\'s Analysis'],
+    ['Ý tưởng then chốt & Phân tích của Gia sư Toán AI', 'Key Insights & AI Math Tutor\'s Analysis'],
     ['Lời giải chi tiết từng bước (Chuẩn thi HSG Quốc gia)', 'Step-by-Step Rigorous Solution (VMO Standard)'],
     ['Sai lầm phổ biến & Lưu ý khi chấm thi', 'Common Pitfalls & Scoring Notes'],
     ['Bài toán', 'Problem'],
@@ -355,31 +354,39 @@
 
     // 2. Cập nhật các thành phần cố định trong header & hero
     const heroBadge = document.querySelector('.hero-badge');
-    if (heroBadge) setNodeText(heroBadge, '🇻🇳 VMO ĐÀ NẴNG 2026–2027 · TÀI LIỆU CHUYÊN SÂU', UI_TRANSLATIONS.en.heroBadge, isEn);
-
+    if (heroBadge) setNodeText(heroBadge, 'MATHAPP · NỀN TẢNG TOÁN CHUYÊN & OLYMPIC', UI_TRANSLATIONS.en.heroBadge, isEn);
     const heroH1 = document.querySelector('.hero h1');
-    if (heroH1) setNodeText(heroH1, 'ÔN LUYỆN CHỌN ĐỘI TUYỂN HỌC SINH GIỎI QUỐC GIA MÔN TOÁN', UI_TRANSLATIONS.en.heroTitle, isEn);
-
-    const heroParagraphs = document.querySelectorAll('.hero > p');
-    if (heroParagraphs[0]) setNodeText(heroParagraphs[0], 'Người biên soạn - Trần Hoàng Kiên.', UI_TRANSLATIONS.en.heroAuthor, isEn);
-    if (heroParagraphs[1]) setNodeText(heroParagraphs[1], 'Trường THPT - Phan Châu Trình - Tp Đà Nẵng.', UI_TRANSLATIONS.en.heroSchool, isEn);
-
-    // Thống kê Hero Chips
-    const statLabels = document.querySelectorAll('.hero-stats .stat-chip .label');
-    const heroStatEn = [
-      'Provincial/City Exam Sets',
-      'Da Nang–Quang Nam Exams',
-      'Material Chapters',
-      UI_TRANSLATIONS.en.statSections,
-      UI_TRANSLATIONS.en.statExamples,
-      UI_TRANSLATIONS.en.statMocks
-    ];
-    statLabels.forEach((el, idx) => {
-      if (heroStatEn[idx]) {
-        if (!el._origViText) el._origViText = el.textContent;
-        el.textContent = isEn ? heroStatEn[idx] : el._origViText;
-      }
+    if (heroH1) setNodeText(heroH1, 'Chinh phục Toán chuyên cùng Gia sư AI', UI_TRANSLATIONS.en.heroTitle, isEn);
+    const heroSlogan = document.querySelector('.hero-slogan');
+    if (heroSlogan) setNodeText(heroSlogan, 'Hiểu sâu bản chất · Rèn tư duy sắc bén · Vững bước đến kỳ thi lớn.', UI_TRANSLATIONS.en.heroSlogan, isEn);
+    const statLabels = {
+      mock: ['🎯 Bộ đề thi thử VMO', '🎯 VMO practice exams'],
+      support: ['🧩 Hỗ trợ giải toán', '🧩 Problem-solving support'],
+      tst: ['🏛️ Đề TST', '🏛️ TST exams'],
+      vmo: ['🇻🇳 Đề VMO', '🇻🇳 VMO exams'],
+      olympic: ['🌐 Đề IMO–Olympic', '🌐 IMO–Olympiad exams'],
+      regional: ['🗂️ Đề Đà Nẵng–Quảng Nam', '🗂️ Da Nang–Quang Nam exams'],
+      olympic30: ['🏅 Đề Olympic 30/4', '🏅 April 30 Olympiad exams'],
+      duyenhai: ['🌊 Đề Duyên hải miền Bắc', '🌊 Northern Coastal exams']
+    };
+    document.querySelectorAll('[data-hero-stat-label]').forEach(node => {
+      const labels = statLabels[node.dataset.heroStatLabel];
+      if (labels) node.textContent = labels[isEn ? 1 : 0];
     });
+    document.querySelectorAll('[data-stat-unit]').forEach(node => {
+      node.textContent = node.dataset.statUnit === 'support' ? (isEn ? 'problems' : 'bài toán') : (isEn ? 'exams' : 'đề');
+    });
+    const statNote = document.querySelector('.hero-stat-note');
+    if (statNote?.firstChild) statNote.firstChild.textContent = isEn ? 'Each exam day counts as one exam. ' : 'Mỗi đề/ngày thi được tính là một đề. ';
+    const scopeNote = document.getElementById('supportStatsScope');
+    if (scopeNote) {
+      const all = document.querySelector('.hero-stats [data-catalog-stat="support"]')?.dataset.scope === 'all';
+      scopeNote.textContent = isEn ? (all ? 'Standalone problems: all accounts.' : 'Standalone problems: your account.') : (all ? 'Bài toán riêng lẻ: toàn hệ thống.' : 'Bài toán riêng lẻ: của bạn.');
+    }
+    const heroStats = document.querySelector('.hero-stats');
+    if (heroStats) heroStats.setAttribute('aria-label', isEn ? 'Exam and problem library statistics' : 'Thống kê kho đề và bài toán');
+    const brandTag = document.querySelector('.app-topbar-brand .brand-tag');
+    if (brandTag) brandTag.textContent = isEn ? 'Advanced math & Olympiads' : 'Toán chuyên & Olympic';
 
     // 3. Thanh Tab Navigation (Định vị chính xác theo ID và hành vi onclick, không dùng chỉ mục mảng)
     const btnDanang = document.getElementById('tab-btn-danang') || document.querySelector('.tab-btn[onclick*="tab-danang"]');
@@ -398,6 +405,17 @@
     if (btnVmo) setNodeText(btnVmo, '🇻🇳 Đề VMO', UI_TRANSLATIONS.en.tabVmo, isEn);
     if (btnOlympic) setNodeText(btnOlympic, '🌐 Đề IMO–Olympic', UI_TRANSLATIONS.en.tabOlympic, isEn);
     if (btnHistory) setNodeText(btnHistory, '🗂️ Đề Đà Nẵng–Quảng Nam', UI_TRANSLATIONS.en.tabHistory, isEn);
+
+    [
+      ['navGroupLearning', 'Học tập & luyện tập', 'Learning & practice'],
+      ['navGroupNational', 'Đề thi trong nước', 'Vietnamese examinations'],
+      ['navGroupOlympic', 'Olympic & giao lưu', 'Olympiads & exchanges'],
+      ['moduleNavigationCaption', 'Đang xem', 'Currently viewing'],
+      ['moduleNavigationAction', 'Chọn mục', 'Choose section']
+    ].forEach(([id, vi, en]) => { const node = document.getElementById(id); if (node) setNodeText(node, vi, en, isEn); });
+    const admissionTab = document.getElementById('tab-btn-admission');
+    if (admissionTab) setNodeText(admissionTab, '🎓 Đề thi vào lớp 10 chuyên', '🎓 Specialized grade-10 admissions', isEn);
+    window.refreshModuleNavigation?.();
 
     // 4. User Auth Bar
     const btnOpenUserMgmt = document.getElementById('btnOpenUserMgmt');
@@ -664,8 +682,8 @@
         : 'Đăng nhập | Ôn luyện VMO Đà Nẵng 2026 - 2027 & TST Toàn Quốc';
     } else {
       document.title = isEn
-        ? 'VMO Da Nang 2026–2027 | Complete Materials & TST'
-        : 'Ôn luyện VMO Đà Nẵng 2026–2027 | Tài liệu đầy đủ & TST';
+        ? 'MathApp | Master Advanced Mathematics with Your AI Tutor'
+        : 'MathApp | Chinh phục Toán chuyên cùng Gia sư AI';
     }
 
     // 11. Duyệt qua từ điển cụm từ để dịch các tiêu đề, đề mục và nội dung

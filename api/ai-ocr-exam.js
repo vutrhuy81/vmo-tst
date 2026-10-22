@@ -163,7 +163,7 @@ Quy tắc bắt buộc:
     }
     if (error?.code === 'AI_INVALID_JSON') {
       console.error('[Exam OCR invalid JSON]', { finishReason: error.finishReason });
-      return res.status(502).json({ success: false, error: 'Gemini chưa trả về cấu trúc đề thi hợp lệ. Vui lòng thử lại ảnh này.' });
+      return res.status(502).json({ success: false, error: 'Gia sư Toán AI chưa nhận dạng được đầy đủ cấu trúc đề thi. Vui lòng thử lại ảnh này.' });
     }
     return handleAiError(res, error);
   }

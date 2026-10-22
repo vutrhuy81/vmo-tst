@@ -131,8 +131,8 @@ export default async function handler(req, res) {
     return res.status(openAiTimeout ? 504 : (openAiMissing || geminiMissing ? 503 : 502)).json({
       success: false,
       error: openAiTimeout
-        ? (body.mode === 'diagram' ? 'Quá thời gian dựng hoặc kiểm tra hình vẽ. Vui lòng thử lại.' : 'Gemini đã tạo lời giải nhưng GPT kiểm định quá thời gian. Vui lòng thử lại.')
-        : (openAiMissing || geminiMissing ? error.message : 'Pipeline Gemini–GPT tạm thời không phản hồi'),
+        ? (body.mode === 'diagram' ? 'Gia sư Toán AI chưa hoàn tất dựng và kiểm tra hình trong thời gian cho phép. Vui lòng thử lại.' : 'Gia sư Toán AI chưa hoàn tất kiểm định lời giải trong thời gian cho phép. Vui lòng thử lại.')
+        : 'Gia sư Toán AI tạm thời không phản hồi. Vui lòng thử lại sau.',
       code: text(error?.code, 80) || 'AI_PIPELINE_ERROR'
     });
   }

@@ -13,7 +13,7 @@ const originalGuide = {
   quality: { verified: true, score: '5.0/5.0', verifier: 'GPT' }
 };
 
-export async function createHarness({ role = 'admin', persisted = true, guide = originalGuide, support = false, statement = '' } = {}) {
+export async function createHarness({ role = 'admin', persisted = true, guide = originalGuide, support = false, statement = '', topic = 'Đại số' } = {}) {
   const dom = new JSDOM(`<!doctype html><html><body><div class="tab-pane active">
     <article class="exam-card"><h3 class="exam-title">Đề kiểm thử</h3>
       <div class="problem-item" id="question-2" data-content-key="tst:tst-da-nang:day-1:question-2"
@@ -68,6 +68,7 @@ export async function createHarness({ role = 'admin', persisted = true, guide = 
     card.dataset.contentKey = 'math_support:owner:clipboard-question';
   }
   if (statement) window.document.querySelector('.problem-content').setAttribute('data-raw-math', statement);
+  window.document.querySelector('.badge-topic').textContent = topic;
   const button = window.document.querySelector('.btn-ai-guide');
   await window.openAIGuide(button);
   const panel = window.document.querySelector('.ai-guide-panel');
@@ -75,6 +76,22 @@ export async function createHarness({ role = 'admin', persisted = true, guide = 
 }
 
 const saved = await createHarness({ role: 'admin', persisted: true });
+assert.match(saved.panel.textContent, /Gia sư Toán AI/);
+assert.doesNotMatch(saved.panel.textContent, /Giáo sư|MongoDB|Professor/);
+const referenceKey = 'vmo_official:vmo-vmo-2024-2025:day-1:question-2';
+const referenced = await createHarness({ guide: { ...originalGuide, quality: { ...originalGuide.quality,
+  retrieval: { mode: 'exact', sources: [{ matchType: 'exact', problemKey: referenceKey },
+    { matchType: 'similar', problemKey: '<img src=x onerror=alert(1)>' }] } } } });
+const referenceBadge = referenced.panel.querySelector('.ai-guide-reference-badge');
+assert.match(referenceBadge.textContent, /Tham chiếu lời giải:/);
+assert.ok(referenceBadge.textContent.includes(referenceKey), 'Keep the reference identity intact');
+assert.doesNotMatch(referenceBadge.textContent, /RAG|exact|similar/);
+assert.equal(referenceBadge.querySelector('img'), null, 'Reference labels escape source identifiers');
+referenced.window.currentLang = 'en';
+referenced.window.dispatchEvent(new referenced.window.CustomEvent('langchange', { detail: { lang: 'en' } }));
+assert.equal(referenced.panel.querySelector('.ai-guide-reference-label').textContent, 'Solution references:');
+assert.ok(referenceBadge.textContent.includes(referenceKey));
+referenced.window.close();
 assert.ok(saved.panel.querySelector('.btn-ai-guide-edit'), 'admin phải thấy nút chỉnh sửa');
 saved.window.editAIGuideContent(saved.problemId);
 assert.equal(saved.panel.querySelectorAll('.ai-guide-source-editor').length, 4,

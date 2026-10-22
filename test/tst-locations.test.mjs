@@ -261,6 +261,13 @@ for (const [anchor, expectedDays] of [
     'Mỗi địa phương chỉ có một liên kết sidebar');
 }
 const scrollTargets = [];
+async function waitForScroll(count) {
+  const deadline = Date.now() + 3000;
+  while (scrollTargets.length < count && Date.now() < deadline) {
+    await new Promise(resolve => setTimeout(resolve, 10));
+  }
+  assert.ok(scrollTargets.length >= count, `Expected ${count} completed sidebar scrolls`);
+}
 window.HTMLElement.prototype.scrollIntoView = function(options) { scrollTargets.push({ id: this.id, options }); };
 window.requestAnimationFrame = callback => setTimeout(callback, 0);
 const originalDetail = window.VMODataService.getExamCatalogDetail;
@@ -276,12 +283,12 @@ thaiNguyenLink.dispatchEvent(firstClick);
 assert.equal(firstClick.defaultPrevented, true, 'Ngăn browser cuộn vào placeholder trước khi tải');
 assert.deepEqual(scrollTargets, [], 'Không cuộn trước khi dữ liệu về');
 releaseThaiNguyen();
-await new Promise(resolve => setTimeout(resolve, 20));
+await waitForScroll(1);
 assert.deepEqual(scrollTargets.map(target => target.id), ['tst-thai-nguyen'], 'Một lần nhấp cuộn đúng đề sau khi tải');
 assert.equal(scrollTargets[0].options.behavior, 'instant', 'Cuộn tức thời, không kế thừa smooth scrolling');
 assert.equal(window.location.hash, '#tst-thai-nguyen');
 thaiNguyenLink.click();
-await new Promise(resolve => setTimeout(resolve, 20));
+await waitForScroll(2);
 assert.deepEqual(scrollTargets.map(target => target.id), ['tst-thai-nguyen', 'tst-thai-nguyen'], 'Nhấp lại đề đã tải vẫn cuộn đúng');
 let releaseHungYen;
 const hungYenGate = new Promise(resolve => { releaseHungYen = resolve; });
@@ -292,7 +299,7 @@ window.VMODataService.getExamCatalogDetail = async (category, anchor) => {
 window.document.querySelector('#sidebar-tst a[href="#tst-hung-yen"]').click();
 window.document.querySelector('#sidebar-tst a[href="#tst-ptnk"]').click();
 releaseHungYen();
-await new Promise(resolve => setTimeout(resolve, 25));
+await waitForScroll(3);
 assert.equal(scrollTargets.at(-1).id, 'tst-ptnk', 'Nhấp liên tiếp ưu tiên mục mới nhất');
 assert.equal(window.location.hash, '#tst-ptnk');
 for (const [sidebar, category, anchor] of [

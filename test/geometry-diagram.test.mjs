@@ -2,6 +2,11 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import { JSDOM } from 'jsdom';
 import { cleanGeometryDiagram as clean, geometrySchema, geometryInstruction, selectGuideGeometry, inspectGeometryDiagram } from '../lib/geometry-diagram.js';
+for (const path of ['../src/template.html', '../index.html']) {
+  const page = fs.readFileSync(new URL(path, import.meta.url), 'utf8');
+  assert.ok(page.indexOf('src="geometry_diagram.js') >= 0, 'The deployed page must load the geometry renderer');
+  assert.ok(page.indexOf('src="geometry_diagram.js') < page.indexOf('src="ai_guide_engine.js'), 'The renderer must load before the guide engine');
+}
 
 const triangle = {
   isGeometry: true, caption: 'Tam giác ABC, M là trung điểm BC; AH vuông góc BC.',
@@ -88,6 +93,11 @@ old.window.fetch=async(url,options)=>{requested=JSON.parse(options.body);return{
 assert.equal(await old.window.generateAIGuideDiagram(old.problemId),true);
 assert.equal(requested.mode,'diagram');assert.equal(requested.solution,guide.solution);assert.equal(old.panel.querySelectorAll('svg').length,1);
 assert.equal(old.updateCalls.length,0,'Diagram generation does not silently update the saved guide');old.window.close();
+for (const support of [false, true]) {
+  const legacy = await createHarness({ support, topic: 'Hình học phẳng', guide: { knowledge: 'K', intuition: 'I', solution: 'S', pitfalls: 'P' } });
+  assert.ok(legacy.panel.querySelector('.ai-geometry-generate'), 'A legacy saved guide without branch/geometry must use the question topic');
+  legacy.window.close();
+}
 const invalid=await createHarness({guide:{...guide,geometry:mutate(v=>v.constraints=[])}});
 assert.equal(invalid.panel.querySelectorAll('svg').length,0);
 invalid.window.fetch=async()=>({ok:false,json:async()=>({success:false,error:'Hình không hợp lệ',code:'GEOMETRY_CONSTRAINT_MISMATCH',reason:'Cần dựng lại hình chiếu.',details:[{message:'perpendicular(P, X, B, C)'}]})});

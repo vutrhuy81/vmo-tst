@@ -87,7 +87,7 @@ async function apiFetch(url, options = {}) {
     if (error?.name === 'VMODataServiceError') throw error;
 
     throw createServiceError(
-      error?.message || 'Không thể kết nối tới API MongoDB',
+      error?.message || 'Không thể kết nối tới API cơ sở dữ liệu',
       0,
       'NETWORK_ERROR'
     );
@@ -151,7 +151,7 @@ async function mutate(action, payload = {}) {
 
   // Mutation thành công có thể làm thay đổi catalog hoặc dữ liệu quản trị.
   invalidateReadCache();
-  if (action === 'create_exam_from_ocr') {
+  if (['create_exam_from_ocr', 'create_math_support', 'add_exam', 'update_exam', 'delete_exam', 'save_problem'].includes(action)) {
     window.dispatchEvent(new CustomEvent('vmo:data-changed', { detail: { action } }));
   }
 
