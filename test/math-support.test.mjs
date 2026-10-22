@@ -10,6 +10,7 @@ import { canAccessProblem, supportVisibility } from '../lib/problem-access.js';
 import { retrieveVerifiedContext } from '../lib/rag-retrieval.js';
 import { sourceFresh } from '../lib/rag-core.js';
 import { getCatalogTotals } from '../lib/home-stats.js';
+import { cleanGeometryDiagram } from '../lib/geometry-diagram.js';
 
 const malformedLiveOcr = String.raw`BÀI TOÁN KIỂM THỬ MATHAPP\\\\Cho hai số thực a và b. Chứng minh rằng:\$$a^2 + b^2 \ge 2ab.$-\\\-Khi nào đẳng thức xảy ra?`;
 const repairedOcr = normalizeStandaloneMath(malformedLiveOcr);
@@ -97,8 +98,8 @@ const db = { collection(name) {
 let session = { sub: 'owner-1', username: 'student1', role: 'student' };
 const owner = { ...session }, other = { sub: 'owner-2', username: 'student2', role: 'student' }, admin = { sub: 'admin-1', username: 'admin', role: 'admin' };
 const routeSource = fs.readFileSync(new URL('../api/data.js', import.meta.url), 'utf8').replace(/^import .*;\n/gm, '').replace('export default async function handler', 'async function handler');
-const handler = new Function('getDb','getSession','ObjectId','recordActivity','handleMathSupport','canAccessProblem','supportVisibility','getCatalogTotals', `${routeSource}\nreturn handler;`)(
-  async () => db, () => session, ObjectId, async () => {}, handleMathSupport, canAccessProblem, supportVisibility, getCatalogTotals);
+const handler = new Function('getDb','getSession','ObjectId','recordActivity','handleMathSupport','canAccessProblem','supportVisibility','getCatalogTotals','cleanGeometryDiagram', `${routeSource}\nreturn handler;`)(
+  async () => db, () => session, ObjectId, async () => {}, handleMathSupport, canAccessProblem, supportVisibility, getCatalogTotals, cleanGeometryDiagram);
 async function call({ action, payload, query } = {}) {
   const res = { code: 0, setHeader() {}, status(n) { this.code = n; return this; }, json(body) { this.body = JSON.parse(JSON.stringify(body)); return this; } };
   await handler({ method: action ? 'POST' : 'GET', query, body: { action, payload } }, res);

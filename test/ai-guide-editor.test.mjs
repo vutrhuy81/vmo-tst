@@ -13,7 +13,7 @@ const originalGuide = {
   quality: { verified: true, score: '5.0/5.0', verifier: 'GPT' }
 };
 
-async function createHarness({ role = 'admin', persisted = true, guide = originalGuide, support = false, statement = '' } = {}) {
+export async function createHarness({ role = 'admin', persisted = true, guide = originalGuide, support = false, statement = '', topic = 'Đại số' } = {}) {
   const dom = new JSDOM(`<!doctype html><html><body><div class="tab-pane active">
     <article class="exam-card"><h3 class="exam-title">Đề kiểm thử</h3>
       <div class="problem-item" id="question-2" data-content-key="tst:tst-da-nang:day-1:question-2"
@@ -58,6 +58,7 @@ async function createHarness({ role = 'admin', persisted = true, guide = origina
       return { _id: savedId };
     }
   };
+  window.eval(fs.readFileSync(new URL('../geometry_diagram.js', import.meta.url), 'utf8'));
   window.eval(engineSource);
   window.document.dispatchEvent(new window.Event('DOMContentLoaded'));
   if (support) {
@@ -67,6 +68,7 @@ async function createHarness({ role = 'admin', persisted = true, guide = origina
     card.dataset.contentKey = 'math_support:owner:clipboard-question';
   }
   if (statement) window.document.querySelector('.problem-content').setAttribute('data-raw-math', statement);
+  window.document.querySelector('.badge-topic').textContent = topic;
   const button = window.document.querySelector('.btn-ai-guide');
   await window.openAIGuide(button);
   const panel = window.document.querySelector('.ai-guide-panel');

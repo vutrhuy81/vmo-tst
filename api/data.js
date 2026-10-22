@@ -1,4 +1,5 @@
 import { getCatalogTotals } from '../lib/home-stats.js';
+import { cleanGeometryDiagram } from '../lib/geometry-diagram.js';
 import { canAccessProblem, supportVisibility } from '../lib/problem-access.js';
 import { handleMathSupport } from '../lib/math-support.js';
 import { specializedSchool } from '../lib/specialized-schools.js';
@@ -71,6 +72,8 @@ function cleanAiGuide(value) {
     : null;
   return {
     branch: cleanText(value.branch, 300),
+    geometryRequested: value.geometryRequested === true,
+    geometry: cleanGeometryDiagram(value.geometry),
     knowledge: cleanText(value.knowledge, 50000),
     intuition: cleanText(value.intuition, 50000),
     solution: cleanText(value.solution, 100000),
