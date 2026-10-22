@@ -399,6 +399,17 @@
     if (btnOlympic) setNodeText(btnOlympic, '🌐 Đề IMO–Olympic', UI_TRANSLATIONS.en.tabOlympic, isEn);
     if (btnHistory) setNodeText(btnHistory, '🗂️ Đề Đà Nẵng–Quảng Nam', UI_TRANSLATIONS.en.tabHistory, isEn);
 
+    [
+      ['navGroupLearning', 'Học tập & luyện tập', 'Learning & practice'],
+      ['navGroupNational', 'Đề thi trong nước', 'Vietnamese examinations'],
+      ['navGroupOlympic', 'Olympic & giao lưu', 'Olympiads & exchanges'],
+      ['moduleNavigationCaption', 'Đang xem', 'Currently viewing'],
+      ['moduleNavigationAction', 'Chọn mục', 'Choose section']
+    ].forEach(([id, vi, en]) => { const node = document.getElementById(id); if (node) setNodeText(node, vi, en, isEn); });
+    const admissionTab = document.getElementById('tab-btn-admission');
+    if (admissionTab) setNodeText(admissionTab, '🎓 Đề thi vào lớp 10 chuyên', '🎓 Specialized grade-10 admissions', isEn);
+    window.refreshModuleNavigation?.();
+
     // 4. User Auth Bar
     const btnOpenUserMgmt = document.getElementById('btnOpenUserMgmt');
     if (btnOpenUserMgmt) setNodeText(btnOpenUserMgmt, '⚙️ Quản lý tài khoản', UI_TRANSLATIONS.en.btnManage, isEn);
