@@ -510,7 +510,7 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
     }
   };
 
-  // Đánh giá bài giải của học sinh bằng AI Chuyên gia Toán học
+  // Đánh giá bài giải của học sinh bằng Gia sư Toán AI học
   window.evaluateStudentSolution = async function() {
     const text = (document.getElementById('subSolutionText')?.value || '').trim();
     const image = window.currentUploadedImage;
@@ -553,7 +553,7 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
     const origBtnHtml = btn ? btn.innerHTML : '';
     if (btn) {
       btn.disabled = true;
-      btn.innerHTML = '⏳ <span>AI Giáo sư Toán đang phân tích...</span>';
+      btn.innerHTML = '⏳ <span>Gia sư Toán AI đang phân tích...</span>';
     }
 
     // Hiển thị hộp loading trực quan ngay trong modal với các bước sinh động
@@ -592,7 +592,7 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
       }
     }
 
-    showToast('🤖 AI Giáo sư Toán Olympic đang đọc và rà soát logic bài giải của bạn...', true);
+    showToast('🤖 Gia sư Toán AI đang đọc và rà soát logic bài giải của bạn...', true);
 
     try {
       const payload = {
@@ -642,7 +642,7 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
           window.currentUploadedImageOcrResult = {
             img: image,
             latexText: verifiedTranscription,
-            summary: 'Bản chép bài làm đã được Gemini đọc và GPT dùng để kiểm định'
+            summary: 'Bản chép bài làm đã được Gia sư Toán AI đọc và dùng để kiểm định'
           };
         }
       }
@@ -979,7 +979,7 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
         </style>
       </head>
       <body>
-        <h2>BÁO CÁO THẨM ĐỊNH BÀI GIẢI TOÁN OLYMPIC (AI VMO)</h2>
+        <h2>BÁO CÁO THẨM ĐỊNH BÀI GIẢI TOÁN OLYMPIC — GIA SƯ TOÁN AI</h2>
         <p><strong>Bài toán:</strong> ${escapeHtmlText(subData.problemTitle || 'Bài tập VMO')}</p>
         <div class="banner">
           <p><strong>Kết luận:</strong> ${escapeHtmlText(evalData.verdictLabel || evalData.verdict || 'Hoàn tất')}</p>
@@ -989,7 +989,7 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
         <div class="card"><div class="title">2. Hướng tiếp cận &amp; Phương pháp:</div><div>${formatMathMarkdown(evalData.approachAnalysis || '')}</div></div>
         <div class="card"><div class="title">3. Rà soát chi tiết từng bước:</div><div>${formatMathMarkdown(evalData.stepByStep || '')}</div></div>
         <div class="card"><div class="title">4. Lỗ hổng logic / Lưu ý:</div><div>${formatMathMarkdown(evalData.criticalFlaws || '')}</div></div>
-        <div class="card"><div class="title">5. Lời khuyên của Chuyên gia:</div><div>${formatMathMarkdown(evalData.recommendations || '')}</div></div>
+        <div class="card"><div class="title">5. Lời khuyên của Gia sư Toán AI:</div><div>${formatMathMarkdown(evalData.recommendations || '')}</div></div>
         <div class="card"><div class="title">6. Hậu kiểm công thức:</div><div>${formatMathMarkdown(evalData.verificationNotes || '')}</div></div>
       </body>
       </html>
@@ -1010,16 +1010,17 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
       ? String(evalData.verdictColor)
       : fallbackVerdictBg;
     const rag = evalData.quality?.retrieval;
-    const ragNotice = rag ? `<div style="padding:8px;margin:8px 0;font-size:.8rem;">📚 Tham chiếu: ${escapeHtmlText(rag.mode || 'none')} · ${escapeHtmlText((rag.sources || []).map(item => `${item.matchType}: ${item.problemKey}`).join('; ') || 'AI tự giải độc lập')}</div>` : '';
+    const referenceKeys = (rag?.sources || []).map(item => item.problemKey).filter(Boolean);
+    const ragNotice = rag ? `<div style="padding:8px;margin:8px 0;font-size:.8rem;">📚 <strong>Tham chiếu lời giải:</strong> ${referenceKeys.length ? `<strong>${escapeHtmlText(referenceKeys.join('; '))}</strong>` : 'Gia sư Toán AI tự xây dựng lời giải'}</div>` : '';
     const verificationBadge = evalData.quality?.verified
-      ? `<div style="display:inline-flex;align-items:center;gap:5px;margin-top:6px;padding:3px 9px;border-radius:999px;background:rgba(255,255,255,.2);border:1px solid rgba(255,255,255,.45);font-size:.75rem;font-weight:700;">✓ Đã kiểm định độc lập Gemini–GPT${evalData.quality.corrected ? ' · GPT đã hiệu chỉnh' : ''}</div>`
+      ? `<div style="display:inline-flex;align-items:center;gap:5px;margin-top:6px;padding:3px 9px;border-radius:999px;background:rgba(255,255,255,.2);border:1px solid rgba(255,255,255,.45);font-size:.75rem;font-weight:700;">✓ Đã kiểm định độc lập${evalData.quality.corrected ? ' · Đã hiệu chỉnh' : ''}</div>`
       : '';
 
     return `
       <!-- Banner Kết luận Tổng quan & Điểm số -->
       <div style="padding: 16px 20px; background: ${verdictBg}; color: #ffffff; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; border-radius: 10px 10px 0 0;">
         <div>
-          <div style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.5px; opacity: 0.95; margin-bottom: 2px;">Kết luận chuyên môn của Giáo sư Toán:</div>
+          <div style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.5px; opacity: 0.95; margin-bottom: 2px;">Kết luận chuyên môn của Gia sư Toán AI:</div>
           <div style="font-size: 1.15rem; font-weight: 800; text-shadow: 0 1px 2px rgba(0,0,0,0.2);">
             ${escapeHtmlText(evalData.verdictLabel || evalData.verdict || 'ĐÚNG HOÀN TOÀN (TỐI ƯU)')}
           </div>
@@ -1034,7 +1035,7 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
         <!-- 1. Tóm tắt -->
         <div style="margin-bottom: 16px;">
           <h5 style="margin: 0 0 6px 0; color: #0f172a; font-size: 0.95rem; display: flex; align-items: center; gap: 6px;">
-            <span>📝</span> <strong>Nhận định tổng quan của Chuyên gia:</strong>
+            <span>📝</span> <strong>Nhận định tổng quan của Gia sư Toán AI:</strong>
           </h5>
           <div style="color: #1e293b; background: #f8fafc; padding: 12px 16px; border-radius: 6px; border-left: 4px solid #0284c7; font-size: 0.92rem;">
             ${formatMathMarkdown(evalData.summary || 'Lời giải đã được thẩm định.')}
@@ -1074,7 +1075,7 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
         <!-- 5. Lời khuyên & Hướng giải tối ưu -->
         <div style="margin-bottom: 20px;">
           <h5 style="margin: 0 0 6px 0; color: #047857; font-size: 0.95rem; display: flex; align-items: center; gap: 6px;">
-            <span>💡</span> <strong>Lời khuyên của Giáo sư &amp; Hướng giải tối ưu:</strong>
+            <span>💡</span> <strong>Lời khuyên của Gia sư Toán AI &amp; Hướng giải tối ưu:</strong>
           </h5>
           <div style="color: #065f46; background: #ecfdf5; padding: 12px 16px; border-radius: 6px; border: 1px solid #a7f3d0;">
             ${formatMathMarkdown(evalData.recommendations || evalData.optimalSuggestions || 'Tiếp tục phát huy!')}
@@ -1102,7 +1103,7 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
             </button>
           </div>
           <button type="button" onclick="document.getElementById('btnConfirmSubmit')?.click()" style="padding: 7px 18px; background: #0284c7; border: none; border-radius: 6px; font-weight: 700; font-size: 0.88rem; color: #ffffff; cursor: pointer; display: inline-flex; align-items: center; gap: 6px; box-shadow: 0 2px 8px rgba(2,132,199,0.3);">
-            <span>🚀</span> <span>Lưu bài vào Database</span>
+            <span>🚀</span> <span>Lưu bài vào cơ sở dữ liệu</span>
           </button>
         </div>
       </div>
@@ -1205,7 +1206,7 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
     }
 
     // Hàm này được dùng ở cả lịch sử trong cửa sổ nộp bài và Database Hub.
-    // Khi gọi từ Database Hub, cần đóng Hub và chủ động mở submissionModal;
+    // Khi gọi từ cơ sở dữ liệu Hub, cần đóng Hub và chủ động mở submissionModal;
     // nếu không, dữ liệu AI đã được nạp nhưng người dùng không nhìn thấy.
     if (typeof window.closeDataHubModal === 'function') {
       window.closeDataHubModal();
@@ -1221,7 +1222,7 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
     if (typeof window.switchSubmissionTab === 'function') {
       window.switchSubmissionTab('eval');
     }
-    showToast('Đã mở lại nhận xét của Chuyên gia cho bài nộp #' + (window.lastLoadedSubmissions.length - index), true);
+    showToast('Đã mở lại nhận xét của Gia sư Toán AI cho bài nộp #' + (window.lastLoadedSubmissions.length - index), true);
   };
 
   window.openSubmissionModal = function(problemId, problemTitle, problemCard) {
@@ -1413,7 +1414,7 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
       };
     }
 
-    // Nạp lịch sử các bài đã nộp cho câu hỏi này từ Database
+    // Nạp lịch sử các bài đã nộp cho câu hỏi này từ cơ sở dữ liệu
     loadSubHistory(problemId);
 
     // Gán sự kiện cho nút Lưu bài giải
@@ -1435,7 +1436,7 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
         }
 
         submitBtn.disabled = true;
-        submitBtn.innerHTML = '⏳ Đang lưu vào database...';
+        submitBtn.innerHTML = '⏳ Đang lưu vào cơ sở dữ liệu...';
 
         try {
           if (window.VMODataService && window.VMODataService.submitSolution) {
@@ -1464,7 +1465,7 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
           }
         } catch (err) {
           console.error('Lỗi nộp bài giải:', err);
-          let saveError = err?.message || 'Không thể ghi vào database';
+          let saveError = err?.message || 'Không thể ghi vào cơ sở dữ liệu';
           if (err?.status === 401 || err?.code === 'AUTH_REQUIRED') {
             saveError = 'Phiên đăng nhập đã hết hạn. Vui lòng đăng nhập lại rồi thử lưu.';
           } else if (err?.status === 403 || err?.code === 'FORBIDDEN') {
@@ -1926,8 +1927,8 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
       font-size: 0.85rem;
       transition: background 0.2s;
     `;
-    btn.innerHTML = `🗄️ Database Hub`;
-    btn.title = 'Quản lý Tài liệu, Đề thi và Sự kiện trên Database';
+    btn.innerHTML = `🗄️ Kho dữ liệu`;
+    btn.title = 'Quản lý Tài liệu, Đề thi và Sự kiện trên cơ sở dữ liệu';
     btn.onclick = () => window.openDataHubModal();
 
     // Chèn trước nút Đăng xuất
@@ -1956,8 +1957,8 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
     const heading = modal.querySelector('#hubModalHeading, .vmo-modal-title span:last-child');
     if (heading) {
       heading.textContent = isAdmin
-        ? 'Trung tâm Quản trị Dữ liệu (VMO Database Hub)'
-        : 'Kho dữ liệu học tập (VMO Database Hub)';
+        ? 'Trung tâm Quản trị Dữ liệu'
+        : 'Kho dữ liệu học tập';
     }
 
     if (!isAdmin) {
@@ -2012,9 +2013,9 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
         </div>
         <label for="examPredictionOutline">Khung câu hỏi (VMO bắt buộc nhập; TST để trống dùng mẫu Đà Nẵng; mỗi dòng: số câu | điểm | chuyên đề)</label><textarea id="examPredictionOutline" rows="3" style="display:block;width:100%;box-sizing:border-box;margin:5px 0 10px;padding:7px;resize:vertical;" placeholder="1 | 5 | Dãy số và giới hạn\n2 | 5 | Phương trình hàm\n3 | 5 | Số học\n4 | 5 | Hình học phẳng"></textarea>
         <label for="examPredictionStructure">Quy định hoặc định hướng bổ sung</label><textarea id="examPredictionStructure" rows="3" style="display:block;width:100%;box-sizing:border-box;margin:5px 0 10px;padding:7px;resize:vertical;" placeholder="Ví dụ: hạn chế trùng chuyên đề với năm trước; ưu tiên bài toán chứng minh..."></textarea>
-        <label for="examPredictionNotes">Ghi chú lịch sử bổ sung (không thay thế đề nguồn trong Atlas)</label><textarea id="examPredictionNotes" maxlength="12000" rows="4" style="display:block;width:100%;box-sizing:border-box;margin:5px 0 10px;padding:7px;resize:vertical;" placeholder="Ghi chú bối cảnh có năm và nguồn; cần ít nhất một đề quá khứ đã lưu trên Atlas."></textarea>
+        <label for="examPredictionNotes">Ghi chú lịch sử bổ sung (không thay thế đề nguồn trong cơ sở dữ liệu)</label><textarea id="examPredictionNotes" maxlength="12000" rows="4" style="display:block;width:100%;box-sizing:border-box;margin:5px 0 10px;padding:7px;resize:vertical;" placeholder="Ghi chú bối cảnh có năm và nguồn; cần ít nhất một đề quá khứ đã lưu trên cơ sở dữ liệu."></textarea>
         <div style="font-size:.8rem;color:#475569;margin-bottom:9px;">Số năm tham chiếu là giới hạn tìm kiếm; kết quả sẽ ghi rõ số năm thực sự có dữ liệu. Đề AI chỉ là bản dự đoán cần admin rà soát.</div>
-        <button type="button" id="examPreviewButton" onclick="previewExamPredictionEvidence()">🔎 Kiểm tra nguồn Atlas</button>
+        <button type="button" id="examPreviewButton" onclick="previewExamPredictionEvidence()">🔎 Kiểm tra nguồn cơ sở dữ liệu</button>
         <button type="button" id="examPredictButton" onclick="runPredictExam()" style="background:#1d4ed8;color:#fff;border:0;border-radius:6px;padding:8px 12px;font-weight:700;cursor:pointer;">🔮 Dự đoán &amp; soạn đề</button>
         <span id="examPredictionStatus" role="status" style="margin-left:8px;font-size:.8rem;"></span><div id="examPredictionEvidence" style="font-size:.8rem;margin-top:8px;"></div>
       </div>`}
@@ -2024,7 +2025,7 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
         <div style="display:flex;align-items:center;gap:8px;margin-top:9px;"><button type="button" id="${kind}OcrButton" onclick="runExamOcr('${kind}')" style="background:#7c3aed;color:#fff;border:none;padding:7px 13px;border-radius:6px;font-weight:700;cursor:pointer;">🔎 OCR đề thi & tạo MathJax</button><span id="${kind}OcrStatus" style="font-size:.8rem;color:#64748b;">Chưa xử lý ảnh.</span></div>
       </div>
       <div id="${kind}OcrPreview" style="display:none;margin-bottom:10px;padding:10px;background:#fff;border:1px solid #cbd5e1;border-radius:7px;"></div>
-      <div style="text-align:right;"><button type="button" onclick="${tst ? 'toggleAddDocForm' : 'toggleAddExamForm'}()" style="margin-right:8px;padding:6px 12px;border:1px solid #cbd5e1;border-radius:6px;background:#fff;cursor:pointer;">Hủy</button><button type="submit" id="${kind}SaveButton" disabled style="background:#16a34a;color:#fff;border:none;padding:6px 14px;border-radius:6px;font-weight:600;cursor:pointer;">Lưu ${tst ? 'đề TST' : 'đề thi thử'} & câu hỏi vào MongoDB</button></div>`;
+      <div style="text-align:right;"><button type="button" onclick="${tst ? 'toggleAddDocForm' : 'toggleAddExamForm'}()" style="margin-right:8px;padding:6px 12px;border:1px solid #cbd5e1;border-radius:6px;background:#fff;cursor:pointer;">Hủy</button><button type="submit" id="${kind}SaveButton" disabled style="background:#16a34a;color:#fff;border:none;padding:6px 14px;border-radius:6px;font-weight:600;cursor:pointer;">Lưu ${tst ? 'đề TST' : 'đề thi thử'} & câu hỏi vào cơ sở dữ liệu</button></div>`;
   }
 
   function ensureCatalogManagementUi(modal, isAdmin) {
@@ -2071,7 +2072,7 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
     if (!requireAdminUiAction()) return;
     const list = document.getElementById('hubCatalogList');
     if (!list) return;
-    list.innerHTML = '<em>Đang tải danh mục từ MongoDB...</em>';
+    list.innerHTML = '<em>Đang tải danh mục từ cơ sở dữ liệu...</em>';
     try {
       const [sets, problems] = await Promise.all([
         window.VMODataService.getContentSets(),
@@ -2245,7 +2246,7 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
       changes.order = Number(document.getElementById('catalogEditProblemOrder').value) || 0;
     }
     if (!changes.title) return showToast('Tiêu đề không được để trống.', false);
-    if (!window.confirm('Lưu metadata mới vào MongoDB? Khóa liên kết lịch sử sẽ được giữ nguyên.')) return;
+    if (!window.confirm('Lưu thông tin mới vào cơ sở dữ liệu? Khóa liên kết lịch sử sẽ được giữ nguyên.')) return;
     try {
       await window.VMODataService.updateCatalogItem(itemType, id, changes);
       window.closeCatalogEditModal();
@@ -2453,7 +2454,7 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
     panel.innerHTML = `
       <div style="margin-bottom:12px;">
         <h4 style="margin:0;color:#173b64;">AI Phân tích xu hướng ra đề</h4>
-        <small style="color:#64748b;">GPT phân tích dữ liệu Atlas; hệ thống đối chiếu số liệu và mã dẫn. Chỉ dành cho quản trị viên.</small>
+        <small style="color:#64748b;">Gia sư Toán AI phân tích kho đề; hệ thống đối chiếu số liệu và mã dẫn. Chỉ dành cho quản trị viên.</small>
       </div>
       <div style="background:#f8fafc;border:1px solid #cbd5e1;border-radius:9px;padding:12px;margin-bottom:14px;">
         <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(205px,1fr));gap:10px;">
@@ -2466,9 +2467,9 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
         <label class="trend-target-field" style="display:block;margin-top:9px;"><input id="trendIncludeCurrentYear" type="checkbox" checked onchange="syncExamTrendForm()"> Bao gồm đề của năm học đang chọn (ngoài số năm quá khứ)</label>
         <p id="trendScopeHelp" style="margin:9px 0;color:#475569;font-size:.79rem;"></p>
         <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;">
-          <button type="button" id="trendPreviewButton">🔎 Kiểm tra nguồn Atlas</button>
-          <button type="button" id="trendRunButton" style="padding:9px 13px;border:0;border-radius:6px;background:#1d4ed8;color:white;font-weight:700;cursor:pointer;">✨ GPT phân tích · đối chiếu Atlas</button>
-          <button type="button" id="trendSaveButton" disabled style="padding:9px 13px;border:0;border-radius:6px;background:#16a34a;color:white;font-weight:700;cursor:pointer;">💾 Lưu báo cáo vào MongoDB</button>
+          <button type="button" id="trendPreviewButton">🔎 Kiểm tra nguồn cơ sở dữ liệu</button>
+          <button type="button" id="trendRunButton" style="padding:9px 13px;border:0;border-radius:6px;background:#1d4ed8;color:white;font-weight:700;cursor:pointer;">✨ Gia sư Toán AI phân tích · đối chiếu cơ sở dữ liệu</button>
+          <button type="button" id="trendSaveButton" disabled style="padding:9px 13px;border:0;border-radius:6px;background:#16a34a;color:white;font-weight:700;cursor:pointer;">💾 Lưu báo cáo vào cơ sở dữ liệu</button>
           <span id="trendStatus" role="status" style="font-size:.8rem;color:#475569;"></span>
         </div>
       </div>
@@ -2502,7 +2503,7 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
               status.textContent = `Đã đưa ${result.queued} nguồn vào hàng đợi.${result.hasMore ? ' Bấm tiếp để lấy trang sau.' : ''}`;
             } else status.textContent = button.dataset.ragAction === 'rag_process'
               ? (result.results || []).map(item => `${item.sourceId}: ${item.status}${item.error ? ` (${item.error})` : ''}`).join(' · ') || 'Không có nguồn chờ xử lý.'
-              : 'Đã yêu cầu tạo chỉ mục. Chờ Atlas báo sẵn sàng.';
+              : 'Đã yêu cầu tạo chỉ mục. Chờ cơ sở dữ liệu báo sẵn sàng.';
           } else status.textContent = '';
           const data = await window.VMODataService.getRagStatus();
           ragPanel.querySelector('[data-rag-summary]').textContent = `Nguồn: ${(data.knowledge || []).map(item => `${item._id}: ${item.count}`).join(', ') || '0'} · Hàng đợi: ${(data.jobs || []).map(item => `${item._id}: ${item.count}`).join(', ') || '0'} · Chỉ mục: ${(data.indexes || []).map(item => `${item.name}: ${item.status}`).join(', ') || data.indexError || 'chưa tạo'} · Metadata v${data.metadataVersion || 1}: ${data.currentMetadataSources || 0} nguồn sẵn sàng · Embedding: ${data.embeddingConfigured ? 'đã cấu hình' : 'chưa cấu hình'}`;
@@ -2613,11 +2614,11 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
   }
 
   function trendStatusLabel(quality = {}) {
-    if (quality.status === 'checked') return ['✅ Đã đối chiếu Atlas', '#166534', '#dcfce7'];
+    if (quality.status === 'checked') return ['✅ Đã đối chiếu cơ sở dữ liệu', '#166534', '#dcfce7'];
     if (quality.status === 'limited') return ['⚠️ Cần rà soát nhận định', '#92400e', '#fef3c7'];
-    if (quality.status === 'approved') return ['✅ GPT đã duyệt', '#166534', '#dcfce7'];
-    if (quality.status === 'rejected') return ['⚠️ GPT chưa duyệt', '#991b1b', '#fee2e2'];
-    return ['⏳ GPT chưa kiểm định được', '#92400e', '#fef3c7'];
+    if (quality.status === 'approved') return ['✅ Gia sư Toán AI đã duyệt', '#166534', '#dcfce7'];
+    if (quality.status === 'rejected') return ['⚠️ Gia sư Toán AI chưa duyệt', '#991b1b', '#fee2e2'];
+    return ['⏳ Gia sư Toán AI chưa kiểm định được', '#92400e', '#fef3c7'];
   }
 
   function parseTrendEvidenceId(value) {
@@ -2698,7 +2699,7 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
     const theory = data.theory || {};
     container.replaceChildren();
     const status = document.createElement('p');
-    status.textContent = data.quality?.summary || 'GPT biên soạn và tự kiểm tra; đối chiếu tài liệu nền bên dưới.';
+    status.textContent = data.quality?.summary || 'Gia sư Toán AI biên soạn và tự kiểm tra; đối chiếu tài liệu nền bên dưới.';
     container.appendChild(status);
     const sources = new Map((data.sources || []).map(source => [source.id, source]));
     const addReferences = (section, item) => {
@@ -2749,7 +2750,7 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
     };
     button('✏️ Chỉnh sửa nội dung', () => editTrendTheory(data, container));
     if (data.id) button('🗑️ Xóa bản đã lưu', () => deleteTrendTheory(data, container));
-    else button('💾 Lưu vào MongoDB', () => saveTrendTheory(data, container));
+    else button('💾 Lưu vào cơ sở dữ liệu', () => saveTrendTheory(data, container));
     container.appendChild(controls);
   }
 
@@ -2760,7 +2761,7 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
       const saved = await window.VMODataService.saveTrendTheory(data);
       trendTheoryCache.set(trendTheoryKey(saved), saved);
       renderTrendTheory(saved, container);
-      showToast('Đã lưu cơ sở lý thuyết vào MongoDB.', true);
+      showToast('Đã lưu cơ sở lý thuyết vào cơ sở dữ liệu.', true);
     } catch (error) { showToast(error.message || 'Không lưu được tài liệu.', false); }
   }
 
@@ -2838,7 +2839,7 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
           : { ...data, theory: draft, quality: { summary: 'Bản nháp đã được Admin chỉnh sửa; chưa kiểm định độc lập.' } };
         trendTheoryCache.set(trendTheoryKey(updated), updated);
         renderTrendTheory(updated, container);
-        if (data.id) showToast('Đã cập nhật tài liệu trên MongoDB.', true);
+        if (data.id) showToast('Đã cập nhật tài liệu trên cơ sở dữ liệu.', true);
       } catch (error) { showToast(error.message || 'Không lưu được chỉnh sửa.', false); submit.disabled = false; }
     };
   }
@@ -2855,7 +2856,7 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
     modal.classList.add('active');
     document.body.classList.add('trend-practice-open');
     const key = `${topic.topic}\n${method.name}`;
-    body.textContent = 'Đang kiểm tra tài liệu đã lưu trên MongoDB…';
+    body.textContent = 'Đang kiểm tra tài liệu đã lưu trên cơ sở dữ liệu…';
     try {
       const saved = await window.VMODataService.getTrendTheory(topic.topic, method.name);
       if (saved) { trendTheoryCache.set(key, saved); return renderTrendTheory(saved, body); }
@@ -2864,7 +2865,7 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
       return;
     }
     if (trendTheoryCache.has(key)) return renderTrendTheory(trendTheoryCache.get(key), body);
-    body.textContent = 'GPT đang biên soạn, tự kiểm tra và gắn tài liệu nền…';
+    body.textContent = 'Gia sư Toán AI đang biên soạn, tự kiểm tra và gắn tài liệu nền…';
     const controller = new AbortController();
     const timer = setTimeout(() => controller.abort(), 295_000);
     try {
@@ -2979,10 +2980,10 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
     const body = modal.querySelector('#trendPracticeBody');
     const notice = modal.querySelector('#trendPracticeNotice');
     modal.querySelector('#trendPracticeTitle').textContent = isTopic ? topic.topic : method.name;
-    modal.querySelector('#trendPracticeSubtitle').textContent = `${topic.topic} · ${evidence.length} câu từ Atlas`;
+    modal.querySelector('#trendPracticeSubtitle').textContent = `${topic.topic} · ${evidence.length} câu từ cơ sở dữ liệu`;
     notice.textContent = data.quality?.status === 'checked'
-      ? '✅ Số liệu và mã câu đã được đối chiếu Atlas; nhận định do GPT tự rà soát.'
-      : data.quality?.status === 'approved' ? '✅ Danh sách vi chủ đề đã được GPT kiểm định.'
+      ? '✅ Số liệu và mã câu đã được đối chiếu cơ sở dữ liệu; nhận định do Gia sư Toán AI tự rà soát.'
+      : data.quality?.status === 'approved' ? '✅ Danh sách vi chủ đề đã được Gia sư Toán AI kiểm định.'
       : '⚠️ Hãy rà soát các nhận định và giới hạn mẫu trước khi sử dụng.';
     notice.className = `trend-practice-notice ${['approved', 'checked'].includes(data.quality?.status) ? 'approved' : 'warning'}`;
     body.innerHTML = '<div class="trend-practice-loading">Đang đối chiếu và tải câu hỏi từ kho đề…</div>';
@@ -3073,10 +3074,10 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
     target.innerHTML = `
       <article style="border:1px solid #cbd5e1;border-radius:10px;background:white;padding:14px;">
         <div style="display:flex;justify-content:space-between;gap:9px;align-items:flex-start;flex-wrap:wrap;">
-          <div><h3 style="margin:0 0 5px;color:#0f172a;">${escapeHtmlText(report.title)}</h3><div style="font-size:.78rem;color:#64748b;">${saved ? 'Báo cáo đã lưu' : `GPT: ${escapeHtmlText(data.model || 'không rõ model')}`} · ${escapeHtmlText(learningDate(data.createdAt || data.generatedAt))}</div></div>
+          <div><h3 style="margin:0 0 5px;color:#0f172a;">${escapeHtmlText(report.title)}</h3><div style="font-size:.78rem;color:#64748b;">${saved ? 'Báo cáo đã lưu' : 'Gia sư Toán AI'} · ${escapeHtmlText(learningDate(data.createdAt || data.generatedAt))}</div></div>
           <div><span style="padding:6px 9px;border-radius:999px;background:${qualityBackground};color:${qualityColor};font-size:.78rem;font-weight:800;">${qualityLabel}${quality.score !== null && quality.score !== undefined ? ` · ${escapeHtmlText(quality.score)}/5` : ''}</span> <button type="button" class="trend-collapse-report" aria-label="Thu gọn báo cáo">▲ Thu gọn</button></div>
         </div>
-        <div style="margin:11px 0;padding:10px;background:#eff6ff;border-radius:7px;color:#1e3a8a;font-size:.82rem;"><strong>Nguồn Atlas:</strong> ${Number(evidence.examCount) || 0} đề · ${Number(evidence.questionCount) || 0} câu · ${Number(evidence.unitCount) || 0} đơn vị · ${escapeHtmlText((evidence.years || []).join(', ') || data.settings?.year || '')} · thiếu ${Number(evidence.missingYears?.length) || 0} năm · AI đọc ${Number(evidence.sampleCount) || evidence.samples?.length || 0} câu mẫu${Number(evidence.otherQuestionCount) ? ` · ${Number(evidence.otherQuestionCount)} câu ngoài 6 tiêu chí` : ''}${evidence.mergedProvinceHistory ? `<div style="margin-top:5px;"><strong>Địa giới hiện hành:</strong> ${escapeHtmlText((evidence.historyMembers || []).join(' + '))} → ${escapeHtmlText(evidence.historyCurrentProvince || '')}</div>` : ''}<div style="margin-top:5px;">Tỷ lệ chủ đề tính theo câu; tần suất vi chủ đề dựa trên câu mẫu được dẫn.</div></div>
+        <div style="margin:11px 0;padding:10px;background:#eff6ff;border-radius:7px;color:#1e3a8a;font-size:.82rem;"><strong>Nguồn cơ sở dữ liệu:</strong> ${Number(evidence.examCount) || 0} đề · ${Number(evidence.questionCount) || 0} câu · ${Number(evidence.unitCount) || 0} đơn vị · ${escapeHtmlText((evidence.years || []).join(', ') || data.settings?.year || '')} · thiếu ${Number(evidence.missingYears?.length) || 0} năm · AI đọc ${Number(evidence.sampleCount) || evidence.samples?.length || 0} câu mẫu${Number(evidence.otherQuestionCount) ? ` · ${Number(evidence.otherQuestionCount)} câu ngoài 6 tiêu chí` : ''}${evidence.mergedProvinceHistory ? `<div style="margin-top:5px;"><strong>Địa giới hiện hành:</strong> ${escapeHtmlText((evidence.historyMembers || []).join(' + '))} → ${escapeHtmlText(evidence.historyCurrentProvince || '')}</div>` : ''}<div style="margin-top:5px;">Tỷ lệ chủ đề tính theo câu; tần suất vi chủ đề dựa trên câu mẫu được dẫn.</div></div>
         <p style="white-space:pre-wrap;line-height:1.55;">${escapeHtmlText(report.executiveSummary || '')}</p>
         <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:9px;">${(report.topicTrends || []).map((item, topicIndex) => `
           <section style="border:1px solid #e2e8f0;border-radius:8px;padding:10px;background:#f8fafc;">
@@ -3112,7 +3113,7 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
     const status = document.getElementById('trendStatus');
     const selected = document.getElementById('trendTarget')?.selectedOptions?.[0];
     button.disabled = true;
-    if (status) status.textContent = 'Đang kiểm tra kho đề Atlas...';
+    if (status) status.textContent = 'Đang kiểm tra kho đề cơ sở dữ liệu...';
     try {
       const response = await fetch('/api/ai-exam-trends', { method: 'POST', credentials: 'same-origin',
         headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({
@@ -3126,7 +3127,7 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
       const result = await response.json();
       if (!response.ok || !result.success) throw new Error(result.error || 'Không kiểm tra được nguồn.');
       const data = result.data;
-      if (status) status.textContent = `Atlas: ${data.examCount} đề, ${data.questionCount} câu; năm có dữ liệu: ${data.years.join(', ') || 'không có'}; năm thiếu: ${data.missingYears.join(', ') || 'không có'}.`;
+      if (status) status.textContent = `cơ sở dữ liệu: ${data.examCount} đề, ${data.questionCount} câu; năm có dữ liệu: ${data.years.join(', ') || 'không có'}; năm thiếu: ${data.missingYears.join(', ') || 'không có'}.`;
     } catch (error) { if (status) status.textContent = error.message; }
     finally { button.disabled = false; }
   };
@@ -3149,7 +3150,7 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
     examTrendState.current = null;
     if (save) save.disabled = true;
     if (button) button.disabled = true;
-    if (status) status.textContent = 'GPT đang phân tích và hệ thống sẽ đối chiếu dữ liệu Atlas…';
+    if (status) status.textContent = 'Gia sư Toán AI đang phân tích và hệ thống sẽ đối chiếu kho đề…';
     const controller = new AbortController();
     const timer = setTimeout(() => controller.abort(), 295_000);
     try {
@@ -3163,7 +3164,7 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
       renderExamTrendReport(result.data);
       if (save) save.disabled = false;
       if (status) status.textContent = result.data.quality?.status === 'checked'
-        ? 'Hoàn tất: số liệu và mã dẫn đã đối chiếu Atlas.'
+        ? 'Hoàn tất: số liệu và mã dẫn đã đối chiếu cơ sở dữ liệu.'
         : 'Hoàn tất: xem các giới hạn và mã dẫn cần rà soát.';
     } catch (error) {
       if (status) status.textContent = error?.name === 'AbortError'
@@ -3184,8 +3185,8 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
     try {
       const saved = await window.VMODataService.saveExamTrendReport(examTrendState.current);
       examTrendState.current = { ...examTrendState.current, id: saved.id, createdAt: saved.createdAt };
-      if (status) status.textContent = 'Đã lưu báo cáo xu hướng vào MongoDB.';
-      showToast('Đã lưu báo cáo xu hướng vào MongoDB!', true);
+      if (status) status.textContent = 'Đã lưu báo cáo xu hướng vào cơ sở dữ liệu.';
+      showToast('Đã lưu báo cáo xu hướng vào cơ sở dữ liệu!', true);
       await window.loadExamTrendReports(true);
     } catch (error) {
       if (button) button.disabled = false;
@@ -3198,7 +3199,7 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
     if (!requireAdminUiAction()) return;
     const list = document.getElementById('trendSavedReports');
     if (!list || (examTrendState.loaded && !force)) return;
-    list.innerHTML = '<em>Đang tải báo cáo từ MongoDB...</em>';
+    list.innerHTML = '<em>Đang tải báo cáo từ cơ sở dữ liệu...</em>';
     try {
       examTrendState.saved = await window.VMODataService.getExamTrendReports();
       examTrendState.loaded = true;
@@ -3327,7 +3328,7 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
       </div>
       <div id="hubActivityList" aria-live="polite"></div>
       <div id="hubActivityPager" style="display:flex;justify-content:flex-end;gap:6px;margin-top:8px;"></div>
-      <p style="font-size:.75rem;color:#64748b;margin-top:12px;">Thống kê tính từ các bài đã lưu trong MongoDB; nhật ký bắt đầu từ khi chức năng được triển khai. Mỗi câu tính một lần cho mỗi tài khoản; tổng hệ thống là tổng theo tài khoản. Điểm dùng lần đánh giá đã lưu gần nhất theo thang AI.</p>`;
+      <p style="font-size:.75rem;color:#64748b;margin-top:12px;">Thống kê tính từ các bài đã lưu trong cơ sở dữ liệu; nhật ký bắt đầu từ khi chức năng được triển khai. Mỗi câu tính một lần cho mỗi tài khoản; tổng hệ thống là tổng theo tài khoản. Điểm dùng lần đánh giá đã lưu gần nhất theo thang AI.</p>`;
     const selector = panel.querySelector('#hubLearningAccount');
     selector.parentElement.style.display = isAdmin ? 'flex' : 'none';
     selector.onchange = () => {
@@ -3398,7 +3399,7 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
     try {
       await window.VMODataService.deleteAiGuide(submissionId);
       window.onAIGuideDeleted?.(submissionId);
-      showToast('Đã xóa AI Hướng dẫn giải đã lưu trong MongoDB.', true);
+      showToast('Đã xóa AI Hướng dẫn giải đã lưu trong cơ sở dữ liệu.', true);
       await window.loadLearningDashboard();
     } catch (error) {
       if (button) button.disabled = false;
@@ -3442,7 +3443,7 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
     const summary = document.getElementById('hubLearningSummary');
     if (!summary) return;
     const requestId = ++learningDashboard.requestId;
-    summary.textContent = 'Đang tính thống kê từ MongoDB...';
+    summary.textContent = 'Đang tính thống kê từ cơ sở dữ liệu...';
     try {
       const result = await window.VMODataService.getLearningOverview();
       if (requestId !== learningDashboard.requestId) return;
@@ -3474,7 +3475,7 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
           <div class="vmo-modal-header" style="background:#0f172a; color:#fff;">
             <div class="vmo-modal-title" style="color:#fff;">
               <span>🗄️</span>
-              <span>Trung tâm Quản trị Dữ liệu database (VMO Database Hub)</span>
+              <span>Trung tâm Quản trị Dữ liệu</span>
             </div>
             <button type="button" class="vmo-modal-close" style="color:#fff;" onclick="closeDataHubModal()">✕</button>
           </div>
@@ -3528,12 +3529,12 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
                 </div>
                 <div style="text-align:right;">
                   <button type="button" onclick="toggleAddEventForm()" style="margin-right:8px; padding:6px 12px; border:1px solid #cbd5e1; border-radius:6px; background:#fff; cursor:pointer;">Hủy</button>
-                  <button type="submit" style="background:#16a34a; color:#fff; border:none; padding:6px 14px; border-radius:6px; font-weight:600; cursor:pointer;">Lưu vào database</button>
+                  <button type="submit" style="background:#16a34a; color:#fff; border:none; padding:6px 14px; border-radius:6px; font-weight:600; cursor:pointer;">Lưu vào cơ sở dữ liệu</button>
                 </div>
               </form>
 
               <div id="hubEventsList" style="max-height:300px; overflow-y:auto;">
-                <em>Đang nạp danh sách sự kiện từ database...</em>
+                <em>Đang nạp danh sách sự kiện từ cơ sở dữ liệu...</em>
               </div>
             </div>
 
@@ -3552,7 +3553,7 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
               </form>
 
               <div id="hubDocsList" style="max-height:300px; overflow-y:auto;">
-                <em>Đang nạp danh sách tài liệu từ database...</em>
+                <em>Đang nạp danh sách tài liệu từ cơ sở dữ liệu...</em>
               </div>
             </div>
 
@@ -3571,7 +3572,7 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
               </form>
 
               <div id="hubExamsList" style="max-height:300px; overflow-y:auto;">
-                <em>Đang nạp danh sách đề thi từ database...</em>
+                <em>Đang nạp danh sách đề thi từ cơ sở dữ liệu...</em>
               </div>
             </div>
 
@@ -3694,7 +3695,7 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
   window.loadAllSubmissions = async function() {
     const el = document.getElementById('hubSubsList');
     if (!el) return;
-    el.innerHTML = '<em>Đang tải danh sách bài nộp từ database...</em>';
+    el.innerHTML = '<em>Đang tải danh sách bài nộp từ cơ sở dữ liệu...</em>';
     try {
       if (window.VMODataService && window.VMODataService.getSubmissionsPage) {
         const result = await window.VMODataService.getSubmissionsPage(readSubmissionFilters());
@@ -3706,10 +3707,10 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
           pages: result.pagination?.pages || 1
         };
         // Dùng cùng nguồn dữ liệu với cửa sổ lịch sử để các nút xem chi tiết
-        // có thể mở đúng nhận xét AI của bản ghi đang hiển thị trong Database Hub.
+        // có thể mở đúng nhận xét AI của bản ghi đang hiển thị trong cơ sở dữ liệu Hub.
         window.lastLoadedSubmissions = subs || [];
         if (!subs || subs.length === 0) {
-          el.innerHTML = '<div style="padding:14px; text-align:center; color:#94a3b8; font-style:italic;">Chưa có bài giải nào được lưu trên hệ thống database. Học sinh hoặc giáo viên có thể nhấn "✍️ Nộp bài giải" hoặc "🚀 Lưu bài giải lên database" ở từng câu hỏi để lưu vào đây!</div>';
+          el.innerHTML = '<div style="padding:14px; text-align:center; color:#94a3b8; font-style:italic;">Chưa có bài giải nào được lưu trên hệ thống cơ sở dữ liệu. Học sinh hoặc giáo viên có thể nhấn "✍️ Nộp bài giải" hoặc "🚀 Lưu bài giải lên database" ở từng câu hỏi để lưu vào đây!</div>';
           return;
         }
         const cardsHtml = subs.map((s, idx) => {
@@ -3795,7 +3796,7 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
           </div>`;
         el.innerHTML = cardsHtml + pagerHtml;
       } else {
-        el.innerHTML = '<div style="color:#dc2626;">Dịch vụ VMODataService chưa sẵn sàng.</div>';
+        el.innerHTML = '<div style="color:#dc2626;">Dịch vụ lưu trữ chưa sẵn sàng. Vui lòng thử lại sau.</div>';
       }
     } catch (e) {
       el.innerHTML = '<div style="color:#dc2626; padding:10px;">Lỗi tải bài nộp: ' + e.message + '</div>';
@@ -3804,10 +3805,10 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
 
   window.deleteSubmissionItem = async function(id) {
     if (!requireAdminUiAction()) return;
-    if (!confirm('Bạn có chắc chắn muốn xóa vĩnh viễn bài nộp này và ảnh bài làm liên quan khỏi Database?')) return;
+    if (!confirm('Bạn có chắc chắn muốn xóa vĩnh viễn bài nộp này và ảnh bài làm liên quan khỏi cơ sở dữ liệu?')) return;
     try {
       await window.VMODataService.deleteSubmission(id);
-      showToast('Đã xóa bài nộp và ảnh liên quan khỏi database.', true);
+      showToast('Đã xóa bài nộp và ảnh liên quan khỏi cơ sở dữ liệu.', true);
       await loadAllSubmissions();
     } catch (err) {
       showToast('Không thể xóa bài nộp: ' + (err?.message || 'Lỗi không xác định'), false);
@@ -3819,7 +3820,7 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
     const actionLabel = verified ? 'xác minh' : 'hủy xác minh';
     const warning = verified
       ? 'Sau khi xác minh, lời giải này có thể được dùng làm nguồn tham khảo tin cậy cho AI Hướng dẫn giải và AI Đánh giá bài. Chỉ tiếp tục nếu đã kiểm tra đầy đủ tính đúng đắn toán học.'
-      : 'Sau khi hủy xác minh, lời giải này sẽ không còn được dùng làm nguồn tham khảo tin cậy cho các pipeline AI.';
+      : 'Sau khi hủy xác minh, lời giải này sẽ không còn được dùng làm nguồn tham khảo tin cậy cho Gia sư Toán AI.';
     if (!window.confirm(`${warning}\n\nTiếp tục ${actionLabel} bài nộp này?`)) return;
     const note = window.prompt(verified
       ? 'Ghi chú xác minh (khuyến nghị nêu phạm vi đã kiểm tra):'
@@ -4065,7 +4066,7 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
     if (regionalTarget) regionalTarget.required = regional;
     const label = { tst: 'TST', regional: 'Đà Nẵng–Quảng Nam', vmo: 'VMO', olympic: 'IMO–Olympic', olympic30: 'Olympic 30/4', duyenhai: 'Duyên hải miền Bắc', admission: 'Đề thi vào lớp 10 chuyên' }[destination];
     if (hint) hint.textContent = `Đề sẽ được lưu và hiển thị trong kho ${label}.`;
-    if (save) save.textContent = `Lưu đề ${label} & câu hỏi vào MongoDB`;
+    if (save) save.textContent = `Lưu đề ${label} & câu hỏi vào cơ sở dữ liệu`;
     if (admission) window.syncAdmissionSchool?.();
     else if (regional) window.syncRegionalExamTarget();
     else if (competition) { const province = document.getElementById('docProvince'); if (province) province.value = competitionInput?.value.trim() || ''; }
@@ -4156,7 +4157,7 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
     const targetType = document.getElementById('examPredictionType')?.value;
     const target = document.getElementById('examPredictionTarget')?.selectedOptions?.[0];
     button.disabled = true;
-    if (status) status.textContent = 'Đang kiểm tra kho đề Atlas...';
+    if (status) status.textContent = 'Đang kiểm tra kho đề cơ sở dữ liệu...';
     try {
       const response = await fetch('/api/ai-predict-exam', { method: 'POST', credentials: 'same-origin',
         headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({
@@ -4169,7 +4170,7 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
       const result = await response.json();
       if (!response.ok || !result.success) throw new Error(result.error || 'Không kiểm tra được nguồn.');
       const data = result.data;
-      if (status) status.textContent = `Atlas: ${data.ownExamCount} đề của đơn vị (${data.years.join(', ') || 'chưa có'}); thiếu ${data.missingYears.length} năm; ${data.peerExamCount} đề TST đối chiếu.`;
+      if (status) status.textContent = `cơ sở dữ liệu: ${data.ownExamCount} đề của đơn vị (${data.years.join(', ') || 'chưa có'}); thiếu ${data.missingYears.length} năm; ${data.peerExamCount} đề TST đối chiếu.`;
     } catch (error) { if (status) status.textContent = error.message; }
     finally { button.disabled = false; }
   };
@@ -4190,7 +4191,7 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
     ocrStates.exam.prediction = null;
     if (report) report.replaceChildren();
     if (button) button.disabled = true;
-    if (status) status.textContent = 'Gemini đang soạn đề; GPT sẽ kiểm định độc lập từng câu (có thể mất gần 5 phút)...';
+    if (status) status.textContent = 'Gia sư Toán AI đang soạn đề và kiểm định độc lập từng câu (có thể mất gần 5 phút)...';
     try {
       const response = await fetch('/api/ai-predict-exam', {
         method: 'POST', credentials: 'same-origin', headers: { 'Content-Type': 'application/json' },
@@ -4207,7 +4208,7 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
       const data = payload.data;
       if (!Array.isArray(data?.questions) || !Array.isArray(data?.quality?.questionChecks) ||
           data.quality.questionChecks.length !== data.questions.length) {
-        throw new Error('Thiếu nội dung đề hoặc nhận xét GPT theo từng câu; chưa thể lưu bản dự đoán.');
+        throw new Error('Thiếu nội dung đề hoặc nhận xét Gia sư Toán AI theo từng câu; chưa thể lưu bản dự đoán.');
       }
       ocrStates.exam.questions = data.questions;
       ocrStates.exam.prediction = { key: requestKey, evidence: data.evidence, model: data.model,
@@ -4223,10 +4224,10 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
         const mergerText = evidence.mergedProvinceHistory
           ? ` Đã hợp nhất lịch sử ${evidence.historyMembers?.join(' + ')} vào ${evidence.historyCurrentProvince}.`
           : '';
-        summary.textContent = `Nguồn Atlas: ${evidence.ownExamCount || 0} đề / ${evidence.years?.length || 0} năm của đơn vị (${(evidence.years || []).join(', ') || 'chưa có'}); thiếu ${evidence.missingYears?.length || 0} năm trong phạm vi yêu cầu. ${evidence.peerExamCount || 0} đề TST cùng kỳ ${evidence.trendYear || ''}.${mergerText} ${data.reasoning || ''}`;
+        summary.textContent = `Nguồn cơ sở dữ liệu: ${evidence.ownExamCount || 0} đề / ${evidence.years?.length || 0} năm của đơn vị (${(evidence.years || []).join(', ') || 'chưa có'}); thiếu ${evidence.missingYears?.length || 0} năm trong phạm vi yêu cầu. ${evidence.peerExamCount || 0} đề TST cùng kỳ ${evidence.trendYear || ''}.${mergerText} ${data.reasoning || ''}`;
         report.appendChild(summary);
         const review = document.createElement('p');
-        review.textContent = `Kiểm định GPT: ${data.quality.verified ? 'Đã duyệt' : 'Chưa duyệt — lưu để admin sửa'} (${data.quality.score}/5). ${data.quality.summary || ''}`;
+        review.textContent = `Kiểm định Gia sư Toán AI: ${data.quality.verified ? 'Đã duyệt' : 'Chưa duyệt — lưu để admin sửa'} (${data.quality.score}/5). ${data.quality.summary || ''}`;
         report.appendChild(review);
         (data.quality.criticalIssues || []).forEach(issue => {
           const item = document.createElement('p');
@@ -4236,7 +4237,7 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
         });
         (data.quality.questionChecks || []).forEach(check => {
           const item = document.createElement('div');
-          item.textContent = `Câu ${check.questionNumber} · ${check.approved ? 'Đã duyệt' : 'Cần sửa'}: ${[check.reason, ...(check.issues || [])].filter(Boolean).join(' · ') || 'GPT chưa nêu đủ lý do.'}`;
+          item.textContent = `Câu ${check.questionNumber} · ${check.approved ? 'Đã duyệt' : 'Cần sửa'}: ${[check.reason, ...(check.issues || [])].filter(Boolean).join(' · ') || 'Gia sư Toán AI chưa nêu đủ lý do.'}`;
           report.appendChild(item);
         });
         (evidence.sources || []).slice(0, 10).forEach(source => {
@@ -4246,8 +4247,8 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
         });
       }
       if (status) status.textContent = data.quality.verified
-        ? 'Gemini đã soạn, GPT đã duyệt bản gốc. Hãy rà soát từng câu trước khi lưu.'
-        : 'Đề chưa được GPT duyệt. Có thể lưu vào MongoDB; câu bị bác sẽ ẩn với thành viên cho đến khi admin sửa và xác nhận.';
+        ? 'Gia sư Toán AI đã soạn và kiểm định bản gốc. Hãy rà soát từng câu trước khi lưu.'
+        : 'Đề chưa được Gia sư Toán AI duyệt. Có thể lưu vào cơ sở dữ liệu; câu bị bác sẽ ẩn với thành viên cho đến khi admin sửa và xác nhận.';
     } catch (error) {
       if (status) status.textContent = error.message;
       showToast(error.message, false);
@@ -4321,7 +4322,7 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
     preview.innerHTML = `<div style="font-weight:800;color:#1e293b;margin-bottom:8px;">${kind === 'exam' && ocrStates.exam.prediction ? 'Bản đề dự đoán (AI) — kiểm tra tính đúng đắn và chỉnh sửa trước khi lưu' : 'Bản OCR — kiểm tra và chỉnh sửa trước khi lưu'} (${questions.length} câu)</div>` + questions.map((item, index) => `
       <div class="exam-ocr-question" data-index="${index}" style="border-top:1px solid #e2e8f0;padding-top:10px;margin-top:10px;">
         ${kind === 'exam' && ocrStates.exam.prediction?.quality?.questionChecks?.[index]?.approved === false
-          ? `<div style="padding:9px;margin-bottom:8px;border:1px solid #fca5a5;background:#fef2f2;border-radius:6px;color:#991b1b;white-space:pre-wrap;"><strong>⚠️ GPT chưa duyệt Câu ${Number(item.questionNumber) || index + 1}</strong><br>${escapeHtmlText([ocrStates.exam.prediction.quality.questionChecks[index].reason, ...(ocrStates.exam.prediction.quality.questionChecks[index].issues || [])].filter(Boolean).join('\n'))}</div>` : ''}
+          ? `<div style="padding:9px;margin-bottom:8px;border:1px solid #fca5a5;background:#fef2f2;border-radius:6px;color:#991b1b;white-space:pre-wrap;"><strong>⚠️ Gia sư Toán AI chưa duyệt Câu ${Number(item.questionNumber) || index + 1}</strong><br>${escapeHtmlText([ocrStates.exam.prediction.quality.questionChecks[index].reason, ...(ocrStates.exam.prediction.quality.questionChecks[index].issues || [])].filter(Boolean).join('\n'))}</div>` : ''}
         <div style="display:grid;grid-template-columns:90px 1fr 90px;gap:8px;margin-bottom:7px;">
           <input class="exam-ocr-number" type="number" min="1" max="99" value="${Number(item.questionNumber) || index + 1}" aria-label="Số câu" style="padding:6px;border:1px solid #cbd5e1;border-radius:5px;">
           <input class="exam-ocr-topic" value="${escapeHtmlText(item.topic || 'Toán Olympic')}" aria-label="Chuyên đề" style="padding:6px;border:1px solid #cbd5e1;border-radius:5px;">
@@ -4425,7 +4426,7 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
     try {
       const events = await window.VMODataService.getEvents();
       if (!events || events.length === 0) {
-        el.innerHTML = '<div style="padding:14px; text-align:center; color:#94a3b8; font-style:italic;">Chưa có sự kiện nào được lưu trên database. Hãy nhấn "➕ Thêm sự kiện mới" để tạo sự kiện đầu tiên!</div>';
+        el.innerHTML = '<div style="padding:14px; text-align:center; color:#94a3b8; font-style:italic;">Chưa có sự kiện nào được lưu trên cơ sở dữ liệu. Hãy nhấn "➕ Thêm sự kiện mới" để tạo sự kiện đầu tiên!</div>';
         return;
       }
       el.innerHTML = events.map(e => `
@@ -4441,7 +4442,7 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
         </div>
       `).join('');
     } catch (err) {
-      el.innerHTML = '<div style="color:#dc2626; padding:10px;">Lỗi tải sự kiện từ database: ' + err.message + '</div>';
+      el.innerHTML = '<div style="color:#dc2626; padding:10px;">Lỗi tải sự kiện từ cơ sở dữ liệu: ' + err.message + '</div>';
     }
   }
 
@@ -4459,7 +4460,7 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
         window.VMODataService.getExamCatalogSummary('specialized-admission')
       ]);
       if (!docs.length && !tstExams.length && !regionalExams.length && !vmoExams.length && !olympicExams.length && !olympic30Exams.length && !duyenhaiExams.length && !admissionExams.length) {
-        el.innerHTML = '<div style="padding:14px;text-align:center;color:#94a3b8;">Chưa có tài liệu hoặc đề lưu trữ nào trong database.</div>';
+        el.innerHTML = '<div style="padding:14px;text-align:center;color:#94a3b8;">Chưa có tài liệu hoặc đề lưu trữ nào trong cơ sở dữ liệu.</div>';
         return;
       }
       const catalogExams = [...admissionExams.map(exam => ({ ...exam, catalogLabel: 'Vào lớp 10 chuyên' })), ...tstExams.map(exam => ({ ...exam, catalogLabel: 'TST' })), ...regionalExams.map(exam => ({ ...exam, catalogLabel: 'Đà Nẵng–Quảng Nam' })), ...vmoExams.map(exam => ({ ...exam, catalogLabel: 'VMO' })), ...olympicExams.map(exam => ({ ...exam, catalogLabel: 'IMO–Olympic' })), ...olympic30Exams.map(exam => ({ ...exam, catalogLabel: `Olympic 30/4 · Lớp ${exam.grade}` })), ...duyenhaiExams.map(exam => ({ ...exam, catalogLabel: `Duyên hải miền Bắc · Lớp ${exam.grade}` }))];
@@ -4489,7 +4490,7 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
       const exams = await window.VMODataService.getExams('vmo-mock');
       exams.forEach(exam => managedExams.set(exam.id || exam._id, exam));
       if (!exams || exams.length === 0) {
-        el.innerHTML = '<div style="padding:14px; text-align:center; color:#94a3b8; font-style:italic;">Chưa có đề thi nào trong database. Nhấn "➕ Thêm đề thi mới" để bắt đầu!</div>';
+        el.innerHTML = '<div style="padding:14px; text-align:center; color:#94a3b8; font-style:italic;">Chưa có đề thi nào trong cơ sở dữ liệu. Nhấn "➕ Thêm đề thi mới" để bắt đầu!</div>';
         return;
       }
       el.innerHTML = exams.map(x => `
@@ -4580,7 +4581,7 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
         <label>Chủ đề <input name="topic" maxlength="120" placeholder="Toán Olympic"></label>
         <label>Điểm tối đa <input name="maxScore" type="number" min="0" max="20" step="0.1" value="0"></label>
         <label>Nội dung HTML/LaTeX <textarea name="content" required rows="8" maxlength="50000" style="width:100%"></textarea></label>
-        <button type="submit">Lưu câu hỏi vào MongoDB</button>
+        <button type="submit">Lưu câu hỏi vào cơ sở dữ liệu</button>
       </form>`;
     panel.querySelector('.close-questions').onclick = () => panel.remove();
     (exam.category === 'vmo-mock' ? document.getElementById('hubExamsList') : document.getElementById('hubDocsList'))?.before(panel);
@@ -4748,7 +4749,7 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
 
     try {
       await window.VMODataService.addEvent({ title, eventType, startDate, location, description });
-      showToast('Đã lưu sự kiện mới vào database!', true);
+      showToast('Đã lưu sự kiện mới vào cơ sở dữ liệu!', true);
       toggleAddEventForm();
       loadHubEvents();
     } catch (err) {
@@ -4770,7 +4771,7 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
     const prediction = !tst && field('CreationMode')?.value === 'prediction';
     if (!questions.length || (!prediction && !sourceImages.length)) return showToast('Vui lòng tạo và rà soát nội dung câu hỏi trước khi lưu.', false);
     if (prediction && (!state.prediction || state.prediction.key !== predictionInputKey())) return showToast('Thông số dự đoán đã thay đổi. Hãy tạo bản dự đoán mới trước khi lưu.', false);
-    if (prediction && !Array.isArray(state.prediction.quality?.questionChecks)) return showToast('Chưa có nhận xét GPT cho đề dự đoán.', false);
+    if (prediction && !Array.isArray(state.prediction.quality?.questionChecks)) return showToast('Chưa có nhận xét Gia sư Toán AI cho đề dự đoán.', false);
     if (prediction && (questions.length < 2 || questions.length > 6 || Math.abs(questions.reduce((total, question) => total + question.maxScore, 0) - 20) > 0.001)) return showToast('Đề dự đoán cần 2–6 câu và tổng điểm đúng 20.', false);
     const destination = tst ? (field('Destination')?.value || 'tst') : 'mock';
     const regional = destination === 'regional';
@@ -4787,7 +4788,7 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
         : (tst ? field('TargetAnchor')?.value : `mock-set${setNumber}-day${dayNumber}`);
     if (!targetAnchor) return showToast('Vui lòng chọn tỉnh/thành phố.', false);
     const saveButton = field('SaveButton');
-    const originalLabel = saveButton?.textContent || 'Lưu vào MongoDB';
+    const originalLabel = saveButton?.textContent || 'Lưu vào cơ sở dữ liệu';
     const payload = {
       destination, ...(admission ? { schoolId: field('SchoolId')?.value } : {}), ...(graded ? { grade: Number(field('Grade')?.value) } : {}), title: field('Title')?.value.trim(),
       province: field('Province')?.value.trim(), year: field('Year')?.value.trim(),
@@ -4802,8 +4803,8 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
         const review = state.prediction.quality.questionChecks.find(check => check.questionNumber === question.questionNumber);
         return { ...question, predictionReview: {
           questionNumber: question.questionNumber, approved: unchanged && review?.approved === true,
-          reason: review?.reason || 'Câu này chưa được GPT kiểm định.',
-          issues: [...(review?.issues || []), ...(!unchanged ? ['Nội dung đã thay đổi sau kiểm định GPT; cần admin kiểm tra và xác nhận.'] : [])]
+          reason: review?.reason || 'Câu này chưa được Gia sư Toán AI kiểm định.',
+          issues: [...(review?.issues || []), ...(!unchanged ? ['Nội dung đã thay đổi sau kiểm định Gia sư Toán AI; cần admin kiểm tra và xác nhận.'] : [])]
         } };
       }) : questions,
       origin: prediction ? 'prediction' : 'ocr',
@@ -4829,7 +4830,7 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
     try {
       if (prediction && !confirm(state.prediction.quality.verified
         ? 'Đây là đề DỰ ĐOÁN do AI soạn. Xác nhận lưu bản đã biên tập trong Bộ đề thi thử VMO?'
-        : 'GPT đã bác ít nhất một câu. Vẫn lưu đề vào MongoDB; các câu chưa duyệt sẽ ẩn với thành viên và chờ admin chỉnh sửa trong ⚙️ Quản lý nguồn. Xác nhận lưu?')) return;
+        : 'Gia sư Toán AI đã bác ít nhất một câu. Vẫn lưu đề vào cơ sở dữ liệu; các câu chưa duyệt sẽ ẩn với thành viên và chờ admin chỉnh sửa trong ⚙️ Quản lý nguồn. Xác nhận lưu?')) return;
       if (saveButton) { saveButton.disabled = true; saveButton.textContent = 'Đang lưu đề thi...'; }
       let saved;
       try { saved = await window.VMODataService.createExamFromOcr(payload); }
@@ -4843,7 +4844,7 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
         await window.VMODataService.saveExamImage(saved.id || saved._id, index + 1, sourceImages[index]);
       }
       const savedType = { tst: 'đề TST', regional: 'đề Đà Nẵng–Quảng Nam', vmo: 'đề VMO', olympic: 'đề IMO–Olympic', olympic30: 'đề Olympic 30/4', duyenhai: 'đề Duyên hải miền Bắc', admission: 'đề thi vào lớp 10 chuyên', mock: 'đề thi thử' }[destination];
-      showToast(`Đã lưu ${savedType} và ${saved?.problemCount || questions.length} câu hỏi vào MongoDB!`, true);
+      showToast(`Đã lưu ${savedType} và ${saved?.problemCount || questions.length} câu hỏi vào cơ sở dữ liệu!`, true);
       e.target.reset();
       window.resetExamOcrPreview(kind);
       if (prediction) window.syncExamCreationMode();
@@ -4867,10 +4868,10 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
 
   window.deleteEventItem = async function(id) {
     if (!requireAdminUiAction()) return;
-    if (!confirm('Bạn có chắc chắn muốn xóa sự kiện này khỏi Database?')) return;
+    if (!confirm('Bạn có chắc chắn muốn xóa sự kiện này khỏi cơ sở dữ liệu?')) return;
     try {
       await window.VMODataService.deleteEvent(id);
-      showToast('Đã xóa sự kiện khỏi database!', true);
+      showToast('Đã xóa sự kiện khỏi cơ sở dữ liệu!', true);
       loadHubEvents();
     } catch (e) {
       showToast('Lỗi khi xóa: ' + e.message, false);
@@ -4879,10 +4880,10 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
 
   window.deleteDocItem = async function(id) {
     if (!requireAdminUiAction()) return;
-    if (!confirm('Bạn có chắc chắn muốn xóa tài liệu này khỏi Database?')) return;
+    if (!confirm('Bạn có chắc chắn muốn xóa tài liệu này khỏi cơ sở dữ liệu?')) return;
     try {
       await window.VMODataService.deleteDocument(id);
-      showToast('Đã xóa tài liệu khỏi database!', true);
+      showToast('Đã xóa tài liệu khỏi cơ sở dữ liệu!', true);
       loadHubDocs();
     } catch (e) {
       showToast('Lỗi khi xóa: ' + e.message, false);
@@ -4902,7 +4903,7 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
     card.dataset.databaseCard = 'true';
     card.dataset.filter = exam.region || 'BAC';
     card.dataset.search = `${exam.province || ''} ${exam.year || ''}`.toLowerCase();
-    card.innerHTML = `<div class="exam-header"><div class="exam-top-tags"><span class="tag tag-year">${escapeHtmlText(exam.year || '2026-2027')}</span><span class="tag tag-province">${escapeHtmlText(exam.province || '')}</span>${exam.grade ? `<span class="tag tag-official">Lớp ${exam.grade}</span>` : ''}<span class="tag tag-official">Đề từ database</span></div><h3 class="exam-title">${escapeHtmlText(exam.title || `Đề TST ${exam.province || ''}`)}</h3></div><div class="exam-body"></div>`;
+    card.innerHTML = `<div class="exam-header"><div class="exam-top-tags"><span class="tag tag-year">${escapeHtmlText(exam.year || '2026-2027')}</span><span class="tag tag-province">${escapeHtmlText(exam.province || '')}</span>${exam.grade ? `<span class="tag tag-official">Lớp ${exam.grade}</span>` : ''}<span class="tag tag-official">Đề từ cơ sở dữ liệu</span></div><h3 class="exam-title">${escapeHtmlText(exam.title || `Đề TST ${exam.province || ''}`)}</h3></div><div class="exam-body"></div>`;
     (document.querySelector('#tab-tst .feed-container') || document.getElementById('tab-tst'))?.appendChild(card);
     ensureDatabaseExamSidebar(exam);
     return card;
@@ -4918,7 +4919,7 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
     card.dataset.grade = exam.grade || '';
     card.dataset.filter = exam.category === 'specialized-admission' ? exam.region : exam.grade ? `GRADE${exam.grade}` : 'ALL';
     card.dataset.search = `${exam.province || ''} ${exam.schoolName || ''} ${exam.year || ''} ${exam.title || ''} ${exam.grade ? `Lớp ${exam.grade}` : ''}`;
-    card.innerHTML = `<div class="exam-header"><div class="exam-top-tags"><span class="tag tag-year">${escapeHtmlText(exam.year || '')}</span><span class="tag tag-province">${escapeHtmlText(exam.province || '')}</span>${exam.grade ? `<span class="tag tag-official">Lớp ${exam.grade}</span>` : ''}<span class="tag tag-official">Đề từ database</span></div><h3 class="exam-title">${escapeHtmlText(exam.title || exam.province || 'Đề thi')}</h3></div><div class="exam-body"></div>`;
+    card.innerHTML = `<div class="exam-header"><div class="exam-top-tags"><span class="tag tag-year">${escapeHtmlText(exam.year || '')}</span><span class="tag tag-province">${escapeHtmlText(exam.province || '')}</span>${exam.grade ? `<span class="tag tag-official">Lớp ${exam.grade}</span>` : ''}<span class="tag tag-official">Đề từ cơ sở dữ liệu</span></div><h3 class="exam-title">${escapeHtmlText(exam.title || exam.province || 'Đề thi')}</h3></div><div class="exam-body"></div>`;
     (document.querySelector(`#${tabId} .feed-container`) || document.getElementById(tabId))?.appendChild(card);
     ensureCompetitionSidebar(exam);
     window.refreshGradeCatalogFilter?.(tabId);
@@ -4946,7 +4947,7 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
     card.dataset.databaseCard = 'true';
     card.dataset.filter = isQuangNam ? 'QUANGNAM' : 'DANANG';
     card.dataset.search = `${exam.province || ''} ${exam.year || ''} ${exam.title || ''}`.toLowerCase();
-    card.innerHTML = `<div class="exam-header"><div class="exam-top-tags"><span class="tag tag-year">${escapeHtmlText(exam.year || '')}</span><span class="tag tag-province">${escapeHtmlText(exam.province || '')}</span><span class="tag tag-official">Đề lưu trữ từ database</span></div><h3 class="exam-title">${escapeHtmlText(exam.title || `Đề ${exam.province || ''} ${exam.year || ''}`)}</h3></div><div class="exam-body"></div>`;
+    card.innerHTML = `<div class="exam-header"><div class="exam-top-tags"><span class="tag tag-year">${escapeHtmlText(exam.year || '')}</span><span class="tag tag-province">${escapeHtmlText(exam.province || '')}</span><span class="tag tag-official">Đề lưu trữ từ cơ sở dữ liệu</span></div><h3 class="exam-title">${escapeHtmlText(exam.title || `Đề ${exam.province || ''} ${exam.year || ''}`)}</h3></div><div class="exam-body"></div>`;
     (document.querySelector('#tab-history .feed-container') || document.getElementById('tab-history'))?.appendChild(card);
     ensureDatabaseRegionalNavigation(exam);
     return card;
@@ -5115,7 +5116,7 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
     try {
       const items = await window.VMODataService.getCatalogProblems({ contentKey });
       const problem = items?.[0];
-      if (!problem) throw new Error('Không tìm thấy câu hỏi trong MongoDB');
+      if (!problem) throw new Error('Không tìm thấy câu hỏi trong cơ sở dữ liệu');
       if (modal.dataset.contentKey !== contentKey) return;
       window.mongoProblemsByContentKey ||= new Map();
       window.mongoProblemsByContentKey.set(contentKey, problem);
@@ -5126,7 +5127,7 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
       contentInput.disabled = false;
       if (problem.predictionReview?.status === 'gpt_rejected') {
         const review = document.getElementById('referenceManagerPredictionReview');
-        review.textContent = `⚠️ GPT chưa duyệt câu hỏi này.\n${[problem.predictionReview.reason,
+        review.textContent = `⚠️ Gia sư Toán AI chưa duyệt câu hỏi này.\n${[problem.predictionReview.reason,
           ...(problem.predictionReview.issues || [])].filter(Boolean).join('\n\n') || 'Chưa có nhận xét chi tiết.'}`;
         review.style.display = 'block';
         document.getElementById('referenceManagerResolveWrap').style.display = 'block';
@@ -5171,7 +5172,7 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
     const resolvePredictionReview = problem.predictionReview?.status === 'gpt_rejected' &&
       document.getElementById('referenceManagerResolve').checked;
     if (resolvePredictionReview && content === problem.content?.trim()) {
-      return showToast('Cần sửa nội dung câu hỏi trước khi xác nhận đã khắc phục nhận xét GPT.', false);
+      return showToast('Cần sửa nội dung câu hỏi trước khi xác nhận đã khắc phục nhận xét Gia sư Toán AI.', false);
     }
     if (!window.confirm('Lưu nội dung câu hỏi và các nguồn lời giải tham khảo? Phiên bản hiện tại sẽ được lưu vào lịch sử để có thể khôi phục.')) return;
     const saveButton = document.getElementById('saveReferenceLinksManagerButton');
@@ -5406,7 +5407,7 @@ if (card) card.dataset.databaseCard = 'true';
     meta.style.cssText = 'display:flex;flex-wrap:wrap;gap:12px;align-items:center;background:#eff6ff;padding:10px 12px;border-radius:8px;margin-bottom:12px;color:#0f172a;';
     const imageCount = Math.max(0, Math.min(20, Number(exam.sourceImageCount) || (exam.hasImages ? 1 : 0)));
     const imageButtons = Array.from({ length: imageCount }, (_, index) => `<button type="button" onclick="openExamSourceImage('${escapeHtmlText(exam.id || exam._id)}',${index + 1})" style="border:1px solid #93c5fd;background:#fff;color:#1d4ed8;padding:4px 9px;border-radius:5px;cursor:pointer;">🖼️ Ảnh ${index + 1}</button>`).join('');
-    meta.innerHTML = `<strong>📌 Ngày thi thứ ${Number(exam.dayNumber) || 1}</strong><span>📅 ${escapeHtmlText(exam.examDate || 'Đang cập nhật')}</span><span>⏱️ ${Number(exam.duration) || 180} phút</span><span>🗄️ MongoDB</span>${imageButtons}`;
+    meta.innerHTML = `<strong>📌 Ngày thi thứ ${Number(exam.dayNumber) || 1}</strong><span>📅 ${escapeHtmlText(exam.examDate || 'Đang cập nhật')}</span><span>⏱️ ${Number(exam.duration) || 180} phút</span><span>🗄️ cơ sở dữ liệu</span>${imageButtons}`;
     section.appendChild(meta);
 
     newProblems.sort((a, b) => Number(a.questionNumber) - Number(b.questionNumber)).forEach(problem => {
@@ -5442,7 +5443,7 @@ if (card) card.dataset.databaseCard = 'true';
         const warning = document.createElement('div');
         warning.className = 'prediction-review-warning';
         warning.style.cssText = 'white-space:pre-wrap;margin:10px 0;padding:10px;border:1px solid #fca5a5;background:#fef2f2;color:#991b1b;border-radius:6px;';
-        warning.textContent = `⚠️ GPT chưa duyệt, câu hỏi đang ẩn với thành viên.\n${[problem.predictionReview.reason,
+        warning.textContent = `⚠️ Gia sư Toán AI chưa duyệt, câu hỏi đang ẩn với thành viên.\n${[problem.predictionReview.reason,
           ...(problem.predictionReview.issues || [])].filter(Boolean).join('\n\n')}`;
         const edit = document.createElement('button');
         edit.type = 'button';
@@ -5622,7 +5623,7 @@ if (card) card.dataset.databaseCard = 'true';
         if (!body.querySelector('.db-exam-loading')) {
           const notice = document.createElement('p');
           notice.className = 'db-exam-loading';
-          notice.textContent = 'Chọn đề để tải câu hỏi từ MongoDB.';
+          notice.textContent = 'Chọn đề để tải câu hỏi từ cơ sở dữ liệu.';
           body.appendChild(notice);
         }
         observeExamCard(card, category);
@@ -5732,8 +5733,8 @@ if (card) card.dataset.databaseCard = 'true';
     state.className = 'db-catalog-state';
     state.setAttribute('role', error ? 'alert' : 'status');
     state.textContent = error
-      ? 'Không tải được dữ liệu đề thi từ MongoDB Atlas. Vui lòng thử lại sau.'
-      : 'Chưa có đề thi liên kết với câu hỏi trong MongoDB Atlas.';
+      ? 'Không tải được dữ liệu đề thi từ cơ sở dữ liệu. Vui lòng thử lại sau.'
+      : 'Chưa có đề thi liên kết với câu hỏi trong cơ sở dữ liệu.';
     feed.appendChild(state);
   }
   async function loadDatabaseMockExams(force = false) {

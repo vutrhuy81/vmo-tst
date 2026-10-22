@@ -87,7 +87,7 @@ async function apiFetch(url, options = {}) {
     if (error?.name === 'VMODataServiceError') throw error;
 
     throw createServiceError(
-      error?.message || 'Không thể kết nối tới API MongoDB',
+      error?.message || 'Không thể kết nối tới API cơ sở dữ liệu',
       0,
       'NETWORK_ERROR'
     );

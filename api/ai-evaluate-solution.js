@@ -220,7 +220,7 @@ Mọi phép biến đổi đại số do bạn nêu phải được tự kiểm 
     const provisionalData = normalizeEvaluation(provisional.data);
     const observedStudentWork = solutionText || text(provisional.data?.studentWorkTranscription, 100_000);
     if (!observedStudentWork) {
-      return res.status(422).json({ success: false, error: 'Gemini chưa đọc được nội dung bài làm để GPT kiểm định độc lập.', code: 'STUDENT_WORK_TRANSCRIPTION_MISSING' });
+      return res.status(422).json({ success: false, error: 'Gia sư Toán AI chưa đọc rõ nội dung bài làm để kiểm định độc lập. Vui lòng gửi ảnh rõ hơn hoặc nhập bài làm.', code: 'STUDENT_WORK_TRANSCRIPTION_MISSING' });
     }
 
     const verified = await generateOpenAIJson({
@@ -271,7 +271,7 @@ ${mathematicalAuditInstruction}\n\nYÊU CẦU KIỂM ĐỊNH
       });
       return res.status(422).json({
         success: false,
-        error: 'Kết quả chấm chưa vượt qua kiểm định độc lập Gemini–GPT.',
+        error: 'Kết quả chấm của Gia sư Toán AI chưa vượt qua kiểm định độc lập.',
         code: 'QUALITY_REJECTED',
         quality: {
           failedChecks,
@@ -309,10 +309,10 @@ ${mathematicalAuditInstruction}\n\nYÊU CẦU KIỂM ĐỊNH
     const openAiMissing = error?.code === 'OPENAI_NOT_CONFIGURED';
     const geminiMissing = error?.code === 'AI_NOT_CONFIGURED';
     const openAiTimeout = error?.code === 'OPENAI_TIMEOUT';
-    if (openAiTimeout) return res.status(504).json({ success: false, error: 'Gemini đã chấm sơ bộ nhưng GPT kiểm định quá thời gian. Vui lòng thử lại.', code: 'OPENAI_TIMEOUT' });
-    if (openAiMissing || geminiMissing) return res.status(503).json({ success: false, error: error.message, code: error.code });
+    if (openAiTimeout) return res.status(504).json({ success: false, error: 'Gia sư Toán AI chưa hoàn tất kiểm định bài làm trong thời gian cho phép. Vui lòng thử lại.', code: 'OPENAI_TIMEOUT' });
+    if (openAiMissing || geminiMissing) return res.status(503).json({ success: false, error: 'Gia sư Toán AI tạm thời chưa sẵn sàng. Vui lòng thử lại sau.', code: error.code });
     if (String(error?.code || '').startsWith('OPENAI_')) {
-      return res.status(502).json({ success: false, error: 'GPT chưa thể hoàn tất kiểm định kết quả chấm.', code: error.code });
+      return res.status(502).json({ success: false, error: 'Gia sư Toán AI chưa thể hoàn tất kiểm định kết quả chấm. Vui lòng thử lại.', code: error.code });
     }
     return handleAiError(res, error);
   }
