@@ -235,9 +235,9 @@ function problemSnapshot(problem) {
   };
 }
 
-function requireAdmin(session, res) {
-  if (session.role === 'admin') return true;
-  res.status(403).json({ success: false, error: 'Chỉ quản trị viên được thực hiện thao tác này' });
+function requireContentManager(session, res) {
+  if (['admin', 'teacher'].includes(session.role)) return true;
+  res.status(403).json({ success: false, error: 'Chỉ Admin hoặc Giáo viên được thực hiện thao tác này' });
   return false;
 }
 
@@ -252,7 +252,7 @@ export default async function handler(req, res) {
   res.setHeader('Cache-Control', 'no-store');
   if (req.method === 'OPTIONS') return res.status(200).end();
 
-  const session = getSession(req);
+  const session = await getSession(req);
   if (!session) return res.status(401).json({ success: false, error: 'Vui lòng đăng nhập lại' });
 
   try {
@@ -269,7 +269,7 @@ export default async function handler(req, res) {
         const scope = learningScope(session, cleanText(req.query?.username, 64));
         if (!scope) return res.status(403).json({ success: false, error: 'Bạn chỉ được xem dữ liệu của tài khoản mình' });
         let userFilter = { ...scope };
-        if (session.role === 'admin' && scope.username) {
+        if (['admin', 'teacher'].includes(session.role) && scope.username) {
           const account = await db.collection('users').findOne({ username: scope.username }, { projection: { _id: 1 } });
           if (!account) return res.status(404).json({ success: false, error: 'Không tìm thấy tài khoản' });
           userFilter = { userId: String(account._id) };
@@ -287,7 +287,7 @@ export default async function handler(req, res) {
           return res.status(200).json({ success: true, items, pagination: { page: safePage, limit, total, pages } });
         }
         const [users, rows] = await Promise.all([
-          db.collection('users').find(session.role === 'admin' ? {} : { _id: objectId(String(session.sub)) }, {
+          db.collection('users').find(['admin', 'teacher'].includes(session.role) ? {} : { _id: objectId(String(session.sub)) }, {
             projection: { username: 1, fullName: 1, role: 1 }
           }).sort({ username: 1 }).toArray(),
           db.collection('submissions').find({ ...userFilter, $or: [
@@ -319,7 +319,7 @@ export default async function handler(req, res) {
           { projection: { userId: 1, hasImage: 1 } }
         );
         if (!submission) return res.status(404).json({ success: false, error: 'Không tìm thấy bài nộp' });
-        if (session.role !== 'admin' && String(submission.userId) !== String(session.sub)) {
+        if (!['admin', 'teacher'].includes(session.role) && String(submission.userId) !== String(session.sub)) {
           return res.status(403).json({ success: false, error: 'Bạn không có quyền xem ảnh này' });
         }
 
@@ -336,7 +336,7 @@ export default async function handler(req, res) {
         if (!examId) return res.status(400).json({ success: false, error: 'Mã đề thi không hợp lệ' });
         const exam = await db.collection('exams').findOne({ _id: examId }, { projection: { status: 1 } });
         if (!exam) return res.status(404).json({ success: false, error: 'Không tìm thấy đề thi' });
-        if (session.role !== 'admin' && exam.status !== 'published') {
+        if (!['admin', 'teacher'].includes(session.role) && exam.status !== 'published') {
           return res.status(403).json({ success: false, error: 'Đề thi chưa được công khai' });
         }
         const stored = await db.collection('exam_images').findOne(
@@ -347,7 +347,7 @@ export default async function handler(req, res) {
       }
 
       if (resource === 'content_revisions') {
-        if (!requireAdmin(session, res)) return;
+        if (!requireContentManager(session, res)) return;
         const problemId = objectId(cleanText(req.query?.problemId, 80));
         if (!problemId) return res.status(400).json({ success: false, error: 'Mã câu hỏi không hợp lệ' });
         const items = await db.collection('content_revisions')
@@ -359,7 +359,7 @@ export default async function handler(req, res) {
       }
 
       if (resource === 'rag_status' || resource === 'rag_logs') {
-        if (!requireAdmin(session, res)) return;
+        if (!requireContentManager(session, res)) return;
         if (resource === 'rag_logs') {
           const items = await db.collection('rag_retrieval_logs').find({}).sort({ createdAt: -1 }).limit(30).toArray();
           return res.status(200).json({ success: true, items });
@@ -377,7 +377,6 @@ export default async function handler(req, res) {
       }
 
       if (resource === 'trend_theories') {
-        if (!requireAdmin(session, res)) return;
         const topic = cleanText(req.query?.topic, 120);
         const method = cleanText(req.query?.method, 240);
         if (!topic || !method) return res.status(400).json({ success: false, error: 'Thiếu chuyên đề' });
@@ -386,10 +385,9 @@ export default async function handler(req, res) {
       }
 
       if (resource === 'exam_trend_reports') {
-        if (!requireAdmin(session, res)) return;
         // Mẫu bằng chứng chi tiết vẫn được lưu để kiểm toán, nhưng không tải lại
         // trong danh sách nhằm tránh làm nặng Database Hub khi đã có nhiều báo cáo.
-        const items = await db.collection('exam_trend_reports').find({ deletedAt: { $exists: false } }, { projection: { 'evidence.samples': 0, revisions: 0 } })
+        const items = await db.collection('exam_trend_reports').find({ deletedAt: { $exists: false }, ...(!['admin', 'teacher'].includes(session.role) ? { ownerId: String(session.sub) } : {}) }, { projection: { 'evidence.samples': 0, revisions: 0 } })
           .sort({ createdAt: -1, _id: -1 }).limit(100).toArray();
         return res.status(200).json({ success: true, items });
       }
@@ -407,7 +405,7 @@ export default async function handler(req, res) {
         };
         // Đồng nhất với catalog: admin thấy toàn bộ dữ liệu, thành viên chỉ
         // thấy nội dung đã công khai.
-        if (session.role !== 'admin') {
+        if (!['admin', 'teacher'].includes(session.role)) {
           homeExamFilter.status = 'published';
           homeExampleFilter.status = 'published';
         }
@@ -432,7 +430,7 @@ export default async function handler(req, res) {
 
       if (resource === 'exam_catalog') {
         const examFilter = { category: cleanText(req.query?.category, 80) || 'tst-national', status: { $ne: 'deleted' } };
-        if (session.role !== 'admin') examFilter.status = 'published';
+        if (!['admin', 'teacher'].includes(session.role)) examFilter.status = 'published';
         if (req.query?.grade != null && ['olympic-30-4', 'duyen-hai-bac'].includes(examFilter.category)) {
           const grade = Number(req.query.grade);
           if (![10, 11].includes(grade)) return res.status(400).json({ success: false, error: 'Khối lớp không hợp lệ' });
@@ -448,7 +446,7 @@ export default async function handler(req, res) {
           const exams = await db.collection('exams').find(examFilter, { projection })
             .sort({ provinceOrder: 1, dayNumber: 1, createdAt: 1 }).limit(200).toArray();
           const problemFilter = { examId: { $in: exams.map(exam => String(exam._id)) }, status: { $ne: 'deleted' } };
-          if (session.role !== 'admin') problemFilter.status = 'published';
+          if (!['admin', 'teacher'].includes(session.role)) problemFilter.status = 'published';
           const counts = exams.length ? await db.collection('problems').aggregate([
             { $match: problemFilter }, { $group: { _id: '$examId', count: { $sum: 1 } } }
           ]).toArray() : [];
@@ -467,7 +465,7 @@ export default async function handler(req, res) {
             .sort({ dayNumber: 1, createdAt: 1 }).limit(20).toArray();
           if (!exams.length) return res.status(404).json({ success: false, error: 'Không tìm thấy đề thi' });
           const problemFilter = { examId: { $in: exams.map(exam => String(exam._id)) }, status: { $ne: 'deleted' } };
-          if (session.role !== 'admin') problemFilter.status = 'published';
+          if (!['admin', 'teacher'].includes(session.role)) problemFilter.status = 'published';
           const problems = await db.collection('problems').find(problemFilter)
             .sort({ orderNumber: 1, questionNumber: 1 }).limit(500).toArray();
           const byExam = new Map();
@@ -492,7 +490,7 @@ export default async function handler(req, res) {
             examId: { $in: [...anchorById.keys()] },
             $or: [{ content: regex }, { title: regex }, { shortLabel: regex }, { topic: regex }]
           };
-          if (session.role !== 'admin') problemFilter.status = 'published';
+          if (!['admin', 'teacher'].includes(session.role)) problemFilter.status = 'published';
           const matches = exams.length ? await db.collection('problems').find(problemFilter, {
             projection: { _id: 0, examId: 1 }
           }).limit(1000).toArray() : [];
@@ -502,7 +500,7 @@ export default async function handler(req, res) {
         const exams = await db.collection('exams').find(examFilter).sort({ provinceOrder: 1, dayNumber: 1, createdAt: 1 }).limit(200).toArray();
         const examIds = exams.map(item => String(item._id));
         const problemFilter = { examId: { $in: examIds }, status: { $ne: 'deleted' } };
-        if (session.role !== 'admin') problemFilter.status = 'published';
+        if (!['admin', 'teacher'].includes(session.role)) problemFilter.status = 'published';
         const problems = examIds.length
           ? await db.collection('problems').find(problemFilter).sort({ orderNumber: 1, questionNumber: 1 }).limit(1000).toArray()
           : [];
@@ -523,12 +521,12 @@ export default async function handler(req, res) {
       if (resource === 'content_sets') {
         if (req.query?.group) filter.group = cleanText(req.query.group, 80);
         if (req.query?.key) filter.key = cleanKey(req.query.key);
-        if (session.role !== 'admin') filter.status = 'published';
+        if (!['admin', 'teacher'].includes(session.role)) filter.status = 'published';
       }
       if (resource === 'content_blocks') {
         if (req.query?.group) filter.group = cleanText(req.query.group, 80);
         if (req.query?.blockKey) filter.blockKey = cleanKey(req.query.blockKey);
-        if (session.role !== 'admin') filter.status = 'published';
+        if (!['admin', 'teacher'].includes(session.role)) filter.status = 'published';
       }
       if (resource === 'problems') {
         if (req.query?.examId) filter.examId = cleanText(req.query.examId, 120);
@@ -550,7 +548,7 @@ export default async function handler(req, res) {
             version: 1
           };
         }
-        if (req.query?.catalogRules === '1' && session.role !== 'admin') {
+        if (req.query?.catalogRules === '1' && !['admin', 'teacher'].includes(session.role)) {
           const [sets, problems] = await Promise.all([
             db.collection('content_sets').find(supportVisibility(session, 'group'), { projection: { status: 1 } }).toArray(),
             db.collection('problems').find(supportVisibility(session), { projection: {
@@ -574,7 +572,7 @@ export default async function handler(req, res) {
           }));
           return res.status(200).json({ success: true, items });
         }
-        if (session.role !== 'admin') {
+        if (!['admin', 'teacher'].includes(session.role)) {
           filter.status = 'published';
           const publishedSets = await db.collection('content_sets')
             .find({ status: 'published', ...supportVisibility(session, 'group') }, { projection: { _id: 1 } })
@@ -593,13 +591,13 @@ export default async function handler(req, res) {
         filter.category = cleanText(req.query.category, 80);
       }
       if (resource === 'exams' || resource === 'problems') {
-        filter.status = session.role === 'admin' ? { $ne: 'deleted' } : 'published';
+        filter.status = ['admin', 'teacher'].includes(session.role) ? { $ne: 'deleted' } : 'published';
       }
       if (resource === 'documents' && req.query?.topic && req.query.topic !== 'all') {
         filter.topic = cleanText(req.query.topic, 120);
       }
       if (resource === 'submissions') {
-        if (session.role !== 'admin' || req.query?.own === '1') filter.userId = String(session.sub);
+        if (!['admin', 'teacher'].includes(session.role) || req.query?.own === '1') filter.userId = String(session.sub);
         if (req.query?.submissionKind) {
           filter.submissionKind = cleanText(req.query.submissionKind, 40);
         }
@@ -616,7 +614,7 @@ export default async function handler(req, res) {
 
         if (req.query?.paged === '1') {
           if (req.query?.sourceGroup) filter.sourceGroup = cleanText(req.query.sourceGroup, 80);
-          if (session.role === 'admin' && req.query?.username) {
+          if (['admin', 'teacher'].includes(session.role) && req.query?.username) {
             const username = cleanText(req.query.username, 80);
             filter.username = { $regex: `^${escapeRegex(username)}$`, $options: 'i' };
           }
@@ -712,7 +710,7 @@ export default async function handler(req, res) {
       problemFilters.push({ id: submittedProblemId });
       const registeredProblem = await db.collection('problems').findOne({ $or: problemFilters });
       if (registeredProblem && !canAccessProblem(registeredProblem, session)) return res.status(403).json({ success: false, error: 'Bạn không có quyền truy cập bài toán này' });
-      if (registeredProblem && session.role !== 'admin') {
+      if (registeredProblem && !['admin', 'teacher'].includes(session.role)) {
         const registeredSet = registeredProblem.setId
           ? await db.collection('content_sets').findOne({ _id: registeredProblem.setId }, { projection: { status: 1 } })
           : null;
@@ -729,8 +727,8 @@ export default async function handler(req, res) {
       const submissionKind = payload.submissionKind === 'ai_guide' ? 'ai_guide' : 'student_solution';
       const aiGuide = submissionKind === 'ai_guide' ? cleanAiGuide(payload.aiGuide) : null;
       const aiGuideAdminEdited = submissionKind === 'ai_guide' && payload.aiGuideAdminEdited === true;
-      if (aiGuideAdminEdited && session.role !== 'admin') {
-        return res.status(403).json({ success: false, error: 'Chỉ admin được chỉnh sửa nội dung AI hướng dẫn giải' });
+      if (aiGuideAdminEdited && !['admin', 'teacher'].includes(session.role)) {
+        return res.status(403).json({ success: false, error: 'Chỉ Admin hoặc Giáo viên được chỉnh sửa nội dung AI hướng dẫn giải' });
       }
       if (aiGuideAdminEdited && aiGuide?.quality) {
         aiGuide.quality.verified = false;
@@ -816,11 +814,11 @@ export default async function handler(req, res) {
       return res.status(201).json({ success: true, item: { _id: result.insertedId, ...doc } });
     }
 
-    if (action === 'update_catalog_content' && session.role !== 'admin') {
+    if (action === 'update_catalog_content' && !['admin', 'teacher'].includes(session.role)) {
       const id = objectId(cleanText(payload.id, 80));
       const problem = id ? await db.collection('problems').findOne({ _id: id }) : null;
       if (!problem || problem.sourceGroup !== 'math_support' || !canAccessProblem(problem, session)) return res.status(403).json({ success: false, error: 'Chỉ được chỉnh sửa bài toán của bạn' });
-    } else if (!requireAdmin(session, res)) return;
+    } else if (!['save_exam_trend_report', 'update_exam_trend_report', 'delete_exam_trend_report'].includes(action) && !requireContentManager(session, res)) return;
 
     if (action === 'rag_benchmark') {
       if (!checkRateLimit(`${session.username}:rag-benchmark`, 30)) return res.status(429).json({ success: false, error: 'Tối đa 30 ca benchmark/phút.' });
@@ -1042,7 +1040,7 @@ export default async function handler(req, res) {
       if (!cleaned || !cleaned.settings.mode || !cleaned.settings.year || !cleaned.report.title) {
         return res.status(400).json({ success: false, error: 'Báo cáo xu hướng không hợp lệ hoặc thiếu 6 chuyên đề' });
       }
-      const doc = { ...cleaned, createdBy: session.username, createdAt: now, updatedAt: now };
+      const doc = { ...cleaned, ownerId: String(session.sub), createdBy: session.username, createdAt: now, updatedAt: now };
       const result = await db.collection('exam_trend_reports').insertOne(doc);
       await recordActivity(db, session, 'trend_report.saved', {
         itemTitle: doc.report.title, reportId: result.insertedId, year: doc.settings.year,
@@ -1057,6 +1055,7 @@ export default async function handler(req, res) {
       const collection = db.collection('exam_trend_reports');
       const previous = await collection.findOne({ _id: id, deletedAt: { $exists: false } });
       if (!previous) return res.status(404).json({ success: false, error: 'Không tìm thấy báo cáo' });
+      if (!['admin', 'teacher'].includes(session.role) && String(previous.ownerId || '') !== String(session.sub)) return res.status(403).json({ success: false, error: 'Bạn chỉ được sửa hoặc xóa báo cáo xu hướng của mình' });
       if (action === 'delete_exam_trend_report') {
         await collection.updateOne({ _id: id, deletedAt: { $exists: false } },
           { $set: { deletedAt: now, deletedBy: session.username, updatedAt: now } });
@@ -1082,7 +1081,7 @@ export default async function handler(req, res) {
         $set: { 'report.title': title, 'report.executiveSummary': executiveSummary,
           'report.conclusion': conclusion, 'report.topicTrends': revisedTopics,
           'quality.status': 'unavailable', 'quality.verified': false, 'quality.score': null,
-          'quality.summary': 'Nội dung đã được Admin chỉnh sửa; cần kiểm định lại nếu sử dụng như báo cáo AI đã duyệt.',
+          'quality.summary': 'Nội dung đã được chỉnh sửa; cần kiểm định lại nếu sử dụng như báo cáo AI đã duyệt.',
           updatedAt: now, updatedBy: session.username },
         $push: { revisions: { $each: [revision], $slice: -20 } }
       }, { returnDocument: 'after' });
@@ -1163,7 +1162,7 @@ export default async function handler(req, res) {
       const id = objectId(cleanText(payload.id, 80));
       const content = cleanText(payload.content, 50000);
       const referenceSolution = cleanText(payload.referenceSolution, 100000);
-      const referenceSolutionVerified = session.role === 'admin' && payload.referenceSolutionVerified === true && Boolean(referenceSolution);
+      const referenceSolutionVerified = ['admin', 'teacher'].includes(session.role) && payload.referenceSolutionVerified === true && Boolean(referenceSolution);
       const referenceLinks = cleanReferenceLinks(payload.referenceLinks);
       const changeNote = cleanText(payload.changeNote, 500);
       if (!id || !content) {
@@ -1171,7 +1170,7 @@ export default async function handler(req, res) {
       }
       const current = await db.collection('problems').findOne({ _id: id });
       if (!current) return res.status(404).json({ success: false, error: 'Không tìm thấy câu hỏi' });
-      const resolvePredictionReview = session.role === 'admin' && payload.resolvePredictionReview === true &&
+      const resolvePredictionReview = ['admin', 'teacher'].includes(session.role) && payload.resolvePredictionReview === true &&
         current.origin === 'prediction' && current.predictionReview?.status === 'gpt_rejected';
       if (resolvePredictionReview && content === current.content) {
         return res.status(400).json({ success: false, error: 'Cần sửa nội dung câu hỏi trước khi xác nhận đã khắc phục nhận xét của Gia sư Toán AI.' });

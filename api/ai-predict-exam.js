@@ -43,9 +43,9 @@ export default async function handler(req, res) {
   prepare(res);
   if (req.method === 'OPTIONS') return res.status(200).end();
   if (req.method !== 'POST') return res.status(405).json({ success: false, error: 'Method not allowed' });
-  const session = getSession(req);
+  const session = await getSession(req);
   if (!session) return res.status(401).json({ success: false, error: 'Vui lòng đăng nhập lại' });
-  if (session.role !== 'admin') return res.status(403).json({ success: false, error: 'Chỉ quản trị viên được dự đoán đề' });
+  if (!['admin', 'teacher'].includes(session.role)) return res.status(403).json({ success: false, error: 'Chỉ Admin hoặc Giáo viên được dự đoán đề' });
 
   const body = parseBody(req);
   let settings;

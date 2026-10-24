@@ -29,12 +29,12 @@ export default async function handler(req, res) {
     const { action, username, password, fullName, role, targetUsername, newPassword } = body || {};
 
     if (action === 'me') {
-      const session = getSession(req);
+      const session = await getSession(req);
       return session ? res.status(200).json({ success: true, user: session })
         : res.status(401).json({ success: false, error: 'Chưa đăng nhập' });
     }
     if (action === 'logout') {
-      const session = getSession(req);
+      const session = await getSession(req);
       clearSessionCookie(res);
       if (session) {
         try { await recordActivity(await getDb(), session, 'logout'); }
@@ -55,9 +55,9 @@ export default async function handler(req, res) {
     const users = db.collection('users');
 
     // Các thao tác quản trị luôn được kiểm tra bằng cookie phiên ở phía server.
-    const adminActions = new Set(['list_users', 'create_user', 'update_password', 'delete_user']);
+    const adminActions = new Set(['list_users', 'create_user', 'update_password', 'update_role', 'delete_user']);
     if (adminActions.has(action)) {
-      const session = getSession(req);
+      const session = await getSession(req);
       if (!session) {
         return res.status(401).json({ success: false, error: 'Phiên đăng nhập không hợp lệ hoặc đã hết hạn' });
       }
@@ -85,7 +85,7 @@ export default async function handler(req, res) {
       if (action === 'create_user') {
         const cleanNewUsername = String(username || '').trim().toLowerCase();
         const cleanFullName = String(fullName || '').trim();
-        const cleanRole = role === 'admin' ? 'admin' : 'student';
+        const cleanRole = ['admin', 'teacher', 'student'].includes(role) ? role : 'student';
 
         if (!/^[a-z0-9_.-]{3,64}$/.test(cleanNewUsername)) {
           return res.status(400).json({ success: false, error: 'Tên đăng nhập phải có 3–64 ký tự: chữ thường, số, dấu chấm, gạch dưới hoặc gạch ngang' });
@@ -123,6 +123,23 @@ export default async function handler(req, res) {
       const target = await users.findOne({ username: cleanTarget });
       if (!target) {
         return res.status(404).json({ success: false, error: 'Không tìm thấy tài khoản' });
+      }
+
+      if (action === 'update_role') {
+        if (!['admin', 'teacher', 'student'].includes(role)) {
+          return res.status(400).json({ success: false, error: 'Vai trò không hợp lệ' });
+        }
+        if (String(target._id) === session.sub || cleanTarget === session.username) {
+          return res.status(400).json({ success: false, error: 'Không thể đổi quyền tài khoản đang đăng nhập' });
+        }
+        if ((target.role || 'student') === role) {
+          return res.status(200).json({ success: true, message: 'Tài khoản đã có quyền này' });
+        }
+        await users.updateOne({ _id: target._id }, {
+          $set: { role, updatedAt: new Date(), updatedBy: session.username }
+        });
+        await recordActivity(db, session, 'account.updated', { itemTitle: cleanTarget });
+        return res.status(200).json({ success: true, message: `Đã cập nhật quyền cho "${cleanTarget}". Người dùng cần đăng nhập lại.` });
       }
 
       if (action === 'update_password') {

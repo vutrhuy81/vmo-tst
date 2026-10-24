@@ -57,9 +57,9 @@ export default async function handler(req, res) {
   if (req.method === 'OPTIONS') return res.status(200).end();
   if (req.method !== 'POST') return res.status(405).json({ success: false, error: 'Method not allowed' });
 
-  const session = getSession(req);
+  const session = await getSession(req);
   if (!session) return res.status(401).json({ success: false, error: 'Vui lòng đăng nhập lại' });
-  if (session.role !== 'admin') return res.status(403).json({ success: false, error: 'Chỉ quản trị viên được OCR đề thi' });
+  if (!['admin', 'teacher'].includes(session.role)) return res.status(403).json({ success: false, error: 'Chỉ Admin hoặc Giáo viên được OCR đề thi' });
   if (!checkRateLimit(`exam-ocr:${session.username}`, 12)) {
     return res.status(429).json({ success: false, error: 'Bạn đang gửi yêu cầu OCR quá nhanh' });
   }

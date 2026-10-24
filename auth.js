@@ -143,6 +143,10 @@ const VMOAuth = (() => {
     return adminRequest('delete_user', { targetUsername });
   }
 
+  function updateRole(targetUsername, role) {
+    return adminRequest('update_role', { targetUsername, role });
+  }
+
   function updatePassword(targetUsername, newPassword) {
     return adminRequest('update_password', { targetUsername, newPassword });
   }
@@ -228,6 +232,7 @@ const VMOAuth = (() => {
     createUser,
     deleteUser,
     updatePassword,
+    updateRole,
     LAST_ACTIVITY_KEY
   };
 })();

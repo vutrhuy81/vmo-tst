@@ -324,8 +324,8 @@
       ? `<span class="prof-badge ai-guide-persisted-badge" style="background:#e0f2fe;color:#075985;">☁ ${isEn ? 'Loaded from the database' : 'Đã tải từ cơ sở dữ liệu'}</span>`
       : '';
     const canDeleteSaved = guideData.persisted && /^[a-f\d]{24}$/i.test(String(guideData.savedGuideId || '')) &&
-      window.VMOAuth?.getSession?.()?.role === 'admin';
-    const canEditGuide = window.VMOAuth?.getSession?.()?.role === 'admin';
+      ['admin', 'teacher'].includes(window.VMOAuth?.getSession?.()?.role);
+    const canEditGuide = ['admin', 'teacher'].includes(window.VMOAuth?.getSession?.()?.role);
 
     const sec1 = isEn ? '🎯 1. Essential Theorems & Lemmas' : '🎯 1. Kiến thức & Bổ đề Chuyên toán cần nắm vững';
     const sec2 = isEn ? '💡 2. Key Insights & AI Math Tutor\'s Analysis' : '💡 2. Ý tưởng then chốt & Phân tích của Gia sư Toán AI';
@@ -733,7 +733,7 @@
   const GUIDE_EDIT_FIELDS = ['knowledge', 'intuition', 'solution', 'pitfalls'];
 
   function isAdminGuideEditor() {
-    return window.VMOAuth?.getSession?.()?.role === 'admin';
+    return ['admin', 'teacher'].includes(window.VMOAuth?.getSession?.()?.role);
   }
 
   function setGuideEditorState(panel, editing) {
@@ -951,7 +951,7 @@
             }
           );
         const savedId = String(saved?.id || saved?._id || '');
-        if (savedId && window.VMOAuth?.getSession?.()?.role === 'admin') {
+        if (savedId && ['admin', 'teacher'].includes(window.VMOAuth?.getSession?.()?.role)) {
           const context = aiGuideContexts.get(problemId);
           if (context) context.savedGuideId = savedId;
           const actions = document.getElementById(`ai-panel-${problemId}`)?.querySelector('.ai-guide-actions');
@@ -1025,7 +1025,7 @@
   };
 
   window.deleteSavedAIGuide = async function(problemId) {
-    if (window.VMOAuth?.getSession?.()?.role !== 'admin') return;
+    if (!['admin', 'teacher'].includes(window.VMOAuth?.getSession?.()?.role)) return;
     const context = aiGuideContexts.get(problemId);
     const savedId = String(context?.savedGuideId || '');
     if (!/^[a-f\d]{24}$/i.test(savedId)) return;

@@ -35,8 +35,8 @@ function initAccountMgmt() {
   if (currentUserRoleEl) {
     const isAdmin = session.role === 'admin';
     const isEn = (window.currentLang === 'en');
-    currentUserRoleEl.textContent = isAdmin ? 'Admin' : (isEn ? 'Member' : 'Thành viên');
-    currentUserRoleEl.className = 'user-role-badge ' + (isAdmin ? 'role-admin' : 'role-user');
+    currentUserRoleEl.textContent = isAdmin ? 'Admin' : session.role === 'teacher' ? (isEn ? 'Teacher' : 'Giáo viên') : (isEn ? 'Member' : 'Thành viên');
+    currentUserRoleEl.className = 'user-role-badge ' + (isAdmin ? 'role-admin' : session.role === 'teacher' ? 'role-teacher' : 'role-user');
   }
 
   // Lắng nghe sự kiện đổi ngôn ngữ để cập nhật vai trò người dùng trên thanh điều hướng
@@ -44,7 +44,7 @@ function initAccountMgmt() {
     const isEn = (e.detail?.lang === 'en');
     if (currentUserRoleEl) {
       const isAdmin = session.role === 'admin';
-      currentUserRoleEl.textContent = isAdmin ? 'Admin' : (isEn ? 'Member' : 'Thành viên');
+      currentUserRoleEl.textContent = isAdmin ? 'Admin' : session.role === 'teacher' ? (isEn ? 'Teacher' : 'Giáo viên') : (isEn ? 'Member' : 'Thành viên');
     }
     if (modalOverlay && modalOverlay.classList.contains('active')) {
       renderUsers();
@@ -199,8 +199,8 @@ function initAccountMgmt() {
           ${u.fullName && u.fullName !== u.username ? `<br><small style="color:#64748b;">${escapeHtml(u.fullName)}</small>` : ''}
         </td>
         <td>
-          <span class="user-role-badge ${isAdminRole ? 'role-admin' : 'role-user'}">
-            ${isAdminRole ? 'Admin' : (isEn ? 'Member' : 'Thành viên')}
+          <span class="user-role-badge ${isAdminRole ? 'role-admin' : u.role === 'teacher' ? 'role-teacher' : 'role-user'}">
+            ${isAdminRole ? 'Admin' : u.role === 'teacher' ? (isEn ? 'Teacher' : 'Giáo viên') : (isEn ? 'Member' : 'Thành viên')}
           </span>
         </td>
         <td style="font-size:0.8rem; color:#64748b;">${createdDate}</td>
@@ -215,6 +215,44 @@ function initAccountMgmt() {
           ` : `<span style="font-size:0.75rem; color:#94a3b8; font-style:italic;">${isEn ? 'In use' : 'Đang dùng'}</span>`}
         </td>
       `;
+      if (!isCurrent) {
+        const cell = tr.lastElementChild;
+        const editor = document.createElement('span');
+        editor.style.cssText = 'display:inline-flex;gap:6px;align-items:center;flex-wrap:wrap;margin:4px;';
+        const select = document.createElement('select');
+        select.setAttribute('aria-label', (isEn ? 'Role for ' : 'Quyền của ') + u.username);
+        select.style.cssText = 'font:inherit;padding:6px;border:1px solid #cbd5e1;border-radius:6px;max-width:150px;';
+        for (const [value, label] of [['student', isEn ? 'Member' : 'Thành viên'], ['teacher', isEn ? 'Teacher' : 'Giáo viên'], ['admin', 'Admin']]) {
+          const option = document.createElement('option');
+          option.value = value;
+          option.textContent = label;
+          select.appendChild(option);
+        }
+        select.value = u.role || 'student';
+        const button = document.createElement('button');
+        button.type = 'button';
+        button.className = 'btn-icon-action btn-change-role';
+        button.textContent = isEn ? 'Change role' : 'Đổi quyền';
+        button.disabled = true;
+        select.addEventListener('change', () => { button.disabled = select.value === (u.role || 'student'); });
+        button.addEventListener('click', async () => {
+          if (session.role !== 'admin') return;
+          button.disabled = true;
+          select.disabled = true;
+          try {
+            const result = await VMOAuth.updateRole(u.username, select.value);
+            showAlert(result.message, result.success);
+            if (result.success) await renderUsers();
+          } catch {
+            showAlert(isEn ? 'Unable to change role. Please try again.' : 'Không thể đổi quyền. Vui lòng thử lại.', false);
+          } finally {
+            select.disabled = false;
+            button.disabled = select.value === (u.role || 'student');
+          }
+        });
+        editor.append(select, button);
+        cell.prepend(editor);
+      }
       usersTableBody.appendChild(tr);
     });
   }

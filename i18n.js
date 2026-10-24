@@ -427,13 +427,16 @@
     const currentUserRole = document.getElementById('currentUserRole');
     if (currentUserRole) {
       const isAdmin = currentUserRole.classList.contains('role-admin');
-      currentUserRole.textContent = isEn ? (isAdmin ? 'Admin' : 'Member') : (isAdmin ? 'Admin' : 'Thành viên');
+      currentUserRole.textContent = isAdmin ? 'Admin' : currentUserRole.classList.contains('role-teacher') ? (isEn ? 'Teacher' : 'Giáo viên') : (isEn ? 'Member' : 'Thành viên');
     }
 
     const userInfoChip = document.querySelector('.user-info-chip');
     if (userInfoChip) {
       userInfoChip.title = isEn ? UI_TRANSLATIONS.en.idleTitle : 'Phiên bảo mật: Tự động đăng xuất sau 5 phút không hoạt động';
     }
+
+    const roleOptions = { student: ['Thành viên (Học tập và AI xu hướng đề)', 'Member (Learning and exam trends)'], teacher: ['Giáo viên (Quản trị dữ liệu)', 'Teacher (Content management)'], admin: ['Quản trị viên (Toàn quyền quản lý)', 'Admin (Full access)'] };
+    document.querySelectorAll('#newRole option').forEach(option => { if (roleOptions[option.value]) option.textContent = roleOptions[option.value][isEn ? 1 : 0]; });
 
     // 5. Controls & Search bar
     const searchInput = document.getElementById('searchInput');

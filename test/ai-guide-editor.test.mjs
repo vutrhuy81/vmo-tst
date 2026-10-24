@@ -119,12 +119,14 @@ assert.equal(fresh.submitCalls[0][5].aiGuide.knowledge, 'Kiến thức admin đ�
 
 const member = await createHarness({ role: 'student', persisted: true });
 assert.equal(member.panel.querySelector('.btn-ai-guide-edit'), null, 'thành viên không được thấy chức năng chỉnh sửa');
+const teacher = await createHarness({ role: 'teacher', persisted: true });
+assert.ok(teacher.panel.querySelector('.btn-ai-guide-edit'), 'Giáo viên được chỉnh sửa lời giải AI');
+teacher.window.close();
 
 const apiSource = fs.readFileSync(new URL('../api/data.js', import.meta.url), 'utf8');
 assert.match(apiSource, /if \(action === 'update_ai_guide'\)[\s\S]*submissionKind: 'ai_guide'/,
   'API phải cập nhật đúng bản ghi AI Guide');
-assert.match(apiSource, /if \(!requireAdmin\(session, res\)\) return;[\s\S]*action === 'update_ai_guide'/,
-  'API cập nhật AI Guide phải nằm sau cổng quyền admin');
+// API allow/deny behavior for teacher/member is exercised in teacher-permissions.test.mjs.
 
 // Reproduce guide rendering on standalone uploads, both fresh and restored from DB.
 const mathGuide = {
