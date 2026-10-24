@@ -39,7 +39,7 @@ export default async function handler(req, res) {
 
     // POST /api/exams
     if (req.method === 'POST') {
-      const session = getSession(req);
+      const session = await getSession(req);
       if (!session) return res.status(401).json({ success: false, error: 'Vui lòng đăng nhập' });
       let body = req.body;
       if (typeof body === 'string') {

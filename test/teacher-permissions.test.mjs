@@ -1,5 +1,6 @@
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
+import crypto from 'node:crypto';
 import { ObjectId } from 'mongodb';
 import { JSDOM } from 'jsdom';
 import { canAccessProblem, supportVisibility } from '../lib/problem-access.js';
@@ -38,12 +39,36 @@ const db={collection(name){
  };
 }};
 const auth=route('api/auth.js',{getDb:async()=>db,getSession:()=>session,bcrypt:{hash:async()=> 'test-hash'},recordActivity:async()=>{}});
-for(const role of [teacher,member])for(const action of ['list_users','create_user','update_password','delete_user']){
+for(const role of [teacher,member])for(const action of ['list_users','create_user','update_password','update_role','delete_user']){
  session=role;const res=response();await auth({method:'POST',body:{action,username:'newteacher',password:'testing-only',role:'admin',targetUsername:'admin'}},res);
  assert.equal(res.code,403,role.role+' cannot '+action);
 }
 session=admin;let res=response();await auth({method:'POST',body:{action:'create_user',username:'newteacher',password:'testing-only',role:'teacher'}},res);
 assert.equal(res.code,201);assert.equal(collections.get('users')[0].role,'teacher','Only Admin assigns the new teacher role');
+async function changeRole(targetUsername, role) {
+ const res=response();await auth({method:'POST',body:{action:'update_role',targetUsername,role}},res);return res;
+}
+for(const role of ['admin','student','teacher']) {
+ res=await changeRole('newteacher',role);assert.equal(res.code,200);assert.equal(collections.get('users')[0].role,role);
+}
+assert.equal((await changeRole('newteacher','superadmin')).code,400);
+assert.equal((await changeRole('missing','teacher')).code,404);
+collections.get('users').push({_id:'admin-id',username:'admin',role:'admin'});
+assert.equal((await changeRole('admin','student')).code,400,'No self demotion, so sole Admin is protected');
+session=null;assert.equal((await changeRole('newteacher','admin')).code,401);session=admin;
+// Exercise real signed cookies and DB role lookup without a live database.
+const sessionCode=source('lib/session.js').replace(/^import[\s\S]*?;\n/gm,'').replaceAll('export ', '');
+const cookieAuth=new Function('crypto','ObjectId','getDb',sessionCode+';return {signSession,getSession};')(crypto,ObjectId,async()=>db);
+const oldSecret=process.env.JWT_SECRET;process.env.JWT_SECRET='test-session-secret-only-not-a-real-key';
+try {
+ const user=collections.get('users')[0];
+ const token=cookieAuth.signSession(user);const req={headers:{cookie:'vmo_session='+token}};
+ assert.equal((await cookieAuth.getSession(req)).role,'teacher');
+ user.role='student';assert.equal(await cookieAuth.getSession(req),null,'Old privileged cookie rejected after demotion');
+ const newToken=cookieAuth.signSession(user);assert.equal((await cookieAuth.getSession({headers:{cookie:'vmo_session='+newToken}})).role,'student');
+ collections.get('users').shift();assert.equal(await cookieAuth.getSession(req),null,'Deleted accounts cannot retain cookie access');
+ assert.equal(await cookieAuth.getSession({headers:{cookie:'vmo_session=invalid'}}),null);
+} finally {if(oldSecret===undefined)delete process.env.JWT_SECRET;else process.env.JWT_SECRET=oldSecret;}
 assert.equal(canAccessProblem({sourceGroup:'math_support',ownerId:'someone-else'},teacher),true);
 assert.deepEqual(supportVisibility(teacher),{});
 assert.deepEqual(learningScope(teacher),{});
@@ -90,6 +115,26 @@ for(const role of [admin,teacher,member]){
  assert.equal(window.document.querySelectorAll('[data-rag-action]').length>0,role.role!=='student','RAG operations are not part of member trend access');
  if(role.role==='teacher')assert.equal(window.document.getElementById('currentUserRole').textContent,'Giáo viên');
  assert.ok(window.document.querySelector('#newRole option[value="teacher"]'));
+ window.close();
+}
+// Account manager interaction: choose role, save, refresh, and keep current account protected.
+{
+ const dom=new JSDOM('<!doctype html><body><button id="btnOpenUserMgmt"></button>'+source('src/modals/account-modal.html'),{url:'https://example.test/',runScripts:'outside-only'});
+ const {window}=dom;let calls=0;
+ const users=[{username:'admin',role:'admin'},{username:'newteacher',role:'student'}];
+ window.VMOAuth={requireAuth:()=>admin,listUsers:async()=>({success:true,users}),updateRole:async(name,role)=>{calls++;assert.equal(name,'newteacher');users[1].role=role;return{success:true,message:'Đã cập nhật quyền'};}};
+ window.eval(source('account_mgmt.js'));
+ // Run initialization once: DOMContentLoaded is dispatched automatically by jsdom.
+ await new Promise(resolve=>window.setTimeout(resolve,0));
+ window.document.getElementById('btnOpenUserMgmt').click();
+ await new Promise(resolve=>window.setTimeout(resolve,0));
+ let select=window.document.querySelector('select[aria-label="Quyền của newteacher"]');
+ assert.ok(select);assert.equal(window.document.querySelectorAll('.btn-change-role').length,1,'No self role editor');
+ select.value='teacher';select.dispatchEvent(new window.Event('change'));
+ const button=window.document.querySelector('.btn-change-role');assert.equal(button.disabled,false);button.click();
+ await new Promise(resolve=>window.setTimeout(resolve,0));
+ assert.equal(calls,1);assert.equal(window.document.querySelector('select[aria-label="Quyền của newteacher"]').value,'teacher');
+ assert.match(window.document.getElementById('modalAlert').textContent,/Đã cập nhật quyền/);
  window.close();
 }
 console.log('Teacher content permissions, Admin-only accounts, member trends/ownership and Hub UI: OK');
