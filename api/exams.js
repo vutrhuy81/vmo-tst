@@ -53,8 +53,8 @@ export default async function handler(req, res) {
       const { type, payload } = body || {};
 
       if (type === 'create_exam') {
-        if (session.role !== 'admin') {
-          return res.status(403).json({ success: false, error: 'Chỉ Admin được tạo đề thi' });
+        if (!['admin', 'teacher'].includes(session.role)) {
+          return res.status(403).json({ success: false, error: 'Chỉ Admin hoặc Giáo viên được tạo đề thi' });
         }
         if (!payload || typeof payload !== 'object') {
           return res.status(400).json({ success: false, error: 'Thiếu dữ liệu payload đề thi' });

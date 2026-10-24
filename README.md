@@ -103,3 +103,11 @@ Hình biểu diễn một cấu hình minh họa, không phải chứng minh hì
 - Điểm, nhãn điểm, đoạn thẳng và đường tròn bổ sung ngoài đề bài có `auxiliary: true`: hiển thị màu đỏ; đường phụ vẫn dùng nét đứt để phân biệt trên bản in đen trắng. Các đối tượng được đề bài định nghĩa giữ màu gốc, kể cả khi tọa độ được tính bằng phép dựng.
 - Nhãn `auxiliary` của điểm được bảo toàn khi tính tọa độ, kiểm định, lưu/tải lại và in/PDF. Mô hình sinh và mô hình kiểm định đều đối chiếu phân loại với đề bài và lời giải.
 - Hình cũ vẫn đọc được. Các đường đã có cờ phụ chuyển sang đỏ ngay; điểm cũ thiếu thông tin phân loại không bị tự động suy đoán. Bấm **Vẽ lại hình** rồi lưu hướng dẫn để cập nhật phân loại điểm theo lời giải.
+
+## Phân quyền Admin, Giáo viên và Thành viên
+
+- **Admin** quản trị nội dung, AI, bài nộp và tài khoản. Chỉ Admin được liệt kê/tạo/xóa tài khoản hoặc đổi mật khẩu qua API quản lý tài khoản.
+- **Giáo viên** (`teacher`) có các quyền quản trị dữ liệu như Admin: quản lý kho đề/câu hỏi, OCR đề, chỉnh sửa/lưu/xóa hướng dẫn AI, xác minh bài nộp và nguồn tham chiếu, xem hoạt động học tập, quản lý phân tích xu hướng và cơ sở lý thuyết. Không được quản lý tài khoản. Admin có thể chọn Giáo viên khi tạo tài khoản mới.
+- **Thành viên** tiếp tục học tập theo quyền hiện có và được sử dụng **Kho dữ liệu → AI xu hướng đề**: phân tích kho đề công khai; tạo/lưu/xem/sửa/xóa báo cáo của mình; xem/tạo nội dung cơ sở lý thuyết để học. Không được thay đổi thư viện lý thuyết dùng chung hoặc vận hành công cụ quản trị kho tham chiếu. Báo cáo mới gắn `ownerId` từ phiên đăng nhập, không tin thông tin chủ sở hữu do client gửi; báo cáo cũ chưa có `ownerId` vẫn do Admin/Giáo viên quản lý, không tự gán quyền sở hữu cho Thành viên chỉ vì trùng tên tài khoản.
+
+Quyền được kiểm tra ở API bên cạnh việc ẩn/hiện giao diện. Không tự chuyển vai trò của các tài khoản hiện có. Chạy `node test/teacher-permissions.test.mjs` để kiểm tra ranh giới quản trị tài khoản, quản trị nội dung, truy cập AI xu hướng đề và quyền sở hữu báo cáo.

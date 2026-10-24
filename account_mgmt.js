@@ -35,8 +35,8 @@ function initAccountMgmt() {
   if (currentUserRoleEl) {
     const isAdmin = session.role === 'admin';
     const isEn = (window.currentLang === 'en');
-    currentUserRoleEl.textContent = isAdmin ? 'Admin' : (isEn ? 'Member' : 'Thành viên');
-    currentUserRoleEl.className = 'user-role-badge ' + (isAdmin ? 'role-admin' : 'role-user');
+    currentUserRoleEl.textContent = isAdmin ? 'Admin' : session.role === 'teacher' ? (isEn ? 'Teacher' : 'Giáo viên') : (isEn ? 'Member' : 'Thành viên');
+    currentUserRoleEl.className = 'user-role-badge ' + (isAdmin ? 'role-admin' : session.role === 'teacher' ? 'role-teacher' : 'role-user');
   }
 
   // Lắng nghe sự kiện đổi ngôn ngữ để cập nhật vai trò người dùng trên thanh điều hướng
@@ -44,7 +44,7 @@ function initAccountMgmt() {
     const isEn = (e.detail?.lang === 'en');
     if (currentUserRoleEl) {
       const isAdmin = session.role === 'admin';
-      currentUserRoleEl.textContent = isAdmin ? 'Admin' : (isEn ? 'Member' : 'Thành viên');
+      currentUserRoleEl.textContent = isAdmin ? 'Admin' : session.role === 'teacher' ? (isEn ? 'Teacher' : 'Giáo viên') : (isEn ? 'Member' : 'Thành viên');
     }
     if (modalOverlay && modalOverlay.classList.contains('active')) {
       renderUsers();
@@ -199,8 +199,8 @@ function initAccountMgmt() {
           ${u.fullName && u.fullName !== u.username ? `<br><small style="color:#64748b;">${escapeHtml(u.fullName)}</small>` : ''}
         </td>
         <td>
-          <span class="user-role-badge ${isAdminRole ? 'role-admin' : 'role-user'}">
-            ${isAdminRole ? 'Admin' : (isEn ? 'Member' : 'Thành viên')}
+          <span class="user-role-badge ${isAdminRole ? 'role-admin' : u.role === 'teacher' ? 'role-teacher' : 'role-user'}">
+            ${isAdminRole ? 'Admin' : u.role === 'teacher' ? (isEn ? 'Teacher' : 'Giáo viên') : (isEn ? 'Member' : 'Thành viên')}
           </span>
         </td>
         <td style="font-size:0.8rem; color:#64748b;">${createdDate}</td>

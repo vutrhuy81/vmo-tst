@@ -41,7 +41,6 @@ export default async function handler(req, res) {
   if (req.method !== 'POST') return res.status(405).json({ success: false, error: 'Method not allowed' });
   const session = getSession(req);
   if (!session) return res.status(401).json({ success: false, error: 'Vui lòng đăng nhập lại' });
-  if (session.role !== 'admin') return res.status(403).json({ success: false, error: 'Chỉ Admin được tạo cơ sở lý thuyết' });
   const body = parseBody(req);
   const topic = text(body?.topic, 120);
   const method = text(body?.method, 240);

@@ -126,7 +126,7 @@ export default async function handler(req, res) {
   if (!solutionText && !solutionImage) return res.status(400).json({ success: false, error: 'Cần có văn bản hoặc ảnh bài giải' });
   const outputLanguage = body.lang === 'en' ? 'English' : 'Vietnamese';
 
-  if (session.role !== 'admin') {
+  if (!['admin', 'teacher'].includes(session.role)) {
     const problemRef = text(body.problemKey || body.problemId, 180);
     if (problemRef) {
       const filters = [{ contentKey: problemRef }, { id: problemRef }];

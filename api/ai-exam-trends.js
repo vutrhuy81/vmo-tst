@@ -92,7 +92,6 @@ export default async function handler(req, res) {
   if (req.method !== 'POST') return res.status(405).json({ success: false, error: 'Method not allowed' });
   const session = getSession(req);
   if (!session) return res.status(401).json({ success: false, error: 'Vui lòng đăng nhập lại' });
-  if (session.role !== 'admin') return res.status(403).json({ success: false, error: 'Chỉ quản trị viên được phân tích xu hướng đề' });
   const body = parseBody(req) || {};
   let settings;
   try { settings = trendAnalysisSettings(body); }

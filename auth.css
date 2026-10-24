@@ -698,3 +698,5 @@ body.dark .form-group select {
   border-color: #fca5a5;
 }
 
+
+.user-role-badge.role-teacher { background:#e0e7ff; color:#3730a3; border:1px solid #a5b4fc; }

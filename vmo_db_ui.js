@@ -238,7 +238,7 @@
   }
 
   window.migrateTstReferenceLinksToDatabase = async function() {
-    if (!requireAdminUiAction()) return;
+    if (!requireContentManagerUiAction()) return;
     if (!window.VMODataService?.migrateTstReferenceLinks) return showToast('Dịch vụ migration chưa sẵn sàng.', false);
     if (!window.tstSources || !Object.keys(window.tstSources).length) return showToast('Không tìm thấy dữ liệu tst-sources.js.', false);
     if (!window.confirm('Lưu nguồn tham khảo từ tst-sources.js vào từng document problems? Chỉ trường referenceLinks được cập nhật.')) return;
@@ -274,7 +274,7 @@
   let catalogRulesPromise = null;
 
   async function applyCatalogAccessRules(root = document, force = false) {
-    if (isCurrentUserAdmin() || !window.VMODataService?.getCatalogRules) return;
+    if (isCurrentUserContentManager() || !window.VMODataService?.getCatalogRules) return;
     try {
       if (force) {
         catalogRulesLoaded = false;
@@ -1941,19 +1941,25 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
   }
 
   // 4. MODAL "DATABASE HUB" TRỰC QUAN
-  function isCurrentUserAdmin() {
-    return window.VMOAuth?.getSession?.()?.role === 'admin';
+  function isCurrentUserContentManager() {
+    return ['admin', 'teacher'].includes(window.VMOAuth?.getSession?.()?.role);
   }
 
-  function requireAdminUiAction() {
-    if (isCurrentUserAdmin()) return true;
-    showToast('Chức năng này chỉ dành cho quản trị viên.', false);
+  function requireTrendUiAction() {
+    if (window.VMOAuth?.getSession?.()) return true;
+    showToast('Vui lòng đăng nhập để sử dụng AI xu hướng đề.', false);
+    return false;
+  }
+
+  function requireContentManagerUiAction() {
+    if (isCurrentUserContentManager()) return true;
+    showToast('Chức năng này chỉ dành cho Admin hoặc Giáo viên.', false);
     return false;
   }
 
   function applyDataHubPermissions(modal) {
     if (!modal) return;
-    const isAdmin = isCurrentUserAdmin();
+    const isAdmin = isCurrentUserContentManager();
     const heading = modal.querySelector('#hubModalHeading, .vmo-modal-title span:last-child');
     if (heading) {
       heading.textContent = isAdmin
@@ -2014,7 +2020,7 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
         <label for="examPredictionOutline">Khung câu hỏi (VMO bắt buộc nhập; TST để trống dùng mẫu Đà Nẵng; mỗi dòng: số câu | điểm | chuyên đề)</label><textarea id="examPredictionOutline" rows="3" style="display:block;width:100%;box-sizing:border-box;margin:5px 0 10px;padding:7px;resize:vertical;" placeholder="1 | 5 | Dãy số và giới hạn\n2 | 5 | Phương trình hàm\n3 | 5 | Số học\n4 | 5 | Hình học phẳng"></textarea>
         <label for="examPredictionStructure">Quy định hoặc định hướng bổ sung</label><textarea id="examPredictionStructure" rows="3" style="display:block;width:100%;box-sizing:border-box;margin:5px 0 10px;padding:7px;resize:vertical;" placeholder="Ví dụ: hạn chế trùng chuyên đề với năm trước; ưu tiên bài toán chứng minh..."></textarea>
         <label for="examPredictionNotes">Ghi chú lịch sử bổ sung (không thay thế đề nguồn trong cơ sở dữ liệu)</label><textarea id="examPredictionNotes" maxlength="12000" rows="4" style="display:block;width:100%;box-sizing:border-box;margin:5px 0 10px;padding:7px;resize:vertical;" placeholder="Ghi chú bối cảnh có năm và nguồn; cần ít nhất một đề quá khứ đã lưu trên cơ sở dữ liệu."></textarea>
-        <div style="font-size:.8rem;color:#475569;margin-bottom:9px;">Số năm tham chiếu là giới hạn tìm kiếm; kết quả sẽ ghi rõ số năm thực sự có dữ liệu. Đề AI chỉ là bản dự đoán cần admin rà soát.</div>
+        <div style="font-size:.8rem;color:#475569;margin-bottom:9px;">Số năm tham chiếu là giới hạn tìm kiếm; kết quả sẽ ghi rõ số năm thực sự có dữ liệu. Đề AI chỉ là bản dự đoán cần Admin hoặc Giáo viên rà soát.</div>
         <button type="button" id="examPreviewButton" onclick="previewExamPredictionEvidence()">🔎 Kiểm tra nguồn cơ sở dữ liệu</button>
         <button type="button" id="examPredictButton" onclick="runPredictExam()" style="background:#1d4ed8;color:#fff;border:0;border-radius:6px;padding:8px 12px;font-weight:700;cursor:pointer;">🔮 Dự đoán &amp; soạn đề</button>
         <span id="examPredictionStatus" role="status" style="margin-left:8px;font-size:.8rem;"></span><div id="examPredictionEvidence" style="font-size:.8rem;margin-top:8px;"></div>
@@ -2069,7 +2075,7 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
   window.catalogManagementData = { sets: [], problems: [] };
 
   window.loadCatalogManagement = async function() {
-    if (!requireAdminUiAction()) return;
+    if (!requireContentManagerUiAction()) return;
     const list = document.getElementById('hubCatalogList');
     if (!list) return;
     list.innerHTML = '<em>Đang tải danh mục từ cơ sở dữ liệu...</em>';
@@ -2135,7 +2141,7 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
   }
 
   window.toggleCatalogStatus = async function(itemType, id, status) {
-    if (!requireAdminUiAction()) return;
+    if (!requireContentManagerUiAction()) return;
     const actionLabel = status === 'draft' ? 'ẩn nội dung này' : 'xuất bản nội dung này';
     if (!window.confirm(`Xác nhận ${actionLabel}? Khóa liên kết lịch sử bài nộp sẽ được giữ nguyên.`)) return;
     try {
@@ -2146,7 +2152,7 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
   };
 
   window.toggleCatalogPermission = async function(id, field, enabled) {
-    if (!requireAdminUiAction()) return;
+    if (!requireContentManagerUiAction()) return;
     const featureLabel = field === 'allowSubmission' ? 'nộp bài' : 'đánh giá AI';
     if (!window.confirm(`Xác nhận ${enabled ? 'mở' : 'khóa'} chức năng ${featureLabel} cho câu hỏi này?`)) return;
     try {
@@ -2195,7 +2201,7 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
   }
 
   window.editCatalogItem = function(itemType, id) {
-    if (!requireAdminUiAction()) return;
+    if (!requireContentManagerUiAction()) return;
     const data = window.catalogManagementData || { sets: [], problems: [] };
     const source = itemType === 'set' ? data.sets : data.problems;
     const item = source.find(entry => String(entry.id || entry._id) === String(id));
@@ -2231,7 +2237,7 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
 
   window.saveCatalogMetadata = async function(event) {
     event.preventDefault();
-    if (!requireAdminUiAction()) return;
+    if (!requireContentManagerUiAction()) return;
     const itemType = document.getElementById('catalogEditType').value;
     const id = document.getElementById('catalogEditId').value;
     const changes = { title: document.getElementById('catalogEditTitle').value.trim() };
@@ -2297,7 +2303,7 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
   }
 
   window.editCatalogContent = async function(id) {
-    if (!requireAdminUiAction()) return;
+    if (!requireContentManagerUiAction()) return;
     const item = (window.catalogManagementData?.problems || []).find(entry => String(entry.id || entry._id) === String(id));
     if (!item) return showToast('Không tìm thấy câu hỏi cần chỉnh sửa.', false);
     ensureCatalogContentModal();
@@ -2336,7 +2342,7 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
 
   window.saveCatalogContent = async function(event) {
     event.preventDefault();
-    if (!requireAdminUiAction()) return;
+    if (!requireContentManagerUiAction()) return;
     const id = document.getElementById('catalogContentId').value;
     const content = document.getElementById('catalogProblemContent').value.trim();
     const referenceSolution = document.getElementById('catalogReferenceSolution').value.trim();
@@ -2358,7 +2364,7 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
   };
 
   window.restoreCatalogRevision = async function(revisionId) {
-    if (!requireAdminUiAction()) return;
+    if (!requireContentManagerUiAction()) return;
     if (!window.confirm('Khôi phục phiên bản này? Nội dung hiện tại vẫn được sao lưu trước khi khôi phục.')) return;
     try {
       const id = document.getElementById('catalogContentId').value;
@@ -2430,11 +2436,7 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
   const trendTheoryCache = new Map();
 
   function ensureExamTrendUi(modal, isAdmin) {
-    if (!isAdmin) {
-      modal.querySelector('#hub-tab-trends')?.remove();
-      modal.querySelector('#hub-panel-trends')?.remove();
-      return;
-    }
+    if (!window.VMOAuth?.getSession?.()) return;
     const tabs = modal.querySelector('#hub-tab-events')?.parentElement;
     const body = modal.querySelector('.vmo-modal-body');
     if (!tabs || !body || modal.querySelector('#hub-tab-trends')) return;
@@ -2454,7 +2456,7 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
     panel.innerHTML = `
       <div style="margin-bottom:12px;">
         <h4 style="margin:0;color:#173b64;">AI Phân tích xu hướng ra đề</h4>
-        <small style="color:#64748b;">Gia sư Toán AI phân tích kho đề; hệ thống đối chiếu số liệu và mã dẫn. Chỉ dành cho quản trị viên.</small>
+        <small style="color:#64748b;">Gia sư Toán AI phân tích kho đề; hệ thống đối chiếu số liệu và mã dẫn. Phân tích từ kho đề đã công khai. ${isAdmin ? 'Quản lý báo cáo toàn hệ thống.' : 'Báo cáo đã lưu thuộc tài khoản của bạn.'}</small>
       </div>
       <div style="background:#f8fafc;border:1px solid #cbd5e1;border-radius:9px;padding:12px;margin-bottom:14px;">
         <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(205px,1fr));gap:10px;">
@@ -2477,7 +2479,7 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
       <details style="margin-top:16px;" open><summary style="font-weight:800;color:#173b64;cursor:pointer;">🗃️ Báo cáo đã lưu</summary><div id="trendSavedReports" style="margin-top:9px;"><em>Chưa tải dữ liệu.</em></div></details>`;
     const ragPanel = document.createElement('details');
     ragPanel.innerHTML = `<summary style="font-weight:700;cursor:pointer;margin:14px 0;">📚 Kho tham chiếu đã xác minh (RAG)</summary>
-      <p>Chỉ lời giải được Admin xác minh và khớp phiên bản đề mới được dùng làm nguồn.</p>
+      <p>Chỉ lời giải được Admin hoặc Giáo viên xác minh và khớp phiên bản đề mới được dùng làm nguồn.</p>
       <div style="display:flex;gap:8px;flex-wrap:wrap;"><button type="button" data-rag-action="refresh">↻ Trạng thái</button>
       <button type="button" data-rag-action="rag_setup">Thiết lập chỉ mục</button>
       <button type="button" data-rag-action="rag_backfill">Đưa nguồn đã xác minh vào hàng đợi</button>
@@ -2577,7 +2579,7 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
         status.textContent = `${stopBenchmark ? 'Đã dừng' : 'Hoàn tất'}: ${completed} ca chạy. Kết quả ít mẫu không đại diện p95 sản xuất.`;
       } finally { runBenchmark.disabled = false; stopButton.disabled = true; controls.forEach(control => { control.disabled = false; }); }
     };
-    panel.appendChild(ragPanel);
+    if (isAdmin) panel.appendChild(ragPanel);
     body.appendChild(panel);
 
     const target = panel.querySelector('#trendTarget');
@@ -2748,15 +2750,16 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
       node.type = 'button'; node.textContent = label; node.onclick = callback;
       controls.appendChild(node);
     };
-    button('✏️ Chỉnh sửa nội dung', () => editTrendTheory(data, container));
-    if (data.id) button('🗑️ Xóa bản đã lưu', () => deleteTrendTheory(data, container));
-    else button('💾 Lưu vào cơ sở dữ liệu', () => saveTrendTheory(data, container));
+    if (isCurrentUserContentManager()) button('✏️ Chỉnh sửa nội dung', () => editTrendTheory(data, container));
+    if (isCurrentUserContentManager() && data.id) button('🗑️ Xóa bản đã lưu', () => deleteTrendTheory(data, container));
+    else if (isCurrentUserContentManager()) button('💾 Lưu vào cơ sở dữ liệu', () => saveTrendTheory(data, container));
     container.appendChild(controls);
   }
 
   function trendTheoryKey(data) { return `${data.topic}\n${data.method}`; }
 
   async function saveTrendTheory(data, container) {
+    if (!requireContentManagerUiAction()) return;
     try {
       const saved = await window.VMODataService.saveTrendTheory(data);
       trendTheoryCache.set(trendTheoryKey(saved), saved);
@@ -2766,6 +2769,7 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
   }
 
   async function deleteTrendTheory(data, container) {
+    if (!requireContentManagerUiAction()) return;
     if (!window.confirm(`Xóa cơ sở lý thuyết đã lưu: ${data.method}?`)) return;
     try {
       await window.VMODataService.deleteTrendTheory(data.topic, data.method);
@@ -2776,6 +2780,7 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
   }
 
   function editTrendTheory(data, container) {
+    if (!requireContentManagerUiAction()) return;
     const draft = JSON.parse(JSON.stringify(data.theory));
     container.replaceChildren();
     const form = document.createElement('form');
@@ -2845,7 +2850,7 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
   }
 
   window.openTrendTheory = async function(topicIndex, methodIndex) {
-    if (!requireAdminUiAction()) return;
+    if (!requireTrendUiAction()) return;
     const topic = examTrendState.rendered?.report?.topicTrends?.[Number(topicIndex)];
     const method = topic?.frequentMethods?.[Number(methodIndex)];
     if (!topic || !method) return showToast('Không tìm thấy vi chủ đề.', false);
@@ -3108,7 +3113,7 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
   }
 
   window.previewExamTrendEvidence = async function() {
-    if (!requireAdminUiAction()) return;
+    if (!requireTrendUiAction()) return;
     const button = document.getElementById('trendPreviewButton');
     const status = document.getElementById('trendStatus');
     const selected = document.getElementById('trendTarget')?.selectedOptions?.[0];
@@ -3133,7 +3138,7 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
   };
 
   window.runExamTrendAnalysis = async function() {
-    if (!requireAdminUiAction() || examTrendState.running) return;
+    if (!requireTrendUiAction() || examTrendState.running) return;
     const status = document.getElementById('trendStatus');
     const button = document.getElementById('trendRunButton');
     const save = document.getElementById('trendSaveButton');
@@ -3178,7 +3183,7 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
   };
 
   window.saveExamTrendReport = async function() {
-    if (!requireAdminUiAction() || !examTrendState.current) return;
+    if (!requireTrendUiAction() || !examTrendState.current) return;
     const button = document.getElementById('trendSaveButton');
     const status = document.getElementById('trendStatus');
     if (button) button.disabled = true;
@@ -3196,7 +3201,7 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
   };
 
   window.loadExamTrendReports = async function(force = false) {
-    if (!requireAdminUiAction()) return;
+    if (!requireTrendUiAction()) return;
     const list = document.getElementById('trendSavedReports');
     if (!list || (examTrendState.loaded && !force)) return;
     list.innerHTML = '<em>Đang tải báo cáo từ cơ sở dữ liệu...</em>';
@@ -3228,7 +3233,7 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
   };
 
   window.editExamTrendReport = function(index) {
-    if (!requireAdminUiAction()) return;
+    if (!requireTrendUiAction()) return;
     const item = examTrendState.saved[index];
     if (!item?.id) return;
     let editor = document.getElementById('trendReportEditor');
@@ -3254,7 +3259,7 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
     editor.querySelector('#trendEditCancel').onclick = () => editor.remove();
     form.onsubmit = async event => {
       event.preventDefault();
-      if (!requireAdminUiAction()) return;
+      if (!requireTrendUiAction()) return;
       const submit = form.querySelector('[type="submit"]');
       submit.disabled = true;
       try {
@@ -3276,7 +3281,7 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
   };
 
   window.deleteExamTrendReport = async function(index) {
-    if (!requireAdminUiAction()) return;
+    if (!requireTrendUiAction()) return;
     const item = examTrendState.saved[index];
     if (!item?.id || !window.confirm(`Xóa báo cáo “${item.report?.title || 'Báo cáo xu hướng'}” khỏi danh sách đã lưu?`)) return;
     try {
@@ -3375,13 +3380,13 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
         <div style="padding:10px;border-radius:8px;background:#ecfdf5;"><strong style="display:block;font-size:1.25rem;">${totals.evaluationCount}</strong>Ví dụ/câu đã lưu đánh giá AI</div>
         <div style="padding:10px;border-radius:8px;background:#fff7ed;"><strong style="display:block;font-size:1.25rem;">${score(totals.scoreEarned)} / ${score(totals.scoreMaximum)}</strong>Tổng điểm AI / điểm tối đa</div>
       </div>`;
-    document.getElementById('hubLearningMembers').innerHTML = isCurrentUserAdmin() ? `
+    document.getElementById('hubLearningMembers').innerHTML = isCurrentUserContentManager() ? `
       <div style="overflow:auto;max-height:220px;margin-top:12px;"><table style="width:100%;border-collapse:collapse;font-size:.82rem;">
         <thead><tr><th style="text-align:left;">Thành viên</th><th>Hướng dẫn</th><th>Đánh giá</th><th>Điểm AI</th></tr></thead>
         <tbody>${members.map(member => `<tr style="border-top:1px solid #e2e8f0;"><td>${escapeHtmlText(member.fullName)} <small>(${escapeHtmlText(member.username)})</small></td><td style="text-align:center;">${member.guideCount}</td><td style="text-align:center;">${member.evaluationCount}</td><td style="text-align:center;">${score(member.scoreEarned)} / ${score(member.scoreMaximum)}</td></tr>`).join('')}</tbody>
       </table></div>` : '';
     const guideList = document.getElementById('hubLearningGuides');
-    guideList.innerHTML = learningList(guides, false, isCurrentUserAdmin());
+    guideList.innerHTML = learningList(guides, false, isCurrentUserContentManager());
     guideList.querySelectorAll('[data-delete-ai-guide]').forEach(button => {
       button.onclick = () => window.deleteLearningAiGuide(button.dataset.deleteAiGuide);
     });
@@ -3389,7 +3394,7 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
   }
 
   window.deleteLearningAiGuide = async function(submissionId) {
-    if (!requireAdminUiAction()) return;
+    if (!requireContentManagerUiAction()) return;
     const guide = learningDashboard.overview?.guides?.find(item => item.submissionId === submissionId);
     if (!guide || !/^[a-f\d]{24}$/i.test(submissionId)) return;
     if (!window.confirm(`Xóa vĩnh viễn AI Hướng dẫn giải đã lưu cho "${guide.problemTitle}" của ${guide.username}? Bài nộp và đánh giá AI được giữ nguyên.`)) return;
@@ -3415,7 +3420,7 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
     list.textContent = 'Đang tải hoạt động...';
     try {
       const result = await window.VMODataService.getActivityFeed({
-        page, limit: 20, username: isCurrentUserAdmin() ? learningDashboard.account : ''
+        page, limit: 20, username: isCurrentUserContentManager() ? learningDashboard.account : ''
       });
       if (requestId !== learningDashboard.activityRequestId) return;
       const pagination = result.pagination || { page: 1, pages: 1, total: 0 };
@@ -3450,7 +3455,7 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
       learningDashboard.overview = result.overview;
       learningDashboard.accounts = result.accounts;
       const selector = document.getElementById('hubLearningAccount');
-      if (isCurrentUserAdmin()) {
+      if (isCurrentUserContentManager()) {
         const previous = learningDashboard.account;
         selector.replaceChildren(new Option('Tất cả thành viên', ''));
         result.accounts.forEach(account => selector.add(new Option(`${account.fullName} (${account.username})`, account.username)));
@@ -3744,17 +3749,17 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
               📷 Xem ảnh
             </button>
           ` : '';
-          const deleteBtn = isCurrentUserAdmin() ? `
+          const deleteBtn = isCurrentUserContentManager() ? `
             <button type="button" onclick="deleteSubmissionItem('${submissionId}')" style="background:#fff1f2; border:1px solid #fecdd3; color:#be123c; border-radius:4px; padding:5px 9px; font-size:0.75rem; cursor:pointer; font-weight:700;">
               🗑️ Xóa bài nộp
             </button>
           ` : '';
-          const editContentBtn = isCurrentUserAdmin() && /^[a-f\d]{24}$/i.test(submissionId) ? `
+          const editContentBtn = isCurrentUserContentManager() && /^[a-f\d]{24}$/i.test(submissionId) ? `
             <button type="button" onclick="openSubmissionContentEditor('${submissionId}', ${idx})" style="background:#f5f3ff;border:1px solid #c4b5fd;color:#6d28d9;border-radius:4px;padding:5px 9px;font-size:.75rem;cursor:pointer;font-weight:700;">
               ✏️ Sửa MathJax
             </button>
           ` : '';
-          const verificationBtn = isCurrentUserAdmin() && /^[a-f\d]{24}$/i.test(submissionId) ? `
+          const verificationBtn = isCurrentUserContentManager() && /^[a-f\d]{24}$/i.test(submissionId) ? `
             <button type="button" onclick="setSubmissionVerification('${submissionId}', ${verified ? 'false' : 'true'})" ${!verified && !hasSolutionText ? 'disabled title="Bài chỉ có ảnh, chưa có lời giải văn bản để AI đối chiếu"' : ''} style="background:${verified ? '#fff7ed' : '#ecfdf5'};border:1px solid ${verified ? '#fdba74' : (!hasSolutionText ? '#cbd5e1' : '#86efac')};color:${verified ? '#c2410c' : (!hasSolutionText ? '#64748b' : '#166534')};border-radius:4px;padding:5px 9px;font-size:.75rem;cursor:${!verified && !hasSolutionText ? 'not-allowed' : 'pointer'};font-weight:700;opacity:${!verified && !hasSolutionText ? '.72' : '1'};">
               ${verified ? '↩️ Hủy xác minh' : (hasSolutionText ? '✅ Xác minh bài nộp' : '🔒 Thiếu lời giải văn bản')}
             </button>
@@ -3804,7 +3809,7 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
   };
 
   window.deleteSubmissionItem = async function(id) {
-    if (!requireAdminUiAction()) return;
+    if (!requireContentManagerUiAction()) return;
     if (!confirm('Bạn có chắc chắn muốn xóa vĩnh viễn bài nộp này và ảnh bài làm liên quan khỏi cơ sở dữ liệu?')) return;
     try {
       await window.VMODataService.deleteSubmission(id);
@@ -3816,7 +3821,7 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
   };
 
   window.setSubmissionVerification = async function(id, verified) {
-    if (!requireAdminUiAction()) return;
+    if (!requireContentManagerUiAction()) return;
     const actionLabel = verified ? 'xác minh' : 'hủy xác minh';
     const warning = verified
       ? 'Sau khi xác minh, lời giải này có thể được dùng làm nguồn tham khảo tin cậy cho AI Hướng dẫn giải và AI Đánh giá bài. Chỉ tiếp tục nếu đã kiểm tra đầy đủ tính đúng đắn toán học.'
@@ -3876,7 +3881,7 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
   }
 
   window.openSubmissionContentEditor = function(id, index) {
-    if (!requireAdminUiAction()) return;
+    if (!requireContentManagerUiAction()) return;
     const submission = (window.lastLoadedSubmissions || []).find(item => String(item.id || item._id || '') === String(id))
       || window.lastLoadedSubmissions?.[index];
     if (!submission) {
@@ -3959,7 +3964,7 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
   };
 
   window.saveSubmissionContentEditor = async function() {
-    if (!requireAdminUiAction()) return;
+    if (!requireContentManagerUiAction()) return;
     const modal = document.getElementById('submissionContentEditorModal');
     const id = String(modal?.dataset.submissionId || '');
     const content = String(document.getElementById('submissionContentEditorText')?.value || '').trim();
@@ -3985,12 +3990,12 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
   };
 
   window.toggleAddEventForm = function() {
-    if (!requireAdminUiAction()) return;
+    if (!requireContentManagerUiAction()) return;
     const f = document.getElementById('formAddEvent');
     if (f) f.style.display = (f.style.display === 'none') ? 'block' : 'none';
   };
   window.toggleAddDocForm = function() {
-    if (!requireAdminUiAction()) return;
+    if (!requireContentManagerUiAction()) return;
     const f = document.getElementById('formAddDoc');
     if (f) {
       f.style.display = (f.style.display === 'none') ? 'block' : 'none';
@@ -4151,7 +4156,7 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
   }
 
   window.previewExamPredictionEvidence = async function() {
-    if (!requireAdminUiAction()) return;
+    if (!requireContentManagerUiAction()) return;
     const button = document.getElementById('examPreviewButton');
     const status = document.getElementById('examPredictionStatus');
     const targetType = document.getElementById('examPredictionType')?.value;
@@ -4176,7 +4181,7 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
   };
 
   window.runPredictExam = async function() {
-    if (!requireAdminUiAction()) return;
+    if (!requireContentManagerUiAction()) return;
     const button = document.getElementById('examPredictButton');
     const status = document.getElementById('examPredictionStatus');
     const report = document.getElementById('examPredictionEvidence');
@@ -4340,7 +4345,7 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
   }
 
   window.runExamOcr = async function(kind = 'exam') {
-    if (!requireAdminUiAction()) return;
+    if (!requireContentManagerUiAction()) return;
     const input = document.getElementById(`${kind}Images`);
     const files = Array.from(input?.files || []);
     if (!files.length) return showToast('Vui lòng chọn ít nhất một ảnh đề thi.', false);
@@ -4407,7 +4412,7 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
   }
 
   window.toggleAddExamForm = function() {
-    if (!requireAdminUiAction()) return;
+    if (!requireContentManagerUiAction()) return;
     const f = document.getElementById('formAddExam');
     if (f) {
       f.style.display = (f.style.display === 'none') ? 'block' : 'none';
@@ -4438,7 +4443,7 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
             </div>
             ${e.description ? `<div style="font-size:0.8rem; color:#475569; margin-top:4px;">${e.description}</div>` : ''}
           </div>
-          ${isCurrentUserAdmin() ? `<button type="button" onclick="deleteEventItem('${e.id}')" style="background:#fee2e2; border:none; color:#dc2626; padding:6px 10px; border-radius:6px; cursor:pointer; font-size:0.8rem;">🗑️ Xóa</button>` : ''}
+          ${isCurrentUserContentManager() ? `<button type="button" onclick="deleteEventItem('${e.id}')" style="background:#fee2e2; border:none; color:#dc2626; padding:6px 10px; border-radius:6px; cursor:pointer; font-size:0.8rem;">🗑️ Xóa</button>` : ''}
         </div>
       `).join('');
     } catch (err) {
@@ -4474,7 +4479,7 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
             </div>
             ${d.fileUrl ? `<a href="${d.fileUrl}" target="_blank" rel="noreferrer" style="font-size:0.8rem; color:#0284c7; text-decoration:underline;">🔗 Mở tài liệu</a>` : ''}
           </div>
-          ${isCurrentUserAdmin() ? `<button type="button" onclick="deleteDocItem('${d.id}')" style="background:#fee2e2; border:none; color:#dc2626; padding:6px 10px; border-radius:6px; cursor:pointer; font-size:0.8rem;">🗑️ Xóa</button>` : ''}
+          ${isCurrentUserContentManager() ? `<button type="button" onclick="deleteDocItem('${d.id}')" style="background:#fee2e2; border:none; color:#dc2626; padding:6px 10px; border-radius:6px; cursor:pointer; font-size:0.8rem;">🗑️ Xóa</button>` : ''}
         </div>
       `).join('');
       attachExamSearch('docs', catalogExams);
@@ -4559,12 +4564,12 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
   }
   function examActions(exam) {
     const id = exam.id || exam._id;
-    if (!isCurrentUserAdmin() || !/^[a-f\d]{24}$/i.test(String(id || ''))) return '';
+    if (!isCurrentUserContentManager() || !/^[a-f\d]{24}$/i.test(String(id || ''))) return '';
     return `<div style="margin-top:8px;display:flex;gap:8px;flex-wrap:wrap;"><button type="button" onclick="editManagedExam('${id}')">✏️ Chỉnh sửa đề</button><button type="button" onclick="manageExamQuestions('${id}')">📝 Quản lý câu hỏi</button><button type="button" onclick="deleteManagedExam('${id}')">🗑️ Xóa đề</button></div>`;
   }
 
   window.manageExamQuestions = async function(id) {
-    if (!requireAdminUiAction()) return;
+    if (!requireContentManagerUiAction()) return;
     const exam = managedExams.get(id);
     if (!exam) return;
     document.getElementById('managedQuestionsEditor')?.remove();
@@ -4614,7 +4619,7 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
           form.querySelector('.cancel-question-edit').onclick = () => form.remove();
           form.onsubmit = async event => {
             event.preventDefault();
-            if (!requireAdminUiAction()) return;
+            if (!requireContentManagerUiAction()) return;
             const value = Number(form.elements.maxScore.value);
             const topic = form.elements.topic.value.trim();
             if (!topic || form.elements.maxScore.value === '' || !Number.isFinite(value) || value < 0 || value > 20) {
@@ -4640,7 +4645,7 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
         remove.type = 'button';
         remove.textContent = '🗑️ Xóa câu';
         remove.onclick = async () => {
-          if (!requireAdminUiAction() || !confirm(`Xóa câu ${problem.questionNumber} khỏi đề “${exam.title}”? Bài nộp vẫn được lưu.`)) return;
+          if (!requireContentManagerUiAction() || !confirm(`Xóa câu ${problem.questionNumber} khỏi đề “${exam.title}”? Bài nộp vẫn được lưu.`)) return;
           remove.disabled = true;
           try {
             await window.VMODataService.deleteExamQuestion(id, problem.id || problem._id);
@@ -4655,7 +4660,7 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
     }
     panel.querySelector('.add-exam-question').onsubmit = async event => {
       event.preventDefault();
-      if (!requireAdminUiAction()) return;
+      if (!requireContentManagerUiAction()) return;
       const form = event.currentTarget;
       const button = form.querySelector('[type="submit"]');
       button.disabled = true;
@@ -4677,7 +4682,7 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
   };
 
   window.editManagedExam = function(id) {
-    if (!requireAdminUiAction()) return;
+    if (!requireContentManagerUiAction()) return;
     const exam = managedExams.get(id);
     if (!exam) return;
     document.getElementById('managedExamEditor')?.remove();
@@ -4698,7 +4703,7 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
     form.elements.description.value = exam.description || '';
     form.onsubmit = async event => {
       event.preventDefault();
-      if (!requireAdminUiAction()) return;
+      if (!requireContentManagerUiAction()) return;
       const button = form.querySelector('[type="submit"]');
       button.disabled = true;
       try {
@@ -4715,7 +4720,7 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
   };
 
   window.deleteManagedExam = async function(id) {
-    if (!requireAdminUiAction()) return;
+    if (!requireContentManagerUiAction()) return;
     const exam = managedExams.get(id);
     if (!exam || !confirm(`Xóa đề “${exam.title}” (Ngày ${Number(exam.dayNumber) || 1}) khỏi catalog? Câu hỏi của đề sẽ bị ẩn; bài nộp vẫn được lưu.`)) return;
     try {
@@ -4740,7 +4745,7 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
   // Handlers tạo mới
   window.handleCreateEvent = async function(e) {
     e.preventDefault();
-    if (!requireAdminUiAction()) return;
+    if (!requireContentManagerUiAction()) return;
     const title = document.getElementById('evtTitle').value.trim();
     const eventType = document.getElementById('evtType').value;
     const startDate = document.getElementById('evtStartDate').value;
@@ -4762,7 +4767,7 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
 
   async function saveOcrExam(e, kind) {
     e.preventDefault();
-    if (!requireAdminUiAction()) return;
+    if (!requireContentManagerUiAction()) return;
     const tst = kind === 'doc';
     const field = name => document.getElementById(`${kind}${name}`);
     const state = ocrStates[kind];
@@ -4867,7 +4872,7 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
   }
 
   window.deleteEventItem = async function(id) {
-    if (!requireAdminUiAction()) return;
+    if (!requireContentManagerUiAction()) return;
     if (!confirm('Bạn có chắc chắn muốn xóa sự kiện này khỏi cơ sở dữ liệu?')) return;
     try {
       await window.VMODataService.deleteEvent(id);
@@ -4879,7 +4884,7 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
   };
 
   window.deleteDocItem = async function(id) {
-    if (!requireAdminUiAction()) return;
+    if (!requireContentManagerUiAction()) return;
     if (!confirm('Bạn có chắc chắn muốn xóa tài liệu này khỏi cơ sở dữ liệu?')) return;
     try {
       await window.VMODataService.deleteDocument(id);
@@ -5088,7 +5093,7 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
   function canManageProblemSource(contentKey) {
     const problem = window.mongoProblemsByContentKey?.get(contentKey);
     const session = window.VMOAuth?.getSession?.();
-    return isCurrentUserAdmin() || (problem?.sourceGroup === 'math_support' && session?.username && problem.createdBy === session.username);
+    return isCurrentUserContentManager() || (problem?.sourceGroup === 'math_support' && session?.username && problem.createdBy === session.username);
   }
 
   window.openReferenceLinksManager = async function(contentKey) {
@@ -5439,7 +5444,7 @@ if (card) card.dataset.databaseCard = 'true';
       if (window.safeRenderMathJaxToElement) window.safeRenderMathJaxToElement(content, problem.content || '');
       else content.textContent = problem.content || '';
       content._renderedMongoContent = problem.content || '';
-      if (isCurrentUserAdmin() && problem.predictionReview?.status === 'gpt_rejected') {
+      if (isCurrentUserContentManager() && problem.predictionReview?.status === 'gpt_rejected') {
         const warning = document.createElement('div');
         warning.className = 'prediction-review-warning';
         warning.style.cssText = 'white-space:pre-wrap;margin:10px 0;padding:10px;border:1px solid #fca5a5;background:#fef2f2;color:#991b1b;border-radius:6px;';

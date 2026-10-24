@@ -85,7 +85,7 @@ export default async function handler(req, res) {
       if (action === 'create_user') {
         const cleanNewUsername = String(username || '').trim().toLowerCase();
         const cleanFullName = String(fullName || '').trim();
-        const cleanRole = role === 'admin' ? 'admin' : 'student';
+        const cleanRole = ['admin', 'teacher', 'student'].includes(role) ? role : 'student';
 
         if (!/^[a-z0-9_.-]{3,64}$/.test(cleanNewUsername)) {
           return res.status(400).json({ success: false, error: 'Tên đăng nhập phải có 3–64 ký tự: chữ thường, số, dấu chấm, gạch dưới hoặc gạch ngang' });

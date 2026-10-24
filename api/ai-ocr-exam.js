@@ -59,7 +59,7 @@ export default async function handler(req, res) {
 
   const session = getSession(req);
   if (!session) return res.status(401).json({ success: false, error: 'Vui lòng đăng nhập lại' });
-  if (session.role !== 'admin') return res.status(403).json({ success: false, error: 'Chỉ quản trị viên được OCR đề thi' });
+  if (!['admin', 'teacher'].includes(session.role)) return res.status(403).json({ success: false, error: 'Chỉ Admin hoặc Giáo viên được OCR đề thi' });
   if (!checkRateLimit(`exam-ocr:${session.username}`, 12)) {
     return res.status(429).json({ success: false, error: 'Bạn đang gửi yêu cầu OCR quá nhanh' });
   }
