@@ -23,6 +23,7 @@
   function contentLevel(item) {
     if (levels.includes(item?.educationLevel)) return item.educationLevel;
     const group = item?.sourceGroup || item?.group || item?.category || item?.problemSnapshot?.sourceGroup;
+    if (group === 'university') return 'university';
     if (['math_support'].includes(group)) return 'shared';
     if (['specialized_admission', 'specialized-admission'].includes(group)) return 'lower_secondary';
     return 'upper_secondary';

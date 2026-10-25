@@ -1,3 +1,4 @@
+import { universityCourse } from '../lib/university-courses.js';
 import { allows } from '../lib/education-access.js';
 import { getSession } from '../lib/session.js';
 import { checkRateLimit, generateJson, handleAiError, parseBody, prepare, text } from '../lib/ai.js';
@@ -66,10 +67,12 @@ export default async function handler(req, res) {
   }
 
   const body = parseBody(req);
-  if (!allows(session, body?.destination === 'admission' ? 'lower_secondary' : 'upper_secondary')) return res.status(403).json({ success: false, error: 'Không có quyền OCR nội dung cấp học này' });
+  if (!allows(session, body?.destination === 'university' ? 'university' : body?.destination === 'admission' ? 'lower_secondary' : 'upper_secondary')) return res.status(403).json({ success: false, error: 'Không có quyền OCR nội dung cấp học này' });
   if (['olympic30', 'duyenhai'].includes(body?.destination) && ![10, 11].includes(Number(body?.grade))) {
     return res.status(400).json({ success: false, error: 'Vui lòng chọn Lớp 10 hoặc Lớp 11' });
   }
+  const course = body?.destination === 'university' ? universityCourse(body.courseId) : null;
+  if (body?.destination === 'university' && !course) return res.status(400).json({ success: false, error: 'Học phần không hợp lệ' });
   const image = text(body?.image, 4_000_000);
   const match = image.match(/^data:(image\/(?:jpeg|png|webp));base64,(.+)$/s);
   if (!match) return res.status(400).json({ success: false, error: 'Thiếu ảnh JPEG, PNG hoặc WEBP hợp lệ' });
@@ -78,11 +81,11 @@ export default async function handler(req, res) {
     province: text(body?.province, 120),
     schoolName: body?.destination === 'admission' ? text(body?.schoolName, 200) : '',
     year: text(body?.year, 40) || '2026-2027',
-    dayNumber: Math.max(1, Math.min(['tst', 'regional', 'vmo', 'olympic', 'olympic30', 'duyenhai', 'admission'].includes(body?.destination) ? 4 : 2, Number(body?.dayNumber) || 1))
+    dayNumber: Math.max(1, Math.min(['tst', 'regional', 'vmo', 'olympic', 'olympic30', 'duyenhai', 'admission', 'university'].includes(body?.destination) ? 4 : 2, Number(body?.dayNumber) || 1))
   };
-  const prompt = `Nhận dạng chính xác đề thi Toán tiếng Việt trong ảnh và tách thành từng câu hỏi.
+  const prompt = `Nhận dạng chính xác đề thi Toán bằng ngôn ngữ trong ảnh và tách thành từng câu hỏi.
 
-Ngữ cảnh do quản trị viên cung cấp: tỉnh/thành phố "${context.province}", năm học "${context.year}", ngày thi thứ ${context.dayNumber}.${context.schoolName ? ` Kỳ thi tuyển sinh vào lớp 10 chuyên, trường: ${context.schoolName}.` : ''}${['olympic30', 'duyenhai'].includes(body?.destination) && [10, 11].includes(Number(body?.grade)) ? ` Khối lớp: Lớp ${Number(body.grade)}.` : ''}
+Ngữ cảnh do quản trị viên cung cấp: ${course ? `Học phần Đại học ${course.code}: ${course.name} (${course.nameVi}). Giữ nguyên ngôn ngữ đề và thuật ngữ học phần. ` : ''} tỉnh/thành phố "${context.province}", năm học "${context.year}", ngày thi thứ ${context.dayNumber}.${context.schoolName ? ` Kỳ thi tuyển sinh vào lớp 10 chuyên, trường: ${context.schoolName}.` : ''}${['olympic30', 'duyenhai'].includes(body?.destination) && [10, 11].includes(Number(body?.grade)) ? ` Khối lớp: Lớp ${Number(body.grade)}.` : ''}
 
 Quy tắc bắt buộc:
 1. Chỉ chép nội dung nhìn thấy; không giải bài, không bổ sung giả thiết và không suy diễn phần bị khuất.
@@ -113,7 +116,7 @@ Quy tắc bắt buộc:
         timeoutMs: OCR_ATTEMPT_TIMEOUT_MS,
         totalTimeoutMs: OCR_TOTAL_TIMEOUT_MS,
         maxOutputTokens: OCR_MAX_OUTPUT_TOKENS,
-        systemInstruction: 'Bạn là chuyên gia biên tập đề thi Olympic Toán Việt Nam. Nhiệm vụ duy nhất là OCR chính xác và tạo LaTeX tương thích MathJax.'
+        systemInstruction: 'Bạn là chuyên gia biên tập đề thi Toán, bao gồm Toán Đại học và Olympic. Nhiệm vụ duy nhất là OCR chính xác và tạo LaTeX tương thích MathJax.'
       });
     } catch (geminiError) {
       console.warn('[Exam OCR Gemini fallback]', {
@@ -127,7 +130,7 @@ Quy tắc bắt buộc:
         timeoutMs: OCR_OPENAI_TIMEOUT_MS,
         maxOutputTokens: 16_000,
         reasoningEffort: 'low',
-        systemInstruction: 'Bạn là chuyên gia OCR đề thi Olympic Toán Việt Nam. Chỉ trích xuất trung thực nội dung trong ảnh người dùng cung cấp và trả JSON đúng schema.'
+        systemInstruction: 'Bạn là chuyên gia OCR đề thi Toán, bao gồm Toán Đại học và Olympic. Chỉ trích xuất trung thực nội dung trong ảnh người dùng cung cấp và trả JSON đúng schema.'
       });
       source = 'openai-fallback';
     }
@@ -137,7 +140,7 @@ Quy tắc bắt buộc:
       .map((item, index) => ({
         questionNumber: Math.max(1, Number(item?.questionNumber) || index + 1),
         title: text(item?.title, 200) || `Câu ${index + 1}`,
-        topic: text(item?.topic, 120) || 'Toán Olympic',
+        topic: text(item?.topic, 120) || course?.nameVi || 'Toán Olympic',
         maxScore: Math.max(0, Math.min(20, Number(item?.maxScore) || 0)),
         content: normalizeMath(item?.content)
       }))
@@ -153,7 +156,7 @@ Quy tắc bắt buộc:
         examTitle: text(data.examTitle, 500),
         examDate: text(data.examDate, 20),
         duration: Math.max(1, Math.min(600, Number(data.duration) || 180)),
-        dayNumber: Math.max(1, Math.min(['tst', 'regional', 'vmo', 'olympic', 'olympic30', 'duyenhai', 'admission'].includes(body?.destination) ? 4 : 2, Number(data.dayNumber) || context.dayNumber)),
+        dayNumber: Math.max(1, Math.min(['tst', 'regional', 'vmo', 'olympic', 'olympic30', 'duyenhai', 'admission', 'university'].includes(body?.destination) ? 4 : 2, Number(data.dayNumber) || context.dayNumber)),
         confidence: text(data.confidence, 40) || 'unknown',
         questions
       }

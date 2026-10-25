@@ -121,7 +121,7 @@ Cấp học độc lập với vai trò Admin/Giáo viên/Thành viên. Admin ch
 | Tiểu học (`primary`) | Khu vực riêng; chưa có bộ học liệu riêng |
 | THCS (`lower_secondary`) | Đề thi vào lớp 10 chuyên |
 | THPT (`upper_secondary`) | Tài liệu chuyên đề VMO, thi thử VMO, TST, VMO, IMO–Olympic, Đà Nẵng–Quảng Nam, Olympic 30/4, Duyên hải miền Bắc; AI xu hướng đề |
-| Đại học (`university`) | Khu vực riêng; chưa có bộ học liệu riêng |
+| Đại học (`university`) | 10 kho học phần: MTH 141, MTH 142, CSE 191, MTH 309, EAS 305, STA 301, CSE 496, MTH 411, MTH 435, MTH 311 |
 
 **Hỗ trợ giải toán** dùng chung cho mọi cấp đã được cấp quyền, vẫn giữ quyền sở hữu bài toán riêng lẻ. Chọn THCS + THPT mở hợp của hai danh mục. Không có cấp nào (`[]`) nghĩa là chờ Admin cấp quyền; không tự mở nội dung khi tự đăng ký. Tài khoản cũ chưa có trường `educationLevels` tiếp tục được THCS + THPT, giữ quyền hiện tại; không cần sửa hàng loạt dữ liệu. Nội dung tương lai có thể gắn `educationLevel` rõ ràng; dữ liệu cũ phân loại từ category/sourceGroup/group, mặc định THPT, riêng tuyển sinh chuyên là THCS.
 
@@ -132,3 +132,14 @@ Phiên ký chứa danh sách cấp học chuẩn hóa; mỗi yêu cầu đối c
 Trang chính được phục vụ qua API hiện có với `private, no-store` và `Vary: Cookie`; máy chủ loại tài liệu chuyên đề THPT khỏi HTML của tài khoản ngoài cấp. Đường dẫn HTML nguồn/bản sao/manifest và mã phía máy chủ không được phục vụ trực tiếp; PDF/ảnh học liệu trong assets phải qua kiểm tra THPT. `server.js` sử dụng cùng handler API và cổng trang/tài liệu như Vercel. Việc tải trang và tài liệu cần DB xác thực đang hoạt động; file đã được tải trước đó hoặc nguồn bên ngoài ứng dụng không thể thu hồi bằng phân quyền này.
 
 Kiểm thử thêm: `node test/education-access.test.mjs` (chọn nhiều cấp, cấp học sai/rỗng, quyền Admin, đọc/đếm/ghi theo cấp, chặn query vượt phạm vi, RAG, HTML/PDF và điều hướng). Các fixture sử dụng DB mô phỏng; không thay đổi tài khoản production hoặc tạo học liệu Tiểu học/Đại học bằng dữ liệu giả.
+
+
+### Kho đề Đại học
+
+Trong **Đại học**, chọn học phần bằng sidebar hoặc bộ chọn: MTH 141 College Calculus I (Giải tích 1); MTH 142 College Calculus II (Giải tích 2); CSE 191 Discrete Structures (Toán rời rạc); MTH 309 Introductory Linear Algebra (Đại số tuyến tính); EAS 305 Applied Probability (Xác suất ứng dụng); STA 301 Probability & Statistics (Xác suất và Thống kê); CSE 496 Algorithms and Complexity (Thuật toán và Độ phức tạp); MTH 411 Probability Theory (Lý thuyết xác suất nâng cao); MTH 435 Introduction to Cryptography (Mật mã học cơ sở); MTH 311 Introduction to Higher Mathematics (Toán học cao cấp). Tên học phần theo danh sách yêu cầu, không gán cho một trường đại học cụ thể.
+
+Admin/Giáo viên có cấp Đại học vào **Kho dữ liệu → Tài liệu & Kỷ yếu → Thêm đề → Đại học → Học phần** để OCR ảnh, rà soát câu hỏi, lưu đề và ảnh nguồn. Dùng cùng chức năng xem/tìm kiếm theo năm, sao chép, nộp bài, hướng dẫn AI, quản lý nguồn, sửa/xóa đề và thêm/sửa/xóa câu hỏi. Danh sách chỉ tải metadata; nội dung câu hỏi tải khi chọn/xem đề. Sidebar hiển thị đề của học phần đang chọn. Hiện mỗi học phần/năm hỗ trợ tối đa 4 buổi/đề theo mô hình ngày thi hiện có.
+
+Một category `university` dùng registry 10 `courseId` cố định, lưu courseCode/courseName/educationLevel ở đề, nhóm nội dung và câu hỏi. Khóa đề/câu hỏi gồm học phần, năm và ngày nên không ghi đè giữa học phần. API kiểm tra mã học phần, năm và anchor; hỗ trợ lọc summary/detail/search bằng courseId. Câu hỏi thêm mới kế thừa học phần và cấp từ đề cha. Quyền THCS/THPT không tự mở Đại học; AI/RAG xét quyền nguồn như các kho khác và prompt giải/chấm dùng ngữ cảnh Toán Đại học khi câu hỏi đăng ký thuộc học phần.
+
+Đây là các kho học phần sẵn sàng nhập đề; không tự sinh đề thi, giáo trình hay ghi dữ liệu lên production. Kiểm thử mở rộng trong `test/grade-catalogs.test.mjs`: tạo 10 học phần bằng fixture, cách ly khóa/cấp học, lọc courseId, hiển thị/lazy-load câu hỏi và form OCR.

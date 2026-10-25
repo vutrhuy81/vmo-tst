@@ -257,8 +257,8 @@ export async function getExamCatalog(category = 'tst-national') {
   }));
 }
 
-export async function getExamCatalogSummary(category = 'tst-national') {
-  return normalizeList(await request('exam_catalog', { category, view: 'summary' }));
+export async function getExamCatalogSummary(category = 'tst-national', courseId = '') {
+  return normalizeList(await request('exam_catalog', { category, view: 'summary', ...(courseId ? { courseId } : {}) }));
 }
 
 export async function getExamCatalogDetail(category, anchor, year = '') {

@@ -292,6 +292,8 @@
     const isO = (tabId === 'tab-olympic');
     const isSupport = tabId === 'tab-support';
     if (qs('#sidebar-support')) qs('#sidebar-support').style.display = isSupport ? 'block' : 'none';
+    const isUniversity = tabId === 'tab-university';
+    if (qs('#sidebar-university')) qs('#sidebar-university').style.display = isUniversity ? 'block' : 'none';
     const isAdmission = tabId === 'tab-admission';
     if (qs('#admissionFilterPills')) qs('#admissionFilterPills').style.display = isAdmission ? 'flex' : 'none';
     if (qs('#sidebar-admission')) qs('#sidebar-admission').style.display = isAdmission ? 'block' : 'none';
@@ -307,7 +309,7 @@
     const sbTst = qs('#sidebar-tst');
     const sbHistory = qs('#sidebar-history');
 
-    if (sbDanang) sbDanang.style.display = (!isM && !isT && !isH && !isV && !isO && !isGradeCatalog && !isSupport && !isAdmission) ? 'block' : 'none';
+    if (sbDanang) sbDanang.style.display = (!isM && !isT && !isH && !isV && !isO && !isGradeCatalog && !isSupport && !isAdmission && !isUniversity) ? 'block' : 'none';
     if (sbMock) sbMock.style.display = isM ? 'block' : 'none';
     if (sbTst) sbTst.style.display = isT ? 'block' : 'none';
     if (sbHistory) sbHistory.style.display = isH ? 'block' : 'none';
@@ -352,7 +354,7 @@
     window.applyCurrentLanguage?.();
 
     // Render công thức toán nếu tab vừa mở chưa được biên dịch
-    if (!isM && !isT && !isH && !isV && !isO && !isGradeCatalog && !isSupport && !isAdmission) typeset(targetPane);
+    if (!isM && !isT && !isH && !isV && !isO && !isGradeCatalog && !isSupport && !isAdmission && !isUniversity) typeset(targetPane);
   };
 
   // 2. Hiện / Ẩn lời giải và barem điểm từng bài
@@ -407,6 +409,7 @@
 
   function clearSearch() {
     qsa('.hidden-by-search').forEach(x => x.classList.remove('hidden-by-search'));
+    window.refreshUniversityCatalogFilter?.();
     ['tab-olympic30', 'tab-duyenhai', 'tab-admission'].forEach(id => window.refreshGradeCatalogFilter?.(id));
     if (searchSummary) {
       searchSummary.classList.remove('visible');
@@ -465,7 +468,7 @@
     const val = norm(raw);
     const active = qs('.tab-pane.active');
     let n = 0;
-    if (['tab-mock', 'tab-tst', 'tab-history', 'tab-vmo', 'tab-olympic', 'tab-olympic30', 'tab-duyenhai', 'tab-admission'].includes(active?.id)) {
+    if (['tab-mock', 'tab-tst', 'tab-history', 'tab-vmo', 'tab-olympic', 'tab-olympic30', 'tab-duyenhai', 'tab-admission', 'tab-university'].includes(active?.id)) {
       n = searchExamBank(active.id, val);
     } else {
       n = searchBook(val);
@@ -474,7 +477,7 @@
       searchSummary.textContent = `Tìm thấy ${n} mục phù hợp với “${raw}”.`;
       searchSummary.classList.add('visible');
     }
-    const category = { 'tab-tst': 'tst-national', 'tab-mock': 'vmo-mock', 'tab-history': 'history-dn-qn', 'tab-vmo': 'vmo-official', 'tab-olympic': 'imo-olympic', 'tab-olympic30': 'olympic-30-4', 'tab-duyenhai': 'duyen-hai-bac', 'tab-admission': 'specialized-admission' }[active?.id];
+    const category = { 'tab-tst': 'tst-national', 'tab-mock': 'vmo-mock', 'tab-history': 'history-dn-qn', 'tab-vmo': 'vmo-official', 'tab-olympic': 'imo-olympic', 'tab-olympic30': 'olympic-30-4', 'tab-duyenhai': 'duyen-hai-bac', 'tab-admission': 'specialized-admission', 'tab-university': 'university' }[active?.id];
     if (category && raw.length >= 2 && window.VMODataService?.searchExamCatalog) {
       catalogSearchTimer = setTimeout(async () => {
         try {
@@ -500,6 +503,7 @@
 
   function gradeMatches(card) {
     const id = card.closest('.tab-pane')?.id;
+    if (id === 'tab-university') return card.dataset.courseId === window.currentUniversityCourse;
     if (!['tab-olympic30', 'tab-duyenhai', 'tab-admission'].includes(id)) return true;
     const filter = qs(`#${id.slice(4)}FilterPills .pill.active`)?.dataset.filter || 'ALL';
     return filter === 'ALL' || card.dataset.filter === filter;

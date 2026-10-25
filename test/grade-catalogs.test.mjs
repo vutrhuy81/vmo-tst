@@ -1,3 +1,4 @@
+import { UNIVERSITY_COURSES, universityCourse } from '../lib/university-courses.js';
 import { educationDb } from '../lib/education-db.js';
 import { allows } from '../lib/education-access.js';
 import { canAccessProblem, supportVisibility } from '../lib/problem-access.js';
@@ -10,8 +11,13 @@ import { JSDOM } from 'jsdom';
 // Execute the real route against isolated collections; never connect to Atlas.
 const stores = new Map();
 let role = 'admin';
+let educationLevels;
 const matches = (doc, query) => Object.entries(query).every(([key, value]) => {
+  if (key === '$and') return value.every(part => matches(doc, part));
+  if (key === '$or') return value.some(part => matches(doc, part));
   if (value && typeof value === 'object' && !(value instanceof ObjectId)) {
+    if ('$exists' in value) return (doc[key] !== undefined) === value.$exists;
+    if ('$nin' in value) return !value.$nin.some(item => String(item) === String(doc[key]));
     if ('$ne' in value) return doc[key] !== value.$ne;
     if ('$in' in value) return value.$in.some(item => String(item) === String(doc[key]));
     return true;
@@ -44,8 +50,8 @@ const db = { collection(name) {
 } };
 const source = fs.readFileSync(new URL('../api/data.js', import.meta.url), 'utf8')
   .replace(/^import .*;\n/gm, '').replace('export default async function handler', 'async function handler');
-const handler = new Function('educationDb', 'allows', 'getDb', 'getSession', 'ObjectId', 'recordActivity', 'canAccessProblem', 'supportVisibility', 'handleMathSupport', `${source}\nreturn handler;`)(
-  educationDb, allows,   async () => db, () => ({ role, username: 'tester' }), ObjectId, async () => {}, canAccessProblem, supportVisibility, handleMathSupport);
+const handler = new Function('universityCourse', 'educationDb', 'allows', 'getDb', 'getSession', 'ObjectId', 'recordActivity', 'canAccessProblem', 'supportVisibility', 'handleMathSupport', `${source}\nreturn handler;`)(
+  universityCourse, educationDb, allows,   async () => db, () => ({ role, username: 'tester', ...(educationLevels ? {educationLevels} : {}) }), ObjectId, async () => {}, canAccessProblem, supportVisibility, handleMathSupport);
 async function call(payload, query) {
   const res = { code: 0, setHeader() {}, status(code) { this.code = code; return this; }, json(body) { this.body = body; return this; } };
   await handler({ method: query ? 'GET' : 'POST', query, body: { action: 'create_exam_from_ocr', payload } }, res);
@@ -80,6 +86,39 @@ assert.equal(stores.get('exams').length, 4);
 assert.equal(stores.get('content_sets').length, 4);
 assert.equal(stores.get('problems').length, 4);
 
+// University course identity, question metadata, summaries and education-level boundaries.
+assert.equal(UNIVERSITY_COURSES.length,10);
+const universityResults=[];
+for (const course of UNIVERSITY_COURSES) {
+ const payload={destination:'university',courseId:course.id,province:course.code,year:'2026-2027',dayNumber:1,
+  targetAnchor:`university-${course.id}-2026-2027`,sourceImageCount:1,questions:[{questionNumber:1,topic:course.nameVi,content:'Prove the stated result.'}]};
+ const result=await call(payload);assert.equal(result.code,201);universityResults.push(result.body.item);
+ assert.equal(result.body.item.category,'university');assert.equal(result.body.item.courseId,course.id);
+ assert.equal(result.body.item.problems[0].educationLevel,'university');assert.equal(result.body.item.problems[0].courseId,course.id);
+ assert.equal((await call(payload)).code,409,'Same course/year/paper needs explicit replace confirmation');
+ assert.equal((await call({...payload,province:'Forged course'})).code,400);
+}
+assert.equal(new Set(universityResults.map(exam=>exam.examKey)).size,10,'Courses never overwrite each other');
+assert.equal(new Set(universityResults.map(exam=>exam.problems[0].contentKey)).size,10);
+assert.equal((await call({destination:'university',courseId:'fake'})).code,400);
+role='student';educationLevels=['university'];
+let courseSummary=await call(null,{resource:'exam_catalog',category:'university',courseId:'mth-141',view:'summary'});
+assert.equal(courseSummary.code,200);assert.equal(courseSummary.body.items.length,1);assert.equal(courseSummary.body.items[0].courseCode,'MTH 141');
+assert.equal((await call(null,{resource:'exam_catalog',category:'university',courseId:'fake',view:'summary'})).code,400);
+for(const grants of [['upper_secondary'],['lower_secondary'],['primary']]){
+ educationLevels=grants;
+ assert.equal((await call(null,{resource:'exam_catalog',category:'university',view:'summary'})).body.items.length,0,'Other levels cannot read university exams');
+}
+educationLevels=['university'];
+assert.equal((await call(null,{resource:'exam_catalog',category:'olympic-30-4',view:'summary'})).body.items.length,0,'University alone does not open THPT exams');
+role='teacher';educationLevels=['upper_secondary'];
+assert.equal((await call({destination:'university',courseId:'mth-141'})).code,403,'A THPT Teacher cannot upload University content');
+role='admin';educationLevels=undefined;
+const addQuestionRes={code:0,setHeader(){},status(code){this.code=code;return this;},json(body){this.body=body;return this;}};
+await handler({method:'POST',body:{action:'add_exam_question',payload:{examId:String(universityResults[0]._id),questionNumber:2,content:'Compute the derivative.',topic:'Calculus'}}},addQuestionRes);
+assert.equal(addQuestionRes.code,201);assert.equal(addQuestionRes.body.item.courseId,'mth-141');assert.equal(addQuestionRes.body.item.educationLevel,'university');
+
+
 // Grade pills compose with search, and clearing search retains the grade selection.
 const template = fs.readFileSync(new URL('../src/template.html', import.meta.url), 'utf8');
 const dom = new JSDOM(template, { runScripts: 'outside-only', url: 'https://example.test' });
@@ -108,5 +147,40 @@ for (const id of ['olympic30', 'duyenhai']) {
   window.document.querySelector(`#${id}FilterPills [data-filter="ALL"]`).click();
   assert.ok(cards.every(card => !card.classList.contains('hidden-by-search')));
 }
+// All ten University banks share the proven lazy exam renderer and question actions.
+window.CSS ||= {};window.CSS.escape ||= value=>String(value);
+window.VMOAuth={getSession:()=>({role:'admin',username:'tester'})};window.alert=()=>{};
+window.VMODataService={
+ getExamCatalog:async()=>[],
+ getExamCatalogSummary:async category=>category==='university'?universityResults.map(({problems,...exam})=>({...exam,problemCount:1})):[],
+ getExamCatalogDetail:async(category,anchor)=>universityResults.filter(exam=>exam.targetAnchor===anchor),
+ getCatalogProblems:async()=>[],getContentSets:async()=>[],getEvents:async()=>[],getDocuments:async()=>[],getExams:async()=>[]
+};
+window.eval(fs.readFileSync(new URL('../university_courses.js',import.meta.url),'utf8'));
+window.eval(fs.readFileSync(new URL('../university.js',import.meta.url),'utf8'));
+window.eval(fs.readFileSync(new URL('../vmo_db_ui.js',import.meta.url),'utf8'));
+window.eval(fs.readFileSync(new URL('../ai_guide_engine.js',import.meta.url),'utf8'));
+window.document.dispatchEvent(new window.Event('DOMContentLoaded'));
+await window.switchTab('tab-university');
+await window.loadDatabaseCompetitionExams('tab-university');
+assert.equal(window.document.querySelectorAll('#universityCourseSelect option').length,10);
+assert.equal(window.document.querySelectorAll('#universityCourseList button').length,10);
+assert.equal(window.document.querySelectorAll('#tab-university .exam-card').length,10);
+for(const course of UNIVERSITY_COURSES){
+ window.selectUniversityCourse(course.id);
+ const visible=[...window.document.querySelectorAll('#tab-university .exam-card')].filter(card=>!card.classList.contains('hidden-by-search'));
+ assert.equal(visible.length,1);assert.equal(visible[0].dataset.courseId,course.id);
+ await window.loadDatabaseExamDetail('university',visible[0].id);
+ assert.ok(visible[0].querySelector('.problem-item'));
+ assert.ok(visible[0].querySelector('.btn-submit-solution'),'Standard submission action is retained');
+ assert.equal(window.document.querySelectorAll('#universityExamLinks a:not([hidden])').length,1);
+}
+window.openDataHubModal();
+window.document.getElementById('docDestination').value='university';window.syncDocumentDestination();
+assert.equal(window.document.getElementById('docCourseId').options.length,10);
+assert.equal(window.document.getElementById('docProvince').value,'MTH 141');
+assert.equal(window.document.getElementById('docCourseWrap').style.display,'block');
+window.switchHubTab('docs');await new Promise(resolve=>window.setTimeout(resolve,0));
+assert.equal(window.document.querySelectorAll('#hubDocsList .hub-managed-exam').length,10);
 window.close();
-console.log('Grade catalog API isolation, authorization, summary and UI filters: OK');
+console.log('Grade and ten University catalogs: identities, authorization, lazy questions, course filters and OCR form: OK');
