@@ -44,10 +44,10 @@
         const key=`university-materials:${course.id}:${section.id}:example-${j+1}`;
         const problem=byKey.get(key);if(!problem)return; // unpublished examples stay unavailable
         const card=node('div',undefined,'examplebox problem-item university-material-example');
-        card.dataset.contentKey=key;card.dataset.databaseProblem='true';card.dataset.sourceGroup='university_materials';card.dataset.sourceType='university_material_example';card.dataset.contentType='university_materials';card.dataset.setKey=problem.setKey;card.dataset.setTitle=problem.setTitle;card.dataset.questionNumber=String(i*5+j+1);card.dataset.topic=problem.topic;
-        const head=node('div',undefined,'problem-header box-heading');head.append(node('span',`Ví dụ ${i+1}.${j+1}`,'problem-id'));
+        card.dataset.contentKey=key;card.dataset.databaseProblem='true';card.dataset.sourceGroup='university_materials';card.dataset.sourceType='university_material_example';card.dataset.contentType='university_materials';card.dataset.setId=String(problem.setId||'');card.dataset.setKey=problem.setKey;card.dataset.setTitle=problem.setTitle;card.dataset.questionNumber=String(i*5+j+1);card.dataset.topic=problem.topic;
+        const head=node('div',undefined,'problem-header box-heading');const label=node('div',undefined,'problem-id');label.append(node('span',problem.shortLabel||`Ví dụ ${i+1}.${j+1}`));const badge=node('span',problem.topic||section.title,'badge-topic');label.append(badge);head.append(label);
         const copy=node('button','📋 Sao chép','btn-copy');copy.type='button';copy.addEventListener('click',()=>window.copyText?.(copy));head.append(copy);card.append(head);
-        const statement=node('div',problem.content,'problem-content');card.append(statement);
+        const statement=node('div',problem.content,'problem-content');statement.setAttribute('data-raw-math',problem.content);card.append(statement);
         const toggle=node('button','Ẩn lời giải','solution-toggle');toggle.type='button';toggle.setAttribute('aria-expanded','true');
         const answer=node('div',undefined,'example-solution');
         if(window.safeRenderMathJaxToElement)window.safeRenderMathJaxToElement(answer,problem.referenceSolution||'Chưa có lời giải tham khảo.');else answer.textContent=problem.referenceSolution||'';

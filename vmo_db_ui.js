@@ -1265,7 +1265,7 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
     let examTitle = '';
 
     if (problemCard) {
-      if (problemCard.classList.contains('examplebox')) {
+      if (problemCard.classList.contains('examplebox') && !problemCard.querySelector('.problem-content')) {
         const headingEl = problemCard.querySelector('.box-heading');
         topic = headingEl ? (headingEl.innerText || headingEl.textContent || '').trim() : 'Ví dụ chuyên đề';
         const chBlock = problemCard.closest('.chapter-block');
@@ -1280,7 +1280,8 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
       } else {
         const contentEl = problemCard.querySelector('.problem-content');
         const topicEl = problemCard.querySelector('.badge-topic');
-        if (topicEl) topic = (topicEl.innerText || topicEl.textContent || '').trim();
+        topic = problemCard.dataset.topic || (topicEl?.innerText || topicEl?.textContent || '').trim();
+        examTitle = problemCard.dataset.setTitle || '';
         const examCard = problemCard.closest('.exam-card') || problemCard.closest('.paper-card');
         if (examCard) {
           const titleEl = examCard.querySelector('.exam-title');

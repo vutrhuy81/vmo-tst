@@ -431,7 +431,7 @@
     if (!card) return;
 
     // Xác định ID và thông tin câu hỏi
-    const idEl = card.querySelector('.problem-id span:first-child') || card.querySelector('.box-heading') || card.querySelector('h3');
+    const idEl = card.querySelector('.problem-id span:first-child') || card.querySelector('.problem-id') || card.querySelector('.box-heading') || card.querySelector('h3');
     const topicEl = card.querySelector('.badge-topic');
     const contentEl = card.querySelector('.problem-content') || card.querySelector('p');
     const examCard = card.closest('.exam-card');
@@ -441,9 +441,9 @@
     const cleanTitle = cleanElementText(idEl) || 'Bài toán Olympic';
     const problemId = (card.id || cleanTitle).replace(/[^a-zA-Z0-9_-]/g, '-').toLowerCase() + '-' + Math.abs(hashCode(sourceText.slice(0, 50) || 'vmo'));
     const problemTitle = cleanTitle;
-    const problemTopic = topicEl ? (topicEl.textContent || '').trim() : '';
+    const problemTopic = card.dataset.topic || (topicEl?.textContent || '').trim();
     const problemContent = sourceText;
-    const examTitle = examTitleEl ? examTitleEl.innerText : 'Ôn luyện VMO Đà Nẵng 2026 - 2027';
+    const examTitle = card.dataset.setTitle || (examTitleEl?.innerText || examTitleEl?.textContent || '').trim() || 'Ôn luyện Toán';
     const problemKey = card.dataset.contentKey || problemId;
 
     // Kiểm tra xem panel đã tồn tại chưa

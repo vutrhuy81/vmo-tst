@@ -2,6 +2,7 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import { JSDOM } from 'jsdom';
 import { getUniversityMaterials, universityMaterialCatalog } from '../lib/university-materials.js';
+import { filterAppShell } from '../lib/app-shell.js';
 import { canAccessProblem } from '../lib/problem-access.js';
 const read=path=>fs.readFileSync(new URL('../'+path,import.meta.url),'utf8');
 const catalog=await universityMaterialCatalog();
@@ -29,14 +30,15 @@ await Promise.all([getUniversityMaterials(db,user,'mth-141'),getUniversityMateri
 assert.equal(stores.get('problems').length,400);assert.equal(stores.get('problems').find(p=>p.contentKey===key).content,'Admin edited statement');
 await assert.rejects(()=>getUniversityMaterials(db,{...user,educationLevels:['upper_secondary']},'mth-141'),/Đại học/);
 await assert.rejects(()=>getUniversityMaterials(db,user,'../sources'),/Học phần/);
-const dom=new JSDOM(read('index.html'),{url:'https://example.test/',runScripts:'outside-only'});const {window}=dom;
-window.MathAppEducation={moduleAllowed:()=>true};let activeUser=user;window.VMOAuth={getSession:()=>activeUser};
+const dom=new JSDOM(filterAppShell(read('index.html'),user),{url:'https://example.test/',runScripts:'outside-only'});const {window}=dom;
+window.eval(read('education_access.js'));let activeUser=user;window.VMOAuth={getSession:()=>activeUser};
 window.CSS ||= {};window.CSS.escape ||= value=>String(value);
 window.MathJax={typesetClear(){},typesetPromise:async()=>{}};
 window.safeRenderMathJaxToElement=(el,text)=>{el.textContent=text;};window.reinitDatabaseUI=()=>{};window.reinitAIGuide=()=>{};
 window.fetch=async url=>{const id=new URL(url,'https://example.test').searchParams.get('courseId');return{ok:true,json:async()=>({success:true,item:id?await getUniversityMaterials(db,user,id):catalog})};};
 window.VMODataService={getCatalogProblems:async()=>[],getContentSets:async()=>[],getEvents:async()=>[]};
 window.eval(read('vmo_db_ui.js'));window.eval(read('ai_guide_engine.js'));
+window.scrollTo=()=>{};window.eval(read('app.js'));
 window.eval(read('university_materials.js'));await window.loadUniversityMaterials();
 assert.equal(window.document.querySelectorAll('#universityMaterialsCourse option').length,10);
 for(const course of catalog.courses){window.document.getElementById('universityMaterialsCourse').value=course.id;await window.loadUniversityMaterials();assert.equal(window.document.querySelectorAll('#universityMaterialsContent .theorybox').length,8);assert.equal(window.document.querySelectorAll('#universityMaterialsContent .problem-item').length,40);}
@@ -44,6 +46,63 @@ assert.equal(window.document.querySelectorAll('#universityMaterialsContent .btn-
 assert.equal(window.document.querySelectorAll('#universityMaterialsContent .btn-submit-solution').length,40);
 activeUser={...user,role:'teacher'};window.reinitDatabaseUI(window.document.getElementById('universityMaterialsContent'));
 assert.equal(window.document.querySelectorAll('#universityMaterialsContent .btn-manage-reference-links').length,40);
+// Exercise actual click handlers and the actual data service, not just button counts.
+const tick=()=>new Promise(resolve=>window.setTimeout(resolve,0));
+const uiErrors=[];window.addEventListener('error',event=>{uiErrors.push(event.error?.message||event.message);event.preventDefault();});
+const requests=[];let submitted=null,updated=null,guideFailure=false;
+const response=(body,ok=true)=>({ok,status:ok?200:503,headers:{get:()=> 'application/json'},json:async()=>body});
+window.fetch=async(url,options={})=>{
+ const parsed=new URL(url,'https://example.test');const body=options.body?JSON.parse(options.body):null;requests.push({url:parsed,body});
+ if(parsed.pathname==='/api/ai-guide')return guideFailure?response({error:'AI temporarily unavailable'},false):response({success:true,data:{knowledge:'Use the definition.',intuition:'Apply the hypothesis.',solution:'Detailed solution: $x=1$.',pitfalls:'Check the domain.'}});
+ if(body?.action==='submit_solution'){submitted=body.payload;return response({success:true,item:{_id:'submission-test',...submitted}});}
+ if(body?.action==='update_catalog_content'){
+  updated=body.payload;const problem=stores.get('problems').find(p=>String(p._id)===updated.id);Object.assign(problem,{content:updated.content,referenceLinks:updated.referenceLinks,version:problem.version+1});return response({success:true,item:{...problem,_id:String(problem._id)}});
+ }
+ if(parsed.searchParams.get('resource')==='university_materials')return response({success:true,item:await getUniversityMaterials(db,user,parsed.searchParams.get('courseId'))});
+ if(parsed.searchParams.get('resource')==='problems')return response({success:true,items:stores.get('problems').filter(p=>p.contentKey===parsed.searchParams.get('contentKey')).map(p=>({...p,_id:String(p._id),setId:String(p.setId)}))});
+ return response({success:true,items:[]});
+};
+window.eval(read('vmo_data_service.js').replace(/^export /gm,''));
+let copied='',fallbackText='';Object.defineProperty(window.navigator,'clipboard',{configurable:true,value:{writeText:async text=>{copied=text;}}});
+window.confirm=()=>true;window.prompt=(_,text)=>{fallbackText=text;};
+for(const course of catalog.courses){
+ window.document.getElementById('universityMaterialsCourse').value=course.id;await window.loadUniversityMaterials();
+ const card=window.document.querySelector('#universityMaterialsContent .problem-item');
+ const problem=stores.get('problems').find(p=>p.contentKey===card.dataset.contentKey);
+ // Simulate a MathJax-rendered statement whose text no longer contains original TeX.
+ card.querySelector('.problem-content').innerHTML='<mjx-container>typeset display only</mjx-container>';
+ card.querySelector('.btn-copy').click();await tick();assert.equal(copied,`${problem.shortLabel}:\n${problem.content}`);
+ card.querySelector('.btn-submit-solution').click();
+ // Verify BEFORE the asynchronous catalog refresh: initial modal must have the full statement.
+ assert.equal(window.currentSubmissionData.problemContent,problem.content);
+ assert.equal(window.currentSubmissionData.topic,problem.topic);assert.equal(window.currentSubmissionData.examTitle,problem.setTitle);
+ assert.equal(window.document.getElementById('submissionModal').style.display,'flex');await tick();
+ window.document.getElementById('subSolutionText').value='My solution: $x=1$';await window.document.getElementById('btnConfirmSubmit').onclick();
+ assert.equal(submitted.problemKey,problem.contentKey);assert.equal(submitted.problemContent,problem.content);assert.equal(submitted.sourceGroup,'university_materials');
+ assert.equal(submitted.solutionContent,'My solution: $x=1$');window.closeSubmissionModal();
+ card.querySelector('.btn-ai-guide').click();await tick();
+ const guide=requests.filter(r=>r.url.pathname==='/api/ai-guide').at(-1).body;
+ assert.equal(guide.contentKey,problem.contentKey);assert.equal(guide.problemTitle,problem.shortLabel);assert.equal(guide.problemContent,problem.content);
+ assert.equal(guide.examTitle,problem.setTitle);assert.equal(guide.topic,problem.topic);
+ assert.ok(card.querySelector('.ai-guide-panel').textContent.includes('Detailed solution'));
+ card.querySelector('.btn-ai-guide').click();await tick();assert.equal(card.querySelector('.ai-guide-panel').style.display,'none');
+ card.querySelector('.btn-ai-guide').click();await tick();assert.equal(card.querySelector('.ai-guide-panel').style.display,'block');
+ card.querySelector('.btn-manage-reference-links').click();await tick();
+ const modal=window.document.getElementById('referenceLinksAdminModal');assert.equal(modal.style.display,'flex');assert.equal(modal.dataset.problemId,String(problem._id));
+ const edit=window.document.getElementById('referenceManagerProblemContent');assert.equal(edit.disabled,false);assert.equal(edit.value,problem.content);
+ const changed=problem.content+' Updated $y=2$';edit.value=changed;
+ const row=window.document.querySelector('#referenceLinksRows .reference-link-edit-row');row.querySelector('.reference-link-label').value='Reference';row.querySelector('.reference-link-url').value='https://example.test/reference';
+ await window.saveReferenceLinksManager();assert.equal(updated.id,String(problem._id));assert.equal(updated.expectedVersion,1);
+ assert.equal(card.querySelector('.problem-content').getAttribute('data-raw-math'),changed);assert.ok(card.querySelector('.source-solution-box a'));
+ card.querySelector('.btn-copy').click();await tick();assert.equal(copied,`${problem.shortLabel}:\n${changed}`);
+}
+const last=window.document.querySelector('#universityMaterialsContent .problem-item');
+Object.defineProperty(window.navigator,'clipboard',{value:{writeText:async()=>{throw Error('denied');}}});last.querySelector('.btn-copy').click();await tick();assert.ok(fallbackText.includes('Updated $y=2$'));
+Object.defineProperty(window.navigator,'clipboard',{value:undefined});fallbackText='';last.querySelector('.btn-copy').click();await tick();assert.ok(fallbackText.includes('Updated $y=2$'));
+last.querySelector('.ai-guide-panel').remove();guideFailure=true;last.querySelector('.btn-ai-guide').click();await tick();assert.equal(last.querySelector('.ai-guide-panel').dataset.guideError,'true');
+guideFailure=false;last.querySelector('.btn-ai-guide').click();await tick();assert.ok(last.querySelector('.ai-guide-panel').textContent.includes('Detailed solution'));
+activeUser=user;last.querySelector('.btn-manage-reference-links').remove();window.reinitDatabaseUI(last.parentElement);assert.equal(last.querySelector('.btn-manage-reference-links'),null);
+assert.deepEqual(uiErrors,[]);
 const search=window.document.getElementById('universityMaterialsSearch');search.value='zzzz-no-match';search.dispatchEvent(new window.Event('input'));assert.equal(window.document.querySelectorAll('.university-material-section[hidden]').length,8);
 search.value='';search.dispatchEvent(new window.Event('input'));assert.equal(window.document.querySelectorAll('.university-material-section[hidden]').length,0);
 window.document.getElementById('universityMaterialsSolutions').click();assert.equal(window.document.querySelectorAll('#universityMaterialsContent .example-solution.is-collapsed').length,40);

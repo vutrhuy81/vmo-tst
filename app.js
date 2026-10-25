@@ -389,16 +389,29 @@
     const card = btn.closest('.problem-item');
     if (!card) return;
     const isEn = (window.currentLang === 'en');
-    const id = card.querySelector('.problem-id span:first-child')?.innerText || (isEn ? 'Problem' : 'Bài toán');
-    const rawMath = card.dataset.sourceGroup === 'math_support'
-      ? card.querySelector('.problem-content')?.getAttribute('data-raw-math') : '';
-    const content = rawMath || card.querySelector('.problem-content')?.innerText || card.innerText;
-
-    navigator.clipboard.writeText(`${id}:\n${content}`).then(() => {
-      const old = btn.textContent;
+    const label = card.querySelector('.problem-id span:first-child') || card.querySelector('.problem-id');
+    const id = label?.innerText || label?.textContent || (isEn ? 'Problem' : 'Bài toán');
+    const statement = card.querySelector('.problem-content');
+    // Read the original TeX, never the typeset MathJax DOM or the answer/actions.
+    const content = statement?.getAttribute('data-raw-math') || statement?.innerText || statement?.textContent || '';
+    const text = `${id}:\n${content}`;
+    const old = btn.textContent;
+    const success = () => {
       btn.textContent = isEn ? '✅ Copied' : '✅ Đã sao chép';
       setTimeout(() => { btn.textContent = old; }, 1500);
-    });
+    };
+    const fallback = () => {
+      const area = document.createElement('textarea');
+      area.value = text;area.style.cssText = 'position:fixed;left:-9999px';
+      document.body.appendChild(area);area.select();
+      let ok = false;
+      try { ok = document.execCommand?.('copy') === true; } catch { /* browser denies clipboard */ }
+      area.remove();btn.focus();
+      if (ok) success();
+      else window.prompt(isEn ? 'Copy problem text:' : 'Sao chép nội dung bài toán:', text);
+    };
+    if (!navigator.clipboard?.writeText) { fallback();return; }
+    navigator.clipboard.writeText(text).then(success, fallback);
   };
 
   // 4. Tìm kiếm nội dung theo từ khóa tiếng Việt / không dấu
