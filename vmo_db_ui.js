@@ -5,6 +5,7 @@
 
 (() => {
   const CONTENT_SOURCE_CONFIG = Object.freeze({
+    'tab-university-materials': { sourceGroup: 'university_materials', sourceType: 'university_material_example', contentType: 'university_materials' },
     'tab-university': { sourceGroup: 'university', sourceType: 'university_question', contentType: 'university_exam' },
     'tab-support': { sourceGroup: 'math_support', sourceType: 'standalone_question', contentType: 'standalone_problem' },
     'tab-mock': { sourceGroup: 'mock_exam', sourceType: 'mock_exam_question', contentType: 'mock_exam' },

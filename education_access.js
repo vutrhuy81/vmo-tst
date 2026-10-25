@@ -9,7 +9,7 @@
   const modules = {
     danang: 'upper_secondary', mock: 'upper_secondary', tst: 'upper_secondary', vmo: 'upper_secondary',
     history: 'upper_secondary', olympic: 'upper_secondary', olympic30: 'upper_secondary', duyenhai: 'upper_secondary',
-    admission: 'lower_secondary', primary: 'primary', university: 'university', support: 'shared', trends: 'upper_secondary'
+    admission: 'lower_secondary', 'university-materials': 'university', primary: 'primary', university: 'university', support: 'shared', trends: 'upper_secondary'
   };
   function valid(value) { return Array.isArray(value) && value.length <= 4 && value.every(v => levels.includes(v)) && new Set(value).size === value.length; }
   function assigned(user) {
@@ -23,7 +23,7 @@
   function contentLevel(item) {
     if (levels.includes(item?.educationLevel)) return item.educationLevel;
     const group = item?.sourceGroup || item?.group || item?.category || item?.problemSnapshot?.sourceGroup;
-    if (group === 'university') return 'university';
+    if (['university','university_materials'].includes(group)) return 'university';
     if (['math_support'].includes(group)) return 'shared';
     if (['specialized_admission', 'specialized-admission'].includes(group)) return 'lower_secondary';
     return 'upper_secondary';

@@ -21,7 +21,7 @@
     },
     "api/data.js": {
       "maxDuration": 120,
-      "includeFiles": "{index.html,assets/**}"
+      "includeFiles": "{index.html,assets/**,data/university-materials/**}"
     },
     "api/rag-worker.js": {
       "maxDuration": 300

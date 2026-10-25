@@ -1,3 +1,4 @@
+import { getUniversityMaterials, universityMaterialCatalog } from '../lib/university-materials.js';
 import { universityCourse } from '../lib/university-courses.js';
 import { serveEducationPage } from '../lib/app-shell.js';
 import { allows } from '../lib/education-access.js';
@@ -19,7 +20,7 @@ import { deleteAiGuideRecord, learningScope, recordActivity, summarizeLearning }
 import { cleanTrendTheory } from '../lib/trend-theory-storage.js';
 import { buildSubmissionContentUpdate, buildSubmissionVerificationUpdate } from '../lib/submission-verification.js';
 
-const ALLOWED_RESOURCES = new Set(['math_support', 'math_support_image', 'documents', 'exams', 'exam_catalog', 'home_stats', 'exam_image', 'content_sets', 'content_blocks', 'problems', 'content_revisions', 'submissions', 'submission_image', 'events', 'activity_feed', 'learning_overview', 'exam_trend_reports', 'trend_theories', 'rag_status', 'rag_logs']);
+const ALLOWED_RESOURCES = new Set(['university_materials', 'math_support', 'math_support_image', 'documents', 'exams', 'exam_catalog', 'home_stats', 'exam_image', 'content_sets', 'content_blocks', 'problems', 'content_revisions', 'submissions', 'submission_image', 'events', 'activity_feed', 'learning_overview', 'exam_trend_reports', 'trend_theories', 'rag_status', 'rag_logs']);
 const TST_REGIONS = new Set(['BAC', 'TRUNG', 'NAM']);
 const EXAM_TREND_TOPICS = [
   'Dãy số và Giới hạn dãy số', 'Phương trình hàm', 'Số học và dãy số',
@@ -401,6 +402,14 @@ export default async function handler(req, res) {
         const items = await db.collection('exam_trend_reports').find({ deletedAt: { $exists: false }, ...(!['admin', 'teacher'].includes(session.role) ? { ownerId: String(session.sub) } : {}) }, { projection: { 'evidence.samples': 0, revisions: 0 } })
           .sort({ createdAt: -1, _id: -1 }).limit(100).toArray();
         return res.status(200).json({ success: true, items });
+      }
+
+      if (resource === 'university_materials') {
+        if (!allows(session,'university')) return res.status(403).json({success:false,error:'Tài liệu thuộc cấp Đại học'});
+        const courseId=cleanText(req.query?.courseId,40);
+        if (!courseId) return res.status(200).json({success:true,item:await universityMaterialCatalog()});
+        if (!universityCourse(courseId)) return res.status(400).json({success:false,error:'Học phần không hợp lệ'});
+        return res.status(200).json({success:true,item:await getUniversityMaterials(db,session,courseId)});
       }
 
       if (resource === 'home_stats') {

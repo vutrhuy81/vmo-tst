@@ -1,0 +1,186 @@
+[
+  {
+    "id": "loomis",
+    "title": "Advanced Calculus",
+    "authors": "Lynn H. Loomis và Shlomo Sternberg",
+    "pdfPages": 592,
+    "reviewNote": "Toàn văn đọc được; tiêu đề tác giả đối chiếu trang đầu",
+    "kind": "uploaded"
+  },
+  {
+    "id": "gallier",
+    "title": "Algebra, Topology, Differential Calculus, and Optimization Theory for Computer Science and Machine Learning",
+    "authors": "Jean Gallier và Jocelyn Quaintance",
+    "pdfPages": 2236,
+    "reviewNote": "Toàn văn đọc được; bản ghi ngày 22/10/2026",
+    "kind": "uploaded"
+  },
+  {
+    "id": "powers",
+    "title": "Mathematical Methods in Engineering",
+    "authors": "Joseph M. Powers và Mihir Sen",
+    "pdfPages": 638,
+    "reviewNote": "Toàn văn đọc được",
+    "kind": "uploaded"
+  },
+  {
+    "id": "solomon",
+    "title": "Mathematical Methods for Computer Vision, Robotics, and Graphics (CS 205A, 2013)",
+    "authors": "Justin Solomon",
+    "pdfPages": 219,
+    "reviewNote": "Toàn văn đọc được",
+    "kind": "uploaded"
+  },
+  {
+    "id": "abstract",
+    "title": "Abstract Algebra with Applications",
+    "authors": "Audrey Terras",
+    "pdfPages": 327,
+    "reviewNote": "Có lỗi cấu trúc PDF ở một số phần; đã kiểm tra mục lục và phần trích xuất được",
+    "kind": "uploaded"
+  },
+  {
+    "id": "scherk",
+    "title": "Algebra: A Computational Introduction",
+    "authors": "John Scherk",
+    "pdfPages": 419,
+    "reviewNote": "Toàn văn đọc được",
+    "kind": "uploaded"
+  },
+  {
+    "id": "vinh",
+    "title": "Đại số tuyến tính",
+    "authors": "Đặng Văn Vinh",
+    "pdfPages": 339,
+    "reviewNote": "Bản scan; đối chiếu bìa và OCR mục lục, không coi OCR là bản văn đã hiệu đính",
+    "kind": "uploaded"
+  },
+  {
+    "id": "lax",
+    "title": "Linear Algebra and Its Applications, 2nd Edition",
+    "authors": "Peter D. Lax",
+    "pdfPages": 394,
+    "reviewNote": "Đối chiếu thông tin thư mục trong tệp",
+    "kind": "uploaded"
+  },
+  {
+    "id": "knill",
+    "title": "Linear Algebra with Probability",
+    "authors": "Oliver Knill",
+    "pdfPages": 158,
+    "reviewNote": "Ghi chú Math 19b, 2011",
+    "kind": "uploaded"
+  },
+  {
+    "id": "bertsekas",
+    "title": "Introduction to Probability, MIT 6.041–6.431 Lecture Notes",
+    "authors": "Dimitri P. Bertsekas và John N. Tsitsiklis",
+    "pdfPages": 284,
+    "reviewNote": "Bản lecture notes Fall 2000; không đồng nhất với mọi ấn bản sách",
+    "kind": "uploaded"
+  },
+  {
+    "id": "yates",
+    "title": "Probability and Stochastic Processes",
+    "authors": "Roy D. Yates và David J. Goodman",
+    "pdfPages": 513,
+    "reviewNote": "Bản scan; đã OCR phần giới thiệu và roadmap",
+    "kind": "uploaded"
+  },
+  {
+    "id": "gnedenko",
+    "title": "An Elementary Introduction to the Theory of Probability",
+    "authors": "B. V. Gnedenko và A. Ya. Khinchin",
+    "pdfPages": 151,
+    "reviewNote": "Toàn văn trích xuất được, có nhiễu OCR",
+    "kind": "uploaded"
+  },
+  {
+    "id": "fernandez",
+    "title": "Probability and Statistics for Data Science",
+    "authors": "Carlos Fernandez-Granda",
+    "pdfPages": 237,
+    "reviewNote": "Ghi chú học phần NYU",
+    "kind": "uploaded"
+  },
+  {
+    "id": "roch",
+    "title": "Modern Discrete Probability: An Essential Toolkit",
+    "authors": "Sébastien Roch",
+    "pdfPages": 571,
+    "reviewNote": "Bản ghi 20/12/2023",
+    "kind": "uploaded"
+  },
+  {
+    "id": "stapleton",
+    "title": "Models for Probability and Statistical Inference: Theory and Applications",
+    "authors": "James H. Stapleton",
+    "pdfPages": 467,
+    "reviewNote": "Có một số trang không trích xuất thành văn bản đầy đủ",
+    "kind": "uploaded"
+  },
+  {
+    "id": "agresti",
+    "title": "Foundations of Statistics for Data Scientists",
+    "authors": "Alan Agresti và Maria Kateri",
+    "pdfPages": 49,
+    "reviewNote": "Bản đính kèm chỉ 49 trang, chủ yếu phần đầu; không là toàn văn",
+    "kind": "uploaded"
+  },
+  {
+    "id": "albert",
+    "title": "Probability and Bayesian Modeling",
+    "authors": "Jim Albert và Huoying Zhou",
+    "pdfPages": 48,
+    "reviewNote": "Bản đính kèm chỉ 48 trang; không gán nội dung chương chưa có cho bản trích",
+    "kind": "uploaded"
+  },
+  {
+    "id": "principles",
+    "title": "Principles of Probability Theory and its Applications",
+    "authors": "Theo thông tin bản đính kèm",
+    "pdfPages": 548,
+    "reviewNote": "Đọc phần giới thiệu và mục lục; nguồn bổ trợ",
+    "kind": "uploaded"
+  },
+  {
+    "id": "ahn",
+    "title": "Probability and Statistics for Science and Engineering",
+    "authors": "Hongshik Ahn",
+    "pdfPages": 367,
+    "reviewNote": "Nguồn bổ trợ xác suất và thống kê kỹ thuật",
+    "kind": "uploaded"
+  },
+  {
+    "id": "openstax3",
+    "title": "Calculus Volume 3",
+    "authors": "Gilbert Strang, Edwin Herman và cộng sự",
+    "pdfPages": 913,
+    "reviewNote": "Chủ yếu giải tích nhiều biến, dùng như nguồn mở rộng, không thay nội dung giải tích một biến",
+    "kind": "uploaded"
+  },
+  {
+    "id": "mit-discrete",
+    "title": "Mathematics for Computer Science",
+    "authors": "MIT OpenCourseWare",
+    "kind": "supplement",
+    "url": "https://ocw.mit.edu/courses/6-042j-mathematics-for-computer-science-spring-2015/resources/mit6_042js15_textbook_pdf/",
+    "reviewNote": "Nguồn chính thức bổ sung cho logic, chứng minh, đếm và đồ thị"
+  },
+  {
+    "id": "mit-algorithms",
+    "title": "Introduction to Algorithms — Lecture Notes",
+    "authors": "MIT OpenCourseWare",
+    "kind": "supplement",
+    "url": "https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-spring-2020/pages/lecture-notes/",
+    "reviewNote": "Nguồn chính thức bổ sung cho thiết kế thuật toán; không gán mọi nội dung NP/luồng cho một bài giảng cụ thể"
+  },
+  {
+    "id": "stanford-crypto",
+    "title": "A Graduate Course in Applied Cryptography",
+    "authors": "Dan Boneh và Victor Shoup",
+    "kind": "supplement",
+    "url": "https://crypto.stanford.edu/~dabo/cryptobook/",
+    "reviewNote": "Nguồn chính thức bổ sung về mô hình an toàn và các primitive hiện đại"
+  }
+]
