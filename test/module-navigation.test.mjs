@@ -12,8 +12,8 @@ function harness(compact=true) {
   return{dom,window,doc,media,toggle:doc.getElementById('moduleNavigationToggle'),nav:doc.getElementById('moduleNavigation')};
 }
 const h=harness();
-assert.equal(h.nav.querySelectorAll('.tab-btn').length,10);assert.equal(h.nav.querySelectorAll('.navigation-group').length,3);
-assert.equal(new Set([...h.nav.querySelectorAll('.tab-btn')].map(x=>x.id)).size,10,'One real button per module, no duplicated IDs');
+assert.equal(h.nav.querySelectorAll('.tab-btn').length,12);assert.equal(h.nav.querySelectorAll('.navigation-group').length,3);
+assert.equal(new Set([...h.nav.querySelectorAll('.tab-btn')].map(x=>x.id)).size,12,'One real button per module, no duplicated IDs');
 assert.equal(h.nav.hidden,true);h.toggle.click();assert.equal(h.nav.hidden,false);assert.equal(h.toggle.getAttribute('aria-expanded'),'true');
 for(const key of ['danang','mock','support','admission','tst','vmo','history','olympic','olympic30','duyenhai']){
   if(h.nav.hidden)h.toggle.click();

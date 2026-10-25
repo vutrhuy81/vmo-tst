@@ -1,3 +1,5 @@
+import { educationDb } from '../lib/education-db.js';
+import { assigned, valid, allows } from '../lib/education-access.js';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import crypto from 'node:crypto';
@@ -11,7 +13,7 @@ import { trendAnalysisSettings } from '../lib/exam-trends.js';
 const source = path => fs.readFileSync(new URL('../'+path, import.meta.url), 'utf8');
 function route(path, dependencies) {
   const code = source(path).replace(/^import[\s\S]*?;\n/gm, '').replaceAll('export default async function', 'async function').replaceAll('export function', 'function');
-  return new Function(...Object.keys(dependencies), code+'\nreturn handler;')(...Object.values(dependencies));
+  return new Function(...Object.keys({educationDb,assigned,valid,allows,...dependencies}), code+'\nreturn handler;')(...Object.values({educationDb,assigned,valid,allows,...dependencies}));
 }
 const response = () => ({ code:0, setHeader(){}, status(code){this.code=code;return this;}, json(body){this.body=body;return this;}, end(){return this;} });
 const admin={sub:'admin-id',username:'admin',role:'admin'}, teacher={sub:'teacher-id',username:'teacher',role:'teacher'}, member={sub:'member-id',username:'member',role:'student'};
@@ -58,12 +60,14 @@ assert.equal((await changeRole('admin','student')).code,400,'No self demotion, s
 session=null;assert.equal((await changeRole('newteacher','admin')).code,401);session=admin;
 // Exercise real signed cookies and DB role lookup without a live database.
 const sessionCode=source('lib/session.js').replace(/^import[\s\S]*?;\n/gm,'').replaceAll('export ', '');
-const cookieAuth=new Function('crypto','ObjectId','getDb',sessionCode+';return {signSession,getSession};')(crypto,ObjectId,async()=>db);
+const cookieAuth=new Function('assigned','crypto','ObjectId','getDb',sessionCode+';return {signSession,getSession};')(assigned,crypto,ObjectId,async()=>db);
 const oldSecret=process.env.JWT_SECRET;process.env.JWT_SECRET='test-session-secret-only-not-a-real-key';
 try {
  const user=collections.get('users')[0];
  const token=cookieAuth.signSession(user);const req={headers:{cookie:'vmo_session='+token}};
  assert.equal((await cookieAuth.getSession(req)).role,'teacher');
+ user.educationLevels=['lower_secondary'];assert.equal(await cookieAuth.getSession(req),null,'Old cookie rejected after education-level assignment');
+ delete user.educationLevels;
  user.role='student';assert.equal(await cookieAuth.getSession(req),null,'Old privileged cookie rejected after demotion');
  const newToken=cookieAuth.signSession(user);assert.equal((await cookieAuth.getSession({headers:{cookie:'vmo_session='+newToken}})).role,'student');
  collections.get('users').shift();assert.equal(await cookieAuth.getSession(req),null,'Deleted accounts cannot retain cookie access');

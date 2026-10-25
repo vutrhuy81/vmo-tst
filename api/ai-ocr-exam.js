@@ -1,3 +1,4 @@
+import { allows } from '../lib/education-access.js';
 import { getSession } from '../lib/session.js';
 import { checkRateLimit, generateJson, handleAiError, parseBody, prepare, text } from '../lib/ai.js';
 import { generateOpenAIJson } from '../lib/openai.js';
@@ -65,6 +66,7 @@ export default async function handler(req, res) {
   }
 
   const body = parseBody(req);
+  if (!allows(session, body?.destination === 'admission' ? 'lower_secondary' : 'upper_secondary')) return res.status(403).json({ success: false, error: 'Không có quyền OCR nội dung cấp học này' });
   if (['olympic30', 'duyenhai'].includes(body?.destination) && ![10, 11].includes(Number(body?.grade))) {
     return res.status(400).json({ success: false, error: 'Vui lòng chọn Lớp 10 hoặc Lớp 11' });
   }

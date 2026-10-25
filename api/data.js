@@ -1,3 +1,6 @@
+import { serveEducationPage } from '../lib/app-shell.js';
+import { allows } from '../lib/education-access.js';
+import { educationDb } from '../lib/education-db.js';
 import { getCatalogTotals } from '../lib/home-stats.js';
 import { cleanGeometryDiagram } from '../lib/geometry-diagram.js';
 import { canAccessProblem, supportVisibility } from '../lib/problem-access.js';
@@ -253,14 +256,20 @@ export default async function handler(req, res) {
   if (req.method === 'OPTIONS') return res.status(200).end();
 
   const session = await getSession(req);
+  if (['app_shell', 'protected_asset', 'blocked_static'].includes(req.query?.resource)) {
+    if (req.method !== 'GET') return res.status(405).end();
+    try { if (await serveEducationPage(req, res, session)) return; }
+    catch { return res.status(500).json({ success: false, error: 'Không tải được giao diện học tập' }); }
+  }
   if (!session) return res.status(401).json({ success: false, error: 'Vui lòng đăng nhập lại' });
 
   try {
-    const db = await getDb();
+    const db = educationDb(await getDb(), session);
     if (await handleMathSupport({ db, req, res, session })) return;
 
     if (req.method === 'GET') {
       const resource = cleanText(req.query?.resource, 30);
+      if (['exam_trend_reports', 'trend_theories', 'rag_status', 'rag_logs'].includes(resource) && !allows(session, 'upper_secondary')) return res.status(403).json({ success: false, error: 'Nội dung thuộc cấp Trung học phổ thông' });
       if (!ALLOWED_RESOURCES.has(resource)) {
         return res.status(400).json({ success: false, error: 'Loại dữ liệu không hợp lệ' });
       }
@@ -350,6 +359,7 @@ export default async function handler(req, res) {
         if (!requireContentManager(session, res)) return;
         const problemId = objectId(cleanText(req.query?.problemId, 80));
         if (!problemId) return res.status(400).json({ success: false, error: 'Mã câu hỏi không hợp lệ' });
+        if (!await db.collection('problems').findOne({ _id: problemId })) return res.status(403).json({ success: false, error: 'Không có quyền truy cập câu hỏi' });
         const items = await db.collection('content_revisions')
           .find({ problemId })
           .sort({ createdAt: -1 })
@@ -689,6 +699,8 @@ export default async function handler(req, res) {
     const body = parseBody(req);
     if (!body) return res.status(400).json({ success: false, error: 'JSON không hợp lệ' });
     const { action, payload = {} } = body;
+    if (!allows(session, 'shared')) return res.status(403).json({ success: false, error: 'Tài khoản chưa được cấp quyền cấp học' });
+    if (/trend|^rag_|^migrate_tst/.test(action) && !allows(session, 'upper_secondary')) return res.status(403).json({ success: false, error: 'Nội dung thuộc cấp Trung học phổ thông' });
     const now = new Date();
     if (await handleMathSupport({ db, req, res, session, action, payload })) return;
 
@@ -709,6 +721,7 @@ export default async function handler(req, res) {
       if (submittedProblemKey) problemFilters.push({ contentKey: submittedProblemKey });
       problemFilters.push({ id: submittedProblemId });
       const registeredProblem = await db.collection('problems').findOne({ $or: problemFilters });
+      if (!registeredProblem && Object.hasOwn(session, 'educationLevels')) return res.status(403).json({ success: false, error: 'Bài toán chưa đăng ký hoặc không thuộc cấp học được cấp quyền' });
       if (registeredProblem && !canAccessProblem(registeredProblem, session)) return res.status(403).json({ success: false, error: 'Bạn không có quyền truy cập bài toán này' });
       if (registeredProblem && !['admin', 'teacher'].includes(session.role)) {
         const registeredSet = registeredProblem.setId
@@ -1337,6 +1350,7 @@ export default async function handler(req, res) {
     }
 
     if (action === 'create_exam_from_ocr') {
+      if (!allows(session, payload.destination === 'admission' ? 'lower_secondary' : 'upper_secondary')) return res.status(403).json({ success: false, error: 'Đề thi không thuộc cấp học được cấp quyền' });
       const isMock = payload.destination === 'mock';
       const isRegional = payload.destination === 'regional';
       const catalogDestination = { admission: { category: 'specialized-admission', prefix: 'admission-', group: 'specialized_admission' }, vmo: { category: 'vmo-official', prefix: 'vmo-', group: 'vmo_official' }, olympic: { category: 'imo-olympic', prefix: 'olympic-', group: 'imo_olympic' }, olympic30: { category: 'olympic-30-4', prefix: 'olympic30-', group: 'olympic_30_4', graded: true }, duyenhai: { category: 'duyen-hai-bac', prefix: 'duyenhai-', group: 'duyen_hai_bac', graded: true } }[payload.destination];
@@ -1693,6 +1707,7 @@ export default async function handler(req, res) {
 
     return res.status(400).json({ success: false, error: 'Thao tác không hợp lệ' });
   } catch (error) {
+    if (error?.code === 'EDUCATION_ACCESS_DENIED') return res.status(403).json({ success: false, error: error.message });
     console.error('[API data]', error);
     return res.status(500).json({ success: false, error: 'Không thể xử lý dữ liệu cơ sở dữ liệu' });
   }

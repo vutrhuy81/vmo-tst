@@ -1,3 +1,4 @@
+import { allows } from '../lib/education-access.js';
 import { canAccessProblem } from '../lib/problem-access.js';
 import { mathematicalAuditInstruction, auditEvidence } from '../lib/math-audit.js';
 import { retrieveVerifiedContext } from '../lib/rag-retrieval.js';
@@ -118,6 +119,7 @@ export default async function handler(req, res) {
   if (req.method !== 'POST') return res.status(405).json({ success: false, error: 'Method not allowed' });
   const session = await getSession(req);
   if (!session) return res.status(401).json({ success: false, error: 'Vui lòng đăng nhập lại' });
+  if (!allows(session, 'shared')) return res.status(403).json({ success: false, error: 'Tài khoản chưa được cấp quyền cấp học' });
   if (!checkRateLimit(session.username, 8)) return res.status(429).json({ success: false, error: 'Bạn đang gửi yêu cầu quá nhanh' });
   const body = parseBody(req);
   if (!body) return res.status(400).json({ success: false, error: 'JSON không hợp lệ' });
@@ -126,7 +128,7 @@ export default async function handler(req, res) {
   if (!solutionText && !solutionImage) return res.status(400).json({ success: false, error: 'Cần có văn bản hoặc ảnh bài giải' });
   const outputLanguage = body.lang === 'en' ? 'English' : 'Vietnamese';
 
-  if (!['admin', 'teacher'].includes(session.role)) {
+  if (session.role !== 'admin') {
     const problemRef = text(body.problemKey || body.problemId, 180);
     if (problemRef) {
       const filters = [{ contentKey: problemRef }, { id: problemRef }];

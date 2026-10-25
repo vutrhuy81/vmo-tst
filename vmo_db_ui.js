@@ -1946,7 +1946,8 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
   }
 
   function requireTrendUiAction() {
-    if (window.VMOAuth?.getSession?.()) return true;
+    const session = window.VMOAuth?.getSession?.();
+    if (session && (!window.MathAppEducation || window.MathAppEducation.moduleAllowed(session, 'trends'))) return true;
     showToast('Vui lòng đăng nhập để sử dụng AI xu hướng đề.', false);
     return false;
   }
@@ -1979,6 +1980,29 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
     ensureSubmissionFilterUi(modal, isAdmin);
     ensureLearningDashboardUi(modal, isAdmin);
     ensureExamTrendUi(modal, isAdmin);
+    const policy = window.MathAppEducation;
+    if (policy) {
+      const session = window.VMOAuth?.getSession?.();
+      const upper = policy.allows(session, 'upper_secondary');
+      const lower = policy.allows(session, 'lower_secondary');
+      const examsTab = modal.querySelector('#hub-tab-exams');
+      if (examsTab) examsTab.style.display = upper ? '' : 'none';
+      const docsTab = modal.querySelector('#hub-tab-docs');
+      if (docsTab) docsTab.style.display = (upper || lower) ? '' : 'none';
+      modal.querySelectorAll('#docDestination option').forEach(option => {
+        if (!policy.allows(session, option.value === 'admission' ? 'lower_secondary' : 'upper_secondary')) option.remove();
+      });
+      for (const selector of ['#hubCatalogGroup', '#hubSubSource']) {
+        const select = modal.querySelector(selector);
+        if (select && lower && !select.querySelector('option[value="specialized_admission"]')) {
+          const option = document.createElement('option');option.value = 'specialized_admission';option.textContent = 'Đề vào lớp 10 chuyên';select.appendChild(option);
+        }
+        select?.querySelectorAll('option').forEach(option => {
+          if (option.value && !policy.contentAllowed(session, { sourceGroup: option.value })) option.remove();
+        });
+      }
+      if (modal.querySelector('#docDestination')?.value === 'admission') window.syncDocumentDestination?.();
+    }
   }
 
   function ensureExamOcrForm(modal) {
@@ -2440,6 +2464,7 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
     const tabs = modal.querySelector('#hub-tab-events')?.parentElement;
     const body = modal.querySelector('.vmo-modal-body');
     if (!tabs || !body || modal.querySelector('#hub-tab-trends')) return;
+    if (window.MathAppEducation && !window.MathAppEducation.moduleAllowed(window.VMOAuth?.getSession?.(), 'trends')) return;
     const button = document.createElement('button');
     button.type = 'button';
     button.className = 'hub-tab-btn';
@@ -3641,6 +3666,8 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
   };
 
   window.switchHubTab = function(tabName) {
+    const policy = window.MathAppEducation, session = window.VMOAuth?.getSession?.();
+    if (policy && ((['exams', 'trends'].includes(tabName) && !policy.allows(session, 'upper_secondary')) || (tabName === 'docs' && !policy.allows(session, 'upper_secondary') && !policy.allows(session, 'lower_secondary')))) return;
     ['events', 'docs', 'exams', 'catalog', 'subs', 'progress', 'trends'].forEach(t => {
       const btn = document.getElementById('hub-tab-' + t);
       const panel = document.getElementById('hub-panel-' + t);

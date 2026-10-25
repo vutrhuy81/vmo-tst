@@ -25,6 +25,7 @@ const VMOAuth = (() => {
     const sessionData = {
       username: user.username,
       role: user.role || 'user',
+      ...(Array.isArray(user.educationLevels) ? { educationLevels: user.educationLevels } : {}),
       name: user.fullName || user.name || user.username,
       photoURL: user.photoURL || '',
       uid: user.uid || '',
@@ -135,12 +136,16 @@ const VMOAuth = (() => {
     return adminRequest('list_users');
   }
 
-  function createUser(username, password, role = 'student', fullName = '') {
-    return adminRequest('create_user', { username, password, role, fullName });
+  function createUser(username, password, role = 'student', fullName = '', educationLevels = []) {
+    return adminRequest('create_user', { username, password, role, fullName, educationLevels });
   }
 
   function deleteUser(targetUsername) {
     return adminRequest('delete_user', { targetUsername });
+  }
+
+  function updateEducationLevels(targetUsername, educationLevels) {
+    return adminRequest('update_education_levels', { targetUsername, educationLevels });
   }
 
   function updateRole(targetUsername, role) {
@@ -198,10 +203,21 @@ const VMOAuth = (() => {
       window.VMOIdleTracker.start();
     }
 
+    fetch('/api/auth', { method: 'POST', credentials: 'same-origin', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ action: 'me' }) })
+      .then(async response => {
+        if (response.status === 401) { await logout('permissions_changed');return; }
+        if (!response.ok) return;
+        const data = await response.json();
+        if (!data.success || !data.user) return;
+        if (data.user.role !== sess.role || JSON.stringify(data.user.educationLevels) !== JSON.stringify(sess.educationLevels)) {
+          const remember = !!localStorage.getItem(SESSION_KEY);
+          clearSession();setSession(data.user, remember);window.location.reload();
+        }
+      }).catch(() => {});
     return sess;
   }
 
-  function redirectIfLoggedIn(redirectUrl = 'index.html') {
+  async function redirectIfLoggedIn(redirectUrl = 'index.html') {
     const sess = getSession();
     if (!sess) return false;
 
@@ -214,8 +230,17 @@ const VMOAuth = (() => {
       return false;
     }
 
-    window.location.replace(redirectUrl);
-    return true;
+    try {
+      const response = await fetch('/api/auth', { method: 'POST', credentials: 'same-origin', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ action: 'me' }) });
+      if (response.status === 401) { clearSession();return false; }
+      if (!response.ok) return false;
+      const data = await response.json();
+      if (!data.success || !data.user) return false;
+      const remember = !!localStorage.getItem(SESSION_KEY);
+      clearSession();setSession(data.user, remember);
+      window.location.replace(redirectUrl);
+      return true;
+    } catch { return false; }
   }
 
   return {
@@ -233,6 +258,7 @@ const VMOAuth = (() => {
     deleteUser,
     updatePassword,
     updateRole,
+    updateEducationLevels,
     LAST_ACTIVITY_KEY
   };
 })();

@@ -247,6 +247,7 @@
   window.refreshVMOCatalogStats();
 
   async function ensureTabContent(tabId) {
+    if (window.MathAppEducation && !window.MathAppEducation.moduleAllowed(window.VMOAuth?.getSession?.(), tabId.replace(/^tab-/, ''))) return null;
     return qs('#' + tabId);
   }
 
@@ -269,6 +270,7 @@
   // 1. Chuyển đổi Tab nội dung chính & đồng bộ Sidebar tương ứng
   window.switchTab = async function (tabId, btn) {
     if (!qs('#' + tabId)) return;
+    if (window.MathAppEducation && !window.MathAppEducation.moduleAllowed(window.VMOAuth?.getSession?.(), tabId.replace(/^tab-/, ''))) return;
     const version = ++tabSwitchVersion;
     closeModuleNavigation(true);
     closeToc(false);
@@ -610,4 +612,50 @@
 
     qsa('#book-content h1[id], #book-content h2[id]').forEach(h => obs.observe(h));
   }
+  window.refreshEducationAccess = function() {
+    const policy = window.MathAppEducation;
+    if (!policy) return;
+    const user = window.VMOAuth?.getSession?.();
+    const isEn = window.currentLang === 'en';
+    qsa('#moduleNavigation .tab-btn').forEach(button => {
+      const allowed = policy.moduleAllowed(user, button.id.replace('tab-btn-', ''));
+      button.hidden = !allowed;
+      button.style.display = allowed ? '' : 'none';
+      const pane = qs('#' + button.id.replace('tab-btn-', 'tab-'));
+      if (pane && !allowed) { pane.classList.remove('active');pane.hidden = true; }
+      else if (pane) pane.hidden = false;
+      if (!allowed) button.classList.remove('active');
+    });
+    qsa('.navigation-group').forEach(group => { group.hidden = ![...group.querySelectorAll('.tab-btn')].some(button => !button.hidden); });
+    const grants = policy.assigned(user);
+    const summary = qs('#educationAccessSummary');
+    if (summary) summary.textContent = grants.length
+      ? (isEn ? 'Your levels: ' : 'Cấp học được truy cập: ') + grants.map(level => policy.labels[level][isEn ? 1 : 0]).join(' · ')
+      : (isEn ? 'Awaiting education level assignment by Admin.' : 'Đang chờ Admin phân cấp học cho tài khoản.');
+    for (const [key, icon] of [['primary', '🌱'], ['university', '🎓']]) {
+      const button = qs('#tab-btn-' + key);if (button) button.textContent = icon + ' ' + policy.labels[key][isEn ? 1 : 0];
+    }
+    qsa('[data-level-title]').forEach(node => { node.textContent = policy.labels[node.dataset.levelTitle][isEn ? 1 : 0]; });
+    qsa('[data-level-empty]').forEach(node => { node.textContent = isEn ? 'Learning materials for this level are being prepared. You can use Math support.' : 'Kho học liệu của cấp học này đang được xây dựng. Bạn có thể sử dụng Hỗ trợ giải toán.'; });
+    if (qs('[data-pending-title]')) qs('[data-pending-title]').textContent = isEn ? 'Awaiting level assignment' : 'Chờ phân cấp học';
+    if (qs('[data-pending-note]')) qs('[data-pending-note]').textContent = isEn ? 'Please contact Admin to request access to your education levels.' : 'Vui lòng liên hệ Admin để được cấp quyền nội dung theo cấp học.';
+    const current = qs('#moduleNavigation .tab-btn.active:not([hidden])');
+    const fallback = qs('#moduleNavigation .tab-btn:not([hidden]):not(#tab-btn-support)') || qs('#tab-btn-support:not([hidden])');
+    if (!current && fallback) window.switchTab(fallback.id.replace('tab-btn-', 'tab-'), fallback);
+    if (!fallback) {
+      qsa('.tab-pane').forEach(pane => pane.classList.remove('active'));
+      qs('#tab-pending')?.classList.add('active');
+      qsa('#mainSidebar > div').forEach(node => { node.style.display = 'none'; });
+      const activeLabel = qs('#activeModuleLabel');if (activeLabel) activeLabel.textContent = isEn ? 'Awaiting level assignment' : 'Chờ phân cấp học';
+    }
+    qsa('.hero-stats [data-catalog-stat]').forEach(node => {
+      const key = node.dataset.catalogStat;
+      const module = { support: 'support', mockSets: 'mock', tst: 'tst', vmo: 'vmo', olympic: 'olympic', regional: 'history', olympic30: 'olympic30', duyenhai: 'duyenhai' }[key];
+      if (module) { node.parentElement.hidden = !policy.moduleAllowed(user, module);node.parentElement.style.display = node.parentElement.hidden ? 'none' : ''; }
+    });
+    window.refreshModuleNavigation?.();
+    syncStickyOffset();
+  };
+  window.addEventListener('langchange', () => window.refreshEducationAccess());
+  window.refreshEducationAccess();
 })();

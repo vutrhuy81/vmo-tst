@@ -111,3 +111,24 @@ Hình biểu diễn một cấu hình minh họa, không phải chứng minh hì
 - **Thành viên** tiếp tục học tập theo quyền hiện có và được sử dụng **Kho dữ liệu → AI xu hướng đề**: phân tích kho đề công khai; tạo/lưu/xem/sửa/xóa báo cáo của mình; xem/tạo nội dung cơ sở lý thuyết để học. Không được thay đổi thư viện lý thuyết dùng chung hoặc vận hành công cụ quản trị kho tham chiếu. Báo cáo mới gắn `ownerId` từ phiên đăng nhập, không tin thông tin chủ sở hữu do client gửi; báo cáo cũ chưa có `ownerId` vẫn do Admin/Giáo viên quản lý, không tự gán quyền sở hữu cho Thành viên chỉ vì trùng tên tài khoản.
 
 Quyền được kiểm tra ở API bên cạnh việc ẩn/hiện giao diện. Không tự chuyển vai trò của các tài khoản hiện có. Chạy `node test/teacher-permissions.test.mjs` để kiểm tra ranh giới quản trị tài khoản, quản trị nội dung, truy cập AI xu hướng đề và quyền sở hữu báo cáo.
+
+## Cấp học và phạm vi nội dung
+
+Cấp học độc lập với vai trò Admin/Giáo viên/Thành viên. Admin chọn nhiều ô trong **Quản lý tài khoản → Cấp học → Lưu cấp học**, hoặc chọn khi tạo tài khoản. Giáo viên chỉ quản trị nội dung trong cấp học được cấp; không được tự cấp quyền cho mình hoặc tài khoản khác. Admin luôn quản trị toàn hệ thống.
+
+| Cấp học | Nội dung hiện có |
+| --- | --- |
+| Tiểu học (`primary`) | Khu vực riêng; chưa có bộ học liệu riêng |
+| THCS (`lower_secondary`) | Đề thi vào lớp 10 chuyên |
+| THPT (`upper_secondary`) | Tài liệu chuyên đề VMO, thi thử VMO, TST, VMO, IMO–Olympic, Đà Nẵng–Quảng Nam, Olympic 30/4, Duyên hải miền Bắc; AI xu hướng đề |
+| Đại học (`university`) | Khu vực riêng; chưa có bộ học liệu riêng |
+
+**Hỗ trợ giải toán** dùng chung cho mọi cấp đã được cấp quyền, vẫn giữ quyền sở hữu bài toán riêng lẻ. Chọn THCS + THPT mở hợp của hai danh mục. Không có cấp nào (`[]`) nghĩa là chờ Admin cấp quyền; không tự mở nội dung khi tự đăng ký. Tài khoản cũ chưa có trường `educationLevels` tiếp tục được THCS + THPT, giữ quyền hiện tại; không cần sửa hàng loạt dữ liệu. Nội dung tương lai có thể gắn `educationLevel` rõ ràng; dữ liệu cũ phân loại từ category/sourceGroup/group, mặc định THPT, riêng tuyển sinh chuyên là THCS.
+
+Phiên ký chứa danh sách cấp học chuẩn hóa; mỗi yêu cầu đối chiếu bản ghi tài khoản. Thay đổi quyền hoặc cấp học từ chối phiên cũ; người dùng đăng nhập lại. Cookie cũ chưa có danh sách cấp học dùng phạm vi hiện tại từ DB. Giao diện kiểm tra lại phiên khi mở trang, không tin phạm vi trong localStorage làm căn cứ cho API.
+
+`educationDb` áp cùng điều kiện phạm vi cho đọc danh sách/chi tiết, đếm, aggregate và ghi trong các collection nội dung; bộ lọc client kết hợp bằng `$and` nên không ghi đè được phạm vi. Bài nộp và lời giải lưu tuân theo cấp học. Hướng dẫn AI/đánh giá/vẽ hình và nguồn RAG kiểm tra câu hỏi đã đăng ký; không đưa nguồn ngoài phạm vi vào ngữ cảnh mô hình. Không thêm serverless function (vẫn 12).
+
+Trang chính được phục vụ qua API hiện có với `private, no-store` và `Vary: Cookie`; máy chủ loại tài liệu chuyên đề THPT khỏi HTML của tài khoản ngoài cấp. Đường dẫn HTML nguồn/bản sao/manifest và mã phía máy chủ không được phục vụ trực tiếp; PDF/ảnh học liệu trong assets phải qua kiểm tra THPT. `server.js` sử dụng cùng handler API và cổng trang/tài liệu như Vercel. Việc tải trang và tài liệu cần DB xác thực đang hoạt động; file đã được tải trước đó hoặc nguồn bên ngoài ứng dụng không thể thu hồi bằng phân quyền này.
+
+Kiểm thử thêm: `node test/education-access.test.mjs` (chọn nhiều cấp, cấp học sai/rỗng, quyền Admin, đọc/đếm/ghi theo cấp, chặn query vượt phạm vi, RAG, HTML/PDF và điều hướng). Các fixture sử dụng DB mô phỏng; không thay đổi tài khoản production hoặc tạo học liệu Tiểu học/Đại học bằng dữ liệu giả.

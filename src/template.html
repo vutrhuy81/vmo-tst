@@ -58,6 +58,7 @@ window.MathJax = {
 <link rel="stylesheet" href="i18n.css?v=20260915_2">
 
 <!-- Synchronous Auth Gate: Chặn truy cập nếu chưa đăng nhập -->
+<script src="education_access.js?v=20261025"></script>
 <script src="auth.js?v=20260915_2"></script>
 <script>
 VMOAuth.requireAuth('login.html');
@@ -139,6 +140,7 @@ VMOAuth.requireAuth('login.html');
     </div>
   </div>
 
+  <div id="educationAccessSummary" role="status" style="padding:10px 20px;color:var(--text-muted,#475569);font-size:.9rem;"></div>
   <!-- Content navigation: all modules visible on desktop; one disclosure on small screens. -->
   <div class="nav-tabs-container module-navigation-shell">
     <button id="moduleNavigationToggle" class="module-navigation-toggle" type="button" aria-controls="moduleNavigation" aria-expanded="false">
@@ -149,6 +151,8 @@ VMOAuth.requireAuth('login.html');
       <div class="navigation-group" role="group" aria-labelledby="navGroupLearning">
         <span class="navigation-group-title" id="navGroupLearning">Học tập &amp; luyện tập</span>
         <div class="navigation-group-items">
+          <button class="tab-btn" id="tab-btn-primary" type="button" onclick="switchTab('tab-primary',this)">🌱 Tiểu học</button>
+          <button class="tab-btn" id="tab-btn-university" type="button" onclick="switchTab('tab-university',this)">🎓 Đại học</button>
           <button class="tab-btn active" id="tab-btn-danang" type="button" aria-current="page" onclick="switchTab('tab-danang',this)">📚 Tài liệu chuyên đề VMO</button>
           <button class="tab-btn" id="tab-btn-mock" type="button" onclick="switchTab('tab-mock',this)">🎯 Bộ đề thi thử VMO</button>
           <button class="tab-btn" id="tab-btn-support" type="button" onclick="switchTab('tab-support',this)">🧩 Hỗ trợ giải toán</button>
@@ -215,7 +219,10 @@ VMOAuth.requireAuth('login.html');
     <!-- INJECT:SIDEBAR_HISTORY -->
   </aside>
   <main>
-    <!-- INJECT:TAB_DANANG -->
+    <div class="tab-pane" id="tab-primary"><section class="feed-container"><h2 data-level-title="primary">Tiểu học</h2><p data-level-empty>Kho học liệu của cấp học này đang được xây dựng. Bạn có thể sử dụng Hỗ trợ giải toán.</p></section></div>
+<div class="tab-pane" id="tab-university"><section class="feed-container"><h2 data-level-title="university">Đại học</h2><p data-level-empty>Kho học liệu của cấp học này đang được xây dựng. Bạn có thể sử dụng Hỗ trợ giải toán.</p></section></div>
+<div class="tab-pane" id="tab-pending"><section class="feed-container"><h2 data-pending-title>Chờ phân cấp học</h2><p data-pending-note>Vui lòng liên hệ Admin để được cấp quyền nội dung theo cấp học.</p></section></div>
+<!-- INJECT:TAB_DANANG -->
     <!-- INJECT:TAB_MOCK -->
     <!-- INJECT:TAB_TST -->
     <!-- INJECT:TAB_VMO -->

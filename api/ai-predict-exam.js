@@ -1,3 +1,4 @@
+import { allows } from '../lib/education-access.js';
 import { getDb } from '../lib/db.js';
 import { getSession } from '../lib/session.js';
 import { checkRateLimit, generateJson, handleAiError, parseBody, prepare, text } from '../lib/ai.js';
@@ -45,6 +46,7 @@ export default async function handler(req, res) {
   if (req.method !== 'POST') return res.status(405).json({ success: false, error: 'Method not allowed' });
   const session = await getSession(req);
   if (!session) return res.status(401).json({ success: false, error: 'Vui lòng đăng nhập lại' });
+  if (!allows(session, 'upper_secondary')) return res.status(403).json({ success: false, error: 'Chức năng này thuộc cấp Trung học phổ thông' });
   if (!['admin', 'teacher'].includes(session.role)) return res.status(403).json({ success: false, error: 'Chỉ Admin hoặc Giáo viên được dự đoán đề' });
 
   const body = parseBody(req);
