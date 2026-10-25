@@ -342,6 +342,8 @@ export async function ocrMathSupport(image) {
   return data.data;
 }
 
+export async function updateUniversityTheory(payload) { return normalize(await mutate('update_university_theory',payload)); }
+
 export async function updateCatalogContent(id, contentData = {}) {
   return normalize(await mutate('update_catalog_content', { id, ...contentData }));
 }
@@ -610,6 +612,7 @@ const VMODataService = Object.freeze({
   updateCatalogItem,
   getContentRevisions,
   updateCatalogContent,
+  updateUniversityTheory,
   getMathSupportProblems, createMathSupport, getMathSupportImage, ocrMathSupport,
   migrateTstReferenceLinks,
   updateProblemReferenceLinks,

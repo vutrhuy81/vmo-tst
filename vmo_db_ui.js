@@ -166,7 +166,7 @@
       const header = item.querySelector('.problem-header');
       if (!header || item.querySelector('.btn-submit-solution')) return;
 
-      const problemIdEl = header.querySelector('.problem-id');
+      const problemIdEl = header.querySelector('.problem-id') || item.querySelector('.problem-id');
       const problemTitle = problemIdEl ? (problemIdEl.innerText || problemIdEl.textContent || '').trim() : 'Câu hỏi';
       const identity = getProblemIdentity(item, problemTitle);
       item.dataset.contentKey = identity.problemKey;
@@ -1232,7 +1232,7 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
     let modal = document.getElementById('submissionModal');
     if (!modal) return;
 
-    if (problemCard?.classList?.contains('examplebox')) {
+    if (problemCard?.classList?.contains('examplebox') && !problemCard.querySelector('.problem-content')) {
       problemTitle = headingTextWithoutActions(problemCard.querySelector('.box-heading')) || problemTitle;
     }
 
@@ -5094,6 +5094,10 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
             <strong>🔗 Lời giải tham khảo</strong>
             <span style="font-size:.75rem;color:#64748b;">Mỗi nguồn gồm nhãn hiển thị và URL</span>
           </div>
+          <div id="referenceManagerSolutionWrap" style="display:none;margin:12px 0;">
+            <label for="referenceManagerSolution" style="font-weight:700;">Nội dung lời giải ví dụ (LaTeX)</label>
+            <textarea id="referenceManagerSolution" rows="12" style="width:100%;box-sizing:border-box;"></textarea>
+          </div>
           <div id="referenceLinksRows"></div>
           <button type="button" onclick="addReferenceLinkRow()" style="padding:7px 11px;border:1px solid #0891b2;border-radius:6px;background:#ecfeff;color:#155e75;font-weight:700;cursor:pointer;">＋ Thêm link</button>
           <label for="referenceManagerChangeNote" style="display:block;font-weight:700;margin:12px 0 4px;">Ghi chú thay đổi</label>
@@ -5175,6 +5179,8 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
       modal.dataset.problemVersion = String(Number(problem.version) || 1);
       document.getElementById('referenceLinksProblemKey').textContent = `Câu hỏi: ${contentKey} · Phiên bản ${Number(problem.version) || 1}`;
       contentInput.value = problem.content || '';
+      document.getElementById('referenceManagerSolutionWrap').style.display = problem.sourceGroup === 'university_materials' ? '' : 'none';
+      document.getElementById('referenceManagerSolution').value = problem.referenceSolution || '';
       contentInput.disabled = false;
       if (problem.predictionReview?.status === 'gpt_rejected') {
         const review = document.getElementById('referenceManagerPredictionReview');
@@ -5230,17 +5236,19 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
     const originalLabel = saveButton?.textContent || 'Lưu thay đổi';
     if (saveButton) { saveButton.disabled = true; saveButton.textContent = 'Đang lưu...'; }
     try {
+      const solution = problem.sourceGroup === 'university_materials' ? document.getElementById('referenceManagerSolution').value : problem.referenceSolution || '';
+      const solutionChanged = solution !== (problem.referenceSolution || '');
       const updated = await window.VMODataService.updateCatalogContent(problemId, {
         content,
-        referenceSolution: problem.referenceSolution || '',
-        referenceSolutionVerified: problem.referenceSolutionVerified === true,
+        referenceSolution: solution,
+        referenceSolutionVerified: !solutionChanged && problem.referenceSolutionVerified === true,
         referenceLinks: links,
         changeNote: changeNote || 'Cập nhật từ chức năng Quản lý nguồn',
         resolvePredictionReview,
         expectedVersion
       });
       const nextVersion = Number(updated?.version) || expectedVersion + 1;
-      const nextProblem = { ...problem, content, referenceLinks: links, version: nextVersion,
+      const nextProblem = { ...problem, content, referenceSolution: solution, referenceSolutionVerified: !solutionChanged && problem.referenceSolutionVerified === true, referenceLinks: links, version: nextVersion,
         ...(resolvePredictionReview ? { predictionReview: { ...problem.predictionReview, status: 'admin_corrected' },
           status: 'published', allowSubmission: true, allowAiEvaluation: true } : {}) };
       window.mongoProblemsByContentKey.set(contentKey, nextProblem);
@@ -5254,6 +5262,8 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
           if (window.safeRenderMathJaxToElement) window.safeRenderMathJaxToElement(displayed, content);
           else displayed.textContent = content;
         }
+        const answer = item.querySelector('[data-university-reference-solution]');
+        if (answer) { if(window.safeRenderMathJaxToElement)window.safeRenderMathJaxToElement(answer,solution);else answer.textContent=solution; }
         if (resolvePredictionReview) item.querySelector('.prediction-review-warning')?.remove();
       });
       window.closeReferenceLinksManager();

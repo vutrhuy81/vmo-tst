@@ -1,4 +1,4 @@
-import { getUniversityMaterials, universityMaterialCatalog } from '../lib/university-materials.js';
+import { getUniversityMaterials, universityMaterialCatalog, updateUniversityTheory } from '../lib/university-materials.js';
 import { universityCourse } from '../lib/university-courses.js';
 import { serveEducationPage } from '../lib/app-shell.js';
 import { allows } from '../lib/education-access.js';
@@ -717,6 +717,11 @@ export default async function handler(req, res) {
     if (/trend|^rag_|^migrate_tst/.test(action) && !allows(session, 'upper_secondary')) return res.status(403).json({ success: false, error: 'Nội dung thuộc cấp Trung học phổ thông' });
     const now = new Date();
     if (await handleMathSupport({ db, req, res, session, action, payload })) return;
+    if(action === 'update_university_theory') {
+      try { return res.status(200).json({success:true,item:await updateUniversityTheory(db,session,payload)}); }
+      catch(error) { if(error.status)return res.status(error.status).json({success:false,error:error.message});throw error; }
+    }
+
 
     if (action === 'submit_solution') {
       const submittedProblemId = cleanText(payload.problemId, 180);
