@@ -344,8 +344,9 @@
             <span style="font-size: 0.8rem; font-weight: 500; color: #64748b; margin-left: 4px;">• ${topic || guideData.branch || defaultTopic}</span>
           </div>
           <div class="ai-guide-actions">
+            <button type="button" class="btn-guide-action btn-ai-guide-refresh" onclick="regenerateAIGuide('${problemId}',this)">${isEn ? '🔄 Recheck sources / Regenerate' : '🔄 Đối chiếu nguồn / Tạo lại'}</button>
             <button type="button" class="btn-guide-action" id="btn-save-ai-${problemId}" onclick="saveAIGuideToDatabase('${problemId}', '${(topic || guideData.branch || defaultTopic).replace(/'/g, "\\'")}')" title="Lưu hướng dẫn giải này vào cơ sở dữ liệu" style="color: #0284c7; font-weight: 600;">
-              ${guideData.persisted ? '💾 Cập nhật lời giải đã lưu' : '🚀 Lưu bài giải vào cơ sở dữ liệu'}
+              ${guideData.persisted || guideData.savedGuideId ? '💾 Cập nhật lời giải đã lưu' : '🚀 Lưu bài giải vào cơ sở dữ liệu'}
             </button>
             ${canEditGuide ? `<button type="button" class="btn-guide-action btn-ai-guide-edit" onclick="editAIGuideContent('${problemId}')" style="color:#7c3aed;font-weight:600;" title="Chỉnh sửa bốn phần nội dung Markdown/LaTeX trước hoặc sau khi lưu">✏️ Chỉnh sửa nội dung</button>` : ''}
             ${canEditGuide ? `<button type="button" class="btn-guide-action btn-ai-guide-apply" onclick="applyAIGuideEdits('${problemId}')" style="display:none;color:#047857;font-weight:600;">👁️ Áp dụng & xem trước</button>` : ''}
@@ -426,9 +427,9 @@
     return (holder.textContent || '').replace(/\uE120(\d+)\uE121/g, (_, index) => math[Number(index)]).trim();
   }
 
-  window.openAIGuide = async function(btn) {
+  window.openAIGuide = async function(btn, options = {}) {
     const card = btn.closest('.problem-item') || btn.closest('.examplebox') || btn.closest('.book-subsection') || btn.closest('article');
-    if (!card) return;
+    if (!card || (card.dataset.guideRefreshing === 'true' && !options.regenerate)) return;
 
     // Xác định ID và thông tin câu hỏi
     const idEl = card.querySelector('.problem-id span:first-child') || card.querySelector('.problem-id') || card.querySelector('.box-heading') || card.querySelector('h3');
@@ -450,12 +451,12 @@
     let existingPanel = card.querySelector('.ai-guide-panel');
 
     if (existingPanel) {
-      if (existingPanel.dataset.guideError === 'true') {
+      if (!options.regenerate && existingPanel.dataset.guideError === 'true') {
         existingPanel.remove();
         existingPanel = null;
       }
     }
-    if (existingPanel) {
+    if (existingPanel && !options.regenerate) {
       const isVisible = existingPanel.style.display !== 'none';
       existingPanel.style.display = isVisible ? 'none' : 'block';
       btn.classList.toggle('active', !isVisible);
@@ -494,11 +495,13 @@
       card.appendChild(tempPanel);
     }
 
+    const previousContext = aiGuideContexts.get(problemId);
+    if(options.regenerate)tempPanel.id += '-refresh';
     let guideData = null;
     let rawGuide = null;
 
     // Ưu tiên khôi phục hướng dẫn mà người dùng đã chủ động lưu trước đó.
-    if (window.VMODataService?.getLatestAiGuide) {
+    if (!options.regenerate && window.VMODataService?.getLatestAiGuide) {
       try {
         const saved = await window.VMODataService.getLatestAiGuide(problemKey);
         if (saved?.aiGuide?.solution) {
@@ -568,6 +571,7 @@
         throw new Error(result.error || `Dịch vụ AI trả về lỗi ${resp.status}`);
       }
     } catch (err) {
+      if(options.regenerate && existingPanel){tempPanel.remove();existingPanel.querySelector('.ai-guide-refresh-error')?.remove();const error=document.createElement('p');error.className='ai-guide-refresh-error';error.setAttribute('role','alert');error.textContent=(err.message || 'Chưa tạo được hướng dẫn mới')+'. Lời giải hiện tại được giữ nguyên.';existingPanel.querySelector('.ai-guide-body')?.prepend(error);window.showVMOToast?.(error.textContent,false);return false;}
       const isEn = window.currentLang === 'en';
       tempPanel.dataset.guideError = 'true';
       tempPanel.innerHTML = `<div class="ai-guide-header"><div class="ai-guide-title"><span>⚠️ ${isEn ? 'Guide not displayed' : 'Chưa hiển thị lời giải'}</span></div></div><div style="padding:18px;color:#991b1b;background:#fff7ed;"><strong>${isEn ? 'Quality gate rejected this result.' : 'Kết quả chưa vượt qua kiểm định chất lượng.'}</strong><div style="margin-top:8px;">${String(err.message || '').replace(/[<>&]/g, '')}</div><div style="margin-top:8px;color:#475569;">${isEn ? 'Click the AI Solution Guide button again to retry.' : 'Bấm lại nút AI Hướng dẫn giải để thử lại.'}</div></div>`;
@@ -577,12 +581,14 @@
     }
 
     if (!guideData) {
+      if(options.regenerate && existingPanel){tempPanel.remove();return false;}
       tempPanel.dataset.guideError = 'true';
       btn.classList.remove('active');
       btn.innerHTML = '<span class="guide-sparkle">🔄</span> Thử lại AI Hướng dẫn giải';
       return;
     }
 
+    if(options.regenerate)guideData.savedGuideId=previousContext?.savedGuideId || '';
     aiGuideContexts.set(problemId, {
       problemKey,
       problemTitle,
@@ -594,21 +600,37 @@
       sourceType: card.dataset.sourceType || '',
       sourceGroup: card.dataset.sourceGroup || '',
       rawGuide,
-      savedGuideId: guideData.savedGuideId || '',
+      savedGuideId: guideData.savedGuideId || (options.regenerate ? previousContext?.savedGuideId : '') || '',
       adminEdited: false
     });
 
     // Render HTML hoàn chỉnh
+    if(options.regenerate && existingPanel){window.MathJax?.typesetClear?.([existingPanel]);existingPanel.remove();}
     tempPanel.outerHTML = renderAIGuideHtml(problemId, guideData, problemTopic);
     const isEn = (window.currentLang === 'en');
     btn.innerHTML = isEn ? '<span class="guide-sparkle">🙈</span> Hide Guide' : '<span class="guide-sparkle">🙈</span> Ẩn hướng dẫn';
 
     // Typeset LaTeX bằng MathJax
     const finalPanel = document.getElementById(`ai-panel-${problemId}`);
+    if(options.regenerate){
+      const notice=document.createElement('p');notice.className='ai-guide-refresh-notice';notice.textContent=window.currentLang==='en'?'Sources rechecked and a new guide generated. Save/Update to store this result.':'Đã đối chiếu lại nguồn và tạo hướng dẫn mới. Bấm Lưu/Cập nhật để lưu kết quả này.';finalPanel?.querySelector('.ai-guide-body')?.prepend(notice);
+    }
     mountGuideGeometry(finalPanel, rawGuide);
     if (finalPanel && window.MathJax?.typesetPromise) {
       window.MathJax.typesetPromise([finalPanel]).catch(() => {});
     }
+  };
+
+  window.regenerateAIGuide = async function(problemId, button) {
+    if(button?.disabled)return;
+    if(!window.confirm(window.currentLang==='en'?'Recheck verified sources and generate a new guide? Unsaved edits will be replaced on success.':'Đối chiếu lại nguồn đã xác minh và tạo hướng dẫn mới? Chỉnh sửa chưa lưu sẽ được thay bằng kết quả mới khi thành công.'))return;
+    const panel=document.getElementById(`ai-panel-${problemId}`);
+    const card=panel?.closest('.problem-item, .examplebox, .book-subsection, article');
+    const guideButton=card?.querySelector('.btn-ai-guide');if(!guideButton)return;
+    if(card.dataset.guideRefreshing==='true')return;card.dataset.guideRefreshing='true';
+    if(button)button.disabled=true;
+    try { await window.openAIGuide(guideButton,{regenerate:true}); }
+    finally { delete card.dataset.guideRefreshing;if(button)button.disabled=false; }
   };
 
   // Render from source in an isolated root, then copy the finished MathJax output.
@@ -1258,6 +1280,8 @@
         btn.innerHTML = isEn ? '<span class="guide-sparkle">✨</span> AI Solution Guide' : '<span class="guide-sparkle">✨</span> AI Hướng dẫn giải';
       }
     });
+
+    document.querySelectorAll('.btn-ai-guide-refresh').forEach(button=>{button.textContent=isEn?'🔄 Recheck sources / Regenerate':'🔄 Đối chiếu nguồn / Tạo lại';});
 
     // Cập nhật tiêu đề trong các panel đang mở
     document.querySelectorAll('.ai-guide-panel').forEach(panel => {
