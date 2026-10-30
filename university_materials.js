@@ -127,16 +127,16 @@
     const q=(document.getElementById('universityMaterialsSearch')?.value||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().replace(/đ/g,'d');
     root.querySelectorAll('.university-material-section').forEach(section=>{section.hidden=!!q&&!section.textContent.normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().replace(/đ/g,'d').includes(q);});
   }
-  function buildToc(){toc.replaceChildren();picker.replaceChildren();
+  function buildToc(){const previous=picker.value;toc.replaceChildren();picker.replaceChildren();
     catalog.courses.forEach(course=>{const opt=node('option',`${course.code}: ${course.nameVi}`);opt.value=course.id;picker.append(opt);
       const details=node('details');details.dataset.materialCourse=course.id;const summary=node('summary',`${course.code}: ${course.nameVi}`);
-      const button=node('button','Mở học phần');button.type='button';button.addEventListener('click',()=>{picker.value=course.id;window.loadUniversityMaterials(true);});details.append(summary,button);toc.append(details);});
+      const button=node('button','Mở học phần');button.type='button';button.addEventListener('click',()=>{picker.value=course.id;window.loadUniversityMaterials(true);});details.append(summary,button);toc.append(details);});if(catalog.courses.some(c=>c.id===previous))picker.value=previous;
   }
   window.loadUniversityMaterials=async function(force=false){
     if(!allowed())return;
     const version=++requestVersion;root.setAttribute('aria-busy','true');
     try{
-      if(!catalog){catalog=await read();if(version!==requestVersion)return;buildToc();document.getElementById('universityMaterialsStats').textContent=`${catalog.courses.length} học phần · ${catalog.courses.reduce((n,c)=>n+c.sectionCount,0)} phần lý thuyết · ${catalog.courses.reduce((n,c)=>n+c.exampleCount,0)} ví dụ có lời giải`;}
+      if(!catalog||force){catalog=await read();if(version!==requestVersion)return;buildToc();document.getElementById('universityMaterialsStats').textContent=`${catalog.courses.length} học phần · ${catalog.courses.reduce((n,c)=>n+c.sectionCount,0)} chuyên đề · ${catalog.courses.reduce((n,c)=>n+c.exampleCount,0)} ví dụ có lời giải`;}
       const id=picker.value||catalog.courses[0].id;if(loaded===id&&!force)return;
       const data=await read(id);if(version!==requestVersion)return;render(data);loaded=id;showSolutions=true;
       toc.querySelectorAll('details').forEach(item=>{item.open=item.dataset.materialCourse===id;});
@@ -144,6 +144,7 @@
     }catch(error){if(version===requestVersion){root.replaceChildren(node('p',error.message));const retry=node('button','Thử tải lại');retry.type='button';retry.addEventListener('click',()=>window.loadUniversityMaterials(true));root.append(retry);}}
     finally{if(version===requestVersion)root.removeAttribute('aria-busy');}
   };
+  window.addEventListener('universitycatalogchange',()=>{catalog=null;loaded='';if(root.closest('.tab-pane')?.classList.contains('active'))window.loadUniversityMaterials(true);});
   picker.addEventListener('change',()=>window.loadUniversityMaterials());
   document.getElementById('universityMaterialsSearch').addEventListener('input',filter);
   document.getElementById('universityMaterialsSolutions').addEventListener('click',()=>{showSolutions=!showSolutions;root.querySelectorAll('.example-solution').forEach(el=>el.classList.toggle('is-collapsed',!showSolutions));root.querySelectorAll('.solution-toggle').forEach(btn=>{btn.textContent=showSolutions?'Ẩn lời giải':'Hiện lời giải';btn.setAttribute('aria-expanded',String(showSolutions));});if(showSolutions)math(root);});

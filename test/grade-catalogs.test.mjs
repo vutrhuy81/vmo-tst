@@ -1,3 +1,4 @@
+import { universityCatalog, resolveUniversityCourse, addUniversityCatalogItem, UNIVERSITY_MAX_DAYS, UNIVERSITY_MAX_QUESTIONS } from '../lib/university-catalog.js';
 import { UNIVERSITY_COURSES, universityCourse, universitySection, universityExamSection } from '../lib/university-courses.js';
 import { educationDb } from '../lib/education-db.js';
 import { allows } from '../lib/education-access.js';
@@ -50,8 +51,8 @@ const db = { collection(name) {
 } };
 const source = fs.readFileSync(new URL('../api/data.js', import.meta.url), 'utf8')
   .replace(/^import .*;\n/gm, '').replace('export default async function handler', 'async function handler');
-const handler = new Function('universitySection','universityExamSection','universityCourse', 'educationDb', 'allows', 'getDb', 'getSession', 'ObjectId', 'recordActivity', 'canAccessProblem', 'supportVisibility', 'handleMathSupport', `${source}\nreturn handler;`)(
-  universitySection,universityExamSection,universityCourse, educationDb, allows,   async () => db, () => ({ role, username: 'tester', ...(educationLevels ? {educationLevels} : {}) }), ObjectId, async () => {}, canAccessProblem, supportVisibility, handleMathSupport);
+const handler = new Function('universityCatalog','resolveUniversityCourse','addUniversityCatalogItem','UNIVERSITY_MAX_DAYS','UNIVERSITY_MAX_QUESTIONS','universitySection','universityExamSection','universityCourse', 'educationDb', 'allows', 'getDb', 'getSession', 'ObjectId', 'recordActivity', 'canAccessProblem', 'supportVisibility', 'handleMathSupport', `${source}\nreturn handler;`)(
+  universityCatalog,resolveUniversityCourse,addUniversityCatalogItem,UNIVERSITY_MAX_DAYS,UNIVERSITY_MAX_QUESTIONS,universitySection,universityExamSection,universityCourse, educationDb, allows,   async () => db, () => ({ role, username: 'tester', ...(educationLevels ? {educationLevels} : {}) }), ObjectId, async () => {}, canAccessProblem, supportVisibility, handleMathSupport);
 async function call(payload, query) {
   const res = { code: 0, setHeader() {}, status(code) { this.code = code; return this; }, json(body) { this.body = body; return this; } };
   await handler({ method: query ? 'GET' : 'POST', query, body: { action: 'create_exam_from_ocr', payload } }, res);
@@ -158,6 +159,7 @@ for (const id of ['olympic30', 'duyenhai']) {
 // All ten University banks share the proven lazy exam renderer and question actions.
 window.CSS ||= {};window.CSS.escape ||= value=>String(value);
 window.VMOAuth={getSession:()=>({role:'admin',username:'tester'})};window.alert=()=>{};
+window.fetch=async url=>({ok:true,json:async()=>({success:true,item:await universityCatalog(db,{role:'admin'})})});
 window.VMODataService={
  getExamCatalog:async()=>[],
  getExamCatalogSummary:async category=>category==='university'?universityResults.map(({problems,...exam})=>({...exam,problemCount:1})):[],
@@ -257,7 +259,7 @@ assert.equal(window.document.getElementById('university-unknown').classList.cont
 const documentNode=window.document;
 documentNode.getElementById('docDestination').value='university';documentNode.getElementById('docCourseId').value=firstCourse.id;window.syncDocumentDestination(true);
 documentNode.getElementById('docSectionId').value=firstCourse.sections[1].id;
-documentNode.getElementById('docYear').value='2028-2029';documentNode.getElementById('docDayNumber').value='2';
+documentNode.getElementById('docQuestionCount').value='1';documentNode.getElementById('docYear').value='2028-2029';documentNode.getElementById('docDayNumber').value='2';
 window.Image=class {constructor(){this.width=20;this.height=20;}set src(value){queueMicrotask(()=>this.onload());}};
 window.HTMLCanvasElement.prototype.getContext=()=>({drawImage(){}});
 window.HTMLCanvasElement.prototype.toDataURL=()=> 'data:image/jpeg;base64,AAAA';
@@ -288,10 +290,66 @@ assert.equal(documentNode.getElementById('docSaveButton').disabled,true);
 // Real OCR handler validates whitelist before model invocation, and includes the topic in its prompt.
 let modelCalls=0,prompt='';
 const ocrSource=fs.readFileSync(new URL('../api/ai-ocr-exam.js',import.meta.url),'utf8').replace(/^import .*;\n/gm,'').replace('export default async function handler','async function handler');
-const ocrHandler=new Function('universityCourse','universitySection','allows','getSession','checkRateLimit','parseBody','prepare','text','generateJson','handleAiError',`${ocrSource}\nreturn handler;`)(universityCourse,universitySection,allows,async()=>({role:'teacher',username:'uni-teacher',educationLevels:['university']}),()=>true,req=>req.body,()=>{},(value,max)=>String(value||'').slice(0,max),async options=>{modelCalls++;prompt=JSON.stringify(options);return{model:'mock',data:{questions:[{questionNumber:1,content:'$1+1$'}]}};},(res,error)=>{throw error;});
+const ocrHandler=new Function('resolveUniversityCourse','UNIVERSITY_MAX_DAYS','UNIVERSITY_MAX_QUESTIONS','getDb','universityCourse','universitySection','allows','getSession','checkRateLimit','parseBody','prepare','text','generateJson','handleAiError',`${ocrSource}\nreturn handler;`)(resolveUniversityCourse,UNIVERSITY_MAX_DAYS,UNIVERSITY_MAX_QUESTIONS,async()=>db,universityCourse,universitySection,allows,async()=>({role:'teacher',username:'uni-teacher',educationLevels:['university']}),()=>true,req=>req.body,()=>{},(value,max)=>String(value||'').slice(0,max),async options=>{modelCalls++;prompt=JSON.stringify(options);return{model:'mock',data:{questions:[{questionNumber:1,content:'$1+1$'}]}};},(res,error)=>{throw error;});
 async function ocrCall(sectionId){const res={status(code){this.code=code;return this;},json(body){this.body=body;return this;}};await ocrHandler({method:'POST',body:{destination:'university',courseId:firstCourse.id,sectionId,image:'data:image/png;base64,AAAA'}},res);return res;}
 assert.equal((await ocrCall('forged')).code,400);assert.equal((await ocrCall(undefined)).code,400);assert.equal(modelCalls,0);
 assert.equal((await ocrCall(firstSection.id)).code,200);assert.equal(modelCalls,1);assert.ok(prompt.includes(firstSection.title));
+
+// Persistent catalog changes, authorization, count validation and days beyond four.
+const admin={role:'admin',username:'tester'},teacher={role:'teacher',username:'teacher',educationLevels:['university']};
+for(const account of [{role:'student',educationLevels:['university']},{...teacher,educationLevels:['upper_secondary']}])
+ await assert.rejects(()=>addUniversityCatalogItem(db,account,{kind:'course',code:'NEW 101',nameVi:'Học phần mới'}),e=>e.status===403);
+const added=await addUniversityCatalogItem(db,teacher,{kind:'course',code:'NEW 101',nameVi:'Toán ứng dụng bổ sung'});
+assert.equal(added.catalog.courses.length,11);
+await assert.rejects(()=>addUniversityCatalogItem(db,admin,{kind:'course',code:'new 101',nameVi:'Duplicate'}),e=>e.status===409);
+const topic=await addUniversityCatalogItem(db,teacher,{kind:'section',courseId:added.courseId,title:'Mô hình ứng dụng'});
+await assert.rejects(()=>addUniversityCatalogItem(db,admin,{kind:'section',courseId:added.courseId,title:'Mô hình ứng dụng'}),e=>e.status===409);
+await assert.rejects(()=>addUniversityCatalogItem(db,admin,{kind:'section',courseId:'forged',title:'No parent'}),e=>e.status===400);
+const reloaded=await resolveUniversityCourse(db,added.courseId);assert.equal(reloaded.sections[0].id,topic.sectionId);
+const extended={destination:'university',courseId:added.courseId,sectionId:topic.sectionId,province:'NEW 101',year:'2031-2032',dayNumber:5,
+ targetAnchor:`university-${added.courseId}-${topic.sectionId}-2031-2032`,sourceImageCount:1,questionCount:120,region:'OTHER',regionName:'Quốc tế',status:'draft',
+ questions:Array.from({length:120},(_,i)=>({questionNumber:i+1,content:`Compute $${i}+1$.`}))};
+role='admin';educationLevels=undefined;
+const extendedResult=await call(extended);assert.equal(extendedResult.code,201);assert.equal(extendedResult.body.item.problems.length,120);
+assert.equal(extendedResult.body.item.region,'OTHER');assert.equal(extendedResult.body.item.regionName,'Quốc tế');assert.equal(extendedResult.body.item.status,'draft');
+assert.match(extendedResult.body.item.problems.at(-1).contentKey,/question-120$/);
+for(const dayNumber of [6,999]){const res=await call({...extended,dayNumber});assert.equal(res.code,201);assert.notEqual(res.body.item.examKey,extendedResult.body.item.examKey);}
+const before=stores.get('exams').length;
+for(const patch of [{dayNumber:1000},{dayNumber:1.5},{questionCount:121},{questionCount:0},{questionCount:1001},
+ {questions:extended.questions.map((q,i)=>i===2?{...q,content:''}:q)},
+ {questions:extended.questions.map((q,i)=>i===2?{...q,questionNumber:1}:q)},
+ {questions:extended.questions.map((q,i)=>i===2?{...q,questionNumber:1001}:q)}])assert.equal((await call({...extended,dayNumber:7,...patch})).code,400);
+assert.equal(stores.get('exams').length,before,'All invalid requests fail before writing');
+for(const region of ['BAC','TRUNG','NAM'])assert.equal((await call({...extended,dayNumber:8+['BAC','TRUNG','NAM'].indexOf(region),region})).body.item.region,region);
+// UI catalogs update immediately, selected custom section persists, day/region controls work.
+window.applyUniversityCatalog(topic.catalog);
+documentNode.getElementById('docCourseId').value=added.courseId;window.syncDocumentDestination(true);
+documentNode.getElementById('docSectionId').value=topic.sectionId;window.syncDocumentDestination();
+assert.equal(documentNode.getElementById('docSectionId').value,topic.sectionId);assert.equal(documentNode.getElementById('docProvince').value,'NEW 101');
+window.addUniversityExamDay();assert.equal(documentNode.getElementById('docDayNumber').selectedOptions[0].textContent,'Ngày thi thứ năm');
+window.addUniversityExamDay();assert.equal(documentNode.getElementById('docDayNumber').value,'6');
+documentNode.getElementById('docUniversityRegion').value='OTHER';window.syncUniversityRegion();assert.equal(documentNode.getElementById('docRegion').value,'OTHER');assert.equal(documentNode.getElementById('docRegionName').disabled,false);
+documentNode.getElementById('docUniversityRegion').value='TRUNG';window.syncUniversityRegion();assert.equal(documentNode.getElementById('docRegion').value,'TRUNG');assert.equal(documentNode.getElementById('docRegionName').disabled,true);
+const mathPreview=documentNode.createElement('div');
+const tex=String.raw`Điều kiện $x\neq1$, $x\notin A$, $\nu+\nabla f$.`;
+window.safeRenderMathJaxToElement(mathPreview,tex);assert.equal(mathPreview.textContent,tex);
+// Exercise the real modal save path, including server error preservation.
+const previousFetch=window.fetch;let rejectCatalog=true;
+window.fetch=async(url,options)=>{const body=JSON.parse(options.body);assert.equal(body.action,'add_university_catalog_item');
+ if(rejectCatalog)return{ok:false,json:async()=>({success:false,error:'Thử lại sau'})};
+ const item=await addUniversityCatalogItem(db,admin,body.payload);return{ok:true,json:async()=>({success:true,item})};};
+await window.openUniversityCatalogEditor('section');
+const catalogModal=documentNode.getElementById('universityCatalogEditor'),catalogForm=catalogModal.querySelector('form');
+catalogForm.elements.title.value='Chuyên đề thêm từ form';
+await catalogForm.onsubmit({preventDefault(){}});assert.ok(catalogModal.textContent.includes('Thử lại sau'));assert.equal(catalogForm.elements.title.value,'Chuyên đề thêm từ form');
+rejectCatalog=false;await catalogForm.onsubmit({preventDefault(){}});
+assert.equal(documentNode.getElementById('universityCatalogEditor'),null);
+assert.equal(documentNode.getElementById('docSectionId').selectedOptions[0].textContent,'2. Chuyên đề thêm từ form');window.fetch=previousFetch;
+// Custom sections are also available to materials without inventing examples.
+const {getUniversityMaterials,universityMaterialCatalog}=await import('../lib/university-materials.js');
+const customMaterials=await getUniversityMaterials(db,teacher,added.courseId);
+assert.equal(customMaterials.book.sections[0].id,topic.sectionId);assert.equal(customMaterials.problems.length,0);assert.equal(customMaterials.book.sections[0].examples.length,0);
+assert.equal((await universityMaterialCatalog(db,teacher)).courses.length,11);
 
 window.close();
 console.log('Grade and ten University catalogs: identities, authorization, lazy questions, course filters and OCR form: OK');

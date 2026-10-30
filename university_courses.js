@@ -423,7 +423,7 @@
     }
   ]
 };
-  const courses = [
+  let courses = [
     ['mth-141','MTH 141','College Calculus I','Giải tích 1'],
     ['mth-142','MTH 142','College Calculus II','Giải tích 2'],
     ['cse-191','CSE 191','Discrete Structures','Toán rời rạc'],
@@ -442,5 +442,15 @@
     if(exam.sectionId) return section(exam.courseId,exam.sectionId);
     return course(exam.courseId)?.sections.find(item=>normalizedTitle(item.title)===normalizedTitle(exam.title))||null;
   };
-  root.MathAppUniversity = Object.freeze({courses:Object.freeze(courses),course,section,examSection});
+  const defaults=courses;
+  function installCatalog(rows) {
+    if(!Array.isArray(rows))return;
+    const merged=new Map(defaults.map(c=>[c.id,c]));
+    for(const c of rows)if(c&&/^[a-z0-9-]{1,90}$/.test(c.id)&&typeof c.code==='string'&&typeof c.nameVi==='string'&&Array.isArray(c.sections)) {
+      merged.set(c.id,Object.freeze({...c,sections:Object.freeze(c.sections.filter(s=>s&&/^[a-z0-9-]{1,90}$/.test(s.id)&&typeof s.title==='string').map(s=>Object.freeze({...s})))}));
+    }
+    courses=[...merged.values()];
+  }
+  const dayLabel=n=>`Ngày thi thứ ${['','nhất','hai','ba','tư','năm','sáu','bảy','tám','chín','mười'][n]||n}`;
+  root.MathAppUniversity = Object.freeze({get courses(){return Object.freeze([...courses]);},course,section,examSection,installCatalog,dayLabel});
 })(typeof window !== 'undefined' ? window : globalThis);

@@ -79,7 +79,22 @@
     const sectionLabel=document.querySelector('label[for="universitySectionSelect"]');if(sectionLabel)sectionLabel.textContent=en()?'Course topic':'Chuyên đề con';
     refreshSections();window.refreshUniversityCatalogFilter();
   }
-  select.addEventListener('change',()=>window.selectUniversityCourse(select.value));
+  let catalogLoaded=false,catalogPending=null;
+  window.applyUniversityCatalog=function(data) {
+    registry.installCatalog(data.courses);catalogLoaded=true;
+    if(!registry.course(window.currentUniversityCourse)){window.currentUniversityCourse=registry.courses[0].id;window.currentUniversitySection='';}
+    refreshLabels();window.dispatchEvent(new Event('universitycatalogchange'));
+  };
+  window.loadUniversityCatalog=async function(force=false) {
+    if(catalogLoaded&&!force)return;
+    if(catalogPending)return catalogPending;
+    catalogPending=(async()=>{
+      const response=await fetch('/api/data?resource=university_catalog',{credentials:'same-origin',cache:'no-store'});
+      const body=await response.json();if(!response.ok||!body.success)throw Error(body.error||'Không tải được danh mục Đại học');
+      window.applyUniversityCatalog(body.item);
+    })().finally(()=>{catalogPending=null;});return catalogPending;
+  };
+  select.addEventListener('change' ,()=>window.selectUniversityCourse(select.value));
   sectionSelect.addEventListener('change',()=>window.selectUniversitySection(sectionSelect.value));
   window.addEventListener('langchange',refreshLabels);refreshLabels();
 })();

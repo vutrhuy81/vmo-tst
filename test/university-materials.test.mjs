@@ -13,7 +13,7 @@ const matches=(row,q)=>Object.entries(q).every(([k,v])=>String(row[k])===String(
 const db={collection(name){if(!stores.has(name))stores.set(name,[]);const rows=stores.get(name);return{
  async findOne(q){const row=rows.find(row=>matches(row,q));return row?{...row}:null;},
  async findOneAndUpdate(q,update,options){let row=rows.find(row=>matches(row,q));if(!row){if(!options?.upsert)return null;row={...q,...update.$setOnInsert};rows.push(row);}Object.assign(row,update.$set);if(update.$push?.revisions){const push=update.$push.revisions;row.revisions=[...(row.revisions||[]),...push.$each].slice(push.$slice);}return {...row};},
- find(q){return{async toArray(){return rows.filter(row=>matches(row,q)).map(row=>({...row}));}};}
+ find(q){return{sort(){return this;},limit(){return this;},async toArray(){return rows.filter(row=>matches(row,q)).map(row=>({...row}));}};}
 };}};
 const user={role:'student',username:'uni',sub:'uni-id',educationLevels:['university']};
 for(const course of catalog.courses){
@@ -71,7 +71,7 @@ window.fetch=async(url,options={})=>{
  if(body?.action==='update_catalog_content'){
   updated=body.payload;const problem=stores.get('problems').find(p=>String(p._id)===updated.id);Object.assign(problem,{content:updated.content,referenceSolution:updated.referenceSolution,referenceLinks:updated.referenceLinks,version:problem.version+1});return response({success:true,item:{...problem,_id:String(problem._id)}});
  }
- if(parsed.searchParams.get('resource')==='university_materials')return response({success:true,item:await getUniversityMaterials(db,user,parsed.searchParams.get('courseId'))});
+ if(parsed.searchParams.get('resource')==='university_materials')return response({success:true,item:parsed.searchParams.get('courseId')?await getUniversityMaterials(db,user,parsed.searchParams.get('courseId')):await universityMaterialCatalog(db,user)});
  if(parsed.searchParams.get('resource')==='problems')return response({success:true,items:stores.get('problems').filter(p=>p.contentKey===parsed.searchParams.get('contentKey')).map(p=>({...p,_id:String(p._id),setId:String(p.setId)}))});
  return response({success:true,items:[]});
 };

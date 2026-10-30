@@ -1522,8 +1522,6 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
     text = text.replace(/[\u200B-\u200D\uFEFF]/g, '').replace(/\u00A0/g, ' ');
     // JSON/OCR cũ đôi khi escape delimiter thành \\$...\\$.
     text = text.replace(/\\\$/g, '$');
-    // Một số phản hồi OCR mã hóa xuống dòng thành hai ký tự "\\n".
-    text = text.replace(/\\n(?!(?:e)(?:\s|$|[,.;:]))(?=[A-Za-z\\])/g, '\n');
     // Chuẩn hóa và bọc toàn bộ môi trường aligned trước các bước xử lý
     // chỉ số/công thức inline; nếu xử lý từng dòng riêng lẻ MathJax sẽ báo
     // "Missing \\begin{aligned}" hoặc "Missing \\end{aligned}".
@@ -1540,6 +1538,7 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
       mathParts.push(match);
       return `\uE000${mathParts.length - 1}\uE001`;
     });
+    text = text.replace(/\\n(?=[A-ZÀ-Ỹ\\])/g, '\n');
     text = text.replace(/\\text(?:bf|it|rm)?\{((?:[^{}]|\{[^{}]*\})*)\}/g, '$1');
     text = text.replace(/\\textcircled\{(\d{1,2})\}/g, (_, value) => {
       const number = Number(value);
@@ -2024,14 +2023,14 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
     const days = tst ? 4 : 2;
     return `
       ${tst ? '' : `<div style="margin-bottom:12px;"><label for="examCreationMode" style="font-weight:700;">Phương thức tạo đề</label><select id="examCreationMode" onchange="syncExamCreationMode()" style="display:block;width:100%;padding:8px;margin-top:5px;"><option value="ocr">Ảnh đề do admin biên soạn (OCR)</option><option value="prediction">Dự đoán đề từ dữ liệu tham chiếu</option></select></div>`}
-      ${tst ? `<div style="margin-bottom:12px;"><label for="docDestination" style="font-weight:700;">Kho hiển thị tài liệu *</label><select id="docDestination" required onchange="syncDocumentDestination(true)" style="display:block;width:100%;padding:8px;margin-top:5px;"><option value="tst">🏛️ Đề TST</option><option value="vmo">🇻🇳 Đề VMO</option><option value="olympic">🌐 Đề IMO–Olympic</option><option value="olympic30">🏅 Đề Olympic 30/4</option><option value="duyenhai">🌊 Đề Duyên hải miền Bắc</option><option value="admission">🎓 Đề thi vào lớp 10 chuyên</option><option value="university">🎓 Đại học</option><option value="regional">🗂️ Đề Đà Nẵng–Quảng Nam</option></select><div id="docCourseWrap" style="display:none"><label for="docCourseId">Các học phần Đại học *</label><select id="docCourseId" onchange="syncDocumentDestination(true)" style="width:100%;padding:8px;">${(window.MathAppUniversity?.courses || []).map(course=>`<option value="${course.id}">${escapeHtmlText(course.code + ': ' + course.name + ' (' + course.nameVi + ')')}</option>`).join('')}</select><label for="docSectionId">Chuyên đề con *</label><select id="docSectionId" required onchange="resetExamOcrPreview('doc')" style="width:100%;padding:8px;"></select></div><div id="docGradeWrap" style="display:none"><label for="docGrade">Khối lớp *</label><select id="docGrade" onchange="resetExamOcrPreview('doc')"><option value="10">Lớp 10</option><option value="11">Lớp 11</option></select></div><small id="docDestinationHint" style="display:block;margin-top:5px;color:#64748b;">Đề sẽ được lưu và hiển thị trong kho TST.</small></div>` : ''}
+      ${tst ? `<div style="margin-bottom:12px;"><label for="docDestination" style="font-weight:700;">Kho hiển thị tài liệu *</label><select id="docDestination" required onchange="syncDocumentDestination(true)" style="display:block;width:100%;padding:8px;margin-top:5px;"><option value="tst">🏛️ Đề TST</option><option value="vmo">🇻🇳 Đề VMO</option><option value="olympic">🌐 Đề IMO–Olympic</option><option value="olympic30">🏅 Đề Olympic 30/4</option><option value="duyenhai">🌊 Đề Duyên hải miền Bắc</option><option value="admission">🎓 Đề thi vào lớp 10 chuyên</option><option value="university">🎓 Đại học</option><option value="regional">🗂️ Đề Đà Nẵng–Quảng Nam</option></select><div id="docCourseWrap" style="display:none"><label for="docCourseId">Các học phần Đại học *</label><select id="docCourseId" onchange="syncDocumentDestination(true)" style="width:100%;padding:8px;">${(window.MathAppUniversity?.courses || []).map(course=>`<option value="${course.id}">${escapeHtmlText(course.code + ': ' + course.name + ' (' + course.nameVi + ')')}</option>`).join('')}</select><button type="button" onclick="openUniversityCatalogEditor('course')">＋ Thêm học phần</button><label for="docSectionId">Chuyên đề con *</label><select id="docSectionId" required onchange="resetExamOcrPreview('doc')" style="width:100%;padding:8px;"></select><button type="button" onclick="openUniversityCatalogEditor('section')">＋ Thêm chuyên đề con</button></div><div id="docGradeWrap" style="display:none"><label for="docGrade">Khối lớp *</label><select id="docGrade" onchange="resetExamOcrPreview('doc')"><option value="10">Lớp 10</option><option value="11">Lớp 11</option></select></div><small id="docDestinationHint" style="display:block;margin-top:5px;color:#64748b;">Đề sẽ được lưu và hiển thị trong kho TST.</small></div>` : ''}
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px;">
         <div>${tst ? `<div id="docTstTargetWrap"><label>Tỉnh/Thành phố hoặc trường chuyên *</label><select id="docTargetAnchor" required onchange="syncExamProvinceFromTarget('doc')" style="width:100%;padding:7px;"></select></div><div id="docAdmissionWrap" style="display:none"><label for="docSchoolId">Trường chuyên *</label><select id="docSchoolId" onchange="syncAdmissionSchool();resetExamOcrPreview('doc')" style="width:100%;padding:7px"></select></div><div id="docRegionalTargetWrap" style="display:none;"><label>Đơn vị lưu trữ *</label><select id="docRegionalUnit" onchange="syncRegionalExamTarget()" style="width:100%;padding:7px;"><option value="dn">Đà Nẵng</option><option value="qn">Quảng Nam</option></select></div><div id="docCompetitionWrap" style="display:none;"><label for="docCompetition">Kỳ thi / đơn vị *</label><input id="docCompetition" maxlength="120" placeholder="VMO hoặc IMO" oninput="syncDocumentDestination()" style="width:100%;box-sizing:border-box;padding:7px;"></div>` : `<label>Bộ đề thi thử số *</label><input id="examSetNumber" type="number" min="3" max="100" value="3" required style="width:100%;box-sizing:border-box;padding:7px;">`}</div>
-        <div><label>Ngày thi *</label><select id="${kind}DayNumber" required style="width:100%;padding:7px;">${['nhất','hai','ba','tư'].slice(0,days).map((label,index) => `<option value="${index+1}">Ngày thi thứ ${label}</option>`).join('')}</select></div>
+        <div><label>Ngày thi *</label><select id="${kind}DayNumber" required style="width:100%;padding:7px;">${['nhất','hai','ba','tư'].slice(0,days).map((label,index) => `<option value="${index+1}">Ngày thi thứ ${label}</option>`).join('')}</select>${tst?`<button id="docAddDay" type="button" style="display:none" onclick="addUniversityExamDay()">＋ Thêm ngày thi</button>`:''}</div>
       </div>
       <div style="display:grid;grid-template-columns:1fr .55fr 1fr;gap:10px;margin-bottom:10px;">
         <div><label>Tỉnh / Đơn vị *</label><input type="text" id="${kind}Province" ${tst ? 'readonly' : 'value="Đà Nẵng"'} required style="width:100%;box-sizing:border-box;padding:7px;"></div>
-        <div><label>Vùng ${tst ? '(tự động)' : ''}</label><input type="hidden" id="${kind}Region" value="${tst ? '' : 'TRUNG'}"><input type="text" id="${kind}RegionDisplay" value="${tst ? '' : 'Miền Trung'}" readonly style="width:100%;box-sizing:border-box;padding:7px;"></div>
+        <div id="${kind}AutoRegionWrap"><label>Vùng ${tst ? '(tự động)' : ''}</label><input type="hidden" id="${kind}Region" value="${tst ? '' : 'TRUNG'}"><input type="text" id="${kind}RegionDisplay" value="${tst ? '' : 'Miền Trung'}" readonly style="width:100%;box-sizing:border-box;padding:7px;"></div>
         <div><label>Tên đề thi</label><input type="text" id="${kind}Title" placeholder="Có thể để trống để lấy từ OCR" style="width:100%;box-sizing:border-box;padding:7px;"></div>
       </div>
       <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:10px;">
@@ -2039,6 +2038,7 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
         <div><label>Ngày tổ chức</label><input type="date" id="${kind}Date" style="width:100%;box-sizing:border-box;padding:7px;"></div>
         <div><label>Thời gian (phút)</label><input type="number" id="${kind}Duration" value="180" min="1" max="600" style="width:100%;box-sizing:border-box;padding:7px;"></div>
       </div>
+      ${tst?`<div id="docUniversityOptions" style="display:none;margin-bottom:12px"><label for="docUniversityRegion">Vùng *</label><select id="docUniversityRegion" onchange="syncUniversityRegion()"><option value="BAC">Miền Bắc</option><option value="TRUNG">Miền Trung</option><option value="NAM">Miền Nam</option><option value="OTHER">Nơi khác</option></select><label for="docRegionName">Tên vùng khác (tùy chọn)</label><input id="docRegionName" maxlength="120" placeholder="Ví dụ: Quốc tế, trực tuyến…"><label for="docQuestionCount">Số câu của toàn bộ đề *</label><input id="docQuestionCount" type="number" min="1" max="1000" step="1" value="10"><small>1–1000 câu/đề. Tải đủ các trang và rà soát số câu trước khi lưu.</small><label for="docPublishStatus">Trạng thái lưu</label><select id="docPublishStatus"><option value="published">Công bố</option><option value="draft">Bản nháp (chỉ người quản lý nội dung)</option></select></div>`:''}
       ${tst ? '' : `<div id="examPredictionPanel" style="display:none;margin-bottom:10px;padding:12px;background:#eff6ff;border:1px solid #93c5fd;border-radius:8px;">
         <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px;">
           <div><label>Loại đề cần dự đoán *</label><select id="examPredictionType" onchange="syncExamPredictionTarget()" style="width:100%;padding:7px;"><option value="tst">TST của tỉnh/thành hoặc trường chuyên</option><option value="vmo">VMO — học sinh giỏi quốc gia môn Toán</option></select></div>
@@ -2059,6 +2059,7 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
         <input type="file" id="${kind}Images" accept="image/jpeg,image/png,image/webp" multiple required onchange="resetExamOcrPreview('${kind}')" style="width:100%;">
         <div style="display:flex;align-items:center;gap:8px;margin-top:9px;"><button type="button" id="${kind}OcrButton" onclick="runExamOcr('${kind}')" style="background:#7c3aed;color:#fff;border:none;padding:7px 13px;border-radius:6px;font-weight:700;cursor:pointer;">🔎 OCR đề thi & tạo MathJax</button><span id="${kind}OcrStatus" style="font-size:.8rem;color:#64748b;">Chưa xử lý ảnh.</span></div>
       </div>
+      ${tst?`<button id="docAddQuestion" type="button" onclick="addOcrExamQuestion('doc')">＋ Thêm câu hỏi vào bản OCR</button>`:''}
       <div id="${kind}OcrPreview" style="display:none;margin-bottom:10px;padding:10px;background:#fff;border:1px solid #cbd5e1;border-radius:7px;"></div>
       <div style="text-align:right;"><button type="button" onclick="${tst ? 'toggleAddDocForm' : 'toggleAddExamForm'}()" style="margin-right:8px;padding:6px 12px;border:1px solid #cbd5e1;border-radius:6px;background:#fff;cursor:pointer;">Hủy</button><button type="submit" id="${kind}SaveButton" disabled style="background:#16a34a;color:#fff;border:none;padding:6px 14px;border-radius:6px;font-weight:600;cursor:pointer;">Lưu ${tst ? 'đề TST' : 'đề thi thử'} & câu hỏi vào cơ sở dữ liệu</button></div>`;
   }
@@ -4034,6 +4035,7 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
       if (f.style.display === 'block') {
         populateExamTargetOptions();
         window.syncDocumentDestination();
+        window.loadUniversityCatalog?.().then(()=>window.syncDocumentDestination()).catch(error=>showToast(error.message,false));
       }
     }
   };
@@ -4073,22 +4075,85 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
     window.syncExamProvinceFromTarget('doc');
   }
 
+  window.syncUniversityRegion=function() {
+    if(document.getElementById('docDestination')?.value!=='university')return;
+    const select=document.getElementById('docUniversityRegion'),hidden=document.getElementById('docRegion');
+    if(hidden)hidden.value=select?.value||'BAC';
+    const name=document.getElementById('docRegionName');if(name)name.disabled=select?.value!=='OTHER';
+  };
+  window.addUniversityExamDay=function() {
+    if(!requireContentManagerUiAction()||document.getElementById('docDestination')?.value!=='university')return;
+    const select=document.getElementById('docDayNumber');if(!select)return;
+    const next=Math.max(4,...[...select.options].map(o=>Number(o.value)))+1;
+    if(next>999)return showToast('Tối đa 999 ngày thi trong một chuyên đề/năm.',false);
+    select.add(new Option(window.MathAppUniversity.dayLabel(next),String(next)));select.value=String(next);window.resetExamOcrPreview('doc');
+  };
+  window.addOcrExamQuestion=function(kind='doc') {
+    if(!requireContentManagerUiAction())return;
+    const current=collectExamOcrQuestions(kind),max=kind==='doc'&&document.getElementById('docDestination')?.value==='university'?1000:10;
+    if(current.length>=max)return showToast(`Tối đa ${max} câu; hãy chia sang ngày thi khác.`,false);
+    ocrStates[kind].questions=[...current,{questionNumber:Math.max(0,...current.map(q=>q.questionNumber))+1,topic:'',content:'',maxScore:0}];
+    renderExamOcrEditor(kind);const save=document.getElementById(`${kind}SaveButton`);if(save)save.disabled=!ocrStates[kind].images.length;
+  };
+  window.openUniversityCatalogEditor=async function(kind) {
+    if(!requireContentManagerUiAction()||document.getElementById('docDestination')?.value!=='university')return;
+    if(document.getElementById('universityCatalogEditor'))return;
+    try{await window.loadUniversityCatalog?.();}catch(error){return showToast(error.message,false);}
+    const courseId=document.getElementById('docCourseId')?.value;
+    const modal=document.createElement('div');modal.id='universityCatalogEditor';modal.setAttribute('role','dialog');modal.setAttribute('aria-modal','true');modal.setAttribute('aria-label',kind==='course'?'Thêm học phần Đại học':'Thêm chuyên đề con');
+    modal.style.cssText='position:fixed;inset:0;z-index:25000;background:#0008;display:flex;align-items:center;justify-content:center;padding:16px';
+    const form=document.createElement('form');form.style.cssText='background:var(--card-bg,#fff);color:var(--text-color,#172033);padding:22px;border-radius:12px;width:480px;max-width:100%';
+    const heading=document.createElement('h3');heading.textContent=kind==='course'?'Thêm học phần Đại học':'Thêm chuyên đề con';form.append(heading);
+    const fields=kind==='course'?[['code','Mã học phần',50],['nameVi','Tên học phần',200],['name','Tên tiếng Anh (tùy chọn)',200]]:[['title','Tên chuyên đề con',200]];
+    for(const [key,title,max] of fields){const label=document.createElement('label');label.textContent=title;const input=document.createElement('input');input.name=key;input.maxLength=max;input.required=key!=='name';input.style.cssText='display:block;width:100%;box-sizing:border-box;margin:6px 0 12px;padding:9px';label.append(input);form.append(label);}
+    const error=document.createElement('p');error.setAttribute('role','alert');error.style.color='#b91c1c';form.append(error);
+    const close=document.createElement('button');close.type='button';close.textContent='Hủy';
+    const dismiss=()=>{modal.remove();document.removeEventListener('keydown',keys);};close.onclick=dismiss;
+    const save=document.createElement('button');save.type='submit';save.textContent='Lưu danh mục';form.append(close,save);
+    const keys=event=>{if(event.key==='Escape'){event.stopPropagation();dismiss();}if(event.key==='Tab'){const nodes=[...form.querySelectorAll('input,button')].filter(el=>!el.disabled);if(event.shiftKey&&document.activeElement===nodes[0]){event.preventDefault();nodes.at(-1).focus();}else if(!event.shiftKey&&document.activeElement===nodes.at(-1)){event.preventDefault();nodes[0].focus();}}};
+    form.onsubmit=async event=>{
+      event.preventDefault();if(!requireContentManagerUiAction())return;save.disabled=true;error.textContent='';
+      const payload={kind,courseId};for(const [key] of fields)payload[key]=form.elements[key].value.trim();
+      try{const response=await fetch('/api/data',{method:'POST',credentials:'same-origin',headers:{'Content-Type':'application/json'},body:JSON.stringify({action:'add_university_catalog_item',payload})});
+        const body=await response.json();if(!response.ok||!body.success)throw Error(body.error||'Không lưu được danh mục');
+        window.applyUniversityCatalog(body.item.catalog);document.getElementById('docCourseId').value=body.item.courseId;window.syncDocumentDestination(true);
+        if(body.item.sectionId)document.getElementById('docSectionId').value=body.item.sectionId;
+        dismiss();showToast('Đã lưu danh mục Đại học vào cơ sở dữ liệu.',true);
+      }catch(err){error.textContent=err.message;}finally{save.disabled=false;}
+    };
+    modal.append(form);document.body.append(modal);document.addEventListener('keydown',keys);form.querySelector('input')?.focus();
+  };
+  window.addEventListener('universitycatalogchange',()=>{if(document.getElementById('docCourseId'))window.syncDocumentDestination();});
+
   window.syncDocumentDestination = function(resetPreview = false) {
     const destination = document.getElementById('docDestination')?.value || 'tst';
     const university = destination === 'university';
-    const courseSelect=document.getElementById('docCourseId');if(courseSelect)courseSelect.required=university;
+    const courseSelect=document.getElementById('docCourseId');
+    if(courseSelect) {
+      const courses=window.MathAppUniversity?.courses||[],signature=courses.map(c=>c.id).join('|');
+      if(courseSelect.dataset.registry!==signature) {const previous=courseSelect.value;courseSelect.replaceChildren();courses.forEach(c=>courseSelect.add(new Option(`${c.code}: ${c.nameVi}`,c.id)));courseSelect.dataset.registry=signature;if(courses.some(c=>c.id===previous))courseSelect.value=previous;}
+    }if(courseSelect)courseSelect.required=university;
     const courseWrap=document.getElementById('docCourseWrap');if(courseWrap)courseWrap.style.display=university?'block':'none';
     const sectionSelect=document.getElementById('docSectionId');
     if(sectionSelect) {
       sectionSelect.required=university;sectionSelect.disabled=!university;
       const course=window.MathAppUniversity?.course(courseSelect?.value);
-      if(sectionSelect.dataset.courseId!==course?.id) {
+      const signature=JSON.stringify([course?.id,course?.sections]);
+      if(sectionSelect.dataset.registry!==signature) {
+        const previous=sectionSelect.dataset.courseId===course?.id?sectionSelect.value:'';
         sectionSelect.replaceChildren(new Option('Chọn chuyên đề con…',''));
         (course?.sections||[]).forEach(section=>sectionSelect.add(new Option(`${section.number}. ${section.title}`,section.id)));
-        sectionSelect.dataset.courseId=course?.id||'';
+        sectionSelect.dataset.courseId=course?.id||'';sectionSelect.dataset.registry=signature;
+        if(course?.sections.some(s=>s.id===previous))sectionSelect.value=previous;
       }
     }
     if(university) { const course=window.MathAppUniversity?.course(courseSelect?.value);const province=document.getElementById('docProvince');if(province && course)province.value=course.code; }
+    const options=document.getElementById('docUniversityOptions');if(options)options.style.display=university?'block':'none';
+    const countInput=document.getElementById('docQuestionCount');if(countInput){countInput.required=university;countInput.disabled=!university;}
+    const addDay=document.getElementById('docAddDay');if(addDay)addDay.style.display=university?'':'none';
+    const day=document.getElementById('docDayNumber');if(day&&!university){[...day.options].filter(o=>Number(o.value)>4).forEach(o=>o.remove());}
+    const autoRegion=document.getElementById('docAutoRegionWrap');if(autoRegion)autoRegion.style.display=university?'none':'';
+    if(university)window.syncUniversityRegion?.();
     const regional = destination === 'regional';
     const admission = destination === 'admission';
     const graded = ['olympic30', 'duyenhai'].includes(destination);
@@ -4376,10 +4441,11 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
         ${kind === 'exam' && ocrStates.exam.prediction?.quality?.questionChecks?.[index]?.approved === false
           ? `<div style="padding:9px;margin-bottom:8px;border:1px solid #fca5a5;background:#fef2f2;border-radius:6px;color:#991b1b;white-space:pre-wrap;"><strong>⚠️ Gia sư Toán AI chưa duyệt Câu ${Number(item.questionNumber) || index + 1}</strong><br>${escapeHtmlText([ocrStates.exam.prediction.quality.questionChecks[index].reason, ...(ocrStates.exam.prediction.quality.questionChecks[index].issues || [])].filter(Boolean).join('\n'))}</div>` : ''}
         <div style="display:grid;grid-template-columns:90px 1fr 90px;gap:8px;margin-bottom:7px;">
-          <input class="exam-ocr-number" type="number" min="1" max="99" value="${Number(item.questionNumber) || index + 1}" aria-label="Số câu" style="padding:6px;border:1px solid #cbd5e1;border-radius:5px;">
+          <input class="exam-ocr-number" type="number" min="1" max="${document.getElementById('docDestination')?.value==='university'&&kind==='doc'?1000:99}" value="${Number(item.questionNumber) || index + 1}" aria-label="Số câu" style="padding:6px;border:1px solid #cbd5e1;border-radius:5px;">
           <input class="exam-ocr-topic" value="${escapeHtmlText(item.topic || 'Toán Olympic')}" aria-label="Chuyên đề" style="padding:6px;border:1px solid #cbd5e1;border-radius:5px;">
           <input class="exam-ocr-score" type="number" min="0" max="20" step="0.25" value="${Number(item.maxScore) || 0}" aria-label="Điểm" style="padding:6px;border:1px solid #cbd5e1;border-radius:5px;">
         </div>
+        <button type="button" onclick="this.closest('.exam-ocr-question').remove()" aria-label="Bỏ câu hỏi khỏi bản OCR">Bỏ câu này</button>
         <textarea class="exam-ocr-content" rows="7" style="width:100%;box-sizing:border-box;padding:8px;border:1px solid #cbd5e1;border-radius:5px;font-family:monospace;">${escapeHtmlText(item.content || '')}</textarea>
         <div class="exam-ocr-math-preview" data-no-i18n="true" style="margin-top:7px;padding:9px;border:1px solid #e2e8f0;border-radius:5px;line-height:1.65;"></div>
       </div>`).join('');
@@ -4410,6 +4476,8 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
     const ocrRevision=ocrStates[kind].revision;
     const requestCourseId=document.getElementById('docCourseId')?.value;
     const requestSectionId=document.getElementById('docSectionId')?.value;
+    const questionCount=destination==='university'?Number(document.getElementById('docQuestionCount')?.value):10;
+    if(!Number.isInteger(questionCount)||questionCount<1||questionCount>1000)return showToast('Số câu khai báo phải từ 1–1000.',false);
     if (button) button.disabled = true;
     try {
       const byNumber = new Map();
@@ -4422,7 +4490,7 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
           method: 'POST',
           credentials: 'same-origin',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ image, province, year, dayNumber, destination, courseId: destination === 'university' ? requestCourseId : undefined, sectionId: destination === 'university' ? requestSectionId : undefined, schoolName: destination === 'admission' ? window.VMO_SPECIALIZED_SCHOOLS?.find(school => school.id === document.getElementById('docSchoolId')?.value)?.name : undefined, grade: Number(document.getElementById('docGrade')?.value) || undefined })
+          body: JSON.stringify({ image, province, year, dayNumber, destination, questionCount, courseId: destination === 'university' ? requestCourseId : undefined, sectionId: destination === 'university' ? requestSectionId : undefined, schoolName: destination === 'admission' ? window.VMO_SPECIALIZED_SCHOOLS?.find(school => school.id === document.getElementById('docSchoolId')?.value)?.name : undefined, grade: Number(document.getElementById('docGrade')?.value) || undefined })
         });
         const payload = await response.json().catch(() => ({}));
         if(ocrRevision!==ocrStates[kind].revision)return;
@@ -4850,14 +4918,17 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
     if (!targetAnchor) return showToast('Vui lòng chọn tỉnh/thành phố.', false);
     const saveButton = field('SaveButton');
     const originalLabel = saveButton?.textContent || 'Lưu vào cơ sở dữ liệu';
+    const questionCount=university?Number(field('QuestionCount')?.value):questions.length;
+    if(university && (!Number.isInteger(questionCount)||questionCount<1||questionCount>1000||questionCount!==questions.length))return showToast(`Đã có ${questions.length} câu; cần khớp số câu khai báo (1–1000). Hãy bổ sung câu hoặc sửa khai báo.`,false);
     const payload = {
+      ...(university?{questionCount,regionName:field('RegionName')?.value.trim()}:{}),
       destination, ...(university ? { courseId: field('CourseId')?.value, sectionId: field('SectionId')?.value } : {}), ...(admission ? { schoolId: field('SchoolId')?.value } : {}), ...(graded ? { grade: Number(field('Grade')?.value) } : {}), title: field('Title')?.value.trim(),
       province: field('Province')?.value.trim(), year: field('Year')?.value.trim(),
       duration: Number(field('Duration')?.value) || 180, examDate: field('Date')?.value || '',
       dayNumber, setNumber, targetAnchor, region: field('Region')?.value || 'BAC',
       provinceOrder: regional ? (regionalUnit === 'dn' ? 1 : 2) : (destination === 'tst' ? Number(field('TargetAnchor')?.selectedOptions?.[0]?.dataset.order) || 0 : setNumber),
       sourceImageCount: sourceImages.length, ocrConfidence: state.confidence,
-      status: 'published', questions: prediction ? questions.map(question => {
+      status: university&&field('PublishStatus')?.value==='draft'?'draft':'published', questions: prediction ? questions.map(question => {
         const original = state.prediction.verifiedQuestions.find(item => item.questionNumber === question.questionNumber);
         const unchanged = original && ['questionNumber', 'topic', 'maxScore', 'content'].every(field =>
           question[field] === original[field]);
@@ -5488,7 +5559,7 @@ if (card) card.dataset.databaseCard = 'true';
     meta.style.cssText = 'display:flex;flex-wrap:wrap;gap:12px;align-items:center;background:#eff6ff;padding:10px 12px;border-radius:8px;margin-bottom:12px;color:#0f172a;';
     const imageCount = Math.max(0, Math.min(20, Number(exam.sourceImageCount) || (exam.hasImages ? 1 : 0)));
     const imageButtons = Array.from({ length: imageCount }, (_, index) => `<button type="button" onclick="openExamSourceImage('${escapeHtmlText(exam.id || exam._id)}',${index + 1})" style="border:1px solid #93c5fd;background:#fff;color:#1d4ed8;padding:4px 9px;border-radius:5px;cursor:pointer;">🖼️ Ảnh ${index + 1}</button>`).join('');
-    meta.innerHTML = `<strong>📌 Ngày thi thứ ${['','nhất','hai','ba','tư'][Number(exam.dayNumber)||1] || (Number(exam.dayNumber)||1)}</strong><span>📅 ${escapeHtmlText(exam.examDate || 'Đang cập nhật')}</span><span>⏱️ ${Number(exam.duration) || 180} phút</span><span>🗄️ cơ sở dữ liệu</span>${imageButtons}`;
+    meta.innerHTML = `<strong>📌 Ngày thi thứ ${['','nhất','hai','ba','tư','năm','sáu','bảy','tám','chín','mười'][Number(exam.dayNumber)||1] || (Number(exam.dayNumber)||1)}</strong><span>📅 ${escapeHtmlText(exam.examDate || 'Đang cập nhật')}</span><span>⏱️ ${Number(exam.duration) || 180} phút</span><span>🗄️ cơ sở dữ liệu</span>${imageButtons}`;
     section.appendChild(meta);
 
     newProblems.sort((a, b) => Number(a.questionNumber) - Number(b.questionNumber)).forEach(problem => {
@@ -5892,6 +5963,7 @@ if (card) card.dataset.databaseCard = 'true';
     if (force) { window.invalidateVMODataCache?.(); resetExamCategory(tabId); competitionLoaded.delete(tabId); }
     const pending = (async () => {
       try {
+        if(tabId==='tab-university')await window.loadUniversityCatalog?.();
         const exams = await window.VMODataService.getExamCatalogSummary(category);
         await renderExamSummaries(exams, category);
         const root = document.getElementById(tabId);

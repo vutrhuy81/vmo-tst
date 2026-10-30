@@ -1,4 +1,5 @@
-import { universityCourse, universitySection } from '../lib/university-courses.js';
+import { resolveUniversityCourse, UNIVERSITY_MAX_DAYS, UNIVERSITY_MAX_QUESTIONS } from '../lib/university-catalog.js';
+import { getDb } from '../lib/db.js';
 import { allows } from '../lib/education-access.js';
 import { getSession } from '../lib/session.js';
 import { checkRateLimit, generateJson, handleAiError, parseBody, prepare, text } from '../lib/ai.js';
@@ -71,10 +72,14 @@ export default async function handler(req, res) {
   if (['olympic30', 'duyenhai'].includes(body?.destination) && ![10, 11].includes(Number(body?.grade))) {
     return res.status(400).json({ success: false, error: 'Vui lòng chọn Lớp 10 hoặc Lớp 11' });
   }
-  const course = body?.destination === 'university' ? universityCourse(body.courseId) : null;
+  const course = body?.destination === 'university' ? await resolveUniversityCourse(await getDb(),body.courseId) : null;
   if (body?.destination === 'university' && !course) return res.status(400).json({ success: false, error: 'Học phần không hợp lệ' });
-  const section = course ? universitySection(course.id,body.sectionId) : null;
+  const section = course ? course.sections.find(s=>s.id===body.sectionId) : null;
   if(course && !section) return res.status(400).json({success:false,error:'Chuyên đề con không thuộc học phần đã chọn'});
+  const questionLimit=course ? Number(body.questionCount ?? 10) : 10;
+  if(!Number.isInteger(questionLimit)||questionLimit<1||questionLimit>UNIVERSITY_MAX_QUESTIONS)return res.status(400).json({success:false,error:'Số câu khai báo phải từ 1–1000'});
+  const requestedDay=Number(body.dayNumber ?? 1);
+  if(course && (!Number.isInteger(requestedDay)||requestedDay<1||requestedDay>UNIVERSITY_MAX_DAYS))return res.status(400).json({success:false,error:'Ngày thi phải từ 1–999'});
   const image = text(body?.image, 4_000_000);
   const match = image.match(/^data:(image\/(?:jpeg|png|webp));base64,(.+)$/s);
   if (!match) return res.status(400).json({ success: false, error: 'Thiếu ảnh JPEG, PNG hoặc WEBP hợp lệ' });
@@ -83,7 +88,7 @@ export default async function handler(req, res) {
     province: text(body?.province, 120),
     schoolName: body?.destination === 'admission' ? text(body?.schoolName, 200) : '',
     year: text(body?.year, 40) || '2026-2027',
-    dayNumber: Math.max(1, Math.min(['tst', 'regional', 'vmo', 'olympic', 'olympic30', 'duyenhai', 'admission', 'university'].includes(body?.destination) ? 4 : 2, Number(body?.dayNumber) || 1))
+    dayNumber: course ? requestedDay : Math.max(1, Math.min(['tst', 'regional', 'vmo', 'olympic', 'olympic30', 'duyenhai', 'admission', 'university'].includes(body?.destination) ? 4 : 2, Number(body?.dayNumber) || 1))
   };
   const prompt = `Nhận dạng chính xác đề thi Toán bằng ngôn ngữ trong ảnh và tách thành từng câu hỏi.
 
@@ -97,7 +102,8 @@ Quy tắc bắt buộc:
 5. Dùng LaTeX chuẩn MathJax: \\mathbb, \\frac, \\sqrt, \\le, \\ge, \\ne, \\in, \\to, \\mid.
 6. title ngắn gọn dạng "Câu 5"; topic là một trong các mô tả như Đại số, Số học, Hình học, Tổ hợp, Phương trình hàm, Dãy số.
 7. examDate dùng định dạng YYYY-MM-DD nếu đọc được, nếu không để chuỗi rỗng. duration là số phút.
-8. Trả đúng JSON theo schema, không Markdown và không văn bản ngoài JSON.`;
+8. Đề có tổng số ${questionLimit} câu theo khai báo; chỉ chép những câu nhìn thấy trong ảnh hiện tại, không tạo câu bị thiếu.
+9. Trả đúng JSON theo schema, không Markdown và không văn bản ngoài JSON.`;
 
   try {
     let source = 'gemini';
@@ -137,8 +143,9 @@ Quy tắc bắt buộc:
       source = 'openai-fallback';
     }
     const data = result.data || {};
-    const questions = (Array.isArray(data.questions) ? data.questions : [])
-      .slice(0, 10)
+    const rawQuestions=Array.isArray(data.questions)?data.questions:[];
+    if(course && rawQuestions.length>questionLimit)return res.status(422).json({success:false,error:'Số câu OCR vượt khai báo. Hãy chỉnh số câu rồi thử lại.'});
+    const questions = (course?rawQuestions:rawQuestions.slice(0,10))
       .map((item, index) => ({
         questionNumber: Math.max(1, Number(item?.questionNumber) || index + 1),
         title: text(item?.title, 200) || `Câu ${index + 1}`,
@@ -158,7 +165,7 @@ Quy tắc bắt buộc:
         examTitle: text(data.examTitle, 500),
         examDate: text(data.examDate, 20),
         duration: Math.max(1, Math.min(600, Number(data.duration) || 180)),
-        dayNumber: Math.max(1, Math.min(['tst', 'regional', 'vmo', 'olympic', 'olympic30', 'duyenhai', 'admission', 'university'].includes(body?.destination) ? 4 : 2, Number(data.dayNumber) || context.dayNumber)),
+        dayNumber: course ? requestedDay : Math.max(1, Math.min(['tst', 'regional', 'vmo', 'olympic', 'olympic30', 'duyenhai', 'admission', 'university'].includes(body?.destination) ? 4 : 2, Number(data.dayNumber) || context.dayNumber)),
         confidence: text(data.confidence, 40) || 'unknown',
         questions
       }

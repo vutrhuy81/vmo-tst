@@ -1,5 +1,6 @@
+import { universityCatalog, resolveUniversityCourse, addUniversityCatalogItem, UNIVERSITY_MAX_DAYS, UNIVERSITY_MAX_QUESTIONS } from '../lib/university-catalog.js';
 import { getUniversityMaterials, universityMaterialCatalog, updateUniversityTheory } from '../lib/university-materials.js';
-import { universityCourse, universitySection, universityExamSection } from '../lib/university-courses.js';
+import { universityExamSection } from '../lib/university-courses.js';
 import { serveEducationPage } from '../lib/app-shell.js';
 import { allows } from '../lib/education-access.js';
 import { educationDb } from '../lib/education-db.js';
@@ -20,7 +21,7 @@ import { deleteAiGuideRecord, learningScope, recordActivity, summarizeLearning }
 import { cleanTrendTheory } from '../lib/trend-theory-storage.js';
 import { buildSubmissionContentUpdate, buildSubmissionVerificationUpdate } from '../lib/submission-verification.js';
 
-const ALLOWED_RESOURCES = new Set(['university_materials', 'math_support', 'math_support_image', 'documents', 'exams', 'exam_catalog', 'home_stats', 'exam_image', 'content_sets', 'content_blocks', 'problems', 'content_revisions', 'submissions', 'submission_image', 'events', 'activity_feed', 'learning_overview', 'exam_trend_reports', 'trend_theories', 'rag_status', 'rag_logs']);
+const ALLOWED_RESOURCES = new Set(['university_catalog', 'university_materials', 'math_support', 'math_support_image', 'documents', 'exams', 'exam_catalog', 'home_stats', 'exam_image', 'content_sets', 'content_blocks', 'problems', 'content_revisions', 'submissions', 'submission_image', 'events', 'activity_feed', 'learning_overview', 'exam_trend_reports', 'trend_theories', 'rag_status', 'rag_logs']);
 const TST_REGIONS = new Set(['BAC', 'TRUNG', 'NAM']);
 const EXAM_TREND_TOPICS = [
   'Dãy số và Giới hạn dãy số', 'Phương trình hàm', 'Số học và dãy số',
@@ -404,11 +405,15 @@ export default async function handler(req, res) {
         return res.status(200).json({ success: true, items });
       }
 
+      if(resource === 'university_catalog') {
+        if(!allows(session,'university'))return res.status(403).json({success:false,error:'Nội dung thuộc cấp Đại học'});
+        return res.status(200).json({success:true,item:await universityCatalog(db,session)});
+      }
       if (resource === 'university_materials') {
         if (!allows(session,'university')) return res.status(403).json({success:false,error:'Tài liệu thuộc cấp Đại học'});
-        const courseId=cleanText(req.query?.courseId,40);
-        if (!courseId) return res.status(200).json({success:true,item:await universityMaterialCatalog()});
-        if (!universityCourse(courseId)) return res.status(400).json({success:false,error:'Học phần không hợp lệ'});
+        const courseId=cleanText(req.query?.courseId,90);
+        if (!courseId) return res.status(200).json({success:true,item:await universityMaterialCatalog(db,session)});
+        if (!await resolveUniversityCourse(db,courseId)) return res.status(400).json({success:false,error:'Học phần không hợp lệ'});
         return res.status(200).json({success:true,item:await getUniversityMaterials(db,session,courseId)});
       }
 
@@ -452,11 +457,11 @@ export default async function handler(req, res) {
         const examFilter = { category: cleanText(req.query?.category, 80) || 'tst-national', status: { $ne: 'deleted' } };
         if (!['admin', 'teacher'].includes(session.role)) examFilter.status = 'published';
         if (examFilter.category === 'university' && req.query?.courseId) {
-          if (!universityCourse(req.query.courseId)) return res.status(400).json({ success: false, error: 'Học phần không hợp lệ' });
+          if (!await resolveUniversityCourse(db,req.query.courseId)) return res.status(400).json({ success: false, error: 'Học phần không hợp lệ' });
           examFilter.courseId = req.query.courseId;
         }
         if (examFilter.category === 'university' && req.query?.sectionId) {
-          const section=universitySection(examFilter.courseId,req.query.sectionId);
+          const section=(await resolveUniversityCourse(db,examFilter.courseId))?.sections.find(s=>s.id===req.query.sectionId);
           if(!section) return res.status(400).json({success:false,error:'Chuyên đề con không hợp lệ'});
           examFilter.sectionId=section.id;
         }
@@ -469,7 +474,7 @@ export default async function handler(req, res) {
         if (view === 'summary') {
           const projection = {
             examKey: 1, targetAnchor: 1, category: 1, title: 1, province: 1,
-            courseId: 1, courseCode: 1, courseName: 1, sectionId: 1, sectionTitle: 1, sectionNumber: 1, educationLevel: 1, schoolId: 1, schoolName: 1, schoolAuthority: 1, provinceId: 1, provinceOrder: 1, region: 1, year: 1, grade: 1, setNumber: 1, dayNumber: 1,
+            courseId: 1, courseCode: 1, courseName: 1, sectionId: 1, sectionTitle: 1, sectionNumber: 1, educationLevel: 1, schoolId: 1, schoolName: 1, schoolAuthority: 1, provinceId: 1, provinceOrder: 1, region: 1, regionName: 1, questionCount: 1, year: 1, grade: 1, setNumber: 1, dayNumber: 1,
             examDate: 1, duration: 1, description: 1, status: 1, origin: 1, sourceImageCount: 1
           };
           const exams = await db.collection('exams').find(examFilter, { projection })
@@ -491,12 +496,12 @@ export default async function handler(req, res) {
           if (year && !/^20\d{2}-20\d{2}$/.test(year)) return res.status(400).json({ success: false, error: 'Năm học không hợp lệ' });
           const yearFilter = year ? { year: { $in: [year, year.replace('-', '–'), year.replace('-', '—')] } } : {};
           const exams = await db.collection('exams').find({ ...examFilter, targetAnchor: anchor, ...yearFilter })
-            .sort({ dayNumber: 1, createdAt: 1 }).limit(20).toArray();
+            .sort({ dayNumber: 1, createdAt: 1 }).limit(examFilter.category === 'university' ? UNIVERSITY_MAX_DAYS : 20).toArray();
           if (!exams.length) return res.status(404).json({ success: false, error: 'Không tìm thấy đề thi' });
           const problemFilter = { examId: { $in: exams.map(exam => String(exam._id)) }, status: { $ne: 'deleted' } };
           if (!['admin', 'teacher'].includes(session.role)) problemFilter.status = 'published';
           const problems = await db.collection('problems').find(problemFilter)
-            .sort({ orderNumber: 1, questionNumber: 1 }).limit(500).toArray();
+            .sort({ orderNumber: 1, questionNumber: 1 }).limit(examFilter.category === 'university' ? UNIVERSITY_MAX_QUESTIONS * exams.length : 500).toArray();
           const byExam = new Map();
           problems.forEach(problem => {
             const key = String(problem.examId);
@@ -722,6 +727,10 @@ export default async function handler(req, res) {
     if (/trend|^rag_|^migrate_tst/.test(action) && !allows(session, 'upper_secondary')) return res.status(403).json({ success: false, error: 'Nội dung thuộc cấp Trung học phổ thông' });
     const now = new Date();
     if (await handleMathSupport({ db, req, res, session, action, payload })) return;
+    if(action === 'add_university_catalog_item') {
+      try{return res.status(201).json({success:true,item:await addUniversityCatalogItem(db,session,payload)});}
+      catch(error){if(error.status)return res.status(error.status).json({success:false,error:error.message});throw error;}
+    }
     if(action === 'update_university_theory') {
       try { return res.status(200).json({success:true,item:await updateUniversityTheory(db,session,payload)}); }
       catch(error) { if(error.status)return res.status(error.status).json({success:false,error:error.message});throw error; }
@@ -916,8 +925,8 @@ export default async function handler(req, res) {
       }
       const questionNumber = Number(payload.questionNumber);
       const content = cleanText(payload.content, 50000);
-      if (!Number.isInteger(questionNumber) || questionNumber < 1 || questionNumber > 99 || !content) {
-        return res.status(400).json({ success: false, error: 'Cần số câu từ 1–99 và nội dung câu hỏi' });
+      if (!Number.isInteger(questionNumber) || questionNumber < 1 || questionNumber > (exam.category==='university'?UNIVERSITY_MAX_QUESTIONS:99) || !content) {
+        return res.status(400).json({ success: false, error: `Cần số câu từ 1–${exam.category==='university'?UNIVERSITY_MAX_QUESTIONS:99} và nội dung câu hỏi` });
       }
       const active = await db.collection('problems').findOne({
         examId: examIdText, questionNumber, status: { $ne: 'deleted' }
@@ -925,8 +934,8 @@ export default async function handler(req, res) {
       if (active) return res.status(409).json({ success: false, error: `Câu ${questionNumber} đã có trong đề này` });
       const isMock = exam.category === 'vmo-mock';
       const isRegional = exam.category === 'history-dn-qn';
-      const inheritedCourse = exam.category === 'university' ? universityCourse(exam.courseId) : null;
-      const inheritedSection = inheritedCourse ? universityExamSection(exam) : null;
+      const inheritedCourse = exam.category === 'university' ? await resolveUniversityCourse(db,exam.courseId) : null;
+      const inheritedSection = inheritedCourse ? inheritedCourse.sections.find(s=>s.id===exam.sectionId)||universityExamSection(exam) : null;
       const inheritedCourseMetadata = inheritedCourse ? { courseId: inheritedCourse.id, courseCode: inheritedCourse.code, courseName: inheritedCourse.name, ...(inheritedSection ? {sectionId:inheritedSection.id,sectionTitle:inheritedSection.title,sectionNumber:inheritedSection.number} : {}), educationLevel: 'university' } : {};
       const categoryGroup = { 'vmo-official': 'vmo_official', 'imo-olympic': 'imo_olympic', 'olympic-30-4': 'olympic_30_4', 'duyen-hai-bac': 'duyen_hai_bac', 'university': 'university', 'specialized-admission': 'specialized_admission' }[exam.category];
       const day = Number(exam.dayNumber) || 1;
@@ -1388,16 +1397,17 @@ export default async function handler(req, res) {
       const school = admission ? specializedSchool(cleanText(payload.schoolId, 150)) : null;
       if (admission && !school) return res.status(400).json({ success: false, error: 'Vui lòng chọn trường trong danh mục trường chuyên' });
       const schoolMetadata = school ? { schoolId: school.id, schoolName: school.name, schoolAuthority: school.authority, provinceId: school.provinceId } : {};
-      const course = payload.destination === 'university' ? universityCourse(payload.courseId) : null;
-      if (payload.destination === 'university' && !course) return res.status(400).json({ success: false, error: 'Vui lòng chọn một trong mười học phần Đại học' });
-      const section = course ? universitySection(course.id, payload.sectionId) : null;
+      const course = payload.destination === 'university' ? await resolveUniversityCourse(db,payload.courseId) : null;
+      if (payload.destination === 'university' && !course) return res.status(400).json({ success: false, error: 'Vui lòng chọn học phần Đại học hợp lệ' });
+      const section = course ? course.sections.find(s=>s.id===payload.sectionId) : null;
       if (course && !section) return res.status(400).json({success:false,error:'Vui lòng chọn chuyên đề con thuộc học phần đã chọn'});
       const courseMetadata = course ? { courseId: course.id, courseCode: course.code, courseName: course.name, sectionId: section.id, sectionTitle: section.title, sectionNumber: section.number, educationLevel: 'university' } : {};
       const gradeMetadata = { ...courseMetadata, ...(catalogDestination?.graded ? { grade } : {}), ...schoolMetadata };
       const province = cleanText(payload.province, 120);
       const targetAnchor = cleanKey(payload.targetAnchor, 220);
       const requestedRegion = cleanText(payload.region, 20).toUpperCase();
-      const region = school?.region || (TST_REGIONS.has(requestedRegion) ? requestedRegion : 'BAC');
+      const region = school?.region || ((TST_REGIONS.has(requestedRegion) || (course && requestedRegion==='OTHER')) ? requestedRegion : 'BAC');
+      const regionName=course && requestedRegion==='OTHER' ? cleanText(payload.regionName,120) : '';
       const dayNumber = Number(payload.dayNumber);
       const setNumber = Number(payload.setNumber);
       const year = cleanText(payload.year, 40) || '2026-2027';
@@ -1405,11 +1415,14 @@ export default async function handler(req, res) {
       if (payload.origin === 'prediction' && !isMock) return res.status(400).json({ success: false, error: 'Đề dự đoán phải được lưu trong bộ thi thử' });
       const imageCount = cleanNumber(payload.sourceImageCount, 0, 0, 20);
       if (!isPrediction && imageCount < 1) return res.status(400).json({ success: false, error: 'Đề OCR cần ít nhất một ảnh nguồn' });
-      const questions = Array.isArray(payload.questions) ? payload.questions.slice(0, 10) : [];
+      const questions = Array.isArray(payload.questions) ? (course ? payload.questions : payload.questions.slice(0,10)) : [];
+      if(course && (questions.length>UNIVERSITY_MAX_QUESTIONS || Buffer.byteLength(JSON.stringify(questions),'utf8')>2500000))return res.status(400).json({success:false,error:'Đề tối đa 1000 câu và 2,5 MB nội dung; hãy chia thành nhiều ngày thi.'});
+      const declaredCount=payload.questionCount===undefined?questions.length:Number(payload.questionCount);
+      if(course && (!Number.isInteger(declaredCount)||declaredCount<1||declaredCount>UNIVERSITY_MAX_QUESTIONS||declaredCount!==questions.length))return res.status(400).json({success:false,error:'Số câu nhận được không khớp số câu khai báo (1–1000).'});
       const validTarget = isMock
         ? /^mock-set\d+-day[12]$/.test(targetAnchor) && Number.isInteger(setNumber) && setNumber >= 3 && setNumber <= 100 && targetAnchor === `mock-set${setNumber}-day${dayNumber}`
         : (isRegional ? /^hist-(dn|qn)-[a-z0-9._:-]+$/.test(targetAnchor) : catalogDestination ? new RegExp(`^${catalogDestination.prefix}[a-z0-9._:-]+$`).test(targetAnchor) : /^tst-[a-z0-9._:-]+$/.test(targetAnchor));
-      if (!province || !validTarget || !Number.isInteger(dayNumber) || dayNumber < 1 || dayNumber > (isMock ? 2 : 4) || !questions.length) {
+      if (!province || !validTarget || !Number.isInteger(dayNumber) || dayNumber < 1 || dayNumber > (course ? UNIVERSITY_MAX_DAYS : isMock ? 2 : 4) || !questions.length) {
         return res.status(400).json({ success: false, error: 'Thiếu tỉnh/thành phố, vị trí frontend hoặc danh sách câu hỏi' });
       }
 
@@ -1441,7 +1454,8 @@ export default async function handler(req, res) {
       const normalizedQuestions = [];
       const seenQuestionNumbers = new Set();
       for (const [index, raw] of questions.entries()) {
-        const questionNumber = Math.max(1, Math.min(99, Number(raw?.questionNumber) || index + 1));
+        const questionNumber = course ? Number(raw?.questionNumber ?? index+1) : Math.max(1, Math.min(99,Number(raw?.questionNumber)||index+1));
+        if(course && (!Number.isInteger(questionNumber)||questionNumber<1||questionNumber>UNIVERSITY_MAX_QUESTIONS))return res.status(400).json({success:false,error:'Số thứ tự câu phải là số nguyên từ 1–1000.'});
         const content = cleanText(raw?.content, 50000);
         if (!content) continue;
         if (seenQuestionNumbers.has(questionNumber)) {
@@ -1450,6 +1464,7 @@ export default async function handler(req, res) {
         seenQuestionNumbers.add(questionNumber);
         normalizedQuestions.push({ raw, questionNumber, content });
       }
+      if(course && normalizedQuestions.length!==declaredCount)return res.status(400).json({success:false,error:'Có câu trống; vui lòng hoàn thiện hoặc sửa số câu khai báo.'});
       if (!normalizedQuestions.length) {
         return res.status(400).json({ success: false, error: 'Không có câu hỏi hợp lệ để lưu' });
       }
@@ -1459,6 +1474,7 @@ export default async function handler(req, res) {
       }
       const examDoc = {
         ...gradeMetadata,
+        ...(course?{questionCount:declaredCount,regionName}:{}),
         examKey,
         setKey,
         title,
@@ -1557,7 +1573,7 @@ export default async function handler(req, res) {
           questionNumber,
           day: `Ngày ${dayNumber}`,
           dayNumber,
-          order: dayNumber * 100 + questionNumber,
+          order: dayNumber * (course ? 10000 : 100) + questionNumber,
           orderNumber: questionNumber,
           maxScore: cleanNumber(raw?.maxScore, 0, 0, 20),
           topic: cleanText(raw?.topic, 120) || 'Toán Olympic',
