@@ -520,7 +520,7 @@
 
   function gradeMatches(card) {
     const id = card.closest('.tab-pane')?.id;
-    if (id === 'tab-university') return card.dataset.courseId === window.currentUniversityCourse;
+    if (id === 'tab-university') return card.dataset.courseId === window.currentUniversityCourse && (!window.currentUniversitySection || (card.dataset.sectionId || 'unclassified') === window.currentUniversitySection);
     if (!['tab-olympic30', 'tab-duyenhai', 'tab-admission'].includes(id)) return true;
     const filter = qs(`#${id.slice(4)}FilterPills .pill.active`)?.dataset.filter || 'ALL';
     return filter === 'ALL' || card.dataset.filter === filter;

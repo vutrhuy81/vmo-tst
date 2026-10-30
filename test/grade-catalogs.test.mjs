@@ -1,4 +1,4 @@
-import { UNIVERSITY_COURSES, universityCourse } from '../lib/university-courses.js';
+import { UNIVERSITY_COURSES, universityCourse, universitySection, universityExamSection } from '../lib/university-courses.js';
 import { educationDb } from '../lib/education-db.js';
 import { allows } from '../lib/education-access.js';
 import { canAccessProblem, supportVisibility } from '../lib/problem-access.js';
@@ -50,8 +50,8 @@ const db = { collection(name) {
 } };
 const source = fs.readFileSync(new URL('../api/data.js', import.meta.url), 'utf8')
   .replace(/^import .*;\n/gm, '').replace('export default async function handler', 'async function handler');
-const handler = new Function('universityCourse', 'educationDb', 'allows', 'getDb', 'getSession', 'ObjectId', 'recordActivity', 'canAccessProblem', 'supportVisibility', 'handleMathSupport', `${source}\nreturn handler;`)(
-  universityCourse, educationDb, allows,   async () => db, () => ({ role, username: 'tester', ...(educationLevels ? {educationLevels} : {}) }), ObjectId, async () => {}, canAccessProblem, supportVisibility, handleMathSupport);
+const handler = new Function('universitySection','universityExamSection','universityCourse', 'educationDb', 'allows', 'getDb', 'getSession', 'ObjectId', 'recordActivity', 'canAccessProblem', 'supportVisibility', 'handleMathSupport', `${source}\nreturn handler;`)(
+  universitySection,universityExamSection,universityCourse, educationDb, allows,   async () => db, () => ({ role, username: 'tester', ...(educationLevels ? {educationLevels} : {}) }), ObjectId, async () => {}, canAccessProblem, supportVisibility, handleMathSupport);
 async function call(payload, query) {
   const res = { code: 0, setHeader() {}, status(code) { this.code = code; return this; }, json(body) { this.body = body; return this; } };
   await handler({ method: query ? 'GET' : 'POST', query, body: { action: 'create_exam_from_ocr', payload } }, res);
@@ -88,10 +88,18 @@ assert.equal(stores.get('problems').length, 4);
 
 // University course identity, question metadata, summaries and education-level boundaries.
 assert.equal(UNIVERSITY_COURSES.length,10);
+for(const course of UNIVERSITY_COURSES) {
+ const book=JSON.parse(fs.readFileSync(new URL(`../data/university-materials/${course.id}.json`,import.meta.url)));
+ assert.deepEqual(course.sections.map(({id,title})=>({id,title})),book.sections.map(({id,title})=>({id,title})));
+ assert.equal(course.sections.length,8);
+ assert.equal(universityExamSection({courseId:course.id,title:`1. ${course.sections[0].title}`})?.id,course.sections[0].id);
+ assert.equal(universityExamSection({courseId:course.id,title:'Unknown exam'}),null);
+}
+
 const universityResults=[];
 for (const course of UNIVERSITY_COURSES) {
- const payload={destination:'university',courseId:course.id,province:course.code,year:'2026-2027',dayNumber:1,
-  targetAnchor:`university-${course.id}-2026-2027`,sourceImageCount:1,questions:[{questionNumber:1,topic:course.nameVi,content:'Prove the stated result.'}]};
+ const payload={destination:'university',courseId:course.id,sectionId:course.sections[0].id,province:course.code,year:'2026-2027',dayNumber:1,
+  targetAnchor:`university-${course.id}-${course.sections[0].id}-2026-2027`,sourceImageCount:1,questions:[{questionNumber:1,topic:course.nameVi,content:'Prove the stated result.'}]};
  const result=await call(payload);assert.equal(result.code,201);universityResults.push(result.body.item);
  assert.equal(result.body.item.category,'university');assert.equal(result.body.item.courseId,course.id);
  assert.equal(result.body.item.problems[0].educationLevel,'university');assert.equal(result.body.item.problems[0].courseId,course.id);
@@ -116,7 +124,7 @@ assert.equal((await call({destination:'university',courseId:'mth-141'})).code,40
 role='admin';educationLevels=undefined;
 const addQuestionRes={code:0,setHeader(){},status(code){this.code=code;return this;},json(body){this.body=body;return this;}};
 await handler({method:'POST',body:{action:'add_exam_question',payload:{examId:String(universityResults[0]._id),questionNumber:2,content:'Compute the derivative.',topic:'Calculus'}}},addQuestionRes);
-assert.equal(addQuestionRes.code,201);assert.equal(addQuestionRes.body.item.courseId,'mth-141');assert.equal(addQuestionRes.body.item.educationLevel,'university');
+assert.equal(addQuestionRes.body.item.sectionId,UNIVERSITY_COURSES[0].sections[0].id);assert.equal(addQuestionRes.code,201);assert.equal(addQuestionRes.body.item.courseId,'mth-141');assert.equal(addQuestionRes.body.item.educationLevel,'university');
 
 
 // Grade pills compose with search, and clearing search retains the grade selection.
@@ -164,14 +172,23 @@ window.document.dispatchEvent(new window.Event('DOMContentLoaded'));
 await window.switchTab('tab-university');
 await window.loadDatabaseCompetitionExams('tab-university');
 assert.equal(window.document.querySelectorAll('#universityCourseSelect option').length,10);
-assert.equal(window.document.querySelectorAll('#universityCourseList button').length,10);
+assert.equal(window.document.querySelectorAll('#universityCourseList .university-course-button').length,10);
 assert.equal(window.document.querySelectorAll('#tab-university .exam-card').length,10);
 for(const course of UNIVERSITY_COURSES){
  window.selectUniversityCourse(course.id);
+ assert.equal(window.document.getElementById('universitySectionSelect').options.length,10);
+ assert.equal(window.document.querySelectorAll('#universitySectionList button').length,10);
+ for(const section of course.sections) {
+  window.selectUniversitySection(section.id);
+  const cards=[...window.document.querySelectorAll('#tab-university .exam-card')].filter(card=>!card.classList.contains('hidden-by-search'));
+  assert.equal(cards.length,section===course.sections[0]?1:0);
+  assert.equal(window.document.getElementById('universitySectionSelect').value,section.id);
+ }
+ window.selectUniversitySection('');
  const visible=[...window.document.querySelectorAll('#tab-university .exam-card')].filter(card=>!card.classList.contains('hidden-by-search'));
  assert.equal(visible.length,1);assert.equal(visible[0].dataset.courseId,course.id);
  await window.loadDatabaseExamDetail('university',visible[0].id);
- assert.ok(visible[0].querySelector('.problem-item'));
+ assert.ok(visible[0].querySelector('.problem-item'));assert.ok(visible[0].textContent.includes('Ngày thi thứ nhất'));assert.ok(!visible[0].textContent.includes('Đề số 1'));
  assert.ok(visible[0].querySelector('.btn-submit-solution'),'Standard submission action is retained');
  assert.equal(window.document.querySelectorAll('#universityExamLinks a:not([hidden])').length,1);
 }
@@ -180,7 +197,101 @@ window.document.getElementById('docDestination').value='university';window.syncD
 assert.equal(window.document.getElementById('docCourseId').options.length,10);
 assert.equal(window.document.getElementById('docProvince').value,'MTH 141');
 assert.equal(window.document.getElementById('docCourseWrap').style.display,'block');
+for(const course of UNIVERSITY_COURSES) {
+ window.document.getElementById('docCourseId').value=course.id;window.syncDocumentDestination(true);
+ const options=[...window.document.getElementById('docSectionId').options].slice(1);
+ assert.deepEqual(options.map(o=>o.value),course.sections.map(section=>section.id));
+ assert.deepEqual(options.map(o=>o.textContent),course.sections.map(section=>`${section.number}. ${section.title}`));
+ window.document.getElementById('docSectionId').value=course.sections[0].id;window.syncDocumentDestination();
+ assert.equal(window.document.getElementById('docSectionId').value,course.sections[0].id,'Same-course sync preserves selection');
+}
+window.document.getElementById('docDestination').value='tst';window.syncDocumentDestination();
+assert.equal(window.document.getElementById('docSectionId').required,false);assert.equal(window.document.getElementById('docSectionId').disabled,true);
+window.document.getElementById('docDestination').value='university';window.syncDocumentDestination();
+assert.equal(window.document.getElementById('docSectionId').required,true);assert.equal(window.document.getElementById('docSectionId').disabled,false);
 window.switchHubTab('docs');await new Promise(resolve=>window.setTimeout(resolve,0));
 assert.equal(window.document.querySelectorAll('#hubDocsList .hub-managed-exam').length,10);
+// Exercise every section through the real create route, plus multi-day identity.
+role='admin';educationLevels=['university'];
+const allSectionExams=[];
+for(const course of UNIVERSITY_COURSES)for(const section of course.sections) {
+ const payload={destination:'university',courseId:course.id,sectionId:section.id,province:course.code,year:'2027-2028',dayNumber:1,
+ targetAnchor:`university-${course.id}-${section.id}-2027-2028`,sourceImageCount:1,questions:[{questionNumber:1,content:'Compute $1+1$.'}]};
+ const res=await call(payload);assert.equal(res.code,201);allSectionExams.push(res.body.item);
+ assert.equal(res.body.item.sectionTitle,section.title);assert.equal(res.body.item.problems[0].sectionId,section.id);
+ assert.equal(stores.get('content_sets').find(set=>String(set._id)===String(res.body.item.problems[0].setId)).sectionId,section.id);
+ assert.equal((await call({...payload,sectionId:undefined})).code,400);
+ assert.equal((await call({...payload,sectionId:'forged'})).code,400);
+ assert.equal((await call({...payload,targetAnchor:`university-${course.id}-2027-2028`})).code,400);
+}
+assert.equal(new Set(allSectionExams.map(exam=>exam.examKey)).size,80);
+assert.equal(new Set(allSectionExams.map(exam=>exam.problems[0].contentKey)).size,80);
+const firstCourse=UNIVERSITY_COURSES[0], firstSection=firstCourse.sections[0];
+const secondDay=await call({destination:'university',courseId:firstCourse.id,sectionId:firstSection.id,province:firstCourse.code,year:'2026-2027',dayNumber:2,
+ targetAnchor:universityResults[0].targetAnchor,sourceImageCount:1,questions:[{questionNumber:1,content:'Day 2 $2+2$.'}]});
+assert.equal(secondDay.code,201);assert.notEqual(secondDay.body.item.problems[0].contentKey,universityResults[0].problems[0].contentKey);
+universityResults.push(secondDay.body.item);
+await window.loadDatabaseCompetitionExams('tab-university',true);window.selectUniversityCourse(firstCourse.id,firstSection.id);
+await window.loadDatabaseExamDetail('university',universityResults[0].targetAnchor);
+const firstCard=window.document.getElementById(universityResults[0].targetAnchor);
+assert.ok(firstCard.textContent.includes('Ngày thi thứ nhất'));assert.ok(firstCard.textContent.includes('Ngày thi thứ hai'));
+assert.equal(firstCard.querySelectorAll('.db-exam-day').length,2);
+const summary=await call(null,{resource:'exam_catalog',category:'university',courseId:firstCourse.id,sectionId:firstSection.id,view:'summary'});
+assert.ok(summary.body.items.every(exam=>exam.sectionId===firstSection.id));
+assert.equal((await call(null,{resource:'exam_catalog',category:'university',courseId:firstCourse.id,sectionId:'forged',view:'summary'})).code,400);
+// Legacy rows retain their identity and are only classified by an exact known title.
+const legacy={...universityResults[0],_id:new ObjectId(),targetAnchor:'university-legacy',examKey:'legacy',sectionId:undefined,title:`1. ${firstSection.title}`};
+universityResults.push(legacy,{...legacy,_id:new ObjectId(),targetAnchor:'university-unknown',examKey:'unknown',title:'Unmapped legacy exam'});
+await window.loadDatabaseCompetitionExams('tab-university',true);window.selectUniversityCourse(firstCourse.id,firstSection.id);
+assert.equal(window.document.getElementById('university-legacy').classList.contains('hidden-by-search'),false);
+assert.equal(window.document.getElementById('university-unknown').classList.contains('hidden-by-search'),true);
+window.selectUniversitySection('unclassified');assert.equal(window.document.getElementById('university-unknown').classList.contains('hidden-by-search'),false);
+window.selectUniversitySection(firstSection.id);
+window.VMODataService.searchExamCatalog=async()=>universityResults;
+const search=window.document.getElementById('searchInput');search.value='Prove';search.dispatchEvent(new window.Event('input'));
+await new Promise(resolve=>window.setTimeout(resolve,350));
+assert.equal(window.document.getElementById('university-unknown').classList.contains('hidden-by-search'),true,'Server search must retain topic scope');
+search.value='';search.dispatchEvent(new window.Event('input'));
+assert.equal(window.document.getElementById('university-unknown').classList.contains('hidden-by-search'),true,'Clearing search must retain topic scope');
+// OCR request -> editor -> real save route: course/section/day survive the full UI flow.
+const documentNode=window.document;
+documentNode.getElementById('docDestination').value='university';documentNode.getElementById('docCourseId').value=firstCourse.id;window.syncDocumentDestination(true);
+documentNode.getElementById('docSectionId').value=firstCourse.sections[1].id;
+documentNode.getElementById('docYear').value='2028-2029';documentNode.getElementById('docDayNumber').value='2';
+window.Image=class {constructor(){this.width=20;this.height=20;}set src(value){queueMicrotask(()=>this.onload());}};
+window.HTMLCanvasElement.prototype.getContext=()=>({drawImage(){}});
+window.HTMLCanvasElement.prototype.toDataURL=()=> 'data:image/jpeg;base64,AAAA';
+Object.defineProperty(documentNode.getElementById('docImages'),'files',{configurable:true,value:[new window.File(['image'],'exam.png',{type:'image/png'})]});
+let ocrRequest;
+window.fetch=async(url,options)=>{ocrRequest=JSON.parse(options.body);return{ok:true,json:async()=>({success:true,data:{questions:[{questionNumber:1,content:'Compute $3+4$.',topic:'Limits',maxScore:5}],confidence:'high'}})};};
+await window.runExamOcr('doc');
+assert.equal(ocrRequest.courseId,firstCourse.id);assert.equal(ocrRequest.sectionId,firstCourse.sections[1].id);assert.equal(ocrRequest.dayNumber,2);
+assert.equal(documentNode.querySelectorAll('#docOcrPreview .exam-ocr-question').length,1);
+let savePayload;
+window.VMODataService.createExamFromOcr=async payload=>{savePayload=payload;const result=await call(payload);assert.equal(result.code,201);universityResults.push(result.body.item);return result.body.item;};
+window.VMODataService.saveExamImage=async()=>{};
+await window.handleCreateDocument({preventDefault(){},target:documentNode.getElementById('formAddDoc')});
+assert.equal(savePayload.sectionId,firstCourse.sections[1].id);assert.equal(savePayload.dayNumber,2);
+assert.equal(savePayload.targetAnchor,`university-${firstCourse.id}-${firstCourse.sections[1].id}-2028-2029`);
+assert.equal(window.currentUniversitySection,firstCourse.sections[1].id);
+assert.ok(documentNode.getElementById(savePayload.targetAnchor),'Saved exam is reloaded into the university catalog');
+// An OCR response for a previous selection must not repopulate the edited course/topic.
+documentNode.getElementById('docDestination').value='university';documentNode.getElementById('docCourseId').value=firstCourse.id;window.syncDocumentDestination(true);documentNode.getElementById('docSectionId').value=firstSection.id;
+let finishOcr, startedOcr;
+const started=new Promise(resolve=>startedOcr=resolve);
+window.fetch=async()=>{startedOcr();return new Promise(resolve=>finishOcr=resolve);};
+const pendingOcr=window.runExamOcr('doc');await started;
+documentNode.getElementById('docCourseId').value=UNIVERSITY_COURSES[1].id;window.syncDocumentDestination(true);
+finishOcr({ok:true,json:async()=>({success:true,data:{questions:[{questionNumber:1,content:'Stale question'}]}})});await pendingOcr;
+assert.equal(documentNode.querySelectorAll('#docOcrPreview .exam-ocr-question').length,0);
+assert.equal(documentNode.getElementById('docSaveButton').disabled,true);
+// Real OCR handler validates whitelist before model invocation, and includes the topic in its prompt.
+let modelCalls=0,prompt='';
+const ocrSource=fs.readFileSync(new URL('../api/ai-ocr-exam.js',import.meta.url),'utf8').replace(/^import .*;\n/gm,'').replace('export default async function handler','async function handler');
+const ocrHandler=new Function('universityCourse','universitySection','allows','getSession','checkRateLimit','parseBody','prepare','text','generateJson','handleAiError',`${ocrSource}\nreturn handler;`)(universityCourse,universitySection,allows,async()=>({role:'teacher',username:'uni-teacher',educationLevels:['university']}),()=>true,req=>req.body,()=>{},(value,max)=>String(value||'').slice(0,max),async options=>{modelCalls++;prompt=JSON.stringify(options);return{model:'mock',data:{questions:[{questionNumber:1,content:'$1+1$'}]}};},(res,error)=>{throw error;});
+async function ocrCall(sectionId){const res={status(code){this.code=code;return this;},json(body){this.body=body;return this;}};await ocrHandler({method:'POST',body:{destination:'university',courseId:firstCourse.id,sectionId,image:'data:image/png;base64,AAAA'}},res);return res;}
+assert.equal((await ocrCall('forged')).code,400);assert.equal((await ocrCall(undefined)).code,400);assert.equal(modelCalls,0);
+assert.equal((await ocrCall(firstSection.id)).code,200);assert.equal(modelCalls,1);assert.ok(prompt.includes(firstSection.title));
+
 window.close();
 console.log('Grade and ten University catalogs: identities, authorization, lazy questions, course filters and OCR form: OK');

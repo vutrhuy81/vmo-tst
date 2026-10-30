@@ -1,4 +1,4 @@
-import { universityCourse } from '../lib/university-courses.js';
+import { universityCourse, universitySection } from '../lib/university-courses.js';
 import { allows } from '../lib/education-access.js';
 import { getSession } from '../lib/session.js';
 import { checkRateLimit, generateJson, handleAiError, parseBody, prepare, text } from '../lib/ai.js';
@@ -73,6 +73,8 @@ export default async function handler(req, res) {
   }
   const course = body?.destination === 'university' ? universityCourse(body.courseId) : null;
   if (body?.destination === 'university' && !course) return res.status(400).json({ success: false, error: 'Học phần không hợp lệ' });
+  const section = course ? universitySection(course.id,body.sectionId) : null;
+  if(course && !section) return res.status(400).json({success:false,error:'Chuyên đề con không thuộc học phần đã chọn'});
   const image = text(body?.image, 4_000_000);
   const match = image.match(/^data:(image\/(?:jpeg|png|webp));base64,(.+)$/s);
   if (!match) return res.status(400).json({ success: false, error: 'Thiếu ảnh JPEG, PNG hoặc WEBP hợp lệ' });
@@ -85,7 +87,7 @@ export default async function handler(req, res) {
   };
   const prompt = `Nhận dạng chính xác đề thi Toán bằng ngôn ngữ trong ảnh và tách thành từng câu hỏi.
 
-Ngữ cảnh do quản trị viên cung cấp: ${course ? `Học phần Đại học ${course.code}: ${course.name} (${course.nameVi}). Giữ nguyên ngôn ngữ đề và thuật ngữ học phần. ` : ''} tỉnh/thành phố "${context.province}", năm học "${context.year}", ngày thi thứ ${context.dayNumber}.${context.schoolName ? ` Kỳ thi tuyển sinh vào lớp 10 chuyên, trường: ${context.schoolName}.` : ''}${['olympic30', 'duyenhai'].includes(body?.destination) && [10, 11].includes(Number(body?.grade)) ? ` Khối lớp: Lớp ${Number(body.grade)}.` : ''}
+Ngữ cảnh do quản trị viên cung cấp: ${course ? `Học phần Đại học ${course.code}: ${course.name} (${course.nameVi}). Chuyên đề con: ${section.number}. ${section.title}. Giữ nguyên ngôn ngữ đề và thuật ngữ học phần. ` : ''} tỉnh/thành phố "${context.province}", năm học "${context.year}", ngày thi thứ ${context.dayNumber}.${context.schoolName ? ` Kỳ thi tuyển sinh vào lớp 10 chuyên, trường: ${context.schoolName}.` : ''}${['olympic30', 'duyenhai'].includes(body?.destination) && [10, 11].includes(Number(body?.grade)) ? ` Khối lớp: Lớp ${Number(body.grade)}.` : ''}
 
 Quy tắc bắt buộc:
 1. Chỉ chép nội dung nhìn thấy; không giải bài, không bổ sung giả thiết và không suy diễn phần bị khuất.

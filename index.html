@@ -52,19 +52,19 @@ window.MathJax = {
         onerror="this.onerror=null;this.src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.min.js';"></script>
 
 <!-- Stylesheets tách biệt, tối ưu bộ nhớ đệm -->
-<link rel="stylesheet" href="styles.css?v=1793228799539">
-<link rel="stylesheet" href="auth.css?v=1793228799539">
-<link rel="stylesheet" href="ai_guide.css?v=1793228799539">
-<link rel="stylesheet" href="i18n.css?v=1793228799539">
+<link rel="stylesheet" href="styles.css?v=1793334239233">
+<link rel="stylesheet" href="auth.css?v=1793334239233">
+<link rel="stylesheet" href="ai_guide.css?v=1793334239233">
+<link rel="stylesheet" href="i18n.css?v=1793334239233">
 
 <!-- Synchronous Auth Gate: Chặn truy cập nếu chưa đăng nhập -->
-<script src="education_access.js?v=1793228799539"></script>
-<script src="auth.js?v=1793228799539"></script>
+<script src="education_access.js?v=1793334239233"></script>
+<script src="auth.js?v=1793334239233"></script>
 <script>
 VMOAuth.requireAuth('login.html');
 </script>
 
-<script type="module" src="vmo_data_service.js?v=1793228799539"></script>
+<script type="module" src="vmo_data_service.js?v=1793334239233"></script>
 <script id="specialized-school-registry" type="application/json">{
   "asOf": "2026-10-16",
   "sources": {
@@ -1149,19 +1149,19 @@ VMOAuth.requireAuth('login.html');
   ]
 }
 </script>
-<script src="university_courses.js?v=1793228799539" defer></script>
-<script src="university_materials.js?v=1793228799539" defer></script>
-<script src="university.js?v=1793228799539" defer></script>
-<script src="admissions.js?v=1793228799539" defer></script>
-<script src="tst-locations.js?v=1793228799539" defer></script>
-<script src="vmo_db_ui.js?v=1793228799539" defer></script>
-<script src="account_mgmt.js?v=1793228799539" defer></script>
-<script src="geometry_diagram.js?v=1793228799539" defer></script>
-<script src="ai_guide_engine.js?v=1793228799539" defer></script>
-<script src="i18n_content.js?v=1793228799539" defer></script>
-<script src="i18n.js?v=1793228799539" defer></script>
-<script src="math_support.js?v=1793228799539" defer></script>
-<script src="app.js?v=1793228799539" defer></script>
+<script src="university_courses.js?v=1793334239233" defer></script>
+<script src="university_materials.js?v=1793334239233" defer></script>
+<script src="university.js?v=1793334239233" defer></script>
+<script src="admissions.js?v=1793334239233" defer></script>
+<script src="tst-locations.js?v=1793334239233" defer></script>
+<script src="vmo_db_ui.js?v=1793334239233" defer></script>
+<script src="account_mgmt.js?v=1793334239233" defer></script>
+<script src="geometry_diagram.js?v=1793334239233" defer></script>
+<script src="ai_guide_engine.js?v=1793334239233" defer></script>
+<script src="i18n_content.js?v=1793334239233" defer></script>
+<script src="i18n.js?v=1793334239233" defer></script>
+<script src="math_support.js?v=1793334239233" defer></script>
+<script src="app.js?v=1793334239233" defer></script>
 </head>
 <body class="tex2jax_process">
 <a href="#main-content" class="skip-link">Bỏ qua đến nội dung chính</a>
@@ -1310,7 +1310,7 @@ VMOAuth.requireAuth('login.html');
   <main>
     <div class="tab-pane" id="tab-primary"><section class="feed-container"><h2 data-level-title="primary">Tiểu học</h2><p data-level-empty>Kho học liệu của cấp học này đang được xây dựng. Bạn có thể sử dụng Hỗ trợ giải toán.</p></section></div>
 <div class="tab-pane" id="tab-university-materials" data-no-i18n="true"><section class="book-dashboard"><div class="dashboard-copy"><div class="eyebrow">TOÁN ĐẠI HỌC</div><h2>📚 Tài liệu Toán–Đại học</h2><p>Lý thuyết cốt lõi · Phương pháp giải · Ví dụ từng bước · Nguồn đối chiếu</p><p id="universityMaterialsStats" role="status">Đang tải danh mục học liệu…</p></div></section><div class="university-material-controls"><label for="universityMaterialsCourse">Học phần</label><select id="universityMaterialsCourse"></select><label for="universityMaterialsSearch">Tìm trong học phần</label><input id="universityMaterialsSearch" type="search" placeholder="Tìm khái niệm, định lý, ví dụ…"><button id="universityMaterialsSolutions" type="button">Ẩn/hiện lời giải</button><button id="universityMaterialsPrint" type="button">🖨️ In học phần / PDF</button></div><div id="universityMaterialsContent" class="book-content" aria-live="polite"></div></div>
-<div class="tab-pane" id="tab-university"><section class="feed-container"><div class="section-header-box"><h2 data-university-label>Các học phần Đại học</h2><label for="universityCourseSelect">Chọn học phần</label><select id="universityCourseSelect" style="display:block;max-width:100%;width:100%;padding:10px;margin:8px 0;font:inherit;"></select><h3 id="universityCourseTitle"></h3></div></section></div>
+<div class="tab-pane" id="tab-university"><section class="feed-container"><div class="section-header-box"><h2 data-university-label>Các học phần Đại học</h2><label for="universityCourseSelect">Chọn học phần</label><select id="universityCourseSelect" style="display:block;max-width:100%;width:100%;padding:10px;margin:8px 0;font:inherit;"></select><label for="universitySectionSelect">Chuyên đề con</label><select id="universitySectionSelect" style="display:block;width:100%;padding:10px;margin:8px 0;font:inherit;"></select><h3 id="universityCourseTitle"></h3></div></section></div>
 <div class="tab-pane" id="tab-pending"><section class="feed-container"><h2 data-pending-title>Chờ phân cấp học</h2><p data-pending-note>Vui lòng liên hệ Admin để được cấp quyền nội dung theo cấp học.</p></section></div>
 <!-- EDUCATION:upper_secondary:START --><div class="tab-pane active" id="tab-danang">
 <section class="book-dashboard" id="book-dashboard">

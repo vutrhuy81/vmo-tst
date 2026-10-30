@@ -1,5 +1,5 @@
 import { getUniversityMaterials, universityMaterialCatalog, updateUniversityTheory } from '../lib/university-materials.js';
-import { universityCourse } from '../lib/university-courses.js';
+import { universityCourse, universitySection, universityExamSection } from '../lib/university-courses.js';
 import { serveEducationPage } from '../lib/app-shell.js';
 import { allows } from '../lib/education-access.js';
 import { educationDb } from '../lib/education-db.js';
@@ -455,6 +455,11 @@ export default async function handler(req, res) {
           if (!universityCourse(req.query.courseId)) return res.status(400).json({ success: false, error: 'Học phần không hợp lệ' });
           examFilter.courseId = req.query.courseId;
         }
+        if (examFilter.category === 'university' && req.query?.sectionId) {
+          const section=universitySection(examFilter.courseId,req.query.sectionId);
+          if(!section) return res.status(400).json({success:false,error:'Chuyên đề con không hợp lệ'});
+          examFilter.sectionId=section.id;
+        }
         if (req.query?.grade != null && ['olympic-30-4', 'duyen-hai-bac'].includes(examFilter.category)) {
           const grade = Number(req.query.grade);
           if (![10, 11].includes(grade)) return res.status(400).json({ success: false, error: 'Khối lớp không hợp lệ' });
@@ -464,11 +469,11 @@ export default async function handler(req, res) {
         if (view === 'summary') {
           const projection = {
             examKey: 1, targetAnchor: 1, category: 1, title: 1, province: 1,
-            courseId: 1, courseCode: 1, courseName: 1, educationLevel: 1, schoolId: 1, schoolName: 1, schoolAuthority: 1, provinceId: 1, provinceOrder: 1, region: 1, year: 1, grade: 1, setNumber: 1, dayNumber: 1,
+            courseId: 1, courseCode: 1, courseName: 1, sectionId: 1, sectionTitle: 1, sectionNumber: 1, educationLevel: 1, schoolId: 1, schoolName: 1, schoolAuthority: 1, provinceId: 1, provinceOrder: 1, region: 1, year: 1, grade: 1, setNumber: 1, dayNumber: 1,
             examDate: 1, duration: 1, description: 1, status: 1, origin: 1, sourceImageCount: 1
           };
           const exams = await db.collection('exams').find(examFilter, { projection })
-            .sort({ provinceOrder: 1, dayNumber: 1, createdAt: 1 }).limit(200).toArray();
+            .sort({ provinceOrder: 1, dayNumber: 1, createdAt: 1 }).limit(examFilter.category === 'university' ? 1000 : 200).toArray();
           const problemFilter = { examId: { $in: exams.map(exam => String(exam._id)) }, status: { $ne: 'deleted' } };
           if (!['admin', 'teacher'].includes(session.role)) problemFilter.status = 'published';
           const counts = exams.length ? await db.collection('problems').aggregate([
@@ -521,7 +526,7 @@ export default async function handler(req, res) {
           return res.status(200).json({ success: true, items: [...new Set(matches
             .map(problem => anchorById.get(String(problem.examId))).filter(Boolean))].map(targetAnchor => ({ targetAnchor })) });
         }
-        const exams = await db.collection('exams').find(examFilter).sort({ provinceOrder: 1, dayNumber: 1, createdAt: 1 }).limit(200).toArray();
+        const exams = await db.collection('exams').find(examFilter).sort({ provinceOrder: 1, dayNumber: 1, createdAt: 1 }).limit(examFilter.category === 'university' ? 1000 : 200).toArray();
         const examIds = exams.map(item => String(item._id));
         const problemFilter = { examId: { $in: examIds }, status: { $ne: 'deleted' } };
         if (!['admin', 'teacher'].includes(session.role)) problemFilter.status = 'published';
@@ -921,7 +926,8 @@ export default async function handler(req, res) {
       const isMock = exam.category === 'vmo-mock';
       const isRegional = exam.category === 'history-dn-qn';
       const inheritedCourse = exam.category === 'university' ? universityCourse(exam.courseId) : null;
-      const inheritedCourseMetadata = inheritedCourse ? { courseId: inheritedCourse.id, courseCode: inheritedCourse.code, courseName: inheritedCourse.name, educationLevel: 'university' } : {};
+      const inheritedSection = inheritedCourse ? universityExamSection(exam) : null;
+      const inheritedCourseMetadata = inheritedCourse ? { courseId: inheritedCourse.id, courseCode: inheritedCourse.code, courseName: inheritedCourse.name, ...(inheritedSection ? {sectionId:inheritedSection.id,sectionTitle:inheritedSection.title,sectionNumber:inheritedSection.number} : {}), educationLevel: 'university' } : {};
       const categoryGroup = { 'vmo-official': 'vmo_official', 'imo-olympic': 'imo_olympic', 'olympic-30-4': 'olympic_30_4', 'duyen-hai-bac': 'duyen_hai_bac', 'university': 'university', 'specialized-admission': 'specialized_admission' }[exam.category];
       const day = Number(exam.dayNumber) || 1;
       const setKey = exam.setKey || (isMock ? `mock:${exam.targetAnchor}`
@@ -1384,7 +1390,9 @@ export default async function handler(req, res) {
       const schoolMetadata = school ? { schoolId: school.id, schoolName: school.name, schoolAuthority: school.authority, provinceId: school.provinceId } : {};
       const course = payload.destination === 'university' ? universityCourse(payload.courseId) : null;
       if (payload.destination === 'university' && !course) return res.status(400).json({ success: false, error: 'Vui lòng chọn một trong mười học phần Đại học' });
-      const courseMetadata = course ? { courseId: course.id, courseCode: course.code, courseName: course.name, educationLevel: 'university' } : {};
+      const section = course ? universitySection(course.id, payload.sectionId) : null;
+      if (course && !section) return res.status(400).json({success:false,error:'Vui lòng chọn chuyên đề con thuộc học phần đã chọn'});
+      const courseMetadata = course ? { courseId: course.id, courseCode: course.code, courseName: course.name, sectionId: section.id, sectionTitle: section.title, sectionNumber: section.number, educationLevel: 'university' } : {};
       const gradeMetadata = { ...courseMetadata, ...(catalogDestination?.graded ? { grade } : {}), ...schoolMetadata };
       const province = cleanText(payload.province, 120);
       const targetAnchor = cleanKey(payload.targetAnchor, 220);
@@ -1406,7 +1414,7 @@ export default async function handler(req, res) {
       }
 
       if (admission && (province !== school.province || targetAnchor !== `admission-${school.id}-${slugKey(year)}` || !/^20\d{2}-20\d{2}$/.test(year) || Number(year.slice(5)) !== Number(year.slice(0, 4)) + 1)) return res.status(400).json({ success: false, error: 'Trường, tỉnh/thành, năm học và mã đề không khớp' });
-      if (course && (province !== course.code || targetAnchor !== `university-${course.id}-${slugKey(year)}` || !/^20\d{2}-20\d{2}$/.test(year) || Number(year.slice(5)) !== Number(year.slice(0, 4)) + 1)) return res.status(400).json({ success: false, error: 'Học phần, năm học và mã đề không khớp' });
+      if (course && (province !== course.code || targetAnchor !== `university-${course.id}-${section.id}-${slugKey(year)}` || !/^20\d{2}-20\d{2}$/.test(year) || Number(year.slice(5)) !== Number(year.slice(0, 4)) + 1)) return res.status(400).json({ success: false, error: 'Học phần, năm học và mã đề không khớp' });
       const provinceSlug = slugKey(province);
       const yearSlug = slugKey(year);
       if (catalogDestination?.graded && targetAnchor !== `${catalogDestination.prefix}${provinceSlug}-${yearSlug}-grade-${grade}`) return res.status(400).json({ success: false, error: 'Mã đề không khớp kỳ thi, năm và khối lớp' });
@@ -1416,7 +1424,7 @@ export default async function handler(req, res) {
           return res.status(400).json({ success: false, error: 'Đơn vị lưu trữ không khớp kho Đà Nẵng–Quảng Nam' });
         }
       }
-      const examKey = isMock ? `mock:set-${setNumber}:${yearSlug}:day-${dayNumber}` : `${catalogDestination?.group || (isRegional ? 'regional' : 'tst')}:${school?.id || provinceSlug}:${yearSlug}${catalogDestination?.graded ? `:grade-${grade}` : ''}:day-${dayNumber}`;
+      const examKey = isMock ? `mock:set-${setNumber}:${yearSlug}:day-${dayNumber}` : `${catalogDestination?.group || (isRegional ? 'regional' : 'tst')}:${school?.id || provinceSlug}:${yearSlug}${section ? `:section-${section.id}` : ''}${catalogDestination?.graded ? `:grade-${grade}` : ''}:day-${dayNumber}`;
       // Một tỉnh có thể có hai đề với các số câu trùng nhau. Ngày thi phải
       // thuộc khóa ổn định để ngày 2 không ghi đè câu hỏi/lịch sử của ngày 1.
       const setKey = isMock ? `mock:${targetAnchor}` : `${catalogDestination?.group || (isRegional ? 'danang_quangnam' : 'tst')}:${targetAnchor}:day-${dayNumber}${!isRegional && !catalogDestination && year !== '2026-2027' ? `:year-${yearSlug}` : ''}`;
