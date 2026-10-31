@@ -979,12 +979,17 @@ export default async function handler(req, res) {
         // Reclassification changes metadata only: existing IDs/keys remain stable
         // so saved guides, submissions and links still belong to the same exam.
         let sectionMetadata = {};
-        if (Object.hasOwn(payload, 'sectionId')) {
+        const universityEdit = ['sectionId', 'courseId', 'dayNumber'].some(key => Object.hasOwn(payload, key));
+        if (universityEdit) {
           if (exam.category !== 'university') return res.status(400).json({ success: false, error: 'Chỉ đề Đại học được chọn chuyên đề con tại đây' });
-          const course = await resolveUniversityCourse(db, exam.courseId);
-          const section = course?.sections.find(item => item.id === payload.sectionId);
+          const courseId = payload.courseId ?? exam.courseId;
+          const course = await resolveUniversityCourse(db, courseId);
+          const section = course?.sections.find(item => item.id === (payload.sectionId ?? exam.sectionId));
           if (!section) return res.status(400).json({ success: false, error: 'Chuyên đề con không thuộc học phần của đề thi' });
-          sectionMetadata = { sectionId: section.id, sectionTitle: section.title, sectionNumber: section.number };
+          const dayNumber = Number(payload.dayNumber ?? exam.dayNumber ?? 1);
+          if (!Number.isInteger(dayNumber) || dayNumber < 1 || dayNumber > UNIVERSITY_MAX_DAYS) return res.status(400).json({success:false,error:'Ngày thi phải là số nguyên từ 1–999'});
+          sectionMetadata = { courseId: course.id, courseCode: course.code, courseName: course.name, province: course.code,
+            sectionId: section.id, sectionTitle: section.title, sectionNumber: section.number, dayNumber, day: `Ngày ${dayNumber}` };
         }
         const title = cleanText(payload.title, 500);
         const year = cleanText(payload.year, 40);
@@ -994,6 +999,11 @@ export default async function handler(req, res) {
             !Number.isInteger(duration) || duration < 1 || duration > 600 ||
             (examDate && !/^\d{4}-\d{2}-\d{2}$/.test(examDate))) {
           return res.status(400).json({ success: false, error: 'Tên đề, năm học (YYYY-YYYY), ngày thi hoặc thời lượng không hợp lệ' });
+        }
+        if (universityEdit) {
+          const duplicate = await db.collection('exams').findOne({ category: 'university', courseId: sectionMetadata.courseId,
+            sectionId: sectionMetadata.sectionId, dayNumber: sectionMetadata.dayNumber, year, status: {$ne:'deleted'}, _id: {$ne:id} });
+          if (duplicate) return res.status(409).json({success:false,error:'Học phần/chuyên đề/năm học đã có đề ở ngày thi này. Hãy chọn ngày khác.'});
         }
         const updated = await db.collection('exams').findOneAndUpdate({ _id: id },
           { $set: { ...sectionMetadata, title, year, duration, examDate, description: cleanText(payload.description, 5000), updatedBy: session.username, updatedAt: now } },
@@ -1007,7 +1017,7 @@ export default async function handler(req, res) {
             { $set: { ...sectionMetadata, title, year, updatedBy: session.username, updatedAt: now } });
         }
         await db.collection('problems').updateMany({ examId: String(id) },
-          { $set: { ...sectionMetadata, setTitle: title, updatedBy: session.username, updatedAt: now } });
+          { $set: { ...sectionMetadata, ...(universityEdit ? {year} : {}), setTitle: title, updatedBy: session.username, updatedAt: now } });
         await recordActivity(db, session, 'exam.updated', { itemTitle: title, examId: String(id) });
         return res.status(200).json({ success: true, item: updated });
       }
@@ -1448,6 +1458,10 @@ export default async function handler(req, res) {
         }
       }
       const examKey = isMock ? `mock:set-${setNumber}:${yearSlug}:day-${dayNumber}` : `${catalogDestination?.group || (isRegional ? 'regional' : 'tst')}:${school?.id || provinceSlug}:${yearSlug}${section ? `:section-${section.id}` : ''}${catalogDestination?.graded ? `:grade-${grade}` : ''}:day-${dayNumber}`;
+      if (course) {
+        const occupied = await db.collection('exams').findOne({ category:'university', courseId:course.id, sectionId:section.id, year, dayNumber, status:{$ne:'deleted'} });
+        if (occupied && occupied.examKey !== examKey) return res.status(409).json({success:false,error:'Ngày thi này đã có đề được chuyển từ học phần/chuyên đề khác. Hãy chỉnh sửa đề hiện có hoặc chọn ngày khác.'});
+      }
       // Một tỉnh có thể có hai đề với các số câu trùng nhau. Ngày thi phải
       // thuộc khóa ổn định để ngày 2 không ghi đè câu hỏi/lịch sử của ngày 1.
       const setKey = isMock ? `mock:${targetAnchor}` : `${catalogDestination?.group || (isRegional ? 'danang_quangnam' : 'tst')}:${targetAnchor}:day-${dayNumber}${!isRegional && !catalogDestination && year !== '2026-2027' ? `:year-${yearSlug}` : ''}`;

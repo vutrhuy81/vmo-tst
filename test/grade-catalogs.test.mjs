@@ -19,7 +19,7 @@ const matches = (doc, query) => Object.entries(query).every(([key, value]) => {
   if (value && typeof value === 'object' && !(value instanceof ObjectId)) {
     if ('$exists' in value) return (doc[key] !== undefined) === value.$exists;
     if ('$nin' in value) return !value.$nin.some(item => String(item) === String(doc[key]));
-    if ('$ne' in value) return doc[key] !== value.$ne;
+    if ('$ne' in value) return String(doc[key]) !== String(value.$ne);
     if ('$in' in value) return value.$in.some(item => String(item) === String(doc[key]));
     return true;
   }
@@ -398,6 +398,33 @@ assert.ok([...mixedCard.querySelectorAll('.db-exam-day')].some(day=>!day.hidden&
 assert.ok([...mixedCard.querySelectorAll('.db-exam-day')].filter(day=>day.dataset.sectionId!==editCourse.sections[2].id).every(day=>day.hidden));
 window.selectUniversitySection(editCourse.sections[0].id);assert.equal(mixedCard.classList.contains('hidden-by-search'),false);
 assert.ok([...mixedCard.querySelectorAll('.db-exam-day')].some(day=>!day.hidden&&day.dataset.sectionId===editCourse.sections[0].id));
+
+// Full university metadata editing: dependent course/section, numbered day and title.
+await window.editManagedExam(editId);
+const fullEdit=documentNode.getElementById('managedExamEditor');assert.equal(fullEdit.elements.courseId.value,editCourse.id);
+assert.ok(fullEdit.textContent.includes('Mã học phần *'));assert.ok(fullEdit.textContent.includes('Tên đề thi *'));
+const destinationCourse=UNIVERSITY_COURSES[1];
+fullEdit.elements.courseId.value=destinationCourse.id;fullEdit.elements.courseId.dispatchEvent(new window.Event('change'));
+assert.equal(fullEdit.elements.sectionId.value,'');assert.equal(fullEdit.elements.sectionId.options.length,destinationCourse.sections.length+1);
+fullEdit.elements.sectionId.value=destinationCourse.sections[0].id;
+fullEdit.querySelector('.managed-add-day').click();fullEdit.querySelector('.managed-add-day').click();
+assert.equal(fullEdit.elements.dayNumber.value,'6');assert.equal(fullEdit.elements.dayNumber.selectedOptions[0].textContent,'Ngày thi thứ sáu');
+fullEdit.elements.title.value='Đề Giải tích 2 đã chuyển';await fullEdit.onsubmit({preventDefault(){}});
+assert.equal(fullEdit.isConnected,false);assert.equal(editTarget.courseId,destinationCourse.id);assert.equal(editTarget.dayNumber,6);assert.equal(editTarget.title,'Đề Giải tích 2 đã chuyển');
+for(const row of stores.get('problems').filter(p=>p.examId===editId)){assert.equal(row.courseId,destinationCourse.id);assert.equal(row.dayNumber,6);assert.equal(row.province,destinationCourse.code);assert.equal(row.setTitle,editTarget.title);}
+const updatedSet=stores.get('content_sets').find(s=>s.key===oldIdentity.setKey);assert.equal(updatedSet.courseId,destinationCourse.id);assert.equal(updatedSet.dayNumber,6);
+for(const [key,value] of Object.entries(oldIdentity))assert.equal(editTarget[key],value);
+assert.equal(originalProblem.contentKey,originalKey);assert.equal(window.currentUniversityCourse,destinationCourse.id);
+for(const patch of [{dayNumber:0},{dayNumber:1.5},{dayNumber:1000},{courseId:'forged'},{courseId:editCourse.id,sectionId:'forged'}])assert.equal((await editCall({...patch,sectionId:patch.sectionId||destinationCourse.sections[0].id})).code,400);
+assert.equal((await editCall({courseId:destinationCourse.id,sectionId:destinationCourse.sections[0].id,dayNumber:1})).code,409,'Occupied day is not overwritten');
+assert.equal(stores.get('exams').find(e=>String(e._id)===editId).dayNumber,6);
+assert.equal((await call({destination:'university',courseId:destinationCourse.id,sectionId:destinationCourse.sections[0].id,province:destinationCourse.code,year:editTarget.year,dayNumber:6,targetAnchor:`university-${destinationCourse.id}-${destinationCourse.sections[0].id}-${editTarget.year}`,sourceImageCount:1,questions:[{questionNumber:1,content:'New exam'}]})).code,409,'New upload cannot overwrite a relocated exam through a different key');
+await window.loadDatabaseCompetitionExams('tab-university',true);await window.loadDatabaseExamDetail('university',editTarget.targetAnchor);
+window.selectUniversityCourse(destinationCourse.id,destinationCourse.sections[0].id);
+const relocated=documentNode.getElementById(editTarget.targetAnchor);assert.equal(relocated.classList.contains('hidden-by-search'),false);
+assert.ok([...relocated.querySelectorAll('.db-exam-day')].some(day=>!day.hidden&&day.dataset.courseId===destinationCourse.id));
+window.selectUniversityCourse(editCourse.id,editCourse.sections[0].id);assert.equal(relocated.classList.contains('hidden-by-search'),false);
+assert.ok([...relocated.querySelectorAll('.db-exam-day')].filter(day=>day.dataset.courseId!==editCourse.id).every(day=>day.hidden));
 
 window.close();
 console.log('Grade and ten University catalogs: identities, authorization, lazy questions, course filters and OCR form: OK');

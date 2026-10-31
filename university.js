@@ -44,13 +44,13 @@
       const active=button.dataset.courseId===course.id;button.setAttribute('aria-pressed',String(active));button.style.fontWeight=active?'800':'400';button.style.borderColor=active?'#2563eb':'#cbd5e1';
     });
     topicList.querySelectorAll('button').forEach(button=>{const active=button.dataset.sectionId===window.currentUniversitySection;button.setAttribute('aria-pressed',String(active));button.style.fontWeight=active?'800':'400';button.style.borderColor=active?'#2563eb':'#cbd5e1';});
-    const matches=node=>node.dataset.courseId===course.id && (!window.currentUniversitySection || (node.dataset.sectionIds || node.dataset.sectionId || 'unclassified').split('|').includes(window.currentUniversitySection));
+    const matches=node=>(node.dataset.courseSections || `${node.dataset.courseId}:${node.dataset.sectionId||'unclassified'}`).split('|').some(value=>{const [courseId,sectionId]=value.split(':');return courseId===course.id&&(!window.currentUniversitySection||sectionId===window.currentUniversitySection);});
     document.querySelectorAll('#universityExamLinks a').forEach(link=>{link.hidden=!matches(link);link.style.display=link.hidden?'none':'';});
     let count=0;
     const norm=value=>String(value||'').toLocaleLowerCase('vi').normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/đ/g,'d');
     const search=norm(document.getElementById('searchInput')?.value).trim();
     document.querySelectorAll('#tab-university .exam-card').forEach(card=>{const visible=matches(card)&&(!search || norm(`${card.dataset.search||''} ${card.textContent}`).includes(search));card.classList.toggle('hidden-by-search',!visible);if(visible)count++;
-      card.querySelectorAll('.db-exam-day').forEach(day=>{day.hidden=!!window.currentUniversitySection && (day.dataset.sectionId||'unclassified')!==window.currentUniversitySection;});
+      card.querySelectorAll('.db-exam-day').forEach(day=>{day.hidden=day.dataset.courseId!==course.id || (!!window.currentUniversitySection && (day.dataset.sectionId||'unclassified')!==window.currentUniversitySection);});
     });
     const root=document.getElementById('tab-university');
     let notice=root?.querySelector('.university-empty');

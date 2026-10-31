@@ -2029,7 +2029,7 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
         <div><label>Ngày thi *</label><select id="${kind}DayNumber" required style="width:100%;padding:7px;">${['nhất','hai','ba','tư'].slice(0,days).map((label,index) => `<option value="${index+1}">Ngày thi thứ ${label}</option>`).join('')}</select>${tst?`<button id="docAddDay" type="button" style="display:none" onclick="addUniversityExamDay()">＋ Thêm ngày thi</button>`:''}</div>
       </div>
       <div style="display:grid;grid-template-columns:1fr .55fr 1fr;gap:10px;margin-bottom:10px;">
-        <div><label>Tỉnh / Đơn vị *</label><input type="text" id="${kind}Province" ${tst ? 'readonly' : 'value="Đà Nẵng"'} required style="width:100%;box-sizing:border-box;padding:7px;"></div>
+        <div><label id="${kind}ProvinceLabel">Tỉnh / Đơn vị *</label><input type="text" id="${kind}Province" ${tst ? 'readonly' : 'value="Đà Nẵng"'} required style="width:100%;box-sizing:border-box;padding:7px;"></div>
         <div id="${kind}AutoRegionWrap"><label>Vùng ${tst ? '(tự động)' : ''}</label><input type="hidden" id="${kind}Region" value="${tst ? '' : 'TRUNG'}"><input type="text" id="${kind}RegionDisplay" value="${tst ? '' : 'Miền Trung'}" readonly style="width:100%;box-sizing:border-box;padding:7px;"></div>
         <div><label>Tên đề thi</label><input type="text" id="${kind}Title" placeholder="Có thể để trống để lấy từ OCR" style="width:100%;box-sizing:border-box;padding:7px;"></div>
       </div>
@@ -4128,6 +4128,7 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
   window.syncDocumentDestination = function(resetPreview = false) {
     const destination = document.getElementById('docDestination')?.value || 'tst';
     const university = destination === 'university';
+    const provinceLabel=document.getElementById('docProvinceLabel');if(provinceLabel)provinceLabel.textContent=university?'Mã học phần *':'Tỉnh / Đơn vị *';
     const courseSelect=document.getElementById('docCourseId');
     if(courseSelect) {
       const courses=window.MathAppUniversity?.courses||[],signature=courses.map(c=>c.id).join('|');
@@ -4812,10 +4813,10 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
     form.id = 'managedExamEditor';
     form.style.cssText = 'padding:14px;margin:12px 0;background:#fff;border:1px solid #94a3b8;border-radius:8px;';
     form.innerHTML = `<strong>Chỉnh sửa đề · ${escapeHtmlText(exam.province || '')}${exam.grade ? ` · Lớp ${exam.grade}` : ''} · Ngày ${Number(exam.dayNumber) || 1}</strong>
-      ${exam.category === 'university' ? '<label style="display:block">Chuyên đề con *<select name="sectionId" required disabled style="width:100%"><option value="">Đang tải chuyên đề…</option></select></label><p class="managed-exam-section-status" role="status"></p>' : ''}
-      <label style="display:block">Tên đề<input name="title" required maxlength="500" style="width:100%"></label>
+      ${exam.category === 'university' ? '<label style="display:block">Mã học phần *<select name="courseId" required disabled style="width:100%"></select></label><label style="display:block">Chuyên đề con *<select name="sectionId" required disabled style="width:100%"><option value="">Đang tải chuyên đề…</option></select></label><p class="managed-exam-section-status" role="status"></p><label style="display:block">Ngày thi *<select name="dayNumber" required style="width:100%"></select></label><button type="button" class="managed-add-day">＋ Thêm ngày thi</button>' : ''}
+      <label style="display:block">Tên đề thi *<input name="title" required maxlength="500" style="width:100%"></label>
       <label style="display:block">Năm học<input name="year" required maxlength="9" pattern="[0-9]{4}-[0-9]{4}" placeholder="2024-2025" style="width:100%"></label>
-      <label style="display:block">Ngày thi<input name="examDate" type="date" style="width:100%"></label>
+      <label style="display:block">Ngày tổ chức<input name="examDate" type="date" style="width:100%"></label>
       <label style="display:block">Thời lượng (phút)<input name="duration" type="number" min="1" max="600" required style="width:100%"></label>
       <label style="display:block">Mô tả<textarea name="description" maxlength="5000" style="width:100%"></textarea></label>
       <button type="submit">Lưu thay đổi</button> <button type="button" onclick="this.closest('form').remove()">Hủy</button>`;
@@ -4831,18 +4832,27 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
       button.disabled = true;
       try {
         await window.VMODataService.updateExam(id, {
-          ...(exam.category === 'university' ? { sectionId: form.elements.sectionId.value } : {}),
+          ...(exam.category === 'university' ? { courseId: form.elements.courseId.value, sectionId: form.elements.sectionId.value, dayNumber: Number(form.elements.dayNumber.value) } : {}),
           title: form.elements.title.value, year: form.elements.year.value.trim(), examDate: form.elements.examDate.value,
           duration: Number(form.elements.duration.value), description: form.elements.description.value
         });
         form.remove();
         showToast('Đã cập nhật đề thi.', true);
         await refreshManagedExams(exam);
-        if (exam.category === 'university') window.selectUniversityCourse?.(exam.courseId, form.elements.sectionId.value);
+        if (exam.category === 'university') window.selectUniversityCourse?.(form.elements.courseId.value, form.elements.sectionId.value);
       } catch (error) { showToast('Lỗi chỉnh sửa đề: ' + error.message, false); button.disabled = false; }
     };
     (exam.category === 'vmo-mock' ? document.getElementById('hubExamsList') : document.getElementById('hubDocsList'))?.before(form);
     if (exam.category === 'university') {
+      const daySelect = form.elements.dayNumber;
+      const addDay = number => daySelect.add(new Option(window.MathAppUniversity.dayLabel(number), String(number)));
+      for (let number = 1; number <= Math.max(4, Number(exam.dayNumber) || 1); number++) addDay(number);
+      daySelect.value = String(Number(exam.dayNumber) || 1);
+      form.querySelector('.managed-add-day').onclick = () => {
+        const number = daySelect.options.length + 1;
+        if (number > 999) return showToast('Tối đa 999 ngày thi.', false);
+        addDay(number); daySelect.value = String(number);
+      };
       const button = form.querySelector('[type="submit"]');
       button.disabled = true;
       const loadSections = async () => {
@@ -4850,14 +4860,22 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
         try {
           await window.loadUniversityCatalog?.(true);
           if (!form.isConnected) return;
-          const course = window.MathAppUniversity?.course(exam.courseId);
-          if (!course) throw new Error('Không tìm thấy học phần của đề thi.');
+          const registry = window.MathAppUniversity;
+          const courses = form.elements.courseId;
+          courses.replaceChildren(new Option('Chọn mã học phần…', ''));
+          registry.courses.forEach(course => courses.add(new Option(`${course.code}: ${course.nameVi}`, course.id)));
+          courses.value = exam.courseId || ''; courses.disabled = false;
           const select = form.elements.sectionId;
-          select.replaceChildren(new Option('Chọn chuyên đề con…', ''));
-          course.sections.forEach(section => select.add(new Option(`${section.number}. ${section.title}`, section.id)));
-          select.value = window.MathAppUniversity.examSection(exam)?.id || '';
+          const refreshSections = (selected = '') => {
+            const course = registry.course(courses.value);
+            select.replaceChildren(new Option('Chọn chuyên đề con…', ''));
+            (course?.sections || []).forEach(section => select.add(new Option(`${section.number}. ${section.title}`, section.id)));
+            select.value = selected;
+            status.textContent = 'Thay đổi học phần, chuyên đề và ngày thi sẽ áp dụng cho mọi câu hỏi trong đề.';
+          };
+          courses.onchange = () => refreshSections();
+          refreshSections(registry.examSection(exam)?.id || '');
           select.disabled = false; button.disabled = false;
-          status.textContent = `${course.code}: ${course.nameVi}. Thay đổi chuyên đề sẽ áp dụng cho mọi câu hỏi trong đề.`;
         } catch (error) {
           if (!form.isConnected) return;
           status.textContent = error.message;
@@ -5075,6 +5093,7 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
   function addUniversitySectionMembership(node, exam) {
     if (!node || exam.category !== 'university') return;
     const sectionId = window.MathAppUniversity?.examSection(exam)?.id || 'unclassified';
+    node.dataset.courseSections = [...new Set([...(node.dataset.courseSections || '').split('|').filter(Boolean), `${exam.courseId}:${sectionId}`])].join('|');
     node.dataset.sectionIds = [...new Set([...(node.dataset.sectionIds || '').split('|').filter(Boolean), sectionId])].join('|');
   }
   function createCompetitionCard(exam) {
@@ -5587,7 +5606,7 @@ if (card) card.dataset.databaseCard = 'true';
 
     const section = document.createElement('section');
     section.className = 'db-exam-day';
-    if (exam.category === 'university') section.dataset.sectionId = window.MathAppUniversity?.examSection(exam)?.id || 'unclassified';
+    if (exam.category === 'university') {section.dataset.courseId=exam.courseId;section.dataset.sectionId = window.MathAppUniversity?.examSection(exam)?.id || 'unclassified';}
     section.dataset.examKey = exam.examKey || exam.id || '';
     section.dataset.dayNumber = String(Number(exam.dayNumber) || 1);
     section.style.cssText = 'border-top:3px solid #0ea5e9;margin-top:20px;padding-top:14px;';
@@ -5596,7 +5615,7 @@ if (card) card.dataset.databaseCard = 'true';
     meta.style.cssText = 'display:flex;flex-wrap:wrap;gap:12px;align-items:center;background:#eff6ff;padding:10px 12px;border-radius:8px;margin-bottom:12px;color:#0f172a;';
     const imageCount = Math.max(0, Math.min(20, Number(exam.sourceImageCount) || (exam.hasImages ? 1 : 0)));
     const imageButtons = Array.from({ length: imageCount }, (_, index) => `<button type="button" onclick="openExamSourceImage('${escapeHtmlText(exam.id || exam._id)}',${index + 1})" style="border:1px solid #93c5fd;background:#fff;color:#1d4ed8;padding:4px 9px;border-radius:5px;cursor:pointer;">🖼️ Ảnh ${index + 1}</button>`).join('');
-    meta.innerHTML = `<strong>📌 Ngày thi thứ ${['','nhất','hai','ba','tư','năm','sáu','bảy','tám','chín','mười'][Number(exam.dayNumber)||1] || (Number(exam.dayNumber)||1)}</strong><span>📅 ${escapeHtmlText(exam.examDate || 'Đang cập nhật')}</span><span>⏱️ ${Number(exam.duration) || 180} phút</span><span>🗄️ cơ sở dữ liệu</span>${imageButtons}`;
+    meta.innerHTML = `${exam.category==='university'?`<span><strong>${escapeHtmlText(exam.courseCode||'')}</strong> · ${escapeHtmlText(exam.title||'')}</span>`:''}<strong>📌 Ngày thi thứ ${['','nhất','hai','ba','tư','năm','sáu','bảy','tám','chín','mười'][Number(exam.dayNumber)||1] || (Number(exam.dayNumber)||1)}</strong><span>📅 ${escapeHtmlText(exam.examDate || 'Đang cập nhật')}</span><span>⏱️ ${Number(exam.duration) || 180} phút</span><span>🗄️ cơ sở dữ liệu</span>${imageButtons}`;
     section.appendChild(meta);
 
     newProblems.sort((a, b) => Number(a.questionNumber) - Number(b.questionNumber)).forEach(problem => {
@@ -5718,6 +5737,7 @@ if (card) card.dataset.databaseCard = 'true';
   const detailKey = (category, anchor) => `${category}:${anchor}`;
 
   function consolidateExamDays(exams, category) {
+    if (category === 'university') return [...exams].sort((a,b)=>Number(a.dayNumber)-Number(b.dayNumber));
     if (category !== 'tst-national' && !competitionTabs[category]) return exams;
     const days = new Map();
     exams.forEach(exam => {
@@ -5859,8 +5879,9 @@ if (card) card.dataset.databaseCard = 'true';
     const category = examCategories[tab];
     const anchor = link.getAttribute('href')?.slice(1);
     if (tab === 'tab-university' && link.dataset.courseId) {
-      const sections=(link.dataset.sectionIds||link.dataset.sectionId||'unclassified').split('|');
-      window.selectUniversityCourse?.(link.dataset.courseId,sections.includes(window.currentUniversitySection)?window.currentUniversitySection:sections[0]);
+      const memberships=(link.dataset.courseSections||`${link.dataset.courseId}:${link.dataset.sectionId||'unclassified'}`).split('|').map(value=>value.split(':'));
+      const chosen=memberships.find(([course,section])=>course===window.currentUniversityCourse&&section===window.currentUniversitySection)||memberships.find(([course])=>course===window.currentUniversityCourse)||memberships[0];
+      window.selectUniversityCourse?.(chosen[0],chosen[1]);
     }
     if (!category || !anchor) return;
     event.preventDefault();
