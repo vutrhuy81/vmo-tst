@@ -1,3 +1,4 @@
+import { allows } from '../lib/education-access.js';
 import { canAccessProblem } from '../lib/problem-access.js';
 import { mathematicalAuditInstruction, auditEvidence } from '../lib/math-audit.js';
 import { retrieveVerifiedContext } from '../lib/rag-retrieval.js';
@@ -118,6 +119,7 @@ export default async function handler(req, res) {
   if (req.method !== 'POST') return res.status(405).json({ success: false, error: 'Method not allowed' });
   const session = await getSession(req);
   if (!session) return res.status(401).json({ success: false, error: 'Vui lòng đăng nhập lại' });
+  if (!allows(session, 'shared')) return res.status(403).json({ success: false, error: 'Tài khoản chưa được cấp quyền cấp học' });
   if (!checkRateLimit(session.username, 8)) return res.status(429).json({ success: false, error: 'Bạn đang gửi yêu cầu quá nhanh' });
   const body = parseBody(req);
   if (!body) return res.status(400).json({ success: false, error: 'JSON không hợp lệ' });
@@ -126,7 +128,7 @@ export default async function handler(req, res) {
   if (!solutionText && !solutionImage) return res.status(400).json({ success: false, error: 'Cần có văn bản hoặc ảnh bài giải' });
   const outputLanguage = body.lang === 'en' ? 'English' : 'Vietnamese';
 
-  if (!['admin', 'teacher'].includes(session.role)) {
+  if (session.role !== 'admin') {
     const problemRef = text(body.problemKey || body.problemId, 180);
     if (problemRef) {
       const filters = [{ contentKey: problemRef }, { id: problemRef }];
@@ -160,7 +162,7 @@ export default async function handler(req, res) {
     return res.status(503).json({ success: false, error: 'Chưa đối chiếu được nguồn bài toán. Vui lòng thử lại.' });
   }
 
-  const prompt = `Chấm bài giải Olympic THPT theo thang 5 điểm. Viết TOÀN BỘ báo cáo bằng ${outputLanguage}, với văn phong toán học chuẩn mực.
+  const prompt = `Chấm bài giải ${reference?.educationLevel === 'university' ? 'Toán Đại học, học phần ' + (reference.courseName || 'tương ứng') : 'Olympic THPT'} theo thang 5 điểm. Viết TOÀN BỘ báo cáo bằng ${outputLanguage}, với văn phong toán học chuẩn mực.
 
 THÔNG TIN BÀI TOÁN
 - Kỳ thi: ${text(body.examTitle, 300)}
@@ -212,7 +214,7 @@ ${mathematicalAuditInstruction}\n\nQUY TRÌNH CHẤM BẮT BUỘC
       totalTimeoutMs: 130_000,
       maxOutputTokens: 16_000,
       thinkingLevel: 'HIGH',
-      systemInstruction: `Bạn là giám khảo VMO/IMO nghiêm túc và thận trọng. Toàn bộ nội dung phải được viết bằng ${outputLanguage}.
+      systemInstruction: `Bạn là giám khảo ${reference?.educationLevel === 'university' ? 'Toán Đại học (' + (reference.courseName || 'học phần tương ứng') + ')' : 'VMO/IMO'} nghiêm túc và thận trọng. Toàn bộ nội dung phải được viết bằng ${outputLanguage}.
 Ưu tiên tính đúng đắn hơn độ dài. Không bịa dữ kiện hoặc lỗi.
 Mọi phép biến đổi đại số do bạn nêu phải được tự kiểm tra độc lập trước khi trả kết quả JSON.`
     });
@@ -252,7 +254,7 @@ ${mathematicalAuditInstruction}\n\nYÊU CẦU KIỂM ĐỊNH
 8. allClaimsChecked đánh giá mức độ kiểm tra của báo cáo cuối; không đặt false chỉ vì học sinh bỏ dở hoặc thiếu chứng minh.
 9. Dùng MathJax $...$ hoặc $$...$$; không dùng align, aligned, tag, itemize, enumerate hoặc textbf.`,
       schema: verifierSchema,
-      systemInstruction: `Bạn là giám khảo phản biện VMO/IMO độc lập. Hãy kiểm tra bài làm gốc và báo cáo Gemini bằng ${outputLanguage}. Ưu tiên tính đúng đắn; không bịa nội dung học sinh. Trả về đúng structured JSON.`,
+      systemInstruction: `Bạn là giám khảo phản biện ${reference?.educationLevel === 'university' ? 'Toán Đại học (' + (reference.courseName || 'học phần tương ứng') + ')' : 'VMO/IMO'} độc lập. Hãy kiểm tra bài làm gốc và báo cáo Gemini bằng ${outputLanguage}. Ưu tiên tính đúng đắn; không bịa nội dung học sinh. Trả về đúng structured JSON.`,
       timeoutMs: 140_000,
       maxOutputTokens: 16_000,
       reasoningEffort: 'high'

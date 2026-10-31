@@ -28,6 +28,7 @@
                 <th style="width:40px; text-align:center;">#</th>
                 <th>Tài khoản</th>
                 <th style="width:110px;">Phân quyền</th>
+                <th style="min-width:210px;">Cấp học</th>
                 <th style="width:110px;">Ngày tạo</th>
                 <th style="width:150px; text-align:right;">Thao tác</th>
               </tr>
@@ -66,6 +67,13 @@
                 <option value="admin">Quản trị viên (Toàn quyền quản lý)</option>
               </select>
             </div>
+            <fieldset id="newEducationLevels" class="form-group" style="border:1px solid #cbd5e1;border-radius:8px;padding:12px;">
+              <legend>Cấp học được truy cập (chọn nhiều)</legend>
+              <label><input type="checkbox" value="primary"> Tiểu học</label>
+              <label><input type="checkbox" value="lower_secondary"> Trung học cơ sở</label>
+              <label><input type="checkbox" value="upper_secondary" checked> Trung học phổ thông</label>
+              <label><input type="checkbox" value="university"> Đại học</label>
+            </fieldset>
             <button type="submit" class="btn-submit-user">
               <span>➕ Tạo tài khoản</span>
             </button>

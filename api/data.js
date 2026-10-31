@@ -1,3 +1,9 @@
+import { universityCatalog, resolveUniversityCourse, addUniversityCatalogItem, UNIVERSITY_MAX_DAYS, UNIVERSITY_MAX_QUESTIONS } from '../lib/university-catalog.js';
+import { getUniversityMaterials, universityMaterialCatalog, updateUniversityTheory } from '../lib/university-materials.js';
+import { universityExamSection } from '../lib/university-courses.js';
+import { serveEducationPage } from '../lib/app-shell.js';
+import { allows } from '../lib/education-access.js';
+import { educationDb } from '../lib/education-db.js';
 import { getCatalogTotals } from '../lib/home-stats.js';
 import { cleanGeometryDiagram } from '../lib/geometry-diagram.js';
 import { canAccessProblem, supportVisibility } from '../lib/problem-access.js';
@@ -15,7 +21,7 @@ import { deleteAiGuideRecord, learningScope, recordActivity, summarizeLearning }
 import { cleanTrendTheory } from '../lib/trend-theory-storage.js';
 import { buildSubmissionContentUpdate, buildSubmissionVerificationUpdate } from '../lib/submission-verification.js';
 
-const ALLOWED_RESOURCES = new Set(['math_support', 'math_support_image', 'documents', 'exams', 'exam_catalog', 'home_stats', 'exam_image', 'content_sets', 'content_blocks', 'problems', 'content_revisions', 'submissions', 'submission_image', 'events', 'activity_feed', 'learning_overview', 'exam_trend_reports', 'trend_theories', 'rag_status', 'rag_logs']);
+const ALLOWED_RESOURCES = new Set(['university_catalog', 'university_materials', 'math_support', 'math_support_image', 'documents', 'exams', 'exam_catalog', 'home_stats', 'exam_image', 'content_sets', 'content_blocks', 'problems', 'content_revisions', 'submissions', 'submission_image', 'events', 'activity_feed', 'learning_overview', 'exam_trend_reports', 'trend_theories', 'rag_status', 'rag_logs']);
 const TST_REGIONS = new Set(['BAC', 'TRUNG', 'NAM']);
 const EXAM_TREND_TOPICS = [
   'Dãy số và Giới hạn dãy số', 'Phương trình hàm', 'Số học và dãy số',
@@ -253,14 +259,20 @@ export default async function handler(req, res) {
   if (req.method === 'OPTIONS') return res.status(200).end();
 
   const session = await getSession(req);
+  if (['app_shell', 'protected_asset', 'blocked_static'].includes(req.query?.resource)) {
+    if (req.method !== 'GET') return res.status(405).end();
+    try { if (await serveEducationPage(req, res, session)) return; }
+    catch { return res.status(500).json({ success: false, error: 'Không tải được giao diện học tập' }); }
+  }
   if (!session) return res.status(401).json({ success: false, error: 'Vui lòng đăng nhập lại' });
 
   try {
-    const db = await getDb();
+    const db = educationDb(await getDb(), session);
     if (await handleMathSupport({ db, req, res, session })) return;
 
     if (req.method === 'GET') {
       const resource = cleanText(req.query?.resource, 30);
+      if (['exam_trend_reports', 'trend_theories', 'rag_status', 'rag_logs'].includes(resource) && !allows(session, 'upper_secondary')) return res.status(403).json({ success: false, error: 'Nội dung thuộc cấp Trung học phổ thông' });
       if (!ALLOWED_RESOURCES.has(resource)) {
         return res.status(400).json({ success: false, error: 'Loại dữ liệu không hợp lệ' });
       }
@@ -350,6 +362,7 @@ export default async function handler(req, res) {
         if (!requireContentManager(session, res)) return;
         const problemId = objectId(cleanText(req.query?.problemId, 80));
         if (!problemId) return res.status(400).json({ success: false, error: 'Mã câu hỏi không hợp lệ' });
+        if (!await db.collection('problems').findOne({ _id: problemId })) return res.status(403).json({ success: false, error: 'Không có quyền truy cập câu hỏi' });
         const items = await db.collection('content_revisions')
           .find({ problemId })
           .sort({ createdAt: -1 })
@@ -392,6 +405,18 @@ export default async function handler(req, res) {
         return res.status(200).json({ success: true, items });
       }
 
+      if(resource === 'university_catalog') {
+        if(!allows(session,'university'))return res.status(403).json({success:false,error:'Nội dung thuộc cấp Đại học'});
+        return res.status(200).json({success:true,item:await universityCatalog(db,session)});
+      }
+      if (resource === 'university_materials') {
+        if (!allows(session,'university')) return res.status(403).json({success:false,error:'Tài liệu thuộc cấp Đại học'});
+        const courseId=cleanText(req.query?.courseId,90);
+        if (!courseId) return res.status(200).json({success:true,item:await universityMaterialCatalog(db,session)});
+        if (!await resolveUniversityCourse(db,courseId)) return res.status(400).json({success:false,error:'Học phần không hợp lệ'});
+        return res.status(200).json({success:true,item:await getUniversityMaterials(db,session,courseId)});
+      }
+
       if (resource === 'home_stats') {
         // Chỉ lấy khóa định danh và số ví dụ từ MongoDB để hiển thị thống kê.
         // Không tải problems/nội dung đề, nên request này vẫn nhẹ.
@@ -431,6 +456,15 @@ export default async function handler(req, res) {
       if (resource === 'exam_catalog') {
         const examFilter = { category: cleanText(req.query?.category, 80) || 'tst-national', status: { $ne: 'deleted' } };
         if (!['admin', 'teacher'].includes(session.role)) examFilter.status = 'published';
+        if (examFilter.category === 'university' && req.query?.courseId) {
+          if (!await resolveUniversityCourse(db,req.query.courseId)) return res.status(400).json({ success: false, error: 'Học phần không hợp lệ' });
+          examFilter.courseId = req.query.courseId;
+        }
+        if (examFilter.category === 'university' && req.query?.sectionId) {
+          const section=(await resolveUniversityCourse(db,examFilter.courseId))?.sections.find(s=>s.id===req.query.sectionId);
+          if(!section) return res.status(400).json({success:false,error:'Chuyên đề con không hợp lệ'});
+          examFilter.sectionId=section.id;
+        }
         if (req.query?.grade != null && ['olympic-30-4', 'duyen-hai-bac'].includes(examFilter.category)) {
           const grade = Number(req.query.grade);
           if (![10, 11].includes(grade)) return res.status(400).json({ success: false, error: 'Khối lớp không hợp lệ' });
@@ -440,11 +474,11 @@ export default async function handler(req, res) {
         if (view === 'summary') {
           const projection = {
             examKey: 1, targetAnchor: 1, category: 1, title: 1, province: 1,
-            schoolId: 1, schoolName: 1, schoolAuthority: 1, provinceId: 1, provinceOrder: 1, region: 1, year: 1, grade: 1, setNumber: 1, dayNumber: 1,
+            courseId: 1, courseCode: 1, courseName: 1, sectionId: 1, sectionTitle: 1, sectionNumber: 1, educationLevel: 1, schoolId: 1, schoolName: 1, schoolAuthority: 1, provinceId: 1, provinceOrder: 1, region: 1, regionName: 1, questionCount: 1, year: 1, grade: 1, setNumber: 1, dayNumber: 1,
             examDate: 1, duration: 1, description: 1, status: 1, origin: 1, sourceImageCount: 1
           };
           const exams = await db.collection('exams').find(examFilter, { projection })
-            .sort({ provinceOrder: 1, dayNumber: 1, createdAt: 1 }).limit(200).toArray();
+            .sort({ provinceOrder: 1, dayNumber: 1, createdAt: 1 }).limit(examFilter.category === 'university' ? 1000 : 200).toArray();
           const problemFilter = { examId: { $in: exams.map(exam => String(exam._id)) }, status: { $ne: 'deleted' } };
           if (!['admin', 'teacher'].includes(session.role)) problemFilter.status = 'published';
           const counts = exams.length ? await db.collection('problems').aggregate([
@@ -462,12 +496,12 @@ export default async function handler(req, res) {
           if (year && !/^20\d{2}-20\d{2}$/.test(year)) return res.status(400).json({ success: false, error: 'Năm học không hợp lệ' });
           const yearFilter = year ? { year: { $in: [year, year.replace('-', '–'), year.replace('-', '—')] } } : {};
           const exams = await db.collection('exams').find({ ...examFilter, targetAnchor: anchor, ...yearFilter })
-            .sort({ dayNumber: 1, createdAt: 1 }).limit(20).toArray();
+            .sort({ dayNumber: 1, createdAt: 1 }).limit(examFilter.category === 'university' ? UNIVERSITY_MAX_DAYS : 20).toArray();
           if (!exams.length) return res.status(404).json({ success: false, error: 'Không tìm thấy đề thi' });
           const problemFilter = { examId: { $in: exams.map(exam => String(exam._id)) }, status: { $ne: 'deleted' } };
           if (!['admin', 'teacher'].includes(session.role)) problemFilter.status = 'published';
           const problems = await db.collection('problems').find(problemFilter)
-            .sort({ orderNumber: 1, questionNumber: 1 }).limit(500).toArray();
+            .sort({ orderNumber: 1, questionNumber: 1 }).limit(examFilter.category === 'university' ? UNIVERSITY_MAX_QUESTIONS * exams.length : 500).toArray();
           const byExam = new Map();
           problems.forEach(problem => {
             const key = String(problem.examId);
@@ -497,7 +531,7 @@ export default async function handler(req, res) {
           return res.status(200).json({ success: true, items: [...new Set(matches
             .map(problem => anchorById.get(String(problem.examId))).filter(Boolean))].map(targetAnchor => ({ targetAnchor })) });
         }
-        const exams = await db.collection('exams').find(examFilter).sort({ provinceOrder: 1, dayNumber: 1, createdAt: 1 }).limit(200).toArray();
+        const exams = await db.collection('exams').find(examFilter).sort({ provinceOrder: 1, dayNumber: 1, createdAt: 1 }).limit(examFilter.category === 'university' ? 1000 : 200).toArray();
         const examIds = exams.map(item => String(item._id));
         const problemFilter = { examId: { $in: examIds }, status: { $ne: 'deleted' } };
         if (!['admin', 'teacher'].includes(session.role)) problemFilter.status = 'published';
@@ -689,8 +723,19 @@ export default async function handler(req, res) {
     const body = parseBody(req);
     if (!body) return res.status(400).json({ success: false, error: 'JSON không hợp lệ' });
     const { action, payload = {} } = body;
+    if (!allows(session, 'shared')) return res.status(403).json({ success: false, error: 'Tài khoản chưa được cấp quyền cấp học' });
+    if (/trend|^rag_|^migrate_tst/.test(action) && !allows(session, 'upper_secondary')) return res.status(403).json({ success: false, error: 'Nội dung thuộc cấp Trung học phổ thông' });
     const now = new Date();
     if (await handleMathSupport({ db, req, res, session, action, payload })) return;
+    if(action === 'add_university_catalog_item') {
+      try{return res.status(201).json({success:true,item:await addUniversityCatalogItem(db,session,payload)});}
+      catch(error){if(error.status)return res.status(error.status).json({success:false,error:error.message});throw error;}
+    }
+    if(action === 'update_university_theory') {
+      try { return res.status(200).json({success:true,item:await updateUniversityTheory(db,session,payload)}); }
+      catch(error) { if(error.status)return res.status(error.status).json({success:false,error:error.message});throw error; }
+    }
+
 
     if (action === 'submit_solution') {
       const submittedProblemId = cleanText(payload.problemId, 180);
@@ -709,6 +754,7 @@ export default async function handler(req, res) {
       if (submittedProblemKey) problemFilters.push({ contentKey: submittedProblemKey });
       problemFilters.push({ id: submittedProblemId });
       const registeredProblem = await db.collection('problems').findOne({ $or: problemFilters });
+      if (!registeredProblem && Object.hasOwn(session, 'educationLevels')) return res.status(403).json({ success: false, error: 'Bài toán chưa đăng ký hoặc không thuộc cấp học được cấp quyền' });
       if (registeredProblem && !canAccessProblem(registeredProblem, session)) return res.status(403).json({ success: false, error: 'Bạn không có quyền truy cập bài toán này' });
       if (registeredProblem && !['admin', 'teacher'].includes(session.role)) {
         const registeredSet = registeredProblem.setId
@@ -834,7 +880,7 @@ export default async function handler(req, res) {
       const examId = objectId(cleanText(payload.examId, 80));
       if (!examId) return res.status(400).json({ success: false, error: 'ID đề thi không hợp lệ' });
       const exam = await db.collection('exams').findOne({ _id: examId, status: { $ne: 'deleted' } });
-      if (!exam || !['tst-national', 'history-dn-qn', 'vmo-mock', 'vmo-official', 'imo-olympic', 'olympic-30-4', 'duyen-hai-bac', 'specialized-admission'].includes(exam.category) || !exam.targetAnchor) {
+      if (!exam || !['tst-national', 'history-dn-qn', 'vmo-mock', 'vmo-official', 'imo-olympic', 'olympic-30-4', 'duyen-hai-bac', 'specialized-admission', 'university'].includes(exam.category) || !exam.targetAnchor) {
         return res.status(404).json({ success: false, error: 'Không tìm thấy đề thi trong catalog' });
       }
       const examIdText = String(examId);
@@ -879,8 +925,8 @@ export default async function handler(req, res) {
       }
       const questionNumber = Number(payload.questionNumber);
       const content = cleanText(payload.content, 50000);
-      if (!Number.isInteger(questionNumber) || questionNumber < 1 || questionNumber > 99 || !content) {
-        return res.status(400).json({ success: false, error: 'Cần số câu từ 1–99 và nội dung câu hỏi' });
+      if (!Number.isInteger(questionNumber) || questionNumber < 1 || questionNumber > (exam.category==='university'?UNIVERSITY_MAX_QUESTIONS:99) || !content) {
+        return res.status(400).json({ success: false, error: `Cần số câu từ 1–${exam.category==='university'?UNIVERSITY_MAX_QUESTIONS:99} và nội dung câu hỏi` });
       }
       const active = await db.collection('problems').findOne({
         examId: examIdText, questionNumber, status: { $ne: 'deleted' }
@@ -888,7 +934,10 @@ export default async function handler(req, res) {
       if (active) return res.status(409).json({ success: false, error: `Câu ${questionNumber} đã có trong đề này` });
       const isMock = exam.category === 'vmo-mock';
       const isRegional = exam.category === 'history-dn-qn';
-      const categoryGroup = { 'vmo-official': 'vmo_official', 'imo-olympic': 'imo_olympic', 'olympic-30-4': 'olympic_30_4', 'duyen-hai-bac': 'duyen_hai_bac', 'specialized-admission': 'specialized_admission' }[exam.category];
+      const inheritedCourse = exam.category === 'university' ? await resolveUniversityCourse(db,exam.courseId) : null;
+      const inheritedSection = inheritedCourse ? inheritedCourse.sections.find(s=>s.id===exam.sectionId)||universityExamSection(exam) : null;
+      const inheritedCourseMetadata = inheritedCourse ? { courseId: inheritedCourse.id, courseCode: inheritedCourse.code, courseName: inheritedCourse.name, ...(inheritedSection ? {sectionId:inheritedSection.id,sectionTitle:inheritedSection.title,sectionNumber:inheritedSection.number} : {}), educationLevel: 'university' } : {};
+      const categoryGroup = { 'vmo-official': 'vmo_official', 'imo-olympic': 'imo_olympic', 'olympic-30-4': 'olympic_30_4', 'duyen-hai-bac': 'duyen_hai_bac', 'university': 'university', 'specialized-admission': 'specialized_admission' }[exam.category];
       const day = Number(exam.dayNumber) || 1;
       const setKey = exam.setKey || (isMock ? `mock:${exam.targetAnchor}`
         : `${categoryGroup || (isRegional ? 'danang_quangnam' : 'tst')}:${exam.targetAnchor}:day-${day}${!isRegional && !categoryGroup && exam.year !== '2026-2027' ? `:year-${slugKey(exam.year)}` : ''}`);
@@ -899,13 +948,13 @@ export default async function handler(req, res) {
       }
       const group = categoryGroup || (isMock ? 'mock_exam' : isRegional ? 'danang_quangnam' : 'tst');
       const savedSet = await db.collection('content_sets').findOneAndUpdate({ key: setKey },
-        { $setOnInsert: { key: setKey, contentType: categoryGroup ? `${categoryGroup}_exam` : isMock ? 'mock_exam' : isRegional ? 'regional_exam' : 'tst_exam',
+        { $setOnInsert: { ...inheritedCourseMetadata, key: setKey, contentType: categoryGroup ? `${categoryGroup}_exam` : isMock ? 'mock_exam' : isRegional ? 'regional_exam' : 'tst_exam',
           title: exam.title, group, ...(exam.grade ? { grade: exam.grade } : {}), year: exam.year, province: exam.province, status: 'published', createdAt: now } },
         { upsert: true, returnDocument: 'after' });
       const title = cleanText(payload.title, 500) || `Câu ${questionNumber}`;
       const saved = await db.collection('problems').findOneAndUpdate({ contentKey },
         { $set: {
-          ...(exam.grade ? { grade: exam.grade } : {}), examId: examIdText, examKey: exam.examKey || '', setId: savedSet._id, setKey, setTitle: exam.title,
+          ...inheritedCourseMetadata, ...(exam.grade ? { grade: exam.grade } : {}), examId: examIdText, examKey: exam.examKey || '', setId: savedSet._id, setKey, setTitle: exam.title,
           sourceGroup: group, sourceType: categoryGroup ? `${categoryGroup}_question` : isMock ? 'mock_exam_question' : isRegional ? 'regional_question' : 'tst_question',
           title, shortLabel: `Câu ${questionNumber}`, questionNumber, dayNumber: day, day: `Ngày ${day}`,
           order: day * 100 + questionNumber, orderNumber: questionNumber,
@@ -927,6 +976,21 @@ export default async function handler(req, res) {
       const exam = await db.collection('exams').findOne({ _id: id, status: { $ne: 'deleted' } });
       if (!exam) return res.status(404).json({ success: false, error: 'Không tìm thấy đề thi' });
       if (action === 'update_exam') {
+        // Reclassification changes metadata only: existing IDs/keys remain stable
+        // so saved guides, submissions and links still belong to the same exam.
+        let sectionMetadata = {};
+        const universityEdit = ['sectionId', 'courseId', 'dayNumber'].some(key => Object.hasOwn(payload, key));
+        if (universityEdit) {
+          if (exam.category !== 'university') return res.status(400).json({ success: false, error: 'Chỉ đề Đại học được chọn chuyên đề con tại đây' });
+          const courseId = payload.courseId ?? exam.courseId;
+          const course = await resolveUniversityCourse(db, courseId);
+          const section = course?.sections.find(item => item.id === (payload.sectionId ?? exam.sectionId));
+          if (!section) return res.status(400).json({ success: false, error: 'Chuyên đề con không thuộc học phần của đề thi' });
+          const dayNumber = Number(payload.dayNumber ?? exam.dayNumber ?? 1);
+          if (!Number.isInteger(dayNumber) || dayNumber < 1 || dayNumber > UNIVERSITY_MAX_DAYS) return res.status(400).json({success:false,error:'Ngày thi phải là số nguyên từ 1–999'});
+          sectionMetadata = { courseId: course.id, courseCode: course.code, courseName: course.name, province: course.code,
+            sectionId: section.id, sectionTitle: section.title, sectionNumber: section.number, dayNumber, day: `Ngày ${dayNumber}` };
+        }
         const title = cleanText(payload.title, 500);
         const year = cleanText(payload.year, 40);
         const duration = Number(payload.duration);
@@ -936,19 +1000,24 @@ export default async function handler(req, res) {
             (examDate && !/^\d{4}-\d{2}-\d{2}$/.test(examDate))) {
           return res.status(400).json({ success: false, error: 'Tên đề, năm học (YYYY-YYYY), ngày thi hoặc thời lượng không hợp lệ' });
         }
+        if (universityEdit) {
+          const duplicate = await db.collection('exams').findOne({ category: 'university', courseId: sectionMetadata.courseId,
+            sectionId: sectionMetadata.sectionId, dayNumber: sectionMetadata.dayNumber, year, status: {$ne:'deleted'}, _id: {$ne:id} });
+          if (duplicate) return res.status(409).json({success:false,error:'Học phần/chuyên đề/năm học đã có đề ở ngày thi này. Hãy chọn ngày khác.'});
+        }
         const updated = await db.collection('exams').findOneAndUpdate({ _id: id },
-          { $set: { title, year, duration, examDate, description: cleanText(payload.description, 5000), updatedBy: session.username, updatedAt: now } },
+          { $set: { ...sectionMetadata, title, year, duration, examDate, description: cleanText(payload.description, 5000), updatedBy: session.username, updatedAt: now } },
           { returnDocument: 'after' });
         if (exam.targetAnchor) {
-          const group = { 'vmo-official': 'vmo_official', 'imo-olympic': 'imo_olympic', 'olympic-30-4': 'olympic_30_4', 'duyen-hai-bac': 'duyen_hai_bac', 'specialized-admission': 'specialized_admission',
+          const group = { 'vmo-official': 'vmo_official', 'imo-olympic': 'imo_olympic', 'olympic-30-4': 'olympic_30_4', 'duyen-hai-bac': 'duyen_hai_bac', 'university': 'university', 'specialized-admission': 'specialized_admission',
             'history-dn-qn': 'danang_quangnam' }[exam.category] || 'tst';
           const setKey = exam.setKey || (exam.category === 'vmo-mock' ? `mock:${exam.targetAnchor}`
             : `${group}:${exam.targetAnchor}:day-${Number(exam.dayNumber) || 1}${group === 'tst' && exam.year !== '2026-2027' ? `:year-${slugKey(exam.year)}` : ''}`);
           await db.collection('content_sets').updateOne({ key: setKey },
-            { $set: { title, year, updatedBy: session.username, updatedAt: now } });
+            { $set: { ...sectionMetadata, title, year, updatedBy: session.username, updatedAt: now } });
         }
         await db.collection('problems').updateMany({ examId: String(id) },
-          { $set: { setTitle: title, updatedBy: session.username, updatedAt: now } });
+          { $set: { ...sectionMetadata, ...(universityEdit ? {year} : {}), setTitle: title, updatedBy: session.username, updatedAt: now } });
         await recordActivity(db, session, 'exam.updated', { itemTitle: title, examId: String(id) });
         return res.status(200).json({ success: true, item: updated });
       }
@@ -1337,21 +1406,28 @@ export default async function handler(req, res) {
     }
 
     if (action === 'create_exam_from_ocr') {
+      if (!allows(session, payload.destination === 'university' ? 'university' : payload.destination === 'admission' ? 'lower_secondary' : 'upper_secondary')) return res.status(403).json({ success: false, error: 'Đề thi không thuộc cấp học được cấp quyền' });
       const isMock = payload.destination === 'mock';
       const isRegional = payload.destination === 'regional';
-      const catalogDestination = { admission: { category: 'specialized-admission', prefix: 'admission-', group: 'specialized_admission' }, vmo: { category: 'vmo-official', prefix: 'vmo-', group: 'vmo_official' }, olympic: { category: 'imo-olympic', prefix: 'olympic-', group: 'imo_olympic' }, olympic30: { category: 'olympic-30-4', prefix: 'olympic30-', group: 'olympic_30_4', graded: true }, duyenhai: { category: 'duyen-hai-bac', prefix: 'duyenhai-', group: 'duyen_hai_bac', graded: true } }[payload.destination];
-      if (payload.destination && !['mock', 'tst', 'regional', 'vmo', 'olympic', 'olympic30', 'duyenhai', 'admission'].includes(payload.destination)) return res.status(400).json({ success: false, error: 'Loại đề thi không hợp lệ' });
+      const catalogDestination = { university: { category: 'university', prefix: 'university-', group: 'university' }, admission: { category: 'specialized-admission', prefix: 'admission-', group: 'specialized_admission' }, vmo: { category: 'vmo-official', prefix: 'vmo-', group: 'vmo_official' }, olympic: { category: 'imo-olympic', prefix: 'olympic-', group: 'imo_olympic' }, olympic30: { category: 'olympic-30-4', prefix: 'olympic30-', group: 'olympic_30_4', graded: true }, duyenhai: { category: 'duyen-hai-bac', prefix: 'duyenhai-', group: 'duyen_hai_bac', graded: true } }[payload.destination];
+      if (payload.destination && !['mock', 'tst', 'regional', 'vmo', 'olympic', 'olympic30', 'duyenhai', 'admission', 'university'].includes(payload.destination)) return res.status(400).json({ success: false, error: 'Loại đề thi không hợp lệ' });
       const grade = Number(payload.grade);
       if (catalogDestination?.graded && ![10, 11].includes(grade)) return res.status(400).json({ success: false, error: 'Vui lòng chọn Lớp 10 hoặc Lớp 11' });
       const admission = payload.destination === 'admission';
       const school = admission ? specializedSchool(cleanText(payload.schoolId, 150)) : null;
       if (admission && !school) return res.status(400).json({ success: false, error: 'Vui lòng chọn trường trong danh mục trường chuyên' });
       const schoolMetadata = school ? { schoolId: school.id, schoolName: school.name, schoolAuthority: school.authority, provinceId: school.provinceId } : {};
-      const gradeMetadata = { ...(catalogDestination?.graded ? { grade } : {}), ...schoolMetadata };
+      const course = payload.destination === 'university' ? await resolveUniversityCourse(db,payload.courseId) : null;
+      if (payload.destination === 'university' && !course) return res.status(400).json({ success: false, error: 'Vui lòng chọn học phần Đại học hợp lệ' });
+      const section = course ? course.sections.find(s=>s.id===payload.sectionId) : null;
+      if (course && !section) return res.status(400).json({success:false,error:'Vui lòng chọn chuyên đề con thuộc học phần đã chọn'});
+      const courseMetadata = course ? { courseId: course.id, courseCode: course.code, courseName: course.name, sectionId: section.id, sectionTitle: section.title, sectionNumber: section.number, educationLevel: 'university' } : {};
+      const gradeMetadata = { ...courseMetadata, ...(catalogDestination?.graded ? { grade } : {}), ...schoolMetadata };
       const province = cleanText(payload.province, 120);
       const targetAnchor = cleanKey(payload.targetAnchor, 220);
       const requestedRegion = cleanText(payload.region, 20).toUpperCase();
-      const region = school?.region || (TST_REGIONS.has(requestedRegion) ? requestedRegion : 'BAC');
+      const region = school?.region || ((TST_REGIONS.has(requestedRegion) || (course && requestedRegion==='OTHER')) ? requestedRegion : 'BAC');
+      const regionName=course && requestedRegion==='OTHER' ? cleanText(payload.regionName,120) : '';
       const dayNumber = Number(payload.dayNumber);
       const setNumber = Number(payload.setNumber);
       const year = cleanText(payload.year, 40) || '2026-2027';
@@ -1359,15 +1435,19 @@ export default async function handler(req, res) {
       if (payload.origin === 'prediction' && !isMock) return res.status(400).json({ success: false, error: 'Đề dự đoán phải được lưu trong bộ thi thử' });
       const imageCount = cleanNumber(payload.sourceImageCount, 0, 0, 20);
       if (!isPrediction && imageCount < 1) return res.status(400).json({ success: false, error: 'Đề OCR cần ít nhất một ảnh nguồn' });
-      const questions = Array.isArray(payload.questions) ? payload.questions.slice(0, 10) : [];
+      const questions = Array.isArray(payload.questions) ? (course ? payload.questions : payload.questions.slice(0,10)) : [];
+      if(course && (questions.length>UNIVERSITY_MAX_QUESTIONS || Buffer.byteLength(JSON.stringify(questions),'utf8')>2500000))return res.status(400).json({success:false,error:'Đề tối đa 1000 câu và 2,5 MB nội dung; hãy chia thành nhiều ngày thi.'});
+      const declaredCount=payload.questionCount===undefined?questions.length:Number(payload.questionCount);
+      if(course && (!Number.isInteger(declaredCount)||declaredCount<1||declaredCount>UNIVERSITY_MAX_QUESTIONS||declaredCount!==questions.length))return res.status(400).json({success:false,error:'Số câu nhận được không khớp số câu khai báo (1–1000).'});
       const validTarget = isMock
         ? /^mock-set\d+-day[12]$/.test(targetAnchor) && Number.isInteger(setNumber) && setNumber >= 3 && setNumber <= 100 && targetAnchor === `mock-set${setNumber}-day${dayNumber}`
         : (isRegional ? /^hist-(dn|qn)-[a-z0-9._:-]+$/.test(targetAnchor) : catalogDestination ? new RegExp(`^${catalogDestination.prefix}[a-z0-9._:-]+$`).test(targetAnchor) : /^tst-[a-z0-9._:-]+$/.test(targetAnchor));
-      if (!province || !validTarget || !Number.isInteger(dayNumber) || dayNumber < 1 || dayNumber > (isMock ? 2 : 4) || !questions.length) {
+      if (!province || !validTarget || !Number.isInteger(dayNumber) || dayNumber < 1 || dayNumber > (course ? UNIVERSITY_MAX_DAYS : isMock ? 2 : 4) || !questions.length) {
         return res.status(400).json({ success: false, error: 'Thiếu tỉnh/thành phố, vị trí frontend hoặc danh sách câu hỏi' });
       }
 
       if (admission && (province !== school.province || targetAnchor !== `admission-${school.id}-${slugKey(year)}` || !/^20\d{2}-20\d{2}$/.test(year) || Number(year.slice(5)) !== Number(year.slice(0, 4)) + 1)) return res.status(400).json({ success: false, error: 'Trường, tỉnh/thành, năm học và mã đề không khớp' });
+      if (course && (province !== course.code || targetAnchor !== `university-${course.id}-${section.id}-${slugKey(year)}` || !/^20\d{2}-20\d{2}$/.test(year) || Number(year.slice(5)) !== Number(year.slice(0, 4)) + 1)) return res.status(400).json({ success: false, error: 'Học phần, năm học và mã đề không khớp' });
       const provinceSlug = slugKey(province);
       const yearSlug = slugKey(year);
       if (catalogDestination?.graded && targetAnchor !== `${catalogDestination.prefix}${provinceSlug}-${yearSlug}-grade-${grade}`) return res.status(400).json({ success: false, error: 'Mã đề không khớp kỳ thi, năm và khối lớp' });
@@ -1377,7 +1457,11 @@ export default async function handler(req, res) {
           return res.status(400).json({ success: false, error: 'Đơn vị lưu trữ không khớp kho Đà Nẵng–Quảng Nam' });
         }
       }
-      const examKey = isMock ? `mock:set-${setNumber}:${yearSlug}:day-${dayNumber}` : `${catalogDestination?.group || (isRegional ? 'regional' : 'tst')}:${school?.id || provinceSlug}:${yearSlug}${catalogDestination?.graded ? `:grade-${grade}` : ''}:day-${dayNumber}`;
+      const examKey = isMock ? `mock:set-${setNumber}:${yearSlug}:day-${dayNumber}` : `${catalogDestination?.group || (isRegional ? 'regional' : 'tst')}:${school?.id || provinceSlug}:${yearSlug}${section ? `:section-${section.id}` : ''}${catalogDestination?.graded ? `:grade-${grade}` : ''}:day-${dayNumber}`;
+      if (course) {
+        const occupied = await db.collection('exams').findOne({ category:'university', courseId:course.id, sectionId:section.id, year, dayNumber, status:{$ne:'deleted'} });
+        if (occupied && occupied.examKey !== examKey) return res.status(409).json({success:false,error:'Ngày thi này đã có đề được chuyển từ học phần/chuyên đề khác. Hãy chỉnh sửa đề hiện có hoặc chọn ngày khác.'});
+      }
       // Một tỉnh có thể có hai đề với các số câu trùng nhau. Ngày thi phải
       // thuộc khóa ổn định để ngày 2 không ghi đè câu hỏi/lịch sử của ngày 1.
       const setKey = isMock ? `mock:${targetAnchor}` : `${catalogDestination?.group || (isRegional ? 'danang_quangnam' : 'tst')}:${targetAnchor}:day-${dayNumber}${!isRegional && !catalogDestination && year !== '2026-2027' ? `:year-${yearSlug}` : ''}`;
@@ -1394,7 +1478,8 @@ export default async function handler(req, res) {
       const normalizedQuestions = [];
       const seenQuestionNumbers = new Set();
       for (const [index, raw] of questions.entries()) {
-        const questionNumber = Math.max(1, Math.min(99, Number(raw?.questionNumber) || index + 1));
+        const questionNumber = course ? Number(raw?.questionNumber ?? index+1) : Math.max(1, Math.min(99,Number(raw?.questionNumber)||index+1));
+        if(course && (!Number.isInteger(questionNumber)||questionNumber<1||questionNumber>UNIVERSITY_MAX_QUESTIONS))return res.status(400).json({success:false,error:'Số thứ tự câu phải là số nguyên từ 1–1000.'});
         const content = cleanText(raw?.content, 50000);
         if (!content) continue;
         if (seenQuestionNumbers.has(questionNumber)) {
@@ -1403,6 +1488,7 @@ export default async function handler(req, res) {
         seenQuestionNumbers.add(questionNumber);
         normalizedQuestions.push({ raw, questionNumber, content });
       }
+      if(course && normalizedQuestions.length!==declaredCount)return res.status(400).json({success:false,error:'Có câu trống; vui lòng hoàn thiện hoặc sửa số câu khai báo.'});
       if (!normalizedQuestions.length) {
         return res.status(400).json({ success: false, error: 'Không có câu hỏi hợp lệ để lưu' });
       }
@@ -1412,6 +1498,7 @@ export default async function handler(req, res) {
       }
       const examDoc = {
         ...gradeMetadata,
+        ...(course?{questionCount:declaredCount,regionName}:{}),
         examKey,
         setKey,
         title,
@@ -1510,7 +1597,7 @@ export default async function handler(req, res) {
           questionNumber,
           day: `Ngày ${dayNumber}`,
           dayNumber,
-          order: dayNumber * 100 + questionNumber,
+          order: dayNumber * (course ? 10000 : 100) + questionNumber,
           orderNumber: questionNumber,
           maxScore: cleanNumber(raw?.maxScore, 0, 0, 20),
           topic: cleanText(raw?.topic, 120) || 'Toán Olympic',
@@ -1693,6 +1780,7 @@ export default async function handler(req, res) {
 
     return res.status(400).json({ success: false, error: 'Thao tác không hợp lệ' });
   } catch (error) {
+    if (error?.code === 'EDUCATION_ACCESS_DENIED') return res.status(403).json({ success: false, error: error.message });
     console.error('[API data]', error);
     return res.status(500).json({ success: false, error: 'Không thể xử lý dữ liệu cơ sở dữ liệu' });
   }

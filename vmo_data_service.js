@@ -257,8 +257,8 @@ export async function getExamCatalog(category = 'tst-national') {
   }));
 }
 
-export async function getExamCatalogSummary(category = 'tst-national') {
-  return normalizeList(await request('exam_catalog', { category, view: 'summary' }));
+export async function getExamCatalogSummary(category = 'tst-national', courseId = '') {
+  return normalizeList(await request('exam_catalog', { category, view: 'summary', ...(courseId ? { courseId } : {}) }));
 }
 
 export async function getExamCatalogDetail(category, anchor, year = '') {
@@ -341,6 +341,8 @@ export async function ocrMathSupport(image) {
   const data = await apiFetch('/api/ai-ocr-math', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ image, purpose: 'standalone_problem' }) });
   return data.data;
 }
+
+export async function updateUniversityTheory(payload) { return normalize(await mutate('update_university_theory',payload)); }
 
 export async function updateCatalogContent(id, contentData = {}) {
   return normalize(await mutate('update_catalog_content', { id, ...contentData }));
@@ -610,6 +612,7 @@ const VMODataService = Object.freeze({
   updateCatalogItem,
   getContentRevisions,
   updateCatalogContent,
+  updateUniversityTheory,
   getMathSupportProblems, createMathSupport, getMathSupportImage, ocrMathSupport,
   migrateTstReferenceLinks,
   updateProblemReferenceLinks,

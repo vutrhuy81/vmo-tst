@@ -19,6 +19,11 @@ function initAccountMgmt() {
   const totalUsersCount = document.getElementById('totalUsersCount');
   const adminUsersCount = document.getElementById('adminUsersCount');
 
+  const newLevels = document.getElementById('newEducationLevels');
+  const newRole = document.getElementById('newRole');
+  function syncNewLevelControl() { if (newLevels) { newLevels.disabled = newRole?.value === 'admin';newLevels.title = newRole?.value === 'admin' ? 'Admin có toàn quyền các cấp học' : ''; } }
+  newRole?.addEventListener('change', syncNewLevelControl);syncNewLevelControl();
+
   // 2. Hiển thị thông tin người dùng lên thanh điều hướng
   const userAvatarContainer = document.getElementById('userAvatarContainer');
   if (userAvatarContainer) {
@@ -166,10 +171,10 @@ function initAccountMgmt() {
   // 6. Tải và hiển thị danh sách người dùng từ MongoDB
   async function renderUsers() {
     if (!usersTableBody) return;
-    usersTableBody.innerHTML = '<tr><td colspan="5" style="text-align:center; padding:20px; color:#64748b;">Đang tải dữ liệu cơ sở dữ liệu...</td></tr>';
+    usersTableBody.innerHTML = '<tr><td colspan="6" style="text-align:center; padding:20px; color:#64748b;">Đang tải dữ liệu cơ sở dữ liệu...</td></tr>';
     const result = await VMOAuth.listUsers();
     if (!result.success) {
-      usersTableBody.innerHTML = '<tr><td colspan="5" style="text-align:center; padding:20px; color:#b91c1c;">Không thể tải danh sách tài khoản.</td></tr>';
+      usersTableBody.innerHTML = '<tr><td colspan="6" style="text-align:center; padding:20px; color:#b91c1c;">Không thể tải danh sách tài khoản.</td></tr>';
       showAlert(result.message, false);
       return;
     }
@@ -203,6 +208,7 @@ function initAccountMgmt() {
             ${isAdminRole ? 'Admin' : u.role === 'teacher' ? (isEn ? 'Teacher' : 'Giáo viên') : (isEn ? 'Member' : 'Thành viên')}
           </span>
         </td>
+        <td class="account-levels-cell"></td>
         <td style="font-size:0.8rem; color:#64748b;">${createdDate}</td>
         <td style="text-align:right;">
           <button type="button" class="btn-icon-action btn-edit-pw" onclick="handleChangePassword('${u.username}')" title="${isEn ? 'Change password' : 'Đổi mật khẩu'}">
@@ -215,6 +221,42 @@ function initAccountMgmt() {
           ` : `<span style="font-size:0.75rem; color:#94a3b8; font-style:italic;">${isEn ? 'In use' : 'Đang dùng'}</span>`}
         </td>
       `;
+      const education = window.MathAppEducation;
+      const levelCell = tr.querySelector('.account-levels-cell');
+      if (education && levelCell) {
+        if (isAdminRole) {
+          levelCell.textContent = isEn ? 'All levels (Admin)' : 'Tất cả cấp học (Admin)';
+        } else {
+          const fieldset = document.createElement('fieldset');
+          fieldset.style.cssText = 'border:0;padding:0;margin:0;display:grid;gap:4px;';
+          const legend = document.createElement('legend');
+          legend.textContent = (isEn ? 'Levels for ' : 'Cấp học của ') + u.username;
+          legend.style.cssText = 'font-size:.8rem;font-weight:600;';
+          fieldset.appendChild(legend);
+          const current = education.assigned(u);
+          const boxes = education.levels.map(value => {
+            const label = document.createElement('label');
+            label.style.cssText = 'display:flex;gap:6px;align-items:center;font-size:.8rem;';
+            const box = document.createElement('input');box.type = 'checkbox';box.value = value;box.checked = current.includes(value);
+            label.append(box, document.createTextNode(education.labels[value][isEn ? 1 : 0]));fieldset.appendChild(label);return box;
+          });
+          const save = document.createElement('button');save.type = 'button';save.className = 'btn-icon-action btn-save-levels';
+          save.textContent = isEn ? 'Save levels' : 'Lưu cấp học';save.disabled = true;
+          const selected = () => boxes.filter(box => box.checked).map(box => box.value);
+          boxes.forEach(box => box.addEventListener('change', () => { save.disabled = JSON.stringify(selected()) === JSON.stringify(current); }));
+          save.addEventListener('click', async () => {
+            if (session.role !== 'admin') return;
+            save.disabled = true;boxes.forEach(box => { box.disabled = true; });
+            try {
+              const result = await VMOAuth.updateEducationLevels(u.username, selected());
+              showAlert(result.message, result.success);
+              if (result.success) await renderUsers();
+            } catch { showAlert(isEn ? 'Unable to save levels.' : 'Không thể lưu cấp học.', false); }
+            finally { boxes.forEach(box => { box.disabled = false; });save.disabled = JSON.stringify(selected()) === JSON.stringify(current); }
+          });
+          fieldset.appendChild(save);levelCell.appendChild(fieldset);
+        }
+      }
       if (!isCurrent) {
         const cell = tr.lastElementChild;
         const editor = document.createElement('span');
@@ -304,11 +346,12 @@ function initAccountMgmt() {
 
       const submitButton = addUserForm.querySelector('button[type="submit"]');
       if (submitButton) submitButton.disabled = true;
-      const res = await VMOAuth.createUser(u, p, r, n);
+      const res = await VMOAuth.createUser(u, p, r, n, [...document.querySelectorAll('#newEducationLevels input:checked')].map(box => box.value));
       if (submitButton) submitButton.disabled = false;
       if (res.success) {
         showAlert(res.message, true);
         addUserForm.reset();
+        syncNewLevelControl();
         renderUsers();
       } else {
         showAlert(res.message, false);

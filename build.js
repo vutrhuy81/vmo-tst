@@ -69,7 +69,9 @@ export function build() {
     if (!html.includes(item.tag)) {
       console.warn(`[Build Cảnh báo] Thẻ ${item.tag} không tìm thấy trong template.html`);
     }
-    html = html.replace(item.tag, content);
+    const protectedContent = ['<!-- INJECT:TAB_DANANG -->', '<!-- INJECT:SIDEBAR_DANANG -->'].includes(item.tag)
+      ? `<!-- EDUCATION:upper_secondary:START -->${content}<!-- EDUCATION:upper_secondary:END -->` : content;
+    html = html.replace(item.tag, protectedContent);
   }
 
   // Ghi tệp index.html tại thư mục gốc

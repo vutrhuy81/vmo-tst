@@ -1,3 +1,5 @@
+import { educationDb } from '../lib/education-db.js';
+import { allows } from '../lib/education-access.js';
 import { handleMathSupport } from '../lib/math-support.js';
 import { canAccessProblem, supportVisibility } from '../lib/problem-access.js';
 import { SPECIALIZED_SCHOOLS, specializedSchool } from '../lib/specialized-schools.js';
@@ -43,8 +45,8 @@ const db = { collection(name) {
 } };
 const source = fs.readFileSync(new URL('../api/data.js', import.meta.url), 'utf8')
   .replace(/^import .*;\n/gm, '').replace('export default async function handler', 'async function handler');
-const handler = new Function('handleMathSupport', 'canAccessProblem', 'supportVisibility', 'specializedSchool', 'getDb', 'getSession', 'ObjectId', 'recordActivity', `${source}\nreturn handler;`)(
-  handleMathSupport, canAccessProblem, supportVisibility, specializedSchool, async () => db, () => ({ role, username: 'tester' }), ObjectId, async () => {});
+const handler = new Function('educationDb', 'allows', 'handleMathSupport', 'canAccessProblem', 'supportVisibility', 'specializedSchool', 'getDb', 'getSession', 'ObjectId', 'recordActivity', `${source}\nreturn handler;`)(
+  educationDb, allows,   handleMathSupport, canAccessProblem, supportVisibility, specializedSchool, async () => db, () => ({ role, username: 'tester' }), ObjectId, async () => {});
 async function call(payload, query) {
   const res = { code: 0, setHeader() {}, status(code) { this.code = code; return this; }, json(body) { this.body = body; return this; } };
   await handler({ method: query ? 'GET' : 'POST', query, body: { action: 'create_exam_from_ocr', payload } }, res);

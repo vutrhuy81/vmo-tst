@@ -240,3 +240,34 @@ assert.match(draftPopup.window.document.querySelector('[role="alert"]').textCont
 assert.equal(draftPrint.panel.querySelector('.btn-ai-guide-print').disabled, false);
 draftPopup.window.close(); draftPrint.window.close();
 console.log('Admin AI Guide editor, standalone LaTeX and print/PDF readiness: OK');
+
+// Recheck sources bypasses saved-guide reuse, without silently overwriting DB data.
+for(const role of ['admin','student']){
+ const h=await createHarness({role,persisted:true,support:true});
+ const {window,problemId}=h;window.confirm=()=>true;
+ assert.ok(h.panel.querySelector('.btn-ai-guide-refresh'));
+ assert.equal(h.guideRequests.length,0);
+ const fresh={...originalGuide,solution:'Lời giải mới $x=2$.',quality:{verified:true,score:'5.0/5.0',retrieval:{mode:'exact',sources:[{problemKey:'tst:hcm:question-6'}]}}};
+ window.fetch=async(url,options)=>{h.guideRequests.push(JSON.parse(options.body));return{ok:true,json:async()=>({success:true,data:fresh})};};
+ await window.regenerateAIGuide(problemId,h.panel.querySelector('.btn-ai-guide-refresh'));
+ const next=window.document.getElementById(`ai-panel-${problemId}`);
+ assert.notEqual(next,h.panel);assert.ok(next.textContent.includes('Lời giải mới'));assert.ok(next.textContent.includes('tst:hcm:question-6'));
+ assert.ok(next.querySelector('.ai-guide-refresh-notice'));assert.equal(h.guideRequests.length,1);assert.equal(h.guideRequests[0].contentKey,'math_support:owner:clipboard-question');
+ assert.equal(h.updateCalls.length+h.submitCalls.length,0);
+ // A failed refresh keeps the currently displayed proof and its source evidence.
+ window.fetch=async()=>({ok:false,json:async()=>({error:'Model timeout'})});
+ await window.regenerateAIGuide(problemId,next.querySelector('.btn-ai-guide-refresh'));
+ assert.equal(window.document.getElementById(`ai-panel-${problemId}`),next);
+ assert.ok(next.textContent.includes('Lời giải mới'));assert.match(next.querySelector('[role="alert"]').textContent,/Model timeout/);
+ assert.equal(next.querySelector('.btn-ai-guide-refresh').disabled,false);
+ assert.equal(window.document.querySelectorAll('.ai-guide-panel').length,1);
+ // A deliberate refresh can be cancelled and cannot start twice concurrently.
+ let calls=0;window.confirm=()=>false;window.fetch=async()=>{calls++;throw Error('unexpected');};
+ await window.regenerateAIGuide(problemId,next.querySelector('.btn-ai-guide-refresh'));assert.equal(calls,0);
+ window.confirm=()=>true;let release;window.fetch=async()=>{calls++;await new Promise(r=>{release=r;});return{ok:true,json:async()=>({success:true,data:fresh})};};
+ const first=window.regenerateAIGuide(problemId,next.querySelector('.btn-ai-guide-refresh'));
+ await window.regenerateAIGuide(problemId,next.querySelector('.btn-ai-guide-refresh'));assert.equal(calls,1);release();await first;
+ assert.equal(window.document.querySelectorAll('.ai-guide-panel').length,1);
+ window.close();
+}
+console.log('Saved AI Guide refresh: new retrieval, source badge, explicit save, error preservation, cancel and duplicate-click guard: OK');
