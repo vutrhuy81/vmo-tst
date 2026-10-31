@@ -37,6 +37,8 @@ const db = { collection(name) {
       return row;
     },
     async deleteMany() {}, async createIndex() {},
+    async updateOne(query, update) { const row=rows.find(row=>matches(row,query));if(row)Object.assign(row,update.$set);return{matchedCount:row?1:0}; },
+    async updateMany(query, update) { const selected=rows.filter(row=>matches(row,query));selected.forEach(row=>Object.assign(row,update.$set));return{matchedCount:selected.length}; },
     find(query, options = {}) {
       return { sort() { return this; }, limit() { return this; }, async toArray() {
         return rows.filter(row => matches(row, query)).map(row => options.projection ? Object.fromEntries(Object.entries(row).filter(([key]) => key === '_id' || options.projection[key])) : row);
@@ -162,7 +164,7 @@ window.VMOAuth={getSession:()=>({role:'admin',username:'tester'})};window.alert=
 window.fetch=async url=>({ok:true,json:async()=>({success:true,item:await universityCatalog(db,{role:'admin'})})});
 window.VMODataService={
  getExamCatalog:async()=>[],
- getExamCatalogSummary:async category=>category==='university'?universityResults.map(({problems,...exam})=>({...exam,problemCount:1})):[],
+ getExamCatalogSummary:async category=>category==='university'?universityResults.map(({problems,...exam})=>({...exam,id:String(exam._id),problemCount:1})):[],
  getExamCatalogDetail:async(category,anchor)=>universityResults.filter(exam=>exam.targetAnchor===anchor),
  getCatalogProblems:async()=>[],getContentSets:async()=>[],getEvents:async()=>[],getDocuments:async()=>[],getExams:async()=>[]
 };
@@ -350,6 +352,52 @@ const {getUniversityMaterials,universityMaterialCatalog}=await import('../lib/un
 const customMaterials=await getUniversityMaterials(db,teacher,added.courseId);
 assert.equal(customMaterials.book.sections[0].id,topic.sectionId);assert.equal(customMaterials.problems.length,0);assert.equal(customMaterials.book.sections[0].examples.length,0);
 assert.equal((await universityMaterialCatalog(db,teacher)).courses.length,11);
+
+
+// Changing an existing exam's section preserves all identities and follows the current catalog.
+const editTarget=universityResults[0],editId=String(editTarget._id),editCourse=UNIVERSITY_COURSES[0];
+async function editCall(patch={}) {
+ const res={code:0,setHeader(){},status(code){this.code=code;return this;},json(body){this.body=body;return this;}};
+ await handler({method:'POST',body:{action:'update_exam',payload:{id:editId,title:editTarget.title,year:editTarget.year,duration:90,examDate:'',...patch}}},res);return res;
+}
+const oldIdentity={examKey:editTarget.examKey,setKey:editTarget.setKey,targetAnchor:editTarget.targetAnchor};
+const originalProblem=stores.get('problems').find(p=>p.examId===editId),originalKey=originalProblem.contentKey,originalId=String(originalProblem._id);
+for(const sectionId of ['', 'forged', UNIVERSITY_COURSES[1].sections.find(s=>!editCourse.sections.some(t=>t.id===s.id)).id])assert.equal((await editCall({sectionId})).code,400);
+assert.equal(stores.get('exams').find(e=>String(e._id)===editId).sectionId,editCourse.sections[0].id);
+role='student';educationLevels=['university'];assert.equal((await editCall({sectionId:editCourse.sections[1].id})).code,403);
+role='teacher';educationLevels=['upper_secondary'];assert.equal((await editCall({sectionId:editCourse.sections[1].id})).code,404);
+role='teacher';educationLevels=['university'];
+const moved=await editCall({sectionId:editCourse.sections[1].id});assert.equal(moved.code,200);
+for(const [key,value]of Object.entries(oldIdentity))assert.equal(moved.body.item[key],value);
+for(const row of stores.get('problems').filter(p=>p.examId===editId)){assert.equal(row.sectionId,editCourse.sections[1].id);assert.equal(row.sectionNumber,2);}
+assert.equal(originalProblem.contentKey,originalKey);assert.equal(String(originalProblem._id),originalId);
+assert.equal(stores.get('content_sets').find(s=>s.key===oldIdentity.setKey).sectionId,editCourse.sections[1].id);
+// Older clients that only edit title/date do not accidentally clear the section.
+assert.equal((await editCall({title:'Updated existing title'})).code,200);assert.equal(originalProblem.sectionId,editCourse.sections[1].id);
+role='admin';educationLevels=undefined;
+Object.assign(editTarget,stores.get('exams').find(e=>String(e._id)===editId));
+window.fetch=async()=>({ok:true,json:async()=>({success:true,item:await universityCatalog(db,admin)})});
+window.VMODataService.updateExam=async(id,fields)=>{assert.equal(id,editId);const res=await editCall(fields);if(res.code!==200)throw new Error(res.body.error);Object.assign(editTarget,res.body.item);return res.body.item;};
+window.switchHubTab('docs');await new Promise(resolve=>window.setTimeout(resolve,0));
+await window.editManagedExam(editId);
+const editForm=documentNode.getElementById('managedExamEditor');assert.ok(editForm);
+assert.equal(editForm.elements.sectionId.options.length,editCourse.sections.length+1);
+assert.equal(editForm.elements.sectionId.value,editCourse.sections[1].id);
+editForm.elements.sectionId.value=editCourse.sections[2].id;
+let failEdit=true;const saveEdit=window.VMODataService.updateExam;
+window.VMODataService.updateExam=async(...args)=>{if(failEdit)throw Error('Temporary failure');return saveEdit(...args);};
+await editForm.onsubmit({preventDefault(){}});assert.equal(editForm.isConnected,true);assert.equal(editForm.elements.sectionId.value,editCourse.sections[2].id);
+failEdit=false;await editForm.onsubmit({preventDefault(){}});assert.equal(editForm.isConnected,false);assert.equal(originalProblem.sectionId,editCourse.sections[2].id);assert.equal(window.currentUniversitySection,editCourse.sections[2].id);
+
+// Legacy multi-day anchors can now contain days assigned to different sections.
+await window.loadDatabaseCompetitionExams('tab-university',true);
+await window.loadDatabaseExamDetail('university',editTarget.targetAnchor);
+window.selectUniversityCourse(editCourse.id,editCourse.sections[2].id);
+const mixedCard=documentNode.getElementById(editTarget.targetAnchor);assert.equal(mixedCard.classList.contains('hidden-by-search'),false);
+assert.ok([...mixedCard.querySelectorAll('.db-exam-day')].some(day=>!day.hidden&&day.dataset.sectionId===editCourse.sections[2].id));
+assert.ok([...mixedCard.querySelectorAll('.db-exam-day')].filter(day=>day.dataset.sectionId!==editCourse.sections[2].id).every(day=>day.hidden));
+window.selectUniversitySection(editCourse.sections[0].id);assert.equal(mixedCard.classList.contains('hidden-by-search'),false);
+assert.ok([...mixedCard.querySelectorAll('.db-exam-day')].some(day=>!day.hidden&&day.dataset.sectionId===editCourse.sections[0].id));
 
 window.close();
 console.log('Grade and ten University catalogs: identities, authorization, lazy questions, course filters and OCR form: OK');

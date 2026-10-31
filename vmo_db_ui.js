@@ -4803,7 +4803,7 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
     catch (error) { panel.querySelector('.managed-questions-list').textContent = `Lỗi tải câu hỏi: ${error.message}`; }
   };
 
-  window.editManagedExam = function(id) {
+  window.editManagedExam = async function(id) {
     if (!requireContentManagerUiAction()) return;
     const exam = managedExams.get(id);
     if (!exam) return;
@@ -4812,6 +4812,7 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
     form.id = 'managedExamEditor';
     form.style.cssText = 'padding:14px;margin:12px 0;background:#fff;border:1px solid #94a3b8;border-radius:8px;';
     form.innerHTML = `<strong>Chỉnh sửa đề · ${escapeHtmlText(exam.province || '')}${exam.grade ? ` · Lớp ${exam.grade}` : ''} · Ngày ${Number(exam.dayNumber) || 1}</strong>
+      ${exam.category === 'university' ? '<label style="display:block">Chuyên đề con *<select name="sectionId" required disabled style="width:100%"><option value="">Đang tải chuyên đề…</option></select></label><p class="managed-exam-section-status" role="status"></p>' : ''}
       <label style="display:block">Tên đề<input name="title" required maxlength="500" style="width:100%"></label>
       <label style="display:block">Năm học<input name="year" required maxlength="9" pattern="[0-9]{4}-[0-9]{4}" placeholder="2024-2025" style="width:100%"></label>
       <label style="display:block">Ngày thi<input name="examDate" type="date" style="width:100%"></label>
@@ -4830,15 +4831,43 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
       button.disabled = true;
       try {
         await window.VMODataService.updateExam(id, {
+          ...(exam.category === 'university' ? { sectionId: form.elements.sectionId.value } : {}),
           title: form.elements.title.value, year: form.elements.year.value.trim(), examDate: form.elements.examDate.value,
           duration: Number(form.elements.duration.value), description: form.elements.description.value
         });
         form.remove();
         showToast('Đã cập nhật đề thi.', true);
         await refreshManagedExams(exam);
+        if (exam.category === 'university') window.selectUniversityCourse?.(exam.courseId, form.elements.sectionId.value);
       } catch (error) { showToast('Lỗi chỉnh sửa đề: ' + error.message, false); button.disabled = false; }
     };
     (exam.category === 'vmo-mock' ? document.getElementById('hubExamsList') : document.getElementById('hubDocsList'))?.before(form);
+    if (exam.category === 'university') {
+      const button = form.querySelector('[type="submit"]');
+      button.disabled = true;
+      const loadSections = async () => {
+        const status = form.querySelector('.managed-exam-section-status');
+        try {
+          await window.loadUniversityCatalog?.(true);
+          if (!form.isConnected) return;
+          const course = window.MathAppUniversity?.course(exam.courseId);
+          if (!course) throw new Error('Không tìm thấy học phần của đề thi.');
+          const select = form.elements.sectionId;
+          select.replaceChildren(new Option('Chọn chuyên đề con…', ''));
+          course.sections.forEach(section => select.add(new Option(`${section.number}. ${section.title}`, section.id)));
+          select.value = window.MathAppUniversity.examSection(exam)?.id || '';
+          select.disabled = false; button.disabled = false;
+          status.textContent = `${course.code}: ${course.nameVi}. Thay đổi chuyên đề sẽ áp dụng cho mọi câu hỏi trong đề.`;
+        } catch (error) {
+          if (!form.isConnected) return;
+          status.textContent = error.message;
+          const retry = document.createElement('button'); retry.type = 'button'; retry.textContent = 'Thử tải lại chuyên đề';
+          retry.onclick = () => { status.textContent = 'Đang tải chuyên đề…'; loadSections(); };
+          status.append(' ', retry);
+        }
+      };
+      await loadSections();
+    }
   };
 
   window.deleteManagedExam = async function(id) {
@@ -5043,6 +5072,11 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
   }
 
   const competitionTabs = { 'vmo-official': 'tab-vmo', 'imo-olympic': 'tab-olympic', 'olympic-30-4': 'tab-olympic30', 'duyen-hai-bac': 'tab-duyenhai', 'specialized-admission': 'tab-admission', 'university': 'tab-university' };
+  function addUniversitySectionMembership(node, exam) {
+    if (!node || exam.category !== 'university') return;
+    const sectionId = window.MathAppUniversity?.examSection(exam)?.id || 'unclassified';
+    node.dataset.sectionIds = [...new Set([...(node.dataset.sectionIds || '').split('|').filter(Boolean), sectionId])].join('|');
+  }
   function createCompetitionCard(exam) {
     const tabId = competitionTabs[exam.category];
     const card = document.createElement('article');
@@ -5052,6 +5086,7 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
     card.dataset.grade = exam.grade || '';
     card.dataset.courseId = exam.courseId || '';
     card.dataset.sectionId = window.MathAppUniversity?.examSection(exam)?.id || '';
+    addUniversitySectionMembership(card, exam);
     card.dataset.filter = exam.category === 'specialized-admission' ? exam.region : exam.grade ? `GRADE${exam.grade}` : 'ALL';
     card.dataset.search = `${exam.province || ''} ${exam.schoolName || ''} ${exam.year || ''} ${exam.title || ''} ${exam.grade ? `Lớp ${exam.grade}` : ''}`;
     card.innerHTML = `<div class="exam-header"><div class="exam-top-tags"><span class="tag tag-year">${escapeHtmlText(exam.year || '')}</span><span class="tag tag-province">${escapeHtmlText(exam.province || '')}</span>${exam.grade ? `<span class="tag tag-official">Lớp ${exam.grade}</span>` : ''}<span class="tag tag-official">Đề từ cơ sở dữ liệu</span></div><h3 class="exam-title">${escapeHtmlText(exam.title || exam.province || 'Đề thi')}</h3></div><div class="exam-body"></div>`;
@@ -5068,6 +5103,7 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
       if (target && ![...target.querySelectorAll('a')].some(link=>link.getAttribute('href')===`#${exam.targetAnchor}`)) {
         const link=document.createElement('a');link.className='nav-link db-exam-sidebar-link';link.href=`#${exam.targetAnchor}`;link.dataset.courseId=exam.courseId;link.dataset.sectionId=window.MathAppUniversity?.examSection(exam)?.id||'';link.textContent=`${exam.courseCode || ''} · ${exam.year || ''}`;target.appendChild(link);
       }
+      addUniversitySectionMembership([...target?.querySelectorAll('a') || []].find(link=>link.getAttribute('href')===`#${exam.targetAnchor}`), exam);
       window.refreshUniversityCatalogFilter?.();return;
     }
     const tabId = competitionTabs[exam.category];
@@ -5551,6 +5587,7 @@ if (card) card.dataset.databaseCard = 'true';
 
     const section = document.createElement('section');
     section.className = 'db-exam-day';
+    if (exam.category === 'university') section.dataset.sectionId = window.MathAppUniversity?.examSection(exam)?.id || 'unclassified';
     section.dataset.examKey = exam.examKey || exam.id || '';
     section.dataset.dayNumber = String(Number(exam.dayNumber) || 1);
     section.style.cssText = 'border-top:3px solid #0ea5e9;margin-top:20px;padding-top:14px;';
@@ -5725,6 +5762,7 @@ if (card) card.dataset.databaseCard = 'true';
         applyMongoReferenceLinks(card || document);
         card?.querySelector('.db-exam-loading')?.remove();
         loadedDetails.add(key);
+        if (category === 'university') window.refreshUniversityCatalogFilter?.();
       } catch (error) {
         const notice = card?.querySelector('.db-exam-loading');
         if (notice) notice.textContent = 'Không tải được đề thi. Chọn lại mục lục để thử lại.';
@@ -5767,6 +5805,7 @@ if (card) card.dataset.databaseCard = 'true';
       if (kind === 'regional') ensureDatabaseRegionalNavigation(exam);
       if (kind === 'mock') ensureDatabaseMockNavigation(exam);
       if (kind === 'competition') ensureCompetitionSidebar(exam);
+      addUniversitySectionMembership(card, exam);
       if (Array.isArray(exam.problems)) {
         renderDatabaseExam(exam, kind);
         loadedDetails.add(detailKey(category, displayAnchor));
@@ -5819,7 +5858,10 @@ if (card) card.dataset.databaseCard = 'true';
       [link.closest('#sidebar-tst, #sidebar-mock, #sidebar-history, #sidebar-vmo, #sidebar-olympic, #sidebar-olympic30, #sidebar-duyenhai, #sidebar-admission, #sidebar-university')?.id];
     const category = examCategories[tab];
     const anchor = link.getAttribute('href')?.slice(1);
-    if (tab === 'tab-university' && link.dataset.courseId) window.selectUniversityCourse?.(link.dataset.courseId,link.dataset.sectionId || 'unclassified');
+    if (tab === 'tab-university' && link.dataset.courseId) {
+      const sections=(link.dataset.sectionIds||link.dataset.sectionId||'unclassified').split('|');
+      window.selectUniversityCourse?.(link.dataset.courseId,sections.includes(window.currentUniversitySection)?window.currentUniversitySection:sections[0]);
+    }
     if (!category || !anchor) return;
     event.preventDefault();
     const token = ++sidebarNavigationToken;

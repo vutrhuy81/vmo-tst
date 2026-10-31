@@ -976,6 +976,16 @@ export default async function handler(req, res) {
       const exam = await db.collection('exams').findOne({ _id: id, status: { $ne: 'deleted' } });
       if (!exam) return res.status(404).json({ success: false, error: 'Không tìm thấy đề thi' });
       if (action === 'update_exam') {
+        // Reclassification changes metadata only: existing IDs/keys remain stable
+        // so saved guides, submissions and links still belong to the same exam.
+        let sectionMetadata = {};
+        if (Object.hasOwn(payload, 'sectionId')) {
+          if (exam.category !== 'university') return res.status(400).json({ success: false, error: 'Chỉ đề Đại học được chọn chuyên đề con tại đây' });
+          const course = await resolveUniversityCourse(db, exam.courseId);
+          const section = course?.sections.find(item => item.id === payload.sectionId);
+          if (!section) return res.status(400).json({ success: false, error: 'Chuyên đề con không thuộc học phần của đề thi' });
+          sectionMetadata = { sectionId: section.id, sectionTitle: section.title, sectionNumber: section.number };
+        }
         const title = cleanText(payload.title, 500);
         const year = cleanText(payload.year, 40);
         const duration = Number(payload.duration);
@@ -986,7 +996,7 @@ export default async function handler(req, res) {
           return res.status(400).json({ success: false, error: 'Tên đề, năm học (YYYY-YYYY), ngày thi hoặc thời lượng không hợp lệ' });
         }
         const updated = await db.collection('exams').findOneAndUpdate({ _id: id },
-          { $set: { title, year, duration, examDate, description: cleanText(payload.description, 5000), updatedBy: session.username, updatedAt: now } },
+          { $set: { ...sectionMetadata, title, year, duration, examDate, description: cleanText(payload.description, 5000), updatedBy: session.username, updatedAt: now } },
           { returnDocument: 'after' });
         if (exam.targetAnchor) {
           const group = { 'vmo-official': 'vmo_official', 'imo-olympic': 'imo_olympic', 'olympic-30-4': 'olympic_30_4', 'duyen-hai-bac': 'duyen_hai_bac', 'university': 'university', 'specialized-admission': 'specialized_admission',
@@ -994,10 +1004,10 @@ export default async function handler(req, res) {
           const setKey = exam.setKey || (exam.category === 'vmo-mock' ? `mock:${exam.targetAnchor}`
             : `${group}:${exam.targetAnchor}:day-${Number(exam.dayNumber) || 1}${group === 'tst' && exam.year !== '2026-2027' ? `:year-${slugKey(exam.year)}` : ''}`);
           await db.collection('content_sets').updateOne({ key: setKey },
-            { $set: { title, year, updatedBy: session.username, updatedAt: now } });
+            { $set: { ...sectionMetadata, title, year, updatedBy: session.username, updatedAt: now } });
         }
         await db.collection('problems').updateMany({ examId: String(id) },
-          { $set: { setTitle: title, updatedBy: session.username, updatedAt: now } });
+          { $set: { ...sectionMetadata, setTitle: title, updatedBy: session.username, updatedAt: now } });
         await recordActivity(db, session, 'exam.updated', { itemTitle: title, examId: String(id) });
         return res.status(200).json({ success: true, item: updated });
       }
