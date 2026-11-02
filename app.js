@@ -292,6 +292,8 @@
     const isO = (tabId === 'tab-olympic');
     const isSupport = tabId === 'tab-support';
     if (qs('#sidebar-support')) qs('#sidebar-support').style.display = isSupport ? 'block' : 'none';
+    const isBooks = tabId === 'tab-books';
+    if(qs('#sidebar-books'))qs('#sidebar-books').style.display=isBooks?'block':'none';
     const isUniversityMaterials = tabId === 'tab-university-materials';
     if (qs('#sidebar-university-materials')) qs('#sidebar-university-materials').style.display = isUniversityMaterials ? 'block' : 'none';
     const isUniversity = tabId === 'tab-university';
@@ -311,7 +313,7 @@
     const sbTst = qs('#sidebar-tst');
     const sbHistory = qs('#sidebar-history');
 
-    if (sbDanang) sbDanang.style.display = (!isM && !isT && !isH && !isV && !isO && !isGradeCatalog && !isSupport && !isAdmission && !isUniversity && !isUniversityMaterials) ? 'block' : 'none';
+    if (sbDanang) sbDanang.style.display = (!isM && !isT && !isH && !isV && !isO && !isGradeCatalog && !isSupport && !isAdmission && !isUniversity && !isUniversityMaterials && !isBooks) ? 'block' : 'none';
     if (sbMock) sbMock.style.display = isM ? 'block' : 'none';
     if (sbTst) sbTst.style.display = isT ? 'block' : 'none';
     if (sbHistory) sbHistory.style.display = isH ? 'block' : 'none';
@@ -350,6 +352,7 @@
 
     // Đồng bộ lại các nút AI Hướng dẫn giải & Nút Nộp bài Database nếu cần
     if (isSupport) await window.loadMathSupportProblems?.();
+    if (isBooks) await window.loadBooks?.();
     if (isUniversityMaterials) await window.loadUniversityMaterials?.();
     if (version !== tabSwitchVersion) return;
     window.reinitAIGuide?.(targetPane);
@@ -357,7 +360,7 @@
     window.applyCurrentLanguage?.();
 
     // Render công thức toán nếu tab vừa mở chưa được biên dịch
-    if (!isM && !isT && !isH && !isV && !isO && !isGradeCatalog && !isSupport && !isAdmission && !isUniversity && !isUniversityMaterials) typeset(targetPane);
+    if (!isM && !isT && !isH && !isV && !isO && !isGradeCatalog && !isSupport && !isAdmission && !isUniversity && !isUniversityMaterials && !isBooks) typeset(targetPane);
   };
 
   // 2. Hiện / Ẩn lời giải và barem điểm từng bài

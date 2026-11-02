@@ -1,3 +1,4 @@
+import {readBooks, mutateBooks} from '../lib/books.js';
 import { universityCatalog, resolveUniversityCourse, addUniversityCatalogItem, UNIVERSITY_MAX_DAYS, UNIVERSITY_MAX_QUESTIONS } from '../lib/university-catalog.js';
 import { getUniversityMaterials, universityMaterialCatalog, updateUniversityTheory } from '../lib/university-materials.js';
 import { universityExamSection } from '../lib/university-courses.js';
@@ -21,7 +22,7 @@ import { deleteAiGuideRecord, learningScope, recordActivity, summarizeLearning }
 import { cleanTrendTheory } from '../lib/trend-theory-storage.js';
 import { buildSubmissionContentUpdate, buildSubmissionVerificationUpdate } from '../lib/submission-verification.js';
 
-const ALLOWED_RESOURCES = new Set(['university_catalog', 'university_materials', 'math_support', 'math_support_image', 'documents', 'exams', 'exam_catalog', 'home_stats', 'exam_image', 'content_sets', 'content_blocks', 'problems', 'content_revisions', 'submissions', 'submission_image', 'events', 'activity_feed', 'learning_overview', 'exam_trend_reports', 'trend_theories', 'rag_status', 'rag_logs']);
+const ALLOWED_RESOURCES = new Set(['books', 'university_catalog', 'university_materials', 'math_support', 'math_support_image', 'documents', 'exams', 'exam_catalog', 'home_stats', 'exam_image', 'content_sets', 'content_blocks', 'problems', 'content_revisions', 'submissions', 'submission_image', 'events', 'activity_feed', 'learning_overview', 'exam_trend_reports', 'trend_theories', 'rag_status', 'rag_logs']);
 const TST_REGIONS = new Set(['BAC', 'TRUNG', 'NAM']);
 const EXAM_TREND_TOPICS = [
   'Dãy số và Giới hạn dãy số', 'Phương trình hàm', 'Số học và dãy số',
@@ -405,6 +406,10 @@ export default async function handler(req, res) {
         return res.status(200).json({ success: true, items });
       }
 
+      if(resource === 'books') {
+        try{return res.status(200).json({success:true,item:await readBooks(db,session,req.query)});}
+        catch(error){if(error.status)return res.status(error.status).json({success:false,error:error.message});throw error;}
+      }
       if(resource === 'university_catalog') {
         if(!allows(session,'university'))return res.status(403).json({success:false,error:'Nội dung thuộc cấp Đại học'});
         return res.status(200).json({success:true,item:await universityCatalog(db,session)});
@@ -727,6 +732,10 @@ export default async function handler(req, res) {
     if (/trend|^rag_|^migrate_tst/.test(action) && !allows(session, 'upper_secondary')) return res.status(403).json({ success: false, error: 'Nội dung thuộc cấp Trung học phổ thông' });
     const now = new Date();
     if (await handleMathSupport({ db, req, res, session, action, payload })) return;
+    if(typeof action==='string' && action.startsWith('books_')) {
+      try{return res.status(200).json({success:true,item:await mutateBooks(db,session,action,payload)});}
+      catch(error){if(error.status)return res.status(error.status).json({success:false,error:error.message});throw error;}
+    }
     if(action === 'add_university_catalog_item') {
       try{return res.status(201).json({success:true,item:await addUniversityCatalogItem(db,session,payload)});}
       catch(error){if(error.status)return res.status(error.status).json({success:false,error:error.message});throw error;}
