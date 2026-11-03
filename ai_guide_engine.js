@@ -1192,7 +1192,11 @@
     text = normalizeBareGuideMath(restore(decoded.value));
     math.length = 0;
     // Tokenize again after recovering bare TeX. Restore only AFTER all prose transforms.
-    text = text.replace(guideMathPattern(), protect);
+    text = text.replace(guideMathPattern(), protect)
+      // Decode escaped prose line breaks only after math has been protected.
+      // A following lowercase letter denotes a TeX command (e.g. \\neq, \\nabla).
+      .replace(/(?:\\r\\n|\\n|\\r){2,}/g, '\n\n')
+      .replace(/\\(?:r\\n|n|r)(?![a-z])/g, '\n');
     const formatted = escapeGuideHtml(text)
       .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
       .replace(/\*(.*?)\*/g, '<em>$1</em>');

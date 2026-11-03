@@ -162,6 +162,17 @@ for (const persisted of [false, true]) {
   assert.ok(field('knowledge').textContent.includes('$a*b*c$'), 'Admin edits use the same safe formatter');
   h.window.close();
 }
+// Live Stewart §1.1 responses may contain escaped prose newlines.
+for (const persisted of [false,true]) {
+ const escaped = {...originalGuide,solution:String.raw`Bước 1:\n$3x-5y=7$.\n\nBước 2:\n$y=(3x-7)/5$.\n\nVới $x\neq0$, $\nu$, $\nabla f$, $x\notin A$.`};
+ const h=await createHarness({guide:escaped,persisted});
+ const field=h.panel.querySelector('[data-guide-field="solution"] .ai-section-content');
+ assert.equal(field.querySelectorAll('p').length,3);assert.equal(field.querySelectorAll('br').length,2);
+ assert.ok(field.textContent.includes(String.raw`$x\neq0$`));assert.ok(field.textContent.includes(String.raw`$\nabla f$`));assert.ok(field.textContent.includes(String.raw`$x\notin A$`));
+ assert.equal(field.textContent.includes(String.raw`\nBước`),false);
+ h.window.editAIGuideContent(h.problemId);assert.equal(h.panel.querySelector('[data-guide-editor="solution"]').value,escaped.solution);
+ h.window.close();
+}
 const bare = await createHarness({ support: true, guide: {
   ...originalGuide,
   knowledge: '<p><strong>Bổ đề</strong>: $x<y<z$.</p>',
