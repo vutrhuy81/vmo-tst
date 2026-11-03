@@ -48,6 +48,9 @@ async function route(method,payload){const res={status(code){this.code=code;retu
 assert.equal((await route('GET')).code,200);user=teacher;assert.equal((await route('POST',{action:'books_save_category',payload:{name:'Forbidden'}})).code,403);user=other;assert.equal((await route('GET')).code,403);user=admin;
 window.eval(read('books.js'));await window.loadBooks();
 assert.ok(window.document.getElementById('booksToc').textContent.includes('Chương 16.'));
+await [...window.document.querySelectorAll('#booksContent button')].find(b=>b.textContent==='✏️ Chỉnh sửa nội dung').onclick();
+assert.equal(window.document.querySelector('#booksEditor select[name=contentFormat]').value,'plain-latex');
+[...window.document.querySelectorAll('#booksEditor button')].find(b=>b.textContent==='Hủy').onclick();
 const buttons=()=>[...window.document.querySelectorAll('#tab-books button')];
 await buttons().find(b=>b.textContent==='＋ Thêm nhóm sách').onclick();
 let form=window.document.querySelector('#booksEditor form');form.elements.name.value='Nhóm từ giao diện';await form.onsubmit({preventDefault(){}});
