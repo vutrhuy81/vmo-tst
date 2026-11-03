@@ -1,4 +1,4 @@
-import {readBooks, mutateBooks} from '../lib/books.js';
+import {readBooks, mutateBooks, readBookAsset} from '../lib/books.js';
 import { universityCatalog, resolveUniversityCourse, addUniversityCatalogItem, UNIVERSITY_MAX_DAYS, UNIVERSITY_MAX_QUESTIONS } from '../lib/university-catalog.js';
 import { getUniversityMaterials, universityMaterialCatalog, updateUniversityTheory } from '../lib/university-materials.js';
 import { universityExamSection } from '../lib/university-courses.js';
@@ -22,7 +22,7 @@ import { deleteAiGuideRecord, learningScope, recordActivity, summarizeLearning }
 import { cleanTrendTheory } from '../lib/trend-theory-storage.js';
 import { buildSubmissionContentUpdate, buildSubmissionVerificationUpdate } from '../lib/submission-verification.js';
 
-const ALLOWED_RESOURCES = new Set(['books', 'university_catalog', 'university_materials', 'math_support', 'math_support_image', 'documents', 'exams', 'exam_catalog', 'home_stats', 'exam_image', 'content_sets', 'content_blocks', 'problems', 'content_revisions', 'submissions', 'submission_image', 'events', 'activity_feed', 'learning_overview', 'exam_trend_reports', 'trend_theories', 'rag_status', 'rag_logs']);
+const ALLOWED_RESOURCES = new Set(['book_asset', 'books', 'university_catalog', 'university_materials', 'math_support', 'math_support_image', 'documents', 'exams', 'exam_catalog', 'home_stats', 'exam_image', 'content_sets', 'content_blocks', 'problems', 'content_revisions', 'submissions', 'submission_image', 'events', 'activity_feed', 'learning_overview', 'exam_trend_reports', 'trend_theories', 'rag_status', 'rag_logs']);
 const TST_REGIONS = new Set(['BAC', 'TRUNG', 'NAM']);
 const EXAM_TREND_TOPICS = [
   'Dãy số và Giới hạn dãy số', 'Phương trình hàm', 'Số học và dãy số',
@@ -406,6 +406,10 @@ export default async function handler(req, res) {
         return res.status(200).json({ success: true, items });
       }
 
+      if(resource === 'book_asset') {
+        try{const asset=await readBookAsset(session,req.query.asset);res.setHeader('Content-Type',asset.mime);res.setHeader('X-Content-Type-Options','nosniff');res.setHeader('Cache-Control','private, max-age=3600');return res.status(200).send(asset.bytes);}
+        catch(error){if(error.status)return res.status(error.status).json({success:false,error:error.message});throw error;}
+      }
       if(resource === 'books') {
         try{return res.status(200).json({success:true,item:await readBooks(db,session,req.query)});}
         catch(error){if(error.status)return res.status(error.status).json({success:false,error:error.message});throw error;}

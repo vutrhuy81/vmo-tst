@@ -1,0 +1,417 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage{fontspec}
+\setmainfont{Latin Modern Roman}
+\setsansfont{DejaVu Sans}
+\usepackage{amsmath,amssymb,graphicx,geometry,enumitem,longtable,booktabs,fancyhdr,hyperref}
+\geometry{left=28mm,right=23mm,top=24mm,bottom=24mm}
+\hypersetup{unicode=true,colorlinks=true,linkcolor=black,urlcolor=blue,pdftitle={Giải tích Chương 1 Mục 1.1 Bốn cách biểu diễn một hàm số}}
+\setlength{\parindent}{1.2em}
+\setlength{\parskip}{4pt}
+\setlength{\headheight}{16pt}
+\pagestyle{fancy}\fancyhf{}\fancyhead[L]{\small Chương 1. Hàm số và mô hình}\fancyhead[R]{\small §1.1}\fancyfoot[C]{\thepage}
+\newcommand{\fig}[3][.68]{\begin{center}\includegraphics[width=#1\linewidth]{assets/#2.png}\\{\small #3}\end{center}}
+\newcommand{\ex}[1]{\par\medskip\noindent\textbf{Ví dụ #1.}\ }
+\newcommand{\sol}{\par\noindent\textit{Lời giải.}\ }
+\newcommand{\bt}[1]{\par\smallskip\noindent\textbf{#1.}\ }
+\newcommand{\group}[1]{\par\medskip\noindent\textbf{#1}\par}
+\begin{document}
+\begin{center}
+{\Large\bfseries GIẢI TÍCH}\\[5pt]
+{\large Các hàm siêu việt được trình bày sớm}\\[10pt]
+{\Large\bfseries Chương 1. Hàm số và mô hình}\\[5pt]
+{\large\bfseries 1.1. Bốn cách biểu diễn một hàm số}
+\end{center}
+\noindent\textbf{Nguồn:} James Stewart, Daniel K. Clegg, Saleem Watson, \textit{Calculus: Early Transcendentals}, ấn bản thứ 9. Bản dịch mục §1.1, trang in 8–21 (trang PDF 43–56), kết thúc ở Bài tập 88 trước §1.2.
+
+\noindent\textbf{Quy ước biên tập:} Giữ số ví dụ, bảng, hình và bài tập trong mục gốc. Công thức được nhập lại bằng LaTeX; hình được trích từ bản gốc để giữ đúng đường cong và dữ liệu. Những nhãn tiếng Anh còn nằm trong hình có chú giải tiếng Việt ở chú thích. Số trang của bản dịch được đánh riêng. Phần bảng thuật ngữ và kế hoạch ghép tập ở cuối là nội dung biên tập bổ sung.
+
+\section*{Hàm số}
+Hàm số xuất hiện mỗi khi một đại lượng phụ thuộc vào một đại lượng khác. Xét bốn tình huống sau.
+
+\noindent\textbf{A.} Diện tích $A$ của một hình tròn phụ thuộc vào bán kính $r$ của hình tròn. Quy tắc liên hệ $r$ với $A$ được cho bởi phương trình $A=\pi r^2$. Mỗi số dương $r$ tương ứng với một giá trị duy nhất của $A$; ta nói $A$ là một hàm số của $r$.
+
+\noindent\textbf{B.} Dân số thế giới $P$ phụ thuộc vào thời gian $t$. Bảng 1 cho các giá trị ước tính của dân số thế giới $P$ tại một số năm $t$. Chẳng hạn,
+\[P\approx2\,560\,000\,000\qquad\text{khi }t=1950.\]
+Với mỗi giá trị của thời gian $t$, có một giá trị tương ứng của $P$; ta nói $P$ là một hàm số của $t$.
+
+\begin{center}\textbf{Bảng 1. Dân số thế giới}\\[4pt]
+\begin{tabular}{rr@{\qquad}rr}\toprule
+Năm&Dân số (triệu người)&Năm&Dân số (triệu người)\\\midrule
+1900&1650&1960&3040\\1910&1750&1970&3710\\1920&1860&1980&4450\\1930&2070&1990&5280\\1940&2300&2000&6080\\1950&2560&2010&6870\\\bottomrule
+\end{tabular}\end{center}
+
+\noindent\textbf{C.} Cước phí $C$ để gửi một phong bì phụ thuộc vào khối lượng $w$ của phong bì. Mặc dù không có công thức đơn giản liên hệ $w$ và $C$, bưu điện có quy tắc xác định $C$ khi biết $w$.
+
+\noindent\textbf{D.} Gia tốc theo phương thẳng đứng $a$ của mặt đất do máy địa chấn ghi lại trong một trận động đất là một hàm số của thời gian đã trôi qua $t$. Hình 1 là đồ thị được tạo từ hoạt động địa chấn trong trận động đất Northridge làm rung chuyển Los Angeles năm 1994. Với mỗi giá trị cho trước của $t$, đồ thị cho một giá trị tương ứng của $a$.
+\fig[.92]{f01}{Hình 1. Gia tốc thẳng đứng của mặt đất trong trận động đất Northridge.\\ $a$: cm/s$^2$; $t$: giây. Nguồn: Cơ quan Mỏ và Địa chất California.}
+Mỗi ví dụ trên mô tả một quy tắc gán cho một số đã cho (chẳng hạn $r$ trong Ví dụ A) một số khác ($A$). Trong mỗi trường hợp, ta nói số thứ hai là một hàm số của số thứ nhất. Nếu $f$ biểu thị quy tắc liên hệ $A$ với $r$ trong Ví dụ A, ta viết theo ký hiệu hàm số: $A=f(r)$.
+
+\begin{quote}\textbf{Định nghĩa.} Một \textbf{hàm số} $f$ là một quy tắc gán cho mỗi phần tử $x$ thuộc một tập $D$ đúng một phần tử, ký hiệu là $f(x)$, thuộc một tập $E$.\end{quote}
+
+Thông thường, ta xét các hàm số mà $D$ và $E$ là các tập số thực. Tập $D$ được gọi là \textbf{tập xác định} của hàm số. Số $f(x)$ là \textbf{giá trị của $f$ tại $x$}, đọc là ``$f$ của $x$''. \textbf{Tập giá trị} của $f$ là tập hợp tất cả các giá trị có thể có của $f(x)$ khi $x$ chạy khắp tập xác định. Một ký hiệu biểu thị một số tùy ý trong tập xác định của $f$ được gọi là \textbf{biến độc lập}. Một ký hiệu biểu thị một số trong tập giá trị của $f$ được gọi là \textbf{biến phụ thuộc}. Chẳng hạn, ở Ví dụ A, $r$ là biến độc lập và $A$ là biến phụ thuộc.
+
+Có thể hình dung hàm số như một cỗ máy (Hình 2). Khi $x$ thuộc tập xác định của $f$ được đưa vào máy làm đầu vào, máy tạo ra đầu ra $f(x)$ theo quy tắc của hàm số. Như vậy, tập xác định là tập hợp mọi đầu vào có thể có, còn tập giá trị là tập hợp mọi đầu ra có thể có. Các hàm số lập trình sẵn trong máy tính cầm tay là những ví dụ điển hình. Chẳng hạn, khi nhập một số rồi bấm phím bình phương, máy hiển thị bình phương của số đầu vào.
+\fig[.43]{f02}{Hình 2. Sơ đồ máy biểu diễn hàm số $f$.\\ input: đầu vào; output: đầu ra.}
+Một cách hình dung khác là sơ đồ mũi tên trong Hình 3. Mỗi mũi tên nối một phần tử của $D$ với một phần tử của $E$, cho biết $f(x)$ tương ứng với $x$, $f(a)$ tương ứng với $a$, v.v.
+\fig[.40]{f03}{Hình 3. Sơ đồ mũi tên của $f$.}
+Có lẽ phương pháp trực quan hữu ích nhất để biểu diễn hàm số là đồ thị. Nếu $f$ có tập xác định $D$, thì \textbf{đồ thị} của $f$ là tập các cặp có thứ tự
+\[\{(x,f(x))\mid x\in D\}.\]
+Đây chính là các cặp đầu vào–đầu ra. Nói cách khác, đồ thị của $f$ gồm tất cả các điểm $(x,y)$ trên mặt phẳng tọa độ sao cho $y=f(x)$ và $x$ thuộc tập xác định của $f$.
+
+Đồ thị cho ta hình ảnh hữu ích về dáng điệu hay ``lịch sử biến thiên'' của hàm số. Vì tung độ của mỗi điểm $(x,y)$ trên đồ thị bằng $y=f(x)$, ta có thể đọc $f(x)$ từ độ cao có dấu của đồ thị tại hoành độ $x$ (Hình 4). Đồ thị cũng giúp hình dung tập xác định trên trục $x$ và tập giá trị trên trục $y$ (Hình 5).
+\fig[.46]{f04}{Hình 4. Đọc giá trị hàm số từ đồ thị.}
+\fig[.46]{f05}{Hình 5. domain: tập xác định; range: tập giá trị.}
+
+\ex{1} Đồ thị của hàm số $f$ được cho ở Hình 6.\\
+(a) Tìm $f(1)$ và $f(5)$. \quad (b) Tìm tập xác định và tập giá trị của $f$.
+\fig[.40]{f06}{Hình 6. Đồ thị dùng trong Ví dụ 1.}
+\sol (a) Điểm $(1,3)$ thuộc đồ thị nên $f(1)=3$. Nói cách khác, điểm trên đồ thị ứng với $x=1$ nằm cao hơn trục $x$ một khoảng 3 đơn vị. Khi $x=5$, đồ thị nằm thấp hơn trục $x$ khoảng $0.7$ đơn vị, nên $f(5)\approx-0.7$.
+
+(b) Hàm số $f(x)$ được xác định khi $0\le x\le7$, nên tập xác định là đoạn $[0,7]$. Hàm số nhận mọi giá trị từ $-2$ đến $4$, nên tập giá trị là
+\[\{y\mid-2\le y\le4\}=[-2,4].\]
+\noindent\textit{Chú thích bên lề của bản gốc:} Ký hiệu khoảng được trình bày ở Phụ lục A.
+
+Trong giải tích, cách thông dụng nhất để xác định hàm số là dùng một phương trình đại số. Chẳng hạn, phương trình $y=2x-1$ xác định $y$ là một hàm số của $x$; theo ký hiệu hàm số, ta viết $f(x)=2x-1$.
+
+\ex{2} Phác họa đồ thị và tìm tập xác định, tập giá trị của mỗi hàm số:
+\[(a)\quad f(x)=2x-1;\qquad(b)\quad g(x)=x^2.\]
+\sol (a) Phương trình đồ thị là $y=2x-1$, tức một đường thẳng có hệ số góc $2$ và tung độ gốc $-1$. Nhắc lại dạng phương trình đường thẳng theo hệ số góc và tung độ gốc: $y=mx+b$ (Phụ lục B). Từ đó, ta phác họa một phần đồ thị ở Hình 7. Biểu thức $2x-1$ xác định với mọi số thực, nên tập xác định của $f$ là $\mathbb R$. Đồ thị cho thấy tập giá trị cũng là $\mathbb R$.
+\fig[.40]{f07}{Hình 7. Đường thẳng $y=2x-1$.}
+(b) Vì $g(2)=2^2=4$ và $g(-1)=(-1)^2=1$, ta có thể chấm các điểm $(2,4)$, $(-1,1)$ cùng một số điểm khác rồi nối chúng để được đồ thị ở Hình 8. Phương trình $y=x^2$ biểu diễn một parabol (Phụ lục C). Tập xác định là $\mathbb R$. Tập giá trị gồm các số dạng $x^2$. Với mọi $x$, ta có $x^2\ge0$ và mọi số dương đều là một bình phương. Do đó, tập giá trị là $\{y\mid y\ge0\}=[0,\infty)$. Điều này cũng thấy được từ Hình 8.
+\fig[.40]{f08}{Hình 8. Parabol $y=x^2$.}
+
+\ex{3} Cho $f(x)=2x^2-5x+1$ và $h\ne0$. Tính $\dfrac{f(a+h)-f(a)}h$.
+\sol Trước hết, thay $x$ bằng $a+h$ trong biểu thức của $f(x)$:
+\begin{align*}
+f(a+h)&=2(a+h)^2-5(a+h)+1\\
+&=2(a^2+2ah+h^2)-5(a+h)+1\\
+&=2a^2+4ah+2h^2-5a-5h+1.
+\end{align*}
+Thay vào biểu thức đã cho rồi rút gọn:
+\begin{align*}
+\frac{f(a+h)-f(a)}h
+&=\frac{(2a^2+4ah+2h^2-5a-5h+1)-(2a^2-5a+1)}h\\
+&=\frac{2a^2+4ah+2h^2-5a-5h+1-2a^2+5a-1}h\\
+&=\frac{4ah+2h^2-5h}h=4a+2h-5.
+\end{align*}
+\noindent\textit{Chú thích bên lề:} Biểu thức $\dfrac{f(a+h)-f(a)}h$ được gọi là \textbf{thương sai phân} và thường xuyên xuất hiện trong giải tích. Như sẽ thấy ở Chương 2, nó biểu thị tốc độ biến thiên trung bình của $f(x)$ từ $x=a$ đến $x=a+h$.
+
+\section*{Các cách biểu diễn hàm số}
+Ta xét bốn cách biểu diễn một hàm số:
+\begin{itemize}[nosep]
+\item Bằng lời: mô tả bằng ngôn ngữ.
+\item Bằng số: lập bảng giá trị.
+\item Bằng hình ảnh: dùng đồ thị.
+\item Bằng đại số: dùng công thức tường minh.
+\end{itemize}
+Nếu cùng một hàm số có thể được biểu diễn theo cả bốn cách, việc chuyển từ cách này sang cách khác thường giúp hiểu sâu hơn về hàm số đó. Chẳng hạn, trong Ví dụ 2, ta đi từ công thức đại số đến đồ thị. Tuy nhiên, một số hàm số được mô tả tự nhiên hơn bằng một cách nhất định. Với nhận xét này, ta xem lại bốn tình huống ở đầu mục.
+
+\noindent\textbf{A.} Cách biểu diễn hữu ích nhất của diện tích hình tròn theo bán kính có lẽ là công thức $A=\pi r^2$, hay $A(r)=\pi r^2$. Ta cũng có thể lập bảng giá trị hoặc phác họa đồ thị (một nửa parabol). Vì bán kính phải dương nên tập xác định là $\{r\mid r>0\}=(0,\infty)$ và tập giá trị cũng là $(0,\infty)$.
+
+\noindent\textbf{B.} Ta có mô tả bằng lời: $P(t)$ là dân số thế giới tại thời điểm $t$. Chọn mốc thời gian sao cho $t=0$ ứng với năm 1900. Bảng 2 là một cách biểu diễn thuận tiện. Chấm các cặp có thứ tự trong bảng, ta được \textbf{biểu đồ phân tán} ở Hình 9. Đồ thị giúp bao quát toàn bộ dữ liệu cùng một lúc. Còn công thức thì sao? Không thể đưa ra một công thức tường minh cho chính xác dân số $P(t)$ tại mọi thời điểm $t$. Tuy nhiên, có thể tìm một biểu thức xấp xỉ. Bằng các phương pháp sẽ trình bày ở §1.4, ta thu được
+\[P(t)\approx f(t)=(1.43653\times10^9)\cdot(1.01395)^t.\]
+Hình 10 cho thấy đường cong khớp với dữ liệu tương đối tốt. Hàm số $f$ được gọi là một \textbf{mô hình toán học} của sự tăng trưởng dân số: đó là một hàm số có công thức tường minh xấp xỉ dáng điệu của hàm số đã cho. Tuy nhiên, các ý tưởng của giải tích vẫn áp dụng được cho bảng giá trị mà không nhất thiết phải có công thức tường minh.
+\begin{center}\textbf{Bảng 2. Dân số thế giới theo số năm kể từ 1900}\\[4pt]
+\begin{tabular}{rr@{\qquad}rr}\toprule
+$t$ (năm)&Dân số (triệu người)&$t$ (năm)&Dân số (triệu người)\\\midrule
+0&1650&60&3040\\10&1750&70&3710\\20&1860&80&4450\\30&2070&90&5280\\40&2300&100&6080\\50&2560&110&6870\\\bottomrule
+\end{tabular}\end{center}
+\fig[.65]{f09}{Hình 9. Biểu đồ phân tán dân số. $t$: số năm kể từ 1900.}
+\fig[.65]{f10}{Hình 10. Đường cong mô hình xấp xỉ dữ liệu dân số.\\ Years since 1900: số năm kể từ 1900.}
+Hàm số $P$ tiêu biểu cho các hàm số xuất hiện khi áp dụng giải tích vào thực tế. Ta bắt đầu từ mô tả bằng lời rồi có thể lập bảng giá trị, chẳng hạn từ số đọc của thiết bị trong một thí nghiệm khoa học. Dù không biết đầy đủ mọi giá trị của hàm số, như sẽ thấy trong suốt cuốn sách, ta vẫn có thể thực hiện các phép toán giải tích đối với hàm số ấy.
+
+\noindent\textit{Chú thích bên lề:} Hàm số được xác định bằng bảng giá trị được gọi là \textbf{hàm số cho bởi bảng}.
+
+\noindent\textbf{C.} Hàm số tiếp tục được mô tả bằng lời: $C(w)$ là cước phí gửi một phong bì lớn có khối lượng $w$. Quy tắc của Bưu điện Hoa Kỳ áp dụng năm 2019 là: 1 đô la cho khối lượng không quá 1 ounce (oz), cộng thêm 15 cent cho mỗi ounce tăng thêm hoặc phần lẻ của một ounce, đến 13 oz. Bảng giá trị là cách biểu diễn thuận tiện nhất (Bảng 3), dù ta cũng có thể phác họa đồ thị (Ví dụ 10).
+\begin{center}\textbf{Bảng 3}\\[4pt]
+\begin{tabular}{cc}\toprule $w$ (ounce)&$C(w)$ (đô la)\\\midrule
+$0<w\le1$&1.00\\$1<w\le2$&1.15\\$2<w\le3$&1.30\\$3<w\le4$&1.45\\$4<w\le5$&1.60\\$\vdots$&$\vdots$\\\bottomrule
+\end{tabular}\end{center}
+\noindent\textbf{D.} Đồ thị ở Hình 1 là cách biểu diễn tự nhiên nhất của hàm gia tốc thẳng đứng $a(t)$. Ta có thể lập bảng giá trị, thậm chí xây dựng công thức xấp xỉ. Tuy nhiên, mọi thông tin nhà địa chất cần biết, như biên độ và dạng biến thiên, đều dễ dàng nhận ra trên đồ thị. Điều tương tự cũng đúng với các dạng tín hiệu trong điện tâm đồ của bệnh nhân tim và biểu đồ ghi đa thông số dùng để phát hiện nói dối.
+
+Trong ví dụ tiếp theo, ta phác họa đồ thị của một hàm số được xác định bằng lời.
+\ex{4} Khi mở một vòi nước nóng nối với bình chứa nước nóng, nhiệt độ $T$ của nước phụ thuộc vào thời gian nước đã chảy. Hãy phác họa đồ thị của $T$ theo thời gian $t$ kể từ lúc mở vòi.
+\sol Ban đầu, nhiệt độ nước chảy ra gần bằng nhiệt độ phòng vì nước đã nằm trong ống dẫn. Khi nước từ bình chứa bắt đầu chảy đến vòi, $T$ tăng nhanh. Ở giai đoạn tiếp theo, $T$ không đổi và bằng nhiệt độ nước nóng trong bình. Khi bình cạn, $T$ giảm xuống bằng nhiệt độ của nguồn nước cấp. Từ đó, ta phác họa đồ thị như Hình 11.
+\fig[.45]{f11}{Hình 11. Nhiệt độ nước theo thời gian.}
+
+Ở ví dụ sau, ta xuất phát từ mô tả bằng lời trong một tình huống thực tế để lập công thức đại số tường minh. Đây là kỹ năng hữu ích khi giải các bài toán tìm giá trị lớn nhất hoặc nhỏ nhất của một đại lượng.
+\ex{5} Một thùng chứa hình hộp chữ nhật không có nắp có thể tích $10\,\mathrm{m}^3$. Chiều dài đáy gấp đôi chiều rộng. Vật liệu làm đáy có giá 10 đô la/m$^2$; vật liệu làm các mặt bên có giá 6 đô la/m$^2$. Biểu diễn chi phí vật liệu theo chiều rộng đáy.
+\sol Vẽ hình như Hình 12, gọi $w$, $2w$ lần lượt là chiều rộng, chiều dài đáy và $h$ là chiều cao.
+\fig[.43]{f12}{Hình 12. Kích thước thùng chứa.}
+Diện tích đáy là $(2w)w=2w^2$, nên chi phí vật liệu làm đáy là $10(2w^2)$ đô la. Hai mặt bên có diện tích $wh$, hai mặt còn lại có diện tích $2wh$, nên chi phí vật liệu làm các mặt bên là $6[2(wh)+2(2wh)]$. Tổng chi phí là
+\[C=10(2w^2)+6[2(wh)+2(2wh)]=20w^2+36wh.\]
+Để biểu diễn $C$ chỉ theo $w$, ta khử $h$ bằng điều kiện thể tích:
+\[w(2w)h=10,\qquad h=\frac{10}{2w^2}=\frac5{w^2}.\]
+Thay vào biểu thức của $C$:
+\[C=20w^2+36w\left(\frac5{w^2}\right)=20w^2+\frac{180}w.\]
+Vậy phương trình
+\[C(w)=20w^2+\frac{180}w,\qquad w>0,\]
+biểu diễn $C$ là một hàm số của $w$.
+
+\noindent\textit{Gợi ý giải toán bên lề:} Khi lập các hàm số ứng dụng như trong Ví dụ 5, có thể xem lại các nguyên tắc giải toán ở cuối chương, đặc biệt là Bước 1: Hiểu bài toán.
+
+Ở ví dụ tiếp theo, ta tìm tập xác định của một hàm số cho bởi công thức đại số. Nếu đề bài không nêu tập xác định, ta dùng \textbf{quy ước về tập xác định}: tập xác định gồm mọi đầu vào mà công thức có nghĩa và cho đầu ra là số thực.
+
+\ex{6} Tìm tập xác định của mỗi hàm số:
+\[(a)\quad f(x)=\sqrt{x+2};\qquad(b)\quad g(x)=\frac1{x^2-x}.\]
+\sol (a) Vì căn bậc hai của một số âm không xác định trong tập số thực, tập xác định gồm các $x$ sao cho $x+2\ge0$, tương đương $x\ge-2$. Vậy tập xác định là $[-2,\infty)$.
+
+(b) Ta có
+\[g(x)=\frac1{x^2-x}=\frac1{x(x-1)}.\]
+Không được chia cho 0, nên $g(x)$ không xác định tại $x=0$ hoặc $x=1$. Tập xác định là
+\[\{x\mid x\ne0\text{ và }x\ne1\},\]
+hay dưới dạng hợp các khoảng:
+\[(-\infty,0)\cup(0,1)\cup(1,\infty).\]
+
+\section*{Quy tắc nào xác định hàm số?}
+Không phải mọi phương trình đều xác định một hàm số. Phương trình $y=x^2$ xác định $y$ là một hàm số của $x$ vì nó xác định đúng một giá trị $y$ cho mỗi giá trị $x$. Tuy nhiên, phương trình $y^2=x$ không xác định $y$ là một hàm số của $x$, vì một số đầu vào $x$ tương ứng với nhiều đầu ra $y$; chẳng hạn, đầu vào $x=4$ cho các đầu ra $y=2$ và $y=-2$.
+
+Tương tự, không phải mọi bảng giá trị đều xác định một hàm số. Bảng 3 xác định $C$ theo $w$: mỗi khối lượng $w$ tương ứng đúng một cước phí. Trái lại, Bảng 4 không xác định $y$ là hàm số của $x$, vì đầu vào $x=5$ có hai đầu ra $y=7$ và $y=8$.
+\begin{center}\textbf{Bảng 4}\\[4pt]\begin{tabular}{c|rrrrr}$x$&2&4&5&5&6\\\hline$y$&3&6&7&8&9\end{tabular}\end{center}
+Với các đường cong trong mặt phẳng $xy$, đường nào là đồ thị của một hàm số? Tiêu chuẩn sau trả lời câu hỏi đó.
+\begin{quote}\textbf{Tiêu chuẩn đường thẳng đứng.} Một đường cong trong mặt phẳng $xy$ là đồ thị của một hàm số theo $x$ khi và chỉ khi không có đường thẳng đứng nào cắt đường cong tại nhiều hơn một điểm.\end{quote}
+Lý do được minh họa ở Hình 13. Nếu mỗi đường thẳng đứng $x=a$ cắt đường cong đúng một lần tại $(a,b)$, thì tại đó chỉ có một giá trị hàm số $f(a)=b$. Nếu một đường thẳng $x=a$ cắt đường cong hai lần tại $(a,b)$ và $(a,c)$ với $b\ne c$, đường cong không thể biểu diễn một hàm số, vì một hàm số không thể gán hai giá trị khác nhau cho $a$.
+\fig[.45]{f13}{Hình 13. (a) Đường cong biểu diễn một hàm số.\\ (b) Đường cong không biểu diễn một hàm số.}
+Chẳng hạn, parabol $x=y^2-2$ trong Hình 14(a) không phải đồ thị của một hàm số theo $x$, vì có các đường thẳng đứng cắt parabol hai lần. Tuy nhiên, parabol chứa đồ thị của hai hàm số theo $x$. Từ $x=y^2-2$ suy ra $y^2=x+2$, do đó $y=\pm\sqrt{x+2}$. Vì thế, nửa trên và nửa dưới của parabol là đồ thị của $f(x)=\sqrt{x+2}$ [Ví dụ 6(a)] và $g(x)=-\sqrt{x+2}$ [Hình 14(b), (c)].
+\fig[.95]{f14}{Hình 14. (a) $x=y^2-2$; (b) $y=\sqrt{x+2}$; (c) $y=-\sqrt{x+2}$.}
+Nếu đổi vai trò của $x$ và $y$, phương trình $x=h(y)=y^2-2$ lại xác định $x$ là một hàm số của $y$, trong đó $y$ là biến độc lập và $x$ là biến phụ thuộc. Đồ thị của $h$ là parabol ở Hình 14(a).
+
+\section*{Hàm số xác định từng phần}
+Các hàm số trong bốn ví dụ tiếp theo được xác định bằng những công thức khác nhau trên những phần khác nhau của tập xác định. Chúng được gọi là \textbf{hàm số xác định từng phần}.
+\ex{7} Hàm số $f$ được xác định bởi
+\[f(x)=\begin{cases}1-x&\text{nếu }x\le-1,\\x^2&\text{nếu }x>-1.\end{cases}\]
+Tính $f(-2)$, $f(-1)$, $f(0)$ và phác họa đồ thị.
+\sol Hãy nhớ hàm số là một quy tắc. Với hàm số này, trước hết xét đầu vào $x$: nếu $x\le-1$ thì $f(x)=1-x$; nếu $x>-1$ thì $f(x)=x^2$. Dù dùng hai công thức, $f$ vẫn là một hàm số.
+\begin{align*}
+-2\le-1&\ \Longrightarrow\ f(-2)=1-(-2)=3,\\
+-1\le-1&\ \Longrightarrow\ f(-1)=1-(-1)=2,\\
+0>-1&\ \Longrightarrow\ f(0)=0^2=0.
+\end{align*}
+Với $x\le-1$, phần đồ thị bên trái đường thẳng $x=-1$ nằm trên đường thẳng $y=1-x$, có hệ số góc $-1$ và tung độ gốc $1$. Với $x>-1$, phần đồ thị bên phải đường thẳng $x=-1$ nằm trên parabol $y=x^2$. Từ đó có Hình 15. Chấm đặc cho biết $(-1,2)$ thuộc đồ thị; chấm rỗng cho biết $(-1,1)$ không thuộc đồ thị.
+\fig[.43]{f15}{Hình 15. Đồ thị của hàm số trong Ví dụ 7.}
+Ví dụ tiếp theo về hàm số xác định từng phần là \textbf{hàm giá trị tuyệt đối}. Giá trị tuyệt đối của số $a$, ký hiệu $|a|$, là khoảng cách từ $a$ đến $0$ trên trục số thực. Khoảng cách luôn không âm, nên $|a|\ge0$ với mọi số $a$. Chẳng hạn,
+\[|3|=3,\quad|-3|=3,\quad|0|=0,\quad|\sqrt2-1|=\sqrt2-1,\quad|3-\pi|=\pi-3.\]
+Nói chung,
+\[|a|=a\ \text{nếu }a\ge0;\qquad |a|=-a\ \text{nếu }a<0.\]
+Lưu ý: nếu $a$ âm thì $-a$ dương. Xem Phụ lục A để ôn tập đầy đủ hơn về giá trị tuyệt đối.
+
+\ex{8} Phác họa đồ thị hàm giá trị tuyệt đối $f(x)=|x|$.
+\sol Theo trên,
+\[|x|=\begin{cases}x&\text{nếu }x\ge0,\\-x&\text{nếu }x<0.\end{cases}\]
+Dùng phương pháp của Ví dụ 7, đồ thị trùng với đường thẳng $y=x$ ở bên phải trục $y$ và đường thẳng $y=-x$ ở bên trái trục $y$ (Hình 16).
+\fig[.44]{f16}{Hình 16. Đồ thị $y=|x|$.}
+
+\ex{9} Tìm công thức của hàm số $f$ có đồ thị ở Hình 17.
+\fig[.48]{f17}{Hình 17. Đồ thị dùng trong Ví dụ 9.}
+\sol Đường thẳng qua $(0,0)$ và $(1,1)$ có hệ số góc $m=1$, tung độ gốc $b=0$, nên phương trình là $y=x$. Do đó, trên phần nối hai điểm này,
+\[f(x)=x\qquad\text{nếu }0\le x\le1.\]
+Đường thẳng qua $(1,1)$ và $(2,0)$ có hệ số góc $m=-1$, nên dạng phương trình qua một điểm với hệ số góc đã biết là
+\[y-0=(-1)(x-2),\qquad\text{hay }y=2-x.\]
+Vì vậy, $f(x)=2-x$ nếu $1<x\le2$. Đồ thị cũng trùng với trục $x$ khi $x>2$. Kết hợp lại,
+\[f(x)=\begin{cases}x&\text{nếu }0\le x\le1,\\2-x&\text{nếu }1<x\le2,\\0&\text{nếu }x>2.\end{cases}\]
+\noindent\textit{Chú thích bên lề:} Phương trình đường thẳng qua một điểm với hệ số góc đã biết là $y-y_1=m(x-x_1)$ (Phụ lục B).
+
+\ex{10} Ở Ví dụ C đầu mục, ta xét cước phí $C(w)$ để gửi phong bì lớn có khối lượng $w$. Thực chất đây là một hàm số xác định từng phần, vì từ Bảng 3:
+\[C(w)=\begin{cases}1.00&\text{nếu }0<w\le1,\\1.15&\text{nếu }1<w\le2,\\1.30&\text{nếu }2<w\le3,\\1.45&\text{nếu }3<w\le4,\\\vdots&\end{cases}\]
+Đồ thị được cho ở Hình 18. Từ hình này, ta thấy vì sao hàm số như trong Ví dụ 10 được gọi là \textbf{hàm bậc thang}.
+\fig[.48]{f18}{Hình 18. Đồ thị cước phí gửi phong bì.}
+
+\section*{Hàm số chẵn và hàm số lẻ}
+Nếu $f(-x)=f(x)$ với mọi $x$ thuộc tập xác định, thì $f$ được gọi là \textbf{hàm số chẵn}. Chẳng hạn, $f(x)=x^2$ là hàm số chẵn vì
+\[f(-x)=(-x)^2=x^2=f(x).\]
+Về hình học, đồ thị hàm số chẵn đối xứng qua trục $y$ (Hình 19). Nếu đã vẽ đồ thị với $x\ge0$, ta nhận được toàn bộ đồ thị bằng cách lấy đối xứng phần đó qua trục $y$.
+\fig[.46]{f19}{Hình 19. Hàm số chẵn.}
+Nếu $f(-x)=-f(x)$ với mọi $x$ thuộc tập xác định, thì $f$ được gọi là \textbf{hàm số lẻ}. Chẳng hạn, $f(x)=x^3$ là hàm số lẻ vì
+\[f(-x)=(-x)^3=-x^3=-f(x).\]
+Đồ thị của hàm số lẻ đối xứng qua gốc tọa độ (Hình 20). Nếu đã có đồ thị với $x\ge0$, ta nhận được toàn bộ đồ thị bằng phép quay phần đó một góc $180^\circ$ quanh gốc tọa độ.
+\fig[.46]{f20}{Hình 20. Hàm số lẻ.}
+
+\ex{11} Xác định mỗi hàm số sau là chẵn, lẻ hay không chẵn không lẻ:
+\[(a)\ f(x)=x^5+x;\quad(b)\ g(x)=1-x^4;\quad(c)\ h(x)=2x-x^2.\]
+\sol (a) Ta có
+\begin{align*}f(-x)&=(-x)^5+(-x)=(-1)^5x^5+(-x)\\&=-x^5-x=-(x^5+x)=-f(x).\end{align*}
+Vậy $f$ là hàm số lẻ.
+
+(b) $g(-x)=1-(-x)^4=1-x^4=g(x)$, nên $g$ là hàm số chẵn.
+
+(c) $h(-x)=2(-x)-(-x)^2=-2x-x^2$. Các đồng nhất thức $h(-x)=h(x)$ và $h(-x)=-h(x)$ đều không đúng với mọi $x$, nên $h$ không chẵn cũng không lẻ.
+
+Đồ thị các hàm số trong Ví dụ 11 được cho ở Hình 21. Đồ thị của $h$ không đối xứng qua trục $y$ và cũng không đối xứng qua gốc tọa độ.
+\fig[.95]{f21}{Hình 21. (a) $f(x)=x^5+x$; (b) $g(x)=1-x^4$; (c) $h(x)=2x-x^2$.}
+
+\section*{Hàm số đồng biến và hàm số nghịch biến}
+Đồ thị ở Hình 22 đi lên từ $A$ đến $B$, đi xuống từ $B$ đến $C$, rồi lại đi lên từ $C$ đến $D$. Ta nói $f$ \textbf{đồng biến} trên $[a,b]$, \textbf{nghịch biến} trên $[b,c]$, rồi đồng biến trên $[c,d]$. Nếu $x_1,x_2$ nằm giữa $a$ và $b$, $x_1<x_2$, thì $f(x_1)<f(x_2)$. Đây là tính chất dùng để định nghĩa hàm số đồng biến.
+\fig[.86]{f22}{Hình 22. Các đoạn đồng biến và nghịch biến của hàm số.}
+\begin{quote}
+Hàm số $f$ được gọi là \textbf{đồng biến} trên một khoảng $I$ nếu
+\[f(x_1)<f(x_2)\qquad\text{với mọi }x_1,x_2\in I,\ x_1<x_2.\]
+Hàm số được gọi là \textbf{nghịch biến} trên $I$ nếu
+\[f(x_1)>f(x_2)\qquad\text{với mọi }x_1,x_2\in I,\ x_1<x_2.\]
+\end{quote}
+Trong định nghĩa đồng biến, bất đẳng thức phải đúng với \emph{mọi} cặp $x_1,x_2\in I$ thỏa $x_1<x_2$. Từ Hình 23, hàm số $f(x)=x^2$ nghịch biến trên $(-\infty,0]$ và đồng biến trên $[0,\infty)$.
+\fig[.40]{f23}{Hình 23. Sự biến thiên của $f(x)=x^2$.}
+
+\clearpage
+\section*{1.1. Bài tập}
+\bt{1} Nếu $f(x)=x+\sqrt{2-x}$ và $g(u)=u+\sqrt{2-u}$ thì $f=g$ có đúng không?
+\bt{2} Nếu $f(x)=\dfrac{x^2-x}{x-1}$ và $g(x)=x$ thì $f=g$ có đúng không?
+\bt{3} Cho đồ thị của hàm số $g$ như hình. (a) Nêu các giá trị $g(-2)$, $g(0)$, $g(2)$, $g(3)$. (b) Với những giá trị nào của $x$ thì $g(x)=3$? (c) Với những giá trị nào của $x$ thì $g(x)\le3$? (d) Nêu tập xác định và tập giá trị của $g$. (e) Hàm số $g$ đồng biến trên những khoảng nào?
+\fig[.47]{e03}{Đồ thị cho Bài tập 3.}
+\bt{4} Cho đồ thị của $f$ và $g$ như hình. (a) Nêu $f(-4)$ và $g(3)$. (b) Giá trị nào lớn hơn: $f(-3)$ hay $g(-3)$? (c) Với những giá trị nào của $x$ thì $f(x)=g(x)$? (d) Trên những khoảng nào $f(x)\le g(x)$? (e) Nêu nghiệm của $f(x)=-1$. (f) Hàm số $g$ nghịch biến trên những khoảng nào? (g) Nêu tập xác định và tập giá trị của $f$. (h) Nêu tập xác định và tập giá trị của $g$.
+\fig[.48]{e04}{Đồ thị cho Bài tập 4.}
+\bt{5} Hình 1 được ghi bởi thiết bị do Cơ quan Mỏ và Địa chất California vận hành tại Bệnh viện Đại học thuộc Đại học Nam California (USC), Los Angeles. Dùng hình này để ước lượng tập giá trị của hàm gia tốc thẳng đứng của mặt đất tại USC trong trận động đất Northridge.
+\bt{6} Trong mục này, ta đã xét các hàm số thường gặp: dân số theo thời gian, cước bưu điện theo khối lượng bưu phẩm, nhiệt độ nước theo thời gian. Hãy nêu bằng lời ba ví dụ khác về hàm số trong đời sống. Có thể nói gì về tập xác định và tập giá trị của mỗi hàm số? Nếu có thể, hãy phác họa đồ thị của chúng.
+\group{7–14. Xác định phương trình hoặc bảng có xác định $y$ là một hàm số của $x$ hay không.}
+\bt{7} $3x-5y=7$.
+\bt{8} $3x^2-2y=5$.
+\bt{9} $x^2+(y-3)^2=5$.
+\bt{10} $2xy+5y^2=4$.
+\bt{11} $(y+3)^3+1=2x$.
+\bt{12} $2x-|y|=0$.
+\bt{13} Bảng chiều cao và cỡ giày:
+\begin{center}\begin{tabular}{c|rrrrr}$x$: chiều cao (inch)&72&60&60&63&70\\\hline $y$: cỡ giày&12&8&7&9&10\end{tabular}\end{center}
+\bt{14} Bảng năm và học phí:
+\begin{center}\begin{tabular}{c|rrrrr}$x$: năm&2016&2017&2018&2019&2020\\\hline$y$: học phí (đô la)&10\,900&11\,000&11\,200&11\,200&11\,300\end{tabular}\end{center}
+\group{15–18. Xác định đường cong có phải đồ thị của một hàm số theo $x$ hay không. Nếu có, nêu tập xác định và tập giá trị.}
+\fig[.78]{e15_18}{Các đường cong cho Bài tập 15, 16, 17 và 18 (theo thứ tự trong hình).}
+\bt{19} Hình bên cho đồ thị nhiệt độ trung bình toàn cầu $T$ trong thế kỷ XX. Ước lượng: (a) Nhiệt độ trung bình toàn cầu năm 1950. (b) Năm có nhiệt độ trung bình $14.2^\circ\mathrm C$. (c) Các năm có nhiệt độ nhỏ nhất và lớn nhất. (d) Tập giá trị của $T$.
+\fig[.60]{e19}{Đồ thị cho Bài tập 19. Nguồn: phỏng theo Globe and Mail\\ (Toronto), ngày 5 tháng 12 năm 2009.}
+\bt{20} Cây phát triển nhanh hơn và tạo vòng năm rộng hơn trong những năm ấm; phát triển chậm hơn và tạo vòng năm hẹp hơn trong những năm lạnh. Hình cho bề rộng vòng năm của một cây thông Siberia từ 1500 đến 2000. (a) Tập giá trị của hàm bề rộng vòng năm là gì? (b) Đồ thị gợi ý điều gì về nhiệt độ Trái Đất? Đồ thị có phản ánh các vụ phun trào núi lửa giữa thế kỷ XIX không?
+\fig[.62]{e20}{Đồ thị cho Bài tập 20. Ring width (mm): bề rộng vòng năm (mm); Year: năm.\\ Nguồn: phỏng theo G. Jacoby và cộng sự, ``Mongolian Tree Rings and\\ 20th-Century Warming'', Science 273 (1996), 771–773.}
+\bt{21} Cho vài viên đá vào cốc, rót đầy nước lạnh rồi để cốc trên bàn. Mô tả sự thay đổi nhiệt độ của nước theo thời gian. Sau đó phác họa đồ thị nhiệt độ nước theo thời gian đã trôi qua.
+\bt{22} Đặt một chiếc bánh đông lạnh vào lò, nướng trong một giờ, sau đó lấy ra để nguội. Mô tả sự thay đổi nhiệt độ của bánh theo thời gian và phác họa đồ thị tương ứng.
+\bt{23} Đồ thị cho công suất điện tiêu thụ trong một ngày tháng Chín ở San Francisco ($P$ tính bằng megawatt, $t$ tính bằng giờ kể từ nửa đêm). (a) Công suất tiêu thụ lúc 6 giờ sáng và 6 giờ chiều là bao nhiêu? (b) Công suất tiêu thụ thấp nhất và cao nhất vào lúc nào? Các thời điểm đó có hợp lý không?
+\fig[.72]{e23}{Đồ thị cho Bài tập 23. Nguồn: Pacific Gas \& Electric.}
+\bt{24} Ba vận động viên thi chạy 100 m. Đồ thị biểu diễn quãng đường đã chạy theo thời gian của mỗi người. Diễn đạt bằng lời những thông tin về cuộc đua mà đồ thị cho biết. Ai thắng cuộc? Cả ba người có chạy hết cự ly không?
+\fig[.64]{e24}{Đồ thị cho Bài tập 24. $t$: giây.}
+\bt{25} Phác họa đồ thị nhiệt độ ngoài trời theo thời gian trong một ngày xuân điển hình.
+\bt{26} Phác họa đồ thị số giờ có ánh sáng ban ngày theo thời điểm trong năm.
+\bt{27} Phác họa đồ thị lượng cà phê thuộc một nhãn hiệu được cửa hàng bán ra theo giá bán.
+\bt{28} Phác họa đồ thị giá thị trường của một ô tô mới theo thời gian trong 20 năm. Giả sử xe được bảo dưỡng tốt.
+\bt{29} Một chủ nhà cắt cỏ vào chiều thứ Tư hằng tuần. Phác họa đồ thị chiều cao cỏ theo thời gian trong bốn tuần.
+\bt{30} Một máy bay cất cánh từ một sân bay và hạ cánh sau một giờ tại sân bay khác cách đó 400 dặm. Gọi $t$ là thời gian tính bằng phút kể từ lúc máy bay rời nhà ga; $x(t)$ là quãng đường theo phương ngang và $y(t)$ là độ cao. Phác họa những đồ thị có thể có của: (a) $x(t)$; (b) $y(t)$; (c) tốc độ so với mặt đất; (d) vận tốc theo phương thẳng đứng.
+\bt{31} Vào một ngày tháng Sáu ở Atlanta, nhiệt độ $T$ (độ F) được ghi hai giờ một lần từ nửa đêm đến 14 giờ. Thời gian $t$ tính bằng giờ kể từ nửa đêm.
+\begin{center}\begin{tabular}{c|rrrrrrrr}$t$&0&2&4&6&8&10&12&14\\\hline$T$&74&69&68&66&70&78&82&86\end{tabular}\end{center}
+(a) Dùng số liệu để phác họa đồ thị $T$ theo $t$. (b) Dùng đồ thị để ước lượng nhiệt độ lúc 9 giờ sáng.
+\bt{32} Các nhà nghiên cứu đo nồng độ cồn trong máu (BAC) của tám nam giới trưởng thành sau khi uống nhanh 30 mL ethanol (tương đương hai đơn vị đồ uống có cồn tiêu chuẩn). Bảng cho số liệu BAC trung bình (g/dL) của tám người. (a) Dùng số liệu để phác họa đồ thị BAC theo $t$. (b) Dùng đồ thị mô tả tác động của cồn thay đổi theo thời gian như thế nào.
+\begin{center}\begin{tabular}{rr@{\qquad}rr}\toprule$t$ (giờ)&BAC&$t$ (giờ)&BAC\\\midrule
+0&0&1.75&0.022\\0.2&0.025&2.0&0.018\\0.5&0.041&2.25&0.015\\0.75&0.040&2.5&0.012\\1.0&0.033&3.0&0.007\\1.25&0.029&3.5&0.003\\1.5&0.024&4.0&0.001\\\bottomrule\end{tabular}\end{center}
+\noindent\textit{Nguồn:} Phỏng theo P. Wilkinson và cộng sự, ``Pharmacokinetics of Ethanol after Oral Administration in the Fasting State'', \textit{Journal of Pharmacokinetics and Biopharmaceutics} 5 (1977), 207–224.
+\bt{33} Cho $f(x)=3x^2-x+2$. Tính $f(2)$, $f(-2)$, $f(a)$, $f(-a)$, $f(a+1)$, $2f(a)$, $f(2a)$, $f(a^2)$, $[f(a)]^2$ và $f(a+h)$.
+\bt{34} Cho $g(x)=\dfrac{x}{\sqrt{x+1}}$. Tính $g(0)$, $g(3)$, $5g(a)$, $\dfrac12g(4a)$, $g(a^2)$, $[g(a)]^2$, $g(a+h)$ và $g(x-a)$.
+\group{35–38. Tính và rút gọn thương sai phân đã cho.}
+\bt{35} $f(x)=4+3x-x^2$, \quad $\dfrac{f(3+h)-f(3)}h$.
+\bt{36} $f(x)=x^3$, \quad $\dfrac{f(a+h)-f(a)}h$.
+\bt{37} $f(x)=\dfrac1x$, \quad $\dfrac{f(x)-f(a)}{x-a}$.
+\bt{38} $f(x)=\sqrt{x+2}$, \quad $\dfrac{f(x)-f(1)}{x-1}$.
+\group{39–46. Tìm tập xác định của hàm số.}
+\bt{39} $f(x)=\dfrac{x+4}{x^2-9}$.
+\bt{40} $f(x)=\dfrac{x^2+1}{x^2+4x-21}$.
+\bt{41} $f(t)=\sqrt[3]{2t-1}$.
+\bt{42} $g(t)=\sqrt{3-t}-\sqrt{2+t}$.
+\bt{43} $h(x)=\dfrac1{\sqrt[4]{x^2-5x}}$.
+\bt{44} $f(u)=\dfrac{u+1}{1+\dfrac1{u+1}}$.
+\bt{45} $F(p)=\sqrt{2-\sqrt p}$.
+\bt{46} $h(x)=\sqrt{x^2-4x-5}$.
+\bt{47} Tìm tập xác định, tập giá trị và phác họa đồ thị của $h(x)=\sqrt{4-x^2}$.
+\bt{48} Tìm tập xác định và phác họa đồ thị của $f(x)=\dfrac{x^2-4}{x-2}$.
+\group{49–52. Tính $f(-3)$, $f(0)$, $f(2)$ đối với hàm số xác định từng phần, rồi phác họa đồ thị.}
+\bt{49} $f(x)=\begin{cases}x^2+2&\text{nếu }x<0,\\x&\text{nếu }x\ge0.\end{cases}$
+\bt{50} $f(x)=\begin{cases}5&\text{nếu }x<2,\\\frac12x-3&\text{nếu }x\ge2.\end{cases}$
+\bt{51} $f(x)=\begin{cases}x+1&\text{nếu }x\le-1,\\x^2&\text{nếu }x>-1.\end{cases}$
+\bt{52} $f(x)=\begin{cases}-1&\text{nếu }x\le1,\\7-2x&\text{nếu }x>1.\end{cases}$
+\group{53–58. Phác họa đồ thị hàm số.}
+\bt{53} $f(x)=x+|x|$.
+\bt{54} $f(x)=|x+2|$.
+\bt{55} $g(t)=|1-3t|$.
+\bt{56} $f(x)=\dfrac{|x|}x$.
+\bt{57} $f(x)=\begin{cases}|x|&\text{nếu }|x|\le1,\\1&\text{nếu }|x|>1.\end{cases}$
+\bt{58} $g(x)=\bigl||x|-1\bigr|$.
+\group{59–64. Tìm công thức của hàm số có đồ thị là đường cong đã cho.}
+\bt{59} Đoạn thẳng nối $(1,-3)$ và $(5,7)$.
+\bt{60} Đoạn thẳng nối $(-5,10)$ và $(7,-10)$.
+\bt{61} Nửa dưới của parabol $x+(y-1)^2=0$.
+\bt{62} Nửa trên của đường tròn $x^2+(y-2)^2=4$.
+\bt{63–64} Các đường cong trong hình sau.
+\fig[.82]{e63_64}{Đồ thị cho Bài tập 63 (trái) và 64 (phải).}
+\group{65–70. Tìm công thức của hàm số được mô tả và nêu tập xác định.}
+\bt{65} Một hình chữ nhật có chu vi 20 m. Biểu diễn diện tích theo độ dài một cạnh.
+\bt{66} Một hình chữ nhật có diện tích $16\,\mathrm m^2$. Biểu diễn chu vi theo độ dài một cạnh.
+\bt{67} Biểu diễn diện tích tam giác đều theo độ dài cạnh.
+\bt{68} Một hình hộp chữ nhật kín có thể tích $8\,\mathrm{ft}^3$, chiều dài gấp đôi chiều rộng. Biểu diễn chiều cao theo chiều rộng.
+\bt{69} Một hình hộp chữ nhật không nắp có thể tích $2\,\mathrm m^3$ và đáy vuông. Biểu diễn diện tích toàn bộ các mặt của hộp theo độ dài cạnh đáy.
+\bt{70} Một hình trụ tròn xoay có thể tích $25\,\mathrm{in}^3$. Biểu diễn bán kính theo chiều cao.
+\bt{71} Từ tấm bìa hình chữ nhật kích thước 12 inch và 20 inch, cắt bỏ ở bốn góc các hình vuông bằng nhau có cạnh $x$, rồi gấp các mép lên để tạo hộp không nắp như hình. Biểu diễn thể tích $V$ của hộp theo $x$.
+\fig[.80]{e71}{Hình minh họa Bài tập 71.}
+\bt{72} Một cửa sổ kiểu Norman có dạng hình chữ nhật ghép với nửa hình tròn ở phía trên. Nếu chu vi cửa sổ là 30 ft, biểu diễn diện tích $A$ theo chiều rộng $x$ của cửa sổ.
+\fig[.26]{e72}{Hình minh họa Bài tập 72.}
+\bt{73} Tại một bang, tốc độ tối đa trên xa lộ là 65 dặm/giờ, tốc độ tối thiểu là 40 dặm/giờ. Mức phạt là 15 đô la cho mỗi dặm/giờ vượt quá mức tối đa hoặc thấp hơn mức tối thiểu. Biểu diễn tiền phạt $F$ theo tốc độ $x$, rồi vẽ đồ thị $F(x)$ với $0\le x\le100$.
+\bt{74} Một công ty điện lực thu phí cơ bản 10 đô la/tháng, cộng 6 cent/kWh cho 1200 kWh đầu tiên và 7 cent/kWh cho phần vượt 1200 kWh. Biểu diễn chi phí hằng tháng $E$ theo lượng điện $x$ đã dùng, rồi vẽ đồ thị với $0\le x\le2000$.
+\bt{75} Tại một quốc gia, thuế thu nhập được tính như sau: thu nhập đến 10\,000 đô la được miễn thuế; phần vượt 10\,000 đô la đến 20\,000 đô la chịu thuế suất 10\%; phần vượt 20\,000 đô la chịu thuế suất 15\%. (a) Phác họa đồ thị thuế suất $R$ theo thu nhập $I$. (b) Thuế phải nộp với thu nhập 14\,000 đô la và 26\,000 đô la là bao nhiêu? (c) Phác họa đồ thị tổng thuế phải nộp $T$ theo thu nhập $I$.
+\bt{76} (a) Nếu $(5,3)$ thuộc đồ thị một hàm số chẵn thì điểm nào khác chắc chắn cũng thuộc đồ thị? (b) Trả lời câu hỏi tương tự đối với hàm số lẻ.
+\group{77–78. Cho đồ thị $f$ và $g$. Xác định mỗi hàm số là chẵn, lẻ hay không chẵn không lẻ. Giải thích.}
+\fig[.83]{e77_78}{Đồ thị cho Bài tập 77 (trái) và 78 (phải).}
+\group{79–80. Cho đồ thị một hàm số xác định với $x\ge0$. Bổ sung phần đồ thị với $x<0$ để được (a) hàm số chẵn; (b) hàm số lẻ.}
+\fig[.40]{e79_80}{Đồ thị cho Bài tập 79 (trên) và 80 (dưới).}
+\group{81–86. Xác định $f$ là chẵn, lẻ hay không chẵn không lẻ. Có thể dùng máy tính vẽ đồ thị hoặc máy tính điện tử để kiểm tra trực quan.}
+\bt{81} $f(x)=\dfrac{x}{x^2+1}$.
+\bt{82} $f(x)=\dfrac{x^2}{x^4+1}$.
+\bt{83} $f(x)=\dfrac{x}{x+1}$.
+\bt{84} $f(x)=x|x|$.
+\bt{85} $f(x)=1+3x^2-x^4$.
+\bt{86} $f(x)=1+3x^3-x^5$.
+\bt{87} Nếu $f$ và $g$ đều chẵn thì $f+g$ có chẵn không? Nếu $f$ và $g$ đều lẻ thì $f+g$ có lẻ không? Điều gì xảy ra nếu $f$ chẵn còn $g$ lẻ? Giải thích các câu trả lời.
+\bt{88} Nếu $f$ và $g$ đều chẵn thì tích $fg$ có chẵn không? Nếu $f$ và $g$ đều lẻ thì $fg$ có lẻ không? Điều gì xảy ra nếu $f$ chẵn còn $g$ lẻ? Giải thích các câu trả lời.
+
+\clearpage
+\section*{Bảng thuật ngữ chuẩn hóa cho các phần tiếp theo}
+\noindent\textit{Phần biên tập bổ sung; không thuộc nguyên bản §1.1.} Phân biệt tập đích $E$ với tập giá trị $f(D)$. Định nghĩa hàm số chẵn/lẻ ngầm yêu cầu tập xác định đối xứng qua 0; điều kiện phải đúng với mọi phần tử của tập xác định. Thuật ngữ đồng biến/nghịch biến ở đây ứng với bất đẳng thức nghiêm ngặt.
+\begin{longtable}{p{.42\linewidth}p{.49\linewidth}}\toprule Tiếng Anh&Tiếng Việt thống nhất\\\midrule\endhead
+function&hàm số\\
+rule&quy tắc\\
+domain&tập xác định\\
+range&tập giá trị\\
+value of a function&giá trị của hàm số\\
+independent variable&biến độc lập\\
+dependent variable&biến phụ thuộc\\
+input / output&đầu vào / đầu ra\\
+arrow diagram&sơ đồ mũi tên\\
+graph&đồ thị\\
+ordered pair&cặp có thứ tự\\
+coordinate plane&mặt phẳng tọa độ\\
+slope&hệ số góc\\
+y-intercept&tung độ gốc\\
+parabola&parabol\\
+difference quotient&thương sai phân\\
+average rate of change&tốc độ biến thiên trung bình\\
+explicit formula&công thức tường minh\\
+verbal representation&biểu diễn bằng lời\\
+numerical representation&biểu diễn bằng số\\
+algebraic representation&biểu diễn bằng đại số\\
+table of values&bảng giá trị\\
+tabular function&hàm số cho bởi bảng\\
+scatter plot&biểu đồ phân tán\\
+mathematical model&mô hình toán học\\
+vertical line test&tiêu chuẩn đường thẳng đứng\\
+piecewise defined function&hàm số xác định từng phần\\
+absolute value&giá trị tuyệt đối\\
+step function&hàm bậc thang\\
+even / odd function&hàm số chẵn / hàm số lẻ\\
+symmetry about the origin&đối xứng qua gốc tọa độ\\
+increasing / decreasing&đồng biến / nghịch biến\\
+closed interval&đoạn\\
+open interval&khoảng mở\\
+\bottomrule\end{longtable}
+\section*{Phạm vi và kế hoạch tiếp nối}
+Đợt này hoàn thành §1.1, gồm 11 ví dụ, 23 hình, 4 bảng và toàn bộ Bài tập 1–88. Các nhãn hình và số thứ tự giữ theo nguyên bản. Bản dịch không thêm lời giải bài tập.
+
+Các phần còn lại của Chương 1, theo thứ tự nguồn:
+\begin{enumerate}[nosep]
+\item §1.2. Mô hình toán học: một danh mục các hàm số cơ bản (trang in 21–36).
+\item §1.3. Xây dựng hàm số mới từ những hàm số đã biết (trang 36–45).
+\item §1.4. Hàm số mũ (trang 45–54).
+\item §1.5. Hàm số ngược và lôgarit (trang 54–67).
+\item Ôn tập Chương 1 (từ trang 67) và Các nguyên tắc giải toán (từ trang 70).
+\end{enumerate}
+Khi ghép tập, có thể gom §1.2–§1.3 thành một đợt khoảng 24 trang nguồn và §1.4–§1.5 cùng phần ôn tập thành đợt tiếp theo, giữ ranh giới từng mục. Độ dài từng đợt tính theo trang nguồn, không theo số trang sau dàn trang tiếng Việt.
+\end{document}
