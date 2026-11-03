@@ -47,7 +47,7 @@
   const heading=[...body.querySelectorAll('h1,h2,h3,h4,h5,h6')].find(x=>x.textContent.trim()==='1.1. Bài tập');
   if(!heading)return;
   // Replace only the exercise region, retaining the theory and editorial material.
-  for(let x=heading.nextSibling;x&&!/^H[1-6]$/.test(x.nodeName);){const next=x.nextSibling;window.MathJax?.typesetClear?.([x]);x.remove();x=next;}
+  for(let x=heading.nextSibling;x&&!/^H[1-6]$/.test(x.nodeName);){const next=x.nextSibling;if(x.nodeType===Node.ELEMENT_NODE)window.MathJax?.typesetClear?.([x]);x.remove();x=next;}
   const list=node('div');list.className='book-exercise-list';heading.after(list);
   window.mongoProblemsByContentKey ||= new Map();window.mongoProblemReferenceLinks ||= new Map();
   for(const problem of exercises){
