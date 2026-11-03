@@ -14,7 +14,7 @@
  function selectField(form,name,label,options,value){const wrapper=node('label',label),select=node('select');select.name=name;select.required=name!=='parentId';for(const option of options)select.add(new Option(option.title,option.id));select.value=value||'';wrapper.append(select);form.append(wrapper);return select;}
 
  // Build a fresh allowlisted DOM; imported HTML never executes scripts or event handlers.
- window.renderBookContent=async function(target,section){
+ window.renderBookContent=async function(target,section,typeset=true){
   window.MathJax?.typesetClear?.([target]);target.replaceChildren();target.style.whiteSpace=section.contentFormat==='html-latex'?'normal':'pre-wrap';
   if(section.contentFormat!=='html-latex'){if(window.safeRenderMathJaxToElement)window.safeRenderMathJaxToElement(target,section.content);else target.textContent=section.content;return;}
   const parsed=new DOMParser().parseFromString(section.content||'','text/html');
@@ -40,8 +40,26 @@
    for(const child of input.childNodes)output.append(clean(child));return output;
   }
   for(const child of parsed.body.childNodes)target.append(clean(child));
-  if(window.MathJax?.typesetPromise)await window.MathJax.typesetPromise([target]);
+  if(typeset&&window.MathJax?.typesetPromise)await window.MathJax.typesetPromise([target]);
  };
+ async function renderExercises(body,exercises){
+  if(!exercises?.length)return;
+  const heading=[...body.querySelectorAll('h1,h2,h3,h4,h5,h6')].find(x=>x.textContent.trim()==='1.1. Bài tập');
+  if(!heading)return;
+  // Replace only the exercise region, retaining the theory and editorial material.
+  for(let x=heading.nextSibling;x&&!/^H[1-6]$/.test(x.nodeName);){const next=x.nextSibling;window.MathJax?.typesetClear?.([x]);x.remove();x=next;}
+  const list=node('div');list.className='book-exercise-list';heading.after(list);
+  window.mongoProblemsByContentKey ||= new Map();window.mongoProblemReferenceLinks ||= new Map();
+  for(const problem of exercises){
+   window.mongoProblemsByContentKey.set(problem.contentKey,problem);window.mongoProblemReferenceLinks.set(problem.contentKey,problem.referenceLinks||[]);
+   const card=node('article');card.className='problem-item book-exercise';card.id='book-exercise-'+problem.id;
+   Object.assign(card.dataset,{databaseProblem:'true',contentKey:problem.contentKey,setKey:problem.setKey,setId:String(problem.setId),setTitle:problem.setTitle,sourceGroup:'university_books',sourceType:'book_exercise',contentType:'book_exercises',questionNumber:String(problem.questionNumber),topic:problem.topic});
+   const head=node('div');head.className='problem-header';const title=node('div',problem.title);title.className='problem-id';head.append(title);card.append(head);
+   const statement=node('div');statement.className='problem-content';statement.setAttribute('data-raw-math',problem.content);card.append(statement);list.append(card);
+   await window.renderBookContent(statement,{content:problem.content,contentFormat:problem.contentFormat||'html-latex'},false);statement._renderedMongoContent=problem.content;
+  }
+  window.reinitDatabaseUI?.(list);window.reinitAIGuide?.(list);
+ }
  function showEditor(title,fields,action,initial={},extra={}){
   if(!admin())return;editor.replaceChildren();const form=node('form');form.style.cssText='display:grid;gap:12px;padding:18px;border:1px solid #94a3b8;border-radius:8px;margin:12px 0';form.append(node('h3',title));
   for(const field of fields){if(field.options){selectField(form,field.name,field.label,field.options,initial[field.name]);continue;}const label=node('label',field.label),input=node(field.name==='content'?'textarea':'input');input.name=field.name;input.required=field.required||false;input.maxLength=field.max||300;if(field.name==='order'){input.type='number';input.min='0';input.max='100000';}if(field.name==='content'){input.rows=16;input.style.fontFamily='monospace';}input.style.cssText+=';display:block;width:100%;box-sizing:border-box;padding:9px';input.value=initial[field.name]??'';label.append(input);form.append(label);}
@@ -65,7 +83,7 @@
   add('',toc);
  }
  async function openSection(id){const version=++state.version;state.sectionId=id;status.textContent='Đang tải nội dung…';try{const data=await request({bookId:state.bookId,sectionId:id,...(state.showDeleted?{includeDeleted:'1'}:{})});if(version!==state.version)return;renderToc();content.replaceChildren();const section=data.section;content.append(node('h2',data.book.title),node('h3',section.title));if(section.originalTitle)content.append(node('p',section.originalTitle));if(section.printedPage)content.append(node('p',`Trang in: ${section.printedPage}`));
-    const body=node('div');body.style.cssText='white-space:pre-wrap;line-height:1.8';content.append(body);if(section.content)await window.renderBookContent(body,section);else body.textContent='Chưa có nội dung chi tiết. Admin có thể thêm lý thuyết, ví dụ và bài tập cho mục này.';if(version!==state.version)return;content.append(body);
+    const body=node('div');body.style.cssText='white-space:pre-wrap;line-height:1.8';content.append(body);if(section.content)await window.renderBookContent(body,section,false);else body.textContent='Chưa có nội dung chi tiết. Admin có thể thêm lý thuyết, ví dụ và bài tập cho mục này.';if(version!==state.version)return;await renderExercises(body,data.exercises);if(window.MathJax?.typesetPromise)await window.MathJax.typesetPromise([body]);if(version!==state.version)return;content.append(body);
     if(admin()){if(section.status==='deleted')content.append(button('Khôi phục mục và các mục con',()=>changeStatus(section,true)));else content.append(button('✏️ Chỉnh sửa nội dung',()=>sectionEditor(section)),button('🗑️ Xóa mục',()=>changeStatus(section,false)));}
     status.textContent='';}catch(e){if(version===state.version)message(e);}}
  async function changeStatus(section,restore){if(!admin()||!confirm(restore?'Khôi phục mục này và các mục con?':'Xóa mục này và các mục con? Nội dung được giữ để Admin khôi phục.'))return;try{await request(null,{action:restore?'books_restore_section':'books_delete_section',payload:{id:section.id,expectedVersion:section.version}});state.sectionId='';editor.replaceChildren();await loadBook();}catch(e){message(e);}}

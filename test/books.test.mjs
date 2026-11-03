@@ -2,19 +2,23 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import {ObjectId} from 'mongodb';
 import {JSDOM} from 'jsdom';
-import {readBooks,mutateBooks,readBookAsset} from '../lib/books.js';
+import {readBooks,mutateBooks,readBookAsset,readBookProblemImages} from '../lib/books.js';
+import {canAccessProblem} from '../lib/problem-access.js';
 import {educationDb} from '../lib/education-db.js';
 import {filterAppShell} from '../lib/app-shell.js';
 const rows=[];
 const eq=(a,b)=>String(a)===String(b);
 function match(row,q){return Object.entries(q).every(([k,v])=>{if(k==='$and')return v.every(x=>match(row,x));if(k==='$or')return v.some(x=>match(row,x));if(v&&typeof v==='object'&&!(v instanceof ObjectId)){if('$in'in v)return v.$in.some(x=>eq(x,row[k]));if('$nin'in v)return !v.$nin.some(x=>eq(x,row[k]));if('$ne'in v)return !eq(row[k],v.$ne);if('$exists'in v)return(row[k]!==undefined)===v.$exists;}return eq(row[k],v);});}
 function change(row,u,insert=false){if(insert)Object.assign(row,u.$setOnInsert);Object.assign(row,u.$set);for(const[k,v]of Object.entries(u.$inc||{}))row[k]=(row[k]||0)+v;}
-const col={async findOne(q){return rows.find(r=>match(r,q))?{...rows.find(r=>match(r,q))}:null;},async findOneAndUpdate(q,u,o){let row=rows.find(r=>match(r,q));if(!row){if(!o?.upsert)return null;row={...q};change(row,u,true);rows.push(row);}else change(row,u);return{...row};},async insertOne(doc){rows.push({...doc});return{insertedId:doc._id};},async updateMany(q,u){rows.filter(r=>match(r,q)).forEach(r=>change(r,u));},find(q,options={}){let limit=Infinity;return{sort(){return this;},limit(n){limit=n;return this;},async toArray(){return rows.filter(r=>match(r,q)).slice(0,limit).map(r=>{const copy={...r};for(const[k,v]of Object.entries(options.projection||{}))if(v===0)delete copy[k];return copy;});}};}};
+const col={async findOne(q){return rows.find(r=>match(r,q))?{...rows.find(r=>match(r,q))}:null;},async findOneAndUpdate(q,u,o){let row=rows.find(r=>match(r,q));if(!row){if(!o?.upsert)return null;row={...q};change(row,u,true);rows.push(row);}else change(row,u);return{...row};},async insertOne(doc){const row={_id:new ObjectId(),...doc};rows.push(row);return{insertedId:row._id};},async createIndex(){},async updateOne(q,u){const row=rows.find(r=>match(r,q));if(!row)return{matchedCount:0};change(row,u);return{matchedCount:1};},async updateMany(q,u){rows.filter(r=>match(r,q)).forEach(r=>change(r,u));},find(q,options={}){let limit=Infinity;return{sort(){return this;},limit(n){limit=n;return this;},async toArray(){return rows.filter(r=>match(r,q)).slice(0,limit).map(r=>{const copy={...r};for(const[k,v]of Object.entries(options.projection||{}))if(v===0)delete copy[k];return copy;});}};}};
 const db={collection:()=>col},admin={role:'admin',username:'admin'},student={role:'student',educationLevels:['university']},teacher={role:'teacher',educationLevels:['university']},other={role:'student',educationLevels:['upper_secondary']};
 let catalog=await readBooks(db,student);assert.equal(catalog.categories.length,5);assert.equal(catalog.books.length,1);
 const book=catalog.books[0],detail=await readBooks(db,student,{bookId:book.id});assert.equal(detail.sections.length,175);assert.equal(detail.sections.filter(s=>/^Chương \d+\./.test(s.title)).length,16);assert.ok(detail.sections.every(s=>s.content===undefined));
 const first=detail.sections.find(s=>s.title.startsWith('Chương 1.')),child=detail.sections.find(s=>s.title.startsWith('1.1'));
-const imported=(await readBooks(db,student,{bookId:book.id,sectionId:child.id})).section;assert.equal(imported.contentFormat,'html-latex');assert.equal(imported.version,2);assert.equal(imported.sourceInfo.assetCount,35);assert.ok(imported.content.includes('Ví dụ 11.'));assert.ok(imported.content.includes('88.'));assert.equal((imported.content.match(/<img /g)||[]).length,35);
+const exerciseRead=await readBooks(db,student,{bookId:book.id,sectionId:child.id});
+const exercises=exerciseRead.exercises;assert.equal(exercises.length,88);assert.deepEqual(exercises.map(e=>e.questionNumber),Array.from({length:88},(_,i)=>i+1));assert.equal(new Set(exercises.map(e=>e.contentKey)).size,88);
+assert.ok(exercises[6].content.includes('Xác định phương trình'));assert.ok(exercises[14].content.includes('e15_18.png'));assert.ok(exercises[63].content.includes('hình bên phải'));assert.ok(exercises[4].content.includes('/f01.png'));assert.ok(exercises[30].content.includes('<table>'));assert.ok(exercises.every(e=>e.referenceSolutionVerified===false));
+const imported=exerciseRead.section;assert.equal(imported.contentFormat,'html-latex');assert.equal(imported.version,2);assert.equal(imported.sourceInfo.assetCount,35);assert.ok(imported.content.includes('Ví dụ 11.'));assert.ok(imported.content.includes('88.'));assert.equal((imported.content.match(/<img /g)||[]).length,35);
 await assert.rejects(()=>readBooks(educationDb(db,other),other),e=>e.status===403);
 for(const user of[student,teacher])await assert.rejects(()=>mutateBooks(db,user,'books_save_category',{name:'No'}),e=>e.status===403);
 const cat=await mutateBooks(db,admin,'books_save_category',{name:'Giải tích nâng cao'});await assert.rejects(()=>mutateBooks(db,admin,'books_save_category',{name:cat.name}),e=>e.status===409);
@@ -43,11 +47,34 @@ window.eval(read('vmo_db_ui.js'));
 window.fetch=async(url,options={})=>{try{const query=Object.fromEntries(new URL(url,'https://example.test').searchParams);const body=options.body?JSON.parse(options.body):null;return{ok:true,json:async()=>({success:true,item:body?await mutateBooks(db,user,body.action,body.payload):await readBooks(db,user,query)})};}catch(e){return{ok:false,json:async()=>({success:false,error:e.message})};}};
 // Route integration: authentication and Admin-only writes are enforced server-side.
 const apiSource=read('api/data.js').replace(/^import .*;\n/gm,'').replace('export default async function handler','async function handler');
-const handler=new Function('readBooks','mutateBooks','readBookAsset','educationDb','getDb','getSession','handleMathSupport','allows',apiSource+'\nreturn handler;')(readBooks,mutateBooks,readBookAsset,educationDb,async()=>db,async()=>user,async()=>false,(session,level)=>window.MathAppEducation.allows(session,level));
+const handler=new Function('readBooks','mutateBooks','readBookAsset','educationDb','getDb','getSession','handleMathSupport','allows','ObjectId','canAccessProblem','recordActivity',apiSource+'\nreturn handler;')(readBooks,mutateBooks,readBookAsset,educationDb,async()=>db,async()=>user,async()=>false,(session,level)=>window.MathAppEducation.allows(session,level),ObjectId,canAccessProblem,async()=>{});
 async function route(method,payload){const res={status(code){this.code=code;return this;},setHeader(){},json(body){this.body=body;return this;}};await handler({method,query:{resource:'books'},body:payload},res);return res;}
-assert.equal((await route('GET')).code,200);user=teacher;assert.equal((await route('POST',{action:'books_save_category',payload:{name:'Forbidden'}})).code,403);user=other;assert.equal((await route('GET')).code,403);user=admin;
-window.eval(read('books.js'));await window.loadBooks();
+assert.equal((await route('GET')).code,200);
+const sourceEdit={action:'update_catalog_content',payload:{id:exercises[6].id,content:exercises[6].content+'<p>Kiểm tra tập xác định.</p>',referenceLinks:[],expectedVersion:1}};
+user=teacher;assert.equal((await route('POST',sourceEdit)).code,403);
+user=admin;assert.equal((await route('POST',sourceEdit)).code,200);assert.equal((await route('POST',sourceEdit)).code,409);
+user={...student,sub:'university-student',username:'student'};
+const submitted=await route('POST',{action:'submit_solution',payload:{problemId:exercises[6].id,problemKey:exercises[6].contentKey,solutionContent:'$y=(3x-7)/5$, nên mỗi $x$ xác định đúng một $y$.'}});
+assert.equal(submitted.code,201);assert.equal(submitted.body.item.problemKey,exercises[6].contentKey);assert.equal(submitted.body.item.sourceGroup,'university_books');
+user=other;assert.equal((await route('POST',{action:'submit_solution',payload:{problemId:exercises[6].id,solutionContent:'Denied'}})).code,403);user=admin;
+user=teacher;assert.equal((await route('POST',{action:'books_save_category',payload:{name:'Forbidden'}})).code,403);user=other;assert.equal((await route('GET')).code,403);user=admin;
+await mutateBooks(db,admin,'books_save_section',{id:child.id,expectedVersion:edited.version,title:child.title,order:1,content:imported.content,contentFormat:'html-latex'});
+window.eval(read('books.js'));window.eval(read('ai_guide_engine.js'));await window.loadBooks();
 assert.ok(window.document.getElementById('booksToc').textContent.includes('Chương 16.'));
+await [...window.document.querySelectorAll('#booksToc button')].find(b=>b.textContent.startsWith('1.1')).onclick();
+assert.equal(window.document.querySelectorAll('.book-exercise').length,88);
+assert.equal(window.document.querySelectorAll('.book-exercise .btn-ai-guide').length,88);
+assert.equal(window.document.querySelectorAll('.book-exercise .btn-submit-solution').length,88);
+assert.equal(window.document.querySelectorAll('.book-exercise .btn-manage-reference-links').length,88);
+const e7=window.document.querySelectorAll('.book-exercise')[6];assert.ok(e7.querySelector('.problem-content').textContent.includes('Xác định phương trình'));
+let aiCard;const originalOpen=window.openAIGuide;window.openAIGuide=btn=>{aiCard=btn.closest('.book-exercise').dataset.contentKey;};e7.querySelector('.btn-ai-guide').onclick();assert.equal(aiCard,exercises[6].contentKey);window.openAIGuide=originalOpen;
+e7.querySelector('.btn-submit-solution').onclick();assert.equal(window.document.getElementById('submissionModal').dataset.problemKey,undefined);assert.ok(window.document.getElementById('submissionModal').textContent.includes('Bài tập 7'));window.closeSubmissionModal();
+// Source modal fetches this question, not another question with the same number.
+window.VMODataService={getCatalogProblems:async({contentKey})=>exercises.filter(e=>e.contentKey===contentKey)};
+await window.openReferenceLinksManager(exercises[6].contentKey);assert.equal(window.document.getElementById('referenceManagerProblemContent').value,exercises[6].content);window.closeReferenceLinksManager();
+// Return to an unformatted legacy section to test the editor's default format.
+await [...window.document.querySelectorAll('#booksToc button')].find(b=>b.textContent==='Khái quát về Giải tích').onclick();
+
 await [...window.document.querySelectorAll('#booksContent button')].find(b=>b.textContent==='✏️ Chỉnh sửa nội dung').onclick();
 assert.equal(window.document.querySelector('#booksEditor select[name=contentFormat]').value,'plain-latex');
 [...window.document.querySelectorAll('#booksEditor button')].find(b=>b.textContent==='Hủy').onclick();
@@ -69,4 +96,16 @@ assert.equal(importedTarget.querySelectorAll('script,svg,iframe,[onclick],[onerr
 const asset=await readBookAsset(student,'stewart-1-1-47c33e6c/f01.png');assert.equal(asset.mime,'image/png');assert.equal(asset.bytes[0],137);
 await assert.rejects(()=>readBookAsset(other,'stewart-1-1-47c33e6c/f01.png'),e=>e.status===403);
 for(const value of ['../imports/Stewart_Ch01_1_1_VI.tex','unknown.png','stewart-1-1-47c33e6c/%2e%2e/source'])await assert.rejects(()=>readBookAsset(student,value),e=>e.status===404);
+// Exercise identity and edits survive reinitialization; deleting the section disables its questions.
+const editable=rows.find(r=>String(r._id)===exercises[6].id);editable.content='<p>Admin corrected $3x-5y=7$</p>';editable.version=2;
+const reloaded=await readBooks(db,student,{bookId:book.id,sectionId:child.id});assert.equal(reloaded.exercises.length,88);assert.equal(reloaded.exercises.find(e=>e.id===exercises[6].id).content,editable.content);
+const liveSection=reloaded.section;
+await mutateBooks(db,admin,'books_delete_section',{id:child.id,expectedVersion:liveSection.version});
+assert.equal(rows.find(r=>String(r._id)===exercises[6].id).status,'deleted');
+const deletedSection=(await readBooks(db,admin,{bookId:book.id,sectionId:child.id,includeDeleted:'1'})).section;
+await mutateBooks(db,admin,'books_restore_section',{id:child.id,expectedVersion:deletedSection.version});
+assert.equal((await readBooks(db,student,{bookId:book.id,sectionId:child.id})).exercises.find(e=>e.id===exercises[6].id).content,editable.content);
+const images=await readBookProblemImages({bookAssetKeys:['stewart-1-1-47c33e6c/e03.png']},student);assert.ok(images[0].startsWith('data:image/png;base64,'));
+await assert.rejects(()=>readBookProblemImages({bookAssetKeys:['stewart-1-1-47c33e6c/e03.png']},other),e=>e.status===403);
+await assert.rejects(()=>readBookProblemImages({bookAssetKeys:['https://evil.test/image.png']},student),e=>e.status===404);
 window.close();console.log('Books: seeded TOC, admin CRUD/CAS, scopes, subtree delete/restore, lazy bodies and UI actions OK');

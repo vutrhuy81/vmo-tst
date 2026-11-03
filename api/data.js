@@ -1252,6 +1252,7 @@ export default async function handler(req, res) {
       }
       const current = await db.collection('problems').findOne({ _id: id });
       if (!current) return res.status(404).json({ success: false, error: 'Không tìm thấy câu hỏi' });
+      if(current.sourceGroup==='university_books' && session.role!=='admin')return res.status(403).json({success:false,error:'Chỉ Admin được chỉnh sửa bài tập Sách học.'});
       const resolvePredictionReview = ['admin', 'teacher'].includes(session.role) && payload.resolvePredictionReview === true &&
         current.origin === 'prediction' && current.predictionReview?.status === 'gpt_rejected';
       if (resolvePredictionReview && content === current.content) {

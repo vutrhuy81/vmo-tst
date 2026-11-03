@@ -5,6 +5,7 @@
 
 (() => {
   const CONTENT_SOURCE_CONFIG = Object.freeze({
+    'tab-books': { sourceGroup: 'university_books', sourceType: 'book_exercise', contentType: 'book_exercises' },
     'tab-university-materials': { sourceGroup: 'university_materials', sourceType: 'university_material_example', contentType: 'university_materials' },
     'tab-university': { sourceGroup: 'university', sourceType: 'university_question', contentType: 'university_exam' },
     'tab-support': { sourceGroup: 'math_support', sourceType: 'standalone_question', contentType: 'standalone_problem' },
@@ -5289,6 +5290,7 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
   function canManageProblemSource(contentKey) {
     const problem = window.mongoProblemsByContentKey?.get(contentKey);
     const session = window.VMOAuth?.getSession?.();
+    if(problem?.sourceGroup === 'university_books') return session?.role === 'admin';
     return isCurrentUserContentManager() || (problem?.sourceGroup === 'math_support' && session?.username && problem.createdBy === session.username);
   }
 
@@ -5400,18 +5402,19 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
       window.mongoProblemsByContentKey.set(contentKey, nextProblem);
       window.mongoProblemReferenceLinks ||= new Map();
       window.mongoProblemReferenceLinks.set(contentKey, links);
-      document.querySelectorAll('.problem-item[data-content-key]').forEach(item => {
-        if (item.dataset.contentKey !== contentKey) return;
+      for (const item of document.querySelectorAll('.problem-item[data-content-key]')) {
+        if (item.dataset.contentKey !== contentKey) continue;
         const displayed = item.querySelector('.problem-content');
         if (displayed) {
           displayed.setAttribute('data-raw-math', content);
-          if (window.safeRenderMathJaxToElement) window.safeRenderMathJaxToElement(displayed, content);
+          if (problem.sourceGroup === 'university_books' && window.renderBookContent) await window.renderBookContent(displayed,{content,contentFormat:'html-latex'});
+          else if (window.safeRenderMathJaxToElement) window.safeRenderMathJaxToElement(displayed, content);
           else displayed.textContent = content;
         }
         const answer = item.querySelector('[data-university-reference-solution]');
         if (answer) { if(window.safeRenderMathJaxToElement)window.safeRenderMathJaxToElement(answer,solution);else answer.textContent=solution; }
         if (resolvePredictionReview) item.querySelector('.prediction-review-warning')?.remove();
-      });
+      }
       window.closeReferenceLinksManager();
       applyMongoReferenceLinks();
       showToast(`Đã lưu phiên bản ${nextVersion}: nội dung câu hỏi và ${links.length} nguồn tham khảo.`, true);
@@ -5511,7 +5514,9 @@ Vậy giới hạn cần tìm là $\\sqrt{2}$.`;
     if (!target) return;
     if (target._renderedMongoContent === content) return;
     target.setAttribute('data-raw-math', content);
-    if (/<\/?[a-z][\w:-]*(?:\s[^<>]*)?>/i.test(content)) {
+    if (problem.dataset.sourceGroup === 'university_books' && window.renderBookContent) {
+      window.renderBookContent(target,{content,contentFormat:'html-latex'}).catch(()=>{});
+    } else if (/<\/?[a-z][\w:-]*(?:\s[^<>]*)?>/i.test(content)) {
       if (window.MathJax?.typesetClear) window.MathJax.typesetClear([target]);
       target.innerHTML = sanitizeCatalogHtml(content);
       if (window.MathJax?.typesetPromise) window.MathJax.typesetPromise([target]).catch(() => {});

@@ -1,3 +1,4 @@
+import { readBookProblemImages } from '../lib/books.js';
 import { allows } from '../lib/education-access.js';
 import { canAccessProblem } from '../lib/problem-access.js';
 import { mathematicalAuditInstruction, auditEvidence } from '../lib/math-audit.js';
@@ -192,12 +193,15 @@ ${mathematicalAuditInstruction}\n\nQUY TRÌNH CHẤM BẮT BUỘC
   try {
     const referenceBlock = `\n${reference.block}`;
     const provisionalPrompt = `${prompt}${referenceBlock}`;
+    const bookImages=reference.bookAssetKeys?.length?await readBookProblemImages(reference,session):[];
     let contents = provisionalPrompt;
     if (solutionImage) {
       const match = solutionImage.match(/^data:(image\/(?:jpeg|png|webp));base64,(.+)$/s);
       if (!match) return res.status(400).json({ success: false, error: 'Ảnh phải là JPEG, PNG hoặc WEBP dạng base64' });
       contents = { parts: [{ inlineData: { mimeType: match[1], data: match[2] } }, { text: provisionalPrompt }] };
     }
+
+    if(bookImages.length){if(typeof contents==='string')contents={parts:[{text:contents}]};contents.parts.push(...bookImages.map(url=>({inlineData:{mimeType:'image/png',data:url.split(',')[1]}})));}
 
     const provisional = await generateJson({
       contents,
@@ -226,6 +230,7 @@ Mọi phép biến đổi đại số do bạn nêu phải được tự kiểm 
     }
 
     const verified = await generateOpenAIJson({
+      imageDataUrls:bookImages,
       model: process.env.OPENAI_EVALUATION_VERIFY_MODEL || process.env.OPENAI_VERIFY_MODEL || 'gpt-5.6-terra',
       input: `Hãy tự giải bài toán và kiểm định độc lập báo cáo chấm của Gemini. Không mặc nhiên tin Gemini.
 
