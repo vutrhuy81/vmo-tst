@@ -30,7 +30,7 @@
     if(input.classList.contains('math'))output.className=input.classList.contains('display')?'math display':'math inline';
     if(input.tagName==='IMG'){
      const raw=input.getAttribute('src')||'';let url;try{url=new URL(raw,location.origin);}catch{return document.createDocumentFragment();}
-     if(url.origin!==location.origin||url.pathname!=='/api/data'||url.searchParams.get('resource')!=='book_asset'||!/^stewart-1-1-47c33e6c\/[a-z0-9_]+\.png$/.test(url.searchParams.get('asset')||''))return document.createDocumentFragment();
+     if(url.origin!==location.origin||url.pathname!=='/api/data'||url.searchParams.get('resource')!=='book_asset'||!/^(?:stewart-1-1-47c33e6c|stewart-1-2-a7a72f38)\/[a-z0-9_]+\.png$/.test(url.searchParams.get('asset')||''))return document.createDocumentFragment();
      output.src=url.pathname+url.search;output.alt=input.getAttribute('alt')||'Hình minh họa';output.loading='lazy';output.style.maxWidth='100%';output.style.height='auto';
     }
     if(['TH','TD'].includes(input.tagName))for(const attr of ['colspan','rowspan']){const n=Number(input.getAttribute(attr));if(Number.isInteger(n)&&n>=1&&n<=30)output.setAttribute(attr,String(n));}
@@ -42,9 +42,9 @@
   for(const child of parsed.body.childNodes)target.append(clean(child));
   if(typeset&&window.MathJax?.typesetPromise)await window.MathJax.typesetPromise([target]);
  };
- async function renderExercises(body,exercises){
+ async function renderExercises(body,exercises,exerciseHeading){
   if(!exercises?.length)return;
-  const heading=[...body.querySelectorAll('h1,h2,h3,h4,h5,h6')].find(x=>x.textContent.trim()==='1.1. Bài tập');
+  const heading=[...body.querySelectorAll('h1,h2,h3,h4,h5,h6')].find(x=>x.textContent.trim()===exerciseHeading);
   if(!heading)return;
   // Replace only the exercise region, retaining the theory and editorial material.
   for(let x=heading.nextSibling;x&&!/^H[1-6]$/.test(x.nodeName);){const next=x.nextSibling;if(x.nodeType===Node.ELEMENT_NODE)window.MathJax?.typesetClear?.([x]);x.remove();x=next;}
@@ -83,7 +83,7 @@
   add('',toc);
  }
  async function openSection(id){const version=++state.version;state.sectionId=id;status.textContent='Đang tải nội dung…';try{const data=await request({bookId:state.bookId,sectionId:id,...(state.showDeleted?{includeDeleted:'1'}:{})});if(version!==state.version)return;renderToc();content.replaceChildren();const section=data.section;content.append(node('h2',data.book.title),node('h3',section.title));if(section.originalTitle)content.append(node('p',section.originalTitle));if(section.printedPage)content.append(node('p',`Trang in: ${section.printedPage}`));
-    const body=node('div');body.style.cssText='white-space:pre-wrap;line-height:1.8';content.append(body);if(section.content)await window.renderBookContent(body,section,false);else body.textContent='Chưa có nội dung chi tiết. Admin có thể thêm lý thuyết, ví dụ và bài tập cho mục này.';if(version!==state.version)return;await renderExercises(body,data.exercises);if(window.MathJax?.typesetPromise)await window.MathJax.typesetPromise([body]);if(version!==state.version)return;content.append(body);
+    const body=node('div');body.style.cssText='white-space:pre-wrap;line-height:1.8';content.append(body);if(section.content)await window.renderBookContent(body,section,false);else body.textContent='Chưa có nội dung chi tiết. Admin có thể thêm lý thuyết, ví dụ và bài tập cho mục này.';if(version!==state.version)return;await renderExercises(body,data.exercises,data.exerciseHeading);if(window.MathJax?.typesetPromise)await window.MathJax.typesetPromise([body]);if(version!==state.version)return;content.append(body);
     if(admin()){if(section.status==='deleted')content.append(button('Khôi phục mục và các mục con',()=>changeStatus(section,true)));else content.append(button('✏️ Chỉnh sửa nội dung',()=>sectionEditor(section)),button('🗑️ Xóa mục',()=>changeStatus(section,false)));}
     status.textContent='';}catch(e){if(version===state.version)message(e);}}
  async function changeStatus(section,restore){if(!admin()||!confirm(restore?'Khôi phục mục này và các mục con?':'Xóa mục này và các mục con? Nội dung được giữ để Admin khôi phục.'))return;try{await request(null,{action:restore?'books_restore_section':'books_delete_section',payload:{id:section.id,expectedVersion:section.version}});state.sectionId='';editor.replaceChildren();await loadBook();}catch(e){message(e);}}

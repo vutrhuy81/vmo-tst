@@ -1,0 +1,156 @@
+{
+  "bookKey": "stewart-9",
+  "sectionKey": "1-2",
+  "heading": "1.2. Bài tập",
+  "sourceSha256": "a7a72f384e0092316fde69e83ea6897b37c1ff1918e5177e3605e86e6e390071",
+  "exercises": [
+    {
+      "number": 1,
+      "content": "<p><strong>1–2. Phân loại từng hàm số: hàm lũy thừa, hàm căn thức, đa\nthức (nêu bậc), hàm hữu tỉ, hàm đại số, hàm lượng giác, hàm số mũ hoặc\nhàm lôgarit.</strong></p><p><strong>1.</strong>&nbsp; (a) <span class=\"math inline\">\\(f(x)=x^3+3x^2\\)</span>; (b) <span class=\"math inline\">\\(g(t)=\\cos^2t-\\sin t\\)</span>; (c) <span class=\"math inline\">\\(r(t)=t^{\\sqrt3}\\)</span>; (d) <span class=\"math inline\">\\(v(t)=8^t\\)</span>; (e) <span class=\"math inline\">\\(y=\\dfrac{\\sqrt x}{x^2+1}\\)</span>; (f) <span class=\"math inline\">\\(g(u)=\\log_{10}u\\)</span>.</p>"
+    },
+    {
+      "number": 2,
+      "content": "<p><strong>1–2. Phân loại từng hàm số: hàm lũy thừa, hàm căn thức, đa\nthức (nêu bậc), hàm hữu tỉ, hàm đại số, hàm lượng giác, hàm số mũ hoặc\nhàm lôgarit.</strong></p><p><strong>2.</strong>&nbsp; (a) <span class=\"math inline\">\\(f(t)=\\dfrac{3t^2+2}t\\)</span>; (b) <span class=\"math inline\">\\(h(r)=2.3^r\\)</span>; (c) <span class=\"math inline\">\\(s(t)=\\sqrt{t+4}\\)</span>; (d) <span class=\"math inline\">\\(y=x^4+5\\)</span>; (e) <span class=\"math inline\">\\(g(x)=\\sqrt[3]x\\)</span>; (f) <span class=\"math inline\">\\(y=\\dfrac1{x^2}\\)</span>.</p>"
+    },
+    {
+      "number": 3,
+      "content": "<p><strong>3–4. Ghép từng phương trình với đồ thị tương ứng. Giải thích\nlựa chọn; không dùng máy tính điện tử hoặc máy tính vẽ đồ\nthị.</strong></p><p><strong>3.</strong>&nbsp; (a) <span class=\"math inline\">\\(y=x^2\\)</span>;\n(b) <span class=\"math inline\">\\(y=x^5\\)</span>; (c) <span class=\"math inline\">\\(y=x^8\\)</span>.</p>\n<div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-1-2-a7a72f38/e03.png\" alt=\"image\"><br>\n<span>Đồ thị cho Bài tập 3.</span></p>\n</div>"
+    },
+    {
+      "number": 4,
+      "content": "<p><strong>3–4. Ghép từng phương trình với đồ thị tương ứng. Giải thích\nlựa chọn; không dùng máy tính điện tử hoặc máy tính vẽ đồ\nthị.</strong></p><p><strong>4.</strong>&nbsp; (a) <span class=\"math inline\">\\(y=3x\\)</span>;\n(b) <span class=\"math inline\">\\(y=3^x\\)</span>; (c) <span class=\"math inline\">\\(y=x^3\\)</span>; (d) <span class=\"math inline\">\\(y=\\sqrt[3]x\\)</span>.</p>\n<div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-1-2-a7a72f38/e04.png\" alt=\"image\"><br>\n<span>Đồ thị cho Bài tập 4.</span></p>\n</div>"
+    },
+    {
+      "number": 5,
+      "content": "<p><strong>5–6. Tìm tập xác định của hàm số.</strong></p><p><strong>5.</strong>&nbsp; <span class=\"math inline\">\\(f(x)=\\dfrac{\\cos\nx}{1-\\sin x}\\)</span>.</p>"
+    },
+    {
+      "number": 6,
+      "content": "<p><strong>5–6. Tìm tập xác định của hàm số.</strong></p><p><strong>6.</strong>&nbsp; <span class=\"math inline\">\\(g(x)=\\dfrac1{1-\\tan\nx}\\)</span>.</p>"
+    },
+    {
+      "number": 7,
+      "content": "<p><strong>7.</strong>&nbsp; (a) Tìm phương trình của họ hàm tuyến tính có hệ\nsố góc 2 và phác họa một số hàm trong họ. (b) Tìm phương trình của họ\nhàm tuyến tính thỏa <span class=\"math inline\">\\(f(2)=1\\)</span> và phác\nhọa một số hàm trong họ. (c) Hàm số nào thuộc cả hai họ?</p>"
+    },
+    {
+      "number": 8,
+      "content": "<p><strong>8.</strong>&nbsp; Mọi hàm thuộc họ <span class=\"math inline\">\\(f(x)=1+m(x+3)\\)</span> có đặc điểm chung nào? Phác\nhọa một số hàm trong họ.</p>"
+    },
+    {
+      "number": 9,
+      "content": "<p><strong>9.</strong>&nbsp; Mọi hàm thuộc họ <span class=\"math inline\">\\(f(x)=c-x\\)</span> có đặc điểm chung nào? Phác họa\nmột số hàm trong họ.</p>"
+    },
+    {
+      "number": 10,
+      "content": "<p><strong>10.</strong>&nbsp; Phác họa một số đa thức trong họ <span class=\"math inline\">\\(P(x)=x^3-cx^2\\)</span>. Đồ thị thay đổi thế nào\nkhi <span class=\"math inline\">\\(c\\)</span> thay đổi? <em>Bài có ký hiệu\nyêu cầu công cụ vẽ đồ thị trong bản gốc.</em></p>"
+    },
+    {
+      "number": 11,
+      "content": "<p><strong>Bài tập 11 — hình bên trái.</strong></p><p><strong>11–12. Tìm công thức của hàm bậc hai có đồ thị như\nhình.</strong></p>\n<div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-1-2-a7a72f38/e11_12.png\" alt=\"image\"><br>\n<span>Bài tập 11 (trái) và 12 (phải). Giữ nguyên các điểm, tọa độ và\nvạch chia trong hình gốc.</span></p>\n</div>"
+    },
+    {
+      "number": 12,
+      "content": "<p><strong>Bài tập 12 — hình bên phải.</strong></p><p><strong>11–12. Tìm công thức của hàm bậc hai có đồ thị như\nhình.</strong></p>\n<div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-1-2-a7a72f38/e11_12.png\" alt=\"image\"><br>\n<span>Bài tập 11 (trái) và 12 (phải). Giữ nguyên các điểm, tọa độ và\nvạch chia trong hình gốc.</span></p>\n</div>"
+    },
+    {
+      "number": 13,
+      "content": "<p><strong>13.</strong>&nbsp; Tìm công thức một hàm bậc ba <span class=\"math inline\">\\(f\\)</span>, biết <span class=\"math inline\">\\(f(1)=6\\)</span> và <span class=\"math inline\">\\(f(-1)=f(0)=f(2)=0\\)</span>.</p>"
+    },
+    {
+      "number": 14,
+      "content": "<p><strong>14.</strong>&nbsp; Các nghiên cứu gần thời điểm sách được viết cho\nthấy nhiệt độ trung bình bề mặt Trái Đất tăng đều. Một số nhà khoa học\ndùng mô hình tuyến tính <span class=\"math inline\">\\(T=0.02t+8.50\\)</span>, trong đó <span class=\"math inline\">\\(T\\)</span> tính bằng độ C và <span class=\"math inline\">\\(t\\)</span> là số năm kể từ 1900. (a) Hệ số góc và\ngiao điểm với trục <span class=\"math inline\">\\(T\\)</span> biểu thị điều\ngì? (b) Dùng phương trình dự báo nhiệt độ trung bình bề mặt Trái Đất năm\n2100.</p>"
+    },
+    {
+      "number": 15,
+      "content": "<p><strong>15.</strong>&nbsp; Nếu liều thuốc khuyến nghị cho người trưởng\nthành là <span class=\"math inline\">\\(D\\)</span> (mg), thì để xác định\nliều thích hợp <span class=\"math inline\">\\(c\\)</span> cho trẻ <span class=\"math inline\">\\(a\\)</span> tuổi, dược sĩ dùng phương trình <span class=\"math inline\">\\(c=0.0417D(a+1)\\)</span>. Giả sử liều cho người\ntrưởng thành là 200 mg. (a) Tìm hệ số góc của đồ thị <span class=\"math inline\">\\(c\\)</span>. Nó biểu thị điều gì? (b) Liều theo mô\nhình cho trẻ sơ sinh là bao nhiêu?</p>"
+    },
+    {
+      "number": 16,
+      "content": "<p><strong>16.</strong>&nbsp; Từ kinh nghiệm, người quản lý một chợ đồ cũ\ncuối tuần biết rằng nếu giá thuê mỗi chỗ là <span class=\"math inline\">\\(x\\)</span> đô la thì số chỗ được thuê <span class=\"math inline\">\\(y\\)</span> thỏa <span class=\"math inline\">\\(y=200-4x\\)</span>. (a) Phác họa đồ thị hàm tuyến\ntính này; lưu ý giá thuê và số chỗ được thuê đều không thể âm. (b) Hệ số\ngóc, tung độ gốc và hoành độ giao điểm với trục <span class=\"math inline\">\\(x\\)</span> biểu thị điều gì?</p>"
+    },
+    {
+      "number": 17,
+      "content": "<p><strong>17.</strong>&nbsp; Quan hệ giữa nhiệt độ Fahrenheit (<span class=\"math inline\">\\(F\\)</span>) và Celsius (<span class=\"math inline\">\\(C\\)</span>) được cho bởi <span class=\"math inline\">\\(F=\\dfrac95C+32\\)</span>. (a) Phác họa đồ thị. (b)\nHệ số góc là bao nhiêu và biểu thị điều gì? Giao điểm với trục <span class=\"math inline\">\\(F\\)</span> là gì và biểu thị điều gì?</p>"
+    },
+    {
+      "number": 18,
+      "content": "<p><strong>18.</strong>&nbsp; Jade và bạn cùng phòng Jari đi làm hằng sáng\ntheo hướng tây trên xa lộ I-10. Một sáng, Jade khởi hành lúc 6 giờ 50\nphút; Jari khởi hành muộn hơn 10 phút. Cả hai lái xe với tốc độ không\nđổi. Đồ thị cho quãng đường (dặm) mỗi người đã đi trên I-10 sau 7 giờ\nsáng <span class=\"math inline\">\\(t\\)</span> phút. (a) Dựa vào đồ thị, ai\nđi nhanh hơn? (b) Tìm tốc độ mỗi người (dặm/giờ). (c) Tìm các hàm tuyến\ntính <span class=\"math inline\">\\(f\\)</span> và <span class=\"math inline\">\\(g\\)</span> mô hình hóa quãng đường Jade và Jari đã\nđi theo <span class=\"math inline\">\\(t\\)</span> (phút).</p>\n<div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-1-2-a7a72f38/e18.png\" alt=\"image\"><br>\n<span>Đồ thị cho Bài tập 18. Distance traveled (mi): quãng đường\n(dặm);<br>\nTime since 7:00 AM (min): thời gian sau 7 giờ sáng (phút).</span></p>\n</div>"
+    },
+    {
+      "number": 19,
+      "content": "<p><strong>19.</strong>&nbsp; Người quản lý xưởng đồ gỗ thấy chi phí làm 100\nchiếc ghế trong một ngày là 2200 đô la, còn làm 300 chiếc là 4800 đô la.\n(a) Giả sử quan hệ tuyến tính, biểu diễn chi phí theo số ghế sản xuất và\nphác họa đồ thị. (b) Hệ số góc là bao nhiêu và biểu thị điều gì? (c)\nTung độ gốc là bao nhiêu và biểu thị điều gì?</p>"
+    },
+    {
+      "number": 20,
+      "content": "<p><strong>20.</strong>&nbsp; Chi phí lái ô tô hằng tháng phụ thuộc vào số\ndặm đã đi. Lynn thấy tháng Năm đi 480 dặm hết 380 đô la, tháng Sáu đi\n800 dặm hết 460 đô la. (a) Biểu diễn chi phí tháng <span class=\"math inline\">\\(C\\)</span> theo quãng đường <span class=\"math inline\">\\(d\\)</span>, giả sử mô hình tuyến tính là thích\nhợp. (b) Dự báo chi phí nếu đi 1500 dặm mỗi tháng. (c) Vẽ đồ thị; hệ số\ngóc biểu thị điều gì? (d) Giao điểm với trục <span class=\"math inline\">\\(C\\)</span> biểu thị điều gì? (e) Vì sao hàm tuyến\ntính thích hợp trong tình huống này?</p>"
+    },
+    {
+      "number": 21,
+      "content": "<p><strong>21.</strong>&nbsp; Ở mặt biển, áp suất nước bằng áp suất không khí\nphía trên, là <span class=\"math inline\">\\(15\\,\\mathrm{lb}/\\mathrm{in}^2\\)</span>. Dưới mặt\nbiển, cứ xuống sâu thêm 10 ft, áp suất tăng <span class=\"math inline\">\\(4.34\\,\\mathrm{lb}/\\mathrm{in}^2\\)</span>. (a) Biểu\ndiễn áp suất theo độ sâu. (b) Ở độ sâu nào áp suất là <span class=\"math inline\">\\(100\\,\\mathrm{lb}/\\mathrm{in}^2\\)</span>?</p>"
+    },
+    {
+      "number": 22,
+      "content": "<p><strong>22.</strong>&nbsp; Điện trở <span class=\"math inline\">\\(R\\)</span>\ncủa dây dẫn có chiều dài cố định liên hệ với đường kính <span class=\"math inline\">\\(x\\)</span> theo định luật nghịch đảo bình phương\n<span class=\"math inline\">\\(R(x)=kx^{-2}\\)</span>. (a) Dây có đường kính\n<span class=\"math inline\">\\(0.005\\)</span> m và điện trở <span class=\"math inline\">\\(140\\,\\Omega\\)</span>. Tìm <span class=\"math inline\">\\(k\\)</span>. (b) Tìm điện trở của dây cùng vật\nliệu, cùng chiều dài nhưng đường kính <span class=\"math inline\">\\(0.008\\)</span> m.</p>"
+    },
+    {
+      "number": 23,
+      "content": "<p><strong>23.</strong>&nbsp; Độ rọi trên vật do một nguồn sáng tạo ra liên\nhệ với khoảng cách đến nguồn theo định luật nghịch đảo bình phương. Khi\ntrời tối, bạn ngồi đọc sách trong phòng chỉ có một đèn. Vì quá tối, bạn\nchuyển ghế đến vị trí cách đèn bằng một nửa khoảng cách ban đầu. Độ rọi\ntăng bao nhiêu lần?</p>"
+    },
+    {
+      "number": 24,
+      "content": "<p><strong>24.</strong>&nbsp; Áp suất <span class=\"math inline\">\\(P\\)</span>\ncủa một mẫu khí oxy bị nén ở nhiệt độ không đổi liên hệ với thể tích\n<span class=\"math inline\">\\(V\\)</span> theo hàm nghịch đảo <span class=\"math inline\">\\(P=k/V\\)</span>. (a) Mẫu khí có thể tích <span class=\"math inline\">\\(0.671\\,\\mathrm m^3\\)</span>, áp suất 39 kPa, ở\nnhiệt độ 293 K (nhiệt độ tuyệt đối theo thang Kelvin). Tìm <span class=\"math inline\">\\(k\\)</span>. (b) Nếu mẫu khí giãn đến <span class=\"math inline\">\\(0.916\\,\\mathrm m^3\\)</span>, áp suất mới là bao\nnhiêu?</p>"
+    },
+    {
+      "number": 25,
+      "content": "<p><strong>25.</strong>&nbsp; Công suất phát của tua-bin gió phụ thuộc nhiều\nyếu tố. Từ các nguyên lý vật lý, có thể chỉ ra mô hình <span class=\"math display\">\\[P=kAv^3,\\]</span> trong đó <span class=\"math inline\">\\(v\\)</span> là tốc độ gió, <span class=\"math inline\">\\(A\\)</span> là diện tích do các cánh quét qua,\n<span class=\"math inline\">\\(k\\)</span> là hằng số phụ thuộc mật độ không\nkhí, hiệu suất tua-bin và thiết kế cánh. (a) Nếu chỉ tăng gấp đôi tốc độ\ngió, công suất tăng mấy lần? (b) Nếu chỉ tăng gấp đôi chiều dài cánh,\ncông suất tăng mấy lần? (c) Với tua-bin có cánh dài 30 m và <span class=\"math inline\">\\(k=0.214\\,\\mathrm{kg}/\\mathrm m^3\\)</span>, tìm\ncông suất (watt, <span class=\"math inline\">\\(\\mathrm W=\\mathrm\nm^2\\cdot\\mathrm{kg}/\\mathrm s^3\\)</span>) khi tốc độ gió là 10, 15 và 25\nm/s.</p>"
+    },
+    {
+      "number": 26,
+      "content": "<p><strong>26.</strong>&nbsp; Các nhà thiên văn suy ra suất phát xạ (thông\nlượng bức xạ phát ra trên đơn vị diện tích) của các ngôi sao bằng định\nluật Stefan–Boltzmann: <span class=\"math display\">\\[E(T)=(5.67\\times10^{-8})T^4,\\]</span> trong đó,\ntheo cách diễn đạt của bản gốc, <span class=\"math inline\">\\(E\\)</span>\nlà năng lượng bức xạ trên đơn vị diện tích bề mặt, tính bằng watt (W),\nvà <span class=\"math inline\">\\(T\\)</span> là nhiệt độ tuyệt đối tính\nbằng kelvin (K). (a) Vẽ đồ thị <span class=\"math inline\">\\(E\\)</span>\nvới <span class=\"math inline\">\\(100\\le T\\le300\\)</span> K. (b) Dùng đồ\nthị mô tả sự thay đổi của <span class=\"math inline\">\\(E\\)</span> khi\n<span class=\"math inline\">\\(T\\)</span> tăng. <em>Xem lưu ý về đơn vị ở\ncuối bản dịch.</em></p>"
+    },
+    {
+      "number": 27,
+      "content": "<p><strong>Bài tập 27 — hai biểu đồ ở hàng trên.</strong></p><p><strong>27–28. Với mỗi biểu đồ phân tán, chọn loại hàm số có thể dùng\nlàm mô hình cho dữ liệu. Giải thích lựa chọn.</strong></p>\n<div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-1-2-a7a72f38/e27_28.png\" alt=\"image\"><br>\n<span>Bài tập 27: hai biểu đồ ở hàng trên; Bài tập 28: hai biểu đồ ở\nhàng dưới.</span></p>\n</div>"
+    },
+    {
+      "number": 28,
+      "content": "<p><strong>Bài tập 28 — hai biểu đồ ở hàng dưới.</strong></p><p><strong>27–28. Với mỗi biểu đồ phân tán, chọn loại hàm số có thể dùng\nlàm mô hình cho dữ liệu. Giải thích lựa chọn.</strong></p>\n<div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-1-2-a7a72f38/e27_28.png\" alt=\"image\"><br>\n<span>Bài tập 27: hai biểu đồ ở hàng trên; Bài tập 28: hai biểu đồ ở\nhàng dưới.</span></p>\n</div>"
+    },
+    {
+      "number": 29,
+      "content": "<p><strong>29.</strong>&nbsp; Bảng cho tỉ lệ từng mắc loét dạ dày–tá tràng\ntrong đời, tính trên 100 người, theo thu nhập gia đình, từ Khảo sát\nPhỏng vấn Sức khỏe Quốc gia. (a) Lập biểu đồ phân tán và xem mô hình\ntuyến tính có thích hợp không. (b) Tìm và vẽ mô hình tuyến tính dùng\nđiểm đầu và điểm cuối. (c) Tìm và vẽ đường hồi quy. (d) Dùng mô hình ở\n(c) ước lượng tỉ lệ mắc loét của người có thu nhập 25 000 đô la. (e)\nTheo mô hình, khả năng mắc loét của người có thu nhập 80 000 đô la là\nbao nhiêu? (f) Có hợp lý không nếu áp dụng mô hình cho người có thu nhập\n200 000 đô la?</p>\n<div class=\"center\">\n<table>\n<thead>\n<tr class=\"header\">\n<th style=\"text-align: right;\">Thu nhập (đô la)</th>\n<th style=\"text-align: right;\">Tỉ lệ mắc loét (trên 100 người)</th>\n</tr>\n</thead>\n<tbody>\n<tr class=\"odd\">\n<td style=\"text-align: right;\">4000</td>\n<td style=\"text-align: right;\">14.1</td>\n</tr>\n<tr class=\"even\">\n<td style=\"text-align: right;\">6000</td>\n<td style=\"text-align: right;\">13.0</td>\n</tr>\n<tr class=\"odd\">\n<td style=\"text-align: right;\">8000</td>\n<td style=\"text-align: right;\">13.4</td>\n</tr>\n<tr class=\"even\">\n<td style=\"text-align: right;\">12 000</td>\n<td style=\"text-align: right;\">12.5</td>\n</tr>\n<tr class=\"odd\">\n<td style=\"text-align: right;\">16 000</td>\n<td style=\"text-align: right;\">12.0</td>\n</tr>\n<tr class=\"even\">\n<td style=\"text-align: right;\">20 000</td>\n<td style=\"text-align: right;\">12.4</td>\n</tr>\n<tr class=\"odd\">\n<td style=\"text-align: right;\">30 000</td>\n<td style=\"text-align: right;\">10.5</td>\n</tr>\n<tr class=\"even\">\n<td style=\"text-align: right;\">45 000</td>\n<td style=\"text-align: right;\">9.4</td>\n</tr>\n<tr class=\"odd\">\n<td style=\"text-align: right;\">60 000</td>\n<td style=\"text-align: right;\">8.2</td>\n</tr>\n</tbody>\n</table>\n</div>"
+    },
+    {
+      "number": 30,
+      "content": "<p><strong>30.</strong>&nbsp; Khi chuột thí nghiệm tiếp xúc với sợi amiăng,\nmột số con phát triển khối u phổi. Bảng cho kết quả các thí nghiệm của\nnhiều nhà khoa học. (a) Tìm đường hồi quy. (b) Lập biểu đồ phân tán và\nvẽ đường hồi quy. Đường hồi quy có vẻ thích hợp với dữ liệu không? (c)\nTung độ gốc của đường hồi quy biểu thị điều gì?</p>\n<div class=\"center\">\n<table>\n<tbody>\n<tr class=\"odd\">\n<td colspan=\"2\" style=\"text-align: center;\">Mức phơi nhiễm và tỉ lệ u\nphổi</td>\n<td colspan=\"2\" style=\"text-align: center;\">Mức phơi nhiễm và tỉ lệ u\nphổi</td>\n</tr>\n<tr class=\"even\">\n<td style=\"text-align: right;\">Sợi/mL</td>\n<td style=\"text-align: right;\">% chuột</td>\n<td style=\"text-align: right;\">Sợi/mL</td>\n<td style=\"text-align: right;\">% chuột</td>\n</tr>\n<tr class=\"odd\">\n<td style=\"text-align: right;\">50</td>\n<td style=\"text-align: right;\">2</td>\n<td style=\"text-align: right;\">1600</td>\n<td style=\"text-align: right;\">42</td>\n</tr>\n<tr class=\"even\">\n<td style=\"text-align: right;\">400</td>\n<td style=\"text-align: right;\">6</td>\n<td style=\"text-align: right;\">1800</td>\n<td style=\"text-align: right;\">37</td>\n</tr>\n<tr class=\"odd\">\n<td style=\"text-align: right;\">500</td>\n<td style=\"text-align: right;\">5</td>\n<td style=\"text-align: right;\">2000</td>\n<td style=\"text-align: right;\">38</td>\n</tr>\n<tr class=\"even\">\n<td style=\"text-align: right;\">900</td>\n<td style=\"text-align: right;\">10</td>\n<td style=\"text-align: right;\">3000</td>\n<td style=\"text-align: right;\">50</td>\n</tr>\n<tr class=\"odd\">\n<td style=\"text-align: right;\">1100</td>\n<td style=\"text-align: right;\">26</td>\n<td style=\"text-align: right;\"></td>\n<td style=\"text-align: right;\"></td>\n</tr>\n</tbody>\n</table>\n</div>"
+    },
+    {
+      "number": 31,
+      "content": "<p><strong>31.</strong>&nbsp; Các nhà nhân học dùng mô hình tuyến tính liên\nhệ chiều dài xương đùi với chiều cao. Mô hình cho phép xác định chiều\ncao khi chỉ tìm được một phần bộ xương, trong đó có xương đùi. Hãy tìm\nmô hình từ số liệu của tám nam giới trong bảng. (a) Lập biểu đồ phân\ntán. (b) Tìm và vẽ đường hồi quy. (c) Nếu tìm được xương đùi dài 53 cm,\nngười đó cao bao nhiêu?</p>\n<div class=\"center\">\n<table>\n<thead>\n<tr class=\"header\">\n<th style=\"text-align: right;\">Xương đùi (cm)</th>\n<th style=\"text-align: right;\">Chiều cao (cm)</th>\n<th style=\"text-align: right;\">Xương đùi (cm)</th>\n<th style=\"text-align: right;\">Chiều cao (cm)</th>\n</tr>\n</thead>\n<tbody>\n<tr class=\"odd\">\n<td style=\"text-align: right;\">50.1</td>\n<td style=\"text-align: right;\">178.5</td>\n<td style=\"text-align: right;\">44.5</td>\n<td style=\"text-align: right;\">168.3</td>\n</tr>\n<tr class=\"even\">\n<td style=\"text-align: right;\">48.3</td>\n<td style=\"text-align: right;\">173.6</td>\n<td style=\"text-align: right;\">42.7</td>\n<td style=\"text-align: right;\">165.0</td>\n</tr>\n<tr class=\"odd\">\n<td style=\"text-align: right;\">45.2</td>\n<td style=\"text-align: right;\">164.8</td>\n<td style=\"text-align: right;\">39.5</td>\n<td style=\"text-align: right;\">155.4</td>\n</tr>\n<tr class=\"even\">\n<td style=\"text-align: right;\">44.7</td>\n<td style=\"text-align: right;\">163.7</td>\n<td style=\"text-align: right;\">38.0</td>\n<td style=\"text-align: right;\">155.8</td>\n</tr>\n</tbody>\n</table>\n</div>"
+    },
+    {
+      "number": 32,
+      "content": "<p><strong>32.</strong>&nbsp; Bảng cho giá bán lẻ điện sinh hoạt trung bình\ntại Hoa Kỳ từ 2000 đến 2016, tính bằng cent/kWh. (a) Lập biểu đồ phân\ntán. Mô hình tuyến tính có thích hợp không? (b) Tìm và vẽ đường hồi quy.\n(c) Dùng mô hình ở (b) ước lượng giá điện trung bình năm 2005 và\n2017.</p>\n<div class=\"center\">\n<table>\n<thead>\n<tr class=\"header\">\n<th style=\"text-align: right;\">Năm từ 2000</th>\n<th style=\"text-align: right;\">Cent/kWh</th>\n<th style=\"text-align: right;\">Năm từ 2000</th>\n<th style=\"text-align: right;\">Cent/kWh</th>\n</tr>\n</thead>\n<tbody>\n<tr class=\"odd\">\n<td style=\"text-align: right;\">0</td>\n<td style=\"text-align: right;\">8.24</td>\n<td style=\"text-align: right;\">10</td>\n<td style=\"text-align: right;\">11.54</td>\n</tr>\n<tr class=\"even\">\n<td style=\"text-align: right;\">2</td>\n<td style=\"text-align: right;\">8.44</td>\n<td style=\"text-align: right;\">12</td>\n<td style=\"text-align: right;\">11.88</td>\n</tr>\n<tr class=\"odd\">\n<td style=\"text-align: right;\">4</td>\n<td style=\"text-align: right;\">8.95</td>\n<td style=\"text-align: right;\">14</td>\n<td style=\"text-align: right;\">12.52</td>\n</tr>\n<tr class=\"even\">\n<td style=\"text-align: right;\">6</td>\n<td style=\"text-align: right;\">10.40</td>\n<td style=\"text-align: right;\">16</td>\n<td style=\"text-align: right;\">12.90</td>\n</tr>\n<tr class=\"odd\">\n<td style=\"text-align: right;\">8</td>\n<td style=\"text-align: right;\">11.26</td>\n<td style=\"text-align: right;\"></td>\n<td style=\"text-align: right;\"></td>\n</tr>\n</tbody>\n</table>\n</div>\n<p><em>Nguồn:</em> Cơ quan Thông tin Năng lượng Hoa Kỳ.</p>"
+    },
+    {
+      "number": 33,
+      "content": "<p><strong>33.</strong>&nbsp; Bảng cho mức tiêu thụ dầu trung bình hằng ngày\ntrên thế giới từ 1985 đến 2015, tính bằng nghìn thùng/ngày. (a) Lập biểu\nđồ phân tán và xem mô hình tuyến tính có thích hợp không. (b) Tìm và vẽ\nđường hồi quy. (c) Dùng mô hình tuyến tính ước lượng mức tiêu thụ dầu\nnăm 2002 và 2017.</p>\n<div class=\"center\">\n<table>\n<thead>\n<tr class=\"header\">\n<th style=\"text-align: right;\">Số năm kể từ 1985</th>\n<th style=\"text-align: right;\">Nghìn thùng dầu/ngày</th>\n</tr>\n</thead>\n<tbody>\n<tr class=\"odd\">\n<td style=\"text-align: right;\">0</td>\n<td style=\"text-align: right;\">60 083</td>\n</tr>\n<tr class=\"even\">\n<td style=\"text-align: right;\">5</td>\n<td style=\"text-align: right;\">66 533</td>\n</tr>\n<tr class=\"odd\">\n<td style=\"text-align: right;\">10</td>\n<td style=\"text-align: right;\">70 099</td>\n</tr>\n<tr class=\"even\">\n<td style=\"text-align: right;\">15</td>\n<td style=\"text-align: right;\">76 784</td>\n</tr>\n<tr class=\"odd\">\n<td style=\"text-align: right;\">20</td>\n<td style=\"text-align: right;\">84 077</td>\n</tr>\n<tr class=\"even\">\n<td style=\"text-align: right;\">25</td>\n<td style=\"text-align: right;\">87 302</td>\n</tr>\n<tr class=\"odd\">\n<td style=\"text-align: right;\">30</td>\n<td style=\"text-align: right;\">94 071</td>\n</tr>\n</tbody>\n</table>\n</div>\n<p><em>Nguồn:</em> Cơ quan Thông tin Năng lượng Hoa Kỳ.</p>"
+    },
+    {
+      "number": 34,
+      "content": "<p><strong>34.</strong>&nbsp; Bảng cho khoảng cách trung bình <span class=\"math inline\">\\(d\\)</span> từ các hành tinh đến Mặt Trời, lấy\nkhoảng cách Trái Đất–Mặt Trời làm đơn vị, và chu kỳ <span class=\"math inline\">\\(T\\)</span> (thời gian quay hết một vòng, tính bằng\nnăm). (a) Khớp một mô hình lũy thừa với dữ liệu. (b) Định luật III\nKepler phát biểu: “Bình phương chu kỳ chuyển động của một hành tinh tỉ\nlệ thuận với lập phương khoảng cách trung bình của nó đến Mặt Trời.” Mô\nhình có xác nhận định luật này không?</p>\n<div class=\"center\">\n<table>\n<thead>\n<tr class=\"header\">\n<th style=\"text-align: left;\">Hành tinh</th>\n<th style=\"text-align: right;\"><span class=\"math inline\">\\(d\\)</span></th>\n<th style=\"text-align: right;\"><span class=\"math inline\">\\(T\\)</span></th>\n</tr>\n</thead>\n<tbody>\n<tr class=\"odd\">\n<td style=\"text-align: left;\">Sao Thủy</td>\n<td style=\"text-align: right;\">0.387</td>\n<td style=\"text-align: right;\">0.241</td>\n</tr>\n<tr class=\"even\">\n<td style=\"text-align: left;\">Sao Kim</td>\n<td style=\"text-align: right;\">0.723</td>\n<td style=\"text-align: right;\">0.615</td>\n</tr>\n<tr class=\"odd\">\n<td style=\"text-align: left;\">Trái Đất</td>\n<td style=\"text-align: right;\">1.000</td>\n<td style=\"text-align: right;\">1.000</td>\n</tr>\n<tr class=\"even\">\n<td style=\"text-align: left;\">Sao Hỏa</td>\n<td style=\"text-align: right;\">1.523</td>\n<td style=\"text-align: right;\">1.881</td>\n</tr>\n<tr class=\"odd\">\n<td style=\"text-align: left;\">Sao Mộc</td>\n<td style=\"text-align: right;\">5.203</td>\n<td style=\"text-align: right;\">11.861</td>\n</tr>\n<tr class=\"even\">\n<td style=\"text-align: left;\">Sao Thổ</td>\n<td style=\"text-align: right;\">9.541</td>\n<td style=\"text-align: right;\">29.457</td>\n</tr>\n<tr class=\"odd\">\n<td style=\"text-align: left;\">Sao Thiên Vương</td>\n<td style=\"text-align: right;\">19.190</td>\n<td style=\"text-align: right;\">84.008</td>\n</tr>\n<tr class=\"even\">\n<td style=\"text-align: left;\">Sao Hải Vương</td>\n<td style=\"text-align: right;\">30.086</td>\n<td style=\"text-align: right;\">164.784</td>\n</tr>\n</tbody>\n</table>\n</div>"
+    },
+    {
+      "number": 35,
+      "content": "<p><strong>35.</strong>&nbsp; Diện tích một vùng càng lớn thì số loài sinh\nsống trong đó thường càng nhiều. Nhiều nhà sinh thái học mô hình hóa\nquan hệ số loài–diện tích bằng hàm lũy thừa. Cụ thể, số loài dơi <span class=\"math inline\">\\(S\\)</span> sống trong hang ở miền trung Mexico\nliên hệ với diện tích bề mặt hang <span class=\"math inline\">\\(A\\)</span>\nbởi <span class=\"math inline\">\\(S=0.7A^{0.3}\\)</span>. (a) Hang Misión\nImposible gần Puebla, Mexico có <span class=\"math inline\">\\(A=60\\,\\mathrm m^2\\)</span>. Dự kiến có bao nhiêu\nloài dơi sống trong hang? (b) Nếu thấy có bốn loài dơi sống trong một\nhang, hãy ước lượng diện tích hang.</p>"
+    },
+    {
+      "number": 36,
+      "content": "<p><strong>36.</strong>&nbsp; Bảng cho số loài bò sát và lưỡng cư <span class=\"math inline\">\\(N\\)</span> sống trên các đảo Caribe và diện tích\nđảo <span class=\"math inline\">\\(A\\)</span> tính bằng dặm vuông. (a) Dùng\nhàm lũy thừa mô hình hóa <span class=\"math inline\">\\(N\\)</span> theo\n<span class=\"math inline\">\\(A\\)</span>. (b) Đảo Dominica có diện tích\n<span class=\"math inline\">\\(291\\,\\mathrm{mi}^2\\)</span>. Dự kiến có bao\nnhiêu loài bò sát và lưỡng cư sống trên đảo?</p>\n<div class=\"center\">\n<table>\n<thead>\n<tr class=\"header\">\n<th style=\"text-align: left;\">Đảo</th>\n<th style=\"text-align: right;\"><span class=\"math inline\">\\(A\\)</span></th>\n<th style=\"text-align: right;\"><span class=\"math inline\">\\(N\\)</span></th>\n</tr>\n</thead>\n<tbody>\n<tr class=\"odd\">\n<td style=\"text-align: left;\">Saba</td>\n<td style=\"text-align: right;\">4</td>\n<td style=\"text-align: right;\">5</td>\n</tr>\n<tr class=\"even\">\n<td style=\"text-align: left;\">Monserrat</td>\n<td style=\"text-align: right;\">40</td>\n<td style=\"text-align: right;\">9</td>\n</tr>\n<tr class=\"odd\">\n<td style=\"text-align: left;\">Puerto Rico</td>\n<td style=\"text-align: right;\">3459</td>\n<td style=\"text-align: right;\">40</td>\n</tr>\n<tr class=\"even\">\n<td style=\"text-align: left;\">Jamaica</td>\n<td style=\"text-align: right;\">4411</td>\n<td style=\"text-align: right;\">39</td>\n</tr>\n<tr class=\"odd\">\n<td style=\"text-align: left;\">Hispaniola</td>\n<td style=\"text-align: right;\">29 418</td>\n<td style=\"text-align: right;\">84</td>\n</tr>\n<tr class=\"even\">\n<td style=\"text-align: left;\">Cuba</td>\n<td style=\"text-align: right;\">44 218</td>\n<td style=\"text-align: right;\">76</td>\n</tr>\n</tbody>\n</table>\n</div>"
+    },
+    {
+      "number": 37,
+      "content": "<p><strong>37.</strong>&nbsp; Giả sử một lực hoặc năng lượng xuất phát từ một\nnguồn điểm và lan truyền ảnh hưởng đều theo mọi hướng, chẳng hạn ánh\nsáng của bóng đèn hoặc lực hấp dẫn của một hành tinh. Ở khoảng cách\n<span class=\"math inline\">\\(r\\)</span>, cường độ <span class=\"math inline\">\\(I\\)</span> bằng độ mạnh nguồn <span class=\"math inline\">\\(S\\)</span> chia cho diện tích mặt cầu bán kính\n<span class=\"math inline\">\\(r\\)</span>. Chứng minh <span class=\"math inline\">\\(I\\)</span> thỏa định luật nghịch đảo bình phương\n<span class=\"math inline\">\\(I=k/r^2\\)</span>, với <span class=\"math inline\">\\(k\\)</span> là hằng số dương.</p>"
+    }
+  ]
+}
