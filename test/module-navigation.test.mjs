@@ -12,7 +12,7 @@ function harness(compact=true) {
   return{dom,window,doc,media,toggle:doc.getElementById('moduleNavigationToggle'),nav:doc.getElementById('moduleNavigation')};
 }
 const h=harness();
-assert.equal(h.nav.querySelectorAll('.tab-btn').length,14);assert.equal(h.nav.querySelectorAll('.navigation-group').length,3);
+assert.equal(h.nav.querySelectorAll('.tab-btn').length,14);assert.equal(h.nav.querySelectorAll('.navigation-group').length,4);
 assert.equal(new Set([...h.nav.querySelectorAll('.tab-btn')].map(x=>x.id)).size,14,'One real button per module, no duplicated IDs');
 assert.equal(h.nav.hidden,true);h.toggle.click();assert.equal(h.nav.hidden,false);assert.equal(h.toggle.getAttribute('aria-expanded'),'true');
 for(const key of ['danang','books','mock','support','admission','tst','vmo','history','olympic','olympic30','duyenhai']){
@@ -40,8 +40,23 @@ for(const language of ['en','vi','en','vi']){
  h.window.setLanguage(language);
  assert.equal(h.doc.getElementById('activeModuleLabel').textContent,h.doc.getElementById('tab-btn-admission').textContent);
  assert.equal(h.doc.getElementById('moduleNavigationAction').textContent,language==='en'?'Choose section':'Chọn mục');
- assert.equal(h.doc.getElementById('navGroupLearning').textContent,language==='en'?'Learning & practice':'Học tập & luyện tập');
+ assert.equal(h.doc.querySelector('[data-education-level=university]').textContent,language==='en'?'University':'Đại học');
 }
+// Level chooser exposes one group, preserves all canonical module buttons and shared support.
+for(const [level,key] of [['primary','primary'],['lower_secondary','admission'],['upper_secondary','danang'],['university','university-materials']]){
+ await h.window.chooseEducationLevel(level);
+ assert.equal(h.doc.querySelectorAll('[data-navigation-level]:not([hidden])').length,1);
+ assert.equal(h.doc.querySelector('[data-navigation-level]:not([hidden])').dataset.navigationLevel,level);
+ assert.equal(h.doc.querySelector('.tab-btn.active').closest('[data-navigation-level]').dataset.navigationLevel,level);
+ assert.equal(h.doc.getElementById('tab-btn-support').hidden,false);
+}
+await h.window.switchTab('tab-books');await h.window.chooseEducationLevel('upper_secondary');await h.window.chooseEducationLevel('university');assert.equal(h.doc.querySelector('.tab-pane.active').id,'tab-books','Return to the last module of a level');
+h.window.eval(fs.readFileSync(new URL('../education_access.js',import.meta.url),'utf8'));
+let account={role:'student',educationLevels:['lower_secondary','university']};h.window.VMOAuth={getSession:()=>account};h.window.refreshEducationAccess();
+assert.equal(h.doc.querySelector('[data-education-level=upper_secondary]').hidden,true);assert.equal(h.doc.getElementById('tab-btn-tst').hidden,true);
+await h.window.chooseEducationLevel('upper_secondary');assert.equal(h.doc.querySelector('.tab-pane.active').id,'tab-books','Unauthorized level cannot be opened');
+await h.window.chooseEducationLevel('lower_secondary');assert.equal(h.doc.querySelector('.tab-pane.active').id,'tab-admission');
+account={role:'student',educationLevels:[]};h.window.refreshEducationAccess();assert.equal(h.doc.getElementById('educationLevelSelect').disabled,true);assert.equal(h.doc.querySelector('.tab-pane.active').id,'tab-pending');
 h.window.close();
 const desktop=harness(false);assert.equal(desktop.nav.hidden,false);desktop.toggle.click();assert.equal(desktop.nav.hidden,false,'Desktop navigation is always visible');desktop.window.close();
 const reading=harness();

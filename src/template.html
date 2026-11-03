@@ -147,40 +147,50 @@ VMOAuth.requireAuth('login.html');
   <div id="educationAccessSummary" role="status" style="padding:10px 20px;color:var(--text-muted,#475569);font-size:.9rem;"></div>
   <!-- Content navigation: all modules visible on desktop; one disclosure on small screens. -->
   <div class="nav-tabs-container module-navigation-shell">
+    <div class="education-level-bar" role="group" aria-label="Cấp học">
+      <div class="education-level-buttons">
+        <button type="button" class="education-level-button" data-education-level="primary" aria-pressed="false">Tiểu học</button>
+        <button type="button" class="education-level-button" data-education-level="lower_secondary" aria-pressed="false">Trung học cơ sở</button>
+        <button type="button" class="education-level-button" data-education-level="upper_secondary" aria-pressed="true">Trung học phổ thông</button>
+        <button type="button" class="education-level-button" data-education-level="university" aria-pressed="false">Đại học</button>
+      </div>
+      <select id="educationLevelSelect" aria-label="Cấp học"><option value="primary">Tiểu học</option><option value="lower_secondary">Trung học cơ sở</option><option value="upper_secondary" selected>Trung học phổ thông</option><option value="university">Đại học</option></select>
+    </div>
     <button id="moduleNavigationToggle" class="module-navigation-toggle" type="button" aria-controls="moduleNavigation" aria-expanded="false">
       <span class="module-navigation-summary"><span class="module-navigation-caption" id="moduleNavigationCaption">Đang xem</span><span id="activeModuleLabel">📚 Tài liệu chuyên đề VMO</span></span>
       <span class="module-navigation-action"><span id="moduleNavigationAction">Chọn mục</span><span class="module-navigation-chevron" aria-hidden="true">⌄</span></span>
     </button>
-    <nav class="nav-tabs module-navigation" id="moduleNavigation" aria-label="Phân loại tài liệu và đề thi">
-      <div class="navigation-group" role="group" aria-labelledby="navGroupLearning">
-        <span class="navigation-group-title" id="navGroupLearning">Học tập &amp; luyện tập</span>
+    <nav class="nav-tabs module-navigation" id="moduleNavigation" aria-label="Nội dung theo cấp học">
+      <div class="navigation-group" data-navigation-level="primary" role="group" aria-label="Tiểu học" hidden>
         <div class="navigation-group-items">
           <button class="tab-btn" id="tab-btn-primary" type="button" onclick="switchTab('tab-primary',this)">🌱 Tiểu học</button>
-          <button class="tab-btn" id="tab-btn-university-materials" type="button" onclick="switchTab('tab-university-materials',this)">📚 Tài liệu Toán–Đại học</button>
-          <button class="tab-btn" id="tab-btn-books" type="button" onclick="switchTab('tab-books',this)">📖 Sách học</button>
-          <button class="tab-btn" id="tab-btn-university" type="button" onclick="switchTab('tab-university',this)">🎓 Đại học</button>
-          <button class="tab-btn active" id="tab-btn-danang" type="button" aria-current="page" onclick="switchTab('tab-danang',this)">📚 Tài liệu chuyên đề VMO</button>
-          <button class="tab-btn" id="tab-btn-mock" type="button" onclick="switchTab('tab-mock',this)">🎯 Bộ đề thi thử VMO</button>
-          <button class="tab-btn" id="tab-btn-support" type="button" onclick="switchTab('tab-support',this)">🧩 Hỗ trợ giải toán</button>
         </div>
       </div>
-      <div class="navigation-group" role="group" aria-labelledby="navGroupNational">
-        <span class="navigation-group-title" id="navGroupNational">Đề thi trong nước</span>
+      <div class="navigation-group" data-navigation-level="lower_secondary" role="group" aria-label="Trung học cơ sở" hidden>
         <div class="navigation-group-items">
           <button class="tab-btn" id="tab-btn-admission" type="button" onclick="switchTab('tab-admission',this)">🎓 Đề thi vào lớp 10 chuyên</button>
+        </div>
+      </div>
+      <div class="navigation-group" data-navigation-level="upper_secondary" role="group" aria-label="Trung học phổ thông">
+        <div class="navigation-group-items">
+          <button class="tab-btn active" id="tab-btn-danang" type="button" aria-current="page" onclick="switchTab('tab-danang',this)">📚 Tài liệu chuyên đề VMO</button>
+          <button class="tab-btn" id="tab-btn-mock" type="button" onclick="switchTab('tab-mock',this)">🎯 Bộ đề thi thử VMO</button>
           <button class="tab-btn" id="tab-btn-tst" type="button" onclick="switchTab('tab-tst',this)">🏛️ Đề TST</button>
           <button class="tab-btn" id="tab-btn-vmo" type="button" onclick="switchTab('tab-vmo',this)">🇻🇳 Đề VMO</button>
           <button class="tab-btn" id="tab-btn-history" type="button" onclick="switchTab('tab-history',this)">🗂️ Đề Đà Nẵng–Quảng Nam</button>
-        </div>
-      </div>
-      <div class="navigation-group" role="group" aria-labelledby="navGroupOlympic">
-        <span class="navigation-group-title" id="navGroupOlympic">Olympic &amp; giao lưu</span>
-        <div class="navigation-group-items">
           <button class="tab-btn" id="tab-btn-olympic" type="button" onclick="switchTab('tab-olympic',this)">🌐 Đề IMO–Olympic</button>
           <button class="tab-btn" id="tab-btn-olympic30" type="button" onclick="switchTab('tab-olympic30',this)">🏅 Đề Olympic 30/4</button>
           <button class="tab-btn" id="tab-btn-duyenhai" type="button" onclick="switchTab('tab-duyenhai',this)">🌊 Đề Duyên hải miền Bắc</button>
         </div>
       </div>
+      <div class="navigation-group" data-navigation-level="university" role="group" aria-label="Đại học" hidden>
+        <div class="navigation-group-items">
+          <button class="tab-btn" id="tab-btn-university-materials" type="button" onclick="switchTab('tab-university-materials',this)">📚 Tài liệu Toán–Đại học</button>
+          <button class="tab-btn" id="tab-btn-books" type="button" onclick="switchTab('tab-books',this)">📖 Sách học</button>
+          <button class="tab-btn" id="tab-btn-university" type="button" onclick="switchTab('tab-university',this)">🎓 Đại học</button>
+        </div>
+      </div>
+      <div class="navigation-shared"><button class="tab-btn" id="tab-btn-support" type="button" onclick="switchTab('tab-support',this)">🧩 Hỗ trợ giải toán</button></div>
     </nav>
   </div>
 </div>

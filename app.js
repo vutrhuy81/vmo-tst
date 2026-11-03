@@ -95,6 +95,42 @@
     if (compactNavigation.matches && restoreFocus && focusWasInside) moduleToggle.focus();
   }
 
+  const levelNames={primary:['Tiểu học','Primary school'],lower_secondary:['Trung học cơ sở','Lower secondary'],upper_secondary:['Trung học phổ thông','Upper secondary'],university:['Đại học','University']};
+  let navigationLevel='upper_secondary';
+  const lastLevelModule=new Map();
+  function syncLevelNavigation(){
+    const policy=window.MathAppEducation,user=window.VMOAuth?.getSession?.(),en=window.currentLang==='en';
+    const grants=policy?policy.assigned(user):Object.keys(levelNames);
+    const active=moduleNavigation?.querySelector('.tab-btn.active:not([hidden])');
+    const activeLevel=active?.closest('[data-navigation-level]')?.dataset.navigationLevel;
+    if(activeLevel){navigationLevel=activeLevel;lastLevelModule.set(activeLevel,active.id);}
+    if(!grants.includes(navigationLevel))navigationLevel=grants[0]||'';
+    qsa('[data-navigation-level]').forEach(group=>{group.hidden=group.dataset.navigationLevel!==navigationLevel||![...group.querySelectorAll('.tab-btn')].some(b=>!b.hidden);group.setAttribute('aria-label',levelNames[group.dataset.navigationLevel][en?1:0]);});
+    qsa('.education-level-button').forEach(button=>{const level=button.dataset.educationLevel;button.hidden=!grants.includes(level);button.setAttribute('aria-pressed',String(level===navigationLevel));button.textContent=levelNames[level][en?1:0];});
+    const select=qs('#educationLevelSelect');
+    if(select){select.setAttribute('aria-label',en?'Education level':'Cấp học');[...select.options].forEach(o=>{o.hidden=!grants.includes(o.value);o.disabled=o.hidden;o.textContent=levelNames[o.value][en?1:0];});select.value=navigationLevel;select.disabled=!grants.length;}
+    qs('.education-level-bar')?.setAttribute('aria-label',en?'Education level':'Cấp học');
+    const summary=qs('#educationAccessSummary');if(summary)summary.classList.toggle('levels-assigned',!!grants.length);
+  }
+  window.chooseEducationLevel=async level=>{
+    const control=qs(`.education-level-button[data-education-level="${level}"]`);
+    if(!control||control.hidden)return;
+    const group=qs(`[data-navigation-level="${level}"]`);
+    const remembered=qs('#'+(lastLevelModule.get(level)||'missing-module'));
+    const next=remembered&&!remembered.hidden?remembered:group?.querySelector('.tab-btn:not([hidden])');
+    if(next)await window.switchTab(next.id.replace('tab-btn-','tab-'),next);
+  };
+  qsa('.education-level-button').forEach(button=>{
+    button.addEventListener('click',()=>window.chooseEducationLevel(button.dataset.educationLevel));
+    button.addEventListener('keydown',event=>{
+      if(!['ArrowLeft','ArrowRight','Home','End'].includes(event.key))return;
+      const buttons=qsa('.education-level-button:not([hidden])');const i=buttons.indexOf(button);
+      const next=event.key==='Home'?buttons[0]:event.key==='End'?buttons.at(-1):buttons[(i+(event.key==='ArrowRight'?1:-1)+buttons.length)%buttons.length];
+      event.preventDefault();next?.focus();next?.click();
+    });
+  });
+  qs('#educationLevelSelect')?.addEventListener('change',event=>window.chooseEducationLevel(event.target.value));
+
   window.refreshModuleNavigation = function() {
     if (!moduleNavigation) return;
     const active = moduleNavigation.querySelector('.tab-btn.active');
@@ -108,6 +144,7 @@
     });
     const summary = qs('#activeModuleLabel');
     if (summary && active) summary.textContent = active.textContent.trim();
+    syncLevelNavigation();
   };
   if (moduleNavigation && moduleToggle) {
     document.documentElement.classList.add('navigation-ready');
