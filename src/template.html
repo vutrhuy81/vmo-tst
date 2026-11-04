@@ -241,16 +241,24 @@ VMOAuth.requireAuth('login.html');
     <div class="tab-pane" id="tab-primary"><section class="feed-container"><h2 data-level-title="primary">Tiểu học</h2><p data-level-empty>Kho học liệu của cấp học này đang được xây dựng. Bạn có thể sử dụng Hỗ trợ giải toán.</p></section></div>
 <!-- EDUCATION:university:START -->
 <style>
-#booksControls{display:flex;flex-wrap:wrap;gap:12px;align-items:end;padding:16px 0}
-#booksControls label{display:flex;flex-direction:column;gap:5px;max-width:100%}
-#booksControls select{max-width:100%;padding:9px;font:inherit}
+/* Dedicated toolbar: nested selects must not inherit flex-basis from university materials. */
+#booksControls{display:flex;flex-wrap:wrap;gap:8px 12px;align-items:flex-end;padding:10px 12px;margin:8px 0;border:1px solid var(--border,#cbd5e1);border-radius:10px;min-width:0}
+#booksControls>label{display:flex;flex-direction:column;gap:4px;min-width:0;max-width:100%;font-size:.82rem;font-weight:600}
+#booksControls>label:first-child{flex:0 1 13rem}
+#booksControls>label:nth-child(2){flex:1 1 20rem;max-width:32rem}
+#booksControls select{display:block;flex:none;width:100%;min-width:0;max-width:100%;height:42px;min-height:42px;padding:6px 30px 6px 10px;border:1px solid var(--border,#cbd5e1);border-radius:7px;background:var(--card-bg,#fff);color:var(--text);font:inherit;text-overflow:ellipsis}
+#tab-books #booksControls>button{min-height:42px;font-size:.8rem;padding:6px 10px}
+#booksControls>label:has(input[type=checkbox]){flex-direction:row;align-items:center;align-self:center;font-weight:400}
+#booksControls input[type=checkbox]{flex:none;width:18px;height:18px;margin:0}
+#booksControls :is(select,button,input):focus-visible{outline:2px solid var(--primary,#173b64);outline-offset:2px}
+@media(max-width:600px){#booksControls{padding:8px;gap:8px}#booksControls>label:first-child,#booksControls>label:nth-child(2){flex:1 1 100%;max-width:100%}#booksControls>button{white-space:normal}}
 #tab-books button{padding:8px 12px;border:1px solid var(--border,#cbd5e1);border-radius:7px;cursor:pointer;font:inherit}
 #booksContent .book-center{text-align:center}#booksContent table{display:block;max-width:100%;overflow-x:auto;border-collapse:collapse;margin:16px 0}#booksContent th,#booksContent td{border:1px solid var(--border,#cbd5e1);padding:6px 10px}#booksContent img{display:block;margin:12px auto}#booksContent h1{font-size:1.45rem}#booksContent .math.display{overflow-x:auto;display:block}
 #booksContent{overflow-wrap:anywhere;padding:16px 0}#booksContent>button{margin:8px 8px 0 0}
 #booksEditor select,#booksEditor textarea{font:inherit;max-width:100%}
 .book-exercise{margin:16px 0;padding:16px;border:1px solid #cbd5e1;border-radius:10px;background:var(--bg-card,#fff)} .book-exercise .problem-header{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-bottom:12px} .book-exercise .problem-id{font-weight:700;margin-right:auto}
 </style>
-<div class="tab-pane" id="tab-books" data-no-i18n="true"><section class="book-dashboard"><h2>📖 Sách học</h2><p>Chọn nhóm sách, chọn sách và mở mục lục để học từng phần.</p></section><div id="booksControls" class="university-material-controls"></div><div id="booksStatus" role="status" aria-live="polite"></div><div id="booksEditor"></div><div id="booksContent" class="book-content"></div></div>
+<div class="tab-pane" id="tab-books" data-no-i18n="true"><section class="book-dashboard"><h2>📖 Sách học</h2><p>Chọn nhóm sách, chọn sách và mở mục lục để học từng phần.</p></section><div id="booksControls"></div><div id="booksStatus" role="status" aria-live="polite"></div><div id="booksEditor"></div><div id="booksContent" class="book-content"></div></div>
 <!-- EDUCATION:university:END -->
 <div class="tab-pane" id="tab-university-materials" data-no-i18n="true"><section class="book-dashboard"><div class="dashboard-copy"><div class="eyebrow">TOÁN ĐẠI HỌC</div><h2>📚 Tài liệu Toán–Đại học</h2><p>Lý thuyết cốt lõi · Phương pháp giải · Ví dụ từng bước · Nguồn đối chiếu</p><p id="universityMaterialsStats" role="status">Đang tải danh mục học liệu…</p></div></section><div class="university-material-controls"><label for="universityMaterialsCourse">Học phần</label><select id="universityMaterialsCourse"></select><label for="universityMaterialsSearch">Tìm trong học phần</label><input id="universityMaterialsSearch" type="search" placeholder="Tìm khái niệm, định lý, ví dụ…"><button id="universityMaterialsSolutions" type="button">Ẩn/hiện lời giải</button><button id="universityMaterialsPrint" type="button">🖨️ In học phần / PDF</button></div><div id="universityMaterialsContent" class="book-content" aria-live="polite"></div></div>
 <div class="tab-pane" id="tab-university"><section class="feed-container"><div class="section-header-box"><h2 data-university-label>Các học phần Đại học</h2><label for="universityCourseSelect">Chọn học phần</label><select id="universityCourseSelect" style="display:block;max-width:100%;width:100%;padding:10px;margin:8px 0;font:inherit;"></select><label for="universitySectionSelect">Chuyên đề con</label><select id="universitySectionSelect" style="display:block;width:100%;padding:10px;margin:8px 0;font:inherit;"></select><h3 id="universityCourseTitle"></h3></div></section></div>
