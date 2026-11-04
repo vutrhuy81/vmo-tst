@@ -1,0 +1,413 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage{fontspec}\setmainfont{Latin Modern Roman}\setsansfont{DejaVu Sans}
+\usepackage{amsmath,amssymb,graphicx,geometry,enumitem,longtable,booktabs,fancyhdr,hyperref}
+\geometry{left=28mm,right=23mm,top=24mm,bottom=24mm}
+\hypersetup{unicode=true,colorlinks=true,linkcolor=black,urlcolor=blue,pdftitle={Giải tích Chương 1 Mục 1.5 Hàm ngược và lôgarit}}
+\setlength{\parindent}{1.2em}\setlength{\parskip}{4pt}\setlength{\headheight}{16pt}
+\pagestyle{fancy}\fancyhf{}\fancyhead[L]{\small Chương 1. Hàm số và mô hình}\fancyhead[R]{\small §1.5}\fancyfoot[C]{\thepage}
+\newcommand{\fig}[3][.68]{\begin{center}\includegraphics[width=#1\linewidth]{assets/#2.png}\\{\small #3}\end{center}}
+\newcommand{\ex}[1]{\par\medskip\noindent\textbf{Ví dụ #1.}\ }
+\newcommand{\sol}{\par\noindent\textit{Lời giải.}\ }
+\newcommand{\bt}[1]{\par\smallskip\noindent\textbf{#1.}\ }
+\newcommand{\group}[1]{\par\medskip\noindent\textbf{#1}\par}
+\begin{document}
+\begin{center}
+{\Large\bfseries GIẢI TÍCH}\\[5pt]
+{\large Chương 1. Hàm số và mô hình}\\[9pt]
+{\Large\bfseries 1.5. Hàm ngược và lôgarit}
+\end{center}
+\noindent\textbf{Nguồn:} James Stewart, Daniel K. Clegg, Saleem Watson, \textit{Calculus: Early Transcendentals}, ấn bản thứ 9. Phạm vi: trọn §1.5, trang in 54–66 (trang PDF 89–101), trước phần Ôn tập Chương 1.
+
+\noindent\textbf{Quy ước biên tập:} Kế thừa thuật ngữ §1.1–§1.4, giữ số định nghĩa, công thức và quy trình (1)–(12), Ví dụ 1–14, Hình 1–26 và Bài tập 1–83. Công thức và bảng được nhập lại; hình được trích từ sách để giữ đường cong, điểm đầu mút và dữ liệu. Bản dịch dùng thuật ngữ ``đơn ánh'' cho \textit{one-to-one}. Quy ước nhánh của các hàm lượng giác ngược được giữ đúng nguồn. Ghi chú bổ sung được tách riêng ở cuối.
+
+\section*{Hàm ngược}
+Bảng 1 cho số liệu một thí nghiệm: nhà sinh học bắt đầu nuôi cấy 100 vi khuẩn trong môi trường dinh dưỡng hữu hạn và ghi số lượng sau mỗi giờ. Số vi khuẩn $N$ là hàm của thời gian $t$: $N=f(t)$.
+
+Giả sử nhà sinh học đổi cách nhìn, quan tâm đến thời gian cần để quần thể đạt những mức số lượng khác nhau, tức xem $t$ là hàm của $N$. Hàm này gọi là \textbf{hàm ngược} của $f$, ký hiệu $f^{-1}$, đọc là ``$f$ ngược''. Ở đây, $t=f^{-1}(N)$ là thời gian cần để quần thể đạt $N$. Đọc Bảng 1 từ phải sang trái, hoặc xem Bảng 2, ta tìm được các giá trị của $f^{-1}$. Chẳng hạn, $f^{-1}(550)=6$ vì $f(6)=550$.
+\begin{center}\textbf{Bảng 1. $N$ là hàm của $t$}\par
+\begin{tabular}{rr}\toprule$t$ (giờ)&$N=f(t)$: số lượng tại $t$\\\midrule
+0&100\\1&168\\2&259\\3&358\\4&445\\5&509\\6&550\\7&573\\8&586\\\bottomrule\end{tabular}\end{center}
+\noindent\begin{minipage}{\linewidth}\begin{center}\textbf{Bảng 2. $t$ là hàm của $N$}\par
+\begin{tabular}{rr}\toprule$N$&$t=f^{-1}(N)$: thời gian đạt $N$ vi khuẩn\\\midrule
+100&0\\168&1\\259&2\\358&3\\445&4\\509&5\\550&6\\573&7\\586&8\\\bottomrule\end{tabular}\end{center}\end{minipage}
+Không phải mọi hàm số đều có hàm ngược. So sánh $f$ và $g$ có sơ đồ mũi tên ở Hình 1: $f$ không nhận cùng một giá trị hai lần, nghĩa là hai đầu vào khác nhau luôn có đầu ra khác nhau; còn $g$ nhận giá trị 4 ở cả hai đầu vào 2 và 3. Viết bằng ký hiệu,
+\[g(2)=g(3),\]
+trong khi $f(x_1)\ne f(x_2)$ khi $x_1\ne x_2$. Các hàm có tính chất như $f$ gọi là \textbf{hàm số đơn ánh}.
+\fig[.40]{f01}{Hình 1. $f$ đơn ánh; $g$ không đơn ánh.}
+\begin{quote}\textbf{1. Định nghĩa.} Hàm số $f$ được gọi là \textbf{đơn ánh} nếu nó không nhận cùng một giá trị hai lần, tức
+\[f(x_1)\ne f(x_2)\quad\text{khi }x_1\ne x_2.\]
+\end{quote}
+\noindent\textit{Chú thích bên lề:} Theo ngôn ngữ đầu vào–đầu ra, $f$ đơn ánh khi mỗi đầu ra tương ứng chỉ một đầu vào.
+
+Nếu một đường thẳng ngang cắt đồ thị $f$ tại nhiều hơn một điểm, Hình 2 cho thấy có $x_1\ne x_2$ sao cho $f(x_1)=f(x_2)$, nên $f$ không đơn ánh. Từ đó có tiêu chuẩn hình học:
+\begin{quote}\textbf{Tiêu chuẩn đường thẳng ngang.} Hàm số đơn ánh khi và chỉ khi không có đường thẳng ngang nào cắt đồ thị tại nhiều hơn một điểm.\end{quote}
+\fig[.43]{f02}{Hình 2. Hàm không đơn ánh vì $f(x_1)=f(x_2)$ với $x_1\ne x_2$.}
+
+\ex{1} Hàm $f(x)=x^3$ có đơn ánh không?
+\par\noindent\textit{Cách giải 1.} Nếu $x_1\ne x_2$ thì $x_1^3\ne x_2^3$, vì hai số khác nhau không có cùng lập phương. Theo Định nghĩa 1, $f$ đơn ánh.
+\par\noindent\textit{Cách giải 2.} Hình 3 cho thấy không có đường thẳng ngang nào cắt đồ thị $x^3$ nhiều hơn một lần. Theo tiêu chuẩn đường thẳng ngang, $f$ đơn ánh.
+\fig[.44]{f03}{Hình 3. $f(x)=x^3$ đơn ánh.}
+
+\ex{2} Hàm $g(x)=x^2$ có đơn ánh không?
+\par\noindent\textit{Cách giải 1.} Không, vì $g(1)=1=g(-1)$: hai đầu vào 1 và $-1$ có cùng đầu ra.
+\par\noindent\textit{Cách giải 2.} Hình 4 có những đường thẳng ngang cắt đồ thị nhiều hơn một lần, nên $g$ không đơn ánh.
+\fig[.38]{f04}{Hình 4. $g(x)=x^2$ không đơn ánh.}
+Các hàm đơn ánh quan trọng vì chính chúng có hàm ngược theo định nghĩa sau.
+\begin{quote}\textbf{2. Định nghĩa.} Cho hàm đơn ánh $f$ có tập xác định $A$, tập giá trị $B$. Hàm ngược $f^{-1}$ có tập xác định $B$, tập giá trị $A$, xác định bởi
+\[f^{-1}(y)=x\quad\Longleftrightarrow\quad f(x)=y,\qquad y\in B.\]
+\end{quote}
+Nếu $f$ biến $x$ thành $y$, thì $f^{-1}$ biến $y$ trở lại $x$. Nếu $f$ không đơn ánh, phép xác định ngược không duy nhất. Hình 5 cho thấy $f^{-1}$ đảo ngược tác động của $f$. Ta có
+\begin{align*}
+\text{Tập xác định của }f^{-1}&=\text{tập giá trị của }f,\\
+\text{Tập giá trị của }f^{-1}&=\text{tập xác định của }f.
+\end{align*}
+\fig[.42]{f05}{Hình 5. Tác động của $f$ và $f^{-1}$.}
+Ví dụ, hàm ngược của $f(x)=x^3$ là $f^{-1}(x)=x^{1/3}$, vì nếu $y=x^3$ thì
+\[f^{-1}(y)=f^{-1}(x^3)=(x^3)^{1/3}=x.\]
+\noindent\textbf{Lưu ý.} Không xem $-1$ trong ký hiệu $f^{-1}$ là số mũ. $f^{-1}(x)$ \emph{không có nghĩa là} $1/f(x)$. Đại lượng nghịch đảo $1/f(x)$ có thể viết là $[f(x)]^{-1}$.
+
+\ex{3} Cho $f$ đơn ánh, $f(1)=5$, $f(3)=7$, $f(8)=-10$. Tìm $f^{-1}(7)$, $f^{-1}(5)$ và $f^{-1}(-10)$.
+\sol Theo định nghĩa,
+\begin{align*}
+f^{-1}(7)&=3&&\text{vì }f(3)=7,\\
+f^{-1}(5)&=1&&\text{vì }f(1)=5,\\
+f^{-1}(-10)&=8&&\text{vì }f(8)=-10.
+\end{align*}
+Hình 6 minh họa cách hàm ngược đảo vai trò đầu vào và đầu ra.
+\fig[.35]{f06}{Hình 6. Hàm ngược đảo vai trò đầu vào và đầu ra.}
+Theo truyền thống, chữ $x$ thường dùng làm biến độc lập. Khi xét $f^{-1}$, ta thường đổi vai trò $x,y$ trong Định nghĩa 2 và viết
+\begin{equation}f^{-1}(x)=y\quad\Longleftrightarrow\quad f(y)=x.\tag{3}\end{equation}
+Thay thế thích hợp trong Định nghĩa 2 và (3), ta được các \textbf{đẳng thức khử}:
+\begin{equation}\begin{aligned}
+f^{-1}(f(x))&=x&&\text{với mọi }x\in A,\\
+f(f^{-1}(x))&=x&&\text{với mọi }x\in B.
+\end{aligned}\tag{4}\end{equation}
+Đẳng thức thứ nhất nói rằng từ $x$, thực hiện $f$ rồi $f^{-1}$, ta trở về $x$ ban đầu (Hình 7). Như vậy, $f^{-1}$ hoàn tác điều $f$ đã làm. Đẳng thức thứ hai nói $f$ hoàn tác điều $f^{-1}$ đã làm.
+\fig[.76]{f07}{Hình 7. Thực hiện liên tiếp $f$ rồi $f^{-1}$ đưa đầu vào $x$ trở lại chính nó.}
+Nếu $f(x)=x^3$, $f^{-1}(x)=x^{1/3}$, thì
+\[f^{-1}(f(x))=(x^3)^{1/3}=x,\qquad f(f^{-1}(x))=(x^{1/3})^3=x.\]
+Hai đẳng thức cho biết phép lập phương và khai căn bậc ba khử nhau khi thực hiện liên tiếp.
+
+Để tìm hàm ngược của $y=f(x)$, nếu giải được phương trình theo $x$ dưới dạng hàm của $y$, theo Định nghĩa 2 ta có $x=f^{-1}(y)$. Muốn gọi biến độc lập là $x$, ta đổi $x,y$ để được $y=f^{-1}(x)$.
+\group{5. Cách tìm hàm ngược của một hàm đơn ánh $f$}
+\begin{enumerate}[label=\textbf{Bước \arabic*.},leftmargin=*]
+\item Viết $y=f(x)$.
+\item Giải phương trình theo $x$ dưới dạng hàm của $y$, nếu có thể.
+\item Đổi $x,y$ để biểu diễn $f^{-1}$ theo $x$. Phương trình thu được là $y=f^{-1}(x)$.
+\end{enumerate}
+
+\ex{4} Tìm hàm ngược của $f(x)=x^3+2$.
+\sol Theo (5), viết $y=x^3+2$, rồi giải theo $x$:
+\[x^3=y-2,\qquad x=\sqrt[3]{y-2}.\]
+Đổi $x,y$, được $y=\sqrt[3]{x-2}$. Vậy $f^{-1}(x)=\sqrt[3]{x-2}$.
+
+\noindent\textit{Chú thích bên lề:} $f$ là quy tắc ``lập phương rồi cộng 2''; $f^{-1}$ là ``trừ 2 rồi khai căn bậc ba''.
+
+Việc đổi $x,y$ cũng cho phương pháp dựng đồ thị hàm ngược: $f(a)=b$ khi và chỉ khi $f^{-1}(b)=a$, nên $(a,b)$ thuộc đồ thị $f$ khi và chỉ khi $(b,a)$ thuộc đồ thị $f^{-1}$. Điểm $(b,a)$ là ảnh của $(a,b)$ qua phép đối xứng qua đường $y=x$ (Hình 8).
+\fig[.43]{f08}{Hình 8. Hai điểm $(a,b)$ và $(b,a)$ đối xứng qua $y=x$.}
+\fig[.43]{f09}{Hình 9. Đồ thị $f$ và $f^{-1}$ đối xứng qua $y=x$.}
+\begin{quote}Đồ thị $f^{-1}$ thu được bằng cách lấy đối xứng đồ thị $f$ qua đường thẳng $y=x$.\end{quote}
+
+\ex{5} Phác họa đồ thị $f(x)=\sqrt{-1-x}$ và hàm ngược trên cùng hệ trục.
+\sol Trước hết vẽ $y=\sqrt{-1-x}$, nửa trên của parabol $y^2=-1-x$, hay $x=-y^2-1$. Lấy đối xứng qua $y=x$ để có đồ thị $f^{-1}$ (Hình 10). Kiểm tra bằng công thức $f^{-1}(x)=-x^2-1$, $x\ge0$: đồ thị là nửa bên phải của parabol $y=-x^2-1$, phù hợp với hình.
+\fig[.53]{f10}{Hình 10. $f(x)=\sqrt{-1-x}$ và $f^{-1}(x)=-x^2-1$, $x\ge0$.}
+
+\section*{Hàm lôgarit}
+Nếu $b>0$, $b\ne1$, hàm $f(x)=b^x$ đồng biến hoặc nghịch biến, nên đơn ánh theo tiêu chuẩn đường thẳng ngang. Do đó nó có hàm ngược, gọi là \textbf{hàm lôgarit cơ số $b$}, ký hiệu $\log_b$. Áp dụng (3), ta có
+\begin{equation}\log_bx=y\quad\Longleftrightarrow\quad b^y=x.\tag{6}\end{equation}
+Vì vậy, với $x>0$, $\log_bx$ là số mũ cần nâng cơ số $b$ lên để được $x$. Chẳng hạn, $\log_{10}0.001=-3$ vì $10^{-3}=0.001$.
+
+Các đẳng thức khử (4) đối với $f(x)=b^x$ và $f^{-1}(x)=\log_bx$ trở thành
+\begin{equation}\begin{aligned}
+\log_b(b^x)&=x&&\text{với mọi }x\in\mathbb R,\\
+b^{\log_bx}&=x&&\text{với mọi }x>0.
+\end{aligned}\tag{7}\end{equation}
+Hàm $\log_b$ có tập xác định $(0,\infty)$, tập giá trị $\mathbb R$. Đồ thị là ảnh đối xứng của $y=b^x$ qua $y=x$.
+\fig[.48]{f11}{Hình 11. Hàm số mũ và hàm lôgarit cơ số $b>1$.}
+Hình 11 xét $b>1$, là các cơ số thường quan trọng nhất trong ứng dụng lôgarit. Việc $b^x$ tăng rất nhanh khi $x>0$ tương ứng với việc $\log_bx$ tăng rất chậm khi $x>1$. Hình 12 biểu diễn một số cơ số $b>1$. Vì $\log_b1=0$, mọi đồ thị lôgarit đều qua $(1,0)$.
+\fig[.51]{f12}{Hình 12. Lôgarit cơ số 2, 3, 5 và 10.}
+Các tính chất sau được suy ra từ các quy tắc lũy thừa ở §1.4.
+\begin{quote}\textbf{Các quy tắc lôgarit.} Nếu $x,y>0$, thì
+\begin{align*}
+1.\quad\log_b(xy)&=\log_bx+\log_by,\\
+2.\quad\log_b(x/y)&=\log_bx-\log_by,\\
+3.\quad\log_b(x^r)&=r\log_bx\qquad(r\in\mathbb R).
+\end{align*}\end{quote}
+
+\ex{6} Tính $\log_2 80-\log_2 5$ bằng các quy tắc lôgarit.
+\sol Theo Quy tắc 2,
+\[\log_2 80-\log_2 5=\log_2(80/5)=\log_2 16=4,\]
+vì $2^4=16$.
+
+\section*{Lôgarit tự nhiên}
+Trong các cơ số lôgarit, Chương 3 sẽ cho thấy lựa chọn thuận tiện nhất là số $e$ ở §1.4. Lôgarit cơ số $e$ gọi là \textbf{lôgarit tự nhiên}, có ký hiệu riêng:
+\[\log_e x=\ln x.\]
+\noindent\textit{Chú thích bên lề về ký hiệu:} Phần lớn giáo trình giải tích, khoa học và máy tính cầm tay dùng $\ln x$ cho lôgarit tự nhiên, $\log x$ cho lôgarit thập phân $\log_{10}x$. Tuy nhiên, trong tài liệu toán học, khoa học chuyên sâu và các ngôn ngữ máy tính, $\log x$ thường chỉ lôgarit tự nhiên.
+
+Đặt $b=e$, thay $\log_e$ bằng $\ln$ trong (6), (7), được
+\begin{equation}\ln x=y\quad\Longleftrightarrow\quad e^y=x.\tag{8}\end{equation}
+\begin{equation}\begin{aligned}
+\ln(e^x)&=x&&x\in\mathbb R,\\
+e^{\ln x}&=x&&x>0.
+\end{aligned}\tag{9}\end{equation}
+Đặc biệt, đặt $x=1$ trong đẳng thức thứ nhất, ta có $\ln e=1$. Kết hợp (9) với Quy tắc 3:
+\[x^r=e^{\ln(x^r)}=e^{r\ln x},\qquad x>0.\]
+Như vậy, lũy thừa của $x$ có thể viết dưới dạng hàm mũ tương đương, một điều hữu ích ở các chương sau:
+\begin{equation}x^r=e^{r\ln x}\qquad(x>0).\tag{10}\end{equation}
+
+\ex{7} Tìm $x$ nếu $\ln x=5$.
+\par\noindent\textit{Cách giải 1.} Theo (8), $\ln x=5$ nghĩa là $e^5=x$. Vậy $x=e^5$. Nếu chưa quen ký hiệu $\ln$, thay bằng $\log_e$: phương trình $\log_e x=5$ cho $e^5=x$ theo định nghĩa.
+\par\noindent\textit{Cách giải 2.} Từ $\ln x=5$, áp dụng hàm số mũ vào hai vế: $e^{\ln x}=e^5$. Theo (9), $e^{\ln x}=x$, nên $x=e^5$.
+
+\ex{8} Giải $e^{5-3x}=10$.
+\sol Lấy lôgarit tự nhiên hai vế và dùng (9):
+\begin{align*}
+\ln(e^{5-3x})&=\ln10,\\
+5-3x&=\ln10,\\
+3x&=5-\ln10,\\
+x&=\frac13(5-\ln10).
+\end{align*}
+Dùng máy tính, làm tròn đến bốn chữ số thập phân: $x\approx0.8991$.
+
+Các quy tắc lôgarit cho phép khai triển lôgarit của tích, thương thành tổng, hiệu các lôgarit; ngược lại, cũng cho phép gộp tổng, hiệu thành một lôgarit duy nhất. Hai ví dụ sau minh họa.
+
+\ex{9} Khai triển $\displaystyle\ln\frac{x^2\sqrt{x^2+2}}{3x+1}$ bằng các quy tắc lôgarit.
+\sol Theo các Quy tắc 1, 2, 3, sách trình bày
+\begin{align*}
+\ln\frac{x^2\sqrt{x^2+2}}{3x+1}
+&=\ln x^2+\ln\sqrt{x^2+2}-\ln(3x+1)\\
+&=2\ln x+\frac12\ln(x^2+2)-\ln(3x+1).
+\end{align*}
+\noindent\textit{Xem ghi chú cuối mục về điều kiện $x>0$ và công thức trên toàn tập xác định.}
+
+\ex{10} Viết $\ln a+\frac12\ln b$ thành một lôgarit duy nhất.
+\sol Theo Quy tắc 3 và 1,
+\[\ln a+\frac12\ln b=\ln a+\ln b^{1/2}=\ln a+\ln\sqrt b=\ln(a\sqrt b).\]
+Công thức sau biểu diễn lôgarit với cơ số bất kỳ thông qua lôgarit tự nhiên.
+\begin{quote}\textbf{11. Công thức đổi cơ số.} Với $b>0$, $b\ne1$, ta có
+\[\log_bx=\frac{\ln x}{\ln b}.\]
+\end{quote}
+\noindent\textit{Chứng minh.} Đặt $y=\log_bx$. Theo (6), $b^y=x$. Lấy lôgarit tự nhiên hai vế, được $y\ln b=\ln x$, nên $y=\ln x/\ln b$.\hfill$\square$
+
+Công thức 11 cho phép tính lôgarit cơ số bất kỳ bằng máy tính, đồng thời vẽ đồ thị mọi hàm lôgarit bằng máy tính (Bài tập 49–50).
+
+\ex{11} Tính $\log_8 5$, chính xác đến sáu chữ số thập phân.
+\sol Theo Công thức 11,
+\[\log_8 5=\frac{\ln5}{\ln8}\approx0.773976.\]
+
+\section*{Đồ thị và sự tăng trưởng của lôgarit tự nhiên}
+Hình 13 biểu diễn $y=e^x$ và hàm ngược $y=\ln x$. Như các hàm lôgarit có cơ số lớn hơn 1 khác, $\ln x$ đồng biến trên $(0,\infty)$ và có trục $y$ là tiệm cận đứng: khi $x$ tiến đến 0 từ phía dương, $\ln x$ nhận những giá trị âm có độ lớn ngày càng tăng.
+\fig[.50]{f13}{Hình 13. Đồ thị $y=\ln x$ là ảnh đối xứng của $y=e^x$ qua $y=x$.}
+
+\ex{12} Phác họa $y=\ln(x-2)-1$.
+\sol Từ $y=\ln x$ ở Hình 13, tịnh tiến sang phải 2 đơn vị để được $y=\ln(x-2)$, rồi tịnh tiến xuống 1 đơn vị để được $y=\ln(x-2)-1$ (Hình 14).
+\fig[1]{f14}{Hình 14. Các phép tịnh tiến của đồ thị lôgarit.}
+Mặc dù $\ln x$ đồng biến, nó tăng rất chậm khi $x>1$, chậm hơn mọi lũy thừa dương của $x$. Hình 15–16 so sánh $y=\ln x$ với $y=x^{1/2}=\sqrt x$: ban đầu chúng có tốc độ tăng tương đối gần nhau, nhưng về sau hàm căn vượt xa hàm lôgarit.
+\fig[.59]{f15}{Hình 15. So sánh $y=\sqrt x$ và $y=\ln x$.}
+\fig[.51]{f16}{Hình 16. Hàm căn vượt xa hàm lôgarit khi $x$ lớn.}
+
+\section*{Các hàm lượng giác ngược}
+Khi tìm hàm ngược của hàm lượng giác, ta gặp khó khăn vì chúng không đơn ánh trên tập xác định thông thường. Ta khắc phục bằng cách \textbf{hạn chế tập xác định} để chúng trở thành đơn ánh.
+
+Hình 17 cho thấy $y=\sin x$ không đơn ánh. Nếu hạn chế tập xác định vào $[-\pi/2,\pi/2]$, hàm trở thành đơn ánh mà vẫn nhận mọi giá trị trong tập giá trị ban đầu (Hình 18). Hàm ngược của hàm sin bị hạn chế này được ký hiệu $\sin^{-1}$ hoặc $\arcsin$, gọi là \textbf{hàm sin ngược}, hay \textbf{hàm arcsin}.
+\fig[.85]{f17}{Hình 17. $y=\sin x$ không đơn ánh trên $\mathbb R$.}
+\fig[.45]{f18}{Hình 18. $y=\sin x$ trên $[-\pi/2,\pi/2]$.}
+Từ định nghĩa hàm ngược,
+\[\sin^{-1}x=y\quad\Longleftrightarrow\quad\sin y=x\ \text{và}\ -\frac\pi2\le y\le\frac\pi2.\]
+Với $-1\le x\le1$, $\sin^{-1}x$ là số trong $[-\pi/2,\pi/2]$ có sin bằng $x$.
+\noindent\textit{Chú thích bên lề:} $\sin^{-1}x\ne1/\sin x$.
+
+\ex{13} Tính (a) $\sin^{-1}(1/2)$; (b) $\tan(\arcsin(1/3))$.
+\sol (a) $\sin^{-1}(1/2)=\pi/6$, vì $\sin(\pi/6)=1/2$ và $\pi/6\in[-\pi/2,\pi/2]$.
+
+(b) Đặt $\theta=\arcsin(1/3)$, nên $\sin\theta=1/3$. Vẽ tam giác vuông như Hình 19. Theo định lý Pythagore, cạnh còn lại dài $\sqrt{9-1}=2\sqrt2$. Vì vậy,
+\[\tan(\arcsin(1/3))=\tan\theta=\frac1{2\sqrt2}.\]
+\fig[.48]{f19}{Hình 19. Tam giác vuông dùng trong Ví dụ 13(b).}
+Các đẳng thức khử là
+\begin{align*}
+\sin^{-1}(\sin x)&=x&&-\pi/2\le x\le\pi/2,\\
+\sin(\sin^{-1}x)&=x&&-1\le x\le1.
+\end{align*}
+Hàm $\sin^{-1}$ có tập xác định $[-1,1]$, tập giá trị $[-\pi/2,\pi/2]$. Đồ thị ở Hình 20 là ảnh đối xứng của Hình 18 qua $y=x$.
+\fig[.40]{f20}{Hình 20. $y=\sin^{-1}x=\arcsin x$.}
+
+Hàm côsin ngược được xây dựng tương tự. Hàm $f(x)=\cos x$ bị hạn chế trên $[0,\pi]$ là đơn ánh (Hình 21), nên có hàm ngược $\cos^{-1}$, hay $\arccos$:
+\[\cos^{-1}x=y\quad\Longleftrightarrow\quad\cos y=x\ \text{và}\ 0\le y\le\pi.\]
+\fig[.46]{f21}{Hình 21. $y=\cos x$ trên $[0,\pi]$.}
+Các đẳng thức khử:
+\begin{align*}
+\cos^{-1}(\cos x)&=x&&0\le x\le\pi,\\
+\cos(\cos^{-1}x)&=x&&-1\le x\le1.
+\end{align*}
+Hàm $\cos^{-1}$ có tập xác định $[-1,1]$, tập giá trị $[0,\pi]$; đồ thị ở Hình 22.
+\fig[.46]{f22}{Hình 22. $y=\cos^{-1}x=\arccos x$.}
+Hàm tang trở thành đơn ánh khi hạn chế vào $(-\pi/2,\pi/2)$. Hàm ngược của $f(x)=\tan x$ trên khoảng đó là \textbf{hàm tang ngược}, ký hiệu $\tan^{-1}$ hay $\arctan$ (Hình 23):
+\[\tan^{-1}x=y\quad\Longleftrightarrow\quad\tan y=x\ \text{và}\ -\frac\pi2<y<\frac\pi2.\]
+\fig[.40]{f23}{Hình 23. $y=\tan x$ trên $(-\pi/2,\pi/2)$.}
+
+\ex{14} Rút gọn $\cos(\tan^{-1}x)$.
+\par\noindent\textit{Cách giải 1.} Đặt $y=\tan^{-1}x$, nên $\tan y=x$ và $-\pi/2<y<\pi/2$. Muốn tìm $\cos y$, trước hết tìm $\sec y$:
+\[\sec^2y=1+\tan^2y=1+x^2,\qquad\sec y=\sqrt{1+x^2},\]
+vì $\sec y>0$ trên $(-\pi/2,\pi/2)$. Do đó,
+\[\cos(\tan^{-1}x)=\cos y=\frac1{\sec y}=\frac1{\sqrt{1+x^2}}.\]
+\par\noindent\textit{Cách giải 2.} Có thể dùng hình vẽ thay cho các đẳng thức lượng giác. Nếu $y=\tan^{-1}x$, thì $\tan y=x$. Từ Hình 24, minh họa trường hợp $y>0$, ta đọc được
+\[\cos(\tan^{-1}x)=\cos y=\frac1{\sqrt{1+x^2}}.\]
+\fig[.36]{f24}{Hình 24. Tam giác vuông minh họa Ví dụ 14 khi $y>0$.}
+Hàm $\tan^{-1}=\arctan$ có tập xác định $\mathbb R$, tập giá trị $(-\pi/2,\pi/2)$; đồ thị ở Hình 25.
+\fig[.40]{f25}{Hình 25. $y=\tan^{-1}x=\arctan x$.}
+Các đường $x=\pm\pi/2$ là tiệm cận đứng của đồ thị tang. Vì đồ thị $\tan^{-1}$ là ảnh đối xứng của đồ thị tang bị hạn chế qua $y=x$, các đường $y=\pi/2$ và $y=-\pi/2$ là tiệm cận ngang của đồ thị tang ngược.
+
+Các hàm lượng giác ngược còn lại ít được dùng hơn và được tóm tắt dưới đây.
+\group{12. Các hàm côsec ngược, sec ngược và côtang ngược}
+\begin{align*}
+y=\csc^{-1}x\ (|x|\ge1)&\Longleftrightarrow\csc y=x,\\
+&\quad y\in(0,\pi/2]\cup(\pi,3\pi/2];\\[4pt]
+y=\sec^{-1}x\ (|x|\ge1)&\Longleftrightarrow\sec y=x,\\
+&\quad y\in[0,\pi/2)\cup[\pi,3\pi/2);\\[4pt]
+y=\cot^{-1}x\ (x\in\mathbb R)&\Longleftrightarrow\cot y=x,\\
+&\quad y\in(0,\pi).
+\end{align*}
+Việc chọn các khoảng cho $y$ trong định nghĩa $\csc^{-1}$ và $\sec^{-1}$ không thống nhất ở mọi tài liệu. Chẳng hạn, một số tác giả dùng $y\in[0,\pi/2)\cup(\pi/2,\pi]$ khi định nghĩa $\sec^{-1}$. Hình 26 cho thấy cả lựa chọn đó và lựa chọn trong (12) đều phù hợp.
+\fig[.36]{f26}{Hình 26. Đồ thị $y=\sec x$.}
+
+\section*{1.5. Bài tập}
+\bt{1} (a) Hàm số đơn ánh là gì? (b) Làm thế nào nhận biết một hàm có đơn ánh hay không từ đồ thị?
+\bt{2} (a) Cho $f$ đơn ánh, tập xác định $A$, tập giá trị $B$. Hàm ngược $f^{-1}$ được định nghĩa như thế nào? Tập xác định và tập giá trị của nó là gì? (b) Khi biết công thức của $f$, tìm công thức $f^{-1}$ bằng cách nào? (c) Khi biết đồ thị của $f$, dựng đồ thị $f^{-1}$ bằng cách nào?
+\group{3–16. Cho hàm số bằng bảng, đồ thị, công thức hoặc mô tả bằng lời. Xác định hàm có đơn ánh hay không.}
+\bt{3} Bảng giá trị:
+\begin{center}\begin{tabular}{c|rrrrrr}\toprule$x$&1&2&3&4&5&6\\\midrule$f(x)$&1.5&2.0&3.6&5.3&2.8&2.0\\\bottomrule\end{tabular}\end{center}
+\bt{4} Bảng giá trị:
+\begin{center}\begin{tabular}{c|rrrrrr}\toprule$x$&1&2&3&4&5&6\\\midrule$f(x)$&1.0&1.9&2.8&3.5&3.1&2.9\\\bottomrule\end{tabular}\end{center}
+\fig[.82]{e05_08}{Đồ thị cho Bài tập 5–8, theo đúng các nhãn trong hình.}
+\bt{9} $f(x)=2x-3$.
+\bt{10} $f(x)=x^4-16$.
+\bt{11} $r(t)=t^3+4$.
+\bt{12} $g(x)=\sqrt[3]x$.
+\bt{13} $g(x)=1-\sin x$.
+\bt{14} $f(x)=x^4-1$, $0\le x\le10$.
+\bt{15} $f(t)$ là độ cao quả bóng bầu dục sau khi được đá đi $t$ giây.
+\bt{16} $f(t)$ là chiều cao của bạn ở tuổi $t$.
+\bt{17} Giả sử $f$ đơn ánh. (a) Nếu $f(6)=17$, $f^{-1}(17)$ bằng bao nhiêu? (b) Nếu $f^{-1}(3)=2$, $f(2)$ bằng bao nhiêu?
+\bt{18} Cho $f(x)=x^5+x^3+x$. Tìm $f^{-1}(3)$ và $f(f^{-1}(2))$.
+\bt{19} Cho $g(x)=3+x+e^x$. Tìm $g^{-1}(4)$.
+\bt{20} Cho đồ thị $f$. (a) Vì sao $f$ đơn ánh? (b) Tập xác định và tập giá trị của $f^{-1}$ là gì? (c) Tìm $f^{-1}(2)$. (d) Ước lượng $f^{-1}(0)$.
+\fig[.42]{e20}{Đồ thị cho Bài tập 20.}
+\bt{21} Công thức $C=\frac59(F-32)$, $F\ge-459.67$, biểu diễn nhiệt độ Celsius $C$ theo Fahrenheit $F$. Tìm công thức hàm ngược và diễn giải. Tập xác định của hàm ngược là gì?
+\bt{22} Theo thuyết tương đối, khối lượng của hạt có tốc độ $v$ là
+\[m=f(v)=\frac{m_0}{\sqrt{1-v^2/c^2}},\]
+trong đó $m_0$ là khối lượng nghỉ, $c$ là tốc độ ánh sáng trong chân không. Tìm hàm ngược và giải thích ý nghĩa.
+\group{23–30. Tìm công thức hàm ngược.}
+\bt{23} $f(x)=1-x^2$, $x\ge0$.
+\bt{24} $g(x)=x^2-2x$, $x\ge1$.
+\bt{25} $g(x)=2+\sqrt{x+1}$.
+\bt{26} $h(x)=\dfrac{6-3x}{5x+7}$.
+\bt{27} $y=e^{1-x}$.
+\bt{28} $y=3\ln(x-2)$.
+\bt{29} $y=(2+\sqrt[3]x)^5$.
+\bt{30} $y=\dfrac{1-e^{-x}}{1+e^{-x}}$.
+\group{31–32. Tìm công thức tường minh của $f^{-1}$ rồi vẽ $f^{-1}$, $f$ và $y=x$ trên cùng màn hình. Kiểm tra hai đồ thị $f$, $f^{-1}$ đối xứng qua đường thẳng đó.}
+\bt{31} $f(x)=\sqrt{4x+3}$.
+\bt{32} $f(x)=1+e^{-x}$.
+\group{33–34. Dùng đồ thị $f$ đã cho để phác họa đồ thị $f^{-1}$.}
+\fig[.80]{e33_34}{Đồ thị cho Bài tập 33 (trái) và 34 (phải).}
+\bt{35} Cho $f(x)=\sqrt{1-x^2}$, $0\le x\le1$. (a) Tìm $f^{-1}$. Nó liên hệ thế nào với $f$? (b) Nhận dạng đồ thị $f$ và giải thích câu trả lời ở (a).
+\bt{36} Cho $g(x)=\sqrt[3]{1-x^3}$. (a) Tìm $g^{-1}$ và mối liên hệ với $g$. (b) Vẽ $g$ và giải thích kết quả ở (a).
+\bt{37} (a) Hàm lôgarit $y=\log_bx$ được định nghĩa thế nào? (b) Tập xác định là gì? (c) Tập giá trị là gì? (d) Phác họa dạng tổng quát của đồ thị khi $b>1$.
+\bt{38} (a) Lôgarit tự nhiên là gì? (b) Lôgarit thập phân là gì? (c) Phác họa trên cùng hệ trục đồ thị hàm lôgarit tự nhiên và hàm số mũ tự nhiên.
+\group{39–42. Tính giá trị chính xác của mỗi biểu thức.}
+\bt{39} (a) $\log_3 81$; (b) $\log_3(1/81)$; (c) $\log_9 3$.
+\bt{40} (a) $\ln(1/e^2)$; (b) $\ln\sqrt e$; (c) $\ln\left(\ln e^{e^{50}}\right)$.
+\bt{41} (a) $\log_2 30-\log_2 15$; (b) $\log_3 10-\log_3 5-\log_3 18$; (c) $2\log_5 100-4\log_5 50$.
+\bt{42} (a) $e^{3\ln2}$; (b) $e^{-2\ln5}$; (c) $e^{\ln(\ln e^3)}$.
+\group{43–44. Khai triển bằng các quy tắc lôgarit.}
+\bt{43} (a) $\log_{10}(x^2y^3z)$; (b) $\displaystyle\ln\left(\frac{x^4}{\sqrt{x^2-4}}\right)$.
+\bt{44} (a) $\displaystyle\ln\sqrt{\frac{3x}{x-3}}$; (b) $\displaystyle\log_2\left[(x^3+1)\sqrt[3]{(x-3)^2}\right]$.
+\group{45–46. Biểu diễn thành một lôgarit duy nhất.}
+\bt{45} (a) $\log_{10}20-\frac13\log_{10}1000$; (b) $\ln a-2\ln b+3\ln c$.
+\bt{46} (a) $3\ln(x-2)-\ln(x^2-5x+6)+2\ln(x-3)$; (b) $c\log_a x-d\log_a y+\log_a z$.
+\group{47–48. Dùng Công thức 11 tính chính xác đến sáu chữ số thập phân.}
+\bt{47} (a) $\log_5 10$; (b) $\log_{15}12$.
+\bt{48} (a) $\log_3 12$; (b) $\log_{12}6$.
+\group{49–50. Dùng Công thức 11 vẽ các hàm trên cùng màn hình. Các đồ thị liên hệ thế nào?}
+\bt{49} $y=\log_{1.5}x$, $y=\ln x$, $y=\log_{10}x$, $y=\log_{50}x$.
+\bt{50} $y=\ln x$, $y=\log_8x$, $y=e^x$, $y=8^x$.
+\bt{51} Đồ thị $y=\log_2x$ được vẽ trên hệ trục có đơn vị 1 inch. Phải đi sang phải bao nhiêu dặm từ gốc tọa độ để độ cao đường cong đạt 3 ft?
+\bt{52} So sánh $f(x)=x^{0.1}$ và $g(x)=\ln x$ trong nhiều cửa sổ vẽ. Từ khi nào đồ thị $f$ vượt lên trên $g$ và tiếp tục ở phía trên?
+\group{53–54. Phác họa bằng tay, dùng Hình 12–13 và các phép biến đổi ở §1.3 khi cần.}
+\bt{53} (a) $y=\log_{10}(x+5)$; (b) $y=-\ln x$.
+\bt{54} (a) $y=\ln(-x)$; (b) $y=\ln|x|$.
+\group{55–56. (a) Tìm tập xác định và tập giá trị. (b) Tìm giao điểm đồ thị với trục $x$. (c) Phác họa đồ thị.}
+\bt{55} $f(x)=\ln x+2$.
+\bt{56} $f(x)=\ln(x-1)-1$.
+\group{57–60. Giải từng phương trình theo $x$, cho nghiệm chính xác và gần đúng đến ba chữ số thập phân.}
+\bt{57} (a) $\ln(4x+2)=3$; (b) $e^{2x-3}=12$.
+\bt{58} (a) $\log_2(x^2-x-1)=2$; (b) $1+e^{4x+1}=20$.
+\bt{59} (a) $\ln x+\ln(x-1)=0$; (b) $5^{1-2x}=9$.
+\bt{60} (a) $\ln(\ln x)=0$; (b) $\dfrac{60}{1+e^{-x}}=4$.
+\group{61–62. Giải từng bất phương trình theo $x$.}
+\bt{61} (a) $\ln x<0$; (b) $e^x>5$.
+\bt{62} (a) $1<e^{3x-1}<2$; (b) $1-2\ln x<3$.
+\bt{63} (a) Tìm tập xác định $f(x)=\ln(e^x-3)$. (b) Tìm $f^{-1}$ và tập xác định của nó.
+\bt{64} (a) Các giá trị $e^{\ln300}$, $\ln(e^{300})$ là gì? (b) Dùng máy tính tính chúng. Bạn nhận thấy điều gì? Giải thích vì sao máy tính có thể gặp khó khăn.
+\bt{65} Vẽ $f(x)=\sqrt[3]{x^3+x^2+x+1}$ và giải thích vì sao hàm đơn ánh. Dùng hệ thống đại số máy tính (CAS) tìm biểu thức tường minh của $f^{-1}(x)$. CAS sẽ cho ba biểu thức có thể có; giải thích vì sao hai biểu thức không phù hợp trong ngữ cảnh này.
+\bt{66} (a) Với $g(x)=x^6+x^4$, $x\ge0$, dùng CAS tìm $g^{-1}(x)$. (b) Dùng kết quả để vẽ $y=g(x)$, $y=x$, $y=g^{-1}(x)$ trên cùng màn hình.
+\bt{67} Một quần thể bắt đầu với 100 vi khuẩn và tăng gấp đôi sau mỗi ba giờ, nên sau $t$ giờ có $n=f(t)=100\cdot2^{t/3}$. (a) Tìm hàm ngược và diễn giải. (b) Khi nào quần thể đạt 50\,000?
+\bt{68} Cơ sở Đánh lửa Quốc gia tại Phòng thí nghiệm Quốc gia Lawrence Livermore được sách giới thiệu là cơ sở laser lớn nhất thế giới. Laser dùng để khởi phát phản ứng nhiệt hạch được cấp năng lượng bởi bộ tụ lưu trữ tổng cộng khoảng 400 MJ. Khi laser phát xung, các tụ phóng điện hoàn toàn rồi lập tức nạp lại. Điện tích $Q$ sau khi phóng $t$ giây được cho bởi
+\[Q(t)=Q_0(1-e^{-t/a}),\]
+trong đó $Q_0$ là điện tích cực đại và $t$ tính bằng giây. (a) Tìm công thức hàm ngược và giải thích ý nghĩa. (b) Nếu $a=50$, mất bao lâu để nạp đến 90\% điện tích cực đại?
+\group{69–74. Tính giá trị chính xác.}
+\bt{69} (a) $\cos^{-1}(-1)$; (b) $\sin^{-1}(0.5)$.
+\bt{70} (a) $\tan^{-1}\sqrt3$; (b) $\arctan(-1)$.
+\bt{71} (a) $\csc^{-1}\sqrt2$; (b) $\arcsin1$.
+\bt{72} (a) $\sin^{-1}(-1/\sqrt2)$; (b) $\cos^{-1}(\sqrt3/2)$.
+\bt{73} (a) $\cot^{-1}(-\sqrt3)$; (b) $\sec^{-1}2$.
+\bt{74} (a) $\arcsin(\sin(5\pi/4))$; (b) $\cos\left(2\sin^{-1}(5/13)\right)$.
+\bt{75} Chứng minh $\cos(\sin^{-1}x)=\sqrt{1-x^2}$.
+\group{76–78. Rút gọn biểu thức.}
+\bt{76} $\tan(\sin^{-1}x)$.
+\bt{77} $\sin(\tan^{-1}x)$.
+\bt{78} $\sin(2\arccos x)$.
+\group{79–80. Vẽ các hàm trên cùng màn hình. Các đồ thị liên hệ thế nào?}
+\bt{79} $y=\sin x$, $-\pi/2\le x\le\pi/2$; $y=\sin^{-1}x$; $y=x$.
+\bt{80} $y=\tan x$, $-\pi/2<x<\pi/2$; $y=\tan^{-1}x$; $y=x$.
+\bt{81} Tìm tập xác định và tập giá trị của $g(x)=\sin^{-1}(3x+1)$.
+\bt{82} (a) Vẽ $f(x)=\sin(\sin^{-1}x)$ và giải thích hình dạng đồ thị. (b) Vẽ $g(x)=\sin^{-1}(\sin x)$. Giải thích hình dạng đồ thị này.
+\bt{83} (a) Khi tịnh tiến một đường cong sang trái, ảnh đối xứng của nó qua $y=x$ thay đổi thế nào? Dựa vào nguyên lý hình học đó, tìm biểu thức hàm ngược của $g(x)=f(x+c)$, với $f$ đơn ánh. (b) Tìm hàm ngược của $h(x)=f(cx)$, $c\ne0$.
+
+\clearpage
+\section*{Ghi chú biên tập}
+\noindent\textit{Nội dung bổ sung, không thuộc nguyên bản.}
+\begin{enumerate}[leftmargin=*,itemsep=5pt]
+\item Trong Ví dụ 9, bước $\ln x^2=2\ln x$ cần $x>0$. Biểu thức ban đầu có tập xác định $(-1/3,0)\cup(0,\infty)$. Trên toàn tập này, khai triển đúng là
+\[2\ln|x|+\frac12\ln(x^2+2)-\ln(3x+1).\]
+Bản dịch giữ phép biến đổi của sách và nêu riêng điều kiện còn thiếu.
+\item Công thức (10), các quy tắc lôgarit và Công thức 11 phải dùng với đối số dương; cơ số thỏa $b>0$, $b\ne1$.
+\item Các nhánh $\csc^{-1}$, $\sec^{-1}$ ở (12) được giữ theo sách. Do các tài liệu có thể dùng nhánh khác, phải kiểm tra khoảng giá trị trước khi tính hoặc so sánh kết quả.
+\item Bài tập 22 dùng tốc độ, nên hiểu miền vật lý là $0\le v<c$ với $m_0>0$; nếu xem $v$ là vận tốc có dấu trên $(-c,c)$, hàm chẵn và không đơn ánh trên toàn miền đó.
+\item Bài tập 64 phản ánh giới hạn số học của máy tính: kết quả thực tế có thể phụ thuộc thiết bị, phần mềm và cách xử lý lôgarit–hàm mũ; các đẳng thức toán học vẫn đúng.
+\end{enumerate}
+\section*{Thuật ngữ bổ sung từ §1.5}
+\begingroup\small
+\begin{longtable}{p{.43\linewidth}p{.49\linewidth}}\toprule Tiếng Anh&Tiếng Việt thống nhất\\\midrule\endhead
+one-to-one function&hàm số đơn ánh\\
+horizontal line test&tiêu chuẩn đường thẳng ngang\\
+restriction of the domain&hạn chế tập xác định\\
+cancellation equations&các đẳng thức khử\\
+common logarithm&lôgarit thập phân\\
+natural logarithm&lôgarit tự nhiên\\
+laws of logarithms&các quy tắc lôgarit\\
+change of base formula&công thức đổi cơ số\\
+vertical asymptote&tiệm cận đứng\\
+inverse trigonometric function&hàm lượng giác ngược\\
+inverse sine function&hàm sin ngược; hàm arcsin\\
+inverse cosine function&hàm côsin ngược; hàm arccos\\
+inverse tangent function&hàm tang ngược; hàm arctan\\
+inverse cosecant function&hàm côsec ngược\\
+inverse secant function&hàm sec ngược\\
+inverse cotangent function&hàm côtang ngược\\
+computer algebra system&hệ thống đại số máy tính\\
+exact value&giá trị chính xác\\
+\bottomrule\end{longtable}
+\endgroup
+\noindent\textbf{Phạm vi hoàn thành:} Trọn §1.5, gồm 14 ví dụ, 26 hình, 2 bảng và 83 bài tập. Giữ các mục đánh số (1)–(12), các cách giải và chứng minh công thức đổi cơ số. Phần tiếp theo: \textit{Ôn tập Chương 1}, bắt đầu ở trang in 67.
+\end{document}
