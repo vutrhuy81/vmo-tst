@@ -1,0 +1,292 @@
+{
+  "bookKey": "stewart-9",
+  "sectionKey": "1-3",
+  "heading": "1.3. Bài tập",
+  "sourceSha256": "65a416112d819ab4d07ed95839253b9e51f451bea37c9c442aabdd3d806881ea",
+  "exercises": [
+    {
+      "number": 1,
+      "content": "<p><strong>1.</strong>&nbsp; Giả sử đã cho đồ thị <span class=\"math inline\">\\(f\\)</span>. Viết phương trình của đồ thị nhận được\nkhi: (a) Tịnh tiến lên 3 đơn vị. (b) Tịnh tiến xuống 3 đơn vị. (c) Tịnh\ntiến sang phải 3 đơn vị. (d) Tịnh tiến sang trái 3 đơn vị. (e) Lấy đối\nxứng qua trục <span class=\"math inline\">\\(x\\)</span>. (f) Lấy đối xứng\nqua trục <span class=\"math inline\">\\(y\\)</span>. (g) Giãn theo phương\nthẳng đứng với hệ số 3. (h) Co theo phương thẳng đứng, tung độ còn <span class=\"math inline\">\\(1/3\\)</span> lần.</p>"
+    },
+    {
+      "number": 2,
+      "content": "<p><strong>2.</strong>&nbsp; Giải thích cách thu được mỗi đồ thị sau từ <span class=\"math inline\">\\(y=f(x)\\)</span>: (a) <span class=\"math inline\">\\(y=f(x)+8\\)</span>; (b) <span class=\"math inline\">\\(y=f(x+8)\\)</span>; (c) <span class=\"math inline\">\\(y=8f(x)\\)</span>; (d) <span class=\"math inline\">\\(y=f(8x)\\)</span>; (e) <span class=\"math inline\">\\(y=-f(x)-1\\)</span>; (f) <span class=\"math inline\">\\(y=8f(x/8)\\)</span>.</p>"
+    },
+    {
+      "number": 3,
+      "content": "<p><strong>3.</strong>&nbsp; Cho đồ thị <span class=\"math inline\">\\(y=f(x)\\)</span>. Ghép mỗi phương trình với đồ thị\ntương ứng và giải thích: (a) <span class=\"math inline\">\\(y=f(x-4)\\)</span>; (b) <span class=\"math inline\">\\(y=f(x)+3\\)</span>; (c) <span class=\"math inline\">\\(y=\\frac13f(x)\\)</span>; (d) <span class=\"math inline\">\\(y=-f(x+4)\\)</span>; (e) <span class=\"math inline\">\\(y=2f(x+6)\\)</span>.</p>\n<div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-1-3-65a41611/e03.png\" alt=\"image\"><br>\n<span>Đồ thị cho Bài tập 3, với các nhãn số 1–5 khoanh tròn theo bản\ngốc.</span></p>\n</div>"
+    },
+    {
+      "number": 4,
+      "content": "<p><strong>4.</strong>&nbsp; Từ đồ thị <span class=\"math inline\">\\(f\\)</span>\nđã cho, vẽ: (a) <span class=\"math inline\">\\(y=f(x)-3\\)</span>; (b) <span class=\"math inline\">\\(y=f(x+1)\\)</span>; (c) <span class=\"math inline\">\\(y=\\frac12f(x)\\)</span>; (d) <span class=\"math inline\">\\(y=-f(x)\\)</span>.</p>\n<div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-1-3-65a41611/e04.png\" alt=\"image\"><br>\n<span>Đồ thị cho Bài tập 4.</span></p>\n</div>"
+    },
+    {
+      "number": 5,
+      "content": "<p><strong>5.</strong>&nbsp; Dùng đồ thị <span class=\"math inline\">\\(f\\)</span> đã cho để vẽ: (a) <span class=\"math inline\">\\(y=f(2x)\\)</span>; (b) <span class=\"math inline\">\\(y=f(x/2)\\)</span>; (c) <span class=\"math inline\">\\(y=f(-x)\\)</span>; (d) <span class=\"math inline\">\\(y=-f(-x)\\)</span>.</p>\n<div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-1-3-65a41611/e05.png\" alt=\"image\"><br>\n<span>Đồ thị cho Bài tập 5.</span></p>\n</div>"
+    },
+    {
+      "number": 6,
+      "content": "<p><strong>Bài tập 6 — hình bên trái.</strong></p><p><strong>6–7. Cho đồ thị <span class=\"math inline\">\\(y=\\sqrt{3x-x^2}\\)</span>. Dùng các phép biến đổi\nđể tạo hàm số có đồ thị như các hình yêu cầu.</strong></p>\n<div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-1-3-65a41611/e06_07_base.png\" alt=\"image\"><br>\n<span>Đồ thị xuất phát cho Bài tập 6–7.</span></p>\n</div>\n<div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-1-3-65a41611/e06_07.png\" alt=\"image\"><br>\n<span>Các đồ thị cần tạo trong Bài tập 6 (trái) và 7 (phải).</span></p>\n</div>"
+    },
+    {
+      "number": 7,
+      "content": "<p><strong>Bài tập 7 — hình bên phải.</strong></p><p><strong>6–7. Cho đồ thị <span class=\"math inline\">\\(y=\\sqrt{3x-x^2}\\)</span>. Dùng các phép biến đổi\nđể tạo hàm số có đồ thị như các hình yêu cầu.</strong></p>\n<div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-1-3-65a41611/e06_07_base.png\" alt=\"image\"><br>\n<span>Đồ thị xuất phát cho Bài tập 6–7.</span></p>\n</div>\n<div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-1-3-65a41611/e06_07.png\" alt=\"image\"><br>\n<span>Các đồ thị cần tạo trong Bài tập 6 (trái) và 7 (phải).</span></p>\n</div>"
+    },
+    {
+      "number": 8,
+      "content": "<p><strong>8.</strong>&nbsp; (a) Đồ thị <span class=\"math inline\">\\(y=1+\\sqrt\nx\\)</span> liên hệ thế nào với đồ thị <span class=\"math inline\">\\(y=\\sqrt x\\)</span>? Dùng câu trả lời và Hình 4(a)\nđể phác họa <span class=\"math inline\">\\(y=1+\\sqrt x\\)</span>. (b) Đồ thị\n<span class=\"math inline\">\\(y=5\\sin\\pi x\\)</span> liên hệ thế nào với\n<span class=\"math inline\">\\(y=\\sin x\\)</span>? Dùng câu trả lời và Hình\n6 để phác họa <span class=\"math inline\">\\(y=5\\sin\\pi x\\)</span>.</p><div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-1-3-65a41611/f04.png\" alt=\"image\"><br>\n<span>Hình 4. (a) <span class=\"math inline\">\\(y=\\sqrt x\\)</span>; (b)\n<span class=\"math inline\">\\(y=\\sqrt x-2\\)</span>; (c) <span class=\"math inline\">\\(y=\\sqrt{x-2}\\)</span>;<br>\n(d) <span class=\"math inline\">\\(y=-\\sqrt x\\)</span>; (e) <span class=\"math inline\">\\(y=2\\sqrt x\\)</span>; (f) <span class=\"math inline\">\\(y=\\sqrt{-x}\\)</span>.</span></p>\n</div><div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-1-3-65a41611/f06.png\" alt=\"image\"><br>\n<span>Hình 6. Đồ thị <span class=\"math inline\">\\(y=\\sin\nx\\)</span>.</span></p>\n</div>"
+    },
+    {
+      "number": 9,
+      "content": "<p><strong>9–26. Vẽ đồ thị bằng tay bằng cách xuất phát từ một hàm cơ\nbản ở Bảng 1.2.3, rồi áp dụng các phép biến đổi thích hợp; không vẽ bằng\ncách lập bảng điểm.</strong></p><p><strong>9.</strong>&nbsp; <span class=\"math inline\">\\(y=1+x^2\\)</span>.</p>"
+    },
+    {
+      "number": 10,
+      "content": "<p><strong>9–26. Vẽ đồ thị bằng tay bằng cách xuất phát từ một hàm cơ\nbản ở Bảng 1.2.3, rồi áp dụng các phép biến đổi thích hợp; không vẽ bằng\ncách lập bảng điểm.</strong></p><p><strong>10.</strong>&nbsp; <span class=\"math inline\">\\(y=(x+1)^2\\)</span>.</p>"
+    },
+    {
+      "number": 11,
+      "content": "<p><strong>9–26. Vẽ đồ thị bằng tay bằng cách xuất phát từ một hàm cơ\nbản ở Bảng 1.2.3, rồi áp dụng các phép biến đổi thích hợp; không vẽ bằng\ncách lập bảng điểm.</strong></p><p><strong>11.</strong>&nbsp; <span class=\"math inline\">\\(y=|x+2|\\)</span>.</p>"
+    },
+    {
+      "number": 12,
+      "content": "<p><strong>9–26. Vẽ đồ thị bằng tay bằng cách xuất phát từ một hàm cơ\nbản ở Bảng 1.2.3, rồi áp dụng các phép biến đổi thích hợp; không vẽ bằng\ncách lập bảng điểm.</strong></p><p><strong>12.</strong>&nbsp; <span class=\"math inline\">\\(y=1-x^3\\)</span>.</p>"
+    },
+    {
+      "number": 13,
+      "content": "<p><strong>9–26. Vẽ đồ thị bằng tay bằng cách xuất phát từ một hàm cơ\nbản ở Bảng 1.2.3, rồi áp dụng các phép biến đổi thích hợp; không vẽ bằng\ncách lập bảng điểm.</strong></p><p><strong>13.</strong>&nbsp; <span class=\"math inline\">\\(y=\\dfrac1x+2\\)</span>.</p>"
+    },
+    {
+      "number": 14,
+      "content": "<p><strong>9–26. Vẽ đồ thị bằng tay bằng cách xuất phát từ một hàm cơ\nbản ở Bảng 1.2.3, rồi áp dụng các phép biến đổi thích hợp; không vẽ bằng\ncách lập bảng điểm.</strong></p><p><strong>14.</strong>&nbsp; <span class=\"math inline\">\\(y=-\\sqrt\nx-1\\)</span>.</p>"
+    },
+    {
+      "number": 15,
+      "content": "<p><strong>9–26. Vẽ đồ thị bằng tay bằng cách xuất phát từ một hàm cơ\nbản ở Bảng 1.2.3, rồi áp dụng các phép biến đổi thích hợp; không vẽ bằng\ncách lập bảng điểm.</strong></p><p><strong>15.</strong>&nbsp; <span class=\"math inline\">\\(y=\\sin4x\\)</span>.</p>"
+    },
+    {
+      "number": 16,
+      "content": "<p><strong>9–26. Vẽ đồ thị bằng tay bằng cách xuất phát từ một hàm cơ\nbản ở Bảng 1.2.3, rồi áp dụng các phép biến đổi thích hợp; không vẽ bằng\ncách lập bảng điểm.</strong></p><p><strong>16.</strong>&nbsp; <span class=\"math inline\">\\(y=1+\\dfrac1{x^2}\\)</span>.</p>"
+    },
+    {
+      "number": 17,
+      "content": "<p><strong>9–26. Vẽ đồ thị bằng tay bằng cách xuất phát từ một hàm cơ\nbản ở Bảng 1.2.3, rồi áp dụng các phép biến đổi thích hợp; không vẽ bằng\ncách lập bảng điểm.</strong></p><p><strong>17.</strong>&nbsp; <span class=\"math inline\">\\(y=2+\\sqrt{x+1}\\)</span>.</p>"
+    },
+    {
+      "number": 18,
+      "content": "<p><strong>9–26. Vẽ đồ thị bằng tay bằng cách xuất phát từ một hàm cơ\nbản ở Bảng 1.2.3, rồi áp dụng các phép biến đổi thích hợp; không vẽ bằng\ncách lập bảng điểm.</strong></p><p><strong>18.</strong>&nbsp; <span class=\"math inline\">\\(y=-(x-1)^2+3\\)</span>.</p>"
+    },
+    {
+      "number": 19,
+      "content": "<p><strong>9–26. Vẽ đồ thị bằng tay bằng cách xuất phát từ một hàm cơ\nbản ở Bảng 1.2.3, rồi áp dụng các phép biến đổi thích hợp; không vẽ bằng\ncách lập bảng điểm.</strong></p><p><strong>19.</strong>&nbsp; <span class=\"math inline\">\\(y=x^2-2x+5\\)</span>.</p>"
+    },
+    {
+      "number": 20,
+      "content": "<p><strong>9–26. Vẽ đồ thị bằng tay bằng cách xuất phát từ một hàm cơ\nbản ở Bảng 1.2.3, rồi áp dụng các phép biến đổi thích hợp; không vẽ bằng\ncách lập bảng điểm.</strong></p><p><strong>20.</strong>&nbsp; <span class=\"math inline\">\\(y=(x+1)^3+2\\)</span>.</p>"
+    },
+    {
+      "number": 21,
+      "content": "<p><strong>9–26. Vẽ đồ thị bằng tay bằng cách xuất phát từ một hàm cơ\nbản ở Bảng 1.2.3, rồi áp dụng các phép biến đổi thích hợp; không vẽ bằng\ncách lập bảng điểm.</strong></p><p><strong>21.</strong>&nbsp; <span class=\"math inline\">\\(y=2-|x|\\)</span>.</p>"
+    },
+    {
+      "number": 22,
+      "content": "<p><strong>9–26. Vẽ đồ thị bằng tay bằng cách xuất phát từ một hàm cơ\nbản ở Bảng 1.2.3, rồi áp dụng các phép biến đổi thích hợp; không vẽ bằng\ncách lập bảng điểm.</strong></p><p><strong>22.</strong>&nbsp; <span class=\"math inline\">\\(y=2-2\\cos\nx\\)</span>.</p>"
+    },
+    {
+      "number": 23,
+      "content": "<p><strong>9–26. Vẽ đồ thị bằng tay bằng cách xuất phát từ một hàm cơ\nbản ở Bảng 1.2.3, rồi áp dụng các phép biến đổi thích hợp; không vẽ bằng\ncách lập bảng điểm.</strong></p><p><strong>23.</strong>&nbsp; <span class=\"math inline\">\\(y=3\\sin\\frac12x+1\\)</span>.</p>"
+    },
+    {
+      "number": 24,
+      "content": "<p><strong>9–26. Vẽ đồ thị bằng tay bằng cách xuất phát từ một hàm cơ\nbản ở Bảng 1.2.3, rồi áp dụng các phép biến đổi thích hợp; không vẽ bằng\ncách lập bảng điểm.</strong></p><p><strong>24.</strong>&nbsp; <span class=\"math inline\">\\(y=\\frac14\\tan\\left(x-\\frac\\pi4\\right)\\)</span>.</p>"
+    },
+    {
+      "number": 25,
+      "content": "<p><strong>9–26. Vẽ đồ thị bằng tay bằng cách xuất phát từ một hàm cơ\nbản ở Bảng 1.2.3, rồi áp dụng các phép biến đổi thích hợp; không vẽ bằng\ncách lập bảng điểm.</strong></p><p><strong>25.</strong>&nbsp; <span class=\"math inline\">\\(y=|\\cos\\pi\nx|\\)</span>.</p>"
+    },
+    {
+      "number": 26,
+      "content": "<p><strong>9–26. Vẽ đồ thị bằng tay bằng cách xuất phát từ một hàm cơ\nbản ở Bảng 1.2.3, rồi áp dụng các phép biến đổi thích hợp; không vẽ bằng\ncách lập bảng điểm.</strong></p><p><strong>26.</strong>&nbsp; <span class=\"math inline\">\\(y=|\\sqrt\nx-1|\\)</span>.</p>"
+    },
+    {
+      "number": 27,
+      "content": "<p><strong>27.</strong>&nbsp; New Orleans ở vĩ độ <span class=\"math inline\">\\(30^\\circ\\)</span> Bắc. Dùng Hình 9 để tìm hàm số\nmô hình hóa số giờ có ánh sáng ban ngày tại đây theo thời điểm trong\nnăm. Kiểm tra độ chính xác bằng thông tin: ngày 31 tháng Ba, Mặt Trời\nmọc lúc 5 giờ 51 phút và lặn lúc 18 giờ 18 phút.</p><div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-1-3-65a41611/f09.png\" alt=\"image\"><br>\n<span>Hình 9. Độ dài ban ngày từ 21 tháng Ba đến 21 tháng Mười Hai ở các\nvĩ độ.<br>\nHours: giờ; N: Bắc; Mar.–Dec.: các tháng Ba–Mười Hai.<br>\nNguồn: phỏng theo L. Harrison, <em>Daylight, Twilight, Darkness and\nTime</em><br>\n(New York: Silver, Burdett, 1935), tr. 40.</span></p>\n</div>"
+    },
+    {
+      "number": 28,
+      "content": "<p><strong>28.</strong>&nbsp; Sao biến quang là ngôi sao có độ sáng tăng giảm\nluân phiên. Với Delta Cephei, ngôi sao biến quang dễ quan sát nhất, thời\ngian giữa hai lần sáng cực đại là <span class=\"math inline\">\\(5.4\\)</span> ngày; độ sáng trung bình (cấp sao) là\n<span class=\"math inline\">\\(4.0\\)</span>, biến thiên <span class=\"math inline\">\\(\\pm0.35\\)</span> cấp sao. Tìm hàm mô hình hóa độ\nsáng của Delta Cephei theo thời gian.</p>"
+    },
+    {
+      "number": 29,
+      "content": "<p><strong>29.</strong>&nbsp; Một số mức thủy triều cao nhất thế giới xuất\nhiện tại vịnh Fundy, bờ Đại Tây Dương của Canada. Ở Hopewell Cape, độ\nsâu nước khi triều thấp khoảng <span class=\"math inline\">\\(2.0\\)</span>\nm, khi triều cao khoảng <span class=\"math inline\">\\(12.0\\)</span> m. Chu\nkỳ dao động tự nhiên khoảng 12 giờ; trong một ngày cụ thể, triều cao xảy\nra lúc 6 giờ 45 phút. Tìm hàm có chứa côsin mô hình hóa độ sâu <span class=\"math inline\">\\(D(t)\\)</span> (m) theo thời gian <span class=\"math inline\">\\(t\\)</span> (giờ kể từ nửa đêm) trong ngày đó.</p>"
+    },
+    {
+      "number": 30,
+      "content": "<p><strong>30.</strong>&nbsp; Trong một chu kỳ hô hấp bình thường, thể tích\nkhí ra vào phổi khoảng 500 mL. Thể tích khí dự trữ và khí cặn còn trong\nphổi khoảng 2000 mL; một chu kỳ hô hấp ở người trung bình kéo dài khoảng\n4 giây. Tìm mô hình cho tổng thể tích khí <span class=\"math inline\">\\(V(t)\\)</span> trong phổi theo thời gian.</p>"
+    },
+    {
+      "number": 31,
+      "content": "<p><strong>31.</strong>&nbsp; (a) Đồ thị <span class=\"math inline\">\\(y=f(|x|)\\)</span> liên hệ thế nào với đồ thị <span class=\"math inline\">\\(f\\)</span>? (b) Phác họa <span class=\"math inline\">\\(y=\\sin|x|\\)</span>. (c) Phác họa <span class=\"math inline\">\\(y=\\sqrt{|x|}\\)</span>.</p>"
+    },
+    {
+      "number": 32,
+      "content": "<p><strong>32.</strong>&nbsp; Dùng đồ thị <span class=\"math inline\">\\(f\\)</span> đã cho để phác họa <span class=\"math inline\">\\(y=1/f(x)\\)</span>. Những đặc điểm nào của <span class=\"math inline\">\\(f\\)</span> quan trọng nhất đối với việc phác họa?\nGiải thích cách sử dụng chúng.</p>\n<div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-1-3-65a41611/e32.png\" alt=\"image\"><br>\n<span>Đồ thị cho Bài tập 32.</span></p>\n</div>"
+    },
+    {
+      "number": 33,
+      "content": "<p><strong>33–34. Tìm (a) <span class=\"math inline\">\\(f+g\\)</span>; (b)\n<span class=\"math inline\">\\(f-g\\)</span>; (c) <span class=\"math inline\">\\(fg\\)</span>; (d) <span class=\"math inline\">\\(f/g\\)</span> và nêu tập xác định.</strong></p><p><strong>33.</strong>&nbsp; <span class=\"math inline\">\\(f(x)=\\sqrt{25-x^2}\\)</span>, <span class=\"math inline\">\\(g(x)=\\sqrt{x+1}\\)</span>.</p>"
+    },
+    {
+      "number": 34,
+      "content": "<p><strong>33–34. Tìm (a) <span class=\"math inline\">\\(f+g\\)</span>; (b)\n<span class=\"math inline\">\\(f-g\\)</span>; (c) <span class=\"math inline\">\\(fg\\)</span>; (d) <span class=\"math inline\">\\(f/g\\)</span> và nêu tập xác định.</strong></p><p><strong>34.</strong>&nbsp; <span class=\"math inline\">\\(f(x)=\\dfrac1{x-1}\\)</span>, <span class=\"math inline\">\\(g(x)=\\dfrac1x-2\\)</span>.</p>"
+    },
+    {
+      "number": 35,
+      "content": "<p><strong>35–40. Tìm công thức và tập xác định của (a) <span class=\"math inline\">\\(f\\circ g\\)</span>; (b) <span class=\"math inline\">\\(g\\circ f\\)</span>; (c) <span class=\"math inline\">\\(f\\circ f\\)</span>; (d) <span class=\"math inline\">\\(g\\circ g\\)</span>.</strong></p><p><strong>35.</strong>&nbsp; <span class=\"math inline\">\\(f(x)=x^3+5\\)</span>, <span class=\"math inline\">\\(g(x)=\\sqrt[3]x\\)</span>.</p>"
+    },
+    {
+      "number": 36,
+      "content": "<p><strong>35–40. Tìm công thức và tập xác định của (a) <span class=\"math inline\">\\(f\\circ g\\)</span>; (b) <span class=\"math inline\">\\(g\\circ f\\)</span>; (c) <span class=\"math inline\">\\(f\\circ f\\)</span>; (d) <span class=\"math inline\">\\(g\\circ g\\)</span>.</strong></p><p><strong>36.</strong>&nbsp; <span class=\"math inline\">\\(f(x)=\\dfrac1x\\)</span>, <span class=\"math inline\">\\(g(x)=2x+1\\)</span>.</p>"
+    },
+    {
+      "number": 37,
+      "content": "<p><strong>35–40. Tìm công thức và tập xác định của (a) <span class=\"math inline\">\\(f\\circ g\\)</span>; (b) <span class=\"math inline\">\\(g\\circ f\\)</span>; (c) <span class=\"math inline\">\\(f\\circ f\\)</span>; (d) <span class=\"math inline\">\\(g\\circ g\\)</span>.</strong></p><p><strong>37.</strong>&nbsp; <span class=\"math inline\">\\(f(x)=\\dfrac1{\\sqrt\nx}\\)</span>, <span class=\"math inline\">\\(g(x)=x+1\\)</span>.</p>"
+    },
+    {
+      "number": 38,
+      "content": "<p><strong>35–40. Tìm công thức và tập xác định của (a) <span class=\"math inline\">\\(f\\circ g\\)</span>; (b) <span class=\"math inline\">\\(g\\circ f\\)</span>; (c) <span class=\"math inline\">\\(f\\circ f\\)</span>; (d) <span class=\"math inline\">\\(g\\circ g\\)</span>.</strong></p><p><strong>38.</strong>&nbsp; <span class=\"math inline\">\\(f(x)=\\dfrac{x}{x+1}\\)</span>, <span class=\"math inline\">\\(g(x)=2x-1\\)</span>.</p>"
+    },
+    {
+      "number": 39,
+      "content": "<p><strong>35–40. Tìm công thức và tập xác định của (a) <span class=\"math inline\">\\(f\\circ g\\)</span>; (b) <span class=\"math inline\">\\(g\\circ f\\)</span>; (c) <span class=\"math inline\">\\(f\\circ f\\)</span>; (d) <span class=\"math inline\">\\(g\\circ g\\)</span>.</strong></p><p><strong>39.</strong>&nbsp; <span class=\"math inline\">\\(f(x)=\\dfrac2x\\)</span>, <span class=\"math inline\">\\(g(x)=\\sin x\\)</span>.</p>"
+    },
+    {
+      "number": 40,
+      "content": "<p><strong>35–40. Tìm công thức và tập xác định của (a) <span class=\"math inline\">\\(f\\circ g\\)</span>; (b) <span class=\"math inline\">\\(g\\circ f\\)</span>; (c) <span class=\"math inline\">\\(f\\circ f\\)</span>; (d) <span class=\"math inline\">\\(g\\circ g\\)</span>.</strong></p><p><strong>40.</strong>&nbsp; <span class=\"math inline\">\\(f(x)=\\sqrt{5-x}\\)</span>, <span class=\"math inline\">\\(g(x)=\\sqrt{x-1}\\)</span>.</p>"
+    },
+    {
+      "number": 41,
+      "content": "<p><strong>41–44. Tìm <span class=\"math inline\">\\(f\\circ g\\circ\nh\\)</span>.</strong></p><p><strong>41.</strong>&nbsp; <span class=\"math inline\">\\(f(x)=3x-2\\)</span>,\n<span class=\"math inline\">\\(g(x)=\\sin x\\)</span>, <span class=\"math inline\">\\(h(x)=x^2\\)</span>.</p>"
+    },
+    {
+      "number": 42,
+      "content": "<p><strong>41–44. Tìm <span class=\"math inline\">\\(f\\circ g\\circ\nh\\)</span>.</strong></p><p><strong>42.</strong>&nbsp; <span class=\"math inline\">\\(f(x)=|x-4|\\)</span>, <span class=\"math inline\">\\(g(x)=2^x\\)</span>, <span class=\"math inline\">\\(h(x)=\\sqrt x\\)</span>.</p>"
+    },
+    {
+      "number": 43,
+      "content": "<p><strong>41–44. Tìm <span class=\"math inline\">\\(f\\circ g\\circ\nh\\)</span>.</strong></p><p><strong>43.</strong>&nbsp; <span class=\"math inline\">\\(f(x)=\\sqrt{x-3}\\)</span>, <span class=\"math inline\">\\(g(x)=x^2\\)</span>, <span class=\"math inline\">\\(h(x)=x^3+2\\)</span>.</p>"
+    },
+    {
+      "number": 44,
+      "content": "<p><strong>41–44. Tìm <span class=\"math inline\">\\(f\\circ g\\circ\nh\\)</span>.</strong></p><p><strong>44.</strong>&nbsp; <span class=\"math inline\">\\(f(x)=\\tan\nx\\)</span>, <span class=\"math inline\">\\(g(x)=\\dfrac{x}{x-1}\\)</span>,\n<span class=\"math inline\">\\(h(x)=\\sqrt[3]x\\)</span>.</p>"
+    },
+    {
+      "number": 45,
+      "content": "<p><strong>45–50. Biểu diễn hàm số dưới dạng <span class=\"math inline\">\\(f\\circ g\\)</span>.</strong></p><p><strong>45.</strong>&nbsp; <span class=\"math inline\">\\(F(x)=(2x+x^2)^4\\)</span>.</p>"
+    },
+    {
+      "number": 46,
+      "content": "<p><strong>45–50. Biểu diễn hàm số dưới dạng <span class=\"math inline\">\\(f\\circ g\\)</span>.</strong></p><p><strong>46.</strong>&nbsp; <span class=\"math inline\">\\(F(x)=\\cos^2x\\)</span>.</p>"
+    },
+    {
+      "number": 47,
+      "content": "<p><strong>45–50. Biểu diễn hàm số dưới dạng <span class=\"math inline\">\\(f\\circ g\\)</span>.</strong></p><p><strong>47.</strong>&nbsp; <span class=\"math inline\">\\(F(x)=\\dfrac{\\sqrt[3]x}{1+\\sqrt[3]x}\\)</span>.</p>"
+    },
+    {
+      "number": 48,
+      "content": "<p><strong>45–50. Biểu diễn hàm số dưới dạng <span class=\"math inline\">\\(f\\circ g\\)</span>.</strong></p><p><strong>48.</strong>&nbsp; <span class=\"math inline\">\\(G(x)=\\sqrt[3]{\\dfrac{x}{1+x}}\\)</span>.</p>"
+    },
+    {
+      "number": 49,
+      "content": "<p><strong>45–50. Biểu diễn hàm số dưới dạng <span class=\"math inline\">\\(f\\circ g\\)</span>.</strong></p><p><strong>49.</strong>&nbsp; <span class=\"math inline\">\\(v(t)=\\sec(t^2)\\tan(t^2)\\)</span>.</p>"
+    },
+    {
+      "number": 50,
+      "content": "<p><strong>45–50. Biểu diễn hàm số dưới dạng <span class=\"math inline\">\\(f\\circ g\\)</span>.</strong></p><p><strong>50.</strong>&nbsp; <span class=\"math inline\">\\(H(x)=\\sqrt{1+\\sqrt\nx}\\)</span>.</p>"
+    },
+    {
+      "number": 51,
+      "content": "<p><strong>51–54. Biểu diễn hàm số dưới dạng <span class=\"math inline\">\\(f\\circ g\\circ h\\)</span>.</strong></p><p><strong>51.</strong>&nbsp; <span class=\"math inline\">\\(R(x)=\\sqrt{\\sqrt\nx-1}\\)</span>.</p>"
+    },
+    {
+      "number": 52,
+      "content": "<p><strong>51–54. Biểu diễn hàm số dưới dạng <span class=\"math inline\">\\(f\\circ g\\circ h\\)</span>.</strong></p><p><strong>52.</strong>&nbsp; <span class=\"math inline\">\\(H(x)=\\sqrt[8]{2+|x|}\\)</span>.</p>"
+    },
+    {
+      "number": 53,
+      "content": "<p><strong>51–54. Biểu diễn hàm số dưới dạng <span class=\"math inline\">\\(f\\circ g\\circ h\\)</span>.</strong></p><p><strong>53.</strong>&nbsp; <span class=\"math inline\">\\(S(t)=\\sin^2(\\cos\nt)\\)</span>.</p>"
+    },
+    {
+      "number": 54,
+      "content": "<p><strong>51–54. Biểu diễn hàm số dưới dạng <span class=\"math inline\">\\(f\\circ g\\circ h\\)</span>.</strong></p><p><strong>54.</strong>&nbsp; <span class=\"math inline\">\\(H(t)=\\cos\\left(\\sqrt{\\tan\nt}+1\\right)\\)</span>.</p>"
+    },
+    {
+      "number": 55,
+      "content": "<p><strong>55–56. Dùng bảng sau để tính các biểu thức.</strong></p>\n<div class=\"center\">\n<table>\n<thead>\n<tr class=\"header\">\n<th style=\"text-align: center;\"><span class=\"math inline\">\\(x\\)</span></th>\n<th style=\"text-align: right;\">1</th>\n<th style=\"text-align: right;\">2</th>\n<th style=\"text-align: right;\">3</th>\n<th style=\"text-align: right;\">4</th>\n<th style=\"text-align: right;\">5</th>\n<th style=\"text-align: right;\">6</th>\n</tr>\n</thead>\n<tbody>\n<tr class=\"odd\">\n<td style=\"text-align: center;\"><span class=\"math inline\">\\(f(x)\\)</span></td>\n<td style=\"text-align: right;\">3</td>\n<td style=\"text-align: right;\">1</td>\n<td style=\"text-align: right;\">5</td>\n<td style=\"text-align: right;\">6</td>\n<td style=\"text-align: right;\">2</td>\n<td style=\"text-align: right;\">4</td>\n</tr>\n<tr class=\"even\">\n<td style=\"text-align: center;\"><span class=\"math inline\">\\(g(x)\\)</span></td>\n<td style=\"text-align: right;\">5</td>\n<td style=\"text-align: right;\">3</td>\n<td style=\"text-align: right;\">4</td>\n<td style=\"text-align: right;\">1</td>\n<td style=\"text-align: right;\">3</td>\n<td style=\"text-align: right;\">2</td>\n</tr>\n</tbody>\n</table>\n</div><p><strong>55.</strong>&nbsp; (a) <span class=\"math inline\">\\(f(g(3))\\)</span>; (b) <span class=\"math inline\">\\(g(f(2))\\)</span>; (c) <span class=\"math inline\">\\((f\\circ g)(5)\\)</span>; (d) <span class=\"math inline\">\\((g\\circ f)(5)\\)</span>.</p>"
+    },
+    {
+      "number": 56,
+      "content": "<p><strong>55–56. Dùng bảng sau để tính các biểu thức.</strong></p>\n<div class=\"center\">\n<table>\n<thead>\n<tr class=\"header\">\n<th style=\"text-align: center;\"><span class=\"math inline\">\\(x\\)</span></th>\n<th style=\"text-align: right;\">1</th>\n<th style=\"text-align: right;\">2</th>\n<th style=\"text-align: right;\">3</th>\n<th style=\"text-align: right;\">4</th>\n<th style=\"text-align: right;\">5</th>\n<th style=\"text-align: right;\">6</th>\n</tr>\n</thead>\n<tbody>\n<tr class=\"odd\">\n<td style=\"text-align: center;\"><span class=\"math inline\">\\(f(x)\\)</span></td>\n<td style=\"text-align: right;\">3</td>\n<td style=\"text-align: right;\">1</td>\n<td style=\"text-align: right;\">5</td>\n<td style=\"text-align: right;\">6</td>\n<td style=\"text-align: right;\">2</td>\n<td style=\"text-align: right;\">4</td>\n</tr>\n<tr class=\"even\">\n<td style=\"text-align: center;\"><span class=\"math inline\">\\(g(x)\\)</span></td>\n<td style=\"text-align: right;\">5</td>\n<td style=\"text-align: right;\">3</td>\n<td style=\"text-align: right;\">4</td>\n<td style=\"text-align: right;\">1</td>\n<td style=\"text-align: right;\">3</td>\n<td style=\"text-align: right;\">2</td>\n</tr>\n</tbody>\n</table>\n</div><p><strong>56.</strong>&nbsp; (a) <span class=\"math inline\">\\(g(g(g(2)))\\)</span>; (b) <span class=\"math inline\">\\((f\\circ f\\circ f)(1)\\)</span>; (c) <span class=\"math inline\">\\((f\\circ f\\circ g)(1)\\)</span>; (d) <span class=\"math inline\">\\((g\\circ f\\circ g)(3)\\)</span>.</p>"
+    },
+    {
+      "number": 57,
+      "content": "<p><strong>57.</strong>&nbsp; Dùng đồ thị <span class=\"math inline\">\\(f\\)</span> và <span class=\"math inline\">\\(g\\)</span> để tính các biểu thức sau, hoặc giải\nthích vì sao không xác định: (a) <span class=\"math inline\">\\(f(g(2))\\)</span>; (b) <span class=\"math inline\">\\(g(f(0))\\)</span>; (c) <span class=\"math inline\">\\((f\\circ g)(0)\\)</span>; (d) <span class=\"math inline\">\\((g\\circ f)(6)\\)</span>; (e) <span class=\"math inline\">\\((g\\circ g)(-2)\\)</span>; (f) <span class=\"math inline\">\\((f\\circ f)(4)\\)</span>.</p>\n<div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-1-3-65a41611/e57.png\" alt=\"image\"><br>\n<span>Đồ thị cho Bài tập 57.</span></p>\n</div>"
+    },
+    {
+      "number": 58,
+      "content": "<p><strong>58.</strong>&nbsp; Dùng đồ thị <span class=\"math inline\">\\(f\\)</span> và <span class=\"math inline\">\\(g\\)</span> để ước lượng <span class=\"math inline\">\\(f(g(x))\\)</span> với <span class=\"math inline\">\\(x=-5,-4,-3,\\ldots,5\\)</span>. Từ các ước lượng đó,\nphác họa đồ thị <span class=\"math inline\">\\(f\\circ g\\)</span>.</p>\n<div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-1-3-65a41611/e58.png\" alt=\"image\"><br>\n<span>Đồ thị cho Bài tập 58.</span></p>\n</div>"
+    },
+    {
+      "number": 59,
+      "content": "<p><strong>59.</strong>&nbsp; Một hòn đá rơi xuống hồ tạo gợn sóng tròn lan\nra với tốc độ 60 cm/s. (a) Biểu diễn bán kính <span class=\"math inline\">\\(r\\)</span> của vòng tròn theo thời gian <span class=\"math inline\">\\(t\\)</span> (s). (b) Nếu <span class=\"math inline\">\\(A\\)</span> là diện tích hình tròn theo bán kính,\ntìm <span class=\"math inline\">\\(A\\circ r\\)</span> và diễn giải ý\nnghĩa.</p>"
+    },
+    {
+      "number": 60,
+      "content": "<p><strong>60.</strong>&nbsp; Một quả bóng hình cầu được bơm phồng, bán kính\ntăng với tốc độ 2 cm/s. (a) Biểu diễn bán kính <span class=\"math inline\">\\(r\\)</span> theo thời gian <span class=\"math inline\">\\(t\\)</span> (s). (b) Nếu <span class=\"math inline\">\\(V\\)</span> là thể tích theo bán kính, tìm <span class=\"math inline\">\\(V\\circ r\\)</span> và diễn giải ý nghĩa.</p>"
+    },
+    {
+      "number": 61,
+      "content": "<p><strong>61.</strong>&nbsp; Một con tàu chạy với tốc độ 30 km/h song song\nvới bờ biển thẳng, cách bờ 6 km và đi ngang một ngọn hải đăng lúc giữa\ntrưa. (a) Biểu diễn khoảng cách <span class=\"math inline\">\\(s\\)</span>\ntừ hải đăng đến tàu theo quãng đường <span class=\"math inline\">\\(d\\)</span> tàu đã đi kể từ giữa trưa; tức tìm\n<span class=\"math inline\">\\(f\\)</span> sao cho <span class=\"math inline\">\\(s=f(d)\\)</span>. (b) Biểu diễn <span class=\"math inline\">\\(d\\)</span> theo thời gian <span class=\"math inline\">\\(t\\)</span> kể từ giữa trưa; tức tìm <span class=\"math inline\">\\(g\\)</span> sao cho <span class=\"math inline\">\\(d=g(t)\\)</span>. (c) Tìm <span class=\"math inline\">\\(f\\circ g\\)</span>. Hàm số này biểu thị điều\ngì?</p>"
+    },
+    {
+      "number": 62,
+      "content": "<p><strong>62.</strong>&nbsp; Một máy bay bay với tốc độ 350 dặm/giờ, ở độ\ncao 1 dặm, đi qua đúng phía trên trạm radar lúc <span class=\"math inline\">\\(t=0\\)</span>. (a) Biểu diễn quãng đường theo\nphương ngang <span class=\"math inline\">\\(d\\)</span> (dặm) mà máy bay đã\nbay theo <span class=\"math inline\">\\(t\\)</span>. (b) Biểu diễn khoảng\ncách <span class=\"math inline\">\\(s\\)</span> từ máy bay đến trạm radar\ntheo <span class=\"math inline\">\\(d\\)</span>. (c) Dùng phép hợp để biểu\ndiễn <span class=\"math inline\">\\(s\\)</span> theo <span class=\"math inline\">\\(t\\)</span>.</p>"
+    },
+    {
+      "number": 63,
+      "content": "<p><strong>63.</strong>&nbsp; <strong>Hàm Heaviside.</strong> Hàm <span class=\"math inline\">\\(H\\)</span> được xác định bởi <span class=\"math display\">\\[H(t)=\\begin{cases}0&amp;\\text{nếu\n}t&lt;0,\\\\1&amp;\\text{nếu }t\\ge0.\\end{cases}\\]</span> Hàm được dùng khi\nnghiên cứu mạch điện để biểu diễn sự tăng đột ngột của dòng điện hoặc\nđiện áp khi đóng công tắc tức thời. (a) Phác họa đồ thị <span class=\"math inline\">\\(H\\)</span>. (b) Phác họa điện áp <span class=\"math inline\">\\(V(t)\\)</span> nếu công tắc đóng lúc <span class=\"math inline\">\\(t=0\\)</span> và điện áp 120 V được đặt tức thời\nvào mạch. Viết <span class=\"math inline\">\\(V(t)\\)</span> theo <span class=\"math inline\">\\(H(t)\\)</span>. (c) Phác họa <span class=\"math inline\">\\(V(t)\\)</span> nếu công tắc đóng lúc <span class=\"math inline\">\\(t=5\\)</span> s và điện áp 240 V được đặt tức thời\nvào mạch. Viết công thức theo <span class=\"math inline\">\\(H(t)\\)</span>;\nlưu ý thời điểm bắt đầu <span class=\"math inline\">\\(t=5\\)</span> tương\nứng với một phép tịnh tiến.</p>"
+    },
+    {
+      "number": 64,
+      "content": "<p><strong>64.</strong>&nbsp; <strong>Hàm dốc.</strong> Hàm Heaviside ở Bài\ntập 63 có thể dùng để xác định hàm dốc <span class=\"math inline\">\\(y=ctH(t)\\)</span>, biểu diễn sự tăng dần của điện\náp hoặc dòng điện. (a) Phác họa <span class=\"math inline\">\\(y=tH(t)\\)</span>. (b) Phác họa <span class=\"math inline\">\\(V(t)\\)</span> nếu công tắc đóng lúc <span class=\"math inline\">\\(t=0\\)</span> và điện áp tăng dần đến 120 V trong\n60 s. Viết công thức theo <span class=\"math inline\">\\(H(t)\\)</span> với\n<span class=\"math inline\">\\(t\\le60\\)</span>. (c) Phác họa <span class=\"math inline\">\\(V(t)\\)</span> nếu công tắc đóng lúc <span class=\"math inline\">\\(t=7\\)</span> s và điện áp tăng dần đến 100 V trong\n25 s. Viết công thức theo <span class=\"math inline\">\\(H(t)\\)</span> với\n<span class=\"math inline\">\\(t\\le32\\)</span>.</p><p>Định nghĩa ở Bài 63: <span class=\"math inline\">\\(H(t)=\\begin{cases}0 &amp; t&lt;0,\\\\1 &amp; t\\ge0.\\end{cases}\\)</span></p>"
+    },
+    {
+      "number": 65,
+      "content": "<p><strong>65.</strong>&nbsp; Cho hai hàm tuyến tính <span class=\"math inline\">\\(f(x)=m_1x+b_1\\)</span> và <span class=\"math inline\">\\(g(x)=m_2x+b_2\\)</span>. Hàm <span class=\"math inline\">\\(f\\circ g\\)</span> có tuyến tính không? Nếu có, hệ\nsố góc của đồ thị là bao nhiêu?</p>"
+    },
+    {
+      "number": 66,
+      "content": "<p><strong>66.</strong>&nbsp; Đầu tư <span class=\"math inline\">\\(x\\)</span>\nđô la với lãi suất 4%, ghép lãi hằng năm, thì sau một năm có <span class=\"math inline\">\\(A(x)=1.04x\\)</span>. Tìm <span class=\"math inline\">\\(A\\circ A\\)</span>, <span class=\"math inline\">\\(A\\circ A\\circ A\\)</span> và <span class=\"math inline\">\\(A\\circ A\\circ A\\circ A\\)</span>. Các hàm hợp biểu\nthị điều gì? Tìm công thức khi hợp <span class=\"math inline\">\\(n\\)</span> bản sao của <span class=\"math inline\">\\(A\\)</span>.</p>"
+    },
+    {
+      "number": 67,
+      "content": "<p><strong>67.</strong>&nbsp; (a) Cho <span class=\"math inline\">\\(g(x)=2x+1\\)</span>, <span class=\"math inline\">\\(h(x)=4x^2+4x+7\\)</span>. Tìm <span class=\"math inline\">\\(f\\)</span> sao cho <span class=\"math inline\">\\(f\\circ g=h\\)</span>. Hãy nghĩ về các phép toán cần\nthực hiện trên công thức của <span class=\"math inline\">\\(g\\)</span> để\nthu được công thức của <span class=\"math inline\">\\(h\\)</span>. (b) Cho\n<span class=\"math inline\">\\(f(x)=3x+5\\)</span>, <span class=\"math inline\">\\(h(x)=3x^2+3x+2\\)</span>. Tìm <span class=\"math inline\">\\(g\\)</span> sao cho <span class=\"math inline\">\\(f\\circ g=h\\)</span>.</p>"
+    },
+    {
+      "number": 68,
+      "content": "<p><strong>68.</strong>&nbsp; Cho <span class=\"math inline\">\\(f(x)=x+4\\)</span> và <span class=\"math inline\">\\(h(x)=4x-1\\)</span>. Tìm <span class=\"math inline\">\\(g\\)</span> sao cho <span class=\"math inline\">\\(g\\circ f=h\\)</span>.</p>"
+    },
+    {
+      "number": 69,
+      "content": "<p><strong>69.</strong>&nbsp; Giả sử <span class=\"math inline\">\\(g\\)</span>\nlà hàm số chẵn và <span class=\"math inline\">\\(h=f\\circ g\\)</span>. Hàm\n<span class=\"math inline\">\\(h\\)</span> có luôn chẵn không?</p>"
+    },
+    {
+      "number": 70,
+      "content": "<p><strong>70.</strong>&nbsp; Giả sử <span class=\"math inline\">\\(g\\)</span>\nlà hàm số lẻ và <span class=\"math inline\">\\(h=f\\circ g\\)</span>. Hàm\n<span class=\"math inline\">\\(h\\)</span> có luôn lẻ không? Nếu <span class=\"math inline\">\\(f\\)</span> lẻ thì sao? Nếu <span class=\"math inline\">\\(f\\)</span> chẵn thì sao?</p>"
+    },
+    {
+      "number": 71,
+      "content": "<p><strong>71.</strong>&nbsp; Cho hàm số <span class=\"math inline\">\\(f(x)\\)</span> có tập xác định <span class=\"math inline\">\\(\\mathbb R\\)</span>. (a) Chứng minh <span class=\"math inline\">\\(E(x)=f(x)+f(-x)\\)</span> chẵn. (b) Chứng minh\n<span class=\"math inline\">\\(O(x)=f(x)-f(-x)\\)</span> lẻ. (c) Chứng minh\nmọi hàm <span class=\"math inline\">\\(f(x)\\)</span> đều viết được thành\ntổng một hàm chẵn và một hàm lẻ. (d) Biểu diễn <span class=\"math inline\">\\(f(x)=2^x+(x-3)^2\\)</span> thành tổng một hàm chẵn\nvà một hàm lẻ.</p>"
+    }
+  ]
+}

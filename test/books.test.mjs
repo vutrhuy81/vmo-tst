@@ -26,6 +26,16 @@ assert.equal(section12.exercises.length,37);assert.deepEqual(section12.exercises
 assert.ok(section12.exercises[2].content.includes('Ghép từng phương trình'));assert.ok(section12.exercises[10].content.includes('hình bên trái'));assert.ok(section12.exercises[11].content.includes('hình bên phải'));assert.ok(section12.exercises[26].content.includes('hai biểu đồ ở hàng trên'));assert.ok(section12.exercises[27].content.includes('hai biểu đồ ở hàng dưới'));assert.ok(section12.exercises[28].content.includes('<table>'));
 assert.equal(section12.exercises.some(e=>exercises.some(old=>old.contentKey===e.contentKey)),false,'Different sections never share exercise identity');
 assert.equal((section12.section.content.match(/<img /g)||[]).length,33);assert.equal((section12.section.content.match(/<table/g)||[]).length,11);
+const child13=detail.sections.find(s=>s.title.startsWith('1.3'));
+const section13=await readBooks(db,student,{bookId:book.id,sectionId:child13.id});
+assert.equal(section13.section.version,2);assert.equal(section13.section.sourceInfo.assetCount,19);assert.equal(section13.section.sourceInfo.exampleCount,9);assert.equal(section13.exerciseHeading,'1.3. Bài tập');
+assert.equal(section13.exercises.length,71);assert.deepEqual(section13.exercises.map(e=>e.questionNumber),Array.from({length:71},(_,i)=>i+1));
+assert.ok(section13.exercises[5].content.includes('hình bên trái'));assert.ok(section13.exercises[6].content.includes('hình bên phải'));
+for(const n of [5,6]){assert.ok(section13.exercises[n].content.includes('e06_07_base.png'));assert.ok(section13.exercises[n].content.includes('e06_07.png'));}
+for(const n of [54,55])assert.ok(section13.exercises[n].content.includes('<table>'),'Shared table must be in each problem');
+assert.ok(section13.exercises[7].content.includes('/f04.png'));assert.ok(section13.exercises[7].content.includes('/f06.png'));assert.ok(section13.exercises[26].content.includes('/f09.png'));assert.ok(section13.exercises[63].content.includes('H(t)=\\begin{cases}'));
+assert.equal(section13.exercises.some(e=>[...exercises,...section12.exercises].some(old=>old.contentKey===e.contentKey)),false);
+assert.equal((section13.section.content.match(/<img /g)||[]).length,19);assert.equal((section13.section.content.match(/<table/g)||[]).length,4);
 await assert.rejects(()=>readBooks(educationDb(db,other),other),e=>e.status===403);
 for(const user of[student,teacher])await assert.rejects(()=>mutateBooks(db,user,'books_save_category',{name:'No'}),e=>e.status===403);
 const cat=await mutateBooks(db,admin,'books_save_category',{name:'Giải tích nâng cao'});await assert.rejects(()=>mutateBooks(db,admin,'books_save_category',{name:cat.name}),e=>e.status===409);
@@ -83,6 +93,11 @@ await [...window.document.querySelectorAll('#booksToc button')].find(b=>b.textCo
 for(const selector of ['.book-exercise','.book-exercise .btn-ai-guide','.book-exercise .btn-submit-solution','.book-exercise .btn-manage-reference-links'])assert.equal(window.document.querySelectorAll(selector).length,37);
 assert.ok(window.document.querySelectorAll('.book-exercise')[11].querySelector('img').src.includes('stewart-1-2-a7a72f38/e11_12.png'));
 assert.ok(window.document.getElementById('booksContent').textContent.includes('Ghi chú biên tập'));
+await [...window.document.querySelectorAll('#booksToc button')].find(b=>b.textContent.startsWith('1.3')).onclick();
+for(const selector of ['.book-exercise','.book-exercise .btn-ai-guide','.book-exercise .btn-submit-solution','.book-exercise .btn-manage-reference-links'])assert.equal(window.document.querySelectorAll(selector).length,71);
+assert.equal(window.document.querySelectorAll('.book-exercise')[54].querySelectorAll('table').length,1);
+assert.equal(window.document.querySelectorAll('.book-exercise')[5].querySelectorAll('img').length,2);
+assert.ok(window.document.getElementById('booksContent').textContent.includes('Thuật ngữ bổ sung'));
 // Return to an unformatted legacy section to test the editor's default format.
 await [...window.document.querySelectorAll('#booksToc button')].find(b=>b.textContent==='Khái quát về Giải tích').onclick();
 
@@ -125,4 +140,9 @@ const render12=window.document.createElement('div');await window.renderBookConte
 const changed12=await mutateBooks(db,admin,'books_save_section',{id:child12.id,expectedVersion:2,title:child12.title,order:2,content:section12.section.content+'<p>Admin edit.</p>',contentFormat:'html-latex'});
 assert.equal((await readBooks(db,student,{bookId:book.id,sectionId:child12.id})).section.content,changed12.content);
 assert.equal((await readBooks(db,student,{bookId:book.id,sectionId:child12.id})).exercises.length,37);
+const image13=await readBookAsset(student,'stewart-1-3-65a41611/e03.png');assert.equal(image13.bytes[0],137);
+await assert.rejects(()=>readBookAsset(other,'stewart-1-3-65a41611/e03.png'),e=>e.status===403);
+const render13=window.document.createElement('div');await window.renderBookContent(render13,section13.section);assert.equal(render13.querySelectorAll('img').length,19);assert.equal(render13.querySelectorAll('table').length,4);
+const changed13=await mutateBooks(db,admin,'books_save_section',{id:child13.id,expectedVersion:2,title:child13.title,order:3,content:section13.section.content+'<p>Admin edit.</p>',contentFormat:'html-latex'});
+assert.equal((await readBooks(db,student,{bookId:book.id,sectionId:child13.id})).section.content,changed13.content);assert.equal((await readBooks(db,student,{bookId:book.id,sectionId:child13.id})).exercises.length,71);
 window.close();console.log('Books: seeded TOC, admin CRUD/CAS, scopes, subtree delete/restore, lazy bodies and UI actions OK');
