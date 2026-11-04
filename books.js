@@ -30,7 +30,7 @@
     if(input.classList.contains('math'))output.className=input.classList.contains('display')?'math display':'math inline';
     if(input.tagName==='IMG'){
      const raw=input.getAttribute('src')||'';let url;try{url=new URL(raw,location.origin);}catch{return document.createDocumentFragment();}
-     if(url.origin!==location.origin||url.pathname!=='/api/data'||url.searchParams.get('resource')!=='book_asset'||!/^(?:stewart-1-1-47c33e6c|stewart-1-2-a7a72f38|stewart-1-3-65a41611)\/[a-z0-9_]+\.png$/.test(url.searchParams.get('asset')||''))return document.createDocumentFragment();
+     if(url.origin!==location.origin||url.pathname!=='/api/data'||url.searchParams.get('resource')!=='book_asset'||!/^(?:stewart-1-1-47c33e6c|stewart-1-2-a7a72f38|stewart-1-3-65a41611|stewart-1-4-c1a9f973)\/[a-z0-9_]+\.png$/.test(url.searchParams.get('asset')||''))return document.createDocumentFragment();
      output.src=url.pathname+url.search;output.alt=input.getAttribute('alt')||'Hình minh họa';output.loading='lazy';output.style.maxWidth='100%';output.style.height='auto';
     }
     if(['TH','TD'].includes(input.tagName))for(const attr of ['colspan','rowspan']){const n=Number(input.getAttribute(attr));if(Number.isInteger(n)&&n>=1&&n<=30)output.setAttribute(attr,String(n));}
