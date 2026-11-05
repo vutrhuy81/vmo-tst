@@ -60,6 +60,15 @@ for(const n of [32,33])assert.ok(section15.exercises[n].content.includes('e33_34
 for(let n=47;n<=50;n++)assert.ok(section15.exercises[n-1].content.includes('\\log_b x=\\frac{\\ln x}{\\ln b}'));
 for(const n of [52,53])for(const name of ['f12','f13'])assert.ok(section15.exercises[n].content.includes('/'+name+'.png'));
 assert.equal((section15.section.content.match(/<img /g)||[]).length,29);assert.equal((section15.section.content.match(/<table/g)||[]).length,5);
+const childReview=detail.sections.find(s=>s.title==='Ôn tập'&&s.parentId===first.id);
+const review=await readBooks(db,student,{bookId:book.id,sectionId:childReview.id});
+assert.equal(review.section.version,2);assert.equal(review.section.sourceInfo.conceptCheckCount,13);assert.equal(review.section.sourceInfo.trueFalseCount,14);assert.equal(review.exerciseHeading,'Bài tập');
+assert.deepEqual(review.exercises.map(e=>e.questionNumber),Array.from({length:38},(_,i)=>i+1));
+assert.equal(new Set([...exercises,...section12.exercises,...section13.exercises,...section14.exercises,...section15.exercises,...review.exercises].map(e=>e.contentKey)).size,352);
+for(const [n,image]of [[1,'ex01'],[2,'ex02'],[10,'ex10']])assert.ok(review.exercises[n-1].content.includes('/'+image+'.png'));
+assert.ok(review.exercises[22].content.includes('<table>'));assert.ok(review.exercises[30].content.includes('ba chữ số'));
+assert.equal((review.section.content.match(/<img /g)||[]).length,3);assert.equal((review.section.content.match(/<table/g)||[]).length,2);
+assert.equal((await readBooks(db,student,{bookId:book.id,sectionId:detail.sections.find(s=>s.title==='Ôn tập'&&s.parentId!==first.id).id})).section.content,'','Only Chapter 1 review is imported');
 await assert.rejects(()=>readBooks(educationDb(db,other),other),e=>e.status===403);
 for(const user of[student,teacher])await assert.rejects(()=>mutateBooks(db,user,'books_save_category',{name:'No'}),e=>e.status===403);
 const cat=await mutateBooks(db,admin,'books_save_category',{name:'Giải tích nâng cao'});await assert.rejects(()=>mutateBooks(db,admin,'books_save_category',{name:cat.name}),e=>e.status===409);
@@ -132,6 +141,14 @@ for(const selector of ['.book-exercise','.book-exercise .btn-ai-guide','.book-ex
 assert.equal(window.document.querySelectorAll('.book-exercise')[4].querySelectorAll('img').length,1);
 assert.equal(window.document.querySelectorAll('.book-exercise')[2].querySelectorAll('table').length,1);
 assert.ok(window.document.getElementById('booksContent').textContent.includes('Thuật ngữ bổ sung'));
+await [...window.document.querySelectorAll('#booksToc button')].find(b=>b.textContent==='Ôn tập').onclick();
+for(const selector of ['.book-exercise','.book-exercise .btn-ai-guide','.book-exercise .btn-submit-solution','.book-exercise .btn-manage-reference-links'])assert.equal(window.document.querySelectorAll(selector).length,38);
+for(const [title,count]of [['Kiểm tra khái niệm',13],['Câu hỏi đúng–sai',14]]){
+ const heading=[...window.document.querySelectorAll('#booksContent h1')].find(h=>h.textContent===title);assert.ok(heading);let n=0;
+ for(let x=heading.nextElementSibling;x&&!/^H[1-6]$/.test(x.tagName);x=x.nextElementSibling)if(x.tagName==='P'&&/^\d+\./.test(x.querySelector(':scope > strong')?.textContent||''))n++;
+ assert.equal(n,count,'Review question groups retain independent numbering');
+}
+assert.ok(window.document.getElementById('booksContent').textContent.includes('Ghi chú biên tập'));
 // Return to an unformatted legacy section to test the editor's default format.
 await [...window.document.querySelectorAll('#booksToc button')].find(b=>b.textContent==='Khái quát về Giải tích').onclick();
 
@@ -189,4 +206,9 @@ await assert.rejects(()=>readBookAsset(other,'stewart-1-5-6c69c192/e05_08.png'),
 const render15=window.document.createElement('div');await window.renderBookContent(render15,section15.section);assert.equal(render15.querySelectorAll('img').length,29);assert.equal(render15.querySelectorAll('table').length,5);
 const changed15=await mutateBooks(db,admin,'books_save_section',{id:child15.id,expectedVersion:2,title:child15.title,order:5,content:section15.section.content+'<p>Admin edit.</p>',contentFormat:'html-latex'});
 assert.equal((await readBooks(db,student,{bookId:book.id,sectionId:child15.id})).section.content,changed15.content);assert.equal((await readBooks(db,student,{bookId:book.id,sectionId:child15.id})).exercises.length,83);
+const imageReview=await readBookAsset(student,'stewart-1-review-f5f8bf56/ex01.png');assert.equal(imageReview.bytes[0],137);
+await assert.rejects(()=>readBookAsset(other,'stewart-1-review-f5f8bf56/ex01.png'),e=>e.status===403);
+const renderReview=window.document.createElement('div');await window.renderBookContent(renderReview,review.section);assert.equal(renderReview.querySelectorAll('img').length,3);assert.equal(renderReview.querySelectorAll('table').length,2);
+const changedReview=await mutateBooks(db,admin,'books_save_section',{id:childReview.id,expectedVersion:2,title:childReview.title,order:900,content:review.section.content+'<p>Admin edit.</p>',contentFormat:'html-latex'});
+assert.equal((await readBooks(db,student,{bookId:book.id,sectionId:childReview.id})).section.content,changedReview.content);assert.equal((await readBooks(db,student,{bookId:book.id,sectionId:childReview.id})).exercises.length,38);
 window.close();console.log('Books: seeded TOC, admin CRUD/CAS, scopes, subtree delete/restore, lazy bodies and UI actions OK');
