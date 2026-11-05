@@ -688,5 +688,10 @@
     "file": "stewart-1-review-f5f8bf56/ex01.png",
     "mime": "image/png",
     "sha256": "df26df8c707a6ea47465ed34365414cc83c80f38a232560899b0d33e91e2ec4d"
+  },
+  "stewart-1-principles-06d484fa/f01.png": {
+    "file": "stewart-1-principles-06d484fa/f01.png",
+    "mime": "image/png",
+    "sha256": "dc8ffa7aa8a7ac8e6dc978f16dbea9fada3013cc9b6ba2b861393de4f3717974"
   }
 }
