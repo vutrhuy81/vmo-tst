@@ -1,0 +1,416 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage{fontspec}\setmainfont{Latin Modern Roman}\setsansfont{DejaVu Sans}
+\usepackage{amsmath,amssymb,graphicx,geometry,enumitem,longtable,booktabs,fancyhdr,hyperref}
+\geometry{left=28mm,right=23mm,top=24mm,bottom=24mm}
+\hypersetup{unicode=true,colorlinks=true,linkcolor=black,urlcolor=blue,pdftitle={Giải tích Chương 2 Mục 2.6 Giới hạn tại vô cực; tiệm cận ngang}}
+\setlength{\parindent}{1.2em}\setlength{\parskip}{4pt}\setlength{\headheight}{16pt}
+\pagestyle{fancy}\fancyhf{}\fancyhead[L]{\small Chương 2. Giới hạn và đạo hàm}\fancyhead[R]{\small §2.6}\fancyfoot[C]{\thepage}
+\newcommand{\fig}[3][.68]{\begin{center}\begin{minipage}{\linewidth}\centering\includegraphics[width=#1\linewidth]{assets/#2.png}\\{\small #3}\end{minipage}\end{center}}
+\newcommand{\ex}[1]{\par\medskip\noindent\textbf{Ví dụ #1.}\ }
+\newcommand{\sol}{\par\noindent\textit{Lời giải.}\ }
+\newcommand{\bt}[1]{\par\smallskip\noindent\textbf{#1.}\ }
+\newcommand{\group}[1]{\par\medskip\noindent\textbf{#1}\par\nopagebreak[4]}
+\newcommand{\gint}[1]{\left[\!\left[#1\right]\!\right]}
+\begin{document}
+\begin{center}
+{\Large\bfseries GIẢI TÍCH}\\[5pt]
+{\large Chương 2. Giới hạn và đạo hàm}\\[9pt]
+{\Large\bfseries 2.6. Giới hạn tại vô cực; tiệm cận ngang}
+\end{center}
+\noindent\textbf{Nguồn:} James Stewart, Daniel K. Clegg, Saleem Watson, \textit{Calculus: Early Transcendentals}, ấn bản thứ 9 (2020), trang in 127–140 (trang PDF 162–175; kết thúc trước §2.7).
+
+Trong §2.2 và §2.4, ta đã khảo sát giới hạn vô cực và tiệm cận đứng của đường cong $y=f(x)$. Khi đó, cho $x$ tiến đến một số, ta nhận được các giá trị $y$ lớn tùy ý về phía dương hoặc phía âm. Trong mục này, ta cho $x$ lớn tùy ý về phía dương hoặc phía âm và tìm hiểu điều gì xảy ra với $y$.
+\section*{Giới hạn tại vô cực và tiệm cận ngang}
+Trước hết, xét dáng điệu của hàm
+\[f(x)=\frac{x^2-1}{x^2+1}\]
+khi $x$ tăng lớn. Bảng sau cho giá trị hàm, làm tròn đến sáu chữ số thập phân; Hình 1 là đồ thị vẽ bằng máy tính.
+\begin{center}\begin{tabular}{rr}\toprule $x$&$f(x)$\\\midrule
+0&$-1$\\ $\pm1$&0\\ $\pm2$&0.600000\\ $\pm3$&0.800000\\ $\pm4$&0.882353\\ $\pm5$&0.923077\\ $\pm10$&0.980198\\ $\pm50$&0.999200\\ $\pm100$&0.999800\\ $\pm1000$&0.999998\\\bottomrule
+\end{tabular}\end{center}
+\fig[.87]{f01}{Hình 1. Đồ thị $y=(x^2-1)/(x^2+1)$.}
+Khi $x$ càng lớn, $f(x)$ càng gần 1. Nhìn về phía phải, đồ thị tiến gần đường thẳng ngang $y=1$. Có vẻ ta có thể làm $f(x)$ gần 1 tùy ý bằng cách chọn $x$ đủ lớn. Ta viết
+\[\lim_{x\to\infty}\frac{x^2-1}{x^2+1}=1.\]
+Nói chung, ký hiệu $\lim_{x\to\infty}f(x)=L$ diễn tả rằng các giá trị $f(x)$ tiến đến $L$ khi $x$ càng lớn.
+\begin{quote}\textbf{1. Định nghĩa trực quan của giới hạn tại vô cực.} Cho hàm $f$ xác định trên một khoảng $(a,\infty)$. Khi đó,
+\[\lim_{x\to\infty}f(x)=L\]
+có nghĩa là có thể làm các giá trị $f(x)$ gần $L$ tùy ý bằng cách yêu cầu $x$ đủ lớn.
+\end{quote}
+Một cách viết khác là $f(x)\to L$ khi $x\to\infty$.
+
+Ký hiệu $\infty$ không biểu thị một số. Tuy nhiên, ta thường đọc biểu thức giới hạn trên là: “giới hạn của $f(x)$ khi $x$ tiến đến vô cực bằng $L$”, “khi $x$ trở nên vô hạn” hoặc “khi $x$ tăng không bị chặn”. Ý nghĩa các cách nói này được xác định bởi Định nghĩa 1. Cuối mục sẽ trình bày định nghĩa chính xác, tương tự định nghĩa $\varepsilon,\delta$ ở §2.4.
+
+Hình 2 minh họa Định nghĩa 1. Có nhiều cách để đồ thị tiến gần đường thẳng $y=L$, gọi là một \textbf{tiệm cận ngang}, khi nhìn về phía phải rất xa.
+\fig[.95]{f02}{Hình 2. Các ví dụ minh họa $\lim_{x\to\infty}f(x)=L$.}
+Trở lại Hình 1, với $x$ âm có giá trị tuyệt đối lớn, $f(x)$ gần 1. Cho $x$ giảm không bị chặn qua các giá trị âm, ta có thể làm $f(x)$ gần 1 tùy ý. Ta viết
+\[\lim_{x\to-\infty}\frac{x^2-1}{x^2+1}=1.\]
+\begin{quote}\textbf{2. Định nghĩa.} Cho hàm $f$ xác định trên một khoảng $(-\infty,a)$. Khi đó,
+\[\lim_{x\to-\infty}f(x)=L\]
+có nghĩa là có thể làm $f(x)$ gần $L$ tùy ý bằng cách yêu cầu $x$ âm và có giá trị tuyệt đối đủ lớn.
+\end{quote}
+Ký hiệu $-\infty$ cũng không biểu thị một số. Biểu thức trên thường được đọc là: “giới hạn của $f(x)$ khi $x$ tiến đến âm vô cực bằng $L$”. Hình 3 minh họa: đồ thị tiến gần $y=L$ khi nhìn về phía trái rất xa.
+\fig[.36]{f03}{Hình 3. Các ví dụ minh họa $\lim_{x\to-\infty}f(x)=L$.}
+\begin{quote}\textbf{3. Định nghĩa.} Đường thẳng $y=L$ được gọi là một \textbf{tiệm cận ngang} của đường cong $y=f(x)$ nếu
+\[\lim_{x\to\infty}f(x)=L\qquad\text{hoặc}\qquad\lim_{x\to-\infty}f(x)=L.\]
+\end{quote}
+Chẳng hạn, đường cong ở Hình 1 có tiệm cận ngang $y=1$ vì
+\[\lim_{x\to\infty}\frac{x^2-1}{x^2+1}=1.\]
+Một đường cong có hai tiệm cận ngang là $y=\tan^{-1}x$ (Hình 4). Thật vậy,
+\[\lim_{x\to-\infty}\tan^{-1}x=-\frac\pi2,\qquad\lim_{x\to\infty}\tan^{-1}x=\frac\pi2.\tag{4}\]
+Vậy $y=-\pi/2$ và $y=\pi/2$ đều là tiệm cận ngang. Điều này suy ra từ việc $x=\pm\pi/2$ là các tiệm cận đứng của đồ thị hàm tang.
+\fig[.40]{f04}{Hình 4. $y=\tan^{-1}x$.}
+\ex{1} Tìm các giới hạn vô cực, giới hạn tại vô cực và các tiệm cận của hàm $f$ có đồ thị ở Hình 5.
+\fig[.46]{f05}{Hình 5. Đồ thị hàm $f$ trong Ví dụ 1.}
+\sol Khi $x\to-1$ từ cả hai phía, $f(x)$ tăng lớn, nên
+\[\lim_{x\to-1}f(x)=\infty.\]
+Khi $x$ tiến đến 2 từ bên trái, $f(x)$ âm và có giá trị tuyệt đối lớn; từ bên phải, $f(x)$ dương và lớn. Do đó,
+\[\lim_{x\to2^-}f(x)=-\infty,\qquad\lim_{x\to2^+}f(x)=\infty.\]
+Vậy $x=-1$ và $x=2$ là các tiệm cận đứng.
+
+Khi $x$ tăng lớn, $f(x)$ dường như tiến đến 4; khi $x$ giảm qua các giá trị âm, $f(x)$ tiến đến 2. Vì vậy,
+\[\lim_{x\to\infty}f(x)=4,\qquad\lim_{x\to-\infty}f(x)=2.\]
+Suy ra $y=4$ và $y=2$ là hai tiệm cận ngang.\hfill$\square$
+\ex{2} Tìm $\lim_{x\to\infty}1/x$ và $\lim_{x\to-\infty}1/x$.
+\sol Khi $x$ lớn thì $1/x$ nhỏ. Chẳng hạn,
+\[\frac1{100}=0.01,\qquad\frac1{10\,000}=0.0001,\qquad\frac1{1\,000\,000}=0.000001.\]
+Chọn $x$ đủ lớn, ta có thể làm $1/x$ gần 0 tùy ý. Theo Định nghĩa 1,
+\[\lim_{x\to\infty}\frac1x=0.\]
+Tương tự, khi $x$ âm với giá trị tuyệt đối lớn, $1/x$ âm và gần 0, nên
+\[\lim_{x\to-\infty}\frac1x=0.\]
+Vì vậy, đường thẳng $y=0$ (trục hoành) là tiệm cận ngang của $y=1/x$, một hypebol (Hình 6).
+\fig[.43]{f06}{Hình 6. $\lim_{x\to\infty}1/x=0$ và $\lim_{x\to-\infty}1/x=0$. $\square$}
+\section*{Tính giới hạn tại vô cực}
+Phần lớn các quy tắc giới hạn ở §2.3 cũng đúng cho giới hạn tại vô cực. Có thể chứng minh rằng các quy tắc ấy, trừ Quy tắc 10 và 11, vẫn đúng khi thay “$x\to a$” bằng “$x\to\infty$” hoặc “$x\to-\infty$”. Đặc biệt, kết hợp Quy tắc 6, 7 với Ví dụ 2, ta được kết quả quan trọng sau.
+\begin{quote}\textbf{5. Định lý.} Nếu $r>0$ là số hữu tỉ thì
+\[\lim_{x\to\infty}\frac1{x^r}=0.\]
+Nếu $r>0$ là số hữu tỉ sao cho $x^r$ xác định với mọi $x$, thì
+\[\lim_{x\to-\infty}\frac1{x^r}=0.\]
+\end{quote}
+\ex{3} Tính giới hạn sau và nêu tính chất giới hạn được sử dụng ở mỗi bước:
+\[\lim_{x\to\infty}\frac{3x^2-x-2}{5x^2+4x+1}.\]
+\sol Khi $x$ tăng lớn, cả tử và mẫu đều tăng lớn nên chưa thể thấy ngay tỉ số biến thiên thế nào. Cần biến đổi đại số trước.
+
+Để tính giới hạn tại vô cực của một hàm hữu tỉ, trước hết chia cả tử lẫn mẫu cho lũy thừa cao nhất của $x$ xuất hiện ở mẫu. Có thể giả sử $x\ne0$, vì chỉ xét các giá trị $x$ lớn. Ở đây lũy thừa ấy là $x^2$, nên
+\begin{align*}
+\lim_{x\to\infty}\frac{3x^2-x-2}{5x^2+4x+1}
+&=\lim_{x\to\infty}\frac{(3x^2-x-2)/x^2}{(5x^2+4x+1)/x^2}\\
+&=\lim_{x\to\infty}\frac{3-1/x-2/x^2}{5+4/x+1/x^2}\\
+&=\frac{\lim_{x\to\infty}(3-1/x-2/x^2)}{\lim_{x\to\infty}(5+4/x+1/x^2)}\quad\text{(Quy tắc 5)}\\
+&=\frac{\lim_{x\to\infty}3-\lim_{x\to\infty}1/x-2\lim_{x\to\infty}1/x^2}{\lim_{x\to\infty}5+4\lim_{x\to\infty}1/x+\lim_{x\to\infty}1/x^2}\\
+&\hspace{3em}\text{(Quy tắc 1, 2 và 3)}\\
+&=\frac{3-0-0}{5+0+0}\quad\text{(Quy tắc 8 và Định lý 5)}\\
+&=\frac35.
+\end{align*}
+Tính tương tự cho $x\to-\infty$ cũng được $3/5$. Hình 7 minh họa đồ thị tiến gần tiệm cận ngang $y=3/5=0.6$.
+\fig[.40]{f07}{Hình 7. $y=(3x^2-x-2)/(5x^2+4x+1)$. $\square$}
+\ex{4} Tìm các tiệm cận ngang của đồ thị hàm
+\[f(x)=\frac{\sqrt{2x^2+1}}{3x-5}.\]
+\sol Chia cả tử và mẫu cho $x$, lũy thừa cao nhất của $x$ trong mẫu, rồi dùng các tính chất giới hạn:
+\begin{align*}
+\lim_{x\to\infty}\frac{\sqrt{2x^2+1}}{3x-5}
+&=\lim_{x\to\infty}\frac{\sqrt{2x^2+1}/x}{(3x-5)/x}\\
+&=\lim_{x\to\infty}\frac{\sqrt{(2x^2+1)/x^2}}{3-5/x}\quad(\sqrt{x^2}=x\text{ khi }x>0)\\
+&=\frac{\lim_{x\to\infty}\sqrt{2+1/x^2}}{\lim_{x\to\infty}(3-5/x)}\\
+&=\frac{\sqrt{\lim_{x\to\infty}2+\lim_{x\to\infty}1/x^2}}{\lim_{x\to\infty}3-5\lim_{x\to\infty}1/x}\\
+&=\frac{\sqrt{2+0}}{3-5\cdot0}=\frac{\sqrt2}{3}.
+\end{align*}
+Vậy $y=\sqrt2/3$ là một tiệm cận ngang.
+
+Khi tính giới hạn tại $-\infty$, cần nhớ rằng $x<0$ thì $\sqrt{x^2}=|x|=-x$. Do đó,
+\[\frac{\sqrt{2x^2+1}}x=\frac{\sqrt{2x^2+1}}{-\sqrt{x^2}}=-\sqrt{\frac{2x^2+1}{x^2}}=-\sqrt{2+\frac1{x^2}}.\]
+Suy ra
+\begin{align*}
+\lim_{x\to-\infty}\frac{\sqrt{2x^2+1}}{3x-5}
+&=\lim_{x\to-\infty}\frac{-\sqrt{2+1/x^2}}{3-5/x}\\
+&=\frac{-\sqrt{2+\lim_{x\to-\infty}1/x^2}}{3-5\lim_{x\to-\infty}1/x}=-\frac{\sqrt2}{3}.
+\end{align*}
+Vậy $y=-\sqrt2/3$ cũng là một tiệm cận ngang (Hình 8).
+\fig[.43]{f08}{Hình 8. $y=\sqrt{2x^2+1}/(3x-5)$. $\square$}
+\ex{5} Tính $\lim_{x\to\infty}(\sqrt{x^2+1}-x)$.
+\sol Vì cả $\sqrt{x^2+1}$ và $x$ đều lớn khi $x$ lớn, khó thấy ngay hiệu của chúng biến thiên thế nào. Ta biến đổi đại số, coi biểu thức có mẫu bằng 1 và nhân cả tử lẫn mẫu với biểu thức căn liên hợp:
+\begin{align*}
+\lim_{x\to\infty}(\sqrt{x^2+1}-x)
+&=\lim_{x\to\infty}(\sqrt{x^2+1}-x)\frac{\sqrt{x^2+1}+x}{\sqrt{x^2+1}+x}\\
+&=\lim_{x\to\infty}\frac{(x^2+1)-x^2}{\sqrt{x^2+1}+x}\\
+&=\lim_{x\to\infty}\frac1{\sqrt{x^2+1}+x}.
+\end{align*}
+Mẫu số tăng lớn khi $x\to\infty$ (nó lớn hơn $x$). Vì thế,
+\[\lim_{x\to\infty}(\sqrt{x^2+1}-x)=\lim_{x\to\infty}\frac1{\sqrt{x^2+1}+x}=0.\]
+Hình 9 minh họa kết quả này.
+\fig[.44]{f09}{Hình 9. $y=\sqrt{x^2+1}-x$. $\square$}
+\ex{6} Tính $\displaystyle\lim_{x\to2^+}\arctan\left(\frac1{x-2}\right)$.
+\sol Đặt $t=1/(x-2)$; khi $x\to2^+$ thì $t\to\infty$. Theo đẳng thức thứ hai trong (4),
+\[\lim_{x\to2^+}\arctan\left(\frac1{x-2}\right)=\lim_{t\to\infty}\arctan t=\frac\pi2.\qquad\square\]
+Đồ thị hàm mũ tự nhiên $y=e^x$ có tiệm cận ngang $y=0$ (trục hoành). Điều này cũng đúng với mọi hàm mũ cơ số $b>1$. Từ Hình 10 và bảng giá trị tương ứng, ta thấy
+\[\lim_{x\to-\infty}e^x=0.\tag{6}\]
+Các giá trị $e^x$ tiến đến 0 rất nhanh.
+\fig[.42]{f10}{Hình 10. Đồ thị $y=e^x$.}
+\begin{center}\begin{tabular}{rr}\toprule$x$&$e^x$\\\midrule
+0&1.00000\\$-1$&0.36788\\$-2$&0.13534\\$-3$&0.04979\\$-5$&0.00674\\$-8$&0.00034\\$-10$&0.00005\\\bottomrule
+\end{tabular}\end{center}
+\ex{7} Tính $\lim_{x\to0^-}e^{1/x}$.
+\sol Đặt $t=1/x$; khi $x\to0^-$ thì $t\to-\infty$. Theo (6),
+\[\lim_{x\to0^-}e^{1/x}=\lim_{t\to-\infty}e^t=0.\]
+(Xem Bài tập 81.)\hfill$\square$
+
+\noindent\textit{Chiến lược giải toán.} Các Ví dụ 6 và 7 sử dụng chiến lược đưa thêm một yếu tố phụ trợ (xem phần Nguyên tắc giải toán sau Chương 1). Ở đây, yếu tố phụ trợ là biến mới $t$.
+\ex{8} Tính $\lim_{x\to\infty}\sin x$.
+\sol Khi $x$ tăng, $\sin x$ dao động giữa $1$ và $-1$ vô số lần nên không tiến đến một số xác định nào. Vì vậy, $\lim_{x\to\infty}\sin x$ không tồn tại.\hfill$\square$
+\section*{Giới hạn vô cực tại vô cực}
+Ký hiệu
+\[\lim_{x\to\infty}f(x)=\infty\]
+diễn tả rằng $f(x)$ tăng lớn khi $x$ tăng lớn. Các ký hiệu sau có ý nghĩa tương tự:
+\[\lim_{x\to-\infty}f(x)=\infty,\qquad\lim_{x\to\infty}f(x)=-\infty,\qquad\lim_{x\to-\infty}f(x)=-\infty.\]
+\ex{9} Tìm $\lim_{x\to\infty}x^3$ và $\lim_{x\to-\infty}x^3$.
+\sol Khi $x$ lớn thì $x^3$ cũng lớn. Chẳng hạn,
+\[10^3=1000,\qquad100^3=1\,000\,000,\qquad1000^3=1\,000\,000\,000.\]
+Có thể làm $x^3$ lớn tùy ý bằng cách yêu cầu $x$ đủ lớn. Do đó,
+\[\lim_{x\to\infty}x^3=\infty.\]
+Tương tự, khi $x$ âm có giá trị tuyệt đối lớn thì $x^3$ cũng vậy, nên
+\[\lim_{x\to-\infty}x^3=-\infty.\]
+Các giới hạn này cũng thấy được trên đồ thị ở Hình 11.
+\fig[.34]{f11}{Hình 11. $\lim_{x\to\infty}x^3=\infty$, $\lim_{x\to-\infty}x^3=-\infty$. $\square$}
+Từ Hình 10, ta thấy $\lim_{x\to\infty}e^x=\infty$. Tuy nhiên, Hình 12 cho thấy $e^x$ tăng lớn nhanh hơn $x^3$ rất nhiều khi $x\to\infty$.
+\fig[.40]{f12}{Hình 12. Khi $x$ lớn, $e^x$ lớn hơn $x^3$ rất nhiều.}
+\ex{10} Tìm $\lim_{x\to\infty}(x^2-x)$.
+\sol Quy tắc 2 nói rằng giới hạn của một hiệu bằng hiệu các giới hạn, với điều kiện các giới hạn ấy tồn tại. Không thể áp dụng ở đây vì
+\[\lim_{x\to\infty}x^2=\infty\qquad\text{và}\qquad\lim_{x\to\infty}x=\infty.\]
+Nói chung, không thể áp dụng các quy tắc giới hạn ấy cho giới hạn vô cực, vì $\infty$ không phải là số; $\infty-\infty$ không xác định. Tuy nhiên,
+\[\lim_{x\to\infty}(x^2-x)=\lim_{x\to\infty}x(x-1)=\infty,\]
+vì cả $x$ và $x-1$ đều lớn tùy ý nên tích của chúng cũng vậy.\hfill$\square$
+\ex{11} Tìm $\displaystyle\lim_{x\to\infty}\frac{x^2+x}{3-x}$.
+\sol Như Ví dụ 3, chia cả tử và mẫu cho lũy thừa cao nhất của $x$ trong mẫu, ở đây là $x$:
+\[\lim_{x\to\infty}\frac{x^2+x}{3-x}=\lim_{x\to\infty}\frac{x+1}{3/x-1}=-\infty,\]
+vì $x+1\to\infty$ và $3/x-1\to0-1=-1$ khi $x\to\infty$.\hfill$\square$
+
+Ví dụ sau cho thấy: kết hợp giới hạn vô cực tại vô cực với giao điểm của đồ thị và các trục tọa độ, ta có thể phác họa đồ thị đa thức mà không cần tính nhiều điểm.
+\ex{12} Phác họa đồ thị $y=(x-2)^4(x+1)^3(x-1)$ bằng cách tìm các giao điểm với trục tọa độ và giới hạn khi $x\to\infty$, $x\to-\infty$.
+\sol Tung độ giao điểm với trục tung là $f(0)=(-2)^4(1)^3(-1)=-16$. Cho $y=0$, được các hoành độ giao điểm với trục hoành là $x=2,-1,1$. Vì $(x-2)^4$ luôn không âm nên hàm không đổi dấu tại 2; đồ thị không đi xuyên qua trục hoành tại đó. Đồ thị đi xuyên qua trục hoành tại $-1$ và 1.
+
+Khi $x$ dương lớn, cả ba thừa số đều dương lớn nên
+\[\lim_{x\to\infty}(x-2)^4(x+1)^3(x-1)=\infty.\]
+Khi $x$ âm có giá trị tuyệt đối lớn, thừa số thứ nhất dương lớn, còn hai thừa số kia âm có giá trị tuyệt đối lớn. Do đó,
+\[\lim_{x\to-\infty}(x-2)^4(x+1)^3(x-1)=\infty.\]
+Kết hợp các thông tin này, ta phác họa đồ thị như Hình 13.
+\fig[.42]{f13}{Hình 13. $y=(x-2)^4(x+1)^3(x-1)$. $\square$}
+\section*{Các định nghĩa chính xác}
+Định nghĩa 1 có thể được phát biểu chính xác như sau.
+\begin{quote}\textbf{7. Định nghĩa chính xác của giới hạn tại vô cực.} Cho $f$ xác định trên một khoảng $(a,\infty)$. Khi đó,
+\[\lim_{x\to\infty}f(x)=L\]
+có nghĩa là với mỗi $\varepsilon>0$, tồn tại một số $N$ tương ứng sao cho
+\[x>N\quad\Longrightarrow\quad|f(x)-L|<\varepsilon.\]
+\end{quote}
+Nói cách khác, có thể làm $f(x)$ gần $L$ tùy ý (cách $L$ một khoảng nhỏ hơn $\varepsilon$, với $\varepsilon$ dương tùy ý) bằng cách yêu cầu $x$ đủ lớn (lớn hơn $N$, trong đó $N$ phụ thuộc $\varepsilon$). Về hình học, với $x>N$, đồ thị nằm giữa hai đường thẳng ngang $y=L-\varepsilon$ và $y=L+\varepsilon$ như Hình 14. Điều này phải đúng dù chọn $\varepsilon$ nhỏ đến đâu.
+\fig[.91]{f14}{Hình 14. Minh họa $\lim_{x\to\infty}f(x)=L$: khi $x$ ở miền bên phải $N$, $f(x)$ nằm trong dải giữa hai đường ngang.}
+Hình 15 cho thấy: nếu chọn $\varepsilon$ nhỏ hơn thì có thể cần một giá trị $N$ lớn hơn.
+\fig[.87]{f15}{Hình 15. Minh họa $\lim_{x\to\infty}f(x)=L$ với $\varepsilon$ nhỏ hơn.}
+Tương tự, Định nghĩa 8 là dạng chính xác của Định nghĩa 2 (Hình 16).
+\begin{quote}\textbf{8. Định nghĩa.} Cho $f$ xác định trên một khoảng $(-\infty,a)$. Khi đó,
+\[\lim_{x\to-\infty}f(x)=L\]
+có nghĩa là với mỗi $\varepsilon>0$, tồn tại một số $N$ tương ứng sao cho
+\[x<N\quad\Longrightarrow\quad|f(x)-L|<\varepsilon.\]
+\end{quote}
+\fig[.87]{f16}{Hình 16. Minh họa $\lim_{x\to-\infty}f(x)=L$.}
+Trong Ví dụ 3, ta đã tính được
+\[\lim_{x\to\infty}\frac{3x^2-x-2}{5x^2+4x+1}=\frac35.\]
+Ví dụ tiếp theo dùng máy tính cầm tay hoặc máy tính để liên hệ kết quả này với Định nghĩa 7, khi $L=3/5=0.6$, $\varepsilon=0.1$.
+\ex{13} Dùng đồ thị để tìm một số $N$ sao cho
+\[x>N\quad\Longrightarrow\quad\left|\frac{3x^2-x-2}{5x^2+4x+1}-0.6\right|<0.1.\]
+\sol Viết lại bất đẳng thức thành
+\[0.5<\frac{3x^2-x-2}{5x^2+4x+1}<0.7.\]
+Cần tìm các giá trị $x$ để đường cong nằm giữa hai đường thẳng $y=0.5$ và $y=0.7$. Vẽ đường cong và hai đường thẳng ấy như Hình 17. Từ đồ thị, ước lượng được giao điểm với $y=0.5$ có hoành độ $x\approx6.7$. Về bên phải giá trị này, đường cong dường như luôn nằm giữa hai đường thẳng. Làm tròn lên để bảo đảm, ta có thể nói
+\[x>7\quad\Longrightarrow\quad\left|\frac{3x^2-x-2}{5x^2+4x+1}-0.6\right|<0.1.\]
+Vậy với $\varepsilon=0.1$, có thể chọn $N=7$ hoặc bất kỳ số lớn hơn trong Định nghĩa 7.
+\fig[.46]{f17}{Hình 17. Đường cong nằm giữa $y=0.5$ và $y=0.7$ khi $x>7$. $\square$}
+\ex{14} Dùng Định nghĩa 7 để chứng minh $\lim_{x\to\infty}1/x=0$.
+\sol Cho $\varepsilon>0$, cần tìm $N$ sao cho
+\[x>N\quad\Longrightarrow\quad\left|\frac1x-0\right|<\varepsilon.\]
+Khi tính giới hạn này, có thể giả sử $x>0$. Khi ấy $1/x<\varepsilon\iff x>1/\varepsilon$. Chọn $N=1/\varepsilon$. Nếu $x>N=1/\varepsilon$ thì
+\[\left|\frac1x-0\right|=\frac1x<\varepsilon.\]
+Theo Định nghĩa 7, $\lim_{x\to\infty}1/x=0$. Hình 18 minh họa một vài giá trị $\varepsilon$ và các giá trị $N$ tương ứng.
+\fig[.96]{f18}{Hình 18. Với $\varepsilon=1,0.2,0.1$, có thể lần lượt chọn $N=1,5,10$. $\square$}
+Cuối cùng, giới hạn vô cực tại vô cực có thể được định nghĩa như sau; Hình 19 là minh họa hình học.
+\begin{quote}\textbf{9. Định nghĩa chính xác của giới hạn vô cực tại vô cực.} Cho $f$ xác định trên một khoảng $(a,\infty)$. Khi đó,
+\[\lim_{x\to\infty}f(x)=\infty\]
+có nghĩa là với mỗi số dương $M$, tồn tại số dương $N$ tương ứng sao cho
+\[x>N\quad\Longrightarrow\quad f(x)>M.\]
+\end{quote}
+Có các định nghĩa tương tự khi thay ký hiệu $\infty$ bằng $-\infty$ (xem Bài tập 80).
+\fig[.46]{f19}{Hình 19. Minh họa $\lim_{x\to\infty}f(x)=\infty$.}
+\clearpage
+\section*{2.6. Bài tập}
+\bt{1} Giải thích bằng lời ý nghĩa của mỗi biểu thức sau:
+\[(a)\quad\lim_{x\to\infty}f(x)=5;\qquad(b)\quad\lim_{x\to-\infty}f(x)=3.\]
+\bt{2} (a) Đồ thị $y=f(x)$ có thể giao với một tiệm cận đứng không? Có thể giao với một tiệm cận ngang không? Phác họa đồ thị minh họa.
+
+(b) Đồ thị $y=f(x)$ có thể có bao nhiêu tiệm cận ngang? Phác họa đồ thị minh họa các khả năng.
+\bt{3} Với hàm $f$ có đồ thị sau, hãy nêu:
+\[(a)\ \lim_{x\to\infty}f(x);\qquad(b)\ \lim_{x\to-\infty}f(x);\]\[(c)\ \lim_{x\to1}f(x);\qquad(d)\ \lim_{x\to3}f(x).\]
+(e) Phương trình các tiệm cận.
+\fig[.60]{e03}{Đồ thị dùng cho Bài tập 3.}
+\bt{4} Với hàm $g$ có đồ thị sau, hãy nêu:
+\[(a)\ \lim_{x\to\infty}g(x);\quad(b)\ \lim_{x\to-\infty}g(x);\quad(c)\ \lim_{x\to0}g(x);\]
+\[(d)\ \lim_{x\to2^-}g(x);\qquad(e)\ \lim_{x\to2^+}g(x).\]
+(f) Phương trình các tiệm cận.
+\fig[.60]{e04}{Đồ thị dùng cho Bài tập 4.}
+\group{5–10. Phác họa một ví dụ về đồ thị hàm $f$ thỏa mãn tất cả các điều kiện đã cho.}
+\bt{5} $f(2)=4$, $f(-2)=-4$, $\lim_{x\to-\infty}f(x)=0$, $\lim_{x\to\infty}f(x)=2$.
+\bt{6} $f(0)=0$, $\lim_{x\to1^-}f(x)=\infty$, $\lim_{x\to1^+}f(x)=-\infty$,
+\[\lim_{x\to-\infty}f(x)=-2,\qquad\lim_{x\to\infty}f(x)=-2.\]
+\bt{7} $\lim_{x\to0}f(x)=\infty$, $\lim_{x\to3^-}f(x)=-\infty$, $\lim_{x\to3^+}f(x)=\infty$,
+\[\lim_{x\to-\infty}f(x)=1,\qquad\lim_{x\to\infty}f(x)=-1.\]
+\bt{8} $\lim_{x\to-\infty}f(x)=-\infty$, $\lim_{x\to-2^-}f(x)=\infty$, $\lim_{x\to-2^+}f(x)=-\infty$,
+\[\lim_{x\to2}f(x)=\infty,\qquad\lim_{x\to\infty}f(x)=\infty.\]
+\bt{9} $f(0)=0$, $\lim_{x\to1}f(x)=-\infty$, $\lim_{x\to\infty}f(x)=-\infty$; $f$ là hàm lẻ.
+\bt{10} $\lim_{x\to-\infty}f(x)=-1$, $\lim_{x\to0^-}f(x)=\infty$, $\lim_{x\to0^+}f(x)=-\infty$,
+\[\lim_{x\to3^-}f(x)=1,\quad f(3)=4,\quad\lim_{x\to3^+}f(x)=4,\quad\lim_{x\to\infty}f(x)=1.\]
+\bt{11} Dự đoán giá trị $\lim_{x\to\infty}x^2/2^x$ bằng cách tính $f(x)=x^2/2^x$ tại
+\[x=0,1,2,3,4,5,6,7,8,9,10,20,50,100.\] Sau đó dùng đồ thị $f$ để củng cố dự đoán.
+\bt{12} (a) Dùng đồ thị $f(x)=(1-2/x)^x$ để ước lượng $\lim_{x\to\infty}f(x)$, chính xác đến hai chữ số thập phân.
+
+(b) Dùng bảng giá trị $f(x)$ để ước lượng giới hạn đến bốn chữ số thập phân.
+\group{13–14. Tính giới hạn và giải thích từng bước bằng cách nêu tính chất giới hạn thích hợp.}
+\bt{13} $\displaystyle\lim_{x\to\infty}\frac{2x^2-7}{5x^2+x-3}$.
+\bt{14} $\displaystyle\lim_{x\to\infty}\sqrt{\frac{9x^3+8x-4}{3-5x+x^3}}$.
+\group{15–42. Tìm giới hạn hoặc chứng tỏ giới hạn không tồn tại.}
+\bt{15} $\displaystyle\lim_{x\to\infty}\frac{4x+3}{5x-1}$.
+\bt{16} $\displaystyle\lim_{x\to\infty}\frac{-2}{3x+7}$.
+\bt{17} $\displaystyle\lim_{t\to-\infty}\frac{3t^2+t}{t^3-4t+1}$.
+\bt{18} $\displaystyle\lim_{t\to-\infty}\frac{6t^2+t-5}{9-2t^2}$.
+\bt{19} $\displaystyle\lim_{r\to\infty}\frac{r-r^3}{2-r^2+3r^3}$.
+\bt{20} $\displaystyle\lim_{x\to\infty}\frac{3x^3-8x+2}{4x^3-5x^2-2}$.
+\bt{21} $\displaystyle\lim_{x\to\infty}\frac{4-\sqrt x}{2+\sqrt x}$.
+\bt{22} $\displaystyle\lim_{u\to-\infty}\frac{(u^2+1)(2u^2-1)}{(u^2+2)^2}$.
+\bt{23} $\displaystyle\lim_{x\to\infty}\frac{\sqrt{x+3x^2}}{4x-1}$.
+\bt{24} $\displaystyle\lim_{t\to\infty}\frac{t+3}{\sqrt{2t^2-1}}$.
+\bt{25} $\displaystyle\lim_{x\to\infty}\frac{\sqrt{1+4x^6}}{2-x^3}$.
+\bt{26} $\displaystyle\lim_{x\to-\infty}\frac{\sqrt{1+4x^6}}{2-x^3}$.
+\bt{27} $\displaystyle\lim_{x\to-\infty}\frac{2x^5-x}{x^4+3}$.
+\bt{28} $\displaystyle\lim_{q\to\infty}\frac{q^3+6q-4}{4q^2-3q+3}$.
+\bt{29} $\displaystyle\lim_{t\to\infty}(\sqrt{25t^2+2}-5t)$.
+\bt{30} $\displaystyle\lim_{x\to-\infty}(\sqrt{4x^2+3x}+2x)$.
+\bt{31} $\displaystyle\lim_{x\to\infty}(\sqrt{x^2+ax}-\sqrt{x^2+bx})$.
+\bt{32} $\displaystyle\lim_{x\to\infty}(x-\sqrt x)$.
+\bt{33} $\displaystyle\lim_{x\to-\infty}(x^2+2x^7)$.
+\bt{34} $\displaystyle\lim_{x\to\infty}(e^{-x}+2\cos3x)$.
+\bt{35} $\displaystyle\lim_{x\to\infty}(e^{-2x}\cos x)$.
+\bt{36} $\displaystyle\lim_{x\to\infty}\frac{\sin^2x}{x^2+1}$.
+\bt{37} $\displaystyle\lim_{x\to\infty}\frac{1-e^x}{1+2e^x}$.
+\bt{38} $\displaystyle\lim_{x\to\infty}\frac{e^{3x}-e^{-3x}}{e^{3x}+e^{-3x}}$.
+\bt{39} $\displaystyle\lim_{x\to(\pi/2)^+}e^{\sec x}$.
+\bt{40} $\displaystyle\lim_{x\to0^+}\tan^{-1}(\ln x)$.
+\bt{41} $\displaystyle\lim_{x\to\infty}[\ln(1+x^2)-\ln(1+x)]$.
+\bt{42} $\displaystyle\lim_{x\to\infty}[\ln(2+x)-\ln(1+x)]$.
+\bt{43} (a) Cho $f(x)=x/\ln x$. Tìm các giới hạn:
+\[\text{(i)}\ \lim_{x\to0^+}f(x);\quad\text{(ii)}\ \lim_{x\to1^-}f(x);\quad\text{(iii)}\ \lim_{x\to1^+}f(x).\]
+(b) Dùng bảng giá trị để ước lượng $\lim_{x\to\infty}f(x)$.
+
+(c) Dùng thông tin từ (a), (b) để phác họa đồ thị $f$.
+\bt{44} (a) Cho $f(x)=2/x-1/\ln x$. Tìm các giới hạn:
+\[\text{(i)}\ \lim_{x\to\infty}f(x);\quad\text{(ii)}\ \lim_{x\to0^+}f(x);\quad\text{(iii)}\ \lim_{x\to1^-}f(x);\quad\text{(iv)}\ \lim_{x\to1^+}f(x).\]
+(b) Dùng thông tin từ (a) để phác họa đồ thị $f$.
+\bt{45} (a) Ước lượng $\lim_{x\to-\infty}(\sqrt{x^2+x+1}+x)$ bằng cách vẽ đồ thị $f(x)=\sqrt{x^2+x+1}+x$.
+
+(b) Dùng bảng giá trị $f(x)$ để dự đoán giá trị giới hạn.
+
+(c) Chứng minh dự đoán đúng.
+\bt{46} (a) Dùng đồ thị
+\[f(x)=\sqrt{3x^2+8x+6}-\sqrt{3x^2+3x+1}\]
+để ước lượng $\lim_{x\to\infty}f(x)$ đến một chữ số thập phân.
+
+(b) Dùng bảng giá trị $f(x)$ để ước lượng đến bốn chữ số thập phân.
+
+(c) Tìm giá trị chính xác của giới hạn.
+\group{47–52. Tìm các tiệm cận ngang và đứng của mỗi đường cong. Có thể dùng máy tính vẽ đồ thị để kiểm tra bằng cách vẽ đường cong và ước lượng các tiệm cận.}
+\bt{47} $\displaystyle y=\frac{5+4x}{x+3}$.
+\bt{48} $\displaystyle y=\frac{2x^2+1}{3x^2+2x-1}$.
+\bt{49} $\displaystyle y=\frac{2x^2+x-1}{x^2+x-2}$.
+\bt{50} $\displaystyle y=\frac{1+x^4}{x^2-x^4}$.
+\bt{51} $\displaystyle y=\frac{x^3-x}{x^2-6x+5}$.
+\bt{52} $\displaystyle y=\frac{2e^x}{e^x-5}$.
+\bt{53} Ước lượng tiệm cận ngang của
+\[f(x)=\frac{3x^3+500x^2}{x^3+500x^2+100x+2000}\]
+bằng đồ thị với $-10\le x\le10$. Sau đó tính phương trình tiệm cận bằng giới hạn. Giải thích sự sai khác.
+\bt{54} (a) Vẽ đồ thị $f(x)=\sqrt{2x^2+1}/(3x-5)$. Quan sát thấy bao nhiêu tiệm cận ngang và đứng? Dùng đồ thị để ước lượng
+\[\lim_{x\to\infty}\frac{\sqrt{2x^2+1}}{3x-5},\qquad\lim_{x\to-\infty}\frac{\sqrt{2x^2+1}}{3x-5}.\]
+(b) Tính các giá trị $f(x)$ để ước lượng bằng số các giới hạn ở (a).
+
+(c) Tính chính xác các giới hạn ở (a). Hai giá trị bằng nhau hay khác nhau? [Căn cứ vào câu trả lời ở (a), có thể cần kiểm tra lại phép tính giới hạn thứ hai.]
+\bt{55} Cho $P,Q$ là các đa thức. Tìm $\lim_{x\to\infty}P(x)/Q(x)$ nếu bậc của $P$: (a) nhỏ hơn bậc của $Q$; (b) lớn hơn bậc của $Q$.
+\bt{56} Phác họa đường cong $y=x^n$ ($n$ nguyên) trong năm trường hợp: (i) $n=0$; (ii) $n>0$, $n$ lẻ; (iii) $n>0$, $n$ chẵn; (iv) $n<0$, $n$ lẻ; (v) $n<0$, $n$ chẵn. Dùng các hình ấy để tìm:
+\[(a)\ \lim_{x\to0^+}x^n;\quad(b)\ \lim_{x\to0^-}x^n;\quad(c)\ \lim_{x\to\infty}x^n;\quad(d)\ \lim_{x\to-\infty}x^n.\]
+\bt{57} Tìm công thức một hàm $f$ thỏa mãn:
+\[\lim_{x\to\pm\infty}f(x)=0,\quad\lim_{x\to0}f(x)=-\infty,\quad f(2)=0,\]
+\[\lim_{x\to3^-}f(x)=\infty,\qquad\lim_{x\to3^+}f(x)=-\infty.\]
+\bt{58} Tìm công thức một hàm có các tiệm cận đứng $x=1$, $x=3$ và tiệm cận ngang $y=1$.
+\bt{59} Hàm $f$ là tỉ số của hai đa thức bậc hai, có tiệm cận đứng $x=4$ và chỉ một giao điểm với trục hoành, tại $x=1$. Biết $f$ có gián đoạn có thể khử tại $x=-1$ và $\lim_{x\to-1}f(x)=2$. Tính:
+\[(a)\quad f(0);\qquad(b)\quad\lim_{x\to\infty}f(x).\]
+\group{60–64. Tìm giới hạn khi $x\to\infty$ và $x\to-\infty$. Dùng các kết quả cùng các giao điểm với trục tọa độ để phác họa đồ thị như Ví dụ 12.}
+\bt{60} $y=2x^3-x^4$.
+\bt{61} $y=x^4-x^6$.
+\bt{62} $y=x^3(x+2)^2(x-1)$.
+\bt{63} $y=(3-x)(1+x)^2(1-x)^4$.
+\bt{64} $y=x^2(x^2-1)^2(x+2)$.
+\bt{65} (a) Dùng Định lý kẹp để tính $\lim_{x\to\infty}(\sin x)/x$.
+
+(b) Vẽ đồ thị $f(x)=(\sin x)/x$. Đồ thị cắt tiệm cận bao nhiêu lần?
+\bt{66} \textbf{Dáng điệu tại vô cực của hàm số.} Dáng điệu tại vô cực là dáng điệu các giá trị hàm khi $x\to\infty$ và $x\to-\infty$.
+
+(a) Mô tả và so sánh dáng điệu tại vô cực của
+\[P(x)=3x^5-5x^3+2x,\qquad Q(x)=3x^5\]
+bằng cách vẽ cả hai trong các cửa sổ $[-2,2]\times[-2,2]$ và $[-10,10]\times[-10\,000,10\,000]$.
+
+(b) Hai hàm được nói là có cùng dáng điệu tại vô cực nếu tỉ số của chúng tiến đến 1 khi $x\to\infty$. Chứng tỏ $P$ và $Q$ có cùng dáng điệu tại vô cực.
+\bt{67} Tìm $\lim_{x\to\infty}f(x)$ nếu với mọi $x>1$,
+\[\frac{10e^x-21}{2e^x}<f(x)<\frac{5\sqrt x}{\sqrt x-1}.\]
+\bt{68} (a) Một bể chứa 5000 L nước tinh khiết. Nước muối chứa 30 g muối trên mỗi lít được bơm vào bể với lưu lượng 25 L/phút. Chứng tỏ nồng độ muối sau $t$ phút (đơn vị g/L) là
+\[C(t)=\frac{30t}{200+t}.\]
+(b) Nồng độ biến thiên thế nào khi $t\to\infty$?
+\bt{69} Trong Chương 9, dưới những giả thiết thích hợp, ta sẽ chứng minh vận tốc $v(t)$ của một giọt mưa rơi tại thời điểm $t$ là
+\[v(t)=v^*(1-e^{-gt/v^*}),\]
+trong đó $g$ là gia tốc trọng trường, $v^*$ là vận tốc giới hạn của giọt mưa.
+
+(a) Tìm $\lim_{t\to\infty}v(t)$.
+
+(b) Vẽ đồ thị $v(t)$ khi $v^*=1$ m/s và $g=9.8$ $\mathrm{m/s^2}$. Mất bao lâu để vận tốc giọt mưa đạt 99\% vận tốc giới hạn?
+\bt{70} (a) Vẽ $y=e^{-x/10}$ và $y=0.1$ trên cùng màn hình để tìm xem cần chọn $x$ lớn đến mức nào để $e^{-x/10}<0.1$.
+
+(b) Có thể giải (a) mà không dùng đồ thị không?
+\bt{71} Dùng đồ thị để tìm số $N$ sao cho
+\[x>N\quad\Longrightarrow\quad\left|\frac{3x^2+1}{2x^2+x+1}-1.5\right|<0.05.\]
+\bt{72} Với giới hạn $\displaystyle\lim_{x\to\infty}\frac{1-3x}{\sqrt{x^2+1}}=-3$, minh họa Định nghĩa 7 bằng cách tìm các giá trị $N$ tương ứng với $\varepsilon=0.1$ và $\varepsilon=0.05$.
+\bt{73} Với giới hạn $\displaystyle\lim_{x\to-\infty}\frac{1-3x}{\sqrt{x^2+1}}=3$, minh họa Định nghĩa 8 bằng cách tìm các giá trị $N$ tương ứng với $\varepsilon=0.1$ và $\varepsilon=0.05$.
+\bt{74} Với giới hạn $\displaystyle\lim_{x\to\infty}\sqrt{x}\ln x=\infty$, minh họa Định nghĩa 9 bằng cách tìm giá trị $N$ tương ứng với $M=100$.
+\bt{75} (a) Cần chọn $x$ lớn đến mức nào để $1/x^2<0.0001$?
+
+(b) Lấy $r=2$ trong Định lý 5, ta có $\lim_{x\to\infty}1/x^2=0$. Chứng minh trực tiếp bằng Định nghĩa 7.
+\bt{76} (a) Cần chọn $x$ lớn đến mức nào để $1/\sqrt{x}<0.0001$?
+
+(b) Lấy $r=1/2$ trong Định lý 5, ta có $\lim_{x\to\infty}1/\sqrt{x}=0$. Chứng minh trực tiếp bằng Định nghĩa 7.
+\bt{77} Dùng Định nghĩa 8 chứng minh $\lim_{x\to-\infty}1/x=0$.
+\bt{78} Dùng Định nghĩa 9 chứng minh $\lim_{x\to\infty}x^3=\infty$.
+\bt{79} Dùng Định nghĩa 9 chứng minh $\lim_{x\to\infty}e^x=\infty$.
+\bt{80} Phát biểu định nghĩa chính xác của $\lim_{x\to-\infty}f(x)=-\infty$. Sau đó dùng định nghĩa ấy chứng minh
+\[\lim_{x\to-\infty}(1+x^3)=-\infty.\]
+\bt{81} (a) Chứng minh rằng
+\[\lim_{x\to\infty}f(x)=\lim_{t\to0^+}f(1/t),\qquad\lim_{x\to-\infty}f(x)=\lim_{t\to0^-}f(1/t),\]
+với giả thiết các giới hạn này tồn tại.
+
+(b) Dùng (a) và Bài tập 65 để tìm $\displaystyle\lim_{x\to0^+}x\sin\frac1x$.
+\section*{Chú thích biên tập và thuật ngữ}
+\begin{enumerate}
+\item Giữ số thứ tự như bản gốc: Định nghĩa 1–3, 7–9; Định lý 5; các công thức (4), (6); Ví dụ 1–14; Hình 1–19; Bài tập 1–81. $\tan^{-1}x$ có nghĩa là $\arctan x$.
+\item Trong các định nghĩa chính xác, điều kiện kéo theo được xét với $x$ thuộc tập xác định. Có thể tăng $N$ trong Định nghĩa 7, 9, hoặc giảm $N$ trong Định nghĩa 8, để toàn bộ miền xét nằm trong khoảng mà hàm xác định.
+\item Các quy tắc đại số cho giới hạn hữu hạn không tự động áp dụng khi có giá trị $\pm\infty$. Các kết luận trong Ví dụ 10, 11 dựa vào dấu và độ lớn của các biểu thức.
+\item Các hình được trích từ bản gốc để bảo toàn đường cong và ký hiệu; chú thích tiếng Việt giải thích nội dung. Trong Hình 14, các nhãn tiếng Anh có nghĩa là: “khi $x$ ở miền này” và “$f(x)$ nằm trong dải này”.
+\end{enumerate}
+\begin{center}\begin{tabular}{ll}\toprule Thuật ngữ tiếng Anh&Thuật ngữ tiếng Việt\\\midrule
+limit at infinity&giới hạn tại vô cực\\
+infinite limit at infinity&giới hạn vô cực tại vô cực\\
+horizontal asymptote&tiệm cận ngang\\
+vertical asymptote&tiệm cận đứng\\
+end behavior&dáng điệu tại vô cực\\
+conjugate radical&biểu thức căn liên hợp\\
+terminal velocity&vận tốc giới hạn\\\bottomrule
+\end{tabular}\end{center}
+\noindent\textbf{Phạm vi:} Toàn bộ §2.6, gồm lý thuyết, ví dụ, chứng minh và 81 bài tập; không bổ sung lời giải bài tập. Phần tiếp theo: \textbf{§2.7 — Đạo hàm và tốc độ biến thiên}.
+\end{document}
