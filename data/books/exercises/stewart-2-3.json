@@ -1,0 +1,280 @@
+{
+  "bookKey": "stewart-9",
+  "sectionKey": "2-3",
+  "heading": "2.3. Bài tập",
+  "sourceSha256": "5ecf77736f6b0842a8c9112fdaa9e9a2fc8938166eff22628aec5de455f84b89",
+  "exercises": [
+    {
+      "number": 1,
+      "content": "<p><strong>1.</strong>&nbsp; Cho <span class=\"math inline\">\\(\\lim_{x\\to2}f(x)=4\\)</span>, <span class=\"math inline\">\\(\\lim_{x\\to2}g(x)=-2\\)</span>, <span class=\"math inline\">\\(\\lim_{x\\to2}h(x)=0\\)</span>. Tính những giới hạn\ntồn tại; nếu không tồn tại, giải thích: <span class=\"math display\">\\[(a)\\ \\lim_{x\\to2}[f(x)+5g(x)];\\quad(b)\\\n\\lim_{x\\to2}[g(x)]^3;\\quad(c)\\ \\lim_{x\\to2}\\sqrt{f(x)};\\]</span> <span class=\"math display\">\\[(d)\\ \\lim_{x\\to2}\\frac{3f(x)}{g(x)};\\qquad(e)\\\n\\lim_{x\\to2}\\frac{g(x)}{h(x)};\\qquad(f)\\\n\\lim_{x\\to2}\\frac{g(x)h(x)}{f(x)}.\\]</span></p>"
+    },
+    {
+      "number": 2,
+      "content": "<p><strong>2.</strong>&nbsp; Cho đồ thị <span class=\"math inline\">\\(f,g\\)</span>. Dùng chúng tính mỗi giới hạn, nếu\ntồn tại; nếu không, giải thích: <span class=\"math display\">\\[(a)\\\n\\lim_{x\\to2}[f(x)+g(x)];\\quad(b)\\ \\lim_{x\\to0}[f(x)-g(x)];\\quad(c)\\\n\\lim_{x\\to-1}[f(x)g(x)];\\]</span> <span class=\"math display\">\\[(d)\\\n\\lim_{x\\to3}\\frac{f(x)}{g(x)};\\quad(e)\\ \\lim_{x\\to2}[x^2f(x)];\\quad(f)\\\nf(-1)+\\lim_{x\\to-1}g(x).\\]</span></p>\n<div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-2-3-5ecf7773/e02.png\" alt=\"image\"><br>\n<span>Đồ thị cho Bài tập 2.</span></p>\n</div>"
+    },
+    {
+      "number": 3,
+      "content": "<p><strong>3–9. Tính giới hạn, giải thích từng bước bằng cách nêu quy\ntắc giới hạn thích hợp.</strong></p><p><strong>3.</strong>&nbsp; <span class=\"math inline\">\\(\\displaystyle\\lim_{x\\to5}(4x^2-5x)\\)</span>.</p>"
+    },
+    {
+      "number": 4,
+      "content": "<p><strong>3–9. Tính giới hạn, giải thích từng bước bằng cách nêu quy\ntắc giới hạn thích hợp.</strong></p><p><strong>4.</strong>&nbsp; <span class=\"math inline\">\\(\\displaystyle\\lim_{x\\to-3}(2x^3+6x^2-9)\\)</span>.</p>"
+    },
+    {
+      "number": 5,
+      "content": "<p><strong>3–9. Tính giới hạn, giải thích từng bước bằng cách nêu quy\ntắc giới hạn thích hợp.</strong></p><p><strong>5.</strong>&nbsp; <span class=\"math inline\">\\(\\displaystyle\\lim_{v\\to2}(v^2+2v)(2v^3-5)\\)</span>.</p>"
+    },
+    {
+      "number": 6,
+      "content": "<p><strong>3–9. Tính giới hạn, giải thích từng bước bằng cách nêu quy\ntắc giới hạn thích hợp.</strong></p><p><strong>6.</strong>&nbsp; <span class=\"math inline\">\\(\\displaystyle\\lim_{t\\to7}\\frac{3t^2+1}{t^2-5t+2}\\)</span>.</p>"
+    },
+    {
+      "number": 7,
+      "content": "<p><strong>3–9. Tính giới hạn, giải thích từng bước bằng cách nêu quy\ntắc giới hạn thích hợp.</strong></p><p><strong>7.</strong>&nbsp; <span class=\"math inline\">\\(\\displaystyle\\lim_{u\\to-2}\\sqrt{9-u^3+2u^2}\\)</span>.</p>"
+    },
+    {
+      "number": 8,
+      "content": "<p><strong>3–9. Tính giới hạn, giải thích từng bước bằng cách nêu quy\ntắc giới hạn thích hợp.</strong></p><p><strong>8.</strong>&nbsp; <span class=\"math inline\">\\(\\displaystyle\\lim_{x\\to3}\\sqrt[3]{x+5}\\,(2x^2-3x)\\)</span>.</p>"
+    },
+    {
+      "number": 9,
+      "content": "<p><strong>3–9. Tính giới hạn, giải thích từng bước bằng cách nêu quy\ntắc giới hạn thích hợp.</strong></p><p><strong>9.</strong>&nbsp; <span class=\"math inline\">\\(\\displaystyle\\lim_{t\\to-1}\\left(\\frac{2t^5-t^4}{5t^2+4}\\right)^3\\)</span>.</p>"
+    },
+    {
+      "number": 10,
+      "content": "<p><strong>10.</strong>&nbsp; (a) Đẳng thức sau sai ở điểm nào? <span class=\"math display\">\\[\\frac{x^2+x-6}{x-2}=x+3.\\]</span> (b) Dựa vào\n(a), giải thích vì sao đẳng thức sau đúng: <span class=\"math display\">\\[\\lim_{x\\to2}\\frac{x^2+x-6}{x-2}=\\lim_{x\\to2}(x+3).\\]</span></p>"
+    },
+    {
+      "number": 11,
+      "content": "<p><strong>11–34. Tính giới hạn, nếu tồn tại.</strong></p><p><strong>11.</strong>&nbsp; <span class=\"math inline\">\\(\\displaystyle\\lim_{x\\to-2}(3x-7)\\)</span>.</p>"
+    },
+    {
+      "number": 12,
+      "content": "<p><strong>11–34. Tính giới hạn, nếu tồn tại.</strong></p><p><strong>12.</strong>&nbsp; <span class=\"math inline\">\\(\\displaystyle\\lim_{x\\to6}(8-\\tfrac12\nx)\\)</span>.</p>"
+    },
+    {
+      "number": 13,
+      "content": "<p><strong>11–34. Tính giới hạn, nếu tồn tại.</strong></p><p><strong>13.</strong>&nbsp; <span class=\"math inline\">\\(\\displaystyle\\lim_{t\\to4}\\frac{t^2-2t-8}{t-4}\\)</span>.</p>"
+    },
+    {
+      "number": 14,
+      "content": "<p><strong>11–34. Tính giới hạn, nếu tồn tại.</strong></p><p><strong>14.</strong>&nbsp; <span class=\"math inline\">\\(\\displaystyle\\lim_{x\\to-3}\\frac{x^2+3x}{x^2-x-12}\\)</span>.</p>"
+    },
+    {
+      "number": 15,
+      "content": "<p><strong>11–34. Tính giới hạn, nếu tồn tại.</strong></p><p><strong>15.</strong>&nbsp; <span class=\"math inline\">\\(\\displaystyle\\lim_{x\\to2}\\frac{x^2+5x+4}{x-2}\\)</span>.</p>"
+    },
+    {
+      "number": 16,
+      "content": "<p><strong>11–34. Tính giới hạn, nếu tồn tại.</strong></p><p><strong>16.</strong>&nbsp; <span class=\"math inline\">\\(\\displaystyle\\lim_{x\\to4}\\frac{x^2+3x}{x^2-x-12}\\)</span>.</p>"
+    },
+    {
+      "number": 17,
+      "content": "<p><strong>11–34. Tính giới hạn, nếu tồn tại.</strong></p><p><strong>17.</strong>&nbsp; <span class=\"math inline\">\\(\\displaystyle\\lim_{x\\to-2}\\frac{x^2-x-6}{3x^2+5x-2}\\)</span>.</p>"
+    },
+    {
+      "number": 18,
+      "content": "<p><strong>11–34. Tính giới hạn, nếu tồn tại.</strong></p><p><strong>18.</strong>&nbsp; <span class=\"math inline\">\\(\\displaystyle\\lim_{x\\to-5}\\frac{2x^2+9x-5}{x^2-25}\\)</span>.</p>"
+    },
+    {
+      "number": 19,
+      "content": "<p><strong>11–34. Tính giới hạn, nếu tồn tại.</strong></p><p><strong>19.</strong>&nbsp; <span class=\"math inline\">\\(\\displaystyle\\lim_{t\\to3}\\frac{t^3-27}{t^2-9}\\)</span>.</p>"
+    },
+    {
+      "number": 20,
+      "content": "<p><strong>11–34. Tính giới hạn, nếu tồn tại.</strong></p><p><strong>20.</strong>&nbsp; <span class=\"math inline\">\\(\\displaystyle\\lim_{u\\to-1}\\frac{u+1}{u^3+1}\\)</span>.</p>"
+    },
+    {
+      "number": 21,
+      "content": "<p><strong>11–34. Tính giới hạn, nếu tồn tại.</strong></p><p><strong>21.</strong>&nbsp; <span class=\"math inline\">\\(\\displaystyle\\lim_{h\\to0}\\frac{(h-3)^2-9}{h}\\)</span>.</p>"
+    },
+    {
+      "number": 22,
+      "content": "<p><strong>11–34. Tính giới hạn, nếu tồn tại.</strong></p><p><strong>22.</strong>&nbsp; <span class=\"math inline\">\\(\\displaystyle\\lim_{x\\to9}\\frac{9-x}{3-\\sqrt{x}}\\)</span>.</p>"
+    },
+    {
+      "number": 23,
+      "content": "<p><strong>11–34. Tính giới hạn, nếu tồn tại.</strong></p><p><strong>23.</strong>&nbsp; <span class=\"math inline\">\\(\\displaystyle\\lim_{h\\to0}\\frac{\\sqrt{9+h}-3}{h}\\)</span>.</p>"
+    },
+    {
+      "number": 24,
+      "content": "<p><strong>11–34. Tính giới hạn, nếu tồn tại.</strong></p><p><strong>24.</strong>&nbsp; <span class=\"math inline\">\\(\\displaystyle\\lim_{x\\to2}\\frac{2-x}{\\sqrt{x+2}-2}\\)</span>.</p>"
+    },
+    {
+      "number": 25,
+      "content": "<p><strong>11–34. Tính giới hạn, nếu tồn tại.</strong></p><p><strong>25.</strong>&nbsp; <span class=\"math inline\">\\(\\displaystyle\\lim_{x\\to3}\\frac{1/x-1/3}{x-3}\\)</span>.</p>"
+    },
+    {
+      "number": 26,
+      "content": "<p><strong>11–34. Tính giới hạn, nếu tồn tại.</strong></p><p><strong>26.</strong>&nbsp; <span class=\"math inline\">\\(\\displaystyle\\lim_{h\\to0}\\frac{(-2+h)^{-1}+2^{-1}}h\\)</span>.</p>"
+    },
+    {
+      "number": 27,
+      "content": "<p><strong>11–34. Tính giới hạn, nếu tồn tại.</strong></p><p><strong>27.</strong>&nbsp; <span class=\"math inline\">\\(\\displaystyle\\lim_{t\\to0}\\frac{\\sqrt{1+t}-\\sqrt{1-t}}t\\)</span>.</p>"
+    },
+    {
+      "number": 28,
+      "content": "<p><strong>11–34. Tính giới hạn, nếu tồn tại.</strong></p><p><strong>28.</strong>&nbsp; <span class=\"math inline\">\\(\\displaystyle\\lim_{t\\to0}\\left(\\frac1t-\\frac1{t^2+t}\\right)\\)</span>.</p>"
+    },
+    {
+      "number": 29,
+      "content": "<p><strong>11–34. Tính giới hạn, nếu tồn tại.</strong></p><p><strong>29.</strong>&nbsp; <span class=\"math inline\">\\(\\displaystyle\\lim_{x\\to16}\\frac{4-\\sqrt{x}}{16x-x^2}\\)</span>.</p>"
+    },
+    {
+      "number": 30,
+      "content": "<p><strong>11–34. Tính giới hạn, nếu tồn tại.</strong></p><p><strong>30.</strong>&nbsp; <span class=\"math inline\">\\(\\displaystyle\\lim_{x\\to2}\\frac{x^2-4x+4}{x^4-3x^2-4}\\)</span>.</p>"
+    },
+    {
+      "number": 31,
+      "content": "<p><strong>11–34. Tính giới hạn, nếu tồn tại.</strong></p><p><strong>31.</strong>&nbsp; <span class=\"math inline\">\\(\\displaystyle\\lim_{t\\to0}\\left(\\frac1{t\\sqrt{1+t}}-\\frac1t\\right)\\)</span>.</p>"
+    },
+    {
+      "number": 32,
+      "content": "<p><strong>11–34. Tính giới hạn, nếu tồn tại.</strong></p><p><strong>32.</strong>&nbsp; <span class=\"math inline\">\\(\\displaystyle\\lim_{x\\to-4}\\frac{\\sqrt{x^2+9}-5}{x+4}\\)</span>.</p>"
+    },
+    {
+      "number": 33,
+      "content": "<p><strong>11–34. Tính giới hạn, nếu tồn tại.</strong></p><p><strong>33.</strong>&nbsp; <span class=\"math inline\">\\(\\displaystyle\\lim_{h\\to0}\\frac{(x+h)^3-x^3}{h}\\)</span>.</p>"
+    },
+    {
+      "number": 34,
+      "content": "<p><strong>11–34. Tính giới hạn, nếu tồn tại.</strong></p><p><strong>34.</strong>&nbsp; <span class=\"math inline\">\\(\\displaystyle\\lim_{h\\to0}\\frac{1/(x+h)^2-1/x^2}{h}\\)</span>.</p>"
+    },
+    {
+      "number": 35,
+      "content": "<p><strong>35.</strong>&nbsp; (a) Vẽ <span class=\"math inline\">\\(f(x)=x/(\\sqrt{1+3x}-1)\\)</span> để ước lượng <span class=\"math display\">\\[\\lim_{x\\to0}\\frac{x}{\\sqrt{1+3x}-1}.\\]</span> (b)\nLập bảng <span class=\"math inline\">\\(f(x)\\)</span> khi <span class=\"math inline\">\\(x\\)</span> gần 0 rồi dự đoán giới hạn. (c) Dùng\ncác quy tắc giới hạn chứng minh dự đoán.</p>"
+    },
+    {
+      "number": 36,
+      "content": "<p><strong>36.</strong>&nbsp; (a) Dùng đồ thị <span class=\"math inline\">\\(f(x)=(\\sqrt{3+x}-\\sqrt3)/x\\)</span> ước lượng\n<span class=\"math inline\">\\(\\lim_{x\\to0}f(x)\\)</span> đến hai chữ số sau\ndấu phẩy. (b) Dùng bảng giá trị ước lượng đến bốn chữ số sau dấu phẩy.\n(c) Dùng các quy tắc giới hạn tìm giá trị chính xác.</p>"
+    },
+    {
+      "number": 37,
+      "content": "<p><strong>37.</strong>&nbsp; Dùng định lý kẹp chứng minh <span class=\"math inline\">\\(\\lim_{x\\to0}x^2\\cos20\\pi x=0\\)</span>. Minh họa\nbằng cách vẽ <span class=\"math inline\">\\(f(x)=-x^2\\)</span>, <span class=\"math inline\">\\(g(x)=x^2\\cos20\\pi x\\)</span>, <span class=\"math inline\">\\(h(x)=x^2\\)</span> trên cùng màn hình.</p>"
+    },
+    {
+      "number": 38,
+      "content": "<p><strong>38.</strong>&nbsp; Dùng định lý kẹp chứng minh <span class=\"math inline\">\\(\\displaystyle\\lim_{x\\to0^+}\\sqrt{x^3+x^2}\\sin\\frac\\pi\nx=0\\)</span>. Minh họa bằng đồ thị <span class=\"math inline\">\\(f,g,h\\)</span> (theo ký hiệu định lý kẹp) trên\ncùng màn hình.</p>"
+    },
+    {
+      "number": 39,
+      "content": "<p><strong>39.</strong>&nbsp; Nếu <span class=\"math inline\">\\(4x-9\\le f(x)\\le\nx^2-4x+7\\)</span> với <span class=\"math inline\">\\(x\\ge0\\)</span>, tìm\n<span class=\"math inline\">\\(\\lim_{x\\to4}f(x)\\)</span>.</p>"
+    },
+    {
+      "number": 40,
+      "content": "<p><strong>40.</strong>&nbsp; Nếu <span class=\"math inline\">\\(2x\\le g(x)\\le\nx^4-x^2+2\\)</span> với mọi <span class=\"math inline\">\\(x\\)</span>, tính\n<span class=\"math inline\">\\(\\lim_{x\\to1}g(x)\\)</span>.</p>"
+    },
+    {
+      "number": 41,
+      "content": "<p><strong>41.</strong>&nbsp; Chứng minh <span class=\"math inline\">\\(\\displaystyle\\lim_{x\\to0}x^4\\cos\\frac2x=0\\)</span>.</p>"
+    },
+    {
+      "number": 42,
+      "content": "<p><strong>42.</strong>&nbsp; Chứng minh <span class=\"math inline\">\\(\\displaystyle\\lim_{x\\to0^+}\\sqrt{x}\\,e^{\\sin(\\pi/x)}=0\\)</span>.</p>"
+    },
+    {
+      "number": 43,
+      "content": "<p><strong>43–48. Tìm giới hạn, nếu tồn tại; nếu không, giải thích vì\nsao.</strong></p><p><strong>43.</strong>&nbsp; <span class=\"math inline\">\\(\\displaystyle\\lim_{x\\to-4}(|x+4|-2x)\\)</span>.</p>"
+    },
+    {
+      "number": 44,
+      "content": "<p><strong>43–48. Tìm giới hạn, nếu tồn tại; nếu không, giải thích vì\nsao.</strong></p><p><strong>44.</strong>&nbsp; <span class=\"math inline\">\\(\\displaystyle\\lim_{x\\to-4}\\frac{|x+4|}{2x+8}\\)</span>.</p>"
+    },
+    {
+      "number": 45,
+      "content": "<p><strong>43–48. Tìm giới hạn, nếu tồn tại; nếu không, giải thích vì\nsao.</strong></p><p><strong>45.</strong>&nbsp; <span class=\"math inline\">\\(\\displaystyle\\lim_{x\\to0.5^-}\\frac{2x-1}{|2x^3-x^2|}\\)</span>.</p>"
+    },
+    {
+      "number": 46,
+      "content": "<p><strong>43–48. Tìm giới hạn, nếu tồn tại; nếu không, giải thích vì\nsao.</strong></p><p><strong>46.</strong>&nbsp; <span class=\"math inline\">\\(\\displaystyle\\lim_{x\\to-2}\\frac{2-|x|}{2+x}\\)</span>.</p>"
+    },
+    {
+      "number": 47,
+      "content": "<p><strong>43–48. Tìm giới hạn, nếu tồn tại; nếu không, giải thích vì\nsao.</strong></p><p><strong>47.</strong>&nbsp; <span class=\"math inline\">\\(\\displaystyle\\lim_{x\\to0^-}\\left(\\frac1x-\\frac1{|x|}\\right)\\)</span>.</p>"
+    },
+    {
+      "number": 48,
+      "content": "<p><strong>43–48. Tìm giới hạn, nếu tồn tại; nếu không, giải thích vì\nsao.</strong></p><p><strong>48.</strong>&nbsp; <span class=\"math inline\">\\(\\displaystyle\\lim_{x\\to0^+}\\left(\\frac1x-\\frac1{|x|}\\right)\\)</span>.</p>"
+    },
+    {
+      "number": 49,
+      "content": "<p><strong>49.</strong>&nbsp; <strong>Hàm dấu.</strong> Hàm dấu, ký hiệu\n<span class=\"math inline\">\\(\\operatorname{sgn}\\)</span>, được định nghĩa\nbởi <span class=\"math display\">\\[\\operatorname{sgn}x=\\begin{cases}-1,&amp;x&lt;0,\\\\0,&amp;x=0,\\\\1,&amp;x&gt;0.\\end{cases}\\]</span>\n(a) Vẽ phác đồ thị. (b) Tìm các giới hạn hoặc giải thích vì sao không\ntồn tại: <span class=\"math display\">\\[(i)\\\n\\lim_{x\\to0^+}\\operatorname{sgn}x;\\quad(ii)\\\n\\lim_{x\\to0^-}\\operatorname{sgn}x;\\]</span> <span class=\"math display\">\\[(iii)\\\n\\lim_{x\\to0}\\operatorname{sgn}x;\\qquad(iv)\\\n\\lim_{x\\to0}|\\operatorname{sgn}x|.\\]</span></p>"
+    },
+    {
+      "number": 50,
+      "content": "<p><strong>50.</strong>&nbsp; Cho <span class=\"math inline\">\\(g(x)=\\operatorname{sgn}(\\sin x)\\)</span>.</p>\n<p>(a) Tìm các giới hạn hoặc giải thích vì sao không tồn tại: <span class=\"math display\">\\[(i)\\ \\lim_{x\\to0^+}g(x);\\quad(ii)\\\n\\lim_{x\\to0^-}g(x);\\quad(iii)\\ \\lim_{x\\to0}g(x);\\]</span> <span class=\"math display\">\\[(iv)\\ \\lim_{x\\to\\pi^+}g(x);\\quad(v)\\\n\\lim_{x\\to\\pi^-}g(x);\\quad(vi)\\ \\lim_{x\\to\\pi}g(x).\\]</span> (b) Với\nnhững <span class=\"math inline\">\\(a\\)</span> nào, <span class=\"math inline\">\\(\\lim_{x\\to a}g(x)\\)</span> không tồn tại? (c) Vẽ\nphác đồ thị <span class=\"math inline\">\\(g\\)</span>.</p><p><strong>Định nghĩa hàm dấu.</strong> sgn(u) = −1 khi u &lt; 0; sgn(u) = 0 khi u = 0; sgn(u) = 1 khi u &gt; 0.</p>"
+    },
+    {
+      "number": 51,
+      "content": "<p><strong>51.</strong>&nbsp; Cho <span class=\"math inline\">\\(g(x)=\\dfrac{x^2+x-6}{|x-2|}\\)</span>. (a) Tìm (i)\n<span class=\"math inline\">\\(\\lim_{x\\to2^+}g(x)\\)</span>, (ii) <span class=\"math inline\">\\(\\lim_{x\\to2^-}g(x)\\)</span>. (b) <span class=\"math inline\">\\(\\lim_{x\\to2}g(x)\\)</span> có tồn tại không? (c) Vẽ\nphác đồ thị <span class=\"math inline\">\\(g\\)</span>.</p>"
+    },
+    {
+      "number": 52,
+      "content": "<p><strong>52.</strong>&nbsp; Cho <span class=\"math inline\">\\(f(x)=\\begin{cases}x^2+1,&amp;x&lt;1,\\\\(x-2)^2,&amp;x\\ge1.\\end{cases}\\)</span></p>\n<p>(a) Tìm <span class=\"math inline\">\\(\\lim_{x\\to1^-}f(x)\\)</span> và\n<span class=\"math inline\">\\(\\lim_{x\\to1^+}f(x)\\)</span>. (b) Giới hạn\nhai phía tại 1 có tồn tại không? (c) Vẽ phác đồ thị <span class=\"math inline\">\\(f\\)</span>.</p>"
+    },
+    {
+      "number": 53,
+      "content": "<p><strong>53.</strong>&nbsp; Cho <span class=\"math inline\">\\(B(t)=\\begin{cases}4-\\tfrac12t,&amp;t&lt;2,\\\\\\sqrt{t+c},&amp;t\\ge2.\\end{cases}\\)</span>\nTìm <span class=\"math inline\">\\(c\\)</span> để <span class=\"math inline\">\\(\\lim_{t\\to2}B(t)\\)</span> tồn tại.</p>"
+    },
+    {
+      "number": 54,
+      "content": "<p><strong>54.</strong>&nbsp; Cho <span class=\"math inline\">\\(g(x)=\\begin{cases}x,&amp;x&lt;1,\\\\3,&amp;x=1,\\\\2-x^2,&amp;1&lt;x\\le2,\\\\x-3,&amp;x&gt;2.\\end{cases}\\)</span></p>\n<p>(a) Tính nếu tồn tại: <span class=\"math display\">\\[(i)\\\n\\lim_{x\\to1^-}g(x);\\quad(ii)\\ \\lim_{x\\to1}g(x);\\quad(iii)\\\ng(1);\\]</span> <span class=\"math display\">\\[(iv)\\\n\\lim_{x\\to2^-}g(x);\\quad(v)\\ \\lim_{x\\to2^+}g(x);\\quad(vi)\\\n\\lim_{x\\to2}g(x).\\]</span> (b) Vẽ phác đồ thị <span class=\"math inline\">\\(g\\)</span>.</p>"
+    },
+    {
+      "number": 55,
+      "content": "<p><strong>55.</strong>&nbsp; (a) Với ký hiệu phần nguyên trong Ví dụ 10,\ntính <span class=\"math display\">\\[(i)\\\n\\lim_{x\\to-2^+}\\left[\\!\\left[x\\right]\\!\\right];\\quad(ii)\\\n\\lim_{x\\to-2}\\left[\\!\\left[x\\right]\\!\\right];\\quad(iii)\\\n\\lim_{x\\to-2.4}\\left[\\!\\left[x\\right]\\!\\right].\\]</span> (b) Nếu <span class=\"math inline\">\\(n\\)</span> nguyên, tính (i) <span class=\"math inline\">\\(\\lim_{x\\to\nn^-}\\left[\\!\\left[x\\right]\\!\\right]\\)</span>, (ii) <span class=\"math inline\">\\(\\lim_{x\\to\nn^+}\\left[\\!\\left[x\\right]\\!\\right]\\)</span>. (c) Với những <span class=\"math inline\">\\(a\\)</span> nào, <span class=\"math inline\">\\(\\lim_{x\\to\na}\\left[\\!\\left[x\\right]\\!\\right]\\)</span> tồn tại?</p><p><strong>Ký hiệu trong Ví dụ 10.</strong> Hàm phần nguyên của x là số nguyên lớn nhất không vượt quá x.</p>"
+    },
+    {
+      "number": 56,
+      "content": "<p><strong>56.</strong>&nbsp; Cho <span class=\"math inline\">\\(f(x)=\\left[\\!\\left[\\cos x\\right]\\!\\right]\\)</span>\ntrên <span class=\"math inline\">\\(-\\pi\\le x\\le\\pi\\)</span>.</p>\n<p>(a) Vẽ phác đồ thị. (b) Tính nếu tồn tại: <span class=\"math display\">\\[(i)\\ \\lim_{x\\to0}f(x);\\quad(ii)\\\n\\lim_{x\\to(\\pi/2)^-}f(x);\\]</span> <span class=\"math display\">\\[(iii)\\\n\\lim_{x\\to(\\pi/2)^+}f(x);\\qquad(iv)\\ \\lim_{x\\to\\pi/2}f(x).\\]</span> (c)\nVới những <span class=\"math inline\">\\(a\\)</span> nào, <span class=\"math inline\">\\(\\lim_{x\\to a}f(x)\\)</span> tồn tại?</p><p><strong>Ký hiệu trong Ví dụ 10.</strong> Hàm phần nguyên của x là số nguyên lớn nhất không vượt quá x.</p>"
+    },
+    {
+      "number": 57,
+      "content": "<p><strong>57.</strong>&nbsp; Với <span class=\"math inline\">\\(f(x)=\\left[\\!\\left[x\\right]\\!\\right]+\\left[\\!\\left[-x\\right]\\!\\right]\\)</span>,\nchứng minh <span class=\"math inline\">\\(\\lim_{x\\to2}f(x)\\)</span> tồn tại\nnhưng khác <span class=\"math inline\">\\(f(2)\\)</span>.</p><p><strong>Ký hiệu trong Ví dụ 10.</strong> Hàm phần nguyên của x là số nguyên lớn nhất không vượt quá x.</p>"
+    },
+    {
+      "number": 58,
+      "content": "<p><strong>58.</strong>&nbsp; Trong thuyết tương đối, công thức co độ dài\nLorentz <span class=\"math display\">\\[L=L_0\\sqrt{1-v^2/c^2}\\]</span> biểu\ndiễn độ dài <span class=\"math inline\">\\(L\\)</span> theo vận tốc <span class=\"math inline\">\\(v\\)</span> đối với một người quan sát; <span class=\"math inline\">\\(L_0\\)</span> là độ dài khi vật đứng yên, <span class=\"math inline\">\\(c\\)</span> là tốc độ ánh sáng. Tìm <span class=\"math inline\">\\(\\lim_{v\\to c^-}L\\)</span>, giải thích kết quả và\nvì sao phải xét giới hạn bên trái.</p>"
+    },
+    {
+      "number": 59,
+      "content": "<p><strong>59.</strong>&nbsp; Nếu <span class=\"math inline\">\\(p\\)</span> là\nđa thức, chứng minh <span class=\"math inline\">\\(\\lim_{x\\to\na}p(x)=p(a)\\)</span>.</p>"
+    },
+    {
+      "number": 60,
+      "content": "<p><strong>60.</strong>&nbsp; Nếu <span class=\"math inline\">\\(r\\)</span> là\nhàm hữu tỉ, dùng Bài tập 59 chứng minh <span class=\"math inline\">\\(\\lim_{x\\to a}r(x)=r(a)\\)</span> với mọi <span class=\"math inline\">\\(a\\)</span> thuộc tập xác định của <span class=\"math inline\">\\(r\\)</span>.</p>"
+    },
+    {
+      "number": 61,
+      "content": "<p><strong>61.</strong>&nbsp; Nếu <span class=\"math inline\">\\(\\displaystyle\\lim_{x\\to1}\\frac{f(x)-8}{x-1}=10\\)</span>,\ntìm <span class=\"math inline\">\\(\\lim_{x\\to1}f(x)\\)</span>.</p>"
+    },
+    {
+      "number": 62,
+      "content": "<p><strong>62.</strong>&nbsp; Nếu <span class=\"math inline\">\\(\\displaystyle\\lim_{x\\to0}\\frac{f(x)}{x^2}=5\\)</span>,\ntìm: (a) <span class=\"math inline\">\\(\\lim_{x\\to0}f(x)\\)</span>; (b)\n<span class=\"math inline\">\\(\\lim_{x\\to0}f(x)/x\\)</span>.</p>"
+    },
+    {
+      "number": 63,
+      "content": "<p><strong>63.</strong>&nbsp; Cho <span class=\"math inline\">\\(f(x)=\\begin{cases}x^2,&amp;x\\text{ hữu\ntỉ},\\\\0,&amp;x\\text{ vô tỉ}.\\end{cases}\\)</span> Chứng minh <span class=\"math inline\">\\(\\lim_{x\\to0}f(x)=0\\)</span>.</p>"
+    },
+    {
+      "number": 64,
+      "content": "<p><strong>64.</strong>&nbsp; Nêu ví dụ cho thấy <span class=\"math inline\">\\(\\lim_{x\\to a}[f(x)+g(x)]\\)</span> có thể tồn tại\ndù cả <span class=\"math inline\">\\(\\lim_{x\\to a}f(x)\\)</span> và <span class=\"math inline\">\\(\\lim_{x\\to a}g(x)\\)</span> đều không tồn tại.</p>"
+    },
+    {
+      "number": 65,
+      "content": "<p><strong>65.</strong>&nbsp; Nêu ví dụ tương tự đối với <span class=\"math inline\">\\(\\lim_{x\\to a}[f(x)g(x)]\\)</span>.</p>"
+    },
+    {
+      "number": 66,
+      "content": "<p><strong>66.</strong>&nbsp; Tính <span class=\"math inline\">\\(\\displaystyle\\lim_{x\\to2}\\frac{\\sqrt{6-x}-2}{\\sqrt{3-x}-1}\\)</span>.</p>"
+    },
+    {
+      "number": 67,
+      "content": "<p><strong>67.</strong>&nbsp; Có số <span class=\"math inline\">\\(a\\)</span>\nnào để <span class=\"math inline\">\\(\\displaystyle\\lim_{x\\to-2}\\frac{3x^2+ax+a+3}{x^2+x-2}\\)</span>\ntồn tại không? Nếu có, tìm <span class=\"math inline\">\\(a\\)</span> và\ngiới hạn.</p>"
+    },
+    {
+      "number": 68,
+      "content": "<p><strong>68.</strong>&nbsp; Hình vẽ cho đường tròn cố định <span class=\"math inline\">\\(C_1:(x-1)^2+y^2=1\\)</span> và đường tròn <span class=\"math inline\">\\(C_2\\)</span> tâm tại gốc tọa độ, bán kính <span class=\"math inline\">\\(r\\)</span>, đang co lại. Điểm <span class=\"math inline\">\\(P=(0,r)\\)</span>; <span class=\"math inline\">\\(Q\\)</span> là giao điểm phía trên của hai đường\ntròn; <span class=\"math inline\">\\(R\\)</span> là giao điểm đường thẳng\n<span class=\"math inline\">\\(PQ\\)</span> với trục <span class=\"math inline\">\\(x\\)</span>. Điều gì xảy ra với <span class=\"math inline\">\\(R\\)</span> khi <span class=\"math inline\">\\(C_2\\)</span> co lại, tức <span class=\"math inline\">\\(r\\to0^+\\)</span>?</p>\n<div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-2-3-5ecf7773/e68.png\" alt=\"image\"><br>\n<span>Hình cho Bài tập 68.</span></p>\n</div>"
+    }
+  ]
+}

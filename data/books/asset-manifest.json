@@ -835,5 +835,55 @@
     "file": "stewart-2-2-cd4ecf72/e10.png",
     "mime": "image/png",
     "sha256": "60c708681464e0b96e9d50f71e1cb9937a796b4777f2e0ef61d35d673bf2649b"
+  },
+  "stewart-2-3-5ecf7773/f01.png": {
+    "file": "stewart-2-3-5ecf7773/f01.png",
+    "mime": "image/png",
+    "sha256": "464835ecbb8057768c4c85bdbd091e992fc2473ffba4afe0dbc8c81160d5f081"
+  },
+  "stewart-2-3-5ecf7773/f02.png": {
+    "file": "stewart-2-3-5ecf7773/f02.png",
+    "mime": "image/png",
+    "sha256": "6150fba48b64e247afd95c410a0c1f3f8286aaf089f1fd2f37d6a020e8780de6"
+  },
+  "stewart-2-3-5ecf7773/f03.png": {
+    "file": "stewart-2-3-5ecf7773/f03.png",
+    "mime": "image/png",
+    "sha256": "e921fe10ec2c5210033888176f650fed7fb90503fd1db31c5aa95e3019ba03ae"
+  },
+  "stewart-2-3-5ecf7773/f04.png": {
+    "file": "stewart-2-3-5ecf7773/f04.png",
+    "mime": "image/png",
+    "sha256": "cfa2a30e6ede2368ebdc3f584b51ef1cc8383d90dc9a6235f8df24c39e44e815"
+  },
+  "stewart-2-3-5ecf7773/f05.png": {
+    "file": "stewart-2-3-5ecf7773/f05.png",
+    "mime": "image/png",
+    "sha256": "6087b5f53d9603cfd5adae9d7c2d4a28b22f89bd54d8ca2d9cd347d2f03a51ed"
+  },
+  "stewart-2-3-5ecf7773/f06.png": {
+    "file": "stewart-2-3-5ecf7773/f06.png",
+    "mime": "image/png",
+    "sha256": "55c57932e09f855878d851cfa60b222fa072be9dfbd8a4be1835b8af0c394b82"
+  },
+  "stewart-2-3-5ecf7773/f07.png": {
+    "file": "stewart-2-3-5ecf7773/f07.png",
+    "mime": "image/png",
+    "sha256": "905696ec5cd3ee7ffa0ec78447a8da66b1a9234b7742573b06787fdbb1848721"
+  },
+  "stewart-2-3-5ecf7773/f08.png": {
+    "file": "stewart-2-3-5ecf7773/f08.png",
+    "mime": "image/png",
+    "sha256": "7e00e6a8a6f4f5c886b6de2f0280391a0d3d0835d2441cb32a2dc8d89a71f5ff"
+  },
+  "stewart-2-3-5ecf7773/e02.png": {
+    "file": "stewart-2-3-5ecf7773/e02.png",
+    "mime": "image/png",
+    "sha256": "8c6c8febaa4531e346a74fa2b75a31a0db3908c977ac53ab7a29b5845ccd2645"
+  },
+  "stewart-2-3-5ecf7773/e68.png": {
+    "file": "stewart-2-3-5ecf7773/e68.png",
+    "mime": "image/png",
+    "sha256": "7760951645d1f4caa33351f69e66afa777cd19c1ffe8f648a66a65af856734dc"
   }
 }
