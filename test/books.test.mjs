@@ -162,6 +162,15 @@ await [...window.document.querySelectorAll('#booksToc button')].find(b=>b.textCo
 for(const selector of ['.book-exercise','.book-exercise .btn-ai-guide','.book-exercise .btn-submit-solution','.book-exercise .btn-manage-reference-links'])assert.equal(window.document.querySelectorAll(selector).length,22);
 assert.ok(window.document.getElementById('booksContent').textContent.includes('Ghi chú biên tập'));
 assert.ok(window.document.getElementById('booksContent').textContent.includes('Ví dụ 3.'));
+// Chapter 2.1 uses the same independent exercise actions as Chapter 1.
+const section21=await readBooks(db,student,{bookId:book.id,sectionId:detail.sections.find(s=>s.title.startsWith('2.1.')).id});
+assert.equal(section21.exerciseHeading,'2.1. Bài tập');
+assert.deepEqual(section21.exercises.map(e=>e.questionNumber),Array.from({length:9},(_,i)=>i+1));
+assert.equal(new Set(section21.exercises.map(e=>e.contentKey)).size,9);
+await [...window.document.querySelectorAll('#booksToc button')].find(b=>b.textContent.startsWith('2.1.')).onclick();
+for(const selector of ['.book-exercise','.book-exercise .btn-ai-guide','.book-exercise .btn-submit-solution','.book-exercise .btn-manage-reference-links'])assert.equal(window.document.querySelectorAll(selector).length,9);
+assert.equal(window.document.querySelectorAll('#booksContent img').length,8);
+assert.ok(window.document.getElementById('booksContent').textContent.includes('Ghi chú biên tập'));
 // Return to an unformatted legacy section to test the editor's default format.
 await [...window.document.querySelectorAll('#booksToc button')].find(b=>b.textContent==='Khái quát về Giải tích').onclick();
 
@@ -230,3 +239,4 @@ const renderPrinciples=window.document.createElement('div');await window.renderB
 const changedPrinciples=await mutateBooks(db,admin,'books_save_section',{id:childPrinciples.id,expectedVersion:2,title:childPrinciples.title,order:902,content:principles.section.content+'<p>Admin edit.</p>',contentFormat:'html-latex'});
 assert.equal((await readBooks(db,student,{bookId:book.id,sectionId:childPrinciples.id})).section.content,changedPrinciples.content);assert.equal((await readBooks(db,student,{bookId:book.id,sectionId:childPrinciples.id})).exercises.length,22);
 window.close();console.log('Books: seeded TOC, admin CRUD/CAS, scopes, subtree delete/restore, lazy bodies and UI actions OK');
+

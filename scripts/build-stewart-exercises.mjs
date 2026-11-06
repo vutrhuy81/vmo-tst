@@ -1,8 +1,8 @@
 // Offline conversion of reviewed Stewart HTML. Never parse arbitrary requests here.
 import fs from 'node:fs';
 import {JSDOM} from 'jsdom';
-const section=process.argv[2]||'1-1';if(!['1-1','1-2','1-3','1-4','1-5','1-review','1-principles'].includes(section))throw Error('Unknown section');
-const headingText=['1-review','1-principles'].includes(section)?'Bài tập':section.replace('-','.')+'. Bài tập',count={'1-1':88,'1-2':37,'1-3':71,'1-4':35,'1-5':83,'1-review':38,'1-principles':22}[section];
+const section=process.argv[2]||'1-1';if(!['1-1','1-2','1-3','1-4','1-5','1-review','1-principles','2-1'].includes(section))throw Error('Unknown section');
+const headingText=['1-review','1-principles'].includes(section)?'Bài tập':section.replace('-','.')+'. Bài tập',count={'1-1':88,'1-2':37,'1-3':71,'1-4':35,'1-5':83,'1-review':38,'1-principles':22,'2-1':9}[section];
 const source=JSON.parse(fs.readFileSync(`data/books/imports/stewart-${section}.json`,'utf8'));
 const dom=new JSDOM(source.content),doc=dom.window.document;
 const heading=[...doc.querySelectorAll('h1,h2,h3,h4,h5,h6')].find(x=>x.textContent===headingText);
@@ -45,3 +45,4 @@ for(const [j,entry]of anchors.entries()){
 if(exercises.length!==count||exercises.some((e,i)=>e.number!==i+1))throw Error('Missing/duplicate exercise');
 fs.writeFileSync(`data/books/exercises/stewart-${section}.json`,JSON.stringify({bookKey:'stewart-9',sectionKey:section,heading:headingText,sourceSha256:source.sourceInfo.sha256,exercises},null,2)+'\n');
 dom.window.close();console.log(`Prepared ${count} exercises for ${section}.`);
+
