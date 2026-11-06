@@ -68,7 +68,7 @@ assert.equal(new Set([...exercises,...section12.exercises,...section13.exercises
 for(const [n,image]of [[1,'ex01'],[2,'ex02'],[10,'ex10']])assert.ok(review.exercises[n-1].content.includes('/'+image+'.png'));
 assert.ok(review.exercises[22].content.includes('<table>'));assert.ok(review.exercises[30].content.includes('ba chữ số'));
 assert.equal((review.section.content.match(/<img /g)||[]).length,3);assert.equal((review.section.content.match(/<table/g)||[]).length,2);
-assert.equal((await readBooks(db,student,{bookId:book.id,sectionId:detail.sections.find(s=>s.title==='Ôn tập'&&s.parentId!==first.id).id})).section.content,'','Only Chapter 1 review is imported');
+assert.equal((await readBooks(db,student,{bookId:book.id,sectionId:detail.sections.find(s=>s.title==='Ôn tập'&&s.parentId===detail.sections.find(x=>x.title.startsWith('Chương 3.')).id).id})).section.content,'','Chapter 3 review remains unimported');
 const childPrinciples=detail.sections.find(s=>s.title==='Các nguyên tắc giải toán'&&s.parentId===first.id);
 const principles=await readBooks(db,student,{bookId:book.id,sectionId:childPrinciples.id});
 assert.equal(principles.section.version,2);assert.equal(principles.section.sourceInfo.exampleCount,3);assert.equal(principles.exerciseHeading,'Bài tập');
@@ -235,6 +235,16 @@ await [...window.document.querySelectorAll('#booksToc button')].find(b=>b.textCo
 for(const selector of ['.book-exercise','.book-exercise .btn-ai-guide','.book-exercise .btn-submit-solution','.book-exercise .btn-manage-reference-links'])assert.equal(window.document.querySelectorAll(selector).length,68);
 assert.equal(window.document.querySelectorAll('#booksContent img').length,36);
 assert.ok(window.document.getElementById('booksContent').textContent.replace(/\s+/g,' ').includes('Chú thích biên tập và thuật ngữ'));
+// Chapter 2 review uses the same independent exercise actions as Chapter 1.
+const section2r=await readBooks(db,student,{bookId:book.id,sectionId:detail.sections.find(s=>s.title==='Ôn tập'&&s.parentId===detail.sections.find(x=>x.title.startsWith('Chương 2.')).id).id});
+assert.equal(section2r.exerciseHeading,'Bài tập');
+assert.deepEqual(section2r.exercises.map(e=>e.questionNumber),Array.from({length:56},(_,i)=>i+1));
+assert.equal(new Set(section2r.exercises.map(e=>e.contentKey)).size,56);
+await [...window.document.querySelectorAll('#booksToc button')].filter(b=>b.textContent==='Ôn tập')[1].onclick();
+for(const selector of ['.book-exercise','.book-exercise .btn-ai-guide','.book-exercise .btn-submit-solution','.book-exercise .btn-manage-reference-links'])assert.equal(window.document.querySelectorAll(selector).length,56);
+assert.equal(window.document.querySelectorAll('#booksContent img').length,7);
+assert.ok(window.document.getElementById('booksContent').textContent.replace(/\s+/g,' ').includes('Chú thích biên tập và thuật ngữ'));
+for(const [title,count]of [['Kiểm tra khái niệm',16],['Câu hỏi đúng–sai',26]]){const h=[...window.document.querySelectorAll('#booksContent h1')].find(h=>h.textContent===title);let n=0;for(let x=h.nextElementSibling;x&&!/^H[1-6]$/.test(x.tagName);x=x.nextElementSibling){const ps=x.tagName==='P'?[x]:[...x.querySelectorAll('p')];n+=ps.filter(p=>/^\d+\./.test(p.querySelector(':scope > strong')?.textContent||'')).length;}assert.equal(n,count);}
 // Return to an unformatted legacy section to test the editor's default format.
 await [...window.document.querySelectorAll('#booksToc button')].find(b=>b.textContent==='Khái quát về Giải tích').onclick();
 
