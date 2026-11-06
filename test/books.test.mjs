@@ -216,6 +216,16 @@ await [...window.document.querySelectorAll('#booksToc button')].find(b=>b.textCo
 for(const selector of ['.book-exercise','.book-exercise .btn-ai-guide','.book-exercise .btn-submit-solution','.book-exercise .btn-manage-reference-links'])assert.equal(window.document.querySelectorAll(selector).length,81);
 assert.equal(window.document.querySelectorAll('#booksContent img').length,26);
 assert.ok(window.document.getElementById('booksContent').textContent.replace(/\s+/g,' ').includes('Chú thích biên tập và thuật ngữ'));
+// Chapter 2.7 uses the same independent exercise actions as Chapter 1.
+const section27=await readBooks(db,student,{bookId:book.id,sectionId:detail.sections.find(s=>s.title.startsWith('2.7.')).id});
+assert.equal(section27.exerciseHeading,'2.7. Bài tập');
+assert.deepEqual(section27.exercises.map(e=>e.questionNumber),Array.from({length:60},(_,i)=>i+1));
+assert.equal(new Set(section27.exercises.map(e=>e.contentKey)).size,60);
+await [...window.document.querySelectorAll('#booksToc button')].find(b=>b.textContent.startsWith('2.7.')).onclick();
+for(const selector of ['.book-exercise','.book-exercise .btn-ai-guide','.book-exercise .btn-submit-solution','.book-exercise .btn-manage-reference-links'])assert.equal(window.document.querySelectorAll(selector).length,60);
+assert.equal(window.document.querySelectorAll('#booksContent img').length,16);
+assert.ok(window.document.getElementById('booksContent').textContent.replace(/\s+/g,' ').includes('Chú thích biên tập và thuật ngữ'));
+assert.ok(window.document.getElementById('booksContent').textContent.replace(/\s+/g,' ').includes('Chuyên đề viết: Các phương pháp ban đầu để tìm tiếp tuyến'));
 // Return to an unformatted legacy section to test the editor's default format.
 await [...window.document.querySelectorAll('#booksToc button')].find(b=>b.textContent==='Khái quát về Giải tích').onclick();
 
