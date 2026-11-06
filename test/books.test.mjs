@@ -198,6 +198,15 @@ await [...window.document.querySelectorAll('#booksToc button')].find(b=>b.textCo
 for(const selector of ['.book-exercise','.book-exercise .btn-ai-guide','.book-exercise .btn-submit-solution','.book-exercise .btn-manage-reference-links'])assert.equal(window.document.querySelectorAll(selector).length,44);
 assert.equal(window.document.querySelectorAll('#booksContent img').length,19);
 assert.ok(window.document.getElementById('booksContent').textContent.includes('Ghi chú biên tập'));
+// Chapter 2.5 uses the same independent exercise actions as Chapter 1.
+const section25=await readBooks(db,student,{bookId:book.id,sectionId:detail.sections.find(s=>s.title.startsWith('2.5.')).id});
+assert.equal(section25.exerciseHeading,'2.5. Bài tập');
+assert.deepEqual(section25.exercises.map(e=>e.questionNumber),Array.from({length:76},(_,i)=>i+1));
+assert.equal(new Set(section25.exercises.map(e=>e.contentKey)).size,76);
+await [...window.document.querySelectorAll('#booksToc button')].find(b=>b.textContent.startsWith('2.5.')).onclick();
+for(const selector of ['.book-exercise','.book-exercise .btn-ai-guide','.book-exercise .btn-submit-solution','.book-exercise .btn-manage-reference-links'])assert.equal(window.document.querySelectorAll(selector).length,76);
+assert.equal(window.document.querySelectorAll('#booksContent img').length,15);
+assert.ok(window.document.getElementById('booksContent').textContent.includes('Ghi chú biên tập'));
 // Return to an unformatted legacy section to test the editor's default format.
 await [...window.document.querySelectorAll('#booksToc button')].find(b=>b.textContent==='Khái quát về Giải tích').onclick();
 

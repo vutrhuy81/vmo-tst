@@ -1,8 +1,8 @@
 // Offline conversion of reviewed Stewart HTML. Never parse arbitrary requests here.
 import fs from 'node:fs';
 import {JSDOM} from 'jsdom';
-const section=process.argv[2]||'1-1';if(!['1-1','1-2','1-3','1-4','1-5','1-review','1-principles','2-1','2-2','2-3','2-4'].includes(section))throw Error('Unknown section');
-const headingText=['1-review','1-principles'].includes(section)?'Bài tập':section.replace('-','.')+'. Bài tập',count={'1-1':88,'1-2':37,'1-3':71,'1-4':35,'1-5':83,'1-review':38,'1-principles':22,'2-1':9,'2-2':51,'2-3':68,'2-4':44}[section];
+const section=process.argv[2]||'1-1';if(!['1-1','1-2','1-3','1-4','1-5','1-review','1-principles','2-1','2-2','2-3','2-4','2-5'].includes(section))throw Error('Unknown section');
+const headingText=['1-review','1-principles'].includes(section)?'Bài tập':section.replace('-','.')+'. Bài tập',count={'1-1':88,'1-2':37,'1-3':71,'1-4':35,'1-5':83,'1-review':38,'1-principles':22,'2-1':9,'2-2':51,'2-3':68,'2-4':44,'2-5':76}[section];
 const source=JSON.parse(fs.readFileSync(`data/books/imports/stewart-${section}.json`,'utf8'));
 const dom=new JSDOM(source.content),doc=dom.window.document;
 const heading=[...doc.querySelectorAll('h1,h2,h3,h4,h5,h6')].find(x=>x.textContent===headingText);
@@ -46,6 +46,11 @@ for(const [j,entry]of anchors.entries()){
   if(section==='2-4'){
    if(a>=15&&a<=18)content+=doc.querySelector('img[src$="/f09.png"]').parentElement.parentElement.outerHTML;
    if(a===38)content+='<p><strong>Hàm Heaviside ở §2.2.</strong> H(t) = 0 khi t &lt; 0; H(t) = 1 khi t ≥ 0.</p>';
+  }
+  if(section==='2-5'&&(a===66||a===67)){
+   const formula=[...doc.querySelectorAll('p')].find(p=>p.textContent.includes('\\tag{6}'));
+   if(!formula)throw Error('Missing formula 6');
+   content+='<p><strong>Công thức (6).</strong></p>'+formula.outerHTML;
   }
   exercises.push({number:a,content});
  }
