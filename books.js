@@ -30,7 +30,7 @@
     if(input.classList.contains('math'))output.className=input.classList.contains('display')?'math display':'math inline';
     if(input.tagName==='IMG'){
      const raw=input.getAttribute('src')||'';let url;try{url=new URL(raw,location.origin);}catch{return document.createDocumentFragment();}
-     if(url.origin!==location.origin||url.pathname!=='/api/data'||url.searchParams.get('resource')!=='book_asset'||!/^(?:stewart-1-1-47c33e6c|stewart-1-2-a7a72f38|stewart-1-3-65a41611|stewart-1-4-c1a9f973|stewart-1-5-6c69c192|stewart-1-review-f5f8bf56|stewart-1-principles-06d484fa|stewart-2-1-eee6f638|stewart-2-2-cd4ecf72|stewart-2-3-5ecf7773|stewart-2-4-473b5539|stewart-2-5-47b1887b|stewart-2-6-fbbc38a2|stewart-2-7-8fc77b65)\/[a-z0-9_]+\.png$/.test(url.searchParams.get('asset')||''))return document.createDocumentFragment();
+     if(url.origin!==location.origin||url.pathname!=='/api/data'||url.searchParams.get('resource')!=='book_asset'||!/^(?:stewart-1-1-47c33e6c|stewart-1-2-a7a72f38|stewart-1-3-65a41611|stewart-1-4-c1a9f973|stewart-1-5-6c69c192|stewart-1-review-f5f8bf56|stewart-1-principles-06d484fa|stewart-2-1-eee6f638|stewart-2-2-cd4ecf72|stewart-2-3-5ecf7773|stewart-2-4-473b5539|stewart-2-5-47b1887b|stewart-2-6-fbbc38a2|stewart-2-7-8fc77b65|stewart-2-8-09f990f6)\/[a-z0-9_]+\.png$/.test(url.searchParams.get('asset')||''))return document.createDocumentFragment();
      output.src=url.pathname+url.search;output.alt=input.getAttribute('alt')||'Hình minh họa';output.loading='lazy';output.style.maxWidth='100%';output.style.height='auto';
     }
     if(['TH','TD'].includes(input.tagName))for(const attr of ['colspan','rowspan']){const n=Number(input.getAttribute(attr));if(Number.isInteger(n)&&n>=1&&n<=30)output.setAttribute(attr,String(n));}

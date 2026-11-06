@@ -1220,5 +1220,185 @@
     "file": "stewart-2-7-8fc77b65/e54.png",
     "mime": "image/png",
     "sha256": "94947230601ef954ddbfcd97e2434a711dc8a6a0bea75e01aa032a0705a7f344"
+  },
+  "stewart-2-8-09f990f6/f01.png": {
+    "file": "stewart-2-8-09f990f6/f01.png",
+    "mime": "image/png",
+    "sha256": "41df977b2562b689dc7bcbdea4f5ce932ac2ae988eff010ae8f9dbbf3c94ca1d"
+  },
+  "stewart-2-8-09f990f6/f02.png": {
+    "file": "stewart-2-8-09f990f6/f02.png",
+    "mime": "image/png",
+    "sha256": "8e4260d1b7f3a6ab591b8654b51ed57fc67813bfce94d3b10f52b7b8ff801a1b"
+  },
+  "stewart-2-8-09f990f6/f03.png": {
+    "file": "stewart-2-8-09f990f6/f03.png",
+    "mime": "image/png",
+    "sha256": "5cd121471495e562751780ba71f29130b1277126fc828a0c89f5587c4549a89b"
+  },
+  "stewart-2-8-09f990f6/f04.png": {
+    "file": "stewart-2-8-09f990f6/f04.png",
+    "mime": "image/png",
+    "sha256": "ac7458eda3f44ad37570a2ec798667c385961242b2c82b52dd41824deab1c997"
+  },
+  "stewart-2-8-09f990f6/f05.png": {
+    "file": "stewart-2-8-09f990f6/f05.png",
+    "mime": "image/png",
+    "sha256": "35ca5fd0aee7fe67495b0e3d86d279ff76a23574aaf0380db1b14403e20722f9"
+  },
+  "stewart-2-8-09f990f6/f06.png": {
+    "file": "stewart-2-8-09f990f6/f06.png",
+    "mime": "image/png",
+    "sha256": "49d7fb77bdd1a75316bc541827398b6dfbc81cd79e4680897574b5a53e5fa464"
+  },
+  "stewart-2-8-09f990f6/f07.png": {
+    "file": "stewart-2-8-09f990f6/f07.png",
+    "mime": "image/png",
+    "sha256": "5c562e0401343d56fbbbc732d94e0917d2aaea67683da5cbde7faf83aea2d1f9"
+  },
+  "stewart-2-8-09f990f6/f08.png": {
+    "file": "stewart-2-8-09f990f6/f08.png",
+    "mime": "image/png",
+    "sha256": "f056f1ea10d0ac56d0b20c24db915e20c1b70835f82ca13fdf842136107d7e07"
+  },
+  "stewart-2-8-09f990f6/f09.png": {
+    "file": "stewart-2-8-09f990f6/f09.png",
+    "mime": "image/png",
+    "sha256": "eb635a8ce89c5880327f7a69fba0ccf9952c7c32348bcbcaf09eb4c3828de1c1"
+  },
+  "stewart-2-8-09f990f6/f10.png": {
+    "file": "stewart-2-8-09f990f6/f10.png",
+    "mime": "image/png",
+    "sha256": "e8e952f586cf22e87734d83db8f8272a31f10f6ea17db03313bbc950dc43b55c"
+  },
+  "stewart-2-8-09f990f6/e01.png": {
+    "file": "stewart-2-8-09f990f6/e01.png",
+    "mime": "image/png",
+    "sha256": "8f8edffd6a05ab6f0243b7f521c1de0cd90db2829da9aa2767b7d8e35fe55e5d"
+  },
+  "stewart-2-8-09f990f6/e02.png": {
+    "file": "stewart-2-8-09f990f6/e02.png",
+    "mime": "image/png",
+    "sha256": "18836bccbb1321b663aca926c83d74ae4915a940a3fff0adc0ffdfe2c72913ac"
+  },
+  "stewart-2-8-09f990f6/e03.png": {
+    "file": "stewart-2-8-09f990f6/e03.png",
+    "mime": "image/png",
+    "sha256": "5d4aa6205c1e2de2f35aca7233dd121de83876cd30dfad2221c68d8d93febc5e"
+  },
+  "stewart-2-8-09f990f6/e04.png": {
+    "file": "stewart-2-8-09f990f6/e04.png",
+    "mime": "image/png",
+    "sha256": "84c4f1f54c5894bc29c042ad2f9b5487d385b0639a798ebd1f619625e7e8026b"
+  },
+  "stewart-2-8-09f990f6/e05.png": {
+    "file": "stewart-2-8-09f990f6/e05.png",
+    "mime": "image/png",
+    "sha256": "f4d274813d0811d310e2410e145db287a08a9a617bf4ac4692ce4396c0874e1e"
+  },
+  "stewart-2-8-09f990f6/e06.png": {
+    "file": "stewart-2-8-09f990f6/e06.png",
+    "mime": "image/png",
+    "sha256": "4aaa82ec73e39861fefb2d76cdbdb80945290d67a3ab3cb1e88cb67fc4098070"
+  },
+  "stewart-2-8-09f990f6/e07.png": {
+    "file": "stewart-2-8-09f990f6/e07.png",
+    "mime": "image/png",
+    "sha256": "b09fc8df7a4ce5b375729312fdb41eee37f8aa66d10c75ade5fc5dab81ca3715"
+  },
+  "stewart-2-8-09f990f6/e08.png": {
+    "file": "stewart-2-8-09f990f6/e08.png",
+    "mime": "image/png",
+    "sha256": "33775fcb6088e216bdd4f4794712b4e5728f92e088cbe0e1e5913aaed7ad93cf"
+  },
+  "stewart-2-8-09f990f6/e09.png": {
+    "file": "stewart-2-8-09f990f6/e09.png",
+    "mime": "image/png",
+    "sha256": "a61f7607359293d46d60aeb4172b7e24ec4feaba3a444219c88b65e37b0ac553"
+  },
+  "stewart-2-8-09f990f6/e10.png": {
+    "file": "stewart-2-8-09f990f6/e10.png",
+    "mime": "image/png",
+    "sha256": "888fead669c16dc15084cc243cb5709d194110e72a04279d96631227ae5df532"
+  },
+  "stewart-2-8-09f990f6/e11.png": {
+    "file": "stewart-2-8-09f990f6/e11.png",
+    "mime": "image/png",
+    "sha256": "b401b0fd259611a8d5ca8b01d4b5ddc49344bf1b463f80068bd65cbb57e40d6b"
+  },
+  "stewart-2-8-09f990f6/e12.png": {
+    "file": "stewart-2-8-09f990f6/e12.png",
+    "mime": "image/png",
+    "sha256": "86f52f24969d9e48f9f884550c7a969d7c40ca2a10cca7ec34df5857cfc2f9ed"
+  },
+  "stewart-2-8-09f990f6/e13.png": {
+    "file": "stewart-2-8-09f990f6/e13.png",
+    "mime": "image/png",
+    "sha256": "a81bba2d23fb5af6e404f2bf1193330eddc4905a76407be76bf5db3f45ebdccb"
+  },
+  "stewart-2-8-09f990f6/e14.png": {
+    "file": "stewart-2-8-09f990f6/e14.png",
+    "mime": "image/png",
+    "sha256": "b58c3c0da0116816be66595e7f2a0557aac3820f23ccbc5a97ebba06d48322de"
+  },
+  "stewart-2-8-09f990f6/e15.png": {
+    "file": "stewart-2-8-09f990f6/e15.png",
+    "mime": "image/png",
+    "sha256": "c5bc2a7d39e24b9bba2bab139a9d794a0cf33e72a3b133c1917bb965cee4542e"
+  },
+  "stewart-2-8-09f990f6/e41.png": {
+    "file": "stewart-2-8-09f990f6/e41.png",
+    "mime": "image/png",
+    "sha256": "52ff96fe5c74b94309562a69807bb4d0400c4dbfff6b6dae4554e9418f011f52"
+  },
+  "stewart-2-8-09f990f6/e42.png": {
+    "file": "stewart-2-8-09f990f6/e42.png",
+    "mime": "image/png",
+    "sha256": "b081b69e575589ff223a6c1b0831cbe02b7f1e1792e64f4c34a3bea4000a3e5b"
+  },
+  "stewart-2-8-09f990f6/e43.png": {
+    "file": "stewart-2-8-09f990f6/e43.png",
+    "mime": "image/png",
+    "sha256": "5708bea22c5cefd223c0176bcf1baf41141ad6ef6fbb4686c3fab2e1f48c7888"
+  },
+  "stewart-2-8-09f990f6/e44.png": {
+    "file": "stewart-2-8-09f990f6/e44.png",
+    "mime": "image/png",
+    "sha256": "430e48431122ec42471e279dd9a1d9d7253526eb26d7819a026d83a96fca4068"
+  },
+  "stewart-2-8-09f990f6/e47.png": {
+    "file": "stewart-2-8-09f990f6/e47.png",
+    "mime": "image/png",
+    "sha256": "bd343b36bf5a263cc012e3b020514b69cbcec55721c5ea7db7dd128f1c27358e"
+  },
+  "stewart-2-8-09f990f6/e48.png": {
+    "file": "stewart-2-8-09f990f6/e48.png",
+    "mime": "image/png",
+    "sha256": "217fc7de3cdbd42e3049fdedbf61a28eac733493fb4752e4737b71ae1a88b5a0"
+  },
+  "stewart-2-8-09f990f6/e49.png": {
+    "file": "stewart-2-8-09f990f6/e49.png",
+    "mime": "image/png",
+    "sha256": "6e160b35e0342a07f534c411a9093fbeec07e4322faff0e814d0d96224dc7d63"
+  },
+  "stewart-2-8-09f990f6/e50.png": {
+    "file": "stewart-2-8-09f990f6/e50.png",
+    "mime": "image/png",
+    "sha256": "93a74a73f231ea18ea52c8fb46b4ac78e17e86df6aed467996f0068670cf5045"
+  },
+  "stewart-2-8-09f990f6/e51.png": {
+    "file": "stewart-2-8-09f990f6/e51.png",
+    "mime": "image/png",
+    "sha256": "ff4dc90c13c7170cfba5736a2e07cff7a969176fe1ed1522015a0c593de0c015"
+  },
+  "stewart-2-8-09f990f6/e52.png": {
+    "file": "stewart-2-8-09f990f6/e52.png",
+    "mime": "image/png",
+    "sha256": "57806b3d1a4ba13c19e5dd2f6da6f1d8e5fc6af7c91a8c2a890030a3823c79d3"
+  },
+  "stewart-2-8-09f990f6/e56.png": {
+    "file": "stewart-2-8-09f990f6/e56.png",
+    "mime": "image/png",
+    "sha256": "09a3ecd05166ee10bdca9b67b0395aa92de589372f2a68a73ed6e28877ad0fd3"
   }
 }
