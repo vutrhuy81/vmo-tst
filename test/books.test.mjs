@@ -245,6 +245,16 @@ for(const selector of ['.book-exercise','.book-exercise .btn-ai-guide','.book-ex
 assert.equal(window.document.querySelectorAll('#booksContent img').length,7);
 assert.ok(window.document.getElementById('booksContent').textContent.replace(/\s+/g,' ').includes('Chú thích biên tập và thuật ngữ'));
 for(const [title,count]of [['Kiểm tra khái niệm',16],['Câu hỏi đúng–sai',26]]){const h=[...window.document.querySelectorAll('#booksContent h1')].find(h=>h.textContent===title);let n=0;for(let x=h.nextElementSibling;x&&!/^H[1-6]$/.test(x.tagName);x=x.nextElementSibling){const ps=x.tagName==='P'?[x]:[...x.querySelectorAll('p')];n+=ps.filter(p=>/^\d+\./.test(p.querySelector(':scope > strong')?.textContent||'')).length;}assert.equal(n,count);}
+// Chapter 2 Problems Plus keeps its example and independent exercise identities.
+const section2p=await readBooks(db,student,{bookId:book.id,sectionId:detail.sections.find(s=>s.title==='Bài tập nâng cao'&&s.parentId===detail.sections.find(x=>x.title.startsWith('Chương 2.')).id).id});
+assert.equal(section2p.exerciseHeading,'Bài toán');
+assert.deepEqual(section2p.exercises.map(e=>e.questionNumber),Array.from({length:14},(_,i)=>i+1));
+assert.equal(new Set(section2p.exercises.map(e=>e.contentKey)).size,14);
+await [...[...window.document.querySelectorAll('#booksToc details')].find(d=>d.querySelector(':scope > summary')?.textContent.startsWith('Chương 2.')).querySelectorAll('button')].find(b=>b.textContent==='Bài tập nâng cao').onclick();
+for(const selector of ['.book-exercise','.book-exercise .btn-ai-guide','.book-exercise .btn-submit-solution','.book-exercise .btn-manage-reference-links'])assert.equal(window.document.querySelectorAll(selector).length,14);
+assert.equal(window.document.querySelectorAll('#booksContent img').length,2);
+const plusText=window.document.getElementById('booksContent').textContent.replace(/\s+/g,' ');
+assert.ok(plusText.includes('Ví dụ'));assert.ok(plusText.includes('Các bài toán sau nhằm kiểm tra'));assert.ok(plusText.includes('Chú thích biên tập và thuật ngữ'));
 // Return to an unformatted legacy section to test the editor's default format.
 await [...window.document.querySelectorAll('#booksToc button')].find(b=>b.textContent==='Khái quát về Giải tích').onclick();
 

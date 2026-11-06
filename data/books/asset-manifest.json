@@ -1435,5 +1435,15 @@
     "file": "stewart-2-review-ee7b7bf5/e54.png",
     "mime": "image/png",
     "sha256": "e1f724ae0c2d59987ac5291fad2b0df468d22db7fab3fe3fee1cc9416b3a8a43"
+  },
+  "stewart-2-plus-bd302d07/e04.png": {
+    "file": "stewart-2-plus-bd302d07/e04.png",
+    "mime": "image/png",
+    "sha256": "ba1dfff5ee0d2119f147b46bf26f1a23ca084c6268361e78eafadb816a583474"
+  },
+  "stewart-2-plus-bd302d07/e10.png": {
+    "file": "stewart-2-plus-bd302d07/e10.png",
+    "mime": "image/png",
+    "sha256": "4b028603da50e515fcc0410eb12dd22c1a28d940d4eaed7f6f86e3699881b308"
   }
 }

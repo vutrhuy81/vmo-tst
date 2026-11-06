@@ -1,0 +1,64 @@
+{
+  "bookKey": "stewart-9",
+  "sectionKey": "2-plus",
+  "heading": "Bài toán",
+  "sourceSha256": "bd302d07d9da4131ca3d4f4f8b8f8327af44c276ec19404de64293635e055b03",
+  "exercises": [
+    {
+      "number": 1,
+      "content": "<p><strong>1.</strong>&nbsp; Tính <span class=\"math inline\">\\(\\displaystyle\\lim_{x\\to1}\\frac{\\sqrt[3]{x}-1}{\\sqrt{x}-1}\\)</span>.</p>"
+    },
+    {
+      "number": 2,
+      "content": "<p><strong>2.</strong>&nbsp; Tìm các số <span class=\"math inline\">\\(a,b\\)</span> sao cho <span class=\"math inline\">\\(\\displaystyle\\lim_{x\\to0}\\frac{\\sqrt{ax+b}-2}{x}=1\\)</span>.</p>"
+    },
+    {
+      "number": 3,
+      "content": "<p><strong>3.</strong>&nbsp; Tính <span class=\"math inline\">\\(\\displaystyle\\lim_{x\\to0}\\frac{|2x-1|-|2x+1|}{x}\\)</span>.</p>"
+    },
+    {
+      "number": 4,
+      "content": "<p><strong>4.</strong>&nbsp; Hình cho điểm <span class=\"math inline\">\\(P\\)</span> trên parabol <span class=\"math inline\">\\(y=x^2\\)</span> và điểm <span class=\"math inline\">\\(Q\\)</span> là giao điểm của đường trung trực đoạn\n<span class=\"math inline\">\\(OP\\)</span> với trục tung. Khi <span class=\"math inline\">\\(P\\)</span> tiến đến gốc tọa độ dọc theo parabol,\n<span class=\"math inline\">\\(Q\\)</span> chuyển động như thế nào? Điểm\n<span class=\"math inline\">\\(Q\\)</span> có vị trí giới hạn không? Nếu có,\nhãy tìm vị trí ấy.</p>\n<div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-2-plus-bd302d07/e04.png\" alt=\"image\"><br>\n<span>Hình dùng cho Bài toán 4.</span></p>\n</div>"
+    },
+    {
+      "number": 5,
+      "content": "<p><strong>5.</strong>&nbsp; Tính các giới hạn sau, nếu tồn tại, trong đó\n<span class=\"math inline\">\\(\\left[\\!\\left[x\\right]\\!\\right]\\)</span> là\nhàm phần nguyên: <span class=\"math display\">\\[(a)\\quad\\lim_{x\\to0}\\frac{\\left[\\!\\left[x\\right]\\!\\right]}{x};\\qquad(b)\\quad\\lim_{x\\to0}x\\left[\\!\\left[1/x\\right]\\!\\right].\\]</span></p><p><strong>Hàm phần nguyên.</strong> Giá trị tại x là số nguyên lớn nhất không vượt quá x.</p>"
+    },
+    {
+      "number": 6,
+      "content": "<p><strong>6.</strong>&nbsp; Phác họa miền trong mặt phẳng được xác định bởi\nmỗi phương trình sau: <span class=\"math display\">\\[(a)\\quad\\left[\\!\\left[x\\right]\\!\\right]^{2}+\\left[\\!\\left[y\\right]\\!\\right]^{2}=1;\\qquad(b)\\quad\\left[\\!\\left[x\\right]\\!\\right]^{2}-\\left[\\!\\left[y\\right]\\!\\right]^{2}=3;\\]</span>\n<span class=\"math display\">\\[(c)\\quad\\left[\\!\\left[x+y\\right]\\!\\right]^{2}=1;\\qquad(d)\\quad\\left[\\!\\left[x\\right]\\!\\right]+\\left[\\!\\left[y\\right]\\!\\right]=1.\\]</span></p><p><strong>Hàm phần nguyên.</strong> Giá trị tại x là số nguyên lớn nhất không vượt quá x.</p>"
+    },
+    {
+      "number": 7,
+      "content": "<p><strong>7.</strong>&nbsp; Cho <span class=\"math inline\">\\(f(x)=x/\\left[\\!\\left[x\\right]\\!\\right]\\)</span>.</p>\n<p>(a) Tìm tập xác định và tập giá trị của <span class=\"math inline\">\\(f\\)</span>.</p>\n<p>(b) Tính <span class=\"math inline\">\\(\\lim_{x\\to\\infty}f(x)\\)</span>.</p><p><strong>Hàm phần nguyên.</strong> Giá trị tại x là số nguyên lớn nhất không vượt quá x.</p>"
+    },
+    {
+      "number": 8,
+      "content": "<p><strong>8.</strong>&nbsp; Một <strong>điểm bất động</strong> của hàm <span class=\"math inline\">\\(f\\)</span> là số <span class=\"math inline\">\\(c\\)</span> thuộc tập xác định sao cho <span class=\"math inline\">\\(f(c)=c\\)</span>. Hàm không làm thay đổi <span class=\"math inline\">\\(c\\)</span>; điểm ấy được giữ cố định.</p>\n<p>(a) Phác họa đồ thị một hàm liên tục có tập xác định <span class=\"math inline\">\\([0,1]\\)</span> và tập giá trị nằm trong <span class=\"math inline\">\\([0,1]\\)</span>. Xác định một điểm bất động của\n<span class=\"math inline\">\\(f\\)</span>.</p>\n<p>(b) Thử vẽ đồ thị một hàm liên tục có tập xác định <span class=\"math inline\">\\([0,1]\\)</span>, tập giá trị nằm trong <span class=\"math inline\">\\([0,1]\\)</span>, nhưng không có điểm bất động. Bạn\ngặp trở ngại gì?</p>\n<p>(c) Dùng Định lý giá trị trung gian chứng minh rằng mọi hàm liên tục\ncó tập xác định <span class=\"math inline\">\\([0,1]\\)</span> và tập giá\ntrị nằm trong <span class=\"math inline\">\\([0,1]\\)</span> đều có điểm bất\nđộng.</p>"
+    },
+    {
+      "number": 9,
+      "content": "<p><strong>9.</strong>&nbsp; Biết <span class=\"math inline\">\\(\\lim_{x\\to\na}[f(x)+g(x)]=2\\)</span> và <span class=\"math inline\">\\(\\lim_{x\\to\na}[f(x)-g(x)]=1\\)</span>. Tìm <span class=\"math inline\">\\(\\lim_{x\\to\na}[f(x)g(x)]\\)</span>.</p>"
+    },
+    {
+      "number": 10,
+      "content": "<p><strong>10.</strong>&nbsp; (a) Hình cho tam giác cân <span class=\"math inline\">\\(ABC\\)</span>, với <span class=\"math inline\">\\(\\angle B=\\angle C\\)</span>. Đường phân giác góc\n<span class=\"math inline\">\\(B\\)</span> cắt cạnh <span class=\"math inline\">\\(AC\\)</span> tại <span class=\"math inline\">\\(P\\)</span>. Giả sử đáy <span class=\"math inline\">\\(BC\\)</span> cố định nhưng độ dài đường cao <span class=\"math inline\">\\(|AM|\\)</span> tiến đến 0, nên <span class=\"math inline\">\\(A\\)</span> tiến đến trung điểm <span class=\"math inline\">\\(M\\)</span> của <span class=\"math inline\">\\(BC\\)</span>. Trong quá trình ấy, <span class=\"math inline\">\\(P\\)</span> chuyển động như thế nào? Điểm <span class=\"math inline\">\\(P\\)</span> có vị trí giới hạn không? Nếu có, hãy\ntìm vị trí ấy.</p>\n<p>(b) Thử phác họa quỹ tích của <span class=\"math inline\">\\(P\\)</span>\ntrong quá trình này. Sau đó tìm phương trình đường cong ấy và dùng\nphương trình để phác họa đường cong.</p>\n<div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-2-plus-bd302d07/e10.png\" alt=\"image\"><br>\n<span>Hình dùng cho Bài toán 10.</span></p>\n</div>"
+    },
+    {
+      "number": 11,
+      "content": "<p><strong>11.</strong>&nbsp; (a) Xuất phát từ vĩ độ <span class=\"math inline\">\\(0^\\circ\\)</span> và đi về phía tây, gọi <span class=\"math inline\">\\(T(x)\\)</span> là nhiệt độ tại điểm <span class=\"math inline\">\\(x\\)</span> ở một thời điểm cho trước. Giả sử <span class=\"math inline\">\\(T\\)</span> liên tục theo <span class=\"math inline\">\\(x\\)</span>. Chứng tỏ rằng tại mỗi thời điểm cố\nđịnh, có ít nhất hai điểm đối nhau qua tâm trên đường xích đạo có cùng\nnhiệt độ.</p>\n<p>(b) Kết quả ở (a) có đúng với các điểm nằm trên một đường tròn bất kỳ\ntrên bề mặt Trái Đất không?</p>\n<p>(c) Kết quả ở (a) có đúng đối với áp suất khí quyển và độ cao so với\nmực nước biển không?</p>"
+    },
+    {
+      "number": 12,
+      "content": "<p><strong>12.</strong>&nbsp; Cho <span class=\"math inline\">\\(f\\)</span> khả\nvi và <span class=\"math inline\">\\(g(x)=xf(x)\\)</span>. Dùng định nghĩa\nđạo hàm chứng minh <span class=\"math display\">\\[g'(x)=xf'(x)+f(x).\\]</span></p>"
+    },
+    {
+      "number": 13,
+      "content": "<p><strong>13.</strong>&nbsp; Hàm <span class=\"math inline\">\\(f\\)</span> thỏa\nmãn <span class=\"math display\">\\[f(x+y)=f(x)+f(y)+x^2y+xy^2\\]</span> với\nmọi số thực <span class=\"math inline\">\\(x,y\\)</span>. Giả sử thêm rằng\n<span class=\"math display\">\\[\\lim_{x\\to0}\\frac{f(x)}x=1.\\]</span> (a)\nTìm <span class=\"math inline\">\\(f(0)\\)</span>. (b) Tìm <span class=\"math inline\">\\(f'(0)\\)</span>. (c) Tìm <span class=\"math inline\">\\(f'(x)\\)</span>.</p>"
+    },
+    {
+      "number": 14,
+      "content": "<p><strong>14.</strong>&nbsp; Giả sử <span class=\"math inline\">\\(|f(x)|\\le\nx^2\\)</span> với mọi <span class=\"math inline\">\\(x\\)</span>. Chứng tỏ\n<span class=\"math inline\">\\(f(0)=0\\)</span>, rồi chứng tỏ <span class=\"math inline\">\\(f'(0)=0\\)</span>.</p>"
+    }
+  ]
+}

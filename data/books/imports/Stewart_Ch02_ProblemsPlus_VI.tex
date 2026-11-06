@@ -1,0 +1,103 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage{fontspec}\setmainfont{Latin Modern Roman}\setsansfont{DejaVu Sans}
+\usepackage{amsmath,amssymb,graphicx,geometry,enumitem,longtable,booktabs,fancyhdr,hyperref}
+\geometry{left=28mm,right=23mm,top=24mm,bottom=24mm}
+\hypersetup{unicode=true,colorlinks=true,linkcolor=black,urlcolor=blue,pdftitle={Giải tích Chương 2 Bài toán nâng cao Giới hạn và đạo hàm}}
+\setlength{\parindent}{1.2em}\setlength{\parskip}{4pt}\setlength{\headheight}{16pt}
+\pagestyle{fancy}\fancyhf{}\fancyhead[L]{\small Chương 2. Giới hạn và đạo hàm}\fancyhead[R]{\small Bài toán nâng cao}\fancyfoot[C]{\thepage}
+\newcommand{\fig}[3][.68]{\begin{center}\begin{minipage}{\linewidth}\centering\includegraphics[width=#1\linewidth]{assets/#2.png}\\{\small #3}\end{minipage}\end{center}}
+\newcommand{\ex}[1]{\par\medskip\noindent\textbf{Ví dụ #1.}\ }
+\newcommand{\sol}{\par\nopagebreak[4]\noindent\textit{Lời giải.}\ }
+\newcommand{\bt}[1]{\par\smallskip\noindent\textbf{#1.}\ }
+\newcommand{\group}[1]{\par\medskip\noindent\textbf{#1}\par\nopagebreak[4]}
+\newcommand{\gint}[1]{\left[\!\left[#1\right]\!\right]}
+\begin{document}
+\begin{center}
+{\Large\bfseries GIẢI TÍCH}\\[5pt]
+{\large Chương 2. Giới hạn và đạo hàm}\\[9pt]
+{\Large\bfseries BÀI TOÁN NÂNG CAO}
+\end{center}
+\noindent\textbf{Nguồn:} James Stewart, Daniel K. Clegg, Saleem Watson, \textit{Calculus: Early Transcendentals}, ấn bản thứ 9 (2020), phần \textit{Problems Plus}, trang in 171–172 (trang PDF 206–207).
+
+Trong phần Nguyên tắc giải toán sau Chương 1, ta đã xét chiến lược đưa thêm một yếu tố phụ trợ. Ví dụ sau cho thấy chiến lược này đôi khi hữu ích khi tính giới hạn. Ý tưởng là \textbf{đổi biến}: đưa vào một biến mới liên hệ với biến ban đầu sao cho bài toán trở nên đơn giản hơn. Ở §5.5, ta sẽ sử dụng rộng rãi hơn ý tưởng tổng quát này.
+\section*{Ví dụ}
+Tính
+\[\lim_{x\to0}\frac{\sqrt[3]{1+cx}-1}{x},\]
+trong đó $c$ là hằng số.
+\sol Ở dạng hiện tại, giới hạn có vẻ khó tính. Trong §2.3, ta đã tính những giới hạn mà cả tử và mẫu đều tiến đến 0. Chiến lược khi ấy là biến đổi đại số để xuất hiện nhân tử có thể giản ước, nhưng ở đây chưa rõ cần thực hiện phép biến đổi nào.
+
+Vì vậy, đưa vào biến mới $t$ bằng phương trình
+\[t=\sqrt[3]{1+cx}.\]
+Cần biểu diễn $x$ theo $t$, nên giải phương trình này:
+\[t^3=1+cx,\qquad x=\frac{t^3-1}{c}\quad(c\ne0).\]
+Chú ý $x\to0$ tương đương $t\to1$. Do đó, chuyển giới hạn đã cho thành giới hạn theo $t$:
+\begin{align*}
+\lim_{x\to0}\frac{\sqrt[3]{1+cx}-1}{x}
+&=\lim_{t\to1}\frac{t-1}{(t^3-1)/c}\\
+&=\lim_{t\to1}\frac{c(t-1)}{t^3-1}.
+\end{align*}
+Phép đổi biến thay một giới hạn tương đối phức tạp bằng giới hạn đơn giản hơn thuộc dạng đã gặp. Phân tích mẫu thành hiệu hai lập phương:
+\begin{align*}
+\lim_{t\to1}\frac{c(t-1)}{t^3-1}
+&=\lim_{t\to1}\frac{c(t-1)}{(t-1)(t^2+t+1)}\\
+&=\lim_{t\to1}\frac{c}{t^2+t+1}=\frac c3.
+\end{align*}
+Khi đổi biến, ta đã loại trường hợp $c=0$. Tuy nhiên, nếu $c=0$ thì hàm dưới dấu giới hạn bằng 0 với mọi $x\ne0$, nên giới hạn bằng 0. Vậy trong mọi trường hợp, giới hạn bằng $c/3$.\hfill$\square$
+\section*{Bài toán}
+Các bài toán sau nhằm kiểm tra và thử thách kỹ năng giải toán. Một số bài đòi hỏi nhiều thời gian suy nghĩ; đừng nản nếu chưa giải được ngay. Khi gặp bế tắc, có thể tham khảo lại phần Nguyên tắc giải toán sau Chương 1.
+\bt{1} Tính $\displaystyle\lim_{x\to1}\frac{\sqrt[3]{x}-1}{\sqrt{x}-1}$.
+\bt{2} Tìm các số $a,b$ sao cho $\displaystyle\lim_{x\to0}\frac{\sqrt{ax+b}-2}{x}=1$.
+\bt{3} Tính $\displaystyle\lim_{x\to0}\frac{|2x-1|-|2x+1|}{x}$.
+\bt{4} Hình cho điểm $P$ trên parabol $y=x^2$ và điểm $Q$ là giao điểm của đường trung trực đoạn $OP$ với trục tung. Khi $P$ tiến đến gốc tọa độ dọc theo parabol, $Q$ chuyển động như thế nào? Điểm $Q$ có vị trí giới hạn không? Nếu có, hãy tìm vị trí ấy.
+\fig[.45]{e04}{Hình dùng cho Bài toán 4.}
+\bt{5} Tính các giới hạn sau, nếu tồn tại, trong đó $\gint{x}$ là hàm phần nguyên:
+\[(a)\quad\lim_{x\to0}\frac{\gint{x}}{x};\qquad(b)\quad\lim_{x\to0}x\gint{1/x}.\]
+\bt{6} Phác họa miền trong mặt phẳng được xác định bởi mỗi phương trình sau:
+\[(a)\quad\gint{x}^{2}+\gint{y}^{2}=1;\qquad(b)\quad\gint{x}^{2}-\gint{y}^{2}=3;\]
+\[(c)\quad\gint{x+y}^{2}=1;\qquad(d)\quad\gint{x}+\gint{y}=1.\]
+\bt{7} Cho $f(x)=x/\gint{x}$.
+
+(a) Tìm tập xác định và tập giá trị của $f$.
+
+(b) Tính $\lim_{x\to\infty}f(x)$.
+\bt{8} Một \textbf{điểm bất động} của hàm $f$ là số $c$ thuộc tập xác định sao cho $f(c)=c$. Hàm không làm thay đổi $c$; điểm ấy được giữ cố định.
+
+(a) Phác họa đồ thị một hàm liên tục có tập xác định $[0,1]$ và tập giá trị nằm trong $[0,1]$. Xác định một điểm bất động của $f$.
+
+(b) Thử vẽ đồ thị một hàm liên tục có tập xác định $[0,1]$, tập giá trị nằm trong $[0,1]$, nhưng không có điểm bất động. Bạn gặp trở ngại gì?
+
+(c) Dùng Định lý giá trị trung gian chứng minh rằng mọi hàm liên tục có tập xác định $[0,1]$ và tập giá trị nằm trong $[0,1]$ đều có điểm bất động.
+\bt{9} Biết $\lim_{x\to a}[f(x)+g(x)]=2$ và $\lim_{x\to a}[f(x)-g(x)]=1$. Tìm $\lim_{x\to a}[f(x)g(x)]$.
+\bt{10} (a) Hình cho tam giác cân $ABC$, với $\angle B=\angle C$. Đường phân giác góc $B$ cắt cạnh $AC$ tại $P$. Giả sử đáy $BC$ cố định nhưng độ dài đường cao $|AM|$ tiến đến 0, nên $A$ tiến đến trung điểm $M$ của $BC$. Trong quá trình ấy, $P$ chuyển động như thế nào? Điểm $P$ có vị trí giới hạn không? Nếu có, hãy tìm vị trí ấy.
+
+(b) Thử phác họa quỹ tích của $P$ trong quá trình này. Sau đó tìm phương trình đường cong ấy và dùng phương trình để phác họa đường cong.
+\fig[.45]{e10}{Hình dùng cho Bài toán 10.}
+\bt{11} (a) Xuất phát từ vĩ độ $0^\circ$ và đi về phía tây, gọi $T(x)$ là nhiệt độ tại điểm $x$ ở một thời điểm cho trước. Giả sử $T$ liên tục theo $x$. Chứng tỏ rằng tại mỗi thời điểm cố định, có ít nhất hai điểm đối nhau qua tâm trên đường xích đạo có cùng nhiệt độ.
+
+(b) Kết quả ở (a) có đúng với các điểm nằm trên một đường tròn bất kỳ trên bề mặt Trái Đất không?
+
+(c) Kết quả ở (a) có đúng đối với áp suất khí quyển và độ cao so với mực nước biển không?
+\bt{12} Cho $f$ khả vi và $g(x)=xf(x)$. Dùng định nghĩa đạo hàm chứng minh
+\[g'(x)=xf'(x)+f(x).\]
+\bt{13} Hàm $f$ thỏa mãn
+\[f(x+y)=f(x)+f(y)+x^2y+xy^2\]
+với mọi số thực $x,y$. Giả sử thêm rằng
+\[\lim_{x\to0}\frac{f(x)}x=1.\]
+(a) Tìm $f(0)$. (b) Tìm $f'(0)$. (c) Tìm $f'(x)$.
+\bt{14} Giả sử $|f(x)|\le x^2$ với mọi $x$. Chứng tỏ $f(0)=0$, rồi chứng tỏ $f'(0)=0$.
+\section*{Chú thích biên tập và thuật ngữ}
+\begin{enumerate}
+\item Giữ ví dụ không đánh số, lời giải và các Bài toán 1–14 như bản gốc. Hai hình được đặt cạnh nội dung bài toán tương ứng. Không bổ sung lời giải cho 14 bài toán.
+\item $\gint{x}$ là số nguyên lớn nhất không vượt quá $x$, cũng viết $\lfloor x\rfloor$. Trong Bài toán 6, $\gint{x}^{2}$ là bình phương của phần nguyên, không phải phần nguyên của $x^2$; tương tự, $\gint{x+y}^{2}$ là bình phương của phần nguyên của $x+y$.
+\item Bài toán 7 được hiểu trên tập các $x$ mà mẫu $\gint{x}$ khác 0. Các ký hiệu và điều kiện được giữ nguyên; việc xác định tập xác định là yêu cầu của bài toán.
+\item Trong Bài toán 11(b), “đối nhau qua tâm” được xét đối với đường tròn đang xét. Như giả thiết ở (a), kết luận được nghiên cứu dưới điều kiện đại lượng tương ứng biến thiên liên tục dọc đường tròn.
+\end{enumerate}
+\begin{center}\begin{tabular}{ll}\toprule Tiếng Anh&Tiếng Việt\\\midrule
+change of variable&phép đổi biến\\
+fixed point&điểm bất động\\
+perpendicular bisector&đường trung trực\\
+limiting position&vị trí giới hạn\\
+diametrically opposite points&hai điểm đối nhau qua tâm\\\bottomrule
+\end{tabular}\end{center}
+\noindent\textbf{Phạm vi:} Toàn bộ phần \textit{Problems Plus} của Chương 2. Phần tiếp theo: \textbf{Chương 3 — Các quy tắc tính đạo hàm; §3.1 — Đạo hàm của đa thức và hàm mũ}.
+\end{document}
