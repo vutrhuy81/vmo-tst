@@ -1,0 +1,449 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage{fontspec}\setmainfont{Latin Modern Roman}\setsansfont{DejaVu Sans}
+\usepackage{amsmath,amssymb,graphicx,geometry,enumitem,longtable,booktabs,fancyhdr,hyperref}
+\geometry{left=28mm,right=23mm,top=24mm,bottom=24mm}
+\hypersetup{unicode=true,colorlinks=true,linkcolor=black,urlcolor=blue,pdftitle={Giải tích Chương 2 Mục 2.8 Đạo hàm như một hàm số}}
+\setlength{\parindent}{1.2em}\setlength{\parskip}{4pt}\setlength{\headheight}{16pt}
+\pagestyle{fancy}\fancyhf{}\fancyhead[L]{\small Chương 2. Giới hạn và đạo hàm}\fancyhead[R]{\small §2.8}\fancyfoot[C]{\thepage}
+\newcommand{\fig}[3][.68]{\begin{center}\begin{minipage}{\linewidth}\centering\includegraphics[width=#1\linewidth]{assets/#2.png}\\{\small #3}\end{minipage}\end{center}}
+\newcommand{\ex}[1]{\par\medskip\noindent\textbf{Ví dụ #1.}\ }
+\newcommand{\sol}{\par\nopagebreak[4]\noindent\textit{Lời giải.}\ }
+\newcommand{\bt}[1]{\par\smallskip\noindent\textbf{#1.}\ }
+\newcommand{\group}[1]{\par\medskip\noindent\textbf{#1}\par\nopagebreak[4]}
+\newcommand{\gint}[1]{\left[\!\left[#1\right]\!\right]}
+\begin{document}
+\begin{center}
+{\Large\bfseries GIẢI TÍCH}\\[5pt]
+{\large Chương 2. Giới hạn và đạo hàm}\\[9pt]
+{\Large\bfseries 2.8. Đạo hàm như một hàm số}
+\end{center}
+\noindent\textbf{Nguồn:} James Stewart, Daniel K. Clegg, Saleem Watson, \textit{Calculus: Early Transcendentals}, ấn bản thứ 9 (2020), trang in 153–166 (trang PDF 188–201), từ tiêu đề §2.8 đến trước phần Ôn tập Chương 2.
+\section*{Hàm đạo hàm}
+Trong mục trước, ta xét đạo hàm của hàm $f$ tại một số cố định $a$:
+\[f'(a)=\lim_{h\to0}\frac{f(a+h)-f(a)}h.\tag{1}\]
+Bây giờ thay đổi cách nhìn và cho $a$ biến thiên. Thay $a$ trong (1) bằng biến $x$, ta được
+\[f'(x)=\lim_{h\to0}\frac{f(x+h)-f(x)}h.\tag{2}\]
+Với mỗi $x$ mà giới hạn này tồn tại, ta gán cho $x$ số $f'(x)$. Vì vậy, có thể xem $f'$ là một hàm mới, gọi là \textbf{hàm đạo hàm của $f$}, xác định bởi (2). Về hình học, giá trị $f'(x)$ là hệ số góc tiếp tuyến của đồ thị $f$ tại $(x,f(x))$.
+
+Hàm $f'$ được gọi là đạo hàm của $f$ vì nó được suy ra từ $f$ bằng phép lấy giới hạn trong (2). Tập xác định của $f'$ là $\{x\mid f'(x)\text{ tồn tại}\}$ và có thể nhỏ hơn tập xác định của $f$.
+\ex{1} Đồ thị hàm $f$ được cho trong Hình 1. Dùng đồ thị này để phác họa đồ thị đạo hàm $f'$.
+\fig[.87]{f01}{Hình 1. Đồ thị $y=f(x)$.}
+\sol Có thể ước lượng đạo hàm tại mỗi $x$ bằng cách vẽ tiếp tuyến tại $(x,f(x))$ rồi ước lượng hệ số góc. Chẳng hạn, tại $x=3$, vẽ tiếp tuyến tại $P$ trong Hình 2 và dùng tam giác đã vẽ để ước lượng hệ số góc xấp xỉ $-2/3$. Do đó, $f'(3)\approx-2/3\approx-0.67$. Ta đặt điểm $P'(3,-0.67)$ trên đồ thị $f'$, ngay phía dưới $P$. Hệ số góc của đồ thị $f$ trở thành tung độ của đồ thị $f'$.
+\fig[.86]{f02}{Hình 2. Dựng đồ thị $f'$ từ hệ số góc các tiếp tuyến của đồ thị $f$.}
+Tiếp tuyến tại $A$ dường như có hệ số góc $-1$, nên điểm $A'$ nằm ngay dưới $A$ và có tung độ $-1$. Tiếp tuyến tại $B,D$ nằm ngang, nên đạo hàm bằng 0; đồ thị $f'$ cắt trục hoành tại $B',D'$ ngay dưới $B,D$. Giữa $B,D$, đồ thị $f$ dốc nhất tại $C$, với hệ số góc tiếp tuyến dường như bằng 1. Vì thế giá trị lớn nhất của $f'$ giữa $B',D'$ bằng 1, đạt tại $C'$.
+
+Giữa $B,D$, các tiếp tuyến có hệ số góc dương nên $f'(x)>0$, và đồ thị $f'$ ở trên trục hoành. Bên phải $D$, các tiếp tuyến có hệ số góc âm nên $f'(x)<0$, và đồ thị $f'$ ở dưới trục hoành.\hfill$\square$
+\ex{2} (a) Cho $f(x)=x^3-x$. Tìm công thức $f'(x)$.
+
+(b) Minh họa công thức bằng cách so sánh đồ thị $f$ và $f'$.
+\sol (a) Khi dùng (2), cần nhớ rằng biến tiến đến giới hạn là $h$; trong quá trình tính giới hạn, $x$ tạm thời được xem là hằng số.
+\begin{align*}
+f'(x)&=\lim_{h\to0}\frac{f(x+h)-f(x)}h\\
+&=\lim_{h\to0}\frac{[(x+h)^3-(x+h)]-[x^3-x]}h\\
+&=\lim_{h\to0}\frac{x^3+3x^2h+3xh^2+h^3-x-h-x^3+x}h\\
+&=\lim_{h\to0}\frac{3x^2h+3xh^2+h^3-h}h\\
+&=\lim_{h\to0}(3x^2+3xh+h^2-1)=3x^2-1.
+\end{align*}
+(b) Dùng máy tính vẽ $f$ và $f'$ như Hình 3. Ta thấy $f'(x)=0$ tại các điểm mà đồ thị $f$ có tiếp tuyến ngang, và $f'(x)>0$ khi các tiếp tuyến có hệ số góc dương. Các đồ thị giúp kiểm tra kết quả (a).
+\fig[.36]{f03}{Hình 3. Đồ thị $f(x)=x^3-x$ và $f'(x)=3x^2-1$. $\square$}
+\ex{3} Cho $f(x)=\sqrt{x}$. Tìm đạo hàm của $f$ và tập xác định của $f'$.
+\sol Dùng biểu thức căn liên hợp để hữu tỉ hóa tử số:
+\begin{align*}
+f'(x)&=\lim_{h\to0}\frac{f(x+h)-f(x)}h=\lim_{h\to0}\frac{\sqrt{x+h}-\sqrt{x}}h\\
+&=\lim_{h\to0}\left(\frac{\sqrt{x+h}-\sqrt{x}}h\cdot\frac{\sqrt{x+h}+\sqrt{x}}{\sqrt{x+h}+\sqrt{x}}\right)\\
+&=\lim_{h\to0}\frac{(x+h)-x}{h(\sqrt{x+h}+\sqrt{x})}\\
+&=\lim_{h\to0}\frac{h}{h(\sqrt{x+h}+\sqrt{x})}\\
+&=\lim_{h\to0}\frac1{\sqrt{x+h}+\sqrt{x}}=\frac1{\sqrt{x}+\sqrt{x}}=\frac1{2\sqrt{x}}.
+\end{align*}
+Đạo hàm $f'(x)$ tồn tại khi $x>0$, nên tập xác định của $f'$ là $(0,\infty)$, nhỏ hơn một chút so với tập xác định $[0,\infty)$ của $f$.\hfill$\square$
+
+Kiểm tra tính hợp lý của kết quả bằng Hình 4. Khi $x$ gần 0, $\sqrt{x}$ cũng gần 0, nên $f'(x)=1/(2\sqrt{x})$ rất lớn. Điều này phù hợp với các tiếp tuyến dốc gần $(0,0)$ ở Hình 4(a) và các giá trị lớn của $f'$ ngay bên phải 0 ở Hình 4(b). Khi $x$ lớn, $f'(x)$ rất nhỏ, phù hợp với các tiếp tuyến thoải ở phía phải đồ thị $f$ và tiệm cận ngang của đồ thị $f'$.
+\fig[.86]{f04}{Hình 4. (a) $f(x)=\sqrt{x}$; (b) $f'(x)=1/(2\sqrt{x})$.}
+\ex{4} Tìm $f'$ nếu $f(x)=(1-x)/(2+x)$.
+\sol
+\begin{align*}
+f'(x)&=\lim_{h\to0}\frac{f(x+h)-f(x)}h\\
+&=\lim_{h\to0}\frac{\dfrac{1-(x+h)}{2+(x+h)}-\dfrac{1-x}{2+x}}h\\
+&=\lim_{h\to0}\frac{(1-x-h)(2+x)-(1-x)(2+x+h)}{h(2+x+h)(2+x)}\\
+&=\lim_{h\to0}\frac{(2-x-2h-x^2-xh)-(2-x+h-x^2-xh)}{h(2+x+h)(2+x)}\\
+&=\lim_{h\to0}\frac{-3h}{h(2+x+h)(2+x)}\\
+&=\lim_{h\to0}\frac{-3}{(2+x+h)(2+x)}=-\frac3{(2+x)^2}.
+\end{align*}
+\noindent\textit{Nhắc lại phép biến đổi:}
+\[\frac{a/b-c/d}{e}=\frac{ad-bc}{bd}\cdot\frac1e.\qquad\square\]
+\section*{Các ký hiệu khác}
+Trong ký hiệu truyền thống $y=f(x)$, $x$ là biến độc lập, $y$ là biến phụ thuộc. Các ký hiệu thường dùng khác cho đạo hàm là
+\[f'(x)=y'=\frac{dy}{dx}=\frac{df}{dx}=\frac{d}{dx}f(x)=Df(x)=D_xf(x).\]
+Các ký hiệu $D$ và $d/dx$ được gọi là \textbf{toán tử lấy đạo hàm}, vì chúng chỉ phép lấy đạo hàm, tức quá trình tính một đạo hàm.
+
+Ký hiệu $dy/dx$ do Leibniz đưa ra, ở giai đoạn này không nên xem là một tỉ số; nó chỉ là một cách viết khác của $f'(x)$. Tuy vậy, đây là ký hiệu hữu ích và gợi ý, nhất là khi kết hợp với số gia. Từ (2.7.6), định nghĩa đạo hàm viết theo ký hiệu Leibniz là
+\[\frac{dy}{dx}=\lim_{\Delta x\to0}\frac{\Delta y}{\Delta x}.\]
+Để chỉ giá trị đạo hàm tại số $a$, dùng
+\[\left.\frac{dy}{dx}\right|_{x=a}\qquad\text{hoặc}\qquad\frac{dy}{dx}\bigg]_{x=a},\]
+cùng nghĩa với $f'(a)$. Dấu gạch đứng có nghĩa là “tính tại”.
+\begin{samepage}\begin{quote}\textbf{3. Định nghĩa.} Hàm $f$ \textbf{khả vi tại $a$} nếu $f'(a)$ tồn tại. Hàm \textbf{khả vi trên khoảng mở} $(a,b)$, hoặc $(a,\infty)$, $(-\infty,a)$, $(-\infty,\infty)$, nếu khả vi tại mọi số thuộc khoảng đó.
+\end{quote}\end{samepage}
+\subsection*{Leibniz}
+Gottfried Wilhelm Leibniz sinh tại Leipzig năm 1646. Ông học luật, thần học, triết học và toán học tại đại học ở đó, tốt nghiệp cử nhân năm 17 tuổi. Sau khi nhận bằng tiến sĩ luật năm 20 tuổi, ông làm công tác ngoại giao và dành phần lớn cuộc đời đi tới các thủ đô châu Âu trong các nhiệm vụ chính trị. Đặc biệt, ông tìm cách ngăn chặn mối đe dọa quân sự của Pháp đối với Đức và hòa giải Giáo hội Công giáo với các giáo hội Tin Lành.
+
+Ông chỉ bắt đầu nghiên cứu toán học một cách chuyên sâu từ năm 1672, khi làm nhiệm vụ ngoại giao ở Paris. Tại đây, ông chế tạo một máy tính cơ học và gặp các nhà khoa học như Huygens, người hướng ông đến những tiến bộ mới nhất của toán học và khoa học. Leibniz tìm cách xây dựng logic ký hiệu và hệ ký hiệu nhằm đơn giản hóa suy luận logic. Đặc biệt, công trình vi tích phân công bố năm 1684 của ông đặt nền tảng cho ký hiệu và các quy tắc tính đạo hàm mà ta dùng ngày nay.
+
+Đáng tiếc, trong thập niên 1690 đã nổ ra cuộc tranh chấp gay gắt về quyền ưu tiên giữa những người ủng hộ Newton và Leibniz. Một số thành viên Hội Hoàng gia Anh thậm chí cáo buộc Leibniz đạo văn. Thực tế, hai người phát minh vi tích phân độc lập. Newton tìm ra trước, nhưng vì ngại tranh luận nên không công bố ngay; do đó trình bày năm 1684 của Leibniz là công trình được xuất bản trước.
+\ex{5} Hàm $f(x)=|x|$ khả vi ở đâu?
+\sol Nếu $x>0$, ta có $|x|=x$. Chọn $h$ đủ nhỏ để $x+h>0$, nên $|x+h|=x+h$. Vì vậy, với $x>0$,
+\begin{align*}
+f'(x)&=\lim_{h\to0}\frac{|x+h|-|x|}h=\lim_{h\to0}\frac{(x+h)-x}h\\
+&=\lim_{h\to0}\frac hh=\lim_{h\to0}1=1.
+\end{align*}
+Vậy $f$ khả vi với mọi $x>0$.
+
+Tương tự, nếu $x<0$ thì $|x|=-x$. Chọn $h$ đủ nhỏ để $x+h<0$, nên $|x+h|=-(x+h)$. Do đó, với $x<0$,
+\begin{align*}
+f'(x)&=\lim_{h\to0}\frac{|x+h|-|x|}h=\lim_{h\to0}\frac{-(x+h)-(-x)}h\\
+&=\lim_{h\to0}\frac{-h}h=\lim_{h\to0}(-1)=-1.
+\end{align*}
+Vậy $f$ khả vi với mọi $x<0$.
+
+Tại $x=0$, cần xét, nếu tồn tại,
+\begin{align*}
+f'(0)&=\lim_{h\to0}\frac{f(0+h)-f(0)}h\\
+&=\lim_{h\to0}\frac{|0+h|-|0|}h=\lim_{h\to0}\frac{|h|}h.
+\end{align*}
+Tính riêng hai giới hạn một phía:
+\[\lim_{h\to0^+}\frac{|h|}h=\lim_{h\to0^+}\frac hh=\lim_{h\to0^+}1=1,\]
+\[\lim_{h\to0^-}\frac{|h|}h=\lim_{h\to0^-}\frac{-h}h=\lim_{h\to0^-}(-1)=-1.\]
+Vì hai giới hạn khác nhau nên $f'(0)$ không tồn tại. Do đó, $f$ khả vi tại mọi $x\ne0$. Công thức đạo hàm là
+\[f'(x)=\begin{cases}1,&x>0,\\-1,&x<0.\end{cases}\]
+Đồ thị được vẽ trong Hình 5(b). Về hình học, $f'(0)$ không tồn tại tương ứng với việc đường cong $y=|x|$ không có tiếp tuyến tại $(0,0)$, như Hình 5(a).
+\fig[.36]{f05}{Hình 5. (a) $y=f(x)=|x|$; (b) $y=f'(x)$. $\square$}
+Tính liên tục và tính khả vi đều là những tính chất quan trọng của hàm số. Định lý sau liên hệ chúng.
+\begin{samepage}\begin{quote}\textbf{4. Định lý.} Nếu $f$ khả vi tại $a$ thì $f$ liên tục tại $a$.
+\end{quote}\end{samepage}
+\noindent\textit{Chứng minh.} Cần chứng tỏ $\lim_{x\to a}f(x)=f(a)$. Ta sẽ làm điều này bằng cách chứng minh hiệu $f(x)-f(a)$ tiến đến 0.
+
+Giả thiết $f$ khả vi tại $a$ có nghĩa là
+\[f'(a)=\lim_{x\to a}\frac{f(x)-f(a)}{x-a}\]
+tồn tại, theo (2.7.5). Để liên hệ điều đã biết với điều cần chứng minh, chia rồi nhân $f(x)-f(a)$ với $x-a$, hợp lệ khi $x\ne a$:
+\[f(x)-f(a)=\frac{f(x)-f(a)}{x-a}(x-a).\]
+Theo Quy tắc giới hạn 4,
+\begin{align*}
+\lim_{x\to a}[f(x)-f(a)]&=\lim_{x\to a}\left[\frac{f(x)-f(a)}{x-a}(x-a)\right]\\
+&=\lim_{x\to a}\frac{f(x)-f(a)}{x-a}\cdot\lim_{x\to a}(x-a)\\
+&=f'(a)\cdot0=0.
+\end{align*}
+Để dùng kết quả vừa chứng minh, thêm và bớt $f(a)$:
+\begin{align*}
+\lim_{x\to a}f(x)&=\lim_{x\to a}[f(a)+(f(x)-f(a))]\\
+&=\lim_{x\to a}f(a)+\lim_{x\to a}[f(x)-f(a)]\\
+&=f(a)+0=f(a).
+\end{align*}
+Vậy $f$ liên tục tại $a$.\hfill$\square$
+
+\noindent\textit{Chiến lược giải toán.} Tìm mối liên hệ giữa giả thiết và kết luận là một khía cạnh quan trọng của giải toán. Xem Bước 2 (Lập kế hoạch) trong phần Nguyên tắc giải toán sau Chương 1.
+
+\noindent\textbf{Chú ý.} Mệnh đề đảo của Định lý 4 sai: có hàm liên tục nhưng không khả vi. Chẳng hạn, $f(x)=|x|$ liên tục tại 0 vì
+\[\lim_{x\to0}f(x)=\lim_{x\to0}|x|=0=f(0),\]
+như Ví dụ 2.3.7, nhưng Ví dụ 5 cho thấy hàm không khả vi tại 0.
+\section*{Khi nào hàm số không khả vi?}
+Hàm $y=|x|$ trong Ví dụ 5 không khả vi tại 0; Hình 5(a) cho thấy đồ thị đổi hướng đột ngột tại đó. Nói chung, khi đồ thị có một \textbf{điểm góc} hoặc chỗ gấp khúc, nó không có tiếp tuyến tại điểm ấy và $f$ không khả vi ở đó. Khi tính $f'(a)$, ta thấy hai giới hạn một phía khác nhau.
+
+Định lý 4 cho một trường hợp khác: nếu $f$ không liên tục tại $a$ thì không khả vi tại $a$. Do đó, tại mọi điểm gián đoạn, chẳng hạn gián đoạn nhảy, hàm không khả vi.
+
+Khả năng thứ ba là đường cong có \textbf{tiếp tuyến đứng} tại $x=a$: $f$ liên tục tại $a$ và
+\[\lim_{x\to a}|f'(x)|=\infty.\]
+Khi $x\to a$, các tiếp tuyến ngày càng dốc. Hình 6 minh họa một trường hợp; Hình 7(c) cho một trường hợp khác. Hình 7 tổng hợp ba khả năng vừa xét.
+\fig[.44]{f06}{Hình 6. Đường thẳng đứng $x=a$ là tiếp tuyến đứng.}
+\fig[.94]{f07}{Hình 7. Ba cách để hàm $f$ không khả vi tại $a$: (a) điểm góc; (b) gián đoạn; (c) tiếp tuyến đứng.}
+Máy tính vẽ đồ thị cho một cách nhìn khác về tính khả vi. Nếu $f$ khả vi tại $a$, khi phóng đại quanh $(a,f(a))$, đồ thị ngày càng thẳng ra và giống đường thẳng (Hình 8; xem ví dụ cụ thể ở Hình 2.7.2). Nhưng dù phóng đại bao nhiêu quanh điểm như trong Hình 6 hoặc Hình 7(a), vẫn không thể loại bỏ điểm nhọn hoặc điểm góc (Hình 9).
+\fig[.52]{f08}{Hình 8. Hàm $f$ khả vi tại $a$.}
+\fig[.52]{f09}{Hình 9. Hàm $f$ không khả vi tại $a$.}
+\section*{Đạo hàm cấp cao}
+Nếu $f$ khả vi thì $f'$ cũng là một hàm, nên bản thân $f'$ có thể có đạo hàm, ký hiệu $(f')'=f''$. Hàm mới $f''$ được gọi là \textbf{đạo hàm cấp hai} của $f$, vì nó là đạo hàm của đạo hàm. Với $y=f(x)$, ký hiệu Leibniz cho ta
+\[\frac d{dx}\left(\frac{dy}{dx}\right)=\frac{d^2y}{dx^2}.\]
+Vế trái là đạo hàm của đạo hàm cấp một; vế phải là ký hiệu đạo hàm cấp hai.
+\ex{6} Cho $f(x)=x^3-x$. Tìm và diễn giải $f''(x)$.
+\sol Theo Ví dụ 2, $f'(x)=3x^2-1$. Vì thế,
+\begin{align*}
+f''(x)&=(f')'(x)=\lim_{h\to0}\frac{f'(x+h)-f'(x)}h\\
+&=\lim_{h\to0}\frac{[3(x+h)^2-1]-[3x^2-1]}h\\
+&=\lim_{h\to0}\frac{3x^2+6xh+3h^2-1-3x^2+1}h\\
+&=\lim_{h\to0}(6x+3h)=6x.
+\end{align*}
+Hình 10 cho các đồ thị $f,f',f''$.
+\fig[.48]{f10}{Hình 10. $f(x)=x^3-x$, $f'(x)=3x^2-1$, $f''(x)=6x$.}
+Có thể diễn giải $f''(x)$ là hệ số góc đường cong $y=f'(x)$ tại $(x,f'(x))$, tức tốc độ biến thiên hệ số góc của đường cong ban đầu $y=f(x)$.
+
+Trong Hình 10, $f''(x)<0$ khi $y=f'(x)$ có hệ số góc âm, và $f''(x)>0$ khi hệ số góc dương. Các đồ thị giúp kiểm tra phép tính.\hfill$\square$
+
+Tổng quát, đạo hàm cấp hai là tốc độ biến thiên của một tốc độ biến thiên. Ví dụ quen thuộc nhất là \textbf{gia tốc}, được định nghĩa như sau.
+
+Nếu $s=s(t)$ là hàm vị trí của vật chuyển động thẳng, đạo hàm cấp một biểu thị vận tốc theo thời gian:
+\[v(t)=s'(t)=\frac{ds}{dt}.\]
+Tốc độ biến thiên tức thời của vận tốc theo thời gian gọi là \textbf{gia tốc} $a(t)$. Hàm gia tốc là đạo hàm của hàm vận tốc, tức đạo hàm cấp hai của hàm vị trí:
+\[a(t)=v'(t)=s''(t),\qquad a=\frac{dv}{dt}=\frac{d^2s}{dt^2}.\]
+Gia tốc gắn với sự thay đổi vận tốc mà ta cảm nhận khi ô tô tăng tốc hoặc giảm tốc.
+
+\textbf{Đạo hàm cấp ba} $f'''$ là đạo hàm của đạo hàm cấp hai: $f'''=(f'')'$. Vì vậy, $f'''(x)$ là hệ số góc của $y=f''(x)$, hoặc tốc độ biến thiên của $f''(x)$. Với $y=f(x)$, các ký hiệu khác là
+\[y'''=f'''(x)=\frac d{dx}\left(\frac{d^2y}{dx^2}\right)=\frac{d^3y}{dx^3}.\]
+Nếu $s=s(t)$ là hàm vị trí của vật chuyển động thẳng, ta còn có thể diễn giải đạo hàm cấp ba về vật lý. Vì $s'''=(s'')'=a'$, đạo hàm cấp ba của hàm vị trí là đạo hàm của gia tốc, gọi là \textbf{độ giật} (\textit{jerk}):
+\[j=\frac{da}{dt}=\frac{d^3s}{dt^3}.\]
+Vậy $j$ là tốc độ biến thiên gia tốc. Tên gọi này phù hợp vì độ giật lớn nghĩa là gia tốc thay đổi đột ngột, gây chuyển động giật.
+
+Có thể tiếp tục lấy đạo hàm. Đạo hàm cấp bốn $f''''$ thường được ký hiệu $f^{(4)}$. Tổng quát, \textbf{đạo hàm cấp $n$} ký hiệu $f^{(n)}$, thu được bằng cách lấy đạo hàm $n$ lần. Nếu $y=f(x)$ thì
+\[y^{(n)}=f^{(n)}(x)=\frac{d^ny}{dx^n}.\]
+\ex{7} Cho $f(x)=x^3-x$. Tìm $f'''(x)$ và $f^{(4)}(x)$.
+\sol Trong Ví dụ 6, ta có $f''(x)=6x$. Đồ thị đạo hàm cấp hai là đường thẳng $y=6x$, có hệ số góc 6. Vì $f'''(x)$ là hệ số góc của đồ thị $f''$, nên với mọi $x$,
+\[f'''(x)=6.\]
+Đây là hàm hằng, có đồ thị là đường thẳng ngang. Do đó, với mọi $x$,
+\[f^{(4)}(x)=0.\qquad\square\]
+Ta đã thấy ứng dụng đạo hàm cấp hai và cấp ba vào phân tích chuyển động qua gia tốc và độ giật. §4.3 sẽ xét ứng dụng đạo hàm cấp hai để tìm hiểu hình dạng đồ thị $f$. Trong Chương 11, đạo hàm cấp hai và cấp cao giúp biểu diễn hàm bằng tổng các chuỗi vô hạn.
+\clearpage
+\section*{2.8. Bài tập}
+\group{1–2. Dùng đồ thị đã cho để ước lượng mỗi đạo hàm, rồi phác họa đồ thị $f'$.}
+\bt{1} (a) $f'(0)$; (b) $f'(1)$; (c) $f'(2)$; (d) $f'(3)$; (e) $f'(4)$; (f) $f'(5)$; (g) $f'(6)$; (h) $f'(7)$.
+\fig[.46]{e01}{Đồ thị Bài tập 1.}
+\bt{2} (a) $f'(-3)$; (b) $f'(-2)$; (c) $f'(-1)$; (d) $f'(0)$; (e) $f'(1)$; (f) $f'(2)$; (g) $f'(3)$.
+\fig[.44]{e02}{Đồ thị Bài tập 2.}
+\bt{3} Ghép đồ thị mỗi hàm ở (a)–(d) với đồ thị đạo hàm tương ứng trong I–IV. Giải thích lựa chọn.
+\fig[.67]{e03}{Các đồ thị dùng cho Bài tập 3.}
+\par\medskip\noindent\begin{minipage}{\linewidth}
+\group{4–11. Đồ lại hoặc sao chép đồ thị hàm $f$ đã cho; giả sử hai trục có cùng tỉ lệ. Dùng phương pháp Ví dụ 1 để phác họa đồ thị $f'$ phía dưới đồ thị $f$.}
+\bt{4} \fig[.43]{e04}{Đồ thị Bài tập 4.}
+\end{minipage}\par\medskip
+\par\medskip\noindent\begin{minipage}{\linewidth}
+\bt{5} \fig[.43]{e05}{Đồ thị Bài tập 5.}
+\end{minipage}\par\medskip
+\par\medskip\noindent\begin{minipage}{\linewidth}
+\bt{6} \fig[.43]{e06}{Đồ thị Bài tập 6.}
+\end{minipage}\par\medskip
+\par\medskip\noindent\begin{minipage}{\linewidth}
+\bt{7} \fig[.43]{e07}{Đồ thị Bài tập 7.}
+\end{minipage}\par\medskip
+\par\medskip\noindent\begin{minipage}{\linewidth}
+\bt{8} \fig[.43]{e08}{Đồ thị Bài tập 8.}
+\end{minipage}\par\medskip
+\par\medskip\noindent\begin{minipage}{\linewidth}
+\bt{9} \fig[.43]{e09}{Đồ thị Bài tập 9.}
+\end{minipage}\par\medskip
+\par\medskip\noindent\begin{minipage}{\linewidth}
+\bt{10} \fig[.43]{e10}{Đồ thị Bài tập 10.}
+\end{minipage}\par\medskip
+\par\medskip\noindent\begin{minipage}{\linewidth}
+\bt{11} \fig[.43]{e11}{Đồ thị Bài tập 11.}
+\end{minipage}\par\medskip
+\bt{12} Đồ thị cho hàm số lượng tế bào nấm men $P(t)$ trong môi trường nuôi cấy phòng thí nghiệm. Dùng phương pháp Ví dụ 1 vẽ đạo hàm $P'(t)$. Đồ thị $P'$ cho biết điều gì về quần thể nấm men?
+\fig[.57]{e12}{Đồ thị Bài tập 12. $P$: số tế bào nấm men; $t$: giờ.}
+\bt{13} Một pin sạc được nối vào bộ sạc. Đồ thị $C(t)$ cho phần trăm dung lượng đầy đạt được sau $t$ giờ.
+
+(a) Đạo hàm $C'(t)$ có ý nghĩa gì?
+
+(b) Phác họa đồ thị $C'(t)$. Đồ thị cho biết điều gì?
+\fig[.65]{e13}{Đồ thị Bài tập 13. $C$: phần trăm mức sạc đầy; $t$: giờ.}
+\bt{14} Đồ thị của Bộ Năng lượng Hoa Kỳ cho ảnh hưởng của tốc độ lái xe đến mức tiết kiệm nhiên liệu. $F$ đo bằng dặm/gallon, $v$ bằng dặm/giờ.
+
+(a) Đạo hàm $F'(v)$ có ý nghĩa gì?
+
+(b) Phác họa đồ thị $F'(v)$.
+
+(c) Nên lái ở tốc độ nào để tiết kiệm nhiên liệu?
+\fig[.65]{e14}{Đồ thị Bài tập 14. $F$: mi/gal; $v$: mi/h.}
+\bt{15} Đồ thị cho nhiệt độ trung bình $f$ của nước mặt hồ Michigan trong một năm; $t$ đo bằng tháng, $t=0$ ứng với ngày 1 tháng 1. Giá trị trung bình được tính từ dữ liệu 20 năm kết thúc vào năm 2011. Phác họa đồ thị $f'$. Khi nào $f'(t)$ lớn nhất?
+\fig[.65]{e15}{Đồ thị Bài tập 15. $f$: °F; $t$: tháng.}
+\group{16–18. Vẽ cẩn thận đồ thị $f$, rồi phác họa đồ thị $f'$ phía dưới như Bài tập 4–11. Từ đồ thị, có thể đoán công thức $f'(x)$ không?}
+\bt{16} $f(x)=\sin x$.
+\bt{17} $f(x)=e^x$.
+\bt{18} $f(x)=\ln x$.
+\bt{19} Cho $f(x)=x^2$.
+
+(a) Phóng đại đồ thị $f$ để ước lượng $f'(0)$, $f'(1/2)$, $f'(1)$, $f'(2)$.
+
+(b) Dùng tính đối xứng suy ra $f'(-1/2)$, $f'(-1)$, $f'(-2)$.
+
+(c) Từ (a), (b), dự đoán công thức $f'(x)$.
+
+(d) Dùng định nghĩa đạo hàm chứng minh dự đoán ở (c).
+\bt{20} Cho $f(x)=x^3$.
+
+(a) Phóng đại đồ thị $f$ để ước lượng $f'(0)$, $f'(1/2)$, $f'(1)$, $f'(2)$, $f'(3)$.
+
+(b) Dùng tính đối xứng suy ra $f'(-1/2)$, $f'(-1)$, $f'(-2)$, $f'(-3)$.
+
+(c) Dùng các giá trị ở (a), (b) vẽ đồ thị $f'$.
+
+(d) Dự đoán công thức $f'(x)$.
+
+(e) Dùng định nghĩa đạo hàm chứng minh dự đoán ở (d).
+\group{21–32. Dùng định nghĩa đạo hàm để tìm đạo hàm của hàm đã cho. Nêu tập xác định của hàm và của đạo hàm.}
+\bt{21} $f(x)=3x-8$.
+\bt{22} $f(x)=mx+b$.
+\bt{23} $f(t)=2.5t^2+6t$.
+\bt{24} $f(x)=4+8x-5x^2$.
+\bt{25} $A(p)=4p^3+3p$.
+\bt{26} $F(t)=t^3-5t+1$.
+\bt{27} $f(x)=1/(x^2-4)$.
+\bt{28} $F(v)=v/(v+2)$.
+\bt{29} $g(u)=(u+1)/(4u-1)$.
+\bt{30} $f(x)=x^4$.
+\bt{31} $f(x)=1/\sqrt{1+x}$.
+\bt{32} $g(x)=1/(1+\sqrt{x})$.
+\bt{33} (a) Phác họa $f(x)=1+\sqrt{x+3}$ từ đồ thị $y=\sqrt{x}$, dùng các phép biến đổi ở §1.3.
+
+(b) Dùng đồ thị ở (a) phác họa đồ thị $f'$.
+
+(c) Dùng định nghĩa đạo hàm tìm $f'(x)$. Tập xác định của $f$ và $f'$ là gì?
+
+(d) Vẽ $f'$ và so sánh với hình phác ở (b).
+\bt{34} (a) Cho $f(x)=x+1/x$. Tìm $f'(x)$.
+
+(b) Kiểm tra tính hợp lý của (a) bằng cách so sánh đồ thị $f$ và $f'$.
+\bt{35} (a) Cho $f(x)=x^4+2x$. Tìm $f'(x)$.
+
+(b) Kiểm tra tính hợp lý của (a) bằng cách so sánh đồ thị $f$ và $f'$.
+\bt{36} Bảng cho số thủ thuật thẩm mỹ ít xâm lấn $N(t)$ được thực hiện tại Hoa Kỳ trong năm $t$, tính bằng nghìn.
+\begin{center}\begin{tabular}{rr}\toprule$t$&$N(t)$ (nghìn)\\\midrule
+2000&5500\\2002&4897\\2004&7470\\2006&9138\\2008&10\,897\\2010&11\,561\\2012&13\,035\\2014&13\,945\\\bottomrule
+\end{tabular}\\*{\small Nguồn: Hiệp hội Bác sĩ Phẫu thuật Tạo hình Hoa Kỳ.}\end{center}
+(a) $N'(t)$ có ý nghĩa gì? Đơn vị là gì?
+
+(b) Lập bảng các giá trị ước lượng của $N'(t)$.
+
+(c) Vẽ đồ thị $N$ và $N'$.
+
+(d) Làm thế nào để có giá trị $N'(t)$ chính xác hơn?
+\bt{37} Bảng cho chiều cao theo tuổi của một cây thông điển hình trồng lấy gỗ tại khu vực được quản lý.
+\begin{center}\begin{tabular}{lrrrrrr}\toprule
+Tuổi cây (năm)&14&21&28&35&42&49\\
+Chiều cao (ft)&41&54&64&72&78&83\\\bottomrule
+\end{tabular}\\*{\small Nguồn: Ủy ban Lâm nghiệp Arkansas.}\end{center}
+Gọi $H(t)$ là chiều cao sau $t$ năm. Lập bảng các giá trị ước lượng của $H'$ và phác họa đồ thị.
+\bt{38} Nhiệt độ nước ảnh hưởng tốc độ sinh trưởng của cá hồi suối. Bảng cho khối lượng tăng thêm sau 24 ngày ở các nhiệt độ nước khác nhau.
+\begin{center}\begin{tabular}{lrrrrr}\toprule
+Nhiệt độ (°C)&15.5&17.7&20.0&22.4&24.4\\
+Khối lượng tăng (g)&37.2&31.0&19.8&9.7&$-9.8$\\\bottomrule
+\end{tabular}\end{center}
+Gọi $W(x)$ là khối lượng tăng ở nhiệt độ $x$. Lập bảng các giá trị ước lượng của $W'$ và phác họa đồ thị. Đơn vị của $W'(x)$ là gì?
+
+\noindent{\small Nguồn: Phỏng theo J. Chadwick Jr., “Temperature Effects on Growth and Stress Physiology of Brook Trout: Implications for Climate Change Impacts on an Iconic Cold-Water Fish”, luận văn thạc sĩ, bài số 897 (2012), \url{https://scholarworks.umass.edu/theses/897}.}
+\bt{39} Gọi $P$ là tỉ lệ phần trăm điện năng của một thành phố được sản xuất bằng các tấm pin mặt trời, tại thời điểm $t$ năm sau ngày 1 tháng 1 năm 2020.
+
+(a) $dP/dt$ biểu thị điều gì trong bối cảnh này?
+
+(b) Diễn giải $\left.\dfrac{dP}{dt}\right|_{t=2}=3.5$.
+\bt{40} Gọi $N$ là số người ở Hoa Kỳ đi nghỉ bằng ô tô sang bang khác trong một năm khi giá xăng trung bình là $p$ đô la/gallon. Bạn dự đoán $dN/dp$ dương hay âm? Giải thích.
+\group{41–44. Cho đồ thị $f$. Nêu các số tại đó $f$ không khả vi và giải thích.}
+\par\medskip\noindent\begin{minipage}{\linewidth}
+\bt{41} \fig[.46]{e41}{Đồ thị Bài tập 41.}
+\end{minipage}\par\medskip
+\par\medskip\noindent\begin{minipage}{\linewidth}
+\bt{42} \fig[.46]{e42}{Đồ thị Bài tập 42.}
+\end{minipage}\par\medskip
+\par\medskip\noindent\begin{minipage}{\linewidth}
+\bt{43} \fig[.46]{e43}{Đồ thị Bài tập 43.}
+\end{minipage}\par\medskip
+\par\medskip\noindent\begin{minipage}{\linewidth}
+\bt{44} \fig[.46]{e44}{Đồ thị Bài tập 44.}
+\end{minipage}\par\medskip
+\bt{45} Vẽ $f(x)=x+\sqrt{|x|}$. Phóng đại nhiều lần, trước hết quanh $(-1,0)$ rồi quanh gốc tọa độ. Dáng điệu $f$ gần hai điểm này khác nhau thế nào? Kết luận gì về tính khả vi của $f$?
+\bt{46} Phóng đại quanh $(1,0)$, $(0,1)$, $(-1,0)$ trên đồ thị $g(x)=(x^2-1)^{2/3}$. Bạn nhận thấy gì? Giải thích bằng tính khả vi của $g$.
+\group{47–48. Đồ thị một hàm $f$ và đạo hàm $f'$ được cho dưới đây. Số nào lớn hơn: $f'(-1)$ hay $f''(1)$?}
+\par\medskip\noindent\begin{minipage}{\linewidth}
+\bt{47} \fig[.55]{e47}{Các đồ thị Bài tập 47.}
+\end{minipage}\par\medskip
+\par\medskip\noindent\begin{minipage}{\linewidth}
+\bt{48} \fig[.55]{e48}{Các đồ thị Bài tập 48.}
+\end{minipage}\par\medskip
+\bt{49} Hình cho đồ thị $f,f',f''$. Nhận dạng từng đường cong và giải thích lựa chọn.
+\fig[.60]{e49}{Các đường cong $a,b,c$ trong Bài tập 49.}
+\bt{50} Hình cho đồ thị $f,f',f'',f'''$. Nhận dạng từng đường cong và giải thích lựa chọn.
+\fig[.49]{e50}{Các đường cong $a,b,c,d$ trong Bài tập 50.}
+\bt{51} Hình cho ba hàm: vị trí, vận tốc và gia tốc của một ô tô. Nhận dạng từng đường cong và giải thích lựa chọn.
+\fig[.56]{e51}{Các đường cong $a,b,c$ trong Bài tập 51.}
+\bt{52} Hình cho bốn hàm: vị trí, vận tốc, gia tốc và độ giật của một ô tô. Nhận dạng từng đường cong và giải thích lựa chọn.
+\fig[.56]{e52}{Các đường cong $a,b,c,d$ trong Bài tập 52.}
+\group{53–54. Dùng định nghĩa đạo hàm tìm $f'(x)$ và $f''(x)$. Vẽ $f,f',f''$ trên cùng màn hình để kiểm tra tính hợp lý của kết quả.}
+\bt{53} $f(x)=3x^2+2x+1$.
+\bt{54} $f(x)=x^3-3x$.
+\bt{55} Cho $f(x)=2x^2-x^3$. Tìm $f'(x)$, $f''(x)$, $f'''(x)$ và $f^{(4)}(x)$. Vẽ $f,f',f'',f'''$ trên cùng màn hình. Các đồ thị có phù hợp với ý nghĩa hình học của các đạo hàm này không?
+\bt{56} (a) Cho đồ thị hàm vị trí của ô tô, với $s$ đo bằng ft, $t$ bằng giây. Dùng đồ thị để vẽ vận tốc và gia tốc. Gia tốc tại $t=10$ giây bằng bao nhiêu?
+\fig[.59]{e56}{Đồ thị Bài tập 56. $s$: ft; $t$: giây.}
+(b) Dùng đường cong gia tốc ở (a) để ước lượng độ giật tại $t=10$ giây. Đơn vị của độ giật là gì?
+\bt{57} Cho $f(x)=\sqrt[3]{x}$.
+
+(a) Nếu $a\ne0$, dùng (2.7.5) để tìm $f'(a)$.
+
+(b) Chứng tỏ $f'(0)$ không tồn tại.
+
+(c) Chứng tỏ $y=\sqrt[3]{x}$ có tiếp tuyến đứng tại $(0,0)$. Nhắc lại dạng đồ thị $f$ trong Hình 1.2.13.
+\bt{58} (a) Cho $g(x)=x^{2/3}$. Chứng tỏ $g'(0)$ không tồn tại.
+
+(b) Nếu $a\ne0$, tìm $g'(a)$.
+
+(c) Chứng tỏ $y=x^{2/3}$ có tiếp tuyến đứng tại $(0,0)$.
+
+(d) Minh họa (c) bằng cách vẽ $y=x^{2/3}$.
+\bt{59} Chứng tỏ $f(x)=|x-6|$ không khả vi tại 6. Tìm công thức $f'$ và phác họa đồ thị.
+\bt{60} Hàm phần nguyên $f(x)=\gint{x}$ không khả vi ở đâu? Tìm công thức $f'$ và phác họa đồ thị.
+\bt{61} (a) Phác họa đồ thị $f(x)=x|x|$.
+
+(b) Hàm $f$ khả vi với những giá trị $x$ nào?
+
+(c) Tìm công thức $f'$.
+\bt{62} (a) Phác họa đồ thị $g(x)=x+|x|$.
+
+(b) Hàm $g$ khả vi với những giá trị $x$ nào?
+
+(c) Tìm công thức $g'$.
+\bt{63} \textbf{Đạo hàm của hàm chẵn và hàm lẻ.} Nhắc lại: $f$ chẵn nếu $f(-x)=f(x)$ với mọi $x$ thuộc tập xác định; $f$ lẻ nếu $f(-x)=-f(x)$. Chứng minh:
+
+(a) Đạo hàm của một hàm chẵn là hàm lẻ.
+
+(b) Đạo hàm của một hàm lẻ là hàm chẵn.
+\group{64–65. Đạo hàm bên trái và bên phải.}
+Đạo hàm bên trái và bên phải của $f$ tại $a$ được định nghĩa lần lượt bởi
+\[f'_-(a)=\lim_{h\to0^-}\frac{f(a+h)-f(a)}h,\qquad f'_+(a)=\lim_{h\to0^+}\frac{f(a+h)-f(a)}h,\]
+nếu các giới hạn tồn tại. Đạo hàm $f'(a)$ tồn tại khi và chỉ khi hai đạo hàm một phía tồn tại và bằng nhau.
+\bt{64} Tìm $f'_-(0)$ và $f'_+(0)$ trong mỗi trường hợp sau. Hàm $f$ có khả vi tại 0 không?
+\[(a)\quad f(x)=\begin{cases}0,&x\le0,\\x,&x>0;\end{cases}\qquad
+(b)\quad f(x)=\begin{cases}0,&x\le0,\\x^2,&x>0.\end{cases}\]
+\bt{65} Cho
+\[f(x)=\begin{cases}0,&x\le0,\\5-x,&0<x<4,\\\dfrac1{5-x},&x\ge4.\end{cases}\]
+(a) Tìm $f'_-(4)$ và $f'_+(4)$.
+
+(b) Phác họa đồ thị $f$.
+
+(c) Hàm $f$ gián đoạn ở đâu?
+
+(d) Hàm $f$ không khả vi ở đâu?
+\bt{66} Khi mở vòi nước nóng, nhiệt độ $T$ của nước phụ thuộc thời gian đã chảy. Trong Ví dụ 1.1.4, ta phác họa một đồ thị có thể có của $T$ theo thời gian $t$ kể từ lúc mở vòi.
+
+(a) Mô tả sự biến đổi của tốc độ biến thiên $T$ theo $t$ khi $t$ tăng.
+
+(b) Phác họa đồ thị đạo hàm của $T$.
+\bt{67} Nick bắt đầu chạy bộ và chạy nhanh dần trong 3 phút, rồi đi bộ 5 phút. Anh dừng ở giao lộ 2 phút, chạy khá nhanh 5 phút, rồi đi bộ 4 phút.
+
+(a) Phác họa một đồ thị có thể có của quãng đường $s$ Nick đi được sau $t$ phút.
+
+(b) Phác họa đồ thị $ds/dt$.
+\bt{68} Gọi $\ell$ là tiếp tuyến của parabol $y=x^2$ tại $(1,1)$. \textbf{Góc nghiêng} của $\ell$ là góc $\phi$ mà $\ell$ tạo với chiều dương trục hoành. Tính $\phi$, làm tròn đến độ gần nhất.
+\section*{Chú thích biên tập và thuật ngữ}
+\begin{enumerate}
+\item Giữ thứ tự bản gốc: công thức (1), (2); Định nghĩa 3; Định lý 4 và chứng minh; Ví dụ 1–7; Hình 1–10; Bài tập 1–68. Phần tài liệu tham khảo phía trên tiêu đề §2.8 thuộc chuyên đề viết của §2.7 và đã được đưa vào phần trước.
+\item Trong mục này, “khả vi” ở một điểm được hiểu là đạo hàm hữu hạn tồn tại. Tiếp tuyến đứng không tạo ra một giá trị đạo hàm hữu hạn. Ba dạng không khả vi được minh họa không phải danh sách đầy đủ mọi trường hợp có thể có.
+\item Ký hiệu $f^{(n)}$ chỉ đạo hàm cấp $n$, không phải lũy thừa $f^n$. Ký hiệu $dy/dx$ ở đây là ký hiệu đạo hàm. Độ giật là đạo hàm gia tốc theo thời gian, có đơn vị độ dài chia cho lập phương thời gian.
+\item Hàm phần nguyên $\gint{x}$ là số nguyên lớn nhất không vượt quá $x$, cũng thường viết $\lfloor x\rfloor$. Trong Bài tập 65, công thức nhánh cuối không xác định tại $x=5$; giữ nguyên đề gốc và hiểu tập xác định theo các biểu thức đã cho.
+\item Dữ liệu lịch sử, thực nghiệm và các đơn vị được giữ theo bản gốc. Giá trị cuối bảng Bài tập 38 là $-9.8$ g. Hình trích từ bản gốc giữ đường cong và ký hiệu; các chú thích tiếng Việt giải thích nhãn tiếng Anh.
+\end{enumerate}
+\begin{center}\begin{tabular}{ll}\toprule Tiếng Anh&Tiếng Việt\\\midrule
+derivative function&hàm đạo hàm\\
+differentiable&khả vi\\
+differentiation&phép lấy đạo hàm\\
+differentiation operator&toán tử lấy đạo hàm\\
+second derivative&đạo hàm cấp hai\\
+higher derivatives&đạo hàm cấp cao\\
+left-hand / right-hand derivative&đạo hàm bên trái / bên phải\\
+vertical tangent&tiếp tuyến đứng\\
+acceleration&gia tốc\\
+jerk&độ giật\\\bottomrule
+\end{tabular}\end{center}
+\noindent\textbf{Phạm vi:} Toàn bộ §2.8; không bổ sung lời giải bài tập. Phần tiếp theo: \textbf{Ôn tập Chương 2 — Giới hạn và đạo hàm}.
+\end{document}

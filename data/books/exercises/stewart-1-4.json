@@ -1,0 +1,148 @@
+{
+  "bookKey": "stewart-9",
+  "sectionKey": "1-4",
+  "heading": "1.4. Bài tập",
+  "sourceSha256": "c1a9f973df78bf0c8d79f5c527b891669524d56118a6f0f00d85362b1934a148",
+  "exercises": [
+    {
+      "number": 1,
+      "content": "<p><strong>1–2. Dùng các quy tắc lũy thừa để biến đổi và rút gọn từng\nbiểu thức.</strong></p><p><strong>1.</strong>&nbsp; (a) <span class=\"math inline\">\\(\\dfrac{-2^6}{4^3}\\)</span>; (b) <span class=\"math inline\">\\(\\dfrac{(-3)^6}{9^6}\\)</span>; (c) <span class=\"math inline\">\\(\\dfrac1{\\sqrt[4]{x^5}}\\)</span>; (d) <span class=\"math inline\">\\(\\dfrac{x^3\\cdot x^n}{x^{n+1}}\\)</span>; (e) <span class=\"math inline\">\\(b^3(3b^{-1})^{-2}\\)</span>; (f) <span class=\"math inline\">\\(\\dfrac{2x^2y}{(3x^{-2}y)^2}\\)</span>.</p>"
+    },
+    {
+      "number": 2,
+      "content": "<p><strong>1–2. Dùng các quy tắc lũy thừa để biến đổi và rút gọn từng\nbiểu thức.</strong></p><p><strong>2.</strong>&nbsp; (a) <span class=\"math inline\">\\(\\dfrac{\\sqrt[3]4}{\\sqrt[3]{108}}\\)</span>; (b)\n<span class=\"math inline\">\\(27^{2/3}\\)</span>; (c) <span class=\"math inline\">\\(2x^2(3x^5)^2\\)</span>; (d) <span class=\"math inline\">\\((2x^{-2})^{-3}x^{-3}\\)</span>; (e) <span class=\"math inline\">\\(\\dfrac{3a^{3/2}\\cdot a^{1/2}}{a^{-1}}\\)</span>;\n(f) <span class=\"math inline\">\\(\\dfrac{\\sqrt a\\sqrt\nb}{\\sqrt[3]{ab}}\\)</span>.</p>"
+    },
+    {
+      "number": 3,
+      "content": "<p><strong>3.</strong>&nbsp; (a) Viết phương trình xác định hàm số mũ cơ số\n<span class=\"math inline\">\\(b&gt;0\\)</span>. (b) Tập xác định là gì? (c)\nNếu <span class=\"math inline\">\\(b\\ne1\\)</span>, tập giá trị là gì? (d)\nPhác họa dạng tổng quát của đồ thị trong ba trường hợp: (i) <span class=\"math inline\">\\(b&gt;1\\)</span>; (ii) <span class=\"math inline\">\\(b=1\\)</span>; (iii) <span class=\"math inline\">\\(0&lt;b&lt;1\\)</span>.</p>"
+    },
+    {
+      "number": 4,
+      "content": "<p><strong>4.</strong>&nbsp; (a) Số <span class=\"math inline\">\\(e\\)</span>\nđược định nghĩa như thế nào? (b) Giá trị gần đúng của <span class=\"math inline\">\\(e\\)</span> là bao nhiêu? (c) Hàm số mũ tự nhiên là\ngì?</p>"
+    },
+    {
+      "number": 5,
+      "content": "<p><strong>5–8. Vẽ các hàm số trên cùng một màn hình. Các đồ thị liên hệ\nvới nhau như thế nào?</strong></p><p><strong>5.</strong>&nbsp; <span class=\"math inline\">\\(y=2^x\\)</span>,\n<span class=\"math inline\">\\(y=e^x\\)</span>, <span class=\"math inline\">\\(y=5^x\\)</span>, <span class=\"math inline\">\\(y=20^x\\)</span>.</p>"
+    },
+    {
+      "number": 6,
+      "content": "<p><strong>5–8. Vẽ các hàm số trên cùng một màn hình. Các đồ thị liên hệ\nvới nhau như thế nào?</strong></p><p><strong>6.</strong>&nbsp; <span class=\"math inline\">\\(y=e^x\\)</span>,\n<span class=\"math inline\">\\(y=e^{-x}\\)</span>, <span class=\"math inline\">\\(y=8^x\\)</span>, <span class=\"math inline\">\\(y=8^{-x}\\)</span>.</p>"
+    },
+    {
+      "number": 7,
+      "content": "<p><strong>5–8. Vẽ các hàm số trên cùng một màn hình. Các đồ thị liên hệ\nvới nhau như thế nào?</strong></p><p><strong>7.</strong>&nbsp; <span class=\"math inline\">\\(y=3^x\\)</span>,\n<span class=\"math inline\">\\(y=10^x\\)</span>, <span class=\"math inline\">\\(y=(1/3)^x\\)</span>, <span class=\"math inline\">\\(y=(1/10)^x\\)</span>.</p>"
+    },
+    {
+      "number": 8,
+      "content": "<p><strong>5–8. Vẽ các hàm số trên cùng một màn hình. Các đồ thị liên hệ\nvới nhau như thế nào?</strong></p><p><strong>8.</strong>&nbsp; <span class=\"math inline\">\\(y=0.9^x\\)</span>,\n<span class=\"math inline\">\\(y=0.6^x\\)</span>, <span class=\"math inline\">\\(y=0.3^x\\)</span>, <span class=\"math inline\">\\(y=0.1^x\\)</span>.</p>"
+    },
+    {
+      "number": 9,
+      "content": "<p><strong>9–14. Phác họa đồ thị bằng tay, dùng Hình 3 và 15, kết hợp\ncác phép biến đổi ở §1.3 khi cần.</strong></p><p><strong>9.</strong>&nbsp; <span class=\"math inline\">\\(g(x)=3^x+1\\)</span>.</p><div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-1-4-c1a9f973/f03.png\" alt=\"image\"><br>\n<span>Hình 3. Họ hàm số mũ với các cơ số khác nhau.</span></p>\n</div><div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-1-4-c1a9f973/f15.png\" alt=\"image\"><br>\n<span>Hình 15. Đồ thị <span class=\"math inline\">\\(y=e^x\\)</span> nằm\ngiữa <span class=\"math inline\">\\(y=2^x\\)</span> và <span class=\"math inline\">\\(y=3^x\\)</span>.</span></p>\n</div>"
+    },
+    {
+      "number": 10,
+      "content": "<p><strong>9–14. Phác họa đồ thị bằng tay, dùng Hình 3 và 15, kết hợp\ncác phép biến đổi ở §1.3 khi cần.</strong></p><p><strong>10.</strong>&nbsp; <span class=\"math inline\">\\(h(x)=2(1/2)^x-3\\)</span>.</p><div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-1-4-c1a9f973/f03.png\" alt=\"image\"><br>\n<span>Hình 3. Họ hàm số mũ với các cơ số khác nhau.</span></p>\n</div><div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-1-4-c1a9f973/f15.png\" alt=\"image\"><br>\n<span>Hình 15. Đồ thị <span class=\"math inline\">\\(y=e^x\\)</span> nằm\ngiữa <span class=\"math inline\">\\(y=2^x\\)</span> và <span class=\"math inline\">\\(y=3^x\\)</span>.</span></p>\n</div>"
+    },
+    {
+      "number": 11,
+      "content": "<p><strong>9–14. Phác họa đồ thị bằng tay, dùng Hình 3 và 15, kết hợp\ncác phép biến đổi ở §1.3 khi cần.</strong></p><p><strong>11.</strong>&nbsp; <span class=\"math inline\">\\(y=-e^{-x}\\)</span>.</p><div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-1-4-c1a9f973/f03.png\" alt=\"image\"><br>\n<span>Hình 3. Họ hàm số mũ với các cơ số khác nhau.</span></p>\n</div><div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-1-4-c1a9f973/f15.png\" alt=\"image\"><br>\n<span>Hình 15. Đồ thị <span class=\"math inline\">\\(y=e^x\\)</span> nằm\ngiữa <span class=\"math inline\">\\(y=2^x\\)</span> và <span class=\"math inline\">\\(y=3^x\\)</span>.</span></p>\n</div>"
+    },
+    {
+      "number": 12,
+      "content": "<p><strong>9–14. Phác họa đồ thị bằng tay, dùng Hình 3 và 15, kết hợp\ncác phép biến đổi ở §1.3 khi cần.</strong></p><p><strong>12.</strong>&nbsp; <span class=\"math inline\">\\(y=4^{x+2}\\)</span>.</p><div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-1-4-c1a9f973/f03.png\" alt=\"image\"><br>\n<span>Hình 3. Họ hàm số mũ với các cơ số khác nhau.</span></p>\n</div><div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-1-4-c1a9f973/f15.png\" alt=\"image\"><br>\n<span>Hình 15. Đồ thị <span class=\"math inline\">\\(y=e^x\\)</span> nằm\ngiữa <span class=\"math inline\">\\(y=2^x\\)</span> và <span class=\"math inline\">\\(y=3^x\\)</span>.</span></p>\n</div>"
+    },
+    {
+      "number": 13,
+      "content": "<p><strong>9–14. Phác họa đồ thị bằng tay, dùng Hình 3 và 15, kết hợp\ncác phép biến đổi ở §1.3 khi cần.</strong></p><p><strong>13.</strong>&nbsp; <span class=\"math inline\">\\(y=1-\\frac12e^{-x}\\)</span>.</p><div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-1-4-c1a9f973/f03.png\" alt=\"image\"><br>\n<span>Hình 3. Họ hàm số mũ với các cơ số khác nhau.</span></p>\n</div><div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-1-4-c1a9f973/f15.png\" alt=\"image\"><br>\n<span>Hình 15. Đồ thị <span class=\"math inline\">\\(y=e^x\\)</span> nằm\ngiữa <span class=\"math inline\">\\(y=2^x\\)</span> và <span class=\"math inline\">\\(y=3^x\\)</span>.</span></p>\n</div>"
+    },
+    {
+      "number": 14,
+      "content": "<p><strong>9–14. Phác họa đồ thị bằng tay, dùng Hình 3 và 15, kết hợp\ncác phép biến đổi ở §1.3 khi cần.</strong></p><p><strong>14.</strong>&nbsp; <span class=\"math inline\">\\(y=e^{|x|}\\)</span>.</p><div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-1-4-c1a9f973/f03.png\" alt=\"image\"><br>\n<span>Hình 3. Họ hàm số mũ với các cơ số khác nhau.</span></p>\n</div><div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-1-4-c1a9f973/f15.png\" alt=\"image\"><br>\n<span>Hình 15. Đồ thị <span class=\"math inline\">\\(y=e^x\\)</span> nằm\ngiữa <span class=\"math inline\">\\(y=2^x\\)</span> và <span class=\"math inline\">\\(y=3^x\\)</span>.</span></p>\n</div>"
+    },
+    {
+      "number": 15,
+      "content": "<p><strong>15.</strong>&nbsp; Xuất phát từ đồ thị <span class=\"math inline\">\\(y=e^x\\)</span>, viết phương trình đồ thị nhận được\nkhi: (a) Tịnh tiến xuống 2 đơn vị. (b) Tịnh tiến sang phải 2 đơn vị. (c)\nLấy đối xứng qua trục <span class=\"math inline\">\\(x\\)</span>. (d) Lấy\nđối xứng qua trục <span class=\"math inline\">\\(y\\)</span>. (e) Lấy đối\nxứng qua trục <span class=\"math inline\">\\(x\\)</span>, rồi qua trục <span class=\"math inline\">\\(y\\)</span>.</p>"
+    },
+    {
+      "number": 16,
+      "content": "<p><strong>16.</strong>&nbsp; Xuất phát từ <span class=\"math inline\">\\(y=e^x\\)</span>, tìm phương trình đồ thị nhận được\nkhi: (a) Lấy đối xứng qua đường thẳng <span class=\"math inline\">\\(y=4\\)</span>. (b) Lấy đối xứng qua đường thẳng\n<span class=\"math inline\">\\(x=2\\)</span>.</p>"
+    },
+    {
+      "number": 17,
+      "content": "<p><strong>17–18. Tìm tập xác định của mỗi hàm số.</strong></p><p><strong>17.</strong>&nbsp; (a) <span class=\"math inline\">\\(f(x)=\\dfrac{1-e^{x^2}}{1-e^{1-x^2}}\\)</span>; (b)\n<span class=\"math inline\">\\(f(x)=\\dfrac{1+x}{e^{\\cos x}}\\)</span>.</p>"
+    },
+    {
+      "number": 18,
+      "content": "<p><strong>17–18. Tìm tập xác định của mỗi hàm số.</strong></p><p><strong>18.</strong>&nbsp; (a) <span class=\"math inline\">\\(g(t)=\\sqrt{10^t-100}\\)</span>; (b) <span class=\"math inline\">\\(g(t)=\\sin(e^t-1)\\)</span>.</p>"
+    },
+    {
+      "number": 19,
+      "content": "<p><strong>Bài tập 19 — hình bên trái.</strong></p><p><strong>19–20. Tìm hàm số mũ <span class=\"math inline\">\\(f(x)=Cb^x\\)</span> có đồ thị đã cho.</strong></p>\n<div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-1-4-c1a9f973/e19_20.png\" alt=\"image\"><br>\n<span>Đồ thị cho Bài tập 19 (trái) và 20 (phải).</span></p>\n</div>"
+    },
+    {
+      "number": 20,
+      "content": "<p><strong>Bài tập 20 — hình bên phải.</strong></p><p><strong>19–20. Tìm hàm số mũ <span class=\"math inline\">\\(f(x)=Cb^x\\)</span> có đồ thị đã cho.</strong></p>\n<div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-1-4-c1a9f973/e19_20.png\" alt=\"image\"><br>\n<span>Đồ thị cho Bài tập 19 (trái) và 20 (phải).</span></p>\n</div>"
+    },
+    {
+      "number": 21,
+      "content": "<p><strong>21.</strong>&nbsp; Cho <span class=\"math inline\">\\(f(x)=5^x\\)</span>. Chứng minh <span class=\"math display\">\\[\\frac{f(x+h)-f(x)}h=5^x\\left(\\frac{5^h-1}h\\right).\\]</span></p>"
+    },
+    {
+      "number": 22,
+      "content": "<p><strong>22.</strong>&nbsp; Bạn được đề nghị một công việc kéo dài một\ntháng. Bạn chọn cách trả công nào sau đây? (I) Một triệu đô la vào cuối\ntháng. (II) Một cent vào ngày đầu, hai cent ngày thứ hai, bốn cent ngày\nthứ ba; nói chung, <span class=\"math inline\">\\(2^{n-1}\\)</span> cent vào\nngày thứ <span class=\"math inline\">\\(n\\)</span>.</p>"
+    },
+    {
+      "number": 23,
+      "content": "<p><strong>23.</strong>&nbsp; Giả sử đồ thị <span class=\"math inline\">\\(f(x)=x^2\\)</span> và <span class=\"math inline\">\\(g(x)=2^x\\)</span> được vẽ trên hệ trục có đơn vị\nđộ dài 1 inch. Chứng minh tại vị trí cách gốc tọa độ 2 ft về bên phải,\nđộ cao đồ thị <span class=\"math inline\">\\(f\\)</span> là 48 ft, còn độ\ncao đồ thị <span class=\"math inline\">\\(g\\)</span> khoảng 265 dặm.</p>"
+    },
+    {
+      "number": 24,
+      "content": "<p><strong>24.</strong>&nbsp; So sánh <span class=\"math inline\">\\(f(x)=x^5\\)</span> và <span class=\"math inline\">\\(g(x)=5^x\\)</span> bằng cách vẽ trong nhiều cửa sổ\nkhác nhau. Tìm mọi giao điểm chính xác đến một chữ số thập phân. Khi\n<span class=\"math inline\">\\(x\\)</span> lớn, hàm nào tăng nhanh hơn?</p>"
+    },
+    {
+      "number": 25,
+      "content": "<p><strong>25.</strong>&nbsp; So sánh <span class=\"math inline\">\\(f(x)=x^{10}\\)</span> và <span class=\"math inline\">\\(g(x)=e^x\\)</span> bằng cách vẽ trong nhiều cửa sổ\nkhác nhau. Từ thời điểm nào đồ thị <span class=\"math inline\">\\(g\\)</span> vượt lên trên <span class=\"math inline\">\\(f\\)</span> và tiếp tục ở phía trên?</p>"
+    },
+    {
+      "number": 26,
+      "content": "<p><strong>26.</strong>&nbsp; Dùng đồ thị ước lượng các giá trị <span class=\"math inline\">\\(x\\)</span> sao cho <span class=\"math inline\">\\(e^x&gt;1\\,000\\,000\\,000\\)</span>.</p>"
+    },
+    {
+      "number": 27,
+      "content": "<p><strong>27.</strong>&nbsp; Một nhà nghiên cứu muốn xác định thời gian tăng\ngấp đôi của quần thể <em>Giardia lamblia</em>, được gọi là “vi khuẩn”\ntrong đề gốc. Nuôi cấy trong dung dịch dinh dưỡng, ông ước lượng số\nlượng sau mỗi bốn giờ và được bảng sau. (a) Lập biểu đồ phân tán. (b)\nDùng máy tính tìm đường cong hàm mũ <span class=\"math inline\">\\(f(t)=a\\cdot b^t\\)</span> mô hình hóa quần thể sau\n<span class=\"math inline\">\\(t\\)</span> giờ. (c) Vẽ mô hình cùng các điểm\ndữ liệu; dùng đồ thị ước lượng thời gian để số lượng tăng gấp đôi.</p>\n<div class=\"center\">\n<table>\n<thead>\n<tr class=\"header\">\n<th style=\"text-align: center;\">Thời gian (giờ)</th>\n<th style=\"text-align: right;\">0</th>\n<th style=\"text-align: right;\">4</th>\n<th style=\"text-align: right;\">8</th>\n<th style=\"text-align: right;\">12</th>\n<th style=\"text-align: right;\">16</th>\n<th style=\"text-align: right;\">20</th>\n<th style=\"text-align: right;\">24</th>\n</tr>\n</thead>\n<tbody>\n<tr class=\"odd\">\n<td style=\"text-align: center;\">Số lượng (CFU/mL)</td>\n<td style=\"text-align: right;\">37</td>\n<td style=\"text-align: right;\">47</td>\n<td style=\"text-align: right;\">63</td>\n<td style=\"text-align: right;\">78</td>\n<td style=\"text-align: right;\">105</td>\n<td style=\"text-align: right;\">130</td>\n<td style=\"text-align: right;\">173</td>\n</tr>\n</tbody>\n</table>\n</div>\n<div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-1-4-c1a9f973/e27_photo.png\" alt=\"image\"><br>\n<span><em>G. lamblia</em>. Minh họa trong đề gốc.<br>\nNguồn ảnh: Sebastian Kaulitzki / Shutterstock.com.</span></p>\n</div>"
+    },
+    {
+      "number": 28,
+      "content": "<p><strong>28.</strong>&nbsp; Bảng cho dân số Hoa Kỳ, tính bằng triệu người,\ntừ 1900 đến 2010. Dùng máy tính có hồi quy hàm mũ để mô hình hóa dân số\ntừ năm 1900. Dùng mô hình ước lượng dân số năm 1925 và dự báo cho năm\n2020.</p>\n<div class=\"center\">\n<table>\n<thead>\n<tr class=\"header\">\n<th style=\"text-align: right;\">Năm</th>\n<th style=\"text-align: right;\">Dân số</th>\n<th style=\"text-align: right;\">Năm</th>\n<th style=\"text-align: right;\">Dân số</th>\n</tr>\n</thead>\n<tbody>\n<tr class=\"odd\">\n<td style=\"text-align: right;\">1900</td>\n<td style=\"text-align: right;\">76</td>\n<td style=\"text-align: right;\">1960</td>\n<td style=\"text-align: right;\">179</td>\n</tr>\n<tr class=\"even\">\n<td style=\"text-align: right;\">1910</td>\n<td style=\"text-align: right;\">92</td>\n<td style=\"text-align: right;\">1970</td>\n<td style=\"text-align: right;\">203</td>\n</tr>\n<tr class=\"odd\">\n<td style=\"text-align: right;\">1920</td>\n<td style=\"text-align: right;\">106</td>\n<td style=\"text-align: right;\">1980</td>\n<td style=\"text-align: right;\">227</td>\n</tr>\n<tr class=\"even\">\n<td style=\"text-align: right;\">1930</td>\n<td style=\"text-align: right;\">123</td>\n<td style=\"text-align: right;\">1990</td>\n<td style=\"text-align: right;\">250</td>\n</tr>\n<tr class=\"odd\">\n<td style=\"text-align: right;\">1940</td>\n<td style=\"text-align: right;\">131</td>\n<td style=\"text-align: right;\">2000</td>\n<td style=\"text-align: right;\">281</td>\n</tr>\n<tr class=\"even\">\n<td style=\"text-align: right;\">1950</td>\n<td style=\"text-align: right;\">150</td>\n<td style=\"text-align: right;\">2010</td>\n<td style=\"text-align: right;\">310</td>\n</tr>\n</tbody>\n</table>\n</div>"
+    },
+    {
+      "number": 29,
+      "content": "<p><strong>29.</strong>&nbsp; Một mẫu nuôi cấy bắt đầu với 500 vi khuẩn, số\nlượng tăng gấp đôi sau mỗi nửa giờ. (a) Sau 3 giờ có bao nhiêu vi khuẩn?\n(b) Sau <span class=\"math inline\">\\(t\\)</span> giờ có bao nhiêu? (c) Sau\n40 phút có bao nhiêu? (d) Vẽ hàm quần thể và ước lượng thời gian đạt\n100 000 vi khuẩn.</p>"
+    },
+    {
+      "number": 30,
+      "content": "<p><strong>30.</strong>&nbsp; Một quần thể sóc xám được đưa đến một vùng cách\nđây 18 năm. Các nhà sinh học quan sát thấy số lượng tăng gấp đôi sau mỗi\nsáu năm; hiện có 600 con. (a) Quần thể ban đầu là bao nhiêu? (b) Quần\nthể dự kiến sau <span class=\"math inline\">\\(t\\)</span> năm kể từ lúc đưa\nđến là bao nhiêu? (c) Ước lượng số lượng dự kiến sau 10 năm nữa.</p>"
+    },
+    {
+      "number": 31,
+      "content": "<p><strong>31.</strong>&nbsp; Trong Ví dụ 4, tải lượng virus <span class=\"math inline\">\\(V\\)</span> sau một ngày điều trị là <span class=\"math inline\">\\(76.0\\)</span> bản sao RNA/mL. Dùng Hình 11 ước\nlượng thời gian cần thêm để tải lượng giảm còn một nửa mức đó.</p><div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-1-4-c1a9f973/f11.png\" alt=\"image\"><br>\n<span>Hình 11. Mô hình hàm mũ cho tải lượng virus.</span></p>\n</div>"
+    },
+    {
+      "number": 32,
+      "content": "<p><strong>32.</strong>&nbsp; Sau khi được hấp thu hoàn toàn vào cơ thể, cồn\nđược chuyển hóa. Giả sử sau khi uống một số đồ uống có cồn vào buổi tối,\nnồng độ cồn trong máu (BAC) lúc nửa đêm là <span class=\"math inline\">\\(0.14\\)</span> g/dL. Sau <span class=\"math inline\">\\(1.5\\)</span> giờ, BAC giảm còn một nửa. (a) Tìm mô\nhình hàm mũ cho BAC sau nửa đêm <span class=\"math inline\">\\(t\\)</span>\ngiờ. (b) Vẽ đồ thị và xác định khi nào BAC đạt <span class=\"math inline\">\\(0.08\\)</span> g/dL, mức được đề gốc gọi là giới\nhạn pháp luật.</p>\n<p><em>Nguồn:</em> Phỏng theo P. Wilkinson và cộng sự, “Pharmacokinetics\nof Ethanol after Oral Administration in the Fasting State”, <em>Journal\nof Pharmacokinetics and Biopharmaceutics</em> 5 (1977), 207–224.</p>"
+    },
+    {
+      "number": 33,
+      "content": "<p><strong>33.</strong>&nbsp; Vẽ đồ thị <span class=\"math display\">\\[f(x)=\\frac{1-e^{1/x}}{1+e^{1/x}}.\\]</span> Bạn sẽ\nthấy <span class=\"math inline\">\\(f\\)</span> có vẻ là hàm số lẻ. Hãy\nchứng minh.</p>"
+    },
+    {
+      "number": 34,
+      "content": "<p><strong>34.</strong>&nbsp; Vẽ một số hàm trong họ <span class=\"math display\">\\[f(x)=\\frac1{1+ae^{bx}},\\qquad a&gt;0.\\]</span> Đồ\nthị thay đổi thế nào khi <span class=\"math inline\">\\(b\\)</span> thay\nđổi? Khi <span class=\"math inline\">\\(a\\)</span> thay đổi thì sao?</p>"
+    },
+    {
+      "number": 35,
+      "content": "<p><strong>35.</strong>&nbsp; Vẽ một số hàm trong họ <span class=\"math display\">\\[f(x)=\\frac a2\\left(e^{x/a}+e^{-x/a}\\right),\\qquad\na&gt;0.\\]</span> Đồ thị thay đổi như thế nào khi <span class=\"math inline\">\\(a\\)</span> tăng?</p>"
+    }
+  ]
+}

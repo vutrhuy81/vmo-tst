@@ -1,0 +1,259 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage{fontspec}\setmainfont{Latin Modern Roman}\setsansfont{DejaVu Sans}
+\usepackage{amsmath,amssymb,graphicx,geometry,enumitem,longtable,booktabs,fancyhdr,hyperref}
+\geometry{left=28mm,right=23mm,top=24mm,bottom=24mm}
+\hypersetup{unicode=true,colorlinks=true,linkcolor=black,urlcolor=blue,pdftitle={Giải tích Chương 2 Ôn tập Giới hạn và đạo hàm}}
+\setlength{\parindent}{1.2em}\setlength{\parskip}{4pt}\setlength{\headheight}{16pt}
+\pagestyle{fancy}\fancyhf{}\fancyhead[L]{\small Chương 2. Giới hạn và đạo hàm}\fancyhead[R]{\small Ôn tập}\fancyfoot[C]{\thepage}
+\newcommand{\fig}[3][.68]{\begin{center}\begin{minipage}{\linewidth}\centering\includegraphics[width=#1\linewidth]{assets/#2.png}\\{\small #3}\end{minipage}\end{center}}
+\newcommand{\ex}[1]{\par\medskip\noindent\textbf{Ví dụ #1.}\ }
+\newcommand{\sol}{\par\nopagebreak[4]\noindent\textit{Lời giải.}\ }
+\newcommand{\bt}[1]{\par\smallskip\noindent\textbf{#1.}\ }
+\newcommand{\group}[1]{\par\medskip\noindent\textbf{#1}\par\nopagebreak[4]}
+\newcommand{\gint}[1]{\left[\!\left[#1\right]\!\right]}
+\begin{document}
+\begin{center}
+{\Large\bfseries GIẢI TÍCH}\\[5pt]
+{\large Chương 2. Giới hạn và đạo hàm}\\[9pt]
+{\Large\bfseries ÔN TẬP CHƯƠNG 2}
+\end{center}
+\noindent\textbf{Nguồn:} James Stewart, Daniel K. Clegg, Saleem Watson, \textit{Calculus: Early Transcendentals}, ấn bản thứ 9 (2020), trang in 166–170 (trang PDF 201–205), từ tiêu đề Ôn tập đến trước phần Bài toán nâng cao.
+\section*{Kiểm tra khái niệm}
+\bt{1} Giải thích ý nghĩa mỗi biểu thức sau và phác họa hình minh họa:
+\[(a)\ \lim_{x\to a}f(x)=L;\quad(b)\ \lim_{x\to a^+}f(x)=L;\quad(c)\ \lim_{x\to a^-}f(x)=L;\]
+\[(d)\ \lim_{x\to a}f(x)=\infty;\qquad(e)\ \lim_{x\to\infty}f(x)=L.\]
+\bt{2} Mô tả một số trường hợp mà giới hạn không tồn tại. Phác họa hình minh họa.
+\bt{3} Phát biểu các quy tắc giới hạn: (a) quy tắc tổng; (b) quy tắc hiệu; (c) quy tắc nhân với hằng số; (d) quy tắc tích; (e) quy tắc thương; (f) quy tắc lũy thừa; (g) quy tắc căn.
+\bt{4} Phát biểu Định lý kẹp.
+\bt{5} (a) Nói $x=a$ là tiệm cận đứng của $y=f(x)$ có nghĩa là gì? Vẽ các đường cong minh họa những khả năng khác nhau.
+
+(b) Nói $y=L$ là tiệm cận ngang của $y=f(x)$ có nghĩa là gì? Vẽ các đường cong minh họa những khả năng khác nhau.
+\bt{6} Những đường cong nào sau đây có tiệm cận đứng? Những đường cong nào có tiệm cận ngang?
+\[(a)\ y=x^4;\quad(b)\ y=\sin x;\quad(c)\ y=\tan x;\quad(d)\ y=\tan^{-1}x;\]
+\[(e)\ y=e^x;\quad(f)\ y=\ln x;\quad(g)\ y=1/x;\quad(h)\ y=\sqrt{x}.\]
+\bt{7} (a) Hàm $f$ liên tục tại $a$ có nghĩa là gì?
+
+(b) Hàm $f$ liên tục trên $(-\infty,\infty)$ có nghĩa là gì? Có thể nói gì về đồ thị của hàm ấy?
+\bt{8} (a) Cho các ví dụ về hàm liên tục trên $[-1,1]$.
+
+(b) Cho một ví dụ về hàm không liên tục trên $[0,1]$.
+\bt{9} Phát biểu Định lý giá trị trung gian.
+\bt{10} Viết biểu thức hệ số góc tiếp tuyến của $y=f(x)$ tại $(a,f(a))$.
+\bt{11} Một vật chuyển động thẳng có vị trí $f(t)$ tại thời điểm $t$. Viết biểu thức vận tốc tức thời tại $t=a$. Diễn giải vận tốc này theo đồ thị $f$.
+\begin{samepage}
+\bt{12} Cho $y=f(x)$, với $x$ thay đổi từ $x_1$ đến $x_2$. Viết biểu thức:
+
+(a) Tốc độ biến thiên trung bình của $y$ theo $x$ trên $[x_1,x_2]$.
+
+(b) Tốc độ biến thiên tức thời của $y$ theo $x$ tại $x=x_1$.
+\end{samepage}
+\bt{13} Định nghĩa đạo hàm $f'(a)$. Trình bày hai cách diễn giải số này.
+\bt{14} Định nghĩa đạo hàm cấp hai của $f$. Nếu $f(t)$ là hàm vị trí của một chất điểm, đạo hàm cấp hai có ý nghĩa gì?
+\bt{15} (a) Hàm $f$ khả vi tại $a$ có nghĩa là gì?
+
+(b) Tính khả vi và tính liên tục liên hệ với nhau thế nào?
+
+(c) Phác họa đồ thị một hàm liên tục nhưng không khả vi tại $a=2$.
+\bt{16} Mô tả một số trường hợp mà hàm không khả vi. Phác họa hình minh họa.
+
+\noindent\textit{Ghi chú của bản gốc:} Đáp án phần Kiểm tra khái niệm được cung cấp tại StewartCalculus.com.
+\medskip
+\section*{Câu hỏi đúng–sai}
+Xác định mỗi mệnh đề sau đúng hay sai. Nếu đúng, giải thích vì sao. Nếu sai, giải thích hoặc đưa ra phản ví dụ.
+\bt{1} $\displaystyle\lim_{x\to4}\left(\frac{2x}{x-4}-\frac8{x-4}\right)=\lim_{x\to4}\frac{2x}{x-4}-\lim_{x\to4}\frac8{x-4}$.
+\bt{2} $\displaystyle\lim_{x\to1}\frac{x^2+6x-7}{x^2+5x-6}=\frac{\lim_{x\to1}(x^2+6x-7)}{\lim_{x\to1}(x^2+5x-6)}$.
+\bt{3} $\displaystyle\lim_{x\to1}\frac{x-3}{x^2+2x-4}=\frac{\lim_{x\to1}(x-3)}{\lim_{x\to1}(x^2+2x-4)}$.
+\bt{4} $\displaystyle\frac{x^2-9}{x-3}=x+3$.
+\bt{5} $\displaystyle\lim_{x\to3}\frac{x^2-9}{x-3}=\lim_{x\to3}(x+3)$.
+\bt{6} Nếu $\lim_{x\to5}f(x)=2$ và $\lim_{x\to5}g(x)=0$ thì $\lim_{x\to5}[f(x)/g(x)]$ không tồn tại.
+\bt{7} Nếu $\lim_{x\to5}f(x)=0$ và $\lim_{x\to5}g(x)=0$ thì $\lim_{x\to5}[f(x)/g(x)]$ không tồn tại.
+\bt{8} Nếu cả $\lim_{x\to a}f(x)$ lẫn $\lim_{x\to a}g(x)$ đều không tồn tại thì $\lim_{x\to a}[f(x)+g(x)]$ không tồn tại.
+\bt{9} Nếu $\lim_{x\to a}f(x)$ tồn tại còn $\lim_{x\to a}g(x)$ không tồn tại thì $\lim_{x\to a}[f(x)+g(x)]$ không tồn tại.
+\bt{10} Nếu $p$ là đa thức thì $\lim_{x\to b}p(x)=p(b)$.
+\bt{11} Nếu $\lim_{x\to0}f(x)=\infty$ và $\lim_{x\to0}g(x)=\infty$ thì $\lim_{x\to0}[f(x)-g(x)]=0$.
+\bt{12} Một hàm có thể có hai tiệm cận ngang khác nhau.
+\bt{13} Nếu $f$ có tập xác định $[0,\infty)$ và không có tiệm cận ngang thì $\lim_{x\to\infty}f(x)=\infty$ hoặc $\lim_{x\to\infty}f(x)=-\infty$.
+\bt{14} Nếu $x=1$ là tiệm cận đứng của $y=f(x)$ thì $f$ không xác định tại 1.
+\bt{15} Nếu $f(1)>0$ và $f(3)<0$ thì tồn tại số $c$ giữa 1 và 3 sao cho $f(c)=0$.
+\bt{16} Nếu $f$ liên tục tại 5, $f(5)=2$ và $f(4)=3$ thì $\lim_{x\to2}f(4x^2-11)=2$.
+\bt{17} Nếu $f$ liên tục trên $[-1,1]$, $f(-1)=4$ và $f(1)=3$ thì tồn tại số $r$ sao cho $|r|<1$ và $f(r)=\pi$.
+\bt{18} Nếu $\lim_{x\to0}f(x)=6$ thì tồn tại $\delta>0$ sao cho $0<|x|<\delta$ kéo theo $|f(x)-6|<1$.
+\bt{19} Nếu $f(x)>1$ với mọi $x$ và $\lim_{x\to0}f(x)$ tồn tại thì $\lim_{x\to0}f(x)>1$.
+\bt{20} Nếu $f$ liên tục tại $a$ thì $f$ khả vi tại $a$.
+\bt{21} Nếu $f'(r)$ tồn tại thì $\lim_{x\to r}f(x)=f(r)$.
+\bt{22} $\displaystyle\frac{d^2y}{dx^2}=\left(\frac{dy}{dx}\right)^2$.
+\bt{23} Phương trình $x^{10}-10x^2+5=0$ có một nghiệm trong $(0,2)$.
+\bt{24} Nếu $f$ liên tục tại $a$ thì $|f|$ cũng liên tục tại $a$.
+\bt{25} Nếu $|f|$ liên tục tại $a$ thì $f$ cũng liên tục tại $a$.
+\bt{26} Nếu $f$ khả vi tại $a$ thì $|f|$ cũng khả vi tại $a$.
+\medskip
+\section*{Bài tập}
+\bt{1} Cho đồ thị hàm $f$ dưới đây.
+\fig[.65]{e01}{Đồ thị Bài tập 1.}
+(a) Tìm từng giới hạn sau hoặc giải thích vì sao không tồn tại:
+\[\text{(i)}\ \lim_{x\to-1}f(x);\quad\text{(ii)}\ \lim_{x\to-3^+}f(x);\quad\text{(iii)}\ \lim_{x\to-3}f(x);\]
+\[\text{(iv)}\ \lim_{x\to4}f(x);\quad\text{(v)}\ \lim_{x\to0}f(x);\quad\text{(vi)}\ \lim_{x\to2}f(x);\]
+\[\text{(vii)}\ \lim_{x\to\infty}f(x);\qquad\text{(viii)}\ \lim_{x\to-\infty}f(x).\]
+(b) Nêu phương trình các tiệm cận ngang.
+
+(c) Nêu phương trình các tiệm cận đứng.
+
+(d) Hàm $f$ gián đoạn tại những số nào? Giải thích.
+\bt{2} Phác họa đồ thị một hàm $f$ thỏa mãn tất cả các điều kiện:
+\[\lim_{x\to-\infty}f(x)=-2,\quad\lim_{x\to\infty}f(x)=0,\quad\lim_{x\to-3}f(x)=\infty,\]
+\[\lim_{x\to3^-}f(x)=-\infty,\qquad\lim_{x\to3^+}f(x)=2;\]
+$f$ liên tục bên phải tại 3.
+\group{3–20. Tìm giới hạn.}
+\bt{3} $\displaystyle\lim_{x\to0}\cos(x^3+3x)$.
+\bt{4} $\displaystyle\lim_{x\to3}\frac{x^2-9}{x^2+2x-3}$.
+\bt{5} $\displaystyle\lim_{x\to-3}\frac{x^2-9}{x^2+2x-3}$.
+\bt{6} $\displaystyle\lim_{x\to1^+}\frac{x^2-9}{x^2+2x-3}$.
+\bt{7} $\displaystyle\lim_{h\to0}\frac{(h-1)^3+1}h$.
+\bt{8} $\displaystyle\lim_{t\to2}\frac{t^2-4}{t^3-8}$.
+\bt{9} $\displaystyle\lim_{r\to9}\frac{\sqrt r}{(r-9)^4}$.
+\bt{10} $\displaystyle\lim_{v\to4^+}\frac{4-v}{|4-v|}$.
+\bt{11} $\displaystyle\lim_{r\to-1}\frac{r^2-3r-4}{4r^2+r-3}$.
+\bt{12} $\displaystyle\lim_{t\to5}\frac{3-\sqrt{t+4}}{t-5}$.
+\bt{13} $\displaystyle\lim_{x\to\infty}\frac{\sqrt{x^2-9}}{2x-6}$.
+\bt{14} $\displaystyle\lim_{x\to-\infty}\frac{\sqrt{x^2-9}}{2x-6}$.
+\bt{15} $\displaystyle\lim_{x\to\pi^-}\ln(\sin x)$.
+\bt{16} $\displaystyle\lim_{x\to-\infty}\frac{1-2x^2-x^4}{5+x-3x^4}$.
+\bt{17} $\displaystyle\lim_{x\to\infty}(\sqrt{x^2+4x+1}-x)$.
+\bt{18} $\displaystyle\lim_{x\to\infty}e^{x-x^2}$.
+\bt{19} $\displaystyle\lim_{x\to0^+}\tan^{-1}(1/x)$.
+\bt{20} $\displaystyle\lim_{x\to1}\left(\frac1{x-1}+\frac1{x^2-3x+2}\right)$.
+\group{21–22. Dùng đồ thị để phát hiện các tiệm cận của đường cong, rồi chứng minh kết quả đã tìm được.}
+\bt{21} $y=\cos^2x/x^2$.
+\bt{22} $y=\sqrt{x^2+x+1}-\sqrt{x^2-x}$.
+\bt{23} Biết $2x-1\le f(x)\le x^2$ với $0<x<3$. Tìm $\lim_{x\to1}f(x)$.
+\bt{24} Chứng minh $\lim_{x\to0}x^2\cos(1/x^2)=0$.
+\group{25–28. Dùng định nghĩa chính xác của giới hạn để chứng minh mệnh đề.}
+\bt{25} $\displaystyle\lim_{x\to2}(14-5x)=4$.
+\bt{26} $\displaystyle\lim_{x\to0}\sqrt[3]{x}=0$.
+\bt{27} $\displaystyle\lim_{x\to2}(x^2-3x)=-2$.
+\bt{28} $\displaystyle\lim_{x\to4^+}\frac2{\sqrt{x-4}}=\infty$.
+\bt{29} Cho
+\[f(x)=\begin{cases}\sqrt{-x},&x<0,\\3-x,&0\le x<3,\\(x-3)^2,&x>3.\end{cases}\]
+(a) Tính các giới hạn sau, nếu tồn tại:
+\[\text{(i)}\ \lim_{x\to0^+}f(x);\quad\text{(ii)}\ \lim_{x\to0^-}f(x);\quad\text{(iii)}\ \lim_{x\to0}f(x);\]
+\[\text{(iv)}\ \lim_{x\to3^-}f(x);\quad\text{(v)}\ \lim_{x\to3^+}f(x);\quad\text{(vi)}\ \lim_{x\to3}f(x).\]
+(b) Hàm $f$ gián đoạn ở đâu?
+
+(c) Phác họa đồ thị $f$.
+\bt{30} Cho
+\[g(x)=\begin{cases}2x-x^2,&0\le x\le2,\\2-x,&2<x\le3,\\x-4,&3<x<4,\\\pi,&x\ge4.\end{cases}\]
+(a) Tại mỗi số 2, 3, 4, xác định $g$ liên tục bên trái, liên tục bên phải hay liên tục tại số đó.
+
+(b) Phác họa đồ thị $g$.
+\group{31–32. Chứng tỏ hàm liên tục trên tập xác định và nêu tập xác định ấy.}
+\bt{31} $h(x)=xe^{\sin x}$.
+\bt{32} $g(x)=\sqrt{x^2-9}/(x^2-2)$.
+\group{33–34. Dùng Định lý giá trị trung gian chứng tỏ phương trình có nghiệm trong khoảng đã cho.}
+\bt{33} $x^5-x^3+3x-5=0$, khoảng $(1,2)$.
+\bt{34} $\cos\sqrt{x}=e^x-2$, khoảng $(0,1)$.
+\bt{35} (a) Tìm hệ số góc tiếp tuyến của $y=9-2x^2$ tại $(2,1)$.
+
+(b) Tìm phương trình tiếp tuyến này.
+\bt{36} Tìm phương trình các tiếp tuyến của $y=2/(1-3x)$ tại các điểm có hoành độ 0 và $-1$.
+\bt{37} Độ dời (mét) của một vật chuyển động thẳng là $s=1+2t+\frac14t^2$, với $t$ tính bằng giây.
+
+(a) Tìm vận tốc trung bình trên mỗi khoảng thời gian: (i) $[1,3]$; (ii) $[1,2]$; (iii) $[1,1.5]$; (iv) $[1,1.1]$.
+
+(b) Tìm vận tốc tức thời tại $t=1$.
+\bt{38} Theo định luật Boyle, khi nhiệt độ của một lượng khí bị giam giữ không đổi, tích áp suất $P$ và thể tích $V$ là hằng số. Giả sử $PV=800$, với $P$ đo bằng pound trên inch vuông, $V$ bằng inch khối.
+
+(a) Tìm tốc độ biến thiên trung bình của $P$ khi $V$ tăng từ 200 đến 250 inch khối.
+
+(b) Biểu diễn $V$ theo $P$ và chứng tỏ tốc độ biến thiên tức thời của $V$ theo $P$ tỉ lệ nghịch với bình phương $P$.
+\bt{39} (a) Dùng định nghĩa đạo hàm tìm $f'(2)$, với $f(x)=x^3-2x$.
+
+(b) Tìm phương trình tiếp tuyến của $y=x^3-2x$ tại $(2,4)$.
+
+(c) Minh họa (b) bằng đồ thị đường cong và tiếp tuyến trên cùng màn hình.
+\bt{40} Tìm một hàm $f$ và số $a$ sao cho
+\[\lim_{h\to0}\frac{(2+h)^6-64}h=f'(a).\]
+\bt{41} Tổng chi phí trả một khoản vay sinh viên có lãi suất $r\%$ mỗi năm là $C=f(r)$.
+
+(a) $f'(r)$ có ý nghĩa gì? Đơn vị là gì?
+
+(b) $f'(10)=1200$ có nghĩa là gì?
+
+(c) $f'(r)$ luôn dương hay có thể đổi dấu?
+\par\medskip\noindent\begin{minipage}{\linewidth}\group{42–44. Đồ lại hoặc sao chép đồ thị hàm đã cho, rồi phác họa đồ thị đạo hàm ngay phía dưới.}
+\bt{42}\fig[.45]{e42}{Đồ thị Bài tập 42.}\end{minipage}\par\medskip
+\par\medskip\noindent\begin{minipage}{\linewidth}\bt{43}\fig[.45]{e43}{Đồ thị Bài tập 43.}\end{minipage}\par\medskip
+\par\medskip\noindent\begin{minipage}{\linewidth}\bt{44}\fig[.45]{e44}{Đồ thị Bài tập 44.}\end{minipage}\par\medskip
+\group{45–46. Dùng định nghĩa đạo hàm tìm $f'$. Tập xác định của $f'$ là gì?}
+\bt{45} $f(x)=2/x^2$.
+\bt{46} $f(t)=1/\sqrt{t+1}$.
+\bt{47} (a) Cho $f(x)=\sqrt{3-5x}$. Dùng định nghĩa đạo hàm tìm $f'(x)$.
+
+(b) Tìm tập xác định của $f$ và $f'$.
+
+(c) Vẽ $f,f'$ trên cùng màn hình. So sánh các đồ thị để kiểm tra tính hợp lý của (a).
+\bt{48} (a) Tìm các tiệm cận của $f(x)=(4-x)/(3+x)$ và dùng chúng để phác họa đồ thị.
+
+(b) Dùng đồ thị ở (a) phác họa đồ thị $f'$.
+
+(c) Dùng định nghĩa đạo hàm tìm $f'(x)$.
+
+(d) Vẽ $f'$ và so sánh với hình phác ở (b).
+\bt{49} Cho đồ thị $f$. Nêu các số mà tại đó $f$ không khả vi và giải thích.
+\fig[.70]{e49}{Đồ thị Bài tập 49.}
+\bt{50} Hình cho các đồ thị $f,f',f''$. Nhận dạng từng đường cong và giải thích lựa chọn.
+\fig[.58]{e50}{Các đường cong $a,b,c$ trong Bài tập 50.}
+\bt{51} Phác họa đồ thị một hàm $f$ thỏa mãn tất cả các điều kiện:
+
+Tập xác định gồm mọi số thực khác 0;
+\[\lim_{x\to0^-}f(x)=1,\qquad\lim_{x\to0^+}f(x)=0;\]
+$f'(x)>0$ với mọi $x$ thuộc tập xác định của $f$;
+\[\lim_{x\to-\infty}f'(x)=0,\qquad\lim_{x\to\infty}f'(x)=1.\]
+\bt{52} Gọi $P(t)$ là tỉ lệ phần trăm người Mỹ dưới 18 tuổi tại thời điểm $t$. Bảng cho các giá trị vào các năm điều tra dân số từ 1950 đến 2010.
+\begin{center}\begin{tabular}{rrrr}\toprule$t$&$P(t)$&$t$&$P(t)$\\\midrule
+1950&31.1&1990&25.7\\1960&35.7&2000&25.7\\1970&34.0&2010&24.0\\1980&28.0&&\\\bottomrule
+\end{tabular}\end{center}
+(a) $P'(t)$ có ý nghĩa gì? Đơn vị là gì?
+
+(b) Lập bảng các giá trị ước lượng của $P'(t)$.
+
+(c) Vẽ $P$ và $P'$.
+
+(d) Làm thế nào để có các giá trị $P'(t)$ chính xác hơn?
+\bt{53} Gọi $B(t)$ là số tờ tiền mệnh giá 20 đô la Mỹ đang lưu hành tại thời điểm $t$. Bảng cho giá trị từ 1995 đến 2015 tại ngày 31 tháng 12, đơn vị tỉ tờ. Diễn giải và ước lượng $B'(2010)$.
+\begin{center}\begin{tabular}{lrrrrr}\toprule
+$t$&1995&2000&2005&2010&2015\\
+$B(t)$&4.21&4.93&5.77&6.53&8.57\\\bottomrule
+\end{tabular}\end{center}
+\bt{54} \textbf{Tổng tỉ suất sinh} tại thời điểm $t$, ký hiệu $F(t)$, là ước lượng số con trung bình mỗi phụ nữ sinh ra, với giả thiết các tỉ suất sinh hiện hành giữ nguyên. Đồ thị tổng tỉ suất sinh tại Hoa Kỳ cho các dao động từ 1940 đến 2010.
+
+(a) Ước lượng $F'(1950)$, $F'(1965)$ và $F'(1987)$.
+
+(b) Các đạo hàm này có ý nghĩa gì?
+
+(c) Bạn có thể đề xuất những nguyên nhân giải thích các giá trị ấy không?
+\fig[.78]{e54}{Đồ thị Bài tập 54. Các nhãn lần lượt chỉ bùng nổ sinh, suy giảm sinh và đợt tăng sinh nhỏ.}
+\bt{55} Giả sử $|f(x)|\le g(x)$ với mọi $x$ và $\lim_{x\to a}g(x)=0$. Tìm $\lim_{x\to a}f(x)$.
+\begin{samepage}
+\bt{56} Cho $f(x)=\gint{x}+\gint{-x}$.
+
+(a) Với những giá trị $a$ nào thì $\lim_{x\to a}f(x)$ tồn tại?
+
+(b) Hàm $f$ gián đoạn tại những số nào?
+\end{samepage}
+\section*{Chú thích biên tập và thuật ngữ}
+\begin{enumerate}
+\item Ba nhóm giữ hệ thống đánh số độc lập như bản gốc: 16 câu Kiểm tra khái niệm, 26 câu Đúng–sai và 56 Bài tập. Không bổ sung đáp án, phản ví dụ hoặc lời giải.
+\item Các khẳng định trong nhóm Đúng–sai là đối tượng cần đánh giá; được giữ nguyên, kể cả khi thiếu giả thiết hoặc có kết luận sai. Không được đọc chúng như các định lý đã được xác nhận.
+\item $\tan^{-1}$ là hàm arctang. Ký hiệu $\gint{x}$ là phần nguyên, số nguyên lớn nhất không vượt quá $x$; trong Bài tập 56, số hạng thứ hai là $\gint{-x}$.
+\item Tại các đầu mút tập xác định, xét giới hạn trên miền mà hàm xác định. Trong Bài tập 29, $f(3)$ không được định nghĩa; các điều kiện nhánh được giữ đúng theo bản gốc.
+\item Số liệu dân số, tiền tệ và sinh suất được giữ theo bản gốc, không cập nhật. Các hình trích từ bản gốc giữ nguyên đường cong và ký hiệu; chú thích tiếng Việt giải thích nhãn tiếng Anh.
+\end{enumerate}
+\begin{center}\begin{tabular}{ll}\toprule Tiếng Anh&Tiếng Việt\\\midrule
+concept check&kiểm tra khái niệm\\
+true-false quiz&câu hỏi đúng–sai\\
+counterexample&phản ví dụ\\
+total fertility rate&tổng tỉ suất sinh\\
+Boyle's Law&định luật Boyle\\\bottomrule
+\end{tabular}\end{center}
+\noindent\textbf{Phạm vi:} Toàn bộ phần Ôn tập Chương 2, trước phần \textit{Problems Plus}. Phần tiếp theo: \textbf{Bài toán nâng cao — Chương 2}.
+\end{document}

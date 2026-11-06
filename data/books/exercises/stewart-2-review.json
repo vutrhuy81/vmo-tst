@@ -1,0 +1,232 @@
+{
+  "bookKey": "stewart-9",
+  "sectionKey": "2-review",
+  "heading": "Bài tập",
+  "sourceSha256": "ee7b7bf54cd430496947a007feb7344bcf25093c8dfcac51e0ca5aa2ecebaa51",
+  "exercises": [
+    {
+      "number": 1,
+      "content": "<p><strong>1.</strong>&nbsp; Cho đồ thị hàm <span class=\"math inline\">\\(f\\)</span> dưới đây.</p>\n<div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-2-review-ee7b7bf5/e01.png\" alt=\"image\"><br>\n<span>Đồ thị Bài tập 1.</span></p>\n</div>\n<p>(a) Tìm từng giới hạn sau hoặc giải thích vì sao không tồn tại: <span class=\"math display\">\\[\\text{(i)}\\ \\lim_{x\\to-1}f(x);\\quad\\text{(ii)}\\\n\\lim_{x\\to-3^+}f(x);\\quad\\text{(iii)}\\ \\lim_{x\\to-3}f(x);\\]</span> <span class=\"math display\">\\[\\text{(iv)}\\ \\lim_{x\\to4}f(x);\\quad\\text{(v)}\\\n\\lim_{x\\to0}f(x);\\quad\\text{(vi)}\\ \\lim_{x\\to2}f(x);\\]</span> <span class=\"math display\">\\[\\text{(vii)}\\\n\\lim_{x\\to\\infty}f(x);\\qquad\\text{(viii)}\\\n\\lim_{x\\to-\\infty}f(x).\\]</span> (b) Nêu phương trình các tiệm cận\nngang.</p>\n<p>(c) Nêu phương trình các tiệm cận đứng.</p>\n<p>(d) Hàm <span class=\"math inline\">\\(f\\)</span> gián đoạn tại những số\nnào? Giải thích.</p>"
+    },
+    {
+      "number": 2,
+      "content": "<p><strong>2.</strong>&nbsp; Phác họa đồ thị một hàm <span class=\"math inline\">\\(f\\)</span> thỏa mãn tất cả các điều kiện: <span class=\"math display\">\\[\\lim_{x\\to-\\infty}f(x)=-2,\\quad\\lim_{x\\to\\infty}f(x)=0,\\quad\\lim_{x\\to-3}f(x)=\\infty,\\]</span>\n<span class=\"math display\">\\[\\lim_{x\\to3^-}f(x)=-\\infty,\\qquad\\lim_{x\\to3^+}f(x)=2;\\]</span>\n<span class=\"math inline\">\\(f\\)</span> liên tục bên phải tại 3.</p>"
+    },
+    {
+      "number": 3,
+      "content": "<p><strong>3–20. Tìm giới hạn.</strong></p><p><strong>3.</strong>&nbsp; <span class=\"math inline\">\\(\\displaystyle\\lim_{x\\to0}\\cos(x^3+3x)\\)</span>.</p>"
+    },
+    {
+      "number": 4,
+      "content": "<p><strong>3–20. Tìm giới hạn.</strong></p><p><strong>4.</strong>&nbsp; <span class=\"math inline\">\\(\\displaystyle\\lim_{x\\to3}\\frac{x^2-9}{x^2+2x-3}\\)</span>.</p>"
+    },
+    {
+      "number": 5,
+      "content": "<p><strong>3–20. Tìm giới hạn.</strong></p><p><strong>5.</strong>&nbsp; <span class=\"math inline\">\\(\\displaystyle\\lim_{x\\to-3}\\frac{x^2-9}{x^2+2x-3}\\)</span>.</p>"
+    },
+    {
+      "number": 6,
+      "content": "<p><strong>3–20. Tìm giới hạn.</strong></p><p><strong>6.</strong>&nbsp; <span class=\"math inline\">\\(\\displaystyle\\lim_{x\\to1^+}\\frac{x^2-9}{x^2+2x-3}\\)</span>.</p>"
+    },
+    {
+      "number": 7,
+      "content": "<p><strong>3–20. Tìm giới hạn.</strong></p><p><strong>7.</strong>&nbsp; <span class=\"math inline\">\\(\\displaystyle\\lim_{h\\to0}\\frac{(h-1)^3+1}h\\)</span>.</p>"
+    },
+    {
+      "number": 8,
+      "content": "<p><strong>3–20. Tìm giới hạn.</strong></p><p><strong>8.</strong>&nbsp; <span class=\"math inline\">\\(\\displaystyle\\lim_{t\\to2}\\frac{t^2-4}{t^3-8}\\)</span>.</p>"
+    },
+    {
+      "number": 9,
+      "content": "<p><strong>3–20. Tìm giới hạn.</strong></p><p><strong>9.</strong>&nbsp; <span class=\"math inline\">\\(\\displaystyle\\lim_{r\\to9}\\frac{\\sqrt\nr}{(r-9)^4}\\)</span>.</p>"
+    },
+    {
+      "number": 10,
+      "content": "<p><strong>3–20. Tìm giới hạn.</strong></p><p><strong>10.</strong>&nbsp; <span class=\"math inline\">\\(\\displaystyle\\lim_{v\\to4^+}\\frac{4-v}{|4-v|}\\)</span>.</p>"
+    },
+    {
+      "number": 11,
+      "content": "<p><strong>3–20. Tìm giới hạn.</strong></p><p><strong>11.</strong>&nbsp; <span class=\"math inline\">\\(\\displaystyle\\lim_{r\\to-1}\\frac{r^2-3r-4}{4r^2+r-3}\\)</span>.</p>"
+    },
+    {
+      "number": 12,
+      "content": "<p><strong>3–20. Tìm giới hạn.</strong></p><p><strong>12.</strong>&nbsp; <span class=\"math inline\">\\(\\displaystyle\\lim_{t\\to5}\\frac{3-\\sqrt{t+4}}{t-5}\\)</span>.</p>"
+    },
+    {
+      "number": 13,
+      "content": "<p><strong>3–20. Tìm giới hạn.</strong></p><p><strong>13.</strong>&nbsp; <span class=\"math inline\">\\(\\displaystyle\\lim_{x\\to\\infty}\\frac{\\sqrt{x^2-9}}{2x-6}\\)</span>.</p>"
+    },
+    {
+      "number": 14,
+      "content": "<p><strong>3–20. Tìm giới hạn.</strong></p><p><strong>14.</strong>&nbsp; <span class=\"math inline\">\\(\\displaystyle\\lim_{x\\to-\\infty}\\frac{\\sqrt{x^2-9}}{2x-6}\\)</span>.</p>"
+    },
+    {
+      "number": 15,
+      "content": "<p><strong>3–20. Tìm giới hạn.</strong></p><p><strong>15.</strong>&nbsp; <span class=\"math inline\">\\(\\displaystyle\\lim_{x\\to\\pi^-}\\ln(\\sin\nx)\\)</span>.</p>"
+    },
+    {
+      "number": 16,
+      "content": "<p><strong>3–20. Tìm giới hạn.</strong></p><p><strong>16.</strong>&nbsp; <span class=\"math inline\">\\(\\displaystyle\\lim_{x\\to-\\infty}\\frac{1-2x^2-x^4}{5+x-3x^4}\\)</span>.</p>"
+    },
+    {
+      "number": 17,
+      "content": "<p><strong>3–20. Tìm giới hạn.</strong></p><p><strong>17.</strong>&nbsp; <span class=\"math inline\">\\(\\displaystyle\\lim_{x\\to\\infty}(\\sqrt{x^2+4x+1}-x)\\)</span>.</p>"
+    },
+    {
+      "number": 18,
+      "content": "<p><strong>3–20. Tìm giới hạn.</strong></p><p><strong>18.</strong>&nbsp; <span class=\"math inline\">\\(\\displaystyle\\lim_{x\\to\\infty}e^{x-x^2}\\)</span>.</p>"
+    },
+    {
+      "number": 19,
+      "content": "<p><strong>3–20. Tìm giới hạn.</strong></p><p><strong>19.</strong>&nbsp; <span class=\"math inline\">\\(\\displaystyle\\lim_{x\\to0^+}\\tan^{-1}(1/x)\\)</span>.</p>"
+    },
+    {
+      "number": 20,
+      "content": "<p><strong>3–20. Tìm giới hạn.</strong></p><p><strong>20.</strong>&nbsp; <span class=\"math inline\">\\(\\displaystyle\\lim_{x\\to1}\\left(\\frac1{x-1}+\\frac1{x^2-3x+2}\\right)\\)</span>.</p>"
+    },
+    {
+      "number": 21,
+      "content": "<p><strong>21–22. Dùng đồ thị để phát hiện các tiệm cận của đường cong,\nrồi chứng minh kết quả đã tìm được.</strong></p><p><strong>21.</strong>&nbsp; <span class=\"math inline\">\\(y=\\cos^2x/x^2\\)</span>.</p>"
+    },
+    {
+      "number": 22,
+      "content": "<p><strong>21–22. Dùng đồ thị để phát hiện các tiệm cận của đường cong,\nrồi chứng minh kết quả đã tìm được.</strong></p><p><strong>22.</strong>&nbsp; <span class=\"math inline\">\\(y=\\sqrt{x^2+x+1}-\\sqrt{x^2-x}\\)</span>.</p>"
+    },
+    {
+      "number": 23,
+      "content": "<p><strong>23.</strong>&nbsp; Biết <span class=\"math inline\">\\(2x-1\\le\nf(x)\\le x^2\\)</span> với <span class=\"math inline\">\\(0&lt;x&lt;3\\)</span>. Tìm <span class=\"math inline\">\\(\\lim_{x\\to1}f(x)\\)</span>.</p>"
+    },
+    {
+      "number": 24,
+      "content": "<p><strong>24.</strong>&nbsp; Chứng minh <span class=\"math inline\">\\(\\lim_{x\\to0}x^2\\cos(1/x^2)=0\\)</span>.</p>"
+    },
+    {
+      "number": 25,
+      "content": "<p><strong>25–28. Dùng định nghĩa chính xác của giới hạn để chứng minh\nmệnh đề.</strong></p><p><strong>25.</strong>&nbsp; <span class=\"math inline\">\\(\\displaystyle\\lim_{x\\to2}(14-5x)=4\\)</span>.</p>"
+    },
+    {
+      "number": 26,
+      "content": "<p><strong>25–28. Dùng định nghĩa chính xác của giới hạn để chứng minh\nmệnh đề.</strong></p><p><strong>26.</strong>&nbsp; <span class=\"math inline\">\\(\\displaystyle\\lim_{x\\to0}\\sqrt[3]{x}=0\\)</span>.</p>"
+    },
+    {
+      "number": 27,
+      "content": "<p><strong>25–28. Dùng định nghĩa chính xác của giới hạn để chứng minh\nmệnh đề.</strong></p><p><strong>27.</strong>&nbsp; <span class=\"math inline\">\\(\\displaystyle\\lim_{x\\to2}(x^2-3x)=-2\\)</span>.</p>"
+    },
+    {
+      "number": 28,
+      "content": "<p><strong>25–28. Dùng định nghĩa chính xác của giới hạn để chứng minh\nmệnh đề.</strong></p><p><strong>28.</strong>&nbsp; <span class=\"math inline\">\\(\\displaystyle\\lim_{x\\to4^+}\\frac2{\\sqrt{x-4}}=\\infty\\)</span>.</p>"
+    },
+    {
+      "number": 29,
+      "content": "<p><strong>29.</strong>&nbsp; Cho <span class=\"math display\">\\[f(x)=\\begin{cases}\\sqrt{-x},&amp;x&lt;0,\\\\3-x,&amp;0\\le\nx&lt;3,\\\\(x-3)^2,&amp;x&gt;3.\\end{cases}\\]</span> (a) Tính các giới hạn\nsau, nếu tồn tại: <span class=\"math display\">\\[\\text{(i)}\\\n\\lim_{x\\to0^+}f(x);\\quad\\text{(ii)}\\\n\\lim_{x\\to0^-}f(x);\\quad\\text{(iii)}\\ \\lim_{x\\to0}f(x);\\]</span> <span class=\"math display\">\\[\\text{(iv)}\\ \\lim_{x\\to3^-}f(x);\\quad\\text{(v)}\\\n\\lim_{x\\to3^+}f(x);\\quad\\text{(vi)}\\ \\lim_{x\\to3}f(x).\\]</span> (b) Hàm\n<span class=\"math inline\">\\(f\\)</span> gián đoạn ở đâu?</p>\n<p>(c) Phác họa đồ thị <span class=\"math inline\">\\(f\\)</span>.</p>"
+    },
+    {
+      "number": 30,
+      "content": "<p><strong>30.</strong>&nbsp; Cho <span class=\"math display\">\\[g(x)=\\begin{cases}2x-x^2,&amp;0\\le\nx\\le2,\\\\2-x,&amp;2&lt;x\\le3,\\\\x-4,&amp;3&lt;x&lt;4,\\\\\\pi,&amp;x\\ge4.\\end{cases}\\]</span>\n(a) Tại mỗi số 2, 3, 4, xác định <span class=\"math inline\">\\(g\\)</span>\nliên tục bên trái, liên tục bên phải hay liên tục tại số đó.</p>\n<p>(b) Phác họa đồ thị <span class=\"math inline\">\\(g\\)</span>.</p>"
+    },
+    {
+      "number": 31,
+      "content": "<p><strong>31–32. Chứng tỏ hàm liên tục trên tập xác định và nêu tập xác\nđịnh ấy.</strong></p><p><strong>31.</strong>&nbsp; <span class=\"math inline\">\\(h(x)=xe^{\\sin\nx}\\)</span>.</p>"
+    },
+    {
+      "number": 32,
+      "content": "<p><strong>31–32. Chứng tỏ hàm liên tục trên tập xác định và nêu tập xác\nđịnh ấy.</strong></p><p><strong>32.</strong>&nbsp; <span class=\"math inline\">\\(g(x)=\\sqrt{x^2-9}/(x^2-2)\\)</span>.</p>"
+    },
+    {
+      "number": 33,
+      "content": "<p><strong>33–34. Dùng Định lý giá trị trung gian chứng tỏ phương trình\ncó nghiệm trong khoảng đã cho.</strong></p><p><strong>33.</strong>&nbsp; <span class=\"math inline\">\\(x^5-x^3+3x-5=0\\)</span>, khoảng <span class=\"math inline\">\\((1,2)\\)</span>.</p>"
+    },
+    {
+      "number": 34,
+      "content": "<p><strong>33–34. Dùng Định lý giá trị trung gian chứng tỏ phương trình\ncó nghiệm trong khoảng đã cho.</strong></p><p><strong>34.</strong>&nbsp; <span class=\"math inline\">\\(\\cos\\sqrt{x}=e^x-2\\)</span>, khoảng <span class=\"math inline\">\\((0,1)\\)</span>.</p>"
+    },
+    {
+      "number": 35,
+      "content": "<p><strong>35.</strong>&nbsp; (a) Tìm hệ số góc tiếp tuyến của <span class=\"math inline\">\\(y=9-2x^2\\)</span> tại <span class=\"math inline\">\\((2,1)\\)</span>.</p>\n<p>(b) Tìm phương trình tiếp tuyến này.</p>"
+    },
+    {
+      "number": 36,
+      "content": "<p><strong>36.</strong>&nbsp; Tìm phương trình các tiếp tuyến của <span class=\"math inline\">\\(y=2/(1-3x)\\)</span> tại các điểm có hoành độ 0 và\n<span class=\"math inline\">\\(-1\\)</span>.</p>"
+    },
+    {
+      "number": 37,
+      "content": "<p><strong>37.</strong>&nbsp; Độ dời (mét) của một vật chuyển động thẳng là\n<span class=\"math inline\">\\(s=1+2t+\\frac14t^2\\)</span>, với <span class=\"math inline\">\\(t\\)</span> tính bằng giây.</p>\n<p>(a) Tìm vận tốc trung bình trên mỗi khoảng thời gian: (i) <span class=\"math inline\">\\([1,3]\\)</span>; (ii) <span class=\"math inline\">\\([1,2]\\)</span>; (iii) <span class=\"math inline\">\\([1,1.5]\\)</span>; (iv) <span class=\"math inline\">\\([1,1.1]\\)</span>.</p>\n<p>(b) Tìm vận tốc tức thời tại <span class=\"math inline\">\\(t=1\\)</span>.</p>"
+    },
+    {
+      "number": 38,
+      "content": "<p><strong>38.</strong>&nbsp; Theo định luật Boyle, khi nhiệt độ của một\nlượng khí bị giam giữ không đổi, tích áp suất <span class=\"math inline\">\\(P\\)</span> và thể tích <span class=\"math inline\">\\(V\\)</span> là hằng số. Giả sử <span class=\"math inline\">\\(PV=800\\)</span>, với <span class=\"math inline\">\\(P\\)</span> đo bằng pound trên inch vuông, <span class=\"math inline\">\\(V\\)</span> bằng inch khối.</p>\n<p>(a) Tìm tốc độ biến thiên trung bình của <span class=\"math inline\">\\(P\\)</span> khi <span class=\"math inline\">\\(V\\)</span> tăng từ 200 đến 250 inch khối.</p>\n<p>(b) Biểu diễn <span class=\"math inline\">\\(V\\)</span> theo <span class=\"math inline\">\\(P\\)</span> và chứng tỏ tốc độ biến thiên tức thời\ncủa <span class=\"math inline\">\\(V\\)</span> theo <span class=\"math inline\">\\(P\\)</span> tỉ lệ nghịch với bình phương <span class=\"math inline\">\\(P\\)</span>.</p>"
+    },
+    {
+      "number": 39,
+      "content": "<p><strong>39.</strong>&nbsp; (a) Dùng định nghĩa đạo hàm tìm <span class=\"math inline\">\\(f'(2)\\)</span>, với <span class=\"math inline\">\\(f(x)=x^3-2x\\)</span>.</p>\n<p>(b) Tìm phương trình tiếp tuyến của <span class=\"math inline\">\\(y=x^3-2x\\)</span> tại <span class=\"math inline\">\\((2,4)\\)</span>.</p>\n<p>(c) Minh họa (b) bằng đồ thị đường cong và tiếp tuyến trên cùng màn\nhình.</p>"
+    },
+    {
+      "number": 40,
+      "content": "<p><strong>40.</strong>&nbsp; Tìm một hàm <span class=\"math inline\">\\(f\\)</span> và số <span class=\"math inline\">\\(a\\)</span> sao cho <span class=\"math display\">\\[\\lim_{h\\to0}\\frac{(2+h)^6-64}h=f'(a).\\]</span></p>"
+    },
+    {
+      "number": 41,
+      "content": "<p><strong>41.</strong>&nbsp; Tổng chi phí trả một khoản vay sinh viên có lãi\nsuất <span class=\"math inline\">\\(r\\%\\)</span> mỗi năm là <span class=\"math inline\">\\(C=f(r)\\)</span>.</p>\n<p>(a) <span class=\"math inline\">\\(f'(r)\\)</span> có ý nghĩa gì? Đơn\nvị là gì?</p>\n<p>(b) <span class=\"math inline\">\\(f'(10)=1200\\)</span> có nghĩa là\ngì?</p>\n<p>(c) <span class=\"math inline\">\\(f'(r)\\)</span> luôn dương hay có\nthể đổi dấu?</p>"
+    },
+    {
+      "number": 42,
+      "content": "<p><strong>42–44. Đồ lại hoặc sao chép đồ thị hàm đã cho, rồi phác họa\nđồ thị đạo hàm ngay phía dưới.</strong></p><p><strong>42.</strong>&nbsp;</p>\n<div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-2-review-ee7b7bf5/e42.png\" alt=\"image\"><br>\n<span>Đồ thị Bài tập 42.</span></p>\n</div>"
+    },
+    {
+      "number": 43,
+      "content": "<p><strong>42–44. Đồ lại hoặc sao chép đồ thị hàm đã cho, rồi phác họa\nđồ thị đạo hàm ngay phía dưới.</strong></p><p><strong>43.</strong>&nbsp;</p>\n<div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-2-review-ee7b7bf5/e43.png\" alt=\"image\"><br>\n<span>Đồ thị Bài tập 43.</span></p>\n</div>"
+    },
+    {
+      "number": 44,
+      "content": "<p><strong>42–44. Đồ lại hoặc sao chép đồ thị hàm đã cho, rồi phác họa\nđồ thị đạo hàm ngay phía dưới.</strong></p><p><strong>44.</strong>&nbsp;</p>\n<div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-2-review-ee7b7bf5/e44.png\" alt=\"image\"><br>\n<span>Đồ thị Bài tập 44.</span></p>\n</div>"
+    },
+    {
+      "number": 45,
+      "content": "<p><strong>45–46. Dùng định nghĩa đạo hàm tìm <span class=\"math inline\">\\(f'\\)</span>. Tập xác định của <span class=\"math inline\">\\(f'\\)</span> là gì?</strong></p><p><strong>45.</strong>&nbsp; <span class=\"math inline\">\\(f(x)=2/x^2\\)</span>.</p>"
+    },
+    {
+      "number": 46,
+      "content": "<p><strong>45–46. Dùng định nghĩa đạo hàm tìm <span class=\"math inline\">\\(f'\\)</span>. Tập xác định của <span class=\"math inline\">\\(f'\\)</span> là gì?</strong></p><p><strong>46.</strong>&nbsp; <span class=\"math inline\">\\(f(t)=1/\\sqrt{t+1}\\)</span>.</p>"
+    },
+    {
+      "number": 47,
+      "content": "<p><strong>47.</strong>&nbsp; (a) Cho <span class=\"math inline\">\\(f(x)=\\sqrt{3-5x}\\)</span>. Dùng định nghĩa đạo hàm\ntìm <span class=\"math inline\">\\(f'(x)\\)</span>.</p>\n<p>(b) Tìm tập xác định của <span class=\"math inline\">\\(f\\)</span> và\n<span class=\"math inline\">\\(f'\\)</span>.</p>\n<p>(c) Vẽ <span class=\"math inline\">\\(f,f'\\)</span> trên cùng màn\nhình. So sánh các đồ thị để kiểm tra tính hợp lý của (a).</p>"
+    },
+    {
+      "number": 48,
+      "content": "<p><strong>48.</strong>&nbsp; (a) Tìm các tiệm cận của <span class=\"math inline\">\\(f(x)=(4-x)/(3+x)\\)</span> và dùng chúng để phác\nhọa đồ thị.</p>\n<p>(b) Dùng đồ thị ở (a) phác họa đồ thị <span class=\"math inline\">\\(f'\\)</span>.</p>\n<p>(c) Dùng định nghĩa đạo hàm tìm <span class=\"math inline\">\\(f'(x)\\)</span>.</p>\n<p>(d) Vẽ <span class=\"math inline\">\\(f'\\)</span> và so sánh với\nhình phác ở (b).</p>"
+    },
+    {
+      "number": 49,
+      "content": "<p><strong>49.</strong>&nbsp; Cho đồ thị <span class=\"math inline\">\\(f\\)</span>. Nêu các số mà tại đó <span class=\"math inline\">\\(f\\)</span> không khả vi và giải thích.</p>\n<div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-2-review-ee7b7bf5/e49.png\" alt=\"image\"><br>\n<span>Đồ thị Bài tập 49.</span></p>\n</div>"
+    },
+    {
+      "number": 50,
+      "content": "<p><strong>50.</strong>&nbsp; Hình cho các đồ thị <span class=\"math inline\">\\(f,f',f''\\)</span>. Nhận dạng từng\nđường cong và giải thích lựa chọn.</p>\n<div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-2-review-ee7b7bf5/e50.png\" alt=\"image\"><br>\n<span>Các đường cong <span class=\"math inline\">\\(a,b,c\\)</span> trong\nBài tập 50.</span></p>\n</div>"
+    },
+    {
+      "number": 51,
+      "content": "<p><strong>51.</strong>&nbsp; Phác họa đồ thị một hàm <span class=\"math inline\">\\(f\\)</span> thỏa mãn tất cả các điều kiện:</p>\n<p>Tập xác định gồm mọi số thực khác 0; <span class=\"math display\">\\[\\lim_{x\\to0^-}f(x)=1,\\qquad\\lim_{x\\to0^+}f(x)=0;\\]</span>\n<span class=\"math inline\">\\(f'(x)&gt;0\\)</span> với mọi <span class=\"math inline\">\\(x\\)</span> thuộc tập xác định của <span class=\"math inline\">\\(f\\)</span>; <span class=\"math display\">\\[\\lim_{x\\to-\\infty}f'(x)=0,\\qquad\\lim_{x\\to\\infty}f'(x)=1.\\]</span></p>"
+    },
+    {
+      "number": 52,
+      "content": "<p><strong>52.</strong>&nbsp; Gọi <span class=\"math inline\">\\(P(t)\\)</span>\nlà tỉ lệ phần trăm người Mỹ dưới 18 tuổi tại thời điểm <span class=\"math inline\">\\(t\\)</span>. Bảng cho các giá trị vào các năm điều\ntra dân số từ 1950 đến 2010.</p>\n<div class=\"center\">\n<table>\n<thead>\n<tr class=\"header\">\n<th style=\"text-align: right;\"><span class=\"math inline\">\\(t\\)</span></th>\n<th style=\"text-align: right;\"><span class=\"math inline\">\\(P(t)\\)</span></th>\n<th style=\"text-align: right;\"><span class=\"math inline\">\\(t\\)</span></th>\n<th style=\"text-align: right;\"><span class=\"math inline\">\\(P(t)\\)</span></th>\n</tr>\n</thead>\n<tbody>\n<tr class=\"odd\">\n<td style=\"text-align: right;\">1950</td>\n<td style=\"text-align: right;\">31.1</td>\n<td style=\"text-align: right;\">1990</td>\n<td style=\"text-align: right;\">25.7</td>\n</tr>\n<tr class=\"even\">\n<td style=\"text-align: right;\">1960</td>\n<td style=\"text-align: right;\">35.7</td>\n<td style=\"text-align: right;\">2000</td>\n<td style=\"text-align: right;\">25.7</td>\n</tr>\n<tr class=\"odd\">\n<td style=\"text-align: right;\">1970</td>\n<td style=\"text-align: right;\">34.0</td>\n<td style=\"text-align: right;\">2010</td>\n<td style=\"text-align: right;\">24.0</td>\n</tr>\n<tr class=\"even\">\n<td style=\"text-align: right;\">1980</td>\n<td style=\"text-align: right;\">28.0</td>\n<td style=\"text-align: right;\"></td>\n<td style=\"text-align: right;\"></td>\n</tr>\n</tbody>\n</table>\n</div>\n<p>(a) <span class=\"math inline\">\\(P'(t)\\)</span> có ý nghĩa gì? Đơn\nvị là gì?</p>\n<p>(b) Lập bảng các giá trị ước lượng của <span class=\"math inline\">\\(P'(t)\\)</span>.</p>\n<p>(c) Vẽ <span class=\"math inline\">\\(P\\)</span> và <span class=\"math inline\">\\(P'\\)</span>.</p>\n<p>(d) Làm thế nào để có các giá trị <span class=\"math inline\">\\(P'(t)\\)</span> chính xác hơn?</p>"
+    },
+    {
+      "number": 53,
+      "content": "<p><strong>53.</strong>&nbsp; Gọi <span class=\"math inline\">\\(B(t)\\)</span>\nlà số tờ tiền mệnh giá 20 đô la Mỹ đang lưu hành tại thời điểm <span class=\"math inline\">\\(t\\)</span>. Bảng cho giá trị từ 1995 đến 2015 tại\nngày 31 tháng 12, đơn vị tỉ tờ. Diễn giải và ước lượng <span class=\"math inline\">\\(B'(2010)\\)</span>.</p>\n<div class=\"center\">\n<table>\n<tbody>\n<tr class=\"odd\">\n<td style=\"text-align: left;\"><span class=\"math inline\">\\(t\\)</span></td>\n<td style=\"text-align: right;\">1995</td>\n<td style=\"text-align: right;\">2000</td>\n<td style=\"text-align: right;\">2005</td>\n<td style=\"text-align: right;\">2010</td>\n<td style=\"text-align: right;\">2015</td>\n</tr>\n<tr class=\"even\">\n<td style=\"text-align: left;\"><span class=\"math inline\">\\(B(t)\\)</span></td>\n<td style=\"text-align: right;\">4.21</td>\n<td style=\"text-align: right;\">4.93</td>\n<td style=\"text-align: right;\">5.77</td>\n<td style=\"text-align: right;\">6.53</td>\n<td style=\"text-align: right;\">8.57</td>\n</tr>\n</tbody>\n</table>\n</div>"
+    },
+    {
+      "number": 54,
+      "content": "<p><strong>54.</strong>&nbsp; <strong>Tổng tỉ suất sinh</strong> tại thời\nđiểm <span class=\"math inline\">\\(t\\)</span>, ký hiệu <span class=\"math inline\">\\(F(t)\\)</span>, là ước lượng số con trung bình mỗi\nphụ nữ sinh ra, với giả thiết các tỉ suất sinh hiện hành giữ nguyên. Đồ\nthị tổng tỉ suất sinh tại Hoa Kỳ cho các dao động từ 1940 đến 2010.</p>\n<p>(a) Ước lượng <span class=\"math inline\">\\(F'(1950)\\)</span>,\n<span class=\"math inline\">\\(F'(1965)\\)</span> và <span class=\"math inline\">\\(F'(1987)\\)</span>.</p>\n<p>(b) Các đạo hàm này có ý nghĩa gì?</p>\n<p>(c) Bạn có thể đề xuất những nguyên nhân giải thích các giá trị ấy\nkhông?</p>\n<div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-2-review-ee7b7bf5/e54.png\" alt=\"image\"><br>\n<span>Đồ thị Bài tập 54. Các nhãn lần lượt chỉ bùng nổ sinh, suy giảm\nsinh và đợt tăng sinh nhỏ.</span></p>\n</div>"
+    },
+    {
+      "number": 55,
+      "content": "<p><strong>55.</strong>&nbsp; Giả sử <span class=\"math inline\">\\(|f(x)|\\le\ng(x)\\)</span> với mọi <span class=\"math inline\">\\(x\\)</span> và <span class=\"math inline\">\\(\\lim_{x\\to a}g(x)=0\\)</span>. Tìm <span class=\"math inline\">\\(\\lim_{x\\to a}f(x)\\)</span>.</p>"
+    },
+    {
+      "number": 56,
+      "content": "<p><strong>56.</strong>&nbsp; Cho <span class=\"math inline\">\\(f(x)=\\left[\\!\\left[x\\right]\\!\\right]+\\left[\\!\\left[-x\\right]\\!\\right]\\)</span>.</p>\n<p>(a) Với những giá trị <span class=\"math inline\">\\(a\\)</span> nào thì\n<span class=\"math inline\">\\(\\lim_{x\\to a}f(x)\\)</span> tồn tại?</p>\n<p>(b) Hàm <span class=\"math inline\">\\(f\\)</span> gián đoạn tại những số\nnào?</p><p><strong>Hàm phần nguyên.</strong> Giá trị tại x là số nguyên lớn nhất không vượt quá x.</p>"
+    }
+  ]
+}

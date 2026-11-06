@@ -1,0 +1,445 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage{fontspec}\setmainfont{Latin Modern Roman}\setsansfont{DejaVu Sans}
+\usepackage{amsmath,amssymb,graphicx,geometry,enumitem,longtable,booktabs,fancyhdr,hyperref}
+\geometry{left=28mm,right=23mm,top=24mm,bottom=24mm}
+\hypersetup{unicode=true,colorlinks=true,linkcolor=black,urlcolor=blue,pdftitle={Giải tích Chương 2 Mục 2.7 Đạo hàm và tốc độ biến thiên}}
+\setlength{\parindent}{1.2em}\setlength{\parskip}{4pt}\setlength{\headheight}{16pt}
+\pagestyle{fancy}\fancyhf{}\fancyhead[L]{\small Chương 2. Giới hạn và đạo hàm}\fancyhead[R]{\small §2.7}\fancyfoot[C]{\thepage}
+\newcommand{\fig}[3][.68]{\begin{center}\begin{minipage}{\linewidth}\centering\includegraphics[width=#1\linewidth]{assets/#2.png}\\{\small #3}\end{minipage}\end{center}}
+\newcommand{\ex}[1]{\par\medskip\noindent\textbf{Ví dụ #1.}\ }
+\newcommand{\sol}{\par\nopagebreak[4]\noindent\textit{Lời giải.}\ }
+\newcommand{\bt}[1]{\par\smallskip\noindent\textbf{#1.}\ }
+\newcommand{\group}[1]{\par\medskip\noindent\textbf{#1}\par\nopagebreak[4]}
+\newcommand{\gint}[1]{\left[\!\left[#1\right]\!\right]}
+\begin{document}
+\begin{center}
+{\Large\bfseries GIẢI TÍCH}\\[5pt]
+{\large Chương 2. Giới hạn và đạo hàm}\\[9pt]
+{\Large\bfseries 2.7. Đạo hàm và tốc độ biến thiên}
+\end{center}
+\noindent\textbf{Nguồn:} James Stewart, Daniel K. Clegg, Saleem Watson, \textit{Calculus: Early Transcendentals}, ấn bản thứ 9 (2020), trang in 140–152 (trang PDF 175–187), cùng phần tài liệu tham khảo của chuyên đề viết ở đầu trang in 153 (PDF 188).
+
+Sau khi đã định nghĩa giới hạn và học các phương pháp tính giới hạn, ta trở lại các bài toán tìm tiếp tuyến và vận tốc ở §2.1. Loại giới hạn đặc biệt xuất hiện trong cả hai bài toán được gọi là \textbf{đạo hàm}. Ta sẽ thấy nó có thể được diễn giải như một tốc độ biến thiên trong khoa học tự nhiên, khoa học xã hội hoặc kỹ thuật.
+\section*{Tiếp tuyến}
+Cho đường cong $C$ có phương trình $y=f(x)$. Để tìm tiếp tuyến tại $P(a,f(a))$, như ở §2.1, ta xét một điểm lân cận $Q(x,f(x))$, với $x\ne a$, và tính hệ số góc của cát tuyến $PQ$:
+\[m_{PQ}=\frac{f(x)-f(a)}{x-a}.\]
+Cho $x$ tiến đến $a$, tức $Q$ tiến đến $P$ dọc theo $C$. Nếu $m_{PQ}$ tiến đến một số $m$, ta định nghĩa tiếp tuyến $\ell$ là đường thẳng đi qua $P$ và có hệ số góc $m$. Nói cách khác, tiếp tuyến là vị trí giới hạn của cát tuyến $PQ$ khi $Q$ tiến đến $P$ (Hình 1).
+\fig[.27]{f01}{Hình 1. Cát tuyến $PQ$ tiến đến tiếp tuyến $\ell$ khi $Q$ tiến đến $P$.}
+\begin{quote}\textbf{1. Định nghĩa.} \textbf{Tiếp tuyến} của đường cong $y=f(x)$ tại điểm $P(a,f(a))$ là đường thẳng đi qua $P$ và có hệ số góc
+\[m=\lim_{x\to a}\frac{f(x)-f(a)}{x-a},\]
+với điều kiện giới hạn này tồn tại.
+\end{quote}
+Ví dụ đầu tiên xác nhận dự đoán trong Ví dụ 2.1.1.
+\ex{1} Tìm phương trình tiếp tuyến của parabol $y=x^2$ tại $P(1,1)$.
+\sol Với $a=1$, $f(x)=x^2$, hệ số góc là
+\begin{align*}
+m&=\lim_{x\to1}\frac{f(x)-f(1)}{x-1}=\lim_{x\to1}\frac{x^2-1}{x-1}\\
+&=\lim_{x\to1}\frac{(x-1)(x+1)}{x-1}\\
+&=\lim_{x\to1}(x+1)=1+1=2.
+\end{align*}
+Dùng dạng điểm–hệ số góc của phương trình đường thẳng, ta được tiếp tuyến tại $(1,1)$:
+\[y-1=2(x-1)\qquad\text{hay}\qquad y=2x-1.\qquad\square\]
+\noindent\textit{Nhắc lại.} Đường thẳng đi qua $(x_1,y_1)$, có hệ số góc $m$, có phương trình $y-y_1=m(x-x_1)$.
+
+Đôi khi ta gọi hệ số góc của tiếp tuyến tại một điểm là \textbf{hệ số góc của đường cong} tại điểm ấy. Ý tưởng là khi phóng đại đủ nhiều quanh điểm đó, đường cong trông gần như một đường thẳng. Hình 2 minh họa điều này với $y=x^2$ trong Ví dụ 1. Càng phóng đại, parabol càng giống một đường thẳng; đường cong gần như không thể phân biệt với tiếp tuyến của nó.
+\fig[.98]{f02}{Hình 2. Phóng đại quanh điểm $(1,1)$ trên parabol $y=x^2$.}
+Có một biểu thức khác cho hệ số góc tiếp tuyến, đôi khi dễ sử dụng hơn. Đặt $h=x-a$ thì $x=a+h$, do đó hệ số góc cát tuyến $PQ$ là
+\[m_{PQ}=\frac{f(a+h)-f(a)}h.\]
+Hình 3 minh họa trường hợp $h>0$, khi $Q$ ở bên phải $P$. Nếu $h<0$ thì $Q$ ở bên trái $P$.
+\fig[.48]{f03}{Hình 3. Cát tuyến với số gia $h=x-a$.}
+Vì $h=x-a$, khi $x\to a$ thì $h\to0$. Công thức trong Định nghĩa 1 trở thành
+\[m=\lim_{h\to0}\frac{f(a+h)-f(a)}h.\tag{2}\]
+\ex{2} Tìm phương trình tiếp tuyến của hypebol $y=3/x$ tại $(3,1)$.
+\sol Đặt $f(x)=3/x$. Theo (2), hệ số góc tiếp tuyến tại $(3,1)$ là
+\begin{align*}
+m&=\lim_{h\to0}\frac{f(3+h)-f(3)}h=\lim_{h\to0}\frac{3/(3+h)-1}h\\
+&=\lim_{h\to0}\frac{[3-(3+h)]/(3+h)}h\\
+&=\lim_{h\to0}\frac{-h}{h(3+h)}=\lim_{h\to0}\frac{-1}{3+h}=-\frac13.
+\end{align*}
+Phương trình tiếp tuyến là $y-1=-\frac13(x-3)$, hay sau khi thu gọn,
+\[x+3y-6=0.\]
+Hypebol và tiếp tuyến được vẽ trong Hình 4.
+\fig[.48]{f04}{Hình 4. $y=3/x$ và tiếp tuyến $x+3y-6=0$. $\square$}
+\section*{Vận tốc}
+Trong §2.1, ta khảo sát chuyển động của quả bóng được thả từ tháp CN và định nghĩa vận tốc là giới hạn của các vận tốc trung bình trên những khoảng thời gian ngày càng ngắn.
+
+Tổng quát, giả sử một vật chuyển động trên đường thẳng theo phương trình $s=f(t)$, trong đó $s$ là độ dời (khoảng cách có hướng) từ gốc tọa độ tại thời điểm $t$. Hàm $f$ mô tả chuyển động được gọi là \textbf{hàm vị trí}. Trong khoảng thời gian từ $t=a$ đến $t=a+h$, độ biến thiên vị trí là $f(a+h)-f(a)$ (Hình 5).
+\fig[.55]{f05}{Hình 5. Vị trí tại $t=a$ là $f(a)$; vị trí tại $t=a+h$ là $f(a+h)$.}
+Vận tốc trung bình trên khoảng thời gian này là
+\[\text{vận tốc trung bình}=\frac{\text{độ dời}}{\text{thời gian}}=\frac{f(a+h)-f(a)}h,\]
+đúng bằng hệ số góc cát tuyến $PQ$ trong Hình 6.
+\fig[.45]{f06}{Hình 6. Hệ số góc cát tuyến $PQ$ bằng vận tốc trung bình $[f(a+h)-f(a)]/h$.}
+Bây giờ tính vận tốc trung bình trên các khoảng thời gian $[a,a+h]$ ngày càng ngắn, tức cho $h\to0$. Như trong ví dụ quả bóng rơi, ta định nghĩa vận tốc, hay \textbf{vận tốc tức thời}, $v(a)$ tại $t=a$ là giới hạn của các vận tốc trung bình ấy.
+\begin{quote}\textbf{3. Định nghĩa.} \textbf{Vận tốc tức thời} tại $t=a$ của một vật có hàm vị trí $f(t)$ là
+\[v(a)=\lim_{h\to0}\frac{f(a+h)-f(a)}h,\]
+với điều kiện giới hạn này tồn tại.
+\end{quote}
+Vậy vận tốc tại $t=a$ bằng hệ số góc tiếp tuyến tại $P$; so sánh (2) với Định nghĩa 3.
+
+Nay đã biết tính giới hạn, ta xét lại bài toán quả bóng rơi ở Ví dụ 2.1.3.
+\begin{samepage}
+\ex{3} Một quả bóng được thả từ đài quan sát phía trên của tháp CN, cao 450 m so với mặt đất.
+
+(a) Vận tốc quả bóng sau 5 giây là bao nhiêu?
+
+(b) Khi chạm đất, quả bóng chuyển động với tốc độ bao nhiêu?
+\end{samepage}
+\sol Vì cần tính vận tốc ở hai thời điểm, trước hết nên tìm vận tốc tại thời điểm tổng quát $t=a$. Nhắc lại từ §2.1: quãng đường rơi sau $t$ giây là $4.9t^2$ mét. Với phương trình chuyển động $s=f(t)=4.9t^2$, ta có
+\begin{align*}
+v(a)&=\lim_{h\to0}\frac{f(a+h)-f(a)}h=\lim_{h\to0}\frac{4.9(a+h)^2-4.9a^2}h\\
+&=\lim_{h\to0}\frac{4.9(a^2+2ah+h^2-a^2)}h\\
+&=\lim_{h\to0}\frac{4.9(2ah+h^2)}h\\
+&=\lim_{h\to0}\frac{4.9h(2a+h)}h=\lim_{h\to0}4.9(2a+h)=9.8a.
+\end{align*}
+(a) Sau 5 giây, $v(5)=(9.8)(5)=49$ m/s.
+
+(b) Đài quan sát cao 450 m, nên bóng chạm đất khi $s(t)=450$, tức $4.9t^2=450$. Suy ra
+\[t^2=\frac{450}{4.9},\qquad t=\sqrt{\frac{450}{4.9}}\approx9.6\ \mathrm{s}.\]
+Vận tốc khi chạm đất là
+\[v\left(\sqrt{\frac{450}{4.9}}\right)=9.8\sqrt{\frac{450}{4.9}}\approx94\ \mathrm{m/s}.\qquad\square\]
+\section*{Đạo hàm}
+Ta đã thấy cùng một loại giới hạn xuất hiện khi tìm hệ số góc tiếp tuyến, theo (2), và khi tính vận tốc, theo Định nghĩa 3. Thật ra, các giới hạn dạng
+\[\lim_{h\to0}\frac{f(a+h)-f(a)}h\]
+xuất hiện mỗi khi tính tốc độ biến thiên trong khoa học hoặc kỹ thuật, chẳng hạn tốc độ phản ứng trong hóa học hay chi phí biên trong kinh tế học. Vì xuất hiện rộng rãi, loại giới hạn này có tên gọi và ký hiệu riêng.
+\begin{quote}\textbf{4. Định nghĩa.} \textbf{Đạo hàm của hàm $f$ tại số $a$}, ký hiệu $f'(a)$, là
+\[f'(a)=\lim_{h\to0}\frac{f(a+h)-f(a)}h,\]
+nếu giới hạn này tồn tại.
+\end{quote}
+Ký hiệu $f'(a)$ được đọc là “$f$ phẩy tại $a$”.
+
+Đặt $x=a+h$ thì $h=x-a$, và $h\to0$ khi và chỉ khi $x\to a$. Do đó, một cách viết tương đương của định nghĩa đạo hàm, như đã thấy khi tìm tiếp tuyến trong Định nghĩa 1, là
+\[f'(a)=\lim_{x\to a}\frac{f(x)-f(a)}{x-a}.\tag{5}\]
+Định nghĩa 4 và công thức (5) tương đương, nên có thể dùng một trong hai để tính đạo hàm. Trong thực hành, Định nghĩa 4 thường cho phép tính đơn giản hơn.
+\ex{4} Dùng Định nghĩa 4 để tìm đạo hàm của $f(x)=x^2-8x+9$ tại: (a) $2$; (b) $a$.
+\sol (a) Theo Định nghĩa 4,
+\begin{align*}
+f'(2)&=\lim_{h\to0}\frac{f(2+h)-f(2)}h\\
+&=\lim_{h\to0}\frac{(2+h)^2-8(2+h)+9-(-3)}h\\
+&=\lim_{h\to0}\frac{4+4h+h^2-16-8h+9+3}h\\
+&=\lim_{h\to0}\frac{h^2-4h}h=\lim_{h\to0}\frac{h(h-4)}h\\
+&=\lim_{h\to0}(h-4)=-4.
+\end{align*}
+(b) Tương tự,
+\begin{align*}
+f'(a)&=\lim_{h\to0}\frac{f(a+h)-f(a)}h\\
+&=\lim_{h\to0}\frac{[(a+h)^2-8(a+h)+9]-[a^2-8a+9]}h\\
+&=\lim_{h\to0}\frac{a^2+2ah+h^2-8a-8h+9-a^2+8a-9}h\\
+&=\lim_{h\to0}\frac{2ah+h^2-8h}h\\
+&=\lim_{h\to0}(2a+h-8)=2a-8.
+\end{align*}
+Để kiểm tra (a), thay $a=2$ được $f'(2)=2(2)-8=-4$.\hfill$\square$
+\ex{5} Dùng (5) để tìm đạo hàm của $f(x)=1/\sqrt{x}$ tại $a$, với $a>0$.
+\sol Theo (5),
+\begin{align*}
+f'(a)&=\lim_{x\to a}\frac{f(x)-f(a)}{x-a}\\
+&=\lim_{x\to a}\frac{1/\sqrt{x}-1/\sqrt{a}}{x-a}\\
+&=\lim_{x\to a}\frac{1/\sqrt{x}-1/\sqrt{a}}{x-a}\cdot\frac{\sqrt{x}\sqrt{a}}{\sqrt{x}\sqrt{a}}\\
+&=\lim_{x\to a}\frac{\sqrt{a}-\sqrt{x}}{\sqrt{ax}(x-a)}\\
+&=\lim_{x\to a}\frac{\sqrt{a}-\sqrt{x}}{\sqrt{ax}(x-a)}\cdot\frac{\sqrt{a}+\sqrt{x}}{\sqrt{a}+\sqrt{x}}\\
+&=\lim_{x\to a}\frac{-(x-a)}{\sqrt{ax}(x-a)(\sqrt{a}+\sqrt{x})}\\
+&=\lim_{x\to a}\frac{-1}{\sqrt{ax}(\sqrt{a}+\sqrt{x})}\\
+&=\frac{-1}{\sqrt{a^2}(\sqrt{a}+\sqrt{a})}=\frac{-1}{a\cdot2\sqrt{a}}=-\frac1{2a^{3/2}}.
+\end{align*}
+Có thể kiểm tra rằng dùng Định nghĩa 4 cũng cho cùng kết quả.\hfill$\square$
+
+Ta đã định nghĩa tiếp tuyến của $y=f(x)$ tại $P(a,f(a))$ là đường thẳng đi qua $P$, có hệ số góc $m$ cho bởi Định nghĩa 1 hoặc công thức (2). Theo Định nghĩa 4 và (5), hệ số góc này chính là $f'(a)$. Vì thế:
+\begin{quote}\textbf{Tiếp tuyến của $y=f(x)$ tại $(a,f(a))$ là đường thẳng đi qua $(a,f(a))$, có hệ số góc bằng đạo hàm $f'(a)$.}\end{quote}
+Dùng dạng điểm–hệ số góc, phương trình tiếp tuyến là
+\[y-f(a)=f'(a)(x-a).\]
+\ex{6} Tìm phương trình tiếp tuyến của parabol $y=x^2-8x+9$ tại $(3,-6)$.
+\sol Theo Ví dụ 4(b), đạo hàm của $f(x)=x^2-8x+9$ tại $a$ là $f'(a)=2a-8$. Vậy hệ số góc tiếp tuyến tại $(3,-6)$ là $f'(3)=2(3)-8=-2$. Phương trình tiếp tuyến, được vẽ trong Hình 7, là
+\[y-(-6)=(-2)(x-3)\qquad\text{hay}\qquad y=-2x.\]
+\fig[.43]{f07}{Hình 7. Parabol $y=x^2-8x+9$ và tiếp tuyến $y=-2x$. $\square$}
+\section*{Tốc độ biến thiên}
+Giả sử đại lượng $y$ phụ thuộc một đại lượng khác $x$, tức $y=f(x)$. Khi $x$ thay đổi từ $x_1$ đến $x_2$, độ biến thiên của $x$, còn gọi là \textbf{số gia của $x$}, là
+\[\Delta x=x_2-x_1,\]
+và độ biến thiên tương ứng của $y$ là
+\[\Delta y=f(x_2)-f(x_1).\]
+\textbf{Thương sai phân}
+\[\frac{\Delta y}{\Delta x}=\frac{f(x_2)-f(x_1)}{x_2-x_1}\]
+được gọi là \textbf{tốc độ biến thiên trung bình của $y$ theo $x$} trên đoạn $[x_1,x_2]$, và được diễn giải là hệ số góc cát tuyến $PQ$ trong Hình 8.
+\fig[.49]{f08}{Hình 8. Tốc độ biến thiên trung bình bằng $m_{PQ}$; tốc độ biến thiên tức thời bằng hệ số góc tiếp tuyến tại $P$.}
+Tương tự như vận tốc, ta xét tốc độ biến thiên trung bình trên các khoảng ngày càng nhỏ, bằng cách cho $x_2\to x_1$, tức $\Delta x\to0$. Giới hạn các tốc độ biến thiên trung bình được gọi là \textbf{tốc độ biến thiên tức thời của $y$ theo $x$ tại $x=x_1$}. Cũng như vận tốc, nó được diễn giải là hệ số góc tiếp tuyến của $y=f(x)$ tại $P(x_1,f(x_1))$:
+\[\text{tốc độ biến thiên tức thời}=\lim_{\Delta x\to0}\frac{\Delta y}{\Delta x}=\lim_{x_2\to x_1}\frac{f(x_2)-f(x_1)}{x_2-x_1}.\tag{6}\]
+Ta nhận ra giới hạn này là đạo hàm $f'(x_1)$.
+
+Một cách diễn giải $f'(a)$ là hệ số góc tiếp tuyến của $y=f(x)$ tại $x=a$. Nay ta có cách diễn giải thứ hai:
+\begin{quote}\textbf{Đạo hàm $f'(a)$ là tốc độ biến thiên tức thời của $y=f(x)$ theo $x$ tại $x=a$.}\end{quote}
+Mối liên hệ với cách diễn giải thứ nhất là: nếu vẽ $y=f(x)$, tốc độ biến thiên tức thời chính là hệ số góc tiếp tuyến tại điểm có hoành độ $a$. Khi đạo hàm lớn, đường cong dốc như tại $P$ trong Hình 9, nên $y$ thay đổi nhanh. Khi đạo hàm nhỏ, đường cong tương đối thoải như tại $Q$, nên $y$ thay đổi chậm.
+\fig[.43]{f09}{Hình 9. Các giá trị $y$ thay đổi nhanh tại $P$ và chậm tại $Q$.}
+Đặc biệt, nếu $s=f(t)$ là hàm vị trí của chất điểm chuyển động trên đường thẳng thì $f'(a)$ là tốc độ biến thiên của độ dời $s$ theo thời gian $t$, tức \textbf{vận tốc} tại $t=a$. \textbf{Tốc độ} của chất điểm là giá trị tuyệt đối của vận tốc, tức $|f'(a)|$.
+
+Ví dụ tiếp theo xét ý nghĩa đạo hàm của một hàm được mô tả bằng lời.
+\ex{7} Một nhà sản xuất làm các cuộn vải có bề rộng cố định. Chi phí sản xuất $x$ yard vải là $C=f(x)$ đô la.
+
+(a) Đạo hàm $f'(x)$ có ý nghĩa gì? Đơn vị là gì?
+
+(b) Về thực tế, $f'(1000)=9$ có nghĩa là gì?
+
+(c) Theo bạn, $f'(50)$ hay $f'(500)$ lớn hơn? Còn $f'(5000)$ thì sao?
+\sol (a) $f'(x)$ là tốc độ biến thiên tức thời của $C$ theo $x$, tức tốc độ biến thiên chi phí sản xuất theo số yard vải. Các nhà kinh tế gọi đây là \textbf{chi phí biên}; khái niệm này sẽ được xét kỹ hơn ở §3.7 và §4.7.
+
+Vì
+\[f'(x)=\lim_{\Delta x\to0}\frac{\Delta C}{\Delta x},\]
+đơn vị của $f'(x)$ giống đơn vị của $\Delta C/\Delta x$. Do $\Delta C$ đo bằng đô la, $\Delta x$ đo bằng yard, nên $f'(x)$ có đơn vị đô la/yard.
+
+(b) $f'(1000)=9$ nghĩa là sau khi đã sản xuất 1000 yard, chi phí đang tăng với tốc độ 9 đô la/yard. Khi $x=1000$, $C$ tăng nhanh gấp 9 lần $x$ theo các đơn vị đã chọn.
+
+Vì $\Delta x=1$ nhỏ so với $x=1000$, có thể dùng xấp xỉ
+\[f'(1000)\approx\frac{\Delta C}{\Delta x}=\frac{\Delta C}{1}=\Delta C\]
+và nói rằng chi phí sản xuất yard thứ 1000 (hoặc thứ 1001) xấp xỉ 9 đô la. Ở đây giả sử hàm chi phí có dáng điệu đều đặn, không dao động nhanh gần $x=1000$.
+
+(c) Do lợi thế quy mô, tốc độ tăng chi phí trên mỗi yard có lẽ nhỏ hơn ở $x=500$ so với $x=50$: chi phí làm yard thứ 500 nhỏ hơn chi phí làm yard thứ 50, do nhà sản xuất sử dụng hiệu quả hơn các chi phí cố định. Vì thế,
+\[f'(50)>f'(500).\]
+Tuy nhiên, khi sản xuất mở rộng, hoạt động quy mô lớn có thể kém hiệu quả và phát sinh chi phí làm thêm giờ. Tốc độ tăng chi phí vì vậy có thể bắt đầu tăng trở lại. Có thể xảy ra
+\[f'(5000)>f'(500).\qquad\square\]
+Ví dụ tiếp theo ước lượng tốc độ biến thiên nợ quốc gia theo thời gian. Hàm được cho bằng bảng giá trị, thay vì bằng công thức.
+\ex{8} Gọi $D(t)$ là nợ quốc gia Hoa Kỳ tại thời điểm $t$. Bảng sau cho các giá trị xấp xỉ cuối năm từ 2000 đến 2016, đơn vị tỉ đô la. Diễn giải và ước lượng $D'(2008)$.
+\begin{center}\begin{tabular}{rr}\toprule$t$&$D(t)$\\\midrule
+2000&5662.2\\2004&7596.1\\2008&10\,699.8\\2012&16\,432.7\\2016&19\,976.8\\\bottomrule
+\end{tabular}\\*{\small Nguồn: Bộ Ngân khố Hoa Kỳ.}\end{center}
+\sol Đạo hàm $D'(2008)$ là tốc độ biến thiên của $D$ theo $t$ tại $t=2008$, tức tốc độ tăng nợ quốc gia trong năm 2008. Theo (5),
+\[D'(2008)=\lim_{t\to2008}\frac{D(t)-D(2008)}{t-2008}.\]
+Một cách ước lượng là so sánh tốc độ biến thiên trung bình trên các khoảng thời gian khác nhau, thông qua các thương sai phân trong bảng:
+\begin{center}\begin{tabular}{rcr}\toprule
+$t$&Khoảng thời gian&Tốc độ biến thiên trung bình\\
+&&$[D(t)-D(2008)]/(t-2008)$\\\midrule
+2000&$[2000,2008]$&629.7\\
+2004&$[2004,2008]$&775.93\\
+2012&$[2008,2012]$&1433.23\\
+2016&$[2008,2016]$&1159.63\\\bottomrule
+\end{tabular}\end{center}
+Từ bảng này, ta ước lượng $D'(2008)$ nằm giữa 775.93 và 1433.23 tỉ đô la/năm, với giả thiết hợp lý rằng nợ không dao động mạnh giữa 2004 và 2012. Lấy trung bình hai số trên, ta có ước lượng thích hợp:
+\[D'(2008)\approx1105\ \text{tỉ đô la/năm}.\]
+Một cách khác là vẽ đồ thị hàm nợ và ước lượng hệ số góc tiếp tuyến tại $t=2008$.\hfill$\square$
+
+\noindent\textit{Chú ý về đơn vị.} Đơn vị của tốc độ biến thiên trung bình $\Delta D/\Delta t$ bằng đơn vị của $\Delta D$ chia cho đơn vị của $\Delta t$, tức tỉ đô la/năm. Tốc độ biến thiên tức thời là giới hạn các tốc độ biến thiên trung bình nên có cùng đơn vị.
+
+Trong các Ví dụ 3, 7, 8, ta gặp ba tốc độ biến thiên: vận tốc là tốc độ biến thiên độ dời theo thời gian; chi phí biên là tốc độ biến thiên chi phí sản xuất theo lượng sản phẩm; tốc độ biến thiên nợ theo thời gian có ý nghĩa kinh tế. Một số ví dụ khác: trong vật lý, tốc độ biến thiên công theo thời gian là \textbf{công suất}; trong hóa học, tốc độ biến thiên nồng độ chất phản ứng theo thời gian là \textbf{tốc độ phản ứng}; trong sinh học, người ta quan tâm tốc độ biến thiên số lượng vi khuẩn trong một quần thể theo thời gian. Tính tốc độ biến thiên có vai trò quan trọng trong mọi khoa học tự nhiên, kỹ thuật và cả khoa học xã hội. §3.7 sẽ có thêm ví dụ.
+
+Tất cả các tốc độ biến thiên ấy đều là đạo hàm, nên có thể diễn giải thành hệ số góc tiếp tuyến. Điều này làm tăng ý nghĩa của bài toán tiếp tuyến: giải một bài toán tiếp tuyến còn gián tiếp giải nhiều bài toán tốc độ biến thiên trong khoa học và kỹ thuật.
+\clearpage
+\section*{2.7. Bài tập}
+\bt{1} Một đường cong có phương trình $y=f(x)$.
+
+(a) Viết biểu thức hệ số góc cát tuyến đi qua $P(3,f(3))$ và $Q(x,f(x))$.
+
+(b) Viết biểu thức hệ số góc tiếp tuyến tại $P$.
+\bt{2} Vẽ đường cong $y=e^x$ trong các cửa sổ $[-1,1]\times[0,2]$, $[-0.5,0.5]\times[0.5,1.5]$ và $[-0.1,0.1]\times[0.9,1.1]$. Khi phóng đại quanh $(0,1)$, bạn nhận thấy điều gì về đường cong?
+\bt{3} (a) Tìm hệ số góc tiếp tuyến của parabol $y=x^2+3x$ tại $(-1,-2)$ bằng: (i) Định nghĩa 1; (ii) công thức (2).
+
+(b) Tìm phương trình tiếp tuyến ở (a).
+
+(c) Vẽ parabol và tiếp tuyến. Kiểm tra kết quả bằng cách phóng đại quanh $(-1,-2)$ cho đến khi không thể phân biệt parabol và tiếp tuyến.
+\bt{4} (a) Tìm hệ số góc tiếp tuyến của $y=x^3+1$ tại $(1,2)$ bằng: (i) Định nghĩa 1; (ii) công thức (2).
+
+(b) Tìm phương trình tiếp tuyến ở (a).
+
+(c) Vẽ đường cong và tiếp tuyến trong các cửa sổ ngày càng nhỏ, có tâm $(1,2)$, cho đến khi chúng dường như trùng nhau.
+\group{5–8. Tìm phương trình tiếp tuyến của đường cong tại điểm đã cho.}
+\bt{5} $y=2x^2-5x+1$, tại $(3,4)$.
+\bt{6} $y=x^2-2x^3$, tại $(1,-1)$.
+\bt{7} $y=(x+2)/(x-3)$, tại $(2,-4)$.
+\bt{8} $y=\sqrt{1-3x}$, tại $(-1,2)$.
+\bt{9} (a) Tìm hệ số góc tiếp tuyến của $y=3+4x^2-2x^3$ tại điểm có hoành độ $a$.
+
+(b) Tìm phương trình các tiếp tuyến tại $(1,5)$ và $(2,3)$.
+
+(c) Vẽ đường cong và hai tiếp tuyến trên cùng màn hình.
+\bt{10} (a) Tìm hệ số góc tiếp tuyến của $y=2\sqrt{x}$ tại điểm có hoành độ $a$.
+
+(b) Tìm phương trình các tiếp tuyến tại $(1,2)$ và $(9,6)$.
+
+(c) Vẽ đường cong và hai tiếp tuyến trên cùng màn hình.
+\bt{11} Một người nhảy từ vách đá cao 100 ft so với mặt nước. Quãng đường rơi sau $t$ giây là $d(t)=16t^2$ ft.
+
+(a) Sau bao nhiêu giây người đó chạm nước?
+
+(b) Vận tốc khi chạm nước là bao nhiêu?
+\bt{12} Trên sao Hỏa, một hòn đá được ném thẳng đứng lên với vận tốc 10 m/s. Độ cao sau $t$ giây là $H=10t-1.86t^2$ mét.
+
+(a) Tìm vận tốc sau một giây. (b) Tìm vận tốc tại $t=a$.
+
+(c) Khi nào hòn đá chạm mặt đất? (d) Vận tốc khi chạm đất là bao nhiêu?
+\bt{13} Độ dời (mét) của chất điểm chuyển động thẳng là $s=1/t^2$, với $t$ tính bằng giây. Tìm vận tốc tại $t=a$, $t=1$, $t=2$, $t=3$.
+\bt{14} Độ dời (ft) của chất điểm chuyển động thẳng là $s=\frac12t^2-6t+23$, với $t$ tính bằng giây.
+
+(a) Tìm vận tốc trung bình trên mỗi khoảng: (i) $[4,8]$; (ii) $[6,8]$; (iii) $[8,10]$; (iv) $[8,12]$.
+
+(b) Tìm vận tốc tức thời tại $t=8$.
+
+(c) Vẽ đồ thị $s$ theo $t$ và các cát tuyến có hệ số góc bằng vận tốc trung bình ở (a). Sau đó vẽ tiếp tuyến có hệ số góc bằng vận tốc tức thời ở (b).
+\bt{15} (a) Một chất điểm bắt đầu chuyển động sang phải trên đường thẳng nằm ngang; đồ thị hàm vị trí được cho dưới đây. Khi nào chất điểm chuyển động sang phải, sang trái hoặc đứng yên?
+
+(b) Vẽ đồ thị hàm vận tốc.
+\fig[.62]{e15}{Đồ thị Bài tập 15. Trục $s$: mét; trục $t$: giây.}
+\bt{16} Hình sau cho đồ thị hàm vị trí của hai vận động viên $A,B$ chạy đua 100 m và về đích đồng thời.
+
+(a) Mô tả và so sánh cách chạy của hai người.
+
+(b) Khi nào khoảng cách giữa họ lớn nhất?
+
+(c) Khi nào họ có cùng vận tốc?
+\fig[.62]{e16}{Đồ thị Bài tập 16. Trục $s$: mét; trục $t$: giây.}
+\bt{17} Với hàm $g$ có đồ thị sau, sắp xếp theo thứ tự tăng dần các số sau và giải thích:
+\[0,\qquad g'(-2),\qquad g'(0),\qquad g'(2),\qquad g'(4).\]
+\fig[.58]{e17}{Đồ thị Bài tập 17.}
+\bt{18} Cho đồ thị hàm $f$ như sau.
+
+(a) Tìm tốc độ biến thiên trung bình của $f$ trên $[20,60]$.
+
+(b) Chỉ ra một khoảng mà tốc độ biến thiên trung bình của $f$ bằng 0.
+
+(c) Tính $[f(40)-f(10)]/(40-10)$. Giá trị này biểu thị điều gì về hình học?
+
+(d) Ước lượng $f'(50)$.
+
+(e) Có phải $f'(10)>f'(30)$ không?
+
+(f) Có phải $f'(60)>[f(80)-f(40)]/(80-40)$ không? Giải thích.
+\fig[.43]{e18}{Đồ thị Bài tập 18.}
+\group{19–20. Dùng Định nghĩa 4 tìm $f'(a)$ tại số $a$ đã cho.}
+\bt{19} $f(x)=\sqrt{4x+1}$, $a=6$.
+\bt{20} $f(x)=5x^4$, $a=-1$.
+\group{21–22. Dùng công thức (5) tìm $f'(a)$ tại số $a$ đã cho.}
+\bt{21} $f(x)=x^2/(x+6)$, $a=3$.
+\bt{22} $f(x)=1/(\sqrt{2x}+2)$, $a=1$.
+\group{23–26. Tìm $f'(a)$.}
+\bt{23} $f(x)=2x^2-5x+3$.
+\bt{24} $f(t)=t^3-3t$.
+\bt{25} $f(t)=1/(t^2+1)$.
+\bt{26} $f(x)=x/(1-4x)$.
+\bt{27} Tìm phương trình tiếp tuyến của $y=B(x)$ tại $x=6$, biết $B(6)=0$, $B'(6)=-1/2$.
+\bt{28} Tìm phương trình tiếp tuyến của $y=g(x)$ tại $x=5$, biết $g(5)=-3$, $g'(5)=4$.
+\bt{29} Cho $f(x)=3x^2-x^3$. Tìm $f'(1)$ và dùng kết quả để tìm phương trình tiếp tuyến của $y=3x^2-x^3$ tại $(1,2)$.
+\bt{30} Cho $g(x)=x^4-2$. Tìm $g'(1)$ và dùng kết quả để tìm phương trình tiếp tuyến của $y=x^4-2$ tại $(1,-1)$.
+\bt{31} (a) Cho $F(x)=5x/(1+x^2)$. Tìm $F'(2)$ và phương trình tiếp tuyến của $y=5x/(1+x^2)$ tại $(2,2)$.
+
+(b) Minh họa (a) bằng cách vẽ đường cong và tiếp tuyến trên cùng màn hình.
+\bt{32} (a) Cho $G(x)=4x^2-x^3$. Tìm $G'(a)$ và dùng kết quả để tìm phương trình các tiếp tuyến của $y=4x^2-x^3$ tại $(2,8)$ và $(3,9)$.
+
+(b) Minh họa (a) bằng cách vẽ đường cong và các tiếp tuyến trên cùng màn hình.
+\bt{33} Biết tiếp tuyến của $y=f(x)$ tại điểm có hoành độ $a=2$ có phương trình $y=4x-5$. Tìm $f(2)$ và $f'(2)$.
+\bt{34} Tiếp tuyến của $y=f(x)$ tại $(4,3)$ đi qua $(0,2)$. Tìm $f(4)$ và $f'(4)$.
+\group{35–36. Chất điểm chuyển động thẳng theo phương trình $s=f(t)$; $s$ đo bằng mét, $t$ bằng giây. Tìm vận tốc và tốc độ tại $t=4$.}
+\bt{35} $f(t)=80t-6t^2$.
+\bt{36} $f(t)=10+45/(t+1)$.
+\bt{37} Đặt một lon nước ngọt ấm vào tủ lạnh. Phác họa đồ thị nhiệt độ nước ngọt theo thời gian. Tốc độ biến thiên nhiệt độ ban đầu lớn hơn hay nhỏ hơn tốc độ biến thiên sau một giờ?
+\bt{38} Một con gà tây quay được lấy khỏi lò ở nhiệt độ $185^\circ\mathrm{F}$ và đặt lên bàn trong phòng có nhiệt độ $75^\circ\mathrm{F}$. Đồ thị cho thấy nhiệt độ gà giảm dần và tiến đến nhiệt độ phòng. Bằng cách đo hệ số góc tiếp tuyến, ước lượng tốc độ biến thiên nhiệt độ sau một giờ.
+\fig[.59]{e38}{Đồ thị Bài tập 38. $T$ đo bằng °F; $t$ đo bằng phút.}
+\bt{39} Phác họa đồ thị hàm $f$ thỏa $f(0)=0$, $f'(0)=3$, $f'(1)=0$, $f'(2)=-1$.
+\bt{40} Phác họa đồ thị hàm $g$ thỏa
+\[g(0)=g(2)=g(4)=0,\qquad g'(1)=g'(3)=0,\]
+\[g'(0)=g'(4)=1,\qquad g'(2)=-1,\]
+\[\lim_{x\to\infty}g(x)=\infty,\qquad\lim_{x\to-\infty}g(x)=-\infty.\]
+\bt{41} Phác họa đồ thị hàm $g$ liên tục trên tập xác định $(-5,5)$, thỏa
+\[g(0)=1,\quad g'(0)=1,\quad g'(-2)=0,\]
+\[\lim_{x\to-5^+}g(x)=\infty,\qquad\lim_{x\to5^-}g(x)=3.\]
+\bt{42} Phác họa đồ thị hàm $f$ có tập xác định $(-2,2)$, thỏa $f'(0)=-2$, $\lim_{x\to-2}f(x)=\infty$; $f$ liên tục tại mọi điểm trong tập xác định, trừ $\pm1$, và $f$ là hàm lẻ.
+\group{43–48. Mỗi giới hạn sau biểu thị đạo hàm của một hàm $f$ tại một số $a$. Trong mỗi trường hợp, hãy nêu một hàm $f$ và số $a$ thích hợp.}
+\bt{43} $\displaystyle\lim_{h\to0}\frac{\sqrt{9+h}-3}h$.
+\bt{44} $\displaystyle\lim_{h\to0}\frac{e^{-2+h}-e^{-2}}h$.
+\bt{45} $\displaystyle\lim_{x\to2}\frac{x^6-64}{x-2}$.
+\bt{46} $\displaystyle\lim_{x\to1/4}\frac{1/x-4}{x-1/4}$.
+\bt{47} $\displaystyle\lim_{h\to0}\frac{\tan(\pi/4+h)-1}h$.
+\bt{48} $\displaystyle\lim_{\theta\to\pi/6}\frac{\sin\theta-1/2}{\theta-\pi/6}$.
+\bt{49} Chi phí sản xuất $x$ đơn vị hàng hóa là $C(x)=5000+10x+0.05x^2$ đô la.
+
+(a) Tìm tốc độ biến thiên trung bình của $C$ theo $x$ khi mức sản xuất thay đổi: (i) từ $x=100$ đến $x=105$; (ii) từ $x=100$ đến $x=101$.
+
+(b) Tìm tốc độ biến thiên tức thời của $C$ theo $x$ tại $x=100$. Đây là chi phí biên; ý nghĩa sẽ được giải thích ở §3.7.
+\bt{50} Gọi $H(t)$ là chi phí hằng ngày, tính bằng đô la, để sưởi một tòa nhà văn phòng khi nhiệt độ ngoài trời là $t$ độ Fahrenheit.
+
+(a) $H'(58)$ có ý nghĩa gì? Đơn vị là gì?
+
+(b) Bạn dự đoán $H'(58)$ dương hay âm? Giải thích.
+\bt{51} Chi phí sản xuất $x$ ounce vàng từ một mỏ mới là $C=f(x)$ đô la.
+
+(a) Đạo hàm $f'(x)$ có ý nghĩa gì? Đơn vị là gì?
+
+(b) $f'(800)=17$ có nghĩa là gì?
+
+(c) Bạn dự đoán $f'(x)$ sẽ tăng hay giảm trong ngắn hạn? Còn dài hạn? Giải thích.
+\bt{52} Lượng cà phê xay cao cấp bán được, tính bằng pound, khi giá là $p$ đô la/pound, được cho bởi $Q=f(p)$.
+
+(a) $f'(8)$ có ý nghĩa gì? Đơn vị là gì?
+
+(b) $f'(8)$ dương hay âm? Giải thích.
+\bt{53} Lượng oxy có thể hòa tan trong nước phụ thuộc nhiệt độ nước; vì vậy ô nhiễm nhiệt ảnh hưởng hàm lượng oxy. Đồ thị cho độ hòa tan $S$ theo nhiệt độ $T$.
+
+(a) $S'(T)$ có ý nghĩa gì? Đơn vị là gì?
+
+(b) Ước lượng $S'(16)$ và diễn giải.
+\fig[.49]{e53}{Đồ thị Bài tập 53. $S$ đo bằng mg/L; $T$ bằng °C.}
+\noindent{\small Nguồn: C. Kupchella và cộng sự, \textit{Environmental Science: Living Within the System of Nature}, ấn bản 2 (Boston: Allyn and Bacon, 1989).}
+\bt{54} Đồ thị cho ảnh hưởng của nhiệt độ $T$ đến tốc độ bơi tối đa có thể duy trì $S$ của cá hồi Coho.
+
+(a) $S'(T)$ có ý nghĩa gì? Đơn vị là gì?
+
+(b) Ước lượng $S'(15)$, $S'(25)$ và diễn giải.
+\fig[.53]{e54}{Đồ thị Bài tập 54. $S$ đo bằng cm/s; $T$ bằng °C.}
+\bt{55} Các nhà nghiên cứu đo nồng độ cồn trung bình trong máu $C(t)$ của tám nam giới, bắt đầu một giờ sau khi uống 30 mL ethanol, tương đương hai khẩu phần đồ uống có cồn.
+\begin{center}\begin{tabular}{lrrrrr}\toprule
+$t$ (giờ)&1.0&1.5&2.0&2.5&3.0\\
+$C(t)$ (g/dL)&0.033&0.024&0.018&0.012&0.007\\\bottomrule
+\end{tabular}\end{center}
+(a) Tìm tốc độ biến thiên trung bình của $C$ theo $t$ trên: (i) $[1.0,2.0]$; (ii) $[1.5,2.0]$; (iii) $[2.0,2.5]$; (iv) $[2.0,3.0]$. Ghi đơn vị trong mỗi trường hợp.
+
+(b) Ước lượng tốc độ biến thiên tức thời tại $t=2$ và diễn giải kết quả. Đơn vị là gì?
+
+\noindent{\small Nguồn: Phỏng theo P. Wilkinson và cộng sự, “Pharmacokinetics of Ethanol after Oral Administration in the Fasting State”, \textit{Journal of Pharmacokinetics and Biopharmaceutics} 5 (1977), tr. 207–224.}
+\bt{56} Bảng cho số cơ sở $N$ của một chuỗi quán cà phê phổ biến, tính tại ngày 1 tháng 10 mỗi năm.
+\begin{center}\begin{tabular}{rr}\toprule Năm&$N$\\\midrule
+2008&16\,680\\2010&16\,858\\2012&18\,066\\2014&21\,366\\2016&25\,085\\\bottomrule
+\end{tabular}\end{center}
+(a) Tìm tốc độ tăng trung bình: (i) từ 2008 đến 2010; (ii) từ 2010 đến 2012. Ghi đơn vị và nêu kết luận.
+
+(b) Ước lượng tốc độ tăng tức thời năm 2010 bằng trung bình của hai tốc độ biến thiên trung bình. Đơn vị là gì?
+
+(c) Ước lượng tốc độ tăng tức thời năm 2010 bằng cách đo hệ số góc tiếp tuyến.
+\group{57–58. Xác định $f'(0)$ có tồn tại hay không.}
+\bt{57} $\displaystyle f(x)=\begin{cases}x\sin(1/x),&x\ne0,\\0,&x=0.\end{cases}$
+\bt{58} $\displaystyle f(x)=\begin{cases}x^2\sin(1/x),&x\ne0,\\0,&x=0.\end{cases}$
+\bt{59} (a) Vẽ $f(x)=\sin x-\frac1{1000}\sin(1000x)$ trong cửa sổ $[-2\pi,2\pi]\times[-4,4]$. Đồ thị dường như có hệ số góc bao nhiêu tại gốc tọa độ?
+
+(b) Phóng đại đến cửa sổ $[-0.4,0.4]\times[-0.25,0.25]$ và ước lượng $f'(0)$. Kết quả có phù hợp (a) không?
+
+(c) Phóng đại tiếp đến cửa sổ $[-0.008,0.008]\times[-0.005,0.005]$. Bạn có muốn sửa ước lượng $f'(0)$ không?
+\bt{60} \textbf{Thương sai phân đối xứng.} Trong Ví dụ 8, ta xấp xỉ tốc độ biến thiên tức thời bằng trung bình của hai tốc độ biến thiên trung bình. Một cách khác là dùng một tốc độ biến thiên trung bình trên khoảng có tâm là giá trị cần xét. \textbf{Thương sai phân đối xứng} của $f$ tại $x=a$ trên $[a-d,a+d]$ được định nghĩa là
+\[\frac{f(a+d)-f(a-d)}{(a+d)-(a-d)}=\frac{f(a+d)-f(a-d)}{2d}.\]
+(a) Tính thương sai phân đối xứng của hàm $D$ trong Ví dụ 8 trên $[2004,2012]$; kiểm tra sự phù hợp với ước lượng $D'(2008)$ trong ví dụ.
+
+(b) Chứng tỏ thương sai phân đối xứng của $f$ tại $x=a$ bằng trung bình của các tốc độ biến thiên trung bình trên $[a-d,a]$ và $[a,a+d]$.
+
+(c) Dùng thương sai phân đối xứng với $d=0.4$ để ước lượng $f'(1)$, trong đó $f(x)=x^3-2x^2+2$. Vẽ đồ thị $f$ cùng các cát tuyến tương ứng với tốc độ biến thiên trung bình trên $[1-d,1]$, $[1,1+d]$, $[1-d,1+d]$. Cát tuyến nào dường như có hệ số góc gần hệ số góc tiếp tuyến tại $x=1$ nhất?
+\section*{Chuyên đề viết: Các phương pháp ban đầu để tìm tiếp tuyến}
+Người đầu tiên phát biểu tường minh các ý tưởng về giới hạn và đạo hàm là Sir Isaac Newton vào thập niên 1660. Tuy nhiên, Newton thừa nhận rằng nếu ông nhìn xa hơn người khác thì đó là nhờ đứng trên vai những người khổng lồ. Hai người khổng lồ ấy là Pierre Fermat (1601–1665) và người thầy của Newton tại Cambridge, Isaac Barrow (1630–1677). Newton biết các phương pháp tìm tiếp tuyến của họ; những phương pháp ấy góp phần vào việc ông xây dựng phép tính vi tích phân.
+
+Tìm hiểu các phương pháp này qua Internet hoặc một trong các tài liệu dưới đây. Viết bài luận so sánh phương pháp của Fermat hoặc Barrow với phương pháp hiện đại. Cụ thể, dùng phương pháp §2.7 tìm tiếp tuyến của $y=x^3+2x$ tại $(1,3)$, rồi trình bày cách Fermat hoặc Barrow giải cùng bài toán. Dù bạn dùng đạo hàm còn họ không dùng, hãy chỉ ra những điểm tương đồng.
+\begin{enumerate}
+\item C. H. Edwards, \textit{The Historical Development of the Calculus} (New York: Springer-Verlag, 1979), tr. 124, 132.
+\item Howard Eves, \textit{An Introduction to the History of Mathematics}, ấn bản 6 (New York: Saunders, 1990), tr. 391, 395.
+\item Morris Kline, \textit{Mathematical Thought from Ancient to Modern Times} (New York: Oxford University Press, 1972), tr. 344, 346.
+\item Uta Merzbach và Carl Boyer, \textit{A History of Mathematics}, ấn bản 3 (Hoboken, NJ: Wiley, 2011), tr. 323, 356.
+\end{enumerate}
+\section*{Chú thích biên tập và thuật ngữ}
+\begin{enumerate}
+\item Giữ thứ tự bản gốc: Định nghĩa 1, 3, 4; công thức (2), (5), (6); Ví dụ 1–8; Hình 1–9; Bài tập 1–60. Chuyên đề viết và bốn tài liệu tham khảo được đặt sau bài tập, trước §2.8.
+\item Trong Ví dụ 3, chiều dương được chọn hướng xuống từ vị trí thả bóng; bởi vậy vận tốc rơi có dấu dương. Vận tốc có dấu, còn tốc độ là giá trị tuyệt đối của vận tốc.
+\item Nhận xét “đạo hàm lớn/nhỏ” khi nói đường cong dốc/thoải được hiểu theo độ lớn $|f'(a)|$; Hình 9 minh họa trường hợp đạo hàm dương.
+\item Bài tập 37 hỏi tốc độ biến thiên có dấu. Các số liệu kinh tế, sinh học và thực nghiệm được giữ theo bản gốc, không cập nhật thành số liệu hiện hành. Các ước lượng đạo hàm từ bảng hữu hạn không phải những chặn được chứng minh chỉ từ bảng.
+\item Hình trích từ bản gốc giữ nguyên đường cong và nhãn; chú thích được dịch sang tiếng Việt. Giữ nguyên các đơn vị yard, ft, ounce và pound theo đề gốc.
+\end{enumerate}
+\begin{center}\begin{tabular}{ll}\toprule Tiếng Anh&Tiếng Việt\\\midrule
+derivative&đạo hàm\\
+difference quotient&thương sai phân\\
+symmetric difference quotient&thương sai phân đối xứng\\
+increment&số gia\\
+position function&hàm vị trí\\
+average rate of change&tốc độ biến thiên trung bình\\
+instantaneous rate of change&tốc độ biến thiên tức thời\\
+velocity / speed&vận tốc / tốc độ\\
+marginal cost&chi phí biên\\\bottomrule
+\end{tabular}\end{center}
+\noindent\textbf{Phạm vi:} Toàn bộ §2.7 cùng chuyên đề viết liền sau mục này; không bổ sung lời giải bài tập. Phần tiếp theo: \textbf{§2.8 — Đạo hàm như một hàm số}.
+\end{document}

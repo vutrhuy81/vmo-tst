@@ -1,3 +1,5 @@
+import { educationDb } from '../lib/education-db.js';
+import { allows } from '../lib/education-access.js';
 import { MATH_SUPPORT_TOPICS } from '../lib/math-support-topics.js';
 import { normalizeStandaloneMath } from '../lib/ocr-normalization.js';
 import assert from 'node:assert/strict';
@@ -26,8 +28,8 @@ for (const statement of [String.raw`$x$$y$`, String.raw`Cho $a,b\in\mathbb R$. C
 const ocrSource = fs.readFileSync(new URL('../api/ai-ocr-math.js', import.meta.url), 'utf8')
   .replace(/^import .*;\n/gm, '').replace('export default async function handler', 'async function handler');
 let ocrTopic = MATH_SUPPORT_TOPICS[0], ocrOptions;
-const ocrRoute = new Function('MATH_SUPPORT_TOPICS', 'normalizeStandaloneMath', 'getSession', 'checkRateLimit', 'prepare', 'parseBody', 'text', 'generateJson', 'handleAiError', `${ocrSource}\nreturn handler;`)(
-  MATH_SUPPORT_TOPICS, normalizeStandaloneMath, () => ({ username: 'tester' }), () => true, () => {}, req => req.body,
+const ocrRoute = new Function('allows', 'MATH_SUPPORT_TOPICS', 'normalizeStandaloneMath', 'getSession', 'checkRateLimit', 'prepare', 'parseBody', 'text', 'generateJson', 'handleAiError', `${ocrSource}\nreturn handler;`)(
+  allows,   MATH_SUPPORT_TOPICS, normalizeStandaloneMath, () => ({ username: 'tester' }), () => true, () => {}, req => req.body,
   value => String(value || ''), async options => { ocrOptions = options; return { model: 'fixture', data: { latexText: malformedLiveOcr, summary: 'test', confidence: 'high', topic: ocrTopic } }; }, () => { throw new Error('Unexpected OCR error'); });
 const ocrResponse = { status(n) { this.code = n; return this; }, json(body) { this.body = body; return this; } };
 await ocrRoute({ method: 'POST', body: { image: 'data:image/png;base64,iVBORw0KGgo=', purpose: 'standalone_problem' } }, ocrResponse);
@@ -98,8 +100,8 @@ const db = { collection(name) {
 let session = { sub: 'owner-1', username: 'student1', role: 'student' };
 const owner = { ...session }, other = { sub: 'owner-2', username: 'student2', role: 'student' }, admin = { sub: 'admin-1', username: 'admin', role: 'admin' };
 const routeSource = fs.readFileSync(new URL('../api/data.js', import.meta.url), 'utf8').replace(/^import .*;\n/gm, '').replace('export default async function handler', 'async function handler');
-const handler = new Function('getDb','getSession','ObjectId','recordActivity','handleMathSupport','canAccessProblem','supportVisibility','getCatalogTotals','cleanGeometryDiagram', `${routeSource}\nreturn handler;`)(
-  async () => db, () => session, ObjectId, async () => {}, handleMathSupport, canAccessProblem, supportVisibility, getCatalogTotals, cleanGeometryDiagram);
+const handler = new Function('educationDb', 'allows', 'getDb','getSession','ObjectId','recordActivity','handleMathSupport','canAccessProblem','supportVisibility','getCatalogTotals','cleanGeometryDiagram', `${routeSource}\nreturn handler;`)(
+  educationDb, allows,   async () => db, () => session, ObjectId, async () => {}, handleMathSupport, canAccessProblem, supportVisibility, getCatalogTotals, cleanGeometryDiagram);
 async function call({ action, payload, query } = {}) {
   const res = { code: 0, setHeader() {}, status(n) { this.code = n; return this; }, json(body) { this.body = JSON.parse(JSON.stringify(body)); return this; } };
   await handler({ method: action ? 'POST' : 'GET', query, body: { action, payload } }, res);

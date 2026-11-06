@@ -1,0 +1,236 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage{fontspec}\setmainfont{Latin Modern Roman}\setsansfont{DejaVu Sans}
+\usepackage{amsmath,amssymb,graphicx,geometry,enumitem,longtable,booktabs,fancyhdr,hyperref}
+\geometry{left=28mm,right=23mm,top=24mm,bottom=24mm}
+\hypersetup{unicode=true,colorlinks=true,linkcolor=black,urlcolor=blue,pdftitle={Giải tích Các nguyên tắc giải toán}}
+\setlength{\parindent}{1.2em}\setlength{\parskip}{4pt}\setlength{\headheight}{16pt}
+\pagestyle{fancy}\fancyhf{}\fancyhead[L]{\small Chương 1. Hàm số và mô hình}\fancyhead[R]{\small Các nguyên tắc giải toán}\fancyfoot[C]{\thepage}
+\newcommand{\fig}[3][.68]{\begin{center}\includegraphics[width=#1\linewidth]{assets/#2.png}\\{\small #3}\end{center}}
+\newcommand{\ex}[1]{\par\medskip\noindent\textbf{Ví dụ #1.}\ }
+\newcommand{\sol}{\par\noindent\textit{Lời giải.}\ }
+\newcommand{\bt}[1]{\par\smallskip\noindent\textbf{#1.}\ }
+\newcommand{\group}[1]{\par\medskip\noindent\textbf{#1}\par}
+\begin{document}
+\begin{center}
+{\Large\bfseries GIẢI TÍCH}\\[5pt]
+{\Large\bfseries CÁC NGUYÊN TẮC GIẢI TOÁN}\\[5pt]
+{\large Principles of Problem Solving}
+\end{center}
+\noindent\textbf{Nguồn:} James Stewart, Daniel K. Clegg, Saleem Watson, \textit{Calculus: Early Transcendentals}, ấn bản thứ 9 (2020), trang in 70–76 (trang PDF 105–111).
+
+Không có những quy tắc cứng nhắc nào bảo đảm thành công khi giải toán. Tuy nhiên, có thể phác thảo một số bước tổng quát trong quá trình giải toán và nêu những nguyên tắc hữu ích đối với một số bài toán. Những bước và nguyên tắc này chỉ là sự diễn đạt tường minh của lẽ suy xét thông thường. Chúng được phỏng theo cuốn \textit{How To Solve It} của George Polya.
+\section*{1. Hiểu bài toán}
+Bước đầu tiên là đọc đề bài và bảo đảm rằng mình đã hiểu rõ. Hãy tự đặt các câu hỏi:
+\begin{quote}
+Đại lượng cần tìm là gì?\\
+Những đại lượng nào đã cho?\\
+Những điều kiện nào đã cho?
+\end{quote}
+Đối với nhiều bài toán, việc \textbf{vẽ hình} và xác định trên hình các đại lượng đã cho cùng các đại lượng cần tìm là hữu ích.
+
+Thông thường, cần \textbf{đưa vào những ký hiệu thích hợp}. Khi chọn ký hiệu cho các đại lượng chưa biết, ta thường dùng các chữ như $a,b,c,m,n,x,y$; nhưng đôi khi nên dùng chữ cái đầu có tính gợi nhớ, chẳng hạn $V$ cho thể tích hoặc $t$ cho thời gian.
+\section*{2. Lập kế hoạch}
+Hãy tìm mối liên hệ giữa dữ kiện và đại lượng cần tìm, sao cho từ đó có thể tính được đại lượng ấy. Việc tự hỏi một cách rõ ràng: ``Làm thế nào liên hệ dữ kiện với đại lượng cần tìm?'' thường hữu ích. Nếu chưa thấy ngay mối liên hệ, những gợi ý sau có thể giúp xây dựng kế hoạch.
+
+\noindent\textbf{Nhận ra điều quen thuộc.} Liên hệ tình huống đã cho với kiến thức đã biết. Xét đại lượng cần tìm và cố nhớ một bài toán quen thuộc hơn có đại lượng cần tìm tương tự.
+
+\noindent\textbf{Nhận ra quy luật.} Một số bài toán được giải bằng cách nhận ra một quy luật đang xuất hiện. Quy luật đó có thể mang tính hình học, số học hoặc đại số. Nếu nhận thấy tính đều đặn hoặc sự lặp lại, ta có thể dự đoán quy luật tiếp diễn rồi chứng minh dự đoán ấy.
+
+\noindent\textbf{Dùng phép tương tự.} Hãy nghĩ đến một bài toán tương tự, tức một bài toán gần giống hoặc có liên quan, nhưng dễ hơn bài toán ban đầu. Giải được bài toán đơn giản ấy có thể đem lại những gợi ý cần thiết để giải bài toán khó hơn. Chẳng hạn, nếu đề bài chứa các số rất lớn, trước hết có thể thử một bài tương tự với các số nhỏ hơn. Nếu bài toán thuộc hình học không gian, có thể tìm một bài tương tự trong hình học phẳng. Nếu bài toán ban đầu mang tính tổng quát, có thể thử trước một trường hợp riêng.
+
+\noindent\textbf{Đưa thêm yếu tố phụ.} Đôi khi cần đưa vào một yếu tố mới, một phương tiện phụ trợ, để nối dữ kiện với đại lượng cần tìm. Trong bài toán có hình vẽ, yếu tố phụ có thể là một đường kẻ thêm. Trong bài toán đại số, đó có thể là một ẩn phụ liên hệ với ẩn ban đầu.
+
+\noindent\textbf{Chia trường hợp.} Đôi khi cần chia bài toán thành nhiều trường hợp và lập luận riêng cho từng trường hợp. Chẳng hạn, ta thường dùng phương pháp này khi xử lý giá trị tuyệt đối.
+
+\noindent\textbf{Suy ngược.} Đôi khi nên hình dung bài toán đã được giải, rồi lần ngược từng bước cho đến khi trở về các dữ kiện đã cho. Khi ấy, có thể đảo chiều các bước để xây dựng lời giải cho bài toán ban đầu. Cách làm này thường được dùng khi giải phương trình. Chẳng hạn, để giải $3x-5=7$, ta giả sử $x$ là một số thỏa mãn phương trình ấy rồi suy ngược. Cộng 5 vào hai vế, sau đó chia hai vế cho 3, ta được $x=4$. Vì mỗi bước đều đảo ngược được, bài toán đã được giải.
+
+\noindent\textbf{Đặt mục tiêu trung gian.} Với một bài toán phức tạp, việc đặt những mục tiêu trung gian, trong đó yêu cầu chỉ được đáp ứng một phần, thường có ích. Nếu đạt được các mục tiêu ấy trước, ta có thể dựa vào đó để đạt mục tiêu cuối cùng.
+
+\noindent\textbf{Lập luận gián tiếp.} Đôi khi nên tiếp cận bài toán một cách gián tiếp. Khi dùng chứng minh phản chứng để chứng minh $P$ kéo theo $Q$, ta giả sử $P$ đúng và $Q$ sai, rồi tìm hiểu vì sao điều này không thể xảy ra. Ta phải dùng thông tin ấy để dẫn đến mâu thuẫn với một điều chắc chắn đúng.
+
+\noindent\textbf{Quy nạp toán học.} Khi chứng minh các mệnh đề có chứa số nguyên dương $n$, nguyên lý sau thường hữu ích.
+\begin{quote}
+\textbf{Nguyên lý quy nạp toán học.} Cho $S_n$ là một mệnh đề về số nguyên dương $n$. Giả sử:
+
+1. $S_1$ đúng.
+
+2. Mỗi khi $S_k$ đúng thì $S_{k+1}$ cũng đúng.
+
+Khi đó $S_n$ đúng với mọi số nguyên dương $n$.
+\end{quote}
+Điều này hợp lý vì $S_1$ đúng nên điều kiện 2 với $k=1$ cho $S_2$ đúng. Tiếp tục dùng điều kiện 2 với $k=2$, ta có $S_3$ đúng; dùng với $k=3$, ta có $S_4$ đúng. Quá trình ấy có thể tiếp tục vô hạn.
+\section*{3. Thực hiện kế hoạch}
+Ở Bước 2, ta đã lập một kế hoạch. Khi thực hiện, cần kiểm tra từng giai đoạn và trình bày những chi tiết chứng minh rằng mỗi giai đoạn đều đúng.
+\section*{4. Nhìn lại lời giải}
+Sau khi hoàn thành, nên xem lại lời giải: một mặt để phát hiện sai sót, mặt khác để tìm xem có cách giải nào đơn giản hơn hay không. Việc xem lại còn giúp ta nắm vững phương pháp, có thể dùng cho những bài toán sau này. Descartes nói: ``Mỗi bài toán tôi giải được đều trở thành một quy tắc giúp tôi giải những bài toán khác về sau.''
+
+Các ví dụ sau minh họa những nguyên tắc trên. Trước khi đọc lời giải, hãy tự giải; nếu gặp khó khăn, hãy tham khảo các nguyên tắc này. Khi làm bài tập ở những chương còn lại, thỉnh thoảng quay lại phần này cũng có thể hữu ích.
+\section*{Ví dụ minh họa}
+\ex{1} Biểu diễn cạnh huyền $h$ của một tam giác vuông có diện tích $25\,\mathrm{m}^2$ như một hàm của chu vi $P$.
+\sol Trước hết, hệ thống hóa thông tin bằng cách xác định đại lượng cần tìm và dữ kiện:
+\begin{quote}
+Đại lượng cần tìm: cạnh huyền $h$.\\
+Các đại lượng đã cho: chu vi $P$, diện tích $25\,\mathrm{m}^2$.
+\end{quote}
+\noindent\textit{Gợi ý giải toán: Hiểu bài toán; vẽ hình.}
+
+Việc vẽ hình là hữu ích; ta thực hiện ở Hình 1.
+\fig[.45]{f01}{Hình 1. Tam giác vuông có hai cạnh góc vuông $a,b$ và cạnh huyền $h$.}
+Để nối dữ kiện với đại lượng cần tìm, ta đưa thêm hai biến $a,b$ là độ dài hai cạnh còn lại. Khi đó, điều kiện tam giác vuông được biểu diễn bằng định lý Pythagore:
+\[h^2=a^2+b^2.\]
+Các mối liên hệ khác được viết từ diện tích và chu vi:
+\[25=\tfrac12 ab,\qquad P=a+b+h.\]
+\noindent\textit{Gợi ý giải toán: Liên hệ dữ kiện với đại lượng cần tìm; đưa thêm yếu tố phụ.}
+
+Vì $P$ đã cho, ta có ba phương trình với ba ẩn $a,b,h$:
+\begin{align}
+h^2&=a^2+b^2,\tag{1}\\
+25&=\tfrac12 ab,\tag{2}\\
+P&=a+b+h.\tag{3}
+\end{align}
+Tuy số phương trình bằng số ẩn, việc giải trực tiếp không đơn giản. Nhưng nguyên tắc nhận ra điều quen thuộc giúp giải dễ hơn. Xét các vế phải của (1), (2), (3): chúng chứa những thành phần của hằng đẳng thức quen thuộc
+\[(a+b)^2=a^2+2ab+b^2.\]
+\noindent\textit{Gợi ý giải toán: Liên hệ với điều quen thuộc.}
+
+Theo ý tưởng này, ta biểu diễn $(a+b)^2$ theo hai cách. Từ (1), (2),
+\[(a+b)^2=(a^2+b^2)+2ab=h^2+4(25)=h^2+100.\]
+Từ (3),
+\[(a+b)^2=(P-h)^2=P^2-2Ph+h^2.\]
+Do đó,
+\begin{align*}
+h^2+100&=P^2-2Ph+h^2,\\
+2Ph&=P^2-100,\\
+h&=\frac{P^2-100}{2P}.
+\end{align*}
+Đây là biểu thức cần tìm của $h$ theo $P$.\hfill$\square$
+
+Ví dụ kế tiếp cho thấy khi xử lý giá trị tuyệt đối, thường cần dùng nguyên tắc chia trường hợp.
+\ex{2} Giải bất phương trình $|x-3|+|x+2|<11$.
+\sol Nhắc lại định nghĩa giá trị tuyệt đối:
+\[|x|=\begin{cases}x,&x\ge0,\\-x,&x<0.\end{cases}\]
+Suy ra
+\begin{align*}
+|x-3|&=\begin{cases}x-3,&x-3\ge0,\\-(x-3),&x-3<0\end{cases}
+=\begin{cases}x-3,&x\ge3,\\-x+3,&x<3;\end{cases}\\
+|x+2|&=\begin{cases}x+2,&x+2\ge0,\\-(x+2),&x+2<0\end{cases}
+=\begin{cases}x+2,&x\ge-2,\\-x-2,&x<-2.\end{cases}
+\end{align*}
+Các biểu thức này cho thấy cần xét ba trường hợp:
+\[x<-2;\qquad -2\le x<3;\qquad x\ge3.\]
+\noindent\textit{Gợi ý giải toán: Chia trường hợp.}
+
+\noindent\textbf{Trường hợp I.} Nếu $x<-2$, ta có
+\begin{align*}
+|x-3|+|x+2|&<11,\\
+-x+3-x-2&<11,\\
+-2x&<10,\\
+x&>-5.
+\end{align*}
+\noindent\textbf{Trường hợp II.} Nếu $-2\le x<3$, bất phương trình trở thành
+\[-x+3+x+2<11,\qquad 5<11\quad\text{(luôn đúng)}.\]
+\noindent\textbf{Trường hợp III.} Nếu $x\ge3$, ta được
+\[x-3+x+2<11,\qquad 2x<12,\qquad x<6.\]
+Kết hợp ba trường hợp, bất phương trình thỏa mãn khi $-5<x<6$. Vậy tập nghiệm là khoảng $(-5,6)$.\hfill$\square$
+
+Trong ví dụ sau, trước hết ta dự đoán kết quả bằng cách xét các trường hợp riêng và nhận ra quy luật, rồi chứng minh dự đoán bằng quy nạp toán học.
+
+Khi dùng nguyên lý quy nạp toán học, ta thực hiện ba bước:
+\begin{quote}
+\textbf{Bước 1.} Chứng minh $S_n$ đúng khi $n=1$.
+
+\textbf{Bước 2.} Giả sử $S_n$ đúng khi $n=k$, rồi suy ra $S_n$ đúng khi $n=k+1$.
+
+\textbf{Bước 3.} Kết luận $S_n$ đúng với mọi $n$ theo nguyên lý quy nạp toán học.
+\end{quote}
+\ex{3} Cho $f_0(x)=x/(x+1)$ và $f_{n+1}=f_0\circ f_n$ với $n=0,1,2,\ldots$. Tìm công thức của $f_n(x)$.
+\sol Trước hết, tìm công thức trong các trường hợp riêng $n=1,2,3$:
+\begin{align*}
+f_1(x)&=(f_0\circ f_0)(x)=f_0\bigl(f_0(x)\bigr)=f_0\left(\frac{x}{x+1}\right)\\
+&=\frac{\dfrac{x}{x+1}}{\dfrac{x}{x+1}+1}
+=\frac{\dfrac{x}{x+1}}{\dfrac{2x+1}{x+1}}=\frac{x}{2x+1},\\[5pt]
+f_2(x)&=(f_0\circ f_1)(x)=f_0\bigl(f_1(x)\bigr)=f_0\left(\frac{x}{2x+1}\right)\\
+&=\frac{\dfrac{x}{2x+1}}{\dfrac{x}{2x+1}+1}
+=\frac{\dfrac{x}{2x+1}}{\dfrac{3x+1}{2x+1}}=\frac{x}{3x+1},\\[5pt]
+f_3(x)&=(f_0\circ f_2)(x)=f_0\bigl(f_2(x)\bigr)=f_0\left(\frac{x}{3x+1}\right)\\
+&=\frac{\dfrac{x}{3x+1}}{\dfrac{x}{3x+1}+1}
+=\frac{\dfrac{x}{3x+1}}{\dfrac{4x+1}{3x+1}}=\frac{x}{4x+1}.
+\end{align*}
+\noindent\textit{Gợi ý giải toán: Dùng phép tương tự, thử một bài toán gần giống nhưng đơn giản hơn; tìm quy luật.}
+
+Ta nhận ra quy luật: hệ số của $x$ ở mẫu số là $n+1$ trong cả ba trường hợp. Vì vậy, dự đoán công thức tổng quát
+\begin{equation}f_n(x)=\frac{x}{(n+1)x+1}.\tag{4}\end{equation}
+Để chứng minh, dùng nguyên lý quy nạp toán học. Ta đã kiểm tra (4) đúng khi $n=1$. Giả sử đúng khi $n=k$, tức là
+\[f_k(x)=\frac{x}{(k+1)x+1}.\]
+Khi đó,
+\begin{align*}
+f_{k+1}(x)&=(f_0\circ f_k)(x)=f_0\bigl(f_k(x)\bigr)=f_0\left(\frac{x}{(k+1)x+1}\right)\\
+&=\frac{\dfrac{x}{(k+1)x+1}}{\dfrac{x}{(k+1)x+1}+1}
+=\frac{\dfrac{x}{(k+1)x+1}}{\dfrac{(k+2)x+1}{(k+1)x+1}}
+=\frac{x}{(k+2)x+1}.
+\end{align*}
+Biểu thức này cho thấy (4) đúng khi $n=k+1$. Theo quy nạp toán học, công thức đúng với mọi số nguyên dương $n$.\hfill$\square$
+\section*{Bài tập}
+\bt{1} Một cạnh góc vuông của tam giác vuông dài $4\,\mathrm{cm}$. Biểu diễn độ dài đường cao hạ xuống cạnh huyền như một hàm của độ dài cạnh huyền.
+\bt{2} Đường cao hạ xuống cạnh huyền của một tam giác vuông dài $12\,\mathrm{cm}$. Biểu diễn độ dài cạnh huyền như một hàm của chu vi.
+\bt{3} Giải phương trình $\bigl|4x-|x+1|\bigr|=3$.
+\bt{4} Giải bất phương trình $|x-1|-|x-3|\ge5$.
+\bt{5} Vẽ phác đồ thị của $f(x)=\bigl|x^2-4|x|+3\bigr|$.
+\bt{6} Vẽ phác đồ thị của $g(x)=|x^2-1|-|x^2-4|$.
+\bt{7} Vẽ đồ thị của phương trình $x+|x|=y+|y|$.
+\bt{8} Vẽ phác miền trong mặt phẳng gồm tất cả các điểm $(x,y)$ sao cho
+\[|x-y|+|x|-|y|\le2.\]
+\bt{9} Ký hiệu $\max\{a,b,\ldots\}$ chỉ số lớn nhất trong các số $a,b,\ldots$. Vẽ phác đồ thị của mỗi hàm:
+
+(a) $f(x)=\max\{x,1/x\}$.
+
+(b) $f(x)=\max\{\sin x,\cos x\}$.
+
+(c) $f(x)=\max\{x^2,2+x,2-x\}$.
+\bt{10} Vẽ phác miền trong mặt phẳng được xác định bởi mỗi phương trình hoặc bất phương trình:
+
+(a) $\max\{x,2y\}=1$.
+
+(b) $-1\le\max\{x,2y\}\le1$.
+
+(c) $\max\{x,y^2\}=1$.
+\bt{11} Chứng minh rằng nếu $x>0$ và $x\ne1$ thì
+\[\frac1{\log_2x}+\frac1{\log_3x}+\frac1{\log_5x}=\frac1{\log_{30}x}.\]
+\bt{12} Tìm số nghiệm của phương trình $\sin x=x/100$.
+\bt{13} Tìm giá trị chính xác của
+\[\sin\frac\pi{100}+\sin\frac{2\pi}{100}+\sin\frac{3\pi}{100}+\cdots+\sin\frac{200\pi}{100}.\]
+\bt{14} (a) Chứng minh $f(x)=\ln\bigl(x+\sqrt{x^2+1}\bigr)$ là hàm số lẻ. (b) Tìm hàm ngược của $f$.
+\bt{15} Giải bất phương trình $\ln(x^2-2x-2)\le0$.
+\bt{16} Dùng lập luận gián tiếp để chứng minh $\log_2 5$ là số vô tỉ.
+\bt{17} Một người lái xe thực hiện một chuyến đi. Trên nửa đầu quãng đường, người ấy đi với tốc độ thong thả 30 dặm/giờ; trên nửa còn lại đi với tốc độ 60 dặm/giờ. Tốc độ trung bình của cả chuyến đi bằng bao nhiêu?
+\bt{18} Đẳng thức $f\circ(g+h)=f\circ g+f\circ h$ có đúng không?
+\bt{19} Chứng minh rằng với mọi số nguyên dương $n$, số $7^n-1$ chia hết cho 6.
+\bt{20} Chứng minh $1+3+5+\cdots+(2n-1)=n^2$.
+\bt{21} Cho $f_0(x)=x^2$ và $f_{n+1}(x)=f_0\bigl(f_n(x)\bigr)$ với $n=0,1,2,\ldots$. Tìm công thức của $f_n(x)$.
+\bt{22} (a) Cho $f_0(x)=\dfrac1{2-x}$ và $f_{n+1}=f_0\circ f_n$ với $n=0,1,2,\ldots$. Tìm biểu thức của $f_n(x)$ rồi chứng minh bằng quy nạp toán học.
+
+(b) Vẽ đồ thị $f_0,f_1,f_2,f_3$ trên cùng một màn hình và mô tả tác động của phép hợp lặp lại. \textit{(Dùng công cụ vẽ đồ thị.)}
+\section*{Ghi chú biên tập}
+Các lưu ý sau bổ sung điều kiện xác định; nội dung và số thứ tự của sách được giữ nguyên ở trên.
+
+\noindent\textbf{Ví dụ 1.} Với diện tích $25\,\mathrm{m}^2$, chu vi tam giác vuông phải thỏa mãn $P\ge10+10\sqrt2$ (tính bằng mét). Dấu bằng ứng với tam giác vuông cân. Công thức tìm được cần hiểu trên miền hình học này.
+
+\noindent\textbf{Ví dụ 3.} Công thức rút gọn (4) đúng trên miền xác định của hàm hợp ban đầu:
+\[D_n=\mathbb R\setminus\left\{-1,-\frac12,\ldots,-\frac1{n+1}\right\},\qquad n\ge0.\]
+Không được chỉ loại nghiệm của mẫu số cuối cùng rồi bổ sung trở lại các điểm đã bị loại ở những bước hợp trước. Công thức (4) cũng đúng khi $n=0$ trên $D_0$.
+
+\noindent\textbf{Bài tập.} Chỉ dịch đề bài, không bổ sung đáp án. Các bất phương trình ở Bài tập 4, 8, 10(b), 15 lần lượt giữ đúng các dấu $\ge$, $\le$, $\le$, $\le$ của bản gốc.
+\section*{Thuật ngữ bổ sung}
+\begin{center}\begin{tabular}{ll}\toprule Tiếng Anh&Tiếng Việt thống nhất\\\midrule
+problem solving&giải toán\\
+analogy&phép tương tự\\
+auxiliary aid&yếu tố phụ trợ\\
+work backward&suy ngược\\
+subgoal&mục tiêu trung gian\\
+indirect reasoning&lập luận gián tiếp\\
+proof by contradiction&chứng minh phản chứng\\
+mathematical induction&quy nạp toán học\\
+induction hypothesis&giả thiết quy nạp\\
+repeated composition&phép hợp lặp lại\\
+\bottomrule\end{tabular}\end{center}
+\noindent\textbf{Phạm vi hoàn thành:} Trọn phần \textit{Các nguyên tắc giải toán}, trang in 70–76, gồm bốn bước giải toán, nguyên lý quy nạp toán học, 3 ví dụ, Hình 1, các công thức (1)–(4) và 22 bài tập. Phần tiếp theo: \textit{Chương 2. Giới hạn và đạo hàm}, mở đầu ở trang in 77; §2.1 bắt đầu ở trang in 78.
+\end{document}

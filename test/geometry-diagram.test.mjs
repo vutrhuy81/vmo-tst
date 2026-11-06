@@ -57,9 +57,10 @@ const { mathematicalAuditInstruction, auditEvidence }=await import('../lib/math-
 let signedIn=true, blocked=false, approval=true, diagram=triangle;
 const calls=[];
 const { generateGuideDiagram } = await import('../lib/guide-diagram.js');
-const route=new Function('generateGuideDiagram', 'inspectGeometryDiagram', 'geometrySchema','geometryInstruction','selectGuideGeometry','cleanGeometryDiagram','mathematicalAuditInstruction','auditEvidence','retrieveVerifiedContext','getSession','checkRateLimit','generateJson','parseBody','prepare','text','generateOpenAIJson',routeSource+';return handler;')(
-  generateGuideDiagram,inspectGeometryDiagram,geometrySchema,geometryInstruction,selectGuideGeometry,clean,mathematicalAuditInstruction,auditEvidence,
-  async()=>({blocked,statement:'CANONICAL triangle ABC',topic:'Hình học phẳng',block:'No reference'}),()=>signedIn?{username:'student'}:null,()=>true,
+let bookAssetKeys=[];
+const route=new Function('readBookProblemImages','generateGuideDiagram', 'inspectGeometryDiagram', 'geometrySchema','geometryInstruction','selectGuideGeometry','cleanGeometryDiagram','mathematicalAuditInstruction','auditEvidence','retrieveVerifiedContext','getSession','checkRateLimit','generateJson','parseBody','prepare','text','generateOpenAIJson',routeSource+';return handler;')(
+  async()=>['data:image/png;base64,cG5n'],generateGuideDiagram,inspectGeometryDiagram,geometrySchema,geometryInstruction,selectGuideGeometry,clean,mathematicalAuditInstruction,auditEvidence,
+  async()=>({blocked,bookAssetKeys,statement:'CANONICAL triangle ABC',topic:'Hình học phẳng',block:'No reference'}),()=>signedIn?{username:'student'}:null,()=>true,
   async args=>{calls.push(args);return{data:triangle,model:'solver'}}, req=>req.body,()=>{},(v,max=50000)=>String(v??'').slice(0,max),
   async args=>{calls.push(args);return{data:{approved:approval,geometry:diagram},model:'reviewer'}}
 );
@@ -71,6 +72,10 @@ assert.equal((await request({mode:'diagram',problemContent:'x'})).code,400);
 approval=false;assert.equal((await request()).code,422);approval=true;
 diagram=mutate(v=>v.points[0].x=NaN);assert.equal((await request()).code,422);
 
+bookAssetKeys=['stewart-1-1-47c33e6c/e03.png'];calls.length=0;
+await request({problemContent:'graph',contentKey:'books:section:exercise-3'});
+assert.equal(calls[0].contents.parts[1].inlineData.data,'cG5n');assert.deepEqual(calls[1].imageDataUrls,['data:image/png;base64,cG5n']);
+bookAssetKeys=[];
 const { createHarness } = await import('./ai-guide-editor.test.mjs');
 const guide={branch:'Hình học phẳng',knowledge:'Tam giác',intuition:'Dựng H',solution:'Lời giải với $AH \\perp BC$.',pitfalls:'Các trường hợp suy biến.',geometry:triangle,geometryRequested:true};
 for(const persisted of [false,true])for(const support of [false,true]){

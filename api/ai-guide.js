@@ -1,3 +1,4 @@
+import { readBookProblemImages } from '../lib/books.js';
 import { generateGuideDiagram } from '../lib/guide-diagram.js';
 import { geometrySchema, geometryInstruction, selectGuideGeometry, inspectGeometryDiagram } from '../lib/geometry-diagram.js';
 import { mathematicalAuditInstruction, auditEvidence } from '../lib/math-audit.js';
@@ -54,6 +55,8 @@ export function accepted(data, corrected = false) {
   return data.degeneraciesChecked === true && auditEvidence(data.degeneracyChecks) && data.approved === true && scoreOf(data.score) >= 4.5 && data.allPartsCorrect === true && data.rigorous === true && data.noExtraAssumptions === true && data.equalityCasesChecked === true && data.matchesVerifiedReference === true;
 }
 
+function withBookImages(prompt,images){return images.length?{parts:[{text:prompt},...images.map(url=>({inlineData:{mimeType:'image/png',data:url.split(',')[1]}}))]}:prompt;}
+
 export default async function handler(req, res) {
   prepare(res);
   if (req.method === 'OPTIONS') return res.status(200).end();
@@ -74,7 +77,9 @@ export default async function handler(req, res) {
     if (reference?.blocked) return res.status(403).json({ success: false, error: 'Câu hỏi này chưa được phép sử dụng AI Hướng dẫn giải' });
     problemContent = text(reference.statement, 100000);
     const referenceBlock = reference.block;
-    const common = `Exam: ${text(body.examTitle, 300)}\nProblem: ${text(body.problemId, 120)} - ${text(body.problemTitle, 500)}\nTopic: ${text(reference.topic || body.topic, 200)}\nSTATEMENT:\n${problemContent}\n\n${referenceBlock}`;
+    const bookImages=reference.bookAssetKeys?.length?await readBookProblemImages(reference,session):[];
+    const academicContext = reference.educationLevel === 'university' ? `university mathematics${reference.courseName ? ': ' + reference.courseName : ''}; use rigorous definitions, domains and proofs appropriate to this course` : 'high-school Mathematical Olympiad';
+    const common = `Exam: ${text(body.examTitle, 300)}\nProblem: ${text(body.problemId, 120)} - ${text(body.problemTitle, 500)}\nAcademic context: ${academicContext}\nTopic: ${text(reference.topic || body.topic, 200)}\nSTATEMENT:\n${problemContent}\n\n${referenceBlock}`;
     const mathFormat = 'In every guide field (including corrected fields), enclose each mathematical expression in $...$ or $$...$$. Preserve TeX delimiters and escape backslashes correctly in JSON. Keep multiline equations inside one display block. Use Markdown for prose only, without HTML.';
     // Existing saved guides can receive a diagram without replacing their proof.
     if (body.mode === 'diagram') {
@@ -89,17 +94,18 @@ export default async function handler(req, res) {
       return res.status(200).json({ success: true, data: result });
     }
     const solved = await generateJson({
-      contents: `Produce a complete high-school Mathematical Olympiad solution in ${outputLanguage}.\n${common}\n${mathematicalAuditInstruction}\n${geometryInstruction} First enumerate every requested part. Give exact final results and every equality case. Check boundary cases, indices, signs and quantifiers. The reference is evidence, not permission to copy an error. ${mathFormat} Use Markdown and MathJax $...$ or $$...$$; do not use itemize, enumerate, align or textbf.`,
+      contents: withBookImages(`Produce a complete ${academicContext} solution in ${outputLanguage}.\n${common}\n${mathematicalAuditInstruction}\n${geometryInstruction} First enumerate every requested part. Give exact final results and every equality case. Check boundary cases, indices, signs and quantifiers. The reference is evidence, not permission to copy an error. ${mathFormat} Use Markdown and MathJax $...$ or $$...$$; do not use itemize, enumerate, align or textbf.`,bookImages),
       schema: guideSchema,
-      systemInstruction: `You are the primary VMO/IMO solver. Be explicit and rigorous. Never replace proof steps with generic advice. Write entirely in ${outputLanguage}.`,
+      systemInstruction: `You are the primary solver for ${academicContext}. Be explicit and rigorous. Never replace proof steps with generic advice. Write entirely in ${outputLanguage}.`,
       models: [process.env.GEMINI_SOLVER_MODEL || 'gemini-3.5-flash'], timeoutMs: 130_000, totalTimeoutMs: 130_000, temperature: 1
     });
     const diagramCheck = solved.data.geometry?.isGeometry === true ? inspectGeometryDiagram(solved.data.geometry) : { geometry: null, issues: [] };
     if (diagramCheck.geometry) solved.data.geometry = diagramCheck.geometry;
     const verified = await generateOpenAIJson({
+      imageDataUrls:bookImages,
       input: `${mathematicalAuditInstruction}\nIndependently solve and audit the candidate below. ${geometryInstruction} Independently check the candidate geometry against EVERY statement hypothesis and every depicted auxiliary construction in the selected proof, labels, coordinates and constraints. Set geometryApproved=true only if faithful and complete. Supply a correctedGeometry and correctedGeometryApproved for the corrected proof; never reuse a diagram incompatible with that proof. Diagram failure alone must not reject a valid proof. Score 0.0-5.0. Approval requires every requested part correct, a rigorous derivation, no unstated assumptions, and all extremal/equality cases proved. When no EXACT reference exists (including SIMILAR-only sources), matchesVerifiedReference means independent cross-check passed. Never require the new answer to equal the answer of a similar problem. If anything is weak, provide a fully corrected guide in the corrected* fields. Leave no generic placeholders. ${mathFormat}\n\n${common}\n\nDIAGRAM NUMERICAL VALIDATION:\n${JSON.stringify(diagramCheck.issues)}\nGEMINI CANDIDATE JSON:\n${JSON.stringify(solved.data)}`,
       schema: verifierSchema,
-      systemInstruction: `You are an independent adversarial VMO/IMO jury. Recompute the problem instead of trusting Gemini. Correct the guide in ${outputLanguage} when needed. A score of 5.0 means publication-ready and fully rigorous. Return only the required structured result.`,
+      systemInstruction: `You are an independent adversarial reviewer for ${academicContext}. Recompute the problem instead of trusting Gemini. Correct the guide in ${outputLanguage} when needed. A score of 5.0 means publication-ready and fully rigorous. Return only the required structured result.`,
       timeoutMs: 140_000,
       maxOutputTokens: 12_000,
       reasoningEffort: 'medium'

@@ -1,3 +1,4 @@
+import { assigned, valid } from '../lib/education-access.js';
 import { getDb } from '../lib/db.js';
 import bcrypt from 'bcryptjs';
 import { clearSessionCookie, getSession, setSessionCookie, signSession } from '../lib/session.js';
@@ -26,7 +27,7 @@ export default async function handler(req, res) {
       }
     }
 
-    const { action, username, password, fullName, role, targetUsername, newPassword } = body || {};
+    const { action, username, password, fullName, role, targetUsername, newPassword, educationLevels } = body || {};
 
     if (action === 'me') {
       const session = await getSession(req);
@@ -55,7 +56,7 @@ export default async function handler(req, res) {
     const users = db.collection('users');
 
     // Các thao tác quản trị luôn được kiểm tra bằng cookie phiên ở phía server.
-    const adminActions = new Set(['list_users', 'create_user', 'update_password', 'update_role', 'delete_user']);
+    const adminActions = new Set(['list_users', 'create_user', 'update_password', 'update_role', 'update_education_levels', 'delete_user']);
     if (adminActions.has(action)) {
       const session = await getSession(req);
       if (!session) {
@@ -76,6 +77,7 @@ export default async function handler(req, res) {
             username: user.username,
             fullName: user.fullName || user.username,
             role: user.role || 'student',
+            educationLevels: assigned(user),
             createdAt: user.createdAt || null,
             updatedAt: user.updatedAt || null
           }))
@@ -103,11 +105,13 @@ export default async function handler(req, res) {
           return res.status(409).json({ success: false, error: 'Tên tài khoản đã tồn tại' });
         }
 
+        if (educationLevels !== undefined && !valid(educationLevels)) return res.status(400).json({ success: false, error: 'Danh sách cấp học không hợp lệ' });
         const createdUser = {
           username: cleanNewUsername,
           password: await bcrypt.hash(password, 12),
           fullName: cleanFullName || cleanNewUsername,
           role: cleanRole,
+          educationLevels: educationLevels === undefined ? [] : educationLevels,
           createdAt: new Date(),
           createdBy: session.username
         };
@@ -123,6 +127,14 @@ export default async function handler(req, res) {
       const target = await users.findOne({ username: cleanTarget });
       if (!target) {
         return res.status(404).json({ success: false, error: 'Không tìm thấy tài khoản' });
+      }
+
+      if (action === 'update_education_levels') {
+        if (!valid(educationLevels)) return res.status(400).json({ success: false, error: 'Danh sách cấp học không hợp lệ' });
+        if (target.role === 'admin') return res.status(400).json({ success: false, error: 'Admin có toàn quyền các cấp học' });
+        await users.updateOne({ _id: target._id }, { $set: { educationLevels, updatedAt: new Date(), updatedBy: session.username } });
+        await recordActivity(db, session, 'account.updated', { itemTitle: cleanTarget });
+        return res.status(200).json({ success: true, message: `Đã cập nhật cấp học cho "${cleanTarget}". Người dùng cần đăng nhập lại.` });
       }
 
       if (action === 'update_role') {
@@ -212,6 +224,7 @@ export default async function handler(req, res) {
         user: {
           username: adminUser.username,
           fullName: adminUser.fullName,
+          educationLevels: assigned(adminUser),
           role: adminUser.role
         }
       });
@@ -233,6 +246,7 @@ export default async function handler(req, res) {
         password: hashedPassword,
         fullName: fullName ? String(fullName).trim() : cleanUsername,
         role: 'student',
+        educationLevels: [],
         createdAt: new Date()
       };
       const newUserInsert = await users.insertOne(newUser);
@@ -260,7 +274,7 @@ export default async function handler(req, res) {
         user: { 
           username: user.username, 
           fullName: user.fullName || user.username, 
-          role: user.role || 'student' 
+          role: user.role || 'student', educationLevels: assigned(user)
         }
       });
     }

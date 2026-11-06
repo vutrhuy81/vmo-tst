@@ -1,0 +1,241 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage{fontspec}\setmainfont{Latin Modern Roman}\setsansfont{DejaVu Sans}
+\usepackage{amsmath,amssymb,graphicx,geometry,enumitem,longtable,booktabs,fancyhdr,hyperref}
+\geometry{left=28mm,right=23mm,top=24mm,bottom=24mm}
+\hypersetup{unicode=true,colorlinks=true,linkcolor=black,urlcolor=blue,pdftitle={Giải tích Chương 1 Mục 1.4 Hàm số mũ}}
+\setlength{\parindent}{1.2em}\setlength{\parskip}{4pt}\setlength{\headheight}{16pt}
+\pagestyle{fancy}\fancyhf{}\fancyhead[L]{\small Chương 1. Hàm số và mô hình}\fancyhead[R]{\small §1.4}\fancyfoot[C]{\thepage}
+\newcommand{\fig}[3][.68]{\begin{center}\includegraphics[width=#1\linewidth]{assets/#2.png}\\{\small #3}\end{center}}
+\newcommand{\ex}[1]{\par\medskip\noindent\textbf{Ví dụ #1.}\ }
+\newcommand{\sol}{\par\noindent\textit{Lời giải.}\ }
+\newcommand{\bt}[1]{\par\smallskip\noindent\textbf{#1.}\ }
+\newcommand{\group}[1]{\par\medskip\noindent\textbf{#1}\par}
+\begin{document}
+\begin{center}
+{\Large\bfseries GIẢI TÍCH}\\[5pt]
+{\large Chương 1. Hàm số và mô hình}\\[9pt]
+{\Large\bfseries 1.4. Hàm số mũ}
+\end{center}
+\noindent\textbf{Nguồn:} James Stewart, Daniel K. Clegg, Saleem Watson, \textit{Calculus: Early Transcendentals}, ấn bản thứ 9. Phạm vi: từ đầu §1.4 ở trang in 45 đến hết Bài tập 35 ở trang in 53 (trang PDF 80–88), trước §1.5.
+
+\noindent\textbf{Quy ước biên tập:} Kế thừa thuật ngữ của §1.1–§1.3; giữ số ví dụ, hình, bảng và bài tập gốc. Các công thức và bảng số liệu được nhập lại. Hình được trích từ sách, kèm chú giải tiếng Việt đối với nhãn tiếng Anh còn trong hình. Dữ liệu, mốc thời gian và dự báo giữ theo nguồn. Những điểm cần làm rõ về khoa học hoặc cách diễn đạt được ghi riêng ở cuối, không thay đổi dữ liệu bài tập.
+
+Hàm số $f(x)=2^x$ được gọi là \textbf{hàm số mũ} vì biến $x$ nằm ở số mũ. Không nên nhầm nó với hàm lũy thừa $g(x)=x^2$, trong đó biến nằm ở cơ số.
+
+\section*{Hàm số mũ và đồ thị}
+Nói chung, hàm số mũ có dạng
+\[f(x)=b^x,\]
+trong đó $b$ là hằng số dương. Ta nhắc lại ý nghĩa của ký hiệu này.
+
+\noindent\textit{Chú thích bên lề của bản gốc:} Phụ lục G trình bày một cách tiếp cận khác đối với hàm số mũ và hàm lôgarit bằng phép tính tích phân.
+
+Nếu $x=n$ là số nguyên dương, thì
+\[b^n=\underbrace{b\cdot b\cdots b}_{n\ \text{thừa số}}.\]
+Nếu $x=0$, thì $b^0=1$. Nếu $x=-n$, với $n$ nguyên dương, thì
+\[b^{-n}=\frac1{b^n}.\]
+Nếu $x$ là số hữu tỉ, $x=p/q$, với $p,q$ nguyên và $q>0$, thì
+\[b^x=b^{p/q}=\sqrt[q]{b^p}=\left(\sqrt[q]b\right)^p.\]
+Nhưng $b^x$ có nghĩa gì khi $x$ là số vô tỉ? Chẳng hạn, $2^{\sqrt3}$ hoặc $5^\pi$ được hiểu như thế nào?
+
+Để trả lời, trước hết xét đồ thị $y=2^x$ khi $x$ hữu tỉ. Một hình biểu diễn đồ thị đó được cho ở Hình 1. Ta muốn mở rộng tập xác định để bao gồm cả số hữu tỉ lẫn số vô tỉ.
+\fig[.39]{f01}{Hình 1. Biểu diễn $y=2^x$ với $x$ hữu tỉ.}
+Đồ thị ở Hình 1 có những ``lỗ hổng'' tương ứng với các giá trị vô tỉ của $x$. Ta muốn lấp các lỗ hổng bằng cách định nghĩa $f(x)=2^x$ với $x\in\mathbb R$ sao cho $f$ là hàm đồng biến. Cụ thể, vì
+\[1.7<\sqrt3<1.8,\]
+ta phải có
+\[2^{1.7}<2^{\sqrt3}<2^{1.8}.\]
+Ta đã biết ý nghĩa của $2^{1.7}$ và $2^{1.8}$ vì $1.7$, $1.8$ là số hữu tỉ. Tương tự, dùng các xấp xỉ tốt hơn của $\sqrt3$, ta có các xấp xỉ tốt hơn của $2^{\sqrt3}$:
+\begin{align*}
+1.73<\sqrt3<1.74&\quad\Longrightarrow\quad2^{1.73}<2^{\sqrt3}<2^{1.74},\\
+1.732<\sqrt3<1.733&\quad\Longrightarrow\quad2^{1.732}<2^{\sqrt3}<2^{1.733},\\
+1.7320<\sqrt3<1.7321&\quad\Longrightarrow\quad2^{1.7320}<2^{\sqrt3}<2^{1.7321},\\
+1.73205<\sqrt3<1.73206&\quad\Longrightarrow\quad2^{1.73205}<2^{\sqrt3}<2^{1.73206},\\
+&\hspace{3em}\vdots
+\end{align*}
+Có thể chứng minh tồn tại đúng một số lớn hơn mọi số trong dãy
+\[2^{1.7},\quad2^{1.73},\quad2^{1.732},\quad2^{1.7320},\quad2^{1.73205},\quad\ldots\]
+và nhỏ hơn mọi số trong dãy
+\[2^{1.8},\quad2^{1.74},\quad2^{1.733},\quad2^{1.7321},\quad2^{1.73206},\quad\ldots\]
+Ta định nghĩa $2^{\sqrt3}$ là số đó. Bằng quá trình xấp xỉ trên, có thể tính chính xác đến sáu chữ số thập phân:
+\[2^{\sqrt3}\approx3.321997.\]
+\noindent\textit{Chú thích bên lề:} Một chứng minh được trình bày trong J. Marsden và A. Weinstein, \textit{Calculus Unlimited} (Menlo Park, CA: Benjamin/Cummings, 1981).
+
+Tương tự, ta định nghĩa được $2^x$, hoặc $b^x$ với $b>0$, khi $x$ là số vô tỉ bất kỳ. Hình 2 cho thấy các lỗ hổng trong Hình 1 được lấp đầy để hoàn thiện đồ thị $f(x)=2^x$ với $x\in\mathbb R$.
+\fig[.40]{f02}{Hình 2. $y=2^x$ với $x$ thực.}
+Hình 3 biểu diễn họ hàm $y=b^x$ ứng với các cơ số $b$ khác nhau. Mọi đồ thị đều đi qua $(0,1)$ vì $b^0=1$ khi $b\ne0$. Khi $b$ lớn hơn, hàm số mũ tăng nhanh hơn đối với $x>0$.
+\fig[.76]{f03}{Hình 3. Họ hàm số mũ với các cơ số khác nhau.}
+\noindent\textit{Chú thích bên lề:} Nếu $0<b<1$, $b^x$ tiến đến 0 khi $x$ tăng vô hạn. Nếu $b>1$, $b^x$ tiến đến 0 khi $x$ giảm qua các giá trị âm và tiến đến $-\infty$. Trong cả hai trường hợp, trục $x$ là tiệm cận ngang. Các vấn đề này được bàn ở §2.6.
+
+Từ Hình 3, có ba trường hợp cơ bản: nếu $0<b<1$, hàm số mũ nghịch biến; nếu $b=1$, hàm là hằng; nếu $b>1$, hàm đồng biến. Hình 4 minh họa ba trường hợp. Nếu $b\ne1$, tập xác định của $y=b^x$ là $\mathbb R$, tập giá trị là $(0,\infty)$. Vì
+\[\left(\frac1b\right)^x=\frac1{b^x}=b^{-x},\]
+đồ thị $y=(1/b)^x$ là ảnh đối xứng của đồ thị $y=b^x$ qua trục $y$.
+\fig[.95]{f04}{Hình 4. (a) $0<b<1$; (b) $b=1$; (c) $b>1$.}
+Một lý do khiến hàm số mũ quan trọng là các tính chất dưới đây. Với $x,y$ hữu tỉ, chúng đã quen thuộc trong đại số sơ cấp. Có thể chứng minh chúng vẫn đúng với $x,y$ thực tùy ý.
+\begin{quote}\textbf{Các quy tắc lũy thừa.} Nếu $a,b>0$ và $x,y\in\mathbb R$, thì
+\begin{align*}
+1.\quad b^{x+y}&=b^xb^y,\\
+2.\quad b^{x-y}&=\frac{b^x}{b^y},\\
+3.\quad(b^x)^y&=b^{xy},\\
+4.\quad(ab)^x&=a^xb^x.
+\end{align*}\end{quote}
+\noindent\textit{Chú thích bên lề:} Để ôn tập và luyện các quy tắc lũy thừa, sách hướng dẫn truy cập \url{https://www.StewartCalculus.com} và chọn \textit{Review of Algebra}.
+
+\ex{1} Phác họa $y=3-2^x$ và xác định tập xác định, tập giá trị.
+\sol Trước hết, lấy đối xứng đồ thị $y=2^x$ ở Hình 2 và 5(a) qua trục $x$ để được $y=-2^x$ ở Hình 5(b). Tiếp theo, tịnh tiến lên trên 3 đơn vị để được $y=3-2^x$ ở Hình 5(c). Tập xác định là $\mathbb R$, tập giá trị là $(-\infty,3)$.
+\fig[.93]{f05}{Hình 5. (a) $y=2^x$; (b) $y=-2^x$; (c) $y=3-2^x$.}
+\noindent\textit{Chú thích bên lề:} Ôn tập phép đối xứng và tịnh tiến đồ thị ở §1.3.
+
+\ex{2} Dùng máy tính vẽ đồ thị hoặc máy tính điện tử so sánh hàm số mũ $f(x)=2^x$ và hàm lũy thừa $g(x)=x^2$. Khi $x$ lớn, hàm nào tăng nhanh hơn?
+\sol Hình 6 biểu diễn hai hàm trong cửa sổ $[-2,6]\times[0,40]$. Hai đồ thị cắt nhau ba lần; khi $x>4$, đồ thị $f(x)=2^x$ luôn nằm trên $g(x)=x^2$. Hình 7 cho một cái nhìn bao quát hơn: với $x$ lớn, hàm số mũ $2^x$ tăng nhanh hơn rất nhiều so với hàm lũy thừa $x^2$.
+\fig[.54]{f06}{Hình 6. So sánh trong cửa sổ $[-2,6]\times[0,40]$.}
+\fig[.54]{f07}{Hình 7. So sánh trên một cửa sổ rộng hơn.}
+\noindent\textit{Chú thích bên lề:} Để hình dung $2^x$ tăng nhanh đến mức nào, xét một thí nghiệm tưởng tượng: bắt đầu với tờ giấy dày $1/1000$ inch và gấp đôi 50 lần. Mỗi lần gấp, độ dày tăng gấp đôi, nên độ dày cuối cùng là $2^{50}/1000$ inch. Bạn nghĩ nó dày bao nhiêu? Kết quả lớn hơn 17 triệu dặm!
+
+\section*{Ứng dụng của hàm số mũ}
+Hàm số mũ xuất hiện thường xuyên trong các mô hình toán học về tự nhiên và xã hội. Ở đây, ta giới thiệu ngắn gọn vai trò của nó trong mô tả dân số tăng và tải lượng virus giảm. Các chương sau sẽ nghiên cứu sâu hơn những ứng dụng này cùng các ứng dụng khác.
+
+Trước hết, xét một quần thể vi khuẩn trong môi trường dinh dưỡng đồng nhất. Lấy mẫu ở những khoảng thời gian nhất định, ta xác định số lượng tăng gấp đôi sau mỗi giờ. Nếu $p(t)$ là số vi khuẩn tại thời điểm $t$, tính bằng giờ, và $p(0)=1000$, thì
+\begin{align*}
+p(1)&=2p(0)=2\times1000,\\
+p(2)&=2p(1)=2^2\times1000,\\
+p(3)&=2p(2)=2^3\times1000.
+\end{align*}
+Từ quy luật đó, nói chung ta có
+\[p(t)=2^t\times1000=(1000)2^t.\]
+Hàm quần thể này là một bội hằng của $y=2^t$, nên thể hiện sự tăng nhanh ở Hình 7. Trong điều kiện lý tưởng, không gian và dinh dưỡng không hạn chế, không có bệnh, tăng trưởng theo hàm mũ là dạng tăng trưởng điển hình quan sát được trong tự nhiên.
+
+\ex{3} Bảng 1 cho dữ liệu dân số thế giới trong thế kỷ XX; Hình 8 là biểu đồ phân tán tương ứng. Dạng phân bố các điểm gợi ý tăng trưởng theo hàm mũ. Dùng máy tính có chức năng hồi quy hàm mũ để áp dụng phương pháp bình phương tối thiểu, ta thu được
+\[P(t)=(1.43653\times10^9)\cdot(1.01395)^t,\]
+trong đó $t=0$ ứng với năm 1900. Hình 9 cho đồ thị mô hình cùng dữ liệu ban đầu; đường cong khớp dữ liệu tương đối tốt. Sách giải thích giai đoạn tăng dân số tương đối chậm bằng hai cuộc chiến tranh thế giới và cuộc Đại khủng hoảng những năm 1930.
+\begin{center}\textbf{Bảng 1. Dân số thế giới}\\[4pt]
+\begin{tabular}{rr@{\qquad}rr}\toprule
+$t$ (năm từ 1900)&$P$ (triệu người)&$t$ (năm từ 1900)&$P$ (triệu người)\\\midrule
+0&1650&60&3040\\10&1750&70&3710\\20&1860&80&4450\\30&2070&90&5280\\40&2300&100&6080\\50&2560&110&6870\\\bottomrule\end{tabular}\end{center}
+\fig[.68]{f08}{Hình 8. Biểu đồ phân tán sự tăng dân số thế giới.\\ Years since 1900: số năm kể từ 1900.}
+\fig[.68]{f09}{Hình 9. Mô hình hàm mũ cho sự tăng dân số thế giới.}
+
+\ex{4} Năm 1995, một bài báo nghiên cứu công bố chi tiết ảnh hưởng của chất ức chế protease ABT-538 lên virus gây suy giảm miễn dịch ở người HIV-1.\footnote{D. Ho và cộng sự, ``Rapid Turnover of Plasma Virions and CD4 Lymphocytes in HIV-1 Infection'', \textit{Nature} 373 (1995), 123–126.} Bảng 2 cho các giá trị tải lượng virus trong huyết tương $V(t)$ của bệnh nhân 303, tính bằng số bản sao RNA/mL, sau khi bắt đầu điều trị ABT-538 $t$ ngày. Biểu đồ phân tán tương ứng ở Hình 10.
+\begin{center}\textbf{Bảng 2}\\[4pt]
+\begin{tabular}{rr}\toprule$t$ (ngày)&$V(t)$\\\midrule
+1&76.0\\4&53.0\\8&18.0\\11&9.4\\15&5.2\\22&3.6\\\bottomrule\end{tabular}\end{center}
+Sự suy giảm mạnh của tải lượng virus ở Hình 10 gợi nhớ đồ thị $y=b^x$ trong Hình 3 và 4(a), khi $b<1$. Vì vậy, ta mô hình hóa $V(t)$ bằng hàm số mũ. Dùng máy tính khớp dữ liệu với $y=a\cdot b^t$, ta được
+\[V=96.39785\cdot(0.818656)^t.\]
+Hình 11 biểu diễn hàm số này cùng các điểm dữ liệu; mô hình mô tả tương đối tốt tải lượng virus trong tháng điều trị đầu tiên.
+\fig[.59]{f10}{Hình 10. Tải lượng virus huyết tương ở bệnh nhân 303.\\ RNA copies/mL: bản sao RNA/mL; $t$ (days): $t$ (ngày).}
+\fig[.59]{f11}{Hình 11. Mô hình hàm mũ cho tải lượng virus.}
+Trong Ví dụ 3, ta dùng $y=a\cdot b^t$, $b>1$, để mô hình hóa dân số tăng; trong Ví dụ 4, dùng $y=a\cdot b^t$, $b<1$, để mô hình hóa tải lượng virus giảm. Ở §3.8, ta sẽ xét thêm các đại lượng tăng hoặc giảm theo hàm mũ, gồm giá trị tài khoản đầu tư có lãi kép và lượng chất phóng xạ còn lại khi phân rã.
+
+\section*{Số $e$}
+Trong các cơ số có thể dùng cho hàm số mũ, có một cơ số đặc biệt thuận tiện cho giải tích. Việc chọn $b$ liên quan đến cách đồ thị $y=b^x$ cắt trục $y$. Hình 12–13 cho tiếp tuyến của $y=2^x$ và $y=3^x$ tại $(0,1)$. Tiếp tuyến sẽ được định nghĩa chính xác ở §2.7; ở đây có thể tạm hình dung tiếp tuyến của đồ thị hàm số mũ tại một điểm là đường thẳng chỉ tiếp xúc với đồ thị tại điểm đó. Đo các hệ số góc, ta thấy $m\approx0.7$ đối với $y=2^x$ và $m\approx1.1$ đối với $y=3^x$.
+\fig[.41]{f12}{Hình 12. $y=2^x$, tiếp tuyến tại $(0,1)$ có $m\approx0.7$.}
+\fig[.41]{f13}{Hình 13. $y=3^x$, tiếp tuyến tại $(0,1)$ có $m\approx1.1$.}
+Như sẽ thấy ở Chương 3, một số công thức giải tích đơn giản hơn rất nhiều nếu chọn $b$ sao cho tiếp tuyến của $y=b^x$ tại $(0,1)$ có hệ số góc đúng bằng 1 (Hình 14). Thật vậy, có một số như thế, ký hiệu là $e$. Ký hiệu này được nhà toán học Thụy Sĩ Leonhard Euler chọn năm 1727; theo nhận định trong sách, có lẽ vì đây là chữ cái đầu của từ \textit{exponential}.
+\fig[.41]{f14}{Hình 14. $y=e^x$, tiếp tuyến tại $(0,1)$ có $m=1$.}
+Từ Hình 12–13, không ngạc nhiên khi $2<e<3$ và đồ thị $y=e^x$ nằm giữa các đồ thị $y=2^x$, $y=3^x$ (Hình 15). Ở Chương 3, ta sẽ thấy giá trị của $e$, làm tròn đến năm chữ số thập phân, là
+\[e\approx2.71828.\]
+Hàm $f(x)=e^x$ được gọi là \textbf{hàm số mũ tự nhiên}.
+\fig[.48]{f15}{Hình 15. Đồ thị $y=e^x$ nằm giữa $y=2^x$ và $y=3^x$.}
+
+\ex{5} Vẽ đồ thị $y=\frac12e^{-x}-1$, nêu tập xác định và tập giá trị.
+\sol Từ đồ thị $y=e^x$ ở Hình 14 và 16(a), lấy đối xứng qua trục $y$ để được $y=e^{-x}$ ở Hình 16(b). Tiếp tuyến tại giao điểm với trục $y$ có hệ số góc $-1$. Sau đó, co theo phương thẳng đứng, tung độ còn một nửa, để được $y=\frac12e^{-x}$ ở Hình 16(c). Cuối cùng, tịnh tiến xuống 1 đơn vị để được đồ thị cần tìm ở Hình 16(d). Tập xác định là $\mathbb R$, tập giá trị là $(-1,\infty)$.
+\fig[1]{f16}{Hình 16. (a) $y=e^x$; (b) $y=e^{-x}$;\\ (c) $y=\frac12e^{-x}$; (d) $y=\frac12e^{-x}-1$.}
+\noindent\begin{minipage}{\linewidth}
+Bạn nghĩ phải đi sang phải xa đến đâu để độ cao của đồ thị $y=e^x$ vượt một triệu? Ví dụ tiếp theo minh họa tốc độ tăng nhanh của hàm số bằng một câu trả lời có thể gây bất ngờ.
+
+\ex{6} Dùng máy tính vẽ đồ thị hoặc máy tính điện tử tìm các giá trị $x$ sao cho $e^x>1\,000\,000$.
+\sol Hình 17 biểu diễn $y=e^x$ và đường thẳng $y=1\,000\,000$. Hai đường cắt nhau khi $x\approx13.8$. Vì thế, theo độ chính xác của đồ thị, $e^x>10^6$ khi $x>13.8$. Điều đáng chú ý là giá trị hàm số mũ đã vượt một triệu khi $x$ mới bằng 14.
+\fig[.50]{f17}{Hình 17. So sánh $y=e^x$ với $y=10^6$.}
+\end{minipage}
+
+\clearpage
+\section*{1.4. Bài tập}
+\group{1–2. Dùng các quy tắc lũy thừa để biến đổi và rút gọn từng biểu thức.}
+\bt{1} (a) $\dfrac{-2^6}{4^3}$; (b) $\dfrac{(-3)^6}{9^6}$; (c) $\dfrac1{\sqrt[4]{x^5}}$; (d) $\dfrac{x^3\cdot x^n}{x^{n+1}}$; (e) $b^3(3b^{-1})^{-2}$; (f) $\dfrac{2x^2y}{(3x^{-2}y)^2}$.
+\bt{2} (a) $\dfrac{\sqrt[3]4}{\sqrt[3]{108}}$; (b) $27^{2/3}$; (c) $2x^2(3x^5)^2$; (d) $(2x^{-2})^{-3}x^{-3}$; (e) $\dfrac{3a^{3/2}\cdot a^{1/2}}{a^{-1}}$; (f) $\dfrac{\sqrt a\sqrt b}{\sqrt[3]{ab}}$.
+\bt{3} (a) Viết phương trình xác định hàm số mũ cơ số $b>0$. (b) Tập xác định là gì? (c) Nếu $b\ne1$, tập giá trị là gì? (d) Phác họa dạng tổng quát của đồ thị trong ba trường hợp: (i) $b>1$; (ii) $b=1$; (iii) $0<b<1$.
+\bt{4} (a) Số $e$ được định nghĩa như thế nào? (b) Giá trị gần đúng của $e$ là bao nhiêu? (c) Hàm số mũ tự nhiên là gì?
+\group{5–8. Vẽ các hàm số trên cùng một màn hình. Các đồ thị liên hệ với nhau như thế nào?}
+\bt{5} $y=2^x$, $y=e^x$, $y=5^x$, $y=20^x$.
+\bt{6} $y=e^x$, $y=e^{-x}$, $y=8^x$, $y=8^{-x}$.
+\bt{7} $y=3^x$, $y=10^x$, $y=(1/3)^x$, $y=(1/10)^x$.
+\bt{8} $y=0.9^x$, $y=0.6^x$, $y=0.3^x$, $y=0.1^x$.
+\group{9–14. Phác họa đồ thị bằng tay, dùng Hình 3 và 15, kết hợp các phép biến đổi ở §1.3 khi cần.}
+\bt{9} $g(x)=3^x+1$.
+\bt{10} $h(x)=2(1/2)^x-3$.
+\bt{11} $y=-e^{-x}$.
+\bt{12} $y=4^{x+2}$.
+\bt{13} $y=1-\frac12e^{-x}$.
+\bt{14} $y=e^{|x|}$.
+\bt{15} Xuất phát từ đồ thị $y=e^x$, viết phương trình đồ thị nhận được khi: (a) Tịnh tiến xuống 2 đơn vị. (b) Tịnh tiến sang phải 2 đơn vị. (c) Lấy đối xứng qua trục $x$. (d) Lấy đối xứng qua trục $y$. (e) Lấy đối xứng qua trục $x$, rồi qua trục $y$.
+\bt{16} Xuất phát từ $y=e^x$, tìm phương trình đồ thị nhận được khi: (a) Lấy đối xứng qua đường thẳng $y=4$. (b) Lấy đối xứng qua đường thẳng $x=2$.
+\group{17–18. Tìm tập xác định của mỗi hàm số.}
+\bt{17} (a) $f(x)=\dfrac{1-e^{x^2}}{1-e^{1-x^2}}$; (b) $f(x)=\dfrac{1+x}{e^{\cos x}}$.
+\bt{18} (a) $g(t)=\sqrt{10^t-100}$; (b) $g(t)=\sin(e^t-1)$.
+\group{19–20. Tìm hàm số mũ $f(x)=Cb^x$ có đồ thị đã cho.}
+\fig[.87]{e19_20}{Đồ thị cho Bài tập 19 (trái) và 20 (phải).}
+\bt{21} Cho $f(x)=5^x$. Chứng minh
+\[\frac{f(x+h)-f(x)}h=5^x\left(\frac{5^h-1}h\right).\]
+\bt{22} Bạn được đề nghị một công việc kéo dài một tháng. Bạn chọn cách trả công nào sau đây? (I) Một triệu đô la vào cuối tháng. (II) Một cent vào ngày đầu, hai cent ngày thứ hai, bốn cent ngày thứ ba; nói chung, $2^{n-1}$ cent vào ngày thứ $n$.
+\bt{23} Giả sử đồ thị $f(x)=x^2$ và $g(x)=2^x$ được vẽ trên hệ trục có đơn vị độ dài 1 inch. Chứng minh tại vị trí cách gốc tọa độ 2 ft về bên phải, độ cao đồ thị $f$ là 48 ft, còn độ cao đồ thị $g$ khoảng 265 dặm.
+\bt{24} So sánh $f(x)=x^5$ và $g(x)=5^x$ bằng cách vẽ trong nhiều cửa sổ khác nhau. Tìm mọi giao điểm chính xác đến một chữ số thập phân. Khi $x$ lớn, hàm nào tăng nhanh hơn?
+\bt{25} So sánh $f(x)=x^{10}$ và $g(x)=e^x$ bằng cách vẽ trong nhiều cửa sổ khác nhau. Từ thời điểm nào đồ thị $g$ vượt lên trên $f$ và tiếp tục ở phía trên?
+\bt{26} Dùng đồ thị ước lượng các giá trị $x$ sao cho $e^x>1\,000\,000\,000$.
+\bt{27} Một nhà nghiên cứu muốn xác định thời gian tăng gấp đôi của quần thể \textit{Giardia lamblia}, được gọi là ``vi khuẩn'' trong đề gốc. Nuôi cấy trong dung dịch dinh dưỡng, ông ước lượng số lượng sau mỗi bốn giờ và được bảng sau. (a) Lập biểu đồ phân tán. (b) Dùng máy tính tìm đường cong hàm mũ $f(t)=a\cdot b^t$ mô hình hóa quần thể sau $t$ giờ. (c) Vẽ mô hình cùng các điểm dữ liệu; dùng đồ thị ước lượng thời gian để số lượng tăng gấp đôi.
+\begin{center}\begin{tabular}{c|rrrrrrr}\toprule
+Thời gian (giờ)&0&4&8&12&16&20&24\\\midrule
+Số lượng (CFU/mL)&37&47&63&78&105&130&173\\\bottomrule\end{tabular}\end{center}
+\fig[.36]{e27_photo}{\textit{G. lamblia}. Minh họa trong đề gốc.\\ Nguồn ảnh: Sebastian Kaulitzki / Shutterstock.com.}
+\bt{28} Bảng cho dân số Hoa Kỳ, tính bằng triệu người, từ 1900 đến 2010. Dùng máy tính có hồi quy hàm mũ để mô hình hóa dân số từ năm 1900. Dùng mô hình ước lượng dân số năm 1925 và dự báo cho năm 2020.
+\begin{center}\begin{tabular}{rr@{\qquad}rr}\toprule
+Năm&Dân số&Năm&Dân số\\\midrule
+1900&76&1960&179\\1910&92&1970&203\\1920&106&1980&227\\1930&123&1990&250\\1940&131&2000&281\\1950&150&2010&310\\\bottomrule\end{tabular}\end{center}
+\bt{29} Một mẫu nuôi cấy bắt đầu với 500 vi khuẩn, số lượng tăng gấp đôi sau mỗi nửa giờ. (a) Sau 3 giờ có bao nhiêu vi khuẩn? (b) Sau $t$ giờ có bao nhiêu? (c) Sau 40 phút có bao nhiêu? (d) Vẽ hàm quần thể và ước lượng thời gian đạt 100\,000 vi khuẩn.
+\bt{30} Một quần thể sóc xám được đưa đến một vùng cách đây 18 năm. Các nhà sinh học quan sát thấy số lượng tăng gấp đôi sau mỗi sáu năm; hiện có 600 con. (a) Quần thể ban đầu là bao nhiêu? (b) Quần thể dự kiến sau $t$ năm kể từ lúc đưa đến là bao nhiêu? (c) Ước lượng số lượng dự kiến sau 10 năm nữa.
+\bt{31} Trong Ví dụ 4, tải lượng virus $V$ sau một ngày điều trị là $76.0$ bản sao RNA/mL. Dùng Hình 11 ước lượng thời gian cần thêm để tải lượng giảm còn một nửa mức đó.
+\bt{32} Sau khi được hấp thu hoàn toàn vào cơ thể, cồn được chuyển hóa. Giả sử sau khi uống một số đồ uống có cồn vào buổi tối, nồng độ cồn trong máu (BAC) lúc nửa đêm là $0.14$ g/dL. Sau $1.5$ giờ, BAC giảm còn một nửa. (a) Tìm mô hình hàm mũ cho BAC sau nửa đêm $t$ giờ. (b) Vẽ đồ thị và xác định khi nào BAC đạt $0.08$ g/dL, mức được đề gốc gọi là giới hạn pháp luật.
+
+\noindent\textit{Nguồn:} Phỏng theo P. Wilkinson và cộng sự, ``Pharmacokinetics of Ethanol after Oral Administration in the Fasting State'', \textit{Journal of Pharmacokinetics and Biopharmaceutics} 5 (1977), 207–224.
+\bt{33} Vẽ đồ thị
+\[f(x)=\frac{1-e^{1/x}}{1+e^{1/x}}.\]
+Bạn sẽ thấy $f$ có vẻ là hàm số lẻ. Hãy chứng minh.
+\bt{34} Vẽ một số hàm trong họ
+\[f(x)=\frac1{1+ae^{bx}},\qquad a>0.\]
+Đồ thị thay đổi thế nào khi $b$ thay đổi? Khi $a$ thay đổi thì sao?
+\bt{35} Vẽ một số hàm trong họ
+\[f(x)=\frac a2\left(e^{x/a}+e^{-x/a}\right),\qquad a>0.\]
+Đồ thị thay đổi như thế nào khi $a$ tăng?
+
+\clearpage
+\section*{Ghi chú biên tập}
+\noindent\textit{Phần bổ sung, không thuộc nguyên bản.}
+\begin{enumerate}[leftmargin=*,itemsep=5pt]
+\item Trong Bảng 1, dân số được ghi theo triệu người; công thức $P(t)=(1.43653\times10^9)(1.01395)^t$ và trục tung của Hình 8–9 dùng số người. Khi tính toán phải thống nhất đơn vị. Bảng giữ cả hàng năm 2010 ($t=110$), đúng như sách gốc.
+\item Ví dụ 6 dùng kết quả đọc đồ thị, làm tròn đến một chữ số thập phân. Ngưỡng chính xác là $x>\ln(10^6)$, với $\ln(10^6)\approx13.81551$; không nên hiểu $x>13.8$ là điều kiện chính xác. Ký hiệu lôgarit sẽ học ở §1.5.
+\item Đề gốc Bài tập 27 gọi \textit{Giardia lamblia} là vi khuẩn, nhưng đây là sinh vật nhân thực đơn bào ký sinh. Bảng số liệu, ký hiệu CFU/mL và hình minh họa được giữ nguyên theo nguồn để bảo toàn bài tập mô hình hóa; tên gọi trong đề gốc được nêu rõ, không coi là phân loại sinh học đúng.
+\item Mức BAC $0.08$ g/dL ở Bài tập 32 được giữ như dữ kiện của đề gốc; không xem đó là quy định hiện hành áp dụng tại Việt Nam hoặc một kết luận về khả năng lái xe. Các dữ liệu y sinh trong mục là ví dụ lịch sử phục vụ học toán.
+\item Các ký hiệu công cụ trong nguồn được hiểu như sau: Bài tập 5–8, 24–26, 29(d), 32(b), 33–35 dùng công cụ vẽ đồ thị; Bài tập 27–28 yêu cầu xử lý số liệu hoặc hồi quy bằng máy tính.
+\end{enumerate}
+\section*{Thuật ngữ bổ sung từ §1.4}
+\begingroup\small
+\begin{longtable}{p{.43\linewidth}p{.49\linewidth}}\toprule Tiếng Anh&Tiếng Việt thống nhất\\\midrule\endhead
+exponent&số mũ\\
+laws of exponents&các quy tắc lũy thừa\\
+rational number&số hữu tỉ\\
+irrational number&số vô tỉ\\
+real exponent&số mũ thực\\
+natural exponential function&hàm số mũ tự nhiên\\
+exponential growth&tăng trưởng theo hàm mũ\\
+exponential decay&suy giảm theo hàm mũ\\
+exponential regression&hồi quy hàm mũ\\
+doubling time&thời gian tăng gấp đôi\\
+half-life&thời gian bán rã\\
+horizontal asymptote&tiệm cận ngang\\
+tangent line&tiếp tuyến\\
+viewing rectangle&cửa sổ vẽ đồ thị\\
+plasma viral load&tải lượng virus trong huyết tương\\
+RNA copies per mL&số bản sao RNA trên mỗi mL\\
+compound interest&lãi kép\\
+radioactive decay&phân rã phóng xạ\\
+\bottomrule\end{longtable}
+\endgroup
+\noindent\textbf{Phạm vi hoàn thành:} Trọn §1.4, gồm Ví dụ 1–6, Hình 1–17, Bảng 1–2, Bài tập 1–35 và các bảng, hình kèm bài tập. Phần tiếp theo là §1.5, \textit{Hàm ngược và lôgarit}.
+\end{document}

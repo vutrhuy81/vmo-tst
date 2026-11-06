@@ -1,0 +1,332 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage{fontspec}\setmainfont{Latin Modern Roman}\setsansfont{DejaVu Sans}
+\usepackage{amsmath,amssymb,graphicx,geometry,enumitem,longtable,booktabs,fancyhdr,hyperref}
+\geometry{left=28mm,right=23mm,top=24mm,bottom=24mm}
+\hypersetup{unicode=true,colorlinks=true,linkcolor=black,urlcolor=blue,pdftitle={Giải tích Chương 2 Mục 2.2 Giới hạn của hàm số}}
+\setlength{\parindent}{1.2em}\setlength{\parskip}{4pt}\setlength{\headheight}{16pt}
+\pagestyle{fancy}\fancyhf{}\fancyhead[L]{\small Chương 2. Giới hạn và đạo hàm}\fancyhead[R]{\small §2.2}\fancyfoot[C]{\thepage}
+\newcommand{\fig}[3][.68]{\begin{center}\begin{minipage}{\linewidth}\centering\includegraphics[width=#1\linewidth]{assets/#2.png}\\{\small #3}\end{minipage}\end{center}}
+\newcommand{\ex}[1]{\par\medskip\noindent\textbf{Ví dụ #1.}\ }
+\newcommand{\sol}{\par\noindent\textit{Lời giải.}\ }
+\newcommand{\bt}[1]{\par\smallskip\noindent\textbf{#1.}\ }
+\newcommand{\group}[1]{\par\medskip\noindent\textbf{#1}\par}
+\begin{document}
+\begin{center}
+{\Large\bfseries GIẢI TÍCH}\\[5pt]
+{\large Chương 2. Giới hạn và đạo hàm}\\[9pt]
+{\Large\bfseries 2.2. Giới hạn của hàm số}
+\end{center}
+\noindent\textbf{Nguồn:} James Stewart, Daniel K. Clegg, Saleem Watson, \textit{Calculus: Early Transcendentals}, ấn bản thứ 9 (2020), trang in 83–94 (trang PDF 118–129), kết thúc trước §2.3.
+
+Ở mục trước, ta đã thấy giới hạn xuất hiện khi tìm tiếp tuyến của một đường cong hoặc vận tốc của một vật. Nay ta xét giới hạn nói chung và các phương pháp số, phương pháp đồ thị để tính giới hạn.
+\section*{Tìm giới hạn bằng phương pháp số và đồ thị}
+Khảo sát hàm $f(x)=(x-1)/(x^2-1)$ khi $x$ gần 1. Bảng sau cho các giá trị của $f(x)$ khi $x$ gần nhưng khác 1.
+\begin{center}\begin{tabular}{rrrr}\toprule
+$x<1$&$f(x)$&$x>1$&$f(x)$\\\midrule
+0.5&0.666667&1.5&0.400000\\0.9&0.526316&1.1&0.476190\\0.99&0.502513&1.01&0.497512\\0.999&0.500250&1.001&0.499750\\0.9999&0.500025&1.0001&0.499975\\\bottomrule\end{tabular}\end{center}
+Trong hai nửa của bảng, $x$ tiến đến 1, còn $f(x)$ tiến đến $0.5$.
+\fig[.47]{f01}{Hình 1. Khi $x$ tiến đến 1, $f(x)$ tiến đến $0.5$.}
+Từ bảng và Hình 1, ta thấy $x$ càng gần 1, từ cả hai phía, thì $f(x)$ càng gần $0.5$. Dường như có thể làm $f(x)$ gần $0.5$ tùy ý bằng cách lấy $x$ đủ gần 1. Ta diễn đạt: ``Giới hạn của hàm số $f(x)=(x-1)/(x^2-1)$ khi $x$ tiến đến 1 bằng $0.5$'', và viết
+\[\lim_{x\to1}\frac{x-1}{x^2-1}=0.5.\]
+Tổng quát, ta dùng ký hiệu sau.
+\begin{quote}
+\textbf{1. Định nghĩa trực giác về giới hạn.} Giả sử $f(x)$ xác định khi $x$ gần số $a$, nghĩa là $f$ xác định trên một khoảng mở chứa $a$, có thể trừ chính $a$. Ta viết
+\[\lim_{x\to a}f(x)=L\]
+và nói ``giới hạn của $f(x)$ khi $x$ tiến đến $a$ bằng $L$'' nếu có thể làm các giá trị $f(x)$ gần $L$ tùy ý bằng cách buộc $x$ đủ gần $a$, từ cả hai phía, nhưng khác $a$.
+\end{quote}
+Nói một cách sơ lược, $f(x)$ tiến đến $L$ khi $x$ tiến đến $a$. Nói cách khác, các giá trị $f(x)$ càng gần $L$ khi $x$ càng gần $a$ từ cả hai phía, với $x\ne a$. Định nghĩa chính xác hơn sẽ được đưa ra ở §2.4.
+
+Một ký hiệu khác của $\lim_{x\to a}f(x)=L$ là
+\[f(x)\to L\qquad\text{khi}\qquad x\to a,\]
+thường đọc là ``$f(x)$ tiến đến $L$ khi $x$ tiến đến $a$''.
+
+Lưu ý cụm từ ``nhưng $x$ khác $a$'' trong định nghĩa: khi tìm giới hạn tại $a$, ta không xét $x=a$. Thậm chí $f(x)$ không cần xác định tại $a$. Điều quan trọng duy nhất là cách xác định hàm ở gần $a$.
+
+Hình 2 cho đồ thị của ba hàm. Ở (b), $f(a)$ không xác định; ở (c), $f(a)\ne L$. Tuy nhiên, trong cả ba trường hợp, bất kể điều gì xảy ra tại $a$, ta đều có $\lim_{x\to a}f(x)=L$.
+\fig[.96]{f02}{Hình 2. Trong cả ba trường hợp, $\lim_{x\to a}f(x)=L$.}
+\ex{1} Ước lượng $\displaystyle\lim_{t\to0}\frac{\sqrt{t^2+9}-3}{t^2}$.
+\sol Bảng sau cho các giá trị của hàm khi $t$ gần 0.
+\begin{center}\begin{tabular}{rr}\toprule$t$&$(\sqrt{t^2+9}-3)/t^2$\\\midrule
+$\pm1.0$&$0.162277\ldots$\\$\pm0.5$&$0.165525\ldots$\\$\pm0.1$&$0.166620\ldots$\\$\pm0.05$&$0.166655\ldots$\\$\pm0.01$&$0.166666\ldots$\\\bottomrule\end{tabular}\end{center}
+Khi $t$ tiến đến 0, giá trị hàm dường như tiến đến $0.1666666\ldots$, nên ta dự đoán
+\[\lim_{t\to0}\frac{\sqrt{t^2+9}-3}{t^2}=\frac16.\qquad\square\]
+Nếu lấy các giá trị $t$ còn nhỏ hơn thì sao? Bảng sau ghi kết quả từ một máy tính cầm tay; có vẻ xuất hiện điều bất thường.
+\begin{center}\begin{tabular}{rr}\toprule$t$&$(\sqrt{t^2+9}-3)/t^2$\\\midrule
+$\pm0.001$&0.166667\\$\pm0.0001$&0.166670\\$\pm0.00001$&0.167000\\$\pm0.000001$&0.000000\\\bottomrule\end{tabular}\end{center}
+Máy tính của bạn có thể cho số liệu khác, nhưng cuối cùng có thể nhận giá trị 0 khi $t$ đủ nhỏ. Điều này có nghĩa giới hạn thực sự bằng 0 thay vì $1/6$ không? Không. Giá trị giới hạn là $1/6$, như sẽ chứng minh ở mục sau. Vấn đề là máy tính cho kết quả sai vì $\sqrt{t^2+9}$ rất gần 3 khi $t$ nhỏ. Khi $t$ đủ nhỏ, máy tính biểu diễn căn thức ấy bằng $3.000\ldots$ với toàn bộ số chữ số mà nó lưu được.
+
+Điều tương tự xảy ra khi dùng máy tính đồ thị hoặc máy tính điện tử để vẽ
+\[f(t)=\frac{\sqrt{t^2+9}-3}{t^2}.\]
+Hình 3(a), (b) cho đồ thị khá chính xác; khi dò theo đường cong, dễ ước lượng giới hạn gần $1/6$. Nhưng phóng quá lớn như (c), (d) cho đồ thị sai do sai số làm tròn trong tính toán.
+\fig[.98]{f03}{Hình 3. (a) $-5\le t\le5$; (b) $-0.1\le t\le0.1$; (c) $-10^{-6}\le t\le10^{-6}$; (d) $-10^{-7}\le t\le10^{-7}$.}
+\noindent\textit{Chú thích của sách:} Tại StewartCalculus.com, tài liệu \textit{Lies My Calculator and Computer Told Me}, đặc biệt mục \textit{The Perils of Subtraction}, giải thích thêm vì sao máy tính đôi khi cho giá trị sai.
+\ex{2} Dự đoán $\displaystyle\lim_{x\to0}\frac{\sin x}{x}$.
+\sol Hàm $f(x)=(\sin x)/x$ không xác định tại $x=0$. Dùng máy tính và nhớ rằng với $x\in\mathbb R$, $\sin x$ là sin của góc có số đo $x$ radian, ta lập bảng với tám chữ số sau dấu phẩy.
+\begin{center}\begin{tabular}{rr}\toprule$x$&$(\sin x)/x$\\\midrule
+$\pm1.0$&0.84147098\\$\pm0.5$&0.95885108\\$\pm0.4$&0.97354586\\$\pm0.3$&0.98506736\\$\pm0.2$&0.99334665\\$\pm0.1$&0.99833417\\$\pm0.05$&0.99958339\\$\pm0.01$&0.99998333\\$\pm0.005$&0.99999583\\$\pm0.001$&0.99999983\\\bottomrule\end{tabular}\end{center}
+Từ bảng và Hình 4, ta dự đoán
+\[\lim_{x\to0}\frac{\sin x}{x}=1.\]
+Dự đoán này đúng; Chương 3 sẽ chứng minh bằng lập luận hình học.
+\fig[.56]{f04}{Hình 4. Đồ thị $y=(\sin x)/x$ gợi ý giới hạn tại 0 bằng 1.}\hfill$\square$
+\ex{3} Tìm $\displaystyle\lim_{x\to0}\left(x^3+\frac{\cos5x}{10\,000}\right)$.
+\sol Như trước, ta lập bảng. Từ bảng đầu, giới hạn có vẻ bằng 0.
+\begin{center}\begin{tabular}{rr}\toprule$x$&$x^3+(\cos5x)/10\,000$\\\midrule
+1&1.000028\\0.5&0.124920\\0.1&0.001088\\0.05&0.000222\\0.01&0.000101\\\bottomrule\end{tabular}\end{center}
+Nhưng tiếp tục với các giá trị $x$ nhỏ hơn, bảng thứ hai cho thấy giới hạn có khả năng bằng $0.0001$ hơn.
+\begin{center}\begin{tabular}{rr}\toprule$x$&$x^3+(\cos5x)/10\,000$\\\midrule
+0.005&0.00010009\\0.001&0.00010000\\\bottomrule\end{tabular}\end{center}
+Ở §2.5, ta sẽ chứng minh $\lim_{x\to0}\cos5x=1$, từ đó suy ra
+\[\lim_{x\to0}\left(x^3+\frac{\cos5x}{10\,000}\right)=\frac1{10\,000}=0.0001.\qquad\square\]
+\section*{Giới hạn một phía}
+Hàm Heaviside $H$ được định nghĩa bởi
+\[H(t)=\begin{cases}0,&t<0,\\1,&t\ge0.\end{cases}\]
+Hàm mang tên kỹ sư điện Oliver Heaviside (1850–1925), có thể dùng để mô tả dòng điện được đóng vào tại $t=0$. Đồ thị ở Hình 5.
+\fig[.48]{f05}{Hình 5. Hàm Heaviside.}
+Không có một số duy nhất mà $H(t)$ tiến đến khi $t\to0$, nên $\lim_{t\to0}H(t)$ không tồn tại. Tuy nhiên, khi $t$ tiến đến 0 từ bên trái, $H(t)$ tiến đến 0; từ bên phải, nó tiến đến 1. Ta viết
+\[\lim_{t\to0^-}H(t)=0\qquad\text{và}\qquad\lim_{t\to0^+}H(t)=1,\]
+và gọi đó là các \textbf{giới hạn một phía}. Ký hiệu $t\to0^-$ chỉ xét $t<0$; tương tự, $t\to0^+$ chỉ xét $t>0$.
+\begin{quote}
+\textbf{2. Định nghĩa trực giác về giới hạn một phía.} Ta viết
+\[\lim_{x\to a^-}f(x)=L\]
+và nói \textbf{giới hạn bên trái} của $f(x)$ khi $x$ tiến đến $a$ bằng $L$ nếu có thể làm $f(x)$ gần $L$ tùy ý bằng cách lấy $x$ đủ gần $a$ và $x<a$.
+
+Ta viết
+\[\lim_{x\to a^+}f(x)=L\]
+và nói \textbf{giới hạn bên phải} của $f(x)$ khi $x$ tiến đến $a$ bằng $L$ nếu có thể làm $f(x)$ gần $L$ tùy ý bằng cách lấy $x$ đủ gần $a$ và $x>a$.
+\end{quote}
+Chẳng hạn, $x\to5^-$ chỉ xét $x<5$, còn $x\to5^+$ chỉ xét $x>5$. Hình 6 minh họa Định nghĩa 2.
+\fig[.88]{f06}{Hình 6. (a) Giới hạn bên trái bằng $L$. (b) Giới hạn bên phải bằng $L$.}
+Định nghĩa 2 chỉ khác Định nghĩa 1 ở yêu cầu $x<a$ hoặc $x>a$. So sánh hai định nghĩa, ta có:
+\begin{quote}\textbf{3.} $\displaystyle\lim_{x\to a}f(x)=L$ khi và chỉ khi
+\[\lim_{x\to a^-}f(x)=L\qquad\text{và}\qquad\lim_{x\to a^+}f(x)=L.\]
+\end{quote}
+\ex{4} Đồ thị hàm $g$ được cho ở Hình 7. Dùng đồ thị nêu giá trị, nếu tồn tại, của:
+\[(a)\ \lim_{x\to2^-}g(x);\quad(b)\ \lim_{x\to2^+}g(x);\quad(c)\ \lim_{x\to2}g(x);\]
+\[(d)\ \lim_{x\to5^-}g(x);\quad(e)\ \lim_{x\to5^+}g(x);\quad(f)\ \lim_{x\to5}g(x).\]
+\fig[.55]{f07}{Hình 7. Đồ thị $y=g(x)$ trong Ví dụ 4.}
+\sol Khi $x$ tiến đến 2 từ bên trái, $g(x)$ tiến đến 3; từ bên phải, $g(x)$ tiến đến 1. Do đó:
+\[(a)\ \lim_{x\to2^-}g(x)=3;\qquad(b)\ \lim_{x\to2^+}g(x)=1.\]
+(c) Hai giới hạn một phía khác nhau nên theo (3), $\lim_{x\to2}g(x)$ không tồn tại.
+
+Đồ thị còn cho thấy:
+\[(d)\ \lim_{x\to5^-}g(x)=2;\qquad(e)\ \lim_{x\to5^+}g(x)=2.\]
+(f) Lần này hai giới hạn một phía bằng nhau nên theo (3),
+\[\lim_{x\to5}g(x)=2.\]
+Dù vậy, lưu ý rằng $g(5)\ne2$.\hfill$\square$
+\section*{Khi nào giới hạn không tồn tại?}
+Ta đã thấy giới hạn tại $a$ không tồn tại khi hai giới hạn bên trái và bên phải khác nhau, như Ví dụ 4. Hai ví dụ tiếp theo minh họa những cách khác khiến giới hạn không tồn tại.
+\ex{5} Khảo sát $\displaystyle\lim_{x\to0}\sin\frac\pi x$.
+\sol Hàm $f(x)=\sin(\pi/x)$ không xác định tại 0. Với một số giá trị $x$ nhỏ, ta được
+\[f(1)=\sin\pi=0;\qquad f(1/2)=\sin2\pi=0;\]
+\[f(1/3)=\sin3\pi=0;\qquad f(1/4)=\sin4\pi=0;\]
+\[f(0.1)=\sin10\pi=0;\qquad f(0.01)=\sin100\pi=0.\]
+Tương tự, $f(0.001)=f(0.0001)=0$. Từ đó ta có thể muốn dự đoán giới hạn bằng 0, nhưng lần này dự đoán ấy sai. Mặc dù $f(1/n)=\sin n\pi=0$ với mọi số nguyên $n$ khác 0, vẫn có vô số giá trị $x$ tiến đến 0 mà $f(x)=1$, chẳng hạn $2/5$, $2/101$. Có thể thấy điều này trên Hình 8.
+\fig[.88]{f08}{Hình 8. Đồ thị $y=\sin(\pi/x)$ dao động vô hạn lần gần 0.}
+Các nét đứt gần trục $y$ cho biết $\sin(\pi/x)$ dao động giữa 1 và $-1$ vô hạn lần khi $x\to0$. Vì $f(x)$ không tiến đến một số cố định, nên
+\[\lim_{x\to0}\sin\frac\pi x\quad\text{không tồn tại}.\qquad\square\]
+\noindent\textbf{Giới hạn và công nghệ.} Một số phần mềm, gồm hệ thống đại số máy tính (CAS), tính được giới hạn. Để tránh những sai lầm ở Ví dụ 1, 3, 5, chúng không chỉ thử nghiệm số mà dùng kỹ thuật tinh vi hơn, như tính chuỗi vô hạn. Bạn nên dùng một công cụ như vậy để tính giới hạn trong các ví dụ và kiểm tra kết quả bài tập của chương.
+
+Ví dụ 3 và 5 cho thấy những cạm bẫy khi dự đoán giới hạn. Chọn giá trị $x$ không thích hợp dễ dẫn đến dự đoán sai, nhưng khó biết lúc nào nên dừng tính. Như phần sau Ví dụ 1 đã chỉ ra, máy tính đôi khi còn cho giá trị sai. Ở mục tiếp theo, ta sẽ xây dựng những phương pháp tính giới hạn bảo đảm tính đúng đắn.
+
+Một cách khác khiến giới hạn tại $a$ không tồn tại là giá trị hàm tăng tùy ý về độ lớn khi $x$ tiến đến $a$.
+\ex{6} Tìm $\displaystyle\lim_{x\to0}\frac1{x^2}$, nếu tồn tại.
+\sol Khi $x$ gần 0, $x^2$ cũng gần 0 và $1/x^2$ rất lớn, như bảng sau.
+\begin{center}\begin{tabular}{rr}\toprule$x$&$1/x^2$\\\midrule
+$\pm1$&1\\$\pm0.5$&4\\$\pm0.2$&25\\$\pm0.1$&100\\$\pm0.05$&400\\$\pm0.01$&$10\,000$\\$\pm0.001$&$1\,000\,000$\\\bottomrule\end{tabular}\end{center}
+Đồ thị Hình 9 cho thấy dường như có thể làm $f(x)=1/x^2$ lớn tùy ý bằng cách lấy $x$ đủ gần 0. Các giá trị ấy không tiến đến một số, nên giới hạn không tồn tại.
+\fig[.48]{f09}{Hình 9. Đồ thị $y=1/x^2$.}\hfill$\square$
+\section*{Giới hạn vô cực và tiệm cận đứng}
+Để diễn tả dạng hành vi trong Ví dụ 6, ta viết
+\[\lim_{x\to0}\frac1{x^2}=\infty.\]
+Điều này không có nghĩa coi $\infty$ là một số, cũng không có nghĩa giới hạn hữu hạn tồn tại. Nó chỉ mô tả cách đặc biệt mà giới hạn không tồn tại: có thể làm $1/x^2$ lớn tùy ý bằng cách lấy $x$ đủ gần 0.
+
+Tổng quát, ký hiệu $\lim_{x\to a}f(x)=\infty$ cho biết $f(x)$ ngày càng lớn, hay ``tăng không bị chặn'', khi $x$ ngày càng gần $a$.
+\begin{quote}
+\textbf{4. Định nghĩa trực giác về giới hạn vô cực.} Cho $f$ xác định ở cả hai phía của $a$, có thể trừ chính $a$. Khi đó
+\[\lim_{x\to a}f(x)=\infty\]
+có nghĩa là có thể làm $f(x)$ lớn tùy ý bằng cách lấy $x$ đủ gần $a$, nhưng khác $a$.
+\end{quote}
+Một ký hiệu khác là $f(x)\to\infty$ khi $x\to a$. Nhắc lại, $\infty$ không phải một số. Biểu thức trên thường đọc là ``giới hạn của $f(x)$ khi $x$ tiến đến $a$ bằng dương vô cực'', ``$f(x)$ trở nên vô hạn khi $x$ tiến đến $a$'', hoặc ``$f(x)$ tăng không bị chặn khi $x$ tiến đến $a$''. Hình 10 minh họa định nghĩa.
+\fig[.47]{f10}{Hình 10. $\lim_{x\to a}f(x)=\infty$.}
+Một dạng tương tự, với các giá trị hàm âm có độ lớn tăng tùy ý khi $x$ gần $a$, được nêu trong Định nghĩa 5 và Hình 11.
+\begin{quote}
+\textbf{5. Định nghĩa.} Cho $f$ xác định ở cả hai phía của $a$, có thể trừ chính $a$. Khi đó
+\[\lim_{x\to a}f(x)=-\infty\]
+có nghĩa là có thể làm $f(x)$ âm với độ lớn tùy ý bằng cách lấy $x$ đủ gần $a$, nhưng khác $a$.
+\end{quote}
+\noindent\textit{Chú thích bên lề:} Một số ``âm có độ lớn lớn'' là số âm nhưng có giá trị tuyệt đối lớn.
+\fig[.47]{f11}{Hình 11. $\lim_{x\to a}f(x)=-\infty$.}
+Ta đọc ký hiệu này là ``giới hạn của $f(x)$ khi $x$ tiến đến $a$ bằng âm vô cực'', hoặc ``$f(x)$ giảm không bị chặn khi $x$ tiến đến $a$''. Chẳng hạn,
+\[\lim_{x\to0}\left(-\frac1{x^2}\right)=-\infty.\]
+Có thể định nghĩa tương tự bốn giới hạn vô cực một phía:
+\[\lim_{x\to a^-}f(x)=\infty;\qquad\lim_{x\to a^+}f(x)=\infty;\]
+\[\lim_{x\to a^-}f(x)=-\infty;\qquad\lim_{x\to a^+}f(x)=-\infty.\]
+Nhớ rằng $x\to a^-$ chỉ xét $x<a$, còn $x\to a^+$ chỉ xét $x>a$. Hình 12 minh họa bốn trường hợp.
+\fig[.98]{f12}{Hình 12. (a), (b) Giới hạn một phía bằng $\infty$; (c), (d) bằng $-\infty$.}
+\begin{quote}
+\textbf{6. Định nghĩa.} Đường thẳng đứng $x=a$ được gọi là \textbf{tiệm cận đứng} của đường cong $y=f(x)$ nếu ít nhất một trong sáu khẳng định sau đúng:
+\[\lim_{x\to a}f(x)=\infty;\quad\lim_{x\to a^-}f(x)=\infty;\quad\lim_{x\to a^+}f(x)=\infty;\]
+\[\lim_{x\to a}f(x)=-\infty;\quad\lim_{x\to a^-}f(x)=-\infty;\quad\lim_{x\to a^+}f(x)=-\infty.\]
+\end{quote}
+Ví dụ, trục $y$ là tiệm cận đứng của $y=1/x^2$ vì $\lim_{x\to0}1/x^2=\infty$. Trong cả bốn trường hợp ở Hình 12, $x=a$ là tiệm cận đứng. Biết các tiệm cận đứng rất hữu ích khi vẽ phác đồ thị.
+\ex{7} Đường cong $y=\dfrac{2x}{x-3}$ có tiệm cận đứng không?
+\sol Mẫu bằng 0 tại $x=3$, nên đây là vị trí có thể có tiệm cận đứng; ta xét giới hạn một phía tại đó.
+
+Nếu $x$ gần 3 nhưng lớn hơn 3, mẫu $x-3$ dương và nhỏ, còn $2x$ gần 6. Thương là số dương lớn. Chẳng hạn $x=3.01$ cho $6.02/0.01=602$. Vì vậy, theo trực giác,
+\[\lim_{x\to3^+}\frac{2x}{x-3}=\infty.\]
+Nếu $x$ gần 3 nhưng nhỏ hơn 3, mẫu âm và nhỏ về độ lớn, còn tử vẫn dương, gần 6. Thương âm có độ lớn lớn. Do đó,
+\[\lim_{x\to3^-}\frac{2x}{x-3}=-\infty.\]
+Đồ thị ở Hình 13. Theo Định nghĩa 6, $x=3$ là tiệm cận đứng.
+\fig[.45]{f13}{Hình 13. $y=2x/(x-3)$ có tiệm cận đứng $x=3$.}\hfill$\square$
+\noindent\textbf{Lưu ý.} Cả hai ví dụ 6, 7 đều không có giới hạn hữu hạn. Ở Ví dụ 6, ta viết $\lim_{x\to0}1/x^2=\infty$ vì hàm tiến đến $\infty$ từ cả hai phía. Ở Ví dụ 7, hàm tiến đến $\infty$ từ bên phải và $-\infty$ từ bên trái, nên chỉ nói giới hạn hai phía tại 3 không tồn tại.
+\ex{8} Tìm các tiệm cận đứng của $f(x)=\tan x$.
+\sol Vì $\tan x=\sin x/\cos x$, những vị trí có thể có tiệm cận đứng là nơi $\cos x=0$. Khi $x\to(\pi/2)^-$, $\cos x\to0^+$; khi $x\to(\pi/2)^+$, $\cos x\to0^-$; còn $\sin x$ dương, gần 1. Vì thế,
+\[\lim_{x\to(\pi/2)^-}\tan x=\infty;\qquad\lim_{x\to(\pi/2)^+}\tan x=-\infty.\]
+Vậy $x=\pi/2$ là tiệm cận đứng. Lập luận tương tự cho thấy mọi đường $x=\pi/2+n\pi$, với $n$ nguyên, đều là tiệm cận đứng của $\tan x$. Hình 14 xác nhận điều này.
+\fig[.56]{f14}{Hình 14. Đồ thị $y=\tan x$.}\hfill$\square$
+Một ví dụ khác là hàm lôgarit tự nhiên. Từ Hình 15,
+\[\lim_{x\to0^+}\ln x=-\infty,\]
+nên $x=0$, tức trục $y$, là tiệm cận đứng. Điều tương tự đúng cho $y=\log_bx$ khi $b>1$ (xem Hình 1.5.11, 1.5.12).
+\fig[.43]{f15}{Hình 15. Trục $y$ là tiệm cận đứng của hàm lôgarit tự nhiên.}
+\section*{2.2. Bài tập}
+\bt{1} Giải thích bằng lời của mình ý nghĩa $\lim_{x\to2}f(x)=5$. Khẳng định này có thể đúng trong khi $f(2)=3$ không? Giải thích.
+\bt{2} Giải thích ý nghĩa $\lim_{x\to1^-}f(x)=3$ và $\lim_{x\to1^+}f(x)=7$. Trong tình huống đó, $\lim_{x\to1}f(x)$ có thể tồn tại không? Giải thích.
+\bt{3} Giải thích ý nghĩa: (a) $\lim_{x\to-3}f(x)=\infty$; (b) $\lim_{x\to4^+}f(x)=-\infty$.
+\bt{4} Dùng đồ thị $f$ để nêu giá trị của mỗi đại lượng, nếu tồn tại; nếu không, giải thích vì sao:
+\[(a)\ \lim_{x\to2^-}f(x);\quad(b)\ \lim_{x\to2^+}f(x);\quad(c)\ \lim_{x\to2}f(x);\]
+\[(d)\ f(2);\qquad(e)\ \lim_{x\to4}f(x);\qquad(f)\ f(4).\]
+\fig[.43]{e04}{Đồ thị cho Bài tập 4.}
+\bt{5} Với $f$ có đồ thị dưới đây, nêu giá trị nếu tồn tại; nếu không, giải thích:
+\[(a)\ \lim_{x\to1}f(x);\quad(b)\ \lim_{x\to3^-}f(x);\quad(c)\ \lim_{x\to3^+}f(x);\]
+\[(d)\ \lim_{x\to3}f(x);\qquad(e)\ f(3).\]
+\fig[.43]{e05}{Đồ thị cho Bài tập 5.}
+\bt{6} Với $h$ có đồ thị dưới đây, nêu giá trị nếu tồn tại; nếu không, giải thích:
+\[(a)\ \lim_{x\to-3^-}h(x);\quad(b)\ \lim_{x\to-3^+}h(x);\quad(c)\ \lim_{x\to-3}h(x);\]
+\[(d)\ h(-3);\qquad(e)\ \lim_{x\to0^-}h(x);\qquad(f)\ \lim_{x\to0^+}h(x);\]
+\[(g)\ \lim_{x\to0}h(x);\qquad(h)\ h(0);\qquad(i)\ \lim_{x\to2}h(x);\]
+\[(j)\ h(2);\qquad(k)\ \lim_{x\to5^+}h(x);\qquad(l)\ \lim_{x\to5^-}h(x).\]
+\fig[.72]{e06}{Đồ thị cho Bài tập 6.}
+\bt{7} Với $g$ có đồ thị dưới đây, tìm một số $a$ thỏa mãn từng mô tả:
+
+(a) $\lim_{x\to a}g(x)$ không tồn tại nhưng $g(a)$ xác định.
+
+(b) $\lim_{x\to a}g(x)$ tồn tại nhưng $g(a)$ không xác định.
+
+(c) $\lim_{x\to a^-}g(x)$ và $\lim_{x\to a^+}g(x)$ đều tồn tại, nhưng $\lim_{x\to a}g(x)$ không tồn tại.
+
+(d) $\lim_{x\to a^+}g(x)=g(a)$ nhưng $\lim_{x\to a^-}g(x)\ne g(a)$.
+\fig[.45]{e07}{Đồ thị cho Bài tập 7.}
+\bt{8} Với $A$ có đồ thị dưới đây, nêu:
+\[(a)\ \lim_{x\to-3}A(x);\quad(b)\ \lim_{x\to2^-}A(x);\quad(c)\ \lim_{x\to2^+}A(x);\quad(d)\ \lim_{x\to-1}A(x).\]
+(e) Phương trình các tiệm cận đứng.
+\fig[.72]{e08}{Đồ thị cho Bài tập 8.}
+\bt{9} Với $f$ có đồ thị dưới đây, nêu:
+\[(a)\ \lim_{x\to-7}f(x);\quad(b)\ \lim_{x\to-3}f(x);\quad(c)\ \lim_{x\to0}f(x);\]
+\[(d)\ \lim_{x\to6^-}f(x);\qquad(e)\ \lim_{x\to6^+}f(x).\]
+(f) Phương trình các tiệm cận đứng.
+\fig[.72]{e09}{Đồ thị cho Bài tập 9.}
+\bt{10} Một bệnh nhân được tiêm 150 mg thuốc sau mỗi 4 giờ. Đồ thị cho lượng thuốc $f(t)$ trong máu sau $t$ giờ. Tìm
+\[\lim_{t\to12^-}f(t)\qquad\text{và}\qquad\lim_{t\to12^+}f(t),\]
+và giải thích ý nghĩa hai giới hạn một phía.
+\fig[.46]{e10}{Đồ thị cho Bài tập 10; $t$ tính bằng giờ, $f(t)$ tính bằng mg.}
+\group{11–12. Vẽ phác đồ thị rồi xác định các giá trị $a$ mà $\lim_{x\to a}f(x)$ tồn tại.}
+\bt{11} $f(x)=\begin{cases}e^x,&x\le0,\\x-1,&0<x<1,\\\ln x,&x\ge1.\end{cases}$
+\bt{12} $f(x)=\begin{cases}\sqrt[3]{x},&x\le-1,\\x,&-1<x\le2,\\(x-1)^2,&x>2.\end{cases}$
+\group{13–14. Dùng đồ thị để nêu giá trị các giới hạn sau, nếu tồn tại; nếu không, giải thích vì sao.}
+\[(a)\ \lim_{x\to0^-}f(x);\qquad(b)\ \lim_{x\to0^+}f(x);\qquad(c)\ \lim_{x\to0}f(x).\]
+\bt{13} $f(x)=x\sqrt{1+x^{-2}}$.
+\bt{14} $f(x)=\dfrac{e^{1/x}-2}{e^{1/x}+1}$.
+\group{15–18. Vẽ phác một ví dụ về hàm $f$ thỏa mãn tất cả các điều kiện đã cho.}
+\bt{15} $\lim_{x\to1^-}f(x)=3$, $\lim_{x\to1^+}f(x)=0$, $f(1)=2$.
+\bt{16} $\lim_{x\to0}f(x)=4$, $\lim_{x\to8^-}f(x)=1$, $\lim_{x\to8^+}f(x)=-3$, $f(0)=6$, $f(8)=-1$.
+\bt{17} $\lim_{x\to-1^-}f(x)=0$, $\lim_{x\to-1^+}f(x)=1$, $\lim_{x\to2}f(x)=3$, $f(-1)=2$, $f(2)=1$.
+\bt{18} $\lim_{x\to-3^-}f(x)=3$, $\lim_{x\to-3^+}f(x)=2$, $\lim_{x\to3^-}f(x)=-1$, $\lim_{x\to3^+}f(x)=2$, $f(-3)=2$, $f(3)=0$.
+\group{19–22. Dự đoán giới hạn, nếu tồn tại, bằng cách tính giá trị hàm tại các số đã cho, làm tròn đến sáu chữ số sau dấu phẩy.}
+\bt{19} $\displaystyle\lim_{x\to3}\frac{x^2-3x}{x^2-9}$, với
+\[x=3.1,3.05,3.01,3.001,3.0001,\quad2.9,2.95,2.99,2.999,2.9999.\]
+\bt{20} $\displaystyle\lim_{x\to-3}\frac{x^2-3x}{x^2-9}$, với
+\[x=-2.5,-2.9,-2.95,-2.99,-2.999,-2.9999,\]
+\[\phantom{x={}}-3.5,-3.1,-3.05,-3.01,-3.001,-3.0001.\]
+\bt{21} $\displaystyle\lim_{t\to0}\frac{e^{5t}-1}{t}$, với $t=\pm0.5,\pm0.1,\pm0.01,\pm0.001,\pm0.0001$.
+\bt{22} $\displaystyle\lim_{h\to0}\frac{(2+h)^5-32}{h}$, với $h=\pm0.5,\pm0.1,\pm0.01,\pm0.001,\pm0.0001$.
+\group{23–28. Dùng bảng giá trị để ước lượng giới hạn. Nếu có công cụ vẽ đồ thị, dùng nó kiểm tra kết quả bằng đồ thị.}
+\bt{23} $\displaystyle\lim_{x\to4}\frac{\ln x-\ln4}{x-4}$.
+\bt{24} $\displaystyle\lim_{p\to-1}\frac{1+p^9}{1+p^{15}}$.
+\bt{25} $\displaystyle\lim_{\theta\to0}\frac{\sin3\theta}{\tan2\theta}$.
+\bt{26} $\displaystyle\lim_{t\to0}\frac{5^t-1}{t}$.
+\bt{27} $\displaystyle\lim_{x\to0^+}x^x$.
+\bt{28} $\displaystyle\lim_{x\to0^+}x^2\ln x$.
+\group{29–40. Xác định giới hạn vô cực.}
+\bt{29} $\displaystyle\lim_{x\to5^+}\frac{x+1}{x-5}$.
+\bt{30} $\displaystyle\lim_{x\to5^-}\frac{x+1}{x-5}$.
+\bt{31} $\displaystyle\lim_{x\to2}\frac{x^2}{(x-2)^2}$.
+\bt{32} $\displaystyle\lim_{x\to3^-}\frac{\sqrt{x}}{(x-3)^5}$.
+\bt{33} $\displaystyle\lim_{x\to1^+}\ln(\sqrt{x}-1)$.
+\bt{34} $\displaystyle\lim_{x\to0^+}\ln(\sin x)$.
+\bt{35} $\displaystyle\lim_{x\to(\pi/2)^+}\frac1x\sec x$.
+\bt{36} $\displaystyle\lim_{x\to\pi^-}x\cot x$.
+\bt{37} $\displaystyle\lim_{x\to1}\frac{x^2+2x}{x^2-2x+1}$.
+\bt{38} $\displaystyle\lim_{x\to3^-}\frac{x^2+4x}{x^2-2x-3}$.
+\bt{39} $\displaystyle\lim_{x\to0}(\ln x^2-x^{-2})$.
+\bt{40} $\displaystyle\lim_{x\to0^+}\left(\frac1x-\ln x\right)$.
+\bt{41} Tìm tiệm cận đứng của $f(x)=\dfrac{x-1}{2x+4}$.
+\bt{42} (a) Tìm các tiệm cận đứng của $y=\dfrac{x^2+1}{3x-2x^2}$. (b) Vẽ đồ thị để kiểm tra câu (a).
+\bt{43} Xác định $\displaystyle\lim_{x\to1^-}\frac1{x^3-1}$ và $\displaystyle\lim_{x\to1^+}\frac1{x^3-1}$ bằng ba cách:
+
+(a) Tính $f(x)=1/(x^3-1)$ tại các giá trị $x$ tiến đến 1 từ trái và phải.
+
+(b) Lập luận như trong Ví dụ 7.
+
+(c) Dựa vào đồ thị của $f$.
+\bt{44} (a) Vẽ đồ thị $f(x)=\dfrac{\cos2x-\cos x}{x^2}$ rồi phóng lớn về điểm nơi đồ thị cắt trục $y$ để ước lượng $\lim_{x\to0}f(x)$.
+
+(b) Kiểm tra câu (a) bằng cách tính $f(x)$ tại các giá trị $x$ tiến đến 0.
+\bt{45} (a) Ước lượng $\lim_{x\to0}(1+x)^{1/x}$ đến năm chữ số sau dấu phẩy. Số này có quen thuộc không? (b) Minh họa câu (a) bằng đồ thị $y=(1+x)^{1/x}$.
+\bt{46} (a) Vẽ $f(x)=e^x+\ln|x-4|$ trên $0\le x\le5$. Bạn có cho rằng đồ thị là biểu diễn chính xác của $f$ không? (b) Làm thế nào thu được đồ thị biểu diễn $f$ tốt hơn?
+\bt{47} (a) Tính $f(x)=x^2-2^x/1000$ tại $x=1,0.8,0.6,0.4,0.2,0.1,0.05$, rồi dự đoán
+\[\lim_{x\to0}\left(x^2-\frac{2^x}{1000}\right).\]
+(b) Tính tại $x=0.04,0.02,0.01,0.005,0.003,0.001$, rồi dự đoán lại.
+\bt{48} (a) Tính $h(x)=\dfrac{\tan x-x}{x^3}$ tại $x=1,0.5,0.1,0.05,0.01,0.005$.
+
+(b) Dự đoán $\displaystyle\lim_{x\to0}\frac{\tan x-x}{x^3}$.
+
+(c) Tính $h(x)$ với các giá trị $x$ ngày càng nhỏ cho đến khi nhận được $h(x)=0$. Bạn còn tin dự đoán ở (b) đúng không? Giải thích vì sao cuối cùng thu được các giá trị 0. Ở §4.4 sẽ trình bày một phương pháp tính giới hạn này.
+
+(d) Vẽ $h$ trong cửa sổ $[-1,1]\times[0,1]$. Phóng lớn về điểm nơi đồ thị cắt trục $y$ để ước lượng giới hạn tại 0. Tiếp tục phóng lớn đến khi thấy đồ thị bị méo. So sánh với câu (c).
+\bt{49} Dùng đồ thị ước lượng phương trình tất cả các tiệm cận đứng của
+\[y=\tan(2\sin x),\qquad-\pi\le x\le\pi.\]
+Sau đó tìm phương trình chính xác của các tiệm cận.
+\bt{50} Xét $f(x)=\tan(1/x)$.
+
+(a) Chứng minh $f(x)=0$ với $x=1/\pi,1/(2\pi),1/(3\pi),\ldots$.
+
+(b) Chứng minh $f(x)=1$ với $x=4/\pi,4/(5\pi),4/(9\pi),\ldots$.
+
+(c) Kết luận được gì về $\displaystyle\lim_{x\to0^+}\tan\frac1x$?
+\bt{51} Trong thuyết tương đối, khối lượng của hạt có vận tốc $v$ được cho bởi
+\[m=\frac{m_0}{\sqrt{1-v^2/c^2}},\]
+trong đó $m_0$ là khối lượng khi hạt đứng yên và $c$ là tốc độ ánh sáng. Điều gì xảy ra khi $v\to c^-$?
+\section*{Ghi chú biên tập}
+\begin{enumerate}
+\item Sách dùng ``giới hạn không tồn tại'' để chỉ không có giới hạn hữu hạn trong các Ví dụ 6, 7; ký hiệu $\infty$, $-\infty$ mô tả sự phân kỳ vô cực. Bản dịch giữ sự phân biệt này.
+\item Những số liệu máy tính sau Ví dụ 1 minh họa một thiết bị cụ thể; sai số, giá trị 0 và mức phóng đại gây méo đồ thị phụ thuộc thiết bị, phần mềm và độ chính xác tính toán. Có thể đối chiếu bằng biểu thức ổn định $1/(\sqrt{t^2+9}+3)$ khi $t\ne0$.
+\item Trong Bài tập 44 và 48(d), cách diễn đạt gốc ``đồ thị cắt trục $y$'' được giữ lại. Các hàm gốc không xác định tại 0; phải hiểu là vùng đồ thị tiến sát trục $y$, hay điểm của phần mở rộng liên tục nếu đã bổ sung giá trị thích hợp.
+\item Hình gốc giữ nguyên các đường cong, nhãn và điểm trống/điểm đặc; chú thích được dịch. Bài tập chỉ dịch đề, không bổ sung đáp án. Các ký hiệu hướng tiến đến và dấu bất đẳng thức được giữ đúng nguồn.
+\end{enumerate}
+\section*{Thuật ngữ bổ sung}
+\begin{center}\begin{tabular}{ll}\toprule Tiếng Anh&Tiếng Việt thống nhất\\\midrule
+intuitive definition&định nghĩa trực giác\\
+one-sided limit&giới hạn một phía\\
+left-hand limit&giới hạn bên trái\\
+right-hand limit&giới hạn bên phải\\
+two-sided limit&giới hạn hai phía\\
+infinite limit&giới hạn vô cực\\
+rounding error&sai số làm tròn\\
+oscillation&dao động\\
+unbounded&không bị chặn\\
+Heaviside function&hàm Heaviside\\
+numerical experimentation&thử nghiệm số\\
+viewing rectangle&cửa sổ vẽ đồ thị\\
+\bottomrule\end{tabular}\end{center}
+\noindent\textbf{Phạm vi hoàn thành:} Trọn §2.2, gồm các mục đánh số (1)–(6), 8 ví dụ, Hình 1–15, các bảng giá trị và 51 bài tập. Phần tiếp theo: \textit{§2.3 — Tính giới hạn bằng các quy tắc giới hạn}, bắt đầu ở cuối trang in 94.
+\end{document}

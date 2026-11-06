@@ -1,0 +1,1284 @@
+{
+  "title": "Calculus: Early Transcendentals — James Stewart",
+  "authors": "James Stewart, Daniel Clegg, Saleem Watson",
+  "edition": "9th edition",
+  "sourceNote": "Mục lục chính đối chiếu trang PDF 8–14 của bản Stewart–Clegg–Watson, ấn bản 9. Số trang ghi theo trang in của sách, không phải trang PDF. Có chương, mục đánh số, ôn tập, bài tập nâng cao và phụ lục; chưa nhập các project và nội dung chi tiết.",
+  "sections": [
+    {
+      "key": "preview",
+      "title": "Khái quát về Giải tích",
+      "originalTitle": "A Preview of Calculus",
+      "page": "1",
+      "parent": "",
+      "order": 0
+    },
+    {
+      "key": "ch-1",
+      "title": "Chương 1. Hàm số và mô hình",
+      "originalTitle": "Functions and Models",
+      "page": "7",
+      "parent": "",
+      "order": 1
+    },
+    {
+      "key": "1-1",
+      "title": "1.1 — Bốn cách biểu diễn hàm số",
+      "page": "8",
+      "parent": "ch-1",
+      "order": 1
+    },
+    {
+      "key": "1-2",
+      "title": "1.2 — Mô hình toán học: Các hàm số cơ bản",
+      "page": "21",
+      "parent": "ch-1",
+      "order": 2
+    },
+    {
+      "key": "1-3",
+      "title": "1.3 — Xây dựng hàm số mới từ những hàm số đã biết",
+      "page": "36",
+      "parent": "ch-1",
+      "order": 3
+    },
+    {
+      "key": "1-4",
+      "title": "1.4 — Hàm số mũ",
+      "page": "45",
+      "parent": "ch-1",
+      "order": 4
+    },
+    {
+      "key": "1-5",
+      "title": "1.5 — Hàm ngược và lôgarit",
+      "page": "54",
+      "parent": "ch-1",
+      "order": 5
+    },
+    {
+      "key": "1-review",
+      "title": "Ôn tập",
+      "originalTitle": "Review",
+      "page": "67",
+      "parent": "ch-1",
+      "order": 900
+    },
+    {
+      "key": "ch-2",
+      "title": "Chương 2. Giới hạn và đạo hàm",
+      "originalTitle": "Limits and Derivatives",
+      "page": "77",
+      "parent": "",
+      "order": 2
+    },
+    {
+      "key": "2-1",
+      "title": "2.1 — Các bài toán tiếp tuyến và vận tốc",
+      "page": "78",
+      "parent": "ch-2",
+      "order": 1
+    },
+    {
+      "key": "2-2",
+      "title": "2.2 — Giới hạn của hàm số",
+      "page": "83",
+      "parent": "ch-2",
+      "order": 2
+    },
+    {
+      "key": "2-3",
+      "title": "2.3 — Tính giới hạn bằng các quy tắc giới hạn",
+      "page": "94",
+      "parent": "ch-2",
+      "order": 3
+    },
+    {
+      "key": "2-4",
+      "title": "2.4 — Định nghĩa chính xác của giới hạn",
+      "page": "105",
+      "parent": "ch-2",
+      "order": 4
+    },
+    {
+      "key": "2-5",
+      "title": "2.5 — Tính liên tục",
+      "page": "115",
+      "parent": "ch-2",
+      "order": 5
+    },
+    {
+      "key": "2-6",
+      "title": "2.6 — Giới hạn tại vô cực; tiệm cận ngang",
+      "page": "127",
+      "parent": "ch-2",
+      "order": 6
+    },
+    {
+      "key": "2-7",
+      "title": "2.7 — Đạo hàm và tốc độ biến thiên",
+      "page": "140",
+      "parent": "ch-2",
+      "order": 7
+    },
+    {
+      "key": "2-8",
+      "title": "2.8 — Đạo hàm xét như một hàm số",
+      "page": "153",
+      "parent": "ch-2",
+      "order": 8
+    },
+    {
+      "key": "2-review",
+      "title": "Ôn tập",
+      "originalTitle": "Review",
+      "page": "166",
+      "parent": "ch-2",
+      "order": 900
+    },
+    {
+      "key": "2-plus",
+      "title": "Bài tập nâng cao",
+      "originalTitle": "Problems Plus",
+      "page": "171",
+      "parent": "ch-2",
+      "order": 901
+    },
+    {
+      "key": "ch-3",
+      "title": "Chương 3. Các quy tắc tính đạo hàm",
+      "originalTitle": "Differentiation Rules",
+      "page": "173",
+      "parent": "",
+      "order": 3
+    },
+    {
+      "key": "3-1",
+      "title": "3.1 — Đạo hàm của đa thức và hàm số mũ",
+      "page": "174",
+      "parent": "ch-3",
+      "order": 1
+    },
+    {
+      "key": "3-2",
+      "title": "3.2 — Quy tắc đạo hàm tích và thương",
+      "page": "185",
+      "parent": "ch-3",
+      "order": 2
+    },
+    {
+      "key": "3-3",
+      "title": "3.3 — Đạo hàm của hàm lượng giác",
+      "page": "191",
+      "parent": "ch-3",
+      "order": 3
+    },
+    {
+      "key": "3-4",
+      "title": "3.4 — Quy tắc dây chuyền",
+      "page": "199",
+      "parent": "ch-3",
+      "order": 4
+    },
+    {
+      "key": "3-5",
+      "title": "3.5 — Đạo hàm ẩn",
+      "page": "209",
+      "parent": "ch-3",
+      "order": 5
+    },
+    {
+      "key": "3-6",
+      "title": "3.6 — Đạo hàm của lôgarit và hàm lượng giác ngược",
+      "page": "217",
+      "parent": "ch-3",
+      "order": 6
+    },
+    {
+      "key": "3-7",
+      "title": "3.7 — Tốc độ biến thiên trong khoa học tự nhiên và xã hội",
+      "page": "225",
+      "parent": "ch-3",
+      "order": 7
+    },
+    {
+      "key": "3-8",
+      "title": "3.8 — Tăng trưởng và suy giảm theo hàm mũ",
+      "page": "239",
+      "parent": "ch-3",
+      "order": 8
+    },
+    {
+      "key": "3-9",
+      "title": "3.9 — Tốc độ biến thiên liên hệ",
+      "page": "247",
+      "parent": "ch-3",
+      "order": 9
+    },
+    {
+      "key": "3-10",
+      "title": "3.10 — Xấp xỉ tuyến tính và vi phân",
+      "page": "254",
+      "parent": "ch-3",
+      "order": 10
+    },
+    {
+      "key": "3-11",
+      "title": "3.11 — Hàm hyperbolic",
+      "page": "261",
+      "parent": "ch-3",
+      "order": 11
+    },
+    {
+      "key": "3-review",
+      "title": "Ôn tập",
+      "originalTitle": "Review",
+      "page": "269",
+      "parent": "ch-3",
+      "order": 900
+    },
+    {
+      "key": "3-plus",
+      "title": "Bài tập nâng cao",
+      "originalTitle": "Problems Plus",
+      "page": "274",
+      "parent": "ch-3",
+      "order": 901
+    },
+    {
+      "key": "ch-4",
+      "title": "Chương 4. Ứng dụng của đạo hàm",
+      "originalTitle": "Applications of Differentiation",
+      "page": "279",
+      "parent": "",
+      "order": 4
+    },
+    {
+      "key": "4-1",
+      "title": "4.1 — Giá trị lớn nhất và nhỏ nhất",
+      "page": "280",
+      "parent": "ch-4",
+      "order": 1
+    },
+    {
+      "key": "4-2",
+      "title": "4.2 — Định lý giá trị trung bình",
+      "page": "290",
+      "parent": "ch-4",
+      "order": 2
+    },
+    {
+      "key": "4-3",
+      "title": "4.3 — Đạo hàm và hình dạng đồ thị",
+      "page": "296",
+      "parent": "ch-4",
+      "order": 3
+    },
+    {
+      "key": "4-4",
+      "title": "4.4 — Dạng vô định và quy tắc L’Hôpital",
+      "page": "309",
+      "parent": "ch-4",
+      "order": 4
+    },
+    {
+      "key": "4-5",
+      "title": "4.5 — Tổng hợp phương pháp khảo sát đồ thị",
+      "page": "320",
+      "parent": "ch-4",
+      "order": 5
+    },
+    {
+      "key": "4-6",
+      "title": "4.6 — Vẽ đồ thị bằng Giải tích và công nghệ",
+      "page": "329",
+      "parent": "ch-4",
+      "order": 6
+    },
+    {
+      "key": "4-7",
+      "title": "4.7 — Bài toán tối ưu",
+      "page": "336",
+      "parent": "ch-4",
+      "order": 7
+    },
+    {
+      "key": "4-8",
+      "title": "4.8 — Phương pháp Newton",
+      "page": "351",
+      "parent": "ch-4",
+      "order": 8
+    },
+    {
+      "key": "4-9",
+      "title": "4.9 — Nguyên hàm",
+      "page": "356",
+      "parent": "ch-4",
+      "order": 9
+    },
+    {
+      "key": "4-review",
+      "title": "Ôn tập",
+      "originalTitle": "Review",
+      "page": "364",
+      "parent": "ch-4",
+      "order": 900
+    },
+    {
+      "key": "4-plus",
+      "title": "Bài tập nâng cao",
+      "originalTitle": "Problems Plus",
+      "page": "369",
+      "parent": "ch-4",
+      "order": 901
+    },
+    {
+      "key": "ch-5",
+      "title": "Chương 5. Tích phân",
+      "originalTitle": "Integrals",
+      "page": "371",
+      "parent": "",
+      "order": 5
+    },
+    {
+      "key": "5-1",
+      "title": "5.1 — Bài toán diện tích và quãng đường",
+      "page": "372",
+      "parent": "ch-5",
+      "order": 1
+    },
+    {
+      "key": "5-2",
+      "title": "5.2 — Tích phân xác định",
+      "page": "384",
+      "parent": "ch-5",
+      "order": 2
+    },
+    {
+      "key": "5-3",
+      "title": "5.3 — Định lý cơ bản của Giải tích",
+      "page": "399",
+      "parent": "ch-5",
+      "order": 3
+    },
+    {
+      "key": "5-4",
+      "title": "5.4 — Tích phân bất định và định lý biến thiên tổng cộng",
+      "page": "409",
+      "parent": "ch-5",
+      "order": 4
+    },
+    {
+      "key": "5-5",
+      "title": "5.5 — Quy tắc đổi biến",
+      "page": "419",
+      "parent": "ch-5",
+      "order": 5
+    },
+    {
+      "key": "5-review",
+      "title": "Ôn tập",
+      "originalTitle": "Review",
+      "page": "428",
+      "parent": "ch-5",
+      "order": 900
+    },
+    {
+      "key": "5-plus",
+      "title": "Bài tập nâng cao",
+      "originalTitle": "Problems Plus",
+      "page": "432",
+      "parent": "ch-5",
+      "order": 901
+    },
+    {
+      "key": "ch-6",
+      "title": "Chương 6. Ứng dụng của tích phân",
+      "originalTitle": "Applications of Integration",
+      "page": "435",
+      "parent": "",
+      "order": 6
+    },
+    {
+      "key": "6-1",
+      "title": "6.1 — Diện tích giữa các đường cong",
+      "page": "436",
+      "parent": "ch-6",
+      "order": 1
+    },
+    {
+      "key": "6-2",
+      "title": "6.2 — Thể tích",
+      "page": "446",
+      "parent": "ch-6",
+      "order": 2
+    },
+    {
+      "key": "6-3",
+      "title": "6.3 — Thể tích bằng phương pháp vỏ trụ",
+      "page": "460",
+      "parent": "ch-6",
+      "order": 3
+    },
+    {
+      "key": "6-4",
+      "title": "6.4 — Công cơ học",
+      "page": "467",
+      "parent": "ch-6",
+      "order": 4
+    },
+    {
+      "key": "6-5",
+      "title": "6.5 — Giá trị trung bình của hàm số",
+      "page": "473",
+      "parent": "ch-6",
+      "order": 5
+    },
+    {
+      "key": "6-review",
+      "title": "Ôn tập",
+      "originalTitle": "Review",
+      "page": "478",
+      "parent": "ch-6",
+      "order": 900
+    },
+    {
+      "key": "6-plus",
+      "title": "Bài tập nâng cao",
+      "originalTitle": "Problems Plus",
+      "page": "481",
+      "parent": "ch-6",
+      "order": 901
+    },
+    {
+      "key": "ch-7",
+      "title": "Chương 7. Các kỹ thuật tính tích phân",
+      "originalTitle": "Techniques of Integration",
+      "page": "485",
+      "parent": "",
+      "order": 7
+    },
+    {
+      "key": "7-1",
+      "title": "7.1 — Tích phân từng phần",
+      "page": "486",
+      "parent": "ch-7",
+      "order": 1
+    },
+    {
+      "key": "7-2",
+      "title": "7.2 — Tích phân lượng giác",
+      "page": "493",
+      "parent": "ch-7",
+      "order": 2
+    },
+    {
+      "key": "7-3",
+      "title": "7.3 — Đổi biến lượng giác",
+      "page": "500",
+      "parent": "ch-7",
+      "order": 3
+    },
+    {
+      "key": "7-4",
+      "title": "7.4 — Tích phân hàm hữu tỉ bằng phân thức đơn giản",
+      "page": "507",
+      "parent": "ch-7",
+      "order": 4
+    },
+    {
+      "key": "7-5",
+      "title": "7.5 — Chiến lược tính tích phân",
+      "page": "517",
+      "parent": "ch-7",
+      "order": 5
+    },
+    {
+      "key": "7-6",
+      "title": "7.6 — Tính tích phân bằng bảng và công nghệ",
+      "page": "523",
+      "parent": "ch-7",
+      "order": 6
+    },
+    {
+      "key": "7-7",
+      "title": "7.7 — Tính gần đúng tích phân",
+      "page": "529",
+      "parent": "ch-7",
+      "order": 7
+    },
+    {
+      "key": "7-8",
+      "title": "7.8 — Tích phân suy rộng",
+      "page": "542",
+      "parent": "ch-7",
+      "order": 8
+    },
+    {
+      "key": "7-review",
+      "title": "Ôn tập",
+      "originalTitle": "Review",
+      "page": "552",
+      "parent": "ch-7",
+      "order": 900
+    },
+    {
+      "key": "7-plus",
+      "title": "Bài tập nâng cao",
+      "originalTitle": "Problems Plus",
+      "page": "556",
+      "parent": "ch-7",
+      "order": 901
+    },
+    {
+      "key": "ch-8",
+      "title": "Chương 8. Các ứng dụng tiếp theo của tích phân",
+      "originalTitle": "Further Applications of Integration",
+      "page": "559",
+      "parent": "",
+      "order": 8
+    },
+    {
+      "key": "8-1",
+      "title": "8.1 — Độ dài cung",
+      "page": "560",
+      "parent": "ch-8",
+      "order": 1
+    },
+    {
+      "key": "8-2",
+      "title": "8.2 — Diện tích mặt tròn xoay",
+      "page": "567",
+      "parent": "ch-8",
+      "order": 2
+    },
+    {
+      "key": "8-3",
+      "title": "8.3 — Ứng dụng trong vật lý và kỹ thuật",
+      "page": "576",
+      "parent": "ch-8",
+      "order": 3
+    },
+    {
+      "key": "8-4",
+      "title": "8.4 — Ứng dụng trong kinh tế và sinh học",
+      "page": "587",
+      "parent": "ch-8",
+      "order": 4
+    },
+    {
+      "key": "8-5",
+      "title": "8.5 — Xác suất",
+      "page": "592",
+      "parent": "ch-8",
+      "order": 5
+    },
+    {
+      "key": "8-review",
+      "title": "Ôn tập",
+      "originalTitle": "Review",
+      "page": "600",
+      "parent": "ch-8",
+      "order": 900
+    },
+    {
+      "key": "8-plus",
+      "title": "Bài tập nâng cao",
+      "originalTitle": "Problems Plus",
+      "page": "602",
+      "parent": "ch-8",
+      "order": 901
+    },
+    {
+      "key": "ch-9",
+      "title": "Chương 9. Phương trình vi phân",
+      "originalTitle": "Differential Equations",
+      "page": "605",
+      "parent": "",
+      "order": 9
+    },
+    {
+      "key": "9-1",
+      "title": "9.1 — Mô hình hóa bằng phương trình vi phân",
+      "page": "606",
+      "parent": "ch-9",
+      "order": 1
+    },
+    {
+      "key": "9-2",
+      "title": "9.2 — Trường hướng và phương pháp Euler",
+      "page": "612",
+      "parent": "ch-9",
+      "order": 2
+    },
+    {
+      "key": "9-3",
+      "title": "9.3 — Phương trình tách biến",
+      "page": "621",
+      "parent": "ch-9",
+      "order": 3
+    },
+    {
+      "key": "9-4",
+      "title": "9.4 — Mô hình tăng trưởng quần thể",
+      "page": "631",
+      "parent": "ch-9",
+      "order": 4
+    },
+    {
+      "key": "9-5",
+      "title": "9.5 — Phương trình tuyến tính",
+      "page": "641",
+      "parent": "ch-9",
+      "order": 5
+    },
+    {
+      "key": "9-6",
+      "title": "9.6 — Hệ vật săn mồi–con mồi",
+      "page": "649",
+      "parent": "ch-9",
+      "order": 6
+    },
+    {
+      "key": "9-review",
+      "title": "Ôn tập",
+      "originalTitle": "Review",
+      "page": "656",
+      "parent": "ch-9",
+      "order": 900
+    },
+    {
+      "key": "9-plus",
+      "title": "Bài tập nâng cao",
+      "originalTitle": "Problems Plus",
+      "page": "659",
+      "parent": "ch-9",
+      "order": 901
+    },
+    {
+      "key": "ch-10",
+      "title": "Chương 10. Phương trình tham số và tọa độ cực",
+      "originalTitle": "Parametric Equations and Polar Coordinates",
+      "page": "661",
+      "parent": "",
+      "order": 10
+    },
+    {
+      "key": "10-1",
+      "title": "10.1 — Đường cong xác định bằng phương trình tham số",
+      "page": "662",
+      "parent": "ch-10",
+      "order": 1
+    },
+    {
+      "key": "10-2",
+      "title": "10.2 — Vi tích phân với đường cong tham số",
+      "page": "673",
+      "parent": "ch-10",
+      "order": 2
+    },
+    {
+      "key": "10-3",
+      "title": "10.3 — Tọa độ cực",
+      "page": "684",
+      "parent": "ch-10",
+      "order": 3
+    },
+    {
+      "key": "10-4",
+      "title": "10.4 — Vi tích phân trong tọa độ cực",
+      "page": "694",
+      "parent": "ch-10",
+      "order": 4
+    },
+    {
+      "key": "10-5",
+      "title": "10.5 — Các đường conic",
+      "page": "702",
+      "parent": "ch-10",
+      "order": 5
+    },
+    {
+      "key": "10-6",
+      "title": "10.6 — Các đường conic trong tọa độ cực",
+      "page": "711",
+      "parent": "ch-10",
+      "order": 6
+    },
+    {
+      "key": "10-review",
+      "title": "Ôn tập",
+      "originalTitle": "Review",
+      "page": "719",
+      "parent": "ch-10",
+      "order": 900
+    },
+    {
+      "key": "10-plus",
+      "title": "Bài tập nâng cao",
+      "originalTitle": "Problems Plus",
+      "page": "722",
+      "parent": "ch-10",
+      "order": 901
+    },
+    {
+      "key": "ch-11",
+      "title": "Chương 11. Dãy số, chuỗi số và chuỗi lũy thừa",
+      "originalTitle": "Sequences, Series, and Power Series",
+      "page": "723",
+      "parent": "",
+      "order": 11
+    },
+    {
+      "key": "11-1",
+      "title": "11.1 — Dãy số",
+      "page": "724",
+      "parent": "ch-11",
+      "order": 1
+    },
+    {
+      "key": "11-2",
+      "title": "11.2 — Chuỗi số",
+      "page": "738",
+      "parent": "ch-11",
+      "order": 2
+    },
+    {
+      "key": "11-3",
+      "title": "11.3 — Tiêu chuẩn tích phân và ước lượng tổng",
+      "page": "751",
+      "parent": "ch-11",
+      "order": 3
+    },
+    {
+      "key": "11-4",
+      "title": "11.4 — Các tiêu chuẩn so sánh",
+      "page": "760",
+      "parent": "ch-11",
+      "order": 4
+    },
+    {
+      "key": "11-5",
+      "title": "11.5 — Chuỗi đan dấu và hội tụ tuyệt đối",
+      "page": "765",
+      "parent": "ch-11",
+      "order": 5
+    },
+    {
+      "key": "11-6",
+      "title": "11.6 — Tiêu chuẩn tỉ số và căn thức",
+      "page": "774",
+      "parent": "ch-11",
+      "order": 6
+    },
+    {
+      "key": "11-7",
+      "title": "11.7 — Chiến lược kiểm tra hội tụ của chuỗi",
+      "page": "779",
+      "parent": "ch-11",
+      "order": 7
+    },
+    {
+      "key": "11-8",
+      "title": "11.8 — Chuỗi lũy thừa",
+      "page": "781",
+      "parent": "ch-11",
+      "order": 8
+    },
+    {
+      "key": "11-9",
+      "title": "11.9 — Biểu diễn hàm số bằng chuỗi lũy thừa",
+      "page": "787",
+      "parent": "ch-11",
+      "order": 9
+    },
+    {
+      "key": "11-10",
+      "title": "11.10 — Chuỗi Taylor và Maclaurin",
+      "page": "795",
+      "parent": "ch-11",
+      "order": 10
+    },
+    {
+      "key": "11-11",
+      "title": "11.11 — Ứng dụng của đa thức Taylor",
+      "page": "811",
+      "parent": "ch-11",
+      "order": 11
+    },
+    {
+      "key": "11-review",
+      "title": "Ôn tập",
+      "originalTitle": "Review",
+      "page": "821",
+      "parent": "ch-11",
+      "order": 900
+    },
+    {
+      "key": "11-plus",
+      "title": "Bài tập nâng cao",
+      "originalTitle": "Problems Plus",
+      "page": "825",
+      "parent": "ch-11",
+      "order": 901
+    },
+    {
+      "key": "ch-12",
+      "title": "Chương 12. Vectơ và hình học không gian",
+      "originalTitle": "Vectors and the Geometry of Space",
+      "page": "829",
+      "parent": "",
+      "order": 12
+    },
+    {
+      "key": "12-1",
+      "title": "12.1 — Hệ tọa độ ba chiều",
+      "page": "830",
+      "parent": "ch-12",
+      "order": 1
+    },
+    {
+      "key": "12-2",
+      "title": "12.2 — Vectơ",
+      "page": "836",
+      "parent": "ch-12",
+      "order": 2
+    },
+    {
+      "key": "12-3",
+      "title": "12.3 — Tích vô hướng",
+      "page": "847",
+      "parent": "ch-12",
+      "order": 3
+    },
+    {
+      "key": "12-4",
+      "title": "12.4 — Tích có hướng",
+      "page": "855",
+      "parent": "ch-12",
+      "order": 4
+    },
+    {
+      "key": "12-5",
+      "title": "12.5 — Phương trình đường thẳng và mặt phẳng",
+      "page": "864",
+      "parent": "ch-12",
+      "order": 5
+    },
+    {
+      "key": "12-6",
+      "title": "12.6 — Mặt trụ và mặt bậc hai",
+      "page": "875",
+      "parent": "ch-12",
+      "order": 6
+    },
+    {
+      "key": "12-review",
+      "title": "Ôn tập",
+      "originalTitle": "Review",
+      "page": "883",
+      "parent": "ch-12",
+      "order": 900
+    },
+    {
+      "key": "12-plus",
+      "title": "Bài tập nâng cao",
+      "originalTitle": "Problems Plus",
+      "page": "887",
+      "parent": "ch-12",
+      "order": 901
+    },
+    {
+      "key": "ch-13",
+      "title": "Chương 13. Hàm vectơ",
+      "originalTitle": "Vector Functions",
+      "page": "889",
+      "parent": "",
+      "order": 13
+    },
+    {
+      "key": "13-1",
+      "title": "13.1 — Hàm vectơ và đường cong không gian",
+      "page": "890",
+      "parent": "ch-13",
+      "order": 1
+    },
+    {
+      "key": "13-2",
+      "title": "13.2 — Đạo hàm và tích phân của hàm vectơ",
+      "page": "898",
+      "parent": "ch-13",
+      "order": 2
+    },
+    {
+      "key": "13-3",
+      "title": "13.3 — Độ dài cung và độ cong",
+      "page": "904",
+      "parent": "ch-13",
+      "order": 3
+    },
+    {
+      "key": "13-4",
+      "title": "13.4 — Chuyển động trong không gian: Vận tốc và gia tốc",
+      "page": "916",
+      "parent": "ch-13",
+      "order": 4
+    },
+    {
+      "key": "13-review",
+      "title": "Ôn tập",
+      "originalTitle": "Review",
+      "page": "927",
+      "parent": "ch-13",
+      "order": 900
+    },
+    {
+      "key": "13-plus",
+      "title": "Bài tập nâng cao",
+      "originalTitle": "Problems Plus",
+      "page": "930",
+      "parent": "ch-13",
+      "order": 901
+    },
+    {
+      "key": "ch-14",
+      "title": "Chương 14. Đạo hàm riêng",
+      "originalTitle": "Partial Derivatives",
+      "page": "933",
+      "parent": "",
+      "order": 14
+    },
+    {
+      "key": "14-1",
+      "title": "14.1 — Hàm nhiều biến",
+      "page": "934",
+      "parent": "ch-14",
+      "order": 1
+    },
+    {
+      "key": "14-2",
+      "title": "14.2 — Giới hạn và liên tục",
+      "page": "951",
+      "parent": "ch-14",
+      "order": 2
+    },
+    {
+      "key": "14-3",
+      "title": "14.3 — Đạo hàm riêng",
+      "page": "961",
+      "parent": "ch-14",
+      "order": 3
+    },
+    {
+      "key": "14-4",
+      "title": "14.4 — Mặt phẳng tiếp xúc và xấp xỉ tuyến tính",
+      "page": "974",
+      "parent": "ch-14",
+      "order": 4
+    },
+    {
+      "key": "14-5",
+      "title": "14.5 — Quy tắc dây chuyền",
+      "page": "985",
+      "parent": "ch-14",
+      "order": 5
+    },
+    {
+      "key": "14-6",
+      "title": "14.6 — Đạo hàm theo hướng và vectơ gradient",
+      "page": "994",
+      "parent": "ch-14",
+      "order": 6
+    },
+    {
+      "key": "14-7",
+      "title": "14.7 — Giá trị lớn nhất và nhỏ nhất",
+      "page": "1008",
+      "parent": "ch-14",
+      "order": 7
+    },
+    {
+      "key": "14-8",
+      "title": "14.8 — Nhân tử Lagrange",
+      "page": "1020",
+      "parent": "ch-14",
+      "order": 8
+    },
+    {
+      "key": "14-review",
+      "title": "Ôn tập",
+      "originalTitle": "Review",
+      "page": "1031",
+      "parent": "ch-14",
+      "order": 900
+    },
+    {
+      "key": "14-plus",
+      "title": "Bài tập nâng cao",
+      "originalTitle": "Problems Plus",
+      "page": "1035",
+      "parent": "ch-14",
+      "order": 901
+    },
+    {
+      "key": "ch-15",
+      "title": "Chương 15. Tích phân bội",
+      "originalTitle": "Multiple Integrals",
+      "page": "1037",
+      "parent": "",
+      "order": 15
+    },
+    {
+      "key": "15-1",
+      "title": "15.1 — Tích phân kép trên hình chữ nhật",
+      "page": "1038",
+      "parent": "ch-15",
+      "order": 1
+    },
+    {
+      "key": "15-2",
+      "title": "15.2 — Tích phân kép trên miền tổng quát",
+      "page": "1051",
+      "parent": "ch-15",
+      "order": 2
+    },
+    {
+      "key": "15-3",
+      "title": "15.3 — Tích phân kép trong tọa độ cực",
+      "page": "1062",
+      "parent": "ch-15",
+      "order": 3
+    },
+    {
+      "key": "15-4",
+      "title": "15.4 — Ứng dụng của tích phân kép",
+      "page": "1069",
+      "parent": "ch-15",
+      "order": 4
+    },
+    {
+      "key": "15-5",
+      "title": "15.5 — Diện tích mặt",
+      "page": "1079",
+      "parent": "ch-15",
+      "order": 5
+    },
+    {
+      "key": "15-6",
+      "title": "15.6 — Tích phân ba lớp",
+      "page": "1082",
+      "parent": "ch-15",
+      "order": 6
+    },
+    {
+      "key": "15-7",
+      "title": "15.7 — Tích phân ba lớp trong tọa độ trụ",
+      "page": "1095",
+      "parent": "ch-15",
+      "order": 7
+    },
+    {
+      "key": "15-8",
+      "title": "15.8 — Tích phân ba lớp trong tọa độ cầu",
+      "page": "1102",
+      "parent": "ch-15",
+      "order": 8
+    },
+    {
+      "key": "15-9",
+      "title": "15.9 — Đổi biến trong tích phân bội",
+      "page": "1109",
+      "parent": "ch-15",
+      "order": 9
+    },
+    {
+      "key": "15-review",
+      "title": "Ôn tập",
+      "originalTitle": "Review",
+      "page": "1117",
+      "parent": "ch-15",
+      "order": 900
+    },
+    {
+      "key": "15-plus",
+      "title": "Bài tập nâng cao",
+      "originalTitle": "Problems Plus",
+      "page": "1121",
+      "parent": "ch-15",
+      "order": 901
+    },
+    {
+      "key": "ch-16",
+      "title": "Chương 16. Giải tích vectơ",
+      "originalTitle": "Vector Calculus",
+      "page": "1123",
+      "parent": "",
+      "order": 16
+    },
+    {
+      "key": "16-1",
+      "title": "16.1 — Trường vectơ",
+      "page": "1124",
+      "parent": "ch-16",
+      "order": 1
+    },
+    {
+      "key": "16-2",
+      "title": "16.2 — Tích phân đường",
+      "page": "1131",
+      "parent": "ch-16",
+      "order": 2
+    },
+    {
+      "key": "16-3",
+      "title": "16.3 — Định lý cơ bản cho tích phân đường",
+      "page": "1144",
+      "parent": "ch-16",
+      "order": 3
+    },
+    {
+      "key": "16-4",
+      "title": "16.4 — Định lý Green",
+      "page": "1154",
+      "parent": "ch-16",
+      "order": 4
+    },
+    {
+      "key": "16-5",
+      "title": "16.5 — Rotor và divergence",
+      "page": "1161",
+      "parent": "ch-16",
+      "order": 5
+    },
+    {
+      "key": "16-6",
+      "title": "16.6 — Mặt tham số và diện tích",
+      "page": "1170",
+      "parent": "ch-16",
+      "order": 6
+    },
+    {
+      "key": "16-7",
+      "title": "16.7 — Tích phân mặt",
+      "page": "1182",
+      "parent": "ch-16",
+      "order": 7
+    },
+    {
+      "key": "16-8",
+      "title": "16.8 — Định lý Stokes",
+      "page": "1195",
+      "parent": "ch-16",
+      "order": 8
+    },
+    {
+      "key": "16-9",
+      "title": "16.9 — Định lý divergence",
+      "page": "1201",
+      "parent": "ch-16",
+      "order": 9
+    },
+    {
+      "key": "16-10",
+      "title": "16.10 — Tổng kết",
+      "page": "1208",
+      "parent": "ch-16",
+      "order": 10
+    },
+    {
+      "key": "16-review",
+      "title": "Ôn tập",
+      "originalTitle": "Review",
+      "page": "1209",
+      "parent": "ch-16",
+      "order": 900
+    },
+    {
+      "key": "16-plus",
+      "title": "Bài tập nâng cao",
+      "originalTitle": "Problems Plus",
+      "page": "1213",
+      "parent": "ch-16",
+      "order": 901
+    },
+    {
+      "key": "appendixes",
+      "title": "Phụ lục",
+      "originalTitle": "Appendixes",
+      "page": "A1",
+      "parent": "",
+      "order": 17
+    },
+    {
+      "key": "app-A",
+      "title": "A. Số, bất đẳng thức và giá trị tuyệt đối",
+      "page": "A2",
+      "parent": "appendixes",
+      "order": 0
+    },
+    {
+      "key": "app-B",
+      "title": "B. Hình học tọa độ và đường thẳng",
+      "page": "A10",
+      "parent": "appendixes",
+      "order": 1
+    },
+    {
+      "key": "app-C",
+      "title": "C. Đồ thị phương trình bậc hai",
+      "page": "A16",
+      "parent": "appendixes",
+      "order": 2
+    },
+    {
+      "key": "app-D",
+      "title": "D. Lượng giác",
+      "page": "A24",
+      "parent": "appendixes",
+      "order": 3
+    },
+    {
+      "key": "app-E",
+      "title": "E. Ký hiệu tổng sigma",
+      "page": "A36",
+      "parent": "appendixes",
+      "order": 4
+    },
+    {
+      "key": "app-F",
+      "title": "F. Chứng minh các định lý",
+      "page": "A41",
+      "parent": "appendixes",
+      "order": 5
+    },
+    {
+      "key": "app-G",
+      "title": "G. Định nghĩa lôgarit bằng tích phân",
+      "page": "A53",
+      "parent": "appendixes",
+      "order": 6
+    },
+    {
+      "key": "app-H",
+      "title": "H. Đáp án bài tập số lẻ",
+      "page": "A61",
+      "parent": "appendixes",
+      "order": 7
+    },
+    {
+      "key": "index",
+      "title": "Chỉ mục tra cứu",
+      "originalTitle": "Index",
+      "page": "A143",
+      "parent": "",
+      "order": 18
+    },
+    {
+      "key": "1-principles",
+      "title": "Các nguyên tắc giải toán",
+      "originalTitle": "Principles of Problem Solving",
+      "page": "70",
+      "parent": "ch-1",
+      "order": 902
+    }
+  ]
+}

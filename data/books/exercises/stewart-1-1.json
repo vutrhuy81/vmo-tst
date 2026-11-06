@@ -1,0 +1,360 @@
+{
+  "bookKey": "stewart-9",
+  "sectionKey": "1-1",
+  "heading": "1.1. Bài tập",
+  "sourceSha256": "47c33e6c4e1368899b4790d3ee704f93ea098b99f00cdeb1337f9d852b721b2a",
+  "exercises": [
+    {
+      "number": 1,
+      "content": "<p><strong>1.</strong>&nbsp; Nếu <span class=\"math inline\">\\(f(x)=x+\\sqrt{2-x}\\)</span> và <span class=\"math inline\">\\(g(u)=u+\\sqrt{2-u}\\)</span> thì <span class=\"math inline\">\\(f=g\\)</span> có đúng không?</p>"
+    },
+    {
+      "number": 2,
+      "content": "<p><strong>2.</strong>&nbsp; Nếu <span class=\"math inline\">\\(f(x)=\\dfrac{x^2-x}{x-1}\\)</span> và <span class=\"math inline\">\\(g(x)=x\\)</span> thì <span class=\"math inline\">\\(f=g\\)</span> có đúng không?</p>"
+    },
+    {
+      "number": 3,
+      "content": "<p><strong>3.</strong>&nbsp; Cho đồ thị của hàm số <span class=\"math inline\">\\(g\\)</span> như hình. (a) Nêu các giá trị <span class=\"math inline\">\\(g(-2)\\)</span>, <span class=\"math inline\">\\(g(0)\\)</span>, <span class=\"math inline\">\\(g(2)\\)</span>, <span class=\"math inline\">\\(g(3)\\)</span>. (b) Với những giá trị nào của <span class=\"math inline\">\\(x\\)</span> thì <span class=\"math inline\">\\(g(x)=3\\)</span>? (c) Với những giá trị nào của\n<span class=\"math inline\">\\(x\\)</span> thì <span class=\"math inline\">\\(g(x)\\le3\\)</span>? (d) Nêu tập xác định và tập giá\ntrị của <span class=\"math inline\">\\(g\\)</span>. (e) Hàm số <span class=\"math inline\">\\(g\\)</span> đồng biến trên những khoảng nào?</p>\n<div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-1-1-47c33e6c/e03.png\" alt=\"image\"><br>\n<span>Đồ thị cho Bài tập 3.</span></p>\n</div>"
+    },
+    {
+      "number": 4,
+      "content": "<p><strong>4.</strong>&nbsp; Cho đồ thị của <span class=\"math inline\">\\(f\\)</span> và <span class=\"math inline\">\\(g\\)</span> như hình. (a) Nêu <span class=\"math inline\">\\(f(-4)\\)</span> và <span class=\"math inline\">\\(g(3)\\)</span>. (b) Giá trị nào lớn hơn: <span class=\"math inline\">\\(f(-3)\\)</span> hay <span class=\"math inline\">\\(g(-3)\\)</span>? (c) Với những giá trị nào của\n<span class=\"math inline\">\\(x\\)</span> thì <span class=\"math inline\">\\(f(x)=g(x)\\)</span>? (d) Trên những khoảng nào\n<span class=\"math inline\">\\(f(x)\\le g(x)\\)</span>? (e) Nêu nghiệm của\n<span class=\"math inline\">\\(f(x)=-1\\)</span>. (f) Hàm số <span class=\"math inline\">\\(g\\)</span> nghịch biến trên những khoảng nào? (g)\nNêu tập xác định và tập giá trị của <span class=\"math inline\">\\(f\\)</span>. (h) Nêu tập xác định và tập giá trị\ncủa <span class=\"math inline\">\\(g\\)</span>.</p>\n<div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-1-1-47c33e6c/e04.png\" alt=\"image\"><br>\n<span>Đồ thị cho Bài tập 4.</span></p>\n</div>"
+    },
+    {
+      "number": 5,
+      "content": "<p><strong>5.</strong>&nbsp; Hình 1 được ghi bởi thiết bị do Cơ quan Mỏ và\nĐịa chất California vận hành tại Bệnh viện Đại học thuộc Đại học Nam\nCalifornia (USC), Los Angeles. Dùng hình này để ước lượng tập giá trị\ncủa hàm gia tốc thẳng đứng của mặt đất tại USC trong trận động đất\nNorthridge.</p><div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-1-1-47c33e6c/f01.png\" alt=\"image\"><br>\n<span>Hình 1. Gia tốc thẳng đứng của mặt đất trong trận động đất\nNorthridge.<br>\n<span class=\"math inline\">\\(a\\)</span>: cm/s<span class=\"math inline\">\\(^2\\)</span>; <span class=\"math inline\">\\(t\\)</span>: giây. Nguồn: Cơ quan Mỏ và Địa chất\nCalifornia.</span></p>\n</div>"
+    },
+    {
+      "number": 6,
+      "content": "<p><strong>6.</strong>&nbsp; Trong mục này, ta đã xét các hàm số thường gặp:\ndân số theo thời gian, cước bưu điện theo khối lượng bưu phẩm, nhiệt độ\nnước theo thời gian. Hãy nêu bằng lời ba ví dụ khác về hàm số trong đời\nsống. Có thể nói gì về tập xác định và tập giá trị của mỗi hàm số? Nếu\ncó thể, hãy phác họa đồ thị của chúng.</p>"
+    },
+    {
+      "number": 7,
+      "content": "<p><strong>7–14. Xác định phương trình hoặc bảng có xác định <span class=\"math inline\">\\(y\\)</span> là một hàm số của <span class=\"math inline\">\\(x\\)</span> hay không.</strong></p><p><strong>7.</strong>&nbsp; <span class=\"math inline\">\\(3x-5y=7\\)</span>.</p>"
+    },
+    {
+      "number": 8,
+      "content": "<p><strong>7–14. Xác định phương trình hoặc bảng có xác định <span class=\"math inline\">\\(y\\)</span> là một hàm số của <span class=\"math inline\">\\(x\\)</span> hay không.</strong></p><p><strong>8.</strong>&nbsp; <span class=\"math inline\">\\(3x^2-2y=5\\)</span>.</p>"
+    },
+    {
+      "number": 9,
+      "content": "<p><strong>7–14. Xác định phương trình hoặc bảng có xác định <span class=\"math inline\">\\(y\\)</span> là một hàm số của <span class=\"math inline\">\\(x\\)</span> hay không.</strong></p><p><strong>9.</strong>&nbsp; <span class=\"math inline\">\\(x^2+(y-3)^2=5\\)</span>.</p>"
+    },
+    {
+      "number": 10,
+      "content": "<p><strong>7–14. Xác định phương trình hoặc bảng có xác định <span class=\"math inline\">\\(y\\)</span> là một hàm số của <span class=\"math inline\">\\(x\\)</span> hay không.</strong></p><p><strong>10.</strong>&nbsp; <span class=\"math inline\">\\(2xy+5y^2=4\\)</span>.</p>"
+    },
+    {
+      "number": 11,
+      "content": "<p><strong>7–14. Xác định phương trình hoặc bảng có xác định <span class=\"math inline\">\\(y\\)</span> là một hàm số của <span class=\"math inline\">\\(x\\)</span> hay không.</strong></p><p><strong>11.</strong>&nbsp; <span class=\"math inline\">\\((y+3)^3+1=2x\\)</span>.</p>"
+    },
+    {
+      "number": 12,
+      "content": "<p><strong>7–14. Xác định phương trình hoặc bảng có xác định <span class=\"math inline\">\\(y\\)</span> là một hàm số của <span class=\"math inline\">\\(x\\)</span> hay không.</strong></p><p><strong>12.</strong>&nbsp; <span class=\"math inline\">\\(2x-|y|=0\\)</span>.</p>"
+    },
+    {
+      "number": 13,
+      "content": "<p><strong>7–14. Xác định phương trình hoặc bảng có xác định <span class=\"math inline\">\\(y\\)</span> là một hàm số của <span class=\"math inline\">\\(x\\)</span> hay không.</strong></p><p><strong>13.</strong>&nbsp; Bảng chiều cao và cỡ giày:</p>\n<div class=\"center\">\n<table>\n<thead>\n<tr class=\"header\">\n<th style=\"text-align: center;\"><span class=\"math inline\">\\(x\\)</span>:\nchiều cao (inch)</th>\n<th style=\"text-align: right;\">72</th>\n<th style=\"text-align: right;\">60</th>\n<th style=\"text-align: right;\">60</th>\n<th style=\"text-align: right;\">63</th>\n<th style=\"text-align: right;\">70</th>\n</tr>\n</thead>\n<tbody>\n<tr class=\"odd\">\n<td style=\"text-align: center;\"><span class=\"math inline\">\\(y\\)</span>:\ncỡ giày</td>\n<td style=\"text-align: right;\">12</td>\n<td style=\"text-align: right;\">8</td>\n<td style=\"text-align: right;\">7</td>\n<td style=\"text-align: right;\">9</td>\n<td style=\"text-align: right;\">10</td>\n</tr>\n</tbody>\n</table>\n</div>"
+    },
+    {
+      "number": 14,
+      "content": "<p><strong>7–14. Xác định phương trình hoặc bảng có xác định <span class=\"math inline\">\\(y\\)</span> là một hàm số của <span class=\"math inline\">\\(x\\)</span> hay không.</strong></p><p><strong>14.</strong>&nbsp; Bảng năm và học phí:</p>\n<div class=\"center\">\n<table>\n<thead>\n<tr class=\"header\">\n<th style=\"text-align: center;\"><span class=\"math inline\">\\(x\\)</span>:\nnăm</th>\n<th style=\"text-align: right;\">2016</th>\n<th style=\"text-align: right;\">2017</th>\n<th style=\"text-align: right;\">2018</th>\n<th style=\"text-align: right;\">2019</th>\n<th style=\"text-align: right;\">2020</th>\n</tr>\n</thead>\n<tbody>\n<tr class=\"odd\">\n<td style=\"text-align: center;\"><span class=\"math inline\">\\(y\\)</span>:\nhọc phí (đô la)</td>\n<td style=\"text-align: right;\">10 900</td>\n<td style=\"text-align: right;\">11 000</td>\n<td style=\"text-align: right;\">11 200</td>\n<td style=\"text-align: right;\">11 200</td>\n<td style=\"text-align: right;\">11 300</td>\n</tr>\n</tbody>\n</table>\n</div>"
+    },
+    {
+      "number": 15,
+      "content": "<p><strong>Bài tập 15 — đường cong thứ nhất.</strong></p><p><strong>15–18. Xác định đường cong có phải đồ thị của một hàm số theo\n<span class=\"math inline\">\\(x\\)</span> hay không. Nếu có, nêu tập xác\nđịnh và tập giá trị.</strong></p>\n<div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-1-1-47c33e6c/e15_18.png\" alt=\"image\"><br>\n<span>Các đường cong cho Bài tập 15, 16, 17 và 18 (theo thứ tự trong\nhình).</span></p>\n</div>"
+    },
+    {
+      "number": 16,
+      "content": "<p><strong>Bài tập 16 — đường cong thứ hai.</strong></p><p><strong>15–18. Xác định đường cong có phải đồ thị của một hàm số theo\n<span class=\"math inline\">\\(x\\)</span> hay không. Nếu có, nêu tập xác\nđịnh và tập giá trị.</strong></p>\n<div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-1-1-47c33e6c/e15_18.png\" alt=\"image\"><br>\n<span>Các đường cong cho Bài tập 15, 16, 17 và 18 (theo thứ tự trong\nhình).</span></p>\n</div>"
+    },
+    {
+      "number": 17,
+      "content": "<p><strong>Bài tập 17 — đường cong thứ ba.</strong></p><p><strong>15–18. Xác định đường cong có phải đồ thị của một hàm số theo\n<span class=\"math inline\">\\(x\\)</span> hay không. Nếu có, nêu tập xác\nđịnh và tập giá trị.</strong></p>\n<div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-1-1-47c33e6c/e15_18.png\" alt=\"image\"><br>\n<span>Các đường cong cho Bài tập 15, 16, 17 và 18 (theo thứ tự trong\nhình).</span></p>\n</div>"
+    },
+    {
+      "number": 18,
+      "content": "<p><strong>Bài tập 18 — đường cong thứ tư.</strong></p><p><strong>15–18. Xác định đường cong có phải đồ thị của một hàm số theo\n<span class=\"math inline\">\\(x\\)</span> hay không. Nếu có, nêu tập xác\nđịnh và tập giá trị.</strong></p>\n<div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-1-1-47c33e6c/e15_18.png\" alt=\"image\"><br>\n<span>Các đường cong cho Bài tập 15, 16, 17 và 18 (theo thứ tự trong\nhình).</span></p>\n</div>"
+    },
+    {
+      "number": 19,
+      "content": "<p><strong>19.</strong>&nbsp; Hình bên cho đồ thị nhiệt độ trung bình toàn\ncầu <span class=\"math inline\">\\(T\\)</span> trong thế kỷ XX. Ước lượng:\n(a) Nhiệt độ trung bình toàn cầu năm 1950. (b) Năm có nhiệt độ trung\nbình <span class=\"math inline\">\\(14.2^\\circ\\mathrm C\\)</span>. (c) Các\nnăm có nhiệt độ nhỏ nhất và lớn nhất. (d) Tập giá trị của <span class=\"math inline\">\\(T\\)</span>.</p>\n<div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-1-1-47c33e6c/e19.png\" alt=\"image\"><br>\n<span>Đồ thị cho Bài tập 19. Nguồn: phỏng theo Globe and Mail<br>\n(Toronto), ngày 5 tháng 12 năm 2009.</span></p>\n</div>"
+    },
+    {
+      "number": 20,
+      "content": "<p><strong>20.</strong>&nbsp; Cây phát triển nhanh hơn và tạo vòng năm rộng\nhơn trong những năm ấm; phát triển chậm hơn và tạo vòng năm hẹp hơn\ntrong những năm lạnh. Hình cho bề rộng vòng năm của một cây thông\nSiberia từ 1500 đến 2000. (a) Tập giá trị của hàm bề rộng vòng năm là\ngì? (b) Đồ thị gợi ý điều gì về nhiệt độ Trái Đất? Đồ thị có phản ánh\ncác vụ phun trào núi lửa giữa thế kỷ XIX không?</p>\n<div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-1-1-47c33e6c/e20.png\" alt=\"image\"><br>\n<span>Đồ thị cho Bài tập 20. Ring width (mm): bề rộng vòng năm (mm);\nYear: năm.<br>\nNguồn: phỏng theo G. Jacoby và cộng sự, “Mongolian Tree Rings and<br>\n20th-Century Warming”, Science 273 (1996), 771–773.</span></p>\n</div>"
+    },
+    {
+      "number": 21,
+      "content": "<p><strong>21.</strong>&nbsp; Cho vài viên đá vào cốc, rót đầy nước lạnh rồi\nđể cốc trên bàn. Mô tả sự thay đổi nhiệt độ của nước theo thời gian. Sau\nđó phác họa đồ thị nhiệt độ nước theo thời gian đã trôi qua.</p>"
+    },
+    {
+      "number": 22,
+      "content": "<p><strong>22.</strong>&nbsp; Đặt một chiếc bánh đông lạnh vào lò, nướng\ntrong một giờ, sau đó lấy ra để nguội. Mô tả sự thay đổi nhiệt độ của\nbánh theo thời gian và phác họa đồ thị tương ứng.</p>"
+    },
+    {
+      "number": 23,
+      "content": "<p><strong>23.</strong>&nbsp; Đồ thị cho công suất điện tiêu thụ trong một\nngày tháng Chín ở San Francisco (<span class=\"math inline\">\\(P\\)</span>\ntính bằng megawatt, <span class=\"math inline\">\\(t\\)</span> tính bằng giờ\nkể từ nửa đêm). (a) Công suất tiêu thụ lúc 6 giờ sáng và 6 giờ chiều là\nbao nhiêu? (b) Công suất tiêu thụ thấp nhất và cao nhất vào lúc nào? Các\nthời điểm đó có hợp lý không?</p>\n<div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-1-1-47c33e6c/e23.png\" alt=\"image\"><br>\n<span>Đồ thị cho Bài tập 23. Nguồn: Pacific Gas &amp;\nElectric.</span></p>\n</div>"
+    },
+    {
+      "number": 24,
+      "content": "<p><strong>24.</strong>&nbsp; Ba vận động viên thi chạy 100 m. Đồ thị biểu\ndiễn quãng đường đã chạy theo thời gian của mỗi người. Diễn đạt bằng lời\nnhững thông tin về cuộc đua mà đồ thị cho biết. Ai thắng cuộc? Cả ba\nngười có chạy hết cự ly không?</p>\n<div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-1-1-47c33e6c/e24.png\" alt=\"image\"><br>\n<span>Đồ thị cho Bài tập 24. <span class=\"math inline\">\\(t\\)</span>:\ngiây.</span></p>\n</div>"
+    },
+    {
+      "number": 25,
+      "content": "<p><strong>25.</strong>&nbsp; Phác họa đồ thị nhiệt độ ngoài trời theo thời\ngian trong một ngày xuân điển hình.</p>"
+    },
+    {
+      "number": 26,
+      "content": "<p><strong>26.</strong>&nbsp; Phác họa đồ thị số giờ có ánh sáng ban ngày\ntheo thời điểm trong năm.</p>"
+    },
+    {
+      "number": 27,
+      "content": "<p><strong>27.</strong>&nbsp; Phác họa đồ thị lượng cà phê thuộc một nhãn\nhiệu được cửa hàng bán ra theo giá bán.</p>"
+    },
+    {
+      "number": 28,
+      "content": "<p><strong>28.</strong>&nbsp; Phác họa đồ thị giá thị trường của một ô tô mới\ntheo thời gian trong 20 năm. Giả sử xe được bảo dưỡng tốt.</p>"
+    },
+    {
+      "number": 29,
+      "content": "<p><strong>29.</strong>&nbsp; Một chủ nhà cắt cỏ vào chiều thứ Tư hằng tuần.\nPhác họa đồ thị chiều cao cỏ theo thời gian trong bốn tuần.</p>"
+    },
+    {
+      "number": 30,
+      "content": "<p><strong>30.</strong>&nbsp; Một máy bay cất cánh từ một sân bay và hạ cánh\nsau một giờ tại sân bay khác cách đó 400 dặm. Gọi <span class=\"math inline\">\\(t\\)</span> là thời gian tính bằng phút kể từ lúc\nmáy bay rời nhà ga; <span class=\"math inline\">\\(x(t)\\)</span> là quãng\nđường theo phương ngang và <span class=\"math inline\">\\(y(t)\\)</span> là\nđộ cao. Phác họa những đồ thị có thể có của: (a) <span class=\"math inline\">\\(x(t)\\)</span>; (b) <span class=\"math inline\">\\(y(t)\\)</span>; (c) tốc độ so với mặt đất; (d) vận\ntốc theo phương thẳng đứng.</p>"
+    },
+    {
+      "number": 31,
+      "content": "<p><strong>31.</strong>&nbsp; Vào một ngày tháng Sáu ở Atlanta, nhiệt độ\n<span class=\"math inline\">\\(T\\)</span> (độ F) được ghi hai giờ một lần\ntừ nửa đêm đến 14 giờ. Thời gian <span class=\"math inline\">\\(t\\)</span>\ntính bằng giờ kể từ nửa đêm.</p>\n<div class=\"center\">\n<table>\n<thead>\n<tr class=\"header\">\n<th style=\"text-align: center;\"><span class=\"math inline\">\\(t\\)</span></th>\n<th style=\"text-align: right;\">0</th>\n<th style=\"text-align: right;\">2</th>\n<th style=\"text-align: right;\">4</th>\n<th style=\"text-align: right;\">6</th>\n<th style=\"text-align: right;\">8</th>\n<th style=\"text-align: right;\">10</th>\n<th style=\"text-align: right;\">12</th>\n<th style=\"text-align: right;\">14</th>\n</tr>\n</thead>\n<tbody>\n<tr class=\"odd\">\n<td style=\"text-align: center;\"><span class=\"math inline\">\\(T\\)</span></td>\n<td style=\"text-align: right;\">74</td>\n<td style=\"text-align: right;\">69</td>\n<td style=\"text-align: right;\">68</td>\n<td style=\"text-align: right;\">66</td>\n<td style=\"text-align: right;\">70</td>\n<td style=\"text-align: right;\">78</td>\n<td style=\"text-align: right;\">82</td>\n<td style=\"text-align: right;\">86</td>\n</tr>\n</tbody>\n</table>\n</div>\n<p>(a) Dùng số liệu để phác họa đồ thị <span class=\"math inline\">\\(T\\)</span> theo <span class=\"math inline\">\\(t\\)</span>. (b) Dùng đồ thị để ước lượng nhiệt độ\nlúc 9 giờ sáng.</p>"
+    },
+    {
+      "number": 32,
+      "content": "<p><strong>32.</strong>&nbsp; Các nhà nghiên cứu đo nồng độ cồn trong máu\n(BAC) của tám nam giới trưởng thành sau khi uống nhanh 30 mL ethanol\n(tương đương hai đơn vị đồ uống có cồn tiêu chuẩn). Bảng cho số liệu BAC\ntrung bình (g/dL) của tám người. (a) Dùng số liệu để phác họa đồ thị BAC\ntheo <span class=\"math inline\">\\(t\\)</span>. (b) Dùng đồ thị mô tả tác\nđộng của cồn thay đổi theo thời gian như thế nào.</p>\n<div class=\"center\">\n<table>\n<thead>\n<tr class=\"header\">\n<th style=\"text-align: right;\"><span class=\"math inline\">\\(t\\)</span>\n(giờ)</th>\n<th style=\"text-align: right;\">BAC</th>\n<th style=\"text-align: right;\"><span class=\"math inline\">\\(t\\)</span>\n(giờ)</th>\n<th style=\"text-align: right;\">BAC</th>\n</tr>\n</thead>\n<tbody>\n<tr class=\"odd\">\n<td style=\"text-align: right;\">0</td>\n<td style=\"text-align: right;\">0</td>\n<td style=\"text-align: right;\">1.75</td>\n<td style=\"text-align: right;\">0.022</td>\n</tr>\n<tr class=\"even\">\n<td style=\"text-align: right;\">0.2</td>\n<td style=\"text-align: right;\">0.025</td>\n<td style=\"text-align: right;\">2.0</td>\n<td style=\"text-align: right;\">0.018</td>\n</tr>\n<tr class=\"odd\">\n<td style=\"text-align: right;\">0.5</td>\n<td style=\"text-align: right;\">0.041</td>\n<td style=\"text-align: right;\">2.25</td>\n<td style=\"text-align: right;\">0.015</td>\n</tr>\n<tr class=\"even\">\n<td style=\"text-align: right;\">0.75</td>\n<td style=\"text-align: right;\">0.040</td>\n<td style=\"text-align: right;\">2.5</td>\n<td style=\"text-align: right;\">0.012</td>\n</tr>\n<tr class=\"odd\">\n<td style=\"text-align: right;\">1.0</td>\n<td style=\"text-align: right;\">0.033</td>\n<td style=\"text-align: right;\">3.0</td>\n<td style=\"text-align: right;\">0.007</td>\n</tr>\n<tr class=\"even\">\n<td style=\"text-align: right;\">1.25</td>\n<td style=\"text-align: right;\">0.029</td>\n<td style=\"text-align: right;\">3.5</td>\n<td style=\"text-align: right;\">0.003</td>\n</tr>\n<tr class=\"odd\">\n<td style=\"text-align: right;\">1.5</td>\n<td style=\"text-align: right;\">0.024</td>\n<td style=\"text-align: right;\">4.0</td>\n<td style=\"text-align: right;\">0.001</td>\n</tr>\n</tbody>\n</table>\n</div>\n<p><em>Nguồn:</em> Phỏng theo P. Wilkinson và cộng sự, “Pharmacokinetics\nof Ethanol after Oral Administration in the Fasting State”, <em>Journal\nof Pharmacokinetics and Biopharmaceutics</em> 5 (1977), 207–224.</p>"
+    },
+    {
+      "number": 33,
+      "content": "<p><strong>33.</strong>&nbsp; Cho <span class=\"math inline\">\\(f(x)=3x^2-x+2\\)</span>. Tính <span class=\"math inline\">\\(f(2)\\)</span>, <span class=\"math inline\">\\(f(-2)\\)</span>, <span class=\"math inline\">\\(f(a)\\)</span>, <span class=\"math inline\">\\(f(-a)\\)</span>, <span class=\"math inline\">\\(f(a+1)\\)</span>, <span class=\"math inline\">\\(2f(a)\\)</span>, <span class=\"math inline\">\\(f(2a)\\)</span>, <span class=\"math inline\">\\(f(a^2)\\)</span>, <span class=\"math inline\">\\([f(a)]^2\\)</span> và <span class=\"math inline\">\\(f(a+h)\\)</span>.</p>"
+    },
+    {
+      "number": 34,
+      "content": "<p><strong>34.</strong>&nbsp; Cho <span class=\"math inline\">\\(g(x)=\\dfrac{x}{\\sqrt{x+1}}\\)</span>. Tính <span class=\"math inline\">\\(g(0)\\)</span>, <span class=\"math inline\">\\(g(3)\\)</span>, <span class=\"math inline\">\\(5g(a)\\)</span>, <span class=\"math inline\">\\(\\dfrac12g(4a)\\)</span>, <span class=\"math inline\">\\(g(a^2)\\)</span>, <span class=\"math inline\">\\([g(a)]^2\\)</span>, <span class=\"math inline\">\\(g(a+h)\\)</span> và <span class=\"math inline\">\\(g(x-a)\\)</span>.</p>"
+    },
+    {
+      "number": 35,
+      "content": "<p><strong>35–38. Tính và rút gọn thương sai phân đã cho.</strong></p><p><strong>35.</strong>&nbsp; <span class=\"math inline\">\\(f(x)=4+3x-x^2\\)</span>, <span class=\"math inline\">\\(\\dfrac{f(3+h)-f(3)}h\\)</span>.</p>"
+    },
+    {
+      "number": 36,
+      "content": "<p><strong>35–38. Tính và rút gọn thương sai phân đã cho.</strong></p><p><strong>36.</strong>&nbsp; <span class=\"math inline\">\\(f(x)=x^3\\)</span>,\n<span class=\"math inline\">\\(\\dfrac{f(a+h)-f(a)}h\\)</span>.</p>"
+    },
+    {
+      "number": 37,
+      "content": "<p><strong>35–38. Tính và rút gọn thương sai phân đã cho.</strong></p><p><strong>37.</strong>&nbsp; <span class=\"math inline\">\\(f(x)=\\dfrac1x\\)</span>, <span class=\"math inline\">\\(\\dfrac{f(x)-f(a)}{x-a}\\)</span>.</p>"
+    },
+    {
+      "number": 38,
+      "content": "<p><strong>35–38. Tính và rút gọn thương sai phân đã cho.</strong></p><p><strong>38.</strong>&nbsp; <span class=\"math inline\">\\(f(x)=\\sqrt{x+2}\\)</span>, <span class=\"math inline\">\\(\\dfrac{f(x)-f(1)}{x-1}\\)</span>.</p>"
+    },
+    {
+      "number": 39,
+      "content": "<p><strong>39–46. Tìm tập xác định của hàm số.</strong></p><p><strong>39.</strong>&nbsp; <span class=\"math inline\">\\(f(x)=\\dfrac{x+4}{x^2-9}\\)</span>.</p>"
+    },
+    {
+      "number": 40,
+      "content": "<p><strong>39–46. Tìm tập xác định của hàm số.</strong></p><p><strong>40.</strong>&nbsp; <span class=\"math inline\">\\(f(x)=\\dfrac{x^2+1}{x^2+4x-21}\\)</span>.</p>"
+    },
+    {
+      "number": 41,
+      "content": "<p><strong>39–46. Tìm tập xác định của hàm số.</strong></p><p><strong>41.</strong>&nbsp; <span class=\"math inline\">\\(f(t)=\\sqrt[3]{2t-1}\\)</span>.</p>"
+    },
+    {
+      "number": 42,
+      "content": "<p><strong>39–46. Tìm tập xác định của hàm số.</strong></p><p><strong>42.</strong>&nbsp; <span class=\"math inline\">\\(g(t)=\\sqrt{3-t}-\\sqrt{2+t}\\)</span>.</p>"
+    },
+    {
+      "number": 43,
+      "content": "<p><strong>39–46. Tìm tập xác định của hàm số.</strong></p><p><strong>43.</strong>&nbsp; <span class=\"math inline\">\\(h(x)=\\dfrac1{\\sqrt[4]{x^2-5x}}\\)</span>.</p>"
+    },
+    {
+      "number": 44,
+      "content": "<p><strong>39–46. Tìm tập xác định của hàm số.</strong></p><p><strong>44.</strong>&nbsp; <span class=\"math inline\">\\(f(u)=\\dfrac{u+1}{1+\\dfrac1{u+1}}\\)</span>.</p>"
+    },
+    {
+      "number": 45,
+      "content": "<p><strong>39–46. Tìm tập xác định của hàm số.</strong></p><p><strong>45.</strong>&nbsp; <span class=\"math inline\">\\(F(p)=\\sqrt{2-\\sqrt\np}\\)</span>.</p>"
+    },
+    {
+      "number": 46,
+      "content": "<p><strong>39–46. Tìm tập xác định của hàm số.</strong></p><p><strong>46.</strong>&nbsp; <span class=\"math inline\">\\(h(x)=\\sqrt{x^2-4x-5}\\)</span>.</p>"
+    },
+    {
+      "number": 47,
+      "content": "<p><strong>47.</strong>&nbsp; Tìm tập xác định, tập giá trị và phác họa đồ\nthị của <span class=\"math inline\">\\(h(x)=\\sqrt{4-x^2}\\)</span>.</p>"
+    },
+    {
+      "number": 48,
+      "content": "<p><strong>48.</strong>&nbsp; Tìm tập xác định và phác họa đồ thị của <span class=\"math inline\">\\(f(x)=\\dfrac{x^2-4}{x-2}\\)</span>.</p>"
+    },
+    {
+      "number": 49,
+      "content": "<p><strong>49–52. Tính <span class=\"math inline\">\\(f(-3)\\)</span>, <span class=\"math inline\">\\(f(0)\\)</span>, <span class=\"math inline\">\\(f(2)\\)</span> đối với hàm số xác định từng phần,\nrồi phác họa đồ thị.</strong></p><p><strong>49.</strong>&nbsp; <span class=\"math inline\">\\(f(x)=\\begin{cases}x^2+2&amp;\\text{nếu\n}x&lt;0,\\\\x&amp;\\text{nếu }x\\ge0.\\end{cases}\\)</span></p>"
+    },
+    {
+      "number": 50,
+      "content": "<p><strong>49–52. Tính <span class=\"math inline\">\\(f(-3)\\)</span>, <span class=\"math inline\">\\(f(0)\\)</span>, <span class=\"math inline\">\\(f(2)\\)</span> đối với hàm số xác định từng phần,\nrồi phác họa đồ thị.</strong></p><p><strong>50.</strong>&nbsp; <span class=\"math inline\">\\(f(x)=\\begin{cases}5&amp;\\text{nếu\n}x&lt;2,\\\\\\frac12x-3&amp;\\text{nếu }x\\ge2.\\end{cases}\\)</span></p>"
+    },
+    {
+      "number": 51,
+      "content": "<p><strong>49–52. Tính <span class=\"math inline\">\\(f(-3)\\)</span>, <span class=\"math inline\">\\(f(0)\\)</span>, <span class=\"math inline\">\\(f(2)\\)</span> đối với hàm số xác định từng phần,\nrồi phác họa đồ thị.</strong></p><p><strong>51.</strong>&nbsp; <span class=\"math inline\">\\(f(x)=\\begin{cases}x+1&amp;\\text{nếu\n}x\\le-1,\\\\x^2&amp;\\text{nếu }x&gt;-1.\\end{cases}\\)</span></p>"
+    },
+    {
+      "number": 52,
+      "content": "<p><strong>49–52. Tính <span class=\"math inline\">\\(f(-3)\\)</span>, <span class=\"math inline\">\\(f(0)\\)</span>, <span class=\"math inline\">\\(f(2)\\)</span> đối với hàm số xác định từng phần,\nrồi phác họa đồ thị.</strong></p><p><strong>52.</strong>&nbsp; <span class=\"math inline\">\\(f(x)=\\begin{cases}-1&amp;\\text{nếu\n}x\\le1,\\\\7-2x&amp;\\text{nếu }x&gt;1.\\end{cases}\\)</span></p>"
+    },
+    {
+      "number": 53,
+      "content": "<p><strong>53–58. Phác họa đồ thị hàm số.</strong></p><p><strong>53.</strong>&nbsp; <span class=\"math inline\">\\(f(x)=x+|x|\\)</span>.</p>"
+    },
+    {
+      "number": 54,
+      "content": "<p><strong>53–58. Phác họa đồ thị hàm số.</strong></p><p><strong>54.</strong>&nbsp; <span class=\"math inline\">\\(f(x)=|x+2|\\)</span>.</p>"
+    },
+    {
+      "number": 55,
+      "content": "<p><strong>53–58. Phác họa đồ thị hàm số.</strong></p><p><strong>55.</strong>&nbsp; <span class=\"math inline\">\\(g(t)=|1-3t|\\)</span>.</p>"
+    },
+    {
+      "number": 56,
+      "content": "<p><strong>53–58. Phác họa đồ thị hàm số.</strong></p><p><strong>56.</strong>&nbsp; <span class=\"math inline\">\\(f(x)=\\dfrac{|x|}x\\)</span>.</p>"
+    },
+    {
+      "number": 57,
+      "content": "<p><strong>53–58. Phác họa đồ thị hàm số.</strong></p><p><strong>57.</strong>&nbsp; <span class=\"math inline\">\\(f(x)=\\begin{cases}|x|&amp;\\text{nếu\n}|x|\\le1,\\\\1&amp;\\text{nếu }|x|&gt;1.\\end{cases}\\)</span></p>"
+    },
+    {
+      "number": 58,
+      "content": "<p><strong>53–58. Phác họa đồ thị hàm số.</strong></p><p><strong>58.</strong>&nbsp; <span class=\"math inline\">\\(g(x)=\\bigl||x|-1\\bigr|\\)</span>.</p>"
+    },
+    {
+      "number": 59,
+      "content": "<p><strong>59–64. Tìm công thức của hàm số có đồ thị là đường cong đã\ncho.</strong></p><p><strong>59.</strong>&nbsp; Đoạn thẳng nối <span class=\"math inline\">\\((1,-3)\\)</span> và <span class=\"math inline\">\\((5,7)\\)</span>.</p>"
+    },
+    {
+      "number": 60,
+      "content": "<p><strong>59–64. Tìm công thức của hàm số có đồ thị là đường cong đã\ncho.</strong></p><p><strong>60.</strong>&nbsp; Đoạn thẳng nối <span class=\"math inline\">\\((-5,10)\\)</span> và <span class=\"math inline\">\\((7,-10)\\)</span>.</p>"
+    },
+    {
+      "number": 61,
+      "content": "<p><strong>59–64. Tìm công thức của hàm số có đồ thị là đường cong đã\ncho.</strong></p><p><strong>61.</strong>&nbsp; Nửa dưới của parabol <span class=\"math inline\">\\(x+(y-1)^2=0\\)</span>.</p>"
+    },
+    {
+      "number": 62,
+      "content": "<p><strong>59–64. Tìm công thức của hàm số có đồ thị là đường cong đã\ncho.</strong></p><p><strong>62.</strong>&nbsp; Nửa trên của đường tròn <span class=\"math inline\">\\(x^2+(y-2)^2=4\\)</span>.</p>"
+    },
+    {
+      "number": 63,
+      "content": "<p><strong>59–64. Tìm công thức của hàm số có đồ thị là đường cong đã\ncho.</strong></p><p><strong>Bài tập 63 — hình bên trái.</strong></p><p><strong>63–64.</strong>&nbsp; Các đường cong trong hình sau.</p>\n<div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-1-1-47c33e6c/e63_64.png\" alt=\"image\"><br>\n<span>Đồ thị cho Bài tập 63 (trái) và 64 (phải).</span></p>\n</div>"
+    },
+    {
+      "number": 64,
+      "content": "<p><strong>59–64. Tìm công thức của hàm số có đồ thị là đường cong đã\ncho.</strong></p><p><strong>Bài tập 64 — hình bên phải.</strong></p><p><strong>63–64.</strong>&nbsp; Các đường cong trong hình sau.</p>\n<div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-1-1-47c33e6c/e63_64.png\" alt=\"image\"><br>\n<span>Đồ thị cho Bài tập 63 (trái) và 64 (phải).</span></p>\n</div>"
+    },
+    {
+      "number": 65,
+      "content": "<p><strong>65–70. Tìm công thức của hàm số được mô tả và nêu tập xác\nđịnh.</strong></p><p><strong>65.</strong>&nbsp; Một hình chữ nhật có chu vi 20 m. Biểu diễn\ndiện tích theo độ dài một cạnh.</p>"
+    },
+    {
+      "number": 66,
+      "content": "<p><strong>65–70. Tìm công thức của hàm số được mô tả và nêu tập xác\nđịnh.</strong></p><p><strong>66.</strong>&nbsp; Một hình chữ nhật có diện tích <span class=\"math inline\">\\(16\\,\\mathrm m^2\\)</span>. Biểu diễn chu vi theo độ\ndài một cạnh.</p>"
+    },
+    {
+      "number": 67,
+      "content": "<p><strong>65–70. Tìm công thức của hàm số được mô tả và nêu tập xác\nđịnh.</strong></p><p><strong>67.</strong>&nbsp; Biểu diễn diện tích tam giác đều theo độ dài\ncạnh.</p>"
+    },
+    {
+      "number": 68,
+      "content": "<p><strong>65–70. Tìm công thức của hàm số được mô tả và nêu tập xác\nđịnh.</strong></p><p><strong>68.</strong>&nbsp; Một hình hộp chữ nhật kín có thể tích <span class=\"math inline\">\\(8\\,\\mathrm{ft}^3\\)</span>, chiều dài gấp đôi chiều\nrộng. Biểu diễn chiều cao theo chiều rộng.</p>"
+    },
+    {
+      "number": 69,
+      "content": "<p><strong>65–70. Tìm công thức của hàm số được mô tả và nêu tập xác\nđịnh.</strong></p><p><strong>69.</strong>&nbsp; Một hình hộp chữ nhật không nắp có thể tích\n<span class=\"math inline\">\\(2\\,\\mathrm m^3\\)</span> và đáy vuông. Biểu\ndiễn diện tích toàn bộ các mặt của hộp theo độ dài cạnh đáy.</p>"
+    },
+    {
+      "number": 70,
+      "content": "<p><strong>65–70. Tìm công thức của hàm số được mô tả và nêu tập xác\nđịnh.</strong></p><p><strong>70.</strong>&nbsp; Một hình trụ tròn xoay có thể tích <span class=\"math inline\">\\(25\\,\\mathrm{in}^3\\)</span>. Biểu diễn bán kính\ntheo chiều cao.</p>"
+    },
+    {
+      "number": 71,
+      "content": "<p><strong>71.</strong>&nbsp; Từ tấm bìa hình chữ nhật kích thước 12 inch và\n20 inch, cắt bỏ ở bốn góc các hình vuông bằng nhau có cạnh <span class=\"math inline\">\\(x\\)</span>, rồi gấp các mép lên để tạo hộp không\nnắp như hình. Biểu diễn thể tích <span class=\"math inline\">\\(V\\)</span>\ncủa hộp theo <span class=\"math inline\">\\(x\\)</span>.</p>\n<div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-1-1-47c33e6c/e71.png\" alt=\"image\"><br>\n<span>Hình minh họa Bài tập 71.</span></p>\n</div>"
+    },
+    {
+      "number": 72,
+      "content": "<p><strong>72.</strong>&nbsp; Một cửa sổ kiểu Norman có dạng hình chữ nhật\nghép với nửa hình tròn ở phía trên. Nếu chu vi cửa sổ là 30 ft, biểu\ndiễn diện tích <span class=\"math inline\">\\(A\\)</span> theo chiều rộng\n<span class=\"math inline\">\\(x\\)</span> của cửa sổ.</p>\n<div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-1-1-47c33e6c/e72.png\" alt=\"image\"><br>\n<span>Hình minh họa Bài tập 72.</span></p>\n</div>"
+    },
+    {
+      "number": 73,
+      "content": "<p><strong>73.</strong>&nbsp; Tại một bang, tốc độ tối đa trên xa lộ là 65\ndặm/giờ, tốc độ tối thiểu là 40 dặm/giờ. Mức phạt là 15 đô la cho mỗi\ndặm/giờ vượt quá mức tối đa hoặc thấp hơn mức tối thiểu. Biểu diễn tiền\nphạt <span class=\"math inline\">\\(F\\)</span> theo tốc độ <span class=\"math inline\">\\(x\\)</span>, rồi vẽ đồ thị <span class=\"math inline\">\\(F(x)\\)</span> với <span class=\"math inline\">\\(0\\le\nx\\le100\\)</span>.</p>"
+    },
+    {
+      "number": 74,
+      "content": "<p><strong>74.</strong>&nbsp; Một công ty điện lực thu phí cơ bản 10 đô\nla/tháng, cộng 6 cent/kWh cho 1200 kWh đầu tiên và 7 cent/kWh cho phần\nvượt 1200 kWh. Biểu diễn chi phí hằng tháng <span class=\"math inline\">\\(E\\)</span> theo lượng điện <span class=\"math inline\">\\(x\\)</span> đã dùng, rồi vẽ đồ thị với <span class=\"math inline\">\\(0\\le x\\le2000\\)</span>.</p>"
+    },
+    {
+      "number": 75,
+      "content": "<p><strong>75.</strong>&nbsp; Tại một quốc gia, thuế thu nhập được tính như\nsau: thu nhập đến 10 000 đô la được miễn thuế; phần vượt 10 000 đô la\nđến 20 000 đô la chịu thuế suất 10%; phần vượt 20 000 đô la chịu thuế\nsuất 15%. (a) Phác họa đồ thị thuế suất <span class=\"math inline\">\\(R\\)</span> theo thu nhập <span class=\"math inline\">\\(I\\)</span>. (b) Thuế phải nộp với thu nhập 14 000\nđô la và 26 000 đô la là bao nhiêu? (c) Phác họa đồ thị tổng thuế phải\nnộp <span class=\"math inline\">\\(T\\)</span> theo thu nhập <span class=\"math inline\">\\(I\\)</span>.</p>"
+    },
+    {
+      "number": 76,
+      "content": "<p><strong>76.</strong>&nbsp; (a) Nếu <span class=\"math inline\">\\((5,3)\\)</span> thuộc đồ thị một hàm số chẵn thì\nđiểm nào khác chắc chắn cũng thuộc đồ thị? (b) Trả lời câu hỏi tương tự\nđối với hàm số lẻ.</p>"
+    },
+    {
+      "number": 77,
+      "content": "<p><strong>Bài tập 77 — hình bên trái.</strong></p><p><strong>77–78. Cho đồ thị <span class=\"math inline\">\\(f\\)</span> và\n<span class=\"math inline\">\\(g\\)</span>. Xác định mỗi hàm số là chẵn, lẻ\nhay không chẵn không lẻ. Giải thích.</strong></p>\n<div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-1-1-47c33e6c/e77_78.png\" alt=\"image\"><br>\n<span>Đồ thị cho Bài tập 77 (trái) và 78 (phải).</span></p>\n</div>"
+    },
+    {
+      "number": 78,
+      "content": "<p><strong>Bài tập 78 — hình bên phải.</strong></p><p><strong>77–78. Cho đồ thị <span class=\"math inline\">\\(f\\)</span> và\n<span class=\"math inline\">\\(g\\)</span>. Xác định mỗi hàm số là chẵn, lẻ\nhay không chẵn không lẻ. Giải thích.</strong></p>\n<div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-1-1-47c33e6c/e77_78.png\" alt=\"image\"><br>\n<span>Đồ thị cho Bài tập 77 (trái) và 78 (phải).</span></p>\n</div>"
+    },
+    {
+      "number": 79,
+      "content": "<p><strong>Bài tập 79 — hình phía trên.</strong></p><p><strong>79–80. Cho đồ thị một hàm số xác định với <span class=\"math inline\">\\(x\\ge 0\\)</span>. Bổ sung phần đồ thị với <span class=\"math inline\">\\(x&lt;0\\)</span> để được (a) hàm số chẵn; (b) hàm\nsố lẻ.</strong></p>\n<div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-1-1-47c33e6c/e79_80.png\" alt=\"image\"><br>\n<span>Đồ thị cho Bài tập 79 (trên) và 80 (dưới).</span></p>\n</div>"
+    },
+    {
+      "number": 80,
+      "content": "<p><strong>Bài tập 80 — hình phía dưới.</strong></p><p><strong>79–80. Cho đồ thị một hàm số xác định với <span class=\"math inline\">\\(x\\ge 0\\)</span>. Bổ sung phần đồ thị với <span class=\"math inline\">\\(x&lt;0\\)</span> để được (a) hàm số chẵn; (b) hàm\nsố lẻ.</strong></p>\n<div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-1-1-47c33e6c/e79_80.png\" alt=\"image\"><br>\n<span>Đồ thị cho Bài tập 79 (trên) và 80 (dưới).</span></p>\n</div>"
+    },
+    {
+      "number": 81,
+      "content": "<p><strong>81–86. Xác định <span class=\"math inline\">\\(f\\)</span> là\nchẵn, lẻ hay không chẵn không lẻ. Có thể dùng máy tính vẽ đồ thị hoặc\nmáy tính điện tử để kiểm tra trực quan.</strong></p><p><strong>81.</strong>&nbsp; <span class=\"math inline\">\\(f(x)=\\dfrac{x}{x^2+1}\\)</span>.</p>"
+    },
+    {
+      "number": 82,
+      "content": "<p><strong>81–86. Xác định <span class=\"math inline\">\\(f\\)</span> là\nchẵn, lẻ hay không chẵn không lẻ. Có thể dùng máy tính vẽ đồ thị hoặc\nmáy tính điện tử để kiểm tra trực quan.</strong></p><p><strong>82.</strong>&nbsp; <span class=\"math inline\">\\(f(x)=\\dfrac{x^2}{x^4+1}\\)</span>.</p>"
+    },
+    {
+      "number": 83,
+      "content": "<p><strong>81–86. Xác định <span class=\"math inline\">\\(f\\)</span> là\nchẵn, lẻ hay không chẵn không lẻ. Có thể dùng máy tính vẽ đồ thị hoặc\nmáy tính điện tử để kiểm tra trực quan.</strong></p><p><strong>83.</strong>&nbsp; <span class=\"math inline\">\\(f(x)=\\dfrac{x}{x+1}\\)</span>.</p>"
+    },
+    {
+      "number": 84,
+      "content": "<p><strong>81–86. Xác định <span class=\"math inline\">\\(f\\)</span> là\nchẵn, lẻ hay không chẵn không lẻ. Có thể dùng máy tính vẽ đồ thị hoặc\nmáy tính điện tử để kiểm tra trực quan.</strong></p><p><strong>84.</strong>&nbsp; <span class=\"math inline\">\\(f(x)=x|x|\\)</span>.</p>"
+    },
+    {
+      "number": 85,
+      "content": "<p><strong>81–86. Xác định <span class=\"math inline\">\\(f\\)</span> là\nchẵn, lẻ hay không chẵn không lẻ. Có thể dùng máy tính vẽ đồ thị hoặc\nmáy tính điện tử để kiểm tra trực quan.</strong></p><p><strong>85.</strong>&nbsp; <span class=\"math inline\">\\(f(x)=1+3x^2-x^4\\)</span>.</p>"
+    },
+    {
+      "number": 86,
+      "content": "<p><strong>81–86. Xác định <span class=\"math inline\">\\(f\\)</span> là\nchẵn, lẻ hay không chẵn không lẻ. Có thể dùng máy tính vẽ đồ thị hoặc\nmáy tính điện tử để kiểm tra trực quan.</strong></p><p><strong>86.</strong>&nbsp; <span class=\"math inline\">\\(f(x)=1+3x^3-x^5\\)</span>.</p>"
+    },
+    {
+      "number": 87,
+      "content": "<p><strong>87.</strong>&nbsp; Nếu <span class=\"math inline\">\\(f\\)</span> và\n<span class=\"math inline\">\\(g\\)</span> đều chẵn thì <span class=\"math inline\">\\(f+g\\)</span> có chẵn không? Nếu <span class=\"math inline\">\\(f\\)</span> và <span class=\"math inline\">\\(g\\)</span> đều lẻ thì <span class=\"math inline\">\\(f+g\\)</span> có lẻ không? Điều gì xảy ra nếu <span class=\"math inline\">\\(f\\)</span> chẵn còn <span class=\"math inline\">\\(g\\)</span> lẻ? Giải thích các câu trả lời.</p>"
+    },
+    {
+      "number": 88,
+      "content": "<p><strong>88.</strong>&nbsp; Nếu <span class=\"math inline\">\\(f\\)</span> và\n<span class=\"math inline\">\\(g\\)</span> đều chẵn thì tích <span class=\"math inline\">\\(fg\\)</span> có chẵn không? Nếu <span class=\"math inline\">\\(f\\)</span> và <span class=\"math inline\">\\(g\\)</span> đều lẻ thì <span class=\"math inline\">\\(fg\\)</span> có lẻ không? Điều gì xảy ra nếu <span class=\"math inline\">\\(f\\)</span> chẵn còn <span class=\"math inline\">\\(g\\)</span> lẻ? Giải thích các câu trả lời.</p>"
+    }
+  ]
+}

@@ -1,0 +1,304 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage{fontspec}\setmainfont{Latin Modern Roman}\setsansfont{DejaVu Sans}
+\usepackage{amsmath,amssymb,graphicx,geometry,enumitem,longtable,booktabs,fancyhdr,hyperref}
+\geometry{left=28mm,right=23mm,top=24mm,bottom=24mm}
+\hypersetup{unicode=true,colorlinks=true,linkcolor=black,urlcolor=blue,pdftitle={Giải tích Chương 2 Mục 2.4 Định nghĩa chính xác của giới hạn}}
+\setlength{\parindent}{1.2em}\setlength{\parskip}{4pt}\setlength{\headheight}{16pt}
+\pagestyle{fancy}\fancyhf{}\fancyhead[L]{\small Chương 2. Giới hạn và đạo hàm}\fancyhead[R]{\small §2.4}\fancyfoot[C]{\thepage}
+\newcommand{\fig}[3][.68]{\begin{center}\begin{minipage}{\linewidth}\centering\includegraphics[width=#1\linewidth]{assets/#2.png}\\{\small #3}\end{minipage}\end{center}}
+\newcommand{\ex}[1]{\par\medskip\noindent\textbf{Ví dụ #1.}\ }
+\newcommand{\sol}{\par\noindent\textit{Lời giải.}\ }
+\newcommand{\bt}[1]{\par\smallskip\noindent\textbf{#1.}\ }
+\newcommand{\group}[1]{\par\medskip\noindent\textbf{#1}\par}
+\newcommand{\gint}[1]{\left[\!\left[#1\right]\!\right]}
+\begin{document}
+\begin{center}
+{\Large\bfseries GIẢI TÍCH}\\[5pt]
+{\large Chương 2. Giới hạn và đạo hàm}\\[9pt]
+{\Large\bfseries 2.4. Định nghĩa chính xác của giới hạn}
+\end{center}
+\noindent\textbf{Nguồn:} James Stewart, Daniel K. Clegg, Saleem Watson, \textit{Calculus: Early Transcendentals}, ấn bản thứ 9 (2020), trang in 105–114 (trang PDF 140–149).
+
+Định nghĩa trực giác ở §2.2 chưa đủ cho một số mục đích vì những cụm từ như ``$x$ gần 2'' hay ``$f(x)$ ngày càng gần $L$'' còn mơ hồ. Để chứng minh dứt khoát rằng
+\[\lim_{x\to0}\left(x^3+\frac{\cos5x}{10\,000}\right)=0.0001\qquad\text{hoặc}\qquad\lim_{x\to0}\frac{\sin x}{x}=1,\]
+ta phải làm chính xác định nghĩa giới hạn.
+\section*{Định nghĩa chính xác của giới hạn}
+Để dẫn đến định nghĩa, xét
+\[f(x)=\begin{cases}2x-1,&x\ne3,\\6,&x=3.\end{cases}\]
+Theo trực giác, khi $x$ gần 3 nhưng khác 3, $f(x)$ gần 5; vì vậy $\lim_{x\to3}f(x)=5$.
+
+Để biết chi tiết hơn về cách $f(x)$ biến thiên gần 3, ta hỏi:
+\begin{quote}$x$ phải gần 3 đến mức nào để $f(x)$ sai khác 5 ít hơn $0.1$?\end{quote}
+Khoảng cách từ $x$ đến 3 là $|x-3|$; từ $f(x)$ đến 5 là $|f(x)-5|$. Bài toán là tìm số $\delta$ (chữ Hy Lạp delta) sao cho
+\[|f(x)-5|<0.1\quad\text{nếu}\quad |x-3|<\delta,\quad x\ne3.\]
+Vì $|x-3|>0$ tương đương $x\ne3$, có thể viết
+\[0<|x-3|<\delta\quad\Longrightarrow\quad |f(x)-5|<0.1.\]
+Nếu $0<|x-3|<0.1/2=0.05$, thì
+\[|f(x)-5|=|(2x-1)-5|=|2x-6|=2|x-3|<2(0.05)=0.1.\]
+Do đó,
+\[0<|x-3|<0.05\quad\Longrightarrow\quad |f(x)-5|<0.1.\]
+Vậy $\delta=0.05$ là một đáp án: khi $x\ne3$ cách 3 ít hơn $0.05$, $f(x)$ cách 5 ít hơn $0.1$.
+
+Thay $0.1$ bằng $0.01$ và lập luận tương tự, ta được
+\[0<|x-3|<0.005\quad\Longrightarrow\quad |f(x)-5|<0.01.\]
+Tương tự,
+\[0<|x-3|<0.0005\quad\Longrightarrow\quad |f(x)-5|<0.001.\]
+Các số $0.1$, $0.01$, $0.001$ là những dung sai có thể cho phép. Để 5 thực sự là giới hạn khi $x\to3$, không chỉ cần sai khác nhỏ hơn ba số ấy mà phải nhỏ hơn \textit{mọi số dương}. Lập luận tương tự thực hiện được điều này. Ký hiệu $\varepsilon$ (chữ Hy Lạp epsilon) là số dương tùy ý, ta có
+\begin{equation}
+0<|x-3|<\delta=\frac\varepsilon2\quad\Longrightarrow\quad |f(x)-5|<\varepsilon.\tag{1}
+\end{equation}
+Đó là cách diễn đạt chính xác rằng $f(x)$ gần 5 khi $x$ gần 3: có thể làm $f(x)$ cách 5 ít hơn một khoảng tùy ý $\varepsilon$ bằng cách buộc $x$ cách 3 ít hơn $\varepsilon/2$, nhưng $x\ne3$.
+
+Có thể viết lại (1): nếu $3-\delta<x<3+\delta$ và $x\ne3$, thì $5-\varepsilon<f(x)<5+\varepsilon$. Hình 1 minh họa: khi $x$ ở trong $(3-\delta,3+\delta)$, trừ 3, thì $f(x)$ ở trong $(5-\varepsilon,5+\varepsilon)$.
+\fig[.47]{f01}{Hình 1. $f(x)$ nằm trong khoảng quanh 5 khi $x$ nằm trong khoảng quanh 3, với $x\ne3$.}
+Dùng (1) làm mẫu, ta đưa ra định nghĩa sau.
+\begin{quote}
+\textbf{2. Định nghĩa chính xác của giới hạn.} Cho $f$ xác định trên một khoảng mở chứa $a$, có thể trừ chính $a$. Ta nói giới hạn của $f(x)$ khi $x$ tiến đến $a$ bằng $L$, và viết $\lim_{x\to a}f(x)=L$, nếu \textbf{với mọi} $\varepsilon>0$, \textbf{tồn tại} $\delta>0$ sao cho
+\[0<|x-a|<\delta\quad\Longrightarrow\quad |f(x)-L|<\varepsilon.\]
+\end{quote}
+\noindent\textit{Chú thích bên lề:} Theo truyền thống, dùng hai chữ Hy Lạp $\varepsilon$ và $\delta$ trong định nghĩa chính xác của giới hạn.
+
+Vì $|x-a|$ là khoảng cách từ $x$ đến $a$, còn $|f(x)-L|$ là khoảng cách từ $f(x)$ đến $L$, và $\varepsilon$ có thể nhỏ tùy ý, có thể phát biểu:
+\begin{quote}$\lim_{x\to a}f(x)=L$ nghĩa là khoảng cách giữa $f(x)$ và $L$ có thể làm nhỏ tùy ý bằng cách yêu cầu khoảng cách từ $x$ đến $a$ đủ nhỏ, nhưng khác 0.\end{quote}
+Hoặc: có thể làm $f(x)$ gần $L$ tùy ý bằng cách yêu cầu $x$ đủ gần $a$, nhưng khác $a$.
+
+Ta cũng có thể phát biểu bằng khoảng. Bất đẳng thức $|x-a|<\delta$ tương đương $-\delta<x-a<\delta$, tức $a-\delta<x<a+\delta$. Điều kiện $0<|x-a|$ tương đương $x\ne a$. Tương tự, $|f(x)-L|<\varepsilon$ tương đương $L-\varepsilon<f(x)<L+\varepsilon$. Do đó:
+\begin{quote}Với mọi $\varepsilon>0$, dù nhỏ đến đâu, có thể tìm $\delta>0$ sao cho nếu $x\in(a-\delta,a+\delta)$ và $x\ne a$, thì $f(x)\in(L-\varepsilon,L+\varepsilon)$.\end{quote}
+Để diễn giải hình học, biểu diễn hàm bằng sơ đồ mũi tên như Hình 2, trong đó $f$ ánh xạ một tập con của $\mathbb R$ lên một tập con khác của $\mathbb R$.
+\fig[.88]{f02}{Hình 2. Sơ đồ mũi tên biểu diễn hàm số.}
+Định nghĩa nói rằng với mỗi khoảng nhỏ $(L-\varepsilon,L+\varepsilon)$ quanh $L$, có thể tìm khoảng $(a-\delta,a+\delta)$ quanh $a$ sao cho $f$ đưa mọi điểm trong khoảng ấy, có thể trừ $a$, vào khoảng đã cho quanh $L$.
+\fig[.88]{f03}{Hình 3. Ảnh của khoảng quanh $a$, trừ có thể chính $a$, nằm trong khoảng quanh $L$.}
+Một cách diễn giải khác dựa trên đồ thị: cho $\varepsilon>0$, vẽ các đường ngang $y=L+\varepsilon$, $y=L-\varepsilon$ và đồ thị $f$ (Hình 4). Nếu $\lim_{x\to a}f(x)=L$, tìm được $\delta>0$ để khi $a-\delta<x<a+\delta$, $x\ne a$, phần đồ thị tương ứng nằm giữa hai đường ấy (Hình 5). Khi đã tìm được một $\delta$ phù hợp, mọi số dương nhỏ hơn nó cũng phù hợp.
+\fig[.45]{f04}{Hình 4. Dải ngang $L-\varepsilon<y<L+\varepsilon$.}
+\fig[.53]{f05}{Hình 5. Chọn khoảng quanh $a$ để phần đồ thị tương ứng nằm trong dải ngang.}
+Quá trình này phải thực hiện được với \textit{mọi} $\varepsilon>0$, dù nhỏ đến đâu. Hình 6 cho thấy chọn $\varepsilon$ nhỏ hơn có thể đòi hỏi $\delta$ nhỏ hơn.
+\fig[.50]{f06}{Hình 6. Khi dải ngang hẹp hơn, có thể cần một khoảng quanh $a$ hẹp hơn.}
+\ex{1} Vì $f(x)=x^3-5x+6$ là đa thức, tính chất thế trực tiếp cho
+\[\lim_{x\to1}f(x)=f(1)=1^3-5(1)+6=2.\]
+Dùng đồ thị tìm $\delta$ sao cho nếu $x$ cách 1 ít hơn $\delta$ thì $y$ cách 2 ít hơn $0.2$, tức
+\[|x-1|<\delta\quad\Longrightarrow\quad |(x^3-5x+6)-2|<0.2.\]
+Nói cách khác, tìm $\delta$ ứng với $\varepsilon=0.2$, $a=1$, $L=2$.
+\sol Hình 7 là đồ thị $f$; ta quan tâm vùng gần $(1,2)$. Bất đẳng thức cần có tương đương
+\[-0.2<(x^3-5x+6)-2<0.2,\]
+hay $1.8<x^3-5x+6<2.2$. Cần tìm các $x$ mà đường cong nằm giữa hai đường ngang $y=1.8$, $y=2.2$. Vẽ ba đường gần $(1,2)$ như Hình 8: giao điểm với $y=2.2$ có hoành độ khoảng $0.911$, còn với $y=1.8$ có hoành độ khoảng $1.124$. Làm tròn về phía 1 để bảo đảm an toàn, ta có
+\[0.92<x<1.12\quad\Longrightarrow\quad1.8<x^3-5x+6<2.2.\]
+\fig[.46]{f07}{Hình 7. Đồ thị $y=x^3-5x+6$.}
+\fig[.46]{f08}{Hình 8. Phóng lớn gần $(1,2)$ và hai đường $y=1.8$, $y=2.2$.}
+Khoảng $(0.92,1.12)$ không đối xứng quanh 1. Khoảng cách từ 1 đến đầu trái là $0.08$, đến đầu phải là $0.12$. Chọn số nhỏ hơn, $\delta=0.08$, ta được
+\[|x-1|<0.08\quad\Longrightarrow\quad |(x^3-5x+6)-2|<0.2.\]
+Nghĩa là giữ $x$ cách 1 ít hơn $0.08$ sẽ giữ $f(x)$ cách 2 ít hơn $0.2$. Mọi giá trị dương nhỏ hơn $0.08$ cũng dùng được.\hfill$\square$
+
+Quy trình đồ thị này chỉ minh họa định nghĩa với $\varepsilon=0.2$, chưa chứng minh giới hạn bằng 2. Chứng minh phải đưa ra $\delta$ cho \textit{mọi} $\varepsilon$.
+
+Có thể xem định nghĩa như một thử thách: trước hết cho một số $\varepsilon$, rồi ta phải tìm được $\delta$ thích hợp. Phải làm được với mọi $\varepsilon>0$, không chỉ một giá trị cụ thể.
+
+Hình dung cuộc thi giữa A và B, bạn là B. A yêu cầu các giá trị $f(x)$ xấp xỉ số cố định $L$ với sai số nhỏ hơn $\varepsilon$, chẳng hạn $0.01$. B đáp lại bằng một $\delta$ để $0<|x-a|<\delta$ kéo theo $|f(x)-L|<\varepsilon$. A có thể đòi hỏi nghiêm ngặt hơn, chọn $\varepsilon=0.0001$; B lại phải tìm $\delta$ tương ứng. Thông thường $\varepsilon$ càng nhỏ thì $\delta$ tương ứng cũng phải nhỏ hơn. Nếu B luôn đáp ứng được, dù A chọn $\varepsilon$ nhỏ đến đâu, thì $\lim_{x\to a}f(x)=L$.
+\ex{2} Chứng minh $\lim_{x\to3}(4x-5)=7$.
+\sol \textbf{1. Phân tích sơ bộ, dự đoán $\delta$.} Cho $\varepsilon>0$. Cần $\delta>0$ để
+\[0<|x-3|<\delta\quad\Longrightarrow\quad |(4x-5)-7|<\varepsilon.\]
+Vì $|(4x-5)-7|=|4x-12|=|4(x-3)|=4|x-3|$, cần
+\[0<|x-3|<\delta\quad\Longrightarrow\quad4|x-3|<\varepsilon,\]
+hay $|x-3|<\varepsilon/4$. Điều này gợi ý chọn $\delta=\varepsilon/4$.
+
+\noindent\textbf{2. Chứng minh lựa chọn phù hợp.} Cho $\varepsilon>0$, chọn $\delta=\varepsilon/4$. Nếu $0<|x-3|<\delta$, thì
+\[|(4x-5)-7|=|4x-12|=4|x-3|<4\delta=4\left(\frac\varepsilon4\right)=\varepsilon.\]
+Vậy điều kiện định nghĩa được thỏa mãn, nên $\lim_{x\to3}(4x-5)=7$. Hình 9 minh họa ví dụ.
+\fig[.47]{f09}{Hình 9. Với $\delta=\varepsilon/4$, điều kiện trên $x$ bảo đảm điều kiện trên $f(x)$. \(\square\)}
+Lời giải có hai giai đoạn: dự đoán và chứng minh. Phân tích sơ bộ giúp đoán $\delta$, nhưng sau đó phải quay lại chứng minh cẩn thận, hợp lôgic rằng dự đoán đúng. Đây là quy trình thường gặp trong toán học: trước hết có một dự đoán có cơ sở, rồi chứng minh nó.
+\subsection*{Cauchy và giới hạn}
+Sau khi giải tích ra đời ở thế kỷ XVII, thế kỷ XVIII chứng kiến sự phát triển tự do của môn học. Các nhà toán học như anh em Bernoulli và Euler nhiệt tình khai thác sức mạnh của giải tích, mạnh dạn khảo sát hệ quả của lý thuyết mới mà chưa quá bận tâm việc mọi chứng minh đã hoàn toàn đúng hay chưa.
+
+Trái lại, thế kỷ XIX là thời đại của tính chặt chẽ trong toán học. Người ta quay lại nền tảng, xây dựng định nghĩa cẩn thận và chứng minh nghiêm ngặt. Đi đầu là Augustin-Louis Cauchy (1789–1857), nhà toán học Pháp từng là kỹ sư quân sự trước khi trở thành giáo sư toán ở Paris. Ông làm chính xác hơn ý tưởng giới hạn của Newton, vốn được Jean d’Alembert duy trì trong thế kỷ XVIII.
+
+Định nghĩa của Cauchy được sách trích như sau: ``Khi các giá trị liên tiếp gán cho một biến tiến mãi đến một giá trị cố định, sao cho cuối cùng sai khác với nó ít tùy ý, giá trị cố định ấy được gọi là giới hạn của mọi giá trị kia.'' Khi vận dụng vào ví dụ và chứng minh, Cauchy thường dùng các bất đẳng thức delta–epsilon tương tự ở đây. Một chứng minh điển hình mở đầu: ``Ký hiệu $\delta$ và $\varepsilon$ là hai số rất nhỏ; \ldots''. Theo sách, ông chọn $\varepsilon$ vì liên hệ giữa epsilon và từ Pháp \textit{erreur} (sai số), còn $\delta$ liên hệ với \textit{différence} (sai khác). Về sau, Karl Weierstrass (1815–1897) phát biểu định nghĩa giới hạn đúng dạng Định nghĩa 2.
+\ex{3} Chứng minh $\lim_{x\to3}x^2=9$.
+\sol \textbf{1. Dự đoán $\delta$.} Cho $\varepsilon>0$. Cần tìm $\delta>0$ sao cho
+\[0<|x-3|<\delta\quad\Longrightarrow\quad |x^2-9|<\varepsilon.\]
+Phân tích $|x^2-9|=|(x+3)(x-3)|=|x+3||x-3|$. Nếu tìm được hằng số $C>0$ để $|x+3|<C$, thì
+\[|x+3||x-3|<C|x-3|,\]
+và có thể làm vế phải nhỏ hơn $\varepsilon$ bằng cách lấy $|x-3|<\varepsilon/C$.
+
+Có thể chặn $|x+3|$ khi hạn chế $x$ trong một khoảng tâm 3. Ta chỉ quan tâm các $x$ gần 3, nên giả sử $|x-3|<1$. Khi đó $2<x<4$, suy ra $5<x+3<7$, nên $|x+3|<7$. Vậy chọn $C=7$ là thích hợp.
+
+Có hai yêu cầu: $|x-3|<1$ và $|x-3|<\varepsilon/7$. Để cả hai cùng đúng, lấy số nhỏ hơn:
+\[\delta=\min\{1,\varepsilon/7\}.\]
+\noindent\textbf{2. Chứng minh lựa chọn phù hợp.} Cho $\varepsilon>0$, đặt $\delta=\min\{1,\varepsilon/7\}$. Nếu $0<|x-3|<\delta$, thì $|x-3|<1$, nên $2<x<4$ và $|x+3|<7$. Đồng thời $|x-3|<\varepsilon/7$. Do đó,
+\[|x^2-9|=|x+3||x-3|<7\cdot\frac\varepsilon7=\varepsilon.\]
+Vậy $\lim_{x\to3}x^2=9$.\hfill$\square$
+\section*{Giới hạn một phía}
+Các định nghĩa trực giác ở §2.2 được phát biểu chính xác như sau.
+\begin{quote}
+\textbf{3. Định nghĩa chính xác của giới hạn bên trái.} Ta có $\lim_{x\to a^-}f(x)=L$ nếu với mọi $\varepsilon>0$, tồn tại $\delta>0$ sao cho
+\[a-\delta<x<a\quad\Longrightarrow\quad |f(x)-L|<\varepsilon.\]
+\end{quote}
+\begin{quote}
+\textbf{4. Định nghĩa chính xác của giới hạn bên phải.} Ta có $\lim_{x\to a^+}f(x)=L$ nếu với mọi $\varepsilon>0$, tồn tại $\delta>0$ sao cho
+\[a<x<a+\delta\quad\Longrightarrow\quad |f(x)-L|<\varepsilon.\]
+\end{quote}
+Định nghĩa 3 chỉ khác Định nghĩa 2 ở việc $x$ nằm trong nửa trái $(a-\delta,a)$ của khoảng $(a-\delta,a+\delta)$. Ở Định nghĩa 4, $x$ nằm trong nửa phải $(a,a+\delta)$.
+\ex{4} Dùng Định nghĩa 4 chứng minh $\lim_{x\to0^+}\sqrt{x}=0$.
+\sol \textbf{1. Dự đoán $\delta$.} Cho $\varepsilon>0$. Ở đây $a=L=0$, nên cần
+\[0<x<\delta\quad\Longrightarrow\quad |\sqrt{x}-0|<\varepsilon.\]
+Tức $\sqrt{x}<\varepsilon$; bình phương hai vế cho $x<\varepsilon^2$. Vậy nên chọn $\delta=\varepsilon^2$.
+
+\noindent\textbf{2. Chứng minh lựa chọn phù hợp.} Cho $\varepsilon>0$, lấy $\delta=\varepsilon^2$. Nếu $0<x<\delta$, thì
+\[\sqrt{x}<\sqrt{\delta}=\sqrt{\varepsilon^2}=\varepsilon,\]
+nên $|\sqrt{x}-0|<\varepsilon$. Theo Định nghĩa 4, giới hạn bên phải bằng 0.\hfill$\square$
+\section*{Các quy tắc giới hạn}
+Những ví dụ trên cho thấy chứng minh trực tiếp bằng định nghĩa $\varepsilon$–$\delta$ không phải lúc nào cũng dễ. Với hàm phức tạp như $f(x)=(6x^2-8x+9)/(2x^2-1)$, một chứng minh như vậy đòi hỏi nhiều khéo léo. May thay, ta có thể chứng minh các quy tắc ở §2.3 bằng Định nghĩa 2, rồi dùng chúng tính chặt chẽ giới hạn của hàm phức tạp mà không quay lại định nghĩa mỗi lần.
+
+Chẳng hạn, ta chứng minh \textbf{quy tắc tổng}: nếu $\lim_{x\to a}f(x)=L$, $\lim_{x\to a}g(x)=M$ cùng tồn tại, thì
+\[\lim_{x\to a}[f(x)+g(x)]=L+M.\]
+Các quy tắc còn lại được chứng minh trong bài tập và Phụ lục F.
+\subsection*{Chứng minh quy tắc tổng}
+Cho $\varepsilon>0$. Cần tìm $\delta>0$ để
+\[0<|x-a|<\delta\quad\Longrightarrow\quad |f(x)+g(x)-(L+M)|<\varepsilon.\]
+Dùng bất đẳng thức tam giác,
+\begin{equation}
+\begin{split}
+|f(x)+g(x)-(L+M)|&=|(f(x)-L)+(g(x)-M)|\\
+&\le|f(x)-L|+|g(x)-M|.
+\end{split}\tag{5}
+\end{equation}
+\noindent\textit{Nhắc lại:} $|a+b|\le|a|+|b|$ (xem Phụ lục A).
+
+Ta làm sai khác của tổng nhỏ hơn $\varepsilon$ bằng cách làm mỗi số $|f(x)-L|$, $|g(x)-M|$ nhỏ hơn $\varepsilon/2$.
+
+Vì $\varepsilon/2>0$ và $\lim_{x\to a}f(x)=L$, tồn tại $\delta_1>0$ sao cho
+\[0<|x-a|<\delta_1\quad\Longrightarrow\quad |f(x)-L|<\varepsilon/2.\]
+Tương tự, tồn tại $\delta_2>0$ sao cho
+\[0<|x-a|<\delta_2\quad\Longrightarrow\quad |g(x)-M|<\varepsilon/2.\]
+Đặt $\delta=\min\{\delta_1,\delta_2\}$. Khi $0<|x-a|<\delta$, cả hai điều kiện trên cùng thỏa mãn. Theo (5),
+\[|f(x)+g(x)-(L+M)|\le|f(x)-L|+|g(x)-M|<\frac\varepsilon2+\frac\varepsilon2=\varepsilon.\]
+Vậy điều kiện định nghĩa đúng, nên
+\[\lim_{x\to a}[f(x)+g(x)]=L+M.\qquad\square\]
+\section*{Giới hạn vô cực}
+Giới hạn vô cực cũng được định nghĩa chính xác. Sau đây là phiên bản chính xác của Định nghĩa 2.2.4.
+\begin{quote}
+\textbf{6. Định nghĩa chính xác của giới hạn vô cực.} Cho $f$ xác định trên một khoảng mở chứa $a$, có thể trừ chính $a$. Khi đó $\lim_{x\to a}f(x)=\infty$ nghĩa là với mọi số $M>0$, tồn tại $\delta>0$ sao cho
+\[0<|x-a|<\delta\quad\Longrightarrow\quad f(x)>M.\]
+\end{quote}
+Có thể làm $f(x)$ lớn tùy ý, lớn hơn mọi số $M$ cho trước, bằng cách buộc $x$ đủ gần $a$: cách $a$ ít hơn $\delta$, trong đó $\delta$ phụ thuộc $M$, và $x\ne a$. Hình 10 minh họa điều này.
+\fig[.47]{f10}{Hình 10. Cho đường ngang $y=M$, chọn khoảng quanh $a$ để phần đồ thị tương ứng nằm phía trên.}
+Với mỗi $y=M$, tìm được $\delta>0$ sao cho khi $x\in(a-\delta,a+\delta)$, $x\ne a$, đồ thị nằm trên đường ấy. Chọn $M$ lớn hơn có thể đòi hỏi $\delta$ nhỏ hơn.
+\ex{5} Dùng Định nghĩa 6 chứng minh $\displaystyle\lim_{x\to0}\frac1{x^2}=\infty$.
+\sol Cho $M>0$. Cần $\delta>0$ để
+\[0<|x|<\delta\quad\Longrightarrow\quad1/x^2>M.\]
+Với $x\ne0$,
+\[\frac1{x^2}>M\ \Longleftrightarrow\ x^2<\frac1M\ \Longleftrightarrow\ \sqrt{x^2}<\sqrt{\frac1M}\ \Longleftrightarrow\ |x|<\frac1{\sqrt M}.\]
+Chọn $\delta=1/\sqrt M$. Nếu $0<|x|<\delta$, thì $1/x^2>M$. Vậy $1/x^2\to\infty$ khi $x\to0$.\hfill$\square$
+
+Tương tự, định nghĩa sau chính xác hóa Định nghĩa 2.2.5 và được minh họa ở Hình 11.
+\begin{quote}
+\textbf{7. Định nghĩa.} Cho $f$ xác định trên một khoảng mở chứa $a$, có thể trừ chính $a$. Khi đó $\lim_{x\to a}f(x)=-\infty$ nghĩa là với mọi số $N<0$, tồn tại $\delta>0$ sao cho
+\[0<|x-a|<\delta\quad\Longrightarrow\quad f(x)<N.\]
+\end{quote}
+\fig[.47]{f11}{Hình 11. Định nghĩa giới hạn bằng $-\infty$: phần đồ thị tương ứng nằm dưới $y=N$.}
+\section*{2.4. Bài tập}
+\bt{1} Dùng đồ thị $f$ để tìm $\delta$ sao cho
+\[|x-1|<\delta\quad\Longrightarrow\quad |f(x)-1|<0.2.\]
+\fig[.46]{e01}{Đồ thị cho Bài tập 1.}
+\bt{2} Dùng đồ thị $f$ để tìm $\delta$ sao cho
+\[0<|x-3|<\delta\quad\Longrightarrow\quad |f(x)-2|<0.5.\]
+\fig[.50]{e02}{Đồ thị cho Bài tập 2.}
+\bt{3} Dùng đồ thị $f(x)=\sqrt{x}$ để tìm $\delta$ sao cho
+\[|x-4|<\delta\quad\Longrightarrow\quad |\sqrt{x}-2|<0.4.\]
+\fig[.50]{e03}{Đồ thị cho Bài tập 3.}
+\bt{4} Dùng đồ thị $f(x)=x^2$ để tìm $\delta$ sao cho
+\[|x-1|<\delta\quad\Longrightarrow\quad |x^2-1|<\tfrac12.\]
+\fig[.50]{e04}{Đồ thị cho Bài tập 4.}
+\bt{5} Dùng đồ thị tìm $\delta$ sao cho
+\[|x-2|<\delta\quad\Longrightarrow\quad |\sqrt{x^2+5}-3|<0.3.\]
+\bt{6} Dùng đồ thị tìm $\delta$ sao cho
+\[\left|x-\frac\pi6\right|<\delta\quad\Longrightarrow\quad\left|\cos^2x-\frac34\right|<0.1.\]
+\bt{7} Với giới hạn $\lim_{x\to2}(x^3-3x+4)=6$, minh họa Định nghĩa 2 bằng cách tìm $\delta$ ứng với $\varepsilon=0.2$, $\varepsilon=0.1$.
+\bt{8} Với giới hạn $\displaystyle\lim_{x\to0}\frac{e^{2x}-1}{x}=2$, minh họa Định nghĩa 2 bằng cách tìm $\delta$ ứng với $\varepsilon=0.5$, $\varepsilon=0.1$.
+\bt{9} (a) Dùng đồ thị tìm $\delta$ sao cho
+\[2<x<2+\delta\quad\Longrightarrow\quad\frac1{\ln(x-1)}>100.\]
+(b) Câu (a) gợi ý giới hạn nào đúng?
+\bt{10} Biết $\lim_{x\to\pi}\csc^2x=\infty$, minh họa Định nghĩa 6 bằng cách tìm $\delta$ ứng với (a) $M=500$; (b) $M=1000$.
+\bt{11} Một thợ cơ khí phải chế tạo đĩa kim loại tròn có diện tích $1000\,\mathrm{cm}^2$.
+
+(a) Bán kính bao nhiêu cho đĩa như vậy?
+
+(b) Nếu dung sai diện tích là $\pm5\,\mathrm{cm}^2$, bán kính phải được khống chế gần bán kính lý tưởng ở (a) đến mức nào?
+
+(c) Theo định nghĩa $\varepsilon$–$\delta$ của $\lim_{x\to a}f(x)=L$, ở đây $x$, $f(x)$, $a$, $L$ là gì? Giá trị $\varepsilon$ đã cho và $\delta$ tương ứng là bao nhiêu?
+\bt{12} Lò nuôi tinh thể được dùng trong nghiên cứu cách chế tạo tinh thể cho linh kiện điện tử. Để tinh thể phát triển thích hợp, phải điều khiển chính xác nhiệt độ bằng cách điều chỉnh công suất vào. Giả sử
+\[T(w)=0.1w^2+2.155w+20,\]
+trong đó $T$ tính bằng độ Celsius, $w$ tính bằng watt.
+
+(a) Cần công suất bao nhiêu để duy trì $200^\circ\mathrm C$?
+
+(b) Nếu nhiệt độ được phép lệch khỏi $200^\circ\mathrm C$ tối đa $\pm1^\circ\mathrm C$, công suất vào được phép nằm trong khoảng nào?
+
+(c) Theo định nghĩa $\varepsilon$–$\delta$, xác định $x$, $f(x)$, $a$, $L$, $\varepsilon$ đã cho và $\delta$ tương ứng.
+\bt{13} (a) Tìm $\delta$ sao cho $|x-2|<\delta$ kéo theo $|4x-8|<\varepsilon$ với $\varepsilon=0.1$. (b) Làm lại với $\varepsilon=0.01$.
+\bt{14} Biết $\lim_{x\to2}(5x-7)=3$, minh họa Định nghĩa 2 bằng cách tìm $\delta$ ứng với $\varepsilon=0.1$, $0.05$, $0.01$.
+\group{15–18. Chứng minh bằng định nghĩa $\varepsilon$–$\delta$ và minh họa bằng hình tương tự Hình 9.}
+\bt{15} $\displaystyle\lim_{x\to4}(\tfrac12x-1)=1$.
+\bt{16} $\displaystyle\lim_{x\to2}(2-3x)=-4$.
+\bt{17} $\displaystyle\lim_{x\to-2}(-2x+1)=5$.
+\bt{18} $\displaystyle\lim_{x\to1}(2x-5)=-3$.
+\group{19–32. Chứng minh bằng định nghĩa $\varepsilon$–$\delta$ của giới hạn.}
+\bt{19} $\displaystyle\lim_{x\to9}(1-\tfrac13x)=-2$.
+\bt{20} $\displaystyle\lim_{x\to5}(\tfrac32x-\tfrac12)=7$.
+\bt{21} $\displaystyle\lim_{x\to4}\frac{x^2-2x-8}{x-4}=6$.
+\bt{22} $\displaystyle\lim_{x\to-1.5}\frac{9-4x^2}{3+2x}=6$.
+\bt{23} $\displaystyle\lim_{x\to a}x=a$.
+\bt{24} $\displaystyle\lim_{x\to a}c=c$.
+\bt{25} $\displaystyle\lim_{x\to0}x^2=0$.
+\bt{26} $\displaystyle\lim_{x\to0}x^3=0$.
+\bt{27} $\displaystyle\lim_{x\to0}|x|=0$.
+\bt{28} $\displaystyle\lim_{x\to-6^+}\sqrt[8]{6+x}=0$.
+\bt{29} $\displaystyle\lim_{x\to2}(x^2-4x+5)=1$.
+\bt{30} $\displaystyle\lim_{x\to2}(x^2+2x-7)=1$.
+\bt{31} $\displaystyle\lim_{x\to-2}(x^2-1)=3$.
+\bt{32} $\displaystyle\lim_{x\to2}x^3=8$.
+\bt{33} Kiểm tra $\delta=\min\{2,\varepsilon/8\}$ cũng là lựa chọn phù hợp để chứng minh $\lim_{x\to3}x^2=9$ trong Ví dụ 3.
+\bt{34} Dùng lập luận hình học kiểm tra giá trị lớn nhất có thể chọn để chứng minh $\lim_{x\to3}x^2=9$ là $\delta=\sqrt{9+\varepsilon}-3$.
+\bt{35} (a) Với $\lim_{x\to1}(x^3+x+1)=3$, dùng đồ thị tìm $\delta$ ứng với $\varepsilon=0.4$.
+
+(b) Giải phương trình bậc ba $x^3+x+1=3+\varepsilon$ để tìm giá trị lớn nhất của $\delta$ phù hợp với mỗi $\varepsilon>0$ đã cho.
+
+(c) Thay $\varepsilon=0.4$ vào kết quả (b), so sánh với (a).
+\bt{36} Chứng minh $\displaystyle\lim_{x\to2}\frac1x=\frac12$.
+\bt{37} Chứng minh $\lim_{x\to a}\sqrt{x}=\sqrt a$ nếu $a>0$.
+\noindent\textit{Gợi ý:} Dùng $|\sqrt{x}-\sqrt a|=|x-a|/(\sqrt{x}+\sqrt a)$.
+\bt{38} Với hàm Heaviside $H$ ở §2.2, dùng Định nghĩa 2 chứng minh $\lim_{t\to0}H(t)$ không tồn tại.
+\noindent\textit{Gợi ý:} Chứng minh gián tiếp: giả sử giới hạn bằng $L$, lấy $\varepsilon=1/2$ và tìm mâu thuẫn.
+\bt{39} Cho $f(x)=\begin{cases}0,&x\text{ hữu tỉ},\\1,&x\text{ vô tỉ}.\end{cases}$ Chứng minh $\lim_{x\to0}f(x)$ không tồn tại.
+\bt{40} So sánh Định nghĩa 2, 3, 4 để chứng minh Định lý 2.3.1:
+\[\lim_{x\to a}f(x)=L\quad\Longleftrightarrow\quad\lim_{x\to a^-}f(x)=L=\lim_{x\to a^+}f(x).\]
+\bt{41} Phải lấy $x$ gần $-3$ đến mức nào để $\displaystyle\frac1{(x+3)^4}>10\,000$?
+\bt{42} Dùng Định nghĩa 6 chứng minh $\displaystyle\lim_{x\to-3}\frac1{(x+3)^4}=\infty$.
+\bt{43} Chứng minh $\lim_{x\to0^+}\ln x=-\infty$.
+\bt{44} Giả sử $\lim_{x\to a}f(x)=\infty$ và $\lim_{x\to a}g(x)=c$, với $c$ thực. Chứng minh:
+
+(a) $\lim_{x\to a}[f(x)+g(x)]=\infty$.
+
+(b) $\lim_{x\to a}[f(x)g(x)]=\infty$ nếu $c>0$.
+
+(c) $\lim_{x\to a}[f(x)g(x)]=-\infty$ nếu $c<0$.
+\section*{Ghi chú biên tập}
+\begin{enumerate}
+\item Thứ tự lượng từ là ``với mọi $\varepsilon>0$, tồn tại $\delta>0$''; $\delta$ có thể phụ thuộc $\varepsilon$, hàm và điểm đang xét, nhưng không phụ thuộc giá trị cụ thể của $x$ trong khoảng đã chọn.
+\item Điều kiện $0<|x-a|$ loại chính điểm $a$. Những bài tập trong sách không ghi điều kiện loại điểm được giữ nguyên; với biểu thức không xác định tại điểm ấy, chỉ xét các $x$ thuộc miền xác định.
+\item Với giới hạn vô cực, $M$ trong Định nghĩa 6 là số dương tùy ý; $N$ trong Định nghĩa 7 là số âm tùy ý. Không thay các điều kiện nghiêm ngặt bằng điều kiện không nghiêm ngặt trong quá trình dịch.
+\item Bài tập 28 là căn bậc \textbf{tám}, và Bài tập 6 chứa $\cos^2x$. Hai ký hiệu được đối chiếu trực tiếp với trang gốc. Bài tập chỉ được dịch đề, không bổ sung đáp án.
+\end{enumerate}
+\section*{Thuật ngữ bổ sung}
+\begin{center}\begin{tabular}{ll}\toprule Tiếng Anh&Tiếng Việt thống nhất\\\midrule
+precise definition&định nghĩa chính xác\\
+error tolerance&dung sai\\
+arbitrary positive number&số dương tùy ý\\
+open interval&khoảng mở\\
+punctured neighborhood&lân cận thủng\\
+quantifier&lượng từ\\
+preliminary analysis&phân tích sơ bộ\\
+triangle inequality&bất đẳng thức tam giác\\
+rigorous proof&chứng minh chặt chẽ\\
+crystal growth furnace&lò nuôi tinh thể\\
+\bottomrule\end{tabular}\end{center}
+\noindent\textbf{Phạm vi hoàn thành:} Trọn §2.4, gồm Định nghĩa 2, 3, 4, 6, 7; công thức (1), (5); Ví dụ 1–5; Hình 1–11; chứng minh quy tắc tổng; và 44 bài tập. Phần tiếp theo: \textit{§2.5 — Tính liên tục}, trang in 115.
+\end{document}

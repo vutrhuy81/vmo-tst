@@ -1,0 +1,248 @@
+{
+  "bookKey": "stewart-9",
+  "sectionKey": "2-7",
+  "heading": "2.7. Bài tập",
+  "sourceSha256": "8fc77b6567a2a1b69fe8e2c5da4d2b4784564e0d588a2c581d8124664ab8b4eb",
+  "exercises": [
+    {
+      "number": 1,
+      "content": "<p><strong>1.</strong>&nbsp; Một đường cong có phương trình <span class=\"math inline\">\\(y=f(x)\\)</span>.</p>\n<p>(a) Viết biểu thức hệ số góc cát tuyến đi qua <span class=\"math inline\">\\(P(3,f(3))\\)</span> và <span class=\"math inline\">\\(Q(x,f(x))\\)</span>.</p>\n<p>(b) Viết biểu thức hệ số góc tiếp tuyến tại <span class=\"math inline\">\\(P\\)</span>.</p>"
+    },
+    {
+      "number": 2,
+      "content": "<p><strong>2.</strong>&nbsp; Vẽ đường cong <span class=\"math inline\">\\(y=e^x\\)</span> trong các cửa sổ <span class=\"math inline\">\\([-1,1]\\times[0,2]\\)</span>, <span class=\"math inline\">\\([-0.5,0.5]\\times[0.5,1.5]\\)</span> và <span class=\"math inline\">\\([-0.1,0.1]\\times[0.9,1.1]\\)</span>. Khi phóng đại\nquanh <span class=\"math inline\">\\((0,1)\\)</span>, bạn nhận thấy điều gì\nvề đường cong?</p>"
+    },
+    {
+      "number": 3,
+      "content": "<p><strong>3.</strong>&nbsp; (a) Tìm hệ số góc tiếp tuyến của parabol <span class=\"math inline\">\\(y=x^2+3x\\)</span> tại <span class=\"math inline\">\\((-1,-2)\\)</span> bằng: (i) Định nghĩa 1; (ii) công\nthức (2).</p>\n<p>(b) Tìm phương trình tiếp tuyến ở (a).</p>\n<p>(c) Vẽ parabol và tiếp tuyến. Kiểm tra kết quả bằng cách phóng đại\nquanh <span class=\"math inline\">\\((-1,-2)\\)</span> cho đến khi không thể\nphân biệt parabol và tiếp tuyến.</p><p><strong>Công thức (2).</strong></p><p>Vì <span class=\"math inline\">\\(h=x-a\\)</span>, khi <span class=\"math inline\">\\(x\\to a\\)</span> thì <span class=\"math inline\">\\(h\\to0\\)</span>. Công thức trong Định nghĩa 1 trở\nthành <span class=\"math display\">\\[m=\\lim_{h\\to0}\\frac{f(a+h)-f(a)}h.\\tag{2}\\]</span></p>"
+    },
+    {
+      "number": 4,
+      "content": "<p><strong>4.</strong>&nbsp; (a) Tìm hệ số góc tiếp tuyến của <span class=\"math inline\">\\(y=x^3+1\\)</span> tại <span class=\"math inline\">\\((1,2)\\)</span> bằng: (i) Định nghĩa 1; (ii) công\nthức (2).</p>\n<p>(b) Tìm phương trình tiếp tuyến ở (a).</p>\n<p>(c) Vẽ đường cong và tiếp tuyến trong các cửa sổ ngày càng nhỏ, có\ntâm <span class=\"math inline\">\\((1,2)\\)</span>, cho đến khi chúng dường\nnhư trùng nhau.</p><p><strong>Công thức (2).</strong></p><p>Vì <span class=\"math inline\">\\(h=x-a\\)</span>, khi <span class=\"math inline\">\\(x\\to a\\)</span> thì <span class=\"math inline\">\\(h\\to0\\)</span>. Công thức trong Định nghĩa 1 trở\nthành <span class=\"math display\">\\[m=\\lim_{h\\to0}\\frac{f(a+h)-f(a)}h.\\tag{2}\\]</span></p>"
+    },
+    {
+      "number": 5,
+      "content": "<p><strong>5–8. Tìm phương trình tiếp tuyến của đường cong tại điểm đã\ncho.</strong></p><p><strong>5.</strong>&nbsp; <span class=\"math inline\">\\(y=2x^2-5x+1\\)</span>, tại <span class=\"math inline\">\\((3,4)\\)</span>.</p>"
+    },
+    {
+      "number": 6,
+      "content": "<p><strong>5–8. Tìm phương trình tiếp tuyến của đường cong tại điểm đã\ncho.</strong></p><p><strong>6.</strong>&nbsp; <span class=\"math inline\">\\(y=x^2-2x^3\\)</span>,\ntại <span class=\"math inline\">\\((1,-1)\\)</span>.</p>"
+    },
+    {
+      "number": 7,
+      "content": "<p><strong>5–8. Tìm phương trình tiếp tuyến của đường cong tại điểm đã\ncho.</strong></p><p><strong>7.</strong>&nbsp; <span class=\"math inline\">\\(y=(x+2)/(x-3)\\)</span>, tại <span class=\"math inline\">\\((2,-4)\\)</span>.</p>"
+    },
+    {
+      "number": 8,
+      "content": "<p><strong>5–8. Tìm phương trình tiếp tuyến của đường cong tại điểm đã\ncho.</strong></p><p><strong>8.</strong>&nbsp; <span class=\"math inline\">\\(y=\\sqrt{1-3x}\\)</span>, tại <span class=\"math inline\">\\((-1,2)\\)</span>.</p>"
+    },
+    {
+      "number": 9,
+      "content": "<p><strong>9.</strong>&nbsp; (a) Tìm hệ số góc tiếp tuyến của <span class=\"math inline\">\\(y=3+4x^2-2x^3\\)</span> tại điểm có hoành độ <span class=\"math inline\">\\(a\\)</span>.</p>\n<p>(b) Tìm phương trình các tiếp tuyến tại <span class=\"math inline\">\\((1,5)\\)</span> và <span class=\"math inline\">\\((2,3)\\)</span>.</p>\n<p>(c) Vẽ đường cong và hai tiếp tuyến trên cùng màn hình.</p>"
+    },
+    {
+      "number": 10,
+      "content": "<p><strong>10.</strong>&nbsp; (a) Tìm hệ số góc tiếp tuyến của <span class=\"math inline\">\\(y=2\\sqrt{x}\\)</span> tại điểm có hoành độ <span class=\"math inline\">\\(a\\)</span>.</p>\n<p>(b) Tìm phương trình các tiếp tuyến tại <span class=\"math inline\">\\((1,2)\\)</span> và <span class=\"math inline\">\\((9,6)\\)</span>.</p>\n<p>(c) Vẽ đường cong và hai tiếp tuyến trên cùng màn hình.</p>"
+    },
+    {
+      "number": 11,
+      "content": "<p><strong>11.</strong>&nbsp; Một người nhảy từ vách đá cao 100 ft so với mặt\nnước. Quãng đường rơi sau <span class=\"math inline\">\\(t\\)</span> giây là\n<span class=\"math inline\">\\(d(t)=16t^2\\)</span> ft.</p>\n<p>(a) Sau bao nhiêu giây người đó chạm nước?</p>\n<p>(b) Vận tốc khi chạm nước là bao nhiêu?</p>"
+    },
+    {
+      "number": 12,
+      "content": "<p><strong>12.</strong>&nbsp; Trên sao Hỏa, một hòn đá được ném thẳng đứng\nlên với vận tốc 10 m/s. Độ cao sau <span class=\"math inline\">\\(t\\)</span> giây là <span class=\"math inline\">\\(H=10t-1.86t^2\\)</span> mét.</p>\n<p>(a) Tìm vận tốc sau một giây. (b) Tìm vận tốc tại <span class=\"math inline\">\\(t=a\\)</span>.</p>\n<p>(c) Khi nào hòn đá chạm mặt đất? (d) Vận tốc khi chạm đất là bao\nnhiêu?</p>"
+    },
+    {
+      "number": 13,
+      "content": "<p><strong>13.</strong>&nbsp; Độ dời (mét) của chất điểm chuyển động thẳng là\n<span class=\"math inline\">\\(s=1/t^2\\)</span>, với <span class=\"math inline\">\\(t\\)</span> tính bằng giây. Tìm vận tốc tại <span class=\"math inline\">\\(t=a\\)</span>, <span class=\"math inline\">\\(t=1\\)</span>, <span class=\"math inline\">\\(t=2\\)</span>, <span class=\"math inline\">\\(t=3\\)</span>.</p>"
+    },
+    {
+      "number": 14,
+      "content": "<p><strong>14.</strong>&nbsp; Độ dời (ft) của chất điểm chuyển động thẳng là\n<span class=\"math inline\">\\(s=\\frac12t^2-6t+23\\)</span>, với <span class=\"math inline\">\\(t\\)</span> tính bằng giây.</p>\n<p>(a) Tìm vận tốc trung bình trên mỗi khoảng: (i) <span class=\"math inline\">\\([4,8]\\)</span>; (ii) <span class=\"math inline\">\\([6,8]\\)</span>; (iii) <span class=\"math inline\">\\([8,10]\\)</span>; (iv) <span class=\"math inline\">\\([8,12]\\)</span>.</p>\n<p>(b) Tìm vận tốc tức thời tại <span class=\"math inline\">\\(t=8\\)</span>.</p>\n<p>(c) Vẽ đồ thị <span class=\"math inline\">\\(s\\)</span> theo <span class=\"math inline\">\\(t\\)</span> và các cát tuyến có hệ số góc bằng vận\ntốc trung bình ở (a). Sau đó vẽ tiếp tuyến có hệ số góc bằng vận tốc tức\nthời ở (b).</p>"
+    },
+    {
+      "number": 15,
+      "content": "<p><strong>15.</strong>&nbsp; (a) Một chất điểm bắt đầu chuyển động sang phải\ntrên đường thẳng nằm ngang; đồ thị hàm vị trí được cho dưới đây. Khi nào\nchất điểm chuyển động sang phải, sang trái hoặc đứng yên?</p>\n<p>(b) Vẽ đồ thị hàm vận tốc.</p>\n<div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-2-7-8fc77b65/e15.png\" alt=\"image\"><br>\n<span>Đồ thị Bài tập 15. Trục <span class=\"math inline\">\\(s\\)</span>:\nmét; trục <span class=\"math inline\">\\(t\\)</span>: giây.</span></p>\n</div>"
+    },
+    {
+      "number": 16,
+      "content": "<p><strong>16.</strong>&nbsp; Hình sau cho đồ thị hàm vị trí của hai vận động\nviên <span class=\"math inline\">\\(A,B\\)</span> chạy đua 100 m và về đích\nđồng thời.</p>\n<p>(a) Mô tả và so sánh cách chạy của hai người.</p>\n<p>(b) Khi nào khoảng cách giữa họ lớn nhất?</p>\n<p>(c) Khi nào họ có cùng vận tốc?</p>\n<div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-2-7-8fc77b65/e16.png\" alt=\"image\"><br>\n<span>Đồ thị Bài tập 16. Trục <span class=\"math inline\">\\(s\\)</span>:\nmét; trục <span class=\"math inline\">\\(t\\)</span>: giây.</span></p>\n</div>"
+    },
+    {
+      "number": 17,
+      "content": "<p><strong>17.</strong>&nbsp; Với hàm <span class=\"math inline\">\\(g\\)</span>\ncó đồ thị sau, sắp xếp theo thứ tự tăng dần các số sau và giải thích:\n<span class=\"math display\">\\[0,\\qquad g'(-2),\\qquad g'(0),\\qquad\ng'(2),\\qquad g'(4).\\]</span></p>\n<div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-2-7-8fc77b65/e17.png\" alt=\"image\"><br>\n<span>Đồ thị Bài tập 17.</span></p>\n</div>"
+    },
+    {
+      "number": 18,
+      "content": "<p><strong>18.</strong>&nbsp; Cho đồ thị hàm <span class=\"math inline\">\\(f\\)</span> như sau.</p>\n<p>(a) Tìm tốc độ biến thiên trung bình của <span class=\"math inline\">\\(f\\)</span> trên <span class=\"math inline\">\\([20,60]\\)</span>.</p>\n<p>(b) Chỉ ra một khoảng mà tốc độ biến thiên trung bình của <span class=\"math inline\">\\(f\\)</span> bằng 0.</p>\n<p>(c) Tính <span class=\"math inline\">\\([f(40)-f(10)]/(40-10)\\)</span>.\nGiá trị này biểu thị điều gì về hình học?</p>\n<p>(d) Ước lượng <span class=\"math inline\">\\(f'(50)\\)</span>.</p>\n<p>(e) Có phải <span class=\"math inline\">\\(f'(10)&gt;f'(30)\\)</span> không?</p>\n<p>(f) Có phải <span class=\"math inline\">\\(f'(60)&gt;[f(80)-f(40)]/(80-40)\\)</span>\nkhông? Giải thích.</p>\n<div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-2-7-8fc77b65/e18.png\" alt=\"image\"><br>\n<span>Đồ thị Bài tập 18.</span></p>\n</div>"
+    },
+    {
+      "number": 19,
+      "content": "<p><strong>19–20. Dùng Định nghĩa 4 tìm <span class=\"math inline\">\\(f'(a)\\)</span> tại số <span class=\"math inline\">\\(a\\)</span> đã cho.</strong></p><p><strong>19.</strong>&nbsp; <span class=\"math inline\">\\(f(x)=\\sqrt{4x+1}\\)</span>, <span class=\"math inline\">\\(a=6\\)</span>.</p>"
+    },
+    {
+      "number": 20,
+      "content": "<p><strong>19–20. Dùng Định nghĩa 4 tìm <span class=\"math inline\">\\(f'(a)\\)</span> tại số <span class=\"math inline\">\\(a\\)</span> đã cho.</strong></p><p><strong>20.</strong>&nbsp; <span class=\"math inline\">\\(f(x)=5x^4\\)</span>,\n<span class=\"math inline\">\\(a=-1\\)</span>.</p>"
+    },
+    {
+      "number": 21,
+      "content": "<p><strong>21–22. Dùng công thức (5) tìm <span class=\"math inline\">\\(f'(a)\\)</span> tại số <span class=\"math inline\">\\(a\\)</span> đã cho.</strong></p><p><strong>21.</strong>&nbsp; <span class=\"math inline\">\\(f(x)=x^2/(x+6)\\)</span>, <span class=\"math inline\">\\(a=3\\)</span>.</p><p><strong>Công thức (5).</strong></p><p>Đặt <span class=\"math inline\">\\(x=a+h\\)</span> thì <span class=\"math inline\">\\(h=x-a\\)</span>, và <span class=\"math inline\">\\(h\\to0\\)</span> khi và chỉ khi <span class=\"math inline\">\\(x\\to a\\)</span>. Do đó, một cách viết tương đương\ncủa định nghĩa đạo hàm, như đã thấy khi tìm tiếp tuyến trong Định nghĩa\n1, là <span class=\"math display\">\\[f'(a)=\\lim_{x\\to\na}\\frac{f(x)-f(a)}{x-a}.\\tag{5}\\]</span> Định nghĩa 4 và công thức (5)\ntương đương, nên có thể dùng một trong hai để tính đạo hàm. Trong thực\nhành, Định nghĩa 4 thường cho phép tính đơn giản hơn.</p>"
+    },
+    {
+      "number": 22,
+      "content": "<p><strong>21–22. Dùng công thức (5) tìm <span class=\"math inline\">\\(f'(a)\\)</span> tại số <span class=\"math inline\">\\(a\\)</span> đã cho.</strong></p><p><strong>22.</strong>&nbsp; <span class=\"math inline\">\\(f(x)=1/(\\sqrt{2x}+2)\\)</span>, <span class=\"math inline\">\\(a=1\\)</span>.</p><p><strong>Công thức (5).</strong></p><p>Đặt <span class=\"math inline\">\\(x=a+h\\)</span> thì <span class=\"math inline\">\\(h=x-a\\)</span>, và <span class=\"math inline\">\\(h\\to0\\)</span> khi và chỉ khi <span class=\"math inline\">\\(x\\to a\\)</span>. Do đó, một cách viết tương đương\ncủa định nghĩa đạo hàm, như đã thấy khi tìm tiếp tuyến trong Định nghĩa\n1, là <span class=\"math display\">\\[f'(a)=\\lim_{x\\to\na}\\frac{f(x)-f(a)}{x-a}.\\tag{5}\\]</span> Định nghĩa 4 và công thức (5)\ntương đương, nên có thể dùng một trong hai để tính đạo hàm. Trong thực\nhành, Định nghĩa 4 thường cho phép tính đơn giản hơn.</p>"
+    },
+    {
+      "number": 23,
+      "content": "<p><strong>23–26. Tìm <span class=\"math inline\">\\(f'(a)\\)</span>.</strong></p><p><strong>23.</strong>&nbsp; <span class=\"math inline\">\\(f(x)=2x^2-5x+3\\)</span>.</p>"
+    },
+    {
+      "number": 24,
+      "content": "<p><strong>23–26. Tìm <span class=\"math inline\">\\(f'(a)\\)</span>.</strong></p><p><strong>24.</strong>&nbsp; <span class=\"math inline\">\\(f(t)=t^3-3t\\)</span>.</p>"
+    },
+    {
+      "number": 25,
+      "content": "<p><strong>23–26. Tìm <span class=\"math inline\">\\(f'(a)\\)</span>.</strong></p><p><strong>25.</strong>&nbsp; <span class=\"math inline\">\\(f(t)=1/(t^2+1)\\)</span>.</p>"
+    },
+    {
+      "number": 26,
+      "content": "<p><strong>23–26. Tìm <span class=\"math inline\">\\(f'(a)\\)</span>.</strong></p><p><strong>26.</strong>&nbsp; <span class=\"math inline\">\\(f(x)=x/(1-4x)\\)</span>.</p>"
+    },
+    {
+      "number": 27,
+      "content": "<p><strong>27.</strong>&nbsp; Tìm phương trình tiếp tuyến của <span class=\"math inline\">\\(y=B(x)\\)</span> tại <span class=\"math inline\">\\(x=6\\)</span>, biết <span class=\"math inline\">\\(B(6)=0\\)</span>, <span class=\"math inline\">\\(B'(6)=-1/2\\)</span>.</p>"
+    },
+    {
+      "number": 28,
+      "content": "<p><strong>28.</strong>&nbsp; Tìm phương trình tiếp tuyến của <span class=\"math inline\">\\(y=g(x)\\)</span> tại <span class=\"math inline\">\\(x=5\\)</span>, biết <span class=\"math inline\">\\(g(5)=-3\\)</span>, <span class=\"math inline\">\\(g'(5)=4\\)</span>.</p>"
+    },
+    {
+      "number": 29,
+      "content": "<p><strong>29.</strong>&nbsp; Cho <span class=\"math inline\">\\(f(x)=3x^2-x^3\\)</span>. Tìm <span class=\"math inline\">\\(f'(1)\\)</span> và dùng kết quả để tìm phương\ntrình tiếp tuyến của <span class=\"math inline\">\\(y=3x^2-x^3\\)</span> tại\n<span class=\"math inline\">\\((1,2)\\)</span>.</p>"
+    },
+    {
+      "number": 30,
+      "content": "<p><strong>30.</strong>&nbsp; Cho <span class=\"math inline\">\\(g(x)=x^4-2\\)</span>. Tìm <span class=\"math inline\">\\(g'(1)\\)</span> và dùng kết quả để tìm phương\ntrình tiếp tuyến của <span class=\"math inline\">\\(y=x^4-2\\)</span> tại\n<span class=\"math inline\">\\((1,-1)\\)</span>.</p>"
+    },
+    {
+      "number": 31,
+      "content": "<p><strong>31.</strong>&nbsp; (a) Cho <span class=\"math inline\">\\(F(x)=5x/(1+x^2)\\)</span>. Tìm <span class=\"math inline\">\\(F'(2)\\)</span> và phương trình tiếp tuyến của\n<span class=\"math inline\">\\(y=5x/(1+x^2)\\)</span> tại <span class=\"math inline\">\\((2,2)\\)</span>.</p>\n<p>(b) Minh họa (a) bằng cách vẽ đường cong và tiếp tuyến trên cùng màn\nhình.</p>"
+    },
+    {
+      "number": 32,
+      "content": "<p><strong>32.</strong>&nbsp; (a) Cho <span class=\"math inline\">\\(G(x)=4x^2-x^3\\)</span>. Tìm <span class=\"math inline\">\\(G'(a)\\)</span> và dùng kết quả để tìm phương\ntrình các tiếp tuyến của <span class=\"math inline\">\\(y=4x^2-x^3\\)</span>\ntại <span class=\"math inline\">\\((2,8)\\)</span> và <span class=\"math inline\">\\((3,9)\\)</span>.</p>\n<p>(b) Minh họa (a) bằng cách vẽ đường cong và các tiếp tuyến trên cùng\nmàn hình.</p>"
+    },
+    {
+      "number": 33,
+      "content": "<p><strong>33.</strong>&nbsp; Biết tiếp tuyến của <span class=\"math inline\">\\(y=f(x)\\)</span> tại điểm có hoành độ <span class=\"math inline\">\\(a=2\\)</span> có phương trình <span class=\"math inline\">\\(y=4x-5\\)</span>. Tìm <span class=\"math inline\">\\(f(2)\\)</span> và <span class=\"math inline\">\\(f'(2)\\)</span>.</p>"
+    },
+    {
+      "number": 34,
+      "content": "<p><strong>34.</strong>&nbsp; Tiếp tuyến của <span class=\"math inline\">\\(y=f(x)\\)</span> tại <span class=\"math inline\">\\((4,3)\\)</span> đi qua <span class=\"math inline\">\\((0,2)\\)</span>. Tìm <span class=\"math inline\">\\(f(4)\\)</span> và <span class=\"math inline\">\\(f'(4)\\)</span>.</p>"
+    },
+    {
+      "number": 35,
+      "content": "<p><strong>35–36. Chất điểm chuyển động thẳng theo phương trình <span class=\"math inline\">\\(s=f(t)\\)</span>; <span class=\"math inline\">\\(s\\)</span> đo bằng mét, <span class=\"math inline\">\\(t\\)</span> bằng giây. Tìm vận tốc và tốc độ tại\n<span class=\"math inline\">\\(t=4\\)</span>.</strong></p><p><strong>35.</strong>&nbsp; <span class=\"math inline\">\\(f(t)=80t-6t^2\\)</span>.</p>"
+    },
+    {
+      "number": 36,
+      "content": "<p><strong>35–36. Chất điểm chuyển động thẳng theo phương trình <span class=\"math inline\">\\(s=f(t)\\)</span>; <span class=\"math inline\">\\(s\\)</span> đo bằng mét, <span class=\"math inline\">\\(t\\)</span> bằng giây. Tìm vận tốc và tốc độ tại\n<span class=\"math inline\">\\(t=4\\)</span>.</strong></p><p><strong>36.</strong>&nbsp; <span class=\"math inline\">\\(f(t)=10+45/(t+1)\\)</span>.</p>"
+    },
+    {
+      "number": 37,
+      "content": "<p><strong>37.</strong>&nbsp; Đặt một lon nước ngọt ấm vào tủ lạnh. Phác họa\nđồ thị nhiệt độ nước ngọt theo thời gian. Tốc độ biến thiên nhiệt độ ban\nđầu lớn hơn hay nhỏ hơn tốc độ biến thiên sau một giờ?</p>"
+    },
+    {
+      "number": 38,
+      "content": "<p><strong>38.</strong>&nbsp; Một con gà tây quay được lấy khỏi lò ở nhiệt độ\n<span class=\"math inline\">\\(185^\\circ\\mathrm{F}\\)</span> và đặt lên bàn\ntrong phòng có nhiệt độ <span class=\"math inline\">\\(75^\\circ\\mathrm{F}\\)</span>. Đồ thị cho thấy nhiệt\nđộ gà giảm dần và tiến đến nhiệt độ phòng. Bằng cách đo hệ số góc tiếp\ntuyến, ước lượng tốc độ biến thiên nhiệt độ sau một giờ.</p>\n<div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-2-7-8fc77b65/e38.png\" alt=\"image\"><br>\n<span>Đồ thị Bài tập 38. <span class=\"math inline\">\\(T\\)</span> đo bằng\n°F; <span class=\"math inline\">\\(t\\)</span> đo bằng phút.</span></p>\n</div>"
+    },
+    {
+      "number": 39,
+      "content": "<p><strong>39.</strong>&nbsp; Phác họa đồ thị hàm <span class=\"math inline\">\\(f\\)</span> thỏa <span class=\"math inline\">\\(f(0)=0\\)</span>, <span class=\"math inline\">\\(f'(0)=3\\)</span>, <span class=\"math inline\">\\(f'(1)=0\\)</span>, <span class=\"math inline\">\\(f'(2)=-1\\)</span>.</p>"
+    },
+    {
+      "number": 40,
+      "content": "<p><strong>40.</strong>&nbsp; Phác họa đồ thị hàm <span class=\"math inline\">\\(g\\)</span> thỏa <span class=\"math display\">\\[g(0)=g(2)=g(4)=0,\\qquad\ng'(1)=g'(3)=0,\\]</span> <span class=\"math display\">\\[g'(0)=g'(4)=1,\\qquad\ng'(2)=-1,\\]</span> <span class=\"math display\">\\[\\lim_{x\\to\\infty}g(x)=\\infty,\\qquad\\lim_{x\\to-\\infty}g(x)=-\\infty.\\]</span></p>"
+    },
+    {
+      "number": 41,
+      "content": "<p><strong>41.</strong>&nbsp; Phác họa đồ thị hàm <span class=\"math inline\">\\(g\\)</span> liên tục trên tập xác định <span class=\"math inline\">\\((-5,5)\\)</span>, thỏa <span class=\"math display\">\\[g(0)=1,\\quad g'(0)=1,\\quad\ng'(-2)=0,\\]</span> <span class=\"math display\">\\[\\lim_{x\\to-5^+}g(x)=\\infty,\\qquad\\lim_{x\\to5^-}g(x)=3.\\]</span></p>"
+    },
+    {
+      "number": 42,
+      "content": "<p><strong>42.</strong>&nbsp; Phác họa đồ thị hàm <span class=\"math inline\">\\(f\\)</span> có tập xác định <span class=\"math inline\">\\((-2,2)\\)</span>, thỏa <span class=\"math inline\">\\(f'(0)=-2\\)</span>, <span class=\"math inline\">\\(\\lim_{x\\to-2}f(x)=\\infty\\)</span>; <span class=\"math inline\">\\(f\\)</span> liên tục tại mọi điểm trong tập xác\nđịnh, trừ <span class=\"math inline\">\\(\\pm1\\)</span>, và <span class=\"math inline\">\\(f\\)</span> là hàm lẻ.</p>"
+    },
+    {
+      "number": 43,
+      "content": "<p><strong>43–48. Mỗi giới hạn sau biểu thị đạo hàm của một hàm <span class=\"math inline\">\\(f\\)</span> tại một số <span class=\"math inline\">\\(a\\)</span>. Trong mỗi trường hợp, hãy nêu một hàm\n<span class=\"math inline\">\\(f\\)</span> và số <span class=\"math inline\">\\(a\\)</span> thích hợp.</strong></p><p><strong>43.</strong>&nbsp; <span class=\"math inline\">\\(\\displaystyle\\lim_{h\\to0}\\frac{\\sqrt{9+h}-3}h\\)</span>.</p>"
+    },
+    {
+      "number": 44,
+      "content": "<p><strong>43–48. Mỗi giới hạn sau biểu thị đạo hàm của một hàm <span class=\"math inline\">\\(f\\)</span> tại một số <span class=\"math inline\">\\(a\\)</span>. Trong mỗi trường hợp, hãy nêu một hàm\n<span class=\"math inline\">\\(f\\)</span> và số <span class=\"math inline\">\\(a\\)</span> thích hợp.</strong></p><p><strong>44.</strong>&nbsp; <span class=\"math inline\">\\(\\displaystyle\\lim_{h\\to0}\\frac{e^{-2+h}-e^{-2}}h\\)</span>.</p>"
+    },
+    {
+      "number": 45,
+      "content": "<p><strong>43–48. Mỗi giới hạn sau biểu thị đạo hàm của một hàm <span class=\"math inline\">\\(f\\)</span> tại một số <span class=\"math inline\">\\(a\\)</span>. Trong mỗi trường hợp, hãy nêu một hàm\n<span class=\"math inline\">\\(f\\)</span> và số <span class=\"math inline\">\\(a\\)</span> thích hợp.</strong></p><p><strong>45.</strong>&nbsp; <span class=\"math inline\">\\(\\displaystyle\\lim_{x\\to2}\\frac{x^6-64}{x-2}\\)</span>.</p>"
+    },
+    {
+      "number": 46,
+      "content": "<p><strong>43–48. Mỗi giới hạn sau biểu thị đạo hàm của một hàm <span class=\"math inline\">\\(f\\)</span> tại một số <span class=\"math inline\">\\(a\\)</span>. Trong mỗi trường hợp, hãy nêu một hàm\n<span class=\"math inline\">\\(f\\)</span> và số <span class=\"math inline\">\\(a\\)</span> thích hợp.</strong></p><p><strong>46.</strong>&nbsp; <span class=\"math inline\">\\(\\displaystyle\\lim_{x\\to1/4}\\frac{1/x-4}{x-1/4}\\)</span>.</p>"
+    },
+    {
+      "number": 47,
+      "content": "<p><strong>43–48. Mỗi giới hạn sau biểu thị đạo hàm của một hàm <span class=\"math inline\">\\(f\\)</span> tại một số <span class=\"math inline\">\\(a\\)</span>. Trong mỗi trường hợp, hãy nêu một hàm\n<span class=\"math inline\">\\(f\\)</span> và số <span class=\"math inline\">\\(a\\)</span> thích hợp.</strong></p><p><strong>47.</strong>&nbsp; <span class=\"math inline\">\\(\\displaystyle\\lim_{h\\to0}\\frac{\\tan(\\pi/4+h)-1}h\\)</span>.</p>"
+    },
+    {
+      "number": 48,
+      "content": "<p><strong>43–48. Mỗi giới hạn sau biểu thị đạo hàm của một hàm <span class=\"math inline\">\\(f\\)</span> tại một số <span class=\"math inline\">\\(a\\)</span>. Trong mỗi trường hợp, hãy nêu một hàm\n<span class=\"math inline\">\\(f\\)</span> và số <span class=\"math inline\">\\(a\\)</span> thích hợp.</strong></p><p><strong>48.</strong>&nbsp; <span class=\"math inline\">\\(\\displaystyle\\lim_{\\theta\\to\\pi/6}\\frac{\\sin\\theta-1/2}{\\theta-\\pi/6}\\)</span>.</p>"
+    },
+    {
+      "number": 49,
+      "content": "<p><strong>49.</strong>&nbsp; Chi phí sản xuất <span class=\"math inline\">\\(x\\)</span> đơn vị hàng hóa là <span class=\"math inline\">\\(C(x)=5000+10x+0.05x^2\\)</span> đô la.</p>\n<p>(a) Tìm tốc độ biến thiên trung bình của <span class=\"math inline\">\\(C\\)</span> theo <span class=\"math inline\">\\(x\\)</span> khi mức sản xuất thay đổi: (i) từ <span class=\"math inline\">\\(x=100\\)</span> đến <span class=\"math inline\">\\(x=105\\)</span>; (ii) từ <span class=\"math inline\">\\(x=100\\)</span> đến <span class=\"math inline\">\\(x=101\\)</span>.</p>\n<p>(b) Tìm tốc độ biến thiên tức thời của <span class=\"math inline\">\\(C\\)</span> theo <span class=\"math inline\">\\(x\\)</span> tại <span class=\"math inline\">\\(x=100\\)</span>. Đây là chi phí biên; ý nghĩa sẽ\nđược giải thích ở §3.7.</p>"
+    },
+    {
+      "number": 50,
+      "content": "<p><strong>50.</strong>&nbsp; Gọi <span class=\"math inline\">\\(H(t)\\)</span>\nlà chi phí hằng ngày, tính bằng đô la, để sưởi một tòa nhà văn phòng khi\nnhiệt độ ngoài trời là <span class=\"math inline\">\\(t\\)</span> độ\nFahrenheit.</p>\n<p>(a) <span class=\"math inline\">\\(H'(58)\\)</span> có ý nghĩa gì?\nĐơn vị là gì?</p>\n<p>(b) Bạn dự đoán <span class=\"math inline\">\\(H'(58)\\)</span> dương\nhay âm? Giải thích.</p>"
+    },
+    {
+      "number": 51,
+      "content": "<p><strong>51.</strong>&nbsp; Chi phí sản xuất <span class=\"math inline\">\\(x\\)</span> ounce vàng từ một mỏ mới là <span class=\"math inline\">\\(C=f(x)\\)</span> đô la.</p>\n<p>(a) Đạo hàm <span class=\"math inline\">\\(f'(x)\\)</span> có ý nghĩa\ngì? Đơn vị là gì?</p>\n<p>(b) <span class=\"math inline\">\\(f'(800)=17\\)</span> có nghĩa là\ngì?</p>\n<p>(c) Bạn dự đoán <span class=\"math inline\">\\(f'(x)\\)</span> sẽ\ntăng hay giảm trong ngắn hạn? Còn dài hạn? Giải thích.</p>"
+    },
+    {
+      "number": 52,
+      "content": "<p><strong>52.</strong>&nbsp; Lượng cà phê xay cao cấp bán được, tính bằng\npound, khi giá là <span class=\"math inline\">\\(p\\)</span> đô la/pound,\nđược cho bởi <span class=\"math inline\">\\(Q=f(p)\\)</span>.</p>\n<p>(a) <span class=\"math inline\">\\(f'(8)\\)</span> có ý nghĩa gì? Đơn\nvị là gì?</p>\n<p>(b) <span class=\"math inline\">\\(f'(8)\\)</span> dương hay âm? Giải\nthích.</p>"
+    },
+    {
+      "number": 53,
+      "content": "<p><strong>53.</strong>&nbsp; Lượng oxy có thể hòa tan trong nước phụ thuộc\nnhiệt độ nước; vì vậy ô nhiễm nhiệt ảnh hưởng hàm lượng oxy. Đồ thị cho\nđộ hòa tan <span class=\"math inline\">\\(S\\)</span> theo nhiệt độ <span class=\"math inline\">\\(T\\)</span>.</p>\n<p>(a) <span class=\"math inline\">\\(S'(T)\\)</span> có ý nghĩa gì? Đơn\nvị là gì?</p>\n<p>(b) Ước lượng <span class=\"math inline\">\\(S'(16)\\)</span> và diễn\ngiải.</p>\n<div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-2-7-8fc77b65/e53.png\" alt=\"image\"><br>\n<span>Đồ thị Bài tập 53. <span class=\"math inline\">\\(S\\)</span> đo bằng\nmg/L; <span class=\"math inline\">\\(T\\)</span> bằng °C.</span></p>\n</div>"
+    },
+    {
+      "number": 54,
+      "content": "<p><strong>54.</strong>&nbsp; Đồ thị cho ảnh hưởng của nhiệt độ <span class=\"math inline\">\\(T\\)</span> đến tốc độ bơi tối đa có thể duy trì\n<span class=\"math inline\">\\(S\\)</span> của cá hồi Coho.</p>\n<p>(a) <span class=\"math inline\">\\(S'(T)\\)</span> có ý nghĩa gì? Đơn\nvị là gì?</p>\n<p>(b) Ước lượng <span class=\"math inline\">\\(S'(15)\\)</span>, <span class=\"math inline\">\\(S'(25)\\)</span> và diễn giải.</p>\n<div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-2-7-8fc77b65/e54.png\" alt=\"image\"><br>\n<span>Đồ thị Bài tập 54. <span class=\"math inline\">\\(S\\)</span> đo bằng\ncm/s; <span class=\"math inline\">\\(T\\)</span> bằng °C.</span></p>\n</div>"
+    },
+    {
+      "number": 55,
+      "content": "<p><strong>55.</strong>&nbsp; Các nhà nghiên cứu đo nồng độ cồn trung bình\ntrong máu <span class=\"math inline\">\\(C(t)\\)</span> của tám nam giới,\nbắt đầu một giờ sau khi uống 30 mL ethanol, tương đương hai khẩu phần đồ\nuống có cồn.</p>\n<div class=\"center\">\n<table>\n<tbody>\n<tr class=\"odd\">\n<td style=\"text-align: left;\"><span class=\"math inline\">\\(t\\)</span>\n(giờ)</td>\n<td style=\"text-align: right;\">1.0</td>\n<td style=\"text-align: right;\">1.5</td>\n<td style=\"text-align: right;\">2.0</td>\n<td style=\"text-align: right;\">2.5</td>\n<td style=\"text-align: right;\">3.0</td>\n</tr>\n<tr class=\"even\">\n<td style=\"text-align: left;\"><span class=\"math inline\">\\(C(t)\\)</span>\n(g/dL)</td>\n<td style=\"text-align: right;\">0.033</td>\n<td style=\"text-align: right;\">0.024</td>\n<td style=\"text-align: right;\">0.018</td>\n<td style=\"text-align: right;\">0.012</td>\n<td style=\"text-align: right;\">0.007</td>\n</tr>\n</tbody>\n</table>\n</div>\n<p>(a) Tìm tốc độ biến thiên trung bình của <span class=\"math inline\">\\(C\\)</span> theo <span class=\"math inline\">\\(t\\)</span> trên: (i) <span class=\"math inline\">\\([1.0,2.0]\\)</span>; (ii) <span class=\"math inline\">\\([1.5,2.0]\\)</span>; (iii) <span class=\"math inline\">\\([2.0,2.5]\\)</span>; (iv) <span class=\"math inline\">\\([2.0,3.0]\\)</span>. Ghi đơn vị trong mỗi trường\nhợp.</p>\n<p>(b) Ước lượng tốc độ biến thiên tức thời tại <span class=\"math inline\">\\(t=2\\)</span> và diễn giải kết quả. Đơn vị là\ngì?</p>"
+    },
+    {
+      "number": 56,
+      "content": "<p><strong>56.</strong>&nbsp; Bảng cho số cơ sở <span class=\"math inline\">\\(N\\)</span> của một chuỗi quán cà phê phổ biến,\ntính tại ngày 1 tháng 10 mỗi năm.</p>\n<div class=\"center\">\n<table>\n<thead>\n<tr class=\"header\">\n<th style=\"text-align: right;\">Năm</th>\n<th style=\"text-align: right;\"><span class=\"math inline\">\\(N\\)</span></th>\n</tr>\n</thead>\n<tbody>\n<tr class=\"odd\">\n<td style=\"text-align: right;\">2008</td>\n<td style=\"text-align: right;\">16 680</td>\n</tr>\n<tr class=\"even\">\n<td style=\"text-align: right;\">2010</td>\n<td style=\"text-align: right;\">16 858</td>\n</tr>\n<tr class=\"odd\">\n<td style=\"text-align: right;\">2012</td>\n<td style=\"text-align: right;\">18 066</td>\n</tr>\n<tr class=\"even\">\n<td style=\"text-align: right;\">2014</td>\n<td style=\"text-align: right;\">21 366</td>\n</tr>\n<tr class=\"odd\">\n<td style=\"text-align: right;\">2016</td>\n<td style=\"text-align: right;\">25 085</td>\n</tr>\n</tbody>\n</table>\n</div>\n<p>(a) Tìm tốc độ tăng trung bình: (i) từ 2008 đến 2010; (ii) từ 2010\nđến 2012. Ghi đơn vị và nêu kết luận.</p>\n<p>(b) Ước lượng tốc độ tăng tức thời năm 2010 bằng trung bình của hai\ntốc độ biến thiên trung bình. Đơn vị là gì?</p>\n<p>(c) Ước lượng tốc độ tăng tức thời năm 2010 bằng cách đo hệ số góc\ntiếp tuyến.</p>"
+    },
+    {
+      "number": 57,
+      "content": "<p><strong>57–58. Xác định <span class=\"math inline\">\\(f'(0)\\)</span> có tồn tại hay\nkhông.</strong></p><p><strong>57.</strong>&nbsp; <span class=\"math inline\">\\(\\displaystyle\nf(x)=\\begin{cases}x\\sin(1/x),&amp;x\\ne0,\\\\0,&amp;x=0.\\end{cases}\\)</span></p>"
+    },
+    {
+      "number": 58,
+      "content": "<p><strong>57–58. Xác định <span class=\"math inline\">\\(f'(0)\\)</span> có tồn tại hay\nkhông.</strong></p><p><strong>58.</strong>&nbsp; <span class=\"math inline\">\\(\\displaystyle\nf(x)=\\begin{cases}x^2\\sin(1/x),&amp;x\\ne0,\\\\0,&amp;x=0.\\end{cases}\\)</span></p>"
+    },
+    {
+      "number": 59,
+      "content": "<p><strong>59.</strong>&nbsp; (a) Vẽ <span class=\"math inline\">\\(f(x)=\\sin\nx-\\frac1{1000}\\sin(1000x)\\)</span> trong cửa sổ <span class=\"math inline\">\\([-2\\pi,2\\pi]\\times[-4,4]\\)</span>. Đồ thị dường\nnhư có hệ số góc bao nhiêu tại gốc tọa độ?</p>\n<p>(b) Phóng đại đến cửa sổ <span class=\"math inline\">\\([-0.4,0.4]\\times[-0.25,0.25]\\)</span> và ước lượng\n<span class=\"math inline\">\\(f'(0)\\)</span>. Kết quả có phù hợp (a)\nkhông?</p>\n<p>(c) Phóng đại tiếp đến cửa sổ <span class=\"math inline\">\\([-0.008,0.008]\\times[-0.005,0.005]\\)</span>. Bạn\ncó muốn sửa ước lượng <span class=\"math inline\">\\(f'(0)\\)</span>\nkhông?</p>"
+    },
+    {
+      "number": 60,
+      "content": "<p><strong>60.</strong>&nbsp; <strong>Thương sai phân đối xứng.</strong>\nTrong Ví dụ 8, ta xấp xỉ tốc độ biến thiên tức thời bằng trung bình của\nhai tốc độ biến thiên trung bình. Một cách khác là dùng một tốc độ biến\nthiên trung bình trên khoảng có tâm là giá trị cần xét. <strong>Thương\nsai phân đối xứng</strong> của <span class=\"math inline\">\\(f\\)</span>\ntại <span class=\"math inline\">\\(x=a\\)</span> trên <span class=\"math inline\">\\([a-d,a+d]\\)</span> được định nghĩa là <span class=\"math display\">\\[\\frac{f(a+d)-f(a-d)}{(a+d)-(a-d)}=\\frac{f(a+d)-f(a-d)}{2d}.\\]</span>\n(a) Tính thương sai phân đối xứng của hàm <span class=\"math inline\">\\(D\\)</span> trong Ví dụ 8 trên <span class=\"math inline\">\\([2004,2012]\\)</span>; kiểm tra sự phù hợp với ước\nlượng <span class=\"math inline\">\\(D'(2008)\\)</span> trong ví dụ.</p>\n<p>(b) Chứng tỏ thương sai phân đối xứng của <span class=\"math inline\">\\(f\\)</span> tại <span class=\"math inline\">\\(x=a\\)</span> bằng trung bình của các tốc độ biến\nthiên trung bình trên <span class=\"math inline\">\\([a-d,a]\\)</span> và\n<span class=\"math inline\">\\([a,a+d]\\)</span>.</p>\n<p>(c) Dùng thương sai phân đối xứng với <span class=\"math inline\">\\(d=0.4\\)</span> để ước lượng <span class=\"math inline\">\\(f'(1)\\)</span>, trong đó <span class=\"math inline\">\\(f(x)=x^3-2x^2+2\\)</span>. Vẽ đồ thị <span class=\"math inline\">\\(f\\)</span> cùng các cát tuyến tương ứng với tốc độ\nbiến thiên trung bình trên <span class=\"math inline\">\\([1-d,1]\\)</span>,\n<span class=\"math inline\">\\([1,1+d]\\)</span>, <span class=\"math inline\">\\([1-d,1+d]\\)</span>. Cát tuyến nào dường như có hệ\nsố góc gần hệ số góc tiếp tuyến tại <span class=\"math inline\">\\(x=1\\)</span> nhất?</p>"
+    }
+  ]
+}

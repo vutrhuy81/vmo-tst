@@ -1,0 +1,160 @@
+{
+  "bookKey": "stewart-9",
+  "sectionKey": "1-review",
+  "heading": "Bài tập",
+  "sourceSha256": "f5f8bf569f445aa3e4e0cb99fe456f4adce2c7091a08f4e49433171bda259a4c",
+  "exercises": [
+    {
+      "number": 1,
+      "content": "<p><strong>1.</strong>&nbsp; Cho hàm số <span class=\"math inline\">\\(f\\)</span> có đồ thị như hình.</p>\n<div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-1-review-f5f8bf56/ex01.png\" alt=\"image\"><br>\n<span>Đồ thị cho Bài tập 1.</span></p>\n</div>\n<p>(a) Ước lượng <span class=\"math inline\">\\(f(2)\\)</span>. (b) Ước\nlượng các giá trị <span class=\"math inline\">\\(x\\)</span> sao cho <span class=\"math inline\">\\(f(x)=3\\)</span>. (c) Nêu tập xác định của <span class=\"math inline\">\\(f\\)</span>. (d) Nêu tập giá trị của <span class=\"math inline\">\\(f\\)</span>. (e) Trên khoảng nào <span class=\"math inline\">\\(f\\)</span> đồng biến? (f) Hàm <span class=\"math inline\">\\(f\\)</span> có đơn ánh không? Giải thích. (g) Hàm\n<span class=\"math inline\">\\(f\\)</span> chẵn, lẻ hay không chẵn cũng\nkhông lẻ? Giải thích.</p>"
+    },
+    {
+      "number": 2,
+      "content": "<p><strong>2.</strong>&nbsp; Cho đồ thị của <span class=\"math inline\">\\(g\\)</span> như hình.</p>\n<div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-1-review-f5f8bf56/ex02.png\" alt=\"image\"><br>\n<span>Đồ thị cho Bài tập 2.</span></p>\n</div>\n<p>(a) Nêu giá trị <span class=\"math inline\">\\(g(2)\\)</span>. (b) Vì sao\n<span class=\"math inline\">\\(g\\)</span> đơn ánh? (c) Ước lượng <span class=\"math inline\">\\(g^{-1}(2)\\)</span>. (d) Ước lượng tập xác định của\n<span class=\"math inline\">\\(g^{-1}\\)</span>. (e) Vẽ phác đồ thị của\n<span class=\"math inline\">\\(g^{-1}\\)</span>.</p>"
+    },
+    {
+      "number": 3,
+      "content": "<p><strong>3.</strong>&nbsp; Cho <span class=\"math inline\">\\(f(x)=x^2-2x+3\\)</span>. Tính thương sai phân <span class=\"math display\">\\[\\frac{f(a+h)-f(a)}h.\\]</span></p>"
+    },
+    {
+      "number": 4,
+      "content": "<p><strong>4.</strong>&nbsp; Vẽ phác đồ thị của năng suất cây trồng theo\nlượng phân bón được sử dụng.</p>"
+    },
+    {
+      "number": 5,
+      "content": "<p><strong>5–8. Tìm tập xác định và tập giá trị của hàm số. Viết kết quả\nbằng ký hiệu khoảng.</strong></p><p><strong>5.</strong>&nbsp; <span class=\"math inline\">\\(f(x)=2/(3x-1)\\)</span>.</p>"
+    },
+    {
+      "number": 6,
+      "content": "<p><strong>5–8. Tìm tập xác định và tập giá trị của hàm số. Viết kết quả\nbằng ký hiệu khoảng.</strong></p><p><strong>6.</strong>&nbsp; <span class=\"math inline\">\\(g(x)=\\sqrt{16-x^4}\\)</span>.</p>"
+    },
+    {
+      "number": 7,
+      "content": "<p><strong>5–8. Tìm tập xác định và tập giá trị của hàm số. Viết kết quả\nbằng ký hiệu khoảng.</strong></p><p><strong>7.</strong>&nbsp; <span class=\"math inline\">\\(h(x)=\\ln(x+6)\\)</span>.</p>"
+    },
+    {
+      "number": 8,
+      "content": "<p><strong>5–8. Tìm tập xác định và tập giá trị của hàm số. Viết kết quả\nbằng ký hiệu khoảng.</strong></p><p><strong>8.</strong>&nbsp; <span class=\"math inline\">\\(F(t)=3+\\cos2t\\)</span>.</p>"
+    },
+    {
+      "number": 9,
+      "content": "<p><strong>9.</strong>&nbsp; Cho đồ thị của <span class=\"math inline\">\\(f\\)</span>. Mô tả cách thu được đồ thị của các hàm\nsau từ đồ thị của <span class=\"math inline\">\\(f\\)</span>: <span class=\"math display\">\\[\\begin{aligned}\n(a)\\ y&amp;=f(x)+5;&amp;(b)\\ y&amp;=f(x+5);\\\\\n(c)\\ y&amp;=1+2f(x);&amp;(d)\\ y&amp;=f(x-2)-2;\\\\\n(e)\\ y&amp;=-f(x);&amp;(f)\\ y&amp;=f^{-1}(x).\n\\end{aligned}\\]</span></p>"
+    },
+    {
+      "number": 10,
+      "content": "<p><strong>10.</strong>&nbsp; Cho đồ thị của <span class=\"math inline\">\\(f\\)</span> như hình. Vẽ đồ thị của các hàm: <span class=\"math display\">\\[\\begin{aligned}\n(a)\\ y&amp;=f(x-8);&amp;(b)\\ y&amp;=-f(x);\\\\\n(c)\\ y&amp;=2-f(x);&amp;(d)\\ y&amp;=\\tfrac12 f(x)-1;\\\\\n(e)\\ y&amp;=f^{-1}(x);&amp;(f)\\ y&amp;=f^{-1}(x+3).\n\\end{aligned}\\]</span></p>\n<div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-1-review-f5f8bf56/ex10.png\" alt=\"image\"><br>\n<span>Đồ thị cho Bài tập 10.</span></p>\n</div>"
+    },
+    {
+      "number": 11,
+      "content": "<p><strong>11–18. Dùng các phép biến đổi đồ thị để vẽ phác đồ thị của\nhàm số.</strong></p><p><strong>11.</strong>&nbsp; <span class=\"math inline\">\\(f(x)=x^3+2\\)</span>.</p>"
+    },
+    {
+      "number": 12,
+      "content": "<p><strong>11–18. Dùng các phép biến đổi đồ thị để vẽ phác đồ thị của\nhàm số.</strong></p><p><strong>12.</strong>&nbsp; <span class=\"math inline\">\\(f(x)=(x-3)^2\\)</span>.</p>"
+    },
+    {
+      "number": 13,
+      "content": "<p><strong>11–18. Dùng các phép biến đổi đồ thị để vẽ phác đồ thị của\nhàm số.</strong></p><p><strong>13.</strong>&nbsp; <span class=\"math inline\">\\(y=\\sqrt{x+2}\\)</span>.</p>"
+    },
+    {
+      "number": 14,
+      "content": "<p><strong>11–18. Dùng các phép biến đổi đồ thị để vẽ phác đồ thị của\nhàm số.</strong></p><p><strong>14.</strong>&nbsp; <span class=\"math inline\">\\(y=\\ln(x+5)\\)</span>.</p>"
+    },
+    {
+      "number": 15,
+      "content": "<p><strong>11–18. Dùng các phép biến đổi đồ thị để vẽ phác đồ thị của\nhàm số.</strong></p><p><strong>15.</strong>&nbsp; <span class=\"math inline\">\\(g(x)=1+\\cos2x\\)</span>.</p>"
+    },
+    {
+      "number": 16,
+      "content": "<p><strong>11–18. Dùng các phép biến đổi đồ thị để vẽ phác đồ thị của\nhàm số.</strong></p><p><strong>16.</strong>&nbsp; <span class=\"math inline\">\\(h(x)=-e^x+2\\)</span>.</p>"
+    },
+    {
+      "number": 17,
+      "content": "<p><strong>11–18. Dùng các phép biến đổi đồ thị để vẽ phác đồ thị của\nhàm số.</strong></p><p><strong>17.</strong>&nbsp; <span class=\"math inline\">\\(s(x)=1+0.5^x\\)</span>.</p>"
+    },
+    {
+      "number": 18,
+      "content": "<p><strong>11–18. Dùng các phép biến đổi đồ thị để vẽ phác đồ thị của\nhàm số.</strong></p><p><strong>18.</strong>&nbsp; <span class=\"math inline\">\\(f(x)=\\begin{cases}-x,&amp;x&lt;0,\\\\e^x-1,&amp;x\\ge0.\\end{cases}\\)</span></p>"
+    },
+    {
+      "number": 19,
+      "content": "<p><strong>19.</strong>&nbsp; Xác định <span class=\"math inline\">\\(f\\)</span>\nchẵn, lẻ hay không chẵn cũng không lẻ: <span class=\"math display\">\\[\\begin{aligned}\n(a)\\ f(x)&amp;=2x^5-3x^2+2;&amp;(b)\\ f(x)&amp;=x^3-x^7;\\\\\n(c)\\ f(x)&amp;=e^{-x^2};&amp;(d)\\ f(x)&amp;=1+\\sin x;\\\\\n(e)\\ f(x)&amp;=1-\\cos2x;&amp;(f)\\ f(x)&amp;=(x+1)^2.\n\\end{aligned}\\]</span></p>"
+    },
+    {
+      "number": 20,
+      "content": "<p><strong>20.</strong>&nbsp; Tìm biểu thức của hàm số có đồ thị gồm đoạn\nthẳng nối <span class=\"math inline\">\\((-2,2)\\)</span> với <span class=\"math inline\">\\((-1,0)\\)</span> và nửa trên của đường tròn tâm tại\ngốc tọa độ, bán kính 1.</p>"
+    },
+    {
+      "number": 21,
+      "content": "<p><strong>21.</strong>&nbsp; Cho <span class=\"math inline\">\\(f(x)=\\ln\nx\\)</span> và <span class=\"math inline\">\\(g(x)=x^2-9\\)</span>. Tìm các\nhàm (a) <span class=\"math inline\">\\(f\\circ g\\)</span>, (b) <span class=\"math inline\">\\(g\\circ f\\)</span>, (c) <span class=\"math inline\">\\(f\\circ f\\)</span>, (d) <span class=\"math inline\">\\(g\\circ g\\)</span>, cùng tập xác định của\nchúng.</p>"
+    },
+    {
+      "number": 22,
+      "content": "<p><strong>22.</strong>&nbsp; Biểu diễn <span class=\"math inline\">\\(F(x)=1/\\sqrt{x+\\sqrt{x}}\\)</span> dưới dạng hợp\ncủa ba hàm số.</p>"
+    },
+    {
+      "number": 23,
+      "content": "<p><strong>23.</strong>&nbsp; Tuổi thọ kỳ vọng đã tăng đáng kể trong những\nthập niên gần đây. Bảng sau cho tuổi thọ kỳ vọng khi sinh (tính bằng\nnăm) của nam giới sinh tại Hoa Kỳ. Dùng biểu đồ phân tán để chọn một\nloại mô hình phù hợp. Dùng mô hình đó dự đoán tuổi thọ của một nam giới\nsinh năm 2030.</p>\n<div class=\"center\">\n<table>\n<thead>\n<tr class=\"header\">\n<th style=\"text-align: right;\">Năm sinh</th>\n<th style=\"text-align: right;\">Tuổi thọ kỳ vọng</th>\n<th style=\"text-align: right;\">Năm sinh</th>\n<th style=\"text-align: right;\">Tuổi thọ kỳ vọng</th>\n</tr>\n</thead>\n<tbody>\n<tr class=\"odd\">\n<td style=\"text-align: right;\">1900</td>\n<td style=\"text-align: right;\">48.3</td>\n<td style=\"text-align: right;\">1960</td>\n<td style=\"text-align: right;\">66.6</td>\n</tr>\n<tr class=\"even\">\n<td style=\"text-align: right;\">1910</td>\n<td style=\"text-align: right;\">51.1</td>\n<td style=\"text-align: right;\">1970</td>\n<td style=\"text-align: right;\">67.1</td>\n</tr>\n<tr class=\"odd\">\n<td style=\"text-align: right;\">1920</td>\n<td style=\"text-align: right;\">55.2</td>\n<td style=\"text-align: right;\">1980</td>\n<td style=\"text-align: right;\">70.0</td>\n</tr>\n<tr class=\"even\">\n<td style=\"text-align: right;\">1930</td>\n<td style=\"text-align: right;\">57.4</td>\n<td style=\"text-align: right;\">1990</td>\n<td style=\"text-align: right;\">71.8</td>\n</tr>\n<tr class=\"odd\">\n<td style=\"text-align: right;\">1940</td>\n<td style=\"text-align: right;\">62.5</td>\n<td style=\"text-align: right;\">2000</td>\n<td style=\"text-align: right;\">73.0</td>\n</tr>\n<tr class=\"even\">\n<td style=\"text-align: right;\">1950</td>\n<td style=\"text-align: right;\">65.6</td>\n<td style=\"text-align: right;\">2010</td>\n<td style=\"text-align: right;\">76.2</td>\n</tr>\n</tbody>\n</table>\n</div>"
+    },
+    {
+      "number": 24,
+      "content": "<p><strong>24.</strong>&nbsp; Một hãng sản xuất đồ gia dụng nhỏ nhận thấy chi\nphí sản xuất 1000 lò nướng bánh mỗi tuần là 9000 đô la, còn chi phí sản\nxuất 1500 lò mỗi tuần là 12 000 đô la.</p>\n<p>(a) Giả sử chi phí là hàm tuyến tính của số lò được sản xuất, hãy\nbiểu diễn hàm chi phí và vẽ phác đồ thị. (b) Hệ số góc của đồ thị bằng\nbao nhiêu và có ý nghĩa gì? (c) Tung độ gốc của đồ thị bằng bao nhiêu và\ncó ý nghĩa gì?</p>"
+    },
+    {
+      "number": 25,
+      "content": "<p><strong>25.</strong>&nbsp; Cho <span class=\"math inline\">\\(f(x)=2x+4^x\\)</span>. Tìm <span class=\"math inline\">\\(f^{-1}(6)\\)</span>.</p>"
+    },
+    {
+      "number": 26,
+      "content": "<p><strong>26.</strong>&nbsp; Tìm hàm ngược của <span class=\"math inline\">\\(f(x)=\\dfrac{2x+3}{1-5x}\\)</span>.</p>"
+    },
+    {
+      "number": 27,
+      "content": "<p><strong>27.</strong>&nbsp; Dùng các quy tắc lôgarit để khai triển: <span class=\"math display\">\\[(a)\\ \\ln\\bigl(x\\sqrt{x+1}\\bigr);\\qquad(b)\\\n\\log_2\\sqrt{\\frac{x^2+1}{x-1}}.\\]</span></p>"
+    },
+    {
+      "number": 28,
+      "content": "<p><strong>28.</strong>&nbsp; Biểu diễn dưới dạng một lôgarit duy nhất: <span class=\"math display\">\\[(a)\\ \\tfrac12\\ln x-2\\ln(x^2+1);\\qquad(b)\\\n\\ln(x-3)+\\ln(x+3)-2\\ln(x^2-9).\\]</span></p>"
+    },
+    {
+      "number": 29,
+      "content": "<p><strong>29–30. Tìm giá trị chính xác của mỗi biểu thức.</strong></p><p><strong>29.</strong>&nbsp; (a) <span class=\"math inline\">\\(e^{2\\ln5}\\)</span>; (b) <span class=\"math inline\">\\(\\log_6 4+\\log_6 54\\)</span>; (c) <span class=\"math inline\">\\(\\tan(\\arcsin\\tfrac45)\\)</span>.</p>"
+    },
+    {
+      "number": 30,
+      "content": "<p><strong>29–30. Tìm giá trị chính xác của mỗi biểu thức.</strong></p><p><strong>30.</strong>&nbsp; (a) <span class=\"math inline\">\\(\\ln\\dfrac1{e^3}\\)</span>; (b) <span class=\"math inline\">\\(\\sin(\\tan^{-1}1)\\)</span>; (c) <span class=\"math inline\">\\(10^{-3\\log4}\\)</span>.</p>"
+    },
+    {
+      "number": 31,
+      "content": "<p><strong>31–36. Giải phương trình theo <span class=\"math inline\">\\(x\\)</span>. Cho cả giá trị chính xác và giá trị\nthập phân gần đúng, làm tròn đến ba chữ số sau dấu phẩy.</strong></p><p><strong>31.</strong>&nbsp; <span class=\"math inline\">\\(e^{2x}=3\\)</span>.</p>"
+    },
+    {
+      "number": 32,
+      "content": "<p><strong>31–36. Giải phương trình theo <span class=\"math inline\">\\(x\\)</span>. Cho cả giá trị chính xác và giá trị\nthập phân gần đúng, làm tròn đến ba chữ số sau dấu phẩy.</strong></p><p><strong>32.</strong>&nbsp; <span class=\"math inline\">\\(\\ln\nx^2=5\\)</span>.</p>"
+    },
+    {
+      "number": 33,
+      "content": "<p><strong>31–36. Giải phương trình theo <span class=\"math inline\">\\(x\\)</span>. Cho cả giá trị chính xác và giá trị\nthập phân gần đúng, làm tròn đến ba chữ số sau dấu phẩy.</strong></p><p><strong>33.</strong>&nbsp; <span class=\"math inline\">\\(e^{e^x}=10\\)</span>.</p>"
+    },
+    {
+      "number": 34,
+      "content": "<p><strong>31–36. Giải phương trình theo <span class=\"math inline\">\\(x\\)</span>. Cho cả giá trị chính xác và giá trị\nthập phân gần đúng, làm tròn đến ba chữ số sau dấu phẩy.</strong></p><p><strong>34.</strong>&nbsp; <span class=\"math inline\">\\(\\cos^{-1}x=2\\)</span>.</p>"
+    },
+    {
+      "number": 35,
+      "content": "<p><strong>31–36. Giải phương trình theo <span class=\"math inline\">\\(x\\)</span>. Cho cả giá trị chính xác và giá trị\nthập phân gần đúng, làm tròn đến ba chữ số sau dấu phẩy.</strong></p><p><strong>35.</strong>&nbsp; <span class=\"math inline\">\\(\\tan^{-1}(3x^2)=\\pi/4\\)</span>.</p>"
+    },
+    {
+      "number": 36,
+      "content": "<p><strong>31–36. Giải phương trình theo <span class=\"math inline\">\\(x\\)</span>. Cho cả giá trị chính xác và giá trị\nthập phân gần đúng, làm tròn đến ba chữ số sau dấu phẩy.</strong></p><p><strong>36.</strong>&nbsp; <span class=\"math inline\">\\(\\ln\nx-1=\\ln(5+x)-4\\)</span>.</p>"
+    },
+    {
+      "number": 37,
+      "content": "<p><strong>37.</strong>&nbsp; Trước khi bắt đầu điều trị, tải lượng virus của\nmột bệnh nhân HIV là 52.0 bản sao RNA/mL. Tám ngày sau, tải lượng virus\nbằng một nửa ban đầu.</p>\n<ol>\n<li><p>Tìm tải lượng virus sau 24 ngày.</p></li>\n<li><p>Tìm tải lượng virus <span class=\"math inline\">\\(V(t)\\)</span> còn\nlại sau <span class=\"math inline\">\\(t\\)</span> ngày.</p></li>\n<li><p>Tìm công thức hàm ngược của <span class=\"math inline\">\\(V\\)</span> và giải thích ý nghĩa.</p></li>\n<li><p>Sau bao nhiêu ngày tải lượng virus giảm còn 2.0 bản sao\nRNA/mL?</p></li>\n</ol>"
+    },
+    {
+      "number": 38,
+      "content": "<p><strong>38.</strong>&nbsp; Trong một môi trường hữu hạn, quần thể của một\nloài có số lượng ban đầu 100 và sức chứa môi trường 1000, được cho bởi\n<span class=\"math display\">\\[P(t)=\\frac{100\\,000}{100+900e^{-t}},\\]</span>\ntrong đó <span class=\"math inline\">\\(t\\)</span> tính bằng năm.</p>\n<ol>\n<li><p>Vẽ đồ thị của hàm số và ước lượng thời gian để số lượng quần thể\nđạt 900. <em>(Dùng công cụ vẽ đồ thị.)</em></p></li>\n<li><p>Tìm hàm ngược và giải thích ý nghĩa.</p></li>\n<li><p>Dùng hàm ngược để tìm thời gian cần thiết cho quần thể đạt 900.\nSo sánh với kết quả câu (a).</p></li>\n</ol>"
+    }
+  ]
+}

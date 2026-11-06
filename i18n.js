@@ -437,6 +437,13 @@
 
     const roleOptions = { student: ['Thành viên (Học tập và AI xu hướng đề)', 'Member (Learning and exam trends)'], teacher: ['Giáo viên (Quản trị dữ liệu)', 'Teacher (Content management)'], admin: ['Quản trị viên (Toàn quyền quản lý)', 'Admin (Full access)'] };
     document.querySelectorAll('#newRole option').forEach(option => { if (roleOptions[option.value]) option.textContent = roleOptions[option.value][isEn ? 1 : 0]; });
+    const levelLabels = window.MathAppEducation?.labels;
+    if (levelLabels) document.querySelectorAll('#newEducationLevels label').forEach(label => {
+      const input = label.querySelector('input');
+      if (input && levelLabels[input.value]) { label.replaceChildren(input, document.createTextNode(' ' + levelLabels[input.value][isEn ? 1 : 0])); }
+    });
+    const levelLegend = document.querySelector('#newEducationLevels legend');
+    if (levelLegend) levelLegend.textContent = isEn ? 'Accessible levels (multiple choices)' : 'Cấp học được truy cập (chọn nhiều)';
 
     // 5. Controls & Search bar
     const searchInput = document.getElementById('searchInput');

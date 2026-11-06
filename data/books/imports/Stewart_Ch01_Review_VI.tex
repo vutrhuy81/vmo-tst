@@ -1,0 +1,170 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage{fontspec}\setmainfont{Latin Modern Roman}\setsansfont{DejaVu Sans}
+\usepackage{amsmath,amssymb,graphicx,geometry,enumitem,longtable,booktabs,fancyhdr,hyperref}
+\geometry{left=28mm,right=23mm,top=24mm,bottom=24mm}
+\hypersetup{unicode=true,colorlinks=true,linkcolor=black,urlcolor=blue,pdftitle={Giải tích Ôn tập Chương 1}}
+\setlength{\parindent}{1.2em}\setlength{\parskip}{4pt}\setlength{\headheight}{16pt}
+\pagestyle{fancy}\fancyhf{}\fancyhead[L]{\small Chương 1. Hàm số và mô hình}\fancyhead[R]{\small Ôn tập}\fancyfoot[C]{\thepage}
+\newcommand{\fig}[3][.68]{\begin{center}\includegraphics[width=#1\linewidth]{assets/#2.png}\\{\small #3}\end{center}}
+\newcommand{\ex}[1]{\par\medskip\noindent\textbf{Ví dụ #1.}\ }
+\newcommand{\sol}{\par\noindent\textit{Lời giải.}\ }
+\newcommand{\bt}[1]{\par\smallskip\noindent\textbf{#1.}\ }
+\newcommand{\group}[1]{\par\medskip\noindent\textbf{#1}\par}
+\begin{document}
+\begin{center}
+{\Large\bfseries GIẢI TÍCH}\\[5pt]
+{\large Chương 1. Hàm số và mô hình}\\[9pt]
+{\Large\bfseries ÔN TẬP CHƯƠNG 1}
+\end{center}
+\noindent\textbf{Nguồn:} James Stewart, Daniel K. Clegg, Saleem Watson, \textit{Calculus: Early Transcendentals}, ấn bản thứ 9 (2020), trang in 67–69 (trang PDF 102–104).
+
+Phần ôn tập gồm ba nhóm: kiểm tra khái niệm, câu hỏi đúng–sai và bài tập tổng hợp. Số thứ tự được giữ riêng cho từng nhóm như trong sách; thuật ngữ thống nhất với §1.1–§1.5. Các mệnh đề đúng–sai được giữ nguyên để người học tự xét, không kèm đáp án.
+\section*{Kiểm tra khái niệm}
+\bt{1} (a) Hàm số là gì? Tập xác định và tập giá trị của nó là gì? (b) Đồ thị của một hàm số là gì? (c) Làm thế nào nhận biết một đường cong cho trước có phải là đồ thị của một hàm số hay không?
+\bt{2} Trình bày bốn cách biểu diễn một hàm số. Minh họa bằng các ví dụ.
+\bt{3} (a) Hàm số chẵn là gì? Làm thế nào nhận biết tính chẵn từ đồ thị? Cho ba ví dụ về hàm số chẵn. (b) Hàm số lẻ là gì? Làm thế nào nhận biết tính lẻ từ đồ thị? Cho ba ví dụ về hàm số lẻ.
+\bt{4} Hàm số đồng biến là gì?
+\bt{5} Mô hình toán học là gì?
+\bt{6} Cho một ví dụ về mỗi loại hàm sau: (a) hàm tuyến tính; (b) hàm lũy thừa; (c) hàm số mũ; (d) hàm bậc hai; (e) đa thức bậc 5; (f) hàm hữu tỉ.
+\bt{7} Vẽ phác bằng tay, trên cùng một hệ trục tọa độ, đồ thị của các hàm:
+\[(a)\ f(x)=x;\quad(b)\ g(x)=x^2;\quad(c)\ h(x)=x^3;\quad(d)\ j(x)=x^4.\]
+\bt{8} Vẽ phác bằng tay đồ thị của mỗi hàm sau:
+\begin{align*}
+(a)\ y&=\sin x;&(b)\ y&=\tan x;&(c)\ y&=e^x;\\
+(d)\ y&=\ln x;&(e)\ y&=1/x;&(f)\ y&=|x|;\\
+(g)\ y&=\sqrt{x};&(h)\ y&=\tan^{-1}x.
+\end{align*}
+\bt{9} Giả sử $f$ có tập xác định $A$ và $g$ có tập xác định $B$. Tìm tập xác định của: (a) $f+g$; (b) $fg$; (c) $f/g$.
+\bt{10} Hàm hợp $f\circ g$ được định nghĩa như thế nào? Tập xác định của nó là gì?
+\bt{11} Cho đồ thị của $f$. Viết phương trình của đồ thị thu được từ đồ thị ấy bằng mỗi phép biến đổi sau:
+\begin{enumerate}[label=(\alph*)]
+\item Tịnh tiến lên trên 2 đơn vị.
+\item Tịnh tiến xuống dưới 2 đơn vị.
+\item Tịnh tiến sang phải 2 đơn vị.
+\item Tịnh tiến sang trái 2 đơn vị.
+\item Lấy đối xứng qua trục $x$.
+\item Lấy đối xứng qua trục $y$.
+\item Kéo dãn theo phương thẳng đứng với hệ số 2.
+\item Co theo phương thẳng đứng với hệ số 2.
+\item Kéo dãn theo phương ngang với hệ số 2.
+\item Co theo phương ngang với hệ số 2.
+\end{enumerate}
+\bt{12} (a) Hàm số đơn ánh là gì? Làm thế nào nhận biết tính đơn ánh từ đồ thị? (b) Nếu $f$ đơn ánh, hàm ngược $f^{-1}$ được định nghĩa như thế nào? Dựng đồ thị của $f^{-1}$ từ đồ thị của $f$ bằng cách nào?
+\bt{13} (a) Hàm sin ngược $f(x)=\sin^{-1}x$ được định nghĩa như thế nào? Tập xác định và tập giá trị của nó là gì? (b) Trả lời tương tự đối với hàm côsin ngược $f(x)=\cos^{-1}x$. (c) Trả lời tương tự đối với hàm tang ngược $f(x)=\tan^{-1}x$.
+\noindent\textit{Chú thích của sách:} Đáp án phần Kiểm tra khái niệm có tại StewartCalculus.com.
+\section*{Câu hỏi đúng–sai}
+Xác định mỗi mệnh đề sau là đúng hay sai. Nếu đúng, giải thích vì sao. Nếu sai, giải thích hoặc đưa ra một phản ví dụ.
+\bt{1} Nếu $f$ là một hàm số thì $f(s+t)=f(s)+f(t)$.
+\bt{2} Nếu $f(s)=f(t)$ thì $s=t$.
+\bt{3} Nếu $f$ là một hàm số thì $f(3x)=3f(x)$.
+\bt{4} Nếu hàm $f$ có hàm ngược và $f(2)=3$ thì $f^{-1}(3)=2$.
+\bt{5} Một đường thẳng đứng cắt đồ thị của một hàm số tại nhiều nhất một điểm.
+\bt{6} Nếu $f$ và $g$ là các hàm số thì $f\circ g=g\circ f$.
+\bt{7} Nếu $f$ đơn ánh thì $f^{-1}(x)=\dfrac1{f(x)}$.
+\bt{8} Luôn có thể thực hiện phép chia cho $e^x$.
+\bt{9} Nếu $0<a<b$ thì $\ln a<\ln b$.
+\bt{10} Nếu $x>0$ thì $(\ln x)^6=6\ln x$.
+\bt{11} Nếu $x>0$ và $a>1$ thì $\dfrac{\ln x}{\ln a}=\ln\dfrac xa$.
+\bt{12} $\tan^{-1}(-1)=3\pi/4$.
+\bt{13} $\tan^{-1}x=\dfrac{\sin^{-1}x}{\cos^{-1}x}$.
+\bt{14} Với mọi số thực $x$, ta có $\sqrt{x^2}=x$.
+\section*{Bài tập}
+\bt{1} Cho hàm số $f$ có đồ thị như hình.
+\fig[.53]{ex01}{Đồ thị cho Bài tập 1.}
+(a) Ước lượng $f(2)$. (b) Ước lượng các giá trị $x$ sao cho $f(x)=3$. (c) Nêu tập xác định của $f$. (d) Nêu tập giá trị của $f$. (e) Trên khoảng nào $f$ đồng biến? (f) Hàm $f$ có đơn ánh không? Giải thích. (g) Hàm $f$ chẵn, lẻ hay không chẵn cũng không lẻ? Giải thích.
+\bt{2} Cho đồ thị của $g$ như hình.
+\fig[.43]{ex02}{Đồ thị cho Bài tập 2.}
+(a) Nêu giá trị $g(2)$. (b) Vì sao $g$ đơn ánh? (c) Ước lượng $g^{-1}(2)$. (d) Ước lượng tập xác định của $g^{-1}$. (e) Vẽ phác đồ thị của $g^{-1}$.
+\bt{3} Cho $f(x)=x^2-2x+3$. Tính thương sai phân
+\[\frac{f(a+h)-f(a)}h.\]
+\bt{4} Vẽ phác đồ thị của năng suất cây trồng theo lượng phân bón được sử dụng.
+\group{5–8. Tìm tập xác định và tập giá trị của hàm số. Viết kết quả bằng ký hiệu khoảng.}
+\bt{5} $f(x)=2/(3x-1)$.
+\bt{6} $g(x)=\sqrt{16-x^4}$.
+\bt{7} $h(x)=\ln(x+6)$.
+\bt{8} $F(t)=3+\cos2t$.
+\bt{9} Cho đồ thị của $f$. Mô tả cách thu được đồ thị của các hàm sau từ đồ thị của $f$:
+\begin{align*}
+(a)\ y&=f(x)+5;&(b)\ y&=f(x+5);\\
+(c)\ y&=1+2f(x);&(d)\ y&=f(x-2)-2;\\
+(e)\ y&=-f(x);&(f)\ y&=f^{-1}(x).
+\end{align*}
+\bt{10} Cho đồ thị của $f$ như hình. Vẽ đồ thị của các hàm:
+\begin{align*}
+(a)\ y&=f(x-8);&(b)\ y&=-f(x);\\
+(c)\ y&=2-f(x);&(d)\ y&=\tfrac12 f(x)-1;\\
+(e)\ y&=f^{-1}(x);&(f)\ y&=f^{-1}(x+3).
+\end{align*}
+\fig[.48]{ex10}{Đồ thị cho Bài tập 10.}
+\group{11–18. Dùng các phép biến đổi đồ thị để vẽ phác đồ thị của hàm số.}
+\bt{11} $f(x)=x^3+2$.
+\bt{12} $f(x)=(x-3)^2$.
+\bt{13} $y=\sqrt{x+2}$.
+\bt{14} $y=\ln(x+5)$.
+\bt{15} $g(x)=1+\cos2x$.
+\bt{16} $h(x)=-e^x+2$.
+\bt{17} $s(x)=1+0.5^x$.
+\bt{18} $f(x)=\begin{cases}-x,&x<0,\\e^x-1,&x\ge0.\end{cases}$
+\bt{19} Xác định $f$ chẵn, lẻ hay không chẵn cũng không lẻ:
+\begin{align*}
+(a)\ f(x)&=2x^5-3x^2+2;&(b)\ f(x)&=x^3-x^7;\\
+(c)\ f(x)&=e^{-x^2};&(d)\ f(x)&=1+\sin x;\\
+(e)\ f(x)&=1-\cos2x;&(f)\ f(x)&=(x+1)^2.
+\end{align*}
+\bt{20} Tìm biểu thức của hàm số có đồ thị gồm đoạn thẳng nối $(-2,2)$ với $(-1,0)$ và nửa trên của đường tròn tâm tại gốc tọa độ, bán kính 1.
+\bt{21} Cho $f(x)=\ln x$ và $g(x)=x^2-9$. Tìm các hàm (a) $f\circ g$, (b) $g\circ f$, (c) $f\circ f$, (d) $g\circ g$, cùng tập xác định của chúng.
+\bt{22} Biểu diễn $F(x)=1/\sqrt{x+\sqrt{x}}$ dưới dạng hợp của ba hàm số.
+\bt{23} Tuổi thọ kỳ vọng đã tăng đáng kể trong những thập niên gần đây. Bảng sau cho tuổi thọ kỳ vọng khi sinh (tính bằng năm) của nam giới sinh tại Hoa Kỳ. Dùng biểu đồ phân tán để chọn một loại mô hình phù hợp. Dùng mô hình đó dự đoán tuổi thọ của một nam giới sinh năm 2030.
+\begin{center}\begin{tabular}{rrrr}\toprule
+Năm sinh&Tuổi thọ kỳ vọng&Năm sinh&Tuổi thọ kỳ vọng\\\midrule
+1900&48.3&1960&66.6\\1910&51.1&1970&67.1\\1920&55.2&1980&70.0\\1930&57.4&1990&71.8\\1940&62.5&2000&73.0\\1950&65.6&2010&76.2\\\bottomrule
+\end{tabular}\end{center}
+\bt{24} Một hãng sản xuất đồ gia dụng nhỏ nhận thấy chi phí sản xuất 1000 lò nướng bánh mỗi tuần là 9000 đô la, còn chi phí sản xuất 1500 lò mỗi tuần là 12\,000 đô la.
+
+(a) Giả sử chi phí là hàm tuyến tính của số lò được sản xuất, hãy biểu diễn hàm chi phí và vẽ phác đồ thị. (b) Hệ số góc của đồ thị bằng bao nhiêu và có ý nghĩa gì? (c) Tung độ gốc của đồ thị bằng bao nhiêu và có ý nghĩa gì?
+\bt{25} Cho $f(x)=2x+4^x$. Tìm $f^{-1}(6)$.
+\bt{26} Tìm hàm ngược của $f(x)=\dfrac{2x+3}{1-5x}$.
+\bt{27} Dùng các quy tắc lôgarit để khai triển:
+\[(a)\ \ln\bigl(x\sqrt{x+1}\bigr);\qquad(b)\ \log_2\sqrt{\frac{x^2+1}{x-1}}.\]
+\bt{28} Biểu diễn dưới dạng một lôgarit duy nhất:
+\[(a)\ \tfrac12\ln x-2\ln(x^2+1);\qquad(b)\ \ln(x-3)+\ln(x+3)-2\ln(x^2-9).\]
+\group{29–30. Tìm giá trị chính xác của mỗi biểu thức.}
+\bt{29} (a) $e^{2\ln5}$; \quad(b) $\log_6 4+\log_6 54$; \quad(c) $\tan(\arcsin\tfrac45)$.
+\bt{30} (a) $\ln\dfrac1{e^3}$; \quad(b) $\sin(\tan^{-1}1)$; \quad(c) $10^{-3\log4}$.
+\group{31–36. Giải phương trình theo $x$. Cho cả giá trị chính xác và giá trị thập phân gần đúng, làm tròn đến ba chữ số sau dấu phẩy.}
+\bt{31} $e^{2x}=3$.
+\bt{32} $\ln x^2=5$.
+\bt{33} $e^{e^x}=10$.
+\bt{34} $\cos^{-1}x=2$.
+\bt{35} $\tan^{-1}(3x^2)=\pi/4$.
+\bt{36} $\ln x-1=\ln(5+x)-4$.
+\bt{37} Trước khi bắt đầu điều trị, tải lượng virus của một bệnh nhân HIV là 52.0 bản sao RNA/mL. Tám ngày sau, tải lượng virus bằng một nửa ban đầu.
+\begin{enumerate}[label=(\alph*)]
+\item Tìm tải lượng virus sau 24 ngày.
+\item Tìm tải lượng virus $V(t)$ còn lại sau $t$ ngày.
+\item Tìm công thức hàm ngược của $V$ và giải thích ý nghĩa.
+\item Sau bao nhiêu ngày tải lượng virus giảm còn 2.0 bản sao RNA/mL?
+\end{enumerate}
+\bt{38} Trong một môi trường hữu hạn, quần thể của một loài có số lượng ban đầu 100 và sức chứa môi trường 1000, được cho bởi
+\[P(t)=\frac{100\,000}{100+900e^{-t}},\]
+trong đó $t$ tính bằng năm.
+\begin{enumerate}[label=(\alph*)]
+\item Vẽ đồ thị của hàm số và ước lượng thời gian để số lượng quần thể đạt 900. \textit{(Dùng công cụ vẽ đồ thị.)}
+\item Tìm hàm ngược và giải thích ý nghĩa.
+\item Dùng hàm ngược để tìm thời gian cần thiết cho quần thể đạt 900. So sánh với kết quả câu (a).
+\end{enumerate}
+\section*{Ghi chú biên tập}
+\begin{enumerate}
+\item Phần này dịch đề bài, không bổ sung lời giải. Các mệnh đề sai trong nhóm đúng–sai được giữ đúng bản gốc.
+\item Trong Bài tập 37, mô hình suy giảm mũ được hiểu theo ngữ cảnh của chương; các số liệu và yêu cầu được giữ nguyên từ sách.
+\item Các số liệu dùng dấu chấm thập phân như bản gốc. Ký hiệu $\log$ không ghi cơ số là lôgarit thập phân.
+\end{enumerate}
+\section*{Thuật ngữ bổ sung}\begin{center}\begin{tabular}{ll}\toprule Tiếng Anh&Tiếng Việt\\\midrule
+concept check&kiểm tra khái niệm\\
+counterexample&phản ví dụ\\
+life expectancy at birth&tuổi thọ kỳ vọng khi sinh\\
+carrying capacity&sức chứa môi trường\\
+viral load&tải lượng virus\\
+\bottomrule\end{tabular}\end{center}
+\noindent\textbf{Phạm vi hoàn thành:} Trọn phần Ôn tập Chương 1, gồm 13 câu hỏi khái niệm, 14 mệnh đề đúng–sai, 38 bài tập, 3 đồ thị và 1 bảng số liệu. Phần tiếp theo: \textit{Các nguyên tắc giải toán} (\textit{Principles of Problem Solving}), bắt đầu ở trang in 70.
+\end{document}

@@ -1,0 +1,342 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage{fontspec}\setmainfont{Latin Modern Roman}\setsansfont{DejaVu Sans}
+\usepackage{amsmath,amssymb,graphicx,geometry,enumitem,longtable,booktabs,fancyhdr,hyperref}
+\geometry{left=28mm,right=23mm,top=24mm,bottom=24mm}
+\hypersetup{unicode=true,colorlinks=true,linkcolor=black,urlcolor=blue,pdftitle={Giải tích Chương 2 Mục 2.5 Tính liên tục}}
+\setlength{\parindent}{1.2em}\setlength{\parskip}{4pt}\setlength{\headheight}{16pt}
+\pagestyle{fancy}\fancyhf{}\fancyhead[L]{\small Chương 2. Giới hạn và đạo hàm}\fancyhead[R]{\small §2.5}\fancyfoot[C]{\thepage}
+\newcommand{\fig}[3][.68]{\begin{center}\begin{minipage}{\linewidth}\centering\includegraphics[width=#1\linewidth]{assets/#2.png}\\{\small #3}\end{minipage}\end{center}}
+\newcommand{\ex}[1]{\par\medskip\noindent\textbf{Ví dụ #1.}\ }
+\newcommand{\sol}{\par\noindent\textit{Lời giải.}\ }
+\newcommand{\bt}[1]{\par\smallskip\noindent\textbf{#1.}\ }
+\newcommand{\group}[1]{\par\medskip\noindent\textbf{#1}\par\nopagebreak[4]}
+\newcommand{\gint}[1]{\left[\!\left[#1\right]\!\right]}
+\begin{document}
+\begin{center}
+{\Large\bfseries GIẢI TÍCH}\\[5pt]
+{\large Chương 2. Giới hạn và đạo hàm}\\[9pt]
+{\Large\bfseries 2.5. Tính liên tục}
+\end{center}
+\noindent\textbf{Nguồn:} James Stewart, Daniel K. Clegg, Saleem Watson, \textit{Calculus: Early Transcendentals}, ấn bản thứ 9 (2020), trang in 115–126 (trang PDF 150–161).
+\section*{Tính liên tục của hàm số}
+Ở §2.3, ta nhận thấy giới hạn khi $x$ tiến đến $a$ thường tính được bằng giá trị hàm tại $a$. Các hàm có tính chất ấy được gọi là \textbf{liên tục tại $a$}. Định nghĩa toán học phù hợp khá sát nghĩa thông thường: một quá trình liên tục diễn ra không bị gián đoạn.
+\begin{quote}\textbf{1. Định nghĩa.} Hàm $f$ \textbf{liên tục tại số $a$} nếu
+\[\lim_{x\to a}f(x)=f(a).\]
+\end{quote}
+Định nghĩa ngầm đòi hỏi ba điều:
+\begin{enumerate}
+\item $f(a)$ xác định, tức $a$ thuộc tập xác định của $f$.
+\item $\lim_{x\to a}f(x)$ tồn tại.
+\item $\lim_{x\to a}f(x)=f(a)$.
+\end{enumerate}
+Nghĩa là $f(x)$ tiến đến $f(a)$ khi $x$ tiến đến $a$. Với hàm liên tục, một thay đổi nhỏ của $x$ chỉ gây thay đổi nhỏ của $f(x)$; có thể giữ thay đổi của $f(x)$ nhỏ tùy ý bằng cách giữ thay đổi của $x$ đủ nhỏ.
+
+Nếu $f$ xác định gần $a$, tức trên một khoảng mở chứa $a$, có thể trừ $a$, nhưng không liên tục tại $a$, ta nói $f$ \textbf{gián đoạn tại $a$}, hay có một điểm gián đoạn tại đó.
+
+Các hiện tượng vật lý thường liên tục: độ dời hoặc vận tốc xe đang chuyển động biến thiên liên tục theo thời gian, cũng như chiều cao của một người. Tuy nhiên, gián đoạn có thể xuất hiện, chẳng hạn trong dòng điện. Hàm Heaviside ở §2.2 gián đoạn tại 0 vì giới hạn tại đó không tồn tại.
+
+Về hình học, hàm liên tục tại mọi số trong một khoảng có đồ thị không bị đứt đoạn: có thể vẽ mà không nhấc bút khỏi giấy. Như Hình 1, các điểm $(x,f(x))$ tiến đến $(a,f(a))$ nên không có khoảng hở trên đường cong.
+\fig[.49]{f01}{Hình 1. Khi $x$ tiến đến $a$, $f(x)$ tiến đến $f(a)$ và các điểm trên đồ thị tiến đến $(a,f(a))$.}
+\ex{1} Hình 2 cho đồ thị hàm $f$. Hàm gián đoạn tại những số nào? Vì sao?
+\fig[.50]{f02}{Hình 2. Đồ thị hàm $f$ trong Ví dụ 1.}
+\sol Đồ thị có chỗ hở tại $a=1$. Lý do chính xác là $f(1)$ không xác định, nên $f$ gián đoạn tại 1.
+
+Tại $a=3$, đồ thị cũng bị đứt, nhưng lý do khác: $f(3)$ xác định, còn $\lim_{x\to3}f(x)$ không tồn tại vì hai giới hạn một phía khác nhau. Vậy $f$ gián đoạn tại 3.
+
+Tại $a=5$, $f(5)$ xác định và giới hạn tồn tại vì hai giới hạn một phía bằng nhau, nhưng
+\[\lim_{x\to5}f(x)\ne f(5).\]
+Vậy $f$ gián đoạn tại 5.\hfill$\square$
+
+Tiếp theo, xét cách nhận biết gián đoạn khi hàm được cho bằng công thức.
+\ex{2} Các hàm sau gián đoạn ở đâu?
+\[(a)\quad f(x)=\frac{x^2-x-2}{x-2};\]
+\[(b)\quad f(x)=\begin{cases}\dfrac{x^2-x-2}{x-2},&x\ne2,\\1,&x=2;\end{cases}\]
+\[(c)\quad f(x)=\begin{cases}1/x^2,&x\ne0,\\1,&x=0;\end{cases}\qquad(d)\quad f(x)=\gint{x}.\]
+\sol (a) $f(2)$ không xác định nên gián đoạn tại 2. Về sau ta sẽ thấy hàm liên tục tại mọi số còn lại.
+
+(b) $f(2)=1$ xác định và
+\[\lim_{x\to2}f(x)=\lim_{x\to2}\frac{x^2-x-2}{x-2}=\lim_{x\to2}\frac{(x-2)(x+1)}{x-2}=\lim_{x\to2}(x+1)=3.\]
+Giới hạn tồn tại nhưng khác $f(2)$, nên hàm không liên tục tại 2.
+
+(c) $f(0)=1$ xác định, nhưng $\lim_{x\to0}f(x)=\lim_{x\to0}1/x^2$ không tồn tại như một giới hạn hữu hạn (Ví dụ 2.2.6). Vậy gián đoạn tại 0.
+
+(d) Hàm phần nguyên gián đoạn tại mọi số nguyên $n$ vì $\lim_{x\to n}\gint{x}$ không tồn tại (xem Ví dụ 2.3.10 và Bài tập 2.3.55).\hfill$\square$
+
+Hình 3 cho đồ thị các hàm trong Ví dụ 2. Trong mỗi trường hợp, không thể vẽ mà không nhấc bút vì có lỗ hổng, chỗ đứt hoặc bước nhảy. Gián đoạn ở (a), (b) được gọi là \textbf{gián đoạn có thể khử}, vì chỉ cần xác định lại giá trị tại 2 là khử được: đặt $f(2)=3$, ta được hàm $g(x)=x+1$ liên tục. Ở (c) là \textbf{gián đoạn vô cực}. Ở (d) là \textbf{gián đoạn nhảy}, vì hàm nhảy từ giá trị này sang giá trị khác.
+\fig[.98]{f03}{Hình 3. (a), (b) Gián đoạn có thể khử; (c) gián đoạn vô cực; (d) gián đoạn nhảy.}
+\begin{quote}\textbf{2. Định nghĩa.} Hàm $f$ \textbf{liên tục bên phải tại $a$} nếu $\lim_{x\to a^+}f(x)=f(a)$; \textbf{liên tục bên trái tại $a$} nếu $\lim_{x\to a^-}f(x)=f(a)$.\end{quote}
+\ex{3} Tại mỗi số nguyên $n$, hàm $f(x)=\gint{x}$ ở Hình 3(d) liên tục bên phải nhưng gián đoạn bên trái, vì
+\[\lim_{x\to n^+}f(x)=\lim_{x\to n^+}\gint{x}=n=f(n),\]
+trong khi
+\[\lim_{x\to n^-}f(x)=\lim_{x\to n^-}\gint{x}=n-1\ne f(n).\qquad\square\]
+\begin{quote}\textbf{3. Định nghĩa.} Hàm $f$ \textbf{liên tục trên một khoảng} nếu liên tục tại mọi số trong khoảng ấy. Nếu hàm chỉ xác định ở một phía của đầu mút, hiểu liên tục tại đầu mút là liên tục bên phải hoặc bên trái tương ứng.\end{quote}
+\ex{4} Chứng minh $f(x)=1-\sqrt{1-x^2}$ liên tục trên $[-1,1]$.
+\sol Nếu $-1<a<1$, các quy tắc giới hạn ở §2.3 cho
+\begin{align*}
+\lim_{x\to a}f(x)&=\lim_{x\to a}(1-\sqrt{1-x^2})\\
+&=1-\lim_{x\to a}\sqrt{1-x^2}\\
+&=1-\sqrt{\lim_{x\to a}(1-x^2)}\\
+&=1-\sqrt{1-a^2}=f(a).
+\end{align*}
+Lần lượt dùng Quy tắc 2, 8; Quy tắc 7; rồi Quy tắc 2, 8, 10. Vậy $f$ liên tục tại mọi $a\in(-1,1)$. Tính tương tự cho
+\[\lim_{x\to-1^+}f(x)=1=f(-1),\qquad\lim_{x\to1^-}f(x)=1=f(1).\]
+Hàm liên tục bên phải tại $-1$, bên trái tại 1, nên theo Định nghĩa 3 liên tục trên $[-1,1]$. Đồ thị là nửa dưới của đường tròn $x^2+(y-1)^2=1$.
+\fig[.47]{f04}{Hình 4. Đồ thị $y=1-\sqrt{1-x^2}$. \(\square\)}
+\section*{Các tính chất của hàm liên tục}
+Thay vì luôn dùng các định nghĩa để kiểm tra như Ví dụ 4, thường thuận tiện hơn khi dùng định lý sau để xây dựng hàm liên tục phức tạp từ những hàm đơn giản.
+\begin{quote}\textbf{4. Định lý.} Nếu $f,g$ liên tục tại $a$ và $c$ là hằng số, thì các hàm sau cũng liên tục tại $a$:
+
+1. $f+g$; \quad2. $f-g$; \quad3. $cf$; \quad4. $fg$; \quad5. $f/g$ nếu $g(a)\ne0$.
+\end{quote}
+\noindent\textit{Chứng minh.} Mỗi phần suy ra từ quy tắc giới hạn tương ứng. Chẳng hạn, chứng minh phần 1. Vì $f,g$ liên tục tại $a$,
+\[\lim_{x\to a}f(x)=f(a),\qquad\lim_{x\to a}g(x)=g(a).\]
+Do đó,
+\begin{align*}
+\lim_{x\to a}(f+g)(x)&=\lim_{x\to a}[f(x)+g(x)]\\
+&=\lim_{x\to a}f(x)+\lim_{x\to a}g(x)\\
+&=f(a)+g(a)=(f+g)(a).
+\end{align*}
+Bước thứ hai dùng Quy tắc 1. Vậy $f+g$ liên tục tại $a$.\hfill$\square$
+
+Từ Định lý 4 và Định nghĩa 3, nếu $f,g$ liên tục trên một khoảng thì $f+g$, $f-g$, $cf$, $fg$ cũng liên tục trên khoảng ấy; $f/g$ cũng vậy nếu $g$ không bằng 0 ở đâu trên khoảng. Định lý tiếp theo đã được nêu ở §2.3 dưới tên tính chất thế trực tiếp.
+\begin{quote}\textbf{5. Định lý.}
+
+(a) Mọi đa thức đều liên tục khắp nơi, tức trên $\mathbb R=(-\infty,\infty)$.
+
+(b) Mọi hàm hữu tỉ đều liên tục tại mọi điểm nó xác định, tức liên tục trên tập xác định.
+\end{quote}
+\noindent\textit{Chứng minh.} (a) Đa thức có dạng
+\[P(x)=c_nx^n+c_{n-1}x^{n-1}+\cdots+c_1x+c_0,\]
+với $c_0,\ldots,c_n$ là hằng số. Ta biết
+\[\lim_{x\to a}c_0=c_0\quad\text{(Quy tắc 8)},\qquad\lim_{x\to a}x^m=a^m\quad(m=1,\ldots,n)\quad\text{(Quy tắc 10)}.\]
+Điều thứ hai chính là tính liên tục của $x^m$. Theo phần 3 của Định lý 4, $cx^m$ liên tục; theo phần 1, tổng các hàm ấy và hàm hằng cũng liên tục. Vậy $P$ liên tục.
+
+(b) Hàm hữu tỉ có dạng $f(x)=P(x)/Q(x)$ với $P,Q$ là đa thức, miền xác định $D=\{x\in\mathbb R\mid Q(x)\ne0\}$. Theo (a), $P,Q$ liên tục khắp nơi; theo phần 5 của Định lý 4, $f$ liên tục tại mọi số trong $D$.\hfill$\square$
+
+Ví dụ, thể tích hình cầu biến thiên liên tục theo bán kính vì $V(r)=\tfrac43\pi r^3$ là đa thức theo $r$. Tương tự, quả bóng được ném thẳng đứng lên với vận tốc đầu 50 feet/giây có độ cao sau $t$ giây là $h=50t-16t^2$ (feet). Đây là đa thức nên độ cao liên tục theo thời gian, đúng như dự kiến.
+
+Biết hàm nào liên tục cho phép tính nhanh một số giới hạn. So sánh ví dụ sau với Ví dụ 2.3.2(b).
+\ex{5} Tìm $\displaystyle\lim_{x\to-2}\frac{x^3+2x^2-1}{5-3x}$.
+\sol Hàm $f(x)=(x^3+2x^2-1)/(5-3x)$ hữu tỉ nên liên tục trên miền xác định $\{x\mid x\ne5/3\}$. Vì vậy,
+\[\lim_{x\to-2}\frac{x^3+2x^2-1}{5-3x}=\lim_{x\to-2}f(x)=f(-2)=\frac{(-2)^3+2(-2)^2-1}{5-3(-2)}=-\frac1{11}.\qquad\square\]
+Hầu hết các hàm quen thuộc liên tục tại mọi điểm trong tập xác định. Chẳng hạn, Quy tắc 11 ở §2.3 chính là tính liên tục của các hàm căn.
+
+Nhìn đồ thị sin và côsin (Hình 1.2.19), ta dự đoán chúng liên tục. Theo định nghĩa, điểm $P$ ở Hình 5 có tọa độ $(\cos\theta,\sin\theta)$. Khi $\theta\to0$, $P$ tiến đến $(1,0)$, nên
+\begin{equation}\lim_{\theta\to0}\cos\theta=1,\qquad\lim_{\theta\to0}\sin\theta=0.\tag{6}\end{equation}
+\fig[.46]{f05}{Hình 5. Khi $\theta$ tiến đến 0, $P(\cos\theta,\sin\theta)$ tiến đến $(1,0)$.}
+Vì $\cos0=1$, $\sin0=0$, (6) nói hai hàm liên tục tại 0. Các công thức cộng cho phép suy ra chúng liên tục khắp nơi (Bài tập 66, 67).
+
+\noindent\textit{Chú thích của sách:} Có thể chứng minh (6) bằng định lý kẹp và bất đẳng thức $\sin\theta<\theta$ với $\theta>0$, sẽ chứng minh ở §3.3.
+
+Theo phần 5 của Định lý 4, $\tan x=\sin x/\cos x$ liên tục trừ nơi $\cos x=0$, tức các bội nguyên lẻ của $\pi/2$. Hàm tang có gián đoạn vô cực tại $\pm\pi/2,\pm3\pi/2,\pm5\pi/2,\ldots$.
+\fig[.53]{f06}{Hình 6. Đồ thị $y=\tan x$.}
+Hàm ngược của một hàm liên tục đơn ánh cũng liên tục. Chứng minh có trong Phụ lục F; trực giác hình học là đồ thị hàm ngược được lấy đối xứng qua $y=x$, nên nếu đồ thị ban đầu không bị đứt, đồ thị hàm ngược cũng không bị đứt. Do đó các hàm lượng giác ngược liên tục (xem lại §1.5).
+
+Ở §1.4, hàm $y=b^x$ được định nghĩa bằng cách lấp các khoảng trống của đồ thị ứng với số mũ hữu tỉ. Chính định nghĩa làm nó liên tục trên $\mathbb R$. Hàm ngược $y=\log_bx$ do đó liên tục trên $(0,\infty)$.
+\begin{quote}\textbf{7. Định lý.} Các loại hàm sau liên tục tại mọi điểm thuộc tập xác định: đa thức, hàm hữu tỉ, hàm căn, hàm lượng giác, hàm lượng giác ngược, hàm số mũ và hàm lôgarit.\end{quote}
+\ex{6} Hàm $f(x)=\dfrac{\ln x+\tan^{-1}x}{x^2-1}$ liên tục ở đâu?
+\sol Theo Định lý 7, $\ln x$ liên tục với $x>0$, còn $\tan^{-1}x$ liên tục trên $\mathbb R$. Theo phần 1 của Định lý 4, tổng liên tục trên $(0,\infty)$. Mẫu là đa thức nên liên tục khắp nơi. Theo phần 5, thương liên tục với mọi $x>0$ trừ nơi $x^2-1=0$, tức $x=\pm1$. Vậy $f$ liên tục trên $(0,1)$ và $(1,\infty)$.\hfill$\square$
+\ex{7} Tính $\displaystyle\lim_{x\to\pi}\frac{\sin x}{2+\cos x}$.
+\sol $\sin x$ liên tục; $2+\cos x$ là tổng hai hàm liên tục nên liên tục. Mẫu không bao giờ bằng 0 vì $\cos x\ge-1$, nên $2+\cos x>0$. Vậy thương $f(x)=\sin x/(2+\cos x)$ liên tục khắp nơi, và
+\[\lim_{x\to\pi}\frac{\sin x}{2+\cos x}=\lim_{x\to\pi}f(x)=f(\pi)=\frac{\sin\pi}{2+\cos\pi}=\frac0{2-1}=0.\qquad\square\]
+Một cách khác kết hợp hai hàm liên tục là tạo hàm hợp $f\circ g$. Điều này là hệ quả của định lý sau.
+\begin{quote}\textbf{8. Định lý.} Nếu $f$ liên tục tại $b$ và $\lim_{x\to a}g(x)=b$, thì $\lim_{x\to a}f(g(x))=f(b)$. Nói cách khác,
+\[\lim_{x\to a}f(g(x))=f\left(\lim_{x\to a}g(x)\right).\]
+\end{quote}
+Định lý cho phép đưa ký hiệu giới hạn qua ký hiệu hàm khi hàm liên tục và giới hạn tồn tại. Theo trực giác, nếu $x$ gần $a$ thì $g(x)$ gần $b$; do $f$ liên tục tại $b$, $f(g(x))$ gần $f(b)$. Chứng minh có trong Phụ lục F.
+\ex{8} Tính $\displaystyle\lim_{x\to1}\arcsin\left(\frac{1-\sqrt{x}}{1-x}\right)$.
+\sol Vì arcsin liên tục, áp dụng Định lý 8:
+\begin{align*}
+\lim_{x\to1}\arcsin\left(\frac{1-\sqrt{x}}{1-x}\right)
+&=\arcsin\left(\lim_{x\to1}\frac{1-\sqrt{x}}{1-x}\right)\\
+&=\arcsin\left(\lim_{x\to1}\frac{1-\sqrt{x}}{(1-\sqrt{x})(1+\sqrt{x})}\right)\\
+&=\arcsin\left(\lim_{x\to1}\frac1{1+\sqrt{x}}\right)\\
+&=\arcsin\frac12=\frac\pi6.
+\end{align*}\hfill$\square$
+Áp dụng Định lý 8 với $f(x)=\sqrt[n]{x}$, $n$ nguyên dương. Khi đó $f(g(x))=\sqrt[n]{g(x)}$ và $f(\lim_{x\to a}g(x))=\sqrt[n]{\lim_{x\to a}g(x)}$, nên
+\[\lim_{x\to a}\sqrt[n]{g(x)}=\sqrt[n]{\lim_{x\to a}g(x)}.\]
+Như vậy Quy tắc giới hạn 7 đã được chứng minh, với giả thiết các căn tồn tại.
+\begin{quote}\textbf{9. Định lý.} Nếu $g$ liên tục tại $a$ và $f$ liên tục tại $g(a)$, thì hàm hợp $(f\circ g)(x)=f(g(x))$ liên tục tại $a$.\end{quote}
+Thường nói ngắn gọn: ``Hàm liên tục của một hàm liên tục là hàm liên tục.''
+
+\noindent\textit{Chứng minh.} Vì $g$ liên tục tại $a$, $\lim_{x\to a}g(x)=g(a)$. Vì $f$ liên tục tại $b=g(a)$, Định lý 8 cho
+\[\lim_{x\to a}f(g(x))=f(g(a)).\]
+Đó chính là tính liên tục của $h(x)=f(g(x))$ tại $a$.\hfill$\square$
+\ex{9} Các hàm sau liên tục ở đâu? (a) $h(x)=\sin(x^2)$; (b) $F(x)=\ln(1+\cos x)$.
+\sol (a) Viết $h=f\circ g$ với $g(x)=x^2$, $f(x)=\sin x$. Cả hai liên tục trên $\mathbb R$, nên theo Định lý 9, $h$ liên tục trên $\mathbb R$.
+
+(b) $f(x)=\ln x$ liên tục trên tập xác định; $g(x)=1+\cos x$ liên tục vì là tổng hai hàm liên tục. Theo Định lý 9, $F=f\circ g$ liên tục tại mọi điểm xác định. Điều kiện là $1+\cos x>0$, loại $\cos x=-1$, tức $x=\pm\pi,\pm3\pi,\ldots$. Vậy $F$ gián đoạn tại các bội nguyên lẻ của $\pi$ và liên tục trên các khoảng giữa chúng.
+\fig[.49]{f07}{Hình 7. Đồ thị $y=\ln(1+\cos x)$. \(\square\)}
+\section*{Định lý giá trị trung gian}
+Một tính chất quan trọng của hàm liên tục được phát biểu trong định lý sau; chứng minh có trong các giáo trình giải tích nâng cao.
+\begin{quote}\textbf{10. Định lý giá trị trung gian.} Giả sử $f$ liên tục trên đoạn $[a,b]$ và $N$ là một số nằm giữa $f(a)$ và $f(b)$, với $f(a)\ne f(b)$. Khi đó tồn tại $c\in(a,b)$ sao cho $f(c)=N$.\end{quote}
+Nghĩa là hàm liên tục nhận mọi giá trị trung gian giữa $f(a)$ và $f(b)$. Hình 8 minh họa: giá trị $N$ có thể được nhận một lần ở (a), hoặc nhiều lần ở (b).
+\fig[.91]{f08}{Hình 8. (a) Một điểm $c$; (b) nhiều điểm $c_1,c_2,c_3$ có cùng giá trị hàm $N$.}
+Nếu hình dung đồ thị hàm liên tục không có lỗ hoặc chỗ đứt, định lý rất dễ tin. Về hình học, một đường ngang $y=N$ nằm giữa $y=f(a)$ và $y=f(b)$ không thể bị đồ thị nhảy qua; đồ thị phải cắt nó ở đâu đó.
+\fig[.49]{f09}{Hình 9. Đồ thị phải cắt đường $y=N$.}
+Giả thiết liên tục là thiết yếu: nói chung định lý không đúng cho hàm gián đoạn (Bài tập 52).
+
+Một ứng dụng là định vị nghiệm phương trình.
+\ex{10} Chứng minh phương trình $4x^3-6x^2+3x-2=0$ có nghiệm giữa 1 và 2.
+\sol Đặt $f(x)=4x^3-6x^2+3x-2$. Cần $c\in(1,2)$ với $f(c)=0$, nên chọn $a=1$, $b=2$, $N=0$ trong Định lý 10. Ta có
+\[f(1)=4-6+3-2=-1<0,\qquad f(2)=32-24+6-2=12>0.\]
+Vậy $f(1)<0<f(2)$. Hàm $f$ là đa thức nên liên tục; định lý giá trị trung gian bảo đảm tồn tại $c\in(1,2)$ với $f(c)=0$. Phương trình có ít nhất một nghiệm trong khoảng ấy.
+
+Có thể định vị chính xác hơn bằng cách áp dụng lại định lý. Vì
+\[f(1.2)=-0.128<0,\qquad f(1.3)=0.548>0,\]
+có nghiệm giữa $1.2$ và $1.3$. Máy tính, qua thử dần, cho
+\[f(1.22)=-0.007008<0,\qquad f(1.23)=0.056068>0,\]
+nên có nghiệm trong $(1.22,1.23)$.\hfill$\square$
+
+Hình 10 biểu diễn $f$ trong cửa sổ $[-1,3]\times[-3,3]$, cho thấy đồ thị cắt trục $x$ giữa 1 và 2. Hình 11 phóng lớn trong $[1.2,1.3]\times[-0.2,0.2]$.
+\fig[.47]{f10}{Hình 10. Đồ thị trong cửa sổ $[-1,3]\times[-3,3]$.}
+\fig[.47]{f11}{Hình 11. Phóng lớn gần nghiệm.}
+Định lý giá trị trung gian còn liên quan cách thiết bị vẽ đồ thị hoạt động. Máy tính tính hữu hạn điểm, bật các điểm ảnh chứa chúng, rồi giả sử hàm liên tục và nhận mọi giá trị trung gian giữa hai điểm liên tiếp. Nó ``nối các điểm'' bằng cách bật các điểm ảnh ở giữa.
+\section*{2.5. Bài tập}
+\bt{1} Viết đẳng thức diễn tả $f$ liên tục tại 4.
+\bt{2} Nếu $f$ liên tục trên $(-\infty,\infty)$, có thể nói gì về đồ thị?
+\bt{3} (a) Từ đồ thị $f$, nêu các số tại đó hàm gián đoạn, giải thích. (b) Tại mỗi số ấy, xác định hàm liên tục bên phải, bên trái hay không bên nào.
+\fig[.79]{e03}{Đồ thị cho Bài tập 3.}
+\bt{4} Từ đồ thị $g$, nêu các số tại đó hàm gián đoạn, giải thích.
+\fig[.66]{e04}{Đồ thị cho Bài tập 4.}
+\group{5–6. Cho đồ thị $f$.}
+(a) Với những $a$ nào, $\lim_{x\to a}f(x)$ không tồn tại? (b) Với những $a$ nào, $f$ không liên tục? (c) Với những $a$ nào, giới hạn tồn tại nhưng $f$ không liên tục tại $a$?
+\bt{5}\fig[.47]{e05}{Đồ thị cho Bài tập 5.}
+\bt{6}\fig[.47]{e06}{Đồ thị cho Bài tập 6.}
+\group{7–10. Vẽ phác một hàm xác định trên $\mathbb R$, liên tục trừ các điểm gián đoạn đã nêu.}
+\bt{7} Gián đoạn có thể khử tại $-2$, gián đoạn vô cực tại 2.
+\bt{8} Gián đoạn nhảy tại $-3$, gián đoạn có thể khử tại 4.
+\bt{9} Gián đoạn tại 0 và 3, nhưng liên tục bên phải tại 0 và bên trái tại 3.
+\bt{10} Chỉ liên tục bên trái tại $-1$; không liên tục bên trái cũng không liên tục bên phải tại 3.
+\bt{11} Phí $T$ trên một đoạn đường là 5 đô la, trừ giờ cao điểm từ 7 đến 10 giờ sáng và 4 đến 7 giờ chiều, khi phí là 7 đô la.
+
+(a) Vẽ phác $T$ theo thời gian $t$, tính bằng giờ kể từ nửa đêm. (b) Thảo luận các điểm gián đoạn và ý nghĩa đối với người dùng đường.
+\bt{12} Giải thích mỗi hàm liên tục hay gián đoạn:
+
+(a) Nhiệt độ tại một vị trí cụ thể theo thời gian.
+
+(b) Nhiệt độ tại một thời điểm cụ thể theo khoảng cách về chính tây từ Thành phố New York.
+
+(c) Độ cao so với mực nước biển theo khoảng cách về chính tây từ Thành phố New York.
+
+(d) Tiền taxi theo quãng đường đã đi.
+
+(e) Dòng điện trong mạch đèn một căn phòng theo thời gian.
+\group{13–16. Dùng định nghĩa tính liên tục và các tính chất giới hạn để chứng minh hàm liên tục tại số $a$ đã cho.}
+\bt{13} $f(x)=3x^2+(x+2)^5$, $a=-1$.
+\bt{14} $g(t)=\dfrac{t^2+5t}{2t+1}$, $a=2$.
+\bt{15} $p(v)=2\sqrt{3v^2+1}$, $a=1$.
+\bt{16} $f(r)=\sqrt[3]{4r^2-2r+7}$, $a=-2$.
+\group{17–18. Dùng định nghĩa tính liên tục và các tính chất giới hạn để chứng minh hàm liên tục trên khoảng đã cho.}
+\bt{17} $f(x)=x+\sqrt{x-4}$, $[4,\infty)$.
+\bt{18} $g(x)=\dfrac{x-1}{3x+6}$, $(-\infty,-2)$.
+\group{19–24. Giải thích vì sao hàm gián đoạn tại $a$. Vẽ phác đồ thị.}
+\bt{19} $f(x)=1/(x+2)$, $a=-2$.
+\bt{20} $f(x)=\begin{cases}1/(x+2),&x\ne-2,\\1,&x=-2,\end{cases}$ $a=-2$.
+\bt{21} $f(x)=\begin{cases}x+3,&x\le-1,\\2^x,&x>-1,\end{cases}$ $a=-1$.
+\bt{22} $f(x)=\begin{cases}\dfrac{x^2-x}{x^2-1},&x\ne1,\\1,&x=1,\end{cases}$ $a=1$.
+\bt{23} $f(x)=\begin{cases}\cos x,&x<0,\\0,&x=0,\\1-x^2,&x>0,\end{cases}$ $a=0$.
+\bt{24} $f(x)=\begin{cases}\dfrac{2x^2-5x-3}{x-3},&x\ne3,\\6,&x=3,\end{cases}$ $a=3$.
+\group{25–26. (a) Chứng minh $f$ có gián đoạn có thể khử tại 3. (b) Xác định lại $f(3)$ để hàm liên tục tại đó.}
+\bt{25} $f(x)=\dfrac{x-3}{x^2-9}$.
+\bt{26} $f(x)=\dfrac{x^2-7x+12}{x-3}$.
+\group{27–34. Dùng Định lý 4, 5, 7, 9 giải thích vì sao hàm liên tục tại mọi điểm thuộc tập xác định. Nêu tập xác định.}
+\bt{27} $f(x)=\dfrac{x^2}{\sqrt{x^4+2}}$.
+\bt{28} $g(v)=\dfrac{3v-1}{v^2+2v-15}$.
+\bt{29} $h(t)=\dfrac{\cos(t^2)}{1-e^t}$.
+\bt{30} $B(u)=\sqrt{3u-2}+\sqrt[3]{2u-3}$.
+\bt{31} $L(v)=v\ln(1-v^2)$.
+\bt{32} $f(t)=e^{-t^2}\ln(1+t^2)$.
+\bt{33} $M(x)=\sqrt{1+1/x}$.
+\bt{34} $g(t)=\cos^{-1}(e^t-1)$.
+\group{35–38. Dùng tính liên tục để tính giới hạn.}
+\bt{35} $\displaystyle\lim_{x\to2}x\sqrt{20-x^2}$.
+\bt{36} $\displaystyle\lim_{\theta\to\pi/2}\sin(\tan(\cos\theta))$.
+\bt{37} $\displaystyle\lim_{x\to1}\ln\left(\frac{5-x^2}{1+x}\right)$.
+\bt{38} $\displaystyle\lim_{x\to4}3^{\sqrt{x^2-2x-4}}$.
+\group{39–40. Xác định các điểm gián đoạn và minh họa bằng đồ thị.}
+\bt{39} $f(x)=\dfrac1{\sqrt{1-\sin x}}$.
+\bt{40} $y=\arctan(1/x)$.
+\group{41–42. Chứng minh $f$ liên tục trên $(-\infty,\infty)$.}
+\bt{41} $f(x)=\begin{cases}1-x^2,&x\le1,\\\ln x,&x>1.\end{cases}$
+\bt{42} $f(x)=\begin{cases}\sin x,&x<\pi/4,\\\cos x,&x\ge\pi/4.\end{cases}$
+\group{43–45. Tìm các điểm gián đoạn. Tại mỗi điểm ấy, hàm liên tục bên phải, bên trái hay không bên nào? Vẽ phác đồ thị.}
+\bt{43} $f(x)=\begin{cases}x^2,&x<-1,\\x,&-1\le x<1,\\1/x,&x\ge1.\end{cases}$
+\bt{44} $f(x)=\begin{cases}2^x,&x\le1,\\3-x,&1<x\le4,\\\sqrt{x},&x>4.\end{cases}$
+\bt{45} $f(x)=\begin{cases}x+2,&x<0,\\e^x,&0\le x\le1,\\2-x,&x>1.\end{cases}$
+\bt{46} Lực hấp dẫn do Trái Đất tác dụng lên một đơn vị khối lượng cách tâm khoảng $r$ là
+\[F(r)=\begin{cases}\dfrac{GMr}{R^3},&r<R,\\\dfrac{GM}{r^2},&r\ge R,\end{cases}\]
+trong đó $M$ là khối lượng Trái Đất, $R$ là bán kính và $G$ là hằng số hấp dẫn. $F$ có liên tục theo $r$ không?
+\bt{47} Với giá trị nào của $c$, hàm sau liên tục trên $\mathbb R$?
+\[f(x)=\begin{cases}cx^2+2x,&x<2,\\x^3-cx,&x\ge2.\end{cases}\]
+\bt{48} Tìm $a,b$ để hàm liên tục khắp nơi:
+\[f(x)=\begin{cases}\dfrac{x^2-4}{x-2},&x<2,\\ax^2-bx+3,&2\le x<3,\\2x-a+b,&x\ge3.\end{cases}\]
+\bt{49} Cho $f,g$ liên tục, $g(2)=6$ và $\lim_{x\to2}[3f(x)+f(x)g(x)]=36$. Tìm $f(2)$.
+\bt{50} Cho $f(x)=1/x$, $g(x)=1/x^2$. (a) Tìm $(f\circ g)(x)$. (b) Hàm hợp có liên tục khắp nơi không? Giải thích.
+\bt{51} Hàm nào có gián đoạn có thể khử tại $a$? Nếu có, tìm $g$ trùng với $f$ khi $x\ne a$ và liên tục tại $a$:
+
+(a) $f(x)=\dfrac{x^4-1}{x-1}$, $a=1$.
+
+(b) $f(x)=\dfrac{x^3-x^2-2x}{x-2}$, $a=2$.
+
+(c) $f(x)=\gint{\sin x}$, $a=\pi$.
+\bt{52} Giả sử $f$ liên tục trên $[0,1]$ trừ tại $0.25$, $f(0)=1$, $f(1)=3$; đặt $N=2$. Vẽ hai đồ thị có thể có: một cho thấy kết luận định lý giá trị trung gian có thể không đúng; một cho thấy kết luận vẫn có thể đúng dù giả thiết không được thỏa mãn.
+\bt{53} Nếu $f(x)=x^2+10\sin x$, chứng minh tồn tại $c$ sao cho $f(c)=1000$.
+\bt{54} Giả sử $f$ liên tục trên $[1,5]$, phương trình $f(x)=6$ chỉ có các nghiệm $x=1$, $x=4$. Nếu $f(2)=8$, giải thích vì sao $f(3)>6$.
+\group{55–58. Dùng định lý giá trị trung gian chứng minh phương trình có nghiệm trong khoảng đã cho.}
+\bt{55} $-x^3+4x+1=0$, $(-1,0)$.
+\bt{56} $\ln x=x-\sqrt{x}$, $(2,3)$.
+\bt{57} $e^x=3-2x$, $(0,1)$.
+\bt{58} $\sin x=x^2-x$, $(1,2)$.
+\group{59–60. (a) Chứng minh phương trình có ít nhất một nghiệm thực. (b) Dùng máy tính tìm khoảng dài $0.01$ chứa một nghiệm.}
+\bt{59} $\cos x=x^3$.
+\bt{60} $\ln x=3-2x$.
+\group{61–62. (a) Chứng minh phương trình có ít nhất một nghiệm thực. (b) Dùng đồ thị tìm nghiệm đúng đến ba chữ số sau dấu phẩy.}
+\bt{61} $100e^{-x/100}=0.01x^2$.
+\bt{62} $\arctan x=1-x$.
+\group{63–64. Không vẽ đồ thị, chứng minh đồ thị hàm có ít nhất hai giao điểm với trục $x$ trong khoảng đã cho.}
+\bt{63} $y=\sin(x^3)$, $(1,2)$.
+\bt{64} $y=x^2-3+1/x$, $(0,2)$.
+\bt{65} Chứng minh $f$ liên tục tại $a$ khi và chỉ khi $\lim_{h\to0}f(a+h)=f(a)$.
+\bt{66} Để chứng minh sin liên tục, cần $\lim_{x\to a}\sin x=\sin a$ với mọi $a\in\mathbb R$. Theo Bài tập 65, tương đương $\lim_{h\to0}\sin(a+h)=\sin a$. Dùng (6) chứng minh điều này.
+\bt{67} Chứng minh côsin là hàm liên tục.
+\bt{68} (a) Chứng minh phần 3 của Định lý 4. (b) Chứng minh phần 5 của Định lý 4.
+\bt{69} Dùng Định lý 8 chứng minh Quy tắc giới hạn 6 và 7 ở §2.3.
+\bt{70} Có số nào lớn hơn lập phương của chính nó đúng 1 đơn vị không?
+\bt{71} Hàm $f(x)=\begin{cases}0,&x\text{ hữu tỉ},\\1,&x\text{ vô tỉ}\end{cases}$ liên tục tại những $x$ nào?
+\bt{72} Hàm $g(x)=\begin{cases}0,&x\text{ hữu tỉ},\\x,&x\text{ vô tỉ}\end{cases}$ liên tục tại những $x$ nào?
+\bt{73} Chứng minh $f(x)=\begin{cases}x^4\sin(1/x),&x\ne0,\\0,&x=0\end{cases}$ liên tục trên $\mathbb R$.
+\bt{74} Nếu $a,b>0$, chứng minh phương trình
+\[\frac{a}{x^3+2x^2-1}+\frac{b}{x^3+x-2}=0\]
+có ít nhất một nghiệm trong $(-1,1)$.
+\bt{75} Một nhà sư Tây Tạng rời tu viện lúc 7 giờ sáng, theo đường quen lên đỉnh núi, đến lúc 7 giờ tối. Sáng hôm sau, ông khởi hành từ đỉnh lúc 7 giờ sáng, trở lại cùng đường và đến tu viện lúc 7 giờ tối. Dùng định lý giá trị trung gian chứng minh có một điểm trên đường mà ông đi qua đúng cùng thời điểm trong ngày ở cả hai hôm.
+\bt{76} \textbf{Giá trị tuyệt đối và tính liên tục.}
+
+(a) Chứng minh $F(x)=|x|$ liên tục khắp nơi.
+
+(b) Chứng minh nếu $f$ liên tục trên một khoảng thì $|f|$ cũng liên tục trên khoảng ấy.
+
+(c) Mệnh đề đảo có đúng không? Nếu $|f|$ liên tục, có suy ra $f$ liên tục không? Nếu đúng, chứng minh; nếu sai, nêu phản ví dụ.
+\section*{Ghi chú biên tập}
+\begin{enumerate}
+\item Trong Định lý 10, ``$N$ nằm giữa $f(a)$ và $f(b)$'' được hiểu là nằm \textit{nghiêm ngặt} giữa hai giá trị, để kết luận $c\in(a,b)$. Nếu cho phép $N$ bằng giá trị đầu mút, kết luận tổng quát là $c\in[a,b]$.
+\item Nhận xét về tính liên tục của hàm ngược được dùng ở đây trong bối cảnh hàm liên tục đơn ánh trên một khoảng. Với các tập xác định tùy ý, không nên bỏ qua điều kiện về miền.
+\item Ở Định lý 8, các giá trị $g(x)$ gần điểm lấy giới hạn phải thuộc tập xác định của $f$. Tại đầu mút của miền, tính liên tục được hiểu một phía như Định nghĩa 3.
+\item Trong Bài tập 50, phép rút gọn công thức hàm hợp không tự bổ sung điểm đã bị loại khỏi miền xác định. Các bài tập chỉ dịch đề, không kèm đáp án.
+\end{enumerate}
+\section*{Thuật ngữ bổ sung}
+\begin{center}\begin{tabular}{ll}\toprule Tiếng Anh&Tiếng Việt thống nhất\\\midrule
+continuity&tính liên tục\\
+discontinuous at a point&gián đoạn tại một điểm\\
+removable discontinuity&gián đoạn có thể khử\\
+infinite discontinuity&gián đoạn vô cực\\
+jump discontinuity&gián đoạn nhảy\\
+continuous from the right&liên tục bên phải\\
+continuous from the left&liên tục bên trái\\
+continuous on an interval&liên tục trên một khoảng\\
+Intermediate Value Theorem&định lý giá trị trung gian\\
+closed interval&đoạn\\
+endpoint&đầu mút\\
+\bottomrule\end{tabular}\end{center}
+\noindent\textbf{Phạm vi hoàn thành:} Trọn §2.5, gồm Định nghĩa 1–3; Định lý 4, 5, 7, 8, 9, 10 và các chứng minh trong sách; công thức (6); Ví dụ 1–10; Hình 1–11; 76 bài tập. Phần tiếp theo: \textit{§2.6 — Giới hạn tại vô cực; tiệm cận ngang}, trang in 127.
+\end{document}

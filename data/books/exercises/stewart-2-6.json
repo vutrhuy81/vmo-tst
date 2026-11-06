@@ -1,0 +1,332 @@
+{
+  "bookKey": "stewart-9",
+  "sectionKey": "2-6",
+  "heading": "2.6. Bài tập",
+  "sourceSha256": "fbbc38a253dc0b9d8464e1682aaa44919e775ccfb8b2afafe8701dd6860fe1a5",
+  "exercises": [
+    {
+      "number": 1,
+      "content": "<p><strong>1.</strong>&nbsp; Giải thích bằng lời ý nghĩa của mỗi biểu thức\nsau: <span class=\"math display\">\\[(a)\\quad\\lim_{x\\to\\infty}f(x)=5;\\qquad(b)\\quad\\lim_{x\\to-\\infty}f(x)=3.\\]</span></p>"
+    },
+    {
+      "number": 2,
+      "content": "<p><strong>2.</strong>&nbsp; (a) Đồ thị <span class=\"math inline\">\\(y=f(x)\\)</span> có thể giao với một tiệm cận đứng\nkhông? Có thể giao với một tiệm cận ngang không? Phác họa đồ thị minh\nhọa.</p>\n<p>(b) Đồ thị <span class=\"math inline\">\\(y=f(x)\\)</span> có thể có bao\nnhiêu tiệm cận ngang? Phác họa đồ thị minh họa các khả năng.</p>"
+    },
+    {
+      "number": 3,
+      "content": "<p><strong>3.</strong>&nbsp; Với hàm <span class=\"math inline\">\\(f\\)</span>\ncó đồ thị sau, hãy nêu: <span class=\"math display\">\\[(a)\\\n\\lim_{x\\to\\infty}f(x);\\qquad(b)\\ \\lim_{x\\to-\\infty}f(x);\\]</span><span class=\"math display\">\\[(c)\\ \\lim_{x\\to1}f(x);\\qquad(d)\\\n\\lim_{x\\to3}f(x).\\]</span> (e) Phương trình các tiệm cận.</p>\n<div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-2-6-fbbc38a2/e03.png\" alt=\"image\"><br>\n<span>Đồ thị dùng cho Bài tập 3.</span></p>\n</div>"
+    },
+    {
+      "number": 4,
+      "content": "<p><strong>4.</strong>&nbsp; Với hàm <span class=\"math inline\">\\(g\\)</span>\ncó đồ thị sau, hãy nêu: <span class=\"math display\">\\[(a)\\\n\\lim_{x\\to\\infty}g(x);\\quad(b)\\ \\lim_{x\\to-\\infty}g(x);\\quad(c)\\\n\\lim_{x\\to0}g(x);\\]</span> <span class=\"math display\">\\[(d)\\\n\\lim_{x\\to2^-}g(x);\\qquad(e)\\ \\lim_{x\\to2^+}g(x).\\]</span> (f) Phương\ntrình các tiệm cận.</p>\n<div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-2-6-fbbc38a2/e04.png\" alt=\"image\"><br>\n<span>Đồ thị dùng cho Bài tập 4.</span></p>\n</div>"
+    },
+    {
+      "number": 5,
+      "content": "<p><strong>5–10. Phác họa một ví dụ về đồ thị hàm <span class=\"math inline\">\\(f\\)</span> thỏa mãn tất cả các điều kiện đã\ncho.</strong></p><p><strong>5.</strong>&nbsp; <span class=\"math inline\">\\(f(2)=4\\)</span>,\n<span class=\"math inline\">\\(f(-2)=-4\\)</span>, <span class=\"math inline\">\\(\\lim_{x\\to-\\infty}f(x)=0\\)</span>, <span class=\"math inline\">\\(\\lim_{x\\to\\infty}f(x)=2\\)</span>.</p>"
+    },
+    {
+      "number": 6,
+      "content": "<p><strong>5–10. Phác họa một ví dụ về đồ thị hàm <span class=\"math inline\">\\(f\\)</span> thỏa mãn tất cả các điều kiện đã\ncho.</strong></p><p><strong>6.</strong>&nbsp; <span class=\"math inline\">\\(f(0)=0\\)</span>,\n<span class=\"math inline\">\\(\\lim_{x\\to1^-}f(x)=\\infty\\)</span>, <span class=\"math inline\">\\(\\lim_{x\\to1^+}f(x)=-\\infty\\)</span>, <span class=\"math display\">\\[\\lim_{x\\to-\\infty}f(x)=-2,\\qquad\\lim_{x\\to\\infty}f(x)=-2.\\]</span></p>"
+    },
+    {
+      "number": 7,
+      "content": "<p><strong>5–10. Phác họa một ví dụ về đồ thị hàm <span class=\"math inline\">\\(f\\)</span> thỏa mãn tất cả các điều kiện đã\ncho.</strong></p><p><strong>7.</strong>&nbsp; <span class=\"math inline\">\\(\\lim_{x\\to0}f(x)=\\infty\\)</span>, <span class=\"math inline\">\\(\\lim_{x\\to3^-}f(x)=-\\infty\\)</span>, <span class=\"math inline\">\\(\\lim_{x\\to3^+}f(x)=\\infty\\)</span>, <span class=\"math display\">\\[\\lim_{x\\to-\\infty}f(x)=1,\\qquad\\lim_{x\\to\\infty}f(x)=-1.\\]</span></p>"
+    },
+    {
+      "number": 8,
+      "content": "<p><strong>5–10. Phác họa một ví dụ về đồ thị hàm <span class=\"math inline\">\\(f\\)</span> thỏa mãn tất cả các điều kiện đã\ncho.</strong></p><p><strong>8.</strong>&nbsp; <span class=\"math inline\">\\(\\lim_{x\\to-\\infty}f(x)=-\\infty\\)</span>, <span class=\"math inline\">\\(\\lim_{x\\to-2^-}f(x)=\\infty\\)</span>, <span class=\"math inline\">\\(\\lim_{x\\to-2^+}f(x)=-\\infty\\)</span>, <span class=\"math display\">\\[\\lim_{x\\to2}f(x)=\\infty,\\qquad\\lim_{x\\to\\infty}f(x)=\\infty.\\]</span></p>"
+    },
+    {
+      "number": 9,
+      "content": "<p><strong>5–10. Phác họa một ví dụ về đồ thị hàm <span class=\"math inline\">\\(f\\)</span> thỏa mãn tất cả các điều kiện đã\ncho.</strong></p><p><strong>9.</strong>&nbsp; <span class=\"math inline\">\\(f(0)=0\\)</span>,\n<span class=\"math inline\">\\(\\lim_{x\\to1}f(x)=-\\infty\\)</span>, <span class=\"math inline\">\\(\\lim_{x\\to\\infty}f(x)=-\\infty\\)</span>; <span class=\"math inline\">\\(f\\)</span> là hàm lẻ.</p>"
+    },
+    {
+      "number": 10,
+      "content": "<p><strong>5–10. Phác họa một ví dụ về đồ thị hàm <span class=\"math inline\">\\(f\\)</span> thỏa mãn tất cả các điều kiện đã\ncho.</strong></p><p><strong>10.</strong>&nbsp; <span class=\"math inline\">\\(\\lim_{x\\to-\\infty}f(x)=-1\\)</span>, <span class=\"math inline\">\\(\\lim_{x\\to0^-}f(x)=\\infty\\)</span>, <span class=\"math inline\">\\(\\lim_{x\\to0^+}f(x)=-\\infty\\)</span>, <span class=\"math display\">\\[\\lim_{x\\to3^-}f(x)=1,\\quad\nf(3)=4,\\quad\\lim_{x\\to3^+}f(x)=4,\\quad\\lim_{x\\to\\infty}f(x)=1.\\]</span></p>"
+    },
+    {
+      "number": 11,
+      "content": "<p><strong>11.</strong>&nbsp; Dự đoán giá trị <span class=\"math inline\">\\(\\lim_{x\\to\\infty}x^2/2^x\\)</span> bằng cách tính\n<span class=\"math inline\">\\(f(x)=x^2/2^x\\)</span> tại <span class=\"math display\">\\[x=0,1,2,3,4,5,6,7,8,9,10,20,50,100.\\]</span> Sau\nđó dùng đồ thị <span class=\"math inline\">\\(f\\)</span> để củng cố dự\nđoán.</p>"
+    },
+    {
+      "number": 12,
+      "content": "<p><strong>12.</strong>&nbsp; (a) Dùng đồ thị <span class=\"math inline\">\\(f(x)=(1-2/x)^x\\)</span> để ước lượng <span class=\"math inline\">\\(\\lim_{x\\to\\infty}f(x)\\)</span>, chính xác đến hai\nchữ số thập phân.</p>\n<p>(b) Dùng bảng giá trị <span class=\"math inline\">\\(f(x)\\)</span> để\nước lượng giới hạn đến bốn chữ số thập phân.</p>"
+    },
+    {
+      "number": 13,
+      "content": "<p><strong>13–14. Tính giới hạn và giải thích từng bước bằng cách nêu\ntính chất giới hạn thích hợp.</strong></p><p><strong>13.</strong>&nbsp; <span class=\"math inline\">\\(\\displaystyle\\lim_{x\\to\\infty}\\frac{2x^2-7}{5x^2+x-3}\\)</span>.</p>"
+    },
+    {
+      "number": 14,
+      "content": "<p><strong>13–14. Tính giới hạn và giải thích từng bước bằng cách nêu\ntính chất giới hạn thích hợp.</strong></p><p><strong>14.</strong>&nbsp; <span class=\"math inline\">\\(\\displaystyle\\lim_{x\\to\\infty}\\sqrt{\\frac{9x^3+8x-4}{3-5x+x^3}}\\)</span>.</p>"
+    },
+    {
+      "number": 15,
+      "content": "<p><strong>15–42. Tìm giới hạn hoặc chứng tỏ giới hạn không tồn\ntại.</strong></p><p><strong>15.</strong>&nbsp; <span class=\"math inline\">\\(\\displaystyle\\lim_{x\\to\\infty}\\frac{4x+3}{5x-1}\\)</span>.</p>"
+    },
+    {
+      "number": 16,
+      "content": "<p><strong>15–42. Tìm giới hạn hoặc chứng tỏ giới hạn không tồn\ntại.</strong></p><p><strong>16.</strong>&nbsp; <span class=\"math inline\">\\(\\displaystyle\\lim_{x\\to\\infty}\\frac{-2}{3x+7}\\)</span>.</p>"
+    },
+    {
+      "number": 17,
+      "content": "<p><strong>15–42. Tìm giới hạn hoặc chứng tỏ giới hạn không tồn\ntại.</strong></p><p><strong>17.</strong>&nbsp; <span class=\"math inline\">\\(\\displaystyle\\lim_{t\\to-\\infty}\\frac{3t^2+t}{t^3-4t+1}\\)</span>.</p>"
+    },
+    {
+      "number": 18,
+      "content": "<p><strong>15–42. Tìm giới hạn hoặc chứng tỏ giới hạn không tồn\ntại.</strong></p><p><strong>18.</strong>&nbsp; <span class=\"math inline\">\\(\\displaystyle\\lim_{t\\to-\\infty}\\frac{6t^2+t-5}{9-2t^2}\\)</span>.</p>"
+    },
+    {
+      "number": 19,
+      "content": "<p><strong>15–42. Tìm giới hạn hoặc chứng tỏ giới hạn không tồn\ntại.</strong></p><p><strong>19.</strong>&nbsp; <span class=\"math inline\">\\(\\displaystyle\\lim_{r\\to\\infty}\\frac{r-r^3}{2-r^2+3r^3}\\)</span>.</p>"
+    },
+    {
+      "number": 20,
+      "content": "<p><strong>15–42. Tìm giới hạn hoặc chứng tỏ giới hạn không tồn\ntại.</strong></p><p><strong>20.</strong>&nbsp; <span class=\"math inline\">\\(\\displaystyle\\lim_{x\\to\\infty}\\frac{3x^3-8x+2}{4x^3-5x^2-2}\\)</span>.</p>"
+    },
+    {
+      "number": 21,
+      "content": "<p><strong>15–42. Tìm giới hạn hoặc chứng tỏ giới hạn không tồn\ntại.</strong></p><p><strong>21.</strong>&nbsp; <span class=\"math inline\">\\(\\displaystyle\\lim_{x\\to\\infty}\\frac{4-\\sqrt\nx}{2+\\sqrt x}\\)</span>.</p>"
+    },
+    {
+      "number": 22,
+      "content": "<p><strong>15–42. Tìm giới hạn hoặc chứng tỏ giới hạn không tồn\ntại.</strong></p><p><strong>22.</strong>&nbsp; <span class=\"math inline\">\\(\\displaystyle\\lim_{u\\to-\\infty}\\frac{(u^2+1)(2u^2-1)}{(u^2+2)^2}\\)</span>.</p>"
+    },
+    {
+      "number": 23,
+      "content": "<p><strong>15–42. Tìm giới hạn hoặc chứng tỏ giới hạn không tồn\ntại.</strong></p><p><strong>23.</strong>&nbsp; <span class=\"math inline\">\\(\\displaystyle\\lim_{x\\to\\infty}\\frac{\\sqrt{x+3x^2}}{4x-1}\\)</span>.</p>"
+    },
+    {
+      "number": 24,
+      "content": "<p><strong>15–42. Tìm giới hạn hoặc chứng tỏ giới hạn không tồn\ntại.</strong></p><p><strong>24.</strong>&nbsp; <span class=\"math inline\">\\(\\displaystyle\\lim_{t\\to\\infty}\\frac{t+3}{\\sqrt{2t^2-1}}\\)</span>.</p>"
+    },
+    {
+      "number": 25,
+      "content": "<p><strong>15–42. Tìm giới hạn hoặc chứng tỏ giới hạn không tồn\ntại.</strong></p><p><strong>25.</strong>&nbsp; <span class=\"math inline\">\\(\\displaystyle\\lim_{x\\to\\infty}\\frac{\\sqrt{1+4x^6}}{2-x^3}\\)</span>.</p>"
+    },
+    {
+      "number": 26,
+      "content": "<p><strong>15–42. Tìm giới hạn hoặc chứng tỏ giới hạn không tồn\ntại.</strong></p><p><strong>26.</strong>&nbsp; <span class=\"math inline\">\\(\\displaystyle\\lim_{x\\to-\\infty}\\frac{\\sqrt{1+4x^6}}{2-x^3}\\)</span>.</p>"
+    },
+    {
+      "number": 27,
+      "content": "<p><strong>15–42. Tìm giới hạn hoặc chứng tỏ giới hạn không tồn\ntại.</strong></p><p><strong>27.</strong>&nbsp; <span class=\"math inline\">\\(\\displaystyle\\lim_{x\\to-\\infty}\\frac{2x^5-x}{x^4+3}\\)</span>.</p>"
+    },
+    {
+      "number": 28,
+      "content": "<p><strong>15–42. Tìm giới hạn hoặc chứng tỏ giới hạn không tồn\ntại.</strong></p><p><strong>28.</strong>&nbsp; <span class=\"math inline\">\\(\\displaystyle\\lim_{q\\to\\infty}\\frac{q^3+6q-4}{4q^2-3q+3}\\)</span>.</p>"
+    },
+    {
+      "number": 29,
+      "content": "<p><strong>15–42. Tìm giới hạn hoặc chứng tỏ giới hạn không tồn\ntại.</strong></p><p><strong>29.</strong>&nbsp; <span class=\"math inline\">\\(\\displaystyle\\lim_{t\\to\\infty}(\\sqrt{25t^2+2}-5t)\\)</span>.</p>"
+    },
+    {
+      "number": 30,
+      "content": "<p><strong>15–42. Tìm giới hạn hoặc chứng tỏ giới hạn không tồn\ntại.</strong></p><p><strong>30.</strong>&nbsp; <span class=\"math inline\">\\(\\displaystyle\\lim_{x\\to-\\infty}(\\sqrt{4x^2+3x}+2x)\\)</span>.</p>"
+    },
+    {
+      "number": 31,
+      "content": "<p><strong>15–42. Tìm giới hạn hoặc chứng tỏ giới hạn không tồn\ntại.</strong></p><p><strong>31.</strong>&nbsp; <span class=\"math inline\">\\(\\displaystyle\\lim_{x\\to\\infty}(\\sqrt{x^2+ax}-\\sqrt{x^2+bx})\\)</span>.</p>"
+    },
+    {
+      "number": 32,
+      "content": "<p><strong>15–42. Tìm giới hạn hoặc chứng tỏ giới hạn không tồn\ntại.</strong></p><p><strong>32.</strong>&nbsp; <span class=\"math inline\">\\(\\displaystyle\\lim_{x\\to\\infty}(x-\\sqrt\nx)\\)</span>.</p>"
+    },
+    {
+      "number": 33,
+      "content": "<p><strong>15–42. Tìm giới hạn hoặc chứng tỏ giới hạn không tồn\ntại.</strong></p><p><strong>33.</strong>&nbsp; <span class=\"math inline\">\\(\\displaystyle\\lim_{x\\to-\\infty}(x^2+2x^7)\\)</span>.</p>"
+    },
+    {
+      "number": 34,
+      "content": "<p><strong>15–42. Tìm giới hạn hoặc chứng tỏ giới hạn không tồn\ntại.</strong></p><p><strong>34.</strong>&nbsp; <span class=\"math inline\">\\(\\displaystyle\\lim_{x\\to\\infty}(e^{-x}+2\\cos3x)\\)</span>.</p>"
+    },
+    {
+      "number": 35,
+      "content": "<p><strong>15–42. Tìm giới hạn hoặc chứng tỏ giới hạn không tồn\ntại.</strong></p><p><strong>35.</strong>&nbsp; <span class=\"math inline\">\\(\\displaystyle\\lim_{x\\to\\infty}(e^{-2x}\\cos\nx)\\)</span>.</p>"
+    },
+    {
+      "number": 36,
+      "content": "<p><strong>15–42. Tìm giới hạn hoặc chứng tỏ giới hạn không tồn\ntại.</strong></p><p><strong>36.</strong>&nbsp; <span class=\"math inline\">\\(\\displaystyle\\lim_{x\\to\\infty}\\frac{\\sin^2x}{x^2+1}\\)</span>.</p>"
+    },
+    {
+      "number": 37,
+      "content": "<p><strong>15–42. Tìm giới hạn hoặc chứng tỏ giới hạn không tồn\ntại.</strong></p><p><strong>37.</strong>&nbsp; <span class=\"math inline\">\\(\\displaystyle\\lim_{x\\to\\infty}\\frac{1-e^x}{1+2e^x}\\)</span>.</p>"
+    },
+    {
+      "number": 38,
+      "content": "<p><strong>15–42. Tìm giới hạn hoặc chứng tỏ giới hạn không tồn\ntại.</strong></p><p><strong>38.</strong>&nbsp; <span class=\"math inline\">\\(\\displaystyle\\lim_{x\\to\\infty}\\frac{e^{3x}-e^{-3x}}{e^{3x}+e^{-3x}}\\)</span>.</p>"
+    },
+    {
+      "number": 39,
+      "content": "<p><strong>15–42. Tìm giới hạn hoặc chứng tỏ giới hạn không tồn\ntại.</strong></p><p><strong>39.</strong>&nbsp; <span class=\"math inline\">\\(\\displaystyle\\lim_{x\\to(\\pi/2)^+}e^{\\sec\nx}\\)</span>.</p>"
+    },
+    {
+      "number": 40,
+      "content": "<p><strong>15–42. Tìm giới hạn hoặc chứng tỏ giới hạn không tồn\ntại.</strong></p><p><strong>40.</strong>&nbsp; <span class=\"math inline\">\\(\\displaystyle\\lim_{x\\to0^+}\\tan^{-1}(\\ln\nx)\\)</span>.</p>"
+    },
+    {
+      "number": 41,
+      "content": "<p><strong>15–42. Tìm giới hạn hoặc chứng tỏ giới hạn không tồn\ntại.</strong></p><p><strong>41.</strong>&nbsp; <span class=\"math inline\">\\(\\displaystyle\\lim_{x\\to\\infty}[\\ln(1+x^2)-\\ln(1+x)]\\)</span>.</p>"
+    },
+    {
+      "number": 42,
+      "content": "<p><strong>15–42. Tìm giới hạn hoặc chứng tỏ giới hạn không tồn\ntại.</strong></p><p><strong>42.</strong>&nbsp; <span class=\"math inline\">\\(\\displaystyle\\lim_{x\\to\\infty}[\\ln(2+x)-\\ln(1+x)]\\)</span>.</p>"
+    },
+    {
+      "number": 43,
+      "content": "<p><strong>43.</strong>&nbsp; (a) Cho <span class=\"math inline\">\\(f(x)=x/\\ln\nx\\)</span>. Tìm các giới hạn: <span class=\"math display\">\\[\\text{(i)}\\\n\\lim_{x\\to0^+}f(x);\\quad\\text{(ii)}\\\n\\lim_{x\\to1^-}f(x);\\quad\\text{(iii)}\\ \\lim_{x\\to1^+}f(x).\\]</span> (b)\nDùng bảng giá trị để ước lượng <span class=\"math inline\">\\(\\lim_{x\\to\\infty}f(x)\\)</span>.</p>\n<p>(c) Dùng thông tin từ (a), (b) để phác họa đồ thị <span class=\"math inline\">\\(f\\)</span>.</p>"
+    },
+    {
+      "number": 44,
+      "content": "<p><strong>44.</strong>&nbsp; (a) Cho <span class=\"math inline\">\\(f(x)=2/x-1/\\ln x\\)</span>. Tìm các giới hạn: <span class=\"math display\">\\[\\text{(i)}\\\n\\lim_{x\\to\\infty}f(x);\\quad\\text{(ii)}\\\n\\lim_{x\\to0^+}f(x);\\quad\\text{(iii)}\\\n\\lim_{x\\to1^-}f(x);\\quad\\text{(iv)}\\ \\lim_{x\\to1^+}f(x).\\]</span> (b)\nDùng thông tin từ (a) để phác họa đồ thị <span class=\"math inline\">\\(f\\)</span>.</p>"
+    },
+    {
+      "number": 45,
+      "content": "<p><strong>45.</strong>&nbsp; (a) Ước lượng <span class=\"math inline\">\\(\\lim_{x\\to-\\infty}(\\sqrt{x^2+x+1}+x)\\)</span> bằng\ncách vẽ đồ thị <span class=\"math inline\">\\(f(x)=\\sqrt{x^2+x+1}+x\\)</span>.</p>\n<p>(b) Dùng bảng giá trị <span class=\"math inline\">\\(f(x)\\)</span> để dự\nđoán giá trị giới hạn.</p>\n<p>(c) Chứng minh dự đoán đúng.</p>"
+    },
+    {
+      "number": 46,
+      "content": "<p><strong>46.</strong>&nbsp; (a) Dùng đồ thị <span class=\"math display\">\\[f(x)=\\sqrt{3x^2+8x+6}-\\sqrt{3x^2+3x+1}\\]</span>\nđể ước lượng <span class=\"math inline\">\\(\\lim_{x\\to\\infty}f(x)\\)</span>\nđến một chữ số thập phân.</p>\n<p>(b) Dùng bảng giá trị <span class=\"math inline\">\\(f(x)\\)</span> để\nước lượng đến bốn chữ số thập phân.</p>\n<p>(c) Tìm giá trị chính xác của giới hạn.</p>"
+    },
+    {
+      "number": 47,
+      "content": "<p><strong>47–52. Tìm các tiệm cận ngang và đứng của mỗi đường cong. Có\nthể dùng máy tính vẽ đồ thị để kiểm tra bằng cách vẽ đường cong và ước\nlượng các tiệm cận.</strong></p><p><strong>47.</strong>&nbsp; <span class=\"math inline\">\\(\\displaystyle\ny=\\frac{5+4x}{x+3}\\)</span>.</p>"
+    },
+    {
+      "number": 48,
+      "content": "<p><strong>47–52. Tìm các tiệm cận ngang và đứng của mỗi đường cong. Có\nthể dùng máy tính vẽ đồ thị để kiểm tra bằng cách vẽ đường cong và ước\nlượng các tiệm cận.</strong></p><p><strong>48.</strong>&nbsp; <span class=\"math inline\">\\(\\displaystyle\ny=\\frac{2x^2+1}{3x^2+2x-1}\\)</span>.</p>"
+    },
+    {
+      "number": 49,
+      "content": "<p><strong>47–52. Tìm các tiệm cận ngang và đứng của mỗi đường cong. Có\nthể dùng máy tính vẽ đồ thị để kiểm tra bằng cách vẽ đường cong và ước\nlượng các tiệm cận.</strong></p><p><strong>49.</strong>&nbsp; <span class=\"math inline\">\\(\\displaystyle\ny=\\frac{2x^2+x-1}{x^2+x-2}\\)</span>.</p>"
+    },
+    {
+      "number": 50,
+      "content": "<p><strong>47–52. Tìm các tiệm cận ngang và đứng của mỗi đường cong. Có\nthể dùng máy tính vẽ đồ thị để kiểm tra bằng cách vẽ đường cong và ước\nlượng các tiệm cận.</strong></p><p><strong>50.</strong>&nbsp; <span class=\"math inline\">\\(\\displaystyle\ny=\\frac{1+x^4}{x^2-x^4}\\)</span>.</p>"
+    },
+    {
+      "number": 51,
+      "content": "<p><strong>47–52. Tìm các tiệm cận ngang và đứng của mỗi đường cong. Có\nthể dùng máy tính vẽ đồ thị để kiểm tra bằng cách vẽ đường cong và ước\nlượng các tiệm cận.</strong></p><p><strong>51.</strong>&nbsp; <span class=\"math inline\">\\(\\displaystyle\ny=\\frac{x^3-x}{x^2-6x+5}\\)</span>.</p>"
+    },
+    {
+      "number": 52,
+      "content": "<p><strong>47–52. Tìm các tiệm cận ngang và đứng của mỗi đường cong. Có\nthể dùng máy tính vẽ đồ thị để kiểm tra bằng cách vẽ đường cong và ước\nlượng các tiệm cận.</strong></p><p><strong>52.</strong>&nbsp; <span class=\"math inline\">\\(\\displaystyle\ny=\\frac{2e^x}{e^x-5}\\)</span>.</p>"
+    },
+    {
+      "number": 53,
+      "content": "<p><strong>53.</strong>&nbsp; Ước lượng tiệm cận ngang của <span class=\"math display\">\\[f(x)=\\frac{3x^3+500x^2}{x^3+500x^2+100x+2000}\\]</span>\nbằng đồ thị với <span class=\"math inline\">\\(-10\\le x\\le10\\)</span>. Sau\nđó tính phương trình tiệm cận bằng giới hạn. Giải thích sự sai khác.</p>"
+    },
+    {
+      "number": 54,
+      "content": "<p><strong>54.</strong>&nbsp; (a) Vẽ đồ thị <span class=\"math inline\">\\(f(x)=\\sqrt{2x^2+1}/(3x-5)\\)</span>. Quan sát thấy\nbao nhiêu tiệm cận ngang và đứng? Dùng đồ thị để ước lượng <span class=\"math display\">\\[\\lim_{x\\to\\infty}\\frac{\\sqrt{2x^2+1}}{3x-5},\\qquad\\lim_{x\\to-\\infty}\\frac{\\sqrt{2x^2+1}}{3x-5}.\\]</span>\n(b) Tính các giá trị <span class=\"math inline\">\\(f(x)\\)</span> để ước\nlượng bằng số các giới hạn ở (a).</p>\n<p>(c) Tính chính xác các giới hạn ở (a). Hai giá trị bằng nhau hay khác\nnhau? [Căn cứ vào câu trả lời ở (a), có thể cần kiểm tra lại phép tính\ngiới hạn thứ hai.]</p>"
+    },
+    {
+      "number": 55,
+      "content": "<p><strong>55.</strong>&nbsp; Cho <span class=\"math inline\">\\(P,Q\\)</span> là\ncác đa thức. Tìm <span class=\"math inline\">\\(\\lim_{x\\to\\infty}P(x)/Q(x)\\)</span> nếu bậc của\n<span class=\"math inline\">\\(P\\)</span>: (a) nhỏ hơn bậc của <span class=\"math inline\">\\(Q\\)</span>; (b) lớn hơn bậc của <span class=\"math inline\">\\(Q\\)</span>.</p>"
+    },
+    {
+      "number": 56,
+      "content": "<p><strong>56.</strong>&nbsp; Phác họa đường cong <span class=\"math inline\">\\(y=x^n\\)</span> (<span class=\"math inline\">\\(n\\)</span> nguyên) trong năm trường hợp: (i) <span class=\"math inline\">\\(n=0\\)</span>; (ii) <span class=\"math inline\">\\(n&gt;0\\)</span>, <span class=\"math inline\">\\(n\\)</span> lẻ; (iii) <span class=\"math inline\">\\(n&gt;0\\)</span>, <span class=\"math inline\">\\(n\\)</span> chẵn; (iv) <span class=\"math inline\">\\(n&lt;0\\)</span>, <span class=\"math inline\">\\(n\\)</span> lẻ; (v) <span class=\"math inline\">\\(n&lt;0\\)</span>, <span class=\"math inline\">\\(n\\)</span> chẵn. Dùng các hình ấy để tìm: <span class=\"math display\">\\[(a)\\ \\lim_{x\\to0^+}x^n;\\quad(b)\\\n\\lim_{x\\to0^-}x^n;\\quad(c)\\ \\lim_{x\\to\\infty}x^n;\\quad(d)\\\n\\lim_{x\\to-\\infty}x^n.\\]</span></p>"
+    },
+    {
+      "number": 57,
+      "content": "<p><strong>57.</strong>&nbsp; Tìm công thức một hàm <span class=\"math inline\">\\(f\\)</span> thỏa mãn: <span class=\"math display\">\\[\\lim_{x\\to\\pm\\infty}f(x)=0,\\quad\\lim_{x\\to0}f(x)=-\\infty,\\quad\nf(2)=0,\\]</span> <span class=\"math display\">\\[\\lim_{x\\to3^-}f(x)=\\infty,\\qquad\\lim_{x\\to3^+}f(x)=-\\infty.\\]</span></p>"
+    },
+    {
+      "number": 58,
+      "content": "<p><strong>58.</strong>&nbsp; Tìm công thức một hàm có các tiệm cận đứng\n<span class=\"math inline\">\\(x=1\\)</span>, <span class=\"math inline\">\\(x=3\\)</span> và tiệm cận ngang <span class=\"math inline\">\\(y=1\\)</span>.</p>"
+    },
+    {
+      "number": 59,
+      "content": "<p><strong>59.</strong>&nbsp; Hàm <span class=\"math inline\">\\(f\\)</span> là\ntỉ số của hai đa thức bậc hai, có tiệm cận đứng <span class=\"math inline\">\\(x=4\\)</span> và chỉ một giao điểm với trục hoành,\ntại <span class=\"math inline\">\\(x=1\\)</span>. Biết <span class=\"math inline\">\\(f\\)</span> có gián đoạn có thể khử tại <span class=\"math inline\">\\(x=-1\\)</span> và <span class=\"math inline\">\\(\\lim_{x\\to-1}f(x)=2\\)</span>. Tính: <span class=\"math display\">\\[(a)\\quad\nf(0);\\qquad(b)\\quad\\lim_{x\\to\\infty}f(x).\\]</span></p>"
+    },
+    {
+      "number": 60,
+      "content": "<p><strong>60–64. Tìm giới hạn khi <span class=\"math inline\">\\(x\\to\\infty\\)</span> và <span class=\"math inline\">\\(x\\to-\\infty\\)</span>. Dùng các kết quả cùng các\ngiao điểm với trục tọa độ để phác họa đồ thị như Ví dụ 12.</strong></p><p><strong>60.</strong>&nbsp; <span class=\"math inline\">\\(y=2x^3-x^4\\)</span>.</p><div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-2-6-fbbc38a2/f13.png\" alt=\"image\"><br>\n<span>Hình 13. <span class=\"math inline\">\\(y=(x-2)^4(x+1)^3(x-1)\\)</span>. <span class=\"math inline\">\\(\\square\\)</span></span></p>\n</div>"
+    },
+    {
+      "number": 61,
+      "content": "<p><strong>60–64. Tìm giới hạn khi <span class=\"math inline\">\\(x\\to\\infty\\)</span> và <span class=\"math inline\">\\(x\\to-\\infty\\)</span>. Dùng các kết quả cùng các\ngiao điểm với trục tọa độ để phác họa đồ thị như Ví dụ 12.</strong></p><p><strong>61.</strong>&nbsp; <span class=\"math inline\">\\(y=x^4-x^6\\)</span>.</p><div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-2-6-fbbc38a2/f13.png\" alt=\"image\"><br>\n<span>Hình 13. <span class=\"math inline\">\\(y=(x-2)^4(x+1)^3(x-1)\\)</span>. <span class=\"math inline\">\\(\\square\\)</span></span></p>\n</div>"
+    },
+    {
+      "number": 62,
+      "content": "<p><strong>60–64. Tìm giới hạn khi <span class=\"math inline\">\\(x\\to\\infty\\)</span> và <span class=\"math inline\">\\(x\\to-\\infty\\)</span>. Dùng các kết quả cùng các\ngiao điểm với trục tọa độ để phác họa đồ thị như Ví dụ 12.</strong></p><p><strong>62.</strong>&nbsp; <span class=\"math inline\">\\(y=x^3(x+2)^2(x-1)\\)</span>.</p><div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-2-6-fbbc38a2/f13.png\" alt=\"image\"><br>\n<span>Hình 13. <span class=\"math inline\">\\(y=(x-2)^4(x+1)^3(x-1)\\)</span>. <span class=\"math inline\">\\(\\square\\)</span></span></p>\n</div>"
+    },
+    {
+      "number": 63,
+      "content": "<p><strong>60–64. Tìm giới hạn khi <span class=\"math inline\">\\(x\\to\\infty\\)</span> và <span class=\"math inline\">\\(x\\to-\\infty\\)</span>. Dùng các kết quả cùng các\ngiao điểm với trục tọa độ để phác họa đồ thị như Ví dụ 12.</strong></p><p><strong>63.</strong>&nbsp; <span class=\"math inline\">\\(y=(3-x)(1+x)^2(1-x)^4\\)</span>.</p><div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-2-6-fbbc38a2/f13.png\" alt=\"image\"><br>\n<span>Hình 13. <span class=\"math inline\">\\(y=(x-2)^4(x+1)^3(x-1)\\)</span>. <span class=\"math inline\">\\(\\square\\)</span></span></p>\n</div>"
+    },
+    {
+      "number": 64,
+      "content": "<p><strong>60–64. Tìm giới hạn khi <span class=\"math inline\">\\(x\\to\\infty\\)</span> và <span class=\"math inline\">\\(x\\to-\\infty\\)</span>. Dùng các kết quả cùng các\ngiao điểm với trục tọa độ để phác họa đồ thị như Ví dụ 12.</strong></p><p><strong>64.</strong>&nbsp; <span class=\"math inline\">\\(y=x^2(x^2-1)^2(x+2)\\)</span>.</p><div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-2-6-fbbc38a2/f13.png\" alt=\"image\"><br>\n<span>Hình 13. <span class=\"math inline\">\\(y=(x-2)^4(x+1)^3(x-1)\\)</span>. <span class=\"math inline\">\\(\\square\\)</span></span></p>\n</div>"
+    },
+    {
+      "number": 65,
+      "content": "<p><strong>65.</strong>&nbsp; (a) Dùng Định lý kẹp để tính <span class=\"math inline\">\\(\\lim_{x\\to\\infty}(\\sin x)/x\\)</span>.</p>\n<p>(b) Vẽ đồ thị <span class=\"math inline\">\\(f(x)=(\\sin x)/x\\)</span>.\nĐồ thị cắt tiệm cận bao nhiêu lần?</p>"
+    },
+    {
+      "number": 66,
+      "content": "<p><strong>66.</strong>&nbsp; <strong>Dáng điệu tại vô cực của hàm\nsố.</strong> Dáng điệu tại vô cực là dáng điệu các giá trị hàm khi <span class=\"math inline\">\\(x\\to\\infty\\)</span> và <span class=\"math inline\">\\(x\\to-\\infty\\)</span>.</p>\n<p>(a) Mô tả và so sánh dáng điệu tại vô cực của <span class=\"math display\">\\[P(x)=3x^5-5x^3+2x,\\qquad Q(x)=3x^5\\]</span> bằng\ncách vẽ cả hai trong các cửa sổ <span class=\"math inline\">\\([-2,2]\\times[-2,2]\\)</span> và <span class=\"math inline\">\\([-10,10]\\times[-10\\,000,10\\,000]\\)</span>.</p>\n<p>(b) Hai hàm được nói là có cùng dáng điệu tại vô cực nếu tỉ số của\nchúng tiến đến 1 khi <span class=\"math inline\">\\(x\\to\\infty\\)</span>.\nChứng tỏ <span class=\"math inline\">\\(P\\)</span> và <span class=\"math inline\">\\(Q\\)</span> có cùng dáng điệu tại vô cực.</p>"
+    },
+    {
+      "number": 67,
+      "content": "<p><strong>67.</strong>&nbsp; Tìm <span class=\"math inline\">\\(\\lim_{x\\to\\infty}f(x)\\)</span> nếu với mọi <span class=\"math inline\">\\(x&gt;1\\)</span>, <span class=\"math display\">\\[\\frac{10e^x-21}{2e^x}&lt;f(x)&lt;\\frac{5\\sqrt\nx}{\\sqrt x-1}.\\]</span></p>"
+    },
+    {
+      "number": 68,
+      "content": "<p><strong>68.</strong>&nbsp; (a) Một bể chứa 5000 L nước tinh khiết. Nước\nmuối chứa 30 g muối trên mỗi lít được bơm vào bể với lưu lượng 25\nL/phút. Chứng tỏ nồng độ muối sau <span class=\"math inline\">\\(t\\)</span>\nphút (đơn vị g/L) là <span class=\"math display\">\\[C(t)=\\frac{30t}{200+t}.\\]</span> (b) Nồng độ biến\nthiên thế nào khi <span class=\"math inline\">\\(t\\to\\infty\\)</span>?</p>"
+    },
+    {
+      "number": 69,
+      "content": "<p><strong>69.</strong>&nbsp; Trong Chương 9, dưới những giả thiết thích hợp,\nta sẽ chứng minh vận tốc <span class=\"math inline\">\\(v(t)\\)</span> của\nmột giọt mưa rơi tại thời điểm <span class=\"math inline\">\\(t\\)</span> là\n<span class=\"math display\">\\[v(t)=v^*(1-e^{-gt/v^*}),\\]</span> trong đó\n<span class=\"math inline\">\\(g\\)</span> là gia tốc trọng trường, <span class=\"math inline\">\\(v^*\\)</span> là vận tốc giới hạn của giọt mưa.</p>\n<p>(a) Tìm <span class=\"math inline\">\\(\\lim_{t\\to\\infty}v(t)\\)</span>.</p>\n<p>(b) Vẽ đồ thị <span class=\"math inline\">\\(v(t)\\)</span> khi <span class=\"math inline\">\\(v^*=1\\)</span> m/s và <span class=\"math inline\">\\(g=9.8\\)</span> <span class=\"math inline\">\\(\\mathrm{m/s^2}\\)</span>. Mất bao lâu để vận tốc\ngiọt mưa đạt 99% vận tốc giới hạn?</p>"
+    },
+    {
+      "number": 70,
+      "content": "<p><strong>70.</strong>&nbsp; (a) Vẽ <span class=\"math inline\">\\(y=e^{-x/10}\\)</span> và <span class=\"math inline\">\\(y=0.1\\)</span> trên cùng màn hình để tìm xem cần\nchọn <span class=\"math inline\">\\(x\\)</span> lớn đến mức nào để <span class=\"math inline\">\\(e^{-x/10}&lt;0.1\\)</span>.</p>\n<p>(b) Có thể giải (a) mà không dùng đồ thị không?</p>"
+    },
+    {
+      "number": 71,
+      "content": "<p><strong>71.</strong>&nbsp; Dùng đồ thị để tìm số <span class=\"math inline\">\\(N\\)</span> sao cho <span class=\"math display\">\\[x&gt;N\\quad\\Longrightarrow\\quad\\left|\\frac{3x^2+1}{2x^2+x+1}-1.5\\right|&lt;0.05.\\]</span></p>"
+    },
+    {
+      "number": 72,
+      "content": "<p><strong>72.</strong>&nbsp; Với giới hạn <span class=\"math inline\">\\(\\displaystyle\\lim_{x\\to\\infty}\\frac{1-3x}{\\sqrt{x^2+1}}=-3\\)</span>,\nminh họa Định nghĩa 7 bằng cách tìm các giá trị <span class=\"math inline\">\\(N\\)</span> tương ứng với <span class=\"math inline\">\\(\\varepsilon=0.1\\)</span> và <span class=\"math inline\">\\(\\varepsilon=0.05\\)</span>.</p>"
+    },
+    {
+      "number": 73,
+      "content": "<p><strong>73.</strong>&nbsp; Với giới hạn <span class=\"math inline\">\\(\\displaystyle\\lim_{x\\to-\\infty}\\frac{1-3x}{\\sqrt{x^2+1}}=3\\)</span>,\nminh họa Định nghĩa 8 bằng cách tìm các giá trị <span class=\"math inline\">\\(N\\)</span> tương ứng với <span class=\"math inline\">\\(\\varepsilon=0.1\\)</span> và <span class=\"math inline\">\\(\\varepsilon=0.05\\)</span>.</p>"
+    },
+    {
+      "number": 74,
+      "content": "<p><strong>74.</strong>&nbsp; Với giới hạn <span class=\"math inline\">\\(\\displaystyle\\lim_{x\\to\\infty}\\sqrt{x}\\ln\nx=\\infty\\)</span>, minh họa Định nghĩa 9 bằng cách tìm giá trị <span class=\"math inline\">\\(N\\)</span> tương ứng với <span class=\"math inline\">\\(M=100\\)</span>.</p>"
+    },
+    {
+      "number": 75,
+      "content": "<p><strong>75.</strong>&nbsp; (a) Cần chọn <span class=\"math inline\">\\(x\\)</span> lớn đến mức nào để <span class=\"math inline\">\\(1/x^2&lt;0.0001\\)</span>?</p>\n<p>(b) Lấy <span class=\"math inline\">\\(r=2\\)</span> trong Định lý 5, ta\ncó <span class=\"math inline\">\\(\\lim_{x\\to\\infty}1/x^2=0\\)</span>. Chứng\nminh trực tiếp bằng Định nghĩa 7.</p>"
+    },
+    {
+      "number": 76,
+      "content": "<p><strong>76.</strong>&nbsp; (a) Cần chọn <span class=\"math inline\">\\(x\\)</span> lớn đến mức nào để <span class=\"math inline\">\\(1/\\sqrt{x}&lt;0.0001\\)</span>?</p>\n<p>(b) Lấy <span class=\"math inline\">\\(r=1/2\\)</span> trong Định lý 5,\nta có <span class=\"math inline\">\\(\\lim_{x\\to\\infty}1/\\sqrt{x}=0\\)</span>. Chứng minh\ntrực tiếp bằng Định nghĩa 7.</p>"
+    },
+    {
+      "number": 77,
+      "content": "<p><strong>77.</strong>&nbsp; Dùng Định nghĩa 8 chứng minh <span class=\"math inline\">\\(\\lim_{x\\to-\\infty}1/x=0\\)</span>.</p>"
+    },
+    {
+      "number": 78,
+      "content": "<p><strong>78.</strong>&nbsp; Dùng Định nghĩa 9 chứng minh <span class=\"math inline\">\\(\\lim_{x\\to\\infty}x^3=\\infty\\)</span>.</p>"
+    },
+    {
+      "number": 79,
+      "content": "<p><strong>79.</strong>&nbsp; Dùng Định nghĩa 9 chứng minh <span class=\"math inline\">\\(\\lim_{x\\to\\infty}e^x=\\infty\\)</span>.</p>"
+    },
+    {
+      "number": 80,
+      "content": "<p><strong>80.</strong>&nbsp; Phát biểu định nghĩa chính xác của <span class=\"math inline\">\\(\\lim_{x\\to-\\infty}f(x)=-\\infty\\)</span>. Sau đó\ndùng định nghĩa ấy chứng minh <span class=\"math display\">\\[\\lim_{x\\to-\\infty}(1+x^3)=-\\infty.\\]</span></p>"
+    },
+    {
+      "number": 81,
+      "content": "<p><strong>81.</strong>&nbsp; (a) Chứng minh rằng <span class=\"math display\">\\[\\lim_{x\\to\\infty}f(x)=\\lim_{t\\to0^+}f(1/t),\\qquad\\lim_{x\\to-\\infty}f(x)=\\lim_{t\\to0^-}f(1/t),\\]</span>\nvới giả thiết các giới hạn này tồn tại.</p>\n<p>(b) Dùng (a) và Bài tập 65 để tìm <span class=\"math inline\">\\(\\displaystyle\\lim_{x\\to0^+}x\\sin\\frac1x\\)</span>.</p>"
+    }
+  ]
+}

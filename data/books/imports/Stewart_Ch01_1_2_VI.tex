@@ -1,0 +1,377 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage{fontspec}
+\setmainfont{Latin Modern Roman}
+\setsansfont{DejaVu Sans}
+\usepackage{amsmath,amssymb,graphicx,geometry,enumitem,longtable,booktabs,fancyhdr,hyperref}
+\geometry{left=28mm,right=23mm,top=24mm,bottom=24mm}
+\hypersetup{unicode=true,colorlinks=true,linkcolor=black,urlcolor=blue,pdftitle={Giải tích Chương 1 Mục 1.2 Mô hình toán học}}
+\setlength{\parindent}{1.2em}\setlength{\parskip}{4pt}\setlength{\headheight}{16pt}
+\pagestyle{fancy}\fancyhf{}\fancyhead[L]{\small Chương 1. Hàm số và mô hình}\fancyhead[R]{\small §1.2}\fancyfoot[C]{\thepage}
+\newcommand{\fig}[3][.68]{\begin{center}\includegraphics[width=#1\linewidth]{assets/#2.png}\\{\small #3}\end{center}}
+\newcommand{\ex}[1]{\par\medskip\noindent\textbf{Ví dụ #1.}\ }
+\newcommand{\sol}{\par\noindent\textit{Lời giải.}\ }
+\newcommand{\bt}[1]{\par\smallskip\noindent\textbf{#1.}\ }
+\newcommand{\group}[1]{\par\medskip\noindent\textbf{#1}\par}
+\begin{document}
+\begin{center}
+{\Large\bfseries GIẢI TÍCH}\\[5pt]
+{\large Chương 1. Hàm số và mô hình}\\[9pt]
+{\Large\bfseries 1.2. Mô hình toán học}\\[4pt]
+{\large\bfseries Một danh mục các hàm số cơ bản}
+\end{center}
+\noindent\textbf{Nguồn:} James Stewart, Daniel K. Clegg, Saleem Watson, \textit{Calculus: Early Transcendentals}, ấn bản thứ 9. Phạm vi: từ đầu §1.2 ở trang in 21 đến hết Bài tập 37 ở trang in 36 (trang PDF 56–71), trước §1.3.
+
+\noindent\textbf{Quy ước biên tập:} Thuật ngữ kế thừa §1.1. Giữ nguyên số ví dụ, hình, bảng, phương trình và bài tập trong mục gốc. Công thức và bảng số liệu được nhập lại; hình đồ thị được trích từ sách để bảo toàn đường cong và dữ liệu. Hình 1 được dàn lại bằng tiếng Việt theo đúng các bước của sơ đồ gốc. Những nhãn tiếng Anh còn trong hình có chú giải tiếng Việt ở chú thích. Các dự báo theo năm trong ví dụ được giữ nguyên như những minh họa lịch sử của sách. Ghi chú biên tập và thuật ngữ bổ sung nằm riêng ở cuối.
+
+\section*{Mô hình toán học và quá trình mô hình hóa}
+Một \textbf{mô hình toán học} là sự mô tả bằng toán học, thường thông qua một hàm số hoặc một phương trình, về một hiện tượng thực tế: chẳng hạn quy mô dân số, nhu cầu đối với một sản phẩm, tốc độ của vật rơi, nồng độ của một sản phẩm trong phản ứng hóa học, tuổi thọ kỳ vọng của một người khi mới sinh, hoặc chi phí giảm phát thải. Mục đích của mô hình là giúp hiểu hiện tượng và có thể dự báo diễn biến của nó trong tương lai.
+
+Với một bài toán thực tế đã cho, nhiệm vụ đầu tiên trong quá trình \textbf{mô hình hóa toán học} là thiết lập mô hình: xác định, đặt tên các biến độc lập và phụ thuộc, đồng thời đưa ra những giả thiết đơn giản hóa hiện tượng đến mức có thể xử lý bằng toán học. Ta dùng hiểu biết về tình huống thực tế và các kỹ năng toán học để lập những phương trình liên hệ các biến. Khi không có định luật vật lý làm cơ sở, ta có thể phải thu thập dữ liệu từ Internet, thư viện hoặc từ những thí nghiệm tự tiến hành, rồi xem xét dữ liệu dưới dạng bảng để nhận ra quy luật. Từ cách biểu diễn hàm số bằng số này, ta có thể chuyển sang biểu diễn bằng đồ thị bằng cách chấm các điểm dữ liệu. Trong một số trường hợp, đồ thị còn gợi ý một công thức đại số thích hợp.
+
+Giai đoạn thứ hai là áp dụng kiến thức toán học đã biết, chẳng hạn các kiến thức giải tích sẽ được xây dựng trong sách này, vào mô hình đã thiết lập để suy ra những kết luận toán học. Ở giai đoạn thứ ba, ta diễn giải các kết luận ấy thành thông tin về hiện tượng thực tế ban đầu, nhằm giải thích hiện tượng hoặc đưa ra dự báo. Bước cuối cùng là kiểm nghiệm dự báo bằng cách đối chiếu với dữ liệu thực tế mới. Nếu dự báo không phù hợp với thực tế, ta cần hiệu chỉnh mô hình hoặc xây dựng mô hình mới rồi lặp lại chu trình. Hình 1 minh họa quá trình đó.
+\fig[1]{f01}{Hình 1. Quá trình mô hình hóa.}
+Một mô hình toán học không bao giờ biểu diễn hoàn toàn chính xác một tình huống vật lý: nó là một sự lý tưởng hóa. Mô hình tốt đơn giản hóa thực tế đủ để thực hiện các tính toán toán học, nhưng vẫn đủ chính xác để đưa ra những kết luận có giá trị. Cần nhận thức rõ các giới hạn của mô hình.
+
+Có nhiều loại hàm số dùng để mô hình hóa các mối quan hệ quan sát được trong thực tế. Sau đây, ta khảo sát dáng điệu và đồ thị của một số loại hàm số, đồng thời nêu các tình huống thích hợp để mô hình hóa bằng chúng.
+
+\section*{Mô hình tuyến tính}
+Khi nói $y$ là một \textbf{hàm tuyến tính} của $x$, ta hiểu rằng đồ thị của hàm số là một đường thẳng. Vì thế, dùng dạng phương trình đường thẳng theo hệ số góc và tung độ gốc, ta viết
+\[y=f(x)=mx+b,\]
+trong đó $m$ là hệ số góc của đường thẳng và $b$ là tung độ gốc.
+
+\noindent\textit{Chú thích bên lề của bản gốc:} Hình học tọa độ của đường thẳng được ôn tập ở Phụ lục B.
+
+Đặc trưng của hàm tuyến tính là biến thiên với tốc độ không đổi. Chẳng hạn, Hình 2 cho đồ thị của $f(x)=3x-2$ và một bảng giá trị mẫu. Mỗi khi $x$ tăng $0.1$, giá trị $f(x)$ tăng $0.3$. Như vậy, $f(x)$ tăng nhanh gấp ba lần $x$. Điều đó có nghĩa là hệ số góc $3$ của đồ thị $y=3x-2$ có thể được hiểu là tốc độ biến thiên của $y$ theo $x$.
+\fig[.40]{f02}{Hình 2. Đồ thị hàm tuyến tính $f(x)=3x-2$.}
+\begin{center}\textit{Bảng giá trị đi kèm Hình 2}\\[4pt]
+\begin{tabular}{cc}\toprule$x$&$f(x)=3x-2$\\\midrule
+1.0&1.0\\1.1&1.3\\1.2&1.6\\1.3&1.9\\1.4&2.2\\1.5&2.5\\\bottomrule\end{tabular}\end{center}
+
+\ex{1} (a) Khi không khí khô chuyển động lên cao, nó giãn nở và lạnh đi. Biết nhiệt độ mặt đất là $20^\circ\mathrm C$ và nhiệt độ ở độ cao 1 km là $10^\circ\mathrm C$, hãy biểu diễn nhiệt độ $T$ (độ C) theo độ cao $h$ (km), giả sử mô hình tuyến tính là thích hợp.
+
+(b) Vẽ đồ thị hàm số ở câu (a). Hệ số góc biểu thị điều gì?\\
+(c) Nhiệt độ ở độ cao $2.5$ km là bao nhiêu?
+\sol (a) Vì giả sử $T$ là hàm tuyến tính của $h$, ta viết
+\[T=mh+b.\]
+Khi $h=0$, $T=20$, nên $20=m\cdot0+b=b$. Nói cách khác, tung độ gốc là $b=20$. Khi $h=1$, $T=10$, nên
+\[10=m\cdot1+20.\]
+Do đó, hệ số góc là $m=10-20=-10$ và hàm tuyến tính cần tìm là
+\[T=-10h+20.\]
+(b) Đồ thị được phác họa ở Hình 3. Hệ số góc $m=-10\,{}^\circ\mathrm C/\mathrm{km}$ biểu thị tốc độ biến thiên của nhiệt độ theo độ cao.
+\fig[.42]{f03}{Hình 3. Mô hình nhiệt độ theo độ cao.}
+(c) Ở độ cao $h=2.5$ km, nhiệt độ là
+\[T=-10(2.5)+20=-5^\circ\mathrm C.\]
+Nếu không có định luật hoặc nguyên lý vật lý để thiết lập mô hình, ta xây dựng một \textbf{mô hình thực nghiệm}, hoàn toàn dựa trên dữ liệu thu thập được. Ta tìm một đường cong ``khớp'' dữ liệu, theo nghĩa phản ánh được xu thế cơ bản của các điểm dữ liệu.
+
+\ex{2} Bảng 1 cho nồng độ carbon dioxide trung bình trong khí quyển, tính bằng phần triệu, được đo tại Đài quan trắc Mauna Loa từ 1980 đến 2016. Dùng dữ liệu để tìm một mô hình cho nồng độ carbon dioxide.
+\begin{center}\textbf{Bảng 1}\\[4pt]
+\begin{tabular}{rr@{\qquad}rr}\toprule
+Năm&Nồng độ $\mathrm{CO}_2$ (ppm)&Năm&Nồng độ $\mathrm{CO}_2$ (ppm)\\\midrule
+1980&338.7&2000&369.4\\1984&344.4&2004&377.5\\1988&351.5&2008&385.6\\1992&356.3&2012&393.8\\1996&362.4&2016&404.2\\\bottomrule\end{tabular}\end{center}
+\sol Từ Bảng 1, lập biểu đồ phân tán ở Hình 4, trong đó $t$ biểu thị thời gian (năm), còn $C$ là nồng độ $\mathrm{CO}_2$ (phần triệu, ppm).
+\fig[.64]{f04}{Hình 4. Biểu đồ phân tán nồng độ $\mathrm{CO}_2$ trung bình.}
+Các điểm dữ liệu có vẻ nằm gần một đường thẳng, nên việc chọn mô hình tuyến tính là tự nhiên. Tuy nhiên, có nhiều đường thẳng xấp xỉ tập dữ liệu này; ta nên chọn đường nào? Một khả năng là đường thẳng qua điểm đầu và điểm cuối. Hệ số góc của đường thẳng này là
+\[\frac{404.2-338.7}{2016-1980}=\frac{65.5}{36}\approx1.819.\]
+Phương trình của nó là
+\[C-338.7=1.819(t-1980),\]
+hay
+\begin{equation}C=1.819t-3262.92.\tag{1}\end{equation}
+Phương trình (1) cho một mô hình tuyến tính của nồng độ $\mathrm{CO}_2$, có đồ thị ở Hình 5. Mô hình cho giá trị cao hơn phần lớn các giá trị thực tế. Một mô hình tuyến tính tốt hơn được xây dựng bằng một phương pháp thống kê gọi là \textbf{hồi quy tuyến tính}. Nhiều máy tính vẽ đồ thị và phần mềm máy tính có thể xác định đường hồi quy của một tập dữ liệu. Một máy tính như vậy cho hệ số góc và tung độ gốc của đường hồi quy đối với Bảng 1 là
+\[m=1.78242,\qquad b=-3192.90.\]
+Vì thế, mô hình bình phương tối thiểu cho nồng độ $\mathrm{CO}_2$ là
+\begin{equation}C=1.78242t-3192.90.\tag{2}\end{equation}
+Hình 6 biểu diễn đường hồi quy cùng các điểm dữ liệu. So với Hình 5, đường hồi quy khớp dữ liệu tốt hơn.
+\fig[.64]{f05}{Hình 5. Mô hình tuyến tính qua điểm dữ liệu đầu và cuối.}
+\fig[.64]{f06}{Hình 6. Đường hồi quy.}
+\noindent\textit{Chú thích bên lề:} Máy tính xác định đường hồi quy bằng \textbf{phương pháp bình phương tối thiểu}: cực tiểu hóa tổng bình phương các khoảng cách theo phương thẳng đứng từ các điểm dữ liệu đến đường thẳng. Chi tiết được trình bày trong Bài tập 14.7.61.
+
+\ex{3} Dùng mô hình tuyến tính (2) để ước lượng nồng độ $\mathrm{CO}_2$ trung bình năm 1987 và dự báo nồng độ năm 2025. Theo mô hình này, khi nào nồng độ $\mathrm{CO}_2$ vượt 440 phần triệu?
+\sol Thay $t=1987$ vào (2), ta ước lượng
+\[C(1987)=1.78242(1987)-3192.90\approx348.77.\]
+Đây là \textbf{nội suy}, vì ta ước lượng một giá trị nằm giữa các giá trị đã quan sát. Trên thực tế, Đài quan trắc Mauna Loa công bố nồng độ trung bình năm 1987 là $348.93$ ppm; vì vậy, ước lượng khá chính xác.
+
+Với $t=2025$,
+\[C(2025)=1.78242(2025)-3192.90\approx416.50.\]
+Ta dự báo nồng độ $\mathrm{CO}_2$ trung bình năm 2025 là $416.5$ ppm. Đây là \textbf{ngoại suy}, vì giá trị dự báo nằm ngoài khoảng thời gian quan sát. Do đó, mức độ chắc chắn về độ chính xác của dự báo thấp hơn nhiều.
+
+Theo (2), nồng độ vượt 440 ppm khi
+\[1.78242t-3192.90>440.\]
+Giải bất phương trình:
+\[t>\frac{3632.9}{1.78242}\approx2038.18.\]
+Vì vậy, ta dự báo nồng độ $\mathrm{CO}_2$ vượt 440 ppm vào năm 2038. Dự báo này có rủi ro vì thời điểm dự báo cách xa thời gian quan sát. Thật vậy, Hình 6 cho thấy những năm gần cuối chuỗi dữ liệu có xu thế tăng nhanh hơn, nên nồng độ có thể vượt 440 ppm sớm hơn nhiều so với năm 2038.
+
+\section*{Hàm đa thức}
+Một hàm số $P$ được gọi là \textbf{đa thức} nếu
+\[P(x)=a_nx^n+a_{n-1}x^{n-1}+\cdots+a_2x^2+a_1x+a_0,\]
+trong đó $n$ là số nguyên không âm và $a_0,a_1,a_2,\ldots,a_n$ là các hằng số, gọi là \textbf{hệ số} của đa thức. Tập xác định của mọi đa thức là $\mathbb R=(-\infty,\infty)$. Nếu hệ số cao nhất $a_n\ne0$, thì \textbf{bậc} của đa thức là $n$. Chẳng hạn,
+\[P(x)=2x^6-x^4+\frac25x^3+\sqrt2\]
+là đa thức bậc 6.
+
+Đa thức bậc 1 có dạng $P(x)=mx+b$, nên là một hàm tuyến tính. Đa thức bậc 2 có dạng $P(x)=ax^2+bx+c$, gọi là \textbf{hàm bậc hai}. Đồ thị của nó luôn là một parabol thu được bằng cách tịnh tiến parabol $y=ax^2$, như sẽ thấy ở §1.3. Parabol mở lên nếu $a>0$ và mở xuống nếu $a<0$ (Hình 7).
+\fig[.42]{f07}{Hình 7. Đồ thị các hàm bậc hai là parabol.\\ (a) $y=x^2+x+1$; (b) $y=-2x^2+3x+1$.}
+Đa thức bậc 3 có dạng
+\[P(x)=ax^3+bx^2+cx+d,\qquad a\ne0,\]
+và được gọi là \textbf{hàm bậc ba}. Hình 8(a) biểu diễn một hàm bậc ba; Hình 8(b), (c) biểu diễn các đa thức bậc 4 và 5. Sau này ta sẽ giải thích vì sao đồ thị có những hình dạng đó.
+\fig[.95]{f08}{Hình 8. (a) $y=x^3-x+1$; (b) $y=x^4-3x^2+x$;\\ (c) $y=3x^5-25x^3+60x$.}
+Đa thức thường được dùng để mô hình hóa những đại lượng trong khoa học tự nhiên và khoa học xã hội. Chẳng hạn, ở §3.7 ta sẽ giải thích vì sao các nhà kinh tế thường dùng một đa thức $P(x)$ để biểu diễn chi phí sản xuất $x$ đơn vị hàng hóa. Ví dụ tiếp theo dùng hàm bậc hai để mô hình hóa chuyển động rơi của quả bóng.
+
+\ex{4} Một quả bóng được thả từ đài quan sát phía trên của Tháp CN, ở độ cao 450 m so với mặt đất. Độ cao $h$ được ghi sau mỗi giây như Bảng 2. Tìm một mô hình khớp dữ liệu và dùng mô hình dự báo thời điểm bóng chạm đất.
+\begin{center}\textbf{Bảng 2}\\[4pt]
+\begin{tabular}{rr@{\qquad}rr}\toprule
+Thời gian (s)&Độ cao (m)&Thời gian (s)&Độ cao (m)\\\midrule
+0&450&5&332\\1&445&6&279\\2&431&7&216\\3&408&8&143\\4&375&9&61\\\bottomrule\end{tabular}\end{center}
+\sol Biểu đồ phân tán ở Hình 9 cho thấy mô hình tuyến tính không thích hợp. Các điểm dữ liệu có vẻ nằm trên một parabol, nên ta thử mô hình bậc hai. Dùng máy tính vẽ đồ thị hoặc hệ thống đại số máy tính có áp dụng phương pháp bình phương tối thiểu, ta thu được
+\begin{equation}h=449.36+0.96t-4.90t^2.\tag{3}\end{equation}
+\fig[.54]{f09}{Hình 9. Biểu đồ phân tán cho quả bóng rơi.\\ $h$: độ cao (m); $t$: thời gian (s).}
+\fig[.54]{f10}{Hình 10. Mô hình bậc hai cho quả bóng rơi.}
+Hình 10 biểu diễn (3) cùng các điểm dữ liệu; mô hình bậc hai khớp rất tốt. Quả bóng chạm đất khi $h=0$, nên ta giải
+\[-4.90t^2+0.96t+449.36=0.\]
+Công thức nghiệm của phương trình bậc hai cho
+\[t=\frac{-0.96\pm\sqrt{(0.96)^2-4(-4.90)(449.36)}}{2(-4.90)}.\]
+Nghiệm dương là $t\approx9.67$, nên ta dự báo bóng chạm đất sau khoảng $9.7$ giây rơi.
+
+\section*{Hàm lũy thừa}
+Hàm số dạng $f(x)=x^a$, trong đó $a$ là hằng số, được gọi là \textbf{hàm lũy thừa}. Ta xét một số trường hợp.
+\subsection*{(i) $a=n$, với $n$ là số nguyên dương}
+Hình 11 cho đồ thị của $f(x)=x^n$ với $n=1,2,3,4,5$. Đây là các đa thức chỉ có một hạng tử. Ta đã biết đồ thị $y=x$ là đường thẳng qua gốc tọa độ, hệ số góc 1; đồ thị $y=x^2$ là parabol [Ví dụ 1.1.2(b)].
+\fig[1]{f11}{Hình 11. Đồ thị $f(x)=x^n$, với $n=1,2,3,4,5$.}
+Dạng tổng quát của đồ thị $f(x)=x^n$ phụ thuộc vào tính chẵn lẻ của $n$. Nếu $n$ chẵn, $f$ là hàm số chẵn, đồ thị có dạng tương tự parabol $y=x^2$. Nếu $n$ lẻ, $f$ là hàm số lẻ, đồ thị có dạng tương tự $y=x^3$. Tuy nhiên, Hình 12 cho thấy khi $n$ tăng, đồ thị $y=x^n$ phẳng hơn ở gần 0 và dốc hơn khi $|x|>1$. Nếu $|x|$ nhỏ, thì $x^2$ nhỏ hơn về độ lớn, $x^3$ còn nhỏ hơn, $x^4$ lại nhỏ hơn nữa, v.v.
+\fig[.90]{f12}{Hình 12. Các họ hàm lũy thừa với số mũ chẵn và số mũ lẻ.}
+\noindent\textit{Chú thích bên lề:} Một \textbf{họ hàm số} là một tập hợp các hàm số có phương trình liên hệ với nhau. Hình 12 cho hai họ hàm lũy thừa, một họ với số mũ chẵn và một họ với số mũ lẻ.
+
+\subsection*{(ii) $a=1/n$, với $n$ là số nguyên dương}
+Hàm số $f(x)=x^{1/n}=\sqrt[n]x$ là một \textbf{hàm căn thức}. Với $n=2$, ta có \textbf{hàm căn bậc hai} $f(x)=\sqrt x$, tập xác định $[0,\infty)$, đồ thị là nửa trên của parabol $x=y^2$ [Hình 13(a)]. Với các giá trị chẵn khác của $n$, đồ thị $y=\sqrt[n]x$ có dạng tương tự $y=\sqrt x$.
+
+Với $n=3$, ta có \textbf{hàm căn bậc ba} $f(x)=\sqrt[3]x$, tập xác định $\mathbb R$, vì mọi số thực đều có căn bậc ba. Đồ thị được cho ở Hình 13(b). Với $n$ lẻ, $n>3$, đồ thị $y=\sqrt[n]x$ có dạng tương tự $y=\sqrt[3]x$.
+\fig[.82]{f13}{Hình 13. Đồ thị các hàm căn thức: (a) $f(x)=\sqrt x$; (b) $f(x)=\sqrt[3]x$.}
+
+\subsection*{(iii) $a=-1$}
+Đồ thị \textbf{hàm nghịch đảo} $f(x)=x^{-1}=1/x$ được cho ở Hình 14. Đồ thị có phương trình $y=1/x$, hay $xy=1$, là một hyperbol có hai trục tọa độ làm các đường tiệm cận. Hàm số này xuất hiện trong vật lý và hóa học liên quan đến \textbf{định luật Boyle}: ở nhiệt độ không đổi, thể tích $V$ của một lượng khí tỉ lệ nghịch với áp suất $P$:
+\[V=\frac CP,\]
+trong đó $C$ là hằng số. Vì vậy, đồ thị của $V$ theo $P$ ở Hình 15 có dạng tổng quát giống nhánh bên phải của Hình 14.
+\fig[.42]{f14}{Hình 14. Hàm nghịch đảo $f(x)=1/x$.}
+\fig[.42]{f15}{Hình 15. Thể tích theo áp suất ở nhiệt độ không đổi.}
+
+\subsection*{(iv) $a=-2$}
+Trong các số mũ âm còn lại của $f(x)=x^a$, trường hợp quan trọng nhất là $a=-2$. Nhiều định luật tự nhiên phát biểu rằng một đại lượng tỉ lệ nghịch với bình phương của đại lượng khác. Nghĩa là đại lượng thứ nhất được mô hình hóa bằng hàm dạng $f(x)=C/x^2$; ta gọi đó là một \textbf{định luật nghịch đảo bình phương}. Chẳng hạn, độ rọi $I$ do một nguồn sáng tạo ra trên vật tỉ lệ nghịch với bình phương khoảng cách $x$ từ vật đến nguồn:
+\[I=\frac C{x^2},\]
+trong đó $C$ là hằng số. Đồ thị $I$ theo $x$ (Hình 17) có dạng tổng quát giống nhánh bên phải của Hình 16.
+\fig[.47]{f16}{Hình 16. Hàm số $y=1/x^2$.}
+\fig[.47]{f17}{Hình 17. Độ rọi theo khoảng cách đến nguồn sáng.}
+Các định luật nghịch đảo bình phương mô hình hóa lực hấp dẫn, độ lớn của âm và lực tĩnh điện giữa hai hạt mang điện. Bài tập 37 nêu một lý do hình học giải thích vì sao các định luật này thường xuất hiện trong tự nhiên.
+
+Hàm lũy thừa còn được dùng để mô hình hóa quan hệ giữa số loài và diện tích nơi cư trú (Bài tập 35–36), cũng như chu kỳ chuyển động của một hành tinh theo khoảng cách đến Mặt Trời (Bài tập 34).
+
+\section*{Hàm hữu tỉ}
+Một \textbf{hàm hữu tỉ} $f$ là thương của hai đa thức:
+\[f(x)=\frac{P(x)}{Q(x)},\]
+trong đó $P$, $Q$ là các đa thức. Tập xác định gồm tất cả $x$ sao cho $Q(x)\ne0$. Ví dụ đơn giản là $f(x)=1/x$, với tập xác định $\{x\mid x\ne0\}$; đây là hàm nghịch đảo ở Hình 14. Hàm số
+\[f(x)=\frac{2x^4-x^2+1}{x^2-4}\]
+là hàm hữu tỉ, có tập xác định $\{x\mid x\ne\pm2\}$. Đồ thị được cho ở Hình 18.
+\fig[.40]{f18}{Hình 18. Đồ thị $f(x)=\dfrac{2x^4-x^2+1}{x^2-4}$.}
+
+\section*{Hàm đại số}
+Một hàm số $f$ được gọi là \textbf{hàm đại số} nếu có thể xây dựng từ các đa thức bằng các phép toán đại số như cộng, trừ, nhân, chia và khai căn. Mọi hàm hữu tỉ đều là hàm đại số. Hai ví dụ khác là
+\[f(x)=\sqrt{x^2+1},\qquad g(x)=\frac{x^4-16x^2}{x+\sqrt x}+(x-2)\sqrt[3]{x+1}.\]
+Ở Chương 4, ta sẽ phác họa nhiều hàm đại số khác nhau và thấy rằng đồ thị của chúng có thể có nhiều hình dạng.
+
+Một ví dụ về hàm đại số xuất hiện trong thuyết tương đối. Khối lượng của một hạt chuyển động với vận tốc $v$ là
+\[m=f(v)=\frac{m_0}{\sqrt{1-v^2/c^2}},\]
+trong đó $m_0$ là khối lượng nghỉ của hạt, còn $c=3.0\times10^5$ km/s là tốc độ ánh sáng trong chân không.
+
+Những hàm số không phải hàm đại số được gọi là \textbf{hàm siêu việt}; trong số đó có các hàm lượng giác, hàm số mũ và hàm lôgarit.
+
+\section*{Hàm lượng giác}
+Lượng giác và các hàm lượng giác được ôn tập ở Trang tham khảo 2 và Phụ lục D. Trong giải tích, ta quy ước luôn dùng \textbf{đơn vị radian}, trừ khi có chỉ dẫn khác. Chẳng hạn, với $f(x)=\sin x$, ta hiểu $\sin x$ là sin của góc có số đo radian bằng $x$. Đồ thị của hàm sin và côsin được cho ở Hình 19.
+
+\noindent\textit{Chú thích bên lề:} Các trang tham khảo được đặt ở đầu và cuối sách gốc.
+\fig[1]{f19}{Hình 19. (a) $f(x)=\sin x$; (b) $g(x)=\cos x$.}
+Cả hai hàm đều có tập xác định $(-\infty,\infty)$ và tập giá trị $[-1,1]$. Vì vậy, với mọi $x$,
+\[-1\le\sin x\le1,\qquad-1\le\cos x\le1,\]
+hay
+\[|\sin x|\le1,\qquad|\cos x|\le1.\]
+Một tính chất quan trọng là sin và côsin là các \textbf{hàm tuần hoàn}, có \textbf{chu kỳ} $2\pi$. Nghĩa là với mọi $x$,
+\[\sin(x+2\pi)=\sin x,\qquad\cos(x+2\pi)=\cos x.\]
+Tính tuần hoàn khiến chúng thích hợp để mô hình hóa các hiện tượng lặp lại như thủy triều, dao động lò xo và sóng âm. Chẳng hạn, trong Ví dụ 1.3.4, ta sẽ thấy một mô hình hợp lý cho số giờ có ánh sáng ban ngày tại Philadelphia, sau ngày 1 tháng Một $t$ ngày, là
+\[L(t)=12+2.8\sin\left[\frac{2\pi}{365}(t-80)\right].\]
+
+\ex{5} Tìm tập xác định của $f(x)=\dfrac1{1-2\cos x}$.
+\sol Hàm số xác định với mọi $x$, trừ những giá trị làm mẫu số bằng 0. Ta có
+\begin{align*}
+1-2\cos x=0
+&\iff\cos x=\frac12\\
+&\iff x=\frac\pi3+2n\pi\quad\text{hoặc}\quad x=\frac{5\pi}3+2n\pi,
+\end{align*}
+trong đó $n$ là số nguyên tùy ý, vì hàm côsin có chu kỳ $2\pi$. Tập xác định của $f$ là tập số thực loại bỏ các giá trị trên.
+
+Hàm tang liên hệ với sin và côsin bởi
+\[\tan x=\frac{\sin x}{\cos x},\]
+có đồ thị ở Hình 20. Hàm không xác định khi $\cos x=0$, tức $x=\pm\pi/2,\pm3\pi/2,\ldots$. Tập giá trị là $(-\infty,\infty)$. Hàm tang có chu kỳ $\pi$:
+\[\tan(x+\pi)=\tan x\qquad\text{với mọi }x\text{ thuộc tập xác định}.\]
+\fig[.48]{f20}{Hình 20. Đồ thị $y=\tan x$.}
+Ba hàm lượng giác còn lại, côsec, sec và côtang, lần lượt là các hàm nghịch đảo của sin, côsin và tang. Đồ thị của chúng được cho ở Phụ lục D.
+
+\section*{Hàm số mũ}
+Các \textbf{hàm số mũ} có dạng $f(x)=b^x$, trong đó cơ số $b$ là một hằng số dương. Đồ thị $y=2^x$ và $y=(0.5)^x$ được cho ở Hình 21. Trong cả hai trường hợp, tập xác định là $(-\infty,\infty)$ và tập giá trị là $(0,\infty)$.
+\fig[.57]{f21}{Hình 21. (a) $y=2^x$; (b) $y=(0.5)^x$.}
+Hàm số mũ sẽ được nghiên cứu chi tiết ở §1.4. Ta sẽ thấy chúng hữu ích trong việc mô hình hóa nhiều hiện tượng tự nhiên, chẳng hạn dân số tăng khi $b>1$ hoặc giảm khi $b<1$.
+
+\section*{Hàm lôgarit}
+Các \textbf{hàm lôgarit} $f(x)=\log_bx$, với cơ số $b$ là hằng số dương, là các hàm ngược của hàm số mũ. Chúng sẽ được nghiên cứu ở §1.5. Hình 22 cho đồ thị của bốn hàm lôgarit với các cơ số khác nhau. Trong mỗi trường hợp đó, tập xác định là $(0,\infty)$, tập giá trị là $(-\infty,\infty)$, và hàm số tăng chậm khi $x>1$.
+\fig[.48]{f22}{Hình 22. Các hàm lôgarit cơ số 2, 3, 5 và 10.}
+
+\ex{6} Phân loại các hàm số sau theo những loại hàm đã xét:
+\begin{align*}
+(a)\quad f(x)&=5^x;&(b)\quad g(x)&=x^5;\\
+(c)\quad h(x)&=\frac{1+x}{1-\sqrt x};&(d)\quad u(t)&=1-t+5t^4.
+\end{align*}
+\sol (a) $f(x)=5^x$ là hàm số mũ; biến $x$ nằm ở số mũ.
+
+(b) $g(x)=x^5$ là hàm lũy thừa; biến $x$ nằm ở cơ số. Cũng có thể xem đây là đa thức bậc 5.
+
+(c) $h(x)=\dfrac{1+x}{1-\sqrt x}$ là hàm đại số. Nó không phải hàm hữu tỉ vì mẫu số không phải đa thức.
+
+(d) $u(t)=1-t+5t^4$ là đa thức bậc 4.
+
+Bảng 3 tổng hợp đồ thị của một số họ hàm cơ bản sẽ thường xuyên được dùng trong sách.
+\clearpage
+\section*{Bảng 3. Các họ hàm cơ bản và đồ thị}
+\noindent\textbf{Hàm tuyến tính:} $f(x)=mx+b$.
+\fig[.94]{t3_1}{Hàm hằng $f(x)=b$ và hàm $f(x)=mx+b$.}
+\noindent\textbf{Hàm lũy thừa:} $f(x)=x^n$.
+\fig[.94]{t3_2}{$f(x)=x^2,\ x^3,\ x^4,\ x^5$.}
+\noindent\textbf{Hàm căn thức:} $f(x)=\sqrt[n]x$.
+\fig[.94]{t3_3}{$f(x)=\sqrt x,\ \sqrt[3]x,\ \sqrt[4]x,\ \sqrt[5]x$.}
+\clearpage
+\noindent\textbf{Bảng 3 (tiếp). Các họ hàm cơ bản và đồ thị}
+
+\noindent\textbf{Hàm nghịch đảo:} $f(x)=1/x^n$.
+\fig[.94]{t3_4}{$f(x)=1/x,\ 1/x^2,\ 1/x^3,\ 1/x^4$.}
+\noindent\textbf{Hàm số mũ và hàm lôgarit:} $f(x)=b^x$, $f(x)=\log_bx$.
+\fig[.94]{t3_5}{$f(x)=b^x$ với $b>1$ và $0<b<1$; $f(x)=\log_bx$ với $b>1$.}
+\noindent\textbf{Hàm lượng giác:} $f(x)=\sin x$, $f(x)=\cos x$, $f(x)=\tan x$.
+\fig[.94]{t3_6}{Các đồ thị sin, côsin và tang.}
+
+\clearpage
+\section*{1.2. Bài tập}
+\group{1–2. Phân loại từng hàm số: hàm lũy thừa, hàm căn thức, đa thức (nêu bậc), hàm hữu tỉ, hàm đại số, hàm lượng giác, hàm số mũ hoặc hàm lôgarit.}
+\bt{1} (a) $f(x)=x^3+3x^2$; (b) $g(t)=\cos^2t-\sin t$; (c) $r(t)=t^{\sqrt3}$; (d) $v(t)=8^t$; (e) $y=\dfrac{\sqrt x}{x^2+1}$; (f) $g(u)=\log_{10}u$.
+\bt{2} (a) $f(t)=\dfrac{3t^2+2}t$; (b) $h(r)=2.3^r$; (c) $s(t)=\sqrt{t+4}$; (d) $y=x^4+5$; (e) $g(x)=\sqrt[3]x$; (f) $y=\dfrac1{x^2}$.
+\group{3–4. Ghép từng phương trình với đồ thị tương ứng. Giải thích lựa chọn; không dùng máy tính điện tử hoặc máy tính vẽ đồ thị.}
+\bt{3} (a) $y=x^2$; (b) $y=x^5$; (c) $y=x^8$.
+\fig[.48]{e03}{Đồ thị cho Bài tập 3.}
+\bt{4} (a) $y=3x$; (b) $y=3^x$; (c) $y=x^3$; (d) $y=\sqrt[3]x$.
+\fig[.48]{e04}{Đồ thị cho Bài tập 4.}
+\group{5–6. Tìm tập xác định của hàm số.}
+\bt{5} $f(x)=\dfrac{\cos x}{1-\sin x}$.
+\bt{6} $g(x)=\dfrac1{1-\tan x}$.
+\bt{7} (a) Tìm phương trình của họ hàm tuyến tính có hệ số góc 2 và phác họa một số hàm trong họ. (b) Tìm phương trình của họ hàm tuyến tính thỏa $f(2)=1$ và phác họa một số hàm trong họ. (c) Hàm số nào thuộc cả hai họ?
+\bt{8} Mọi hàm thuộc họ $f(x)=1+m(x+3)$ có đặc điểm chung nào? Phác họa một số hàm trong họ.
+\bt{9} Mọi hàm thuộc họ $f(x)=c-x$ có đặc điểm chung nào? Phác họa một số hàm trong họ.
+\bt{10} Phác họa một số đa thức trong họ $P(x)=x^3-cx^2$. Đồ thị thay đổi thế nào khi $c$ thay đổi? \textit{Bài có ký hiệu yêu cầu công cụ vẽ đồ thị trong bản gốc.}
+\group{11–12. Tìm công thức của hàm bậc hai có đồ thị như hình.}
+\fig[.94]{e11_12}{Bài tập 11 (trái) và 12 (phải). Giữ nguyên các điểm, tọa độ và vạch chia trong hình gốc.}
+\bt{13} Tìm công thức một hàm bậc ba $f$, biết $f(1)=6$ và $f(-1)=f(0)=f(2)=0$.
+\bt{14} Các nghiên cứu gần thời điểm sách được viết cho thấy nhiệt độ trung bình bề mặt Trái Đất tăng đều. Một số nhà khoa học dùng mô hình tuyến tính $T=0.02t+8.50$, trong đó $T$ tính bằng độ C và $t$ là số năm kể từ 1900. (a) Hệ số góc và giao điểm với trục $T$ biểu thị điều gì? (b) Dùng phương trình dự báo nhiệt độ trung bình bề mặt Trái Đất năm 2100.
+\bt{15} Nếu liều thuốc khuyến nghị cho người trưởng thành là $D$ (mg), thì để xác định liều thích hợp $c$ cho trẻ $a$ tuổi, dược sĩ dùng phương trình $c=0.0417D(a+1)$. Giả sử liều cho người trưởng thành là 200 mg. (a) Tìm hệ số góc của đồ thị $c$. Nó biểu thị điều gì? (b) Liều theo mô hình cho trẻ sơ sinh là bao nhiêu?
+\bt{16} Từ kinh nghiệm, người quản lý một chợ đồ cũ cuối tuần biết rằng nếu giá thuê mỗi chỗ là $x$ đô la thì số chỗ được thuê $y$ thỏa $y=200-4x$. (a) Phác họa đồ thị hàm tuyến tính này; lưu ý giá thuê và số chỗ được thuê đều không thể âm. (b) Hệ số góc, tung độ gốc và hoành độ giao điểm với trục $x$ biểu thị điều gì?
+\bt{17} Quan hệ giữa nhiệt độ Fahrenheit ($F$) và Celsius ($C$) được cho bởi $F=\dfrac95C+32$. (a) Phác họa đồ thị. (b) Hệ số góc là bao nhiêu và biểu thị điều gì? Giao điểm với trục $F$ là gì và biểu thị điều gì?
+\bt{18} Jade và bạn cùng phòng Jari đi làm hằng sáng theo hướng tây trên xa lộ I-10. Một sáng, Jade khởi hành lúc 6 giờ 50 phút; Jari khởi hành muộn hơn 10 phút. Cả hai lái xe với tốc độ không đổi. Đồ thị cho quãng đường (dặm) mỗi người đã đi trên I-10 sau 7 giờ sáng $t$ phút. (a) Dựa vào đồ thị, ai đi nhanh hơn? (b) Tìm tốc độ mỗi người (dặm/giờ). (c) Tìm các hàm tuyến tính $f$ và $g$ mô hình hóa quãng đường Jade và Jari đã đi theo $t$ (phút).
+\fig[.62]{e18}{Đồ thị cho Bài tập 18. Distance traveled (mi): quãng đường (dặm);\\ Time since 7:00 AM (min): thời gian sau 7 giờ sáng (phút).}
+\bt{19} Người quản lý xưởng đồ gỗ thấy chi phí làm 100 chiếc ghế trong một ngày là 2200 đô la, còn làm 300 chiếc là 4800 đô la. (a) Giả sử quan hệ tuyến tính, biểu diễn chi phí theo số ghế sản xuất và phác họa đồ thị. (b) Hệ số góc là bao nhiêu và biểu thị điều gì? (c) Tung độ gốc là bao nhiêu và biểu thị điều gì?
+\bt{20} Chi phí lái ô tô hằng tháng phụ thuộc vào số dặm đã đi. Lynn thấy tháng Năm đi 480 dặm hết 380 đô la, tháng Sáu đi 800 dặm hết 460 đô la. (a) Biểu diễn chi phí tháng $C$ theo quãng đường $d$, giả sử mô hình tuyến tính là thích hợp. (b) Dự báo chi phí nếu đi 1500 dặm mỗi tháng. (c) Vẽ đồ thị; hệ số góc biểu thị điều gì? (d) Giao điểm với trục $C$ biểu thị điều gì? (e) Vì sao hàm tuyến tính thích hợp trong tình huống này?
+\bt{21} Ở mặt biển, áp suất nước bằng áp suất không khí phía trên, là $15\,\mathrm{lb}/\mathrm{in}^2$. Dưới mặt biển, cứ xuống sâu thêm 10 ft, áp suất tăng $4.34\,\mathrm{lb}/\mathrm{in}^2$. (a) Biểu diễn áp suất theo độ sâu. (b) Ở độ sâu nào áp suất là $100\,\mathrm{lb}/\mathrm{in}^2$?
+\bt{22} Điện trở $R$ của dây dẫn có chiều dài cố định liên hệ với đường kính $x$ theo định luật nghịch đảo bình phương $R(x)=kx^{-2}$. (a) Dây có đường kính $0.005$ m và điện trở $140\,\Omega$. Tìm $k$. (b) Tìm điện trở của dây cùng vật liệu, cùng chiều dài nhưng đường kính $0.008$ m.
+\bt{23} Độ rọi trên vật do một nguồn sáng tạo ra liên hệ với khoảng cách đến nguồn theo định luật nghịch đảo bình phương. Khi trời tối, bạn ngồi đọc sách trong phòng chỉ có một đèn. Vì quá tối, bạn chuyển ghế đến vị trí cách đèn bằng một nửa khoảng cách ban đầu. Độ rọi tăng bao nhiêu lần?
+\bt{24} Áp suất $P$ của một mẫu khí oxy bị nén ở nhiệt độ không đổi liên hệ với thể tích $V$ theo hàm nghịch đảo $P=k/V$. (a) Mẫu khí có thể tích $0.671\,\mathrm m^3$, áp suất 39 kPa, ở nhiệt độ 293 K (nhiệt độ tuyệt đối theo thang Kelvin). Tìm $k$. (b) Nếu mẫu khí giãn đến $0.916\,\mathrm m^3$, áp suất mới là bao nhiêu?
+\bt{25} Công suất phát của tua-bin gió phụ thuộc nhiều yếu tố. Từ các nguyên lý vật lý, có thể chỉ ra mô hình
+\[P=kAv^3,\]
+trong đó $v$ là tốc độ gió, $A$ là diện tích do các cánh quét qua, $k$ là hằng số phụ thuộc mật độ không khí, hiệu suất tua-bin và thiết kế cánh. (a) Nếu chỉ tăng gấp đôi tốc độ gió, công suất tăng mấy lần? (b) Nếu chỉ tăng gấp đôi chiều dài cánh, công suất tăng mấy lần? (c) Với tua-bin có cánh dài 30 m và $k=0.214\,\mathrm{kg}/\mathrm m^3$, tìm công suất (watt, $\mathrm W=\mathrm m^2\cdot\mathrm{kg}/\mathrm s^3$) khi tốc độ gió là 10, 15 và 25 m/s.
+\bt{26} Các nhà thiên văn suy ra suất phát xạ (thông lượng bức xạ phát ra trên đơn vị diện tích) của các ngôi sao bằng định luật Stefan–Boltzmann:
+\[E(T)=(5.67\times10^{-8})T^4,\]
+trong đó, theo cách diễn đạt của bản gốc, $E$ là năng lượng bức xạ trên đơn vị diện tích bề mặt, tính bằng watt (W), và $T$ là nhiệt độ tuyệt đối tính bằng kelvin (K). (a) Vẽ đồ thị $E$ với $100\le T\le300$ K. (b) Dùng đồ thị mô tả sự thay đổi của $E$ khi $T$ tăng. \textit{Xem lưu ý về đơn vị ở cuối bản dịch.}
+\group{27–28. Với mỗi biểu đồ phân tán, chọn loại hàm số có thể dùng làm mô hình cho dữ liệu. Giải thích lựa chọn.}
+\fig[.80]{e27_28}{Bài tập 27: hai biểu đồ ở hàng trên; Bài tập 28: hai biểu đồ ở hàng dưới.}
+\bt{29} Bảng cho tỉ lệ từng mắc loét dạ dày–tá tràng trong đời, tính trên 100 người, theo thu nhập gia đình, từ Khảo sát Phỏng vấn Sức khỏe Quốc gia. (a) Lập biểu đồ phân tán và xem mô hình tuyến tính có thích hợp không. (b) Tìm và vẽ mô hình tuyến tính dùng điểm đầu và điểm cuối. (c) Tìm và vẽ đường hồi quy. (d) Dùng mô hình ở (c) ước lượng tỉ lệ mắc loét của người có thu nhập 25\,000 đô la. (e) Theo mô hình, khả năng mắc loét của người có thu nhập 80\,000 đô la là bao nhiêu? (f) Có hợp lý không nếu áp dụng mô hình cho người có thu nhập 200\,000 đô la?
+\begin{center}\begin{tabular}{rr}\toprule Thu nhập (đô la)&Tỉ lệ mắc loét (trên 100 người)\\\midrule
+4000&14.1\\6000&13.0\\8000&13.4\\12\,000&12.5\\16\,000&12.0\\20\,000&12.4\\30\,000&10.5\\45\,000&9.4\\60\,000&8.2\\\bottomrule\end{tabular}\end{center}
+\bt{30} Khi chuột thí nghiệm tiếp xúc với sợi amiăng, một số con phát triển khối u phổi. Bảng cho kết quả các thí nghiệm của nhiều nhà khoa học. (a) Tìm đường hồi quy. (b) Lập biểu đồ phân tán và vẽ đường hồi quy. Đường hồi quy có vẻ thích hợp với dữ liệu không? (c) Tung độ gốc của đường hồi quy biểu thị điều gì?
+\begin{center}\begin{tabular}{rr@{\quad}rr}\toprule
+\multicolumn{2}{c}{Mức phơi nhiễm và tỉ lệ u phổi}&\multicolumn{2}{c}{Mức phơi nhiễm và tỉ lệ u phổi}\\
+Sợi/mL&\% chuột&Sợi/mL&\% chuột\\\midrule
+50&2&1600&42\\400&6&1800&37\\500&5&2000&38\\900&10&3000&50\\1100&26&&\\\bottomrule\end{tabular}\end{center}
+\bt{31} Các nhà nhân học dùng mô hình tuyến tính liên hệ chiều dài xương đùi với chiều cao. Mô hình cho phép xác định chiều cao khi chỉ tìm được một phần bộ xương, trong đó có xương đùi. Hãy tìm mô hình từ số liệu của tám nam giới trong bảng. (a) Lập biểu đồ phân tán. (b) Tìm và vẽ đường hồi quy. (c) Nếu tìm được xương đùi dài 53 cm, người đó cao bao nhiêu?
+\begin{center}\begin{tabular}{rr@{\qquad}rr}\toprule
+Xương đùi (cm)&Chiều cao (cm)&Xương đùi (cm)&Chiều cao (cm)\\\midrule
+50.1&178.5&44.5&168.3\\48.3&173.6&42.7&165.0\\45.2&164.8&39.5&155.4\\44.7&163.7&38.0&155.8\\\bottomrule\end{tabular}\end{center}
+\bt{32} Bảng cho giá bán lẻ điện sinh hoạt trung bình tại Hoa Kỳ từ 2000 đến 2016, tính bằng cent/kWh. (a) Lập biểu đồ phân tán. Mô hình tuyến tính có thích hợp không? (b) Tìm và vẽ đường hồi quy. (c) Dùng mô hình ở (b) ước lượng giá điện trung bình năm 2005 và 2017.
+\begin{center}\begin{tabular}{rr@{\qquad}rr}\toprule
+Năm từ 2000&Cent/kWh&Năm từ 2000&Cent/kWh\\\midrule
+0&8.24&10&11.54\\2&8.44&12&11.88\\4&8.95&14&12.52\\6&10.40&16&12.90\\8&11.26&&\\\bottomrule\end{tabular}\end{center}
+\noindent\textit{Nguồn:} Cơ quan Thông tin Năng lượng Hoa Kỳ.
+\bt{33} Bảng cho mức tiêu thụ dầu trung bình hằng ngày trên thế giới từ 1985 đến 2015, tính bằng nghìn thùng/ngày. (a) Lập biểu đồ phân tán và xem mô hình tuyến tính có thích hợp không. (b) Tìm và vẽ đường hồi quy. (c) Dùng mô hình tuyến tính ước lượng mức tiêu thụ dầu năm 2002 và 2017.
+\begin{center}\begin{tabular}{rr}\toprule
+Số năm kể từ 1985&Nghìn thùng dầu/ngày\\\midrule
+0&60\,083\\5&66\,533\\10&70\,099\\15&76\,784\\20&84\,077\\25&87\,302\\30&94\,071\\\bottomrule\end{tabular}\end{center}
+\noindent\textit{Nguồn:} Cơ quan Thông tin Năng lượng Hoa Kỳ.
+\bt{34} Bảng cho khoảng cách trung bình $d$ từ các hành tinh đến Mặt Trời, lấy khoảng cách Trái Đất–Mặt Trời làm đơn vị, và chu kỳ $T$ (thời gian quay hết một vòng, tính bằng năm). (a) Khớp một mô hình lũy thừa với dữ liệu. (b) Định luật III Kepler phát biểu: ``Bình phương chu kỳ chuyển động của một hành tinh tỉ lệ thuận với lập phương khoảng cách trung bình của nó đến Mặt Trời.'' Mô hình có xác nhận định luật này không?
+\begin{center}\begin{tabular}{lrr}\toprule Hành tinh&$d$&$T$\\\midrule
+Sao Thủy&0.387&0.241\\Sao Kim&0.723&0.615\\Trái Đất&1.000&1.000\\Sao Hỏa&1.523&1.881\\Sao Mộc&5.203&11.861\\Sao Thổ&9.541&29.457\\Sao Thiên Vương&19.190&84.008\\Sao Hải Vương&30.086&164.784\\\bottomrule\end{tabular}\end{center}
+\bt{35} Diện tích một vùng càng lớn thì số loài sinh sống trong đó thường càng nhiều. Nhiều nhà sinh thái học mô hình hóa quan hệ số loài–diện tích bằng hàm lũy thừa. Cụ thể, số loài dơi $S$ sống trong hang ở miền trung Mexico liên hệ với diện tích bề mặt hang $A$ bởi $S=0.7A^{0.3}$. (a) Hang Misión Imposible gần Puebla, Mexico có $A=60\,\mathrm m^2$. Dự kiến có bao nhiêu loài dơi sống trong hang? (b) Nếu thấy có bốn loài dơi sống trong một hang, hãy ước lượng diện tích hang.
+\bt{36} Bảng cho số loài bò sát và lưỡng cư $N$ sống trên các đảo Caribe và diện tích đảo $A$ tính bằng dặm vuông. (a) Dùng hàm lũy thừa mô hình hóa $N$ theo $A$. (b) Đảo Dominica có diện tích $291\,\mathrm{mi}^2$. Dự kiến có bao nhiêu loài bò sát và lưỡng cư sống trên đảo?
+\begin{center}\begin{tabular}{lrr}\toprule Đảo&$A$&$N$\\\midrule
+Saba&4&5\\Monserrat&40&9\\Puerto Rico&3459&40\\Jamaica&4411&39\\Hispaniola&29\,418&84\\Cuba&44\,218&76\\\bottomrule\end{tabular}\end{center}
+\bt{37} Giả sử một lực hoặc năng lượng xuất phát từ một nguồn điểm và lan truyền ảnh hưởng đều theo mọi hướng, chẳng hạn ánh sáng của bóng đèn hoặc lực hấp dẫn của một hành tinh. Ở khoảng cách $r$, cường độ $I$ bằng độ mạnh nguồn $S$ chia cho diện tích mặt cầu bán kính $r$. Chứng minh $I$ thỏa định luật nghịch đảo bình phương $I=k/r^2$, với $k$ là hằng số dương.
+
+\clearpage
+\section*{Ghi chú biên tập và chuẩn hóa thuật ngữ}
+\noindent\textit{Phần bổ sung của bản dịch, không thuộc nội dung nguyên bản.}
+\begin{enumerate}[leftmargin=*,itemsep=4pt]
+\item Trong mục này, ``hàm tuyến tính'' dịch từ \textit{linear function} theo quy ước của sách là $f(x)=mx+b$, bao gồm cả hàm hằng khi $m=0$. Trong đại số tuyến tính, ánh xạ tuyến tính trên $\mathbb R$ có dạng $mx$; dạng tổng quát $mx+b$ là hàm affine. Không đồng nhất hai quy ước này.
+\item Phân biệt \textbf{hàm nghịch đảo} (\textit{reciprocal function}, lấy nghịch đảo giá trị, như $1/x$) với \textbf{hàm ngược} (\textit{inverse function}, sẽ học ở §1.5).
+\item Điều kiện đầy đủ đối với cơ số lôgarit là $b>0$, $b\ne1$. Trong Hình 22, các cơ số đều lớn hơn 1; phát biểu ``tăng chậm khi $x>1$'' áp dụng cho các đồ thị đó. Với $0<b<1$, hàm lôgarit nghịch biến.
+\item Dữ liệu, các năm và dự báo $\mathrm{CO}_2$ ở Ví dụ 2–3 được giữ theo sách gốc để minh họa nội suy–ngoại suy; đây không phải cập nhật nồng độ khí quyển tại thời điểm dịch.
+\item Bài tập 26 dùng tên \textit{radiant exitance}, tức suất phát xạ. Đơn vị SI đúng của đại lượng này là W/m$^2$; hệ số Stefan–Boltzmann có đơn vị W/(m$^2$K$^4$). Bản gốc ghi W và dùng từ ``energy''; bản dịch giữ thông tin nguồn trong đề và làm rõ sự thiếu nhất quán về đơn vị tại đây.
+\end{enumerate}
+\section*{Thuật ngữ bổ sung từ §1.2}
+\begin{longtable}{p{.43\linewidth}p{.49\linewidth}}\toprule Tiếng Anh&Tiếng Việt thống nhất\\\midrule\endhead
+mathematical modeling&mô hình hóa toán học\\
+linear model&mô hình tuyến tính\\
+linear function&hàm tuyến tính (theo quy ước của sách)\\
+empirical model&mô hình thực nghiệm\\
+linear regression&hồi quy tuyến tính\\
+regression line&đường hồi quy\\
+least squares method&phương pháp bình phương tối thiểu\\
+interpolation&nội suy\\
+extrapolation&ngoại suy\\
+polynomial&đa thức; hàm đa thức\\
+coefficient&hệ số\\
+leading coefficient&hệ số cao nhất\\
+degree of a polynomial&bậc của đa thức\\
+quadratic function&hàm bậc hai\\
+cubic function&hàm bậc ba\\
+power function&hàm lũy thừa\\
+family of functions&họ hàm số\\
+root function&hàm căn thức\\
+square root function&hàm căn bậc hai\\
+cube root function&hàm căn bậc ba\\
+reciprocal function&hàm nghịch đảo\\
+inverse function&hàm ngược\\
+hyperbola&hyperbol\\
+asymptote&đường tiệm cận\\
+inverse square law&định luật nghịch đảo bình phương\\
+rational function&hàm hữu tỉ\\
+algebraic function&hàm đại số\\
+transcendental function&hàm siêu việt\\
+trigonometric function&hàm lượng giác\\
+radian measure&số đo radian\\
+periodic function&hàm tuần hoàn\\
+period&chu kỳ\\
+exponential function&hàm số mũ\\
+logarithmic function&hàm lôgarit\\
+base&cơ số\\
+illumination&độ rọi\\
+radiant exitance&suất phát xạ\\
+\bottomrule\end{longtable}
+\noindent\textbf{Phạm vi hoàn thành:} Trọn §1.2, gồm Ví dụ 1–6, Hình 1–22, Bảng 1–3 và Bài tập 1–37. Bảng giá trị trong Hình 2 và các bảng dữ liệu của bài tập được giữ đầy đủ. Bảng 3 được dàn thành hai trang để các nhãn tiếng Việt và đường cong dễ đọc. Phần tiếp theo là §1.3: \textit{Xây dựng hàm số mới từ những hàm số đã biết}.
+\end{document}

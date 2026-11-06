@@ -1,3 +1,4 @@
+import { allows } from '../lib/education-access.js';
 import { getSession } from '../lib/session.js';
 import { checkRateLimit, handleAiError, parseBody, prepare, text } from '../lib/ai.js';
 import { generateOpenAIJson } from '../lib/openai.js';
@@ -41,6 +42,7 @@ export default async function handler(req, res) {
   if (req.method !== 'POST') return res.status(405).json({ success: false, error: 'Method not allowed' });
   const session = await getSession(req);
   if (!session) return res.status(401).json({ success: false, error: 'Vui lòng đăng nhập lại' });
+  if (!allows(session, 'upper_secondary')) return res.status(403).json({ success: false, error: 'Chức năng này thuộc cấp Trung học phổ thông' });
   const body = parseBody(req);
   const topic = text(body?.topic, 120);
   const method = text(body?.method, 240);

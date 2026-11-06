@@ -1,3 +1,12 @@
+import authHandler from './api/auth.js';
+import dataHandler from './api/data.js';
+import examsHandler from './api/exams.js';
+import guideHandler from './api/ai-guide.js';
+import evaluateHandler from './api/ai-evaluate-solution.js';
+import ocrMathHandler from './api/ai-ocr-math.js';
+import ocrExamHandler from './api/ai-ocr-exam.js';
+import trendsHandler from './api/ai-exam-trends.js';
+import trendTheoryHandler from './api/ai-trend-theory.js';
 import express from 'express';
 import path from 'path';
 import compression from 'compression';
@@ -29,6 +38,19 @@ app.use(compression());
 // Keep local development behavior aligned with the Vercel serverless route.
 app.all('/api/translate-content', translateContentHandler);
 app.all('/api/ai-predict-exam', predictExamHandler);
+
+app.all('/api/auth', authHandler);
+app.all('/api/data', dataHandler);
+app.all('/api/exams', examsHandler);
+app.all('/api/ai-guide', guideHandler);
+app.all('/api/ai-evaluate-solution', evaluateHandler);
+app.all('/api/ai-ocr-math', ocrMathHandler);
+app.all('/api/ai-ocr-exam', ocrExamHandler);
+app.all('/api/ai-exam-trends', trendsHandler);
+app.all('/api/ai-trend-theory', trendTheoryHandler);
+app.get(['/', '/index.html'], (req, res) => { req.query.resource = 'app_shell';return dataHandler(req, res); });
+app.get('/assets/*', (req, res) => { req.query.resource = 'protected_asset';req.query.file = req.params[0];return dataHandler(req, res); });
+app.use(['/src', '/data', '/lib', '/scripts', '/test', '/docs', '/index_backup_before_auth.html'], (_req, res) => res.status(404).end());
 
 // Model Cooldown Tracker for transient 503/429/overload errors
 const modelCooldownMap = new Map();
@@ -691,17 +713,6 @@ app.use(express.static(__dirname, {
   }
 }));
 
-// Route for root /
-app.get('/', (req, res) => {
-  try {
-    build();
-  } catch (err) {
-    console.warn('[Build Warning]:', err.message);
-  }
-  res.setHeader('Cache-Control', 'public, max-age=0, must-revalidate');
-  res.sendFile(path.join(__dirname, 'index.html'));
-});
-
 // Route for login
 app.get('/login', (req, res) => {
   res.setHeader('Cache-Control', 'public, max-age=0, must-revalidate');
@@ -709,10 +720,7 @@ app.get('/login', (req, res) => {
 });
 
 // Fallback for clean URLs
-app.use((req, res) => {
-  res.setHeader('Cache-Control', 'public, max-age=0, must-revalidate');
-  res.sendFile(path.join(__dirname, 'index.html'));
-});
+app.use((req, res) => { req.query.resource = 'app_shell';return dataHandler(req, res); });
 
 app.listen(PORT, '0.0.0.0', () => {
   console.log(`VMO Da Nang production server running on port ${PORT}`);

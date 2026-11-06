@@ -1,3 +1,4 @@
+import { allows } from '../lib/education-access.js';
 import crypto from 'node:crypto';
 import { getDb } from '../lib/db.js';
 import { getSession } from '../lib/session.js';
@@ -74,6 +75,7 @@ export default async function handler(req, res) {
 
   const session = await getSession(req);
   if (!session) return res.status(401).json({ success: false, error: 'Vui lòng đăng nhập lại' });
+  if (!allows(session, 'shared')) return res.status(403).json({ success: false, error: 'Tài khoản chưa được cấp quyền cấp học' });
 
   const body = parseBody(req);
   if (!body) return res.status(400).json({ success: false, error: 'JSON không hợp lệ' });

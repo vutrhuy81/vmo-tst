@@ -58,6 +58,7 @@ window.MathJax = {
 <link rel="stylesheet" href="i18n.css?v=20260915_2">
 
 <!-- Synchronous Auth Gate: Chặn truy cập nếu chưa đăng nhập -->
+<script src="education_access.js?v=20261025"></script>
 <script src="auth.js?v=20260915_2"></script>
 <script>
 VMOAuth.requireAuth('login.html');
@@ -65,6 +66,10 @@ VMOAuth.requireAuth('login.html');
 
 <script type="module" src="vmo_data_service.js?v=20260915_2"></script>
 <!-- INJECT:SPECIALIZED_SCHOOL_REGISTRY -->
+<script src="university_courses.js?v=20261025" defer></script>
+<script src="books.js?v=20261102" defer></script>
+<script src="university_materials.js?v=20261025" defer></script>
+<script src="university.js?v=20261025" defer></script>
 <script src="admissions.js?v=20261016" defer></script>
 <script src="tst-locations.js?v=20260918_tst_locations_v1" defer></script>
 <script src="vmo_db_ui.js?v=20260917_eval_gemini_gpt_v2" defer></script>
@@ -139,38 +144,53 @@ VMOAuth.requireAuth('login.html');
     </div>
   </div>
 
+  <div id="educationAccessSummary" role="status" style="padding:10px 20px;color:var(--text-muted,#475569);font-size:.9rem;"></div>
   <!-- Content navigation: all modules visible on desktop; one disclosure on small screens. -->
   <div class="nav-tabs-container module-navigation-shell">
+    <div class="education-level-bar" role="group" aria-label="Cấp học">
+      <div class="education-level-buttons">
+        <button type="button" class="education-level-button" data-education-level="primary" aria-pressed="false">Tiểu học</button>
+        <button type="button" class="education-level-button" data-education-level="lower_secondary" aria-pressed="false">Trung học cơ sở</button>
+        <button type="button" class="education-level-button" data-education-level="upper_secondary" aria-pressed="true">Trung học phổ thông</button>
+        <button type="button" class="education-level-button" data-education-level="university" aria-pressed="false">Đại học</button>
+      </div>
+      <select id="educationLevelSelect" aria-label="Cấp học"><option value="primary">Tiểu học</option><option value="lower_secondary">Trung học cơ sở</option><option value="upper_secondary" selected>Trung học phổ thông</option><option value="university">Đại học</option></select>
+    </div>
     <button id="moduleNavigationToggle" class="module-navigation-toggle" type="button" aria-controls="moduleNavigation" aria-expanded="false">
       <span class="module-navigation-summary"><span class="module-navigation-caption" id="moduleNavigationCaption">Đang xem</span><span id="activeModuleLabel">📚 Tài liệu chuyên đề VMO</span></span>
       <span class="module-navigation-action"><span id="moduleNavigationAction">Chọn mục</span><span class="module-navigation-chevron" aria-hidden="true">⌄</span></span>
     </button>
-    <nav class="nav-tabs module-navigation" id="moduleNavigation" aria-label="Phân loại tài liệu và đề thi">
-      <div class="navigation-group" role="group" aria-labelledby="navGroupLearning">
-        <span class="navigation-group-title" id="navGroupLearning">Học tập &amp; luyện tập</span>
+    <nav class="nav-tabs module-navigation" id="moduleNavigation" aria-label="Nội dung theo cấp học">
+      <div class="navigation-group" data-navigation-level="primary" role="group" aria-label="Tiểu học" hidden>
+        <div class="navigation-group-items">
+          <button class="tab-btn" id="tab-btn-primary" type="button" onclick="switchTab('tab-primary',this)">🌱 Tiểu học</button>
+        </div>
+      </div>
+      <div class="navigation-group" data-navigation-level="lower_secondary" role="group" aria-label="Trung học cơ sở" hidden>
+        <div class="navigation-group-items">
+          <button class="tab-btn" id="tab-btn-admission" type="button" onclick="switchTab('tab-admission',this)">🎓 Đề thi vào lớp 10 chuyên</button>
+        </div>
+      </div>
+      <div class="navigation-group" data-navigation-level="upper_secondary" role="group" aria-label="Trung học phổ thông">
         <div class="navigation-group-items">
           <button class="tab-btn active" id="tab-btn-danang" type="button" aria-current="page" onclick="switchTab('tab-danang',this)">📚 Tài liệu chuyên đề VMO</button>
           <button class="tab-btn" id="tab-btn-mock" type="button" onclick="switchTab('tab-mock',this)">🎯 Bộ đề thi thử VMO</button>
-          <button class="tab-btn" id="tab-btn-support" type="button" onclick="switchTab('tab-support',this)">🧩 Hỗ trợ giải toán</button>
-        </div>
-      </div>
-      <div class="navigation-group" role="group" aria-labelledby="navGroupNational">
-        <span class="navigation-group-title" id="navGroupNational">Đề thi trong nước</span>
-        <div class="navigation-group-items">
-          <button class="tab-btn" id="tab-btn-admission" type="button" onclick="switchTab('tab-admission',this)">🎓 Đề thi vào lớp 10 chuyên</button>
           <button class="tab-btn" id="tab-btn-tst" type="button" onclick="switchTab('tab-tst',this)">🏛️ Đề TST</button>
           <button class="tab-btn" id="tab-btn-vmo" type="button" onclick="switchTab('tab-vmo',this)">🇻🇳 Đề VMO</button>
           <button class="tab-btn" id="tab-btn-history" type="button" onclick="switchTab('tab-history',this)">🗂️ Đề Đà Nẵng–Quảng Nam</button>
-        </div>
-      </div>
-      <div class="navigation-group" role="group" aria-labelledby="navGroupOlympic">
-        <span class="navigation-group-title" id="navGroupOlympic">Olympic &amp; giao lưu</span>
-        <div class="navigation-group-items">
           <button class="tab-btn" id="tab-btn-olympic" type="button" onclick="switchTab('tab-olympic',this)">🌐 Đề IMO–Olympic</button>
           <button class="tab-btn" id="tab-btn-olympic30" type="button" onclick="switchTab('tab-olympic30',this)">🏅 Đề Olympic 30/4</button>
           <button class="tab-btn" id="tab-btn-duyenhai" type="button" onclick="switchTab('tab-duyenhai',this)">🌊 Đề Duyên hải miền Bắc</button>
         </div>
       </div>
+      <div class="navigation-group" data-navigation-level="university" role="group" aria-label="Đại học" hidden>
+        <div class="navigation-group-items">
+          <button class="tab-btn" id="tab-btn-university-materials" type="button" onclick="switchTab('tab-university-materials',this)">📚 Tài liệu Toán–Đại học</button>
+          <button class="tab-btn" id="tab-btn-books" type="button" onclick="switchTab('tab-books',this)">📖 Sách học</button>
+          <button class="tab-btn" id="tab-btn-university" type="button" onclick="switchTab('tab-university',this)">🎓 Đại học</button>
+        </div>
+      </div>
+      <div class="navigation-shared"><button class="tab-btn" id="tab-btn-support" type="button" onclick="switchTab('tab-support',this)">🧩 Hỗ trợ giải toán</button></div>
     </nav>
   </div>
 </div>
@@ -212,10 +232,38 @@ VMOAuth.requireAuth('login.html');
     <div id="sidebar-olympic30" style="display:none"><div class="sidebar-title">Đề Olympic 30/4</div><div class="nav-year-group" data-grade="10"><div class="nav-year-title">LỚP 10</div></div><div class="nav-year-group" data-grade="11"><div class="nav-year-title">LỚP 11</div></div></div>
     <div id="sidebar-duyenhai" style="display:none"><div class="sidebar-title">Đề Duyên hải miền Bắc</div><div class="nav-year-group" data-grade="10"><div class="nav-year-title">LỚP 10</div></div><div class="nav-year-group" data-grade="11"><div class="nav-year-title">LỚP 11</div></div></div>
 <div id="sidebar-support" style="display:none"><div class="sidebar-title">Hỗ trợ giải toán</div><a class="nav-link" href="#mathSupportForm">📷 Tải ảnh và OCR</a><a class="nav-link" href="#supportProblems">📝 Bài toán đã lưu</a></div>
+    <div id="sidebar-books" style="display:none"><div class="sidebar-title">Sách học</div><nav id="booksToc" aria-label="Mục lục sách"></nav></div>
+    <div id="sidebar-university-materials" style="display:none"><div class="sidebar-title">Tài liệu Toán–Đại học</div><nav id="universityMaterialsToc" aria-label="Mục lục Toán Đại học"></nav></div>
+    <div id="sidebar-university" style="display:none"><div class="sidebar-title" data-university-label>Các học phần Đại học</div><nav id="universityCourseList" aria-label="Các học phần Đại học"></nav><div class="nav-year-group" id="universityExamLinks"></div></div>
     <!-- INJECT:SIDEBAR_HISTORY -->
   </aside>
   <main>
-    <!-- INJECT:TAB_DANANG -->
+    <div class="tab-pane" id="tab-primary"><section class="feed-container"><h2 data-level-title="primary">Tiểu học</h2><p data-level-empty>Kho học liệu của cấp học này đang được xây dựng. Bạn có thể sử dụng Hỗ trợ giải toán.</p></section></div>
+<!-- EDUCATION:university:START -->
+<style>
+/* Dedicated toolbar: nested selects must not inherit flex-basis from university materials. */
+#booksControls{display:flex;flex-wrap:wrap;gap:8px 12px;align-items:flex-end;padding:10px 12px;margin:8px 0;border:1px solid var(--border,#cbd5e1);border-radius:10px;min-width:0}
+#booksControls>label{display:flex;flex-direction:column;gap:4px;min-width:0;max-width:100%;font-size:.82rem;font-weight:600}
+#booksControls>label:first-child{flex:0 1 13rem}
+#booksControls>label:nth-child(2){flex:1 1 20rem;max-width:32rem}
+#booksControls select{display:block;flex:none;width:100%;min-width:0;max-width:100%;height:42px;min-height:42px;padding:6px 30px 6px 10px;border:1px solid var(--border,#cbd5e1);border-radius:7px;background:var(--card-bg,#fff);color:var(--text);font:inherit;text-overflow:ellipsis}
+#tab-books #booksControls>button{min-height:42px;font-size:.8rem;padding:6px 10px}
+#booksControls>label:has(input[type=checkbox]){flex-direction:row;align-items:center;align-self:center;font-weight:400}
+#booksControls input[type=checkbox]{flex:none;width:18px;height:18px;margin:0}
+#booksControls :is(select,button,input):focus-visible{outline:2px solid var(--primary,#173b64);outline-offset:2px}
+@media(max-width:600px){#booksControls{padding:8px;gap:8px}#booksControls>label:first-child,#booksControls>label:nth-child(2){flex:1 1 100%;max-width:100%}#booksControls>button{white-space:normal}}
+#tab-books button{padding:8px 12px;border:1px solid var(--border,#cbd5e1);border-radius:7px;cursor:pointer;font:inherit}
+#booksContent .book-center{text-align:center}#booksContent table{display:block;max-width:100%;overflow-x:auto;border-collapse:collapse;margin:16px 0}#booksContent th,#booksContent td{border:1px solid var(--border,#cbd5e1);padding:6px 10px}#booksContent img{display:block;margin:12px auto}#booksContent h1{font-size:1.45rem}#booksContent .math.display{overflow-x:auto;display:block}
+#booksContent{overflow-wrap:anywhere;padding:16px 0}#booksContent>button{margin:8px 8px 0 0}
+#booksEditor select,#booksEditor textarea{font:inherit;max-width:100%}
+.book-exercise{margin:16px 0;padding:16px;border:1px solid #cbd5e1;border-radius:10px;background:var(--bg-card,#fff)} .book-exercise .problem-header{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-bottom:12px} .book-exercise .problem-id{font-weight:700;margin-right:auto}
+</style>
+<div class="tab-pane" id="tab-books" data-no-i18n="true"><section class="book-dashboard"><h2>📖 Sách học</h2><p>Chọn nhóm sách, chọn sách và mở mục lục để học từng phần.</p></section><div id="booksControls"></div><div id="booksStatus" role="status" aria-live="polite"></div><div id="booksEditor"></div><div id="booksContent" class="book-content"></div></div>
+<!-- EDUCATION:university:END -->
+<div class="tab-pane" id="tab-university-materials" data-no-i18n="true"><section class="book-dashboard"><div class="dashboard-copy"><div class="eyebrow">TOÁN ĐẠI HỌC</div><h2>📚 Tài liệu Toán–Đại học</h2><p>Lý thuyết cốt lõi · Phương pháp giải · Ví dụ từng bước · Nguồn đối chiếu</p><p id="universityMaterialsStats" role="status">Đang tải danh mục học liệu…</p></div></section><div class="university-material-controls"><label for="universityMaterialsCourse">Học phần</label><select id="universityMaterialsCourse"></select><label for="universityMaterialsSearch">Tìm trong học phần</label><input id="universityMaterialsSearch" type="search" placeholder="Tìm khái niệm, định lý, ví dụ…"><button id="universityMaterialsSolutions" type="button">Ẩn/hiện lời giải</button><button id="universityMaterialsPrint" type="button">🖨️ In học phần / PDF</button></div><div id="universityMaterialsContent" class="book-content" aria-live="polite"></div></div>
+<div class="tab-pane" id="tab-university"><section class="feed-container"><div class="section-header-box"><h2 data-university-label>Các học phần Đại học</h2><label for="universityCourseSelect">Chọn học phần</label><select id="universityCourseSelect" style="display:block;max-width:100%;width:100%;padding:10px;margin:8px 0;font:inherit;"></select><label for="universitySectionSelect">Chuyên đề con</label><select id="universitySectionSelect" style="display:block;width:100%;padding:10px;margin:8px 0;font:inherit;"></select><h3 id="universityCourseTitle"></h3></div></section></div>
+<div class="tab-pane" id="tab-pending"><section class="feed-container"><h2 data-pending-title>Chờ phân cấp học</h2><p data-pending-note>Vui lòng liên hệ Admin để được cấp quyền nội dung theo cấp học.</p></section></div>
+<!-- INJECT:TAB_DANANG -->
     <!-- INJECT:TAB_MOCK -->
     <!-- INJECT:TAB_TST -->
     <!-- INJECT:TAB_VMO -->
