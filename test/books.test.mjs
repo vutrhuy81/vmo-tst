@@ -324,3 +324,26 @@ const changedPrinciples=await mutateBooks(db,admin,'books_save_section',{id:chil
 assert.equal((await readBooks(db,student,{bookId:book.id,sectionId:childPrinciples.id})).section.content,changedPrinciples.content);assert.equal((await readBooks(db,student,{bookId:book.id,sectionId:childPrinciples.id})).exercises.length,22);
 window.close();console.log('Books: seeded TOC, admin CRUD/CAS, scopes, subtree delete/restore, lazy bodies and UI actions OK');
 
+
+// Chain-rule exercises use the same action initialization as section 1.1.
+const child34=detail.sections.find(s=>s.title.startsWith('3.4'));
+const section34=await readBooks(db,student,{bookId:book.id,sectionId:child34.id});
+assert.equal(section34.exerciseHeading,'3.4. Bài tập');
+assert.deepEqual(section34.exercises.map(e=>e.questionNumber),Array.from({length:102},(_,i)=>i+1));
+assert.ok(section34.exercises.every(e=>e.allowSubmission&&e.allowAiEvaluation&&e.contentKey&&e.setKey));
+for(const n of [1,6])assert.ok(section34.exercises[n-1].content.includes('Viết hàm hợp'));
+for(const n of [7,52])assert.ok(section34.exercises[n-1].content.includes('Tìm đạo hàm'));
+for(const n of [71,72,73,99])assert.ok(section34.exercises[n-1].content.includes('/e'+n+'.png'));
+assert.ok(section34.exercises[69].content.includes('<table>'));
+assert.ok(section34.exercises[93].content.includes('<table>'));
+assert.ok(section34.section.content.includes('Dự án ứng dụng'));
+const doc34=new JSDOM(section34.section.content);
+assert.equal(doc34.window.document.querySelectorAll('img').length,6);
+assert.equal(section34.section.sourceInfo.exampleCount,10);
+for(const image of doc34.window.document.querySelectorAll('img')){
+ const asset=new URL(image.src,'https://example.test').searchParams.get('asset');
+ assert.equal((await readBookAsset(student,asset)).bytes[0],137);
+ await assert.rejects(()=>readBookAsset(other,asset),e=>e.status===403);
+}
+doc34.window.close();
+assert.deepEqual((await readBooks(db,student,{bookId:book.id,sectionId:child34.id})).exercises.map(e=>e.contentKey),section34.exercises.map(e=>e.contentKey));
