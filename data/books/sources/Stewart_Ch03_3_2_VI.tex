@@ -1,0 +1,305 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage{fontspec}\setmainfont{Latin Modern Roman}\setsansfont{DejaVu Sans}
+\usepackage{amsmath,amssymb,graphicx,geometry,enumitem,longtable,booktabs,fancyhdr,hyperref}
+\geometry{left=28mm,right=23mm,top=24mm,bottom=24mm}
+\hypersetup{unicode=true,colorlinks=true,linkcolor=black,urlcolor=blue,pdftitle={Giải tích Chương 3 Mục 3.2 Các quy tắc tích và thương}}
+\setlength{\parindent}{1.2em}\setlength{\parskip}{4pt}\setlength{\headheight}{16pt}
+\pagestyle{fancy}\fancyhf{}\fancyhead[L]{\small Chương 3. Các quy tắc tính đạo hàm}\fancyhead[R]{\small §3.2}\fancyfoot[C]{\thepage}
+\newcommand{\fig}[3][.68]{\begin{center}\begin{minipage}{\linewidth}\centering\includegraphics[width=#1\linewidth]{assets/#2.png}\\{\small #3}\end{minipage}\end{center}}
+\newcommand{\ex}[1]{\par\medskip\noindent\textbf{Ví dụ #1.}\ }
+\newcommand{\sol}{\par\nopagebreak[4]\noindent\textit{Lời giải.}\ }
+\newcommand{\bt}[1]{\par\smallskip\noindent\textbf{#1.}\ }
+\newcommand{\group}[1]{\par\medskip\noindent\textbf{#1}\par\nopagebreak[4]}
+\newcommand{\gint}[1]{\left[\!\left[#1\right]\!\right]}
+\allowdisplaybreaks[2]
+\begin{document}
+\begin{center}
+{\Large\bfseries GIẢI TÍCH}\\[5pt]
+{\large Chương 3. Các quy tắc tính đạo hàm}\\[9pt]
+{\Large\bfseries 3.2. Các quy tắc tích và thương}
+\end{center}
+\noindent\textbf{Nguồn:} James Stewart, Daniel K. Clegg, Saleem Watson, \textit{Calculus: Early Transcendentals}, ấn bản thứ 9 (2020), trang in 185–191 (trang PDF 220–226), từ tiêu đề §3.2 đến hết Bài tập 66, trước tiêu đề §3.3.
+
+Các công thức trong mục này cho phép tính đạo hàm của những hàm mới được tạo từ các hàm đã biết bằng phép nhân hoặc phép chia.
+\section*{Quy tắc tích}
+Do tương tự với các quy tắc tổng và hiệu, ta có thể muốn dự đoán, như Leibniz đã từng làm cách đây ba thế kỷ, rằng đạo hàm của một tích bằng tích các đạo hàm. Tuy nhiên, một ví dụ cụ thể cho thấy dự đoán này sai. Đặt $f(x)=x$ và $g(x)=x^2$. Quy tắc lũy thừa cho $f'(x)=1$ và $g'(x)=2x$. Nhưng $(fg)(x)=x^3$, nên $(fg)'(x)=3x^2$. Vậy $(fg)'\ne f'g'$. Công thức đúng được Leibniz tìm ra ngay sau bước khởi đầu sai ấy và được gọi là \textbf{quy tắc tích}.
+
+Trước khi phát biểu quy tắc, hãy xem có thể tìm ra nó như thế nào. Giả sử ban đầu $u=f(x)$ và $v=g(x)$ là hai hàm dương, khả vi. Khi đó có thể diễn giải tích $uv$ là diện tích một hình chữ nhật (Hình 1). Nếu $x$ thay đổi một lượng $\Delta x$ thì các số gia tương ứng của $u,v$ là
+\[\Delta u=f(x+\Delta x)-f(x),\qquad \Delta v=g(x+\Delta x)-g(x).\]
+Giá trị mới của tích, $(u+\Delta u)(v+\Delta v)$, có thể được diễn giải là diện tích hình chữ nhật lớn trong Hình 1, với điều kiện $\Delta u,\Delta v$ đều dương.
+\fig[.50]{f01}{Hình 1. Ý nghĩa hình học của quy tắc tích.}
+Độ biến thiên diện tích hình chữ nhật là
+\[\Delta(uv)=(u+\Delta u)(v+\Delta v)-uv=u\,\Delta v+v\,\Delta u+\Delta u\,\Delta v,\tag{1}\]
+tức bằng tổng diện tích của ba miền tô màu. Chia cho $\Delta x$, được
+\[\frac{\Delta(uv)}{\Delta x}=u\frac{\Delta v}{\Delta x}+v\frac{\Delta u}{\Delta x}+\Delta u\frac{\Delta v}{\Delta x}.\]
+Nhắc lại: theo ký hiệu Leibniz, định nghĩa đạo hàm là
+\[\frac{dy}{dx}=\lim_{\Delta x\to0}\frac{\Delta y}{\Delta x}.\]
+Cho $\Delta x\to0$, ta được đạo hàm của $uv$:
+\begin{align*}
+\frac{d}{dx}(uv)&=\lim_{\Delta x\to0}\frac{\Delta(uv)}{\Delta x}\\
+&=\lim_{\Delta x\to0}\left(u\frac{\Delta v}{\Delta x}+v\frac{\Delta u}{\Delta x}+\Delta u\frac{\Delta v}{\Delta x}\right)\\
+&=u\lim_{\Delta x\to0}\frac{\Delta v}{\Delta x}+v\lim_{\Delta x\to0}\frac{\Delta u}{\Delta x}
++\left(\lim_{\Delta x\to0}\Delta u\right)\left(\lim_{\Delta x\to0}\frac{\Delta v}{\Delta x}\right)\\
+&=u\frac{dv}{dx}+v\frac{du}{dx}+0\cdot\frac{dv}{dx}.
+\end{align*}
+Vì vậy,
+\[\frac{d}{dx}(uv)=u\frac{dv}{dx}+v\frac{du}{dx}.\tag{2}\]
+Chú ý $\Delta u\to0$ khi $\Delta x\to0$, vì $f$ khả vi nên liên tục.
+
+Mặc dù để diễn giải hình học, ban đầu ta giả sử mọi đại lượng đều dương, nhưng (1) luôn đúng: các phép biến đổi đại số vẫn đúng dù $u,v,\Delta u,\Delta v$ dương hay âm. Do đó, ta đã chứng minh (2), tức quy tắc tích, cho mọi hàm khả vi $u,v$.
+\begin{quote}\textbf{Quy tắc tích.} Nếu $f$ và $g$ đều khả vi thì
+\[\frac{d}{dx}[f(x)g(x)]=f(x)\frac{d}{dx}[g(x)]+g(x)\frac{d}{dx}[f(x)].\]
+\end{quote}
+Theo ký hiệu dấu phẩy, quy tắc tích được viết là
+\[(fg)'=fg'+gf'.\]
+Bằng lời: đạo hàm của tích hai hàm bằng hàm thứ nhất nhân đạo hàm của hàm thứ hai, cộng với hàm thứ hai nhân đạo hàm của hàm thứ nhất.
+\ex{1} (a) Nếu $f(x)=xe^x$, tìm $f'(x)$.
+
+(b) Tìm đạo hàm cấp $n$, $f^{(n)}(x)$.
+\sol (a) Theo quy tắc tích,
+\begin{align*}
+f'(x)&=\frac{d}{dx}(xe^x)\\
+&=x\frac{d}{dx}(e^x)+e^x\frac{d}{dx}(x)\\
+&=xe^x+e^x\cdot1=(x+1)e^x.
+\end{align*}
+(b) Áp dụng quy tắc tích lần thứ hai:
+\begin{align*}
+f''(x)&=\frac{d}{dx}[(x+1)e^x]\\
+&=(x+1)\frac{d}{dx}(e^x)+e^x\frac{d}{dx}(x+1)\\
+&=(x+1)e^x+e^x\cdot1=(x+2)e^x.
+\end{align*}
+Tiếp tục áp dụng quy tắc tích, được
+\[f'''(x)=(x+3)e^x,\qquad f^{(4)}(x)=(x+4)e^x.\]
+Thực tế, mỗi lần lấy đạo hàm lại thêm một số hạng $e^x$, nên
+\[f^{(n)}(x)=(x+n)e^x.\qquad\square\]
+Hình 2 biểu diễn hàm $f$ trong Ví dụ 1 và đạo hàm $f'$. Chú ý $f'(x)>0$ khi $f$ đồng biến và $f'(x)<0$ khi $f$ nghịch biến.
+\fig[.46]{f02}{Hình 2. Hàm $f(x)=xe^x$ và đạo hàm $f'(x)=(x+1)e^x$.}
+\ex{2} Tính đạo hàm của $f(t)=\sqrt{t}\,(a+bt)$.
+
+\noindent\textit{Lời giải 1.} Dùng quy tắc tích:
+\begin{align*}
+f'(t)&=\sqrt{t}\,\frac{d}{dt}(a+bt)+(a+bt)\frac{d}{dt}(\sqrt{t})\\
+&=\sqrt{t}\cdot b+(a+bt)\cdot\frac12t^{-1/2}\\
+&=b\sqrt{t}+\frac{a+bt}{2\sqrt{t}}=\frac{a+3bt}{2\sqrt{t}}.
+\end{align*}
+\noindent\textit{Lời giải 2.} Nếu trước hết dùng các quy tắc lũy thừa để viết lại $f(t)$ thì có thể tính trực tiếp mà không cần dùng quy tắc tích:
+\[f(t)=a\sqrt{t}+bt\sqrt{t}=at^{1/2}+bt^{3/2},\]
+\[f'(t)=\frac12at^{-1/2}+\frac32bt^{1/2}.\]
+Kết quả này tương đương với kết quả trong Lời giải 1.\hfill$\square$
+
+Trong Ví dụ 2, $a,b$ là các hằng số. Theo thông lệ toán học, các chữ cái gần đầu bảng chữ cái thường được dùng để biểu thị hằng số, còn các chữ cái gần cuối bảng chữ cái thường biểu thị biến số.
+
+Ví dụ 2 cho thấy đôi khi rút gọn tích trước khi lấy đạo hàm đơn giản hơn dùng quy tắc tích. Tuy nhiên, trong Ví dụ 1, quy tắc tích là phương pháp duy nhất có thể dùng trong các phương pháp đang xét.
+\ex{3} Nếu $f(x)=\sqrt{x}\,g(x)$, trong đó $g(4)=2$ và $g'(4)=3$, hãy tìm $f'(4)$.
+\sol Áp dụng quy tắc tích:
+\begin{align*}
+f'(x)&=\frac{d}{dx}[\sqrt{x}\,g(x)]
+=\sqrt{x}\,\frac{d}{dx}[g(x)]+g(x)\frac{d}{dx}[\sqrt{x}]\\
+&=\sqrt{x}\,g'(x)+g(x)\cdot\frac12x^{-1/2}\\
+&=\sqrt{x}\,g'(x)+\frac{g(x)}{2\sqrt{x}}.
+\end{align*}
+Do đó,
+\[f'(4)=\sqrt4\,g'(4)+\frac{g(4)}{2\sqrt4}=2\cdot3+\frac2{2\cdot2}=6.5.\qquad\square\]
+\section*{Quy tắc thương}
+Ta tìm quy tắc lấy đạo hàm của thương hai hàm khả vi $u=f(x)$ và $v=g(x)$ theo cách gần giống khi tìm quy tắc tích. Nếu $x,u,v$ thay đổi các lượng $\Delta x,\Delta u,\Delta v$ thì số gia tương ứng của thương $u/v$ là
+\begin{align*}
+\Delta\left(\frac uv\right)&=\frac{u+\Delta u}{v+\Delta v}-\frac uv
+=\frac{(u+\Delta u)v-u(v+\Delta v)}{v(v+\Delta v)}\\
+&=\frac{v\,\Delta u-u\,\Delta v}{v(v+\Delta v)}.
+\end{align*}
+Vì vậy,
+\[\frac{d}{dx}\left(\frac uv\right)=\lim_{\Delta x\to0}\frac{\Delta(u/v)}{\Delta x}
+=\lim_{\Delta x\to0}\frac{v\dfrac{\Delta u}{\Delta x}-u\dfrac{\Delta v}{\Delta x}}{v(v+\Delta v)}.\]
+Khi $\Delta x\to0$ thì $\Delta v\to0$, vì $v=g(x)$ khả vi nên liên tục. Do đó, dùng các quy tắc giới hạn, ta được
+\[\frac{d}{dx}\left(\frac uv\right)
+=\frac{v\displaystyle\lim_{\Delta x\to0}\dfrac{\Delta u}{\Delta x}-u\displaystyle\lim_{\Delta x\to0}\dfrac{\Delta v}{\Delta x}}{v\displaystyle\lim_{\Delta x\to0}(v+\Delta v)}
+=\frac{v\dfrac{du}{dx}-u\dfrac{dv}{dx}}{v^2}.\]
+\begin{quote}\textbf{Quy tắc thương.} Nếu $f$ và $g$ khả vi thì
+\[\frac{d}{dx}\left[\frac{f(x)}{g(x)}\right]
+=\frac{g(x)\dfrac{d}{dx}[f(x)]-f(x)\dfrac{d}{dx}[g(x)]}{[g(x)]^2}.\]
+\end{quote}
+Theo ký hiệu dấu phẩy,
+\[\left(\frac fg\right)'=\frac{gf'-fg'}{g^2}.\]
+Bằng lời: đạo hàm của một thương bằng mẫu số nhân đạo hàm của tử số, trừ đi tử số nhân đạo hàm của mẫu số, rồi chia tất cả cho bình phương mẫu số.
+
+Quy tắc thương kết hợp với các công thức đạo hàm khác cho phép tính đạo hàm của mọi hàm hữu tỉ, như ví dụ sau.
+\ex{4} Cho $\displaystyle y=\frac{x^2+x-2}{x^3+6}$. Khi đó,
+\begin{align*}
+y'&=\frac{(x^3+6)\dfrac{d}{dx}(x^2+x-2)-(x^2+x-2)\dfrac{d}{dx}(x^3+6)}{(x^3+6)^2}\\
+&=\frac{(x^3+6)(2x+1)-(x^2+x-2)(3x^2)}{(x^3+6)^2}\\
+&=\frac{(2x^4+x^3+12x+6)-(3x^4+3x^3-6x^2)}{(x^3+6)^2}\\
+&=\frac{-x^4-2x^3+6x^2+12x+6}{(x^3+6)^2}.\qquad\square
+\end{align*}
+Hình 3 biểu diễn hàm trong Ví dụ 4 và đạo hàm của nó. Khi $y$ tăng nhanh, gần $-\sqrt[3]6\approx-1.8$, thì $y'$ lớn. Khi $y$ tăng chậm, $y'$ gần 0.
+\fig[.48]{f03}{Hình 3. Hàm $y=(x^2+x-2)/(x^3+6)$ và đạo hàm $y'$.}
+\ex{5} Tìm phương trình tiếp tuyến của đường cong $y=e^x/(1+x^2)$ tại điểm $(1,\tfrac12e)$.
+\sol Theo quy tắc thương,
+\begin{align*}
+\frac{dy}{dx}&=\frac{(1+x^2)\dfrac{d}{dx}(e^x)-e^x\dfrac{d}{dx}(1+x^2)}{(1+x^2)^2}\\
+&=\frac{(1+x^2)e^x-e^x(2x)}{(1+x^2)^2}
+=\frac{e^x(1-2x+x^2)}{(1+x^2)^2}\\
+&=\frac{e^x(1-x)^2}{(1+x^2)^2}.
+\end{align*}
+Vậy hệ số góc tiếp tuyến tại $(1,\tfrac12e)$ là
+\[\left.\frac{dy}{dx}\right|_{x=1}=0.\]
+Điều đó có nghĩa là tiếp tuyến tại $(1,\tfrac12e)$ nằm ngang và có phương trình $y=\tfrac12e$ (Hình 4).\hfill$\square$
+\fig[.49]{f04}{Hình 4. Đồ thị $y=e^x/(1+x^2)$ và tiếp tuyến $y=\tfrac12e$.}
+\noindent\textbf{Chú ý.} Không nên dùng quy tắc thương mỗi khi thấy một thương. Đôi khi viết lại thương trước sẽ đưa hàm về dạng dễ lấy đạo hàm hơn. Chẳng hạn, dù có thể dùng quy tắc thương để tính đạo hàm của
+\[F(x)=\frac{3x^2+2\sqrt{x}}x,\]
+nhưng thực hiện phép chia trước để viết
+\[F(x)=3x+2x^{-1/2}\]
+rồi mới lấy đạo hàm thì đơn giản hơn nhiều.
+\section*{Bảng các công thức đạo hàm}
+Tóm tắt các công thức đạo hàm đã học như sau:
+\[\frac{d}{dx}(c)=0,\qquad \frac{d}{dx}(x^n)=nx^{n-1},\qquad \frac{d}{dx}(e^x)=e^x.\]
+\[(cf)'=cf',\qquad (f+g)'=f'+g',\qquad (f-g)'=f'-g'.\]
+\[(fg)'=fg'+gf',\qquad \left(\frac fg\right)'=\frac{gf'-fg'}{g^2}.\]
+\newpage
+\section*{3.2. Bài tập}
+\bt{1} Tính đạo hàm của $f(x)=(1+2x^2)(x-x^2)$ theo hai cách: dùng quy tắc tích và nhân khai triển trước. Hai kết quả có trùng nhau không?
+\bt{2} Tính đạo hàm của hàm
+\[F(x)=\frac{x^4-5x^3+\sqrt{x}}{x^2}\]
+theo hai cách: dùng quy tắc thương và rút gọn trước. Chứng tỏ hai kết quả tương đương. Bạn thích phương pháp nào hơn?
+\group{3–30. Tính đạo hàm.}
+\bt{3} $y=(4x^2+3)(2x+5)$.
+\bt{4} $y=(10x^2+7x-2)(2-x^2)$.
+\bt{5} $y=x^3e^x$.
+\bt{6} $y=(e^x+2)(2e^x-1)$.
+\bt{7} $f(x)=(3x^2-5x)e^x$.
+\bt{8} $g(x)=(x+2\sqrt{x})e^x$.
+\bt{9} $y=\dfrac{x}{e^x}$.
+\bt{10} $y=\dfrac{e^x}{1-e^x}$.
+\bt{11} $g(t)=\dfrac{3-2t}{5t+1}$.
+\bt{12} $G(u)=\dfrac{6u^4-5u}{u+1}$.
+\bt{13} $f(t)=\dfrac{5t}{t^3-t-1}$.
+\bt{14} $F(x)=\dfrac1{2x^3-6x^2+5}$.
+\bt{15} $y=\dfrac{s-\sqrt{s}}{s^2}$.
+\bt{16} $y=\dfrac{\sqrt{x}}{\sqrt{x}+1}$.
+\bt{17} $J(u)=\left(\dfrac1u+\dfrac1{u^2}\right)\left(u+\dfrac1u\right)$.
+\bt{18} $h(w)=(w^2+3w)(w^{-1}-w^{-4})$.
+\bt{19} $H(u)=(u-\sqrt{u})(u+\sqrt{u})$.
+\bt{20} $f(z)=(1-e^z)(z+e^z)$.
+\bt{21} $V(t)=(t+2e^t)\sqrt{t}$.
+\bt{22} $W(t)=e^t(1+te^t)$.
+\bt{23} $y=e^p(p+p\sqrt{p})$.
+\bt{24} $h(r)=\dfrac{ae^r}{b+e^r}$.
+\bt{25} $f(t)=\dfrac{\sqrt[3]{t}}{t-3}$.
+\bt{26} $y=(z^2+e^z)\sqrt{z}$.
+\bt{27} $f(x)=\dfrac{x^2e^x}{x^2+e^x}$.
+\bt{28} $F(t)=\dfrac{At}{Bt^2+Ct^3}$.
+\bt{29} $f(x)=\dfrac{x}{x+\dfrac cx}$.
+\bt{30} $f(x)=\dfrac{ax+b}{cx+d}$.
+\group{31–34. Tìm $f'(x)$ và $f''(x)$.}
+\bt{31} $f(x)=x^2e^x$.
+\bt{32} $f(x)=\sqrt{x}\,e^x$.
+\bt{33} $f(x)=\dfrac{x}{x^2-1}$.
+\bt{34} $f(x)=\dfrac{x}{1+\sqrt{x}}$.
+\group{35–36. Tìm phương trình tiếp tuyến của đường cong tại điểm đã cho.}
+\bt{35} $y=\dfrac{x^2}{1+x}$, \quad $(1,\tfrac12)$.
+\bt{36} $y=\dfrac{1+x}{1+e^x}$, \quad $(0,\tfrac12)$.
+\group{37–38. Tìm phương trình tiếp tuyến và pháp tuyến của đường cong tại điểm đã cho.}
+\bt{37} $y=\dfrac{3x}{1+5x^2}$, \quad $(1,\tfrac12)$.
+\bt{38} $y=x+xe^x$, \quad $(0,0)$.
+\bt{39} (a) Đường cong $y=1/(1+x^2)$ được gọi là \textit{đường phù thủy của Maria Agnesi}. Tìm phương trình tiếp tuyến của đường cong tại $(-1,\tfrac12)$.
+
+(b) Minh họa (a) bằng cách vẽ đường cong và tiếp tuyến trên cùng một màn hình.
+\bt{40} (a) Đường cong $y=x/(1+x^2)$ được gọi là \textit{đường hình rắn}. Tìm phương trình tiếp tuyến của đường cong tại $(3,0.3)$.
+
+(b) Minh họa (a) bằng cách vẽ đường cong và tiếp tuyến trên cùng một màn hình.
+\bt{41} (a) Nếu $f(x)=(x^3-x)e^x$, tìm $f'(x)$.
+
+(b) Kiểm tra tính hợp lý của kết quả ở (a) bằng cách so sánh đồ thị $f$ và $f'$.
+\bt{42} (a) Nếu $f(x)=(x^2-1)/(x^2+1)$, tìm $f'(x)$ và $f''(x)$.
+
+(b) Kiểm tra tính hợp lý của các kết quả ở (a) bằng cách so sánh đồ thị $f,f',f''$.
+\bt{43} Nếu $f(x)=x^2/(1+x)$, tìm $f''(1)$.
+\bt{44} Nếu $g(x)=x/e^x$, tìm $g^{(n)}(x)$.
+\bt{45} Giả sử $f(5)=1$, $f'(5)=6$, $g(5)=-3$ và $g'(5)=2$. Tìm:
+
+(a) $(fg)'(5)$; \qquad (b) $(f/g)'(5)$; \qquad (c) $(g/f)'(5)$.
+\bt{46} Giả sử $f(4)=2$, $g(4)=5$, $f'(4)=6$ và $g'(4)=-3$. Tìm $h'(4)$ trong mỗi trường hợp:
+
+(a) $h(x)=3f(x)+8g(x)$; \qquad (b) $h(x)=f(x)g(x)$;
+
+(c) $h(x)=\dfrac{f(x)}{g(x)}$; \qquad (d) $h(x)=\dfrac{g(x)}{f(x)+g(x)}$.
+\bt{47} Nếu $f(x)=e^xg(x)$, trong đó $g(0)=2$, $g'(0)=5$, tìm $f'(0)$.
+\bt{48} Nếu $h(2)=4$ và $h'(2)=-3$, tìm
+\[\left.\frac{d}{dx}\left(\frac{h(x)}x\right)\right|_{x=2}.\]
+\bt{49} Nếu $g(x)=xf(x)$, trong đó $f(3)=4$, $f'(3)=-2$, tìm phương trình tiếp tuyến của đồ thị $g$ tại điểm có hoành độ $x=3$.
+\bt{50} Nếu $f(2)=10$ và $f'(x)=x^2f(x)$ với mọi $x$, tìm $f''(2)$.
+\bt{51} Cho các hàm $f,g$ có đồ thị như hình, đặt $u(x)=f(x)g(x)$ và $v(x)=f(x)/g(x)$.
+
+(a) Tìm $u'(1)$; \qquad (b) Tìm $v'(4)$.
+\fig[.57]{e51}{Hình dùng cho Bài tập 51.}
+\bt{52} Đặt $P(x)=F(x)G(x)$ và $Q(x)=F(x)/G(x)$, trong đó $F,G$ có đồ thị như hình.
+
+(a) Tìm $P'(2)$; \qquad (b) Tìm $Q'(7)$.
+\fig[.57]{e52}{Hình dùng cho Bài tập 52.}
+\bt{53} Nếu $g$ khả vi, tìm biểu thức đạo hàm của từng hàm sau:
+
+(a) $y=xg(x)$; \qquad (b) $y=\dfrac{x}{g(x)}$; \qquad (c) $y=\dfrac{g(x)}x$.
+\bt{54} Nếu $f$ khả vi, tìm biểu thức đạo hàm của từng hàm sau:
+
+(a) $y=x^2f(x)$; \qquad (b) $y=\dfrac{f(x)}{x^2}$;
+
+(c) $y=\dfrac{x^2}{f(x)}$; \qquad (d) $y=\dfrac{1+xf(x)}{\sqrt{x}}$.
+\bt{55} Có bao nhiêu tiếp tuyến của đường cong $y=x/(x+1)$ đi qua $(1,2)$? Các tiếp tuyến ấy tiếp xúc với đường cong tại những điểm nào?
+\bt{56} Tìm phương trình các tiếp tuyến của đường cong
+\[y=\frac{x-1}{x+1}\]
+song song với đường thẳng $x-2y=2$.
+\bt{57} Tìm $R'(0)$, trong đó
+\[R(x)=\frac{x-3x^3+5x^5}{1+3x^3+6x^6+9x^9}.\]
+\textit{Gợi ý:} Thay vì tìm $R'(x)$ trước, hãy gọi $f(x)$ là tử số, $g(x)$ là mẫu số của $R(x)$ rồi tính $R'(0)$ từ $f(0),f'(0),g(0),g'(0)$.
+\bt{58} Dùng phương pháp của Bài tập 57 để tính $Q'(0)$, trong đó
+\[Q(x)=\frac{1+x+x^2+xe^x}{1-x+x^2-xe^x}.\]
+\bt{59} Trong bài tập này, ta ước lượng tốc độ tăng của tổng thu nhập cá nhân tại Boulder, Colorado. Năm 2015, dân số thành phố là 107,350 người và tăng khoảng 1960 người mỗi năm. Thu nhập bình quân hằng năm là 60,220 đô la mỗi người và tăng khoảng 2250 đô la mỗi năm, cao hơn một chút so với mức tăng bình quân toàn quốc khoảng 1810 đô la mỗi năm. Dùng quy tắc tích và các số liệu trên để ước lượng tốc độ tăng tổng thu nhập cá nhân tại Boulder năm 2015. Giải thích ý nghĩa của từng số hạng trong quy tắc tích.
+\bt{60} Một nhà sản xuất làm các cuộn vải có khổ rộng cố định. Lượng vải $q$ bán được, tính bằng yard, là một hàm của giá bán $p$, tính bằng đô la mỗi yard; do đó có thể viết $q=f(p)$. Tổng doanh thu ứng với giá bán $p$ là $R(p)=pf(p)$.
+
+(a) Các đẳng thức $f(20)=10{,}000$ và $f'(20)=-350$ có ý nghĩa gì?
+
+(b) Với các giá trị ở (a), tìm $R'(20)$ và diễn giải kết quả.
+\bt{61} Phương trình Michaelis–Menten đối với enzym chymotrypsin là
+\[v=\frac{0.14[S]}{0.015+[S]},\]
+trong đó $v$ là tốc độ phản ứng enzym, $[S]$ là nồng độ cơ chất $S$. Tính $dv/d[S]$ và diễn giải kết quả.
+\bt{62} Sinh khối $B(t)$ của một quần thể cá là tổng khối lượng các cá thể trong quần thể tại thời điểm $t$. Nó bằng số cá thể $N(t)$ nhân với khối lượng trung bình $M(t)$ của một con cá tại thời điểm $t$. Ở cá bảy màu, sự sinh sản diễn ra liên tục. Giả sử tại thời điểm $t=4$ tuần, quần thể có 820 con và đang tăng với tốc độ 50 con mỗi tuần, còn khối lượng trung bình là $1.2\ \mathrm g$ và đang tăng với tốc độ $0.14\ \mathrm{g/tuần}$. Sinh khối đang tăng với tốc độ bao nhiêu khi $t=4$?
+\bt{63} \textbf{Quy tắc tích mở rộng.} Có thể mở rộng quy tắc tích cho tích ba hàm.
+
+(a) Dùng quy tắc tích hai lần để chứng minh: nếu $f,g,h$ khả vi thì
+\[(fgh)'=f'gh+fg'h+fgh'.\]
+(b) Cho $f=g=h$ trong (a), chứng tỏ
+\[\frac{d}{dx}[f(x)]^3=3[f(x)]^2f'(x).\]
+(c) Dùng (b) để tính đạo hàm của $y=e^{3x}$.
+\bt{64} (a) Nếu $F(x)=f(x)g(x)$, trong đó $f,g$ có đạo hàm mọi cấp, chứng tỏ
+\[F''=f''g+2f'g'+fg''.\]
+(b) Tìm các công thức tương tự cho $F'''$ và $F^{(4)}$.
+
+(c) Dự đoán một công thức cho $F^{(n)}$.
+\bt{65} Tìm biểu thức của năm đạo hàm đầu tiên của $f(x)=x^2e^x$. Bạn có nhận thấy quy luật nào không? Dự đoán công thức $f^{(n)}(x)$ rồi chứng minh bằng quy nạp toán học.
+\bt{66} \textbf{Quy tắc nghịch đảo.} Nếu $g$ khả vi, quy tắc nghịch đảo cho biết
+\[\frac{d}{dx}\left[\frac1{g(x)}\right]=-\frac{g'(x)}{[g(x)]^2}.\]
+(a) Dùng quy tắc thương để chứng minh quy tắc nghịch đảo.
+
+(b) Dùng quy tắc nghịch đảo để tính đạo hàm của hàm trong Bài tập 14.
+
+(c) Dùng quy tắc nghịch đảo để kiểm tra rằng quy tắc lũy thừa đúng với số mũ nguyên âm, tức
+\[\frac{d}{dx}(x^{-n})=-nx^{-n-1}\]
+với mọi số nguyên dương $n$.
+\section*{Chú thích biên tập và thuật ngữ}
+\begin{enumerate}[leftmargin=*]
+\item Quy tắc thương được áp dụng tại những điểm mà mẫu số khác 0; điều kiện này cũng được hiểu trong bảng công thức và các bài tập. Các đạo hàm được xét trên miền xác định thích hợp của từng hàm.
+\item Giữ nguyên số công thức (1)–(2), Ví dụ 1–5, Hình 1–4, Bài tập 1–66 và hai hình bài tập. Không bổ sung lời giải cho bài tập.
+\item Ở Bài tập 59–60, dấu phẩy trong 107,350; 60,220; 10,000 là dấu phân cách hàng nghìn theo bản gốc. Dấu chấm là dấu thập phân; các đơn vị và số liệu được giữ nguyên.
+\item Ký hiệu $[S]$ trong Bài tập 61 chỉ nồng độ cơ chất, không phải hàm phần nguyên. Bài tập 63–66 được giữ cùng các bài tập khác trước tiêu đề §3.3 dù xuất hiện trên trang có đầu trang ghi §3.3.
+\end{enumerate}
+\begin{center}\begin{tabular}{ll}\toprule
+Tiếng Anh&Tiếng Việt\\\midrule
+product rule&quy tắc tích\\
+quotient rule&quy tắc thương\\
+extended product rule&quy tắc tích mở rộng\\
+reciprocal rule&quy tắc nghịch đảo\\
+mathematical induction&quy nạp toán học\\
+biomass&sinh khối\\
+substrate&cơ chất\\\bottomrule
+\end{tabular}\end{center}
+\noindent\textbf{Phần tiếp theo:} §3.3 — Đạo hàm của các hàm lượng giác.
+\end{document}
