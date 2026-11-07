@@ -1,0 +1,416 @@
+{
+  "bookKey": "stewart-9",
+  "sectionKey": "3-4",
+  "heading": "3.4. Bài tập",
+  "sourceSha256": "92443e24beea0a33a051cad0afb5f19920f536cfeff32359ff4be6bc7d93be51",
+  "exercises": [
+    {
+      "number": 1,
+      "content": "<p><strong>1–6. Viết hàm hợp dưới dạng <span class=\"math inline\">\\(f(g(x))\\)</span>: xác định hàm trong <span class=\"math inline\">\\(u=g(x)\\)</span> và hàm ngoài <span class=\"math inline\">\\(y=f(u)\\)</span>. Sau đó tìm <span class=\"math inline\">\\(dy/dx\\)</span>.</strong></p><p><strong>1.</strong> <span class=\"math inline\">\\(y=(5-x^4)^3\\)</span>.</p>"
+    },
+    {
+      "number": 2,
+      "content": "<p><strong>1–6. Viết hàm hợp dưới dạng <span class=\"math inline\">\\(f(g(x))\\)</span>: xác định hàm trong <span class=\"math inline\">\\(u=g(x)\\)</span> và hàm ngoài <span class=\"math inline\">\\(y=f(u)\\)</span>. Sau đó tìm <span class=\"math inline\">\\(dy/dx\\)</span>.</strong></p><p><strong>2.</strong> <span class=\"math inline\">\\(y=\\sqrt{x^3+2}\\)</span>.</p>"
+    },
+    {
+      "number": 3,
+      "content": "<p><strong>1–6. Viết hàm hợp dưới dạng <span class=\"math inline\">\\(f(g(x))\\)</span>: xác định hàm trong <span class=\"math inline\">\\(u=g(x)\\)</span> và hàm ngoài <span class=\"math inline\">\\(y=f(u)\\)</span>. Sau đó tìm <span class=\"math inline\">\\(dy/dx\\)</span>.</strong></p><p><strong>3.</strong> <span class=\"math inline\">\\(y=\\sin(\\cos x)\\)</span>.</p>"
+    },
+    {
+      "number": 4,
+      "content": "<p><strong>1–6. Viết hàm hợp dưới dạng <span class=\"math inline\">\\(f(g(x))\\)</span>: xác định hàm trong <span class=\"math inline\">\\(u=g(x)\\)</span> và hàm ngoài <span class=\"math inline\">\\(y=f(u)\\)</span>. Sau đó tìm <span class=\"math inline\">\\(dy/dx\\)</span>.</strong></p><p><strong>4.</strong> <span class=\"math inline\">\\(y=\\tan(x^2)\\)</span>.</p>"
+    },
+    {
+      "number": 5,
+      "content": "<p><strong>1–6. Viết hàm hợp dưới dạng <span class=\"math inline\">\\(f(g(x))\\)</span>: xác định hàm trong <span class=\"math inline\">\\(u=g(x)\\)</span> và hàm ngoài <span class=\"math inline\">\\(y=f(u)\\)</span>. Sau đó tìm <span class=\"math inline\">\\(dy/dx\\)</span>.</strong></p><p><strong>5.</strong> <span class=\"math inline\">\\(y=e^{\\sqrt{x}}\\)</span>.</p>"
+    },
+    {
+      "number": 6,
+      "content": "<p><strong>1–6. Viết hàm hợp dưới dạng <span class=\"math inline\">\\(f(g(x))\\)</span>: xác định hàm trong <span class=\"math inline\">\\(u=g(x)\\)</span> và hàm ngoài <span class=\"math inline\">\\(y=f(u)\\)</span>. Sau đó tìm <span class=\"math inline\">\\(dy/dx\\)</span>.</strong></p><p><strong>6.</strong> <span class=\"math inline\">\\(y=\\sqrt[3]{e^x+1}\\)</span>.</p>"
+    },
+    {
+      "number": 7,
+      "content": "<p><strong>7–52. Tìm đạo hàm của hàm số.</strong></p><p><strong>7.</strong> <span class=\"math inline\">\\(f(x)=(2x^3-5x^2+4)^5\\)</span>.</p>"
+    },
+    {
+      "number": 8,
+      "content": "<p><strong>7–52. Tìm đạo hàm của hàm số.</strong></p><p><strong>8.</strong> <span class=\"math inline\">\\(f(x)=(x^5+3x^2-x)^{50}\\)</span>.</p>"
+    },
+    {
+      "number": 9,
+      "content": "<p><strong>7–52. Tìm đạo hàm của hàm số.</strong></p><p><strong>9.</strong> <span class=\"math inline\">\\(f(x)=\\sqrt{5x+1}\\)</span>.</p>"
+    },
+    {
+      "number": 10,
+      "content": "<p><strong>7–52. Tìm đạo hàm của hàm số.</strong></p><p><strong>10.</strong> <span class=\"math inline\">\\(f(x)=\\dfrac1{\\sqrt[3]{x^2-1}}\\)</span>.</p>"
+    },
+    {
+      "number": 11,
+      "content": "<p><strong>7–52. Tìm đạo hàm của hàm số.</strong></p><p><strong>11.</strong> <span class=\"math inline\">\\(g(t)=\\dfrac1{(2t+1)^2}\\)</span>.</p>"
+    },
+    {
+      "number": 12,
+      "content": "<p><strong>7–52. Tìm đạo hàm của hàm số.</strong></p><p><strong>12.</strong> <span class=\"math inline\">\\(F(t)=\\left(\\dfrac1{2t+1}\\right)^4\\)</span>.</p>"
+    },
+    {
+      "number": 13,
+      "content": "<p><strong>7–52. Tìm đạo hàm của hàm số.</strong></p><p><strong>13.</strong> <span class=\"math inline\">\\(f(\\theta)=\\cos(\\theta^2)\\)</span>.</p>"
+    },
+    {
+      "number": 14,
+      "content": "<p><strong>7–52. Tìm đạo hàm của hàm số.</strong></p><p><strong>14.</strong> <span class=\"math inline\">\\(g(\\theta)=\\cos^2\\theta\\)</span>.</p>"
+    },
+    {
+      "number": 15,
+      "content": "<p><strong>7–52. Tìm đạo hàm của hàm số.</strong></p><p><strong>15.</strong> <span class=\"math inline\">\\(g(x)=e^{x^2-x}\\)</span>.</p>"
+    },
+    {
+      "number": 16,
+      "content": "<p><strong>7–52. Tìm đạo hàm của hàm số.</strong></p><p><strong>16.</strong> <span class=\"math inline\">\\(y=5^{\\sqrt{x}}\\)</span>.</p>"
+    },
+    {
+      "number": 17,
+      "content": "<p><strong>7–52. Tìm đạo hàm của hàm số.</strong></p><p><strong>17.</strong> <span class=\"math inline\">\\(y=x^2e^{-3x}\\)</span>.</p>"
+    },
+    {
+      "number": 18,
+      "content": "<p><strong>7–52. Tìm đạo hàm của hàm số.</strong></p><p><strong>18.</strong> <span class=\"math inline\">\\(f(t)=t\\sin\\pi t\\)</span>.</p>"
+    },
+    {
+      "number": 19,
+      "content": "<p><strong>7–52. Tìm đạo hàm của hàm số.</strong></p><p><strong>19.</strong> <span class=\"math inline\">\\(f(t)=e^{at}\\sin bt\\)</span>.</p>"
+    },
+    {
+      "number": 20,
+      "content": "<p><strong>7–52. Tìm đạo hàm của hàm số.</strong></p><p><strong>20.</strong> <span class=\"math inline\">\\(A(r)=\\sqrt r\\cdot e^{r^2+1}\\)</span>.</p>"
+    },
+    {
+      "number": 21,
+      "content": "<p><strong>7–52. Tìm đạo hàm của hàm số.</strong></p><p><strong>21.</strong> <span class=\"math inline\">\\(F(x)=(4x+5)^3(x^2-2x+5)^4\\)</span>.</p>"
+    },
+    {
+      "number": 22,
+      "content": "<p><strong>7–52. Tìm đạo hàm của hàm số.</strong></p><p><strong>22.</strong> <span class=\"math inline\">\\(G(z)=(1-4z)^2\\sqrt{z^2+1}\\)</span>.</p>"
+    },
+    {
+      "number": 23,
+      "content": "<p><strong>7–52. Tìm đạo hàm của hàm số.</strong></p><p><strong>23.</strong> <span class=\"math inline\">\\(y=\\sqrt{\\dfrac{x}{x+1}}\\)</span>.</p>"
+    },
+    {
+      "number": 24,
+      "content": "<p><strong>7–52. Tìm đạo hàm của hàm số.</strong></p><p><strong>24.</strong> <span class=\"math inline\">\\(y=\\left(x+\\dfrac1x\\right)^5\\)</span>.</p>"
+    },
+    {
+      "number": 25,
+      "content": "<p><strong>7–52. Tìm đạo hàm của hàm số.</strong></p><p><strong>25.</strong> <span class=\"math inline\">\\(y=e^{\\tan\\theta}\\)</span>.</p>"
+    },
+    {
+      "number": 26,
+      "content": "<p><strong>7–52. Tìm đạo hàm của hàm số.</strong></p><p><strong>26.</strong> <span class=\"math inline\">\\(f(t)=2^{t^3}\\)</span>.</p>"
+    },
+    {
+      "number": 27,
+      "content": "<p><strong>7–52. Tìm đạo hàm của hàm số.</strong></p><p><strong>27.</strong> <span class=\"math inline\">\\(g(u)=\\left(\\dfrac{u^3-1}{u^3+1}\\right)^8\\)</span>.</p>"
+    },
+    {
+      "number": 28,
+      "content": "<p><strong>7–52. Tìm đạo hàm của hàm số.</strong></p><p><strong>28.</strong> <span class=\"math inline\">\\(s(t)=\\sqrt{\\dfrac{1+\\sin t}{1+\\cos t}}\\)</span>.</p>"
+    },
+    {
+      "number": 29,
+      "content": "<p><strong>7–52. Tìm đạo hàm của hàm số.</strong></p><p><strong>29.</strong> <span class=\"math inline\">\\(r(t)=10^{2\\sqrt t}\\)</span>.</p>"
+    },
+    {
+      "number": 30,
+      "content": "<p><strong>7–52. Tìm đạo hàm của hàm số.</strong></p><p><strong>30.</strong> <span class=\"math inline\">\\(f(z)=e^{z/(z-1)}\\)</span>.</p>"
+    },
+    {
+      "number": 31,
+      "content": "<p><strong>7–52. Tìm đạo hàm của hàm số.</strong></p><p><strong>31.</strong> <span class=\"math inline\">\\(H(r)=\\dfrac{(r^2-1)^3}{(2r+1)^5}\\)</span>.</p>"
+    },
+    {
+      "number": 32,
+      "content": "<p><strong>7–52. Tìm đạo hàm của hàm số.</strong></p><p><strong>32.</strong> <span class=\"math inline\">\\(J(\\theta)=\\tan^2(n\\theta)\\)</span>.</p>"
+    },
+    {
+      "number": 33,
+      "content": "<p><strong>7–52. Tìm đạo hàm của hàm số.</strong></p><p><strong>33.</strong> <span class=\"math inline\">\\(F(t)=e^{t\\sin2t}\\)</span>.</p>"
+    },
+    {
+      "number": 34,
+      "content": "<p><strong>7–52. Tìm đạo hàm của hàm số.</strong></p><p><strong>34.</strong> <span class=\"math inline\">\\(F(t)=\\dfrac{t^2}{\\sqrt{t^3+1}}\\)</span>.</p>"
+    },
+    {
+      "number": 35,
+      "content": "<p><strong>7–52. Tìm đạo hàm của hàm số.</strong></p><p><strong>35.</strong> <span class=\"math inline\">\\(G(x)=4^{C/x}\\)</span>.</p>"
+    },
+    {
+      "number": 36,
+      "content": "<p><strong>7–52. Tìm đạo hàm của hàm số.</strong></p><p><strong>36.</strong> <span class=\"math inline\">\\(U(y)=\\left(\\dfrac{y^4+1}{y^2+1}\\right)^5\\)</span>.</p>"
+    },
+    {
+      "number": 37,
+      "content": "<p><strong>7–52. Tìm đạo hàm của hàm số.</strong></p><p><strong>37.</strong> <span class=\"math inline\">\\(f(x)=\\sin x\\cos(1-x^2)\\)</span>.</p>"
+    },
+    {
+      "number": 38,
+      "content": "<p><strong>7–52. Tìm đạo hàm của hàm số.</strong></p><p><strong>38.</strong> <span class=\"math inline\">\\(g(x)=e^{-x}\\cos(x^2)\\)</span>.</p>"
+    },
+    {
+      "number": 39,
+      "content": "<p><strong>7–52. Tìm đạo hàm của hàm số.</strong></p><p><strong>39.</strong> <span class=\"math inline\">\\(F(t)=\\tan\\sqrt{1+t^2}\\)</span>.</p>"
+    },
+    {
+      "number": 40,
+      "content": "<p><strong>7–52. Tìm đạo hàm của hàm số.</strong></p><p><strong>40.</strong> <span class=\"math inline\">\\(G(z)=(1+\\cos^2z)^3\\)</span>.</p>"
+    },
+    {
+      "number": 41,
+      "content": "<p><strong>7–52. Tìm đạo hàm của hàm số.</strong></p><p><strong>41.</strong> <span class=\"math inline\">\\(y=\\sin^2(x^2+1)\\)</span>.</p>"
+    },
+    {
+      "number": 42,
+      "content": "<p><strong>7–52. Tìm đạo hàm của hàm số.</strong></p><p><strong>42.</strong> <span class=\"math inline\">\\(y=e^{\\sin2x}+\\sin(e^{2x})\\)</span>.</p>"
+    },
+    {
+      "number": 43,
+      "content": "<p><strong>7–52. Tìm đạo hàm của hàm số.</strong></p><p><strong>43.</strong> <span class=\"math inline\">\\(g(x)=\\sin\\left(\\dfrac{e^x}{1+e^x}\\right)\\)</span>.</p>"
+    },
+    {
+      "number": 44,
+      "content": "<p><strong>7–52. Tìm đạo hàm của hàm số.</strong></p><p><strong>44.</strong> <span class=\"math inline\">\\(f(t)=e^{1/t}\\sqrt{t^2-1}\\)</span>.</p>"
+    },
+    {
+      "number": 45,
+      "content": "<p><strong>7–52. Tìm đạo hàm của hàm số.</strong></p><p><strong>45.</strong> <span class=\"math inline\">\\(f(t)=\\tan(\\sec(\\cos t))\\)</span>.</p>"
+    },
+    {
+      "number": 46,
+      "content": "<p><strong>7–52. Tìm đạo hàm của hàm số.</strong></p><p><strong>46.</strong> <span class=\"math inline\">\\(y=\\sqrt{x+\\sqrt{x+\\sqrt{x}}}\\)</span>.</p>"
+    },
+    {
+      "number": 47,
+      "content": "<p><strong>7–52. Tìm đạo hàm của hàm số.</strong></p><p><strong>47.</strong> <span class=\"math inline\">\\(f(x)=e^{\\sin^2(x^2)}\\)</span>.</p>"
+    },
+    {
+      "number": 48,
+      "content": "<p><strong>7–52. Tìm đạo hàm của hàm số.</strong></p><p><strong>48.</strong> <span class=\"math inline\">\\(y=2^{3^{4^x}}\\)</span>.</p>"
+    },
+    {
+      "number": 49,
+      "content": "<p><strong>7–52. Tìm đạo hàm của hàm số.</strong></p><p><strong>49.</strong> <span class=\"math inline\">\\(y=(3^{\\cos(x^2)}-1)^4\\)</span>.</p>"
+    },
+    {
+      "number": 50,
+      "content": "<p><strong>7–52. Tìm đạo hàm của hàm số.</strong></p><p><strong>50.</strong> <span class=\"math inline\">\\(y=\\sin(\\theta+\\tan(\\theta+\\cos\\theta))\\)</span>.</p>"
+    },
+    {
+      "number": 51,
+      "content": "<p><strong>7–52. Tìm đạo hàm của hàm số.</strong></p><p><strong>51.</strong> <span class=\"math inline\">\\(y=\\cos\\sqrt{\\sin(\\tan\\pi x)}\\)</span>.</p>"
+    },
+    {
+      "number": 52,
+      "content": "<p><strong>7–52. Tìm đạo hàm của hàm số.</strong></p><p><strong>52.</strong> <span class=\"math inline\">\\(y=\\sin^3(\\cos(x^2))\\)</span>.</p>"
+    },
+    {
+      "number": 53,
+      "content": "<p><strong>53–56. Tìm <span class=\"math inline\">\\(y'\\)</span> và <span class=\"math inline\">\\(y''\\)</span>.</strong></p><p><strong>53.</strong> <span class=\"math inline\">\\(y=\\cos(\\sin3\\theta)\\)</span>.</p>"
+    },
+    {
+      "number": 54,
+      "content": "<p><strong>53–56. Tìm <span class=\"math inline\">\\(y'\\)</span> và <span class=\"math inline\">\\(y''\\)</span>.</strong></p><p><strong>54.</strong> <span class=\"math inline\">\\(y=(1+\\sqrt x)^3\\)</span>.</p>"
+    },
+    {
+      "number": 55,
+      "content": "<p><strong>53–56. Tìm <span class=\"math inline\">\\(y'\\)</span> và <span class=\"math inline\">\\(y''\\)</span>.</strong></p><p><strong>55.</strong> <span class=\"math inline\">\\(y=\\sqrt{\\cos x}\\)</span>.</p>"
+    },
+    {
+      "number": 56,
+      "content": "<p><strong>53–56. Tìm <span class=\"math inline\">\\(y'\\)</span> và <span class=\"math inline\">\\(y''\\)</span>.</strong></p><p><strong>56.</strong> <span class=\"math inline\">\\(y=e^{e^x}\\)</span>.</p>"
+    },
+    {
+      "number": 57,
+      "content": "<p><strong>57–60. Tìm phương trình tiếp tuyến của đường cong tại điểm đã cho.</strong></p><p><strong>57.</strong> <span class=\"math inline\">\\(y=2^x\\)</span>, <span class=\"math inline\">\\((0,1)\\)</span>.</p>"
+    },
+    {
+      "number": 58,
+      "content": "<p><strong>57–60. Tìm phương trình tiếp tuyến của đường cong tại điểm đã cho.</strong></p><p><strong>58.</strong> <span class=\"math inline\">\\(y=\\sqrt{1+x^3}\\)</span>, <span class=\"math inline\">\\((2,3)\\)</span>.</p>"
+    },
+    {
+      "number": 59,
+      "content": "<p><strong>57–60. Tìm phương trình tiếp tuyến của đường cong tại điểm đã cho.</strong></p><p><strong>59.</strong> <span class=\"math inline\">\\(y=\\sin(\\sin x)\\)</span>, <span class=\"math inline\">\\((\\pi,0)\\)</span>.</p>"
+    },
+    {
+      "number": 60,
+      "content": "<p><strong>57–60. Tìm phương trình tiếp tuyến của đường cong tại điểm đã cho.</strong></p><p><strong>60.</strong> <span class=\"math inline\">\\(y=xe^{-x^2}\\)</span>, <span class=\"math inline\">\\((0,0)\\)</span>.</p>"
+    },
+    {
+      "number": 61,
+      "content": "<p><strong>61.</strong> (a) Tìm phương trình tiếp tuyến của đường cong <span class=\"math inline\">\\(y=2/(1+e^{-x})\\)</span> tại <span class=\"math inline\">\\((0,1)\\)</span>.</p>\n<p>(b) Minh họa (a) bằng cách vẽ đường cong và tiếp tuyến trên cùng một màn hình.</p>"
+    },
+    {
+      "number": 62,
+      "content": "<p><strong>62.</strong> (a) Đường cong <span class=\"math inline\">\\(y=|x|/\\sqrt{2-x^2}\\)</span> được gọi là <em>đường cong mũi đạn</em>. Tìm phương trình tiếp tuyến tại <span class=\"math inline\">\\((1,1)\\)</span>.</p>\n<p>(b) Minh họa (a) bằng cách vẽ đường cong và tiếp tuyến trên cùng một màn hình.</p>"
+    },
+    {
+      "number": 63,
+      "content": "<p><strong>63.</strong> (a) Nếu <span class=\"math inline\">\\(f(x)=x\\sqrt{2-x^2}\\)</span>, tìm <span class=\"math inline\">\\(f'(x)\\)</span>.</p>\n<p>(b) Kiểm tra tính hợp lý của kết quả ở (a) bằng cách so sánh đồ thị <span class=\"math inline\">\\(f,f'\\)</span>.</p>"
+    },
+    {
+      "number": 64,
+      "content": "<p><strong>64.</strong> Hàm <span class=\"math inline\">\\(f(x)=\\sin(x+\\sin2x)\\)</span>, <span class=\"math inline\">\\(0\\le x\\le\\pi\\)</span>, xuất hiện trong các ứng dụng tổng hợp bằng điều chế tần số (FM).</p>\n<p>(a) Dùng đồ thị <span class=\"math inline\">\\(f\\)</span> tạo bởi máy tính cầm tay hoặc máy tính để phác họa đồ thị <span class=\"math inline\">\\(f'\\)</span>.</p>\n<p>(b) Tính <span class=\"math inline\">\\(f'(x)\\)</span> rồi dùng biểu thức đó và máy tính để vẽ <span class=\"math inline\">\\(f'\\)</span>. So sánh với hình phác họa ở (a).</p>"
+    },
+    {
+      "number": 65,
+      "content": "<p><strong>65.</strong> Tìm mọi điểm trên đồ thị <span class=\"math inline\">\\(f(x)=2\\sin x+\\sin^2x\\)</span> mà tại đó tiếp tuyến nằm ngang.</p>"
+    },
+    {
+      "number": 66,
+      "content": "<p><strong>66.</strong> Tại điểm nào trên đường cong <span class=\"math inline\">\\(y=\\sqrt{1+2x}\\)</span>, tiếp tuyến vuông góc với đường thẳng <span class=\"math inline\">\\(6x+2y=1\\)</span>?</p>"
+    },
+    {
+      "number": 67,
+      "content": "<p><strong>67.</strong> Nếu <span class=\"math inline\">\\(F(x)=f(g(x))\\)</span>, trong đó <span class=\"math inline\">\\(f(-2)=8\\)</span>, <span class=\"math inline\">\\(f'(-2)=4\\)</span>, <span class=\"math inline\">\\(f'(5)=3\\)</span>, <span class=\"math inline\">\\(g(5)=-2\\)</span>, <span class=\"math inline\">\\(g'(5)=6\\)</span>, tìm <span class=\"math inline\">\\(F'(5)\\)</span>.</p>"
+    },
+    {
+      "number": 68,
+      "content": "<p><strong>68.</strong> Nếu <span class=\"math inline\">\\(h(x)=\\sqrt{4+3f(x)}\\)</span>, trong đó <span class=\"math inline\">\\(f(1)=7\\)</span>, <span class=\"math inline\">\\(f'(1)=4\\)</span>, tìm <span class=\"math inline\">\\(h'(1)\\)</span>.</p>"
+    },
+    {
+      "number": 69,
+      "content": "<p><strong>69.</strong> Cho bảng giá trị của <span class=\"math inline\">\\(f,g,f',g'\\)</span>:</p>\n<div class=\"center\">\n<table>\n<thead>\n<tr class=\"header\">\n<th style=\"text-align: center;\"><span class=\"math inline\">\\(x\\)</span></th>\n<th style=\"text-align: center;\"><span class=\"math inline\">\\(f(x)\\)</span></th>\n<th style=\"text-align: center;\"><span class=\"math inline\">\\(g(x)\\)</span></th>\n<th style=\"text-align: center;\"><span class=\"math inline\">\\(f'(x)\\)</span></th>\n<th style=\"text-align: center;\"><span class=\"math inline\">\\(g'(x)\\)</span></th>\n</tr>\n</thead>\n<tbody>\n<tr class=\"odd\">\n<td style=\"text-align: center;\">1</td>\n<td style=\"text-align: center;\">3</td>\n<td style=\"text-align: center;\">2</td>\n<td style=\"text-align: center;\">4</td>\n<td style=\"text-align: center;\">6</td>\n</tr>\n<tr class=\"even\">\n<td style=\"text-align: center;\">2</td>\n<td style=\"text-align: center;\">1</td>\n<td style=\"text-align: center;\">8</td>\n<td style=\"text-align: center;\">5</td>\n<td style=\"text-align: center;\">7</td>\n</tr>\n<tr class=\"odd\">\n<td style=\"text-align: center;\">3</td>\n<td style=\"text-align: center;\">7</td>\n<td style=\"text-align: center;\">2</td>\n<td style=\"text-align: center;\">7</td>\n<td style=\"text-align: center;\">9</td>\n</tr>\n</tbody>\n</table>\n</div>\n<p>(a) Nếu <span class=\"math inline\">\\(h(x)=f(g(x))\\)</span>, tìm <span class=\"math inline\">\\(h'(1)\\)</span>.</p>\n<p>(b) Nếu <span class=\"math inline\">\\(H(x)=g(f(x))\\)</span>, tìm <span class=\"math inline\">\\(H'(1)\\)</span>.</p>"
+    },
+    {
+      "number": 70,
+      "content": "<p><strong>70.</strong> Cho <span class=\"math inline\">\\(f,g\\)</span> là các hàm trong Bài tập 69.</p>\n<p>(a) Nếu <span class=\"math inline\">\\(F(x)=f(f(x))\\)</span>, tìm <span class=\"math inline\">\\(F'(2)\\)</span>.</p>\n<p>(b) Nếu <span class=\"math inline\">\\(G(x)=g(g(x))\\)</span>, tìm <span class=\"math inline\">\\(G'(3)\\)</span>.</p><p><strong>Bảng dữ liệu của Bài tập 69.</strong></p><table>\n<thead>\n<tr class=\"header\">\n<th style=\"text-align: center;\"><span class=\"math inline\">\\(x\\)</span></th>\n<th style=\"text-align: center;\"><span class=\"math inline\">\\(f(x)\\)</span></th>\n<th style=\"text-align: center;\"><span class=\"math inline\">\\(g(x)\\)</span></th>\n<th style=\"text-align: center;\"><span class=\"math inline\">\\(f'(x)\\)</span></th>\n<th style=\"text-align: center;\"><span class=\"math inline\">\\(g'(x)\\)</span></th>\n</tr>\n</thead>\n<tbody>\n<tr class=\"odd\">\n<td style=\"text-align: center;\">1</td>\n<td style=\"text-align: center;\">3</td>\n<td style=\"text-align: center;\">2</td>\n<td style=\"text-align: center;\">4</td>\n<td style=\"text-align: center;\">6</td>\n</tr>\n<tr class=\"even\">\n<td style=\"text-align: center;\">2</td>\n<td style=\"text-align: center;\">1</td>\n<td style=\"text-align: center;\">8</td>\n<td style=\"text-align: center;\">5</td>\n<td style=\"text-align: center;\">7</td>\n</tr>\n<tr class=\"odd\">\n<td style=\"text-align: center;\">3</td>\n<td style=\"text-align: center;\">7</td>\n<td style=\"text-align: center;\">2</td>\n<td style=\"text-align: center;\">7</td>\n<td style=\"text-align: center;\">9</td>\n</tr>\n</tbody>\n</table>"
+    },
+    {
+      "number": 71,
+      "content": "<p><strong>71.</strong> Cho <span class=\"math inline\">\\(f,g\\)</span> có đồ thị như hình, đặt <span class=\"math inline\">\\(u(x)=f(g(x))\\)</span>, <span class=\"math inline\">\\(v(x)=g(f(x))\\)</span>, <span class=\"math inline\">\\(w(x)=g(g(x))\\)</span>. Tìm từng đạo hàm sau nếu tồn tại; nếu không tồn tại, giải thích vì sao:</p>\n<p>(a) <span class=\"math inline\">\\(u'(1)\\)</span>; (b) <span class=\"math inline\">\\(v'(1)\\)</span>; (c) <span class=\"math inline\">\\(w'(1)\\)</span>.</p>\n<div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-3-4-92443e24/e71.png\" alt=\"image\"><br>\nHình dùng cho Bài tập 71.</p>\n</div>"
+    },
+    {
+      "number": 72,
+      "content": "<p><strong>72.</strong> Cho <span class=\"math inline\">\\(f\\)</span> có đồ thị như hình, đặt <span class=\"math inline\">\\(h(x)=f(f(x))\\)</span>, <span class=\"math inline\">\\(g(x)=f(x^2)\\)</span>. Dùng đồ thị <span class=\"math inline\">\\(f\\)</span> ước lượng:</p>\n<p>(a) <span class=\"math inline\">\\(h'(2)\\)</span>; (b) <span class=\"math inline\">\\(g'(2)\\)</span>.</p>\n<div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-3-4-92443e24/e72.png\" alt=\"image\"><br>\nHình dùng cho Bài tập 72.</p>\n</div>"
+    },
+    {
+      "number": 73,
+      "content": "<p><strong>73.</strong> Nếu <span class=\"math inline\">\\(g(x)=\\sqrt{f(x)}\\)</span>, với đồ thị <span class=\"math inline\">\\(f\\)</span> như hình, tính <span class=\"math inline\">\\(g'(3)\\)</span>.</p>\n<div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-3-4-92443e24/e73.png\" alt=\"image\"><br>\nHình dùng cho Bài tập 73.</p>\n</div>"
+    },
+    {
+      "number": 74,
+      "content": "<p><strong>74.</strong> Giả sử <span class=\"math inline\">\\(f\\)</span> khả vi trên <span class=\"math inline\">\\(\\mathbb R\\)</span> và <span class=\"math inline\">\\(\\alpha\\)</span> là số thực. Đặt <span class=\"math inline\">\\(F(x)=f(x^\\alpha)\\)</span> và <span class=\"math inline\">\\(G(x)=[f(x)]^\\alpha\\)</span>. Tìm biểu thức của:</p>\n<p>(a) <span class=\"math inline\">\\(F'(x)\\)</span>; (b) <span class=\"math inline\">\\(G'(x)\\)</span>.</p>"
+    },
+    {
+      "number": 75,
+      "content": "<p><strong>75.</strong> Giả sử <span class=\"math inline\">\\(f\\)</span> khả vi trên <span class=\"math inline\">\\(\\mathbb R\\)</span>. Đặt <span class=\"math inline\">\\(F(x)=f(e^x)\\)</span>, <span class=\"math inline\">\\(G(x)=e^{f(x)}\\)</span>. Tìm biểu thức của:</p>\n<p>(a) <span class=\"math inline\">\\(F'(x)\\)</span>; (b) <span class=\"math inline\">\\(G'(x)\\)</span>.</p>"
+    },
+    {
+      "number": 76,
+      "content": "<p><strong>76.</strong> Đặt <span class=\"math inline\">\\(g(x)=e^{cx}+f(x)\\)</span>, <span class=\"math inline\">\\(h(x)=e^{kx}f(x)\\)</span>, trong đó <span class=\"math inline\">\\(f(0)=3\\)</span>, <span class=\"math inline\">\\(f'(0)=5\\)</span>, <span class=\"math inline\">\\(f''(0)=-2\\)</span>.</p>\n<p>(a) Tìm <span class=\"math inline\">\\(g'(0),g''(0)\\)</span> theo <span class=\"math inline\">\\(c\\)</span>.</p>\n<p>(b) Tìm theo <span class=\"math inline\">\\(k\\)</span> phương trình tiếp tuyến của đồ thị <span class=\"math inline\">\\(h\\)</span> tại điểm có hoành độ <span class=\"math inline\">\\(x=0\\)</span>.</p>"
+    },
+    {
+      "number": 77,
+      "content": "<p><strong>77.</strong> Cho <span class=\"math inline\">\\(r(x)=f(g(h(x)))\\)</span>, trong đó <span class=\"math inline\">\\(h(1)=2\\)</span>, <span class=\"math inline\">\\(g(2)=3\\)</span>, <span class=\"math inline\">\\(h'(1)=4\\)</span>, <span class=\"math inline\">\\(g'(2)=5\\)</span>, <span class=\"math inline\">\\(f'(3)=6\\)</span>. Tìm <span class=\"math inline\">\\(r'(1)\\)</span>.</p>"
+    },
+    {
+      "number": 78,
+      "content": "<p><strong>78.</strong> Nếu <span class=\"math inline\">\\(g\\)</span> khả vi hai lần và <span class=\"math inline\">\\(f(x)=xg(x^2)\\)</span>, tìm <span class=\"math inline\">\\(f''\\)</span> theo <span class=\"math inline\">\\(g,g',g''\\)</span>.</p>"
+    },
+    {
+      "number": 79,
+      "content": "<p><strong>79.</strong> Nếu <span class=\"math inline\">\\(F(x)=f(3f(4f(x)))\\)</span>, trong đó <span class=\"math inline\">\\(f(0)=0\\)</span>, <span class=\"math inline\">\\(f'(0)=2\\)</span>, tìm <span class=\"math inline\">\\(F'(0)\\)</span>.</p>"
+    },
+    {
+      "number": 80,
+      "content": "<p><strong>80.</strong> Nếu <span class=\"math inline\">\\(F(x)=f(xf(xf(x)))\\)</span>, trong đó <span class=\"math inline\">\\(f(1)=2\\)</span>, <span class=\"math inline\">\\(f(2)=3\\)</span>, <span class=\"math inline\">\\(f'(1)=4\\)</span>, <span class=\"math inline\">\\(f'(2)=5\\)</span>, <span class=\"math inline\">\\(f'(3)=6\\)</span>, tìm <span class=\"math inline\">\\(F'(1)\\)</span>.</p>"
+    },
+    {
+      "number": 81,
+      "content": "<p><strong>81.</strong> Chứng minh <span class=\"math inline\">\\(y=e^{2x}(A\\cos3x+B\\sin3x)\\)</span> thỏa mãn phương trình vi phân <span class=\"math inline\">\\(y''-4y'+13y=0\\)</span>.</p>"
+    },
+    {
+      "number": 82,
+      "content": "<p><strong>82.</strong> Với những giá trị nào của <span class=\"math inline\">\\(r\\)</span>, hàm <span class=\"math inline\">\\(y=e^{rx}\\)</span> thỏa mãn phương trình vi phân <span class=\"math inline\">\\(y''-4y'+y=0\\)</span>?</p>"
+    },
+    {
+      "number": 83,
+      "content": "<p><strong>83.</strong> Tìm đạo hàm cấp 50 của <span class=\"math inline\">\\(y=\\cos2x\\)</span>.</p>"
+    },
+    {
+      "number": 84,
+      "content": "<p><strong>84.</strong> Tìm đạo hàm cấp 1000 của <span class=\"math inline\">\\(f(x)=xe^{-x}\\)</span>.</p>"
+    },
+    {
+      "number": 85,
+      "content": "<p><strong>85.</strong> Li độ của một chất điểm trên dây dao động được cho bởi <span class=\"math display\">\\[s(t)=10+\\frac14\\sin(10\\pi t),\\]</span> trong đó <span class=\"math inline\">\\(s\\)</span> tính bằng xentimét, <span class=\"math inline\">\\(t\\)</span> tính bằng giây. Tìm vận tốc sau <span class=\"math inline\">\\(t\\)</span> giây.</p>"
+    },
+    {
+      "number": 86,
+      "content": "<p><strong>86.</strong> Nếu phương trình chuyển động của một chất điểm là <span class=\"math inline\">\\(s=A\\cos(\\omega t+\\delta)\\)</span> thì chất điểm được nói là thực hiện dao động điều hòa đơn giản.</p>\n<p>(a) Tìm vận tốc tại thời điểm <span class=\"math inline\">\\(t\\)</span>.</p>\n<p>(b) Khi nào vận tốc bằng 0?</p>"
+    },
+    {
+      "number": 87,
+      "content": "<p><strong>87.</strong> Sao biến quang Cepheid là sao có độ sáng luân phiên tăng và giảm. Sao dễ quan sát nhất thuộc loại này là Delta Cephei, có khoảng thời gian giữa hai lần sáng cực đại là 5.4 ngày. Độ sáng trung bình của sao này là 4.0 và biến thiên <span class=\"math inline\">\\(\\pm0.35\\)</span>. Từ các dữ liệu đó, độ sáng của Delta Cephei tại thời điểm <span class=\"math inline\">\\(t\\)</span>, tính bằng ngày, được mô hình hóa bởi <span class=\"math display\">\\[B(t)=4.0+0.35\\sin\\left(\\frac{2\\pi t}{5.4}\\right).\\]</span> (a) Tìm tốc độ biến thiên độ sáng sau <span class=\"math inline\">\\(t\\)</span> ngày.</p>\n<p>(b) Tìm tốc độ tăng sau một ngày, chính xác đến hai chữ số thập phân.</p>"
+    },
+    {
+      "number": 88,
+      "content": "<p><strong>88.</strong> Trong Ví dụ 1.3.4, ta đã xây dựng mô hình độ dài ban ngày, tính bằng giờ, tại Philadelphia vào ngày thứ <span class=\"math inline\">\\(t\\)</span> trong năm: <span class=\"math display\">\\[L(t)=12+2.8\\sin\\left[\\frac{2\\pi}{365}(t-80)\\right].\\]</span> Dùng mô hình so sánh tốc độ tăng số giờ ban ngày tại Philadelphia vào ngày 21 tháng 3 (<span class=\"math inline\">\\(t=80\\)</span>) và ngày 21 tháng 5 (<span class=\"math inline\">\\(t=141\\)</span>).</p>"
+    },
+    {
+      "number": 89,
+      "content": "<p><strong>89.</strong> Chuyển động của lò xo chịu lực ma sát hoặc lực cản, như bộ giảm xóc ô tô, thường được mô hình hóa bằng tích của hàm mũ với hàm sin hoặc côsin. Giả sử phương trình chuyển động của một điểm trên lò xo là <span class=\"math display\">\\[s(t)=2e^{-1.5t}\\sin2\\pi t,\\]</span> trong đó <span class=\"math inline\">\\(s\\)</span> tính bằng xentimét, <span class=\"math inline\">\\(t\\)</span> tính bằng giây. Tìm vận tốc sau <span class=\"math inline\">\\(t\\)</span> giây và vẽ các hàm vị trí, vận tốc với <span class=\"math inline\">\\(0\\le t\\le2\\)</span>.</p>"
+    },
+    {
+      "number": 90,
+      "content": "<p><strong>90.</strong> Trong những điều kiện nhất định, một tin đồn lan truyền theo phương trình <span class=\"math display\">\\[p(t)=\\frac1{1+ae^{-kt}},\\]</span> trong đó <span class=\"math inline\">\\(p(t)\\)</span> là tỉ lệ dân số đã nghe tin đồn tại thời điểm <span class=\"math inline\">\\(t\\)</span>; <span class=\"math inline\">\\(a,k\\)</span> là các hằng số dương. Trong §9.4, ta sẽ thấy đây là phương trình hợp lý cho <span class=\"math inline\">\\(p(t)\\)</span>.</p>\n<p>(a) Tìm <span class=\"math inline\">\\(\\lim_{t\\to\\infty}p(t)\\)</span> và diễn giải kết quả.</p>\n<p>(b) Tìm tốc độ lan truyền tin đồn.</p>\n<p>(c) Vẽ <span class=\"math inline\">\\(p\\)</span> khi <span class=\"math inline\">\\(a=10\\)</span>, <span class=\"math inline\">\\(k=0.5\\)</span>, với <span class=\"math inline\">\\(t\\)</span> tính bằng giờ. Dùng đồ thị ước lượng thời gian cần để 80% dân số đã nghe tin đồn.</p>"
+    },
+    {
+      "number": 91,
+      "content": "<p><strong>91.</strong> Nồng độ cồn trong máu trung bình (BAC) của tám nam giới được đo sau khi uống 15 mL ethanol, tương ứng một đơn vị đồ uống có cồn. Dữ liệu thu được được mô hình hóa bằng hàm nồng độ <span class=\"math display\">\\[C(t)=0.00225te^{-0.0467t},\\]</span> trong đó <span class=\"math inline\">\\(t\\)</span> là số phút sau khi uống, <span class=\"math inline\">\\(C\\)</span> tính bằng g/dL.</p>\n<p>(a) Sau 10 phút, BAC đang tăng nhanh đến mức nào?</p>\n<p>(b) Nửa giờ sau, nồng độ đang giảm nhanh đến mức nào?</p>\n<p><em>Nguồn của bài tập:</em> Phỏng theo P. Wilkinson và cộng sự, “Pharmacokinetics of Ethanol after Oral Administration in the Fasting State”, <em>Journal of Pharmacokinetics and Biopharmaceutics</em> 5 (1977), 207–224.</p>"
+    },
+    {
+      "number": 92,
+      "content": "<p><strong>92.</strong> Không khí được bơm vào một khí cầu thời tiết hình cầu. Tại thời điểm <span class=\"math inline\">\\(t\\)</span>, thể tích khí cầu là <span class=\"math inline\">\\(V(t)\\)</span>, bán kính là <span class=\"math inline\">\\(r(t)\\)</span>.</p>\n<p>(a) Các đạo hàm <span class=\"math inline\">\\(dV/dr\\)</span> và <span class=\"math inline\">\\(dV/dt\\)</span> biểu thị điều gì?</p>\n<p>(b) Biểu diễn <span class=\"math inline\">\\(dV/dt\\)</span> theo <span class=\"math inline\">\\(dr/dt\\)</span>.</p>"
+    },
+    {
+      "number": 93,
+      "content": "<p><strong>93.</strong> Một chất điểm chuyển động trên đường thẳng với li độ <span class=\"math inline\">\\(s(t)\\)</span>, vận tốc <span class=\"math inline\">\\(v(t)\\)</span> và gia tốc <span class=\"math inline\">\\(a(t)\\)</span>. Chứng minh <span class=\"math display\">\\[a(t)=v(t)\\frac{dv}{ds}.\\]</span> Giải thích sự khác nhau về ý nghĩa của <span class=\"math inline\">\\(dv/dt\\)</span> và <span class=\"math inline\">\\(dv/ds\\)</span>.</p>"
+    },
+    {
+      "number": 94,
+      "content": "<p><strong>94.</strong> Bảng sau cho dân số Hoa Kỳ từ 1790 đến 1860.</p>\n<div class=\"center\">\n<table>\n<thead>\n<tr class=\"header\">\n<th style=\"text-align: right;\">Năm</th>\n<th style=\"text-align: right;\">Dân số</th>\n<th style=\"text-align: right;\">Năm</th>\n<th style=\"text-align: right;\">Dân số</th>\n</tr>\n</thead>\n<tbody>\n<tr class=\"odd\">\n<td style=\"text-align: right;\">1790</td>\n<td style=\"text-align: right;\">3,929,000</td>\n<td style=\"text-align: right;\">1830</td>\n<td style=\"text-align: right;\">12,861,000</td>\n</tr>\n<tr class=\"even\">\n<td style=\"text-align: right;\">1800</td>\n<td style=\"text-align: right;\">5,308,000</td>\n<td style=\"text-align: right;\">1840</td>\n<td style=\"text-align: right;\">17,063,000</td>\n</tr>\n<tr class=\"odd\">\n<td style=\"text-align: right;\">1810</td>\n<td style=\"text-align: right;\">7,240,000</td>\n<td style=\"text-align: right;\">1850</td>\n<td style=\"text-align: right;\">23,192,000</td>\n</tr>\n<tr class=\"even\">\n<td style=\"text-align: right;\">1820</td>\n<td style=\"text-align: right;\">9,639,000</td>\n<td style=\"text-align: right;\">1860</td>\n<td style=\"text-align: right;\">31,443,000</td>\n</tr>\n</tbody>\n</table>\n</div>\n<p>(a) Khớp một hàm mũ với dữ liệu. Vẽ các điểm dữ liệu và mô hình hàm mũ. Mức độ khớp tốt đến đâu?</p>\n<p>(b) Ước lượng tốc độ tăng dân số năm 1800 và 1850 bằng trung bình các hệ số góc cát tuyến.</p>\n<p>(c) Dùng mô hình hàm mũ ở (a) ước lượng tốc độ tăng năm 1800 và 1850. So sánh với các ước lượng ở (b).</p>\n<p>(d) Dùng mô hình dự báo dân số năm 1870. So sánh với dân số thực tế 38,558,000. Có thể giải thích sự chênh lệch không?</p>"
+    },
+    {
+      "number": 95,
+      "content": "<p><strong>95.</strong> Dùng quy tắc dây chuyền chứng minh:</p>\n<p>(a) Đạo hàm của hàm chẵn là hàm lẻ.</p>\n<p>(b) Đạo hàm của hàm lẻ là hàm chẵn.</p>"
+    },
+    {
+      "number": 96,
+      "content": "<p><strong>96.</strong> Dùng quy tắc dây chuyền và quy tắc tích để đưa ra một chứng minh khác cho quy tắc thương.</p>\n<p><em>Gợi ý:</em> Viết <span class=\"math inline\">\\(f(x)/g(x)=f(x)[g(x)]^{-1}\\)</span>.</p>"
+    },
+    {
+      "number": 97,
+      "content": "<p><strong>97.</strong> Dùng quy tắc dây chuyền chứng tỏ nếu <span class=\"math inline\">\\(\\theta\\)</span> được đo bằng độ thì <span class=\"math display\">\\[\\frac{d}{d\\theta}(\\sin\\theta)=\\frac\\pi{180}\\cos\\theta.\\]</span> Điều này giải thích một lý do của quy ước luôn dùng số đo radian khi xét hàm lượng giác trong giải tích: nếu dùng độ, các công thức đạo hàm sẽ không đơn giản như vậy.</p>"
+    },
+    {
+      "number": 98,
+      "content": "<p><strong>98.</strong> (a) Viết <span class=\"math inline\">\\(|x|=\\sqrt{x^2}\\)</span> rồi dùng quy tắc dây chuyền chứng tỏ <span class=\"math display\">\\[\\frac{d}{dx}|x|=\\frac{x}{|x|}.\\]</span> (b) Nếu <span class=\"math inline\">\\(f(x)=|\\sin x|\\)</span>, tìm <span class=\"math inline\">\\(f'(x)\\)</span>, phác họa đồ thị <span class=\"math inline\">\\(f,f'\\)</span>. Hàm <span class=\"math inline\">\\(f\\)</span> không khả vi ở đâu?</p>\n<p>(c) Nếu <span class=\"math inline\">\\(g(x)=\\sin|x|\\)</span>, tìm <span class=\"math inline\">\\(g'(x)\\)</span>, phác họa đồ thị <span class=\"math inline\">\\(g,g'\\)</span>. Hàm <span class=\"math inline\">\\(g\\)</span> không khả vi ở đâu?</p>"
+    },
+    {
+      "number": 99,
+      "content": "<p><strong>99.</strong> Gọi <span class=\"math inline\">\\(c\\)</span> là hoành độ giao điểm của tiếp tuyến đường cong <span class=\"math inline\">\\(y=b^x\\)</span> (<span class=\"math inline\">\\(b&gt;0\\)</span>, <span class=\"math inline\">\\(b\\ne1\\)</span>) tại <span class=\"math inline\">\\((a,b^a)\\)</span> với trục hoành. Chứng minh khoảng cách giữa <span class=\"math inline\">\\((a,0)\\)</span> và <span class=\"math inline\">\\((c,0)\\)</span> như nhau với mọi giá trị <span class=\"math inline\">\\(a\\)</span>.</p>\n<div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-3-4-92443e24/e99.png\" alt=\"image\"><br>\nHình dùng cho Bài tập 99.</p>\n</div>"
+    },
+    {
+      "number": 100,
+      "content": "<p><strong>100.</strong> Trên mỗi đường cong hàm mũ <span class=\"math inline\">\\(y=b^x\\)</span> (<span class=\"math inline\">\\(b&gt;0\\)</span>, <span class=\"math inline\">\\(b\\ne1\\)</span>), có đúng một điểm <span class=\"math inline\">\\((x_0,y_0)\\)</span> mà tiếp tuyến tại đó đi qua gốc tọa độ. Chứng minh trong mọi trường hợp đều có <span class=\"math inline\">\\(y_0=e\\)</span>.</p>\n<p><em>Gợi ý:</em> Có thể dùng công thức (1.5.10).</p>"
+    },
+    {
+      "number": 101,
+      "content": "<p><strong>101.</strong> Nếu <span class=\"math inline\">\\(F=f\\circ g\\circ h\\)</span>, trong đó <span class=\"math inline\">\\(f,g,h\\)</span> khả vi, dùng quy tắc dây chuyền chứng tỏ <span class=\"math display\">\\[F'(x)=f'(g(h(x)))\\cdot g'(h(x))\\cdot h'(x).\\]</span></p>"
+    },
+    {
+      "number": 102,
+      "content": "<p><strong>102.</strong> Nếu <span class=\"math inline\">\\(F=f\\circ g\\)</span>, trong đó <span class=\"math inline\">\\(f,g\\)</span> khả vi hai lần, dùng quy tắc dây chuyền và quy tắc tích chứng tỏ <span class=\"math display\">\\[F''(x)=f''(g(x))\\cdot[g'(x)]^2+f'(g(x))\\cdot g''(x).\\]</span></p>"
+    }
+  ]
+}
