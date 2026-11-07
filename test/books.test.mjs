@@ -324,3 +324,16 @@ const changedPrinciples=await mutateBooks(db,admin,'books_save_section',{id:chil
 assert.equal((await readBooks(db,student,{bookId:book.id,sectionId:childPrinciples.id})).section.content,changedPrinciples.content);assert.equal((await readBooks(db,student,{bookId:book.id,sectionId:childPrinciples.id})).exercises.length,22);
 window.close();console.log('Books: seeded TOC, admin CRUD/CAS, scopes, subtree delete/restore, lazy bodies and UI actions OK');
 
+
+const child31=detail.sections.find(s=>s.title.startsWith('3.1'));
+const section31=await readBooks(db,student,{bookId:book.id,sectionId:child31.id});
+assert.equal(section31.exerciseHeading,'3.1. Bài tập');
+assert.deepEqual(section31.exercises.map(e=>e.questionNumber),Array.from({length:91},(_,i)=>i+1));
+assert.ok(section31.exercises.every(e=>e.allowSubmission&&e.allowAiEvaluation&&e.contentKey));
+assert.ok(section31.exercises[2].content.includes('Tính đạo hàm'));
+assert.ok(section31.exercises[87].content.includes('/e88.png'));
+assert.ok(section31.section.content.includes('Thiết kế tàu lượn'));
+for(const image of new JSDOM(section31.section.content).window.document.querySelectorAll('img')){
+ const asset=new URL(image.src,'https://example.test').searchParams.get('asset');
+ assert.equal((await readBookAsset(student,asset)).bytes[0],137);
+}
