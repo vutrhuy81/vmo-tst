@@ -1,0 +1,372 @@
+{
+  "bookKey": "stewart-9",
+  "sectionKey": "3-1",
+  "heading": "3.1. Bài tập",
+  "sourceSha256": "01fe01fde78e97987c19ee894af7110e177e8d7d77a2964491b0d7c64286e47b",
+  "exercises": [
+    {
+      "number": 1,
+      "content": "<p><strong>1.</strong> (a) Số <span class=\"math inline\">\\(e\\)</span> được định nghĩa như thế nào?</p>\n<p>(b) Dùng máy tính ước lượng các giới hạn <span class=\"math display\">\\[\\lim_{h\\to0}\\frac{2.7^h-1}h\\qquad\\text{và}\\qquad\\lim_{h\\to0}\\frac{2.8^h-1}h\\]</span> đến hai chữ số thập phân. Có thể kết luận gì về giá trị của <span class=\"math inline\">\\(e\\)</span>?</p>"
+    },
+    {
+      "number": 2,
+      "content": "<p><strong>2.</strong> (a) Phác họa bằng tay đồ thị <span class=\"math inline\">\\(f(x)=e^x\\)</span>, đặc biệt chú ý cách đồ thị cắt trục tung. Hệ số góc tiếp tuyến tại điểm đó bằng bao nhiêu?</p>\n<p>(b) Các hàm <span class=\"math inline\">\\(f(x)=e^x\\)</span> và <span class=\"math inline\">\\(g(x)=x^e\\)</span> thuộc những loại hàm nào? So sánh công thức đạo hàm của <span class=\"math inline\">\\(f\\)</span> và <span class=\"math inline\">\\(g\\)</span>.</p>\n<p>(c) Trong hai hàm ở (b), hàm nào tăng nhanh hơn khi <span class=\"math inline\">\\(x\\)</span> lớn?</p>"
+    },
+    {
+      "number": 3,
+      "content": "<p><strong>3–34. Tính đạo hàm của hàm số.</strong></p><p><strong>3.</strong> <span class=\"math inline\">\\(g(x)=4x+7\\)</span>.</p>"
+    },
+    {
+      "number": 4,
+      "content": "<p><strong>3–34. Tính đạo hàm của hàm số.</strong></p><p><strong>4.</strong> <span class=\"math inline\">\\(g(t)=5t+4t^2\\)</span>.</p>"
+    },
+    {
+      "number": 5,
+      "content": "<p><strong>3–34. Tính đạo hàm của hàm số.</strong></p><p><strong>5.</strong> <span class=\"math inline\">\\(f(x)=x^{15}-x+3\\)</span>.</p>"
+    },
+    {
+      "number": 6,
+      "content": "<p><strong>3–34. Tính đạo hàm của hàm số.</strong></p><p><strong>6.</strong> <span class=\"math inline\">\\(g(x)=\\frac14x^2-3x+12\\)</span>.</p>"
+    },
+    {
+      "number": 7,
+      "content": "<p><strong>3–34. Tính đạo hàm của hàm số.</strong></p><p><strong>7.</strong> <span class=\"math inline\">\\(f(t)=-2e^t\\)</span>.</p>"
+    },
+    {
+      "number": 8,
+      "content": "<p><strong>3–34. Tính đạo hàm của hàm số.</strong></p><p><strong>8.</strong> <span class=\"math inline\">\\(F(t)=t^3+e^3\\)</span>.</p>"
+    },
+    {
+      "number": 9,
+      "content": "<p><strong>3–34. Tính đạo hàm của hàm số.</strong></p><p><strong>9.</strong> <span class=\"math inline\">\\(W(v)=1.8v^{-3}\\)</span>.</p>"
+    },
+    {
+      "number": 10,
+      "content": "<p><strong>3–34. Tính đạo hàm của hàm số.</strong></p><p><strong>10.</strong> <span class=\"math inline\">\\(r(z)=z^{-5}-z^{1/2}\\)</span>.</p>"
+    },
+    {
+      "number": 11,
+      "content": "<p><strong>3–34. Tính đạo hàm của hàm số.</strong></p><p><strong>11.</strong> <span class=\"math inline\">\\(f(x)=x^{3/2}+x^{-3}\\)</span>.</p>"
+    },
+    {
+      "number": 12,
+      "content": "<p><strong>3–34. Tính đạo hàm của hàm số.</strong></p><p><strong>12.</strong> <span class=\"math inline\">\\(V(t)=t^{-3/5}+t^4\\)</span>.</p>"
+    },
+    {
+      "number": 13,
+      "content": "<p><strong>3–34. Tính đạo hàm của hàm số.</strong></p><p><strong>13.</strong> <span class=\"math inline\">\\(s(t)=\\dfrac1t+\\dfrac1{t^2}\\)</span>.</p>"
+    },
+    {
+      "number": 14,
+      "content": "<p><strong>3–34. Tính đạo hàm của hàm số.</strong></p><p><strong>14.</strong> <span class=\"math inline\">\\(r(t)=\\dfrac a{t^2}+\\dfrac b{t^4}\\)</span>.</p>"
+    },
+    {
+      "number": 15,
+      "content": "<p><strong>3–34. Tính đạo hàm của hàm số.</strong></p><p><strong>15.</strong> <span class=\"math inline\">\\(y=2x+\\sqrt{x}\\)</span>.</p>"
+    },
+    {
+      "number": 16,
+      "content": "<p><strong>3–34. Tính đạo hàm của hàm số.</strong></p><p><strong>16.</strong> <span class=\"math inline\">\\(h(w)=\\sqrt[3]{2}\\,w-\\sqrt2\\)</span>.</p>"
+    },
+    {
+      "number": 17,
+      "content": "<p><strong>3–34. Tính đạo hàm của hàm số.</strong></p><p><strong>17.</strong> <span class=\"math inline\">\\(g(x)=\\dfrac1{\\sqrt{x}}+\\sqrt[4]{x}\\)</span>.</p>"
+    },
+    {
+      "number": 18,
+      "content": "<p><strong>3–34. Tính đạo hàm của hàm số.</strong></p><p><strong>18.</strong> <span class=\"math inline\">\\(W(t)=\\sqrt{t}-2e^t\\)</span>.</p>"
+    },
+    {
+      "number": 19,
+      "content": "<p><strong>3–34. Tính đạo hàm của hàm số.</strong></p><p><strong>19.</strong> <span class=\"math inline\">\\(f(x)=x^3(x+3)\\)</span>.</p>"
+    },
+    {
+      "number": 20,
+      "content": "<p><strong>3–34. Tính đạo hàm của hàm số.</strong></p><p><strong>20.</strong> <span class=\"math inline\">\\(F(t)=(2t-3)^2\\)</span>.</p>"
+    },
+    {
+      "number": 21,
+      "content": "<p><strong>3–34. Tính đạo hàm của hàm số.</strong></p><p><strong>21.</strong> <span class=\"math inline\">\\(y=3e^x+\\dfrac4{\\sqrt[3]{x}}\\)</span>.</p>"
+    },
+    {
+      "number": 22,
+      "content": "<p><strong>3–34. Tính đạo hàm của hàm số.</strong></p><p><strong>22.</strong> <span class=\"math inline\">\\(S(R)=4\\pi R^2\\)</span>.</p>"
+    },
+    {
+      "number": 23,
+      "content": "<p><strong>3–34. Tính đạo hàm của hàm số.</strong></p><p><strong>23.</strong> <span class=\"math inline\">\\(f(x)=\\dfrac{3x^2+x^3}{x}\\)</span>.</p>"
+    },
+    {
+      "number": 24,
+      "content": "<p><strong>3–34. Tính đạo hàm của hàm số.</strong></p><p><strong>24.</strong> <span class=\"math inline\">\\(y=\\dfrac{\\sqrt{x}+x}{x^2}\\)</span>.</p>"
+    },
+    {
+      "number": 25,
+      "content": "<p><strong>3–34. Tính đạo hàm của hàm số.</strong></p><p><strong>25.</strong> <span class=\"math inline\">\\(G(r)=\\dfrac{3r^{3/2}+r^{5/2}}r\\)</span>.</p>"
+    },
+    {
+      "number": 26,
+      "content": "<p><strong>3–34. Tính đạo hàm của hàm số.</strong></p><p><strong>26.</strong> <span class=\"math inline\">\\(G(t)=\\sqrt5\\,t+\\dfrac{\\sqrt7}t\\)</span>.</p>"
+    },
+    {
+      "number": 27,
+      "content": "<p><strong>3–34. Tính đạo hàm của hàm số.</strong></p><p><strong>27.</strong> <span class=\"math inline\">\\(j(x)=x^{2.4}+e^{2.4}\\)</span>.</p>"
+    },
+    {
+      "number": 28,
+      "content": "<p><strong>3–34. Tính đạo hàm của hàm số.</strong></p><p><strong>28.</strong> <span class=\"math inline\">\\(k(r)=e^r+r^e\\)</span>.</p>"
+    },
+    {
+      "number": 29,
+      "content": "<p><strong>3–34. Tính đạo hàm của hàm số.</strong></p><p><strong>29.</strong> <span class=\"math inline\">\\(F(z)=\\dfrac{A+Bz+Cz^2}{z^2}\\)</span>.</p>"
+    },
+    {
+      "number": 30,
+      "content": "<p><strong>3–34. Tính đạo hàm của hàm số.</strong></p><p><strong>30.</strong> <span class=\"math inline\">\\(G(q)=(1+q^{-1})^2\\)</span>.</p>"
+    },
+    {
+      "number": 31,
+      "content": "<p><strong>3–34. Tính đạo hàm của hàm số.</strong></p><p><strong>31.</strong> <span class=\"math inline\">\\(D(t)=\\dfrac{1+16t^2}{(4t)^3}\\)</span>.</p>"
+    },
+    {
+      "number": 32,
+      "content": "<p><strong>3–34. Tính đạo hàm của hàm số.</strong></p><p><strong>32.</strong> <span class=\"math inline\">\\(f(v)=\\dfrac{\\sqrt[3]{v^2}-2ve^v}v\\)</span>.</p>"
+    },
+    {
+      "number": 33,
+      "content": "<p><strong>3–34. Tính đạo hàm của hàm số.</strong></p><p><strong>33.</strong> <span class=\"math inline\">\\(P(w)=\\dfrac{2w^2-w+4}{\\sqrt{w}}\\)</span>.</p>"
+    },
+    {
+      "number": 34,
+      "content": "<p><strong>3–34. Tính đạo hàm của hàm số.</strong></p><p><strong>34.</strong> <span class=\"math inline\">\\(y=e^{x+1}+1\\)</span>.</p>"
+    },
+    {
+      "number": 35,
+      "content": "<p><strong>35–36. Tìm <span class=\"math inline\">\\(dy/dx\\)</span> và <span class=\"math inline\">\\(dy/dt\\)</span>.</strong></p><p><strong>35.</strong> <span class=\"math inline\">\\(y=tx^2+t^3x\\)</span>.</p>"
+    },
+    {
+      "number": 36,
+      "content": "<p><strong>35–36. Tìm <span class=\"math inline\">\\(dy/dx\\)</span> và <span class=\"math inline\">\\(dy/dt\\)</span>.</strong></p><p><strong>36.</strong> <span class=\"math inline\">\\(y=\\dfrac t{x^2}+\\dfrac xt\\)</span>.</p>"
+    },
+    {
+      "number": 37,
+      "content": "<p><strong>37–40. Tìm phương trình tiếp tuyến của đường cong tại điểm đã cho.</strong></p><p><strong>37.</strong> <span class=\"math inline\">\\(y=2x^3-x^2+2\\)</span>, <span class=\"math inline\">\\((1,3)\\)</span>.</p>"
+    },
+    {
+      "number": 38,
+      "content": "<p><strong>37–40. Tìm phương trình tiếp tuyến của đường cong tại điểm đã cho.</strong></p><p><strong>38.</strong> <span class=\"math inline\">\\(y=2e^x+x\\)</span>, <span class=\"math inline\">\\((0,2)\\)</span>.</p>"
+    },
+    {
+      "number": 39,
+      "content": "<p><strong>37–40. Tìm phương trình tiếp tuyến của đường cong tại điểm đã cho.</strong></p><p><strong>39.</strong> <span class=\"math inline\">\\(y=x+\\dfrac2x\\)</span>, <span class=\"math inline\">\\((2,3)\\)</span>.</p>"
+    },
+    {
+      "number": 40,
+      "content": "<p><strong>37–40. Tìm phương trình tiếp tuyến của đường cong tại điểm đã cho.</strong></p><p><strong>40.</strong> <span class=\"math inline\">\\(y=\\sqrt[4]{x}-x\\)</span>, <span class=\"math inline\">\\((1,0)\\)</span>.</p>"
+    },
+    {
+      "number": 41,
+      "content": "<p><strong>41–42. Tìm phương trình tiếp tuyến và pháp tuyến của đường cong tại điểm đã cho.</strong></p><p><strong>41.</strong> <span class=\"math inline\">\\(y=x^4+2e^x\\)</span>, <span class=\"math inline\">\\((0,2)\\)</span>.</p>"
+    },
+    {
+      "number": 42,
+      "content": "<p><strong>41–42. Tìm phương trình tiếp tuyến và pháp tuyến của đường cong tại điểm đã cho.</strong></p><p><strong>42.</strong> <span class=\"math inline\">\\(y=x^{3/2}\\)</span>, <span class=\"math inline\">\\((1,1)\\)</span>.</p>"
+    },
+    {
+      "number": 43,
+      "content": "<p><strong>43–44. Tìm phương trình tiếp tuyến của đường cong tại điểm đã cho. Minh họa bằng cách vẽ đường cong và tiếp tuyến trên cùng một màn hình.</strong></p><p><strong>43.</strong> <span class=\"math inline\">\\(y=3x^2-x^3\\)</span>, <span class=\"math inline\">\\((1,2)\\)</span>.</p>"
+    },
+    {
+      "number": 44,
+      "content": "<p><strong>43–44. Tìm phương trình tiếp tuyến của đường cong tại điểm đã cho. Minh họa bằng cách vẽ đường cong và tiếp tuyến trên cùng một màn hình.</strong></p><p><strong>44.</strong> <span class=\"math inline\">\\(y=x-\\sqrt{x}\\)</span>, <span class=\"math inline\">\\((1,0)\\)</span>.</p>"
+    },
+    {
+      "number": 45,
+      "content": "<p><strong>45–46. Tìm <span class=\"math inline\">\\(f'(x)\\)</span>. So sánh đồ thị của <span class=\"math inline\">\\(f\\)</span> và <span class=\"math inline\">\\(f'\\)</span> rồi dùng chúng để giải thích vì sao kết quả là hợp lý.</strong></p><p><strong>45.</strong> <span class=\"math inline\">\\(f(x)=x^4-2x^3+x^2\\)</span>.</p>"
+    },
+    {
+      "number": 46,
+      "content": "<p><strong>45–46. Tìm <span class=\"math inline\">\\(f'(x)\\)</span>. So sánh đồ thị của <span class=\"math inline\">\\(f\\)</span> và <span class=\"math inline\">\\(f'\\)</span> rồi dùng chúng để giải thích vì sao kết quả là hợp lý.</strong></p><p><strong>46.</strong> <span class=\"math inline\">\\(f(x)=x^5-2x^3+x-1\\)</span>.</p>"
+    },
+    {
+      "number": 47,
+      "content": "<p><strong>47.</strong> (a) Vẽ đồ thị <span class=\"math inline\">\\(f(x)=x^4-3x^3-6x^2+7x+30\\)</span> trong cửa sổ <span class=\"math inline\">\\([-3,5]\\times[-10,50]\\)</span>.</p>\n<p>(b) Dùng đồ thị ở (a) để ước lượng hệ số góc, rồi phác họa bằng tay đồ thị <span class=\"math inline\">\\(f'\\)</span> (xem Ví dụ 2.8.1).</p>\n<p>(c) Tính <span class=\"math inline\">\\(f'(x)\\)</span> và dùng biểu thức đó vẽ đồ thị <span class=\"math inline\">\\(f'\\)</span>. So sánh với hình phác họa ở (b).</p>"
+    },
+    {
+      "number": 48,
+      "content": "<p><strong>48.</strong> (a) Vẽ đồ thị <span class=\"math inline\">\\(g(x)=e^x-3x^2\\)</span> trong cửa sổ <span class=\"math inline\">\\([-1,4]\\times[-8,8]\\)</span>.</p>\n<p>(b) Dùng đồ thị ở (a) để ước lượng hệ số góc, rồi phác họa bằng tay đồ thị <span class=\"math inline\">\\(g'\\)</span> (xem Ví dụ 2.8.1).</p>\n<p>(c) Tính <span class=\"math inline\">\\(g'(x)\\)</span> và dùng biểu thức đó vẽ đồ thị <span class=\"math inline\">\\(g'\\)</span>. So sánh với hình phác họa ở (b).</p>"
+    },
+    {
+      "number": 49,
+      "content": "<p><strong>49–50. Tìm đạo hàm cấp một và cấp hai của hàm số.</strong></p><p><strong>49.</strong> <span class=\"math inline\">\\(f(x)=0.001x^5-0.02x^3\\)</span>.</p>"
+    },
+    {
+      "number": 50,
+      "content": "<p><strong>49–50. Tìm đạo hàm cấp một và cấp hai của hàm số.</strong></p><p><strong>50.</strong> <span class=\"math inline\">\\(G(r)=\\sqrt r+\\sqrt[3]r\\)</span>.</p>"
+    },
+    {
+      "number": 51,
+      "content": "<p><strong>51–52. Tìm đạo hàm cấp một và cấp hai của hàm số. Kiểm tra tính hợp lý của kết quả bằng cách so sánh đồ thị của <span class=\"math inline\">\\(f\\)</span>, <span class=\"math inline\">\\(f'\\)</span> và <span class=\"math inline\">\\(f''\\)</span>.</strong></p><p><strong>51.</strong> <span class=\"math inline\">\\(f(x)=2x-5x^{3/4}\\)</span>.</p>"
+    },
+    {
+      "number": 52,
+      "content": "<p><strong>51–52. Tìm đạo hàm cấp một và cấp hai của hàm số. Kiểm tra tính hợp lý của kết quả bằng cách so sánh đồ thị của <span class=\"math inline\">\\(f\\)</span>, <span class=\"math inline\">\\(f'\\)</span> và <span class=\"math inline\">\\(f''\\)</span>.</strong></p><p><strong>52.</strong> <span class=\"math inline\">\\(f(x)=e^x-x^3\\)</span>.</p>"
+    },
+    {
+      "number": 53,
+      "content": "<p><strong>53.</strong> Phương trình chuyển động của một chất điểm là <span class=\"math inline\">\\(s=t^3-3t\\)</span>, trong đó <span class=\"math inline\">\\(s\\)</span> tính bằng mét và <span class=\"math inline\">\\(t\\)</span> tính bằng giây. Tìm:</p>\n<p>(a) vận tốc và gia tốc theo <span class=\"math inline\">\\(t\\)</span>;</p>\n<p>(b) gia tốc sau 2 giây;</p>\n<p>(c) gia tốc khi vận tốc bằng 0.</p>"
+    },
+    {
+      "number": 54,
+      "content": "<p><strong>54.</strong> Phương trình chuyển động của một chất điểm là <span class=\"math inline\">\\(s=t^4-2t^3+t^2-t\\)</span>, trong đó <span class=\"math inline\">\\(s\\)</span> tính bằng mét, <span class=\"math inline\">\\(t\\)</span> tính bằng giây.</p>\n<p>(a) Tìm vận tốc và gia tốc theo <span class=\"math inline\">\\(t\\)</span>.</p>\n<p>(b) Tìm gia tốc sau 1 giây.</p>\n<p>(c) Vẽ các hàm vị trí, vận tốc và gia tốc trên cùng một màn hình.</p>"
+    },
+    {
+      "number": 55,
+      "content": "<p><strong>55.</strong> Các nhà sinh học đề xuất đa thức bậc ba sau để mô hình hóa chiều dài <span class=\"math inline\">\\(L\\)</span> của cá rockfish Alaska theo tuổi <span class=\"math inline\">\\(A\\)</span>: <span class=\"math display\">\\[L=0.0155A^3-0.372A^2+3.95A+1.21,\\]</span> trong đó <span class=\"math inline\">\\(L\\)</span> tính bằng inch, <span class=\"math inline\">\\(A\\)</span> tính bằng năm. Tính <span class=\"math inline\">\\(\\left.\\dfrac{dL}{dA}\\right|_{A=12}\\)</span> và diễn giải kết quả.</p>"
+    },
+    {
+      "number": 56,
+      "content": "<p><strong>56.</strong> Số loài cây <span class=\"math inline\">\\(S\\)</span> trong một khu vực có diện tích <span class=\"math inline\">\\(A\\)</span> thuộc khu bảo tồn rừng được mô hình hóa bằng hàm lũy thừa <span class=\"math display\">\\[S(A)=0.882A^{0.842},\\]</span> trong đó <span class=\"math inline\">\\(A\\)</span> tính bằng mét vuông. Tìm <span class=\"math inline\">\\(S'(100)\\)</span> và diễn giải kết quả.</p>"
+    },
+    {
+      "number": 57,
+      "content": "<p><strong>57.</strong> Định luật Boyle phát biểu rằng khi một mẫu khí bị nén ở nhiệt độ không đổi thì áp suất <span class=\"math inline\">\\(P\\)</span> tỉ lệ nghịch với thể tích <span class=\"math inline\">\\(V\\)</span>.</p>\n<p>(a) Giả sử một mẫu không khí có thể tích <span class=\"math inline\">\\(0.106\\ \\mathrm{m^3}\\)</span> ở <span class=\"math inline\">\\(25^{\\circ}\\mathrm C\\)</span> và áp suất <span class=\"math inline\">\\(50\\ \\mathrm{kPa}\\)</span>. Viết <span class=\"math inline\">\\(V\\)</span> thành hàm của <span class=\"math inline\">\\(P\\)</span>.</p>\n<p>(b) Tính <span class=\"math inline\">\\(dV/dP\\)</span> khi <span class=\"math inline\">\\(P=50\\ \\mathrm{kPa}\\)</span>. Đạo hàm này có ý nghĩa gì? Đơn vị của nó là gì?</p>"
+    },
+    {
+      "number": 58,
+      "content": "<p><strong>58.</strong> Lốp ô tô cần được bơm đúng áp suất vì bơm quá căng hoặc quá non có thể làm mặt lốp mòn sớm. Bảng sau cho tuổi thọ lốp <span class=\"math inline\">\\(L\\)</span> (nghìn dặm) của một loại lốp tại các áp suất <span class=\"math inline\">\\(P\\)</span> (<span class=\"math inline\">\\(\\mathrm{lb/in^2}\\)</span>).</p>\n<div class=\"center\">\n<table>\n<thead>\n<tr class=\"header\">\n<th style=\"text-align: center;\"><span class=\"math inline\">\\(P\\)</span></th>\n<th style=\"text-align: right;\">26</th>\n<th style=\"text-align: right;\">28</th>\n<th style=\"text-align: right;\">31</th>\n<th style=\"text-align: right;\">35</th>\n<th style=\"text-align: right;\">38</th>\n<th style=\"text-align: right;\">42</th>\n<th style=\"text-align: right;\">45</th>\n</tr>\n</thead>\n<tbody>\n<tr class=\"odd\">\n<td style=\"text-align: center;\"><span class=\"math inline\">\\(L\\)</span></td>\n<td style=\"text-align: right;\">50</td>\n<td style=\"text-align: right;\">66</td>\n<td style=\"text-align: right;\">78</td>\n<td style=\"text-align: right;\">81</td>\n<td style=\"text-align: right;\">74</td>\n<td style=\"text-align: right;\">70</td>\n<td style=\"text-align: right;\">59</td>\n</tr>\n</tbody>\n</table>\n</div>\n<p>(a) Dùng máy tính cầm tay hoặc máy tính để mô hình hóa tuổi thọ lốp bằng một hàm bậc hai theo áp suất.</p>\n<p>(b) Dùng mô hình ước lượng <span class=\"math inline\">\\(dL/dP\\)</span> khi <span class=\"math inline\">\\(P=30\\)</span> và <span class=\"math inline\">\\(P=40\\)</span>. Đạo hàm có ý nghĩa gì? Đơn vị là gì? Dấu của các đạo hàm cho biết điều gì?</p>"
+    },
+    {
+      "number": 59,
+      "content": "<p><strong>59.</strong> Tìm các điểm trên đường cong <span class=\"math inline\">\\(y=x^3+3x^2-9x+10\\)</span> mà tại đó tiếp tuyến nằm ngang.</p>"
+    },
+    {
+      "number": 60,
+      "content": "<p><strong>60.</strong> Với giá trị nào của <span class=\"math inline\">\\(x\\)</span>, đồ thị <span class=\"math inline\">\\(f(x)=e^x-2x\\)</span> có tiếp tuyến nằm ngang?</p>"
+    },
+    {
+      "number": 61,
+      "content": "<p><strong>61.</strong> Chứng minh đường cong <span class=\"math inline\">\\(y=2e^x+3x+5x^3\\)</span> không có tiếp tuyến với hệ số góc bằng 2.</p>"
+    },
+    {
+      "number": 62,
+      "content": "<p><strong>62.</strong> Tìm phương trình đường thẳng vừa tiếp xúc với đường cong <span class=\"math inline\">\\(y=x^4+1\\)</span>, vừa song song với <span class=\"math inline\">\\(32x-y=15\\)</span>.</p>"
+    },
+    {
+      "number": 63,
+      "content": "<p><strong>63.</strong> Tìm phương trình hai đường thẳng vừa tiếp xúc với đường cong <span class=\"math inline\">\\(y=x^3-3x^2+3x-3\\)</span>, vừa song song với <span class=\"math inline\">\\(3x-y=15\\)</span>.</p>"
+    },
+    {
+      "number": 64,
+      "content": "<p><strong>64.</strong> Tại điểm nào trên đường cong <span class=\"math inline\">\\(y=1+2e^x-3x\\)</span>, tiếp tuyến song song với <span class=\"math inline\">\\(3x-y=5\\)</span>? Minh họa bằng cách vẽ đường cong và cả hai đường thẳng.</p>"
+    },
+    {
+      "number": 65,
+      "content": "<p><strong>65.</strong> Tìm phương trình pháp tuyến của đường cong <span class=\"math inline\">\\(y=\\sqrt{x}\\)</span> song song với <span class=\"math inline\">\\(2x+y=1\\)</span>.</p>"
+    },
+    {
+      "number": 66,
+      "content": "<p><strong>66.</strong> Pháp tuyến của parabol <span class=\"math inline\">\\(y=x^2-1\\)</span> tại <span class=\"math inline\">\\((-1,0)\\)</span> cắt parabol lần thứ hai ở đâu? Minh họa bằng một hình phác họa.</p>"
+    },
+    {
+      "number": 67,
+      "content": "<p><strong>67.</strong> Vẽ hình để chỉ ra có hai tiếp tuyến của parabol <span class=\"math inline\">\\(y=x^2\\)</span> đi qua <span class=\"math inline\">\\((0,-4)\\)</span>. Tìm tọa độ các tiếp điểm.</p>"
+    },
+    {
+      "number": 68,
+      "content": "<p><strong>68.</strong> (a) Tìm phương trình của cả hai đường thẳng đi qua <span class=\"math inline\">\\((2,-3)\\)</span> và tiếp xúc với parabol <span class=\"math inline\">\\(y=x^2+x\\)</span>.</p>\n<p>(b) Chứng minh không có đường thẳng nào qua <span class=\"math inline\">\\((2,7)\\)</span> tiếp xúc với parabol đó. Sau đó vẽ hình để thấy lý do.</p>"
+    },
+    {
+      "number": 69,
+      "content": "<p><strong>69.</strong> Dùng định nghĩa đạo hàm chứng minh rằng nếu <span class=\"math inline\">\\(f(x)=1/x\\)</span> thì <span class=\"math inline\">\\(f'(x)=-1/x^2\\)</span>. Điều này chứng minh quy tắc lũy thừa khi <span class=\"math inline\">\\(n=-1\\)</span>.</p>"
+    },
+    {
+      "number": 70,
+      "content": "<p><strong>70.</strong> Tìm đạo hàm cấp <span class=\"math inline\">\\(n\\)</span> của mỗi hàm bằng cách tính vài đạo hàm đầu tiên rồi nhận xét quy luật:</p>\n<p>(a) <span class=\"math inline\">\\(f(x)=x^n\\)</span>; (b) <span class=\"math inline\">\\(f(x)=1/x\\)</span>.</p>"
+    },
+    {
+      "number": 71,
+      "content": "<p><strong>71.</strong> Tìm đa thức bậc hai <span class=\"math inline\">\\(P\\)</span> sao cho <span class=\"math inline\">\\(P(2)=5\\)</span>, <span class=\"math inline\">\\(P'(2)=3\\)</span> và <span class=\"math inline\">\\(P''(2)=2\\)</span>.</p>"
+    },
+    {
+      "number": 72,
+      "content": "<p><strong>72.</strong> Phương trình <span class=\"math inline\">\\(y''+y'-2y=x^2\\)</span> được gọi là <strong>phương trình vi phân</strong> vì chứa hàm chưa biết <span class=\"math inline\">\\(y\\)</span> cùng các đạo hàm <span class=\"math inline\">\\(y'\\)</span> và <span class=\"math inline\">\\(y''\\)</span>. Tìm các hằng số <span class=\"math inline\">\\(A,B,C\\)</span> sao cho hàm <span class=\"math inline\">\\(y=Ax^2+Bx+C\\)</span> thỏa mãn phương trình. Phương trình vi phân sẽ được nghiên cứu chi tiết trong Chương 9.</p>"
+    },
+    {
+      "number": 73,
+      "content": "<p><strong>73.</strong> Tìm hàm bậc ba <span class=\"math inline\">\\(y=ax^3+bx^2+cx+d\\)</span> có đồ thị với các tiếp tuyến nằm ngang tại <span class=\"math inline\">\\((-2,6)\\)</span> và <span class=\"math inline\">\\((2,0)\\)</span>.</p>"
+    },
+    {
+      "number": 74,
+      "content": "<p><strong>74.</strong> Tìm parabol <span class=\"math inline\">\\(y=ax^2+bx+c\\)</span> có hệ số góc bằng 4 tại <span class=\"math inline\">\\(x=1\\)</span>, bằng <span class=\"math inline\">\\(-8\\)</span> tại <span class=\"math inline\">\\(x=-1\\)</span>, và đi qua <span class=\"math inline\">\\((2,15)\\)</span>.</p>"
+    },
+    {
+      "number": 75,
+      "content": "<p><strong>75.</strong> Cho <span class=\"math display\">\\[f(x)=\\begin{cases}x^2+1,&amp;x&lt;1,\\\\x+1,&amp;x\\ge1.\\end{cases}\\]</span> Hàm <span class=\"math inline\">\\(f\\)</span> có khả vi tại 1 không? Phác họa đồ thị <span class=\"math inline\">\\(f\\)</span> và <span class=\"math inline\">\\(f'\\)</span>.</p>"
+    },
+    {
+      "number": 76,
+      "content": "<p><strong>76.</strong> Hàm sau khả vi tại những số nào? <span class=\"math display\">\\[g(x)=\\begin{cases}2x,&amp;x\\le0,\\\\2x-x^2,&amp;0&lt;x&lt;2,\\\\2-x,&amp;x\\ge2.\\end{cases}\\]</span> Cho công thức của <span class=\"math inline\">\\(g'\\)</span> và phác họa đồ thị <span class=\"math inline\">\\(g\\)</span>, <span class=\"math inline\">\\(g'\\)</span>.</p>"
+    },
+    {
+      "number": 77,
+      "content": "<p><strong>77.</strong> (a) Hàm <span class=\"math inline\">\\(f(x)=|x^2-9|\\)</span> khả vi tại những giá trị nào của <span class=\"math inline\">\\(x\\)</span>? Tìm công thức <span class=\"math inline\">\\(f'\\)</span>.</p>\n<p>(b) Phác họa đồ thị <span class=\"math inline\">\\(f\\)</span> và <span class=\"math inline\">\\(f'\\)</span>.</p>"
+    },
+    {
+      "number": 78,
+      "content": "<p><strong>78.</strong> Hàm <span class=\"math inline\">\\(h(x)=|x-1|+|x+2|\\)</span> khả vi ở đâu? Cho công thức của <span class=\"math inline\">\\(h'\\)</span> và phác họa đồ thị <span class=\"math inline\">\\(h\\)</span>, <span class=\"math inline\">\\(h'\\)</span>.</p>"
+    },
+    {
+      "number": 79,
+      "content": "<p><strong>79.</strong> Tìm parabol <span class=\"math inline\">\\(y=ax^2+bx\\)</span> có tiếp tuyến tại <span class=\"math inline\">\\((1,1)\\)</span> với phương trình <span class=\"math inline\">\\(y=3x-2\\)</span>.</p>"
+    },
+    {
+      "number": 80,
+      "content": "<p><strong>80.</strong> Giả sử đường cong <span class=\"math inline\">\\(y=x^4+ax^3+bx^2+cx+d\\)</span> có tiếp tuyến tại <span class=\"math inline\">\\(x=0\\)</span> với phương trình <span class=\"math inline\">\\(y=2x+1\\)</span> và tiếp tuyến tại <span class=\"math inline\">\\(x=1\\)</span> với phương trình <span class=\"math inline\">\\(y=2-3x\\)</span>. Tìm <span class=\"math inline\">\\(a,b,c,d\\)</span>.</p>"
+    },
+    {
+      "number": 81,
+      "content": "<p><strong>81.</strong> Với các giá trị nào của <span class=\"math inline\">\\(a,b\\)</span>, đường thẳng <span class=\"math inline\">\\(2x+y=b\\)</span> tiếp xúc với parabol <span class=\"math inline\">\\(y=ax^2\\)</span> tại điểm có hoành độ <span class=\"math inline\">\\(x=2\\)</span>?</p>"
+    },
+    {
+      "number": 82,
+      "content": "<p><strong>82.</strong> Tìm <span class=\"math inline\">\\(c\\)</span> sao cho <span class=\"math inline\">\\(y=\\frac32x+6\\)</span> tiếp xúc với đường cong <span class=\"math inline\">\\(y=c\\sqrt{x}\\)</span>.</p>"
+    },
+    {
+      "number": 83,
+      "content": "<p><strong>83.</strong> Giá trị nào của <span class=\"math inline\">\\(c\\)</span> làm cho đường thẳng <span class=\"math inline\">\\(y=2x+3\\)</span> tiếp xúc với parabol <span class=\"math inline\">\\(y=cx^2\\)</span>?</p>"
+    },
+    {
+      "number": 84,
+      "content": "<p><strong>84.</strong> Đồ thị của mọi hàm bậc hai <span class=\"math inline\">\\(f(x)=ax^2+bx+c\\)</span> là một parabol. Chứng minh trung bình cộng các hệ số góc tiếp tuyến của parabol tại hai đầu mút của một đoạn bất kỳ <span class=\"math inline\">\\([p,q]\\)</span> bằng hệ số góc tiếp tuyến tại trung điểm của đoạn.</p>"
+    },
+    {
+      "number": 85,
+      "content": "<p><strong>85.</strong> Cho <span class=\"math display\">\\[f(x)=\\begin{cases}x^2,&amp;x\\le2,\\\\mx+b,&amp;x&gt;2.\\end{cases}\\]</span> Tìm <span class=\"math inline\">\\(m,b\\)</span> để <span class=\"math inline\">\\(f\\)</span> khả vi tại mọi điểm.</p>"
+    },
+    {
+      "number": 86,
+      "content": "<p><strong>86.</strong> Tìm các số <span class=\"math inline\">\\(a,b\\)</span> sao cho hàm <span class=\"math inline\">\\(g\\)</span> dưới đây khả vi tại 1: <span class=\"math display\">\\[g(x)=\\begin{cases}ax^3-3x,&amp;x\\le1,\\\\bx^2+2,&amp;x&gt;1.\\end{cases}\\]</span></p>"
+    },
+    {
+      "number": 87,
+      "content": "<p><strong>87.</strong> Tính <span class=\"math inline\">\\(\\displaystyle\\lim_{x\\to1}\\frac{x^{1000}-1}{x-1}\\)</span>.</p>"
+    },
+    {
+      "number": 88,
+      "content": "<p><strong>88.</strong> Vẽ tiếp tuyến của hypebol <span class=\"math inline\">\\(xy=c\\)</span> tại điểm <span class=\"math inline\">\\(P\\)</span> như hình.</p>\n<p>(a) Chứng minh <span class=\"math inline\">\\(P\\)</span> là trung điểm của đoạn thẳng do hai trục tọa độ chắn trên tiếp tuyến này.</p>\n<p>(b) Chứng minh tam giác tạo bởi tiếp tuyến và hai trục tọa độ luôn có cùng diện tích, bất kể vị trí của <span class=\"math inline\">\\(P\\)</span> trên hypebol.</p>\n<div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-3-1-01fe01fd/e88.png\" alt=\"image\"><br>\nHình dùng cho Bài tập 88.<br>\n<em>Đồ thị dựng lại từ công thức; không phải hình gốc.</em></p>\n</div>"
+    },
+    {
+      "number": 89,
+      "content": "<p><strong>89.</strong> Vẽ hình biểu diễn hai đường thẳng vuông góc, cắt nhau trên trục tung và đều tiếp xúc với parabol <span class=\"math inline\">\\(y=x^2\\)</span>. Chúng cắt nhau ở đâu?</p>"
+    },
+    {
+      "number": 90,
+      "content": "<p><strong>90.</strong> Phác họa hai parabol <span class=\"math inline\">\\(y=x^2\\)</span> và <span class=\"math inline\">\\(y=x^2-2x+2\\)</span>. Theo bạn, có đường thẳng nào tiếp xúc với cả hai đường cong không? Nếu có, tìm phương trình của nó. Nếu không, vì sao?</p>"
+    },
+    {
+      "number": 91,
+      "content": "<p><strong>91.</strong> Nếu <span class=\"math inline\">\\(c&gt;\\frac12\\)</span>, có bao nhiêu đường thẳng qua <span class=\"math inline\">\\((0,c)\\)</span> là pháp tuyến của parabol <span class=\"math inline\">\\(y=x^2\\)</span>? Nếu <span class=\"math inline\">\\(c\\le\\frac12\\)</span> thì sao?</p>"
+    }
+  ]
+}

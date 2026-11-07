@@ -1,0 +1,432 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage{fontspec}\setmainfont{Latin Modern Roman}\setsansfont{DejaVu Sans}
+\usepackage{amsmath,amssymb,graphicx,geometry,enumitem,longtable,booktabs,fancyhdr,hyperref}
+\geometry{left=28mm,right=23mm,top=24mm,bottom=24mm}
+\hypersetup{unicode=true,colorlinks=true,linkcolor=black,urlcolor=blue,pdftitle={Giải tích Chương 3 Mục 3.1 Đạo hàm của đa thức và hàm mũ}}
+\setlength{\parindent}{1.2em}\setlength{\parskip}{4pt}\setlength{\headheight}{16pt}
+\pagestyle{fancy}\fancyhf{}\fancyhead[L]{\small Chương 3. Các quy tắc tính đạo hàm}\fancyhead[R]{\small §3.1}\fancyfoot[C]{\thepage}
+\newcommand{\fig}[3][.68]{\begin{center}\begin{minipage}{\linewidth}\centering\includegraphics[width=#1\linewidth]{assets/#2.png}\\{\small #3}\end{minipage}\end{center}}
+\newcommand{\ex}[1]{\par\medskip\noindent\textbf{Ví dụ #1.}\ }
+\newcommand{\sol}{\par\nopagebreak[4]\noindent\textit{Lời giải.}\ }
+\newcommand{\bt}[1]{\par\smallskip\noindent\textbf{#1.}\ }
+\newcommand{\group}[1]{\par\medskip\noindent\textbf{#1}\par\nopagebreak[4]}
+\newcommand{\gint}[1]{\left[\!\left[#1\right]\!\right]}
+\allowdisplaybreaks[2]
+\begin{document}
+\begin{center}
+{\Large\bfseries GIẢI TÍCH}\\[6pt]
+{\LARGE\bfseries Chương 3}\\[5pt]
+{\Large\bfseries CÁC QUY TẮC TÍNH ĐẠO HÀM}
+\end{center}
+\noindent\textbf{Nguồn:} James Stewart, Daniel K. Clegg, Saleem Watson, \textit{Calculus: Early Transcendentals}, ấn bản thứ 9 (2020), trang in 173–184 (trang PDF 208–219): phần mở đầu Chương 3, §3.1, Bài tập 1–91 và dự án ứng dụng sau mục này.
+\fig[.95]{chapter}{Trong dự án sau §3.4, ta sẽ tính khoảng cách đến đường băng mà tại đó phi công nên bắt đầu hạ độ cao để máy bay hạ cánh êm thuận. Ảnh: Who is Danny / Shutterstock.com.}
+Ta đã biết cách diễn giải đạo hàm như hệ số góc và tốc độ biến thiên, đồng thời đã dùng định nghĩa đạo hàm để tính đạo hàm của các hàm được cho bởi công thức. Tuy nhiên, nếu lúc nào cũng phải dùng định nghĩa thì công việc sẽ rất dài dòng. Vì vậy, trong chương này ta xây dựng các quy tắc tính đạo hàm mà không cần trực tiếp sử dụng định nghĩa. Các quy tắc này cho phép tính tương đối dễ dàng đạo hàm của đa thức, hàm hữu tỉ, hàm đại số, hàm mũ và hàm lôgarit, hàm lượng giác và hàm lượng giác ngược. Sau đó, ta dùng chúng để giải các bài toán về tốc độ biến thiên và xấp xỉ hàm số.
+\newpage
+\section*{3.1. Đạo hàm của đa thức và hàm mũ}
+Trong mục này, ta học cách tính đạo hàm của hàm hằng, hàm lũy thừa, đa thức và hàm mũ.
+\subsection*{Hàm hằng}
+Bắt đầu với hàm đơn giản nhất: hàm hằng $f(x)=c$. Đồ thị của nó là đường thẳng nằm ngang $y=c$, có hệ số góc bằng 0; do đó phải có $f'(x)=0$ (Hình 1). Chứng minh trực tiếp từ định nghĩa cũng rất đơn giản:
+\[f'(x)=\lim_{h\to0}\frac{f(x+h)-f(x)}h=\lim_{h\to0}\frac{c-c}h=\lim_{h\to0}0=0.\]
+\fig[.40]{f01}{Hình 1. Đồ thị $f(x)=c$ là đường thẳng $y=c$, nên $f'(x)=0$. Trong hình, \textit{slope} nghĩa là hệ số góc.}
+Theo ký hiệu Leibniz, quy tắc này được viết như sau.
+\begin{quote}\textbf{Đạo hàm của hàm hằng}
+\[\frac{d}{dx}(c)=0.\]
+\end{quote}
+\subsection*{Hàm lũy thừa}
+Tiếp theo, xét $f(x)=x^n$, trong đó $n$ là số nguyên dương. Nếu $n=1$, đồ thị $f(x)=x$ là đường thẳng $y=x$, có hệ số góc bằng 1 (Hình 2). Vì vậy,
+\[\frac{d}{dx}(x)=1.\tag{1}\]
+\fig[.40]{f02}{Hình 2. Đồ thị $f(x)=x$ là đường thẳng $y=x$, nên $f'(x)=1$.}
+Cũng có thể kiểm tra (1) bằng định nghĩa đạo hàm. Ta đã khảo sát các trường hợp $n=2$ và $n=3$. Cụ thể, trong Bài tập 19 và 20 của §2.8, ta đã tìm được
+\[\frac{d}{dx}(x^2)=2x,\qquad \frac{d}{dx}(x^3)=3x^2.\tag{2}\]
+Với $n=4$, đạo hàm của $f(x)=x^4$ được tính như sau:
+\begin{align*}
+f'(x)&=\lim_{h\to0}\frac{f(x+h)-f(x)}h=\lim_{h\to0}\frac{(x+h)^4-x^4}h\\
+&=\lim_{h\to0}\frac{x^4+4x^3h+6x^2h^2+4xh^3+h^4-x^4}h\\
+&=\lim_{h\to0}\frac{4x^3h+6x^2h^2+4xh^3+h^4}h\\
+&=\lim_{h\to0}(4x^3+6x^2h+4xh^2+h^3)=4x^3.
+\end{align*}
+Do đó,
+\[\frac{d}{dx}(x^4)=4x^3.\tag{3}\]
+So sánh (1), (2) và (3), ta nhận thấy một quy luật. Có thể dự đoán hợp lý rằng với $n$ nguyên dương, $(d/dx)(x^n)=nx^{n-1}$. Điều này quả thực đúng. Ta chứng minh theo hai cách; cách thứ hai dùng định lý nhị thức.
+\begin{quote}\textbf{Quy tắc lũy thừa.} Nếu $n$ là số nguyên dương thì
+\[\frac{d}{dx}(x^n)=nx^{n-1}.\]
+\end{quote}
+\noindent\textit{Chứng minh thứ nhất.} Công thức
+\[x^n-a^n=(x-a)(x^{n-1}+x^{n-2}a+\cdots+xa^{n-2}+a^{n-1})\]
+được kiểm tra bằng cách nhân khai triển vế phải, hoặc tính tổng nhân tử thứ hai như một cấp số nhân. Nếu $f(x)=x^n$, dùng (2.7.5) và công thức trên, ta có
+\begin{align*}
+f'(a)&=\lim_{x\to a}\frac{f(x)-f(a)}{x-a}=\lim_{x\to a}\frac{x^n-a^n}{x-a}\\
+&=\lim_{x\to a}(x^{n-1}+x^{n-2}a+\cdots+xa^{n-2}+a^{n-1})\\
+&=a^{n-1}+a^{n-2}a+\cdots+aa^{n-2}+a^{n-1}=na^{n-1}.
+\end{align*}
+\noindent\textit{Chứng minh thứ hai.}
+\[f'(x)=\lim_{h\to0}\frac{f(x+h)-f(x)}h=\lim_{h\to0}\frac{(x+h)^n-x^n}h.\]
+Khi tính đạo hàm của $x^4$, ta đã khai triển $(x+h)^4$. Ở đây cần khai triển $(x+h)^n$ bằng định lý nhị thức:
+\begin{align*}
+f'(x)&=\lim_{h\to0}\frac{\left[x^n+nx^{n-1}h+\frac{n(n-1)}2x^{n-2}h^2+\cdots+nxh^{n-1}+h^n\right]-x^n}h\\
+&=\lim_{h\to0}\frac{nx^{n-1}h+\frac{n(n-1)}2x^{n-2}h^2+\cdots+nxh^{n-1}+h^n}h\\
+&=\lim_{h\to0}\left[nx^{n-1}+\frac{n(n-1)}2x^{n-2}h+\cdots+nxh^{n-2}+h^{n-1}\right]\\
+&=nx^{n-1},
+\end{align*}
+vì mọi số hạng trừ số hạng đầu đều chứa nhân tử $h$ nên tiến đến 0.\hfill$\square$
+
+\noindent\textit{Ghi chú của bản gốc:} Định lý nhị thức được trình bày ở Trang tham khảo 1. Ví dụ sau minh họa quy tắc lũy thừa với các ký hiệu khác nhau.
+\ex{1} (a) Nếu $f(x)=x^6$ thì $f'(x)=6x^5$.
+
+(b) Nếu $y=x^{1000}$ thì $y'=1000x^{999}$.
+
+(c) Nếu $y=t^4$ thì $dy/dt=4t^3$.
+
+(d) $\displaystyle\frac{d}{dr}(r^3)=3r^2$.\hfill$\square$
+
+Với số mũ nguyên âm thì sao? Bài tập 69 yêu cầu kiểm tra từ định nghĩa rằng
+\[\frac{d}{dx}\left(\frac1x\right)=-\frac1{x^2}.\]
+Có thể viết lại dưới dạng
+\[\frac{d}{dx}(x^{-1})=(-1)x^{-2}.\]
+Như vậy, quy tắc lũy thừa đúng khi $n=-1$. Trong mục tiếp theo, Bài tập 3.2.66(c) sẽ cho thấy quy tắc đúng với mọi số nguyên âm.
+
+Nếu số mũ là một phân số thì sao? Trong Ví dụ 2.8.3, ta tìm được
+\[\frac{d}{dx}\sqrt{x}=\frac1{2\sqrt{x}},\qquad\text{hay}\qquad\frac{d}{dx}(x^{1/2})=\frac12x^{-1/2}.\]
+Điều này cho thấy quy tắc còn đúng khi số mũ bằng $1/2$. Ở §3.6, ta sẽ chứng minh quy tắc đúng với mọi số mũ thực $n$.
+\begin{quote}\textbf{Quy tắc lũy thừa (phiên bản tổng quát).} Nếu $n$ là một số thực bất kỳ thì
+\[\frac{d}{dx}(x^n)=nx^{n-1}.\]
+\end{quote}
+\ex{2} Tính đạo hàm:
+
+(a) $\displaystyle f(x)=\frac1{x^2}$; \qquad (b) $\displaystyle y=\sqrt[3]{x^2}$.
+\sol Trong mỗi trường hợp, viết lại hàm số dưới dạng lũy thừa của $x$.
+
+(a) Vì $f(x)=x^{-2}$, áp dụng quy tắc lũy thừa với $n=-2$:
+\[f'(x)=\frac{d}{dx}(x^{-2})=-2x^{-2-1}=-2x^{-3}=-\frac2{x^3}.\]
+(b)
+\[\frac{dy}{dx}=\frac{d}{dx}\bigl(\sqrt[3]{x^2}\bigr)=\frac{d}{dx}(x^{2/3})=\frac23x^{(2/3)-1}=\frac23x^{-1/3}.\qquad\square\]
+Hình 3 biểu diễn hàm $y$ trong Ví dụ 2(b) và đạo hàm $y'$. Chú ý rằng $y$ không khả vi tại 0: $y'$ không xác định ở đó. Cũng nhận thấy $y$ đồng biến khi $y'>0$ và nghịch biến khi $y'<0$. Trong Chương 4, ta sẽ chứng minh kết quả tổng quát: hàm đồng biến khi đạo hàm dương và nghịch biến khi đạo hàm âm.
+\fig[.43]{f03}{Hình 3. Hàm $y=\sqrt[3]{x^2}$ và đạo hàm $y'$.}
+Quy tắc lũy thừa cho phép tìm tiếp tuyến mà không cần quay lại định nghĩa đạo hàm. Nó cũng cho phép tìm \textbf{pháp tuyến}. Pháp tuyến của đường cong $C$ tại $P$ là đường thẳng qua $P$ và vuông góc với tiếp tuyến tại $P$. Trong quang học, định luật phản xạ liên quan đến góc giữa tia sáng và pháp tuyến của thấu kính.
+\ex{3} Tìm phương trình tiếp tuyến và pháp tuyến của đường cong $y=x\sqrt{x}$ tại $(1,1)$. Minh họa bằng cách vẽ đường cong và hai đường thẳng đó.
+\sol Đạo hàm của $f(x)=x\sqrt{x}=xx^{1/2}=x^{3/2}$ là
+\[f'(x)=\frac32x^{(3/2)-1}=\frac32x^{1/2}=\frac32\sqrt{x}.\]
+Hệ số góc tiếp tuyến tại $(1,1)$ là $f'(1)=3/2$. Vì vậy, phương trình tiếp tuyến là
+\[y-1=\frac32(x-1),\qquad\text{hay}\qquad y=\frac32x-\frac12.\]
+Pháp tuyến vuông góc với tiếp tuyến, nên hệ số góc của nó bằng nghịch đảo đối của $3/2$, tức $-2/3$. Do đó, phương trình pháp tuyến là
+\[y-1=-\frac23(x-1),\qquad\text{hay}\qquad y=-\frac23x+\frac53.\]
+Đường cong cùng tiếp tuyến và pháp tuyến được vẽ trong Hình 4.\hfill$\square$
+\fig[.45]{f04}{Hình 4. $y=x\sqrt{x}$; \textit{tangent}: tiếp tuyến; \textit{normal}: pháp tuyến.}
+\subsection*{Tính đạo hàm của hàm số mới từ những hàm số đã biết}
+Khi tạo hàm mới từ các hàm đã biết bằng phép cộng, phép trừ hoặc phép nhân với hằng số, ta có thể tính đạo hàm của hàm mới theo đạo hàm của các hàm ban đầu. Cụ thể, công thức sau nói rằng đạo hàm của tích một hằng số với một hàm bằng hằng số đó nhân với đạo hàm của hàm.
+\begin{quote}\textbf{Quy tắc nhân với hằng số.} Nếu $c$ là hằng số và $f$ khả vi thì
+\[\frac{d}{dx}[cf(x)]=c\frac{d}{dx}f(x).\]
+\end{quote}
+\noindent\textit{Chứng minh.} Đặt $g(x)=cf(x)$. Khi đó,
+\begin{align*}
+g'(x)&=\lim_{h\to0}\frac{g(x+h)-g(x)}h=\lim_{h\to0}\frac{cf(x+h)-cf(x)}h\\
+&=\lim_{h\to0}c\left[\frac{f(x+h)-f(x)}h\right]\\
+&=c\lim_{h\to0}\frac{f(x+h)-f(x)}h=cf'(x),
+\end{align*}
+trong đó dùng Quy tắc giới hạn 3.\hfill$\square$
+\fig[.47]{multiple}{Ý nghĩa hình học của quy tắc nhân với hằng số.}
+Nhân với $c=2$ làm đồ thị giãn theo phương thẳng đứng với hệ số 2. Mọi độ tăng tung độ đều tăng gấp đôi, còn độ tăng hoành độ không đổi; do đó các hệ số góc cũng tăng gấp đôi.
+\ex{4} (a)
+\[\frac{d}{dx}(3x^4)=3\frac{d}{dx}(x^4)=3(4x^3)=12x^3.\]
+(b)
+\[\frac{d}{dx}(-x)=\frac{d}{dx}[(-1)x]=(-1)\frac{d}{dx}(x)=-1(1)=-1.\qquad\square\]
+Quy tắc tiếp theo cho biết đạo hàm của tổng (hoặc hiệu) các hàm bằng tổng (hoặc hiệu) các đạo hàm.
+\begin{quote}\textbf{Các quy tắc tổng và hiệu.} Nếu $f$ và $g$ đều khả vi thì
+\[\frac{d}{dx}[f(x)+g(x)]=\frac{d}{dx}f(x)+\frac{d}{dx}g(x),\]
+\[\frac{d}{dx}[f(x)-g(x)]=\frac{d}{dx}f(x)-\frac{d}{dx}g(x).\]
+\end{quote}
+Theo ký hiệu dấu phẩy, có thể viết $(f+g)'=f'+g'$ và $(f-g)'=f'-g'$.
+
+\noindent\textit{Chứng minh.} Để chứng minh quy tắc tổng, đặt $F(x)=f(x)+g(x)$. Khi đó,
+\begin{align*}
+F'(x)&=\lim_{h\to0}\frac{F(x+h)-F(x)}h\\
+&=\lim_{h\to0}\frac{[f(x+h)+g(x+h)]-[f(x)+g(x)]}h\\
+&=\lim_{h\to0}\left[\frac{f(x+h)-f(x)}h+\frac{g(x+h)-g(x)}h\right]\\
+&=\lim_{h\to0}\frac{f(x+h)-f(x)}h+\lim_{h\to0}\frac{g(x+h)-g(x)}h\\
+&=f'(x)+g'(x),
+\end{align*}
+trong đó dùng Quy tắc giới hạn 1. Để chứng minh quy tắc hiệu, viết $f-g=f+(-1)g$ rồi áp dụng quy tắc tổng và quy tắc nhân với hằng số.\hfill$\square$
+
+Quy tắc tổng được mở rộng cho tổng của một số hữu hạn hàm số. Chẳng hạn, áp dụng hai lần, ta được
+\[(f+g+h)'=[(f+g)+h]'=(f+g)'+h'=f'+g'+h'.\]
+Kết hợp quy tắc nhân với hằng số, quy tắc tổng, quy tắc hiệu và quy tắc lũy thừa, ta tính được đạo hàm của mọi đa thức, như ba ví dụ sau.
+\ex{5}
+\begin{align*}
+&\frac{d}{dx}(x^8+12x^5-4x^4+10x^3-6x+5)\\
+&=\frac{d}{dx}(x^8)+12\frac{d}{dx}(x^5)-4\frac{d}{dx}(x^4)+10\frac{d}{dx}(x^3)-6\frac{d}{dx}(x)+\frac{d}{dx}(5)\\
+&=8x^7+12(5x^4)-4(4x^3)+10(3x^2)-6(1)+0\\
+&=8x^7+60x^4-16x^3+30x^2-6.\qquad\square
+\end{align*}
+\ex{6} Tìm các điểm trên đường cong $y=x^4-6x^2+4$ mà tại đó tiếp tuyến nằm ngang.
+\sol Tiếp tuyến nằm ngang tại các điểm mà đạo hàm bằng 0. Ta có
+\begin{align*}
+\frac{dy}{dx}&=\frac{d}{dx}(x^4)-6\frac{d}{dx}(x^2)+\frac{d}{dx}(4)\\
+&=4x^3-12x+0=4x(x^2-3).
+\end{align*}
+Vậy $dy/dx=0$ nếu $x=0$ hoặc $x^2-3=0$, tức $x=\pm\sqrt3$. Đường cong đã cho có tiếp tuyến ngang khi $x=0,\sqrt3,-\sqrt3$. Các điểm tương ứng là $(0,4)$, $(\sqrt3,-5)$ và $(-\sqrt3,-5)$ (Hình 5).\hfill$\square$
+\fig[.50]{f05}{Hình 5. Đường cong $y=x^4-6x^2+4$ và các tiếp tuyến nằm ngang.}
+\ex{7} Phương trình chuyển động của một chất điểm là $s=2t^3-5t^2+3t+4$, trong đó $s$ tính bằng xentimét, $t$ tính bằng giây. Tìm gia tốc theo thời gian. Gia tốc sau 2 giây bằng bao nhiêu?
+\sol Vận tốc và gia tốc là
+\[v(t)=\frac{ds}{dt}=6t^2-10t+3,\]
+\[a(t)=\frac{dv}{dt}=12t-10.\]
+Gia tốc sau 2 giây là $a(2)=14\ \mathrm{cm/s^2}$.\hfill$\square$
+\subsection*{Hàm mũ}
+Thử tính đạo hàm của hàm mũ $f(x)=b^x$ bằng định nghĩa:
+\begin{align*}
+f'(x)&=\lim_{h\to0}\frac{f(x+h)-f(x)}h=\lim_{h\to0}\frac{b^{x+h}-b^x}h\\
+&=\lim_{h\to0}\frac{b^xb^h-b^x}h=\lim_{h\to0}\frac{b^x(b^h-1)}h.
+\end{align*}
+Nhân tử $b^x$ không phụ thuộc $h$, nên có thể đưa ra ngoài dấu giới hạn:
+\[f'(x)=b^x\lim_{h\to0}\frac{b^h-1}h.\]
+Chú ý giới hạn này chính là giá trị đạo hàm của $f$ tại 0:
+\[\lim_{h\to0}\frac{b^h-1}h=f'(0).\]
+Vì vậy, nếu hàm mũ $f(x)=b^x$ khả vi tại 0 thì nó khả vi tại mọi điểm và
+\[f'(x)=f'(0)b^x.\tag{4}\]
+Công thức này nói rằng tốc độ biến thiên của một hàm mũ bất kỳ tỉ lệ với chính hàm đó: hệ số góc tỉ lệ với độ cao của đồ thị.
+
+Bảng sau cung cấp bằng chứng số về sự tồn tại của $f'(0)$ khi $b=2$ và $b=3$. Các giá trị được cho đúng đến bốn chữ số thập phân. Có thể chứng minh các giới hạn tồn tại và
+\[\text{với }b=2:\quad f'(0)=\lim_{h\to0}\frac{2^h-1}h\approx0.693,\]
+\[\text{với }b=3:\quad f'(0)=\lim_{h\to0}\frac{3^h-1}h\approx1.099.\]
+\begin{center}\begin{tabular}{ccc}\toprule
+$h$ & $(2^h-1)/h$ & $(3^h-1)/h$\\\midrule
+0.1&0.71773&1.16123\\
+0.01&0.69556&1.10467\\
+0.001&0.69339&1.09922\\
+0.0001&0.69317&1.09867\\
+0.00001&0.69315&1.09862\\\bottomrule
+\end{tabular}\end{center}
+Từ (4), ta có
+\[\frac{d}{dx}(2^x)\approx(0.693)2^x,\qquad\frac{d}{dx}(3^x)\approx(1.099)3^x.\tag{5}\]
+Trong mọi cách chọn cơ số $b$ ở (4), công thức đạo hàm đơn giản nhất thu được khi $f'(0)=1$. Từ các ước lượng khi $b=2$ và $b=3$, ta có thể dự đoán có một số $b$ nằm giữa 2 và 3 sao cho $f'(0)=1$. Theo truyền thống, số ấy được ký hiệu là $e$; thực ra, đó là cách ta đã giới thiệu $e$ trong §1.4. Vì vậy, có định nghĩa sau.
+\begin{quote}\textbf{Định nghĩa số $e$.}
+\[e\text{ là số sao cho }\quad\lim_{h\to0}\frac{e^h-1}h=1.\]
+\end{quote}
+Bài tập 1 sẽ cho thấy $e$ nằm giữa 2.7 và 2.8. Về sau, ta sẽ chứng minh được giá trị làm tròn đến năm chữ số thập phân là $e\approx2.71828$.
+
+Về hình học, trong tất cả các hàm mũ $y=b^x$, hàm $f(x)=e^x$ là hàm có tiếp tuyến tại $(0,1)$ với hệ số góc $f'(0)$ đúng bằng 1 (Hình 6 và 7).
+\fig[.48]{f06}{Hình 6. So sánh các đồ thị $y=2^x$, $y=e^x$, $y=3^x$.}
+\fig[.48]{f07}{Hình 7. Trên đồ thị $y=e^x$, hệ số góc tiếp tuyến tại $(0,1)$ bằng 1 và tại $(x,e^x)$ bằng $e^x$.}
+Thay $b=e$, do đó $f'(0)=1$, vào (4), ta được công thức quan trọng sau.
+\begin{quote}\textbf{Đạo hàm của hàm mũ tự nhiên}
+\[\frac{d}{dx}(e^x)=e^x.\]
+\end{quote}
+Như vậy, hàm mũ $f(x)=e^x$ có tính chất đạo hàm bằng chính nó. Ý nghĩa hình học là: hệ số góc tiếp tuyến của đường cong $y=e^x$ tại $(x,e^x)$ bằng tung độ của điểm đó (Hình 7).
+\ex{8} Cho $f(x)=e^x-x$. Tìm $f'$ và $f''$. So sánh đồ thị của $f$ và $f'$.
+\sol Theo quy tắc hiệu,
+\[f'(x)=\frac{d}{dx}(e^x-x)=\frac{d}{dx}(e^x)-\frac{d}{dx}(x)=e^x-1.\]
+Trong §2.8, đạo hàm cấp hai được định nghĩa là đạo hàm của $f'$, nên
+\[f''(x)=\frac{d}{dx}(e^x-1)=\frac{d}{dx}(e^x)-\frac{d}{dx}(1)=e^x.\]
+Đồ thị $f$ và $f'$ được vẽ trong Hình 8. Hàm $f$ có tiếp tuyến ngang tại $x=0$, phù hợp với $f'(0)=0$. Khi $x>0$, $f'(x)>0$ và $f$ đồng biến; khi $x<0$, $f'(x)<0$ và $f$ nghịch biến.\hfill$\square$
+\fig[.47]{f08}{Hình 8. Hàm $f(x)=e^x-x$ và đạo hàm $f'(x)=e^x-1$.}
+\ex{9} Tại điểm nào trên đường cong $y=e^x$, tiếp tuyến song song với đường thẳng $y=2x$?
+\sol Vì $y=e^x$ nên $y'=e^x$. Gọi hoành độ điểm cần tìm là $a$. Khi đó hệ số góc tiếp tuyến tại điểm ấy bằng $e^a$. Tiếp tuyến song song với $y=2x$ nếu có cùng hệ số góc, tức bằng 2. Cho hai hệ số góc bằng nhau, ta được
+\[e^a=2,\qquad a=\ln2.\]
+Vậy điểm cần tìm là $(a,e^a)=(\ln2,2)$ (Hình 9).\hfill$\square$
+\fig[.42]{f09}{Hình 9. Tiếp tuyến của $y=e^x$ tại $(\ln2,2)$ song song với $y=2x$.}
+\newpage
+\section*{3.1. Bài tập}
+\bt{1} (a) Số $e$ được định nghĩa như thế nào?
+
+(b) Dùng máy tính ước lượng các giới hạn
+\[\lim_{h\to0}\frac{2.7^h-1}h\qquad\text{và}\qquad\lim_{h\to0}\frac{2.8^h-1}h\]
+đến hai chữ số thập phân. Có thể kết luận gì về giá trị của $e$?
+\bt{2} (a) Phác họa bằng tay đồ thị $f(x)=e^x$, đặc biệt chú ý cách đồ thị cắt trục tung. Hệ số góc tiếp tuyến tại điểm đó bằng bao nhiêu?
+
+(b) Các hàm $f(x)=e^x$ và $g(x)=x^e$ thuộc những loại hàm nào? So sánh công thức đạo hàm của $f$ và $g$.
+
+(c) Trong hai hàm ở (b), hàm nào tăng nhanh hơn khi $x$ lớn?
+\group{3–34. Tính đạo hàm của hàm số.}
+\bt{3} $g(x)=4x+7$.
+\bt{4} $g(t)=5t+4t^2$.
+\bt{5} $f(x)=x^{15}-x+3$.
+\bt{6} $g(x)=\frac14x^2-3x+12$.
+\bt{7} $f(t)=-2e^t$.
+\bt{8} $F(t)=t^3+e^3$.
+\bt{9} $W(v)=1.8v^{-3}$.
+\bt{10} $r(z)=z^{-5}-z^{1/2}$.
+\bt{11} $f(x)=x^{3/2}+x^{-3}$.
+\bt{12} $V(t)=t^{-3/5}+t^4$.
+\bt{13} $s(t)=\dfrac1t+\dfrac1{t^2}$.
+\bt{14} $r(t)=\dfrac a{t^2}+\dfrac b{t^4}$.
+\bt{15} $y=2x+\sqrt{x}$.
+\bt{16} $h(w)=\sqrt[3]{2}\,w-\sqrt2$.
+\bt{17} $g(x)=\dfrac1{\sqrt{x}}+\sqrt[4]{x}$.
+\bt{18} $W(t)=\sqrt{t}-2e^t$.
+\bt{19} $f(x)=x^3(x+3)$.
+\bt{20} $F(t)=(2t-3)^2$.
+\bt{21} $y=3e^x+\dfrac4{\sqrt[3]{x}}$.
+\bt{22} $S(R)=4\pi R^2$.
+\bt{23} $f(x)=\dfrac{3x^2+x^3}{x}$.
+\bt{24} $y=\dfrac{\sqrt{x}+x}{x^2}$.
+\bt{25} $G(r)=\dfrac{3r^{3/2}+r^{5/2}}r$.
+\bt{26} $G(t)=\sqrt5\,t+\dfrac{\sqrt7}t$.
+\bt{27} $j(x)=x^{2.4}+e^{2.4}$.
+\bt{28} $k(r)=e^r+r^e$.
+\bt{29} $F(z)=\dfrac{A+Bz+Cz^2}{z^2}$.
+\bt{30} $G(q)=(1+q^{-1})^2$.
+\bt{31} $D(t)=\dfrac{1+16t^2}{(4t)^3}$.
+\bt{32} $f(v)=\dfrac{\sqrt[3]{v^2}-2ve^v}v$.
+\bt{33} $P(w)=\dfrac{2w^2-w+4}{\sqrt{w}}$.
+\bt{34} $y=e^{x+1}+1$.
+\group{35–36. Tìm $dy/dx$ và $dy/dt$.}
+\bt{35} $y=tx^2+t^3x$.
+\bt{36} $y=\dfrac t{x^2}+\dfrac xt$.
+\group{37–40. Tìm phương trình tiếp tuyến của đường cong tại điểm đã cho.}
+\bt{37} $y=2x^3-x^2+2$, \quad $(1,3)$.
+\bt{38} $y=2e^x+x$, \quad $(0,2)$.
+\bt{39} $y=x+\dfrac2x$, \quad $(2,3)$.
+\bt{40} $y=\sqrt[4]{x}-x$, \quad $(1,0)$.
+\group{41–42. Tìm phương trình tiếp tuyến và pháp tuyến của đường cong tại điểm đã cho.}
+\bt{41} $y=x^4+2e^x$, \quad $(0,2)$.
+\bt{42} $y=x^{3/2}$, \quad $(1,1)$.
+\group{43–44. Tìm phương trình tiếp tuyến của đường cong tại điểm đã cho. Minh họa bằng cách vẽ đường cong và tiếp tuyến trên cùng một màn hình.}
+\bt{43} $y=3x^2-x^3$, \quad $(1,2)$.
+\bt{44} $y=x-\sqrt{x}$, \quad $(1,0)$.
+\group{45–46. Tìm $f'(x)$. So sánh đồ thị của $f$ và $f'$ rồi dùng chúng để giải thích vì sao kết quả là hợp lý.}
+\bt{45} $f(x)=x^4-2x^3+x^2$.
+\bt{46} $f(x)=x^5-2x^3+x-1$.
+\bt{47} (a) Vẽ đồ thị $f(x)=x^4-3x^3-6x^2+7x+30$ trong cửa sổ $[-3,5]\times[-10,50]$.
+
+(b) Dùng đồ thị ở (a) để ước lượng hệ số góc, rồi phác họa bằng tay đồ thị $f'$ (xem Ví dụ 2.8.1).
+
+(c) Tính $f'(x)$ và dùng biểu thức đó vẽ đồ thị $f'$. So sánh với hình phác họa ở (b).
+\bt{48} (a) Vẽ đồ thị $g(x)=e^x-3x^2$ trong cửa sổ $[-1,4]\times[-8,8]$.
+
+(b) Dùng đồ thị ở (a) để ước lượng hệ số góc, rồi phác họa bằng tay đồ thị $g'$ (xem Ví dụ 2.8.1).
+
+(c) Tính $g'(x)$ và dùng biểu thức đó vẽ đồ thị $g'$. So sánh với hình phác họa ở (b).
+\group{49–50. Tìm đạo hàm cấp một và cấp hai của hàm số.}
+\bt{49} $f(x)=0.001x^5-0.02x^3$.
+\bt{50} $G(r)=\sqrt r+\sqrt[3]r$.
+\group{51–52. Tìm đạo hàm cấp một và cấp hai của hàm số. Kiểm tra tính hợp lý của kết quả bằng cách so sánh đồ thị của $f$, $f'$ và $f''$.}
+\bt{51} $f(x)=2x-5x^{3/4}$.
+\bt{52} $f(x)=e^x-x^3$.
+\bt{53} Phương trình chuyển động của một chất điểm là $s=t^3-3t$, trong đó $s$ tính bằng mét và $t$ tính bằng giây. Tìm:
+
+(a) vận tốc và gia tốc theo $t$;
+
+(b) gia tốc sau 2 giây;
+
+(c) gia tốc khi vận tốc bằng 0.
+\bt{54} Phương trình chuyển động của một chất điểm là $s=t^4-2t^3+t^2-t$, trong đó $s$ tính bằng mét, $t$ tính bằng giây.
+
+(a) Tìm vận tốc và gia tốc theo $t$.
+
+(b) Tìm gia tốc sau 1 giây.
+
+(c) Vẽ các hàm vị trí, vận tốc và gia tốc trên cùng một màn hình.
+\bt{55} Các nhà sinh học đề xuất đa thức bậc ba sau để mô hình hóa chiều dài $L$ của cá rockfish Alaska theo tuổi $A$:
+\[L=0.0155A^3-0.372A^2+3.95A+1.21,\]
+trong đó $L$ tính bằng inch, $A$ tính bằng năm. Tính $\left.\dfrac{dL}{dA}\right|_{A=12}$ và diễn giải kết quả.
+\begin{samepage}
+\bt{56} Số loài cây $S$ trong một khu vực có diện tích $A$ thuộc khu bảo tồn rừng được mô hình hóa bằng hàm lũy thừa
+\[S(A)=0.882A^{0.842},\]
+trong đó $A$ tính bằng mét vuông. Tìm $S'(100)$ và diễn giải kết quả.
+\end{samepage}
+\bt{57} Định luật Boyle phát biểu rằng khi một mẫu khí bị nén ở nhiệt độ không đổi thì áp suất $P$ tỉ lệ nghịch với thể tích $V$.
+
+(a) Giả sử một mẫu không khí có thể tích $0.106\ \mathrm{m^3}$ ở $25^{\circ}\mathrm C$ và áp suất $50\ \mathrm{kPa}$. Viết $V$ thành hàm của $P$.
+
+(b) Tính $dV/dP$ khi $P=50\ \mathrm{kPa}$. Đạo hàm này có ý nghĩa gì? Đơn vị của nó là gì?
+\bt{58} Lốp ô tô cần được bơm đúng áp suất vì bơm quá căng hoặc quá non có thể làm mặt lốp mòn sớm. Bảng sau cho tuổi thọ lốp $L$ (nghìn dặm) của một loại lốp tại các áp suất $P$ ($\mathrm{lb/in^2}$).
+\begin{center}\begin{tabular}{c|rrrrrrr}
+$P$&26&28&31&35&38&42&45\\\hline
+$L$&50&66&78&81&74&70&59
+\end{tabular}\end{center}
+(a) Dùng máy tính cầm tay hoặc máy tính để mô hình hóa tuổi thọ lốp bằng một hàm bậc hai theo áp suất.
+
+(b) Dùng mô hình ước lượng $dL/dP$ khi $P=30$ và $P=40$. Đạo hàm có ý nghĩa gì? Đơn vị là gì? Dấu của các đạo hàm cho biết điều gì?
+\bt{59} Tìm các điểm trên đường cong $y=x^3+3x^2-9x+10$ mà tại đó tiếp tuyến nằm ngang.
+\bt{60} Với giá trị nào của $x$, đồ thị $f(x)=e^x-2x$ có tiếp tuyến nằm ngang?
+\bt{61} Chứng minh đường cong $y=2e^x+3x+5x^3$ không có tiếp tuyến với hệ số góc bằng 2.
+\bt{62} Tìm phương trình đường thẳng vừa tiếp xúc với đường cong $y=x^4+1$, vừa song song với $32x-y=15$.
+\bt{63} Tìm phương trình hai đường thẳng vừa tiếp xúc với đường cong $y=x^3-3x^2+3x-3$, vừa song song với $3x-y=15$.
+\bt{64} Tại điểm nào trên đường cong $y=1+2e^x-3x$, tiếp tuyến song song với $3x-y=5$? Minh họa bằng cách vẽ đường cong và cả hai đường thẳng.
+\bt{65} Tìm phương trình pháp tuyến của đường cong $y=\sqrt{x}$ song song với $2x+y=1$.
+\bt{66} Pháp tuyến của parabol $y=x^2-1$ tại $(-1,0)$ cắt parabol lần thứ hai ở đâu? Minh họa bằng một hình phác họa.
+\bt{67} Vẽ hình để chỉ ra có hai tiếp tuyến của parabol $y=x^2$ đi qua $(0,-4)$. Tìm tọa độ các tiếp điểm.
+\bt{68} (a) Tìm phương trình của cả hai đường thẳng đi qua $(2,-3)$ và tiếp xúc với parabol $y=x^2+x$.
+
+(b) Chứng minh không có đường thẳng nào qua $(2,7)$ tiếp xúc với parabol đó. Sau đó vẽ hình để thấy lý do.
+\bt{69} Dùng định nghĩa đạo hàm chứng minh rằng nếu $f(x)=1/x$ thì $f'(x)=-1/x^2$. Điều này chứng minh quy tắc lũy thừa khi $n=-1$.
+\begin{samepage}
+\bt{70} Tìm đạo hàm cấp $n$ của mỗi hàm bằng cách tính vài đạo hàm đầu tiên rồi nhận xét quy luật:
+
+(a) $f(x)=x^n$; \qquad (b) $f(x)=1/x$.
+\end{samepage}
+\bt{71} Tìm đa thức bậc hai $P$ sao cho $P(2)=5$, $P'(2)=3$ và $P''(2)=2$.
+\bt{72} Phương trình $y''+y'-2y=x^2$ được gọi là \textbf{phương trình vi phân} vì chứa hàm chưa biết $y$ cùng các đạo hàm $y'$ và $y''$. Tìm các hằng số $A,B,C$ sao cho hàm $y=Ax^2+Bx+C$ thỏa mãn phương trình. Phương trình vi phân sẽ được nghiên cứu chi tiết trong Chương 9.
+\bt{73} Tìm hàm bậc ba $y=ax^3+bx^2+cx+d$ có đồ thị với các tiếp tuyến nằm ngang tại $(-2,6)$ và $(2,0)$.
+\bt{74} Tìm parabol $y=ax^2+bx+c$ có hệ số góc bằng 4 tại $x=1$, bằng $-8$ tại $x=-1$, và đi qua $(2,15)$.
+\bt{75} Cho
+\[f(x)=\begin{cases}x^2+1,&x<1,\\x+1,&x\ge1.\end{cases}\]
+Hàm $f$ có khả vi tại 1 không? Phác họa đồ thị $f$ và $f'$.
+\bt{76} Hàm sau khả vi tại những số nào?
+\[g(x)=\begin{cases}2x,&x\le0,\\2x-x^2,&0<x<2,\\2-x,&x\ge2.\end{cases}\]
+Cho công thức của $g'$ và phác họa đồ thị $g$, $g'$.
+\bt{77} (a) Hàm $f(x)=|x^2-9|$ khả vi tại những giá trị nào của $x$? Tìm công thức $f'$.
+
+(b) Phác họa đồ thị $f$ và $f'$.
+\bt{78} Hàm $h(x)=|x-1|+|x+2|$ khả vi ở đâu? Cho công thức của $h'$ và phác họa đồ thị $h$, $h'$.
+\bt{79} Tìm parabol $y=ax^2+bx$ có tiếp tuyến tại $(1,1)$ với phương trình $y=3x-2$.
+\bt{80} Giả sử đường cong $y=x^4+ax^3+bx^2+cx+d$ có tiếp tuyến tại $x=0$ với phương trình $y=2x+1$ và tiếp tuyến tại $x=1$ với phương trình $y=2-3x$. Tìm $a,b,c,d$.
+\bt{81} Với các giá trị nào của $a,b$, đường thẳng $2x+y=b$ tiếp xúc với parabol $y=ax^2$ tại điểm có hoành độ $x=2$?
+\bt{82} Tìm $c$ sao cho $y=\frac32x+6$ tiếp xúc với đường cong $y=c\sqrt{x}$.
+\bt{83} Giá trị nào của $c$ làm cho đường thẳng $y=2x+3$ tiếp xúc với parabol $y=cx^2$?
+\bt{84} Đồ thị của mọi hàm bậc hai $f(x)=ax^2+bx+c$ là một parabol. Chứng minh trung bình cộng các hệ số góc tiếp tuyến của parabol tại hai đầu mút của một đoạn bất kỳ $[p,q]$ bằng hệ số góc tiếp tuyến tại trung điểm của đoạn.
+\bt{85} Cho
+\[f(x)=\begin{cases}x^2,&x\le2,\\mx+b,&x>2.\end{cases}\]
+Tìm $m,b$ để $f$ khả vi tại mọi điểm.
+\bt{86} Tìm các số $a,b$ sao cho hàm $g$ dưới đây khả vi tại 1:
+\[g(x)=\begin{cases}ax^3-3x,&x\le1,\\bx^2+2,&x>1.\end{cases}\]
+\bt{87} Tính $\displaystyle\lim_{x\to1}\frac{x^{1000}-1}{x-1}$.
+\bt{88} Vẽ tiếp tuyến của hypebol $xy=c$ tại điểm $P$ như hình.
+
+(a) Chứng minh $P$ là trung điểm của đoạn thẳng do hai trục tọa độ chắn trên tiếp tuyến này.
+
+(b) Chứng minh tam giác tạo bởi tiếp tuyến và hai trục tọa độ luôn có cùng diện tích, bất kể vị trí của $P$ trên hypebol.
+\fig[.44]{e88}{Hình dùng cho Bài tập 88.}
+\bt{89} Vẽ hình biểu diễn hai đường thẳng vuông góc, cắt nhau trên trục tung và đều tiếp xúc với parabol $y=x^2$. Chúng cắt nhau ở đâu?
+\bt{90} Phác họa hai parabol $y=x^2$ và $y=x^2-2x+2$. Theo bạn, có đường thẳng nào tiếp xúc với cả hai đường cong không? Nếu có, tìm phương trình của nó. Nếu không, vì sao?
+\bt{91} Nếu $c>\frac12$, có bao nhiêu đường thẳng qua $(0,c)$ là pháp tuyến của parabol $y=x^2$? Nếu $c\le\frac12$ thì sao?
+\newpage
+\section*{Dự án ứng dụng}
+\subsection*{Thiết kế tàu lượn siêu tốc tốt hơn}
+Giả sử bạn được yêu cầu thiết kế đoạn lên dốc và đoạn lao xuống đầu tiên của một tàu lượn siêu tốc mới. Sau khi xem ảnh các tàu lượn yêu thích, bạn chọn hệ số góc của đoạn lên là $0.8$ và của đoạn xuống là $-1.6$. Bạn nối hai đoạn thẳng $y=L_1(x)$ và $y=L_2(x)$ bằng một phần parabol $y=f(x)=ax^2+bx+c$, trong đó $x$ và $f(x)$ tính bằng foot. Để đường ray êm thuận, hướng chuyển động không được thay đổi đột ngột; do đó, bạn muốn các đoạn thẳng $L_1,L_2$ tiếp xúc với parabol tại các điểm chuyển tiếp $P,Q$ (xem hình). Để đơn giản hóa phương trình, chọn gốc tọa độ tại $P$.
+\fig[.50]{project}{Sơ đồ dự án. Hai đoạn thẳng $L_1,L_2$ được nối bằng một phần đồ thị $f$.}
+\bt{1} (a) Giả sử khoảng cách theo phương ngang giữa $P$ và $Q$ bằng $100\ \mathrm{ft}$. Lập các phương trình theo $a,b,c$ bảo đảm đường ray êm thuận tại các điểm chuyển tiếp.
+
+(b) Giải các phương trình ở (a) để tìm $a,b,c$ và công thức $f(x)$.
+
+(c) Vẽ $L_1,f,L_2$ để kiểm tra bằng đồ thị rằng các chỗ chuyển tiếp là êm thuận.
+
+(d) Tìm độ chênh cao giữa $P$ và $Q$.
+\bt{2} Thiết kế trong Bài toán 1 có thể trông êm thuận nhưng người đi có thể chưa cảm thấy êm thuận, vì hàm xác định từng phần gồm $L_1(x)$ khi $x<0$, $f(x)$ khi $0\le x\le100$ và $L_2(x)$ khi $x>100$ không có đạo hàm cấp hai liên tục. Vì vậy, bạn cải tiến thiết kế bằng cách chỉ dùng hàm bậc hai $q(x)=ax^2+bx+c$ trên đoạn $10\le x\le90$, rồi nối nó với hai hàm tuyến tính bằng hai hàm bậc ba:
+\[g(x)=kx^3+lx^2+mx+n,\qquad 0\le x<10,\]
+\[h(x)=px^3+qx^2+rx+s,\qquad 90<x\le100.\]
+(a) Lập một hệ phương trình với 11 ẩn sao cho các hàm và hai đạo hàm đầu tiên của chúng có giá trị bằng nhau tại các điểm chuyển tiếp.
+
+(b) Giải hệ ở (a) để tìm công thức $q(x),g(x),h(x)$.
+
+(c) Vẽ $L_1,g,q,h,L_2$ và so sánh với đồ thị ở Bài toán 1(c).
+\fig[.49]{coaster}{Ảnh minh họa dự án. Susana Ortega / Shutterstock.com.}
+\section*{Chú thích biên tập và thuật ngữ}
+\begin{enumerate}[leftmargin=*]
+\item Giữ nguyên số công thức (1)–(5), Ví dụ 1–9, Hình 1–9 và Bài tập 1–91. Hai bài toán của dự án có hệ đánh số riêng. Không bổ sung lời giải bài tập hoặc dự án.
+\item Quy tắc lũy thừa tổng quát được hiểu tại những điểm mà lũy thừa thực tương ứng xác định và khả vi. Đặc biệt, không suy ra tính khả vi tại $x=0$ chỉ từ dạng hình thức của công thức. Bản gốc đưa chứng minh đầy đủ cho số mũ thực ở §3.6.
+\item Trong Bài tập 16 và 26, dấu căn chỉ phủ các hằng số: $\sqrt[3]{2}\,w$ và $\sqrt5\,t$ là tích. Bài tập 34 giữ nguyên $e^{x+1}+1$. Trong Bài tập 35–36, khi lấy đạo hàm theo một biến, biến còn lại được xem là hằng số.
+\item Trong dự án, $q(x)$ là tên hàm bậc hai, còn $q$ trong biểu thức $h(x)=px^3+qx^2+rx+s$ là một hệ số; giữ nguyên cách ký hiệu của bản gốc. Đơn vị inch, foot, dặm và áp suất được giữ nguyên.
+\end{enumerate}
+\begin{center}\begin{tabular}{ll}\toprule
+Tiếng Anh&Tiếng Việt\\\midrule
+power rule&quy tắc lũy thừa\\
+constant multiple rule&quy tắc nhân với hằng số\\
+sum rule&quy tắc tổng\\
+difference rule&quy tắc hiệu\\
+normal line&pháp tuyến\\
+natural exponential function&hàm mũ tự nhiên\\
+differential equation&phương trình vi phân\\
+transition point&điểm chuyển tiếp\\\bottomrule
+\end{tabular}\end{center}
+\noindent\textbf{Phần tiếp theo:} §3.2 — Các quy tắc tích và thương.
+\end{document}
