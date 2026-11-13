@@ -1,0 +1,472 @@
+{
+  "bookKey": "stewart-9",
+  "sectionKey": "3-review",
+  "heading": "Bài tập",
+  "sourceSha256": "e3f0e9704f0ec4e0f39904987be4ef62548e1851287d70b28e2948f385f146e2",
+  "exercises": [
+    {
+      "number": 1,
+      "content": "<p><strong>1–54.</strong></p>\n<p>Tính <span class=\"math inline\">\\(y'\\)</span>.</p><p><strong>1.</strong> <span class=\"math inline\">\\(y=(x^2+x^3)^4\\)</span>.</p>"
+    },
+    {
+      "number": 2,
+      "content": "<p><strong>1–54.</strong></p>\n<p>Tính <span class=\"math inline\">\\(y'\\)</span>.</p><p><strong>2.</strong> <span class=\"math inline\">\\(\\displaystyle y=\\frac1{\\sqrt{x}}-\\frac1{\\sqrt[5]{x^3}}\\)</span>.</p>"
+    },
+    {
+      "number": 3,
+      "content": "<p><strong>1–54.</strong></p>\n<p>Tính <span class=\"math inline\">\\(y'\\)</span>.</p><p><strong>3.</strong> <span class=\"math inline\">\\(\\displaystyle y=\\frac{x^2-x+2}{\\sqrt{x}}\\)</span>.</p>"
+    },
+    {
+      "number": 4,
+      "content": "<p><strong>1–54.</strong></p>\n<p>Tính <span class=\"math inline\">\\(y'\\)</span>.</p><p><strong>4.</strong> <span class=\"math inline\">\\(\\displaystyle y=\\frac{\\tan x}{1+\\cos x}\\)</span>.</p>"
+    },
+    {
+      "number": 5,
+      "content": "<p><strong>1–54.</strong></p>\n<p>Tính <span class=\"math inline\">\\(y'\\)</span>.</p><p><strong>5.</strong> <span class=\"math inline\">\\(y=x^2\\sin\\pi x\\)</span>.</p>"
+    },
+    {
+      "number": 6,
+      "content": "<p><strong>1–54.</strong></p>\n<p>Tính <span class=\"math inline\">\\(y'\\)</span>.</p><p><strong>6.</strong> <span class=\"math inline\">\\(y=x\\cos^{-1}x\\)</span>.</p>"
+    },
+    {
+      "number": 7,
+      "content": "<p><strong>1–54.</strong></p>\n<p>Tính <span class=\"math inline\">\\(y'\\)</span>.</p><p><strong>7.</strong> <span class=\"math inline\">\\(\\displaystyle y=\\frac{t^4-1}{t^4+1}\\)</span>.</p>"
+    },
+    {
+      "number": 8,
+      "content": "<p><strong>1–54.</strong></p>\n<p>Tính <span class=\"math inline\">\\(y'\\)</span>.</p><p><strong>8.</strong> <span class=\"math inline\">\\(xe^y=y\\sin x\\)</span>.</p>"
+    },
+    {
+      "number": 9,
+      "content": "<p><strong>1–54.</strong></p>\n<p>Tính <span class=\"math inline\">\\(y'\\)</span>.</p><p><strong>9.</strong> <span class=\"math inline\">\\(y=\\ln(x\\ln x)\\)</span>.</p>"
+    },
+    {
+      "number": 10,
+      "content": "<p><strong>1–54.</strong></p>\n<p>Tính <span class=\"math inline\">\\(y'\\)</span>.</p><p><strong>10.</strong> <span class=\"math inline\">\\(y=e^{mx}\\cos nx\\)</span>.</p>"
+    },
+    {
+      "number": 11,
+      "content": "<p><strong>1–54.</strong></p>\n<p>Tính <span class=\"math inline\">\\(y'\\)</span>.</p><p><strong>11.</strong> <span class=\"math inline\">\\(y=\\sqrt{x}\\cos\\sqrt{x}\\)</span>.</p>"
+    },
+    {
+      "number": 12,
+      "content": "<p><strong>1–54.</strong></p>\n<p>Tính <span class=\"math inline\">\\(y'\\)</span>.</p><p><strong>12.</strong> <span class=\"math inline\">\\(y=(\\arcsin2x)^2\\)</span>.</p>"
+    },
+    {
+      "number": 13,
+      "content": "<p><strong>1–54.</strong></p>\n<p>Tính <span class=\"math inline\">\\(y'\\)</span>.</p><p><strong>13.</strong> <span class=\"math inline\">\\(\\displaystyle y=\\frac{e^{1/x}}{x^2}\\)</span>.</p>"
+    },
+    {
+      "number": 14,
+      "content": "<p><strong>1–54.</strong></p>\n<p>Tính <span class=\"math inline\">\\(y'\\)</span>.</p><p><strong>14.</strong> <span class=\"math inline\">\\(y=\\ln\\sec x\\)</span>.</p>"
+    },
+    {
+      "number": 15,
+      "content": "<p><strong>1–54.</strong></p>\n<p>Tính <span class=\"math inline\">\\(y'\\)</span>.</p><p><strong>15.</strong> <span class=\"math inline\">\\(y+x\\cos y=x^2y\\)</span>.</p>"
+    },
+    {
+      "number": 16,
+      "content": "<p><strong>1–54.</strong></p>\n<p>Tính <span class=\"math inline\">\\(y'\\)</span>.</p><p><strong>16.</strong> <span class=\"math inline\">\\(\\displaystyle y=\\left(\\frac{u-1}{u^2+u+1}\\right)^4\\)</span>.</p>"
+    },
+    {
+      "number": 17,
+      "content": "<p><strong>1–54.</strong></p>\n<p>Tính <span class=\"math inline\">\\(y'\\)</span>.</p><p><strong>17.</strong> <span class=\"math inline\">\\(y=\\sqrt{\\arctan x}\\)</span>.</p>"
+    },
+    {
+      "number": 18,
+      "content": "<p><strong>1–54.</strong></p>\n<p>Tính <span class=\"math inline\">\\(y'\\)</span>.</p><p><strong>18.</strong> <span class=\"math inline\">\\(y=\\cot(\\csc x)\\)</span>.</p>"
+    },
+    {
+      "number": 19,
+      "content": "<p><strong>1–54.</strong></p>\n<p>Tính <span class=\"math inline\">\\(y'\\)</span>.</p><p><strong>19.</strong> <span class=\"math inline\">\\(\\displaystyle y=\\tan\\left(\\frac{t}{1+t^2}\\right)\\)</span>.</p>"
+    },
+    {
+      "number": 20,
+      "content": "<p><strong>1–54.</strong></p>\n<p>Tính <span class=\"math inline\">\\(y'\\)</span>.</p><p><strong>20.</strong> <span class=\"math inline\">\\(y=e^{x\\sec x}\\)</span>.</p>"
+    },
+    {
+      "number": 21,
+      "content": "<p><strong>1–54.</strong></p>\n<p>Tính <span class=\"math inline\">\\(y'\\)</span>.</p><p><strong>21.</strong> <span class=\"math inline\">\\(y=3^{x\\ln x}\\)</span>.</p>"
+    },
+    {
+      "number": 22,
+      "content": "<p><strong>1–54.</strong></p>\n<p>Tính <span class=\"math inline\">\\(y'\\)</span>.</p><p><strong>22.</strong> <span class=\"math inline\">\\(y=\\sec(1+x^2)\\)</span>.</p>"
+    },
+    {
+      "number": 23,
+      "content": "<p><strong>1–54.</strong></p>\n<p>Tính <span class=\"math inline\">\\(y'\\)</span>.</p><p><strong>23.</strong> <span class=\"math inline\">\\(y=(1-x^{-1})^{-1}\\)</span>.</p>"
+    },
+    {
+      "number": 24,
+      "content": "<p><strong>1–54.</strong></p>\n<p>Tính <span class=\"math inline\">\\(y'\\)</span>.</p><p><strong>24.</strong> <span class=\"math inline\">\\(\\displaystyle y=\\frac1{\\sqrt[3]{x}}+\\sqrt{x}\\)</span>.</p>"
+    },
+    {
+      "number": 25,
+      "content": "<p><strong>1–54.</strong></p>\n<p>Tính <span class=\"math inline\">\\(y'\\)</span>.</p><p><strong>25.</strong> <span class=\"math inline\">\\(\\sin(xy)=x^2-y\\)</span>.</p>"
+    },
+    {
+      "number": 26,
+      "content": "<p><strong>1–54.</strong></p>\n<p>Tính <span class=\"math inline\">\\(y'\\)</span>.</p><p><strong>26.</strong> <span class=\"math inline\">\\(y=\\sqrt{\\sin\\sqrt{x}}\\)</span>.</p>"
+    },
+    {
+      "number": 27,
+      "content": "<p><strong>1–54.</strong></p>\n<p>Tính <span class=\"math inline\">\\(y'\\)</span>.</p><p><strong>27.</strong> <span class=\"math inline\">\\(y=\\log_5(1+2x)\\)</span>.</p>"
+    },
+    {
+      "number": 28,
+      "content": "<p><strong>1–54.</strong></p>\n<p>Tính <span class=\"math inline\">\\(y'\\)</span>.</p><p><strong>28.</strong> <span class=\"math inline\">\\(y=(\\cos x)^x\\)</span>.</p>"
+    },
+    {
+      "number": 29,
+      "content": "<p><strong>1–54.</strong></p>\n<p>Tính <span class=\"math inline\">\\(y'\\)</span>.</p><p><strong>29.</strong> <span class=\"math inline\">\\(y=\\ln\\sin x-\\tfrac12\\sin^2x\\)</span>.</p>"
+    },
+    {
+      "number": 30,
+      "content": "<p><strong>1–54.</strong></p>\n<p>Tính <span class=\"math inline\">\\(y'\\)</span>.</p><p><strong>30.</strong> <span class=\"math inline\">\\(\\displaystyle y=\\frac{(x^2+1)^4}{(2x+1)^3(3x-1)^5}\\)</span>.</p>"
+    },
+    {
+      "number": 31,
+      "content": "<p><strong>1–54.</strong></p>\n<p>Tính <span class=\"math inline\">\\(y'\\)</span>.</p><p><strong>31.</strong> <span class=\"math inline\">\\(y=x\\tan^{-1}(4x)\\)</span>.</p>"
+    },
+    {
+      "number": 32,
+      "content": "<p><strong>1–54.</strong></p>\n<p>Tính <span class=\"math inline\">\\(y'\\)</span>.</p><p><strong>32.</strong> <span class=\"math inline\">\\(y=e^{\\cos x}+\\cos(e^x)\\)</span>.</p>"
+    },
+    {
+      "number": 33,
+      "content": "<p><strong>1–54.</strong></p>\n<p>Tính <span class=\"math inline\">\\(y'\\)</span>.</p><p><strong>33.</strong> <span class=\"math inline\">\\(y=\\ln|\\sec5x+\\tan5x|\\)</span>.</p>"
+    },
+    {
+      "number": 34,
+      "content": "<p><strong>1–54.</strong></p>\n<p>Tính <span class=\"math inline\">\\(y'\\)</span>.</p><p><strong>34.</strong> <span class=\"math inline\">\\(y=10^{\\tan\\pi\\theta}\\)</span>.</p>"
+    },
+    {
+      "number": 35,
+      "content": "<p><strong>1–54.</strong></p>\n<p>Tính <span class=\"math inline\">\\(y'\\)</span>.</p><p><strong>35.</strong> <span class=\"math inline\">\\(y=\\cot(3x^2+5)\\)</span>.</p>"
+    },
+    {
+      "number": 36,
+      "content": "<p><strong>1–54.</strong></p>\n<p>Tính <span class=\"math inline\">\\(y'\\)</span>.</p><p><strong>36.</strong> <span class=\"math inline\">\\(y=\\sqrt{t}\\ln(t^4)\\)</span>.</p>"
+    },
+    {
+      "number": 37,
+      "content": "<p><strong>1–54.</strong></p>\n<p>Tính <span class=\"math inline\">\\(y'\\)</span>.</p><p><strong>37.</strong> <span class=\"math inline\">\\(y=\\sin\\left(\\tan\\sqrt{1+x^3}\\right)\\)</span>.</p>"
+    },
+    {
+      "number": 38,
+      "content": "<p><strong>1–54.</strong></p>\n<p>Tính <span class=\"math inline\">\\(y'\\)</span>.</p><p><strong>38.</strong> <span class=\"math inline\">\\(y=x\\sec^{-1}x\\)</span>.</p>"
+    },
+    {
+      "number": 39,
+      "content": "<p><strong>1–54.</strong></p>\n<p>Tính <span class=\"math inline\">\\(y'\\)</span>.</p><p><strong>39.</strong> <span class=\"math inline\">\\(y=5\\arctan(1/x)\\)</span>.</p>"
+    },
+    {
+      "number": 40,
+      "content": "<p><strong>1–54.</strong></p>\n<p>Tính <span class=\"math inline\">\\(y'\\)</span>.</p><p><strong>40.</strong> <span class=\"math inline\">\\(y=\\sin^{-1}(\\cos\\theta)\\)</span>, <span class=\"math inline\">\\(0&lt;\\theta&lt;\\pi\\)</span>.</p>"
+    },
+    {
+      "number": 41,
+      "content": "<p><strong>1–54.</strong></p>\n<p>Tính <span class=\"math inline\">\\(y'\\)</span>.</p><p><strong>41.</strong> <span class=\"math inline\">\\(y=x\\tan^{-1}x-\\tfrac12\\ln(1+x^2)\\)</span>.</p>"
+    },
+    {
+      "number": 42,
+      "content": "<p><strong>1–54.</strong></p>\n<p>Tính <span class=\"math inline\">\\(y'\\)</span>.</p><p><strong>42.</strong> <span class=\"math inline\">\\(y=\\ln(\\arcsin x^2)\\)</span>.</p>"
+    },
+    {
+      "number": 43,
+      "content": "<p><strong>1–54.</strong></p>\n<p>Tính <span class=\"math inline\">\\(y'\\)</span>.</p><p><strong>43.</strong> <span class=\"math inline\">\\(y=\\tan^2(\\sin\\theta)\\)</span>.</p>"
+    },
+    {
+      "number": 44,
+      "content": "<p><strong>1–54.</strong></p>\n<p>Tính <span class=\"math inline\">\\(y'\\)</span>.</p><p><strong>44.</strong> <span class=\"math inline\">\\(y+\\ln y=xy^2\\)</span>.</p>"
+    },
+    {
+      "number": 45,
+      "content": "<p><strong>1–54.</strong></p>\n<p>Tính <span class=\"math inline\">\\(y'\\)</span>.</p><p><strong>45.</strong> <span class=\"math inline\">\\(\\displaystyle y=\\frac{\\sqrt{x+1}\\,(2-x)^5}{(x+3)^7}\\)</span>.</p>"
+    },
+    {
+      "number": 46,
+      "content": "<p><strong>1–54.</strong></p>\n<p>Tính <span class=\"math inline\">\\(y'\\)</span>.</p><p><strong>46.</strong> <span class=\"math inline\">\\(\\displaystyle y=\\frac{(x+\\lambda)^4}{x^4+\\lambda^4}\\)</span>.</p>"
+    },
+    {
+      "number": 47,
+      "content": "<p><strong>1–54.</strong></p>\n<p>Tính <span class=\"math inline\">\\(y'\\)</span>.</p><p><strong>47.</strong> <span class=\"math inline\">\\(y=x\\sinh(x^2)\\)</span>.</p>"
+    },
+    {
+      "number": 48,
+      "content": "<p><strong>1–54.</strong></p>\n<p>Tính <span class=\"math inline\">\\(y'\\)</span>.</p><p><strong>48.</strong> <span class=\"math inline\">\\(\\displaystyle y=\\frac{\\sin mx}{x}\\)</span>.</p>"
+    },
+    {
+      "number": 49,
+      "content": "<p><strong>1–54.</strong></p>\n<p>Tính <span class=\"math inline\">\\(y'\\)</span>.</p><p><strong>49.</strong> <span class=\"math inline\">\\(y=\\ln(\\cosh3x)\\)</span>.</p>"
+    },
+    {
+      "number": 50,
+      "content": "<p><strong>1–54.</strong></p>\n<p>Tính <span class=\"math inline\">\\(y'\\)</span>.</p><p><strong>50.</strong> <span class=\"math inline\">\\(\\displaystyle y=\\ln\\left|\\frac{x^2-4}{2x+5}\\right|\\)</span>.</p>"
+    },
+    {
+      "number": 51,
+      "content": "<p><strong>1–54.</strong></p>\n<p>Tính <span class=\"math inline\">\\(y'\\)</span>.</p><p><strong>51.</strong> <span class=\"math inline\">\\(y=\\cosh^{-1}(\\sinh x)\\)</span>.</p>"
+    },
+    {
+      "number": 52,
+      "content": "<p><strong>1–54.</strong></p>\n<p>Tính <span class=\"math inline\">\\(y'\\)</span>.</p><p><strong>52.</strong> <span class=\"math inline\">\\(y=x\\tanh^{-1}\\sqrt{x}\\)</span>.</p>"
+    },
+    {
+      "number": 53,
+      "content": "<p><strong>1–54.</strong></p>\n<p>Tính <span class=\"math inline\">\\(y'\\)</span>.</p><p><strong>53.</strong> <span class=\"math inline\">\\(y=\\cos\\left(e^{\\sqrt{\\tan3x}}\\right)\\)</span>.</p>"
+    },
+    {
+      "number": 54,
+      "content": "<p><strong>1–54.</strong></p>\n<p>Tính <span class=\"math inline\">\\(y'\\)</span>.</p><p><strong>54.</strong> <span class=\"math inline\">\\(y=\\sin^2\\left(\\cos\\sqrt{\\sin\\pi x}\\right)\\)</span>.</p>"
+    },
+    {
+      "number": 55,
+      "content": "<p><strong>55.</strong> Nếu <span class=\"math inline\">\\(f(t)=\\sqrt{4t+1}\\)</span>, tìm <span class=\"math inline\">\\(f''(2)\\)</span>.</p>"
+    },
+    {
+      "number": 56,
+      "content": "<p><strong>56.</strong> Nếu <span class=\"math inline\">\\(g(\\theta)=\\theta\\sin\\theta\\)</span>, tìm <span class=\"math inline\">\\(g''(\\pi/6)\\)</span>.</p>"
+    },
+    {
+      "number": 57,
+      "content": "<p><strong>57.</strong> Tìm <span class=\"math inline\">\\(y''\\)</span> nếu <span class=\"math inline\">\\(x^6+y^6=1\\)</span>.</p>"
+    },
+    {
+      "number": 58,
+      "content": "<p><strong>58.</strong> Tìm <span class=\"math inline\">\\(f^{(n)}(x)\\)</span> nếu <span class=\"math inline\">\\(f(x)=1/(2-x)\\)</span>.</p>"
+    },
+    {
+      "number": 59,
+      "content": "<p><strong>59.</strong> Dùng quy nạp toán học để chứng minh: nếu <span class=\"math inline\">\\(f(x)=xe^x\\)</span> thì <span class=\"math inline\">\\(f^{(n)}(x)=(x+n)e^x\\)</span>. (Xem Các nguyên tắc giải toán sau Chương 1.)</p>"
+    },
+    {
+      "number": 60,
+      "content": "<p><strong>60.</strong> Tính <span class=\"math inline\">\\(\\displaystyle\\lim_{t\\to0}\\frac{t^3}{\\tan^3(2t)}\\)</span>.</p>"
+    },
+    {
+      "number": 61,
+      "content": "<p><strong>61–63.</strong></p>\n<p>Tìm phương trình tiếp tuyến của đường cong tại điểm đã cho.</p><p><strong>61.</strong> <span class=\"math inline\">\\(y=4\\sin^2x\\)</span>, <span class=\"math inline\">\\((\\pi/6,1)\\)</span>.</p>"
+    },
+    {
+      "number": 62,
+      "content": "<p><strong>61–63.</strong></p>\n<p>Tìm phương trình tiếp tuyến của đường cong tại điểm đã cho.</p><p><strong>62.</strong> <span class=\"math inline\">\\(\\displaystyle y=\\frac{x^2-1}{x^2+1}\\)</span>, <span class=\"math inline\">\\((0,-1)\\)</span>.</p>"
+    },
+    {
+      "number": 63,
+      "content": "<p><strong>61–63.</strong></p>\n<p>Tìm phương trình tiếp tuyến của đường cong tại điểm đã cho.</p><p><strong>63.</strong> <span class=\"math inline\">\\(y=\\sqrt{1+4\\sin x}\\)</span>, <span class=\"math inline\">\\((0,1)\\)</span>.</p>"
+    },
+    {
+      "number": 64,
+      "content": "<p><strong>64–65.</strong></p>\n<p>Tìm phương trình tiếp tuyến và pháp tuyến của đường cong tại điểm đã cho.</p><p><strong>64.</strong> <span class=\"math inline\">\\(x^2+4xy+y^2=13\\)</span>, <span class=\"math inline\">\\((2,1)\\)</span>.</p>"
+    },
+    {
+      "number": 65,
+      "content": "<p><strong>64–65.</strong></p>\n<p>Tìm phương trình tiếp tuyến và pháp tuyến của đường cong tại điểm đã cho.</p><p><strong>65.</strong> <span class=\"math inline\">\\(y=(2+x)e^{-x}\\)</span>, <span class=\"math inline\">\\((0,2)\\)</span>.</p>"
+    },
+    {
+      "number": 66,
+      "content": "<p><strong>66.</strong> <em>[Cần công cụ vẽ đồ thị.]</em> Nếu <span class=\"math inline\">\\(f(x)=xe^{\\sin x}\\)</span>, tìm <span class=\"math inline\">\\(f'(x)\\)</span>. Vẽ <span class=\"math inline\">\\(f\\)</span> và <span class=\"math inline\">\\(f'\\)</span> trên cùng một màn hình, rồi nhận xét.</p>"
+    },
+    {
+      "number": 67,
+      "content": "<p><strong>67.</strong> (a) Nếu <span class=\"math inline\">\\(f(x)=x\\sqrt{5-x}\\)</span>, tìm <span class=\"math inline\">\\(f'(x)\\)</span>.</p>\n<p>(b) Tìm phương trình các tiếp tuyến của <span class=\"math inline\">\\(y=x\\sqrt{5-x}\\)</span> tại <span class=\"math inline\">\\((1,2)\\)</span> và <span class=\"math inline\">\\((4,4)\\)</span>.</p>\n<p>(c) <em>[Cần công cụ vẽ đồ thị.]</em> Minh họa câu (b) bằng cách vẽ đường cong và các tiếp tuyến trên cùng một màn hình.</p>\n<p>(d) <em>[Cần công cụ vẽ đồ thị.]</em> Kiểm tra tính hợp lý của kết quả ở câu (a) bằng cách so sánh đồ thị của <span class=\"math inline\">\\(f\\)</span> và <span class=\"math inline\">\\(f'\\)</span>.</p>"
+    },
+    {
+      "number": 68,
+      "content": "<p><strong>68.</strong> (a) Nếu <span class=\"math inline\">\\(f(x)=4x-\\tan x\\)</span>, <span class=\"math inline\">\\(-\\pi/2&lt;x&lt;\\pi/2\\)</span>, tìm <span class=\"math inline\">\\(f'\\)</span> và <span class=\"math inline\">\\(f''\\)</span>.</p>\n<p>(b) <em>[Cần công cụ vẽ đồ thị.]</em> Kiểm tra tính hợp lý của kết quả ở câu (a) bằng cách so sánh đồ thị của <span class=\"math inline\">\\(f,f',f''\\)</span>.</p>"
+    },
+    {
+      "number": 69,
+      "content": "<p><strong>69.</strong> Tại những điểm nào trên đường cong <span class=\"math inline\">\\(y=\\sin x+\\cos x\\)</span>, <span class=\"math inline\">\\(0\\le x\\le2\\pi\\)</span>, tiếp tuyến nằm ngang?</p>"
+    },
+    {
+      "number": 70,
+      "content": "<p><strong>70.</strong> Tìm các điểm trên elip <span class=\"math inline\">\\(x^2+2y^2=1\\)</span> mà tiếp tuyến có hệ số góc bằng <span class=\"math inline\">\\(1\\)</span>.</p>"
+    },
+    {
+      "number": 71,
+      "content": "<p><strong>71.</strong> Nếu <span class=\"math inline\">\\(f(x)=(x-a)(x-b)(x-c)\\)</span>, chứng minh <span class=\"math display\">\\[\\frac{f'(x)}{f(x)}=\\frac1{x-a}+\\frac1{x-b}+\\frac1{x-c}.\\]</span></p>"
+    },
+    {
+      "number": 72,
+      "content": "<p><strong>72.</strong> (a) Lấy đạo hàm công thức góc đôi <span class=\"math inline\">\\(\\cos2x=\\cos^2x-\\sin^2x\\)</span> để thu được công thức góc đôi của hàm sin.</p>\n<p>(b) Lấy đạo hàm công thức cộng <span class=\"math inline\">\\(\\sin(x+a)=\\sin x\\cos a+\\cos x\\sin a\\)</span> để thu được công thức cộng của hàm cosin.</p>"
+    },
+    {
+      "number": 73,
+      "content": "<p><strong>73.</strong> Giả sử <span class=\"math display\">\\[\\begin{aligned}\nf(1)&amp;=2,&amp;f'(1)&amp;=3,&amp;f(2)&amp;=1,&amp;f'(2)&amp;=2,\\\\\ng(1)&amp;=3,&amp;g'(1)&amp;=1,&amp;g(2)&amp;=1,&amp;g'(2)&amp;=4.\n\\end{aligned}\\]</span> (a) Nếu <span class=\"math inline\">\\(S(x)=f(x)+g(x)\\)</span>, tìm <span class=\"math inline\">\\(S'(1)\\)</span>.</p>\n<p>(b) Nếu <span class=\"math inline\">\\(P(x)=f(x)g(x)\\)</span>, tìm <span class=\"math inline\">\\(P'(2)\\)</span>.</p>\n<p>(c) Nếu <span class=\"math inline\">\\(Q(x)=f(x)/g(x)\\)</span>, tìm <span class=\"math inline\">\\(Q'(1)\\)</span>.</p>\n<p>(d) Nếu <span class=\"math inline\">\\(C(x)=f(g(x))\\)</span>, tìm <span class=\"math inline\">\\(C'(2)\\)</span>.</p>"
+    },
+    {
+      "number": 74,
+      "content": "<p><strong>74.</strong> Cho <span class=\"math inline\">\\(f,g\\)</span> có đồ thị như hình. Đặt <span class=\"math inline\">\\(P(x)=f(x)g(x)\\)</span>, <span class=\"math inline\">\\(Q(x)=f(x)/g(x)\\)</span> và <span class=\"math inline\">\\(C(x)=f(g(x))\\)</span>. Tìm (a) <span class=\"math inline\">\\(P'(2)\\)</span>; (b) <span class=\"math inline\">\\(Q'(2)\\)</span>; (c) <span class=\"math inline\">\\(C'(2)\\)</span>.</p>\n<div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-3-review-e3f0e970/ex74.png\" alt=\"image\"><br>\nHình cho Bài tập 74.</p>\n</div>"
+    },
+    {
+      "number": 75,
+      "content": "<p><strong>75–82.</strong></p>\n<p>Tìm <span class=\"math inline\">\\(f'\\)</span> theo <span class=\"math inline\">\\(g'\\)</span>.</p><p><strong>75.</strong> <span class=\"math inline\">\\(f(x)=x^2g(x)\\)</span>.</p>"
+    },
+    {
+      "number": 76,
+      "content": "<p><strong>75–82.</strong></p>\n<p>Tìm <span class=\"math inline\">\\(f'\\)</span> theo <span class=\"math inline\">\\(g'\\)</span>.</p><p><strong>76.</strong> <span class=\"math inline\">\\(f(x)=g(x^2)\\)</span>.</p>"
+    },
+    {
+      "number": 77,
+      "content": "<p><strong>75–82.</strong></p>\n<p>Tìm <span class=\"math inline\">\\(f'\\)</span> theo <span class=\"math inline\">\\(g'\\)</span>.</p><p><strong>77.</strong> <span class=\"math inline\">\\(f(x)=[g(x)]^2\\)</span>.</p>"
+    },
+    {
+      "number": 78,
+      "content": "<p><strong>75–82.</strong></p>\n<p>Tìm <span class=\"math inline\">\\(f'\\)</span> theo <span class=\"math inline\">\\(g'\\)</span>.</p><p><strong>78.</strong> <span class=\"math inline\">\\(f(x)=g(g(x))\\)</span>.</p>"
+    },
+    {
+      "number": 79,
+      "content": "<p><strong>75–82.</strong></p>\n<p>Tìm <span class=\"math inline\">\\(f'\\)</span> theo <span class=\"math inline\">\\(g'\\)</span>.</p><p><strong>79.</strong> <span class=\"math inline\">\\(f(x)=g(e^x)\\)</span>.</p>"
+    },
+    {
+      "number": 80,
+      "content": "<p><strong>75–82.</strong></p>\n<p>Tìm <span class=\"math inline\">\\(f'\\)</span> theo <span class=\"math inline\">\\(g'\\)</span>.</p><p><strong>80.</strong> <span class=\"math inline\">\\(f(x)=e^{g(x)}\\)</span>.</p>"
+    },
+    {
+      "number": 81,
+      "content": "<p><strong>75–82.</strong></p>\n<p>Tìm <span class=\"math inline\">\\(f'\\)</span> theo <span class=\"math inline\">\\(g'\\)</span>.</p><p><strong>81.</strong> <span class=\"math inline\">\\(f(x)=\\ln|g(x)|\\)</span>.</p>"
+    },
+    {
+      "number": 82,
+      "content": "<p><strong>75–82.</strong></p>\n<p>Tìm <span class=\"math inline\">\\(f'\\)</span> theo <span class=\"math inline\">\\(g'\\)</span>.</p><p><strong>82.</strong> <span class=\"math inline\">\\(f(x)=g(\\ln x)\\)</span>.</p>"
+    },
+    {
+      "number": 83,
+      "content": "<p><strong>83–85.</strong></p>\n<p>Tìm <span class=\"math inline\">\\(h'\\)</span> theo <span class=\"math inline\">\\(f'\\)</span> và <span class=\"math inline\">\\(g'\\)</span>.</p><p><strong>83.</strong> <span class=\"math inline\">\\(\\displaystyle h(x)=\\frac{f(x)g(x)}{f(x)+g(x)}\\)</span>.</p>"
+    },
+    {
+      "number": 84,
+      "content": "<p><strong>83–85.</strong></p>\n<p>Tìm <span class=\"math inline\">\\(h'\\)</span> theo <span class=\"math inline\">\\(f'\\)</span> và <span class=\"math inline\">\\(g'\\)</span>.</p><p><strong>84.</strong> <span class=\"math inline\">\\(\\displaystyle h(x)=\\sqrt{\\frac{f(x)}{g(x)}}\\)</span>.</p>"
+    },
+    {
+      "number": 85,
+      "content": "<p><strong>83–85.</strong></p>\n<p>Tìm <span class=\"math inline\">\\(h'\\)</span> theo <span class=\"math inline\">\\(f'\\)</span> và <span class=\"math inline\">\\(g'\\)</span>.</p><p><strong>85.</strong> <span class=\"math inline\">\\(h(x)=f(g(\\sin4x))\\)</span>.</p>"
+    },
+    {
+      "number": 86,
+      "content": "<p><strong>86.</strong> (a) <em>[Cần công cụ vẽ đồ thị.]</em> Vẽ <span class=\"math inline\">\\(f(x)=x-2\\sin x\\)</span> trong khung nhìn <span class=\"math inline\">\\([0,8]\\times[-2,8]\\)</span>.</p>\n<p>(b) Tốc độ biến thiên trung bình lớn hơn trên khoảng nào: <span class=\"math inline\">\\([1,2]\\)</span> hay <span class=\"math inline\">\\([2,3]\\)</span>?</p>\n<p>(c) Tốc độ biến thiên tức thời lớn hơn tại giá trị nào: <span class=\"math inline\">\\(x=2\\)</span> hay <span class=\"math inline\">\\(x=5\\)</span>?</p>\n<p>(d) Kiểm tra các ước lượng từ đồ thị ở câu (c) bằng cách tính <span class=\"math inline\">\\(f'(x)\\)</span> và so sánh <span class=\"math inline\">\\(f'(2)\\)</span> với <span class=\"math inline\">\\(f'(5)\\)</span>.</p>"
+    },
+    {
+      "number": 87,
+      "content": "<p><strong>87.</strong> Tại điểm nào trên đường cong <span class=\"math inline\">\\(y=[\\ln(x+4)]^2\\)</span>, tiếp tuyến nằm ngang?</p>"
+    },
+    {
+      "number": 88,
+      "content": "<p><strong>88.</strong> (a) Tìm phương trình tiếp tuyến của <span class=\"math inline\">\\(y=e^x\\)</span> song song với đường thẳng <span class=\"math inline\">\\(x-4y=1\\)</span>.</p>\n<p>(b) Tìm phương trình tiếp tuyến của <span class=\"math inline\">\\(y=e^x\\)</span> đi qua gốc tọa độ.</p>"
+    },
+    {
+      "number": 89,
+      "content": "<p><strong>89.</strong> Tìm parabol <span class=\"math inline\">\\(y=ax^2+bx+c\\)</span> đi qua <span class=\"math inline\">\\((1,4)\\)</span>, có các tiếp tuyến tại <span class=\"math inline\">\\(x=-1\\)</span> và <span class=\"math inline\">\\(x=5\\)</span> với hệ số góc lần lượt là <span class=\"math inline\">\\(6\\)</span> và <span class=\"math inline\">\\(-2\\)</span>.</p>"
+    },
+    {
+      "number": 90,
+      "content": "<p><strong>90.</strong> Hàm <span class=\"math inline\">\\(C(t)=K(e^{-at}-e^{-bt})\\)</span>, với <span class=\"math inline\">\\(a,b,K\\)</span> là các hằng số dương và <span class=\"math inline\">\\(b&gt;a\\)</span>, được dùng để mô hình hóa nồng độ tại thời điểm <span class=\"math inline\">\\(t\\)</span> của một loại thuốc tiêm vào máu.</p>\n<p>(a) Chứng minh <span class=\"math inline\">\\(\\displaystyle\\lim_{t\\to\\infty}C(t)=0\\)</span>.</p>\n<p>(b) Tìm <span class=\"math inline\">\\(C'(t)\\)</span>, tốc độ biến thiên nồng độ thuốc trong máu.</p>\n<p>(c) Khi nào tốc độ này bằng <span class=\"math inline\">\\(0\\)</span>?</p>"
+    },
+    {
+      "number": 91,
+      "content": "<p><strong>91.</strong> Phương trình chuyển động dạng <span class=\"math inline\">\\(s=Ae^{-ct}\\cos(\\omega t+\\delta)\\)</span> biểu diễn dao động tắt dần của một vật. Tìm vận tốc và gia tốc của vật.</p>"
+    },
+    {
+      "number": 92,
+      "content": "<p><strong>92.</strong> Một chất điểm chuyển động trên đường thẳng nằm ngang, có tọa độ tại thời điểm <span class=\"math inline\">\\(t\\)</span> là <span class=\"math inline\">\\(x=\\sqrt{b^2+c^2t^2}\\)</span>, <span class=\"math inline\">\\(t\\ge0\\)</span>, với <span class=\"math inline\">\\(b,c\\)</span> là hằng số dương.</p>\n<p>(a) Tìm hàm vận tốc và hàm gia tốc.</p>\n<p>(b) Chứng minh chất điểm luôn chuyển động theo chiều dương.</p>"
+    },
+    {
+      "number": 93,
+      "content": "<p><strong>93.</strong> Một chất điểm chuyển động trên đường thẳng đứng, có tọa độ tại thời điểm <span class=\"math inline\">\\(t\\)</span> là <span class=\"math inline\">\\(y=t^3-12t+3\\)</span>, <span class=\"math inline\">\\(t\\ge0\\)</span>.</p>\n<p>(a) Tìm hàm vận tốc và hàm gia tốc.</p>\n<p>(b) Khi nào chất điểm chuyển động lên trên, khi nào xuống dưới?</p>\n<p>(c) Tìm quãng đường chất điểm đi được trong khoảng thời gian <span class=\"math inline\">\\(0\\le t\\le3\\)</span>.</p>\n<p>(d) <em>[Cần công cụ vẽ đồ thị.]</em> Vẽ các hàm vị trí, vận tốc và gia tốc với <span class=\"math inline\">\\(0\\le t\\le3\\)</span>.</p>\n<p>(e) Khi nào chất điểm nhanh dần? Khi nào chậm dần?</p>"
+    },
+    {
+      "number": 94,
+      "content": "<p><strong>94.</strong> Thể tích hình nón tròn xoay là <span class=\"math inline\">\\(V=\\tfrac13\\pi r^2h\\)</span>, với <span class=\"math inline\">\\(r\\)</span> là bán kính đáy và <span class=\"math inline\">\\(h\\)</span> là chiều cao.</p>\n<p>(a) Tìm tốc độ biến thiên thể tích theo chiều cao nếu bán kính không đổi.</p>\n<p>(b) Tìm tốc độ biến thiên thể tích theo bán kính nếu chiều cao không đổi.</p>"
+    },
+    {
+      "number": 95,
+      "content": "<p><strong>95.</strong> Khối lượng một đoạn dây là <span class=\"math inline\">\\(x(1+\\sqrt{x})\\)</span> kilôgam, với <span class=\"math inline\">\\(x\\)</span> là khoảng cách tính bằng mét từ một đầu dây. Tìm khối lượng trên một đơn vị chiều dài tại <span class=\"math inline\">\\(x=4\\,\\mathrm m\\)</span>.</p>"
+    },
+    {
+      "number": 96,
+      "content": "<p><strong>96.</strong> Chi phí tính bằng đôla để sản xuất <span class=\"math inline\">\\(x\\)</span> đơn vị của một loại hàng hóa là <span class=\"math display\">\\[C(x)=920+2x-0.02x^2+0.00007x^3.\\]</span> (a) Tìm hàm chi phí cận biên.</p>\n<p>(b) Tính <span class=\"math inline\">\\(C'(100)\\)</span> và giải thích ý nghĩa.</p>\n<p>(c) So sánh <span class=\"math inline\">\\(C'(100)\\)</span> với chi phí sản xuất sản phẩm thứ <span class=\"math inline\">\\(101\\)</span>.</p>"
+    },
+    {
+      "number": 97,
+      "content": "<p><strong>97.</strong> Một quần thể vi khuẩn ban đầu có <span class=\"math inline\">\\(200\\)</span> tế bào và tăng trưởng với tốc độ tỉ lệ thuận với quy mô quần thể. Sau nửa giờ, số tế bào tăng lên <span class=\"math inline\">\\(360\\)</span>.</p>\n<p>(a) Tìm số tế bào sau <span class=\"math inline\">\\(t\\)</span> giờ.</p>\n<p>(b) Tìm số tế bào sau <span class=\"math inline\">\\(4\\)</span> giờ.</p>\n<p>(c) Tìm tốc độ tăng trưởng sau <span class=\"math inline\">\\(4\\)</span> giờ.</p>\n<p>(d) Khi nào quần thể đạt <span class=\"math inline\">\\(10\\,000\\)</span> tế bào?</p>"
+    },
+    {
+      "number": 98,
+      "content": "<p><strong>98.</strong> Cobalt-60 có chu kỳ bán rã <span class=\"math inline\">\\(5.24\\)</span> năm.</p>\n<p>(a) Tìm khối lượng còn lại của mẫu <span class=\"math inline\">\\(100\\,\\mathrm{mg}\\)</span> sau <span class=\"math inline\">\\(20\\)</span> năm.</p>\n<p>(b) Mất bao lâu để khối lượng giảm xuống <span class=\"math inline\">\\(1\\,\\mathrm{mg}\\)</span>?</p>"
+    },
+    {
+      "number": 99,
+      "content": "<p><strong>99.</strong> Gọi <span class=\"math inline\">\\(C(t)\\)</span> là nồng độ một loại thuốc trong máu. Khi cơ thể đào thải thuốc, <span class=\"math inline\">\\(C(t)\\)</span> giảm với tốc độ tỉ lệ thuận với lượng thuốc có mặt tại thời điểm đó. Do đó <span class=\"math inline\">\\(C'(t)=-kC(t)\\)</span>, với <span class=\"math inline\">\\(k&gt;0\\)</span> được gọi là hằng số đào thải của thuốc.</p>\n<p>(a) Nếu <span class=\"math inline\">\\(C_0\\)</span> là nồng độ tại <span class=\"math inline\">\\(t=0\\)</span>, tìm nồng độ tại thời điểm <span class=\"math inline\">\\(t\\)</span>.</p>\n<p>(b) Nếu cơ thể đào thải một nửa lượng thuốc trong <span class=\"math inline\">\\(30\\)</span> giờ, mất bao lâu để đào thải <span class=\"math inline\">\\(90\\%\\)</span> lượng thuốc?</p>"
+    },
+    {
+      "number": 100,
+      "content": "<p><strong>100.</strong> Một cốc sôcôla nóng có nhiệt độ <span class=\"math inline\">\\(80^\\circ\\mathrm C\\)</span> trong phòng duy trì ở <span class=\"math inline\">\\(20^\\circ\\mathrm C\\)</span>. Sau nửa giờ, sôcôla nguội xuống <span class=\"math inline\">\\(60^\\circ\\mathrm C\\)</span>.</p>\n<p>(a) Nhiệt độ của sôcôla sau thêm nửa giờ là bao nhiêu?</p>\n<p>(b) Khi nào sôcôla nguội xuống <span class=\"math inline\">\\(40^\\circ\\mathrm C\\)</span>?</p>"
+    },
+    {
+      "number": 101,
+      "content": "<p><strong>101.</strong> Thể tích một hình lập phương tăng với tốc độ <span class=\"math inline\">\\(10\\,\\mathrm{cm^3/min}\\)</span>. Diện tích toàn phần tăng nhanh bao nhiêu khi cạnh dài <span class=\"math inline\">\\(30\\,\\mathrm{cm}\\)</span>?</p>"
+    },
+    {
+      "number": 102,
+      "content": "<p><strong>102.</strong> Một cốc giấy có dạng hình nón, cao <span class=\"math inline\">\\(10\\,\\mathrm{cm}\\)</span> và bán kính miệng <span class=\"math inline\">\\(3\\,\\mathrm{cm}\\)</span>. Nếu nước được rót vào cốc với lưu lượng <span class=\"math inline\">\\(2\\,\\mathrm{cm^3/s}\\)</span>, mực nước dâng nhanh bao nhiêu khi nước sâu <span class=\"math inline\">\\(5\\,\\mathrm{cm}\\)</span>?</p>"
+    },
+    {
+      "number": 103,
+      "content": "<p><strong>103.</strong> Một quả bóng bay lên với tốc độ không đổi <span class=\"math inline\">\\(5\\,\\mathrm{ft/s}\\)</span>. Một cậu bé đạp xe dọc đường thẳng với tốc độ <span class=\"math inline\">\\(15\\,\\mathrm{ft/s}\\)</span>. Khi cậu đi qua ngay dưới quả bóng, bóng ở phía trên cậu <span class=\"math inline\">\\(45\\,\\mathrm{ft}\\)</span>. Sau đó <span class=\"math inline\">\\(3\\)</span> giây, khoảng cách giữa cậu bé và bóng tăng nhanh bao nhiêu?</p>"
+    },
+    {
+      "number": 104,
+      "content": "<p><strong>104.</strong> Một nữ vận động viên trượt nước đi lên đường dốc trong hình với tốc độ <span class=\"math inline\">\\(30\\,\\mathrm{ft/s}\\)</span>. Khi rời đường dốc, cô đang đi lên với tốc độ bao nhiêu theo phương thẳng đứng?</p>\n<div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-3-review-e3f0e970/ex104.png\" alt=\"image\"><br>\nHình cho Bài tập 104.</p>\n</div>"
+    },
+    {
+      "number": 105,
+      "content": "<p><strong>105.</strong> Góc nâng của Mặt Trời giảm với tốc độ <span class=\"math inline\">\\(0.25\\,\\mathrm{rad/h}\\)</span>. Bóng của một tòa nhà cao <span class=\"math inline\">\\(400\\,\\mathrm{ft}\\)</span> dài ra nhanh bao nhiêu khi góc nâng bằng <span class=\"math inline\">\\(\\pi/6\\)</span>?</p>"
+    },
+    {
+      "number": 106,
+      "content": "<p><strong>106.</strong> <em>[Cần công cụ vẽ đồ thị.]</em> (a) Tìm xấp xỉ tuyến tính của <span class=\"math inline\">\\(f(x)=\\sqrt{25-x^2}\\)</span> ở gần <span class=\"math inline\">\\(3\\)</span>.</p>\n<p>(b) Minh họa câu (a) bằng đồ thị của <span class=\"math inline\">\\(f\\)</span> và hàm tuyến tính hóa.</p>\n<p>(c) Với những giá trị nào của <span class=\"math inline\">\\(x\\)</span>, phép xấp xỉ tuyến tính có sai số nhỏ hơn <span class=\"math inline\">\\(0.1\\)</span>?</p>"
+    },
+    {
+      "number": 107,
+      "content": "<p><strong>107.</strong> (a) Tìm hàm tuyến tính hóa của <span class=\"math inline\">\\(f(x)=\\sqrt[3]{1+3x}\\)</span> tại <span class=\"math inline\">\\(a=0\\)</span>. Nêu phép xấp xỉ tuyến tính tương ứng và dùng nó để tính gần đúng <span class=\"math inline\">\\(\\sqrt[3]{1.03}\\)</span>.</p>\n<p>(b) <em>[Cần công cụ vẽ đồ thị.]</em> Xác định các giá trị <span class=\"math inline\">\\(x\\)</span> sao cho phép xấp xỉ tuyến tính ở câu (a) có sai số nhỏ hơn <span class=\"math inline\">\\(0.1\\)</span>.</p>"
+    },
+    {
+      "number": 108,
+      "content": "<p><strong>108.</strong> Tính <span class=\"math inline\">\\(dy\\)</span> nếu <span class=\"math inline\">\\(y=x^3-2x^2+1\\)</span>, <span class=\"math inline\">\\(x=2\\)</span> và <span class=\"math inline\">\\(dx=0.2\\)</span>.</p>"
+    },
+    {
+      "number": 109,
+      "content": "<p><strong>109.</strong> Một cửa sổ có dạng hình vuông với một nửa hình tròn ở phía trên. Chiều rộng đáy cửa sổ được đo là <span class=\"math inline\">\\(60\\,\\mathrm{cm}\\)</span>, với sai số đo có thể có là <span class=\"math inline\">\\(0.1\\,\\mathrm{cm}\\)</span>. Dùng vi phân để ước lượng sai số lớn nhất có thể có khi tính diện tích cửa sổ.</p>"
+    },
+    {
+      "number": 110,
+      "content": "<p><strong>110–112.</strong></p>\n<p>Biểu diễn giới hạn dưới dạng đạo hàm rồi tính giá trị.</p><p><strong>110.</strong> <span class=\"math inline\">\\(\\displaystyle\\lim_{x\\to1}\\frac{x^{17}-1}{x-1}\\)</span>.</p>"
+    },
+    {
+      "number": 111,
+      "content": "<p><strong>110–112.</strong></p>\n<p>Biểu diễn giới hạn dưới dạng đạo hàm rồi tính giá trị.</p><p><strong>111.</strong> <span class=\"math inline\">\\(\\displaystyle\\lim_{h\\to0}\\frac{\\sqrt[4]{16+h}-2}{h}\\)</span>.</p>"
+    },
+    {
+      "number": 112,
+      "content": "<p><strong>110–112.</strong></p>\n<p>Biểu diễn giới hạn dưới dạng đạo hàm rồi tính giá trị.</p><p><strong>112.</strong> <span class=\"math inline\">\\(\\displaystyle\\lim_{\\theta\\to\\pi/3}\\frac{\\cos\\theta-0.5}{\\theta-\\pi/3}\\)</span>.</p>"
+    },
+    {
+      "number": 113,
+      "content": "<p><strong>113.</strong> Tính <span class=\"math inline\">\\(\\displaystyle\\lim_{x\\to0}\\frac{\\sqrt{1+\\tan x}-\\sqrt{1+\\sin x}}{x^3}\\)</span>.</p>"
+    },
+    {
+      "number": 114,
+      "content": "<p><strong>114.</strong> Giả sử <span class=\"math inline\">\\(f\\)</span> khả vi, <span class=\"math inline\">\\(f(g(x))=x\\)</span> và <span class=\"math inline\">\\(f'(x)=1+[f(x)]^2\\)</span>. Chứng minh <span class=\"math inline\">\\(g'(x)=1/(1+x^2)\\)</span>.</p>"
+    },
+    {
+      "number": 115,
+      "content": "<p><strong>115.</strong> Tìm <span class=\"math inline\">\\(f'(x)\\)</span> nếu biết <span class=\"math display\">\\[\\frac d{dx}[f(2x)]=x^2.\\]</span></p>"
+    },
+    {
+      "number": 116,
+      "content": "<p><strong>116.</strong> Chứng minh độ dài đoạn của một tiếp tuyến bất kỳ với đường astroid <span class=\"math inline\">\\(x^{2/3}+y^{2/3}=a^{2/3}\\)</span> bị hai trục tọa độ chắn là không đổi.</p>"
+    }
+  ]
+}

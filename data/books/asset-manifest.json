@@ -1870,5 +1870,15 @@
     "file": "stewart-3-11-b68c7c11/fig9.png",
     "mime": "image/png",
     "sha256": "0179bac57851477047e7cf1b47fc727e618072f812b69846a3ab1473d63d869a"
+  },
+  "stewart-3-review-e3f0e970/ex104.png": {
+    "file": "stewart-3-review-e3f0e970/ex104.png",
+    "mime": "image/png",
+    "sha256": "68e240fa7ecc22ee06b9f06a13a065c7ff2ccadf631ab8fead7c5e1115ed735d"
+  },
+  "stewart-3-review-e3f0e970/ex74.png": {
+    "file": "stewart-3-review-e3f0e970/ex74.png",
+    "mime": "image/png",
+    "sha256": "2a24f5f5ec334e9e19d6f60be805c184354a0abea67758a09ca0d69a9f0b731f"
   }
 }

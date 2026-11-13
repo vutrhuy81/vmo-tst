@@ -68,7 +68,7 @@ assert.equal(new Set([...exercises,...section12.exercises,...section13.exercises
 for(const [n,image]of [[1,'ex01'],[2,'ex02'],[10,'ex10']])assert.ok(review.exercises[n-1].content.includes('/'+image+'.png'));
 assert.ok(review.exercises[22].content.includes('<table>'));assert.ok(review.exercises[30].content.includes('ba chữ số'));
 assert.equal((review.section.content.match(/<img /g)||[]).length,3);assert.equal((review.section.content.match(/<table/g)||[]).length,2);
-assert.equal((await readBooks(db,student,{bookId:book.id,sectionId:detail.sections.find(s=>s.title==='Ôn tập'&&s.parentId===detail.sections.find(x=>x.title.startsWith('Chương 3.')).id).id})).section.content,'','Chapter 3 review remains unimported');
+assert.equal((await readBooks(db,student,{bookId:book.id,sectionId:detail.sections.find(s=>s.title==='Ôn tập'&&s.parentId===detail.sections.find(x=>x.title.startsWith('Chương 3.')).id).id})).exercises.length,116,'Chapter 3 review imports all exercises');
 const childPrinciples=detail.sections.find(s=>s.title==='Các nguyên tắc giải toán'&&s.parentId===first.id);
 const principles=await readBooks(db,student,{bookId:book.id,sectionId:childPrinciples.id});
 assert.equal(principles.section.version,2);assert.equal(principles.section.sourceInfo.exampleCount,3);assert.equal(principles.exerciseHeading,'Bài tập');
@@ -559,3 +559,32 @@ for(const image of doc311.window.document.querySelectorAll('img')){
 }
 doc311.window.close();
 assert.deepEqual((await readBooks(db,student,{bookId:book.id,sectionId:child311.id})).exercises.map(e=>e.contentKey),section311.exercises.map(e=>e.contentKey));
+
+// Chapter 3 review keeps concept/true-false material and persists all 116 exercises.
+const chapter3ReviewParent=detail.sections.find(s=>s.title.startsWith('Chương 3.'));
+const child3Review=detail.sections.find(s=>s.title==='Ôn tập'&&s.parentId===chapter3ReviewParent.id);
+const section3Review=await readBooks(db,student,{bookId:book.id,sectionId:child3Review.id});
+assert.equal(section3Review.exerciseHeading,'Bài tập');
+assert.deepEqual(section3Review.exercises.map(e=>e.questionNumber),Array.from({length:116},(_,i)=>i+1));
+assert.ok(section3Review.exercises.every(e=>e.allowSubmission&&e.allowAiEvaluation&&e.contentKey&&e.setKey));
+for(const n of [1,54])assert.ok(section3Review.exercises[n-1].content.includes('Tính'));
+for(const n of [75,82])assert.ok(section3Review.exercises[n-1].content.includes('theo'));
+for(const n of [110,112])assert.ok(section3Review.exercises[n-1].content.includes('Biểu diễn giới hạn'));
+for(const n of [74,104])assert.ok(section3Review.exercises[n-1].content.includes('/ex'+n+'.png'));
+assert.equal(section3Review.section.sourceInfo.conceptCheckCount,7);
+assert.equal(section3Review.section.sourceInfo.trueFalseCount,15);
+assert.equal(/\\(?:cc|tf)\b/.test(section3Review.section.content),false);
+const doc3Review=new JSDOM(section3Review.section.content);
+for(const [label,count]of [['Kiểm tra khái niệm',7],['Trắc nghiệm đúng–sai',15]]){
+ const h=[...doc3Review.window.document.querySelectorAll('h1')].find(h=>h.textContent===label);assert.ok(h);
+ let found=0;for(let n=h.nextElementSibling;n&&!/^H[1-6]$/.test(n.nodeName);n=n.nextElementSibling)if(n.matches('p')&&/^\d+\.$/.test(n.querySelector(':scope > strong')?.textContent||''))found++;
+ assert.equal(found,count);
+}
+assert.equal(doc3Review.window.document.querySelectorAll('img').length,2);
+for(const image of doc3Review.window.document.querySelectorAll('img')){
+ const asset=new URL(image.src,'https://example.test').searchParams.get('asset');
+ assert.equal((await readBookAsset(student,asset)).bytes[0],137);
+ await assert.rejects(()=>readBookAsset(other,asset),e=>e.status===403);
+}
+doc3Review.window.close();
+assert.deepEqual((await readBooks(db,student,{bookId:book.id,sectionId:child3Review.id})).exercises.map(e=>e.contentKey),section3Review.exercises.map(e=>e.contentKey));
