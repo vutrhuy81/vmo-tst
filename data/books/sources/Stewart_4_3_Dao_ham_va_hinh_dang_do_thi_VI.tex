@@ -1,0 +1,528 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage{fontspec}\setmainfont{Latin Modern Roman}\setsansfont{DejaVu Sans}
+\usepackage{amsmath,amssymb,graphicx,geometry,enumitem,needspace,longtable,booktabs,fancyhdr,hyperref}
+\geometry{left=28mm,right=23mm,top=24mm,bottom=24mm}
+\hypersetup{unicode=true,colorlinks=true,linkcolor=black,urlcolor=blue,pdftitle={Giải tích §4.3 — Đạo hàm cho biết gì về hình dạng đồ thị}}
+\setlength{\parindent}{1.2em}\setlength{\parskip}{4pt}\setlength{\headheight}{16pt}
+\pagestyle{fancy}\fancyhf{}\fancyhead[L]{\small Chương 4. Ứng dụng của đạo hàm}\fancyhead[R]{\small §4.3}\fancyfoot[C]{\thepage}
+\newcommand{\fig}[3][.68]{\begin{center}\begin{minipage}{\linewidth}\centering\includegraphics[width=#1\linewidth]{assets/#2.png}\\{\small #3}\end{minipage}\end{center}}
+\newcommand{\ex}[1]{\par\medskip\noindent\textbf{Ví dụ #1.}\ }
+\newcommand{\sol}{\par\nopagebreak[4]\noindent\textit{Lời giải.}\ }
+\newcommand{\bt}[1]{\par\smallskip\Needspace{5\baselineskip}\noindent\textbf{#1.}\ }
+\newcommand{\group}[1]{\par\medskip\noindent\textbf{#1}\par\nopagebreak[4]}
+\newcommand{\gint}[1]{\left[\!\left[#1\right]\!\right]}
+\allowdisplaybreaks[2]
+\DeclareMathOperator{\sech}{sech}
+\DeclareMathOperator{\csch}{csch}
+\DeclareMathOperator{\arccot}{arccot}
+\begin{document}
+\begin{center}{\Large\bfseries 4.3 — Đạo hàm cho biết gì về hình dạng đồ thị}\end{center}
+\noindent\textit{Bản dịch tiếng Việt — Stewart, Clegg và Watson, Calculus: Early Transcendentals, ấn bản thứ 9. Phạm vi: §4.3, tr. 296–309.}
+
+Nhiều ứng dụng của phép tính vi tích phân phụ thuộc vào khả năng suy ra các tính chất của hàm số $f$ từ thông tin về các đạo hàm của nó. Vì $f'(x)$ biểu diễn hệ số góc của đường cong $y=f(x)$ tại $(x,f(x))$, nó cho biết hướng đi của đường cong tại mỗi điểm. Do đó, có cơ sở để kỳ vọng thông tin về $f'(x)$ sẽ cung cấp thông tin về $f(x)$.
+\section*{Đạo hàm $f'$ cho biết gì về $f$?}
+Để thấy đạo hàm giúp xác định nơi hàm số đồng biến hoặc nghịch biến như thế nào, xét Hình 1. (Hàm đồng biến và nghịch biến đã được định nghĩa ở §1.1.) Giữa $A$ và $B$, cũng như giữa $C$ và $D$, các tiếp tuyến có hệ số góc dương nên $f'(x)>0$. Giữa $B$ và $C$, các tiếp tuyến có hệ số góc âm nên $f'(x)<0$. Vì thế, dường như $f$ đồng biến khi $f'(x)$ dương và nghịch biến khi $f'(x)$ âm. Để chứng minh điều này luôn đúng, ta dùng Định lý giá trị trung bình.
+\fig[.42]{fig01}{Hình 1}
+\Needspace{8\baselineskip}
+\group{Tiêu chuẩn xét tính đồng biến và nghịch biến}
+(a) Nếu $f'(x)>0$ trên một khoảng, thì $f$ đồng biến trên khoảng đó.
+
+(b) Nếu $f'(x)<0$ trên một khoảng, thì $f$ nghịch biến trên khoảng đó.
+
+\noindent\textit{Ký hiệu.} Trong sách gốc, tiêu chuẩn này được viết tắt là I/D Test.
+\par\noindent\textit{Chứng minh.} (a) Cho $x_1,x_2$ là hai số bất kỳ trong khoảng với $x_1<x_2$. Theo định nghĩa hàm đồng biến (§1.1), cần chứng minh $f(x_1)<f(x_2)$.
+
+Vì theo giả thiết $f'(x)>0$, nên $f$ khả vi trên $[x_1,x_2]$. Theo Định lý giá trị trung bình, tồn tại một số $c$ nằm giữa $x_1$ và $x_2$ sao cho
+\[f(x_2)-f(x_1)=f'(c)(x_2-x_1).\tag{1}\]
+Ta có $f'(c)>0$ theo giả thiết và $x_2-x_1>0$ vì $x_1<x_2$. Vậy vế phải của (1) dương, nên
+\[f(x_2)-f(x_1)>0,\qquad\text{hay}\qquad f(x_1)<f(x_2).\]
+Điều này chứng tỏ $f$ đồng biến. Phần (b) được chứng minh tương tự.\hfill$\square$
+\Needspace{10\baselineskip}
+\ex{1} Tìm nơi hàm số $f(x)=3x^4-4x^3-12x^2+5$ đồng biến và nơi nó nghịch biến.
+\sol Trước hết, lấy đạo hàm:
+\[f'(x)=12x^3-12x^2-24x=12x(x-2)(x+1).\]
+Để áp dụng tiêu chuẩn xét tính đồng biến và nghịch biến, cần biết nơi $f'(x)>0$ và nơi $f'(x)<0$. Muốn giải các bất đẳng thức này, trước tiên tìm nơi $f'(x)=0$, tức là $x=0$, $x=2$, $x=-1$. Đây là các số tới hạn của $f$; chúng chia miền xác định thành bốn khoảng (xem trục số ở Hình 2). Trong mỗi khoảng, $f'(x)$ luôn dương hoặc luôn âm (xem Ví dụ 3 và 4 ở Phụ lục A). Ta xác định dấu trên từng khoảng từ dấu của ba thừa số $12x$, $x-2$, $x+1$, như bảng sau. Dấu cộng biểu thị biểu thức dương, dấu trừ biểu thị biểu thức âm. Cột cuối đưa ra kết luận theo tiêu chuẩn. Chẳng hạn, $f'(x)<0$ khi $0<x<2$, nên $f$ nghịch biến trên $(0,2)$. (Cũng đúng nếu nói $f$ nghịch biến trên đoạn đóng $[0,2]$.)
+\fig[.43]{fig02}{Hình 2}
+\begin{center}\small
+\begin{longtable}{llllll}\toprule
+Khoảng&$12x$&$x-2$&$x+1$&$f'(x)$&$f$\\\midrule
+$x<-1$&$-$&$-$&$-$&$-$&Nghịch biến trên $(-\infty,-1)$\\
+$-1<x<0$&$-$&$-$&$+$&$+$&Đồng biến trên $(-1,0)$\\
+$0<x<2$&$+$&$-$&$+$&$-$&Nghịch biến trên $(0,2)$\\
+$x>2$&$+$&$+$&$+$&$+$&Đồng biến trên $(2,\infty)$\\\bottomrule
+\end{longtable}\end{center}
+Đồ thị của $f$ ở Hình 3 xác nhận thông tin trong bảng.
+\fig[.42]{fig03}{Hình 3}
+\section*{Tiêu chuẩn đạo hàm bậc nhất}
+Nhắc lại từ §4.1: nếu $f$ có cực đại hoặc cực tiểu địa phương tại $c$, thì $c$ phải là số tới hạn của $f$ (theo Định lý Fermat). Nhưng không phải mọi số tới hạn đều cho cực đại hoặc cực tiểu. Vì vậy, cần một tiêu chuẩn để xác định hàm số có cực đại hoặc cực tiểu địa phương tại một số tới hạn hay không.
+
+Từ Hình 3, với hàm $f$ ở Ví dụ 1, $f(0)=5$ là cực đại địa phương vì $f$ đồng biến trên $(-1,0)$ và nghịch biến trên $(0,2)$. Diễn đạt bằng đạo hàm: $f'(x)>0$ khi $-1<x<0$ và $f'(x)<0$ khi $0<x<2$. Nói cách khác, $f'(x)$ đổi dấu từ dương sang âm tại 0. Nhận xét này là cơ sở của tiêu chuẩn sau.
+\Needspace{11\baselineskip}
+\group{Tiêu chuẩn đạo hàm bậc nhất}
+Giả sử $c$ là một số tới hạn của hàm liên tục $f$.
+
+(a) Nếu $f'$ đổi dấu từ dương sang âm tại $c$, thì $f$ có cực đại địa phương tại $c$.
+
+(b) Nếu $f'$ đổi dấu từ âm sang dương tại $c$, thì $f$ có cực tiểu địa phương tại $c$.
+
+(c) Nếu $f'$ dương ở cả bên trái và bên phải của $c$, hoặc âm ở cả hai phía, thì $f$ không có cực đại hoặc cực tiểu địa phương tại $c$.
+
+Tiêu chuẩn đạo hàm bậc nhất là hệ quả của tiêu chuẩn xét tính đồng biến và nghịch biến. Chẳng hạn, ở (a), vì $f'(x)$ đổi dấu từ dương sang âm tại $c$, $f$ đồng biến ở bên trái và nghịch biến ở bên phải của $c$. Suy ra $f$ có cực đại địa phương tại $c$.
+
+Có thể dễ dàng ghi nhớ tiêu chuẩn này bằng cách hình dung các sơ đồ như Hình 4.
+\fig[.99]{fig04}{Hình 4. (a) Cực đại địa phương tại $c$; (b) cực tiểu địa phương tại $c$; (c), (d) không có cực đại hoặc cực tiểu tại $c$.}
+\ex{2} Tìm các giá trị cực tiểu và cực đại địa phương của hàm $f$ ở Ví dụ 1.
+\sol Từ bảng trong lời giải Ví dụ 1, $f'(x)$ đổi dấu từ âm sang dương tại $-1$, nên theo tiêu chuẩn đạo hàm bậc nhất, $f(-1)=0$ là cực tiểu địa phương. Tương tự, $f'$ đổi dấu từ âm sang dương tại 2, nên $f(2)=-27$ cũng là cực tiểu địa phương. Như đã nhận xét, $f(0)=5$ là cực đại địa phương vì $f'(x)$ đổi dấu từ dương sang âm tại 0.
+\Needspace{10\baselineskip}
+\ex{3} Tìm các giá trị cực đại và cực tiểu địa phương của
+\[g(x)=x+2\sin x,\qquad0\le x\le2\pi.\]
+\sol Như ở Ví dụ 1, trước hết tìm các số tới hạn. Đạo hàm là
+\[g'(x)=1+2\cos x,\]
+nên $g'(x)=0$ khi $\cos x=-\frac12$. Các nghiệm là $2\pi/3$ và $4\pi/3$. Vì $g$ khả vi khắp nơi, chỉ có hai số tới hạn ấy. Ta chia miền xác định theo các số tới hạn. Trong mỗi khoảng, $g'(x)$ luôn dương hoặc luôn âm; vì vậy, xét bảng sau.
+\begin{center}\small
+\begin{longtable}{lll}\toprule
+Khoảng&$g'(x)=1+2\cos x$&$g$\\\midrule
+$0<x<2\pi/3$&$+$&Đồng biến trên $(0,2\pi/3)$\\
+$2\pi/3<x<4\pi/3$&$-$&Nghịch biến trên $(2\pi/3,4\pi/3)$\\
+$4\pi/3<x<2\pi$&$+$&Đồng biến trên $(4\pi/3,2\pi)$\\\bottomrule
+\end{longtable}\end{center}
+Các dấu $+$ trong bảng do $g'(x)>0$ khi $\cos x>-\frac12$. Từ đồ thị $y=\cos x$, điều này đúng trên các khoảng đã nêu. Cũng có thể chọn một giá trị thử trong mỗi khoảng rồi kiểm tra dấu của $g'(x)$ tại giá trị ấy.
+
+Vì $g'(x)$ đổi dấu từ dương sang âm tại $2\pi/3$, tiêu chuẩn đạo hàm bậc nhất cho biết hàm có cực đại địa phương tại đó; giá trị cực đại là
+\[g(2\pi/3)=\frac{2\pi}3+2\sin\frac{2\pi}3
+=\frac{2\pi}3+2\left(\frac{\sqrt3}2\right)=\frac{2\pi}3+\sqrt3\approx3{,}83.\]
+Tương tự, $g'(x)$ đổi dấu từ âm sang dương tại $4\pi/3$, nên
+\[g(4\pi/3)=\frac{4\pi}3+2\sin\frac{4\pi}3
+=\frac{4\pi}3+2\left(-\frac{\sqrt3}2\right)=\frac{4\pi}3-\sqrt3\approx2{,}46\]
+là cực tiểu địa phương. Đồ thị $g$ ở Hình 5 củng cố kết luận này.
+\fig[.42]{fig05}{Hình 5. $g(x)=x+2\sin x$.}
+
+\section*{Đạo hàm $f''$ cho biết gì về $f$?}
+Hình 6 biểu diễn đồ thị của hai hàm đồng biến trên $(a,b)$. Cả hai đều nối điểm $A$ với điểm $B$, nhưng trông khác nhau vì uốn cong theo hai hướng khác nhau. Phân biệt hai kiểu biến thiên này như thế nào?
+\fig[.9]{fig06}{Hình 6}
+Ở Hình 7, các tiếp tuyến được vẽ tại một số điểm. Trong (a), đường cong nằm phía trên các tiếp tuyến và ta nói $f$ \textit{lõm lên} trên $(a,b)$. Trong (b), đường cong nằm phía dưới các tiếp tuyến và ta nói $g$ \textit{lõm xuống} trên $(a,b)$.
+\fig[.9]{fig07}{Hình 7. (a) Lõm lên; (b) lõm xuống.}
+\Needspace{8\baselineskip}
+\group{Định nghĩa}
+Nếu đồ thị của $f$ nằm phía trên mọi tiếp tuyến của nó trên một khoảng $I$, thì $f$ được gọi là \textbf{lõm lên} trên $I$. Nếu đồ thị nằm phía dưới mọi tiếp tuyến của nó trên $I$, thì $f$ được gọi là \textbf{lõm xuống} trên $I$.
+
+\noindent\textit{Ký hiệu.} Trong các hình của sách gốc, CU viết tắt cho lõm lên, CD viết tắt cho lõm xuống.
+
+Hình 8 biểu diễn đồ thị của một hàm lõm lên (CU) trên $(b,c)$, $(d,e)$, $(e,p)$ và lõm xuống (CD) trên $(a,b)$, $(c,d)$, $(p,q)$.
+\fig[.96]{fig08}{Hình 8. CU: lõm lên; CD: lõm xuống.}
+Xét cách đạo hàm bậc hai giúp xác định các khoảng có độ lõm khác nhau. Ở Hình 7(a), khi đi từ trái sang phải, hệ số góc của tiếp tuyến tăng. Điều này có nghĩa là $f'$ đồng biến, do đó đạo hàm $f''$ dương. Tương tự, ở Hình 7(b), hệ số góc của tiếp tuyến giảm từ trái sang phải nên $g'$ nghịch biến, do đó $g''$ âm. Đảo lại lập luận này gợi ý định lý sau. Chứng minh được trình bày ở Phụ lục F với sự hỗ trợ của Định lý giá trị trung bình.
+\Needspace{8\baselineskip}
+\group{Tiêu chuẩn xét độ lõm}
+(a) Nếu $f''(x)>0$ với mọi $x$ trong khoảng $I$, thì đồ thị của $f$ lõm lên trên $I$.
+
+(b) Nếu $f''(x)<0$ với mọi $x$ trong khoảng $I$, thì đồ thị của $f$ lõm xuống trên $I$.
+\Needspace{10\baselineskip}
+\ex{4} Hình 9 biểu diễn số lượng ong mật được nuôi tại một trại ong. Tốc độ tăng số lượng thay đổi theo thời gian như thế nào? Khi nào tốc độ này lớn nhất? Hàm $P$ lõm lên hoặc lõm xuống trên những khoảng nào?
+\fig[.67]{fig09}{Hình 9. Trục đứng: số ong (nghìn con); trục ngang: thời gian (tuần).}
+\sol Quan sát hệ số góc của đường cong khi $t$ tăng, ta thấy tốc độ tăng số lượng ban đầu rất nhỏ, sau đó tăng dần đến lớn nhất vào khoảng $t=12$ tuần, rồi giảm khi số lượng bắt đầu ổn định. Khi số lượng tiến tới mức tối đa khoảng 75.000 con (gọi là \textit{sức chứa của môi trường}), tốc độ tăng $P'(t)$ tiến tới 0. Đường cong có vẻ lõm lên trên $(0,12)$ và lõm xuống trên $(12,18)$.
+
+Trong Ví dụ 4, đường cong số lượng đổi từ lõm lên sang lõm xuống tại điểm xấp xỉ $(12,38.000)$. Điểm này được gọi là \textit{điểm uốn} của đường cong. Ý nghĩa của nó là tốc độ tăng số lượng đạt lớn nhất tại đó. Tổng quát, điểm uốn là điểm mà đường cong đổi chiều lõm.
+\Needspace{7\baselineskip}
+\group{Định nghĩa}
+Một điểm $P$ trên đường cong $y=f(x)$ được gọi là \textbf{điểm uốn} nếu $f$ liên tục tại đó và đường cong đổi từ lõm lên sang lõm xuống, hoặc từ lõm xuống sang lõm lên tại $P$.
+
+Chẳng hạn, ở Hình 8, $B,C,D,P$ là các điểm uốn. Chú ý rằng nếu đường cong có tiếp tuyến tại một điểm uốn, thì đường cong cắt qua tiếp tuyến tại đó.
+
+Theo tiêu chuẩn xét độ lõm, một điểm mà hàm số liên tục và đạo hàm bậc hai đổi dấu là một điểm uốn.
+\Needspace{12\baselineskip}
+\ex{5} Phác họa một đồ thị có thể có của hàm số thỏa mãn:
+
+(i) $f'(x)>0$ trên $(-\infty,1)$, $f'(x)<0$ trên $(1,\infty)$;
+
+(ii) $f''(x)>0$ trên $(-\infty,-2)$ và $(2,\infty)$, $f''(x)<0$ trên $(-2,2)$;
+
+(iii) $\displaystyle\lim_{x\to-\infty}f(x)=-2$, $\displaystyle\lim_{x\to\infty}f(x)=0$.
+\sol Điều kiện (i) cho biết $f$ đồng biến trên $(-\infty,1)$ và nghịch biến trên $(1,\infty)$. Điều kiện (ii) cho biết $f$ lõm lên trên $(-\infty,-2)$ và $(2,\infty)$, lõm xuống trên $(-2,2)$. Theo (iii), đồ thị có hai tiệm cận ngang: $y=-2$ về phía trái và $y=0$ về phía phải.
+
+Trước hết vẽ tiệm cận ngang $y=-2$ bằng nét đứt (Hình 10). Sau đó vẽ đồ thị $f$ tiến gần tiệm cận này ở phía rất xa bên trái, tăng đến điểm cực đại tại $x=1$, rồi giảm về phía trục hoành ở phía rất xa bên phải. Ta cũng bảo đảm đồ thị có các điểm uốn tại $x=-2$ và $x=2$: đường cong uốn lên khi $x<-2$ và $x>2$, uốn xuống khi $x$ nằm giữa $-2$ và 2.
+\fig[.46]{fig10}{Hình 10}
+\section*{Tiêu chuẩn đạo hàm bậc hai}
+Một ứng dụng khác của đạo hàm bậc hai là tiêu chuẩn sau để nhận biết các giá trị cực đại và cực tiểu địa phương. Đây là hệ quả của tiêu chuẩn xét độ lõm và là một phương án thay cho tiêu chuẩn đạo hàm bậc nhất.
+\Needspace{9\baselineskip}
+\group{Tiêu chuẩn đạo hàm bậc hai}
+Giả sử $f''$ liên tục ở gần $c$.
+
+(a) Nếu $f'(c)=0$ và $f''(c)>0$, thì $f$ có cực tiểu địa phương tại $c$.
+
+(b) Nếu $f'(c)=0$ và $f''(c)<0$, thì $f$ có cực đại địa phương tại $c$.
+
+Chẳng hạn, (a) đúng vì $f''(x)>0$ ở gần $c$, nên $f$ lõm lên gần $c$. Điều này có nghĩa là đồ thị nằm phía trên tiếp tuyến nằm ngang tại $c$, do đó $f$ có cực tiểu địa phương tại $c$ (Hình 11).
+\fig[.39]{fig11}{Hình 11. $f''(c)>0$, $f$ lõm lên.}
+\group{Chú ý}
+Tiêu chuẩn đạo hàm bậc hai không cho kết luận khi $f''(c)=0$. Nói cách khác, tại điểm như vậy có thể có cực đại, cực tiểu hoặc không có cả hai. Tiêu chuẩn này cũng không áp dụng được khi $f''(c)$ không tồn tại. Khi đó, phải dùng tiêu chuẩn đạo hàm bậc nhất. Thực ra, ngay cả khi cả hai tiêu chuẩn đều áp dụng được, tiêu chuẩn đạo hàm bậc nhất thường dễ dùng hơn.
+\Needspace{10\baselineskip}
+\ex{6} Khảo sát đường cong $y=x^4-4x^3$ về độ lõm, điểm uốn và các cực đại, cực tiểu địa phương.
+\sol Nếu $f(x)=x^4-4x^3$, thì
+\[f'(x)=4x^3-12x^2=4x^2(x-3),\]
+\[f''(x)=12x^2-24x=12x(x-2).\]
+Đặt $f'(x)=0$, ta được các số tới hạn $x=0$ và $x=3$. (Chú ý $f'$ là đa thức nên xác định khắp nơi.) Để dùng tiêu chuẩn đạo hàm bậc hai, tính $f''$ tại các số tới hạn:
+\[f''(0)=0,\qquad f''(3)=36>0.\]
+Vì $f'(3)=0$ và $f''(3)>0$, tiêu chuẩn đạo hàm bậc hai cho biết $f(3)=-27$ là cực tiểu địa phương. Do $f''(0)=0$, tiêu chuẩn này không cho thông tin về số tới hạn 0. Nhưng vì $f'(x)<0$ khi $x<0$ và khi $0<x<3$, tiêu chuẩn đạo hàm bậc nhất cho biết $f$ không có cực đại hoặc cực tiểu địa phương tại 0.
+
+Vì $f''(x)=0$ khi $x=0$ hoặc $x=2$, ta chia trục thực thành các khoảng có đầu mút là hai số này và lập bảng:
+\begin{center}
+\begin{longtable}{lll}\toprule
+Khoảng&$f''(x)=12x(x-2)$&Độ lõm\\\midrule
+$(-\infty,0)$&$+$&Lõm lên\\
+$(0,2)$&$-$&Lõm xuống\\
+$(2,\infty)$&$+$&Lõm lên\\\bottomrule
+\end{longtable}\end{center}
+Điểm $(0,0)$ là điểm uốn vì đường cong đổi từ lõm lên sang lõm xuống tại đó. Tương tự, $(2,-16)$ là điểm uốn vì đường cong đổi từ lõm xuống sang lõm lên. Đồ thị $y=x^4-4x^3$ ở Hình 12 củng cố kết luận này.
+\fig[.42]{fig12}{Hình 12. $y=x^4-4x^3$.}
+\section*{Phác họa đồ thị}
+Bây giờ, dùng thông tin thu được từ đạo hàm bậc nhất và bậc hai để phác họa đồ thị hàm số.
+\Needspace{10\baselineskip}
+\ex{7} Phác họa đồ thị của $f(x)=x^{2/3}(6-x)^{1/3}$.
+\sol Trước hết, miền xác định của $f$ là $\mathbb R$. Tính hai đạo hàm đầu tiên:
+\[f'(x)=\frac{4-x}{x^{1/3}(6-x)^{2/3}},\qquad
+f''(x)=\frac{-8}{x^{4/3}(6-x)^{5/3}}.\]
+Hãy dùng các quy tắc đạo hàm để kiểm tra các phép tính này.
+
+Vì $f'(x)=0$ khi $x=4$ và $f'(x)$ không tồn tại khi $x=0$ hoặc $x=6$, các số tới hạn là 0, 4, 6.
+\begin{center}\small
+\begin{longtable}{llllll}\toprule
+Khoảng&$4-x$&$x^{1/3}$&$(6-x)^{2/3}$&$f'(x)$&$f$\\\midrule
+$x<0$&$+$&$-$&$+$&$-$&Nghịch biến trên $(-\infty,0)$\\
+$0<x<4$&$+$&$+$&$+$&$+$&Đồng biến trên $(0,4)$\\
+$4<x<6$&$-$&$+$&$+$&$-$&Nghịch biến trên $(4,6)$\\
+$x>6$&$-$&$+$&$+$&$-$&Nghịch biến trên $(6,\infty)$\\\bottomrule
+\end{longtable}\end{center}
+Để tìm cực trị địa phương, dùng tiêu chuẩn đạo hàm bậc nhất. Vì $f'$ đổi dấu từ âm sang dương tại 0, $f(0)=0$ là cực tiểu địa phương. Vì $f'$ đổi dấu từ dương sang âm tại 4, $f(4)=2^{5/3}$ là cực đại địa phương. Dấu của $f'$ không đổi tại 6 nên không có cực tiểu hoặc cực đại ở đó. (Có thể dùng tiêu chuẩn đạo hàm bậc hai tại 4, nhưng không thể dùng tại 0 hoặc 6 vì $f''$ không tồn tại ở hai số ấy.)
+
+Từ biểu thức của $f''(x)$ và nhận xét $x^{4/3}>0$ với mọi $x\ne0$, ta có $f''(x)<0$ khi $x<0$ và khi $0<x<6$, còn $f''(x)>0$ khi $x>6$. Do đó, $f$ lõm xuống trên $(-\infty,0)$ và $(0,6)$, lõm lên trên $(6,\infty)$; điểm uốn duy nhất là $(6,0)$. Dùng toàn bộ thông tin từ $f'$ và $f''$, ta phác họa đồ thị ở Hình 13. Đường cong có tiếp tuyến thẳng đứng tại $(0,0)$ và $(6,0)$ vì $|f'(x)|\to\infty$ khi $x\to0$ và khi $x\to6$.
+\fig[.69]{fig13}{Hình 13}
+Hãy thử vẽ lại Hình 13 bằng máy tính cầm tay có chức năng đồ thị hoặc máy tính. Một số máy vẽ được toàn bộ đồ thị, một số chỉ vẽ phần bên phải trục tung, một số chỉ vẽ phần giữa $x=0$ và $x=6$. Để được giải thích, xem Ví dụ 7 trong mục \textit{Graphing Calculators and Computers} tại www.StewartCalculus.com.
+\Needspace{10\baselineskip}
+\ex{8} Dùng đạo hàm bậc nhất, bậc hai của $f(x)=e^{1/x}$, cùng các tiệm cận, để phác họa đồ thị.
+\sol Miền xác định là $\{x\mid x\ne0\}$, nên kiểm tra tiệm cận đứng bằng các giới hạn trái và phải khi $x\to0$. Khi $x\to0^+$, $t=1/x\to\infty$, nên
+\[\lim_{x\to0^+}e^{1/x}=\lim_{t\to\infty}e^t=\infty.\]
+Điều này cho thấy $x=0$ là tiệm cận đứng. Khi $x\to0^-$, $t=1/x\to-\infty$, nên
+\[\lim_{x\to0^-}e^{1/x}=\lim_{t\to-\infty}e^t=0.\]
+Khi $x\to\pm\infty$, ta có $1/x\to0$, do đó
+\[\lim_{x\to\pm\infty}e^{1/x}=e^0=1.\]
+Vậy $y=1$ là tiệm cận ngang ở cả hai phía.
+
+Bây giờ tính đạo hàm. Theo quy tắc hàm hợp,
+\[f'(x)=-\frac{e^{1/x}}{x^2}.\]
+Vì $e^{1/x}>0$ và $x^2>0$ với mọi $x\ne0$, ta có $f'(x)<0$ với mọi $x\ne0$. Do đó $f$ nghịch biến trên $(-\infty,0)$ và $(0,\infty)$. Không có số tới hạn nên hàm không có cực đại hoặc cực tiểu địa phương. Đạo hàm bậc hai là
+\[f''(x)=-\frac{x^2e^{1/x}(-1/x^2)-e^{1/x}(2x)}{x^4}
+=\frac{e^{1/x}(2x+1)}{x^4}.\]
+Vì $e^{1/x}>0$ và $x^4>0$, $f''(x)>0$ khi $x>-\frac12$ ($x\ne0$), còn $f''(x)<0$ khi $x<-\frac12$. Vậy đường cong lõm xuống trên $(-\infty,-\frac12)$, lõm lên trên $(-\frac12,0)$ và $(0,\infty)$. Điểm uốn là $(-\frac12,e^{-2})$.
+
+Để phác họa, trước hết vẽ tiệm cận ngang $y=1$ bằng nét đứt, rồi vẽ sơ bộ các phần đường cong gần tiệm cận [Hình 14(a)]. Những phần này phản ánh các giới hạn đã tìm và tính nghịch biến trên cả $(-\infty,0)$ lẫn $(0,\infty)$. Ta cũng thể hiện $f(x)\to0$ khi $x\to0^-$ dù $f(0)$ không tồn tại. Ở Hình 14(b), hoàn chỉnh hình vẽ bằng thông tin về độ lõm và điểm uốn. Hình 14(c) kiểm tra kết quả bằng máy tính.
+\fig[.99]{fig14}{Hình 14. (a) Phác họa sơ bộ; (b) hình vẽ hoàn chỉnh, “inflection point”: điểm uốn; (c) kiểm tra bằng máy tính.}
+
+\clearpage
+\section*{4.3 — Bài tập}
+\Needspace{14\baselineskip}
+\group{1–2} Dùng đồ thị đã cho của $f$ để tìm:
+
+(a) Các khoảng mở mà $f$ đồng biến.
+
+(b) Các khoảng mở mà $f$ nghịch biến.
+
+(c) Các khoảng mở mà $f$ lõm lên.
+
+(d) Các khoảng mở mà $f$ lõm xuống.
+
+(e) Tọa độ các điểm uốn.
+\par\noindent\begin{minipage}{\linewidth}
+\bt{1}\fig[.37]{ex01}{Đồ thị cho Bài tập 1.}
+\end{minipage}\par
+\par\noindent\begin{minipage}{\linewidth}
+\bt{2}\fig[.37]{ex02}{Đồ thị cho Bài tập 2.}
+\end{minipage}\par
+\bt{3} Giả sử có công thức của hàm số $f$.
+
+(a) Xác định nơi $f$ đồng biến hoặc nghịch biến như thế nào?
+
+(b) Xác định nơi đồ thị của $f$ lõm lên hoặc lõm xuống như thế nào?
+
+(c) Xác định các điểm uốn như thế nào?
+\bt{4} (a) Phát biểu tiêu chuẩn đạo hàm bậc nhất.
+
+(b) Phát biểu tiêu chuẩn đạo hàm bậc hai. Khi nào tiêu chuẩn này không cho kết luận? Làm gì khi không áp dụng được tiêu chuẩn này?
+\Needspace{13\baselineskip}
+\group{5–6} Cho đồ thị của đạo hàm $f'$ của hàm số $f$.
+
+(a) Hàm $f$ đồng biến trên những khoảng nào? Nghịch biến trên những khoảng nào?
+
+(b) Tại những giá trị $x$ nào, $f$ có cực đại địa phương? Cực tiểu địa phương?
+\par\noindent\begin{minipage}{\linewidth}
+\bt{5}\fig[.46]{ex05}{Đồ thị cho Bài tập 5.}
+\end{minipage}\par
+\par\noindent\begin{minipage}{\linewidth}
+\bt{6}\fig[.46]{ex06}{Đồ thị cho Bài tập 6.}
+\end{minipage}\par
+\par\noindent\begin{minipage}{\linewidth}
+\bt{7} Trong mỗi trường hợp, nêu hoành độ các điểm uốn của $f$. Giải thích câu trả lời.
+
+(a) Đường cong là đồ thị của $f$.
+
+(b) Đường cong là đồ thị của $f'$.
+
+(c) Đường cong là đồ thị của $f''$.
+\fig[.44]{ex07}{Đồ thị cho Bài tập 7.}
+\end{minipage}\par
+\par\noindent\begin{minipage}{\linewidth}
+\bt{8} Cho đồ thị của đạo hàm bậc nhất $f'$ của hàm số $f$.
+
+(a) Hàm $f$ đồng biến trên những khoảng nào? Giải thích.
+
+(b) Tại những giá trị $x$ nào, $f$ có cực đại hoặc cực tiểu địa phương? Giải thích.
+
+(c) Hàm $f$ lõm lên hoặc lõm xuống trên những khoảng nào? Giải thích.
+
+(d) Hoành độ các điểm uốn của $f$ là bao nhiêu? Vì sao?
+\fig[.44]{ex08}{Đồ thị cho Bài tập 8.}
+\end{minipage}\par
+\Needspace{8\baselineskip}
+\group{9–16} Tìm các khoảng mà $f$ đồng biến hoặc nghịch biến và các giá trị cực đại, cực tiểu địa phương của $f$.
+\bt{9} $f(x)=2x^3-15x^2+24x-5$.
+\bt{10} $f(x)=x^3-6x^2-135x$.
+\bt{11} $f(x)=6x^4-16x^3+1$.
+\bt{12} $f(x)=x^{2/3}(x-3)$.
+\bt{13} $f(x)=\dfrac{x^2-24}{x-5}$.
+\bt{14} $f(x)=x+\dfrac4{x^2}$.
+\bt{15} $f(x)=\sin x+\cos x,\quad0\le x\le2\pi$.
+\bt{16} $f(x)=x^4e^{-x}$.
+\Needspace{8\baselineskip}
+\group{17–22} Tìm các khoảng mà $f$ lõm lên hoặc lõm xuống và các điểm uốn của $f$.
+\bt{17} $f(x)=x^3-3x^2-9x+4$.
+\bt{18} $f(x)=2x^3-9x^2+12x-3$.
+\bt{19} $f(x)=\sin^2x-\cos2x,\quad0\le x\le\pi$.
+\bt{20} $f(x)=\ln(2+\sin x),\quad0\le x\le2\pi$.
+\bt{21} $f(x)=\ln(x^2+5)$.
+\bt{22} $f(x)=\dfrac{e^x}{e^x+2}$.
+\Needspace{10\baselineskip}
+\group{23–28} (a) Tìm các khoảng mà $f$ đồng biến hoặc nghịch biến.
+
+(b) Tìm các giá trị cực đại và cực tiểu địa phương của $f$.
+
+(c) Tìm các khoảng có độ lõm khác nhau và các điểm uốn.
+\bt{23} $f(x)=x^4-2x^2+3$.
+\bt{24} $f(x)=\dfrac{x}{x^2+1}$.
+\bt{25} $f(x)=x^2-x-\ln x$.
+\bt{26} $f(x)=x^2\ln x$.
+\bt{27} $f(x)=xe^x$.
+\bt{28} $f(x)=\cos^2x-2\sin x,\quad0\le x\le2\pi$.
+\Needspace{8\baselineskip}
+\group{29–30} Tìm các giá trị cực đại, cực tiểu địa phương của $f$ bằng cả tiêu chuẩn đạo hàm bậc nhất lẫn tiêu chuẩn đạo hàm bậc hai. Bạn thích phương pháp nào hơn?
+\bt{29} $f(x)=1+3x^2-2x^3$.
+\bt{30} $f(x)=\dfrac{x^2}{x-1}$.
+\bt{31} Giả sử đạo hàm của hàm số $f$ là
+\[f'(x)=(x-4)^2(x+3)^7(x-5)^8.\]
+Hàm $f$ đồng biến trên những khoảng nào?
+\bt{32} (a) Tìm các số tới hạn của $f(x)=x^4(x-1)^3$.
+
+(b) Tiêu chuẩn đạo hàm bậc hai cho biết gì về tính chất của $f$ tại các số tới hạn này?
+
+(c) Tiêu chuẩn đạo hàm bậc nhất cho biết điều gì?
+\bt{33} Giả sử $f''$ liên tục trên $(-\infty,\infty)$.
+
+(a) Nếu $f'(2)=0$ và $f''(2)=-5$, có thể nói gì về $f$?
+
+(b) Nếu $f'(6)=0$ và $f''(6)=0$, có thể nói gì về $f$?
+\Needspace{8\baselineskip}
+\group{34–41} Phác họa đồ thị của một hàm số thỏa mãn mọi điều kiện đã cho.
+\bt{34} (a) $f'(x)<0$, $f''(x)<0$ với mọi $x$.
+
+(b) $f'(x)>0$, $f''(x)>0$ với mọi $x$.
+\bt{35} (a) $f'(x)>0$, $f''(x)<0$ với mọi $x$.
+
+(b) $f'(x)<0$, $f''(x)>0$ với mọi $x$.
+\bt{36} Tiệm cận đứng $x=0$; $f'(x)>0$ nếu $x<-2$; $f'(x)<0$ nếu $x>-2$ ($x\ne0$); $f''(x)<0$ nếu $x<0$; $f''(x)>0$ nếu $x>0$.
+\bt{37} $f'(0)=f'(2)=f'(4)=0$;
+
+$f'(x)>0$ nếu $x<0$ hoặc $2<x<4$;
+
+$f'(x)<0$ nếu $0<x<2$ hoặc $x>4$;
+
+$f''(x)>0$ nếu $1<x<3$; $f''(x)<0$ nếu $x<1$ hoặc $x>3$.
+\bt{38} $f'(x)>0$ với mọi $x\ne1$; tiệm cận đứng $x=1$;
+
+$f''(x)>0$ nếu $x<1$ hoặc $x>3$; $f''(x)<0$ nếu $1<x<3$.
+\bt{39} $f'(5)=0$; $f'(x)<0$ khi $x<5$; $f'(x)>0$ khi $x>5$;
+
+$f''(2)=0$, $f''(8)=0$;
+
+$f''(x)<0$ khi $x<2$ hoặc $x>8$; $f''(x)>0$ khi $2<x<8$;
+
+$\displaystyle\lim_{x\to\infty}f(x)=3$, $\displaystyle\lim_{x\to-\infty}f(x)=3$.
+\bt{40} $f'(0)=f'(4)=0$; $f'(x)=1$ nếu $x<-1$;
+
+$f'(x)>0$ nếu $0<x<2$;
+
+$f'(x)<0$ nếu $-1<x<0$, hoặc $2<x<4$, hoặc $x>4$;
+
+$\displaystyle\lim_{x\to2^-}f'(x)=\infty$, $\displaystyle\lim_{x\to2^+}f'(x)=-\infty$;
+
+$f''(x)>0$ nếu $-1<x<2$ hoặc $2<x<4$; $f''(x)<0$ nếu $x>4$.
+\bt{41} $f'(x)>0$ nếu $x\ne2$; $f''(x)>0$ nếu $x<2$; $f''(x)<0$ nếu $x>2$; $f$ có điểm uốn $(2,5)$;
+
+$\displaystyle\lim_{x\to\infty}f(x)=8$, $\displaystyle\lim_{x\to-\infty}f(x)=0$.
+\par\noindent\begin{minipage}{\linewidth}
+\bt{42} Cho đồ thị của hàm số $y=f(x)$. Tại những điểm nào các điều sau đúng?
+
+(a) $dy/dx$ và $d^2y/dx^2$ đều dương.
+
+(b) $dy/dx$ và $d^2y/dx^2$ đều âm.
+
+(c) $dy/dx$ âm nhưng $d^2y/dx^2$ dương.
+\fig[.47]{ex42}{Đồ thị cho Bài tập 42.}
+\end{minipage}\par
+\Needspace{14\baselineskip}
+\group{43–44} Cho đồ thị của đạo hàm $f'$ của hàm liên tục $f$.
+
+(a) Hàm $f$ đồng biến trên những khoảng nào? Nghịch biến trên những khoảng nào?
+
+(b) Tại những giá trị $x$ nào, $f$ có cực đại địa phương? Cực tiểu địa phương?
+
+(c) Hàm $f$ lõm lên trên những khoảng nào? Lõm xuống trên những khoảng nào?
+
+(d) Nêu hoành độ các điểm uốn của $f$.
+
+(e) Giả sử $f(0)=0$, phác họa đồ thị của $f$.
+\par\noindent\begin{minipage}{\linewidth}
+\bt{43}\fig[.41]{ex43}{Đồ thị cho Bài tập 43.}
+\end{minipage}\par
+\par\noindent\begin{minipage}{\linewidth}
+\bt{44}\fig[.41]{ex44}{Đồ thị cho Bài tập 44.}
+\end{minipage}\par
+\Needspace{12\baselineskip}
+\group{45–58} (a) Tìm các khoảng đồng biến hoặc nghịch biến.
+
+(b) Tìm các giá trị cực đại và cực tiểu địa phương.
+
+(c) Tìm các khoảng có độ lõm khác nhau và các điểm uốn.
+
+(d) Dùng thông tin từ (a)–(c) để phác họa đồ thị. Có thể kiểm tra bằng máy tính cầm tay có chức năng đồ thị hoặc máy tính.
+\bt{45} $f(x)=x^3-3x^2+4$.
+\bt{46} $f(x)=36x+3x^2-2x^3$.
+\bt{47} $f(x)=\frac12x^4-4x^2+3$.
+\bt{48} $g(x)=200+8x^3+x^4$.
+\bt{49} $g(t)=3t^4-8t^3+12$.
+\bt{50} $h(x)=5x^3-3x^5$.
+\bt{51} $f(z)=z^7-112z^2$.
+\bt{52} $f(x)=(x^2-4)^3$.
+\bt{53} $F(x)=x\sqrt{6-x}$.
+\bt{54} $G(x)=5x^{2/3}-2x^{5/3}$.
+\bt{55} $C(x)=x^{1/3}(x+4)$.
+\bt{56} $f(x)=\ln(x^2+9)$.
+\bt{57} $f(\theta)=2\cos\theta+\cos^2\theta,\quad0\le\theta\le2\pi$.
+\bt{58} $S(x)=x-\sin x,\quad0\le x\le4\pi$.
+\Needspace{13\baselineskip}
+\group{59–66} (a) Tìm các tiệm cận đứng và ngang.
+
+(b) Tìm các khoảng đồng biến hoặc nghịch biến.
+
+(c) Tìm các giá trị cực đại và cực tiểu địa phương.
+
+(d) Tìm các khoảng có độ lõm khác nhau và các điểm uốn.
+
+(e) Dùng thông tin từ (a)–(d) để phác họa đồ thị của $f$.
+\bt{59} $f(x)=1+\dfrac1x-\dfrac1{x^2}$.
+\bt{60} $f(x)=\dfrac{x^2-4}{x^2+4}$.
+\bt{61} $f(x)=e^{-2/x}$.
+\bt{62} $f(x)=\dfrac{e^x}{1-e^x}$.
+\bt{63} $f(x)=e^{-x^2}$.
+\bt{64} $f(x)=x-\dfrac16x^2-\dfrac23\ln x$.
+\bt{65} $f(x)=\ln(1-\ln x)$.
+\bt{66} $f(x)=e^{\arctan x}$.
+\Needspace{8\baselineskip}
+\group{67–68} Dùng các phương pháp trong mục này để phác họa một số thành viên của họ đường cong đã cho. Các thành viên có điểm gì chung? Chúng khác nhau như thế nào?
+\bt{67} $f(x)=x^4-cx,\quad c>0$.
+\bt{68} $f(x)=x^3-3c^2x+2c^3,\quad c>0$.
+\Needspace{10\baselineskip}
+\group{69–70} (a) Dùng đồ thị $f$ để ước lượng các giá trị lớn nhất, nhỏ nhất. Sau đó tìm các giá trị chính xác.
+
+(b) Ước lượng giá trị $x$ tại đó $f$ tăng nhanh nhất. Sau đó tìm giá trị chính xác.
+\bt{69} $f(x)=\dfrac{x+1}{\sqrt{x^2+1}}$.
+\bt{70} $f(x)=x^2e^{-x}$.
+\Needspace{10\baselineskip}
+\group{71–72} (a) Dùng đồ thị $f$ để ước lượng sơ bộ các khoảng có độ lõm khác nhau và tọa độ các điểm uốn.
+
+(b) Dùng đồ thị $f''$ để có các ước lượng tốt hơn.
+\bt{71} $f(x)=\sin2x+\sin4x,\quad0\le x\le\pi$.
+\bt{72} $f(x)=(x-1)^2(x+1)^3$.
+\Needspace{8\baselineskip}
+\group{73–74} Ước lượng các khoảng có độ lõm khác nhau, chính xác đến một chữ số thập phân, bằng cách dùng hệ thống đại số máy tính để tính và vẽ đồ thị $f''$.
+\bt{73} $f(x)=\dfrac{x^4+x^3+1}{\sqrt{x^2+x+1}}$.
+\bt{74} $f(x)=\dfrac{x^2\arctan x}{1+x^3}$.
+\par\noindent\begin{minipage}{\linewidth}
+\bt{75} Cho đồ thị số lượng tế bào nấm men trong một mẫu nuôi cấy mới ở phòng thí nghiệm theo thời gian.
+\fig[.69]{ex75}{Đồ thị cho Bài tập 75. Trục đứng: số tế bào nấm men; trục ngang: thời gian (giờ).}
+(a) Mô tả sự thay đổi của tốc độ tăng số lượng.
+
+(b) Khi nào tốc độ này lớn nhất?
+
+(c) Hàm số lượng lõm lên hoặc lõm xuống trên những khoảng nào?
+
+(d) Ước lượng tọa độ điểm uốn.
+\end{minipage}\par
+\bt{76} Trong một tập phim truyền hình \textit{The Simpsons}, Homer đọc báo và thông báo: “Có tin tốt đây! Theo bài báo nổi bật này, điểm SAT đang giảm với tốc độ chậm dần.” Diễn giải phát biểu của Homer theo một hàm số và các đạo hàm bậc nhất, bậc hai của nó.
+\bt{77} Tổng thống thông báo thâm hụt quốc gia đang tăng, nhưng với tốc độ giảm dần. Diễn giải phát biểu này theo một hàm số và các đạo hàm bậc nhất, bậc hai của nó.
+\bt{78} Cho $f(t)$ là nhiệt độ tại thời điểm $t$ ở nơi bạn sống và giả sử tại $t=3$ bạn cảm thấy nóng khó chịu. Với dữ liệu trong từng trường hợp, bạn cảm thấy thế nào?
+
+(a) $f'(3)=2$, $f''(3)=4$.
+
+(b) $f'(3)=2$, $f''(3)=-4$.
+
+(c) $f'(3)=-2$, $f''(3)=4$.
+
+(d) $f'(3)=-2$, $f''(3)=-4$.
+\bt{79} Cho $K(t)$ đo lượng kiến thức thu được sau $t$ giờ học để chuẩn bị kiểm tra. Theo bạn, $K(8)-K(7)$ hay $K(3)-K(2)$ lớn hơn? Đồ thị $K$ lõm lên hay lõm xuống? Vì sao?
+\par\noindent\begin{minipage}{\linewidth}
+\bt{80} Cà phê được rót vào chiếc cốc trong hình với tốc độ không đổi (đo bằng thể tích trên một đơn vị thời gian). Phác họa đồ thị gần đúng của độ sâu cà phê trong cốc theo thời gian. Giải thích hình dạng đồ thị bằng độ lõm. Điểm uốn có ý nghĩa gì?
+\fig[.25]{ex80}{Hình cho Bài tập 80.}
+\end{minipage}\par
+\bt{81} \textit{Đường cong đáp ứng thuốc} mô tả mức thuốc trong máu sau khi dùng thuốc. Một hàm tăng vọt $S(t)=At^pe^{-kt}$ thường được dùng để mô hình hóa đường cong đáp ứng, phản ánh mức thuốc tăng mạnh ban đầu rồi giảm từ từ hơn. Với một loại thuốc cụ thể, $A=0{,}01$, $p=4$, $k=0{,}07$ và $t$ tính bằng phút, hãy ước lượng các thời điểm tương ứng với điểm uốn và giải thích ý nghĩa của chúng. Sau đó vẽ đường cong đáp ứng thuốc.
+\bt{82} \textbf{Các hàm mật độ chuẩn.} Họ đường cong hình chuông
+\[y=\frac1{\sigma\sqrt{2\pi}}e^{-(x-\mu)^2/(2\sigma^2)}\]
+xuất hiện trong xác suất và thống kê, được gọi là hàm mật độ chuẩn. Hằng số $\mu$ gọi là \textit{trung bình}, hằng số dương $\sigma$ gọi là \textit{độ lệch chuẩn}. Để đơn giản, thay đổi tỉ lệ hàm nhằm bỏ thừa số $1/(\sigma\sqrt{2\pi})$ và xét trường hợp đặc biệt $\mu=0$. Vậy ta nghiên cứu
+\[f(x)=e^{-x^2/(2\sigma^2)}.\]
+(a) Tìm tiệm cận, giá trị lớn nhất và các điểm uốn của $f$.
+
+(b) Tham số $\sigma$ có vai trò gì đối với hình dạng đường cong?
+
+(c) Minh họa bằng cách vẽ bốn thành viên của họ trên cùng một màn hình.
+\bt{83} Tìm hàm bậc ba $f(x)=ax^3+bx^2+cx+d$ có giá trị cực đại địa phương bằng 3 tại $x=-2$ và giá trị cực tiểu địa phương bằng 0 tại $x=1$.
+\bt{84} Với những giá trị nào của $a,b$, hàm số
+\[f(x)=axe^{bx^2}\]
+có giá trị lớn nhất $f(2)=1$?
+\bt{85} Chứng minh đường cong $y=(1+x)/(1+x^2)$ có ba điểm uốn và cả ba cùng nằm trên một đường thẳng.
+\bt{86} Chứng minh các đường cong $y=e^{-x}$ và $y=-e^{-x}$ tiếp xúc với đường cong $y=e^{-x}\sin x$ tại các điểm uốn của nó.
+\bt{87} Chứng minh các điểm uốn của đường cong $y=x\sin x$ nằm trên đường cong $y^2(x^2+4)=4x^2$.
+\Needspace{8\baselineskip}
+\group{88–90} Giả sử mọi hàm số đều khả vi hai lần và các đạo hàm bậc hai không bao giờ bằng 0.
+\bt{88} (a) Nếu $f,g$ lõm lên trên khoảng $I$, chứng minh $f+g$ lõm lên trên $I$.
+
+(b) Nếu $f$ dương và lõm lên trên $I$, chứng minh $g(x)=[f(x)]^2$ lõm lên trên $I$.
+\bt{89} (a) Nếu $f,g$ đều dương, đồng biến và lõm lên trên khoảng $I$, chứng minh hàm tích $fg$ lõm lên trên $I$.
+
+(b) Chứng minh (a) vẫn đúng nếu $f,g$ đều nghịch biến.
+
+(c) Giả sử $f$ đồng biến và $g$ nghịch biến. Bằng ba ví dụ, chứng tỏ $fg$ có thể lõm lên, lõm xuống hoặc là hàm tuyến tính. Vì sao lập luận ở (a), (b) không áp dụng được trong trường hợp này?
+\bt{90} Giả sử $f,g$ đều lõm lên trên $(-\infty,\infty)$. Với điều kiện nào của $f$, hàm hợp $h(x)=f(g(x))$ sẽ lõm lên?
+\bt{91} Chứng minh hàm bậc ba (đa thức bậc 3) luôn có đúng một điểm uốn. Nếu đồ thị có ba giao điểm với trục hoành tại $x_1,x_2,x_3$, chứng minh hoành độ điểm uốn là $(x_1+x_2+x_3)/3$.
+\bt{92} Với những giá trị nào của $c$, đa thức $P(x)=x^4+cx^3+x^2$ có hai điểm uốn? Một điểm uốn? Không có điểm uốn? Minh họa bằng đồ thị $P$ với một số giá trị $c$. Đồ thị thay đổi như thế nào khi $c$ giảm?
+\bt{93} Chứng minh rằng nếu $(c,f(c))$ là điểm uốn của đồ thị $f$ và $f''$ tồn tại trên một khoảng mở chứa $c$, thì $f''(c)=0$. [\textit{Gợi ý:} Áp dụng tiêu chuẩn đạo hàm bậc nhất và Định lý Fermat cho hàm $g=f'$.]
+\bt{94} Chứng minh rằng nếu $f(x)=x^4$, thì $f''(0)=0$, nhưng $(0,0)$ không phải điểm uốn của đồ thị $f$.
+\bt{95} Chứng minh hàm $g(x)=x|x|$ có điểm uốn tại $(0,0)$ nhưng $g''(0)$ không tồn tại.
+\bt{96} Giả sử $f'''$ liên tục và $f'(c)=f''(c)=0$, nhưng $f'''(c)>0$. Hàm $f$ có cực đại hoặc cực tiểu địa phương tại $c$ không? Hàm $f$ có điểm uốn tại $c$ không?
+\bt{97} Giả sử $f$ khả vi trên một khoảng $I$ và $f'(x)>0$ với mọi $x\in I$, trừ một số duy nhất $c$. Chứng minh $f$ đồng biến trên toàn bộ $I$.
+\bt{98} Với những giá trị nào của $c$, hàm số
+\[f(x)=cx+\frac1{x^2+3}\]
+đồng biến trên $(-\infty,\infty)$?
+\bt{99} Ba trường hợp của tiêu chuẩn đạo hàm bậc nhất bao quát những tình huống thường gặp nhưng không bao quát mọi khả năng. Xét các hàm $f,g,h$ đều nhận giá trị 0 tại 0 và, với $x\ne0$,
+\[f(x)=x^4\sin\frac1x,\qquad g(x)=x^4\left(2+\sin\frac1x\right),\]
+\[h(x)=x^4\left(-2+\sin\frac1x\right).\]
+(a) Chứng minh 0 là số tới hạn của cả ba hàm, nhưng đạo hàm của chúng đổi dấu vô số lần ở cả hai phía của 0.
+
+(b) Chứng minh $f$ không có cực đại hoặc cực tiểu địa phương tại 0; $g$ có cực tiểu địa phương và $h$ có cực đại địa phương tại 0.
+\end{document}
