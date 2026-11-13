@@ -18,11 +18,11 @@
     },
     {
       "number": 5,
-      "content": "<p><strong>5.</strong> </p><p> Cho đồ thị hàm số <span class=\"math inline\">\\(f\\)</span>. Ước lượng <span class=\"math inline\">\\(\\int_0^{10}f(x)\\,dx\\)</span> bằng năm đoạn con với (a) đầu mút phải, (b) đầu mút trái và (c) trung điểm. <p><em>Hình ex05: Hình cho Bài tập 5 (chưa có tệp ảnh gốc).</em></p>"
+      "content": "<p><strong>5.</strong> </p><p> Cho đồ thị hàm số <span class=\"math inline\">\\(f\\)</span>. Ước lượng <span class=\"math inline\">\\(\\int_0^{10}f(x)\\,dx\\)</span> bằng năm đoạn con với (a) đầu mút phải, (b) đầu mút trái và (c) trung điểm. <p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-5-2-157ffa41/ex05.png\" alt=\"5-2 ex05\" loading=\"lazy\"><br><span>Hình cho Bài tập 5</span></p>"
     },
     {
       "number": 6,
-      "content": "<p><strong>6.</strong> </p><p> Cho đồ thị hàm số <span class=\"math inline\">\\(g\\)</span>. Ước lượng <span class=\"math inline\">\\(\\int_{-2}^4g(x)\\,dx\\)</span> bằng sáu đoạn con với (a) đầu mút phải, (b) đầu mút trái và (c) trung điểm. <p><em>Hình ex06: Hình cho Bài tập 6 (chưa có tệp ảnh gốc).</em></p>"
+      "content": "<p><strong>6.</strong> </p><p> Cho đồ thị hàm số <span class=\"math inline\">\\(g\\)</span>. Ước lượng <span class=\"math inline\">\\(\\int_{-2}^4g(x)\\,dx\\)</span> bằng sáu đoạn con với (a) đầu mút phải, (b) đầu mút trái và (c) trung điểm. <p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-5-2-157ffa41/ex06.png\" alt=\"5-2 ex06\" loading=\"lazy\"><br><span>Hình cho Bài tập 6</span></p>"
     },
     {
       "number": 7,
@@ -138,11 +138,11 @@
     },
     {
       "number": 35,
-      "content": "<p><strong>35.</strong> </p><p> Cho đồ thị <span class=\"math inline\">\\(f\\)</span>. Tính từng tích phân bằng cách diễn giải theo diện tích. <span class=\"math display\">\\[\\begin{aligned}\n&amp;\\text{(a) }\\int_0^2 f(x)\\,dx &amp;&amp;\\text{(b) }\\int_0^5 f(x)\\,dx\\\\\n&amp;\\text{(c) }\\int_5^7 f(x)\\,dx &amp;&amp;\\text{(d) }\\int_3^7 f(x)\\,dx\\\\\n&amp;\\text{(e) }\\int_3^7|f(x)|\\,dx &amp;&amp;\\text{(f) }\\int_2^0 f(x)\\,dx\n\\end{aligned}\\]</span> <p><em>Hình ex35: Hình cho Bài tập 35 (chưa có tệp ảnh gốc).</em></p>"
+      "content": "<p><strong>35.</strong> </p><p> Cho đồ thị <span class=\"math inline\">\\(f\\)</span>. Tính từng tích phân bằng cách diễn giải theo diện tích. <span class=\"math display\">\\[\\begin{aligned}\n&amp;\\text{(a) }\\int_0^2 f(x)\\,dx &amp;&amp;\\text{(b) }\\int_0^5 f(x)\\,dx\\\\\n&amp;\\text{(c) }\\int_5^7 f(x)\\,dx &amp;&amp;\\text{(d) }\\int_3^7 f(x)\\,dx\\\\\n&amp;\\text{(e) }\\int_3^7|f(x)|\\,dx &amp;&amp;\\text{(f) }\\int_2^0 f(x)\\,dx\n\\end{aligned}\\]</span> <p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-5-2-157ffa41/ex35.png\" alt=\"5-2 ex35\" loading=\"lazy\"><br><span>Hình cho Bài tập 35</span></p>"
     },
     {
       "number": 36,
-      "content": "<p><strong>36.</strong> </p><p> Đồ thị <span class=\"math inline\">\\(g\\)</span> gồm hai đoạn thẳng và một nửa đường tròn. Tính từng tích phân bằng cách diễn giải theo diện tích.<br>(a) <span class=\"math inline\">\\(\\int_0^2g(x)\\,dx\\)</span>; (b) <span class=\"math inline\">\\(\\int_2^6g(x)\\,dx\\)</span>; (c) <span class=\"math inline\">\\(\\int_0^7g(x)\\,dx\\)</span>. <p><em>Hình ex36: Hình cho Bài tập 36 (chưa có tệp ảnh gốc).</em></p>"
+      "content": "<p><strong>36.</strong> </p><p> Đồ thị <span class=\"math inline\">\\(g\\)</span> gồm hai đoạn thẳng và một nửa đường tròn. Tính từng tích phân bằng cách diễn giải theo diện tích.<br>(a) <span class=\"math inline\">\\(\\int_0^2g(x)\\,dx\\)</span>; (b) <span class=\"math inline\">\\(\\int_2^6g(x)\\,dx\\)</span>; (c) <span class=\"math inline\">\\(\\int_0^7g(x)\\,dx\\)</span>. <p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-5-2-157ffa41/ex36.png\" alt=\"5-2 ex36\" loading=\"lazy\"><br><span>Hình cho Bài tập 36</span></p>"
     },
     {
       "number": 37,
@@ -242,15 +242,15 @@
     },
     {
       "number": 61,
-      "content": "<p><strong>61.</strong> </p><p> Với hàm <span class=\"math inline\">\\(f\\)</span> có đồ thị đã cho, sắp xếp các đại lượng sau theo thứ tự tăng dần và giải thích. <span class=\"math display\">\\[\\begin{aligned}\n&amp;\\text{(A) }\\int_0^8 f(x)\\,dx &amp;&amp;\\text{(B) }\\int_0^3 f(x)\\,dx &amp;&amp;\\text{(C) }\\int_3^8 f(x)\\,dx\\\\\n&amp;\\text{(D) }\\int_4^8 f(x)\\,dx &amp;&amp;\\text{(E) }f'(1)\n\\end{aligned}\\]</span> <p><em>Hình ex61: Hình cho Bài tập 61 (chưa có tệp ảnh gốc).</em></p>"
+      "content": "<p><strong>61.</strong> </p><p> Với hàm <span class=\"math inline\">\\(f\\)</span> có đồ thị đã cho, sắp xếp các đại lượng sau theo thứ tự tăng dần và giải thích. <span class=\"math display\">\\[\\begin{aligned}\n&amp;\\text{(A) }\\int_0^8 f(x)\\,dx &amp;&amp;\\text{(B) }\\int_0^3 f(x)\\,dx &amp;&amp;\\text{(C) }\\int_3^8 f(x)\\,dx\\\\\n&amp;\\text{(D) }\\int_4^8 f(x)\\,dx &amp;&amp;\\text{(E) }f'(1)\n\\end{aligned}\\]</span> <p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-5-2-157ffa41/ex61.png\" alt=\"5-2 ex61\" loading=\"lazy\"><br><span>Hình cho Bài tập 61</span></p>"
     },
     {
       "number": 62,
-      "content": "<p><strong>62.</strong> </p><p> Cho <span class=\"math inline\">\\(F(x)=\\int_2^x f(t)\\,dt\\)</span>, với <span class=\"math inline\">\\(f\\)</span> có đồ thị như hình. Giá trị nào sau đây lớn nhất?<br>(A) <span class=\"math inline\">\\(F(0)\\)</span>; (B) <span class=\"math inline\">\\(F(1)\\)</span>; (C) <span class=\"math inline\">\\(F(2)\\)</span>; (D) <span class=\"math inline\">\\(F(3)\\)</span>; (E) <span class=\"math inline\">\\(F(4)\\)</span>. <p><em>Hình ex62: Hình cho Bài tập 62 (chưa có tệp ảnh gốc).</em></p>"
+      "content": "<p><strong>62.</strong> </p><p> Cho <span class=\"math inline\">\\(F(x)=\\int_2^x f(t)\\,dt\\)</span>, với <span class=\"math inline\">\\(f\\)</span> có đồ thị như hình. Giá trị nào sau đây lớn nhất?<br>(A) <span class=\"math inline\">\\(F(0)\\)</span>; (B) <span class=\"math inline\">\\(F(1)\\)</span>; (C) <span class=\"math inline\">\\(F(2)\\)</span>; (D) <span class=\"math inline\">\\(F(3)\\)</span>; (E) <span class=\"math inline\">\\(F(4)\\)</span>. <p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-5-2-157ffa41/ex62.png\" alt=\"5-2 ex62\" loading=\"lazy\"><br><span>Hình cho Bài tập 62</span></p>"
     },
     {
       "number": 63,
-      "content": "<p><strong>63.</strong> </p><p> Mỗi miền <span class=\"math inline\">\\(A,B,C\\)</span> giới hạn bởi đồ thị <span class=\"math inline\">\\(f\\)</span> và trục <span class=\"math inline\">\\(x\\)</span> đều có diện tích 3. Tìm giá trị của <span class=\"math display\">\\[\\int_{-4}^2[f(x)+2x+5]\\,dx.\\]</span> <p><em>Hình ex63: Hình cho Bài tập 63 (chưa có tệp ảnh gốc).</em></p>"
+      "content": "<p><strong>63.</strong> </p><p> Mỗi miền <span class=\"math inline\">\\(A,B,C\\)</span> giới hạn bởi đồ thị <span class=\"math inline\">\\(f\\)</span> và trục <span class=\"math inline\">\\(x\\)</span> đều có diện tích 3. Tìm giá trị của <span class=\"math display\">\\[\\int_{-4}^2[f(x)+2x+5]\\,dx.\\]</span> <p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-5-2-157ffa41/ex63.png\" alt=\"5-2 ex63\" loading=\"lazy\"><br><span>Hình cho Bài tập 63</span></p>"
     },
     {
       "number": 64,
@@ -318,7 +318,7 @@
     },
     {
       "number": 80,
-      "content": "<p><strong>80.</strong> </p><p> (a) Với hàm <span class=\"math inline\">\\(f\\)</span> có đồ thị như hình, kiểm tra bằng hình học bất đẳng thức <span class=\"math display\">\\[\\left|\\int_a^b f(x)\\,dx\\right|\\le\\int_a^b|f(x)|\\,dx.\\]</span> <p><em>Hình ex80: Hình cho Bài tập 80 (chưa có tệp ảnh gốc).</em></p> (b) Chứng minh bất đẳng thức ở (a) đúng với mọi hàm <span class=\"math inline\">\\(f\\)</span> liên tục trên <span class=\"math inline\">\\([a,b]\\)</span>.<br>(c) Chứng minh <span class=\"math display\">\\[\\left|\\int_a^b f(x)\\sin2x\\,dx\\right|\\le\\int_a^b|f(x)|\\,dx.\\]</span></p>"
+      "content": "<p><strong>80.</strong> </p><p> (a) Với hàm <span class=\"math inline\">\\(f\\)</span> có đồ thị như hình, kiểm tra bằng hình học bất đẳng thức <span class=\"math display\">\\[\\left|\\int_a^b f(x)\\,dx\\right|\\le\\int_a^b|f(x)|\\,dx.\\]</span> <p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-5-2-157ffa41/ex80.png\" alt=\"5-2 ex80\" loading=\"lazy\"><br><span>Hình cho Bài tập 80</span></p> (b) Chứng minh bất đẳng thức ở (a) đúng với mọi hàm <span class=\"math inline\">\\(f\\)</span> liên tục trên <span class=\"math inline\">\\([a,b]\\)</span>.<br>(c) Chứng minh <span class=\"math display\">\\[\\left|\\int_a^b f(x)\\sin2x\\,dx\\right|\\le\\int_a^b|f(x)|\\,dx.\\]</span></p>"
     },
     {
       "number": 81,
