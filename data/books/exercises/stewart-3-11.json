@@ -1,0 +1,276 @@
+{
+  "bookKey": "stewart-9",
+  "sectionKey": "3-11",
+  "heading": "3.11. Bài tập",
+  "sourceSha256": "b68c7c113aed01016779de1e9ce02d8e16d38d05641eced48f324d2689bcedee",
+  "exercises": [
+    {
+      "number": 1,
+      "content": "<p><strong>1–6.</strong></p>\n<p>Tìm giá trị số của mỗi biểu thức.</p><p><strong>1.</strong> (a) <span class=\"math inline\">\\(\\sinh0\\)</span>; (b) <span class=\"math inline\">\\(\\cosh0\\)</span>.</p>"
+    },
+    {
+      "number": 2,
+      "content": "<p><strong>1–6.</strong></p>\n<p>Tìm giá trị số của mỗi biểu thức.</p><p><strong>2.</strong> (a) <span class=\"math inline\">\\(\\tanh0\\)</span>; (b) <span class=\"math inline\">\\(\\tanh1\\)</span>.</p>"
+    },
+    {
+      "number": 3,
+      "content": "<p><strong>1–6.</strong></p>\n<p>Tìm giá trị số của mỗi biểu thức.</p><p><strong>3.</strong> (a) <span class=\"math inline\">\\(\\cosh(\\ln5)\\)</span>; (b) <span class=\"math inline\">\\(\\cosh5\\)</span>.</p>"
+    },
+    {
+      "number": 4,
+      "content": "<p><strong>1–6.</strong></p>\n<p>Tìm giá trị số của mỗi biểu thức.</p><p><strong>4.</strong> (a) <span class=\"math inline\">\\(\\sinh4\\)</span>; (b) <span class=\"math inline\">\\(\\sinh(\\ln4)\\)</span>.</p>"
+    },
+    {
+      "number": 5,
+      "content": "<p><strong>1–6.</strong></p>\n<p>Tìm giá trị số của mỗi biểu thức.</p><p><strong>5.</strong> (a) <span class=\"math inline\">\\(\\operatorname{sech}0\\)</span>; (b) <span class=\"math inline\">\\(\\cosh^{-1}1\\)</span>.</p>"
+    },
+    {
+      "number": 6,
+      "content": "<p><strong>1–6.</strong></p>\n<p>Tìm giá trị số của mỗi biểu thức.</p><p><strong>6.</strong> (a) <span class=\"math inline\">\\(\\sinh1\\)</span>; (b) <span class=\"math inline\">\\(\\sinh^{-1}1\\)</span>.</p>"
+    },
+    {
+      "number": 7,
+      "content": "<p><strong>7.</strong> Viết <span class=\"math inline\">\\(8\\sinh x+5\\cosh x\\)</span> theo <span class=\"math inline\">\\(e^x\\)</span> và <span class=\"math inline\">\\(e^{-x}\\)</span>.</p>"
+    },
+    {
+      "number": 8,
+      "content": "<p><strong>8.</strong> Viết <span class=\"math inline\">\\(2e^{2x}+3e^{-2x}\\)</span> theo <span class=\"math inline\">\\(\\sinh2x\\)</span> và <span class=\"math inline\">\\(\\cosh2x\\)</span>.</p>"
+    },
+    {
+      "number": 9,
+      "content": "<p><strong>9.</strong> Viết <span class=\"math inline\">\\(\\sinh(\\ln x)\\)</span> dưới dạng hàm hữu tỉ của <span class=\"math inline\">\\(x\\)</span>.</p>"
+    },
+    {
+      "number": 10,
+      "content": "<p><strong>10.</strong> Viết <span class=\"math inline\">\\(\\cosh(4\\ln x)\\)</span> dưới dạng hàm hữu tỉ của <span class=\"math inline\">\\(x\\)</span>.</p>"
+    },
+    {
+      "number": 11,
+      "content": "<p><strong>11–23.</strong></p>\n<p>Chứng minh đồng nhất thức.</p><p><strong>11.</strong> <span class=\"math inline\">\\(\\sinh(-x)=-\\sinh x\\)</span>. (Điều này cho thấy <span class=\"math inline\">\\(\\sinh\\)</span> là hàm lẻ.)</p>"
+    },
+    {
+      "number": 12,
+      "content": "<p><strong>11–23.</strong></p>\n<p>Chứng minh đồng nhất thức.</p><p><strong>12.</strong> <span class=\"math inline\">\\(\\cosh(-x)=\\cosh x\\)</span>. (Điều này cho thấy <span class=\"math inline\">\\(\\cosh\\)</span> là hàm chẵn.)</p>"
+    },
+    {
+      "number": 13,
+      "content": "<p><strong>11–23.</strong></p>\n<p>Chứng minh đồng nhất thức.</p><p><strong>13.</strong> <span class=\"math inline\">\\(\\cosh x+\\sinh x=e^x\\)</span>.</p>"
+    },
+    {
+      "number": 14,
+      "content": "<p><strong>11–23.</strong></p>\n<p>Chứng minh đồng nhất thức.</p><p><strong>14.</strong> <span class=\"math inline\">\\(\\cosh x-\\sinh x=e^{-x}\\)</span>.</p>"
+    },
+    {
+      "number": 15,
+      "content": "<p><strong>11–23.</strong></p>\n<p>Chứng minh đồng nhất thức.</p><p><strong>15.</strong> <span class=\"math inline\">\\(\\sinh(x+y)=\\sinh x\\cosh y+\\cosh x\\sinh y\\)</span>.</p>"
+    },
+    {
+      "number": 16,
+      "content": "<p><strong>11–23.</strong></p>\n<p>Chứng minh đồng nhất thức.</p><p><strong>16.</strong> <span class=\"math inline\">\\(\\cosh(x+y)=\\cosh x\\cosh y+\\sinh x\\sinh y\\)</span>.</p>"
+    },
+    {
+      "number": 17,
+      "content": "<p><strong>11–23.</strong></p>\n<p>Chứng minh đồng nhất thức.</p><p><strong>17.</strong> <span class=\"math inline\">\\(\\coth^2x-1=\\operatorname{csch}^2x\\)</span>.</p>"
+    },
+    {
+      "number": 18,
+      "content": "<p><strong>11–23.</strong></p>\n<p>Chứng minh đồng nhất thức.</p><p><strong>18.</strong> <span class=\"math inline\">\\(\\displaystyle\\tanh(x+y)=\\frac{\\tanh x+\\tanh y}{1+\\tanh x\\tanh y}\\)</span>.</p>"
+    },
+    {
+      "number": 19,
+      "content": "<p><strong>11–23.</strong></p>\n<p>Chứng minh đồng nhất thức.</p><p><strong>19.</strong> <span class=\"math inline\">\\(\\sinh2x=2\\sinh x\\cosh x\\)</span>.</p>"
+    },
+    {
+      "number": 20,
+      "content": "<p><strong>11–23.</strong></p>\n<p>Chứng minh đồng nhất thức.</p><p><strong>20.</strong> <span class=\"math inline\">\\(\\cosh2x=\\cosh^2x+\\sinh^2x\\)</span>.</p>"
+    },
+    {
+      "number": 21,
+      "content": "<p><strong>11–23.</strong></p>\n<p>Chứng minh đồng nhất thức.</p><p><strong>21.</strong> <span class=\"math inline\">\\(\\displaystyle\\tanh(\\ln x)=\\frac{x^2-1}{x^2+1}\\)</span>.</p>"
+    },
+    {
+      "number": 22,
+      "content": "<p><strong>11–23.</strong></p>\n<p>Chứng minh đồng nhất thức.</p><p><strong>22.</strong> <span class=\"math inline\">\\(\\displaystyle\\frac{1+\\tanh x}{1-\\tanh x}=e^{2x}\\)</span>.</p>"
+    },
+    {
+      "number": 23,
+      "content": "<p><strong>11–23.</strong></p>\n<p>Chứng minh đồng nhất thức.</p><p><strong>23.</strong> <span class=\"math inline\">\\((\\cosh x+\\sinh x)^n=\\cosh nx+\\sinh nx\\)</span>, với <span class=\"math inline\">\\(n\\)</span> là số thực bất kỳ.</p>"
+    },
+    {
+      "number": 24,
+      "content": "<p><strong>24.</strong> Nếu <span class=\"math inline\">\\(\\tanh x=12/13\\)</span>, tìm giá trị của các hàm hyperbolic còn lại tại <span class=\"math inline\">\\(x\\)</span>.</p>"
+    },
+    {
+      "number": 25,
+      "content": "<p><strong>25.</strong> Nếu <span class=\"math inline\">\\(\\cosh x=5/3\\)</span> và <span class=\"math inline\">\\(x&gt;0\\)</span>, tìm giá trị của các hàm hyperbolic còn lại tại <span class=\"math inline\">\\(x\\)</span>.</p>"
+    },
+    {
+      "number": 26,
+      "content": "<p><strong>26.</strong> (a) Dùng đồ thị của <span class=\"math inline\">\\(\\sinh\\)</span>, <span class=\"math inline\">\\(\\cosh\\)</span>, <span class=\"math inline\">\\(\\tanh\\)</span> trong Hình 1–3 để vẽ đồ thị của <span class=\"math inline\">\\(\\operatorname{csch}\\)</span>, <span class=\"math inline\">\\(\\operatorname{sech}\\)</span>, <span class=\"math inline\">\\(\\coth\\)</span>.</p>\n<p>(b) <em>[Cần công cụ vẽ đồ thị.]</em> Kiểm tra các đồ thị đã phác họa ở câu (a) bằng máy tính đồ thị hoặc máy tính.</p><div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-3-11-b68c7c11/fig1.png\" alt=\"image\"><br>\nHình 1. <span class=\"math inline\">\\(y=\\sinh x=\\tfrac12e^x-\\tfrac12e^{-x}\\)</span>.</p>\n</div><div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-3-11-b68c7c11/fig2.png\" alt=\"image\"><br>\nHình 2. <span class=\"math inline\">\\(y=\\cosh x=\\tfrac12e^x+\\tfrac12e^{-x}\\)</span>.</p>\n</div><div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-3-11-b68c7c11/fig3.png\" alt=\"image\"><br>\nHình 3. <span class=\"math inline\">\\(y=\\tanh x\\)</span>.</p>\n</div>"
+    },
+    {
+      "number": 27,
+      "content": "<p><strong>27.</strong> Dùng định nghĩa các hàm hyperbolic để tìm các giới hạn sau. <span class=\"math display\">\\[\\begin{aligned}\n\\text{(a)}\\quad&amp;\\lim_{x\\to\\infty}\\tanh x,&amp;\\text{(b)}\\quad&amp;\\lim_{x\\to-\\infty}\\tanh x,\\\\\n\\text{(c)}\\quad&amp;\\lim_{x\\to\\infty}\\sinh x,&amp;\\text{(d)}\\quad&amp;\\lim_{x\\to-\\infty}\\sinh x,\\\\\n\\text{(e)}\\quad&amp;\\lim_{x\\to\\infty}\\operatorname{sech} x,&amp;\\text{(f)}\\quad&amp;\\lim_{x\\to\\infty}\\coth x,\\\\\n\\text{(g)}\\quad&amp;\\lim_{x\\to0^+}\\coth x,&amp;\\text{(h)}\\quad&amp;\\lim_{x\\to0^-}\\coth x,\\\\\n\\text{(i)}\\quad&amp;\\lim_{x\\to-\\infty}\\operatorname{csch} x,&amp;\\text{(j)}\\quad&amp;\\lim_{x\\to\\infty}\\frac{\\sinh x}{e^x}.\n\\end{aligned}\\]</span></p>"
+    },
+    {
+      "number": 28,
+      "content": "<p><strong>28.</strong> Chứng minh các công thức trong Bảng 1 về đạo hàm của: (a) <span class=\"math inline\">\\(\\cosh\\)</span>; (b) <span class=\"math inline\">\\(\\tanh\\)</span>; (c) <span class=\"math inline\">\\(\\operatorname{csch}\\)</span>; (d) <span class=\"math inline\">\\(\\operatorname{sech}\\)</span>; (e) <span class=\"math inline\">\\(\\coth\\)</span>.</p><p><strong>1. Đạo hàm của các hàm hyperbolic</strong></p><p><span class=\"math display\">\\[\\begin{aligned}\n\\frac d{dx}(\\sinh x)&amp;=\\cosh x,&amp;\\frac d{dx}(\\operatorname{csch} x)&amp;=-\\operatorname{csch} x\\coth x,\\\\\n\\frac d{dx}(\\cosh x)&amp;=\\sinh x,&amp;\\frac d{dx}(\\operatorname{sech} x)&amp;=-\\operatorname{sech} x\\tanh x,\\\\\n\\frac d{dx}(\\tanh x)&amp;=\\operatorname{sech}^2x,&amp;\\frac d{dx}(\\coth x)&amp;=-\\operatorname{csch}^2x.\n\\end{aligned}\\]</span> Mỗi quy tắc này đều có thể kết hợp với quy tắc hàm hợp, như ví dụ sau.</p>"
+    },
+    {
+      "number": 29,
+      "content": "<p><strong>29.</strong> Cho một lời giải khác của Ví dụ 3 bằng cách đặt <span class=\"math inline\">\\(y=\\sinh^{-1}x\\)</span>, rồi dùng Bài tập 13 và Ví dụ 1(a), với <span class=\"math inline\">\\(x\\)</span> được thay bằng <span class=\"math inline\">\\(y\\)</span>.</p><p><strong>Ví dụ 3.</strong> Chứng minh <span class=\"math inline\">\\(\\sinh^{-1}x=\\ln\\left(x+\\sqrt{x^2+1}\\right)\\)</span>. <em>Lời giải.</em> Đặt <span class=\"math inline\">\\(y=\\sinh^{-1}x\\)</span>. Khi đó <span class=\"math display\">\\[x=\\sinh y=\\frac{e^y-e^{-y}}2,\\]</span> suy ra <span class=\"math inline\">\\(e^y-2x-e^{-y}=0\\)</span>. Nhân với <span class=\"math inline\">\\(e^y\\)</span>, được <span class=\"math display\">\\[e^{2y}-2xe^y-1=0.\\]</span> Đây là phương trình bậc hai theo <span class=\"math inline\">\\(e^y\\)</span>: <span class=\"math display\">\\[(e^y)^2-2x(e^y)-1=0.\\]</span> Dùng công thức nghiệm, <span class=\"math display\">\\[e^y=\\frac{2x\\pm\\sqrt{4x^2+4}}2=x\\pm\\sqrt{x^2+1}.\\]</span> Lưu ý <span class=\"math inline\">\\(e^y&gt;0\\)</span>, trong khi <span class=\"math inline\">\\(x-\\sqrt{x^2+1}&lt;0\\)</span> vì <span class=\"math inline\">\\(x&lt;\\sqrt{x^2+1}\\)</span>. Do đó không nhận dấu trừ, và <span class=\"math display\">\\[e^y=x+\\sqrt{x^2+1}.\\]</span> Vì vậy, <span class=\"math display\">\\[y=\\ln(e^y)=\\ln\\left(x+\\sqrt{x^2+1}\\right).\\]</span> Như vậy, <span class=\"math display\">\\[\\sinh^{-1}x=\\ln\\left(x+\\sqrt{x^2+1}\\right).\\]</span> Xem Bài tập 29 để có phương pháp khác.</p><p><strong>Ví dụ 1.</strong> Chứng minh (a) <span class=\"math inline\">\\(\\cosh^2x-\\sinh^2x=1\\)</span>; (b) <span class=\"math inline\">\\(1-\\tanh^2x=\\operatorname{sech}^2x\\)</span>. <em>Lời giải.</em> (a) Theo định nghĩa, <span class=\"math display\">\\[\\begin{aligned}\n\\cosh^2x-\\sinh^2x\n&amp;=\\left(\\frac{e^x+e^{-x}}2\\right)^2-\\left(\\frac{e^x-e^{-x}}2\\right)^2\\\\\n&amp;=\\frac{e^{2x}+2+e^{-2x}}4-\\frac{e^{2x}-2+e^{-2x}}4\\\\\n&amp;=\\frac44=1.\n\\end{aligned}\\]</span> (b) Xuất phát từ đồng nhất thức vừa chứng minh: <span class=\"math display\">\\[\\cosh^2x-\\sinh^2x=1.\\]</span> Chia hai vế cho <span class=\"math inline\">\\(\\cosh^2x\\)</span>, được <span class=\"math display\">\\[1-\\frac{\\sinh^2x}{\\cosh^2x}=\\frac1{\\cosh^2x},\\]</span> hay <span class=\"math display\">\\[1-\\tanh^2x=\\operatorname{sech}^2x.\\]</span></p><p><strong>Dữ kiện tham chiếu — Bài tập 13.</strong></p><p><strong>11–23.</strong></p>\n<p>Chứng minh đồng nhất thức.</p><p><strong>13.</strong> <span class=\"math inline\">\\(\\cosh x+\\sinh x=e^x\\)</span>.</p>"
+    },
+    {
+      "number": 30,
+      "content": "<p><strong>30.</strong> Chứng minh công thức (4).</p><p>Vì các hàm hyperbolic được định nghĩa theo hàm mũ, không có gì ngạc nhiên khi các hàm ngược có thể biểu diễn theo logarit. Cụ thể, <span class=\"math display\">\\[\\sinh^{-1}x=\\ln\\left(x+\\sqrt{x^2+1}\\right),\\qquad x\\in\\mathbb R,\\tag{3}\\]</span> <span class=\"math display\">\\[\\cosh^{-1}x=\\ln\\left(x+\\sqrt{x^2-1}\\right),\\qquad x\\ge1,\\tag{4}\\]</span> <span class=\"math display\">\\[\\tanh^{-1}x=\\frac12\\ln\\left(\\frac{1+x}{1-x}\\right),\\qquad -1&lt;x&lt;1.\\tag{5}\\]</span> Công thức (3) được chứng minh trong Ví dụ 3. Chứng minh (4), (5) là yêu cầu của Bài tập 30, 31.</p>"
+    },
+    {
+      "number": 31,
+      "content": "<p><strong>31.</strong> Chứng minh công thức (5) bằng (a) phương pháp của Ví dụ 3; (b) Bài tập 22, với <span class=\"math inline\">\\(x\\)</span> được thay bằng <span class=\"math inline\">\\(y\\)</span>.</p><p>Vì các hàm hyperbolic được định nghĩa theo hàm mũ, không có gì ngạc nhiên khi các hàm ngược có thể biểu diễn theo logarit. Cụ thể, <span class=\"math display\">\\[\\sinh^{-1}x=\\ln\\left(x+\\sqrt{x^2+1}\\right),\\qquad x\\in\\mathbb R,\\tag{3}\\]</span> <span class=\"math display\">\\[\\cosh^{-1}x=\\ln\\left(x+\\sqrt{x^2-1}\\right),\\qquad x\\ge1,\\tag{4}\\]</span> <span class=\"math display\">\\[\\tanh^{-1}x=\\frac12\\ln\\left(\\frac{1+x}{1-x}\\right),\\qquad -1&lt;x&lt;1.\\tag{5}\\]</span> Công thức (3) được chứng minh trong Ví dụ 3. Chứng minh (4), (5) là yêu cầu của Bài tập 30, 31.</p><p><strong>Ví dụ 3.</strong> Chứng minh <span class=\"math inline\">\\(\\sinh^{-1}x=\\ln\\left(x+\\sqrt{x^2+1}\\right)\\)</span>. <em>Lời giải.</em> Đặt <span class=\"math inline\">\\(y=\\sinh^{-1}x\\)</span>. Khi đó <span class=\"math display\">\\[x=\\sinh y=\\frac{e^y-e^{-y}}2,\\]</span> suy ra <span class=\"math inline\">\\(e^y-2x-e^{-y}=0\\)</span>. Nhân với <span class=\"math inline\">\\(e^y\\)</span>, được <span class=\"math display\">\\[e^{2y}-2xe^y-1=0.\\]</span> Đây là phương trình bậc hai theo <span class=\"math inline\">\\(e^y\\)</span>: <span class=\"math display\">\\[(e^y)^2-2x(e^y)-1=0.\\]</span> Dùng công thức nghiệm, <span class=\"math display\">\\[e^y=\\frac{2x\\pm\\sqrt{4x^2+4}}2=x\\pm\\sqrt{x^2+1}.\\]</span> Lưu ý <span class=\"math inline\">\\(e^y&gt;0\\)</span>, trong khi <span class=\"math inline\">\\(x-\\sqrt{x^2+1}&lt;0\\)</span> vì <span class=\"math inline\">\\(x&lt;\\sqrt{x^2+1}\\)</span>. Do đó không nhận dấu trừ, và <span class=\"math display\">\\[e^y=x+\\sqrt{x^2+1}.\\]</span> Vì vậy, <span class=\"math display\">\\[y=\\ln(e^y)=\\ln\\left(x+\\sqrt{x^2+1}\\right).\\]</span> Như vậy, <span class=\"math display\">\\[\\sinh^{-1}x=\\ln\\left(x+\\sqrt{x^2+1}\\right).\\]</span> Xem Bài tập 29 để có phương pháp khác.</p><p><strong>Dữ kiện tham chiếu — Bài tập 22.</strong></p><p><strong>11–23.</strong></p>\n<p>Chứng minh đồng nhất thức.</p><p><strong>22.</strong> <span class=\"math inline\">\\(\\displaystyle\\frac{1+\\tanh x}{1-\\tanh x}=e^{2x}\\)</span>.</p>"
+    },
+    {
+      "number": 32,
+      "content": "<p><strong>32.</strong> Với mỗi hàm sau: (i) cho định nghĩa tương tự (2); (ii) phác họa đồ thị; (iii) tìm công thức tương tự (3).</p>\n<p>(a) <span class=\"math inline\">\\(\\operatorname{csch}^{-1}\\)</span>; (b) <span class=\"math inline\">\\(\\operatorname{sech}^{-1}\\)</span>; (c) <span class=\"math inline\">\\(\\coth^{-1}\\)</span>.</p><p>Từ Hình 1 và 3, ta thấy <span class=\"math inline\">\\(\\sinh\\)</span> và <span class=\"math inline\">\\(\\tanh\\)</span> là các hàm một-một, nên có các hàm ngược, ký hiệu <span class=\"math inline\">\\(\\sinh^{-1}\\)</span> và <span class=\"math inline\">\\(\\tanh^{-1}\\)</span>. Hình 2 cho thấy <span class=\"math inline\">\\(\\cosh\\)</span> không phải hàm một-một, nhưng nếu hạn chế miền xác định về <span class=\"math inline\">\\([0,\\infty)\\)</span> thì <span class=\"math inline\">\\(y=\\cosh x\\)</span> là hàm một-một và nhận mọi giá trị trong tập giá trị <span class=\"math inline\">\\([1,\\infty)\\)</span>. Hàm cosin hyperbolic ngược được định nghĩa là hàm ngược của hàm đã hạn chế này. <span class=\"math display\">\\[\\begin{aligned}\ny=\\sinh^{-1}x&amp;\\iff\\sinh y=x,\\\\\ny=\\cosh^{-1}x&amp;\\iff\\cosh y=x\\text{ và }y\\ge0,\\tag{2}\\\\\ny=\\tanh^{-1}x&amp;\\iff\\tanh y=x.\n\\end{aligned}\\]</span> Các hàm hyperbolic ngược còn lại được định nghĩa tương tự (Bài tập 32).</p><p>Vì các hàm hyperbolic được định nghĩa theo hàm mũ, không có gì ngạc nhiên khi các hàm ngược có thể biểu diễn theo logarit. Cụ thể, <span class=\"math display\">\\[\\sinh^{-1}x=\\ln\\left(x+\\sqrt{x^2+1}\\right),\\qquad x\\in\\mathbb R,\\tag{3}\\]</span> <span class=\"math display\">\\[\\cosh^{-1}x=\\ln\\left(x+\\sqrt{x^2-1}\\right),\\qquad x\\ge1,\\tag{4}\\]</span> <span class=\"math display\">\\[\\tanh^{-1}x=\\frac12\\ln\\left(\\frac{1+x}{1-x}\\right),\\qquad -1&lt;x&lt;1.\\tag{5}\\]</span> Công thức (3) được chứng minh trong Ví dụ 3. Chứng minh (4), (5) là yêu cầu của Bài tập 30, 31.</p>"
+    },
+    {
+      "number": 33,
+      "content": "<p><strong>33.</strong> Chứng minh công thức trong Bảng 6 về đạo hàm của: (a) <span class=\"math inline\">\\(\\cosh^{-1}\\)</span>; (b) <span class=\"math inline\">\\(\\tanh^{-1}\\)</span>; (c) <span class=\"math inline\">\\(\\coth^{-1}\\)</span>.</p><p><strong>6. Đạo hàm của các hàm hyperbolic ngược</strong></p><p><span class=\"math display\">\\[\\begin{aligned}\n\\frac d{dx}(\\sinh^{-1}x)&amp;=\\frac1{\\sqrt{1+x^2}},&amp;\n\\frac d{dx}(\\operatorname{csch}^{-1}x)&amp;=-\\frac1{|x|\\sqrt{x^2+1}},\\\\\n\\frac d{dx}(\\cosh^{-1}x)&amp;=\\frac1{\\sqrt{x^2-1}},&amp;\n\\frac d{dx}(\\operatorname{sech}^{-1}x)&amp;=-\\frac1{x\\sqrt{1-x^2}},\\\\\n\\frac d{dx}(\\tanh^{-1}x)&amp;=\\frac1{1-x^2},&amp;\n\\frac d{dx}(\\coth^{-1}x)&amp;=\\frac1{1-x^2}.\n\\end{aligned}\\]</span> Chú ý: công thức đạo hàm của <span class=\"math inline\">\\(\\tanh^{-1}x\\)</span> và <span class=\"math inline\">\\(\\coth^{-1}x\\)</span> có vẻ giống nhau, nhưng hai miền xác định không có phần tử chung: <span class=\"math inline\">\\(\\tanh^{-1}x\\)</span> xác định khi <span class=\"math inline\">\\(|x|&lt;1\\)</span>, còn <span class=\"math inline\">\\(\\coth^{-1}x\\)</span> xác định khi <span class=\"math inline\">\\(|x|&gt;1\\)</span>.</p>"
+    },
+    {
+      "number": 34,
+      "content": "<p><strong>34.</strong> Chứng minh công thức trong Bảng 6 về đạo hàm của: (a) <span class=\"math inline\">\\(\\operatorname{sech}^{-1}\\)</span>; (b) <span class=\"math inline\">\\(\\operatorname{csch}^{-1}\\)</span>.</p><p><strong>6. Đạo hàm của các hàm hyperbolic ngược</strong></p><p><span class=\"math display\">\\[\\begin{aligned}\n\\frac d{dx}(\\sinh^{-1}x)&amp;=\\frac1{\\sqrt{1+x^2}},&amp;\n\\frac d{dx}(\\operatorname{csch}^{-1}x)&amp;=-\\frac1{|x|\\sqrt{x^2+1}},\\\\\n\\frac d{dx}(\\cosh^{-1}x)&amp;=\\frac1{\\sqrt{x^2-1}},&amp;\n\\frac d{dx}(\\operatorname{sech}^{-1}x)&amp;=-\\frac1{x\\sqrt{1-x^2}},\\\\\n\\frac d{dx}(\\tanh^{-1}x)&amp;=\\frac1{1-x^2},&amp;\n\\frac d{dx}(\\coth^{-1}x)&amp;=\\frac1{1-x^2}.\n\\end{aligned}\\]</span> Chú ý: công thức đạo hàm của <span class=\"math inline\">\\(\\tanh^{-1}x\\)</span> và <span class=\"math inline\">\\(\\coth^{-1}x\\)</span> có vẻ giống nhau, nhưng hai miền xác định không có phần tử chung: <span class=\"math inline\">\\(\\tanh^{-1}x\\)</span> xác định khi <span class=\"math inline\">\\(|x|&lt;1\\)</span>, còn <span class=\"math inline\">\\(\\coth^{-1}x\\)</span> xác định khi <span class=\"math inline\">\\(|x|&gt;1\\)</span>.</p>"
+    },
+    {
+      "number": 35,
+      "content": "<p><strong>35–53.</strong></p>\n<p>Tìm đạo hàm. Rút gọn nếu có thể.</p><p><strong>35.</strong> <span class=\"math inline\">\\(f(x)=\\cosh3x\\)</span>.</p>"
+    },
+    {
+      "number": 36,
+      "content": "<p><strong>35–53.</strong></p>\n<p>Tìm đạo hàm. Rút gọn nếu có thể.</p><p><strong>36.</strong> <span class=\"math inline\">\\(f(x)=e^x\\cosh x\\)</span>.</p>"
+    },
+    {
+      "number": 37,
+      "content": "<p><strong>35–53.</strong></p>\n<p>Tìm đạo hàm. Rút gọn nếu có thể.</p><p><strong>37.</strong> <span class=\"math inline\">\\(h(x)=\\sinh(x^2)\\)</span>.</p>"
+    },
+    {
+      "number": 38,
+      "content": "<p><strong>35–53.</strong></p>\n<p>Tìm đạo hàm. Rút gọn nếu có thể.</p><p><strong>38.</strong> <span class=\"math inline\">\\(g(x)=\\sinh^2x\\)</span>.</p>"
+    },
+    {
+      "number": 39,
+      "content": "<p><strong>35–53.</strong></p>\n<p>Tìm đạo hàm. Rút gọn nếu có thể.</p><p><strong>39.</strong> <span class=\"math inline\">\\(G(t)=\\sinh(\\ln t)\\)</span>.</p>"
+    },
+    {
+      "number": 40,
+      "content": "<p><strong>35–53.</strong></p>\n<p>Tìm đạo hàm. Rút gọn nếu có thể.</p><p><strong>40.</strong> <span class=\"math inline\">\\(F(t)=\\ln(\\sinh t)\\)</span>.</p>"
+    },
+    {
+      "number": 41,
+      "content": "<p><strong>35–53.</strong></p>\n<p>Tìm đạo hàm. Rút gọn nếu có thể.</p><p><strong>41.</strong> <span class=\"math inline\">\\(f(x)=\\tanh\\sqrt{x}\\)</span>.</p>"
+    },
+    {
+      "number": 42,
+      "content": "<p><strong>35–53.</strong></p>\n<p>Tìm đạo hàm. Rút gọn nếu có thể.</p><p><strong>42.</strong> <span class=\"math inline\">\\(H(v)=e^{\\tanh2v}\\)</span>.</p>"
+    },
+    {
+      "number": 43,
+      "content": "<p><strong>35–53.</strong></p>\n<p>Tìm đạo hàm. Rút gọn nếu có thể.</p><p><strong>43.</strong> <span class=\"math inline\">\\(y=\\operatorname{sech} x\\tanh x\\)</span>.</p>"
+    },
+    {
+      "number": 44,
+      "content": "<p><strong>35–53.</strong></p>\n<p>Tìm đạo hàm. Rút gọn nếu có thể.</p><p><strong>44.</strong> <span class=\"math inline\">\\(y=\\operatorname{sech}(\\tanh x)\\)</span>.</p>"
+    },
+    {
+      "number": 45,
+      "content": "<p><strong>35–53.</strong></p>\n<p>Tìm đạo hàm. Rút gọn nếu có thể.</p><p><strong>45.</strong> <span class=\"math inline\">\\(g(t)=t\\coth\\sqrt{t^2+1}\\)</span>.</p>"
+    },
+    {
+      "number": 46,
+      "content": "<p><strong>35–53.</strong></p>\n<p>Tìm đạo hàm. Rút gọn nếu có thể.</p><p><strong>46.</strong> <span class=\"math inline\">\\(\\displaystyle f(t)=\\frac{1+\\sinh t}{1-\\sinh t}\\)</span>.</p>"
+    },
+    {
+      "number": 47,
+      "content": "<p><strong>35–53.</strong></p>\n<p>Tìm đạo hàm. Rút gọn nếu có thể.</p><p><strong>47.</strong> <span class=\"math inline\">\\(f(x)=\\sinh^{-1}(-2x)\\)</span>.</p>"
+    },
+    {
+      "number": 48,
+      "content": "<p><strong>35–53.</strong></p>\n<p>Tìm đạo hàm. Rút gọn nếu có thể.</p><p><strong>48.</strong> <span class=\"math inline\">\\(g(x)=\\tanh^{-1}(x^3)\\)</span>.</p>"
+    },
+    {
+      "number": 49,
+      "content": "<p><strong>35–53.</strong></p>\n<p>Tìm đạo hàm. Rút gọn nếu có thể.</p><p><strong>49.</strong> <span class=\"math inline\">\\(y=\\cosh^{-1}(\\sec\\theta)\\)</span>, <span class=\"math inline\">\\(0\\le\\theta&lt;\\pi/2\\)</span>.</p>"
+    },
+    {
+      "number": 50,
+      "content": "<p><strong>35–53.</strong></p>\n<p>Tìm đạo hàm. Rút gọn nếu có thể.</p><p><strong>50.</strong> <span class=\"math inline\">\\(y=\\operatorname{sech}^{-1}(\\sin\\theta)\\)</span>, <span class=\"math inline\">\\(0&lt;\\theta&lt;\\pi/2\\)</span>.</p>"
+    },
+    {
+      "number": 51,
+      "content": "<p><strong>35–53.</strong></p>\n<p>Tìm đạo hàm. Rút gọn nếu có thể.</p><p><strong>51.</strong> <span class=\"math inline\">\\(G(u)=\\cosh^{-1}\\sqrt{1+u^2}\\)</span>, <span class=\"math inline\">\\(u&gt;0\\)</span>.</p>"
+    },
+    {
+      "number": 52,
+      "content": "<p><strong>35–53.</strong></p>\n<p>Tìm đạo hàm. Rút gọn nếu có thể.</p><p><strong>52.</strong> <span class=\"math inline\">\\(y=x\\tanh^{-1}x+\\ln\\sqrt{1-x^2}\\)</span>.</p>"
+    },
+    {
+      "number": 53,
+      "content": "<p><strong>35–53.</strong></p>\n<p>Tìm đạo hàm. Rút gọn nếu có thể.</p><p><strong>53.</strong> <span class=\"math inline\">\\(y=x\\sinh^{-1}(x/3)-\\sqrt{9+x^2}\\)</span>.</p>"
+    },
+    {
+      "number": 54,
+      "content": "<p><strong>54.</strong> Chứng minh <span class=\"math inline\">\\(\\displaystyle\\frac d{dx}\\sqrt[4]{\\frac{1+\\tanh x}{1-\\tanh x}}=\\frac12e^{x/2}\\)</span>.</p>"
+    },
+    {
+      "number": 55,
+      "content": "<p><strong>55.</strong> Chứng minh <span class=\"math inline\">\\(\\displaystyle\\frac d{dx}\\arctan(\\tanh x)=\\operatorname{sech}2x\\)</span>.</p>"
+    },
+    {
+      "number": 56,
+      "content": "<p><strong>56.</strong> <strong>Cổng Gateway Arch.</strong> Cổng Gateway Arch ở St. Louis do Eero Saarinen thiết kế; đường cong trung tâm của cổng được xây dựng theo phương trình <span class=\"math display\">\\[y=211.49-20.96\\cosh(0.03291765x),\\]</span> trong đó <span class=\"math inline\">\\(x,y\\)</span> tính bằng mét và <span class=\"math inline\">\\(|x|\\le91.20\\)</span>.</p>\n<p>(a) <em>[Cần công cụ vẽ đồ thị.]</em> Vẽ đường cong trung tâm.</p>\n<p>(b) Chiều cao của cổng tại tâm là bao nhiêu?</p>\n<p>(c) Tại những điểm nào chiều cao bằng <span class=\"math inline\">\\(100\\,\\mathrm{m}\\)</span>?</p>\n<p>(d) Hệ số góc của cổng tại các điểm ở câu (c) bằng bao nhiêu?</p><div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-3-11-b68c7c11/arch.png\" alt=\"image\"><br>\nCổng Gateway Arch ở St. Louis được thiết kế bằng hàm cosin hyperbolic (xem Bài tập 56). Ảnh: iStock.com/gnagel.</p>\n</div>"
+    },
+    {
+      "number": 57,
+      "content": "<p><strong>57.</strong> Nếu sóng nước có bước sóng <span class=\"math inline\">\\(L\\)</span> truyền với vận tốc <span class=\"math inline\">\\(v\\)</span> trong vùng nước sâu <span class=\"math inline\">\\(d\\)</span>, thì <span class=\"math display\">\\[v=\\sqrt{\\frac{gL}{2\\pi}\\tanh\\left(\\frac{2\\pi d}{L}\\right)},\\]</span> trong đó <span class=\"math inline\">\\(g\\)</span> là gia tốc trọng trường (Hình 5). Giải thích vì sao phép xấp xỉ <span class=\"math display\">\\[v\\approx\\sqrt{\\frac{gL}{2\\pi}}\\]</span> phù hợp với vùng nước sâu.</p><div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-3-11-b68c7c11/fig5.png\" alt=\"image\"><br>\nHình 5. Mô hình lý tưởng hóa của sóng nước.</p>\n</div>"
+    },
+    {
+      "number": 58,
+      "content": "<p><strong>58.</strong> <em>[Cần công cụ vẽ đồ thị.]</em> Một dây cáp mềm luôn treo theo dạng đường dây xích <span class=\"math inline\">\\(y=c+a\\cosh(x/a)\\)</span>, với <span class=\"math inline\">\\(c,a\\)</span> là hằng số và <span class=\"math inline\">\\(a&gt;0\\)</span> (Hình 4 và Bài tập 60). Vẽ một số đồ thị trong họ hàm <span class=\"math inline\">\\(y=a\\cosh(x/a)\\)</span>. Đồ thị thay đổi thế nào khi <span class=\"math inline\">\\(a\\)</span> thay đổi?</p><div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-3-11-b68c7c11/fig4.png\" alt=\"image\"><br>\nHình 4. Đường dây xích <span class=\"math inline\">\\(y=c+a\\cosh(x/a)\\)</span>.</p>\n</div>"
+    },
+    {
+      "number": 59,
+      "content": "<p><strong>59.</strong> Một đường dây điện thoại treo giữa hai cột cách nhau <span class=\"math inline\">\\(14\\,\\mathrm{m}\\)</span> có dạng đường dây xích <span class=\"math inline\">\\(y=20\\cosh(x/20)-15\\)</span>, với <span class=\"math inline\">\\(x,y\\)</span> tính bằng mét.</p>\n<p>(a) Tìm hệ số góc của đường cong tại điểm gặp cột bên phải.</p>\n<p>(b) Tìm góc <span class=\"math inline\">\\(\\theta\\)</span> giữa dây và cột.</p>\n<div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-3-11-b68c7c11/ex59.png\" alt=\"image\"><br>\nHình cho Bài tập 59.</p>\n</div>"
+    },
+    {
+      "number": 60,
+      "content": "<p><strong>60.</strong> Từ các nguyên lý vật lý, có thể chứng minh rằng dây cáp treo giữa hai cột có dạng đường cong <span class=\"math inline\">\\(y=f(x)\\)</span> thỏa mãn phương trình vi phân <span class=\"math display\">\\[\\frac{d^2y}{dx^2}=\\frac{\\rho g}{T}\\sqrt{1+\\left(\\frac{dy}{dx}\\right)^2},\\]</span> trong đó <span class=\"math inline\">\\(\\rho\\)</span> là khối lượng trên một đơn vị chiều dài của cáp, <span class=\"math inline\">\\(g\\)</span> là gia tốc trọng trường, <span class=\"math inline\">\\(T\\)</span> là lực căng cáp tại điểm thấp nhất, và hệ tọa độ được chọn thích hợp. Kiểm tra rằng <span class=\"math display\">\\[y=f(x)=\\frac{T}{\\rho g}\\cosh\\left(\\frac{\\rho gx}{T}\\right)\\]</span> là một nghiệm của phương trình vi phân này.</p>"
+    },
+    {
+      "number": 61,
+      "content": "<p><strong>61.</strong> Một dây cáp có khối lượng trên một đơn vị chiều dài <span class=\"math inline\">\\(\\rho=2\\,\\mathrm{kg/m}\\)</span> được căng giữa đỉnh hai cột cách nhau <span class=\"math inline\">\\(200\\,\\mathrm{m}\\)</span>.</p>\n<p>(a) Dùng Bài tập 60 để tìm lực căng <span class=\"math inline\">\\(T\\)</span> sao cho điểm thấp nhất của dây cách mặt đất <span class=\"math inline\">\\(60\\,\\mathrm{m}\\)</span>. Các cột cao bao nhiêu?</p>\n<p>(b) Nếu lực căng tăng gấp đôi, điểm thấp nhất mới của dây ở độ cao nào? Khi đó các cột cao bao nhiêu?</p><p><strong>Dữ kiện tham chiếu — Bài tập 60.</strong></p><p><strong>60.</strong> Từ các nguyên lý vật lý, có thể chứng minh rằng dây cáp treo giữa hai cột có dạng đường cong <span class=\"math inline\">\\(y=f(x)\\)</span> thỏa mãn phương trình vi phân <span class=\"math display\">\\[\\frac{d^2y}{dx^2}=\\frac{\\rho g}{T}\\sqrt{1+\\left(\\frac{dy}{dx}\\right)^2},\\]</span> trong đó <span class=\"math inline\">\\(\\rho\\)</span> là khối lượng trên một đơn vị chiều dài của cáp, <span class=\"math inline\">\\(g\\)</span> là gia tốc trọng trường, <span class=\"math inline\">\\(T\\)</span> là lực căng cáp tại điểm thấp nhất, và hệ tọa độ được chọn thích hợp. Kiểm tra rằng <span class=\"math display\">\\[y=f(x)=\\frac{T}{\\rho g}\\cosh\\left(\\frac{\\rho gx}{T}\\right)\\]</span> là một nghiệm của phương trình vi phân này.</p>"
+    },
+    {
+      "number": 62,
+      "content": "<p><strong>62.</strong> Mô hình vận tốc của một vật rơi sau thời gian <span class=\"math inline\">\\(t\\)</span> là <span class=\"math display\">\\[v(t)=\\sqrt{\\frac{mg}{k}}\\tanh\\left(t\\sqrt{\\frac{gk}{m}}\\right),\\]</span> trong đó <span class=\"math inline\">\\(m\\)</span> là khối lượng vật, <span class=\"math inline\">\\(g=9.8\\,\\mathrm{m/s^2}\\)</span> là gia tốc trọng trường, <span class=\"math inline\">\\(k\\)</span> là hằng số, <span class=\"math inline\">\\(t\\)</span> tính bằng giây và <span class=\"math inline\">\\(v\\)</span> tính bằng <span class=\"math inline\">\\(\\mathrm{m/s}\\)</span>.</p>\n<p>(a) Tính vận tốc giới hạn của vật, tức là <span class=\"math inline\">\\(\\displaystyle\\lim_{t\\to\\infty}v(t)\\)</span>.</p>\n<p>(b) Nếu một người nhảy dù từ máy bay, giá trị <span class=\"math inline\">\\(k\\)</span> phụ thuộc tư thế. Với tư thế nằm sấp hướng bụng xuống đất, <span class=\"math inline\">\\(k=0.515\\,\\mathrm{kg/s}\\)</span>; với tư thế chân xuống trước, <span class=\"math inline\">\\(k=0.067\\,\\mathrm{kg/s}\\)</span>. Nếu một người nặng <span class=\"math inline\">\\(60\\,\\mathrm{kg}\\)</span> rơi ở tư thế nằm sấp, vận tốc giới hạn bằng bao nhiêu? Nếu chân xuống trước thì sao?</p>\n<p><em>Nguồn:</em> L. Long và cộng sự, “How Terminal Is Terminal Velocity?”, <em>American Mathematical Monthly</em> 113 (2006): 752–755.</p>"
+    },
+    {
+      "number": 63,
+      "content": "<p><strong>63.</strong> (a) Chứng minh mọi hàm dạng <span class=\"math inline\">\\(y=A\\sinh mx+B\\cosh mx\\)</span> đều thỏa mãn phương trình vi phân <span class=\"math inline\">\\(y''=m^2y\\)</span>.</p>\n<p>(b) Tìm <span class=\"math inline\">\\(y=y(x)\\)</span> sao cho <span class=\"math inline\">\\(y''=9y\\)</span>, <span class=\"math inline\">\\(y(0)=-4\\)</span> và <span class=\"math inline\">\\(y'(0)=6\\)</span>.</p>"
+    },
+    {
+      "number": 64,
+      "content": "<p><strong>64.</strong> Nếu <span class=\"math inline\">\\(x=\\ln(\\sec\\theta+\\tan\\theta)\\)</span>, chứng minh <span class=\"math inline\">\\(\\sec\\theta=\\cosh x\\)</span>.</p>"
+    },
+    {
+      "number": 65,
+      "content": "<p><strong>65.</strong> Tại điểm nào của đường cong <span class=\"math inline\">\\(y=\\cosh x\\)</span>, tiếp tuyến có hệ số góc bằng <span class=\"math inline\">\\(1\\)</span>?</p>"
+    },
+    {
+      "number": 66,
+      "content": "<p><strong>66.</strong> <em>[Cần công cụ vẽ đồ thị.]</em> Khảo sát họ hàm <span class=\"math inline\">\\(f_n(x)=\\tanh(n\\sin x)\\)</span>, trong đó <span class=\"math inline\">\\(n\\)</span> là số nguyên dương. Mô tả đồ thị của <span class=\"math inline\">\\(f_n\\)</span> khi <span class=\"math inline\">\\(n\\)</span> trở nên lớn.</p>"
+    },
+    {
+      "number": 67,
+      "content": "<p><strong>67.</strong> Chứng minh rằng nếu <span class=\"math inline\">\\(a\\ne0\\)</span>, <span class=\"math inline\">\\(b\\ne0\\)</span> thì tồn tại các số <span class=\"math inline\">\\(\\alpha,\\beta\\)</span> sao cho <span class=\"math inline\">\\(ae^x+be^{-x}\\)</span> bằng một trong hai biểu thức <span class=\"math display\">\\[\\alpha\\sinh(x+\\beta)\\qquad\\text{hoặc}\\qquad\\alpha\\cosh(x+\\beta).\\]</span> Nói cách khác, hầu hết các hàm dạng <span class=\"math inline\">\\(f(x)=ae^x+be^{-x}\\)</span> là các hàm sin hyperbolic hoặc cosin hyperbolic được tịnh tiến và co giãn.</p>"
+    }
+  ]
+}

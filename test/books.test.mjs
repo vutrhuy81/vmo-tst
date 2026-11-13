@@ -534,3 +534,28 @@ for(const image of doc310.window.document.querySelectorAll('img')){
 }
 doc310.window.close();
 assert.deepEqual((await readBooks(db,student,{bookId:book.id,sectionId:child310.id})).exercises.map(e=>e.contentKey),section310.exercises.map(e=>e.contentKey));
+
+// Hyperbolic functions use the same persisted exercises and actions as section 1.1.
+const child311=detail.sections.find(s=>s.title.startsWith('3.11.'));
+const section311=await readBooks(db,student,{bookId:book.id,sectionId:child311.id});
+assert.equal(section311.exerciseHeading,'3.11. Bài tập');
+assert.deepEqual(section311.exercises.map(e=>e.questionNumber),Array.from({length:67},(_,i)=>i+1));
+assert.ok(section311.exercises.every(e=>e.allowSubmission&&e.allowAiEvaluation&&e.contentKey&&e.setKey));
+for(const n of [1,6])assert.ok(section311.exercises[n-1].content.includes('Tìm giá trị số'));
+for(const n of [35,53])assert.ok(section311.exercises[n-1].content.includes('Tìm đạo hàm'));
+for(const n of [30,31,32])assert.ok(section311.exercises[n-1].content.includes('\\tag{'));
+for(const n of [28,33,34])assert.ok(section311.exercises[n-1].content.includes('Đạo hàm của các hàm'));
+assert.ok(section311.exercises[60].content.includes('Dữ kiện tham chiếu — Bài tập 60'));
+assert.ok(section311.exercises[58].content.includes('/ex59.png'));
+assert.ok(section311.exercises[4].content.includes('\\operatorname{sech}'));
+assert.equal(/\\(?:sech|csch)\b/.test(section311.section.content),false);
+const doc311=new JSDOM(section311.section.content);
+assert.equal(doc311.window.document.querySelectorAll('img').length,12);
+assert.equal(section311.section.sourceInfo.exampleCount,5);
+for(const image of doc311.window.document.querySelectorAll('img')){
+ const asset=new URL(image.src,'https://example.test').searchParams.get('asset');
+ assert.equal((await readBookAsset(student,asset)).bytes[0],137);
+ await assert.rejects(()=>readBookAsset(other,asset),e=>e.status===403);
+}
+doc311.window.close();
+assert.deepEqual((await readBooks(db,student,{bookId:book.id,sectionId:child311.id})).exercises.map(e=>e.contentKey),section311.exercises.map(e=>e.contentKey));

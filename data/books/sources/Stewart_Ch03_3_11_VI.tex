@@ -1,0 +1,311 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage{fontspec}\setmainfont{Latin Modern Roman}\setsansfont{DejaVu Sans}
+\usepackage{amsmath,amssymb,graphicx,geometry,enumitem,needspace,longtable,booktabs,fancyhdr,hyperref}
+\geometry{left=28mm,right=23mm,top=24mm,bottom=24mm}
+\hypersetup{unicode=true,colorlinks=true,linkcolor=black,urlcolor=blue,pdftitle={Giải tích Chương 3 Mục 3.11 Các hàm hyperbolic}}
+\setlength{\parindent}{1.2em}\setlength{\parskip}{4pt}\setlength{\headheight}{16pt}
+\pagestyle{fancy}\fancyhf{}\fancyhead[L]{\small Chương 3. Các quy tắc tính đạo hàm}\fancyhead[R]{\small §3.11}\fancyfoot[C]{\thepage}
+\newcommand{\fig}[3][.68]{\begin{center}\begin{minipage}{\linewidth}\centering\includegraphics[width=#1\linewidth]{assets/#2.png}\\{\small #3}\end{minipage}\end{center}}
+\newcommand{\ex}[1]{\par\medskip\noindent\textbf{Ví dụ #1.}\ }
+\newcommand{\sol}{\par\nopagebreak[4]\noindent\textit{Lời giải.}\ }
+\newcommand{\bt}[1]{\par\smallskip\Needspace{5\baselineskip}\noindent\textbf{#1.}\ }
+\newcommand{\group}[1]{\par\medskip\noindent\textbf{#1}\par\nopagebreak[4]}
+\newcommand{\gint}[1]{\left[\!\left[#1\right]\!\right]}
+\allowdisplaybreaks[2]
+\DeclareMathOperator{\sech}{sech}
+\DeclareMathOperator{\csch}{csch}
+\begin{document}
+\begin{center}{\Large\bfseries 3.11 Các hàm hyperbolic}\end{center}
+\noindent\textit{Stewart–Clegg–Watson, Giải tích: Các hàm siêu việt sớm, ấn bản 9; trang in 261–268.}
+
+\section*{Các hàm hyperbolic và đạo hàm}
+Một số tổ hợp của các hàm mũ $e^x$ và $e^{-x}$ xuất hiện thường xuyên trong toán học và ứng dụng đến mức cần có tên gọi riêng. Về nhiều mặt, chúng tương tự các hàm lượng giác, và quan hệ của chúng với hyperbol cũng giống như quan hệ của các hàm lượng giác với đường tròn. Vì vậy, chúng được gọi chung là \textbf{các hàm hyperbolic}, còn từng hàm được gọi là sin hyperbolic, cosin hyperbolic, v.v.
+
+\group{Định nghĩa các hàm hyperbolic}
+\begin{align*}
+\sinh x&=\frac{e^x-e^{-x}}2,&\csch x&=\frac1{\sinh x},\\
+\cosh x&=\frac{e^x+e^{-x}}2,&\sech x&=\frac1{\cosh x},\\
+\tanh x&=\frac{\sinh x}{\cosh x},&\coth x&=\frac{\cosh x}{\sinh x}.
+\end{align*}
+Có thể phác họa đồ thị sin hyperbolic và cosin hyperbolic bằng phép cộng đồ thị như trong Hình 1 và 2.
+\fig[.39]{fig1}{Hình 1. $y=\sinh x=\tfrac12e^x-\tfrac12e^{-x}$.}
+\fig[.39]{fig2}{Hình 2. $y=\cosh x=\tfrac12e^x+\tfrac12e^{-x}$.}
+Lưu ý rằng $\sinh$ có miền xác định $\mathbb R$ và tập giá trị $\mathbb R$, còn $\cosh$ có miền xác định $\mathbb R$ và tập giá trị $[1,\infty)$. Đồ thị của $\tanh$ được cho ở Hình 3; các tiệm cận ngang là $y=\pm1$ (xem Bài tập 27).
+\fig[.42]{fig3}{Hình 3. $y=\tanh x$.}
+Một số ứng dụng toán học của hàm hyperbolic sẽ được trình bày trong Chương 7. Các ứng dụng trong khoa học và kỹ thuật xuất hiện khi một đại lượng như ánh sáng, vận tốc, điện hay độ phóng xạ bị hấp thụ hoặc suy giảm dần, vì quá trình suy giảm có thể được biểu diễn bằng hàm hyperbolic. Ứng dụng nổi tiếng nhất là dùng cosin hyperbolic để mô tả hình dạng một sợi dây treo. Có thể chứng minh rằng một dây cáp mềm, có trọng lượng (chẳng hạn dây điện trên không), được treo giữa hai điểm cùng độ cao sẽ có dạng đường cong
+\[y=c+a\cosh(x/a),\]
+gọi là \textbf{đường dây xích} (Hình 4). Từ Latinh \textit{catena} có nghĩa là “dây xích”.
+\fig[.42]{fig4}{Hình 4. Đường dây xích $y=c+a\cosh(x/a)$.}
+Một ứng dụng khác của hàm hyperbolic là mô tả sóng biển: vận tốc của sóng nước có bước sóng $L$, truyền trong vùng nước sâu $d$, được mô hình hóa bởi
+\[v=\sqrt{\frac{gL}{2\pi}\tanh\left(\frac{2\pi d}{L}\right)},\]
+trong đó $g$ là gia tốc trọng trường (Hình 5 và Bài tập 57).
+\fig[.44]{fig5}{Hình 5. Mô hình lý tưởng hóa của sóng nước.}
+Các hàm hyperbolic thỏa mãn nhiều đồng nhất thức tương tự các đồng nhất thức lượng giác quen thuộc. Sau đây là một số đồng nhất thức; phần lớn các chứng minh được dành làm bài tập.
+
+\group{Các đồng nhất thức hyperbolic}
+\begin{align*}
+\sinh(-x)&=-\sinh x,&\cosh(-x)&=\cosh x,\\
+\cosh^2x-\sinh^2x&=1,&1-\tanh^2x&=\sech^2x,\\
+\sinh(x+y)&=\sinh x\cosh y+\cosh x\sinh y,\\
+\cosh(x+y)&=\cosh x\cosh y+\sinh x\sinh y.
+\end{align*}
+
+\ex{1} Chứng minh (a) $\cosh^2x-\sinh^2x=1$; (b) $1-\tanh^2x=\sech^2x$.
+\sol (a) Theo định nghĩa,
+\begin{align*}
+\cosh^2x-\sinh^2x
+&=\left(\frac{e^x+e^{-x}}2\right)^2-\left(\frac{e^x-e^{-x}}2\right)^2\\
+&=\frac{e^{2x}+2+e^{-2x}}4-\frac{e^{2x}-2+e^{-2x}}4\\
+&=\frac44=1.
+\end{align*}
+(b) Xuất phát từ đồng nhất thức vừa chứng minh:
+\[\cosh^2x-\sinh^2x=1.\]
+Chia hai vế cho $\cosh^2x$, được
+\[1-\frac{\sinh^2x}{\cosh^2x}=\frac1{\cosh^2x},\]
+hay
+\[1-\tanh^2x=\sech^2x.\]
+\fig[.36]{arch}{Cổng Gateway Arch ở St. Louis được thiết kế bằng hàm cosin hyperbolic (xem Bài tập 56). Ảnh: iStock.com/gnagel.}
+Đồng nhất thức trong Ví dụ 1(a) gợi ra lý do dùng tên gọi “hyperbolic”. Với mọi số thực $t$, điểm $P(\cos t,\sin t)$ nằm trên đường tròn đơn vị $x^2+y^2=1$, vì $\cos^2t+\sin^2t=1$. Thật vậy, có thể hiểu $t$ là số đo radian của góc $POQ$ trong Hình 6. Vì lý do đó, các hàm lượng giác đôi khi được gọi là \textit{các hàm tròn}.
+\fig[.37]{fig6}{Hình 6. Điểm $(\cos t,\sin t)$ trên đường tròn đơn vị.}
+Tương tự, với mọi số thực $t$, điểm $P(\cosh t,\sinh t)$ nằm trên nhánh phải của hyperbol $x^2-y^2=1$, vì $\cosh^2t-\sinh^2t=1$ và $\cosh t\ge1$. Lần này, $t$ không phải số đo một góc. Tuy nhiên, $t$ bằng hai lần diện tích hình quạt hyperbolic tô màu trong Hình 7, tương tự trường hợp lượng giác, khi $t$ bằng hai lần diện tích hình quạt tròn tô màu trong Hình 6.
+\fig[.36]{fig7}{Hình 7. Điểm $(\cosh t,\sinh t)$ trên hyperbol đơn vị.}
+Đạo hàm của các hàm hyperbolic được tính dễ dàng. Chẳng hạn,
+\[\frac d{dx}(\sinh x)=\frac d{dx}\left(\frac{e^x-e^{-x}}2\right)
+=\frac{e^x+e^{-x}}2=\cosh x.\]
+Các công thức đạo hàm được liệt kê trong Bảng 1; những chứng minh còn lại được dành làm bài tập. Chú ý sự tương tự với công thức đạo hàm lượng giác, nhưng dấu khác nhau trong một số trường hợp.
+
+\group{1. Đạo hàm của các hàm hyperbolic}
+\begin{align*}
+\frac d{dx}(\sinh x)&=\cosh x,&\frac d{dx}(\csch x)&=-\csch x\coth x,\\
+\frac d{dx}(\cosh x)&=\sinh x,&\frac d{dx}(\sech x)&=-\sech x\tanh x,\\
+\frac d{dx}(\tanh x)&=\sech^2x,&\frac d{dx}(\coth x)&=-\csch^2x.
+\end{align*}
+Mỗi quy tắc này đều có thể kết hợp với quy tắc hàm hợp, như ví dụ sau.
+
+\ex{2} Nếu $y=\cosh\sqrt{x}$, hãy tìm $dy/dx$.
+\sol Dùng Bảng 1 và quy tắc hàm hợp:
+\[\frac{dy}{dx}=\frac d{dx}(\cosh\sqrt{x})
+=\sinh\sqrt{x}\cdot\frac d{dx}\sqrt{x}=\frac{\sinh\sqrt{x}}{2\sqrt{x}}.\]
+
+\section*{Các hàm hyperbolic ngược và đạo hàm}
+Từ Hình 1 và 3, ta thấy $\sinh$ và $\tanh$ là các hàm một-một, nên có các hàm ngược, ký hiệu $\sinh^{-1}$ và $\tanh^{-1}$. Hình 2 cho thấy $\cosh$ không phải hàm một-một, nhưng nếu hạn chế miền xác định về $[0,\infty)$ thì $y=\cosh x$ là hàm một-một và nhận mọi giá trị trong tập giá trị $[1,\infty)$. Hàm cosin hyperbolic ngược được định nghĩa là hàm ngược của hàm đã hạn chế này.
+\begin{align*}
+y=\sinh^{-1}x&\iff\sinh y=x,\\
+y=\cosh^{-1}x&\iff\cosh y=x\text{ và }y\ge0,\tag{2}\\
+y=\tanh^{-1}x&\iff\tanh y=x.
+\end{align*}
+Các hàm hyperbolic ngược còn lại được định nghĩa tương tự (Bài tập 32).
+
+Dựa vào Hình 1, 2, 3, ta phác họa đồ thị $\sinh^{-1}$, $\cosh^{-1}$ và $\tanh^{-1}$ trong Hình 8, 9, 10.
+\fig[.42]{fig8}{Hình 8. $y=\sinh^{-1}x$. Miền xác định: $\mathbb R$; tập giá trị: $\mathbb R$.}
+\fig[.42]{fig9}{Hình 9. $y=\cosh^{-1}x$. Miền xác định: $[1,\infty)$; tập giá trị: $[0,\infty)$.}
+\fig[.34]{fig10}{Hình 10. $y=\tanh^{-1}x$. Miền xác định: $(-1,1)$; tập giá trị: $\mathbb R$.}
+Vì các hàm hyperbolic được định nghĩa theo hàm mũ, không có gì ngạc nhiên khi các hàm ngược có thể biểu diễn theo logarit. Cụ thể,
+\[\sinh^{-1}x=\ln\left(x+\sqrt{x^2+1}\right),\qquad x\in\mathbb R,\tag{3}\]
+\[\cosh^{-1}x=\ln\left(x+\sqrt{x^2-1}\right),\qquad x\ge1,\tag{4}\]
+\[\tanh^{-1}x=\frac12\ln\left(\frac{1+x}{1-x}\right),\qquad -1<x<1.\tag{5}\]
+Công thức (3) được chứng minh trong Ví dụ 3. Chứng minh (4), (5) là yêu cầu của Bài tập 30, 31.
+
+\ex{3} Chứng minh $\sinh^{-1}x=\ln\left(x+\sqrt{x^2+1}\right)$.
+\sol Đặt $y=\sinh^{-1}x$. Khi đó
+\[x=\sinh y=\frac{e^y-e^{-y}}2,\]
+suy ra $e^y-2x-e^{-y}=0$. Nhân với $e^y$, được
+\[e^{2y}-2xe^y-1=0.\]
+Đây là phương trình bậc hai theo $e^y$:
+\[(e^y)^2-2x(e^y)-1=0.\]
+Dùng công thức nghiệm,
+\[e^y=\frac{2x\pm\sqrt{4x^2+4}}2=x\pm\sqrt{x^2+1}.\]
+Lưu ý $e^y>0$, trong khi $x-\sqrt{x^2+1}<0$ vì $x<\sqrt{x^2+1}$. Do đó không nhận dấu trừ, và
+\[e^y=x+\sqrt{x^2+1}.\]
+Vì vậy,
+\[y=\ln(e^y)=\ln\left(x+\sqrt{x^2+1}\right).\]
+Như vậy,
+\[\sinh^{-1}x=\ln\left(x+\sqrt{x^2+1}\right).\]
+Xem Bài tập 29 để có phương pháp khác.
+
+\Needspace{12\baselineskip}
+\group{6. Đạo hàm của các hàm hyperbolic ngược}
+\begin{align*}
+\frac d{dx}(\sinh^{-1}x)&=\frac1{\sqrt{1+x^2}},&
+\frac d{dx}(\csch^{-1}x)&=-\frac1{|x|\sqrt{x^2+1}},\\
+\frac d{dx}(\cosh^{-1}x)&=\frac1{\sqrt{x^2-1}},&
+\frac d{dx}(\sech^{-1}x)&=-\frac1{x\sqrt{1-x^2}},\\
+\frac d{dx}(\tanh^{-1}x)&=\frac1{1-x^2},&
+\frac d{dx}(\coth^{-1}x)&=\frac1{1-x^2}.
+\end{align*}
+Chú ý: công thức đạo hàm của $\tanh^{-1}x$ và $\coth^{-1}x$ có vẻ giống nhau, nhưng hai miền xác định không có phần tử chung: $\tanh^{-1}x$ xác định khi $|x|<1$, còn $\coth^{-1}x$ xác định khi $|x|>1$.
+
+Các hàm hyperbolic ngược đều khả vi vì các hàm hyperbolic khả vi (xem Phụ lục F). Có thể chứng minh các công thức trong Bảng 6 bằng phương pháp dành cho hàm ngược, hoặc lấy đạo hàm các công thức (3), (4), (5).
+
+\ex{4} Chứng minh $\displaystyle\frac d{dx}(\sinh^{-1}x)=\frac1{\sqrt{1+x^2}}$.
+\sol\textbf{ Cách 1.} Đặt $y=\sinh^{-1}x$, nên $\sinh y=x$. Lấy đạo hàm ẩn theo $x$:
+\[\cosh y\frac{dy}{dx}=1.\]
+Vì $\cosh^2y-\sinh^2y=1$ và $\cosh y\ge0$, ta có $\cosh y=\sqrt{1+\sinh^2y}$. Vì thế,
+\[\frac{dy}{dx}=\frac1{\cosh y}=\frac1{\sqrt{1+\sinh^2y}}=\frac1{\sqrt{1+x^2}}.\]
+\noindent\textit{Lời giải — Cách 2.} Theo (3), đã chứng minh trong Ví dụ 3,
+\begin{align*}
+\frac d{dx}(\sinh^{-1}x)&=\frac d{dx}\ln\left(x+\sqrt{x^2+1}\right)\\
+&=\frac1{x+\sqrt{x^2+1}}\frac d{dx}\left(x+\sqrt{x^2+1}\right)\\
+&=\frac1{x+\sqrt{x^2+1}}\left(1+\frac{x}{\sqrt{x^2+1}}\right)\\
+&=\frac{\sqrt{x^2+1}+x}{(x+\sqrt{x^2+1})\sqrt{x^2+1}}\\
+&=\frac1{\sqrt{x^2+1}}.
+\end{align*}
+
+\ex{5} Tìm $\displaystyle\frac d{dx}\bigl[\tanh^{-1}(\sin x)\bigr]$.
+\sol Dùng Bảng 6 và quy tắc hàm hợp,
+\begin{align*}
+\frac d{dx}\bigl[\tanh^{-1}(\sin x)\bigr]
+&=\frac1{1-(\sin x)^2}\frac d{dx}(\sin x)\\
+&=\frac1{1-\sin^2x}\cos x=\frac{\cos x}{\cos^2x}=\sec x.
+\end{align*}
+
+\clearpage
+\section*{3.11. Bài tập}
+\group{1–6} Tìm giá trị số của mỗi biểu thức.
+\bt{1} (a) $\sinh0$; \quad (b) $\cosh0$.
+\bt{2} (a) $\tanh0$; \quad (b) $\tanh1$.
+\bt{3} (a) $\cosh(\ln5)$; \quad (b) $\cosh5$.
+\bt{4} (a) $\sinh4$; \quad (b) $\sinh(\ln4)$.
+\bt{5} (a) $\sech0$; \quad (b) $\cosh^{-1}1$.
+\bt{6} (a) $\sinh1$; \quad (b) $\sinh^{-1}1$.
+\bt{7} Viết $8\sinh x+5\cosh x$ theo $e^x$ và $e^{-x}$.
+\bt{8} Viết $2e^{2x}+3e^{-2x}$ theo $\sinh2x$ và $\cosh2x$.
+\bt{9} Viết $\sinh(\ln x)$ dưới dạng hàm hữu tỉ của $x$.
+\bt{10} Viết $\cosh(4\ln x)$ dưới dạng hàm hữu tỉ của $x$.
+\Needspace{9\baselineskip}
+\group{11–23} Chứng minh đồng nhất thức.
+\bt{11} $\sinh(-x)=-\sinh x$. (Điều này cho thấy $\sinh$ là hàm lẻ.)
+\bt{12} $\cosh(-x)=\cosh x$. (Điều này cho thấy $\cosh$ là hàm chẵn.)
+\bt{13} $\cosh x+\sinh x=e^x$.
+\bt{14} $\cosh x-\sinh x=e^{-x}$.
+\bt{15} $\sinh(x+y)=\sinh x\cosh y+\cosh x\sinh y$.
+\bt{16} $\cosh(x+y)=\cosh x\cosh y+\sinh x\sinh y$.
+\bt{17} $\coth^2x-1=\csch^2x$.
+\bt{18} $\displaystyle\tanh(x+y)=\frac{\tanh x+\tanh y}{1+\tanh x\tanh y}$.
+\bt{19} $\sinh2x=2\sinh x\cosh x$.
+\bt{20} $\cosh2x=\cosh^2x+\sinh^2x$.
+\bt{21} $\displaystyle\tanh(\ln x)=\frac{x^2-1}{x^2+1}$.
+\bt{22} $\displaystyle\frac{1+\tanh x}{1-\tanh x}=e^{2x}$.
+\bt{23} $(\cosh x+\sinh x)^n=\cosh nx+\sinh nx$, với $n$ là số thực bất kỳ.
+\bt{24} Nếu $\tanh x=12/13$, tìm giá trị của các hàm hyperbolic còn lại tại $x$.
+\bt{25} Nếu $\cosh x=5/3$ và $x>0$, tìm giá trị của các hàm hyperbolic còn lại tại $x$.
+\bt{26} (a) Dùng đồ thị của $\sinh$, $\cosh$, $\tanh$ trong Hình 1–3 để vẽ đồ thị của $\csch$, $\sech$, $\coth$.
+
+(b) \textit{[Cần công cụ vẽ đồ thị.]} Kiểm tra các đồ thị đã phác họa ở câu (a) bằng máy tính đồ thị hoặc máy tính.
+
+\bt{27} Dùng định nghĩa các hàm hyperbolic để tìm các giới hạn sau.
+\begin{align*}
+\text{(a)}\quad&\lim_{x\to\infty}\tanh x,&\text{(b)}\quad&\lim_{x\to-\infty}\tanh x,\\
+\text{(c)}\quad&\lim_{x\to\infty}\sinh x,&\text{(d)}\quad&\lim_{x\to-\infty}\sinh x,\\
+\text{(e)}\quad&\lim_{x\to\infty}\sech x,&\text{(f)}\quad&\lim_{x\to\infty}\coth x,\\
+\text{(g)}\quad&\lim_{x\to0^+}\coth x,&\text{(h)}\quad&\lim_{x\to0^-}\coth x,\\
+\text{(i)}\quad&\lim_{x\to-\infty}\csch x,&\text{(j)}\quad&\lim_{x\to\infty}\frac{\sinh x}{e^x}.
+\end{align*}
+\bt{28} Chứng minh các công thức trong Bảng 1 về đạo hàm của: (a) $\cosh$; (b) $\tanh$; (c) $\csch$; (d) $\sech$; (e) $\coth$.
+\bt{29} Cho một lời giải khác của Ví dụ 3 bằng cách đặt $y=\sinh^{-1}x$, rồi dùng Bài tập 13 và Ví dụ 1(a), với $x$ được thay bằng $y$.
+\bt{30} Chứng minh công thức (4).
+\bt{31} Chứng minh công thức (5) bằng (a) phương pháp của Ví dụ 3; (b) Bài tập 22, với $x$ được thay bằng $y$.
+\bt{32} Với mỗi hàm sau: (i) cho định nghĩa tương tự (2); (ii) phác họa đồ thị; (iii) tìm công thức tương tự (3).
+
+(a) $\csch^{-1}$; \quad (b) $\sech^{-1}$; \quad (c) $\coth^{-1}$.
+\bt{33} Chứng minh công thức trong Bảng 6 về đạo hàm của: (a) $\cosh^{-1}$; (b) $\tanh^{-1}$; (c) $\coth^{-1}$.
+\bt{34} Chứng minh công thức trong Bảng 6 về đạo hàm của: (a) $\sech^{-1}$; (b) $\csch^{-1}$.
+
+\Needspace{9\baselineskip}
+\group{35–53} Tìm đạo hàm. Rút gọn nếu có thể.
+\bt{35} $f(x)=\cosh3x$.
+\bt{36} $f(x)=e^x\cosh x$.
+\bt{37} $h(x)=\sinh(x^2)$.
+\bt{38} $g(x)=\sinh^2x$.
+\bt{39} $G(t)=\sinh(\ln t)$.
+\bt{40} $F(t)=\ln(\sinh t)$.
+\bt{41} $f(x)=\tanh\sqrt{x}$.
+\bt{42} $H(v)=e^{\tanh2v}$.
+\bt{43} $y=\sech x\tanh x$.
+\bt{44} $y=\sech(\tanh x)$.
+\bt{45} $g(t)=t\coth\sqrt{t^2+1}$.
+\bt{46} $\displaystyle f(t)=\frac{1+\sinh t}{1-\sinh t}$.
+\bt{47} $f(x)=\sinh^{-1}(-2x)$.
+\bt{48} $g(x)=\tanh^{-1}(x^3)$.
+\bt{49} $y=\cosh^{-1}(\sec\theta)$, \quad $0\le\theta<\pi/2$.
+\bt{50} $y=\sech^{-1}(\sin\theta)$, \quad $0<\theta<\pi/2$.
+\bt{51} $G(u)=\cosh^{-1}\sqrt{1+u^2}$, \quad $u>0$.
+\bt{52} $y=x\tanh^{-1}x+\ln\sqrt{1-x^2}$.
+\bt{53} $y=x\sinh^{-1}(x/3)-\sqrt{9+x^2}$.
+\bt{54} Chứng minh $\displaystyle\frac d{dx}\sqrt[4]{\frac{1+\tanh x}{1-\tanh x}}=\frac12e^{x/2}$.
+\bt{55} Chứng minh $\displaystyle\frac d{dx}\arctan(\tanh x)=\sech2x$.
+
+\bt{56} \textbf{Cổng Gateway Arch.} Cổng Gateway Arch ở St. Louis do Eero Saarinen thiết kế; đường cong trung tâm của cổng được xây dựng theo phương trình
+\[y=211.49-20.96\cosh(0.03291765x),\]
+trong đó $x,y$ tính bằng mét và $|x|\le91.20$.
+
+(a) \textit{[Cần công cụ vẽ đồ thị.]} Vẽ đường cong trung tâm.
+
+(b) Chiều cao của cổng tại tâm là bao nhiêu?
+
+(c) Tại những điểm nào chiều cao bằng $100\,\mathrm{m}$?
+
+(d) Hệ số góc của cổng tại các điểm ở câu (c) bằng bao nhiêu?
+
+\bt{57} Nếu sóng nước có bước sóng $L$ truyền với vận tốc $v$ trong vùng nước sâu $d$, thì
+\[v=\sqrt{\frac{gL}{2\pi}\tanh\left(\frac{2\pi d}{L}\right)},\]
+trong đó $g$ là gia tốc trọng trường (Hình 5). Giải thích vì sao phép xấp xỉ
+\[v\approx\sqrt{\frac{gL}{2\pi}}\]
+phù hợp với vùng nước sâu.
+
+\bt{58} \textit{[Cần công cụ vẽ đồ thị.]} Một dây cáp mềm luôn treo theo dạng đường dây xích $y=c+a\cosh(x/a)$, với $c,a$ là hằng số và $a>0$ (Hình 4 và Bài tập 60). Vẽ một số đồ thị trong họ hàm $y=a\cosh(x/a)$. Đồ thị thay đổi thế nào khi $a$ thay đổi?
+
+\noindent\begin{minipage}{\linewidth}
+\bt{59} Một đường dây điện thoại treo giữa hai cột cách nhau $14\,\mathrm{m}$ có dạng đường dây xích $y=20\cosh(x/20)-15$, với $x,y$ tính bằng mét.
+
+(a) Tìm hệ số góc của đường cong tại điểm gặp cột bên phải.
+
+(b) Tìm góc $\theta$ giữa dây và cột.
+\fig[.44]{ex59}{Hình cho Bài tập 59.}
+\end{minipage}
+
+\bt{60} Từ các nguyên lý vật lý, có thể chứng minh rằng dây cáp treo giữa hai cột có dạng đường cong $y=f(x)$ thỏa mãn phương trình vi phân
+\[\frac{d^2y}{dx^2}=\frac{\rho g}{T}\sqrt{1+\left(\frac{dy}{dx}\right)^2},\]
+trong đó $\rho$ là khối lượng trên một đơn vị chiều dài của cáp, $g$ là gia tốc trọng trường, $T$ là lực căng cáp tại điểm thấp nhất, và hệ tọa độ được chọn thích hợp. Kiểm tra rằng
+\[y=f(x)=\frac{T}{\rho g}\cosh\left(\frac{\rho gx}{T}\right)\]
+là một nghiệm của phương trình vi phân này.
+
+\bt{61} Một dây cáp có khối lượng trên một đơn vị chiều dài $\rho=2\,\mathrm{kg/m}$ được căng giữa đỉnh hai cột cách nhau $200\,\mathrm{m}$.
+
+(a) Dùng Bài tập 60 để tìm lực căng $T$ sao cho điểm thấp nhất của dây cách mặt đất $60\,\mathrm{m}$. Các cột cao bao nhiêu?
+
+(b) Nếu lực căng tăng gấp đôi, điểm thấp nhất mới của dây ở độ cao nào? Khi đó các cột cao bao nhiêu?
+
+\bt{62} Mô hình vận tốc của một vật rơi sau thời gian $t$ là
+\[v(t)=\sqrt{\frac{mg}{k}}\tanh\left(t\sqrt{\frac{gk}{m}}\right),\]
+trong đó $m$ là khối lượng vật, $g=9.8\,\mathrm{m/s^2}$ là gia tốc trọng trường, $k$ là hằng số, $t$ tính bằng giây và $v$ tính bằng $\mathrm{m/s}$.
+
+(a) Tính vận tốc giới hạn của vật, tức là $\displaystyle\lim_{t\to\infty}v(t)$.
+
+(b) Nếu một người nhảy dù từ máy bay, giá trị $k$ phụ thuộc tư thế. Với tư thế nằm sấp hướng bụng xuống đất, $k=0.515\,\mathrm{kg/s}$; với tư thế chân xuống trước, $k=0.067\,\mathrm{kg/s}$. Nếu một người nặng $60\,\mathrm{kg}$ rơi ở tư thế nằm sấp, vận tốc giới hạn bằng bao nhiêu? Nếu chân xuống trước thì sao?
+
+\noindent\textit{Nguồn:} L. Long và cộng sự, “How Terminal Is Terminal Velocity?”, \textit{American Mathematical Monthly} 113 (2006): 752–755.
+
+\bt{63} (a) Chứng minh mọi hàm dạng $y=A\sinh mx+B\cosh mx$ đều thỏa mãn phương trình vi phân $y''=m^2y$.
+
+(b) Tìm $y=y(x)$ sao cho $y''=9y$, $y(0)=-4$ và $y'(0)=6$.
+
+\bt{64} Nếu $x=\ln(\sec\theta+\tan\theta)$, chứng minh $\sec\theta=\cosh x$.
+\bt{65} Tại điểm nào của đường cong $y=\cosh x$, tiếp tuyến có hệ số góc bằng $1$?
+\bt{66} \textit{[Cần công cụ vẽ đồ thị.]} Khảo sát họ hàm $f_n(x)=\tanh(n\sin x)$, trong đó $n$ là số nguyên dương. Mô tả đồ thị của $f_n$ khi $n$ trở nên lớn.
+\bt{67} Chứng minh rằng nếu $a\ne0$, $b\ne0$ thì tồn tại các số $\alpha,\beta$ sao cho $ae^x+be^{-x}$ bằng một trong hai biểu thức
+\[\alpha\sinh(x+\beta)\qquad\text{hoặc}\qquad\alpha\cosh(x+\beta).\]
+Nói cách khác, hầu hết các hàm dạng $f(x)=ae^x+be^{-x}$ là các hàm sin hyperbolic hoặc cosin hyperbolic được tịnh tiến và co giãn.
+
+\clearpage
+\section*{Ghi chú biên tập}
+Phần này tách biệt với bản dịch. Ký hiệu $\sinh^{-1}$, $\cosh^{-1}$, v.v. chỉ \textit{hàm ngược}, không phải nghịch đảo của giá trị hàm; chẳng hạn $1/\sinh x=\csch x$.
+
+Các công thức đạo hàm trong Bảng 6 áp dụng tại các điểm trong miền mà đạo hàm hữu hạn: $\sinh^{-1}$ trên $\mathbb R$; $\cosh^{-1}$ khi $x>1$; $\tanh^{-1}$ khi $|x|<1$; $\csch^{-1}$ khi $x\ne0$; $\sech^{-1}$ khi $0<x<1$; $\coth^{-1}$ khi $|x|>1$. Tại $x=1$, $\cosh^{-1}$ và $\sech^{-1}$ xác định nhưng không có đạo hàm hữu hạn. Vì thế, phát biểu khả vi trong phần văn bản cần được hiểu với các điều kiện này.
+
+Diễn giải tham số $t$ bằng hai lần diện tích hình quạt tương ứng với hình vẽ cho $t\ge0$; nếu $t<0$, cần dùng diện tích có hướng. Trong Ví dụ 2, công thức đạo hàm được viết cho $x>0$; tại đầu mút $x=0$, đạo hàm phải có giới hạn $1/2$.
+
+Bài tập 61 sử dụng hệ tọa độ được chọn trong Bài tập 60, với công thức không có hằng số tịnh tiến theo phương đứng. Khi thay đổi lực căng, chiều cao các cột cũng thay đổi theo yêu cầu của đề.
+
+Bài tập 62(b): đơn vị $\mathrm{kg/s}$ của $k$ được giữ theo bản in. Phân tích thứ nguyên của mô hình đã cho đòi hỏi đơn vị $\mathrm{kg/m}$; đây là điểm không nhất quán về đơn vị trong nguyên bản. Các giá trị số vẫn được giữ nguyên.
+\end{document}

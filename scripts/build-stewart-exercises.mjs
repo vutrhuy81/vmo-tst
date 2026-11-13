@@ -1,11 +1,11 @@
 // Offline conversion of reviewed Stewart HTML. Never parse arbitrary requests here.
 import fs from 'node:fs';
 import {JSDOM} from 'jsdom';
-const section=process.argv[2]||'1-1';if(!['1-1','1-2','1-3','1-4','1-5','1-review','1-principles','2-1','2-2','2-3','2-4','2-5','2-6','2-7','2-8','2-review','2-plus','3-2','3-3','3-4','3-5','3-6','3-7','3-8','3-9','3-10'].includes(section))throw Error('Unknown section');
-const headingText=section==='2-plus'?'Bài toán':['1-review','1-principles','2-review'].includes(section)?'Bài tập':section.replace('-','.')+'. Bài tập',count={'1-1':88,'1-2':37,'1-3':71,'1-4':35,'1-5':83,'1-review':38,'1-principles':22,'2-1':9,'2-2':51,'2-3':68,'2-4':44,'2-5':76,'2-6':81,'2-7':60,'2-8':68,'2-review':56,'2-plus':14,'3-2':66,'3-3':68,'3-4':102,'3-5':67,'3-6':88,'3-7':43,'3-8':22,'3-9':53,'3-10':52}[section];
+const section=process.argv[2]||'1-1';if(!['1-1','1-2','1-3','1-4','1-5','1-review','1-principles','2-1','2-2','2-3','2-4','2-5','2-6','2-7','2-8','2-review','2-plus','3-2','3-3','3-4','3-5','3-6','3-7','3-8','3-9','3-10','3-11'].includes(section))throw Error('Unknown section');
+const headingText=section==='2-plus'?'Bài toán':['1-review','1-principles','2-review'].includes(section)?'Bài tập':section.replace('-','.')+'. Bài tập',count={'1-1':88,'1-2':37,'1-3':71,'1-4':35,'1-5':83,'1-review':38,'1-principles':22,'2-1':9,'2-2':51,'2-3':68,'2-4':44,'2-5':76,'2-6':81,'2-7':60,'2-8':68,'2-review':56,'2-plus':14,'3-2':66,'3-3':68,'3-4':102,'3-5':67,'3-6':88,'3-7':43,'3-8':22,'3-9':53,'3-10':52,'3-11':67}[section];
 const source=JSON.parse(fs.readFileSync(`data/books/imports/stewart-${section}.json`,'utf8'));
 const dom=new JSDOM(source.content),doc=dom.window.document;
-if(['2-review','3-2','3-3','3-4','3-5','3-6','3-7','3-8','3-9','3-10'].includes(section))for(const wrapper of doc.querySelectorAll(['3-4','3-5','3-7','3-8','3-9','3-10'].includes(section)?'div.samepage, div.minipage':'div.samepage'))wrapper.replaceWith(...wrapper.childNodes);
+if(['2-review','3-2','3-3','3-4','3-5','3-6','3-7','3-8','3-9','3-10','3-11'].includes(section))for(const wrapper of doc.querySelectorAll(['3-4','3-5','3-7','3-8','3-9','3-10','3-11'].includes(section)?'div.samepage, div.minipage':'div.samepage'))wrapper.replaceWith(...wrapper.childNodes);
 const heading=[...doc.querySelectorAll('h1,h2,h3,h4,h5,h6')].find(x=>x.textContent===headingText);
 const nodes=[];for(let x=heading.nextSibling;x&&!/^H[1-6]$/.test(x.nodeName);x=x.nextSibling)nodes.push(x);
 const anchors=nodes.flatMap((x,i)=>{const label=x.nodeName==='P'?x.querySelector(':scope > strong')?.textContent:'';const m=/^(\d+)(?:[–−-](\d+))?\./.exec(label||'');return m?[{i,a:+m[1],b:+(m[2]||m[1]),node:x}]:[];});
@@ -80,6 +80,24 @@ for(const [j,entry]of anchors.entries()){
    content+=doc.querySelector('img[src$="/fig2.png"]').parentElement.parentElement.outerHTML;
   }
   if(section==='3-10'&&a>=23&&a<=26)content+=doc.querySelector('img[src$="/fig5.png"]').parentElement.parentElement.outerHTML;
+  if(section==='3-11'){
+   const image=name=>{const img=doc.querySelector(`img[src$="/${name}.png"]`);if(!img)throw Error('Missing image '+name);return img.parentElement.parentElement.outerHTML;};
+   const tagged=n=>{const p=[...doc.querySelectorAll('p')].find(p=>p.textContent.includes('\\tag{'+n+'}'));if(!p)throw Error('Missing formula '+n);return p.outerHTML;};
+   const table=n=>{const label=[...doc.querySelectorAll('p')].find(p=>p.querySelector(':scope > strong')?.textContent.startsWith(n+'. Đạo hàm'));if(!label)throw Error('Missing derivative table '+n);return label.outerHTML+label.nextElementSibling.outerHTML;};
+   const example=n=>{const p=[...doc.querySelectorAll('p')].find(p=>p.querySelector(':scope > strong')?.textContent==='Ví dụ '+n+'.');if(!p)throw Error('Missing example '+n);return p.outerHTML;};
+   const prior=n=>{const e=exercises.find(e=>e.number===n);if(!e)throw Error('Missing exercise '+n);return '<p><strong>Dữ kiện tham chiếu — Bài tập '+n+'.</strong></p>'+e.content;};
+   if(a===26)for(const name of ['fig1','fig2','fig3'])content+=image(name);
+   if(a===28)content+=table(1);
+   if(a===29)content+=example(3)+example(1)+prior(13);
+   if(a===30)content+=tagged(4);
+   if(a===31)content+=tagged(5)+example(3)+prior(22);
+   if(a===32)content+=tagged(2)+tagged(3);
+   if(a===33||a===34)content+=table(6);
+   if(a===56)content+=image('arch');
+   if(a===57)content+=image('fig5');
+   if(a===58)content+=image('fig4');
+   if(a===61)content+=prior(60);
+  }
   exercises.push({number:a,content});
  }
 }
