@@ -722,4 +722,31 @@ doc44.window.close();
 const rendered44=window.document.createElement('div');await window.renderBookContent(rendered44,section44.section,false);
 assert.equal(rendered44.querySelectorAll('img').length,12,'All section 4.4 figures survive frontend filtering');
 assert.deepEqual((await readBooks(db,student,{bookId:book.id,sectionId:child44.id})).exercises.map(e=>e.contentKey),section44.exercises.map(e=>e.contentKey));
+// Curve-sketching synthesis: shared graph, requirements and referenced exercise.
+const child45=detail.sections.find(s=>s.title.startsWith('4.5'));
+const section45=await readBooks(db,student,{bookId:book.id,sectionId:child45.id});
+assert.equal(section45.exerciseHeading,'4.5. Bài tập');
+assert.deepEqual(section45.exercises.map(e=>e.questionNumber),Array.from({length:80},(_,i)=>i+1));
+assert.ok(section45.exercises.every(e=>e.allowSubmission&&e.allowAiEvaluation&&e.contentKey&&e.setKey));
+for(const n of [1,54])assert.ok(section45.exercises[n-1].content.includes('Dùng các hướng dẫn'));
+for(const n of [55,56,57,58]){
+ assert.ok(section45.exercises[n-1].content.includes('/ex55_58.png'));
+ for(const text of ['Miền xác định','Các số tới hạn',"g'(6)",'Mọi tiệm cận'])assert.ok(section45.exercises[n-1].content.includes(text));
+}
+for(const n of [63,64])assert.ok(section45.exercises[n-1].content.includes('/ex'+n+'.png'));
+for(const n of [65,68])assert.ok(section45.exercises[n-1].content.includes('Không vẽ đường cong'));
+for(const n of [69,74])assert.ok(section45.exercises[n-1].content.includes('Ở bước D'));
+assert.ok(section45.exercises[78].content.includes('Nội dung tham chiếu — Bài tập 78'));
+assert.equal(section45.section.sourceInfo.exampleCount,6);
+const doc45=new JSDOM(section45.section.content);
+assert.equal(doc45.window.document.querySelectorAll('img').length,16);
+for(const image of doc45.window.document.querySelectorAll('img')){
+ const asset=new URL(image.src,'https://example.test').searchParams.get('asset');
+ assert.equal((await readBookAsset(student,asset)).bytes[0],137);
+ await assert.rejects(()=>readBookAsset(other,asset),e=>e.status===403);
+}
+doc45.window.close();
+const rendered45=window.document.createElement('div');await window.renderBookContent(rendered45,section45.section,false);
+assert.equal(rendered45.querySelectorAll('img').length,16,'All section 4.5 figures survive frontend filtering');
+assert.deepEqual((await readBooks(db,student,{bookId:book.id,sectionId:child45.id})).exercises.map(e=>e.contentKey),section45.exercises.map(e=>e.contentKey));
 window.close();console.log('Books: seeded TOC, admin CRUD/CAS, scopes, subtree delete/restore, lazy bodies and UI actions OK');
