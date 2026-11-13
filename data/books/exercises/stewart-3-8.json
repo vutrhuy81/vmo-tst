@@ -1,0 +1,96 @@
+{
+  "bookKey": "stewart-9",
+  "sectionKey": "3-8",
+  "heading": "3.8. Bài tập",
+  "sourceSha256": "b93a5d2c515d3f8040de34921e6ed5b6725c9526512069bbbd576e9ae33a0c63",
+  "exercises": [
+    {
+      "number": 1,
+      "content": "<p><strong>1.</strong> Quần thể nấm men <em>Saccharomyces cerevisiae</em>, dùng trong lên men, phát triển với tốc độ tăng trưởng tương đối không đổi <span class=\"math inline\">\\(0.4159\\)</span> mỗi giờ. Ban đầu có <span class=\"math inline\">\\(3.8\\)</span> triệu tế bào. Tìm kích thước quần thể sau <span class=\"math inline\">\\(2\\)</span> giờ.</p>"
+    },
+    {
+      "number": 2,
+      "content": "<p><strong>2.</strong> Vi khuẩn <em>Escherichia coli</em> thường sống trong ruột người, được đặt theo tên bác sĩ nhi khoa Đức Theodor Escherich, người nhận diện nó năm <span class=\"math inline\">\\(1885\\)</span>. Trong môi trường nước dùng dinh dưỡng, mỗi tế bào phân đôi sau <span class=\"math inline\">\\(20\\)</span> phút. Quần thể nuôi cấy ban đầu có <span class=\"math inline\">\\(50\\)</span> tế bào.</p>\n<p>(a) Tìm tốc độ tăng trưởng tương đối.</p>\n<p>(b) Tìm biểu thức số tế bào sau <span class=\"math inline\">\\(t\\)</span> giờ.</p>\n<p>(c) Tìm số tế bào sau <span class=\"math inline\">\\(6\\)</span> giờ.</p>\n<p>(d) Tìm tốc độ tăng trưởng sau <span class=\"math inline\">\\(6\\)</span> giờ.</p>\n<p>(e) Khi nào quần thể đạt một triệu tế bào?</p>"
+    },
+    {
+      "number": 3,
+      "content": "<p><strong>3.</strong> Môi trường nuôi cấy vi khuẩn <em>Salmonella enteritidis</em> ban đầu chứa <span class=\"math inline\">\\(50\\)</span> tế bào. Khi đưa vào nước dùng dinh dưỡng, quần thể tăng với tốc độ tỉ lệ kích thước. Sau <span class=\"math inline\">\\(1.5\\)</span> giờ, số tế bào tăng lên <span class=\"math inline\">\\(975\\)</span>.</p>\n<p>(a) Tìm biểu thức số vi khuẩn sau <span class=\"math inline\">\\(t\\)</span> giờ.</p>\n<p>(b) Tìm số vi khuẩn sau <span class=\"math inline\">\\(3\\)</span> giờ.</p>\n<p>(c) Tìm tốc độ tăng trưởng sau <span class=\"math inline\">\\(3\\)</span> giờ.</p>\n<p>(d) Sau bao nhiêu giờ quần thể đạt <span class=\"math inline\">\\(250\\,000\\)</span>?</p>"
+    },
+    {
+      "number": 4,
+      "content": "<p><strong>4.</strong> Một quần thể vi khuẩn tăng với tốc độ tăng trưởng tương đối không đổi. Có <span class=\"math inline\">\\(400\\)</span> vi khuẩn sau <span class=\"math inline\">\\(2\\)</span> giờ và <span class=\"math inline\">\\(25\\,600\\)</span> sau <span class=\"math inline\">\\(6\\)</span> giờ.</p>\n<p>(a) Tốc độ tăng trưởng tương đối là bao nhiêu? Biểu diễn bằng phần trăm.</p>\n<p>(b) Quần thể ban đầu có bao nhiêu vi khuẩn?</p>\n<p>(c) Tìm biểu thức số vi khuẩn sau <span class=\"math inline\">\\(t\\)</span> giờ.</p>\n<p>(d) Tìm số vi khuẩn sau <span class=\"math inline\">\\(4.5\\)</span> giờ.</p>\n<p>(e) Tìm tốc độ tăng trưởng sau <span class=\"math inline\">\\(4.5\\)</span> giờ.</p>\n<p>(f) Khi nào quần thể đạt <span class=\"math inline\">\\(50\\,000\\)</span>?</p>"
+    },
+    {
+      "number": 5,
+      "content": "<p><strong>5.</strong> Bảng sau cho dân số thế giới ước tính, bằng triệu người, từ <span class=\"math inline\">\\(1750\\)</span> đến <span class=\"math inline\">\\(2000\\)</span>.</p>\n<div class=\"center\">\n<table>\n<thead>\n<tr class=\"header\">\n<th style=\"text-align: right;\">Năm</th>\n<th style=\"text-align: right;\">Dân số (triệu)</th>\n<th style=\"text-align: right;\">Năm</th>\n<th style=\"text-align: right;\">Dân số (triệu)</th>\n</tr>\n</thead>\n<tbody>\n<tr class=\"odd\">\n<td style=\"text-align: right;\">1750</td>\n<td style=\"text-align: right;\">790</td>\n<td style=\"text-align: right;\">1900</td>\n<td style=\"text-align: right;\">1650</td>\n</tr>\n<tr class=\"even\">\n<td style=\"text-align: right;\">1800</td>\n<td style=\"text-align: right;\">980</td>\n<td style=\"text-align: right;\">1950</td>\n<td style=\"text-align: right;\">2560</td>\n</tr>\n<tr class=\"odd\">\n<td style=\"text-align: right;\">1850</td>\n<td style=\"text-align: right;\">1260</td>\n<td style=\"text-align: right;\">2000</td>\n<td style=\"text-align: right;\">6080</td>\n</tr>\n</tbody>\n</table>\n</div>\n<p>(a) Dùng mô hình mũ và dân số năm <span class=\"math inline\">\\(1750,1800\\)</span> để dự báo dân số năm <span class=\"math inline\">\\(1900,1950\\)</span>. So sánh với số liệu thực tế.</p>\n<p>(b) Dùng mô hình mũ và dân số năm <span class=\"math inline\">\\(1850,1900\\)</span> để dự báo dân số năm <span class=\"math inline\">\\(1950\\)</span>. So sánh với thực tế.</p>\n<p>(c) Dùng mô hình mũ và dân số năm <span class=\"math inline\">\\(1900,1950\\)</span> để dự báo dân số năm <span class=\"math inline\">\\(2000\\)</span>. So sánh với thực tế và thử giải thích sai khác.</p>"
+    },
+    {
+      "number": 6,
+      "content": "<p><strong>6.</strong> Bảng sau cho số liệu điều tra dân số Indonesia, bằng triệu người, trong nửa sau thế kỷ XX.</p>\n<div class=\"center\">\n<table>\n<thead>\n<tr class=\"header\">\n<th style=\"text-align: right;\">Năm</th>\n<th style=\"text-align: right;\">Dân số (triệu)</th>\n</tr>\n</thead>\n<tbody>\n<tr class=\"odd\">\n<td style=\"text-align: right;\">1950</td>\n<td style=\"text-align: right;\">83</td>\n</tr>\n<tr class=\"even\">\n<td style=\"text-align: right;\">1960</td>\n<td style=\"text-align: right;\">100</td>\n</tr>\n<tr class=\"odd\">\n<td style=\"text-align: right;\">1970</td>\n<td style=\"text-align: right;\">122</td>\n</tr>\n<tr class=\"even\">\n<td style=\"text-align: right;\">1980</td>\n<td style=\"text-align: right;\">150</td>\n</tr>\n<tr class=\"odd\">\n<td style=\"text-align: right;\">1990</td>\n<td style=\"text-align: right;\">182</td>\n</tr>\n<tr class=\"even\">\n<td style=\"text-align: right;\">2000</td>\n<td style=\"text-align: right;\">214</td>\n</tr>\n</tbody>\n</table>\n</div>\n<p>(a) Giả sử tốc độ tăng dân số tỉ lệ với dân số, dùng số liệu <span class=\"math inline\">\\(1950,1960\\)</span> để dự báo dân số năm <span class=\"math inline\">\\(1980\\)</span>. So sánh với thực tế.</p>\n<p>(b) Dùng số liệu <span class=\"math inline\">\\(1960,1980\\)</span> để dự báo dân số năm <span class=\"math inline\">\\(2000\\)</span>. So sánh với thực tế.</p>\n<p>(c) Dùng số liệu <span class=\"math inline\">\\(1980,2000\\)</span> để dự báo dân số năm <span class=\"math inline\">\\(2010\\)</span> và so sánh với số liệu thực tế <span class=\"math inline\">\\(243\\)</span> triệu người.</p>\n<p>(d) Dùng mô hình (c) để dự báo dân số năm <span class=\"math inline\">\\(2025\\)</span>. Bạn cho rằng dự báo quá cao hay quá thấp? Vì sao?</p>"
+    },
+    {
+      "number": 7,
+      "content": "<p><strong>7.</strong> Thực nghiệm cho thấy phản ứng <span class=\"math display\">\\[\\mathrm N_2\\mathrm O_5\\longrightarrow2\\mathrm N\\mathrm O_2+\\frac12\\mathrm O_2\\]</span> ở <span class=\"math inline\">\\(45\\)</span> °C có tốc độ phản ứng xét theo dinitơ pentoxit tỉ lệ với nồng độ: <span class=\"math display\">\\[-\\frac{d[\\mathrm N_2\\mathrm O_5]}{dt}=0.0005[\\mathrm N_2\\mathrm O_5].\\]</span> (a) Tìm nồng độ <span class=\"math inline\">\\([\\mathrm N_2\\mathrm O_5]\\)</span> sau <span class=\"math inline\">\\(t\\)</span> giây nếu nồng độ ban đầu là <span class=\"math inline\">\\(C\\)</span>.</p>\n<p>(b) Mất bao lâu để nồng độ giảm còn <span class=\"math inline\">\\(90\\%\\)</span> giá trị ban đầu?</p>"
+    },
+    {
+      "number": 8,
+      "content": "<p><strong>8.</strong> Strontium-90 có chu kỳ bán rã <span class=\"math inline\">\\(28\\)</span> ngày.</p>\n<p>(a) Một mẫu có khối lượng ban đầu <span class=\"math inline\">\\(50\\)</span> mg. Tìm công thức khối lượng còn lại sau <span class=\"math inline\">\\(t\\)</span> ngày.</p>\n<p>(b) Tìm khối lượng còn lại sau <span class=\"math inline\">\\(40\\)</span> ngày.</p>\n<p>(c) Mất bao lâu để mẫu giảm còn <span class=\"math inline\">\\(2\\)</span> mg?</p>\n<p>(d) Phác họa đồ thị hàm khối lượng.</p>"
+    },
+    {
+      "number": 9,
+      "content": "<p><strong>9.</strong> Chu kỳ bán rã của cesium-137 là <span class=\"math inline\">\\(30\\)</span> năm. Giả sử có mẫu <span class=\"math inline\">\\(100\\)</span> mg.</p>\n<p>(a) Tìm khối lượng còn lại sau <span class=\"math inline\">\\(t\\)</span> năm.</p>\n<p>(b) Sau <span class=\"math inline\">\\(100\\)</span> năm còn lại bao nhiêu?</p>\n<p>(c) Sau bao lâu chỉ còn <span class=\"math inline\">\\(1\\)</span> mg?</p>"
+    },
+    {
+      "number": 10,
+      "content": "<p><strong>10.</strong> Một mẫu einsteinium-252 giảm còn <span class=\"math inline\">\\(64.3\\%\\)</span> khối lượng ban đầu sau <span class=\"math inline\">\\(300\\)</span> ngày.</p>\n<p>(a) Chu kỳ bán rã của einsteinium-252 là bao nhiêu?</p>\n<p>(b) Mất bao lâu để mẫu giảm còn một phần ba khối lượng ban đầu?</p>"
+    },
+    {
+      "number": 11,
+      "content": "<p><strong>11–13. Định tuổi bằng carbon phóng xạ</strong></p>\n<p>Các nhà khoa học có thể xác định tuổi cổ vật bằng phương pháp carbon phóng xạ. Tia vũ trụ bắn phá tầng khí quyển trên, chuyển nitơ thành đồng vị carbon phóng xạ <span class=\"math inline\">\\(^{14}\\mathrm C\\)</span>, có chu kỳ bán rã khoảng <span class=\"math inline\">\\(5730\\)</span> năm. Thực vật hấp thụ carbon dioxide từ khí quyển; động vật tiếp nhận <span class=\"math inline\">\\(^{14}\\mathrm C\\)</span> qua chuỗi thức ăn. Khi sinh vật chết, nó ngừng bổ sung carbon; lượng <span class=\"math inline\">\\(^{14}\\mathrm C\\)</span> giảm do phân rã phóng xạ. Vì vậy, mức phóng xạ cũng giảm theo hàm mũ.</p><p><strong>11.</strong> Một mảnh giấy da được phát hiện có mức phóng xạ <span class=\"math inline\">\\(^{14}\\mathrm C\\)</span> bằng khoảng <span class=\"math inline\">\\(74\\%\\)</span> mức của vật liệu thực vật trên Trái Đất ngày nay. Ước tính tuổi mảnh giấy da.</p>"
+    },
+    {
+      "number": 12,
+      "content": "<p><strong>11–13. Định tuổi bằng carbon phóng xạ</strong></p>\n<p>Các nhà khoa học có thể xác định tuổi cổ vật bằng phương pháp carbon phóng xạ. Tia vũ trụ bắn phá tầng khí quyển trên, chuyển nitơ thành đồng vị carbon phóng xạ <span class=\"math inline\">\\(^{14}\\mathrm C\\)</span>, có chu kỳ bán rã khoảng <span class=\"math inline\">\\(5730\\)</span> năm. Thực vật hấp thụ carbon dioxide từ khí quyển; động vật tiếp nhận <span class=\"math inline\">\\(^{14}\\mathrm C\\)</span> qua chuỗi thức ăn. Khi sinh vật chết, nó ngừng bổ sung carbon; lượng <span class=\"math inline\">\\(^{14}\\mathrm C\\)</span> giảm do phân rã phóng xạ. Vì vậy, mức phóng xạ cũng giảm theo hàm mũ.</p><p><strong>12.</strong> Hóa thạch khủng long quá cổ để định tuổi đáng tin cậy bằng carbon-14. Giả sử có hóa thạch <span class=\"math inline\">\\(68\\)</span> triệu năm tuổi. Tỉ phần <span class=\"math inline\">\\(^{14}\\mathrm C\\)</span> của khủng long lúc còn sống còn lại ngày nay là bao nhiêu? Nếu ngưỡng khối lượng phát hiện được nhỏ nhất là <span class=\"math inline\">\\(0.1\\%\\)</span>, tuổi lớn nhất của hóa thạch có thể định tuổi bằng <span class=\"math inline\">\\(^{14}\\mathrm C\\)</span> là bao nhiêu?</p>"
+    },
+    {
+      "number": 13,
+      "content": "<p><strong>11–13. Định tuổi bằng carbon phóng xạ</strong></p>\n<p>Các nhà khoa học có thể xác định tuổi cổ vật bằng phương pháp carbon phóng xạ. Tia vũ trụ bắn phá tầng khí quyển trên, chuyển nitơ thành đồng vị carbon phóng xạ <span class=\"math inline\">\\(^{14}\\mathrm C\\)</span>, có chu kỳ bán rã khoảng <span class=\"math inline\">\\(5730\\)</span> năm. Thực vật hấp thụ carbon dioxide từ khí quyển; động vật tiếp nhận <span class=\"math inline\">\\(^{14}\\mathrm C\\)</span> qua chuỗi thức ăn. Khi sinh vật chết, nó ngừng bổ sung carbon; lượng <span class=\"math inline\">\\(^{14}\\mathrm C\\)</span> giảm do phân rã phóng xạ. Vì vậy, mức phóng xạ cũng giảm theo hàm mũ.</p><p><strong>13.</strong> Hóa thạch khủng long thường được định tuổi bằng nguyên tố khác carbon, chẳng hạn potassium-40 có chu kỳ bán rã dài hơn, khoảng <span class=\"math inline\">\\(1.25\\)</span> tỉ năm. Giả sử ngưỡng phát hiện nhỏ nhất là <span class=\"math inline\">\\(0.1\\%\\)</span> và một khủng long được định tuổi bằng <span class=\"math inline\">\\(^{40}\\mathrm K\\)</span> là <span class=\"math inline\">\\(68\\)</span> triệu năm. Việc định tuổi như vậy có khả thi không? Nói cách khác, tuổi lớn nhất có thể định bằng <span class=\"math inline\">\\(^{40}\\mathrm K\\)</span> là bao nhiêu?</p>"
+    },
+    {
+      "number": 14,
+      "content": "<p><strong>14.</strong> Một đường cong đi qua <span class=\"math inline\">\\((0,5)\\)</span> và có hệ số góc tại mọi điểm <span class=\"math inline\">\\(P\\)</span> bằng hai lần tung độ của <span class=\"math inline\">\\(P\\)</span>. Tìm phương trình đường cong.</p>"
+    },
+    {
+      "number": 15,
+      "content": "<p><strong>15.</strong> Một con gà tây quay được lấy khỏi lò ở nhiệt độ <span class=\"math inline\">\\(185\\)</span> °F và đặt trên bàn trong phòng có nhiệt độ <span class=\"math inline\">\\(75\\)</span> °F.</p>\n<p>(a) Nếu sau nửa giờ nhiệt độ là <span class=\"math inline\">\\(150\\)</span> °F, nhiệt độ sau <span class=\"math inline\">\\(45\\)</span> phút là bao nhiêu?</p>\n<p>(b) Khi nào nhiệt độ giảm còn <span class=\"math inline\">\\(100\\)</span> °F?</p>"
+    },
+    {
+      "number": 16,
+      "content": "<p><strong>16.</strong> Trong điều tra án mạng, nhiệt độ thi thể là <span class=\"math inline\">\\(32.5\\)</span> °C lúc <span class=\"math inline\">\\(13\\)</span> giờ <span class=\"math inline\">\\(30\\)</span> và <span class=\"math inline\">\\(30.3\\)</span> °C một giờ sau. Nhiệt độ cơ thể bình thường là <span class=\"math inline\">\\(37.0\\)</span> °C, nhiệt độ môi trường là <span class=\"math inline\">\\(20.0\\)</span> °C. Vụ án xảy ra lúc nào?</p>"
+    },
+    {
+      "number": 17,
+      "content": "<p><strong>17.</strong> Một đồ uống lạnh được lấy khỏi tủ lạnh ở nhiệt độ <span class=\"math inline\">\\(5\\)</span> °C. Sau <span class=\"math inline\">\\(25\\)</span> phút trong phòng <span class=\"math inline\">\\(20\\)</span> °C, nhiệt độ tăng lên <span class=\"math inline\">\\(10\\)</span> °C.</p>\n<p>(a) Nhiệt độ sau <span class=\"math inline\">\\(50\\)</span> phút là bao nhiêu?</p>\n<p>(b) Khi nào nhiệt độ đạt <span class=\"math inline\">\\(15\\)</span> °C?</p>"
+    },
+    {
+      "number": 18,
+      "content": "<p><strong>18.</strong> Một tách cà phê mới pha ở nhiệt độ <span class=\"math inline\">\\(95\\)</span> °C trong phòng <span class=\"math inline\">\\(20\\)</span> °C. Khi nhiệt độ là <span class=\"math inline\">\\(70\\)</span> °C, cà phê đang nguội với tốc độ <span class=\"math inline\">\\(1\\)</span> °C/phút. Điều này xảy ra lúc nào?</p>"
+    },
+    {
+      "number": 19,
+      "content": "<p><strong>19.</strong> Ở nhiệt độ không đổi, tốc độ biến thiên của áp suất khí quyển <span class=\"math inline\">\\(P\\)</span> theo độ cao <span class=\"math inline\">\\(h\\)</span> tỉ lệ với <span class=\"math inline\">\\(P\\)</span>. Tại <span class=\"math inline\">\\(15\\)</span> °C, áp suất ở mực nước biển là <span class=\"math inline\">\\(101.3\\)</span> kPa, và tại <span class=\"math inline\">\\(h=1000\\)</span> m là <span class=\"math inline\">\\(87.14\\)</span> kPa.</p>\n<p>(a) Áp suất ở độ cao <span class=\"math inline\">\\(3000\\)</span> m là bao nhiêu?</p>\n<p>(b) Áp suất trên đỉnh McKinley, cao <span class=\"math inline\">\\(6187\\)</span> m, là bao nhiêu?</p>"
+    },
+    {
+      "number": 20,
+      "content": "<p><strong>20.</strong> (a) Vay <span class=\"math inline\">\\(2500\\)</span> đô la với lãi suất <span class=\"math inline\">\\(4.5\\%\\)</span>. Tìm số tiền phải trả cuối <span class=\"math inline\">\\(3\\)</span> năm nếu ghép lãi: (i) hằng năm; (ii) hằng quý; (iii) hằng tháng; (iv) hằng tuần; (v) hằng ngày; (vi) hằng giờ; (vii) liên tục.</p>\n<p>(b) Giả sử vay <span class=\"math inline\">\\(2500\\)</span> đô la và ghép lãi liên tục. Nếu <span class=\"math inline\">\\(A(t)\\)</span> là số tiền phải trả sau <span class=\"math inline\">\\(t\\)</span> năm, <span class=\"math inline\">\\(0\\le t\\le3\\)</span>, vẽ <span class=\"math inline\">\\(A(t)\\)</span> cho các lãi suất <span class=\"math inline\">\\(5\\%,6\\%,7\\%\\)</span> trên cùng một hệ trục.</p>"
+    },
+    {
+      "number": 21,
+      "content": "<p><strong>21.</strong> (a) Đầu tư <span class=\"math inline\">\\(4000\\)</span> đô la với lãi suất <span class=\"math inline\">\\(1.75\\%\\)</span>. Tìm giá trị cuối <span class=\"math inline\">\\(5\\)</span> năm nếu ghép lãi: (i) hằng năm; (ii) nửa năm; (iii) hằng tháng; (iv) hằng tuần; (v) hằng ngày; (vi) liên tục.</p>\n<p>(b) Với trường hợp ghép lãi liên tục, gọi <span class=\"math inline\">\\(A(t)\\)</span> là giá trị đầu tư tại thời điểm <span class=\"math inline\">\\(t\\)</span>. Viết phương trình vi phân và điều kiện ban đầu mà <span class=\"math inline\">\\(A(t)\\)</span> thỏa mãn.</p>"
+    },
+    {
+      "number": 22,
+      "content": "<p><strong>22.</strong> (a) Mất bao lâu để khoản đầu tư tăng gấp đôi với lãi suất <span class=\"math inline\">\\(3\\%\\)</span>, ghép lãi liên tục?</p>\n<p>(b) Lãi suất hằng năm tương đương là bao nhiêu?</p>"
+    }
+  ]
+}
