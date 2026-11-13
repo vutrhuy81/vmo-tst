@@ -464,3 +464,27 @@ for(const image of doc37.window.document.querySelectorAll('img')){
 }
 doc37.window.close();
 assert.deepEqual((await readBooks(db,student,{bookId:book.id,sectionId:child37.id})).exercises.map(e=>e.contentKey),section37.exercises.map(e=>e.contentKey));
+
+// Exponential growth/decay exercises share section 1.1's action initialization.
+const child38=detail.sections.find(s=>s.title.startsWith('3.8'));
+const section38=await readBooks(db,student,{bookId:book.id,sectionId:child38.id});
+assert.equal(section38.exerciseHeading,'3.8. Bài tập');
+assert.deepEqual(section38.exercises.map(e=>e.questionNumber),Array.from({length:22},(_,i)=>i+1));
+assert.ok(section38.exercises.every(e=>e.allowSubmission&&e.allowAiEvaluation&&e.contentKey&&e.setKey));
+for(const n of [11,12,13]){
+ assert.ok(section38.exercises[n-1].content.includes('5730'));
+ assert.ok(section38.exercises[n-1].content.includes('carbon phóng xạ'));
+}
+for(const n of [5,6])assert.ok(section38.exercises[n-1].content.includes('<table>'));
+assert.ok(section38.section.content.includes('Kiểm soát lượng hồng cầu'));
+assert.ok(section38.section.content.includes('28 ngày'));
+const doc38=new JSDOM(section38.section.content);
+assert.equal(doc38.window.document.querySelectorAll('img').length,4);
+assert.equal(section38.section.sourceInfo.exampleCount,4);
+for(const image of doc38.window.document.querySelectorAll('img')){
+ const asset=new URL(image.src,'https://example.test').searchParams.get('asset');
+ assert.equal((await readBookAsset(student,asset)).bytes[0],137);
+ await assert.rejects(()=>readBookAsset(other,asset),e=>e.status===403);
+}
+doc38.window.close();
+assert.deepEqual((await readBooks(db,student,{bookId:book.id,sectionId:child38.id})).exercises.map(e=>e.contentKey),section38.exercises.map(e=>e.contentKey));
