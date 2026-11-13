@@ -1,8 +1,8 @@
 // Offline conversion of reviewed Stewart HTML. Never parse arbitrary requests here.
 import fs from 'node:fs';
 import {JSDOM} from 'jsdom';
-const section=process.argv[2]||'1-1';if(!['1-1','1-2','1-3','1-4','1-5','1-review','1-principles','2-1','2-2','2-3','2-4','2-5','2-6','2-7','2-8','2-review','2-plus'].includes(section))throw Error('Unknown section');
-const headingText=section==='2-plus'?'Bài toán':['1-review','1-principles','2-review'].includes(section)?'Bài tập':section.replace('-','.')+'. Bài tập',count={'1-1':88,'1-2':37,'1-3':71,'1-4':35,'1-5':83,'1-review':38,'1-principles':22,'2-1':9,'2-2':51,'2-3':68,'2-4':44,'2-5':76,'2-6':81,'2-7':60,'2-8':68,'2-review':56,'2-plus':14}[section];
+const section=process.argv[2]||'1-1';if(!['1-1','1-2','1-3','1-4','1-5','1-review','1-principles','2-1','2-2','2-3','2-4','2-5','2-6','2-7','2-8','2-review','2-plus','3-6'].includes(section))throw Error('Unknown section');
+const headingText=section==='2-plus'?'Bài toán':['1-review','1-principles','2-review'].includes(section)?'Bài tập':section.replace('-','.')+'. Bài tập',count={'1-1':88,'1-2':37,'1-3':71,'1-4':35,'1-5':83,'1-review':38,'1-principles':22,'2-1':9,'2-2':51,'2-3':68,'2-4':44,'2-5':76,'2-6':81,'2-7':60,'2-8':68,'2-review':56,'2-plus':14,'3-6':88}[section];
 const source=JSON.parse(fs.readFileSync(`data/books/imports/stewart-${section}.json`,'utf8'));
 const dom=new JSDOM(source.content),doc=dom.window.document;
 if(section==='2-review')for(const wrapper of doc.querySelectorAll('div.samepage'))wrapper.replaceWith(...wrapper.childNodes);
@@ -63,6 +63,7 @@ for(const [j,entry]of anchors.entries()){
   if(section==='2-8'&&a===60)content+='<p><strong>Hàm phần nguyên.</strong> Giá trị tại x là số nguyên lớn nhất không vượt quá x.</p>';
   if(section==='2-review'&&a===56)content+='<p><strong>Hàm phần nguyên.</strong> Giá trị tại x là số nguyên lớn nhất không vượt quá x.</p>';
   if(section==='2-plus'&&a>=5&&a<=7)content+='<p><strong>Hàm phần nguyên.</strong> Giá trị tại x là số nguyên lớn nhất không vượt quá x.</p>';
+  if(section==='3-6'&&((a>=84&&a<=86)||a===88)){const n=a===88?87:83;const ref=exercises.find(e=>e.number===n);if(!ref)throw Error('Missing referenced exercise '+n);content+=`<aside><p><strong>Nội dung tham chiếu — Bài tập ${n}.</strong></p>${ref.content}</aside>`;}
   exercises.push({number:a,content});
  }
 }

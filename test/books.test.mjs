@@ -324,3 +324,26 @@ const changedPrinciples=await mutateBooks(db,admin,'books_save_section',{id:chil
 assert.equal((await readBooks(db,student,{bookId:book.id,sectionId:childPrinciples.id})).section.content,changedPrinciples.content);assert.equal((await readBooks(db,student,{bookId:book.id,sectionId:childPrinciples.id})).exercises.length,22);
 window.close();console.log('Books: seeded TOC, admin CRUD/CAS, scopes, subtree delete/restore, lazy bodies and UI actions OK');
 
+
+// Section 3.6 uses section 1.1's persisted problem/action initialization.
+const child36=detail.sections.find(s=>s.title.startsWith('3.6'));
+const section36=await readBooks(db,student,{bookId:book.id,sectionId:child36.id});
+assert.equal(section36.exerciseHeading,'3.6. Bài tập');
+assert.deepEqual(section36.exercises.map(e=>e.questionNumber),Array.from({length:88},(_,i)=>i+1));
+assert.ok(section36.exercises.every(e=>e.allowSubmission&&e.allowAiEvaluation&&e.contentKey&&e.setKey));
+for(const n of [2,26])assert.ok(section36.exercises[n-1].content.includes('Tính đạo hàm'));
+for(const n of [45,56])assert.ok(section36.exercises[n-1].content.includes('bằng logarit'));
+for(const n of [63,78])assert.ok(section36.exercises[n-1].content.includes('rút gọn'));
+for(const n of [84,85,86])assert.ok(section36.exercises[n-1].content.includes('Nội dung tham chiếu — Bài tập 83'));
+assert.ok(section36.exercises[87].content.includes('Nội dung tham chiếu — Bài tập 87'));
+assert.ok(section36.exercises[81].content.includes('|x|'));
+const doc36=new JSDOM(section36.section.content);
+assert.equal(doc36.window.document.querySelectorAll('img').length,5);
+assert.equal(section36.section.sourceInfo.exampleCount,10);
+for(const image of doc36.window.document.querySelectorAll('img')){
+ const asset=new URL(image.src,'https://example.test').searchParams.get('asset');
+ assert.equal((await readBookAsset(student,asset)).bytes[0],137);
+ await assert.rejects(()=>readBookAsset(other,asset),e=>e.status===403);
+}
+doc36.window.close();
+assert.deepEqual((await readBooks(db,student,{bookId:book.id,sectionId:child36.id})).exercises.map(e=>e.contentKey),section36.exercises.map(e=>e.contentKey));
