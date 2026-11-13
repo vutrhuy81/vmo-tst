@@ -1,0 +1,272 @@
+{
+  "bookKey": "stewart-9",
+  "sectionKey": "3-2",
+  "heading": "3.2. Bài tập",
+  "sourceSha256": "67883edf19c72b3e987df20b827cd7b09d843ccbe10b512269fbc378ba4f755a",
+  "exercises": [
+    {
+      "number": 1,
+      "content": "<p><strong>1.</strong> Tính đạo hàm của <span class=\"math inline\">\\(f(x)=(1+2x^2)(x-x^2)\\)</span> theo hai cách: dùng quy tắc tích và nhân khai triển trước. Hai kết quả có trùng nhau không?</p>"
+    },
+    {
+      "number": 2,
+      "content": "<p><strong>2.</strong> Tính đạo hàm của hàm <span class=\"math display\">\\[F(x)=\\frac{x^4-5x^3+\\sqrt{x}}{x^2}\\]</span> theo hai cách: dùng quy tắc thương và rút gọn trước. Chứng tỏ hai kết quả tương đương. Bạn thích phương pháp nào hơn?</p>"
+    },
+    {
+      "number": 3,
+      "content": "<p><strong>3–30. Tính đạo hàm.</strong></p><p><strong>3.</strong> <span class=\"math inline\">\\(y=(4x^2+3)(2x+5)\\)</span>.</p>"
+    },
+    {
+      "number": 4,
+      "content": "<p><strong>3–30. Tính đạo hàm.</strong></p><p><strong>4.</strong> <span class=\"math inline\">\\(y=(10x^2+7x-2)(2-x^2)\\)</span>.</p>"
+    },
+    {
+      "number": 5,
+      "content": "<p><strong>3–30. Tính đạo hàm.</strong></p><p><strong>5.</strong> <span class=\"math inline\">\\(y=x^3e^x\\)</span>.</p>"
+    },
+    {
+      "number": 6,
+      "content": "<p><strong>3–30. Tính đạo hàm.</strong></p><p><strong>6.</strong> <span class=\"math inline\">\\(y=(e^x+2)(2e^x-1)\\)</span>.</p>"
+    },
+    {
+      "number": 7,
+      "content": "<p><strong>3–30. Tính đạo hàm.</strong></p><p><strong>7.</strong> <span class=\"math inline\">\\(f(x)=(3x^2-5x)e^x\\)</span>.</p>"
+    },
+    {
+      "number": 8,
+      "content": "<p><strong>3–30. Tính đạo hàm.</strong></p><p><strong>8.</strong> <span class=\"math inline\">\\(g(x)=(x+2\\sqrt{x})e^x\\)</span>.</p>"
+    },
+    {
+      "number": 9,
+      "content": "<p><strong>3–30. Tính đạo hàm.</strong></p><p><strong>9.</strong> <span class=\"math inline\">\\(y=\\dfrac{x}{e^x}\\)</span>.</p>"
+    },
+    {
+      "number": 10,
+      "content": "<p><strong>3–30. Tính đạo hàm.</strong></p><p><strong>10.</strong> <span class=\"math inline\">\\(y=\\dfrac{e^x}{1-e^x}\\)</span>.</p>"
+    },
+    {
+      "number": 11,
+      "content": "<p><strong>3–30. Tính đạo hàm.</strong></p><p><strong>11.</strong> <span class=\"math inline\">\\(g(t)=\\dfrac{3-2t}{5t+1}\\)</span>.</p>"
+    },
+    {
+      "number": 12,
+      "content": "<p><strong>3–30. Tính đạo hàm.</strong></p><p><strong>12.</strong> <span class=\"math inline\">\\(G(u)=\\dfrac{6u^4-5u}{u+1}\\)</span>.</p>"
+    },
+    {
+      "number": 13,
+      "content": "<p><strong>3–30. Tính đạo hàm.</strong></p><p><strong>13.</strong> <span class=\"math inline\">\\(f(t)=\\dfrac{5t}{t^3-t-1}\\)</span>.</p>"
+    },
+    {
+      "number": 14,
+      "content": "<p><strong>3–30. Tính đạo hàm.</strong></p><p><strong>14.</strong> <span class=\"math inline\">\\(F(x)=\\dfrac1{2x^3-6x^2+5}\\)</span>.</p>"
+    },
+    {
+      "number": 15,
+      "content": "<p><strong>3–30. Tính đạo hàm.</strong></p><p><strong>15.</strong> <span class=\"math inline\">\\(y=\\dfrac{s-\\sqrt{s}}{s^2}\\)</span>.</p>"
+    },
+    {
+      "number": 16,
+      "content": "<p><strong>3–30. Tính đạo hàm.</strong></p><p><strong>16.</strong> <span class=\"math inline\">\\(y=\\dfrac{\\sqrt{x}}{\\sqrt{x}+1}\\)</span>.</p>"
+    },
+    {
+      "number": 17,
+      "content": "<p><strong>3–30. Tính đạo hàm.</strong></p><p><strong>17.</strong> <span class=\"math inline\">\\(J(u)=\\left(\\dfrac1u+\\dfrac1{u^2}\\right)\\left(u+\\dfrac1u\\right)\\)</span>.</p>"
+    },
+    {
+      "number": 18,
+      "content": "<p><strong>3–30. Tính đạo hàm.</strong></p><p><strong>18.</strong> <span class=\"math inline\">\\(h(w)=(w^2+3w)(w^{-1}-w^{-4})\\)</span>.</p>"
+    },
+    {
+      "number": 19,
+      "content": "<p><strong>3–30. Tính đạo hàm.</strong></p><p><strong>19.</strong> <span class=\"math inline\">\\(H(u)=(u-\\sqrt{u})(u+\\sqrt{u})\\)</span>.</p>"
+    },
+    {
+      "number": 20,
+      "content": "<p><strong>3–30. Tính đạo hàm.</strong></p><p><strong>20.</strong> <span class=\"math inline\">\\(f(z)=(1-e^z)(z+e^z)\\)</span>.</p>"
+    },
+    {
+      "number": 21,
+      "content": "<p><strong>3–30. Tính đạo hàm.</strong></p><p><strong>21.</strong> <span class=\"math inline\">\\(V(t)=(t+2e^t)\\sqrt{t}\\)</span>.</p>"
+    },
+    {
+      "number": 22,
+      "content": "<p><strong>3–30. Tính đạo hàm.</strong></p><p><strong>22.</strong> <span class=\"math inline\">\\(W(t)=e^t(1+te^t)\\)</span>.</p>"
+    },
+    {
+      "number": 23,
+      "content": "<p><strong>3–30. Tính đạo hàm.</strong></p><p><strong>23.</strong> <span class=\"math inline\">\\(y=e^p(p+p\\sqrt{p})\\)</span>.</p>"
+    },
+    {
+      "number": 24,
+      "content": "<p><strong>3–30. Tính đạo hàm.</strong></p><p><strong>24.</strong> <span class=\"math inline\">\\(h(r)=\\dfrac{ae^r}{b+e^r}\\)</span>.</p>"
+    },
+    {
+      "number": 25,
+      "content": "<p><strong>3–30. Tính đạo hàm.</strong></p><p><strong>25.</strong> <span class=\"math inline\">\\(f(t)=\\dfrac{\\sqrt[3]{t}}{t-3}\\)</span>.</p>"
+    },
+    {
+      "number": 26,
+      "content": "<p><strong>3–30. Tính đạo hàm.</strong></p><p><strong>26.</strong> <span class=\"math inline\">\\(y=(z^2+e^z)\\sqrt{z}\\)</span>.</p>"
+    },
+    {
+      "number": 27,
+      "content": "<p><strong>3–30. Tính đạo hàm.</strong></p><p><strong>27.</strong> <span class=\"math inline\">\\(f(x)=\\dfrac{x^2e^x}{x^2+e^x}\\)</span>.</p>"
+    },
+    {
+      "number": 28,
+      "content": "<p><strong>3–30. Tính đạo hàm.</strong></p><p><strong>28.</strong> <span class=\"math inline\">\\(F(t)=\\dfrac{At}{Bt^2+Ct^3}\\)</span>.</p>"
+    },
+    {
+      "number": 29,
+      "content": "<p><strong>3–30. Tính đạo hàm.</strong></p><p><strong>29.</strong> <span class=\"math inline\">\\(f(x)=\\dfrac{x}{x+\\dfrac cx}\\)</span>.</p>"
+    },
+    {
+      "number": 30,
+      "content": "<p><strong>3–30. Tính đạo hàm.</strong></p><p><strong>30.</strong> <span class=\"math inline\">\\(f(x)=\\dfrac{ax+b}{cx+d}\\)</span>.</p>"
+    },
+    {
+      "number": 31,
+      "content": "<p><strong>31–34. Tìm <span class=\"math inline\">\\(f'(x)\\)</span> và <span class=\"math inline\">\\(f''(x)\\)</span>.</strong></p><p><strong>31.</strong> <span class=\"math inline\">\\(f(x)=x^2e^x\\)</span>.</p>"
+    },
+    {
+      "number": 32,
+      "content": "<p><strong>31–34. Tìm <span class=\"math inline\">\\(f'(x)\\)</span> và <span class=\"math inline\">\\(f''(x)\\)</span>.</strong></p><p><strong>32.</strong> <span class=\"math inline\">\\(f(x)=\\sqrt{x}\\,e^x\\)</span>.</p>"
+    },
+    {
+      "number": 33,
+      "content": "<p><strong>31–34. Tìm <span class=\"math inline\">\\(f'(x)\\)</span> và <span class=\"math inline\">\\(f''(x)\\)</span>.</strong></p><p><strong>33.</strong> <span class=\"math inline\">\\(f(x)=\\dfrac{x}{x^2-1}\\)</span>.</p>"
+    },
+    {
+      "number": 34,
+      "content": "<p><strong>31–34. Tìm <span class=\"math inline\">\\(f'(x)\\)</span> và <span class=\"math inline\">\\(f''(x)\\)</span>.</strong></p><p><strong>34.</strong> <span class=\"math inline\">\\(f(x)=\\dfrac{x}{1+\\sqrt{x}}\\)</span>.</p>"
+    },
+    {
+      "number": 35,
+      "content": "<p><strong>35–36. Tìm phương trình tiếp tuyến của đường cong tại điểm đã cho.</strong></p><p><strong>35.</strong> <span class=\"math inline\">\\(y=\\dfrac{x^2}{1+x}\\)</span>, <span class=\"math inline\">\\((1,\\tfrac12)\\)</span>.</p>"
+    },
+    {
+      "number": 36,
+      "content": "<p><strong>35–36. Tìm phương trình tiếp tuyến của đường cong tại điểm đã cho.</strong></p><p><strong>36.</strong> <span class=\"math inline\">\\(y=\\dfrac{1+x}{1+e^x}\\)</span>, <span class=\"math inline\">\\((0,\\tfrac12)\\)</span>.</p>"
+    },
+    {
+      "number": 37,
+      "content": "<p><strong>37–38. Tìm phương trình tiếp tuyến và pháp tuyến của đường cong tại điểm đã cho.</strong></p><p><strong>37.</strong> <span class=\"math inline\">\\(y=\\dfrac{3x}{1+5x^2}\\)</span>, <span class=\"math inline\">\\((1,\\tfrac12)\\)</span>.</p>"
+    },
+    {
+      "number": 38,
+      "content": "<p><strong>37–38. Tìm phương trình tiếp tuyến và pháp tuyến của đường cong tại điểm đã cho.</strong></p><p><strong>38.</strong> <span class=\"math inline\">\\(y=x+xe^x\\)</span>, <span class=\"math inline\">\\((0,0)\\)</span>.</p>"
+    },
+    {
+      "number": 39,
+      "content": "<p><strong>39.</strong> (a) Đường cong <span class=\"math inline\">\\(y=1/(1+x^2)\\)</span> được gọi là <em>đường phù thủy của Maria Agnesi</em>. Tìm phương trình tiếp tuyến của đường cong tại <span class=\"math inline\">\\((-1,\\tfrac12)\\)</span>.</p>\n<p>(b) Minh họa (a) bằng cách vẽ đường cong và tiếp tuyến trên cùng một màn hình.</p>"
+    },
+    {
+      "number": 40,
+      "content": "<p><strong>40.</strong> (a) Đường cong <span class=\"math inline\">\\(y=x/(1+x^2)\\)</span> được gọi là <em>đường hình rắn</em>. Tìm phương trình tiếp tuyến của đường cong tại <span class=\"math inline\">\\((3,0.3)\\)</span>.</p>\n<p>(b) Minh họa (a) bằng cách vẽ đường cong và tiếp tuyến trên cùng một màn hình.</p>"
+    },
+    {
+      "number": 41,
+      "content": "<p><strong>41.</strong> (a) Nếu <span class=\"math inline\">\\(f(x)=(x^3-x)e^x\\)</span>, tìm <span class=\"math inline\">\\(f'(x)\\)</span>.</p>\n<p>(b) Kiểm tra tính hợp lý của kết quả ở (a) bằng cách so sánh đồ thị <span class=\"math inline\">\\(f\\)</span> và <span class=\"math inline\">\\(f'\\)</span>.</p>"
+    },
+    {
+      "number": 42,
+      "content": "<p><strong>42.</strong> (a) Nếu <span class=\"math inline\">\\(f(x)=(x^2-1)/(x^2+1)\\)</span>, tìm <span class=\"math inline\">\\(f'(x)\\)</span> và <span class=\"math inline\">\\(f''(x)\\)</span>.</p>\n<p>(b) Kiểm tra tính hợp lý của các kết quả ở (a) bằng cách so sánh đồ thị <span class=\"math inline\">\\(f,f',f''\\)</span>.</p>"
+    },
+    {
+      "number": 43,
+      "content": "<p><strong>43.</strong> Nếu <span class=\"math inline\">\\(f(x)=x^2/(1+x)\\)</span>, tìm <span class=\"math inline\">\\(f''(1)\\)</span>.</p>"
+    },
+    {
+      "number": 44,
+      "content": "<p><strong>44.</strong> Nếu <span class=\"math inline\">\\(g(x)=x/e^x\\)</span>, tìm <span class=\"math inline\">\\(g^{(n)}(x)\\)</span>.</p>"
+    },
+    {
+      "number": 45,
+      "content": "<p><strong>45.</strong> Giả sử <span class=\"math inline\">\\(f(5)=1\\)</span>, <span class=\"math inline\">\\(f'(5)=6\\)</span>, <span class=\"math inline\">\\(g(5)=-3\\)</span> và <span class=\"math inline\">\\(g'(5)=2\\)</span>. Tìm:</p>\n<p>(a) <span class=\"math inline\">\\((fg)'(5)\\)</span>; (b) <span class=\"math inline\">\\((f/g)'(5)\\)</span>; (c) <span class=\"math inline\">\\((g/f)'(5)\\)</span>.</p>"
+    },
+    {
+      "number": 46,
+      "content": "<p><strong>46.</strong> Giả sử <span class=\"math inline\">\\(f(4)=2\\)</span>, <span class=\"math inline\">\\(g(4)=5\\)</span>, <span class=\"math inline\">\\(f'(4)=6\\)</span> và <span class=\"math inline\">\\(g'(4)=-3\\)</span>. Tìm <span class=\"math inline\">\\(h'(4)\\)</span> trong mỗi trường hợp:</p>\n<p>(a) <span class=\"math inline\">\\(h(x)=3f(x)+8g(x)\\)</span>; (b) <span class=\"math inline\">\\(h(x)=f(x)g(x)\\)</span>;</p>\n<p>(c) <span class=\"math inline\">\\(h(x)=\\dfrac{f(x)}{g(x)}\\)</span>; (d) <span class=\"math inline\">\\(h(x)=\\dfrac{g(x)}{f(x)+g(x)}\\)</span>.</p>"
+    },
+    {
+      "number": 47,
+      "content": "<p><strong>47.</strong> Nếu <span class=\"math inline\">\\(f(x)=e^xg(x)\\)</span>, trong đó <span class=\"math inline\">\\(g(0)=2\\)</span>, <span class=\"math inline\">\\(g'(0)=5\\)</span>, tìm <span class=\"math inline\">\\(f'(0)\\)</span>.</p>"
+    },
+    {
+      "number": 48,
+      "content": "<p><strong>48.</strong> Nếu <span class=\"math inline\">\\(h(2)=4\\)</span> và <span class=\"math inline\">\\(h'(2)=-3\\)</span>, tìm <span class=\"math display\">\\[\\left.\\frac{d}{dx}\\left(\\frac{h(x)}x\\right)\\right|_{x=2}.\\]</span></p>"
+    },
+    {
+      "number": 49,
+      "content": "<p><strong>49.</strong> Nếu <span class=\"math inline\">\\(g(x)=xf(x)\\)</span>, trong đó <span class=\"math inline\">\\(f(3)=4\\)</span>, <span class=\"math inline\">\\(f'(3)=-2\\)</span>, tìm phương trình tiếp tuyến của đồ thị <span class=\"math inline\">\\(g\\)</span> tại điểm có hoành độ <span class=\"math inline\">\\(x=3\\)</span>.</p>"
+    },
+    {
+      "number": 50,
+      "content": "<p><strong>50.</strong> Nếu <span class=\"math inline\">\\(f(2)=10\\)</span> và <span class=\"math inline\">\\(f'(x)=x^2f(x)\\)</span> với mọi <span class=\"math inline\">\\(x\\)</span>, tìm <span class=\"math inline\">\\(f''(2)\\)</span>.</p>"
+    },
+    {
+      "number": 51,
+      "content": "<p><strong>51.</strong> Cho các hàm <span class=\"math inline\">\\(f,g\\)</span> có đồ thị như hình, đặt <span class=\"math inline\">\\(u(x)=f(x)g(x)\\)</span> và <span class=\"math inline\">\\(v(x)=f(x)/g(x)\\)</span>.</p>\n<p>(a) Tìm <span class=\"math inline\">\\(u'(1)\\)</span>; (b) Tìm <span class=\"math inline\">\\(v'(4)\\)</span>.</p>\n<div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-3-2-67883edf/e51.png\" alt=\"image\"><br>\nHình dùng cho Bài tập 51.</p>\n</div>"
+    },
+    {
+      "number": 52,
+      "content": "<p><strong>52.</strong> Đặt <span class=\"math inline\">\\(P(x)=F(x)G(x)\\)</span> và <span class=\"math inline\">\\(Q(x)=F(x)/G(x)\\)</span>, trong đó <span class=\"math inline\">\\(F,G\\)</span> có đồ thị như hình.</p>\n<p>(a) Tìm <span class=\"math inline\">\\(P'(2)\\)</span>; (b) Tìm <span class=\"math inline\">\\(Q'(7)\\)</span>.</p>\n<div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-3-2-67883edf/e52.png\" alt=\"image\"><br>\nHình dùng cho Bài tập 52.</p>\n</div>"
+    },
+    {
+      "number": 53,
+      "content": "<p><strong>53.</strong> Nếu <span class=\"math inline\">\\(g\\)</span> khả vi, tìm biểu thức đạo hàm của từng hàm sau:</p>\n<p>(a) <span class=\"math inline\">\\(y=xg(x)\\)</span>; (b) <span class=\"math inline\">\\(y=\\dfrac{x}{g(x)}\\)</span>; (c) <span class=\"math inline\">\\(y=\\dfrac{g(x)}x\\)</span>.</p>"
+    },
+    {
+      "number": 54,
+      "content": "<p><strong>54.</strong> Nếu <span class=\"math inline\">\\(f\\)</span> khả vi, tìm biểu thức đạo hàm của từng hàm sau:</p>\n<p>(a) <span class=\"math inline\">\\(y=x^2f(x)\\)</span>; (b) <span class=\"math inline\">\\(y=\\dfrac{f(x)}{x^2}\\)</span>;</p>\n<p>(c) <span class=\"math inline\">\\(y=\\dfrac{x^2}{f(x)}\\)</span>; (d) <span class=\"math inline\">\\(y=\\dfrac{1+xf(x)}{\\sqrt{x}}\\)</span>.</p>"
+    },
+    {
+      "number": 55,
+      "content": "<p><strong>55.</strong> Có bao nhiêu tiếp tuyến của đường cong <span class=\"math inline\">\\(y=x/(x+1)\\)</span> đi qua <span class=\"math inline\">\\((1,2)\\)</span>? Các tiếp tuyến ấy tiếp xúc với đường cong tại những điểm nào?</p>"
+    },
+    {
+      "number": 56,
+      "content": "<p><strong>56.</strong> Tìm phương trình các tiếp tuyến của đường cong <span class=\"math display\">\\[y=\\frac{x-1}{x+1}\\]</span> song song với đường thẳng <span class=\"math inline\">\\(x-2y=2\\)</span>.</p>"
+    },
+    {
+      "number": 57,
+      "content": "<p><strong>57.</strong> Tìm <span class=\"math inline\">\\(R'(0)\\)</span>, trong đó <span class=\"math display\">\\[R(x)=\\frac{x-3x^3+5x^5}{1+3x^3+6x^6+9x^9}.\\]</span> <em>Gợi ý:</em> Thay vì tìm <span class=\"math inline\">\\(R'(x)\\)</span> trước, hãy gọi <span class=\"math inline\">\\(f(x)\\)</span> là tử số, <span class=\"math inline\">\\(g(x)\\)</span> là mẫu số của <span class=\"math inline\">\\(R(x)\\)</span> rồi tính <span class=\"math inline\">\\(R'(0)\\)</span> từ <span class=\"math inline\">\\(f(0),f'(0),g(0),g'(0)\\)</span>.</p>"
+    },
+    {
+      "number": 58,
+      "content": "<p><strong>58.</strong> Dùng phương pháp của Bài tập 57 để tính <span class=\"math inline\">\\(Q'(0)\\)</span>, trong đó <span class=\"math display\">\\[Q(x)=\\frac{1+x+x^2+xe^x}{1-x+x^2-xe^x}.\\]</span></p><p><strong>Phương pháp ở Bài tập 57.</strong> Gọi f(x) là tử số, g(x) là mẫu số; tính giá trị của f, g và các đạo hàm cấp một tại 0 rồi áp dụng quy tắc thương tại 0.</p>"
+    },
+    {
+      "number": 59,
+      "content": "<p><strong>59.</strong> Trong bài tập này, ta ước lượng tốc độ tăng của tổng thu nhập cá nhân tại Boulder, Colorado. Năm 2015, dân số thành phố là 107,350 người và tăng khoảng 1960 người mỗi năm. Thu nhập bình quân hằng năm là 60,220 đô la mỗi người và tăng khoảng 2250 đô la mỗi năm, cao hơn một chút so với mức tăng bình quân toàn quốc khoảng 1810 đô la mỗi năm. Dùng quy tắc tích và các số liệu trên để ước lượng tốc độ tăng tổng thu nhập cá nhân tại Boulder năm 2015. Giải thích ý nghĩa của từng số hạng trong quy tắc tích.</p>"
+    },
+    {
+      "number": 60,
+      "content": "<p><strong>60.</strong> Một nhà sản xuất làm các cuộn vải có khổ rộng cố định. Lượng vải <span class=\"math inline\">\\(q\\)</span> bán được, tính bằng yard, là một hàm của giá bán <span class=\"math inline\">\\(p\\)</span>, tính bằng đô la mỗi yard; do đó có thể viết <span class=\"math inline\">\\(q=f(p)\\)</span>. Tổng doanh thu ứng với giá bán <span class=\"math inline\">\\(p\\)</span> là <span class=\"math inline\">\\(R(p)=pf(p)\\)</span>.</p>\n<p>(a) Các đẳng thức <span class=\"math inline\">\\(f(20)=10{,}000\\)</span> và <span class=\"math inline\">\\(f'(20)=-350\\)</span> có ý nghĩa gì?</p>\n<p>(b) Với các giá trị ở (a), tìm <span class=\"math inline\">\\(R'(20)\\)</span> và diễn giải kết quả.</p>"
+    },
+    {
+      "number": 61,
+      "content": "<p><strong>61.</strong> Phương trình Michaelis–Menten đối với enzym chymotrypsin là <span class=\"math display\">\\[v=\\frac{0.14[S]}{0.015+[S]},\\]</span> trong đó <span class=\"math inline\">\\(v\\)</span> là tốc độ phản ứng enzym, <span class=\"math inline\">\\([S]\\)</span> là nồng độ cơ chất <span class=\"math inline\">\\(S\\)</span>. Tính <span class=\"math inline\">\\(dv/d[S]\\)</span> và diễn giải kết quả.</p>"
+    },
+    {
+      "number": 62,
+      "content": "<p><strong>62.</strong> Sinh khối <span class=\"math inline\">\\(B(t)\\)</span> của một quần thể cá là tổng khối lượng các cá thể trong quần thể tại thời điểm <span class=\"math inline\">\\(t\\)</span>. Nó bằng số cá thể <span class=\"math inline\">\\(N(t)\\)</span> nhân với khối lượng trung bình <span class=\"math inline\">\\(M(t)\\)</span> của một con cá tại thời điểm <span class=\"math inline\">\\(t\\)</span>. Ở cá bảy màu, sự sinh sản diễn ra liên tục. Giả sử tại thời điểm <span class=\"math inline\">\\(t=4\\)</span> tuần, quần thể có 820 con và đang tăng với tốc độ 50 con mỗi tuần, còn khối lượng trung bình là <span class=\"math inline\">\\(1.2\\ \\mathrm g\\)</span> và đang tăng với tốc độ <span class=\"math inline\">\\(0.14\\ \\mathrm{g/tuần}\\)</span>. Sinh khối đang tăng với tốc độ bao nhiêu khi <span class=\"math inline\">\\(t=4\\)</span>?</p>"
+    },
+    {
+      "number": 63,
+      "content": "<p><strong>63.</strong> <strong>Quy tắc tích mở rộng.</strong> Có thể mở rộng quy tắc tích cho tích ba hàm.</p>\n<p>(a) Dùng quy tắc tích hai lần để chứng minh: nếu <span class=\"math inline\">\\(f,g,h\\)</span> khả vi thì <span class=\"math display\">\\[(fgh)'=f'gh+fg'h+fgh'.\\]</span> (b) Cho <span class=\"math inline\">\\(f=g=h\\)</span> trong (a), chứng tỏ <span class=\"math display\">\\[\\frac{d}{dx}[f(x)]^3=3[f(x)]^2f'(x).\\]</span> (c) Dùng (b) để tính đạo hàm của <span class=\"math inline\">\\(y=e^{3x}\\)</span>.</p>"
+    },
+    {
+      "number": 64,
+      "content": "<p><strong>64.</strong> (a) Nếu <span class=\"math inline\">\\(F(x)=f(x)g(x)\\)</span>, trong đó <span class=\"math inline\">\\(f,g\\)</span> có đạo hàm mọi cấp, chứng tỏ <span class=\"math display\">\\[F''=f''g+2f'g'+fg''.\\]</span> (b) Tìm các công thức tương tự cho <span class=\"math inline\">\\(F'''\\)</span> và <span class=\"math inline\">\\(F^{(4)}\\)</span>.</p>\n<p>(c) Dự đoán một công thức cho <span class=\"math inline\">\\(F^{(n)}\\)</span>.</p>"
+    },
+    {
+      "number": 65,
+      "content": "<p><strong>65.</strong> Tìm biểu thức của năm đạo hàm đầu tiên của <span class=\"math inline\">\\(f(x)=x^2e^x\\)</span>. Bạn có nhận thấy quy luật nào không? Dự đoán công thức <span class=\"math inline\">\\(f^{(n)}(x)\\)</span> rồi chứng minh bằng quy nạp toán học.</p>"
+    },
+    {
+      "number": 66,
+      "content": "<p><strong>66.</strong> <strong>Quy tắc nghịch đảo.</strong> Nếu <span class=\"math inline\">\\(g\\)</span> khả vi, quy tắc nghịch đảo cho biết <span class=\"math display\">\\[\\frac{d}{dx}\\left[\\frac1{g(x)}\\right]=-\\frac{g'(x)}{[g(x)]^2}.\\]</span> (a) Dùng quy tắc thương để chứng minh quy tắc nghịch đảo.</p>\n<p>(b) Dùng quy tắc nghịch đảo để tính đạo hàm của hàm trong Bài tập 14.</p>\n<p>(c) Dùng quy tắc nghịch đảo để kiểm tra rằng quy tắc lũy thừa đúng với số mũ nguyên âm, tức <span class=\"math display\">\\[\\frac{d}{dx}(x^{-n})=-nx^{-n-1}\\]</span> với mọi số nguyên dương <span class=\"math inline\">\\(n\\)</span>.</p>"
+    }
+  ]
+}
