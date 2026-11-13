@@ -2755,5 +2755,60 @@
     "file": "stewart-4-8-4ced8003/fig07.png",
     "mime": "image/png",
     "sha256": "75fa730ab1a5b5595be82fa28e55fc5ee2f5072ccdda3fa9a3e2c6b769391b5a"
+  },
+  "stewart-4-9-4ae26d66/ex57.png": {
+    "file": "stewart-4-9-4ae26d66/ex57.png",
+    "mime": "image/png",
+    "sha256": "baed0883bd7f2ebe81f7e873224ebca52dc115dbe1a410f658058e206026a296"
+  },
+  "stewart-4-9-4ae26d66/ex58.png": {
+    "file": "stewart-4-9-4ae26d66/ex58.png",
+    "mime": "image/png",
+    "sha256": "71c6fd2f27f4e6453447daef2fa040b8ce2493ad6fcf5e740e4716ed5c8845b8"
+  },
+  "stewart-4-9-4ae26d66/ex59.png": {
+    "file": "stewart-4-9-4ae26d66/ex59.png",
+    "mime": "image/png",
+    "sha256": "7344cbfa24ecfd2b25e28b3891946e7b2d3be065d7537a0354a47c393fd4a8d7"
+  },
+  "stewart-4-9-4ae26d66/ex60.png": {
+    "file": "stewart-4-9-4ae26d66/ex60.png",
+    "mime": "image/png",
+    "sha256": "7288cd7dca63f74b2fb96ab9dda9e3d5d2f09b326684e1c17825ae9d42ad2af5"
+  },
+  "stewart-4-9-4ae26d66/ex61.png": {
+    "file": "stewart-4-9-4ae26d66/ex61.png",
+    "mime": "image/png",
+    "sha256": "a8fb657621c2f9200270c7676290754d006b983bcaf75a78275fe655865d4a88"
+  },
+  "stewart-4-9-4ae26d66/ex76.png": {
+    "file": "stewart-4-9-4ae26d66/ex76.png",
+    "mime": "image/png",
+    "sha256": "05fabbf49ff47d87a9ce67e7bca0c502d662fbeeafcad6b83c73c71b984e1606"
+  },
+  "stewart-4-9-4ae26d66/fig01.png": {
+    "file": "stewart-4-9-4ae26d66/fig01.png",
+    "mime": "image/png",
+    "sha256": "3134d117b728c26b1931300930f8b663d462a7e9687197549c056a5fbc854455"
+  },
+  "stewart-4-9-4ae26d66/fig02.png": {
+    "file": "stewart-4-9-4ae26d66/fig02.png",
+    "mime": "image/png",
+    "sha256": "6a9243d951f096f29245ed784af5cabaac3151f992f28992ca996b69aff5d455"
+  },
+  "stewart-4-9-4ae26d66/fig03.png": {
+    "file": "stewart-4-9-4ae26d66/fig03.png",
+    "mime": "image/png",
+    "sha256": "fc545aa5919d255a761aaf687ff0e8660a158702eb9f13d4643e6b3527c91c54"
+  },
+  "stewart-4-9-4ae26d66/fig04.png": {
+    "file": "stewart-4-9-4ae26d66/fig04.png",
+    "mime": "image/png",
+    "sha256": "a13d2f8413971c9543d684ac641e22427cadb67f6d4bb606f1ddc3e6e1f431e4"
+  },
+  "stewart-4-9-4ae26d66/fig05.png": {
+    "file": "stewart-4-9-4ae26d66/fig05.png",
+    "mime": "image/png",
+    "sha256": "48c0e17c427d68b134220427ef103c6bcf1c7bf001fad571f1ae501d1f1bbe35"
   }
 }

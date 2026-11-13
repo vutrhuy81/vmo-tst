@@ -824,4 +824,29 @@ doc48.window.close();
 const rendered48=window.document.createElement('div');await window.renderBookContent(rendered48,section48.section,false);
 assert.equal(rendered48.querySelectorAll('img').length,12,'All section 4.8 figures survive frontend filtering');
 assert.deepEqual((await readBooks(db,student,{bookId:book.id,sectionId:child48.id})).exercises.map(e=>e.contentKey),section48.exercises.map(e=>e.contentKey));
+// Antiderivatives: keep graph exercises, initial conditions and referenced cliff height.
+const child49=detail.sections.find(s=>s.title.startsWith('4.9'));
+const section49=await readBooks(db,student,{bookId:book.id,sectionId:child49.id});
+assert.equal(section49.exerciseHeading,'4.9. Bài tập');
+assert.deepEqual(section49.exercises.map(e=>e.questionNumber),Array.from({length:85},(_,i)=>i+1));
+assert.ok(section49.exercises.every(e=>e.allowSubmission&&e.allowAiEvaluation&&e.contentKey&&e.setKey));
+for(const n of [57,58,59,60,61,76])assert.ok(section49.exercises[n-1].content.includes('/ex'+n+'.png'));
+for(const n of [5,26])assert.ok(section49.exercises[n-1].content.includes('Kiểm tra bằng cách lấy đạo hàm'));
+for(const n of [57,58])assert.ok(section49.exercises[n-1].content.includes('Đồ thị nào là một nguyên hàm'));
+for(const n of [63,64])assert.ok(section49.exercises[n-1].content.includes('đi qua gốc tọa độ'));
+for(const n of [65,70])assert.ok(section49.exercises[n-1].content.includes('Tìm vị trí chất điểm'));
+assert.ok(section49.exercises[73].content.includes('432 ft')&&section49.exercises[73].content.includes('−32 ft/s²'));
+assert.equal(section49.section.sourceInfo.exampleCount,7);
+const doc49=new JSDOM(section49.section.content);
+assert.equal(doc49.window.document.querySelectorAll('img').length,11);
+assert.ok(doc49.window.document.querySelector('table'),'Antiderivative table is preserved');
+for(const image of doc49.window.document.querySelectorAll('img')){
+ const asset=new URL(image.src,'https://example.test').searchParams.get('asset');
+ assert.equal((await readBookAsset(student,asset)).bytes[0],137);
+ await assert.rejects(()=>readBookAsset(other,asset),e=>e.status===403);
+}
+doc49.window.close();
+const rendered49=window.document.createElement('div');await window.renderBookContent(rendered49,section49.section,false);
+assert.equal(rendered49.querySelectorAll('img').length,11,'All section 4.9 figures survive frontend filtering');
+assert.deepEqual((await readBooks(db,student,{bookId:book.id,sectionId:child49.id})).exercises.map(e=>e.contentKey),section49.exercises.map(e=>e.contentKey));
 window.close();console.log('Books: seeded TOC, admin CRUD/CAS, scopes, subtree delete/restore, lazy bodies and UI actions OK');
