@@ -1,0 +1,176 @@
+{
+  "bookKey": "stewart-9",
+  "sectionKey": "4-8",
+  "heading": "4.8. Bài tập",
+  "sourceSha256": "4ced8003479a08d2ab15b3e7fcb9197e84631fe98f97ad85a57b298c285bed92",
+  "exercises": [
+    {
+      "number": 1,
+      "content": "<p><strong>1.</strong> Hình vẽ cho đồ thị hàm <span class=\"math inline\">\\(f\\)</span>. Giả sử dùng phương pháp Newton để xấp xỉ nghiệm <span class=\"math inline\">\\(s\\)</span> của <span class=\"math inline\">\\(f(x)=0\\)</span>, với xấp xỉ ban đầu <span class=\"math inline\">\\(x_1=6\\)</span>.</p>\n<p>(a) Vẽ các tiếp tuyến dùng để tìm <span class=\"math inline\">\\(x_2,x_3\\)</span>, và ước lượng giá trị của chúng.</p>\n<p>(b) <span class=\"math inline\">\\(x_1=8\\)</span> có phải là xấp xỉ đầu tiên tốt hơn không? Giải thích.</p>\n<div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-4-8-4ced8003/ex01.png\" alt=\"image\"><br>\nHình dùng cho Bài tập 1–2.</p>\n</div>"
+    },
+    {
+      "number": 2,
+      "content": "<p><strong>2.</strong> Làm theo yêu cầu Bài tập 1(a), nhưng dùng <span class=\"math inline\">\\(x_1=1\\)</span> làm xấp xỉ ban đầu để tìm nghiệm <span class=\"math inline\">\\(r\\)</span>.</p><p><strong>Yêu cầu Bài tập 1(a).</strong> Vẽ các tiếp tuyến dùng để tìm các xấp xỉ thứ hai và thứ ba, rồi ước lượng giá trị của chúng.</p><div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-4-8-4ced8003/ex01.png\" alt=\"image\"><br>\nHình dùng cho Bài tập 1–2.</p>\n</div>"
+    },
+    {
+      "number": 3,
+      "content": "<p><strong>3.</strong> Tiếp tuyến của <span class=\"math inline\">\\(y=f(x)\\)</span> tại <span class=\"math inline\">\\((2,5)\\)</span> có phương trình <span class=\"math inline\">\\(y=9-2x\\)</span>. Nếu dùng phương pháp Newton tìm nghiệm <span class=\"math inline\">\\(f(x)=0\\)</span>, với <span class=\"math inline\">\\(x_1=2\\)</span>, hãy tìm xấp xỉ thứ hai <span class=\"math inline\">\\(x_2\\)</span>.</p>"
+    },
+    {
+      "number": 4,
+      "content": "<p><strong>4.</strong> Với mỗi xấp xỉ ban đầu, dùng đồ thị xác định điều gì xảy ra khi áp dụng phương pháp Newton cho hàm có đồ thị như hình.</p>\n<p>(a) <span class=\"math inline\">\\(x_1=0\\)</span>;(b) <span class=\"math inline\">\\(x_1=1\\)</span>;(c) <span class=\"math inline\">\\(x_1=3\\)</span>;(d) <span class=\"math inline\">\\(x_1=4\\)</span>;(e) <span class=\"math inline\">\\(x_1=5\\)</span>.</p>\n<div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-4-8-4ced8003/ex04.png\" alt=\"image\"><br>\nHình cho Bài tập 4.</p>\n</div>"
+    },
+    {
+      "number": 5,
+      "content": "<p><strong>5.</strong> Với những xấp xỉ ban đầu nào trong <span class=\"math inline\">\\(x_1=a,b,c,d\\)</span>, bạn cho rằng phương pháp Newton hoạt động và dẫn đến nghiệm <span class=\"math inline\">\\(f(x)=0\\)</span>?</p>\n<div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-4-8-4ced8003/ex05.png\" alt=\"image\"><br>\nHình cho Bài tập 5.</p>\n</div>"
+    },
+    {
+      "number": 6,
+      "content": "<p><strong>6–8.</strong></p>\n<p>Dùng phương pháp Newton với xấp xỉ ban đầu <span class=\"math inline\">\\(x_1\\)</span> đã cho, tìm xấp xỉ thứ ba <span class=\"math inline\">\\(x_3\\)</span> của nghiệm phương trình. Cho kết quả đến bốn chữ số thập phân.</p><p><strong>6.</strong> <span class=\"math inline\">\\(2x^3-3x^2+2=0\\)</span>,<span class=\"math inline\">\\(x_1=-1\\)</span>.</p>"
+    },
+    {
+      "number": 7,
+      "content": "<p><strong>6–8.</strong></p>\n<p>Dùng phương pháp Newton với xấp xỉ ban đầu <span class=\"math inline\">\\(x_1\\)</span> đã cho, tìm xấp xỉ thứ ba <span class=\"math inline\">\\(x_3\\)</span> của nghiệm phương trình. Cho kết quả đến bốn chữ số thập phân.</p><p><strong>7.</strong> <span class=\"math inline\">\\(\\displaystyle\\frac2x-x^2+1=0\\)</span>,<span class=\"math inline\">\\(x_1=2\\)</span>.</p>"
+    },
+    {
+      "number": 8,
+      "content": "<p><strong>6–8.</strong></p>\n<p>Dùng phương pháp Newton với xấp xỉ ban đầu <span class=\"math inline\">\\(x_1\\)</span> đã cho, tìm xấp xỉ thứ ba <span class=\"math inline\">\\(x_3\\)</span> của nghiệm phương trình. Cho kết quả đến bốn chữ số thập phân.</p><p><strong>8.</strong> <span class=\"math inline\">\\(x^5=x^2+1\\)</span>,<span class=\"math inline\">\\(x_1=1\\)</span>.</p>"
+    },
+    {
+      "number": 9,
+      "content": "<p><strong>9.</strong> Dùng phương pháp Newton với <span class=\"math inline\">\\(x_1=-1\\)</span> tìm xấp xỉ thứ hai <span class=\"math inline\">\\(x_2\\)</span> của nghiệm <span class=\"math inline\">\\(x^3+x+3=0\\)</span>. Giải thích cách hoạt động của phương pháp bằng cách trước hết vẽ đồ thị hàm và tiếp tuyến tại <span class=\"math inline\">\\((-1,1)\\)</span>.</p>"
+    },
+    {
+      "number": 10,
+      "content": "<p><strong>10.</strong> Dùng phương pháp Newton với <span class=\"math inline\">\\(x_1=1\\)</span> tìm xấp xỉ thứ hai <span class=\"math inline\">\\(x_2\\)</span> của nghiệm <span class=\"math inline\">\\(x^4-x-1=0\\)</span>. Giải thích cách hoạt động bằng cách trước hết vẽ đồ thị hàm và tiếp tuyến tại <span class=\"math inline\">\\((1,-1)\\)</span>.</p>"
+    },
+    {
+      "number": 11,
+      "content": "<p><strong>11–12.</strong></p>\n<p>Dùng phương pháp Newton tính gần đúng số đã cho, chính xác đến tám chữ số thập phân.</p><p><strong>11.</strong> <span class=\"math inline\">\\(\\sqrt[4]{75}\\)</span>.</p>"
+    },
+    {
+      "number": 12,
+      "content": "<p><strong>11–12.</strong></p>\n<p>Dùng phương pháp Newton tính gần đúng số đã cho, chính xác đến tám chữ số thập phân.</p><p><strong>12.</strong> <span class=\"math inline\">\\(\\sqrt[8]{500}\\)</span>.</p>"
+    },
+    {
+      "number": 13,
+      "content": "<p><strong>13–14.</strong></p>\n<p>(a) Giải thích vì sao phương trình phải có nghiệm trong đoạn đã cho. (b) Dùng phương pháp Newton xấp xỉ nghiệm, chính xác đến sáu chữ số thập phân.</p><p><strong>13.</strong> <span class=\"math inline\">\\(3x^4-8x^3+2=0\\)</span>,<span class=\"math inline\">\\([2,3]\\)</span>.</p>"
+    },
+    {
+      "number": 14,
+      "content": "<p><strong>13–14.</strong></p>\n<p>(a) Giải thích vì sao phương trình phải có nghiệm trong đoạn đã cho. (b) Dùng phương pháp Newton xấp xỉ nghiệm, chính xác đến sáu chữ số thập phân.</p><p><strong>14.</strong> <span class=\"math inline\">\\(-2x^5+9x^4-7x^3-11x=0\\)</span>,<span class=\"math inline\">\\([3,4]\\)</span>.</p>"
+    },
+    {
+      "number": 15,
+      "content": "<p><strong>15–16.</strong></p>\n<p>Dùng phương pháp Newton xấp xỉ nghiệm được chỉ định, chính xác đến sáu chữ số thập phân.</p><p><strong>15.</strong> Nghiệm âm của <span class=\"math inline\">\\(\\cos x=x^2-4\\)</span>.</p>"
+    },
+    {
+      "number": 16,
+      "content": "<p><strong>15–16.</strong></p>\n<p>Dùng phương pháp Newton xấp xỉ nghiệm được chỉ định, chính xác đến sáu chữ số thập phân.</p><p><strong>16.</strong> Nghiệm dương của <span class=\"math inline\">\\(e^{2x}=x+3\\)</span>.</p>"
+    },
+    {
+      "number": 17,
+      "content": "<p><strong>17–22.</strong></p>\n<p>Dùng phương pháp Newton tìm tất cả các nghiệm, chính xác đến sáu chữ số thập phân.</p><p><strong>17.</strong> <span class=\"math inline\">\\(\\sin x=x-1\\)</span>.</p>"
+    },
+    {
+      "number": 18,
+      "content": "<p><strong>17–22.</strong></p>\n<p>Dùng phương pháp Newton tìm tất cả các nghiệm, chính xác đến sáu chữ số thập phân.</p><p><strong>18.</strong> <span class=\"math inline\">\\(\\cos2x=x^3\\)</span>.</p>"
+    },
+    {
+      "number": 19,
+      "content": "<p><strong>17–22.</strong></p>\n<p>Dùng phương pháp Newton tìm tất cả các nghiệm, chính xác đến sáu chữ số thập phân.</p><p><strong>19.</strong> <span class=\"math inline\">\\(2^x=2-x^2\\)</span>.</p>"
+    },
+    {
+      "number": 20,
+      "content": "<p><strong>17–22.</strong></p>\n<p>Dùng phương pháp Newton tìm tất cả các nghiệm, chính xác đến sáu chữ số thập phân.</p><p><strong>20.</strong> <span class=\"math inline\">\\(\\displaystyle\\ln x=\\frac1{x-3}\\)</span>.</p>"
+    },
+    {
+      "number": 21,
+      "content": "<p><strong>17–22.</strong></p>\n<p>Dùng phương pháp Newton tìm tất cả các nghiệm, chính xác đến sáu chữ số thập phân.</p><p><strong>21.</strong> <span class=\"math inline\">\\(\\arctan x=x^2-3\\)</span>.</p>"
+    },
+    {
+      "number": 22,
+      "content": "<p><strong>17–22.</strong></p>\n<p>Dùng phương pháp Newton tìm tất cả các nghiệm, chính xác đến sáu chữ số thập phân.</p><p><strong>22.</strong> <span class=\"math inline\">\\(x^3=5x-3\\)</span>.</p>"
+    },
+    {
+      "number": 23,
+      "content": "<p><strong>23–28.</strong></p>\n<p>Dùng phương pháp Newton tìm tất cả các nghiệm, chính xác đến tám chữ số thập phân. Trước hết quan sát đồ thị để chọn các xấp xỉ ban đầu.</p><p><strong>23.</strong> <span class=\"math inline\">\\(-2x^7-5x^4+9x^3+5=0\\)</span>.</p>"
+    },
+    {
+      "number": 24,
+      "content": "<p><strong>23–28.</strong></p>\n<p>Dùng phương pháp Newton tìm tất cả các nghiệm, chính xác đến tám chữ số thập phân. Trước hết quan sát đồ thị để chọn các xấp xỉ ban đầu.</p><p><strong>24.</strong> <span class=\"math inline\">\\(x^5-3x^4+x^3-x^2-x+6=0\\)</span>.</p>"
+    },
+    {
+      "number": 25,
+      "content": "<p><strong>23–28.</strong></p>\n<p>Dùng phương pháp Newton tìm tất cả các nghiệm, chính xác đến tám chữ số thập phân. Trước hết quan sát đồ thị để chọn các xấp xỉ ban đầu.</p><p><strong>25.</strong> <span class=\"math inline\">\\(\\displaystyle\\frac{x}{x^2+1}=\\sqrt{1-x}\\)</span>.</p>"
+    },
+    {
+      "number": 26,
+      "content": "<p><strong>23–28.</strong></p>\n<p>Dùng phương pháp Newton tìm tất cả các nghiệm, chính xác đến tám chữ số thập phân. Trước hết quan sát đồ thị để chọn các xấp xỉ ban đầu.</p><p><strong>26.</strong> <span class=\"math inline\">\\(\\cos(x^2-x)=x^4\\)</span>.</p>"
+    },
+    {
+      "number": 27,
+      "content": "<p><strong>23–28.</strong></p>\n<p>Dùng phương pháp Newton tìm tất cả các nghiệm, chính xác đến tám chữ số thập phân. Trước hết quan sát đồ thị để chọn các xấp xỉ ban đầu.</p><p><strong>27.</strong> <span class=\"math inline\">\\(\\sqrt{4-x^3}=e^{x^2}\\)</span>.</p>"
+    },
+    {
+      "number": 28,
+      "content": "<p><strong>23–28.</strong></p>\n<p>Dùng phương pháp Newton tìm tất cả các nghiệm, chính xác đến tám chữ số thập phân. Trước hết quan sát đồ thị để chọn các xấp xỉ ban đầu.</p><p><strong>28.</strong> <span class=\"math inline\">\\(\\displaystyle\\ln(x^2+2)=\\frac{3x}{\\sqrt{x^2+1}}\\)</span>.</p>"
+    },
+    {
+      "number": 29,
+      "content": "<p><strong>29.</strong> (a) Áp dụng phương pháp Newton cho <span class=\"math inline\">\\(x^2-a=0\\)</span> để suy ra thuật toán căn bậc hai sau, đã được người Babylon cổ đại dùng để tính <span class=\"math inline\">\\(\\sqrt a\\)</span>: <span class=\"math display\">\\[x_{n+1}=\\frac12\\left(x_n+\\frac a{x_n}\\right).\\]</span> (b) Dùng (a) tính <span class=\"math inline\">\\(\\sqrt{1000}\\)</span> chính xác đến sáu chữ số thập phân.</p>"
+    },
+    {
+      "number": 30,
+      "content": "<p><strong>30.</strong> (a) Áp dụng phương pháp Newton cho <span class=\"math inline\">\\(1/x-a=0\\)</span> để suy ra thuật toán tính nghịch đảo: <span class=\"math display\">\\[x_{n+1}=2x_n-ax_n^2.\\]</span> Thuật toán này cho phép máy tính tìm nghịch đảo mà không thực hiện phép chia.</p>\n<p>(b) Dùng (a) tính <span class=\"math inline\">\\(1/1{,}6984\\)</span> chính xác đến sáu chữ số thập phân.</p>"
+    },
+    {
+      "number": 31,
+      "content": "<p><strong>31.</strong> Giải thích vì sao phương pháp Newton không tìm được nghiệm <span class=\"math inline\">\\(x^3-3x+6=0\\)</span> nếu chọn <span class=\"math inline\">\\(x_1=1\\)</span>.</p>"
+    },
+    {
+      "number": 32,
+      "content": "<p><strong>32.</strong> (a) Dùng phương pháp Newton với <span class=\"math inline\">\\(x_1=1\\)</span> tìm nghiệm <span class=\"math inline\">\\(x^3-x=1\\)</span> chính xác đến sáu chữ số thập phân.</p>\n<p>(b) Giải phương trình ở (a) với xấp xỉ ban đầu <span class=\"math inline\">\\(x_1=0{,}6\\)</span>.</p>\n<p>(c) Giải phương trình ở (a) với <span class=\"math inline\">\\(x_1=0{,}57\\)</span>. Phần này nhất thiết cần máy tính có thể lập trình.</p>\n<p>(d) Vẽ <span class=\"math inline\">\\(f(x)=x^3-x-1\\)</span> và các tiếp tuyến tại <span class=\"math inline\">\\(x_1=1\\)</span>, <span class=\"math inline\">\\(0{,}6\\)</span>, <span class=\"math inline\">\\(0{,}57\\)</span> để giải thích vì sao phương pháp Newton rất nhạy với xấp xỉ ban đầu.</p>"
+    },
+    {
+      "number": 33,
+      "content": "<p><strong>33.</strong> Giải thích vì sao phương pháp Newton thất bại khi áp dụng cho <span class=\"math inline\">\\(\\sqrt[3]x=0\\)</span> với mọi xấp xỉ ban đầu <span class=\"math inline\">\\(x_1\\ne0\\)</span>. Minh họa bằng hình phác họa.</p>"
+    },
+    {
+      "number": 34,
+      "content": "<p><strong>34.</strong> Nếu <span class=\"math display\">\\[f(x)=\\begin{cases}\\sqrt x,&amp;x\\ge0,\\\\-\\sqrt{-x},&amp;x&lt;0,\\end{cases}\\]</span> thì nghiệm của <span class=\"math inline\">\\(f(x)=0\\)</span> là <span class=\"math inline\">\\(x=0\\)</span>. Giải thích vì sao phương pháp Newton không tìm được nghiệm với bất kỳ xấp xỉ ban đầu <span class=\"math inline\">\\(x_1\\ne0\\)</span>. Minh họa bằng hình phác họa.</p>"
+    },
+    {
+      "number": 35,
+      "content": "<p><strong>35.</strong> (a) Dùng phương pháp Newton tìm các số tới hạn của <span class=\"math inline\">\\(f(x)=x^6-x^4+3x^3-2x\\)</span>, chính xác đến sáu chữ số thập phân.</p>\n<p>(b) Tìm giá trị nhỏ nhất tuyệt đối của <span class=\"math inline\">\\(f\\)</span>, chính xác đến bốn chữ số thập phân.</p>"
+    },
+    {
+      "number": 36,
+      "content": "<p><strong>36.</strong> Dùng phương pháp Newton tìm giá trị lớn nhất tuyệt đối của <span class=\"math inline\">\\(f(x)=x\\cos x\\)</span>, <span class=\"math inline\">\\(0\\le x\\le\\pi\\)</span>, chính xác đến sáu chữ số thập phân.</p>"
+    },
+    {
+      "number": 37,
+      "content": "<p><strong>37.</strong> Dùng phương pháp Newton tìm tọa độ điểm uốn của <span class=\"math inline\">\\(y=x^2\\sin x\\)</span>, <span class=\"math inline\">\\(0\\le x\\le\\pi\\)</span>, chính xác đến sáu chữ số thập phân.</p>"
+    },
+    {
+      "number": 38,
+      "content": "<p><strong>38.</strong> Trong vô số đường thẳng tiếp xúc với <span class=\"math inline\">\\(y=-\\sin x\\)</span> và đi qua gốc tọa độ, có một đường có hệ số góc lớn nhất. Dùng phương pháp Newton tìm hệ số góc đó, chính xác đến sáu chữ số thập phân.</p>"
+    },
+    {
+      "number": 39,
+      "content": "<p><strong>39.</strong> Dùng phương pháp Newton tìm tọa độ điểm trên parabol <span class=\"math inline\">\\(y=(x-1)^2\\)</span> gần gốc tọa độ nhất, chính xác đến sáu chữ số thập phân.</p>"
+    },
+    {
+      "number": 40,
+      "content": "<p><strong>40.</strong> Trong hình, dây cung <span class=\"math inline\">\\(AB\\)</span> dài 4 cm, cung <span class=\"math inline\">\\(AB\\)</span> dài 5 cm. Tìm góc ở tâm <span class=\"math inline\">\\(\\theta\\)</span> tính bằng radian, chính xác đến bốn chữ số thập phân. Sau đó cho kết quả làm tròn đến độ.</p>\n<div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-4-8-4ced8003/ex40.png\" alt=\"image\"><br>\nHình cho Bài tập 40.</p>\n</div>"
+    },
+    {
+      "number": 41,
+      "content": "<p><strong>41.</strong> Đại lý bán xe mới giá <span class=\"math inline\">\\(18\\,000\\)</span> USD, đồng thời cho phép mua trả góp 375 USD/tháng trong 5 năm. Đại lý đang tính lãi suất hằng tháng bao nhiêu?</p>\n<p>Để giải, cần công thức giá trị hiện tại <span class=\"math inline\">\\(A\\)</span> của niên kim gồm <span class=\"math inline\">\\(n\\)</span> khoản thanh toán bằng nhau, mỗi khoản <span class=\"math inline\">\\(R\\)</span>, với lãi suất <span class=\"math inline\">\\(i\\)</span> mỗi kỳ: <span class=\"math display\">\\[A=\\frac Ri\\bigl[1-(1+i)^{-n}\\bigr].\\]</span> Thay <span class=\"math inline\">\\(i\\)</span> bằng <span class=\"math inline\">\\(x\\)</span>, chứng minh <span class=\"math display\">\\[48x(1+x)^{60}-(1+x)^{60}+1=0.\\]</span> Dùng phương pháp Newton giải phương trình này.</p>"
+    },
+    {
+      "number": 42,
+      "content": "<p><strong>42.</strong> Hình vẽ cho Mặt Trời ở gốc tọa độ và Trái Đất tại <span class=\"math inline\">\\((1,0)\\)</span>. Đơn vị là khoảng cách giữa hai tâm, gọi là đơn vị thiên văn: <span class=\"math inline\">\\(1\\ \\mathrm{AU}\\approx1{,}496\\times10^8\\)</span> km. Trong mặt phẳng chuyển động của Trái Đất quanh Mặt Trời có năm vị trí <span class=\"math inline\">\\(L_1,L_2,L_3,L_4,L_5\\)</span> mà tại đó vệ tinh đứng yên tương đối với Trái Đất do các lực tác dụng, kể cả lực hấp dẫn của Trái Đất và Mặt Trời, cân bằng nhau. Các vị trí này gọi là <em>điểm bình động</em> (điểm Lagrange). Một vệ tinh nghiên cứu Mặt Trời đã được đặt tại một điểm như vậy. Nếu <span class=\"math inline\">\\(m_1\\)</span> là khối lượng Mặt Trời, <span class=\"math inline\">\\(m_2\\)</span> là khối lượng Trái Đất và <span class=\"math inline\">\\(r=m_2/(m_1+m_2)\\)</span>, hoành độ <span class=\"math inline\">\\(L_1\\)</span> là nghiệm duy nhất của phương trình bậc năm <span class=\"math display\">\\[\\begin{aligned}\np(x)={}&amp;x^5-(2+r)x^4+(1+2r)x^3-(1-r)x^2\\\\\n&amp;+2(1-r)x+r-1=0,\n\\end{aligned}\\]</span> và hoành độ <span class=\"math inline\">\\(L_2\\)</span> là nghiệm của <span class=\"math display\">\\[p(x)-2rx^2=0.\\]</span> Dùng <span class=\"math inline\">\\(r\\approx3{,}04042\\times10^{-6}\\)</span>, tìm vị trí các điểm bình động (a) <span class=\"math inline\">\\(L_1\\)</span>; (b) <span class=\"math inline\">\\(L_2\\)</span>.</p>\n<div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-4-8-4ced8003/ex42.png\" alt=\"image\"><br>\nHình cho Bài tập 42. “sun”: Mặt Trời; “earth”: Trái Đất.</p>\n</div>"
+    }
+  ]
+}
