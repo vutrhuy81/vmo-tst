@@ -2,11 +2,11 @@
   "exercises": [
     {
       "number": 1,
-      "content": "<p><strong>1.</strong> </p><p>(a) Đọc các giá trị từ đồ thị <span class=\"math inline\">\\(f\\)</span> đã cho, dùng năm hình chữ nhật để tìm một ước lượng dưới và một ước lượng trên cho diện tích dưới đồ thị từ <span class=\"math inline\">\\(x=0\\)</span> đến <span class=\"math inline\">\\(x=10\\)</span>. Trong mỗi trường hợp, phác thảo các hình chữ nhật được dùng.<br>(b) Tìm các ước lượng mới bằng mười hình chữ nhật trong mỗi trường hợp. <p><em>[Hình ex01: Hình cho Bài tập 1 — chưa có tệp ảnh PNG trong nguồn đính kèm.]</em></p></p>"
+      "content": "<p><strong>1.</strong> </p><p>(a) Đọc các giá trị từ đồ thị <span class=\"math inline\">\\(f\\)</span> đã cho, dùng năm hình chữ nhật để tìm một ước lượng dưới và một ước lượng trên cho diện tích dưới đồ thị từ <span class=\"math inline\">\\(x=0\\)</span> đến <span class=\"math inline\">\\(x=10\\)</span>. Trong mỗi trường hợp, phác thảo các hình chữ nhật được dùng.<br>(b) Tìm các ước lượng mới bằng mười hình chữ nhật trong mỗi trường hợp. <p><em>[Hình ex01: Hình cho Bài tập 1 — chưa có tệp ảnh PNG trong nguồn đính kèm.]</em></p>"
     },
     {
       "number": 2,
-      "content": "<p><strong>2.</strong> </p><p>(a) Dùng sáu hình chữ nhật để tìm từng loại ước lượng sau cho diện tích dưới đồ thị <span class=\"math inline\">\\(f\\)</span> từ <span class=\"math inline\">\\(x=0\\)</span> đến <span class=\"math inline\">\\(x=12\\)</span>:<br>(i) <span class=\"math inline\">\\(L_6\\)</span> (điểm lấy mẫu là đầu mút trái);<br>(ii) <span class=\"math inline\">\\(R_6\\)</span> (điểm lấy mẫu là đầu mút phải);<br>(iii) <span class=\"math inline\">\\(M_6\\)</span> (điểm lấy mẫu là trung điểm).<br>(b) <span class=\"math inline\">\\(L_6\\)</span> là ước lượng thiếu hay thừa so với diện tích thực?<br>(c) <span class=\"math inline\">\\(R_6\\)</span> là ước lượng thiếu hay thừa so với diện tích thực?<br>(d) Trong các số <span class=\"math inline\">\\(L_6,R_6,M_6\\)</span>, số nào cho ước lượng tốt nhất? Giải thích. <p><em>[Hình ex02: Hình cho Bài tập 2 — chưa có tệp ảnh PNG trong nguồn đính kèm.]</em></p> </p>"
+      "content": "<p><strong>2.</strong> </p><p>(a) Dùng sáu hình chữ nhật để tìm từng loại ước lượng sau cho diện tích dưới đồ thị <span class=\"math inline\">\\(f\\)</span> từ <span class=\"math inline\">\\(x=0\\)</span> đến <span class=\"math inline\">\\(x=12\\)</span>:<br>(i) <span class=\"math inline\">\\(L_6\\)</span> (điểm lấy mẫu là đầu mút trái);<br>(ii) <span class=\"math inline\">\\(R_6\\)</span> (điểm lấy mẫu là đầu mút phải);<br>(iii) <span class=\"math inline\">\\(M_6\\)</span> (điểm lấy mẫu là trung điểm).<br>(b) <span class=\"math inline\">\\(L_6\\)</span> là ước lượng thiếu hay thừa so với diện tích thực?<br>(c) <span class=\"math inline\">\\(R_6\\)</span> là ước lượng thiếu hay thừa so với diện tích thực?<br>(d) Trong các số <span class=\"math inline\">\\(L_6,R_6,M_6\\)</span>, số nào cho ước lượng tốt nhất? Giải thích. <p><em>[Hình ex02: Hình cho Bài tập 2 — chưa có tệp ảnh PNG trong nguồn đính kèm.]</em></p>"
     },
     {
       "number": 3,
@@ -50,31 +50,31 @@
     },
     {
       "number": 13,
-      "content": "<p><strong>13.</strong> </p><p>Hình vẽ cho đồ thị vận tốc của một ô tô đang phanh. Dùng đồ thị để ước lượng quãng đường ô tô đi được trong thời gian phanh. <p><em>[Hình ex13: Hình cho Bài tập 13. Trục thời gian tính bằng giây. — chưa có tệp ảnh PNG trong nguồn đính kèm.]</em></p></p>"
+      "content": "<p><strong>13.</strong> </p><p>Hình vẽ cho đồ thị vận tốc của một ô tô đang phanh. Dùng đồ thị để ước lượng quãng đường ô tô đi được trong thời gian phanh. <p><em>[Hình ex13: Hình cho Bài tập 13. Trục thời gian tính bằng giây. — chưa có tệp ảnh PNG trong nguồn đính kèm.]</em></p>"
     },
     {
       "number": 14,
-      "content": "<p><strong>14.</strong> </p><p>Hình vẽ cho đồ thị vận tốc của một ô tô tăng tốc từ trạng thái nghỉ đến 120 km/h trong 30 giây. Ước lượng quãng đường ô tô đi được trong thời gian này. <p><em>[Hình ex14: Hình cho Bài tập 14. Trục thời gian tính bằng giây. — chưa có tệp ảnh PNG trong nguồn đính kèm.]</em></p></p>"
+      "content": "<p><strong>14.</strong> </p><p>Hình vẽ cho đồ thị vận tốc của một ô tô tăng tốc từ trạng thái nghỉ đến 120 km/h trong 30 giây. Ước lượng quãng đường ô tô đi được trong thời gian này. <p><em>[Hình ex14: Hình cho Bài tập 14. Trục thời gian tính bằng giây. — chưa có tệp ảnh PNG trong nguồn đính kèm.]</em></p>"
     },
     {
       "number": 15,
-      "content": "<p><strong>15.</strong> </p><p>Ở một người mắc bệnh sởi, mức vi rút <span class=\"math inline\">\\(N\\)</span> (đo bằng số tế bào nhiễm trên mỗi mL huyết tương) đạt mật độ cực đại vào khoảng <span class=\"math inline\">\\(t=12\\)</span> ngày (khi phát ban xuất hiện), rồi giảm khá nhanh do đáp ứng miễn dịch. Diện tích dưới đồ thị <span class=\"math inline\">\\(N(t)\\)</span> từ <span class=\"math inline\">\\(t=0\\)</span> đến <span class=\"math inline\">\\(t=12\\)</span> (như hình) bằng tổng mức nhiễm cần thiết để xuất hiện triệu chứng (đo bằng mật độ tế bào nhiễm nhân thời gian). Hàm <span class=\"math inline\">\\(N\\)</span> được mô hình hóa bởi <span class=\"math display\">\\[f(t)=-t(t-21)(t+1).\\]</span> Dùng mô hình này với sáu khoảng con và các trung điểm của chúng để ước lượng tổng mức nhiễm cần thiết để xuất hiện triệu chứng sởi. <p><em>[Hình ex15: Hình cho Bài tập 15. Trục thời gian tính bằng ngày. — chưa có tệp ảnh PNG trong nguồn đính kèm.]</em></p></p><p><em>Nguồn:</em> J. M. Heffernan và cộng sự, “An In-Host Model of Acute Infection: Measles as a Case Study,” <em>Theoretical Population Biology</em> 73 (2006): 134–47.</p><p> Dùng Định nghĩa 2 để tìm biểu thức diện tích dưới đồ thị <span class=\"math inline\">\\(f\\)</span> dưới dạng một giới hạn. Không tính giới hạn.</p>"
+      "content": "<p><strong>15.</strong> </p><p>Ở một người mắc bệnh sởi, mức vi rút <span class=\"math inline\">\\(N\\)</span> (đo bằng số tế bào nhiễm trên mỗi mL huyết tương) đạt mật độ cực đại vào khoảng <span class=\"math inline\">\\(t=12\\)</span> ngày (khi phát ban xuất hiện), rồi giảm khá nhanh do đáp ứng miễn dịch. Diện tích dưới đồ thị <span class=\"math inline\">\\(N(t)\\)</span> từ <span class=\"math inline\">\\(t=0\\)</span> đến <span class=\"math inline\">\\(t=12\\)</span> (như hình) bằng tổng mức nhiễm cần thiết để xuất hiện triệu chứng (đo bằng mật độ tế bào nhiễm nhân thời gian). Hàm <span class=\"math inline\">\\(N\\)</span> được mô hình hóa bởi <span class=\"math display\">\\[f(t)=-t(t-21)(t+1).\\]</span> Dùng mô hình này với sáu khoảng con và các trung điểm của chúng để ước lượng tổng mức nhiễm cần thiết để xuất hiện triệu chứng sởi. <p><em>[Hình ex15: Hình cho Bài tập 15. Trục thời gian tính bằng ngày. — chưa có tệp ảnh PNG trong nguồn đính kèm.]</em></p><p><em>Nguồn:</em> J. M. Heffernan và cộng sự, “An In-Host Model of Acute Infection: Measles as a Case Study,” <em>Theoretical Population Biology</em> 73 (2006): 134–47.</p>"
     },
     {
       "number": 16,
-      "content": "<p><strong>16.</strong> Dùng Định nghĩa 2 để tìm biểu thức diện tích dưới đồ thị f dưới dạng một giới hạn. Không tính giới hạn. </p><p><span class=\"math inline\">\\(f(x)=x^2e^x\\)</span>, \\quad <span class=\"math inline\">\\(0\\le x\\le4\\)</span>.</p>"
+      "content": "<p><strong>16.</strong> Dùng Định nghĩa 2 để tìm biểu thức diện tích dưới đồ thị f dưới dạng một giới hạn. Không tính giới hạn. </p><p><span class=\"math inline\">\\(f(x)=x^2e^x\\)</span>,   <span class=\"math inline\">\\(0\\le x\\le4\\)</span>.</p>"
     },
     {
       "number": 17,
-      "content": "<p><strong>17.</strong> Dùng Định nghĩa 2 để tìm biểu thức diện tích dưới đồ thị f dưới dạng một giới hạn. Không tính giới hạn. </p><p><span class=\"math inline\">\\(f(x)=2+\\sin^2x\\)</span>, \\quad <span class=\"math inline\">\\(0\\le x\\le\\pi\\)</span>.</p>"
+      "content": "<p><strong>17.</strong> Dùng Định nghĩa 2 để tìm biểu thức diện tích dưới đồ thị f dưới dạng một giới hạn. Không tính giới hạn. </p><p><span class=\"math inline\">\\(f(x)=2+\\sin^2x\\)</span>,   <span class=\"math inline\">\\(0\\le x\\le\\pi\\)</span>.</p>"
     },
     {
       "number": 18,
-      "content": "<p><strong>18.</strong> Dùng Định nghĩa 2 để tìm biểu thức diện tích dưới đồ thị f dưới dạng một giới hạn. Không tính giới hạn. </p><p><span class=\"math inline\">\\(f(x)=x+\\ln x\\)</span>, \\quad <span class=\"math inline\">\\(3\\le x\\le8\\)</span>.</p>"
+      "content": "<p><strong>18.</strong> Dùng Định nghĩa 2 để tìm biểu thức diện tích dưới đồ thị f dưới dạng một giới hạn. Không tính giới hạn. </p><p><span class=\"math inline\">\\(f(x)=x+\\ln x\\)</span>,   <span class=\"math inline\">\\(3\\le x\\le8\\)</span>.</p>"
     },
     {
       "number": 19,
-      "content": "<p><strong>19.</strong> Dùng Định nghĩa 2 để tìm biểu thức diện tích dưới đồ thị f dưới dạng một giới hạn. Không tính giới hạn. </p><p><span class=\"math inline\">\\(f(x)=x\\sqrt{x^3+8}\\)</span>, \\quad <span class=\"math inline\">\\(1\\le x\\le5\\)</span>.  Xác định một miền có diện tích bằng giới hạn đã cho. Không tính giới hạn.</p>"
+      "content": "<p><strong>19.</strong> Dùng Định nghĩa 2 để tìm biểu thức diện tích dưới đồ thị f dưới dạng một giới hạn. Không tính giới hạn. </p><p><span class=\"math inline\">\\(f(x)=x\\sqrt{x^3+8}\\)</span>,   <span class=\"math inline\">\\(1\\le x\\le5\\)</span>."
     },
     {
       "number": 20,
@@ -102,7 +102,7 @@
     },
     {
       "number": 26,
-      "content": "<p><strong>26.</strong> </p><p>Nếu <span class=\"math inline\">\\(A\\)</span> là diện tích dưới đường cong <span class=\"math inline\">\\(y=e^x\\)</span> từ 1 đến 3, dùng Bài tập 25 để tìm một giá trị <span class=\"math inline\">\\(n\\)</span> sao cho <span class=\"math inline\">\\(R_n-A&lt;0.0001\\)</span>.  Với máy tính lập trình được (hoặc máy vi tính), có thể tính các biểu thức tổng diện tích hình chữ nhật xấp xỉ, ngay cả khi <span class=\"math inline\">\\(n\\)</span> lớn, bằng vòng lặp. (Trên TI dùng lệnh <code>Is&gt;</code> hoặc vòng lặp <code>For-EndFor</code>; trên Casio dùng <code>Isz</code>; trên HP hoặc trong BASIC dùng vòng lặp <code>FOR-NEXT</code>.) Tính tổng diện tích các hình chữ nhật xấp xỉ với các đoạn con bằng nhau, dùng đầu mút phải, cho <span class=\"math inline\">\\(n=10,30,50,100\\)</span>. Sau đó dự đoán giá trị diện tích chính xác.</p>"
+      "content": "<p><strong>26.</strong> </p><p>Nếu <span class=\"math inline\">\\(A\\)</span> là diện tích dưới đường cong <span class=\"math inline\">\\(y=e^x\\)</span> từ 1 đến 3, dùng Bài tập 25 để tìm một giá trị <span class=\"math inline\">\\(n\\)</span> sao cho <span class=\"math inline\">\\(R_n-A&lt;0.0001\\)</span>."
     },
     {
       "number": 27,
@@ -110,15 +110,15 @@
     },
     {
       "number": 28,
-      "content": "<p><strong>28.</strong> Tính tổng diện tích các hình chữ nhật xấp xỉ với các đoạn con bằng nhau, dùng đầu mút phải, cho n=10,30,50,100. Sau đó dự đoán diện tích chính xác. </p><p>Miền dưới <span class=\"math inline\">\\(y=\\cos x\\)</span> từ 0 đến <span class=\"math inline\">\\(\\pi/2\\)</span>.  Một số hệ thống đại số máy tính có các lệnh vẽ hình chữ nhật xấp xỉ và tính tổng diện tích của chúng, ít nhất khi <span class=\"math inline\">\\(x_i^*\\)</span> là đầu mút trái hoặc phải. (Chẳng hạn, trong Maple dùng <code>leftbox</code>, <code>rightbox</code>, <code>leftsum</code>, <code>rightsum</code>.)</p>"
+      "content": "<p><strong>28.</strong> Tính tổng diện tích các hình chữ nhật xấp xỉ với các đoạn con bằng nhau, dùng đầu mút phải, cho n=10,30,50,100. Sau đó dự đoán diện tích chính xác. </p><p>Miền dưới <span class=\"math inline\">\\(y=\\cos x\\)</span> từ 0 đến <span class=\"math inline\">\\(\\pi/2\\)</span>."
     },
     {
       "number": 29,
-      "content": "<p><strong>29.</strong> Dùng các tổng trái và tổng phải của các hình chữ nhật xấp xỉ. </p><p>Cho <span class=\"math inline\">\\(f(x)=1/(x^2+1)\\)</span>, <span class=\"math inline\">\\(0\\le x\\le1\\)</span>.<br>(a) Tìm các tổng trái và phải với <span class=\"math inline\">\\(n=10,30,50\\)</span>.<br>(b) Minh họa bằng cách vẽ các hình chữ nhật ở (a).<br>(c) Chứng minh diện tích chính xác dưới đồ thị <span class=\"math inline\">\\(f\\)</span> nằm giữa 0.780 và 0.791.</p>"
+      "content": "<p><strong>29.</strong> Dùng các tổng trái và tổng phải của các hình chữ nhật xấp xỉ.  Dùng tổng trái và tổng phải theo yêu cầu chung của nhóm Bài tập 29–30.</p><p>Cho <span class=\"math inline\">\\(f(x)=1/(x^2+1)\\)</span>, <span class=\"math inline\">\\(0\\le x\\le1\\)</span>.<br>(a) Tìm các tổng trái và phải với <span class=\"math inline\">\\(n=10,30,50\\)</span>.<br>(b) Minh họa bằng cách vẽ các hình chữ nhật ở (a).<br>(c) Chứng minh diện tích chính xác dưới đồ thị <span class=\"math inline\">\\(f\\)</span> nằm giữa 0.780 và 0.791.</p>"
     },
     {
       "number": 30,
-      "content": "<p><strong>30.</strong> Dùng các tổng trái và tổng phải của các hình chữ nhật xấp xỉ. </p><p>Cho <span class=\"math inline\">\\(f(x)=\\ln x\\)</span>, <span class=\"math inline\">\\(1\\le x\\le4\\)</span>.<br>(a) Tìm các tổng trái và phải với <span class=\"math inline\">\\(n=10,30,50\\)</span>.<br>(b) Minh họa bằng cách vẽ các hình chữ nhật ở (a).<br>(c) Chứng minh diện tích chính xác dưới đồ thị <span class=\"math inline\">\\(f\\)</span> nằm giữa 2.50 và 2.59.</p>"
+      "content": "<p><strong>30.</strong> Dùng các tổng trái và tổng phải của các hình chữ nhật xấp xỉ.  Dùng tổng trái và tổng phải theo yêu cầu chung của nhóm Bài tập 29–30.</p><p>Cho <span class=\"math inline\">\\(f(x)=\\ln x\\)</span>, <span class=\"math inline\">\\(1\\le x\\le4\\)</span>.<br>(a) Tìm các tổng trái và phải với <span class=\"math inline\">\\(n=10,30,50\\)</span>.<br>(b) Minh họa bằng cách vẽ các hình chữ nhật ở (a).<br>(c) Chứng minh diện tích chính xác dưới đồ thị <span class=\"math inline\">\\(f\\)</span> nằm giữa 2.50 và 2.59.</p>"
     },
     {
       "number": 31,
