@@ -1,0 +1,297 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage{fontspec}\setmainfont{Latin Modern Roman}\setsansfont{DejaVu Sans}
+\usepackage{amsmath,amssymb,graphicx,geometry,enumitem,longtable,booktabs,fancyhdr,hyperref}
+\geometry{left=28mm,right=23mm,top=24mm,bottom=24mm}
+\hypersetup{unicode=true,colorlinks=true,linkcolor=black,urlcolor=blue,pdftitle={Giải tích Chương 3 Mục 3.8 Tăng trưởng và suy giảm theo hàm mũ}}
+\setlength{\parindent}{1.2em}\setlength{\parskip}{4pt}\setlength{\headheight}{16pt}
+\pagestyle{fancy}\fancyhf{}\fancyhead[L]{\small Chương 3. Các quy tắc tính đạo hàm}\fancyhead[R]{\small §3.8}\fancyfoot[C]{\thepage}
+\newcommand{\fig}[3][.68]{\begin{center}\begin{minipage}{\linewidth}\centering\includegraphics[width=#1\linewidth]{assets/#2.png}\\{\small #3}\end{minipage}\end{center}}
+\newcommand{\ex}[1]{\par\medskip\noindent\textbf{Ví dụ #1.}\ }
+\newcommand{\sol}{\par\nopagebreak[4]\noindent\textit{Lời giải.}\ }
+\newcommand{\bt}[1]{\par\smallskip\noindent\textbf{#1.}\ }
+\newcommand{\group}[1]{\par\medskip\noindent\textbf{#1}\par\nopagebreak[4]}
+\newcommand{\gint}[1]{\left[\!\left[#1\right]\!\right]}
+\allowdisplaybreaks[2]
+\begin{document}
+\begin{center}
+{\Large\bfseries GIẢI TÍCH}\\[5pt]
+{\large Chương 3. Các quy tắc tính đạo hàm}\\[9pt]
+{\Large\bfseries 3.8. Tăng trưởng và suy giảm theo hàm mũ}
+\end{center}
+\noindent\textbf{Nguồn:} James Stewart, Daniel K. Clegg, Saleem Watson, \textit{Calculus: Early Transcendentals}, ấn bản thứ 9 (2020), trang in 239–247 (trang PDF 274–282): toàn bộ §3.8, Bài tập 1–22 và dự án ứng dụng gồm 3 bài toán, trước tiêu đề §3.9.
+
+Trong nhiều hiện tượng tự nhiên, các đại lượng tăng hoặc giảm với tốc độ tỉ lệ với độ lớn của chúng. Chẳng hạn, nếu $y=f(t)$ là số cá thể trong một quần thể động vật hoặc vi khuẩn tại thời điểm $t$, ta có thể dự đoán hợp lý rằng tốc độ tăng trưởng $f'(t)$ tỉ lệ với kích thước quần thể $f(t)$, tức $f'(t)=kf(t)$ với hằng số $k$. Trong điều kiện lý tưởng như môi trường không hạn chế, dinh dưỡng đầy đủ và miễn dịch với bệnh tật, mô hình này dự đoán khá chính xác diễn biến thực tế.
+
+Một ví dụ khác trong vật lý hạt nhân: khối lượng chất phóng xạ giảm với tốc độ tỉ lệ với khối lượng. Trong hóa học, tốc độ phản ứng bậc nhất đơn phân tử tỉ lệ với nồng độ chất. Trong tài chính, giá trị tài khoản tiết kiệm ghép lãi liên tục tăng với tốc độ tỉ lệ với chính giá trị ấy.
+
+Tổng quát, nếu $y(t)$ là giá trị của đại lượng $y$ tại thời điểm $t$ và tốc độ biến thiên của $y$ theo $t$ luôn tỉ lệ với $y(t)$ thì
+\[\frac{dy}{dt}=ky,\tag{1}\]
+trong đó $k$ là hằng số. Phương trình (1) đôi khi được gọi là \textbf{định luật tăng trưởng tự nhiên} nếu $k>0$, hoặc \textbf{định luật suy giảm tự nhiên} nếu $k<0$. Đây là một \textbf{phương trình vi phân}, vì nó chứa một hàm chưa biết $y$ cùng đạo hàm $dy/dt$ của hàm ấy.
+
+Không khó tìm một nghiệm của (1): cần một hàm có đạo hàm bằng một hằng số nhân với chính nó. Mọi hàm mũ $y(t)=Ce^{kt}$, với $C$ không đổi, đều thỏa mãn
+\[\frac{dy}{dt}=C(ke^{kt})=k(Ce^{kt})=ky.\]
+Trong §9.4, ta sẽ thấy mọi hàm thỏa mãn $dy/dt=ky$ đều có dạng $y=Ce^{kt}$. Để hiểu ý nghĩa của $C$, nhận xét $y(0)=Ce^{k\cdot0}=C$. Vậy $C$ là giá trị ban đầu của hàm.
+\begin{quote}\textbf{2. Định lý.} Các nghiệm duy nhất của phương trình vi phân $dy/dt=ky$ là các hàm mũ
+\[y(t)=y(0)e^{kt}.\]
+\end{quote}
+\section*{Tăng trưởng dân số}
+Hằng số tỉ lệ $k$ có ý nghĩa gì? Với $P(t)$ là kích thước quần thể tại thời điểm $t$, ta viết
+\[\frac{dP}{dt}=kP,\qquad\text{hay}\qquad\frac{dP/dt}{P}=k.\tag{3}\]
+Đại lượng $(dP/dt)/P$, tức tốc độ tăng trưởng chia cho kích thước quần thể, được gọi là \textbf{tốc độ tăng trưởng tương đối}. Theo (3), thay vì nói “tốc độ tăng trưởng tỉ lệ với kích thước quần thể”, ta có thể nói “tốc độ tăng trưởng tương đối không đổi”. Định lý 2 cho biết quần thể có tốc độ tăng trưởng tương đối không đổi phải tăng theo hàm mũ. Hằng số $k$ xuất hiện như hệ số của $t$ trong $Ce^{kt}$.
+
+Chẳng hạn, nếu $dP/dt=0.02P$ và $t$ đo bằng năm thì $k=0.02$, nghĩa là dân số tăng với tốc độ tương đối $2\%$ mỗi năm. Nếu dân số lúc $t=0$ là $P_0$ thì $P(t)=P_0e^{0.02t}$.
+\ex{1} Dùng dữ kiện dân số thế giới là $2560$ triệu người năm $1950$ và $3040$ triệu người năm $1960$ để mô hình hóa dân số thế giới trong nửa sau thế kỷ XX. Giả sử tốc độ tăng dân số tỉ lệ với dân số. Tốc độ tăng trưởng tương đối là bao nhiêu? Dùng mô hình để ước tính dân số năm $1993$ và dự báo năm $2025$.
+\sol Đo $t$ bằng năm, lấy $t=0$ ở năm $1950$; đo $P(t)$ bằng triệu người. Khi đó $P(0)=2560$, $P(10)=3040$. Theo giả thiết $dP/dt=kP$ và Định lý 2,
+\[P(t)=P(0)e^{kt}=2560e^{kt}.\]
+Vì $P(10)=2560e^{10k}=3040$,
+\[k=\frac1{10}\ln\frac{3040}{2560}\approx0.017185.\]
+Tốc độ tăng trưởng tương đối khoảng $1.7\%$ mỗi năm, và mô hình là
+\[P(t)=2560e^{0.017185t}.\]
+Ước tính dân số thế giới năm $1993$:
+\[P(43)=2560e^{0.017185(43)}\approx5360\ \text{triệu người}.\]
+Dự báo cho năm $2025$:
+\[P(75)=2560e^{0.017185(75)}\approx9289\ \text{triệu người}.\]
+Hình 1 cho thấy mô hình khá chính xác đến cuối thế kỷ XX; các chấm biểu diễn dân số thực tế. Do đó, ước tính cho năm $1993$ khá đáng tin cậy, nhưng dự báo cho năm $2025$ có thể kém chính xác hơn.\hfill$\square$
+\fig[.76]{f01}{Hình 1. Mô hình tăng trưởng dân số thế giới trong nửa sau thế kỷ XX. Trục đứng: triệu người; trục ngang: số năm kể từ $1950$.}
+\section*{Phân rã phóng xạ}
+Các chất phóng xạ phân rã bằng cách tự phát phát ra bức xạ. Nếu $m(t)$ là khối lượng còn lại sau thời gian $t$ từ khối lượng ban đầu $m_0$, thực nghiệm cho thấy \textbf{tốc độ phân rã tương đối}
+\[-\frac{dm/dt}{m}\]
+không đổi. Vì $dm/dt<0$, tốc độ phân rã tương đối là số dương. Suy ra $dm/dt=km$, trong đó $k<0$. Nói cách khác, tốc độ phân rã tỉ lệ với khối lượng còn lại. Theo Định lý 2,
+\[m(t)=m_0e^{kt}.\]
+Các nhà vật lý thường diễn tả tốc độ phân rã thông qua \textbf{chu kỳ bán rã}: thời gian cần để một nửa lượng chất ban đầu phân rã.
+\ex{2} Chu kỳ bán rã của radium-226 là $1590$ năm.
+
+(a) Một mẫu radium-226 có khối lượng $100$ mg. Tìm công thức khối lượng mẫu còn lại sau $t$ năm.
+
+(b) Tìm khối lượng còn lại sau $1000$ năm, làm tròn đến miligam gần nhất.
+
+(c) Khi nào khối lượng giảm còn $30$ mg?
+\sol (a) Gọi $m(t)$ là khối lượng radium-226, bằng miligam, còn lại sau $t$ năm. Vì $dm/dt=km$ và $m(0)=100$, Định lý 2 cho
+\[m(t)=100e^{kt}.\]
+Dùng $m(1590)=\frac12(100)$ để xác định $k$:
+\[100e^{1590k}=50,\qquad e^{1590k}=\frac12,\]
+\[1590k=\ln\frac12=-\ln2,\qquad k=-\frac{\ln2}{1590}.\]
+Vậy
+\[m(t)=100e^{-(\ln2)t/1590}.\]
+Dùng $e^{\ln2}=2$, cũng có thể viết $m(t)=100\times2^{-t/1590}$.
+
+(b) Khối lượng còn lại sau $1000$ năm là
+\[m(1000)=100e^{-(\ln2)1000/1590}\approx65\ \mathrm{mg}.\]
+(c) Cần tìm $t$ sao cho
+\[100e^{-(\ln2)t/1590}=30,\qquad\text{hay}\qquad e^{-(\ln2)t/1590}=0.3.\]
+Lấy logarit tự nhiên hai vế:
+\[-\frac{\ln2}{1590}t=\ln0.3.\]
+Do đó,
+\[t=-1590\frac{\ln0.3}{\ln2}\approx2762\ \text{năm}.\qquad\square\]
+Để kiểm tra, vẽ đồ thị $m(t)$ cùng đường thẳng $m=30$ như Hình 2. Hai đường cắt nhau khi $t\approx2800$, phù hợp đáp số ở (c).
+\fig[.48]{f02}{Hình 2. Đồ thị khối lượng mẫu radium-226 và đường thẳng $m=30$.}
+\section*{Định luật làm nguội Newton}
+\textbf{Định luật làm nguội Newton} phát biểu rằng tốc độ làm nguội của một vật tỉ lệ với chênh lệch nhiệt độ giữa vật và môi trường, với điều kiện chênh lệch không quá lớn. Định luật cũng áp dụng cho quá trình ấm lên. Nếu $T(t)$ là nhiệt độ vật tại thời điểm $t$ và $T_s$ là nhiệt độ môi trường,
+\[\frac{dT}{dt}=k(T-T_s),\]
+với $k$ là hằng số. Phương trình chưa hoàn toàn giống (1), nên đặt $y(t)=T(t)-T_s$. Vì $T_s$ không đổi, $y'(t)=T'(t)$ và phương trình trở thành $dy/dt=ky$. Dùng Định lý 2 tìm $y$, rồi suy ra $T$.
+\ex{3} Một chai trà đá ở nhiệt độ phòng $72$ °F được đặt vào tủ lạnh ở nhiệt độ $44$ °F. Sau nửa giờ, trà nguội còn $61$ °F.
+
+(a) Sau nửa giờ nữa, nhiệt độ trà là bao nhiêu?
+
+(b) Mất bao lâu để trà nguội còn $50$ °F?
+\sol (a) Gọi $T(t)$ là nhiệt độ trà sau $t$ phút. Nhiệt độ môi trường $T_s=44$ °F, nên
+\[\frac{dT}{dt}=k(T-44).\]
+Đặt $y=T-44$. Khi đó $y(0)=T(0)-44=72-44=28$, nên
+\[\frac{dy}{dt}=ky,\qquad y(0)=28.\]
+Theo (2), $y(t)=28e^{kt}$. Do $T(30)=61$, ta có $y(30)=17$, tức
+\[28e^{30k}=17,\qquad e^{30k}=\frac{17}{28}.\]
+Lấy logarit:
+\[k=\frac{\ln(17/28)}{30}\approx-0.01663.\]
+Do đó,
+\[y(t)=28e^{-0.01663t},\qquad T(t)=44+28e^{-0.01663t},\]
+\[T(60)=44+28e^{-0.01663(60)}\approx54.3.\]
+Sau nửa giờ nữa, trà nguội còn khoảng $54$ °F.
+
+(b) Có $T(t)=50$ khi
+\[44+28e^{-0.01663t}=50,\qquad e^{-0.01663t}=\frac6{28}.\]
+Vậy
+\[t=\frac{\ln(6/28)}{-0.01663}\approx92.6.\]
+Trà nguội còn $50$ °F sau khoảng $1$ giờ $33$ phút.\hfill$\square$
+
+Chú ý trong Ví dụ 3,
+\[\lim_{t\to\infty}T(t)=\lim_{t\to\infty}(44+28e^{-0.01663t})=44+28\cdot0=44.\]
+Như dự đoán, nhiệt độ trà tiến đến nhiệt độ môi trường bên trong tủ lạnh. Đồ thị hàm nhiệt độ ở Hình 3.
+\fig[.50]{f03}{Hình 3. Nhiệt độ trà, tính bằng °F, theo thời gian $t$, tính bằng phút.}
+\section*{Ghép lãi liên tục}
+\ex{4} Nếu đầu tư $5000$ đô la với lãi suất $2\%$, ghép lãi hằng năm, thì sau $1$ năm khoản đầu tư trị giá $5000(1.02)=5100.00$ đô la; sau $2$ năm là $[5000(1.02)](1.02)=5202.00$ đô la; sau $t$ năm là $5000(1.02)^t$ đô la.
+
+Tổng quát, nếu đầu tư số tiền $A_0$ với lãi suất $r$ ($r=0.02$ trong ví dụ), giá trị sau $t$ năm là $A_0(1+r)^t$. Thường lãi được ghép nhiều lần hơn, chẳng hạn $n$ lần mỗi năm. Mỗi kỳ có lãi suất $r/n$, và trong $t$ năm có $nt$ kỳ, nên
+\[A=A_0\left(1+\frac rn\right)^{nt}.\]
+Ví dụ, sau $3$ năm với lãi suất $2\%$, khoản đầu tư $5000$ đô la có giá trị:
+\begin{center}\begin{tabular}{lr}\toprule
+Kỳ ghép lãi & Giá trị (đô la)\\\midrule
+Hằng năm: $5000(1.02)^3$ & $5306.04$\\
+Nửa năm: $5000(1.01)^6$ & $5307.60$\\
+Hằng quý: $5000(1.005)^{12}$ & $5308.39$\\
+Hằng tháng: $5000(1+0.02/12)^{36}$ & $5308.92$\\
+Hằng ngày: $5000(1+0.02/365)^{365\cdot3}$ & $5309.17$\\\bottomrule
+\end{tabular}\end{center}
+Tiền lãi tăng khi số kỳ ghép lãi $n$ tăng. Cho $n\to\infty$, ta ghép lãi liên tục và giá trị khoản đầu tư là
+\begin{align*}
+A(t)&=\lim_{n\to\infty}A_0\left(1+\frac rn\right)^{nt}\\
+&=\lim_{n\to\infty}A_0\left[\left(1+\frac rn\right)^{n/r}\right]^{rt}\\
+&=A_0\left[\lim_{n\to\infty}\left(1+\frac rn\right)^{n/r}\right]^{rt}\\
+&=A_0\left[\lim_{m\to\infty}\left(1+\frac1m\right)^m\right]^{rt},\qquad m=n/r.
+\end{align*}
+Giới hạn trong biểu thức này bằng $e$, theo Công thức 3.6.6:
+\[e=\lim_{n\to\infty}\left(1+\frac1n\right)^n.\]
+Do đó, khi ghép lãi liên tục với lãi suất $r$, số tiền sau $t$ năm là
+\[A(t)=A_0e^{rt}.\]
+Lấy đạo hàm,
+\[\frac{dA}{dt}=rA_0e^{rt}=rA(t).\]
+Vậy khi ghép lãi liên tục, tốc độ tăng giá trị đầu tư tỉ lệ với giá trị đầu tư.
+
+Trở lại khoản $5000$ đô la đầu tư $3$ năm với lãi suất $2\%$, ghép lãi liên tục cho
+\[A(3)=5000e^{(0.02)3}=5309.18\ \text{đô la}.\]
+Giá trị này rất gần $5309.17$ đô la tính theo ghép lãi hằng ngày, nhưng dùng ghép lãi liên tục thì phép tính đơn giản hơn.\hfill$\square$
+\section*{3.8. Bài tập}
+\bt{1} Quần thể nấm men \textit{Saccharomyces cerevisiae}, dùng trong lên men, phát triển với tốc độ tăng trưởng tương đối không đổi $0.4159$ mỗi giờ. Ban đầu có $3.8$ triệu tế bào. Tìm kích thước quần thể sau $2$ giờ.
+\bt{2} Vi khuẩn \textit{Escherichia coli} thường sống trong ruột người, được đặt theo tên bác sĩ nhi khoa Đức Theodor Escherich, người nhận diện nó năm $1885$. Trong môi trường nước dùng dinh dưỡng, mỗi tế bào phân đôi sau $20$ phút. Quần thể nuôi cấy ban đầu có $50$ tế bào.
+
+(a) Tìm tốc độ tăng trưởng tương đối.
+
+(b) Tìm biểu thức số tế bào sau $t$ giờ.
+
+(c) Tìm số tế bào sau $6$ giờ.
+
+(d) Tìm tốc độ tăng trưởng sau $6$ giờ.
+
+(e) Khi nào quần thể đạt một triệu tế bào?
+\bt{3} Môi trường nuôi cấy vi khuẩn \textit{Salmonella enteritidis} ban đầu chứa $50$ tế bào. Khi đưa vào nước dùng dinh dưỡng, quần thể tăng với tốc độ tỉ lệ kích thước. Sau $1.5$ giờ, số tế bào tăng lên $975$.
+
+(a) Tìm biểu thức số vi khuẩn sau $t$ giờ.
+
+(b) Tìm số vi khuẩn sau $3$ giờ.
+
+(c) Tìm tốc độ tăng trưởng sau $3$ giờ.
+
+(d) Sau bao nhiêu giờ quần thể đạt $250\,000$?
+\bt{4} Một quần thể vi khuẩn tăng với tốc độ tăng trưởng tương đối không đổi. Có $400$ vi khuẩn sau $2$ giờ và $25\,600$ sau $6$ giờ.
+
+(a) Tốc độ tăng trưởng tương đối là bao nhiêu? Biểu diễn bằng phần trăm.
+
+(b) Quần thể ban đầu có bao nhiêu vi khuẩn?
+
+(c) Tìm biểu thức số vi khuẩn sau $t$ giờ.
+
+(d) Tìm số vi khuẩn sau $4.5$ giờ.
+
+(e) Tìm tốc độ tăng trưởng sau $4.5$ giờ.
+
+(f) Khi nào quần thể đạt $50\,000$?
+\bt{5} Bảng sau cho dân số thế giới ước tính, bằng triệu người, từ $1750$ đến $2000$.
+\begin{center}\begin{tabular}{rrrr}\toprule
+Năm & Dân số (triệu) & Năm & Dân số (triệu)\\\midrule
+1750&790&1900&1650\\1800&980&1950&2560\\1850&1260&2000&6080\\\bottomrule
+\end{tabular}\end{center}
+(a) Dùng mô hình mũ và dân số năm $1750,1800$ để dự báo dân số năm $1900,1950$. So sánh với số liệu thực tế.
+
+(b) Dùng mô hình mũ và dân số năm $1850,1900$ để dự báo dân số năm $1950$. So sánh với thực tế.
+
+(c) Dùng mô hình mũ và dân số năm $1900,1950$ để dự báo dân số năm $2000$. So sánh với thực tế và thử giải thích sai khác.
+\bt{6} Bảng sau cho số liệu điều tra dân số Indonesia, bằng triệu người, trong nửa sau thế kỷ XX.
+\begin{center}\begin{tabular}{rr}\toprule
+Năm & Dân số (triệu)\\\midrule
+1950&83\\1960&100\\1970&122\\1980&150\\1990&182\\2000&214\\\bottomrule
+\end{tabular}\end{center}
+(a) Giả sử tốc độ tăng dân số tỉ lệ với dân số, dùng số liệu $1950,1960$ để dự báo dân số năm $1980$. So sánh với thực tế.
+
+(b) Dùng số liệu $1960,1980$ để dự báo dân số năm $2000$. So sánh với thực tế.
+
+(c) Dùng số liệu $1980,2000$ để dự báo dân số năm $2010$ và so sánh với số liệu thực tế $243$ triệu người.
+
+(d) Dùng mô hình (c) để dự báo dân số năm $2025$. Bạn cho rằng dự báo quá cao hay quá thấp? Vì sao?
+\bt{7} Thực nghiệm cho thấy phản ứng
+\[\mathrm N_2\mathrm O_5\longrightarrow2\mathrm N\mathrm O_2+\frac12\mathrm O_2\]
+ở $45$ °C có tốc độ phản ứng xét theo dinitơ pentoxit tỉ lệ với nồng độ:
+\[-\frac{d[\mathrm N_2\mathrm O_5]}{dt}=0.0005[\mathrm N_2\mathrm O_5].\]
+(a) Tìm nồng độ $[\mathrm N_2\mathrm O_5]$ sau $t$ giây nếu nồng độ ban đầu là $C$.
+
+(b) Mất bao lâu để nồng độ giảm còn $90\%$ giá trị ban đầu?
+\bt{8} Strontium-90 có chu kỳ bán rã $28$ ngày.
+
+(a) Một mẫu có khối lượng ban đầu $50$ mg. Tìm công thức khối lượng còn lại sau $t$ ngày.
+
+(b) Tìm khối lượng còn lại sau $40$ ngày.
+
+(c) Mất bao lâu để mẫu giảm còn $2$ mg?
+
+(d) Phác họa đồ thị hàm khối lượng.
+\bt{9} Chu kỳ bán rã của cesium-137 là $30$ năm. Giả sử có mẫu $100$ mg.
+
+(a) Tìm khối lượng còn lại sau $t$ năm.
+
+(b) Sau $100$ năm còn lại bao nhiêu?
+
+(c) Sau bao lâu chỉ còn $1$ mg?
+\bt{10} Một mẫu einsteinium-252 giảm còn $64.3\%$ khối lượng ban đầu sau $300$ ngày.
+
+(a) Chu kỳ bán rã của einsteinium-252 là bao nhiêu?
+
+(b) Mất bao lâu để mẫu giảm còn một phần ba khối lượng ban đầu?
+\group{11–13. Định tuổi bằng carbon phóng xạ} Các nhà khoa học có thể xác định tuổi cổ vật bằng phương pháp carbon phóng xạ. Tia vũ trụ bắn phá tầng khí quyển trên, chuyển nitơ thành đồng vị carbon phóng xạ $^{14}\mathrm C$, có chu kỳ bán rã khoảng $5730$ năm. Thực vật hấp thụ carbon dioxide từ khí quyển; động vật tiếp nhận $^{14}\mathrm C$ qua chuỗi thức ăn. Khi sinh vật chết, nó ngừng bổ sung carbon; lượng $^{14}\mathrm C$ giảm do phân rã phóng xạ. Vì vậy, mức phóng xạ cũng giảm theo hàm mũ.
+\bt{11} Một mảnh giấy da được phát hiện có mức phóng xạ $^{14}\mathrm C$ bằng khoảng $74\%$ mức của vật liệu thực vật trên Trái Đất ngày nay. Ước tính tuổi mảnh giấy da.
+\bt{12} Hóa thạch khủng long quá cổ để định tuổi đáng tin cậy bằng carbon-14. Giả sử có hóa thạch $68$ triệu năm tuổi. Tỉ phần $^{14}\mathrm C$ của khủng long lúc còn sống còn lại ngày nay là bao nhiêu? Nếu ngưỡng khối lượng phát hiện được nhỏ nhất là $0.1\%$, tuổi lớn nhất của hóa thạch có thể định tuổi bằng $^{14}\mathrm C$ là bao nhiêu?
+\bt{13} Hóa thạch khủng long thường được định tuổi bằng nguyên tố khác carbon, chẳng hạn potassium-40 có chu kỳ bán rã dài hơn, khoảng $1.25$ tỉ năm. Giả sử ngưỡng phát hiện nhỏ nhất là $0.1\%$ và một khủng long được định tuổi bằng $^{40}\mathrm K$ là $68$ triệu năm. Việc định tuổi như vậy có khả thi không? Nói cách khác, tuổi lớn nhất có thể định bằng $^{40}\mathrm K$ là bao nhiêu?
+\bt{14} Một đường cong đi qua $(0,5)$ và có hệ số góc tại mọi điểm $P$ bằng hai lần tung độ của $P$. Tìm phương trình đường cong.
+\bt{15} Một con gà tây quay được lấy khỏi lò ở nhiệt độ $185$ °F và đặt trên bàn trong phòng có nhiệt độ $75$ °F.
+
+(a) Nếu sau nửa giờ nhiệt độ là $150$ °F, nhiệt độ sau $45$ phút là bao nhiêu?
+
+(b) Khi nào nhiệt độ giảm còn $100$ °F?
+\bt{16} Trong điều tra án mạng, nhiệt độ thi thể là $32.5$ °C lúc $13$ giờ $30$ và $30.3$ °C một giờ sau. Nhiệt độ cơ thể bình thường là $37.0$ °C, nhiệt độ môi trường là $20.0$ °C. Vụ án xảy ra lúc nào?
+\bt{17} Một đồ uống lạnh được lấy khỏi tủ lạnh ở nhiệt độ $5$ °C. Sau $25$ phút trong phòng $20$ °C, nhiệt độ tăng lên $10$ °C.
+
+(a) Nhiệt độ sau $50$ phút là bao nhiêu?
+
+(b) Khi nào nhiệt độ đạt $15$ °C?
+\bt{18} Một tách cà phê mới pha ở nhiệt độ $95$ °C trong phòng $20$ °C. Khi nhiệt độ là $70$ °C, cà phê đang nguội với tốc độ $1$ °C/phút. Điều này xảy ra lúc nào?
+\bt{19} Ở nhiệt độ không đổi, tốc độ biến thiên của áp suất khí quyển $P$ theo độ cao $h$ tỉ lệ với $P$. Tại $15$ °C, áp suất ở mực nước biển là $101.3$ kPa, và tại $h=1000$ m là $87.14$ kPa.
+
+(a) Áp suất ở độ cao $3000$ m là bao nhiêu?
+
+(b) Áp suất trên đỉnh McKinley, cao $6187$ m, là bao nhiêu?
+\bt{20} (a) Vay $2500$ đô la với lãi suất $4.5\%$. Tìm số tiền phải trả cuối $3$ năm nếu ghép lãi: (i) hằng năm; (ii) hằng quý; (iii) hằng tháng; (iv) hằng tuần; (v) hằng ngày; (vi) hằng giờ; (vii) liên tục.
+
+(b) Giả sử vay $2500$ đô la và ghép lãi liên tục. Nếu $A(t)$ là số tiền phải trả sau $t$ năm, $0\le t\le3$, vẽ $A(t)$ cho các lãi suất $5\%,6\%,7\%$ trên cùng một hệ trục.
+\bt{21} (a) Đầu tư $4000$ đô la với lãi suất $1.75\%$. Tìm giá trị cuối $5$ năm nếu ghép lãi: (i) hằng năm; (ii) nửa năm; (iii) hằng tháng; (iv) hằng tuần; (v) hằng ngày; (vi) liên tục.
+
+(b) Với trường hợp ghép lãi liên tục, gọi $A(t)$ là giá trị đầu tư tại thời điểm $t$. Viết phương trình vi phân và điều kiện ban đầu mà $A(t)$ thỏa mãn.
+\bt{22} (a) Mất bao lâu để khoản đầu tư tăng gấp đôi với lãi suất $3\%$, ghép lãi liên tục?
+
+(b) Lãi suất hằng năm tương đương là bao nhiêu?
+\section*{Dự án ứng dụng — Kiểm soát lượng hồng cầu mất trong phẫu thuật}
+Thể tích máu điển hình trong cơ thể người khoảng $5$ L. Một tỉ lệ nhất định của thể tích này là hồng cầu, gọi là \textbf{hematocrit}; ở nam giới, giá trị điển hình khoảng $45\%$. Giả sử một cuộc phẫu thuật kéo dài $4$ giờ và bệnh nhân nam mất $2.5$ L máu. Trong phẫu thuật, thể tích máu được duy trì ở $5$ L bằng cách truyền dung dịch muối, hòa trộn nhanh với máu nhưng làm loãng máu, khiến hematocrit giảm theo thời gian.
+\bt{1} Giả sử tốc độ mất hồng cầu tỉ lệ với thể tích hồng cầu, xác định thể tích hồng cầu của bệnh nhân khi kết thúc phẫu thuật.
+\bt{2} Một thủ thuật gọi là \textbf{pha loãng máu đẳng thể tích cấp} (ANH, \textit{acute normovolemic hemodilution}) được phát triển để giảm thiểu mất hồng cầu trong phẫu thuật. Trước mổ, rút máu của bệnh nhân và thay bằng dung dịch muối. Máu bị pha loãng nên khi chảy máu trong mổ sẽ mất ít hồng cầu hơn. Lượng máu đã rút được truyền lại sau mổ. Tuy nhiên, chỉ được rút một lượng nhất định vì nồng độ hồng cầu không được giảm dưới $25\%$ trong suốt phẫu thuật. Với cuộc mổ được mô tả trong dự án này, lượng máu tối đa có thể rút theo thủ thuật ANH là bao nhiêu?
+\bt{3} Nếu không áp dụng ANH, lượng hồng cầu mất là bao nhiêu? Nếu áp dụng với lượng máu rút được tính ở Bài toán 2, lượng mất là bao nhiêu?
+\fig[.38]{surgery}{Ảnh minh họa dự án ứng dụng trong bản gốc. Nguồn: Kent Weakley / Shutterstock.com.}
+\section*{Ghi chú biên tập và thuật ngữ}
+Các ghi chú dưới đây nằm ngoài nội dung nguyên bản.
+\begin{enumerate}[leftmargin=*]
+\item Giữ Công thức (1), Định lý 2, Công thức (3), Ví dụ 1–4, Hình 1–3, Bài tập 1–22 và ba bài toán dự án. Giữ số liệu lịch sử và các đơn vị °F, °C, năm, ngày, phút như bản gốc; không bổ sung lời giải bài tập.
+\item $k$ có đơn vị nghịch đảo thời gian. Trong mô hình tăng trưởng, $k>0$; trong mô hình suy giảm, $k<0$. Tốc độ phân rã tương đối được định nghĩa với dấu trừ nên là $-k>0$.
+\item Tốc độ tăng trưởng tương đối liên tục $k$ khác tỉ lệ tăng sau một năm $e^k-1$. Tương tự, lãi suất danh nghĩa dùng khi ghép lãi liên tục khác lãi suất hiệu dụng hằng năm. Các câu hỏi yêu cầu so sánh phải giữ cùng đơn vị thời gian.
+\item Bài tập 8 trong bản gốc ghi chu kỳ bán rã của strontium-90 là “28 days” và dùng ngày trong các câu hỏi. Bản dịch giữ nguyên dữ kiện “28 ngày” như giả thiết của bài toán; cần kiểm chứng riêng nếu dùng làm dữ liệu vật lý, thay vì tự động đổi đơn vị trong đề.
+\item Các dự báo năm $2025$ trong Ví dụ 1 và Bài tập 6 được giữ theo bối cảnh của sách. Chúng là kết quả của mô hình được nêu, không phải số liệu dân số hiện tại. Tên đỉnh McKinley và độ cao ở Bài tập 19 cũng giữ theo nguyên bản.
+\item Trong định luật làm nguội Newton theo cách viết của sách, $k<0$ cho quá trình tiến về nhiệt độ môi trường. Dự án cuối mục là một mô hình toán học với các giả thiết đã nêu; những tỉ lệ của đề được giữ nguyên khi dịch.
+\end{enumerate}
+\begin{longtable}{p{.43\linewidth}p{.49\linewidth}}\toprule
+Thuật ngữ tiếng Anh & Thuật ngữ tiếng Việt\\\midrule
+exponential growth & tăng trưởng theo hàm mũ\\
+exponential decay & suy giảm theo hàm mũ\\
+relative growth rate & tốc độ tăng trưởng tương đối\\
+relative decay rate & tốc độ phân rã tương đối\\
+half-life & chu kỳ bán rã\\
+Newton's law of cooling & định luật làm nguội Newton\\
+continuous compounding & ghép lãi liên tục\\
+radiocarbon dating & định tuổi bằng carbon phóng xạ\\
+hematocrit & hematocrit (tỉ lệ thể tích hồng cầu)\\
+initial condition & điều kiện ban đầu\\\bottomrule
+\end{longtable}
+\end{document}

@@ -1445,5 +1445,25 @@
     "file": "stewart-2-plus-bd302d07/e10.png",
     "mime": "image/png",
     "sha256": "4b028603da50e515fcc0410eb12dd22c1a28d940d4eaed7f6f86e3699881b308"
+  },
+  "stewart-3-8-b93a5d2c/f02.png": {
+    "file": "stewart-3-8-b93a5d2c/f02.png",
+    "mime": "image/png",
+    "sha256": "bf668b8c26029a20f7b022240984cbf048af367d39de6ec39544d3c0f704e9bb"
+  },
+  "stewart-3-8-b93a5d2c/f03.png": {
+    "file": "stewart-3-8-b93a5d2c/f03.png",
+    "mime": "image/png",
+    "sha256": "78ed015c00e5323c59c9c7e8d5272bf192e5b4566e913ef3d151874cdb3bbb2e"
+  },
+  "stewart-3-8-b93a5d2c/f01.png": {
+    "file": "stewart-3-8-b93a5d2c/f01.png",
+    "mime": "image/png",
+    "sha256": "3e4ccede834b2a0b92eebebc58fc3d6bbd9bff4571dc11681c92a981a2820f73"
+  },
+  "stewart-3-8-b93a5d2c/surgery.png": {
+    "file": "stewart-3-8-b93a5d2c/surgery.png",
+    "mime": "image/png",
+    "sha256": "62ee24f462b4ba1eb94c2b24e51d7b7769f7104deb3ba0adb51963f6830eac1f"
   }
 }
