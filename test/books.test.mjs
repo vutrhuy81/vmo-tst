@@ -749,4 +749,30 @@ doc45.window.close();
 const rendered45=window.document.createElement('div');await window.renderBookContent(rendered45,section45.section,false);
 assert.equal(rendered45.querySelectorAll('img').length,16,'All section 4.5 figures survive frontend filtering');
 assert.deepEqual((await readBooks(db,student,{bookId:book.id,sectionId:child45.id})).exercises.map(e=>e.contentKey),section45.exercises.map(e=>e.contentKey));
+// Graphing with calculus and technology: shared instructions and referenced data.
+const child46=detail.sections.find(s=>s.title.startsWith('4.6'));
+const section46=await readBooks(db,student,{bookId:book.id,sectionId:child46.id});
+assert.equal(section46.exerciseHeading,'4.6. Bài tập');
+assert.deepEqual(section46.exercises.map(e=>e.questionNumber),Array.from({length:40},(_,i)=>i+1));
+assert.ok(section46.exercises.every(e=>e.allowSubmission&&e.allowAiEvaluation&&e.contentKey&&e.setKey&&e.content.includes('Các bài tập trong mục này sử dụng')));
+for(const n of [1,8])assert.ok(section46.exercises[n-1].content.includes('các điểm uốn'));
+for(const n of [11,12])assert.ok(section46.exercises[n-1].content.includes('Dùng quy tắc l’Hospital'));
+for(const n of [25,26])assert.ok(section46.exercises[n-1].content.includes('hoành độ các điểm uốn'));
+for(const n of [28,35])assert.ok(section46.exercises[n-1].content.includes('giá trị chuyển tiếp'));
+assert.ok(section46.exercises[14].content.includes('Nội dung tham chiếu — Ví dụ 3'));
+for(const name of ['fig10','fig11','fig12','fig13','fig14'])assert.ok(section46.exercises[14].content.includes('/'+name+'.png'));
+assert.ok(section46.exercises[15].content.includes('Nội dung tham chiếu — Bài tập 14'));
+assert.ok(section46.exercises[37].content.includes('/ex38.png'));
+assert.equal(section46.section.sourceInfo.exampleCount,5);
+const doc46=new JSDOM(section46.section.content);
+assert.equal(doc46.window.document.querySelectorAll('img').length,22);
+for(const image of doc46.window.document.querySelectorAll('img')){
+ const asset=new URL(image.src,'https://example.test').searchParams.get('asset');
+ assert.equal((await readBookAsset(student,asset)).bytes[0],137);
+ await assert.rejects(()=>readBookAsset(other,asset),e=>e.status===403);
+}
+doc46.window.close();
+const rendered46=window.document.createElement('div');await window.renderBookContent(rendered46,section46.section,false);
+assert.equal(rendered46.querySelectorAll('img').length,22,'All section 4.6 figures survive frontend filtering');
+assert.deepEqual((await readBooks(db,student,{bookId:book.id,sectionId:child46.id})).exercises.map(e=>e.contentKey),section46.exercises.map(e=>e.contentKey));
 window.close();console.log('Books: seeded TOC, admin CRUD/CAS, scopes, subtree delete/restore, lazy bodies and UI actions OK');
