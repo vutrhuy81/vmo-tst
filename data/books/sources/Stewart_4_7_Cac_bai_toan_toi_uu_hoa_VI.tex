@@ -1,0 +1,503 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage{fontspec}\setmainfont{Latin Modern Roman}\setsansfont{DejaVu Sans}
+\usepackage{amsmath,amssymb,graphicx,geometry,enumitem,needspace,longtable,booktabs,fancyhdr,hyperref}
+\geometry{left=28mm,right=23mm,top=24mm,bottom=24mm}
+\hypersetup{unicode=true,colorlinks=true,linkcolor=black,urlcolor=blue,pdftitle={Giải tích §4.7 — Các bài toán tối ưu hóa}}
+\setlength{\parindent}{1.2em}\setlength{\parskip}{4pt}\setlength{\headheight}{16pt}
+\pagestyle{fancy}\fancyhf{}\fancyhead[L]{\small Chương 4. Ứng dụng của đạo hàm}\fancyhead[R]{\small §4.7}\fancyfoot[C]{\thepage}
+\newcommand{\fig}[3][.68]{\begin{center}\begin{minipage}{\linewidth}\centering\includegraphics[width=#1\linewidth]{assets/#2.png}\\{\small #3}\end{minipage}\end{center}}
+\newcommand{\ex}[1]{\par\medskip\noindent\textbf{Ví dụ #1.}\ }
+\newcommand{\sol}{\par\nopagebreak[4]\noindent\textit{Lời giải.}\ }
+\newcommand{\bt}[1]{\par\smallskip\Needspace{5\baselineskip}\noindent\textbf{#1.}\ }
+\newcommand{\group}[1]{\par\medskip\noindent\textbf{#1}\par\nopagebreak[4]}
+\newcommand{\gint}[1]{\left[\!\left[#1\right]\!\right]}
+\allowdisplaybreaks[2]
+\DeclareMathOperator{\sech}{sech}
+\DeclareMathOperator{\csch}{csch}
+\DeclareMathOperator{\arccot}{arccot}
+\newcommand{\pb}[1]{\par\medskip\Needspace{5\baselineskip}\noindent\textbf{#1.}\ }
+\begin{document}
+\section*{4.7 — Các bài toán tối ưu hóa}
+\noindent\textit{Bản dịch tiếng Việt — Stewart, Clegg và Watson, Calculus: Early Transcendentals, ấn bản thứ 9. Phạm vi: §4.7 và hai dự án ứng dụng tiếp theo, tr. 336–351.}
+
+Các phương pháp tìm giá trị cực trị đã học trong chương này có ứng dụng thực tế trong nhiều lĩnh vực của đời sống: người kinh doanh muốn giảm thiểu chi phí và tối đa hóa lợi nhuận; người đi đường muốn giảm thiểu thời gian di chuyển. Nguyên lý Fermat trong quang học phát biểu rằng ánh sáng đi theo đường mất ít thời gian nhất. Trong mục này, ta giải những bài toán như tối đa hóa diện tích, thể tích, lợi nhuận và tối thiểu hóa khoảng cách, thời gian, chi phí.
+
+Khi giải các bài toán thực tế như vậy, khó khăn lớn nhất thường là chuyển bài toán diễn đạt bằng lời thành một bài toán tối ưu hóa bằng cách thiết lập hàm số cần tìm giá trị lớn nhất hoặc nhỏ nhất. Ta nhắc lại các nguyên tắc giải toán trong phần \textit{Các nguyên tắc giải toán} sau Chương 1 và điều chỉnh cho tình huống này.
+\subsection*{Các bước giải bài toán tối ưu hóa}
+\begin{enumerate}[leftmargin=1.8em]
+\item \textbf{Hiểu bài toán.} Đọc kỹ cho đến khi hiểu rõ. Tự hỏi: Đại lượng chưa biết là gì? Những đại lượng nào đã cho? Những điều kiện nào đã cho?
+\item \textbf{Vẽ hình.} Trong phần lớn bài toán, vẽ hình và ghi các đại lượng đã cho, cần tìm trên hình là việc hữu ích.
+\item \textbf{Đặt ký hiệu.} Gán một ký hiệu cho đại lượng cần tối đa hóa hoặc tối thiểu hóa, tạm gọi là $Q$. Chọn các ký hiệu $a,b,c,\ldots,x,y$ cho các đại lượng chưa biết khác và ghi chúng lên hình. Có thể dùng chữ cái đầu để dễ liên tưởng, chẳng hạn $A$ cho diện tích, $h$ cho chiều cao, $t$ cho thời gian.
+\item Biểu diễn $Q$ theo một số ký hiệu khác đã đặt ở Bước 3.
+\item Nếu ở Bước 4, $Q$ được biểu diễn theo nhiều biến, dùng dữ kiện tìm các quan hệ giữa chúng dưới dạng phương trình. Sau đó dùng các phương trình này để khử tất cả các biến trừ một biến trong biểu thức $Q$. Như vậy, $Q$ được biểu diễn thành hàm của một biến, chẳng hạn $Q=f(x)$. Viết miền xác định của hàm trong bối cảnh bài toán.
+\item Dùng các phương pháp ở §§4.1 và 4.3 tìm giá trị lớn nhất hoặc nhỏ nhất tuyệt đối của $f$. Đặc biệt, nếu miền xác định là một đoạn đóng, có thể dùng phương pháp trên đoạn đóng ở §4.1.
+\end{enumerate}
+
+\Needspace{9\baselineskip}
+\ex{1} Một nông dân có 2400 ft hàng rào và muốn rào một cánh đồng hình chữ nhật giáp một dòng sông thẳng. Không cần rào dọc bờ sông. Cánh đồng có diện tích lớn nhất phải có kích thước bao nhiêu?
+\sol Để hình dung tình huống, ta thử một số trường hợp cụ thể. Hình 1 (không theo tỉ lệ) biểu diễn ba cách bố trí 2400 ft hàng rào.
+\fig[1.0]{fig01}{Hình 1. Diện tích lần lượt: $100\cdot2200=220\,000$ ft$^2$; $700\cdot1000=700\,000$ ft$^2$; $1000\cdot400=400\,000$ ft$^2$.}
+Ta thấy các cánh đồng nông nhưng rộng hoặc sâu nhưng hẹp đều có diện tích tương đối nhỏ. Có vẻ hợp lý rằng một cấu hình trung gian cho diện tích lớn nhất.
+
+Hình 2 biểu diễn trường hợp tổng quát. Ta cần tối đa hóa diện tích $A$. Gọi $x,y$ lần lượt là chiều sâu và chiều rộng của hình chữ nhật, tính bằng ft. Khi đó
+\[A=xy.\]
+\fig[.43]{fig02}{Hình 2}
+Muốn biểu diễn $A$ theo một biến, ta khử $y$ bằng cách biểu diễn nó theo $x$. Tổng chiều dài hàng rào là 2400 ft, nên
+\[2x+y=2400.\]
+Suy ra $y=2400-2x$, do đó
+\[A=xy=x(2400-2x)=2400x-2x^2.\]
+Giá trị lớn nhất của $x$ là 1200 (khi dùng hết hàng rào cho chiều sâu, không còn cho chiều rộng), và $x$ không âm. Vì vậy, hàm cần tối đa hóa là
+\[A(x)=2400x-2x^2,\qquad 0\le x\le1200.\]
+Ta có $A'(x)=2400-4x$. Để tìm số tới hạn, giải $2400-4x=0$, được $x=600$. Giá trị lớn nhất phải đạt tại số tới hạn này hoặc tại một đầu mút. Vì $A(0)=0$, $A(600)=720\,000$, $A(1200)=0$, phương pháp trên đoạn đóng cho giá trị lớn nhất $A(600)=720\,000$.
+
+Cũng có thể nhận thấy $A''(x)=-4<0$ với mọi $x$, nên đồ thị luôn lõm xuống và cực đại địa phương tại $x=600$ phải là cực đại tuyệt đối.
+
+Giá trị tương ứng của $y$ là $2400-2(600)=1200$. Vậy cánh đồng cần có chiều sâu 600 ft và chiều rộng 1200 ft.
+
+\noindent\textit{Gợi ý giải toán trong ví dụ: hiểu bài toán; xét các trường hợp riêng; vẽ hình; đặt ký hiệu.}
+
+\Needspace{9\baselineskip}
+\ex{2} Cần làm một chiếc hộp hình trụ đựng 1 L dầu. Tìm kích thước để chi phí kim loại chế tạo hộp nhỏ nhất.
+\sol Vẽ hình như Hình 3, với $r$ là bán kính, $h$ là chiều cao, cùng tính bằng cm. Muốn giảm thiểu chi phí kim loại, ta tối thiểu hóa tổng diện tích bề mặt hình trụ, gồm nắp, đáy và mặt bên. Từ Hình 4, mặt bên được làm từ một tấm hình chữ nhật kích thước $2\pi r$ và $h$. Do đó
+\[A=2\pi r^2+2\pi rh.\]
+\fig[.25]{fig03}{Hình 3}
+\fig[.46]{fig04}{Hình 4. Diện tích hai đáy $2\pi r^2$; diện tích mặt bên $(2\pi r)h$.}
+Ta muốn biểu diễn $A$ theo một biến $r$. Để khử $h$, dùng thể tích 1 L, tương đương $1000$ cm$^3$:
+\[\pi r^2h=1000,\qquad h=\frac{1000}{\pi r^2}.\]
+Thế vào $A$, được
+\[A=2\pi r^2+2\pi r\left(\frac{1000}{\pi r^2}\right)=2\pi r^2+\frac{2000}{r}.\]
+Ta biết $r>0$ và không có giới hạn trên cho $r$. Vì vậy, cần tìm giá trị nhỏ nhất của
+\[A(r)=2\pi r^2+\frac{2000}{r},\qquad r>0.\]
+Lấy đạo hàm để tìm số tới hạn:
+\[A'(r)=4\pi r-\frac{2000}{r^2}=\frac{4(\pi r^3-500)}{r^2}.\]
+$A'(r)=0$ khi $\pi r^3=500$, nên số tới hạn duy nhất là $r=\sqrt[3]{500/\pi}$.
+
+Vì miền xác định của $A$ là $(0,\infty)$, không thể dùng lập luận về đầu mút như Ví dụ 1. Nhưng $A'(r)<0$ khi $r<\sqrt[3]{500/\pi}$ và $A'(r)>0$ khi $r>\sqrt[3]{500/\pi}$. Do đó $A$ nghịch biến ở toàn bộ phía trái, đồng biến ở toàn bộ phía phải số tới hạn. Vì vậy, $r=\sqrt[3]{500/\pi}$ cho giá trị nhỏ nhất tuyệt đối.
+
+Cách khác: $A(r)\to\infty$ khi $r\to0^+$ và khi $r\to\infty$, nên $A$ phải có giá trị nhỏ nhất, và giá trị ấy phải đạt tại số tới hạn (Hình 5).
+\fig[.40]{fig05}{Hình 5}
+Giá trị $h$ tương ứng là
+\[h=\frac{1000}{\pi r^2}=\frac{1000}{\pi(500/\pi)^{2/3}}=2\sqrt[3]{\frac{500}{\pi}}=2r.\]
+Vậy để chi phí nhỏ nhất, bán kính phải là $\sqrt[3]{500/\pi}$ cm và chiều cao bằng hai lần bán kính, tức bằng đường kính.
+
+\noindent\textit{Trong dự án ứng dụng sau mục này, ta khảo sát hình dạng tiết kiệm nhất của chiếc hộp khi tính đến các chi phí chế tạo khác.}
+
+\group{Chú ý 1}
+Lập luận ở Ví dụ 2 để chứng minh giá trị nhỏ nhất tuyệt đối là một biến thể của tiêu chuẩn đạo hàm bậc nhất, vốn chỉ áp dụng cho cực đại, cực tiểu địa phương. Ta phát biểu để dùng về sau.
+\subsection*{Tiêu chuẩn đạo hàm bậc nhất cho cực trị tuyệt đối}
+Giả sử $c$ là một số tới hạn của hàm liên tục $f$ xác định trên một khoảng.
+
+(a) Nếu $f'(x)>0$ với mọi $x<c$ và $f'(x)<0$ với mọi $x>c$ trong khoảng đó, thì $f(c)$ là giá trị lớn nhất tuyệt đối của $f$.
+
+(b) Nếu $f'(x)<0$ với mọi $x<c$ và $f'(x)>0$ với mọi $x>c$ trong khoảng đó, thì $f(c)$ là giá trị nhỏ nhất tuyệt đối của $f$.
+\group{Chú ý 2}
+Một phương pháp khác để giải bài toán tối ưu hóa là lấy đạo hàm ẩn. Xét lại Ví dụ 2 để minh họa. Vẫn dùng các phương trình
+\[A=2\pi r^2+2\pi rh,\qquad \pi r^2h=1000,\]
+nhưng thay vì khử $h$, ta lấy đạo hàm ẩn hai phương trình theo $r$, coi $A,h$ là các hàm của $r$:
+\begin{align*}
+A'&=4\pi r+2\pi rh'+2\pi h,\\
+\pi r^2h'+2\pi rh&=0.
+\end{align*}
+Giá trị nhỏ nhất đạt tại một số tới hạn. Đặt $A'=0$, rút gọn, được
+\[2r+rh'+h=0,\qquad rh'+2h=0.\]
+Lấy hai phương trình trừ nhau, ta được $2r-h=0$, hay $h=2r$.
+
+\Needspace{9\baselineskip}
+\ex{3} Tìm điểm trên parabol $y^2=2x$ gần điểm $(1,4)$ nhất.
+\sol Khoảng cách từ $(1,4)$ đến $(x,y)$ là
+\[d=\sqrt{(x-1)^2+(y-4)^2}.\]
+Xem Hình 6. Nếu $(x,y)$ thuộc parabol thì $x=\tfrac12y^2$, nên
+\[d=\sqrt{\left(\tfrac12y^2-1\right)^2+(y-4)^2}.\]
+Cũng có thể thế $y=\sqrt{2x}$ để biểu diễn $d$ theo riêng $x$.
+\fig[.43]{fig06}{Hình 6}
+Thay vì tối thiểu hóa $d$, ta tối thiểu hóa bình phương của nó:
+\[d^2=f(y)=\left(\tfrac12y^2-1\right)^2+(y-4)^2.\]
+Bạn hãy tự kiểm tra rằng $d$ và $d^2$ đạt giá trị nhỏ nhất tại cùng một điểm, trong khi $d^2$ dễ xử lý hơn. Không có ràng buộc nào đối với $y$, nên miền xác định là toàn bộ tập số thực. Lấy đạo hàm:
+\[f'(y)=2\left(\tfrac12y^2-1\right)y+2(y-4)=y^3-8.\]
+Vì vậy $f'(y)=0$ khi $y=2$. Do $f'(y)<0$ khi $y<2$ và $f'(y)>0$ khi $y>2$, tiêu chuẩn đạo hàm bậc nhất cho cực trị tuyệt đối cho thấy giá trị nhỏ nhất tuyệt đối đạt tại $y=2$. Cũng có thể nói rằng, xét bản chất hình học, hiển nhiên có điểm gần nhất nhưng không có điểm xa nhất.
+
+Giá trị tương ứng $x=\tfrac12y^2=2$. Vậy điểm trên $y^2=2x$ gần $(1,4)$ nhất là $(2,2)$; khoảng cách là $d=\sqrt{f(2)}=\sqrt5$.
+
+\Needspace{9\baselineskip}
+\ex{4} Một phụ nữ xuất phát bằng thuyền từ điểm $A$ trên bờ một dòng sông thẳng rộng 3 km và muốn đến $B$ ở bờ đối diện, cách vị trí đối diện $A$ một đoạn 8 km về phía hạ lưu, trong thời gian ngắn nhất (Hình 7). Cô có thể chèo thẳng qua sông đến $C$ rồi chạy đến $B$, chèo thẳng đến $B$, hoặc chèo đến một điểm $D$ giữa $C$ và $B$ rồi chạy. Nếu tốc độ chèo là 6 km/h, tốc độ chạy là 8 km/h, cô nên cập bờ ở đâu? Giả sử tốc độ dòng nước không đáng kể so với tốc độ chèo.
+\fig[.30]{fig07}{Hình 7}
+\sol Gọi $x$ là khoảng cách từ $C$ đến $D$. Quãng đường chạy là $|DB|=8-x$, và định lý Pythagore cho quãng đường chèo $|AD|=\sqrt{x^2+9}$. Dùng hệ thức
+\[\text{thời gian}=\frac{\text{quãng đường}}{\text{tốc độ}},\]
+thời gian chèo là $\sqrt{x^2+9}/6$, thời gian chạy là $(8-x)/8$. Tổng thời gian theo $x$:
+\[T(x)=\frac{\sqrt{x^2+9}}6+\frac{8-x}8.\]
+Miền xác định là $[0,8]$. Khi $x=0$, cô chèo đến $C$; khi $x=8$, cô chèo thẳng đến $B$. Đạo hàm là
+\[T'(x)=\frac{x}{6\sqrt{x^2+9}}-\frac18.\]
+Vì $x\ge0$, ta có
+\begin{align*}
+T'(x)=0&\iff\frac{x}{6\sqrt{x^2+9}}=\frac18\\
+&\iff4x=3\sqrt{x^2+9}\\
+&\iff16x^2=9(x^2+9)\\
+&\iff7x^2=81\iff x=\frac9{\sqrt7}.
+\end{align*}
+Số tới hạn duy nhất là $9/\sqrt7$. Để xem giá trị nhỏ nhất đạt tại số này hay tại một đầu mút của $[0,8]$, dùng phương pháp trên đoạn đóng, tính
+\begin{align*}
+T(0)&=1{,}5,\\
+T\left(\frac9{\sqrt7}\right)&=1+\frac{\sqrt7}8\approx1{,}33,\\
+T(8)&=\frac{\sqrt{73}}6\approx1{,}42.
+\end{align*}
+Giá trị nhỏ nhất trong ba giá trị đạt tại $x=9/\sqrt7$, nên giá trị nhỏ nhất tuyệt đối của $T$ cũng đạt tại đó. Hình 8 minh họa phép tính bằng đồ thị $T$.
+\fig[.43]{fig08}{Hình 8}
+Vậy cô nên cập bờ tại điểm cách vị trí xuất phát $9/\sqrt7$ km (khoảng 3,4 km) về phía hạ lưu.
+
+\Needspace{9\baselineskip}
+\ex{5} Tìm diện tích hình chữ nhật lớn nhất nội tiếp một nửa đường tròn bán kính $r$.
+\group{Lời giải 1}
+Chọn nửa đường tròn là nửa trên của đường tròn $x^2+y^2=r^2$, tâm tại gốc tọa độ. Từ \textit{nội tiếp} ở đây có nghĩa là hai đỉnh nằm trên nửa đường tròn và hai đỉnh nằm trên trục hoành, như Hình 9.
+\fig[.46]{fig09}{Hình 9}
+Gọi $(x,y)$ là đỉnh ở góc phần tư thứ nhất. Hình chữ nhật có các cạnh dài $2x$ và $y$, nên $A=2xy$. Vì $(x,y)$ nằm trên đường tròn, $y=\sqrt{r^2-x^2}$. Do đó
+\[A=2x\sqrt{r^2-x^2},\qquad0\le x\le r.\]
+Đạo hàm là
+\[A'=2\sqrt{r^2-x^2}-\frac{2x^2}{\sqrt{r^2-x^2}}=\frac{2(r^2-2x^2)}{\sqrt{r^2-x^2}},\]
+bằng $0$ khi $2x^2=r^2$, tức $x=r/\sqrt2$ do $x\ge0$. Giá trị này cho diện tích lớn nhất vì $A(0)=A(r)=0$. Diện tích hình chữ nhật nội tiếp lớn nhất là
+\[A\left(\frac r{\sqrt2}\right)=2\frac r{\sqrt2}\sqrt{r^2-\frac{r^2}2}=r^2.\]
+\group{Lời giải 2}
+Có lời giải đơn giản hơn nếu chọn một góc làm biến. Gọi $\theta$ là góc ở Hình 10. Diện tích hình chữ nhật là
+\begin{align*}
+A(\theta)&=(2r\cos\theta)(r\sin\theta)\\
+&=r^2(2\sin\theta\cos\theta)=r^2\sin2\theta.
+\end{align*}
+\fig[.46]{fig10}{Hình 10}
+Ta biết $\sin2\theta$ có giá trị lớn nhất bằng $1$ khi $2\theta=\pi/2$. Vì vậy $A$ có giá trị lớn nhất $r^2$ khi $\theta=\pi/4$.
+
+Lưu ý lời giải lượng giác này không dùng phép lấy đạo hàm. Thực ra, ta hoàn toàn không cần dùng phép tính vi phân.
+
+\subsection*{Ứng dụng trong kinh doanh và kinh tế học}
+Ở §3.7, ta đã giới thiệu chi phí biên. Nhắc lại: nếu hàm chi phí $C(x)$ là chi phí sản xuất $x$ đơn vị sản phẩm, thì chi phí biên là tốc độ biến thiên của $C$ theo $x$. Nói cách khác, hàm chi phí biên là đạo hàm $C'(x)$.
+
+Bây giờ xét việc bán hàng. Gọi $p(x)$ là mức giá mỗi đơn vị mà công ty có thể áp dụng khi bán $x$ đơn vị. $p$ được gọi là \textbf{hàm cầu} (hay \textbf{hàm giá}); ta kỳ vọng nó nghịch biến theo $x$, vì bán nhiều hơn thường ứng với giá thấp hơn. Nếu bán $x$ đơn vị với đơn giá $p(x)$, tổng doanh thu là
+\[R(x)=\text{số lượng}\times\text{đơn giá}=xp(x),\]
+và $R$ được gọi là \textbf{hàm doanh thu}. Đạo hàm $R'$ được gọi là \textbf{hàm doanh thu biên}, biểu thị tốc độ biến thiên của doanh thu theo số đơn vị bán được.
+
+Nếu bán $x$ đơn vị thì tổng lợi nhuận là
+\[P(x)=R(x)-C(x),\]
+và $P$ được gọi là \textbf{hàm lợi nhuận}. \textbf{Hàm lợi nhuận biên} là đạo hàm $P'$. Các Bài tập 65–69 yêu cầu dùng các hàm chi phí biên, doanh thu biên và lợi nhuận biên để tối thiểu hóa chi phí, tối đa hóa doanh thu và lợi nhuận.
+
+\Needspace{9\baselineskip}
+\ex{6} Một cửa hàng đang bán 200 màn hình TV mỗi tuần với giá 350 USD/chiếc. Khảo sát thị trường cho thấy cứ hoàn lại 10 USD cho người mua thì số màn hình bán được tăng 20 chiếc mỗi tuần. Tìm hàm cầu và hàm doanh thu. Cửa hàng nên hoàn lại bao nhiêu để doanh thu lớn nhất?
+\sol Gọi $x$ là số màn hình bán được mỗi tuần. Mức tăng số lượng bán là $x-200$. Cứ tăng 20 chiếc thì giá giảm 10 USD. Do đó mỗi chiếc tăng thêm ứng với mức giảm giá $10/20$, và hàm cầu là
+\[p(x)=350-\frac{10}{20}(x-200)=450-\frac12x.\]
+Hàm doanh thu:
+\[R(x)=xp(x)=450x-\frac12x^2.\]
+Vì $R'(x)=450-x$, ta có $R'(x)=0$ khi $x=450$. Theo tiêu chuẩn đạo hàm bậc nhất, giá trị này cho cực đại tuyệt đối; cũng có thể chỉ cần nhận thấy đồ thị $R$ là parabol quay bề lõm xuống. Giá tương ứng là
+\[p(450)=450-\frac12(450)=225.\]
+Khoản hoàn lại là $350-225=125$ USD. Vậy cửa hàng nên hoàn lại 125 USD để tối đa hóa doanh thu.
+
+\clearpage
+\section*{4.7 — Bài tập}
+\bt{1} Xét bài toán: tìm hai số có tổng bằng 23 và tích lớn nhất.
+
+(a) Lập bảng như dưới đây sao cho tổng hai số ở hai cột đầu luôn bằng 23. Dựa vào bảng, ước lượng đáp án.
+
+(b) Dùng phép tính vi phân giải bài toán và so sánh với đáp án ở (a).
+\begin{center}\begin{tabular}{ccc}\toprule
+Số thứ nhất&Số thứ hai&Tích\\\midrule
+1&22&22\\2&21&42\\3&20&60\\$\vdots$&$\vdots$&$\vdots$\\\bottomrule
+\end{tabular}\end{center}
+\bt{2} Tìm hai số có hiệu bằng 100 và tích nhỏ nhất.
+\bt{3} Tìm hai số dương có tích bằng 100 và tổng nhỏ nhất.
+\bt{4} Tổng hai số dương bằng 16. Tổng bình phương của chúng nhỏ nhất bằng bao nhiêu?
+\bt{5} Khoảng cách theo phương thẳng đứng lớn nhất giữa đường thẳng $y=x+2$ và parabol $y=x^2$ với $-1\le x\le2$ bằng bao nhiêu?
+\bt{6} Khoảng cách theo phương thẳng đứng nhỏ nhất giữa các parabol $y=x^2+1$ và $y=x-x^2$ bằng bao nhiêu?
+\bt{7} Tìm kích thước hình chữ nhật có chu vi 100 m và diện tích lớn nhất.
+\bt{8} Tìm kích thước hình chữ nhật có diện tích 1000 m$^2$ và chu vi nhỏ nhất.
+\bt{9} Mô hình năng suất $Y$ của một cây trồng theo mức nitơ $N$ trong đất, đo bằng các đơn vị thích hợp, là
+\[Y=\frac{kN}{1+N^2},\]
+trong đó $k>0$ là hằng số. Mức nitơ nào cho năng suất cao nhất?
+\bt{10} Tốc độ quang hợp của một loài thực vật phù du, tính bằng mg cacbon/(m$^3\cdot$h), được mô hình hóa bởi
+\[P=\frac{100I}{I^2+I+4},\]
+trong đó $I$ là cường độ ánh sáng, tính bằng nghìn foot-candle. Cường độ ánh sáng nào làm $P$ lớn nhất?
+\bt{11} Một nông dân có 750 ft hàng rào muốn rào một khu đất hình chữ nhật rồi chia thành bốn ô chuồng bằng các hàng rào song song với một cạnh hình chữ nhật. Tổng diện tích lớn nhất của bốn ô là bao nhiêu?
+
+(a) Vẽ một số hình, gồm các ô nông nhưng rộng và các ô sâu nhưng hẹp. Tính tổng diện tích từng cấu hình. Có vẻ tồn tại diện tích lớn nhất không? Nếu có, hãy ước lượng.
+
+(b) Vẽ hình tổng quát, đặt ký hiệu và ghi lên hình.
+
+(c) Viết biểu thức tổng diện tích.
+
+(d) Dùng dữ kiện lập phương trình liên hệ các biến.
+
+(e) Dùng (d) biểu diễn tổng diện tích theo một biến.
+
+(f) Hoàn tất lời giải và so sánh với ước lượng ở (a).
+\bt{12} Từ một tấm bìa hình vuông cạnh 3 ft, cắt ở mỗi góc một hình vuông rồi gấp các cạnh lên để làm hộp không nắp. Tìm thể tích lớn nhất của hộp.
+
+(a) Vẽ một số hình, gồm các hộp thấp có đáy lớn và các hộp cao có đáy nhỏ. Tính thể tích một số hộp như vậy. Có vẻ tồn tại thể tích lớn nhất không? Nếu có, hãy ước lượng.
+
+(b) Vẽ hình tổng quát, đặt ký hiệu và ghi lên hình.
+
+(c) Viết biểu thức thể tích.
+
+(d) Dùng dữ kiện lập phương trình liên hệ các biến.
+
+(e) Dùng (d) biểu diễn thể tích theo một biến.
+
+(f) Hoàn tất lời giải và so sánh với ước lượng ở (a).
+\bt{13} Một nông dân muốn rào khu đất hình chữ nhật có diện tích 1,5 triệu ft$^2$, rồi chia đôi bằng một hàng rào song song với một cạnh. Phải bố trí thế nào để chi phí hàng rào nhỏ nhất?
+\par\medskip\noindent\begin{minipage}{\linewidth}
+\bt{14} Một nông dân có 1200 ft hàng rào để rào cánh đồng hình thang dọc sông như hình. Một trong hai cạnh song song dài gấp ba cạnh kia. Không cần rào dọc sông. Tìm diện tích lớn nhất có thể rào.
+\fig[.46]{ex14}{Hình cho Bài tập 14.}
+\end{minipage}\par
+\bt{15} Một nông dân muốn rào một khu đất hình chữ nhật giáp tường phía bắc của nhà kho. Không cần hàng rào dọc nhà kho; hàng rào phía tây được dùng chung với hàng xóm, người sẽ chịu một nửa chi phí đoạn đó. Giá lắp đặt là 20 USD/ft dài, và nông dân không muốn chi quá 5000 USD. Tìm kích thước khu đất có diện tích lớn nhất.
+\bt{16} Nếu nông dân ở Bài tập 15 muốn rào 8000 ft$^2$ đất, kích thước nào làm chi phí hàng rào nhỏ nhất?
+\bt{17} (a) Chứng minh trong các hình chữ nhật có cùng diện tích, hình vuông có chu vi nhỏ nhất.
+
+(b) Chứng minh trong các hình chữ nhật có cùng chu vi, hình vuông có diện tích lớn nhất.
+\bt{18} Hộp đáy vuông không nắp phải có thể tích $32\,000$ cm$^3$. Tìm kích thước để lượng vật liệu nhỏ nhất.
+\bt{19} Có 1200 cm$^2$ vật liệu để làm hộp đáy vuông không nắp. Tìm thể tích lớn nhất của hộp.
+\par\medskip\noindent\begin{minipage}{\linewidth}
+\bt{20} Từ tấm bìa hình chữ nhật $4$ ft $\times3$ ft, cắt các hình vuông hoặc hình chữ nhật ở bốn góc như hình rồi gấp cạnh lên làm hộp không nắp. Một cạnh dài của hộp có hai lớp bìa bằng cách gấp hai lần. Tìm thể tích lớn nhất của hộp.
+\fig[.43]{ex20}{Hình cho Bài tập 20.}
+\end{minipage}\par
+\bt{21} Một thùng chứa hình hộp chữ nhật không nắp có thể tích 10 m$^3$. Chiều dài đáy gấp đôi chiều rộng. Vật liệu đáy giá 10 USD/m$^2$, vật liệu thành giá 6 USD/m$^2$. Tìm chi phí vật liệu thấp nhất.
+\bt{22} Làm lại Bài tập 21, giả sử thùng có nắp làm bằng cùng vật liệu với thành.
+\par\medskip\noindent\begin{minipage}{\linewidth}
+\bt{23} Một kiện hàng gửi qua bưu điện Hoa Kỳ có tổng chiều dài và chu vi vòng không quá 108 inch. Chiều dài là kích thước lớn nhất; chu vi vòng là chu vi lớn nhất quanh kiện, vuông góc với chiều dài. Tìm kích thước hộp chữ nhật đáy vuông có thể tích lớn nhất có thể gửi.
+\fig[.65]{ex23}{Hình cho Bài tập 23–24. “length”: chiều dài; “girth”: chu vi vòng.}
+\end{minipage}\par
+\bt{24} Theo Bài tập 23, tìm kích thước ống gửi thư hình trụ có thể tích lớn nhất có thể gửi qua bưu điện Hoa Kỳ.
+\bt{25} Tìm điểm trên đường thẳng $y=2x+3$ gần gốc tọa độ nhất.
+\bt{26} Tìm điểm trên đường cong $y=\sqrt{x}$ gần điểm $(3,0)$ nhất.
+\bt{27} Tìm các điểm trên elip $4x^2+y^2=4$ xa điểm $(1,0)$ nhất.
+\bt{28} Tìm tọa độ điểm trên $y=\sin x$ gần điểm $(4,2)$ nhất, chính xác đến hai chữ số thập phân. Dùng thiết bị vẽ đồ thị khi cần.
+\bt{29} Tìm kích thước hình chữ nhật có diện tích lớn nhất nội tiếp đường tròn bán kính $r$.
+\bt{30} Tìm diện tích hình chữ nhật lớn nhất nội tiếp elip $x^2/a^2+y^2/b^2=1$.
+\bt{31} Tìm kích thước hình chữ nhật có diện tích lớn nhất nội tiếp tam giác đều cạnh $L$, với một cạnh hình chữ nhật nằm trên đáy tam giác.
+\bt{32} Tìm diện tích hình thang lớn nhất nội tiếp đường tròn bán kính 1, có một đáy là đường kính.
+\bt{33} Tìm kích thước tam giác cân có diện tích lớn nhất nội tiếp đường tròn bán kính $r$.
+\bt{34} Hai cạnh bằng nhau của một tam giác cân dài $a$. Tìm độ dài cạnh thứ ba để diện tích lớn nhất.
+\bt{35} Một cạnh tam giác dài $a$, cạnh khác dài $2a$. Chứng minh diện tích lớn nhất có thể là $a^2$.
+\bt{36} Một hình chữ nhật có đáy trên trục hoành và hai đỉnh trên nằm trên parabol $y=4-x^2$. Diện tích lớn nhất bằng bao nhiêu?
+\bt{37} Một hình trụ tròn xoay nội tiếp hình cầu bán kính $r$. Tìm thể tích lớn nhất của hình trụ.
+\bt{38} Một hình trụ tròn xoay nội tiếp hình nón cao $h$, bán kính đáy $r$. Tìm thể tích lớn nhất của hình trụ.
+\bt{39} Một hình trụ tròn xoay nội tiếp hình cầu bán kính $r$. Tìm diện tích toàn phần lớn nhất của hình trụ.
+\par\medskip\noindent\begin{minipage}{\linewidth}
+\bt{40} Cửa sổ Norman có dạng hình chữ nhật phía dưới, nửa hình tròn phía trên; đường kính nửa hình tròn bằng chiều rộng hình chữ nhật (xem Bài tập 1.1.72). Chu vi cửa sổ là 30 ft. Tìm kích thước để lượng ánh sáng đi qua lớn nhất.
+\fig[.40]{ex40}{Hình cho Bài tập 40.}
+\end{minipage}\par
+\par\medskip\noindent\begin{minipage}{\linewidth}
+\bt{41} Áp phích có lề trên và dưới mỗi bên 6 cm, hai lề bên mỗi bên 4 cm. Diện tích phần in cố định bằng 384 cm$^2$. Tìm kích thước áp phích có diện tích nhỏ nhất.
+\fig[.30]{ex41}{Hình cho Bài tập 41.}
+\end{minipage}\par
+\bt{42} Áp phích có diện tích 180 in$^2$, lề dưới và hai bên mỗi bên 1 inch, lề trên 2 inch. Kích thước nào cho diện tích in lớn nhất?
+\bt{43} Cắt sợi dây dài 10 m thành hai đoạn. Một đoạn uốn thành hình vuông, đoạn kia thành tam giác đều. Cắt thế nào để tổng diện tích được bao bởi hai hình (a) lớn nhất; (b) nhỏ nhất?
+\bt{44} Trả lời Bài tập 43 nếu một đoạn uốn thành hình vuông, đoạn kia thành đường tròn.
+\bt{45} Bạn được nhận một miếng pizza hình quạt tròn có chu vi 32 inch. Đường kính pizza bao nhiêu thì miếng nhận được có diện tích lớn nhất?
+\par\medskip\noindent\begin{minipage}{\linewidth}
+\bt{46} Hàng rào cao 8 ft nằm song song với tường một tòa nhà cao và cách tường 4 ft. Chiếc thang ngắn nhất có thể đặt từ mặt đất, vượt qua hàng rào và chạm tường dài bao nhiêu?
+\fig[.43]{ex46}{Hình cho Bài tập 46.}
+\end{minipage}\par
+\par\medskip\noindent\begin{minipage}{\linewidth}
+\bt{47} Từ tờ giấy hình tròn bán kính $R$, cắt bỏ một hình quạt rồi ghép hai mép $CA,CB$ thành cốc hình nón. Tìm dung tích lớn nhất của cốc.
+\fig[.50]{ex47}{Hình cho Bài tập 47.}
+\end{minipage}\par
+\bt{48} Làm cốc giấy hình nón đựng 27 cm$^3$ nước. Tìm chiều cao và bán kính để lượng giấy nhỏ nhất.
+\bt{49} Hình nón cao $h$ nội tiếp hình nón lớn cao $H$, với đỉnh tại tâm đáy hình nón lớn. Chứng minh thể tích hình nón trong lớn nhất khi $h=H/3$.
+\bt{50} Một vật có trọng lượng $W$ được kéo trên mặt phẳng ngang bởi lực dọc theo một sợi dây nối với vật. Nếu dây hợp với mặt phẳng góc $\theta$, độ lớn lực là
+\[F=\frac{\mu W}{\mu\sin\theta+\cos\theta},\]
+trong đó hằng số $\mu$ gọi là hệ số ma sát. Với giá trị nào của $\theta$, $F$ nhỏ nhất?
+\bt{51} Điện trở $R$ ohm mắc vào nguồn pin có suất điện động $E$ volt và điện trở trong $r$ ohm. Công suất trên điện trở ngoài, tính bằng watt, là
+\[P=\frac{E^2R}{(R+r)^2}.\]
+Nếu $E,r$ cố định và $R$ thay đổi, công suất lớn nhất bằng bao nhiêu?
+\bt{52} Cá bơi với tốc độ $v$ so với nước có năng lượng tiêu hao mỗi đơn vị thời gian tỉ lệ với $v^3$. Người ta cho rằng cá di cư cố giảm thiểu tổng năng lượng để bơi một quãng đường cố định. Nếu cá bơi ngược dòng có tốc độ $u<v$, thời gian bơi quãng đường $L$ là $L/(v-u)$ và tổng năng lượng cần dùng là
+\[E(v)=av^3\cdot\frac L{v-u},\]
+với $a$ là hằng số tỉ lệ.
+
+(a) Tìm $v$ để $E$ nhỏ nhất.
+
+(b) Phác họa đồ thị $E$.
+
+\textit{Chú ý:} Kết quả đã được kiểm chứng thực nghiệm: cá di cư bơi ngược dòng với tốc độ lớn hơn tốc độ dòng nước 50\%.
+\par\medskip\noindent\begin{minipage}{\linewidth}
+\bt{53} Trong tổ ong, mỗi ô là một lăng trụ lục giác đều, hở một đầu; đầu kia được đậy bằng ba hình thoi bằng nhau tạo thành góc tam diện tại đỉnh, như hình. Gọi $\theta$ là góc giữa mỗi hình thoi với đường cao, $s$ là độ dài cạnh lục giác và $h$ là độ dài đáy lớn của các hình thang ở mặt bên. Có thể chứng minh khi giữ $s,h$ cố định, thể tích ô không đổi, không phụ thuộc $\theta$; với mỗi $\theta$, diện tích bề mặt là
+\[S=6sh-\frac32s^2\cot\theta+\frac32\sqrt3\,s^2\csc\theta.\]
+Người ta cho rằng ong tạo ô sao cho diện tích bề mặt nhỏ nhất, để dùng ít sáp nhất.
+
+(a) Tính $dS/d\theta$.
+
+(b) Ong nên chọn góc $\theta$ nào?
+
+(c) Xác định diện tích bề mặt nhỏ nhất theo $s,h$.
+
+\textit{Chú ý:} Các phép đo góc $\theta$ thực tế trong tổ ong hiếm khi lệch quá $2^\circ$ so với giá trị tính toán.
+\fig[.36]{ex53}{Hình cho Bài tập 53. “apex”: đỉnh; “open end”: đầu hở.}
+\end{minipage}\par
+\bt{54} Một thuyền rời bến lúc 14 giờ, đi về hướng nam với tốc độ 20 km/h. Thuyền khác đi về hướng đông với tốc độ 15 km/h, đến cùng bến lúc 15 giờ. Hai thuyền gần nhau nhất vào lúc nào?
+\bt{55} Giải bài toán ở Ví dụ 4 khi sông rộng 5 km và $B$ chỉ cách vị trí đối diện $A$ một đoạn 5 km về phía hạ lưu.
+\par\medskip\noindent\begin{minipage}{\linewidth}
+\bt{56} Một phụ nữ tại $A$ trên bờ hồ tròn bán kính 2 mi muốn đến điểm đối diện qua đường kính $C$ ở bờ kia nhanh nhất (hình vẽ). Cô đi bộ với tốc độ 4 mi/h, chèo thuyền với tốc độ 2 mi/h. Cô nên đi thế nào?
+\fig[.40]{ex56}{Hình cho Bài tập 56.}
+\end{minipage}\par
+\bt{57} Nhà máy lọc dầu ở bờ bắc dòng sông thẳng rộng 2 km. Cần xây đường ống từ nhà máy đến các bể chứa trên bờ nam, cách vị trí đối diện nhà máy 6 km về phía đông. Chi phí đặt ống trên đất liền đến điểm $P$ ở bờ bắc là $400\,000$ USD/km, dưới sông từ $P$ đến bể là $800\,000$ USD/km. Để chi phí nhỏ nhất, $P$ phải ở đâu?
+\bt{58} Giả sử nhà máy ở Bài tập 57 cách sông 1 km về phía bắc. $P$ phải ở đâu? Có thể dùng hệ thống đại số máy tính.
+\bt{59} Độ rọi của một vật do một nguồn sáng tỉ lệ thuận với cường độ nguồn và tỉ lệ nghịch với bình phương khoảng cách đến nguồn. Hai nguồn sáng, một nguồn mạnh gấp ba nguồn kia, cách nhau 10 ft. Đặt vật ở đâu trên đoạn nối hai nguồn để độ rọi nhỏ nhất?
+\bt{60} Tìm phương trình đường thẳng qua $(3,5)$ cắt khỏi góc phần tư thứ nhất một tam giác có diện tích nhỏ nhất.
+\bt{61} Cho $a,b>0$. Tìm độ dài đoạn thẳng ngắn nhất qua $(a,b)$ bị hai trục tọa độ giới hạn trong góc phần tư thứ nhất.
+\bt{62} Tại những điểm nào trên $y=1+40x^3-3x^5$, tiếp tuyến có hệ số góc lớn nhất?
+\bt{63} Đoạn tiếp tuyến của $y=3/x$ bị hai trục tọa độ giới hạn trong góc phần tư thứ nhất có độ dài nhỏ nhất bằng bao nhiêu?
+\bt{64} Tam giác trong góc phần tư thứ nhất, có hai cạnh trên các trục tọa độ và cạnh huyền tiếp xúc parabol $y=4-x^2$, có diện tích nhỏ nhất bằng bao nhiêu?
+\bt{65} (a) Nếu $C(x)$ là chi phí sản xuất $x$ đơn vị hàng hóa, chi phí trung bình mỗi đơn vị là $c(x)=C(x)/x$. Chứng minh khi chi phí trung bình nhỏ nhất, chi phí biên bằng chi phí trung bình.
+
+(b) Nếu $C(x)=16\,000+200x+4x^{3/2}$ USD, tìm: (i) chi phí, chi phí trung bình và chi phí biên khi sản xuất 1000 đơn vị; (ii) mức sản xuất làm chi phí trung bình nhỏ nhất; (iii) chi phí trung bình nhỏ nhất.
+\bt{66} (a) Chứng minh nếu lợi nhuận $P(x)$ lớn nhất thì doanh thu biên bằng chi phí biên.
+
+(b) Nếu hàm chi phí $C(x)=16\,000+500x-1{,}6x^2+0{,}004x^3$ và hàm cầu $p(x)=1700-7x$, tìm mức sản xuất để lợi nhuận lớn nhất.
+\bt{67} Một đội bóng chày thi đấu tại sân vận động có $55\,000$ chỗ. Với giá vé 10 USD, số khán giả trung bình là $27\,000$; khi giảm còn 8 USD, số khán giả tăng lên $33\,000$.
+
+(a) Tìm hàm cầu, giả sử tuyến tính.
+
+(b) Nên đặt giá vé bao nhiêu để doanh thu lớn nhất?
+\bt{68} Vào mùa hè, Terry làm và bán vòng cổ trên bãi biển. Mùa hè trước, cô bán giá 10 USD/chiếc, trung bình 20 chiếc/ngày. Khi tăng giá 1 USD, số bán trung bình giảm 2 chiếc/ngày.
+
+(a) Tìm hàm cầu, giả sử tuyến tính.
+
+(b) Nếu vật liệu mỗi vòng cổ tốn 6 USD, cô nên đặt giá bao nhiêu để lợi nhuận lớn nhất?
+\bt{69} Một nhà bán lẻ đang bán 1200 máy tính bảng mỗi tuần, giá 350 USD/chiếc. Bộ phận tiếp thị ước lượng cứ giảm giá 10 USD thì mỗi tuần bán thêm 80 chiếc.
+
+(a) Tìm hàm cầu.
+
+(b) Nên đặt giá bao nhiêu để doanh thu lớn nhất?
+
+(c) Nếu hàm chi phí hằng tuần là $C(x)=35\,000+120x$, nên đặt giá bao nhiêu để lợi nhuận lớn nhất?
+\bt{70} Công ty khai thác 16 giếng dầu trong một khu vực. Mỗi giếng trung bình cho 240 thùng/ngày. Có thể bổ sung giếng, nhưng mỗi giếng thêm làm sản lượng trung bình mỗi giếng giảm 8 thùng/ngày. Nên thêm bao nhiêu giếng để tổng sản lượng hằng ngày lớn nhất?
+\bt{71} Chứng minh trong các tam giác cân có cùng chu vi, tam giác đều có diện tích lớn nhất.
+\bt{72} Xét Bài tập 57 khi chi phí đặt ống dưới sông cao hơn nhiều so với trên đất liền ($400\,000$ USD/km). Có thể bạn cho rằng đôi khi nên dùng chiều dài ống dưới sông ngắn nhất, tức đặt $P$ cách nhà máy 6 km, đối diện bể chứa. Chứng minh điều đó không bao giờ xảy ra, dù chi phí đặt ống dưới sông lớn đến đâu.
+\bt{73} Xét tiếp tuyến của elip $x^2/a^2+y^2/b^2=1$ tại $(p,q)$ trong góc phần tư thứ nhất.
+
+(a) Chứng minh tiếp tuyến có hoành độ giao điểm $a^2/p$ và tung độ giao điểm $b^2/q$.
+
+(b) Chứng minh đoạn tiếp tuyến bị hai trục tọa độ giới hạn có độ dài nhỏ nhất $a+b$.
+
+(c) Chứng minh tam giác tạo bởi tiếp tuyến và hai trục tọa độ có diện tích nhỏ nhất $ab$.
+\par\medskip\noindent\begin{minipage}{\linewidth}
+\bt{74} Khung diều làm từ sáu thanh gỗ. Bốn thanh ngoài có độ dài như hình. Để diện tích diều lớn nhất, hai thanh chéo phải dài bao nhiêu? Có thể dùng hệ thống đại số máy tính.
+\fig[.40]{ex74}{Hình cho Bài tập 74.}
+\end{minipage}\par
+\par\medskip\noindent\begin{minipage}{\linewidth}
+\bt{75} Cần đặt $P$ trên đường thẳng $AD$ sao cho tổng chiều dài $L$ của các dây cáp nối $P$ với $A,B,C$ nhỏ nhất (hình vẽ). Biểu diễn $L$ theo $x=|AP|$, rồi dùng đồ thị $L$ và $dL/dx$ để ước lượng giá trị nhỏ nhất của $L$.
+\fig[.43]{ex75}{Hình cho Bài tập 75.}
+\end{minipage}\par
+\par\medskip\noindent\begin{minipage}{\linewidth}
+\bt{76} Đồ thị cho mức tiêu thụ nhiên liệu $c$ của ô tô, tính bằng gallon/giờ, theo tốc độ $v$. Ở tốc độ rất thấp, động cơ làm việc kém hiệu quả, nên ban đầu $c$ giảm khi tốc độ tăng. Nhưng ở tốc độ cao, tiêu thụ nhiên liệu tăng. Ta thấy $c(v)$ nhỏ nhất khi $v\approx30$ mi/h. Tuy nhiên, để sử dụng nhiên liệu hiệu quả, cần tối thiểu hóa mức tiêu thụ tính bằng gallon/dặm. Gọi mức này là $G$. Dùng đồ thị ước lượng tốc độ làm $G$ nhỏ nhất.
+\fig[.40]{ex76}{Hình cho Bài tập 76.}
+\end{minipage}\par
+\par\medskip\noindent\begin{minipage}{\linewidth}
+\bt{77} Gọi $v_1,v_2$ là tốc độ ánh sáng trong không khí và nước. Theo nguyên lý Fermat, tia sáng từ $A$ trong không khí đến $B$ trong nước đi theo đường $ACB$ mất ít thời gian nhất. Chứng minh
+\[\frac{\sin\theta_1}{\sin\theta_2}=\frac{v_1}{v_2},\]
+trong đó $\theta_1$ là góc tới, $\theta_2$ là góc khúc xạ như hình. Đây là định luật Snell.
+\fig[.50]{ex77}{Hình cho Bài tập 77.}
+\end{minipage}\par
+\par\medskip\noindent\begin{minipage}{\linewidth}
+\bt{78} Hai cột thẳng đứng $PQ,ST$ được giữ bằng dây $PRS$ đi từ đỉnh cột thứ nhất đến điểm $R$ trên đất giữa hai cột, rồi đến đỉnh cột thứ hai. Chứng minh chiều dài dây ngắn nhất khi $\theta_1=\theta_2$.
+\fig[.46]{ex78}{Hình cho Bài tập 78.}
+\end{minipage}\par
+\par\medskip\noindent\begin{minipage}{\linewidth}
+\bt{79} Góc trên bên phải của tờ giấy $12$ inch $\times8$ inch được gấp xuống cạnh dưới như hình. Gấp thế nào để nếp gấp ngắn nhất? Nói cách khác, chọn $x$ thế nào để $y$ nhỏ nhất?
+\fig[.43]{ex79}{Hình cho Bài tập 79.}
+\end{minipage}\par
+\par\medskip\noindent\begin{minipage}{\linewidth}
+\bt{80} Ống thép được mang dọc hành lang rộng 9 ft. Cuối hành lang là góc vuông rẽ sang hành lang hẹp hơn, rộng 6 ft. Ống dài nhất có thể mang nằm ngang qua góc rẽ dài bao nhiêu?
+\fig[.43]{ex80}{Hình cho Bài tập 80.}
+\end{minipage}\par
+\par\medskip\noindent\begin{minipage}{\linewidth}
+\bt{81} Người quan sát đứng tại $P$, cách đường chạy một đơn vị. Hai vận động viên cùng xuất phát tại $S$ như hình, một người chạy nhanh gấp ba người kia. Tìm góc nhìn $\theta$ lớn nhất giữa hai người.
+\fig[.46]{ex81}{Hình cho Bài tập 81.}
+\end{minipage}\par
+\par\medskip\noindent\begin{minipage}{\linewidth}
+\bt{82} Làm máng xối từ tấm kim loại rộng 30 cm bằng cách gấp một phần ba tấm ở mỗi bên lên góc $\theta$. Chọn $\theta$ thế nào để máng chứa được lượng nước lớn nhất?
+\fig[.55]{ex82}{Hình cho Bài tập 82.}
+\end{minipage}\par
+\par\medskip\noindent\begin{minipage}{\linewidth}
+\bt{83} Chọn điểm $P$ ở đâu trên đoạn $AB$ để góc $\theta$ lớn nhất?
+\fig[.46]{ex83}{Hình cho Bài tập 83.}
+\end{minipage}\par
+\par\medskip\noindent\begin{minipage}{\linewidth}
+\bt{84} Tranh trong phòng triển lãm cao $h$, treo sao cho mép dưới cao hơn mắt người quan sát một đoạn $d$ như hình. Người xem nên đứng cách tường bao nhiêu để nhìn rõ nhất, tức góc $\theta$ chắn bởi bức tranh tại mắt lớn nhất?
+\fig[.55]{ex84}{Hình cho Bài tập 84.}
+\end{minipage}\par
+\par\medskip\noindent\begin{minipage}{\linewidth}
+\bt{85} Tìm diện tích lớn nhất của hình chữ nhật ngoại tiếp hình chữ nhật cho trước có chiều dài $L$, chiều rộng $W$. Gợi ý: biểu diễn diện tích theo một góc $\theta$.
+\fig[.43]{ex85}{Hình cho Bài tập 85.}
+\end{minipage}\par
+\par\medskip\noindent\begin{minipage}{\linewidth}
+\bt{86} Hệ mạch máu gồm động mạch, tiểu động mạch, mao mạch và tĩnh mạch, vận chuyển máu từ tim đến các cơ quan rồi trở về tim. Hệ này cần hoạt động sao cho năng lượng tim dùng để bơm máu nhỏ nhất. Đặc biệt, năng lượng giảm khi sức cản dòng máu giảm. Một định luật Poiseuille cho
+\[R=C\frac L{r^4},\]
+trong đó $L$ là chiều dài mạch, $r$ là bán kính, $C>0$ phụ thuộc độ nhớt của máu. Poiseuille xác lập định luật bằng thực nghiệm, nhưng cũng có thể suy ra từ Phương trình 8.4.2. Hình vẽ cho mạch chính bán kính $r_1$ phân nhánh góc $\theta$ thành mạch nhỏ bán kính $r_2$.
+\fig[.70]{ex86}{Hình cho Bài tập 86. “vascular branching”: sự phân nhánh mạch máu.}
+(a) Dùng định luật Poiseuille chứng minh tổng sức cản theo đường $ABC$ là
+\[R=C\left(\frac{a-b\cot\theta}{r_1^4}+\frac{b\csc\theta}{r_2^4}\right),\]
+với $a,b$ là các khoảng cách trên hình.
+
+(b) Chứng minh sức cản nhỏ nhất khi $\cos\theta=r_2^4/r_1^4$.
+
+(c) Tìm góc phân nhánh tối ưu, làm tròn đến độ, khi bán kính mạch nhỏ bằng hai phần ba bán kính mạch lớn.
+\end{minipage}\par
+\par\medskip\noindent\begin{minipage}{\linewidth}
+\bt{87} Các nhà điểu học xác định một số loài chim tránh bay qua vùng nước lớn vào ban ngày. Người ta cho rằng bay trên nước tốn năng lượng hơn trên đất vì ban ngày không khí thường đi lên trên đất và đi xuống trên nước. Một con chim có xu hướng đó được thả từ đảo cách điểm gần nhất $B$ trên bờ thẳng 5 km, bay đến điểm $C$ trên bờ rồi bay dọc bờ về tổ ở $D$. Giả sử chim theo bản năng chọn đường tiêu hao năng lượng nhỏ nhất. Khoảng cách $BD=13$ km.
+
+(a) Nếu bay trên nước tốn năng lượng gấp 1,4 lần trên đất, chim nên bay đến điểm $C$ nào để tổng năng lượng trở về tổ nhỏ nhất?
+
+(b) Gọi $W,L$ là năng lượng (joule) mỗi km bay trên nước và đất. Tỉ số $W/L$ lớn có ý nghĩa gì đối với đường bay? Tỉ số nhỏ có ý nghĩa gì? Xác định tỉ số $W/L$ tương ứng với mức tiêu hao năng lượng nhỏ nhất.
+
+(c) $W/L$ phải bằng bao nhiêu để chim bay thẳng đến tổ $D$? Phải bằng bao nhiêu để chim bay đến $B$ rồi dọc bờ đến $D$?
+
+\Needspace{17\baselineskip}
+(d) Nếu quan sát thấy chim một loài chạm bờ tại điểm cách $B$ 4 km, bay trên nước tốn năng lượng gấp bao nhiêu lần trên đất?
+\fig[.60]{ex87}{Hình cho Bài tập 87. “island”: đảo; “nest”: tổ.}
+\end{minipage}\par
+\par\medskip\noindent\begin{minipage}{\linewidth}
+\bt{88} Hai nguồn sáng có cùng cường độ đặt cách nhau 10 m. Cần đặt vật tại $P$ trên đường thẳng $\ell$ song song với đường nối hai nguồn và cách nó $d$ mét như hình, sao cho cường độ chiếu sáng nhỏ nhất. Dùng tính chất: độ rọi do một nguồn tỉ lệ thuận với cường độ nguồn và tỉ lệ nghịch với bình phương khoảng cách đến nguồn.
+
+(a) Tìm biểu thức cường độ chiếu sáng $I(x)$ tại $P$.
+
+(b) Với $d=5$ m, dùng đồ thị $I(x),I'(x)$ chứng tỏ cường độ nhỏ nhất khi $x=5$ m, tức $P$ ở trung điểm trên $\ell$ như hình.
+
+(c) Với $d=10$ m, chứng tỏ, có thể khá bất ngờ, cường độ không nhỏ nhất tại trung điểm.
+
+(d) Giữa $d=5$ và $d=10$ có một giá trị chuyển tiếp, tại đó vị trí chiếu sáng yếu nhất thay đổi đột ngột. Ước lượng giá trị này bằng đồ thị, rồi tìm giá trị chính xác.
+\fig[.65]{ex88}{Hình cho Bài tập 88.}
+
+\end{minipage}\par
+\clearpage
+\section*{Dự án ứng dụng — Hình dạng của chiếc hộp}
+Trong dự án này, ta khảo sát hình dạng tiết kiệm nhất của chiếc hộp. Trước hết hiểu rằng thể tích $V$ của hộp hình trụ đã cho, cần tìm chiều cao $h$ và bán kính $r$ để chi phí kim loại nhỏ nhất (hình vẽ). Nếu bỏ qua kim loại thừa khi chế tạo, bài toán là tối thiểu hóa diện tích bề mặt hình trụ. Ví dụ 4.7.2 cho $h=2r$, tức chiều cao bằng đường kính. Nhưng nếu dùng thước đo các hộp trong tủ hoặc siêu thị, bạn sẽ thấy chiều cao thường lớn hơn đường kính, và tỉ số $h/r$ thay đổi từ 2 đến khoảng 3,8. Hãy xem ta có thể giải thích hiện tượng này không.
+\fig[.28]{can}{Hộp hình trụ có bán kính $r$, chiều cao $h$.}
+\pb{1} Vật liệu làm hộp được cắt từ tấm kim loại. Mặt bên hình trụ được uốn từ hình chữ nhật, cắt ra với rất ít hoặc không có phế liệu. Nhưng nếu nắp và đáy tròn được cắt từ các hình vuông cạnh $2r$ như hình, sẽ còn nhiều kim loại thừa; có thể tái chế nhưng giá trị với nhà sản xuất ít hoặc bằng không. Trong trường hợp này, chứng minh lượng kim loại dùng nhỏ nhất khi
+\[\frac hr=\frac8\pi\approx2{,}55.\]
+\fig[.30]{can_square}{Các đĩa tròn cắt từ hình vuông.}
+\par\medskip\noindent\begin{minipage}{\linewidth}
+\pb{2} Cách bố trí hiệu quả hơn là chia tấm kim loại thành các lục giác và cắt các nắp, đáy tròn từ đó như hình. Chứng minh với cách này,
+\[\frac hr=\frac{4\sqrt3}{\pi}\approx2{,}21.\]
+\fig[.43]{can_hex}{Các đĩa tròn cắt từ hình lục giác.}
+\end{minipage}\par
+\pb{3} Các tỉ số $h/r$ ở Câu 1, 2 gần thực tế hơn nhưng chưa giải thích hết. Quan sát kỹ, nắp và đáy thường làm từ đĩa có bán kính lớn hơn $r$ để gập mép vào đầu hộp. Tính đến điều này sẽ làm $h/r$ tăng. Quan trọng hơn, ngoài chi phí kim loại cần tính chi phí chế tạo. Giả sử phần lớn chi phí phát sinh ở việc ghép mặt bên với các vành hộp. Nếu cắt đĩa từ lục giác như Câu 2, tổng chi phí tỉ lệ với
+\[4\sqrt3\,r^2+2\pi rh+k(4\pi r+h),\]
+trong đó $k$ là nghịch đảo của chiều dài mối ghép thực hiện được với chi phí bằng giá một đơn vị diện tích kim loại. Chứng minh biểu thức nhỏ nhất khi
+\[\frac{\sqrt[3]V}{k}=\sqrt[3]{\frac{\pi h}{r}}\cdot\frac{2\pi-h/r}{\pi h/r-4\sqrt3}.\]
+\pb{4} Vẽ $\sqrt[3]V/k$ theo $x=h/r$, rồi dùng đồ thị lập luận: khi hộp lớn hoặc chi phí ghép thấp, nên chọn $h/r\approx2{,}21$ như Câu 2; khi hộp nhỏ hoặc chi phí ghép cao, $h/r$ phải lớn hơn đáng kể.
+\pb{5} Phân tích cho thấy hộp lớn nên có mặt cắt dọc gần hình vuông, còn hộp nhỏ nên cao và thon. Quan sát hình dạng tương đối của các hộp trong siêu thị. Kết luận có thường đúng trong thực tế không? Có ngoại lệ không? Bạn có thể gợi ý vì sao hộp nhỏ không phải lúc nào cũng cao và thon?
+
+\clearpage
+\section*{Dự án ứng dụng — Máy bay và chim: tối thiểu hóa năng lượng}
+Các loài chim nhỏ như chim sẻ thường xen kẽ đập cánh với khép cánh khi lượn (Hình 1). Trong dự án này, ta phân tích hiện tượng và tìm hiểu chim nên đập cánh thường xuyên đến mức nào. Một số nguyên lý giống với máy bay cánh cố định, nên trước hết xét sự phụ thuộc của công suất và năng lượng cần thiết vào tốc độ máy bay.\footnote{Phỏng theo R. McNeill Alexander, \textit{Optima for Animals} (Princeton, NJ: Princeton University Press, 1996).}
+\fig[.40]{bird_photo}{Ảnh minh họa. Nguồn ảnh trong bản gốc: Targn Pleiades / Shutterstock.com.}
+\fig[.85]{bird_path}{Hình 1. “path of wing tip”: quỹ đạo đầu mút cánh.}
+\pb{1} Công suất cần để đẩy máy bay tiến với tốc độ $v$ là
+\[P=Av^3+\frac{BL^2}{v},\]
+trong đó $A,B>0$ là các hằng số đặc trưng của máy bay, $L$ là lực nâng hướng lên đỡ trọng lượng máy bay. Tìm tốc độ làm công suất cần thiết nhỏ nhất.
+\pb{2} Tốc độ ở Câu 1 làm công suất nhỏ nhất, nhưng tốc độ cao hơn có thể dùng ít nhiên liệu hơn. Năng lượng để máy bay đi một đơn vị quãng đường là $E=P/v$. Tốc độ nào làm năng lượng nhỏ nhất?
+\pb{3} Tốc độ làm năng lượng nhỏ nhất lớn gấp bao nhiêu lần tốc độ làm công suất nhỏ nhất?
+\pb{4} Khi áp dụng phương trình Câu 1 cho chim, tách $Av^3$ thành $A_bv^3$ cho thân và $A_wv^3$ cho cánh. Gọi $x$ là phần thời gian bay dành cho đập cánh. Nếu khối lượng chim là $m$ và toàn bộ lực nâng xuất hiện khi đập cánh, lực nâng là $mg/x$, nên công suất khi đập cánh là
+\[P_{\mathrm{flap}}=(A_b+A_w)v^3+\frac{B(mg/x)^2}{v}.\]
+Công suất khi khép cánh là $P_{\mathrm{fold}}=A_bv^3$. Chứng minh công suất trung bình trên cả chu kỳ bay là
+\begin{align*}
+\overline P&=xP_{\mathrm{flap}}+(1-x)P_{\mathrm{fold}}\\
+&=A_bv^3+xA_wv^3+\frac{Bm^2g^2}{xv}.
+\end{align*}
+\pb{5} Với $x$ nào, công suất trung bình nhỏ nhất? Có thể kết luận gì khi chim bay chậm? Khi chim bay ngày càng nhanh thì sao?
+\pb{6} Năng lượng trung bình trên một chu kỳ là $\overline E=\overline P/v$. Giá trị $x$ nào làm $\overline E$ nhỏ nhất?
+\end{document}
