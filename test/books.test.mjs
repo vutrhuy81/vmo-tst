@@ -849,4 +849,35 @@ doc49.window.close();
 const rendered49=window.document.createElement('div');await window.renderBookContent(rendered49,section49.section,false);
 assert.equal(rendered49.querySelectorAll('img').length,11,'All section 4.9 figures survive frontend filtering');
 assert.deepEqual((await readBooks(db,student,{bookId:book.id,sectionId:child49.id})).exercises.map(e=>e.contentKey),section49.exercises.map(e=>e.contentKey));
+// Chapter 4 review: three numbered sections must remain separate.
+const child4Review=detail.sections.find(s=>s.title==='Ôn tập'&&s.parentId===child49.parentId);
+assert.ok(child4Review);
+const section4Review=await readBooks(db,student,{bookId:book.id,sectionId:child4Review.id});
+assert.equal(section4Review.exerciseHeading,'Bài tập');
+assert.deepEqual(section4Review.exercises.map(e=>e.questionNumber),Array.from({length:87},(_,i)=>i+1));
+assert.ok(section4Review.exercises.every(e=>e.allowSubmission&&e.allowAiEvaluation&&e.contentKey&&e.setKey));
+for(const n of [18,79,80,85,87])assert.ok(section4Review.exercises[n-1].content.includes('/ex'+n+'.png'));
+for(const n of [1,6])assert.ok(section4Review.exercises[n-1].content.includes('cực trị địa phương và tuyệt đối'));
+for(const n of [7,14])assert.ok(section4Review.exercises[n-1].content.includes('Tính giới hạn'));
+for(const n of [65,68])assert.ok(section4Review.exercises[n-1].content.includes('nguyên hàm tổng quát nhất'));
+assert.ok(section4Review.exercises[55].content.includes('Dữ kiện gốc — Bài tập 55'));
+assert.equal(section4Review.section.sourceInfo.conceptCheckCount,11);
+assert.equal(section4Review.section.sourceInfo.trueFalseCount,21);
+const doc4Review=new JSDOM(section4Review.section.content);
+const review4Headings=[...doc4Review.window.document.querySelectorAll('h1')];
+assert.deepEqual(review4Headings.map(h=>h.textContent),['Kiểm tra khái niệm','Trắc nghiệm đúng–sai','Bài tập']);
+for(const [i,count] of [[0,11],[1,21]]){
+ let labels=[];for(let p=review4Headings[i].nextElementSibling;p&&p!==review4Headings[i+1];p=p.nextElementSibling){const label=p.querySelector?.(':scope > strong')?.textContent;if(/^\d+\./.test(label||''))labels.push(parseInt(label));}
+ assert.deepEqual(labels,Array.from({length:count},(_,i)=>i+1));
+}
+assert.equal(doc4Review.window.document.querySelectorAll('img').length,5);
+for(const image of doc4Review.window.document.querySelectorAll('img')){
+ const asset=new URL(image.src,'https://example.test').searchParams.get('asset');
+ assert.equal((await readBookAsset(student,asset)).bytes[0],137);
+ await assert.rejects(()=>readBookAsset(other,asset),e=>e.status===403);
+}
+doc4Review.window.close();
+const rendered4Review=window.document.createElement('div');await window.renderBookContent(rendered4Review,section4Review.section,false);
+assert.equal(rendered4Review.querySelectorAll('img').length,5,'All chapter 4 review figures survive frontend filtering');
+assert.deepEqual((await readBooks(db,student,{bookId:book.id,sectionId:child4Review.id})).exercises.map(e=>e.contentKey),section4Review.exercises.map(e=>e.contentKey));
 window.close();console.log('Books: seeded TOC, admin CRUD/CAS, scopes, subtree delete/restore, lazy bodies and UI actions OK');

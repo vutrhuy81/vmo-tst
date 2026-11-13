@@ -2810,5 +2810,30 @@
     "file": "stewart-4-9-4ae26d66/fig05.png",
     "mime": "image/png",
     "sha256": "48c0e17c427d68b134220427ef103c6bcf1c7bf001fad571f1ae501d1f1bbe35"
+  },
+  "stewart-4-review-0a150617/ex18.png": {
+    "file": "stewart-4-review-0a150617/ex18.png",
+    "mime": "image/png",
+    "sha256": "afcc0b9a5fc5ff68a411fa33818bbfd7f17dd9c5a33e4e14d5915e6e6bdaecd4"
+  },
+  "stewart-4-review-0a150617/ex79.png": {
+    "file": "stewart-4-review-0a150617/ex79.png",
+    "mime": "image/png",
+    "sha256": "996b0b32b0a0b9225571f2e81842a1de010dcbd6f315b5f3193c0aafe6445e99"
+  },
+  "stewart-4-review-0a150617/ex80.png": {
+    "file": "stewart-4-review-0a150617/ex80.png",
+    "mime": "image/png",
+    "sha256": "1625f541be8bbf69b94eba91ee2a73b67c7af3f36a13120016b7bf17fc6aa8c9"
+  },
+  "stewart-4-review-0a150617/ex85.png": {
+    "file": "stewart-4-review-0a150617/ex85.png",
+    "mime": "image/png",
+    "sha256": "94d04f27ad62e11c7b5f2d1e0f4a03ac176024347f6f6276a6a11f482f580e4c"
+  },
+  "stewart-4-review-0a150617/ex87.png": {
+    "file": "stewart-4-review-0a150617/ex87.png",
+    "mime": "image/png",
+    "sha256": "6dc27be111e10e6ae70ee233a1db3712098fbca216f9d21bd17ca2fe4fcdb71a"
   }
 }
