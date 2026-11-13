@@ -1,0 +1,216 @@
+{
+  "bookKey": "stewart-9",
+  "sectionKey": "3-10",
+  "heading": "3.10. Bài tập",
+  "sourceSha256": "ebea536f0745377902aba3baa2d0eaf3a05718fd64ed326e79069547437da22b",
+  "exercises": [
+    {
+      "number": 1,
+      "content": "<p><strong>1–4.</strong></p>\n<p>Tìm hàm tuyến tính hóa <span class=\"math inline\">\\(L(x)\\)</span> của hàm số tại <span class=\"math inline\">\\(a\\)</span>.</p><p><strong>1.</strong> <span class=\"math inline\">\\(f(x)=x^3-x^2+3\\)</span>, <span class=\"math inline\">\\(a=-2\\)</span>.</p>"
+    },
+    {
+      "number": 2,
+      "content": "<p><strong>1–4.</strong></p>\n<p>Tìm hàm tuyến tính hóa <span class=\"math inline\">\\(L(x)\\)</span> của hàm số tại <span class=\"math inline\">\\(a\\)</span>.</p><p><strong>2.</strong> <span class=\"math inline\">\\(f(x)=e^{3x}\\)</span>, <span class=\"math inline\">\\(a=0\\)</span>.</p>"
+    },
+    {
+      "number": 3,
+      "content": "<p><strong>1–4.</strong></p>\n<p>Tìm hàm tuyến tính hóa <span class=\"math inline\">\\(L(x)\\)</span> của hàm số tại <span class=\"math inline\">\\(a\\)</span>.</p><p><strong>3.</strong> <span class=\"math inline\">\\(f(x)=\\sqrt[3]{x}\\)</span>, <span class=\"math inline\">\\(a=8\\)</span>.</p>"
+    },
+    {
+      "number": 4,
+      "content": "<p><strong>1–4.</strong></p>\n<p>Tìm hàm tuyến tính hóa <span class=\"math inline\">\\(L(x)\\)</span> của hàm số tại <span class=\"math inline\">\\(a\\)</span>.</p><p><strong>4.</strong> <span class=\"math inline\">\\(f(x)=\\cos2x\\)</span>, <span class=\"math inline\">\\(a=\\pi/6\\)</span>.</p>"
+    },
+    {
+      "number": 5,
+      "content": "<p><strong>5.</strong> <em>[Cần công cụ vẽ đồ thị.]</em> Tìm xấp xỉ tuyến tính của <span class=\"math inline\">\\(f(x)=\\sqrt{1-x}\\)</span> tại <span class=\"math inline\">\\(a=0\\)</span> và dùng nó để tính gần đúng <span class=\"math inline\">\\(\\sqrt{0.9}\\)</span>, <span class=\"math inline\">\\(\\sqrt{0.99}\\)</span>. Minh họa bằng đồ thị của <span class=\"math inline\">\\(f\\)</span> và tiếp tuyến.</p>"
+    },
+    {
+      "number": 6,
+      "content": "<p><strong>6.</strong> <em>[Cần công cụ vẽ đồ thị.]</em> Tìm xấp xỉ tuyến tính của <span class=\"math inline\">\\(g(x)=\\sqrt[3]{1+x}\\)</span> tại <span class=\"math inline\">\\(a=0\\)</span> và dùng nó để tính gần đúng <span class=\"math inline\">\\(\\sqrt[3]{0.95}\\)</span>, <span class=\"math inline\">\\(\\sqrt[3]{1.1}\\)</span>. Minh họa bằng đồ thị của <span class=\"math inline\">\\(g\\)</span> và tiếp tuyến.</p>"
+    },
+    {
+      "number": 7,
+      "content": "<p><strong>7–10.</strong></p>\n<p><em>[Cần công cụ vẽ đồ thị.]</em> Kiểm tra xấp xỉ tuyến tính đã cho tại <span class=\"math inline\">\\(a=0\\)</span>. Sau đó xác định các giá trị <span class=\"math inline\">\\(x\\)</span> để phép xấp xỉ có sai số nhỏ hơn <span class=\"math inline\">\\(0.1\\)</span>.</p><p><strong>7.</strong> <span class=\"math inline\">\\(\\tan^{-1}x\\approx x\\)</span>.</p>"
+    },
+    {
+      "number": 8,
+      "content": "<p><strong>7–10.</strong></p>\n<p><em>[Cần công cụ vẽ đồ thị.]</em> Kiểm tra xấp xỉ tuyến tính đã cho tại <span class=\"math inline\">\\(a=0\\)</span>. Sau đó xác định các giá trị <span class=\"math inline\">\\(x\\)</span> để phép xấp xỉ có sai số nhỏ hơn <span class=\"math inline\">\\(0.1\\)</span>.</p><p><strong>8.</strong> <span class=\"math inline\">\\((1+x)^{-3}\\approx1-3x\\)</span>.</p>"
+    },
+    {
+      "number": 9,
+      "content": "<p><strong>7–10.</strong></p>\n<p><em>[Cần công cụ vẽ đồ thị.]</em> Kiểm tra xấp xỉ tuyến tính đã cho tại <span class=\"math inline\">\\(a=0\\)</span>. Sau đó xác định các giá trị <span class=\"math inline\">\\(x\\)</span> để phép xấp xỉ có sai số nhỏ hơn <span class=\"math inline\">\\(0.1\\)</span>.</p><p><strong>9.</strong> <span class=\"math inline\">\\(\\sqrt[4]{1+2x}\\approx1+\\tfrac12x\\)</span>.</p>"
+    },
+    {
+      "number": 10,
+      "content": "<p><strong>7–10.</strong></p>\n<p><em>[Cần công cụ vẽ đồ thị.]</em> Kiểm tra xấp xỉ tuyến tính đã cho tại <span class=\"math inline\">\\(a=0\\)</span>. Sau đó xác định các giá trị <span class=\"math inline\">\\(x\\)</span> để phép xấp xỉ có sai số nhỏ hơn <span class=\"math inline\">\\(0.1\\)</span>.</p><p><strong>10.</strong> <span class=\"math inline\">\\(\\displaystyle\\frac{2}{1+e^x}\\approx1-\\tfrac12x\\)</span>.</p>"
+    },
+    {
+      "number": 11,
+      "content": "<p><strong>11–18.</strong></p>\n<p>Tìm vi phân của hàm số.</p><p><strong>11.</strong> <span class=\"math inline\">\\(y=e^{5x}\\)</span>.</p>"
+    },
+    {
+      "number": 12,
+      "content": "<p><strong>11–18.</strong></p>\n<p>Tìm vi phân của hàm số.</p><p><strong>12.</strong> <span class=\"math inline\">\\(y=\\sqrt{1-t^4}\\)</span>.</p>"
+    },
+    {
+      "number": 13,
+      "content": "<p><strong>11–18.</strong></p>\n<p>Tìm vi phân của hàm số.</p><p><strong>13.</strong> <span class=\"math inline\">\\(\\displaystyle y=\\frac{1+2u}{1+3u}\\)</span>.</p>"
+    },
+    {
+      "number": 14,
+      "content": "<p><strong>11–18.</strong></p>\n<p>Tìm vi phân của hàm số.</p><p><strong>14.</strong> <span class=\"math inline\">\\(y=\\theta^2\\sin2\\theta\\)</span>.</p>"
+    },
+    {
+      "number": 15,
+      "content": "<p><strong>11–18.</strong></p>\n<p>Tìm vi phân của hàm số.</p><p><strong>15.</strong> <span class=\"math inline\">\\(\\displaystyle y=\\frac{1}{x^2-3x}\\)</span>.</p>"
+    },
+    {
+      "number": 16,
+      "content": "<p><strong>11–18.</strong></p>\n<p>Tìm vi phân của hàm số.</p><p><strong>16.</strong> <span class=\"math inline\">\\(y=\\sqrt{1+\\cos\\theta}\\)</span>.</p>"
+    },
+    {
+      "number": 17,
+      "content": "<p><strong>11–18.</strong></p>\n<p>Tìm vi phân của hàm số.</p><p><strong>17.</strong> <span class=\"math inline\">\\(y=\\ln(\\sin\\theta)\\)</span>.</p>"
+    },
+    {
+      "number": 18,
+      "content": "<p><strong>11–18.</strong></p>\n<p>Tìm vi phân của hàm số.</p><p><strong>18.</strong> <span class=\"math inline\">\\(\\displaystyle y=\\frac{e^x}{1-e^x}\\)</span>.</p>"
+    },
+    {
+      "number": 19,
+      "content": "<p><strong>19–22.</strong></p>\n<p>(a) Tìm vi phân <span class=\"math inline\">\\(dy\\)</span>. (b) Tính <span class=\"math inline\">\\(dy\\)</span> với các giá trị <span class=\"math inline\">\\(x\\)</span> và <span class=\"math inline\">\\(dx\\)</span> đã cho.</p><p><strong>19.</strong> <span class=\"math inline\">\\(y=e^{x/10}\\)</span>, <span class=\"math inline\">\\(x=0\\)</span>, <span class=\"math inline\">\\(dx=0.1\\)</span>.</p>"
+    },
+    {
+      "number": 20,
+      "content": "<p><strong>19–22.</strong></p>\n<p>(a) Tìm vi phân <span class=\"math inline\">\\(dy\\)</span>. (b) Tính <span class=\"math inline\">\\(dy\\)</span> với các giá trị <span class=\"math inline\">\\(x\\)</span> và <span class=\"math inline\">\\(dx\\)</span> đã cho.</p><p><strong>20.</strong> <span class=\"math inline\">\\(y=\\cos\\pi x\\)</span>, <span class=\"math inline\">\\(x=\\tfrac13\\)</span>, <span class=\"math inline\">\\(dx=-0.02\\)</span>.</p>"
+    },
+    {
+      "number": 21,
+      "content": "<p><strong>19–22.</strong></p>\n<p>(a) Tìm vi phân <span class=\"math inline\">\\(dy\\)</span>. (b) Tính <span class=\"math inline\">\\(dy\\)</span> với các giá trị <span class=\"math inline\">\\(x\\)</span> và <span class=\"math inline\">\\(dx\\)</span> đã cho.</p><p><strong>21.</strong> <span class=\"math inline\">\\(y=\\sqrt{3+x^2}\\)</span>, <span class=\"math inline\">\\(x=1\\)</span>, <span class=\"math inline\">\\(dx=-0.1\\)</span>.</p>"
+    },
+    {
+      "number": 22,
+      "content": "<p><strong>19–22.</strong></p>\n<p>(a) Tìm vi phân <span class=\"math inline\">\\(dy\\)</span>. (b) Tính <span class=\"math inline\">\\(dy\\)</span> với các giá trị <span class=\"math inline\">\\(x\\)</span> và <span class=\"math inline\">\\(dx\\)</span> đã cho.</p><p><strong>22.</strong> <span class=\"math inline\">\\(\\displaystyle y=\\frac{x+1}{x-1}\\)</span>, <span class=\"math inline\">\\(x=2\\)</span>, <span class=\"math inline\">\\(dx=0.05\\)</span>.</p>"
+    },
+    {
+      "number": 23,
+      "content": "<p><strong>23–26.</strong></p>\n<p>Tính <span class=\"math inline\">\\(\\Delta y\\)</span> và <span class=\"math inline\">\\(dy\\)</span> với <span class=\"math inline\">\\(x\\)</span> và <span class=\"math inline\">\\(dx=\\Delta x\\)</span> đã cho. Sau đó phác họa sơ đồ tương tự Hình 5, thể hiện các đoạn thẳng có độ dài <span class=\"math inline\">\\(dx\\)</span>, <span class=\"math inline\">\\(dy\\)</span> và <span class=\"math inline\">\\(\\Delta y\\)</span>.</p><p><strong>23.</strong> <span class=\"math inline\">\\(y=x^2-4x\\)</span>, <span class=\"math inline\">\\(x=3\\)</span>, <span class=\"math inline\">\\(\\Delta x=0.5\\)</span>.</p><div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-3-10-ebea536f/fig5.png\" alt=\"image\"><br>\nHình 5. Ý nghĩa hình học của <span class=\"math inline\">\\(dx\\)</span>, <span class=\"math inline\">\\(dy\\)</span> và <span class=\"math inline\">\\(\\Delta y\\)</span>.</p>\n</div>"
+    },
+    {
+      "number": 24,
+      "content": "<p><strong>23–26.</strong></p>\n<p>Tính <span class=\"math inline\">\\(\\Delta y\\)</span> và <span class=\"math inline\">\\(dy\\)</span> với <span class=\"math inline\">\\(x\\)</span> và <span class=\"math inline\">\\(dx=\\Delta x\\)</span> đã cho. Sau đó phác họa sơ đồ tương tự Hình 5, thể hiện các đoạn thẳng có độ dài <span class=\"math inline\">\\(dx\\)</span>, <span class=\"math inline\">\\(dy\\)</span> và <span class=\"math inline\">\\(\\Delta y\\)</span>.</p><p><strong>24.</strong> <span class=\"math inline\">\\(y=x-x^3\\)</span>, <span class=\"math inline\">\\(x=0\\)</span>, <span class=\"math inline\">\\(\\Delta x=-0.3\\)</span>.</p><div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-3-10-ebea536f/fig5.png\" alt=\"image\"><br>\nHình 5. Ý nghĩa hình học của <span class=\"math inline\">\\(dx\\)</span>, <span class=\"math inline\">\\(dy\\)</span> và <span class=\"math inline\">\\(\\Delta y\\)</span>.</p>\n</div>"
+    },
+    {
+      "number": 25,
+      "content": "<p><strong>23–26.</strong></p>\n<p>Tính <span class=\"math inline\">\\(\\Delta y\\)</span> và <span class=\"math inline\">\\(dy\\)</span> với <span class=\"math inline\">\\(x\\)</span> và <span class=\"math inline\">\\(dx=\\Delta x\\)</span> đã cho. Sau đó phác họa sơ đồ tương tự Hình 5, thể hiện các đoạn thẳng có độ dài <span class=\"math inline\">\\(dx\\)</span>, <span class=\"math inline\">\\(dy\\)</span> và <span class=\"math inline\">\\(\\Delta y\\)</span>.</p><p><strong>25.</strong> <span class=\"math inline\">\\(y=\\sqrt{x-2}\\)</span>, <span class=\"math inline\">\\(x=3\\)</span>, <span class=\"math inline\">\\(\\Delta x=0.8\\)</span>.</p><div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-3-10-ebea536f/fig5.png\" alt=\"image\"><br>\nHình 5. Ý nghĩa hình học của <span class=\"math inline\">\\(dx\\)</span>, <span class=\"math inline\">\\(dy\\)</span> và <span class=\"math inline\">\\(\\Delta y\\)</span>.</p>\n</div>"
+    },
+    {
+      "number": 26,
+      "content": "<p><strong>23–26.</strong></p>\n<p>Tính <span class=\"math inline\">\\(\\Delta y\\)</span> và <span class=\"math inline\">\\(dy\\)</span> với <span class=\"math inline\">\\(x\\)</span> và <span class=\"math inline\">\\(dx=\\Delta x\\)</span> đã cho. Sau đó phác họa sơ đồ tương tự Hình 5, thể hiện các đoạn thẳng có độ dài <span class=\"math inline\">\\(dx\\)</span>, <span class=\"math inline\">\\(dy\\)</span> và <span class=\"math inline\">\\(\\Delta y\\)</span>.</p><p><strong>26.</strong> <span class=\"math inline\">\\(y=e^x\\)</span>, <span class=\"math inline\">\\(x=0\\)</span>, <span class=\"math inline\">\\(\\Delta x=0.5\\)</span>.</p><div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-3-10-ebea536f/fig5.png\" alt=\"image\"><br>\nHình 5. Ý nghĩa hình học của <span class=\"math inline\">\\(dx\\)</span>, <span class=\"math inline\">\\(dy\\)</span> và <span class=\"math inline\">\\(\\Delta y\\)</span>.</p>\n</div>"
+    },
+    {
+      "number": 27,
+      "content": "<p><strong>27–30.</strong></p>\n<p>So sánh <span class=\"math inline\">\\(\\Delta y\\)</span> và <span class=\"math inline\">\\(dy\\)</span> khi <span class=\"math inline\">\\(x\\)</span> thay đổi từ <span class=\"math inline\">\\(1\\)</span> đến <span class=\"math inline\">\\(1.05\\)</span>. Nếu <span class=\"math inline\">\\(x\\)</span> thay đổi từ <span class=\"math inline\">\\(1\\)</span> đến <span class=\"math inline\">\\(1.01\\)</span> thì sao? Xấp xỉ <span class=\"math inline\">\\(\\Delta y\\approx dy\\)</span> có tốt hơn khi <span class=\"math inline\">\\(\\Delta x\\)</span> nhỏ đi không?</p><p><strong>27.</strong> <span class=\"math inline\">\\(f(x)=x^4-x+1\\)</span>.</p>"
+    },
+    {
+      "number": 28,
+      "content": "<p><strong>27–30.</strong></p>\n<p>So sánh <span class=\"math inline\">\\(\\Delta y\\)</span> và <span class=\"math inline\">\\(dy\\)</span> khi <span class=\"math inline\">\\(x\\)</span> thay đổi từ <span class=\"math inline\">\\(1\\)</span> đến <span class=\"math inline\">\\(1.05\\)</span>. Nếu <span class=\"math inline\">\\(x\\)</span> thay đổi từ <span class=\"math inline\">\\(1\\)</span> đến <span class=\"math inline\">\\(1.01\\)</span> thì sao? Xấp xỉ <span class=\"math inline\">\\(\\Delta y\\approx dy\\)</span> có tốt hơn khi <span class=\"math inline\">\\(\\Delta x\\)</span> nhỏ đi không?</p><p><strong>28.</strong> <span class=\"math inline\">\\(f(x)=e^{2x-2}\\)</span>.</p>"
+    },
+    {
+      "number": 29,
+      "content": "<p><strong>27–30.</strong></p>\n<p>So sánh <span class=\"math inline\">\\(\\Delta y\\)</span> và <span class=\"math inline\">\\(dy\\)</span> khi <span class=\"math inline\">\\(x\\)</span> thay đổi từ <span class=\"math inline\">\\(1\\)</span> đến <span class=\"math inline\">\\(1.05\\)</span>. Nếu <span class=\"math inline\">\\(x\\)</span> thay đổi từ <span class=\"math inline\">\\(1\\)</span> đến <span class=\"math inline\">\\(1.01\\)</span> thì sao? Xấp xỉ <span class=\"math inline\">\\(\\Delta y\\approx dy\\)</span> có tốt hơn khi <span class=\"math inline\">\\(\\Delta x\\)</span> nhỏ đi không?</p><p><strong>29.</strong> <span class=\"math inline\">\\(f(x)=\\sqrt{5-x}\\)</span>.</p>"
+    },
+    {
+      "number": 30,
+      "content": "<p><strong>27–30.</strong></p>\n<p>So sánh <span class=\"math inline\">\\(\\Delta y\\)</span> và <span class=\"math inline\">\\(dy\\)</span> khi <span class=\"math inline\">\\(x\\)</span> thay đổi từ <span class=\"math inline\">\\(1\\)</span> đến <span class=\"math inline\">\\(1.05\\)</span>. Nếu <span class=\"math inline\">\\(x\\)</span> thay đổi từ <span class=\"math inline\">\\(1\\)</span> đến <span class=\"math inline\">\\(1.01\\)</span> thì sao? Xấp xỉ <span class=\"math inline\">\\(\\Delta y\\approx dy\\)</span> có tốt hơn khi <span class=\"math inline\">\\(\\Delta x\\)</span> nhỏ đi không?</p><p><strong>30.</strong> <span class=\"math inline\">\\(\\displaystyle f(x)=\\frac{1}{x^2+1}\\)</span>.</p>"
+    },
+    {
+      "number": 31,
+      "content": "<p><strong>31–36.</strong></p>\n<p>Dùng xấp xỉ tuyến tính (hoặc vi phân) để ước lượng số đã cho.</p><p><strong>31.</strong> <span class=\"math inline\">\\((1.999)^4\\)</span>.</p>"
+    },
+    {
+      "number": 32,
+      "content": "<p><strong>31–36.</strong></p>\n<p>Dùng xấp xỉ tuyến tính (hoặc vi phân) để ước lượng số đã cho.</p><p><strong>32.</strong> <span class=\"math inline\">\\(1/4.002\\)</span>.</p>"
+    },
+    {
+      "number": 33,
+      "content": "<p><strong>31–36.</strong></p>\n<p>Dùng xấp xỉ tuyến tính (hoặc vi phân) để ước lượng số đã cho.</p><p><strong>33.</strong> <span class=\"math inline\">\\(\\sqrt[3]{1001}\\)</span>.</p>"
+    },
+    {
+      "number": 34,
+      "content": "<p><strong>31–36.</strong></p>\n<p>Dùng xấp xỉ tuyến tính (hoặc vi phân) để ước lượng số đã cho.</p><p><strong>34.</strong> <span class=\"math inline\">\\(\\sqrt{100.5}\\)</span>.</p>"
+    },
+    {
+      "number": 35,
+      "content": "<p><strong>31–36.</strong></p>\n<p>Dùng xấp xỉ tuyến tính (hoặc vi phân) để ước lượng số đã cho.</p><p><strong>35.</strong> <span class=\"math inline\">\\(e^{0.1}\\)</span>.</p>"
+    },
+    {
+      "number": 36,
+      "content": "<p><strong>31–36.</strong></p>\n<p>Dùng xấp xỉ tuyến tính (hoặc vi phân) để ước lượng số đã cho.</p><p><strong>36.</strong> <span class=\"math inline\">\\(\\cos29^\\circ\\)</span>.</p>"
+    },
+    {
+      "number": 37,
+      "content": "<p><strong>37–39.</strong></p>\n<p>Giải thích bằng xấp xỉ tuyến tính hoặc vi phân vì sao các phép xấp xỉ sau là hợp lý.</p><p><strong>37.</strong> <span class=\"math inline\">\\(\\ln1.04\\approx0.04\\)</span>.</p>"
+    },
+    {
+      "number": 38,
+      "content": "<p><strong>37–39.</strong></p>\n<p>Giải thích bằng xấp xỉ tuyến tính hoặc vi phân vì sao các phép xấp xỉ sau là hợp lý.</p><p><strong>38.</strong> <span class=\"math inline\">\\(\\sqrt{4.02}\\approx2.005\\)</span>.</p>"
+    },
+    {
+      "number": 39,
+      "content": "<p><strong>37–39.</strong></p>\n<p>Giải thích bằng xấp xỉ tuyến tính hoặc vi phân vì sao các phép xấp xỉ sau là hợp lý.</p><p><strong>39.</strong> <span class=\"math inline\">\\(\\displaystyle\\frac{1}{9.98}\\approx0.1002\\)</span>.</p>"
+    },
+    {
+      "number": 40,
+      "content": "<p><strong>40.</strong> Cho <span class=\"math display\">\\[f(x)=(x-1)^2,\\qquad g(x)=e^{-2x},\\qquad h(x)=1+\\ln(1-2x).\\]</span> (a) Tìm các hàm tuyến tính hóa của <span class=\"math inline\">\\(f,g,h\\)</span> tại <span class=\"math inline\">\\(a=0\\)</span>. Bạn nhận thấy điều gì? Giải thích hiện tượng đó.</p>\n<p>(b) <em>[Cần công cụ vẽ đồ thị.]</em> Vẽ <span class=\"math inline\">\\(f,g,h\\)</span> và các hàm tuyến tính hóa tương ứng. Xấp xỉ tuyến tính tốt nhất đối với hàm nào? Kém nhất đối với hàm nào? Giải thích.</p>"
+    },
+    {
+      "number": 41,
+      "content": "<p><strong>41.</strong> Cạnh của một hình lập phương đo được là <span class=\"math inline\">\\(30\\,\\mathrm{cm}\\)</span>, với sai số đo có thể có là <span class=\"math inline\">\\(0.1\\,\\mathrm{cm}\\)</span>. Dùng vi phân để ước lượng sai số lớn nhất có thể có, sai số tương đối và sai số phần trăm khi tính (a) thể tích hình lập phương; (b) diện tích toàn phần của hình lập phương.</p>"
+    },
+    {
+      "number": 42,
+      "content": "<p><strong>42.</strong> Bán kính một đĩa tròn được cho là <span class=\"math inline\">\\(24\\,\\mathrm{cm}\\)</span>, với sai số đo lớn nhất <span class=\"math inline\">\\(0.2\\,\\mathrm{cm}\\)</span>.</p>\n<p>(a) Dùng vi phân để ước lượng sai số lớn nhất của diện tích đĩa tính được.</p>\n<p>(b) Sai số tương đối và sai số phần trăm là bao nhiêu?</p>"
+    },
+    {
+      "number": 43,
+      "content": "<p><strong>43.</strong> Chu vi của một hình cầu được đo là <span class=\"math inline\">\\(84\\,\\mathrm{cm}\\)</span>, với sai số có thể có là <span class=\"math inline\">\\(0.5\\,\\mathrm{cm}\\)</span>.</p>\n<p>(a) Dùng vi phân để ước lượng sai số lớn nhất của diện tích mặt cầu tính được. Sai số tương đối là bao nhiêu?</p>\n<p>(b) Dùng vi phân để ước lượng sai số lớn nhất của thể tích tính được. Sai số tương đối là bao nhiêu?</p>"
+    },
+    {
+      "number": 44,
+      "content": "<p><strong>44.</strong> Dùng vi phân để ước lượng lượng sơn cần thiết nhằm phủ một lớp dày <span class=\"math inline\">\\(0.05\\,\\mathrm{cm}\\)</span> lên một mái vòm bán cầu đường kính <span class=\"math inline\">\\(50\\,\\mathrm{m}\\)</span>.</p>"
+    },
+    {
+      "number": 45,
+      "content": "<p><strong>45.</strong> (a) Dùng vi phân để tìm công thức tính gần đúng thể tích một vỏ trụ mỏng có chiều cao <span class=\"math inline\">\\(h\\)</span>, bán kính trong <span class=\"math inline\">\\(r\\)</span> và bề dày <span class=\"math inline\">\\(\\Delta r\\)</span>.</p>\n<p>(b) Sai số khi sử dụng công thức ở câu (a) là bao nhiêu?</p>"
+    },
+    {
+      "number": 46,
+      "content": "<p><strong>46.</strong> Một cạnh của tam giác vuông dài <span class=\"math inline\">\\(20\\,\\mathrm{cm}\\)</span>; góc đối diện cạnh đó được đo là <span class=\"math inline\">\\(30^\\circ\\)</span>, với sai số có thể có là <span class=\"math inline\">\\(\\pm1^\\circ\\)</span>.</p>\n<p>(a) Dùng vi phân để ước lượng sai số khi tính độ dài cạnh huyền.</p>\n<p>(b) Sai số phần trăm là bao nhiêu?</p>"
+    },
+    {
+      "number": 47,
+      "content": "<p><strong>47.</strong> Khi dòng điện <span class=\"math inline\">\\(I\\)</span> chạy qua điện trở có điện trở <span class=\"math inline\">\\(R\\)</span>, định luật Ohm cho độ sụt điện áp <span class=\"math inline\">\\(V=RI\\)</span>. Nếu <span class=\"math inline\">\\(V\\)</span> không đổi và <span class=\"math inline\">\\(R\\)</span> được đo với một sai số nhất định, dùng vi phân để chứng minh sai số tương đối khi tính <span class=\"math inline\">\\(I\\)</span> xấp xỉ bằng sai số tương đối của <span class=\"math inline\">\\(R\\)</span> về độ lớn.</p>"
+    },
+    {
+      "number": 48,
+      "content": "<p><strong>48.</strong> Khi máu chảy dọc theo mạch máu, lưu lượng <span class=\"math inline\">\\(F\\)</span> (thể tích máu đi qua một điểm trong một đơn vị thời gian) tỉ lệ thuận với lũy thừa bậc bốn của bán kính <span class=\"math inline\">\\(R\\)</span> của mạch: <span class=\"math display\">\\[F=kR^4.\\]</span> Đây là định luật Poiseuille; ta sẽ giải thích tính đúng đắn của nó trong Mục 8.4. Một động mạch bị tắc một phần có thể được mở rộng bằng thủ thuật nong mạch: bơm căng một ống thông có bóng ở đầu bên trong động mạch để làm rộng lòng mạch và khôi phục dòng máu bình thường.</p>\n<p>Chứng minh độ biến thiên tương đối của <span class=\"math inline\">\\(F\\)</span> xấp xỉ bằng bốn lần độ biến thiên tương đối của <span class=\"math inline\">\\(R\\)</span>. Bán kính tăng <span class=\"math inline\">\\(5\\%\\)</span> sẽ ảnh hưởng thế nào đến lưu lượng máu?</p>"
+    },
+    {
+      "number": 49,
+      "content": "<p><strong>49.</strong> Thiết lập các quy tắc sau cho vi phân, trong đó <span class=\"math inline\">\\(c\\)</span> là hằng số, <span class=\"math inline\">\\(u,v\\)</span> là các hàm của <span class=\"math inline\">\\(x\\)</span>. <span class=\"math display\">\\[\\begin{aligned}\n\\text{(a)}\\quad dc&amp;=0,&amp;\\text{(b)}\\quad d(cu)&amp;=c\\,du,\\\\\n\\text{(c)}\\quad d(u+v)&amp;=du+dv,&amp;\\text{(d)}\\quad d(uv)&amp;=u\\,dv+v\\,du,\\\\\n\\text{(e)}\\quad d\\left(\\frac uv\\right)&amp;=\\frac{v\\,du-u\\,dv}{v^2},&amp;\n\\text{(f)}\\quad d(x^n)&amp;=nx^{n-1}\\,dx.\n\\end{aligned}\\]</span></p>"
+    },
+    {
+      "number": 50,
+      "content": "<p><strong>50.</strong> Trong sách vật lý, chu kỳ <span class=\"math inline\">\\(T\\)</span> của con lắc dài <span class=\"math inline\">\\(L\\)</span> thường được cho bởi <span class=\"math inline\">\\(T\\approx2\\pi\\sqrt{L/g}\\)</span>, với điều kiện con lắc dao động theo một cung tương đối nhỏ. Khi suy ra công thức này, người ta thu được phương trình gia tốc tiếp tuyến của quả nặng <span class=\"math inline\">\\(a_T=-g\\sin\\theta\\)</span>, rồi thay <span class=\"math inline\">\\(\\sin\\theta\\)</span> bằng <span class=\"math inline\">\\(\\theta\\)</span>, với nhận xét rằng đối với góc nhỏ, <span class=\"math inline\">\\(\\theta\\)</span> (radian) rất gần <span class=\"math inline\">\\(\\sin\\theta\\)</span>.</p>\n<p>(a) Kiểm tra xấp xỉ tuyến tính tại <span class=\"math inline\">\\(0\\)</span> của hàm sin: <span class=\"math display\">\\[\\sin\\theta\\approx\\theta.\\]</span> (b) Nếu <span class=\"math inline\">\\(\\theta=\\pi/18\\)</span> (tương đương <span class=\"math inline\">\\(10^\\circ\\)</span>) và ta xấp xỉ <span class=\"math inline\">\\(\\sin\\theta\\)</span> bằng <span class=\"math inline\">\\(\\theta\\)</span>, sai số phần trăm là bao nhiêu?</p>\n<p>(c) <em>[Cần công cụ vẽ đồ thị.]</em> Dùng đồ thị để xác định các giá trị <span class=\"math inline\">\\(\\theta\\)</span> sao cho <span class=\"math inline\">\\(\\sin\\theta\\)</span> và <span class=\"math inline\">\\(\\theta\\)</span> khác nhau ít hơn <span class=\"math inline\">\\(2\\%\\)</span>. Các giá trị đó tính theo độ là bao nhiêu?</p>"
+    },
+    {
+      "number": 51,
+      "content": "<p><strong>51.</strong> Giả sử thông tin duy nhất biết được về hàm <span class=\"math inline\">\\(f\\)</span> là <span class=\"math inline\">\\(f(1)=5\\)</span> và đồ thị đạo hàm có dạng như hình.</p>\n<p>(a) Dùng xấp xỉ tuyến tính để ước lượng <span class=\"math inline\">\\(f(0.9)\\)</span> và <span class=\"math inline\">\\(f(1.1)\\)</span>.</p>\n<p>(b) Các ước lượng ở câu (a) quá lớn hay quá nhỏ? Giải thích.</p>\n<div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-3-10-ebea536f/ex51.png\" alt=\"image\"><br>\nHình cho Bài tập 51: đồ thị <span class=\"math inline\">\\(y=f'(x)\\)</span>.</p>\n</div>"
+    },
+    {
+      "number": 52,
+      "content": "<p><strong>52.</strong> Giả sử không có công thức của <span class=\"math inline\">\\(g(x)\\)</span>, nhưng biết <span class=\"math inline\">\\(g(2)=-4\\)</span> và <span class=\"math inline\">\\(g'(x)=\\sqrt{x^2+5}\\)</span> với mọi <span class=\"math inline\">\\(x\\)</span>.</p>\n<p>(a) Dùng xấp xỉ tuyến tính để ước lượng <span class=\"math inline\">\\(g(1.95)\\)</span> và <span class=\"math inline\">\\(g(2.05)\\)</span>.</p>\n<p>(b) Các ước lượng ở câu (a) quá lớn hay quá nhỏ? Giải thích.</p>"
+    }
+  ]
+}

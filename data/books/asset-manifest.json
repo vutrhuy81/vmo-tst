@@ -1775,5 +1775,40 @@
     "file": "stewart-3-9-74c9b2c0/fig5.png",
     "mime": "image/png",
     "sha256": "f12cb9f4df2c33d14083bcd4f39c81e77d46f151e9235608dab55dc219e74051"
+  },
+  "stewart-3-10-ebea536f/ex51.png": {
+    "file": "stewart-3-10-ebea536f/ex51.png",
+    "mime": "image/png",
+    "sha256": "957caff44f67269d7fad0b4572d425e13a77feea6af593029c28bffbaa14f5d9"
+  },
+  "stewart-3-10-ebea536f/fig1.png": {
+    "file": "stewart-3-10-ebea536f/fig1.png",
+    "mime": "image/png",
+    "sha256": "1bcbe1c47520755cda93a6a43a78110263150d8257549ad1a3ab268ccd3d8913"
+  },
+  "stewart-3-10-ebea536f/fig2.png": {
+    "file": "stewart-3-10-ebea536f/fig2.png",
+    "mime": "image/png",
+    "sha256": "d0352cdb07211a644812d408555d14fc0c028acecc0d492ba7ee469e2232b19d"
+  },
+  "stewart-3-10-ebea536f/fig3.png": {
+    "file": "stewart-3-10-ebea536f/fig3.png",
+    "mime": "image/png",
+    "sha256": "c913195a920cdbde4e1673095e0cd896d5418ce1a15785ff5fefad66f1dc69ea"
+  },
+  "stewart-3-10-ebea536f/fig4.png": {
+    "file": "stewart-3-10-ebea536f/fig4.png",
+    "mime": "image/png",
+    "sha256": "233c7d9f5d165e62237c21e94c7c0f386b5e38b930e8c741f51a1fc26c89e254"
+  },
+  "stewart-3-10-ebea536f/fig5.png": {
+    "file": "stewart-3-10-ebea536f/fig5.png",
+    "mime": "image/png",
+    "sha256": "84e358fd6533ac39ad71a1d3012aa53444a05e5861fb4ef87295e1f437342445"
+  },
+  "stewart-3-10-ebea536f/fig6.png": {
+    "file": "stewart-3-10-ebea536f/fig6.png",
+    "mime": "image/png",
+    "sha256": "6cddb24de4fecf9c1bbe429a69607d08a50128cbe3133fe2adf2b5fc4a78cfae"
   }
 }

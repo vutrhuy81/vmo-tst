@@ -512,3 +512,25 @@ for(const image of doc39.window.document.querySelectorAll('img')){
 }
 doc39.window.close();
 assert.deepEqual((await readBooks(db,student,{bookId:book.id,sectionId:child39.id})).exercises.map(e=>e.contentKey),section39.exercises.map(e=>e.contentKey));
+
+// Linear approximation/differential exercises share section 1.1's action path.
+const child310=detail.sections.find(s=>s.title.startsWith('3.10.'));
+const section310=await readBooks(db,student,{bookId:book.id,sectionId:child310.id});
+assert.equal(section310.exerciseHeading,'3.10. Bài tập');
+assert.deepEqual(section310.exercises.map(e=>e.questionNumber),Array.from({length:52},(_,i)=>i+1));
+assert.ok(section310.exercises.every(e=>e.allowSubmission&&e.allowAiEvaluation&&e.contentKey&&e.setKey));
+for(const n of [1,4])assert.ok(section310.exercises[n-1].content.includes('tuyến tính hóa'));
+for(const n of [7,10])assert.ok(section310.exercises[n-1].content.includes('sai số nhỏ hơn'));
+for(const n of [23,24,25,26])assert.ok(section310.exercises[n-1].content.includes('/fig5.png'));
+assert.ok(section310.exercises[50].content.includes('/ex51.png'));
+assert.ok(section310.section.content.includes('Dự án khám phá'));
+const doc310=new JSDOM(section310.section.content);
+assert.equal(doc310.window.document.querySelectorAll('img').length,7);
+assert.equal(section310.section.sourceInfo.exampleCount,4);
+for(const image of doc310.window.document.querySelectorAll('img')){
+ const asset=new URL(image.src,'https://example.test').searchParams.get('asset');
+ assert.equal((await readBookAsset(student,asset)).bytes[0],137);
+ await assert.rejects(()=>readBookAsset(other,asset),e=>e.status===403);
+}
+doc310.window.close();
+assert.deepEqual((await readBooks(db,student,{bookId:book.id,sectionId:child310.id})).exercises.map(e=>e.contentKey),section310.exercises.map(e=>e.contentKey));
