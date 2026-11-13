@@ -1,0 +1,441 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage{fontspec}\setmainfont{Latin Modern Roman}\setsansfont{DejaVu Sans}
+\usepackage{amsmath,amssymb,graphicx,geometry,enumitem,longtable,booktabs,fancyhdr,hyperref}
+\geometry{left=28mm,right=23mm,top=24mm,bottom=24mm}
+\hypersetup{unicode=true,colorlinks=true,linkcolor=black,urlcolor=blue,pdftitle={Giải tích Chương 3 Mục 3.4 Quy tắc dây chuyền}}
+\setlength{\parindent}{1.2em}\setlength{\parskip}{4pt}\setlength{\headheight}{16pt}
+\pagestyle{fancy}\fancyhf{}\fancyhead[L]{\small Chương 3. Các quy tắc tính đạo hàm}\fancyhead[R]{\small §3.4}\fancyfoot[C]{\thepage}
+\newcommand{\fig}[3][.68]{\begin{center}\begin{minipage}{\linewidth}\centering\includegraphics[width=#1\linewidth]{assets/#2.png}\\{\small #3}\end{minipage}\end{center}}
+\newcommand{\ex}[1]{\par\medskip\noindent\textbf{Ví dụ #1.}\ }
+\newcommand{\sol}{\par\nopagebreak[4]\noindent\textit{Lời giải.}\ }
+\newcommand{\bt}[1]{\par\smallskip\noindent\textbf{#1.}\ }
+\newcommand{\group}[1]{\par\medskip\noindent\textbf{#1}\par\nopagebreak[4]}
+\newcommand{\gint}[1]{\left[\!\left[#1\right]\!\right]}
+\allowdisplaybreaks[2]
+\begin{document}
+\begin{center}
+{\Large\bfseries GIẢI TÍCH}\\[5pt]
+{\large Chương 3. Các quy tắc tính đạo hàm}\\[9pt]
+{\Large\bfseries 3.4. Quy tắc dây chuyền}
+\end{center}
+\noindent\textbf{Nguồn:} James Stewart, Daniel K. Clegg, Saleem Watson, \textit{Calculus: Early Transcendentals}, ấn bản thứ 9 (2020), trang in 199–209 (trang PDF 234–244): toàn bộ §3.4, Bài tập 1–102 và dự án ứng dụng sau mục này, trước tiêu đề §3.5.
+
+Giả sử cần tính đạo hàm của hàm
+\[F(x)=\sqrt{x^2+1}.\]
+Các công thức đã học trong những mục trước của chương chưa cho phép tính $F'(x)$.
+
+Nhận thấy $F$ là một hàm hợp. Nếu đặt $y=f(u)=\sqrt u$ và $u=g(x)=x^2+1$, ta có $y=F(x)=f(g(x))$, tức $F=f\circ g$. Ta biết cách lấy đạo hàm của cả $f$ lẫn $g$, nên cần một quy tắc cho phép tìm đạo hàm của $F=f\circ g$ theo đạo hàm của $f,g$. Có thể ôn lại hàm hợp ở §1.3.
+\section*{Quy tắc dây chuyền}
+Hóa ra đạo hàm của hàm hợp $f\circ g$ là tích của các đạo hàm theo cách được phát biểu dưới đây. Đây là một trong những quy tắc tính đạo hàm quan trọng nhất, được gọi là \textbf{quy tắc dây chuyền}. Quy tắc có vẻ hợp lý nếu diễn giải đạo hàm như tốc độ biến thiên. Xem $du/dx$ là tốc độ biến thiên của $u$ theo $x$, $dy/du$ là tốc độ biến thiên của $y$ theo $u$, và $dy/dx$ là tốc độ biến thiên của $y$ theo $x$. Nếu $u$ thay đổi nhanh gấp đôi $x$, còn $y$ thay đổi nhanh gấp ba $u$, thì hợp lý khi dự đoán $y$ thay đổi nhanh gấp sáu $x$; do đó, ta chờ đợi $dy/dx$ bằng tích của $dy/du$ và $du/dx$.
+\begin{quote}\textbf{Quy tắc dây chuyền.} Nếu $g$ khả vi tại $x$ và $f$ khả vi tại $g(x)$ thì hàm hợp $F=f\circ g$, xác định bởi $F(x)=f(g(x))$, khả vi tại $x$ và
+\[F'(x)=f'(g(x))\cdot g'(x).\tag{1}\]
+Theo ký hiệu Leibniz, nếu $y=f(u)$ và $u=g(x)$ đều là các hàm khả vi thì
+\[\frac{dy}{dx}=\frac{dy}{du}\frac{du}{dx}.\tag{2}\]
+\end{quote}
+Công thức (2) dễ nhớ vì nếu nghĩ $dy/du$ và $du/dx$ là các thương thì có thể giản ước $du$. Tuy nhiên, ở đây $du$ chưa được định nghĩa và không được xem $du/dx$ là một thương thực sự.
+\subsection*{Nhận xét về chứng minh quy tắc dây chuyền}
+Gọi $\Delta u$ là số gia của $u$ tương ứng với số gia $\Delta x$ của $x$, tức
+\[\Delta u=g(x+\Delta x)-g(x).\]
+Số gia tương ứng của $y$ là
+\[\Delta y=f(u+\Delta u)-f(u).\]
+Ta có thể muốn viết
+\[\frac{dy}{dx}=\lim_{\Delta x\to0}\frac{\Delta y}{\Delta x}\]
+\[=\lim_{\Delta x\to0}\frac{\Delta y}{\Delta u}\cdot\frac{\Delta u}{\Delta x}\tag{3}\]
+\[=\lim_{\Delta x\to0}\frac{\Delta y}{\Delta u}\cdot\lim_{\Delta x\to0}\frac{\Delta u}{\Delta x}\]
+\[=\lim_{\Delta u\to0}\frac{\Delta y}{\Delta u}\cdot\lim_{\Delta x\to0}\frac{\Delta u}{\Delta x}=\frac{dy}{du}\frac{du}{dx}.\]
+Ở đây, $\Delta u\to0$ khi $\Delta x\to0$ vì $g$ liên tục. Sai sót duy nhất của lập luận này là trong (3), có thể xảy ra $\Delta u=0$ ngay cả khi $\Delta x\ne0$, mà không thể chia cho 0. Dẫu vậy, lập luận ít nhất cũng gợi ý rằng quy tắc dây chuyền đúng. Chứng minh đầy đủ sẽ được trình bày ở cuối mục.
+\subsection*{James Gregory}
+Người đầu tiên phát biểu quy tắc dây chuyền là nhà toán học Scotland James Gregory (1638–1675), người cũng thiết kế kính thiên văn phản xạ thực dụng đầu tiên. Gregory tìm ra các ý tưởng cơ bản của vi tích phân gần cùng thời với Newton. Ông trở thành giáo sư toán học đầu tiên của Đại học St. Andrews, sau đó giữ vị trí tương tự tại Đại học Edinburgh. Tuy nhiên, chỉ một năm sau khi nhận chức ở Edinburgh, ông qua đời ở tuổi 36.
+\ex{1} Tìm $F'(x)$ nếu $F(x)=\sqrt{x^2+1}$.
+
+\noindent\textit{Lời giải 1 (dùng công thức (1)).} Ở đầu mục, ta đã viết $F(x)=(f\circ g)(x)=f(g(x))$, với $f(u)=\sqrt u$ và $g(x)=x^2+1$. Vì
+\[f'(u)=\frac12u^{-1/2}=\frac1{2\sqrt u},\qquad g'(x)=2x,\]
+nên
+\begin{align*}
+F'(x)&=f'(g(x))\cdot g'(x)\\
+&=\frac1{2\sqrt{x^2+1}}\cdot2x=\frac{x}{\sqrt{x^2+1}}.
+\end{align*}
+\noindent\textit{Lời giải 2 (dùng công thức (2)).} Đặt $u=x^2+1$ và $y=\sqrt u$. Khi đó,
+\[F'(x)=\frac{dy}{du}\frac{du}{dx}=\frac1{2\sqrt u}(2x)=\frac1{2\sqrt{x^2+1}}(2x)=\frac{x}{\sqrt{x^2+1}}.\qquad\square\]
+Khi dùng (2), cần nhớ $dy/dx$ là đạo hàm của $y$ khi xem $y$ là hàm của $x$, còn $dy/du$ là đạo hàm của $y$ khi xem $y$ là hàm của $u$. Trong Ví dụ 1, có thể xem $y$ là hàm của $x$, $y=\sqrt{x^2+1}$, đồng thời là hàm của $u$, $y=\sqrt u$. Chú ý
+\[\frac{dy}{dx}=F'(x)=\frac{x}{\sqrt{x^2+1}},\qquad\text{còn}\qquad \frac{dy}{du}=f'(u)=\frac1{2\sqrt u}.\]
+\noindent\textbf{Chú ý.} Khi dùng quy tắc dây chuyền, ta làm từ ngoài vào trong. Công thức (1) cho biết: lấy đạo hàm hàm ngoài $f$, tính tại hàm trong $g(x)$, rồi nhân với đạo hàm hàm trong:
+\[\frac{d}{dx}f(g(x))=f'(g(x))\cdot g'(x).\]
+Ở vế trái, hàm ngoài $f$ được tính tại hàm trong $g(x)$; ở vế phải, $f'(g(x))$ là đạo hàm hàm ngoài tính tại hàm trong, còn $g'(x)$ là đạo hàm hàm trong.
+\ex{2} Tính đạo hàm: (a) $y=\sin(x^2)$; \quad (b) $y=\sin^2x$.
+\sol (a) Nếu $y=\sin(x^2)$ thì hàm ngoài là sin và hàm trong là hàm bình phương. Quy tắc dây chuyền cho
+\[\frac{dy}{dx}=\frac{d}{dx}\sin(x^2)=\cos(x^2)\cdot2x=2x\cos(x^2).\]
+Ở đây, $\cos(x^2)$ là đạo hàm của hàm ngoài tính tại hàm trong, và $2x$ là đạo hàm hàm trong.
+
+(b) Chú ý $\sin^2x=(\sin x)^2$. Lúc này hàm ngoài là hàm bình phương, hàm trong là sin. Vì vậy,
+\[\frac{dy}{dx}=\frac{d}{dx}(\sin x)^2=2\cdot(\sin x)\cdot\cos x.\]
+Trong tích cuối, đạo hàm của hàm ngoài là $2u$ được tính tại $u=\sin x$, còn $\cos x$ là đạo hàm hàm trong. Có thể giữ kết quả $2\sin x\cos x$ hoặc viết thành $\sin2x$ bằng công thức góc gấp đôi (xem Trang tham khảo 2 hoặc Phụ lục D).\hfill$\square$
+
+Trong Ví dụ 2(a), ta kết hợp quy tắc dây chuyền với quy tắc lấy đạo hàm của sin. Tổng quát, nếu $y=\sin u$, trong đó $u$ là hàm khả vi của $x$, thì
+\[\frac{dy}{dx}=\frac{dy}{du}\frac{du}{dx}=\cos u\frac{du}{dx},\]
+tức
+\[\frac{d}{dx}(\sin u)=\cos u\frac{du}{dx}.\]
+Tương tự, mọi công thức đạo hàm lượng giác đều có thể kết hợp với quy tắc dây chuyền.
+
+Xét riêng trường hợp hàm ngoài $f$ là hàm lũy thừa. Nếu $y=[g(x)]^n$, có thể viết $y=f(u)=u^n$, với $u=g(x)$. Dùng quy tắc dây chuyền rồi quy tắc lũy thừa,
+\[\frac{dy}{dx}=\frac{dy}{du}\frac{du}{dx}=nu^{n-1}\frac{du}{dx}=n[g(x)]^{n-1}g'(x).\]
+\begin{quote}\textbf{4. Quy tắc lũy thừa kết hợp với quy tắc dây chuyền.} Nếu $n$ là số thực bất kỳ và $u=g(x)$ khả vi thì
+\[\frac{d}{dx}(u^n)=nu^{n-1}\frac{du}{dx}.\]
+Hoặc,
+\[\frac{d}{dx}[g(x)]^n=n[g(x)]^{n-1}\cdot g'(x).\]
+\end{quote}
+Đạo hàm trong Ví dụ 1 cũng có thể tính bằng cách lấy $n=1/2$ trong Quy tắc 4.
+\ex{3} Tính đạo hàm của $y=(x^3-1)^{100}$.
+\sol Lấy $u=g(x)=x^3-1$ và $n=100$ trong (4):
+\begin{align*}
+\frac{dy}{dx}&=\frac{d}{dx}(x^3-1)^{100}=100(x^3-1)^{99}\frac{d}{dx}(x^3-1)\\
+&=100(x^3-1)^{99}\cdot3x^2=300x^2(x^3-1)^{99}.\qquad\square
+\end{align*}
+\ex{4} Tìm $f'(x)$ nếu $\displaystyle f(x)=\frac1{\sqrt[3]{x^2+x+1}}$.
+\sol Trước hết viết lại $f(x)=(x^2+x+1)^{-1/3}$. Khi đó,
+\begin{align*}
+f'(x)&=-\frac13(x^2+x+1)^{-4/3}\frac{d}{dx}(x^2+x+1)\\
+&=-\frac13(x^2+x+1)^{-4/3}(2x+1).\qquad\square
+\end{align*}
+\ex{5} Tìm đạo hàm của $\displaystyle g(t)=\left(\frac{t-2}{2t+1}\right)^9$.
+\sol Kết hợp quy tắc lũy thừa, quy tắc dây chuyền và quy tắc thương:
+\begin{align*}
+g'(t)&=9\left(\frac{t-2}{2t+1}\right)^8\frac{d}{dt}\left(\frac{t-2}{2t+1}\right)\\
+&=9\left(\frac{t-2}{2t+1}\right)^8\frac{(2t+1)\cdot1-2(t-2)}{(2t+1)^2}\\
+&=\frac{45(t-2)^8}{(2t+1)^{10}}.\qquad\square
+\end{align*}
+\ex{6} Tính đạo hàm của $y=(2x+1)^5(x^3-x+1)^4$.
+\sol Trong ví dụ này phải dùng quy tắc tích trước khi dùng quy tắc dây chuyền:
+\begin{align*}
+\frac{dy}{dx}&=(2x+1)^5\frac{d}{dx}(x^3-x+1)^4+(x^3-x+1)^4\frac{d}{dx}(2x+1)^5\\
+&=(2x+1)^5\cdot4(x^3-x+1)^3\frac{d}{dx}(x^3-x+1)\\
+&\quad +(x^3-x+1)^4\cdot5(2x+1)^4\frac{d}{dx}(2x+1)\\
+&=4(2x+1)^5(x^3-x+1)^3(3x^2-1)\\
+&\quad +5(x^3-x+1)^4(2x+1)^4\cdot2.
+\end{align*}
+Mỗi số hạng đều có nhân tử chung $2(2x+1)^4(x^3-x+1)^3$. Đưa nhân tử đó ra ngoài, có thể viết
+\[\frac{dy}{dx}=2(2x+1)^4(x^3-x+1)^3(17x^3+6x^2-9x+3).\qquad\square\]
+Đồ thị $y,y'$ trong Ví dụ 6 được cho ở Hình 1. Khi $y$ tăng nhanh, $y'$ lớn; khi $y$ có tiếp tuyến ngang, $y'=0$. Vì vậy, kết quả có vẻ hợp lý.
+\fig[.47]{f01}{Hình 1. Hàm $y$ trong Ví dụ 6 và đạo hàm $y'$.}
+\ex{7} Tính đạo hàm của $y=e^{\sin x}$.
+\sol Hàm trong là $g(x)=\sin x$, hàm ngoài là hàm mũ $f(x)=e^x$. Theo quy tắc dây chuyền,
+\[\frac{dy}{dx}=\frac{d}{dx}(e^{\sin x})=e^{\sin x}\frac{d}{dx}(\sin x)=e^{\sin x}\cos x.\qquad\square\]
+Tổng quát hơn, quy tắc dây chuyền cho
+\[\frac{d}{dx}(e^u)=e^u\frac{du}{dx}.\]
+Tên gọi “quy tắc dây chuyền” trở nên rõ ràng khi nối thêm một mắt xích. Giả sử $y=f(u)$, $u=g(x)$ và $x=h(t)$, trong đó $f,g,h$ khả vi. Để tính đạo hàm của $y$ theo $t$, dùng quy tắc dây chuyền hai lần:
+\[\frac{dy}{dt}=\frac{dy}{dx}\frac{dx}{dt}=\frac{dy}{du}\frac{du}{dx}\frac{dx}{dt}.\]
+\ex{8} Nếu $f(x)=\sin(\cos(\tan x))$ thì
+\begin{align*}
+f'(x)&=\cos(\cos(\tan x))\frac{d}{dx}\cos(\tan x)\\
+&=\cos(\cos(\tan x))[-\sin(\tan x)]\frac{d}{dx}(\tan x)\\
+&=-\cos(\cos(\tan x))\sin(\tan x)\sec^2x.
+\end{align*}
+Chú ý đã dùng quy tắc dây chuyền hai lần.\hfill$\square$
+\ex{9} Tính đạo hàm của $y=e^{\sec3\theta}$.
+\sol Hàm ngoài là hàm mũ, hàm giữa là sec, hàm trong là hàm nhân ba. Vì vậy,
+\begin{align*}
+\frac{dy}{d\theta}&=e^{\sec3\theta}\frac{d}{d\theta}(\sec3\theta)\\
+&=e^{\sec3\theta}\sec3\theta\tan3\theta\frac{d}{d\theta}(3\theta)\\
+&=3e^{\sec3\theta}\sec3\theta\tan3\theta.\qquad\square
+\end{align*}
+\section*{Đạo hàm của hàm mũ với cơ số tổng quát}
+Có thể dùng quy tắc dây chuyền để lấy đạo hàm của hàm mũ với cơ số bất kỳ $b>0$. Nhắc lại (1.5.10):
+\[b^x=e^{(\ln b)x}.\]
+Theo quy tắc dây chuyền,
+\begin{align*}
+\frac{d}{dx}(b^x)&=\frac{d}{dx}(e^{(\ln b)x})=e^{(\ln b)x}\frac{d}{dx}[(\ln b)x]\\
+&=e^{(\ln b)x}(\ln b)=b^x\ln b,
+\end{align*}
+vì $\ln b$ là hằng số. Do đó,
+\[\frac{d}{dx}(b^x)=b^x\ln b.\tag{5}\]
+Đừng nhầm (5), trong đó $x$ là số mũ, với quy tắc lũy thừa, trong đó $x$ là cơ số:
+\[\frac{d}{dx}(x^n)=nx^{n-1}.\]
+\ex{10} Tìm đạo hàm của: (a) $g(x)=2^x$; \quad (b) $h(x)=5^{x^2}$.
+\sol (a) Dùng (5) với $b=2$:
+\[g'(x)=\frac{d}{dx}(2^x)=2^x\ln2.\]
+Kết quả phù hợp với ước lượng $(d/dx)(2^x)\approx(0.693)2^x$ trong §3.1, vì $\ln2\approx0.693147$.
+
+(b) Hàm ngoài là hàm mũ, hàm trong là hàm bình phương; dùng (5) và quy tắc dây chuyền:
+\[h'(x)=\frac{d}{dx}(5^{x^2})=5^{x^2}\ln5\cdot\frac{d}{dx}(x^2)=2x\cdot5^{x^2}\ln5.\qquad\square\]
+\section*{Chứng minh quy tắc dây chuyền}
+Nhắc lại: nếu $y=f(x)$ và $x$ thay đổi từ $a$ đến $a+\Delta x$ thì số gia của $y$ là
+\[\Delta y=f(a+\Delta x)-f(a).\]
+Theo định nghĩa đạo hàm,
+\[\lim_{\Delta x\to0}\frac{\Delta y}{\Delta x}=f'(a).\]
+Gọi $\varepsilon$ là hiệu giữa $\Delta y/\Delta x$ và $f'(a)$. Khi đó,
+\[\lim_{\Delta x\to0}\varepsilon=\lim_{\Delta x\to0}\left(\frac{\Delta y}{\Delta x}-f'(a)\right)=f'(a)-f'(a)=0.\]
+Mặt khác,
+\[\varepsilon=\frac{\Delta y}{\Delta x}-f'(a)\quad\Longrightarrow\quad \Delta y=f'(a)\Delta x+\varepsilon\Delta x.\]
+Nếu định nghĩa $\varepsilon=0$ khi $\Delta x=0$ thì $\varepsilon$ trở thành hàm của $\Delta x$, liên tục tại $\Delta x=0$. Như vậy, với hàm khả vi $f$, có thể viết
+\[\Delta y=f'(a)\Delta x+\varepsilon\Delta x,\qquad \varepsilon\to0\text{ khi }\Delta x\to0,\tag{6}\]
+trong đó $\varepsilon$ là hàm của $\Delta x$, liên tục tại $\Delta x=0$. Tính chất này của hàm khả vi cho phép chứng minh quy tắc dây chuyền.
+
+\noindent\textit{Chứng minh quy tắc dây chuyền.} Giả sử $u=g(x)$ khả vi tại $a$ và $y=f(u)$ khả vi tại $b=g(a)$. Nếu $\Delta x$ là số gia của $x$, còn $\Delta u,\Delta y$ là các số gia tương ứng của $u,y$, dùng (6) ta viết
+\[\Delta u=g'(a)\Delta x+\varepsilon_1\Delta x=[g'(a)+\varepsilon_1]\Delta x,\tag{7}\]
+với $\varepsilon_1\to0$ khi $\Delta x\to0$. Tương tự,
+\[\Delta y=f'(b)\Delta u+\varepsilon_2\Delta u=[f'(b)+\varepsilon_2]\Delta u,\tag{8}\]
+với $\varepsilon_2\to0$ khi $\Delta u\to0$. Thay biểu thức $\Delta u$ trong (7) vào (8), được
+\[\Delta y=[f'(b)+\varepsilon_2][g'(a)+\varepsilon_1]\Delta x,\]
+nên
+\[\frac{\Delta y}{\Delta x}=[f'(b)+\varepsilon_2][g'(a)+\varepsilon_1].\]
+Khi $\Delta x\to0$, (7) cho thấy $\Delta u\to0$. Lấy giới hạn khi $\Delta x\to0$:
+\begin{align*}
+\frac{dy}{dx}&=\lim_{\Delta x\to0}\frac{\Delta y}{\Delta x}
+=\lim_{\Delta x\to0}[f'(b)+\varepsilon_2][g'(a)+\varepsilon_1]\\
+&=f'(b)g'(a)=f'(g(a))g'(a).
+\end{align*}
+Quy tắc dây chuyền được chứng minh.\hfill$\square$
+\section*{3.4. Bài tập}
+\group{1–6. Viết hàm hợp dưới dạng $f(g(x))$: xác định hàm trong $u=g(x)$ và hàm ngoài $y=f(u)$. Sau đó tìm $dy/dx$.}
+\bt{1} $y=(5-x^4)^3$.
+\bt{2} $y=\sqrt{x^3+2}$.
+\bt{3} $y=\sin(\cos x)$.
+\bt{4} $y=\tan(x^2)$.
+\bt{5} $y=e^{\sqrt{x}}$.
+\bt{6} $y=\sqrt[3]{e^x+1}$.
+\group{7–52. Tìm đạo hàm của hàm số.}
+\bt{7} $f(x)=(2x^3-5x^2+4)^5$.
+\bt{8} $f(x)=(x^5+3x^2-x)^{50}$.
+\bt{9} $f(x)=\sqrt{5x+1}$.
+\bt{10} $f(x)=\dfrac1{\sqrt[3]{x^2-1}}$.
+\bt{11} $g(t)=\dfrac1{(2t+1)^2}$.
+\bt{12} $F(t)=\left(\dfrac1{2t+1}\right)^4$.
+\bt{13} $f(\theta)=\cos(\theta^2)$.
+\bt{14} $g(\theta)=\cos^2\theta$.
+\bt{15} $g(x)=e^{x^2-x}$.
+\bt{16} $y=5^{\sqrt{x}}$.
+\bt{17} $y=x^2e^{-3x}$.
+\bt{18} $f(t)=t\sin\pi t$.
+\bt{19} $f(t)=e^{at}\sin bt$.
+\bt{20} $A(r)=\sqrt r\cdot e^{r^2+1}$.
+\bt{21} $F(x)=(4x+5)^3(x^2-2x+5)^4$.
+\bt{22} $G(z)=(1-4z)^2\sqrt{z^2+1}$.
+\bt{23} $y=\sqrt{\dfrac{x}{x+1}}$.
+\bt{24} $y=\left(x+\dfrac1x\right)^5$.
+\bt{25} $y=e^{\tan\theta}$.
+\bt{26} $f(t)=2^{t^3}$.
+\bt{27} $g(u)=\left(\dfrac{u^3-1}{u^3+1}\right)^8$.
+\bt{28} $s(t)=\sqrt{\dfrac{1+\sin t}{1+\cos t}}$.
+\bt{29} $r(t)=10^{2\sqrt t}$.
+\bt{30} $f(z)=e^{z/(z-1)}$.
+\bt{31} $H(r)=\dfrac{(r^2-1)^3}{(2r+1)^5}$.
+\bt{32} $J(\theta)=\tan^2(n\theta)$.
+\bt{33} $F(t)=e^{t\sin2t}$.
+\bt{34} $F(t)=\dfrac{t^2}{\sqrt{t^3+1}}$.
+\bt{35} $G(x)=4^{C/x}$.
+\bt{36} $U(y)=\left(\dfrac{y^4+1}{y^2+1}\right)^5$.
+\bt{37} $f(x)=\sin x\cos(1-x^2)$.
+\bt{38} $g(x)=e^{-x}\cos(x^2)$.
+\bt{39} $F(t)=\tan\sqrt{1+t^2}$.
+\bt{40} $G(z)=(1+\cos^2z)^3$.
+\bt{41} $y=\sin^2(x^2+1)$.
+\bt{42} $y=e^{\sin2x}+\sin(e^{2x})$.
+\bt{43} $g(x)=\sin\left(\dfrac{e^x}{1+e^x}\right)$.
+\bt{44} $f(t)=e^{1/t}\sqrt{t^2-1}$.
+\bt{45} $f(t)=\tan(\sec(\cos t))$.
+\bt{46} $y=\sqrt{x+\sqrt{x+\sqrt{x}}}$.
+\bt{47} $f(x)=e^{\sin^2(x^2)}$.
+\bt{48} $y=2^{3^{4^x}}$.
+\bt{49} $y=(3^{\cos(x^2)}-1)^4$.
+\bt{50} $y=\sin(\theta+\tan(\theta+\cos\theta))$.
+\bt{51} $y=\cos\sqrt{\sin(\tan\pi x)}$.
+\bt{52} $y=\sin^3(\cos(x^2))$.
+\group{53–56. Tìm $y'$ và $y''$.}
+\bt{53} $y=\cos(\sin3\theta)$.
+\bt{54} $y=(1+\sqrt x)^3$.
+\bt{55} $y=\sqrt{\cos x}$.
+\bt{56} $y=e^{e^x}$.
+\group{57–60. Tìm phương trình tiếp tuyến của đường cong tại điểm đã cho.}
+\bt{57} $y=2^x$, \quad $(0,1)$.
+\bt{58} $y=\sqrt{1+x^3}$, \quad $(2,3)$.
+\bt{59} $y=\sin(\sin x)$, \quad $(\pi,0)$.
+\bt{60} $y=xe^{-x^2}$, \quad $(0,0)$.
+\bt{61} (a) Tìm phương trình tiếp tuyến của đường cong $y=2/(1+e^{-x})$ tại $(0,1)$.
+
+(b) Minh họa (a) bằng cách vẽ đường cong và tiếp tuyến trên cùng một màn hình.
+\bt{62} (a) Đường cong $y=|x|/\sqrt{2-x^2}$ được gọi là \textit{đường cong mũi đạn}. Tìm phương trình tiếp tuyến tại $(1,1)$.
+
+(b) Minh họa (a) bằng cách vẽ đường cong và tiếp tuyến trên cùng một màn hình.
+\bt{63} (a) Nếu $f(x)=x\sqrt{2-x^2}$, tìm $f'(x)$.
+
+(b) Kiểm tra tính hợp lý của kết quả ở (a) bằng cách so sánh đồ thị $f,f'$.
+\bt{64} Hàm $f(x)=\sin(x+\sin2x)$, $0\le x\le\pi$, xuất hiện trong các ứng dụng tổng hợp bằng điều chế tần số (FM).
+
+(a) Dùng đồ thị $f$ tạo bởi máy tính cầm tay hoặc máy tính để phác họa đồ thị $f'$.
+
+(b) Tính $f'(x)$ rồi dùng biểu thức đó và máy tính để vẽ $f'$. So sánh với hình phác họa ở (a).
+\bt{65} Tìm mọi điểm trên đồ thị $f(x)=2\sin x+\sin^2x$ mà tại đó tiếp tuyến nằm ngang.
+\bt{66} Tại điểm nào trên đường cong $y=\sqrt{1+2x}$, tiếp tuyến vuông góc với đường thẳng $6x+2y=1$?
+\bt{67} Nếu $F(x)=f(g(x))$, trong đó $f(-2)=8$, $f'(-2)=4$, $f'(5)=3$, $g(5)=-2$, $g'(5)=6$, tìm $F'(5)$.
+\bt{68} Nếu $h(x)=\sqrt{4+3f(x)}$, trong đó $f(1)=7$, $f'(1)=4$, tìm $h'(1)$.
+\bt{69} Cho bảng giá trị của $f,g,f',g'$:
+\begin{center}\begin{tabular}{ccccc}\toprule
+$x$&$f(x)$&$g(x)$&$f'(x)$&$g'(x)$\\\midrule
+1&3&2&4&6\\
+2&1&8&5&7\\
+3&7&2&7&9\\\bottomrule
+\end{tabular}\end{center}
+(a) Nếu $h(x)=f(g(x))$, tìm $h'(1)$.
+
+(b) Nếu $H(x)=g(f(x))$, tìm $H'(1)$.
+\bt{70} Cho $f,g$ là các hàm trong Bài tập 69.
+
+(a) Nếu $F(x)=f(f(x))$, tìm $F'(2)$.
+
+(b) Nếu $G(x)=g(g(x))$, tìm $G'(3)$.
+\par\medskip\noindent\begin{minipage}{\linewidth}
+\bt{71} Cho $f,g$ có đồ thị như hình, đặt $u(x)=f(g(x))$, $v(x)=g(f(x))$, $w(x)=g(g(x))$. Tìm từng đạo hàm sau nếu tồn tại; nếu không tồn tại, giải thích vì sao:
+
+(a) $u'(1)$; \quad (b) $v'(1)$; \quad (c) $w'(1)$.
+\fig[.40]{e71}{Hình dùng cho Bài tập 71.}
+\end{minipage}\par\medskip
+\par\medskip\noindent\begin{minipage}{\linewidth}
+\bt{72} Cho $f$ có đồ thị như hình, đặt $h(x)=f(f(x))$, $g(x)=f(x^2)$. Dùng đồ thị $f$ ước lượng:
+
+(a) $h'(2)$; \qquad (b) $g'(2)$.
+\fig[.39]{e72}{Hình dùng cho Bài tập 72.}
+\end{minipage}\par\medskip
+\par\medskip\noindent\begin{minipage}{\linewidth}
+\bt{73} Nếu $g(x)=\sqrt{f(x)}$, với đồ thị $f$ như hình, tính $g'(3)$.
+\fig[.40]{e73}{Hình dùng cho Bài tập 73.}
+\end{minipage}\par\medskip
+\bt{74} Giả sử $f$ khả vi trên $\mathbb R$ và $\alpha$ là số thực. Đặt $F(x)=f(x^\alpha)$ và $G(x)=[f(x)]^\alpha$. Tìm biểu thức của:
+
+(a) $F'(x)$; \qquad (b) $G'(x)$.
+\bt{75} Giả sử $f$ khả vi trên $\mathbb R$. Đặt $F(x)=f(e^x)$, $G(x)=e^{f(x)}$. Tìm biểu thức của:
+
+(a) $F'(x)$; \qquad (b) $G'(x)$.
+\bt{76} Đặt $g(x)=e^{cx}+f(x)$, $h(x)=e^{kx}f(x)$, trong đó $f(0)=3$, $f'(0)=5$, $f''(0)=-2$.
+
+(a) Tìm $g'(0),g''(0)$ theo $c$.
+
+(b) Tìm theo $k$ phương trình tiếp tuyến của đồ thị $h$ tại điểm có hoành độ $x=0$.
+\bt{77} Cho $r(x)=f(g(h(x)))$, trong đó $h(1)=2$, $g(2)=3$, $h'(1)=4$, $g'(2)=5$, $f'(3)=6$. Tìm $r'(1)$.
+\bt{78} Nếu $g$ khả vi hai lần và $f(x)=xg(x^2)$, tìm $f''$ theo $g,g',g''$.
+\bt{79} Nếu $F(x)=f(3f(4f(x)))$, trong đó $f(0)=0$, $f'(0)=2$, tìm $F'(0)$.
+\bt{80} Nếu $F(x)=f(xf(xf(x)))$, trong đó $f(1)=2$, $f(2)=3$, $f'(1)=4$, $f'(2)=5$, $f'(3)=6$, tìm $F'(1)$.
+\bt{81} Chứng minh $y=e^{2x}(A\cos3x+B\sin3x)$ thỏa mãn phương trình vi phân $y''-4y'+13y=0$.
+\bt{82} Với những giá trị nào của $r$, hàm $y=e^{rx}$ thỏa mãn phương trình vi phân $y''-4y'+y=0$?
+\bt{83} Tìm đạo hàm cấp 50 của $y=\cos2x$.
+\bt{84} Tìm đạo hàm cấp 1000 của $f(x)=xe^{-x}$.
+\bt{85} Li độ của một chất điểm trên dây dao động được cho bởi
+\[s(t)=10+\frac14\sin(10\pi t),\]
+trong đó $s$ tính bằng xentimét, $t$ tính bằng giây. Tìm vận tốc sau $t$ giây.
+\bt{86} Nếu phương trình chuyển động của một chất điểm là $s=A\cos(\omega t+\delta)$ thì chất điểm được nói là thực hiện dao động điều hòa đơn giản.
+
+(a) Tìm vận tốc tại thời điểm $t$.
+
+(b) Khi nào vận tốc bằng 0?
+\bt{87} Sao biến quang Cepheid là sao có độ sáng luân phiên tăng và giảm. Sao dễ quan sát nhất thuộc loại này là Delta Cephei, có khoảng thời gian giữa hai lần sáng cực đại là 5.4 ngày. Độ sáng trung bình của sao này là 4.0 và biến thiên $\pm0.35$. Từ các dữ liệu đó, độ sáng của Delta Cephei tại thời điểm $t$, tính bằng ngày, được mô hình hóa bởi
+\[B(t)=4.0+0.35\sin\left(\frac{2\pi t}{5.4}\right).\]
+(a) Tìm tốc độ biến thiên độ sáng sau $t$ ngày.
+
+(b) Tìm tốc độ tăng sau một ngày, chính xác đến hai chữ số thập phân.
+\bt{88} Trong Ví dụ 1.3.4, ta đã xây dựng mô hình độ dài ban ngày, tính bằng giờ, tại Philadelphia vào ngày thứ $t$ trong năm:
+\[L(t)=12+2.8\sin\left[\frac{2\pi}{365}(t-80)\right].\]
+Dùng mô hình so sánh tốc độ tăng số giờ ban ngày tại Philadelphia vào ngày 21 tháng 3 ($t=80$) và ngày 21 tháng 5 ($t=141$).
+\bt{89} Chuyển động của lò xo chịu lực ma sát hoặc lực cản, như bộ giảm xóc ô tô, thường được mô hình hóa bằng tích của hàm mũ với hàm sin hoặc côsin. Giả sử phương trình chuyển động của một điểm trên lò xo là
+\[s(t)=2e^{-1.5t}\sin2\pi t,\]
+trong đó $s$ tính bằng xentimét, $t$ tính bằng giây. Tìm vận tốc sau $t$ giây và vẽ các hàm vị trí, vận tốc với $0\le t\le2$.
+\bt{90} Trong những điều kiện nhất định, một tin đồn lan truyền theo phương trình
+\[p(t)=\frac1{1+ae^{-kt}},\]
+trong đó $p(t)$ là tỉ lệ dân số đã nghe tin đồn tại thời điểm $t$; $a,k$ là các hằng số dương. Trong §9.4, ta sẽ thấy đây là phương trình hợp lý cho $p(t)$.
+
+(a) Tìm $\lim_{t\to\infty}p(t)$ và diễn giải kết quả.
+
+(b) Tìm tốc độ lan truyền tin đồn.
+
+(c) Vẽ $p$ khi $a=10$, $k=0.5$, với $t$ tính bằng giờ. Dùng đồ thị ước lượng thời gian cần để 80\% dân số đã nghe tin đồn.
+\bt{91} Nồng độ cồn trong máu trung bình (BAC) của tám nam giới được đo sau khi uống 15 mL ethanol, tương ứng một đơn vị đồ uống có cồn. Dữ liệu thu được được mô hình hóa bằng hàm nồng độ
+\[C(t)=0.00225te^{-0.0467t},\]
+trong đó $t$ là số phút sau khi uống, $C$ tính bằng g/dL.
+
+(a) Sau 10 phút, BAC đang tăng nhanh đến mức nào?
+
+(b) Nửa giờ sau, nồng độ đang giảm nhanh đến mức nào?
+
+\noindent\textit{Nguồn của bài tập:} Phỏng theo P. Wilkinson và cộng sự, “Pharmacokinetics of Ethanol after Oral Administration in the Fasting State”, \textit{Journal of Pharmacokinetics and Biopharmaceutics} 5 (1977), 207–224.
+\bt{92} Không khí được bơm vào một khí cầu thời tiết hình cầu. Tại thời điểm $t$, thể tích khí cầu là $V(t)$, bán kính là $r(t)$.
+
+(a) Các đạo hàm $dV/dr$ và $dV/dt$ biểu thị điều gì?
+
+(b) Biểu diễn $dV/dt$ theo $dr/dt$.
+\bt{93} Một chất điểm chuyển động trên đường thẳng với li độ $s(t)$, vận tốc $v(t)$ và gia tốc $a(t)$. Chứng minh
+\[a(t)=v(t)\frac{dv}{ds}.\]
+Giải thích sự khác nhau về ý nghĩa của $dv/dt$ và $dv/ds$.
+\bt{94} Bảng sau cho dân số Hoa Kỳ từ 1790 đến 1860.
+\begin{center}\begin{tabular}{rrrr}\toprule
+Năm&Dân số&Năm&Dân số\\\midrule
+1790&3,929,000&1830&12,861,000\\
+1800&5,308,000&1840&17,063,000\\
+1810&7,240,000&1850&23,192,000\\
+1820&9,639,000&1860&31,443,000\\\bottomrule
+\end{tabular}\end{center}
+(a) Khớp một hàm mũ với dữ liệu. Vẽ các điểm dữ liệu và mô hình hàm mũ. Mức độ khớp tốt đến đâu?
+
+(b) Ước lượng tốc độ tăng dân số năm 1800 và 1850 bằng trung bình các hệ số góc cát tuyến.
+
+(c) Dùng mô hình hàm mũ ở (a) ước lượng tốc độ tăng năm 1800 và 1850. So sánh với các ước lượng ở (b).
+
+(d) Dùng mô hình dự báo dân số năm 1870. So sánh với dân số thực tế 38,558,000. Có thể giải thích sự chênh lệch không?
+\par\medskip\noindent\begin{minipage}{\linewidth}
+\bt{95} Dùng quy tắc dây chuyền chứng minh:
+
+(a) Đạo hàm của hàm chẵn là hàm lẻ.
+
+(b) Đạo hàm của hàm lẻ là hàm chẵn.
+\end{minipage}\par\medskip
+\bt{96} Dùng quy tắc dây chuyền và quy tắc tích để đưa ra một chứng minh khác cho quy tắc thương.
+
+\textit{Gợi ý:} Viết $f(x)/g(x)=f(x)[g(x)]^{-1}$.
+\bt{97} Dùng quy tắc dây chuyền chứng tỏ nếu $\theta$ được đo bằng độ thì
+\[\frac{d}{d\theta}(\sin\theta)=\frac\pi{180}\cos\theta.\]
+Điều này giải thích một lý do của quy ước luôn dùng số đo radian khi xét hàm lượng giác trong giải tích: nếu dùng độ, các công thức đạo hàm sẽ không đơn giản như vậy.
+\bt{98} (a) Viết $|x|=\sqrt{x^2}$ rồi dùng quy tắc dây chuyền chứng tỏ
+\[\frac{d}{dx}|x|=\frac{x}{|x|}.\]
+(b) Nếu $f(x)=|\sin x|$, tìm $f'(x)$, phác họa đồ thị $f,f'$. Hàm $f$ không khả vi ở đâu?
+
+(c) Nếu $g(x)=\sin|x|$, tìm $g'(x)$, phác họa đồ thị $g,g'$. Hàm $g$ không khả vi ở đâu?
+\bt{99} Gọi $c$ là hoành độ giao điểm của tiếp tuyến đường cong $y=b^x$ ($b>0$, $b\ne1$) tại $(a,b^a)$ với trục hoành. Chứng minh khoảng cách giữa $(a,0)$ và $(c,0)$ như nhau với mọi giá trị $a$.
+\fig[.49]{e99}{Hình dùng cho Bài tập 99.}
+\bt{100} Trên mỗi đường cong hàm mũ $y=b^x$ ($b>0$, $b\ne1$), có đúng một điểm $(x_0,y_0)$ mà tiếp tuyến tại đó đi qua gốc tọa độ. Chứng minh trong mọi trường hợp đều có $y_0=e$.
+
+\textit{Gợi ý:} Có thể dùng công thức (1.5.10).
+\bt{101} Nếu $F=f\circ g\circ h$, trong đó $f,g,h$ khả vi, dùng quy tắc dây chuyền chứng tỏ
+\[F'(x)=f'(g(h(x)))\cdot g'(h(x))\cdot h'(x).\]
+\bt{102} Nếu $F=f\circ g$, trong đó $f,g$ khả vi hai lần, dùng quy tắc dây chuyền và quy tắc tích chứng tỏ
+\[F''(x)=f''(g(x))\cdot[g'(x)]^2+f'(g(x))\cdot g''(x).\]
+\section*{Dự án ứng dụng}
+\subsection*{Phi công nên bắt đầu hạ độ cao ở đâu?}
+Đường tiếp cận hạ cánh của một máy bay được cho trong hình và thỏa mãn các điều kiện:
+\begin{enumerate}[label=(\roman*),leftmargin=*]
+\item Độ cao bay hành trình là $h$ khi bắt đầu hạ độ cao, tại khoảng cách theo phương ngang $\ell$ đến điểm chạm đất ở gốc tọa độ.
+\item Phi công phải giữ tốc độ theo phương ngang không đổi $v$ trong suốt quá trình hạ độ cao.
+\item Trị tuyệt đối của gia tốc theo phương thẳng đứng không được vượt quá hằng số $k$, nhỏ hơn nhiều so với gia tốc trọng trường.
+\end{enumerate}
+\fig[.60]{project}{Đường tiếp cận hạ cánh $y=P(x)$.}
+\bt{1} Tìm đa thức bậc ba $P(x)=ax^3+bx^2+cx+d$ thỏa mãn điều kiện (i), bằng cách đặt các điều kiện thích hợp cho $P(x)$ và $P'(x)$ tại thời điểm bắt đầu hạ độ cao và lúc chạm đất.
+\bt{2} Dùng các điều kiện (ii), (iii) chứng tỏ
+\[\frac{6hv^2}{\ell^2}\le k.\]
+\bt{3} Giả sử hãng hàng không quy định gia tốc thẳng đứng của máy bay không được vượt quá $k=860\ \mathrm{mi/h^2}$. Nếu độ cao bay hành trình là 35,000 ft và tốc độ là 300 mi/h, phi công nên bắt đầu hạ độ cao cách sân bay bao xa?
+\bt{4} Vẽ đường tiếp cận hạ cánh khi thỏa mãn các điều kiện trong Bài toán 3.
+\section*{Chú thích biên tập và thuật ngữ}
+\begin{enumerate}[leftmargin=*]
+\item Giữ hệ đánh số (1)–(8), gồm Quy tắc 4; Ví dụ 1–10; Bài tập 1–102; bốn bài toán riêng của dự án. Hình 1 và năm hình bài tập, dự án được giữ từ bản gốc. Không bổ sung lời giải bài tập hoặc dự án.
+\item Lập luận tại (3) chỉ là gợi ý: $\Delta u$ có thể bằng 0 dù $\Delta x\ne0$. Chứng minh chặt chẽ dùng các số dư $\varepsilon_1,\varepsilon_2$ ở (6)–(8), được định nghĩa cả khi số gia bằng 0.
+\item Các quy tắc lũy thừa thực và hàm hợp được hiểu trên miền mà các hàm tương ứng xác định và thỏa điều kiện khả vi. Trong Bài tập 74 cần lưu ý miền xác định của lũy thừa thực; công thức ở Bài tập 98(a) áp dụng khi $x\ne0$.
+\item Trong Bài tập 48, lũy thừa được lồng từ phải sang trái: $2^{3^{4^x}}$. Dấu phẩy trong số liệu dân số, 35,000 ft là dấu phân cách hàng nghìn theo bản gốc; các đơn vị được giữ nguyên.
+\end{enumerate}
+\begin{center}\begin{tabular}{ll}\toprule
+Tiếng Anh&Tiếng Việt\\\midrule
+chain rule&quy tắc dây chuyền\\
+inner function&hàm trong\\
+outer function&hàm ngoài\\
+double-angle formula&công thức góc gấp đôi\\
+frequency modulation&điều chế tần số\\
+damping force&lực cản\\
+cruising altitude&độ cao bay hành trình\\
+approach path&đường tiếp cận hạ cánh\\\bottomrule
+\end{tabular}\end{center}
+\noindent\textbf{Phần tiếp theo:} §3.5 — Đạo hàm ẩn.
+\end{document}

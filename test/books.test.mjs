@@ -325,6 +325,98 @@ assert.equal((await readBooks(db,student,{bookId:book.id,sectionId:childPrincipl
 window.close();console.log('Books: seeded TOC, admin CRUD/CAS, scopes, subtree delete/restore, lazy bodies and UI actions OK');
 
 
+// Section 3.2 uses the same persisted exercise/action path as section 1.1.
+const child32=detail.sections.find(s=>s.title.startsWith('3.2'));
+const section32=await readBooks(db,student,{bookId:book.id,sectionId:child32.id});
+assert.equal(section32.exerciseHeading,'3.2. Bài tập');
+assert.deepEqual(section32.exercises.map(e=>e.questionNumber),Array.from({length:66},(_,i)=>i+1));
+assert.ok(section32.exercises.every(e=>e.allowSubmission&&e.allowAiEvaluation&&e.contentKey&&e.setKey));
+assert.ok(section32.exercises[2].content.includes('Tính đạo hàm'));
+assert.ok(section32.exercises[30].content.includes('31–34.'));
+assert.ok(section32.exercises[50].content.includes('/e51.png'));
+assert.ok(section32.exercises[51].content.includes('/e52.png'));
+assert.ok(section32.exercises[57].content.includes('Phương pháp ở Bài tập 57'));
+assert.ok(section32.exercises[65].content.includes('Quy tắc nghịch đảo'));
+const doc32=new JSDOM(section32.section.content);
+assert.equal(doc32.window.document.querySelectorAll('img').length,6);
+for(const image of doc32.window.document.querySelectorAll('img')){
+ const asset=new URL(image.src,'https://example.test').searchParams.get('asset');
+ assert.equal((await readBookAsset(student,asset)).bytes[0],137);
+ await assert.rejects(()=>readBookAsset(other,asset),e=>e.status===403);
+}
+doc32.window.close();
+const repeat32=await readBooks(db,student,{bookId:book.id,sectionId:child32.id});
+assert.deepEqual(repeat32.exercises.map(e=>e.contentKey),section32.exercises.map(e=>e.contentKey));
+
+// Section 3.3 shares section 1.1's persisted problems and action initialization.
+const child33=detail.sections.find(s=>s.title.startsWith('3.3'));
+const section33=await readBooks(db,student,{bookId:book.id,sectionId:child33.id});
+assert.equal(section33.exerciseHeading,'3.3. Bài tập');
+assert.deepEqual(section33.exercises.map(e=>e.questionNumber),Array.from({length:68},(_,i)=>i+1));
+assert.ok(section33.exercises.every(e=>e.allowSubmission&&e.allowAiEvaluation&&e.contentKey&&e.setKey));
+for(const n of [1,22])assert.ok(section33.exercises[n-1].content.includes('Tính đạo hàm'));
+for(const n of [45,60])assert.ok(section33.exercises[n-1].content.includes('Tìm giới hạn'));
+for(const n of [41,66,67])assert.ok(section33.exercises[n-1].content.includes('/e'+n+'.png'));
+assert.ok(section33.exercises[67].content.includes('giới hạn bên trái'));
+const doc33=new JSDOM(section33.section.content);
+assert.equal(doc33.window.document.querySelectorAll('img').length,9);
+assert.equal(section33.section.sourceInfo.exampleCount,7);
+for(const image of doc33.window.document.querySelectorAll('img')){
+ const asset=new URL(image.src,'https://example.test').searchParams.get('asset');
+ assert.equal((await readBookAsset(student,asset)).bytes[0],137);
+ await assert.rejects(()=>readBookAsset(other,asset),e=>e.status===403);
+}
+doc33.window.close();
+assert.deepEqual((await readBooks(db,student,{bookId:book.id,sectionId:child33.id})).exercises.map(e=>e.contentKey),section33.exercises.map(e=>e.contentKey));
+
+// Chain-rule exercises use the same action initialization as section 1.1.
+const child34=detail.sections.find(s=>s.title.startsWith('3.4'));
+const section34=await readBooks(db,student,{bookId:book.id,sectionId:child34.id});
+assert.equal(section34.exerciseHeading,'3.4. Bài tập');
+assert.deepEqual(section34.exercises.map(e=>e.questionNumber),Array.from({length:102},(_,i)=>i+1));
+assert.ok(section34.exercises.every(e=>e.allowSubmission&&e.allowAiEvaluation&&e.contentKey&&e.setKey));
+for(const n of [1,6])assert.ok(section34.exercises[n-1].content.includes('Viết hàm hợp'));
+for(const n of [7,52])assert.ok(section34.exercises[n-1].content.includes('Tìm đạo hàm'));
+for(const n of [71,72,73,99])assert.ok(section34.exercises[n-1].content.includes('/e'+n+'.png'));
+assert.ok(section34.exercises[69].content.includes('<table>'));
+assert.ok(section34.exercises[93].content.includes('<table>'));
+assert.ok(section34.section.content.includes('Dự án ứng dụng'));
+const doc34=new JSDOM(section34.section.content);
+assert.equal(doc34.window.document.querySelectorAll('img').length,6);
+assert.equal(section34.section.sourceInfo.exampleCount,10);
+for(const image of doc34.window.document.querySelectorAll('img')){
+ const asset=new URL(image.src,'https://example.test').searchParams.get('asset');
+ assert.equal((await readBookAsset(student,asset)).bytes[0],137);
+ await assert.rejects(()=>readBookAsset(other,asset),e=>e.status===403);
+}
+doc34.window.close();
+assert.deepEqual((await readBooks(db,student,{bookId:book.id,sectionId:child34.id})).exercises.map(e=>e.contentKey),section34.exercises.map(e=>e.contentKey));
+
+// Implicit-differentiation exercises share section 1.1's persisted action path.
+const child35=detail.sections.find(s=>s.title.startsWith('3.5'));
+const section35=await readBooks(db,student,{bookId:book.id,sectionId:child35.id});
+assert.equal(section35.exerciseHeading,'3.5. Bài tập');
+assert.deepEqual(section35.exercises.map(e=>e.questionNumber),Array.from({length:67},(_,i)=>i+1));
+assert.ok(section35.exercises.every(e=>e.allowSubmission&&e.allowAiEvaluation&&e.contentKey&&e.setKey));
+for(const n of [1,4])assert.ok(section35.exercises[n-1].content.includes('Giải phương trình'));
+for(const n of [5,22])assert.ok(section35.exercises[n-1].content.includes('Tìm'));
+for(const n of [25,26])assert.ok(section35.exercises[n-1].content.includes('biến độc lập'));
+for(const n of [53,56])assert.ok(section35.exercises[n-1].content.includes('trực giao'));
+for(const n of [33,34,35,36,67])assert.ok(section35.exercises[n-1].content.includes('/e'+n+'.png'));
+assert.ok(section35.exercises[46].content.includes('25(x^2-y^2)'));
+assert.ok(section35.exercises[46].content.includes('\\[2('));
+assert.ok(section35.section.content.includes('Dự án khám phá'));
+const doc35=new JSDOM(section35.section.content);
+assert.equal(doc35.window.document.querySelectorAll('img').length,13);
+assert.equal(section35.section.sourceInfo.exampleCount,4);
+for(const image of doc35.window.document.querySelectorAll('img')){
+ const asset=new URL(image.src,'https://example.test').searchParams.get('asset');
+ assert.equal((await readBookAsset(student,asset)).bytes[0],137);
+ await assert.rejects(()=>readBookAsset(other,asset),e=>e.status===403);
+}
+doc35.window.close();
+assert.deepEqual((await readBooks(db,student,{bookId:book.id,sectionId:child35.id})).exercises.map(e=>e.contentKey),section35.exercises.map(e=>e.contentKey));
+
 // Section 3.6 uses section 1.1's persisted problem/action initialization.
 const child36=detail.sections.find(s=>s.title.startsWith('3.6'));
 const section36=await readBooks(db,student,{bookId:book.id,sectionId:child36.id});
