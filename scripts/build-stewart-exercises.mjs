@@ -1,11 +1,11 @@
 // Offline conversion of reviewed Stewart HTML. Never parse arbitrary requests here.
 import fs from 'node:fs';
 import {JSDOM} from 'jsdom';
-const section=process.argv[2]||'1-1';if(!['1-1','1-2','1-3','1-4','1-5','1-review','1-principles','2-1','2-2','2-3','2-4','2-5','2-6','2-7','2-8','2-review','2-plus','3-2','3-3','3-4','3-5','3-6','3-7','3-8'].includes(section))throw Error('Unknown section');
-const headingText=section==='2-plus'?'Bài toán':['1-review','1-principles','2-review'].includes(section)?'Bài tập':section.replace('-','.')+'. Bài tập',count={'1-1':88,'1-2':37,'1-3':71,'1-4':35,'1-5':83,'1-review':38,'1-principles':22,'2-1':9,'2-2':51,'2-3':68,'2-4':44,'2-5':76,'2-6':81,'2-7':60,'2-8':68,'2-review':56,'2-plus':14,'3-2':66,'3-3':68,'3-4':102,'3-5':67,'3-6':88,'3-7':43,'3-8':22}[section];
+const section=process.argv[2]||'1-1';if(!['1-1','1-2','1-3','1-4','1-5','1-review','1-principles','2-1','2-2','2-3','2-4','2-5','2-6','2-7','2-8','2-review','2-plus','3-2','3-3','3-4','3-5','3-6','3-7','3-8','3-9'].includes(section))throw Error('Unknown section');
+const headingText=section==='2-plus'?'Bài toán':['1-review','1-principles','2-review'].includes(section)?'Bài tập':section.replace('-','.')+'. Bài tập',count={'1-1':88,'1-2':37,'1-3':71,'1-4':35,'1-5':83,'1-review':38,'1-principles':22,'2-1':9,'2-2':51,'2-3':68,'2-4':44,'2-5':76,'2-6':81,'2-7':60,'2-8':68,'2-review':56,'2-plus':14,'3-2':66,'3-3':68,'3-4':102,'3-5':67,'3-6':88,'3-7':43,'3-8':22,'3-9':53}[section];
 const source=JSON.parse(fs.readFileSync(`data/books/imports/stewart-${section}.json`,'utf8'));
 const dom=new JSDOM(source.content),doc=dom.window.document;
-if(['2-review','3-2','3-3','3-4','3-5','3-6','3-7','3-8'].includes(section))for(const wrapper of doc.querySelectorAll(['3-4','3-5','3-7','3-8','3-9'].includes(section)?'div.samepage, div.minipage':'div.samepage'))wrapper.replaceWith(...wrapper.childNodes);
+if(['2-review','3-2','3-3','3-4','3-5','3-6','3-7','3-8','3-9'].includes(section))for(const wrapper of doc.querySelectorAll(['3-4','3-5','3-7','3-8','3-9'].includes(section)?'div.samepage, div.minipage':'div.samepage'))wrapper.replaceWith(...wrapper.childNodes);
 const heading=[...doc.querySelectorAll('h1,h2,h3,h4,h5,h6')].find(x=>x.textContent===headingText);
 const nodes=[];for(let x=heading.nextSibling;x&&!/^H[1-6]$/.test(x.nodeName);x=x.nextSibling)nodes.push(x);
 const anchors=nodes.flatMap((x,i)=>{const label=x.nodeName==='P'?x.querySelector(':scope > strong')?.textContent:'';const m=/^(\d+)(?:[–−-](\d+))?\./.exec(label||'');return m?[{i,a:+m[1],b:+(m[2]||m[1]),node:x}]:[];});
@@ -72,6 +72,12 @@ for(const [j,entry]of anchors.entries()){
    if(a===8)content+=doc.querySelector('img[src$="/e07.png"]').parentElement.parentElement.outerHTML;
    if(a===19)content+='<p><strong>Khối lượng riêng theo chiều dài.</strong> Là tốc độ biến thiên khối lượng theo vị trí: ρ(x) = dm/dx.</p>';
    if(a===31){const formula=[...doc.querySelectorAll('p')].find(p=>p.textContent.includes('\\tag{1}'));if(!formula)throw Error('Missing flow formula');content+='<p><strong>Định luật dòng chảy tầng — Ví dụ 7.</strong></p>'+formula.outerHTML;content+=doc.querySelector('img[src$="/f08.png"]').parentElement.parentElement.outerHTML;}
+  }
+  if(section==='3-9'&&(a===35||a===36)){
+   const statement=[...doc.querySelectorAll('p')].find(p=>p.querySelector(':scope > strong')?.textContent==='Ví dụ 2.');
+   if(!statement)throw Error('Missing ladder example');
+   content+='<p><strong>Dữ kiện tham chiếu — Ví dụ 2.</strong></p>'+statement.outerHTML;
+   content+=doc.querySelector('img[src$="/fig2.png"]').parentElement.parentElement.outerHTML;
   }
   exercises.push({number:a,content});
  }

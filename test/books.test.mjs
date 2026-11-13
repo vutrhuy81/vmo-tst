@@ -488,3 +488,27 @@ for(const image of doc38.window.document.querySelectorAll('img')){
 }
 doc38.window.close();
 assert.deepEqual((await readBooks(db,student,{bookId:book.id,sectionId:child38.id})).exercises.map(e=>e.contentKey),section38.exercises.map(e=>e.contentKey));
+
+// Related-rates exercises share section 1.1's persisted action initialization.
+const child39=detail.sections.find(s=>s.title.startsWith('3.9'));
+const section39=await readBooks(db,student,{bookId:book.id,sectionId:child39.id});
+assert.equal(section39.exerciseHeading,'3.9. Bài tập');
+assert.deepEqual(section39.exercises.map(e=>e.questionNumber),Array.from({length:53},(_,i)=>i+1));
+assert.ok(section39.exercises.every(e=>e.allowSubmission&&e.allowAiEvaluation&&e.contentKey&&e.setKey));
+for(const n of [13,14,15,16])assert.ok(section39.exercises[n-1].content.includes('Những đại lượng nào'));
+for(const n of [20,22,29,30,39,44])assert.ok(section39.exercises[n-1].content.includes('/ex'+n+'.png'));
+for(const n of [35,36]){
+ assert.ok(section39.exercises[n-1].content.includes('Dữ kiện tham chiếu — Ví dụ 2'));
+ assert.ok(section39.exercises[n-1].content.includes('/fig2.png'));
+ assert.ok(section39.exercises[n-1].content.includes('10'));
+}
+const doc39=new JSDOM(section39.section.content);
+assert.equal(doc39.window.document.querySelectorAll('img').length,11);
+assert.equal(section39.section.sourceInfo.exampleCount,5);
+for(const image of doc39.window.document.querySelectorAll('img')){
+ const asset=new URL(image.src,'https://example.test').searchParams.get('asset');
+ assert.equal((await readBookAsset(student,asset)).bytes[0],137);
+ await assert.rejects(()=>readBookAsset(other,asset),e=>e.status===403);
+}
+doc39.window.close();
+assert.deepEqual((await readBooks(db,student,{bookId:book.id,sectionId:child39.id})).exercises.map(e=>e.contentKey),section39.exercises.map(e=>e.contentKey));
