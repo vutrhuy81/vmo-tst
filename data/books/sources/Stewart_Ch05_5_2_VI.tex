@@ -1,0 +1,356 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage{fontspec}\setmainfont{Latin Modern Roman}\setsansfont{DejaVu Sans}
+\usepackage{amsmath,amssymb,graphicx,geometry,enumitem,needspace,longtable,booktabs,fancyhdr,hyperref}
+\geometry{left=28mm,right=23mm,top=24mm,bottom=24mm}
+\hypersetup{unicode=true,colorlinks=true,linkcolor=black,urlcolor=blue,pdftitle={Giải tích §5.2 — Tích phân xác định}}
+\setlength{\parindent}{1.2em}\setlength{\parskip}{4pt}\setlength{\headheight}{16pt}
+\pagestyle{fancy}\fancyhf{}\fancyhead[L]{\small Chương 5. Tích phân}\fancyhead[R]{\small §5.2}\fancyfoot[C]{\thepage}
+\newcommand{\fig}[3][.68]{\begin{center}\begin{minipage}{\linewidth}\centering\includegraphics[width=#1\linewidth]{assets/#2.png}\\{\small #3}\end{minipage}\end{center}}
+\newcommand{\ex}[1]{\par\medskip\noindent\textbf{Ví dụ #1.}\ }
+\newcommand{\sol}{\par\nopagebreak[4]\noindent\textit{Lời giải.}\ }
+\newcommand{\bt}[1]{\par\smallskip\Needspace{5\baselineskip}\noindent\textbf{#1.}\ }
+\newcommand{\group}[1]{\par\medskip\noindent\textbf{#1}\par\nopagebreak[4]}
+\newcommand{\gint}[1]{\left[\!\left[#1\right]\!\right]}
+\allowdisplaybreaks[2]
+\DeclareMathOperator{\sech}{sech}
+\DeclareMathOperator{\csch}{csch}
+\DeclareMathOperator{\arccot}{arccot}
+\newcommand{\da}[1]{\bt{#1}}
+\begin{document}
+\begin{center}{\LARGE\bfseries 5.2 — Tích phân xác định}\end{center}
+Ở §5.1, ta đã thấy giới hạn dạng
+\[\lim_{n\to\infty}\sum_{i=1}^n f(x_i^*)\Delta x=\lim_{n\to\infty}[f(x_1^*)\Delta x+f(x_2^*)\Delta x+\cdots+f(x_n^*)\Delta x]\tag{1}\]
+xuất hiện khi tính diện tích, cũng như khi tìm quãng đường một vật đi được. Loại giới hạn này còn xuất hiện trong rất nhiều tình huống khác, ngay cả khi $f$ không nhất thiết là hàm dương. Trong các Chương 6 và 8, ta sẽ gặp nó khi tìm độ dài đường cong, thể tích vật thể, khối tâm, lực do áp suất nước, công và những đại lượng khác.
+\section*{Tích phân xác định}
+Ta đặt tên và ký hiệu riêng cho các giới hạn dạng (1).
+\group{2. Định nghĩa tích phân xác định} Cho hàm số $f$ xác định với $a\le x\le b$. Chia đoạn $[a,b]$ thành $n$ đoạn con cùng độ dài $\Delta x=(b-a)/n$. Gọi $x_0=a,x_1,x_2,\ldots,x_n=b$ là các đầu mút và chọn các điểm lấy mẫu bất kỳ $x_1^*,x_2^*,\ldots,x_n^*$ sao cho $x_i^*$ thuộc đoạn con thứ $i$, $[x_{i-1},x_i]$. Khi đó \textbf{tích phân xác định của $f$ từ $a$ đến $b$} là
+\[\int_a^b f(x)\,dx=\lim_{n\to\infty}\sum_{i=1}^n f(x_i^*)\Delta x,\tag{2}\]
+với điều kiện giới hạn tồn tại và có cùng giá trị đối với mọi cách chọn điểm lấy mẫu. Nếu giới hạn ấy tồn tại, ta nói $f$ \textbf{khả tích trên $[a,b]$}.
+
+Ý nghĩa chính xác của giới hạn định nghĩa tích phân là: với mọi số $\varepsilon>0$, tồn tại một số nguyên $N$ sao cho
+\[\left|\int_a^b f(x)\,dx-\sum_{i=1}^n f(x_i^*)\Delta x\right|<\varepsilon\]
+với mọi số nguyên $n>N$ và mọi cách chọn $x_i^*\in[x_{i-1},x_i]$.
+\group{Chú ý 1} Ký hiệu $\int$ do Leibniz đưa ra, được gọi là \textbf{dấu tích phân}. Đó là chữ S kéo dài, được chọn vì tích phân là một giới hạn của các tổng. Trong ký hiệu $\int_a^b f(x)\,dx$, $f(x)$ được gọi là \textbf{hàm dưới dấu tích phân}; $a,b$ là các \textbf{cận tích phân}, với $a$ là cận dưới và $b$ là cận trên. Hiện tại, ký hiệu $dx$ không mang ý nghĩa riêng; toàn bộ $\int_a^b f(x)\,dx$ là một ký hiệu. $dx$ chỉ cho biết biến độc lập là $x$. Quá trình tính tích phân được gọi là \textbf{phép lấy tích phân}.
+\group{Chú ý 2} Tích phân xác định $\int_a^b f(x)\,dx$ là một số, không phụ thuộc vào $x$. Có thể thay $x$ bằng một chữ khác mà không làm thay đổi giá trị:
+\[\int_a^b f(x)\,dx=\int_a^b f(t)\,dt=\int_a^b f(r)\,dr.\]
+\group{Chú ý 3} Tổng $\sum_{i=1}^n f(x_i^*)\Delta x$ trong Định nghĩa 2 được gọi là \textbf{tổng Riemann}, theo tên nhà toán học Đức Bernhard Riemann (1826–1866). Vì vậy, Định nghĩa 2 nói rằng tích phân xác định của một hàm khả tích có thể được xấp xỉ bằng tổng Riemann với độ chính xác tùy ý.
+
+Nếu $f$ dương, tổng Riemann được hiểu là tổng diện tích các hình chữ nhật xấp xỉ (Hình 1). So sánh Định nghĩa 2 với định nghĩa diện tích ở §5.1, ta thấy $\int_a^b f(x)\,dx$ là diện tích dưới đường cong $y=f(x)$ từ $a$ đến $b$ (Hình 2).
+\fig[.47]{fig01}{Hình 1. Nếu $f(x)\ge0$, tổng Riemann là tổng diện tích các hình chữ nhật.}
+\fig[.47]{fig02}{Hình 2. Nếu $f(x)\ge0$, tích phân là diện tích dưới đường cong từ $a$ đến $b$.}
+Nếu $f$ nhận cả giá trị dương lẫn âm như Hình 3, tổng Riemann bằng tổng diện tích các hình chữ nhật phía trên trục $x$ trừ tổng diện tích các hình chữ nhật phía dưới (diện tích các hình màu xanh trừ diện tích các hình màu vàng). Lấy giới hạn các tổng đó, ta được tình huống ở Hình 4. Tích phân xác định có thể được hiểu là \textbf{diện tích có dấu}, tức hiệu của hai diện tích:
+\[\int_a^b f(x)\,dx=A_1-A_2,\]
+trong đó $A_1$ là diện tích miền phía trên trục $x$ và dưới đồ thị $f$; $A_2$ là diện tích miền phía dưới trục $x$ và trên đồ thị $f$.
+\fig[.45]{fig03}{Hình 3. Tổng Riemann xấp xỉ diện tích có dấu.}
+\fig[.45]{fig04}{Hình 4. Tích phân xác định là diện tích có dấu.}
+\group{Riemann} Bernhard Riemann nhận bằng tiến sĩ dưới sự hướng dẫn của Gauss tại Đại học Göttingen và ở lại giảng dạy. Gauss, người hiếm khi khen ngợi các nhà toán học khác, đã nói đến “trí tuệ sáng tạo, năng động, thực sự toán học và tính độc đáo phong phú tuyệt vời” của Riemann. Định nghĩa tích phân (2) mà ta sử dụng là của Riemann. Ông còn đóng góp quan trọng cho lý thuyết hàm biến phức, vật lý toán, lý thuyết số và nền tảng hình học. Quan niệm rộng của ông về không gian và hình học, 50 năm sau, trở thành khuôn khổ thích hợp cho thuyết tương đối rộng của Einstein. Sức khỏe Riemann yếu suốt đời; ông qua đời vì bệnh lao ở tuổi 39.
+\ex{1} Tính tổng Riemann của $f(x)=x^3-6x$, $0\le x\le3$, với $n=6$ đoạn con và các điểm lấy mẫu là đầu mút phải.
+\sol Với $n=6$, $\Delta x=(3-0)/6=\frac12$, các đầu mút phải là
+\[x_1=0.5,\ x_2=1.0,\ x_3=1.5,\ x_4=2.0,\ x_5=2.5,\ x_6=3.0.\]
+Do đó
+\begin{align*}
+R_6&=\sum_{i=1}^6 f(x_i)\Delta x\\
+&=[f(0.5)+f(1.0)+f(1.5)+f(2.0)+f(2.5)+f(3.0)]\Delta x\\
+&=\frac12(-2.875-5-5.625-4+0.625+9)=-3.9375.
+\end{align*}
+$f$ không phải là hàm dương, nên tổng này không biểu diễn một tổng diện tích. Nó biểu diễn tổng diện tích các hình chữ nhật màu xanh (trên trục $x$) trừ tổng diện tích các hình màu vàng (dưới trục $x$) ở Hình 5.
+\fig[.45]{fig05}{Hình 5}
+\group{Chú ý 4} Mặc dù ta định nghĩa tích phân bằng các đoạn con có độ dài bằng nhau, trong một số tình huống dùng độ dài không bằng nhau sẽ thuận lợi hơn. Chẳng hạn, trong Bài tập 5.1.12, NASA cung cấp dữ liệu vận tốc tại các thời điểm không cách đều, nhưng ta vẫn ước lượng được quãng đường. Một số phương pháp tích phân số cũng tận dụng các đoạn con không đều. Nếu độ dài các đoạn con là $\Delta x_1,\ldots,\Delta x_n$, ta phải bảo đảm tất cả chúng tiến đến 0 trong quá trình lấy giới hạn. Điều này được bảo đảm khi độ dài lớn nhất, $\max\Delta x_i$, tiến đến 0. Khi ấy, định nghĩa tích phân trở thành
+\[\int_a^b f(x)\,dx=\lim_{\max\Delta x_i\to0}\sum_{i=1}^n f(x_i^*)\Delta x_i.\]
+Không phải mọi hàm số đều khả tích (xem Bài tập 81–82). Định lý sau cho thấy các hàm thường gặp thực sự khả tích; chứng minh được trình bày trong các học phần nâng cao.
+\group{3. Định lý} Nếu $f$ liên tục trên $[a,b]$, hoặc chỉ có hữu hạn điểm gián đoạn nhảy, thì $f$ khả tích trên $[a,b]$; nghĩa là $\int_a^b f(x)\,dx$ tồn tại.
+
+Nếu $f$ khả tích, giới hạn trong Định nghĩa 2 có cùng giá trị bất kể cách chọn điểm lấy mẫu. Để tính đơn giản hơn, ta thường chọn đầu mút phải, $x_i^*=x_i$.
+\group{4. Định lý} Nếu $f$ khả tích trên $[a,b]$ thì
+\[\int_a^b f(x)\,dx=\lim_{n\to\infty}\sum_{i=1}^n f(x_i)\Delta x,\qquad\Delta x=\frac{b-a}n,\quad x_i=a+i\Delta x.\tag{4}\]
+\ex{2} Biểu diễn $\displaystyle\lim_{n\to\infty}\sum_{i=1}^n(x_i^3+x_i\sin x_i)\Delta x$ thành tích phân trên $[0,\pi]$.
+\sol So sánh với Định lý 4, chọn $f(x)=x^3+x\sin x$, $a=0$, $b=\pi$. Khi đó
+\[\lim_{n\to\infty}\sum_{i=1}^n(x_i^3+x_i\sin x_i)\Delta x=\int_0^\pi(x^3+x\sin x)\,dx.\]
+Khi áp dụng tích phân vào các tình huống vật lý, nhận ra giới hạn của tổng dưới dạng tích phân như trong Ví dụ 2 là rất quan trọng. Leibniz đã chọn các thành phần ký hiệu tích phân để gợi nhớ quá trình lấy giới hạn. Trong
+\[\lim_{n\to\infty}\sum_{i=1}^n f(x_i^*)\Delta x=\int_a^b f(x)\,dx,\]
+ta thay tổ hợp dấu giới hạn và dấu tổng bằng $\int$, thay $x_i^*$ bằng $x$, và $\Delta x$ bằng $dx$.
+\section*{Tính tích phân xác định}
+Để tính tích phân bằng giới hạn, ta cần biết cách xử lý các tổng. Bốn công thức sau cho tổng lũy thừa của các số nguyên dương. Công thức (6) có thể đã quen thuộc từ đại số. Các công thức (7), (8) đã được bàn ở §5.1 và được chứng minh trong Phụ lục E.
+\group{Tổng các lũy thừa}
+\[\sum_{i=1}^n1=n.\tag{5}\]
+\[\sum_{i=1}^ni=\frac{n(n+1)}2.\tag{6}\]
+\[\sum_{i=1}^ni^2=\frac{n(n+1)(2n+1)}6.\tag{7}\]
+\[\sum_{i=1}^ni^3=\left[\frac{n(n+1)}2\right]^2.\tag{8}\]
+Các công thức còn lại là những quy tắc đơn giản của ký hiệu sigma.
+\group{Tính chất của tổng}
+\[\sum_{i=1}^n ca_i=c\sum_{i=1}^n a_i.\tag{9}\]
+\[\sum_{i=1}^n(a_i+b_i)=\sum_{i=1}^n a_i+\sum_{i=1}^n b_i.\tag{10}\]
+\[\sum_{i=1}^n(a_i-b_i)=\sum_{i=1}^n a_i-\sum_{i=1}^n b_i.\tag{11}\]
+Các công thức (9)–(11) được chứng minh bằng cách khai triển hai vế. Vế trái (9) là $ca_1+ca_2+\cdots+ca_n$, vế phải là $c(a_1+a_2+\cdots+a_n)$; chúng bằng nhau theo tính phân phối. Các công thức khác được thảo luận trong Phụ lục E.
+
+Ví dụ tiếp theo tính tích phân của hàm ở Ví dụ 1.
+\ex{3} Tính $\displaystyle\int_0^3(x^3-6x)\,dx$.
+\sol Dùng Định lý 4 với $f(x)=x^3-6x$, $a=0$, $b=3$, ta có $\Delta x=(3-0)/n=3/n$. Các đầu mút là $x_0=0$, $x_1=3/n$, $x_2=6/n$, $x_3=9/n$, tổng quát $x_i=0+i(3/n)=3i/n$. Vì vậy,
+\begin{align*}
+\int_0^3(x^3-6x)\,dx&=\lim_{n\to\infty}\sum_{i=1}^n f(x_i)\Delta x=\lim_{n\to\infty}\sum_{i=1}^n f\left(\frac{3i}n\right)\frac3n\\
+&=\lim_{n\to\infty}\frac3n\sum_{i=1}^n\left[\left(\frac{3i}n\right)^3-6\left(\frac{3i}n\right)\right]\\
+&=\lim_{n\to\infty}\frac3n\sum_{i=1}^n\left[\frac{27}{n^3}i^3-\frac{18}n i\right]\\
+&=\lim_{n\to\infty}\left[\frac{81}{n^4}\sum_{i=1}^n i^3-\frac{54}{n^2}\sum_{i=1}^n i\right]\\
+&=\lim_{n\to\infty}\left\{\frac{81}{n^4}\left[\frac{n(n+1)}2\right]^2-\frac{54}{n^2}\frac{n(n+1)}2\right\}\\
+&=\lim_{n\to\infty}\left[\frac{81}4\left(1+\frac1n\right)^2-27\left(1+\frac1n\right)\right]\\
+&=\frac{81}4-27=-\frac{27}4=-6.75.
+\end{align*}
+Ở dòng thứ hai dùng (9) với $c=3/n$; ở dòng thứ tư dùng (11), (9); ở dòng thứ năm dùng (8), (6). Trong tổng, $n$ là hằng số (khác với $i$), nên đưa $3/n$ ra trước dấu tổng được.
+
+Tích phân này không thể hiểu là một diện tích vì $f$ nhận cả giá trị dương lẫn âm. Nó là hiệu diện tích $A_1-A_2$ như Hình 6.
+\fig[.43]{fig06}{Hình 6. $\int_0^3(x^3-6x)\,dx=A_1-A_2=-6.75$.}
+Hình 7 minh họa phép tính ở Ví dụ 3 bằng các số hạng dương và âm trong tổng Riemann phải $R_n$ với $n=40$. Bảng cho thấy các tổng tiến đến giá trị chính xác $-6.75$ khi $n\to\infty$.
+\fig[.48]{fig07}{Hình 7. $R_{40}\approx-6.3998$.}
+\begin{center}\begin{tabular}{rr}\toprule$n$&$R_n$\\\midrule40&$-6.3998$\\100&$-6.6130$\\500&$-6.7229$\\1000&$-6.7365$\\5000&$-6.7473$\\\bottomrule\end{tabular}\end{center}
+Ở §5.3, ta sẽ có phương pháp đơn giản hơn nhiều để tính các tích phân như Ví dụ 3 nhờ Định lý cơ bản của giải tích.
+\ex{4} (a) Lập biểu thức của $\int_1^3 e^x\,dx$ dưới dạng giới hạn các tổng.\\(b) Dùng hệ thống đại số máy tính để tính biểu thức đó.
+\sol (a) Với $f(x)=e^x$, $a=1$, $b=3$, $\Delta x=(b-a)/n=2/n$. Do đó $x_0=1$, $x_1=1+2/n$, $x_2=1+4/n$, $x_3=1+6/n$ và $x_i=1+2i/n$. Theo Định lý 4,
+\begin{align*}
+\int_1^3 e^x\,dx&=\lim_{n\to\infty}\sum_{i=1}^n f(x_i)\Delta x\\
+&=\lim_{n\to\infty}\sum_{i=1}^n f\left(1+\frac{2i}n\right)\frac2n\\
+&=\lim_{n\to\infty}\frac2n\sum_{i=1}^n e^{1+2i/n}.
+\end{align*}
+(b) Yêu cầu hệ thống đại số máy tính tính tổng và rút gọn, ta được
+\[\sum_{i=1}^n e^{1+2i/n}=\frac{e^{(3n+2)/n}-e^{(n+2)/n}}{e^{2/n}-1}.\]
+Sau đó tính giới hạn:
+\[\int_1^3e^x\,dx=\lim_{n\to\infty}\frac2n\cdot\frac{e^{(3n+2)/n}-e^{(n+2)/n}}{e^{2/n}-1}=e^3-e.\]
+Hệ thống đại số máy tính tìm được biểu thức tường minh vì tổng này là một tổng cấp số nhân. Có thể tính giới hạn bằng quy tắc l’Hospital. Vì $e^x$ dương, tích phân biểu diễn diện tích ở Hình 8.
+\fig[.38]{fig08}{Hình 8}
+\ex{5} Tính các tích phân sau bằng cách diễn giải theo diện tích.\\(a) $\int_0^1\sqrt{1-x^2}\,dx$; \qquad(b) $\int_0^3(x-1)\,dx$.
+\sol (a) Vì $f(x)=\sqrt{1-x^2}\ge0$, tích phân là diện tích dưới đường cong từ 0 đến 1. Từ $y^2=1-x^2$ suy ra $x^2+y^2=1$, nên đồ thị là một phần tư đường tròn bán kính 1 (Hình 9). Do đó
+\[\int_0^1\sqrt{1-x^2}\,dx=\frac14\pi(1)^2=\frac\pi4.\]
+(Ở §7.3, ta sẽ chứng minh diện tích hình tròn bán kính $r$ bằng $\pi r^2$.)
+\fig[.38]{fig09}{Hình 9}
+(b) Đồ thị $y=x-1$ là đường thẳng có hệ số góc 1 (Hình 10). Tính tích phân bằng hiệu diện tích hai tam giác:
+\[\int_0^3(x-1)\,dx=A_1-A_2=\frac12(2\cdot2)-\frac12(1\cdot1)=1.5.\]
+\fig[.40]{fig10}{Hình 10}
+\section*{Quy tắc trung điểm}
+Ta thường chọn đầu mút phải làm điểm lấy mẫu vì thuận tiện khi tính giới hạn. Nhưng để xấp xỉ tích phân, chọn trung điểm của đoạn con thường tốt hơn. Ký hiệu trung điểm đó là $\bar{x}_i$. Mọi tổng Riemann đều xấp xỉ tích phân; dùng trung điểm cho ta quy tắc sau.
+\group{Quy tắc trung điểm}
+\[\int_a^b f(x)\,dx\approx\sum_{i=1}^n f(\bar{x}_i)\Delta x=\Delta x[f(\bar{x}_1)+\cdots+f(\bar{x}_n)],\]
+trong đó $\Delta x=(b-a)/n$ và $\bar{x}_i=\frac12(x_{i-1}+x_i)$ là trung điểm $[x_{i-1},x_i]$.
+\ex{6} Dùng Quy tắc trung điểm với $n=5$ để xấp xỉ $\int_1^2\frac1x\,dx$.
+\sol Các đầu mút là $1,1.2,1.4,1.6,1.8,2.0$, nên các trung điểm là $1.1,1.3,1.5,1.7,1.9$ (Hình 11). Độ dài các đoạn con là $\Delta x=(2-1)/5=\frac15$. Do đó
+\begin{align*}
+\int_1^2\frac1x\,dx&\approx\Delta x[f(1.1)+f(1.3)+f(1.5)+f(1.7)+f(1.9)]\\
+&=\frac15\left(\frac1{1.1}+\frac1{1.3}+\frac1{1.5}+\frac1{1.7}+\frac1{1.9}\right)\approx0.691908.
+\end{align*}
+\fig[.60]{fig11}{Hình 11. Các đầu mút và trung điểm dùng trong Ví dụ 6.}
+Vì $f(x)=1/x>0$ trên $[1,2]$, tích phân là một diện tích; xấp xỉ trung điểm bằng tổng diện tích các hình chữ nhật ở Hình 12.
+\fig[.43]{fig12}{Hình 12}
+Hiện tại ta chưa biết xấp xỉ ở Ví dụ 6 chính xác đến mức nào. Ở §7.7, ta sẽ học cách ước lượng sai số của Quy tắc trung điểm và thảo luận những phương pháp xấp xỉ tích phân khác.
+
+Áp dụng Quy tắc trung điểm cho tích phân ở Ví dụ 3, ta được Hình 13. Xấp xỉ $M_{40}\approx-6.7563$ gần giá trị thực $-6.75$ hơn nhiều so với xấp xỉ đầu mút phải $R_{40}\approx-6.3998$ ở Hình 7.
+\fig[.47]{fig13}{Hình 13. $M_{40}\approx-6.7563$.}
+\section*{Tính chất của tích phân xác định}
+Khi định nghĩa $\int_a^b f(x)\,dx$, ta đã ngầm giả sử $a<b$. Nhưng định nghĩa bằng giới hạn tổng Riemann vẫn có nghĩa khi $a>b$. Đổi chỗ $a,b$ làm $\Delta x$ đổi từ $(b-a)/n$ thành $(a-b)/n$. Vì vậy,
+\[\int_b^a f(x)\,dx=-\int_a^b f(x)\,dx.\]
+Nếu $a=b$ thì $\Delta x=0$, nên $\int_a^a f(x)\,dx=0$.
+
+Sau đây là các tính chất cơ bản giúp tính tích phân đơn giản hơn. Ta giả sử $f,g$ là các hàm liên tục.
+\group{Tính chất của tích phân}
+\[\text{1.}\quad\int_a^b c\,dx=c(b-a)\quad(c\text{ là hằng số}).\]
+\[\text{2.}\quad\int_a^b[f(x)+g(x)]\,dx=\int_a^b f(x)\,dx+\int_a^b g(x)\,dx.\]
+\[\text{3.}\quad\int_a^b cf(x)\,dx=c\int_a^b f(x)\,dx\quad(c\text{ là hằng số}).\]
+\[\text{4.}\quad\int_a^b[f(x)-g(x)]\,dx=\int_a^b f(x)\,dx-\int_a^b g(x)\,dx.\]
+Tính chất 1 nói rằng tích phân của hàm hằng bằng hằng số nhân độ dài đoạn. Nếu $c>0$, $a<b$, điều này phù hợp với diện tích hình chữ nhật $c(b-a)$ (Hình 14).
+\fig[.44]{fig14}{Hình 14. $\int_a^b c\,dx=c(b-a)$.}
+Tính chất 2 nói rằng tích phân của tổng bằng tổng các tích phân. Với các hàm dương, diện tích dưới $f+g$ bằng diện tích dưới $f$ cộng diện tích dưới $g$. Hình 15 giúp hiểu điều này: theo cách cộng đồ thị, các đoạn thẳng đứng tương ứng có cùng chiều cao.
+\fig[.44]{fig15}{Hình 15. Tích phân của tổng bằng tổng các tích phân.}
+Tổng quát, Tính chất 2 suy ra từ Định lý 4 và việc giới hạn của tổng bằng tổng các giới hạn:
+\begin{align*}
+\int_a^b[f(x)+g(x)]\,dx&=\lim_{n\to\infty}\sum_{i=1}^n[f(x_i)+g(x_i)]\Delta x\\
+&=\lim_{n\to\infty}\left[\sum_{i=1}^n f(x_i)\Delta x+\sum_{i=1}^n g(x_i)\Delta x\right]\\
+&=\lim_{n\to\infty}\sum_{i=1}^n f(x_i)\Delta x+\lim_{n\to\infty}\sum_{i=1}^n g(x_i)\Delta x\\
+&=\int_a^b f(x)\,dx+\int_a^b g(x)\,dx.
+\end{align*}
+Tính chất 3 được chứng minh tương tự: tích phân của hằng số nhân hàm số bằng hằng số nhân tích phân. Chỉ hằng số mới được đưa ra ngoài dấu tích phân. Về trực giác, nhân hàm với $c>0$ làm đồ thị và các hình chữ nhật xấp xỉ co giãn theo phương đứng với hệ số $c$, nên diện tích cũng nhân $c$. Tính chất 4 được chứng minh bằng cách viết $f-g=f+(-g)$ và dùng Tính chất 2, 3 với $c=-1$.
+\ex{7} Dùng tính chất tích phân để tính $\int_0^1(4+3x^2)\,dx$.
+\sol Theo Tính chất 2, 3,
+\[\int_0^1(4+3x^2)\,dx=\int_0^1 4\,dx+\int_0^1 3x^2\,dx=\int_0^1 4\,dx+3\int_0^1 x^2\,dx.\]
+Tính chất 1 cho $\int_0^1 4\,dx=4(1-0)=4$. Trong Ví dụ 5.1.2, ta đã tìm được $\int_0^1 x^2\,dx=\frac13$. Vì vậy
+\[\int_0^1(4+3x^2)\,dx=4+3\cdot\frac13=5.\]
+Tính chất tiếp theo cho biết cách ghép tích phân của cùng một hàm trên các đoạn kề nhau.
+\[\text{5.}\quad\int_a^c f(x)\,dx+\int_c^b f(x)\,dx=\int_a^b f(x)\,dx.\]
+Chứng minh tổng quát không dễ, nhưng khi $f(x)\ge0$, $a<c<b$, ta thấy ngay qua Hình 16: diện tích từ $a$ đến $c$ cộng diện tích từ $c$ đến $b$ bằng toàn bộ diện tích từ $a$ đến $b$.
+\fig[.43]{fig16}{Hình 16}
+\ex{8} Biết $\int_0^{10}f(x)\,dx=17$ và $\int_0^8 f(x)\,dx=12$, tìm $\int_8^{10}f(x)\,dx$.
+\sol Theo Tính chất 5, $\int_0^8 f(x)\,dx+\int_8^{10}f(x)\,dx=\int_0^{10}f(x)\,dx$. Do đó
+\[\int_8^{10}f(x)\,dx=\int_0^{10}f(x)\,dx-\int_0^8 f(x)\,dx=17-12=5.\]
+Các Tính chất 1–5 đúng khi $a<b$, $a=b$ hoặc $a>b$. Các tính chất so sánh dưới đây chỉ đúng khi $a\le b$.
+\group{Các tính chất so sánh tích phân}
+\noindent\textbf{6.} Nếu $f(x)\ge0$ với $a\le x\le b$ thì $\int_a^b f(x)\,dx\ge0$.
+
+\noindent\textbf{7.} Nếu $f(x)\ge g(x)$ với $a\le x\le b$ thì $\int_a^b f(x)\,dx\ge\int_a^b g(x)\,dx$.
+
+\noindent\textbf{8.} Nếu $m\le f(x)\le M$ với $a\le x\le b$ thì
+\[m(b-a)\le\int_a^b f(x)\,dx\le M(b-a).\]
+Nếu $f(x)\ge0$, tích phân là diện tích dưới đồ thị, nên Tính chất 6 có ý nghĩa hình học đơn giản là diện tích không âm. Nó cũng suy ra trực tiếp từ định nghĩa vì các đại lượng trong tổng đều không âm. Tính chất 7 nói rằng hàm lớn hơn có tích phân lớn hơn; nó suy ra từ Tính chất 6 và 4 vì $f-g\ge0$.
+
+Hình 17 minh họa Tính chất 8 khi $f(x)\ge0$. Nếu $f$ liên tục, có thể chọn $m,M$ là giá trị nhỏ nhất và lớn nhất tuyệt đối trên $[a,b]$. Khi đó diện tích dưới đồ thị nằm giữa diện tích hai hình chữ nhật cao $m$ và $M$.
+\fig[.44]{fig17}{Hình 17}
+\group{Chứng minh Tính chất 8} Vì $m\le f(x)\le M$, Tính chất 7 cho
+\[\int_a^b m\,dx\le\int_a^b f(x)\,dx\le\int_a^b M\,dx.\]
+Dùng Tính chất 1 để tính hai tích phân ngoài cùng, ta được
+\[m(b-a)\le\int_a^b f(x)\,dx\le M(b-a).\qquad\square\]
+Tính chất 8 hữu ích khi chỉ cần ước lượng sơ bộ tích phân mà không phải dùng Quy tắc trung điểm.
+\ex{9} Dùng Tính chất 8 để ước lượng $\int_0^1 e^{-x^2}\,dx$.
+\sol Vì $f(x)=e^{-x^2}$ nghịch biến trên $[0,1]$, giá trị lớn nhất tuyệt đối là $M=f(0)=1$ và nhỏ nhất là $m=f(1)=e^{-1}$. Do đó
+\[e^{-1}(1-0)\le\int_0^1 e^{-x^2}\,dx\le1(1-0),\]
+hay $e^{-1}\le\int_0^1 e^{-x^2}\,dx\le1$. Vì $e^{-1}\approx0.3679$, ta có thể viết
+\[0.367\le\int_0^1 e^{-x^2}\,dx\le1.\]
+Hình 18 minh họa kết quả: tích phân lớn hơn diện tích hình chữ nhật thấp và nhỏ hơn diện tích hình vuông.
+\fig[.42]{fig18}{Hình 18}
+\clearpage\section*{5.2 — Bài tập}
+\bt{1} Tính tổng Riemann của $f(x)=x-1$, $-6\le x\le4$, với năm đoạn con, chọn điểm lấy mẫu là đầu mút phải. Dùng hình vẽ giải thích tổng Riemann biểu diễn điều gì.
+\bt{2} Cho $f(x)=\cos x$, $0\le x\le3\pi/4$. Tính tổng Riemann với $n=6$, chọn đầu mút trái làm điểm lấy mẫu (chính xác đến sáu chữ số thập phân). Tổng Riemann biểu diễn điều gì? Minh họa bằng hình vẽ.
+\bt{3} Cho $f(x)=x^2-4$, $0\le x\le3$. Tính tổng Riemann với $n=6$, chọn trung điểm làm điểm lấy mẫu. Tổng đó biểu diễn điều gì? Minh họa bằng hình vẽ.
+\bt{4} (a) Tính tổng Riemann của $f(x)=1/x$, $1\le x\le2$, với bốn số hạng, chọn đầu mút phải làm điểm lấy mẫu (chính xác đến sáu chữ số thập phân). Dùng hình phác thảo giải thích tổng biểu diễn điều gì.\\(b) Lặp lại phần (a) với điểm lấy mẫu là trung điểm.
+\par\noindent\begin{minipage}{\linewidth}
+\bt{5} Cho đồ thị hàm số $f$. Ước lượng $\int_0^{10}f(x)\,dx$ bằng năm đoạn con với (a) đầu mút phải, (b) đầu mút trái và (c) trung điểm.
+\fig[.47]{ex05}{Hình cho Bài tập 5}
+\end{minipage}
+\par\noindent\begin{minipage}{\linewidth}
+\bt{6} Cho đồ thị hàm số $g$. Ước lượng $\int_{-2}^4g(x)\,dx$ bằng sáu đoạn con với (a) đầu mút phải, (b) đầu mút trái và (c) trung điểm.
+\fig[.49]{ex06}{Hình cho Bài tập 6}
+\end{minipage}
+\bt{7} Bảng cho giá trị của hàm đồng biến $f$. Dùng bảng để tìm ước lượng dưới và trên của $\int_{10}^{30}f(x)\,dx$.
+\begin{center}\begin{tabular}{lrrrrrr}\toprule$x$&10&14&18&22&26&30\\$f(x)$&$-12$&$-6$&$-2$&1&3&8\\\bottomrule\end{tabular}\end{center}
+\bt{8} Bảng cho các giá trị của một hàm số thu được từ thí nghiệm. Dùng chúng để ước lượng $\int_3^9 f(x)\,dx$ bằng ba đoạn con bằng nhau với (a) đầu mút phải, (b) đầu mút trái, (c) trung điểm. Nếu biết hàm số đồng biến, có thể kết luận các ước lượng nhỏ hơn hay lớn hơn giá trị chính xác của tích phân không?
+\begin{center}\begin{tabular}{lrrrrrrr}\toprule$x$&3&4&5&6&7&8&9\\$f(x)$&$-3.4$&$-2.1$&$-0.6$&0.3&0.9&1.4&1.8\\\bottomrule\end{tabular}\end{center}
+\group{9–10} Dùng Quy tắc trung điểm với $n=4$ để xấp xỉ tích phân.
+\bt{9} $\displaystyle\int_0^8 x^2\,dx$.
+\bt{10} $\displaystyle\int_0^2(8x+3)\,dx$.
+\group{11–14} Dùng Quy tắc trung điểm với $n$ đã cho để xấp xỉ tích phân. Làm tròn đến bốn chữ số thập phân.
+\bt{11} $\displaystyle\int_0^3 e^{\sqrt{x}}\,dx$, \quad $n=6$.
+\bt{12} $\displaystyle\int_0^1\sqrt{x^3+1}\,dx$, \quad $n=5$.
+\bt{13} $\displaystyle\int_1^3\frac{x}{x^2+8}\,dx$, \quad $n=5$.
+\bt{14} $\displaystyle\int_0^\pi x\sin^2x\,dx$, \quad $n=4$.
+\bt{15} Dùng hệ thống đại số máy tính có khả năng tính xấp xỉ trung điểm và vẽ các hình chữ nhật tương ứng (dùng lệnh \texttt{RiemannSum}, hoặc \texttt{middlesum} và \texttt{middlebox} trong Maple) để kiểm tra kết quả Bài tập 13 và minh họa bằng đồ thị. Sau đó lặp lại với $n=10$, $n=20$.
+\bt{16} Dùng hệ thống đại số máy tính tính các tổng Riemann trái và phải của $f(x)=x/(x+1)$ trên $[0,2]$ với $n=100$. Giải thích vì sao các ước lượng cho thấy
+\[0.8946<\int_0^2\frac{x}{x+1}\,dx<0.9081.\]
+\bt{17} Dùng máy tính bỏ túi hoặc máy vi tính lập bảng giá trị các tổng Riemann phải $R_n$ cho $\int_0^\pi\sin x\,dx$, với $n=5,10,50,100$. Các số này có vẻ tiến đến giá trị nào?
+\bt{18} Dùng máy tính bỏ túi hoặc máy vi tính lập bảng các tổng Riemann trái, phải $L_n,R_n$ cho $\int_0^2 e^{-x^2}\,dx$, với $n=5,10,50,100$. Giá trị tích phân phải nằm giữa hai số nào? Có thể phát biểu tương tự cho $\int_{-1}^2 e^{-x^2}\,dx$ không? Giải thích.
+\group{19–22} Biểu diễn giới hạn thành tích phân xác định trên đoạn đã cho.
+\bt{19} $\displaystyle\lim_{n\to\infty}\sum_{i=1}^n\frac{e^{x_i}}{1+x_i}\Delta x$, \quad $[0,1]$.
+\bt{20} $\displaystyle\lim_{n\to\infty}\sum_{i=1}^n x_i\sqrt{1+x_i^3}\Delta x$, \quad $[2,5]$.
+\bt{21} $\displaystyle\lim_{n\to\infty}\sum_{i=1}^n[5(x_i^*)^3-4x_i^*]\Delta x$, \quad $[2,7]$.
+\bt{22} $\displaystyle\lim_{n\to\infty}\sum_{i=1}^n\frac{x_i^*}{(x_i^*)^2+4}\Delta x$, \quad $[1,3]$.
+\group{23–24} Chứng minh tích phân xác định bằng $\lim_{n\to\infty}R_n$, rồi tính giới hạn.
+\bt{23} $\displaystyle\int_0^4(x-x^2)\,dx$, \quad $\displaystyle R_n=\frac4n\sum_{i=1}^n\left[\frac{4i}n-\frac{16i^2}{n^2}\right]$.
+\bt{24} $\displaystyle\int_1^3(x^3+5x^2)\,dx$, \quad $\displaystyle R_n=\frac2n\sum_{i=1}^n\left[6+\frac{26i}n+\frac{32i^2}{n^2}+\frac{8i^3}{n^3}\right]$.
+\group{25–26} Biểu diễn tích phân thành giới hạn các tổng Riemann dùng đầu mút phải. Không tính giới hạn.
+\bt{25} $\displaystyle\int_1^3\sqrt{4+x^2}\,dx$.
+\bt{26} $\displaystyle\int_2^5\left(x^2+\frac1x\right)\,dx$.
+\group{27–34} Dùng dạng định nghĩa tích phân trong Định lý 4 để tính tích phân.
+\bt{27} $\displaystyle\int_0^2 3x\,dx$.
+\bt{28} $\displaystyle\int_0^3 x^2\,dx$.
+\bt{29} $\displaystyle\int_0^3(5x+2)\,dx$.
+\bt{30} $\displaystyle\int_0^4(6-x^2)\,dx$.
+\bt{31} $\displaystyle\int_1^5(3x^2+7x)\,dx$.
+\bt{32} $\displaystyle\int_{-1}^2(4x^2+x+2)\,dx$.
+\bt{33} $\displaystyle\int_0^1(x^3-3x^2)\,dx$.
+\bt{34} $\displaystyle\int_0^2(2x-x^3)\,dx$.
+\par\noindent\begin{minipage}{\linewidth}
+\bt{35} Cho đồ thị $f$. Tính từng tích phân bằng cách diễn giải theo diện tích.
+\begin{align*}
+&\text{(a) }\int_0^2 f(x)\,dx &&\text{(b) }\int_0^5 f(x)\,dx\\
+&\text{(c) }\int_5^7 f(x)\,dx &&\text{(d) }\int_3^7 f(x)\,dx\\
+&\text{(e) }\int_3^7|f(x)|\,dx &&\text{(f) }\int_2^0 f(x)\,dx
+\end{align*}
+\fig[.48]{ex35}{Hình cho Bài tập 35}
+\end{minipage}
+\par\noindent\begin{minipage}{\linewidth}
+\bt{36} Đồ thị $g$ gồm hai đoạn thẳng và một nửa đường tròn. Tính từng tích phân bằng cách diễn giải theo diện tích.\\(a) $\int_0^2g(x)\,dx$; \quad(b) $\int_2^6g(x)\,dx$; \quad(c) $\int_0^7g(x)\,dx$.
+\fig[.44]{ex36}{Hình cho Bài tập 36}
+\end{minipage}
+\group{37–38} (a) Dùng dạng định nghĩa tích phân trong Định lý 4 để tính tích phân.\\(b) Kiểm tra kết quả phần (a) bằng hình học, diễn giải tích phân theo diện tích.
+\bt{37} $\displaystyle\int_0^3 4x\,dx$.
+\bt{38} $\displaystyle\int_{-1}^4\left(2-\frac12x\right)\,dx$.
+\group{39–40} (a) Xấp xỉ tích phân bằng tổng Riemann dùng đầu mút phải với $n=8$.\\(b) Vẽ hình tương tự Hình 3 minh họa xấp xỉ ở (a).\\(c) Dùng Định lý 4 để tính tích phân.\\(d) Diễn giải tích phân ở (c) là hiệu các diện tích và minh họa bằng hình tương tự Hình 4.
+\bt{39} $\displaystyle\int_0^8(3-2x)\,dx$.
+\bt{40} $\displaystyle\int_0^4(x^2-3x)\,dx$.
+\group{41–46} Tính tích phân bằng cách diễn giải theo diện tích.
+\bt{41} $\displaystyle\int_{-2}^5(10-5x)\,dx$.
+\bt{42} $\displaystyle\int_{-1}^3(2x-1)\,dx$.
+\bt{43} $\displaystyle\int_{-4}^3\left|\frac12x\right|\,dx$.
+\bt{44} $\displaystyle\int_0^1|2x-1|\,dx$.
+\bt{45} $\displaystyle\int_{-3}^0(1+\sqrt{9-x^2})\,dx$.
+\bt{46} $\displaystyle\int_{-4}^4(2x-\sqrt{16-x^2})\,dx$.
+\bt{47} Chứng minh $\displaystyle\int_a^b x\,dx=\frac{b^2-a^2}2$.
+\bt{48} Chứng minh $\displaystyle\int_a^b x^2\,dx=\frac{b^3-a^3}3$.
+\group{49–50} Biểu diễn tích phân thành giới hạn các tổng. Sau đó tính, dùng hệ thống đại số máy tính để tìm cả tổng lẫn giới hạn.
+\bt{49} $\displaystyle\int_0^\pi\sin5x\,dx$.
+\bt{50} $\displaystyle\int_2^{10}x^6\,dx$.
+\bt{51} Tính $\displaystyle\int_1^1\sqrt{1+x^4}\,dx$.
+\bt{52} Biết $\displaystyle\int_0^\pi\sin^4x\,dx=\frac38\pi$, tìm $\displaystyle\int_\pi^0\sin^4\theta\,d\theta$.
+\bt{53} Trong Ví dụ 5.1.2, ta đã chứng minh $\int_0^1 x^2\,dx=\frac13$. Dùng kết quả này và các tính chất tích phân để tính $\int_0^1(5-6x^2)\,dx$.
+\bt{54} Dùng tính chất tích phân và kết quả Ví dụ 4 để tính $\int_1^3(2e^x-1)\,dx$.
+\bt{55} Dùng kết quả Ví dụ 4 để tính $\int_1^3e^{x+2}\,dx$.
+\bt{56} Dùng kết quả Bài tập 47, đẳng thức $\int_0^{\pi/2}\cos x\,dx=1$ (từ Bài tập 5.1.33) và các tính chất tích phân để tính $\int_0^{\pi/2}(2\cos x-5x)\,dx$.
+\bt{57} Viết thành một tích phân duy nhất có dạng $\int_a^b f(x)\,dx$:
+\[\int_{-2}^2f(x)\,dx+\int_2^5 f(x)\,dx-\int_{-2}^{-1}f(x)\,dx.\]
+\bt{58} Nếu $\int_2^8 f(x)\,dx=7.3$ và $\int_2^4f(x)\,dx=5.9$, tìm $\int_4^8 f(x)\,dx$.
+\bt{59} Nếu $\int_0^9f(x)\,dx=37$ và $\int_0^9g(x)\,dx=16$, tìm $\int_0^9[2f(x)+3g(x)]\,dx$.
+\bt{60} Tìm $\int_0^5f(x)\,dx$ nếu
+\[f(x)=\begin{cases}3,&x<3,\\x,&x\ge3.\end{cases}\]
+\par\noindent\begin{minipage}{\linewidth}
+\bt{61} Với hàm $f$ có đồ thị đã cho, sắp xếp các đại lượng sau theo thứ tự tăng dần và giải thích.
+\begin{align*}
+&\text{(A) }\int_0^8 f(x)\,dx &&\text{(B) }\int_0^3 f(x)\,dx &&\text{(C) }\int_3^8 f(x)\,dx\\
+&\text{(D) }\int_4^8 f(x)\,dx &&\text{(E) }f'(1)
+\end{align*}
+\fig[.45]{ex61}{Hình cho Bài tập 61}
+\end{minipage}
+\par\noindent\begin{minipage}{\linewidth}
+\bt{62} Cho $F(x)=\int_2^x f(t)\,dt$, với $f$ có đồ thị như hình. Giá trị nào sau đây lớn nhất?\\(A) $F(0)$; \quad(B) $F(1)$; \quad(C) $F(2)$; \quad(D) $F(3)$; \quad(E) $F(4)$.
+\fig[.45]{ex62}{Hình cho Bài tập 62}
+\end{minipage}
+\par\noindent\begin{minipage}{\linewidth}
+\bt{63} Mỗi miền $A,B,C$ giới hạn bởi đồ thị $f$ và trục $x$ đều có diện tích 3. Tìm giá trị của
+\[\int_{-4}^2[f(x)+2x+5]\,dx.\]
+\fig[.50]{ex63}{Hình cho Bài tập 63}
+\end{minipage}
+\bt{64} Giả sử $f$ có giá trị nhỏ nhất tuyệt đối $m$ và giá trị lớn nhất tuyệt đối $M$. Tích phân $\int_0^2f(x)\,dx$ phải nằm giữa hai giá trị nào? Tính chất tích phân nào cho phép kết luận như vậy?
+\group{65–68} Dùng các tính chất tích phân để kiểm tra bất đẳng thức, không tính các tích phân.
+\bt{65} $\displaystyle\int_0^4(x^2-4x+4)\,dx\ge0$.
+\bt{66} $\displaystyle\int_0^1\sqrt{1+x^2}\,dx\le\int_0^1\sqrt{1+x}\,dx$.
+\bt{67} $\displaystyle2\le\int_{-1}^1\sqrt{1+x^2}\,dx\le2\sqrt2$.
+\bt{68} $\displaystyle\frac\pi{12}\le\int_{\pi/6}^{\pi/3}\sin x\,dx\le\frac{\sqrt3\pi}{12}$.
+\group{69–74} Dùng Tính chất 8 để ước lượng giá trị tích phân.
+\bt{69} $\displaystyle\int_0^1 x^3\,dx$.
+\bt{70} $\displaystyle\int_0^3\frac1{x+4}\,dx$.
+\bt{71} $\displaystyle\int_{\pi/4}^{\pi/3}\tan x\,dx$.
+\bt{72} $\displaystyle\int_0^2(x^3-3x+3)\,dx$.
+\bt{73} $\displaystyle\int_0^2 xe^{-x}\,dx$.
+\bt{74} $\displaystyle\int_\pi^{2\pi}(x^2-\sin x)\,dx$.
+\group{75–76} Dùng các tính chất tích phân, cùng Bài tập 47 và 48, để chứng minh bất đẳng thức.
+\bt{75} $\displaystyle\int_1^3\sqrt{x^4+1}\,dx\ge\frac{26}3$.
+\bt{76} $\displaystyle\int_0^{\pi/2}x\sin x\,dx\le\frac{\pi^2}8$.
+\bt{77} Trong ba tích phân $\int_1^2\arctan x\,dx$, $\int_1^2\arctan\sqrt{x}\,dx$ và $\int_1^2\arctan(\sin x)\,dx$, tích phân nào có giá trị lớn nhất? Vì sao?
+\bt{78} Trong hai tích phân $\int_0^{0.5}\cos(x^2)\,dx$ và $\int_0^{0.5}\cos\sqrt{x}\,dx$, tích phân nào lớn hơn? Vì sao?
+\bt{79} Chứng minh Tính chất 3 của tích phân.
+\par\noindent\begin{minipage}{\linewidth}
+\bt{80} (a) Với hàm $f$ có đồ thị như hình, kiểm tra bằng hình học bất đẳng thức
+\[\left|\int_a^b f(x)\,dx\right|\le\int_a^b|f(x)|\,dx.\]
+\fig[.55]{ex80}{Hình cho Bài tập 80}
+(b) Chứng minh bất đẳng thức ở (a) đúng với mọi hàm $f$ liên tục trên $[a,b]$.\\(c) Chứng minh
+\[\left|\int_a^b f(x)\sin2x\,dx\right|\le\int_a^b|f(x)|\,dx.\]
+\end{minipage}
+\bt{81} Cho $f(x)=0$ nếu $x$ hữu tỉ và $f(x)=1$ nếu $x$ vô tỉ. Chứng minh $f$ không khả tích trên $[0,1]$.
+\bt{82} Cho $f(0)=0$ và $f(x)=1/x$ nếu $0<x\le1$. Chứng minh $f$ không khả tích trên $[0,1]$. [Gợi ý: Chứng minh số hạng đầu tiên của tổng Riemann, $f(x_1^*)\Delta x$, có thể lớn tùy ý.]
+\Needspace{9\baselineskip}\group{83–84} Biểu diễn giới hạn thành tích phân xác định.
+\bt{83} $\displaystyle\lim_{n\to\infty}\sum_{i=1}^n\frac{i^4}{n^5}$. [Gợi ý: Xét $f(x)=x^4$.]
+\bt{84} $\displaystyle\lim_{n\to\infty}\frac1n\sum_{i=1}^n\frac1{1+(i/n)^2}$.
+\bt{85} Tìm $\int_1^2x^{-2}\,dx$. Gợi ý: Chọn $x_i^*$ là trung bình nhân của $x_{i-1}$ và $x_i$, tức $x_i^*=\sqrt{x_{i-1}x_i}$, và dùng đẳng thức
+\[\frac1{m(m+1)}=\frac1m-\frac1{m+1}.\]
+\clearpage\section*{Dự án khám phá — Hàm diện tích}
+\da{1} (a) Vẽ đường thẳng $y=2t+1$ và dùng hình học tìm diện tích miền dưới đường thẳng này, trên trục $t$, giữa các đường thẳng đứng $t=1$, $t=3$.\\(b) Với $x>1$, gọi $A(x)$ là diện tích miền dưới $y=2t+1$ từ $t=1$ đến $t=x$. Phác thảo miền và dùng hình học tìm biểu thức của $A(x)$.\\(c) Lấy đạo hàm hàm diện tích $A(x)$. Bạn nhận thấy điều gì?
+\da{2} (a) Với $x\ge-1$, đặt $A(x)=\int_{-1}^x(1+t^2)\,dt$. $A(x)$ biểu diễn diện tích một miền. Hãy phác thảo miền đó.\\(b) Dùng kết quả Bài tập 5.2.48 để tìm biểu thức của $A(x)$.\\(c) Tìm $A'(x)$. Bạn nhận thấy điều gì?\\(d) Nếu $x\ge-1$ và $h$ là số dương nhỏ thì $A(x+h)-A(x)$ biểu diễn diện tích một miền. Mô tả và phác thảo miền đó.\\(e) Vẽ một hình chữ nhật xấp xỉ miền ở (d). So sánh hai diện tích để chỉ ra
+\[\frac{A(x+h)-A(x)}h\approx1+x^2.\]
+(f) Dùng phần (e) để giải thích trực giác kết quả phần (c).
+\da{3} (a) Vẽ đồ thị $f(x)=\cos(x^2)$ trong cửa sổ quan sát $[0,2]\times[-1.25,1.25]$.\\(b) Nếu định nghĩa hàm mới $g(x)=\int_0^x\cos(t^2)\,dt$, thì $g(x)$ là diện tích dưới đồ thị $f$ từ 0 đến $x$ [cho đến khi $f(x)$ âm; khi đó $g(x)$ là hiệu các diện tích]. Dùng phần (a) xác định giá trị $x$ tại đó $g(x)$ bắt đầu giảm. [Khác với tích phân ở Câu 2, không thể tính tích phân định nghĩa $g$ để thu được một biểu thức tường minh của $g(x)$.]\\(c) Dùng lệnh tích phân trên máy tính bỏ túi hoặc máy vi tính để ước lượng
+\[g(0.2),g(0.4),g(0.6),\ldots,g(1.8),g(2).\]
+Dùng các giá trị đó phác thảo đồ thị $g$.\\(d) Dùng đồ thị $g$ ở (c) để phác thảo đồ thị $g'$, dựa vào cách hiểu $g'(x)$ là hệ số góc tiếp tuyến. Đồ thị $g'$ so với đồ thị $f$ như thế nào?
+\da{4} Giả sử $f$ liên tục trên $[a,b]$ và định nghĩa hàm mới $g$ bởi $g(x)=\int_a^x f(t)\,dt$. Dựa vào kết quả ở các Câu 1–3, hãy dự đoán một biểu thức của $g'(x)$.
+\end{document}
