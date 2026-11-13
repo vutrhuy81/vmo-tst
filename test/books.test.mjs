@@ -391,3 +391,28 @@ for(const image of doc34.window.document.querySelectorAll('img')){
 }
 doc34.window.close();
 assert.deepEqual((await readBooks(db,student,{bookId:book.id,sectionId:child34.id})).exercises.map(e=>e.contentKey),section34.exercises.map(e=>e.contentKey));
+
+// Implicit-differentiation exercises share section 1.1's persisted action path.
+const child35=detail.sections.find(s=>s.title.startsWith('3.5'));
+const section35=await readBooks(db,student,{bookId:book.id,sectionId:child35.id});
+assert.equal(section35.exerciseHeading,'3.5. Bài tập');
+assert.deepEqual(section35.exercises.map(e=>e.questionNumber),Array.from({length:67},(_,i)=>i+1));
+assert.ok(section35.exercises.every(e=>e.allowSubmission&&e.allowAiEvaluation&&e.contentKey&&e.setKey));
+for(const n of [1,4])assert.ok(section35.exercises[n-1].content.includes('Giải phương trình'));
+for(const n of [5,22])assert.ok(section35.exercises[n-1].content.includes('Tìm'));
+for(const n of [25,26])assert.ok(section35.exercises[n-1].content.includes('biến độc lập'));
+for(const n of [53,56])assert.ok(section35.exercises[n-1].content.includes('trực giao'));
+for(const n of [33,34,35,36,67])assert.ok(section35.exercises[n-1].content.includes('/e'+n+'.png'));
+assert.ok(section35.exercises[46].content.includes('25(x^2-y^2)'));
+assert.ok(section35.exercises[46].content.includes('\\[2('));
+assert.ok(section35.section.content.includes('Dự án khám phá'));
+const doc35=new JSDOM(section35.section.content);
+assert.equal(doc35.window.document.querySelectorAll('img').length,13);
+assert.equal(section35.section.sourceInfo.exampleCount,4);
+for(const image of doc35.window.document.querySelectorAll('img')){
+ const asset=new URL(image.src,'https://example.test').searchParams.get('asset');
+ assert.equal((await readBookAsset(student,asset)).bytes[0],137);
+ await assert.rejects(()=>readBookAsset(other,asset),e=>e.status===403);
+}
+doc35.window.close();
+assert.deepEqual((await readBooks(db,student,{bookId:book.id,sectionId:child35.id})).exercises.map(e=>e.contentKey),section35.exercises.map(e=>e.contentKey));

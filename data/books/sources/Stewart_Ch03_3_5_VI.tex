@@ -1,0 +1,314 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage{fontspec}\setmainfont{Latin Modern Roman}\setsansfont{DejaVu Sans}
+\usepackage{amsmath,amssymb,graphicx,geometry,enumitem,longtable,booktabs,fancyhdr,hyperref}
+\geometry{left=28mm,right=23mm,top=24mm,bottom=24mm}
+\hypersetup{unicode=true,colorlinks=true,linkcolor=black,urlcolor=blue,pdftitle={Giải tích Chương 3 Mục 3.5 Đạo hàm ẩn}}
+\setlength{\parindent}{1.2em}\setlength{\parskip}{4pt}\setlength{\headheight}{16pt}
+\pagestyle{fancy}\fancyhf{}\fancyhead[L]{\small Chương 3. Các quy tắc tính đạo hàm}\fancyhead[R]{\small §3.5}\fancyfoot[C]{\thepage}
+\newcommand{\fig}[3][.68]{\begin{center}\begin{minipage}{\linewidth}\centering\includegraphics[width=#1\linewidth]{assets/#2.png}\\{\small #3}\end{minipage}\end{center}}
+\newcommand{\ex}[1]{\par\medskip\noindent\textbf{Ví dụ #1.}\ }
+\newcommand{\sol}{\par\nopagebreak[4]\noindent\textit{Lời giải.}\ }
+\newcommand{\bt}[1]{\par\smallskip\noindent\textbf{#1.}\ }
+\newcommand{\group}[1]{\par\medskip\noindent\textbf{#1}\par\nopagebreak[4]}
+\newcommand{\gint}[1]{\left[\!\left[#1\right]\!\right]}
+\allowdisplaybreaks[2]
+\begin{document}
+\begin{center}
+{\Large\bfseries GIẢI TÍCH}\\[5pt]
+{\large Chương 3. Các quy tắc tính đạo hàm}\\[9pt]
+{\Large\bfseries 3.5. Đạo hàm ẩn}
+\end{center}
+\noindent\textbf{Nguồn:} James Stewart, Daniel K. Clegg, Saleem Watson, \textit{Calculus: Early Transcendentals}, ấn bản thứ 9 (2020), trang in 209–217 (trang PDF 244–252): toàn bộ §3.5, Bài tập 1–67 và dự án khám phá sau mục này, trước tiêu đề §3.6.
+\section*{Hàm số được xác định ẩn}
+Những hàm số đã gặp có thể mô tả bằng cách biểu diễn tường minh một biến theo biến kia, chẳng hạn
+\[y=\sqrt{x^3+1},\qquad\text{hoặc}\qquad y=x\sin x,\]
+hay tổng quát là $y=f(x)$. Tuy nhiên, một số hàm được xác định ẩn bởi một hệ thức giữa $x,y$, như
+\[x^2+y^2=25\tag{1}\]
+hoặc
+\[x^3+y^3=6xy.\tag{2}\]
+Trong một số trường hợp, có thể giải phương trình theo $y$ để thu được một hoặc nhiều hàm tường minh của $x$. Chẳng hạn, giải (1) theo $y$ được $y=\pm\sqrt{25-x^2}$; vì thế hai hàm xác định bởi phương trình ẩn (1) là $f(x)=\sqrt{25-x^2}$ và $g(x)=-\sqrt{25-x^2}$. Đồ thị của $f,g$ lần lượt là nửa trên và nửa dưới của đường tròn $x^2+y^2=25$ (Hình 1).
+\fig[.96]{f01}{Hình 1. (a) Đường tròn $x^2+y^2=25$; (b) $f(x)=\sqrt{25-x^2}$; (c) $g(x)=-\sqrt{25-x^2}$.}
+Không dễ giải (2) bằng tay để biểu diễn tường minh $y$ theo $x$. Ngay cả khi dùng công cụ tính toán, các biểu thức thu được cũng rất phức tạp. Dù vậy, (2) là phương trình của một đường cong gọi là \textbf{đường lá Descartes}, được vẽ ở Hình 2, và nó xác định ẩn $y$ như một số hàm của $x$. Đồ thị của ba hàm như vậy được cho trong Hình 3. Nói $f$ là hàm được xác định ẩn bởi (2) có nghĩa là phương trình
+\[x^3+[f(x)]^3=6xf(x)\]
+đúng với mọi $x$ thuộc tập xác định của $f$.
+\fig[.43]{f02}{Hình 2. Đường lá Descartes.}
+\fig[.95]{f03}{Hình 3. Đồ thị ba hàm được xác định ẩn bởi đường lá Descartes.}
+\section*{Phép lấy đạo hàm ẩn}
+May thay, để tìm đạo hàm của $y$, không nhất thiết phải giải phương trình theo $y$. Thay vào đó, có thể dùng \textbf{phép lấy đạo hàm ẩn}: lấy đạo hàm hai vế của phương trình theo $x$, rồi giải phương trình thu được theo $dy/dx$. Trong các ví dụ và bài tập của mục này, luôn giả sử phương trình đã cho xác định ẩn $y$ như một hàm khả vi của $x$ để có thể áp dụng phương pháp.
+\ex{1} Nếu $x^2+y^2=25$, tìm $dy/dx$. Sau đó tìm phương trình tiếp tuyến của đường tròn $x^2+y^2=25$ tại $(3,4)$.
+
+\noindent\textit{Lời giải 1.} Lấy đạo hàm hai vế của $x^2+y^2=25$:
+\[\frac{d}{dx}(x^2+y^2)=\frac{d}{dx}(25),\]
+\[\frac{d}{dx}(x^2)+\frac{d}{dx}(y^2)=0.\]
+Nhớ rằng $y$ là hàm của $x$ và dùng quy tắc dây chuyền:
+\[\frac{d}{dx}(y^2)=\frac{d}{dy}(y^2)\frac{dy}{dx}=2y\frac{dy}{dx}.\]
+Do đó,
+\[2x+2y\frac{dy}{dx}=0.\]
+Giải phương trình theo $dy/dx$, được
+\[\frac{dy}{dx}=-\frac xy.\]
+Tại $(3,4)$, $x=3,y=4$, nên $dy/dx=-3/4$. Vì vậy, phương trình tiếp tuyến là
+\[y-4=-\frac34(x-3),\qquad\text{hay}\qquad3x+4y=25.\]
+\noindent\textit{Lời giải 2.} Giải $x^2+y^2=25$ theo $y$, được $y=\pm\sqrt{25-x^2}$. Điểm $(3,4)$ thuộc nửa đường tròn trên $y=\sqrt{25-x^2}$, nên xét $f(x)=\sqrt{25-x^2}$. Dùng quy tắc dây chuyền,
+\begin{align*}
+f'(x)&=\frac12(25-x^2)^{-1/2}\frac{d}{dx}(25-x^2)\\
+&=\frac12(25-x^2)^{-1/2}(-2x)=-\frac{x}{\sqrt{25-x^2}}.
+\end{align*}
+Tại $(3,4)$,
+\[f'(3)=-\frac3{\sqrt{25-3^2}}=-\frac34.\]
+Như trong Lời giải 1, tiếp tuyến có phương trình $3x+4y=25$.\hfill$\square$
+
+Ví dụ 1 cho thấy ngay cả khi có thể giải tường minh $y$ theo $x$, dùng đạo hàm ẩn vẫn có thể đơn giản hơn.
+
+\noindent\textbf{Chú ý 1.} Biểu thức $dy/dx=-x/y$ trong Lời giải 1 cho đạo hàm theo cả $x$ và $y$. Nó đúng bất kể phương trình đã cho xác định hàm $y$ nào. Chẳng hạn, với $y=f(x)=\sqrt{25-x^2}$,
+\[\frac{dy}{dx}=-\frac xy=-\frac{x}{\sqrt{25-x^2}},\]
+còn với $y=g(x)=-\sqrt{25-x^2}$,
+\[\frac{dy}{dx}=-\frac xy=-\frac{x}{-\sqrt{25-x^2}}=\frac{x}{\sqrt{25-x^2}}.\]
+\ex{2} (a) Tìm $y'$ nếu $x^3+y^3=6xy$.
+
+(b) Tìm tiếp tuyến của đường lá Descartes $x^3+y^3=6xy$ tại $(3,3)$.
+
+(c) Tại điểm nào trong góc phần tư thứ nhất, tiếp tuyến nằm ngang?
+\sol (a) Lấy đạo hàm hai vế theo $x$, coi $y$ là hàm của $x$; dùng quy tắc dây chuyền cho $y^3$ và quy tắc tích cho $6xy$:
+\[3x^2+3y^2y'=6xy'+6y,\]
+hay
+\[x^2+y^2y'=2xy'+2y.\]
+Giải theo $y'$:
+\[y^2y'-2xy'=2y-x^2,\]
+\[(y^2-2x)y'=2y-x^2,\]
+\[y'=\frac{2y-x^2}{y^2-2x}.\]
+Có thể dùng $dy/dx$ hoặc $y'$ để ký hiệu đạo hàm của $y$ theo $x$.
+
+(b) Khi $x=y=3$,
+\[y'=\frac{2\cdot3-3^2}{3^2-2\cdot3}=-1.\]
+Hình 4 xác nhận đây là giá trị hợp lý cho hệ số góc tại $(3,3)$. Phương trình tiếp tuyến là
+\[y-3=-1(x-3),\qquad\text{hay}\qquad x+y=6.\]
+\fig[.40]{f04}{Hình 4. Tiếp tuyến của đường lá Descartes tại $(3,3)$.}
+(c) Tiếp tuyến nằm ngang nếu $y'=0$. Theo (a), điều này xảy ra khi $2y-x^2=0$, với điều kiện $y^2-2x\ne0$. Thay $y=\frac12x^2$ vào phương trình đường cong:
+\[x^3+\left(\frac12x^2\right)^3=6x\left(\frac12x^2\right).\]
+Rút gọn được $x^6=16x^3$. Vì $x\ne0$ trong góc phần tư thứ nhất, nên $x^3=16$. Nếu $x=16^{1/3}=2^{4/3}$ thì $y=\frac12(2^{8/3})=2^{5/3}$. Do đó, tiếp tuyến nằm ngang tại $(2^{4/3},2^{5/3})$, xấp xỉ $(2.5198,3.1748)$. Hình 5 cho thấy kết quả là hợp lý.\hfill$\square$
+\fig[.42]{f05}{Hình 5. Điểm có tiếp tuyến nằm ngang trên nhánh ở góc phần tư thứ nhất.}
+\noindent\textbf{Chú ý 2.} Có công thức cho ba nghiệm của phương trình bậc ba tương tự công thức nghiệm phương trình bậc hai nhưng phức tạp hơn nhiều. Dùng công thức ấy hoặc máy tính để giải $x^3+y^3=6xy$ theo $y$, ta được ba hàm xác định bởi các phương trình:
+\begin{align*}
+y=f(x)&=\sqrt[3]{-\frac12x^3+\sqrt{\frac14x^6-8x^3}}\\
+&\quad+\sqrt[3]{-\frac12x^3-\sqrt{\frac14x^6-8x^3}},
+\end{align*}
+và
+\begin{align*}
+y=\frac12\Biggl[-f(x)\pm\sqrt{-3}\Biggl(&\sqrt[3]{-\frac12x^3+\sqrt{\frac14x^6-8x^3}}\\
+&-\sqrt[3]{-\frac12x^3-\sqrt{\frac14x^6-8x^3}}\Biggr)\Biggr].
+\end{align*}
+Đó là ba hàm có đồ thị ở Hình 3. Có thể thấy phương pháp đạo hàm ẩn tiết kiệm rất nhiều công việc trong những trường hợp như vậy. Hơn nữa, nó cũng áp dụng dễ dàng cho các phương trình như
+\[y^5+3x^2y^2+5x^4=12,\]
+mà không thể tìm biểu thức tường minh của $y$ theo $x$ bằng các công thức căn thức tổng quát.
+\subsection*{Abel và Galois}
+Nhà toán học Na Uy Niels Abel chứng minh năm 1824 rằng không có công thức tổng quát bằng căn thức cho nghiệm của $p(x)=0$, trong đó $p$ là đa thức bậc 5 với hệ số nguyên. Sau đó, nhà toán học Pháp Évariste Galois chứng minh không thể tìm công thức tổng quát bằng căn thức cho nghiệm của $p(x)=0$ khi $p$ là đa thức bậc $n\ge5$.
+\ex{3} Tìm $y'$ nếu $\sin(x+y)=y^2\cos x$.
+\sol Lấy đạo hàm ẩn theo $x$, nhớ rằng $y$ là hàm của $x$:
+\[\cos(x+y)(1+y')=y^2(-\sin x)+(\cos x)(2yy').\]
+Ở vế trái đã dùng quy tắc dây chuyền; ở vế phải đã dùng quy tắc tích và quy tắc dây chuyền. Gom các số hạng chứa $y'$:
+\[\cos(x+y)+y^2\sin x=(2y\cos x)y'-\cos(x+y)y'.\]
+Do đó,
+\[y'=\frac{y^2\sin x+\cos(x+y)}{2y\cos x-\cos(x+y)}.\]
+Hình 6 được vẽ bằng máy tính, cho một phần đường cong $\sin(x+y)=y^2\cos x$. Để kiểm tra phép tính, chú ý $y'=-1$ khi $x=y=0$; đồ thị cũng cho thấy hệ số góc tại gốc tọa độ xấp xỉ $-1$.\hfill$\square$
+\fig[.43]{f06}{Hình 6. Một phần đường cong $\sin(x+y)=y^2\cos x$.}
+Hình 7, 8 và 9 cho thêm ba đường cong được vẽ bằng máy tính. Trong Bài tập 45–46, bạn sẽ có dịp tạo và khảo sát các đường cong khác thường thuộc loại này.
+\fig[.98]{f07_09}{Hình 7, 8, 9, theo thứ tự từ trái sang phải.}
+\noindent\textbf{Hình 7:}
+\[(x^2-1)(x^2-4)(x^2-9)=y^2(y^2-4)(y^2-9).\]
+\noindent\textbf{Hình 8:}
+\[\cos(x-\sin y)=\sin(y-\sin x).\]
+\noindent\textbf{Hình 9:}
+\[\sin(xy)=\sin x+\sin y.\]
+\section*{Đạo hàm cấp hai của hàm ẩn}
+Ví dụ sau minh họa cách tìm đạo hàm cấp hai của một hàm được xác định ẩn.
+\ex{4} Tìm $y''$ nếu $x^4+y^4=16$.
+\sol Lấy đạo hàm ẩn theo $x$:
+\[4x^3+4y^3y'=0.\]
+Giải theo $y'$, được
+\[y'=-\frac{x^3}{y^3}.\tag{3}\]
+Để tìm $y''$, lấy đạo hàm biểu thức này bằng quy tắc thương, nhớ rằng $y$ là hàm của $x$:
+\begin{align*}
+y''&=\frac{d}{dx}\left(-\frac{x^3}{y^3}\right)
+=-\frac{y^3(d/dx)(x^3)-x^3(d/dx)(y^3)}{(y^3)^2}\\
+&=-\frac{y^3\cdot3x^2-x^3(3y^2y')}{y^6}.
+\end{align*}
+Thay (3) vào biểu thức trên:
+\begin{align*}
+y''&=-\frac{3x^2y^3-3x^3y^2\left(-\dfrac{x^3}{y^3}\right)}{y^6}\\
+&=-\frac{3(x^2y^4+x^6)}{y^7}=-\frac{3x^2(y^4+x^4)}{y^7}.
+\end{align*}
+Vì $x,y$ phải thỏa mãn phương trình ban đầu $x^4+y^4=16$, kết quả rút gọn thành
+\[y''=-\frac{3x^2(16)}{y^7}=-\frac{48x^2}{y^7}.\qquad\square\]
+\fig[.46]{f10}{Hình 10. Đường cong $x^4+y^4=16$.}
+Đồ thị trong Hình 10 là một phiên bản được kéo giãn và làm phẳng của đường tròn $x^2+y^2=4$, nên đôi khi được gọi là “đường tròn béo”. Từ phía trái, đường cong ban đầu rất dốc nhưng nhanh chóng trở nên rất thoải. Điều này được thể hiện qua
+\[y'=-\frac{x^3}{y^3}=-\left(\frac xy\right)^3.\]
+\section*{3.5. Bài tập}
+\group{1–4} (a) Tìm $y'$ bằng phép lấy đạo hàm ẩn. (b) Giải phương trình để biểu diễn tường minh $y$ theo $x$, rồi lấy đạo hàm theo $x$. (c) Kiểm tra rằng kết quả ở (a) và (b) phù hợp bằng cách thay biểu thức của $y$ vào kết quả ở (a).
+\bt{1} $5x^2-y^3=7$.
+\bt{2} $6x^4+y^5=2x$.
+\bt{3} $\sqrt x+\sqrt y=1$.
+\bt{4} $\dfrac2x-\dfrac1y=4$.
+\group{5–22} Tìm $dy/dx$ bằng phép lấy đạo hàm ẩn.
+\bt{5} $x^2-4xy+y^2=4$.
+\bt{6} $2x^2+xy-y^2=2$.
+\bt{7} $x^4+x^2y^2+y^3=5$.
+\bt{8} $x^3-xy^2+y^3=1$.
+\bt{9} $\dfrac{x^2}{x+y}=y^2+1$.
+\bt{10} $xe^y=x-y$.
+\bt{11} $\sin x+\cos y=2x-3y$.
+\bt{12} $e^x\sin y=x+y$.
+\bt{13} $\sin(x+y)=\cos x+\cos y$.
+\bt{14} $\tan(x-y)=2xy^3+1$.
+\bt{15} $y\cos x=x^2+y^2$.
+\bt{16} $\sin(xy)=\cos(x+y)$.
+\bt{17} $2xe^y+ye^x=3$.
+\bt{18} $\sin x\cos y=x^2-5y$.
+\bt{19} $\sqrt{x+y}=x^4+y^4$.
+\bt{20} $xy=\sqrt{x^2+y^2}$.
+\bt{21} $e^{x/y}=x-y$.
+\bt{22} $\cos(x^2+y^2)=xe^y$.
+\bt{23} Nếu $f(x)+x^2[f(x)]^3=10$ và $f(1)=2$, hãy tìm $f'(1)$.
+\bt{24} Nếu $g(x)+x\sin g(x)=x^2$, hãy tìm $g'(0)$.
+\group{25–26} Xem $y$ là biến độc lập và $x$ là biến phụ thuộc; dùng phép lấy đạo hàm ẩn để tìm $dx/dy$.
+\bt{25} $x^4y^2-x^3y+2xy^3=0$.
+\bt{26} $y\sec x=x\tan y$.
+\group{27–36} Dùng phép lấy đạo hàm ẩn để tìm phương trình tiếp tuyến của đường cong tại điểm đã cho.
+\bt{27} $ye^{\sin x}=x\cos y$, \quad $(0,0)$.
+\bt{28} $\tan(x+y)+\sec(x-y)=2$, \quad $(\pi/8,\pi/8)$.
+\bt{29} $x^{2/3}+y^{2/3}=4$, \quad $(-3\sqrt3,1)$ (đường astroid).
+\bt{30} $y^2(6-x)=x^3$, \quad $(2,\sqrt2)$ (đường cissoid của Diocles).
+\bt{31} $x^2-xy-y^2=1$, \quad $(2,1)$ (hyperbol).
+\bt{32} $x^2+2xy+4y^2=12$, \quad $(2,1)$ (elip).
+\par\medskip\noindent\begin{minipage}{\linewidth}
+\bt{33} $x^2+y^2=(2x^2+2y^2-x)^2$, \quad $(0,\tfrac12)$ (đường cardioid).
+\fig[.34]{e33}{Hình cho Bài tập 33.}
+\end{minipage}\par\medskip
+\noindent\begin{minipage}{\linewidth}
+\bt{34} $x^2y^2=(y+1)^2(4-y^2)$, \quad $(2\sqrt3,1)$ (đường conchoid của Nicomedes).
+\fig[.39]{e34}{Hình cho Bài tập 34.}
+\end{minipage}\par\medskip
+\noindent\begin{minipage}{\linewidth}
+\bt{35} $2(x^2+y^2)^2=25(x^2-y^2)$, \quad $(3,1)$ (đường lemniscate).
+\fig[.42]{e35}{Hình cho Bài tập 35.}
+\end{minipage}\par\medskip
+\noindent\begin{minipage}{\linewidth}
+\bt{36} $y^2(y^2-4)=x^2(x^2-5)$, \quad $(0,-2)$ (đường cong quỷ).
+\fig[.36]{e36}{Hình cho Bài tập 36.}
+\end{minipage}\par\medskip
+\bt{37} (a) Đường cong có phương trình $y^2=5x^4-x^2$ được gọi là đường kampyle của Eudoxus. Tìm phương trình tiếp tuyến tại $(1,2)$.
+
+(b) Vẽ đường cong và tiếp tuyến trên cùng một hệ trục. Có thể dùng chức năng vẽ đường cong ẩn, hoặc vẽ riêng các nhánh trên và dưới.
+\bt{38} (a) Đường cong có phương trình $y^2=x^3+3x^2$ được gọi là đường bậc ba Tschirnhausen. Tìm phương trình tiếp tuyến tại $(1,-2)$.
+
+(b) Tại những điểm nào đường cong này có tiếp tuyến nằm ngang?
+
+(c) Vẽ đường cong cùng các tiếp tuyến tìm được ở (a) và (b).
+\group{39–42} Tìm $y''$ bằng phép lấy đạo hàm ẩn và rút gọn kết quả.
+\bt{39} $x^2+4y^2=4$.
+\bt{40} $x^2+xy+y^2=3$.
+\bt{41} $\sin y+\cos x=1$.
+\bt{42} $x^3-y^3=7$.
+\bt{43} Nếu $xy+e^y=e$, hãy tìm giá trị của $y''$ tại điểm có $x=0$.
+\bt{44} Nếu $x^2+xy+y^3=1$, hãy tìm giá trị của $y'''$ tại điểm có $x=1$.
+\bt{45} Phương trình
+\[y(y^2-1)(y-2)=x(x-1)(x-2)\]
+xác định một đường cong có hình dạng kỳ thú.
+
+(a) Vẽ đường cong. Có bao nhiêu điểm trên đường cong có tiếp tuyến nằm ngang? Ước lượng hoành độ của các điểm ấy.
+
+(b) Tìm phương trình các tiếp tuyến tại $(0,1)$ và $(0,2)$.
+
+(c) Tìm các giá trị chính xác của những hoành độ ở (a).
+
+(d) Thử thay đổi phương trình để tạo ra những đường cong kỳ thú của riêng bạn.
+\bt{46} (a) Đường cong
+\[2y^3+y^2-y^5=x^4-2x^3+x^2\]
+được ví như một chiếc xe đang nảy lên. Vẽ đồ thị để thấy lý do của cách ví von này.
+
+(b) Có bao nhiêu điểm trên đường cong có tiếp tuyến nằm ngang? Tìm hoành độ của các điểm ấy.
+\bt{47} Tại những điểm nào đường lemniscate trong Bài tập 35 có tiếp tuyến nằm ngang?
+\bt{48} Chứng minh rằng phương trình tiếp tuyến của elip
+\[\frac{x^2}{a^2}+\frac{y^2}{b^2}=1\]
+tại điểm $(x_0,y_0)$ là
+\[\frac{x_0x}{a^2}+\frac{y_0y}{b^2}=1.\]
+\bt{49} Tìm phương trình tiếp tuyến của hyperbol
+\[\frac{x^2}{a^2}-\frac{y^2}{b^2}=1\]
+tại điểm $(x_0,y_0)$.
+\bt{50} Chứng minh rằng tổng các đoạn chắn trên hai trục tọa độ của một tiếp tuyến bất kỳ của đường cong $\sqrt x+\sqrt y=\sqrt c$ bằng $c$.
+\bt{51} Dùng phép lấy đạo hàm ẩn để chứng minh rằng tiếp tuyến của đường tròn tâm $O$ tại điểm $P$ vuông góc với bán kính $OP$.
+\bt{52} Giả sử $y=x^n$ là một hàm khả vi của $x$, trong đó $n=p/q$ là một số hữu tỉ. Từ $y^q=x^p$, dùng phép lấy đạo hàm ẩn để chứng minh rằng
+\[\frac{dy}{dx}=\frac pq x^{(p/q)-1}.\]
+\group{53–56. Quỹ đạo trực giao} Hai đường cong được gọi là \textbf{trực giao} nếu các tiếp tuyến của chúng vuông góc với nhau tại mọi giao điểm. Chứng minh rằng mỗi đường cong trong họ thứ nhất trực giao với mỗi đường cong trong họ thứ hai; nghĩa là hai họ là các quỹ đạo trực giao của nhau. Phác họa cả hai họ trên cùng một hệ trục.
+\bt{53} $x^2+y^2=r^2$; \quad $ax+by=0$.
+\bt{54} $x^2+y^2=ax$; \quad $x^2+y^2=by$.
+\bt{55} $y=cx^2$; \quad $x^2+2y^2=k$.
+\bt{56} $y=ax^3$; \quad $x^2+3y^2=b$.
+\bt{57} Chứng minh rằng elip
+\[\frac{x^2}{a^2}+\frac{y^2}{b^2}=1\]
+và hyperbol
+\[\frac{x^2}{A^2}-\frac{y^2}{B^2}=1\]
+trực giao nếu $A^2<a^2$ và $a^2-b^2=A^2+B^2$. (Như vậy, elip và hyperbol có cùng các tiêu điểm.)
+\bt{58} Tìm giá trị của $a$ để hai họ đường cong $y=(x+c)^{-1}$ và $y=a(x+k)^{1/3}$ là các quỹ đạo trực giao của nhau.
+\bt{59} Phương trình van der Waals đối với $n$ mol khí là
+\[\left(P+\frac{n^2a}{V^2}\right)(V-nb)=nRT,\]
+trong đó $P$ là áp suất, $V$ là thể tích và $T$ là nhiệt độ của khí. Hằng số $R$ là hằng số khí phổ quát; $a,b$ là những hằng số dương đặc trưng cho từng chất khí.
+
+(a) Giữ $T$ không đổi, dùng phép lấy đạo hàm ẩn để tìm $dV/dP$.
+
+(b) Một mol khí carbon dioxide có thể tích $10$ L và áp suất $2.5$ atm. Với $a=3.592$ L$^2\!\cdot$atm/mol$^2$ và $b=0.04267$ L/mol, hãy tìm tốc độ biến thiên của thể tích theo áp suất.
+\bt{60} (a) Dùng phép lấy đạo hàm ẩn để tìm $y'$ nếu $x^2+xy+y^2+1=0$.
+
+(b) Vẽ đường cong ở (a). Bạn nhận thấy điều gì? Chứng minh rằng điều quan sát được là đúng.
+
+(c) Từ (b), có thể kết luận gì về biểu thức của $y'$ tìm được ở (a)?
+\bt{61} Đường cong $x^2-xy+y^2=3$ là một elip có các trục không song song với các trục tọa độ. Tìm giao điểm của elip với trục $x$ và chứng minh rằng các tiếp tuyến tại những điểm ấy song song với nhau.
+\bt{62} (a) Pháp tuyến của elip $x^2-xy+y^2=3$ tại $(-1,1)$ cắt elip ở điểm thứ hai nào?
+
+(b) Vẽ elip và pháp tuyến.
+\bt{63} Tìm các điểm trên đường cong $x^2y^2+xy=2$ mà tại đó tiếp tuyến có hệ số góc bằng $-1$.
+\bt{64} Tìm phương trình của cả hai tiếp tuyến của elip $x^2+4y^2=36$ đi qua điểm $(12,3)$.
+\bt{65} Tìm $dy/dx$ từ mỗi phương trình sau:
+\[\frac xy=y^2+1,\quad y\ne0;\qquad x=y^3+y,\quad y\ne0.\]
+Chứng minh rằng hai biểu thức thu được, dù có dạng khác nhau, đều cho cùng một giá trị tại mọi điểm thỏa mãn phương trình đã cho.
+\bt{66} Hàm Bessel bậc $0$, $y=J(x)$, thỏa mãn phương trình vi phân
+\[xy''+y'+xy=0\]
+với mọi $x$, và $J(0)=1$.
+
+(a) Tìm $J'(0)$.
+
+(b) Dùng phép lấy đạo hàm ẩn để tìm $J''(0)$.
+\bt{67} Một ngọn đèn đặt cách trục $y$ một khoảng $3$ đơn vị về bên phải tạo bóng của miền elip $x^2+4y^2\le5$ như hình. Nếu điểm $(-5,0)$ nằm trên biên của bóng, ngọn đèn phải ở độ cao bao nhiêu so với trục $x$?
+\fig[.68]{e67}{Hình cho Bài tập 67.}
+\section*{Dự án khám phá — Các họ đường cong ẩn}
+Trong dự án này, ta khảo sát sự thay đổi hình dạng của các đường cong được xác định ẩn khi thay đổi các hằng số trong phương trình, đồng thời tìm những đặc điểm chung của các đường cong trong cùng một họ.
+\bt{1} Xét họ đường cong
+\[y^2-2x^2(x+8)=c[(y+1)^2(y+9)-x^2].\]
+(a) Vẽ các đường cong ứng với $c=0$ và $c=2$. Chúng cắt nhau tại bao nhiêu điểm? Có thể cần phóng to hình để xác định đầy đủ các giao điểm.
+
+(b) Vẽ thêm các đường cong ứng với $c=5$ và $c=10$. Bạn nhận thấy điều gì? Điều gì xảy ra với các giá trị khác của $c$?
+\bt{2} (a) Vẽ một số đường cong thuộc họ
+\[x^2+y^2+cx^2y^2=1.\]
+Mô tả hình dạng của các đường cong thay đổi như thế nào khi $c$ thay đổi.
+
+(b) Khi $c=-1$, đường cong có dạng gì? Giải thích bằng đại số những gì xuất hiện trên màn hình.
+
+(c) Dùng phép lấy đạo hàm ẩn để tìm $y'$. Khi $c=-1$, biểu thức này có phù hợp với kết quả ở (b) không?
+\section*{Ghi chú biên tập và thuật ngữ}
+Phần này nằm ngoài nội dung nguyên bản, nhằm làm rõ quy ước của bản dịch.
+\begin{enumerate}[leftmargin=*]
+\item Giữ nguyên số các công thức (1)–(3), Ví dụ 1–4, Hình 1–10, Bài tập 1–67 và hai bài của dự án khám phá. Hình 7–9 giữ bố trí ngang của bản gốc. Không bổ sung lời giải bài tập.
+\item Phép lấy đạo hàm ẩn được áp dụng trên một nhánh hàm khả vi; mọi phép chia phải có mẫu khác $0$. Chẳng hạn, công thức $y'=-x/y$ trong Ví dụ 1 chỉ dùng khi $y\ne0$.
+\item Các công thức nghiệm bậc ba trong Chú ý 2 được giữ nguyên. Khi sử dụng, cần chọn nhất quán các nhánh căn bậc ba, đặc biệt khi xuất hiện số phức. Phát biểu về phương trình bậc năm nói đến việc không tồn tại công thức nghiệm bằng căn thức trong trường hợp tổng quát.
+\item Số mũ ở Bài tập 21 là $x/y$; Bài tập 25–26 yêu cầu $dx/dy$. Giữ nguyên điều kiện $y\ne0$ trong Bài tập 65 và các đơn vị của Bài tập 59.
+\end{enumerate}
+\begin{longtable}{p{.43\linewidth}p{.49\linewidth}}
+\toprule Thuật ngữ tiếng Anh & Thuật ngữ tiếng Việt\\\midrule
+implicit differentiation & phép lấy đạo hàm ẩn\\
+implicitly defined function & hàm được xác định ẩn\\
+folium of Descartes & đường lá Descartes\\
+orthogonal trajectories & quỹ đạo trực giao\\
+foci & các tiêu điểm\\
+concentric circles & các đường tròn đồng tâm\\
+\bottomrule
+\end{longtable}
+\end{document}
