@@ -347,3 +347,24 @@ for(const image of doc32.window.document.querySelectorAll('img')){
 doc32.window.close();
 const repeat32=await readBooks(db,student,{bookId:book.id,sectionId:child32.id});
 assert.deepEqual(repeat32.exercises.map(e=>e.contentKey),section32.exercises.map(e=>e.contentKey));
+
+// Section 3.3 shares section 1.1's persisted problems and action initialization.
+const child33=detail.sections.find(s=>s.title.startsWith('3.3'));
+const section33=await readBooks(db,student,{bookId:book.id,sectionId:child33.id});
+assert.equal(section33.exerciseHeading,'3.3. Bài tập');
+assert.deepEqual(section33.exercises.map(e=>e.questionNumber),Array.from({length:68},(_,i)=>i+1));
+assert.ok(section33.exercises.every(e=>e.allowSubmission&&e.allowAiEvaluation&&e.contentKey&&e.setKey));
+for(const n of [1,22])assert.ok(section33.exercises[n-1].content.includes('Tính đạo hàm'));
+for(const n of [45,60])assert.ok(section33.exercises[n-1].content.includes('Tìm giới hạn'));
+for(const n of [41,66,67])assert.ok(section33.exercises[n-1].content.includes('/e'+n+'.png'));
+assert.ok(section33.exercises[67].content.includes('giới hạn bên trái'));
+const doc33=new JSDOM(section33.section.content);
+assert.equal(doc33.window.document.querySelectorAll('img').length,9);
+assert.equal(section33.section.sourceInfo.exampleCount,7);
+for(const image of doc33.window.document.querySelectorAll('img')){
+ const asset=new URL(image.src,'https://example.test').searchParams.get('asset');
+ assert.equal((await readBookAsset(student,asset)).bytes[0],137);
+ await assert.rejects(()=>readBookAsset(other,asset),e=>e.status===403);
+}
+doc33.window.close();
+assert.deepEqual((await readBooks(db,student,{bookId:book.id,sectionId:child33.id})).exercises.map(e=>e.contentKey),section33.exercises.map(e=>e.contentKey));

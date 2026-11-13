@@ -1,0 +1,319 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage{fontspec}\setmainfont{Latin Modern Roman}\setsansfont{DejaVu Sans}
+\usepackage{amsmath,amssymb,graphicx,geometry,enumitem,longtable,booktabs,fancyhdr,hyperref}
+\geometry{left=28mm,right=23mm,top=24mm,bottom=24mm}
+\hypersetup{unicode=true,colorlinks=true,linkcolor=black,urlcolor=blue,pdftitle={Giải tích Chương 3 Mục 3.3 Đạo hàm của các hàm lượng giác}}
+\setlength{\parindent}{1.2em}\setlength{\parskip}{4pt}\setlength{\headheight}{16pt}
+\pagestyle{fancy}\fancyhf{}\fancyhead[L]{\small Chương 3. Các quy tắc tính đạo hàm}\fancyhead[R]{\small §3.3}\fancyfoot[C]{\thepage}
+\newcommand{\fig}[3][.68]{\begin{center}\begin{minipage}{\linewidth}\centering\includegraphics[width=#1\linewidth]{assets/#2.png}\\{\small #3}\end{minipage}\end{center}}
+\newcommand{\ex}[1]{\par\medskip\noindent\textbf{Ví dụ #1.}\ }
+\newcommand{\sol}{\par\nopagebreak[4]\noindent\textit{Lời giải.}\ }
+\newcommand{\bt}[1]{\par\smallskip\noindent\textbf{#1.}\ }
+\newcommand{\group}[1]{\par\medskip\noindent\textbf{#1}\par\nopagebreak[4]}
+\newcommand{\gint}[1]{\left[\!\left[#1\right]\!\right]}
+\allowdisplaybreaks[2]
+\begin{document}
+\begin{center}
+{\Large\bfseries GIẢI TÍCH}\\[5pt]
+{\large Chương 3. Các quy tắc tính đạo hàm}\\[9pt]
+{\Large\bfseries 3.3. Đạo hàm của các hàm lượng giác}
+\end{center}
+\noindent\textbf{Nguồn:} James Stewart, Daniel K. Clegg, Saleem Watson, \textit{Calculus: Early Transcendentals}, ấn bản thứ 9 (2020), trang in 191–199 (trang PDF 226–234), từ tiêu đề §3.3 đến hết Bài tập 68, trước tiêu đề §3.4.
+
+Trước khi bắt đầu mục này, có thể cần ôn lại các hàm lượng giác; nội dung ôn tập được trình bày ở Phụ lục D. Đặc biệt, cần nhớ rằng khi nói đến hàm $f$ xác định với mọi số thực $x$ bởi
+\[f(x)=\sin x,\]
+ta hiểu $\sin x$ là sin của góc có số đo radian bằng $x$. Quy ước tương tự được áp dụng cho các hàm $\cos,\tan,\csc,\sec,\cot$. Nhắc lại từ §2.5: mọi hàm lượng giác đều liên tục tại mỗi điểm thuộc tập xác định của nó.
+\section*{Đạo hàm của các hàm lượng giác}
+Nếu phác họa đồ thị $f(x)=\sin x$ rồi dùng cách diễn giải $f'(x)$ như hệ số góc tiếp tuyến của đường hình sin để phác họa đồ thị $f'$ (xem Bài tập 2.8.16), ta thấy dường như đồ thị $f'$ chính là đường hình côsin (Hình 1).
+\fig[.89]{f01}{Hình 1. Phác họa đồ thị $f'$ từ các hệ số góc tiếp tuyến của đồ thị $f(x)=\sin x$.}
+Hãy kiểm chứng dự đoán rằng nếu $f(x)=\sin x$ thì $f'(x)=\cos x$. Theo định nghĩa đạo hàm,
+\begin{align*}
+f'(x)&=\lim_{h\to0}\frac{f(x+h)-f(x)}h\\
+&=\lim_{h\to0}\frac{\sin(x+h)-\sin x}h\\
+&=\lim_{h\to0}\frac{\sin x\cos h+\cos x\sin h-\sin x}h\\
+&=\lim_{h\to0}\left[\frac{\sin x\cos h-\sin x}h+\frac{\cos x\sin h}h\right]\\
+&=\lim_{h\to0}\left[\sin x\left(\frac{\cos h-1}h\right)+\cos x\left(\frac{\sin h}h\right)\right].
+\end{align*}
+Ở dòng thứ ba, ta dùng công thức cộng của sin (xem Phụ lục D). Vì vậy,
+\[f'(x)=\lim_{h\to0}\sin x\cdot\lim_{h\to0}\frac{\cos h-1}h
++\lim_{h\to0}\cos x\cdot\lim_{h\to0}\frac{\sin h}h.\tag{1}\]
+Hai trong bốn giới hạn này dễ tính. Vì coi $x$ là hằng số khi lấy giới hạn $h\to0$, ta có
+\[\lim_{h\to0}\sin x=\sin x,\qquad\lim_{h\to0}\cos x=\cos x.\]
+Ở phần sau của mục này, ta sẽ chứng minh
+\[\lim_{h\to0}\frac{\sin h}h=1,\qquad\lim_{h\to0}\frac{\cos h-1}h=0.\]
+Thay các giới hạn đó vào (1), được
+\begin{align*}
+f'(x)&=\lim_{h\to0}\sin x\cdot\lim_{h\to0}\frac{\cos h-1}h
++\lim_{h\to0}\cos x\cdot\lim_{h\to0}\frac{\sin h}h\\
+&=(\sin x)\cdot0+(\cos x)\cdot1=\cos x.
+\end{align*}
+Như vậy, ta đã chứng minh công thức đạo hàm của hàm sin:
+\[\frac{d}{dx}(\sin x)=\cos x.\tag{2}\]
+\ex{1} Tính đạo hàm của $y=x^2\sin x$.
+\sol Dùng quy tắc tích và công thức (2), ta có
+\begin{align*}
+\frac{dy}{dx}&=x^2\frac{d}{dx}(\sin x)+\sin x\frac{d}{dx}(x^2)\\
+&=x^2\cos x+2x\sin x.\qquad\square
+\end{align*}
+Hình 2 biểu diễn hàm trong Ví dụ 1 và đạo hàm của nó. Chú ý $y'=0$ mỗi khi đồ thị $y$ có tiếp tuyến nằm ngang.
+\fig[.47]{f02}{Hình 2. Hàm $y=x^2\sin x$ và đạo hàm $y'$.}
+Dùng phương pháp tương tự như trong chứng minh (2), có thể chứng minh (xem Bài tập 26) rằng
+\[\frac{d}{dx}(\cos x)=-\sin x.\tag{3}\]
+Cũng có thể lấy đạo hàm của hàm tang bằng định nghĩa, nhưng dùng quy tắc thương cùng (2), (3) thì đơn giản hơn:
+\begin{align*}
+\frac{d}{dx}(\tan x)&=\frac{d}{dx}\left(\frac{\sin x}{\cos x}\right)\\
+&=\frac{\cos x\dfrac{d}{dx}(\sin x)-\sin x\dfrac{d}{dx}(\cos x)}{\cos^2x}\\
+&=\frac{\cos x\cdot\cos x-\sin x(-\sin x)}{\cos^2x}\\
+&=\frac{\cos^2x+\sin^2x}{\cos^2x}=\frac1{\cos^2x}=\sec^2x,
+\end{align*}
+vì $\cos^2x+\sin^2x=1$. Do đó,
+\[\frac{d}{dx}(\tan x)=\sec^2x.\tag{4}\]
+Đạo hàm của các hàm lượng giác còn lại $\csc,\sec,\cot$ cũng được tìm dễ dàng bằng quy tắc thương (xem Bài tập 23–25). Tập hợp tất cả các công thức vào bảng sau. Cần nhớ rằng các công thức này chỉ đúng khi $x$ được đo bằng radian.
+\subsection*{Bảng đạo hàm của các hàm lượng giác}
+\[\frac{d}{dx}(\sin x)=\cos x,\qquad \frac{d}{dx}(\csc x)=-\csc x\cot x.\]
+\[\frac{d}{dx}(\cos x)=-\sin x,\qquad \frac{d}{dx}(\sec x)=\sec x\tan x.\]
+\[\frac{d}{dx}(\tan x)=\sec^2x,\qquad \frac{d}{dx}(\cot x)=-\csc^2x.\]
+Khi ghi nhớ bảng, nên chú ý các dấu trừ đi kèm đạo hàm của những hàm có tên tiếng Anh bắt đầu bằng \textit{co}: cosine, cosecant và cotangent.
+\ex{2} Tính đạo hàm của $\displaystyle f(x)=\frac{\sec x}{1+\tan x}$. Với những giá trị nào của $x$, đồ thị $f$ có tiếp tuyến nằm ngang?
+\sol Theo quy tắc thương,
+\begin{align*}
+f'(x)&=\frac{(1+\tan x)\dfrac{d}{dx}(\sec x)-\sec x\dfrac{d}{dx}(1+\tan x)}{(1+\tan x)^2}\\
+&=\frac{(1+\tan x)\sec x\tan x-\sec x\cdot\sec^2x}{(1+\tan x)^2}\\
+&=\frac{\sec x(\tan x+\tan^2x-\sec^2x)}{(1+\tan x)^2}\\
+&=\frac{\sec x(\tan x-1)}{(1+\tan x)^2},
+\end{align*}
+trong đó dùng $\sec^2x=\tan^2x+1$. Vì $\sec x$ không bao giờ bằng 0, nên $f'(x)=0$ khi $\tan x=1$, tức
+\[x=\frac\pi4+n\pi,\qquad n\in\mathbb Z\]
+(xem Hình 3).\hfill$\square$
+\fig[.47]{f03}{Hình 3. Các tiếp tuyến nằm ngang trong Ví dụ 2.}
+Các hàm lượng giác thường được dùng để mô hình hóa hiện tượng thực tế. Đặc biệt, các dao động, sóng, chuyển động đàn hồi và những đại lượng biến thiên tuần hoàn có thể được mô tả bằng hàm lượng giác. Ví dụ sau xét một trường hợp \textbf{dao động điều hòa đơn giản}.
+\ex{3} Một vật gắn vào đầu dưới của một lò xo thẳng đứng được kéo xuống dưới vị trí nghỉ 4 cm rồi thả ra tại thời điểm $t=0$ (Hình 4; chiều dương hướng xuống). Vị trí của vật tại thời điểm $t$ là
+\[s=f(t)=4\cos t.\]
+Tìm vận tốc và gia tốc tại thời điểm $t$, rồi dùng chúng để phân tích chuyển động của vật.
+\fig[.28]{f04}{Hình 4. Vật gắn với lò xo thẳng đứng; chiều dương hướng xuống.}
+\sol Vận tốc và gia tốc là
+\[v=\frac{ds}{dt}=\frac{d}{dt}(4\cos t)=4\frac{d}{dt}(\cos t)=-4\sin t,\]
+\[a=\frac{dv}{dt}=\frac{d}{dt}(-4\sin t)=-4\frac{d}{dt}(\sin t)=-4\cos t.\]
+Vật dao động từ điểm thấp nhất ($s=4\ \mathrm{cm}$) đến điểm cao nhất ($s=-4\ \mathrm{cm}$). Chu kỳ dao động bằng $2\pi$, là chu kỳ của $\cos t$.
+
+Tốc độ là $|v|=4|\sin t|$, lớn nhất khi $|\sin t|=1$, tức khi $\cos t=0$. Do đó, vật chuyển động nhanh nhất khi đi qua vị trí cân bằng ($s=0$). Tốc độ bằng 0 khi $\sin t=0$, tức tại điểm cao nhất và điểm thấp nhất.
+
+Gia tốc $a=-4\cos t=0$ khi $s=0$. Độ lớn gia tốc đạt cực đại tại điểm cao nhất và thấp nhất. Xem các đồ thị trong Hình 5.\hfill$\square$
+\fig[.51]{f05}{Hình 5. Các hàm vị trí $s$, vận tốc $v$ và gia tốc $a$.}
+\ex{4} Tìm đạo hàm cấp 27 của $\cos x$.
+\sol Những đạo hàm đầu tiên của $f(x)=\cos x$ là
+\[f'(x)=-\sin x,\qquad f''(x)=-\cos x,\]
+\[f'''(x)=\sin x,\qquad f^{(4)}(x)=\cos x,\qquad f^{(5)}(x)=-\sin x.\]
+Các đạo hàm liên tiếp lặp lại theo một chu kỳ có độ dài 4; đặc biệt, $f^{(n)}(x)=\cos x$ khi $n$ là bội của 4. Vì vậy,
+\[f^{(24)}(x)=\cos x.\]
+Lấy đạo hàm thêm ba lần, ta được
+\[f^{(27)}(x)=\sin x.\qquad\square\]
+\noindent\textit{Chiến lược giải toán:} Tìm một quy luật.
+\section*{Hai giới hạn lượng giác đặc biệt}
+Khi chứng minh công thức đạo hàm của sin, ta đã dùng hai giới hạn đặc biệt. Bây giờ ta chứng minh chúng.
+\[\lim_{\theta\to0}\frac{\sin\theta}{\theta}=1.\tag{5}\]
+\noindent\textit{Chứng minh.} Trước hết giả sử $0<\theta<\pi/2$. Hình 6(a) biểu diễn một hình quạt tròn tâm $O$, góc ở tâm $\theta$, bán kính 1. Kẻ $BC\perp OA$. Theo định nghĩa số đo radian, độ dài cung $AB$ bằng $\theta$. Đồng thời,
+\[|BC|=|OB|\sin\theta=\sin\theta.\]
+Từ hình vẽ, ta thấy
+\[|BC|<|AB|<\text{độ dài cung }AB.\]
+Do đó,
+\[\sin\theta<\theta,\qquad\text{nên}\qquad \frac{\sin\theta}{\theta}<1.\]
+\fig[.40]{f06}{Hình 6. (a) So sánh các đoạn thẳng và cung tròn. (b) Đường tròn và đa giác ngoại tiếp.}
+Gọi $E$ là giao điểm của hai tiếp tuyến tại $A,B$. Hình 6(b) cho thấy chu vi đường tròn nhỏ hơn chu vi đa giác ngoại tiếp, nên độ dài cung $AB$ nhỏ hơn $|AE|+|EB|$. Vì vậy,
+\begin{align*}
+\theta&=\text{độ dài cung }AB<|AE|+|EB|\\
+&<|AE|+|ED|=|AD|=|OA|\tan\theta=\tan\theta.
+\end{align*}
+Trong Phụ lục F, bất đẳng thức $\theta<\tan\theta$ được chứng minh trực tiếp từ định nghĩa độ dài cung, không dựa vào trực giác hình học như ở đây. Do đó,
+\[\theta<\frac{\sin\theta}{\cos\theta},\qquad\text{suy ra}\qquad \cos\theta<\frac{\sin\theta}{\theta}<1.\]
+Ta biết $\lim_{\theta\to0}1=1$ và $\lim_{\theta\to0}\cos\theta=1$. Theo định lý kẹp,
+\[\lim_{\theta\to0^+}\frac{\sin\theta}{\theta}=1\qquad(0<\theta<\pi/2).\]
+\begin{samepage}
+Hàm $(\sin\theta)/\theta$ là hàm chẵn nên giới hạn bên phải và bên trái bằng nhau. Vậy
+\[\lim_{\theta\to0}\frac{\sin\theta}{\theta}=1,\]
+chứng minh được (5).\hfill$\square$
+\end{samepage}
+
+Giới hạn đặc biệt thứ nhất liên quan đến sin; giới hạn sau liên quan đến côsin:
+\[\lim_{\theta\to0}\frac{\cos\theta-1}{\theta}=0.\tag{6}\]
+\noindent\textit{Chứng minh.} Nhân cả tử và mẫu với $\cos\theta+1$ để đưa hàm về dạng có thể dùng các giới hạn đã biết:
+\begin{align*}
+\lim_{\theta\to0}\frac{\cos\theta-1}{\theta}
+&=\lim_{\theta\to0}\left(\frac{\cos\theta-1}{\theta}\cdot\frac{\cos\theta+1}{\cos\theta+1}\right)\\
+&=\lim_{\theta\to0}\frac{\cos^2\theta-1}{\theta(\cos\theta+1)}\\
+&=\lim_{\theta\to0}\frac{-\sin^2\theta}{\theta(\cos\theta+1)}\\
+&=-\lim_{\theta\to0}\left(\frac{\sin\theta}{\theta}\cdot\frac{\sin\theta}{\cos\theta+1}\right)\\
+&=-\lim_{\theta\to0}\frac{\sin\theta}{\theta}\cdot\lim_{\theta\to0}\frac{\sin\theta}{\cos\theta+1}\\
+&=-1\cdot\left(\frac0{1+1}\right)=0,
+\end{align*}
+trong đó dùng (5).\hfill$\square$
+\ex{5} Tìm $\displaystyle\lim_{x\to0}\frac{\sin7x}{4x}$.
+\sol Để áp dụng (5), trước hết viết lại hàm bằng cách nhân rồi chia cho 7:
+\[\frac{\sin7x}{4x}=\frac74\left(\frac{\sin7x}{7x}\right).\]
+Chú ý $\sin7x\ne7\sin x$. Đặt $\theta=7x$ thì $\theta\to0$ khi $x\to0$. Theo (5),
+\begin{align*}
+\lim_{x\to0}\frac{\sin7x}{4x}&=\frac74\lim_{x\to0}\left(\frac{\sin7x}{7x}\right)\\
+&=\frac74\lim_{\theta\to0}\frac{\sin\theta}{\theta}=\frac74\cdot1=\frac74.\qquad\square
+\end{align*}
+\ex{6} Tính $\displaystyle\lim_{x\to0}x\cot x$.
+\sol Chia cả tử và mẫu cho $x$:
+\begin{align*}
+\lim_{x\to0}x\cot x&=\lim_{x\to0}\frac{x\cos x}{\sin x}\\
+&=\lim_{x\to0}\frac{\cos x}{\dfrac{\sin x}x}
+=\frac{\displaystyle\lim_{x\to0}\cos x}{\displaystyle\lim_{x\to0}\dfrac{\sin x}x}\\
+&=\frac{\cos0}1=1,
+\end{align*}
+nhờ tính liên tục của côsin và (5).\hfill$\square$
+\ex{7} Tìm $\displaystyle\lim_{\theta\to0}\frac{\cos\theta-1}{\sin\theta}$.
+\sol Để dùng (5), (6), chia cả tử và mẫu cho $\theta$:
+\begin{align*}
+\lim_{\theta\to0}\frac{\cos\theta-1}{\sin\theta}
+&=\lim_{\theta\to0}\frac{\dfrac{\cos\theta-1}{\theta}}{\dfrac{\sin\theta}{\theta}}\\
+&=\frac{\displaystyle\lim_{\theta\to0}\dfrac{\cos\theta-1}{\theta}}{\displaystyle\lim_{\theta\to0}\dfrac{\sin\theta}{\theta}}=\frac01=0.\qquad\square
+\end{align*}
+\section*{3.3. Bài tập}
+\group{1–22. Tính đạo hàm.}
+\bt{1} $f(x)=3\sin x-2\cos x$.
+\bt{2} $f(x)=\tan x-4\sin x$.
+\bt{3} $y=x^2+\cot x$.
+\bt{4} $y=2\sec x-\csc x$.
+\bt{5} $h(\theta)=\theta^2\sin\theta$.
+\bt{6} $g(x)=3x+x^2\cos x$.
+\bt{7} $y=\sec\theta\tan\theta$.
+\bt{8} $y=\sin\theta\cos\theta$.
+\bt{9} $f(\theta)=(\theta-\cos\theta)\sin\theta$.
+\bt{10} $g(\theta)=e^\theta(\tan\theta-\theta)$.
+\bt{11} $H(t)=\cos^2t$.
+\bt{12} $f(x)=e^x\sin x+\cos x$.
+\bt{13} $f(\theta)=\dfrac{\sin\theta}{1+\cos\theta}$.
+\bt{14} $y=\dfrac{\cos x}{1-\sin x}$.
+\bt{15} $y=\dfrac{x}{2-\tan x}$.
+\bt{16} $f(t)=\dfrac{\cot t}{e^t}$.
+\bt{17} $f(w)=\dfrac{1+\sec w}{1-\sec w}$.
+\bt{18} $y=\dfrac{\sin t}{1+\tan t}$.
+\bt{19} $y=\dfrac{t\sin t}{1+t}$.
+\bt{20} $g(z)=\dfrac{z}{\sec z+\tan z}$.
+\bt{21} $f(\theta)=\theta\cos\theta\sin\theta$.
+\bt{22} $f(t)=te^t\cot t$.
+\bt{23} Chứng tỏ $\displaystyle\frac{d}{dx}(\csc x)=-\csc x\cot x$.
+\bt{24} Chứng tỏ $\displaystyle\frac{d}{dx}(\sec x)=\sec x\tan x$.
+\bt{25} Chứng tỏ $\displaystyle\frac{d}{dx}(\cot x)=-\csc^2x$.
+\bt{26} Dùng định nghĩa đạo hàm chứng minh rằng nếu $f(x)=\cos x$ thì $f'(x)=-\sin x$.
+\group{27–30. Tìm phương trình tiếp tuyến của đường cong tại điểm đã cho.}
+\bt{27} $y=\sin x+\cos x$, \quad $(0,1)$.
+\bt{28} $y=x+\sin x$, \quad $(\pi,\pi)$.
+\bt{29} $y=e^x\cos x+\sin x$, \quad $(0,1)$.
+\bt{30} $y=\dfrac{1+\sin x}{\cos x}$, \quad $(\pi,-1)$.
+\bt{31} (a) Tìm phương trình tiếp tuyến của đường cong $y=2x\sin x$ tại $(\pi/2,\pi)$.
+
+(b) Minh họa (a) bằng cách vẽ đường cong và tiếp tuyến trên cùng một màn hình.
+\bt{32} (a) Tìm phương trình tiếp tuyến của đường cong $y=3x+6\cos x$ tại $(\pi/3,\pi+3)$.
+
+(b) Minh họa (a) bằng cách vẽ đường cong và tiếp tuyến trên cùng một màn hình.
+\bt{33} (a) Nếu $f(x)=\sec x-x$, tìm $f'(x)$.
+
+(b) Kiểm tra tính hợp lý của kết quả ở (a) bằng cách vẽ cả $f$ và $f'$ với $|x|<\pi/2$.
+\bt{34} (a) Nếu $f(x)=e^x\cos x$, tìm $f'(x)$ và $f''(x)$.
+
+(b) Kiểm tra tính hợp lý của các kết quả ở (a) bằng cách vẽ $f,f',f''$.
+\bt{35} Nếu $g(\theta)=(\sin\theta)/\theta$, tìm $g'(\theta)$ và $g''(\theta)$.
+\bt{36} Nếu $f(t)=\sec t$, tìm $f''(\pi/4)$.
+\bt{37} (a) Dùng quy tắc thương để tính đạo hàm của hàm
+\[f(x)=\frac{\tan x-1}{\sec x}.\]
+(b) Rút gọn biểu thức $f(x)$ bằng cách viết theo $\sin x,\cos x$, rồi tìm $f'(x)$.
+
+(c) Chứng tỏ các kết quả ở (a), (b) tương đương.
+\bt{38} Giả sử $f(\pi/3)=4$, $f'(\pi/3)=-2$ và đặt $g(x)=f(x)\sin x$, $h(x)=(\cos x)/f(x)$. Tìm:
+
+(a) $g'(\pi/3)$; \qquad (b) $h'(\pi/3)$.
+\group{39–40. Với những giá trị nào của $x$, đồ thị $f$ có tiếp tuyến nằm ngang?}
+\bt{39} $f(x)=x+2\sin x$.
+\bt{40} $f(x)=e^x\cos x$.
+\bt{41} Một vật gắn với lò xo dao động theo phương ngang trên một mặt phẳng nhẵn, nằm ngang (xem hình). Phương trình chuyển động là $x(t)=8\sin t$, trong đó $t$ tính bằng giây, $x$ tính bằng xentimét.
+
+(a) Tìm vận tốc và gia tốc tại thời điểm $t$.
+
+(b) Tìm vị trí, vận tốc và gia tốc của vật tại $t=2\pi/3$. Lúc đó vật chuyển động theo chiều nào?
+\fig[.60]{e41}{Hình dùng cho Bài tập 41. \textit{Equilibrium position}: vị trí cân bằng.}
+\bt{42} Một dây đàn hồi được treo vào móc, một vật được treo ở đầu dưới của dây. Khi kéo vật xuống rồi thả ra, nó dao động theo phương thẳng đứng. Phương trình chuyển động là $s=2\cos t+3\sin t$, $t\ge0$, trong đó $s$ tính bằng xentimét và $t$ tính bằng giây. Chọn chiều dương hướng xuống.
+
+(a) Tìm vận tốc và gia tốc tại thời điểm $t$.
+
+(b) Vẽ các hàm vận tốc và gia tốc.
+
+(c) Khi nào vật đi qua vị trí cân bằng lần đầu tiên?
+
+(d) Vật đi xa vị trí cân bằng nhất một khoảng bao nhiêu?
+
+(e) Khi nào tốc độ lớn nhất?
+\bt{43} Một chiếc thang dài 10 ft tựa vào tường thẳng đứng. Gọi $\theta$ là góc giữa đầu trên của thang với tường, $x$ là khoảng cách từ chân thang đến tường. Nếu chân thang trượt ra xa tường, $x$ thay đổi theo $\theta$ với tốc độ bao nhiêu khi $\theta=\pi/3$?
+\bt{44} Một vật có trọng lượng $W$ được kéo trên mặt phẳng ngang bởi lực tác dụng dọc theo một sợi dây gắn với vật. Nếu dây tạo với mặt phẳng góc $\theta$ thì độ lớn lực là
+\[F=\frac{\mu W}{\mu\sin\theta+\cos\theta},\]
+trong đó $\mu$ là hằng số gọi là hệ số ma sát.
+
+(a) Tìm tốc độ biến thiên của $F$ theo $\theta$.
+
+(b) Khi nào tốc độ biến thiên này bằng 0?
+
+(c) Nếu $W=50\ \mathrm{lb}$ và $\mu=0.6$, vẽ đồ thị $F$ theo $\theta$, rồi dùng đồ thị xác định giá trị $\theta$ sao cho $dF/d\theta=0$. Giá trị này có phù hợp với kết quả ở (b) không?
+\group{45–60. Tìm giới hạn.}
+\bt{45} $\displaystyle\lim_{x\to0}\frac{\sin5x}{3x}$.
+\bt{46} $\displaystyle\lim_{x\to0}\frac{\sin x}{\sin\pi x}$.
+\bt{47} $\displaystyle\lim_{t\to0}\frac{\sin3t}{\sin t}$.
+\bt{48} $\displaystyle\lim_{x\to0}\frac{\sin^2 3x}{x}$.
+\bt{49} $\displaystyle\lim_{x\to0}\frac{\sin x-\sin x\cos x}{x^2}$.
+\bt{50} $\displaystyle\lim_{x\to0}\frac{1-\sec x}{2x}$.
+\bt{51} $\displaystyle\lim_{x\to0}\frac{\tan2x}{x}$.
+\bt{52} $\displaystyle\lim_{\theta\to0}\frac{\sin\theta}{\tan7\theta}$.
+\bt{53} $\displaystyle\lim_{x\to0}\frac{\sin3x}{5x^3-4x}$.
+\bt{54} $\displaystyle\lim_{x\to0}\frac{\sin3x\sin5x}{x^2}$.
+\bt{55} $\displaystyle\lim_{\theta\to0}\frac{\sin\theta}{\theta+\tan\theta}$.
+\bt{56} $\displaystyle\lim_{x\to0}\csc x\sin(\sin x)$.
+\bt{57} $\displaystyle\lim_{\theta\to0}\frac{\cos\theta-1}{2\theta^2}$.
+\bt{58} $\displaystyle\lim_{x\to0}\frac{\sin(x^2)}x$.
+\bt{59} $\displaystyle\lim_{x\to\pi/4}\frac{1-\tan x}{\sin x-\cos x}$.
+\bt{60} $\displaystyle\lim_{x\to1}\frac{\sin(x-1)}{x^2+x-2}$.
+\group{61–62. Tìm đạo hàm được yêu cầu bằng cách tính vài đạo hàm đầu tiên rồi nhận xét quy luật.}
+\bt{61} $\displaystyle\frac{d^{99}}{dx^{99}}(\sin x)$.
+\bt{62} $\displaystyle\frac{d^{35}}{dx^{35}}(x\sin x)$.
+\bt{63} Tìm các hằng số $A,B$ sao cho hàm $y=A\sin x+B\cos x$ thỏa mãn phương trình vi phân $y''+y'-2y=\sin x$.
+\bt{64} (a) Tính $\displaystyle\lim_{x\to\infty}x\sin\frac1x$.
+
+(b) Tính $\displaystyle\lim_{x\to0}x\sin\frac1x$.
+
+(c) Minh họa (a), (b) bằng cách vẽ $y=x\sin(1/x)$.
+\bt{65} Lấy đạo hàm mỗi đồng nhất thức lượng giác để thu được một đồng nhất thức mới, hoặc một đồng nhất thức quen thuộc:
+
+(a) $\displaystyle\tan x=\frac{\sin x}{\cos x}$; \qquad (b) $\displaystyle\sec x=\frac1{\cos x}$;
+
+(c) $\displaystyle\sin x+\cos x=\frac{1+\cot x}{\csc x}$.
+\bt{66} Một nửa hình tròn có đường kính $PQ$ được đặt trên tam giác cân $PQR$, tạo thành một miền có dạng hình kem ốc quế hai chiều như hình vẽ. Nếu $A(\theta)$ là diện tích nửa hình tròn và $B(\theta)$ là diện tích tam giác, tìm
+\[\lim_{\theta\to0^+}\frac{A(\theta)}{B(\theta)}.\]
+\fig[.37]{e66}{Hình dùng cho Bài tập 66. Hai cạnh bên dài 10 cm.}
+\bt{67} Hình vẽ biểu diễn một cung tròn độ dài $s$ và dây cung độ dài $d$, cùng chắn góc ở tâm $\theta$. Tìm
+\[\lim_{\theta\to0^+}\frac sd.\]
+\fig[.38]{e67}{Hình dùng cho Bài tập 67.}
+\bt{68} Cho $\displaystyle f(x)=\frac{x}{\sqrt{1-\cos2x}}$.
+
+(a) Vẽ đồ thị $f$. Tại 0, dường như hàm có loại gián đoạn nào?
+
+(b) Tính giới hạn bên trái và bên phải của $f$ tại 0. Các giá trị này có xác nhận kết quả ở (a) không?
+\section*{Chú thích biên tập và thuật ngữ}
+\begin{enumerate}[leftmargin=*]
+\item Giữ số công thức (1)–(6), Ví dụ 1–7, Hình 1–6 và Bài tập 1–68; Hình 6 gồm hai phần (a), (b). Ba hình bài tập được giữ nguyên. Không bổ sung lời giải bài tập.
+\item Góc và biến trong các công thức đạo hàm, giới hạn lượng giác được đo bằng radian. Ký hiệu $\sec x=1/\cos x$, $\csc x=1/\sin x$ được giữ như bản gốc; mỗi công thức chỉ được áp dụng trên miền xác định tương ứng.
+\item Trong Ví dụ 3, vận tốc là $v$, còn tốc độ là $|v|$; chiều dương hướng xuống. Vị trí cân bằng tương ứng $s=0$. Các đơn vị và quy ước chiều của bài tập được giữ nguyên.
+\item Ký hiệu $\sin^2 3x$ trong Bài tập 48 có nghĩa là $(\sin(3x))^2$; ở Bài tập 58, $\sin(x^2)$ có đối số $x^2$. Hai giới hạn ở Bài tập 66–67 đều là giới hạn một phía $\theta\to0^+$.
+\end{enumerate}
+\begin{center}\begin{tabular}{ll}\toprule
+Tiếng Anh&Tiếng Việt\\\midrule
+simple harmonic motion&dao động điều hòa đơn giản\\
+equilibrium position&vị trí cân bằng\\
+central angle&góc ở tâm\\
+circular sector&hình quạt tròn\\
+circumscribed polygon&đa giác ngoại tiếp\\
+coefficient of friction&hệ số ma sát\\
+trigonometric identity&đồng nhất thức lượng giác\\\bottomrule
+\end{tabular}\end{center}
+\noindent\textbf{Phần tiếp theo:} §3.4 — Quy tắc dây chuyền.
+\end{document}
