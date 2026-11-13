@@ -1640,5 +1640,65 @@
     "file": "stewart-3-6-4814da1a/f03.png",
     "mime": "image/png",
     "sha256": "84c449f5e0d62d97cec6e84d13afc883f5ee8d2d862dda619e58a524eea5b446"
+  },
+  "stewart-3-7-e6c44146/e07.png": {
+    "file": "stewart-3-7-e6c44146/e07.png",
+    "mime": "image/png",
+    "sha256": "b3a2aca689ad2410a380186dd722082cf63511d8143133ef2911d8070de0721a"
+  },
+  "stewart-3-7-e6c44146/f02.png": {
+    "file": "stewart-3-7-e6c44146/f02.png",
+    "mime": "image/png",
+    "sha256": "dcf58eda57cbda60d0f3127062a61c155057f1350a2e8cbc9df75c0278bb3053"
+  },
+  "stewart-3-7-e6c44146/e05.png": {
+    "file": "stewart-3-7-e6c44146/e05.png",
+    "mime": "image/png",
+    "sha256": "546bb98c50cc537cfca62a2475cdc4d4388f99412d7de7028022c5391e910b27"
+  },
+  "stewart-3-7-e6c44146/f03.png": {
+    "file": "stewart-3-7-e6c44146/f03.png",
+    "mime": "image/png",
+    "sha256": "eeba36599be7d09359050181d67c51be83e56a3616025e836f9178d926ce9e27"
+  },
+  "stewart-3-7-e6c44146/f07.png": {
+    "file": "stewart-3-7-e6c44146/f07.png",
+    "mime": "image/png",
+    "sha256": "eb20e61026d6e0ff3feb0f9445c447f65ab4582c4046ebfb41faabf3cf86de3d"
+  },
+  "stewart-3-7-e6c44146/f01.png": {
+    "file": "stewart-3-7-e6c44146/f01.png",
+    "mime": "image/png",
+    "sha256": "7bf2a0fa9bfc93243a72648dd1c53ddb129d402133d353707ec3b22f0524a431"
+  },
+  "stewart-3-7-e6c44146/ecoli.png": {
+    "file": "stewart-3-7-e6c44146/ecoli.png",
+    "mime": "image/png",
+    "sha256": "40390368b496e4467127bf924646bcdcea491d7240c881874cd36f5ac16916c3"
+  },
+  "stewart-3-7-e6c44146/e06.png": {
+    "file": "stewart-3-7-e6c44146/e06.png",
+    "mime": "image/png",
+    "sha256": "4d4c5e7a21d22e247414406657955b29db1400a395ee0103a23e70981c25d33d"
+  },
+  "stewart-3-7-e6c44146/f04.png": {
+    "file": "stewart-3-7-e6c44146/f04.png",
+    "mime": "image/png",
+    "sha256": "84cb177004c46f32ef32c401019c7b2d540f2aa96c938c1f9990557ce8a15d80"
+  },
+  "stewart-3-7-e6c44146/f06.png": {
+    "file": "stewart-3-7-e6c44146/f06.png",
+    "mime": "image/png",
+    "sha256": "2e005c94f20d21c47a4220f0b0dd0c061258dcb529d52793d28632ebf969f2cb"
+  },
+  "stewart-3-7-e6c44146/f08.png": {
+    "file": "stewart-3-7-e6c44146/f08.png",
+    "mime": "image/png",
+    "sha256": "a2b0d9dd563d89adaafd625aaf11bdf55426062d3df06adfc7034a6ee711a137"
+  },
+  "stewart-3-7-e6c44146/f05.png": {
+    "file": "stewart-3-7-e6c44146/f05.png",
+    "mime": "image/png",
+    "sha256": "9b072704e19915c847b40a33d846d9328b1b753292021351c6680a65e5a35fe7"
   }
 }
