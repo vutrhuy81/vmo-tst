@@ -629,4 +629,28 @@ const blockedBookImages=window.document.createElement('div');
 await window.renderBookContent(blockedBookImages,{contentFormat:'html-latex',content:'<img src="https://evil.test/api/data?resource=book_asset&asset=stewart-3-2-67883edf/f01.png"><img src="/api/data?resource=book_asset&asset=stewart-3-2-00000000/f01.png"><img src="/api/data?resource=book_asset&asset=stewart-3-2-67883edf/../secret.png">'},false);
 assert.equal(blockedBookImages.querySelectorAll('img').length,0,'External, unapproved and traversal image paths stay blocked');
 
+
+
+// Section 4.1 keeps graph-only questions and all source/project figures.
+const child41=detail.sections.find(s=>s.title.startsWith('4.1'));
+const section41=await readBooks(db,student,{bookId:book.id,sectionId:child41.id});
+assert.equal(section41.exerciseHeading,'4.1. Bài tập');
+assert.deepEqual(section41.exercises.map(e=>e.questionNumber),Array.from({length:82},(_,i)=>i+1));
+assert.ok(section41.exercises.every(e=>e.allowSubmission&&e.allowAiEvaluation&&e.contentKey&&e.setKey));
+for(const n of [3,4,5,6])assert.ok(section41.exercises[n-1].content.includes('/ex0'+n+'.png'));
+for(const n of [51,66])assert.ok(section41.exercises[n-1].content.includes('trên đoạn đã cho'));
+assert.ok(section41.exercises[77].content.includes('<table>'));
+assert.ok(section41.section.content.includes('cầu vồng'));
+assert.equal(section41.section.sourceInfo.exampleCount,10);
+const doc41=new JSDOM(section41.section.content);
+assert.equal(doc41.window.document.querySelectorAll('img').length,26);
+for(const image of doc41.window.document.querySelectorAll('img')){
+ const asset=new URL(image.src,'https://example.test').searchParams.get('asset');
+ assert.equal((await readBookAsset(student,asset)).bytes[0],137);
+ await assert.rejects(()=>readBookAsset(other,asset),e=>e.status===403);
+}
+doc41.window.close();
+const rendered41=window.document.createElement('div');await window.renderBookContent(rendered41,section41.section,false);
+assert.equal(rendered41.querySelectorAll('img').length,26,'All Chapter 4 figures survive the frontend sanitizer');
+assert.deepEqual((await readBooks(db,student,{bookId:book.id,sectionId:child41.id})).exercises.map(e=>e.contentKey),section41.exercises.map(e=>e.contentKey));
 window.close();console.log('Books: seeded TOC, admin CRUD/CAS, scopes, subtree delete/restore, lazy bodies and UI actions OK');
