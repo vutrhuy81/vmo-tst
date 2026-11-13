@@ -1445,5 +1445,60 @@
     "file": "stewart-2-plus-bd302d07/e10.png",
     "mime": "image/png",
     "sha256": "4b028603da50e515fcc0410eb12dd22c1a28d940d4eaed7f6f86e3699881b308"
+  },
+  "stewart-3-9-74c9b2c0/ex20.png": {
+    "file": "stewart-3-9-74c9b2c0/ex20.png",
+    "mime": "image/png",
+    "sha256": "21f3a9285150a89d580c88252813fc5b6c2ca23e3c92403d88af1820c9ce9763"
+  },
+  "stewart-3-9-74c9b2c0/ex22.png": {
+    "file": "stewart-3-9-74c9b2c0/ex22.png",
+    "mime": "image/png",
+    "sha256": "08ccf72e6c87a4b166c54b5970f90624fde2832036fabcf8dc8831bc688b20eb"
+  },
+  "stewart-3-9-74c9b2c0/ex29.png": {
+    "file": "stewart-3-9-74c9b2c0/ex29.png",
+    "mime": "image/png",
+    "sha256": "a49aae1fa077f118b103769567b5bd3f5840884b08c2bb3ba86d074de68f477d"
+  },
+  "stewart-3-9-74c9b2c0/ex30.png": {
+    "file": "stewart-3-9-74c9b2c0/ex30.png",
+    "mime": "image/png",
+    "sha256": "2c3a44512ab769b718044d0105c81b37c8c7ecf03cf4aaffd7c49bfce4be1641"
+  },
+  "stewart-3-9-74c9b2c0/ex39.png": {
+    "file": "stewart-3-9-74c9b2c0/ex39.png",
+    "mime": "image/png",
+    "sha256": "27c89bd70588c0869783f7463e78374e6abfb8e63620319ee351f41c769b7dad"
+  },
+  "stewart-3-9-74c9b2c0/ex44.png": {
+    "file": "stewart-3-9-74c9b2c0/ex44.png",
+    "mime": "image/png",
+    "sha256": "678353e8503b8468686abc4560ddb82b84804ddd6029186a1245cbce16d23ac7"
+  },
+  "stewart-3-9-74c9b2c0/fig1.png": {
+    "file": "stewart-3-9-74c9b2c0/fig1.png",
+    "mime": "image/png",
+    "sha256": "4be7f988c8927f1c8c2cf8f950cf8b3b1610866f3e0b38c30ab6cfcdc719a783"
+  },
+  "stewart-3-9-74c9b2c0/fig2.png": {
+    "file": "stewart-3-9-74c9b2c0/fig2.png",
+    "mime": "image/png",
+    "sha256": "ceaf3f872e5c9b26f65084711f3b0fe3f2630c7c450b3c5de26f0ae8f3fbf63c"
+  },
+  "stewart-3-9-74c9b2c0/fig3.png": {
+    "file": "stewart-3-9-74c9b2c0/fig3.png",
+    "mime": "image/png",
+    "sha256": "c267610e76e2cb386fc16c4813f16b0234a34733ad25c2b272e53b7068fe5fc3"
+  },
+  "stewart-3-9-74c9b2c0/fig4.png": {
+    "file": "stewart-3-9-74c9b2c0/fig4.png",
+    "mime": "image/png",
+    "sha256": "c9d01f31f6edae8a65b154511e5137890392d2ba124ba63e8976de270c75ff71"
+  },
+  "stewart-3-9-74c9b2c0/fig5.png": {
+    "file": "stewart-3-9-74c9b2c0/fig5.png",
+    "mime": "image/png",
+    "sha256": "f12cb9f4df2c33d14083bcd4f39c81e77d46f151e9235608dab55dc219e74051"
   }
 }

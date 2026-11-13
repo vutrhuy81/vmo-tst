@@ -1,0 +1,299 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage{fontspec}\setmainfont{Latin Modern Roman}\setsansfont{DejaVu Sans}
+\usepackage{amsmath,amssymb,graphicx,geometry,enumitem,needspace,longtable,booktabs,fancyhdr,hyperref}
+\geometry{left=28mm,right=23mm,top=24mm,bottom=24mm}
+\hypersetup{unicode=true,colorlinks=true,linkcolor=black,urlcolor=blue,pdftitle={Giải tích Chương 3 Mục 3.9 Các tốc độ biến thiên liên hệ}}
+\setlength{\parindent}{1.2em}\setlength{\parskip}{4pt}\setlength{\headheight}{16pt}
+\pagestyle{fancy}\fancyhf{}\fancyhead[L]{\small Chương 3. Các quy tắc tính đạo hàm}\fancyhead[R]{\small §3.9}\fancyfoot[C]{\thepage}
+\newcommand{\fig}[3][.68]{\begin{center}\begin{minipage}{\linewidth}\centering\includegraphics[width=#1\linewidth]{assets/#2.png}\\{\small #3}\end{minipage}\end{center}}
+\newcommand{\ex}[1]{\par\medskip\noindent\textbf{Ví dụ #1.}\ }
+\newcommand{\sol}{\par\nopagebreak[4]\noindent\textit{Lời giải.}\ }
+\newcommand{\bt}[1]{\par\smallskip\Needspace{5\baselineskip}\noindent\textbf{#1.}\ }
+\newcommand{\group}[1]{\par\medskip\noindent\textbf{#1}\par\nopagebreak[4]}
+\newcommand{\gint}[1]{\left[\!\left[#1\right]\!\right]}
+\allowdisplaybreaks[2]
+\begin{document}
+\begin{center}{\Large\bfseries 3.9 Các tốc độ biến thiên liên hệ}\end{center}
+\noindent\textit{Stewart–Clegg–Watson, Giải tích: Các hàm siêu việt sớm, ấn bản 9; trang in 247–254.}
+
+Nếu bơm không khí vào một quả bóng, cả thể tích lẫn bán kính của bóng đều tăng, và các tốc độ tăng này có liên hệ với nhau. Tuy nhiên, đo trực tiếp tốc độ tăng thể tích dễ hơn nhiều so với đo tốc độ tăng bán kính.
+
+Trong một bài toán về \textbf{các tốc độ biến thiên liên hệ}, ta tính tốc độ biến thiên của một đại lượng từ tốc độ biến thiên của đại lượng khác (có thể dễ đo hơn). Cách làm là tìm một phương trình liên hệ hai đại lượng, rồi dùng quy tắc hàm hợp để lấy đạo hàm hai vế theo thời gian.
+
+\ex{1} Không khí được bơm vào một quả bóng hình cầu sao cho thể tích tăng với tốc độ $100\,\mathrm{cm^3/s}$. Bán kính của bóng tăng nhanh bao nhiêu khi đường kính bằng $50\,\mathrm{cm}$?
+\sol Trước hết, xác định hai điều:
+\begin{itemize}[nosep]
+\item Thông tin đã cho: tốc độ tăng thể tích không khí là $100\,\mathrm{cm^3/s}$.
+\item Đại lượng cần tìm: tốc độ tăng bán kính khi đường kính bằng $50\,\mathrm{cm}$.
+\end{itemize}
+Để diễn đạt các đại lượng này bằng toán học, ta đặt $V$ là thể tích quả bóng và $r$ là bán kính của nó.
+
+\noindent\textit{Giải quyết vấn đề (PS).} Theo các Nguyên tắc giải quyết vấn đề trình bày sau Chương 1, bước đầu tiên là hiểu bài toán: đọc kỹ đề, xác định dữ kiện và ẩn số, đồng thời đưa vào các ký hiệu thích hợp.
+
+Điều cốt yếu cần nhớ là \textit{tốc độ biến thiên chính là đạo hàm}. Trong bài này, thể tích và bán kính đều là các hàm của thời gian $t$. Tốc độ tăng thể tích theo thời gian là đạo hàm $dV/dt$, còn tốc độ tăng bán kính là $dr/dt$. Vì vậy, có thể phát biểu lại như sau:
+\[
+\text{Đã cho: }\frac{dV}{dt}=100\,\mathrm{cm^3/s};\qquad
+\text{Cần tìm: }\frac{dr}{dt}\text{ khi }r=25\,\mathrm{cm}.
+\]
+Để liên hệ $dV/dt$ và $dr/dt$, trước hết liên hệ $V$ và $r$ bằng công thức thể tích hình cầu:
+\[V=\frac43\pi r^3.\]
+\noindent\textit{PS.} Giai đoạn thứ hai là lập kế hoạch liên kết dữ kiện và ẩn số.
+
+Để sử dụng dữ kiện, lấy đạo hàm hai vế theo $t$. Ở vế phải, cần dùng quy tắc hàm hợp:
+\[\frac{dV}{dt}=\frac{dV}{dr}\frac{dr}{dt}=4\pi r^2\frac{dr}{dt}.\]
+Giải theo đại lượng cần tìm:
+\[\frac{dr}{dt}=\frac{1}{4\pi r^2}\frac{dV}{dt}.\]
+Thay $r=25$ và $dV/dt=100$ vào phương trình này, thu được
+\[\frac{dr}{dt}=\frac{1}{4\pi(25)^2}\,100=\frac{1}{25\pi}.\]
+Khi đường kính bằng $50\,\mathrm{cm}$, bán kính tăng với tốc độ $1/(25\pi)\approx0.0127\,\mathrm{cm/s}$.
+
+\noindent\textit{Lưu ý.} Mặc dù $dV/dt$ không đổi, $dr/dt$ không phải là hằng số.
+
+\ex{2} Một chiếc thang dài $10\,\mathrm{ft}$ tựa vào một bức tường thẳng đứng. Chân thang trượt ra xa tường với tốc độ $4\,\mathrm{ft/s}$. Đầu thang trượt xuống tường nhanh bao nhiêu khi chân thang cách tường $6\,\mathrm{ft}$?
+\sol Trước hết vẽ sơ đồ và ghi ký hiệu như Hình 1. Gọi $x$ (ft) là khoảng cách từ chân thang đến tường và $y$ (ft) là khoảng cách từ đầu thang đến mặt đất. Cả $x$ lẫn $y$ đều là các hàm của thời gian $t$, tính bằng giây.
+\fig[.30]{fig1}{Hình 1. Các kích thước của hệ thang–tường.}
+Đã cho $dx/dt=4\,\mathrm{ft/s}$, cần tìm $dy/dt$ khi $x=6\,\mathrm{ft}$ (Hình 2). Theo định lý Pythagore,
+\[x^2+y^2=100.\]
+Lấy đạo hàm hai vế theo $t$, sử dụng quy tắc hàm hợp:
+\[2x\frac{dx}{dt}+2y\frac{dy}{dt}=0.\]
+Giải phương trình này theo tốc độ cần tìm:
+\[\frac{dy}{dt}=-\frac{x}{y}\frac{dx}{dt}.\]
+\fig[.32]{fig2}{Hình 2. Tốc độ đã cho và tốc độ cần tìm.}
+Khi $x=6$, định lý Pythagore cho $y=8$. Thay các giá trị này cùng $dx/dt=4$:
+\[\frac{dy}{dt}=-\frac68(4)=-3\,\mathrm{ft/s}.\]
+Đạo hàm $dy/dt$ âm có nghĩa khoảng cách từ đầu thang đến mặt đất đang giảm với tốc độ $3\,\mathrm{ft/s}$. Nói cách khác, đầu thang trượt xuống tường với tốc độ $3\,\mathrm{ft/s}$.
+
+\Needspace{20\baselineskip}
+\group{Chiến lược giải quyết vấn đề}
+Có thể nhắc lại và điều chỉnh một số nguyên tắc giải quyết vấn đề cho các bài toán tốc độ biến thiên liên hệ, dựa trên kinh nghiệm từ Ví dụ 1 và 2:
+\begin{enumerate}[leftmargin=*,itemsep=2pt]
+\item Đọc kỹ đề bài.
+\item Vẽ sơ đồ nếu có thể.
+\item Đưa vào ký hiệu. Gán ký hiệu cho tất cả các đại lượng là hàm của thời gian.
+\item Diễn đạt dữ kiện và tốc độ cần tìm dưới dạng đạo hàm.
+\item Viết phương trình liên hệ các đại lượng trong bài. Nếu cần, dùng hình học để biểu diễn và thế nhằm khử một biến (xem Ví dụ 3 dưới đây).
+\item Dùng quy tắc hàm hợp để lấy đạo hàm hai vế của phương trình theo $t$.
+\item Thay dữ kiện vào phương trình vừa thu được và giải theo tốc độ chưa biết.
+\end{enumerate}
+Xem thêm các Nguyên tắc giải quyết vấn đề sau Chương 1.
+
+\noindent\textit{PS — Nhìn lại.} Ta đã học được gì từ Ví dụ 1 và 2 để có thể giải các bài toán tiếp theo?
+
+\noindent\textbf{Cảnh báo.} Một lỗi thường gặp là thay các giá trị số đã cho của những đại lượng biến thiên theo thời gian quá sớm. Chỉ được thực hiện việc này \textit{sau khi lấy đạo hàm} (Bước 7 theo sau Bước 6). Chẳng hạn, trong Ví dụ 1, ta giữ $r$ ở dạng tổng quát cho đến bước cuối cùng mới thay $r=25$. Nếu thay $r=25$ sớm hơn, ta sẽ thu được $dV/dt=0$, rõ ràng là sai.
+
+Các ví dụ sau tiếp tục minh họa chiến lược này.
+
+\ex{3} Một bể nước có dạng hình nón tròn xoay lật ngược, bán kính đáy $2\,\mathrm{m}$ và chiều cao $4\,\mathrm{m}$. Nước được bơm vào bể với lưu lượng $2\,\mathrm{m^3/min}$. Tìm tốc độ dâng của mực nước khi độ sâu nước bằng $3\,\mathrm{m}$.
+\sol Phác họa hình nón và ghi ký hiệu như Hình 3. Gọi $V$, $r$ và $h$ lần lượt là thể tích nước, bán kính mặt nước và chiều cao cột nước tại thời điểm $t$, với $t$ tính bằng phút.
+\fig[.30]{fig3}{Hình 3. Bể hình nón và phần nước trong bể.}
+Đã cho $dV/dt=2\,\mathrm{m^3/min}$, cần tìm $dh/dt$ khi $h=3\,\mathrm{m}$. Các đại lượng $V$ và $h$ liên hệ qua phương trình
+\[V=\frac13\pi r^2h,\]
+nhưng sẽ thuận tiện hơn nếu biểu diễn $V$ chỉ theo $h$. Để khử $r$, dùng các tam giác đồng dạng trong Hình 3:
+\[\frac rh=\frac24,\qquad r=\frac h2.\]
+Khi đó,
+\[V=\frac13\pi\left(\frac h2\right)^2h=\frac{\pi}{12}h^3.\]
+Bây giờ lấy đạo hàm hai vế theo $t$:
+\[\frac{dV}{dt}=\frac\pi4h^2\frac{dh}{dt},\qquad
+\frac{dh}{dt}=\frac{4}{\pi h^2}\frac{dV}{dt}.\]
+Thay $h=3\,\mathrm{m}$ và $dV/dt=2\,\mathrm{m^3/min}$:
+\[\frac{dh}{dt}=\frac{4}{\pi(3)^2}\cdot2=\frac{8}{9\pi}.\]
+Mực nước dâng với tốc độ $8/(9\pi)\approx0.28\,\mathrm{m/min}$.
+
+\ex{4} Ô tô A đi về phía tây với tốc độ $50\,\mathrm{mi/h}$, còn ô tô B đi về phía bắc với tốc độ $60\,\mathrm{mi/h}$. Cả hai đều hướng tới giao điểm của hai con đường. Hai xe tiến lại gần nhau nhanh bao nhiêu khi A và B lần lượt cách giao điểm $0.3\,\mathrm{mi}$ và $0.4\,\mathrm{mi}$?
+\sol Vẽ Hình 4, trong đó $C$ là giao điểm hai đường. Tại thời điểm $t$, gọi $x$ là khoảng cách từ A đến $C$, $y$ là khoảng cách từ B đến $C$, và $z$ là khoảng cách giữa hai xe; $x,y,z$ tính bằng dặm.
+\fig[.34]{fig4}{Hình 4. Vị trí hai xe đối với giao điểm $C$.}
+Đã cho $dx/dt=-50\,\mathrm{mi/h}$ và $dy/dt=-60\,\mathrm{mi/h}$. Các đạo hàm âm vì $x$ và $y$ giảm. Cần tìm $dz/dt$. Theo định lý Pythagore,
+\[z^2=x^2+y^2.\]
+Lấy đạo hàm hai vế theo $t$:
+\[2z\frac{dz}{dt}=2x\frac{dx}{dt}+2y\frac{dy}{dt},\]
+\[\frac{dz}{dt}=\frac1z\left(x\frac{dx}{dt}+y\frac{dy}{dt}\right).\]
+Khi $x=0.3\,\mathrm{mi}$ và $y=0.4\,\mathrm{mi}$, định lý Pythagore cho $z=0.5\,\mathrm{mi}$. Do đó,
+\[\frac{dz}{dt}=\frac{1}{0.5}\bigl[0.3(-50)+0.4(-60)\bigr]=-78\,\mathrm{mi/h}.\]
+Hai xe tiến lại gần nhau với tốc độ $78\,\mathrm{mi/h}$.
+
+\ex{5} Một người đi bộ dọc theo đường thẳng với tốc độ $4\,\mathrm{ft/s}$. Một đèn chiếu đặt trên mặt đất, cách đường đi $20\,\mathrm{ft}$, luôn chiếu vào người đó. Đèn quay nhanh bao nhiêu khi người ấy cách điểm trên đường gần đèn nhất một đoạn $15\,\mathrm{ft}$?
+\sol Vẽ Hình 5. Gọi $x$ là khoảng cách từ người đến điểm trên đường gần đèn nhất, và $\theta$ là góc giữa tia sáng và đường vuông góc với đường đi.
+\fig[.35]{fig5}{Hình 5. Đèn chiếu theo người đi bộ.}
+Đã cho $dx/dt=4\,\mathrm{ft/s}$, cần tìm $d\theta/dt$ khi $x=15$. Từ Hình 5,
+\[\frac{x}{20}=\tan\theta,\qquad x=20\tan\theta.\]
+Lấy đạo hàm hai vế theo $t$:
+\[\frac{dx}{dt}=20\sec^2\theta\frac{d\theta}{dt}.\]
+Suy ra
+\[\frac{d\theta}{dt}=\frac1{20}\cos^2\theta\frac{dx}{dt}
+=\frac1{20}\cos^2\theta(4)=\frac15\cos^2\theta.\]
+Khi $x=15$, độ dài tia sáng là $25$, nên $\cos\theta=20/25=4/5$ và
+\[\frac{d\theta}{dt}=\frac15\left(\frac45\right)^2=\frac{16}{125}=0.128.\]
+Đèn quay với tốc độ $0.128\,\mathrm{rad/s}$.
+
+\noindent\textit{Đổi đơn vị:}
+\[0.128\,\frac{\mathrm{rad}}{\mathrm{s}}\cdot
+\frac{1\text{ vòng}}{2\pi\,\mathrm{rad}}\cdot\frac{60\,\mathrm{s}}{1\,\mathrm{min}}
+\approx1.22\text{ vòng/phút}.\]
+
+\section*{3.9. Bài tập}
+\bt{1} (a) Nếu $V$ là thể tích của hình lập phương có cạnh $x$ và hình lập phương nở ra theo thời gian, hãy biểu diễn $dV/dt$ theo $dx/dt$.
+
+(b) Nếu độ dài cạnh tăng với tốc độ $4\,\mathrm{cm/s}$, thể tích tăng nhanh bao nhiêu khi cạnh dài $15\,\mathrm{cm}$?
+
+\bt{2} (a) Nếu $A$ là diện tích hình tròn bán kính $r$ và hình tròn nở ra theo thời gian, hãy biểu diễn $dA/dt$ theo $dr/dt$.
+
+(b) Dầu tràn từ một tàu chở dầu bị vỡ và lan thành hình tròn. Nếu bán kính vết dầu tăng với tốc độ không đổi $2\,\mathrm{m/s}$, diện tích vết dầu tăng nhanh bao nhiêu khi bán kính bằng $30\,\mathrm{m}$?
+
+\bt{3} Mỗi cạnh của một hình vuông tăng với tốc độ $6\,\mathrm{cm/s}$. Diện tích hình vuông tăng với tốc độ nào khi diện tích bằng $16\,\mathrm{cm^2}$?
+
+\bt{4} Bán kính hình cầu tăng với tốc độ $4\,\mathrm{mm/s}$. Thể tích tăng nhanh bao nhiêu khi đường kính bằng $80\,\mathrm{mm}$?
+
+\bt{5} Bán kính một quả cầu tăng với tốc độ $2\,\mathrm{cm/min}$. Diện tích mặt cầu tăng với tốc độ nào khi bán kính bằng $8\,\mathrm{cm}$?
+
+\bt{6} Chiều dài hình chữ nhật tăng với tốc độ $8\,\mathrm{cm/s}$, chiều rộng tăng với tốc độ $3\,\mathrm{cm/s}$. Khi chiều dài bằng $20\,\mathrm{cm}$ và chiều rộng bằng $10\,\mathrm{cm}$, diện tích tăng nhanh bao nhiêu?
+
+\bt{7} Một bể hình trụ bán kính $5\,\mathrm{m}$ được bơm đầy nước với lưu lượng $3\,\mathrm{m^3/min}$. Chiều cao cột nước tăng nhanh bao nhiêu?
+
+\bt{8} Diện tích của tam giác có hai cạnh dài $a,b$ và góc xen giữa $\theta$ là $A=\tfrac12ab\sin\theta$ (xem Công thức 6 trong Phụ lục D).
+
+(a) Nếu $a=2\,\mathrm{cm}$, $b=3\,\mathrm{cm}$ và $\theta$ tăng với tốc độ $0.2\,\mathrm{rad/min}$, diện tích tăng nhanh bao nhiêu khi $\theta=\pi/3$?
+
+(b) Nếu $a=2\,\mathrm{cm}$, $b$ tăng với tốc độ $1.5\,\mathrm{cm/min}$ và $\theta$ tăng với tốc độ $0.2\,\mathrm{rad/min}$, diện tích tăng nhanh bao nhiêu khi $b=3\,\mathrm{cm}$ và $\theta=\pi/3$?
+
+(c) Nếu $a$ tăng với tốc độ $2.5\,\mathrm{cm/min}$, $b$ tăng với tốc độ $1.5\,\mathrm{cm/min}$ và $\theta$ tăng với tốc độ $0.2\,\mathrm{rad/min}$, diện tích tăng nhanh bao nhiêu khi $a=2\,\mathrm{cm}$, $b=3\,\mathrm{cm}$ và $\theta=\pi/3$?
+
+\bt{9} Cho $4x^2+9y^2=25$, trong đó $x,y$ là các hàm của $t$.
+
+(a) Nếu $dy/dt=\tfrac13$, tìm $dx/dt$ khi $x=2$, $y=1$.
+
+(b) Nếu $dx/dt=3$, tìm $dy/dt$ khi $x=-2$, $y=1$.
+
+\bt{10} Nếu $x^2+y^2+z^2=9$, $dx/dt=5$ và $dy/dt=4$, tìm $dz/dt$ khi $(x,y,z)=(2,2,1)$.
+
+\bt{11} Trọng lượng $w$ (pound) của một nữ phi hành gia liên hệ với độ cao $h$ (dặm) so với bề mặt Trái Đất bởi
+\[w=w_0\left(\frac{3960}{3960+h}\right)^2,\]
+trong đó $w_0$ là trọng lượng của cô trên bề mặt Trái Đất. Nếu cô nặng $130$ pound trên Trái Đất và đang ở trong một tên lửa bay thẳng lên với tốc độ $12\,\mathrm{mi/s}$, hãy tìm tốc độ biến thiên trọng lượng (tính bằng $\mathrm{lb/s}$) khi cô ở độ cao $40$ dặm.
+
+\bt{12} Một chất điểm chuyển động trên hyperbol $xy=8$. Khi đến điểm $(4,2)$, tung độ của nó giảm với tốc độ $3\,\mathrm{cm/s}$. Hoành độ biến thiên nhanh bao nhiêu tại thời điểm đó?
+
+\group{13–16}
+(a) Những đại lượng nào đã được cho trong bài toán?\quad (b) Đại lượng nào chưa biết?
+
+(c) Vẽ hình mô tả tình huống tại thời điểm $t$ bất kỳ.
+
+(d) Viết phương trình liên hệ các đại lượng.\quad (e) Hoàn thành lời giải.
+
+\bt{13} Một máy bay bay ngang ở độ cao $1\,\mathrm{mi}$ với tốc độ $500\,\mathrm{mi/h}$, đi qua ngay phía trên một trạm rađa. Tìm tốc độ tăng khoảng cách từ máy bay đến trạm khi máy bay cách trạm $2\,\mathrm{mi}$.
+
+\bt{14} Một quả cầu tuyết tan sao cho diện tích bề mặt giảm với tốc độ $1\,\mathrm{cm^2/min}$. Tìm tốc độ giảm đường kính khi đường kính bằng $10\,\mathrm{cm}$.
+
+\bt{15} Một đèn đường đặt trên đỉnh cột cao $15\,\mathrm{ft}$. Một người cao $6\,\mathrm{ft}$ đi theo đường thẳng ra xa cột với tốc độ $5\,\mathrm{ft/s}$. Đầu mút bóng của người đó chuyển động nhanh bao nhiêu khi người ấy cách cột $40\,\mathrm{ft}$?
+
+\bt{16} Lúc 12 giờ trưa, tàu A ở cách tàu B $150\,\mathrm{km}$ về phía tây. Tàu A đi về phía đông với tốc độ $35\,\mathrm{km/h}$, tàu B đi về phía bắc với tốc độ $25\,\mathrm{km/h}$. Khoảng cách giữa hai tàu biến thiên nhanh bao nhiêu lúc 4 giờ chiều?
+
+\bt{17} Hai ô tô xuất phát từ cùng một điểm. Một xe đi về phía nam với tốc độ $60\,\mathrm{mi/h}$, xe kia đi về phía tây với tốc độ $25\,\mathrm{mi/h}$. Hai giờ sau, khoảng cách giữa hai xe tăng với tốc độ nào?
+
+\bt{18} Một đèn chiếu trên mặt đất chiếu lên bức tường cách đèn $12\,\mathrm{m}$. Một người cao $2\,\mathrm{m}$ đi từ đèn về phía tòa nhà với tốc độ $1.6\,\mathrm{m/s}$. Chiều dài bóng trên tòa nhà giảm nhanh bao nhiêu khi người ấy cách tòa nhà $4\,\mathrm{m}$?
+
+\bt{19} Một người đàn ông bắt đầu đi về phía bắc với tốc độ $4\,\mathrm{ft/s}$ từ điểm $P$. Năm phút sau, một người phụ nữ bắt đầu đi về phía nam với tốc độ $5\,\mathrm{ft/s}$ từ điểm cách $P$ $500\,\mathrm{ft}$ về chính đông. Sau khi người phụ nữ đi được $15$ phút, hai người xa nhau với tốc độ nào?
+
+\noindent\begin{minipage}{\linewidth}
+\bt{20} Sân trong của sân bóng chày là một hình vuông cạnh $90\,\mathrm{ft}$. Một cầu thủ đánh bóng rồi chạy về chốt thứ nhất với tốc độ $24\,\mathrm{ft/s}$.
+
+(a) Khoảng cách từ cầu thủ đến chốt thứ hai giảm với tốc độ nào khi cầu thủ đã chạy được nửa đường đến chốt thứ nhất?
+
+(b) Khoảng cách từ cầu thủ đến chốt thứ ba tăng với tốc độ nào tại cùng thời điểm đó?
+\fig[.35]{ex20}{Hình cho Bài tập 20.}
+\end{minipage}
+
+\bt{21} Chiều cao của một tam giác tăng với tốc độ $1\,\mathrm{cm/min}$, trong khi diện tích tăng với tốc độ $2\,\mathrm{cm^2/min}$. Cạnh đáy biến thiên với tốc độ nào khi chiều cao bằng $10\,\mathrm{cm}$ và diện tích bằng $100\,\mathrm{cm^2}$?
+
+\noindent\begin{minipage}{\linewidth}
+\bt{22} Một chiếc thuyền được kéo vào bến bằng dây buộc ở mũi thuyền, vắt qua một ròng rọc trên bến cao hơn mũi thuyền $1\,\mathrm{m}$. Nếu dây được kéo vào với tốc độ $1\,\mathrm{m/s}$, thuyền tiến về bến nhanh bao nhiêu khi cách bến $8\,\mathrm{m}$?
+\fig[.60]{ex22}{Hình cho Bài tập 22.}
+\end{minipage}
+
+\group{23–24} Sử dụng hệ thức: quãng đường (mét) một hòn đá thả rơi đi được sau $t$ giây là $d=4.9t^2$.
+
+\bt{23} Một người phụ nữ đứng gần mép vách đá và thả một hòn đá xuống. Đúng một giây sau, cô thả một hòn đá khác. Một giây sau lần thả thứ hai, khoảng cách giữa hai hòn đá biến thiên nhanh bao nhiêu?
+
+\bt{24} Hai người đàn ông đứng cách nhau $10\,\mathrm{m}$ trên mặt đất bằng phẳng gần mép vách đá. Một người thả một hòn đá, và một giây sau người kia thả một hòn đá. Một giây sau lần thả thứ hai, khoảng cách giữa hai hòn đá biến thiên nhanh bao nhiêu?
+
+\bt{25} Nước rò ra khỏi một bể hình nón lật ngược với lưu lượng $10\,000\,\mathrm{cm^3/min}$, đồng thời nước được bơm vào bể với lưu lượng không đổi. Bể cao $6\,\mathrm{m}$, đường kính miệng bể $4\,\mathrm{m}$. Nếu mực nước dâng với tốc độ $20\,\mathrm{cm/min}$ khi chiều cao cột nước bằng $2\,\mathrm{m}$, hãy tìm lưu lượng bơm vào bể.
+
+\bt{26} Một chất điểm chuyển động trên đường cong $y=2\sin(\pi x/2)$. Khi chất điểm đi qua điểm $(\tfrac13,1)$, hoành độ tăng với tốc độ $\sqrt{10}\,\mathrm{cm/s}$. Khoảng cách từ chất điểm đến gốc tọa độ biến thiên nhanh bao nhiêu tại thời điểm này?
+
+\bt{27} Một máng nước dài $10\,\mathrm{m}$ có tiết diện ngang là hình thang cân, đáy dưới rộng $30\,\mathrm{cm}$, đáy trên rộng $80\,\mathrm{cm}$ và cao $50\,\mathrm{cm}$. Nếu nước được đổ vào máng với lưu lượng $0.2\,\mathrm{m^3/min}$, mực nước dâng nhanh bao nhiêu khi nước sâu $30\,\mathrm{cm}$?
+
+\bt{28} Một máng dài $10\,\mathrm{ft}$, hai đầu là các tam giác cân có cạnh trên dài $3\,\mathrm{ft}$ và chiều cao $1\,\mathrm{ft}$. Nếu máng được bơm nước với lưu lượng $12\,\mathrm{ft^3/min}$, mực nước dâng nhanh bao nhiêu khi nước sâu $6$ inch?
+
+\noindent\begin{minipage}{\linewidth}
+\bt{29} Sỏi được đổ từ băng tải với lưu lượng $30\,\mathrm{ft^3/min}$. Độ thô của sỏi khiến đống sỏi tạo thành hình nón có đường kính đáy luôn bằng chiều cao. Chiều cao đống sỏi tăng nhanh bao nhiêu khi đống sỏi cao $10\,\mathrm{ft}$?
+\fig[.39]{ex29}{Hình cho Bài tập 29.}
+\end{minipage}
+
+\noindent\begin{minipage}{\linewidth}
+\bt{30} Một bể bơi rộng $20\,\mathrm{ft}$, dài $40\,\mathrm{ft}$, sâu $3\,\mathrm{ft}$ ở đầu nông và $9\,\mathrm{ft}$ tại điểm sâu nhất. Mặt cắt dọc được cho trong hình. Nếu nước được bơm vào bể với lưu lượng $0.8\,\mathrm{ft^3/min}$, mực nước dâng nhanh bao nhiêu khi độ sâu tại điểm sâu nhất bằng $5\,\mathrm{ft}$?
+\fig[.52]{ex30}{Hình cho Bài tập 30. Các kích thước tính bằng ft.}
+\end{minipage}
+
+\bt{31} Các cạnh của một tam giác đều tăng với tốc độ $10\,\mathrm{cm/min}$. Diện tích tam giác tăng với tốc độ nào khi các cạnh dài $30\,\mathrm{cm}$?
+
+\bt{32} Một con diều ở độ cao $100\,\mathrm{ft}$ so với mặt đất chuyển động theo phương ngang với tốc độ $8\,\mathrm{ft/s}$. Góc giữa dây diều và phương ngang giảm với tốc độ nào khi đã thả $200\,\mathrm{ft}$ dây?
+
+\bt{33} Một ô tô đi về phía bắc trên đường thẳng với tốc độ $20\,\mathrm{m/s}$ và một thiết bị bay không người lái bay về phía đông với tốc độ $6\,\mathrm{m/s}$ ở độ cao $25\,\mathrm{m}$. Tại một thời điểm, thiết bị bay đi qua ngay phía trên ô tô. Sau đó $5$ giây, khoảng cách giữa thiết bị bay và ô tô biến thiên nhanh bao nhiêu?
+
+\bt{34} Nếu kim phút của một chiếc đồng hồ dài $r$ (centimét), hãy tìm tốc độ quét diện tích của kim dưới dạng hàm của $r$.
+
+\bt{35} Trong Ví dụ 2, góc giữa thang và mặt đất biến thiên nhanh bao nhiêu khi chân thang cách tường $6\,\mathrm{ft}$?
+
+\bt{36} Theo mô hình đã dùng để giải Ví dụ 2, điều gì xảy ra khi đầu thang tiến gần mặt đất? Mô hình có thích hợp khi $y$ nhỏ không?
+
+\bt{37} Định luật Boyle phát biểu rằng khi một lượng khí được nén ở nhiệt độ không đổi, áp suất $P$ và thể tích $V$ thỏa mãn $PV=C$, với $C$ là hằng số. Tại một thời điểm, thể tích bằng $600\,\mathrm{cm^3}$, áp suất bằng $150\,\mathrm{kPa}$ và áp suất tăng với tốc độ $20\,\mathrm{kPa/min}$. Thể tích giảm với tốc độ nào tại thời điểm đó?
+
+\bt{38} \textit{[Cần công cụ tính toán/đồ thị.]} Một vòi nước đổ vào chậu bán cầu đường kính $60\,\mathrm{cm}$ với lưu lượng $2\,\mathrm{L/min}$. Tìm tốc độ dâng của nước khi chậu đầy một nửa. [Sử dụng các dữ kiện: $1\,\mathrm{L}=1000\,\mathrm{cm^3}$. Thể tích phần hình cầu bán kính $r$, tính từ đáy đến độ cao $h$, là $V=\pi(rh^2-\tfrac13h^3)$; công thức này sẽ được chứng minh trong Chương 6.]
+
+\noindent\begin{minipage}{\linewidth}
+\bt{39} Hai điện trở có điện trở $R_1$ và $R_2$ được mắc song song như hình. Điện trở tương đương $R$, đo bằng ôm ($\Omega$), thỏa mãn
+\[\frac1R=\frac1{R_1}+\frac1{R_2}.\]
+Nếu $R_1,R_2$ lần lượt tăng với tốc độ $0.3\,\Omega/\mathrm{s}$ và $0.2\,\Omega/\mathrm{s}$, $R$ biến thiên nhanh bao nhiêu khi $R_1=80\,\Omega$ và $R_2=100\,\Omega$?
+\fig[.38]{ex39}{Hình cho Bài tập 39.}
+\end{minipage}
+
+\bt{40} Khi không khí giãn nở đoạn nhiệt (không thu hay mất nhiệt), áp suất $P$ và thể tích $V$ liên hệ bởi $PV^{1.4}=C$, với $C$ là hằng số. Tại một thời điểm, thể tích bằng $400\,\mathrm{cm^3}$, áp suất bằng $80\,\mathrm{kPa}$ và đang giảm với tốc độ $10\,\mathrm{kPa/min}$. Thể tích tăng với tốc độ nào tại thời điểm đó?
+
+\bt{41} Hai đường thẳng tách ra từ một giao điểm và tạo với nhau góc $60^\circ$. Hai ô tô rời giao điểm cùng lúc, xe thứ nhất đi trên một đường với tốc độ $40\,\mathrm{mi/h}$, xe thứ hai đi trên đường kia với tốc độ $60\,\mathrm{mi/h}$. Sau nửa giờ, khoảng cách giữa hai xe biến thiên nhanh bao nhiêu? [Gợi ý: Dùng định lý cosin (Công thức 21 trong Phụ lục D).]
+
+\bt{42} Khối lượng não $B$ theo khối lượng cơ thể $W$ của cá được mô hình hóa bằng hàm lũy thừa $B=0.007W^{2/3}$, với $B,W$ tính bằng gam. Mô hình khối lượng cơ thể theo chiều dài cơ thể $L$ (centimét) là $W=0.12L^{2.53}$. Trong $10$ triệu năm, chiều dài trung bình của một loài cá tiến hóa từ $15\,\mathrm{cm}$ lên $20\,\mathrm{cm}$ với tốc độ không đổi. Não của loài này tăng trưởng nhanh bao nhiêu khi chiều dài trung bình bằng $18\,\mathrm{cm}$?
+
+\bt{43} Hai cạnh của một tam giác dài $12\,\mathrm{m}$ và $15\,\mathrm{m}$. Góc xen giữa tăng với tốc độ $2^\circ/\mathrm{min}$. Cạnh thứ ba tăng chiều dài nhanh bao nhiêu khi góc giữa hai cạnh có độ dài cố định bằng $60^\circ$? [Gợi ý: Dùng định lý cosin (Công thức 21 trong Phụ lục D).]
+
+\noindent\begin{minipage}{\linewidth}
+\bt{44} Hai xe đẩy A và B được nối bằng một sợi dây dài $39\,\mathrm{ft}$ vắt qua ròng rọc $P$ (xem hình). Điểm $Q$ nằm trên sàn, ngay dưới $P$ một đoạn $12\,\mathrm{ft}$ và ở giữa hai xe. Xe A được kéo ra xa $Q$ với tốc độ $2\,\mathrm{ft/s}$. Xe B chuyển động về phía $Q$ nhanh bao nhiêu tại thời điểm xe A cách $Q$ $5\,\mathrm{ft}$?
+\fig[.45]{ex44}{Hình cho Bài tập 44.}
+\end{minipage}
+
+\bt{45} Một máy quay truyền hình đặt cách chân bệ phóng tên lửa $4000\,\mathrm{ft}$. Góc nâng của máy quay phải thay đổi với tốc độ thích hợp để luôn quan sát được tên lửa. Cơ cấu lấy nét cũng phải tính đến khoảng cách tăng dần từ máy quay đến tên lửa đang bay lên. Giả sử tên lửa bay thẳng đứng và có tốc độ $600\,\mathrm{ft/s}$ khi đã lên cao $3000\,\mathrm{ft}$.
+
+(a) Khoảng cách từ máy quay đến tên lửa biến thiên nhanh bao nhiêu tại thời điểm đó?
+
+(b) Nếu máy quay luôn hướng vào tên lửa, góc nâng của nó biến thiên nhanh bao nhiêu tại cùng thời điểm?
+
+\bt{46} Một ngọn hải đăng nằm trên đảo nhỏ, cách điểm $P$ gần nhất trên một bờ biển thẳng $3\,\mathrm{km}$; đèn quay $4$ vòng mỗi phút. Điểm sáng chuyển động dọc bờ biển nhanh bao nhiêu khi cách $P$ $1\,\mathrm{km}$?
+
+\bt{47} Một máy bay bay ngang ở độ cao $5\,\mathrm{km}$ và đi qua ngay phía trên một kính thiên văn theo dõi trên mặt đất. Khi góc nâng bằng $\pi/3$, góc này đang giảm với tốc độ $\pi/6\,\mathrm{rad/min}$. Tốc độ của máy bay lúc đó là bao nhiêu?
+
+\bt{48} Một vòng đu quay bán kính $10\,\mathrm{m}$ quay một vòng trong mỗi $2$ phút. Một hành khách đang đi lên với tốc độ nào khi ghế ngồi cao $16\,\mathrm{m}$ so với mặt đất?
+
+\bt{49} Một máy bay có tốc độ không đổi $300\,\mathrm{km/h}$ đi qua phía trên một trạm rađa mặt đất ở độ cao $1\,\mathrm{km}$ và bay lên theo góc $30^\circ$. Một phút sau, khoảng cách từ máy bay đến trạm rađa tăng với tốc độ nào?
+
+\bt{50} Hai người xuất phát từ cùng một điểm. Một người đi về phía đông với tốc độ $3\,\mathrm{mi/h}$, người kia đi về phía đông bắc với tốc độ $2\,\mathrm{mi/h}$. Sau $15$ phút, khoảng cách giữa họ biến thiên nhanh bao nhiêu?
+
+\bt{51} Một vận động viên chạy trên đường tròn bán kính $100\,\mathrm{m}$ với tốc độ không đổi $7\,\mathrm{m/s}$. Người bạn của vận động viên đứng cách tâm đường tròn $200\,\mathrm{m}$. Khoảng cách giữa hai người biến thiên nhanh bao nhiêu khi họ cách nhau $200\,\mathrm{m}$?
+
+\bt{52} Kim phút của một đồng hồ đeo tay dài $8\,\mathrm{mm}$, kim giờ dài $4\,\mathrm{mm}$. Khoảng cách giữa hai đầu kim biến thiên nhanh bao nhiêu vào lúc 1 giờ đúng?
+
+\bt{53} Giả sử thể tích $V$ của một quả cầu tuyết đang lăn tăng sao cho $dV/dt$ tỉ lệ thuận với diện tích bề mặt của quả cầu tại thời điểm $t$. Chứng minh bán kính $r$ tăng với tốc độ không đổi, tức là $dr/dt$ là hằng số.
+
+\section*{Ghi chú biên tập}
+Phần này tách biệt với bản dịch. Các đơn vị và dữ kiện được giữ theo nguyên bản; $\mathrm{ft}$ là foot, $\mathrm{mi}$ là dặm, $\mathrm{h}$ là giờ và $\mathrm{min}$ là phút. Dấu âm của đạo hàm biểu thị đại lượng đang giảm; tốc độ giảm được nêu bằng độ lớn dương.
+
+Bài tập 38: “đầy một nửa” nói về thể tích nước, không phải nửa chiều cao chậu. Ký hiệu yêu cầu công cụ tính toán/đồ thị được chuyển thành ghi chú bằng chữ.
+
+Bài tập 48: nguyên bản không nêu rõ độ cao tâm vòng đu quay; giả thiết thông thường là điểm thấp nhất ở mặt đất. Bài tập 51: dấu của tốc độ biến thiên khoảng cách phụ thuộc việc vận động viên đang tiến gần hay đi xa người bạn; đề gốc không chỉ rõ nhánh chuyển động.
+\end{document}
