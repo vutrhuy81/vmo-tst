@@ -701,4 +701,25 @@ doc43.window.close();
 const rendered43=window.document.createElement('div');await window.renderBookContent(rendered43,section43.section,false);
 assert.equal(rendered43.querySelectorAll('img').length,25,'All section 4.3 figures survive frontend filtering');
 assert.deepEqual((await readBooks(db,student,{bookId:book.id,sectionId:child43.id})).exercises.map(e=>e.contentKey),section43.exercises.map(e=>e.contentKey));
+// L’Hôpital: keep shared hypotheses and all source figures.
+const child44=detail.sections.find(s=>s.title.startsWith('4.4'));
+const section44=await readBooks(db,student,{bookId:book.id,sectionId:child44.id});
+assert.equal(section44.exerciseHeading,'4.4. Bài tập');
+assert.deepEqual(section44.exercises.map(e=>e.questionNumber),Array.from({length:92},(_,i)=>i+1));
+assert.ok(section44.exercises.every(e=>e.allowSubmission&&e.allowAiEvaluation&&e.contentKey&&e.setKey));
+for(const n of [5,6,7,82,86])assert.ok(section44.exercises[n-1].content.includes('/ex'+String(n).padStart(2,'0')+'.png'));
+for(const n of [1,2,3,4])assert.ok(section44.exercises[n-1].content.includes('h(x)=1')&&section44.exercises[n-1].content.includes('q(x)='));
+for(const n of [8,70])assert.ok(section44.exercises[n-1].content.includes('khi thích hợp'));
+assert.equal(section44.section.sourceInfo.exampleCount,10);
+const doc44=new JSDOM(section44.section.content);
+assert.equal(doc44.window.document.querySelectorAll('img').length,12);
+for(const image of doc44.window.document.querySelectorAll('img')){
+ const asset=new URL(image.src,'https://example.test').searchParams.get('asset');
+ assert.equal((await readBookAsset(student,asset)).bytes[0],137);
+ await assert.rejects(()=>readBookAsset(other,asset),e=>e.status===403);
+}
+doc44.window.close();
+const rendered44=window.document.createElement('div');await window.renderBookContent(rendered44,section44.section,false);
+assert.equal(rendered44.querySelectorAll('img').length,12,'All section 4.4 figures survive frontend filtering');
+assert.deepEqual((await readBooks(db,student,{bookId:book.id,sectionId:child44.id})).exercises.map(e=>e.contentKey),section44.exercises.map(e=>e.contentKey));
 window.close();console.log('Books: seeded TOC, admin CRUD/CAS, scopes, subtree delete/restore, lazy bodies and UI actions OK');

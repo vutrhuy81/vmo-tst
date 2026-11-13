@@ -1,0 +1,376 @@
+{
+  "bookKey": "stewart-9",
+  "sectionKey": "4-4",
+  "heading": "4.4. Bài tập",
+  "sourceSha256": "5853e1b184061600804c91185a968ef9caecebbfa14f7076d099f2f49a889e4d",
+  "exercises": [
+    {
+      "number": 1,
+      "content": "<p><strong>1–4.</strong></p>\n<p>Cho <span class=\"math display\">\\[\\lim_{x\\to a}f(x)=0,\\quad\\lim_{x\\to a}g(x)=0,\\quad\\lim_{x\\to a}h(x)=1,\\]</span> <span class=\"math display\">\\[\\lim_{x\\to a}p(x)=\\infty,\\qquad\\lim_{x\\to a}q(x)=\\infty.\\]</span> Trong các giới hạn sau, giới hạn nào có dạng vô định? Với mỗi giới hạn không có dạng vô định, hãy tính giá trị nếu có thể.</p><p><strong>1.</strong> (a) <span class=\"math inline\">\\(\\displaystyle\\lim_{x\\to a}\\frac{f(x)}{g(x)}\\)</span>; (b) <span class=\"math inline\">\\(\\displaystyle\\lim_{x\\to a}\\frac{f(x)}{p(x)}\\)</span>;</p>\n<p>(c) <span class=\"math inline\">\\(\\displaystyle\\lim_{x\\to a}\\frac{h(x)}{p(x)}\\)</span>; (d) <span class=\"math inline\">\\(\\displaystyle\\lim_{x\\to a}\\frac{p(x)}{f(x)}\\)</span>;</p>\n<p>(e) <span class=\"math inline\">\\(\\displaystyle\\lim_{x\\to a}\\frac{p(x)}{q(x)}\\)</span>.</p>"
+    },
+    {
+      "number": 2,
+      "content": "<p><strong>1–4.</strong></p>\n<p>Cho <span class=\"math display\">\\[\\lim_{x\\to a}f(x)=0,\\quad\\lim_{x\\to a}g(x)=0,\\quad\\lim_{x\\to a}h(x)=1,\\]</span> <span class=\"math display\">\\[\\lim_{x\\to a}p(x)=\\infty,\\qquad\\lim_{x\\to a}q(x)=\\infty.\\]</span> Trong các giới hạn sau, giới hạn nào có dạng vô định? Với mỗi giới hạn không có dạng vô định, hãy tính giá trị nếu có thể.</p><p><strong>2.</strong> (a) <span class=\"math inline\">\\(\\displaystyle\\lim_{x\\to a}[f(x)p(x)]\\)</span>; (b) <span class=\"math inline\">\\(\\displaystyle\\lim_{x\\to a}[h(x)p(x)]\\)</span>;</p>\n<p>(c) <span class=\"math inline\">\\(\\displaystyle\\lim_{x\\to a}[p(x)q(x)]\\)</span>.</p>"
+    },
+    {
+      "number": 3,
+      "content": "<p><strong>1–4.</strong></p>\n<p>Cho <span class=\"math display\">\\[\\lim_{x\\to a}f(x)=0,\\quad\\lim_{x\\to a}g(x)=0,\\quad\\lim_{x\\to a}h(x)=1,\\]</span> <span class=\"math display\">\\[\\lim_{x\\to a}p(x)=\\infty,\\qquad\\lim_{x\\to a}q(x)=\\infty.\\]</span> Trong các giới hạn sau, giới hạn nào có dạng vô định? Với mỗi giới hạn không có dạng vô định, hãy tính giá trị nếu có thể.</p><p><strong>3.</strong> (a) <span class=\"math inline\">\\(\\displaystyle\\lim_{x\\to a}[f(x)-p(x)]\\)</span>; (b) <span class=\"math inline\">\\(\\displaystyle\\lim_{x\\to a}[p(x)-q(x)]\\)</span>;</p>\n<p>(c) <span class=\"math inline\">\\(\\displaystyle\\lim_{x\\to a}[p(x)+q(x)]\\)</span>.</p>"
+    },
+    {
+      "number": 4,
+      "content": "<p><strong>1–4.</strong></p>\n<p>Cho <span class=\"math display\">\\[\\lim_{x\\to a}f(x)=0,\\quad\\lim_{x\\to a}g(x)=0,\\quad\\lim_{x\\to a}h(x)=1,\\]</span> <span class=\"math display\">\\[\\lim_{x\\to a}p(x)=\\infty,\\qquad\\lim_{x\\to a}q(x)=\\infty.\\]</span> Trong các giới hạn sau, giới hạn nào có dạng vô định? Với mỗi giới hạn không có dạng vô định, hãy tính giá trị nếu có thể.</p><p><strong>4.</strong> (a) <span class=\"math inline\">\\(\\displaystyle\\lim_{x\\to a}[f(x)]^{g(x)}\\)</span>; (b) <span class=\"math inline\">\\(\\displaystyle\\lim_{x\\to a}[f(x)]^{p(x)}\\)</span>;</p>\n<p>(c) <span class=\"math inline\">\\(\\displaystyle\\lim_{x\\to a}[h(x)]^{p(x)}\\)</span>; (d) <span class=\"math inline\">\\(\\displaystyle\\lim_{x\\to a}[p(x)]^{f(x)}\\)</span>;</p>\n<p>(e) <span class=\"math inline\">\\(\\displaystyle\\lim_{x\\to a}[p(x)]^{q(x)}\\)</span>; (f) <span class=\"math inline\">\\(\\displaystyle\\lim_{x\\to a}\\sqrt[q(x)]{p(x)}\\)</span>.</p>"
+    },
+    {
+      "number": 5,
+      "content": "<p><strong>5–6.</strong></p>\n<p>Dùng đồ thị của <span class=\"math inline\">\\(f,g\\)</span> và các tiếp tuyến của chúng tại <span class=\"math inline\">\\((2,0)\\)</span> để tìm <span class=\"math inline\">\\(\\displaystyle\\lim_{x\\to2}\\frac{f(x)}{g(x)}\\)</span>.</p><p><strong>5.</strong></p>\n<div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-4-4-5853e1b1/ex05.png\" alt=\"image\"><br>\nĐồ thị cho Bài tập 5.</p>\n</div>"
+    },
+    {
+      "number": 6,
+      "content": "<p><strong>5–6.</strong></p>\n<p>Dùng đồ thị của <span class=\"math inline\">\\(f,g\\)</span> và các tiếp tuyến của chúng tại <span class=\"math inline\">\\((2,0)\\)</span> để tìm <span class=\"math inline\">\\(\\displaystyle\\lim_{x\\to2}\\frac{f(x)}{g(x)}\\)</span>.</p><p><strong>6.</strong></p>\n<div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-4-4-5853e1b1/ex06.png\" alt=\"image\"><br>\nĐồ thị cho Bài tập 6.</p>\n</div>"
+    },
+    {
+      "number": 7,
+      "content": "<p><strong>7.</strong> Cho đồ thị của hàm số <span class=\"math inline\">\\(f\\)</span> và tiếp tuyến tại 0. Giá trị của <span class=\"math inline\">\\(\\displaystyle\\lim_{x\\to0}\\frac{f(x)}{e^x-1}\\)</span> là bao nhiêu?</p>\n<div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-4-4-5853e1b1/ex07.png\" alt=\"image\"><br>\nĐồ thị cho Bài tập 7.</p>\n</div>"
+    },
+    {
+      "number": 8,
+      "content": "<p><strong>8–70.</strong></p>\n<p>Tìm giới hạn. Dùng quy tắc l’Hospital khi thích hợp. Nếu có phương pháp sơ cấp hơn, hãy cân nhắc dùng phương pháp đó. Nếu không áp dụng được quy tắc l’Hospital, giải thích vì sao.</p><p><strong>8.</strong> <span class=\"math inline\">\\(\\displaystyle\\lim_{x\\to3}\\frac{x-3}{x^2-9}\\)</span>.</p>"
+    },
+    {
+      "number": 9,
+      "content": "<p><strong>8–70.</strong></p>\n<p>Tìm giới hạn. Dùng quy tắc l’Hospital khi thích hợp. Nếu có phương pháp sơ cấp hơn, hãy cân nhắc dùng phương pháp đó. Nếu không áp dụng được quy tắc l’Hospital, giải thích vì sao.</p><p><strong>9.</strong> <span class=\"math inline\">\\(\\displaystyle\\lim_{x\\to4}\\frac{x^2-2x-8}{x-4}\\)</span>.</p>"
+    },
+    {
+      "number": 10,
+      "content": "<p><strong>8–70.</strong></p>\n<p>Tìm giới hạn. Dùng quy tắc l’Hospital khi thích hợp. Nếu có phương pháp sơ cấp hơn, hãy cân nhắc dùng phương pháp đó. Nếu không áp dụng được quy tắc l’Hospital, giải thích vì sao.</p><p><strong>10.</strong> <span class=\"math inline\">\\(\\displaystyle\\lim_{x\\to-2}\\frac{x^3+8}{x+2}\\)</span>.</p>"
+    },
+    {
+      "number": 11,
+      "content": "<p><strong>8–70.</strong></p>\n<p>Tìm giới hạn. Dùng quy tắc l’Hospital khi thích hợp. Nếu có phương pháp sơ cấp hơn, hãy cân nhắc dùng phương pháp đó. Nếu không áp dụng được quy tắc l’Hospital, giải thích vì sao.</p><p><strong>11.</strong> <span class=\"math inline\">\\(\\displaystyle\\lim_{x\\to1}\\frac{x^7-1}{x^3-1}\\)</span>.</p>"
+    },
+    {
+      "number": 12,
+      "content": "<p><strong>8–70.</strong></p>\n<p>Tìm giới hạn. Dùng quy tắc l’Hospital khi thích hợp. Nếu có phương pháp sơ cấp hơn, hãy cân nhắc dùng phương pháp đó. Nếu không áp dụng được quy tắc l’Hospital, giải thích vì sao.</p><p><strong>12.</strong> <span class=\"math inline\">\\(\\displaystyle\\lim_{x\\to4}\\frac{\\sqrt x-2}{x-4}\\)</span>.</p>"
+    },
+    {
+      "number": 13,
+      "content": "<p><strong>8–70.</strong></p>\n<p>Tìm giới hạn. Dùng quy tắc l’Hospital khi thích hợp. Nếu có phương pháp sơ cấp hơn, hãy cân nhắc dùng phương pháp đó. Nếu không áp dụng được quy tắc l’Hospital, giải thích vì sao.</p><p><strong>13.</strong> <span class=\"math inline\">\\(\\displaystyle\\lim_{x\\to\\pi/4}\\frac{\\sin x-\\cos x}{\\tan x-1}\\)</span>.</p>"
+    },
+    {
+      "number": 14,
+      "content": "<p><strong>8–70.</strong></p>\n<p>Tìm giới hạn. Dùng quy tắc l’Hospital khi thích hợp. Nếu có phương pháp sơ cấp hơn, hãy cân nhắc dùng phương pháp đó. Nếu không áp dụng được quy tắc l’Hospital, giải thích vì sao.</p><p><strong>14.</strong> <span class=\"math inline\">\\(\\displaystyle\\lim_{x\\to0}\\frac{\\tan3x}{\\sin2x}\\)</span>.</p>"
+    },
+    {
+      "number": 15,
+      "content": "<p><strong>8–70.</strong></p>\n<p>Tìm giới hạn. Dùng quy tắc l’Hospital khi thích hợp. Nếu có phương pháp sơ cấp hơn, hãy cân nhắc dùng phương pháp đó. Nếu không áp dụng được quy tắc l’Hospital, giải thích vì sao.</p><p><strong>15.</strong> <span class=\"math inline\">\\(\\displaystyle\\lim_{t\\to0}\\frac{e^{2t}-1}{\\sin t}\\)</span>.</p>"
+    },
+    {
+      "number": 16,
+      "content": "<p><strong>8–70.</strong></p>\n<p>Tìm giới hạn. Dùng quy tắc l’Hospital khi thích hợp. Nếu có phương pháp sơ cấp hơn, hãy cân nhắc dùng phương pháp đó. Nếu không áp dụng được quy tắc l’Hospital, giải thích vì sao.</p><p><strong>16.</strong> <span class=\"math inline\">\\(\\displaystyle\\lim_{x\\to0}\\frac{x^2}{1-\\cos x}\\)</span>.</p>"
+    },
+    {
+      "number": 17,
+      "content": "<p><strong>8–70.</strong></p>\n<p>Tìm giới hạn. Dùng quy tắc l’Hospital khi thích hợp. Nếu có phương pháp sơ cấp hơn, hãy cân nhắc dùng phương pháp đó. Nếu không áp dụng được quy tắc l’Hospital, giải thích vì sao.</p><p><strong>17.</strong> <span class=\"math inline\">\\(\\displaystyle\\lim_{x\\to1}\\frac{\\sin(x-1)}{x^3+x-2}\\)</span>.</p>"
+    },
+    {
+      "number": 18,
+      "content": "<p><strong>8–70.</strong></p>\n<p>Tìm giới hạn. Dùng quy tắc l’Hospital khi thích hợp. Nếu có phương pháp sơ cấp hơn, hãy cân nhắc dùng phương pháp đó. Nếu không áp dụng được quy tắc l’Hospital, giải thích vì sao.</p><p><strong>18.</strong> <span class=\"math inline\">\\(\\displaystyle\\lim_{\\theta\\to\\pi}\\frac{1+\\cos\\theta}{1-\\cos\\theta}\\)</span>.</p>"
+    },
+    {
+      "number": 19,
+      "content": "<p><strong>8–70.</strong></p>\n<p>Tìm giới hạn. Dùng quy tắc l’Hospital khi thích hợp. Nếu có phương pháp sơ cấp hơn, hãy cân nhắc dùng phương pháp đó. Nếu không áp dụng được quy tắc l’Hospital, giải thích vì sao.</p><p><strong>19.</strong> <span class=\"math inline\">\\(\\displaystyle\\lim_{x\\to\\infty}\\frac{\\sqrt x}{1+e^x}\\)</span>.</p>"
+    },
+    {
+      "number": 20,
+      "content": "<p><strong>8–70.</strong></p>\n<p>Tìm giới hạn. Dùng quy tắc l’Hospital khi thích hợp. Nếu có phương pháp sơ cấp hơn, hãy cân nhắc dùng phương pháp đó. Nếu không áp dụng được quy tắc l’Hospital, giải thích vì sao.</p><p><strong>20.</strong> <span class=\"math inline\">\\(\\displaystyle\\lim_{x\\to\\infty}\\frac{x+x^2}{1-2x^2}\\)</span>.</p>"
+    },
+    {
+      "number": 21,
+      "content": "<p><strong>8–70.</strong></p>\n<p>Tìm giới hạn. Dùng quy tắc l’Hospital khi thích hợp. Nếu có phương pháp sơ cấp hơn, hãy cân nhắc dùng phương pháp đó. Nếu không áp dụng được quy tắc l’Hospital, giải thích vì sao.</p><p><strong>21.</strong> <span class=\"math inline\">\\(\\displaystyle\\lim_{x\\to0^+}\\frac{\\ln x}{x}\\)</span>.</p>"
+    },
+    {
+      "number": 22,
+      "content": "<p><strong>8–70.</strong></p>\n<p>Tìm giới hạn. Dùng quy tắc l’Hospital khi thích hợp. Nếu có phương pháp sơ cấp hơn, hãy cân nhắc dùng phương pháp đó. Nếu không áp dụng được quy tắc l’Hospital, giải thích vì sao.</p><p><strong>22.</strong> <span class=\"math inline\">\\(\\displaystyle\\lim_{x\\to\\infty}\\frac{\\ln\\sqrt x}{x^2}\\)</span>.</p>"
+    },
+    {
+      "number": 23,
+      "content": "<p><strong>8–70.</strong></p>\n<p>Tìm giới hạn. Dùng quy tắc l’Hospital khi thích hợp. Nếu có phương pháp sơ cấp hơn, hãy cân nhắc dùng phương pháp đó. Nếu không áp dụng được quy tắc l’Hospital, giải thích vì sao.</p><p><strong>23.</strong> <span class=\"math inline\">\\(\\displaystyle\\lim_{x\\to3}\\frac{\\ln(x/3)}{3-x}\\)</span>.</p>"
+    },
+    {
+      "number": 24,
+      "content": "<p><strong>8–70.</strong></p>\n<p>Tìm giới hạn. Dùng quy tắc l’Hospital khi thích hợp. Nếu có phương pháp sơ cấp hơn, hãy cân nhắc dùng phương pháp đó. Nếu không áp dụng được quy tắc l’Hospital, giải thích vì sao.</p><p><strong>24.</strong> <span class=\"math inline\">\\(\\displaystyle\\lim_{t\\to0}\\frac{8^t-5^t}{t}\\)</span>.</p>"
+    },
+    {
+      "number": 25,
+      "content": "<p><strong>8–70.</strong></p>\n<p>Tìm giới hạn. Dùng quy tắc l’Hospital khi thích hợp. Nếu có phương pháp sơ cấp hơn, hãy cân nhắc dùng phương pháp đó. Nếu không áp dụng được quy tắc l’Hospital, giải thích vì sao.</p><p><strong>25.</strong> <span class=\"math inline\">\\(\\displaystyle\\lim_{x\\to0}\\frac{\\sqrt{1+2x}-\\sqrt{1-4x}}{x}\\)</span>.</p>"
+    },
+    {
+      "number": 26,
+      "content": "<p><strong>8–70.</strong></p>\n<p>Tìm giới hạn. Dùng quy tắc l’Hospital khi thích hợp. Nếu có phương pháp sơ cấp hơn, hãy cân nhắc dùng phương pháp đó. Nếu không áp dụng được quy tắc l’Hospital, giải thích vì sao.</p><p><strong>26.</strong> <span class=\"math inline\">\\(\\displaystyle\\lim_{t\\to\\infty}\\frac{e^{t/10}}{t^3}\\)</span>.</p>"
+    },
+    {
+      "number": 27,
+      "content": "<p><strong>8–70.</strong></p>\n<p>Tìm giới hạn. Dùng quy tắc l’Hospital khi thích hợp. Nếu có phương pháp sơ cấp hơn, hãy cân nhắc dùng phương pháp đó. Nếu không áp dụng được quy tắc l’Hospital, giải thích vì sao.</p><p><strong>27.</strong> <span class=\"math inline\">\\(\\displaystyle\\lim_{x\\to0}\\frac{e^x+e^{-x}-2}{e^x-x-1}\\)</span>.</p>"
+    },
+    {
+      "number": 28,
+      "content": "<p><strong>8–70.</strong></p>\n<p>Tìm giới hạn. Dùng quy tắc l’Hospital khi thích hợp. Nếu có phương pháp sơ cấp hơn, hãy cân nhắc dùng phương pháp đó. Nếu không áp dụng được quy tắc l’Hospital, giải thích vì sao.</p><p><strong>28.</strong> <span class=\"math inline\">\\(\\displaystyle\\lim_{x\\to0}\\frac{\\sinh x-x}{x^3}\\)</span>.</p>"
+    },
+    {
+      "number": 29,
+      "content": "<p><strong>8–70.</strong></p>\n<p>Tìm giới hạn. Dùng quy tắc l’Hospital khi thích hợp. Nếu có phương pháp sơ cấp hơn, hãy cân nhắc dùng phương pháp đó. Nếu không áp dụng được quy tắc l’Hospital, giải thích vì sao.</p><p><strong>29.</strong> <span class=\"math inline\">\\(\\displaystyle\\lim_{x\\to0}\\frac{\\tanh x}{\\tan x}\\)</span>.</p>"
+    },
+    {
+      "number": 30,
+      "content": "<p><strong>8–70.</strong></p>\n<p>Tìm giới hạn. Dùng quy tắc l’Hospital khi thích hợp. Nếu có phương pháp sơ cấp hơn, hãy cân nhắc dùng phương pháp đó. Nếu không áp dụng được quy tắc l’Hospital, giải thích vì sao.</p><p><strong>30.</strong> <span class=\"math inline\">\\(\\displaystyle\\lim_{x\\to0}\\frac{x-\\sin x}{x-\\tan x}\\)</span>.</p>"
+    },
+    {
+      "number": 31,
+      "content": "<p><strong>8–70.</strong></p>\n<p>Tìm giới hạn. Dùng quy tắc l’Hospital khi thích hợp. Nếu có phương pháp sơ cấp hơn, hãy cân nhắc dùng phương pháp đó. Nếu không áp dụng được quy tắc l’Hospital, giải thích vì sao.</p><p><strong>31.</strong> <span class=\"math inline\">\\(\\displaystyle\\lim_{x\\to0}\\frac{\\arcsin x}{x}\\)</span>.</p>"
+    },
+    {
+      "number": 32,
+      "content": "<p><strong>8–70.</strong></p>\n<p>Tìm giới hạn. Dùng quy tắc l’Hospital khi thích hợp. Nếu có phương pháp sơ cấp hơn, hãy cân nhắc dùng phương pháp đó. Nếu không áp dụng được quy tắc l’Hospital, giải thích vì sao.</p><p><strong>32.</strong> <span class=\"math inline\">\\(\\displaystyle\\lim_{x\\to\\infty}\\frac{(\\ln x)^2}{x}\\)</span>.</p>"
+    },
+    {
+      "number": 33,
+      "content": "<p><strong>8–70.</strong></p>\n<p>Tìm giới hạn. Dùng quy tắc l’Hospital khi thích hợp. Nếu có phương pháp sơ cấp hơn, hãy cân nhắc dùng phương pháp đó. Nếu không áp dụng được quy tắc l’Hospital, giải thích vì sao.</p><p><strong>33.</strong> <span class=\"math inline\">\\(\\displaystyle\\lim_{x\\to0}\\frac{x3^x}{3^x-1}\\)</span>.</p>"
+    },
+    {
+      "number": 34,
+      "content": "<p><strong>8–70.</strong></p>\n<p>Tìm giới hạn. Dùng quy tắc l’Hospital khi thích hợp. Nếu có phương pháp sơ cấp hơn, hãy cân nhắc dùng phương pháp đó. Nếu không áp dụng được quy tắc l’Hospital, giải thích vì sao.</p><p><strong>34.</strong> <span class=\"math inline\">\\(\\displaystyle\\lim_{x\\to0}\\frac{e^x+e^{-x}-2\\cos x}{x\\sin x}\\)</span>.</p>"
+    },
+    {
+      "number": 35,
+      "content": "<p><strong>8–70.</strong></p>\n<p>Tìm giới hạn. Dùng quy tắc l’Hospital khi thích hợp. Nếu có phương pháp sơ cấp hơn, hãy cân nhắc dùng phương pháp đó. Nếu không áp dụng được quy tắc l’Hospital, giải thích vì sao.</p><p><strong>35.</strong> <span class=\"math inline\">\\(\\displaystyle\\lim_{x\\to0}\\frac{\\ln(1+x)}{\\cos x+e^x-1}\\)</span>.</p>"
+    },
+    {
+      "number": 36,
+      "content": "<p><strong>8–70.</strong></p>\n<p>Tìm giới hạn. Dùng quy tắc l’Hospital khi thích hợp. Nếu có phương pháp sơ cấp hơn, hãy cân nhắc dùng phương pháp đó. Nếu không áp dụng được quy tắc l’Hospital, giải thích vì sao.</p><p><strong>36.</strong> <span class=\"math inline\">\\(\\displaystyle\\lim_{x\\to1}\\frac{x\\sin(x-1)}{2x^2-x-1}\\)</span>.</p>"
+    },
+    {
+      "number": 37,
+      "content": "<p><strong>8–70.</strong></p>\n<p>Tìm giới hạn. Dùng quy tắc l’Hospital khi thích hợp. Nếu có phương pháp sơ cấp hơn, hãy cân nhắc dùng phương pháp đó. Nếu không áp dụng được quy tắc l’Hospital, giải thích vì sao.</p><p><strong>37.</strong> <span class=\"math inline\">\\(\\displaystyle\\lim_{x\\to0^+}\\frac{\\arctan2x}{\\ln x}\\)</span>.</p>"
+    },
+    {
+      "number": 38,
+      "content": "<p><strong>8–70.</strong></p>\n<p>Tìm giới hạn. Dùng quy tắc l’Hospital khi thích hợp. Nếu có phương pháp sơ cấp hơn, hãy cân nhắc dùng phương pháp đó. Nếu không áp dụng được quy tắc l’Hospital, giải thích vì sao.</p><p><strong>38.</strong> <span class=\"math inline\">\\(\\displaystyle\\lim_{x\\to0}\\frac{x^2\\sin x}{\\sin x-x}\\)</span>.</p>"
+    },
+    {
+      "number": 39,
+      "content": "<p><strong>8–70.</strong></p>\n<p>Tìm giới hạn. Dùng quy tắc l’Hospital khi thích hợp. Nếu có phương pháp sơ cấp hơn, hãy cân nhắc dùng phương pháp đó. Nếu không áp dụng được quy tắc l’Hospital, giải thích vì sao.</p><p><strong>39.</strong> <span class=\"math inline\">\\(\\displaystyle\\lim_{x\\to1}\\frac{x^a-1}{x^b-1},\\quad b\\ne0\\)</span>.</p>"
+    },
+    {
+      "number": 40,
+      "content": "<p><strong>8–70.</strong></p>\n<p>Tìm giới hạn. Dùng quy tắc l’Hospital khi thích hợp. Nếu có phương pháp sơ cấp hơn, hãy cân nhắc dùng phương pháp đó. Nếu không áp dụng được quy tắc l’Hospital, giải thích vì sao.</p><p><strong>40.</strong> <span class=\"math inline\">\\(\\displaystyle\\lim_{x\\to\\infty}\\frac{e^{-x}}{\\pi/2-\\arctan x}\\)</span>.</p>"
+    },
+    {
+      "number": 41,
+      "content": "<p><strong>8–70.</strong></p>\n<p>Tìm giới hạn. Dùng quy tắc l’Hospital khi thích hợp. Nếu có phương pháp sơ cấp hơn, hãy cân nhắc dùng phương pháp đó. Nếu không áp dụng được quy tắc l’Hospital, giải thích vì sao.</p><p><strong>41.</strong> <span class=\"math inline\">\\(\\displaystyle\\lim_{x\\to0}\\frac{\\cos x-1+\\frac12x^2}{x^4}\\)</span>.</p>"
+    },
+    {
+      "number": 42,
+      "content": "<p><strong>8–70.</strong></p>\n<p>Tìm giới hạn. Dùng quy tắc l’Hospital khi thích hợp. Nếu có phương pháp sơ cấp hơn, hãy cân nhắc dùng phương pháp đó. Nếu không áp dụng được quy tắc l’Hospital, giải thích vì sao.</p><p><strong>42.</strong> <span class=\"math inline\">\\(\\displaystyle\\lim_{x\\to0}\\frac{x-\\sin x}{x\\sin(x^2)}\\)</span>.</p>"
+    },
+    {
+      "number": 43,
+      "content": "<p><strong>8–70.</strong></p>\n<p>Tìm giới hạn. Dùng quy tắc l’Hospital khi thích hợp. Nếu có phương pháp sơ cấp hơn, hãy cân nhắc dùng phương pháp đó. Nếu không áp dụng được quy tắc l’Hospital, giải thích vì sao.</p><p><strong>43.</strong> <span class=\"math inline\">\\(\\displaystyle\\lim_{x\\to\\infty}x\\sin(\\pi/x)\\)</span>.</p>"
+    },
+    {
+      "number": 44,
+      "content": "<p><strong>8–70.</strong></p>\n<p>Tìm giới hạn. Dùng quy tắc l’Hospital khi thích hợp. Nếu có phương pháp sơ cấp hơn, hãy cân nhắc dùng phương pháp đó. Nếu không áp dụng được quy tắc l’Hospital, giải thích vì sao.</p><p><strong>44.</strong> <span class=\"math inline\">\\(\\displaystyle\\lim_{x\\to\\infty}\\sqrt x\\,e^{-x/2}\\)</span>.</p>"
+    },
+    {
+      "number": 45,
+      "content": "<p><strong>8–70.</strong></p>\n<p>Tìm giới hạn. Dùng quy tắc l’Hospital khi thích hợp. Nếu có phương pháp sơ cấp hơn, hãy cân nhắc dùng phương pháp đó. Nếu không áp dụng được quy tắc l’Hospital, giải thích vì sao.</p><p><strong>45.</strong> <span class=\"math inline\">\\(\\displaystyle\\lim_{x\\to0}\\sin5x\\,\\csc3x\\)</span>.</p>"
+    },
+    {
+      "number": 46,
+      "content": "<p><strong>8–70.</strong></p>\n<p>Tìm giới hạn. Dùng quy tắc l’Hospital khi thích hợp. Nếu có phương pháp sơ cấp hơn, hãy cân nhắc dùng phương pháp đó. Nếu không áp dụng được quy tắc l’Hospital, giải thích vì sao.</p><p><strong>46.</strong> <span class=\"math inline\">\\(\\displaystyle\\lim_{x\\to-\\infty}x\\ln\\left(1-\\frac1x\\right)\\)</span>.</p>"
+    },
+    {
+      "number": 47,
+      "content": "<p><strong>8–70.</strong></p>\n<p>Tìm giới hạn. Dùng quy tắc l’Hospital khi thích hợp. Nếu có phương pháp sơ cấp hơn, hãy cân nhắc dùng phương pháp đó. Nếu không áp dụng được quy tắc l’Hospital, giải thích vì sao.</p><p><strong>47.</strong> <span class=\"math inline\">\\(\\displaystyle\\lim_{x\\to\\infty}x^3e^{-x^2}\\)</span>.</p>"
+    },
+    {
+      "number": 48,
+      "content": "<p><strong>8–70.</strong></p>\n<p>Tìm giới hạn. Dùng quy tắc l’Hospital khi thích hợp. Nếu có phương pháp sơ cấp hơn, hãy cân nhắc dùng phương pháp đó. Nếu không áp dụng được quy tắc l’Hospital, giải thích vì sao.</p><p><strong>48.</strong> <span class=\"math inline\">\\(\\displaystyle\\lim_{x\\to\\infty}x^{3/2}\\sin(1/x)\\)</span>.</p>"
+    },
+    {
+      "number": 49,
+      "content": "<p><strong>8–70.</strong></p>\n<p>Tìm giới hạn. Dùng quy tắc l’Hospital khi thích hợp. Nếu có phương pháp sơ cấp hơn, hãy cân nhắc dùng phương pháp đó. Nếu không áp dụng được quy tắc l’Hospital, giải thích vì sao.</p><p><strong>49.</strong> <span class=\"math inline\">\\(\\displaystyle\\lim_{x\\to1^+}\\ln x\\tan(\\pi x/2)\\)</span>.</p>"
+    },
+    {
+      "number": 50,
+      "content": "<p><strong>8–70.</strong></p>\n<p>Tìm giới hạn. Dùng quy tắc l’Hospital khi thích hợp. Nếu có phương pháp sơ cấp hơn, hãy cân nhắc dùng phương pháp đó. Nếu không áp dụng được quy tắc l’Hospital, giải thích vì sao.</p><p><strong>50.</strong> <span class=\"math inline\">\\(\\displaystyle\\lim_{x\\to(\\pi/2)^-}\\cos x\\sec5x\\)</span>.</p>"
+    },
+    {
+      "number": 51,
+      "content": "<p><strong>8–70.</strong></p>\n<p>Tìm giới hạn. Dùng quy tắc l’Hospital khi thích hợp. Nếu có phương pháp sơ cấp hơn, hãy cân nhắc dùng phương pháp đó. Nếu không áp dụng được quy tắc l’Hospital, giải thích vì sao.</p><p><strong>51.</strong> <span class=\"math inline\">\\(\\displaystyle\\lim_{x\\to1}\\left(\\frac{x}{x-1}-\\frac1{\\ln x}\\right)\\)</span>.</p>"
+    },
+    {
+      "number": 52,
+      "content": "<p><strong>8–70.</strong></p>\n<p>Tìm giới hạn. Dùng quy tắc l’Hospital khi thích hợp. Nếu có phương pháp sơ cấp hơn, hãy cân nhắc dùng phương pháp đó. Nếu không áp dụng được quy tắc l’Hospital, giải thích vì sao.</p><p><strong>52.</strong> <span class=\"math inline\">\\(\\displaystyle\\lim_{x\\to0}(\\csc x-\\cot x)\\)</span>.</p>"
+    },
+    {
+      "number": 53,
+      "content": "<p><strong>8–70.</strong></p>\n<p>Tìm giới hạn. Dùng quy tắc l’Hospital khi thích hợp. Nếu có phương pháp sơ cấp hơn, hãy cân nhắc dùng phương pháp đó. Nếu không áp dụng được quy tắc l’Hospital, giải thích vì sao.</p><p><strong>53.</strong> <span class=\"math inline\">\\(\\displaystyle\\lim_{x\\to0^+}\\left(\\frac1x-\\frac1{e^x-1}\\right)\\)</span>.</p>"
+    },
+    {
+      "number": 54,
+      "content": "<p><strong>8–70.</strong></p>\n<p>Tìm giới hạn. Dùng quy tắc l’Hospital khi thích hợp. Nếu có phương pháp sơ cấp hơn, hãy cân nhắc dùng phương pháp đó. Nếu không áp dụng được quy tắc l’Hospital, giải thích vì sao.</p><p><strong>54.</strong> <span class=\"math inline\">\\(\\displaystyle\\lim_{x\\to0^+}\\left(\\frac1x-\\frac1{\\arctan x}\\right)\\)</span>.</p>"
+    },
+    {
+      "number": 55,
+      "content": "<p><strong>8–70.</strong></p>\n<p>Tìm giới hạn. Dùng quy tắc l’Hospital khi thích hợp. Nếu có phương pháp sơ cấp hơn, hãy cân nhắc dùng phương pháp đó. Nếu không áp dụng được quy tắc l’Hospital, giải thích vì sao.</p><p><strong>55.</strong> <span class=\"math inline\">\\(\\displaystyle\\lim_{x\\to0^+}\\left(\\frac1x-\\frac1{\\tan x}\\right)\\)</span>.</p>"
+    },
+    {
+      "number": 56,
+      "content": "<p><strong>8–70.</strong></p>\n<p>Tìm giới hạn. Dùng quy tắc l’Hospital khi thích hợp. Nếu có phương pháp sơ cấp hơn, hãy cân nhắc dùng phương pháp đó. Nếu không áp dụng được quy tắc l’Hospital, giải thích vì sao.</p><p><strong>56.</strong> <span class=\"math inline\">\\(\\displaystyle\\lim_{x\\to\\infty}(x-\\ln x)\\)</span>.</p>"
+    },
+    {
+      "number": 57,
+      "content": "<p><strong>8–70.</strong></p>\n<p>Tìm giới hạn. Dùng quy tắc l’Hospital khi thích hợp. Nếu có phương pháp sơ cấp hơn, hãy cân nhắc dùng phương pháp đó. Nếu không áp dụng được quy tắc l’Hospital, giải thích vì sao.</p><p><strong>57.</strong> <span class=\"math inline\">\\(\\displaystyle\\lim_{x\\to0^+}x^{\\sqrt x}\\)</span>.</p>"
+    },
+    {
+      "number": 58,
+      "content": "<p><strong>8–70.</strong></p>\n<p>Tìm giới hạn. Dùng quy tắc l’Hospital khi thích hợp. Nếu có phương pháp sơ cấp hơn, hãy cân nhắc dùng phương pháp đó. Nếu không áp dụng được quy tắc l’Hospital, giải thích vì sao.</p><p><strong>58.</strong> <span class=\"math inline\">\\(\\displaystyle\\lim_{x\\to0^+}(\\tan2x)^x\\)</span>.</p>"
+    },
+    {
+      "number": 59,
+      "content": "<p><strong>8–70.</strong></p>\n<p>Tìm giới hạn. Dùng quy tắc l’Hospital khi thích hợp. Nếu có phương pháp sơ cấp hơn, hãy cân nhắc dùng phương pháp đó. Nếu không áp dụng được quy tắc l’Hospital, giải thích vì sao.</p><p><strong>59.</strong> <span class=\"math inline\">\\(\\displaystyle\\lim_{x\\to0}(1-2x)^{1/x}\\)</span>.</p>"
+    },
+    {
+      "number": 60,
+      "content": "<p><strong>8–70.</strong></p>\n<p>Tìm giới hạn. Dùng quy tắc l’Hospital khi thích hợp. Nếu có phương pháp sơ cấp hơn, hãy cân nhắc dùng phương pháp đó. Nếu không áp dụng được quy tắc l’Hospital, giải thích vì sao.</p><p><strong>60.</strong> <span class=\"math inline\">\\(\\displaystyle\\lim_{x\\to\\infty}\\left(1+\\frac ax\\right)^{bx}\\)</span>.</p>"
+    },
+    {
+      "number": 61,
+      "content": "<p><strong>8–70.</strong></p>\n<p>Tìm giới hạn. Dùng quy tắc l’Hospital khi thích hợp. Nếu có phương pháp sơ cấp hơn, hãy cân nhắc dùng phương pháp đó. Nếu không áp dụng được quy tắc l’Hospital, giải thích vì sao.</p><p><strong>61.</strong> <span class=\"math inline\">\\(\\displaystyle\\lim_{x\\to1^+}x^{1/(1-x)}\\)</span>.</p>"
+    },
+    {
+      "number": 62,
+      "content": "<p><strong>8–70.</strong></p>\n<p>Tìm giới hạn. Dùng quy tắc l’Hospital khi thích hợp. Nếu có phương pháp sơ cấp hơn, hãy cân nhắc dùng phương pháp đó. Nếu không áp dụng được quy tắc l’Hospital, giải thích vì sao.</p><p><strong>62.</strong> <span class=\"math inline\">\\(\\displaystyle\\lim_{x\\to\\infty}(e^x+10x)^{1/x}\\)</span>.</p>"
+    },
+    {
+      "number": 63,
+      "content": "<p><strong>8–70.</strong></p>\n<p>Tìm giới hạn. Dùng quy tắc l’Hospital khi thích hợp. Nếu có phương pháp sơ cấp hơn, hãy cân nhắc dùng phương pháp đó. Nếu không áp dụng được quy tắc l’Hospital, giải thích vì sao.</p><p><strong>63.</strong> <span class=\"math inline\">\\(\\displaystyle\\lim_{x\\to\\infty}x^{1/x}\\)</span>.</p>"
+    },
+    {
+      "number": 64,
+      "content": "<p><strong>8–70.</strong></p>\n<p>Tìm giới hạn. Dùng quy tắc l’Hospital khi thích hợp. Nếu có phương pháp sơ cấp hơn, hãy cân nhắc dùng phương pháp đó. Nếu không áp dụng được quy tắc l’Hospital, giải thích vì sao.</p><p><strong>64.</strong> <span class=\"math inline\">\\(\\displaystyle\\lim_{x\\to\\infty}x^{e^{-x}}\\)</span>.</p>"
+    },
+    {
+      "number": 65,
+      "content": "<p><strong>8–70.</strong></p>\n<p>Tìm giới hạn. Dùng quy tắc l’Hospital khi thích hợp. Nếu có phương pháp sơ cấp hơn, hãy cân nhắc dùng phương pháp đó. Nếu không áp dụng được quy tắc l’Hospital, giải thích vì sao.</p><p><strong>65.</strong> <span class=\"math inline\">\\(\\displaystyle\\lim_{x\\to0^+}(4x+1)^{\\cot x}\\)</span>.</p>"
+    },
+    {
+      "number": 66,
+      "content": "<p><strong>8–70.</strong></p>\n<p>Tìm giới hạn. Dùng quy tắc l’Hospital khi thích hợp. Nếu có phương pháp sơ cấp hơn, hãy cân nhắc dùng phương pháp đó. Nếu không áp dụng được quy tắc l’Hospital, giải thích vì sao.</p><p><strong>66.</strong> <span class=\"math inline\">\\(\\displaystyle\\lim_{x\\to0^+}(1-\\cos x)^{\\sin x}\\)</span>.</p>"
+    },
+    {
+      "number": 67,
+      "content": "<p><strong>8–70.</strong></p>\n<p>Tìm giới hạn. Dùng quy tắc l’Hospital khi thích hợp. Nếu có phương pháp sơ cấp hơn, hãy cân nhắc dùng phương pháp đó. Nếu không áp dụng được quy tắc l’Hospital, giải thích vì sao.</p><p><strong>67.</strong> <span class=\"math inline\">\\(\\displaystyle\\lim_{x\\to0^+}(1+\\sin3x)^{1/x}\\)</span>.</p>"
+    },
+    {
+      "number": 68,
+      "content": "<p><strong>8–70.</strong></p>\n<p>Tìm giới hạn. Dùng quy tắc l’Hospital khi thích hợp. Nếu có phương pháp sơ cấp hơn, hãy cân nhắc dùng phương pháp đó. Nếu không áp dụng được quy tắc l’Hospital, giải thích vì sao.</p><p><strong>68.</strong> <span class=\"math inline\">\\(\\displaystyle\\lim_{x\\to0}(\\cos x)^{1/x^2}\\)</span>.</p>"
+    },
+    {
+      "number": 69,
+      "content": "<p><strong>8–70.</strong></p>\n<p>Tìm giới hạn. Dùng quy tắc l’Hospital khi thích hợp. Nếu có phương pháp sơ cấp hơn, hãy cân nhắc dùng phương pháp đó. Nếu không áp dụng được quy tắc l’Hospital, giải thích vì sao.</p><p><strong>69.</strong> <span class=\"math inline\">\\(\\displaystyle\\lim_{x\\to0^+}\\frac{x^x-1}{\\ln x+x-1}\\)</span>.</p>"
+    },
+    {
+      "number": 70,
+      "content": "<p><strong>8–70.</strong></p>\n<p>Tìm giới hạn. Dùng quy tắc l’Hospital khi thích hợp. Nếu có phương pháp sơ cấp hơn, hãy cân nhắc dùng phương pháp đó. Nếu không áp dụng được quy tắc l’Hospital, giải thích vì sao.</p><p><strong>70.</strong> <span class=\"math inline\">\\(\\displaystyle\\lim_{x\\to\\infty}\\left(\\frac{2x-3}{2x+5}\\right)^{2x+1}\\)</span>.</p>"
+    },
+    {
+      "number": 71,
+      "content": "<p><strong>71–72.</strong></p>\n<p>Dùng đồ thị để ước lượng giá trị giới hạn. Sau đó dùng quy tắc l’Hospital để tìm giá trị chính xác.</p><p><strong>71.</strong> <span class=\"math inline\">\\(\\displaystyle\\lim_{x\\to\\infty}\\left(1+\\frac2x\\right)^x\\)</span>.</p>"
+    },
+    {
+      "number": 72,
+      "content": "<p><strong>71–72.</strong></p>\n<p>Dùng đồ thị để ước lượng giá trị giới hạn. Sau đó dùng quy tắc l’Hospital để tìm giá trị chính xác.</p><p><strong>72.</strong> <span class=\"math inline\">\\(\\displaystyle\\lim_{x\\to0}\\frac{5^x-4^x}{3^x-2^x}\\)</span>.</p>"
+    },
+    {
+      "number": 73,
+      "content": "<p><strong>73–74.</strong></p>\n<p>Minh họa quy tắc l’Hospital bằng cách vẽ đồ thị <span class=\"math inline\">\\(f(x)/g(x)\\)</span> và <span class=\"math inline\">\\(f'(x)/g'(x)\\)</span> ở gần <span class=\"math inline\">\\(x=0\\)</span> để thấy các tỉ số có cùng giới hạn khi <span class=\"math inline\">\\(x\\to0\\)</span>. Đồng thời, tính chính xác giới hạn.</p><p><strong>73.</strong> <span class=\"math inline\">\\(f(x)=e^x-1,\\quad g(x)=x^3+4x\\)</span>.</p>"
+    },
+    {
+      "number": 74,
+      "content": "<p><strong>73–74.</strong></p>\n<p>Minh họa quy tắc l’Hospital bằng cách vẽ đồ thị <span class=\"math inline\">\\(f(x)/g(x)\\)</span> và <span class=\"math inline\">\\(f'(x)/g'(x)\\)</span> ở gần <span class=\"math inline\">\\(x=0\\)</span> để thấy các tỉ số có cùng giới hạn khi <span class=\"math inline\">\\(x\\to0\\)</span>. Đồng thời, tính chính xác giới hạn.</p><p><strong>74.</strong> <span class=\"math inline\">\\(f(x)=2x\\sin x,\\quad g(x)=\\sec x-1\\)</span>.</p>"
+    },
+    {
+      "number": 75,
+      "content": "<p><strong>75.</strong> Chứng minh <span class=\"math display\">\\[\\lim_{x\\to\\infty}\\frac{e^x}{x^n}=\\infty\\]</span> với mọi số nguyên dương <span class=\"math inline\">\\(n\\)</span>. Điều này cho thấy hàm mũ tiến tới vô cực nhanh hơn mọi lũy thừa của <span class=\"math inline\">\\(x\\)</span>.</p>"
+    },
+    {
+      "number": 76,
+      "content": "<p><strong>76.</strong> Chứng minh <span class=\"math display\">\\[\\lim_{x\\to\\infty}\\frac{\\ln x}{x^p}=0\\]</span> với mọi <span class=\"math inline\">\\(p&gt;0\\)</span>. Điều này cho thấy hàm logarit tiến tới vô cực chậm hơn mọi lũy thừa dương của <span class=\"math inline\">\\(x\\)</span>.</p>"
+    },
+    {
+      "number": 77,
+      "content": "<p><strong>77–78.</strong></p>\n<p>Điều gì xảy ra nếu dùng quy tắc l’Hospital để tìm giới hạn? Hãy tính bằng phương pháp khác.</p><p><strong>77.</strong> <span class=\"math inline\">\\(\\displaystyle\\lim_{x\\to\\infty}\\frac{x}{\\sqrt{x^2+1}}\\)</span>.</p>"
+    },
+    {
+      "number": 78,
+      "content": "<p><strong>77–78.</strong></p>\n<p>Điều gì xảy ra nếu dùng quy tắc l’Hospital để tìm giới hạn? Hãy tính bằng phương pháp khác.</p><p><strong>78.</strong> <span class=\"math inline\">\\(\\displaystyle\\lim_{x\\to(\\pi/2)^-}\\frac{\\sec x}{\\tan x}\\)</span>.</p>"
+    },
+    {
+      "number": 79,
+      "content": "<p><strong>79.</strong> Khảo sát họ đường cong <span class=\"math inline\">\\(f(x)=e^x-cx\\)</span>. Đặc biệt, tìm các giới hạn khi <span class=\"math inline\">\\(x\\to\\pm\\infty\\)</span> và xác định các giá trị <span class=\"math inline\">\\(c\\)</span> để <span class=\"math inline\">\\(f\\)</span> có giá trị nhỏ nhất tuyệt đối. Điều gì xảy ra với các điểm đạt giá trị nhỏ nhất khi <span class=\"math inline\">\\(c\\)</span> tăng?</p>"
+    },
+    {
+      "number": 80,
+      "content": "<p><strong>80.</strong> Nếu một vật khối lượng <span class=\"math inline\">\\(m\\)</span> được thả rơi từ trạng thái nghỉ, một mô hình tốc độ của nó sau <span class=\"math inline\">\\(t\\)</span> giây, có tính đến sức cản không khí, là <span class=\"math display\">\\[v=\\frac{mg}{c}\\left(1-e^{-ct/m}\\right),\\]</span> trong đó <span class=\"math inline\">\\(g\\)</span> là gia tốc trọng trường, <span class=\"math inline\">\\(c\\)</span> là hằng số dương. (Ở Chương 9, ta sẽ suy ra phương trình từ giả thiết sức cản không khí tỉ lệ với tốc độ của vật; <span class=\"math inline\">\\(c\\)</span> là hệ số tỉ lệ.)</p>\n<p>(a) Tính <span class=\"math inline\">\\(\\lim_{t\\to\\infty}v\\)</span>. Giới hạn này có ý nghĩa gì?</p>\n<p>(b) Với <span class=\"math inline\">\\(t\\)</span> cố định, dùng quy tắc l’Hospital để tính <span class=\"math inline\">\\(\\lim_{c\\to0^+}v\\)</span>. Có thể kết luận gì về tốc độ của một vật rơi trong chân không?</p>"
+    },
+    {
+      "number": 81,
+      "content": "<p><strong>81.</strong> Nếu số tiền ban đầu <span class=\"math inline\">\\(A_0\\)</span> được đầu tư với lãi suất <span class=\"math inline\">\\(r\\)</span> và ghép lãi <span class=\"math inline\">\\(n\\)</span> lần mỗi năm, thì giá trị đầu tư sau <span class=\"math inline\">\\(t\\)</span> năm là <span class=\"math display\">\\[A=A_0\\left(1+\\frac rn\\right)^{nt}.\\]</span> Khi cho <span class=\"math inline\">\\(n\\to\\infty\\)</span>, ta gọi là <em>ghép lãi liên tục</em>. Dùng quy tắc l’Hospital để chứng minh khi ghép lãi liên tục, số tiền sau <span class=\"math inline\">\\(t\\)</span> năm là <span class=\"math display\">\\[A=A_0e^{rt}.\\]</span></p>"
+    },
+    {
+      "number": 82,
+      "content": "<p><strong>82.</strong> Ánh sáng đi qua đồng tử vào mắt và tới võng mạc, nơi các tế bào thụ cảm ánh sáng cảm nhận ánh sáng và màu sắc. W. Stanley Stiles và B. H. Crawford nghiên cứu hiện tượng độ sáng cảm nhận giảm khi ánh sáng đi vào xa tâm đồng tử hơn (xem hình).</p>\n<div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-4-4-5853e1b1/ex82.png\" alt=\"image\"><br>\nHình cho Bài tập 82. Chùm sáng <span class=\"math inline\">\\(A\\)</span> đi qua tâm đồng tử được cảm nhận sáng hơn chùm <span class=\"math inline\">\\(B\\)</span> đi vào gần mép đồng tử.</p>\n</div>\n<p>Họ trình bày chi tiết phát hiện về hiện tượng này, gọi là <em>hiệu ứng Stiles–Crawford loại thứ nhất</em>, trong một bài báo quan trọng năm 1933. Đặc biệt, họ quan sát thấy lượng độ sáng cảm nhận không tỉ lệ với diện tích đồng tử như dự kiến. Tỉ lệ <span class=\"math inline\">\\(P\\)</span> của tổng độ sáng đi vào đồng tử bán kính <span class=\"math inline\">\\(r\\)</span> mm được võng mạc cảm nhận có thể mô tả bởi <span class=\"math display\">\\[P=\\frac{1-10^{-\\rho r^2}}{\\rho r^2\\ln10},\\]</span> trong đó <span class=\"math inline\">\\(\\rho\\)</span> là hằng số xác định bằng thực nghiệm, thường khoảng <span class=\"math inline\">\\(0{,}05\\)</span>.</p>\n<p>(a) Tỉ lệ phần trăm độ sáng được đồng tử bán kính 3 mm cảm nhận là bao nhiêu? Dùng <span class=\"math inline\">\\(\\rho=0{,}05\\)</span>.</p>\n<p>(b) Tính tỉ lệ phần trăm với đồng tử bán kính 2 mm. Việc kết quả lớn hơn phần (a) có hợp lý không?</p>\n<p>(c) Tính <span class=\"math inline\">\\(\\lim_{r\\to0^+}P\\)</span>. Kết quả có như dự kiến không? Kết quả này có khả thi về mặt vật lý không?</p>\n<p><em>Nguồn:</em> Phỏng theo W. Stiles và B. Crawford, “The Luminous Efficiency of Rays Entering the Eye Pupil at Different Points”, <em>Proceedings of the Royal Society of London, Series B: Biological Sciences</em> 112 (1933): 428–50.</p>"
+    },
+    {
+      "number": 83,
+      "content": "<p><strong>83.</strong> <strong>Phương trình logistic.</strong> Một số quần thể ban đầu tăng theo hàm mũ nhưng cuối cùng ổn định. Các phương trình dạng <span class=\"math display\">\\[P(t)=\\frac{M}{1+Ae^{-kt}},\\]</span> trong đó <span class=\"math inline\">\\(M,A,k\\)</span> là các hằng số dương, được gọi là <em>phương trình logistic</em> và thường dùng để mô hình hóa các quần thể như vậy. (Ta sẽ khảo sát chi tiết ở Chương 9.) Ở đây, <span class=\"math inline\">\\(M\\)</span> là <em>sức chứa của môi trường</em>, biểu diễn quy mô quần thể lớn nhất có thể duy trì, và <span class=\"math display\">\\[A=\\frac{M-P_0}{P_0},\\]</span> với <span class=\"math inline\">\\(P_0\\)</span> là số lượng ban đầu.</p>\n<p>(a) Tính <span class=\"math inline\">\\(\\lim_{t\\to\\infty}P(t)\\)</span>. Giải thích vì sao kết quả là điều dự kiến.</p>\n<p>(b) Tính <span class=\"math inline\">\\(\\lim_{M\\to\\infty}P(t)\\)</span>. (Chú ý <span class=\"math inline\">\\(A\\)</span> được xác định theo <span class=\"math inline\">\\(M\\)</span>.) Kết quả là loại hàm nào?</p>"
+    },
+    {
+      "number": 84,
+      "content": "<p><strong>84.</strong> Một cáp kim loại có bán kính <span class=\"math inline\">\\(r\\)</span>, được bọc cách điện sao cho khoảng cách từ tâm cáp đến mặt ngoài lớp cách điện là <span class=\"math inline\">\\(R\\)</span>. Vận tốc <span class=\"math inline\">\\(v\\)</span> của một xung điện trong cáp là <span class=\"math display\">\\[v=-c\\left(\\frac rR\\right)^2\\ln\\left(\\frac rR\\right),\\]</span> trong đó <span class=\"math inline\">\\(c\\)</span> là hằng số dương. Tìm các giới hạn sau và giải thích kết quả.</p>\n<p>(a) <span class=\"math inline\">\\(\\displaystyle\\lim_{R\\to r^+}v\\)</span>; (b) <span class=\"math inline\">\\(\\displaystyle\\lim_{r\\to0^+}v\\)</span>.</p>"
+    },
+    {
+      "number": 85,
+      "content": "<p><strong>85.</strong> Quy tắc l’Hospital xuất hiện lần đầu trên ấn phẩm trong cuốn <em>Analyse des infiniment petits</em>, được Hầu tước de l’Hospital xuất bản năm 1696. Đây là giáo trình vi tích phân đầu tiên từng được xuất bản. Ví dụ Hầu tước dùng để minh họa quy tắc là tìm giới hạn của hàm <span class=\"math display\">\\[y=\\frac{\\sqrt{2a^3x-x^4}-a\\sqrt[3]{aax}}{a-\\sqrt[4]{ax^3}}\\]</span> khi <span class=\"math inline\">\\(x\\)</span> tiến tới <span class=\"math inline\">\\(a\\)</span>, với <span class=\"math inline\">\\(a&gt;0\\)</span>. (Thời ấy thường viết <span class=\"math inline\">\\(aa\\)</span> thay cho <span class=\"math inline\">\\(a^2\\)</span>.) Hãy giải bài toán này.</p>"
+    },
+    {
+      "number": 86,
+      "content": "<p><strong>86.</strong> Hình vẽ biểu diễn một hình quạt tròn có góc ở tâm <span class=\"math inline\">\\(\\theta\\)</span>. Gọi <span class=\"math inline\">\\(A(\\theta)\\)</span> là diện tích hình viên phân nằm giữa dây <span class=\"math inline\">\\(PR\\)</span> và cung <span class=\"math inline\">\\(PR\\)</span>. Gọi <span class=\"math inline\">\\(B(\\theta)\\)</span> là diện tích tam giác <span class=\"math inline\">\\(PQR\\)</span>. Tìm <span class=\"math inline\">\\(\\displaystyle\\lim_{\\theta\\to0^+}\\frac{A(\\theta)}{B(\\theta)}\\)</span>.</p>\n<div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-4-4-5853e1b1/ex86.png\" alt=\"image\"><br>\nHình cho Bài tập 86.</p>\n</div>"
+    },
+    {
+      "number": 87,
+      "content": "<p><strong>87.</strong> Tính <span class=\"math inline\">\\(\\displaystyle\\lim_{x\\to\\infty}\\left[x-x^2\\ln\\left(\\frac{1+x}{x}\\right)\\right]\\)</span>.</p>"
+    },
+    {
+      "number": 88,
+      "content": "<p><strong>88.</strong> Giả sử <span class=\"math inline\">\\(f\\)</span> là hàm dương. Nếu <span class=\"math inline\">\\(\\lim_{x\\to a}f(x)=0\\)</span> và <span class=\"math inline\">\\(\\lim_{x\\to a}g(x)=\\infty\\)</span>, chứng minh <span class=\"math display\">\\[\\lim_{x\\to a}[f(x)]^{g(x)}=0.\\]</span> Điều này cho thấy <span class=\"math inline\">\\(0^\\infty\\)</span> không phải dạng vô định.</p>"
+    },
+    {
+      "number": 89,
+      "content": "<p><strong>89.</strong> Tìm các hàm <span class=\"math inline\">\\(f,g\\)</span> sao cho <span class=\"math inline\">\\(\\lim_{x\\to0}f(x)=\\lim_{x\\to0}g(x)=\\infty\\)</span> và:</p>\n<p>(a) <span class=\"math inline\">\\(\\displaystyle\\lim_{x\\to0}\\frac{f(x)}{g(x)}=7\\)</span>; (b) <span class=\"math inline\">\\(\\displaystyle\\lim_{x\\to0}[f(x)-g(x)]=7\\)</span>.</p>"
+    },
+    {
+      "number": 90,
+      "content": "<p><strong>90.</strong> Với những giá trị nào của <span class=\"math inline\">\\(a,b\\)</span>, đẳng thức sau đúng? <span class=\"math display\">\\[\\lim_{x\\to0}\\left(\\frac{\\sin2x}{x^3}+a+\\frac b{x^2}\\right)=0.\\]</span></p>"
+    },
+    {
+      "number": 91,
+      "content": "<p><strong>91.</strong> Cho <span class=\"math display\">\\[f(x)=\\begin{cases}e^{-1/x^2}&amp;\\text{khi }x\\ne0,\\\\0&amp;\\text{khi }x=0.\\end{cases}\\]</span> (a) Dùng định nghĩa đạo hàm để tính <span class=\"math inline\">\\(f'(0)\\)</span>.</p>\n<p>(b) Chứng minh <span class=\"math inline\">\\(f\\)</span> có các đạo hàm mọi cấp xác định trên <span class=\"math inline\">\\(\\mathbb R\\)</span>. [<em>Gợi ý:</em> Trước hết, dùng quy nạp chứng minh tồn tại đa thức <span class=\"math inline\">\\(p_n(x)\\)</span> và số nguyên không âm <span class=\"math inline\">\\(k_n\\)</span> sao cho <span class=\"math inline\">\\(f^{(n)}(x)=p_n(x)f(x)/x^{k_n}\\)</span> với <span class=\"math inline\">\\(x\\ne0\\)</span>.]</p>"
+    },
+    {
+      "number": 92,
+      "content": "<p><strong>92.</strong> Cho <span class=\"math display\">\\[f(x)=\\begin{cases}|x|^x&amp;\\text{khi }x\\ne0,\\\\1&amp;\\text{khi }x=0.\\end{cases}\\]</span> (a) Chứng minh <span class=\"math inline\">\\(f\\)</span> liên tục tại 0.</p>\n<p>(b) Dùng đồ thị để khảo sát <span class=\"math inline\">\\(f\\)</span> có khả vi tại 0 không, bằng cách phóng to nhiều lần về phía <span class=\"math inline\">\\((0,1)\\)</span> trên đồ thị.</p>\n<p>(c) Chứng minh <span class=\"math inline\">\\(f\\)</span> không khả vi tại 0. Giải thích sự khác nhau giữa sự kiện này và hình ảnh các đồ thị ở (b).</p>"
+    }
+  ]
+}
