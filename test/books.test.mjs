@@ -324,3 +324,28 @@ const changedPrinciples=await mutateBooks(db,admin,'books_save_section',{id:chil
 assert.equal((await readBooks(db,student,{bookId:book.id,sectionId:childPrinciples.id})).section.content,changedPrinciples.content);assert.equal((await readBooks(db,student,{bookId:book.id,sectionId:childPrinciples.id})).exercises.length,22);
 window.close();console.log('Books: seeded TOC, admin CRUD/CAS, scopes, subtree delete/restore, lazy bodies and UI actions OK');
 
+
+// Rates-of-change exercises share section 1.1's persisted action initialization.
+const child37=detail.sections.find(s=>s.title.startsWith('3.7'));
+const section37=await readBooks(db,student,{bookId:book.id,sectionId:child37.id});
+assert.equal(section37.exerciseHeading,'3.7. Bài tập');
+assert.deepEqual(section37.exercises.map(e=>e.questionNumber),Array.from({length:43},(_,i)=>i+1));
+assert.ok(section37.exercises.every(e=>e.allowSubmission&&e.allowAiEvaluation&&e.contentKey&&e.setKey));
+for(const n of [1,2,3,4]){
+ assert.ok(section37.exercises[n-1].content.includes('tổng quãng đường'));
+ assert.ok(section37.exercises[n-1].content.includes('nhanh dần'));
+ assert.ok(section37.exercises[n-1].content.includes('/f02.png'));
+}
+for(const [n,name]of [[5,'e05'],[6,'e06'],[7,'e07'],[8,'e07'],[31,'f08']])assert.ok(section37.exercises[n-1].content.includes('/'+name+'.png'));
+assert.ok(section37.exercises[30].content.includes('\\tag{1}'));
+for(const n of [29,30])assert.ok(section37.exercises[n-1].content.includes('<table>'));
+const doc37=new JSDOM(section37.section.content);
+assert.equal(doc37.window.document.querySelectorAll('img').length,12);
+assert.equal(section37.section.sourceInfo.exampleCount,8);
+for(const image of doc37.window.document.querySelectorAll('img')){
+ const asset=new URL(image.src,'https://example.test').searchParams.get('asset');
+ assert.equal((await readBookAsset(student,asset)).bytes[0],137);
+ await assert.rejects(()=>readBookAsset(other,asset),e=>e.status===403);
+}
+doc37.window.close();
+assert.deepEqual((await readBooks(db,student,{bookId:book.id,sectionId:child37.id})).exercises.map(e=>e.contentKey),section37.exercises.map(e=>e.contentKey));

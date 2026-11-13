@@ -1,0 +1,472 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage{fontspec}\setmainfont{Latin Modern Roman}\setsansfont{DejaVu Sans}
+\usepackage{amsmath,amssymb,graphicx,geometry,enumitem,longtable,booktabs,fancyhdr,hyperref}
+\geometry{left=28mm,right=23mm,top=24mm,bottom=24mm}
+\hypersetup{unicode=true,colorlinks=true,linkcolor=black,urlcolor=blue,pdftitle={Giải tích Chương 3 Mục 3.7 Tốc độ biến thiên trong khoa học tự nhiên và khoa học xã hội}}
+\setlength{\parindent}{1.2em}\setlength{\parskip}{4pt}\setlength{\headheight}{16pt}
+\pagestyle{fancy}\fancyhf{}\fancyhead[L]{\small Chương 3. Các quy tắc tính đạo hàm}\fancyhead[R]{\small §3.7}\fancyfoot[C]{\thepage}
+\newcommand{\fig}[3][.68]{\begin{center}\begin{minipage}{\linewidth}\centering\includegraphics[width=#1\linewidth]{assets/#2.png}\\{\small #3}\end{minipage}\end{center}}
+\newcommand{\ex}[1]{\par\medskip\noindent\textbf{Ví dụ #1.}\ }
+\newcommand{\sol}{\par\nopagebreak[4]\noindent\textit{Lời giải.}\ }
+\newcommand{\bt}[1]{\par\smallskip\noindent\textbf{#1.}\ }
+\newcommand{\group}[1]{\par\medskip\noindent\textbf{#1}\par\nopagebreak[4]}
+\newcommand{\gint}[1]{\left[\!\left[#1\right]\!\right]}
+\allowdisplaybreaks[2]
+\begin{document}
+\begin{center}
+{\Large\bfseries GIẢI TÍCH}\\[5pt]
+{\large Chương 3. Các quy tắc tính đạo hàm}\\[9pt]
+{\Large\bfseries 3.7. Tốc độ biến thiên trong khoa học\\[3pt]tự nhiên và khoa học xã hội}
+\end{center}
+\noindent\textbf{Nguồn:} James Stewart, Daniel K. Clegg, Saleem Watson, \textit{Calculus: Early Transcendentals}, ấn bản thứ 9 (2020), trang in 225–239 (trang PDF 260–274): toàn bộ §3.7 và Bài tập 1–43, trước tiêu đề §3.8.
+
+Ta biết rằng nếu $y=f(x)$ thì đạo hàm $dy/dx$ có thể được diễn giải là tốc độ biến thiên của $y$ theo $x$. Trong mục này, ta xét một số ứng dụng của ý tưởng ấy trong vật lý, hóa học, sinh học, kinh tế học và các khoa học khác.
+
+Nhắc lại ý tưởng cơ bản ở §2.7. Khi $x$ thay đổi từ $x_1$ đến $x_2$, số gia của $x$ là $\Delta x=x_2-x_1$, và số gia tương ứng của $y$ là $\Delta y=f(x_2)-f(x_1)$. Thương sai phân
+\[\frac{\Delta y}{\Delta x}=\frac{f(x_2)-f(x_1)}{x_2-x_1}\]
+là \textbf{tốc độ biến thiên trung bình} của $y$ theo $x$ trên đoạn $[x_1,x_2]$; về hình học, đó là hệ số góc của cát tuyến $PQ$ trong Hình 1. Giới hạn của thương này khi $\Delta x\to0$ là đạo hàm $f'(x_1)$, được diễn giải là \textbf{tốc độ biến thiên tức thời} của $y$ theo $x$, hoặc hệ số góc của tiếp tuyến tại $P(x_1,f(x_1))$. Theo ký hiệu Leibniz,
+\[\frac{dy}{dx}=\lim_{\Delta x\to0}\frac{\Delta y}{\Delta x}.\]
+\fig[.48]{f01}{Hình 1. $m_{PQ}$ là tốc độ biến thiên trung bình; $m=f'(x_1)$ là tốc độ biến thiên tức thời.}
+Khi hàm $y=f(x)$ có một ý nghĩa cụ thể trong một ngành khoa học, đạo hàm của nó cũng có một ý nghĩa cụ thể như một tốc độ biến thiên. Như đã nói ở §2.7, đơn vị của $dy/dx$ bằng đơn vị của $y$ chia cho đơn vị của $x$. Sau đây là một số cách diễn giải trong khoa học tự nhiên và khoa học xã hội.
+\clearpage
+\section*{Vật lý}
+Nếu $s=f(t)$ là hàm vị trí của một chất điểm chuyển động thẳng thì $\Delta s/\Delta t$ biểu diễn vận tốc trung bình trong khoảng thời gian $\Delta t$, còn $v=ds/dt$ là vận tốc tức thời, tức tốc độ biến thiên của độ dời theo thời gian. Tốc độ biến thiên tức thời của vận tốc theo thời gian là gia tốc:
+\[a(t)=v'(t)=s''(t).\]
+Điều này đã được xét ở §2.7–2.8; nay với các công thức đạo hàm, ta có thể giải dễ dàng hơn các bài toán chuyển động.
+\ex{1} Vị trí của một chất điểm được cho bởi
+\[s=f(t)=t^3-6t^2+9t,\]
+trong đó $t$ tính bằng giây và $s$ tính bằng mét.
+
+(a) Tìm vận tốc tại thời điểm $t$.
+
+(b) Vận tốc sau $2$ s là bao nhiêu? Sau $4$ s là bao nhiêu?
+
+(c) Khi nào chất điểm đứng yên?
+
+(d) Khi nào chất điểm chuyển động theo chiều dương?
+
+(e) Vẽ sơ đồ biểu diễn chuyển động của chất điểm.
+
+(f) Tìm tổng quãng đường chất điểm đi được trong năm giây đầu tiên.
+
+(g) Tìm gia tốc tại thời điểm $t$ và sau $4$ s.
+
+(h) Vẽ các hàm vị trí, vận tốc và gia tốc trên $0\le t\le5$.
+
+(i) Khi nào chất điểm chuyển động nhanh dần? Khi nào chậm dần?
+\sol (a) Hàm vận tốc là đạo hàm của hàm vị trí:
+\[v(t)=\frac{ds}{dt}=3t^2-12t+9.\]
+(b) Vận tốc sau $2$ s là vận tốc tức thời tại $t=2$:
+\[v(2)=\left.\frac{ds}{dt}\right|_{t=2}=3(2)^2-12(2)+9=-3\ \mathrm{m/s}.\]
+Sau $4$ s,
+\[v(4)=3(4)^2-12(4)+9=9\ \mathrm{m/s}.\]
+(c) Chất điểm đứng yên khi $v(t)=0$, tức
+\[3t^2-12t+9=3(t^2-4t+3)=3(t-1)(t-3)=0.\]
+Điều này xảy ra tại $t=1$ hoặc $t=3$. Vậy chất điểm đứng yên sau $1$ s và sau $3$ s.
+
+(d) Chất điểm chuyển động theo chiều dương khi $v(t)>0$, tức $3(t-1)(t-3)>0$. Bất đẳng thức đúng khi cả hai thừa số đều dương ($t>3$), hoặc đều âm ($t<1$). Do đó, chất điểm đi theo chiều dương khi $t<1$ và $t>3$; đi theo chiều âm khi $1<t<3$.
+
+(e) Dùng thông tin ở (d), ta vẽ sơ đồ Hình 2 biểu diễn chất điểm chuyển động qua lại trên trục $s$.
+\fig[.48]{f02}{Hình 2. Sơ đồ chuyển động trên trục vị trí $s$.}
+(f) Cần tính riêng quãng đường trên các khoảng thời gian $[0,1]$, $[1,3]$ và $[3,5]$:
+\[|f(1)-f(0)|=|4-0|=4\ \mathrm m,\]
+\[|f(3)-f(1)|=|0-4|=4\ \mathrm m,\]
+\[|f(5)-f(3)|=|20-0|=20\ \mathrm m.\]
+Tổng quãng đường là $4+4+20=28$ m.
+
+(g) Gia tốc là đạo hàm của vận tốc:
+\[a(t)=\frac{d^2s}{dt^2}=\frac{dv}{dt}=6t-12,\]
+\[a(4)=6(4)-12=12\ \mathrm{m/s^2}.\]
+(h) Hình 3 cho đồ thị của $s,v,a$.
+\fig[.46]{f03}{Hình 3. Đồ thị vị trí $s$, vận tốc $v$ và gia tốc $a$ trên $[0,5]$.}
+(i) Chất điểm nhanh dần khi vận tốc dương và tăng, hoặc khi vận tốc âm và giảm. Nói cách khác, chất điểm nhanh dần khi vận tốc và gia tốc cùng dấu: lực tác dụng theo chiều chuyển động. Theo Hình 3, điều này xảy ra khi $1<t<2$ và $t>3$. Chất điểm chậm dần khi $v,a$ trái dấu, tức $0\le t<1$ và $2<t<3$. Hình 4 tóm tắt chuyển động.\hfill$\square$
+\fig[.61]{f04}{Hình 4. Theo thời gian: đi theo chiều dương, chiều âm, rồi chiều dương; chậm dần, nhanh dần, chậm dần, rồi nhanh dần.}
+\ex{2} Nếu một thanh hoặc sợi dây đồng chất thì \textbf{khối lượng riêng theo chiều dài} của nó không đổi, bằng khối lượng trên một đơn vị chiều dài, $\rho=m/l$, và được đo bằng kg/m. Nếu thanh không đồng chất, giả sử khối lượng từ đầu trái đến vị trí $x$ là $m=f(x)$ như Hình 5.
+\fig[.86]{f05}{Hình 5. Phần thanh từ đầu trái đến vị trí $x$ có khối lượng $f(x)$.}
+Khối lượng đoạn thanh từ $x=x_1$ đến $x=x_2$ là $\Delta m=f(x_2)-f(x_1)$, nên khối lượng riêng trung bình của đoạn này là
+\[\frac{\Delta m}{\Delta x}=\frac{f(x_2)-f(x_1)}{x_2-x_1}.\]
+Khi $\Delta x\to0$, tức $x_2\to x_1$, ta tính khối lượng riêng trung bình trên những đoạn ngày càng nhỏ. Khối lượng riêng theo chiều dài tại $x_1$ là giới hạn ấy:
+\[\rho=\lim_{\Delta x\to0}\frac{\Delta m}{\Delta x}=\frac{dm}{dx}.\]
+Như vậy, khối lượng riêng theo chiều dài là đạo hàm của khối lượng theo chiều dài.
+
+Chẳng hạn, nếu $m=f(x)=\sqrt x$, với $x$ tính bằng mét và $m$ bằng kilôgam, thì khối lượng riêng trung bình trên đoạn $1\le x\le1.2$ là
+\[\frac{\Delta m}{\Delta x}=\frac{f(1.2)-f(1)}{1.2-1}
+=\frac{\sqrt{1.2}-1}{0.2}\approx0.48\ \mathrm{kg/m}.\]
+Còn tại đúng $x=1$,
+\[\rho=\left.\frac{dm}{dx}\right|_{x=1}
+=\left.\frac1{2\sqrt x}\right|_{x=1}=0.50\ \mathrm{kg/m}.\qquad\square\]
+\ex{3} Dòng điện tồn tại khi các điện tích chuyển động. Hình 6 minh họa một phần dây dẫn và các electron đi qua một mặt phẳng tô đỏ. Nếu $\Delta Q$ là điện lượng thuần đi qua mặt này trong khoảng thời gian $\Delta t$, cường độ dòng điện trung bình được định nghĩa là
+\[\frac{\Delta Q}{\Delta t}=\frac{Q_2-Q_1}{t_2-t_1}.\]
+Lấy giới hạn trên các khoảng thời gian ngày càng nhỏ, ta được cường độ dòng điện $I$ tại thời điểm $t_1$:
+\[I=\lim_{\Delta t\to0}\frac{\Delta Q}{\Delta t}=\frac{dQ}{dt}.\]
+Như vậy, cường độ dòng điện là tốc độ điện lượng đi qua một mặt. Đơn vị là điện lượng trên thời gian, thường là coulomb trên giây, gọi là ampe.\hfill$\square$
+\fig[.48]{f06}{Hình 6. Các electron chuyển động qua một mặt cắt của dây dẫn.}
+Vận tốc, khối lượng riêng và cường độ dòng điện không phải những tốc độ biến thiên quan trọng duy nhất trong vật lý. Còn có công suất (tốc độ thực hiện công), tốc độ truyền nhiệt, gradient nhiệt độ (tốc độ biến thiên của nhiệt độ theo vị trí) và tốc độ phân rã chất phóng xạ trong vật lý hạt nhân.
+\section*{Hóa học}
+\ex{4} Phản ứng hóa học tạo ra một hoặc nhiều chất, gọi là \textbf{sản phẩm}, từ một hoặc nhiều chất ban đầu, gọi là \textbf{chất phản ứng}. Chẳng hạn,
+\[2\mathrm H_2+\mathrm O_2\longrightarrow2\mathrm H_2\mathrm O\]
+cho biết hai phân tử hydro và một phân tử oxy tạo thành hai phân tử nước. Xét phản ứng
+\[\mathrm A+\mathrm B\longrightarrow\mathrm C.\]
+Nồng độ của chất phản ứng A là số mol trên một lít, ký hiệu $[\mathrm A]$; một mol có $6.022\times10^{23}$ phân tử. Nồng độ thay đổi trong phản ứng, nên $[\mathrm A],[\mathrm B],[\mathrm C]$ đều là các hàm theo thời gian $t$. Tốc độ phản ứng trung bình xét theo sản phẩm C trên $t_1\le t\le t_2$ là
+\[\frac{\Delta[\mathrm C]}{\Delta t}=\frac{[\mathrm C](t_2)-[\mathrm C](t_1)}{t_2-t_1}.\]
+Các nhà hóa học quan tâm đến tốc độ phản ứng tức thời vì nó cung cấp thông tin về cơ chế phản ứng. Tốc độ này là giới hạn của tốc độ trung bình khi $\Delta t\to0$:
+\[\text{tốc độ phản ứng}=\lim_{\Delta t\to0}\frac{\Delta[\mathrm C]}{\Delta t}=\frac{d[\mathrm C]}{dt}.\]
+Nồng độ sản phẩm tăng trong quá trình phản ứng nên đạo hàm $d[\mathrm C]/dt$ dương. Nồng độ các chất phản ứng giảm; để tốc độ phản ứng xét theo A và B là những số dương, ta đặt dấu trừ trước các đạo hàm tương ứng. Vì $[\mathrm A],[\mathrm B]$ giảm cùng tốc độ mà $[\mathrm C]$ tăng,
+\[\text{tốc độ phản ứng}=\frac{d[\mathrm C]}{dt}=-\frac{d[\mathrm A]}{dt}=-\frac{d[\mathrm B]}{dt}.\]
+Tổng quát, với phản ứng $a\mathrm A+b\mathrm B\longrightarrow c\mathrm C+d\mathrm D$,
+\[-\frac1a\frac{d[\mathrm A]}{dt}=-\frac1b\frac{d[\mathrm B]}{dt}
+=\frac1c\frac{d[\mathrm C]}{dt}=\frac1d\frac{d[\mathrm D]}{dt}.\]
+Có thể xác định tốc độ phản ứng từ số liệu và phương pháp đồ thị. Đôi khi có công thức tường minh của nồng độ theo thời gian, cho phép tính trực tiếp tốc độ phản ứng; xem Bài tập 26.\hfill$\square$
+\ex{5} Một đại lượng được quan tâm trong nhiệt động lực học là \textbf{hệ số nén}. Khi nhiệt độ không đổi, thể tích $V$ của một chất phụ thuộc vào áp suất $P$. Xét đạo hàm $dV/dP$. Khi $P$ tăng, $V$ giảm, nên $dV/dP<0$. Thêm dấu trừ và chia cho $V$, ta định nghĩa
+\[\text{hệ số nén đẳng nhiệt}=\beta=-\frac1V\frac{dV}{dP}.\]
+Đại lượng $\beta$ đo mức giảm thể tích trên một đơn vị thể tích khi áp suất tăng, ở nhiệt độ không đổi.
+
+Ví dụ, thể tích $V$ (mét khối) của một mẫu không khí ở $25\,^{\circ}\mathrm C$ liên hệ với áp suất $P$ (kilopascal) bởi $V=5.3/P$. Tại $P=50$ kPa,
+\[\left.\frac{dV}{dP}\right|_{P=50}
+=\left.-\frac{5.3}{P^2}\right|_{P=50}
+=-\frac{5.3}{2500}=-0.00212\ \mathrm{m^3/kPa}.\]
+Hệ số nén tại áp suất này là
+\[\beta=-\left.\frac1V\frac{dV}{dP}\right|_{P=50}
+=\frac{0.00212}{5.3/50}=0.02\ \frac{\mathrm{m^3/kPa}}{\mathrm{m^3}}.\qquad\square\]
+\section*{Sinh học}
+\ex{6} Gọi $n=f(t)$ là số cá thể trong một quần thể động vật hoặc thực vật tại thời điểm $t$. Độ biến thiên kích thước quần thể từ $t_1$ đến $t_2$ là $\Delta n=f(t_2)-f(t_1)$, nên tốc độ tăng trưởng trung bình là
+\[\frac{\Delta n}{\Delta t}=\frac{f(t_2)-f(t_1)}{t_2-t_1}.\]
+Cho $\Delta t\to0$, ta được tốc độ tăng trưởng tức thời:
+\[\text{tốc độ tăng trưởng}=\lim_{\Delta t\to0}\frac{\Delta n}{\Delta t}=\frac{dn}{dt}.\]
+Nói chặt chẽ, diễn giải này chưa hoàn toàn chính xác: đồ thị thực tế của hàm quần thể là một hàm bậc thang, gián đoạn mỗi khi có cá thể sinh ra hoặc chết đi, nên không khả vi tại các thời điểm đó. Tuy nhiên, với quần thể lớn, có thể thay đồ thị bằng một đường cong trơn xấp xỉ như Hình 7.
+\fig[.65]{f07}{Hình 7. Đường cong trơn xấp xỉ một hàm tăng trưởng.}
+Cụ thể, xét vi khuẩn trong môi trường dinh dưỡng đồng nhất. Qua lấy mẫu ở những thời điểm nhất định, giả sử quần thể được xác định là tăng gấp đôi mỗi giờ. Nếu ban đầu có $n_0$ cá thể và $t$ tính bằng giờ,
+\[f(1)=2f(0)=2n_0,\qquad f(2)=2f(1)=2^2n_0,\]
+\[f(3)=2f(2)=2^3n_0,\qquad\text{và tổng quát}\qquad f(t)=2^tn_0.\]
+Hàm quần thể là $n=n_02^t$. Dùng công thức $\dfrac{d}{dx}(b^x)=b^x\ln b$ ở §3.4,
+\[\frac{dn}{dt}=\frac{d}{dt}(n_02^t)=n_02^t\ln2.\]
+Chẳng hạn, nếu ban đầu có $n_0=100$ vi khuẩn thì sau $4$ giờ,
+\[\left.\frac{dn}{dt}\right|_{t=4}=100\cdot2^4\ln2=1600\ln2\approx1109.\]
+Điều này nghĩa là sau $4$ giờ, quần thể đang tăng với tốc độ khoảng $1109$ vi khuẩn/giờ.\hfill$\square$
+\fig[.43]{ecoli}{Vi khuẩn \textit{E. coli} dài khoảng $2\,\mu\mathrm m$, rộng $0.75\,\mu\mathrm m$; ảnh từ kính hiển vi điện tử quét. Nguồn ảnh trong sách: Science Photo Library / Alamy Stock Photo.}
+\ex{7} Có thể mô hình hóa mạch máu, như tĩnh mạch hoặc động mạch, bằng một ống hình trụ bán kính $R$ và chiều dài $l$ như Hình 8.
+\fig[.75]{f08}{Hình 8. Dòng máu trong một động mạch; $r$ là khoảng cách đến trục giữa.}
+Do ma sát với thành ống, vận tốc máu lớn nhất trên trục giữa, rồi giảm khi khoảng cách $r$ đến trục tăng, đến khi bằng $0$ ở thành mạch. Quan hệ giữa $v$ và $r$ được cho bởi \textbf{định luật dòng chảy tầng}, do bác sĩ người Pháp Jean Léonard Marie Poiseuille tìm ra năm 1838:
+\[v=\frac P{4\eta l}(R^2-r^2).\tag{1}\]
+Ở đây $\eta$ là độ nhớt của máu và $P$ là chênh lệch áp suất giữa hai đầu ống. Nếu $P,l$ không đổi, $v$ là hàm của $r$ với tập xác định $[0,R]$.
+
+Tốc độ biến thiên trung bình của vận tốc khi dịch từ $r=r_1$ ra $r=r_2$ là
+\[\frac{\Delta v}{\Delta r}=\frac{v(r_2)-v(r_1)}{r_2-r_1}.\]
+Khi $\Delta r\to0$, ta được \textbf{gradient vận tốc}, tức tốc độ biến thiên tức thời của vận tốc theo $r$:
+\[\text{gradient vận tốc}=\lim_{\Delta r\to0}\frac{\Delta v}{\Delta r}=\frac{dv}{dr}.\]
+Theo (1),
+\[\frac{dv}{dr}=\frac P{4\eta l}(0-2r)=-\frac{Pr}{2\eta l}.\]
+Với một động mạch nhỏ của người, có thể lấy $\eta=0.027$, $R=0.008$ cm, $l=2$ cm và $P=4000$ dyn/cm$^2$. Khi đó,
+\begin{align*}
+v&=\frac{4000}{4(0.027)2}(0.000064-r^2)\\
+&\approx1.85\times10^4(6.4\times10^{-5}-r^2).
+\end{align*}
+Tại $r=0.002$ cm, máu chảy với tốc độ
+\[v(0.002)\approx1.85\times10^4(64\times10^{-6}-4\times10^{-6})=1.11\ \mathrm{cm/s}.\]
+Gradient vận tốc tại đó là
+\[\left.\frac{dv}{dr}\right|_{r=0.002}=-\frac{4000(0.002)}{2(0.027)2}\approx-74\ \frac{\mathrm{cm/s}}{\mathrm{cm}}.\]
+Để hình dung ý nghĩa, đổi từ xentimét sang micrômét: $1$ cm $=10\,000\,\mu$m. Bán kính động mạch là $80\,\mu$m. Vận tốc ở trục giữa là $11\,850\,\mu$m/s, giảm còn $11\,110\,\mu$m/s ở khoảng cách $r=20\,\mu$m. Giá trị $dv/dr=-74\ (\mu\mathrm{m/s})/\mu\mathrm m$ nghĩa là tại $r=20\,\mu$m, vận tốc giảm khoảng $74\,\mu$m/s cho mỗi micrômét đi ra xa trục giữa.\hfill$\square$
+
+\noindent\textit{Đọc thêm:} W. Nichols, M. O'Rourke và C. Vlachopoulos (chủ biên), \textit{McDonald's Blood Flow in Arteries: Theoretical, Experimental, and Clinical Principles}, ấn bản 6, Boca Raton, FL, 2011.
+\section*{Kinh tế học}
+\ex{8} Giả sử $C(x)$ là tổng chi phí mà một công ty phải chi để sản xuất $x$ đơn vị hàng hóa. Hàm $C$ được gọi là \textbf{hàm chi phí}. Khi số sản phẩm tăng từ $x_1$ lên $x_2$, chi phí tăng thêm là $\Delta C=C(x_2)-C(x_1)$, và tốc độ biến thiên trung bình của chi phí là
+\[\frac{\Delta C}{\Delta x}=\frac{C(x_2)-C(x_1)}{x_2-x_1}
+=\frac{C(x_1+\Delta x)-C(x_1)}{\Delta x}.\]
+Giới hạn khi $\Delta x\to0$, tức tốc độ biến thiên tức thời của chi phí theo số sản phẩm, được các nhà kinh tế gọi là \textbf{chi phí biên}:
+\[\text{chi phí biên}=\lim_{\Delta x\to0}\frac{\Delta C}{\Delta x}=\frac{dC}{dx}.\]
+Vì $x$ thường chỉ nhận giá trị nguyên, việc cho $\Delta x\to0$ có thể không mang nghĩa đen. Tuy nhiên, như trong Ví dụ 6, ta có thể thay $C(x)$ bằng một hàm trơn xấp xỉ.
+
+Lấy $\Delta x=1$ và $n$ đủ lớn, để $\Delta x$ nhỏ so với $n$, ta có
+\[C'(n)\approx C(n+1)-C(n).\]
+Vậy chi phí biên ở mức sản xuất $n$ đơn vị xấp xỉ chi phí sản xuất thêm một đơn vị, tức sản phẩm thứ $n+1$.
+
+Thường có thể biểu diễn tổng chi phí bằng đa thức $C(x)=a+bx+cx^2+dx^3$, trong đó $a$ là chi phí chung như thuê mặt bằng, sưởi ấm, bảo trì; các số hạng khác là chi phí nguyên liệu, lao động, v.v. Chi phí nguyên liệu có thể tỉ lệ với $x$, còn chi phí lao động có thể phụ thuộc một phần vào các lũy thừa cao hơn của $x$ do làm thêm giờ và sự kém hiệu quả trong hoạt động quy mô lớn.
+
+Chẳng hạn, công ty ước tính chi phí, bằng đô la, để sản xuất $x$ sản phẩm là
+\[C(x)=10\,000+5x+0.01x^2.\]
+Hàm chi phí biên là $C'(x)=5+0.02x$. Ở mức $500$ sản phẩm,
+\[C'(500)=5+0.02(500)=15\ \text{đô la/sản phẩm}.\]
+Đây là tốc độ chi phí tăng theo mức sản xuất tại $x=500$, đồng thời dự đoán chi phí của sản phẩm thứ $501$. Chi phí thực tế của sản phẩm ấy là
+\begin{align*}
+C(501)-C(500)&=[10\,000+5(501)+0.01(501)^2]\\
+&\quad-[10\,000+5(500)+0.01(500)^2]\\
+&=15.01\ \text{đô la}.
+\end{align*}
+Chú ý $C'(500)\approx C(501)-C(500)$.\hfill$\square$
+
+Các nhà kinh tế còn nghiên cứu cầu biên, doanh thu biên và lợi nhuận biên, là đạo hàm của các hàm cầu, doanh thu và lợi nhuận. Ta sẽ xét chúng trong Chương 4, sau khi xây dựng các phương pháp tìm giá trị lớn nhất và nhỏ nhất của hàm số.
+\section*{Các ngành khoa học khác}
+Tốc độ biến thiên xuất hiện trong mọi ngành khoa học. Nhà địa chất muốn biết tốc độ nguội đi của khối đá nóng chảy xâm nhập do dẫn nhiệt ra đá xung quanh. Kỹ sư muốn biết tốc độ nước chảy khỏi hồ chứa. Nhà địa lý đô thị quan tâm đến sự thay đổi mật độ dân số theo khoảng cách đến trung tâm thành phố. Nhà khí tượng quan tâm đến tốc độ biến thiên của áp suất khí quyển theo độ cao; xem Bài tập 3.8.19.
+
+Trong tâm lý học, lý thuyết học tập nghiên cứu \textbf{đường cong học tập}, biểu diễn kết quả thực hiện $P(t)$ của người đang học một kỹ năng theo thời gian luyện tập $t$. Đại lượng đặc biệt được quan tâm là tốc độ tiến bộ $dP/dt$. Các nhà tâm lý cũng nghiên cứu trí nhớ và xây dựng mô hình tốc độ lưu giữ ký ức (Bài tập 42), cũng như độ khó khi thực hiện nhiệm vụ và tốc độ độ khó tăng khi thay đổi một tham số (Bài tập 43).
+
+Trong xã hội học, phép tính vi phân được dùng để phân tích sự lan truyền tin đồn, đổi mới, trào lưu hoặc thời trang. Nếu $p(t)$ là tỉ lệ dân số biết một tin đồn vào thời điểm $t$ thì $dp/dt$ là tốc độ lan truyền tin đồn; xem Bài tập 3.4.90.
+\section*{Một ý tưởng, nhiều cách diễn giải}
+Vận tốc, khối lượng riêng, dòng điện, công suất, gradient nhiệt độ trong vật lý; tốc độ phản ứng và hệ số nén trong hóa học; tốc độ tăng trưởng và gradient vận tốc máu trong sinh học; chi phí biên và lợi nhuận biên trong kinh tế; tốc độ truyền nhiệt trong địa chất; tốc độ tiến bộ trong tâm lý học; tốc độ lan truyền tin đồn trong xã hội học: tất cả đều là những trường hợp riêng của cùng một khái niệm toán học, \textbf{đạo hàm}.
+
+Các ứng dụng ấy cho thấy một phần sức mạnh của toán học nằm ở tính trừu tượng. Một khái niệm toán học trừu tượng có thể được diễn giải khác nhau trong từng khoa học. Khi đã xây dựng các tính chất của khái niệm một lần, ta có thể áp dụng chúng cho nhiều ngành, hiệu quả hơn việc phát triển riêng các tính chất của từng khái niệm chuyên biệt. Nhà toán học Pháp Joseph Fourier (1768–1830) diễn đạt ngắn gọn: “Toán học so sánh những hiện tượng đa dạng nhất và khám phá các mối tương đồng sâu kín kết nối chúng.”
+\section*{3.7. Bài tập}
+\group{1–4} Một chất điểm chuyển động theo quy luật $s=f(t)$, $t\ge0$, với $t$ tính bằng giây và $s$ bằng foot.
+
+(a) Tìm vận tốc tại thời điểm $t$.
+
+(b) Vận tốc sau $1$ giây là bao nhiêu?
+
+(c) Khi nào chất điểm đứng yên?
+
+(d) Khi nào chất điểm chuyển động theo chiều dương?
+
+(e) Tìm tổng quãng đường trong $6$ giây đầu tiên.
+
+(f) Vẽ sơ đồ như Hình 2 để minh họa chuyển động.
+
+(g) Tìm gia tốc tại thời điểm $t$ và sau $1$ giây.
+
+(h) Vẽ các hàm vị trí, vận tốc và gia tốc trên $0\le t\le6$.
+
+(i) Khi nào chất điểm nhanh dần? Khi nào chậm dần?
+\bt{1} $f(t)=t^3-9t^2+24t$.
+\bt{2} $f(t)=\dfrac{9t}{t^2+9}$.
+\bt{3} $f(t)=\sin(\pi t/2)$.
+\bt{4} $f(t)=t^2e^{-t}$.
+\par\medskip\noindent\begin{minipage}{\linewidth}
+\bt{5} Hình dưới cho đồ thị vận tốc của hai chất điểm, với $t$ tính bằng giây. Khi nào mỗi chất điểm nhanh dần, khi nào chậm dần? Giải thích.
+\fig[.75]{e05}{Đồ thị vận tốc cho Bài tập 5: (a) bên trái; (b) bên phải.}
+\end{minipage}\par\medskip
+\par\medskip\noindent\begin{minipage}{\linewidth}
+\bt{6} Hình dưới cho đồ thị vị trí của hai chất điểm, với $t$ tính bằng giây. Khi nào vận tốc mỗi chất điểm dương, khi nào âm? Khi nào mỗi chất điểm nhanh dần, khi nào chậm dần? Giải thích.
+\fig[.75]{e06}{Đồ thị vị trí cho Bài tập 6: (a) bên trái; (b) bên phải.}
+\end{minipage}\par\medskip
+\par\medskip\noindent\begin{minipage}{\linewidth}
+\bt{7} Giả sử đồ thị vận tốc của một chất điểm như hình, với $t$ tính bằng giây. Khi nào chất điểm đi theo chiều dương? Khi nào đi theo chiều âm? Điều gì xảy ra khi $5<t<7$?
+\fig[.44]{e07}{Đồ thị cho Bài tập 7–8.}
+\end{minipage}\par\medskip
+\bt{8} Với chất điểm ở Bài tập 7, phác họa đồ thị hàm gia tốc. Khi nào chất điểm nhanh dần, khi nào chậm dần? Khi nào chất điểm chuyển động với tốc độ không đổi?
+\bt{9} Một vật được phóng thẳng đứng lên từ độ cao $2$ m so với mặt đất, với vận tốc đầu $24.5$ m/s. Sau $t$ giây, độ cao, bằng mét, là $h=2+24.5t-4.9t^2$.
+
+(a) Tìm vận tốc sau $2$ s và sau $4$ s.
+
+(b) Khi nào vật đạt độ cao lớn nhất?
+
+(c) Độ cao lớn nhất là bao nhiêu?
+
+(d) Khi nào vật chạm đất?
+
+(e) Vận tốc khi chạm đất là bao nhiêu?
+\bt{10} Một quả bóng được ném thẳng đứng lên với vận tốc $80$ ft/s; sau $t$ giây, độ cao là $s=80t-16t^2$.
+
+(a) Độ cao lớn nhất của bóng là bao nhiêu?
+
+(b) Khi bóng ở độ cao $96$ ft, vận tốc trên đường đi lên là bao nhiêu? Trên đường đi xuống là bao nhiêu?
+\bt{11} Một hòn đá được ném thẳng đứng lên từ bề mặt Sao Hỏa với vận tốc $15$ m/s; sau $t$ giây, độ cao là $h=15t-1.86t^2$.
+
+(a) Vận tốc sau $2$ s là bao nhiêu?
+
+(b) Khi ở độ cao $25$ m, vận tốc trên đường đi lên là bao nhiêu? Trên đường đi xuống là bao nhiêu?
+\bt{12} Một chất điểm chuyển động với hàm vị trí
+\[s=t^4-4t^3-20t^2+20t,\qquad t\ge0.\]
+(a) Tại thời điểm nào chất điểm có vận tốc $20$ m/s?
+
+(b) Khi nào gia tốc bằng $0$? Giá trị $t$ ấy có ý nghĩa gì?
+\bt{13} (a) Một công ty sản xuất chip máy tính từ các phiến silic hình vuông. Kỹ sư công nghệ muốn giữ cạnh phiến rất gần $15$ mm và cần biết diện tích $A(x)$ thay đổi thế nào khi cạnh $x$ thay đổi. Tìm $A'(15)$ và giải thích ý nghĩa.
+
+(b) Chứng minh tốc độ biến thiên của diện tích hình vuông theo cạnh bằng nửa chu vi. Giải thích hình học bằng cách tăng cạnh $x$ thêm $\Delta x$. Nếu $\Delta x$ nhỏ, có thể xấp xỉ số gia diện tích $\Delta A$ thế nào?
+\bt{14} (a) Có thể nuôi tinh thể natri clorat dạng lập phương bằng cách cho dung dịch nước và natri clorat bay hơi chậm. Gọi $V$ là thể tích tinh thể có cạnh $x$. Tính $dV/dx$ tại $x=3$ mm và giải thích ý nghĩa.
+
+(b) Chứng minh tốc độ biến thiên của thể tích hình lập phương theo cạnh bằng nửa diện tích toàn phần. Giải thích hình học tương tự Bài tập 13(b).
+\bt{15} (a) Tìm tốc độ biến thiên trung bình của diện tích hình tròn theo bán kính $r$ khi $r$ thay đổi: (i) từ $2$ đến $3$; (ii) từ $2$ đến $2.5$; (iii) từ $2$ đến $2.1$.
+
+(b) Tìm tốc độ biến thiên tức thời tại $r=2$.
+
+(c) Chứng minh tốc độ biến thiên của diện tích hình tròn theo bán kính tại mọi $r$ bằng chu vi đường tròn. Giải thích hình học bằng cách tăng bán kính thêm $\Delta r$. Nếu $\Delta r$ nhỏ, có thể xấp xỉ $\Delta A$ thế nào?
+\bt{16} Ném một hòn đá xuống hồ tạo ra gợn sóng tròn lan ra với tốc độ $60$ cm/s. Tìm tốc độ tăng diện tích bên trong vòng tròn sau: (a) $1$ s; (b) $3$ s; (c) $5$ s. Có thể kết luận gì?
+\bt{17} Một quả bóng hình cầu đang được bơm căng. Tìm tốc độ tăng diện tích mặt cầu $S=4\pi r^2$ theo bán kính $r$ tại: (a) $1$ ft; (b) $2$ ft; (c) $3$ ft. Có thể kết luận gì?
+\bt{18} (a) Thể tích tế bào hình cầu đang lớn lên là $V=\frac43\pi r^3$, với $r$ tính bằng micrômét ($1\,\mu\mathrm m=10^{-6}$ m). Tìm tốc độ biến thiên trung bình của $V$ theo $r$ khi $r$ thay đổi: (i) từ $5$ đến $8\,\mu$m; (ii) từ $5$ đến $6\,\mu$m; (iii) từ $5$ đến $5.1\,\mu$m.
+
+(b) Tìm tốc độ biến thiên tức thời của $V$ theo $r$ tại $r=5\,\mu$m.
+
+(c) Chứng minh tốc độ biến thiên của thể tích hình cầu theo bán kính bằng diện tích mặt cầu. Giải thích hình học tương tự Bài tập 15(c).
+\bt{19} Khối lượng phần thanh kim loại từ đầu trái đến điểm cách đầu ấy $x$ mét là $3x^2$ kg. Tìm khối lượng riêng theo chiều dài (Ví dụ 2) tại: (a) $x=1$ m; (b) $x=2$ m; (c) $x=3$ m. Ở đâu khối lượng riêng lớn nhất? Nhỏ nhất?
+\bt{20} Một bể nước hình trụ chứa $5000$ gallon; nước thoát qua đáy trong $40$ phút. Theo định luật Torricelli, thể tích nước còn lại sau $t$ phút là
+\[V=5000\left(1-\frac t{40}\right)^2,\qquad0\le t\le40.\]
+Tìm tốc độ nước thoát khỏi bể sau: (a) $5$ phút; (b) $10$ phút; (c) $20$ phút; (d) $40$ phút. Khi nào nước thoát nhanh nhất? Chậm nhất? Tóm tắt kết quả.
+\bt{21} Điện lượng $Q$, bằng coulomb (C), đi qua một điểm trên dây dẫn đến thời điểm $t$ giây được cho bởi $Q(t)=t^3-2t^2+6t+2$. Tìm cường độ dòng điện tại: (a) $t=0.5$ s; (b) $t=1$ s. Xem Ví dụ 3; đơn vị dòng điện là ampe, $1$ A $=1$ C/s. Tại thời điểm nào cường độ dòng điện nhỏ nhất?
+\bt{22} Định luật vạn vật hấp dẫn Newton cho biết độ lớn lực mà vật khối lượng $m$ tác dụng lên vật khối lượng $M$ là
+\[F=\frac{GmM}{r^2},\]
+trong đó $G$ là hằng số hấp dẫn, $r$ là khoảng cách giữa hai vật.
+
+(a) Tìm $dF/dr$ và giải thích ý nghĩa. Dấu trừ thể hiện điều gì?
+
+(b) Giả sử lực hút của Trái Đất lên một vật giảm với tốc độ $2$ N/km tại $r=20\,000$ km. Lực thay đổi nhanh đến mức nào tại $r=10\,000$ km?
+\bt{23} Lực tác dụng lên vật có khối lượng $m$ và vận tốc $v$ là tốc độ biến thiên của động lượng: $F=\frac{d}{dt}(mv)$. Nếu $m$ không đổi, công thức trở thành $F=ma$, với $a=dv/dt$. Trong thuyết tương đối, khối lượng hạt phụ thuộc $v$ theo
+\[m=\frac{m_0}{\sqrt{1-v^2/c^2}},\]
+trong đó $m_0$ là khối lượng nghỉ và $c$ là tốc độ ánh sáng. Chứng minh rằng
+\[F=\frac{m_0a}{(1-v^2/c^2)^{3/2}}.\]
+\bt{24} Vịnh Fundy trên bờ Đại Tây Dương của Canada có những đợt thủy triều thuộc loại cao nhất thế giới. Tại Hopewell Cape, độ sâu khi triều thấp khoảng $2.0$ m và khi triều cao khoảng $12.0$ m. Chu kỳ dao động tự nhiên hơi lớn hơn $12$ giờ; vào một ngày tháng Sáu, triều cao lúc $6$ giờ $45$ sáng. Mô hình độ sâu $D$, bằng mét, theo $t$ giờ kể từ nửa đêm ngày ấy là
+\[D(t)=7+5\cos[0.503(t-6.75)].\]
+Thủy triều đang lên hoặc xuống nhanh đến mức nào tại: (a) $3$ giờ sáng; (b) $6$ giờ sáng; (c) $9$ giờ sáng; (d) $12$ giờ trưa?
+\bt{25} Định luật Boyle: khi nén một lượng khí ở nhiệt độ không đổi, tích áp suất và thể tích không đổi, $PV=C$.
+
+(a) Tìm tốc độ biến thiên của thể tích theo áp suất.
+
+(b) Một lượng khí ban đầu ở áp suất thấp được nén đều ở nhiệt độ không đổi trong $10$ phút. Thể tích giảm nhanh hơn ở đầu hay cuối khoảng thời gian ấy? Giải thích.
+
+(c) Chứng minh hệ số nén đẳng nhiệt (Ví dụ 5) là $\beta=1/P$.
+\bt{26} Trong Ví dụ 4, giả sử một phân tử C được tạo từ một phân tử A và một phân tử B, nồng độ ban đầu của A và B cùng bằng $a$ mol/L. Khi đó
+\[[\mathrm C]=\frac{a^2kt}{akt+1},\]
+với $k$ là hằng số.
+
+(a) Tìm tốc độ phản ứng tại thời điểm $t$.
+
+(b) Chứng minh rằng nếu $x=[\mathrm C]$ thì $\dfrac{dx}{dt}=k(a-x)^2$.
+
+(c) Nồng độ thay đổi thế nào khi $t\to\infty$?
+
+(d) Tốc độ phản ứng thay đổi thế nào khi $t\to\infty$?
+
+(e) Các kết quả (c), (d) có ý nghĩa thực tiễn gì?
+\bt{27} Trong Ví dụ 6, quần thể vi khuẩn tăng gấp đôi mỗi giờ. Giả sử một quần thể khác tăng gấp ba mỗi giờ và ban đầu có $400$ vi khuẩn. Tìm biểu thức cho số vi khuẩn $n$ sau $t$ giờ, rồi dùng nó để ước tính tốc độ tăng trưởng sau $2.5$ giờ.
+\par\medskip\noindent\begin{minipage}{\linewidth}
+\bt{28} Số tế bào nấm men trong môi trường nuôi cấy ban đầu tăng nhanh nhưng cuối cùng ổn định dần. Quần thể được mô hình hóa bởi
+\[n=f(t)=\frac a{1+be^{-0.7t}},\]
+với $t$ tính bằng giờ. Tại $t=0$, có $20$ tế bào và đang tăng với tốc độ $12$ tế bào/giờ. Tìm $a,b$. Theo mô hình, về lâu dài quần thể nấm men sẽ thế nào?
+\end{minipage}\par\medskip
+\bt{29} Bảng sau cho dân số thế giới $P(t)$, bằng triệu người, với $t$ tính bằng năm và $t=0$ tương ứng năm $1900$.
+\begin{center}\begin{tabular}{rrrr}\toprule
+$t$ & $P(t)$ (triệu) & $t$ & $P(t)$ (triệu)\\\midrule
+0&1650&60&3040\\10&1750&70&3710\\20&1860&80&4450\\30&2070&90&5280\\40&2300&100&6080\\50&2560&110&6870\\\bottomrule
+\end{tabular}\end{center}
+(a) Ước tính tốc độ tăng dân số năm $1920$ và $1980$ bằng cách lấy trung bình hệ số góc của hai cát tuyến.
+
+(b) Dùng máy tính đồ thị hoặc máy tính để tìm đa thức bậc ba mô hình hóa số liệu.
+
+(c) Dùng mô hình (b) để tìm mô hình tốc độ tăng dân số.
+
+(d) Ước tính tốc độ tăng năm $1920$ và $1980$ từ (c), rồi so sánh với (a).
+
+(e) Trong §1.1, ta mô hình hóa $P(t)$ bằng hàm mũ
+\[f(t)=(1.43653\times10^9)(1.01395)^t.\]
+Dùng mô hình này để tìm mô hình tốc độ tăng dân số.
+
+(f) Dùng (e) ước tính tốc độ tăng năm $1920$ và $1980$; so sánh với (a), (d).
+
+(g) Ước tính tốc độ tăng năm $1985$.
+\bt{30} Bảng sau cho sự thay đổi tuổi kết hôn lần đầu trung bình của phụ nữ Nhật Bản từ năm $1950$.
+\begin{center}\begin{tabular}{rrrr}\toprule
+$t$ & $A(t)$ & $t$ & $A(t)$\\\midrule
+1950&23.0&1985&25.5\\1955&23.8&1990&25.9\\1960&24.4&1995&26.3\\1965&24.5&2000&27.0\\1970&24.2&2005&28.0\\1975&24.7&2010&28.8\\1980&25.2&2015&29.4\\\bottomrule
+\end{tabular}\end{center}
+(a) Dùng máy tính đồ thị hoặc máy tính để mô hình hóa số liệu bằng đa thức bậc bốn.
+
+(b) Từ (a), tìm mô hình cho $A'(t)$.
+
+(c) Ước tính tốc độ biến thiên của tuổi kết hôn ở phụ nữ năm $1990$.
+
+(d) Vẽ các điểm số liệu và các mô hình $A,A'$.
+\par\medskip\noindent\begin{minipage}{\linewidth}
+\bt{31} Dùng định luật dòng chảy tầng trong Ví dụ 7. Xét mạch máu bán kính $0.01$ cm, dài $3$ cm, chênh lệch áp suất $3000$ dyn/cm$^2$ và độ nhớt $\eta=0.027$.
+
+(a) Tìm vận tốc máu trên trục giữa $r=0$, tại $r=0.005$ cm và ở thành mạch $r=R=0.01$ cm.
+
+(b) Tìm gradient vận tốc tại $r=0$, $r=0.005$ và $r=0.01$.
+
+(c) Vận tốc lớn nhất ở đâu? Vận tốc thay đổi mạnh nhất ở đâu?
+\end{minipage}\par\medskip
+\bt{32} Tần số dao động của dây đàn violin được cho bởi
+\[f=\frac1{2L}\sqrt{\frac T\rho},\]
+trong đó $L$ là chiều dài dây, $T$ là lực căng, $\rho$ là khối lượng riêng theo chiều dài. Xem Chương 11 trong D. E. Hall, \textit{Musical Acoustics}, ấn bản 3, Pacific Grove, CA, 2002.
+
+(a) Tìm tốc độ biến thiên của tần số theo: (i) chiều dài, khi $T,\rho$ không đổi; (ii) lực căng, khi $L,\rho$ không đổi; (iii) khối lượng riêng theo chiều dài, khi $L,T$ không đổi.
+
+(b) Độ cao của âm phụ thuộc vào tần số $f$: tần số càng lớn, âm càng cao. Dùng dấu các đạo hàm ở (a) để xác định độ cao thay đổi thế nào khi: (i) bấm ngón tay lên dây làm phần dây dao động ngắn đi; (ii) tăng lực căng bằng cách vặn chốt lên dây; (iii) đổi sang dây có khối lượng riêng theo chiều dài lớn hơn.
+\bt{33} Chi phí, bằng đô la, để một công ty sản xuất $x$ chiếc quần jean thuộc dòng mới là
+\[C(x)=2000+3x+0.01x^2+0.0002x^3.\]
+(a) Tìm hàm chi phí biên.
+
+(b) Tìm $C'(100)$ và giải thích ý nghĩa. Nó dự đoán điều gì?
+
+(c) So sánh $C'(100)$ với chi phí sản xuất chiếc quần thứ $101$.
+\bt{34} Hàm chi phí của một hàng hóa là
+\[C(q)=84+0.16q-0.0006q^2+0.000003q^3.\]
+(a) Tính và diễn giải $C'(100)$.
+
+(b) So sánh $C'(100)$ với chi phí sản xuất sản phẩm thứ $101$.
+\bt{35} Nếu $p(x)$ là tổng giá trị sản lượng khi nhà máy có $x$ công nhân, năng suất trung bình của lực lượng lao động là $A(x)=p(x)/x$.
+
+(a) Tìm $A'(x)$. Vì sao công ty muốn tuyển thêm công nhân khi $A'(x)>0$?
+
+(b) Chứng minh $A'(x)>0$ nếu $p'(x)$ lớn hơn năng suất trung bình.
+\bt{36} Nếu $R$ là phản ứng của cơ thể với kích thích có cường độ $x$, \textbf{độ nhạy} $S$ được định nghĩa là tốc độ biến thiên của $R$ theo $x$. Ví dụ, khi độ sáng $x$ của nguồn sáng tăng, mắt phản ứng bằng cách giảm diện tích đồng tử $R$. Công thức thực nghiệm
+\[R=\frac{40+24x^{0.4}}{1+4x^{0.4}}\]
+mô hình hóa sự phụ thuộc của $R$ vào $x$, với $R$ tính bằng mm$^2$ và $x$ đo theo đơn vị độ sáng thích hợp.
+
+(a) Tìm độ nhạy.
+
+(b) Vẽ $R,S$ theo $x$ để minh họa. Nhận xét giá trị của $R,S$ khi độ sáng thấp. Điều đó có phù hợp với dự đoán của bạn không?
+\bt{37} Bệnh nhân được lọc máu để loại bỏ urê khi thận không hoạt động bình thường. Máu được đưa qua máy để lọc urê. Trong những điều kiện nhất định, thời gian lọc cần thiết khi nồng độ urê ban đầu là $c>1$ được cho bởi
+\[t=\ln\left(\frac{3c+\sqrt{9c^2-8c}}2\right).\]
+Tính đạo hàm của $t$ theo $c$ và diễn giải.
+\bt{38} Các loài xâm lấn thường tạo một làn sóng lan rộng khi chiếm lĩnh vùng mới. Mô hình dựa trên sự phát tán ngẫu nhiên và sinh sản cho tốc độ lan truyền
+\[f(r)=2\sqrt{Dr},\]
+trong đó $r$ là tốc độ sinh sản của cá thể, $D$ là tham số định lượng sự phát tán. Tính đạo hàm của tốc độ lan truyền theo $r$ và giải thích ý nghĩa.
+\bt{39} Định luật khí lý tưởng là $PV=nRT$, trong đó $T$ là nhiệt độ tuyệt đối (kelvin), $P$ là áp suất (atm), $V$ là thể tích (lít), $n$ là số mol và $R=0.0821$ là hằng số khí. Tại một thời điểm, $P=8.0$ atm và tăng với tốc độ $0.10$ atm/phút; $V=10$ L và giảm với tốc độ $0.15$ L/phút. Tìm tốc độ biến thiên của $T$ theo thời gian tại thời điểm ấy nếu $n=10$ mol.
+\bt{40} Trong một trại nuôi cá, quần thể được thả vào ao và thu hoạch thường xuyên. Mô hình tốc độ biến thiên số cá là
+\[\frac{dP}{dt}=r_0\left(1-\frac{P(t)}{P_c}\right)P(t)-\beta P(t),\]
+trong đó $r_0$ là tỉ lệ sinh, $P_c$ là quần thể tối đa ao có thể duy trì, gọi là \textbf{sức chứa môi trường}, còn $\beta$ là tỉ lệ quần thể được thu hoạch.
+
+(a) Giá trị nào của $dP/dt$ tương ứng với quần thể ổn định?
+
+(b) Nếu ao duy trì tối đa $10\,000$ con, tỉ lệ sinh $5\%$ và tỉ lệ thu hoạch $4\%$, tìm mức quần thể ổn định.
+
+(c) Điều gì xảy ra nếu tăng $\beta$ lên $5\%$?
+\bt{41} Mô hình vật ăn thịt–con mồi thường được dùng trong nghiên cứu hệ sinh thái. Gọi $W(t)$ là số sói vùng lãnh nguyên và $C(t)$ là số tuần lộc ở miền bắc Canada. Sự tương tác được mô hình hóa bởi
+\[\frac{dC}{dt}=aC-bCW,\qquad\frac{dW}{dt}=-cW+dCW.\]
+(a) Những giá trị nào của $dC/dt,dW/dt$ tương ứng với các quần thể ổn định?
+
+(b) Mệnh đề “tuần lộc tuyệt chủng” được biểu diễn toán học thế nào?
+
+(c) Với $a=0.05$, $b=0.001$, $c=0.05$, $d=0.0001$, tìm tất cả cặp quần thể $(C,W)$ dẫn đến trạng thái ổn định. Theo mô hình này, hai loài có thể cùng tồn tại cân bằng hay một hoặc cả hai loài sẽ tuyệt chủng?
+\par\medskip\noindent\begin{minipage}{\linewidth}
+\bt{42} Hermann Ebbinghaus (1850–1909) tiên phong nghiên cứu trí nhớ. Một bài báo năm $2011$ trên \textit{Journal of Mathematical Psychology} đưa ra mô hình đường cong quên Ebbinghaus:
+\[R(t)=a+b(1+ct)^{-\beta},\]
+trong đó $R(t)$ là tỉ phần ký ức còn lưu giữ sau $t$ ngày kể từ khi học nhiệm vụ; $a,b,c$ là các hằng số thực nghiệm giữa $0$ và $1$; $\beta>0$ và $R(0)=1$. Các hằng số phụ thuộc loại nhiệm vụ.
+
+(a) Tốc độ biến thiên của mức lưu giữ ký ức sau $t$ ngày là bao nhiêu?
+
+(b) Bạn quên cách thực hiện nhiệm vụ nhanh hơn ngay sau khi học hay lâu sau khi học?
+
+(c) Tỉ phần ký ức nào được giữ lại vĩnh viễn?
+\end{minipage}\par\medskip
+\bt{43} Độ khó của việc “tiếp cận mục tiêu”, chẳng hạn dùng chuột bấm vào biểu tượng trên màn hình, phụ thuộc tỉ số giữa khoảng cách $D$ đến mục tiêu và bề rộng $W$ của mục tiêu. Theo định luật Fitts, chỉ số độ khó là
+\[I=\log_2\left(\frac{2D}{W}\right).\]
+Định luật được dùng khi thiết kế sản phẩm có tương tác người–máy tính.
+
+(a) Giữ $W$ không đổi, tìm tốc độ biến thiên của $I$ theo $D$. Tốc độ này tăng hay giảm khi $D$ tăng?
+
+(b) Giữ $D$ không đổi, tìm tốc độ biến thiên của $I$ theo $W$. Dấu âm của kết quả biểu thị điều gì? Tốc độ này tăng hay giảm khi $W$ tăng?
+
+(c) Các kết quả (a), (b) có phù hợp trực giác của bạn không?
+\section*{Ghi chú biên tập và thuật ngữ}
+Các ghi chú sau nằm ngoài nội dung nguyên bản.
+\begin{enumerate}[leftmargin=*]
+\item Giữ đủ Ví dụ 1–8, Hình 1–8, ảnh vi khuẩn, Bài tập 1–43, hai bảng số liệu và các tài liệu đọc thêm. Không bổ sung lời giải bài tập. Đơn vị foot, gallon, dyn và các số liệu lịch sử được giữ nguyên.
+\item Phân biệt vận tốc $v$ có dấu với tốc độ $|v|$ không âm. Nhanh dần hoặc chậm dần nói đến $|v|$ tăng hoặc giảm, không chỉ nói đến $v$ tăng hoặc giảm. Các kết luận nhanh/chậm dần áp dụng trên các khoảng có dấu thích hợp, với các thời điểm chuyển tiếp xét riêng.
+\item Khối lượng riêng theo chiều dài là $dm/dx$ (kg/m), khác khối lượng riêng theo thể tích (kg/m$^3$). Cường độ dòng điện là $dQ/dt$ (A), còn gradient vận tốc ở Ví dụ 7 là $dv/dr$, không phải gia tốc $dv/dt$.
+\item Trong Ví dụ 7, $P$ ký hiệu chênh lệch áp suất. Hệ đơn vị và các giá trị làm tròn của sách được giữ nguyên. $1$ dyn $=10^{-5}$ N. Các ký hiệu $\mu$m là micrômét, không phải milimét.
+\item Bài tập 29 dùng triệu người trong bảng, còn mô hình mũ ở (e) cho số người; khi so sánh tốc độ tăng trưởng, cần quy đổi về cùng đơn vị. Việc dùng đường cong trơn cho số cá thể hoặc số sản phẩm là một phép xấp xỉ mô hình như sách đã giải thích.
+\item Ở Bài tập 23, $m$ theo cách dùng thuật ngữ của sách là khối lượng tương đối tính, còn $m_0$ là khối lượng nghỉ. Công thức lực vô hướng đang xét chuyển động một chiều theo phương gia tốc.
+\end{enumerate}
+\begin{longtable}{p{.43\linewidth}p{.49\linewidth}}\toprule
+Thuật ngữ tiếng Anh & Thuật ngữ tiếng Việt\\\midrule
+linear density & khối lượng riêng theo chiều dài\\
+electric current & cường độ dòng điện\\
+rate of reaction & tốc độ phản ứng\\
+isothermal compressibility & hệ số nén đẳng nhiệt\\
+velocity gradient & gradient vận tốc\\
+laminar flow & dòng chảy tầng\\
+marginal cost & chi phí biên\\
+carrying capacity & sức chứa môi trường\\
+learning curve & đường cong học tập\\
+retention & sự lưu giữ ký ức\\
+\bottomrule\end{longtable}
+\end{document}
