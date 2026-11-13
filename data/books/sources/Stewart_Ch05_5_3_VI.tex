@@ -1,0 +1,318 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage{fontspec}\setmainfont{Latin Modern Roman}\setsansfont{DejaVu Sans}
+\usepackage{amsmath,amssymb,graphicx,geometry,enumitem,needspace,longtable,booktabs,fancyhdr,hyperref}
+\geometry{left=28mm,right=23mm,top=24mm,bottom=24mm}
+\hypersetup{unicode=true,colorlinks=true,linkcolor=black,urlcolor=blue,pdftitle={Giải tích §5.3 — Định lý cơ bản của giải tích}}
+\setlength{\parindent}{1.2em}\setlength{\parskip}{4pt}\setlength{\headheight}{16pt}
+\pagestyle{fancy}\fancyhf{}\fancyhead[L]{\small Chương 5. Tích phân}\fancyhead[R]{\small §5.3}\fancyfoot[C]{\thepage}
+\newcommand{\fig}[3][.68]{\begin{center}\begin{minipage}{\linewidth}\centering\includegraphics[width=#1\linewidth]{assets/#2.png}\\{\small #3}\end{minipage}\end{center}}
+\newcommand{\ex}[1]{\par\medskip\noindent\textbf{Ví dụ #1.}\ }
+\newcommand{\sol}{\par\nopagebreak[4]\noindent\textit{Lời giải.}\ }
+\newcommand{\bt}[1]{\par\smallskip\Needspace{5\baselineskip}\noindent\textbf{#1.}\ }
+\newcommand{\group}[1]{\par\medskip\noindent\textbf{#1}\par\nopagebreak[4]}
+\newcommand{\gint}[1]{\left[\!\left[#1\right]\!\right]}
+\allowdisplaybreaks[2]
+\DeclareMathOperator{\sech}{sech}
+\DeclareMathOperator{\csch}{csch}
+\DeclareMathOperator{\arccot}{arccot}
+\begin{document}
+\begin{center}{\LARGE\bfseries 5.3 — Định lý cơ bản của giải tích}\end{center}
+Định lý cơ bản của giải tích mang tên gọi rất thích hợp vì nó thiết lập mối liên hệ giữa hai nhánh của giải tích: phép tính vi phân và phép tính tích phân. Phép tính vi phân nảy sinh từ bài toán tiếp tuyến, trong khi phép tính tích phân bắt nguồn từ bài toán diện tích, thoạt nhìn dường như không liên quan. Isaac Barrow (1630–1677), người hướng dẫn Newton tại Cambridge, phát hiện hai bài toán này thực ra gắn bó chặt chẽ. Ông nhận ra phép lấy đạo hàm và phép lấy tích phân là hai quá trình ngược nhau. Định lý cơ bản của giải tích diễn tả chính xác quan hệ ngược ấy giữa đạo hàm và tích phân. Newton và Leibniz đã khai thác quan hệ này để phát triển giải tích thành một phương pháp toán học có hệ thống. Đặc biệt, họ nhận thấy định lý cho phép tính diện tích và tích phân rất dễ dàng, không cần tính giới hạn các tổng như ở §5.1 và §5.2.
+\section*{Định lý cơ bản của giải tích, Phần 1}
+Phần thứ nhất xét các hàm được định nghĩa bởi phương trình dạng
+\[g(x)=\int_a^x f(t)\,dt,\tag{1}\]
+trong đó $f$ liên tục trên $[a,b]$ và $x$ thay đổi từ $a$ đến $b$. Lưu ý $g$ chỉ phụ thuộc vào $x$, là cận trên biến thiên của tích phân. Khi $x$ cố định, $\int_a^x f(t)\,dt$ là một số xác định. Khi cho $x$ thay đổi, số này cũng thay đổi, xác định một hàm của $x$, ký hiệu $g(x)$.
+
+Nếu $f$ dương, $g(x)$ được hiểu là diện tích dưới đồ thị $f$ từ $a$ đến $x$, với $x$ thay đổi từ $a$ đến $b$. Có thể xem $g$ là hàm “diện tích tích lũy đến hiện tại” (Hình 1).
+\fig[.44]{fig01}{Hình 1. Diện tích bằng $g(x)$.}
+\ex{1} Cho hàm $f$ có đồ thị ở Hình 2 và $g(x)=\int_0^x f(t)\,dt$. Tìm $g(0)$, $g(1)$, $g(2)$, $g(3)$, $g(4)$, $g(5)$, rồi phác thảo sơ bộ đồ thị $g$.
+\fig[.40]{fig02}{Hình 2}
+\sol Trước hết $g(0)=\int_0^0f(t)\,dt=0$. Từ Hình 3, $g(1)$ là diện tích một tam giác:
+\[g(1)=\int_0^1 f(t)\,dt=\frac12(1\cdot2)=1.\]
+Để tìm $g(2)$, cộng thêm diện tích một hình chữ nhật vào $g(1)$:
+\[g(2)=\int_0^2 f(t)\,dt=\int_0^1 f(t)\,dt+\int_1^2 f(t)\,dt=1+(1\cdot2)=3.\]
+\fig[.98]{fig03}{Hình 3}
+Ước lượng diện tích dưới $f$ từ 2 đến 3 bằng khoảng 1.3, nên
+\[g(3)=g(2)+\int_2^3 f(t)\,dt\approx3+1.3=4.3.\]
+Với $t>3$, $f(t)$ âm, nên ta bắt đầu trừ các diện tích:
+\[g(4)=g(3)+\int_3^4f(t)\,dt\approx4.3+(-1.3)=3.0,\]
+\[g(5)=g(4)+\int_4^5f(t)\,dt\approx3+(-1.3)=1.7.\]
+Dùng các giá trị này, ta phác thảo đồ thị $g$ ở Hình 4. Vì $f(t)$ dương khi $t<3$, diện tích được cộng dồn, nên $g$ tăng đến $x=3$, nơi nó đạt giá trị lớn nhất. Với $x>3$, $g$ giảm vì $f(t)$ âm.
+\fig[.40]{fig04}{Hình 4. $g(x)=\int_0^x f(t)\,dt$.}
+Nếu lấy $f(t)=t$, $a=0$, dùng Bài tập 5.2.47, ta có
+\[g(x)=\int_0^x t\,dt=\frac{x^2}2.\]
+Lưu ý $g'(x)=x$, nghĩa là $g'=f$. Nói cách khác, nếu định nghĩa $g$ bằng tích phân của $f$ theo (1), thì ít nhất trong trường hợp này, $g$ là một nguyên hàm của $f$. Nếu phác thảo đạo hàm của hàm $g$ trong Hình 4 bằng cách ước lượng hệ số góc tiếp tuyến, ta cũng thu được đồ thị giống $f$ ở Hình 2. Vì vậy, ta dự đoán trong Ví dụ 1 cũng có $g'=f$.
+
+Để thấy vì sao điều này có thể đúng tổng quát, xét hàm liên tục bất kỳ $f$ với $f(x)\ge0$. Khi ấy, $g(x)=\int_a^x f(t)\,dt$ là diện tích dưới đồ thị $f$ từ $a$ đến $x$ như Hình 1.
+
+Để tính $g'(x)$ theo định nghĩa đạo hàm, trước hết nhận xét rằng với $h>0$, $g(x+h)-g(x)$ là diện tích dưới đồ thị từ $x$ đến $x+h$ (miền xanh ở Hình 5). Khi $h$ nhỏ, diện tích này xấp xỉ diện tích hình chữ nhật cao $f(x)$, rộng $h$:
+\[g(x+h)-g(x)\approx hf(x),\qquad\frac{g(x+h)-g(x)}h\approx f(x).\]
+Về trực giác, ta dự đoán
+\[g'(x)=\lim_{h\to0}\frac{g(x+h)-g(x)}h=f(x).\]
+\fig[.46]{fig05}{Hình 5}
+Điều này đúng ngay cả khi $f$ không nhất thiết dương, như Phần 1 của định lý khẳng định.
+\group{Định lý cơ bản của giải tích, Phần 1 (FTC1)} Nếu $f$ liên tục trên $[a,b]$ thì hàm $g$ định nghĩa bởi
+\[g(x)=\int_a^x f(t)\,dt,\qquad a\le x\le b,\]
+liên tục trên $[a,b]$, khả vi trên $(a,b)$ và $g'(x)=f(x)$.
+
+Ta viết tắt tên định lý là FTC1. Bằng lời: đạo hàm của một tích phân xác định theo cận trên bằng hàm dưới dấu tích phân tính tại cận trên.
+\group{Chứng minh} Nếu $x,x+h\in(a,b)$ thì
+\begin{align*}
+g(x+h)-g(x)&=\int_a^{x+h}f(t)\,dt-\int_a^xf(t)\,dt\\
+&=\left(\int_a^xf(t)\,dt+\int_x^{x+h}f(t)\,dt\right)-\int_a^xf(t)\,dt\\
+&=\int_x^{x+h}f(t)\,dt,
+\end{align*}
+theo Tính chất 5 của tích phân. Do đó, với $h\ne0$,
+\[\frac{g(x+h)-g(x)}h=\frac1h\int_x^{x+h}f(t)\,dt.\tag{2}\]
+Trước hết giả sử $h>0$. Vì $f$ liên tục trên $[x,x+h]$, Định lý giá trị cực trị bảo đảm tồn tại $u,v\in[x,x+h]$ sao cho $f(u)=m$, $f(v)=M$, với $m,M$ là các giá trị nhỏ nhất và lớn nhất tuyệt đối của $f$ trên đoạn này (Hình 6).
+\fig[.46]{fig06}{Hình 6}
+Theo Tính chất 8 của tích phân,
+\[mh\le\int_x^{x+h}f(t)\,dt\le Mh,\]
+hay $f(u)h\le\int_x^{x+h}f(t)\,dt\le f(v)h$. Chia cho $h>0$:
+\[f(u)\le\frac1h\int_x^{x+h}f(t)\,dt\le f(v).\]
+Dùng (2) thay biểu thức giữa, ta được
+\[f(u)\le\frac{g(x+h)-g(x)}h\le f(v).\tag{3}\]
+Có thể chứng minh tương tự (3) khi $h<0$ (xem Bài tập 87).
+
+Cho $h\to0$. Khi đó $u\to x$, $v\to x$ vì chúng nằm giữa $x$ và $x+h$. Do $f$ liên tục tại $x$,
+\[\lim_{h\to0}f(u)=\lim_{u\to x}f(u)=f(x),\qquad\lim_{h\to0}f(v)=\lim_{v\to x}f(v)=f(x).\]
+Từ (3) và Định lý kẹp, suy ra
+\[g'(x)=\lim_{h\to0}\frac{g(x+h)-g(x)}h=f(x).\tag{4}\]
+Nếu $x=a$ hoặc $x=b$, (4) có thể được hiểu theo giới hạn một phía. Khi ấy, Định lý 2.8.4 (điều chỉnh cho giới hạn một phía) cho thấy $g$ liên tục trên $[a,b]$. $\square$
+
+Dùng ký hiệu Leibniz cho đạo hàm, FTC1 được viết thành
+\[\frac d{dx}\int_a^x f(t)\,dt=f(x)\tag{5}\]
+khi $f$ liên tục. Nói khái quát, nếu trước hết lấy tích phân của $f$, rồi lấy đạo hàm kết quả, ta trở lại hàm ban đầu $f$.
+\ex{2} Tìm đạo hàm của $g(x)=\int_0^x\sqrt{1+t^2}\,dt$.
+\sol Vì $f(t)=\sqrt{1+t^2}$ liên tục, FTC1 cho $g'(x)=\sqrt{1+x^2}$.
+\ex{3} Mặc dù $g(x)=\int_a^x f(t)\,dt$ có vẻ là cách định nghĩa hàm lạ, sách vật lý, hóa học và thống kê chứa rất nhiều hàm dạng này. Chẳng hạn, \textbf{hàm Fresnel}
+\[S(x)=\int_0^x\sin(\pi t^2/2)\,dt\]
+được đặt theo tên nhà vật lý Pháp Augustin Fresnel (1788–1827), nổi tiếng về các công trình quang học. Hàm này xuất hiện đầu tiên trong lý thuyết nhiễu xạ sóng ánh sáng của Fresnel; gần đây nó còn được dùng trong thiết kế đường cao tốc.
+
+FTC1 cho biết cách lấy đạo hàm:
+\[S'(x)=\sin(\pi x^2/2).\]
+Vì thế, ta có thể dùng mọi phương pháp của phép tính vi phân để khảo sát $S$ (xem Bài tập 81).
+
+Hình 7 biểu diễn $f(x)=\sin(\pi x^2/2)$ và hàm Fresnel $S(x)=\int_0^x f(t)\,dt$. Máy tính vẽ $S$ bằng cách tính tích phân tại nhiều giá trị $x$. Quả thực, $S(x)$ trông như diện tích dưới đồ thị $f$ từ 0 đến $x$ [cho đến khoảng $x\approx1.4$, khi $S(x)$ trở thành hiệu các diện tích]. Hình 8 cho thấy một phần rộng hơn của đồ thị $S$.
+\fig[.40]{fig07}{Hình 7. $f(x)=\sin(\pi x^2/2)$ và $S(x)=\int_0^x f(t)\,dt$.}
+\fig[.42]{fig08}{Hình 8. Hàm Fresnel $S(x)=\int_0^x\sin(\pi t^2/2)\,dt$.}
+Nếu bắt đầu từ đồ thị $S$ trong Hình 7 và hình dung đạo hàm, kết luận $S'(x)=f(x)$ là hợp lý. Chẳng hạn, $S$ tăng khi $f(x)>0$ và giảm khi $f(x)<0$. Đây là sự xác nhận trực quan của FTC1.
+\ex{4} Tìm $\displaystyle\frac d{dx}\int_1^{x^4}\sec t\,dt$.
+\sol Cần kết hợp Quy tắc dây chuyền với FTC1. Đặt $u=x^4$, ta có
+\begin{align*}
+\frac d{dx}\int_1^{x^4}\sec t\,dt&=\frac d{dx}\int_1^u\sec t\,dt\\
+&=\frac d{du}\left[\int_1^u\sec t\,dt\right]\frac{du}{dx}\\
+&=\sec u\,\frac{du}{dx}\\
+&=\sec(x^4)\cdot4x^3.
+\end{align*}
+Dòng thứ hai dùng Quy tắc dây chuyền; dòng thứ ba dùng FTC1.
+\section*{Định lý cơ bản của giải tích, Phần 2}
+Ở §5.2, ta tính tích phân theo định nghĩa là giới hạn tổng Riemann và thấy quá trình đôi khi dài, khó. Phần thứ hai của định lý, suy ra dễ dàng từ Phần 1, cho một phương pháp tính đơn giản hơn nhiều.
+\group{Định lý cơ bản của giải tích, Phần 2 (FTC2)} Nếu $f$ liên tục trên $[a,b]$ thì
+\[\int_a^b f(x)\,dx=F(b)-F(a),\]
+trong đó $F$ là một nguyên hàm bất kỳ của $f$, nghĩa là $F'=f$. Ta viết tắt định lý này là FTC2.
+\group{Chứng minh} Đặt $g(x)=\int_a^x f(t)\,dt$. Theo Phần 1, $g'(x)=f(x)$, tức $g$ là một nguyên hàm của $f$. Nếu $F$ là nguyên hàm khác trên $[a,b]$, Hệ quả 4.2.7 cho biết $F,g$ sai khác một hằng số:
+\[F(x)=g(x)+C\tag{6}\]
+với $a<x<b$. Vì $F,g$ đều liên tục trên $[a,b]$, lấy giới hạn hai vế khi $x\to a^+$ và $x\to b^-$ cho thấy đẳng thức cũng đúng tại $a,b$. Vậy $F(x)=g(x)+C$ trên toàn bộ $[a,b]$.
+
+Thay $x=a$ vào công thức $g$, ta có $g(a)=\int_a^a f(t)\,dt=0$. Dùng (6) tại $b,a$:
+\begin{align*}
+F(b)-F(a)&=[g(b)+C]-[g(a)+C]\\
+&=g(b)-g(a)=g(b)=\int_a^b f(t)\,dt.\qquad\square
+\end{align*}
+Phần 2 nói rằng nếu biết một nguyên hàm $F$ của $f$, ta tính $\int_a^b f(x)\,dx$ chỉ bằng cách lấy hiệu giá trị của $F$ tại hai đầu mút. Thật đáng chú ý: tích phân được định nghĩa bằng quá trình phức tạp liên quan đến mọi giá trị $f(x)$ trên $[a,b]$, nhưng lại tính được chỉ từ giá trị $F$ tại hai điểm $a,b$.
+
+Diễn giải vật lý làm kết quả trở nên hợp lý. Nếu $v(t)$ là vận tốc và $s(t)$ là vị trí của một vật thì $v(t)=s'(t)$, nên $s$ là nguyên hàm của $v$. Ở §5.1, với vật luôn chuyển động theo chiều dương, diện tích dưới đường cong vận tốc bằng quãng đường:
+\[\int_a^b v(t)\,dt=s(b)-s(a).\]
+Đó chính là phát biểu của FTC2 trong tình huống này.
+\ex{5} Tính $\int_1^3 e^x\,dx$.
+\sol $f(x)=e^x$ liên tục khắp nơi, một nguyên hàm là $F(x)=e^x$. Theo FTC2,
+\[\int_1^3e^x\,dx=F(3)-F(1)=e^3-e.\]
+FTC2 cho phép dùng một nguyên hàm bất kỳ, nên ta chọn nguyên hàm đơn giản nhất $e^x$, thay vì $e^x+7$ hay $e^x+C$. So sánh phép tính này với phép tính khó hơn nhiều trong Ví dụ 5.2.4.
+
+Ta thường dùng ký hiệu
+\[F(x)\big]_a^b=F(b)-F(a).\]
+Do đó FTC2 viết thành $\int_a^b f(x)\,dx=F(x)\big]_a^b$, với $F'=f$. Các ký hiệu thông dụng khác là $F(x)\big|_a^b$ và $[F(x)]_a^b$.
+\par\textit{Chú ý về ký hiệu:} Khi áp dụng định lý, chỉ cần một nguyên hàm cụ thể của $f$, không cần nguyên hàm tổng quát nhất.
+\ex{6} Tìm diện tích dưới parabol $y=x^2$ từ 0 đến 1.
+\sol Một nguyên hàm của $f(x)=x^2$ là $F(x)=\frac13x^3$. Theo FTC2,
+\[A=\int_0^1 x^2\,dx=\left[\frac{x^3}3\right]_0^1=\frac{1^3}3-\frac{0^3}3=\frac13.\]
+So sánh với Ví dụ 5.1.2, ta thấy định lý cho phương pháp ngắn hơn nhiều.
+\ex{7} Tính $\displaystyle\int_3^6\frac{dx}x$.
+\sol Đây là cách viết khác của $\int_3^6\frac1x\,dx$. Một nguyên hàm của $1/x$ là $\ln|x|$; vì $3\le x\le6$, ta có thể viết $F(x)=\ln x$. Vậy
+\[\int_3^6\frac1x\,dx=[\ln x]_3^6=\ln6-\ln3=\ln\frac63=\ln2.\]
+\ex{8} Tìm diện tích dưới đường cong cosin từ 0 đến $b$, với $0\le b\le\pi/2$.
+\sol Vì một nguyên hàm của $\cos x$ là $\sin x$,
+\[A=\int_0^b\cos x\,dx=[\sin x]_0^b=\sin b-\sin0=\sin b.\]
+Đặc biệt, lấy $b=\pi/2$, ta đã chứng minh diện tích dưới đường cong cosin từ 0 đến $\pi/2$ bằng $\sin(\pi/2)=1$ (Hình 9).
+\fig[.42]{fig09}{Hình 9. Diện tích bằng 1.}
+Khi nhà toán học Pháp Gilles de Roberval lần đầu tìm diện tích dưới các đường cong sin và cosin năm 1635, đó là bài toán rất khó, đòi hỏi nhiều sáng tạo. Nếu không có định lý cơ bản, ta phải tính giới hạn khó của các tổng bằng các đồng nhất thức lượng giác ít quen thuộc (hoặc dùng hệ thống đại số máy tính như Bài tập 5.1.33). Roberval còn gặp khó hơn vì công cụ giới hạn chưa được phát minh năm 1635. Nhưng vào các thập niên 1660, 1670, khi Barrow phát hiện định lý và Newton, Leibniz khai thác nó, các bài toán ấy trở nên rất dễ như Ví dụ 8 cho thấy.
+\Needspace{10\baselineskip}\ex{9} Phép tính sau sai ở đâu?
+\[\int_{-1}^3\frac1{x^2}\,dx=\left[\frac{x^{-1}}{-1}\right]_{-1}^3=-\frac13-1=-\frac43.\]
+\sol Trước hết, kết quả phải sai vì nó âm, trong khi $f(x)=1/x^2\ge0$ và Tính chất 6 cho tích phân của hàm không âm là không âm. Định lý cơ bản áp dụng cho hàm liên tục; không thể áp dụng ở đây vì $1/x^2$ không liên tục trên $[-1,3]$. Thực ra, $f$ có gián đoạn vô cực tại $x=0$; ở §7.8, ta sẽ thấy
+\[\int_{-1}^3\frac1{x^2}\,dx\quad\text{không tồn tại}.\]
+\section*{Đạo hàm và tích phân là hai quá trình ngược nhau}
+Ta kết thúc mục bằng cách tập hợp hai phần của định lý.
+\group{Định lý cơ bản của giải tích} Giả sử $f$ liên tục trên $[a,b]$.
+
+\noindent\textbf{1.} Nếu $g(x)=\int_a^x f(t)\,dt$ thì $g'(x)=f(x)$.
+
+\noindent\textbf{2.} $\int_a^b f(x)\,dx=F(b)-F(a)$, trong đó $F$ là nguyên hàm bất kỳ của $f$, tức $F'=f$.
+
+Phần 1 có thể viết thành
+\[\frac d{dx}\int_a^x f(t)\,dt=f(x).\]
+Nghĩa là lấy tích phân của hàm liên tục $f$, rồi lấy đạo hàm kết quả, ta trở lại $f$. Theo Phần 2,
+\[\int_a^x F'(t)\,dt=F(x)-F(a).\]
+Nghĩa là lấy đạo hàm của $F$, rồi lấy tích phân kết quả, ta trở lại $F$ sai khác hằng số $F(a)$. Kết hợp hai phần, phép lấy tích phân và phép lấy đạo hàm là hai quá trình ngược nhau.
+
+Định lý cơ bản của giải tích chắc chắn là định lý quan trọng nhất của giải tích và là một thành tựu lớn của trí tuệ con người. Trước khi nó được phát hiện, từ thời Eudoxus và Archimedes đến Galileo và Fermat, các bài toán diện tích, thể tích, độ dài đường cong khó đến mức chỉ những thiên tài mới giải được, mà cũng chỉ trong các trường hợp rất đặc biệt. Nhờ phương pháp có hệ thống do Newton và Leibniz xây dựng từ định lý, các chương tiếp theo sẽ cho thấy những bài toán khó ấy trở nên nằm trong khả năng của tất cả chúng ta.
+\clearpage\section*{5.3 — Bài tập}
+\bt{1} Giải thích chính xác ý nghĩa của phát biểu “phép lấy đạo hàm và phép lấy tích phân là hai quá trình ngược nhau”.
+\par\noindent\begin{minipage}{\linewidth}
+\bt{2} Cho $g(x)=\int_0^x f(t)\,dt$, với $f$ có đồ thị như hình.\\(a) Tính $g(x)$ với $x=0,1,2,3,4,5,6$.\\(b) Ước lượng $g(7)$.\\(c) $g$ đạt giá trị lớn nhất ở đâu? Đạt giá trị nhỏ nhất ở đâu?\\(d) Phác thảo sơ bộ đồ thị $g$.
+\fig[.43]{ex02}{Hình cho Bài tập 2}
+\end{minipage}
+\par\noindent\begin{minipage}{\linewidth}
+\bt{3} Cho $g(x)=\int_0^x f(t)\,dt$, với $f$ có đồ thị như hình.\\(a) Tính $g(0),g(1),g(2),g(3),g(6)$.\\(b) $g$ đồng biến trên khoảng nào?\\(c) $g$ đạt giá trị lớn nhất ở đâu?\\(d) Phác thảo sơ bộ đồ thị $g$.
+\fig[.43]{ex03}{Hình cho Bài tập 3}
+\end{minipage}
+\par\noindent\begin{minipage}{\linewidth}
+\bt{4} Cho $g(x)=\int_0^x f(t)\,dt$, với $f$ có đồ thị như hình.\\(a) Dùng FTC1 để vẽ đồ thị $g'$.\\(b) Tìm $g(3),g'(3),g''(3)$.\\(c) Tại $x=6$, $g$ có cực đại địa phương, cực tiểu địa phương hay không có cực trị địa phương?\\(d) Trả lời câu hỏi tương tự tại $x=9$.
+\fig[.55]{ex04}{Hình cho Bài tập 4}
+\end{minipage}
+\group{5–6} Cho đồ thị của hàm $f$. Gọi $g$ là hàm biểu diễn diện tích dưới đồ thị $f$ từ 0 đến $x$.\\(a) Dùng hình học tìm công thức $g(x)$.\\(b) Kiểm tra $g$ là nguyên hàm của $f$ và giải thích vì sao điều này xác nhận FTC1 đối với $f$.
+\par\noindent\begin{minipage}{\linewidth}
+\bt{5} \fig[.36]{ex05}{Hình cho Bài tập 5}
+\end{minipage}
+\par\noindent\begin{minipage}{\linewidth}
+\bt{6} \fig[.34]{ex06}{Hình cho Bài tập 6}
+\end{minipage}
+\group{7–8} Phác thảo miền có diện tích được biểu diễn bởi $g(x)$. Tìm $g'(x)$ bằng hai cách: (a) dùng Phần 1 của định lý cơ bản; (b) tính tích phân bằng Phần 2, rồi lấy đạo hàm.
+\bt{7} $\displaystyle g(x)=\int_1^x t^2\,dt$.
+\bt{8} $\displaystyle g(x)=\int_0^x(2+\sin t)\,dt$.
+\group{9–20} Dùng Phần 1 của Định lý cơ bản của giải tích để tìm đạo hàm hàm số.
+\bt{9} $\displaystyle g(x)=\int_0^x\sqrt{t+t^3}\,dt$.
+\bt{10} $\displaystyle g(x)=\int_1^x\ln(1+t^2)\,dt$.
+\bt{11} $\displaystyle g(w)=\int_0^w\sin(1+t^3)\,dt$.
+\bt{12} $\displaystyle h(u)=\int_0^u\frac{\sqrt t}{t+1}\,dt$.
+\bt{13} $\displaystyle F(x)=\int_x^0\sqrt{1+\sec t}\,dt$.\\{}[Gợi ý: $\int_x^0\sqrt{1+\sec t}\,dt=-\int_0^x\sqrt{1+\sec t}\,dt$.]
+\bt{14} $\displaystyle A(w)=\int_w^{-1}e^{t+t^2}\,dt$.
+\bt{15} $\displaystyle h(x)=\int_1^{e^x}\ln t\,dt$.
+\bt{16} $\displaystyle h(x)=\int_1^{\sqrt x}\frac{z^2}{z^4+1}\,dz$.
+\bt{17} $\displaystyle y=\int_1^{3x+2}\frac{t}{1+t^3}\,dt$.
+\bt{18} $\displaystyle y=\int_0^{\tan x}e^{-t^2}\,dt$.
+\bt{19} $\displaystyle y=\int_{\sqrt x}^{\pi/4}\theta\tan\theta\,d\theta$.
+\bt{20} $\displaystyle y=\int_{1/x}^4\sqrt{1+\frac1t}\,dt$.
+\Needspace{10\baselineskip}\group{21–24} Dùng Phần 2 của Định lý cơ bản của giải tích để tính tích phân và diễn giải kết quả là diện tích hoặc hiệu các diện tích. Minh họa bằng hình phác thảo.
+\bt{21} $\displaystyle\int_{-1}^2x^3\,dx$.
+\bt{22} $\displaystyle\int_0^4(x^2-4x)\,dx$.
+\bt{23} $\displaystyle\int_{\pi/2}^{2\pi}2\sin x\,dx$.
+\bt{24} $\displaystyle\int_{-1}^2(e^x+2)\,dx$.
+\group{25–54} Tính tích phân.
+\bt{25} $\displaystyle \int_1^3(x^2+2x-4)\,dx$.
+\bt{26} $\displaystyle \int_{-1}^1x^{100}\,dx$.
+\bt{27} $\displaystyle \int_0^2\left(\frac45t^3-\frac34t^2+\frac25t\right)\,dt$.
+\bt{28} $\displaystyle \int_0^1(1-8v^3+16v^7)\,dv$.
+\bt{29} $\displaystyle \int_1^9\sqrt x\,dx$.
+\bt{30} $\displaystyle \int_1^8x^{-2/3}\,dx$.
+\bt{31} $\displaystyle \int_0^4(t^2+t^{3/2})\,dt$.
+\bt{32} $\displaystyle \int_1^3\left(\frac1{z^2}+\frac1{z^3}\right)\,dz$.
+\bt{33} $\displaystyle \int_{\pi/2}^0\cos\theta\,d\theta$.
+\bt{34} $\displaystyle \int_{-5}^5e\,dx$.
+\bt{35} $\displaystyle \int_0^1(u+2)(u-3)\,du$.
+\bt{36} $\displaystyle \int_0^4(4-t)\sqrt t\,dt$.
+\bt{37} $\displaystyle \int_1^4\frac{2+x^2}{\sqrt x}\,dx$.
+\bt{38} $\displaystyle \int_{-1}^2(3u-2)(u+1)\,du$.
+\bt{39} $\displaystyle \int_1^3\left(2x+\frac1x\right)\,dx$.
+\bt{40} $\displaystyle \int_5^5\sqrt{t^2+\sin t}\,dt$.
+\bt{41} $\displaystyle \int_0^{\pi/3}\sec\theta\tan\theta\,d\theta$.
+\bt{42} $\displaystyle \int_1^3\frac{y^3-2y^2-y}{y^2}\,dy$.
+\bt{43} $\displaystyle \int_0^1(1+r)^3\,dr$.
+\bt{44} $\displaystyle \int_0^3(2\sin x-e^x)\,dx$.
+\bt{45} $\displaystyle \int_1^2\frac{v^3+3v^6}{v^4}\,dv$.
+\bt{46} $\displaystyle \int_1^{18}\sqrt{\frac3z}\,dz$.
+\bt{47} $\displaystyle \int_0^1(x^e+e^x)\,dx$.
+\bt{48} $\displaystyle \int_0^1\cosh t\,dt$.
+\bt{49} $\displaystyle \int_{1/\sqrt3}^{\sqrt3}\frac8{1+x^2}\,dx$.
+\bt{50} $\displaystyle \int_1^3\frac{(3x+1)^2}{x^3}\,dx$.
+\bt{51} $\displaystyle \int_0^4 2^s\,ds$.
+\bt{52} $\displaystyle \int_{1/2}^{1/\sqrt2}\frac4{\sqrt{1-x^2}}\,dx$.
+\bt{53} $\displaystyle\int_0^\pi f(x)\,dx$, trong đó
+\[f(x)=\begin{cases}\sin x,&0\le x<\pi/2,\\\cos x,&\pi/2\le x\le\pi.\end{cases}\]
+\bt{54} $\displaystyle\int_{-2}^2f(x)\,dx$, trong đó
+\[f(x)=\begin{cases}2,&-2\le x\le0,\\4-x^2,&0<x\le2.\end{cases}\]
+\group{55–58} Phác thảo miền được bao bởi các đường đã cho và tính diện tích.
+\bt{55} $y=\sqrt x$, \quad $y=0$, \quad $x=4$.
+\bt{56} $y=x^3$, \quad $y=0$, \quad $x=1$.
+\bt{57} $y=4-x^2$, \quad $y=0$.
+\bt{58} $y=2x-x^2$, \quad $y=0$.
+\group{59–62} Dùng đồ thị ước lượng sơ bộ diện tích miền dưới đường cong đã cho, rồi tìm diện tích chính xác.
+\bt{59} $y=\sqrt[3]x$, \quad $0\le x\le27$.
+\bt{60} $y=x^{-4}$, \quad $1\le x\le6$.
+\bt{61} $y=\sin x$, \quad $0\le x\le\pi$.
+\bt{62} $y=\sec^2x$, \quad $0\le x\le\pi/3$.
+\group{63–66} Đẳng thức sai ở đâu?
+\bt{63} $\displaystyle\int_{-2}^1x^{-4}\,dx=\left[\frac{x^{-3}}{-3}\right]_{-2}^1=-\frac38$.
+\bt{64} $\displaystyle\int_{-1}^2\frac4{x^3}\,dx=\left[-\frac2{x^2}\right]_{-1}^2=\frac32$.
+\bt{65} $\displaystyle\int_{\pi/3}^\pi\sec\theta\tan\theta\,d\theta=[\sec\theta]_{\pi/3}^\pi=-3$.
+\bt{66} $\displaystyle\int_0^\pi\sec^2x\,dx=[\tan x]_0^\pi=0$.
+\group{67–71} Tìm đạo hàm hàm số.
+\bt{67} $\displaystyle g(x)=\int_{2x}^{3x}\frac{u^2-1}{u^2+1}\,du$.\\{}[Gợi ý: $\int_{2x}^{3x}f(u)\,du=\int_{2x}^0f(u)\,du+\int_0^{3x}f(u)\,du$.]
+\bt{68} $\displaystyle g(x)=\int_{1-2x}^{1+2x}t\sin t\,dt$.
+\bt{69} $\displaystyle F(x)=\int_x^{x^2}e^{t^2}\,dt$.
+\bt{70} $\displaystyle F(x)=\int_{\sqrt x}^{2x}\arctan t\,dt$.
+\bt{71} $\displaystyle y=\int_{\cos x}^{\sin x}\ln(1+2v)\,dv$.
+\bt{72} Nếu $f(x)=\int_0^x(1-t^2)e^{t^2}\,dt$, $f$ đồng biến trên khoảng nào?
+\bt{73} Đường cong $\displaystyle y=\int_0^x\frac{t^2}{t^2+t+2}\,dt$ lõm xuống trên khoảng nào?
+\par\noindent\begin{minipage}{\linewidth}
+\bt{74} Cho $F(x)=\int_1^x f(t)\,dt$, với $f$ có đồ thị như hình. $F$ lõm xuống ở đâu?
+\fig[.48]{ex74}{Hình cho Bài tập 74}
+\end{minipage}
+\bt{75} Cho $F(x)=\int_2^x e^{t^2}\,dt$. Tìm phương trình tiếp tuyến của đường cong $y=F(x)$ tại điểm có hoành độ 2.
+\bt{76} Nếu $f(x)=\int_0^{\sin x}\sqrt{1+t^2}\,dt$ và $g(y)=\int_3^y f(x)\,dx$, tìm $g''(\pi/6)$.
+\group{77–78} Dùng quy tắc l’Hospital để tính giới hạn.
+\bt{77} $\displaystyle\lim_{x\to0}\frac1{x^2}\int_0^x\frac{2t}{\sqrt{t^3+1}}\,dt$.
+\bt{78} $\displaystyle\lim_{x\to\infty}\frac1{x^2}\int_0^x\ln(1+e^t)\,dt$.
+\bt{79} Nếu $f(1)=12$, $f'$ liên tục và $\int_1^4 f'(x)\,dx=17$, giá trị $f(4)$ bằng bao nhiêu?
+\bt{80} \textbf{Hàm sai số.} Hàm sai số
+\[\operatorname{erf}(x)=\frac2{\sqrt\pi}\int_0^x e^{-t^2}\,dt\]
+được dùng trong xác suất, thống kê và kỹ thuật.\\(a) Chứng minh
+\[\int_a^b e^{-t^2}\,dt=\frac12\sqrt\pi[\operatorname{erf}(b)-\operatorname{erf}(a)].\]
+(b) Chứng minh $y=e^{x^2}\operatorname{erf}(x)$ thỏa mãn phương trình vi phân $y'=2xy+2/\sqrt\pi$.
+\bt{81} \textbf{Hàm Fresnel.} Hàm Fresnel $S$ được định nghĩa trong Ví dụ 3 và vẽ ở Hình 7, 8.\\(a) Tại những giá trị nào của $x$, hàm có giá trị cực đại địa phương?\\(b) Hàm lõm lên trên những khoảng nào?\\(c) Dùng đồ thị giải phương trình sau, chính xác đến hai chữ số thập phân:
+\[\int_0^x\sin(\pi t^2/2)\,dt=0.2.\]
+\bt{82} \textbf{Hàm tích phân sin.} Hàm tích phân sin
+\[\operatorname{Si}(x)=\int_0^x\frac{\sin t}t\,dt\]
+có vai trò quan trọng trong kỹ thuật điện. [Hàm dưới dấu tích phân $f(t)=(\sin t)/t$ không xác định tại $t=0$, nhưng giới hạn khi $t\to0$ bằng 1. Vì vậy, đặt $f(0)=1$ để $f$ liên tục khắp nơi.]\\(a) Vẽ đồ thị $\operatorname{Si}$.\\(b) Tại những giá trị nào của $x$, hàm có giá trị cực đại địa phương?\\(c) Tìm tọa độ điểm uốn đầu tiên ở bên phải gốc tọa độ.\\(d) Hàm có tiệm cận ngang không?\\(e) Giải phương trình sau, chính xác đến một chữ số thập phân:
+\[\int_0^x\frac{\sin t}t\,dt=1.\]
+\group{83–84} Cho $g(x)=\int_0^x f(t)\,dt$, với $f$ có đồ thị như hình.\\(a) Các giá trị cực đại và cực tiểu địa phương của $g$ xảy ra tại những giá trị nào của $x$?\\(b) $g$ đạt giá trị lớn nhất tuyệt đối ở đâu?\\(c) $g$ lõm xuống trên những khoảng nào?\\(d) Phác thảo đồ thị $g$.
+\par\noindent\begin{minipage}{\linewidth}
+\bt{83} \fig[.52]{ex83}{Hình cho Bài tập 83}
+\end{minipage}
+\par\noindent\begin{minipage}{\linewidth}
+\bt{84} \fig[.52]{ex84}{Hình cho Bài tập 84}
+\end{minipage}
+\group{85–86} Tính giới hạn bằng cách nhận ra tổng là một tổng Riemann của hàm xác định trên $[0,1]$.
+\bt{85} $\displaystyle\lim_{n\to\infty}\sum_{i=1}^n\left(\frac{i^4}{n^5}+\frac i{n^2}\right)$.
+\bt{86} $\displaystyle\lim_{n\to\infty}\frac1n\left(\sqrt{\frac1n}+\sqrt{\frac2n}+\sqrt{\frac3n}+\cdots+\sqrt{\frac nn}\right)$.
+\bt{87} Giải thích tính đúng đắn của (3) trong trường hợp $h<0$.
+\bt{88} Nếu $f$ liên tục, $g,h$ khả vi, chứng minh
+\[\frac d{dx}\int_{g(x)}^{h(x)}f(t)\,dt=f(h(x))h'(x)-f(g(x))g'(x).\]
+\bt{89} (a) Chứng minh $1\le\sqrt{1+x^3}\le1+x^3$ với $x\ge0$.\\(b) Chứng minh $1\le\int_0^1\sqrt{1+x^3}\,dx\le1.25$.
+\bt{90} (a) Chứng minh $\cos(x^2)\ge\cos x$ với $0\le x\le1$.\\(b) Suy ra $\int_0^{\pi/6}\cos(x^2)\,dx\ge\frac12$.
+\bt{91} Chứng minh
+\[0\le\int_5^{10}\frac{x^2}{x^4+x^2+1}\,dx\le0.1\]
+bằng cách so sánh hàm dưới dấu tích phân với một hàm đơn giản hơn.
+\bt{92} Cho
+\[f(x)=\begin{cases}0,&x<0,\\x,&0\le x\le1,\\2-x,&1<x\le2,\\0,&x>2,\end{cases}\qquad g(x)=\int_0^x f(t)\,dt.\]
+(a) Tìm biểu thức của $g(x)$ tương tự biểu thức đã cho của $f(x)$.\\(b) Phác thảo đồ thị $f,g$.\\(c) $f$ khả vi ở đâu? $g$ khả vi ở đâu?
+\bt{93} Tìm hàm $f$ và số $a$ sao cho
+\[6+\int_a^x\frac{f(t)}{t^2}\,dt=2\sqrt x\qquad\text{với mọi }x>0.\]
+\par\noindent\begin{minipage}{\linewidth}
+\bt{94} Diện tích miền $B$ gấp ba diện tích miền $A$. Biểu diễn $b$ theo $a$.
+\fig[.70]{ex94}{Hình cho Bài tập 94}
+\end{minipage}
+\bt{95} Một công ty sản xuất sở hữu thiết bị quan trọng khấu hao với tốc độ (liên tục) $f(t)$, trong đó $t$ là thời gian tính bằng tháng kể từ lần đại tu gần nhất. Vì mỗi lần đại tu phát sinh chi phí cố định $A$, công ty muốn xác định thời gian tối ưu $T$ (tháng) giữa hai lần đại tu.\\(a) Giải thích vì sao $\int_0^t f(s)\,ds$ biểu diễn phần giá trị thiết bị bị mất trong thời gian $t$ kể từ lần đại tu gần nhất.\\(b) Cho
+\[C(t)=\frac1t\left[A+\int_0^t f(s)\,ds\right].\]
+$C$ biểu diễn điều gì và vì sao công ty muốn làm $C$ nhỏ nhất?\\(c) Chứng minh $C$ có giá trị nhỏ nhất tại các số $t=T$ thỏa mãn $C(T)=f(T)$.
+\end{document}

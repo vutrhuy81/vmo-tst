@@ -1,0 +1,54 @@
+import assert from 'node:assert/strict';
+import fs from 'node:fs';
+import crypto from 'node:crypto';
+import {ObjectId} from 'mongodb';
+import {JSDOM} from 'jsdom';
+import {readBooks,readBookAsset,readBookProblemImages} from '../lib/books.js';
+const rows=[];
+const eq=(a,b)=>String(a)===String(b);
+function match(row,q){return Object.entries(q).every(([k,v])=>{if(k==='$and')return v.every(x=>match(row,x));if(k==='$or')return v.some(x=>match(row,x));if(v&&typeof v==='object'&&!(v instanceof ObjectId)){if('$in'in v)return v.$in.some(x=>eq(x,row[k]));if('$nin'in v)return !v.$nin.some(x=>eq(x,row[k]));if('$ne'in v)return !eq(row[k],v.$ne);if('$exists'in v)return(row[k]!==undefined)===v.$exists;}return eq(row[k],v);});}
+function change(row,u,insert=false){if(insert)Object.assign(row,u.$setOnInsert);Object.assign(row,u.$set);for(const[k,v]of Object.entries(u.$inc||{}))row[k]=(row[k]||0)+v;}
+const col={async findOne(q){return rows.find(r=>match(r,q))?{...rows.find(r=>match(r,q))}:null;},async findOneAndUpdate(q,u,o){let row=rows.find(r=>match(r,q));if(!row){if(!o?.upsert)return null;row={...q};change(row,u,true);rows.push(row);}else change(row,u);return{...row};},async insertOne(doc){const row={_id:new ObjectId(),...doc};rows.push(row);return{insertedId:row._id};},async createIndex(){},async updateOne(q,u){const row=rows.find(r=>match(r,q));if(!row)return{matchedCount:0};change(row,u);return{matchedCount:1};},async updateMany(q,u){rows.filter(r=>match(r,q)).forEach(r=>change(r,u));},find(q,options={}){let limit=Infinity;return{sort(){return this;},limit(n){limit=n;return this;},async toArray(){return rows.filter(r=>match(r,q)).slice(0,limit).map(r=>{const copy={...r};for(const[k,v]of Object.entries(options.projection||{}))if(v===0)delete copy[k];return copy;});}};}};
+const db={collection:()=>col},admin={role:'admin',username:'admin'},student={role:'student',educationLevels:['university']},teacher={role:'teacher',educationLevels:['university']},other={role:'student',educationLevels:['upper_secondary']};
+
+const read=p=>fs.readFileSync(new URL('../'+p,import.meta.url),'utf8');
+const data=JSON.parse(read('data/books/imports/stewart-5-3.json'));
+const catalog=await readBooks(db,student), book=catalog.books[0];
+const detail=await readBooks(db,student,{bookId:book.id});
+const section=detail.sections.find(s=>s.title.startsWith('5.3.'));
+assert.ok(section);
+const result=await readBooks(db,student,{bookId:book.id,sectionId:section.id});
+assert.equal(result.exerciseHeading,'5.3. Bài tập');
+assert.equal(result.section.content,data.content);
+const exercises=result.exercises;
+assert.deepEqual(exercises.map(e=>e.questionNumber),Array.from({length:95},(_,i)=>i+1));
+assert.equal(new Set(exercises.map(e=>e.contentKey)).size,95);
+assert.ok(exercises.every(e=>e.allowSubmission&&e.allowAiEvaluation));
+for(const n of [5,6,7,8,9,20,21,24,25,54,55,58,59,62,63,66,67,71,77,78,83,84,85,86])assert.ok(exercises[n-1].content.includes('Yêu cầu chung'),String(n));
+assert.ok(!exercises[3].content.includes('Yêu cầu chung'));
+assert.ok(exercises[80].content.includes('fig07.png')&&exercises[80].content.includes('fig08.png'));
+assert.ok(exercises[86].content.includes('bất đẳng thức (3)'));
+assert.equal(data.sourceInfo.exampleCount,9);
+assert.equal((data.content.match(/<strong>Ví dụ [1-9]\.<\/strong>/g)||[]).length,9);
+const manifest=JSON.parse(read('data/books/asset-manifest.json'));
+const keys=Object.keys(manifest).filter(k=>k.startsWith('stewart-5-3-'));
+assert.equal(keys.length,18);
+for(const key of keys){const a=await readBookAsset(student,key);assert.equal(a.mime,'image/png');assert.equal(a.bytes.subarray(1,4).toString(),'PNG');assert.equal(crypto.createHash('sha256').update(a.bytes).digest('hex'),manifest[key].sha256);}
+await assert.rejects(()=>readBookAsset(other,keys[0]),e=>e.status===403);
+assert.equal((await readBookProblemImages({bookAssetKeys:keys.slice(0,2)},student)).length,2);
+const dom=new JSDOM(read('index.html'),{url:'https://example.test',runScripts:'outside-only'}),{window}=dom;
+window.eval(read('education_access.js'));window.VMOAuth={getSession:()=>admin};window.confirm=()=>true;
+window.fetch=async url=>({ok:true,json:async()=>({success:true,item:await readBooks(db,admin,Object.fromEntries(new URL(url,'https://example.test').searchParams))})});
+window.eval(read('vmo_db_ui.js'));window.eval(read('books.js'));window.eval(read('ai_guide_engine.js'));
+await window.loadBooks();
+await [...window.document.querySelectorAll('#booksToc button')].find(b=>b.textContent.startsWith('5.3.')).onclick();
+for(const selector of ['.book-exercise','.book-exercise .btn-ai-guide','.book-exercise .btn-submit-solution','.book-exercise .btn-manage-reference-links'])assert.equal(window.document.querySelectorAll(selector).length,95,selector);
+const images=[...window.document.querySelectorAll('#booksContent img')];assert.equal(images.length,20);assert.equal(new Set(images.map(i=>i.src)).size,18);
+const card=window.document.querySelectorAll('.book-exercise')[82];
+let selected;window.openAIGuide=button=>{selected=button.closest('.book-exercise').dataset.contentKey;};card.querySelector('.btn-ai-guide').onclick();assert.equal(selected,exercises[82].contentKey);
+card.querySelector('.btn-submit-solution').onclick();assert.ok(window.document.getElementById('submissionModal').textContent.includes('Bài tập 83'));window.closeSubmissionModal();
+window.VMODataService={getCatalogProblems:async({contentKey})=>exercises.filter(e=>e.contentKey===contentKey)};
+await window.openReferenceLinksManager(exercises[82].contentKey);assert.equal(window.document.getElementById('referenceManagerProblemContent').value,exercises[82].content);window.closeReferenceLinksManager();
+const again=await readBooks(db,student,{bookId:book.id,sectionId:section.id});assert.deepEqual(again.exercises.map(e=>e.id),exercises.map(e=>e.id));
+console.log('Stewart 5.3: 95 records, 285 action buttons, 18 original images and correct modal bindings passed.');
+dom.window.close();
