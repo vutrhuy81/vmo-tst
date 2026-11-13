@@ -1,0 +1,77 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage{fontspec}\setmainfont{Latin Modern Roman}\setsansfont{DejaVu Sans}
+\usepackage{amsmath,amssymb,graphicx,geometry,enumitem,needspace,longtable,booktabs,fancyhdr,hyperref}
+\geometry{left=28mm,right=23mm,top=24mm,bottom=24mm}
+\hypersetup{unicode=true,colorlinks=true,linkcolor=black,urlcolor=blue,pdftitle={Giải tích Bài toán nâng cao — Chương 4}}
+\setlength{\parindent}{1.2em}\setlength{\parskip}{4pt}\setlength{\headheight}{16pt}
+\pagestyle{fancy}\fancyhf{}\fancyhead[L]{\small Chương 4. Ứng dụng của đạo hàm}\fancyhead[R]{\small Bài toán nâng cao}\fancyfoot[C]{\thepage}
+\newcommand{\fig}[3][.68]{\begin{center}\begin{minipage}{\linewidth}\centering\includegraphics[width=#1\linewidth]{assets/#2.png}\\{\small #3}\end{minipage}\end{center}}
+\newcommand{\ex}[1]{\par\medskip\noindent\textbf{Ví dụ #1.}\ }
+\newcommand{\sol}{\par\nopagebreak[4]\noindent\textit{Lời giải.}\ }
+\newcommand{\bt}[1]{\par\smallskip\Needspace{5\baselineskip}\noindent\textbf{#1.}\ }
+\newcommand{\group}[1]{\par\medskip\noindent\textbf{#1}\par\nopagebreak[4]}
+\newcommand{\gint}[1]{\left[\!\left[#1\right]\!\right]}
+\allowdisplaybreaks[2]
+\DeclareMathOperator{\sech}{sech}
+\DeclareMathOperator{\csch}{csch}
+\DeclareMathOperator{\arccot}{arccot}
+\begin{document}
+\begin{center}{\LARGE\bfseries Bài toán nâng cao — Problems Plus}\\[5pt]{\large Chương 4. Ứng dụng của đạo hàm}\end{center}
+\noindent\textit{Bản dịch tiếng Việt từ trang 369–370 của tài liệu gốc.}
+\bt{1} Một hình chữ nhật có đáy nằm trên trục $x$ và hai đỉnh nằm trên đường cong $y=e^{-x^2}$. Chứng minh hình chữ nhật có diện tích lớn nhất khi hai đỉnh đó là các điểm uốn của đường cong.
+\bt{2} Chứng minh $|\sin x-\cos x|\le\sqrt2$ với mọi $x$.
+\bt{3} Hàm số $f(x)=e^{10|x-2|-x^2}$ có giá trị cực đại tuyệt đối hay không? Nếu có, hãy tìm giá trị đó. Còn giá trị cực tiểu tuyệt đối thì sao?
+\bt{4} Chứng minh $x^2y^2(4-x^2)(4-y^2)\le16$ với mọi số $x,y$ thỏa mãn $|x|\le2$ và $|y|\le2$.
+\bt{5} Chứng minh các điểm uốn của đường cong $y=(\sin x)/x$ nằm trên đường cong $y^2(x^4+4)=4$.
+\bt{6} Tìm điểm trên parabol $y=1-x^2$ sao cho tiếp tuyến tại đó chắn trong góc phần tư thứ nhất một tam giác có diện tích nhỏ nhất.
+\bt{7} Nếu $a,b,c,d$ là các hằng số thỏa mãn
+\[\lim_{x\to0}\frac{ax^2+\sin bx+\sin cx+\sin dx}{3x^2+5x^4+7x^6}=8,\]
+hãy tìm giá trị của tổng $a+b+c+d$.
+\bt{8} Tính $\displaystyle\lim_{x\to\infty}\frac{(x+2)^{1/x}-x^{1/x}}{(x+3)^{1/x}-x^{1/x}}$.
+\bt{9} Tìm điểm cao nhất và điểm thấp nhất trên đường cong $x^2+xy+y^2=12$.
+\bt{10} Chứng minh rằng nếu $f$ là một hàm số khả vi thỏa mãn
+\[\frac{f(x+n)-f(x)}n=f'(x)\]
+với mọi số thực $x$ và mọi số nguyên dương $n$ thì $f$ là một hàm số tuyến tính.
+\par\noindent\begin{minipage}{\linewidth}
+\bt{11} Cho $P(a,a^2)$ là một điểm bất kỳ thuộc góc phần tư thứ nhất trên parabol $y=x^2$. Gọi $Q$ là giao điểm thứ hai của pháp tuyến tại $P$ với parabol (xem hình).\\(a) Chứng minh tung độ của $Q$ nhỏ nhất khi $a=1/\sqrt2$.\\(b) Chứng minh đoạn thẳng $PQ$ có độ dài nhỏ nhất khi $a=1/\sqrt2$.
+\fig[.40]{ex11}{Hình cho Bài toán 11}
+\end{minipage}
+\bt{12} Với những giá trị nào của $c$, đường cong $y=cx^3+e^x$ có điểm uốn?
+\par\noindent\begin{minipage}{\linewidth}
+\bt{13} Một tam giác cân ngoại tiếp đường tròn đơn vị, hai cạnh bên gặp nhau tại điểm $(0,a)$ trên trục $y$ (xem hình). Tìm giá trị của $a$ làm độ dài các cạnh bên nhỏ nhất. (Có thể bạn sẽ ngạc nhiên vì kết quả không cho một tam giác đều.)
+\fig[.42]{ex13}{Hình cho Bài toán 13}
+\end{minipage}
+\bt{14} Phác thảo miền trong mặt phẳng gồm tất cả các điểm $(x,y)$ sao cho
+\[2xy\le|x-y|\le x^2+y^2.\]
+\par\noindent\begin{minipage}{\linewidth}
+\bt{15} Đường thẳng $y=mx+b$ cắt parabol $y=x^2$ tại $A$ và $B$ (xem hình). Tìm điểm $P$ trên cung $AOB$ của parabol sao cho diện tích tam giác $PAB$ lớn nhất.
+\fig[.46]{ex15}{Hình cho Bài toán 15}
+\end{minipage}
+\bt{16} $ABCD$ là một tờ giấy hình vuông cạnh 1 m. Vẽ một cung một phần tư đường tròn từ $B$ đến $D$, tâm $A$. Gấp tờ giấy theo $EF$, với $E$ thuộc $AB$ và $F$ thuộc $AD$, sao cho $A$ rơi lên cung một phần tư đường tròn. Xác định diện tích lớn nhất và nhỏ nhất mà tam giác $AEF$ có thể có.
+\bt{17} Với những số dương $a$ nào, đường cong $y=a^x$ cắt đường thẳng $y=x$?
+\bt{18} Với giá trị nào của $a$, đẳng thức sau đúng?
+\[\lim_{x\to\infty}\left(\frac{x+a}{x-a}\right)^x=e.\]
+\bt{19} Cho $f(x)=a_1\sin x+a_2\sin2x+\cdots+a_n\sin nx$, trong đó $a_1,a_2,\ldots,a_n$ là các số thực và $n$ là một số nguyên dương. Biết rằng $|f(x)|\le|\sin x|$ với mọi $x$, hãy chứng minh
+\[|a_1+2a_2+\cdots+na_n|\le1.\]
+\par\noindent\begin{minipage}{\linewidth}
+\bt{20} Một cung $PQ$ của đường tròn chắn góc ở tâm $\theta$ như hình vẽ. Gọi $A(\theta)$ là diện tích miền nằm giữa dây $PQ$ và cung $PQ$. Gọi $B(\theta)$ là diện tích miền nằm giữa các tiếp tuyến $PR$, $QR$ và cung đó. Tìm
+\[\lim_{\theta\to0^+}\frac{A(\theta)}{B(\theta)}.\]
+\fig[.44]{ex20}{Hình cho Bài toán 20}
+\end{minipage}
+\bt{21} Có thể xác định vận tốc truyền âm $c_1$ trong lớp đá phía trên, vận tốc truyền âm $c_2$ trong lớp đá phía dưới và bề dày $h$ của lớp trên bằng phương pháp thăm dò địa chấn, nếu vận tốc truyền âm trong lớp dưới lớn hơn trong lớp trên. Một khối thuốc nổ được kích nổ tại điểm $P$; các tín hiệu truyền đi được ghi nhận tại điểm $Q$, cách $P$ một khoảng $D$. Tín hiệu đầu tiên đến $Q$ truyền dọc theo bề mặt và mất $T_1$ giây. Tín hiệu tiếp theo truyền từ $P$ đến điểm $R$, từ $R$ đến $S$ trong lớp dưới, rồi đến $Q$, mất $T_2$ giây. Tín hiệu thứ ba phản xạ trên lớp dưới tại trung điểm $O$ của $RS$ và mất $T_3$ giây để đến $Q$ (xem hình).\\(a) Biểu diễn $T_1$, $T_2$ và $T_3$ theo $D,h,c_1,c_2$ và $\theta$.\\(b) Chứng minh $T_2$ nhỏ nhất khi $\sin\theta=c_1/c_2$.\\(c) Giả sử $D=1$ km, $T_1=0.26$ s, $T_2=0.32$ s và $T_3=0.34$ s. Tìm $c_1,c_2$ và $h$.
+\par\textit{Chú ý:} Các nhà địa vật lý sử dụng kỹ thuật này khi nghiên cứu cấu trúc vỏ Trái Đất, chẳng hạn để tìm kiếm dầu mỏ hoặc khảo sát các đứt gãy.
+\fig[.65]{ex21}{Hình cho Bài toán 21}
+\bt{22} Với những giá trị nào của $c$, tồn tại một đường thẳng cắt đường cong
+\[y=x^4+cx^3+12x^2-5x+2\]
+tại bốn điểm phân biệt?
+\bt{23} Một bài toán do Hầu tước de l’Hospital đặt ra trong giáo trình giải tích \textit{Analyse des infiniment petits} liên quan đến một ròng rọc được treo vào trần nhà tại điểm $C$ bằng một sợi dây dài $r$. Tại một điểm khác $B$ trên trần, cách $C$ một khoảng $d$ (với $d>r$), người ta buộc một sợi dây dài $\ell$, luồn qua ròng rọc tại $F$ rồi nối với một vật nặng $W$. Vật được thả và dừng lại ở vị trí cân bằng $D$ (xem hình). Theo lập luận của l’Hospital, điều này xảy ra khi khoảng cách $|ED|$ lớn nhất. Chứng minh khi hệ đạt cân bằng, giá trị của $x$ là
+\[\frac{r}{4d}\left(r+\sqrt{r^2+8d^2}\right).\]
+Lưu ý biểu thức này không phụ thuộc vào cả $W$ lẫn $\ell$.
+\fig[.40]{ex23}{Hình cho Bài toán 23}
+\bt{24} Cho một hình cầu bán kính $r$. Tìm chiều cao của hình chóp có thể tích nhỏ nhất, đáy là hình vuông, sao cho đáy và mọi mặt bên hình tam giác cùng tiếp xúc với hình cầu. Nếu đáy hình chóp là một đa giác đều $n$ cạnh thì sao? (Đa giác đều $n$ cạnh là đa giác có $n$ cạnh bằng nhau và $n$ góc bằng nhau.) (Sử dụng công thức thể tích hình chóp $V=\frac13Ah$, trong đó $A$ là diện tích đáy.)
+\bt{25} Giả sử một quả cầu tuyết tan chảy sao cho thể tích giảm với tốc độ tỉ lệ thuận với diện tích bề mặt. Nếu mất ba giờ để thể tích quả cầu tuyết giảm còn một nửa thể tích ban đầu thì cần thêm bao lâu để quả cầu tuyết tan hoàn toàn?
+\par\noindent\begin{minipage}{\linewidth}
+\bt{26} Đặt một bong bóng hình bán cầu lên một bong bóng hình cầu bán kính 1. Sau đó đặt một bong bóng hình bán cầu nhỏ hơn lên bong bóng vừa đặt. Tiếp tục quá trình này cho đến khi tạo thành $n$ khoang, kể cả hình cầu ban đầu. (Hình vẽ minh họa trường hợp $n=4$.) Dùng phương pháp quy nạp toán học để chứng minh chiều cao lớn nhất của một tháp bong bóng bất kỳ gồm $n$ khoang là $1+\sqrt n$.
+\fig[.28]{ex26}{Hình cho Bài toán 26}
+\end{minipage}
+\end{document}

@@ -880,4 +880,26 @@ doc4Review.window.close();
 const rendered4Review=window.document.createElement('div');await window.renderBookContent(rendered4Review,section4Review.section,false);
 assert.equal(rendered4Review.querySelectorAll('img').length,5,'All chapter 4 review figures survive frontend filtering');
 assert.deepEqual((await readBooks(db,student,{bookId:book.id,sectionId:child4Review.id})).exercises.map(e=>e.contentKey),section4Review.exercises.map(e=>e.contentKey));
+// Chapter 4 Problems Plus: preserve all 26 independent problems and seven figures.
+const child4Plus=detail.sections.find(s=>s.title==='Bài tập nâng cao'&&s.parentId===child49.parentId);
+assert.ok(child4Plus);
+const section4Plus=await readBooks(db,student,{bookId:book.id,sectionId:child4Plus.id});
+assert.equal(section4Plus.exerciseHeading,'Bài toán');
+assert.deepEqual(section4Plus.exercises.map(e=>e.questionNumber),Array.from({length:26},(_,i)=>i+1));
+assert.ok(section4Plus.exercises.every(e=>e.allowSubmission&&e.allowAiEvaluation&&e.contentKey&&e.setKey));
+for(const n of [11,13,15,20,21,23,26])assert.ok(section4Plus.exercises[n-1].content.includes('/ex'+n+'.png'));
+assert.ok(section4Plus.exercises[20].content.includes('T_3')&&section4Plus.exercises[20].content.includes('0.34'));
+assert.ok(section4Plus.exercises[23].content.includes('đa giác đều'));
+assert.ok(section4Plus.exercises[25].content.includes('quy nạp toán học'));
+const doc4Plus=new JSDOM(section4Plus.section.content);
+assert.equal(doc4Plus.window.document.querySelectorAll('img').length,7);
+for(const image of doc4Plus.window.document.querySelectorAll('img')){
+ const asset=new URL(image.src,'https://example.test').searchParams.get('asset');
+ assert.equal((await readBookAsset(student,asset)).bytes[0],137);
+ await assert.rejects(()=>readBookAsset(other,asset),e=>e.status===403);
+}
+doc4Plus.window.close();
+const rendered4Plus=window.document.createElement('div');await window.renderBookContent(rendered4Plus,section4Plus.section,false);
+assert.equal(rendered4Plus.querySelectorAll('img').length,7,'All chapter 4 Problems Plus figures survive frontend filtering');
+assert.deepEqual((await readBooks(db,student,{bookId:book.id,sectionId:child4Plus.id})).exercises.map(e=>e.contentKey),section4Plus.exercises.map(e=>e.contentKey));
 window.close();console.log('Books: seeded TOC, admin CRUD/CAS, scopes, subtree delete/restore, lazy bodies and UI actions OK');

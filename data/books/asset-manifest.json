@@ -2835,5 +2835,40 @@
     "file": "stewart-4-review-0a150617/ex87.png",
     "mime": "image/png",
     "sha256": "6dc27be111e10e6ae70ee233a1db3712098fbca216f9d21bd17ca2fe4fcdb71a"
+  },
+  "stewart-4-plus-f6dbad81/ex11.png": {
+    "file": "stewart-4-plus-f6dbad81/ex11.png",
+    "mime": "image/png",
+    "sha256": "65ba466f6d2a1f291029bc24ad0a7dbd2bd9f678bb96ed37fdcf67add213dff5"
+  },
+  "stewart-4-plus-f6dbad81/ex13.png": {
+    "file": "stewart-4-plus-f6dbad81/ex13.png",
+    "mime": "image/png",
+    "sha256": "70d0321792ffb9e490ca85f3192bc13d8d12cf844c0046d9076902a3881ecbc2"
+  },
+  "stewart-4-plus-f6dbad81/ex15.png": {
+    "file": "stewart-4-plus-f6dbad81/ex15.png",
+    "mime": "image/png",
+    "sha256": "f8469a6a02f4641325a923154cfbb599596c4df382704e2a2b80b37a81755898"
+  },
+  "stewart-4-plus-f6dbad81/ex20.png": {
+    "file": "stewart-4-plus-f6dbad81/ex20.png",
+    "mime": "image/png",
+    "sha256": "26453afdd0685d64c8b50b950a319ec9ba39aea56653dbe567b85dd77923b478"
+  },
+  "stewart-4-plus-f6dbad81/ex21.png": {
+    "file": "stewart-4-plus-f6dbad81/ex21.png",
+    "mime": "image/png",
+    "sha256": "f2401249d415aa1267805da78a80ef180db6c3eee6074a4ecb22c19cd19c0ece"
+  },
+  "stewart-4-plus-f6dbad81/ex23.png": {
+    "file": "stewart-4-plus-f6dbad81/ex23.png",
+    "mime": "image/png",
+    "sha256": "8ca77d86e4b93a8d1950c25d3ec5c8bd285f3fd4ea3401b911dfcca4c9d36f77"
+  },
+  "stewart-4-plus-f6dbad81/ex26.png": {
+    "file": "stewart-4-plus-f6dbad81/ex26.png",
+    "mime": "image/png",
+    "sha256": "ff1f0cf80c03185a609bdba00b7ad1b319d76ab679c8c269b3776c3365a985b3"
   }
 }
