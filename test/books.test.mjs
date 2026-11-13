@@ -588,3 +588,24 @@ for(const image of doc3Review.window.document.querySelectorAll('img')){
 }
 doc3Review.window.close();
 assert.deepEqual((await readBooks(db,student,{bookId:book.id,sectionId:child3Review.id})).exercises.map(e=>e.contentKey),section3Review.exercises.map(e=>e.contentKey));
+
+// Chapter 3 Problems Plus shares section 1.1's persisted actions.
+const child3Plus=detail.sections.find(s=>s.title==='Bài tập nâng cao'&&s.parentId===chapter3ReviewParent.id);
+const section3Plus=await readBooks(db,student,{bookId:book.id,sectionId:child3Plus.id});
+assert.equal(section3Plus.exerciseHeading,'Bài toán');
+assert.deepEqual(section3Plus.exercises.map(e=>e.questionNumber),Array.from({length:35},(_,i)=>i+1));
+assert.ok(section3Plus.exercises.every(e=>e.allowSubmission&&e.allowAiEvaluation&&e.contentKey&&e.setKey));
+for(const n of [1,8,11,15,19,22,23])assert.ok(section3Plus.exercises[n-1].content.includes('/ex'+n+'.png'));
+assert.equal(section3Plus.section.sourceInfo.exampleCount,2);
+assert.ok(section3Plus.section.content.includes('Ví dụ 1.'));
+assert.ok(section3Plus.section.content.includes('Ví dụ 2.'));
+assert.ok(section3Plus.section.content.includes('Lời giải.'));
+const doc3Plus=new JSDOM(section3Plus.section.content);
+assert.equal(doc3Plus.window.document.querySelectorAll('img').length,11);
+for(const image of doc3Plus.window.document.querySelectorAll('img')){
+ const asset=new URL(image.src,'https://example.test').searchParams.get('asset');
+ assert.equal((await readBookAsset(student,asset)).bytes[0],137);
+ await assert.rejects(()=>readBookAsset(other,asset),e=>e.status===403);
+}
+doc3Plus.window.close();
+assert.deepEqual((await readBooks(db,student,{bookId:book.id,sectionId:child3Plus.id})).exercises.map(e=>e.contentKey),section3Plus.exercises.map(e=>e.contentKey));

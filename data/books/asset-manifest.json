@@ -1880,5 +1880,60 @@
     "file": "stewart-3-review-e3f0e970/ex74.png",
     "mime": "image/png",
     "sha256": "2a24f5f5ec334e9e19d6f60be805c184354a0abea67758a09ca0d69a9f0b731f"
+  },
+  "stewart-3-plus-824a375e/ex1.png": {
+    "file": "stewart-3-plus-824a375e/ex1.png",
+    "mime": "image/png",
+    "sha256": "ecf2e0c7a0b783a42ec79839d0c9c340edd71aff4ef1e2cdfa5b25536e596c3e"
+  },
+  "stewart-3-plus-824a375e/ex11.png": {
+    "file": "stewart-3-plus-824a375e/ex11.png",
+    "mime": "image/png",
+    "sha256": "b1fd2775f3c282e4ebc660dc262134f3c9ec03aeaea0ca757c39ed73b8905eaa"
+  },
+  "stewart-3-plus-824a375e/ex15.png": {
+    "file": "stewart-3-plus-824a375e/ex15.png",
+    "mime": "image/png",
+    "sha256": "04b91396e30bf99b9d8ba460281f80457ae9ed67ec5685ca0fcbe57bf41b6db9"
+  },
+  "stewart-3-plus-824a375e/ex19.png": {
+    "file": "stewart-3-plus-824a375e/ex19.png",
+    "mime": "image/png",
+    "sha256": "73ddb03aac869928c0abab140844b543614f05b1219805b454c9d9dadfefc94f"
+  },
+  "stewart-3-plus-824a375e/ex22.png": {
+    "file": "stewart-3-plus-824a375e/ex22.png",
+    "mime": "image/png",
+    "sha256": "a61c30c6899ebc576223c63fdc58ba2db47a41b2e6ac835c83903d117480c537"
+  },
+  "stewart-3-plus-824a375e/ex23.png": {
+    "file": "stewart-3-plus-824a375e/ex23.png",
+    "mime": "image/png",
+    "sha256": "1439538f776d2823a511178defcd73422580e663a5d92cf1cee0df9d149261ca"
+  },
+  "stewart-3-plus-824a375e/ex8.png": {
+    "file": "stewart-3-plus-824a375e/ex8.png",
+    "mime": "image/png",
+    "sha256": "426b5364b40608e8d814ae863c8c8525588372ae4c7cffdc17b63dbbfe3434d7"
+  },
+  "stewart-3-plus-824a375e/fig1.png": {
+    "file": "stewart-3-plus-824a375e/fig1.png",
+    "mime": "image/png",
+    "sha256": "47a45df71aefe9a3ff247d4826c8eb347c37bdc4b234a86a5a6469b579b95d12"
+  },
+  "stewart-3-plus-824a375e/fig2.png": {
+    "file": "stewart-3-plus-824a375e/fig2.png",
+    "mime": "image/png",
+    "sha256": "9fafeaf729eb71b4e6080a395db8ee03d8ba701fc105e6b4226b69098c8c81fc"
+  },
+  "stewart-3-plus-824a375e/fig3.png": {
+    "file": "stewart-3-plus-824a375e/fig3.png",
+    "mime": "image/png",
+    "sha256": "e0b8e8f4d96c8a062a4249376201a87976ca9abf86debdcedec7b50a4dd6b9d9"
+  },
+  "stewart-3-plus-824a375e/fig4.png": {
+    "file": "stewart-3-plus-824a375e/fig4.png",
+    "mime": "image/png",
+    "sha256": "b52395af5fb093181813f0bb4a85e29881ef1bf531d5b2dfe0d1137f771ffae9"
   }
 }

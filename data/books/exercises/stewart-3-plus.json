@@ -1,0 +1,148 @@
+{
+  "bookKey": "stewart-9",
+  "sectionKey": "3-plus",
+  "heading": "Bài toán",
+  "sourceSha256": "824a375eead7f09e29ee2e7583c61669a412f57071005fda7ea55eebb87a41b9",
+  "exercises": [
+    {
+      "number": 1,
+      "content": "<p><strong>1.</strong> Tìm các điểm <span class=\"math inline\">\\(P,Q\\)</span> trên parabol <span class=\"math inline\">\\(y=1-x^2\\)</span> sao cho tam giác <span class=\"math inline\">\\(ABC\\)</span> tạo bởi trục <span class=\"math inline\">\\(x\\)</span> và các tiếp tuyến tại <span class=\"math inline\">\\(P,Q\\)</span> là tam giác đều (xem hình).</p>\n<div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-3-plus-824a375e/ex1.png\" alt=\"image\"><br>\nHình cho Bài toán 1.</p>\n</div>"
+    },
+    {
+      "number": 2,
+      "content": "<p><strong>2.</strong> <em>[Cần công cụ vẽ đồ thị.]</em> Tìm điểm mà hai đường cong <span class=\"math inline\">\\(y=x^3-3x+4\\)</span> và <span class=\"math inline\">\\(y=3(x^2-x)\\)</span> tiếp xúc với nhau, tức là có tiếp tuyến chung. Minh họa bằng cách phác họa cả hai đường cong và tiếp tuyến chung.</p>"
+    },
+    {
+      "number": 3,
+      "content": "<p><strong>3.</strong> Chứng minh các tiếp tuyến của parabol <span class=\"math inline\">\\(y=ax^2+bx+c\\)</span> tại hai điểm có hoành độ <span class=\"math inline\">\\(p,q\\)</span> bất kỳ giao nhau tại một điểm có hoành độ bằng trung bình cộng của <span class=\"math inline\">\\(p\\)</span> và <span class=\"math inline\">\\(q\\)</span>.</p>"
+    },
+    {
+      "number": 4,
+      "content": "<p><strong>4.</strong> Chứng minh <span class=\"math display\">\\[\\frac d{dx}\\left(\\frac{\\sin^2x}{1+\\cot x}+\\frac{\\cos^2x}{1+\\tan x}\\right)=-\\cos2x.\\]</span></p>"
+    },
+    {
+      "number": 5,
+      "content": "<p><strong>5.</strong> Nếu <span class=\"math inline\">\\(\\displaystyle f(x)=\\lim_{t\\to x}\\frac{\\sec t-\\sec x}{t-x}\\)</span>, tìm <span class=\"math inline\">\\(f'(\\pi/4)\\)</span>.</p>"
+    },
+    {
+      "number": 6,
+      "content": "<p><strong>6.</strong> Tìm các hằng số <span class=\"math inline\">\\(a,b\\)</span> sao cho <span class=\"math display\">\\[\\lim_{x\\to0}\\frac{\\sqrt[3]{ax+b}-2}{x}=\\frac5{12}.\\]</span></p>"
+    },
+    {
+      "number": 7,
+      "content": "<p><strong>7.</strong> Chứng minh <span class=\"math inline\">\\(\\sin^{-1}(\\tanh x)=\\tan^{-1}(\\sinh x)\\)</span>.</p>"
+    },
+    {
+      "number": 8,
+      "content": "<p><strong>8.</strong> Một ô tô đi ban đêm trên đường có dạng parabol, đỉnh tại gốc tọa độ (xem hình). Xe xuất phát từ điểm cách gốc <span class=\"math inline\">\\(100\\,\\mathrm m\\)</span> về phía tây và <span class=\"math inline\">\\(100\\,\\mathrm m\\)</span> về phía bắc, rồi đi theo hướng đông. Một bức tượng nằm cách gốc <span class=\"math inline\">\\(100\\,\\mathrm m\\)</span> về phía đông và <span class=\"math inline\">\\(50\\,\\mathrm m\\)</span> về phía bắc. Tại điểm nào trên đường, đèn pha ô tô sẽ chiếu sáng bức tượng?</p>\n<div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-3-plus-824a375e/ex8.png\" alt=\"image\"><br>\nHình cho Bài toán 8.</p>\n</div>"
+    },
+    {
+      "number": 9,
+      "content": "<p><strong>9.</strong> Chứng minh <span class=\"math display\">\\[\\frac{d^n}{dx^n}(\\sin^4x+\\cos^4x)=4^{n-1}\\cos(4x+n\\pi/2).\\]</span></p>"
+    },
+    {
+      "number": 10,
+      "content": "<p><strong>10.</strong> Nếu <span class=\"math inline\">\\(f\\)</span> khả vi tại <span class=\"math inline\">\\(a&gt;0\\)</span>, tính giới hạn sau theo <span class=\"math inline\">\\(f'(a)\\)</span>: <span class=\"math display\">\\[\\lim_{x\\to a}\\frac{f(x)-f(a)}{\\sqrt{x}-\\sqrt a}.\\]</span></p>"
+    },
+    {
+      "number": 11,
+      "content": "<p><strong>11.</strong> Hình vẽ biểu diễn một đường tròn bán kính <span class=\"math inline\">\\(1\\)</span> nội tiếp parabol <span class=\"math inline\">\\(y=x^2\\)</span>. Tìm tâm đường tròn.</p>\n<div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-3-plus-824a375e/ex11.png\" alt=\"image\"><br>\nHình cho Bài toán 11.</p>\n</div>"
+    },
+    {
+      "number": 12,
+      "content": "<p><strong>12.</strong> Tìm tất cả các giá trị <span class=\"math inline\">\\(c\\)</span> sao cho hai parabol <span class=\"math inline\">\\(y=4x^2\\)</span> và <span class=\"math inline\">\\(x=c+2y^2\\)</span> cắt nhau vuông góc.</p>"
+    },
+    {
+      "number": 13,
+      "content": "<p><strong>13.</strong> Có bao nhiêu đường thẳng tiếp xúc với cả hai đường tròn <span class=\"math inline\">\\(x^2+y^2=4\\)</span> và <span class=\"math inline\">\\(x^2+(y-3)^2=1\\)</span>? Các tiếp tuyến này tiếp xúc với hai đường tròn tại những điểm nào?</p>"
+    },
+    {
+      "number": 14,
+      "content": "<p><strong>14.</strong> Nếu <span class=\"math inline\">\\(\\displaystyle f(x)=\\frac{x^{46}+x^{45}+2}{1+x}\\)</span>, tính <span class=\"math inline\">\\(f^{(46)}(3)\\)</span>. Biểu diễn kết quả bằng ký hiệu giai thừa: <span class=\"math display\">\\[n!=1\\cdot2\\cdot3\\cdots(n-1)\\cdot n.\\]</span></p>"
+    },
+    {
+      "number": 15,
+      "content": "<p><strong>15.</strong> Hình vẽ biểu diễn bánh xe quay bán kính <span class=\"math inline\">\\(40\\,\\mathrm{cm}\\)</span> và thanh truyền <span class=\"math inline\">\\(AP\\)</span> dài <span class=\"math inline\">\\(1.2\\,\\mathrm m\\)</span>. Chốt <span class=\"math inline\">\\(P\\)</span> trượt qua lại dọc trục <span class=\"math inline\">\\(x\\)</span> khi bánh xe quay ngược chiều kim đồng hồ với tốc độ <span class=\"math inline\">\\(360\\)</span> vòng/phút.</p>\n<p>(a) Tìm vận tốc góc của thanh truyền <span class=\"math inline\">\\(d\\alpha/dt\\)</span>, tính bằng radian/giây, khi <span class=\"math inline\">\\(\\theta=\\pi/3\\)</span>.</p>\n<p>(b) Biểu diễn khoảng cách <span class=\"math inline\">\\(x=|OP|\\)</span> theo <span class=\"math inline\">\\(\\theta\\)</span>.</p>\n<p>(c) Tìm biểu thức vận tốc của chốt <span class=\"math inline\">\\(P\\)</span> theo <span class=\"math inline\">\\(\\theta\\)</span>.</p>\n<div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-3-plus-824a375e/ex15.png\" alt=\"image\"><br>\nHình cho Bài toán 15.</p>\n</div>"
+    },
+    {
+      "number": 16,
+      "content": "<p><strong>16.</strong> Các tiếp tuyến <span class=\"math inline\">\\(T_1,T_2\\)</span> tại hai điểm <span class=\"math inline\">\\(P_1,P_2\\)</span> trên parabol <span class=\"math inline\">\\(y=x^2\\)</span> cắt nhau tại <span class=\"math inline\">\\(P\\)</span>. Một tiếp tuyến khác <span class=\"math inline\">\\(T\\)</span> được vẽ tại điểm nằm giữa <span class=\"math inline\">\\(P_1,P_2\\)</span>; nó cắt <span class=\"math inline\">\\(T_1\\)</span> tại <span class=\"math inline\">\\(Q_1\\)</span> và <span class=\"math inline\">\\(T_2\\)</span> tại <span class=\"math inline\">\\(Q_2\\)</span>. Chứng minh <span class=\"math display\">\\[\\frac{|PQ_1|}{|PP_1|}+\\frac{|PQ_2|}{|PP_2|}=1.\\]</span></p>"
+    },
+    {
+      "number": 17,
+      "content": "<p><strong>17.</strong> Chứng minh <span class=\"math display\">\\[\\frac{d^n}{dx^n}(e^{ax}\\sin bx)=r^ne^{ax}\\sin(bx+n\\theta),\\]</span> trong đó <span class=\"math inline\">\\(a,b&gt;0\\)</span>, <span class=\"math inline\">\\(r^2=a^2+b^2\\)</span> và <span class=\"math inline\">\\(\\theta=\\tan^{-1}(b/a)\\)</span>.</p>"
+    },
+    {
+      "number": 18,
+      "content": "<p><strong>18.</strong> Tính <span class=\"math inline\">\\(\\displaystyle\\lim_{x\\to\\pi}\\frac{e^{\\sin x}-1}{x-\\pi}\\)</span>.</p>"
+    },
+    {
+      "number": 19,
+      "content": "<p><strong>19.</strong> Gọi <span class=\"math inline\">\\(T,N\\)</span> là tiếp tuyến và pháp tuyến của elip <span class=\"math inline\">\\(x^2/9+y^2/4=1\\)</span> tại điểm <span class=\"math inline\">\\(P\\)</span> bất kỳ trên elip trong góc phần tư thứ nhất. Gọi <span class=\"math inline\">\\(x_T,y_T\\)</span> lần lượt là hoành độ giao điểm với trục <span class=\"math inline\">\\(x\\)</span> và tung độ giao điểm với trục <span class=\"math inline\">\\(y\\)</span> của <span class=\"math inline\">\\(T\\)</span>; <span class=\"math inline\">\\(x_N,y_N\\)</span> là các đại lượng tương ứng của <span class=\"math inline\">\\(N\\)</span>. Khi <span class=\"math inline\">\\(P\\)</span> chuyển động trên phần elip thuộc góc phần tư thứ nhất, không nằm trên các trục, <span class=\"math inline\">\\(x_T,y_T,x_N,y_N\\)</span> có thể nhận những giá trị nào? Trước hết hãy dự đoán chỉ bằng cách quan sát hình. Sau đó dùng giải tích để giải và đánh giá độ chính xác của trực giác.</p>\n<div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-3-plus-824a375e/ex19.png\" alt=\"image\"><br>\nHình cho Bài toán 19.</p>\n</div>"
+    },
+    {
+      "number": 20,
+      "content": "<p><strong>20.</strong> Tính <span class=\"math inline\">\\(\\displaystyle\\lim_{x\\to0}\\frac{\\sin\\bigl((3+x)^2\\bigr)-\\sin9}{x}\\)</span>.</p>"
+    },
+    {
+      "number": 21,
+      "content": "<p><strong>21.</strong> (a) Dùng đồng nhất thức của <span class=\"math inline\">\\(\\tan(x-y)\\)</span> (Công thức 15b trong Phụ lục D) để chứng minh: nếu hai đường thẳng <span class=\"math inline\">\\(L_1,L_2\\)</span> cắt nhau tạo góc <span class=\"math inline\">\\(\\alpha\\)</span> thì <span class=\"math display\">\\[\\tan\\alpha=\\frac{m_2-m_1}{1+m_1m_2},\\]</span> trong đó <span class=\"math inline\">\\(m_1,m_2\\)</span> lần lượt là hệ số góc của <span class=\"math inline\">\\(L_1,L_2\\)</span>.</p>\n<p>(b) <strong>Góc giữa hai đường cong</strong> <span class=\"math inline\">\\(C_1,C_2\\)</span> tại giao điểm <span class=\"math inline\">\\(P\\)</span> được định nghĩa là góc giữa hai tiếp tuyến tại <span class=\"math inline\">\\(P\\)</span>, nếu các tiếp tuyến tồn tại. Dùng câu (a) để tìm góc giữa mỗi cặp đường cong tại từng giao điểm, làm tròn đến độ gần nhất:</p>\n<p>(i) <span class=\"math inline\">\\(y=x^2\\)</span> và <span class=\"math inline\">\\(y=(x-2)^2\\)</span>.</p>\n<p>(ii) <span class=\"math inline\">\\(x^2-y^2=3\\)</span> và <span class=\"math inline\">\\(x^2-4x+y^2+3=0\\)</span>.</p>"
+    },
+    {
+      "number": 22,
+      "content": "<p><strong>22.</strong> Cho <span class=\"math inline\">\\(P(x_1,y_1)\\)</span> thuộc parabol <span class=\"math inline\">\\(y^2=4px\\)</span>, có tiêu điểm <span class=\"math inline\">\\(F(p,0)\\)</span>. Gọi <span class=\"math inline\">\\(\\alpha\\)</span> là góc giữa parabol và đoạn thẳng <span class=\"math inline\">\\(FP\\)</span>, còn <span class=\"math inline\">\\(\\beta\\)</span> là góc giữa đường thẳng nằm ngang <span class=\"math inline\">\\(y=y_1\\)</span> và parabol, như hình. Chứng minh <span class=\"math inline\">\\(\\alpha=\\beta\\)</span>. Theo một nguyên lý quang hình học, ánh sáng phát từ nguồn đặt tại <span class=\"math inline\">\\(F\\)</span> sẽ phản xạ theo đường thẳng song song với trục <span class=\"math inline\">\\(x\\)</span>. Điều này giải thích vì sao mặt paraboloid, thu được khi quay parabol quanh trục của nó, được dùng làm hình dạng của một số đèn pha ô tô và gương kính thiên văn.</p>\n<div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-3-plus-824a375e/ex22.png\" alt=\"image\"><br>\nHình cho Bài toán 22.</p>\n</div>"
+    },
+    {
+      "number": 23,
+      "content": "<p><strong>23.</strong> Giả sử thay gương parabol trong Bài toán 22 bằng gương cầu. Mặc dù gương không có tiêu điểm, ta có thể chỉ ra sự tồn tại của một tiêu điểm gần đúng. Trong hình, <span class=\"math inline\">\\(C\\)</span> là nửa đường tròn tâm <span class=\"math inline\">\\(O\\)</span>. Một tia sáng tới gương theo đường <span class=\"math inline\">\\(PQ\\)</span> song song với trục sẽ phản xạ đến điểm <span class=\"math inline\">\\(R\\)</span> trên trục sao cho <span class=\"math inline\">\\(\\angle PQO=\\angle OQR\\)</span> (góc tới bằng góc phản xạ). Điều gì xảy ra với <span class=\"math inline\">\\(R\\)</span> khi <span class=\"math inline\">\\(P\\)</span> tiến ngày càng gần trục?</p>\n<div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-3-plus-824a375e/ex23.png\" alt=\"image\"><br>\nHình cho Bài toán 23.</p>\n</div>"
+    },
+    {
+      "number": 24,
+      "content": "<p><strong>24.</strong> Nếu <span class=\"math inline\">\\(f,g\\)</span> khả vi, <span class=\"math inline\">\\(f(0)=g(0)=0\\)</span> và <span class=\"math inline\">\\(g'(0)\\ne0\\)</span>, chứng minh <span class=\"math display\">\\[\\lim_{x\\to0}\\frac{f(x)}{g(x)}=\\frac{f'(0)}{g'(0)}.\\]</span></p>"
+    },
+    {
+      "number": 25,
+      "content": "<p><strong>25.</strong> Tính <span class=\"math inline\">\\(\\displaystyle\\lim_{x\\to0}\\frac{\\sin(a+2x)-2\\sin(a+x)+\\sin a}{x^2}\\)</span>.</p>"
+    },
+    {
+      "number": 26,
+      "content": "<p><strong>26.</strong> <em>[Cần hệ đại số máy tính.]</em> (a) Hàm bậc ba <span class=\"math inline\">\\(f(x)=x(x-2)(x-6)\\)</span> có ba nghiệm phân biệt <span class=\"math inline\">\\(0,2,6\\)</span>. Vẽ <span class=\"math inline\">\\(f\\)</span> và các tiếp tuyến tại trung bình cộng của từng cặp nghiệm. Bạn nhận thấy điều gì?</p>\n<p>(b) Giả sử <span class=\"math inline\">\\(f(x)=(x-a)(x-b)(x-c)\\)</span> có ba nghiệm phân biệt <span class=\"math inline\">\\(a,b,c\\)</span>. Với sự hỗ trợ của hệ đại số máy tính, chứng minh tiếp tuyến tại điểm có hoành độ bằng trung bình cộng của <span class=\"math inline\">\\(a,b\\)</span> cắt đồ thị <span class=\"math inline\">\\(f\\)</span> tại nghiệm thứ ba.</p>"
+    },
+    {
+      "number": 27,
+      "content": "<p><strong>27.</strong> Với giá trị nào của <span class=\"math inline\">\\(k\\)</span>, phương trình <span class=\"math inline\">\\(e^{2x}=k\\sqrt{x}\\)</span> có đúng một nghiệm?</p>"
+    },
+    {
+      "number": 28,
+      "content": "<p><strong>28.</strong> Với những số dương <span class=\"math inline\">\\(a\\)</span> nào, bất đẳng thức <span class=\"math inline\">\\(a^x\\ge1+x\\)</span> đúng với mọi <span class=\"math inline\">\\(x\\)</span>?</p>"
+    },
+    {
+      "number": 29,
+      "content": "<p><strong>29.</strong> Nếu <span class=\"math display\">\\[y=\\frac{x}{\\sqrt{a^2-1}}-\\frac2{\\sqrt{a^2-1}}\\arctan\\left(\\frac{\\sin x}{a+\\sqrt{a^2-1}+\\cos x}\\right),\\]</span> chứng minh <span class=\"math inline\">\\(\\displaystyle y'=\\frac1{a+\\cos x}\\)</span>.</p>"
+    },
+    {
+      "number": 30,
+      "content": "<p><strong>30.</strong> Cho elip <span class=\"math inline\">\\(x^2/a^2+y^2/b^2=1\\)</span>, với <span class=\"math inline\">\\(a\\ne b\\)</span>. Tìm phương trình quỹ tích các điểm mà từ đó kẻ được hai tiếp tuyến tới elip có hệ số góc (a) là nghịch đảo của nhau; (b) là hai số nghịch đảo đối nhau.</p>"
+    },
+    {
+      "number": 31,
+      "content": "<p><strong>31.</strong> Tìm hai điểm trên đường cong <span class=\"math inline\">\\(y=x^4-2x^2-x\\)</span> có chung một tiếp tuyến.</p>"
+    },
+    {
+      "number": 32,
+      "content": "<p><strong>32.</strong> Giả sử ba điểm trên parabol <span class=\"math inline\">\\(y=x^2\\)</span> có các pháp tuyến đồng quy. Chứng minh tổng hoành độ của chúng bằng <span class=\"math inline\">\\(0\\)</span>.</p>"
+    },
+    {
+      "number": 33,
+      "content": "<p><strong>33.</strong> <em>Điểm nguyên</em> trên mặt phẳng là điểm có tọa độ nguyên. Vẽ các đường tròn bán kính <span class=\"math inline\">\\(r\\)</span>, tâm tại tất cả các điểm nguyên. Tìm giá trị nhỏ nhất của <span class=\"math inline\">\\(r\\)</span> sao cho mọi đường thẳng có hệ số góc <span class=\"math inline\">\\(2/5\\)</span> đều cắt một số đường tròn này.</p>"
+    },
+    {
+      "number": 34,
+      "content": "<p><strong>34.</strong> Một hình nón có bán kính <span class=\"math inline\">\\(r\\)</span> centimét, chiều cao <span class=\"math inline\">\\(h\\)</span> centimét được hạ xuống, đỉnh đi trước, với tốc độ <span class=\"math inline\">\\(1\\,\\mathrm{cm/s}\\)</span> vào một hình trụ cao bán kính <span class=\"math inline\">\\(R\\)</span> centimét, chứa nước một phần. Mực nước dâng nhanh bao nhiêu tại thời điểm hình nón vừa ngập hoàn toàn?</p>"
+    },
+    {
+      "number": 35,
+      "content": "<p><strong>35.</strong> Một bình hình nón lật ngược cao <span class=\"math inline\">\\(16\\,\\mathrm{cm}\\)</span>, bán kính miệng <span class=\"math inline\">\\(5\\,\\mathrm{cm}\\)</span>, chứa một phần chất lỏng. Chất lỏng rỉ qua thành bình với lưu lượng tỉ lệ thuận với diện tích thành bình tiếp xúc với chất lỏng. Diện tích xung quanh hình nón là <span class=\"math inline\">\\(\\pi rl\\)</span>, với <span class=\"math inline\">\\(r\\)</span> là bán kính và <span class=\"math inline\">\\(l\\)</span> là đường sinh. Nếu rót chất lỏng vào bình với lưu lượng <span class=\"math inline\">\\(2\\,\\mathrm{cm^3/min}\\)</span> thì chiều cao chất lỏng giảm với tốc độ <span class=\"math inline\">\\(0.3\\,\\mathrm{cm/min}\\)</span> khi chiều cao bằng <span class=\"math inline\">\\(10\\,\\mathrm{cm}\\)</span>. Để giữ chiều cao chất lỏng không đổi ở <span class=\"math inline\">\\(10\\,\\mathrm{cm}\\)</span>, cần rót vào với lưu lượng bao nhiêu?</p>"
+    }
+  ]
+}
