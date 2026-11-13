@@ -1,0 +1,370 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage{fontspec}\setmainfont{Latin Modern Roman}\setsansfont{DejaVu Sans}
+\usepackage{amsmath,amssymb,graphicx,geometry,enumitem,longtable,booktabs,fancyhdr,hyperref}
+\geometry{left=28mm,right=23mm,top=24mm,bottom=24mm}
+\hypersetup{unicode=true,colorlinks=true,linkcolor=black,urlcolor=blue,pdftitle={Giải tích Chương 3 Mục 3.6 Đạo hàm của hàm logarit và hàm lượng giác ngược}}
+\setlength{\parindent}{1.2em}\setlength{\parskip}{4pt}\setlength{\headheight}{16pt}
+\pagestyle{fancy}\fancyhf{}\fancyhead[L]{\small Chương 3. Các quy tắc tính đạo hàm}\fancyhead[R]{\small §3.6}\fancyfoot[C]{\thepage}
+\newcommand{\fig}[3][.68]{\begin{center}\begin{minipage}{\linewidth}\centering\includegraphics[width=#1\linewidth]{assets/#2.png}\\{\small #3}\end{minipage}\end{center}}
+\newcommand{\ex}[1]{\par\medskip\noindent\textbf{Ví dụ #1.}\ }
+\newcommand{\sol}{\par\nopagebreak[4]\noindent\textit{Lời giải.}\ }
+\newcommand{\bt}[1]{\par\smallskip\noindent\textbf{#1.}\ }
+\newcommand{\group}[1]{\par\medskip\noindent\textbf{#1}\par\nopagebreak[4]}
+\newcommand{\gint}[1]{\left[\!\left[#1\right]\!\right]}
+\allowdisplaybreaks[2]
+\begin{document}
+\begin{center}
+{\Large\bfseries GIẢI TÍCH}\\[5pt]
+{\large Chương 3. Các quy tắc tính đạo hàm}\\[9pt]
+{\Large\bfseries 3.6. Đạo hàm của hàm logarit\\[3pt]và hàm lượng giác ngược}
+\end{center}
+\noindent\textbf{Nguồn:} James Stewart, Daniel K. Clegg, Saleem Watson, \textit{Calculus: Early Transcendentals}, ấn bản thứ 9 (2020), trang in 217–225 (trang PDF 252–260): toàn bộ §3.6 và Bài tập 1–88, trước tiêu đề §3.7.
+
+Trong mục này, ta dùng phép lấy đạo hàm ẩn để tìm đạo hàm của các hàm logarit và các hàm lượng giác ngược.
+\section*{Đạo hàm của hàm logarit}
+Trong Phụ lục F, ta chứng minh rằng nếu $f$ là một hàm đơn ánh khả vi thì hàm ngược $f^{-1}$ cũng khả vi, trừ tại những điểm có tiếp tuyến thẳng đứng. Điều này có thể hình dung về mặt hình học: đồ thị của một hàm khả vi không có điểm góc hay điểm nhọn. Đồ thị của $f^{-1}$ thu được bằng cách lấy đối xứng đồ thị của $f$ qua đường thẳng $y=x$, nên cũng không có điểm góc hay điểm nhọn. Chú ý rằng nếu $f$ có tiếp tuyến nằm ngang tại một điểm thì $f^{-1}$ có tiếp tuyến thẳng đứng tại điểm đối xứng tương ứng và không khả vi tại đó.
+
+Vì hàm logarit $y=\log_bx$ là hàm ngược của hàm mũ $y=b^x$, mà theo §3.1 là một hàm khả vi, nên hàm logarit cũng khả vi. Ta phát biểu và chứng minh công thức sau:
+\[\frac{d}{dx}(\log_bx)=\frac1{x\ln b}.\tag{1}\]
+\noindent\textit{Chứng minh.} Đặt $y=\log_bx$. Khi đó $b^y=x$. Lấy đạo hàm ẩn theo $x$ và dùng Công thức 3.4.5, được
+\[(b^y\ln b)\frac{dy}{dx}=1.\]
+Do đó,
+\[\frac{dy}{dx}=\frac1{b^y\ln b}=\frac1{x\ln b}.\qquad\square\]
+Công thức 3.4.5 được dùng ở đây là $\dfrac{d}{dx}(b^x)=b^x\ln b$.
+
+Nếu đặt $b=e$ trong (1), thừa số $\ln b$ ở vế phải trở thành $\ln e=1$, và ta được công thức đạo hàm của hàm logarit tự nhiên $\log_ex=\ln x$:
+\[\frac{d}{dx}(\ln x)=\frac1x.\tag{2}\]
+So sánh (1) và (2), ta thấy một trong những lý do chính để dùng logarit tự nhiên trong giải tích: công thức đạo hàm đơn giản nhất khi cơ số là $e$.
+\ex{1} Tính đạo hàm của $y=\ln(x^3+1)$.
+\sol Để dùng quy tắc dây chuyền, đặt $u=x^3+1$. Khi đó $y=\ln u$, nên
+\[\frac{dy}{dx}=\frac{dy}{du}\frac{du}{dx}=\frac1u\frac{du}{dx}=\frac1{x^3+1}(3x^2)=\frac{3x^2}{x^3+1}.\qquad\square\]
+Tổng quát, kết hợp (2) với quy tắc dây chuyền như trong Ví dụ 1:
+\[\frac{d}{dx}(\ln u)=\frac1u\frac{du}{dx},\qquad\text{hay}\qquad
+\frac{d}{dx}[\ln g(x)]=\frac{g'(x)}{g(x)}.\tag{3}\]
+\ex{2} Tìm $\dfrac{d}{dx}\ln(\sin x)$.
+\sol Theo (3),
+\[\frac{d}{dx}\ln(\sin x)=\frac1{\sin x}\frac{d}{dx}(\sin x)=\frac{\cos x}{\sin x}=\cot x.\qquad\square\]
+\ex{3} Tính đạo hàm của $f(x)=\sqrt{\ln x}$.
+\sol Lần này logarit là hàm trong; quy tắc dây chuyền cho
+\[f'(x)=\frac12(\ln x)^{-1/2}\frac{d}{dx}\ln x
+=\frac1{2\sqrt{\ln x}}\cdot\frac1x=\frac1{2x\sqrt{\ln x}}.\qquad\square\]
+\ex{4} Tính đạo hàm của $f(x)=\log_{10}(2+\sin x)$.
+\sol Dùng (1) với $b=10$:
+\begin{align*}
+f'(x)&=\frac{d}{dx}\log_{10}(2+\sin x)\\
+&=\frac1{(2+\sin x)\ln10}\frac{d}{dx}(2+\sin x)\\
+&=\frac{\cos x}{(2+\sin x)\ln10}.\qquad\square
+\end{align*}
+\ex{5} Tìm $\displaystyle\frac{d}{dx}\ln\frac{x+1}{\sqrt{x-2}}$.
+
+\noindent\textit{Lời giải 1.}
+\begin{align*}
+\frac{d}{dx}\ln\frac{x+1}{\sqrt{x-2}}
+&=\frac1{\dfrac{x+1}{\sqrt{x-2}}}\frac{d}{dx}\frac{x+1}{\sqrt{x-2}}\\
+&=\frac{\sqrt{x-2}}{x+1}
+\frac{\sqrt{x-2}\cdot1-(x+1)\frac12(x-2)^{-1/2}}{x-2}\\
+&=\frac{x-2-\frac12(x+1)}{(x+1)(x-2)}\\
+&=\frac{x-5}{2(x+1)(x-2)}.
+\end{align*}
+\noindent\textit{Lời giải 2.} Nếu trước hết dùng các quy tắc logarit để khai triển hàm đã cho, phép lấy đạo hàm trở nên dễ hơn:
+\begin{align*}
+\frac{d}{dx}\ln\frac{x+1}{\sqrt{x-2}}
+&=\frac{d}{dx}\left[\ln(x+1)-\frac12\ln(x-2)\right]\\
+&=\frac1{x+1}-\frac12\left(\frac1{x-2}\right).
+\end{align*}
+Có thể giữ kết quả ở dạng này, nhưng nếu quy đồng mẫu số thì sẽ thu được cùng đáp số như Lời giải 1.\hfill$\square$
+
+Hình 1 cho đồ thị của hàm $f$ trong Ví dụ 5 và đạo hàm của nó, giúp kiểm tra trực quan phép tính. Chú ý $f'(x)$ có giá trị âm với độ lớn lớn khi $f$ giảm nhanh.
+\fig[.46]{f01}{Hình 1. Hàm trong Ví dụ 5 và đạo hàm của nó.}
+\ex{6} Tìm $f'(x)$ nếu $f(x)=\ln|x|$.
+\sol Vì
+\[f(x)=\begin{cases}\ln x,&x>0,\\\ln(-x),&x<0,\end{cases}\]
+nên
+\[f'(x)=\begin{cases}\dfrac1x,&x>0,\\[5pt]\dfrac1{-x}(-1)=\dfrac1x,&x<0.\end{cases}\]
+Vậy $f'(x)=1/x$ với mọi $x\ne0$.\hfill$\square$
+
+Hình 2 cho đồ thị của $f(x)=\ln|x|$ và $f'(x)=1/x$. Khi $x$ gần $0$, đồ thị $y=\ln|x|$ rất dốc, nên $f'(x)$ có độ lớn lớn, với dấu dương hoặc âm.
+\fig[.43]{f02}{Hình 2. Đồ thị $f(x)=\ln|x|$ và $f'(x)=1/x$.}
+Kết quả Ví dụ 6 rất đáng ghi nhớ:
+\[\frac{d}{dx}\ln|x|=\frac1x.\tag{4}\]
+\section*{Phép lấy đạo hàm bằng logarit}
+Việc tính đạo hàm của các hàm phức tạp chứa tích, thương hoặc lũy thừa thường có thể đơn giản hóa bằng cách lấy logarit. Phương pháp dùng trong ví dụ sau được gọi là \textbf{phép lấy đạo hàm bằng logarit}.
+\ex{7} Tính đạo hàm của $\displaystyle y=\frac{x^{3/4}\sqrt{x^2+1}}{(3x+2)^5}$.
+\sol Lấy logarit hai vế và dùng các quy tắc logarit để rút gọn:
+\[\ln y=\frac34\ln x+\frac12\ln(x^2+1)-5\ln(3x+2).\]
+Lấy đạo hàm ẩn theo $x$:
+\[\frac1y\frac{dy}{dx}=\frac34\cdot\frac1x+\frac12\cdot\frac{2x}{x^2+1}-5\cdot\frac3{3x+2}.\]
+Giải theo $dy/dx$, được
+\[\frac{dy}{dx}=y\left(\frac3{4x}+\frac{x}{x^2+1}-\frac{15}{3x+2}\right).\]
+Vì đã có biểu thức tường minh của $y$, ta thay vào:
+\[\frac{dy}{dx}=\frac{x^{3/4}\sqrt{x^2+1}}{(3x+2)^5}
+\left(\frac3{4x}+\frac{x}{x^2+1}-\frac{15}{3x+2}\right).\qquad\square\]
+Nếu không dùng logarit trong Ví dụ 7, ta phải dùng cả quy tắc thương và quy tắc tích; phép tính sẽ rất dài dòng.
+\begin{quote}
+\textbf{Các bước lấy đạo hàm bằng logarit}
+\begin{enumerate}[leftmargin=*]
+\item Lấy logarit tự nhiên hai vế của $y=f(x)$ và dùng các quy tắc logarit để khai triển biểu thức.
+\item Lấy đạo hàm ẩn theo $x$.
+\item Giải phương trình thu được theo $y'$ rồi thay $y$ bằng $f(x)$.
+\end{enumerate}
+\end{quote}
+Nếu $f(x)<0$ với một số giá trị $x$ thì $\ln f(x)$ không xác định, nhưng vẫn có thể dùng phương pháp này bằng cách viết $|y|=|f(x)|$ trước, rồi dùng (4). Ta minh họa bằng cách chứng minh quy tắc lũy thừa tổng quát, như đã hứa ở §3.1. Quy tắc phát biểu rằng: với $n$ là số thực bất kỳ, nếu $f(x)=x^n$ thì $f'(x)=nx^{n-1}$.
+
+\begin{samepage}
+\noindent\textbf{Chứng minh quy tắc lũy thừa (dạng tổng quát).} Đặt $y=x^n$ và dùng phép lấy đạo hàm bằng logarit:
+\[\ln|y|=\ln|x^n|=n\ln|x|,\qquad x\ne0.\]
+Do đó,
+\[\frac{y'}y=\frac nx.\]
+Suy ra
+\[y'=n\frac yx=n\frac{x^n}x=nx^{n-1}.\qquad\square\]
+\end{samepage}
+Nếu $x=0$, có thể dùng trực tiếp định nghĩa đạo hàm để chứng minh $f'(0)=0$ khi $n>1$.
+
+Cần phân biệt quy tắc lũy thừa $(x^n)'=nx^{n-1}$, trong đó cơ số thay đổi còn số mũ không đổi, với quy tắc đạo hàm hàm mũ $(b^x)'=b^x\ln b$, trong đó cơ số không đổi còn số mũ thay đổi.
+
+Tổng quát, có bốn trường hợp:
+\begin{enumerate}[leftmargin=*]
+\item \textbf{Cơ số và số mũ đều không đổi:}
+\[\frac{d}{dx}(b^n)=0\qquad(b,n\text{ là hằng số}).\]
+\item \textbf{Cơ số thay đổi, số mũ không đổi:}
+\[\frac{d}{dx}[f(x)]^n=n[f(x)]^{n-1}f'(x).\]
+\item \textbf{Cơ số không đổi, số mũ thay đổi:}
+\[\frac{d}{dx}[b^{g(x)}]=b^{g(x)}(\ln b)g'(x).\]
+\item \textbf{Cơ số và số mũ đều thay đổi:} để tìm $\dfrac{d}{dx}[f(x)]^{g(x)}$, có thể dùng phép lấy đạo hàm bằng logarit, như ví dụ sau.
+\end{enumerate}
+\ex{8} Tính đạo hàm của $y=x^{\sqrt x}$.
+
+\noindent\textit{Lời giải 1.} Vì cơ số và số mũ đều thay đổi, ta lấy đạo hàm bằng logarit:
+\[\ln y=\ln x^{\sqrt x}=\sqrt x\ln x,\]
+\[\frac{y'}y=\sqrt x\cdot\frac1x+(\ln x)\frac1{2\sqrt x}.\]
+Do đó,
+\[y'=y\left(\frac1{\sqrt x}+\frac{\ln x}{2\sqrt x}\right)
+=x^{\sqrt x}\left(\frac{2+\ln x}{2\sqrt x}\right).\]
+\noindent\textit{Lời giải 2.} Một cách khác là dùng Công thức 1.5.10 để viết $x^{\sqrt x}=e^{\sqrt x\ln x}$:
+\begin{align*}
+\frac{d}{dx}(x^{\sqrt x})&=\frac{d}{dx}(e^{\sqrt x\ln x})
+=e^{\sqrt x\ln x}\frac{d}{dx}(\sqrt x\ln x)\\
+&=x^{\sqrt x}\left(\frac{2+\ln x}{2\sqrt x}\right).
+\end{align*}
+Kết quả giống như Lời giải 1.\hfill$\square$
+
+Hình 3 minh họa Ví dụ 8 bằng đồ thị của $f(x)=x^{\sqrt x}$ và đạo hàm của nó.
+\fig[.43]{f03}{Hình 3. Hàm $f(x)=x^{\sqrt x}$ và đạo hàm $f'$.}
+\section*{Biểu diễn số \texorpdfstring{$e$}{e} dưới dạng giới hạn}
+Ta đã chứng minh: nếu $f(x)=\ln x$ thì $f'(x)=1/x$, nên $f'(1)=1$. Dùng điều này, ta biểu diễn số $e$ dưới dạng giới hạn.
+
+Theo định nghĩa đạo hàm,
+\begin{align*}
+f'(1)&=\lim_{h\to0}\frac{f(1+h)-f(1)}h
+=\lim_{x\to0}\frac{f(1+x)-f(1)}x\\
+&=\lim_{x\to0}\frac{\ln(1+x)-\ln1}x
+=\lim_{x\to0}\frac1x\ln(1+x)\\
+&=\lim_{x\to0}\ln(1+x)^{1/x}.
+\end{align*}
+Vì $f'(1)=1$, nên $\lim_{x\to0}\ln(1+x)^{1/x}=1$. Theo Định lý 2.5.8 và tính liên tục của hàm mũ,
+\begin{align*}
+e=e^1&=e^{\lim_{x\to0}\ln(1+x)^{1/x}}\\
+&=\lim_{x\to0}e^{\ln(1+x)^{1/x}}
+=\lim_{x\to0}(1+x)^{1/x}.
+\end{align*}
+Vậy
+\[e=\lim_{x\to0}(1+x)^{1/x}.\tag{5}\]
+Công thức (5) được minh họa bằng đồ thị $y=(1+x)^{1/x}$ ở Hình 4 và bảng giá trị khi $x$ gần $0$. Chúng cho thấy, chính xác đến bảy chữ số thập phân,
+\[e\approx2.7182818.\]
+\fig[.44]{f04}{Hình 4. Đồ thị $y=(1+x)^{1/x}$.}
+\begin{center}\begin{tabular}{rr}\toprule
+$x$ & $(1+x)^{1/x}$\\\midrule
+$0.1$ & $2.59374246$\\
+$0.01$ & $2.70481383$\\
+$0.001$ & $2.71692393$\\
+$0.0001$ & $2.71814593$\\
+$0.00001$ & $2.71826824$\\
+$0.000001$ & $2.71828047$\\
+$0.0000001$ & $2.71828169$\\
+$0.00000001$ & $2.71828181$\\\bottomrule
+\end{tabular}\end{center}
+Nếu đặt $n=1/x$ trong (5), thì $n\to\infty$ khi $x\to0^+$, nên có một biểu diễn khác của $e$:
+\[e=\lim_{n\to\infty}\left(1+\frac1n\right)^n.\tag{6}\]
+\section*{Đạo hàm của hàm lượng giác ngược}
+Các hàm lượng giác ngược đã được ôn lại ở §1.5. Ta đã xét tính liên tục của chúng trong §2.5 và các tiệm cận trong §2.6. Ở đây, ta dùng phép lấy đạo hàm ẩn để tìm đạo hàm của chúng. Như đã nhận xét đầu mục, nếu $f$ đơn ánh và khả vi thì $f^{-1}$ cũng khả vi, trừ tại các điểm có tiếp tuyến thẳng đứng. Các hàm lượng giác, khi hạn chế miền xác định như đã dùng để định nghĩa hàm ngược, đều đơn ánh và khả vi; do đó các hàm lượng giác ngược cũng khả vi tại các điểm thích hợp.
+
+Nhắc lại định nghĩa hàm arcsin:
+\[y=\sin^{-1}x\quad\Longleftrightarrow\quad\sin y=x,\quad -\frac\pi2\le y\le\frac\pi2.\]
+Lấy đạo hàm ẩn của $\sin y=x$ theo $x$:
+\[\cos y\frac{dy}{dx}=1,\qquad\text{hay}\qquad\frac{dy}{dx}=\frac1{\cos y}.\]
+Vì $-\pi/2\le y\le\pi/2$, nên $\cos y\ge0$ và
+\[\cos y=\sqrt{1-\sin^2y}=\sqrt{1-x^2}\qquad(\cos^2y+\sin^2y=1).\]
+Do đó,
+\[\frac{dy}{dx}=\frac1{\cos y}=\frac1{\sqrt{1-x^2}},\]
+hay
+\[\frac{d}{dx}(\sin^{-1}x)=\frac1{\sqrt{1-x^2}}.\]
+Tương tự, nếu $y=\tan^{-1}x$ thì $\tan y=x$. Lấy đạo hàm ẩn:
+\[\sec^2y\frac{dy}{dx}=1,\]
+\[\frac{dy}{dx}=\frac1{\sec^2y}=\frac1{1+\tan^2y}=\frac1{1+x^2}.\]
+Vậy
+\[\frac{d}{dx}(\tan^{-1}x)=\frac1{1+x^2}.\]
+Hình 5 cho đồ thị $f(x)=\tan^{-1}x$ và $f'(x)=1/(1+x^2)$. Hàm $f$ tăng và $f'$ luôn dương. Việc $\tan^{-1}x\to\pm\pi/2$ khi $x\to\pm\infty$ được phản ánh qua $f'(x)\to0$ khi $x\to\pm\infty$.
+\fig[.47]{f05}{Hình 5. Hàm arctan và đạo hàm của nó.}
+Các hàm $\sin^{-1}x$ và $\tan^{-1}x$ thường gặp nhất. Đạo hàm của bốn hàm còn lại được cho trong bảng sau; chứng minh để lại làm bài tập.
+\begin{quote}\textbf{Đạo hàm của các hàm lượng giác ngược}
+\begin{align*}
+\frac{d}{dx}(\sin^{-1}x)&=\frac1{\sqrt{1-x^2}}, &
+\frac{d}{dx}(\csc^{-1}x)&=-\frac1{x\sqrt{x^2-1}},\\[5pt]
+\frac{d}{dx}(\cos^{-1}x)&=-\frac1{\sqrt{1-x^2}}, &
+\frac{d}{dx}(\sec^{-1}x)&=\frac1{x\sqrt{x^2-1}},\\[5pt]
+\frac{d}{dx}(\tan^{-1}x)&=\frac1{1+x^2}, &
+\frac{d}{dx}(\cot^{-1}x)&=-\frac1{1+x^2}.
+\end{align*}
+\end{quote}
+Các công thức cho $\csc^{-1}$ và $\sec^{-1}$ phụ thuộc vào định nghĩa được dùng cho những hàm ấy; xem Bài tập 82.
+\ex{9} Tính đạo hàm: (a) $\displaystyle y=\frac1{\sin^{-1}x}$; \quad (b) $f(x)=x\arctan\sqrt x$.
+\sol (a)
+\begin{align*}
+\frac{dy}{dx}&=\frac{d}{dx}(\sin^{-1}x)^{-1}
+=-(\sin^{-1}x)^{-2}\frac{d}{dx}(\sin^{-1}x)\\
+&=-\frac1{(\sin^{-1}x)^2\sqrt{1-x^2}}.
+\end{align*}
+(b)
+\begin{align*}
+f'(x)&=x\frac1{1+(\sqrt x)^2}\left(\frac12x^{-1/2}\right)+\arctan\sqrt x\\
+&=\frac{\sqrt x}{2(1+x)}+\arctan\sqrt x.\qquad\square
+\end{align*}
+Nhớ rằng $\arctan x$ là một ký hiệu khác của $\tan^{-1}x$.
+\ex{10} Tính đạo hàm của $g(x)=\sec^{-1}(x^2)$.
+\sol
+\[g'(x)=\frac1{x^2\sqrt{(x^2)^2-1}}(2x)=\frac2{x\sqrt{x^4-1}}.\qquad\square\]
+\section*{3.6. Bài tập}
+\bt{1} Giải thích tại sao hàm logarit tự nhiên $y=\ln x$ được dùng trong giải tích thường xuyên hơn nhiều so với các hàm logarit $y=\log_bx$ khác.
+\group{2–26} Tính đạo hàm của hàm số.
+\bt{2} $g(t)=\ln(3+t^2)$.
+\bt{3} $f(x)=\ln(x^2+3x+5)$.
+\bt{4} $f(x)=x\ln x-x$.
+\bt{5} $f(x)=\sin(\ln x)$.
+\bt{6} $f(x)=\ln(\sin^2x)$.
+\bt{7} $f(x)=\ln\dfrac1x$.
+\bt{8} $y=\dfrac1{\ln x}$.
+\bt{9} $g(x)=\ln(xe^{-2x})$.
+\bt{10} $g(t)=\sqrt{1+\ln t}$.
+\bt{11} $F(t)=(\ln t)^2\sin t$.
+\bt{12} $p(t)=\ln\sqrt{t^2+1}$.
+\bt{13} $y=\log_8(x^2+3x)$.
+\bt{14} $y=\log_{10}\sec x$.
+\bt{15} $F(s)=\ln\ln s$.
+\bt{16} $P(v)=\dfrac{\ln v}{1-v}$.
+\bt{17} $T(z)=2^z\log_2z$.
+\bt{18} $g(t)=\ln\dfrac{t(t^2+1)^4}{\sqrt[3]{2t-1}}$.
+\bt{19} $y=\ln|3-2x^5|$.
+\bt{20} $y=\ln(\csc x-\cot x)$.
+\bt{21} $y=\ln(e^{-x}+xe^{-x})$.
+\bt{22} $g(x)=e^{x^2\ln x}$.
+\bt{23} $h(x)=e^{x^2+\ln x}$.
+\bt{24} $y=\ln\sqrt{\dfrac{1+2x}{1-2x}}$.
+\bt{25} $y=\ln\dfrac{x^a}{b^x}$.
+\bt{26} $y=\log_2(x\log_5x)$.
+\bt{27} Chứng minh rằng
+\[\frac{d}{dx}\ln\left(x+\sqrt{x^2+1}\right)=\frac1{\sqrt{x^2+1}}.\]
+\bt{28} Chứng minh rằng
+\[\frac{d}{dx}\ln\sqrt{\frac{1-\cos x}{1+\cos x}}=\csc x.\]
+\group{29–32} Tìm $y'$ và $y''$.
+\bt{29} $y=\sqrt x\ln x$.
+\bt{30} $y=\dfrac{\ln x}{1+\ln x}$.
+\bt{31} $y=\ln|\sec x|$.
+\bt{32} $y=\ln(1+\ln x)$.
+\group{33–36} Tính đạo hàm của $f$ và tìm tập xác định của $f$.
+\bt{33} $f(x)=\dfrac{x}{1-\ln(x-1)}$.
+\bt{34} $f(x)=\sqrt{2+\ln x}$.
+\bt{35} $f(x)=\ln(x^2-2x)$.
+\bt{36} $f(x)=\ln\ln\ln x$.
+\bt{37} Nếu $f(x)=\ln(x+\ln x)$, hãy tìm $f'(1)$.
+\bt{38} Nếu $f(x)=\cos(\ln x^2)$, hãy tìm $f'(1)$.
+\group{39–40} Tìm phương trình tiếp tuyến của đường cong tại điểm đã cho.
+\bt{39} $y=\ln(x^2-3x+1)$, \quad $(3,0)$.
+\bt{40} $y=x^2\ln x$, \quad $(1,0)$.
+\bt{41} Nếu $f(x)=\sin x+\ln x$, hãy tìm $f'(x)$. Kiểm tra tính hợp lý của kết quả bằng cách so sánh đồ thị của $f$ và $f'$.
+\bt{42} Tìm phương trình các tiếp tuyến của đường cong $y=(\ln x)/x$ tại $(1,0)$ và $(e,1/e)$. Minh họa bằng cách vẽ đường cong cùng các tiếp tuyến.
+\bt{43} Cho $f(x)=cx+\ln(\cos x)$. Với giá trị nào của $c$ thì $f'(\pi/4)=6$?
+\bt{44} Cho $f(x)=\log_b(3x^2-2)$. Với giá trị nào của $b$ thì $f'(1)=3$?
+\group{45–56} Dùng phép lấy đạo hàm bằng logarit để tìm đạo hàm của hàm số.
+\bt{45} $y=(x^2+2)^2(x^4+4)^4$.
+\bt{46} $y=\dfrac{e^{2x}\cos^2x}{x^2+x+1}$.
+\bt{47} $y=\sqrt{\dfrac{x-1}{x^4+1}}$.
+\bt{48} $y=\sqrt x\,e^{x^2-x}(x+1)^{2/3}$.
+\bt{49} $y=x^x$.
+\bt{50} $y=x^{1/x}$.
+\bt{51} $y=x^{\sin x}$.
+\bt{52} $y=(\sqrt x)^x$.
+\bt{53} $y=(\cos x)^x$.
+\bt{54} $y=(\sin x)^{\ln x}$.
+\bt{55} $y=x^{\ln x}$.
+\bt{56} $y=(\ln x)^{\cos x}$.
+\bt{57} Tìm $y'$ nếu $y=\ln(x^2+y^2)$.
+\bt{58} Tìm $y'$ nếu $x^y=y^x$.
+\bt{59} Tìm công thức cho $f^{(n)}(x)$ nếu $f(x)=\ln(x-1)$.
+\bt{60} Tìm $\displaystyle\frac{d^9}{dx^9}(x^8\ln x)$.
+\bt{61} Dùng định nghĩa đạo hàm để chứng minh rằng
+\[\lim_{x\to0}\frac{\ln(1+x)}x=1.\]
+\bt{62} Chứng minh rằng với mọi $x>0$,
+\[\lim_{n\to\infty}\left(1+\frac xn\right)^n=e^x.\]
+\group{63–78} Tìm đạo hàm của hàm số và rút gọn nếu có thể.
+\bt{63} $f(x)=\sin^{-1}(5x)$.
+\bt{64} $g(x)=\sec^{-1}(e^x)$.
+\bt{65} $y=\tan^{-1}\sqrt{x-1}$.
+\bt{66} $y=\tan^{-1}(x^2)$.
+\bt{67} $y=(\tan^{-1}x)^2$.
+\bt{68} $g(x)=\arccos\sqrt x$.
+\bt{69} $h(x)=(\arcsin x)\ln x$.
+\bt{70} $g(t)=\ln(\arctan(t^4))$.
+\bt{71} $f(z)=e^{\arcsin(z^2)}$.
+\bt{72} $y=\tan^{-1}\left(x-\sqrt{1+x^2}\right)$.
+\bt{73} $h(t)=\cot^{-1}(t)+\cot^{-1}(1/t)$.
+\bt{74} $R(t)=\arcsin(1/t)$.
+\bt{75} $y=x\sin^{-1}x+\sqrt{1-x^2}$.
+\bt{76} $y=\cos^{-1}(\sin^{-1}t)$.
+\bt{77} $y=\tan^{-1}\left(\dfrac xa\right)+\ln\sqrt{\dfrac{x-a}{x+a}}$.
+\bt{78} $y=\arctan\sqrt{\dfrac{1-x}{1+x}}$.
+\group{79–80} Tìm $f'(x)$. Kiểm tra tính hợp lý của kết quả bằng cách so sánh đồ thị của $f$ và $f'$.
+\bt{79} $f(x)=\sqrt{1-x^2}\arcsin x$.
+\bt{80} $f(x)=\arctan(x^2-x)$.
+\bt{81} Chứng minh công thức đạo hàm của $\cos^{-1}x$ bằng cùng phương pháp đã dùng cho $\sin^{-1}x$.
+\bt{82} (a) Một cách định nghĩa $\sec^{-1}x$ là:
+\[y=\sec^{-1}x\quad\Longleftrightarrow\quad\sec y=x,\]
+với $0\le y<\pi/2$ hoặc $\pi\le y<3\pi/2$. Chứng minh rằng với định nghĩa này,
+\[\frac{d}{dx}(\sec^{-1}x)=\frac1{x\sqrt{x^2-1}}.\]
+(b) Một cách định nghĩa khác đôi khi được dùng là:
+\[y=\sec^{-1}x\quad\Longleftrightarrow\quad\sec y=x,\]
+với $0\le y\le\pi$, $y\ne\pi/2$. Chứng minh rằng với định nghĩa này,
+\[\frac{d}{dx}(\sec^{-1}x)=\frac1{|x|\sqrt{x^2-1}}.\]
+\bt{83} \textbf{Đạo hàm của hàm ngược.} Giả sử $f$ là hàm đơn ánh khả vi và $f^{-1}$ cũng khả vi. Dùng phép lấy đạo hàm ẩn để chứng minh rằng
+\[(f^{-1})'(x)=\frac1{f'(f^{-1}(x))},\]
+với điều kiện mẫu số khác $0$.
+\group{84–86} Dùng công thức trong Bài tập 83.
+\bt{84} Nếu $f(4)=5$ và $f'(4)=\dfrac23$, hãy tìm $(f^{-1})'(5)$.
+\bt{85} Nếu $f(x)=x+e^x$, hãy tìm $(f^{-1})'(1)$.
+\bt{86} Nếu $f(x)=x^3+3\sin x+2\cos x$, hãy tìm $(f^{-1})'(2)$.
+\bt{87} Giả sử $f,g$ là các hàm khả vi và đặt $h(x)=f(x)^{g(x)}$. Dùng phép lấy đạo hàm bằng logarit để suy ra công thức
+\[h'=g\,f^{g-1}f'+(\ln f)\,f^g g'.\]
+\bt{88} Dùng công thức trong Bài tập 87 để tính đạo hàm:
+
+(a) $h(x)=x^3$; \qquad (b) $h(x)=3^x$; \qquad (c) $h(x)=(\sin x)^x$.
+\section*{Ghi chú biên tập và thuật ngữ}
+Phần dưới đây nằm ngoài nội dung nguyên bản, nhằm làm rõ quy ước và điều kiện áp dụng.
+\begin{enumerate}[leftmargin=*]
+\item Giữ nguyên Công thức (1)–(6), Ví dụ 1–10, Hình 1–5 và Bài tập 1–88; không bổ sung lời giải bài tập. Các biểu thức lũy thừa và căn thức được giữ đúng phạm vi dấu căn và số mũ.
+\item Trong (1), $b>0$, $b\ne1$ và $x>0$. Công thức (3) với $\ln g(x)$ cần $g(x)>0$; với $\ln|g(x)|$, công thức $g'/g$ đúng ở nơi $g(x)\ne0$.
+\item Chứng minh quy tắc lũy thừa được hiểu trên miền mà lũy thừa thực và phép lấy logarit tương ứng có nghĩa; với số mũ thực bất kỳ, miền chuẩn là $x>0$. Các trường hợp mở rộng sang $x<0$ hoặc $x=0$ cần xét riêng theo số mũ và tập xác định. Tại $x=0$, đạo hàm thông thường hai phía chỉ được xét khi hàm xác định trong một lân cận của $0$.
+\item Trong phần lượng giác ngược, ký hiệu $\sin^{-1}x$ là $\arcsin x$, không phải $1/\sin x$. Các đạo hàm của arcsin, arccos áp dụng khi $|x|<1$; các công thức cho arcsec, arccsc áp dụng khi $|x|>1$, theo đúng quy ước của sách. Tại các đầu mút $x=\pm1$, không dùng các biểu thức đạo hàm có mẫu bằng $0$.
+\item Bảng công thức giữ nguyên mẫu $x\sqrt{x^2-1}$ của sách đối với arcsec và arccsc. Với quy ước khác của arcsec trong Bài tập 82(b), mẫu trở thành $|x|\sqrt{x^2-1}$; không được tráo đổi hai công thức mà không thay đổi định nghĩa hàm ngược.
+\item Ở Bài tập 84, dữ kiện là $f'(4)=2/3$. Bài tập 21 chứa $e^{-x}$, Bài tập 23 có số mũ $x^2+\ln x$, và Bài tập 48 có thừa số $e^{x^2-x}$.
+\end{enumerate}
+\begin{longtable}{p{.43\linewidth}p{.49\linewidth}}\toprule
+Thuật ngữ tiếng Anh & Thuật ngữ tiếng Việt\\\midrule
+logarithmic differentiation & phép lấy đạo hàm bằng logarit\\
+natural logarithmic function & hàm logarit tự nhiên\\
+logarithmic derivative & đạo hàm logarit\\
+inverse trigonometric function & hàm lượng giác ngược\\
+arcsine function & hàm arcsin\\
+arctangent function & hàm arctan\\
+variable exponent & số mũ thay đổi\\
+constant base & cơ số không đổi\\\bottomrule
+\end{longtable}
+\end{document}
