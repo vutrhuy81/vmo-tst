@@ -1,0 +1,441 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage{fontspec}\setmainfont{Latin Modern Roman}\setsansfont{DejaVu Sans}
+\usepackage{amsmath,amssymb,graphicx,geometry,enumitem,needspace,longtable,booktabs,fancyhdr,hyperref}
+\geometry{left=28mm,right=23mm,top=24mm,bottom=24mm}
+\hypersetup{unicode=true,colorlinks=true,linkcolor=black,urlcolor=blue,pdftitle={Giải tích §4.4 — Các dạng vô định và quy tắc l’Hospital}}
+\setlength{\parindent}{1.2em}\setlength{\parskip}{4pt}\setlength{\headheight}{16pt}
+\pagestyle{fancy}\fancyhf{}\fancyhead[L]{\small Chương 4. Ứng dụng của đạo hàm}\fancyhead[R]{\small §4.4}\fancyfoot[C]{\thepage}
+\newcommand{\fig}[3][.68]{\begin{center}\begin{minipage}{\linewidth}\centering\includegraphics[width=#1\linewidth]{assets/#2.png}\\{\small #3}\end{minipage}\end{center}}
+\newcommand{\ex}[1]{\par\medskip\noindent\textbf{Ví dụ #1.}\ }
+\newcommand{\sol}{\par\nopagebreak[4]\noindent\textit{Lời giải.}\ }
+\newcommand{\bt}[1]{\par\smallskip\Needspace{5\baselineskip}\noindent\textbf{#1.}\ }
+\newcommand{\group}[1]{\par\medskip\noindent\textbf{#1}\par\nopagebreak[4]}
+\newcommand{\gint}[1]{\left[\!\left[#1\right]\!\right]}
+\allowdisplaybreaks[2]
+\DeclareMathOperator{\sech}{sech}
+\DeclareMathOperator{\csch}{csch}
+\DeclareMathOperator{\arccot}{arccot}
+\begin{document}
+\begin{center}{\Large\bfseries 4.4 — Các dạng vô định và quy tắc l’Hospital}\end{center}
+\noindent\textit{Bản dịch tiếng Việt — Stewart, Clegg và Watson, Calculus: Early Transcendentals, ấn bản thứ 9. Phạm vi: §4.4, tr. 309–319, và dự án viết về nguồn gốc quy tắc l’Hospital.}
+
+Giả sử ta muốn phân tích tính chất của hàm số
+\[F(x)=\frac{\ln x}{x-1}.\]
+Mặc dù $F$ không xác định khi $x=1$, ta cần biết $F$ biến thiên như thế nào ở gần 1. Đặc biệt, muốn tìm giá trị của giới hạn
+\[\lim_{x\to1}\frac{\ln x}{x-1}.\tag{1}\]
+Khi tính giới hạn này, không thể áp dụng Quy tắc 5 về giới hạn (giới hạn của thương bằng thương các giới hạn, xem §2.3), vì giới hạn của mẫu số bằng 0. Thực ra, dù giới hạn (1) tồn tại, giá trị của nó không hiển nhiên, vì cả tử và mẫu đều tiến tới 0, còn $0/0$ không xác định.
+\section*{Các dạng vô định $0/0$ và $\infty/\infty$}
+Tổng quát, nếu có giới hạn dạng
+\[\lim_{x\to a}\frac{f(x)}{g(x)},\]
+trong đó cả $f(x)\to0$ và $g(x)\to0$ khi $x\to a$, thì giới hạn có thể tồn tại hoặc không; nó được gọi là một \textbf{dạng vô định kiểu $0/0$}. Ta đã gặp các giới hạn như vậy ở Chương 2. Với hàm hữu tỉ, có thể khử các nhân tử chung:
+\[\lim_{x\to1}\frac{x^2-x}{x^2-1}
+=\lim_{x\to1}\frac{x(x-1)}{(x+1)(x-1)}
+=\lim_{x\to1}\frac{x}{x+1}=\frac12.\]
+Ở §3.3, ta dùng lập luận hình học để chứng minh
+\[\lim_{x\to0}\frac{\sin x}{x}=1.\]
+Nhưng những phương pháp này không áp dụng được cho các giới hạn như (1).
+
+Một tình huống khác mà giới hạn không hiển nhiên xuất hiện khi tìm tiệm cận ngang của $F$, cần tính
+\[\lim_{x\to\infty}\frac{\ln x}{x-1}.\tag{2}\]
+Không dễ thấy cách tính vì cả tử và mẫu đều tăng lớn khi $x\to\infty$. Có một sự cạnh tranh giữa tử và mẫu. Nếu tử chiếm ưu thế, giới hạn sẽ là $\infty$ (tử tăng nhanh hơn mẫu đáng kể); nếu mẫu chiếm ưu thế, kết quả bằng 0. Cũng có thể có sự cân bằng, khi đó kết quả là một số dương hữu hạn.
+
+Tổng quát, nếu có giới hạn dạng
+\[\lim_{x\to a}\frac{f(x)}{g(x)},\]
+trong đó $f(x)\to\infty$ (hoặc $-\infty$) và $g(x)\to\infty$ (hoặc $-\infty$), thì giới hạn có thể tồn tại hoặc không; nó được gọi là \textbf{dạng vô định kiểu $\infty/\infty$}. Ở §2.6, ta đã thấy với một số hàm, trong đó có hàm hữu tỉ, có thể tính bằng cách chia tử và mẫu cho lũy thừa cao nhất của $x$ xuất hiện ở mẫu. Chẳng hạn,
+\[\lim_{x\to\infty}\frac{x^2-1}{2x^2+1}
+=\lim_{x\to\infty}\frac{1-1/x^2}{2+1/x^2}
+=\frac{1-0}{2+0}=\frac12.\]
+Nhưng phương pháp này không áp dụng được cho các giới hạn như (2).
+\section*{Quy tắc l’Hospital}
+Bây giờ, ta giới thiệu một phương pháp có hệ thống, gọi là quy tắc l’Hospital, để tính các dạng vô định $0/0$ hoặc $\infty/\infty$.
+\Needspace{19\baselineskip}
+\group{Quy tắc l’Hospital}
+Giả sử $f,g$ khả vi và $g'(x)\ne0$ trên một khoảng mở $I$ chứa $a$ (có thể trừ tại $a$). Giả sử
+\[\lim_{x\to a}f(x)=0,\qquad\lim_{x\to a}g(x)=0,\]
+hoặc
+\[\lim_{x\to a}f(x)=\pm\infty,\qquad\lim_{x\to a}g(x)=\pm\infty.\]
+(Nói cách khác, có dạng vô định $0/0$ hoặc $\infty/\infty$.) Khi đó
+\[\lim_{x\to a}\frac{f(x)}{g(x)}=\lim_{x\to a}\frac{f'(x)}{g'(x)},\]
+nếu giới hạn ở vế phải tồn tại (hoặc bằng $\infty$ hay $-\infty$).
+\fig[.4]{fig01}{Hình 1}
+Hình 1 gợi ý trực quan vì sao quy tắc l’Hospital có thể đúng. Đồ thị thứ nhất biểu diễn hai hàm khả vi $f,g$ cùng tiến tới 0 khi $x\to a$. Nếu phóng to về phía $(a,0)$, các đồ thị bắt đầu trông gần như đường thẳng. Nếu các hàm thực sự tuyến tính như ở hình thứ hai, tỉ số của chúng là
+\[\frac{m_1(x-a)}{m_2(x-a)}=\frac{m_1}{m_2},\]
+chính là tỉ số các đạo hàm. Điều này gợi ý
+\[\lim_{x\to a}\frac{f(x)}{g(x)}=\lim_{x\to a}\frac{f'(x)}{g'(x)}.\]
+\group{Chú ý 1}
+Quy tắc l’Hospital cho biết giới hạn của thương hai hàm bằng giới hạn của thương các đạo hàm, miễn là thỏa mãn những điều kiện đã nêu. Đặc biệt, cần kiểm tra các điều kiện về giới hạn của $f,g$ trước khi áp dụng.
+\group{Chú ý 2}
+Quy tắc cũng đúng cho giới hạn một phía và giới hạn tại dương vô cực hoặc âm vô cực; tức là có thể thay “$x\to a$” bằng $x\to a^+$, $x\to a^-$, $x\to\infty$ hoặc $x\to-\infty$.
+\group{Chú ý 3}
+Trong trường hợp đặc biệt $f(a)=g(a)=0$, $f',g'$ liên tục và $g'(a)\ne0$, dễ thấy vì sao quy tắc đúng. Dùng dạng khác của định nghĩa đạo hàm (2.7.5), ta có
+\begin{align*}
+\lim_{x\to a}\frac{f'(x)}{g'(x)}
+&=\frac{f'(a)}{g'(a)}
+=\frac{\displaystyle\lim_{x\to a}\frac{f(x)-f(a)}{x-a}}
+{\displaystyle\lim_{x\to a}\frac{g(x)-g(a)}{x-a}}\\
+&=\lim_{x\to a}\frac{\dfrac{f(x)-f(a)}{x-a}}{\dfrac{g(x)-g(a)}{x-a}}\\
+&=\lim_{x\to a}\frac{f(x)-f(a)}{g(x)-g(a)}
+=\lim_{x\to a}\frac{f(x)}{g(x)}.
+\end{align*}
+Đẳng thức cuối do $f(a)=g(a)=0$. Chứng minh phiên bản tổng quát khó hơn; xem Phụ lục F.
+\group{l’Hospital}
+Quy tắc mang tên một nhà quý tộc Pháp, Hầu tước de l’Hospital (1661–1704), nhưng được nhà toán học Thụy Sĩ John Bernoulli (1667–1748) phát hiện. Đôi khi tên l’Hospital được viết là l’Hôpital, nhưng chính ông viết tên mình là l’Hospital, theo cách viết phổ biến ở thế kỷ XVII. Xem Bài tập 85 về ví dụ mà Hầu tước dùng để minh họa quy tắc; dự án sau mục này cung cấp thêm chi tiết lịch sử.
+\Needspace{10\baselineskip}
+\ex{1} Tìm $\displaystyle\lim_{x\to1}\frac{\ln x}{x-1}$.
+\sol Vì
+\[\lim_{x\to1}\ln x=\ln1=0,\qquad\lim_{x\to1}(x-1)=0,\]
+giới hạn có dạng vô định $0/0$, nên áp dụng quy tắc l’Hospital:
+\begin{align*}
+\lim_{x\to1}\frac{\ln x}{x-1}
+&=\lim_{x\to1}\frac{\dfrac d{dx}(\ln x)}{\dfrac d{dx}(x-1)}
+=\lim_{x\to1}\frac{1/x}{1}\\
+&=\lim_{x\to1}\frac1x=1.
+\end{align*}
+\noindent\textbf{Lưu ý:} Khi dùng quy tắc l’Hospital, lấy đạo hàm tử và mẫu \textit{riêng rẽ}; không dùng quy tắc đạo hàm của thương.
+\Needspace{10\baselineskip}
+\ex{2} Tính $\displaystyle\lim_{x\to\infty}\frac{e^x}{x^2}$.
+\sol Vì $\lim_{x\to\infty}e^x=\infty$ và $\lim_{x\to\infty}x^2=\infty$, giới hạn có dạng vô định $\infty/\infty$. Quy tắc l’Hospital cho
+\[\lim_{x\to\infty}\frac{e^x}{x^2}
+=\lim_{x\to\infty}\frac{\dfrac d{dx}(e^x)}{\dfrac d{dx}(x^2)}
+=\lim_{x\to\infty}\frac{e^x}{2x}.\]
+Vì $e^x\to\infty$ và $2x\to\infty$ khi $x\to\infty$, giới hạn bên phải vẫn vô định. Áp dụng quy tắc lần thứ hai:
+\[\lim_{x\to\infty}\frac{e^x}{x^2}
+=\lim_{x\to\infty}\frac{e^x}{2x}
+=\lim_{x\to\infty}\frac{e^x}{2}=\infty.\]
+Đồ thị hàm số ở Hình 2 minh họa kết quả. Ta đã nhận xét hàm mũ tăng nhanh hơn nhiều so với hàm lũy thừa, nên kết quả không bất ngờ. Xem thêm Bài tập 75.
+\fig[.43]{fig02}{Hình 2. $y=e^x/x^2$.}
+\Needspace{10\baselineskip}
+\ex{3} Tính $\displaystyle\lim_{x\to\infty}\frac{\ln x}{\sqrt x}$.
+\sol Vì $\ln x\to\infty$ và $\sqrt x\to\infty$ khi $x\to\infty$, áp dụng được quy tắc l’Hospital:
+\[\lim_{x\to\infty}\frac{\ln x}{\sqrt x}
+=\lim_{x\to\infty}\frac{1/x}{\frac12x^{-1/2}}
+=\lim_{x\to\infty}\frac{1/x}{1/(2\sqrt x)}.\]
+Chú ý giới hạn bên phải có dạng vô định $0/0$. Nhưng thay vì áp dụng quy tắc lần thứ hai như ở Ví dụ 2, ta rút gọn và thấy không cần áp dụng thêm:
+\[\lim_{x\to\infty}\frac{\ln x}{\sqrt x}
+=\lim_{x\to\infty}\frac{1/x}{1/(2\sqrt x)}
+=\lim_{x\to\infty}\frac2{\sqrt x}=0.\]
+Đồ thị ở Hình 3 phù hợp với kết quả. Ta đã bàn về sự tăng chậm của logarit, nên không ngạc nhiên khi tỉ số tiến tới 0 lúc $x\to\infty$. Xem thêm Bài tập 76.
+\fig[.46]{fig03}{Hình 3. $y=(\ln x)/\sqrt x$.}
+Trong cả Ví dụ 2 và 3, ta tính giới hạn dạng $\infty/\infty$ nhưng được hai kết quả khác nhau. Ở Ví dụ 2, giới hạn vô cực cho biết tử $e^x$ tăng nhanh hơn mẫu $x^2$ đáng kể, làm các tỉ số ngày càng lớn. Thực ra $y=e^x$ tăng nhanh hơn mọi hàm lũy thừa $y=x^n$ (Bài tập 75). Ở Ví dụ 3, tình huống ngược lại: giới hạn bằng 0 cho biết tử tăng chậm hơn mẫu và tỉ số cuối cùng tiến tới 0.
+\Needspace{10\baselineskip}
+\ex{4} Tìm $\displaystyle\lim_{x\to0}\frac{\tan x-x}{x^3}$. (Xem Bài tập 2.2.48.)
+\sol Cả $\tan x-x\to0$ và $x^3\to0$ khi $x\to0$, nên
+\[\lim_{x\to0}\frac{\tan x-x}{x^3}
+=\lim_{x\to0}\frac{\sec^2x-1}{3x^2}.\]
+Vế phải vẫn có dạng vô định $0/0$, nên tiếp tục:
+\[\lim_{x\to0}\frac{\sec^2x-1}{3x^2}
+=\lim_{x\to0}\frac{2\sec^2x\tan x}{6x}.\]
+Vì $\lim_{x\to0}\sec^2x=1$, ta đơn giản hóa:
+\begin{align*}
+\lim_{x\to0}\frac{2\sec^2x\tan x}{6x}
+&=\frac13\lim_{x\to0}\sec^2x\cdot\lim_{x\to0}\frac{\tan x}{x}\\
+&=\frac13\lim_{x\to0}\frac{\tan x}{x}.
+\end{align*}
+Có thể tính giới hạn cuối bằng quy tắc l’Hospital lần thứ ba, hoặc viết $\tan x=\sin x/\cos x$ và dùng các giới hạn lượng giác đã biết. Gộp các bước:
+\begin{align*}
+\lim_{x\to0}\frac{\tan x-x}{x^3}
+&=\lim_{x\to0}\frac{\sec^2x-1}{3x^2}
+=\lim_{x\to0}\frac{2\sec^2x\tan x}{6x}\\
+&=\frac13\lim_{x\to0}\frac{\tan x}{x}
+=\frac13\lim_{x\to0}\frac{\sec^2x}{1}=\frac13.
+\end{align*}
+Hình 4 xác nhận trực quan kết quả. Tuy nhiên, nếu phóng to quá sâu thì đồ thị có thể không chính xác vì $x$ rất gần $\tan x$ khi $x$ nhỏ. Xem Bài tập 2.2.48(d).
+\fig[.42]{fig04}{Hình 4. $y=(\tan x-x)/x^3$.}
+\Needspace{10\baselineskip}
+\ex{5} Tìm $\displaystyle\lim_{x\to\pi^-}\frac{\sin x}{1-\cos x}$.
+\sol Nếu cố áp dụng quy tắc l’Hospital một cách máy móc, có thể tưởng rằng giới hạn tương đương là
+\[\lim_{x\to\pi^-}\frac{\cos x}{\sin x}=-\infty.\]
+\textbf{Điều này sai!} Dù tử $\sin x\to0$ khi $x\to\pi^-$, mẫu $1-\cos x$ không tiến tới 0; vì vậy không thể áp dụng quy tắc l’Hospital. Thực ra, thay trực tiếp được vì hàm liên tục tại $\pi$ và mẫu khác 0 tại đó:
+\[\lim_{x\to\pi^-}\frac{\sin x}{1-\cos x}
+=\frac{\sin\pi}{1-\cos\pi}=\frac0{1-(-1)}=0.\]
+Ví dụ 5 cho thấy sai sót có thể xảy ra khi dùng quy tắc mà không suy xét. Một số giới hạn có thể tính bằng l’Hospital nhưng dễ tính hơn bằng cách khác (xem Ví dụ 2.3.3, 2.3.5, 2.6.3 và phần đầu mục này). Khi tính bất kỳ giới hạn nào, nên xét các phương pháp khác trước khi dùng l’Hospital.
+
+\section*{Tích vô định dạng $0\cdot\infty$}
+Nếu $f(x)\to0$ và $g(x)\to\infty$ (hoặc $-\infty$) khi $x\to a$, thì chưa rõ giá trị giới hạn của tích $f(x)g(x)$, nếu giới hạn ấy tồn tại. Có sự cạnh tranh giữa $f$ và $g$. Nếu $f$ chiếm ưu thế, kết quả bằng 0; nếu $g$ chiếm ưu thế, kết quả là $\infty$ (hoặc $-\infty$). Cũng có thể cân bằng, cho một số hữu hạn khác 0. Chẳng hạn,
+\[\lim_{x\to0^+}x^2=0,\quad\lim_{x\to0^+}\frac1x=\infty,\quad
+\lim_{x\to0^+}x^2\frac1x=\lim_{x\to0^+}x=0;\]
+\[\lim_{x\to0^+}x=0,\quad\lim_{x\to0^+}\frac1{x^2}=\infty,\quad
+\lim_{x\to0^+}x\frac1{x^2}=\lim_{x\to0^+}\frac1x=\infty;\]
+\[\lim_{x\to0^+}x=0,\quad\lim_{x\to0^+}\frac1x=\infty,\quad
+\lim_{x\to0^+}x\frac1x=\lim_{x\to0^+}1=1.\]
+Loại giới hạn này được gọi là \textbf{dạng vô định $0\cdot\infty$}. Có thể xử lý bằng cách viết tích $fg$ thành thương:
+\[fg=\frac f{1/g}\qquad\text{hoặc}\qquad fg=\frac g{1/f}.\]
+Nhờ đó, chuyển giới hạn thành dạng $0/0$ hoặc $\infty/\infty$ để dùng quy tắc l’Hospital.
+\Needspace{10\baselineskip}
+\ex{6} Tính $\displaystyle\lim_{x\to0^+}x\ln x$.
+\sol Đây là giới hạn vô định: khi $x\to0^+$, thừa số thứ nhất $x$ tiến tới 0, còn thừa số thứ hai $\ln x$ tiến tới $-\infty$. Viết $x=1/(1/x)$; vì $1/x\to\infty$ khi $x\to0^+$, quy tắc l’Hospital cho
+\[\lim_{x\to0^+}x\ln x=\lim_{x\to0^+}\frac{\ln x}{1/x}
+=\lim_{x\to0^+}\frac{1/x}{-1/x^2}=\lim_{x\to0^+}(-x)=0.\]
+Hình 5 biểu diễn đồ thị hàm số. Hàm không xác định tại $x=0$; đồ thị tiến gần gốc tọa độ nhưng không bao giờ tới đó.
+\fig[.33]{fig05}{Hình 5. $y=x\ln x$.}
+\group{Chú ý}
+Một cách viết khác trong Ví dụ 6 là
+\[\lim_{x\to0^+}x\ln x=\lim_{x\to0^+}\frac{x}{1/\ln x}.\]
+Cách này cho dạng $0/0$, nhưng dùng l’Hospital sẽ tạo biểu thức phức tạp hơn ban đầu. Nói chung, khi biến đổi tích vô định, hãy chọn cách dẫn tới giới hạn đơn giản hơn.
+\section*{Hiệu vô định dạng $\infty-\infty$}
+Nếu $\lim_{x\to a}f(x)=\infty$ và $\lim_{x\to a}g(x)=\infty$, thì
+\[\lim_{x\to a}[f(x)-g(x)]\]
+được gọi là \textbf{dạng vô định $\infty-\infty$}. Một lần nữa, có sự cạnh tranh giữa $f$ và $g$. Kết quả là $\infty$ ($f$ chiếm ưu thế), $-\infty$ ($g$ chiếm ưu thế), hay cân bằng thành một số hữu hạn? Để xác định, ta thử chuyển hiệu thành thương (chẳng hạn quy đồng mẫu, khử căn hoặc đặt nhân tử chung), sao cho có dạng $0/0$ hoặc $\infty/\infty$.
+\Needspace{10\baselineskip}
+\ex{7} Tính $\displaystyle\lim_{x\to1^+}\left(\frac1{\ln x}-\frac1{x-1}\right)$.
+\sol Vì $1/\ln x\to\infty$ và $1/(x-1)\to\infty$ khi $x\to1^+$, đây là dạng $\infty-\infty$. Quy đồng mẫu:
+\[\lim_{x\to1^+}\left(\frac1{\ln x}-\frac1{x-1}\right)
+=\lim_{x\to1^+}\frac{x-1-\ln x}{(x-1)\ln x}.\]
+Tử và mẫu đều có giới hạn bằng 0, nên
+\begin{align*}
+\lim_{x\to1^+}\frac{x-1-\ln x}{(x-1)\ln x}
+&=\lim_{x\to1^+}\frac{1-1/x}{(x-1)(1/x)+\ln x}\\
+&=\lim_{x\to1^+}\frac{x-1}{x-1+x\ln x}.
+\end{align*}
+Vẫn là dạng $0/0$, nên áp dụng lần thứ hai:
+\begin{align*}
+\lim_{x\to1^+}\frac{x-1}{x-1+x\ln x}
+&=\lim_{x\to1^+}\frac1{1+x(1/x)+\ln x}\\
+&=\lim_{x\to1^+}\frac1{2+\ln x}=\frac12.
+\end{align*}
+\ex{8} Tính $\displaystyle\lim_{x\to\infty}(e^x-x)$.
+\sol Đây là hiệu vô định vì cả $e^x$ và $x$ đều tiến tới vô cực. Ta dự đoán giới hạn bằng vô cực do $e^x\to\infty$ nhanh hơn $x$ nhiều. Kiểm tra bằng cách đặt $x$ làm nhân tử chung:
+\[e^x-x=x\left(\frac{e^x}{x}-1\right).\]
+Theo l’Hospital, $e^x/x\to\infty$ khi $x\to\infty$. Vì vậy cả hai thừa số đều tăng lớn:
+\[\lim_{x\to\infty}(e^x-x)
+=\lim_{x\to\infty}\left[x\left(\frac{e^x}{x}-1\right)\right]=\infty.\]
+\section*{Lũy thừa vô định dạng $0^0$, $\infty^0$, $1^\infty$}
+Một số dạng vô định xuất hiện từ giới hạn
+\[\lim_{x\to a}[f(x)]^{g(x)}:\]
+\begin{enumerate}
+\item $\lim_{x\to a}f(x)=0$, $\lim_{x\to a}g(x)=0$: dạng $0^0$.
+\item $\lim_{x\to a}f(x)=\infty$, $\lim_{x\to a}g(x)=0$: dạng $\infty^0$.
+\item $\lim_{x\to a}f(x)=1$, $\lim_{x\to a}g(x)=\pm\infty$: dạng $1^\infty$.
+\end{enumerate}
+Mặc dù $0^0$, $\infty^0$, $1^\infty$ là các dạng vô định, dạng $0^\infty$ không vô định (Bài tập 88).
+
+Có thể xử lý mỗi trường hợp bằng cách lấy logarit tự nhiên:
+\[y=[f(x)]^{g(x)}\quad\Longrightarrow\quad\ln y=g(x)\ln f(x),\]
+hoặc dùng Công thức 1.5.10 để viết dưới dạng hàm mũ:
+\[[f(x)]^{g(x)}=e^{g(x)\ln f(x)}.\]
+(Nhắc lại: cả hai cách đều đã dùng khi lấy đạo hàm những hàm như vậy.) Dù theo cách nào, ta đều dẫn tới tích vô định $g(x)\ln f(x)$, dạng $0\cdot\infty$.
+\Needspace{10\baselineskip}
+\ex{9} Tính $\displaystyle\lim_{x\to0^+}(1+\sin4x)^{\cot x}$.
+\sol Khi $x\to0^+$, $1+\sin4x\to1$ và $\cot x\to\infty$, nên có dạng $1^\infty$. Đặt
+\[y=(1+\sin4x)^{\cot x}.\]
+Khi đó
+\[\ln y=\ln[(1+\sin4x)^{\cot x}]
+=\cot x\ln(1+\sin4x)=\frac{\ln(1+\sin4x)}{\tan x}.\]
+Theo quy tắc l’Hospital,
+\[\lim_{x\to0^+}\ln y
+=\lim_{x\to0^+}\frac{\ln(1+\sin4x)}{\tan x}
+=\lim_{x\to0^+}\frac{4\cos4x/(1+\sin4x)}{\sec^2x}=4.\]
+Ta đã tính giới hạn của $\ln y$, nhưng cần giới hạn của $y$. Dùng $y=e^{\ln y}$:
+\[\lim_{x\to0^+}(1+\sin4x)^{\cot x}
+=\lim_{x\to0^+}y=\lim_{x\to0^+}e^{\ln y}=e^4.\]
+\Needspace{10\baselineskip}
+\ex{10} Tìm $\displaystyle\lim_{x\to0^+}x^x$.
+\sol Đây là giới hạn vô định vì $0^x=0$ với mọi $x>0$, nhưng $x^0=1$ với mọi $x\ne0$. (Nhắc lại: $0^0$ không xác định.) Có thể làm như ở Ví dụ 9, hoặc viết thành hàm mũ:
+\[x^x=(e^{\ln x})^x=e^{x\ln x}.\]
+Trong Ví dụ 6, ta đã dùng l’Hospital chứng minh
+\[\lim_{x\to0^+}x\ln x=0.\]
+Do đó
+\[\lim_{x\to0^+}x^x=\lim_{x\to0^+}e^{x\ln x}=e^0=1.\]
+Đồ thị $y=x^x$, $x>0$, ở Hình 6 củng cố kết quả. Dù $0^0$ không xác định, giá trị hàm số tiến tới 1 khi $x\to0^+$.
+\fig[.43]{fig06}{Hình 6. $y=x^x$, $x>0$.}
+
+\clearpage
+\section*{4.4 — Bài tập}
+\Needspace{14\baselineskip}
+\group{1–4} Cho
+\[\lim_{x\to a}f(x)=0,\quad\lim_{x\to a}g(x)=0,\quad\lim_{x\to a}h(x)=1,\]
+\[\lim_{x\to a}p(x)=\infty,\qquad\lim_{x\to a}q(x)=\infty.\]
+Trong các giới hạn sau, giới hạn nào có dạng vô định? Với mỗi giới hạn không có dạng vô định, hãy tính giá trị nếu có thể.
+\bt{1} (a) $\displaystyle\lim_{x\to a}\frac{f(x)}{g(x)}$; \quad(b) $\displaystyle\lim_{x\to a}\frac{f(x)}{p(x)}$;
+
+(c) $\displaystyle\lim_{x\to a}\frac{h(x)}{p(x)}$; \quad(d) $\displaystyle\lim_{x\to a}\frac{p(x)}{f(x)}$;
+
+(e) $\displaystyle\lim_{x\to a}\frac{p(x)}{q(x)}$.
+\bt{2} (a) $\displaystyle\lim_{x\to a}[f(x)p(x)]$; \quad(b) $\displaystyle\lim_{x\to a}[h(x)p(x)]$;
+
+(c) $\displaystyle\lim_{x\to a}[p(x)q(x)]$.
+\bt{3} (a) $\displaystyle\lim_{x\to a}[f(x)-p(x)]$; \quad(b) $\displaystyle\lim_{x\to a}[p(x)-q(x)]$;
+
+(c) $\displaystyle\lim_{x\to a}[p(x)+q(x)]$.
+\bt{4} (a) $\displaystyle\lim_{x\to a}[f(x)]^{g(x)}$; \quad(b) $\displaystyle\lim_{x\to a}[f(x)]^{p(x)}$;
+
+(c) $\displaystyle\lim_{x\to a}[h(x)]^{p(x)}$; \quad(d) $\displaystyle\lim_{x\to a}[p(x)]^{f(x)}$;
+
+(e) $\displaystyle\lim_{x\to a}[p(x)]^{q(x)}$; \quad(f) $\displaystyle\lim_{x\to a}\sqrt[q(x)]{p(x)}$.
+\Needspace{12\baselineskip}
+\group{5–6} Dùng đồ thị của $f,g$ và các tiếp tuyến của chúng tại $(2,0)$ để tìm $\displaystyle\lim_{x\to2}\frac{f(x)}{g(x)}$.
+\par\noindent\begin{minipage}{\linewidth}
+\bt{5}\fig[.36]{ex05}{Đồ thị cho Bài tập 5.}
+\end{minipage}\par
+\par\noindent\begin{minipage}{\linewidth}
+\bt{6}\fig[.36]{ex06}{Đồ thị cho Bài tập 6.}
+\end{minipage}\par
+\par\noindent\begin{minipage}{\linewidth}
+\bt{7} Cho đồ thị của hàm số $f$ và tiếp tuyến tại 0. Giá trị của $\displaystyle\lim_{x\to0}\frac{f(x)}{e^x-1}$ là bao nhiêu?
+\fig[.39]{ex07}{Đồ thị cho Bài tập 7.}
+\end{minipage}\par
+\Needspace{8\baselineskip}
+\group{8–70} Tìm giới hạn. Dùng quy tắc l’Hospital khi thích hợp. Nếu có phương pháp sơ cấp hơn, hãy cân nhắc dùng phương pháp đó. Nếu không áp dụng được quy tắc l’Hospital, giải thích vì sao.
+\bt{8} $\displaystyle\lim_{x\to3}\frac{x-3}{x^2-9}$.
+\bt{9} $\displaystyle\lim_{x\to4}\frac{x^2-2x-8}{x-4}$.
+\bt{10} $\displaystyle\lim_{x\to-2}\frac{x^3+8}{x+2}$.
+\bt{11} $\displaystyle\lim_{x\to1}\frac{x^7-1}{x^3-1}$.
+\bt{12} $\displaystyle\lim_{x\to4}\frac{\sqrt x-2}{x-4}$.
+\bt{13} $\displaystyle\lim_{x\to\pi/4}\frac{\sin x-\cos x}{\tan x-1}$.
+\bt{14} $\displaystyle\lim_{x\to0}\frac{\tan3x}{\sin2x}$.
+\bt{15} $\displaystyle\lim_{t\to0}\frac{e^{2t}-1}{\sin t}$.
+\bt{16} $\displaystyle\lim_{x\to0}\frac{x^2}{1-\cos x}$.
+\bt{17} $\displaystyle\lim_{x\to1}\frac{\sin(x-1)}{x^3+x-2}$.
+\bt{18} $\displaystyle\lim_{\theta\to\pi}\frac{1+\cos\theta}{1-\cos\theta}$.
+\bt{19} $\displaystyle\lim_{x\to\infty}\frac{\sqrt x}{1+e^x}$.
+\bt{20} $\displaystyle\lim_{x\to\infty}\frac{x+x^2}{1-2x^2}$.
+\bt{21} $\displaystyle\lim_{x\to0^+}\frac{\ln x}{x}$.
+\bt{22} $\displaystyle\lim_{x\to\infty}\frac{\ln\sqrt x}{x^2}$.
+\bt{23} $\displaystyle\lim_{x\to3}\frac{\ln(x/3)}{3-x}$.
+\bt{24} $\displaystyle\lim_{t\to0}\frac{8^t-5^t}{t}$.
+\bt{25} $\displaystyle\lim_{x\to0}\frac{\sqrt{1+2x}-\sqrt{1-4x}}{x}$.
+\bt{26} $\displaystyle\lim_{t\to\infty}\frac{e^{t/10}}{t^3}$.
+\bt{27} $\displaystyle\lim_{x\to0}\frac{e^x+e^{-x}-2}{e^x-x-1}$.
+\bt{28} $\displaystyle\lim_{x\to0}\frac{\sinh x-x}{x^3}$.
+\bt{29} $\displaystyle\lim_{x\to0}\frac{\tanh x}{\tan x}$.
+\bt{30} $\displaystyle\lim_{x\to0}\frac{x-\sin x}{x-\tan x}$.
+\bt{31} $\displaystyle\lim_{x\to0}\frac{\arcsin x}{x}$.
+\bt{32} $\displaystyle\lim_{x\to\infty}\frac{(\ln x)^2}{x}$.
+\bt{33} $\displaystyle\lim_{x\to0}\frac{x3^x}{3^x-1}$.
+\bt{34} $\displaystyle\lim_{x\to0}\frac{e^x+e^{-x}-2\cos x}{x\sin x}$.
+\bt{35} $\displaystyle\lim_{x\to0}\frac{\ln(1+x)}{\cos x+e^x-1}$.
+\bt{36} $\displaystyle\lim_{x\to1}\frac{x\sin(x-1)}{2x^2-x-1}$.
+\bt{37} $\displaystyle\lim_{x\to0^+}\frac{\arctan2x}{\ln x}$.
+\bt{38} $\displaystyle\lim_{x\to0}\frac{x^2\sin x}{\sin x-x}$.
+\bt{39} $\displaystyle\lim_{x\to1}\frac{x^a-1}{x^b-1},\quad b\ne0$.
+\bt{40} $\displaystyle\lim_{x\to\infty}\frac{e^{-x}}{\pi/2-\arctan x}$.
+\bt{41} $\displaystyle\lim_{x\to0}\frac{\cos x-1+\frac12x^2}{x^4}$.
+\bt{42} $\displaystyle\lim_{x\to0}\frac{x-\sin x}{x\sin(x^2)}$.
+\bt{43} $\displaystyle\lim_{x\to\infty}x\sin(\pi/x)$.
+\bt{44} $\displaystyle\lim_{x\to\infty}\sqrt x\,e^{-x/2}$.
+\bt{45} $\displaystyle\lim_{x\to0}\sin5x\,\csc3x$.
+\bt{46} $\displaystyle\lim_{x\to-\infty}x\ln\left(1-\frac1x\right)$.
+\bt{47} $\displaystyle\lim_{x\to\infty}x^3e^{-x^2}$.
+\bt{48} $\displaystyle\lim_{x\to\infty}x^{3/2}\sin(1/x)$.
+\bt{49} $\displaystyle\lim_{x\to1^+}\ln x\tan(\pi x/2)$.
+\bt{50} $\displaystyle\lim_{x\to(\pi/2)^-}\cos x\sec5x$.
+\bt{51} $\displaystyle\lim_{x\to1}\left(\frac{x}{x-1}-\frac1{\ln x}\right)$.
+\bt{52} $\displaystyle\lim_{x\to0}(\csc x-\cot x)$.
+\bt{53} $\displaystyle\lim_{x\to0^+}\left(\frac1x-\frac1{e^x-1}\right)$.
+\bt{54} $\displaystyle\lim_{x\to0^+}\left(\frac1x-\frac1{\arctan x}\right)$.
+\bt{55} $\displaystyle\lim_{x\to0^+}\left(\frac1x-\frac1{\tan x}\right)$.
+\bt{56} $\displaystyle\lim_{x\to\infty}(x-\ln x)$.
+\bt{57} $\displaystyle\lim_{x\to0^+}x^{\sqrt x}$.
+\bt{58} $\displaystyle\lim_{x\to0^+}(\tan2x)^x$.
+\bt{59} $\displaystyle\lim_{x\to0}(1-2x)^{1/x}$.
+\bt{60} $\displaystyle\lim_{x\to\infty}\left(1+\frac ax\right)^{bx}$.
+\bt{61} $\displaystyle\lim_{x\to1^+}x^{1/(1-x)}$.
+\bt{62} $\displaystyle\lim_{x\to\infty}(e^x+10x)^{1/x}$.
+\bt{63} $\displaystyle\lim_{x\to\infty}x^{1/x}$.
+\bt{64} $\displaystyle\lim_{x\to\infty}x^{e^{-x}}$.
+\bt{65} $\displaystyle\lim_{x\to0^+}(4x+1)^{\cot x}$.
+\bt{66} $\displaystyle\lim_{x\to0^+}(1-\cos x)^{\sin x}$.
+\bt{67} $\displaystyle\lim_{x\to0^+}(1+\sin3x)^{1/x}$.
+\bt{68} $\displaystyle\lim_{x\to0}(\cos x)^{1/x^2}$.
+\bt{69} $\displaystyle\lim_{x\to0^+}\frac{x^x-1}{\ln x+x-1}$.
+\bt{70} $\displaystyle\lim_{x\to\infty}\left(\frac{2x-3}{2x+5}\right)^{2x+1}$.
+\Needspace{8\baselineskip}
+\group{71–72} Dùng đồ thị để ước lượng giá trị giới hạn. Sau đó dùng quy tắc l’Hospital để tìm giá trị chính xác.
+\bt{71} $\displaystyle\lim_{x\to\infty}\left(1+\frac2x\right)^x$.
+\bt{72} $\displaystyle\lim_{x\to0}\frac{5^x-4^x}{3^x-2^x}$.
+\Needspace{8\baselineskip}
+\group{73–74} Minh họa quy tắc l’Hospital bằng cách vẽ đồ thị $f(x)/g(x)$ và $f'(x)/g'(x)$ ở gần $x=0$ để thấy các tỉ số có cùng giới hạn khi $x\to0$. Đồng thời, tính chính xác giới hạn.
+\bt{73} $f(x)=e^x-1,\quad g(x)=x^3+4x$.
+\bt{74} $f(x)=2x\sin x,\quad g(x)=\sec x-1$.
+\bt{75} Chứng minh
+\[\lim_{x\to\infty}\frac{e^x}{x^n}=\infty\]
+với mọi số nguyên dương $n$. Điều này cho thấy hàm mũ tiến tới vô cực nhanh hơn mọi lũy thừa của $x$.
+\bt{76} Chứng minh
+\[\lim_{x\to\infty}\frac{\ln x}{x^p}=0\]
+với mọi $p>0$. Điều này cho thấy hàm logarit tiến tới vô cực chậm hơn mọi lũy thừa dương của $x$.
+\Needspace{8\baselineskip}
+\group{77–78} Điều gì xảy ra nếu dùng quy tắc l’Hospital để tìm giới hạn? Hãy tính bằng phương pháp khác.
+\bt{77} $\displaystyle\lim_{x\to\infty}\frac{x}{\sqrt{x^2+1}}$.
+\bt{78} $\displaystyle\lim_{x\to(\pi/2)^-}\frac{\sec x}{\tan x}$.
+\bt{79} Khảo sát họ đường cong $f(x)=e^x-cx$. Đặc biệt, tìm các giới hạn khi $x\to\pm\infty$ và xác định các giá trị $c$ để $f$ có giá trị nhỏ nhất tuyệt đối. Điều gì xảy ra với các điểm đạt giá trị nhỏ nhất khi $c$ tăng?
+\bt{80} Nếu một vật khối lượng $m$ được thả rơi từ trạng thái nghỉ, một mô hình tốc độ của nó sau $t$ giây, có tính đến sức cản không khí, là
+\[v=\frac{mg}{c}\left(1-e^{-ct/m}\right),\]
+trong đó $g$ là gia tốc trọng trường, $c$ là hằng số dương. (Ở Chương 9, ta sẽ suy ra phương trình từ giả thiết sức cản không khí tỉ lệ với tốc độ của vật; $c$ là hệ số tỉ lệ.)
+
+(a) Tính $\lim_{t\to\infty}v$. Giới hạn này có ý nghĩa gì?
+
+(b) Với $t$ cố định, dùng quy tắc l’Hospital để tính $\lim_{c\to0^+}v$. Có thể kết luận gì về tốc độ của một vật rơi trong chân không?
+\bt{81} Nếu số tiền ban đầu $A_0$ được đầu tư với lãi suất $r$ và ghép lãi $n$ lần mỗi năm, thì giá trị đầu tư sau $t$ năm là
+\[A=A_0\left(1+\frac rn\right)^{nt}.\]
+Khi cho $n\to\infty$, ta gọi là \textit{ghép lãi liên tục}. Dùng quy tắc l’Hospital để chứng minh khi ghép lãi liên tục, số tiền sau $t$ năm là
+\[A=A_0e^{rt}.\]
+\bt{82} Ánh sáng đi qua đồng tử vào mắt và tới võng mạc, nơi các tế bào thụ cảm ánh sáng cảm nhận ánh sáng và màu sắc. W. Stanley Stiles và B. H. Crawford nghiên cứu hiện tượng độ sáng cảm nhận giảm khi ánh sáng đi vào xa tâm đồng tử hơn (xem hình).
+\fig[.56]{ex82}{Hình cho Bài tập 82. Chùm sáng $A$ đi qua tâm đồng tử được cảm nhận sáng hơn chùm $B$ đi vào gần mép đồng tử.}
+Họ trình bày chi tiết phát hiện về hiện tượng này, gọi là \textit{hiệu ứng Stiles–Crawford loại thứ nhất}, trong một bài báo quan trọng năm 1933. Đặc biệt, họ quan sát thấy lượng độ sáng cảm nhận không tỉ lệ với diện tích đồng tử như dự kiến. Tỉ lệ $P$ của tổng độ sáng đi vào đồng tử bán kính $r$ mm được võng mạc cảm nhận có thể mô tả bởi
+\[P=\frac{1-10^{-\rho r^2}}{\rho r^2\ln10},\]
+trong đó $\rho$ là hằng số xác định bằng thực nghiệm, thường khoảng $0{,}05$.
+
+(a) Tỉ lệ phần trăm độ sáng được đồng tử bán kính 3 mm cảm nhận là bao nhiêu? Dùng $\rho=0{,}05$.
+
+(b) Tính tỉ lệ phần trăm với đồng tử bán kính 2 mm. Việc kết quả lớn hơn phần (a) có hợp lý không?
+
+(c) Tính $\lim_{r\to0^+}P$. Kết quả có như dự kiến không? Kết quả này có khả thi về mặt vật lý không?
+
+\noindent\textit{Nguồn:} Phỏng theo W. Stiles và B. Crawford, “The Luminous Efficiency of Rays Entering the Eye Pupil at Different Points”, \textit{Proceedings of the Royal Society of London, Series B: Biological Sciences} 112 (1933): 428–50.
+\bt{83} \textbf{Phương trình logistic.} Một số quần thể ban đầu tăng theo hàm mũ nhưng cuối cùng ổn định. Các phương trình dạng
+\[P(t)=\frac{M}{1+Ae^{-kt}},\]
+trong đó $M,A,k$ là các hằng số dương, được gọi là \textit{phương trình logistic} và thường dùng để mô hình hóa các quần thể như vậy. (Ta sẽ khảo sát chi tiết ở Chương 9.) Ở đây, $M$ là \textit{sức chứa của môi trường}, biểu diễn quy mô quần thể lớn nhất có thể duy trì, và
+\[A=\frac{M-P_0}{P_0},\]
+với $P_0$ là số lượng ban đầu.
+
+(a) Tính $\lim_{t\to\infty}P(t)$. Giải thích vì sao kết quả là điều dự kiến.
+
+(b) Tính $\lim_{M\to\infty}P(t)$. (Chú ý $A$ được xác định theo $M$.) Kết quả là loại hàm nào?
+\bt{84} Một cáp kim loại có bán kính $r$, được bọc cách điện sao cho khoảng cách từ tâm cáp đến mặt ngoài lớp cách điện là $R$. Vận tốc $v$ của một xung điện trong cáp là
+\[v=-c\left(\frac rR\right)^2\ln\left(\frac rR\right),\]
+trong đó $c$ là hằng số dương. Tìm các giới hạn sau và giải thích kết quả.
+
+(a) $\displaystyle\lim_{R\to r^+}v$; \qquad(b) $\displaystyle\lim_{r\to0^+}v$.
+\bt{85} Quy tắc l’Hospital xuất hiện lần đầu trên ấn phẩm trong cuốn \textit{Analyse des infiniment petits}, được Hầu tước de l’Hospital xuất bản năm 1696. Đây là giáo trình vi tích phân đầu tiên từng được xuất bản. Ví dụ Hầu tước dùng để minh họa quy tắc là tìm giới hạn của hàm
+\[y=\frac{\sqrt{2a^3x-x^4}-a\sqrt[3]{aax}}{a-\sqrt[4]{ax^3}}\]
+khi $x$ tiến tới $a$, với $a>0$. (Thời ấy thường viết $aa$ thay cho $a^2$.) Hãy giải bài toán này.
+\par\noindent\begin{minipage}{\linewidth}
+\bt{86} Hình vẽ biểu diễn một hình quạt tròn có góc ở tâm $\theta$. Gọi $A(\theta)$ là diện tích hình viên phân nằm giữa dây $PR$ và cung $PR$. Gọi $B(\theta)$ là diện tích tam giác $PQR$. Tìm $\displaystyle\lim_{\theta\to0^+}\frac{A(\theta)}{B(\theta)}$.
+\fig[.32]{ex86}{Hình cho Bài tập 86.}
+\end{minipage}\par
+\bt{87} Tính $\displaystyle\lim_{x\to\infty}\left[x-x^2\ln\left(\frac{1+x}{x}\right)\right]$.
+\bt{88} Giả sử $f$ là hàm dương. Nếu $\lim_{x\to a}f(x)=0$ và $\lim_{x\to a}g(x)=\infty$, chứng minh
+\[\lim_{x\to a}[f(x)]^{g(x)}=0.\]
+Điều này cho thấy $0^\infty$ không phải dạng vô định.
+\bt{89} Tìm các hàm $f,g$ sao cho $\lim_{x\to0}f(x)=\lim_{x\to0}g(x)=\infty$ và:
+
+(a) $\displaystyle\lim_{x\to0}\frac{f(x)}{g(x)}=7$; \qquad(b) $\displaystyle\lim_{x\to0}[f(x)-g(x)]=7$.
+\bt{90} Với những giá trị nào của $a,b$, đẳng thức sau đúng?
+\[\lim_{x\to0}\left(\frac{\sin2x}{x^3}+a+\frac b{x^2}\right)=0.\]
+\bt{91} Cho
+\[f(x)=\begin{cases}e^{-1/x^2}&\text{khi }x\ne0,\\0&\text{khi }x=0.\end{cases}\]
+(a) Dùng định nghĩa đạo hàm để tính $f'(0)$.
+
+(b) Chứng minh $f$ có các đạo hàm mọi cấp xác định trên $\mathbb R$. [\textit{Gợi ý:} Trước hết, dùng quy nạp chứng minh tồn tại đa thức $p_n(x)$ và số nguyên không âm $k_n$ sao cho $f^{(n)}(x)=p_n(x)f(x)/x^{k_n}$ với $x\ne0$.]
+\bt{92} Cho
+\[f(x)=\begin{cases}|x|^x&\text{khi }x\ne0,\\1&\text{khi }x=0.\end{cases}\]
+(a) Chứng minh $f$ liên tục tại 0.
+
+(b) Dùng đồ thị để khảo sát $f$ có khả vi tại 0 không, bằng cách phóng to nhiều lần về phía $(0,1)$ trên đồ thị.
+
+(c) Chứng minh $f$ không khả vi tại 0. Giải thích sự khác nhau giữa sự kiện này và hình ảnh các đồ thị ở (b).
+
+\clearpage
+\section*{Dự án viết — Nguồn gốc quy tắc l’Hospital}
+Quy tắc l’Hospital được công bố lần đầu năm 1696 trong giáo trình vi tích phân \textit{Analyse des infiniment petits} của Hầu tước de l’Hospital, nhưng được nhà toán học Thụy Sĩ John (Johann) Bernoulli phát hiện năm 1694. Lý do là hai nhà toán học có một thỏa thuận kinh doanh đặc biệt, theo đó Hầu tước de l’Hospital mua quyền đối với các phát minh toán học của Bernoulli. Có thể tìm các chi tiết, gồm bản dịch bức thư l’Hospital gửi Bernoulli đề xuất thỏa thuận, trong sách của Eves [1].
+
+Hãy viết một bài luận về nguồn gốc lịch sử và toán học của quy tắc l’Hospital. Trước hết, trình bày tiểu sử ngắn của hai người (bộ từ điển do Gillispie biên tập [2] là nguồn tốt), rồi phác thảo thỏa thuận kinh doanh giữa họ. Sau đó trình bày phát biểu quy tắc của l’Hospital, có trong tuyển tập tư liệu của Struik [4], và ngắn gọn hơn trong sách Katz [3]. Chú ý l’Hospital và Bernoulli phát biểu quy tắc theo hình học và đưa kết quả dưới dạng vi phân. So sánh phát biểu ấy với phiên bản quy tắc ở §4.4 và chứng minh hai phát biểu về cơ bản là tương đương.
+\fig[.29]{project_book}{Trang nhan đề cuốn Analyse des infiniment petits. Nguồn ảnh: Thomas Fisher Rare Book Library.}
+\begin{enumerate}
+\item Howard W. Eves, \textit{Mathematical Circles: Volume 1} (Washington, D.C.: Mathematical Association of America, 2003). Xuất bản lần đầu năm 1969 dưới tên \textit{In Mathematical Circles (Volume 2: Quadrants III and IV)}, bởi Prindle Weber and Schmidt.
+\item C. C. Gillispie, chủ biên, \textit{Dictionary of Scientific Biography}, 8 tập (New York: Scribner, 1981). Xem bài về Johann Bernoulli của E. A. Fellmann và J. O. Fleckstein ở Tập II, và bài về Hầu tước de l’Hospital của Abraham Robinson ở Tập III.
+\item Victor J. Katz, \textit{A History of Mathematics: An Introduction}, ấn bản thứ 3 (New York: Pearson, 2018).
+\item Dirk Jan Stuik, chủ biên, \textit{A Source Book in Mathematics, 1200–1800} (1969; tái bản, Princeton, NJ: Princeton University Press, 2016).
+\end{enumerate}
+Internet cũng là nguồn thông tin cho dự án này. Tại www.StewartCalculus.com, chọn \textit{History of Mathematics} để xem danh sách các trang web đáng tin cậy.
+\end{document}

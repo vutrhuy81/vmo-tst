@@ -1,0 +1,324 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage{fontspec}\setmainfont{Latin Modern Roman}\setsansfont{DejaVu Sans}
+\usepackage{amsmath,amssymb,graphicx,geometry,enumitem,needspace,longtable,booktabs,fancyhdr,hyperref}
+\geometry{left=28mm,right=23mm,top=24mm,bottom=24mm}
+\hypersetup{unicode=true,colorlinks=true,linkcolor=black,urlcolor=blue,pdftitle={Giải tích Chương 3 Mục 3.10 Xấp xỉ tuyến tính và vi phân}}
+\setlength{\parindent}{1.2em}\setlength{\parskip}{4pt}\setlength{\headheight}{16pt}
+\pagestyle{fancy}\fancyhf{}\fancyhead[L]{\small Chương 3. Các quy tắc tính đạo hàm}\fancyhead[R]{\small §3.10}\fancyfoot[C]{\thepage}
+\newcommand{\fig}[3][.68]{\begin{center}\begin{minipage}{\linewidth}\centering\includegraphics[width=#1\linewidth]{assets/#2.png}\\{\small #3}\end{minipage}\end{center}}
+\newcommand{\ex}[1]{\par\medskip\noindent\textbf{Ví dụ #1.}\ }
+\newcommand{\sol}{\par\nopagebreak[4]\noindent\textit{Lời giải.}\ }
+\newcommand{\bt}[1]{\par\smallskip\Needspace{5\baselineskip}\noindent\textbf{#1.}\ }
+\newcommand{\group}[1]{\par\medskip\noindent\textbf{#1}\par\nopagebreak[4]}
+\newcommand{\gint}[1]{\left[\!\left[#1\right]\!\right]}
+\allowdisplaybreaks[2]
+\begin{document}
+\begin{center}{\Large\bfseries 3.10 Xấp xỉ tuyến tính và vi phân}\end{center}
+\noindent\textit{Stewart–Clegg–Watson, Giải tích: Các hàm siêu việt sớm, ấn bản 9; trang in 254–261 (kể cả dự án khám phá).}
+
+Ta đã thấy rằng ở gần tiếp điểm, một đường cong nằm rất gần tiếp tuyến của nó. Thật vậy, khi phóng to lân cận một điểm trên đồ thị của hàm khả vi, ta nhận thấy đồ thị ngày càng giống tiếp tuyến (xem Hình 2.7.2). Nhận xét này là cơ sở của một phương pháp tính giá trị gần đúng của hàm số.
+
+\section*{Tuyến tính hóa và xấp xỉ}
+Việc tính giá trị $f(a)$ của một hàm có thể dễ dàng, nhưng tính các giá trị của $f$ ở gần đó lại khó, thậm chí không thể thực hiện được. Vì thế, ta dùng các giá trị dễ tính của hàm tuyến tính $L$ có đồ thị là tiếp tuyến của $f$ tại $(a,f(a))$ (Hình 1).
+\fig[.40]{fig1}{Hình 1. Đường cong và tiếp tuyến tại $(a,f(a))$.}
+Nói cách khác, khi $x$ gần $a$, ta dùng tiếp tuyến tại $(a,f(a))$ để xấp xỉ đường cong $y=f(x)$. Phương trình tiếp tuyến này là
+\[y=f(a)+f'(a)(x-a).\]
+Hàm tuyến tính có đồ thị là tiếp tuyến đó, tức là
+\[\boxed{L(x)=f(a)+f'(a)(x-a)},\tag{1}\]
+được gọi là \textbf{hàm tuyến tính hóa của $f$ tại $a$}. Phép xấp xỉ $f(x)\approx L(x)$, hay
+\[\boxed{f(x)\approx f(a)+f'(a)(x-a)},\tag{2}\]
+được gọi là \textbf{xấp xỉ tuyến tính}, hay \textbf{xấp xỉ bằng tiếp tuyến}, của $f$ tại $a$.
+
+\ex{1} Tìm hàm tuyến tính hóa của $f(x)=\sqrt{x+3}$ tại $a=1$ và dùng nó để tính gần đúng $\sqrt{3.98}$ và $\sqrt{4.05}$. Các giá trị gần đúng này lớn hơn hay nhỏ hơn giá trị đúng?
+\sol Đạo hàm của $f(x)=(x+3)^{1/2}$ là
+\[f'(x)=\frac12(x+3)^{-1/2}=\frac{1}{2\sqrt{x+3}}.\]
+Do đó $f(1)=2$, $f'(1)=\tfrac14$. Thay vào (1), ta được hàm tuyến tính hóa
+\[L(x)=f(1)+f'(1)(x-1)=2+\frac14(x-1)=\frac74+\frac x4.\]
+Xấp xỉ tuyến tính tương ứng (2) là
+\[\sqrt{x+3}\approx\frac74+\frac x4\qquad\text{(khi $x$ gần $1$)}.\]
+Đặc biệt,
+\[\sqrt{3.98}\approx\frac74+\frac{0.98}{4}=1.995,\qquad
+\sqrt{4.05}\approx\frac74+\frac{1.05}{4}=2.0125.\]
+\fig[.43]{fig2}{Hình 2. Xấp xỉ tuyến tính của $\sqrt{x+3}$ tại $x=1$.}
+Hình 2 minh họa phép xấp xỉ này. Khi $x$ gần $1$, xấp xỉ bằng tiếp tuyến quả thực cho giá trị gần đúng tốt. Các giá trị gần đúng đều lớn hơn giá trị đúng, vì tiếp tuyến nằm phía trên đường cong.
+
+Dĩ nhiên, máy tính có thể cho các giá trị gần đúng của $\sqrt{3.98}$ và $\sqrt{4.05}$, nhưng xấp xỉ tuyến tính cho một phép xấp xỉ trên \textit{cả một khoảng}.
+
+Bảng sau so sánh các ước lượng từ xấp xỉ tuyến tính trong Ví dụ 1 với các giá trị đúng. Từ bảng và Hình 2, ta thấy xấp xỉ bằng tiếp tuyến cho ước lượng tốt khi $x$ gần $1$, nhưng độ chính xác giảm khi $x$ xa $1$ hơn.
+\begin{center}
+\begin{tabular}{cccc}
+\toprule
+Số cần xấp xỉ & $x$ & Giá trị từ $L(x)$ & Giá trị đúng\\
+\midrule
+$\sqrt{3.9}$ & $0.9$ & $1.975$ & $1.97484176\ldots$\\
+$\sqrt{3.98}$ & $0.98$ & $1.995$ & $1.99499373\ldots$\\
+$\sqrt4$ & $1$ & $2$ & $2.00000000\ldots$\\
+$\sqrt{4.05}$ & $1.05$ & $2.0125$ & $2.01246117\ldots$\\
+$\sqrt{4.1}$ & $1.1$ & $2.025$ & $2.02484567\ldots$\\
+$\sqrt5$ & $2$ & $2.25$ & $2.23606797\ldots$\\
+$\sqrt6$ & $3$ & $2.5$ & $2.44948974\ldots$\\
+\bottomrule
+\end{tabular}
+\end{center}
+Phép xấp xỉ trong Ví dụ 1 tốt đến mức nào? Ví dụ tiếp theo cho thấy máy tính đồ thị hoặc máy tính có thể giúp xác định một khoảng mà trên đó xấp xỉ tuyến tính đạt độ chính xác cho trước.
+
+\Needspace{14\baselineskip}
+\ex{2} Với những giá trị nào của $x$, xấp xỉ tuyến tính
+\[\sqrt{x+3}\approx\frac74+\frac x4\]
+có sai số nhỏ hơn $0.5$? Nếu yêu cầu sai số nhỏ hơn $0.1$ thì sao?
+\sol Sai số nhỏ hơn $0.5$ có nghĩa hai hàm phải khác nhau ít hơn $0.5$:
+\[\left|\sqrt{x+3}-\left(\frac74+\frac x4\right)\right|<0.5.\]
+Tương đương,
+\[\sqrt{x+3}-0.5<\frac74+\frac x4<\sqrt{x+3}+0.5.\]
+Như vậy, đường thẳng xấp xỉ phải nằm giữa hai đường cong thu được bằng cách tịnh tiến $y=\sqrt{x+3}$ lên và xuống một đoạn $0.5$. Hình 3 cho thấy tiếp tuyến $y=(7+x)/4$ cắt đường cong phía trên $y=\sqrt{x+3}+0.5$ tại $P,Q$. Ước lượng hoành độ của $P$ vào khoảng $-2.66$, của $Q$ vào khoảng $8.66$.
+\fig[.43]{fig3}{Hình 3. Xác định khoảng có sai số nhỏ hơn $0.5$.}
+Do đó, từ đồ thị, phép xấp xỉ
+\[\sqrt{x+3}\approx\frac74+\frac x4\]
+có sai số nhỏ hơn $0.5$ khi $-2.6<x<8.6$. Ta đã làm tròn cận nhỏ lên và cận lớn xuống.
+
+Tương tự, từ Hình 4, phép xấp xỉ có sai số nhỏ hơn $0.1$ khi $-1.1<x<3.9$.
+\fig[.43]{fig4}{Hình 4. Xác định khoảng có sai số nhỏ hơn $0.1$.}
+
+\section*{Ứng dụng trong vật lý}
+Xấp xỉ tuyến tính thường được dùng trong vật lý. Khi phân tích các hệ quả của một phương trình, nhà vật lý đôi khi cần đơn giản hóa một hàm bằng cách thay nó bằng hàm tuyến tính hóa. Chẳng hạn, khi suy ra công thức chu kỳ con lắc, sách vật lý thu được một biểu thức chứa $\sin\theta$, rồi thay $\sin\theta$ bằng $\theta$ với nhận xét rằng hai giá trị rất gần nhau nếu $\theta$ không quá lớn. Có thể kiểm tra hàm tuyến tính hóa của $f(x)=\sin x$ tại $a=0$ là $L(x)=x$. Vì vậy, xấp xỉ tuyến tính tại $0$ là
+\[\sin x\approx x\]
+(xem Bài tập 50). Như vậy, việc suy ra công thức chu kỳ con lắc thực chất sử dụng xấp xỉ bằng tiếp tuyến của hàm sin.
+
+Một ví dụ khác xuất hiện trong quang học: những tia sáng tạo góc nhỏ với quang trục được gọi là \textit{tia cận trục}. Trong quang học cận trục (hay quang học Gauss), cả $\sin\theta$ và $\cos\theta$ đều được thay bằng hàm tuyến tính hóa. Nói cách khác, ta sử dụng
+\[\sin\theta\approx\theta,\qquad\cos\theta\approx1,\]
+vì $\theta$ gần $0$. Kết quả tính toán dựa trên các xấp xỉ này đã trở thành công cụ lý thuyết cơ bản để thiết kế thấu kính. Xem Eugene Hecht, \textit{Optics}, ấn bản 5 (Boston, 2017), tr. 164.
+
+Trong Mục 11.11, ta sẽ trình bày thêm những ứng dụng của xấp xỉ tuyến tính trong vật lý và kỹ thuật.
+
+\section*{Vi phân}
+Các ý tưởng của xấp xỉ tuyến tính đôi khi được trình bày bằng thuật ngữ và ký hiệu vi phân. Nếu $y=f(x)$, với $f$ khả vi, thì \textbf{vi phân $dx$} là một biến độc lập: ta có thể gán cho $dx$ giá trị là một số thực bất kỳ. Khi đó, \textbf{vi phân $dy$} được định nghĩa theo $dx$ bởi
+\[\boxed{dy=f'(x)\,dx}.\tag{3}\]
+Vì thế, $dy$ là biến phụ thuộc; nó phụ thuộc vào $x$ và $dx$. Khi $dx$ có một giá trị cụ thể và $x$ là một số cụ thể thuộc miền xác định của $f$, giá trị số của $dy$ được xác định.
+
+\noindent\textit{Lưu ý.} Nếu $dx\ne0$, chia hai vế (3) cho $dx$ ta được
+\[\frac{dy}{dx}=f'(x).\]
+Ta đã gặp những phương trình tương tự, nhưng bây giờ vế trái có thể được hiểu thực sự là một tỉ số của hai vi phân.
+
+Ý nghĩa hình học của vi phân được minh họa trong Hình 5. Gọi $P(x,f(x))$, $Q(x+\Delta x,f(x+\Delta x))$ là hai điểm trên đồ thị của $f$, và đặt $dx=\Delta x$. Số gia tương ứng của $y$ là
+\[\Delta y=f(x+\Delta x)-f(x).\]
+Hệ số góc của tiếp tuyến $PR$ là $f'(x)$. Vì vậy, độ dài có hướng từ $S$ đến $R$ là $f'(x)\,dx=dy$. Do đó, $dy$ biểu thị độ tăng hoặc giảm của tiếp tuyến (sự thay đổi của hàm tuyến tính hóa), trong khi $\Delta y$ biểu thị độ tăng hoặc giảm của đường cong $y=f(x)$ khi $x$ thay đổi một lượng $dx$.
+\fig[.60]{fig5}{Hình 5. Ý nghĩa hình học của $dx$, $dy$ và $\Delta y$.}
+
+\ex{3} So sánh $\Delta y$ và $dy$ nếu $y=f(x)=x^3+x^2-2x+1$ và $x$ thay đổi (a) từ $2$ đến $2.05$; (b) từ $2$ đến $2.01$.
+\sol (a) Ta có
+\begin{align*}
+f(2)&=2^3+2^2-2(2)+1=9,\\
+f(2.05)&=(2.05)^3+(2.05)^2-2(2.05)+1=9.717625,\\
+\Delta y&=f(2.05)-f(2)=0.717625.
+\end{align*}
+Tổng quát,
+\[dy=f'(x)\,dx=(3x^2+2x-2)\,dx.\]
+Khi $x=2$ và $dx=\Delta x=0.05$, ta được
+\[dy=[3(2)^2+2(2)-2]0.05=0.7.\]
+(b) Ta có
+\begin{align*}
+f(2.01)&=(2.01)^3+(2.01)^2-2(2.01)+1=9.140701,\\
+\Delta y&=f(2.01)-f(2)=0.140701.
+\end{align*}
+Khi $dx=\Delta x=0.01$,
+\[dy=[3(2)^2+2(2)-2]0.01=0.14.\]
+\fig[.36]{fig6}{Hình 6. Hàm số trong Ví dụ 3; so sánh $dy$ và $\Delta y$ tại $a=2$. Khung nhìn: $[1.8,2.5]\times[6,18]$.}
+Trong Ví dụ 3, xấp xỉ $\Delta y\approx dy$ tốt hơn khi $\Delta x$ nhỏ hơn. Cũng cần lưu ý rằng tính $dy$ dễ hơn tính $\Delta y$.
+
+Với ký hiệu vi phân, xấp xỉ tuyến tính $f(x)\approx f(a)+f'(a)(x-a)$ có thể viết thành
+\[f(a+dx)\approx f(a)+dy,\]
+bằng cách đặt $dx=x-a$, do đó $x=a+dx$. Chẳng hạn, với $f(x)=\sqrt{x+3}$ trong Ví dụ 1,
+\[dy=f'(x)\,dx=\frac{dx}{2\sqrt{x+3}}.\]
+Nếu $a=1$ và $dx=\Delta x=0.05$ thì
+\[dy=\frac{0.05}{2\sqrt{1+3}}=0.0125,\]
+và
+\[\sqrt{4.05}=f(1.05)=f(1+0.05)\approx f(1)+dy=2.0125,\]
+đúng như kết quả trong Ví dụ 1.
+
+Ví dụ cuối minh họa việc dùng vi phân để ước lượng sai số do đo đạc gần đúng.
+
+\ex{4} Bán kính của một hình cầu được đo là $21\,\mathrm{cm}$, với sai số đo có thể có không quá $0.05\,\mathrm{cm}$. Sai số lớn nhất khi dùng bán kính này để tính thể tích hình cầu là bao nhiêu?
+\sol Nếu bán kính hình cầu là $r$ thì thể tích $V=\tfrac43\pi r^3$. Gọi sai số đo bán kính là $dr=\Delta r$. Sai số tương ứng trong thể tích tính được là $\Delta V$, có thể xấp xỉ bằng vi phân
+\[dV=4\pi r^2\,dr.\]
+Khi $r=21$, $dr=0.05$,
+\[dV=4\pi(21)^2(0.05)\approx277.\]
+Sai số lớn nhất trong thể tích tính được vào khoảng $277\,\mathrm{cm^3}$.
+
+\noindent\textbf{Chú ý.} Mặc dù sai số có thể có trong Ví dụ 4 trông khá lớn, \textbf{sai số tương đối} cho cái nhìn rõ hơn; nó được tính bằng cách chia sai số cho toàn bộ thể tích:
+\[\frac{\Delta V}{V}\approx\frac{dV}{V}
+=\frac{4\pi r^2\,dr}{\frac43\pi r^3}=3\frac{dr}{r}.\]
+Vậy sai số tương đối của thể tích xấp xỉ bằng ba lần sai số tương đối của bán kính. Trong Ví dụ 4, sai số tương đối của bán kính xấp xỉ $dr/r=0.05/21\approx0.0024$, tạo ra sai số tương đối của thể tích vào khoảng $0.007$. Cũng có thể biểu diễn dưới dạng \textbf{sai số phần trăm}: $0.24\%$ đối với bán kính và $0.7\%$ đối với thể tích.
+
+\clearpage
+\section*{3.10. Bài tập}
+\Needspace{8\baselineskip}
+\group{1–4} Tìm hàm tuyến tính hóa $L(x)$ của hàm số tại $a$.
+\bt{1} $f(x)=x^3-x^2+3$, \quad $a=-2$.
+\bt{2} $f(x)=e^{3x}$, \quad $a=0$.
+\bt{3} $f(x)=\sqrt[3]{x}$, \quad $a=8$.
+\bt{4} $f(x)=\cos2x$, \quad $a=\pi/6$.
+
+\bt{5} \textit{[Cần công cụ vẽ đồ thị.]} Tìm xấp xỉ tuyến tính của $f(x)=\sqrt{1-x}$ tại $a=0$ và dùng nó để tính gần đúng $\sqrt{0.9}$, $\sqrt{0.99}$. Minh họa bằng đồ thị của $f$ và tiếp tuyến.
+
+\bt{6} \textit{[Cần công cụ vẽ đồ thị.]} Tìm xấp xỉ tuyến tính của $g(x)=\sqrt[3]{1+x}$ tại $a=0$ và dùng nó để tính gần đúng $\sqrt[3]{0.95}$, $\sqrt[3]{1.1}$. Minh họa bằng đồ thị của $g$ và tiếp tuyến.
+
+\group{7–10} \textit{[Cần công cụ vẽ đồ thị.]} Kiểm tra xấp xỉ tuyến tính đã cho tại $a=0$. Sau đó xác định các giá trị $x$ để phép xấp xỉ có sai số nhỏ hơn $0.1$.
+\bt{7} $\tan^{-1}x\approx x$.
+\bt{8} $(1+x)^{-3}\approx1-3x$.
+\bt{9} $\sqrt[4]{1+2x}\approx1+\tfrac12x$.
+\bt{10} $\displaystyle\frac{2}{1+e^x}\approx1-\tfrac12x$.
+
+\group{11–18} Tìm vi phân của hàm số.
+\bt{11} $y=e^{5x}$.
+\bt{12} $y=\sqrt{1-t^4}$.
+\bt{13} $\displaystyle y=\frac{1+2u}{1+3u}$.
+\bt{14} $y=\theta^2\sin2\theta$.
+\bt{15} $\displaystyle y=\frac{1}{x^2-3x}$.
+\bt{16} $y=\sqrt{1+\cos\theta}$.
+\bt{17} $y=\ln(\sin\theta)$.
+\bt{18} $\displaystyle y=\frac{e^x}{1-e^x}$.
+
+\Needspace{9\baselineskip}
+\group{19–22} (a) Tìm vi phân $dy$. (b) Tính $dy$ với các giá trị $x$ và $dx$ đã cho.
+\bt{19} $y=e^{x/10}$, \quad $x=0$, \quad $dx=0.1$.
+\bt{20} $y=\cos\pi x$, \quad $x=\tfrac13$, \quad $dx=-0.02$.
+\bt{21} $y=\sqrt{3+x^2}$, \quad $x=1$, \quad $dx=-0.1$.
+\bt{22} $\displaystyle y=\frac{x+1}{x-1}$, \quad $x=2$, \quad $dx=0.05$.
+
+\group{23–26} Tính $\Delta y$ và $dy$ với $x$ và $dx=\Delta x$ đã cho. Sau đó phác họa sơ đồ tương tự Hình 5, thể hiện các đoạn thẳng có độ dài $dx$, $dy$ và $\Delta y$.
+\bt{23} $y=x^2-4x$, \quad $x=3$, \quad $\Delta x=0.5$.
+\bt{24} $y=x-x^3$, \quad $x=0$, \quad $\Delta x=-0.3$.
+\bt{25} $y=\sqrt{x-2}$, \quad $x=3$, \quad $\Delta x=0.8$.
+\bt{26} $y=e^x$, \quad $x=0$, \quad $\Delta x=0.5$.
+
+\group{27–30} So sánh $\Delta y$ và $dy$ khi $x$ thay đổi từ $1$ đến $1.05$. Nếu $x$ thay đổi từ $1$ đến $1.01$ thì sao? Xấp xỉ $\Delta y\approx dy$ có tốt hơn khi $\Delta x$ nhỏ đi không?
+\bt{27} $f(x)=x^4-x+1$.
+\bt{28} $f(x)=e^{2x-2}$.
+\bt{29} $f(x)=\sqrt{5-x}$.
+\bt{30} $\displaystyle f(x)=\frac{1}{x^2+1}$.
+
+\group{31–36} Dùng xấp xỉ tuyến tính (hoặc vi phân) để ước lượng số đã cho.
+\bt{31} $(1.999)^4$.
+\bt{32} $1/4.002$.
+\bt{33} $\sqrt[3]{1001}$.
+\bt{34} $\sqrt{100.5}$.
+\bt{35} $e^{0.1}$.
+\bt{36} $\cos29^\circ$.
+
+\Needspace{9\baselineskip}
+\group{37–39} Giải thích bằng xấp xỉ tuyến tính hoặc vi phân vì sao các phép xấp xỉ sau là hợp lý.
+\bt{37} $\ln1.04\approx0.04$.
+\bt{38} $\sqrt{4.02}\approx2.005$.
+\bt{39} $\displaystyle\frac{1}{9.98}\approx0.1002$.
+
+\Needspace{14\baselineskip}
+\bt{40} Cho
+\[f(x)=(x-1)^2,\qquad g(x)=e^{-2x},\qquad h(x)=1+\ln(1-2x).\]
+(a) Tìm các hàm tuyến tính hóa của $f,g,h$ tại $a=0$. Bạn nhận thấy điều gì? Giải thích hiện tượng đó.
+
+(b) \textit{[Cần công cụ vẽ đồ thị.]} Vẽ $f,g,h$ và các hàm tuyến tính hóa tương ứng. Xấp xỉ tuyến tính tốt nhất đối với hàm nào? Kém nhất đối với hàm nào? Giải thích.
+
+\bt{41} Cạnh của một hình lập phương đo được là $30\,\mathrm{cm}$, với sai số đo có thể có là $0.1\,\mathrm{cm}$. Dùng vi phân để ước lượng sai số lớn nhất có thể có, sai số tương đối và sai số phần trăm khi tính (a) thể tích hình lập phương; (b) diện tích toàn phần của hình lập phương.
+
+\bt{42} Bán kính một đĩa tròn được cho là $24\,\mathrm{cm}$, với sai số đo lớn nhất $0.2\,\mathrm{cm}$.
+
+(a) Dùng vi phân để ước lượng sai số lớn nhất của diện tích đĩa tính được.
+
+(b) Sai số tương đối và sai số phần trăm là bao nhiêu?
+
+\bt{43} Chu vi của một hình cầu được đo là $84\,\mathrm{cm}$, với sai số có thể có là $0.5\,\mathrm{cm}$.
+
+(a) Dùng vi phân để ước lượng sai số lớn nhất của diện tích mặt cầu tính được. Sai số tương đối là bao nhiêu?
+
+(b) Dùng vi phân để ước lượng sai số lớn nhất của thể tích tính được. Sai số tương đối là bao nhiêu?
+
+\bt{44} Dùng vi phân để ước lượng lượng sơn cần thiết nhằm phủ một lớp dày $0.05\,\mathrm{cm}$ lên một mái vòm bán cầu đường kính $50\,\mathrm{m}$.
+
+\bt{45} (a) Dùng vi phân để tìm công thức tính gần đúng thể tích một vỏ trụ mỏng có chiều cao $h$, bán kính trong $r$ và bề dày $\Delta r$.
+
+(b) Sai số khi sử dụng công thức ở câu (a) là bao nhiêu?
+
+\bt{46} Một cạnh của tam giác vuông dài $20\,\mathrm{cm}$; góc đối diện cạnh đó được đo là $30^\circ$, với sai số có thể có là $\pm1^\circ$.
+
+(a) Dùng vi phân để ước lượng sai số khi tính độ dài cạnh huyền.
+
+(b) Sai số phần trăm là bao nhiêu?
+
+\bt{47} Khi dòng điện $I$ chạy qua điện trở có điện trở $R$, định luật Ohm cho độ sụt điện áp $V=RI$. Nếu $V$ không đổi và $R$ được đo với một sai số nhất định, dùng vi phân để chứng minh sai số tương đối khi tính $I$ xấp xỉ bằng sai số tương đối của $R$ về độ lớn.
+
+\bt{48} Khi máu chảy dọc theo mạch máu, lưu lượng $F$ (thể tích máu đi qua một điểm trong một đơn vị thời gian) tỉ lệ thuận với lũy thừa bậc bốn của bán kính $R$ của mạch:
+\[F=kR^4.\]
+Đây là định luật Poiseuille; ta sẽ giải thích tính đúng đắn của nó trong Mục 8.4. Một động mạch bị tắc một phần có thể được mở rộng bằng thủ thuật nong mạch: bơm căng một ống thông có bóng ở đầu bên trong động mạch để làm rộng lòng mạch và khôi phục dòng máu bình thường.
+
+Chứng minh độ biến thiên tương đối của $F$ xấp xỉ bằng bốn lần độ biến thiên tương đối của $R$. Bán kính tăng $5\%$ sẽ ảnh hưởng thế nào đến lưu lượng máu?
+
+\bt{49} Thiết lập các quy tắc sau cho vi phân, trong đó $c$ là hằng số, $u,v$ là các hàm của $x$.
+\begin{align*}
+\text{(a)}\quad dc&=0,&\text{(b)}\quad d(cu)&=c\,du,\\
+\text{(c)}\quad d(u+v)&=du+dv,&\text{(d)}\quad d(uv)&=u\,dv+v\,du,\\
+\text{(e)}\quad d\left(\frac uv\right)&=\frac{v\,du-u\,dv}{v^2},&
+\text{(f)}\quad d(x^n)&=nx^{n-1}\,dx.
+\end{align*}
+
+\bt{50} Trong sách vật lý, chu kỳ $T$ của con lắc dài $L$ thường được cho bởi $T\approx2\pi\sqrt{L/g}$, với điều kiện con lắc dao động theo một cung tương đối nhỏ. Khi suy ra công thức này, người ta thu được phương trình gia tốc tiếp tuyến của quả nặng $a_T=-g\sin\theta$, rồi thay $\sin\theta$ bằng $\theta$, với nhận xét rằng đối với góc nhỏ, $\theta$ (radian) rất gần $\sin\theta$.
+
+(a) Kiểm tra xấp xỉ tuyến tính tại $0$ của hàm sin:
+\[\sin\theta\approx\theta.\]
+(b) Nếu $\theta=\pi/18$ (tương đương $10^\circ$) và ta xấp xỉ $\sin\theta$ bằng $\theta$, sai số phần trăm là bao nhiêu?
+
+(c) \textit{[Cần công cụ vẽ đồ thị.]} Dùng đồ thị để xác định các giá trị $\theta$ sao cho $\sin\theta$ và $\theta$ khác nhau ít hơn $2\%$. Các giá trị đó tính theo độ là bao nhiêu?
+
+\noindent\begin{minipage}{\linewidth}
+\bt{51} Giả sử thông tin duy nhất biết được về hàm $f$ là $f(1)=5$ và đồ thị đạo hàm có dạng như hình.
+
+(a) Dùng xấp xỉ tuyến tính để ước lượng $f(0.9)$ và $f(1.1)$.
+
+(b) Các ước lượng ở câu (a) quá lớn hay quá nhỏ? Giải thích.
+\fig[.32]{ex51}{Hình cho Bài tập 51: đồ thị $y=f'(x)$.}
+\end{minipage}
+
+\bt{52} Giả sử không có công thức của $g(x)$, nhưng biết $g(2)=-4$ và $g'(x)=\sqrt{x^2+5}$ với mọi $x$.
+
+(a) Dùng xấp xỉ tuyến tính để ước lượng $g(1.95)$ và $g(2.05)$.
+
+(b) Các ước lượng ở câu (a) quá lớn hay quá nhỏ? Giải thích.
+
+\clearpage
+\section*{Dự án khám phá — Xấp xỉ đa thức}
+\noindent\textit{Cần công cụ vẽ đồ thị.}
+
+Xấp xỉ bằng tiếp tuyến $L(x)$ là xấp xỉ bậc nhất (tuyến tính) tốt nhất của $f(x)$ ở gần $x=a$, vì $f(x)$ và $L(x)$ có cùng tốc độ biến thiên (đạo hàm) tại $a$. Để có xấp xỉ tốt hơn, hãy thử xấp xỉ bằng một đa thức bậc hai $P(x)$. Nói cách khác, ta xấp xỉ đường cong bằng một parabol thay vì một đường thẳng. Để bảo đảm phép xấp xỉ tốt, đặt ra các điều kiện:
+\begin{enumerate}[label=(\roman*),leftmargin=*]
+\item $P(a)=f(a)$: $P$ và $f$ có cùng giá trị tại $a$.
+\item $P'(a)=f'(a)$: $P$ và $f$ có cùng tốc độ biến thiên tại $a$.
+\item $P''(a)=f''(a)$: hệ số góc của đồ thị $P$ và $f$ biến thiên với cùng tốc độ tại $a$.
+\end{enumerate}
+
+\par\medskip\noindent\textbf{1.}\  Tìm xấp xỉ bậc hai $P(x)=A+Bx+Cx^2$ của hàm $f(x)=\cos x$ thỏa mãn (i), (ii), (iii) với $a=0$. Vẽ $P,f$ và hàm tuyến tính hóa $L(x)=1$ trên cùng một màn hình. Nhận xét mức độ xấp xỉ của $P$ và $L$ đối với $f$.
+
+\par\medskip\noindent\textbf{2.}\  Xác định các giá trị $x$ mà với chúng xấp xỉ bậc hai $f(x)\approx P(x)$ trong Bài toán 1 có sai số nhỏ hơn $0.1$. [Gợi ý: Vẽ $y=P(x)$, $y=\cos x-0.1$ và $y=\cos x+0.1$ trên cùng một màn hình.]
+
+\par\medskip\noindent\textbf{3.}\  Để xấp xỉ hàm $f$ bằng hàm bậc hai $P$ ở gần số $a$, tốt nhất viết $P$ dưới dạng
+\[P(x)=A+B(x-a)+C(x-a)^2.\]
+Chứng minh hàm bậc hai thỏa mãn (i), (ii), (iii) là
+\[P(x)=f(a)+f'(a)(x-a)+\frac12f''(a)(x-a)^2.\]
+
+\par\medskip\noindent\textbf{4.}\  Tìm xấp xỉ bậc hai của $f(x)=\sqrt{x+3}$ ở gần $a=1$. Vẽ $f$, hàm xấp xỉ bậc hai và hàm tuyến tính hóa trong Ví dụ 3.10.2 trên cùng một màn hình. Bạn rút ra kết luận gì?
+
+\par\medskip\noindent\textbf{5.}\  Thay vì dừng ở xấp xỉ tuyến tính hay bậc hai của $f(x)$ gần $x=a$, hãy tìm các phép xấp xỉ tốt hơn bằng đa thức bậc cao. Ta tìm đa thức bậc $n$
+\[T_n(x)=c_0+c_1(x-a)+c_2(x-a)^2+c_3(x-a)^3+\cdots+c_n(x-a)^n,\]
+sao cho tại $x=a$, $T_n$ và $n$ đạo hàm đầu tiên của nó có cùng các giá trị với $f$ và $n$ đạo hàm đầu tiên của $f$. Bằng cách lấy đạo hàm liên tiếp rồi đặt $x=a$, chứng minh những điều kiện này được thỏa mãn khi $c_0=f(a)$, $c_1=f'(a)$, $c_2=\tfrac12f''(a)$ và tổng quát
+\[c_k=\frac{f^{(k)}(a)}{k!},\]
+trong đó $k!=1\cdot2\cdot3\cdot4\cdots k$. Đa thức thu được
+\[T_n(x)=f(a)+f'(a)(x-a)+\frac{f''(a)}{2!}(x-a)^2+\cdots+\frac{f^{(n)}(a)}{n!}(x-a)^n\]
+được gọi là \textbf{đa thức Taylor bậc $n$ của $f$ tâm $a$}. Ta sẽ nghiên cứu kỹ hơn đa thức Taylor trong Chương 11.
+
+\par\medskip\noindent\textbf{6.}\  Tìm đa thức Taylor bậc $8$, tâm $a=0$, của $f(x)=\cos x$. Vẽ $f$ cùng các đa thức Taylor $T_2,T_4,T_6,T_8$ trong khung nhìn $[-5,5]\times[-1.4,1.4]$, rồi nhận xét mức độ xấp xỉ của chúng đối với $f$.
+
+\section*{Ghi chú biên tập}
+Phần này tách biệt với bản dịch. Trong các công thức vi phân dùng để xấp xỉ tại $a$, đạo hàm được lấy tại $x=a$; chẳng hạn $dy=f'(a)\,dx$ trong $f(a+dx)\approx f(a)+dy$. Những góc dùng trong công thức đạo hàm lượng giác phải được tính bằng radian.
+
+Ví dụ 4 sử dụng vi phân để \textit{ước lượng} sai số lớn nhất; $277\,\mathrm{cm^3}$ không phải một chặn trên chính xác của sai số thể tích. Ở Bài tập 43, “chu vi hình cầu” được hiểu là chu vi đường tròn lớn. Với Bài tập 50(c), sai số phần trăm được xét theo giá trị đúng $\sin\theta$; tại $\theta=0$, có thể hiểu qua giới hạn.
+
+Bài toán 4 của dự án dẫn chiếu “Ví dụ 3.10.2” theo nguyên bản; hàm tuyến tính hóa được xây dựng trong Ví dụ 1 và tiếp tục được dùng trong Ví dụ 2. Các ký hiệu yêu cầu công cụ vẽ đồ thị được chuyển thành ghi chú bằng chữ.
+\end{document}

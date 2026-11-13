@@ -1,0 +1,202 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage{fontspec}\setmainfont{Latin Modern Roman}\setsansfont{DejaVu Sans}
+\usepackage{amsmath,amssymb,graphicx,geometry,enumitem,needspace,longtable,booktabs,fancyhdr,hyperref}
+\geometry{left=28mm,right=23mm,top=24mm,bottom=24mm}
+\hypersetup{unicode=true,colorlinks=true,linkcolor=black,urlcolor=blue,pdftitle={Giải tích Ôn tập Chương 4}}
+\setlength{\parindent}{1.2em}\setlength{\parskip}{4pt}\setlength{\headheight}{16pt}
+\pagestyle{fancy}\fancyhf{}\fancyhead[L]{\small Chương 4. Ứng dụng của đạo hàm}\fancyhead[R]{\small Ôn tập}\fancyfoot[C]{\thepage}
+\newcommand{\fig}[3][.68]{\begin{center}\begin{minipage}{\linewidth}\centering\includegraphics[width=#1\linewidth]{assets/#2.png}\\{\small #3}\end{minipage}\end{center}}
+\newcommand{\ex}[1]{\par\medskip\noindent\textbf{Ví dụ #1.}\ }
+\newcommand{\sol}{\par\nopagebreak[4]\noindent\textit{Lời giải.}\ }
+\newcommand{\bt}[1]{\par\smallskip\Needspace{5\baselineskip}\noindent\textbf{#1.}\ }
+\newcommand{\group}[1]{\par\medskip\noindent\textbf{#1}\par\nopagebreak[4]}
+\newcommand{\gint}[1]{\left[\!\left[#1\right]\!\right]}
+\allowdisplaybreaks[2]
+\DeclareMathOperator{\sech}{sech}
+\DeclareMathOperator{\csch}{csch}
+\DeclareMathOperator{\arccot}{arccot}
+\newcommand{\cc}[1]{\bt{#1}}
+\newcommand{\tf}[1]{\bt{#1}}
+\begin{document}
+\begin{center}{\LARGE\bfseries Ôn tập Chương 4}\end{center}
+\noindent\textit{Ứng dụng của đạo hàm. Bản dịch tiếng Việt từ phần ôn tập, trang 364–368 của tài liệu gốc.}
+\section*{Kiểm tra khái niệm}
+\cc{1} Giải thích sự khác nhau giữa giá trị cực đại tuyệt đối và giá trị cực đại địa phương. Minh họa bằng một hình phác thảo.
+\cc{2} (a) Định lý giá trị cực trị phát biểu điều gì?\\(b) Giải thích cách thực hiện Phương pháp xét trên đoạn đóng.
+\cc{3} (a) Phát biểu Định lý Fermat.\\(b) Định nghĩa số tới hạn của $f$.
+\cc{4} (a) Phát biểu Định lý Rolle.\\(b) Phát biểu Định lý giá trị trung bình và nêu cách diễn giải hình học.
+\cc{5} (a) Phát biểu Tiêu chuẩn xét tính đồng biến và nghịch biến.\\(b) Nói $f$ lõm lên trên khoảng $I$ có nghĩa là gì?\\(c) Phát biểu Tiêu chuẩn xét độ lõm.\\(d) Điểm uốn là gì? Tìm các điểm uốn như thế nào?
+\cc{6} (a) Phát biểu Tiêu chuẩn đạo hàm bậc nhất.\\(b) Phát biểu Tiêu chuẩn đạo hàm bậc hai.\\(c) So sánh ưu điểm và nhược điểm của hai tiêu chuẩn này.
+\cc{7} (a) Quy tắc l’Hospital phát biểu điều gì?\\(b) Có thể dùng quy tắc l’Hospital như thế nào đối với tích $f(x)g(x)$, trong đó $f(x)\to0$ và $g(x)\to\infty$ khi $x\to a$?\\(c) Có thể dùng quy tắc l’Hospital như thế nào đối với hiệu $f(x)-g(x)$, trong đó $f(x)\to\infty$ và $g(x)\to\infty$ khi $x\to a$?\\(d) Có thể dùng quy tắc l’Hospital như thế nào đối với lũy thừa $[f(x)]^{g(x)}$, trong đó $f(x)\to0$ và $g(x)\to0$ khi $x\to a$?
+\cc{8} Cho biết mỗi dạng giới hạn sau có phải là dạng vô định hay không. Khi có thể, hãy nêu giới hạn.
+\begin{align*}
+&\text{(a) }\frac00 &&\text{(b) }\frac\infty\infty &&\text{(c) }\frac0\infty &&\text{(d) }\frac\infty0\\
+&\text{(e) }\infty+\infty &&\text{(f) }\infty-\infty &&\text{(g) }\infty\cdot\infty &&\text{(h) }\infty\cdot0\\
+&\text{(i) }0^0 &&\text{(j) }0^\infty &&\text{(k) }\infty^0 &&\text{(l) }1^\infty
+\end{align*}
+\cc{9} Nếu đã có máy tính vẽ đồ thị hoặc máy vi tính, tại sao vẫn cần phép tính vi phân để vẽ đồ thị một hàm số?
+\cc{10} (a) Cho một giá trị gần đúng ban đầu $x_1$ của nghiệm phương trình $f(x)=0$. Hãy giải thích về mặt hình học, kèm hình vẽ, cách tìm giá trị gần đúng thứ hai $x_2$ trong phương pháp Newton.\\(b) Viết biểu thức của $x_2$ theo $x_1$, $f(x_1)$ và $f'(x_1)$.\\(c) Viết biểu thức của $x_{n+1}$ theo $x_n$, $f(x_n)$ và $f'(x_n)$.\\(d) Trong những trường hợp nào phương pháp Newton có thể thất bại hoặc hội tụ rất chậm?
+\cc{11} (a) Nguyên hàm của hàm số $f$ là gì?\\(b) Giả sử $F_1$ và $F_2$ đều là nguyên hàm của $f$ trên một khoảng $I$. $F_1$ và $F_2$ liên hệ với nhau như thế nào?
+\par\textit{Đáp án cho phần Kiểm tra khái niệm có tại StewartCalculus.com.}
+\section*{Trắc nghiệm đúng–sai}
+Xác định mỗi nhận định sau là đúng hay sai. Nếu đúng, hãy giải thích vì sao. Nếu sai, hãy giải thích hoặc đưa ra một phản ví dụ.
+\tf{1} Nếu $f'(c)=0$ thì $f$ có cực đại hoặc cực tiểu địa phương tại $c$.
+\tf{2} Nếu $f$ có giá trị cực tiểu tuyệt đối tại $c$ thì $f'(c)=0$.
+\tf{3} Nếu $f$ liên tục trên $(a,b)$ thì $f$ đạt giá trị cực đại tuyệt đối $f(c)$ và giá trị cực tiểu tuyệt đối $f(d)$ tại một số $c,d$ thuộc $(a,b)$.
+\tf{4} Nếu $f$ khả vi và $f(-1)=f(1)$ thì tồn tại một số $c$ sao cho $|c|<1$ và $f'(c)=0$.
+\tf{5} Nếu $f'(x)<0$ với $1<x<6$ thì $f$ nghịch biến trên $(1,6)$.
+\tf{6} Nếu $f''(2)=0$ thì $(2,f(2))$ là một điểm uốn của đường cong $y=f(x)$.
+\tf{7} Nếu $f'(x)=g'(x)$ với $0<x<1$ thì $f(x)=g(x)$ với $0<x<1$.
+\tf{8} Tồn tại một hàm số $f$ sao cho $f(1)=-2$, $f(3)=0$ và $f'(x)>1$ với mọi $x$.
+\tf{9} Tồn tại một hàm số $f$ sao cho $f(x)>0$, $f'(x)<0$ và $f''(x)>0$ với mọi $x$.
+\tf{10} Tồn tại một hàm số $f$ sao cho $f(x)<0$, $f'(x)<0$ và $f''(x)>0$ với mọi $x$.
+\tf{11} Nếu $f$ và $g$ đồng biến trên khoảng $I$ thì $f+g$ đồng biến trên $I$.
+\tf{12} Nếu $f$ và $g$ đồng biến trên khoảng $I$ thì $f-g$ đồng biến trên $I$.
+\tf{13} Nếu $f$ và $g$ đồng biến trên khoảng $I$ thì $fg$ đồng biến trên $I$.
+\tf{14} Nếu $f$ và $g$ là các hàm số dương, đồng biến trên khoảng $I$ thì $fg$ đồng biến trên $I$.
+\tf{15} Nếu $f$ đồng biến và $f(x)>0$ trên $I$ thì $g(x)=1/f(x)$ nghịch biến trên $I$.
+\tf{16} Nếu $f$ chẵn thì $f'$ chẵn.
+\tf{17} Nếu $f$ tuần hoàn thì $f'$ tuần hoàn.
+\tf{18} Nguyên hàm tổng quát nhất của $f(x)=x^{-2}$ là
+\[F(x)=-\frac1x+C.\]
+\tf{19} Nếu $f'(x)$ tồn tại và khác không với mọi $x$ thì $f(1)\ne f(0)$.
+\tf{20} Nếu $\lim_{x\to\infty}f(x)=1$ và $\lim_{x\to\infty}g(x)=\infty$ thì
+\[\lim_{x\to\infty}[f(x)]^{g(x)}=1.\]
+\tf{21} $\displaystyle\lim_{x\to0}\frac{x}{e^x}=1$.
+\section*{Ôn tập Chương 4 — Bài tập}
+\group{1–6} Tìm các giá trị cực trị địa phương và tuyệt đối của hàm số trên đoạn đã cho.
+\bt{1} $f(x)=x^3-9x^2+24x-2$, \quad $[0,5]$.
+\bt{2} $f(x)=x\sqrt{1-x}$, \quad $[-1,1]$.
+\bt{3} $f(x)=\dfrac{3x-4}{x^2+1}$, \quad $[-2,2]$.
+\bt{4} $f(x)=\sqrt{x^2+x+1}$, \quad $[-2,1]$.
+\bt{5} $f(x)=x+2\cos x$, \quad $[-\pi,\pi]$.
+\bt{6} $f(x)=x^2e^{-x}$, \quad $[-1,3]$.
+\group{7–14} Tính giới hạn.
+\bt{7} $\displaystyle\lim_{x\to0}\frac{e^x-1}{\tan x}$.
+\bt{8} $\displaystyle\lim_{x\to0}\frac{\tan4x}{x+\sin2x}$.
+\bt{9} $\displaystyle\lim_{x\to0}\frac{e^{2x}-e^{-2x}}{\ln(x+1)}$.
+\bt{10} $\displaystyle\lim_{x\to\infty}\frac{e^{2x}-e^{-2x}}{\ln(x+1)}$.
+\bt{11} $\displaystyle\lim_{x\to-\infty}(x^2-x^3)e^{2x}$.
+\bt{12} $\displaystyle\lim_{x\to\pi^-}(x-\pi)\csc x$.
+\bt{13} $\displaystyle\lim_{x\to1^+}\left(\frac{x}{x-1}-\frac1{\ln x}\right)$.
+\bt{14} $\displaystyle\lim_{x\to(\pi/2)^-}(\tan x)^{\cos x}$.
+\group{15–17} Phác thảo đồ thị một hàm số thỏa mãn các điều kiện đã cho.
+\bt{15}
+\begin{align*}
+&f(0)=0,\qquad f'(-2)=f'(1)=f'(9)=0,\\
+&\lim_{x\to\infty}f(x)=0,\qquad\lim_{x\to6}f(x)=-\infty,\\
+&f'(x)<0\text{ trên }(-\infty,-2),\ (1,6)\text{ và }(9,\infty),\\
+&f'(x)>0\text{ trên }(-2,1)\text{ và }(6,9),\\
+&f''(x)>0\text{ trên }(-\infty,0)\text{ và }(12,\infty),\\
+&f''(x)<0\text{ trên }(0,6)\text{ và }(6,12).
+\end{align*}
+\bt{16} $f(0)=0$; $f$ liên tục và chẵn;
+\[f'(x)=2x\text{ nếu }0<x<1;\qquad f'(x)=-1\text{ nếu }1<x<3;\]
+\[f'(x)=1\text{ nếu }x>3.\]
+\bt{17} $f$ lẻ; $f'(x)<0$ với $0<x<2$; $f'(x)>0$ với $x>2$; $f''(x)>0$ với $0<x<3$; $f''(x)<0$ với $x>3$; $\displaystyle\lim_{x\to\infty}f(x)=-2$.
+\bt{18} Hình vẽ biểu diễn đồ thị đạo hàm $f'$ của một hàm số $f$.\\(a) Trên những khoảng nào $f$ đồng biến hoặc nghịch biến?\\(b) Với những giá trị nào của $x$, $f$ có cực đại hoặc cực tiểu địa phương?\\(c) Phác thảo đồ thị của $f''$.\\(d) Phác thảo một đồ thị có thể có của $f$.
+\fig[.48]{ex18}{Hình cho Bài tập 18}
+\group{19–34} Sử dụng các hướng dẫn ở §4.5 để phác thảo đường cong.
+\bt{19} $y=2-2x-x^3$.
+\bt{20} $y=-2x^3-3x^2+12x+5$.
+\bt{21} $y=3x^4-4x^3+2$.
+\bt{22} $y=\dfrac{x}{1-x^2}$.
+\bt{23} $y=\dfrac1{x(x-3)^2}$.
+\bt{24} $y=\dfrac1{x^2}-\dfrac1{(x-2)^2}$.
+\bt{25} $y=\dfrac{(x-1)^3}{x^2}$.
+\bt{26} $y=\sqrt{1-x}+\sqrt{1+x}$.
+\bt{27} $y=x\sqrt{2+x}$.
+\bt{28} $y=x^{2/3}(x-3)^2$.
+\bt{29} $y=e^x\sin x$, \quad $-\pi\le x\le\pi$.
+\bt{30} $y=4x-\tan x$, \quad $-\pi/2<x<\pi/2$.
+\bt{31} $y=\arcsin(1/x)$.
+\bt{32} $y=e^{2x-x^2}$.
+\bt{33} $y=(x-2)e^{-x}$.
+\bt{34} $y=x+\ln(x^2+1)$.
+\group{35–38} Vẽ đồ thị của $f$ sao cho thể hiện tất cả các đặc điểm quan trọng của đường cong. Dùng đồ thị của $f'$ và $f''$ để ước lượng các khoảng đồng biến, nghịch biến, các giá trị cực trị, các khoảng lõm và các điểm uốn. Trong Bài tập 35, dùng phép tính vi phân để tìm chính xác các đại lượng này.
+\bt{35} $f(x)=\dfrac{x^2-1}{x^3}$.
+\bt{36} $f(x)=\dfrac{x^3+1}{x^6+1}$.
+\bt{37} $f(x)=3x^6-5x^5+x^4-5x^3-2x^2+2$.
+\bt{38} $f(x)=x^2+6.5\sin x$, \quad $-5\le x\le5$.
+\bt{39} Vẽ đồ thị $f(x)=e^{-1/x^2}$ trong một cửa sổ quan sát thể hiện tất cả các đặc điểm chính của hàm số. Ước lượng các điểm uốn. Sau đó dùng phép tính vi phân để tìm chính xác chúng.
+\bt{40} (a) Vẽ đồ thị hàm số $f(x)=1/(1+e^{1/x})$.\\(b) Giải thích hình dạng đồ thị bằng cách tính các giới hạn của $f(x)$ khi $x$ tiến đến $\infty$, $-\infty$, $0^+$ và $0^-$.\\(c) Dùng đồ thị của $f$ để ước lượng tọa độ các điểm uốn.\\(d) Dùng một hệ thống đại số máy tính để tính và vẽ đồ thị $f''$.\\(e) Dùng đồ thị ở phần (d) để ước lượng các điểm uốn chính xác hơn.
+\group{41–42} Dùng đồ thị của $f$, $f'$ và $f''$ để ước lượng hoành độ các điểm cực đại, cực tiểu và điểm uốn của $f$.
+\bt{41} $f(x)=\dfrac{\cos^2x}{\sqrt{x^2+x+1}}$, \quad $-\pi\le x\le\pi$.
+\bt{42} $f(x)=e^{-0.1x}\ln(x^2-1)$.
+\bt{43} Khảo sát họ hàm số $f(x)=\ln(\sin x+c)$. Các hàm số trong họ có những đặc điểm chung nào? Chúng khác nhau như thế nào? Với những giá trị nào của $c$, $f$ liên tục trên $(-\infty,\infty)$? Với những giá trị nào của $c$, $f$ hoàn toàn không có đồ thị? Điều gì xảy ra khi $c\to\infty$?
+\bt{44} Khảo sát họ hàm số $f(x)=cxe^{-cx^2}$. Các điểm cực đại, cực tiểu và điểm uốn thay đổi như thế nào khi $c$ thay đổi? Minh họa kết luận bằng đồ thị của một số hàm số trong họ.
+\bt{45} Chứng minh phương trình $3x+2\cos x+5=0$ có đúng một nghiệm thực.
+\bt{46} Giả sử $f$ liên tục trên $[0,4]$, $f(0)=1$ và $2\le f'(x)\le5$ với mọi $x\in(0,4)$. Chứng minh $9\le f(4)\le21$.
+\bt{47} Áp dụng Định lý giá trị trung bình cho hàm số $f(x)=x^{1/5}$ trên đoạn $[32,33]$, chứng minh rằng
+\[2<\sqrt[5]{33}<2.0125.\]
+\bt{48} Với những giá trị nào của các hằng số $a$ và $b$, $(1,3)$ là một điểm uốn của đường cong $y=ax^3+bx^2$?
+\bt{49} Cho $g(x)=f(x^2)$, trong đó $f$ khả vi hai lần với mọi $x$, $f'(x)>0$ với mọi $x\ne0$, và $f$ lõm xuống trên $(-\infty,0)$, lõm lên trên $(0,\infty)$.\\(a) Tại những số nào $g$ có giá trị cực trị?\\(b) Khảo sát độ lõm của $g$.
+\bt{50} Tìm hai số nguyên dương sao cho tổng của số thứ nhất và bốn lần số thứ hai bằng 1000, đồng thời tích của hai số lớn nhất có thể.
+\bt{51} Chứng minh khoảng cách ngắn nhất từ điểm $(x_1,y_1)$ đến đường thẳng $Ax+By+C=0$ là
+\[\frac{|Ax_1+By_1+C|}{\sqrt{A^2+B^2}}.\]
+\bt{52} Tìm điểm trên hyperbol $xy=8$ gần điểm $(3,0)$ nhất.
+\bt{53} Tìm diện tích nhỏ nhất có thể của một tam giác cân ngoại tiếp đường tròn bán kính $r$.
+\bt{54} Tìm thể tích của hình nón tròn xoay lớn nhất có thể nội tiếp hình cầu bán kính $r$.
+\bt{55} Trong tam giác $ABC$, $D$ nằm trên $AB$, $CD\perp AB$, $|AD|=|BD|=4$ cm và $|CD|=5$ cm. Phải chọn điểm $P$ trên $CD$ ở đâu để tổng $|PA|+|PB|+|PC|$ nhỏ nhất?
+\bt{56} Giải Bài tập 55 khi $|CD|=2$ cm.
+\bt{57} Vận tốc của sóng có bước sóng $L$ trong vùng nước sâu là
+\[v=K\sqrt{\frac LC+\frac CL},\]
+trong đó $K$ và $C$ là các hằng số dương đã biết. Bước sóng bằng bao nhiêu thì vận tốc nhỏ nhất?
+\bt{58} Cần chế tạo một bồn chứa bằng kim loại có thể tích $V$, gồm một hình trụ tròn đứng với một bán cầu ở phía trên. Kích thước nào đòi hỏi lượng kim loại ít nhất?
+\bt{59} Một đội khúc côn cầu thi đấu trong một nhà thi đấu có 15\,000 chỗ ngồi. Với giá vé 12 đô la, số khán giả trung bình mỗi trận là 11\,000. Một khảo sát thị trường cho thấy cứ giảm giá vé một đô la thì số khán giả trung bình tăng thêm 1000 người. Chủ đội nên định giá vé bao nhiêu để doanh thu bán vé lớn nhất?
+\bt{60} Một nhà sản xuất xác định chi phí sản xuất $x$ đơn vị hàng hóa là
+\[C(x)=1800+25x-0.2x^2+0.001x^3,\]
+và hàm cầu là $p(x)=48.2-0.03x$.\\(a) Vẽ đồ thị các hàm chi phí và doanh thu, rồi dùng chúng để ước lượng mức sản lượng cho lợi nhuận lớn nhất.\\(b) Dùng phép tính vi phân để tìm mức sản lượng cho lợi nhuận lớn nhất.\\(c) Ước lượng mức sản lượng làm chi phí trung bình nhỏ nhất.
+\bt{61} Dùng phương pháp Newton để tìm nghiệm của phương trình
+\[x^5-x^4+3x^2-3x-2=0\]
+trên đoạn $[1,2]$, chính xác đến sáu chữ số thập phân.
+\bt{62} Dùng phương pháp Newton để tìm tất cả các nghiệm của phương trình $\sin x=x^2-3x+1$, chính xác đến sáu chữ số thập phân.
+\bt{63} Dùng phương pháp Newton để tìm giá trị cực đại tuyệt đối của hàm số $f(t)=\cos t+t-t^2$, chính xác đến tám chữ số thập phân.
+\bt{64} Sử dụng các hướng dẫn ở §4.5 để phác thảo đường cong $y=x\sin x$, $0\le x\le2\pi$. Dùng phương pháp Newton khi cần.
+\group{65–68} Tìm nguyên hàm tổng quát nhất của hàm số.
+\bt{65} $f(x)=4\sqrt{x}-6x^2+3$.
+\bt{66} $g(x)=\dfrac1x+\dfrac1{x^2+1}$.
+\bt{67} $f(t)=2\sin t-3e^t$.
+\bt{68} $f(x)=x^{-3}+\cosh x$.
+\group{69–72} Tìm $f$.
+\bt{69} $f'(t)=2t-3\sin t$, \quad $f(0)=5$.
+\bt{70} $f'(u)=\dfrac{u^2+\sqrt{u}}u$, \quad $f(1)=3$.
+\bt{71} $f''(x)=1-6x+48x^2$, \quad $f(0)=1$, \quad $f'(0)=2$.
+\bt{72} $f''(x)=5x^3+6x^2+2$, \quad $f(0)=3$, \quad $f(1)=-2$.
+\group{73–74} Một chất điểm chuyển động trên đường thẳng với các dữ kiện đã cho. Tìm vị trí của chất điểm.
+\bt{73} $v(t)=2t-1/(1+t^2)$, \quad $s(0)=1$.
+\bt{74} $a(t)=\sin t+3\cos t$, \quad $s(0)=0$, \quad $v(0)=2$.
+\bt{75} (a) Nếu $f(x)=0.1e^x+\sin x$, $-4\le x\le4$, hãy dùng đồ thị của $f$ để phác thảo sơ bộ đồ thị nguyên hàm $F$ của $f$ thỏa mãn $F(0)=0$.\\(b) Tìm biểu thức của $F(x)$.\\(c) Vẽ đồ thị $F$ bằng biểu thức ở phần (b). So sánh với hình phác thảo ở phần (a).
+\bt{76} Khảo sát họ đường cong cho bởi
+\[f(x)=x^4+x^3+cx^2.\]
+Đặc biệt, hãy xác định giá trị chuyển tiếp của $c$ tại đó số lượng số tới hạn thay đổi và giá trị chuyển tiếp tại đó số lượng điểm uốn thay đổi. Minh họa các dạng đồ thị có thể có.
+\bt{77} Một thùng chứa được thả từ máy bay trực thăng đang bay treo ở độ cao 500 m so với mặt đất. Dù của thùng không mở, nhưng thùng được thiết kế để chịu được vận tốc va chạm 100 m/s. Thùng có bị vỡ không?
+\bt{78} Trong một cuộc đua ô tô trên đường thẳng, xe A vượt xe B hai lần. Chứng minh tại một thời điểm nào đó trong cuộc đua, gia tốc của hai xe bằng nhau. Nêu các giả thiết được sử dụng.
+\par\noindent\begin{minipage}{\linewidth}
+\bt{79} Một dầm chữ nhật sẽ được xẻ từ một khúc gỗ hình trụ có bán kính 10 inch.\\(a) Chứng minh dầm có diện tích tiết diện lớn nhất có dạng hình vuông.\\(b) Bốn tấm ván chữ nhật sẽ được xẻ từ bốn phần gỗ còn lại sau khi xẻ dầm vuông. Xác định kích thước của các tấm ván có diện tích tiết diện lớn nhất.\\(c) Giả sử độ bền của một dầm chữ nhật tỉ lệ thuận với tích của chiều rộng và bình phương chiều cao tiết diện. Tìm kích thước của dầm bền nhất có thể xẻ từ khúc gỗ hình trụ.
+\fig[.70]{ex79}{Hình cho Bài tập 79: chiều cao và chiều rộng tiết diện}
+\end{minipage}
+\bt{80} Nếu một vật được phóng với vận tốc ban đầu $v$, hợp với phương ngang một góc $\theta$, thì khi bỏ qua sức cản không khí, quỹ đạo của nó là parabol
+\[y=(\tan\theta)x-\frac{g}{2v^2\cos^2\theta}x^2,\qquad0<\theta<\frac\pi2.\]
+(a) Giả sử vật được phóng từ chân một mặt phẳng nghiêng tạo với phương ngang góc $\alpha>0$, như hình vẽ. Chứng minh tầm xa của vật, đo dọc theo chiều lên dốc, được cho bởi
+\[R(\theta)=\frac{2v^2\cos\theta\sin(\theta-\alpha)}{g\cos^2\alpha}.\]
+(b) Xác định $\theta$ để $R$ lớn nhất.\\(c) Giả sử mặt phẳng nghiêng xuống dưới phương ngang một góc $\alpha$. Xác định tầm xa $R$ trong trường hợp này và góc phóng để $R$ lớn nhất.
+\fig[.42]{ex80}{Hình cho Bài tập 80}
+\bt{81} Nếu điện trường tĩnh điện $E$ tác dụng lên một chất điện môi phân cực ở thể lỏng hoặc thể khí thì mômen lưỡng cực tổng cộng $P$ trên một đơn vị thể tích là
+\[P(E)=\frac{e^E+e^{-E}}{e^E-e^{-E}}-\frac1E.\]
+Chứng minh $\displaystyle\lim_{E\to0^+}P(E)=0$.
+\bt{82} Nếu một viên bi kim loại khối lượng $m$ được phóng trong nước và lực cản tỉ lệ thuận với bình phương vận tốc thì quãng đường viên bi đi được trong thời gian $t$ là
+\[s(t)=\frac mc\ln\cosh\left(\sqrt{\frac{gc}{m}}\,t\right),\]
+trong đó $c$ là một hằng số dương. Tìm $\displaystyle\lim_{c\to0^+}s(t)$.
+\bt{83} Chứng minh rằng với $x>0$,
+\[\frac{x}{1+x^2}<\arctan x<x.\]
+\bt{84} Phác thảo đồ thị một hàm số $f$ sao cho $f'(x)<0$ với mọi $x$, $f''(x)>0$ với $|x|>1$, $f''(x)<0$ với $|x|<1$ và
+\[\lim_{x\to\pm\infty}[f(x)+x]=0.\]
+\bt{85} Hình vẽ biểu diễn một tam giác cân có hai cạnh bên dài $a$, phía trên là một nửa hình tròn. Góc $\theta$ phải bằng bao nhiêu để tổng diện tích lớn nhất?
+\fig[.34]{ex85}{Hình cho Bài tập 85}
+\bt{86} Nước chảy với lưu lượng không đổi vào một bồn hình cầu. Gọi $V(t)$ là thể tích nước và $H(t)$ là độ cao mực nước trong bồn tại thời điểm $t$.\\(a) $V'(t)$ và $H'(t)$ có ý nghĩa gì? Các đạo hàm này dương, âm hay bằng không?\\(b) $V''(t)$ dương, âm hay bằng không? Giải thích.\\(c) Gọi $t_1$, $t_2$ và $t_3$ lần lượt là các thời điểm bồn đầy một phần tư, một nửa và ba phần tư. Mỗi giá trị $H''(t_1)$, $H''(t_2)$ và $H''(t_3)$ dương, âm hay bằng không? Vì sao?
+\par\noindent\begin{minipage}{\linewidth}
+\bt{87} Một đèn được lắp trên đỉnh cột cao $h$ feet để chiếu sáng một vòng xuyến giao thông đông đúc, bán kính 40 ft. Cường độ chiếu sáng $I$ tại một điểm $P$ bất kỳ trên đường tròn tỉ lệ thuận với cosin của góc $\theta$ (xem hình) và tỉ lệ nghịch với bình phương khoảng cách $d$ từ nguồn sáng.\\(a) Cột đèn nên cao bao nhiêu để $I$ lớn nhất?\\(b) Giả sử cột đèn cao $h$ feet và một phụ nữ đi ra xa chân cột với tốc độ 4 ft/s. Khi người đó đến mép ngoài của vòng xuyến, cường độ ánh sáng tại điểm trên lưng cách mặt đất 4 ft đang giảm với tốc độ bao nhiêu?
+\fig[.58]{ex87}{Hình cho Bài tập 87}
+\end{minipage}
+\end{document}

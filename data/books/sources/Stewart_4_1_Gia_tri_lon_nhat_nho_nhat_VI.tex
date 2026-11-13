@@ -1,0 +1,376 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage{fontspec}\setmainfont{Latin Modern Roman}\setsansfont{DejaVu Sans}
+\usepackage{amsmath,amssymb,graphicx,geometry,enumitem,needspace,longtable,booktabs,fancyhdr,hyperref}
+\geometry{left=28mm,right=23mm,top=24mm,bottom=24mm}
+\hypersetup{unicode=true,colorlinks=true,linkcolor=black,urlcolor=blue,pdftitle={Giải tích §4.1 — Giá trị lớn nhất và giá trị nhỏ nhất}}
+\setlength{\parindent}{1.2em}\setlength{\parskip}{4pt}\setlength{\headheight}{16pt}
+\pagestyle{fancy}\fancyhf{}\fancyhead[L]{\small Chương 4. Ứng dụng của đạo hàm}\fancyhead[R]{\small §4.1}\fancyfoot[C]{\thepage}
+\newcommand{\fig}[3][.68]{\begin{center}\begin{minipage}{\linewidth}\centering\includegraphics[width=#1\linewidth]{assets/#2.png}\\{\small #3}\end{minipage}\end{center}}
+\newcommand{\ex}[1]{\par\medskip\noindent\textbf{Ví dụ #1.}\ }
+\newcommand{\sol}{\par\nopagebreak[4]\noindent\textit{Lời giải.}\ }
+\newcommand{\bt}[1]{\par\smallskip\Needspace{5\baselineskip}\noindent\textbf{#1.}\ }
+\newcommand{\group}[1]{\par\medskip\noindent\textbf{#1}\par\nopagebreak[4]}
+\newcommand{\gint}[1]{\left[\!\left[#1\right]\!\right]}
+\allowdisplaybreaks[2]
+\DeclareMathOperator{\sech}{sech}
+\DeclareMathOperator{\csch}{csch}
+\begin{document}
+\begin{center}{\Large\bfseries Chương 4. Ứng dụng của đạo hàm}\par\medskip
+{\Large\bfseries 4.1 — Giá trị lớn nhất và giá trị nhỏ nhất}\end{center}
+\noindent\textit{Bản dịch tiếng Việt — Stewart, Clegg và Watson, Calculus: Early Transcendentals, ấn bản thứ 9. Phạm vi: §4.1, tr. 280–288, và dự án ứng dụng về cầu vồng, tr. 289–290.}
+
+Một số ứng dụng quan trọng nhất của phép tính vi phân là các \textit{bài toán tối ưu hóa}, trong đó ta cần tìm cách tối ưu (tốt nhất) để thực hiện một công việc. Sau đây là những ví dụ về các bài toán sẽ được giải trong chương này:
+\begin{itemize}[nosep]
+\item Hộp hình trụ phải có hình dạng như thế nào để chi phí sản xuất nhỏ nhất?
+\item Gia tốc lớn nhất của một tàu vũ trụ là bao nhiêu? (Đây là câu hỏi quan trọng đối với các phi hành gia phải chịu tác động của gia tốc.)
+\item Khí quản khi co lại phải có bán kính bao nhiêu để đẩy không khí ra nhanh nhất trong một cơn ho?
+\item Các mạch máu phải phân nhánh theo góc nào để năng lượng mà tim tiêu hao khi bơm máu là nhỏ nhất?
+\end{itemize}
+Những bài toán này có thể quy về việc tìm giá trị lớn nhất hoặc giá trị nhỏ nhất của một hàm số. Trước hết, ta làm rõ ý nghĩa chính xác của các khái niệm này.
+
+\section*{Giá trị cực trị tuyệt đối và địa phương}
+Điểm cao nhất trên đồ thị của hàm số $f$ ở Hình 1 là $(3,5)$. Nói cách khác, giá trị lớn nhất của $f$ là $f(3)=5$. Tương tự, giá trị nhỏ nhất là $f(6)=2$. Ta gọi $f(3)=5$ là giá trị lớn nhất tuyệt đối của $f$ và $f(6)=2$ là giá trị nhỏ nhất tuyệt đối. Tổng quát, ta có định nghĩa sau.
+\fig[.34]{fig01}{Hình 1}
+\group{1. Định nghĩa}
+Cho $c$ là một số thuộc miền xác định $D$ của hàm số $f$. Khi đó, $f(c)$ là:
+\begin{itemize}[nosep]
+\item \textbf{giá trị lớn nhất tuyệt đối} của $f$ trên $D$ nếu $f(c)\ge f(x)$ với mọi $x\in D$;
+\item \textbf{giá trị nhỏ nhất tuyệt đối} của $f$ trên $D$ nếu $f(c)\le f(x)$ với mọi $x\in D$.
+\end{itemize}
+Giá trị lớn nhất hoặc nhỏ nhất tuyệt đối đôi khi được gọi là giá trị lớn nhất hoặc nhỏ nhất \textit{toàn cục}. Các giá trị lớn nhất và nhỏ nhất của $f$ được gọi là các \textit{giá trị cực trị} của $f$.
+
+Hình 2 biểu diễn đồ thị của một hàm số $f$ có giá trị lớn nhất tuyệt đối tại $d$ và giá trị nhỏ nhất tuyệt đối tại $a$. Chú ý rằng $(d,f(d))$ là điểm cao nhất trên đồ thị và $(a,f(a))$ là điểm thấp nhất. Nếu chỉ xét các giá trị $x$ gần $b$ [chẳng hạn, giới hạn sự chú ý vào khoảng $(a,c)$], thì $f(b)$ là giá trị lớn nhất trong các giá trị $f(x)$ đó và được gọi là một \textit{giá trị cực đại địa phương} của $f$. Tương tự, $f(c)$ là một \textit{giá trị cực tiểu địa phương}, vì $f(c)\le f(x)$ với $x$ gần $c$ [chẳng hạn, trong khoảng $(b,d)$]. Hàm số $f$ còn có một cực tiểu địa phương tại $e$.
+\fig[.43]{fig02}{Hình 2. Nhỏ nhất tuyệt đối: $f(a)$; lớn nhất tuyệt đối: $f(d)$; cực tiểu địa phương: $f(c),f(e)$; cực đại địa phương: $f(b),f(d)$.}
+\group{2. Định nghĩa}
+Số $f(c)$ là:
+\begin{itemize}[nosep]
+\item một \textbf{giá trị cực đại địa phương} của $f$ nếu $f(c)\ge f(x)$ khi $x$ gần $c$;
+\item một \textbf{giá trị cực tiểu địa phương} của $f$ nếu $f(c)\le f(x)$ khi $x$ gần $c$.
+\end{itemize}
+Trong Định nghĩa 2 (và ở những chỗ khác), khi nói một điều đúng \textit{gần $c$}, ta hiểu rằng điều đó đúng trên một khoảng mở nào đó chứa $c$. (Vì vậy, cực đại hoặc cực tiểu địa phương không thể xảy ra tại một đầu mút.) Chẳng hạn, ở Hình 3, $f(4)=5$ là một cực tiểu địa phương vì đó là giá trị nhỏ nhất của $f$ trên khoảng $I$. Nó không phải là giá trị nhỏ nhất tuyệt đối, vì $f(x)$ nhận những giá trị nhỏ hơn khi $x$ gần 12 (chẳng hạn, trong khoảng $K$). Thực ra, $f(12)=3$ vừa là cực tiểu địa phương vừa là giá trị nhỏ nhất tuyệt đối. Tương tự, $f(8)=7$ là một cực đại địa phương, nhưng không phải là giá trị lớn nhất tuyệt đối vì $f$ nhận những giá trị lớn hơn ở gần 1.
+\fig[.43]{fig03}{Hình 3. Các nhãn từ trái sang phải: cực tiểu địa phương; cực đại địa phương; cực tiểu địa phương và nhỏ nhất tuyệt đối.}
+
+\Needspace{10\baselineskip}
+\ex{1} Đồ thị của hàm số
+\[f(x)=3x^4-16x^3+18x^2,\qquad -1\le x\le4\]
+được cho ở Hình 4. Ta thấy $f(1)=5$ là một cực đại địa phương, còn giá trị lớn nhất tuyệt đối là $f(-1)=37$. (Giá trị lớn nhất tuyệt đối này không phải là cực đại địa phương vì nó xảy ra tại đầu mút.) Ngoài ra, $f(0)=0$ là một cực tiểu địa phương và $f(3)=-27$ vừa là cực tiểu địa phương vừa là giá trị nhỏ nhất tuyệt đối. Chú ý rằng tại $x=4$, $f$ không có cực đại địa phương cũng không có giá trị lớn nhất tuyệt đối.
+\fig[.42]{fig04}{Hình 4}
+\ex{2} Hàm số $f(x)=\cos x$ nhận giá trị lớn nhất (địa phương và tuyệt đối) bằng 1 vô số lần, vì $\cos 2n\pi=1$ với mọi số nguyên $n$ và $-1\le\cos x\le1$ với mọi $x$ (Hình 5). Tương tự, $\cos(2n+1)\pi=-1$ là giá trị nhỏ nhất, với $n$ là số nguyên bất kỳ.
+\fig[.65]{fig05}{Hình 5. $y=\cos x$. Nhãn trên: cực đại địa phương và lớn nhất tuyệt đối; nhãn dưới: cực tiểu địa phương và nhỏ nhất tuyệt đối.}
+\Needspace{18\baselineskip}
+\ex{3} Nếu $f(x)=x^2$, thì $f(x)\ge f(0)$ vì $x^2\ge0$ với mọi $x$. Do đó, $f(0)=0$ là giá trị nhỏ nhất tuyệt đối (và cực tiểu địa phương) của $f$. Điều này tương ứng với việc gốc tọa độ là điểm thấp nhất của parabol $y=x^2$ (Hình 6). Tuy nhiên, parabol không có điểm cao nhất nên hàm số này không có giá trị lớn nhất.
+\fig[.29]{fig06}{Hình 6. Giá trị nhỏ nhất bằng 0; không có giá trị lớn nhất.}
+\ex{4} Từ đồ thị hàm số $f(x)=x^3$ ở Hình 7, ta thấy hàm số này không có giá trị lớn nhất tuyệt đối cũng không có giá trị nhỏ nhất tuyệt đối. Thực ra, nó cũng không có cực trị địa phương.
+\fig[.29]{fig07}{Hình 7. Không có giá trị nhỏ nhất và cũng không có giá trị lớn nhất.}
+Ta đã thấy có những hàm số có giá trị cực trị, trong khi những hàm khác thì không. Định lý sau đưa ra các điều kiện bảo đảm một hàm số có giá trị cực trị.
+\Needspace{7\baselineskip}
+\group{3. Định lý giá trị cực trị}
+Nếu $f$ liên tục trên đoạn đóng $[a,b]$, thì $f$ đạt giá trị lớn nhất tuyệt đối $f(c)$ và giá trị nhỏ nhất tuyệt đối $f(d)$ tại những số $c,d\in[a,b]$ nào đó.
+
+Định lý giá trị cực trị được minh họa ở Hình 8. Chú ý rằng một giá trị cực trị có thể được đạt tại nhiều điểm. Mặc dù định lý rất hợp lý về mặt trực giác, việc chứng minh khá khó nên ta bỏ qua chứng minh.
+\fig[.98]{fig08}{Hình 8. Hàm số liên tục trên một đoạn đóng luôn đạt các giá trị cực trị.}
+Hình 9 và Hình 10 cho thấy hàm số có thể không có các giá trị cực trị nếu bỏ đi một trong hai giả thiết (tính liên tục hoặc đoạn đóng) của Định lý giá trị cực trị.
+\fig[.37]{fig09}{Hình 9. Hàm số này có giá trị nhỏ nhất $f(2)=0$, nhưng không có giá trị lớn nhất.}
+\fig[.37]{fig10}{Hình 10. Hàm liên tục $g$ này không có giá trị lớn nhất cũng không có giá trị nhỏ nhất.}
+Hàm số $f$ ở Hình 9 xác định trên đoạn đóng $[0,2]$ nhưng không có giá trị lớn nhất. (Tập giá trị của $f$ là $[0,3)$. Hàm số nhận những giá trị gần 3 tùy ý, nhưng không bao giờ thực sự đạt giá trị 3.) Điều này không mâu thuẫn với Định lý giá trị cực trị vì $f$ không liên tục. [Tuy vậy, một hàm không liên tục vẫn có thể có cả giá trị lớn nhất và nhỏ nhất; xem Bài tập 13(b).]
+
+Hàm số $g$ ở Hình 10 liên tục trên khoảng mở $(0,2)$ nhưng không có giá trị lớn nhất hoặc nhỏ nhất. [Tập giá trị của $g$ là $(1,\infty)$; hàm nhận những giá trị lớn tùy ý.] Điều này không mâu thuẫn với Định lý giá trị cực trị vì khoảng $(0,2)$ không đóng.
+
+\section*{Số tới hạn và phương pháp trên đoạn đóng}
+Định lý giá trị cực trị cho biết một hàm liên tục trên đoạn đóng có giá trị lớn nhất và nhỏ nhất, nhưng không chỉ cách tìm chúng. Ở Hình 8, các giá trị lớn nhất và nhỏ nhất tuyệt đối đạt tại những điểm \textit{nằm giữa} $a$ và $b$ cũng là những cực đại hoặc cực tiểu địa phương. Vì vậy, ta bắt đầu bằng việc tìm các cực trị địa phương.
+
+Hình 11 biểu diễn đồ thị của một hàm số $f$ có cực đại địa phương tại $c$ và cực tiểu địa phương tại $d$. Dường như tại các điểm cực đại, cực tiểu, tiếp tuyến nằm ngang nên có hệ số góc bằng 0. Vì đạo hàm là hệ số góc của tiếp tuyến, ta có $f'(c)=0$ và $f'(d)=0$. Định lý sau khẳng định điều đó đúng đối với các hàm khả vi.
+\fig[.43]{fig11}{Hình 11}
+\group{4. Định lý Fermat}
+Nếu $f$ có cực đại hoặc cực tiểu địa phương tại $c$ và $f'(c)$ tồn tại, thì $f'(c)=0$.
+\par\noindent\textit{Chứng minh.} Để cụ thể, giả sử $f$ có cực đại địa phương tại $c$. Theo Định nghĩa 2, $f(c)\ge f(x)$ nếu $x$ đủ gần $c$. Điều này có nghĩa là nếu $h$ đủ gần 0, với $h$ dương hoặc âm, thì
+\[f(c)\ge f(c+h),\]
+và do đó
+\[f(c+h)-f(c)\le0.\tag{5}\]
+Ta có thể chia cả hai vế của bất đẳng thức cho một số dương. Vì vậy, nếu $h>0$ và đủ nhỏ thì
+\[\frac{f(c+h)-f(c)}{h}\le0.\]
+Lấy giới hạn bên phải của hai vế (sử dụng Định lý 2.3.2), ta được
+\[\lim_{h\to0^+}\frac{f(c+h)-f(c)}{h}\le\lim_{h\to0^+}0=0.\]
+Nhưng vì $f'(c)$ tồn tại nên
+\[f'(c)=\lim_{h\to0}\frac{f(c+h)-f(c)}{h}
+=\lim_{h\to0^+}\frac{f(c+h)-f(c)}{h}.\]
+Vậy $f'(c)\le0$. Nếu $h<0$, chiều của bất đẳng thức (5) đổi lại khi chia cho $h$:
+\[\frac{f(c+h)-f(c)}{h}\ge0.\]
+Lấy giới hạn bên trái, ta có
+\[f'(c)=\lim_{h\to0}\frac{f(c+h)-f(c)}{h}
+=\lim_{h\to0^-}\frac{f(c+h)-f(c)}{h}\ge0.\]
+Ta đã chứng minh $f'(c)\ge0$ đồng thời $f'(c)\le0$. Vì cả hai bất đẳng thức đều đúng, khả năng duy nhất là $f'(c)=0$.
+
+Ta đã chứng minh Định lý Fermat trong trường hợp cực đại địa phương. Trường hợp cực tiểu địa phương được chứng minh tương tự; Bài tập 81 đưa ra một cách chứng minh khác.\hfill$\square$
+\group{Fermat}
+Định lý Fermat mang tên Pierre Fermat (1601–1665), một luật gia người Pháp nghiên cứu toán học như một thú vui. Dù không phải nhà toán học chuyên nghiệp, Fermat là một trong hai người sáng lập hình học giải tích (người còn lại là Descartes). Những phương pháp tìm tiếp tuyến, giá trị lớn nhất và nhỏ nhất của ông (trước khi giới hạn và đạo hàm ra đời) đã khiến ông trở thành người đi trước Newton trong việc xây dựng phép tính vi phân.
+
+Các ví dụ sau nhắc ta không nên suy diễn quá mức từ Định lý Fermat: không thể chỉ đặt $f'(x)=0$ rồi giải theo $x$ là có thể tìm được các giá trị cực trị.
+\ex{5} Nếu $f(x)=x^3$, thì $f'(x)=3x^2$, nên $f'(0)=0$. Nhưng $f$ không có cực đại hoặc cực tiểu tại 0, như đồ thị ở Hình 12 cho thấy. (Cũng có thể nhận xét $x^3>0$ khi $x>0$, còn $x^3<0$ khi $x<0$.) Việc $f'(0)=0$ chỉ có nghĩa là đường cong $y=x^3$ có tiếp tuyến nằm ngang tại $(0,0)$. Thay vì có cực đại hoặc cực tiểu tại $(0,0)$, đường cong cắt qua tiếp tuyến nằm ngang của nó tại đó.
+\fig[.29]{fig12}{Hình 12. Nếu $f(x)=x^3$, thì $f'(0)=0$, nhưng $f$ không có cực đại hoặc cực tiểu.}
+\ex{6} Hàm số $f(x)=|x|$ có giá trị nhỏ nhất (địa phương và tuyệt đối) tại 0. Tuy nhiên, không thể tìm giá trị này bằng cách đặt $f'(x)=0$, vì như đã thấy trong Ví dụ 2.8.5, $f'(0)$ không tồn tại (Hình 13).
+\fig[.29]{fig13}{Hình 13. Nếu $f(x)=|x|$, thì $f(0)=0$ là giá trị nhỏ nhất, nhưng $f'(0)$ không tồn tại.}
+\group{Lưu ý}
+Ví dụ 5 và 6 cho thấy cần thận trọng khi dùng Định lý Fermat. Ví dụ 5 chứng tỏ \textit{ngay cả khi $f'(c)=0$, hàm số vẫn có thể không có cực đại hoặc cực tiểu tại $c$}. (Nói cách khác, mệnh đề đảo của Định lý Fermat nói chung không đúng.) Hơn nữa, \textit{hàm số có thể có giá trị cực trị khi $f'(c)$ không tồn tại}, như ở Ví dụ 6.
+
+Định lý Fermat gợi ý rằng ít nhất ta nên bắt đầu tìm giá trị cực trị tại các số $c$ mà $f'(c)=0$ hoặc $f'(c)$ không tồn tại. Những số như vậy được gọi bằng một tên riêng.
+\group{6. Định nghĩa}
+Một \textbf{số tới hạn} của hàm số $f$ là một số $c$ thuộc miền xác định của $f$ sao cho $f'(c)=0$ hoặc $f'(c)$ không tồn tại.
+\Needspace{9\baselineskip}
+\ex{7} Tìm các số tới hạn của: (a) $f(x)=x^3-3x^2+1$; (b) $f(x)=x^{3/5}(4-x)$.
+\sol (a) Đạo hàm là $f'(x)=3x^2-6x=3x(x-2)$. Vì $f'(x)$ tồn tại với mọi $x$, các số tới hạn duy nhất của $f$ xuất hiện khi $f'(x)=0$, tức là $x=0$ hoặc $x=2$.
+
+(b) Miền xác định của $f$ là $\mathbb R$. Quy tắc tích cho
+\begin{align*}
+f'(x)&=x^{3/5}(-1)+(4-x)\left(\frac35x^{-2/5}\right)
+=-x^{3/5}+\frac{3(4-x)}{5x^{2/5}}\\
+&=\frac{-5x+3(4-x)}{5x^{2/5}}=\frac{12-8x}{5x^{2/5}}.
+\end{align*}
+[Cũng có thể nhận được kết quả này bằng cách viết trước $f(x)=4x^{3/5}-x^{8/5}$.] Vì vậy, $f'(x)=0$ khi $12-8x=0$, tức là $x=\frac32$, và $f'(x)$ không tồn tại khi $x=0$. Các số tới hạn là $\frac32$ và 0.
+\fig[.41]{fig14}{Hình 14. Đồ thị của hàm số ở Ví dụ 7(b) củng cố kết quả: tiếp tuyến nằm ngang tại $x=1{,}5$ (nơi $f'(x)=0$) và tiếp tuyến thẳng đứng tại $x=0$ (nơi $f'(x)$ không xác định).}
+Theo ngôn ngữ số tới hạn, Định lý Fermat có thể được phát biểu lại như sau (so sánh Định nghĩa 6 và Định lý 4):
+\group{7.} Nếu $f$ có cực đại hoặc cực tiểu địa phương tại $c$, thì $c$ là một số tới hạn của $f$.
+
+Để tìm giá trị lớn nhất hoặc nhỏ nhất tuyệt đối của một hàm liên tục trên một đoạn đóng, chú ý rằng giá trị ấy hoặc là một cực trị địa phương [khi đó đạt tại một số tới hạn, theo (7)], hoặc đạt tại một đầu mút, như đã thấy ở Hình 8. Vì thế, quy trình ba bước sau luôn áp dụng được.
+\Needspace{10\baselineskip}
+\group{Phương pháp trên đoạn đóng}
+Để tìm giá trị lớn nhất và nhỏ nhất tuyệt đối của hàm liên tục $f$ trên đoạn đóng $[a,b]$:
+\begin{enumerate}[nosep]
+\item Tính các giá trị của $f$ tại những số tới hạn của $f$ trong $(a,b)$.
+\item Tính các giá trị của $f$ tại hai đầu mút của đoạn.
+\item Số lớn nhất trong các giá trị ở Bước 1 và 2 là giá trị lớn nhất tuyệt đối; số nhỏ nhất là giá trị nhỏ nhất tuyệt đối.
+\end{enumerate}
+\ex{8} Tìm giá trị lớn nhất và nhỏ nhất tuyệt đối của hàm số
+\[f(x)=x^3-3x^2+1,\qquad -\frac12\le x\le4.\]
+\sol Vì $f$ liên tục trên $[-\frac12,4]$, ta dùng phương pháp trên đoạn đóng. Trong Ví dụ 7(a), ta đã tìm được các số tới hạn $x=0$ và $x=2$. Cả hai đều nằm trong $(-\frac12,4)$. Giá trị của $f$ tại các số tới hạn là
+\[f(0)=1,\qquad f(2)=-3.\]
+Giá trị tại hai đầu mút là
+\[f\left(-\frac12\right)=\frac18,\qquad f(4)=17.\]
+So sánh bốn số này, ta thấy giá trị lớn nhất tuyệt đối là $f(4)=17$ và giá trị nhỏ nhất tuyệt đối là $f(2)=-3$.
+
+Trong ví dụ này, giá trị lớn nhất tuyệt đối đạt tại một đầu mút, còn giá trị nhỏ nhất tuyệt đối đạt tại một số tới hạn. Đồ thị của $f$ được phác họa ở Hình 15.
+\fig[.43]{fig15}{Hình 15}
+Với phần mềm vẽ đồ thị hoặc máy tính cầm tay có chức năng đồ thị, ta dễ dàng ước lượng giá trị lớn nhất và nhỏ nhất của hàm số. Tuy nhiên, như ví dụ sau cho thấy, cần dùng phép tính vi phân để tìm các giá trị chính xác.
+\Needspace{11\baselineskip}
+\ex{9} (a) Dùng máy tính cầm tay hoặc máy tính để ước lượng giá trị nhỏ nhất và lớn nhất tuyệt đối của $f(x)=x-2\sin x$, $0\le x\le2\pi$.
+
+(b) Dùng phép tính vi phân để tìm các giá trị nhỏ nhất và lớn nhất chính xác.
+\sol (a) Hình 16 biểu diễn đồ thị của $f$ trong cửa sổ $[0,2\pi]\times[-1,8]$. Giá trị lớn nhất tuyệt đối xấp xỉ $6{,}97$, đạt khi $x\approx5{,}24$. Tương tự, giá trị nhỏ nhất tuyệt đối xấp xỉ $-0{,}68$, đạt khi $x\approx1{,}05$. Có thể cải thiện độ chính xác của các ước lượng, nhưng để có giá trị chính xác, ta phải dùng phép tính vi phân.
+\fig[.41]{fig16}{Hình 16}
+(b) Hàm số $f(x)=x-2\sin x$ liên tục trên $[0,2\pi]$. Vì $f'(x)=1-2\cos x$, nên $f'(x)=0$ khi $\cos x=\frac12$, tức là $x=\pi/3$ hoặc $x=5\pi/3$. Giá trị tại các số tới hạn là
+\[f(\pi/3)=\frac\pi3-2\sin\frac\pi3=\frac\pi3-\sqrt3\approx-0{,}684853\]
+và
+\[f(5\pi/3)=\frac{5\pi}3-2\sin\frac{5\pi}3=\frac{5\pi}3+\sqrt3\approx6{,}968039.\]
+Giá trị của $f$ tại hai đầu mút là
+\[f(0)=0,\qquad f(2\pi)=2\pi\approx6{,}28.\]
+So sánh bốn số và dùng phương pháp trên đoạn đóng, ta được giá trị nhỏ nhất tuyệt đối $f(\pi/3)=\pi/3-\sqrt3$ và giá trị lớn nhất tuyệt đối $f(5\pi/3)=5\pi/3+\sqrt3$. Các giá trị ở phần (a) giúp kiểm tra kết quả.
+\ex{10} Kính thiên văn không gian Hubble được tàu con thoi \textit{Discovery} đưa vào hoạt động ngày 24 tháng 4 năm 1990. Một mô hình vận tốc của tàu con thoi trong nhiệm vụ này, từ lúc rời bệ phóng $t=0$ đến khi tách các tên lửa đẩy nhiên liệu rắn ở $t=126$ giây, là
+\[v(t)=0{,}001302t^3-0{,}09029t^2+23{,}61t-3{,}083\]
+(tính bằng foot trên giây). Dùng mô hình này để ước lượng giá trị lớn nhất và nhỏ nhất tuyệt đối của \textit{gia tốc} tàu con thoi từ lúc phóng đến khi tách tên lửa đẩy.
+\fig[.34]{hubble}{Kính thiên văn không gian Hubble. Ảnh: NASA.}
+\sol Ta cần tìm các giá trị cực trị của hàm gia tốc, chứ không phải của hàm vận tốc đã cho. Vì vậy, trước hết lấy đạo hàm để tìm gia tốc:
+\begin{align*}
+a(t)&=v'(t)=\frac{d}{dt}\left(0{,}001302t^3-0{,}09029t^2+23{,}61t-3{,}083\right)\\
+&=0{,}003906t^2-0{,}18058t+23{,}61.
+\end{align*}
+Áp dụng phương pháp trên đoạn đóng cho hàm liên tục $a$ trên $0\le t\le126$. Đạo hàm của nó là
+\[a'(t)=0{,}007812t-0{,}18058.\]
+Số tới hạn duy nhất ứng với $a'(t)=0$:
+\[t_1=\frac{0{,}18058}{0{,}007812}\approx23{,}12.\]
+Tính $a(t)$ tại số tới hạn và hai đầu mút:
+\[a(0)=23{,}61,\qquad a(t_1)\approx21{,}52,\qquad a(126)\approx62{,}87.\]
+Vậy gia tốc lớn nhất xấp xỉ $62{,}87\ \mathrm{ft/s^2}$ và gia tốc nhỏ nhất xấp xỉ $21{,}52\ \mathrm{ft/s^2}$.
+
+\clearpage
+\section*{4.1 — Bài tập}
+\bt{1} Giải thích sự khác nhau giữa giá trị nhỏ nhất tuyệt đối và cực tiểu địa phương.
+\bt{2} Giả sử $f$ là hàm liên tục xác định trên đoạn đóng $[a,b]$.
+
+(a) Định lý nào bảo đảm $f$ có giá trị lớn nhất tuyệt đối và nhỏ nhất tuyệt đối?
+
+(b) Bạn thực hiện những bước nào để tìm các giá trị ấy?
+\Needspace{8\baselineskip}
+\group{3–4} Với mỗi số $a,b,c,d,r,s$, hãy xác định hàm số có đồ thị đã cho đạt giá trị lớn nhất tuyệt đối, nhỏ nhất tuyệt đối, cực đại địa phương, cực tiểu địa phương, hay không có cực đại hoặc cực tiểu tại số đó.
+\par\noindent\begin{minipage}{\linewidth}
+\bt{3}\fig[.47]{ex03}{Đồ thị cho Bài tập 3.}
+\end{minipage}\par
+\par\noindent\begin{minipage}{\linewidth}
+\bt{4}\fig[.47]{ex04}{Đồ thị cho Bài tập 4.}
+\end{minipage}\par
+\Needspace{8\baselineskip}
+\group{5–6} Dùng đồ thị để nêu các giá trị lớn nhất, nhỏ nhất tuyệt đối và các giá trị cực đại, cực tiểu địa phương của hàm số.
+\par\noindent\begin{minipage}{\linewidth}
+\bt{5}\fig[.41]{ex05}{Đồ thị cho Bài tập 5.}
+\end{minipage}\par
+\par\noindent\begin{minipage}{\linewidth}
+\bt{6}\fig[.41]{ex06}{Đồ thị cho Bài tập 6.}
+\end{minipage}\par
+\Needspace{8\baselineskip}
+\group{7–10} Phác họa đồ thị của một hàm số $f$ liên tục trên $[1,5]$ và có các tính chất đã cho.
+\bt{7} Giá trị lớn nhất tuyệt đối tại 5, nhỏ nhất tuyệt đối tại 2, cực đại địa phương tại 3, cực tiểu địa phương tại 2 và 4.
+\bt{8} Giá trị lớn nhất tuyệt đối tại 4, nhỏ nhất tuyệt đối tại 5, cực đại địa phương tại 2, cực tiểu địa phương tại 3.
+\bt{9} Giá trị nhỏ nhất tuyệt đối tại 3, lớn nhất tuyệt đối tại 4, cực đại địa phương tại 2.
+\bt{10} Giá trị lớn nhất tuyệt đối tại 2, nhỏ nhất tuyệt đối tại 5; 4 là một số tới hạn nhưng hàm số không có cực đại hoặc cực tiểu địa phương tại đó.
+\bt{11} (a) Phác họa đồ thị của một hàm số có cực đại địa phương tại 2 và khả vi tại 2.
+
+(b) Phác họa đồ thị của một hàm số có cực đại địa phương tại 2, liên tục nhưng không khả vi tại 2.
+
+(c) Phác họa đồ thị của một hàm số có cực đại địa phương tại 2 và không liên tục tại 2.
+\bt{12} (a) Phác họa đồ thị của một hàm số trên $[-1,2]$ có giá trị lớn nhất tuyệt đối nhưng không có cực đại địa phương.
+
+(b) Phác họa đồ thị của một hàm số trên $[-1,2]$ có cực đại địa phương nhưng không có giá trị lớn nhất tuyệt đối.
+\bt{13} (a) Phác họa đồ thị của một hàm số trên $[-1,2]$ có giá trị lớn nhất tuyệt đối nhưng không có giá trị nhỏ nhất tuyệt đối.
+
+(b) Phác họa đồ thị của một hàm số trên $[-1,2]$ không liên tục nhưng có cả giá trị lớn nhất và nhỏ nhất tuyệt đối.
+\bt{14} (a) Phác họa đồ thị của một hàm số có hai cực đại địa phương, một cực tiểu địa phương và không có giá trị nhỏ nhất tuyệt đối.
+
+(b) Phác họa đồ thị của một hàm số có ba cực tiểu địa phương, hai cực đại địa phương và bảy số tới hạn.
+\Needspace{8\baselineskip}
+\group{15–28} Phác họa đồ thị của $f$ bằng tay, rồi dùng hình vẽ để tìm các giá trị lớn nhất, nhỏ nhất tuyệt đối và các giá trị cực đại, cực tiểu địa phương của $f$. (Dùng các đồ thị và phép biến đổi ở §1.2 và §1.3.)
+\bt{15} $f(x)=3-2x,\quad x\ge-1$.
+\bt{16} $f(x)=x^2,\quad -1\le x<2$.
+\bt{17} $f(x)=1/x,\quad x\ge1$.
+\bt{18} $f(x)=1/x,\quad 1<x<3$.
+\bt{19} $f(x)=\sin x,\quad 0\le x<\pi/2$.
+\bt{20} $f(x)=\sin x,\quad 0<x\le\pi/2$.
+\bt{21} $f(x)=\sin x,\quad -\pi/2\le x\le\pi/2$.
+\bt{22} $f(t)=\cos t,\quad -3\pi/2\le t\le3\pi/2$.
+\bt{23} $f(x)=\ln x,\quad 0<x\le2$.
+\bt{24} $f(x)=|x|$.
+\bt{25} $f(x)=1-\sqrt{x}$.
+\bt{26} $f(x)=e^x$.
+\bt{27}
+\[f(x)=\begin{cases}x^2&\text{khi }-1\le x\le0,\\2-3x&\text{khi }0<x\le1.\end{cases}\]
+\bt{28}
+\[f(x)=\begin{cases}2x+1&\text{khi }0\le x<1,\\4-2x&\text{khi }1\le x\le3.\end{cases}\]
+\Needspace{7\baselineskip}
+\group{29–48} Tìm các số tới hạn của hàm số.
+\bt{29} $f(x)=3x^2+x-2$.
+\bt{30} $g(v)=v^3-12v+4$.
+\bt{31} $f(x)=3x^4+8x^3-48x^2$.
+\bt{32} $f(x)=2x^3+x^2+8x$.
+\bt{33} $g(t)=t^5+5t^3+50t$.
+\bt{34} $A(x)=|3-2x|$.
+\bt{35} $g(y)=\dfrac{y-1}{y^2-y+1}$.
+\bt{36} $h(p)=\dfrac{p-1}{p^2+4}$.
+\bt{37} $p(x)=\dfrac{x^2+2}{2x-1}$.
+\bt{38} $q(t)=\dfrac{t^2+9}{t^2-9}$.
+\bt{39} $h(t)=t^{3/4}-2t^{1/4}$.
+\bt{40} $g(x)=\sqrt[3]{4-x^2}$.
+\bt{41} $F(x)=x^{4/5}(x-4)^2$.
+\bt{42} $h(x)=x^{-1/3}(x-2)$.
+\bt{43} $f(x)=x^{1/3}(4-x)^{2/3}$.
+\bt{44} $f(\theta)=\theta+\sqrt2\cos\theta$.
+\bt{45} $f(\theta)=2\cos\theta+\sin^2\theta$.
+\bt{46} $p(t)=te^{4t}$.
+\bt{47} $g(x)=x^2\ln x$.
+\bt{48} $B(u)=4\arctan u-u$.
+\Needspace{7\baselineskip}
+\group{49–50} Cho công thức đạo hàm của hàm số $f$. Hàm số $f$ có bao nhiêu số tới hạn? Dùng công cụ vẽ đồ thị.
+\bt{49} $f'(x)=5e^{-0{,}1|x|}\sin x-1$.
+\bt{50} $f'(x)=\dfrac{100\cos^2x}{10+x^2}-1$.
+\Needspace{7\baselineskip}
+\group{51–66} Tìm giá trị lớn nhất và nhỏ nhất tuyệt đối của $f$ trên đoạn đã cho.
+\bt{51} $f(x)=12+4x-x^2,\quad [0,5]$.
+\bt{52} $f(x)=5+54x-2x^3,\quad [0,4]$.
+\bt{53} $f(x)=2x^3-3x^2-12x+1,\quad [-2,3]$.
+\bt{54} $f(x)=x^3-6x^2+5,\quad [-3,5]$.
+\bt{55} $f(x)=3x^4-4x^3-12x^2+1,\quad [-2,3]$.
+\bt{56} $f(t)=(t^2-4)^3,\quad [-2,3]$.
+\bt{57} $f(x)=x+\dfrac1x,\quad [0{,}2;4]$.
+\bt{58} $f(x)=\dfrac{x}{x^2-x+1},\quad [0,3]$.
+\bt{59} $f(t)=t-\sqrt[3]t,\quad [-1,4]$.
+\bt{60} $f(x)=\dfrac{e^x}{1+x^2},\quad [0,3]$.
+\bt{61} $f(t)=2\cos t+\sin2t,\quad [0,\pi/2]$.
+\bt{62} $f(\theta)=1+\cos^2\theta,\quad [\pi/4,\pi]$.
+\bt{63} $f(x)=x^{-2}\ln x,\quad [\frac12,4]$.
+\bt{64} $f(x)=xe^{x/2},\quad [-3,1]$.
+\bt{65} $f(x)=\ln(x^2+x+1),\quad [-1,1]$.
+\bt{66} $f(x)=x-2\arctan x,\quad [0,4]$.
+\bt{67} Nếu $a,b$ là các số dương, hãy tìm giá trị lớn nhất của $f(x)=x^a(1-x)^b$, $0\le x\le1$.
+\bt{68} Dùng đồ thị để ước lượng các số tới hạn của $f(x)=|1+5x-x^3|$, chính xác đến một chữ số thập phân.
+\Needspace{8\baselineskip}
+\group{69–72} (a) Dùng đồ thị để ước lượng giá trị lớn nhất và nhỏ nhất tuyệt đối của hàm số, chính xác đến hai chữ số thập phân.
+
+(b) Dùng phép tính vi phân để tìm các giá trị lớn nhất và nhỏ nhất chính xác.
+\bt{69} $f(x)=x^5-x^3+2,\quad -1\le x\le1$.
+\bt{70} $f(x)=e^x+e^{-2x},\quad 0\le x\le1$.
+\bt{71} $f(x)=x\sqrt{x-x^2}$.
+\bt{72} $f(x)=x-2\cos x,\quad -2\le x\le0$.
+\bt{73} Sau khi uống đồ uống có cồn, nồng độ cồn trong máu (BAC) tăng khi cồn được hấp thu, rồi giảm dần khi cồn được chuyển hóa. Hàm số
+\[C(t)=0{,}135te^{-2{,}802t}\]
+mô hình hóa BAC trung bình (g/dL) của một nhóm tám nam giới, $t$ giờ sau khi uống nhanh 15 mL cồn (tương đương một đơn vị đồ uống có cồn). BAC trung bình lớn nhất trong 3 giờ đầu là bao nhiêu? Đạt vào lúc nào?
+
+\noindent\textit{Nguồn:} Phỏng theo P. Wilkinson và cộng sự, “Pharmacokinetics of Ethanol after Oral Administration in the Fasting State”, \textit{Journal of Pharmacokinetics and Biopharmaceutics} 5 (1977): 207–24.
+\bt{74} Sau khi uống một viên kháng sinh, nồng độ kháng sinh trong máu được mô hình hóa bởi
+\[C(t)=8\left(e^{-0{,}4t}-e^{-0{,}6t}\right),\]
+trong đó $t$ tính bằng giờ và $C$ tính bằng $\mathrm{\mu g/mL}$. Nồng độ kháng sinh lớn nhất trong 12 giờ đầu là bao nhiêu?
+\bt{75} Trong khoảng từ $0^\circ\mathrm C$ đến $30^\circ\mathrm C$, thể tích $V$ (centimét khối) của 1 kg nước ở nhiệt độ $T$ được cho xấp xỉ bởi
+\[V=999{,}87-0{,}06426T+0{,}0085043T^2-0{,}0000679T^3.\]
+Tìm nhiệt độ tại đó nước có khối lượng riêng lớn nhất.
+\bt{76} Một vật có trọng lượng $W$ được kéo trên một mặt phẳng nằm ngang bằng lực tác dụng dọc theo sợi dây buộc vào vật. Nếu dây tạo với mặt phẳng góc $\theta$, thì độ lớn của lực là
+\[F=\frac{\mu W}{\mu\sin\theta+\cos\theta},\]
+trong đó $\mu$ là hằng số dương gọi là \textit{hệ số ma sát} và $0\le\theta\le\pi/2$. Chứng minh rằng $F$ nhỏ nhất khi $\tan\theta=\mu$.
+\bt{77} Mực nước hồ Lanier ở Georgia, Hoa Kỳ, trong năm 2012, đo bằng foot so với mực nước biển trung bình, có thể được mô hình hóa bởi
+\[L(t)=0{,}01441t^3-0{,}4177t^2+2{,}703t+1060{,}1,\]
+trong đó $t$ tính bằng tháng kể từ ngày 1 tháng 1 năm 2012. Ước lượng thời điểm mực nước cao nhất trong năm 2012.
+\bt{78} Năm 1992, tàu con thoi \textit{Endeavour} thực hiện nhiệm vụ STS-49 để lắp một động cơ đẩy tại cận điểm quỹ đạo cho vệ tinh viễn thông Intelsat. Bảng cho vận tốc của tàu từ lúc phóng đến khi tách các tên lửa đẩy nhiên liệu rắn.
+
+(a) Dùng máy tính cầm tay có chức năng đồ thị hoặc máy tính để tìm đa thức bậc ba mô hình hóa tốt nhất vận tốc của tàu trên $t\in[0,125]$. Sau đó vẽ đồ thị đa thức này.
+
+(b) Tìm mô hình gia tốc và dùng nó để ước lượng gia tốc lớn nhất, nhỏ nhất trong 125 giây đầu.
+\begin{center}\small
+\begin{tabular}{p{8.1cm}rr}\toprule
+Sự kiện&Thời gian (s)&Vận tốc (ft/s)\\\midrule
+Phóng&0&0\\
+Bắt đầu thao tác lăn&10&185\\
+Kết thúc thao tác lăn&15&319\\
+Giảm lực đẩy xuống 89\%&20&447\\
+Giảm lực đẩy xuống 67\%&32&742\\
+Tăng lực đẩy lên 104\%&59&1325\\
+Áp suất động lớn nhất&62&1445\\
+Tách tên lửa đẩy nhiên liệu rắn&125&4151\\\bottomrule
+\end{tabular}\end{center}
+\bt{79} Khi một dị vật mắc trong khí quản khiến một người ho, cơ hoành đẩy lên làm tăng áp suất trong phổi. Đồng thời khí quản co lại, thu hẹp đường dẫn của luồng khí bị đẩy ra. Để một lượng khí nhất định thoát ra trong một khoảng thời gian cố định, nó phải đi nhanh hơn qua đường dẫn hẹp so với đường dẫn rộng. Luồng khí có vận tốc càng lớn thì lực tác dụng lên dị vật càng lớn. Ảnh X-quang cho thấy khi ho, bán kính ống khí quản tròn co lại còn khoảng hai phần ba bán kính bình thường. Theo một mô hình toán học của sự ho, vận tốc $v$ của luồng khí liên hệ với bán kính $r$ của khí quản bởi
+\[v(r)=k(r_0-r)r^2,\qquad \frac12r_0\le r\le r_0,\]
+trong đó $k$ là hằng số và $r_0$ là bán kính bình thường của khí quản. Ràng buộc đối với $r$ là do thành khí quản cứng lại dưới áp lực, ngăn không cho co xuống nhỏ hơn $\frac12r_0$ (nếu không người đó sẽ bị ngạt).
+
+(a) Xác định $r$ trong $[\frac12r_0,r_0]$ để $v$ có giá trị lớn nhất tuyệt đối. Kết quả này so với bằng chứng thực nghiệm như thế nào?
+
+(b) Giá trị lớn nhất tuyệt đối của $v$ trên đoạn là bao nhiêu?
+
+(c) Phác họa đồ thị của $v$ trên $[0,r_0]$.
+\bt{80} Chứng minh rằng hàm số
+\[f(x)=x^{101}+x^{51}+x+1\]
+không có cực đại địa phương cũng không có cực tiểu địa phương.
+\bt{81} (a) Nếu $f$ có cực tiểu địa phương tại $c$, chứng minh $g(x)=-f(x)$ có cực đại địa phương tại $c$.
+
+(b) Dùng phần (a) để chứng minh Định lý Fermat trong trường hợp $f$ có cực tiểu địa phương tại $c$.
+\bt{82} Hàm bậc ba là đa thức bậc 3, tức có dạng $f(x)=ax^3+bx^2+cx+d$, trong đó $a\ne0$.
+
+(a) Chứng minh một hàm bậc ba có thể có hai, một hoặc không có số tới hạn. Cho ví dụ và phác họa đồ thị để minh họa ba khả năng này.
+
+(b) Một hàm bậc ba có thể có bao nhiêu giá trị cực trị địa phương?
+
+\clearpage
+\section*{Dự án ứng dụng — Phép tính vi phân và cầu vồng}
+Cầu vồng hình thành khi các giọt mưa tán xạ ánh sáng Mặt Trời. Từ thời cổ đại, cầu vồng đã cuốn hút con người và khơi nguồn những nỗ lực giải thích khoa học từ thời Aristotle. Trong dự án này, ta dùng ý tưởng của Descartes và Newton để giải thích hình dạng, vị trí và màu sắc của cầu vồng.
+\par\medskip\noindent\textbf{1.} Hình vẽ mô tả một tia sáng Mặt Trời đi vào giọt mưa hình cầu tại $A$. Một phần ánh sáng bị phản xạ, nhưng đoạn $AB$ biểu diễn đường đi của phần đi vào giọt nước. Chú ý rằng ánh sáng bị khúc xạ về phía pháp tuyến $AO$; theo định luật Snell,
+\[\sin\alpha=k\sin\beta,\]
+trong đó $\alpha$ là góc tới, $\beta$ là góc khúc xạ và $k\approx\frac43$ là chiết suất của nước. Tại $B$, một phần ánh sáng đi qua giọt nước và khúc xạ ra không khí, còn đoạn $BC$ biểu diễn phần bị phản xạ. (Góc tới bằng góc phản xạ.) Khi tia tới $C$, một phần bị phản xạ, nhưng ở đây ta quan tâm nhiều hơn đến phần thoát khỏi giọt mưa tại $C$. (Chú ý rằng nó khúc xạ ra xa pháp tuyến.) \textit{Góc lệch} $D(\alpha)$ là góc quay theo chiều kim đồng hồ mà tia sáng đã trải qua trong quá trình ba giai đoạn này. Vì vậy,
+\[D(\alpha)=(\alpha-\beta)+(\pi-2\beta)+(\alpha-\beta)=\pi+2\alpha-4\beta.\]
+Chứng minh góc lệch nhỏ nhất là $D(\alpha)\approx138^\circ$, đạt khi $\alpha\approx59{,}4^\circ$.
+\fig[.46]{rainbow_primary}{Sự hình thành cầu vồng chính. “from sun”: từ Mặt Trời; “to observer”: đến người quan sát.}
+Ý nghĩa của góc lệch nhỏ nhất là: khi $\alpha\approx59{,}4^\circ$, ta có $D'(\alpha)\approx0$, nên $\Delta D/\Delta\alpha\approx0$. Điều này có nghĩa là nhiều tia có $\alpha\approx59{,}4^\circ$ bị lệch đi những góc gần bằng nhau. Chính sự \textit{tập trung} của các tia đến từ gần hướng có góc lệch nhỏ nhất tạo nên độ sáng của cầu vồng chính. Hình tiếp theo cho thấy góc nâng từ người quan sát đến điểm cao nhất của cầu vồng là $180^\circ-138^\circ=42^\circ$. (Góc này được gọi là \textit{góc cầu vồng}.)
+\fig[.46]{rainbow_angle}{Góc cầu vồng chính. “rays from sun”: các tia từ Mặt Trời; “observer”: người quan sát.}
+\par\medskip\noindent\textbf{2.} Bài toán 1 giải thích vị trí của cầu vồng chính, nhưng màu sắc được giải thích thế nào? Ánh sáng Mặt Trời gồm một dải bước sóng, từ vùng đỏ qua cam, vàng, lục, lam, chàm và tím. Như Newton đã phát hiện trong các thí nghiệm lăng kính năm 1666, chiết suất khác nhau đối với từng màu. (Hiện tượng này gọi là \textit{tán sắc}.) Với ánh sáng đỏ, chiết suất $k\approx1{,}3318$; với ánh sáng tím, $k\approx1{,}3435$. Lặp lại phép tính ở Bài toán 1 với các giá trị $k$ này để chứng minh góc cầu vồng xấp xỉ $42{,}3^\circ$ đối với cung đỏ và $40{,}6^\circ$ đối với cung tím. Như vậy, cầu vồng thực sự gồm bảy cung riêng biệt ứng với bảy màu.
+\par\medskip\noindent\textbf{3.} Có lẽ bạn từng thấy một cầu vồng phụ mờ hơn ở phía trên cầu vồng chính. Nó hình thành từ phần tia sáng đi vào giọt mưa, khúc xạ tại $A$, phản xạ hai lần (tại $B$ và $C$), rồi khúc xạ khi thoát khỏi giọt nước tại $D$ (xem hình). Lần này, góc lệch $D(\alpha)$ là tổng góc quay \textit{ngược chiều kim đồng hồ} mà tia sáng trải qua trong quá trình bốn giai đoạn này. Chứng minh rằng
+\[D(\alpha)=2\alpha-6\beta+2\pi\]
+và $D(\alpha)$ đạt giá trị nhỏ nhất khi
+\[\cos\alpha=\sqrt{\frac{k^2-1}{8}}.\]
+\fig[.46]{rainbow_secondary}{Sự hình thành cầu vồng phụ. “from sun”: từ Mặt Trời; “to observer”: đến người quan sát.}
+Lấy $k=\frac43$, chứng minh góc lệch nhỏ nhất xấp xỉ $129^\circ$, do đó góc cầu vồng của cầu vồng phụ xấp xỉ $51^\circ$, như hình dưới.
+\fig[.38]{rainbow_both}{Góc cầu vồng chính và cầu vồng phụ.}
+\par\medskip\noindent\textbf{4.} Chứng minh rằng các màu của cầu vồng phụ xuất hiện theo thứ tự ngược với các màu của cầu vồng chính.
+\fig[.94]{rainbow_photo}{Cầu vồng chính và cầu vồng phụ. Ảnh: Leonid Andronov / Shutterstock.com.}
+\end{document}

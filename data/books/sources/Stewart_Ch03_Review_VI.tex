@@ -1,0 +1,325 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage{fontspec}\setmainfont{Latin Modern Roman}\setsansfont{DejaVu Sans}
+\usepackage{amsmath,amssymb,graphicx,geometry,enumitem,needspace,longtable,booktabs,fancyhdr,hyperref}
+\geometry{left=28mm,right=23mm,top=24mm,bottom=24mm}
+\hypersetup{unicode=true,colorlinks=true,linkcolor=black,urlcolor=blue,pdftitle={Giải tích Chương 3 Ôn tập Chương 3}}
+\setlength{\parindent}{1.2em}\setlength{\parskip}{4pt}\setlength{\headheight}{16pt}
+\pagestyle{fancy}\fancyhf{}\fancyhead[L]{\small Chương 3. Các quy tắc tính đạo hàm}\fancyhead[R]{\small Ôn tập}\fancyfoot[C]{\thepage}
+\newcommand{\fig}[3][.68]{\begin{center}\begin{minipage}{\linewidth}\centering\includegraphics[width=#1\linewidth]{assets/#2.png}\\{\small #3}\end{minipage}\end{center}}
+\newcommand{\ex}[1]{\par\medskip\noindent\textbf{Ví dụ #1.}\ }
+\newcommand{\sol}{\par\nopagebreak[4]\noindent\textit{Lời giải.}\ }
+\newcommand{\bt}[1]{\par\smallskip\Needspace{5\baselineskip}\noindent\textbf{#1.}\ }
+\newcommand{\group}[1]{\par\medskip\noindent\textbf{#1}\par\nopagebreak[4]}
+\newcommand{\gint}[1]{\left[\!\left[#1\right]\!\right]}
+\allowdisplaybreaks[2]
+\DeclareMathOperator{\sech}{sech}
+\DeclareMathOperator{\csch}{csch}
+\newcommand{\cc}[1]{\par\medskip\noindent\textbf{#1.}\ }
+\newcommand{\tf}[1]{\par\medskip\noindent\textbf{#1.}\ }
+\begin{document}
+\begin{center}{\Large\bfseries Chương 3 — Ôn tập}\end{center}
+\noindent\textit{Stewart–Clegg–Watson, Giải tích: Các hàm siêu việt sớm, ấn bản 9; trang in 269–273.}
+
+\section*{Kiểm tra khái niệm}
+\noindent\textit{Đáp án phần Kiểm tra khái niệm có tại StewartCalculus.com.}
+
+\cc{1} Phát biểu mỗi quy tắc tính đạo hàm sau bằng cả ký hiệu và lời văn.
+
+(a) Quy tắc lũy thừa; (b) Quy tắc nhân với hằng số; (c) Quy tắc tổng; (d) Quy tắc hiệu; (e) Quy tắc tích; (f) Quy tắc thương; (g) Quy tắc hàm hợp.
+
+\cc{2} Nêu đạo hàm của mỗi hàm số sau.
+\begin{align*}
+\text{(a)}\quad y&=x^n,&\text{(b)}\quad y&=e^x,&\text{(c)}\quad y&=b^x,\\
+\text{(d)}\quad y&=\ln x,&\text{(e)}\quad y&=\log_bx,&\text{(f)}\quad y&=\sin x,\\
+\text{(g)}\quad y&=\cos x,&\text{(h)}\quad y&=\tan x,&\text{(i)}\quad y&=\csc x,\\
+\text{(j)}\quad y&=\sec x,&\text{(k)}\quad y&=\cot x,&\text{(l)}\quad y&=\sin^{-1}x,\\
+\text{(m)}\quad y&=\cos^{-1}x,&\text{(n)}\quad y&=\tan^{-1}x,&\text{(o)}\quad y&=\sinh x,\\
+\text{(p)}\quad y&=\cosh x,&\text{(q)}\quad y&=\tanh x,&\text{(r)}\quad y&=\sinh^{-1}x,\\
+\text{(s)}\quad y&=\cosh^{-1}x,&\text{(t)}\quad y&=\tanh^{-1}x.
+\end{align*}
+\cc{3} (a) Số $e$ được định nghĩa như thế nào?
+
+(b) Biểu diễn $e$ dưới dạng một giới hạn.
+
+(c) Vì sao hàm mũ tự nhiên $y=e^x$ được dùng trong giải tích thường xuyên hơn các hàm mũ khác $y=b^x$?
+
+(d) Vì sao hàm logarit tự nhiên $y=\ln x$ được dùng trong giải tích thường xuyên hơn các hàm logarit khác $y=\log_bx$?
+
+\cc{4} (a) Giải thích cách lấy đạo hàm ẩn.
+
+(b) Giải thích cách lấy đạo hàm bằng logarit.
+
+\cc{5} Cho một số ví dụ về cách hiểu đạo hàm như tốc độ biến thiên trong vật lý, hóa học, sinh học, kinh tế học hoặc các ngành khoa học khác.
+
+\cc{6} (a) Viết phương trình vi phân diễn đạt quy luật tăng trưởng tự nhiên.
+
+(b) Trong những điều kiện nào, mô hình này thích hợp để mô tả tăng trưởng dân số?
+
+(c) Các nghiệm của phương trình này là gì?
+
+\cc{7} (a) Viết biểu thức cho hàm tuyến tính hóa của $f$ tại $a$.
+
+(b) Nếu $y=f(x)$, viết biểu thức cho vi phân $dy$.
+
+(c) Nếu $dx=\Delta x$, vẽ hình thể hiện ý nghĩa hình học của $\Delta y$ và $dy$.
+
+\clearpage
+\section*{Trắc nghiệm đúng–sai}
+Xác định mỗi mệnh đề là đúng hay sai. Nếu đúng, giải thích vì sao. Nếu sai, giải thích hoặc đưa ra phản ví dụ.
+
+\tf{1} Nếu $f,g$ khả vi thì
+\[\frac d{dx}[f(x)+g(x)]=f'(x)+g'(x).\]
+\tf{2} Nếu $f,g$ khả vi thì
+\[\frac d{dx}[f(x)g(x)]=f'(x)g'(x).\]
+\tf{3} Nếu $f,g$ khả vi thì
+\[\frac d{dx}[f(g(x))]=f'(g(x))g'(x).\]
+\tf{4} Nếu $f$ khả vi thì $\displaystyle\frac d{dx}\sqrt{f(x)}=\frac{f'(x)}{2\sqrt{f(x)}}$.
+\tf{5} Nếu $f$ khả vi thì $\displaystyle\frac d{dx}f(\sqrt{x})=\frac{f'(x)}{2\sqrt{x}}$.
+\tf{6} Nếu $y=e^2$ thì $y'=2e$.
+\tf{7} $\displaystyle\frac d{dx}(10^x)=x10^{x-1}$.
+\tf{8} $\displaystyle\frac d{dx}(\ln10)=\frac1{10}$.
+\tf{9} $\displaystyle\frac d{dx}(\tan^2x)=\frac d{dx}(\sec^2x)$.
+\tf{10} $\displaystyle\frac d{dx}|x^2+x|=|2x+1|$.
+\tf{11} Đạo hàm của một đa thức là một đa thức.
+\tf{12} Nếu $f(x)=(x^6-x^4)^5$ thì $f^{(31)}(x)=0$.
+\tf{13} Đạo hàm của một hàm hữu tỉ là một hàm hữu tỉ.
+\tf{14} Một phương trình tiếp tuyến của parabol $y=x^2$ tại $(-2,4)$ là $y-4=2x(x+2)$.
+\tf{15} Nếu $g(x)=x^5$ thì $\displaystyle\lim_{x\to2}\frac{g(x)-g(2)}{x-2}=80$.
+
+\clearpage
+\section*{Bài tập}
+\group{1–54} Tính $y'$.
+\bt{1} $y=(x^2+x^3)^4$.
+\bt{2} $\displaystyle y=\frac1{\sqrt{x}}-\frac1{\sqrt[5]{x^3}}$.
+\bt{3} $\displaystyle y=\frac{x^2-x+2}{\sqrt{x}}$.
+\bt{4} $\displaystyle y=\frac{\tan x}{1+\cos x}$.
+\bt{5} $y=x^2\sin\pi x$.
+\bt{6} $y=x\cos^{-1}x$.
+\bt{7} $\displaystyle y=\frac{t^4-1}{t^4+1}$.
+\bt{8} $xe^y=y\sin x$.
+\bt{9} $y=\ln(x\ln x)$.
+\bt{10} $y=e^{mx}\cos nx$.
+\bt{11} $y=\sqrt{x}\cos\sqrt{x}$.
+\bt{12} $y=(\arcsin2x)^2$.
+\bt{13} $\displaystyle y=\frac{e^{1/x}}{x^2}$.
+\bt{14} $y=\ln\sec x$.
+\bt{15} $y+x\cos y=x^2y$.
+\bt{16} $\displaystyle y=\left(\frac{u-1}{u^2+u+1}\right)^4$.
+\bt{17} $y=\sqrt{\arctan x}$.
+\bt{18} $y=\cot(\csc x)$.
+\bt{19} $\displaystyle y=\tan\left(\frac{t}{1+t^2}\right)$.
+\bt{20} $y=e^{x\sec x}$.
+\bt{21} $y=3^{x\ln x}$.
+\bt{22} $y=\sec(1+x^2)$.
+\bt{23} $y=(1-x^{-1})^{-1}$.
+\bt{24} $\displaystyle y=\frac1{\sqrt[3]{x}}+\sqrt{x}$.
+\bt{25} $\sin(xy)=x^2-y$.
+\bt{26} $y=\sqrt{\sin\sqrt{x}}$.
+\bt{27} $y=\log_5(1+2x)$.
+\bt{28} $y=(\cos x)^x$.
+\bt{29} $y=\ln\sin x-\tfrac12\sin^2x$.
+\bt{30} $\displaystyle y=\frac{(x^2+1)^4}{(2x+1)^3(3x-1)^5}$.
+\bt{31} $y=x\tan^{-1}(4x)$.
+\bt{32} $y=e^{\cos x}+\cos(e^x)$.
+\bt{33} $y=\ln|\sec5x+\tan5x|$.
+\bt{34} $y=10^{\tan\pi\theta}$.
+\bt{35} $y=\cot(3x^2+5)$.
+\bt{36} $y=\sqrt{t}\ln(t^4)$.
+\bt{37} $y=\sin\left(\tan\sqrt{1+x^3}\right)$.
+\bt{38} $y=x\sec^{-1}x$.
+\bt{39} $y=5\arctan(1/x)$.
+\bt{40} $y=\sin^{-1}(\cos\theta)$, \quad $0<\theta<\pi$.
+\bt{41} $y=x\tan^{-1}x-\tfrac12\ln(1+x^2)$.
+\bt{42} $y=\ln(\arcsin x^2)$.
+\bt{43} $y=\tan^2(\sin\theta)$.
+\bt{44} $y+\ln y=xy^2$.
+\bt{45} $\displaystyle y=\frac{\sqrt{x+1}\,(2-x)^5}{(x+3)^7}$.
+\bt{46} $\displaystyle y=\frac{(x+\lambda)^4}{x^4+\lambda^4}$.
+\bt{47} $y=x\sinh(x^2)$.
+\bt{48} $\displaystyle y=\frac{\sin mx}{x}$.
+\bt{49} $y=\ln(\cosh3x)$.
+\bt{50} $\displaystyle y=\ln\left|\frac{x^2-4}{2x+5}\right|$.
+\bt{51} $y=\cosh^{-1}(\sinh x)$.
+\bt{52} $y=x\tanh^{-1}\sqrt{x}$.
+\bt{53} $y=\cos\left(e^{\sqrt{\tan3x}}\right)$.
+\bt{54} $y=\sin^2\left(\cos\sqrt{\sin\pi x}\right)$.
+\bt{55} Nếu $f(t)=\sqrt{4t+1}$, tìm $f''(2)$.
+\bt{56} Nếu $g(\theta)=\theta\sin\theta$, tìm $g''(\pi/6)$.
+\bt{57} Tìm $y''$ nếu $x^6+y^6=1$.
+\bt{58} Tìm $f^{(n)}(x)$ nếu $f(x)=1/(2-x)$.
+\bt{59} Dùng quy nạp toán học để chứng minh: nếu $f(x)=xe^x$ thì $f^{(n)}(x)=(x+n)e^x$. (Xem Các nguyên tắc giải toán sau Chương 1.)
+\bt{60} Tính $\displaystyle\lim_{t\to0}\frac{t^3}{\tan^3(2t)}$.
+
+\Needspace{9\baselineskip}
+\group{61–63} Tìm phương trình tiếp tuyến của đường cong tại điểm đã cho.
+\bt{61} $y=4\sin^2x$, \quad $(\pi/6,1)$.
+\bt{62} $\displaystyle y=\frac{x^2-1}{x^2+1}$, \quad $(0,-1)$.
+\bt{63} $y=\sqrt{1+4\sin x}$, \quad $(0,1)$.
+\Needspace{9\baselineskip}
+\group{64–65} Tìm phương trình tiếp tuyến và pháp tuyến của đường cong tại điểm đã cho.
+\bt{64} $x^2+4xy+y^2=13$, \quad $(2,1)$.
+\bt{65} $y=(2+x)e^{-x}$, \quad $(0,2)$.
+\bt{66} \textit{[Cần công cụ vẽ đồ thị.]} Nếu $f(x)=xe^{\sin x}$, tìm $f'(x)$. Vẽ $f$ và $f'$ trên cùng một màn hình, rồi nhận xét.
+\bt{67} (a) Nếu $f(x)=x\sqrt{5-x}$, tìm $f'(x)$.
+
+(b) Tìm phương trình các tiếp tuyến của $y=x\sqrt{5-x}$ tại $(1,2)$ và $(4,4)$.
+
+(c) \textit{[Cần công cụ vẽ đồ thị.]} Minh họa câu (b) bằng cách vẽ đường cong và các tiếp tuyến trên cùng một màn hình.
+
+(d) \textit{[Cần công cụ vẽ đồ thị.]} Kiểm tra tính hợp lý của kết quả ở câu (a) bằng cách so sánh đồ thị của $f$ và $f'$.
+
+\bt{68} (a) Nếu $f(x)=4x-\tan x$, $-\pi/2<x<\pi/2$, tìm $f'$ và $f''$.
+
+(b) \textit{[Cần công cụ vẽ đồ thị.]} Kiểm tra tính hợp lý của kết quả ở câu (a) bằng cách so sánh đồ thị của $f,f',f''$.
+\bt{69} Tại những điểm nào trên đường cong $y=\sin x+\cos x$, $0\le x\le2\pi$, tiếp tuyến nằm ngang?
+\bt{70} Tìm các điểm trên elip $x^2+2y^2=1$ mà tiếp tuyến có hệ số góc bằng $1$.
+\bt{71} Nếu $f(x)=(x-a)(x-b)(x-c)$, chứng minh
+\[\frac{f'(x)}{f(x)}=\frac1{x-a}+\frac1{x-b}+\frac1{x-c}.\]
+\bt{72} (a) Lấy đạo hàm công thức góc đôi $\cos2x=\cos^2x-\sin^2x$ để thu được công thức góc đôi của hàm sin.
+
+(b) Lấy đạo hàm công thức cộng $\sin(x+a)=\sin x\cos a+\cos x\sin a$ để thu được công thức cộng của hàm cosin.
+\bt{73} Giả sử
+\begin{align*}
+f(1)&=2,&f'(1)&=3,&f(2)&=1,&f'(2)&=2,\\
+g(1)&=3,&g'(1)&=1,&g(2)&=1,&g'(2)&=4.
+\end{align*}
+(a) Nếu $S(x)=f(x)+g(x)$, tìm $S'(1)$.
+
+(b) Nếu $P(x)=f(x)g(x)$, tìm $P'(2)$.
+
+(c) Nếu $Q(x)=f(x)/g(x)$, tìm $Q'(1)$.
+
+(d) Nếu $C(x)=f(g(x))$, tìm $C'(2)$.
+
+\noindent\begin{minipage}{\linewidth}
+\bt{74} Cho $f,g$ có đồ thị như hình. Đặt $P(x)=f(x)g(x)$, $Q(x)=f(x)/g(x)$ và $C(x)=f(g(x))$. Tìm (a) $P'(2)$; (b) $Q'(2)$; (c) $C'(2)$.
+\fig[.38]{ex74}{Hình cho Bài tập 74.}
+\end{minipage}
+
+\Needspace{9\baselineskip}
+\group{75–82} Tìm $f'$ theo $g'$.
+\bt{75} $f(x)=x^2g(x)$.
+\bt{76} $f(x)=g(x^2)$.
+\bt{77} $f(x)=[g(x)]^2$.
+\bt{78} $f(x)=g(g(x))$.
+\bt{79} $f(x)=g(e^x)$.
+\bt{80} $f(x)=e^{g(x)}$.
+\bt{81} $f(x)=\ln|g(x)|$.
+\bt{82} $f(x)=g(\ln x)$.
+\Needspace{9\baselineskip}
+\group{83–85} Tìm $h'$ theo $f'$ và $g'$.
+\bt{83} $\displaystyle h(x)=\frac{f(x)g(x)}{f(x)+g(x)}$.
+\bt{84} $\displaystyle h(x)=\sqrt{\frac{f(x)}{g(x)}}$.
+\bt{85} $h(x)=f(g(\sin4x))$.
+\bt{86} (a) \textit{[Cần công cụ vẽ đồ thị.]} Vẽ $f(x)=x-2\sin x$ trong khung nhìn $[0,8]\times[-2,8]$.
+
+(b) Tốc độ biến thiên trung bình lớn hơn trên khoảng nào: $[1,2]$ hay $[2,3]$?
+
+(c) Tốc độ biến thiên tức thời lớn hơn tại giá trị nào: $x=2$ hay $x=5$?
+
+(d) Kiểm tra các ước lượng từ đồ thị ở câu (c) bằng cách tính $f'(x)$ và so sánh $f'(2)$ với $f'(5)$.
+\bt{87} Tại điểm nào trên đường cong $y=[\ln(x+4)]^2$, tiếp tuyến nằm ngang?
+\bt{88} (a) Tìm phương trình tiếp tuyến của $y=e^x$ song song với đường thẳng $x-4y=1$.
+
+(b) Tìm phương trình tiếp tuyến của $y=e^x$ đi qua gốc tọa độ.
+\bt{89} Tìm parabol $y=ax^2+bx+c$ đi qua $(1,4)$, có các tiếp tuyến tại $x=-1$ và $x=5$ với hệ số góc lần lượt là $6$ và $-2$.
+\bt{90} Hàm $C(t)=K(e^{-at}-e^{-bt})$, với $a,b,K$ là các hằng số dương và $b>a$, được dùng để mô hình hóa nồng độ tại thời điểm $t$ của một loại thuốc tiêm vào máu.
+
+(a) Chứng minh $\displaystyle\lim_{t\to\infty}C(t)=0$.
+
+(b) Tìm $C'(t)$, tốc độ biến thiên nồng độ thuốc trong máu.
+
+(c) Khi nào tốc độ này bằng $0$?
+\bt{91} Phương trình chuyển động dạng $s=Ae^{-ct}\cos(\omega t+\delta)$ biểu diễn dao động tắt dần của một vật. Tìm vận tốc và gia tốc của vật.
+\bt{92} Một chất điểm chuyển động trên đường thẳng nằm ngang, có tọa độ tại thời điểm $t$ là $x=\sqrt{b^2+c^2t^2}$, $t\ge0$, với $b,c$ là hằng số dương.
+
+(a) Tìm hàm vận tốc và hàm gia tốc.
+
+(b) Chứng minh chất điểm luôn chuyển động theo chiều dương.
+\bt{93} Một chất điểm chuyển động trên đường thẳng đứng, có tọa độ tại thời điểm $t$ là $y=t^3-12t+3$, $t\ge0$.
+
+(a) Tìm hàm vận tốc và hàm gia tốc.
+
+(b) Khi nào chất điểm chuyển động lên trên, khi nào xuống dưới?
+
+(c) Tìm quãng đường chất điểm đi được trong khoảng thời gian $0\le t\le3$.
+
+(d) \textit{[Cần công cụ vẽ đồ thị.]} Vẽ các hàm vị trí, vận tốc và gia tốc với $0\le t\le3$.
+
+(e) Khi nào chất điểm nhanh dần? Khi nào chậm dần?
+\bt{94} Thể tích hình nón tròn xoay là $V=\tfrac13\pi r^2h$, với $r$ là bán kính đáy và $h$ là chiều cao.
+
+(a) Tìm tốc độ biến thiên thể tích theo chiều cao nếu bán kính không đổi.
+
+(b) Tìm tốc độ biến thiên thể tích theo bán kính nếu chiều cao không đổi.
+\bt{95} Khối lượng một đoạn dây là $x(1+\sqrt{x})$ kilôgam, với $x$ là khoảng cách tính bằng mét từ một đầu dây. Tìm khối lượng trên một đơn vị chiều dài tại $x=4\,\mathrm m$.
+\bt{96} Chi phí tính bằng đôla để sản xuất $x$ đơn vị của một loại hàng hóa là
+\[C(x)=920+2x-0.02x^2+0.00007x^3.\]
+(a) Tìm hàm chi phí cận biên.
+
+(b) Tính $C'(100)$ và giải thích ý nghĩa.
+
+(c) So sánh $C'(100)$ với chi phí sản xuất sản phẩm thứ $101$.
+\bt{97} Một quần thể vi khuẩn ban đầu có $200$ tế bào và tăng trưởng với tốc độ tỉ lệ thuận với quy mô quần thể. Sau nửa giờ, số tế bào tăng lên $360$.
+
+(a) Tìm số tế bào sau $t$ giờ.
+
+(b) Tìm số tế bào sau $4$ giờ.
+
+(c) Tìm tốc độ tăng trưởng sau $4$ giờ.
+
+(d) Khi nào quần thể đạt $10\,000$ tế bào?
+\bt{98} Cobalt-60 có chu kỳ bán rã $5.24$ năm.
+
+(a) Tìm khối lượng còn lại của mẫu $100\,\mathrm{mg}$ sau $20$ năm.
+
+(b) Mất bao lâu để khối lượng giảm xuống $1\,\mathrm{mg}$?
+\bt{99} Gọi $C(t)$ là nồng độ một loại thuốc trong máu. Khi cơ thể đào thải thuốc, $C(t)$ giảm với tốc độ tỉ lệ thuận với lượng thuốc có mặt tại thời điểm đó. Do đó $C'(t)=-kC(t)$, với $k>0$ được gọi là hằng số đào thải của thuốc.
+
+(a) Nếu $C_0$ là nồng độ tại $t=0$, tìm nồng độ tại thời điểm $t$.
+
+(b) Nếu cơ thể đào thải một nửa lượng thuốc trong $30$ giờ, mất bao lâu để đào thải $90\%$ lượng thuốc?
+\bt{100} Một cốc sôcôla nóng có nhiệt độ $80^\circ\mathrm C$ trong phòng duy trì ở $20^\circ\mathrm C$. Sau nửa giờ, sôcôla nguội xuống $60^\circ\mathrm C$.
+
+(a) Nhiệt độ của sôcôla sau thêm nửa giờ là bao nhiêu?
+
+(b) Khi nào sôcôla nguội xuống $40^\circ\mathrm C$?
+\bt{101} Thể tích một hình lập phương tăng với tốc độ $10\,\mathrm{cm^3/min}$. Diện tích toàn phần tăng nhanh bao nhiêu khi cạnh dài $30\,\mathrm{cm}$?
+\bt{102} Một cốc giấy có dạng hình nón, cao $10\,\mathrm{cm}$ và bán kính miệng $3\,\mathrm{cm}$. Nếu nước được rót vào cốc với lưu lượng $2\,\mathrm{cm^3/s}$, mực nước dâng nhanh bao nhiêu khi nước sâu $5\,\mathrm{cm}$?
+\bt{103} Một quả bóng bay lên với tốc độ không đổi $5\,\mathrm{ft/s}$. Một cậu bé đạp xe dọc đường thẳng với tốc độ $15\,\mathrm{ft/s}$. Khi cậu đi qua ngay dưới quả bóng, bóng ở phía trên cậu $45\,\mathrm{ft}$. Sau đó $3$ giây, khoảng cách giữa cậu bé và bóng tăng nhanh bao nhiêu?
+
+\noindent\begin{minipage}{\linewidth}
+\bt{104} Một nữ vận động viên trượt nước đi lên đường dốc trong hình với tốc độ $30\,\mathrm{ft/s}$. Khi rời đường dốc, cô đang đi lên với tốc độ bao nhiêu theo phương thẳng đứng?
+\fig[.60]{ex104}{Hình cho Bài tập 104.}
+\end{minipage}
+
+\bt{105} Góc nâng của Mặt Trời giảm với tốc độ $0.25\,\mathrm{rad/h}$. Bóng của một tòa nhà cao $400\,\mathrm{ft}$ dài ra nhanh bao nhiêu khi góc nâng bằng $\pi/6$?
+\bt{106} \textit{[Cần công cụ vẽ đồ thị.]} (a) Tìm xấp xỉ tuyến tính của $f(x)=\sqrt{25-x^2}$ ở gần $3$.
+
+(b) Minh họa câu (a) bằng đồ thị của $f$ và hàm tuyến tính hóa.
+
+(c) Với những giá trị nào của $x$, phép xấp xỉ tuyến tính có sai số nhỏ hơn $0.1$?
+\bt{107} (a) Tìm hàm tuyến tính hóa của $f(x)=\sqrt[3]{1+3x}$ tại $a=0$. Nêu phép xấp xỉ tuyến tính tương ứng và dùng nó để tính gần đúng $\sqrt[3]{1.03}$.
+
+(b) \textit{[Cần công cụ vẽ đồ thị.]} Xác định các giá trị $x$ sao cho phép xấp xỉ tuyến tính ở câu (a) có sai số nhỏ hơn $0.1$.
+\bt{108} Tính $dy$ nếu $y=x^3-2x^2+1$, $x=2$ và $dx=0.2$.
+\bt{109} Một cửa sổ có dạng hình vuông với một nửa hình tròn ở phía trên. Chiều rộng đáy cửa sổ được đo là $60\,\mathrm{cm}$, với sai số đo có thể có là $0.1\,\mathrm{cm}$. Dùng vi phân để ước lượng sai số lớn nhất có thể có khi tính diện tích cửa sổ.
+\Needspace{9\baselineskip}
+\group{110–112} Biểu diễn giới hạn dưới dạng đạo hàm rồi tính giá trị.
+\bt{110} $\displaystyle\lim_{x\to1}\frac{x^{17}-1}{x-1}$.
+\bt{111} $\displaystyle\lim_{h\to0}\frac{\sqrt[4]{16+h}-2}{h}$.
+\bt{112} $\displaystyle\lim_{\theta\to\pi/3}\frac{\cos\theta-0.5}{\theta-\pi/3}$.
+\bt{113} Tính $\displaystyle\lim_{x\to0}\frac{\sqrt{1+\tan x}-\sqrt{1+\sin x}}{x^3}$.
+\bt{114} Giả sử $f$ khả vi, $f(g(x))=x$ và $f'(x)=1+[f(x)]^2$. Chứng minh $g'(x)=1/(1+x^2)$.
+\bt{115} Tìm $f'(x)$ nếu biết
+\[\frac d{dx}[f(2x)]=x^2.\]
+\bt{116} Chứng minh độ dài đoạn của một tiếp tuyến bất kỳ với đường astroid $x^{2/3}+y^{2/3}=a^{2/3}$ bị hai trục tọa độ chắn là không đổi.
+
+\clearpage
+\section*{Ghi chú biên tập}
+Phần này tách biệt với bản dịch. Các mệnh đề của phần Trắc nghiệm đúng–sai được giữ nguyên để người học tự xác định tính đúng sai; chúng không phải danh sách các kết quả đã được khẳng định.
+
+Trong nhóm Bài tập 1–54, đạo hàm được lấy theo biến độc lập xuất hiện trong từng biểu thức; các chữ $m,n,\lambda$ được hiểu là tham số hằng. Ký hiệu $\sec^{-1}x$ ở Bài tập 38 chỉ hàm secant ngược. Trong Bài tập 92, vận tốc bằng $0$ tại $t=0$ và dương khi $t>0$.
+
+Các ký hiệu yêu cầu công cụ vẽ đồ thị được chuyển thành ghi chú bằng chữ. Bản dịch này kết thúc ở Bài tập 116 của phần Ôn tập Chương 3; phần Bài toán nâng cao tiếp theo là một phần riêng trong nguyên bản.
+\end{document}

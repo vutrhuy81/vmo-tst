@@ -1,0 +1,176 @@
+{
+  "bookKey": "stewart-9",
+  "sectionKey": "4-2",
+  "heading": "4.2. Bài tập",
+  "sourceSha256": "9b5264f3a938266c58e050cbcd0832542e7c0580238fd8799a241a7cd4dda038",
+  "exercises": [
+    {
+      "number": 1,
+      "content": "<p><strong>1.</strong> Cho đồ thị của hàm số <span class=\"math inline\">\\(f\\)</span>. Kiểm tra <span class=\"math inline\">\\(f\\)</span> thỏa mãn các giả thiết của Định lý Rolle trên <span class=\"math inline\">\\([0,8]\\)</span>. Sau đó ước lượng các giá trị <span class=\"math inline\">\\(c\\)</span> thỏa mãn kết luận của Định lý Rolle trên đoạn đó.</p>\n<div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-4-2-9b5264f3/ex01.png\" alt=\"image\"><br>\nĐồ thị cho Bài tập 1.</p>\n</div>"
+    },
+    {
+      "number": 2,
+      "content": "<p><strong>2.</strong> Vẽ đồ thị của một hàm xác định trên <span class=\"math inline\">\\([0,8]\\)</span> sao cho <span class=\"math inline\">\\(f(0)=f(8)=3\\)</span> và hàm số không thỏa mãn kết luận của Định lý Rolle trên <span class=\"math inline\">\\([0,8]\\)</span>.</p>"
+    },
+    {
+      "number": 3,
+      "content": "<p><strong>3.</strong> Cho đồ thị của hàm số <span class=\"math inline\">\\(g\\)</span>.</p>\n<div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-4-2-9b5264f3/ex03.png\" alt=\"image\"><br>\nĐồ thị cho Bài tập 3.</p>\n</div>\n<p>(a) Kiểm tra <span class=\"math inline\">\\(g\\)</span> thỏa mãn các giả thiết của Định lý giá trị trung bình trên <span class=\"math inline\">\\([0,8]\\)</span>.</p>\n<p>(b) Ước lượng các giá trị <span class=\"math inline\">\\(c\\)</span> thỏa mãn kết luận của Định lý giá trị trung bình trên <span class=\"math inline\">\\([0,8]\\)</span>.</p>\n<p>(c) Ước lượng các giá trị <span class=\"math inline\">\\(c\\)</span> thỏa mãn kết luận của Định lý giá trị trung bình trên <span class=\"math inline\">\\([2,6]\\)</span>.</p>"
+    },
+    {
+      "number": 4,
+      "content": "<p><strong>4.</strong> Vẽ đồ thị của một hàm liên tục trên <span class=\"math inline\">\\([0,8]\\)</span> với <span class=\"math inline\">\\(f(0)=1\\)</span>, <span class=\"math inline\">\\(f(8)=4\\)</span>, nhưng không thỏa mãn kết luận của Định lý giá trị trung bình trên <span class=\"math inline\">\\([0,8]\\)</span>.</p>"
+    },
+    {
+      "number": 5,
+      "content": "<p><strong>5–8.</strong></p>\n<p>Cho đồ thị của hàm số <span class=\"math inline\">\\(f\\)</span>. Hàm <span class=\"math inline\">\\(f\\)</span> có thỏa mãn các giả thiết của Định lý giá trị trung bình trên <span class=\"math inline\">\\([0,5]\\)</span> không? Nếu có, tìm một giá trị <span class=\"math inline\">\\(c\\)</span> thỏa mãn kết luận của định lý trên đoạn đó.</p><p><strong>5.</strong></p>\n<div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-4-2-9b5264f3/ex05.png\" alt=\"image\"><br>\nĐồ thị cho Bài tập 5.</p>\n</div>"
+    },
+    {
+      "number": 6,
+      "content": "<p><strong>5–8.</strong></p>\n<p>Cho đồ thị của hàm số <span class=\"math inline\">\\(f\\)</span>. Hàm <span class=\"math inline\">\\(f\\)</span> có thỏa mãn các giả thiết của Định lý giá trị trung bình trên <span class=\"math inline\">\\([0,5]\\)</span> không? Nếu có, tìm một giá trị <span class=\"math inline\">\\(c\\)</span> thỏa mãn kết luận của định lý trên đoạn đó.</p><p><strong>6.</strong></p>\n<div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-4-2-9b5264f3/ex06.png\" alt=\"image\"><br>\nĐồ thị cho Bài tập 6.</p>\n</div>"
+    },
+    {
+      "number": 7,
+      "content": "<p><strong>5–8.</strong></p>\n<p>Cho đồ thị của hàm số <span class=\"math inline\">\\(f\\)</span>. Hàm <span class=\"math inline\">\\(f\\)</span> có thỏa mãn các giả thiết của Định lý giá trị trung bình trên <span class=\"math inline\">\\([0,5]\\)</span> không? Nếu có, tìm một giá trị <span class=\"math inline\">\\(c\\)</span> thỏa mãn kết luận của định lý trên đoạn đó.</p><p><strong>7.</strong></p>\n<div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-4-2-9b5264f3/ex07.png\" alt=\"image\"><br>\nĐồ thị cho Bài tập 7.</p>\n</div>"
+    },
+    {
+      "number": 8,
+      "content": "<p><strong>5–8.</strong></p>\n<p>Cho đồ thị của hàm số <span class=\"math inline\">\\(f\\)</span>. Hàm <span class=\"math inline\">\\(f\\)</span> có thỏa mãn các giả thiết của Định lý giá trị trung bình trên <span class=\"math inline\">\\([0,5]\\)</span> không? Nếu có, tìm một giá trị <span class=\"math inline\">\\(c\\)</span> thỏa mãn kết luận của định lý trên đoạn đó.</p><p><strong>8.</strong></p>\n<div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-4-2-9b5264f3/ex08.png\" alt=\"image\"><br>\nĐồ thị cho Bài tập 8.</p>\n</div>"
+    },
+    {
+      "number": 9,
+      "content": "<p><strong>9–12.</strong></p>\n<p>Kiểm tra hàm số thỏa mãn ba giả thiết của Định lý Rolle trên đoạn đã cho. Sau đó tìm tất cả các số <span class=\"math inline\">\\(c\\)</span> thỏa mãn kết luận của định lý.</p><p><strong>9.</strong> <span class=\"math inline\">\\(f(x)=2x^2-4x+5,\\quad [-1,3]\\)</span>.</p>"
+    },
+    {
+      "number": 10,
+      "content": "<p><strong>9–12.</strong></p>\n<p>Kiểm tra hàm số thỏa mãn ba giả thiết của Định lý Rolle trên đoạn đã cho. Sau đó tìm tất cả các số <span class=\"math inline\">\\(c\\)</span> thỏa mãn kết luận của định lý.</p><p><strong>10.</strong> <span class=\"math inline\">\\(f(x)=x^3-2x^2-4x+2,\\quad [-2,2]\\)</span>.</p>"
+    },
+    {
+      "number": 11,
+      "content": "<p><strong>9–12.</strong></p>\n<p>Kiểm tra hàm số thỏa mãn ba giả thiết của Định lý Rolle trên đoạn đã cho. Sau đó tìm tất cả các số <span class=\"math inline\">\\(c\\)</span> thỏa mãn kết luận của định lý.</p><p><strong>11.</strong> <span class=\"math inline\">\\(f(x)=\\sin(x/2),\\quad [\\pi/2,3\\pi/2]\\)</span>.</p>"
+    },
+    {
+      "number": 12,
+      "content": "<p><strong>9–12.</strong></p>\n<p>Kiểm tra hàm số thỏa mãn ba giả thiết của Định lý Rolle trên đoạn đã cho. Sau đó tìm tất cả các số <span class=\"math inline\">\\(c\\)</span> thỏa mãn kết luận của định lý.</p><p><strong>12.</strong> <span class=\"math inline\">\\(f(x)=x+1/x,\\quad [\\frac12,2]\\)</span>.</p>"
+    },
+    {
+      "number": 13,
+      "content": "<p><strong>13.</strong> Cho <span class=\"math inline\">\\(f(x)=1-x^{2/3}\\)</span>. Chứng minh <span class=\"math inline\">\\(f(-1)=f(1)\\)</span> nhưng không tồn tại số <span class=\"math inline\">\\(c\\in(-1,1)\\)</span> sao cho <span class=\"math inline\">\\(f'(c)=0\\)</span>. Vì sao điều này không mâu thuẫn với Định lý Rolle?</p>"
+    },
+    {
+      "number": 14,
+      "content": "<p><strong>14.</strong> Cho <span class=\"math inline\">\\(f(x)=\\tan x\\)</span>. Chứng minh <span class=\"math inline\">\\(f(0)=f(\\pi)\\)</span> nhưng không tồn tại số <span class=\"math inline\">\\(c\\in(0,\\pi)\\)</span> sao cho <span class=\"math inline\">\\(f'(c)=0\\)</span>. Vì sao điều này không mâu thuẫn với Định lý Rolle?</p>"
+    },
+    {
+      "number": 15,
+      "content": "<p><strong>15–18.</strong></p>\n<p>Kiểm tra hàm số thỏa mãn các giả thiết của Định lý giá trị trung bình trên đoạn đã cho. Sau đó tìm tất cả các số <span class=\"math inline\">\\(c\\)</span> thỏa mãn kết luận của định lý.</p><p><strong>15.</strong> <span class=\"math inline\">\\(f(x)=2x^2-3x+1,\\quad [0,2]\\)</span>.</p>"
+    },
+    {
+      "number": 16,
+      "content": "<p><strong>15–18.</strong></p>\n<p>Kiểm tra hàm số thỏa mãn các giả thiết của Định lý giá trị trung bình trên đoạn đã cho. Sau đó tìm tất cả các số <span class=\"math inline\">\\(c\\)</span> thỏa mãn kết luận của định lý.</p><p><strong>16.</strong> <span class=\"math inline\">\\(f(x)=x^3-3x+2,\\quad [-2,2]\\)</span>.</p>"
+    },
+    {
+      "number": 17,
+      "content": "<p><strong>15–18.</strong></p>\n<p>Kiểm tra hàm số thỏa mãn các giả thiết của Định lý giá trị trung bình trên đoạn đã cho. Sau đó tìm tất cả các số <span class=\"math inline\">\\(c\\)</span> thỏa mãn kết luận của định lý.</p><p><strong>17.</strong> <span class=\"math inline\">\\(f(x)=\\ln x,\\quad [1,4]\\)</span>.</p>"
+    },
+    {
+      "number": 18,
+      "content": "<p><strong>15–18.</strong></p>\n<p>Kiểm tra hàm số thỏa mãn các giả thiết của Định lý giá trị trung bình trên đoạn đã cho. Sau đó tìm tất cả các số <span class=\"math inline\">\\(c\\)</span> thỏa mãn kết luận của định lý.</p><p><strong>18.</strong> <span class=\"math inline\">\\(f(x)=1/x,\\quad [1,3]\\)</span>.</p>"
+    },
+    {
+      "number": 19,
+      "content": "<p><strong>19–20.</strong></p>\n<p>Tìm số <span class=\"math inline\">\\(c\\)</span> thỏa mãn kết luận của Định lý giá trị trung bình trên đoạn đã cho. Vẽ đồ thị hàm số, cát tuyến đi qua hai đầu mút của đồ thị trên đoạn và tiếp tuyến tại <span class=\"math inline\">\\((c,f(c))\\)</span>. Cát tuyến và tiếp tuyến có song song không? Dùng công cụ vẽ đồ thị.</p><p><strong>19.</strong> <span class=\"math inline\">\\(f(x)=\\sqrt{x},\\quad [0,4]\\)</span>.</p>"
+    },
+    {
+      "number": 20,
+      "content": "<p><strong>19–20.</strong></p>\n<p>Tìm số <span class=\"math inline\">\\(c\\)</span> thỏa mãn kết luận của Định lý giá trị trung bình trên đoạn đã cho. Vẽ đồ thị hàm số, cát tuyến đi qua hai đầu mút của đồ thị trên đoạn và tiếp tuyến tại <span class=\"math inline\">\\((c,f(c))\\)</span>. Cát tuyến và tiếp tuyến có song song không? Dùng công cụ vẽ đồ thị.</p><p><strong>20.</strong> <span class=\"math inline\">\\(f(x)=e^{-x},\\quad [0,2]\\)</span>.</p>"
+    },
+    {
+      "number": 21,
+      "content": "<p><strong>21.</strong> Cho <span class=\"math inline\">\\(f(x)=(x-3)^{-2}\\)</span>. Chứng minh không tồn tại <span class=\"math inline\">\\(c\\in(1,4)\\)</span> sao cho <span class=\"math inline\">\\(f(4)-f(1)=f'(c)(4-1)\\)</span>. Vì sao điều này không mâu thuẫn với Định lý giá trị trung bình?</p>"
+    },
+    {
+      "number": 22,
+      "content": "<p><strong>22.</strong> Cho <span class=\"math inline\">\\(f(x)=2-|2x-1|\\)</span>. Chứng minh không tồn tại giá trị <span class=\"math inline\">\\(c\\)</span> sao cho <span class=\"math inline\">\\(f(3)-f(0)=f'(c)(3-0)\\)</span>. Vì sao điều này không mâu thuẫn với Định lý giá trị trung bình?</p>"
+    },
+    {
+      "number": 23,
+      "content": "<p><strong>23–24.</strong></p>\n<p>Chứng minh phương trình có đúng một nghiệm thực.</p><p><strong>23.</strong> <span class=\"math inline\">\\(2x+\\cos x=0\\)</span>.</p>"
+    },
+    {
+      "number": 24,
+      "content": "<p><strong>23–24.</strong></p>\n<p>Chứng minh phương trình có đúng một nghiệm thực.</p><p><strong>24.</strong> <span class=\"math inline\">\\(x^3+e^x=0\\)</span>.</p>"
+    },
+    {
+      "number": 25,
+      "content": "<p><strong>25.</strong> Chứng minh phương trình <span class=\"math inline\">\\(x^3-15x+c=0\\)</span> có nhiều nhất một nghiệm trên đoạn <span class=\"math inline\">\\([-2,2]\\)</span>.</p>"
+    },
+    {
+      "number": 26,
+      "content": "<p><strong>26.</strong> Chứng minh phương trình <span class=\"math inline\">\\(x^4+4x+c=0\\)</span> có nhiều nhất hai nghiệm thực.</p>"
+    },
+    {
+      "number": 27,
+      "content": "<p><strong>27.</strong> (a) Chứng minh một đa thức bậc 3 có nhiều nhất ba nghiệm thực.</p>\n<p>(b) Chứng minh một đa thức bậc <span class=\"math inline\">\\(n\\)</span> có nhiều nhất <span class=\"math inline\">\\(n\\)</span> nghiệm thực.</p>"
+    },
+    {
+      "number": 28,
+      "content": "<p><strong>28.</strong> (a) Giả sử <span class=\"math inline\">\\(f\\)</span> khả vi trên <span class=\"math inline\">\\(\\mathbb R\\)</span> và có hai nghiệm. Chứng minh <span class=\"math inline\">\\(f'\\)</span> có ít nhất một nghiệm.</p>\n<p>(b) Giả sử <span class=\"math inline\">\\(f\\)</span> khả vi hai lần trên <span class=\"math inline\">\\(\\mathbb R\\)</span> và có ba nghiệm. Chứng minh <span class=\"math inline\">\\(f''\\)</span> có ít nhất một nghiệm thực.</p>\n<p>(c) Có thể tổng quát hóa các phần (a), (b) không?</p>"
+    },
+    {
+      "number": 29,
+      "content": "<p><strong>29.</strong> Nếu <span class=\"math inline\">\\(f(1)=10\\)</span> và <span class=\"math inline\">\\(f'(x)\\ge2\\)</span> với <span class=\"math inline\">\\(1\\le x\\le4\\)</span>, thì <span class=\"math inline\">\\(f(4)\\)</span> có thể nhỏ đến mức nào?</p>"
+    },
+    {
+      "number": 30,
+      "content": "<p><strong>30.</strong> Giả sử <span class=\"math inline\">\\(3\\le f'(x)\\le5\\)</span> với mọi <span class=\"math inline\">\\(x\\)</span>. Chứng minh <span class=\"math inline\">\\(18\\le f(8)-f(2)\\le30\\)</span>.</p>"
+    },
+    {
+      "number": 31,
+      "content": "<p><strong>31.</strong> Có tồn tại một hàm <span class=\"math inline\">\\(f\\)</span> sao cho <span class=\"math inline\">\\(f(0)=-1\\)</span>, <span class=\"math inline\">\\(f(2)=4\\)</span> và <span class=\"math inline\">\\(f'(x)\\le2\\)</span> với mọi <span class=\"math inline\">\\(x\\)</span> không?</p>"
+    },
+    {
+      "number": 32,
+      "content": "<p><strong>32.</strong> Giả sử <span class=\"math inline\">\\(f,g\\)</span> liên tục trên <span class=\"math inline\">\\([a,b]\\)</span> và khả vi trên <span class=\"math inline\">\\((a,b)\\)</span>. Giả sử thêm <span class=\"math inline\">\\(f(a)=g(a)\\)</span> và <span class=\"math inline\">\\(f'(x)&lt;g'(x)\\)</span> với <span class=\"math inline\">\\(a&lt;x&lt;b\\)</span>. Chứng minh <span class=\"math inline\">\\(f(b)&lt;g(b)\\)</span>. [<em>Gợi ý:</em> Áp dụng Định lý giá trị trung bình cho hàm <span class=\"math inline\">\\(h=f-g\\)</span>.]</p>"
+    },
+    {
+      "number": 33,
+      "content": "<p><strong>33.</strong> Chứng minh <span class=\"math inline\">\\(\\sin x&lt;x\\)</span> nếu <span class=\"math inline\">\\(0&lt;x&lt;2\\pi\\)</span>.</p>"
+    },
+    {
+      "number": 34,
+      "content": "<p><strong>34.</strong> Giả sử <span class=\"math inline\">\\(f\\)</span> là hàm lẻ và khả vi khắp nơi. Chứng minh với mỗi số dương <span class=\"math inline\">\\(b\\)</span>, tồn tại <span class=\"math inline\">\\(c\\in(-b,b)\\)</span> sao cho <span class=\"math inline\">\\(f'(c)=f(b)/b\\)</span>.</p>"
+    },
+    {
+      "number": 35,
+      "content": "<p><strong>35.</strong> Dùng Định lý giá trị trung bình để chứng minh bất đẳng thức <span class=\"math display\">\\[|\\sin a-\\sin b|\\le|a-b|\\qquad\\text{với mọi }a,b.\\]</span></p>"
+    },
+    {
+      "number": 36,
+      "content": "<p><strong>36.</strong> Nếu <span class=\"math inline\">\\(f'(x)=c\\)</span> (<span class=\"math inline\">\\(c\\)</span> là hằng số) với mọi <span class=\"math inline\">\\(x\\)</span>, dùng Hệ quả 7 để chứng minh <span class=\"math inline\">\\(f(x)=cx+d\\)</span> với một hằng số <span class=\"math inline\">\\(d\\)</span> nào đó.</p><p><strong>7. Hệ quả</strong></p><p>Nếu <span class=\"math inline\">\\(f'(x)=g'(x)\\)</span> với mọi <span class=\"math inline\">\\(x\\)</span> trong một khoảng <span class=\"math inline\">\\((a,b)\\)</span>, thì <span class=\"math inline\">\\(f-g\\)</span> là hàm hằng trên <span class=\"math inline\">\\((a,b)\\)</span>; tức là <span class=\"math inline\">\\(f(x)=g(x)+c\\)</span>, trong đó <span class=\"math inline\">\\(c\\)</span> là hằng số.</p>"
+    },
+    {
+      "number": 37,
+      "content": "<p><strong>37.</strong> Cho <span class=\"math inline\">\\(f(x)=1/x\\)</span> và <span class=\"math display\">\\[g(x)=\\begin{cases}\\dfrac1x&amp;\\text{khi }x&gt;0,\\\\1+\\dfrac1x&amp;\\text{khi }x&lt;0.\\end{cases}\\]</span> Chứng minh <span class=\"math inline\">\\(f'(x)=g'(x)\\)</span> với mọi <span class=\"math inline\">\\(x\\)</span> trong miền xác định của chúng. Có thể dùng Hệ quả 7 để kết luận <span class=\"math inline\">\\(f-g\\)</span> là hàm hằng không?</p>"
+    },
+    {
+      "number": 38,
+      "content": "<p><strong>38–39.</strong></p>\n<p>Dùng phương pháp ở Ví dụ 6 để chứng minh đồng nhất thức.</p><p><strong>38.</strong> <span class=\"math inline\">\\(\\displaystyle\\arctan x+\\arctan\\left(\\frac1x\\right)=\\frac\\pi2,\\qquad x&gt;0\\)</span>.</p><p><strong>Phương pháp của Ví dụ 6.</strong> Chứng minh đạo hàm của hiệu hai vế bằng 0 trên khoảng xác định, rồi xác định hằng số bằng một giá trị đặc biệt.</p>"
+    },
+    {
+      "number": 39,
+      "content": "<p><strong>38–39.</strong></p>\n<p>Dùng phương pháp ở Ví dụ 6 để chứng minh đồng nhất thức.</p><p><strong>39.</strong> <span class=\"math inline\">\\(\\displaystyle2\\arcsin x=\\arccos(1-2x^2),\\qquad x\\ge0\\)</span>.</p><p><strong>Phương pháp của Ví dụ 6.</strong> Chứng minh đạo hàm của hiệu hai vế bằng 0 trên khoảng xác định, rồi xác định hằng số bằng một giá trị đặc biệt.</p>"
+    },
+    {
+      "number": 40,
+      "content": "<p><strong>40.</strong> Lúc 2 giờ chiều, đồng hồ tốc độ của một ô tô chỉ <span class=\"math inline\">\\(30\\ \\mathrm{mi/h}\\)</span>. Lúc 2 giờ 10 phút, đồng hồ chỉ <span class=\"math inline\">\\(50\\ \\mathrm{mi/h}\\)</span>. Chứng minh tại một thời điểm nào đó giữa 2 giờ và 2 giờ 10 phút, gia tốc đúng bằng <span class=\"math inline\">\\(120\\ \\mathrm{mi/h^2}\\)</span>.</p>"
+    },
+    {
+      "number": 41,
+      "content": "<p><strong>41.</strong> Hai vận động viên xuất phát cùng lúc và về đích đồng thời. Chứng minh trong cuộc đua có một thời điểm họ có cùng tốc độ. [<em>Gợi ý:</em> Xét <span class=\"math inline\">\\(f(t)=g(t)-h(t)\\)</span>, trong đó <span class=\"math inline\">\\(g,h\\)</span> là các hàm vị trí của hai vận động viên.]</p>"
+    },
+    {
+      "number": 42,
+      "content": "<p><strong>42.</strong> <strong>Điểm bất động.</strong> Một số <span class=\"math inline\">\\(a\\)</span> được gọi là <em>điểm bất động</em> của hàm số <span class=\"math inline\">\\(f\\)</span> nếu <span class=\"math inline\">\\(f(a)=a\\)</span>. Chứng minh rằng nếu <span class=\"math inline\">\\(f'(x)\\ne1\\)</span> với mọi số thực <span class=\"math inline\">\\(x\\)</span>, thì <span class=\"math inline\">\\(f\\)</span> có nhiều nhất một điểm bất động.</p>"
+    }
+  ]
+}

@@ -1,0 +1,404 @@
+{
+  "bookKey": "stewart-9",
+  "sectionKey": "4-3",
+  "heading": "4.3. Bài tập",
+  "sourceSha256": "912ec30c1ce7e08a8b444de45c42b5aee6461e5e72dd28b1c9e6e3665c258345",
+  "exercises": [
+    {
+      "number": 1,
+      "content": "<p><strong>1–2.</strong></p>\n<p>Dùng đồ thị đã cho của <span class=\"math inline\">\\(f\\)</span> để tìm:</p>\n<p>(a) Các khoảng mở mà <span class=\"math inline\">\\(f\\)</span> đồng biến.</p>\n<p>(b) Các khoảng mở mà <span class=\"math inline\">\\(f\\)</span> nghịch biến.</p>\n<p>(c) Các khoảng mở mà <span class=\"math inline\">\\(f\\)</span> lõm lên.</p>\n<p>(d) Các khoảng mở mà <span class=\"math inline\">\\(f\\)</span> lõm xuống.</p>\n<p>(e) Tọa độ các điểm uốn.</p><p><strong>1.</strong></p>\n<div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-4-3-912ec30c/ex01.png\" alt=\"image\"><br>\nĐồ thị cho Bài tập 1.</p>\n</div>"
+    },
+    {
+      "number": 2,
+      "content": "<p><strong>1–2.</strong></p>\n<p>Dùng đồ thị đã cho của <span class=\"math inline\">\\(f\\)</span> để tìm:</p>\n<p>(a) Các khoảng mở mà <span class=\"math inline\">\\(f\\)</span> đồng biến.</p>\n<p>(b) Các khoảng mở mà <span class=\"math inline\">\\(f\\)</span> nghịch biến.</p>\n<p>(c) Các khoảng mở mà <span class=\"math inline\">\\(f\\)</span> lõm lên.</p>\n<p>(d) Các khoảng mở mà <span class=\"math inline\">\\(f\\)</span> lõm xuống.</p>\n<p>(e) Tọa độ các điểm uốn.</p><p><strong>2.</strong></p>\n<div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-4-3-912ec30c/ex02.png\" alt=\"image\"><br>\nĐồ thị cho Bài tập 2.</p>\n</div>"
+    },
+    {
+      "number": 3,
+      "content": "<p><strong>3.</strong> Giả sử có công thức của hàm số <span class=\"math inline\">\\(f\\)</span>.</p>\n<p>(a) Xác định nơi <span class=\"math inline\">\\(f\\)</span> đồng biến hoặc nghịch biến như thế nào?</p>\n<p>(b) Xác định nơi đồ thị của <span class=\"math inline\">\\(f\\)</span> lõm lên hoặc lõm xuống như thế nào?</p>\n<p>(c) Xác định các điểm uốn như thế nào?</p>"
+    },
+    {
+      "number": 4,
+      "content": "<p><strong>4.</strong> (a) Phát biểu tiêu chuẩn đạo hàm bậc nhất.</p>\n<p>(b) Phát biểu tiêu chuẩn đạo hàm bậc hai. Khi nào tiêu chuẩn này không cho kết luận? Làm gì khi không áp dụng được tiêu chuẩn này?</p>"
+    },
+    {
+      "number": 5,
+      "content": "<p><strong>5–6.</strong></p>\n<p>Cho đồ thị của đạo hàm <span class=\"math inline\">\\(f'\\)</span> của hàm số <span class=\"math inline\">\\(f\\)</span>.</p>\n<p>(a) Hàm <span class=\"math inline\">\\(f\\)</span> đồng biến trên những khoảng nào? Nghịch biến trên những khoảng nào?</p>\n<p>(b) Tại những giá trị <span class=\"math inline\">\\(x\\)</span> nào, <span class=\"math inline\">\\(f\\)</span> có cực đại địa phương? Cực tiểu địa phương?</p><p><strong>5.</strong></p>\n<div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-4-3-912ec30c/ex05.png\" alt=\"image\"><br>\nĐồ thị cho Bài tập 5.</p>\n</div>"
+    },
+    {
+      "number": 6,
+      "content": "<p><strong>5–6.</strong></p>\n<p>Cho đồ thị của đạo hàm <span class=\"math inline\">\\(f'\\)</span> của hàm số <span class=\"math inline\">\\(f\\)</span>.</p>\n<p>(a) Hàm <span class=\"math inline\">\\(f\\)</span> đồng biến trên những khoảng nào? Nghịch biến trên những khoảng nào?</p>\n<p>(b) Tại những giá trị <span class=\"math inline\">\\(x\\)</span> nào, <span class=\"math inline\">\\(f\\)</span> có cực đại địa phương? Cực tiểu địa phương?</p><p><strong>6.</strong></p>\n<div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-4-3-912ec30c/ex06.png\" alt=\"image\"><br>\nĐồ thị cho Bài tập 6.</p>\n</div>"
+    },
+    {
+      "number": 7,
+      "content": "<p><strong>7.</strong> Trong mỗi trường hợp, nêu hoành độ các điểm uốn của <span class=\"math inline\">\\(f\\)</span>. Giải thích câu trả lời.</p>\n<p>(a) Đường cong là đồ thị của <span class=\"math inline\">\\(f\\)</span>.</p>\n<p>(b) Đường cong là đồ thị của <span class=\"math inline\">\\(f'\\)</span>.</p>\n<p>(c) Đường cong là đồ thị của <span class=\"math inline\">\\(f''\\)</span>.</p>\n<div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-4-3-912ec30c/ex07.png\" alt=\"image\"><br>\nĐồ thị cho Bài tập 7.</p>\n</div>"
+    },
+    {
+      "number": 8,
+      "content": "<p><strong>8.</strong> Cho đồ thị của đạo hàm bậc nhất <span class=\"math inline\">\\(f'\\)</span> của hàm số <span class=\"math inline\">\\(f\\)</span>.</p>\n<p>(a) Hàm <span class=\"math inline\">\\(f\\)</span> đồng biến trên những khoảng nào? Giải thích.</p>\n<p>(b) Tại những giá trị <span class=\"math inline\">\\(x\\)</span> nào, <span class=\"math inline\">\\(f\\)</span> có cực đại hoặc cực tiểu địa phương? Giải thích.</p>\n<p>(c) Hàm <span class=\"math inline\">\\(f\\)</span> lõm lên hoặc lõm xuống trên những khoảng nào? Giải thích.</p>\n<p>(d) Hoành độ các điểm uốn của <span class=\"math inline\">\\(f\\)</span> là bao nhiêu? Vì sao?</p>\n<div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-4-3-912ec30c/ex08.png\" alt=\"image\"><br>\nĐồ thị cho Bài tập 8.</p>\n</div>"
+    },
+    {
+      "number": 9,
+      "content": "<p><strong>9–16.</strong></p>\n<p>Tìm các khoảng mà <span class=\"math inline\">\\(f\\)</span> đồng biến hoặc nghịch biến và các giá trị cực đại, cực tiểu địa phương của <span class=\"math inline\">\\(f\\)</span>.</p><p><strong>9.</strong> <span class=\"math inline\">\\(f(x)=2x^3-15x^2+24x-5\\)</span>.</p>"
+    },
+    {
+      "number": 10,
+      "content": "<p><strong>9–16.</strong></p>\n<p>Tìm các khoảng mà <span class=\"math inline\">\\(f\\)</span> đồng biến hoặc nghịch biến và các giá trị cực đại, cực tiểu địa phương của <span class=\"math inline\">\\(f\\)</span>.</p><p><strong>10.</strong> <span class=\"math inline\">\\(f(x)=x^3-6x^2-135x\\)</span>.</p>"
+    },
+    {
+      "number": 11,
+      "content": "<p><strong>9–16.</strong></p>\n<p>Tìm các khoảng mà <span class=\"math inline\">\\(f\\)</span> đồng biến hoặc nghịch biến và các giá trị cực đại, cực tiểu địa phương của <span class=\"math inline\">\\(f\\)</span>.</p><p><strong>11.</strong> <span class=\"math inline\">\\(f(x)=6x^4-16x^3+1\\)</span>.</p>"
+    },
+    {
+      "number": 12,
+      "content": "<p><strong>9–16.</strong></p>\n<p>Tìm các khoảng mà <span class=\"math inline\">\\(f\\)</span> đồng biến hoặc nghịch biến và các giá trị cực đại, cực tiểu địa phương của <span class=\"math inline\">\\(f\\)</span>.</p><p><strong>12.</strong> <span class=\"math inline\">\\(f(x)=x^{2/3}(x-3)\\)</span>.</p>"
+    },
+    {
+      "number": 13,
+      "content": "<p><strong>9–16.</strong></p>\n<p>Tìm các khoảng mà <span class=\"math inline\">\\(f\\)</span> đồng biến hoặc nghịch biến và các giá trị cực đại, cực tiểu địa phương của <span class=\"math inline\">\\(f\\)</span>.</p><p><strong>13.</strong> <span class=\"math inline\">\\(f(x)=\\dfrac{x^2-24}{x-5}\\)</span>.</p>"
+    },
+    {
+      "number": 14,
+      "content": "<p><strong>9–16.</strong></p>\n<p>Tìm các khoảng mà <span class=\"math inline\">\\(f\\)</span> đồng biến hoặc nghịch biến và các giá trị cực đại, cực tiểu địa phương của <span class=\"math inline\">\\(f\\)</span>.</p><p><strong>14.</strong> <span class=\"math inline\">\\(f(x)=x+\\dfrac4{x^2}\\)</span>.</p>"
+    },
+    {
+      "number": 15,
+      "content": "<p><strong>9–16.</strong></p>\n<p>Tìm các khoảng mà <span class=\"math inline\">\\(f\\)</span> đồng biến hoặc nghịch biến và các giá trị cực đại, cực tiểu địa phương của <span class=\"math inline\">\\(f\\)</span>.</p><p><strong>15.</strong> <span class=\"math inline\">\\(f(x)=\\sin x+\\cos x,\\quad0\\le x\\le2\\pi\\)</span>.</p>"
+    },
+    {
+      "number": 16,
+      "content": "<p><strong>9–16.</strong></p>\n<p>Tìm các khoảng mà <span class=\"math inline\">\\(f\\)</span> đồng biến hoặc nghịch biến và các giá trị cực đại, cực tiểu địa phương của <span class=\"math inline\">\\(f\\)</span>.</p><p><strong>16.</strong> <span class=\"math inline\">\\(f(x)=x^4e^{-x}\\)</span>.</p>"
+    },
+    {
+      "number": 17,
+      "content": "<p><strong>17–22.</strong></p>\n<p>Tìm các khoảng mà <span class=\"math inline\">\\(f\\)</span> lõm lên hoặc lõm xuống và các điểm uốn của <span class=\"math inline\">\\(f\\)</span>.</p><p><strong>17.</strong> <span class=\"math inline\">\\(f(x)=x^3-3x^2-9x+4\\)</span>.</p>"
+    },
+    {
+      "number": 18,
+      "content": "<p><strong>17–22.</strong></p>\n<p>Tìm các khoảng mà <span class=\"math inline\">\\(f\\)</span> lõm lên hoặc lõm xuống và các điểm uốn của <span class=\"math inline\">\\(f\\)</span>.</p><p><strong>18.</strong> <span class=\"math inline\">\\(f(x)=2x^3-9x^2+12x-3\\)</span>.</p>"
+    },
+    {
+      "number": 19,
+      "content": "<p><strong>17–22.</strong></p>\n<p>Tìm các khoảng mà <span class=\"math inline\">\\(f\\)</span> lõm lên hoặc lõm xuống và các điểm uốn của <span class=\"math inline\">\\(f\\)</span>.</p><p><strong>19.</strong> <span class=\"math inline\">\\(f(x)=\\sin^2x-\\cos2x,\\quad0\\le x\\le\\pi\\)</span>.</p>"
+    },
+    {
+      "number": 20,
+      "content": "<p><strong>17–22.</strong></p>\n<p>Tìm các khoảng mà <span class=\"math inline\">\\(f\\)</span> lõm lên hoặc lõm xuống và các điểm uốn của <span class=\"math inline\">\\(f\\)</span>.</p><p><strong>20.</strong> <span class=\"math inline\">\\(f(x)=\\ln(2+\\sin x),\\quad0\\le x\\le2\\pi\\)</span>.</p>"
+    },
+    {
+      "number": 21,
+      "content": "<p><strong>17–22.</strong></p>\n<p>Tìm các khoảng mà <span class=\"math inline\">\\(f\\)</span> lõm lên hoặc lõm xuống và các điểm uốn của <span class=\"math inline\">\\(f\\)</span>.</p><p><strong>21.</strong> <span class=\"math inline\">\\(f(x)=\\ln(x^2+5)\\)</span>.</p>"
+    },
+    {
+      "number": 22,
+      "content": "<p><strong>17–22.</strong></p>\n<p>Tìm các khoảng mà <span class=\"math inline\">\\(f\\)</span> lõm lên hoặc lõm xuống và các điểm uốn của <span class=\"math inline\">\\(f\\)</span>.</p><p><strong>22.</strong> <span class=\"math inline\">\\(f(x)=\\dfrac{e^x}{e^x+2}\\)</span>.</p>"
+    },
+    {
+      "number": 23,
+      "content": "<p><strong>23–28.</strong></p>\n<p>(a) Tìm các khoảng mà <span class=\"math inline\">\\(f\\)</span> đồng biến hoặc nghịch biến.</p>\n<p>(b) Tìm các giá trị cực đại và cực tiểu địa phương của <span class=\"math inline\">\\(f\\)</span>.</p>\n<p>(c) Tìm các khoảng có độ lõm khác nhau và các điểm uốn.</p><p><strong>23.</strong> <span class=\"math inline\">\\(f(x)=x^4-2x^2+3\\)</span>.</p>"
+    },
+    {
+      "number": 24,
+      "content": "<p><strong>23–28.</strong></p>\n<p>(a) Tìm các khoảng mà <span class=\"math inline\">\\(f\\)</span> đồng biến hoặc nghịch biến.</p>\n<p>(b) Tìm các giá trị cực đại và cực tiểu địa phương của <span class=\"math inline\">\\(f\\)</span>.</p>\n<p>(c) Tìm các khoảng có độ lõm khác nhau và các điểm uốn.</p><p><strong>24.</strong> <span class=\"math inline\">\\(f(x)=\\dfrac{x}{x^2+1}\\)</span>.</p>"
+    },
+    {
+      "number": 25,
+      "content": "<p><strong>23–28.</strong></p>\n<p>(a) Tìm các khoảng mà <span class=\"math inline\">\\(f\\)</span> đồng biến hoặc nghịch biến.</p>\n<p>(b) Tìm các giá trị cực đại và cực tiểu địa phương của <span class=\"math inline\">\\(f\\)</span>.</p>\n<p>(c) Tìm các khoảng có độ lõm khác nhau và các điểm uốn.</p><p><strong>25.</strong> <span class=\"math inline\">\\(f(x)=x^2-x-\\ln x\\)</span>.</p>"
+    },
+    {
+      "number": 26,
+      "content": "<p><strong>23–28.</strong></p>\n<p>(a) Tìm các khoảng mà <span class=\"math inline\">\\(f\\)</span> đồng biến hoặc nghịch biến.</p>\n<p>(b) Tìm các giá trị cực đại và cực tiểu địa phương của <span class=\"math inline\">\\(f\\)</span>.</p>\n<p>(c) Tìm các khoảng có độ lõm khác nhau và các điểm uốn.</p><p><strong>26.</strong> <span class=\"math inline\">\\(f(x)=x^2\\ln x\\)</span>.</p>"
+    },
+    {
+      "number": 27,
+      "content": "<p><strong>23–28.</strong></p>\n<p>(a) Tìm các khoảng mà <span class=\"math inline\">\\(f\\)</span> đồng biến hoặc nghịch biến.</p>\n<p>(b) Tìm các giá trị cực đại và cực tiểu địa phương của <span class=\"math inline\">\\(f\\)</span>.</p>\n<p>(c) Tìm các khoảng có độ lõm khác nhau và các điểm uốn.</p><p><strong>27.</strong> <span class=\"math inline\">\\(f(x)=xe^x\\)</span>.</p>"
+    },
+    {
+      "number": 28,
+      "content": "<p><strong>23–28.</strong></p>\n<p>(a) Tìm các khoảng mà <span class=\"math inline\">\\(f\\)</span> đồng biến hoặc nghịch biến.</p>\n<p>(b) Tìm các giá trị cực đại và cực tiểu địa phương của <span class=\"math inline\">\\(f\\)</span>.</p>\n<p>(c) Tìm các khoảng có độ lõm khác nhau và các điểm uốn.</p><p><strong>28.</strong> <span class=\"math inline\">\\(f(x)=\\cos^2x-2\\sin x,\\quad0\\le x\\le2\\pi\\)</span>.</p>"
+    },
+    {
+      "number": 29,
+      "content": "<p><strong>29–30.</strong></p>\n<p>Tìm các giá trị cực đại, cực tiểu địa phương của <span class=\"math inline\">\\(f\\)</span> bằng cả tiêu chuẩn đạo hàm bậc nhất lẫn tiêu chuẩn đạo hàm bậc hai. Bạn thích phương pháp nào hơn?</p><p><strong>29.</strong> <span class=\"math inline\">\\(f(x)=1+3x^2-2x^3\\)</span>.</p>"
+    },
+    {
+      "number": 30,
+      "content": "<p><strong>29–30.</strong></p>\n<p>Tìm các giá trị cực đại, cực tiểu địa phương của <span class=\"math inline\">\\(f\\)</span> bằng cả tiêu chuẩn đạo hàm bậc nhất lẫn tiêu chuẩn đạo hàm bậc hai. Bạn thích phương pháp nào hơn?</p><p><strong>30.</strong> <span class=\"math inline\">\\(f(x)=\\dfrac{x^2}{x-1}\\)</span>.</p>"
+    },
+    {
+      "number": 31,
+      "content": "<p><strong>31.</strong> Giả sử đạo hàm của hàm số <span class=\"math inline\">\\(f\\)</span> là <span class=\"math display\">\\[f'(x)=(x-4)^2(x+3)^7(x-5)^8.\\]</span> Hàm <span class=\"math inline\">\\(f\\)</span> đồng biến trên những khoảng nào?</p>"
+    },
+    {
+      "number": 32,
+      "content": "<p><strong>32.</strong> (a) Tìm các số tới hạn của <span class=\"math inline\">\\(f(x)=x^4(x-1)^3\\)</span>.</p>\n<p>(b) Tiêu chuẩn đạo hàm bậc hai cho biết gì về tính chất của <span class=\"math inline\">\\(f\\)</span> tại các số tới hạn này?</p>\n<p>(c) Tiêu chuẩn đạo hàm bậc nhất cho biết điều gì?</p>"
+    },
+    {
+      "number": 33,
+      "content": "<p><strong>33.</strong> Giả sử <span class=\"math inline\">\\(f''\\)</span> liên tục trên <span class=\"math inline\">\\((-\\infty,\\infty)\\)</span>.</p>\n<p>(a) Nếu <span class=\"math inline\">\\(f'(2)=0\\)</span> và <span class=\"math inline\">\\(f''(2)=-5\\)</span>, có thể nói gì về <span class=\"math inline\">\\(f\\)</span>?</p>\n<p>(b) Nếu <span class=\"math inline\">\\(f'(6)=0\\)</span> và <span class=\"math inline\">\\(f''(6)=0\\)</span>, có thể nói gì về <span class=\"math inline\">\\(f\\)</span>?</p>"
+    },
+    {
+      "number": 34,
+      "content": "<p><strong>34–41.</strong></p>\n<p>Phác họa đồ thị của một hàm số thỏa mãn mọi điều kiện đã cho.</p><p><strong>34.</strong> (a) <span class=\"math inline\">\\(f'(x)&lt;0\\)</span>, <span class=\"math inline\">\\(f''(x)&lt;0\\)</span> với mọi <span class=\"math inline\">\\(x\\)</span>.</p>\n<p>(b) <span class=\"math inline\">\\(f'(x)&gt;0\\)</span>, <span class=\"math inline\">\\(f''(x)&gt;0\\)</span> với mọi <span class=\"math inline\">\\(x\\)</span>.</p>"
+    },
+    {
+      "number": 35,
+      "content": "<p><strong>34–41.</strong></p>\n<p>Phác họa đồ thị của một hàm số thỏa mãn mọi điều kiện đã cho.</p><p><strong>35.</strong> (a) <span class=\"math inline\">\\(f'(x)&gt;0\\)</span>, <span class=\"math inline\">\\(f''(x)&lt;0\\)</span> với mọi <span class=\"math inline\">\\(x\\)</span>.</p>\n<p>(b) <span class=\"math inline\">\\(f'(x)&lt;0\\)</span>, <span class=\"math inline\">\\(f''(x)&gt;0\\)</span> với mọi <span class=\"math inline\">\\(x\\)</span>.</p>"
+    },
+    {
+      "number": 36,
+      "content": "<p><strong>34–41.</strong></p>\n<p>Phác họa đồ thị của một hàm số thỏa mãn mọi điều kiện đã cho.</p><p><strong>36.</strong> Tiệm cận đứng <span class=\"math inline\">\\(x=0\\)</span>; <span class=\"math inline\">\\(f'(x)&gt;0\\)</span> nếu <span class=\"math inline\">\\(x&lt;-2\\)</span>; <span class=\"math inline\">\\(f'(x)&lt;0\\)</span> nếu <span class=\"math inline\">\\(x&gt;-2\\)</span> (<span class=\"math inline\">\\(x\\ne0\\)</span>); <span class=\"math inline\">\\(f''(x)&lt;0\\)</span> nếu <span class=\"math inline\">\\(x&lt;0\\)</span>; <span class=\"math inline\">\\(f''(x)&gt;0\\)</span> nếu <span class=\"math inline\">\\(x&gt;0\\)</span>.</p>"
+    },
+    {
+      "number": 37,
+      "content": "<p><strong>34–41.</strong></p>\n<p>Phác họa đồ thị của một hàm số thỏa mãn mọi điều kiện đã cho.</p><p><strong>37.</strong> <span class=\"math inline\">\\(f'(0)=f'(2)=f'(4)=0\\)</span>;</p>\n<p><span class=\"math inline\">\\(f'(x)&gt;0\\)</span> nếu <span class=\"math inline\">\\(x&lt;0\\)</span> hoặc <span class=\"math inline\">\\(2&lt;x&lt;4\\)</span>;</p>\n<p><span class=\"math inline\">\\(f'(x)&lt;0\\)</span> nếu <span class=\"math inline\">\\(0&lt;x&lt;2\\)</span> hoặc <span class=\"math inline\">\\(x&gt;4\\)</span>;</p>\n<p><span class=\"math inline\">\\(f''(x)&gt;0\\)</span> nếu <span class=\"math inline\">\\(1&lt;x&lt;3\\)</span>; <span class=\"math inline\">\\(f''(x)&lt;0\\)</span> nếu <span class=\"math inline\">\\(x&lt;1\\)</span> hoặc <span class=\"math inline\">\\(x&gt;3\\)</span>.</p>"
+    },
+    {
+      "number": 38,
+      "content": "<p><strong>34–41.</strong></p>\n<p>Phác họa đồ thị của một hàm số thỏa mãn mọi điều kiện đã cho.</p><p><strong>38.</strong> <span class=\"math inline\">\\(f'(x)&gt;0\\)</span> với mọi <span class=\"math inline\">\\(x\\ne1\\)</span>; tiệm cận đứng <span class=\"math inline\">\\(x=1\\)</span>;</p>\n<p><span class=\"math inline\">\\(f''(x)&gt;0\\)</span> nếu <span class=\"math inline\">\\(x&lt;1\\)</span> hoặc <span class=\"math inline\">\\(x&gt;3\\)</span>; <span class=\"math inline\">\\(f''(x)&lt;0\\)</span> nếu <span class=\"math inline\">\\(1&lt;x&lt;3\\)</span>.</p>"
+    },
+    {
+      "number": 39,
+      "content": "<p><strong>34–41.</strong></p>\n<p>Phác họa đồ thị của một hàm số thỏa mãn mọi điều kiện đã cho.</p><p><strong>39.</strong> <span class=\"math inline\">\\(f'(5)=0\\)</span>; <span class=\"math inline\">\\(f'(x)&lt;0\\)</span> khi <span class=\"math inline\">\\(x&lt;5\\)</span>; <span class=\"math inline\">\\(f'(x)&gt;0\\)</span> khi <span class=\"math inline\">\\(x&gt;5\\)</span>;</p>\n<p><span class=\"math inline\">\\(f''(2)=0\\)</span>, <span class=\"math inline\">\\(f''(8)=0\\)</span>;</p>\n<p><span class=\"math inline\">\\(f''(x)&lt;0\\)</span> khi <span class=\"math inline\">\\(x&lt;2\\)</span> hoặc <span class=\"math inline\">\\(x&gt;8\\)</span>; <span class=\"math inline\">\\(f''(x)&gt;0\\)</span> khi <span class=\"math inline\">\\(2&lt;x&lt;8\\)</span>;</p>\n<p><span class=\"math inline\">\\(\\displaystyle\\lim_{x\\to\\infty}f(x)=3\\)</span>, <span class=\"math inline\">\\(\\displaystyle\\lim_{x\\to-\\infty}f(x)=3\\)</span>.</p>"
+    },
+    {
+      "number": 40,
+      "content": "<p><strong>34–41.</strong></p>\n<p>Phác họa đồ thị của một hàm số thỏa mãn mọi điều kiện đã cho.</p><p><strong>40.</strong> <span class=\"math inline\">\\(f'(0)=f'(4)=0\\)</span>; <span class=\"math inline\">\\(f'(x)=1\\)</span> nếu <span class=\"math inline\">\\(x&lt;-1\\)</span>;</p>\n<p><span class=\"math inline\">\\(f'(x)&gt;0\\)</span> nếu <span class=\"math inline\">\\(0&lt;x&lt;2\\)</span>;</p>\n<p><span class=\"math inline\">\\(f'(x)&lt;0\\)</span> nếu <span class=\"math inline\">\\(-1&lt;x&lt;0\\)</span>, hoặc <span class=\"math inline\">\\(2&lt;x&lt;4\\)</span>, hoặc <span class=\"math inline\">\\(x&gt;4\\)</span>;</p>\n<p><span class=\"math inline\">\\(\\displaystyle\\lim_{x\\to2^-}f'(x)=\\infty\\)</span>, <span class=\"math inline\">\\(\\displaystyle\\lim_{x\\to2^+}f'(x)=-\\infty\\)</span>;</p>\n<p><span class=\"math inline\">\\(f''(x)&gt;0\\)</span> nếu <span class=\"math inline\">\\(-1&lt;x&lt;2\\)</span> hoặc <span class=\"math inline\">\\(2&lt;x&lt;4\\)</span>; <span class=\"math inline\">\\(f''(x)&lt;0\\)</span> nếu <span class=\"math inline\">\\(x&gt;4\\)</span>.</p>"
+    },
+    {
+      "number": 41,
+      "content": "<p><strong>34–41.</strong></p>\n<p>Phác họa đồ thị của một hàm số thỏa mãn mọi điều kiện đã cho.</p><p><strong>41.</strong> <span class=\"math inline\">\\(f'(x)&gt;0\\)</span> nếu <span class=\"math inline\">\\(x\\ne2\\)</span>; <span class=\"math inline\">\\(f''(x)&gt;0\\)</span> nếu <span class=\"math inline\">\\(x&lt;2\\)</span>; <span class=\"math inline\">\\(f''(x)&lt;0\\)</span> nếu <span class=\"math inline\">\\(x&gt;2\\)</span>; <span class=\"math inline\">\\(f\\)</span> có điểm uốn <span class=\"math inline\">\\((2,5)\\)</span>;</p>\n<p><span class=\"math inline\">\\(\\displaystyle\\lim_{x\\to\\infty}f(x)=8\\)</span>, <span class=\"math inline\">\\(\\displaystyle\\lim_{x\\to-\\infty}f(x)=0\\)</span>.</p>"
+    },
+    {
+      "number": 42,
+      "content": "<p><strong>42.</strong> Cho đồ thị của hàm số <span class=\"math inline\">\\(y=f(x)\\)</span>. Tại những điểm nào các điều sau đúng?</p>\n<p>(a) <span class=\"math inline\">\\(dy/dx\\)</span> và <span class=\"math inline\">\\(d^2y/dx^2\\)</span> đều dương.</p>\n<p>(b) <span class=\"math inline\">\\(dy/dx\\)</span> và <span class=\"math inline\">\\(d^2y/dx^2\\)</span> đều âm.</p>\n<p>(c) <span class=\"math inline\">\\(dy/dx\\)</span> âm nhưng <span class=\"math inline\">\\(d^2y/dx^2\\)</span> dương.</p>\n<div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-4-3-912ec30c/ex42.png\" alt=\"image\"><br>\nĐồ thị cho Bài tập 42.</p>\n</div>"
+    },
+    {
+      "number": 43,
+      "content": "<p><strong>43–44.</strong></p>\n<p>Cho đồ thị của đạo hàm <span class=\"math inline\">\\(f'\\)</span> của hàm liên tục <span class=\"math inline\">\\(f\\)</span>.</p>\n<p>(a) Hàm <span class=\"math inline\">\\(f\\)</span> đồng biến trên những khoảng nào? Nghịch biến trên những khoảng nào?</p>\n<p>(b) Tại những giá trị <span class=\"math inline\">\\(x\\)</span> nào, <span class=\"math inline\">\\(f\\)</span> có cực đại địa phương? Cực tiểu địa phương?</p>\n<p>(c) Hàm <span class=\"math inline\">\\(f\\)</span> lõm lên trên những khoảng nào? Lõm xuống trên những khoảng nào?</p>\n<p>(d) Nêu hoành độ các điểm uốn của <span class=\"math inline\">\\(f\\)</span>.</p>\n<p>(e) Giả sử <span class=\"math inline\">\\(f(0)=0\\)</span>, phác họa đồ thị của <span class=\"math inline\">\\(f\\)</span>.</p><p><strong>43.</strong></p>\n<div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-4-3-912ec30c/ex43.png\" alt=\"image\"><br>\nĐồ thị cho Bài tập 43.</p>\n</div>"
+    },
+    {
+      "number": 44,
+      "content": "<p><strong>43–44.</strong></p>\n<p>Cho đồ thị của đạo hàm <span class=\"math inline\">\\(f'\\)</span> của hàm liên tục <span class=\"math inline\">\\(f\\)</span>.</p>\n<p>(a) Hàm <span class=\"math inline\">\\(f\\)</span> đồng biến trên những khoảng nào? Nghịch biến trên những khoảng nào?</p>\n<p>(b) Tại những giá trị <span class=\"math inline\">\\(x\\)</span> nào, <span class=\"math inline\">\\(f\\)</span> có cực đại địa phương? Cực tiểu địa phương?</p>\n<p>(c) Hàm <span class=\"math inline\">\\(f\\)</span> lõm lên trên những khoảng nào? Lõm xuống trên những khoảng nào?</p>\n<p>(d) Nêu hoành độ các điểm uốn của <span class=\"math inline\">\\(f\\)</span>.</p>\n<p>(e) Giả sử <span class=\"math inline\">\\(f(0)=0\\)</span>, phác họa đồ thị của <span class=\"math inline\">\\(f\\)</span>.</p><p><strong>44.</strong></p>\n<div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-4-3-912ec30c/ex44.png\" alt=\"image\"><br>\nĐồ thị cho Bài tập 44.</p>\n</div>"
+    },
+    {
+      "number": 45,
+      "content": "<p><strong>45–58.</strong></p>\n<p>(a) Tìm các khoảng đồng biến hoặc nghịch biến.</p>\n<p>(b) Tìm các giá trị cực đại và cực tiểu địa phương.</p>\n<p>(c) Tìm các khoảng có độ lõm khác nhau và các điểm uốn.</p>\n<p>(d) Dùng thông tin từ (a)–(c) để phác họa đồ thị. Có thể kiểm tra bằng máy tính cầm tay có chức năng đồ thị hoặc máy tính.</p><p><strong>45.</strong> <span class=\"math inline\">\\(f(x)=x^3-3x^2+4\\)</span>.</p>"
+    },
+    {
+      "number": 46,
+      "content": "<p><strong>45–58.</strong></p>\n<p>(a) Tìm các khoảng đồng biến hoặc nghịch biến.</p>\n<p>(b) Tìm các giá trị cực đại và cực tiểu địa phương.</p>\n<p>(c) Tìm các khoảng có độ lõm khác nhau và các điểm uốn.</p>\n<p>(d) Dùng thông tin từ (a)–(c) để phác họa đồ thị. Có thể kiểm tra bằng máy tính cầm tay có chức năng đồ thị hoặc máy tính.</p><p><strong>46.</strong> <span class=\"math inline\">\\(f(x)=36x+3x^2-2x^3\\)</span>.</p>"
+    },
+    {
+      "number": 47,
+      "content": "<p><strong>45–58.</strong></p>\n<p>(a) Tìm các khoảng đồng biến hoặc nghịch biến.</p>\n<p>(b) Tìm các giá trị cực đại và cực tiểu địa phương.</p>\n<p>(c) Tìm các khoảng có độ lõm khác nhau và các điểm uốn.</p>\n<p>(d) Dùng thông tin từ (a)–(c) để phác họa đồ thị. Có thể kiểm tra bằng máy tính cầm tay có chức năng đồ thị hoặc máy tính.</p><p><strong>47.</strong> <span class=\"math inline\">\\(f(x)=\\frac12x^4-4x^2+3\\)</span>.</p>"
+    },
+    {
+      "number": 48,
+      "content": "<p><strong>45–58.</strong></p>\n<p>(a) Tìm các khoảng đồng biến hoặc nghịch biến.</p>\n<p>(b) Tìm các giá trị cực đại và cực tiểu địa phương.</p>\n<p>(c) Tìm các khoảng có độ lõm khác nhau và các điểm uốn.</p>\n<p>(d) Dùng thông tin từ (a)–(c) để phác họa đồ thị. Có thể kiểm tra bằng máy tính cầm tay có chức năng đồ thị hoặc máy tính.</p><p><strong>48.</strong> <span class=\"math inline\">\\(g(x)=200+8x^3+x^4\\)</span>.</p>"
+    },
+    {
+      "number": 49,
+      "content": "<p><strong>45–58.</strong></p>\n<p>(a) Tìm các khoảng đồng biến hoặc nghịch biến.</p>\n<p>(b) Tìm các giá trị cực đại và cực tiểu địa phương.</p>\n<p>(c) Tìm các khoảng có độ lõm khác nhau và các điểm uốn.</p>\n<p>(d) Dùng thông tin từ (a)–(c) để phác họa đồ thị. Có thể kiểm tra bằng máy tính cầm tay có chức năng đồ thị hoặc máy tính.</p><p><strong>49.</strong> <span class=\"math inline\">\\(g(t)=3t^4-8t^3+12\\)</span>.</p>"
+    },
+    {
+      "number": 50,
+      "content": "<p><strong>45–58.</strong></p>\n<p>(a) Tìm các khoảng đồng biến hoặc nghịch biến.</p>\n<p>(b) Tìm các giá trị cực đại và cực tiểu địa phương.</p>\n<p>(c) Tìm các khoảng có độ lõm khác nhau và các điểm uốn.</p>\n<p>(d) Dùng thông tin từ (a)–(c) để phác họa đồ thị. Có thể kiểm tra bằng máy tính cầm tay có chức năng đồ thị hoặc máy tính.</p><p><strong>50.</strong> <span class=\"math inline\">\\(h(x)=5x^3-3x^5\\)</span>.</p>"
+    },
+    {
+      "number": 51,
+      "content": "<p><strong>45–58.</strong></p>\n<p>(a) Tìm các khoảng đồng biến hoặc nghịch biến.</p>\n<p>(b) Tìm các giá trị cực đại và cực tiểu địa phương.</p>\n<p>(c) Tìm các khoảng có độ lõm khác nhau và các điểm uốn.</p>\n<p>(d) Dùng thông tin từ (a)–(c) để phác họa đồ thị. Có thể kiểm tra bằng máy tính cầm tay có chức năng đồ thị hoặc máy tính.</p><p><strong>51.</strong> <span class=\"math inline\">\\(f(z)=z^7-112z^2\\)</span>.</p>"
+    },
+    {
+      "number": 52,
+      "content": "<p><strong>45–58.</strong></p>\n<p>(a) Tìm các khoảng đồng biến hoặc nghịch biến.</p>\n<p>(b) Tìm các giá trị cực đại và cực tiểu địa phương.</p>\n<p>(c) Tìm các khoảng có độ lõm khác nhau và các điểm uốn.</p>\n<p>(d) Dùng thông tin từ (a)–(c) để phác họa đồ thị. Có thể kiểm tra bằng máy tính cầm tay có chức năng đồ thị hoặc máy tính.</p><p><strong>52.</strong> <span class=\"math inline\">\\(f(x)=(x^2-4)^3\\)</span>.</p>"
+    },
+    {
+      "number": 53,
+      "content": "<p><strong>45–58.</strong></p>\n<p>(a) Tìm các khoảng đồng biến hoặc nghịch biến.</p>\n<p>(b) Tìm các giá trị cực đại và cực tiểu địa phương.</p>\n<p>(c) Tìm các khoảng có độ lõm khác nhau và các điểm uốn.</p>\n<p>(d) Dùng thông tin từ (a)–(c) để phác họa đồ thị. Có thể kiểm tra bằng máy tính cầm tay có chức năng đồ thị hoặc máy tính.</p><p><strong>53.</strong> <span class=\"math inline\">\\(F(x)=x\\sqrt{6-x}\\)</span>.</p>"
+    },
+    {
+      "number": 54,
+      "content": "<p><strong>45–58.</strong></p>\n<p>(a) Tìm các khoảng đồng biến hoặc nghịch biến.</p>\n<p>(b) Tìm các giá trị cực đại và cực tiểu địa phương.</p>\n<p>(c) Tìm các khoảng có độ lõm khác nhau và các điểm uốn.</p>\n<p>(d) Dùng thông tin từ (a)–(c) để phác họa đồ thị. Có thể kiểm tra bằng máy tính cầm tay có chức năng đồ thị hoặc máy tính.</p><p><strong>54.</strong> <span class=\"math inline\">\\(G(x)=5x^{2/3}-2x^{5/3}\\)</span>.</p>"
+    },
+    {
+      "number": 55,
+      "content": "<p><strong>45–58.</strong></p>\n<p>(a) Tìm các khoảng đồng biến hoặc nghịch biến.</p>\n<p>(b) Tìm các giá trị cực đại và cực tiểu địa phương.</p>\n<p>(c) Tìm các khoảng có độ lõm khác nhau và các điểm uốn.</p>\n<p>(d) Dùng thông tin từ (a)–(c) để phác họa đồ thị. Có thể kiểm tra bằng máy tính cầm tay có chức năng đồ thị hoặc máy tính.</p><p><strong>55.</strong> <span class=\"math inline\">\\(C(x)=x^{1/3}(x+4)\\)</span>.</p>"
+    },
+    {
+      "number": 56,
+      "content": "<p><strong>45–58.</strong></p>\n<p>(a) Tìm các khoảng đồng biến hoặc nghịch biến.</p>\n<p>(b) Tìm các giá trị cực đại và cực tiểu địa phương.</p>\n<p>(c) Tìm các khoảng có độ lõm khác nhau và các điểm uốn.</p>\n<p>(d) Dùng thông tin từ (a)–(c) để phác họa đồ thị. Có thể kiểm tra bằng máy tính cầm tay có chức năng đồ thị hoặc máy tính.</p><p><strong>56.</strong> <span class=\"math inline\">\\(f(x)=\\ln(x^2+9)\\)</span>.</p>"
+    },
+    {
+      "number": 57,
+      "content": "<p><strong>45–58.</strong></p>\n<p>(a) Tìm các khoảng đồng biến hoặc nghịch biến.</p>\n<p>(b) Tìm các giá trị cực đại và cực tiểu địa phương.</p>\n<p>(c) Tìm các khoảng có độ lõm khác nhau và các điểm uốn.</p>\n<p>(d) Dùng thông tin từ (a)–(c) để phác họa đồ thị. Có thể kiểm tra bằng máy tính cầm tay có chức năng đồ thị hoặc máy tính.</p><p><strong>57.</strong> <span class=\"math inline\">\\(f(\\theta)=2\\cos\\theta+\\cos^2\\theta,\\quad0\\le\\theta\\le2\\pi\\)</span>.</p>"
+    },
+    {
+      "number": 58,
+      "content": "<p><strong>45–58.</strong></p>\n<p>(a) Tìm các khoảng đồng biến hoặc nghịch biến.</p>\n<p>(b) Tìm các giá trị cực đại và cực tiểu địa phương.</p>\n<p>(c) Tìm các khoảng có độ lõm khác nhau và các điểm uốn.</p>\n<p>(d) Dùng thông tin từ (a)–(c) để phác họa đồ thị. Có thể kiểm tra bằng máy tính cầm tay có chức năng đồ thị hoặc máy tính.</p><p><strong>58.</strong> <span class=\"math inline\">\\(S(x)=x-\\sin x,\\quad0\\le x\\le4\\pi\\)</span>.</p>"
+    },
+    {
+      "number": 59,
+      "content": "<p><strong>59–66.</strong></p>\n<p>(a) Tìm các tiệm cận đứng và ngang.</p>\n<p>(b) Tìm các khoảng đồng biến hoặc nghịch biến.</p>\n<p>(c) Tìm các giá trị cực đại và cực tiểu địa phương.</p>\n<p>(d) Tìm các khoảng có độ lõm khác nhau và các điểm uốn.</p>\n<p>(e) Dùng thông tin từ (a)–(d) để phác họa đồ thị của <span class=\"math inline\">\\(f\\)</span>.</p><p><strong>59.</strong> <span class=\"math inline\">\\(f(x)=1+\\dfrac1x-\\dfrac1{x^2}\\)</span>.</p>"
+    },
+    {
+      "number": 60,
+      "content": "<p><strong>59–66.</strong></p>\n<p>(a) Tìm các tiệm cận đứng và ngang.</p>\n<p>(b) Tìm các khoảng đồng biến hoặc nghịch biến.</p>\n<p>(c) Tìm các giá trị cực đại và cực tiểu địa phương.</p>\n<p>(d) Tìm các khoảng có độ lõm khác nhau và các điểm uốn.</p>\n<p>(e) Dùng thông tin từ (a)–(d) để phác họa đồ thị của <span class=\"math inline\">\\(f\\)</span>.</p><p><strong>60.</strong> <span class=\"math inline\">\\(f(x)=\\dfrac{x^2-4}{x^2+4}\\)</span>.</p>"
+    },
+    {
+      "number": 61,
+      "content": "<p><strong>59–66.</strong></p>\n<p>(a) Tìm các tiệm cận đứng và ngang.</p>\n<p>(b) Tìm các khoảng đồng biến hoặc nghịch biến.</p>\n<p>(c) Tìm các giá trị cực đại và cực tiểu địa phương.</p>\n<p>(d) Tìm các khoảng có độ lõm khác nhau và các điểm uốn.</p>\n<p>(e) Dùng thông tin từ (a)–(d) để phác họa đồ thị của <span class=\"math inline\">\\(f\\)</span>.</p><p><strong>61.</strong> <span class=\"math inline\">\\(f(x)=e^{-2/x}\\)</span>.</p>"
+    },
+    {
+      "number": 62,
+      "content": "<p><strong>59–66.</strong></p>\n<p>(a) Tìm các tiệm cận đứng và ngang.</p>\n<p>(b) Tìm các khoảng đồng biến hoặc nghịch biến.</p>\n<p>(c) Tìm các giá trị cực đại và cực tiểu địa phương.</p>\n<p>(d) Tìm các khoảng có độ lõm khác nhau và các điểm uốn.</p>\n<p>(e) Dùng thông tin từ (a)–(d) để phác họa đồ thị của <span class=\"math inline\">\\(f\\)</span>.</p><p><strong>62.</strong> <span class=\"math inline\">\\(f(x)=\\dfrac{e^x}{1-e^x}\\)</span>.</p>"
+    },
+    {
+      "number": 63,
+      "content": "<p><strong>59–66.</strong></p>\n<p>(a) Tìm các tiệm cận đứng và ngang.</p>\n<p>(b) Tìm các khoảng đồng biến hoặc nghịch biến.</p>\n<p>(c) Tìm các giá trị cực đại và cực tiểu địa phương.</p>\n<p>(d) Tìm các khoảng có độ lõm khác nhau và các điểm uốn.</p>\n<p>(e) Dùng thông tin từ (a)–(d) để phác họa đồ thị của <span class=\"math inline\">\\(f\\)</span>.</p><p><strong>63.</strong> <span class=\"math inline\">\\(f(x)=e^{-x^2}\\)</span>.</p>"
+    },
+    {
+      "number": 64,
+      "content": "<p><strong>59–66.</strong></p>\n<p>(a) Tìm các tiệm cận đứng và ngang.</p>\n<p>(b) Tìm các khoảng đồng biến hoặc nghịch biến.</p>\n<p>(c) Tìm các giá trị cực đại và cực tiểu địa phương.</p>\n<p>(d) Tìm các khoảng có độ lõm khác nhau và các điểm uốn.</p>\n<p>(e) Dùng thông tin từ (a)–(d) để phác họa đồ thị của <span class=\"math inline\">\\(f\\)</span>.</p><p><strong>64.</strong> <span class=\"math inline\">\\(f(x)=x-\\dfrac16x^2-\\dfrac23\\ln x\\)</span>.</p>"
+    },
+    {
+      "number": 65,
+      "content": "<p><strong>59–66.</strong></p>\n<p>(a) Tìm các tiệm cận đứng và ngang.</p>\n<p>(b) Tìm các khoảng đồng biến hoặc nghịch biến.</p>\n<p>(c) Tìm các giá trị cực đại và cực tiểu địa phương.</p>\n<p>(d) Tìm các khoảng có độ lõm khác nhau và các điểm uốn.</p>\n<p>(e) Dùng thông tin từ (a)–(d) để phác họa đồ thị của <span class=\"math inline\">\\(f\\)</span>.</p><p><strong>65.</strong> <span class=\"math inline\">\\(f(x)=\\ln(1-\\ln x)\\)</span>.</p>"
+    },
+    {
+      "number": 66,
+      "content": "<p><strong>59–66.</strong></p>\n<p>(a) Tìm các tiệm cận đứng và ngang.</p>\n<p>(b) Tìm các khoảng đồng biến hoặc nghịch biến.</p>\n<p>(c) Tìm các giá trị cực đại và cực tiểu địa phương.</p>\n<p>(d) Tìm các khoảng có độ lõm khác nhau và các điểm uốn.</p>\n<p>(e) Dùng thông tin từ (a)–(d) để phác họa đồ thị của <span class=\"math inline\">\\(f\\)</span>.</p><p><strong>66.</strong> <span class=\"math inline\">\\(f(x)=e^{\\arctan x}\\)</span>.</p>"
+    },
+    {
+      "number": 67,
+      "content": "<p><strong>67–68.</strong></p>\n<p>Dùng các phương pháp trong mục này để phác họa một số thành viên của họ đường cong đã cho. Các thành viên có điểm gì chung? Chúng khác nhau như thế nào?</p><p><strong>67.</strong> <span class=\"math inline\">\\(f(x)=x^4-cx,\\quad c&gt;0\\)</span>.</p>"
+    },
+    {
+      "number": 68,
+      "content": "<p><strong>67–68.</strong></p>\n<p>Dùng các phương pháp trong mục này để phác họa một số thành viên của họ đường cong đã cho. Các thành viên có điểm gì chung? Chúng khác nhau như thế nào?</p><p><strong>68.</strong> <span class=\"math inline\">\\(f(x)=x^3-3c^2x+2c^3,\\quad c&gt;0\\)</span>.</p>"
+    },
+    {
+      "number": 69,
+      "content": "<p><strong>69–70.</strong></p>\n<p>(a) Dùng đồ thị <span class=\"math inline\">\\(f\\)</span> để ước lượng các giá trị lớn nhất, nhỏ nhất. Sau đó tìm các giá trị chính xác.</p>\n<p>(b) Ước lượng giá trị <span class=\"math inline\">\\(x\\)</span> tại đó <span class=\"math inline\">\\(f\\)</span> tăng nhanh nhất. Sau đó tìm giá trị chính xác.</p><p><strong>69.</strong> <span class=\"math inline\">\\(f(x)=\\dfrac{x+1}{\\sqrt{x^2+1}}\\)</span>.</p>"
+    },
+    {
+      "number": 70,
+      "content": "<p><strong>69–70.</strong></p>\n<p>(a) Dùng đồ thị <span class=\"math inline\">\\(f\\)</span> để ước lượng các giá trị lớn nhất, nhỏ nhất. Sau đó tìm các giá trị chính xác.</p>\n<p>(b) Ước lượng giá trị <span class=\"math inline\">\\(x\\)</span> tại đó <span class=\"math inline\">\\(f\\)</span> tăng nhanh nhất. Sau đó tìm giá trị chính xác.</p><p><strong>70.</strong> <span class=\"math inline\">\\(f(x)=x^2e^{-x}\\)</span>.</p>"
+    },
+    {
+      "number": 71,
+      "content": "<p><strong>71–72.</strong></p>\n<p>(a) Dùng đồ thị <span class=\"math inline\">\\(f\\)</span> để ước lượng sơ bộ các khoảng có độ lõm khác nhau và tọa độ các điểm uốn.</p>\n<p>(b) Dùng đồ thị <span class=\"math inline\">\\(f''\\)</span> để có các ước lượng tốt hơn.</p><p><strong>71.</strong> <span class=\"math inline\">\\(f(x)=\\sin2x+\\sin4x,\\quad0\\le x\\le\\pi\\)</span>.</p>"
+    },
+    {
+      "number": 72,
+      "content": "<p><strong>71–72.</strong></p>\n<p>(a) Dùng đồ thị <span class=\"math inline\">\\(f\\)</span> để ước lượng sơ bộ các khoảng có độ lõm khác nhau và tọa độ các điểm uốn.</p>\n<p>(b) Dùng đồ thị <span class=\"math inline\">\\(f''\\)</span> để có các ước lượng tốt hơn.</p><p><strong>72.</strong> <span class=\"math inline\">\\(f(x)=(x-1)^2(x+1)^3\\)</span>.</p>"
+    },
+    {
+      "number": 73,
+      "content": "<p><strong>73–74.</strong></p>\n<p>Ước lượng các khoảng có độ lõm khác nhau, chính xác đến một chữ số thập phân, bằng cách dùng hệ thống đại số máy tính để tính và vẽ đồ thị <span class=\"math inline\">\\(f''\\)</span>.</p><p><strong>73.</strong> <span class=\"math inline\">\\(f(x)=\\dfrac{x^4+x^3+1}{\\sqrt{x^2+x+1}}\\)</span>.</p>"
+    },
+    {
+      "number": 74,
+      "content": "<p><strong>73–74.</strong></p>\n<p>Ước lượng các khoảng có độ lõm khác nhau, chính xác đến một chữ số thập phân, bằng cách dùng hệ thống đại số máy tính để tính và vẽ đồ thị <span class=\"math inline\">\\(f''\\)</span>.</p><p><strong>74.</strong> <span class=\"math inline\">\\(f(x)=\\dfrac{x^2\\arctan x}{1+x^3}\\)</span>.</p>"
+    },
+    {
+      "number": 75,
+      "content": "<p><strong>75.</strong> Cho đồ thị số lượng tế bào nấm men trong một mẫu nuôi cấy mới ở phòng thí nghiệm theo thời gian.</p>\n<div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-4-3-912ec30c/ex75.png\" alt=\"image\"><br>\nĐồ thị cho Bài tập 75. Trục đứng: số tế bào nấm men; trục ngang: thời gian (giờ).</p>\n</div>\n<p>(a) Mô tả sự thay đổi của tốc độ tăng số lượng.</p>\n<p>(b) Khi nào tốc độ này lớn nhất?</p>\n<p>(c) Hàm số lượng lõm lên hoặc lõm xuống trên những khoảng nào?</p>\n<p>(d) Ước lượng tọa độ điểm uốn.</p>"
+    },
+    {
+      "number": 76,
+      "content": "<p><strong>76.</strong> Trong một tập phim truyền hình <em>The Simpsons</em>, Homer đọc báo và thông báo: “Có tin tốt đây! Theo bài báo nổi bật này, điểm SAT đang giảm với tốc độ chậm dần.” Diễn giải phát biểu của Homer theo một hàm số và các đạo hàm bậc nhất, bậc hai của nó.</p>"
+    },
+    {
+      "number": 77,
+      "content": "<p><strong>77.</strong> Tổng thống thông báo thâm hụt quốc gia đang tăng, nhưng với tốc độ giảm dần. Diễn giải phát biểu này theo một hàm số và các đạo hàm bậc nhất, bậc hai của nó.</p>"
+    },
+    {
+      "number": 78,
+      "content": "<p><strong>78.</strong> Cho <span class=\"math inline\">\\(f(t)\\)</span> là nhiệt độ tại thời điểm <span class=\"math inline\">\\(t\\)</span> ở nơi bạn sống và giả sử tại <span class=\"math inline\">\\(t=3\\)</span> bạn cảm thấy nóng khó chịu. Với dữ liệu trong từng trường hợp, bạn cảm thấy thế nào?</p>\n<p>(a) <span class=\"math inline\">\\(f'(3)=2\\)</span>, <span class=\"math inline\">\\(f''(3)=4\\)</span>.</p>\n<p>(b) <span class=\"math inline\">\\(f'(3)=2\\)</span>, <span class=\"math inline\">\\(f''(3)=-4\\)</span>.</p>\n<p>(c) <span class=\"math inline\">\\(f'(3)=-2\\)</span>, <span class=\"math inline\">\\(f''(3)=4\\)</span>.</p>\n<p>(d) <span class=\"math inline\">\\(f'(3)=-2\\)</span>, <span class=\"math inline\">\\(f''(3)=-4\\)</span>.</p>"
+    },
+    {
+      "number": 79,
+      "content": "<p><strong>79.</strong> Cho <span class=\"math inline\">\\(K(t)\\)</span> đo lượng kiến thức thu được sau <span class=\"math inline\">\\(t\\)</span> giờ học để chuẩn bị kiểm tra. Theo bạn, <span class=\"math inline\">\\(K(8)-K(7)\\)</span> hay <span class=\"math inline\">\\(K(3)-K(2)\\)</span> lớn hơn? Đồ thị <span class=\"math inline\">\\(K\\)</span> lõm lên hay lõm xuống? Vì sao?</p>"
+    },
+    {
+      "number": 80,
+      "content": "<p><strong>80.</strong> Cà phê được rót vào chiếc cốc trong hình với tốc độ không đổi (đo bằng thể tích trên một đơn vị thời gian). Phác họa đồ thị gần đúng của độ sâu cà phê trong cốc theo thời gian. Giải thích hình dạng đồ thị bằng độ lõm. Điểm uốn có ý nghĩa gì?</p>\n<div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-4-3-912ec30c/ex80.png\" alt=\"image\"><br>\nHình cho Bài tập 80.</p>\n</div>"
+    },
+    {
+      "number": 81,
+      "content": "<p><strong>81.</strong> <em>Đường cong đáp ứng thuốc</em> mô tả mức thuốc trong máu sau khi dùng thuốc. Một hàm tăng vọt <span class=\"math inline\">\\(S(t)=At^pe^{-kt}\\)</span> thường được dùng để mô hình hóa đường cong đáp ứng, phản ánh mức thuốc tăng mạnh ban đầu rồi giảm từ từ hơn. Với một loại thuốc cụ thể, <span class=\"math inline\">\\(A=0{,}01\\)</span>, <span class=\"math inline\">\\(p=4\\)</span>, <span class=\"math inline\">\\(k=0{,}07\\)</span> và <span class=\"math inline\">\\(t\\)</span> tính bằng phút, hãy ước lượng các thời điểm tương ứng với điểm uốn và giải thích ý nghĩa của chúng. Sau đó vẽ đường cong đáp ứng thuốc.</p>"
+    },
+    {
+      "number": 82,
+      "content": "<p><strong>82.</strong> <strong>Các hàm mật độ chuẩn.</strong> Họ đường cong hình chuông <span class=\"math display\">\\[y=\\frac1{\\sigma\\sqrt{2\\pi}}e^{-(x-\\mu)^2/(2\\sigma^2)}\\]</span> xuất hiện trong xác suất và thống kê, được gọi là hàm mật độ chuẩn. Hằng số <span class=\"math inline\">\\(\\mu\\)</span> gọi là <em>trung bình</em>, hằng số dương <span class=\"math inline\">\\(\\sigma\\)</span> gọi là <em>độ lệch chuẩn</em>. Để đơn giản, thay đổi tỉ lệ hàm nhằm bỏ thừa số <span class=\"math inline\">\\(1/(\\sigma\\sqrt{2\\pi})\\)</span> và xét trường hợp đặc biệt <span class=\"math inline\">\\(\\mu=0\\)</span>. Vậy ta nghiên cứu <span class=\"math display\">\\[f(x)=e^{-x^2/(2\\sigma^2)}.\\]</span> (a) Tìm tiệm cận, giá trị lớn nhất và các điểm uốn của <span class=\"math inline\">\\(f\\)</span>.</p>\n<p>(b) Tham số <span class=\"math inline\">\\(\\sigma\\)</span> có vai trò gì đối với hình dạng đường cong?</p>\n<p>(c) Minh họa bằng cách vẽ bốn thành viên của họ trên cùng một màn hình.</p>"
+    },
+    {
+      "number": 83,
+      "content": "<p><strong>83.</strong> Tìm hàm bậc ba <span class=\"math inline\">\\(f(x)=ax^3+bx^2+cx+d\\)</span> có giá trị cực đại địa phương bằng 3 tại <span class=\"math inline\">\\(x=-2\\)</span> và giá trị cực tiểu địa phương bằng 0 tại <span class=\"math inline\">\\(x=1\\)</span>.</p>"
+    },
+    {
+      "number": 84,
+      "content": "<p><strong>84.</strong> Với những giá trị nào của <span class=\"math inline\">\\(a,b\\)</span>, hàm số <span class=\"math display\">\\[f(x)=axe^{bx^2}\\]</span> có giá trị lớn nhất <span class=\"math inline\">\\(f(2)=1\\)</span>?</p>"
+    },
+    {
+      "number": 85,
+      "content": "<p><strong>85.</strong> Chứng minh đường cong <span class=\"math inline\">\\(y=(1+x)/(1+x^2)\\)</span> có ba điểm uốn và cả ba cùng nằm trên một đường thẳng.</p>"
+    },
+    {
+      "number": 86,
+      "content": "<p><strong>86.</strong> Chứng minh các đường cong <span class=\"math inline\">\\(y=e^{-x}\\)</span> và <span class=\"math inline\">\\(y=-e^{-x}\\)</span> tiếp xúc với đường cong <span class=\"math inline\">\\(y=e^{-x}\\sin x\\)</span> tại các điểm uốn của nó.</p>"
+    },
+    {
+      "number": 87,
+      "content": "<p><strong>87.</strong> Chứng minh các điểm uốn của đường cong <span class=\"math inline\">\\(y=x\\sin x\\)</span> nằm trên đường cong <span class=\"math inline\">\\(y^2(x^2+4)=4x^2\\)</span>.</p>"
+    },
+    {
+      "number": 88,
+      "content": "<p><strong>88–90.</strong></p>\n<p>Giả sử mọi hàm số đều khả vi hai lần và các đạo hàm bậc hai không bao giờ bằng 0.</p><p><strong>88.</strong> (a) Nếu <span class=\"math inline\">\\(f,g\\)</span> lõm lên trên khoảng <span class=\"math inline\">\\(I\\)</span>, chứng minh <span class=\"math inline\">\\(f+g\\)</span> lõm lên trên <span class=\"math inline\">\\(I\\)</span>.</p>\n<p>(b) Nếu <span class=\"math inline\">\\(f\\)</span> dương và lõm lên trên <span class=\"math inline\">\\(I\\)</span>, chứng minh <span class=\"math inline\">\\(g(x)=[f(x)]^2\\)</span> lõm lên trên <span class=\"math inline\">\\(I\\)</span>.</p>"
+    },
+    {
+      "number": 89,
+      "content": "<p><strong>88–90.</strong></p>\n<p>Giả sử mọi hàm số đều khả vi hai lần và các đạo hàm bậc hai không bao giờ bằng 0.</p><p><strong>89.</strong> (a) Nếu <span class=\"math inline\">\\(f,g\\)</span> đều dương, đồng biến và lõm lên trên khoảng <span class=\"math inline\">\\(I\\)</span>, chứng minh hàm tích <span class=\"math inline\">\\(fg\\)</span> lõm lên trên <span class=\"math inline\">\\(I\\)</span>.</p>\n<p>(b) Chứng minh (a) vẫn đúng nếu <span class=\"math inline\">\\(f,g\\)</span> đều nghịch biến.</p>\n<p>(c) Giả sử <span class=\"math inline\">\\(f\\)</span> đồng biến và <span class=\"math inline\">\\(g\\)</span> nghịch biến. Bằng ba ví dụ, chứng tỏ <span class=\"math inline\">\\(fg\\)</span> có thể lõm lên, lõm xuống hoặc là hàm tuyến tính. Vì sao lập luận ở (a), (b) không áp dụng được trong trường hợp này?</p>"
+    },
+    {
+      "number": 90,
+      "content": "<p><strong>88–90.</strong></p>\n<p>Giả sử mọi hàm số đều khả vi hai lần và các đạo hàm bậc hai không bao giờ bằng 0.</p><p><strong>90.</strong> Giả sử <span class=\"math inline\">\\(f,g\\)</span> đều lõm lên trên <span class=\"math inline\">\\((-\\infty,\\infty)\\)</span>. Với điều kiện nào của <span class=\"math inline\">\\(f\\)</span>, hàm hợp <span class=\"math inline\">\\(h(x)=f(g(x))\\)</span> sẽ lõm lên?</p>"
+    },
+    {
+      "number": 91,
+      "content": "<p><strong>91.</strong> Chứng minh hàm bậc ba (đa thức bậc 3) luôn có đúng một điểm uốn. Nếu đồ thị có ba giao điểm với trục hoành tại <span class=\"math inline\">\\(x_1,x_2,x_3\\)</span>, chứng minh hoành độ điểm uốn là <span class=\"math inline\">\\((x_1+x_2+x_3)/3\\)</span>.</p>"
+    },
+    {
+      "number": 92,
+      "content": "<p><strong>92.</strong> Với những giá trị nào của <span class=\"math inline\">\\(c\\)</span>, đa thức <span class=\"math inline\">\\(P(x)=x^4+cx^3+x^2\\)</span> có hai điểm uốn? Một điểm uốn? Không có điểm uốn? Minh họa bằng đồ thị <span class=\"math inline\">\\(P\\)</span> với một số giá trị <span class=\"math inline\">\\(c\\)</span>. Đồ thị thay đổi như thế nào khi <span class=\"math inline\">\\(c\\)</span> giảm?</p>"
+    },
+    {
+      "number": 93,
+      "content": "<p><strong>93.</strong> Chứng minh rằng nếu <span class=\"math inline\">\\((c,f(c))\\)</span> là điểm uốn của đồ thị <span class=\"math inline\">\\(f\\)</span> và <span class=\"math inline\">\\(f''\\)</span> tồn tại trên một khoảng mở chứa <span class=\"math inline\">\\(c\\)</span>, thì <span class=\"math inline\">\\(f''(c)=0\\)</span>. [<em>Gợi ý:</em> Áp dụng tiêu chuẩn đạo hàm bậc nhất và Định lý Fermat cho hàm <span class=\"math inline\">\\(g=f'\\)</span>.]</p>"
+    },
+    {
+      "number": 94,
+      "content": "<p><strong>94.</strong> Chứng minh rằng nếu <span class=\"math inline\">\\(f(x)=x^4\\)</span>, thì <span class=\"math inline\">\\(f''(0)=0\\)</span>, nhưng <span class=\"math inline\">\\((0,0)\\)</span> không phải điểm uốn của đồ thị <span class=\"math inline\">\\(f\\)</span>.</p>"
+    },
+    {
+      "number": 95,
+      "content": "<p><strong>95.</strong> Chứng minh hàm <span class=\"math inline\">\\(g(x)=x|x|\\)</span> có điểm uốn tại <span class=\"math inline\">\\((0,0)\\)</span> nhưng <span class=\"math inline\">\\(g''(0)\\)</span> không tồn tại.</p>"
+    },
+    {
+      "number": 96,
+      "content": "<p><strong>96.</strong> Giả sử <span class=\"math inline\">\\(f'''\\)</span> liên tục và <span class=\"math inline\">\\(f'(c)=f''(c)=0\\)</span>, nhưng <span class=\"math inline\">\\(f'''(c)&gt;0\\)</span>. Hàm <span class=\"math inline\">\\(f\\)</span> có cực đại hoặc cực tiểu địa phương tại <span class=\"math inline\">\\(c\\)</span> không? Hàm <span class=\"math inline\">\\(f\\)</span> có điểm uốn tại <span class=\"math inline\">\\(c\\)</span> không?</p>"
+    },
+    {
+      "number": 97,
+      "content": "<p><strong>97.</strong> Giả sử <span class=\"math inline\">\\(f\\)</span> khả vi trên một khoảng <span class=\"math inline\">\\(I\\)</span> và <span class=\"math inline\">\\(f'(x)&gt;0\\)</span> với mọi <span class=\"math inline\">\\(x\\in I\\)</span>, trừ một số duy nhất <span class=\"math inline\">\\(c\\)</span>. Chứng minh <span class=\"math inline\">\\(f\\)</span> đồng biến trên toàn bộ <span class=\"math inline\">\\(I\\)</span>.</p>"
+    },
+    {
+      "number": 98,
+      "content": "<p><strong>98.</strong> Với những giá trị nào của <span class=\"math inline\">\\(c\\)</span>, hàm số <span class=\"math display\">\\[f(x)=cx+\\frac1{x^2+3}\\]</span> đồng biến trên <span class=\"math inline\">\\((-\\infty,\\infty)\\)</span>?</p>"
+    },
+    {
+      "number": 99,
+      "content": "<p><strong>99.</strong> Ba trường hợp của tiêu chuẩn đạo hàm bậc nhất bao quát những tình huống thường gặp nhưng không bao quát mọi khả năng. Xét các hàm <span class=\"math inline\">\\(f,g,h\\)</span> đều nhận giá trị 0 tại 0 và, với <span class=\"math inline\">\\(x\\ne0\\)</span>, <span class=\"math display\">\\[f(x)=x^4\\sin\\frac1x,\\qquad g(x)=x^4\\left(2+\\sin\\frac1x\\right),\\]</span> <span class=\"math display\">\\[h(x)=x^4\\left(-2+\\sin\\frac1x\\right).\\]</span> (a) Chứng minh 0 là số tới hạn của cả ba hàm, nhưng đạo hàm của chúng đổi dấu vô số lần ở cả hai phía của 0.</p>\n<p>(b) Chứng minh <span class=\"math inline\">\\(f\\)</span> không có cực đại hoặc cực tiểu địa phương tại 0; <span class=\"math inline\">\\(g\\)</span> có cực tiểu địa phương và <span class=\"math inline\">\\(h\\)</span> có cực đại địa phương tại 0.</p>"
+    }
+  ]
+}

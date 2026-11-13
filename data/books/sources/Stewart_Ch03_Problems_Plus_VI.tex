@@ -1,0 +1,158 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage{fontspec}\setmainfont{Latin Modern Roman}\setsansfont{DejaVu Sans}
+\usepackage{amsmath,amssymb,graphicx,geometry,enumitem,needspace,longtable,booktabs,fancyhdr,hyperref}
+\geometry{left=28mm,right=23mm,top=24mm,bottom=24mm}
+\hypersetup{unicode=true,colorlinks=true,linkcolor=black,urlcolor=blue,pdftitle={Giải tích Chương 3 Bài toán nâng cao Chương 3}}
+\setlength{\parindent}{1.2em}\setlength{\parskip}{4pt}\setlength{\headheight}{16pt}
+\pagestyle{fancy}\fancyhf{}\fancyhead[L]{\small Chương 3. Các quy tắc tính đạo hàm}\fancyhead[R]{\small Bài toán nâng cao}\fancyfoot[C]{\thepage}
+\newcommand{\fig}[3][.68]{\begin{center}\begin{minipage}{\linewidth}\centering\includegraphics[width=#1\linewidth]{assets/#2.png}\\{\small #3}\end{minipage}\end{center}}
+\newcommand{\ex}[1]{\par\medskip\noindent\textbf{Ví dụ #1.}\ }
+\newcommand{\sol}{\par\nopagebreak[4]\noindent\textit{Lời giải.}\ }
+\newcommand{\bt}[1]{\par\smallskip\Needspace{5\baselineskip}\noindent\textbf{#1.}\ }
+\newcommand{\group}[1]{\par\medskip\noindent\textbf{#1}\par\nopagebreak[4]}
+\newcommand{\gint}[1]{\left[\!\left[#1\right]\!\right]}
+\allowdisplaybreaks[2]
+\DeclareMathOperator{\sech}{sech}
+\DeclareMathOperator{\csch}{csch}
+\begin{document}
+\begin{center}{\Large\bfseries Chương 3 — Bài toán nâng cao}\\[4pt]{\large Problems Plus}\end{center}
+\noindent\textit{Stewart–Clegg–Watson, Giải tích: Các hàm siêu việt sớm, ấn bản 9; trang in 274–278.}
+
+Hãy tự giải các ví dụ sau trước khi đọc lời giải.
+
+\ex{1} Có bao nhiêu đường thẳng tiếp xúc đồng thời với hai parabol $y=-1-x^2$ và $y=1+x^2$? Tìm tọa độ các tiếp điểm trên hai parabol.
+\sol Để hiểu rõ bài toán, cần vẽ hình. Ta phác họa $y=1+x^2$ (parabol chuẩn $y=x^2$ được tịnh tiến lên trên $1$ đơn vị) và $y=-1-x^2$ (ảnh của parabol thứ nhất qua phép đối xứng đối với trục $x$). Khi thử vẽ đường thẳng tiếp xúc với cả hai parabol, ta nhanh chóng thấy chỉ có hai khả năng, như Hình 1.
+\fig[.32]{fig1}{Hình 1. Hai tiếp tuyến chung của hai parabol.}
+Gọi $P$ là tiếp điểm của một tiếp tuyến với parabol phía trên và $a$ là hoành độ của $P$. Việc chọn ký hiệu cho ẩn số rất quan trọng. Dĩ nhiên, có thể dùng $b,c,x_0$ hoặc $x_1$ thay cho $a$, nhưng không nên dùng $x$, vì dễ nhầm với biến $x$ trong phương trình parabol. Vì $P$ thuộc $y=1+x^2$, tung độ của nó là $1+a^2$. Theo tính đối xứng trong Hình 1, tiếp điểm $Q$ trên parabol phía dưới có tọa độ $(-a,-(1+a^2))$.
+
+Để sử dụng điều kiện đường thẳng là tiếp tuyến, ta cho hệ số góc của $PQ$ bằng hệ số góc tiếp tuyến tại $P$. Ta có
+\[m_{PQ}=\frac{1+a^2-(-1-a^2)}{a-(-a)}=\frac{1+a^2}{a}.\]
+Nếu $f(x)=1+x^2$, hệ số góc tiếp tuyến tại $P$ là $f'(a)=2a$. Vì vậy, điều kiện cần dùng là
+\[\frac{1+a^2}{a}=2a.\]
+Giải phương trình, được $1+a^2=2a^2$, nên $a^2=1$, tức $a=\pm1$. Các điểm tương ứng là $(1,2)$ và $(-1,-2)$. Theo tính đối xứng, hai điểm còn lại là $(-1,2)$ và $(1,-2)$.
+
+\Needspace{12\baselineskip}
+\ex{2} Với những giá trị nào của $c$, phương trình $\ln x=cx^2$ có đúng một nghiệm?
+\sol Một trong những nguyên tắc giải toán quan trọng nhất là vẽ hình, ngay cả khi đề không nêu rõ tình huống hình học. Bài toán này có thể phát biểu lại: với những giá trị nào của $c$, đường cong $y=\ln x$ cắt $y=cx^2$ tại đúng một điểm?
+
+Trước hết, vẽ $y=\ln x$ và $y=cx^2$ với một số giá trị $c$. Khi $c\ne0$, đồ thị $y=cx^2$ là parabol mở lên nếu $c>0$ và mở xuống nếu $c<0$. Hình 2 biểu diễn một số parabol ứng với $c>0$. Phần lớn không cắt $y=\ln x$, còn một parabol cắt tại hai điểm. Ta dự đoán có một giá trị $c$ nằm giữa $0.1$ và $0.3$ để hai đường cong cắt nhau tại đúng một điểm, như Hình 3.
+\fig[.39]{fig2}{Hình 2. $y=\ln x$ và một số parabol $y=cx^2$, $c>0$.}
+\fig[.39]{fig3}{Hình 3. Trường hợp hai đường cong tiếp xúc.}
+Để tìm giá trị $c$ đó, gọi $a$ là hoành độ giao điểm duy nhất. Khi ấy $\ln a=ca^2$, nên $a$ là nghiệm duy nhất của phương trình đã cho. Hình 3 cho thấy hai đường cong chỉ chạm nhau, nên có tiếp tuyến chung tại $x=a$. Vì vậy, chúng có cùng hệ số góc tại đó:
+\[\frac1a=2ca.\]
+Giải hệ $\ln a=ca^2$, $1/a=2ca$, được
+\[\ln a=ca^2=c\cdot\frac1{2c}=\frac12.\]
+Do đó $a=e^{1/2}$ và
+\[c=\frac{\ln a}{a^2}=\frac{\ln e^{1/2}}e=\frac1{2e}.\]
+Với $c<0$, ta có tình huống trong Hình 4: mọi parabol $y=cx^2$ đều cắt $y=\ln x$ tại đúng một điểm. Cũng không được quên $c=0$: đồ thị $y=0x^2=0$ chính là trục $x$, cắt $y=\ln x$ tại đúng một điểm.
+\fig[.39]{fig4}{Hình 4. Trường hợp $c<0$.}
+Vậy các giá trị cần tìm là $c=1/(2e)$ và $c\le0$.
+
+\clearpage
+\section*{Bài toán}
+\noindent\begin{minipage}{\linewidth}
+\bt{1} Tìm các điểm $P,Q$ trên parabol $y=1-x^2$ sao cho tam giác $ABC$ tạo bởi trục $x$ và các tiếp tuyến tại $P,Q$ là tam giác đều (xem hình).
+\fig[.38]{ex1}{Hình cho Bài toán 1.}
+\end{minipage}
+
+\bt{2} \textit{[Cần công cụ vẽ đồ thị.]} Tìm điểm mà hai đường cong $y=x^3-3x+4$ và $y=3(x^2-x)$ tiếp xúc với nhau, tức là có tiếp tuyến chung. Minh họa bằng cách phác họa cả hai đường cong và tiếp tuyến chung.
+\bt{3} Chứng minh các tiếp tuyến của parabol $y=ax^2+bx+c$ tại hai điểm có hoành độ $p,q$ bất kỳ giao nhau tại một điểm có hoành độ bằng trung bình cộng của $p$ và $q$.
+\bt{4} Chứng minh
+\[\frac d{dx}\left(\frac{\sin^2x}{1+\cot x}+\frac{\cos^2x}{1+\tan x}\right)=-\cos2x.\]
+\bt{5} Nếu $\displaystyle f(x)=\lim_{t\to x}\frac{\sec t-\sec x}{t-x}$, tìm $f'(\pi/4)$.
+\bt{6} Tìm các hằng số $a,b$ sao cho
+\[\lim_{x\to0}\frac{\sqrt[3]{ax+b}-2}{x}=\frac5{12}.\]
+\bt{7} Chứng minh $\sin^{-1}(\tanh x)=\tan^{-1}(\sinh x)$.
+
+\noindent\begin{minipage}{\linewidth}
+\bt{8} Một ô tô đi ban đêm trên đường có dạng parabol, đỉnh tại gốc tọa độ (xem hình). Xe xuất phát từ điểm cách gốc $100\,\mathrm m$ về phía tây và $100\,\mathrm m$ về phía bắc, rồi đi theo hướng đông. Một bức tượng nằm cách gốc $100\,\mathrm m$ về phía đông và $50\,\mathrm m$ về phía bắc. Tại điểm nào trên đường, đèn pha ô tô sẽ chiếu sáng bức tượng?
+\fig[.42]{ex8}{Hình cho Bài toán 8.}
+\end{minipage}
+
+\bt{9} Chứng minh
+\[\frac{d^n}{dx^n}(\sin^4x+\cos^4x)=4^{n-1}\cos(4x+n\pi/2).\]
+\bt{10} Nếu $f$ khả vi tại $a>0$, tính giới hạn sau theo $f'(a)$:
+\[\lim_{x\to a}\frac{f(x)-f(a)}{\sqrt{x}-\sqrt a}.\]
+
+\noindent\begin{minipage}{\linewidth}
+\bt{11} Hình vẽ biểu diễn một đường tròn bán kính $1$ nội tiếp parabol $y=x^2$. Tìm tâm đường tròn.
+\fig[.44]{ex11}{Hình cho Bài toán 11.}
+\end{minipage}
+
+\bt{12} Tìm tất cả các giá trị $c$ sao cho hai parabol $y=4x^2$ và $x=c+2y^2$ cắt nhau vuông góc.
+\bt{13} Có bao nhiêu đường thẳng tiếp xúc với cả hai đường tròn $x^2+y^2=4$ và $x^2+(y-3)^2=1$? Các tiếp tuyến này tiếp xúc với hai đường tròn tại những điểm nào?
+\bt{14} Nếu $\displaystyle f(x)=\frac{x^{46}+x^{45}+2}{1+x}$, tính $f^{(46)}(3)$. Biểu diễn kết quả bằng ký hiệu giai thừa:
+\[n!=1\cdot2\cdot3\cdots(n-1)\cdot n.\]
+
+\noindent\begin{minipage}{\linewidth}
+\bt{15} Hình vẽ biểu diễn bánh xe quay bán kính $40\,\mathrm{cm}$ và thanh truyền $AP$ dài $1.2\,\mathrm m$. Chốt $P$ trượt qua lại dọc trục $x$ khi bánh xe quay ngược chiều kim đồng hồ với tốc độ $360$ vòng/phút.
+
+(a) Tìm vận tốc góc của thanh truyền $d\alpha/dt$, tính bằng radian/giây, khi $\theta=\pi/3$.
+
+(b) Biểu diễn khoảng cách $x=|OP|$ theo $\theta$.
+
+(c) Tìm biểu thức vận tốc của chốt $P$ theo $\theta$.
+\fig[.50]{ex15}{Hình cho Bài toán 15.}
+\end{minipage}
+
+\bt{16} Các tiếp tuyến $T_1,T_2$ tại hai điểm $P_1,P_2$ trên parabol $y=x^2$ cắt nhau tại $P$. Một tiếp tuyến khác $T$ được vẽ tại điểm nằm giữa $P_1,P_2$; nó cắt $T_1$ tại $Q_1$ và $T_2$ tại $Q_2$. Chứng minh
+\[\frac{|PQ_1|}{|PP_1|}+\frac{|PQ_2|}{|PP_2|}=1.\]
+\bt{17} Chứng minh
+\[\frac{d^n}{dx^n}(e^{ax}\sin bx)=r^ne^{ax}\sin(bx+n\theta),\]
+trong đó $a,b>0$, $r^2=a^2+b^2$ và $\theta=\tan^{-1}(b/a)$.
+\bt{18} Tính $\displaystyle\lim_{x\to\pi}\frac{e^{\sin x}-1}{x-\pi}$.
+
+\noindent\begin{minipage}{\linewidth}
+\bt{19} Gọi $T,N$ là tiếp tuyến và pháp tuyến của elip $x^2/9+y^2/4=1$ tại điểm $P$ bất kỳ trên elip trong góc phần tư thứ nhất. Gọi $x_T,y_T$ lần lượt là hoành độ giao điểm với trục $x$ và tung độ giao điểm với trục $y$ của $T$; $x_N,y_N$ là các đại lượng tương ứng của $N$. Khi $P$ chuyển động trên phần elip thuộc góc phần tư thứ nhất, không nằm trên các trục, $x_T,y_T,x_N,y_N$ có thể nhận những giá trị nào? Trước hết hãy dự đoán chỉ bằng cách quan sát hình. Sau đó dùng giải tích để giải và đánh giá độ chính xác của trực giác.
+\fig[.50]{ex19}{Hình cho Bài toán 19.}
+\end{minipage}
+
+\bt{20} Tính $\displaystyle\lim_{x\to0}\frac{\sin\bigl((3+x)^2\bigr)-\sin9}{x}$.
+\bt{21} (a) Dùng đồng nhất thức của $\tan(x-y)$ (Công thức 15b trong Phụ lục D) để chứng minh: nếu hai đường thẳng $L_1,L_2$ cắt nhau tạo góc $\alpha$ thì
+\[\tan\alpha=\frac{m_2-m_1}{1+m_1m_2},\]
+trong đó $m_1,m_2$ lần lượt là hệ số góc của $L_1,L_2$.
+
+(b) \textbf{Góc giữa hai đường cong} $C_1,C_2$ tại giao điểm $P$ được định nghĩa là góc giữa hai tiếp tuyến tại $P$, nếu các tiếp tuyến tồn tại. Dùng câu (a) để tìm góc giữa mỗi cặp đường cong tại từng giao điểm, làm tròn đến độ gần nhất:
+
+(i) $y=x^2$ và $y=(x-2)^2$.
+
+(ii) $x^2-y^2=3$ và $x^2-4x+y^2+3=0$.
+
+\noindent\begin{minipage}{\linewidth}
+\bt{22} Cho $P(x_1,y_1)$ thuộc parabol $y^2=4px$, có tiêu điểm $F(p,0)$. Gọi $\alpha$ là góc giữa parabol và đoạn thẳng $FP$, còn $\beta$ là góc giữa đường thẳng nằm ngang $y=y_1$ và parabol, như hình. Chứng minh $\alpha=\beta$. Theo một nguyên lý quang hình học, ánh sáng phát từ nguồn đặt tại $F$ sẽ phản xạ theo đường thẳng song song với trục $x$. Điều này giải thích vì sao mặt paraboloid, thu được khi quay parabol quanh trục của nó, được dùng làm hình dạng của một số đèn pha ô tô và gương kính thiên văn.
+\fig[.46]{ex22}{Hình cho Bài toán 22.}
+\end{minipage}
+
+\noindent\begin{minipage}{\linewidth}
+\bt{23} Giả sử thay gương parabol trong Bài toán 22 bằng gương cầu. Mặc dù gương không có tiêu điểm, ta có thể chỉ ra sự tồn tại của một tiêu điểm gần đúng. Trong hình, $C$ là nửa đường tròn tâm $O$. Một tia sáng tới gương theo đường $PQ$ song song với trục sẽ phản xạ đến điểm $R$ trên trục sao cho $\angle PQO=\angle OQR$ (góc tới bằng góc phản xạ). Điều gì xảy ra với $R$ khi $P$ tiến ngày càng gần trục?
+\fig[.30]{ex23}{Hình cho Bài toán 23.}
+\end{minipage}
+
+\bt{24} Nếu $f,g$ khả vi, $f(0)=g(0)=0$ và $g'(0)\ne0$, chứng minh
+\[\lim_{x\to0}\frac{f(x)}{g(x)}=\frac{f'(0)}{g'(0)}.\]
+\bt{25} Tính $\displaystyle\lim_{x\to0}\frac{\sin(a+2x)-2\sin(a+x)+\sin a}{x^2}$.
+\bt{26} \textit{[Cần hệ đại số máy tính.]} (a) Hàm bậc ba $f(x)=x(x-2)(x-6)$ có ba nghiệm phân biệt $0,2,6$. Vẽ $f$ và các tiếp tuyến tại trung bình cộng của từng cặp nghiệm. Bạn nhận thấy điều gì?
+
+(b) Giả sử $f(x)=(x-a)(x-b)(x-c)$ có ba nghiệm phân biệt $a,b,c$. Với sự hỗ trợ của hệ đại số máy tính, chứng minh tiếp tuyến tại điểm có hoành độ bằng trung bình cộng của $a,b$ cắt đồ thị $f$ tại nghiệm thứ ba.
+\bt{27} Với giá trị nào của $k$, phương trình $e^{2x}=k\sqrt{x}$ có đúng một nghiệm?
+\bt{28} Với những số dương $a$ nào, bất đẳng thức $a^x\ge1+x$ đúng với mọi $x$?
+\bt{29} Nếu
+\[y=\frac{x}{\sqrt{a^2-1}}-\frac2{\sqrt{a^2-1}}\arctan\left(\frac{\sin x}{a+\sqrt{a^2-1}+\cos x}\right),\]
+chứng minh $\displaystyle y'=\frac1{a+\cos x}$.
+\bt{30} Cho elip $x^2/a^2+y^2/b^2=1$, với $a\ne b$. Tìm phương trình quỹ tích các điểm mà từ đó kẻ được hai tiếp tuyến tới elip có hệ số góc (a) là nghịch đảo của nhau; (b) là hai số nghịch đảo đối nhau.
+\bt{31} Tìm hai điểm trên đường cong $y=x^4-2x^2-x$ có chung một tiếp tuyến.
+\bt{32} Giả sử ba điểm trên parabol $y=x^2$ có các pháp tuyến đồng quy. Chứng minh tổng hoành độ của chúng bằng $0$.
+\bt{33} \textit{Điểm nguyên} trên mặt phẳng là điểm có tọa độ nguyên. Vẽ các đường tròn bán kính $r$, tâm tại tất cả các điểm nguyên. Tìm giá trị nhỏ nhất của $r$ sao cho mọi đường thẳng có hệ số góc $2/5$ đều cắt một số đường tròn này.
+\bt{34} Một hình nón có bán kính $r$ centimét, chiều cao $h$ centimét được hạ xuống, đỉnh đi trước, với tốc độ $1\,\mathrm{cm/s}$ vào một hình trụ cao bán kính $R$ centimét, chứa nước một phần. Mực nước dâng nhanh bao nhiêu tại thời điểm hình nón vừa ngập hoàn toàn?
+\bt{35} Một bình hình nón lật ngược cao $16\,\mathrm{cm}$, bán kính miệng $5\,\mathrm{cm}$, chứa một phần chất lỏng. Chất lỏng rỉ qua thành bình với lưu lượng tỉ lệ thuận với diện tích thành bình tiếp xúc với chất lỏng. Diện tích xung quanh hình nón là $\pi rl$, với $r$ là bán kính và $l$ là đường sinh. Nếu rót chất lỏng vào bình với lưu lượng $2\,\mathrm{cm^3/min}$ thì chiều cao chất lỏng giảm với tốc độ $0.3\,\mathrm{cm/min}$ khi chiều cao bằng $10\,\mathrm{cm}$. Để giữ chiều cao chất lỏng không đổi ở $10\,\mathrm{cm}$, cần rót vào với lưu lượng bao nhiêu?
+
+\clearpage
+\section*{Ghi chú biên tập}
+Phần này tách biệt với bản dịch. Trong Bài toán 9, $n$ được hiểu là số nguyên dương. Trong Bài toán 17, chọn $r=\sqrt{a^2+b^2}>0$ và $n$ là số nguyên không âm. Các ký hiệu yêu cầu công cụ vẽ đồ thị hoặc hệ đại số máy tính được chuyển thành ghi chú bằng chữ.
+
+Công thức ở Bài toán 21(a) dùng góc có hướng và các hệ số góc hữu hạn, với $1+m_1m_2\ne0$. Nếu cần góc nhọn giữa hai đường thẳng, lấy giá trị tuyệt đối của tỉ số; khi $1+m_1m_2=0$, hai đường thẳng vuông góc.
+
+Trong Bài toán 29, biểu thức được xét trên miền thực với $|a|>1$ và tại các điểm mà mẫu trong đối số arctang khác $0$; đạo hàm được hiểu trên từng khoảng xác định. Giới hạn ở Bài toán 20 chứa $\sin((3+x)^2)$, không phải $[\sin(3+x)]^2$.
+
+Bài toán 34 xét tốc độ ngay trước khi hình nón ngập hoàn toàn, với hình nón nằm lọt trong hình trụ, $R>r$. Ở Bài toán 32, ba điểm được hiểu là phân biệt.
+\end{document}

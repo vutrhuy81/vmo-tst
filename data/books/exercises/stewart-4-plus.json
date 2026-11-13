@@ -1,0 +1,112 @@
+{
+  "bookKey": "stewart-9",
+  "sectionKey": "4-plus",
+  "heading": "Bài toán",
+  "sourceSha256": "f6dbad817a194d9d1816529cddc007fb679cae113703711fa52204837bfe5beb",
+  "exercises": [
+    {
+      "number": 1,
+      "content": "<p><strong>1.</strong> Một hình chữ nhật có đáy nằm trên trục <span class=\"math inline\">\\(x\\)</span> và hai đỉnh nằm trên đường cong <span class=\"math inline\">\\(y=e^{-x^2}\\)</span>. Chứng minh hình chữ nhật có diện tích lớn nhất khi hai đỉnh đó là các điểm uốn của đường cong.</p>"
+    },
+    {
+      "number": 2,
+      "content": "<p><strong>2.</strong> Chứng minh <span class=\"math inline\">\\(|\\sin x-\\cos x|\\le\\sqrt2\\)</span> với mọi <span class=\"math inline\">\\(x\\)</span>.</p>"
+    },
+    {
+      "number": 3,
+      "content": "<p><strong>3.</strong> Hàm số <span class=\"math inline\">\\(f(x)=e^{10|x-2|-x^2}\\)</span> có giá trị cực đại tuyệt đối hay không? Nếu có, hãy tìm giá trị đó. Còn giá trị cực tiểu tuyệt đối thì sao?</p>"
+    },
+    {
+      "number": 4,
+      "content": "<p><strong>4.</strong> Chứng minh <span class=\"math inline\">\\(x^2y^2(4-x^2)(4-y^2)\\le16\\)</span> với mọi số <span class=\"math inline\">\\(x,y\\)</span> thỏa mãn <span class=\"math inline\">\\(|x|\\le2\\)</span> và <span class=\"math inline\">\\(|y|\\le2\\)</span>.</p>"
+    },
+    {
+      "number": 5,
+      "content": "<p><strong>5.</strong> Chứng minh các điểm uốn của đường cong <span class=\"math inline\">\\(y=(\\sin x)/x\\)</span> nằm trên đường cong <span class=\"math inline\">\\(y^2(x^4+4)=4\\)</span>.</p>"
+    },
+    {
+      "number": 6,
+      "content": "<p><strong>6.</strong> Tìm điểm trên parabol <span class=\"math inline\">\\(y=1-x^2\\)</span> sao cho tiếp tuyến tại đó chắn trong góc phần tư thứ nhất một tam giác có diện tích nhỏ nhất.</p>"
+    },
+    {
+      "number": 7,
+      "content": "<p><strong>7.</strong> Nếu <span class=\"math inline\">\\(a,b,c,d\\)</span> là các hằng số thỏa mãn <span class=\"math display\">\\[\\lim_{x\\to0}\\frac{ax^2+\\sin bx+\\sin cx+\\sin dx}{3x^2+5x^4+7x^6}=8,\\]</span> hãy tìm giá trị của tổng <span class=\"math inline\">\\(a+b+c+d\\)</span>.</p>"
+    },
+    {
+      "number": 8,
+      "content": "<p><strong>8.</strong> Tính <span class=\"math inline\">\\(\\displaystyle\\lim_{x\\to\\infty}\\frac{(x+2)^{1/x}-x^{1/x}}{(x+3)^{1/x}-x^{1/x}}\\)</span>.</p>"
+    },
+    {
+      "number": 9,
+      "content": "<p><strong>9.</strong> Tìm điểm cao nhất và điểm thấp nhất trên đường cong <span class=\"math inline\">\\(x^2+xy+y^2=12\\)</span>.</p>"
+    },
+    {
+      "number": 10,
+      "content": "<p><strong>10.</strong> Chứng minh rằng nếu <span class=\"math inline\">\\(f\\)</span> là một hàm số khả vi thỏa mãn <span class=\"math display\">\\[\\frac{f(x+n)-f(x)}n=f'(x)\\]</span> với mọi số thực <span class=\"math inline\">\\(x\\)</span> và mọi số nguyên dương <span class=\"math inline\">\\(n\\)</span> thì <span class=\"math inline\">\\(f\\)</span> là một hàm số tuyến tính.</p>"
+    },
+    {
+      "number": 11,
+      "content": "<p><strong>11.</strong> Cho <span class=\"math inline\">\\(P(a,a^2)\\)</span> là một điểm bất kỳ thuộc góc phần tư thứ nhất trên parabol <span class=\"math inline\">\\(y=x^2\\)</span>. Gọi <span class=\"math inline\">\\(Q\\)</span> là giao điểm thứ hai của pháp tuyến tại <span class=\"math inline\">\\(P\\)</span> với parabol (xem hình).<br>\n(a) Chứng minh tung độ của <span class=\"math inline\">\\(Q\\)</span> nhỏ nhất khi <span class=\"math inline\">\\(a=1/\\sqrt2\\)</span>.<br>\n(b) Chứng minh đoạn thẳng <span class=\"math inline\">\\(PQ\\)</span> có độ dài nhỏ nhất khi <span class=\"math inline\">\\(a=1/\\sqrt2\\)</span>.</p>\n<div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-4-plus-f6dbad81/ex11.png\" alt=\"image\"><br>\nHình cho Bài toán 11</p>\n</div>"
+    },
+    {
+      "number": 12,
+      "content": "<p><strong>12.</strong> Với những giá trị nào của <span class=\"math inline\">\\(c\\)</span>, đường cong <span class=\"math inline\">\\(y=cx^3+e^x\\)</span> có điểm uốn?</p>"
+    },
+    {
+      "number": 13,
+      "content": "<p><strong>13.</strong> Một tam giác cân ngoại tiếp đường tròn đơn vị, hai cạnh bên gặp nhau tại điểm <span class=\"math inline\">\\((0,a)\\)</span> trên trục <span class=\"math inline\">\\(y\\)</span> (xem hình). Tìm giá trị của <span class=\"math inline\">\\(a\\)</span> làm độ dài các cạnh bên nhỏ nhất. (Có thể bạn sẽ ngạc nhiên vì kết quả không cho một tam giác đều.)</p>\n<div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-4-plus-f6dbad81/ex13.png\" alt=\"image\"><br>\nHình cho Bài toán 13</p>\n</div>"
+    },
+    {
+      "number": 14,
+      "content": "<p><strong>14.</strong> Phác thảo miền trong mặt phẳng gồm tất cả các điểm <span class=\"math inline\">\\((x,y)\\)</span> sao cho <span class=\"math display\">\\[2xy\\le|x-y|\\le x^2+y^2.\\]</span></p>"
+    },
+    {
+      "number": 15,
+      "content": "<p><strong>15.</strong> Đường thẳng <span class=\"math inline\">\\(y=mx+b\\)</span> cắt parabol <span class=\"math inline\">\\(y=x^2\\)</span> tại <span class=\"math inline\">\\(A\\)</span> và <span class=\"math inline\">\\(B\\)</span> (xem hình). Tìm điểm <span class=\"math inline\">\\(P\\)</span> trên cung <span class=\"math inline\">\\(AOB\\)</span> của parabol sao cho diện tích tam giác <span class=\"math inline\">\\(PAB\\)</span> lớn nhất.</p>\n<div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-4-plus-f6dbad81/ex15.png\" alt=\"image\"><br>\nHình cho Bài toán 15</p>\n</div>"
+    },
+    {
+      "number": 16,
+      "content": "<p><strong>16.</strong> <span class=\"math inline\">\\(ABCD\\)</span> là một tờ giấy hình vuông cạnh 1 m. Vẽ một cung một phần tư đường tròn từ <span class=\"math inline\">\\(B\\)</span> đến <span class=\"math inline\">\\(D\\)</span>, tâm <span class=\"math inline\">\\(A\\)</span>. Gấp tờ giấy theo <span class=\"math inline\">\\(EF\\)</span>, với <span class=\"math inline\">\\(E\\)</span> thuộc <span class=\"math inline\">\\(AB\\)</span> và <span class=\"math inline\">\\(F\\)</span> thuộc <span class=\"math inline\">\\(AD\\)</span>, sao cho <span class=\"math inline\">\\(A\\)</span> rơi lên cung một phần tư đường tròn. Xác định diện tích lớn nhất và nhỏ nhất mà tam giác <span class=\"math inline\">\\(AEF\\)</span> có thể có.</p>"
+    },
+    {
+      "number": 17,
+      "content": "<p><strong>17.</strong> Với những số dương <span class=\"math inline\">\\(a\\)</span> nào, đường cong <span class=\"math inline\">\\(y=a^x\\)</span> cắt đường thẳng <span class=\"math inline\">\\(y=x\\)</span>?</p>"
+    },
+    {
+      "number": 18,
+      "content": "<p><strong>18.</strong> Với giá trị nào của <span class=\"math inline\">\\(a\\)</span>, đẳng thức sau đúng? <span class=\"math display\">\\[\\lim_{x\\to\\infty}\\left(\\frac{x+a}{x-a}\\right)^x=e.\\]</span></p>"
+    },
+    {
+      "number": 19,
+      "content": "<p><strong>19.</strong> Cho <span class=\"math inline\">\\(f(x)=a_1\\sin x+a_2\\sin2x+\\cdots+a_n\\sin nx\\)</span>, trong đó <span class=\"math inline\">\\(a_1,a_2,\\ldots,a_n\\)</span> là các số thực và <span class=\"math inline\">\\(n\\)</span> là một số nguyên dương. Biết rằng <span class=\"math inline\">\\(|f(x)|\\le|\\sin x|\\)</span> với mọi <span class=\"math inline\">\\(x\\)</span>, hãy chứng minh <span class=\"math display\">\\[|a_1+2a_2+\\cdots+na_n|\\le1.\\]</span></p>"
+    },
+    {
+      "number": 20,
+      "content": "<p><strong>20.</strong> Một cung <span class=\"math inline\">\\(PQ\\)</span> của đường tròn chắn góc ở tâm <span class=\"math inline\">\\(\\theta\\)</span> như hình vẽ. Gọi <span class=\"math inline\">\\(A(\\theta)\\)</span> là diện tích miền nằm giữa dây <span class=\"math inline\">\\(PQ\\)</span> và cung <span class=\"math inline\">\\(PQ\\)</span>. Gọi <span class=\"math inline\">\\(B(\\theta)\\)</span> là diện tích miền nằm giữa các tiếp tuyến <span class=\"math inline\">\\(PR\\)</span>, <span class=\"math inline\">\\(QR\\)</span> và cung đó. Tìm <span class=\"math display\">\\[\\lim_{\\theta\\to0^+}\\frac{A(\\theta)}{B(\\theta)}.\\]</span></p>\n<div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-4-plus-f6dbad81/ex20.png\" alt=\"image\"><br>\nHình cho Bài toán 20</p>\n</div>"
+    },
+    {
+      "number": 21,
+      "content": "<p><strong>21.</strong> Có thể xác định vận tốc truyền âm <span class=\"math inline\">\\(c_1\\)</span> trong lớp đá phía trên, vận tốc truyền âm <span class=\"math inline\">\\(c_2\\)</span> trong lớp đá phía dưới và bề dày <span class=\"math inline\">\\(h\\)</span> của lớp trên bằng phương pháp thăm dò địa chấn, nếu vận tốc truyền âm trong lớp dưới lớn hơn trong lớp trên. Một khối thuốc nổ được kích nổ tại điểm <span class=\"math inline\">\\(P\\)</span>; các tín hiệu truyền đi được ghi nhận tại điểm <span class=\"math inline\">\\(Q\\)</span>, cách <span class=\"math inline\">\\(P\\)</span> một khoảng <span class=\"math inline\">\\(D\\)</span>. Tín hiệu đầu tiên đến <span class=\"math inline\">\\(Q\\)</span> truyền dọc theo bề mặt và mất <span class=\"math inline\">\\(T_1\\)</span> giây. Tín hiệu tiếp theo truyền từ <span class=\"math inline\">\\(P\\)</span> đến điểm <span class=\"math inline\">\\(R\\)</span>, từ <span class=\"math inline\">\\(R\\)</span> đến <span class=\"math inline\">\\(S\\)</span> trong lớp dưới, rồi đến <span class=\"math inline\">\\(Q\\)</span>, mất <span class=\"math inline\">\\(T_2\\)</span> giây. Tín hiệu thứ ba phản xạ trên lớp dưới tại trung điểm <span class=\"math inline\">\\(O\\)</span> của <span class=\"math inline\">\\(RS\\)</span> và mất <span class=\"math inline\">\\(T_3\\)</span> giây để đến <span class=\"math inline\">\\(Q\\)</span> (xem hình).<br>\n(a) Biểu diễn <span class=\"math inline\">\\(T_1\\)</span>, <span class=\"math inline\">\\(T_2\\)</span> và <span class=\"math inline\">\\(T_3\\)</span> theo <span class=\"math inline\">\\(D,h,c_1,c_2\\)</span> và <span class=\"math inline\">\\(\\theta\\)</span>.<br>\n(b) Chứng minh <span class=\"math inline\">\\(T_2\\)</span> nhỏ nhất khi <span class=\"math inline\">\\(\\sin\\theta=c_1/c_2\\)</span>.<br>\n(c) Giả sử <span class=\"math inline\">\\(D=1\\)</span> km, <span class=\"math inline\">\\(T_1=0.26\\)</span> s, <span class=\"math inline\">\\(T_2=0.32\\)</span> s và <span class=\"math inline\">\\(T_3=0.34\\)</span> s. Tìm <span class=\"math inline\">\\(c_1,c_2\\)</span> và <span class=\"math inline\">\\(h\\)</span>.</p>\n<p><em>Chú ý:</em> Các nhà địa vật lý sử dụng kỹ thuật này khi nghiên cứu cấu trúc vỏ Trái Đất, chẳng hạn để tìm kiếm dầu mỏ hoặc khảo sát các đứt gãy.</p>\n<div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-4-plus-f6dbad81/ex21.png\" alt=\"image\"><br>\nHình cho Bài toán 21</p>\n</div>"
+    },
+    {
+      "number": 22,
+      "content": "<p><strong>22.</strong> Với những giá trị nào của <span class=\"math inline\">\\(c\\)</span>, tồn tại một đường thẳng cắt đường cong <span class=\"math display\">\\[y=x^4+cx^3+12x^2-5x+2\\]</span> tại bốn điểm phân biệt?</p>"
+    },
+    {
+      "number": 23,
+      "content": "<p><strong>23.</strong> Một bài toán do Hầu tước de l’Hospital đặt ra trong giáo trình giải tích <em>Analyse des infiniment petits</em> liên quan đến một ròng rọc được treo vào trần nhà tại điểm <span class=\"math inline\">\\(C\\)</span> bằng một sợi dây dài <span class=\"math inline\">\\(r\\)</span>. Tại một điểm khác <span class=\"math inline\">\\(B\\)</span> trên trần, cách <span class=\"math inline\">\\(C\\)</span> một khoảng <span class=\"math inline\">\\(d\\)</span> (với <span class=\"math inline\">\\(d&gt;r\\)</span>), người ta buộc một sợi dây dài <span class=\"math inline\">\\(\\ell\\)</span>, luồn qua ròng rọc tại <span class=\"math inline\">\\(F\\)</span> rồi nối với một vật nặng <span class=\"math inline\">\\(W\\)</span>. Vật được thả và dừng lại ở vị trí cân bằng <span class=\"math inline\">\\(D\\)</span> (xem hình). Theo lập luận của l’Hospital, điều này xảy ra khi khoảng cách <span class=\"math inline\">\\(|ED|\\)</span> lớn nhất. Chứng minh khi hệ đạt cân bằng, giá trị của <span class=\"math inline\">\\(x\\)</span> là <span class=\"math display\">\\[\\frac{r}{4d}\\left(r+\\sqrt{r^2+8d^2}\\right).\\]</span> Lưu ý biểu thức này không phụ thuộc vào cả <span class=\"math inline\">\\(W\\)</span> lẫn <span class=\"math inline\">\\(\\ell\\)</span>.</p>\n<div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-4-plus-f6dbad81/ex23.png\" alt=\"image\"><br>\nHình cho Bài toán 23</p>\n</div>"
+    },
+    {
+      "number": 24,
+      "content": "<p><strong>24.</strong> Cho một hình cầu bán kính <span class=\"math inline\">\\(r\\)</span>. Tìm chiều cao của hình chóp có thể tích nhỏ nhất, đáy là hình vuông, sao cho đáy và mọi mặt bên hình tam giác cùng tiếp xúc với hình cầu. Nếu đáy hình chóp là một đa giác đều <span class=\"math inline\">\\(n\\)</span> cạnh thì sao? (Đa giác đều <span class=\"math inline\">\\(n\\)</span> cạnh là đa giác có <span class=\"math inline\">\\(n\\)</span> cạnh bằng nhau và <span class=\"math inline\">\\(n\\)</span> góc bằng nhau.) (Sử dụng công thức thể tích hình chóp <span class=\"math inline\">\\(V=\\frac13Ah\\)</span>, trong đó <span class=\"math inline\">\\(A\\)</span> là diện tích đáy.)</p>"
+    },
+    {
+      "number": 25,
+      "content": "<p><strong>25.</strong> Giả sử một quả cầu tuyết tan chảy sao cho thể tích giảm với tốc độ tỉ lệ thuận với diện tích bề mặt. Nếu mất ba giờ để thể tích quả cầu tuyết giảm còn một nửa thể tích ban đầu thì cần thêm bao lâu để quả cầu tuyết tan hoàn toàn?</p>"
+    },
+    {
+      "number": 26,
+      "content": "<p><strong>26.</strong> Đặt một bong bóng hình bán cầu lên một bong bóng hình cầu bán kính 1. Sau đó đặt một bong bóng hình bán cầu nhỏ hơn lên bong bóng vừa đặt. Tiếp tục quá trình này cho đến khi tạo thành <span class=\"math inline\">\\(n\\)</span> khoang, kể cả hình cầu ban đầu. (Hình vẽ minh họa trường hợp <span class=\"math inline\">\\(n=4\\)</span>.) Dùng phương pháp quy nạp toán học để chứng minh chiều cao lớn nhất của một tháp bong bóng bất kỳ gồm <span class=\"math inline\">\\(n\\)</span> khoang là <span class=\"math inline\">\\(1+\\sqrt n\\)</span>.</p>\n<div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-4-plus-f6dbad81/ex26.png\" alt=\"image\"><br>\nHình cho Bài toán 26</p>\n</div>"
+    }
+  ]
+}

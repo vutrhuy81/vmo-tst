@@ -1,0 +1,360 @@
+{
+  "bookKey": "stewart-9",
+  "sectionKey": "4-7",
+  "heading": "4.7. Bài tập",
+  "sourceSha256": "ec65506d3c1380ba2011a514ee517d6f3c25ed00d50bf13d318385825850eec8",
+  "exercises": [
+    {
+      "number": 1,
+      "content": "<p><strong>1.</strong> Xét bài toán: tìm hai số có tổng bằng 23 và tích lớn nhất.</p>\n<p>(a) Lập bảng như dưới đây sao cho tổng hai số ở hai cột đầu luôn bằng 23. Dựa vào bảng, ước lượng đáp án.</p>\n<p>(b) Dùng phép tính vi phân giải bài toán và so sánh với đáp án ở (a).</p>\n<div class=\"center\">\n<table>\n<thead>\n<tr class=\"header\">\n<th style=\"text-align: center;\">Số thứ nhất</th>\n<th style=\"text-align: center;\">Số thứ hai</th>\n<th style=\"text-align: center;\">Tích</th>\n</tr>\n</thead>\n<tbody>\n<tr class=\"odd\">\n<td style=\"text-align: center;\">1</td>\n<td style=\"text-align: center;\">22</td>\n<td style=\"text-align: center;\">22</td>\n</tr>\n<tr class=\"even\">\n<td style=\"text-align: center;\">2</td>\n<td style=\"text-align: center;\">21</td>\n<td style=\"text-align: center;\">42</td>\n</tr>\n<tr class=\"odd\">\n<td style=\"text-align: center;\">3</td>\n<td style=\"text-align: center;\">20</td>\n<td style=\"text-align: center;\">60</td>\n</tr>\n<tr class=\"even\">\n<td style=\"text-align: center;\"><span class=\"math inline\">\\(\\vdots\\)</span></td>\n<td style=\"text-align: center;\"><span class=\"math inline\">\\(\\vdots\\)</span></td>\n<td style=\"text-align: center;\"><span class=\"math inline\">\\(\\vdots\\)</span></td>\n</tr>\n</tbody>\n</table>\n</div>"
+    },
+    {
+      "number": 2,
+      "content": "<p><strong>2.</strong> Tìm hai số có hiệu bằng 100 và tích nhỏ nhất.</p>"
+    },
+    {
+      "number": 3,
+      "content": "<p><strong>3.</strong> Tìm hai số dương có tích bằng 100 và tổng nhỏ nhất.</p>"
+    },
+    {
+      "number": 4,
+      "content": "<p><strong>4.</strong> Tổng hai số dương bằng 16. Tổng bình phương của chúng nhỏ nhất bằng bao nhiêu?</p>"
+    },
+    {
+      "number": 5,
+      "content": "<p><strong>5.</strong> Khoảng cách theo phương thẳng đứng lớn nhất giữa đường thẳng <span class=\"math inline\">\\(y=x+2\\)</span> và parabol <span class=\"math inline\">\\(y=x^2\\)</span> với <span class=\"math inline\">\\(-1\\le x\\le2\\)</span> bằng bao nhiêu?</p>"
+    },
+    {
+      "number": 6,
+      "content": "<p><strong>6.</strong> Khoảng cách theo phương thẳng đứng nhỏ nhất giữa các parabol <span class=\"math inline\">\\(y=x^2+1\\)</span> và <span class=\"math inline\">\\(y=x-x^2\\)</span> bằng bao nhiêu?</p>"
+    },
+    {
+      "number": 7,
+      "content": "<p><strong>7.</strong> Tìm kích thước hình chữ nhật có chu vi 100 m và diện tích lớn nhất.</p>"
+    },
+    {
+      "number": 8,
+      "content": "<p><strong>8.</strong> Tìm kích thước hình chữ nhật có diện tích 1000 m<span class=\"math inline\">\\(^2\\)</span> và chu vi nhỏ nhất.</p>"
+    },
+    {
+      "number": 9,
+      "content": "<p><strong>9.</strong> Mô hình năng suất <span class=\"math inline\">\\(Y\\)</span> của một cây trồng theo mức nitơ <span class=\"math inline\">\\(N\\)</span> trong đất, đo bằng các đơn vị thích hợp, là <span class=\"math display\">\\[Y=\\frac{kN}{1+N^2},\\]</span> trong đó <span class=\"math inline\">\\(k&gt;0\\)</span> là hằng số. Mức nitơ nào cho năng suất cao nhất?</p>"
+    },
+    {
+      "number": 10,
+      "content": "<p><strong>10.</strong> Tốc độ quang hợp của một loài thực vật phù du, tính bằng mg cacbon/(m<span class=\"math inline\">\\(^3\\cdot\\)</span>h), được mô hình hóa bởi <span class=\"math display\">\\[P=\\frac{100I}{I^2+I+4},\\]</span> trong đó <span class=\"math inline\">\\(I\\)</span> là cường độ ánh sáng, tính bằng nghìn foot-candle. Cường độ ánh sáng nào làm <span class=\"math inline\">\\(P\\)</span> lớn nhất?</p>"
+    },
+    {
+      "number": 11,
+      "content": "<p><strong>11.</strong> Một nông dân có 750 ft hàng rào muốn rào một khu đất hình chữ nhật rồi chia thành bốn ô chuồng bằng các hàng rào song song với một cạnh hình chữ nhật. Tổng diện tích lớn nhất của bốn ô là bao nhiêu?</p>\n<p>(a) Vẽ một số hình, gồm các ô nông nhưng rộng và các ô sâu nhưng hẹp. Tính tổng diện tích từng cấu hình. Có vẻ tồn tại diện tích lớn nhất không? Nếu có, hãy ước lượng.</p>\n<p>(b) Vẽ hình tổng quát, đặt ký hiệu và ghi lên hình.</p>\n<p>(c) Viết biểu thức tổng diện tích.</p>\n<p>(d) Dùng dữ kiện lập phương trình liên hệ các biến.</p>\n<p>(e) Dùng (d) biểu diễn tổng diện tích theo một biến.</p>\n<p>(f) Hoàn tất lời giải và so sánh với ước lượng ở (a).</p>"
+    },
+    {
+      "number": 12,
+      "content": "<p><strong>12.</strong> Từ một tấm bìa hình vuông cạnh 3 ft, cắt ở mỗi góc một hình vuông rồi gấp các cạnh lên để làm hộp không nắp. Tìm thể tích lớn nhất của hộp.</p>\n<p>(a) Vẽ một số hình, gồm các hộp thấp có đáy lớn và các hộp cao có đáy nhỏ. Tính thể tích một số hộp như vậy. Có vẻ tồn tại thể tích lớn nhất không? Nếu có, hãy ước lượng.</p>\n<p>(b) Vẽ hình tổng quát, đặt ký hiệu và ghi lên hình.</p>\n<p>(c) Viết biểu thức thể tích.</p>\n<p>(d) Dùng dữ kiện lập phương trình liên hệ các biến.</p>\n<p>(e) Dùng (d) biểu diễn thể tích theo một biến.</p>\n<p>(f) Hoàn tất lời giải và so sánh với ước lượng ở (a).</p>"
+    },
+    {
+      "number": 13,
+      "content": "<p><strong>13.</strong> Một nông dân muốn rào khu đất hình chữ nhật có diện tích 1,5 triệu ft<span class=\"math inline\">\\(^2\\)</span>, rồi chia đôi bằng một hàng rào song song với một cạnh. Phải bố trí thế nào để chi phí hàng rào nhỏ nhất?</p>"
+    },
+    {
+      "number": 14,
+      "content": "<p><strong>14.</strong> Một nông dân có 1200 ft hàng rào để rào cánh đồng hình thang dọc sông như hình. Một trong hai cạnh song song dài gấp ba cạnh kia. Không cần rào dọc sông. Tìm diện tích lớn nhất có thể rào.</p>\n<div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-4-7-ec65506d/ex14.png\" alt=\"image\"><br>\nHình cho Bài tập 14.</p>\n</div>"
+    },
+    {
+      "number": 15,
+      "content": "<p><strong>15.</strong> Một nông dân muốn rào một khu đất hình chữ nhật giáp tường phía bắc của nhà kho. Không cần hàng rào dọc nhà kho; hàng rào phía tây được dùng chung với hàng xóm, người sẽ chịu một nửa chi phí đoạn đó. Giá lắp đặt là 20 USD/ft dài, và nông dân không muốn chi quá 5000 USD. Tìm kích thước khu đất có diện tích lớn nhất.</p>"
+    },
+    {
+      "number": 16,
+      "content": "<p><strong>16.</strong> Nếu nông dân ở Bài tập 15 muốn rào 8000 ft<span class=\"math inline\">\\(^2\\)</span> đất, kích thước nào làm chi phí hàng rào nhỏ nhất?</p><aside><p><strong>Dữ kiện gốc — Bài tập 15 (thay đổi theo đề hiện tại).</strong></p><p><strong>15.</strong> Một nông dân muốn rào một khu đất hình chữ nhật giáp tường phía bắc của nhà kho. Không cần hàng rào dọc nhà kho; hàng rào phía tây được dùng chung với hàng xóm, người sẽ chịu một nửa chi phí đoạn đó. Giá lắp đặt là 20 USD/ft dài, và nông dân không muốn chi quá 5000 USD. Tìm kích thước khu đất có diện tích lớn nhất.</p></aside>"
+    },
+    {
+      "number": 17,
+      "content": "<p><strong>17.</strong> (a) Chứng minh trong các hình chữ nhật có cùng diện tích, hình vuông có chu vi nhỏ nhất.</p>\n<p>(b) Chứng minh trong các hình chữ nhật có cùng chu vi, hình vuông có diện tích lớn nhất.</p>"
+    },
+    {
+      "number": 18,
+      "content": "<p><strong>18.</strong> Hộp đáy vuông không nắp phải có thể tích <span class=\"math inline\">\\(32\\,000\\)</span> cm<span class=\"math inline\">\\(^3\\)</span>. Tìm kích thước để lượng vật liệu nhỏ nhất.</p>"
+    },
+    {
+      "number": 19,
+      "content": "<p><strong>19.</strong> Có 1200 cm<span class=\"math inline\">\\(^2\\)</span> vật liệu để làm hộp đáy vuông không nắp. Tìm thể tích lớn nhất của hộp.</p>"
+    },
+    {
+      "number": 20,
+      "content": "<p><strong>20.</strong> Từ tấm bìa hình chữ nhật <span class=\"math inline\">\\(4\\)</span> ft <span class=\"math inline\">\\(\\times3\\)</span> ft, cắt các hình vuông hoặc hình chữ nhật ở bốn góc như hình rồi gấp cạnh lên làm hộp không nắp. Một cạnh dài của hộp có hai lớp bìa bằng cách gấp hai lần. Tìm thể tích lớn nhất của hộp.</p>\n<div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-4-7-ec65506d/ex20.png\" alt=\"image\"><br>\nHình cho Bài tập 20.</p>\n</div>"
+    },
+    {
+      "number": 21,
+      "content": "<p><strong>21.</strong> Một thùng chứa hình hộp chữ nhật không nắp có thể tích 10 m<span class=\"math inline\">\\(^3\\)</span>. Chiều dài đáy gấp đôi chiều rộng. Vật liệu đáy giá 10 USD/m<span class=\"math inline\">\\(^2\\)</span>, vật liệu thành giá 6 USD/m<span class=\"math inline\">\\(^2\\)</span>. Tìm chi phí vật liệu thấp nhất.</p>"
+    },
+    {
+      "number": 22,
+      "content": "<p><strong>22.</strong> Làm lại Bài tập 21, giả sử thùng có nắp làm bằng cùng vật liệu với thành.</p><aside><p><strong>Dữ kiện gốc — Bài tập 21 (thay đổi theo đề hiện tại).</strong></p><p><strong>21.</strong> Một thùng chứa hình hộp chữ nhật không nắp có thể tích 10 m<span class=\"math inline\">\\(^3\\)</span>. Chiều dài đáy gấp đôi chiều rộng. Vật liệu đáy giá 10 USD/m<span class=\"math inline\">\\(^2\\)</span>, vật liệu thành giá 6 USD/m<span class=\"math inline\">\\(^2\\)</span>. Tìm chi phí vật liệu thấp nhất.</p></aside>"
+    },
+    {
+      "number": 23,
+      "content": "<p><strong>23.</strong> Một kiện hàng gửi qua bưu điện Hoa Kỳ có tổng chiều dài và chu vi vòng không quá 108 inch. Chiều dài là kích thước lớn nhất; chu vi vòng là chu vi lớn nhất quanh kiện, vuông góc với chiều dài. Tìm kích thước hộp chữ nhật đáy vuông có thể tích lớn nhất có thể gửi.</p>\n<div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-4-7-ec65506d/ex23.png\" alt=\"image\"><br>\nHình cho Bài tập 23–24. “length”: chiều dài; “girth”: chu vi vòng.</p>\n</div>"
+    },
+    {
+      "number": 24,
+      "content": "<p><strong>24.</strong> Theo Bài tập 23, tìm kích thước ống gửi thư hình trụ có thể tích lớn nhất có thể gửi qua bưu điện Hoa Kỳ.</p><aside><p><strong>Dữ kiện gốc — Bài tập 23 (thay đổi theo đề hiện tại).</strong></p><p><strong>23.</strong> Một kiện hàng gửi qua bưu điện Hoa Kỳ có tổng chiều dài và chu vi vòng không quá 108 inch. Chiều dài là kích thước lớn nhất; chu vi vòng là chu vi lớn nhất quanh kiện, vuông góc với chiều dài. Tìm kích thước hộp chữ nhật đáy vuông có thể tích lớn nhất có thể gửi.</p>\n<div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-4-7-ec65506d/ex23.png\" alt=\"image\"><br>\nHình cho Bài tập 23–24. “length”: chiều dài; “girth”: chu vi vòng.</p>\n</div></aside>"
+    },
+    {
+      "number": 25,
+      "content": "<p><strong>25.</strong> Tìm điểm trên đường thẳng <span class=\"math inline\">\\(y=2x+3\\)</span> gần gốc tọa độ nhất.</p>"
+    },
+    {
+      "number": 26,
+      "content": "<p><strong>26.</strong> Tìm điểm trên đường cong <span class=\"math inline\">\\(y=\\sqrt{x}\\)</span> gần điểm <span class=\"math inline\">\\((3,0)\\)</span> nhất.</p>"
+    },
+    {
+      "number": 27,
+      "content": "<p><strong>27.</strong> Tìm các điểm trên elip <span class=\"math inline\">\\(4x^2+y^2=4\\)</span> xa điểm <span class=\"math inline\">\\((1,0)\\)</span> nhất.</p>"
+    },
+    {
+      "number": 28,
+      "content": "<p><strong>28.</strong> Tìm tọa độ điểm trên <span class=\"math inline\">\\(y=\\sin x\\)</span> gần điểm <span class=\"math inline\">\\((4,2)\\)</span> nhất, chính xác đến hai chữ số thập phân. Dùng thiết bị vẽ đồ thị khi cần.</p>"
+    },
+    {
+      "number": 29,
+      "content": "<p><strong>29.</strong> Tìm kích thước hình chữ nhật có diện tích lớn nhất nội tiếp đường tròn bán kính <span class=\"math inline\">\\(r\\)</span>.</p>"
+    },
+    {
+      "number": 30,
+      "content": "<p><strong>30.</strong> Tìm diện tích hình chữ nhật lớn nhất nội tiếp elip <span class=\"math inline\">\\(x^2/a^2+y^2/b^2=1\\)</span>.</p>"
+    },
+    {
+      "number": 31,
+      "content": "<p><strong>31.</strong> Tìm kích thước hình chữ nhật có diện tích lớn nhất nội tiếp tam giác đều cạnh <span class=\"math inline\">\\(L\\)</span>, với một cạnh hình chữ nhật nằm trên đáy tam giác.</p>"
+    },
+    {
+      "number": 32,
+      "content": "<p><strong>32.</strong> Tìm diện tích hình thang lớn nhất nội tiếp đường tròn bán kính 1, có một đáy là đường kính.</p>"
+    },
+    {
+      "number": 33,
+      "content": "<p><strong>33.</strong> Tìm kích thước tam giác cân có diện tích lớn nhất nội tiếp đường tròn bán kính <span class=\"math inline\">\\(r\\)</span>.</p>"
+    },
+    {
+      "number": 34,
+      "content": "<p><strong>34.</strong> Hai cạnh bằng nhau của một tam giác cân dài <span class=\"math inline\">\\(a\\)</span>. Tìm độ dài cạnh thứ ba để diện tích lớn nhất.</p>"
+    },
+    {
+      "number": 35,
+      "content": "<p><strong>35.</strong> Một cạnh tam giác dài <span class=\"math inline\">\\(a\\)</span>, cạnh khác dài <span class=\"math inline\">\\(2a\\)</span>. Chứng minh diện tích lớn nhất có thể là <span class=\"math inline\">\\(a^2\\)</span>.</p>"
+    },
+    {
+      "number": 36,
+      "content": "<p><strong>36.</strong> Một hình chữ nhật có đáy trên trục hoành và hai đỉnh trên nằm trên parabol <span class=\"math inline\">\\(y=4-x^2\\)</span>. Diện tích lớn nhất bằng bao nhiêu?</p>"
+    },
+    {
+      "number": 37,
+      "content": "<p><strong>37.</strong> Một hình trụ tròn xoay nội tiếp hình cầu bán kính <span class=\"math inline\">\\(r\\)</span>. Tìm thể tích lớn nhất của hình trụ.</p>"
+    },
+    {
+      "number": 38,
+      "content": "<p><strong>38.</strong> Một hình trụ tròn xoay nội tiếp hình nón cao <span class=\"math inline\">\\(h\\)</span>, bán kính đáy <span class=\"math inline\">\\(r\\)</span>. Tìm thể tích lớn nhất của hình trụ.</p>"
+    },
+    {
+      "number": 39,
+      "content": "<p><strong>39.</strong> Một hình trụ tròn xoay nội tiếp hình cầu bán kính <span class=\"math inline\">\\(r\\)</span>. Tìm diện tích toàn phần lớn nhất của hình trụ.</p>"
+    },
+    {
+      "number": 40,
+      "content": "<p><strong>40.</strong> Cửa sổ Norman có dạng hình chữ nhật phía dưới, nửa hình tròn phía trên; đường kính nửa hình tròn bằng chiều rộng hình chữ nhật (xem Bài tập 1.1.72). Chu vi cửa sổ là 30 ft. Tìm kích thước để lượng ánh sáng đi qua lớn nhất.</p>\n<div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-4-7-ec65506d/ex40.png\" alt=\"image\"><br>\nHình cho Bài tập 40.</p>\n</div>"
+    },
+    {
+      "number": 41,
+      "content": "<p><strong>41.</strong> Áp phích có lề trên và dưới mỗi bên 6 cm, hai lề bên mỗi bên 4 cm. Diện tích phần in cố định bằng 384 cm<span class=\"math inline\">\\(^2\\)</span>. Tìm kích thước áp phích có diện tích nhỏ nhất.</p>\n<div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-4-7-ec65506d/ex41.png\" alt=\"image\"><br>\nHình cho Bài tập 41.</p>\n</div>"
+    },
+    {
+      "number": 42,
+      "content": "<p><strong>42.</strong> Áp phích có diện tích 180 in<span class=\"math inline\">\\(^2\\)</span>, lề dưới và hai bên mỗi bên 1 inch, lề trên 2 inch. Kích thước nào cho diện tích in lớn nhất?</p>"
+    },
+    {
+      "number": 43,
+      "content": "<p><strong>43.</strong> Cắt sợi dây dài 10 m thành hai đoạn. Một đoạn uốn thành hình vuông, đoạn kia thành tam giác đều. Cắt thế nào để tổng diện tích được bao bởi hai hình (a) lớn nhất; (b) nhỏ nhất?</p>"
+    },
+    {
+      "number": 44,
+      "content": "<p><strong>44.</strong> Trả lời Bài tập 43 nếu một đoạn uốn thành hình vuông, đoạn kia thành đường tròn.</p><aside><p><strong>Dữ kiện gốc — Bài tập 43 (thay đổi theo đề hiện tại).</strong></p><p><strong>43.</strong> Cắt sợi dây dài 10 m thành hai đoạn. Một đoạn uốn thành hình vuông, đoạn kia thành tam giác đều. Cắt thế nào để tổng diện tích được bao bởi hai hình (a) lớn nhất; (b) nhỏ nhất?</p></aside>"
+    },
+    {
+      "number": 45,
+      "content": "<p><strong>45.</strong> Bạn được nhận một miếng pizza hình quạt tròn có chu vi 32 inch. Đường kính pizza bao nhiêu thì miếng nhận được có diện tích lớn nhất?</p>"
+    },
+    {
+      "number": 46,
+      "content": "<p><strong>46.</strong> Hàng rào cao 8 ft nằm song song với tường một tòa nhà cao và cách tường 4 ft. Chiếc thang ngắn nhất có thể đặt từ mặt đất, vượt qua hàng rào và chạm tường dài bao nhiêu?</p>\n<div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-4-7-ec65506d/ex46.png\" alt=\"image\"><br>\nHình cho Bài tập 46.</p>\n</div>"
+    },
+    {
+      "number": 47,
+      "content": "<p><strong>47.</strong> Từ tờ giấy hình tròn bán kính <span class=\"math inline\">\\(R\\)</span>, cắt bỏ một hình quạt rồi ghép hai mép <span class=\"math inline\">\\(CA,CB\\)</span> thành cốc hình nón. Tìm dung tích lớn nhất của cốc.</p>\n<div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-4-7-ec65506d/ex47.png\" alt=\"image\"><br>\nHình cho Bài tập 47.</p>\n</div>"
+    },
+    {
+      "number": 48,
+      "content": "<p><strong>48.</strong> Làm cốc giấy hình nón đựng 27 cm<span class=\"math inline\">\\(^3\\)</span> nước. Tìm chiều cao và bán kính để lượng giấy nhỏ nhất.</p>"
+    },
+    {
+      "number": 49,
+      "content": "<p><strong>49.</strong> Hình nón cao <span class=\"math inline\">\\(h\\)</span> nội tiếp hình nón lớn cao <span class=\"math inline\">\\(H\\)</span>, với đỉnh tại tâm đáy hình nón lớn. Chứng minh thể tích hình nón trong lớn nhất khi <span class=\"math inline\">\\(h=H/3\\)</span>.</p>"
+    },
+    {
+      "number": 50,
+      "content": "<p><strong>50.</strong> Một vật có trọng lượng <span class=\"math inline\">\\(W\\)</span> được kéo trên mặt phẳng ngang bởi lực dọc theo một sợi dây nối với vật. Nếu dây hợp với mặt phẳng góc <span class=\"math inline\">\\(\\theta\\)</span>, độ lớn lực là <span class=\"math display\">\\[F=\\frac{\\mu W}{\\mu\\sin\\theta+\\cos\\theta},\\]</span> trong đó hằng số <span class=\"math inline\">\\(\\mu\\)</span> gọi là hệ số ma sát. Với giá trị nào của <span class=\"math inline\">\\(\\theta\\)</span>, <span class=\"math inline\">\\(F\\)</span> nhỏ nhất?</p>"
+    },
+    {
+      "number": 51,
+      "content": "<p><strong>51.</strong> Điện trở <span class=\"math inline\">\\(R\\)</span> ohm mắc vào nguồn pin có suất điện động <span class=\"math inline\">\\(E\\)</span> volt và điện trở trong <span class=\"math inline\">\\(r\\)</span> ohm. Công suất trên điện trở ngoài, tính bằng watt, là <span class=\"math display\">\\[P=\\frac{E^2R}{(R+r)^2}.\\]</span> Nếu <span class=\"math inline\">\\(E,r\\)</span> cố định và <span class=\"math inline\">\\(R\\)</span> thay đổi, công suất lớn nhất bằng bao nhiêu?</p>"
+    },
+    {
+      "number": 52,
+      "content": "<p><strong>52.</strong> Cá bơi với tốc độ <span class=\"math inline\">\\(v\\)</span> so với nước có năng lượng tiêu hao mỗi đơn vị thời gian tỉ lệ với <span class=\"math inline\">\\(v^3\\)</span>. Người ta cho rằng cá di cư cố giảm thiểu tổng năng lượng để bơi một quãng đường cố định. Nếu cá bơi ngược dòng có tốc độ <span class=\"math inline\">\\(u&lt;v\\)</span>, thời gian bơi quãng đường <span class=\"math inline\">\\(L\\)</span> là <span class=\"math inline\">\\(L/(v-u)\\)</span> và tổng năng lượng cần dùng là <span class=\"math display\">\\[E(v)=av^3\\cdot\\frac L{v-u},\\]</span> với <span class=\"math inline\">\\(a\\)</span> là hằng số tỉ lệ.</p>\n<p>(a) Tìm <span class=\"math inline\">\\(v\\)</span> để <span class=\"math inline\">\\(E\\)</span> nhỏ nhất.</p>\n<p>(b) Phác họa đồ thị <span class=\"math inline\">\\(E\\)</span>.</p>\n<p><em>Chú ý:</em> Kết quả đã được kiểm chứng thực nghiệm: cá di cư bơi ngược dòng với tốc độ lớn hơn tốc độ dòng nước 50%.</p>"
+    },
+    {
+      "number": 53,
+      "content": "<p><strong>53.</strong> Trong tổ ong, mỗi ô là một lăng trụ lục giác đều, hở một đầu; đầu kia được đậy bằng ba hình thoi bằng nhau tạo thành góc tam diện tại đỉnh, như hình. Gọi <span class=\"math inline\">\\(\\theta\\)</span> là góc giữa mỗi hình thoi với đường cao, <span class=\"math inline\">\\(s\\)</span> là độ dài cạnh lục giác và <span class=\"math inline\">\\(h\\)</span> là độ dài đáy lớn của các hình thang ở mặt bên. Có thể chứng minh khi giữ <span class=\"math inline\">\\(s,h\\)</span> cố định, thể tích ô không đổi, không phụ thuộc <span class=\"math inline\">\\(\\theta\\)</span>; với mỗi <span class=\"math inline\">\\(\\theta\\)</span>, diện tích bề mặt là <span class=\"math display\">\\[S=6sh-\\frac32s^2\\cot\\theta+\\frac32\\sqrt3\\,s^2\\csc\\theta.\\]</span> Người ta cho rằng ong tạo ô sao cho diện tích bề mặt nhỏ nhất, để dùng ít sáp nhất.</p>\n<p>(a) Tính <span class=\"math inline\">\\(dS/d\\theta\\)</span>.</p>\n<p>(b) Ong nên chọn góc <span class=\"math inline\">\\(\\theta\\)</span> nào?</p>\n<p>(c) Xác định diện tích bề mặt nhỏ nhất theo <span class=\"math inline\">\\(s,h\\)</span>.</p>\n<p><em>Chú ý:</em> Các phép đo góc <span class=\"math inline\">\\(\\theta\\)</span> thực tế trong tổ ong hiếm khi lệch quá <span class=\"math inline\">\\(2^\\circ\\)</span> so với giá trị tính toán.</p>\n<div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-4-7-ec65506d/ex53.png\" alt=\"image\"><br>\nHình cho Bài tập 53. “apex”: đỉnh; “open end”: đầu hở.</p>\n</div>"
+    },
+    {
+      "number": 54,
+      "content": "<p><strong>54.</strong> Một thuyền rời bến lúc 14 giờ, đi về hướng nam với tốc độ 20 km/h. Thuyền khác đi về hướng đông với tốc độ 15 km/h, đến cùng bến lúc 15 giờ. Hai thuyền gần nhau nhất vào lúc nào?</p>"
+    },
+    {
+      "number": 55,
+      "content": "<p><strong>55.</strong> Giải bài toán ở Ví dụ 4 khi sông rộng 5 km và <span class=\"math inline\">\\(B\\)</span> chỉ cách vị trí đối diện <span class=\"math inline\">\\(A\\)</span> một đoạn 5 km về phía hạ lưu.</p><aside><p><strong>Dữ kiện gốc — Ví dụ 4 (thay đổi kích thước theo đề hiện tại).</strong></p><p><strong>Ví dụ 4.</strong> Một phụ nữ xuất phát bằng thuyền từ điểm <span class=\"math inline\">\\(A\\)</span> trên bờ một dòng sông thẳng rộng 3 km và muốn đến <span class=\"math inline\">\\(B\\)</span> ở bờ đối diện, cách vị trí đối diện <span class=\"math inline\">\\(A\\)</span> một đoạn 8 km về phía hạ lưu, trong thời gian ngắn nhất (Hình 7). Cô có thể chèo thẳng qua sông đến <span class=\"math inline\">\\(C\\)</span> rồi chạy đến <span class=\"math inline\">\\(B\\)</span>, chèo thẳng đến <span class=\"math inline\">\\(B\\)</span>, hoặc chèo đến một điểm <span class=\"math inline\">\\(D\\)</span> giữa <span class=\"math inline\">\\(C\\)</span> và <span class=\"math inline\">\\(B\\)</span> rồi chạy. Nếu tốc độ chèo là 6 km/h, tốc độ chạy là 8 km/h, cô nên cập bờ ở đâu? Giả sử tốc độ dòng nước không đáng kể so với tốc độ chèo.</p><div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-4-7-ec65506d/fig07.png\" alt=\"image\"><br>\nHình 7</p>\n</div></aside>"
+    },
+    {
+      "number": 56,
+      "content": "<p><strong>56.</strong> Một phụ nữ tại <span class=\"math inline\">\\(A\\)</span> trên bờ hồ tròn bán kính 2 mi muốn đến điểm đối diện qua đường kính <span class=\"math inline\">\\(C\\)</span> ở bờ kia nhanh nhất (hình vẽ). Cô đi bộ với tốc độ 4 mi/h, chèo thuyền với tốc độ 2 mi/h. Cô nên đi thế nào?</p>\n<div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-4-7-ec65506d/ex56.png\" alt=\"image\"><br>\nHình cho Bài tập 56.</p>\n</div>"
+    },
+    {
+      "number": 57,
+      "content": "<p><strong>57.</strong> Nhà máy lọc dầu ở bờ bắc dòng sông thẳng rộng 2 km. Cần xây đường ống từ nhà máy đến các bể chứa trên bờ nam, cách vị trí đối diện nhà máy 6 km về phía đông. Chi phí đặt ống trên đất liền đến điểm <span class=\"math inline\">\\(P\\)</span> ở bờ bắc là <span class=\"math inline\">\\(400\\,000\\)</span> USD/km, dưới sông từ <span class=\"math inline\">\\(P\\)</span> đến bể là <span class=\"math inline\">\\(800\\,000\\)</span> USD/km. Để chi phí nhỏ nhất, <span class=\"math inline\">\\(P\\)</span> phải ở đâu?</p>"
+    },
+    {
+      "number": 58,
+      "content": "<p><strong>58.</strong> Giả sử nhà máy ở Bài tập 57 cách sông 1 km về phía bắc. <span class=\"math inline\">\\(P\\)</span> phải ở đâu? Có thể dùng hệ thống đại số máy tính.</p><aside><p><strong>Dữ kiện gốc — Bài tập 57 (thay đổi theo đề hiện tại).</strong></p><p><strong>57.</strong> Nhà máy lọc dầu ở bờ bắc dòng sông thẳng rộng 2 km. Cần xây đường ống từ nhà máy đến các bể chứa trên bờ nam, cách vị trí đối diện nhà máy 6 km về phía đông. Chi phí đặt ống trên đất liền đến điểm <span class=\"math inline\">\\(P\\)</span> ở bờ bắc là <span class=\"math inline\">\\(400\\,000\\)</span> USD/km, dưới sông từ <span class=\"math inline\">\\(P\\)</span> đến bể là <span class=\"math inline\">\\(800\\,000\\)</span> USD/km. Để chi phí nhỏ nhất, <span class=\"math inline\">\\(P\\)</span> phải ở đâu?</p></aside>"
+    },
+    {
+      "number": 59,
+      "content": "<p><strong>59.</strong> Độ rọi của một vật do một nguồn sáng tỉ lệ thuận với cường độ nguồn và tỉ lệ nghịch với bình phương khoảng cách đến nguồn. Hai nguồn sáng, một nguồn mạnh gấp ba nguồn kia, cách nhau 10 ft. Đặt vật ở đâu trên đoạn nối hai nguồn để độ rọi nhỏ nhất?</p>"
+    },
+    {
+      "number": 60,
+      "content": "<p><strong>60.</strong> Tìm phương trình đường thẳng qua <span class=\"math inline\">\\((3,5)\\)</span> cắt khỏi góc phần tư thứ nhất một tam giác có diện tích nhỏ nhất.</p>"
+    },
+    {
+      "number": 61,
+      "content": "<p><strong>61.</strong> Cho <span class=\"math inline\">\\(a,b&gt;0\\)</span>. Tìm độ dài đoạn thẳng ngắn nhất qua <span class=\"math inline\">\\((a,b)\\)</span> bị hai trục tọa độ giới hạn trong góc phần tư thứ nhất.</p>"
+    },
+    {
+      "number": 62,
+      "content": "<p><strong>62.</strong> Tại những điểm nào trên <span class=\"math inline\">\\(y=1+40x^3-3x^5\\)</span>, tiếp tuyến có hệ số góc lớn nhất?</p>"
+    },
+    {
+      "number": 63,
+      "content": "<p><strong>63.</strong> Đoạn tiếp tuyến của <span class=\"math inline\">\\(y=3/x\\)</span> bị hai trục tọa độ giới hạn trong góc phần tư thứ nhất có độ dài nhỏ nhất bằng bao nhiêu?</p>"
+    },
+    {
+      "number": 64,
+      "content": "<p><strong>64.</strong> Tam giác trong góc phần tư thứ nhất, có hai cạnh trên các trục tọa độ và cạnh huyền tiếp xúc parabol <span class=\"math inline\">\\(y=4-x^2\\)</span>, có diện tích nhỏ nhất bằng bao nhiêu?</p>"
+    },
+    {
+      "number": 65,
+      "content": "<p><strong>65.</strong> (a) Nếu <span class=\"math inline\">\\(C(x)\\)</span> là chi phí sản xuất <span class=\"math inline\">\\(x\\)</span> đơn vị hàng hóa, chi phí trung bình mỗi đơn vị là <span class=\"math inline\">\\(c(x)=C(x)/x\\)</span>. Chứng minh khi chi phí trung bình nhỏ nhất, chi phí biên bằng chi phí trung bình.</p>\n<p>(b) Nếu <span class=\"math inline\">\\(C(x)=16\\,000+200x+4x^{3/2}\\)</span> USD, tìm: (i) chi phí, chi phí trung bình và chi phí biên khi sản xuất 1000 đơn vị; (ii) mức sản xuất làm chi phí trung bình nhỏ nhất; (iii) chi phí trung bình nhỏ nhất.</p>"
+    },
+    {
+      "number": 66,
+      "content": "<p><strong>66.</strong> (a) Chứng minh nếu lợi nhuận <span class=\"math inline\">\\(P(x)\\)</span> lớn nhất thì doanh thu biên bằng chi phí biên.</p>\n<p>(b) Nếu hàm chi phí <span class=\"math inline\">\\(C(x)=16\\,000+500x-1{,}6x^2+0{,}004x^3\\)</span> và hàm cầu <span class=\"math inline\">\\(p(x)=1700-7x\\)</span>, tìm mức sản xuất để lợi nhuận lớn nhất.</p>"
+    },
+    {
+      "number": 67,
+      "content": "<p><strong>67.</strong> Một đội bóng chày thi đấu tại sân vận động có <span class=\"math inline\">\\(55\\,000\\)</span> chỗ. Với giá vé 10 USD, số khán giả trung bình là <span class=\"math inline\">\\(27\\,000\\)</span>; khi giảm còn 8 USD, số khán giả tăng lên <span class=\"math inline\">\\(33\\,000\\)</span>.</p>\n<p>(a) Tìm hàm cầu, giả sử tuyến tính.</p>\n<p>(b) Nên đặt giá vé bao nhiêu để doanh thu lớn nhất?</p>"
+    },
+    {
+      "number": 68,
+      "content": "<p><strong>68.</strong> Vào mùa hè, Terry làm và bán vòng cổ trên bãi biển. Mùa hè trước, cô bán giá 10 USD/chiếc, trung bình 20 chiếc/ngày. Khi tăng giá 1 USD, số bán trung bình giảm 2 chiếc/ngày.</p>\n<p>(a) Tìm hàm cầu, giả sử tuyến tính.</p>\n<p>(b) Nếu vật liệu mỗi vòng cổ tốn 6 USD, cô nên đặt giá bao nhiêu để lợi nhuận lớn nhất?</p>"
+    },
+    {
+      "number": 69,
+      "content": "<p><strong>69.</strong> Một nhà bán lẻ đang bán 1200 máy tính bảng mỗi tuần, giá 350 USD/chiếc. Bộ phận tiếp thị ước lượng cứ giảm giá 10 USD thì mỗi tuần bán thêm 80 chiếc.</p>\n<p>(a) Tìm hàm cầu.</p>\n<p>(b) Nên đặt giá bao nhiêu để doanh thu lớn nhất?</p>\n<p>(c) Nếu hàm chi phí hằng tuần là <span class=\"math inline\">\\(C(x)=35\\,000+120x\\)</span>, nên đặt giá bao nhiêu để lợi nhuận lớn nhất?</p>"
+    },
+    {
+      "number": 70,
+      "content": "<p><strong>70.</strong> Công ty khai thác 16 giếng dầu trong một khu vực. Mỗi giếng trung bình cho 240 thùng/ngày. Có thể bổ sung giếng, nhưng mỗi giếng thêm làm sản lượng trung bình mỗi giếng giảm 8 thùng/ngày. Nên thêm bao nhiêu giếng để tổng sản lượng hằng ngày lớn nhất?</p>"
+    },
+    {
+      "number": 71,
+      "content": "<p><strong>71.</strong> Chứng minh trong các tam giác cân có cùng chu vi, tam giác đều có diện tích lớn nhất.</p>"
+    },
+    {
+      "number": 72,
+      "content": "<p><strong>72.</strong> Xét Bài tập 57 khi chi phí đặt ống dưới sông cao hơn nhiều so với trên đất liền (<span class=\"math inline\">\\(400\\,000\\)</span> USD/km). Có thể bạn cho rằng đôi khi nên dùng chiều dài ống dưới sông ngắn nhất, tức đặt <span class=\"math inline\">\\(P\\)</span> cách nhà máy 6 km, đối diện bể chứa. Chứng minh điều đó không bao giờ xảy ra, dù chi phí đặt ống dưới sông lớn đến đâu.</p><aside><p><strong>Dữ kiện gốc — Bài tập 57 (thay đổi theo đề hiện tại).</strong></p><p><strong>57.</strong> Nhà máy lọc dầu ở bờ bắc dòng sông thẳng rộng 2 km. Cần xây đường ống từ nhà máy đến các bể chứa trên bờ nam, cách vị trí đối diện nhà máy 6 km về phía đông. Chi phí đặt ống trên đất liền đến điểm <span class=\"math inline\">\\(P\\)</span> ở bờ bắc là <span class=\"math inline\">\\(400\\,000\\)</span> USD/km, dưới sông từ <span class=\"math inline\">\\(P\\)</span> đến bể là <span class=\"math inline\">\\(800\\,000\\)</span> USD/km. Để chi phí nhỏ nhất, <span class=\"math inline\">\\(P\\)</span> phải ở đâu?</p></aside>"
+    },
+    {
+      "number": 73,
+      "content": "<p><strong>73.</strong> Xét tiếp tuyến của elip <span class=\"math inline\">\\(x^2/a^2+y^2/b^2=1\\)</span> tại <span class=\"math inline\">\\((p,q)\\)</span> trong góc phần tư thứ nhất.</p>\n<p>(a) Chứng minh tiếp tuyến có hoành độ giao điểm <span class=\"math inline\">\\(a^2/p\\)</span> và tung độ giao điểm <span class=\"math inline\">\\(b^2/q\\)</span>.</p>\n<p>(b) Chứng minh đoạn tiếp tuyến bị hai trục tọa độ giới hạn có độ dài nhỏ nhất <span class=\"math inline\">\\(a+b\\)</span>.</p>\n<p>(c) Chứng minh tam giác tạo bởi tiếp tuyến và hai trục tọa độ có diện tích nhỏ nhất <span class=\"math inline\">\\(ab\\)</span>.</p>"
+    },
+    {
+      "number": 74,
+      "content": "<p><strong>74.</strong> Khung diều làm từ sáu thanh gỗ. Bốn thanh ngoài có độ dài như hình. Để diện tích diều lớn nhất, hai thanh chéo phải dài bao nhiêu? Có thể dùng hệ thống đại số máy tính.</p>\n<div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-4-7-ec65506d/ex74.png\" alt=\"image\"><br>\nHình cho Bài tập 74.</p>\n</div>"
+    },
+    {
+      "number": 75,
+      "content": "<p><strong>75.</strong> Cần đặt <span class=\"math inline\">\\(P\\)</span> trên đường thẳng <span class=\"math inline\">\\(AD\\)</span> sao cho tổng chiều dài <span class=\"math inline\">\\(L\\)</span> của các dây cáp nối <span class=\"math inline\">\\(P\\)</span> với <span class=\"math inline\">\\(A,B,C\\)</span> nhỏ nhất (hình vẽ). Biểu diễn <span class=\"math inline\">\\(L\\)</span> theo <span class=\"math inline\">\\(x=|AP|\\)</span>, rồi dùng đồ thị <span class=\"math inline\">\\(L\\)</span> và <span class=\"math inline\">\\(dL/dx\\)</span> để ước lượng giá trị nhỏ nhất của <span class=\"math inline\">\\(L\\)</span>.</p>\n<div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-4-7-ec65506d/ex75.png\" alt=\"image\"><br>\nHình cho Bài tập 75.</p>\n</div>"
+    },
+    {
+      "number": 76,
+      "content": "<p><strong>76.</strong> Đồ thị cho mức tiêu thụ nhiên liệu <span class=\"math inline\">\\(c\\)</span> của ô tô, tính bằng gallon/giờ, theo tốc độ <span class=\"math inline\">\\(v\\)</span>. Ở tốc độ rất thấp, động cơ làm việc kém hiệu quả, nên ban đầu <span class=\"math inline\">\\(c\\)</span> giảm khi tốc độ tăng. Nhưng ở tốc độ cao, tiêu thụ nhiên liệu tăng. Ta thấy <span class=\"math inline\">\\(c(v)\\)</span> nhỏ nhất khi <span class=\"math inline\">\\(v\\approx30\\)</span> mi/h. Tuy nhiên, để sử dụng nhiên liệu hiệu quả, cần tối thiểu hóa mức tiêu thụ tính bằng gallon/dặm. Gọi mức này là <span class=\"math inline\">\\(G\\)</span>. Dùng đồ thị ước lượng tốc độ làm <span class=\"math inline\">\\(G\\)</span> nhỏ nhất.</p>\n<div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-4-7-ec65506d/ex76.png\" alt=\"image\"><br>\nHình cho Bài tập 76.</p>\n</div>"
+    },
+    {
+      "number": 77,
+      "content": "<p><strong>77.</strong> Gọi <span class=\"math inline\">\\(v_1,v_2\\)</span> là tốc độ ánh sáng trong không khí và nước. Theo nguyên lý Fermat, tia sáng từ <span class=\"math inline\">\\(A\\)</span> trong không khí đến <span class=\"math inline\">\\(B\\)</span> trong nước đi theo đường <span class=\"math inline\">\\(ACB\\)</span> mất ít thời gian nhất. Chứng minh <span class=\"math display\">\\[\\frac{\\sin\\theta_1}{\\sin\\theta_2}=\\frac{v_1}{v_2},\\]</span> trong đó <span class=\"math inline\">\\(\\theta_1\\)</span> là góc tới, <span class=\"math inline\">\\(\\theta_2\\)</span> là góc khúc xạ như hình. Đây là định luật Snell.</p>\n<div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-4-7-ec65506d/ex77.png\" alt=\"image\"><br>\nHình cho Bài tập 77.</p>\n</div>"
+    },
+    {
+      "number": 78,
+      "content": "<p><strong>78.</strong> Hai cột thẳng đứng <span class=\"math inline\">\\(PQ,ST\\)</span> được giữ bằng dây <span class=\"math inline\">\\(PRS\\)</span> đi từ đỉnh cột thứ nhất đến điểm <span class=\"math inline\">\\(R\\)</span> trên đất giữa hai cột, rồi đến đỉnh cột thứ hai. Chứng minh chiều dài dây ngắn nhất khi <span class=\"math inline\">\\(\\theta_1=\\theta_2\\)</span>.</p>\n<div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-4-7-ec65506d/ex78.png\" alt=\"image\"><br>\nHình cho Bài tập 78.</p>\n</div>"
+    },
+    {
+      "number": 79,
+      "content": "<p><strong>79.</strong> Góc trên bên phải của tờ giấy <span class=\"math inline\">\\(12\\)</span> inch <span class=\"math inline\">\\(\\times8\\)</span> inch được gấp xuống cạnh dưới như hình. Gấp thế nào để nếp gấp ngắn nhất? Nói cách khác, chọn <span class=\"math inline\">\\(x\\)</span> thế nào để <span class=\"math inline\">\\(y\\)</span> nhỏ nhất?</p>\n<div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-4-7-ec65506d/ex79.png\" alt=\"image\"><br>\nHình cho Bài tập 79.</p>\n</div>"
+    },
+    {
+      "number": 80,
+      "content": "<p><strong>80.</strong> Ống thép được mang dọc hành lang rộng 9 ft. Cuối hành lang là góc vuông rẽ sang hành lang hẹp hơn, rộng 6 ft. Ống dài nhất có thể mang nằm ngang qua góc rẽ dài bao nhiêu?</p>\n<div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-4-7-ec65506d/ex80.png\" alt=\"image\"><br>\nHình cho Bài tập 80.</p>\n</div>"
+    },
+    {
+      "number": 81,
+      "content": "<p><strong>81.</strong> Người quan sát đứng tại <span class=\"math inline\">\\(P\\)</span>, cách đường chạy một đơn vị. Hai vận động viên cùng xuất phát tại <span class=\"math inline\">\\(S\\)</span> như hình, một người chạy nhanh gấp ba người kia. Tìm góc nhìn <span class=\"math inline\">\\(\\theta\\)</span> lớn nhất giữa hai người.</p>\n<div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-4-7-ec65506d/ex81.png\" alt=\"image\"><br>\nHình cho Bài tập 81.</p>\n</div>"
+    },
+    {
+      "number": 82,
+      "content": "<p><strong>82.</strong> Làm máng xối từ tấm kim loại rộng 30 cm bằng cách gấp một phần ba tấm ở mỗi bên lên góc <span class=\"math inline\">\\(\\theta\\)</span>. Chọn <span class=\"math inline\">\\(\\theta\\)</span> thế nào để máng chứa được lượng nước lớn nhất?</p>\n<div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-4-7-ec65506d/ex82.png\" alt=\"image\"><br>\nHình cho Bài tập 82.</p>\n</div>"
+    },
+    {
+      "number": 83,
+      "content": "<p><strong>83.</strong> Chọn điểm <span class=\"math inline\">\\(P\\)</span> ở đâu trên đoạn <span class=\"math inline\">\\(AB\\)</span> để góc <span class=\"math inline\">\\(\\theta\\)</span> lớn nhất?</p>\n<div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-4-7-ec65506d/ex83.png\" alt=\"image\"><br>\nHình cho Bài tập 83.</p>\n</div>"
+    },
+    {
+      "number": 84,
+      "content": "<p><strong>84.</strong> Tranh trong phòng triển lãm cao <span class=\"math inline\">\\(h\\)</span>, treo sao cho mép dưới cao hơn mắt người quan sát một đoạn <span class=\"math inline\">\\(d\\)</span> như hình. Người xem nên đứng cách tường bao nhiêu để nhìn rõ nhất, tức góc <span class=\"math inline\">\\(\\theta\\)</span> chắn bởi bức tranh tại mắt lớn nhất?</p>\n<div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-4-7-ec65506d/ex84.png\" alt=\"image\"><br>\nHình cho Bài tập 84.</p>\n</div>"
+    },
+    {
+      "number": 85,
+      "content": "<p><strong>85.</strong> Tìm diện tích lớn nhất của hình chữ nhật ngoại tiếp hình chữ nhật cho trước có chiều dài <span class=\"math inline\">\\(L\\)</span>, chiều rộng <span class=\"math inline\">\\(W\\)</span>. Gợi ý: biểu diễn diện tích theo một góc <span class=\"math inline\">\\(\\theta\\)</span>.</p>\n<div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-4-7-ec65506d/ex85.png\" alt=\"image\"><br>\nHình cho Bài tập 85.</p>\n</div>"
+    },
+    {
+      "number": 86,
+      "content": "<p><strong>86.</strong> Hệ mạch máu gồm động mạch, tiểu động mạch, mao mạch và tĩnh mạch, vận chuyển máu từ tim đến các cơ quan rồi trở về tim. Hệ này cần hoạt động sao cho năng lượng tim dùng để bơm máu nhỏ nhất. Đặc biệt, năng lượng giảm khi sức cản dòng máu giảm. Một định luật Poiseuille cho <span class=\"math display\">\\[R=C\\frac L{r^4},\\]</span> trong đó <span class=\"math inline\">\\(L\\)</span> là chiều dài mạch, <span class=\"math inline\">\\(r\\)</span> là bán kính, <span class=\"math inline\">\\(C&gt;0\\)</span> phụ thuộc độ nhớt của máu. Poiseuille xác lập định luật bằng thực nghiệm, nhưng cũng có thể suy ra từ Phương trình 8.4.2. Hình vẽ cho mạch chính bán kính <span class=\"math inline\">\\(r_1\\)</span> phân nhánh góc <span class=\"math inline\">\\(\\theta\\)</span> thành mạch nhỏ bán kính <span class=\"math inline\">\\(r_2\\)</span>.</p>\n<div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-4-7-ec65506d/ex86.png\" alt=\"image\"><br>\nHình cho Bài tập 86. “vascular branching”: sự phân nhánh mạch máu.</p>\n</div>\n<p>(a) Dùng định luật Poiseuille chứng minh tổng sức cản theo đường <span class=\"math inline\">\\(ABC\\)</span> là <span class=\"math display\">\\[R=C\\left(\\frac{a-b\\cot\\theta}{r_1^4}+\\frac{b\\csc\\theta}{r_2^4}\\right),\\]</span> với <span class=\"math inline\">\\(a,b\\)</span> là các khoảng cách trên hình.</p>\n<p>(b) Chứng minh sức cản nhỏ nhất khi <span class=\"math inline\">\\(\\cos\\theta=r_2^4/r_1^4\\)</span>.</p>\n<p>(c) Tìm góc phân nhánh tối ưu, làm tròn đến độ, khi bán kính mạch nhỏ bằng hai phần ba bán kính mạch lớn.</p>"
+    },
+    {
+      "number": 87,
+      "content": "<p><strong>87.</strong> Các nhà điểu học xác định một số loài chim tránh bay qua vùng nước lớn vào ban ngày. Người ta cho rằng bay trên nước tốn năng lượng hơn trên đất vì ban ngày không khí thường đi lên trên đất và đi xuống trên nước. Một con chim có xu hướng đó được thả từ đảo cách điểm gần nhất <span class=\"math inline\">\\(B\\)</span> trên bờ thẳng 5 km, bay đến điểm <span class=\"math inline\">\\(C\\)</span> trên bờ rồi bay dọc bờ về tổ ở <span class=\"math inline\">\\(D\\)</span>. Giả sử chim theo bản năng chọn đường tiêu hao năng lượng nhỏ nhất. Khoảng cách <span class=\"math inline\">\\(BD=13\\)</span> km.</p>\n<p>(a) Nếu bay trên nước tốn năng lượng gấp 1,4 lần trên đất, chim nên bay đến điểm <span class=\"math inline\">\\(C\\)</span> nào để tổng năng lượng trở về tổ nhỏ nhất?</p>\n<p>(b) Gọi <span class=\"math inline\">\\(W,L\\)</span> là năng lượng (joule) mỗi km bay trên nước và đất. Tỉ số <span class=\"math inline\">\\(W/L\\)</span> lớn có ý nghĩa gì đối với đường bay? Tỉ số nhỏ có ý nghĩa gì? Xác định tỉ số <span class=\"math inline\">\\(W/L\\)</span> tương ứng với mức tiêu hao năng lượng nhỏ nhất.</p>\n<p>(c) <span class=\"math inline\">\\(W/L\\)</span> phải bằng bao nhiêu để chim bay thẳng đến tổ <span class=\"math inline\">\\(D\\)</span>? Phải bằng bao nhiêu để chim bay đến <span class=\"math inline\">\\(B\\)</span> rồi dọc bờ đến <span class=\"math inline\">\\(D\\)</span>?</p>\n<p>(d) Nếu quan sát thấy chim một loài chạm bờ tại điểm cách <span class=\"math inline\">\\(B\\)</span> 4 km, bay trên nước tốn năng lượng gấp bao nhiêu lần trên đất?</p>\n<div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-4-7-ec65506d/ex87.png\" alt=\"image\"><br>\nHình cho Bài tập 87. “island”: đảo; “nest”: tổ.</p>\n</div>"
+    },
+    {
+      "number": 88,
+      "content": "<p><strong>88.</strong> Hai nguồn sáng có cùng cường độ đặt cách nhau 10 m. Cần đặt vật tại <span class=\"math inline\">\\(P\\)</span> trên đường thẳng <span class=\"math inline\">\\(\\ell\\)</span> song song với đường nối hai nguồn và cách nó <span class=\"math inline\">\\(d\\)</span> mét như hình, sao cho cường độ chiếu sáng nhỏ nhất. Dùng tính chất: độ rọi do một nguồn tỉ lệ thuận với cường độ nguồn và tỉ lệ nghịch với bình phương khoảng cách đến nguồn.</p>\n<p>(a) Tìm biểu thức cường độ chiếu sáng <span class=\"math inline\">\\(I(x)\\)</span> tại <span class=\"math inline\">\\(P\\)</span>.</p>\n<p>(b) Với <span class=\"math inline\">\\(d=5\\)</span> m, dùng đồ thị <span class=\"math inline\">\\(I(x),I'(x)\\)</span> chứng tỏ cường độ nhỏ nhất khi <span class=\"math inline\">\\(x=5\\)</span> m, tức <span class=\"math inline\">\\(P\\)</span> ở trung điểm trên <span class=\"math inline\">\\(\\ell\\)</span> như hình.</p>\n<p>(c) Với <span class=\"math inline\">\\(d=10\\)</span> m, chứng tỏ, có thể khá bất ngờ, cường độ không nhỏ nhất tại trung điểm.</p>\n<p>(d) Giữa <span class=\"math inline\">\\(d=5\\)</span> và <span class=\"math inline\">\\(d=10\\)</span> có một giá trị chuyển tiếp, tại đó vị trí chiếu sáng yếu nhất thay đổi đột ngột. Ước lượng giá trị này bằng đồ thị, rồi tìm giá trị chính xác.</p>\n<div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-4-7-ec65506d/ex88.png\" alt=\"image\"><br>\nHình cho Bài tập 88.</p>\n</div>"
+    }
+  ]
+}

@@ -1,0 +1,225 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage{fontspec}\setmainfont{Latin Modern Roman}\setsansfont{DejaVu Sans}
+\usepackage{amsmath,amssymb,graphicx,geometry,enumitem,needspace,longtable,booktabs,fancyhdr,hyperref}
+\geometry{left=28mm,right=23mm,top=24mm,bottom=24mm}
+\hypersetup{unicode=true,colorlinks=true,linkcolor=black,urlcolor=blue,pdftitle={Giải tích §4.6 — Vẽ đồ thị bằng phép tính vi phân và công nghệ}}
+\setlength{\parindent}{1.2em}\setlength{\parskip}{4pt}\setlength{\headheight}{16pt}
+\pagestyle{fancy}\fancyhf{}\fancyhead[L]{\small Chương 4. Ứng dụng của đạo hàm}\fancyhead[R]{\small §4.6}\fancyfoot[C]{\thepage}
+\newcommand{\fig}[3][.68]{\begin{center}\begin{minipage}{\linewidth}\centering\includegraphics[width=#1\linewidth]{assets/#2.png}\\{\small #3}\end{minipage}\end{center}}
+\newcommand{\ex}[1]{\par\medskip\noindent\textbf{Ví dụ #1.}\ }
+\newcommand{\sol}{\par\nopagebreak[4]\noindent\textit{Lời giải.}\ }
+\newcommand{\bt}[1]{\par\smallskip\Needspace{5\baselineskip}\noindent\textbf{#1.}\ }
+\newcommand{\group}[1]{\par\medskip\noindent\textbf{#1}\par\nopagebreak[4]}
+\newcommand{\gint}[1]{\left[\!\left[#1\right]\!\right]}
+\allowdisplaybreaks[2]
+\DeclareMathOperator{\sech}{sech}
+\DeclareMathOperator{\csch}{csch}
+\DeclareMathOperator{\arccot}{arccot}
+\begin{document}
+\section*{4.6 — Vẽ đồ thị bằng phép tính vi phân và công nghệ}
+\noindent\textit{Bản dịch tiếng Việt — Stewart, Clegg và Watson, Calculus: Early Transcendentals, ấn bản thứ 9. Phạm vi: §4.6, tr. 329–336.}
+
+Phương pháp phác họa đường cong ở mục trước là sự tổng hợp phần lớn những kiến thức về phép tính vi phân mà ta đã học. Đồ thị là sản phẩm cuối cùng thu được. Trong mục này, quan điểm hoàn toàn khác. Ta bắt đầu từ một đồ thị do máy tính đồ thị hoặc máy tính tạo ra, rồi hoàn thiện nó. Ta dùng phép tính vi phân để bảo đảm thể hiện được tất cả các đặc điểm quan trọng của đường cong. Nhờ thiết bị vẽ đồ thị, ta còn có thể khảo sát những đường cong quá phức tạp nếu không có công nghệ hỗ trợ. Chủ đề của mục này là sự tương tác giữa phép tính vi phân và công nghệ.
+
+\noindent\textit{Gợi ý đọc thêm.} Nếu chưa đọc, bạn có thể xem \textit{Graphing Calculators and Computers} tại www.StewartCalculus.com. Đặc biệt, tài liệu đó giải thích cách tránh một số sai sót khi dùng thiết bị vẽ đồ thị bằng cách chọn cửa sổ hiển thị thích hợp.
+
+\ex{1} Vẽ đồ thị đa thức $f(x)=2x^6+3x^5+3x^3-2x^2$. Dùng các đồ thị của $f'$ và $f''$ để ước lượng tất cả các điểm cực đại, cực tiểu và các khoảng lõm.
+\sol Nếu chỉ xác định miền giá trị của biến $x$ mà không chỉ định khoảng giá trị của $y$, phần mềm vẽ đồ thị thường suy ra một khoảng thích hợp từ các giá trị tính được. Hình 1 là một đồ thị có thể thu được khi quy định $-5\le x\le5$. Mặc dù cửa sổ này cho thấy hàm có dáng điệu ở vô cực giống $y=2x^6$, rõ ràng nó che khuất một số chi tiết tinh tế. Vì vậy, ta chuyển sang cửa sổ $[-3,2]\times[-50,100]$ ở Hình 2.
+\fig[.43]{fig01}{Hình 1}
+\fig[.43]{fig02}{Hình 2}
+Phần lớn máy tính đồ thị và phần mềm vẽ đồ thị cho phép ta di chuyển dọc theo đường cong để đọc tọa độ xấp xỉ của các điểm. Một số còn có chức năng xác định gần đúng vị trí các điểm cực đại và cực tiểu địa phương. Ở đây, dường như có giá trị nhỏ nhất tuyệt đối khoảng $-15{,}33$ tại $x\approx-1{,}62$, và $f$ nghịch biến trên $(-\infty,-1{,}62)$, đồng biến trên $(-1{,}62,\infty)$. Ngoài ra, dường như có tiếp tuyến ngang tại gốc tọa độ, và có điểm uốn tại $x=0$ cũng như tại một giá trị $x$ nằm giữa $-2$ và $-1$.
+
+Bây giờ, ta thử xác nhận những nhận xét này bằng phép tính vi phân. Lấy đạo hàm, được
+\begin{align*}
+f'(x)&=12x^5+15x^4+9x^2-4x,\\
+f''(x)&=60x^4+60x^3+18x-4.
+\end{align*}
+Vẽ $f'$ ở Hình 3, ta thấy $f'(x)$ đổi dấu từ âm sang dương tại $x\approx-1{,}62$; theo tiêu chuẩn đạo hàm bậc nhất, điều này xác nhận giá trị nhỏ nhất vừa tìm được. Nhưng có lẽ khá bất ngờ, ta còn thấy $f'(x)$ đổi dấu từ dương sang âm tại $x=0$, và từ âm sang dương tại $x\approx0{,}35$. Như vậy, $f$ có cực đại địa phương tại $0$ và cực tiểu địa phương tại $x\approx0{,}35$, nhưng chúng bị che khuất trong Hình 2. Thật vậy, khi phóng to vùng quanh gốc tọa độ ở Hình 4, ta thấy điều đã bỏ sót: giá trị cực đại địa phương bằng $0$ tại $x=0$ và giá trị cực tiểu địa phương khoảng $-0{,}1$ tại $x\approx0{,}35$.
+\fig[.43]{fig03}{Hình 3}
+\fig[.43]{fig04}{Hình 4}
+Còn độ lõm và điểm uốn thì sao? Từ các Hình 2 và 4, dường như có điểm uốn tại một giá trị $x$ hơi nhỏ hơn $-1$ và tại một giá trị $x$ hơi lớn hơn $0$. Nhưng khó xác định điểm uốn từ đồ thị $f$, nên ta vẽ đạo hàm bậc hai $f''$ ở Hình 5. Ta thấy $f''$ đổi dấu từ dương sang âm tại $x\approx-1{,}23$, và từ âm sang dương tại $x\approx0{,}19$. Vì vậy, chính xác đến hai chữ số thập phân, $f$ lõm lên trên trên $(-\infty,-1{,}23)$ và $(0{,}19,\infty)$, lõm xuống trên $(-1{,}23,0{,}19)$. Các điểm uốn là $(-1{,}23;-10{,}18)$ và $(0{,}19;-0{,}05)$.
+\fig[.43]{fig05}{Hình 5}
+Ta đã thấy rằng không một đồ thị riêng lẻ nào thể hiện được tất cả các đặc điểm quan trọng của đa thức này. Tuy nhiên, các Hình 2 và 4 kết hợp lại cho một hình ảnh chính xác.
+
+\Needspace{9\baselineskip}
+\ex{2} Vẽ đồ thị hàm số
+\[f(x)=\frac{x^2+7x+3}{x^2}\]
+trong một cửa sổ hiển thị thể hiện tất cả các đặc điểm quan trọng của hàm. Ước lượng các giá trị cực đại, cực tiểu địa phương và các khoảng lõm. Sau đó dùng phép tính vi phân để xác định chính xác các đại lượng này.
+\sol Hình 6, được tạo bằng phần mềm với chế độ tự động chọn tỉ lệ, là một kết quả rất tệ. Một số máy tính đồ thị dùng cửa sổ mặc định $[-10,10]\times[-10,10]$, nên ta thử cửa sổ này. Đồ thị ở Hình 7 là một cải thiện đáng kể.
+\fig[.43]{fig06}{Hình 6}
+\fig[.46]{fig07}{Hình 7}
+Trục tung dường như là một tiệm cận đứng, và đúng như vậy vì
+\[\lim_{x\to0}\frac{x^2+7x+3}{x^2}=\infty.\]
+Hình 7 cũng cho phép ước lượng các hoành độ giao điểm với trục hoành: khoảng $-0{,}5$ và $-6{,}5$. Giá trị chính xác được tìm bằng công thức nghiệm của phương trình $x^2+7x+3=0$:
+\[x=\frac{-7\pm\sqrt{37}}2.\]
+Để quan sát rõ hơn các tiệm cận ngang, ta chuyển sang cửa sổ $[-20,20]\times[-5,10]$ ở Hình 8. Dường như $y=1$ là tiệm cận ngang, và điều này dễ dàng được xác nhận:
+\[\lim_{x\to\pm\infty}\frac{x^2+7x+3}{x^2}
+=\lim_{x\to\pm\infty}\left(1+\frac7x+\frac3{x^2}\right)=1.\]
+\fig[.46]{fig08}{Hình 8}
+Để ước lượng giá trị nhỏ nhất, ta phóng to sang cửa sổ $[-3,0]\times[-4,2]$ ở Hình 9. Ta thấy giá trị nhỏ nhất tuyệt đối khoảng $-3{,}1$ tại $x\approx-0{,}9$, và hàm nghịch biến trên $(-\infty,-0{,}9)$ và $(0,\infty)$, đồng biến trên $(-0{,}9,0)$. Các giá trị chính xác được tìm bằng cách lấy đạo hàm:
+\[f'(x)=-\frac7{x^2}-\frac6{x^3}=-\frac{7x+6}{x^3}.\]
+Suy ra $f'(x)>0$ khi $-\frac67<x<0$, và $f'(x)<0$ khi $x<-\frac67$ hoặc $x>0$. Giá trị nhỏ nhất chính xác là
+\[f\left(-\frac67\right)=-\frac{37}{12}\approx-3{,}08.\]
+\fig[.43]{fig09}{Hình 9}
+Hình 9 còn cho thấy có một điểm uốn với hoành độ nằm giữa $-1$ và $-2$. Có thể ước lượng chính xác hơn nhiều bằng đồ thị đạo hàm bậc hai, nhưng trong trường hợp này, tìm giá trị chính xác cũng dễ dàng. Vì
+\[f''(x)=\frac{14}{x^3}+\frac{18}{x^4}=\frac{2(7x+9)}{x^4},\]
+ta có $f''(x)>0$ khi $x>-\frac97$ ($x\ne0$), và $f''(x)<0$ khi $x<-\frac97$. Do đó $f$ lõm lên trên trên $(-\frac97,0)$ và $(0,\infty)$, lõm xuống trên $(-\infty,-\frac97)$. Điểm uốn là $(-\frac97,-\frac{71}{27})$.
+
+Phân tích bằng hai đạo hàm đầu cho thấy Hình 8 thể hiện tất cả các đặc điểm chính của đường cong.
+
+\Needspace{9\baselineskip}
+\ex{3} Vẽ đồ thị hàm số $\displaystyle f(x)=\frac{x^2(x+1)^3}{(x-2)^2(x-4)^4}$.
+\sol Từ kinh nghiệm với hàm hữu tỉ ở Ví dụ 2, ta bắt đầu vẽ $f$ trong cửa sổ $[-10,10]\times[-10,10]$. Qua Hình 10, ta cảm thấy cần phóng to để thấy một số chi tiết, đồng thời thu nhỏ để nhìn toàn cảnh. Nhưng để lựa chọn cách phóng to hợp lý, trước hết hãy xem kỹ biểu thức $f(x)$. Các nhân tử $(x-2)^2$ và $(x-4)^4$ ở mẫu cho thấy $x=2$ và $x=4$ có thể là các tiệm cận đứng. Thật vậy,
+\begin{align*}
+\lim_{x\to2}\frac{x^2(x+1)^3}{(x-2)^2(x-4)^4}&=\infty,\\
+\lim_{x\to4}\frac{x^2(x+1)^3}{(x-2)^2(x-4)^4}&=\infty.
+\end{align*}
+\fig[.46]{fig10}{Hình 10}
+Để tìm tiệm cận ngang, chia tử và mẫu cho $x^6$:
+\begin{align*}
+\frac{x^2(x+1)^3}{(x-2)^2(x-4)^4}
+&=\frac{\dfrac{x^2}{x^3}\cdot\dfrac{(x+1)^3}{x^3}}{\dfrac{(x-2)^2}{x^2}\cdot\dfrac{(x-4)^4}{x^4}}\\
+&=\frac{\dfrac1x\left(1+\dfrac1x\right)^3}{\left(1-\dfrac2x\right)^2\left(1-\dfrac4x\right)^4}.
+\end{align*}
+Biểu thức này cho thấy $f(x)\to0$ khi $x\to\pm\infty$, nên trục hoành là một tiệm cận ngang.
+
+Xem xét dáng điệu đồ thị gần các giao điểm với trục hoành, theo cách phân tích như ở Ví dụ 2.6.12, cũng rất hữu ích. Vì $x^2$ dương ở hai phía của $0$, $f(x)$ không đổi dấu tại $0$, nên đồ thị không cắt qua trục hoành tại $0$. Nhưng do nhân tử $(x+1)^3$, đồ thị cắt qua trục hoành tại $-1$ và có tiếp tuyến ngang ở đó. Tổng hợp các thông tin này mà chưa dùng đạo hàm, ta thấy đường cong phải có dạng như Hình 11.
+\fig[.46]{fig11}{Hình 11}
+Bây giờ đã biết cần quan sát điều gì, ta phóng to nhiều lần để thu được các Hình 12 và 13, và thu nhỏ nhiều lần để có Hình 14.
+\fig[.46]{fig12}{Hình 12}
+\fig[.46]{fig13}{Hình 13}
+\fig[.46]{fig14}{Hình 14}
+Từ các đồ thị này, ta đọc được giá trị nhỏ nhất tuyệt đối khoảng $-0{,}02$ tại $x\approx-20$. Còn có một giá trị cực đại địa phương khoảng $0{,}00002$ tại $x\approx-0{,}3$, và một giá trị cực tiểu địa phương khoảng $211$ tại $x\approx2{,}5$. Các đồ thị cũng cho thấy ba điểm uốn gần các hoành độ $-35$, $-5$, $-1$, và hai điểm uốn nằm giữa $-1$ và $0$. Muốn ước lượng sát các điểm uốn, ta cần vẽ $f''$, nhưng tính $f''$ bằng tay là một công việc quá nặng nề. Nếu có hệ thống đại số máy tính, việc đó trở nên dễ dàng (xem Bài tập 15).
+
+Với hàm số đặc biệt này, cần ba đồ thị (các Hình 12, 13 và 14) để truyền tải tất cả thông tin hữu ích. Cách duy nhất thể hiện toàn bộ các đặc điểm trên một đồ thị là vẽ bằng tay. Dù có sự phóng đại và biến dạng, Hình 11 vẫn tổng hợp được bản chất chủ yếu của hàm số.
+
+\Needspace{9\baselineskip}
+\ex{4} Vẽ đồ thị $f(x)=\sin(x+\sin2x)$. Với $0\le x\le\pi$, hãy ước lượng tất cả các giá trị cực đại, cực tiểu, các khoảng đồng biến, nghịch biến và các điểm uốn.
+\sol Trước hết, nhận thấy $f$ tuần hoàn với chu kỳ $2\pi$. Hơn nữa, $f$ lẻ và $|f(x)|\le1$ với mọi $x$. Vì thế việc chọn cửa sổ hiển thị không khó: ta bắt đầu với $[0,\pi]\times[-1{,}1;1{,}1]$ (Hình 15). Dường như có ba giá trị cực đại địa phương và hai giá trị cực tiểu địa phương trong cửa sổ này. Để xác nhận và xác định vị trí chính xác hơn, ta tính
+\[f'(x)=\cos(x+\sin2x)\cdot(1+2\cos2x)\]
+và vẽ cả $f$ lẫn $f'$ ở Hình 16.
+\fig[.43]{fig15}{Hình 15}
+\fig[.43]{fig16}{Hình 16}
+Sau khi ước lượng các hoành độ giao điểm của $f'$ với trục hoành, ta dùng tiêu chuẩn đạo hàm bậc nhất để tìm các kết quả gần đúng sau:
+\begin{itemize}[leftmargin=1.5em]
+\item Các khoảng đồng biến: $(0;0{,}6)$, $(1{,}0;1{,}6)$, $(2{,}1;2{,}5)$.
+\item Các khoảng nghịch biến: $(0{,}6;1{,}0)$, $(1{,}6;2{,}1)$, $(2{,}5;\pi)$.
+\item Các giá trị cực đại địa phương: $f(0{,}6)\approx1$, $f(1{,}6)\approx1$, $f(2{,}5)\approx1$.
+\item Các giá trị cực tiểu địa phương: $f(1{,}0)\approx0{,}94$, $f(2{,}1)\approx0{,}94$.
+\end{itemize}
+Đạo hàm bậc hai là
+\begin{align*}
+f''(x)={}&-(1+2\cos2x)^2\sin(x+\sin2x)\\
+&-4\sin2x\cos(x+\sin2x).
+\end{align*}
+Vẽ cả $f$ và $f''$ ở Hình 17, ta được các kết quả gần đúng:
+\begin{itemize}[leftmargin=1.5em]
+\item Lõm lên trên trên $(0{,}8;1{,}3)$ và $(1{,}8;2{,}3)$.
+\item Lõm xuống trên $(0;0{,}8)$, $(1{,}3;1{,}8)$ và $(2{,}3;\pi)$.
+\item Các điểm uốn: $(0,0)$, $(0{,}8;0{,}97)$, $(1{,}3;0{,}97)$, $(1{,}8;0{,}97)$, $(2{,}3;0{,}97)$.
+\end{itemize}
+\fig[.43]{fig17}{Hình 17}
+Sau khi kiểm tra rằng Hình 15 biểu diễn chính xác $f$ trên $0\le x\le\pi$, ta có thể khẳng định rằng đồ thị mở rộng ở Hình 18 biểu diễn chính xác $f$ trên $-2\pi\le x\le2\pi$.
+\fig[.46]{fig18}{Hình 18}
+\noindent\textit{Ứng dụng.} Họ hàm số $f(x)=\sin(x+\sin cx)$, trong đó $c$ là hằng số, xuất hiện trong tổng hợp tín hiệu bằng điều chế tần số (FM). Một sóng sin được điều chế bởi một sóng có tần số khác ($\sin cx$). Trường hợp $c=2$ được xét ở Ví dụ 4. Bài tập 27 khảo sát một trường hợp đặc biệt khác.
+
+Ví dụ cuối cùng xét các họ hàm số. Các hàm trong một họ liên hệ với nhau bằng một công thức chứa một hay nhiều hằng số tùy ý. Mỗi giá trị của hằng số xác định một thành viên của họ; mục đích là xem đồ thị biến đổi thế nào khi hằng số thay đổi.
+
+\Needspace{8\baselineskip}
+\ex{5} Đồ thị $\displaystyle f(x)=\frac1{x^2+2x+c}$ thay đổi thế nào khi $c$ thay đổi?
+\sol Các Hình 19 và 20, ứng với $c=2$ và $c=-2$, cho thấy hai đường cong trông rất khác nhau.
+\fig[.43]{fig19}{Hình 19. $c=2$.}
+\fig[.43]{fig20}{Hình 20. $c=-2$.}
+Trước khi vẽ thêm, hãy xem các thành viên của họ có điểm gì chung. Vì
+\[\lim_{x\to\pm\infty}\frac1{x^2+2x+c}=0\]
+với mọi $c$, tất cả đều có trục hoành là tiệm cận ngang. Tiệm cận đứng xuất hiện khi $x^2+2x+c=0$. Giải phương trình bậc hai, được $x=-1\pm\sqrt{1-c}$. Khi $c>1$, không có tiệm cận đứng (như Hình 19). Khi $c=1$, đồ thị có đúng một tiệm cận đứng $x=-1$ vì
+\[\lim_{x\to-1}\frac1{x^2+2x+1}=\lim_{x\to-1}\frac1{(x+1)^2}=\infty.\]
+Khi $c<1$, có hai tiệm cận đứng $x=-1\pm\sqrt{1-c}$ (như Hình 20).
+
+Bây giờ tính đạo hàm:
+\[f'(x)=-\frac{2x+2}{(x^2+2x+c)^2}.\]
+Suy ra $f'(x)=0$ khi $x=-1$ (nếu $c\ne1$), $f'(x)>0$ khi $x<-1$, và $f'(x)<0$ khi $x>-1$, tại những điểm thuộc miền xác định. Với $c\ge1$, điều này có nghĩa là $f$ đồng biến trên $(-\infty,-1)$ và nghịch biến trên $(-1,\infty)$. Với $c>1$, có giá trị lớn nhất tuyệt đối $f(-1)=1/(c-1)$. Với $c<1$, $f(-1)=1/(c-1)$ là giá trị cực đại địa phương, và các khoảng đồng biến, nghịch biến bị ngắt tại các tiệm cận đứng.
+
+Hình 21 là một chuỗi hình biểu diễn năm thành viên của họ, cùng trong cửa sổ $[-5,4]\times[-2,2]$. Như dự đoán, số tiệm cận đứng chuyển từ hai sang một khi $c=1$, rồi không còn khi $c>1$. Khi $c$ tăng từ $1$, điểm cực đại thấp dần; điều này được giải thích bởi $1/(c-1)\to0$ khi $c\to\infty$. Khi $c$ giảm từ $1$, các tiệm cận đứng tách xa nhau hơn vì khoảng cách giữa chúng là $2\sqrt{1-c}$, tăng không bị chặn khi $c\to-\infty$. Một lần nữa, điểm cực đại tiến gần trục hoành vì $1/(c-1)\to0$ khi $c\to-\infty$.
+\fig[1.0]{fig21}{Hình 21. Họ hàm số $f(x)=1/(x^2+2x+c)$. Từ trái sang phải: $c=-1,0,1,2,3$.}
+Rõ ràng không có điểm uốn khi $c\le1$. Với $c>1$, ta tính
+\[f''(x)=\frac{2(3x^2+6x+4-c)}{(x^2+2x+c)^3}\]
+và suy ra các điểm uốn có hoành độ $x=-1\pm\sqrt{3(c-1)}/3$. Vì vậy, các điểm uốn càng tách xa khi $c$ tăng, phù hợp với hai đồ thị cuối của Hình 21.
+
+\clearpage
+\section*{4.6 — Bài tập}
+\noindent\textit{Các bài tập trong mục này sử dụng máy tính đồ thị hoặc máy tính; những câu có yêu cầu hệ thống đại số máy tính được ghi rõ trong đề.}
+\group{1–8}
+Vẽ các đồ thị của $f$ thể hiện tất cả các đặc điểm quan trọng của đường cong. Đặc biệt, dùng các đồ thị của $f'$ và $f''$ để ước lượng các khoảng đồng biến, nghịch biến, các giá trị cực trị, các khoảng lõm và các điểm uốn.
+\bt{1} $f(x)=x^5-5x^4-x^3+28x^2-2x$.
+\bt{2} $f(x)=-2x^6+5x^5+140x^3-110x^2$.
+\bt{3} $f(x)=x^6-5x^5+25x^3-6x^2-48x$.
+\bt{4} $\displaystyle f(x)=\frac{x^4-x^3-8}{x^2-x-6}$.
+\bt{5} $\displaystyle f(x)=\frac{x}{x^3+x^2+1}$.
+\bt{6} $f(x)=6\sin x-x^2$, $-5\le x\le3$.
+\bt{7} $f(x)=6\sin x+\cot x$, $-\pi\le x\le\pi$.
+\bt{8} $f(x)=e^x-0{,}186x^4$.
+\group{9–10}
+Vẽ các đồ thị của $f$ thể hiện tất cả các đặc điểm quan trọng của đường cong. Ước lượng các khoảng đồng biến, nghịch biến và các khoảng lõm, rồi dùng phép tính vi phân để xác định chính xác các khoảng này.
+\bt{9} $\displaystyle f(x)=1+\frac1x+\frac8{x^2}+\frac1{x^3}$.
+\bt{10} $\displaystyle f(x)=\frac1{x^8}-\frac{2\times10^8}{x^4}$.
+\group{11–12}
+(a) Vẽ đồ thị hàm số.\\
+(b) Dùng quy tắc l’Hospital giải thích dáng điệu của hàm khi $x\to0$.\\
+(c) Ước lượng giá trị nhỏ nhất và các khoảng lõm. Sau đó dùng phép tính vi phân tìm các giá trị chính xác.
+\bt{11} $f(x)=x^2\ln x$.
+\bt{12} $f(x)=xe^{1/x}$.
+\Needspace{12\baselineskip}
+\group{13–14}
+Phác họa đồ thị bằng tay dựa vào các tiệm cận và giao điểm với các trục tọa độ, không dùng đạo hàm. Sau đó, dùng bản phác họa làm định hướng để tạo các đồ thị trên máy tính đồ thị hoặc máy tính thể hiện những đặc điểm chính của đường cong. Dùng các đồ thị này để ước lượng các giá trị cực đại và cực tiểu.
+\bt{13} $\displaystyle f(x)=\frac{(x+4)(x-3)^2}{x^4(x-1)}$.
+\bt{14} $\displaystyle f(x)=\frac{(2x+3)^2(x-2)^5}{x^3(x-5)^2}$.
+\bt{15} Với hàm $f$ ở Ví dụ 3, dùng hệ thống đại số máy tính tính $f'$, rồi vẽ đồ thị của nó để xác nhận tất cả các giá trị cực đại và cực tiểu nêu trong ví dụ. Tính $f''$ và dùng nó để ước lượng các khoảng lõm và các điểm uốn.
+\bt{16} Với hàm $f$ ở Bài tập 14, dùng hệ thống đại số máy tính tìm $f'$ và $f''$, rồi dùng các đồ thị của chúng để ước lượng các khoảng đồng biến, nghịch biến và các khoảng lõm của $f$.
+\group{17–22}
+Dùng hệ thống đại số máy tính vẽ $f$ và tìm $f'$, $f''$. Dùng các đồ thị của những đạo hàm này để ước lượng các khoảng đồng biến, nghịch biến, các giá trị cực trị, các khoảng lõm và các điểm uốn của $f$.
+\bt{17} $\displaystyle f(x)=\frac{x^3+5x^2+1}{x^4+x^3-x^2+2}$.
+\bt{18} $\displaystyle f(x)=\frac{x^{2/3}}{1+x+x^4}$.
+\bt{19} $f(x)=\sqrt{x}+5\sin x$, $x\le20$.
+\bt{20} $f(x)=x-\arctan(x^2)$.
+\bt{21} $\displaystyle f(x)=\frac{1-e^{1/x}}{1+e^{1/x}}$.
+\bt{22} $\displaystyle f(x)=\frac3{3+2\sin x}$.
+\group{23–24}
+Vẽ đồ thị hàm số, dùng đủ số cửa sổ hiển thị cần thiết để thể hiện đúng bản chất của hàm.
+\bt{23} $\displaystyle f(x)=\frac{1-\cos(x^4)}{x^8}$.
+\bt{24} $f(x)=e^x+\ln|x-4|$.
+\Needspace{12\baselineskip}
+\group{25–26}
+(a) Vẽ đồ thị hàm số.\\
+(b) Giải thích hình dạng đồ thị bằng cách tính giới hạn khi $x\to0^+$ hoặc khi $x\to\infty$.\\
+(c) Ước lượng các giá trị cực đại, cực tiểu, rồi dùng phép tính vi phân tìm các giá trị chính xác.\\
+(d) Dùng hệ thống đại số máy tính tính $f''$. Sau đó dùng đồ thị $f''$ để ước lượng hoành độ các điểm uốn.
+\bt{25} $f(x)=x^{1/x}$.
+\bt{26} $f(x)=(\sin x)^{\sin x}$.
+\bt{27} Ở Ví dụ 4, ta đã xét một thành viên của họ hàm số $f(x)=\sin(x+\sin cx)$ xuất hiện trong tổng hợp FM. Ở đây, khảo sát trường hợp $c=3$. Bắt đầu bằng đồ thị $f$ trong cửa sổ $[0,\pi]\times[-1{,}2;1{,}2]$. Bạn thấy bao nhiêu điểm cực đại địa phương? Đồ thị còn có nhiều điểm cực đại hơn những điểm nhìn thấy bằng mắt thường. Để phát hiện các điểm cực đại, cực tiểu bị che khuất, cần xem xét đồ thị $f'$ rất kỹ. Thật ra, quan sát đồng thời đồ thị $f''$ cũng hữu ích. Tìm tất cả các giá trị cực đại, cực tiểu và các điểm uốn. Sau đó vẽ $f$ trong cửa sổ $[-2\pi,2\pi]\times[-1{,}2;1{,}2]$ và nhận xét về tính đối xứng.
+\group{28–35}
+Mô tả đồ thị $f$ thay đổi thế nào khi $c$ thay đổi. Vẽ một số thành viên của họ để minh họa các xu hướng tìm được. Đặc biệt, khảo sát sự di chuyển của các điểm cực đại, cực tiểu và các điểm uốn khi $c$ thay đổi. Đồng thời xác định những giá trị chuyển tiếp của $c$ tại đó hình dạng cơ bản của đường cong thay đổi.
+\bt{28} $f(x)=x^3+cx$.
+\bt{29} $f(x)=x^2+6x+c/x$ (đường đinh ba Newton).
+\bt{30} $f(x)=x\sqrt{c^2-x^2}$.
+\bt{31} $f(x)=e^x+ce^{-x}$.
+\bt{32} $f(x)=\ln(x^2+c)$.
+\bt{33} $\displaystyle f(x)=\frac{cx}{1+c^2x^2}$.
+\bt{34} $\displaystyle f(x)=\frac{\sin x}{c+\cos x}$.
+\bt{35} $f(x)=cx+\sin x$.
+\bt{36} Họ hàm số $f(t)=C(e^{-at}-e^{-bt})$, trong đó $a,b,C$ là các số dương và $b>a$, được dùng để mô hình hóa nồng độ một loại thuốc tiêm vào máu tại thời điểm $t=0$. Vẽ một số thành viên của họ. Chúng có những đặc điểm gì chung? Với $C$ và $a$ cố định, dùng đồ thị để tìm hiểu điều gì xảy ra khi $b$ tăng. Sau đó dùng phép tính vi phân chứng minh điều đã phát hiện.
+\bt{37} Khảo sát họ đường cong $f(x)=xe^{-cx}$, với $c$ là số thực. Bắt đầu bằng việc tính các giới hạn khi $x\to\pm\infty$. Xác định những giá trị chuyển tiếp của $c$ tại đó hình dạng cơ bản thay đổi. Các điểm cực đại, cực tiểu và các điểm uốn biến đổi thế nào khi $c$ thay đổi? Minh họa bằng đồ thị của một số thành viên trong họ.
+\Needspace{15\baselineskip}
+\bt{38} Hình vẽ cho các đồ thị (màu xanh) của một số thành viên trong họ đa thức $f(x)=cx^4-4x^2+1$.
+
+(a) Với những giá trị nào của $c$, đường cong có các điểm cực tiểu?
+
+(b) Chứng minh rằng các điểm cực tiểu và cực đại của mọi đường cong trong họ nằm trên parabol $y=-2x^2+1$ (màu đỏ).
+\fig[.60]{ex38}{Hình cho Bài tập 38.}
+\bt{39} Khảo sát họ đường cong $f(x)=x^4+cx^2+x$. Bắt đầu bằng việc xác định giá trị chuyển tiếp của $c$ tại đó số điểm uốn thay đổi. Sau đó vẽ một số thành viên của họ để xem những dạng đồ thị nào có thể xuất hiện. Có một giá trị chuyển tiếp khác của $c$ tại đó số các số tới hạn thay đổi. Hãy thử phát hiện bằng đồ thị, rồi chứng minh điều tìm được.
+\bt{40} (a) Khảo sát họ đa thức
+\[f(x)=2x^3+cx^2+2x.\]
+Với những giá trị nào của $c$, đường cong có các điểm cực đại và cực tiểu?
+
+(b) Chứng minh rằng các điểm cực tiểu và cực đại của mọi đường cong trong họ nằm trên đường cong $y=x-x^3$. Minh họa bằng cách vẽ đường cong này cùng một số thành viên của họ.
+\end{document}

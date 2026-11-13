@@ -1,0 +1,240 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage{fontspec}\setmainfont{Latin Modern Roman}\setsansfont{DejaVu Sans}
+\usepackage{amsmath,amssymb,graphicx,geometry,enumitem,needspace,longtable,booktabs,fancyhdr,hyperref}
+\geometry{left=28mm,right=23mm,top=24mm,bottom=24mm}
+\hypersetup{unicode=true,colorlinks=true,linkcolor=black,urlcolor=blue,pdftitle={Giải tích §4.8 — Phương pháp Newton}}
+\setlength{\parindent}{1.2em}\setlength{\parskip}{4pt}\setlength{\headheight}{16pt}
+\pagestyle{fancy}\fancyhf{}\fancyhead[L]{\small Chương 4. Ứng dụng của đạo hàm}\fancyhead[R]{\small §4.8}\fancyfoot[C]{\thepage}
+\newcommand{\fig}[3][.68]{\begin{center}\begin{minipage}{\linewidth}\centering\includegraphics[width=#1\linewidth]{assets/#2.png}\\{\small #3}\end{minipage}\end{center}}
+\newcommand{\ex}[1]{\par\medskip\noindent\textbf{Ví dụ #1.}\ }
+\newcommand{\sol}{\par\nopagebreak[4]\noindent\textit{Lời giải.}\ }
+\newcommand{\bt}[1]{\par\smallskip\Needspace{5\baselineskip}\noindent\textbf{#1.}\ }
+\newcommand{\group}[1]{\par\medskip\noindent\textbf{#1}\par\nopagebreak[4]}
+\newcommand{\gint}[1]{\left[\!\left[#1\right]\!\right]}
+\allowdisplaybreaks[2]
+\DeclareMathOperator{\sech}{sech}
+\DeclareMathOperator{\csch}{csch}
+\DeclareMathOperator{\arccot}{arccot}
+\begin{document}
+\section*{4.8 — Phương pháp Newton}
+\noindent\textit{Bản dịch tiếng Việt — Stewart, Clegg và Watson, Calculus: Early Transcendentals, ấn bản thứ 9. Phạm vi: §4.8, tr. 351–356.}
+
+Giả sử một đại lý ô tô đề nghị bán xe cho bạn với giá $18\,000$ USD hoặc trả góp 375 USD mỗi tháng trong 5 năm. Bạn muốn biết thực chất đại lý đang tính lãi suất hằng tháng bao nhiêu. Để trả lời, phải giải phương trình
+\[48x(1+x)^{60}-(1+x)^{60}+1=0.\tag{1}\]
+Chi tiết được giải thích ở Bài tập 41. Bạn sẽ giải phương trình như vậy thế nào?
+
+Với phương trình bậc hai $ax^2+bx+c=0$, ta có công thức nghiệm quen thuộc. Phương trình bậc ba và bậc bốn cũng có công thức nghiệm, nhưng rất phức tạp. Với đa thức bậc từ 5 trở lên, không có công thức tổng quát tương tự. Cũng không có công thức cho phép tìm nghiệm chính xác của phương trình siêu việt như $\cos x=x$.
+
+Có thể tìm nghiệm gần đúng của (1) bằng cách vẽ đồ thị vế trái và tìm giao điểm với trục hoành. Dùng máy tính đồ thị hoặc máy tính, sau khi thử các cửa sổ hiển thị, ta được Hình 1.
+\fig[.46]{fig01}{Hình 1}
+Ngoài nghiệm $x=0$ mà ta không quan tâm, còn một nghiệm nằm giữa $0{,}007$ và $0{,}008$. Phóng to cho thấy hoành độ giao điểm xấp xỉ $0{,}0076$. Nếu cần độ chính xác cao hơn mức đồ thị cung cấp, có thể dùng máy tính hoặc hệ thống đại số máy tính để giải số. Khi đó, nghiệm chính xác đến chín chữ số thập phân là $0{,}007628603$.
+
+Những thiết bị này giải phương trình ra sao? Chúng dùng nhiều phương pháp, nhưng phần lớn đều có sử dụng \textbf{phương pháp Newton}, còn gọi là \textbf{phương pháp Newton–Raphson}. Ta sẽ giải thích cách phương pháp hoạt động, vừa để hiểu điều diễn ra bên trong máy tính, vừa như một ứng dụng của ý tưởng xấp xỉ tuyến tính.
+
+\noindent\textit{Thử nghiệm.} Hãy thử giải số Phương trình (1) bằng máy tính. Một số máy không giải được; một số khác giải được nhưng yêu cầu chỉ định điểm xuất phát cho quá trình tìm kiếm.
+
+Ý nghĩa hình học của phương pháp Newton được thể hiện ở Hình 2. Ta muốn giải phương trình $f(x)=0$, nên các nghiệm ứng với hoành độ giao điểm của đồ thị $f$ với trục hoành. Nghiệm cần tìm được ký hiệu là $r$. Bắt đầu với xấp xỉ đầu tiên $x_1$, tìm được bằng phỏng đoán, bằng hình phác họa hoặc bằng đồ thị do máy tính tạo ra. Xét tiếp tuyến $L$ của đường cong $y=f(x)$ tại $(x_1,f(x_1))$, và gọi hoành độ giao điểm của $L$ với trục hoành là $x_2$. Ý tưởng là tiếp tuyến gần với đường cong, nên $x_2$ gần với hoành độ giao điểm của đường cong, tức nghiệm $r$. Vì tiếp tuyến là đường thẳng, ta dễ dàng tìm được hoành độ giao điểm của nó.
+\fig[.46]{fig02}{Hình 2}
+Để biểu diễn $x_2$ theo $x_1$, dùng hệ số góc $f'(x_1)$ của $L$:
+\[y-f(x_1)=f'(x_1)(x-x_1).\]
+Vì $(x_2,0)$ nằm trên $L$, ta có
+\[0-f(x_1)=f'(x_1)(x_2-x_1).\]
+Nếu $f'(x_1)\ne0$, giải ra
+\[x_2=x_1-\frac{f(x_1)}{f'(x_1)}.\]
+Ta dùng $x_2$ làm xấp xỉ thứ hai của $r$.
+
+Tiếp tục lặp lại với $x_1$ được thay bởi $x_2$, dùng tiếp tuyến tại $(x_2,f(x_2))$, ta được xấp xỉ thứ ba:
+\[x_3=x_2-\frac{f(x_2)}{f'(x_2)}.\]
+Cứ lặp lại quá trình này, ta thu được dãy xấp xỉ $x_1,x_2,x_3,x_4,\ldots$ như Hình 3. Tổng quát, nếu xấp xỉ thứ $n$ là $x_n$ và $f'(x_n)\ne0$, thì xấp xỉ tiếp theo được cho bởi
+\[\boxed{x_{n+1}=x_n-\frac{f(x_n)}{f'(x_n)}}.\tag{2}\]
+\fig[.46]{fig03}{Hình 3}
+Nếu các số $x_n$ ngày càng gần $r$ khi $n$ tăng, ta nói dãy \textbf{hội tụ} đến $r$ và viết
+\[\lim_{n\to\infty}x_n=r.\]
+Dãy số được trình bày chi tiết hơn ở §11.1.
+
+Mặc dù dãy xấp xỉ liên tiếp hội tụ đến nghiệm mong muốn đối với các hàm có dạng như Hình 3, trong một số trường hợp dãy có thể không hội tụ. Chẳng hạn, ở Hình 4, $x_2$ là xấp xỉ kém hơn $x_1$. Điều này dễ xảy ra khi $f'(x_1)$ gần $0$. Thậm chí một xấp xỉ, như $x_3$ ở Hình 4, có thể nằm ngoài miền xác định của $f$. Khi đó phương pháp Newton thất bại, và cần chọn xấp xỉ ban đầu $x_1$ tốt hơn. Các Bài tập 31–34 cho những ví dụ cụ thể trong đó phương pháp hoạt động rất chậm hoặc hoàn toàn không hoạt động.
+\fig[.46]{fig04}{Hình 4}
+
+\Needspace{9\baselineskip}
+\ex{1} Bắt đầu với $x_1=2$, tìm xấp xỉ thứ ba $x_3$ của nghiệm phương trình $x^3-2x-5=0$.
+\sol Áp dụng phương pháp Newton với
+\[f(x)=x^3-2x-5,\qquad f'(x)=3x^2-2.\]
+Chính Newton đã dùng phương trình này để minh họa phương pháp. Sau một số phép thử, ông chọn $x_1=2$ vì $f(1)=-6$, $f(2)=-1$, $f(3)=16$. Công thức (2) trở thành
+\[x_{n+1}=x_n-\frac{f(x_n)}{f'(x_n)}=x_n-\frac{x_n^3-2x_n-5}{3x_n^2-2}.\]
+Với $n=1$,
+\begin{align*}
+x_2&=x_1-\frac{f(x_1)}{f'(x_1)}=x_1-\frac{x_1^3-2x_1-5}{3x_1^2-2}\\
+&=2-\frac{2^3-2(2)-5}{3(2)^2-2}=2{,}1.
+\end{align*}
+Tiếp theo, với $n=2$,
+\begin{align*}
+x_3&=x_2-\frac{x_2^3-2x_2-5}{3x_2^2-2}\\
+&=2{,}1-\frac{(2{,}1)^3-2(2{,}1)-5}{3(2{,}1)^2-2}\approx2{,}0946.
+\end{align*}
+Hóa ra xấp xỉ thứ ba $x_3\approx2{,}0946$ đã chính xác đến bốn chữ số thập phân.
+\fig[.46]{fig05}{Hình 5}
+Hình 5 thể hiện ý nghĩa hình học của bước đầu trong Ví dụ 1. Vì $f'(2)=10$, tiếp tuyến của $y=x^3-2x-5$ tại $(2,-1)$ có phương trình $y=10x-21$, nên hoành độ giao điểm với trục hoành là $x_2=2{,}1$.
+
+Giả sử ta muốn đạt độ chính xác cho trước, chẳng hạn tám chữ số thập phân. Làm sao biết lúc nào nên dừng? Quy tắc thực hành thường dùng là: dừng khi hai xấp xỉ liên tiếp $x_n,x_{n+1}$ trùng nhau đến tám chữ số thập phân. Một phát biểu chính xác về độ chính xác của phương pháp Newton được nêu ở Bài tập 11.11.39.
+
+Lưu ý thao tác từ bước $n$ sang $n+1$ giống nhau với mọi $n$; đó là một \textbf{quá trình lặp}. Vì vậy, phương pháp Newton đặc biệt thuận tiện để thực hiện trên máy tính có thể lập trình hoặc máy tính điện tử.
+
+\Needspace{9\baselineskip}
+\ex{2} Dùng phương pháp Newton tính $\sqrt[6]2$ chính xác đến tám chữ số thập phân.
+\sol Tìm $\sqrt[6]2$ tương đương tìm nghiệm dương của $x^6-2=0$. Đặt $f(x)=x^6-2$, khi đó $f'(x)=6x^5$, và Công thức (2) cho
+\[x_{n+1}=x_n-\frac{f(x_n)}{f'(x_n)}=x_n-\frac{x_n^6-2}{6x_n^5}.\]
+Chọn xấp xỉ ban đầu $x_1=1$, ta được
+\begin{align*}
+x_2&\approx1{,}16666667,\\
+x_3&\approx1{,}12644368,\\
+x_4&\approx1{,}12249707,\\
+x_5&\approx1{,}12246205,\\
+x_6&\approx1{,}12246205.
+\end{align*}
+Vì $x_5,x_6$ trùng nhau đến tám chữ số thập phân, kết luận
+\[\sqrt[6]2\approx1{,}12246205\]
+chính xác đến tám chữ số thập phân.
+
+\Needspace{9\baselineskip}
+\ex{3} Tìm nghiệm của $\cos x=x$ chính xác đến sáu chữ số thập phân.
+\sol Trước hết đưa về dạng chuẩn $\cos x-x=0$. Đặt $f(x)=\cos x-x$, khi đó $f'(x)=-\sin x-1$, nên (2) trở thành
+\begin{align*}
+x_{n+1}&=x_n-\frac{\cos x_n-x_n}{-\sin x_n-1}\\
+&=x_n+\frac{\cos x_n-x_n}{\sin x_n+1}.
+\end{align*}
+Để chọn $x_1$ thích hợp, phác họa $y=\cos x$ và $y=x$ ở Hình 6. Chúng có vẻ cắt nhau tại điểm có hoành độ nhỏ hơn $1$ một chút, nên ta chọn $x_1=1$ cho thuận tiện. Nhớ đặt máy tính ở chế độ radian, ta được
+\begin{align*}
+x_2&\approx0{,}75036387,\\
+x_3&\approx0{,}73911289,\\
+x_4&\approx0{,}73908513,\\
+x_5&\approx0{,}73908513.
+\end{align*}
+\fig[.46]{fig06}{Hình 6}
+Vì $x_4,x_5$ trùng nhau đến sáu chữ số thập phân, thực ra đến tám chữ số, nghiệm chính xác đến sáu chữ số thập phân là $0{,}739085$.
+
+Thay vì phác họa như Hình 6 để chọn xấp xỉ ban đầu, có thể dùng đồ thị chính xác hơn do máy tính cung cấp. Hình 7 gợi ý chọn $x_1=0{,}75$. Khi đó phương pháp Newton cho
+\begin{align*}
+x_2&\approx0{,}73911114,\\
+x_3&\approx0{,}73908513,\\
+x_4&\approx0{,}73908513.
+\end{align*}
+\fig[.43]{fig07}{Hình 7}
+Ta thu được cùng kết quả nhưng ít hơn một bước.
+
+\clearpage
+\section*{4.8 — Bài tập}
+\par\medskip\noindent\begin{minipage}{\linewidth}
+\bt{1} Hình vẽ cho đồ thị hàm $f$. Giả sử dùng phương pháp Newton để xấp xỉ nghiệm $s$ của $f(x)=0$, với xấp xỉ ban đầu $x_1=6$.
+
+(a) Vẽ các tiếp tuyến dùng để tìm $x_2,x_3$, và ước lượng giá trị của chúng.
+
+(b) $x_1=8$ có phải là xấp xỉ đầu tiên tốt hơn không? Giải thích.
+\fig[.55]{ex01}{Hình dùng cho Bài tập 1–2.}
+\end{minipage}\par
+\bt{2} Làm theo yêu cầu Bài tập 1(a), nhưng dùng $x_1=1$ làm xấp xỉ ban đầu để tìm nghiệm $r$.
+\bt{3} Tiếp tuyến của $y=f(x)$ tại $(2,5)$ có phương trình $y=9-2x$. Nếu dùng phương pháp Newton tìm nghiệm $f(x)=0$, với $x_1=2$, hãy tìm xấp xỉ thứ hai $x_2$.
+\par\medskip\noindent\begin{minipage}{\linewidth}
+\bt{4} Với mỗi xấp xỉ ban đầu, dùng đồ thị xác định điều gì xảy ra khi áp dụng phương pháp Newton cho hàm có đồ thị như hình.
+
+(a) $x_1=0$;\quad (b) $x_1=1$;\quad (c) $x_1=3$;\quad (d) $x_1=4$;\quad (e) $x_1=5$.
+\fig[.60]{ex04}{Hình cho Bài tập 4.}
+\end{minipage}\par
+\par\medskip\noindent\begin{minipage}{\linewidth}
+\bt{5} Với những xấp xỉ ban đầu nào trong $x_1=a,b,c,d$, bạn cho rằng phương pháp Newton hoạt động và dẫn đến nghiệm $f(x)=0$?
+\fig[.70]{ex05}{Hình cho Bài tập 5.}
+\end{minipage}\par
+\Needspace{9\baselineskip}
+\group{6–8}
+Dùng phương pháp Newton với xấp xỉ ban đầu $x_1$ đã cho, tìm xấp xỉ thứ ba $x_3$ của nghiệm phương trình. Cho kết quả đến bốn chữ số thập phân.
+\bt{6} $2x^3-3x^2+2=0$,\quad $x_1=-1$.
+\bt{7} $\displaystyle\frac2x-x^2+1=0$,\quad $x_1=2$.
+\bt{8} $x^5=x^2+1$,\quad $x_1=1$.
+\bt{9} Dùng phương pháp Newton với $x_1=-1$ tìm xấp xỉ thứ hai $x_2$ của nghiệm $x^3+x+3=0$. Giải thích cách hoạt động của phương pháp bằng cách trước hết vẽ đồ thị hàm và tiếp tuyến tại $(-1,1)$.
+\bt{10} Dùng phương pháp Newton với $x_1=1$ tìm xấp xỉ thứ hai $x_2$ của nghiệm $x^4-x-1=0$. Giải thích cách hoạt động bằng cách trước hết vẽ đồ thị hàm và tiếp tuyến tại $(1,-1)$.
+\Needspace{8\baselineskip}
+\group{11–12}
+Dùng phương pháp Newton tính gần đúng số đã cho, chính xác đến tám chữ số thập phân.
+\bt{11} $\sqrt[4]{75}$.
+\bt{12} $\sqrt[8]{500}$.
+\Needspace{9\baselineskip}
+\group{13–14}
+(a) Giải thích vì sao phương trình phải có nghiệm trong đoạn đã cho. (b) Dùng phương pháp Newton xấp xỉ nghiệm, chính xác đến sáu chữ số thập phân.
+\bt{13} $3x^4-8x^3+2=0$,\quad $[2,3]$.
+\bt{14} $-2x^5+9x^4-7x^3-11x=0$,\quad $[3,4]$.
+\Needspace{12\baselineskip}
+\group{15–16}
+Dùng phương pháp Newton xấp xỉ nghiệm được chỉ định, chính xác đến sáu chữ số thập phân.
+\bt{15} Nghiệm âm của $\cos x=x^2-4$.
+\bt{16} Nghiệm dương của $e^{2x}=x+3$.
+\Needspace{8\baselineskip}
+\group{17–22}
+Dùng phương pháp Newton tìm tất cả các nghiệm, chính xác đến sáu chữ số thập phân.
+\bt{17} $\sin x=x-1$.
+\bt{18} $\cos2x=x^3$.
+\bt{19} $2^x=2-x^2$.
+\bt{20} $\displaystyle\ln x=\frac1{x-3}$.
+\bt{21} $\arctan x=x^2-3$.
+\bt{22} $x^3=5x-3$.
+\Needspace{8\baselineskip}
+\group{23–28}
+Dùng phương pháp Newton tìm tất cả các nghiệm, chính xác đến tám chữ số thập phân. Trước hết quan sát đồ thị để chọn các xấp xỉ ban đầu.
+\bt{23} $-2x^7-5x^4+9x^3+5=0$.
+\bt{24} $x^5-3x^4+x^3-x^2-x+6=0$.
+\bt{25} $\displaystyle\frac{x}{x^2+1}=\sqrt{1-x}$.
+\bt{26} $\cos(x^2-x)=x^4$.
+\bt{27} $\sqrt{4-x^3}=e^{x^2}$.
+\bt{28} $\displaystyle\ln(x^2+2)=\frac{3x}{\sqrt{x^2+1}}$.
+\Needspace{11\baselineskip}
+\bt{29} (a) Áp dụng phương pháp Newton cho $x^2-a=0$ để suy ra thuật toán căn bậc hai sau, đã được người Babylon cổ đại dùng để tính $\sqrt a$:
+\[x_{n+1}=\frac12\left(x_n+\frac a{x_n}\right).\]
+(b) Dùng (a) tính $\sqrt{1000}$ chính xác đến sáu chữ số thập phân.
+\Needspace{11\baselineskip}
+\bt{30} (a) Áp dụng phương pháp Newton cho $1/x-a=0$ để suy ra thuật toán tính nghịch đảo:
+\[x_{n+1}=2x_n-ax_n^2.\]
+Thuật toán này cho phép máy tính tìm nghịch đảo mà không thực hiện phép chia.
+
+(b) Dùng (a) tính $1/1{,}6984$ chính xác đến sáu chữ số thập phân.
+\bt{31} Giải thích vì sao phương pháp Newton không tìm được nghiệm $x^3-3x+6=0$ nếu chọn $x_1=1$.
+\bt{32} (a) Dùng phương pháp Newton với $x_1=1$ tìm nghiệm $x^3-x=1$ chính xác đến sáu chữ số thập phân.
+
+(b) Giải phương trình ở (a) với xấp xỉ ban đầu $x_1=0{,}6$.
+
+(c) Giải phương trình ở (a) với $x_1=0{,}57$. Phần này nhất thiết cần máy tính có thể lập trình.
+
+(d) Vẽ $f(x)=x^3-x-1$ và các tiếp tuyến tại $x_1=1$, $0{,}6$, $0{,}57$ để giải thích vì sao phương pháp Newton rất nhạy với xấp xỉ ban đầu.
+\bt{33} Giải thích vì sao phương pháp Newton thất bại khi áp dụng cho $\sqrt[3]x=0$ với mọi xấp xỉ ban đầu $x_1\ne0$. Minh họa bằng hình phác họa.
+\Needspace{12\baselineskip}
+\bt{34} Nếu
+\[f(x)=\begin{cases}\sqrt x,&x\ge0,\\-\sqrt{-x},&x<0,\end{cases}\]
+thì nghiệm của $f(x)=0$ là $x=0$. Giải thích vì sao phương pháp Newton không tìm được nghiệm với bất kỳ xấp xỉ ban đầu $x_1\ne0$. Minh họa bằng hình phác họa.
+\bt{35} (a) Dùng phương pháp Newton tìm các số tới hạn của $f(x)=x^6-x^4+3x^3-2x$, chính xác đến sáu chữ số thập phân.
+
+(b) Tìm giá trị nhỏ nhất tuyệt đối của $f$, chính xác đến bốn chữ số thập phân.
+\bt{36} Dùng phương pháp Newton tìm giá trị lớn nhất tuyệt đối của $f(x)=x\cos x$, $0\le x\le\pi$, chính xác đến sáu chữ số thập phân.
+\bt{37} Dùng phương pháp Newton tìm tọa độ điểm uốn của $y=x^2\sin x$, $0\le x\le\pi$, chính xác đến sáu chữ số thập phân.
+\bt{38} Trong vô số đường thẳng tiếp xúc với $y=-\sin x$ và đi qua gốc tọa độ, có một đường có hệ số góc lớn nhất. Dùng phương pháp Newton tìm hệ số góc đó, chính xác đến sáu chữ số thập phân.
+\bt{39} Dùng phương pháp Newton tìm tọa độ điểm trên parabol $y=(x-1)^2$ gần gốc tọa độ nhất, chính xác đến sáu chữ số thập phân.
+\par\medskip\noindent\begin{minipage}{\linewidth}
+\bt{40} Trong hình, dây cung $AB$ dài 4 cm, cung $AB$ dài 5 cm. Tìm góc ở tâm $\theta$ tính bằng radian, chính xác đến bốn chữ số thập phân. Sau đó cho kết quả làm tròn đến độ.
+\fig[.30]{ex40}{Hình cho Bài tập 40.}
+\end{minipage}\par
+\Needspace{18\baselineskip}
+\bt{41} Đại lý bán xe mới giá $18\,000$ USD, đồng thời cho phép mua trả góp 375 USD/tháng trong 5 năm. Đại lý đang tính lãi suất hằng tháng bao nhiêu?
+
+Để giải, cần công thức giá trị hiện tại $A$ của niên kim gồm $n$ khoản thanh toán bằng nhau, mỗi khoản $R$, với lãi suất $i$ mỗi kỳ:
+\[A=\frac Ri\bigl[1-(1+i)^{-n}\bigr].\]
+Thay $i$ bằng $x$, chứng minh
+\[48x(1+x)^{60}-(1+x)^{60}+1=0.\]
+Dùng phương pháp Newton giải phương trình này.
+\par\medskip\noindent\begin{minipage}{\linewidth}
+\bt{42} Hình vẽ cho Mặt Trời ở gốc tọa độ và Trái Đất tại $(1,0)$. Đơn vị là khoảng cách giữa hai tâm, gọi là đơn vị thiên văn: $1\ \mathrm{AU}\approx1{,}496\times10^8$ km. Trong mặt phẳng chuyển động của Trái Đất quanh Mặt Trời có năm vị trí $L_1,L_2,L_3,L_4,L_5$ mà tại đó vệ tinh đứng yên tương đối với Trái Đất do các lực tác dụng, kể cả lực hấp dẫn của Trái Đất và Mặt Trời, cân bằng nhau. Các vị trí này gọi là \textit{điểm bình động} (điểm Lagrange). Một vệ tinh nghiên cứu Mặt Trời đã được đặt tại một điểm như vậy. Nếu $m_1$ là khối lượng Mặt Trời, $m_2$ là khối lượng Trái Đất và $r=m_2/(m_1+m_2)$, hoành độ $L_1$ là nghiệm duy nhất của phương trình bậc năm
+\begin{align*}
+p(x)={}&x^5-(2+r)x^4+(1+2r)x^3-(1-r)x^2\\
+&+2(1-r)x+r-1=0,
+\end{align*}
+và hoành độ $L_2$ là nghiệm của
+\[p(x)-2rx^2=0.\]
+Dùng $r\approx3{,}04042\times10^{-6}$, tìm vị trí các điểm bình động (a) $L_1$; (b) $L_2$.
+\fig[.60]{ex42}{Hình cho Bài tập 42. “sun”: Mặt Trời; “earth”: Trái Đất.}
+\end{minipage}\par
+\end{document}

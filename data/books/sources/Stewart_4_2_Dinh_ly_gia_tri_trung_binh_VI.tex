@@ -1,0 +1,246 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage{fontspec}\setmainfont{Latin Modern Roman}\setsansfont{DejaVu Sans}
+\usepackage{amsmath,amssymb,graphicx,geometry,enumitem,needspace,longtable,booktabs,fancyhdr,hyperref}
+\geometry{left=28mm,right=23mm,top=24mm,bottom=24mm}
+\hypersetup{unicode=true,colorlinks=true,linkcolor=black,urlcolor=blue,pdftitle={Giải tích §4.2 — Định lý giá trị trung bình}}
+\setlength{\parindent}{1.2em}\setlength{\parskip}{4pt}\setlength{\headheight}{16pt}
+\pagestyle{fancy}\fancyhf{}\fancyhead[L]{\small Chương 4. Ứng dụng của đạo hàm}\fancyhead[R]{\small §4.2}\fancyfoot[C]{\thepage}
+\newcommand{\fig}[3][.68]{\begin{center}\begin{minipage}{\linewidth}\centering\includegraphics[width=#1\linewidth]{assets/#2.png}\\{\small #3}\end{minipage}\end{center}}
+\newcommand{\ex}[1]{\par\medskip\noindent\textbf{Ví dụ #1.}\ }
+\newcommand{\sol}{\par\nopagebreak[4]\noindent\textit{Lời giải.}\ }
+\newcommand{\bt}[1]{\par\smallskip\Needspace{5\baselineskip}\noindent\textbf{#1.}\ }
+\newcommand{\group}[1]{\par\medskip\noindent\textbf{#1}\par\nopagebreak[4]}
+\newcommand{\gint}[1]{\left[\!\left[#1\right]\!\right]}
+\allowdisplaybreaks[2]
+\DeclareMathOperator{\sech}{sech}
+\DeclareMathOperator{\csch}{csch}
+\DeclareMathOperator{\arccot}{arccot}
+\begin{document}
+\begin{center}{\Large\bfseries 4.2 — Định lý giá trị trung bình}\end{center}
+\noindent\textit{Bản dịch tiếng Việt — Stewart, Clegg và Watson, Calculus: Early Transcendentals, ấn bản thứ 9. Phạm vi: §4.2, tr. 290–296.}
+
+Ta sẽ thấy nhiều kết quả trong chương này phụ thuộc vào một sự kiện then chốt, gọi là Định lý giá trị trung bình.
+
+\section*{Định lý Rolle}
+Để đi đến Định lý giá trị trung bình, trước hết ta cần kết quả sau.
+\Needspace{10\baselineskip}
+\group{Định lý Rolle}
+Cho $f$ là hàm số thỏa mãn ba giả thiết sau:
+\begin{enumerate}[nosep]
+\item $f$ liên tục trên đoạn đóng $[a,b]$.
+\item $f$ khả vi trên khoảng mở $(a,b)$.
+\item $f(a)=f(b)$.
+\end{enumerate}
+Khi đó tồn tại một số $c\in(a,b)$ sao cho $f'(c)=0$.
+
+Trước khi chứng minh, ta xét đồ thị của một số hàm điển hình thỏa mãn ba giả thiết ấy. Hình 1 biểu diễn đồ thị của bốn hàm như vậy. Trong mỗi trường hợp, dường như có ít nhất một điểm $(c,f(c))$ trên đồ thị tại đó tiếp tuyến nằm ngang, do đó $f'(c)=0$. Vì thế, Định lý Rolle có vẻ hợp lý.
+\fig[.99]{fig01}{Hình 1}
+\group{Rolle}
+Định lý Rolle được nhà toán học Pháp Michel Rolle (1652–1719) công bố lần đầu năm 1691 trong cuốn \textit{Méthode pour resoudre les egalitez}. Ông từng mạnh mẽ phê phán các phương pháp đương thời và công kích phép tính vi tích phân là một “tập hợp những ngụy biện tinh vi”. Tuy nhiên, về sau ông đã tin tưởng vào tính đúng đắn về căn bản của các phương pháp vi tích phân.
+
+\par\noindent\textit{Chứng minh.} Có ba trường hợp. \textit{Chiến lược giải toán: xét các trường hợp.}
+\group{Trường hợp I: $f(x)=k$, một hằng số.}
+Khi đó $f'(x)=0$, nên có thể chọn $c$ là một số bất kỳ trong $(a,b)$.
+\group{Trường hợp II: $f(x)>f(a)$ với một $x\in(a,b)$ nào đó [như ở Hình 1(b) hoặc (c)].}
+Theo Định lý giá trị cực trị (áp dụng được nhờ giả thiết 1), $f$ có giá trị lớn nhất tại một điểm nào đó trên $[a,b]$. Vì $f(a)=f(b)$, giá trị lớn nhất này phải đạt tại một số $c$ trong khoảng mở $(a,b)$. Khi đó $f$ có cực đại địa phương tại $c$ và, theo giả thiết 2, $f$ khả vi tại $c$. Vì vậy, theo Định lý Fermat, $f'(c)=0$.
+\group{Trường hợp III: $f(x)<f(a)$ với một $x\in(a,b)$ nào đó [như ở Hình 1(c) hoặc (d)].}
+Theo Định lý giá trị cực trị, $f$ có giá trị nhỏ nhất trên $[a,b]$; vì $f(a)=f(b)$, giá trị này đạt tại một số $c\in(a,b)$. Một lần nữa, Định lý Fermat cho $f'(c)=0$.\hfill$\square$
+
+\ex{1} Áp dụng Định lý Rolle cho hàm vị trí $s=f(t)$ của một vật chuyển động. Nếu vật ở cùng một vị trí tại hai thời điểm khác nhau $t=a$ và $t=b$, thì $f(a)=f(b)$. Định lý Rolle cho biết tồn tại một thời điểm $t=c$ nằm giữa $a$ và $b$ sao cho $f'(c)=0$, tức là vận tốc bằng 0. (Đặc biệt, ta có thể thấy điều này đúng khi một quả bóng được ném thẳng đứng lên trên.)
+\Needspace{10\baselineskip}
+\ex{2} Chứng minh phương trình $x^3+x-1=0$ có đúng một nghiệm thực.
+\sol Trước hết, dùng Định lý giá trị trung gian (2.5.10) để chứng minh nghiệm tồn tại. Đặt $f(x)=x^3+x-1$. Khi đó $f(0)=-1<0$ và $f(1)=1>0$. Vì $f$ là đa thức nên liên tục; Định lý giá trị trung gian khẳng định tồn tại một số $c$ nằm giữa 0 và 1 sao cho $f(c)=0$. Vậy phương trình đã cho có nghiệm.
+
+Để chứng minh không có nghiệm thực nào khác, ta dùng Định lý Rolle và lập luận phản chứng. Giả sử phương trình có hai nghiệm phân biệt $a$ và $b$. Khi đó $f(a)=0=f(b)$; vì $f$ là đa thức nên khả vi trên $(a,b)$ và liên tục trên $[a,b]$. Theo Định lý Rolle, tồn tại một số $c$ nằm giữa $a$ và $b$ sao cho $f'(c)=0$. Nhưng
+\[f'(x)=3x^2+1\ge1\qquad\text{với mọi }x\]
+(vì $x^2\ge0$), nên $f'(x)$ không thể bằng 0. Đây là một mâu thuẫn. Do đó, phương trình không thể có hai nghiệm thực.
+\fig[.41]{fig02}{Hình 2. Đồ thị của $f(x)=x^3+x-1$ trong Ví dụ 2. Theo Định lý Rolle, dù mở rộng cửa sổ quan sát đến đâu, ta cũng không thể tìm được giao điểm thứ hai với trục hoành.}
+
+\section*{Định lý giá trị trung bình}
+Ứng dụng chính của Định lý Rolle ở đây là chứng minh định lý quan trọng sau, được một nhà toán học Pháp khác, Joseph-Louis Lagrange, phát biểu đầu tiên.
+\Needspace{14\baselineskip}
+\group{Định lý giá trị trung bình}
+Cho $f$ là hàm số thỏa mãn các giả thiết:
+\begin{enumerate}[nosep]
+\item $f$ liên tục trên đoạn đóng $[a,b]$.
+\item $f$ khả vi trên khoảng mở $(a,b)$.
+\end{enumerate}
+Khi đó tồn tại một số $c\in(a,b)$ sao cho
+\[f'(c)=\frac{f(b)-f(a)}{b-a},\tag{1}\]
+hay tương đương,
+\[f(b)-f(a)=f'(c)(b-a).\tag{2}\]
+Định lý giá trị trung bình là một ví dụ về \textit{định lý tồn tại}. Giống như Định lý giá trị trung gian, Định lý giá trị cực trị và Định lý Rolle, nó bảo đảm tồn tại một số có tính chất nhất định, nhưng không chỉ cách tìm số ấy.
+
+Trước khi chứng minh, ta có thể thấy định lý hợp lý qua cách diễn giải hình học. Hình 3 và Hình 4 biểu diễn các điểm $A(a,f(a))$, $B(b,f(b))$ trên đồ thị của hai hàm khả vi. Hệ số góc của cát tuyến $AB$ là
+\[m_{AB}=\frac{f(b)-f(a)}{b-a},\tag{3}\]
+chính là biểu thức ở vế phải của (1). Vì $f'(c)$ là hệ số góc của tiếp tuyến tại $(c,f(c))$, Định lý giá trị trung bình dưới dạng (1) khẳng định tồn tại ít nhất một điểm $P(c,f(c))$ trên đồ thị mà hệ số góc của tiếp tuyến bằng hệ số góc của cát tuyến $AB$. Nói cách khác, có một điểm $P$ mà tiếp tuyến tại đó song song với cát tuyến $AB$. (Hãy hình dung một đường thẳng ở xa, luôn song song với $AB$ khi dịch chuyển về phía $AB$, cho đến lúc lần đầu chạm vào đồ thị.)
+\fig[.49]{fig03}{Hình 3}
+\fig[.49]{fig04}{Hình 4}
+\par\noindent\textit{Chứng minh.} Áp dụng Định lý Rolle cho một hàm mới $h$, được định nghĩa là hiệu giữa $f$ và hàm có đồ thị là cát tuyến $AB$. Dùng (3) và phương trình đường thẳng qua một điểm với hệ số góc cho trước, ta viết phương trình $AB$ dưới dạng
+\[y-f(a)=\frac{f(b)-f(a)}{b-a}(x-a),\]
+hay
+\[y=f(a)+\frac{f(b)-f(a)}{b-a}(x-a).\]
+Vậy, như Hình 5 cho thấy,
+\[h(x)=f(x)-f(a)-\frac{f(b)-f(a)}{b-a}(x-a).\tag{4}\]
+\fig[.45]{fig05}{Hình 5}
+Trước hết, kiểm tra $h$ thỏa mãn ba giả thiết của Định lý Rolle.
+\begin{enumerate}
+\item Hàm $h$ liên tục trên $[a,b]$ vì là tổng của $f$ và một đa thức bậc nhất; cả hai đều liên tục.
+\item Hàm $h$ khả vi trên $(a,b)$ vì $f$ và đa thức bậc nhất đều khả vi. Thực ra, từ (4), ta tính trực tiếp được
+\[h'(x)=f'(x)-\frac{f(b)-f(a)}{b-a}.\]
+[Chú ý rằng $f(a)$ và $[f(b)-f(a)]/(b-a)$ là các hằng số.]
+\item Ta có
+\[h(a)=f(a)-f(a)-\frac{f(b)-f(a)}{b-a}(a-a)=0\]
+và
+\begin{align*}
+h(b)&=f(b)-f(a)-\frac{f(b)-f(a)}{b-a}(b-a)\\
+&=f(b)-f(a)-[f(b)-f(a)]=0.
+\end{align*}
+Do đó $h(a)=h(b)$.
+\end{enumerate}
+Vì $h$ thỏa mãn mọi giả thiết của Định lý Rolle, tồn tại một số $c\in(a,b)$ sao cho $h'(c)=0$. Vì vậy,
+\[0=h'(c)=f'(c)-\frac{f(b)-f(a)}{b-a},\]
+suy ra
+\[f'(c)=\frac{f(b)-f(a)}{b-a}.\]
+\hfill$\square$
+\group{Lagrange và Định lý giá trị trung bình}
+Định lý giá trị trung bình được Joseph-Louis Lagrange (1736–1813) phát biểu đầu tiên. Ông sinh tại Ý, có cha người Pháp và mẹ người Ý. Là một thần đồng, ông trở thành giáo sư ở Turin khi mới 19 tuổi. Lagrange có những đóng góp lớn cho lý thuyết số, lý thuyết hàm, lý thuyết phương trình, cơ học giải tích và cơ học thiên thể. Đặc biệt, ông áp dụng phép tính vi tích phân để phân tích sự ổn định của hệ Mặt Trời. Theo lời mời của Friedrich Đại đế, ông kế nhiệm Euler tại Viện Hàn lâm Berlin. Khi Friedrich qua đời, Lagrange nhận lời mời của vua Louis XVI đến Paris, được cấp nơi ở trong cung điện Louvre và trở thành giáo sư tại École Polytechnique. Dù được hưởng nhiều vinh hoa và danh tiếng, ông vẫn là người hiền hậu, trầm lặng, chỉ sống cho khoa học.
+
+\Needspace{10\baselineskip}
+\ex{3} Để minh họa Định lý giá trị trung bình bằng một hàm cụ thể, xét $f(x)=x^3-x$, $a=0$, $b=2$. Vì $f$ là đa thức nên liên tục và khả vi với mọi $x$; đặc biệt, nó liên tục trên $[0,2]$ và khả vi trên $(0,2)$. Vì vậy, theo Định lý giá trị trung bình, tồn tại $c\in(0,2)$ sao cho
+\[f(2)-f(0)=f'(c)(2-0).\]
+Ta có $f(2)=6$, $f(0)=0$, $f'(x)=3x^2-1$, nên phương trình trên trở thành
+\[6=(3c^2-1)2=6c^2-2,\]
+suy ra $c^2=\frac43$, tức $c=\pm2/\sqrt3$. Nhưng $c$ phải thuộc $(0,2)$, nên $c=2/\sqrt3$. Hình 6 minh họa phép tính này: tiếp tuyến tại giá trị $c$ ấy song song với cát tuyến $OB$.
+\fig[.42]{fig06}{Hình 6}
+\ex{4} Nếu một vật chuyển động thẳng với hàm vị trí $s=f(t)$, thì vận tốc trung bình từ $t=a$ đến $t=b$ là
+\[\frac{f(b)-f(a)}{b-a},\]
+còn vận tốc tại $t=c$ là $f'(c)$. Vì vậy, Định lý giá trị trung bình [dưới dạng (1)] cho biết tại một thời điểm $t=c$ nằm giữa $a$ và $b$, vận tốc tức thời $f'(c)$ bằng vận tốc trung bình ấy. Chẳng hạn, nếu một ô tô đi được 180 km trong 2 giờ, thì đồng hồ tốc độ phải chỉ $90\ \mathrm{km/h}$ ít nhất một lần.
+
+Tổng quát, có thể diễn giải Định lý giá trị trung bình như sau: tồn tại một số mà tại đó tốc độ biến thiên tức thời bằng tốc độ biến thiên trung bình trên một khoảng.
+
+Ý nghĩa chính của Định lý giá trị trung bình là cho phép suy ra thông tin về một hàm số từ thông tin về đạo hàm của nó. Ví dụ sau minh họa nguyên lý này.
+\Needspace{10\baselineskip}
+\ex{5} Giả sử $f(0)=-3$ và $f'(x)\le5$ với mọi $x$. Giá trị $f(2)$ có thể lớn đến mức nào?
+\sol Theo giả thiết, $f$ khả vi (do đó liên tục) khắp nơi. Đặc biệt, áp dụng Định lý giá trị trung bình trên $[0,2]$, tồn tại một số $c$ sao cho
+\[f(2)-f(0)=f'(c)(2-0),\]
+nên
+\[f(2)=f(0)+2f'(c)=-3+2f'(c).\]
+Vì $f'(x)\le5$ với mọi $x$, nên đặc biệt $f'(c)\le5$. Nhân cả hai vế với 2, ta được $2f'(c)\le10$, do đó
+\[f(2)=-3+2f'(c)\le-3+10=7.\]
+Giá trị lớn nhất có thể của $f(2)$ là 7.
+
+Có thể dùng Định lý giá trị trung bình để thiết lập một số sự kiện cơ bản của phép tính vi phân. Một trong số đó là định lý sau; các kết quả khác sẽ được thảo luận trong những mục tiếp theo.
+\Needspace{7\baselineskip}
+\group{5. Định lý}
+Nếu $f'(x)=0$ với mọi $x$ trong một khoảng $(a,b)$, thì $f$ là hàm hằng trên $(a,b)$.
+\par\noindent\textit{Chứng minh.} Cho $x_1,x_2$ là hai số bất kỳ trong $(a,b)$ với $x_1<x_2$. Vì $f$ khả vi trên $(a,b)$, nó khả vi trên $(x_1,x_2)$ và liên tục trên $[x_1,x_2]$. Áp dụng Định lý giá trị trung bình trên $[x_1,x_2]$, tồn tại một số $c$ sao cho $x_1<c<x_2$ và
+\[f(x_2)-f(x_1)=f'(c)(x_2-x_1).\tag{6}\]
+Vì $f'(x)=0$ với mọi $x$, ta có $f'(c)=0$, nên (6) trở thành
+\[f(x_2)-f(x_1)=0,\qquad\text{hay}\qquad f(x_2)=f(x_1).\]
+Vậy $f$ có cùng giá trị tại hai số $x_1,x_2$ bất kỳ trong $(a,b)$. Điều này có nghĩa là $f$ là hàm hằng trên $(a,b)$.\hfill$\square$
+\Needspace{7\baselineskip}
+\group{7. Hệ quả}
+Nếu $f'(x)=g'(x)$ với mọi $x$ trong một khoảng $(a,b)$, thì $f-g$ là hàm hằng trên $(a,b)$; tức là $f(x)=g(x)+c$, trong đó $c$ là hằng số.
+\par\noindent\textit{Chứng minh.} Đặt $F(x)=f(x)-g(x)$. Khi đó
+\[F'(x)=f'(x)-g'(x)=0\]
+với mọi $x\in(a,b)$. Theo Định lý 5, $F$ là hàm hằng; tức là $f-g$ là hàm hằng.\hfill$\square$
+
+Hệ quả 7 cho biết nếu hai hàm có cùng đạo hàm trên một khoảng, thì đồ thị của chúng phải là các bản tịnh tiến theo phương thẳng đứng của nhau trên khoảng đó. Nói cách khác, các đồ thị có cùng hình dạng, nhưng có thể lệch nhau lên hoặc xuống.
+\group{Chú ý}
+Cần thận trọng khi áp dụng Định lý 5. Xét
+\[f(x)=\frac{x}{|x|}=\begin{cases}1&\text{khi }x>0,\\-1&\text{khi }x<0.\end{cases}\]
+Miền xác định là $D=\{x\mid x\ne0\}$ và $f'(x)=0$ với mọi $x\in D$. Nhưng rõ ràng $f$ không phải hàm hằng. Điều này không mâu thuẫn với Định lý 5 vì $D$ không phải là một khoảng.
+\Needspace{10\baselineskip}
+\ex{6} Chứng minh đồng nhất thức $\arctan x+\arccot x=\pi/2$.
+\sol Mặc dù không cần dùng phép tính vi phân để chứng minh đồng nhất thức này, cách chứng minh bằng vi phân khá đơn giản. Nếu $f(x)=\arctan x+\arccot x$, thì
+\[f'(x)=\frac1{1+x^2}-\frac1{1+x^2}=0\]
+với mọi $x$. Vì vậy $f(x)=C$, một hằng số. Để xác định $C$, ta đặt $x=1$ [vì có thể tính chính xác $f(1)$]. Khi đó
+\[C=f(1)=\arctan1+\arccot1=\frac\pi4+\frac\pi4=\frac\pi2.\]
+Vậy $\arctan x+\arccot x=\pi/2$.
+
+\clearpage
+\section*{4.2 — Bài tập}
+\par\noindent\begin{minipage}{\linewidth}
+\bt{1} Cho đồ thị của hàm số $f$. Kiểm tra $f$ thỏa mãn các giả thiết của Định lý Rolle trên $[0,8]$. Sau đó ước lượng các giá trị $c$ thỏa mãn kết luận của Định lý Rolle trên đoạn đó.
+\fig[.48]{ex01}{Đồ thị cho Bài tập 1.}
+\end{minipage}\par
+\bt{2} Vẽ đồ thị của một hàm xác định trên $[0,8]$ sao cho $f(0)=f(8)=3$ và hàm số không thỏa mãn kết luận của Định lý Rolle trên $[0,8]$.
+\par\noindent\begin{minipage}{\linewidth}
+\bt{3} Cho đồ thị của hàm số $g$.
+\fig[.48]{ex03}{Đồ thị cho Bài tập 3.}
+(a) Kiểm tra $g$ thỏa mãn các giả thiết của Định lý giá trị trung bình trên $[0,8]$.
+
+(b) Ước lượng các giá trị $c$ thỏa mãn kết luận của Định lý giá trị trung bình trên $[0,8]$.
+
+(c) Ước lượng các giá trị $c$ thỏa mãn kết luận của Định lý giá trị trung bình trên $[2,6]$.
+\end{minipage}\par
+\bt{4} Vẽ đồ thị của một hàm liên tục trên $[0,8]$ với $f(0)=1$, $f(8)=4$, nhưng không thỏa mãn kết luận của Định lý giá trị trung bình trên $[0,8]$.
+\Needspace{14\baselineskip}
+\group{5–8} Cho đồ thị của hàm số $f$. Hàm $f$ có thỏa mãn các giả thiết của Định lý giá trị trung bình trên $[0,5]$ không? Nếu có, tìm một giá trị $c$ thỏa mãn kết luận của định lý trên đoạn đó.
+\par\noindent\begin{minipage}{\linewidth}
+\bt{5}\fig[.37]{ex05}{Đồ thị cho Bài tập 5.}
+\end{minipage}\par
+\par\noindent\begin{minipage}{\linewidth}
+\bt{6}\fig[.37]{ex06}{Đồ thị cho Bài tập 6.}
+\end{minipage}\par
+\par\noindent\begin{minipage}{\linewidth}
+\bt{7}\fig[.37]{ex07}{Đồ thị cho Bài tập 7.}
+\end{minipage}\par
+\par\noindent\begin{minipage}{\linewidth}
+\bt{8}\fig[.37]{ex08}{Đồ thị cho Bài tập 8.}
+\end{minipage}\par
+\Needspace{8\baselineskip}
+\group{9–12} Kiểm tra hàm số thỏa mãn ba giả thiết của Định lý Rolle trên đoạn đã cho. Sau đó tìm tất cả các số $c$ thỏa mãn kết luận của định lý.
+\bt{9} $f(x)=2x^2-4x+5,\quad [-1,3]$.
+\bt{10} $f(x)=x^3-2x^2-4x+2,\quad [-2,2]$.
+\bt{11} $f(x)=\sin(x/2),\quad [\pi/2,3\pi/2]$.
+\bt{12} $f(x)=x+1/x,\quad [\frac12,2]$.
+\bt{13} Cho $f(x)=1-x^{2/3}$. Chứng minh $f(-1)=f(1)$ nhưng không tồn tại số $c\in(-1,1)$ sao cho $f'(c)=0$. Vì sao điều này không mâu thuẫn với Định lý Rolle?
+\bt{14} Cho $f(x)=\tan x$. Chứng minh $f(0)=f(\pi)$ nhưng không tồn tại số $c\in(0,\pi)$ sao cho $f'(c)=0$. Vì sao điều này không mâu thuẫn với Định lý Rolle?
+\Needspace{8\baselineskip}
+\group{15–18} Kiểm tra hàm số thỏa mãn các giả thiết của Định lý giá trị trung bình trên đoạn đã cho. Sau đó tìm tất cả các số $c$ thỏa mãn kết luận của định lý.
+\bt{15} $f(x)=2x^2-3x+1,\quad [0,2]$.
+\bt{16} $f(x)=x^3-3x+2,\quad [-2,2]$.
+\bt{17} $f(x)=\ln x,\quad [1,4]$.
+\bt{18} $f(x)=1/x,\quad [1,3]$.
+\Needspace{8\baselineskip}
+\group{19–20} Tìm số $c$ thỏa mãn kết luận của Định lý giá trị trung bình trên đoạn đã cho. Vẽ đồ thị hàm số, cát tuyến đi qua hai đầu mút của đồ thị trên đoạn và tiếp tuyến tại $(c,f(c))$. Cát tuyến và tiếp tuyến có song song không? Dùng công cụ vẽ đồ thị.
+\bt{19} $f(x)=\sqrt{x},\quad [0,4]$.
+\bt{20} $f(x)=e^{-x},\quad [0,2]$.
+\bt{21} Cho $f(x)=(x-3)^{-2}$. Chứng minh không tồn tại $c\in(1,4)$ sao cho $f(4)-f(1)=f'(c)(4-1)$. Vì sao điều này không mâu thuẫn với Định lý giá trị trung bình?
+\bt{22} Cho $f(x)=2-|2x-1|$. Chứng minh không tồn tại giá trị $c$ sao cho $f(3)-f(0)=f'(c)(3-0)$. Vì sao điều này không mâu thuẫn với Định lý giá trị trung bình?
+\Needspace{7\baselineskip}
+\group{23–24} Chứng minh phương trình có đúng một nghiệm thực.
+\bt{23} $2x+\cos x=0$.
+\bt{24} $x^3+e^x=0$.
+\bt{25} Chứng minh phương trình $x^3-15x+c=0$ có nhiều nhất một nghiệm trên đoạn $[-2,2]$.
+\bt{26} Chứng minh phương trình $x^4+4x+c=0$ có nhiều nhất hai nghiệm thực.
+\bt{27} (a) Chứng minh một đa thức bậc 3 có nhiều nhất ba nghiệm thực.
+
+(b) Chứng minh một đa thức bậc $n$ có nhiều nhất $n$ nghiệm thực.
+\bt{28} (a) Giả sử $f$ khả vi trên $\mathbb R$ và có hai nghiệm. Chứng minh $f'$ có ít nhất một nghiệm.
+
+(b) Giả sử $f$ khả vi hai lần trên $\mathbb R$ và có ba nghiệm. Chứng minh $f''$ có ít nhất một nghiệm thực.
+
+(c) Có thể tổng quát hóa các phần (a), (b) không?
+\bt{29} Nếu $f(1)=10$ và $f'(x)\ge2$ với $1\le x\le4$, thì $f(4)$ có thể nhỏ đến mức nào?
+\bt{30} Giả sử $3\le f'(x)\le5$ với mọi $x$. Chứng minh $18\le f(8)-f(2)\le30$.
+\bt{31} Có tồn tại một hàm $f$ sao cho $f(0)=-1$, $f(2)=4$ và $f'(x)\le2$ với mọi $x$ không?
+\bt{32} Giả sử $f,g$ liên tục trên $[a,b]$ và khả vi trên $(a,b)$. Giả sử thêm $f(a)=g(a)$ và $f'(x)<g'(x)$ với $a<x<b$. Chứng minh $f(b)<g(b)$. [\textit{Gợi ý:} Áp dụng Định lý giá trị trung bình cho hàm $h=f-g$.]
+\bt{33} Chứng minh $\sin x<x$ nếu $0<x<2\pi$.
+\bt{34} Giả sử $f$ là hàm lẻ và khả vi khắp nơi. Chứng minh với mỗi số dương $b$, tồn tại $c\in(-b,b)$ sao cho $f'(c)=f(b)/b$.
+\bt{35} Dùng Định lý giá trị trung bình để chứng minh bất đẳng thức
+\[|\sin a-\sin b|\le|a-b|\qquad\text{với mọi }a,b.\]
+\bt{36} Nếu $f'(x)=c$ ($c$ là hằng số) với mọi $x$, dùng Hệ quả 7 để chứng minh $f(x)=cx+d$ với một hằng số $d$ nào đó.
+\bt{37} Cho $f(x)=1/x$ và
+\[g(x)=\begin{cases}\dfrac1x&\text{khi }x>0,\\1+\dfrac1x&\text{khi }x<0.\end{cases}\]
+Chứng minh $f'(x)=g'(x)$ với mọi $x$ trong miền xác định của chúng. Có thể dùng Hệ quả 7 để kết luận $f-g$ là hàm hằng không?
+\Needspace{7\baselineskip}
+\group{38–39} Dùng phương pháp ở Ví dụ 6 để chứng minh đồng nhất thức.
+\bt{38} $\displaystyle\arctan x+\arctan\left(\frac1x\right)=\frac\pi2,\qquad x>0$.
+\bt{39} $\displaystyle2\arcsin x=\arccos(1-2x^2),\qquad x\ge0$.
+\bt{40} Lúc 2 giờ chiều, đồng hồ tốc độ của một ô tô chỉ $30\ \mathrm{mi/h}$. Lúc 2 giờ 10 phút, đồng hồ chỉ $50\ \mathrm{mi/h}$. Chứng minh tại một thời điểm nào đó giữa 2 giờ và 2 giờ 10 phút, gia tốc đúng bằng $120\ \mathrm{mi/h^2}$.
+\bt{41} Hai vận động viên xuất phát cùng lúc và về đích đồng thời. Chứng minh trong cuộc đua có một thời điểm họ có cùng tốc độ. [\textit{Gợi ý:} Xét $f(t)=g(t)-h(t)$, trong đó $g,h$ là các hàm vị trí của hai vận động viên.]
+\bt{42} \textbf{Điểm bất động.} Một số $a$ được gọi là \textit{điểm bất động} của hàm số $f$ nếu $f(a)=a$. Chứng minh rằng nếu $f'(x)\ne1$ với mọi số thực $x$, thì $f$ có nhiều nhất một điểm bất động.
+\end{document}

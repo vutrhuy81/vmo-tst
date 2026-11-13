@@ -1,0 +1,348 @@
+{
+  "bookKey": "stewart-9",
+  "sectionKey": "4-9",
+  "heading": "4.9. Bài tập",
+  "sourceSha256": "4ae26d667da8b2e4ebf7d550eb86a7f7f923be4a2712d9c37537b2f3845e11a6",
+  "exercises": [
+    {
+      "number": 1,
+      "content": "<p><strong>1–4.</strong></p>\n<p>Tìm một nguyên hàm của hàm số.</p><p><strong>1.</strong> (a) <span class=\"math inline\">\\(f(x)=6\\)</span>;(b) <span class=\"math inline\">\\(g(t)=3t^2\\)</span>.</p>"
+    },
+    {
+      "number": 2,
+      "content": "<p><strong>1–4.</strong></p>\n<p>Tìm một nguyên hàm của hàm số.</p><p><strong>2.</strong> (a) <span class=\"math inline\">\\(f(x)=2x\\)</span>;(b) <span class=\"math inline\">\\(g(x)=-1/x^2\\)</span>.</p>"
+    },
+    {
+      "number": 3,
+      "content": "<p><strong>1–4.</strong></p>\n<p>Tìm một nguyên hàm của hàm số.</p><p><strong>3.</strong> (a) <span class=\"math inline\">\\(h(q)=\\cos q\\)</span>;(b) <span class=\"math inline\">\\(f(x)=e^x\\)</span>.</p>"
+    },
+    {
+      "number": 4,
+      "content": "<p><strong>1–4.</strong></p>\n<p>Tìm một nguyên hàm của hàm số.</p><p><strong>4.</strong> (a) <span class=\"math inline\">\\(g(t)=1/t\\)</span>;(b) <span class=\"math inline\">\\(r(\\theta)=\\sec^2\\theta\\)</span>.</p>"
+    },
+    {
+      "number": 5,
+      "content": "<p><strong>5–26.</strong></p>\n<p>Tìm nguyên hàm tổng quát nhất. Kiểm tra bằng cách lấy đạo hàm kết quả.</p><p><strong>5.</strong> <span class=\"math inline\">\\(f(x)=4x+7\\)</span>.</p>"
+    },
+    {
+      "number": 6,
+      "content": "<p><strong>5–26.</strong></p>\n<p>Tìm nguyên hàm tổng quát nhất. Kiểm tra bằng cách lấy đạo hàm kết quả.</p><p><strong>6.</strong> <span class=\"math inline\">\\(f(x)=x^2-3x+2\\)</span>.</p>"
+    },
+    {
+      "number": 7,
+      "content": "<p><strong>5–26.</strong></p>\n<p>Tìm nguyên hàm tổng quát nhất. Kiểm tra bằng cách lấy đạo hàm kết quả.</p><p><strong>7.</strong> <span class=\"math inline\">\\(f(x)=2x^3-\\frac23x^2+5x\\)</span>.</p>"
+    },
+    {
+      "number": 8,
+      "content": "<p><strong>5–26.</strong></p>\n<p>Tìm nguyên hàm tổng quát nhất. Kiểm tra bằng cách lấy đạo hàm kết quả.</p><p><strong>8.</strong> <span class=\"math inline\">\\(f(x)=6x^5-8x^4-9x^2\\)</span>.</p>"
+    },
+    {
+      "number": 9,
+      "content": "<p><strong>5–26.</strong></p>\n<p>Tìm nguyên hàm tổng quát nhất. Kiểm tra bằng cách lấy đạo hàm kết quả.</p><p><strong>9.</strong> <span class=\"math inline\">\\(f(x)=x(12x+8)\\)</span>.</p>"
+    },
+    {
+      "number": 10,
+      "content": "<p><strong>5–26.</strong></p>\n<p>Tìm nguyên hàm tổng quát nhất. Kiểm tra bằng cách lấy đạo hàm kết quả.</p><p><strong>10.</strong> <span class=\"math inline\">\\(f(x)=(x-5)^2\\)</span>.</p>"
+    },
+    {
+      "number": 11,
+      "content": "<p><strong>5–26.</strong></p>\n<p>Tìm nguyên hàm tổng quát nhất. Kiểm tra bằng cách lấy đạo hàm kết quả.</p><p><strong>11.</strong> <span class=\"math inline\">\\(g(x)=4x^{-2/3}-2x^{5/3}\\)</span>.</p>"
+    },
+    {
+      "number": 12,
+      "content": "<p><strong>5–26.</strong></p>\n<p>Tìm nguyên hàm tổng quát nhất. Kiểm tra bằng cách lấy đạo hàm kết quả.</p><p><strong>12.</strong> <span class=\"math inline\">\\(h(z)=3z^{0{,}8}+z^{-2{,}5}\\)</span>.</p>"
+    },
+    {
+      "number": 13,
+      "content": "<p><strong>5–26.</strong></p>\n<p>Tìm nguyên hàm tổng quát nhất. Kiểm tra bằng cách lấy đạo hàm kết quả.</p><p><strong>13.</strong> <span class=\"math inline\">\\(f(x)=3\\sqrt x-2\\sqrt[3]x\\)</span>.</p>"
+    },
+    {
+      "number": 14,
+      "content": "<p><strong>5–26.</strong></p>\n<p>Tìm nguyên hàm tổng quát nhất. Kiểm tra bằng cách lấy đạo hàm kết quả.</p><p><strong>14.</strong> <span class=\"math inline\">\\(g(x)=\\sqrt x(2-x+6x^2)\\)</span>.</p>"
+    },
+    {
+      "number": 15,
+      "content": "<p><strong>5–26.</strong></p>\n<p>Tìm nguyên hàm tổng quát nhất. Kiểm tra bằng cách lấy đạo hàm kết quả.</p><p><strong>15.</strong> <span class=\"math inline\">\\(\\displaystyle f(t)=\\frac{2t-4+3\\sqrt t}{\\sqrt t}\\)</span>.</p>"
+    },
+    {
+      "number": 16,
+      "content": "<p><strong>5–26.</strong></p>\n<p>Tìm nguyên hàm tổng quát nhất. Kiểm tra bằng cách lấy đạo hàm kết quả.</p><p><strong>16.</strong> <span class=\"math inline\">\\(f(x)=\\sqrt[4]5+\\sqrt[4]x\\)</span>.</p>"
+    },
+    {
+      "number": 17,
+      "content": "<p><strong>5–26.</strong></p>\n<p>Tìm nguyên hàm tổng quát nhất. Kiểm tra bằng cách lấy đạo hàm kết quả.</p><p><strong>17.</strong> <span class=\"math inline\">\\(\\displaystyle f(x)=\\frac2{5x}-\\frac3{x^2}\\)</span>.</p>"
+    },
+    {
+      "number": 18,
+      "content": "<p><strong>5–26.</strong></p>\n<p>Tìm nguyên hàm tổng quát nhất. Kiểm tra bằng cách lấy đạo hàm kết quả.</p><p><strong>18.</strong> <span class=\"math inline\">\\(\\displaystyle f(x)=\\frac{5x^2-6x+4}{x^2}\\)</span>, <span class=\"math inline\">\\(x&gt;0\\)</span>.</p>"
+    },
+    {
+      "number": 19,
+      "content": "<p><strong>5–26.</strong></p>\n<p>Tìm nguyên hàm tổng quát nhất. Kiểm tra bằng cách lấy đạo hàm kết quả.</p><p><strong>19.</strong> <span class=\"math inline\">\\(g(t)=7e^t-e^3\\)</span>.</p>"
+    },
+    {
+      "number": 20,
+      "content": "<p><strong>5–26.</strong></p>\n<p>Tìm nguyên hàm tổng quát nhất. Kiểm tra bằng cách lấy đạo hàm kết quả.</p><p><strong>20.</strong> <span class=\"math inline\">\\(\\displaystyle f(x)=\\frac{10}{x^6}-2e^x+3\\)</span>.</p>"
+    },
+    {
+      "number": 21,
+      "content": "<p><strong>5–26.</strong></p>\n<p>Tìm nguyên hàm tổng quát nhất. Kiểm tra bằng cách lấy đạo hàm kết quả.</p><p><strong>21.</strong> <span class=\"math inline\">\\(f(\\theta)=2\\sin\\theta-3\\sec\\theta\\tan\\theta\\)</span>.</p>"
+    },
+    {
+      "number": 22,
+      "content": "<p><strong>5–26.</strong></p>\n<p>Tìm nguyên hàm tổng quát nhất. Kiểm tra bằng cách lấy đạo hàm kết quả.</p><p><strong>22.</strong> <span class=\"math inline\">\\(h(x)=\\sec^2x+\\pi\\cos x\\)</span>.</p>"
+    },
+    {
+      "number": 23,
+      "content": "<p><strong>5–26.</strong></p>\n<p>Tìm nguyên hàm tổng quát nhất. Kiểm tra bằng cách lấy đạo hàm kết quả.</p><p><strong>23.</strong> <span class=\"math inline\">\\(\\displaystyle f(r)=\\frac4{1+r^2}-\\sqrt[5]{r^4}\\)</span>.</p>"
+    },
+    {
+      "number": 24,
+      "content": "<p><strong>5–26.</strong></p>\n<p>Tìm nguyên hàm tổng quát nhất. Kiểm tra bằng cách lấy đạo hàm kết quả.</p><p><strong>24.</strong> <span class=\"math inline\">\\(\\displaystyle g(v)=2\\cos v-\\frac3{\\sqrt{1-v^2}}\\)</span>.</p>"
+    },
+    {
+      "number": 25,
+      "content": "<p><strong>5–26.</strong></p>\n<p>Tìm nguyên hàm tổng quát nhất. Kiểm tra bằng cách lấy đạo hàm kết quả.</p><p><strong>25.</strong> <span class=\"math inline\">\\(f(x)=2^x+4\\sinh x\\)</span>.</p>"
+    },
+    {
+      "number": 26,
+      "content": "<p><strong>5–26.</strong></p>\n<p>Tìm nguyên hàm tổng quát nhất. Kiểm tra bằng cách lấy đạo hàm kết quả.</p><p><strong>26.</strong> <span class=\"math inline\">\\(\\displaystyle f(x)=\\frac{2x^2+5}{x^2+1}\\)</span>.</p>"
+    },
+    {
+      "number": 27,
+      "content": "<p><strong>27–28.</strong></p>\n<p>Tìm nguyên hàm <span class=\"math inline\">\\(F\\)</span> của <span class=\"math inline\">\\(f\\)</span> thỏa điều kiện đã cho. Kiểm tra kết quả bằng cách so sánh đồ thị <span class=\"math inline\">\\(f\\)</span> và <span class=\"math inline\">\\(F\\)</span>.</p><p><strong>27.</strong> <span class=\"math inline\">\\(f(x)=2e^x-6x\\)</span>,<span class=\"math inline\">\\(F(0)=1\\)</span>.</p>"
+    },
+    {
+      "number": 28,
+      "content": "<p><strong>27–28.</strong></p>\n<p>Tìm nguyên hàm <span class=\"math inline\">\\(F\\)</span> của <span class=\"math inline\">\\(f\\)</span> thỏa điều kiện đã cho. Kiểm tra kết quả bằng cách so sánh đồ thị <span class=\"math inline\">\\(f\\)</span> và <span class=\"math inline\">\\(F\\)</span>.</p><p><strong>28.</strong> <span class=\"math inline\">\\(f(x)=4-3(1+x^2)^{-1}\\)</span>,<span class=\"math inline\">\\(F(1)=0\\)</span>.</p>"
+    },
+    {
+      "number": 29,
+      "content": "<p><strong>29–54.</strong></p>\n<p>Tìm <span class=\"math inline\">\\(f\\)</span>.</p><p><strong>29.</strong> <span class=\"math inline\">\\(f''(x)=24x\\)</span>.</p>"
+    },
+    {
+      "number": 30,
+      "content": "<p><strong>29–54.</strong></p>\n<p>Tìm <span class=\"math inline\">\\(f\\)</span>.</p><p><strong>30.</strong> <span class=\"math inline\">\\(f''(t)=t^2-4\\)</span>.</p>"
+    },
+    {
+      "number": 31,
+      "content": "<p><strong>29–54.</strong></p>\n<p>Tìm <span class=\"math inline\">\\(f\\)</span>.</p><p><strong>31.</strong> <span class=\"math inline\">\\(f''(x)=4x^3+24x-1\\)</span>.</p>"
+    },
+    {
+      "number": 32,
+      "content": "<p><strong>29–54.</strong></p>\n<p>Tìm <span class=\"math inline\">\\(f\\)</span>.</p><p><strong>32.</strong> <span class=\"math inline\">\\(f''(x)=6x-x^4+3x^5\\)</span>.</p>"
+    },
+    {
+      "number": 33,
+      "content": "<p><strong>29–54.</strong></p>\n<p>Tìm <span class=\"math inline\">\\(f\\)</span>.</p><p><strong>33.</strong> <span class=\"math inline\">\\(f''(x)=2x+3e^x\\)</span>.</p>"
+    },
+    {
+      "number": 34,
+      "content": "<p><strong>29–54.</strong></p>\n<p>Tìm <span class=\"math inline\">\\(f\\)</span>.</p><p><strong>34.</strong> <span class=\"math inline\">\\(f''(x)=1/x^2\\)</span>,<span class=\"math inline\">\\(x&gt;0\\)</span>.</p>"
+    },
+    {
+      "number": 35,
+      "content": "<p><strong>29–54.</strong></p>\n<p>Tìm <span class=\"math inline\">\\(f\\)</span>.</p><p><strong>35.</strong> <span class=\"math inline\">\\(f'''(t)=12+\\sin t\\)</span>.</p>"
+    },
+    {
+      "number": 36,
+      "content": "<p><strong>29–54.</strong></p>\n<p>Tìm <span class=\"math inline\">\\(f\\)</span>.</p><p><strong>36.</strong> <span class=\"math inline\">\\(f'''(t)=\\sqrt t-2\\cos t\\)</span>.</p>"
+    },
+    {
+      "number": 37,
+      "content": "<p><strong>29–54.</strong></p>\n<p>Tìm <span class=\"math inline\">\\(f\\)</span>.</p><p><strong>37.</strong> <span class=\"math inline\">\\(f'(x)=8x^3+1/x\\)</span>,<span class=\"math inline\">\\(x&gt;0\\)</span>,<span class=\"math inline\">\\(f(1)=-3\\)</span>.</p>"
+    },
+    {
+      "number": 38,
+      "content": "<p><strong>29–54.</strong></p>\n<p>Tìm <span class=\"math inline\">\\(f\\)</span>.</p><p><strong>38.</strong> <span class=\"math inline\">\\(f'(x)=\\sqrt x-2\\)</span>,<span class=\"math inline\">\\(f(9)=4\\)</span>.</p>"
+    },
+    {
+      "number": 39,
+      "content": "<p><strong>29–54.</strong></p>\n<p>Tìm <span class=\"math inline\">\\(f\\)</span>.</p><p><strong>39.</strong> <span class=\"math inline\">\\(f'(t)=4/(1+t^2)\\)</span>,<span class=\"math inline\">\\(f(1)=0\\)</span>.</p>"
+    },
+    {
+      "number": 40,
+      "content": "<p><strong>29–54.</strong></p>\n<p>Tìm <span class=\"math inline\">\\(f\\)</span>.</p><p><strong>40.</strong> <span class=\"math inline\">\\(f'(t)=t+1/t^3\\)</span>,<span class=\"math inline\">\\(t&gt;0\\)</span>,<span class=\"math inline\">\\(f(1)=6\\)</span>.</p>"
+    },
+    {
+      "number": 41,
+      "content": "<p><strong>29–54.</strong></p>\n<p>Tìm <span class=\"math inline\">\\(f\\)</span>.</p><p><strong>41.</strong> <span class=\"math inline\">\\(f'(x)=5x^{2/3}\\)</span>,<span class=\"math inline\">\\(f(8)=21\\)</span>.</p>"
+    },
+    {
+      "number": 42,
+      "content": "<p><strong>29–54.</strong></p>\n<p>Tìm <span class=\"math inline\">\\(f\\)</span>.</p><p><strong>42.</strong> <span class=\"math inline\">\\(f'(x)=(x+1)/\\sqrt x\\)</span>,<span class=\"math inline\">\\(f(1)=5\\)</span>.</p>"
+    },
+    {
+      "number": 43,
+      "content": "<p><strong>29–54.</strong></p>\n<p>Tìm <span class=\"math inline\">\\(f\\)</span>.</p><p><strong>43.</strong> <span class=\"math inline\">\\(f'(t)=\\sec t(\\sec t+\\tan t)\\)</span>,<span class=\"math inline\">\\(-\\pi/2&lt;t&lt;\\pi/2\\)</span>,<span class=\"math inline\">\\(f(\\pi/4)=-1\\)</span>.</p>"
+    },
+    {
+      "number": 44,
+      "content": "<p><strong>29–54.</strong></p>\n<p>Tìm <span class=\"math inline\">\\(f\\)</span>.</p><p><strong>44.</strong> <span class=\"math inline\">\\(f'(t)=3t^2-3/t\\)</span>,<span class=\"math inline\">\\(f(1)=2\\)</span>,<span class=\"math inline\">\\(f(-1)=1\\)</span>.</p>"
+    },
+    {
+      "number": 45,
+      "content": "<p><strong>29–54.</strong></p>\n<p>Tìm <span class=\"math inline\">\\(f\\)</span>.</p><p><strong>45.</strong> <span class=\"math inline\">\\(f''(x)=-2+12x-12x^2\\)</span>,<span class=\"math inline\">\\(f(0)=4\\)</span>,<span class=\"math inline\">\\(f'(0)=12\\)</span>.</p>"
+    },
+    {
+      "number": 46,
+      "content": "<p><strong>29–54.</strong></p>\n<p>Tìm <span class=\"math inline\">\\(f\\)</span>.</p><p><strong>46.</strong> <span class=\"math inline\">\\(f''(x)=8x^3+5\\)</span>,<span class=\"math inline\">\\(f(1)=0\\)</span>,<span class=\"math inline\">\\(f'(1)=8\\)</span>.</p>"
+    },
+    {
+      "number": 47,
+      "content": "<p><strong>29–54.</strong></p>\n<p>Tìm <span class=\"math inline\">\\(f\\)</span>.</p><p><strong>47.</strong> <span class=\"math inline\">\\(f''(\\theta)=\\sin\\theta+\\cos\\theta\\)</span>,<span class=\"math inline\">\\(f(0)=3\\)</span>,<span class=\"math inline\">\\(f'(0)=4\\)</span>.</p>"
+    },
+    {
+      "number": 48,
+      "content": "<p><strong>29–54.</strong></p>\n<p>Tìm <span class=\"math inline\">\\(f\\)</span>.</p><p><strong>48.</strong> <span class=\"math inline\">\\(f''(t)=t^2+1/t^2\\)</span>,<span class=\"math inline\">\\(t&gt;0\\)</span>,<span class=\"math inline\">\\(f(2)=3\\)</span>,<span class=\"math inline\">\\(f'(1)=2\\)</span>.</p>"
+    },
+    {
+      "number": 49,
+      "content": "<p><strong>29–54.</strong></p>\n<p>Tìm <span class=\"math inline\">\\(f\\)</span>.</p><p><strong>49.</strong> <span class=\"math inline\">\\(f''(x)=4+6x+24x^2\\)</span>,<span class=\"math inline\">\\(f(0)=3\\)</span>,<span class=\"math inline\">\\(f(1)=10\\)</span>.</p>"
+    },
+    {
+      "number": 50,
+      "content": "<p><strong>29–54.</strong></p>\n<p>Tìm <span class=\"math inline\">\\(f\\)</span>.</p><p><strong>50.</strong> <span class=\"math inline\">\\(f''(x)=x^3+\\sinh x\\)</span>,<span class=\"math inline\">\\(f(0)=1\\)</span>,<span class=\"math inline\">\\(f(2)=2{,}6\\)</span>.</p>"
+    },
+    {
+      "number": 51,
+      "content": "<p><strong>29–54.</strong></p>\n<p>Tìm <span class=\"math inline\">\\(f\\)</span>.</p><p><strong>51.</strong> <span class=\"math inline\">\\(f''(x)=e^x-2\\sin x\\)</span>,<span class=\"math inline\">\\(f(0)=3\\)</span>,<span class=\"math inline\">\\(f(\\pi/2)=0\\)</span>.</p>"
+    },
+    {
+      "number": 52,
+      "content": "<p><strong>29–54.</strong></p>\n<p>Tìm <span class=\"math inline\">\\(f\\)</span>.</p><p><strong>52.</strong> <span class=\"math inline\">\\(f''(t)=\\sqrt[3]t-\\cos t\\)</span>,<span class=\"math inline\">\\(f(0)=2\\)</span>,<span class=\"math inline\">\\(f(1)=2\\)</span>.</p>"
+    },
+    {
+      "number": 53,
+      "content": "<p><strong>29–54.</strong></p>\n<p>Tìm <span class=\"math inline\">\\(f\\)</span>.</p><p><strong>53.</strong> <span class=\"math inline\">\\(f''(x)=x^{-2}\\)</span>,<span class=\"math inline\">\\(x&gt;0\\)</span>,<span class=\"math inline\">\\(f(1)=0\\)</span>,<span class=\"math inline\">\\(f(2)=0\\)</span>.</p>"
+    },
+    {
+      "number": 54,
+      "content": "<p><strong>29–54.</strong></p>\n<p>Tìm <span class=\"math inline\">\\(f\\)</span>.</p><p><strong>54.</strong> <span class=\"math inline\">\\(f'''(x)=\\cos x\\)</span>,<span class=\"math inline\">\\(f(0)=1\\)</span>,<span class=\"math inline\">\\(f'(0)=2\\)</span>,<span class=\"math inline\">\\(f''(0)=3\\)</span>.</p>"
+    },
+    {
+      "number": 55,
+      "content": "<p><strong>55.</strong> Đồ thị <span class=\"math inline\">\\(f\\)</span> đi qua <span class=\"math inline\">\\((2,5)\\)</span> và hệ số góc tiếp tuyến tại <span class=\"math inline\">\\((x,f(x))\\)</span> là <span class=\"math inline\">\\(3-4x\\)</span>. Tìm <span class=\"math inline\">\\(f(1)\\)</span>.</p>"
+    },
+    {
+      "number": 56,
+      "content": "<p><strong>56.</strong> Tìm hàm <span class=\"math inline\">\\(f\\)</span> sao cho <span class=\"math inline\">\\(f'(x)=x^3\\)</span> và đường thẳng <span class=\"math inline\">\\(x+y=0\\)</span> tiếp xúc đồ thị <span class=\"math inline\">\\(f\\)</span>.</p>"
+    },
+    {
+      "number": 57,
+      "content": "<p><strong>57–58.</strong></p>\n<p>Đồ thị <span class=\"math inline\">\\(f\\)</span> được cho trong hình. Đồ thị nào là một nguyên hàm của <span class=\"math inline\">\\(f\\)</span>? Vì sao?</p><p><strong>57.</strong> Xét hình sau.</p>\n<div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-4-9-4ae26d66/ex57.png\" alt=\"image\"><br>\nHình cho Bài tập 57.</p>\n</div>"
+    },
+    {
+      "number": 58,
+      "content": "<p><strong>57–58.</strong></p>\n<p>Đồ thị <span class=\"math inline\">\\(f\\)</span> được cho trong hình. Đồ thị nào là một nguyên hàm của <span class=\"math inline\">\\(f\\)</span>? Vì sao?</p><p><strong>58.</strong> Xét hình sau.</p>\n<div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-4-9-4ae26d66/ex58.png\" alt=\"image\"><br>\nHình cho Bài tập 58.</p>\n</div>"
+    },
+    {
+      "number": 59,
+      "content": "<p><strong>59.</strong> Đồ thị hàm số được cho trong hình. Phác họa một nguyên hàm <span class=\"math inline\">\\(F\\)</span>, biết <span class=\"math inline\">\\(F(0)=1\\)</span>.</p>\n<div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-4-9-4ae26d66/ex59.png\" alt=\"image\"><br>\nHình cho Bài tập 59.</p>\n</div>"
+    },
+    {
+      "number": 60,
+      "content": "<p><strong>60.</strong> Hình vẽ cho đồ thị vận tốc của một chất điểm. Phác họa đồ thị một hàm vị trí.</p>\n<div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-4-9-4ae26d66/ex60.png\" alt=\"image\"><br>\nHình cho Bài tập 60.</p>\n</div>"
+    },
+    {
+      "number": 61,
+      "content": "<p><strong>61.</strong> Hình vẽ cho đồ thị <span class=\"math inline\">\\(f'\\)</span>. Phác họa đồ thị <span class=\"math inline\">\\(f\\)</span> nếu <span class=\"math inline\">\\(f\\)</span> liên tục trên <span class=\"math inline\">\\([0,3]\\)</span> và <span class=\"math inline\">\\(f(0)=-1\\)</span>.</p>\n<div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-4-9-4ae26d66/ex61.png\" alt=\"image\"><br>\nHình cho Bài tập 61.</p>\n</div>"
+    },
+    {
+      "number": 62,
+      "content": "<p><strong>62.</strong> (a) Vẽ <span class=\"math inline\">\\(f(x)=2x-3\\sqrt x\\)</span>.</p>\n<p>(b) Từ đồ thị ở (a), phác họa nguyên hàm <span class=\"math inline\">\\(F\\)</span> thỏa <span class=\"math inline\">\\(F(0)=1\\)</span>.</p>\n<p>(c) Dùng các quy tắc trong mục này tìm biểu thức <span class=\"math inline\">\\(F(x)\\)</span>.</p>\n<p>(d) Vẽ <span class=\"math inline\">\\(F\\)</span> từ biểu thức ở (c), rồi so sánh với hình phác họa ở (b).</p>"
+    },
+    {
+      "number": 63,
+      "content": "<p><strong>63–64.</strong></p>\n<p>Vẽ đồ thị <span class=\"math inline\">\\(f\\)</span> và dùng nó để phác họa nguyên hàm đi qua gốc tọa độ.</p><p><strong>63.</strong> <span class=\"math inline\">\\(\\displaystyle f(x)=\\frac{\\sin x}{1+x^2}\\)</span>,<span class=\"math inline\">\\(-2\\pi\\le x\\le2\\pi\\)</span>.</p>"
+    },
+    {
+      "number": 64,
+      "content": "<p><strong>63–64.</strong></p>\n<p>Vẽ đồ thị <span class=\"math inline\">\\(f\\)</span> và dùng nó để phác họa nguyên hàm đi qua gốc tọa độ.</p><p><strong>64.</strong> <span class=\"math inline\">\\(f(x)=\\sqrt{x^4-2x^2+2}-2\\)</span>,<span class=\"math inline\">\\(-3\\le x\\le3\\)</span>.</p>"
+    },
+    {
+      "number": 65,
+      "content": "<p><strong>65–70.</strong></p>\n<p>Chất điểm chuyển động với các dữ kiện sau. Tìm vị trí chất điểm.</p><p><strong>65.</strong> <span class=\"math inline\">\\(v(t)=2\\cos t+4\\sin t\\)</span>,<span class=\"math inline\">\\(s(0)=3\\)</span>.</p>"
+    },
+    {
+      "number": 66,
+      "content": "<p><strong>65–70.</strong></p>\n<p>Chất điểm chuyển động với các dữ kiện sau. Tìm vị trí chất điểm.</p><p><strong>66.</strong> <span class=\"math inline\">\\(v(t)=t^2-3\\sqrt t\\)</span>,<span class=\"math inline\">\\(s(4)=8\\)</span>.</p>"
+    },
+    {
+      "number": 67,
+      "content": "<p><strong>65–70.</strong></p>\n<p>Chất điểm chuyển động với các dữ kiện sau. Tìm vị trí chất điểm.</p><p><strong>67.</strong> <span class=\"math inline\">\\(a(t)=2t+1\\)</span>,<span class=\"math inline\">\\(s(0)=3\\)</span>,<span class=\"math inline\">\\(v(0)=-2\\)</span>.</p>"
+    },
+    {
+      "number": 68,
+      "content": "<p><strong>65–70.</strong></p>\n<p>Chất điểm chuyển động với các dữ kiện sau. Tìm vị trí chất điểm.</p><p><strong>68.</strong> <span class=\"math inline\">\\(a(t)=3\\cos t-2\\sin t\\)</span>,<span class=\"math inline\">\\(s(0)=0\\)</span>,<span class=\"math inline\">\\(v(0)=4\\)</span>.</p>"
+    },
+    {
+      "number": 69,
+      "content": "<p><strong>65–70.</strong></p>\n<p>Chất điểm chuyển động với các dữ kiện sau. Tìm vị trí chất điểm.</p><p><strong>69.</strong> <span class=\"math inline\">\\(a(t)=\\sin t-\\cos t\\)</span>,<span class=\"math inline\">\\(s(0)=0\\)</span>,<span class=\"math inline\">\\(s(\\pi)=6\\)</span>.</p>"
+    },
+    {
+      "number": 70,
+      "content": "<p><strong>65–70.</strong></p>\n<p>Chất điểm chuyển động với các dữ kiện sau. Tìm vị trí chất điểm.</p><p><strong>70.</strong> <span class=\"math inline\">\\(a(t)=t^2-4t+6\\)</span>,<span class=\"math inline\">\\(s(0)=0\\)</span>,<span class=\"math inline\">\\(s(1)=20\\)</span>.</p>"
+    },
+    {
+      "number": 71,
+      "content": "<p><strong>71.</strong> Thả một hòn đá từ đài quan sát trên cao (Space Deck) của tháp CN, cao 450 m so với mặt đất.</p>\n<p>(a) Tìm độ cao của đá so với mặt đất tại thời điểm <span class=\"math inline\">\\(t\\)</span>.</p>\n<p>(b) Đá mất bao lâu để chạm đất?</p>\n<p>(c) Vận tốc khi chạm đất bằng bao nhiêu?</p>\n<p>(d) Nếu ném đá xuống với tốc độ 5 m/s, mất bao lâu để chạm đất?</p>"
+    },
+    {
+      "number": 72,
+      "content": "<p><strong>72.</strong> Chứng minh với chuyển động thẳng có gia tốc không đổi <span class=\"math inline\">\\(a\\)</span>, vận tốc ban đầu <span class=\"math inline\">\\(v_0\\)</span>, độ dời ban đầu <span class=\"math inline\">\\(s_0\\)</span>, độ dời sau thời gian <span class=\"math inline\">\\(t\\)</span> là <span class=\"math inline\">\\(s=\\frac12at^2+v_0t+s_0\\)</span>.</p>"
+    },
+    {
+      "number": 73,
+      "content": "<p><strong>73.</strong> Một vật được phóng lên với vận tốc ban đầu <span class=\"math inline\">\\(v_0\\)</span> m/s từ vị trí cao <span class=\"math inline\">\\(s_0\\)</span> mét so với mặt đất. Chứng minh <span class=\"math display\">\\[[v(t)]^2=v_0^2-19{,}6[s(t)-s_0].\\]</span></p>"
+    },
+    {
+      "number": 74,
+      "content": "<p><strong>74.</strong> Hai quả bóng được ném lên từ mép vách đá ở Ví dụ 7. Quả thứ nhất có tốc độ 48 ft/s; quả thứ hai được ném sau một giây với tốc độ 24 ft/s. Hai quả bóng có bao giờ đi ngang qua nhau không?</p><p><strong>Dữ kiện tham chiếu — Ví dụ 7.</strong> Mép vách đá cao 432 ft so với mặt đất; lấy chiều dương hướng lên và gia tốc trọng trường bằng −32 ft/s².</p>"
+    },
+    {
+      "number": 75,
+      "content": "<p><strong>75.</strong> Hòn đá được thả từ vách đá, chạm đất với tốc độ 120 ft/s. Vách đá cao bao nhiêu?</p>"
+    },
+    {
+      "number": 76,
+      "content": "<p><strong>76.</strong> Người nhảy cầu có khối lượng <span class=\"math inline\">\\(m\\)</span> đứng ở đầu ván dài <span class=\"math inline\">\\(L\\)</span>, khối lượng trên đơn vị chiều dài <span class=\"math inline\">\\(\\rho\\)</span>. Ván có dạng <span class=\"math inline\">\\(y=f(x)\\)</span>, với <span class=\"math display\">\\[EIy''=mg(L-x)+\\frac12\\rho g(L-x)^2,\\]</span> trong đó <span class=\"math inline\">\\(E,I&gt;0\\)</span> là các hằng số phụ thuộc vật liệu ván, còn <span class=\"math inline\">\\(g&lt;0\\)</span> là gia tốc trọng trường.</p>\n<p>(a) Tìm biểu thức mô tả hình dạng đường cong.</p>\n<p>(b) Dùng <span class=\"math inline\">\\(f(L)\\)</span> ước lượng độ võng xuống dưới phương ngang ở đầu ván.</p>\n<div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-4-9-4ae26d66/ex76.png\" alt=\"image\"><br>\nHình cho Bài tập 76.</p>\n</div>"
+    },
+    {
+      "number": 77,
+      "content": "<p><strong>77.</strong> Công ty ước lượng chi phí biên, tính bằng USD/sản phẩm, khi sản xuất <span class=\"math inline\">\\(x\\)</span> sản phẩm là <span class=\"math inline\">\\(1{,}92-0{,}002x\\)</span>. Chi phí sản xuất một sản phẩm là 562 USD. Tìm chi phí sản xuất 100 sản phẩm.</p>"
+    },
+    {
+      "number": 78,
+      "content": "<p><strong>78.</strong> Thanh dài 1 m có khối lượng trên đơn vị chiều dài <span class=\"math inline\">\\(\\rho(x)=1/\\sqrt x\\)</span> g/cm, trong đó <span class=\"math inline\">\\(x\\)</span> tính bằng cm từ một đầu thanh. Tìm khối lượng thanh.</p>"
+    },
+    {
+      "number": 79,
+      "content": "<p><strong>79.</strong> Giọt mưa lớn dần khi rơi, diện tích bề mặt và lực cản vì thế tăng. Vận tốc ban đầu hướng xuống là 10 m/s, gia tốc hướng xuống là <span class=\"math display\">\\[a=\\begin{cases}9-0{,}9t,&amp;0\\le t\\le10,\\\\0,&amp;t&gt;10.\\end{cases}\\]</span> Nếu giọt mưa hình thành ở độ cao 500 m, nó mất bao lâu để rơi xuống đất?</p>"
+    },
+    {
+      "number": 80,
+      "content": "<p><strong>80.</strong> Ô tô đang chạy 50 mi/h thì phanh hết mức, tạo độ giảm tốc không đổi 22 ft/s<span class=\"math inline\">\\(^2\\)</span>. Xe đi thêm bao xa trước khi dừng?</p>"
+    },
+    {
+      "number": 81,
+      "content": "<p><strong>81.</strong> Cần gia tốc không đổi bằng bao nhiêu để tăng tốc ô tô từ 30 mi/h lên 50 mi/h trong 5 giây?</p>"
+    },
+    {
+      "number": 82,
+      "content": "<p><strong>82.</strong> Ô tô phanh với độ giảm tốc không đổi 16 ft/s<span class=\"math inline\">\\(^2\\)</span>, để lại vết trượt dài 200 ft trước khi dừng. Tốc độ lúc bắt đầu phanh là bao nhiêu?</p>"
+    },
+    {
+      "number": 83,
+      "content": "<p><strong>83.</strong> Xe chạy 100 km/h, người lái thấy tai nạn cách 80 m phía trước và đạp phanh gấp. Cần độ giảm tốc không đổi bao nhiêu để dừng kịp, tránh va chạm liên hoàn?</p>"
+    },
+    {
+      "number": 84,
+      "content": "<p><strong>84.</strong> Tên lửa mô hình được phóng thẳng đứng từ trạng thái nghỉ. Trong ba giây đầu, gia tốc <span class=\"math inline\">\\(a(t)=60t\\)</span>; sau đó hết nhiên liệu và tên lửa trở thành vật rơi tự do. Mười bốn giây sau, dù mở và tốc độ rơi giảm tuyến tính trong 5 giây, đến khi vận tốc bằng <span class=\"math inline\">\\(-18\\)</span> ft/s. Sau đó tên lửa tiếp tục hạ xuống với vận tốc này.</p>\n<p>(a) Xác định hàm vị trí <span class=\"math inline\">\\(s\\)</span>, vận tốc <span class=\"math inline\">\\(v\\)</span> cho mọi thời điểm <span class=\"math inline\">\\(t\\)</span>. Phác họa đồ thị <span class=\"math inline\">\\(s,v\\)</span>.</p>\n<p>(b) Tên lửa đạt độ cao lớn nhất lúc nào, và độ cao ấy là bao nhiêu?</p>\n<p>(c) Tên lửa chạm đất lúc nào?</p>"
+    },
+    {
+      "number": 85,
+      "content": "<p><strong>85.</strong> Một tàu cao tốc tăng tốc và giảm tốc với độ lớn 2,4 ft/s<span class=\"math inline\">\\(^2\\)</span>. Tốc độ hành trình lớn nhất là 180 mi/h.</p>\n<p>(a) Quãng đường lớn nhất tàu đi được nếu tăng tốc từ nghỉ đến tốc độ hành trình rồi chạy ở tốc độ đó trong 20 phút là bao nhiêu?</p>\n<p>(b) Giả sử tàu xuất phát từ nghỉ và phải dừng hoàn toàn sau 20 phút. Quãng đường lớn nhất đi được là bao nhiêu?</p>\n<p>(c) Tìm thời gian ngắn nhất tàu đi giữa hai ga liên tiếp cách nhau 60 dặm.</p>\n<p>(d) Chuyến đi giữa hai ga mất 37,5 phút. Hai ga cách nhau bao xa?</p>"
+    }
+  ]
+}

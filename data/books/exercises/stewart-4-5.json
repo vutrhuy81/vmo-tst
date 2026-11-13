@@ -1,0 +1,328 @@
+{
+  "bookKey": "stewart-9",
+  "sectionKey": "4-5",
+  "heading": "4.5. Bài tập",
+  "sourceSha256": "b2061f435a93a6117835675a3686c31c46b7da58de0349c25c0881af1931ee8a",
+  "exercises": [
+    {
+      "number": 1,
+      "content": "<p><strong>1–54.</strong></p>\n<p>Dùng các hướng dẫn trong mục này để phác họa đường cong.</p><p><strong>1.</strong> <span class=\"math inline\">\\(y=x^3+3x^2\\)</span>.</p>"
+    },
+    {
+      "number": 2,
+      "content": "<p><strong>1–54.</strong></p>\n<p>Dùng các hướng dẫn trong mục này để phác họa đường cong.</p><p><strong>2.</strong> <span class=\"math inline\">\\(y=2x^3-12x^2+18x\\)</span>.</p>"
+    },
+    {
+      "number": 3,
+      "content": "<p><strong>1–54.</strong></p>\n<p>Dùng các hướng dẫn trong mục này để phác họa đường cong.</p><p><strong>3.</strong> <span class=\"math inline\">\\(y=x^4-4x\\)</span>.</p>"
+    },
+    {
+      "number": 4,
+      "content": "<p><strong>1–54.</strong></p>\n<p>Dùng các hướng dẫn trong mục này để phác họa đường cong.</p><p><strong>4.</strong> <span class=\"math inline\">\\(y=x^4-8x^2+8\\)</span>.</p>"
+    },
+    {
+      "number": 5,
+      "content": "<p><strong>1–54.</strong></p>\n<p>Dùng các hướng dẫn trong mục này để phác họa đường cong.</p><p><strong>5.</strong> <span class=\"math inline\">\\(y=x(x-4)^3\\)</span>.</p>"
+    },
+    {
+      "number": 6,
+      "content": "<p><strong>1–54.</strong></p>\n<p>Dùng các hướng dẫn trong mục này để phác họa đường cong.</p><p><strong>6.</strong> <span class=\"math inline\">\\(y=x^5-5x\\)</span>.</p>"
+    },
+    {
+      "number": 7,
+      "content": "<p><strong>1–54.</strong></p>\n<p>Dùng các hướng dẫn trong mục này để phác họa đường cong.</p><p><strong>7.</strong> <span class=\"math inline\">\\(y=\\frac15x^5-\\frac83x^3+16x\\)</span>.</p>"
+    },
+    {
+      "number": 8,
+      "content": "<p><strong>1–54.</strong></p>\n<p>Dùng các hướng dẫn trong mục này để phác họa đường cong.</p><p><strong>8.</strong> <span class=\"math inline\">\\(y=(4-x^2)^5\\)</span>.</p>"
+    },
+    {
+      "number": 9,
+      "content": "<p><strong>1–54.</strong></p>\n<p>Dùng các hướng dẫn trong mục này để phác họa đường cong.</p><p><strong>9.</strong> <span class=\"math inline\">\\(y=\\dfrac{2x+3}{x+2}\\)</span>.</p>"
+    },
+    {
+      "number": 10,
+      "content": "<p><strong>1–54.</strong></p>\n<p>Dùng các hướng dẫn trong mục này để phác họa đường cong.</p><p><strong>10.</strong> <span class=\"math inline\">\\(y=\\dfrac{x^2+5x}{25-x^2}\\)</span>.</p>"
+    },
+    {
+      "number": 11,
+      "content": "<p><strong>1–54.</strong></p>\n<p>Dùng các hướng dẫn trong mục này để phác họa đường cong.</p><p><strong>11.</strong> <span class=\"math inline\">\\(y=\\dfrac{x-x^2}{2-3x+x^2}\\)</span>.</p>"
+    },
+    {
+      "number": 12,
+      "content": "<p><strong>1–54.</strong></p>\n<p>Dùng các hướng dẫn trong mục này để phác họa đường cong.</p><p><strong>12.</strong> <span class=\"math inline\">\\(y=1+\\dfrac1x+\\dfrac1{x^2}\\)</span>.</p>"
+    },
+    {
+      "number": 13,
+      "content": "<p><strong>1–54.</strong></p>\n<p>Dùng các hướng dẫn trong mục này để phác họa đường cong.</p><p><strong>13.</strong> <span class=\"math inline\">\\(y=\\dfrac{x}{x^2-4}\\)</span>.</p>"
+    },
+    {
+      "number": 14,
+      "content": "<p><strong>1–54.</strong></p>\n<p>Dùng các hướng dẫn trong mục này để phác họa đường cong.</p><p><strong>14.</strong> <span class=\"math inline\">\\(y=\\dfrac1{x^2-4}\\)</span>.</p>"
+    },
+    {
+      "number": 15,
+      "content": "<p><strong>1–54.</strong></p>\n<p>Dùng các hướng dẫn trong mục này để phác họa đường cong.</p><p><strong>15.</strong> <span class=\"math inline\">\\(y=\\dfrac{x^2}{x^2+3}\\)</span>.</p>"
+    },
+    {
+      "number": 16,
+      "content": "<p><strong>1–54.</strong></p>\n<p>Dùng các hướng dẫn trong mục này để phác họa đường cong.</p><p><strong>16.</strong> <span class=\"math inline\">\\(y=\\dfrac{(x-1)^2}{x^2+1}\\)</span>.</p>"
+    },
+    {
+      "number": 17,
+      "content": "<p><strong>1–54.</strong></p>\n<p>Dùng các hướng dẫn trong mục này để phác họa đường cong.</p><p><strong>17.</strong> <span class=\"math inline\">\\(y=\\dfrac{x-1}{x^2}\\)</span>.</p>"
+    },
+    {
+      "number": 18,
+      "content": "<p><strong>1–54.</strong></p>\n<p>Dùng các hướng dẫn trong mục này để phác họa đường cong.</p><p><strong>18.</strong> <span class=\"math inline\">\\(y=\\dfrac{x}{x^3-1}\\)</span>.</p>"
+    },
+    {
+      "number": 19,
+      "content": "<p><strong>1–54.</strong></p>\n<p>Dùng các hướng dẫn trong mục này để phác họa đường cong.</p><p><strong>19.</strong> <span class=\"math inline\">\\(y=\\dfrac{x^3}{x^3+1}\\)</span>.</p>"
+    },
+    {
+      "number": 20,
+      "content": "<p><strong>1–54.</strong></p>\n<p>Dùng các hướng dẫn trong mục này để phác họa đường cong.</p><p><strong>20.</strong> <span class=\"math inline\">\\(y=\\dfrac{x^3}{x-2}\\)</span>.</p>"
+    },
+    {
+      "number": 21,
+      "content": "<p><strong>1–54.</strong></p>\n<p>Dùng các hướng dẫn trong mục này để phác họa đường cong.</p><p><strong>21.</strong> <span class=\"math inline\">\\(y=(x-3)\\sqrt x\\)</span>.</p>"
+    },
+    {
+      "number": 22,
+      "content": "<p><strong>1–54.</strong></p>\n<p>Dùng các hướng dẫn trong mục này để phác họa đường cong.</p><p><strong>22.</strong> <span class=\"math inline\">\\(y=(x-4)\\sqrt[3]x\\)</span>.</p>"
+    },
+    {
+      "number": 23,
+      "content": "<p><strong>1–54.</strong></p>\n<p>Dùng các hướng dẫn trong mục này để phác họa đường cong.</p><p><strong>23.</strong> <span class=\"math inline\">\\(y=\\sqrt{x^2+x-2}\\)</span>.</p>"
+    },
+    {
+      "number": 24,
+      "content": "<p><strong>1–54.</strong></p>\n<p>Dùng các hướng dẫn trong mục này để phác họa đường cong.</p><p><strong>24.</strong> <span class=\"math inline\">\\(y=\\sqrt{x^2+x}-x\\)</span>.</p>"
+    },
+    {
+      "number": 25,
+      "content": "<p><strong>1–54.</strong></p>\n<p>Dùng các hướng dẫn trong mục này để phác họa đường cong.</p><p><strong>25.</strong> <span class=\"math inline\">\\(y=\\dfrac{x}{\\sqrt{x^2+1}}\\)</span>.</p>"
+    },
+    {
+      "number": 26,
+      "content": "<p><strong>1–54.</strong></p>\n<p>Dùng các hướng dẫn trong mục này để phác họa đường cong.</p><p><strong>26.</strong> <span class=\"math inline\">\\(y=x\\sqrt{2-x^2}\\)</span>.</p>"
+    },
+    {
+      "number": 27,
+      "content": "<p><strong>1–54.</strong></p>\n<p>Dùng các hướng dẫn trong mục này để phác họa đường cong.</p><p><strong>27.</strong> <span class=\"math inline\">\\(y=\\dfrac{\\sqrt{1-x^2}}x\\)</span>.</p>"
+    },
+    {
+      "number": 28,
+      "content": "<p><strong>1–54.</strong></p>\n<p>Dùng các hướng dẫn trong mục này để phác họa đường cong.</p><p><strong>28.</strong> <span class=\"math inline\">\\(y=\\dfrac{x}{\\sqrt{x^2-1}}\\)</span>.</p>"
+    },
+    {
+      "number": 29,
+      "content": "<p><strong>1–54.</strong></p>\n<p>Dùng các hướng dẫn trong mục này để phác họa đường cong.</p><p><strong>29.</strong> <span class=\"math inline\">\\(y=x-3x^{1/3}\\)</span>.</p>"
+    },
+    {
+      "number": 30,
+      "content": "<p><strong>1–54.</strong></p>\n<p>Dùng các hướng dẫn trong mục này để phác họa đường cong.</p><p><strong>30.</strong> <span class=\"math inline\">\\(y=x^{5/3}-5x^{2/3}\\)</span>.</p>"
+    },
+    {
+      "number": 31,
+      "content": "<p><strong>1–54.</strong></p>\n<p>Dùng các hướng dẫn trong mục này để phác họa đường cong.</p><p><strong>31.</strong> <span class=\"math inline\">\\(y=\\sqrt[3]{x^2-1}\\)</span>.</p>"
+    },
+    {
+      "number": 32,
+      "content": "<p><strong>1–54.</strong></p>\n<p>Dùng các hướng dẫn trong mục này để phác họa đường cong.</p><p><strong>32.</strong> <span class=\"math inline\">\\(y=\\sqrt[3]{x^3+1}\\)</span>.</p>"
+    },
+    {
+      "number": 33,
+      "content": "<p><strong>1–54.</strong></p>\n<p>Dùng các hướng dẫn trong mục này để phác họa đường cong.</p><p><strong>33.</strong> <span class=\"math inline\">\\(y=\\sin^3x\\)</span>.</p>"
+    },
+    {
+      "number": 34,
+      "content": "<p><strong>1–54.</strong></p>\n<p>Dùng các hướng dẫn trong mục này để phác họa đường cong.</p><p><strong>34.</strong> <span class=\"math inline\">\\(y=x+\\cos x\\)</span>.</p>"
+    },
+    {
+      "number": 35,
+      "content": "<p><strong>1–54.</strong></p>\n<p>Dùng các hướng dẫn trong mục này để phác họa đường cong.</p><p><strong>35.</strong> <span class=\"math inline\">\\(y=x\\tan x,\\quad-\\pi/2&lt;x&lt;\\pi/2\\)</span>.</p>"
+    },
+    {
+      "number": 36,
+      "content": "<p><strong>1–54.</strong></p>\n<p>Dùng các hướng dẫn trong mục này để phác họa đường cong.</p><p><strong>36.</strong> <span class=\"math inline\">\\(y=2x-\\tan x,\\quad-\\pi/2&lt;x&lt;\\pi/2\\)</span>.</p>"
+    },
+    {
+      "number": 37,
+      "content": "<p><strong>1–54.</strong></p>\n<p>Dùng các hướng dẫn trong mục này để phác họa đường cong.</p><p><strong>37.</strong> <span class=\"math inline\">\\(y=\\sin x+\\sqrt3\\cos x,\\quad-2\\pi\\le x\\le2\\pi\\)</span>.</p>"
+    },
+    {
+      "number": 38,
+      "content": "<p><strong>1–54.</strong></p>\n<p>Dùng các hướng dẫn trong mục này để phác họa đường cong.</p><p><strong>38.</strong> <span class=\"math inline\">\\(y=\\csc x-2\\sin x,\\quad0&lt;x&lt;\\pi\\)</span>.</p>"
+    },
+    {
+      "number": 39,
+      "content": "<p><strong>1–54.</strong></p>\n<p>Dùng các hướng dẫn trong mục này để phác họa đường cong.</p><p><strong>39.</strong> <span class=\"math inline\">\\(y=\\dfrac{\\sin x}{1+\\cos x}\\)</span>.</p>"
+    },
+    {
+      "number": 40,
+      "content": "<p><strong>1–54.</strong></p>\n<p>Dùng các hướng dẫn trong mục này để phác họa đường cong.</p><p><strong>40.</strong> <span class=\"math inline\">\\(y=\\dfrac{\\sin x}{2+\\cos x}\\)</span>.</p>"
+    },
+    {
+      "number": 41,
+      "content": "<p><strong>1–54.</strong></p>\n<p>Dùng các hướng dẫn trong mục này để phác họa đường cong.</p><p><strong>41.</strong> <span class=\"math inline\">\\(y=\\arctan(e^x)\\)</span>.</p>"
+    },
+    {
+      "number": 42,
+      "content": "<p><strong>1–54.</strong></p>\n<p>Dùng các hướng dẫn trong mục này để phác họa đường cong.</p><p><strong>42.</strong> <span class=\"math inline\">\\(y=(1-x)e^x\\)</span>.</p>"
+    },
+    {
+      "number": 43,
+      "content": "<p><strong>1–54.</strong></p>\n<p>Dùng các hướng dẫn trong mục này để phác họa đường cong.</p><p><strong>43.</strong> <span class=\"math inline\">\\(y=1/(1+e^{-x})\\)</span>.</p>"
+    },
+    {
+      "number": 44,
+      "content": "<p><strong>1–54.</strong></p>\n<p>Dùng các hướng dẫn trong mục này để phác họa đường cong.</p><p><strong>44.</strong> <span class=\"math inline\">\\(y=e^{-x}\\sin x,\\quad0\\le x\\le2\\pi\\)</span>.</p>"
+    },
+    {
+      "number": 45,
+      "content": "<p><strong>1–54.</strong></p>\n<p>Dùng các hướng dẫn trong mục này để phác họa đường cong.</p><p><strong>45.</strong> <span class=\"math inline\">\\(y=\\dfrac1x+\\ln x\\)</span>.</p>"
+    },
+    {
+      "number": 46,
+      "content": "<p><strong>1–54.</strong></p>\n<p>Dùng các hướng dẫn trong mục này để phác họa đường cong.</p><p><strong>46.</strong> <span class=\"math inline\">\\(y=x(\\ln x)^2\\)</span>.</p>"
+    },
+    {
+      "number": 47,
+      "content": "<p><strong>1–54.</strong></p>\n<p>Dùng các hướng dẫn trong mục này để phác họa đường cong.</p><p><strong>47.</strong> <span class=\"math inline\">\\(y=(1+e^x)^{-2}\\)</span>.</p>"
+    },
+    {
+      "number": 48,
+      "content": "<p><strong>1–54.</strong></p>\n<p>Dùng các hướng dẫn trong mục này để phác họa đường cong.</p><p><strong>48.</strong> <span class=\"math inline\">\\(y=e^x/x^2\\)</span>.</p>"
+    },
+    {
+      "number": 49,
+      "content": "<p><strong>1–54.</strong></p>\n<p>Dùng các hướng dẫn trong mục này để phác họa đường cong.</p><p><strong>49.</strong> <span class=\"math inline\">\\(y=\\ln(\\sin x)\\)</span>.</p>"
+    },
+    {
+      "number": 50,
+      "content": "<p><strong>1–54.</strong></p>\n<p>Dùng các hướng dẫn trong mục này để phác họa đường cong.</p><p><strong>50.</strong> <span class=\"math inline\">\\(y=\\ln(1+x^3)\\)</span>.</p>"
+    },
+    {
+      "number": 51,
+      "content": "<p><strong>1–54.</strong></p>\n<p>Dùng các hướng dẫn trong mục này để phác họa đường cong.</p><p><strong>51.</strong> <span class=\"math inline\">\\(y=xe^{-1/x}\\)</span>.</p>"
+    },
+    {
+      "number": 52,
+      "content": "<p><strong>1–54.</strong></p>\n<p>Dùng các hướng dẫn trong mục này để phác họa đường cong.</p><p><strong>52.</strong> <span class=\"math inline\">\\(y=\\dfrac{\\ln x}{x^2}\\)</span>.</p>"
+    },
+    {
+      "number": 53,
+      "content": "<p><strong>1–54.</strong></p>\n<p>Dùng các hướng dẫn trong mục này để phác họa đường cong.</p><p><strong>53.</strong> <span class=\"math inline\">\\(y=e^{\\arctan x}\\)</span>.</p>"
+    },
+    {
+      "number": 54,
+      "content": "<p><strong>1–54.</strong></p>\n<p>Dùng các hướng dẫn trong mục này để phác họa đường cong.</p><p><strong>54.</strong> <span class=\"math inline\">\\(y=\\arctan\\left(\\dfrac{x-1}{x+1}\\right)\\)</span>.</p>"
+    },
+    {
+      "number": 55,
+      "content": "<p><strong>55–58.</strong></p>\n<p>Cho đồ thị của hàm số <span class=\"math inline\">\\(f\\)</span>. (Các đường nét đứt biểu thị tiệm cận ngang.) Với mỗi hàm <span class=\"math inline\">\\(g\\)</span> đã cho, hãy tìm:</p>\n<p>(a) Miền xác định của <span class=\"math inline\">\\(g\\)</span> và <span class=\"math inline\">\\(g'\\)</span>.</p>\n<p>(b) Các số tới hạn của <span class=\"math inline\">\\(g\\)</span>.</p>\n<p>(c) Giá trị xấp xỉ của <span class=\"math inline\">\\(g'(6)\\)</span>.</p>\n<p>(d) Mọi tiệm cận đứng và ngang của <span class=\"math inline\">\\(g\\)</span>.</p>\n<div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-4-5-b2061f43/ex55_58.png\" alt=\"image\"><br>\nĐồ thị dùng cho Bài tập 55–58.</p>\n</div><p><strong>55.</strong> <span class=\"math inline\">\\(g(x)=\\sqrt{f(x)}\\)</span>.</p>"
+    },
+    {
+      "number": 56,
+      "content": "<p><strong>55–58.</strong></p>\n<p>Cho đồ thị của hàm số <span class=\"math inline\">\\(f\\)</span>. (Các đường nét đứt biểu thị tiệm cận ngang.) Với mỗi hàm <span class=\"math inline\">\\(g\\)</span> đã cho, hãy tìm:</p>\n<p>(a) Miền xác định của <span class=\"math inline\">\\(g\\)</span> và <span class=\"math inline\">\\(g'\\)</span>.</p>\n<p>(b) Các số tới hạn của <span class=\"math inline\">\\(g\\)</span>.</p>\n<p>(c) Giá trị xấp xỉ của <span class=\"math inline\">\\(g'(6)\\)</span>.</p>\n<p>(d) Mọi tiệm cận đứng và ngang của <span class=\"math inline\">\\(g\\)</span>.</p>\n<div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-4-5-b2061f43/ex55_58.png\" alt=\"image\"><br>\nĐồ thị dùng cho Bài tập 55–58.</p>\n</div><p><strong>56.</strong> <span class=\"math inline\">\\(g(x)=\\sqrt[3]{f(x)}\\)</span>.</p>"
+    },
+    {
+      "number": 57,
+      "content": "<p><strong>55–58.</strong></p>\n<p>Cho đồ thị của hàm số <span class=\"math inline\">\\(f\\)</span>. (Các đường nét đứt biểu thị tiệm cận ngang.) Với mỗi hàm <span class=\"math inline\">\\(g\\)</span> đã cho, hãy tìm:</p>\n<p>(a) Miền xác định của <span class=\"math inline\">\\(g\\)</span> và <span class=\"math inline\">\\(g'\\)</span>.</p>\n<p>(b) Các số tới hạn của <span class=\"math inline\">\\(g\\)</span>.</p>\n<p>(c) Giá trị xấp xỉ của <span class=\"math inline\">\\(g'(6)\\)</span>.</p>\n<p>(d) Mọi tiệm cận đứng và ngang của <span class=\"math inline\">\\(g\\)</span>.</p>\n<div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-4-5-b2061f43/ex55_58.png\" alt=\"image\"><br>\nĐồ thị dùng cho Bài tập 55–58.</p>\n</div><p><strong>57.</strong> <span class=\"math inline\">\\(g(x)=|f(x)|\\)</span>.</p>"
+    },
+    {
+      "number": 58,
+      "content": "<p><strong>55–58.</strong></p>\n<p>Cho đồ thị của hàm số <span class=\"math inline\">\\(f\\)</span>. (Các đường nét đứt biểu thị tiệm cận ngang.) Với mỗi hàm <span class=\"math inline\">\\(g\\)</span> đã cho, hãy tìm:</p>\n<p>(a) Miền xác định của <span class=\"math inline\">\\(g\\)</span> và <span class=\"math inline\">\\(g'\\)</span>.</p>\n<p>(b) Các số tới hạn của <span class=\"math inline\">\\(g\\)</span>.</p>\n<p>(c) Giá trị xấp xỉ của <span class=\"math inline\">\\(g'(6)\\)</span>.</p>\n<p>(d) Mọi tiệm cận đứng và ngang của <span class=\"math inline\">\\(g\\)</span>.</p>\n<div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-4-5-b2061f43/ex55_58.png\" alt=\"image\"><br>\nĐồ thị dùng cho Bài tập 55–58.</p>\n</div><p><strong>58.</strong> <span class=\"math inline\">\\(g(x)=1/f(x)\\)</span>.</p>"
+    },
+    {
+      "number": 59,
+      "content": "<p><strong>59.</strong> Trong thuyết tương đối, khối lượng của một hạt là <span class=\"math display\">\\[m=\\frac{m_0}{\\sqrt{1-v^2/c^2}},\\]</span> trong đó <span class=\"math inline\">\\(m_0\\)</span> là khối lượng nghỉ, <span class=\"math inline\">\\(m\\)</span> là khối lượng khi hạt chuyển động với tốc độ <span class=\"math inline\">\\(v\\)</span> đối với người quan sát, <span class=\"math inline\">\\(c\\)</span> là tốc độ ánh sáng. Phác họa đồ thị <span class=\"math inline\">\\(m\\)</span> theo <span class=\"math inline\">\\(v\\)</span>.</p>"
+    },
+    {
+      "number": 60,
+      "content": "<p><strong>60.</strong> Trong thuyết tương đối, năng lượng của một hạt là <span class=\"math display\">\\[E=\\sqrt{m_0^2c^4+h^2c^2/\\lambda^2},\\]</span> trong đó <span class=\"math inline\">\\(m_0\\)</span> là khối lượng nghỉ, <span class=\"math inline\">\\(\\lambda\\)</span> là bước sóng của hạt và <span class=\"math inline\">\\(h\\)</span> là hằng số Planck. Phác họa đồ thị <span class=\"math inline\">\\(E\\)</span> theo <span class=\"math inline\">\\(\\lambda\\)</span>. Đồ thị cho biết gì về năng lượng?</p>"
+    },
+    {
+      "number": 61,
+      "content": "<p><strong>61.</strong> Mô hình lan truyền tin đồn được cho bởi <span class=\"math display\">\\[p(t)=\\frac1{1+ae^{-kt}},\\]</span> trong đó <span class=\"math inline\">\\(p(t)\\)</span> là tỉ lệ dân số biết tin đồn tại thời điểm <span class=\"math inline\">\\(t\\)</span>, <span class=\"math inline\">\\(a,k\\)</span> là hằng số dương.</p>\n<p>(a) Khi nào một nửa dân số đã nghe tin đồn?</p>\n<p>(b) Khi nào tốc độ lan truyền tin đồn lớn nhất?</p>\n<p>(c) Phác họa đồ thị <span class=\"math inline\">\\(p\\)</span>.</p>"
+    },
+    {
+      "number": 62,
+      "content": "<p><strong>62.</strong> Mô hình nồng độ tại thời điểm <span class=\"math inline\">\\(t\\)</span> của thuốc được tiêm vào máu là <span class=\"math display\">\\[C(t)=K(e^{-at}-e^{-bt}),\\]</span> trong đó <span class=\"math inline\">\\(a,b,K\\)</span> là các hằng số dương và <span class=\"math inline\">\\(b&gt;a\\)</span>. Phác họa đồ thị hàm nồng độ. Đồ thị cho biết nồng độ thay đổi theo thời gian như thế nào?</p>"
+    },
+    {
+      "number": 63,
+      "content": "<p><strong>63.</strong> Hình vẽ biểu diễn một dầm dài <span class=\"math inline\">\\(L\\)</span> ngàm vào các tường bê tông. Nếu tải không đổi <span class=\"math inline\">\\(W\\)</span> được phân bố đều dọc chiều dài, dầm có dạng đường đàn hồi <span class=\"math display\">\\[y=-\\frac W{24EI}x^4+\\frac{WL}{12EI}x^3-\\frac{WL^2}{24EI}x^2,\\]</span> trong đó <span class=\"math inline\">\\(E,I\\)</span> là hằng số dương. (<span class=\"math inline\">\\(E\\)</span> là môđun đàn hồi Young, <span class=\"math inline\">\\(I\\)</span> là mômen quán tính của mặt cắt ngang dầm.) Phác họa đồ thị đường đàn hồi.</p>\n<div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-4-5-b2061f43/ex63.png\" alt=\"image\"><br>\nHình cho Bài tập 63.</p>\n</div>"
+    },
+    {
+      "number": 64,
+      "content": "<p><strong>64.</strong> Định luật Coulomb khẳng định lực hút giữa hai hạt mang điện tỉ lệ thuận với tích các điện tích và tỉ lệ nghịch với bình phương khoảng cách giữa chúng. Hình vẽ cho các hạt điện tích <span class=\"math inline\">\\(+1\\)</span> tại vị trí 0 và 2 trên trục tọa độ, và hạt điện tích <span class=\"math inline\">\\(-1\\)</span> ở vị trí <span class=\"math inline\">\\(x\\)</span> giữa chúng. Theo định luật Coulomb, hợp lực tác dụng lên hạt ở giữa là <span class=\"math display\">\\[F(x)=-\\frac k{x^2}+\\frac k{(x-2)^2},\\qquad0&lt;x&lt;2,\\]</span> trong đó <span class=\"math inline\">\\(k\\)</span> là hằng số dương. Phác họa đồ thị hàm hợp lực. Đồ thị cho biết gì về lực?</p>\n<div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-4-5-b2061f43/ex64.png\" alt=\"image\"><br>\nHình cho Bài tập 64.</p>\n</div>"
+    },
+    {
+      "number": 65,
+      "content": "<p><strong>65–68.</strong></p>\n<p>Tìm phương trình tiệm cận xiên. Không vẽ đường cong.</p><p><strong>65.</strong> <span class=\"math inline\">\\(y=\\dfrac{x^2+1}{x+1}\\)</span>.</p>"
+    },
+    {
+      "number": 66,
+      "content": "<p><strong>65–68.</strong></p>\n<p>Tìm phương trình tiệm cận xiên. Không vẽ đường cong.</p><p><strong>66.</strong> <span class=\"math inline\">\\(y=\\dfrac{4x^3-10x^2-11x+1}{x^2-3x}\\)</span>.</p>"
+    },
+    {
+      "number": 67,
+      "content": "<p><strong>65–68.</strong></p>\n<p>Tìm phương trình tiệm cận xiên. Không vẽ đường cong.</p><p><strong>67.</strong> <span class=\"math inline\">\\(y=\\dfrac{2x^3-5x^2+3x}{x^2-x-2}\\)</span>.</p>"
+    },
+    {
+      "number": 68,
+      "content": "<p><strong>65–68.</strong></p>\n<p>Tìm phương trình tiệm cận xiên. Không vẽ đường cong.</p><p><strong>68.</strong> <span class=\"math inline\">\\(y=\\dfrac{-6x^4+2x^3+3}{2x^3-x}\\)</span>.</p>"
+    },
+    {
+      "number": 69,
+      "content": "<p><strong>69–74.</strong></p>\n<p>Dùng hướng dẫn trong mục này để phác họa đường cong. Ở bước D, tìm phương trình tiệm cận xiên.</p><p><strong>69.</strong> <span class=\"math inline\">\\(y=\\dfrac{x^2}{x-1}\\)</span>.</p>"
+    },
+    {
+      "number": 70,
+      "content": "<p><strong>69–74.</strong></p>\n<p>Dùng hướng dẫn trong mục này để phác họa đường cong. Ở bước D, tìm phương trình tiệm cận xiên.</p><p><strong>70.</strong> <span class=\"math inline\">\\(y=\\dfrac{1+5x-2x^2}{x-2}\\)</span>.</p>"
+    },
+    {
+      "number": 71,
+      "content": "<p><strong>69–74.</strong></p>\n<p>Dùng hướng dẫn trong mục này để phác họa đường cong. Ở bước D, tìm phương trình tiệm cận xiên.</p><p><strong>71.</strong> <span class=\"math inline\">\\(y=\\dfrac{x^3+4}{x^2}\\)</span>.</p>"
+    },
+    {
+      "number": 72,
+      "content": "<p><strong>69–74.</strong></p>\n<p>Dùng hướng dẫn trong mục này để phác họa đường cong. Ở bước D, tìm phương trình tiệm cận xiên.</p><p><strong>72.</strong> <span class=\"math inline\">\\(y=\\dfrac{x^3}{(x+1)^2}\\)</span>.</p>"
+    },
+    {
+      "number": 73,
+      "content": "<p><strong>69–74.</strong></p>\n<p>Dùng hướng dẫn trong mục này để phác họa đường cong. Ở bước D, tìm phương trình tiệm cận xiên.</p><p><strong>73.</strong> <span class=\"math inline\">\\(y=1+\\frac12x+e^{-x}\\)</span>.</p>"
+    },
+    {
+      "number": 74,
+      "content": "<p><strong>69–74.</strong></p>\n<p>Dùng hướng dẫn trong mục này để phác họa đường cong. Ở bước D, tìm phương trình tiệm cận xiên.</p><p><strong>74.</strong> <span class=\"math inline\">\\(y=1-x+e^{1+x/3}\\)</span>.</p>"
+    },
+    {
+      "number": 75,
+      "content": "<p><strong>75.</strong> Chứng minh đường cong <span class=\"math inline\">\\(y=x-\\arctan x\\)</span> có hai tiệm cận xiên: <span class=\"math inline\">\\(y=x+\\pi/2\\)</span> và <span class=\"math inline\">\\(y=x-\\pi/2\\)</span>. Dùng sự kiện này để hỗ trợ phác họa.</p>"
+    },
+    {
+      "number": 76,
+      "content": "<p><strong>76.</strong> Chứng minh đường cong <span class=\"math inline\">\\(y=\\sqrt{x^2+4x}\\)</span> có hai tiệm cận xiên: <span class=\"math inline\">\\(y=x+2\\)</span> và <span class=\"math inline\">\\(y=-x-2\\)</span>. Dùng sự kiện này để hỗ trợ phác họa.</p>"
+    },
+    {
+      "number": 77,
+      "content": "<p><strong>77.</strong> Chứng minh các đường thẳng <span class=\"math inline\">\\(y=(b/a)x\\)</span> và <span class=\"math inline\">\\(y=-(b/a)x\\)</span> là tiệm cận xiên của hyperbol <span class=\"math inline\">\\((x^2/a^2)-(y^2/b^2)=1\\)</span>.</p>"
+    },
+    {
+      "number": 78,
+      "content": "<p><strong>78.</strong> Cho <span class=\"math inline\">\\(f(x)=(x^3+1)/x\\)</span>. Chứng minh <span class=\"math display\">\\[\\lim_{x\\to\\pm\\infty}[f(x)-x^2]=0.\\]</span> Điều này cho thấy đồ thị <span class=\"math inline\">\\(f\\)</span> tiến gần đồ thị <span class=\"math inline\">\\(y=x^2\\)</span>; ta nói đường cong <span class=\"math inline\">\\(y=f(x)\\)</span> <em>tiệm cận với parabol</em> <span class=\"math inline\">\\(y=x^2\\)</span>. Dùng sự kiện này để hỗ trợ phác họa đồ thị <span class=\"math inline\">\\(f\\)</span>.</p>"
+    },
+    {
+      "number": 79,
+      "content": "<p><strong>79.</strong> Thảo luận tính chất tiệm cận của <span class=\"math inline\">\\(f(x)=(x^4+1)/x\\)</span> theo cách tương tự Bài tập 78. Sau đó dùng kết quả để hỗ trợ phác họa đồ thị <span class=\"math inline\">\\(f\\)</span>.</p><aside><p><strong>Nội dung tham chiếu — Bài tập 78.</strong></p><p><strong>78.</strong> Cho <span class=\"math inline\">\\(f(x)=(x^3+1)/x\\)</span>. Chứng minh <span class=\"math display\">\\[\\lim_{x\\to\\pm\\infty}[f(x)-x^2]=0.\\]</span> Điều này cho thấy đồ thị <span class=\"math inline\">\\(f\\)</span> tiến gần đồ thị <span class=\"math inline\">\\(y=x^2\\)</span>; ta nói đường cong <span class=\"math inline\">\\(y=f(x)\\)</span> <em>tiệm cận với parabol</em> <span class=\"math inline\">\\(y=x^2\\)</span>. Dùng sự kiện này để hỗ trợ phác họa đồ thị <span class=\"math inline\">\\(f\\)</span>.</p></aside>"
+    },
+    {
+      "number": 80,
+      "content": "<p><strong>80.</strong> Dùng tính chất tiệm cận của <span class=\"math inline\">\\(f(x)=\\sin x+e^{-x}\\)</span> để phác họa đồ thị mà không thực hiện quy trình khảo sát của mục này.</p>"
+    }
+  ]
+}

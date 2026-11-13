@@ -1,0 +1,343 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage{fontspec}\setmainfont{Latin Modern Roman}\setsansfont{DejaVu Sans}
+\usepackage{amsmath,amssymb,graphicx,geometry,enumitem,needspace,longtable,booktabs,fancyhdr,hyperref}
+\geometry{left=28mm,right=23mm,top=24mm,bottom=24mm}
+\hypersetup{unicode=true,colorlinks=true,linkcolor=black,urlcolor=blue,pdftitle={Giải tích §4.5 — Tổng hợp phương pháp khảo sát và vẽ đồ thị}}
+\setlength{\parindent}{1.2em}\setlength{\parskip}{4pt}\setlength{\headheight}{16pt}
+\pagestyle{fancy}\fancyhf{}\fancyhead[L]{\small Chương 4. Ứng dụng của đạo hàm}\fancyhead[R]{\small §4.5}\fancyfoot[C]{\thepage}
+\newcommand{\fig}[3][.68]{\begin{center}\begin{minipage}{\linewidth}\centering\includegraphics[width=#1\linewidth]{assets/#2.png}\\{\small #3}\end{minipage}\end{center}}
+\newcommand{\ex}[1]{\par\medskip\noindent\textbf{Ví dụ #1.}\ }
+\newcommand{\sol}{\par\nopagebreak[4]\noindent\textit{Lời giải.}\ }
+\newcommand{\bt}[1]{\par\smallskip\Needspace{5\baselineskip}\noindent\textbf{#1.}\ }
+\newcommand{\group}[1]{\par\medskip\noindent\textbf{#1}\par\nopagebreak[4]}
+\newcommand{\gint}[1]{\left[\!\left[#1\right]\!\right]}
+\allowdisplaybreaks[2]
+\DeclareMathOperator{\sech}{sech}
+\DeclareMathOperator{\csch}{csch}
+\DeclareMathOperator{\arccot}{arccot}
+\begin{document}
+\begin{center}{\Large\bfseries 4.5 — Tổng hợp phương pháp khảo sát và vẽ đồ thị}\end{center}
+\noindent\textit{Bản dịch tiếng Việt — Stewart, Clegg và Watson, Calculus: Early Transcendentals, ấn bản thứ 9. Phạm vi: §4.5, tr. 320–329.}
+
+Cho đến nay, ta đã xét riêng từng khía cạnh của việc phác họa đồ thị: miền xác định, tập giá trị và tính đối xứng ở Chương 1; giới hạn, tính liên tục và tiệm cận ở Chương 2; đạo hàm và tiếp tuyến ở Chương 2, 3; các giá trị cực trị, khoảng đồng biến và nghịch biến, độ lõm, điểm uốn và quy tắc l’Hospital trong chương này. Bây giờ, cần tổng hợp các thông tin ấy để vẽ đồ thị thể hiện những đặc trưng quan trọng của hàm số.
+
+Có thể bạn hỏi: Tại sao không dùng ngay máy tính cầm tay có chức năng đồ thị hoặc máy tính để vẽ? Vì sao cần phép tính vi phân?
+
+Đúng là công nghệ có thể tạo ra đồ thị rất chính xác. Nhưng ngay cả thiết bị vẽ đồ thị tốt nhất cũng cần được sử dụng một cách hiểu biết. Nếu chỉ dựa vào công nghệ, rất dễ nhận được đồ thị gây hiểu lầm hoặc bỏ sót chi tiết quan trọng. (Xem mục \textit{Graphing Calculators and Computers} tại www.StewartCalculus.com, đặc biệt Ví dụ 1, 3, 4, 5; xem thêm §4.6.) Phép tính vi phân giúp khám phá những đặc trưng đáng chú ý nhất của đồ thị và, trong nhiều trường hợp, tính \textit{chính xác} các điểm cực đại, cực tiểu và điểm uốn thay vì chỉ xấp xỉ.
+
+Chẳng hạn, Hình 1 biểu diễn $f(x)=8x^3-21x^2+18x+2$. Thoạt nhìn, hình có vẻ hợp lý: có dạng như đồ thị bậc ba $y=x^3$ và dường như không có điểm cực đại hoặc cực tiểu. Nhưng khi tính đạo hàm, ta thấy có cực đại tại $x=0{,}75$ và cực tiểu tại $x=1$. Phóng to phần này sẽ thấy tính chất ấy ở Hình 2. Không dùng vi phân, ta dễ bỏ qua nó.
+\fig[.43]{fig01}{Hình 1}
+\fig[.4]{fig02}{Hình 2}
+Trong mục sau, ta sẽ phối hợp phép tính vi phân với công nghệ để vẽ đồ thị. Ở mục này, ta vẽ bằng tay sau khi xem xét các thông tin dưới đây. Đồ thị do máy tạo ra có thể dùng để kiểm tra kết quả.
+
+\section*{Hướng dẫn khảo sát và phác họa đường cong}
+Danh mục sau hướng dẫn phác họa đường cong $y=f(x)$ bằng tay. Không phải mục nào cũng liên quan đến mọi hàm số. (Chẳng hạn, một đường cong có thể không có tiệm cận hoặc tính đối xứng.) Tuy vậy, các hướng dẫn cung cấp mọi thông tin cần thiết để thể hiện những đặc trưng quan trọng nhất.
+\group{A. Miền xác định}
+Thường nên bắt đầu bằng cách xác định miền $D$ của $f$, tức là tập các giá trị $x$ mà $f(x)$ được xác định.
+\group{B. Giao điểm với các trục tọa độ}
+Tung độ giao điểm với trục tung là $f(0)$, cho biết đường cong cắt trục tung ở đâu. Để tìm các giao điểm với trục hoành, đặt $y=0$ rồi giải theo $x$. (Có thể bỏ bước này nếu phương trình khó giải.)
+\group{C. Tính đối xứng}
+(i) Nếu $f(-x)=f(x)$ với mọi $x\in D$, tức phương trình đường cong không đổi khi thay $x$ bằng $-x$, thì $f$ là hàm chẵn và đường cong đối xứng qua trục tung (§1.1). Nhờ đó, công việc giảm một nửa: biết đồ thị với $x\ge0$ thì chỉ cần lấy đối xứng qua trục tung để được toàn bộ đồ thị [Hình 3(a)]. Ví dụ: $y=x^2$, $y=x^4$, $y=|x|$, $y=\cos x$.
+
+(ii) Nếu $f(-x)=-f(x)$ với mọi $x\in D$, thì $f$ là hàm lẻ và đường cong đối xứng qua gốc tọa độ. Biết hình dạng với $x\ge0$, ta cũng thu được toàn bộ đồ thị [quay $180^\circ$ quanh gốc tọa độ; Hình 3(b)]. Ví dụ đơn giản: $y=x$, $y=x^3$, $y=1/x$, $y=\sin x$.
+\fig[.45]{fig03}{Hình 3. (a) Hàm chẵn: đối xứng trục; (b) hàm lẻ: đối xứng quay.}
+(iii) Nếu $f(x+p)=f(x)$ với mọi $x\in D$, trong đó $p$ là hằng số dương, thì $f$ là hàm tuần hoàn; số $p$ nhỏ nhất như vậy gọi là chu kỳ. Chẳng hạn, $y=\sin x$ có chu kỳ $2\pi$, còn $y=\tan x$ có chu kỳ $\pi$. Biết đồ thị trên một khoảng độ dài $p$, ta dùng phép tịnh tiến để hình dung toàn bộ đồ thị (Hình 4).
+\fig[.94]{fig04}{Hình 4. Hàm tuần hoàn: đối xứng tịnh tiến. “period $p$”: chu kỳ $p$.}
+\group{D. Tiệm cận}
+(i) \textit{Tiệm cận ngang.} Nhắc lại từ §2.6: nếu $\lim_{x\to\infty}f(x)=L$ hoặc $\lim_{x\to-\infty}f(x)=L$, thì $y=L$ là tiệm cận ngang của $y=f(x)$. Nếu $\lim_{x\to\infty}f(x)=\infty$ (hoặc $-\infty$), thì không có tiệm cận ngang về phía phải, nhưng đây vẫn là thông tin hữu ích khi vẽ.
+
+(ii) \textit{Tiệm cận đứng.} Theo §2.2, $x=a$ là tiệm cận đứng nếu ít nhất một trong các mệnh đề sau đúng:
+\begin{align*}
+\lim_{x\to a^+}f(x)&=\infty,&\lim_{x\to a^-}f(x)&=\infty,\\
+\lim_{x\to a^+}f(x)&=-\infty,&\lim_{x\to a^-}f(x)&=-\infty.\tag{1}
+\end{align*}
+Với hàm hữu tỉ, có thể tìm tiệm cận đứng bằng cách cho mẫu bằng 0 sau khi khử các nhân tử chung. Phương pháp này không áp dụng cho các hàm khác. Khi vẽ, cũng nên biết chính xác mệnh đề nào ở (1) đúng. Nếu $f(a)$ không xác định nhưng $a$ là đầu mút miền xác định, cần tính $\lim_{x\to a^-}f(x)$ hoặc $\lim_{x\to a^+}f(x)$, dù giới hạn có vô cực hay không.
+
+(iii) \textit{Tiệm cận xiên.} Sẽ được bàn ở cuối mục này.
+\group{E. Các khoảng đồng biến hoặc nghịch biến}
+Dùng tiêu chuẩn xét tính đồng biến và nghịch biến. Tính $f'(x)$, tìm các khoảng mà $f'(x)$ dương ($f$ đồng biến) và các khoảng mà $f'(x)$ âm ($f$ nghịch biến).
+\group{F. Các giá trị cực đại hoặc cực tiểu địa phương}
+Tìm các số tới hạn của $f$ [các số $c$ mà $f'(c)=0$ hoặc $f'(c)$ không tồn tại]. Sau đó dùng tiêu chuẩn đạo hàm bậc nhất. Nếu $f'$ đổi dấu từ dương sang âm tại số tới hạn $c$, thì $f(c)$ là cực đại địa phương. Nếu đổi từ âm sang dương, thì $f(c)$ là cực tiểu địa phương.
+
+Dù thường nên dùng tiêu chuẩn đạo hàm bậc nhất, vẫn có thể dùng tiêu chuẩn đạo hàm bậc hai nếu $f'(c)=0$, $f''(c)\ne0$: $f''(c)>0$ cho cực tiểu địa phương, $f''(c)<0$ cho cực đại địa phương.
+\group{G. Độ lõm và các điểm uốn}
+Tính $f''(x)$ và dùng tiêu chuẩn xét độ lõm. Đường cong lõm lên khi $f''(x)>0$, lõm xuống khi $f''(x)<0$. Điểm uốn xuất hiện tại nơi đường cong đổi chiều lõm.
+\group{H. Phác họa đường cong}
+Dùng thông tin ở A–G để vẽ. Vẽ tiệm cận bằng nét đứt. Đánh dấu giao điểm với các trục, điểm cực đại, cực tiểu và điểm uốn. Sau đó cho đường cong đi qua các điểm ấy, tăng giảm theo E, có độ lõm theo G và tiến gần các tiệm cận.
+
+Nếu cần chính xác hơn ở gần một điểm, có thể tính đạo hàm tại đó. Tiếp tuyến cho biết hướng đi của đường cong.
+
+\Needspace{10\baselineskip}
+\ex{1} Dùng hướng dẫn trên để phác họa $y=2x^2/(x^2-1)$.
+\group{A. Miền xác định}
+\[\{x\mid x^2-1\ne0\}=\{x\mid x\ne\pm1\}=(-\infty,-1)\cup(-1,1)\cup(1,\infty).\]
+\group{B. Giao điểm với các trục} Hoành độ và tung độ giao điểm đều bằng 0.
+\group{C. Tính đối xứng} Vì $f(-x)=f(x)$, $f$ chẵn; đường cong đối xứng qua trục tung.
+\group{D. Tiệm cận}
+\[\lim_{x\to\pm\infty}\frac{2x^2}{x^2-1}=\lim_{x\to\pm\infty}\frac2{1-1/x^2}=2.\]
+Vậy $y=2$ là tiệm cận ngang ở cả hai phía. Vì mẫu bằng 0 khi $x=\pm1$, tính:
+\begin{align*}
+\lim_{x\to1^+}\frac{2x^2}{x^2-1}&=\infty,&\lim_{x\to1^-}\frac{2x^2}{x^2-1}&=-\infty,\\
+\lim_{x\to-1^+}\frac{2x^2}{x^2-1}&=-\infty,&\lim_{x\to-1^-}\frac{2x^2}{x^2-1}&=\infty.
+\end{align*}
+Vậy $x=1$, $x=-1$ là các tiệm cận đứng. Thông tin này cho phép phác họa sơ bộ các phần đường cong gần tiệm cận ở Hình 5.
+\fig[.43]{fig05}{Hình 5. Phác họa sơ bộ.}
+Hình 5 thể hiện đường cong tiến tới tiệm cận ngang từ phía trên. Điều này được xác nhận bởi các khoảng đồng biến và nghịch biến.
+\group{E. Các khoảng đồng biến hoặc nghịch biến}
+\[f'(x)=\frac{(x^2-1)(4x)-2x^2\cdot2x}{(x^2-1)^2}=\frac{-4x}{(x^2-1)^2}.\]
+Vì $f'(x)>0$ khi $x<0$ ($x\ne-1$) và $f'(x)<0$ khi $x>0$ ($x\ne1$), $f$ đồng biến trên $(-\infty,-1)$, $(-1,0)$ và nghịch biến trên $(0,1)$, $(1,\infty)$.
+\group{F. Cực trị địa phương} Số tới hạn duy nhất là $x=0$. Vì $f'$ đổi từ dương sang âm tại 0, $f(0)=0$ là cực đại địa phương theo tiêu chuẩn đạo hàm bậc nhất.
+\group{G. Độ lõm và điểm uốn}
+\[f''(x)=\frac{(x^2-1)^2(-4)+4x\cdot2(x^2-1)2x}{(x^2-1)^4}
+=\frac{12x^2+4}{(x^2-1)^3}.\]
+Vì $12x^2+4>0$ với mọi $x$,
+\[f''(x)>0\ \Longleftrightarrow\ x^2-1>0\ \Longleftrightarrow\ |x|>1,\]
+còn $f''(x)<0\Longleftrightarrow|x|<1$. Do đó đường cong lõm lên trên $(-\infty,-1)$, $(1,\infty)$ và lõm xuống trên $(-1,1)$. Không có điểm uốn vì $1,-1$ không thuộc miền xác định.
+\group{H. Phác họa đường cong} Từ E–G, hoàn chỉnh hình vẽ ở Hình 6.
+\fig[.43]{fig06}{Hình 6. Đồ thị hoàn chỉnh của $y=2x^2/(x^2-1)$.}
+\Needspace{9\baselineskip}
+\ex{2} Phác họa đồ thị $f(x)=x^2/\sqrt{x+1}$.
+\group{A. Miền xác định} $\{x\mid x+1>0\}=\{x\mid x>-1\}=(-1,\infty)$.
+\group{B. Giao điểm với các trục} Hoành độ và tung độ giao điểm đều bằng 0.
+\group{C. Tính đối xứng} Không có.
+\group{D. Tiệm cận} Vì
+\[\lim_{x\to\infty}\frac{x^2}{\sqrt{x+1}}=\infty,\]
+không có tiệm cận ngang. Vì $\sqrt{x+1}\to0$ khi $x\to-1^+$ và $f(x)$ luôn dương gần đó,
+\[\lim_{x\to-1^+}\frac{x^2}{\sqrt{x+1}}=\infty,\]
+nên $x=-1$ là tiệm cận đứng.
+\group{E. Các khoảng đồng biến hoặc nghịch biến}
+\begin{align*}
+f'(x)&=\frac{\sqrt{x+1}(2x)-x^2/(2\sqrt{x+1})}{x+1}\\
+&=\frac{3x^2+4x}{2(x+1)^{3/2}}=\frac{x(3x+4)}{2(x+1)^{3/2}}.
+\end{align*}
+Ta có $f'(x)=0$ khi $x=0$ (chú ý $-4/3$ không thuộc miền xác định), nên số tới hạn duy nhất là 0. Vì $f'(x)<0$ khi $-1<x<0$, còn $f'(x)>0$ khi $x>0$, $f$ nghịch biến trên $(-1,0)$ và đồng biến trên $(0,\infty)$.
+\group{F. Cực trị địa phương} Vì $f'(0)=0$ và $f'$ đổi từ âm sang dương tại 0, $f(0)=0$ là cực tiểu địa phương (đồng thời là giá trị nhỏ nhất tuyệt đối).
+\group{G. Độ lõm và điểm uốn}
+\begin{align*}
+f''(x)&=\frac{2(x+1)^{3/2}(6x+4)-(3x^2+4x)3(x+1)^{1/2}}{4(x+1)^3}\\
+&=\frac{3x^2+8x+8}{4(x+1)^{5/2}}.
+\end{align*}
+Mẫu luôn dương. Tử là tam thức bậc hai $3x^2+8x+8$, luôn dương vì biệt thức $b^2-4ac=-32<0$ và hệ số của $x^2$ dương. Vậy $f''(x)>0$ với mọi $x$ trong miền xác định, nên $f$ lõm lên trên $(-1,\infty)$ và không có điểm uốn.
+\group{H. Phác họa đường cong} Đồ thị ở Hình 7.
+\fig[.4]{fig07}{Hình 7}
+\Needspace{9\baselineskip}
+\ex{3} Phác họa đồ thị $f(x)=xe^x$.
+\group{A. Miền xác định} $\mathbb R$.
+\group{B. Giao điểm với các trục} Hoành độ và tung độ giao điểm đều bằng 0.
+\group{C. Tính đối xứng} Không có.
+\group{D. Tiệm cận} Vì cả $x,e^x$ đều tăng lớn khi $x\to\infty$, $\lim_{x\to\infty}xe^x=\infty$. Tuy nhiên, khi $x\to-\infty$, $e^x\to0$, tạo tích vô định cần dùng l’Hospital:
+\[\lim_{x\to-\infty}xe^x=\lim_{x\to-\infty}\frac{x}{e^{-x}}
+=\lim_{x\to-\infty}\frac1{-e^{-x}}
+=\lim_{x\to-\infty}(-e^x)=0.\]
+Vậy trục hoành là tiệm cận ngang.
+\group{E. Các khoảng đồng biến hoặc nghịch biến}
+\[f'(x)=xe^x+e^x=(x+1)e^x.\]
+Vì $e^x$ luôn dương, $f'(x)>0$ khi $x+1>0$, $f'(x)<0$ khi $x+1<0$. Vậy $f$ đồng biến trên $(-1,\infty)$, nghịch biến trên $(-\infty,-1)$.
+\group{F. Cực trị địa phương} Vì $f'(x)=0$ khi $x=-1$ và $f'$ đổi từ âm sang dương tại đó, $f(-1)=-e^{-1}\approx-0{,}37$ là cực tiểu địa phương (và nhỏ nhất tuyệt đối).
+\group{G. Độ lõm và điểm uốn}
+\[f''(x)=(x+1)e^x+e^x=(x+2)e^x.\]
+Vì $f''(x)>0$ khi $x>-2$, $f''(x)<0$ khi $x<-2$, $f$ lõm lên trên $(-2,\infty)$, lõm xuống trên $(-\infty,-2)$. Điểm uốn là $(-2,-2e^{-2})\approx(-2;-0{,}27)$.
+\group{H. Phác họa đường cong} Từ các thông tin trên, vẽ Hình 8.
+\fig[.44]{fig08}{Hình 8}
+\Needspace{9\baselineskip}
+\ex{4} Phác họa đồ thị $f(x)=\cos x/(2+\sin x)$.
+\group{A. Miền xác định} $\mathbb R$.
+\group{B. Giao điểm với các trục} Tung độ giao điểm với trục tung là $f(0)=\frac12$. Giao điểm với trục hoành xảy ra khi $\cos x=0$, tức $x=\pi/2+n\pi$, $n$ nguyên.
+\group{C. Tính đối xứng} $f$ không chẵn cũng không lẻ, nhưng $f(x+2\pi)=f(x)$ với mọi $x$, nên tuần hoàn với chu kỳ $2\pi$. Vì vậy chỉ cần xét $0\le x\le2\pi$, rồi tịnh tiến đường cong ở bước H.
+\group{D. Tiệm cận} Không có.
+\group{E. Các khoảng đồng biến hoặc nghịch biến}
+\[f'(x)=\frac{(2+\sin x)(-\sin x)-\cos x(\cos x)}{(2+\sin x)^2}
+=-\frac{2\sin x+1}{(2+\sin x)^2}.\]
+Mẫu luôn dương, nên $f'(x)>0$ khi $2\sin x+1<0$, tức $\sin x<-\frac12$, tương đương $7\pi/6<x<11\pi/6$. Vậy $f$ đồng biến trên $(7\pi/6,11\pi/6)$, nghịch biến trên $(0,7\pi/6)$ và $(11\pi/6,2\pi)$.
+\group{F. Cực trị địa phương} Theo E và tiêu chuẩn đạo hàm bậc nhất, cực tiểu địa phương là $f(7\pi/6)=-1/\sqrt3$, cực đại địa phương là $f(11\pi/6)=1/\sqrt3$.
+\group{G. Độ lõm và điểm uốn} Dùng quy tắc đạo hàm của thương một lần nữa rồi rút gọn:
+\[f''(x)=-\frac{2\cos x(1-\sin x)}{(2+\sin x)^3}.\]
+Vì $(2+\sin x)^3>0$, $1-\sin x\ge0$, ta có $f''(x)>0$ khi $\cos x<0$, tức $\pi/2<x<3\pi/2$. Vậy $f$ lõm lên trên $(\pi/2,3\pi/2)$, lõm xuống trên $(0,\pi/2)$ và $(3\pi/2,2\pi)$. Các điểm uốn là $(\pi/2,0)$, $(3\pi/2,0)$.
+\group{H. Phác họa đường cong} Đồ thị giới hạn trên $0\le x\le2\pi$ ở Hình 9. Dùng tính tuần hoàn để mở rộng thành Hình 10.
+\fig[.43]{fig09}{Hình 9}
+\fig[.9]{fig10}{Hình 10}
+\Needspace{9\baselineskip}
+\ex{5} Phác họa đồ thị $y=\ln(4-x^2)$.
+\group{A. Miền xác định}
+\[\{x\mid4-x^2>0\}=\{x\mid x^2<4\}=\{x\mid|x|<2\}=(-2,2).\]
+\group{B. Giao điểm với các trục} Tung độ giao điểm với trục tung là $f(0)=\ln4$. Để tìm giao điểm với trục hoành, đặt $\ln(4-x^2)=0$. Vì $\ln1=0$, ta có $4-x^2=1$, suy ra $x^2=3$; các hoành độ giao điểm là $\pm\sqrt3$.
+\group{C. Tính đối xứng} Vì $f(-x)=f(x)$, $f$ chẵn, đường cong đối xứng qua trục tung.
+\group{D. Tiệm cận} Xét tiệm cận đứng tại các đầu mút miền xác định. Vì $4-x^2\to0^+$ khi $x\to2^-$ và khi $x\to-2^+$,
+\[\lim_{x\to2^-}\ln(4-x^2)=-\infty,\qquad
+\lim_{x\to-2^+}\ln(4-x^2)=-\infty.\]
+Vậy $x=2$, $x=-2$ là tiệm cận đứng.
+\group{E. Các khoảng đồng biến hoặc nghịch biến}
+\[f'(x)=\frac{-2x}{4-x^2}.\]
+Vì $f'(x)>0$ khi $-2<x<0$, $f'(x)<0$ khi $0<x<2$, $f$ đồng biến trên $(-2,0)$, nghịch biến trên $(0,2)$.
+\group{F. Cực trị địa phương} Số tới hạn duy nhất là $x=0$. Vì $f'$ đổi từ dương sang âm tại 0, $f(0)=\ln4$ là cực đại địa phương.
+\group{G. Độ lõm và điểm uốn}
+\[f''(x)=\frac{(4-x^2)(-2)+2x(-2x)}{(4-x^2)^2}
+=\frac{-8-2x^2}{(4-x^2)^2}.\]
+Vì $f''(x)<0$ trên miền xác định, đường cong lõm xuống trên $(-2,2)$ và không có điểm uốn.
+\group{H. Phác họa đường cong} Từ các thông tin trên, vẽ Hình 11.
+\fig[.46]{fig11}{Hình 11. $y=\ln(4-x^2)$.}
+
+\section*{Tiệm cận xiên}
+Một số đường cong có tiệm cận nghiêng, tức không nằm ngang cũng không thẳng đứng. Nếu
+\[\lim_{x\to\infty}[f(x)-(mx+b)]=0,\qquad m\ne0,\]
+thì đường thẳng $y=mx+b$ được gọi là \textbf{tiệm cận xiên}, vì khoảng cách theo phương thẳng đứng giữa đường cong $y=f(x)$ và đường thẳng ấy tiến tới 0, như Hình 12. Tình huống tương tự xảy ra khi $x\to-\infty$. Với hàm hữu tỉ, tiệm cận xiên xuất hiện khi bậc tử lớn hơn bậc mẫu một đơn vị. Khi đó, có thể dùng phép chia đa thức để tìm phương trình tiệm cận, như ví dụ sau.
+\fig[.46]{fig12}{Hình 12}
+\Needspace{9\baselineskip}
+\ex{6} Phác họa đồ thị $f(x)=x^3/(x^2+1)$.
+\group{A. Miền xác định} $\mathbb R$.
+\group{B. Giao điểm với các trục} Hoành độ và tung độ giao điểm đều bằng 0.
+\group{C. Tính đối xứng} Vì $f(-x)=-f(x)$, $f$ lẻ và đồ thị đối xứng qua gốc tọa độ.
+\group{D. Tiệm cận} Vì $x^2+1$ không bao giờ bằng 0, không có tiệm cận đứng. Vì $f(x)\to\infty$ khi $x\to\infty$, $f(x)\to-\infty$ khi $x\to-\infty$, không có tiệm cận ngang. Nhưng phép chia đa thức cho
+\[f(x)=\frac{x^3}{x^2+1}=x-\frac{x}{x^2+1}.\]
+Điều này gợi ý $y=x$ là ứng viên tiệm cận xiên. Thực ra,
+\[f(x)-x=-\frac{x}{x^2+1}=-\frac{1/x}{1+1/x^2}\to0\qquad\text{khi }x\to\pm\infty.\]
+Vậy $y=x$ đúng là tiệm cận xiên.
+\group{E. Các khoảng đồng biến hoặc nghịch biến}
+\[f'(x)=\frac{(x^2+1)(3x^2)-x^3\cdot2x}{(x^2+1)^2}
+=\frac{x^2(x^2+3)}{(x^2+1)^2}.\]
+Vì $f'(x)>0$ với mọi $x$ trừ 0, $f$ đồng biến trên $(-\infty,\infty)$.
+\group{F. Cực trị địa phương} Dù $f'(0)=0$, $f'$ không đổi dấu tại 0, nên không có cực đại hoặc cực tiểu địa phương.
+\group{G. Độ lõm và điểm uốn}
+\begin{align*}
+f''(x)&=\frac{(x^2+1)^2(4x^3+6x)-(x^4+3x^2)\cdot2(x^2+1)2x}{(x^2+1)^4}\\
+&=\frac{2x(3-x^2)}{(x^2+1)^3}.
+\end{align*}
+Vì $f''(x)=0$ khi $x=0$ hoặc $x=\pm\sqrt3$, lập bảng sau.
+\Needspace{9\baselineskip}
+\begin{center}\small
+\begin{longtable}{llllll}\toprule
+Khoảng&$x$&$3-x^2$&$(x^2+1)^3$&$f''(x)$&$f$\\\midrule
+$x<-\sqrt3$&$-$&$-$&$+$&$+$&Lõm lên trên $(-\infty,-\sqrt3)$\\
+$-\sqrt3<x<0$&$-$&$+$&$+$&$-$&Lõm xuống trên $(-\sqrt3,0)$\\
+$0<x<\sqrt3$&$+$&$+$&$+$&$+$&Lõm lên trên $(0,\sqrt3)$\\
+$x>\sqrt3$&$+$&$-$&$+$&$-$&Lõm xuống trên $(\sqrt3,\infty)$\\\bottomrule
+\end{longtable}\end{center}
+Các điểm uốn là $(-\sqrt3,-\frac34\sqrt3)$, $(0,0)$ và $(\sqrt3,\frac34\sqrt3)$.
+\group{H. Phác họa đường cong} Đồ thị $f$ ở Hình 13.
+\fig[.46]{fig13}{Hình 13. “inflection points”: các điểm uốn.}
+
+\clearpage
+\section*{4.5 — Bài tập}
+\Needspace{8\baselineskip}
+\group{1–54} Dùng các hướng dẫn trong mục này để phác họa đường cong.
+\bt{1} $y=x^3+3x^2$.
+\bt{2} $y=2x^3-12x^2+18x$.
+\bt{3} $y=x^4-4x$.
+\bt{4} $y=x^4-8x^2+8$.
+\bt{5} $y=x(x-4)^3$.
+\bt{6} $y=x^5-5x$.
+\bt{7} $y=\frac15x^5-\frac83x^3+16x$.
+\bt{8} $y=(4-x^2)^5$.
+\bt{9} $y=\dfrac{2x+3}{x+2}$.
+\bt{10} $y=\dfrac{x^2+5x}{25-x^2}$.
+\bt{11} $y=\dfrac{x-x^2}{2-3x+x^2}$.
+\bt{12} $y=1+\dfrac1x+\dfrac1{x^2}$.
+\bt{13} $y=\dfrac{x}{x^2-4}$.
+\bt{14} $y=\dfrac1{x^2-4}$.
+\bt{15} $y=\dfrac{x^2}{x^2+3}$.
+\bt{16} $y=\dfrac{(x-1)^2}{x^2+1}$.
+\bt{17} $y=\dfrac{x-1}{x^2}$.
+\bt{18} $y=\dfrac{x}{x^3-1}$.
+\bt{19} $y=\dfrac{x^3}{x^3+1}$.
+\bt{20} $y=\dfrac{x^3}{x-2}$.
+\bt{21} $y=(x-3)\sqrt x$.
+\bt{22} $y=(x-4)\sqrt[3]x$.
+\bt{23} $y=\sqrt{x^2+x-2}$.
+\bt{24} $y=\sqrt{x^2+x}-x$.
+\bt{25} $y=\dfrac{x}{\sqrt{x^2+1}}$.
+\bt{26} $y=x\sqrt{2-x^2}$.
+\bt{27} $y=\dfrac{\sqrt{1-x^2}}x$.
+\bt{28} $y=\dfrac{x}{\sqrt{x^2-1}}$.
+\bt{29} $y=x-3x^{1/3}$.
+\bt{30} $y=x^{5/3}-5x^{2/3}$.
+\bt{31} $y=\sqrt[3]{x^2-1}$.
+\bt{32} $y=\sqrt[3]{x^3+1}$.
+\bt{33} $y=\sin^3x$.
+\bt{34} $y=x+\cos x$.
+\bt{35} $y=x\tan x,\quad-\pi/2<x<\pi/2$.
+\bt{36} $y=2x-\tan x,\quad-\pi/2<x<\pi/2$.
+\bt{37} $y=\sin x+\sqrt3\cos x,\quad-2\pi\le x\le2\pi$.
+\bt{38} $y=\csc x-2\sin x,\quad0<x<\pi$.
+\bt{39} $y=\dfrac{\sin x}{1+\cos x}$.
+\bt{40} $y=\dfrac{\sin x}{2+\cos x}$.
+\bt{41} $y=\arctan(e^x)$.
+\bt{42} $y=(1-x)e^x$.
+\bt{43} $y=1/(1+e^{-x})$.
+\bt{44} $y=e^{-x}\sin x,\quad0\le x\le2\pi$.
+\bt{45} $y=\dfrac1x+\ln x$.
+\bt{46} $y=x(\ln x)^2$.
+\bt{47} $y=(1+e^x)^{-2}$.
+\bt{48} $y=e^x/x^2$.
+\bt{49} $y=\ln(\sin x)$.
+\bt{50} $y=\ln(1+x^3)$.
+\bt{51} $y=xe^{-1/x}$.
+\bt{52} $y=\dfrac{\ln x}{x^2}$.
+\bt{53} $y=e^{\arctan x}$.
+\bt{54} $y=\arctan\left(\dfrac{x-1}{x+1}\right)$.
+\Needspace{18\baselineskip}
+\group{55–58} Cho đồ thị của hàm số $f$. (Các đường nét đứt biểu thị tiệm cận ngang.) Với mỗi hàm $g$ đã cho, hãy tìm:
+
+(a) Miền xác định của $g$ và $g'$.
+
+(b) Các số tới hạn của $g$.
+
+(c) Giá trị xấp xỉ của $g'(6)$.
+
+(d) Mọi tiệm cận đứng và ngang của $g$.
+\fig[.68]{ex55_58}{Đồ thị dùng cho Bài tập 55–58.}
+\bt{55} $g(x)=\sqrt{f(x)}$.
+\bt{56} $g(x)=\sqrt[3]{f(x)}$.
+\bt{57} $g(x)=|f(x)|$.
+\bt{58} $g(x)=1/f(x)$.
+\bt{59} Trong thuyết tương đối, khối lượng của một hạt là
+\[m=\frac{m_0}{\sqrt{1-v^2/c^2}},\]
+trong đó $m_0$ là khối lượng nghỉ, $m$ là khối lượng khi hạt chuyển động với tốc độ $v$ đối với người quan sát, $c$ là tốc độ ánh sáng. Phác họa đồ thị $m$ theo $v$.
+\bt{60} Trong thuyết tương đối, năng lượng của một hạt là
+\[E=\sqrt{m_0^2c^4+h^2c^2/\lambda^2},\]
+trong đó $m_0$ là khối lượng nghỉ, $\lambda$ là bước sóng của hạt và $h$ là hằng số Planck. Phác họa đồ thị $E$ theo $\lambda$. Đồ thị cho biết gì về năng lượng?
+\bt{61} Mô hình lan truyền tin đồn được cho bởi
+\[p(t)=\frac1{1+ae^{-kt}},\]
+trong đó $p(t)$ là tỉ lệ dân số biết tin đồn tại thời điểm $t$, $a,k$ là hằng số dương.
+
+(a) Khi nào một nửa dân số đã nghe tin đồn?
+
+(b) Khi nào tốc độ lan truyền tin đồn lớn nhất?
+
+(c) Phác họa đồ thị $p$.
+\bt{62} Mô hình nồng độ tại thời điểm $t$ của thuốc được tiêm vào máu là
+\[C(t)=K(e^{-at}-e^{-bt}),\]
+trong đó $a,b,K$ là các hằng số dương và $b>a$. Phác họa đồ thị hàm nồng độ. Đồ thị cho biết nồng độ thay đổi theo thời gian như thế nào?
+\bt{63} Hình vẽ biểu diễn một dầm dài $L$ ngàm vào các tường bê tông. Nếu tải không đổi $W$ được phân bố đều dọc chiều dài, dầm có dạng đường đàn hồi
+\[y=-\frac W{24EI}x^4+\frac{WL}{12EI}x^3-\frac{WL^2}{24EI}x^2,\]
+trong đó $E,I$ là hằng số dương. ($E$ là môđun đàn hồi Young, $I$ là mômen quán tính của mặt cắt ngang dầm.) Phác họa đồ thị đường đàn hồi.
+\fig[.48]{ex63}{Hình cho Bài tập 63.}
+\par\noindent\begin{minipage}{\linewidth}
+\bt{64} Định luật Coulomb khẳng định lực hút giữa hai hạt mang điện tỉ lệ thuận với tích các điện tích và tỉ lệ nghịch với bình phương khoảng cách giữa chúng. Hình vẽ cho các hạt điện tích $+1$ tại vị trí 0 và 2 trên trục tọa độ, và hạt điện tích $-1$ ở vị trí $x$ giữa chúng. Theo định luật Coulomb, hợp lực tác dụng lên hạt ở giữa là
+\[F(x)=-\frac k{x^2}+\frac k{(x-2)^2},\qquad0<x<2,\]
+trong đó $k$ là hằng số dương. Phác họa đồ thị hàm hợp lực. Đồ thị cho biết gì về lực?
+\fig[.47]{ex64}{Hình cho Bài tập 64.}
+\end{minipage}\par
+\Needspace{8\baselineskip}
+\group{65–68} Tìm phương trình tiệm cận xiên. Không vẽ đường cong.
+\bt{65} $y=\dfrac{x^2+1}{x+1}$.
+\bt{66} $y=\dfrac{4x^3-10x^2-11x+1}{x^2-3x}$.
+\bt{67} $y=\dfrac{2x^3-5x^2+3x}{x^2-x-2}$.
+\bt{68} $y=\dfrac{-6x^4+2x^3+3}{2x^3-x}$.
+\Needspace{8\baselineskip}
+\group{69–74} Dùng hướng dẫn trong mục này để phác họa đường cong. Ở bước D, tìm phương trình tiệm cận xiên.
+\bt{69} $y=\dfrac{x^2}{x-1}$.
+\bt{70} $y=\dfrac{1+5x-2x^2}{x-2}$.
+\bt{71} $y=\dfrac{x^3+4}{x^2}$.
+\bt{72} $y=\dfrac{x^3}{(x+1)^2}$.
+\bt{73} $y=1+\frac12x+e^{-x}$.
+\bt{74} $y=1-x+e^{1+x/3}$.
+\bt{75} Chứng minh đường cong $y=x-\arctan x$ có hai tiệm cận xiên: $y=x+\pi/2$ và $y=x-\pi/2$. Dùng sự kiện này để hỗ trợ phác họa.
+\bt{76} Chứng minh đường cong $y=\sqrt{x^2+4x}$ có hai tiệm cận xiên: $y=x+2$ và $y=-x-2$. Dùng sự kiện này để hỗ trợ phác họa.
+\bt{77} Chứng minh các đường thẳng $y=(b/a)x$ và $y=-(b/a)x$ là tiệm cận xiên của hyperbol $(x^2/a^2)-(y^2/b^2)=1$.
+\bt{78} Cho $f(x)=(x^3+1)/x$. Chứng minh
+\[\lim_{x\to\pm\infty}[f(x)-x^2]=0.\]
+Điều này cho thấy đồ thị $f$ tiến gần đồ thị $y=x^2$; ta nói đường cong $y=f(x)$ \textit{tiệm cận với parabol} $y=x^2$. Dùng sự kiện này để hỗ trợ phác họa đồ thị $f$.
+\bt{79} Thảo luận tính chất tiệm cận của $f(x)=(x^4+1)/x$ theo cách tương tự Bài tập 78. Sau đó dùng kết quả để hỗ trợ phác họa đồ thị $f$.
+\enlargethispage{2\baselineskip}
+\bt{80} Dùng tính chất tiệm cận của $f(x)=\sin x+e^{-x}$ để phác họa đồ thị mà không thực hiện quy trình khảo sát của mục này.
+\end{document}
