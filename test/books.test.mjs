@@ -322,7 +322,7 @@ await assert.rejects(()=>readBookAsset(other,'stewart-1-principles-06d484fa/f01.
 const renderPrinciples=window.document.createElement('div');await window.renderBookContent(renderPrinciples,principles.section);assert.equal(renderPrinciples.querySelectorAll('img').length,1);assert.equal(renderPrinciples.querySelectorAll('table').length,1);
 const changedPrinciples=await mutateBooks(db,admin,'books_save_section',{id:childPrinciples.id,expectedVersion:2,title:childPrinciples.title,order:902,content:principles.section.content+'<p>Admin edit.</p>',contentFormat:'html-latex'});
 assert.equal((await readBooks(db,student,{bookId:book.id,sectionId:childPrinciples.id})).section.content,changedPrinciples.content);assert.equal((await readBooks(db,student,{bookId:book.id,sectionId:childPrinciples.id})).exercises.length,22);
-window.close();console.log('Books: seeded TOC, admin CRUD/CAS, scopes, subtree delete/restore, lazy bodies and UI actions OK');
+
 
 
 // Section 3.2 uses the same persisted exercise/action path as section 1.1.
@@ -609,3 +609,24 @@ for(const image of doc3Plus.window.document.querySelectorAll('img')){
 }
 doc3Plus.window.close();
 assert.deepEqual((await readBooks(db,student,{bookId:book.id,sectionId:child3Plus.id})).exercises.map(e=>e.contentKey),section3Plus.exercises.map(e=>e.contentKey));
+
+// Exercise the actual browser sanitizer, not only source HTML or the asset API.
+for(const name of fs.readdirSync(new URL('../data/books/imports/',import.meta.url)).filter(n=>n.endsWith('.json'))){
+ const entry=JSON.parse(fs.readFileSync(new URL('../data/books/imports/'+name,import.meta.url),'utf8'));
+ const original=new JSDOM(entry.content);const expected=[...original.window.document.querySelectorAll('img')].map(img=>img.getAttribute('src'));
+ const target=window.document.createElement('div');await window.renderBookContent(target,entry,false);
+ assert.deepEqual([...target.querySelectorAll('img')].map(img=>img.getAttribute('src')),expected,'All images survive browser rendering: '+name);
+ original.window.close();
+ const catalog=JSON.parse(fs.readFileSync(new URL('../data/books/exercises/'+name,import.meta.url),'utf8'));
+ for(const exercise of catalog.exercises.filter(e=>e.content.includes('<img'))){
+  const originalExercise=new JSDOM(exercise.content);const expectedExercise=[...originalExercise.window.document.querySelectorAll('img')].map(img=>img.getAttribute('src'));
+  await window.renderBookContent(target,{contentFormat:'html-latex',content:exercise.content},false);
+  assert.deepEqual([...target.querySelectorAll('img')].map(img=>img.getAttribute('src')),expectedExercise,'Exercise images survive: '+name+' #'+exercise.number);
+  originalExercise.window.close();
+ }
+}
+const blockedBookImages=window.document.createElement('div');
+await window.renderBookContent(blockedBookImages,{contentFormat:'html-latex',content:'<img src="https://evil.test/api/data?resource=book_asset&asset=stewart-3-2-67883edf/f01.png"><img src="/api/data?resource=book_asset&asset=stewart-3-2-00000000/f01.png"><img src="/api/data?resource=book_asset&asset=stewart-3-2-67883edf/../secret.png">'},false);
+assert.equal(blockedBookImages.querySelectorAll('img').length,0,'External, unapproved and traversal image paths stay blocked');
+
+window.close();console.log('Books: seeded TOC, admin CRUD/CAS, scopes, subtree delete/restore, lazy bodies and UI actions OK');
