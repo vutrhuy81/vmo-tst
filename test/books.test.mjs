@@ -653,4 +653,28 @@ doc41.window.close();
 const rendered41=window.document.createElement('div');await window.renderBookContent(rendered41,section41.section,false);
 assert.equal(rendered41.querySelectorAll('img').length,26,'All Chapter 4 figures survive the frontend sanitizer');
 assert.deepEqual((await readBooks(db,student,{bookId:book.id,sectionId:child41.id})).exercises.map(e=>e.contentKey),section41.exercises.map(e=>e.contentKey));
+
+
+// Mean value theorem content and graph-based exercises survive the actual UI path.
+const child42=detail.sections.find(s=>s.title.startsWith('4.2'));
+const section42=await readBooks(db,student,{bookId:book.id,sectionId:child42.id});
+assert.equal(section42.exerciseHeading,'4.2. Bài tập');
+assert.deepEqual(section42.exercises.map(e=>e.questionNumber),Array.from({length:42},(_,i)=>i+1));
+assert.ok(section42.exercises.every(e=>e.allowSubmission&&e.allowAiEvaluation&&e.contentKey&&e.setKey));
+for(const n of [1,3,5,6,7,8])assert.ok(section42.exercises[n-1].content.includes('/ex0'+n+'.png'));
+for(const n of [5,8])assert.ok(section42.exercises[n-1].content.includes('giả thiết'));
+assert.ok(section42.exercises[35].content.includes('7. Hệ quả'));
+for(const n of [38,39])assert.ok(section42.exercises[n-1].content.includes('Phương pháp của Ví dụ 6'));
+assert.equal(section42.section.sourceInfo.exampleCount,6);
+const doc42=new JSDOM(section42.section.content);
+assert.equal(doc42.window.document.querySelectorAll('img').length,12);
+for(const image of doc42.window.document.querySelectorAll('img')){
+ const asset=new URL(image.src,'https://example.test').searchParams.get('asset');
+ assert.equal((await readBookAsset(student,asset)).bytes[0],137);
+ await assert.rejects(()=>readBookAsset(other,asset),e=>e.status===403);
+}
+doc42.window.close();
+const rendered42=window.document.createElement('div');await window.renderBookContent(rendered42,section42.section,false);
+assert.equal(rendered42.querySelectorAll('img').length,12,'All section 4.2 images survive frontend filtering');
+assert.deepEqual((await readBooks(db,student,{bookId:book.id,sectionId:child42.id})).exercises.map(e=>e.contentKey),section42.exercises.map(e=>e.contentKey));
 window.close();console.log('Books: seeded TOC, admin CRUD/CAS, scopes, subtree delete/restore, lazy bodies and UI actions OK');
