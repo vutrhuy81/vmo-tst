@@ -3280,5 +3280,30 @@
     "file": "stewart-5-5-058a053e/fig03.png",
     "mime": "image/png",
     "sha256": "5cd7323eae1afd54c7867d147157f85b34462e13200d3fcc0b9563af31fc61e7"
+  },
+  "stewart-5-review-45ed5363/ex01.png": {
+    "file": "stewart-5-review-45ed5363/ex01.png",
+    "mime": "image/png",
+    "sha256": "376e677ffa541ee5c87a10c77287dd3e5c96f0bdfa95212c376ff0d213a3d947"
+  },
+  "stewart-5-review-45ed5363/ex07.png": {
+    "file": "stewart-5-review-45ed5363/ex07.png",
+    "mime": "image/png",
+    "sha256": "3275a10e8ffee38553157548954b9e9010a90baa42f015594a860fa97d07284a"
+  },
+  "stewart-5-review-45ed5363/ex09.png": {
+    "file": "stewart-5-review-45ed5363/ex09.png",
+    "mime": "image/png",
+    "sha256": "c75b777a295cb8a4ad99d5051b54a0a0412d26a2c50282b0b0b98751026db13f"
+  },
+  "stewart-5-review-45ed5363/ex49_50.png": {
+    "file": "stewart-5-review-45ed5363/ex49_50.png",
+    "mime": "image/png",
+    "sha256": "8455384c2440c2b7c041488650d31d8cf2a5ea37977723f9988e23ddc1293ddb"
+  },
+  "stewart-5-review-45ed5363/ex67.png": {
+    "file": "stewart-5-review-45ed5363/ex67.png",
+    "mime": "image/png",
+    "sha256": "9d037329381c0435e4e0918030692573c96efcd0b75bdc6e9a158a8a107e99c8"
   }
 }
