@@ -1,0 +1,340 @@
+{
+  "exercises": [
+    {
+      "number": 1,
+      "content": "<p><strong>1.</strong></p>\n<p><em>Yêu cầu chung (1–4):</em> Kiểm tra công thức bằng cách lấy đạo hàm.</p>\n<p><span class=\"math inline\">\\(\\displaystyle\\int\\ln x\\,dx=x\\ln x-x+C\\)</span>.</p>\n"
+    },
+    {
+      "number": 2,
+      "content": "<p><strong>2.</strong></p>\n<p><em>Yêu cầu chung (1–4):</em> Kiểm tra công thức bằng cách lấy đạo hàm.</p>\n<p><span class=\"math inline\">\\(\\displaystyle\\int\\tan^2x\\,dx=\\tan x-x+C\\)</span>.</p>\n"
+    },
+    {
+      "number": 3,
+      "content": "<p><strong>3.</strong></p>\n<p><em>Yêu cầu chung (1–4):</em> Kiểm tra công thức bằng cách lấy đạo hàm.</p>\n<p><span class=\"math inline\">\\(\\displaystyle\\int\\frac{dx}{x^2\\sqrt{1+x^2}}=-\\frac{\\sqrt{1+x^2}}x+C\\)</span>.</p>\n"
+    },
+    {
+      "number": 4,
+      "content": "<p><strong>4.</strong></p>\n<p><em>Yêu cầu chung (1–4):</em> Kiểm tra công thức bằng cách lấy đạo hàm.</p>\n<p><span class=\"math inline\">\\(\\displaystyle\\int x\\sqrt{a+bx}\\,dx=\\frac2{15b^2}(3bx-2a)(a+bx)^{3/2}+C\\)</span>.</p>\n"
+    },
+    {
+      "number": 5,
+      "content": "<p><strong>5.</strong></p>\n<p><em>Yêu cầu chung (5–24):</em> Tìm tích phân bất định tổng quát.</p>\n<p><span class=\"math inline\">\\(\\displaystyle\\int(3x^2+4x+1)\\,dx\\)</span>.</p>\n"
+    },
+    {
+      "number": 6,
+      "content": "<p><strong>6.</strong></p>\n<p><em>Yêu cầu chung (5–24):</em> Tìm tích phân bất định tổng quát.</p>\n<p><span class=\"math inline\">\\(\\displaystyle\\int(5+2\\sqrt x)\\,dx\\)</span>.</p>\n"
+    },
+    {
+      "number": 7,
+      "content": "<p><strong>7.</strong></p>\n<p><em>Yêu cầu chung (5–24):</em> Tìm tích phân bất định tổng quát.</p>\n<p><span class=\"math inline\">\\(\\displaystyle\\int(x+\\cos x)\\,dx\\)</span>.</p>\n"
+    },
+    {
+      "number": 8,
+      "content": "<p><strong>8.</strong></p>\n<p><em>Yêu cầu chung (5–24):</em> Tìm tích phân bất định tổng quát.</p>\n<p><span class=\"math inline\">\\(\\displaystyle\\int\\left(\\sqrt[3]x+\\frac1{\\sqrt[3]x}\\right)\\,dx\\)</span>.</p>\n"
+    },
+    {
+      "number": 9,
+      "content": "<p><strong>9.</strong></p>\n<p><em>Yêu cầu chung (5–24):</em> Tìm tích phân bất định tổng quát.</p>\n<p><span class=\"math inline\">\\(\\displaystyle\\int(x^{1.3}+7x^{2.5})\\,dx\\)</span>.</p>\n"
+    },
+    {
+      "number": 10,
+      "content": "<p><strong>10.</strong></p>\n<p><em>Yêu cầu chung (5–24):</em> Tìm tích phân bất định tổng quát.</p>\n<p><span class=\"math inline\">\\(\\displaystyle\\int\\sqrt[4]{x^5}\\,dx\\)</span>.</p>\n"
+    },
+    {
+      "number": 11,
+      "content": "<p><strong>11.</strong></p>\n<p><em>Yêu cầu chung (5–24):</em> Tìm tích phân bất định tổng quát.</p>\n<p><span class=\"math inline\">\\(\\displaystyle\\int\\left(5+\\frac23x^2+\\frac34x^3\\right)\\,dx\\)</span>.</p>\n"
+    },
+    {
+      "number": 12,
+      "content": "<p><strong>12.</strong></p>\n<p><em>Yêu cầu chung (5–24):</em> Tìm tích phân bất định tổng quát.</p>\n<p><span class=\"math inline\">\\(\\displaystyle\\int\\left(u^6-2u^5-u^3+\\frac27\\right)\\,du\\)</span>.</p>\n"
+    },
+    {
+      "number": 13,
+      "content": "<p><strong>13.</strong></p>\n<p><em>Yêu cầu chung (5–24):</em> Tìm tích phân bất định tổng quát.</p>\n<p><span class=\"math inline\">\\(\\displaystyle\\int(u+4)(2u+1)\\,du\\)</span>.</p>\n"
+    },
+    {
+      "number": 14,
+      "content": "<p><strong>14.</strong></p>\n<p><em>Yêu cầu chung (5–24):</em> Tìm tích phân bất định tổng quát.</p>\n<p><span class=\"math inline\">\\(\\displaystyle\\int\\sqrt t(t^2+3t+2)\\,dt\\)</span>.</p>\n"
+    },
+    {
+      "number": 15,
+      "content": "<p><strong>15.</strong></p>\n<p><em>Yêu cầu chung (5–24):</em> Tìm tích phân bất định tổng quát.</p>\n<p><span class=\"math inline\">\\(\\displaystyle\\int\\frac{1+\\sqrt x+x}{x}\\,dx\\)</span>.</p>\n"
+    },
+    {
+      "number": 16,
+      "content": "<p><strong>16.</strong></p>\n<p><em>Yêu cầu chung (5–24):</em> Tìm tích phân bất định tổng quát.</p>\n<p><span class=\"math inline\">\\(\\displaystyle\\int\\left(x^2+1+\\frac1{x^2+1}\\right)\\,dx\\)</span>.</p>\n"
+    },
+    {
+      "number": 17,
+      "content": "<p><strong>17.</strong></p>\n<p><em>Yêu cầu chung (5–24):</em> Tìm tích phân bất định tổng quát.</p>\n<p><span class=\"math inline\">\\(\\displaystyle\\int\\left(e^x+\\frac1x\\right)\\,dx\\)</span>.</p>\n"
+    },
+    {
+      "number": 18,
+      "content": "<p><strong>18.</strong></p>\n<p><em>Yêu cầu chung (5–24):</em> Tìm tích phân bất định tổng quát.</p>\n<p><span class=\"math inline\">\\(\\displaystyle\\int(2+3^x)\\,dx\\)</span>.</p>\n"
+    },
+    {
+      "number": 19,
+      "content": "<p><strong>19.</strong></p>\n<p><em>Yêu cầu chung (5–24):</em> Tìm tích phân bất định tổng quát.</p>\n<p><span class=\"math inline\">\\(\\displaystyle\\int(\\sin x+\\sinh x)\\,dx\\)</span>.</p>\n"
+    },
+    {
+      "number": 20,
+      "content": "<p><strong>20.</strong></p>\n<p><em>Yêu cầu chung (5–24):</em> Tìm tích phân bất định tổng quát.</p>\n<p><span class=\"math inline\">\\(\\displaystyle\\int\\left(\\frac{1+r}{r}\\right)^2\\,dr\\)</span>.</p>\n"
+    },
+    {
+      "number": 21,
+      "content": "<p><strong>21.</strong></p>\n<p><em>Yêu cầu chung (5–24):</em> Tìm tích phân bất định tổng quát.</p>\n<p><span class=\"math inline\">\\(\\displaystyle\\int(2+\\tan^2\\theta)\\,d\\theta\\)</span>.</p>\n"
+    },
+    {
+      "number": 22,
+      "content": "<p><strong>22.</strong></p>\n<p><em>Yêu cầu chung (5–24):</em> Tìm tích phân bất định tổng quát.</p>\n<p><span class=\"math inline\">\\(\\displaystyle\\int\\sec t(\\sec t+\\tan t)\\,dt\\)</span>.</p>\n"
+    },
+    {
+      "number": 23,
+      "content": "<p><strong>23.</strong></p>\n<p><em>Yêu cầu chung (5–24):</em> Tìm tích phân bất định tổng quát.</p>\n<p><span class=\"math inline\">\\(\\displaystyle\\int3\\csc^2t\\,dt\\)</span>.</p>\n"
+    },
+    {
+      "number": 24,
+      "content": "<p><strong>24.</strong></p>\n<p><em>Yêu cầu chung (5–24):</em> Tìm tích phân bất định tổng quát.</p>\n<p><span class=\"math inline\">\\(\\displaystyle\\int\\frac{\\sin2x}{\\sin x}\\,dx\\)</span>.</p>\n"
+    },
+    {
+      "number": 25,
+      "content": "<p><strong>25.</strong></p>\n<p><em>Yêu cầu chung (25–26):</em> Tìm tích phân bất định tổng quát. Minh họa bằng cách vẽ đồ thị của một số hàm trong họ trên cùng một màn hình.</p>\n<p><span class=\"math inline\">\\(\\displaystyle\\int\\left(\\cos x+\\frac12x\\right)\\,dx\\)</span>.</p>\n"
+    },
+    {
+      "number": 26,
+      "content": "<p><strong>26.</strong></p>\n<p><em>Yêu cầu chung (25–26):</em> Tìm tích phân bất định tổng quát. Minh họa bằng cách vẽ đồ thị của một số hàm trong họ trên cùng một màn hình.</p>\n<p><span class=\"math inline\">\\(\\displaystyle\\int(e^x-2x^2)\\,dx\\)</span>.</p>\n"
+    },
+    {
+      "number": 27,
+      "content": "<p><strong>27.</strong></p>\n<p><em>Yêu cầu chung (27–54):</em> Tính tích phân xác định.</p>\n<p><span class=\"math inline\">\\(\\displaystyle\\int_{-2}^3(x^2-3)\\,dx\\)</span>.</p>\n"
+    },
+    {
+      "number": 28,
+      "content": "<p><strong>28.</strong></p>\n<p><em>Yêu cầu chung (27–54):</em> Tính tích phân xác định.</p>\n<p><span class=\"math inline\">\\(\\displaystyle\\int_1^2(4x^3-3x^2+2x)\\,dx\\)</span>.</p>\n"
+    },
+    {
+      "number": 29,
+      "content": "<p><strong>29.</strong></p>\n<p><em>Yêu cầu chung (27–54):</em> Tính tích phân xác định.</p>\n<p><span class=\"math inline\">\\(\\displaystyle\\int_1^4(8t^3-6t^{-2})\\,dt\\)</span>.</p>\n"
+    },
+    {
+      "number": 30,
+      "content": "<p><strong>30.</strong></p>\n<p><em>Yêu cầu chung (27–54):</em> Tính tích phân xác định.</p>\n<p><span class=\"math inline\">\\(\\displaystyle\\int_0^8\\left(\\frac18+\\frac12w+\\frac13w^{1/3}\\right)\\,dw\\)</span>.</p>\n"
+    },
+    {
+      "number": 31,
+      "content": "<p><strong>31.</strong></p>\n<p><em>Yêu cầu chung (27–54):</em> Tính tích phân xác định.</p>\n<p><span class=\"math inline\">\\(\\displaystyle\\int_0^2(2x-3)(4x^2+1)\\,dx\\)</span>.</p>\n"
+    },
+    {
+      "number": 32,
+      "content": "<p><strong>32.</strong></p>\n<p><em>Yêu cầu chung (27–54):</em> Tính tích phân xác định.</p>\n<p><span class=\"math inline\">\\(\\displaystyle\\int_1^2\\left(\\frac1{x^2}-\\frac4{x^3}\\right)\\,dx\\)</span>.</p>\n"
+    },
+    {
+      "number": 33,
+      "content": "<p><strong>33.</strong></p>\n<p><em>Yêu cầu chung (27–54):</em> Tính tích phân xác định.</p>\n<p><span class=\"math inline\">\\(\\displaystyle\\int_1^3\\frac{3x^2+4x+1}{x}\\,dx\\)</span>.</p>\n"
+    },
+    {
+      "number": 34,
+      "content": "<p><strong>34.</strong></p>\n<p><em>Yêu cầu chung (27–54):</em> Tính tích phân xác định.</p>\n<p><span class=\"math inline\">\\(\\displaystyle\\int_{-1}^1t(1-t)^2\\,dt\\)</span>.</p>\n"
+    },
+    {
+      "number": 35,
+      "content": "<p><strong>35.</strong></p>\n<p><em>Yêu cầu chung (27–54):</em> Tính tích phân xác định.</p>\n<p><span class=\"math inline\">\\(\\displaystyle\\int_1^4\\frac{4+6u}{\\sqrt u}\\,du\\)</span>.</p>\n"
+    },
+    {
+      "number": 36,
+      "content": "<p><strong>36.</strong></p>\n<p><em>Yêu cầu chung (27–54):</em> Tính tích phân xác định.</p>\n<p><span class=\"math inline\">\\(\\displaystyle\\int_0^1\\frac4{1+p^2}\\,dp\\)</span>.</p>\n"
+    },
+    {
+      "number": 37,
+      "content": "<p><strong>37.</strong></p>\n<p><em>Yêu cầu chung (27–54):</em> Tính tích phân xác định.</p>\n<p><span class=\"math inline\">\\(\\displaystyle\\int_{\\pi/6}^{\\pi/3}4\\sec^2y\\,dy\\)</span>.</p>\n"
+    },
+    {
+      "number": 38,
+      "content": "<p><strong>38.</strong></p>\n<p><em>Yêu cầu chung (27–54):</em> Tính tích phân xác định.</p>\n<p><span class=\"math inline\">\\(\\displaystyle\\int_0^{\\pi/2}(\\sqrt t-3\\cos t)\\,dt\\)</span>.</p>\n"
+    },
+    {
+      "number": 39,
+      "content": "<p><strong>39.</strong></p>\n<p><em>Yêu cầu chung (27–54):</em> Tính tích phân xác định.</p>\n<p><span class=\"math inline\">\\(\\displaystyle\\int_0^1x(\\sqrt[3]x+\\sqrt[4]x)\\,dx\\)</span>.</p>\n"
+    },
+    {
+      "number": 40,
+      "content": "<p><strong>40.</strong></p>\n<p><em>Yêu cầu chung (27–54):</em> Tính tích phân xác định.</p>\n<p><span class=\"math inline\">\\(\\displaystyle\\int_1^4\\frac{\\sqrt y-y}{y^2}\\,dy\\)</span>.</p>\n"
+    },
+    {
+      "number": 41,
+      "content": "<p><strong>41.</strong></p>\n<p><em>Yêu cầu chung (27–54):</em> Tính tích phân xác định.</p>\n<p><span class=\"math inline\">\\(\\displaystyle\\int_1^2\\left(\\frac x2-\\frac2x\\right)\\,dx\\)</span>.</p>\n"
+    },
+    {
+      "number": 42,
+      "content": "<p><strong>42.</strong></p>\n<p><em>Yêu cầu chung (27–54):</em> Tính tích phân xác định.</p>\n<p><span class=\"math inline\">\\(\\displaystyle\\int_0^1(5^x-5x)\\,dx\\)</span>.</p>\n"
+    },
+    {
+      "number": 43,
+      "content": "<p><strong>43.</strong></p>\n<p><em>Yêu cầu chung (27–54):</em> Tính tích phân xác định.</p>\n<p><span class=\"math inline\">\\(\\displaystyle\\int_{-2}^2(\\sinh x+\\cosh x)\\,dx\\)</span>.</p>\n"
+    },
+    {
+      "number": 44,
+      "content": "<p><strong>44.</strong></p>\n<p><em>Yêu cầu chung (27–54):</em> Tính tích phân xác định.</p>\n<p><span class=\"math inline\">\\(\\displaystyle\\int_0^{\\pi/4}(3e^x-4\\sec x\\tan x)\\,dx\\)</span>.</p>\n"
+    },
+    {
+      "number": 45,
+      "content": "<p><strong>45.</strong></p>\n<p><em>Yêu cầu chung (27–54):</em> Tính tích phân xác định.</p>\n<p><span class=\"math inline\">\\(\\displaystyle\\int_0^{\\pi/4}\\frac{1+\\cos^2\\theta}{\\cos^2\\theta}\\,d\\theta\\)</span>.</p>\n"
+    },
+    {
+      "number": 46,
+      "content": "<p><strong>46.</strong></p>\n<p><em>Yêu cầu chung (27–54):</em> Tính tích phân xác định.</p>\n<p><span class=\"math inline\">\\(\\displaystyle\\int_0^{\\pi/3}\\frac{\\sin\\theta+\\sin\\theta\\tan^2\\theta}{\\sec^2\\theta}\\,d\\theta\\)</span>.</p>\n"
+    },
+    {
+      "number": 47,
+      "content": "<p><strong>47.</strong></p>\n<p><em>Yêu cầu chung (27–54):</em> Tính tích phân xác định.</p>\n<p><span class=\"math inline\">\\(\\displaystyle\\int_3^4\\sqrt{\\frac3x}\\,dx\\)</span>.</p>\n"
+    },
+    {
+      "number": 48,
+      "content": "<p><strong>48.</strong></p>\n<p><em>Yêu cầu chung (27–54):</em> Tính tích phân xác định.</p>\n<p><span class=\"math inline\">\\(\\displaystyle\\int_{-10}^{10}\\frac{2e^x}{\\sinh x+\\cosh x}\\,dx\\)</span>.</p>\n"
+    },
+    {
+      "number": 49,
+      "content": "<p><strong>49.</strong></p>\n<p><em>Yêu cầu chung (27–54):</em> Tính tích phân xác định.</p>\n<p><span class=\"math inline\">\\(\\displaystyle\\int_0^{\\sqrt3/2}\\frac{dr}{\\sqrt{1-r^2}}\\)</span>.</p>\n"
+    },
+    {
+      "number": 50,
+      "content": "<p><strong>50.</strong></p>\n<p><em>Yêu cầu chung (27–54):</em> Tính tích phân xác định.</p>\n<p><span class=\"math inline\">\\(\\displaystyle\\int_{\\pi/6}^{\\pi/2}\\csc t\\cot t\\,dt\\)</span>.</p>\n"
+    },
+    {
+      "number": 51,
+      "content": "<p><strong>51.</strong></p>\n<p><em>Yêu cầu chung (27–54):</em> Tính tích phân xác định.</p>\n<p><span class=\"math inline\">\\(\\displaystyle\\int_0^{1/\\sqrt3}\\frac{t^2-1}{t^4-1}\\,dt\\)</span>.</p>\n"
+    },
+    {
+      "number": 52,
+      "content": "<p><strong>52.</strong></p>\n<p><em>Yêu cầu chung (27–54):</em> Tính tích phân xác định.</p>\n<p><span class=\"math inline\">\\(\\displaystyle\\int_0^2|2x-1|\\,dx\\)</span>.</p>\n"
+    },
+    {
+      "number": 53,
+      "content": "<p><strong>53.</strong></p>\n<p><em>Yêu cầu chung (27–54):</em> Tính tích phân xác định.</p>\n<p><span class=\"math inline\">\\(\\displaystyle\\int_{-1}^2(x-2|x|)\\,dx\\)</span>.</p>\n"
+    },
+    {
+      "number": 54,
+      "content": "<p><strong>54.</strong></p>\n<p><em>Yêu cầu chung (27–54):</em> Tính tích phân xác định.</p>\n<p><span class=\"math inline\">\\(\\displaystyle\\int_0^{3\\pi/2}|\\sin x|\\,dx\\)</span>.</p>\n"
+    },
+    {
+      "number": 55,
+      "content": "<p><strong>55.</strong></p>\n<p>Dùng đồ thị để ước lượng các giao điểm của đường cong <span class=\"math inline\">\\(y=1-2x-5x^4\\)</span> với trục <span class=\"math inline\">\\(x\\)</span>. Sau đó, sử dụng thông tin này để ước lượng diện tích miền nằm dưới đường cong và phía trên trục <span class=\"math inline\">\\(x\\)</span>.</p>\n"
+    },
+    {
+      "number": 56,
+      "content": "<p><strong>56.</strong></p>\n<p>Làm lại Bài tập 55 với đường cong <span class=\"math inline\">\\(y=(x^2+1)^{-1}-x^4\\)</span>.</p>\n<p><em>Yêu cầu từ Bài tập 55:</em> Dùng đồ thị để ước lượng các giao điểm của đường cong đã cho với trục <span class=\"math inline\">\\(x\\)</span>. Sau đó sử dụng thông tin này để ước lượng diện tích miền nằm dưới đường cong và phía trên trục <span class=\"math inline\">\\(x\\)</span>.</p>\n"
+    },
+    {
+      "number": 57,
+      "content": "<p><strong>57.</strong></p>\n<p>Diện tích miền nằm bên phải trục <span class=\"math inline\">\\(y\\)</span> và bên trái parabol <span class=\"math inline\">\\(x=2y-y^2\\)</span> (miền tô màu trong hình) được cho bởi tích phân <span class=\"math inline\">\\(\\int_0^2(2y-y^2)\\,dy\\)</span>. (Nghiêng đầu theo chiều kim đồng hồ và xem miền này là miền nằm dưới đường cong <span class=\"math inline\">\\(x=2y-y^2\\)</span> từ <span class=\"math inline\">\\(y=0\\)</span> đến <span class=\"math inline\">\\(y=2\\)</span>.) Tìm diện tích miền đó.</p>\n<div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-5-4-370195f0/ex57.png\" alt=\"image\" /><br />\nHình cho Bài tập 57</p>\n</div>\n"
+    },
+    {
+      "number": 58,
+      "content": "<p><strong>58.</strong></p>\n<p>Biên của miền tô màu gồm trục <span class=\"math inline\">\\(y\\)</span>, đường thẳng <span class=\"math inline\">\\(y=1\\)</span> và đường cong <span class=\"math inline\">\\(y=\\sqrt[4]x\\)</span>. Tìm diện tích miền này bằng cách viết <span class=\"math inline\">\\(x\\)</span> thành hàm của <span class=\"math inline\">\\(y\\)</span> rồi lấy tích phân theo <span class=\"math inline\">\\(y\\)</span> (như trong Bài tập 57).</p>\n<div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-5-4-370195f0/ex58.png\" alt=\"image\" /><br />\nHình cho Bài tập 58</p>\n</div>\n"
+    },
+    {
+      "number": 59,
+      "content": "<p><strong>59.</strong></p>\n<p>Nếu <span class=\"math inline\">\\(w&#39;(t)\\)</span> là tốc độ tăng trưởng của một đứa trẻ, tính bằng pound mỗi năm, thì <span class=\"math inline\">\\(\\int_5^{10}w&#39;(t)\\,dt\\)</span> biểu diễn điều gì?</p>\n"
+    },
+    {
+      "number": 60,
+      "content": "<p><strong>60.</strong></p>\n<p>Cường độ dòng điện trong một dây dẫn được định nghĩa là đạo hàm của điện tích: <span class=\"math inline\">\\(I(t)=Q&#39;(t)\\)</span>. (Xem Ví dụ 3.7.3.) Tích phân <span class=\"math inline\">\\(\\int_a^b I(t)\\,dt\\)</span> biểu diễn điều gì?</p>\n"
+    },
+    {
+      "number": 61,
+      "content": "<p><strong>61.</strong></p>\n<p>Nếu dầu rò rỉ khỏi một bồn với tốc độ <span class=\"math inline\">\\(r(t)\\)</span> gallon mỗi phút tại thời điểm <span class=\"math inline\">\\(t\\)</span> thì <span class=\"math inline\">\\(\\int_0^{120}r(t)\\,dt\\)</span> biểu diễn điều gì?</p>\n"
+    },
+    {
+      "number": 62,
+      "content": "<p><strong>62.</strong></p>\n<p>Một đàn ong mật ban đầu có 100 con và tăng với tốc độ <span class=\"math inline\">\\(n&#39;(t)\\)</span> con mỗi tuần. Biểu thức <span class=\"math inline\">\\(100+\\int_0^{15}n&#39;(t)\\,dt\\)</span> biểu diễn điều gì?</p>\n"
+    },
+    {
+      "number": 63,
+      "content": "<p><strong>63.</strong></p>\n<p>Ở §4.7, ta đã định nghĩa hàm doanh thu biên <span class=\"math inline\">\\(R&#39;(x)\\)</span> là đạo hàm của hàm doanh thu <span class=\"math inline\">\\(R(x)\\)</span>, trong đó <span class=\"math inline\">\\(x\\)</span> là số đơn vị bán ra. Tích phân <span class=\"math inline\">\\(\\int_{1000}^{5000}R&#39;(x)\\,dx\\)</span> biểu diễn điều gì?</p>\n"
+    },
+    {
+      "number": 64,
+      "content": "<p><strong>64.</strong></p>\n<p>Nếu <span class=\"math inline\">\\(f(x)\\)</span> là hệ số góc của một đường mòn tại vị trí cách điểm đầu đường mòn <span class=\"math inline\">\\(x\\)</span> dặm thì <span class=\"math inline\">\\(\\int_3^5 f(x)\\,dx\\)</span> biểu diễn điều gì?</p>\n"
+    },
+    {
+      "number": 65,
+      "content": "<p><strong>65.</strong></p>\n<p>Nếu <span class=\"math inline\">\\(h(t)\\)</span> là nhịp tim của một người, tính bằng nhịp mỗi phút, sau khi bắt đầu tập thể dục <span class=\"math inline\">\\(t\\)</span> phút thì <span class=\"math inline\">\\(\\int_0^{30}h(t)\\,dt\\)</span> biểu diễn điều gì?</p>\n"
+    },
+    {
+      "number": 66,
+      "content": "<p><strong>66.</strong></p>\n<p>Nếu <span class=\"math inline\">\\(x\\)</span> có đơn vị foot và <span class=\"math inline\">\\(a(x)\\)</span> có đơn vị pound trên foot thì <span class=\"math inline\">\\(da/dx\\)</span> có đơn vị gì? Tích phân <span class=\"math inline\">\\(\\int_2^8a(x)\\,dx\\)</span> có đơn vị gì?</p>\n"
+    },
+    {
+      "number": 67,
+      "content": "<p><strong>67.</strong></p>\n<p>Nếu <span class=\"math inline\">\\(x\\)</span> được tính bằng mét và <span class=\"math inline\">\\(f(x)\\)</span> được tính bằng newton thì tích phân <span class=\"math inline\">\\(\\int_0^{100}f(x)\\,dx\\)</span> có đơn vị gì?</p>\n"
+    },
+    {
+      "number": 68,
+      "content": "<p><strong>68.</strong></p>\n<p>Đồ thị cho biết vận tốc (m/s) của một xe điện tự hành chuyển động trên đường thẳng. Tại <span class=\"math inline\">\\(t=0\\)</span>, xe ở trạm sạc.</p>\n<p>(a) Xe cách trạm sạc bao xa tại <span class=\"math inline\">\\(t=2\\)</span>, <span class=\"math inline\">\\(4\\)</span>, <span class=\"math inline\">\\(6\\)</span>, <span class=\"math inline\">\\(8\\)</span>, <span class=\"math inline\">\\(10\\)</span> và <span class=\"math inline\">\\(12\\)</span>?</p>\n<p>(b) Vào những thời điểm nào xe ở xa trạm sạc nhất?</p>\n<p>(c) Tổng quãng đường xe đi được là bao nhiêu?</p>\n<div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-5-4-370195f0/ex68.png\" alt=\"image\" /><br />\nHình cho Bài tập 68</p>\n</div>\n"
+    },
+    {
+      "number": 69,
+      "content": "<p><strong>69.</strong></p>\n<p><em>Yêu cầu chung (69–70):</em> Cho hàm vận tốc (m/s) của một chất điểm chuyển động trên đường thẳng. Tìm (a) độ dời và (b) quãng đường chất điểm đi được trong khoảng thời gian đã cho.</p>\n<p><span class=\"math inline\">\\(v(t)=3t-5\\)</span>, <span class=\"math inline\">\\(0\\le t\\le3\\)</span>.</p>\n"
+    },
+    {
+      "number": 70,
+      "content": "<p><strong>70.</strong></p>\n<p><em>Yêu cầu chung (69–70):</em> Cho hàm vận tốc (m/s) của một chất điểm chuyển động trên đường thẳng. Tìm (a) độ dời và (b) quãng đường chất điểm đi được trong khoảng thời gian đã cho.</p>\n<p><span class=\"math inline\">\\(v(t)=t^2-2t-3\\)</span>, <span class=\"math inline\">\\(2\\le t\\le4\\)</span>.</p>\n"
+    },
+    {
+      "number": 71,
+      "content": "<p><strong>71.</strong></p>\n<p><em>Yêu cầu chung (71–72):</em> Cho hàm gia tốc (m/s<span class=\"math inline\">\\(^2\\)</span>) và vận tốc ban đầu của một chất điểm chuyển động trên đường thẳng. Tìm (a) vận tốc tại thời điểm <span class=\"math inline\">\\(t\\)</span> và (b) quãng đường đi được trong khoảng thời gian đã cho.</p>\n<p><span class=\"math inline\">\\(a(t)=t+4\\)</span>, <span class=\"math inline\">\\(v(0)=5\\)</span>, <span class=\"math inline\">\\(0\\le t\\le10\\)</span>.</p>\n"
+    },
+    {
+      "number": 72,
+      "content": "<p><strong>72.</strong></p>\n<p><em>Yêu cầu chung (71–72):</em> Cho hàm gia tốc (m/s<span class=\"math inline\">\\(^2\\)</span>) và vận tốc ban đầu của một chất điểm chuyển động trên đường thẳng. Tìm (a) vận tốc tại thời điểm <span class=\"math inline\">\\(t\\)</span> và (b) quãng đường đi được trong khoảng thời gian đã cho.</p>\n<p><span class=\"math inline\">\\(a(t)=2t+3\\)</span>, <span class=\"math inline\">\\(v(0)=-4\\)</span>, <span class=\"math inline\">\\(0\\le t\\le3\\)</span>.</p>\n"
+    },
+    {
+      "number": 73,
+      "content": "<p><strong>73.</strong></p>\n<p>Mật độ khối lượng dài của một thanh dài 4 m được cho bởi <span class=\"math inline\">\\(\\rho(x)=9+2\\sqrt x\\)</span>, tính bằng kilôgam trên mét, trong đó <span class=\"math inline\">\\(x\\)</span> tính bằng mét kể từ một đầu thanh. Tìm khối lượng toàn thanh.</p>\n"
+    },
+    {
+      "number": 74,
+      "content": "<p><strong>74.</strong></p>\n<p>Nước chảy ra từ đáy một bồn chứa với tốc độ <span class=\"math inline\">\\(r(t)=200-4t\\)</span> lít mỗi phút, trong đó <span class=\"math inline\">\\(0\\le t\\le50\\)</span>. Tìm lượng nước chảy ra khỏi bồn trong 10 phút đầu tiên.</p>\n"
+    },
+    {
+      "number": 75,
+      "content": "<p><strong>75.</strong></p>\n<p>Vận tốc của một ô tô được đọc từ đồng hồ tốc độ cứ sau 10 giây và ghi trong bảng. Dùng Quy tắc trung điểm để ước lượng quãng đường ô tô đi được.</p>\n<div class=\"center\">\n<table>\n<thead>\n<tr class=\"header\">\n<th style=\"text-align: right;\"><span class=\"math inline\">\\(t\\)</span> (s)</th>\n<th style=\"text-align: right;\"><span class=\"math inline\">\\(v\\)</span> (mi/h)</th>\n<th style=\"text-align: right;\"><span class=\"math inline\">\\(t\\)</span> (s)</th>\n<th style=\"text-align: right;\"><span class=\"math inline\">\\(v\\)</span> (mi/h)</th>\n</tr>\n</thead>\n<tbody>\n<tr class=\"odd\">\n<td style=\"text-align: right;\">0</td>\n<td style=\"text-align: right;\">0</td>\n<td style=\"text-align: right;\">60</td>\n<td style=\"text-align: right;\">56</td>\n</tr>\n<tr class=\"even\">\n<td style=\"text-align: right;\">10</td>\n<td style=\"text-align: right;\">38</td>\n<td style=\"text-align: right;\">70</td>\n<td style=\"text-align: right;\">53</td>\n</tr>\n<tr class=\"odd\">\n<td style=\"text-align: right;\">20</td>\n<td style=\"text-align: right;\">52</td>\n<td style=\"text-align: right;\">80</td>\n<td style=\"text-align: right;\">50</td>\n</tr>\n<tr class=\"even\">\n<td style=\"text-align: right;\">30</td>\n<td style=\"text-align: right;\">58</td>\n<td style=\"text-align: right;\">90</td>\n<td style=\"text-align: right;\">47</td>\n</tr>\n<tr class=\"odd\">\n<td style=\"text-align: right;\">40</td>\n<td style=\"text-align: right;\">55</td>\n<td style=\"text-align: right;\">100</td>\n<td style=\"text-align: right;\">45</td>\n</tr>\n<tr class=\"even\">\n<td style=\"text-align: right;\">50</td>\n<td style=\"text-align: right;\">51</td>\n<td style=\"text-align: right;\"></td>\n<td style=\"text-align: right;\"></td>\n</tr>\n</tbody>\n</table>\n</div>\n"
+    },
+    {
+      "number": 76,
+      "content": "<p><strong>76.</strong></p>\n<p>Giả sử một núi lửa đang phun trào và các số đo tốc độ <span class=\"math inline\">\\(r(t)\\)</span> mà vật liệu rắn được phun vào khí quyển được cho trong bảng. Thời gian <span class=\"math inline\">\\(t\\)</span> tính bằng giây và <span class=\"math inline\">\\(r(t)\\)</span> có đơn vị tấn (tấn hệ mét) mỗi giây.</p>\n<div class=\"center\">\n<table>\n<thead>\n<tr class=\"header\">\n<th style=\"text-align: right;\"><span class=\"math inline\">\\(t\\)</span></th>\n<th style=\"text-align: right;\">0</th>\n<th style=\"text-align: right;\">1</th>\n<th style=\"text-align: right;\">2</th>\n<th style=\"text-align: right;\">3</th>\n<th style=\"text-align: right;\">4</th>\n<th style=\"text-align: right;\">5</th>\n<th style=\"text-align: right;\">6</th>\n</tr>\n</thead>\n<tbody>\n<tr class=\"odd\">\n<td style=\"text-align: right;\"><span class=\"math inline\">\\(r(t)\\)</span></td>\n<td style=\"text-align: right;\">2</td>\n<td style=\"text-align: right;\">10</td>\n<td style=\"text-align: right;\">24</td>\n<td style=\"text-align: right;\">36</td>\n<td style=\"text-align: right;\">46</td>\n<td style=\"text-align: right;\">54</td>\n<td style=\"text-align: right;\">60</td>\n</tr>\n</tbody>\n</table>\n</div>\n<p>(a) Cho các ước lượng trên và dưới của tổng lượng vật liệu <span class=\"math inline\">\\(Q(6)\\)</span> được phun ra sau sáu giây.</p>\n<p>(b) Dùng Quy tắc trung điểm để ước lượng <span class=\"math inline\">\\(Q(6)\\)</span>.</p>\n"
+    },
+    {
+      "number": 77,
+      "content": "<p><strong>77.</strong></p>\n<p>Chi phí biên để sản xuất <span class=\"math inline\">\\(x\\)</span> yard một loại vải là <span class=\"math display\">\\[C&#39;(x)=3-0.01x+0.000006x^2\\]</span> (đô la trên yard). Tìm mức tăng chi phí khi sản lượng tăng từ 2000 yard lên 4000 yard.</p>\n"
+    },
+    {
+      "number": 78,
+      "content": "<p><strong>78.</strong></p>\n<p>Nước chảy vào và ra khỏi một bồn chứa. Hình vẽ cho đồ thị tốc độ biến thiên <span class=\"math inline\">\\(r(t)\\)</span> của thể tích nước trong bồn, tính bằng lít mỗi ngày. Nếu lượng nước trong bồn tại thời điểm <span class=\"math inline\">\\(t=0\\)</span> là <span class=\"math inline\">\\(25\\,000\\)</span> L, hãy dùng Quy tắc trung điểm để ước lượng lượng nước trong bồn sau bốn ngày.</p>\n<div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-5-4-370195f0/ex78.png\" alt=\"image\" /><br />\nHình cho Bài tập 78</p>\n</div>\n"
+    },
+    {
+      "number": 79,
+      "content": "<p><strong>79.</strong></p>\n<p>Hình vẽ cho đồ thị gia tốc <span class=\"math inline\">\\(a(t)\\)</span> của một ô tô, tính bằng ft/s<span class=\"math inline\">\\(^2\\)</span>. Dùng Quy tắc trung điểm để ước lượng mức tăng vận tốc của ô tô trong khoảng thời gian sáu giây đó.</p>\n<div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-5-4-370195f0/ex79.png\" alt=\"image\" /><br />\nHình cho Bài tập 79. Trục thời gian: <span class=\"math inline\">\\(t\\)</span> (giây)</p>\n</div>\n"
+    },
+    {
+      "number": 80,
+      "content": "<p><strong>80.</strong></p>\n<p>Hồ Lanier ở Georgia, Hoa Kỳ, là hồ chứa được tạo bởi đập Buford trên sông Chattahoochee. Bảng cho biết lưu lượng nước chảy vào, tính bằng foot khối mỗi giây, do Công binh Lục quân Hoa Kỳ đo vào lúc 7 giờ 30 sáng hằng ngày. Dùng Quy tắc trung điểm để ước lượng lượng nước chảy vào hồ Lanier từ 7 giờ 30 sáng ngày 18 tháng 7 năm 2013 đến 7 giờ 30 sáng ngày 26 tháng 7.</p>\n<div class=\"center\">\n<table>\n<thead>\n<tr class=\"header\">\n<th style=\"text-align: left;\">Ngày</th>\n<th style=\"text-align: right;\">Lưu lượng chảy vào (ft<span class=\"math inline\">\\(^3\\)</span>/s)</th>\n</tr>\n</thead>\n<tbody>\n<tr class=\"odd\">\n<td style=\"text-align: left;\">18 tháng 7</td>\n<td style=\"text-align: right;\">5275</td>\n</tr>\n<tr class=\"even\">\n<td style=\"text-align: left;\">19 tháng 7</td>\n<td style=\"text-align: right;\">6401</td>\n</tr>\n<tr class=\"odd\">\n<td style=\"text-align: left;\">20 tháng 7</td>\n<td style=\"text-align: right;\">2554</td>\n</tr>\n<tr class=\"even\">\n<td style=\"text-align: left;\">21 tháng 7</td>\n<td style=\"text-align: right;\">4249</td>\n</tr>\n<tr class=\"odd\">\n<td style=\"text-align: left;\">22 tháng 7</td>\n<td style=\"text-align: right;\">3016</td>\n</tr>\n<tr class=\"even\">\n<td style=\"text-align: left;\">23 tháng 7</td>\n<td style=\"text-align: right;\">3821</td>\n</tr>\n<tr class=\"odd\">\n<td style=\"text-align: left;\">24 tháng 7</td>\n<td style=\"text-align: right;\">2462</td>\n</tr>\n<tr class=\"even\">\n<td style=\"text-align: left;\">25 tháng 7</td>\n<td style=\"text-align: right;\">2628</td>\n</tr>\n<tr class=\"odd\">\n<td style=\"text-align: left;\">26 tháng 7</td>\n<td style=\"text-align: right;\">3003</td>\n</tr>\n</tbody>\n</table>\n</div>\n"
+    },
+    {
+      "number": 81,
+      "content": "<p><strong>81.</strong></p>\n<p>Một quần thể vi khuẩn có 4000 cá thể tại <span class=\"math inline\">\\(t=0\\)</span> và tốc độ tăng trưởng là <span class=\"math inline\">\\(1000\\cdot2^t\\)</span> vi khuẩn mỗi giờ sau <span class=\"math inline\">\\(t\\)</span> giờ. Sau một giờ, quần thể có bao nhiêu cá thể?</p>\n"
+    },
+    {
+      "number": 82,
+      "content": "<p><strong>82.</strong></p>\n<p>Hình vẽ cho đồ thị lưu lượng dữ liệu trên một đường truyền T1 của một nhà cung cấp dịch vụ Internet từ nửa đêm đến 8 giờ sáng. <span class=\"math inline\">\\(D\\)</span> là thông lượng dữ liệu, tính bằng megabit trên giây. Dùng Quy tắc trung điểm để ước lượng tổng lượng dữ liệu truyền đi trong khoảng thời gian đó.</p>\n<div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-5-4-370195f0/ex82.png\" alt=\"image\" /><br />\nHình cho Bài tập 82. Trục thời gian: <span class=\"math inline\">\\(t\\)</span> (giờ)</p>\n</div>\n"
+    },
+    {
+      "number": 83,
+      "content": "<p><strong>83.</strong></p>\n<p>Hình vẽ cho đồ thị công suất điện tiêu thụ tại các bang New England (Connecticut, Maine, Massachusetts, New Hampshire, Rhode Island và Vermont) vào ngày 22 tháng 10 năm 2010 (<span class=\"math inline\">\\(P\\)</span> tính bằng gigawatt và <span class=\"math inline\">\\(t\\)</span> tính bằng giờ kể từ nửa đêm). Sử dụng tính chất công suất là tốc độ biến thiên của năng lượng để ước lượng năng lượng điện tiêu thụ trong ngày đó.</p>\n<div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-5-4-370195f0/ex83.png\" alt=\"image\" /><br />\nHình cho Bài tập 83. Trục đứng: gigawatt; trục ngang: số giờ kể từ nửa đêm. Nguồn: Cơ quan Thông tin Năng lượng Hoa Kỳ.</p>\n</div>\n"
+    },
+    {
+      "number": 84,
+      "content": "<p><strong>84.</strong></p>\n<p>Năm 1992, tàu con thoi <em>Endeavour</em> được phóng trong sứ mệnh STS-49 để lắp một động cơ đẩy tại cận điểm mới cho một vệ tinh viễn thông Intelsat. Bảng cho biết số liệu vận tốc của tàu từ lúc rời bệ phóng đến khi tách các tên lửa đẩy nhiên liệu rắn.</p>\n<p>(a) Dùng máy tính đồ thị hoặc máy tính để mô hình hóa các số liệu này bằng một đa thức bậc ba.</p>\n<p>(b) Sử dụng mô hình ở câu (a) để ước lượng độ cao mà <em>Endeavour</em> đạt được sau khi rời bệ phóng 125 giây.</p>\n<div class=\"center\">\n<table>\n<thead>\n<tr class=\"header\">\n<th style=\"text-align: left;\">Sự kiện</th>\n<th style=\"text-align: right;\">Thời gian (s)</th>\n<th style=\"text-align: right;\">Vận tốc (ft/s)</th>\n</tr>\n</thead>\n<tbody>\n<tr class=\"odd\">\n<td style=\"text-align: left;\">Phóng</td>\n<td style=\"text-align: right;\">0</td>\n<td style=\"text-align: right;\">0</td>\n</tr>\n<tr class=\"even\">\n<td style=\"text-align: left;\">Bắt đầu động tác lăn</td>\n<td style=\"text-align: right;\">10</td>\n<td style=\"text-align: right;\">185</td>\n</tr>\n<tr class=\"odd\">\n<td style=\"text-align: left;\">Kết thúc động tác lăn</td>\n<td style=\"text-align: right;\">15</td>\n<td style=\"text-align: right;\">319</td>\n</tr>\n<tr class=\"even\">\n<td style=\"text-align: left;\">Điều chỉnh lực đẩy đến 89%</td>\n<td style=\"text-align: right;\">20</td>\n<td style=\"text-align: right;\">447</td>\n</tr>\n<tr class=\"odd\">\n<td style=\"text-align: left;\">Điều chỉnh lực đẩy đến 67%</td>\n<td style=\"text-align: right;\">32</td>\n<td style=\"text-align: right;\">742</td>\n</tr>\n<tr class=\"even\">\n<td style=\"text-align: left;\">Điều chỉnh lực đẩy đến 104%</td>\n<td style=\"text-align: right;\">59</td>\n<td style=\"text-align: right;\">1325</td>\n</tr>\n<tr class=\"odd\">\n<td style=\"text-align: left;\">Áp suất động cực đại</td>\n<td style=\"text-align: right;\">62</td>\n<td style=\"text-align: right;\">1445</td>\n</tr>\n<tr class=\"even\">\n<td style=\"text-align: left;\">Tách tên lửa đẩy nhiên liệu rắn</td>\n<td style=\"text-align: right;\">125</td>\n<td style=\"text-align: right;\">4151</td>\n</tr>\n</tbody>\n</table>\n</div>\n"
+    }
+  ]
+}
