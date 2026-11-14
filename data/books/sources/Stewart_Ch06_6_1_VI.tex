@@ -1,0 +1,382 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage{fontspec}\setmainfont{Latin Modern Roman}\setsansfont{DejaVu Sans}
+\usepackage{amsmath,amssymb,graphicx,geometry,enumitem,needspace,longtable,booktabs,fancyhdr,hyperref}
+\geometry{left=28mm,right=23mm,top=24mm,bottom=24mm}
+\hypersetup{unicode=true,colorlinks=true,linkcolor=black,urlcolor=blue,pdftitle={Giải tích §6.1 — Diện tích giữa các đường cong}}
+\setlength{\parindent}{1.2em}\setlength{\parskip}{4pt}\setlength{\headheight}{16pt}
+\pagestyle{fancy}\fancyhf{}\fancyhead[L]{\small Chương 6. Ứng dụng của tích phân}\fancyhead[R]{\small §6.1}\fancyfoot[C]{\thepage}
+\newcommand{\fig}[3][.68]{\begin{center}\begin{minipage}{\linewidth}\centering\includegraphics[width=#1\linewidth]{assets/#2.png}\\{\small #3}\end{minipage}\end{center}}
+\newcommand{\ex}[1]{\par\medskip\noindent\textbf{Ví dụ #1.}\ }
+\newcommand{\sol}{\par\nopagebreak[4]\noindent\textit{Lời giải.}\ }
+\newcommand{\bt}[1]{\par\smallskip\Needspace{5\baselineskip}\noindent\textbf{#1.}\ }
+\newcommand{\group}[1]{\par\medskip\noindent\textbf{#1}\par\nopagebreak[4]}
+\newcommand{\gint}[1]{\left[\!\left[#1\right]\!\right]}
+\allowdisplaybreaks[2]
+\DeclareMathOperator{\sech}{sech}
+\DeclareMathOperator{\csch}{csch}
+\DeclareMathOperator{\arccot}{arccot}
+
+\newcommand{\prj}[1]{\bt{#1}}
+\begin{document}
+\begin{center}{\LARGE\bfseries Chương 6 — Ứng dụng của tích phân}\end{center}
+\fig[.93]{chapter}{Ảnh: Rock and Wasp / Shutterstock.com}
+Phép quay được sử dụng trong nhiều quy trình chế tạo. Bức ảnh cho thấy một nghệ nhân đang tạo hình một chiếc bình đất sét trên bàn xoay gốm. Trong Bài tập 6.2.87, ta sẽ tìm hiểu các vấn đề toán học của việc thiết kế một chiếc bình đất nung.
+
+Trong chương này, ta khảo sát một số ứng dụng của tích phân xác định để tính diện tích giữa các đường cong, thể tích vật thể và công do một lực biến thiên thực hiện. Điểm chung là phương pháp tổng quát sau, tương tự phương pháp đã dùng để tìm diện tích dưới đường cong: chia một đại lượng $Q$ thành nhiều phần nhỏ; xấp xỉ mỗi phần bằng một đại lượng dạng $f(x_i^*)\Delta x$, qua đó xấp xỉ $Q$ bằng một tổng Riemann. Sau đó, lấy giới hạn và biểu diễn $Q$ thành một tích phân. Cuối cùng, tính tích phân bằng Định lý cơ bản của giải tích hoặc Quy tắc trung điểm.
+
+\clearpage
+\begin{center}{\LARGE\bfseries 6.1 — Diện tích giữa các đường cong}\end{center}
+Trong Chương 5, ta đã định nghĩa và tính diện tích các miền nằm dưới đồ thị hàm số. Ở đây, ta dùng tích phân để tìm diện tích các miền nằm giữa đồ thị của hai hàm số.
+
+\subsection*{Diện tích giữa các đường cong: lấy tích phân theo $x$}
+Xét miền $S$ trong Hình 1, nằm giữa hai đường cong $y=f(x)$, $y=g(x)$ và hai đường thẳng đứng $x=a$, $x=b$, trong đó $f$, $g$ liên tục và $f(x)\ge g(x)$ với mọi $x\in[a,b]$.
+\fig[.42]{fig01}{Hình 1}
+\[S=\{(x,y)\mid a\le x\le b,\ g(x)\le y\le f(x)\}.\]
+Như khi tìm diện tích dưới đường cong ở §5.1, ta chia $S$ thành $n$ dải có cùng bề rộng, rồi xấp xỉ dải thứ $i$ bằng một hình chữ nhật có đáy $\Delta x$ và chiều cao $f(x_i^*)-g(x_i^*)$. (Xem Hình 2. Nếu muốn, ta có thể lấy tất cả các điểm mẫu là đầu mút phải, khi đó $x_i^*=x_i$.) Vì vậy, tổng Riemann
+\[\sum_{i=1}^n[f(x_i^*)-g(x_i^*)]\Delta x\]
+là một giá trị xấp xỉ cho diện tích miền $S$ theo cách hiểu trực quan.
+\fig[.90]{fig02}{Hình 2. (a) Hình chữ nhật điển hình. (b) Các hình chữ nhật xấp xỉ.}
+Phép xấp xỉ này có vẻ ngày càng tốt hơn khi $n\to\infty$. Do đó, ta \textit{định nghĩa} diện tích $A$ của miền $S$ là giới hạn của tổng diện tích các hình chữ nhật xấp xỉ:
+\begin{equation}A=\lim_{n\to\infty}\sum_{i=1}^n[f(x_i^*)-g(x_i^*)]\Delta x.\tag{1}\end{equation}
+Ta nhận ra giới hạn trong (1) là tích phân xác định của $f-g$. Vì thế, ta có công thức diện tích sau.
+\Needspace{8\baselineskip}
+\subsection*{2. Công thức diện tích}
+Diện tích $A$ của miền giới hạn bởi các đường cong $y=f(x)$, $y=g(x)$ và các đường thẳng $x=a$, $x=b$, trong đó $f$, $g$ liên tục và $f(x)\ge g(x)$ với mọi $x\in[a,b]$, là
+\[\boxed{\displaystyle A=\int_a^b[f(x)-g(x)]\,dx.}\]
+Chú ý rằng trong trường hợp đặc biệt $g(x)=0$, $S$ là miền dưới đồ thị của $f$ và định nghĩa tổng quát (1) trở thành định nghĩa trước đây về diện tích (Định nghĩa 5.1.2).
+
+Trong trường hợp cả $f$ và $g$ đều dương, Hình 3 cho thấy vì sao (2) đúng:
+\begin{align*}
+A&=[\text{diện tích dưới }y=f(x)]-[\text{diện tích dưới }y=g(x)]\\
+&=\int_a^bf(x)\,dx-\int_a^bg(x)\,dx=\int_a^b[f(x)-g(x)]\,dx.
+\end{align*}
+\fig[.43]{fig03}{Hình 3. $A=\int_a^bf(x)\,dx-\int_a^bg(x)\,dx$.}
+
+\Needspace{22\baselineskip}
+\ex{1} Tìm diện tích miền giới hạn phía trên bởi $y=e^x$, phía dưới bởi $y=x$ và hai bên bởi $x=0$, $x=1$.
+\sol Miền được biểu diễn trong Hình 4. Đường biên trên là $y=e^x$, đường biên dưới là $y=x$. Vì thế, dùng công thức diện tích (2) với $f(x)=e^x$, $g(x)=x$, $a=0$, $b=1$, ta có
+\begin{align*}
+A&=\int_0^1(e^x-x)\,dx=\left[e^x-\frac12x^2\right]_0^1\\
+&=e-\frac12-1=e-1.5.
+\end{align*}
+\fig[.43]{fig04}{Hình 4}
+Trong Hình 4, ta đã vẽ một hình chữ nhật xấp xỉ điển hình có bề rộng $\Delta x$ để nhắc lại quy trình định nghĩa diện tích trong (1). Nói chung, khi thiết lập tích phân tính diện tích, nên phác họa miền để xác định đường cong phía trên $y_T$, đường cong phía dưới $y_B$ và một hình chữ nhật xấp xỉ điển hình như trong Hình 5. Khi đó, diện tích hình chữ nhật điển hình là $(y_T-y_B)\Delta x$, và đẳng thức
+\[A=\lim_{n\to\infty}\sum_{i=1}^n(y_T-y_B)\Delta x=\int_a^b(y_T-y_B)\,dx\]
+tóm tắt quy trình cộng diện tích của tất cả các hình chữ nhật điển hình theo nghĩa lấy giới hạn.
+\fig[.43]{fig05}{Hình 5}
+Chú ý rằng trong Hình 5, biên trái thu lại thành một điểm, còn trong Hình 3, biên phải thu lại thành một điểm. Ở ví dụ tiếp theo, cả hai biên bên đều thu lại thành một điểm, nên bước đầu tiên là tìm $a$ và $b$.
+
+\Needspace{25\baselineskip}
+\ex{2} Tìm diện tích miền giới hạn bởi hai parabol $y=x^2$ và $y=2x-x^2$.
+\sol Trước hết, tìm giao điểm của hai parabol bằng cách giải hệ phương trình của chúng. Ta được $x^2=2x-x^2$, hay $2x^2-2x=0$. Do đó $2x(x-1)=0$, nên $x=0$ hoặc $x=1$. Các giao điểm là $(0,0)$ và $(1,1)$.
+
+Từ Hình 6, đường biên trên và đường biên dưới là
+\[y_T=2x-x^2\qquad\text{và}\qquad y_B=x^2.\]
+Diện tích hình chữ nhật điển hình là
+\[(y_T-y_B)\Delta x=(2x-x^2-x^2)\Delta x=(2x-2x^2)\Delta x,\]
+và miền nằm giữa $x=0$ và $x=1$. Do đó tổng diện tích là
+\begin{align*}
+A&=\int_0^1(2x-2x^2)\,dx=2\int_0^1(x-x^2)\,dx\\
+&=2\left[\frac{x^2}{2}-\frac{x^3}{3}\right]_0^1=2\left(\frac12-\frac13\right)=\frac13.
+\end{align*}
+\fig[.43]{fig06}{Hình 6}
+
+Đôi khi rất khó, thậm chí không thể, tìm chính xác giao điểm của hai đường cong. Như ví dụ sau cho thấy, ta có thể dùng máy tính đồ thị hoặc máy tính để tìm các giá trị gần đúng cho giao điểm, rồi tiếp tục như trước.
+\Needspace{26\baselineskip}
+\ex{3} Tìm gần đúng diện tích miền giới hạn bởi các đường cong $y=x/\sqrt{x^2+1}$ và $y=x^4-x$.
+\sol Nếu tìm chính xác các giao điểm, ta phải giải phương trình
+\[\frac{x}{\sqrt{x^2+1}}=x^4-x.\]
+Phương trình này có vẻ rất khó giải chính xác (thực ra là không thể), nên thay vào đó ta vẽ hai đường cong bằng máy tính (Hình 7). Một giao điểm là gốc tọa độ; giao điểm còn lại có hoành độ $x\approx1.18$. Vì thế, một giá trị xấp xỉ cho diện tích giữa hai đường cong là
+\[A\approx\int_0^{1.18}\left[\frac{x}{\sqrt{x^2+1}}-(x^4-x)\right]dx.\]
+Để lấy tích phân số hạng đầu tiên, đặt $u=x^2+1$. Khi đó $du=2x\,dx$; khi $x=1.18$, ta có $u\approx2.39$; khi $x=0$, $u=1$. Do đó,
+\begin{align*}
+A&\approx\frac12\int_1^{2.39}\frac{du}{\sqrt u}-\int_0^{1.18}(x^4-x)\,dx\\
+&=\left[\sqrt u\right]_1^{2.39}-\left[\frac{x^5}{5}-\frac{x^2}{2}\right]_0^{1.18}\\
+&=\sqrt{2.39}-1-\frac{(1.18)^5}{5}+\frac{(1.18)^2}{2}\\
+&\approx0.785.
+\end{align*}
+\fig[.43]{fig07}{Hình 7}
+
+Nếu cần tìm diện tích giữa các đường cong $y=f(x)$ và $y=g(x)$ mà $f(x)\ge g(x)$ tại một số giá trị $x$, nhưng $g(x)\ge f(x)$ tại những giá trị $x$ khác, ta chia miền $S$ thành một số miền $S_1,S_2,\ldots$ có diện tích $A_1,A_2,\ldots$ như trong Hình 8. Khi đó, ta định nghĩa diện tích miền $S$ là tổng diện tích các miền nhỏ $S_1,S_2,\ldots$, tức là $A=A_1+A_2+\cdots$. Vì
+\[|f(x)-g(x)|=\begin{cases}f(x)-g(x)&\text{khi }f(x)\ge g(x),\\g(x)-f(x)&\text{khi }g(x)\ge f(x),\end{cases}\]
+ta có biểu thức sau cho $A$.
+\Needspace{7\baselineskip}
+\subsection*{3. Diện tích khi các đường cong đổi vị trí}
+Diện tích giữa các đường cong $y=f(x)$, $y=g(x)$ và giữa $x=a$, $x=b$ là
+\[\boxed{\displaystyle A=\int_a^b|f(x)-g(x)|\,dx.}\]
+\fig[.43]{fig08}{Hình 8}
+Tuy nhiên, khi tính tích phân trong (3), ta vẫn phải tách thành các tích phân tương ứng với $A_1,A_2,\ldots$.
+
+\Needspace{26\baselineskip}
+\ex{4} Tìm diện tích miền giới hạn bởi các đường cong $y=\sin x$, $y=\cos x$, $x=0$ và $x=\pi/2$.
+\sol Các giao điểm xuất hiện khi $\sin x=\cos x$, tức là $x=\pi/4$ (vì $0\le x\le\pi/2$). Miền được phác họa trong Hình 9.
+
+Chú ý rằng $\cos x\ge\sin x$ khi $0\le x\le\pi/4$, nhưng $\sin x\ge\cos x$ khi $\pi/4\le x\le\pi/2$. Vì thế, diện tích cần tìm là
+\begin{align*}
+A&=\int_0^{\pi/2}|\cos x-\sin x|\,dx=A_1+A_2\\
+&=\int_0^{\pi/4}(\cos x-\sin x)\,dx+\int_{\pi/4}^{\pi/2}(\sin x-\cos x)\,dx\\
+&=[\sin x+\cos x]_0^{\pi/4}+[-\cos x-\sin x]_{\pi/4}^{\pi/2}\\
+&=\left(\frac1{\sqrt2}+\frac1{\sqrt2}-0-1\right)+\left(-0-1+\frac1{\sqrt2}+\frac1{\sqrt2}\right)\\
+&=2\sqrt2-2.
+\end{align*}
+Trong ví dụ cụ thể này, ta có thể giảm bớt phép tính nếu nhận ra miền đối xứng qua $x=\pi/4$, nên
+\[A=2A_1=2\int_0^{\pi/4}(\cos x-\sin x)\,dx.\]
+\fig[.46]{fig09}{Hình 9}
+
+\subsection*{Diện tích giữa các đường cong: lấy tích phân theo $y$}
+Một số miền được xử lý thuận tiện nhất khi xem $x$ là hàm của $y$. Nếu một miền được giới hạn bởi các đường cong có phương trình $x=f(y)$, $x=g(y)$, $y=c$, $y=d$, trong đó $f$, $g$ liên tục và $f(y)\ge g(y)$ với $c\le y\le d$ (Hình 10), thì diện tích là
+\[A=\int_c^d[f(y)-g(y)]\,dy.\]
+\fig[.43]{fig10}{Hình 10}
+Nếu ký hiệu $x_R$ là biên phải và $x_L$ là biên trái, thì như Hình 11 minh họa, ta có
+\[A=\int_c^d(x_R-x_L)\,dy.\]
+Ở đây, hình chữ nhật xấp xỉ điển hình có các kích thước $x_R-x_L$ và $\Delta y$.
+\fig[.43]{fig11}{Hình 11}
+
+\Needspace{25\baselineskip}
+\ex{5} Tìm diện tích miền giới hạn bởi đường thẳng $y=x-1$ và parabol $y^2=2x+6$.
+\sol Giải hệ hai phương trình, ta tìm được các giao điểm $(-1,-2)$ và $(5,4)$. Giải phương trình parabol theo $x$, từ Hình 12 ta thấy các đường biên trái và phải là
+\[x_L=\frac12y^2-3\qquad\text{và}\qquad x_R=y+1.\]
+Ta phải lấy tích phân giữa các giá trị $y$ tương ứng là $y=-2$ và $y=4$. Do đó,
+\begin{align*}
+A&=\int_{-2}^4(x_R-x_L)\,dy=\int_{-2}^4\left[(y+1)-\left(\frac12y^2-3\right)\right]dy\\
+&=\int_{-2}^4\left(-\frac12y^2+y+4\right)dy\\
+&=\left[-\frac12\left(\frac{y^3}{3}\right)+\frac{y^2}{2}+4y\right]_{-2}^4\\
+&=-\frac16(64)+8+16-\left(\frac43+2-8\right)=18.
+\end{align*}
+\fig[.43]{fig12}{Hình 12}
+\noindent\textbf{Chú ý.} Ta cũng có thể tìm diện tích trong Ví dụ 5 bằng cách lấy tích phân theo $x$ thay vì $y$, nhưng phép tính sẽ phức tạp hơn nhiều. Vì biên dưới gồm hai đường cong khác nhau, ta phải chia miền thành hai phần và tính các diện tích $A_1$, $A_2$ trong Hình 13. Phương pháp đã dùng trong Ví dụ 5 đơn giản hơn nhiều.
+\fig[.45]{fig13}{Hình 13}
+
+\Needspace{21\baselineskip}
+\ex{6} Tìm diện tích miền giới hạn bởi các đường cong $y=1/x$, $y=x$ và $y=\frac14x$, dùng (a) $x$ làm biến tích phân và (b) $y$ làm biến tích phân.
+\sol Miền được vẽ trong Hình 14.
+\fig[.46]{fig14}{Hình 14}
+(a) Nếu lấy tích phân theo $x$, ta phải chia miền thành hai phần vì biên trên gồm hai đường cong riêng biệt, như trong Hình 15(a). Ta tính diện tích:
+\begin{align*}
+A&=A_1+A_2=\int_0^1\left(x-\frac14x\right)dx+\int_1^2\left(\frac1x-\frac14x\right)dx\\
+&=\left[\frac38x^2\right]_0^1+\left[\ln x-\frac18x^2\right]_1^2=\ln2.
+\end{align*}
+(b) Nếu lấy tích phân theo $y$, ta cũng phải chia miền thành hai phần vì biên phải gồm hai đường cong riêng biệt, như trong Hình 15(b). Ta tính diện tích:
+\begin{align*}
+A&=A_1+A_2=\int_0^{1/2}(4y-y)\,dy+\int_{1/2}^1\left(\frac1y-y\right)dy\\
+&=\left[\frac32y^2\right]_0^{1/2}+\left[\ln y-\frac12y^2\right]_{1/2}^1=\ln2.
+\end{align*}
+\fig[.88]{fig15}{Hình 15. (a) Lấy tích phân theo $x$. (b) Lấy tích phân theo $y$.}
+
+\subsection*{Ứng dụng}
+\Needspace{24\baselineskip}
+\ex{7} Hình 16 cho các đường cong vận tốc của hai ô tô A và B xuất phát cạnh nhau và đi trên cùng một con đường. Diện tích giữa hai đường cong biểu diễn điều gì? Dùng Quy tắc trung điểm để ước lượng diện tích đó.
+\fig[.46]{fig16}{Hình 16. Trục đứng: $v$ (mi/h); trục ngang: $t$ (giây).}
+\sol Từ §5.4, ta biết diện tích dưới đường cong vận tốc A biểu diễn quãng đường ô tô A đi được trong 16 giây đầu tiên. Tương tự, diện tích dưới đường cong B là quãng đường ô tô B đi được trong cùng khoảng thời gian. Vì thế, diện tích giữa hai đường cong, tức là hiệu hai diện tích dưới các đường cong, là khoảng cách giữa hai xe sau 16 giây. Đọc vận tốc từ đồ thị rồi đổi sang foot mỗi giây ($1\ \text{mi/h}=\frac{5280}{3600}\ \text{ft/s}$), ta được:
+\begin{center}\begin{tabular}{rrrrrrrrrr}\toprule
+$t$&0&2&4&6&8&10&12&14&16\\\midrule
+$v_A$&0&34&54&67&76&84&89&92&95\\
+$v_B$&0&21&34&44&51&56&60&63&65\\
+$v_A-v_B$&0&13&20&23&25&28&29&29&30\\\bottomrule
+\end{tabular}\end{center}
+Ta dùng Quy tắc trung điểm với $n=4$ khoảng, nên $\Delta t=4$. Các trung điểm là $t_1=2$, $t_2=6$, $t_3=10$, $t_4=14$. Ước lượng khoảng cách giữa hai xe sau 16 giây như sau:
+\begin{align*}
+\int_0^{16}(v_A-v_B)\,dt&\approx\Delta t[13+23+28+29]\\
+&=4(93)=372\ \text{ft}.
+\end{align*}
+
+\Needspace{18\baselineskip}
+\ex{8} Hình 17 là một ví dụ về \textit{đường cong bệnh sinh} của bệnh sởi. Nó cho thấy bệnh phát triển như thế nào ở một người chưa có miễn dịch sau khi virus sởi lan từ đường hô hấp vào máu.
+\fig[.89]{fig17}{Hình 17. Đường cong bệnh sinh của bệnh sởi.}
+Trong hình, $N$ là số tế bào nhiễm trên mỗi mL huyết tương, $t$ tính bằng ngày. Các nhãn lần lượt chỉ thời điểm tác nhân gây bệnh vào huyết tương; bắt đầu có khả năng lây nhiễm (ngày 10–11); xuất hiện triệu chứng (ngày 12); hết khả năng lây nhiễm (ngày 17–18); tác nhân gây bệnh được loại bỏ (ngày 21).
+
+\noindent\textit{Nguồn:} J. M. Heffernan và cộng sự, “An In-Host Model of Acute Infection: Measles as a Case Study,” \textit{Theoretical Population Biology} 73 (2008): 134–147.
+
+Bệnh nhân bắt đầu có khả năng lây cho người khác khi nồng độ tế bào nhiễm đủ lớn và tiếp tục có khả năng lây cho đến khi hệ miễn dịch ngăn được sự truyền nhiễm tiếp theo. Tuy nhiên, các triệu chứng chỉ xuất hiện khi ``lượng nhiễm'' đạt một ngưỡng nhất định. Lượng nhiễm cần để xuất hiện triệu chứng phụ thuộc vào cả nồng độ tế bào nhiễm lẫn thời gian, và tương ứng với diện tích dưới đường cong bệnh sinh cho đến khi xuất hiện triệu chứng. (Xem Bài tập 5.1.15.)
+
+(a) Đường cong bệnh sinh trong Hình 17 được mô hình hóa bởi $f(t)=-t(t-21)(t+1)$. Nếu khả năng lây nhiễm bắt đầu vào ngày $t_1=10$ và kết thúc vào ngày $t_2=18$, các nồng độ tế bào nhiễm tương ứng là bao nhiêu?
+
+(b) \textit{Mức độ lây nhiễm} của một người bệnh là diện tích giữa $N=f(t)$ và đường thẳng qua hai điểm $P_1(t_1,f(t_1))$, $P_2(t_2,f(t_2))$, có đơn vị (tế bào/mL)$\cdot$ngày. (Xem Hình 18.) Tính mức độ lây nhiễm của bệnh nhân này.
+\sol (a) Khả năng lây nhiễm bắt đầu khi nồng độ đạt $f(10)=1210$ tế bào/mL và kết thúc khi nồng độ giảm còn $f(18)=1026$ tế bào/mL.
+
+(b) Đường thẳng qua $P_1$ và $P_2$ có hệ số góc
+\[\frac{1026-1210}{18-10}=-\frac{184}{8}=-23\]
+và có phương trình $N-1210=-23(t-10)$, hay $N=-23t+1440$. Diện tích giữa $f$ và đường thẳng này là
+\begin{align*}
+\int_{10}^{18}[f(t)-(-23t+1440)]\,dt
+&=\int_{10}^{18}(-t^3+20t^2+21t+23t-1440)\,dt\\
+&=\int_{10}^{18}(-t^3+20t^2+44t-1440)\,dt\\
+&=\left[-\frac{t^4}{4}+20\frac{t^3}{3}+44\frac{t^2}{2}-1440t\right]_{10}^{18}\\
+&=-6156-\left(-8033\frac13\right)\approx1877.
+\end{align*}
+Vậy mức độ lây nhiễm của bệnh nhân này khoảng 1877 (tế bào/mL)$\cdot$ngày.
+\fig[.46]{fig18}{Hình 18. Trục ngang: $t$ (ngày).}
+
+\Needspace{13\baselineskip}
+\section*{6.1 — Bài tập}
+\group{1–4} (a) Thiết lập một tích phân tính diện tích miền tô màu.\par\noindent(b) Tính tích phân để tìm diện tích.
+\Needspace{18\baselineskip}
+\bt{1} Miền tô màu trong hình.
+\fig[.38]{ex01}{Hình cho Bài tập 1}
+\Needspace{18\baselineskip}
+\bt{2} Miền tô màu trong hình.
+\fig[.36]{ex02}{Hình cho Bài tập 2}
+\Needspace{18\baselineskip}
+\bt{3} Miền tô màu trong hình.
+\fig[.36]{ex03}{Hình cho Bài tập 3}
+\Needspace{18\baselineskip}
+\bt{4} Miền tô màu trong hình.
+\fig[.36]{ex04}{Hình cho Bài tập 4}
+\Needspace{23\baselineskip}
+\group{5–6} Tìm diện tích miền tô màu.
+\bt{5} Miền tô màu trong hình.
+\fig[.50]{ex05}{Hình cho Bài tập 5}
+\Needspace{21\baselineskip}
+\bt{6} Miền tô màu trong hình.
+\fig[.48]{ex06}{Hình cho Bài tập 6}
+
+\Needspace{10\baselineskip}
+\group{7–10} Thiết lập nhưng không tính tích phân biểu diễn diện tích miền giới hạn bởi các đường cong đã cho.
+\bt{7} $y=2^x$, $y=3^x$, $x=1$.
+\bt{8} $y=\ln x$, $y=\ln(x^2)$, $x=2$.
+\bt{9} $y=2-x$, $y=2x-x^2$.
+\bt{10} $x=y^4$, $x=2-y^2$.
+
+\Needspace{12\baselineskip}
+\group{11–18} Phác họa miền giới hạn bởi các đường cong đã cho. Quyết định lấy tích phân theo $x$ hay $y$. Vẽ một hình chữ nhật xấp xỉ điển hình và ghi chiều cao, chiều rộng của nó. Sau đó, tìm diện tích miền.
+\bt{11} $y=x^2+2$, $y=-x-1$, $x=0$, $x=1$.
+\bt{12} $y=1+x^3$, $y=2-x$, $x=-1$, $x=0$.
+\bt{13} $y=1/x$, $y=1/x^2$, $x=2$.
+\bt{14} $y=\cos x$, $y=e^x$, $x=\pi/2$.
+\bt{15} $y=(x-2)^2$, $y=x$.
+\bt{16} $y=x^2-4x$, $y=2x$.
+\bt{17} $x=1-y^2$, $x=y^2-1$.
+\bt{18} $4x+y^2=12$, $x=y$.
+
+\Needspace{10\baselineskip}
+\group{19–36} Phác họa miền giới hạn bởi các đường cong đã cho và tìm diện tích miền.
+\bt{19} $y=12-x^2$, $y=x^2-6$.
+\bt{20} $y=x^2$, $y=4x-x^2$.
+\bt{21} $x=2y^2$, $x=4+y^2$.
+\bt{22} $y=\sqrt{x-1}$, $x-y=1$.
+\bt{23} $y=\sqrt[3]{2x}$, $y=\frac12x$.
+\bt{24} $y=x^3$, $y=x$.
+\bt{25} $y=\sqrt x$, $y=\frac13x$, $0\le x\le16$.
+\bt{26} $y=\cos x$, $y=2-\cos x$, $0\le x\le2\pi$.
+\bt{27} $y=\cos x$, $y=\sin2x$, $0\le x\le\pi/2$.
+\bt{28} $y=\cos x$, $y=1-\cos x$, $0\le x\le\pi$.
+\bt{29} $y=\sec^2x$, $y=8\cos x$, $-\pi/3\le x\le\pi/3$.
+\bt{30} $y=x^4-3x^2$, $y=x^2$.
+\bt{31} $y=x^4$, $y=2-|x|$.
+\bt{32} $y=x^2$, $y=32/(x^2+4)$.
+\bt{33} $y=\sin(\pi x/2)$, $y=x^3$.
+\bt{34} $y=4-2\cosh x$, $y=\frac12\sinh x$.
+\bt{35} $y=1/x$, $y=x$, $y=\frac14x$, $x>0$.
+\bt{36} $y=\frac14x^2$, $y=2x^2$, $x+y=3$, $x\ge0$.
+
+\Needspace{24\baselineskip}
+\bt{37} Hình vẽ cho đồ thị của hai hàm số và diện tích các miền giữa hai đường cong.
+\par\noindent(a) Tổng diện tích giữa hai đường cong với $0\le x\le5$ là bao nhiêu?
+\par\noindent(b) Giá trị của $\int_0^5[f(x)-g(x)]\,dx$ là bao nhiêu?
+\fig[.52]{ex37}{Hình cho Bài tập 37}
+
+\Needspace{10\baselineskip}
+\group{38–40} Phác họa miền giới hạn bởi các đường cong đã cho và tìm diện tích miền.
+\bt{38} $y=x/\sqrt{1+x^2}$, $y=x/\sqrt{9-x^2}$, $x\ge0$.
+\bt{39} $y=x/(1+x^2)$, $y=x^2/(1+x^3)$.
+\bt{40} $y=(\ln x)/x$, $y=(\ln x)^2/x$.
+\Needspace{10\baselineskip}
+\group{41–42} Dùng phép tính vi tích phân để tìm diện tích tam giác có các đỉnh đã cho.
+\bt{41} $(0,0)$, $(3,1)$, $(1,2)$.
+\bt{42} $(2,0)$, $(0,2)$, $(-1,1)$.
+\Needspace{10\baselineskip}
+\group{43–44} Tính tích phân và giải thích nó như diện tích của một miền. Phác họa miền đó.
+\bt{43} $\displaystyle\int_0^{\pi/2}|\sin x-\cos2x|\,dx$.
+\bt{44} $\displaystyle\int_{-1}^1|3^x-2^x|\,dx$.
+\Needspace{11\baselineskip}
+\group{45–48} Dùng đồ thị để tìm gần đúng hoành độ các giao điểm của những đường cong đã cho. Sau đó, tìm gần đúng diện tích miền giới hạn bởi các đường cong.
+\bt{45} $y=x\sin(x^2)$, $y=x^4$, $x\ge0$.
+\bt{46} $y=x/(x^2+1)^2$, $y=x^5-x$, $x\ge0$.
+\bt{47} $y=3x^2-2x$, $y=x^3-3x+4$.
+\bt{48} $y=1.3^x$, $y=2\sqrt x$.
+\Needspace{11\baselineskip}
+\group{49–52} Vẽ miền giữa các đường cong và tính diện tích chính xác đến năm chữ số thập phân.
+\bt{49} $y=2/(1+x^4)$, $y=x^2$.
+\bt{50} $y=e^{1-x^2}$, $y=x^4$.
+\bt{51} $y=\tan^2x$, $y=\sqrt x$.
+\bt{52} $y=\cos x$, $y=x+2\sin^4x$.
+\bt{53} Dùng một hệ thống đại số máy tính để tìm diện tích chính xác giới hạn bởi các đường cong $y=x^5-6x^3+4x$ và $y=x$.
+\bt{54} Phác họa miền trong mặt phẳng $xy$ được xác định bởi các bất đẳng thức $x-2y^2\ge0$, $1-x-|y|\ge0$ và tìm diện tích miền.
+
+\Needspace{22\baselineskip}
+\bt{55} Hai xe đua do Chris và Kelly điều khiển ở cạnh nhau khi bắt đầu cuộc đua. Bảng cho vận tốc của mỗi xe (mi/h) trong mười giây đầu tiên. Dùng Quy tắc trung điểm để ước lượng Kelly đi xa hơn Chris bao nhiêu trong mười giây đầu.
+\begin{center}\begin{tabular}{rrrrrr}\toprule
+$t$&$v_C$&$v_K$&$t$&$v_C$&$v_K$\\\midrule
+0&0&0&6&69&80\\1&20&22&7&75&86\\2&32&37&8&81&93\\3&46&52&9&86&98\\4&54&61&10&90&102\\5&62&71&&&\\\bottomrule
+\end{tabular}\end{center}
+\Needspace{21\baselineskip}
+\bt{56} Bề rộng (mét) của một bể bơi hình hạt đậu được đo cách nhau 2 m như trong hình. Dùng Quy tắc trung điểm để ước lượng diện tích bể bơi.
+\fig[.46]{ex56}{Hình cho Bài tập 56}
+\Needspace{18\baselineskip}
+\bt{57} Hình vẽ cho một mặt cắt ngang của cánh máy bay. Các số đo bề dày cánh, tính bằng xentimét, tại những vị trí cách nhau 20 cm lần lượt là 5.8, 20.3, 26.7, 29.0, 27.6, 27.3, 23.8, 20.5, 15.1, 8.7 và 2.8. Dùng Quy tắc trung điểm để ước lượng diện tích mặt cắt ngang của cánh.
+\fig[.52]{ex57}{Hình cho Bài tập 57}
+\bt{58} Nếu tốc độ sinh của một quần thể là $b(t)=2200e^{0.024t}$ người mỗi năm và tốc độ tử là $d(t)=1460e^{0.018t}$ người mỗi năm, hãy tìm diện tích giữa hai đường cong với $0\le t\le10$. Diện tích này biểu diễn điều gì?
+\Needspace{20\baselineskip}
+\bt{59} Trong Ví dụ 8, ta đã mô hình hóa một đường cong bệnh sinh của bệnh sởi bằng hàm $f$. Một bệnh nhân nhiễm virus sởi nhưng đã có một phần miễn dịch với virus có đường cong bệnh sinh có thể được mô hình hóa, chẳng hạn, bởi $g(t)=0.9f(t)$.
+\par\noindent(a) Nếu khả năng lây nhiễm bắt đầu ở cùng ngưỡng nồng độ virus như trong Ví dụ 8, điều này xảy ra vào ngày nào?
+\par\noindent(b) Gọi $P_3$ là điểm trên đồ thị $g$ tại đó khả năng lây nhiễm bắt đầu. Người ta đã chỉ ra rằng khả năng lây nhiễm kết thúc tại một điểm $P_4$ trên đồ thị $g$ sao cho đường thẳng qua $P_3,P_4$ có cùng hệ số góc với đường thẳng qua $P_1,P_2$ trong Ví dụ 8(b). Khả năng lây nhiễm kết thúc vào ngày nào?
+\par\noindent(c) Tính mức độ lây nhiễm của bệnh nhân này.
+\bt{60} Cường độ mưa, tính bằng inch mỗi giờ, tại hai địa điểm khác nhau sau khi bão bắt đầu $t$ giờ được mô hình hóa bởi $f(t)=0.73t^3-2t^2+t+0.6$ và $g(t)=0.17t^2-0.5t+1.1$. Tính diện tích giữa các đồ thị với $0\le t\le2$ và giải thích kết quả trong bối cảnh này.
+\Needspace{28\baselineskip}
+\bt{61} Hai ô tô A và B xuất phát cạnh nhau, tăng tốc từ trạng thái nghỉ. Hình vẽ cho đồ thị các hàm vận tốc của chúng.
+\par\noindent(a) Xe nào ở phía trước sau một phút? Giải thích.
+\par\noindent(b) Diện tích miền tô màu có ý nghĩa gì?
+\par\noindent(c) Xe nào ở phía trước sau hai phút? Giải thích.
+\par\noindent(d) Ước lượng thời điểm hai xe lại ở cạnh nhau.
+\fig[.59]{ex61}{Hình cho Bài tập 61. Trục ngang: $t$ (phút).}
+\Needspace{25\baselineskip}
+\bt{62} Hình vẽ cho đồ thị hàm doanh thu biên $R'$ và hàm chi phí biên $C'$ của một nhà sản xuất. [Nhắc lại ở §4.7, $R(x)$ và $C(x)$ biểu diễn doanh thu và chi phí khi sản xuất $x$ đơn vị. Giả sử $R$ và $C$ được tính bằng nghìn đô la.] Diện tích miền tô màu có ý nghĩa gì? Dùng Quy tắc trung điểm để ước lượng giá trị của đại lượng này.
+\fig[.47]{ex62}{Hình cho Bài tập 62}
+\bt{63} Đường cong có phương trình $y^2=x^2(x+3)$ được gọi là đường bậc ba Tschirnhausen. Nếu vẽ đồ thị, ta sẽ thấy một phần của đường cong tạo thành một vòng kín. Tìm diện tích miền giới hạn bởi vòng kín đó.
+\bt{64} Tìm diện tích miền giới hạn bởi parabol $y=x^2$, tiếp tuyến với parabol tại $(1,1)$ và trục $x$.
+\bt{65} Tìm số $b$ sao cho đường thẳng $y=b$ chia miền giới hạn bởi các đường cong $y=x^2$ và $y=4$ thành hai miền có diện tích bằng nhau.
+\Needspace{10\baselineskip}
+\bt{66} (a) Tìm số $a$ sao cho đường thẳng $x=a$ chia đôi diện tích dưới đường cong $y=1/x^2$, $1\le x\le4$.
+\par\noindent(b) Tìm số $b$ sao cho đường thẳng $y=b$ chia đôi diện tích ở câu (a).
+\bt{67} Tìm các giá trị của $c$ sao cho diện tích miền giới hạn bởi các parabol $y=x^2-c^2$ và $y=c^2-x^2$ bằng 576.
+\bt{68} Giả sử $0<c<\pi/2$. Với giá trị nào của $c$, diện tích miền giới hạn bởi các đường cong $y=\cos x$, $y=\cos(x-c)$ và $x=0$ bằng diện tích miền giới hạn bởi các đường cong $y=\cos(x-c)$, $x=\pi$ và $y=0$?
+\Needspace{23\baselineskip}
+\bt{69} Hình vẽ cho đường thẳng nằm ngang $y=c$ cắt đường cong $y=8x-27x^3$. Tìm số $c$ sao cho diện tích các miền tô màu bằng nhau.
+\fig[.49]{ex69}{Hình cho Bài tập 69}
+\bt{70} Với những giá trị nào của $m$, đường thẳng $y=mx$ và đường cong $y=x/\sqrt{x^2+1}$ giới hạn một miền? Tìm diện tích miền đó.
+
+\clearpage
+\section*{Dự án ứng dụng — Chỉ số Gini}
+Làm thế nào để đo lường sự phân bố thu nhập giữa các cư dân trong một quốc gia? Một thước đo như vậy là \textit{chỉ số Gini}, được đặt theo tên nhà kinh tế học người Ý Corrado Gini, người đầu tiên đề xuất chỉ số này vào năm 1912.
+
+Trước hết, ta xếp tất cả các hộ gia đình trong một quốc gia theo thu nhập, rồi tính tỷ lệ phần trăm số hộ có tổng thu nhập bằng một tỷ lệ phần trăm cho trước của tổng thu nhập cả nước. Ta định nghĩa \textit{đường cong Lorenz} $y=L(x)$ trên $[0,1]$ bằng cách đặt điểm $(a/100,b/100)$ trên đường cong nếu $a\%$ số hộ có thu nhập thấp nhất nhận được $b\%$ tổng thu nhập. Chẳng hạn, trong Hình 1, điểm $(0.4,0.114)$ nằm trên đường cong Lorenz của Hoa Kỳ năm 2016 vì 40\% dân số nghèo nhất chỉ nhận 11.4\% tổng thu nhập. Tương tự, 80\% dân số có thu nhập thấp nhất nhận 48.5\% tổng thu nhập, nên điểm $(0.8,0.485)$ nằm trên đường cong Lorenz. (Đường cong Lorenz được đặt theo tên nhà kinh tế học người Mỹ Max Lorenz.)
+\fig[.45]{gini01}{Hình 1 (dự án). Đường cong Lorenz của Hoa Kỳ năm 2016.}
+Hình 2 cho một số đường cong Lorenz điển hình. Tất cả đều đi qua $(0,0)$ và $(1,1)$, đồng thời lõm lên. Trong trường hợp cực hạn $L(x)=x$, xã hội hoàn toàn bình đẳng: $a\%$ dân số nghèo nhất nhận $a\%$ tổng thu nhập, nên mọi người có thu nhập như nhau. Diện tích giữa đường cong Lorenz $y=L(x)$ và đường thẳng $y=x$ đo mức độ phân bố thu nhập khác với sự bình đẳng tuyệt đối. \textit{Chỉ số Gini} (đôi khi được gọi là \textit{hệ số Gini} hoặc \textit{hệ số bất bình đẳng}) bằng diện tích giữa đường cong Lorenz và đường thẳng $y=x$ (miền tô màu trong Hình 3) chia cho diện tích dưới $y=x$.
+\fig[.46]{gini02}{Hình 2 (dự án). Trục đứng: tỷ phần thu nhập; trục ngang: tỷ phần dân số.}
+\fig[.43]{gini03}{Hình 3 (dự án)}
+
+\Needspace{15\baselineskip}
+\prj{1} (a) Chứng minh rằng chỉ số Gini $G$ bằng hai lần diện tích giữa đường cong Lorenz và đường thẳng $y=x$, tức là
+\[G=2\int_0^1[x-L(x)]\,dx.\]
+\noindent(b) $G$ bằng bao nhiêu đối với một xã hội hoàn toàn bình đẳng (mọi người có cùng thu nhập)? $G$ bằng bao nhiêu đối với một xã hội hoàn toàn chuyên chế (một người nhận toàn bộ thu nhập)?
+\Needspace{22\baselineskip}
+\prj{2} Bảng sau (được lập từ số liệu do Cục Điều tra Dân số Hoa Kỳ cung cấp) cho các giá trị của hàm Lorenz đối với phân bố thu nhập ở Hoa Kỳ năm 2016.
+\begin{center}\begin{tabular}{rrrrrrr}\toprule
+$x$&0.0&0.2&0.4&0.6&0.8&1.0\\\midrule
+$L(x)$&0.000&0.031&0.114&0.256&0.485&1.000\\\bottomrule
+\end{tabular}\end{center}
+\noindent(a) Nhóm 20\% dân số giàu nhất nhận bao nhiêu phần trăm tổng thu nhập Hoa Kỳ năm 2016?
+\par\noindent(b) Dùng máy tính để khớp một hàm bậc hai với số liệu trong bảng. Vẽ các điểm dữ liệu và hàm bậc hai. Mô hình bậc hai có phù hợp một cách hợp lý không?
+\par\noindent(c) Dùng mô hình bậc hai cho hàm Lorenz để ước lượng chỉ số Gini của Hoa Kỳ năm 2016.
+\Needspace{21\baselineskip}
+\prj{3} Bảng sau cho các giá trị của hàm Lorenz vào các năm 1980, 1990, 2000 và 2010. Dùng phương pháp của Bài toán 2 để ước lượng chỉ số Gini của Hoa Kỳ trong các năm này, rồi so sánh với kết quả Bài toán 2(c). Có nhận thấy một xu hướng nào không?
+\begin{center}\begin{tabular}{rrrrrrr}\toprule
+$x$&0.0&0.2&0.4&0.6&0.8&1.0\\\midrule
+1980&0.000&0.042&0.144&0.312&0.559&1.000\\
+1990&0.000&0.038&0.134&0.293&0.533&1.000\\
+2000&0.000&0.036&0.125&0.273&0.503&1.000\\
+2010&0.000&0.033&0.118&0.264&0.498&1.000\\\bottomrule
+\end{tabular}\end{center}
+\prj{4} Mô hình lũy thừa thường khớp hàm Lorenz chính xác hơn mô hình bậc hai. Dùng máy tính để khớp một hàm lũy thừa ($y=ax^k$) với số liệu ở Bài toán 2, rồi dùng hàm đó để ước lượng chỉ số Gini của Hoa Kỳ năm 2016. So sánh với các kết quả ở câu (b), (c) của Bài toán 2.
+\end{document}
+
