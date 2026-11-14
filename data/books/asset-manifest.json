@@ -3305,5 +3305,20 @@
     "file": "stewart-5-review-45ed5363/ex67.png",
     "mime": "image/png",
     "sha256": "9d037329381c0435e4e0918030692573c96efcd0b75bdc6e9a158a8a107e99c8"
+  },
+  "stewart-5-plus-86487584/ex08.png": {
+    "file": "stewart-5-plus-86487584/ex08.png",
+    "mime": "image/png",
+    "sha256": "46bd35782dc02916c322007f5799a578c1aa0de89b56d280c68fa70e31b26e27"
+  },
+  "stewart-5-plus-86487584/ex16.png": {
+    "file": "stewart-5-plus-86487584/ex16.png",
+    "mime": "image/png",
+    "sha256": "1dc7a948cca3c40fcf48543ef5e145e0c5f38048db1b7c90e848bca016bc55dd"
+  },
+  "stewart-5-plus-86487584/ex18.png": {
+    "file": "stewart-5-plus-86487584/ex18.png",
+    "mime": "image/png",
+    "sha256": "d5845cb9ef7eaf6eea4549c7099cf52b2d634a6a525ed0da68bfddddf95b369d"
   }
 }
