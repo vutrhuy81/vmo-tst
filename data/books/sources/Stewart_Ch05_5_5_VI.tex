@@ -1,0 +1,401 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage{fontspec}\setmainfont{Latin Modern Roman}\setsansfont{DejaVu Sans}
+\usepackage{amsmath,amssymb,graphicx,geometry,enumitem,needspace,longtable,booktabs,fancyhdr,hyperref}
+\geometry{left=28mm,right=23mm,top=24mm,bottom=24mm}
+\hypersetup{unicode=true,colorlinks=true,linkcolor=black,urlcolor=blue,pdftitle={Giải tích §5.5 — Quy tắc đổi biến}}
+\setlength{\parindent}{1.2em}\setlength{\parskip}{4pt}\setlength{\headheight}{16pt}
+\pagestyle{fancy}\fancyhf{}\fancyhead[L]{\small Chương 5. Tích phân}\fancyhead[R]{\small §5.5}\fancyfoot[C]{\thepage}
+\newcommand{\fig}[3][.68]{\begin{center}\begin{minipage}{\linewidth}\centering\includegraphics[width=#1\linewidth]{assets/#2.png}\\{\small #3}\end{minipage}\end{center}}
+\newcommand{\ex}[1]{\par\medskip\noindent\textbf{Ví dụ #1.}\ }
+\newcommand{\sol}{\par\nopagebreak[4]\noindent\textit{Lời giải.}\ }
+\newcommand{\bt}[1]{\par\smallskip\Needspace{5\baselineskip}\noindent\textbf{#1.}\ }
+\newcommand{\group}[1]{\par\medskip\noindent\textbf{#1}\par\nopagebreak[4]}
+\newcommand{\gint}[1]{\left[\!\left[#1\right]\!\right]}
+\allowdisplaybreaks[2]
+\DeclareMathOperator{\sech}{sech}
+\DeclareMathOperator{\csch}{csch}
+\DeclareMathOperator{\arccot}{arccot}
+\begin{document}
+\begin{center}{\LARGE\bfseries 5.5 — Quy tắc đổi biến}\end{center}
+
+Do Định lý cơ bản của giải tích, việc tìm được nguyên hàm có vai trò quan trọng. Tuy nhiên, các công thức nguyên hàm đã biết chưa cho ta cách tính những tích phân như
+\begin{equation}\int2x\sqrt{1+x^2}\,dx.\tag{1}\end{equation}
+Để tính tích phân này, ta sử dụng chiến lược giải toán là đưa thêm một yếu tố mới. Ở đây, yếu tố mới đó là một biến mới; ta chuyển từ biến $x$ sang một biến mới $u$.
+
+\subsection*{Đổi biến trong tích phân bất định}
+Giả sử ta đặt $u$ bằng biểu thức dưới dấu căn trong (1), tức là $u=1+x^2$. Khi đó, vi phân của $u$ là $du=2x\,dx$. Chú ý rằng nếu $dx$ trong ký hiệu tích phân được hiểu là một vi phân thì vi phân $2x\,dx$ xuất hiện trong (1). Vì vậy, về mặt hình thức, khi chưa biện minh cho phép tính, ta có thể viết
+\begin{align*}
+\int2x\sqrt{1+x^2}\,dx&=\int\sqrt{1+x^2}\,2x\,dx=\int\sqrt u\,du\\
+&=\frac23u^{3/2}+C=\frac23(1+x^2)^{3/2}+C.\tag{2}
+\end{align*}
+Vi phân đã được định nghĩa ở §3.10. Nếu $u=f(x)$ thì $du=f'(x)\,dx$.
+
+Nay ta có thể kiểm tra kết quả bằng cách sử dụng Quy tắc dây chuyền để lấy đạo hàm hàm số cuối cùng trong (2):
+\[
+\frac{d}{dx}\left[\frac23(1+x^2)^{3/2}+C\right]
+=\frac23\cdot\frac32(1+x^2)^{1/2}\cdot2x=2x\sqrt{1+x^2}.
+\]
+Nói chung, phương pháp này áp dụng được mỗi khi ta có một tích phân viết được dưới dạng $\int f(g(x))g'(x)\,dx$. Chú ý rằng nếu $F'=f$ thì
+\begin{equation}\int F'(g(x))g'(x)\,dx=F(g(x))+C\tag{3}\end{equation}
+vì, theo Quy tắc dây chuyền,
+\[\frac{d}{dx}[F(g(x))]=F'(g(x))g'(x).\]
+Nếu thực hiện phép ``đổi biến'' hay ``phép thế'' $u=g(x)$ thì từ (3), ta có
+\begin{align*}
+\int F'(g(x))g'(x)\,dx&=F(g(x))+C\\
+&=F(u)+C=\int F'(u)\,du,
+\end{align*}
+hay, viết $F'=f$, ta được
+\[\int f(g(x))g'(x)\,dx=\int f(u)\,du.\]
+Như vậy, ta đã chứng minh quy tắc sau.
+
+\Needspace{8\baselineskip}
+\subsection*{4. Quy tắc đổi biến}
+Nếu $u=g(x)$ là một hàm khả vi có tập giá trị là một khoảng $I$ và $f$ liên tục trên $I$ thì
+\[\boxed{\displaystyle\int f(g(x))g'(x)\,dx=\int f(u)\,du.}\]
+Chú ý rằng Quy tắc đổi biến trong phép tính tích phân đã được chứng minh bằng Quy tắc dây chuyền trong phép tính đạo hàm. Cũng chú ý rằng nếu $u=g(x)$ thì $du=g'(x)\,dx$, nên một cách ghi nhớ Quy tắc đổi biến là xem $dx$ và $du$ trong (4) như các vi phân.
+
+Vì thế, Quy tắc đổi biến cho biết: \textbf{có thể thao tác với $dx$ và $du$ sau dấu tích phân như thể chúng là các vi phân}.
+
+\Needspace{18\baselineskip}
+\ex{1} Tính $\displaystyle\int x^3\cos(x^4+2)\,dx$.
+\sol Ta thực hiện phép đổi biến $u=x^4+2$ vì vi phân $du=4x^3\,dx$, ngoài một thừa số hằng bằng 4, xuất hiện trong tích phân. Do đó, dùng $x^3\,dx=\frac14\,du$ và Quy tắc đổi biến, ta có
+\begin{align*}
+\int x^3\cos(x^4+2)\,dx&=\int\cos u\cdot\frac14\,du=\frac14\int\cos u\,du\\
+&=\frac14\sin u+C\\
+&=\frac14\sin(x^4+2)+C.
+\end{align*}
+Chú ý rằng ở bước cuối cùng, ta phải trở lại biến ban đầu $x$. Hãy kiểm tra kết quả bằng cách lấy đạo hàm.
+
+Ý tưởng của Quy tắc đổi biến là thay một tích phân tương đối phức tạp bằng một tích phân đơn giản hơn. Điều này được thực hiện bằng cách chuyển từ biến ban đầu $x$ sang một biến mới $u$ là một hàm của $x$. Chẳng hạn, trong Ví dụ 1, ta đã thay tích phân $\int x^3\cos(x^4+2)\,dx$ bằng tích phân đơn giản hơn $\frac14\int\cos u\,du$.
+
+Khó khăn chủ yếu khi sử dụng Quy tắc đổi biến là nghĩ ra một phép đổi biến thích hợp. Nên thử chọn $u$ là một hàm trong biểu thức dưới dấu tích phân mà vi phân của nó cũng xuất hiện ở đó (ngoài một thừa số hằng). Đó chính là trường hợp của Ví dụ 1. Nếu không làm được như vậy, hãy thử chọn $u$ là một phần phức tạp của hàm dưới dấu tích phân (có thể là hàm trong của một hàm hợp). Việc tìm ra phép đổi biến thích hợp phần nào là một nghệ thuật. Đoán sai không phải là điều hiếm gặp; nếu lựa chọn đầu tiên không hiệu quả, hãy thử một phép đổi biến khác.
+
+\Needspace{20\baselineskip}
+\ex{2} Tính $\displaystyle\int\sqrt{2x+1}\,dx$.
+\par\noindent\textit{Lời giải 1.} Đặt $u=2x+1$. Khi đó $du=2\,dx$, nên $dx=\frac12\,du$. Vì thế, Quy tắc đổi biến cho
+\begin{align*}
+\int\sqrt{2x+1}\,dx&=\int\sqrt u\cdot\frac12\,du=\frac12\int u^{1/2}\,du\\
+&=\frac12\cdot\frac{u^{3/2}}{3/2}+C=\frac13u^{3/2}+C\\
+&=\frac13(2x+1)^{3/2}+C.
+\end{align*}
+\par\noindent\textit{Lời giải 2.} Một phép đổi biến khác có thể dùng là $u=\sqrt{2x+1}$. Khi đó,
+\[
+du=\frac{dx}{\sqrt{2x+1}},\qquad
+dx=\sqrt{2x+1}\,du=u\,du.
+\]
+(Hoặc nhận thấy $u^2=2x+1$, nên $2u\,du=2\,dx$.) Do đó,
+\begin{align*}
+\int\sqrt{2x+1}\,dx&=\int u\cdot u\,du=\int u^2\,du\\
+&=\frac{u^3}{3}+C=\frac13(2x+1)^{3/2}+C.
+\end{align*}
+
+\Needspace{26\baselineskip}
+\ex{3} Tính $\displaystyle\int\frac{x}{\sqrt{1-4x^2}}\,dx$.
+\sol Đặt $u=1-4x^2$. Khi đó $du=-8x\,dx$, nên $x\,dx=-\frac18\,du$ và
+\begin{align*}
+\int\frac{x}{\sqrt{1-4x^2}}\,dx
+&=-\frac18\int\frac1{\sqrt u}\,du=-\frac18\int u^{-1/2}\,du\\
+&=-\frac18(2\sqrt u)+C=-\frac14\sqrt{1-4x^2}+C.
+\end{align*}
+Kết quả của Ví dụ 3 có thể được kiểm tra bằng cách lấy đạo hàm, nhưng thay vào đó, ta hãy kiểm tra bằng đồ thị. Trong Hình 1, ta dùng máy tính để vẽ cả hàm dưới dấu tích phân $f(x)=x/\sqrt{1-4x^2}$ và tích phân bất định của nó $g(x)=-\frac14\sqrt{1-4x^2}$ (xét trường hợp $C=0$). Chú ý rằng $g(x)$ giảm khi $f(x)$ âm, tăng khi $f(x)$ dương và đạt giá trị nhỏ nhất khi $f(x)=0$. Vì vậy, qua đồ thị, nhận định $g$ là một nguyên hàm của $f$ có vẻ hợp lý.
+\fig[.42]{fig01}{Hình 1}
+\[
+f(x)=\frac{x}{\sqrt{1-4x^2}},\qquad
+g(x)=\int f(x)\,dx=-\frac14\sqrt{1-4x^2}.
+\]
+
+\Needspace{10\baselineskip}
+\ex{4} Tính $\displaystyle\int e^{5x}\,dx$.
+\sol Nếu đặt $u=5x$ thì $du=5\,dx$, nên $dx=\frac15\,du$. Do đó,
+\[\int e^{5x}\,dx=\frac15\int e^u\,du=\frac15e^u+C=\frac15e^{5x}+C.\]
+
+\subsection*{Chú ý}
+Khi đã có kinh nghiệm, ta có thể tính những tích phân như trong các Ví dụ 1–4 mà không cần viết tường minh phép đổi biến. Bằng cách nhận ra dạng trong (3), ở đó hàm dưới dấu tích phân bên trái là tích của đạo hàm hàm ngoài với đạo hàm hàm trong, ta có thể giải Ví dụ 1 như sau:
+\begin{align*}
+\int x^3\cos(x^4+2)\,dx
+&=\int\cos(x^4+2)\cdot x^3\,dx\\
+&=\frac14\int\cos(x^4+2)\cdot(4x^3)\,dx\\
+&=\frac14\int\cos(x^4+2)\cdot\frac{d}{dx}(x^4+2)\,dx\\
+&=\frac14\sin(x^4+2)+C.
+\end{align*}
+Tương tự, lời giải của Ví dụ 4 có thể viết như sau:
+\begin{align*}
+\int e^{5x}\,dx&=\frac15\int5e^{5x}\,dx
+=\frac15\int\frac{d}{dx}(e^{5x})\,dx\\
+&=\frac15e^{5x}+C.
+\end{align*}
+Tuy nhiên, ví dụ sau phức tạp hơn, nên cần viết tường minh phép đổi biến.
+
+\Needspace{22\baselineskip}
+\ex{5} Tính $\displaystyle\int\sqrt{1+x^2}\,x^5\,dx$.
+\sol Một phép đổi biến thích hợp trở nên rõ ràng hơn nếu ta phân tích $x^5$ thành $x^4\cdot x$. Đặt $u=1+x^2$. Khi đó $du=2x\,dx$, nên $x\,dx=\frac12\,du$. Ngoài ra, $x^2=u-1$, nên $x^4=(u-1)^2$:
+\begin{align*}
+\int\sqrt{1+x^2}\,x^5\,dx
+&=\int\sqrt{1+x^2}\,x^4\cdot x\,dx\\
+&=\int\sqrt u\,(u-1)^2\cdot\frac12\,du\\
+&=\frac12\int\sqrt u\,(u^2-2u+1)\,du\\
+&=\frac12\int(u^{5/2}-2u^{3/2}+u^{1/2})\,du\\
+&=\frac12\left(\frac27u^{7/2}-2\cdot\frac25u^{5/2}+\frac23u^{3/2}\right)+C\\
+&=\frac17(1+x^2)^{7/2}-\frac25(1+x^2)^{5/2}+\frac13(1+x^2)^{3/2}+C.
+\end{align*}
+
+\Needspace{20\baselineskip}
+\ex{6} Tính $\displaystyle\int\tan x\,dx$.
+\sol Trước hết, viết tang theo sin và côsin:
+\[\int\tan x\,dx=\int\frac{\sin x}{\cos x}\,dx.\]
+Điều này gợi ý phép đổi biến $u=\cos x$, vì khi đó $du=-\sin x\,dx$, nên $\sin x\,dx=-du$:
+\begin{align*}
+\int\tan x\,dx&=\int\frac{\sin x}{\cos x}\,dx=-\int\frac1u\,du\\
+&=-\ln|u|+C=-\ln|\cos x|+C.
+\end{align*}
+Chú ý rằng $-\ln|\cos x|=\ln(|\cos x|^{-1})=\ln(1/|\cos x|)=\ln|\sec x|$, nên kết quả của Ví dụ 6 còn có thể viết là
+\begin{equation}\int\tan x\,dx=\ln|\sec x|+C.\tag{5}\end{equation}
+
+\subsection*{Đổi biến trong tích phân xác định}
+Khi tính tích phân xác định bằng phép đổi biến, ta có thể dùng hai phương pháp. Một phương pháp là tính tích phân bất định trước, rồi áp dụng Định lý cơ bản. Chẳng hạn, sử dụng kết quả của Ví dụ 2, ta có
+\begin{align*}
+\int_0^4\sqrt{2x+1}\,dx
+&=\left[\int\sqrt{2x+1}\,dx\right]_0^4\\
+&=\left[\frac13(2x+1)^{3/2}\right]_0^4
+=\frac13(9)^{3/2}-\frac13(1)^{3/2}\\
+&=\frac13(27-1)=\frac{26}{3}.
+\end{align*}
+Một phương pháp khác, thường được ưu tiên hơn, là đổi các cận tích phân khi đổi biến.
+
+\Needspace{8\baselineskip}
+\subsection*{6. Quy tắc đổi biến trong tích phân xác định}
+Nếu $g'$ liên tục trên $[a,b]$ và $f$ liên tục trên tập giá trị của $u=g(x)$ thì
+\[\boxed{\displaystyle\int_a^b f(g(x))g'(x)\,dx=\int_{g(a)}^{g(b)}f(u)\,du.}\]
+Quy tắc này cho biết rằng khi đổi biến trong một tích phân xác định, ta phải biểu diễn mọi thứ theo biến mới $u$: không chỉ $x$ và $dx$ mà cả các cận tích phân. Các cận mới là những giá trị của $u$ tương ứng với $x=a$ và $x=b$.
+
+\par\noindent\textit{Chứng minh.} Gọi $F$ là một nguyên hàm của $f$. Theo (3), $F(g(x))$ là một nguyên hàm của $f(g(x))g'(x)$, nên theo Phần 2 của Định lý cơ bản, ta có
+\[
+\int_a^b f(g(x))g'(x)\,dx=[F(g(x))]_a^b=F(g(b))-F(g(a)).
+\]
+Mặt khác, áp dụng Phần 2 của Định lý cơ bản một lần nữa, ta cũng có
+\[\int_{g(a)}^{g(b)}f(u)\,du=[F(u)]_{g(a)}^{g(b)}=F(g(b))-F(g(a)).\]
+
+\Needspace{22\baselineskip}
+\ex{7} Tính $\displaystyle\int_0^4\sqrt{2x+1}\,dx$ bằng (6).
+\sol Dùng phép đổi biến trong Lời giải 1 của Ví dụ 2, ta có $u=2x+1$ và $dx=\frac12\,du$. Để tìm các cận mới, chú ý rằng
+\[
+\text{khi }x=0,\quad u=2(0)+1=1;
+\]
+\[
+\text{khi }x=4,\quad u=2(4)+1=9.
+\]
+Do đó,
+\begin{align*}
+\int_0^4\sqrt{2x+1}\,dx&=\int_1^9\frac12\sqrt u\,du\\
+&=\frac12\cdot\frac23\left[u^{3/2}\right]_1^9\\
+&=\frac13(9^{3/2}-1^{3/2})=\frac{26}{3}.
+\end{align*}
+Chú ý rằng khi sử dụng (6), ta không trở lại biến $x$ sau khi lấy tích phân. Ta chỉ tính giá trị của biểu thức theo $u$ tại các cận tương ứng của $u$.
+
+\Needspace{16\baselineskip}
+\ex{8} Tính $\displaystyle\int_1^2\frac{dx}{(3-5x)^2}$.
+\sol Đặt $u=3-5x$. Khi đó $du=-5\,dx$, nên $dx=-\frac15\,du$. Khi $x=1$, $u=-2$; khi $x=2$, $u=-7$. Vì vậy,
+\begin{align*}
+\int_1^2\frac{dx}{(3-5x)^2}
+&=-\frac15\int_{-2}^{-7}\frac{du}{u^2}
+=-\frac15\left[-\frac1u\right]_{-2}^{-7}\\
+&=\left[\frac1{5u}\right]_{-2}^{-7}
+=\frac15\left(-\frac17+\frac12\right)=\frac1{14}.
+\end{align*}
+Một cách viết khác của tích phân trong Ví dụ 8 là
+\[\int_1^2\frac1{(3-5x)^2}\,dx.\]
+
+\Needspace{22\baselineskip}
+\ex{9} Tính $\displaystyle\int_1^e\frac{\ln x}{x}\,dx$.
+\sol Đặt $u=\ln x$ vì vi phân $du=(1/x)\,dx$ xuất hiện trong tích phân. Khi $x=1$, $u=\ln1=0$; khi $x=e$, $u=\ln e=1$. Vì vậy,
+\[\int_1^e\frac{\ln x}{x}\,dx=\int_0^1u\,du=\left[\frac{u^2}{2}\right]_0^1=\frac12.\]
+Do hàm số $f(x)=(\ln x)/x$ trong Ví dụ 9 dương khi $x>1$, tích phân biểu diễn diện tích miền tô màu trong Hình 2.
+\fig[.42]{fig02}{Hình 2}
+
+\subsection*{Tính đối xứng}
+Định lý sau sử dụng Quy tắc đổi biến trong tích phân xác định (6) để đơn giản hóa việc tính tích phân của những hàm số có tính đối xứng.
+
+\Needspace{12\baselineskip}
+\subsection*{7. Tích phân của các hàm đối xứng}
+Giả sử $f$ liên tục trên $[-a,a]$.
+
+\noindent(a) Nếu $f$ là hàm chẵn [$f(-x)=f(x)$] thì
+\[\int_{-a}^af(x)\,dx=2\int_0^af(x)\,dx.\]
+\noindent(b) Nếu $f$ là hàm lẻ [$f(-x)=-f(x)$] thì
+\[\int_{-a}^af(x)\,dx=0.\]
+
+\par\noindent\textit{Chứng minh.} Ta tách tích phân thành hai phần:
+\begin{align*}
+\int_{-a}^af(x)\,dx
+&=\int_{-a}^0f(x)\,dx+\int_0^af(x)\,dx\\
+&=-\int_0^{-a}f(x)\,dx+\int_0^af(x)\,dx.\tag{8}
+\end{align*}
+Trong tích phân thứ nhất ở vế phải cuối cùng, thực hiện phép đổi biến $u=-x$. Khi đó $du=-dx$ và khi $x=-a$, $u=a$. Vì vậy,
+\[-\int_0^{-a}f(x)\,dx=-\int_0^af(-u)(-du)=\int_0^af(-u)\,du,\]
+nên (8) trở thành
+\begin{equation}\int_{-a}^af(x)\,dx=\int_0^af(-u)\,du+\int_0^af(x)\,dx.\tag{9}\end{equation}
+(a) Nếu $f$ chẵn thì $f(-u)=f(u)$, nên (9) cho
+\[\int_{-a}^af(x)\,dx=\int_0^af(u)\,du+\int_0^af(x)\,dx=2\int_0^af(x)\,dx.\]
+(b) Nếu $f$ lẻ thì $f(-u)=-f(u)$, nên (9) cho
+\[\int_{-a}^af(x)\,dx=-\int_0^af(u)\,du+\int_0^af(x)\,dx=0.\]
+
+Định lý 7 được minh họa trong Hình 3. Trong trường hợp $f$ dương và chẵn, phần (a) cho biết diện tích dưới đồ thị $y=f(x)$ từ $-a$ đến $a$ gấp đôi diện tích từ 0 đến $a$ do tính đối xứng. Nhắc lại rằng tích phân $\int_a^bf(x)\,dx$ có thể được biểu diễn bằng diện tích phía trên trục $x$ và phía dưới $y=f(x)$ trừ đi diện tích phía dưới trục $x$ và phía trên đường cong. Vì vậy, phần (b) cho biết tích phân bằng 0 do các diện tích triệt tiêu nhau.
+\fig[.43]{fig03}{Hình 3. (a) $f$ chẵn, $\int_{-a}^af(x)\,dx=2\int_0^af(x)\,dx$. (b) $f$ lẻ, $\int_{-a}^af(x)\,dx=0$.}
+
+\Needspace{12\baselineskip}
+\ex{10} Vì $f(x)=x^6+1$ thỏa mãn $f(-x)=f(x)$, nên $f$ chẵn và do đó
+\begin{align*}
+\int_{-2}^2(x^6+1)\,dx&=2\int_0^2(x^6+1)\,dx\\
+&=2\left[\frac17x^7+x\right]_0^2
+=2\left(\frac{128}{7}+2\right)=\frac{284}{7}.
+\end{align*}
+
+\Needspace{9\baselineskip}
+\ex{11} Vì $f(x)=(\tan x)/(\sqrt{1+x^2+x^4})$ thỏa mãn $f(-x)=-f(x)$, nên $f$ lẻ và do đó
+\[\int_{-1}^1\frac{\tan x}{\sqrt{1+x^2+x^4}}\,dx=0.\]
+
+\Needspace{14\baselineskip}
+\section*{5.5 — Bài tập}
+\group{1–8} Tính tích phân bằng phép đổi biến đã cho.
+\bt{1} $\displaystyle\int\cos2x\,dx$, $u=2x$.
+\bt{2} $\displaystyle\int xe^{-x^2}\,dx$, $u=-x^2$.
+\bt{3} $\displaystyle\int x^2\sqrt{x^3+1}\,dx$, $u=x^3+1$.
+\bt{4} $\displaystyle\int\sin^2\theta\cos\theta\,d\theta$, $u=\sin\theta$.
+\bt{5} $\displaystyle\int\frac{x^3}{x^4-5}\,dx$, $u=x^4-5$.
+\bt{6} $\displaystyle\int\frac1{x^2}\sqrt{1+\frac1x}\,dx$, $u=1+\frac1x$.
+\bt{7} $\displaystyle\int\frac{\cos\sqrt t}{\sqrt t}\,dt$, $u=\sqrt t$.
+\bt{8} $\displaystyle\int z\sqrt{z-1}\,dz$, $u=z-1$.
+
+\Needspace{10\baselineskip}
+\group{9–54} Tính tích phân bất định.
+\bt{9} $\displaystyle\int x\sqrt{1-x^2}\,dx$.
+\bt{10} $\displaystyle\int(5-3x)^{10}\,dx$.
+\bt{11} $\displaystyle\int t^3e^{-t^4}\,dt$.
+\bt{12} $\displaystyle\int\sin t\sqrt{1+\cos t}\,dt$.
+\bt{13} $\displaystyle\int\sin(\pi t/3)\,dt$.
+\bt{14} $\displaystyle\int\sec^2(2\theta)\,d\theta$.
+\bt{15} $\displaystyle\int\frac{dx}{4x+7}$.
+\bt{16} $\displaystyle\int y^2(4-y^3)^{2/3}\,dy$.
+\bt{17} $\displaystyle\int\frac{\cos\theta}{1+\sin\theta}\,d\theta$.
+\bt{18} $\displaystyle\int\frac{z^2}{z^3+1}\,dz$.
+\bt{19} $\displaystyle\int\cos^3\theta\sin\theta\,d\theta$.
+\bt{20} $\displaystyle\int e^{-5r}\,dr$.
+\bt{21} $\displaystyle\int\frac{e^u}{(1-e^u)^2}\,du$.
+\bt{22} $\displaystyle\int\frac{\sin(1/x)}{x^2}\,dx$.
+\bt{23} $\displaystyle\int\frac{a+bx^2}{\sqrt{3ax+bx^3}}\,dx$.
+\bt{24} $\displaystyle\int\frac{t+1}{3t^2+6t-5}\,dt$.
+\bt{25} $\displaystyle\int\frac{(\ln x)^2}{x}\,dx$.
+\bt{26} $\displaystyle\int\sin x\sin(\cos x)\,dx$.
+\bt{27} $\displaystyle\int\sec^2\theta\tan^3\theta\,d\theta$.
+\bt{28} $\displaystyle\int x\sqrt{x+2}\,dx$.
+\bt{29} $\displaystyle\int\left(x-\frac1{x^2}\right)\left(x^2+\frac2x\right)^5\,dx$.
+\bt{30} $\displaystyle\int\frac{dx}{ax+b}$, $a\ne0$.
+\bt{31} $\displaystyle\int e^r(2+3e^r)^{3/2}\,dr$.
+\bt{32} $\displaystyle\int\frac{e^{\arcsin x}}{\sqrt{1-x^2}}\,dx$.
+\bt{33} $\displaystyle\int\frac{\sec^2\theta}{\tan\theta}\,d\theta$.
+\bt{34} $\displaystyle\int\frac{\sec^2x}{\tan^2x}\,dx$.
+\bt{35} $\displaystyle\int\frac{(\arctan x)^2}{x^2+1}\,dx$.
+\bt{36} $\displaystyle\int\frac{dx}{(x^2+1)\arctan x}$.
+\bt{37} $\displaystyle\int5^t\sin(5^t)\,dt$.
+\bt{38} $\displaystyle\int\frac{\sin\theta\cos\theta}{1+\sin^2\theta}\,d\theta$.
+\bt{39} $\displaystyle\int\cos(1+5t)\,dt$.
+\bt{40} $\displaystyle\int\frac{\cos(\pi/x)}{x^2}\,dx$.
+\bt{41} $\displaystyle\int\sqrt{\cot x}\,\csc^2x\,dx$.
+\bt{42} $\displaystyle\int\frac{2^t}{2^t+3}\,dt$.
+\bt{43} $\displaystyle\int\sinh^2x\cosh x\,dx$.
+\bt{44} $\displaystyle\int\frac{dt}{\cos^2t\sqrt{1+\tan t}}$.
+\bt{45} $\displaystyle\int\frac{\sin2x}{1+\cos^2x}\,dx$.
+\bt{46} $\displaystyle\int\frac{\sin x}{1+\cos^2x}\,dx$.
+\bt{47} $\displaystyle\int\cot x\,dx$.
+\bt{48} $\displaystyle\int\frac{\cos(\ln t)}t\,dt$.
+\bt{49} $\displaystyle\int\frac{dx}{\sqrt{1-x^2}\,\arcsin x}$.
+\bt{50} $\displaystyle\int\frac{x}{1+x^4}\,dx$.
+\bt{51} $\displaystyle\int\frac{1+x}{1+x^2}\,dx$.
+\bt{52} $\displaystyle\int x^2\sqrt{2+x}\,dx$.
+\bt{53} $\displaystyle\int x(2x+5)^8\,dx$.
+\bt{54} $\displaystyle\int x^3\sqrt{x^2+1}\,dx$.
+
+\Needspace{12\baselineskip}
+\group{55–58} Tính tích phân bất định. Minh họa và kiểm tra tính hợp lý của kết quả bằng cách vẽ đồ thị của cả hàm số và nguyên hàm của nó (lấy $C=0$).
+\bt{55} $\displaystyle\int x(x^2-1)^3\,dx$.
+\bt{56} $\displaystyle\int\tan^2\theta\sec^2\theta\,d\theta$.
+\bt{57} $\displaystyle\int e^{\cos x}\sin x\,dx$.
+\bt{58} $\displaystyle\int\sin x\cos^4x\,dx$.
+
+\Needspace{10\baselineskip}
+\group{59–80} Tính tích phân xác định.
+\bt{59} $\displaystyle\int_0^1\cos(\pi t/2)\,dt$.
+\bt{60} $\displaystyle\int_0^1(3t-1)^{50}\,dt$.
+\bt{61} $\displaystyle\int_0^1\sqrt[3]{1+7x}\,dx$.
+\bt{62} $\displaystyle\int_{\pi/3}^{2\pi/3}\csc^2\left(\frac12t\right)\,dt$.
+\bt{63} $\displaystyle\int_0^{\pi/6}\frac{\sin t}{\cos^2t}\,dt$.
+\bt{64} $\displaystyle\int_1^4\frac{\sqrt{2+\sqrt x}}{\sqrt x}\,dx$.
+\bt{65} $\displaystyle\int_1^2\frac{e^{1/x}}{x^2}\,dx$.
+\bt{66} $\displaystyle\int_0^1\frac{e^x}{1+e^{2x}}\,dx$.
+\bt{67} $\displaystyle\int_{-\pi/4}^{\pi/4}(x^3+x^4\tan x)\,dx$.
+\bt{68} $\displaystyle\int_0^{\pi/2}\cos x\sin(\sin x)\,dx$.
+\bt{69} $\displaystyle\int_0^{13}\frac{dx}{\sqrt[3]{(1+2x)^2}}$.
+\bt{70} $\displaystyle\int_0^a x\sqrt{a^2-x^2}\,dx$.
+\bt{71} $\displaystyle\int_0^a x\sqrt{x^2+a^2}\,dx$, $a>0$.
+\bt{72} $\displaystyle\int_{-\pi/3}^{\pi/3}x^4\sin x\,dx$.
+\bt{73} $\displaystyle\int_1^2x\sqrt{x-1}\,dx$.
+\bt{74} $\displaystyle\int_0^4\frac{x}{\sqrt{1+2x}}\,dx$.
+\bt{75} $\displaystyle\int_e^{e^4}\frac{dx}{x\sqrt{\ln x}}$.
+\bt{76} $\displaystyle\int_0^2(x-1)e^{(x-1)^2}\,dx$.
+\bt{77} $\displaystyle\int_0^1\frac{e^z+1}{e^z+z}\,dz$.
+\bt{78} $\displaystyle\int_1^4\frac1{(x+1)\sqrt x}\,dx$.
+\bt{79} $\displaystyle\int_0^1\frac{dx}{(1+\sqrt x)^4}$.
+\bt{80} $\displaystyle\int_1^{16}\frac{x^{1/2}}{1+x^{3/4}}\,dx$.
+
+\Needspace{12\baselineskip}
+\group{81–82} Dùng đồ thị để ước lượng sơ bộ diện tích miền nằm dưới đường cong đã cho. Sau đó, tìm diện tích chính xác.
+\bt{81} $y=\sqrt{2x+1}$, $0\le x\le1$.
+\bt{82} $y=2\sin x-\sin2x$, $0\le x\le\pi$.
+\bt{83} Tính $\displaystyle\int_{-2}^2(x+3)\sqrt{4-x^2}\,dx$ bằng cách viết thành tổng của hai tích phân và giải thích một trong hai tích phân đó theo diện tích.
+\bt{84} Tính $\displaystyle\int_0^1x\sqrt{1-x^4}\,dx$ bằng cách đổi biến và giải thích tích phân thu được theo diện tích.
+
+\Needspace{24\baselineskip}
+\bt{85} Những diện tích nào dưới đây bằng nhau? Vì sao?
+\fig[.64]{ex85}{Hình cho Bài tập 85}
+
+\bt{86} Một mô hình của tốc độ chuyển hóa cơ bản, tính bằng kcal/h, ở một nam thanh niên là $R(t)=85-0.18\cos(\pi t/12)$, trong đó $t$ là thời gian tính bằng giờ kể từ 5 giờ sáng. Tổng mức chuyển hóa cơ bản của người này, $\int_0^{24}R(t)\,dt$, trong khoảng thời gian 24 giờ là bao nhiêu?
+\bt{87} Một bồn chứa dầu bị vỡ tại thời điểm $t=0$ và dầu rò rỉ khỏi bồn với tốc độ $r(t)=100e^{-0.01t}$ lít mỗi phút. Bao nhiêu dầu rò rỉ trong giờ đầu tiên?
+\bt{88} Một quần thể vi khuẩn ban đầu có 400 cá thể và tăng trưởng với tốc độ $r(t)=(450.268)e^{1.12567t}$ vi khuẩn mỗi giờ. Sau ba giờ, quần thể có bao nhiêu cá thể?
+\bt{89} Hô hấp có tính chu kỳ và một chu kỳ hô hấp đầy đủ, từ lúc bắt đầu hít vào đến khi kết thúc thở ra, kéo dài khoảng 5 giây. Lưu lượng không khí cực đại đi vào phổi khoảng 0.5 L/s. Điều này phần nào giải thích vì sao hàm số $f(t)=\frac12\sin(2\pi t/5)$ thường được dùng để mô hình hóa lưu lượng không khí đi vào phổi. Dùng mô hình này để tìm thể tích không khí đã hít vào trong phổi tại thời điểm $t$.
+\Needspace{13\baselineskip}
+\bt{90} Tốc độ tăng trưởng của một quần thể cá được mô hình hóa bằng phương trình
+\[G(t)=\frac{60\,000e^{-0.6t}}{(1+5e^{-0.6t})^2},\]
+trong đó $t$ là số năm kể từ năm 2000 và $G$ tính bằng kilôgam mỗi năm. Nếu sinh khối vào năm 2000 là $25\,000$ kg thì sinh khối dự báo vào năm 2020 là bao nhiêu?
+\Needspace{16\baselineskip}
+\bt{91} Điều trị lọc máu loại bỏ urê và các chất thải khác khỏi máu của bệnh nhân bằng cách dẫn một phần dòng máu ra ngoài cơ thể qua một thiết bị gọi là máy lọc máu. Tốc độ loại bỏ urê khỏi máu (mg/phút) thường được mô tả tốt bằng phương trình
+\[u(t)=\frac rV C_0e^{-rt/V},\]
+trong đó $r$ là lưu lượng máu qua máy lọc (mL/phút), $V$ là thể tích máu của bệnh nhân (mL) và $C_0$ là lượng urê trong máu (mg) tại thời điểm $t=0$. Tính tích phân $\int_0^{30}u(t)\,dt$ và giải thích ý nghĩa của nó.
+\Needspace{17\baselineskip}
+\bt{92} Công ty Alabama Instruments đã thiết lập một dây chuyền sản xuất một loại máy tính mới. Tốc độ sản xuất các máy tính này sau $t$ tuần là
+\[\frac{dx}{dt}=5000\left(1-\frac{100}{(t+10)^2}\right)\quad\text{máy tính/tuần}.\]
+(Chú ý rằng sản lượng tiến đến 5000 máy mỗi tuần khi thời gian tăng, nhưng sản lượng ban đầu thấp hơn vì công nhân chưa quen với các kỹ thuật mới.) Tìm số máy tính được sản xuất từ đầu tuần thứ ba đến hết tuần thứ tư.
+\bt{93} Nếu $f$ liên tục và $\int_0^4f(x)\,dx=10$, hãy tìm $\int_0^2f(2x)\,dx$.
+\bt{94} Nếu $f$ liên tục và $\int_0^9f(x)\,dx=4$, hãy tìm $\int_0^3xf(x^2)\,dx$.
+\Needspace{13\baselineskip}
+\bt{95} Nếu $f$ liên tục trên $\mathbb R$, chứng minh rằng
+\[\int_a^bf(-x)\,dx=\int_{-b}^{-a}f(x)\,dx.\]
+Trong trường hợp $f(x)\ge0$ và $0<a<b$, vẽ hình để giải thích đẳng thức này về mặt hình học như sự bằng nhau của các diện tích.
+\Needspace{13\baselineskip}
+\bt{96} Nếu $f$ liên tục trên $\mathbb R$, chứng minh rằng
+\[\int_a^bf(x+c)\,dx=\int_{a+c}^{b+c}f(x)\,dx.\]
+Trong trường hợp $f(x)\ge0$, vẽ hình để giải thích đẳng thức này về mặt hình học như sự bằng nhau của các diện tích.
+\Needspace{10\baselineskip}
+\bt{97} Nếu $a$ và $b$ là các số dương, chứng minh rằng
+\[\int_0^1x^a(1-x)^b\,dx=\int_0^1x^b(1-x)^a\,dx.\]
+\Needspace{11\baselineskip}
+\bt{98} Nếu $f$ liên tục trên $[0,\pi]$, dùng phép đổi biến $u=\pi-x$ để chứng minh rằng
+\[\int_0^\pi xf(\sin x)\,dx=\frac\pi2\int_0^\pi f(\sin x)\,dx.\]
+\Needspace{9\baselineskip}
+\bt{99} Sử dụng Bài tập 98 để tính tích phân
+\[\int_0^\pi\frac{x\sin x}{1+\cos^2x}\,dx.\]
+\Needspace{17\baselineskip}
+\bt{100} (a) Nếu $f$ liên tục, chứng minh rằng
+\[\int_0^{\pi/2}f(\cos x)\,dx=\int_0^{\pi/2}f(\sin x)\,dx.\]
+\noindent(b) Sử dụng câu (a) để tính
+\[\int_0^{\pi/2}\cos^2x\,dx\qquad\text{và}\qquad\int_0^{\pi/2}\sin^2x\,dx.\]
+\end{document}

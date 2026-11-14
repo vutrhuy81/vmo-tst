@@ -3260,5 +3260,25 @@
     "file": "stewart-5-4-370195f0/fig04.png",
     "mime": "image/png",
     "sha256": "3ceebb249098d1d0642e80d97cf4ef5a5a6cca3e6a44345e11134cf747244ee5"
+  },
+  "stewart-5-5-058a053e/ex85.png": {
+    "file": "stewart-5-5-058a053e/ex85.png",
+    "mime": "image/png",
+    "sha256": "0b4b11bad8602ca181924e933a3522f1c397cc5fd91dde0dc7947f140b4e0d43"
+  },
+  "stewart-5-5-058a053e/fig01.png": {
+    "file": "stewart-5-5-058a053e/fig01.png",
+    "mime": "image/png",
+    "sha256": "13709e6abf090eaf3040287ab50c532794bad6b08c22db6ac8b840abcc934007"
+  },
+  "stewart-5-5-058a053e/fig02.png": {
+    "file": "stewart-5-5-058a053e/fig02.png",
+    "mime": "image/png",
+    "sha256": "e0c536bdb62ccb463e6af36974123739b6b60b068718e559352b631c3f23fb19"
+  },
+  "stewart-5-5-058a053e/fig03.png": {
+    "file": "stewart-5-5-058a053e/fig03.png",
+    "mime": "image/png",
+    "sha256": "5cd7323eae1afd54c7867d147157f85b34462e13200d3fcc0b9563af31fc61e7"
   }
 }
