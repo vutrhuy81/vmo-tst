@@ -1,0 +1,106 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage{fontspec}\setmainfont{Latin Modern Roman}\setsansfont{DejaVu Sans}
+\usepackage{amsmath,amssymb,graphicx,geometry,enumitem,needspace,longtable,booktabs,fancyhdr,hyperref}
+\geometry{left=28mm,right=23mm,top=24mm,bottom=24mm}
+\hypersetup{unicode=true,colorlinks=true,linkcolor=black,urlcolor=blue,pdftitle={Giải tích — Bài toán nâng cao Chương 5}}
+\setlength{\parindent}{1.2em}\setlength{\parskip}{4pt}\setlength{\headheight}{16pt}
+\pagestyle{fancy}\fancyhf{}\fancyhead[L]{\small Chương 5. Tích phân}\fancyhead[R]{\small Problems Plus}\fancyfoot[C]{\thepage}
+\newcommand{\fig}[3][.68]{\begin{center}\begin{minipage}{\linewidth}\centering\includegraphics[width=#1\linewidth]{assets/#2.png}\\{\small #3}\end{minipage}\end{center}}
+\newcommand{\ex}[1]{\par\medskip\noindent\textbf{Ví dụ #1.}\ }
+\newcommand{\sol}{\par\nopagebreak[4]\noindent\textit{Lời giải.}\ }
+\newcommand{\bt}[1]{\par\smallskip\Needspace{5\baselineskip}\noindent\textbf{#1.}\ }
+\newcommand{\group}[1]{\par\medskip\noindent\textbf{#1}\par\nopagebreak[4]}
+\newcommand{\gint}[1]{\left[\!\left[#1\right]\!\right]}
+\allowdisplaybreaks[2]
+\DeclareMathOperator{\sech}{sech}
+\DeclareMathOperator{\csch}{csch}
+\DeclareMathOperator{\arccot}{arccot}
+\begin{document}
+\begin{center}{\LARGE\bfseries Bài toán nâng cao — Problems Plus}\par
+{\large Chương 5. Tích phân}\end{center}
+
+Trước khi xem lời giải của ví dụ sau, hãy che phần lời giải và thử tự giải bài toán.
+
+\par\medskip\noindent\textbf{Ví dụ.} Tính $\displaystyle\lim_{x\to3}\left(\frac{x}{x-3}\int_3^x\frac{\sin t}{t}\,dt\right)$.
+\sol Trước hết, ta hãy xem sơ bộ các thành phần của hàm số. Điều gì xảy ra với thừa số thứ nhất, $x/(x-3)$, khi $x$ tiến đến 3? Tử số tiến đến 3 và mẫu số tiến đến 0, nên
+\[\frac{x}{x-3}\to\infty\quad\text{khi }x\to3^+,\]
+\[\frac{x}{x-3}\to-\infty\quad\text{khi }x\to3^-.\]
+Thừa số thứ hai tiến đến $\int_3^3(\sin t)/t\,dt$, tức là 0. Chưa rõ toàn bộ hàm số sẽ biến thiên như thế nào. (Một thừa số ngày càng lớn, còn thừa số kia ngày càng nhỏ.) Vậy ta nên tiếp tục ra sao?
+
+Một trong những nguyên tắc giải toán là \textit{nhận ra điều quen thuộc}. Có thành phần nào của hàm số gợi cho ta nhớ đến một điều đã gặp không? Tích phân
+\[\int_3^x\frac{\sin t}{t}\,dt\]
+có cận trên là $x$, và loại tích phân đó xuất hiện trong Phần 1 của Định lý cơ bản của giải tích:
+\[\frac{d}{dx}\int_a^xf(t)\,dt=f(x).\]
+Điều này gợi ý rằng phép tính đạo hàm có thể liên quan đến bài toán.
+
+Hãy ôn lại các Nguyên tắc giải toán ở sau Chương 1.
+
+Khi bắt đầu nghĩ đến phép tính đạo hàm, mẫu số $(x-3)$ lại gợi nhớ một điều quen thuộc khác: một trong các dạng của định nghĩa đạo hàm ở Chương 2 là
+\[F'(a)=\lim_{x\to a}\frac{F(x)-F(a)}{x-a},\]
+và với $a=3$, công thức trở thành
+\[F'(3)=\lim_{x\to3}\frac{F(x)-F(3)}{x-3}.\]
+Vậy hàm $F$ trong bài toán này là gì? Chú ý rằng nếu ta định nghĩa
+\[F(x)=\int_3^x\frac{\sin t}{t}\,dt\]
+thì $F(3)=0$. Còn thừa số $x$ ở tử số thì sao? Thừa số này chỉ làm phân tán sự chú ý, nên ta hãy tách nó ra rồi kết hợp các bước tính:
+\begin{align*}
+\lim_{x\to3}\left(\frac{x}{x-3}\int_3^x\frac{\sin t}{t}\,dt\right)
+&=\lim_{x\to3}x\cdot\lim_{x\to3}\frac{\displaystyle\int_3^x\frac{\sin t}{t}\,dt}{x-3}\\
+&=3\lim_{x\to3}\frac{F(x)-F(3)}{x-3}\\
+&=3F'(3)=3\frac{\sin3}{3}=\sin3.
+\end{align*}
+Bước cuối sử dụng Phần 1 của Định lý cơ bản của giải tích.
+
+Một cách tiếp cận khác là sử dụng quy tắc l’Hospital.
+
+\Needspace{12\baselineskip}
+\section*{Bài toán}
+\bt{1} Nếu $x\sin\pi x=\int_0^{x^2}f(t)\,dt$, trong đó $f$ là một hàm liên tục, hãy tìm $f(4)$.
+\bt{2} Giả sử $f$ liên tục, $f(0)=0$, $f(1)=1$, $f'(x)>0$ và $\int_0^1f(x)\,dx=\frac13$. Tìm giá trị của tích phân $\int_0^1f^{-1}(y)\,dy$.
+\bt{3} Nếu $\int_0^4e^{(x-2)^4}\,dx=k$, hãy tìm giá trị của $\int_0^4xe^{(x-2)^4}\,dx$.
+\Needspace{19\baselineskip}
+\bt{4} (a) Vẽ đồ thị của một số hàm thuộc họ $f(x)=(2cx-x^2)/c^3$ với $c>0$ và quan sát các miền giới hạn bởi những đường cong này và trục $x$. Đưa ra một phỏng đoán về mối quan hệ giữa diện tích của các miền đó.
+\par\noindent(b) Chứng minh phỏng đoán ở câu (a).
+\par\noindent(c) Quan sát lại các đồ thị ở câu (a) và dùng chúng để phác họa đường cong do các đỉnh (các điểm cao nhất) của họ hàm số vạch nên. Có thể đoán được đó là loại đường cong nào không?
+\par\noindent(d) Tìm phương trình của đường cong đã phác họa ở câu (c).
+\Needspace{12\baselineskip}
+\bt{5} Nếu
+\[f(x)=\int_0^{g(x)}\frac1{\sqrt{1+t^3}}\,dt,\qquad
+g(x)=\int_0^{\cos x}[1+\sin(t^2)]\,dt,\]
+hãy tìm $f'(\pi/2)$.
+\bt{6} Nếu $f(x)=\int_0^xx^2\sin(t^2)\,dt$, hãy tìm $f'(x)$.
+\Needspace{12\baselineskip}
+\bt{7} Tính $\displaystyle\lim_{x\to0}\frac1x\int_0^x(1-\tan2t)^{1/t}\,dt$.
+\par\noindent{}[Giả sử hàm dưới dấu tích phân được xác định và liên tục tại $t=0$; xem Bài tập 5.3.82.]
+
+\Needspace{23\baselineskip}
+\bt{8} Hình vẽ cho hai miền trong góc phần tư thứ nhất: $A(t)$ là diện tích dưới đường cong $y=\sin(x^2)$ từ 0 đến $t$, còn $B(t)$ là diện tích tam giác có các đỉnh $O$, $P$ và $(t,0)$. Tìm $\lim_{t\to0^+}[A(t)/B(t)]$.
+\fig[.77]{ex08}{Hình cho Bài toán 8}
+\bt{9} Tìm đoạn $[a,b]$ để giá trị của tích phân $\int_a^b(2+x-x^2)\,dx$ lớn nhất.
+\bt{10} Dùng một tích phân để ước lượng tổng $\displaystyle\sum_{i=1}^{10\,000}\sqrt i$.
+\Needspace{12\baselineskip}
+\bt{11} (a) Tính $\displaystyle\int_0^n\gint{x}\,dx$, trong đó $n$ là một số nguyên dương.
+\par\noindent(b) Tính $\displaystyle\int_a^b\gint{x}\,dx$, trong đó $a$ và $b$ là các số thực thỏa mãn $0\le a<b$.
+\Needspace{10\baselineskip}
+\bt{12} Tìm
+\[\frac{d^2}{dx^2}\int_0^x\left(\int_1^{\sin t}\sqrt{1+u^4}\,du\right)dt.\]
+\Needspace{15\baselineskip}
+\bt{13} Giả sử các hệ số của đa thức bậc ba $P(x)=a+bx+cx^2+dx^3$ thỏa mãn phương trình
+\[a+\frac b2+\frac c3+\frac d4=0.\]
+Chứng minh rằng phương trình $P(x)=0$ có một nghiệm nằm giữa 0 và 1. Có thể tổng quát hóa kết quả này cho một đa thức bậc $n$ không?
+\bt{14} Một đĩa tròn bán kính $r$ được dùng trong thiết bị bay hơi và quay trong một mặt phẳng thẳng đứng. Nếu đĩa được nhúng một phần vào chất lỏng để làm lớn nhất diện tích bề mặt đã được làm ướt và đang lộ ra ngoài chất lỏng, hãy chứng minh rằng tâm đĩa phải được đặt ở độ cao $r/\sqrt{1+\pi^2}$ so với mặt thoáng chất lỏng.
+\Needspace{11\baselineskip}
+\bt{15} Chứng minh rằng nếu $f$ liên tục thì
+\[\int_0^xf(u)(x-u)\,du=\int_0^x\left(\int_0^uf(t)\,dt\right)du.\]
+
+\Needspace{27\baselineskip}
+\bt{16} Hình vẽ cho một mảnh parabol, tức là phần của parabol bị cắt bởi một dây cung $AB$. Hình vẽ cũng cho điểm $C$ trên parabol có tính chất tiếp tuyến tại $C$ song song với dây cung $AB$. Archimedes đã chứng minh rằng diện tích mảnh parabol bằng $\frac43$ diện tích tam giác nội tiếp $ABC$. Kiểm tra kết quả của Archimedes đối với parabol $y=4-x^2$ và đường thẳng $y=x+2$.
+\fig[.46]{ex16}{Hình cho Bài toán 16}
+\bt{17} Cho điểm $(a,b)$ trong góc phần tư thứ nhất. Tìm parabol có bề lõm hướng xuống, đi qua điểm $(a,b)$ và gốc tọa độ, sao cho diện tích dưới parabol nhỏ nhất.
+\Needspace{25\baselineskip}
+\bt{18} Hình vẽ cho một miền gồm tất cả các điểm bên trong một hình vuông mà khoảng cách đến tâm nhỏ hơn khoảng cách đến các cạnh hình vuông. Tìm diện tích miền đó.
+\fig[.38]{ex18}{Hình cho Bài toán 18}
+\Needspace{11\baselineskip}
+\bt{19} Tính
+\[\lim_{n\to\infty}\left(\frac1{\sqrt n\sqrt{n+1}}+\frac1{\sqrt n\sqrt{n+2}}+\cdots+\frac1{\sqrt n\sqrt{n+n}}\right).\]
+\bt{20} Với mỗi số $c$, gọi $f_c(x)$ là số nhỏ hơn trong hai số $(x-c)^2$ và $(x-c-2)^2$. Sau đó, định nghĩa $g(c)=\int_0^1f_c(x)\,dx$. Tìm giá trị lớn nhất và giá trị nhỏ nhất của $g(c)$ nếu $-2\le c\le2$.
+\end{document}

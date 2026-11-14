@@ -1,0 +1,84 @@
+{
+  "exercises": [
+    {
+      "number": 1,
+      "content": "<p><strong>1.</strong></p>\n<p>Nếu <span class=\"math inline\">\\(x\\sin\\pi x=\\int_0^{x^2}f(t)\\,dt\\)</span>, trong đó <span class=\"math inline\">\\(f\\)</span> là một hàm liên tục, hãy tìm <span class=\"math inline\">\\(f(4)\\)</span>.</p>\n"
+    },
+    {
+      "number": 2,
+      "content": "<p><strong>2.</strong></p>\n<p>Giả sử <span class=\"math inline\">\\(f\\)</span> liên tục, <span class=\"math inline\">\\(f(0)=0\\)</span>, <span class=\"math inline\">\\(f(1)=1\\)</span>, <span class=\"math inline\">\\(f&#39;(x)&gt;0\\)</span> và <span class=\"math inline\">\\(\\int_0^1f(x)\\,dx=\\frac13\\)</span>. Tìm giá trị của tích phân <span class=\"math inline\">\\(\\int_0^1f^{-1}(y)\\,dy\\)</span>.</p>\n"
+    },
+    {
+      "number": 3,
+      "content": "<p><strong>3.</strong></p>\n<p>Nếu <span class=\"math inline\">\\(\\int_0^4e^{(x-2)^4}\\,dx=k\\)</span>, hãy tìm giá trị của <span class=\"math inline\">\\(\\int_0^4xe^{(x-2)^4}\\,dx\\)</span>.</p>\n"
+    },
+    {
+      "number": 4,
+      "content": "<p><strong>4.</strong></p>\n<p>(a) Vẽ đồ thị của một số hàm thuộc họ <span class=\"math inline\">\\(f(x)=(2cx-x^2)/c^3\\)</span> với <span class=\"math inline\">\\(c&gt;0\\)</span> và quan sát các miền giới hạn bởi những đường cong này và trục <span class=\"math inline\">\\(x\\)</span>. Đưa ra một phỏng đoán về mối quan hệ giữa diện tích của các miền đó.</p>\n<p>(b) Chứng minh phỏng đoán ở câu (a).</p>\n<p>(c) Quan sát lại các đồ thị ở câu (a) và dùng chúng để phác họa đường cong do các đỉnh (các điểm cao nhất) của họ hàm số vạch nên. Có thể đoán được đó là loại đường cong nào không?</p>\n<p>(d) Tìm phương trình của đường cong đã phác họa ở câu (c).</p>\n"
+    },
+    {
+      "number": 5,
+      "content": "<p><strong>5.</strong></p>\n<p>Nếu <span class=\"math display\">\\[f(x)=\\int_0^{g(x)}\\frac1{\\sqrt{1+t^3}}\\,dt,\\qquad\ng(x)=\\int_0^{\\cos x}[1+\\sin(t^2)]\\,dt,\\]</span> hãy tìm <span class=\"math inline\">\\(f&#39;(\\pi/2)\\)</span>.</p>\n"
+    },
+    {
+      "number": 6,
+      "content": "<p><strong>6.</strong></p>\n<p>Nếu <span class=\"math inline\">\\(f(x)=\\int_0^xx^2\\sin(t^2)\\,dt\\)</span>, hãy tìm <span class=\"math inline\">\\(f&#39;(x)\\)</span>.</p>\n"
+    },
+    {
+      "number": 7,
+      "content": "<p><strong>7.</strong></p>\n<p>Tính <span class=\"math inline\">\\(\\displaystyle\\lim_{x\\to0}\\frac1x\\int_0^x(1-\\tan2t)^{1/t}\\,dt\\)</span>.</p>\n<p>[Giả sử hàm dưới dấu tích phân được xác định và liên tục tại <span class=\"math inline\">\\(t=0\\)</span>; xem Bài tập 5.3.82.]</p>\n"
+    },
+    {
+      "number": 8,
+      "content": "<p><strong>8.</strong></p>\n<p>Hình vẽ cho hai miền trong góc phần tư thứ nhất: <span class=\"math inline\">\\(A(t)\\)</span> là diện tích dưới đường cong <span class=\"math inline\">\\(y=\\sin(x^2)\\)</span> từ 0 đến <span class=\"math inline\">\\(t\\)</span>, còn <span class=\"math inline\">\\(B(t)\\)</span> là diện tích tam giác có các đỉnh <span class=\"math inline\">\\(O\\)</span>, <span class=\"math inline\">\\(P\\)</span> và <span class=\"math inline\">\\((t,0)\\)</span>. Tìm <span class=\"math inline\">\\(\\lim_{t\\to0^+}[A(t)/B(t)]\\)</span>.</p>\n<div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-5-plus-86487584/ex08.png\" alt=\"image\" /><br />\nHình cho Bài toán 8</p>\n</div>\n"
+    },
+    {
+      "number": 9,
+      "content": "<p><strong>9.</strong></p>\n<p>Tìm đoạn <span class=\"math inline\">\\([a,b]\\)</span> để giá trị của tích phân <span class=\"math inline\">\\(\\int_a^b(2+x-x^2)\\,dx\\)</span> lớn nhất.</p>\n"
+    },
+    {
+      "number": 10,
+      "content": "<p><strong>10.</strong></p>\n<p>Dùng một tích phân để ước lượng tổng <span class=\"math inline\">\\(\\displaystyle\\sum_{i=1}^{10\\,000}\\sqrt i\\)</span>.</p>\n"
+    },
+    {
+      "number": 11,
+      "content": "<p><strong>11.</strong></p>\n<p>(a) Tính <span class=\"math inline\">\\(\\displaystyle\\int_0^n\\left[\\!\\left[x\\right]\\!\\right]\\,dx\\)</span>, trong đó <span class=\"math inline\">\\(n\\)</span> là một số nguyên dương.</p>\n<p>(b) Tính <span class=\"math inline\">\\(\\displaystyle\\int_a^b\\left[\\!\\left[x\\right]\\!\\right]\\,dx\\)</span>, trong đó <span class=\"math inline\">\\(a\\)</span> và <span class=\"math inline\">\\(b\\)</span> là các số thực thỏa mãn <span class=\"math inline\">\\(0\\le a&lt;b\\)</span>.</p>\n<p><em>Ký hiệu:</em> <span class=\"math inline\">\\(\\lfloor x\\rfloor\\)</span> (được viết bằng ngoặc vuông kép trong đề) là số nguyên lớn nhất không vượt quá <span class=\"math inline\">\\(x\\)</span>.</p>\n"
+    },
+    {
+      "number": 12,
+      "content": "<p><strong>12.</strong></p>\n<p>Tìm <span class=\"math display\">\\[\\frac{d^2}{dx^2}\\int_0^x\\left(\\int_1^{\\sin t}\\sqrt{1+u^4}\\,du\\right)dt.\\]</span></p>\n"
+    },
+    {
+      "number": 13,
+      "content": "<p><strong>13.</strong></p>\n<p>Giả sử các hệ số của đa thức bậc ba <span class=\"math inline\">\\(P(x)=a+bx+cx^2+dx^3\\)</span> thỏa mãn phương trình <span class=\"math display\">\\[a+\\frac b2+\\frac c3+\\frac d4=0.\\]</span> Chứng minh rằng phương trình <span class=\"math inline\">\\(P(x)=0\\)</span> có một nghiệm nằm giữa 0 và 1. Có thể tổng quát hóa kết quả này cho một đa thức bậc <span class=\"math inline\">\\(n\\)</span> không?</p>\n"
+    },
+    {
+      "number": 14,
+      "content": "<p><strong>14.</strong></p>\n<p>Một đĩa tròn bán kính <span class=\"math inline\">\\(r\\)</span> được dùng trong thiết bị bay hơi và quay trong một mặt phẳng thẳng đứng. Nếu đĩa được nhúng một phần vào chất lỏng để làm lớn nhất diện tích bề mặt đã được làm ướt và đang lộ ra ngoài chất lỏng, hãy chứng minh rằng tâm đĩa phải được đặt ở độ cao <span class=\"math inline\">\\(r/\\sqrt{1+\\pi^2}\\)</span> so với mặt thoáng chất lỏng.</p>\n"
+    },
+    {
+      "number": 15,
+      "content": "<p><strong>15.</strong></p>\n<p>Chứng minh rằng nếu <span class=\"math inline\">\\(f\\)</span> liên tục thì <span class=\"math display\">\\[\\int_0^xf(u)(x-u)\\,du=\\int_0^x\\left(\\int_0^uf(t)\\,dt\\right)du.\\]</span></p>\n"
+    },
+    {
+      "number": 16,
+      "content": "<p><strong>16.</strong></p>\n<p>Hình vẽ cho một mảnh parabol, tức là phần của parabol bị cắt bởi một dây cung <span class=\"math inline\">\\(AB\\)</span>. Hình vẽ cũng cho điểm <span class=\"math inline\">\\(C\\)</span> trên parabol có tính chất tiếp tuyến tại <span class=\"math inline\">\\(C\\)</span> song song với dây cung <span class=\"math inline\">\\(AB\\)</span>. Archimedes đã chứng minh rằng diện tích mảnh parabol bằng <span class=\"math inline\">\\(\\frac43\\)</span> diện tích tam giác nội tiếp <span class=\"math inline\">\\(ABC\\)</span>. Kiểm tra kết quả của Archimedes đối với parabol <span class=\"math inline\">\\(y=4-x^2\\)</span> và đường thẳng <span class=\"math inline\">\\(y=x+2\\)</span>.</p>\n<div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-5-plus-86487584/ex16.png\" alt=\"image\" /><br />\nHình cho Bài toán 16</p>\n</div>\n"
+    },
+    {
+      "number": 17,
+      "content": "<p><strong>17.</strong></p>\n<p>Cho điểm <span class=\"math inline\">\\((a,b)\\)</span> trong góc phần tư thứ nhất. Tìm parabol có bề lõm hướng xuống, đi qua điểm <span class=\"math inline\">\\((a,b)\\)</span> và gốc tọa độ, sao cho diện tích dưới parabol nhỏ nhất.</p>\n"
+    },
+    {
+      "number": 18,
+      "content": "<p><strong>18.</strong></p>\n<p>Hình vẽ cho một miền gồm tất cả các điểm bên trong một hình vuông mà khoảng cách đến tâm nhỏ hơn khoảng cách đến các cạnh hình vuông. Tìm diện tích miền đó.</p>\n<div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-5-plus-86487584/ex18.png\" alt=\"image\" /><br />\nHình cho Bài toán 18</p>\n</div>\n"
+    },
+    {
+      "number": 19,
+      "content": "<p><strong>19.</strong></p>\n<p>Tính <span class=\"math display\">\\[\\lim_{n\\to\\infty}\\left(\\frac1{\\sqrt n\\sqrt{n+1}}+\\frac1{\\sqrt n\\sqrt{n+2}}+\\cdots+\\frac1{\\sqrt n\\sqrt{n+n}}\\right).\\]</span></p>\n"
+    },
+    {
+      "number": 20,
+      "content": "<p><strong>20.</strong></p>\n<p>Với mỗi số <span class=\"math inline\">\\(c\\)</span>, gọi <span class=\"math inline\">\\(f_c(x)\\)</span> là số nhỏ hơn trong hai số <span class=\"math inline\">\\((x-c)^2\\)</span> và <span class=\"math inline\">\\((x-c-2)^2\\)</span>. Sau đó, định nghĩa <span class=\"math inline\">\\(g(c)=\\int_0^1f_c(x)\\,dx\\)</span>. Tìm giá trị lớn nhất và giá trị nhỏ nhất của <span class=\"math inline\">\\(g(c)\\)</span> nếu <span class=\"math inline\">\\(-2\\le c\\le2\\)</span>.</p>\n"
+    }
+  ]
+}

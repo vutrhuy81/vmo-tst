@@ -1,0 +1,262 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage{fontspec}\setmainfont{Latin Modern Roman}\setsansfont{DejaVu Sans}
+\usepackage{amsmath,amssymb,graphicx,geometry,enumitem,needspace,longtable,booktabs,fancyhdr,hyperref}
+\geometry{left=28mm,right=23mm,top=24mm,bottom=24mm}
+\hypersetup{unicode=true,colorlinks=true,linkcolor=black,urlcolor=blue,pdftitle={Giải tích §5.1 — Diện tích và quãng đường}}
+\setlength{\parindent}{1.2em}\setlength{\parskip}{4pt}\setlength{\headheight}{16pt}
+\pagestyle{fancy}\fancyhf{}\fancyhead[L]{\small Chương 5. Tích phân}\fancyhead[R]{\small §5.1}\fancyfoot[C]{\thepage}
+\newcommand{\fig}[3][.68]{\begin{center}\begin{minipage}{\linewidth}\centering\includegraphics[width=#1\linewidth]{assets/#2.png}\\{\small #3}\end{minipage}\end{center}}
+\newcommand{\ex}[1]{\par\medskip\noindent\textbf{Ví dụ #1.}\ }
+\newcommand{\sol}{\par\nopagebreak[4]\noindent\textit{Lời giải.}\ }
+\newcommand{\bt}[1]{\par\smallskip\Needspace{5\baselineskip}\noindent\textbf{#1.}\ }
+\newcommand{\group}[1]{\par\medskip\noindent\textbf{#1}\par\nopagebreak[4]}
+\newcommand{\gint}[1]{\left[\!\left[#1\right]\!\right]}
+\allowdisplaybreaks[2]
+\DeclareMathOperator{\sech}{sech}
+\DeclareMathOperator{\csch}{csch}
+\DeclareMathOperator{\arccot}{arccot}
+\begin{document}
+\begin{center}{\LARGE\bfseries Chương 5 — Tích phân}\end{center}
+\fig[.95]{chapter}{Trong Bài tập 5.4.83, ta sẽ dùng dữ liệu công suất điện tiêu thụ và một tích phân để tính điện năng sử dụng trong một ngày điển hình tại các bang New England. Ảnh: ixpert / Shutterstock.com.}
+Trong Chương 2, chúng ta đã dùng các bài toán tiếp tuyến và vận tốc để giới thiệu đạo hàm. Trong chương này, ta dùng các bài toán diện tích và quãng đường để giới thiệu khái niệm trung tâm còn lại của giải tích: \textbf{tích phân}. Mối liên hệ hết sức quan trọng giữa đạo hàm và tích phân được thể hiện trong \textbf{Định lý cơ bản của giải tích}, khẳng định rằng, theo một nghĩa nào đó, phép lấy đạo hàm và phép lấy tích phân là hai quá trình ngược nhau. Trong chương này và các Chương 6, 8, ta sẽ tìm hiểu cách dùng tích phân để giải quyết các bài toán về thể tích, độ dài đường cong, dự báo dân số, cung lượng tim, lực tác dụng lên đập nước, công, thặng dư tiêu dùng, bóng chày và nhiều vấn đề khác.
+\clearpage
+\begin{center}{\LARGE\bfseries 5.1 — Diện tích và quãng đường}\end{center}
+Trong mục này, ta sẽ thấy rằng khi tìm diện tích dưới một đường cong hoặc quãng đường một ô tô đi được, ta đều đi đến cùng một loại giới hạn đặc biệt.
+\par\textit{Gợi ý đọc:} Đây là lúc thích hợp để đọc (hoặc đọc lại) phần \textit{Tổng quan về giải tích}, nơi trình bày những ý tưởng thống nhất của giải tích và giúp nhìn rõ những nội dung đã học cũng như hướng phát triển tiếp theo.
+\section*{Bài toán diện tích}
+Ta bắt đầu bằng \textbf{bài toán diện tích}: tìm diện tích của miền $S$ nằm dưới đường cong $y=f(x)$ từ $a$ đến $b$. Điều này có nghĩa là miền $S$, minh họa ở Hình 1, được giới hạn bởi đồ thị của hàm số liên tục $f$ [với $f(x)\ge0$], các đường thẳng đứng $x=a$, $x=b$ và trục $x$.
+\fig[.44]{fig01}{Hình 1. $S=\{(x,y)\mid a\le x\le b,\ 0\le y\le f(x)\}$.}
+Khi tìm cách giải bài toán diện tích, ta phải tự hỏi: từ \textit{diện tích} có nghĩa là gì? Với các miền có cạnh thẳng, câu hỏi này dễ trả lời. Diện tích hình chữ nhật được định nghĩa là tích chiều dài và chiều rộng. Diện tích tam giác bằng một nửa tích độ dài đáy và chiều cao. Diện tích đa giác được tìm bằng cách chia nó thành các tam giác (như Hình 2), rồi cộng diện tích các tam giác.
+\fig[.92]{fig02}{Hình 2}
+Tuy nhiên, tìm diện tích một miền có biên cong không dễ như vậy. Tất cả chúng ta đều có hình dung trực giác về diện tích của một miền. Nhưng một phần của bài toán diện tích là làm cho ý tưởng trực giác ấy trở nên chính xác bằng một định nghĩa chặt chẽ.
+
+Nhớ lại rằng khi định nghĩa tiếp tuyến, trước hết ta xấp xỉ hệ số góc tiếp tuyến bằng hệ số góc các cát tuyến, rồi lấy giới hạn của các giá trị gần đúng đó. Ta áp dụng ý tưởng tương tự cho diện tích. Trước hết, ta xấp xỉ miền $S$ bằng các hình chữ nhật, sau đó lấy giới hạn của tổng diện tích các hình chữ nhật xấp xỉ khi tăng số lượng hình chữ nhật. Ví dụ sau minh họa quá trình này.
+\ex{1} Dùng các hình chữ nhật để ước lượng diện tích dưới parabol $y=x^2$ từ 0 đến 1 (miền parabol $S$ ở Hình 3).
+\fig[.38]{fig03}{Hình 3}
+\sol Trước hết, diện tích của $S$ phải nằm giữa 0 và 1 vì $S$ nằm trong hình vuông cạnh 1; tuy nhiên, ta chắc chắn có thể ước lượng tốt hơn. Chia $S$ thành bốn dải $S_1,S_2,S_3,S_4$ bằng các đường thẳng đứng $x=\frac14$, $x=\frac12$ và $x=\frac34$, như Hình 4(a).
+\fig[.82]{fig04}{Hình 4}
+Ta xấp xỉ mỗi dải bằng một hình chữ nhật có cùng đáy với dải và có chiều cao bằng chiều cao ở mép phải của dải [Hình 4(b)]. Nói cách khác, chiều cao các hình chữ nhật là giá trị của hàm $f(x)=x^2$ tại các đầu mút phải của những đoạn con $[0,\frac14]$, $[\frac14,\frac12]$, $[\frac12,\frac34]$ và $[\frac34,1]$.
+
+Mỗi hình chữ nhật rộng $\frac14$, với chiều cao lần lượt là $(\frac14)^2$, $(\frac12)^2$, $(\frac34)^2$ và $1^2$. Gọi $R_4$ là tổng diện tích các hình chữ nhật xấp xỉ này, ta được
+\[R_4=\frac14\left(\frac14\right)^2+\frac14\left(\frac12\right)^2+\frac14\left(\frac34\right)^2+\frac14\cdot1^2=\frac{15}{32}=0.46875.\]
+Từ Hình 4(b), diện tích $A$ của $S$ nhỏ hơn $R_4$, do đó
+\[A<0.46875.\]
+Thay các hình chữ nhật ở Hình 4(b) bằng các hình chữ nhật nhỏ hơn ở Hình 5, có chiều cao là giá trị của $f$ tại đầu mút trái của các đoạn con. (Hình chữ nhật ngoài cùng bên trái suy biến vì chiều cao bằng 0.) Tổng diện tích của chúng là
+\[L_4=\frac14\cdot0^2+\frac14\left(\frac14\right)^2+\frac14\left(\frac12\right)^2+\frac14\left(\frac34\right)^2=\frac7{32}=0.21875.\]
+\fig[.40]{fig05}{Hình 5}
+Diện tích của $S$ lớn hơn $L_4$, nên ta có các ước lượng dưới và trên của $A$:
+\[0.21875<A<0.46875.\]
+Có thể lặp lại quá trình với nhiều dải hơn. Hình 6 cho thấy trường hợp chia $S$ thành tám dải có cùng chiều rộng.
+\fig[.88]{fig06}{Hình 6. Xấp xỉ $S$ bằng tám hình chữ nhật: (a) dùng đầu mút trái; (b) dùng đầu mút phải.}
+Tính tổng diện tích các hình chữ nhật nhỏ hơn $(L_8)$ và các hình chữ nhật lớn hơn $(R_8)$, ta được các ước lượng tốt hơn:
+\[0.2734375<A<0.3984375.\]
+Vậy một câu trả lời có thể đưa ra là diện tích thực của $S$ nằm giữa 0.2734375 và 0.3984375.
+
+Tăng số dải sẽ cho các ước lượng tốt hơn. Bảng sau trình bày kết quả tính tương tự (bằng máy tính), dùng $n$ hình chữ nhật với chiều cao xác định tại đầu mút trái $(L_n)$ hoặc đầu mút phải $(R_n)$.
+\begin{center}\begin{tabular}{rrr}\toprule
+$n$&$L_n$&$R_n$\\\midrule
+10&0.2850000&0.3850000\\20&0.3087500&0.3587500\\30&0.3168519&0.3501852\\50&0.3234000&0.3434000\\100&0.3283500&0.3383500\\1000&0.3328335&0.3338335\\\bottomrule
+\end{tabular}\end{center}
+Đặc biệt, với 50 dải, diện tích nằm giữa 0.3234 và 0.3434. Với 1000 dải, khoảng này thu hẹp hơn nữa: $A$ nằm giữa 0.3328335 và 0.3338335. Lấy trung bình hai số đó cho một ước lượng tốt: $A\approx0.3333335$.
+
+Các giá trị trong bảng của Ví dụ 1 cho thấy dường như $R_n$ tiến đến $\frac13$ khi $n$ tăng. Ví dụ tiếp theo xác nhận điều này.
+\ex{2} Với miền $S$ ở Ví dụ 1, chứng minh các tổng xấp xỉ $R_n$ tiến đến $\frac13$, nghĩa là
+\[\lim_{n\to\infty}R_n=\frac13.\]
+\sol $R_n$ là tổng diện tích của $n$ hình chữ nhật trong Hình 7. Mỗi hình chữ nhật có chiều rộng $1/n$ và chiều cao là giá trị của $f(x)=x^2$ tại các điểm $1/n,2/n,3/n,\ldots,n/n$, tức là $(1/n)^2,(2/n)^2,(3/n)^2,\ldots,(n/n)^2$. Do đó
+\begin{align*}
+R_n&=\frac1n f\left(\frac1n\right)+\frac1n f\left(\frac2n\right)+\frac1n f\left(\frac3n\right)+\cdots+\frac1n f\left(\frac nn\right)\\
+&=\frac1n\left(\frac1n\right)^2+\frac1n\left(\frac2n\right)^2+\frac1n\left(\frac3n\right)^2+\cdots+\frac1n\left(\frac nn\right)^2\\
+&=\frac1n\cdot\frac1{n^2}(1^2+2^2+3^2+\cdots+n^2)\\
+&=\frac1{n^3}(1^2+2^2+3^2+\cdots+n^2).
+\end{align*}
+\fig[.40]{fig07}{Hình 7}
+Ở đây ta cần công thức tổng bình phương của $n$ số nguyên dương đầu tiên:
+\[1^2+2^2+3^2+\cdots+n^2=\frac{n(n+1)(2n+1)}6.\tag{1}\]
+Có thể bạn đã gặp công thức này; chứng minh được trình bày trong Ví dụ 5 ở Phụ lục E. Thay Công thức (1) vào biểu thức của $R_n$, ta được
+\[R_n=\frac1{n^3}\cdot\frac{n(n+1)(2n+1)}6=\frac{(n+1)(2n+1)}{6n^2}.\]
+Vì vậy,
+\begin{align*}
+\lim_{n\to\infty}R_n&=\lim_{n\to\infty}\frac{(n+1)(2n+1)}{6n^2}\\
+&=\lim_{n\to\infty}\frac16\left(\frac{n+1}n\right)\left(\frac{2n+1}n\right)\\
+&=\lim_{n\to\infty}\frac16\left(1+\frac1n\right)\left(2+\frac1n\right)\\
+&=\frac16\cdot1\cdot2=\frac13.
+\end{align*}
+\par\textit{Chú thích về giới hạn:} Ở đây ta tính giới hạn của dãy $\{R_n\}$. Dãy số và giới hạn của dãy sẽ được nghiên cứu chi tiết ở §11.1. Ý tưởng rất giống giới hạn tại vô cực (§2.6), chỉ khác là khi cho $n\to\infty$, $n$ chỉ nhận các giá trị nguyên dương. Đặc biệt, ta biết $\lim_{n\to\infty}1/n=0$. Viết $\lim_{n\to\infty}R_n=\frac13$ có nghĩa là có thể làm $R_n$ gần $\frac13$ tùy ý bằng cách chọn $n$ đủ lớn.
+
+Có thể chứng minh các tổng xấp xỉ $L_n$ trong Ví dụ 2 cũng tiến đến $\frac13$:
+\[\lim_{n\to\infty}L_n=\frac13.\]
+Từ Hình 8 và Hình 9, ta thấy khi $n$ tăng, cả $L_n$ và $R_n$ đều xấp xỉ diện tích của $S$ ngày càng tốt hơn. Vì vậy, ta \textit{định nghĩa} diện tích $A$ là giới hạn của các tổng diện tích hình chữ nhật xấp xỉ:
+\[A=\lim_{n\to\infty}R_n=\lim_{n\to\infty}L_n=\frac13.\]
+\fig[.98]{fig08}{Hình 8. Đầu mút phải cho ước lượng trên vì $f(x)=x^2$ đồng biến.}
+\fig[.98]{fig09}{Hình 9. Đầu mút trái cho ước lượng dưới vì $f(x)=x^2$ đồng biến.}
+Áp dụng ý tưởng của Ví dụ 1 và 2 cho miền $S$ tổng quát hơn ở Hình 1. Trước hết chia $S$ thành $n$ dải $S_1,S_2,\ldots,S_n$ có cùng chiều rộng, như Hình 10.
+\fig[.76]{fig10}{Hình 10}
+Đoạn $[a,b]$ có độ dài $b-a$, nên mỗi dải có chiều rộng
+\[\Delta x=\frac{b-a}n.\]
+Các dải này chia $[a,b]$ thành $n$ đoạn con
+\[[x_0,x_1],\quad[x_1,x_2],\quad[x_2,x_3],\quad\ldots,\quad[x_{n-1},x_n],\]
+trong đó $x_0=a$, $x_n=b$. Các đầu mút phải là
+\[x_1=a+\Delta x,\quad x_2=a+2\Delta x,\quad x_3=a+3\Delta x,\quad\ldots,\]
+và tổng quát $x_i=a+i\Delta x$. Xấp xỉ dải thứ $i$, $S_i$, bằng một hình chữ nhật rộng $\Delta x$, cao $f(x_i)$, là giá trị của $f$ tại đầu mút phải (Hình 11). Diện tích hình chữ nhật thứ $i$ bằng $f(x_i)\Delta x$. Đại lượng mà ta hình dung trực giác là diện tích của $S$ được xấp xỉ bởi tổng
+\[R_n=f(x_1)\Delta x+f(x_2)\Delta x+\cdots+f(x_n)\Delta x.\]
+\fig[.76]{fig11}{Hình 11}
+Hình 12 minh họa phép xấp xỉ này với $n=2,4,8,12$. Phép xấp xỉ dường như tốt dần khi số dải tăng, tức là khi $n\to\infty$. Vì vậy, ta định nghĩa diện tích $A$ của miền $S$ như sau.
+\fig[.98]{fig12}{Hình 12}
+\group{2. Định nghĩa} Diện tích $A$ của miền $S$ nằm dưới đồ thị của hàm số liên tục $f$ là giới hạn của tổng diện tích các hình chữ nhật xấp xỉ:
+\[A=\lim_{n\to\infty}R_n=\lim_{n\to\infty}[f(x_1)\Delta x+f(x_2)\Delta x+\cdots+f(x_n)\Delta x].\tag{2}\]
+Có thể chứng minh giới hạn trong Định nghĩa 2 luôn tồn tại vì ta giả sử $f$ liên tục. Cũng có thể chứng minh việc dùng đầu mút trái cho cùng một giá trị:
+\[A=\lim_{n\to\infty}L_n=\lim_{n\to\infty}[f(x_0)\Delta x+f(x_1)\Delta x+\cdots+f(x_{n-1})\Delta x].\tag{3}\]
+Thực ra, thay vì đầu mút trái hoặc phải, ta có thể lấy chiều cao hình chữ nhật thứ $i$ là giá trị của $f$ tại một số bất kỳ $x_i^*$ trong đoạn con thứ $i$, $[x_{i-1},x_i]$. Các số $x_1^*,x_2^*,\ldots,x_n^*$ được gọi là \textbf{điểm lấy mẫu}. Hình 13 minh họa các hình chữ nhật xấp xỉ khi các điểm lấy mẫu không được chọn là đầu mút. Vậy biểu thức tổng quát hơn cho diện tích $S$ là
+\[A=\lim_{n\to\infty}[f(x_1^*)\Delta x+f(x_2^*)\Delta x+\cdots+f(x_n^*)\Delta x].\tag{4}\]
+\fig[.88]{fig13}{Hình 13}
+\group{Chú ý} Để xấp xỉ diện tích dưới đồ thị của $f$, ta có thể lập các \textbf{tổng dưới} (hoặc \textbf{tổng trên}) bằng cách chọn $x_i^*$ sao cho $f(x_i^*)$ là giá trị nhỏ nhất (hoặc lớn nhất) của $f$ trên đoạn con thứ $i$ (Hình 14). [Vì $f$ liên tục, Định lý giá trị cực trị bảo đảm các giá trị nhỏ nhất và lớn nhất tồn tại trên mỗi đoạn con.] Có thể chứng minh một định nghĩa tương đương của diện tích là: $A$ là số duy nhất nhỏ hơn tất cả các tổng trên và lớn hơn tất cả các tổng dưới.
+\fig[.98]{fig14}{Hình 14. (a) Tổng dưới; (b) tổng trên; (c) tổng trên và tổng dưới.}
+Chẳng hạn, trong Ví dụ 1 và 2, diện tích $A=\frac13$ nằm giữa tất cả các tổng xấp xỉ trái $L_n$ và tất cả các tổng xấp xỉ phải $R_n$. Hàm $f(x)=x^2$ trong những ví dụ đó đồng biến trên $[0,1]$, nên tổng dưới được tạo từ đầu mút trái, còn tổng trên từ đầu mút phải (Hình 8, 9).
+
+Ta thường dùng \textbf{ký hiệu sigma} để viết gọn những tổng có nhiều số hạng. Chẳng hạn,
+\[\sum_{i=1}^n f(x_i)\Delta x=f(x_1)\Delta x+f(x_2)\Delta x+\cdots+f(x_n)\Delta x.\]
+Trong ký hiệu $\sum_{i=m}^n f(x_i)\Delta x$, dấu $\sum$ chỉ phép cộng, $i=m$ cho biết bắt đầu với $i=m$, còn $n$ cho biết kết thúc với $i=n$. Nếu cần luyện tập về ký hiệu sigma, hãy xem các ví dụ và làm một số bài tập ở Phụ lục E.
+
+Các biểu thức diện tích trong (2), (3), (4) có thể viết thành
+\[A=\lim_{n\to\infty}\sum_{i=1}^n f(x_i)\Delta x,\]
+\[A=\lim_{n\to\infty}\sum_{i=1}^n f(x_{i-1})\Delta x,\]
+\[A=\lim_{n\to\infty}\sum_{i=1}^n f(x_i^*)\Delta x.\]
+Công thức (1) cũng có thể viết lại là
+\[\sum_{i=1}^n i^2=\frac{n(n+1)(2n+1)}6.\]
+\ex{3} Gọi $A$ là diện tích miền nằm dưới đồ thị $f(x)=e^{-x}$, giữa $x=0$ và $x=2$.\\(a) Dùng đầu mút phải, tìm một biểu thức của $A$ dưới dạng giới hạn. Không tính giới hạn.\\(b) Ước lượng diện tích bằng cách chọn các điểm lấy mẫu là trung điểm, trước hết dùng bốn đoạn con, rồi dùng mười đoạn con.
+\sol (a) Vì $a=0$, $b=2$, chiều rộng mỗi đoạn con là
+\[\Delta x=\frac{2-0}n=\frac2n.\]
+Do đó $x_1=2/n$, $x_2=4/n$, $x_3=6/n$, $x_i=2i/n$, $x_n=2n/n$. Tổng diện tích các hình chữ nhật xấp xỉ là
+\begin{align*}
+R_n&=f(x_1)\Delta x+f(x_2)\Delta x+\cdots+f(x_n)\Delta x\\
+&=e^{-x_1}\Delta x+e^{-x_2}\Delta x+\cdots+e^{-x_n}\Delta x\\
+&=e^{-2/n}\left(\frac2n\right)+e^{-4/n}\left(\frac2n\right)+\cdots+e^{-2n/n}\left(\frac2n\right).
+\end{align*}
+Theo Định nghĩa 2,
+\[A=\lim_{n\to\infty}R_n=\lim_{n\to\infty}\frac2n(e^{-2/n}+e^{-4/n}+e^{-6/n}+\cdots+e^{-2n/n}).\]
+Dùng ký hiệu sigma, ta có thể viết
+\[A=\lim_{n\to\infty}\frac2n\sum_{i=1}^n e^{-2i/n}.\]
+Tính trực tiếp giới hạn này bằng tay khá khó, nhưng với một hệ thống đại số máy tính thì không khó (xem Bài tập 32). Ở §5.3, ta sẽ tìm $A$ dễ hơn bằng một phương pháp khác.
+
+(b) Với $n=4$, các đoạn con có cùng chiều rộng $\Delta x=0.5$ là $[0,0.5]$, $[0.5,1]$, $[1,1.5]$, $[1.5,2]$. Trung điểm của chúng là $x_1^*=0.25$, $x_2^*=0.75$, $x_3^*=1.25$, $x_4^*=1.75$. Tổng $M_4$ của diện tích bốn hình chữ nhật xấp xỉ (Hình 15) là
+\begin{align*}
+M_4&=\sum_{i=1}^4 f(x_i^*)\Delta x\\
+&=f(0.25)\Delta x+f(0.75)\Delta x+f(1.25)\Delta x+f(1.75)\Delta x\\
+&=e^{-0.25}(0.5)+e^{-0.75}(0.5)+e^{-1.25}(0.5)+e^{-1.75}(0.5)\\
+&=0.5(e^{-0.25}+e^{-0.75}+e^{-1.25}+e^{-1.75})\approx0.8557.
+\end{align*}
+Vậy một ước lượng của diện tích là $A\approx0.8557$.
+\fig[.42]{fig15}{Hình 15}
+Với $n=10$, các đoạn con là $[0,0.2]$, $[0.2,0.4]$, $\ldots$, $[1.8,2]$ và các trung điểm là $x_1^*=0.1$, $x_2^*=0.3$, $x_3^*=0.5$, $\ldots$, $x_{10}^*=1.9$. Do đó
+\begin{align*}
+A\approx M_{10}&=f(0.1)\Delta x+f(0.3)\Delta x+f(0.5)\Delta x+\cdots+f(1.9)\Delta x\\
+&=0.2(e^{-0.1}+e^{-0.3}+e^{-0.5}+\cdots+e^{-1.9})\approx0.8632.
+\end{align*}
+Hình 16 cho thấy ước lượng này có vẻ tốt hơn ước lượng với $n=4$.
+\fig[.42]{fig16}{Hình 16}
+\section*{Bài toán quãng đường}
+Ở §2.1, ta xét \textbf{bài toán vận tốc}: tìm vận tốc tức thời của một vật chuyển động nếu biết khoảng cách của vật tính từ điểm xuất phát tại mọi thời điểm. Bây giờ xét \textbf{bài toán quãng đường}: tìm quãng đường một vật đi được trong một khoảng thời gian khi biết vận tốc của nó tại mọi thời điểm. (Theo một nghĩa nào đó, đây là bài toán ngược của bài toán vận tốc.) Nếu vận tốc không đổi, bài toán được giải dễ dàng bằng công thức
+\[\text{quãng đường}=\text{vận tốc}\times\text{thời gian}.\]
+Nhưng nếu vận tốc thay đổi, việc tìm quãng đường không còn dễ như vậy. Ta khảo sát vấn đề qua ví dụ sau.
+\ex{4} Giả sử đồng hồ đo quãng đường của ô tô bị hỏng và ta muốn ước lượng quãng đường đã đi trong 30 giây. Cứ mỗi năm giây, ta đọc đồng hồ tốc độ và ghi lại:
+\begin{center}\begin{tabular}{lrrrrrrr}\toprule
+Thời gian (s)&0&5&10&15&20&25&30\\Vận tốc (mi/h)&17&21&24&29&32&31&28\\\bottomrule\end{tabular}\end{center}
+Để đơn vị thời gian và vận tốc phù hợp nhau, đổi vận tốc sang feet trên giây $(1\ \mathrm{mi/h}=5280/3600\ \mathrm{ft/s})$:
+\begin{center}\begin{tabular}{lrrrrrrr}\toprule
+Thời gian (s)&0&5&10&15&20&25&30\\Vận tốc (ft/s)&25&31&35&43&47&45&41\\\bottomrule\end{tabular}\end{center}
+Trong năm giây đầu, vận tốc thay đổi không nhiều, nên ta có thể ước lượng quãng đường bằng cách giả sử vận tốc không đổi. Nếu lấy vận tốc trong khoảng này bằng vận tốc ban đầu (25 ft/s), ta được quãng đường gần đúng:
+\[25\ \mathrm{ft/s}\times5\ \mathrm{s}=125\ \mathrm{ft}.\]
+Tương tự, trong khoảng thời gian thứ hai, coi vận tốc gần như không đổi và bằng vận tốc lúc $t=5$ s. Ước lượng quãng đường từ $t=5$ s đến $t=10$ s là
+\[31\ \mathrm{ft/s}\times5\ \mathrm{s}=155\ \mathrm{ft}.\]
+Cộng các ước lượng tương tự cho các khoảng còn lại, ta được ước lượng tổng quãng đường:
+\[(25\times5)+(31\times5)+(35\times5)+(43\times5)+(47\times5)+(45\times5)=1130\ \mathrm{ft}.\]
+Ta cũng có thể dùng vận tốc cuối mỗi khoảng thời gian thay cho vận tốc đầu khoảng. Khi đó ước lượng là
+\[(31\times5)+(35\times5)+(43\times5)+(47\times5)+(45\times5)+(41\times5)=1210\ \mathrm{ft}.\]
+Phác thảo đồ thị gần đúng của hàm vận tốc cùng các hình chữ nhật có chiều cao là vận tốc đầu mỗi khoảng [Hình 17(a)]. Diện tích hình chữ nhật đầu tiên là $25\times5=125$, cũng chính là ước lượng quãng đường trong năm giây đầu. Thực ra, diện tích mỗi hình chữ nhật có thể được hiểu là một quãng đường vì chiều cao biểu diễn vận tốc và chiều rộng biểu diễn thời gian. Tổng diện tích các hình chữ nhật ở Hình 17(a) là $L_6=1130$, tức ước lượng ban đầu của tổng quãng đường.
+
+Muốn ước lượng chính xác hơn, ta có thể đọc vận tốc thường xuyên hơn, như Hình 17(b). Càng đọc vận tốc nhiều lần, tổng diện tích các hình chữ nhật càng gần diện tích chính xác dưới đường cong vận tốc [Hình 17(c)]. Điều này gợi ý rằng tổng quãng đường đi được bằng diện tích dưới đồ thị vận tốc.
+\fig[.98]{fig17}{Hình 17}
+Tổng quát, giả sử một vật chuyển động với vận tốc $v=f(t)$, trong đó $a\le t\le b$ và $f(t)\ge0$ (vật luôn chuyển động theo chiều dương). Đọc vận tốc tại các thời điểm $t_0=a$, $t_1,t_2,\ldots,t_n=b$ sao cho vận tốc gần như không đổi trên mỗi khoảng con. Nếu các thời điểm cách đều nhau thì thời gian giữa hai lần đọc liên tiếp là $\Delta t=(b-a)/n$. Trong khoảng đầu tiên, vận tốc xấp xỉ $f(t_0)$, nên quãng đường xấp xỉ $f(t_0)\Delta t$. Tương tự, quãng đường trong khoảng thứ hai xấp xỉ $f(t_1)\Delta t$. Tổng quãng đường trong khoảng $[a,b]$ xấp xỉ
+\[f(t_0)\Delta t+f(t_1)\Delta t+\cdots+f(t_{n-1})\Delta t=\sum_{i=1}^n f(t_{i-1})\Delta t.\]
+Dùng vận tốc tại đầu mút phải thay cho đầu mút trái, ta được ước lượng
+\[f(t_1)\Delta t+f(t_2)\Delta t+\cdots+f(t_n)\Delta t=\sum_{i=1}^n f(t_i)\Delta t.\]
+Đo vận tốc càng thường xuyên thì ước lượng càng chính xác. Vì thế, có cơ sở để cho rằng quãng đường chính xác $d$ là giới hạn của những biểu thức này:
+\[d=\lim_{n\to\infty}\sum_{i=1}^n f(t_{i-1})\Delta t=\lim_{n\to\infty}\sum_{i=1}^n f(t_i)\Delta t.\tag{5}\]
+Ở §5.4, ta sẽ thấy điều này thực sự đúng.
+
+Vì (5) có cùng dạng với các biểu thức diện tích (2), (3), nên quãng đường đi được bằng diện tích dưới đồ thị hàm vận tốc. Trong các Chương 6 và 8, ta sẽ thấy những đại lượng khác trong khoa học tự nhiên và khoa học xã hội, chẳng hạn công của lực biến thiên hoặc cung lượng tim, cũng có thể được diễn giải là diện tích dưới một đường cong. Vì vậy, khi tính diện tích trong chương này, hãy nhớ rằng chúng có nhiều cách diễn giải thực tiễn khác nhau.
+\clearpage\section*{5.1 — Bài tập}
+\par\noindent\begin{minipage}{\linewidth}
+\bt{1} (a) Đọc các giá trị từ đồ thị $f$ đã cho, dùng năm hình chữ nhật để tìm một ước lượng dưới và một ước lượng trên cho diện tích dưới đồ thị từ $x=0$ đến $x=10$. Trong mỗi trường hợp, phác thảo các hình chữ nhật được dùng.\\(b) Tìm các ước lượng mới bằng mười hình chữ nhật trong mỗi trường hợp.
+\fig[.48]{ex01}{Hình cho Bài tập 1}
+\end{minipage}
+\par\noindent\begin{minipage}{\linewidth}
+\bt{2} (a) Dùng sáu hình chữ nhật để tìm từng loại ước lượng sau cho diện tích dưới đồ thị $f$ từ $x=0$ đến $x=12$:\\(i) $L_6$ (điểm lấy mẫu là đầu mút trái);\\(ii) $R_6$ (điểm lấy mẫu là đầu mút phải);\\(iii) $M_6$ (điểm lấy mẫu là trung điểm).\\(b) $L_6$ là ước lượng thiếu hay thừa so với diện tích thực?\\(c) $R_6$ là ước lượng thiếu hay thừa so với diện tích thực?\\(d) Trong các số $L_6,R_6,M_6$, số nào cho ước lượng tốt nhất? Giải thích.
+\fig[.48]{ex02}{Hình cho Bài tập 2}
+\end{minipage}
+\bt{3} (a) Ước lượng diện tích dưới đồ thị $f(x)=1/x$ từ $x=1$ đến $x=2$ bằng bốn hình chữ nhật xấp xỉ, dùng đầu mút phải. Phác thảo đồ thị và các hình chữ nhật. Ước lượng của bạn là thiếu hay thừa?\\(b) Lặp lại phần (a) với đầu mút trái.
+\bt{4} (a) Ước lượng diện tích dưới đồ thị $f(x)=\sin x$ từ $x=0$ đến $x=\pi/2$ bằng bốn hình chữ nhật xấp xỉ, dùng đầu mút phải. Phác thảo đồ thị và các hình chữ nhật. Ước lượng của bạn là thiếu hay thừa?\\(b) Lặp lại phần (a) với đầu mút trái.
+\bt{5} (a) Ước lượng diện tích dưới đồ thị $f(x)=1+x^2$ từ $x=-1$ đến $x=2$ bằng ba hình chữ nhật, dùng đầu mút phải. Sau đó cải thiện ước lượng bằng sáu hình chữ nhật. Phác thảo đường cong và các hình chữ nhật xấp xỉ.\\(b) Lặp lại phần (a) với đầu mút trái.\\(c) Lặp lại phần (a) với trung điểm.\\(d) Từ các hình phác thảo ở (a)–(c), ước lượng nào có vẻ chính xác nhất?
+\bt{6} (a) Vẽ đồ thị hàm số $f(x)=e^{x-x^2}$, $0\le x\le2$.\\(b) Ước lượng diện tích dưới đồ thị $f$ bằng bốn hình chữ nhật xấp xỉ, chọn điểm lấy mẫu là (i) đầu mút phải và (ii) trung điểm. Trong mỗi trường hợp, phác thảo đường cong và các hình chữ nhật.\\(c) Cải thiện các ước lượng ở (b) bằng tám hình chữ nhật.
+\bt{7} Tính các tổng trên và tổng dưới của $f(x)=6-x^2$, $-2\le x\le2$, với $n=2,4,8$. Minh họa bằng các hình tương tự Hình 14.
+\bt{8} Tính các tổng trên và tổng dưới của
+\[f(x)=1+\cos(x/2),\qquad-\pi\le x\le\pi,\]
+với $n=3,4,6$. Minh họa bằng các hình tương tự Hình 14.
+\bt{9} Tốc độ của một nữ vận động viên chạy tăng đều trong ba giây đầu của cuộc đua. Bảng cho tốc độ tại các thời điểm cách nhau nửa giây. Tìm các ước lượng dưới và trên cho quãng đường cô ấy đi được trong ba giây này.
+\begin{center}\begin{tabular}{lrrrrrrr}\toprule
+$t$ (s)&0&0.5&1.0&1.5&2.0&2.5&3.0\\$v$ (ft/s)&0&6.2&10.8&14.9&18.1&19.4&20.2\\\bottomrule\end{tabular}\end{center}
+\bt{10} Bảng cho các số đọc đồng hồ tốc độ cách nhau 10 giây trong một phút của một xe đua tại trường đua Daytona International Speedway, Florida.\\(a) Ước lượng quãng đường xe đi được trong thời gian này bằng vận tốc đầu mỗi khoảng thời gian.\\(b) Đưa ra một ước lượng khác bằng vận tốc cuối mỗi khoảng.\\(c) Các ước lượng ở (a), (b) có phải là ước lượng trên và dưới không? Giải thích.
+\begin{center}\begin{tabular}{rr}\toprule Thời gian (s)&Vận tốc (mi/h)\\\midrule
+0&182.9\\10&168.0\\20&106.6\\30&99.8\\40&124.5\\50&176.1\\60&175.6\\\bottomrule\end{tabular}\end{center}
+\bt{11} Dầu rò rỉ từ một bồn với lưu lượng $r(t)$ lít trên giờ. Lưu lượng giảm theo thời gian; bảng cho các giá trị cách nhau hai giờ. Tìm các ước lượng dưới và trên cho tổng lượng dầu đã rò rỉ.
+\begin{center}\begin{tabular}{lrrrrrr}\toprule
+$t$ (h)&0&2&4&6&8&10\\$r(t)$ (L/h)&8.7&7.6&6.8&6.2&5.7&5.3\\\bottomrule\end{tabular}\end{center}
+\bt{12} Khi ước lượng quãng đường từ dữ liệu vận tốc, đôi khi cần dùng các thời điểm $t_0,t_1,t_2,t_3,\ldots$ không cách đều nhau. Ta vẫn có thể ước lượng bằng các khoảng thời gian $\Delta t_i=t_i-t_{i-1}$. Chẳng hạn, năm 1992, tàu con thoi \textit{Endeavour} được phóng trong sứ mệnh STS-49 để lắp một động cơ đẩy tại cận điểm mới cho vệ tinh thông tin Intelsat. Bảng do NASA cung cấp cho dữ liệu vận tốc của tàu từ lúc rời bệ đến khi tách các tên lửa đẩy nhiên liệu rắn. Dùng dữ liệu để ước lượng độ cao của \textit{Endeavour} so với bề mặt Trái Đất sau 62 giây kể từ lúc phóng.
+\begin{center}\begin{tabular}{lrr}\toprule
+Sự kiện&Thời gian (s)&Vận tốc (ft/s)\\\midrule
+Phóng&0&0\\Bắt đầu thao tác xoay quanh trục dọc&10&185\\Kết thúc thao tác xoay quanh trục dọc&15&319\\Điều chỉnh lực đẩy về 89\%&20&447\\Điều chỉnh lực đẩy về 67\%&32&742\\Điều chỉnh lực đẩy lên 104\%&59&1325\\Áp suất động cực đại&62&1445\\Tách tên lửa đẩy nhiên liệu rắn&125&4151\\\bottomrule\end{tabular}\end{center}
+\par\noindent\begin{minipage}{\linewidth}
+\bt{13} Hình vẽ cho đồ thị vận tốc của một ô tô đang phanh. Dùng đồ thị để ước lượng quãng đường ô tô đi được trong thời gian phanh.
+\fig[.60]{ex13}{Hình cho Bài tập 13. Trục thời gian tính bằng giây.}
+\end{minipage}
+\par\noindent\begin{minipage}{\linewidth}
+\bt{14} Hình vẽ cho đồ thị vận tốc của một ô tô tăng tốc từ trạng thái nghỉ đến 120 km/h trong 30 giây. Ước lượng quãng đường ô tô đi được trong thời gian này.
+\fig[.60]{ex14}{Hình cho Bài tập 14. Trục thời gian tính bằng giây.}
+\end{minipage}
+\par\noindent\begin{minipage}{\linewidth}
+\bt{15} Ở một người mắc bệnh sởi, mức vi rút $N$ (đo bằng số tế bào nhiễm trên mỗi mL huyết tương) đạt mật độ cực đại vào khoảng $t=12$ ngày (khi phát ban xuất hiện), rồi giảm khá nhanh do đáp ứng miễn dịch. Diện tích dưới đồ thị $N(t)$ từ $t=0$ đến $t=12$ (như hình) bằng tổng mức nhiễm cần thiết để xuất hiện triệu chứng (đo bằng mật độ tế bào nhiễm nhân thời gian). Hàm $N$ được mô hình hóa bởi
+\[f(t)=-t(t-21)(t+1).\]
+Dùng mô hình này với sáu khoảng con và các trung điểm của chúng để ước lượng tổng mức nhiễm cần thiết để xuất hiện triệu chứng sởi.
+\fig[.50]{ex15}{Hình cho Bài tập 15. Trục thời gian tính bằng ngày.}
+\par\textit{Nguồn:} J. M. Heffernan và cộng sự, “An In-Host Model of Acute Infection: Measles as a Case Study,” \textit{Theoretical Population Biology} 73 (2006): 134–47.
+\end{minipage}
+\group{16–19} Dùng Định nghĩa 2 để tìm biểu thức diện tích dưới đồ thị $f$ dưới dạng một giới hạn. Không tính giới hạn.
+\bt{16} $f(x)=x^2e^x$, \quad $0\le x\le4$.
+\bt{17} $f(x)=2+\sin^2x$, \quad $0\le x\le\pi$.
+\bt{18} $f(x)=x+\ln x$, \quad $3\le x\le8$.
+\bt{19} $f(x)=x\sqrt{x^3+8}$, \quad $1\le x\le5$.
+\group{20–23} Xác định một miền có diện tích bằng giới hạn đã cho. Không tính giới hạn.
+\bt{20} $\displaystyle\lim_{n\to\infty}\sum_{i=1}^n\frac1n\left(\frac in\right)^3$.
+\bt{21} $\displaystyle\lim_{n\to\infty}\sum_{i=1}^n\frac2n\,\frac1{1+(2i/n)}$.
+\bt{22} $\displaystyle\lim_{n\to\infty}\sum_{i=1}^n\frac3n\sqrt{1+\frac{3i}n}$.
+\bt{23} $\displaystyle\lim_{n\to\infty}\sum_{i=1}^n\frac\pi{4n}\tan\frac{i\pi}{4n}$.
+\bt{24} (a) Dùng Định nghĩa 2 để biểu diễn diện tích dưới đường cong $y=x^3$ từ 0 đến 1 dưới dạng một giới hạn.\\(b) Công thức sau cho tổng lập phương của $n$ số nguyên đầu tiên được chứng minh ở Phụ lục E. Dùng nó để tính giới hạn ở phần (a).
+\[1^3+2^3+3^3+\cdots+n^3=\left[\frac{n(n+1)}2\right]^2.\]
+\bt{25} Gọi $A$ là diện tích dưới đồ thị của một hàm số liên tục, đồng biến $f$ từ $a$ đến $b$; $L_n,R_n$ lần lượt là các xấp xỉ của $A$ bằng $n$ đoạn con, dùng đầu mút trái và phải.\\(a) $A,L_n,R_n$ liên hệ với nhau như thế nào?\\(b) Chứng minh
+\[R_n-L_n=\frac{b-a}n[f(b)-f(a)].\]
+Sau đó vẽ hình minh họa đẳng thức này bằng cách chỉ ra rằng $n$ hình chữ nhật biểu diễn $R_n-L_n$ có thể ghép lại thành một hình chữ nhật duy nhất, có diện tích bằng vế phải.\\(c) Suy ra
+\[R_n-A<\frac{b-a}n[f(b)-f(a)].\]
+\bt{26} Nếu $A$ là diện tích dưới đường cong $y=e^x$ từ 1 đến 3, dùng Bài tập 25 để tìm một giá trị $n$ sao cho $R_n-A<0.0001$.
+\Needspace{14\baselineskip}\group{27–28} Với máy tính lập trình được (hoặc máy vi tính), có thể tính các biểu thức tổng diện tích hình chữ nhật xấp xỉ, ngay cả khi $n$ lớn, bằng vòng lặp. (Trên TI dùng lệnh \texttt{Is>} hoặc vòng lặp \texttt{For-EndFor}; trên Casio dùng \texttt{Isz}; trên HP hoặc trong BASIC dùng vòng lặp \texttt{FOR-NEXT}.) Tính tổng diện tích các hình chữ nhật xấp xỉ với các đoạn con bằng nhau, dùng đầu mút phải, cho $n=10,30,50,100$. Sau đó dự đoán giá trị diện tích chính xác.
+\bt{27} Miền dưới $y=x^4$ từ 0 đến 1.
+\bt{28} Miền dưới $y=\cos x$ từ 0 đến $\pi/2$.
+\group{29–30} Một số hệ thống đại số máy tính có các lệnh vẽ hình chữ nhật xấp xỉ và tính tổng diện tích của chúng, ít nhất khi $x_i^*$ là đầu mút trái hoặc phải. (Chẳng hạn, trong Maple dùng \texttt{leftbox}, \texttt{rightbox}, \texttt{leftsum}, \texttt{rightsum}.)
+\bt{29} Cho $f(x)=1/(x^2+1)$, $0\le x\le1$.\\(a) Tìm các tổng trái và phải với $n=10,30,50$.\\(b) Minh họa bằng cách vẽ các hình chữ nhật ở (a).\\(c) Chứng minh diện tích chính xác dưới đồ thị $f$ nằm giữa 0.780 và 0.791.
+\bt{30} Cho $f(x)=\ln x$, $1\le x\le4$.\\(a) Tìm các tổng trái và phải với $n=10,30,50$.\\(b) Minh họa bằng cách vẽ các hình chữ nhật ở (a).\\(c) Chứng minh diện tích chính xác dưới đồ thị $f$ nằm giữa 2.50 và 2.59.
+\bt{31} (a) Biểu diễn diện tích dưới đường cong $y=x^5$ từ 0 đến 2 dưới dạng một giới hạn.\\(b) Dùng một hệ thống đại số máy tính để tìm tổng trong biểu thức ở (a).\\(c) Tính giới hạn ở (a).
+\bt{32} Tìm diện tích chính xác của miền dưới đồ thị $y=e^{-x}$ từ 0 đến 2, bằng cách dùng một hệ thống đại số máy tính để tính tổng, rồi tính giới hạn trong Ví dụ 3(a). So sánh kết quả với ước lượng ở Ví dụ 3(b).
+\bt{33} Tìm diện tích chính xác dưới đường cong cosin $y=\cos x$ từ $x=0$ đến $x=b$, với $0<b<\pi/2$. (Dùng một hệ thống đại số máy tính để tính cả tổng lẫn giới hạn.) Đặc biệt, diện tích bằng bao nhiêu nếu $b=\pi/2$?
+\bt{34} (a) Gọi $A_n$ là diện tích của một đa giác có $n$ cạnh bằng nhau nội tiếp đường tròn bán kính $r$. Chia đa giác thành $n$ tam giác bằng nhau có góc ở tâm $2\pi/n$, chứng minh
+\[A_n=\frac12nr^2\sin\frac{2\pi}n.\]
+(b) Chứng minh $\displaystyle\lim_{n\to\infty}A_n=\pi r^2$. [Gợi ý: Dùng Công thức 3.3.5.]
+\end{document}

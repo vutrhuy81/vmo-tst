@@ -1,0 +1,316 @@
+{
+  "exercises": [
+    {
+      "number": 1,
+      "content": "<p><strong>1.</strong></p>\n<p>Dùng đồ thị đã cho của <span class=\"math inline\">\\(f\\)</span> để tìm tổng Riemann với sáu khoảng con. Chọn các điểm lấy mẫu là (a) đầu mút trái và (b) trung điểm. Trong mỗi trường hợp, vẽ hình và giải thích tổng Riemann biểu diễn điều gì.</p>\n<div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-5-review-45ed5363/ex01.png\" alt=\"image\" /><br />\nHình cho Bài tập 1</p>\n</div>\n"
+    },
+    {
+      "number": 2,
+      "content": "<p><strong>2.</strong></p>\n<p>(a) Tính tổng Riemann của <span class=\"math display\">\\[f(x)=x^2-x,\\qquad0\\le x\\le2,\\]</span> với bốn khoảng con, lấy các điểm mẫu là đầu mút phải. Dùng hình vẽ để giải thích tổng Riemann biểu diễn điều gì.</p>\n<p>(b) Dùng định nghĩa tích phân xác định (với đầu mút phải) để tính giá trị của tích phân <span class=\"math display\">\\[\\int_0^2(x^2-x)\\,dx.\\]</span> (c) Dùng Định lý cơ bản để kiểm tra kết quả câu (b).</p>\n<p>(d) Vẽ hình để giải thích ý nghĩa hình học của tích phân trong câu (b).</p>\n"
+    },
+    {
+      "number": 3,
+      "content": "<p><strong>3.</strong></p>\n<p>Tính <span class=\"math display\">\\[\\int_0^1\\left(x+\\sqrt{1-x^2}\\right)\\,dx\\]</span> bằng cách giải thích tích phân theo diện tích.</p>\n"
+    },
+    {
+      "number": 4,
+      "content": "<p><strong>4.</strong></p>\n<p>Biểu diễn <span class=\"math display\">\\[\\lim_{n\\to\\infty}\\sum_{i=1}^n\\sin x_i\\,\\Delta x\\]</span> thành một tích phân xác định trên đoạn <span class=\"math inline\">\\([0,\\pi]\\)</span>, rồi tính tích phân đó.</p>\n"
+    },
+    {
+      "number": 5,
+      "content": "<p><strong>5.</strong></p>\n<p>Nếu <span class=\"math inline\">\\(\\int_0^6f(x)\\,dx=10\\)</span> và <span class=\"math inline\">\\(\\int_0^4f(x)\\,dx=7\\)</span>, hãy tìm <span class=\"math inline\">\\(\\int_4^6f(x)\\,dx\\)</span>.</p>\n"
+    },
+    {
+      "number": 6,
+      "content": "<p><strong>6.</strong></p>\n<p>(a) Viết <span class=\"math inline\">\\(\\int_1^5(x+2x^5)\\,dx\\)</span> thành giới hạn của các tổng Riemann, lấy các điểm mẫu là đầu mút phải. Dùng một hệ thống đại số máy tính để tính tổng và tính giới hạn.</p>\n<p>(b) Dùng Định lý cơ bản để kiểm tra kết quả câu (a).</p>\n"
+    },
+    {
+      "number": 7,
+      "content": "<p><strong>7.</strong></p>\n<p>Hình vẽ biểu diễn đồ thị của <span class=\"math inline\">\\(f\\)</span>, <span class=\"math inline\">\\(f&#39;\\)</span> và <span class=\"math inline\">\\(\\int_0^xf(t)\\,dt\\)</span>. Xác định từng đồ thị và giải thích lựa chọn.</p>\n<div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-5-review-45ed5363/ex07.png\" alt=\"image\" /><br />\nHình cho Bài tập 7</p>\n</div>\n"
+    },
+    {
+      "number": 8,
+      "content": "<p><strong>8.</strong></p>\n<p>Tính: <span class=\"math display\">\\[\\text{(a)}\\quad\\int_0^1\\frac{d}{dx}(e^{\\arctan x})\\,dx.\\]</span> <span class=\"math display\">\\[\\text{(b)}\\quad\\frac{d}{dx}\\int_0^1e^{\\arctan x}\\,dx.\\]</span> <span class=\"math display\">\\[\\text{(c)}\\quad\\frac{d}{dx}\\int_0^xe^{\\arctan t}\\,dt.\\]</span></p>\n"
+    },
+    {
+      "number": 9,
+      "content": "<p><strong>9.</strong></p>\n<p>Đồ thị của <span class=\"math inline\">\\(f\\)</span> gồm ba đoạn thẳng như hình vẽ. Nếu <span class=\"math inline\">\\(g(x)=\\int_0^xf(t)\\,dt\\)</span>, hãy tìm <span class=\"math inline\">\\(g(4)\\)</span> và <span class=\"math inline\">\\(g&#39;(4)\\)</span>.</p>\n<div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-5-review-45ed5363/ex09.png\" alt=\"image\" /><br />\nHình cho Bài tập 9</p>\n</div>\n"
+    },
+    {
+      "number": 10,
+      "content": "<p><strong>10.</strong></p>\n<p>Nếu <span class=\"math inline\">\\(f\\)</span> là hàm số trong Bài tập 9, hãy tìm <span class=\"math inline\">\\(g&#39;&#39;(4)\\)</span>.</p>\n<p><em>Dữ kiện từ Bài tập 9:</em> Đồ thị của <span class=\"math inline\">\\(f\\)</span> gồm ba đoạn thẳng trong hình, và <span class=\"math inline\">\\(g(x)=\\int_0^x f(t)\\,dt\\)</span>.</p>\n<div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-5-review-45ed5363/ex09.png\" alt=\"image\" /></p>\n</div>\n"
+    },
+    {
+      "number": 11,
+      "content": "<p><strong>11.</strong></p>\n<p><em>Yêu cầu chung (11–42):</em> Tính tích phân, nếu tồn tại.</p>\n<p><span class=\"math inline\">\\(\\displaystyle\\int_{-1}^0(x^2+5x)\\,dx\\)</span>.</p>\n"
+    },
+    {
+      "number": 12,
+      "content": "<p><strong>12.</strong></p>\n<p><em>Yêu cầu chung (11–42):</em> Tính tích phân, nếu tồn tại.</p>\n<p><span class=\"math inline\">\\(\\displaystyle\\int_0^T(x^4-8x+7)\\,dx\\)</span>.</p>\n"
+    },
+    {
+      "number": 13,
+      "content": "<p><strong>13.</strong></p>\n<p><em>Yêu cầu chung (11–42):</em> Tính tích phân, nếu tồn tại.</p>\n<p><span class=\"math inline\">\\(\\displaystyle\\int_0^1(1-x^9)\\,dx\\)</span>.</p>\n"
+    },
+    {
+      "number": 14,
+      "content": "<p><strong>14.</strong></p>\n<p><em>Yêu cầu chung (11–42):</em> Tính tích phân, nếu tồn tại.</p>\n<p><span class=\"math inline\">\\(\\displaystyle\\int_0^1(1-x)^9\\,dx\\)</span>.</p>\n"
+    },
+    {
+      "number": 15,
+      "content": "<p><strong>15.</strong></p>\n<p><em>Yêu cầu chung (11–42):</em> Tính tích phân, nếu tồn tại.</p>\n<p><span class=\"math inline\">\\(\\displaystyle\\int_1^9\\frac{\\sqrt u-2u^2}{u}\\,du\\)</span>.</p>\n"
+    },
+    {
+      "number": 16,
+      "content": "<p><strong>16.</strong></p>\n<p><em>Yêu cầu chung (11–42):</em> Tính tích phân, nếu tồn tại.</p>\n<p><span class=\"math inline\">\\(\\displaystyle\\int_0^1(\\sqrt[4]u+1)^2\\,du\\)</span>.</p>\n"
+    },
+    {
+      "number": 17,
+      "content": "<p><strong>17.</strong></p>\n<p><em>Yêu cầu chung (11–42):</em> Tính tích phân, nếu tồn tại.</p>\n<p><span class=\"math inline\">\\(\\displaystyle\\int_0^1y(y^2+1)^5\\,dy\\)</span>.</p>\n"
+    },
+    {
+      "number": 18,
+      "content": "<p><strong>18.</strong></p>\n<p><em>Yêu cầu chung (11–42):</em> Tính tích phân, nếu tồn tại.</p>\n<p><span class=\"math inline\">\\(\\displaystyle\\int_0^2y^2\\sqrt{1+y^3}\\,dy\\)</span>.</p>\n"
+    },
+    {
+      "number": 19,
+      "content": "<p><strong>19.</strong></p>\n<p><em>Yêu cầu chung (11–42):</em> Tính tích phân, nếu tồn tại.</p>\n<p><span class=\"math inline\">\\(\\displaystyle\\int_1^5\\frac{dt}{(t-4)^2}\\)</span>.</p>\n"
+    },
+    {
+      "number": 20,
+      "content": "<p><strong>20.</strong></p>\n<p><em>Yêu cầu chung (11–42):</em> Tính tích phân, nếu tồn tại.</p>\n<p><span class=\"math inline\">\\(\\displaystyle\\int_0^1\\sin(3\\pi t)\\,dt\\)</span>.</p>\n"
+    },
+    {
+      "number": 21,
+      "content": "<p><strong>21.</strong></p>\n<p><em>Yêu cầu chung (11–42):</em> Tính tích phân, nếu tồn tại.</p>\n<p><span class=\"math inline\">\\(\\displaystyle\\int_0^1v^2\\cos(v^3)\\,dv\\)</span>.</p>\n"
+    },
+    {
+      "number": 22,
+      "content": "<p><strong>22.</strong></p>\n<p><em>Yêu cầu chung (11–42):</em> Tính tích phân, nếu tồn tại.</p>\n<p><span class=\"math inline\">\\(\\displaystyle\\int_{-1}^1\\frac{\\sin x}{1+x^2}\\,dx\\)</span>.</p>\n"
+    },
+    {
+      "number": 23,
+      "content": "<p><strong>23.</strong></p>\n<p><em>Yêu cầu chung (11–42):</em> Tính tích phân, nếu tồn tại.</p>\n<p><span class=\"math inline\">\\(\\displaystyle\\int_{-\\pi/4}^{\\pi/4}\\frac{t^4\\tan t}{2+\\cos t}\\,dt\\)</span>.</p>\n"
+    },
+    {
+      "number": 24,
+      "content": "<p><strong>24.</strong></p>\n<p><em>Yêu cầu chung (11–42):</em> Tính tích phân, nếu tồn tại.</p>\n<p><span class=\"math inline\">\\(\\displaystyle\\int_{-2}^{-1}\\frac{z^2+1}{z}\\,dz\\)</span>.</p>\n"
+    },
+    {
+      "number": 25,
+      "content": "<p><strong>25.</strong></p>\n<p><em>Yêu cầu chung (11–42):</em> Tính tích phân, nếu tồn tại.</p>\n<p><span class=\"math inline\">\\(\\displaystyle\\int\\frac{x}{x^2+1}\\,dx\\)</span>.</p>\n"
+    },
+    {
+      "number": 26,
+      "content": "<p><strong>26.</strong></p>\n<p><em>Yêu cầu chung (11–42):</em> Tính tích phân, nếu tồn tại.</p>\n<p><span class=\"math inline\">\\(\\displaystyle\\int\\frac{dx}{x^2+1}\\)</span>.</p>\n"
+    },
+    {
+      "number": 27,
+      "content": "<p><strong>27.</strong></p>\n<p><em>Yêu cầu chung (11–42):</em> Tính tích phân, nếu tồn tại.</p>\n<p><span class=\"math inline\">\\(\\displaystyle\\int\\frac{x+2}{\\sqrt{x^2+4x}}\\,dx\\)</span>.</p>\n"
+    },
+    {
+      "number": 28,
+      "content": "<p><strong>28.</strong></p>\n<p><em>Yêu cầu chung (11–42):</em> Tính tích phân, nếu tồn tại.</p>\n<p><span class=\"math inline\">\\(\\displaystyle\\int\\frac{\\csc^2x}{1+\\cot x}\\,dx\\)</span>.</p>\n"
+    },
+    {
+      "number": 29,
+      "content": "<p><strong>29.</strong></p>\n<p><em>Yêu cầu chung (11–42):</em> Tính tích phân, nếu tồn tại.</p>\n<p><span class=\"math inline\">\\(\\displaystyle\\int\\sin\\pi t\\cos\\pi t\\,dt\\)</span>.</p>\n"
+    },
+    {
+      "number": 30,
+      "content": "<p><strong>30.</strong></p>\n<p><em>Yêu cầu chung (11–42):</em> Tính tích phân, nếu tồn tại.</p>\n<p><span class=\"math inline\">\\(\\displaystyle\\int\\sin x\\cos(\\cos x)\\,dx\\)</span>.</p>\n"
+    },
+    {
+      "number": 31,
+      "content": "<p><strong>31.</strong></p>\n<p><em>Yêu cầu chung (11–42):</em> Tính tích phân, nếu tồn tại.</p>\n<p><span class=\"math inline\">\\(\\displaystyle\\int\\frac{e^{\\sqrt x}}{\\sqrt x}\\,dx\\)</span>.</p>\n"
+    },
+    {
+      "number": 32,
+      "content": "<p><strong>32.</strong></p>\n<p><em>Yêu cầu chung (11–42):</em> Tính tích phân, nếu tồn tại.</p>\n<p><span class=\"math inline\">\\(\\displaystyle\\int\\frac{\\sin(\\ln x)}x\\,dx\\)</span>.</p>\n"
+    },
+    {
+      "number": 33,
+      "content": "<p><strong>33.</strong></p>\n<p><em>Yêu cầu chung (11–42):</em> Tính tích phân, nếu tồn tại.</p>\n<p><span class=\"math inline\">\\(\\displaystyle\\int\\tan x\\ln(\\cos x)\\,dx\\)</span>.</p>\n"
+    },
+    {
+      "number": 34,
+      "content": "<p><strong>34.</strong></p>\n<p><em>Yêu cầu chung (11–42):</em> Tính tích phân, nếu tồn tại.</p>\n<p><span class=\"math inline\">\\(\\displaystyle\\int\\frac{x}{\\sqrt{1-x^4}}\\,dx\\)</span>.</p>\n"
+    },
+    {
+      "number": 35,
+      "content": "<p><strong>35.</strong></p>\n<p><em>Yêu cầu chung (11–42):</em> Tính tích phân, nếu tồn tại.</p>\n<p><span class=\"math inline\">\\(\\displaystyle\\int\\frac{x^3}{1+x^4}\\,dx\\)</span>.</p>\n"
+    },
+    {
+      "number": 36,
+      "content": "<p><strong>36.</strong></p>\n<p><em>Yêu cầu chung (11–42):</em> Tính tích phân, nếu tồn tại.</p>\n<p><span class=\"math inline\">\\(\\displaystyle\\int\\sinh(1+4x)\\,dx\\)</span>.</p>\n"
+    },
+    {
+      "number": 37,
+      "content": "<p><strong>37.</strong></p>\n<p><em>Yêu cầu chung (11–42):</em> Tính tích phân, nếu tồn tại.</p>\n<p><span class=\"math inline\">\\(\\displaystyle\\int\\frac{\\sec\\theta\\tan\\theta}{1+\\sec\\theta}\\,d\\theta\\)</span>.</p>\n"
+    },
+    {
+      "number": 38,
+      "content": "<p><strong>38.</strong></p>\n<p><em>Yêu cầu chung (11–42):</em> Tính tích phân, nếu tồn tại.</p>\n<p><span class=\"math inline\">\\(\\displaystyle\\int_0^{\\pi/4}(1+\\tan t)^3\\sec^2t\\,dt\\)</span>.</p>\n"
+    },
+    {
+      "number": 39,
+      "content": "<p><strong>39.</strong></p>\n<p><em>Yêu cầu chung (11–42):</em> Tính tích phân, nếu tồn tại.</p>\n<p><span class=\"math inline\">\\(\\displaystyle\\int x(1-x)^{2/3}\\,dx\\)</span>.</p>\n"
+    },
+    {
+      "number": 40,
+      "content": "<p><strong>40.</strong></p>\n<p><em>Yêu cầu chung (11–42):</em> Tính tích phân, nếu tồn tại.</p>\n<p><span class=\"math inline\">\\(\\displaystyle\\int\\frac{x}{x-3}\\,dx\\)</span>.</p>\n"
+    },
+    {
+      "number": 41,
+      "content": "<p><strong>41.</strong></p>\n<p><em>Yêu cầu chung (11–42):</em> Tính tích phân, nếu tồn tại.</p>\n<p><span class=\"math inline\">\\(\\displaystyle\\int_0^3|x^2-4|\\,dx\\)</span>.</p>\n"
+    },
+    {
+      "number": 42,
+      "content": "<p><strong>42.</strong></p>\n<p><em>Yêu cầu chung (11–42):</em> Tính tích phân, nếu tồn tại.</p>\n<p><span class=\"math inline\">\\(\\displaystyle\\int_0^4|\\sqrt x-1|\\,dx\\)</span>.</p>\n"
+    },
+    {
+      "number": 43,
+      "content": "<p><strong>43.</strong></p>\n<p><em>Yêu cầu chung (43–44):</em> Tính tích phân bất định. Minh họa và kiểm tra tính hợp lý của kết quả bằng cách vẽ đồ thị của cả hàm số và nguyên hàm của nó (lấy <span class=\"math inline\">\\(C=0\\)</span>).</p>\n<p><span class=\"math inline\">\\(\\displaystyle\\int\\frac{\\cos x}{\\sqrt{1+\\sin x}}\\,dx\\)</span>.</p>\n"
+    },
+    {
+      "number": 44,
+      "content": "<p><strong>44.</strong></p>\n<p><em>Yêu cầu chung (43–44):</em> Tính tích phân bất định. Minh họa và kiểm tra tính hợp lý của kết quả bằng cách vẽ đồ thị của cả hàm số và nguyên hàm của nó (lấy <span class=\"math inline\">\\(C=0\\)</span>).</p>\n<p><span class=\"math inline\">\\(\\displaystyle\\int\\frac{x^3}{\\sqrt{x^2+1}}\\,dx\\)</span>.</p>\n"
+    },
+    {
+      "number": 45,
+      "content": "<p><strong>45.</strong></p>\n<p>Dùng đồ thị để ước lượng sơ bộ diện tích miền nằm dưới đường cong <span class=\"math inline\">\\(y=x\\sqrt x\\)</span>, <span class=\"math inline\">\\(0\\le x\\le4\\)</span>. Sau đó, tìm diện tích chính xác.</p>\n"
+    },
+    {
+      "number": 46,
+      "content": "<p><strong>46.</strong></p>\n<p>Vẽ đồ thị hàm số <span class=\"math inline\">\\(f(x)=\\cos^2x\\sin x\\)</span> và dùng đồ thị để dự đoán giá trị của tích phân <span class=\"math inline\">\\(\\int_0^{2\\pi}f(x)\\,dx\\)</span>. Sau đó, tính tích phân để kiểm tra dự đoán.</p>\n"
+    },
+    {
+      "number": 47,
+      "content": "<p><strong>47.</strong></p>\n<p>Tìm diện tích dưới đồ thị <span class=\"math inline\">\\(y=x^2+5\\)</span> và phía trên trục <span class=\"math inline\">\\(x\\)</span>, từ <span class=\"math inline\">\\(x=0\\)</span> đến <span class=\"math inline\">\\(x=4\\)</span>.</p>\n"
+    },
+    {
+      "number": 48,
+      "content": "<p><strong>48.</strong></p>\n<p>Tìm diện tích dưới đồ thị <span class=\"math inline\">\\(y=\\sin x\\)</span> và phía trên trục <span class=\"math inline\">\\(x\\)</span>, từ <span class=\"math inline\">\\(x=0\\)</span> đến <span class=\"math inline\">\\(x=\\pi/2\\)</span>.</p>\n"
+    },
+    {
+      "number": 49,
+      "content": "<p><strong>49.</strong></p>\n<p><em>Yêu cầu chung (49–50):</em> Các miền <span class=\"math inline\">\\(A\\)</span>, <span class=\"math inline\">\\(B\\)</span> và <span class=\"math inline\">\\(C\\)</span> giới hạn bởi đồ thị của <span class=\"math inline\">\\(f\\)</span> và trục <span class=\"math inline\">\\(x\\)</span> có diện tích lần lượt là 3, 2 và 1. Tính tích phân.</p>\n<div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-5-review-45ed5363/ex49_50.png\" alt=\"image\" /><br />\nHình cho Bài tập 49–50</p>\n</div>\n<p>(a) <span class=\"math inline\">\\(\\displaystyle\\int_1^5f(x)\\,dx\\)</span>.</p>\n<p>(b) <span class=\"math inline\">\\(\\displaystyle\\int_1^5|f(x)|\\,dx\\)</span>.</p>\n"
+    },
+    {
+      "number": 50,
+      "content": "<p><strong>50.</strong></p>\n<p><em>Yêu cầu chung (49–50):</em> Các miền <span class=\"math inline\">\\(A\\)</span>, <span class=\"math inline\">\\(B\\)</span> và <span class=\"math inline\">\\(C\\)</span> giới hạn bởi đồ thị của <span class=\"math inline\">\\(f\\)</span> và trục <span class=\"math inline\">\\(x\\)</span> có diện tích lần lượt là 3, 2 và 1. Tính tích phân.</p>\n<div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-5-review-45ed5363/ex49_50.png\" alt=\"image\" /><br />\nHình cho Bài tập 49–50</p>\n</div>\n<p>(a) <span class=\"math inline\">\\(\\displaystyle\\int_1^4f(x)\\,dx+\\int_3^5f(x)\\,dx\\)</span>.</p>\n<p>(b) <span class=\"math inline\">\\(\\displaystyle\\int_1^{3}2f(x)\\,dx+\\int_3^{5}6f(x)\\,dx\\)</span>.</p>\n"
+    },
+    {
+      "number": 51,
+      "content": "<p><strong>51.</strong></p>\n<p><em>Yêu cầu chung (51–56):</em> Tìm đạo hàm của hàm số.</p>\n<p><span class=\"math inline\">\\(\\displaystyle F(x)=\\int_0^x\\frac{t^2}{1+t^3}\\,dt\\)</span>.</p>\n"
+    },
+    {
+      "number": 52,
+      "content": "<p><strong>52.</strong></p>\n<p><em>Yêu cầu chung (51–56):</em> Tìm đạo hàm của hàm số.</p>\n<p><span class=\"math inline\">\\(\\displaystyle F(x)=\\int_x^1\\sqrt{t+\\sin t}\\,dt\\)</span>.</p>\n"
+    },
+    {
+      "number": 53,
+      "content": "<p><strong>53.</strong></p>\n<p><em>Yêu cầu chung (51–56):</em> Tìm đạo hàm của hàm số.</p>\n<p><span class=\"math inline\">\\(\\displaystyle g(x)=\\int_0^{x^4}\\cos(t^2)\\,dt\\)</span>.</p>\n"
+    },
+    {
+      "number": 54,
+      "content": "<p><strong>54.</strong></p>\n<p><em>Yêu cầu chung (51–56):</em> Tìm đạo hàm của hàm số.</p>\n<p><span class=\"math inline\">\\(\\displaystyle g(x)=\\int_1^{\\sin x}\\frac{1-t^2}{1+t^4}\\,dt\\)</span>.</p>\n"
+    },
+    {
+      "number": 55,
+      "content": "<p><strong>55.</strong></p>\n<p><em>Yêu cầu chung (51–56):</em> Tìm đạo hàm của hàm số.</p>\n<p><span class=\"math inline\">\\(\\displaystyle y=\\int_{\\sqrt x}^x\\frac{e^t}t\\,dt\\)</span>.</p>\n"
+    },
+    {
+      "number": 56,
+      "content": "<p><strong>56.</strong></p>\n<p><em>Yêu cầu chung (51–56):</em> Tìm đạo hàm của hàm số.</p>\n<p><span class=\"math inline\">\\(\\displaystyle y=\\int_{2x}^{3x+1}\\sin(t^4)\\,dt\\)</span>.</p>\n"
+    },
+    {
+      "number": 57,
+      "content": "<p><strong>57.</strong></p>\n<p><em>Yêu cầu chung (57–58):</em> Dùng Tính chất 8 của tích phân để ước lượng giá trị tích phân.</p>\n<p><span class=\"math inline\">\\(\\displaystyle\\int_1^3\\sqrt{x^2+3}\\,dx\\)</span>.</p>\n<p><em>Tính chất 8:</em> Nếu <span class=\"math inline\">\\(m\\le f(x)\\le M\\)</span> trên <span class=\"math inline\">\\([a,b]\\)</span>, <span class=\"math inline\">\\(a\\le b\\)</span>, thì <span class=\"math inline\">\\(m(b-a)\\le\\int_a^b f(x)\\,dx\\le M(b-a)\\)</span>.</p>\n"
+    },
+    {
+      "number": 58,
+      "content": "<p><strong>58.</strong></p>\n<p><em>Yêu cầu chung (57–58):</em> Dùng Tính chất 8 của tích phân để ước lượng giá trị tích phân.</p>\n<p><span class=\"math inline\">\\(\\displaystyle\\int_2^4\\frac1{x^3+2}\\,dx\\)</span>.</p>\n<p><em>Tính chất 8:</em> Nếu <span class=\"math inline\">\\(m\\le f(x)\\le M\\)</span> trên <span class=\"math inline\">\\([a,b]\\)</span>, <span class=\"math inline\">\\(a\\le b\\)</span>, thì <span class=\"math inline\">\\(m(b-a)\\le\\int_a^b f(x)\\,dx\\le M(b-a)\\)</span>.</p>\n"
+    },
+    {
+      "number": 59,
+      "content": "<p><strong>59.</strong></p>\n<p><em>Yêu cầu chung (59–62):</em> Dùng các tính chất của tích phân để kiểm tra bất đẳng thức.</p>\n<p><span class=\"math inline\">\\(\\displaystyle\\int_0^1x^2\\cos x\\,dx\\le\\frac13\\)</span>.</p>\n"
+    },
+    {
+      "number": 60,
+      "content": "<p><strong>60.</strong></p>\n<p><em>Yêu cầu chung (59–62):</em> Dùng các tính chất của tích phân để kiểm tra bất đẳng thức.</p>\n<p><span class=\"math inline\">\\(\\displaystyle\\int_{\\pi/4}^{\\pi/2}\\frac{\\sin x}{x}\\,dx\\le\\frac{\\sqrt2}{2}\\)</span>.</p>\n"
+    },
+    {
+      "number": 61,
+      "content": "<p><strong>61.</strong></p>\n<p><em>Yêu cầu chung (59–62):</em> Dùng các tính chất của tích phân để kiểm tra bất đẳng thức.</p>\n<p><span class=\"math inline\">\\(\\displaystyle\\int_0^1e^x\\cos x\\,dx\\le e-1\\)</span>.</p>\n"
+    },
+    {
+      "number": 62,
+      "content": "<p><strong>62.</strong></p>\n<p><em>Yêu cầu chung (59–62):</em> Dùng các tính chất của tích phân để kiểm tra bất đẳng thức.</p>\n<p><span class=\"math inline\">\\(\\displaystyle\\int_0^1x\\arcsin x\\,dx\\le\\frac\\pi4\\)</span>.</p>\n"
+    },
+    {
+      "number": 63,
+      "content": "<p><strong>63.</strong></p>\n<p>Dùng Quy tắc trung điểm với <span class=\"math inline\">\\(n=6\\)</span> để tính gần đúng <span class=\"math inline\">\\(\\int_0^3\\sin(x^3)\\,dx\\)</span>. Làm tròn đến bốn chữ số thập phân.</p>\n"
+    },
+    {
+      "number": 64,
+      "content": "<p><strong>64.</strong></p>\n<p>Một chất điểm chuyển động trên đường thẳng với hàm vận tốc <span class=\"math inline\">\\(v(t)=t^2-t\\)</span>, trong đó <span class=\"math inline\">\\(v\\)</span> tính bằng mét mỗi giây. Tìm (a) độ dời và (b) quãng đường chất điểm đi được trong khoảng thời gian <span class=\"math inline\">\\([0,5]\\)</span>.</p>\n"
+    },
+    {
+      "number": 65,
+      "content": "<p><strong>65.</strong></p>\n<p>Gọi <span class=\"math inline\">\\(r(t)\\)</span> là tốc độ tiêu thụ dầu của thế giới, trong đó <span class=\"math inline\">\\(t\\)</span> tính bằng năm, bắt đầu tại <span class=\"math inline\">\\(t=0\\)</span> vào ngày 1 tháng 1 năm 2000, và <span class=\"math inline\">\\(r(t)\\)</span> tính bằng thùng mỗi năm. Tích phân <span class=\"math inline\">\\(\\int_{15}^{20}r(t)\\,dt\\)</span> biểu diễn điều gì?</p>\n"
+    },
+    {
+      "number": 66,
+      "content": "<p><strong>66.</strong></p>\n<p>Một máy đo tốc độ bằng radar được dùng để ghi lại tốc độ của một vận động viên chạy tại các thời điểm trong bảng. Dùng Quy tắc trung điểm để ước lượng quãng đường vận động viên chạy được trong 5 giây đó.</p>\n<div class=\"center\">\n<table>\n<thead>\n<tr class=\"header\">\n<th style=\"text-align: right;\"><span class=\"math inline\">\\(t\\)</span> (s)</th>\n<th style=\"text-align: right;\"><span class=\"math inline\">\\(v\\)</span> (m/s)</th>\n<th style=\"text-align: right;\"><span class=\"math inline\">\\(t\\)</span> (s)</th>\n<th style=\"text-align: right;\"><span class=\"math inline\">\\(v\\)</span> (m/s)</th>\n</tr>\n</thead>\n<tbody>\n<tr class=\"odd\">\n<td style=\"text-align: right;\">0</td>\n<td style=\"text-align: right;\">0</td>\n<td style=\"text-align: right;\">3.0</td>\n<td style=\"text-align: right;\">10.51</td>\n</tr>\n<tr class=\"even\">\n<td style=\"text-align: right;\">0.5</td>\n<td style=\"text-align: right;\">4.67</td>\n<td style=\"text-align: right;\">3.5</td>\n<td style=\"text-align: right;\">10.67</td>\n</tr>\n<tr class=\"odd\">\n<td style=\"text-align: right;\">1.0</td>\n<td style=\"text-align: right;\">7.34</td>\n<td style=\"text-align: right;\">4.0</td>\n<td style=\"text-align: right;\">10.76</td>\n</tr>\n<tr class=\"even\">\n<td style=\"text-align: right;\">1.5</td>\n<td style=\"text-align: right;\">8.86</td>\n<td style=\"text-align: right;\">4.5</td>\n<td style=\"text-align: right;\">10.81</td>\n</tr>\n<tr class=\"odd\">\n<td style=\"text-align: right;\">2.0</td>\n<td style=\"text-align: right;\">9.73</td>\n<td style=\"text-align: right;\">5.0</td>\n<td style=\"text-align: right;\">10.81</td>\n</tr>\n<tr class=\"even\">\n<td style=\"text-align: right;\">2.5</td>\n<td style=\"text-align: right;\">10.22</td>\n<td style=\"text-align: right;\"></td>\n<td style=\"text-align: right;\"></td>\n</tr>\n</tbody>\n</table>\n</div>\n"
+    },
+    {
+      "number": 67,
+      "content": "<p><strong>67.</strong></p>\n<p>Một đàn ong mật tăng với tốc độ <span class=\"math inline\">\\(r(t)\\)</span> con mỗi tuần, trong đó đồ thị của <span class=\"math inline\">\\(r\\)</span> được cho trong hình. Dùng Quy tắc trung điểm với sáu khoảng con để ước lượng số ong tăng thêm trong 24 tuần đầu tiên.</p>\n<div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-5-review-45ed5363/ex67.png\" alt=\"image\" /><br />\nHình cho Bài tập 67. Trục ngang: <span class=\"math inline\">\\(t\\)</span> (tuần).</p>\n</div>\n"
+    },
+    {
+      "number": 68,
+      "content": "<p><strong>68.</strong></p>\n<p>Cho <span class=\"math display\">\\[f(x)=\\begin{cases}-x-1&amp;\\text{nếu }-3\\le x\\le0,\\\\[3pt]-\\sqrt{1-x^2}&amp;\\text{nếu }0\\le x\\le1.\\end{cases}\\]</span> Tính <span class=\"math inline\">\\(\\int_{-3}^1f(x)\\,dx\\)</span> bằng cách giải thích tích phân như một hiệu các diện tích.</p>\n"
+    },
+    {
+      "number": 69,
+      "content": "<p><strong>69.</strong></p>\n<p>Nếu <span class=\"math inline\">\\(f\\)</span> liên tục và <span class=\"math inline\">\\(\\int_0^2f(x)\\,dx=6\\)</span>, hãy tính <span class=\"math display\">\\[\\int_0^{\\pi/2}f(2\\sin\\theta)\\cos\\theta\\,d\\theta.\\]</span></p>\n"
+    },
+    {
+      "number": 70,
+      "content": "<p><strong>70.</strong></p>\n<p>Hàm Fresnel <span class=\"math inline\">\\(S(x)=\\int_0^x\\sin(\\frac12\\pi t^2)\\,dt\\)</span> đã được giới thiệu ở §5.3. Fresnel còn dùng hàm số <span class=\"math display\">\\[C(x)=\\int_0^x\\cos\\left(\\frac12\\pi t^2\\right)\\,dt\\]</span> trong lý thuyết nhiễu xạ sóng ánh sáng của ông.</p>\n<p>(a) <span class=\"math inline\">\\(C\\)</span> đồng biến trên những khoảng nào?</p>\n<p>(b) Đồ thị của <span class=\"math inline\">\\(C\\)</span> lõm lên trên những khoảng nào?</p>\n<p>(c) Dùng đồ thị để giải phương trình sau, chính xác đến hai chữ số thập phân: <span class=\"math display\">\\[\\int_0^x\\cos\\left(\\frac12\\pi t^2\\right)\\,dt=0.7.\\]</span> (d) Vẽ đồ thị của <span class=\"math inline\">\\(C\\)</span> và <span class=\"math inline\">\\(S\\)</span> trên cùng một màn hình. Hai đồ thị này có quan hệ như thế nào?</p>\n"
+    },
+    {
+      "number": 71,
+      "content": "<p><strong>71.</strong></p>\n<p>Ước lượng giá trị của số <span class=\"math inline\">\\(c\\)</span> sao cho diện tích dưới đường cong <span class=\"math inline\">\\(y=\\sinh(cx)\\)</span>, từ <span class=\"math inline\">\\(x=0\\)</span> đến <span class=\"math inline\">\\(x=1\\)</span>, bằng 1.</p>\n"
+    },
+    {
+      "number": 72,
+      "content": "<p><strong>72.</strong></p>\n<p>Giả sử nhiệt độ ban đầu trong một thanh dài, mảnh đặt dọc trục <span class=\"math inline\">\\(x\\)</span> là <span class=\"math inline\">\\(C/(2a)\\)</span> nếu <span class=\"math inline\">\\(|x|\\le a\\)</span> và bằng 0 nếu <span class=\"math inline\">\\(|x|&gt;a\\)</span>. Có thể chứng minh rằng nếu hệ số khuếch tán nhiệt của thanh là <span class=\"math inline\">\\(k\\)</span> thì nhiệt độ của thanh tại điểm <span class=\"math inline\">\\(x\\)</span> ở thời điểm <span class=\"math inline\">\\(t\\)</span> là <span class=\"math display\">\\[T(x,t)=\\frac{C}{a\\sqrt{4\\pi kt}}\\int_0^a e^{-(x-u)^2/(4kt)}\\,du.\\]</span> Để tìm phân bố nhiệt độ do một điểm nóng ban đầu tập trung tại gốc tọa độ tạo ra, ta cần tính <span class=\"math inline\">\\(\\lim_{a\\to0}T(x,t)\\)</span>. Dùng quy tắc l’Hospital để tìm giới hạn này.</p>\n"
+    },
+    {
+      "number": 73,
+      "content": "<p><strong>73.</strong></p>\n<p>Nếu <span class=\"math inline\">\\(f\\)</span> là một hàm liên tục thỏa mãn <span class=\"math display\">\\[\\int_1^xf(t)\\,dt=(x-1)e^{2x}+\\int_1^xe^{-t}f(t)\\,dt\\]</span> với mọi <span class=\"math inline\">\\(x\\)</span>, hãy tìm một công thức tường minh cho <span class=\"math inline\">\\(f(x)\\)</span>.</p>\n"
+    },
+    {
+      "number": 74,
+      "content": "<p><strong>74.</strong></p>\n<p>Giả sử <span class=\"math inline\">\\(h\\)</span> là một hàm số thỏa mãn <span class=\"math inline\">\\(h(1)=-2\\)</span>, <span class=\"math inline\">\\(h&#39;(1)=2\\)</span>, <span class=\"math inline\">\\(h&#39;&#39;(1)=3\\)</span>, <span class=\"math inline\">\\(h(2)=6\\)</span>, <span class=\"math inline\">\\(h&#39;(2)=5\\)</span>, <span class=\"math inline\">\\(h&#39;&#39;(2)=13\\)</span> và <span class=\"math inline\">\\(h&#39;&#39;\\)</span> liên tục khắp nơi. Tính <span class=\"math inline\">\\(\\int_1^2h&#39;&#39;(u)\\,du\\)</span>.</p>\n"
+    },
+    {
+      "number": 75,
+      "content": "<p><strong>75.</strong></p>\n<p>Nếu <span class=\"math inline\">\\(f&#39;\\)</span> liên tục trên <span class=\"math inline\">\\([a,b]\\)</span>, chứng minh rằng <span class=\"math display\">\\[2\\int_a^bf(x)f&#39;(x)\\,dx=[f(b)]^2-[f(a)]^2.\\]</span></p>\n"
+    },
+    {
+      "number": 76,
+      "content": "<p><strong>76.</strong></p>\n<p>Tìm <span class=\"math display\">\\[\\lim_{h\\to0}\\frac1h\\int_2^{2+h}\\sqrt{1+t^3}\\,dt.\\]</span></p>\n"
+    },
+    {
+      "number": 77,
+      "content": "<p><strong>77.</strong></p>\n<p>Nếu <span class=\"math inline\">\\(f\\)</span> liên tục trên <span class=\"math inline\">\\([0,1]\\)</span>, chứng minh rằng <span class=\"math display\">\\[\\int_0^1f(x)\\,dx=\\int_0^1f(1-x)\\,dx.\\]</span></p>\n"
+    },
+    {
+      "number": 78,
+      "content": "<p><strong>78.</strong></p>\n<p>Tính <span class=\"math display\">\\[\\lim_{n\\to\\infty}\\frac1n\\left[\\left(\\frac1n\\right)^9+\\left(\\frac2n\\right)^9+\\left(\\frac3n\\right)^9+\\cdots+\\left(\\frac nn\\right)^9\\right].\\]</span></p>\n"
+    }
+  ]
+}

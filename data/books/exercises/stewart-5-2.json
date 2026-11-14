@@ -1,0 +1,360 @@
+{
+  "exercises": [
+    {
+      "number": 1,
+      "content": "<p><strong>1.</strong> </p><p> Tính tổng Riemann của <span class=\"math inline\">\\(f(x)=x-1\\)</span>, <span class=\"math inline\">\\(-6\\le x\\le4\\)</span>, với năm đoạn con, chọn điểm lấy mẫu là đầu mút phải. Dùng hình vẽ giải thích tổng Riemann biểu diễn điều gì. </p>"
+    },
+    {
+      "number": 2,
+      "content": "<p><strong>2.</strong> </p><p> Cho <span class=\"math inline\">\\(f(x)=\\cos x\\)</span>, <span class=\"math inline\">\\(0\\le x\\le3\\pi/4\\)</span>. Tính tổng Riemann với <span class=\"math inline\">\\(n=6\\)</span>, chọn đầu mút trái làm điểm lấy mẫu (chính xác đến sáu chữ số thập phân). Tổng Riemann biểu diễn điều gì? Minh họa bằng hình vẽ. </p>"
+    },
+    {
+      "number": 3,
+      "content": "<p><strong>3.</strong> </p><p> Cho <span class=\"math inline\">\\(f(x)=x^2-4\\)</span>, <span class=\"math inline\">\\(0\\le x\\le3\\)</span>. Tính tổng Riemann với <span class=\"math inline\">\\(n=6\\)</span>, chọn trung điểm làm điểm lấy mẫu. Tổng đó biểu diễn điều gì? Minh họa bằng hình vẽ. </p>"
+    },
+    {
+      "number": 4,
+      "content": "<p><strong>4.</strong> </p><p> (a) Tính tổng Riemann của <span class=\"math inline\">\\(f(x)=1/x\\)</span>, <span class=\"math inline\">\\(1\\le x\\le2\\)</span>, với bốn số hạng, chọn đầu mút phải làm điểm lấy mẫu (chính xác đến sáu chữ số thập phân). Dùng hình phác thảo giải thích tổng biểu diễn điều gì.<br>(b) Lặp lại phần (a) với điểm lấy mẫu là trung điểm.</p>"
+    },
+    {
+      "number": 5,
+      "content": "<p><strong>5.</strong> </p><p> Cho đồ thị hàm số <span class=\"math inline\">\\(f\\)</span>. Ước lượng <span class=\"math inline\">\\(\\int_0^{10}f(x)\\,dx\\)</span> bằng năm đoạn con với (a) đầu mút phải, (b) đầu mút trái và (c) trung điểm. <p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-5-2-157ffa41/ex05.png\" alt=\"5-2 ex05\" loading=\"lazy\"><br><span>Hình cho Bài tập 5</span></p>"
+    },
+    {
+      "number": 6,
+      "content": "<p><strong>6.</strong> </p><p> Cho đồ thị hàm số <span class=\"math inline\">\\(g\\)</span>. Ước lượng <span class=\"math inline\">\\(\\int_{-2}^4g(x)\\,dx\\)</span> bằng sáu đoạn con với (a) đầu mút phải, (b) đầu mút trái và (c) trung điểm. <p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-5-2-157ffa41/ex06.png\" alt=\"5-2 ex06\" loading=\"lazy\"><br><span>Hình cho Bài tập 6</span></p>"
+    },
+    {
+      "number": 7,
+      "content": "<p><strong>7.</strong> </p><p> Bảng cho giá trị của hàm đồng biến <span class=\"math inline\">\\(f\\)</span>. Dùng bảng để tìm ước lượng dưới và trên của <span class=\"math inline\">\\(\\int_{10}^{30}f(x)\\,dx\\)</span>. <table><tbody><tr><td>\\(x\\)</td><td>10</td><td>14</td><td>18</td><td>22</td><td>26</td><td>30</td></tr><tr><td>\\(f(x)\\)</td><td>\\(-12\\)</td><td>\\(-6\\)</td><td>\\(-2\\)</td><td>1</td><td>3</td><td>8</td></tr></tbody></table> "
+    },
+    {
+      "number": 8,
+      "content": "<p><strong>8.</strong> </p><p> Bảng cho các giá trị của một hàm số thu được từ thí nghiệm. Dùng chúng để ước lượng <span class=\"math inline\">\\(\\int_3^9 f(x)\\,dx\\)</span> bằng ba đoạn con bằng nhau với (a) đầu mút phải, (b) đầu mút trái, (c) trung điểm. Nếu biết hàm số đồng biến, có thể kết luận các ước lượng nhỏ hơn hay lớn hơn giá trị chính xác của tích phân không? <table><tbody><tr><td>\\(x\\)</td><td>3</td><td>4</td><td>5</td><td>6</td><td>7</td><td>8</td><td>9</td></tr><tr><td>\\(f(x)\\)</td><td>\\(-3.4\\)</td><td>\\(-2.1\\)</td><td>\\(-0.6\\)</td><td>0.3</td><td>0.9</td><td>1.4</td><td>1.8</td></tr></tbody></table> "
+    },
+    {
+      "number": 9,
+      "content": "<p><strong>9.</strong> </p><p><em>Yêu cầu chung (9–10): Dùng Quy tắc trung điểm với n=4 để xấp xỉ tích phân.</em></p><p> <span class=\"math inline\">\\(\\displaystyle\\int_0^8 x^2\\,dx\\)</span>. </p>"
+    },
+    {
+      "number": 10,
+      "content": "<p><strong>10.</strong> </p><p><em>Yêu cầu chung (9–10): Dùng Quy tắc trung điểm với n=4 để xấp xỉ tích phân.</em></p><p> <span class=\"math inline\">\\(\\displaystyle\\int_0^2(8x+3)\\,dx\\)</span>. </p>"
+    },
+    {
+      "number": 11,
+      "content": "<p><strong>11.</strong> </p><p><em>Yêu cầu chung (11–14): Dùng Quy tắc trung điểm với n đã cho để xấp xỉ tích phân; làm tròn đến bốn chữ số thập phân.</em></p><p> <span class=\"math inline\">\\(\\displaystyle\\int_0^3 e^{\\sqrt{x}}\\,dx\\)</span>,  <span class=\"math inline\">\\(n=6\\)</span>. </p>"
+    },
+    {
+      "number": 12,
+      "content": "<p><strong>12.</strong> </p><p><em>Yêu cầu chung (11–14): Dùng Quy tắc trung điểm với n đã cho để xấp xỉ tích phân; làm tròn đến bốn chữ số thập phân.</em></p><p> <span class=\"math inline\">\\(\\displaystyle\\int_0^1\\sqrt{x^3+1}\\,dx\\)</span>,  <span class=\"math inline\">\\(n=5\\)</span>. </p>"
+    },
+    {
+      "number": 13,
+      "content": "<p><strong>13.</strong> </p><p><em>Yêu cầu chung (11–14): Dùng Quy tắc trung điểm với n đã cho để xấp xỉ tích phân; làm tròn đến bốn chữ số thập phân.</em></p><p> <span class=\"math inline\">\\(\\displaystyle\\int_1^3\\frac{x}{x^2+8}\\,dx\\)</span>,  <span class=\"math inline\">\\(n=5\\)</span>. </p>"
+    },
+    {
+      "number": 14,
+      "content": "<p><strong>14.</strong> </p><p><em>Yêu cầu chung (11–14): Dùng Quy tắc trung điểm với n đã cho để xấp xỉ tích phân; làm tròn đến bốn chữ số thập phân.</em></p><p> <span class=\"math inline\">\\(\\displaystyle\\int_0^\\pi x\\sin^2x\\,dx\\)</span>,  <span class=\"math inline\">\\(n=4\\)</span>. </p>"
+    },
+    {
+      "number": 15,
+      "content": "<p><strong>15.</strong> </p><p> Dùng hệ thống đại số máy tính có khả năng tính xấp xỉ trung điểm và vẽ các hình chữ nhật tương ứng (dùng lệnh <code>RiemannSum</code>, hoặc <code>middlesum</code> và <code>middlebox</code> trong Maple) để kiểm tra kết quả Bài tập 13 và minh họa bằng đồ thị. Sau đó lặp lại với <span class=\"math inline\">\\(n=10\\)</span>, <span class=\"math inline\">\\(n=20\\)</span>. </p>"
+    },
+    {
+      "number": 16,
+      "content": "<p><strong>16.</strong> </p><p> Dùng hệ thống đại số máy tính tính các tổng Riemann trái và phải của <span class=\"math inline\">\\(f(x)=x/(x+1)\\)</span> trên <span class=\"math inline\">\\([0,2]\\)</span> với <span class=\"math inline\">\\(n=100\\)</span>. Giải thích vì sao các ước lượng cho thấy <span class=\"math display\">\\[0.8946&lt;\\int_0^2\\frac{x}{x+1}\\,dx&lt;0.9081.\\]</span> </p>"
+    },
+    {
+      "number": 17,
+      "content": "<p><strong>17.</strong> </p><p> Dùng máy tính bỏ túi hoặc máy vi tính lập bảng giá trị các tổng Riemann phải <span class=\"math inline\">\\(R_n\\)</span> cho <span class=\"math inline\">\\(\\int_0^\\pi\\sin x\\,dx\\)</span>, với <span class=\"math inline\">\\(n=5,10,50,100\\)</span>. Các số này có vẻ tiến đến giá trị nào? </p>"
+    },
+    {
+      "number": 18,
+      "content": "<p><strong>18.</strong> </p><p> Dùng máy tính bỏ túi hoặc máy vi tính lập bảng các tổng Riemann trái, phải <span class=\"math inline\">\\(L_n,R_n\\)</span> cho <span class=\"math inline\">\\(\\int_0^2 e^{-x^2}\\,dx\\)</span>, với <span class=\"math inline\">\\(n=5,10,50,100\\)</span>. Giá trị tích phân phải nằm giữa hai số nào? Có thể phát biểu tương tự cho <span class=\"math inline\">\\(\\int_{-1}^2 e^{-x^2}\\,dx\\)</span> không? Giải thích. </p>"
+    },
+    {
+      "number": 19,
+      "content": "<p><strong>19.</strong> </p><p><em>Yêu cầu chung (19–22): Biểu diễn giới hạn thành tích phân xác định trên đoạn đã cho.</em></p><p> <span class=\"math inline\">\\(\\displaystyle\\lim_{n\\to\\infty}\\sum_{i=1}^n\\frac{e^{x_i}}{1+x_i}\\Delta x\\)</span>,  <span class=\"math inline\">\\([0,1]\\)</span>. </p>"
+    },
+    {
+      "number": 20,
+      "content": "<p><strong>20.</strong> </p><p><em>Yêu cầu chung (19–22): Biểu diễn giới hạn thành tích phân xác định trên đoạn đã cho.</em></p><p> <span class=\"math inline\">\\(\\displaystyle\\lim_{n\\to\\infty}\\sum_{i=1}^n x_i\\sqrt{1+x_i^3}\\Delta x\\)</span>,  <span class=\"math inline\">\\([2,5]\\)</span>. </p>"
+    },
+    {
+      "number": 21,
+      "content": "<p><strong>21.</strong> </p><p><em>Yêu cầu chung (19–22): Biểu diễn giới hạn thành tích phân xác định trên đoạn đã cho.</em></p><p> <span class=\"math inline\">\\(\\displaystyle\\lim_{n\\to\\infty}\\sum_{i=1}^n[5(x_i^*)^3-4x_i^*]\\Delta x\\)</span>,  <span class=\"math inline\">\\([2,7]\\)</span>. </p>"
+    },
+    {
+      "number": 22,
+      "content": "<p><strong>22.</strong> </p><p><em>Yêu cầu chung (19–22): Biểu diễn giới hạn thành tích phân xác định trên đoạn đã cho.</em></p><p> <span class=\"math inline\">\\(\\displaystyle\\lim_{n\\to\\infty}\\sum_{i=1}^n\\frac{x_i^*}{(x_i^*)^2+4}\\Delta x\\)</span>,  <span class=\"math inline\">\\([1,3]\\)</span>. </p>"
+    },
+    {
+      "number": 23,
+      "content": "<p><strong>23.</strong> </p><p><em>Yêu cầu chung (23–24): Chứng minh tích phân xác định bằng giới hạn của tổng Riemann phải R_n, rồi tính giới hạn.</em></p><p> <span class=\"math inline\">\\(\\displaystyle\\int_0^4(x-x^2)\\,dx\\)</span>,  <span class=\"math inline\">\\(\\displaystyle R_n=\\frac4n\\sum_{i=1}^n\\left[\\frac{4i}n-\\frac{16i^2}{n^2}\\right]\\)</span>. </p>"
+    },
+    {
+      "number": 24,
+      "content": "<p><strong>24.</strong> </p><p><em>Yêu cầu chung (23–24): Chứng minh tích phân xác định bằng giới hạn của tổng Riemann phải R_n, rồi tính giới hạn.</em></p><p> <span class=\"math inline\">\\(\\displaystyle\\int_1^3(x^3+5x^2)\\,dx\\)</span>,  <span class=\"math inline\">\\(\\displaystyle R_n=\\frac2n\\sum_{i=1}^n\\left[6+\\frac{26i}n+\\frac{32i^2}{n^2}+\\frac{8i^3}{n^3}\\right]\\)</span>. </p>"
+    },
+    {
+      "number": 25,
+      "content": "<p><strong>25.</strong> </p><p><em>Yêu cầu chung (25–26): Biểu diễn tích phân thành giới hạn các tổng Riemann dùng đầu mút phải; không tính giới hạn.</em></p><p> <span class=\"math inline\">\\(\\displaystyle\\int_1^3\\sqrt{4+x^2}\\,dx\\)</span>. </p>"
+    },
+    {
+      "number": 26,
+      "content": "<p><strong>26.</strong> </p><p><em>Yêu cầu chung (25–26): Biểu diễn tích phân thành giới hạn các tổng Riemann dùng đầu mút phải; không tính giới hạn.</em></p><p> <span class=\"math inline\">\\(\\displaystyle\\int_2^5\\left(x^2+\\frac1x\\right)\\,dx\\)</span>. </p>"
+    },
+    {
+      "number": 27,
+      "content": "<p><strong>27.</strong> </p><p><em>Yêu cầu chung (27–34): Dùng dạng định nghĩa tích phân trong Định lý 4 để tính tích phân.</em></p><p> <span class=\"math inline\">\\(\\displaystyle\\int_0^2 3x\\,dx\\)</span>. </p>"
+    },
+    {
+      "number": 28,
+      "content": "<p><strong>28.</strong> </p><p><em>Yêu cầu chung (27–34): Dùng dạng định nghĩa tích phân trong Định lý 4 để tính tích phân.</em></p><p> <span class=\"math inline\">\\(\\displaystyle\\int_0^3 x^2\\,dx\\)</span>. </p>"
+    },
+    {
+      "number": 29,
+      "content": "<p><strong>29.</strong> </p><p><em>Yêu cầu chung (27–34): Dùng dạng định nghĩa tích phân trong Định lý 4 để tính tích phân.</em></p><p> <span class=\"math inline\">\\(\\displaystyle\\int_0^3(5x+2)\\,dx\\)</span>. </p>"
+    },
+    {
+      "number": 30,
+      "content": "<p><strong>30.</strong> </p><p><em>Yêu cầu chung (27–34): Dùng dạng định nghĩa tích phân trong Định lý 4 để tính tích phân.</em></p><p> <span class=\"math inline\">\\(\\displaystyle\\int_0^4(6-x^2)\\,dx\\)</span>. </p>"
+    },
+    {
+      "number": 31,
+      "content": "<p><strong>31.</strong> </p><p><em>Yêu cầu chung (27–34): Dùng dạng định nghĩa tích phân trong Định lý 4 để tính tích phân.</em></p><p> <span class=\"math inline\">\\(\\displaystyle\\int_1^5(3x^2+7x)\\,dx\\)</span>. </p>"
+    },
+    {
+      "number": 32,
+      "content": "<p><strong>32.</strong> </p><p><em>Yêu cầu chung (27–34): Dùng dạng định nghĩa tích phân trong Định lý 4 để tính tích phân.</em></p><p> <span class=\"math inline\">\\(\\displaystyle\\int_{-1}^2(4x^2+x+2)\\,dx\\)</span>. </p>"
+    },
+    {
+      "number": 33,
+      "content": "<p><strong>33.</strong> </p><p><em>Yêu cầu chung (27–34): Dùng dạng định nghĩa tích phân trong Định lý 4 để tính tích phân.</em></p><p> <span class=\"math inline\">\\(\\displaystyle\\int_0^1(x^3-3x^2)\\,dx\\)</span>. </p>"
+    },
+    {
+      "number": 34,
+      "content": "<p><strong>34.</strong> </p><p><em>Yêu cầu chung (27–34): Dùng dạng định nghĩa tích phân trong Định lý 4 để tính tích phân.</em></p><p> <span class=\"math inline\">\\(\\displaystyle\\int_0^2(2x-x^3)\\,dx\\)</span>.</p>"
+    },
+    {
+      "number": 35,
+      "content": "<p><strong>35.</strong> </p><p> Cho đồ thị <span class=\"math inline\">\\(f\\)</span>. Tính từng tích phân bằng cách diễn giải theo diện tích. <span class=\"math display\">\\[\\begin{aligned}\n&amp;\\text{(a) }\\int_0^2 f(x)\\,dx &amp;&amp;\\text{(b) }\\int_0^5 f(x)\\,dx\\\\\n&amp;\\text{(c) }\\int_5^7 f(x)\\,dx &amp;&amp;\\text{(d) }\\int_3^7 f(x)\\,dx\\\\\n&amp;\\text{(e) }\\int_3^7|f(x)|\\,dx &amp;&amp;\\text{(f) }\\int_2^0 f(x)\\,dx\n\\end{aligned}\\]</span> <p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-5-2-157ffa41/ex35.png\" alt=\"5-2 ex35\" loading=\"lazy\"><br><span>Hình cho Bài tập 35</span></p>"
+    },
+    {
+      "number": 36,
+      "content": "<p><strong>36.</strong> </p><p> Đồ thị <span class=\"math inline\">\\(g\\)</span> gồm hai đoạn thẳng và một nửa đường tròn. Tính từng tích phân bằng cách diễn giải theo diện tích.<br>(a) <span class=\"math inline\">\\(\\int_0^2g(x)\\,dx\\)</span>; (b) <span class=\"math inline\">\\(\\int_2^6g(x)\\,dx\\)</span>; (c) <span class=\"math inline\">\\(\\int_0^7g(x)\\,dx\\)</span>. <p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-5-2-157ffa41/ex36.png\" alt=\"5-2 ex36\" loading=\"lazy\"><br><span>Hình cho Bài tập 36</span></p>"
+    },
+    {
+      "number": 37,
+      "content": "<p><strong>37.</strong> </p><p><em>Yêu cầu chung (37–38): (a) Tính tích phân bằng định nghĩa trong Định lý 4. (b) Kiểm tra bằng hình học, diễn giải tích phân theo diện tích.</em></p><p> <span class=\"math inline\">\\(\\displaystyle\\int_0^3 4x\\,dx\\)</span>. </p>"
+    },
+    {
+      "number": 38,
+      "content": "<p><strong>38.</strong> </p><p><em>Yêu cầu chung (37–38): (a) Tính tích phân bằng định nghĩa trong Định lý 4. (b) Kiểm tra bằng hình học, diễn giải tích phân theo diện tích.</em></p><p> <span class=\"math inline\">\\(\\displaystyle\\int_{-1}^4\\left(2-\\frac12x\\right)\\,dx\\)</span>. </p>"
+    },
+    {
+      "number": 39,
+      "content": "<p><strong>39.</strong> </p><p><em>Yêu cầu chung (39–40): (a) Xấp xỉ bằng tổng Riemann phải với n=8. (b) Vẽ hình minh họa. (c) Tính bằng Định lý 4. (d) Diễn giải là hiệu diện tích và minh họa.</em></p><p> <span class=\"math inline\">\\(\\displaystyle\\int_0^8(3-2x)\\,dx\\)</span>. </p>"
+    },
+    {
+      "number": 40,
+      "content": "<p><strong>40.</strong> </p><p><em>Yêu cầu chung (39–40): (a) Xấp xỉ bằng tổng Riemann phải với n=8. (b) Vẽ hình minh họa. (c) Tính bằng Định lý 4. (d) Diễn giải là hiệu diện tích và minh họa.</em></p><p> <span class=\"math inline\">\\(\\displaystyle\\int_0^4(x^2-3x)\\,dx\\)</span>. </p>"
+    },
+    {
+      "number": 41,
+      "content": "<p><strong>41.</strong> </p><p><em>Yêu cầu chung (41–46): Tính tích phân bằng cách diễn giải theo diện tích.</em></p><p> <span class=\"math inline\">\\(\\displaystyle\\int_{-2}^5(10-5x)\\,dx\\)</span>. </p>"
+    },
+    {
+      "number": 42,
+      "content": "<p><strong>42.</strong> </p><p><em>Yêu cầu chung (41–46): Tính tích phân bằng cách diễn giải theo diện tích.</em></p><p> <span class=\"math inline\">\\(\\displaystyle\\int_{-1}^3(2x-1)\\,dx\\)</span>. </p>"
+    },
+    {
+      "number": 43,
+      "content": "<p><strong>43.</strong> </p><p><em>Yêu cầu chung (41–46): Tính tích phân bằng cách diễn giải theo diện tích.</em></p><p> <span class=\"math inline\">\\(\\displaystyle\\int_{-4}^3\\left|\\frac12x\\right|\\,dx\\)</span>. </p>"
+    },
+    {
+      "number": 44,
+      "content": "<p><strong>44.</strong> </p><p><em>Yêu cầu chung (41–46): Tính tích phân bằng cách diễn giải theo diện tích.</em></p><p> <span class=\"math inline\">\\(\\displaystyle\\int_0^1|2x-1|\\,dx\\)</span>. </p>"
+    },
+    {
+      "number": 45,
+      "content": "<p><strong>45.</strong> </p><p><em>Yêu cầu chung (41–46): Tính tích phân bằng cách diễn giải theo diện tích.</em></p><p> <span class=\"math inline\">\\(\\displaystyle\\int_{-3}^0(1+\\sqrt{9-x^2})\\,dx\\)</span>. </p>"
+    },
+    {
+      "number": 46,
+      "content": "<p><strong>46.</strong> </p><p><em>Yêu cầu chung (41–46): Tính tích phân bằng cách diễn giải theo diện tích.</em></p><p> <span class=\"math inline\">\\(\\displaystyle\\int_{-4}^4(2x-\\sqrt{16-x^2})\\,dx\\)</span>. </p>"
+    },
+    {
+      "number": 47,
+      "content": "<p><strong>47.</strong> </p><p> Chứng minh <span class=\"math inline\">\\(\\displaystyle\\int_a^b x\\,dx=\\frac{b^2-a^2}2\\)</span>. </p>"
+    },
+    {
+      "number": 48,
+      "content": "<p><strong>48.</strong> </p><p> Chứng minh <span class=\"math inline\">\\(\\displaystyle\\int_a^b x^2\\,dx=\\frac{b^3-a^3}3\\)</span>. </p>"
+    },
+    {
+      "number": 49,
+      "content": "<p><strong>49.</strong> </p><p><em>Yêu cầu chung (49–50): Biểu diễn tích phân thành giới hạn các tổng; dùng đại số máy tính để tính tổng và giới hạn.</em></p><p> <span class=\"math inline\">\\(\\displaystyle\\int_0^\\pi\\sin5x\\,dx\\)</span>. </p>"
+    },
+    {
+      "number": 50,
+      "content": "<p><strong>50.</strong> </p><p><em>Yêu cầu chung (49–50): Biểu diễn tích phân thành giới hạn các tổng; dùng đại số máy tính để tính tổng và giới hạn.</em></p><p> <span class=\"math inline\">\\(\\displaystyle\\int_2^{10}x^6\\,dx\\)</span>. </p>"
+    },
+    {
+      "number": 51,
+      "content": "<p><strong>51.</strong> </p><p> Tính <span class=\"math inline\">\\(\\displaystyle\\int_1^1\\sqrt{1+x^4}\\,dx\\)</span>. </p>"
+    },
+    {
+      "number": 52,
+      "content": "<p><strong>52.</strong> </p><p> Biết <span class=\"math inline\">\\(\\displaystyle\\int_0^\\pi\\sin^4x\\,dx=\\frac38\\pi\\)</span>, tìm <span class=\"math inline\">\\(\\displaystyle\\int_\\pi^0\\sin^4\\theta\\,d\\theta\\)</span>. </p>"
+    },
+    {
+      "number": 53,
+      "content": "<p><strong>53.</strong> </p><p> Trong Ví dụ 5.1.2, ta đã chứng minh <span class=\"math inline\">\\(\\int_0^1 x^2\\,dx=\\frac13\\)</span>. Dùng kết quả này và các tính chất tích phân để tính <span class=\"math inline\">\\(\\int_0^1(5-6x^2)\\,dx\\)</span>. </p>"
+    },
+    {
+      "number": 54,
+      "content": "<p><strong>54.</strong> </p><p> Dùng tính chất tích phân và kết quả Ví dụ 4 để tính <span class=\"math inline\">\\(\\int_1^3(2e^x-1)\\,dx\\)</span>. </p>"
+    },
+    {
+      "number": 55,
+      "content": "<p><strong>55.</strong> </p><p> Dùng kết quả Ví dụ 4 để tính <span class=\"math inline\">\\(\\int_1^3e^{x+2}\\,dx\\)</span>. </p>"
+    },
+    {
+      "number": 56,
+      "content": "<p><strong>56.</strong> </p><p> Dùng kết quả Bài tập 47, đẳng thức <span class=\"math inline\">\\(\\int_0^{\\pi/2}\\cos x\\,dx=1\\)</span> (từ Bài tập 5.1.33) và các tính chất tích phân để tính <span class=\"math inline\">\\(\\int_0^{\\pi/2}(2\\cos x-5x)\\,dx\\)</span>. </p>"
+    },
+    {
+      "number": 57,
+      "content": "<p><strong>57.</strong> </p><p> Viết thành một tích phân duy nhất có dạng <span class=\"math inline\">\\(\\int_a^b f(x)\\,dx\\)</span>: <span class=\"math display\">\\[\\int_{-2}^2f(x)\\,dx+\\int_2^5 f(x)\\,dx-\\int_{-2}^{-1}f(x)\\,dx.\\]</span> </p>"
+    },
+    {
+      "number": 58,
+      "content": "<p><strong>58.</strong> </p><p> Nếu <span class=\"math inline\">\\(\\int_2^8 f(x)\\,dx=7.3\\)</span> và <span class=\"math inline\">\\(\\int_2^4f(x)\\,dx=5.9\\)</span>, tìm <span class=\"math inline\">\\(\\int_4^8 f(x)\\,dx\\)</span>. </p>"
+    },
+    {
+      "number": 59,
+      "content": "<p><strong>59.</strong> </p><p> Nếu <span class=\"math inline\">\\(\\int_0^9f(x)\\,dx=37\\)</span> và <span class=\"math inline\">\\(\\int_0^9g(x)\\,dx=16\\)</span>, tìm <span class=\"math inline\">\\(\\int_0^9[2f(x)+3g(x)]\\,dx\\)</span>. </p>"
+    },
+    {
+      "number": 60,
+      "content": "<p><strong>60.</strong> </p><p> Tìm <span class=\"math inline\">\\(\\int_0^5f(x)\\,dx\\)</span> nếu <span class=\"math display\">\\[f(x)=\\begin{cases}3,&amp;x&lt;3,\\\\x,&amp;x\\ge3.\\end{cases}\\]</span></p>"
+    },
+    {
+      "number": 61,
+      "content": "<p><strong>61.</strong> </p><p> Với hàm <span class=\"math inline\">\\(f\\)</span> có đồ thị đã cho, sắp xếp các đại lượng sau theo thứ tự tăng dần và giải thích. <span class=\"math display\">\\[\\begin{aligned}\n&amp;\\text{(A) }\\int_0^8 f(x)\\,dx &amp;&amp;\\text{(B) }\\int_0^3 f(x)\\,dx &amp;&amp;\\text{(C) }\\int_3^8 f(x)\\,dx\\\\\n&amp;\\text{(D) }\\int_4^8 f(x)\\,dx &amp;&amp;\\text{(E) }f'(1)\n\\end{aligned}\\]</span> <p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-5-2-157ffa41/ex61.png\" alt=\"5-2 ex61\" loading=\"lazy\"><br><span>Hình cho Bài tập 61</span></p>"
+    },
+    {
+      "number": 62,
+      "content": "<p><strong>62.</strong> </p><p> Cho <span class=\"math inline\">\\(F(x)=\\int_2^x f(t)\\,dt\\)</span>, với <span class=\"math inline\">\\(f\\)</span> có đồ thị như hình. Giá trị nào sau đây lớn nhất?<br>(A) <span class=\"math inline\">\\(F(0)\\)</span>; (B) <span class=\"math inline\">\\(F(1)\\)</span>; (C) <span class=\"math inline\">\\(F(2)\\)</span>; (D) <span class=\"math inline\">\\(F(3)\\)</span>; (E) <span class=\"math inline\">\\(F(4)\\)</span>. <p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-5-2-157ffa41/ex62.png\" alt=\"5-2 ex62\" loading=\"lazy\"><br><span>Hình cho Bài tập 62</span></p>"
+    },
+    {
+      "number": 63,
+      "content": "<p><strong>63.</strong> </p><p> Mỗi miền <span class=\"math inline\">\\(A,B,C\\)</span> giới hạn bởi đồ thị <span class=\"math inline\">\\(f\\)</span> và trục <span class=\"math inline\">\\(x\\)</span> đều có diện tích 3. Tìm giá trị của <span class=\"math display\">\\[\\int_{-4}^2[f(x)+2x+5]\\,dx.\\]</span> <p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-5-2-157ffa41/ex63.png\" alt=\"5-2 ex63\" loading=\"lazy\"><br><span>Hình cho Bài tập 63</span></p>"
+    },
+    {
+      "number": 64,
+      "content": "<p><strong>64.</strong> </p><p> Giả sử <span class=\"math inline\">\\(f\\)</span> có giá trị nhỏ nhất tuyệt đối <span class=\"math inline\">\\(m\\)</span> và giá trị lớn nhất tuyệt đối <span class=\"math inline\">\\(M\\)</span>. Tích phân <span class=\"math inline\">\\(\\int_0^2f(x)\\,dx\\)</span> phải nằm giữa hai giá trị nào? Tính chất tích phân nào cho phép kết luận như vậy? </p>"
+    },
+    {
+      "number": 65,
+      "content": "<p><strong>65.</strong> </p><p><em>Yêu cầu chung (65–68): Dùng các tính chất tích phân để kiểm tra bất đẳng thức, không tính tích phân.</em></p><p> <span class=\"math inline\">\\(\\displaystyle\\int_0^4(x^2-4x+4)\\,dx\\ge0\\)</span>. </p>"
+    },
+    {
+      "number": 66,
+      "content": "<p><strong>66.</strong> </p><p><em>Yêu cầu chung (65–68): Dùng các tính chất tích phân để kiểm tra bất đẳng thức, không tính tích phân.</em></p><p> <span class=\"math inline\">\\(\\displaystyle\\int_0^1\\sqrt{1+x^2}\\,dx\\le\\int_0^1\\sqrt{1+x}\\,dx\\)</span>. </p>"
+    },
+    {
+      "number": 67,
+      "content": "<p><strong>67.</strong> </p><p><em>Yêu cầu chung (65–68): Dùng các tính chất tích phân để kiểm tra bất đẳng thức, không tính tích phân.</em></p><p> <span class=\"math inline\">\\(\\displaystyle2\\le\\int_{-1}^1\\sqrt{1+x^2}\\,dx\\le2\\sqrt2\\)</span>. </p>"
+    },
+    {
+      "number": 68,
+      "content": "<p><strong>68.</strong> </p><p><em>Yêu cầu chung (65–68): Dùng các tính chất tích phân để kiểm tra bất đẳng thức, không tính tích phân.</em></p><p> <span class=\"math inline\">\\(\\displaystyle\\frac\\pi{12}\\le\\int_{\\pi/6}^{\\pi/3}\\sin x\\,dx\\le\\frac{\\sqrt3\\pi}{12}\\)</span>. </p>"
+    },
+    {
+      "number": 69,
+      "content": "<p><strong>69.</strong> </p><p><em>Yêu cầu chung (69–74): Dùng Tính chất 8 để ước lượng giá trị tích phân.</em></p><p> <span class=\"math inline\">\\(\\displaystyle\\int_0^1 x^3\\,dx\\)</span>. </p>"
+    },
+    {
+      "number": 70,
+      "content": "<p><strong>70.</strong> </p><p><em>Yêu cầu chung (69–74): Dùng Tính chất 8 để ước lượng giá trị tích phân.</em></p><p> <span class=\"math inline\">\\(\\displaystyle\\int_0^3\\frac1{x+4}\\,dx\\)</span>. </p>"
+    },
+    {
+      "number": 71,
+      "content": "<p><strong>71.</strong> </p><p><em>Yêu cầu chung (69–74): Dùng Tính chất 8 để ước lượng giá trị tích phân.</em></p><p> <span class=\"math inline\">\\(\\displaystyle\\int_{\\pi/4}^{\\pi/3}\\tan x\\,dx\\)</span>. </p>"
+    },
+    {
+      "number": 72,
+      "content": "<p><strong>72.</strong> </p><p><em>Yêu cầu chung (69–74): Dùng Tính chất 8 để ước lượng giá trị tích phân.</em></p><p> <span class=\"math inline\">\\(\\displaystyle\\int_0^2(x^3-3x+3)\\,dx\\)</span>. </p>"
+    },
+    {
+      "number": 73,
+      "content": "<p><strong>73.</strong> </p><p><em>Yêu cầu chung (69–74): Dùng Tính chất 8 để ước lượng giá trị tích phân.</em></p><p> <span class=\"math inline\">\\(\\displaystyle\\int_0^2 xe^{-x}\\,dx\\)</span>. </p>"
+    },
+    {
+      "number": 74,
+      "content": "<p><strong>74.</strong> </p><p><em>Yêu cầu chung (69–74): Dùng Tính chất 8 để ước lượng giá trị tích phân.</em></p><p> <span class=\"math inline\">\\(\\displaystyle\\int_\\pi^{2\\pi}(x^2-\\sin x)\\,dx\\)</span>. </p>"
+    },
+    {
+      "number": 75,
+      "content": "<p><strong>75.</strong> </p><p><em>Yêu cầu chung (75–76): Dùng các tính chất tích phân, cùng Bài tập 47 và 48, chứng minh bất đẳng thức.</em></p><p> <span class=\"math inline\">\\(\\displaystyle\\int_1^3\\sqrt{x^4+1}\\,dx\\ge\\frac{26}3\\)</span>. </p>"
+    },
+    {
+      "number": 76,
+      "content": "<p><strong>76.</strong> </p><p><em>Yêu cầu chung (75–76): Dùng các tính chất tích phân, cùng Bài tập 47 và 48, chứng minh bất đẳng thức.</em></p><p> <span class=\"math inline\">\\(\\displaystyle\\int_0^{\\pi/2}x\\sin x\\,dx\\le\\frac{\\pi^2}8\\)</span>. </p>"
+    },
+    {
+      "number": 77,
+      "content": "<p><strong>77.</strong> </p><p> Trong ba tích phân <span class=\"math inline\">\\(\\int_1^2\\arctan x\\,dx\\)</span>, <span class=\"math inline\">\\(\\int_1^2\\arctan\\sqrt{x}\\,dx\\)</span> và <span class=\"math inline\">\\(\\int_1^2\\arctan(\\sin x)\\,dx\\)</span>, tích phân nào có giá trị lớn nhất? Vì sao? </p>"
+    },
+    {
+      "number": 78,
+      "content": "<p><strong>78.</strong> </p><p> Trong hai tích phân <span class=\"math inline\">\\(\\int_0^{0.5}\\cos(x^2)\\,dx\\)</span> và <span class=\"math inline\">\\(\\int_0^{0.5}\\cos\\sqrt{x}\\,dx\\)</span>, tích phân nào lớn hơn? Vì sao? </p>"
+    },
+    {
+      "number": 79,
+      "content": "<p><strong>79.</strong> </p><p> Chứng minh Tính chất 3 của tích phân.</p>"
+    },
+    {
+      "number": 80,
+      "content": "<p><strong>80.</strong> </p><p> (a) Với hàm <span class=\"math inline\">\\(f\\)</span> có đồ thị như hình, kiểm tra bằng hình học bất đẳng thức <span class=\"math display\">\\[\\left|\\int_a^b f(x)\\,dx\\right|\\le\\int_a^b|f(x)|\\,dx.\\]</span> <p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-5-2-157ffa41/ex80.png\" alt=\"5-2 ex80\" loading=\"lazy\"><br><span>Hình cho Bài tập 80</span></p> (b) Chứng minh bất đẳng thức ở (a) đúng với mọi hàm <span class=\"math inline\">\\(f\\)</span> liên tục trên <span class=\"math inline\">\\([a,b]\\)</span>.<br>(c) Chứng minh <span class=\"math display\">\\[\\left|\\int_a^b f(x)\\sin2x\\,dx\\right|\\le\\int_a^b|f(x)|\\,dx.\\]</span></p>"
+    },
+    {
+      "number": 81,
+      "content": "<p><strong>81.</strong> </p><p> Cho <span class=\"math inline\">\\(f(x)=0\\)</span> nếu <span class=\"math inline\">\\(x\\)</span> hữu tỉ và <span class=\"math inline\">\\(f(x)=1\\)</span> nếu <span class=\"math inline\">\\(x\\)</span> vô tỉ. Chứng minh <span class=\"math inline\">\\(f\\)</span> không khả tích trên <span class=\"math inline\">\\([0,1]\\)</span>. </p>"
+    },
+    {
+      "number": 82,
+      "content": "<p><strong>82.</strong> </p><p> Cho <span class=\"math inline\">\\(f(0)=0\\)</span> và <span class=\"math inline\">\\(f(x)=1/x\\)</span> nếu <span class=\"math inline\">\\(0&lt;x\\le1\\)</span>. Chứng minh <span class=\"math inline\">\\(f\\)</span> không khả tích trên <span class=\"math inline\">\\([0,1]\\)</span>. [Gợi ý: Chứng minh số hạng đầu tiên của tổng Riemann, <span class=\"math inline\">\\(f(x_1^*)\\Delta x\\)</span>, có thể lớn tùy ý.] </p>"
+    },
+    {
+      "number": 83,
+      "content": "<p><strong>83.</strong> </p><p><em>Yêu cầu chung (83–84): Biểu diễn giới hạn thành tích phân xác định.</em></p><p> <span class=\"math inline\">\\(\\displaystyle\\lim_{n\\to\\infty}\\sum_{i=1}^n\\frac{i^4}{n^5}\\)</span>. [Gợi ý: Xét <span class=\"math inline\">\\(f(x)=x^4\\)</span>.] </p>"
+    },
+    {
+      "number": 84,
+      "content": "<p><strong>84.</strong> </p><p><em>Yêu cầu chung (83–84): Biểu diễn giới hạn thành tích phân xác định.</em></p><p> <span class=\"math inline\">\\(\\displaystyle\\lim_{n\\to\\infty}\\frac1n\\sum_{i=1}^n\\frac1{1+(i/n)^2}\\)</span>. </p>"
+    },
+    {
+      "number": 85,
+      "content": "<p><strong>85.</strong> </p><p> Tìm <span class=\"math inline\">\\(\\int_1^2x^{-2}\\,dx\\)</span>. Gợi ý: Chọn <span class=\"math inline\">\\(x_i^*\\)</span> là trung bình nhân của <span class=\"math inline\">\\(x_{i-1}\\)</span> và <span class=\"math inline\">\\(x_i\\)</span>, tức <span class=\"math inline\">\\(x_i^*=\\sqrt{x_{i-1}x_i}\\)</span>, và dùng đẳng thức <span class=\"math display\">\\[\\frac1{m(m+1)}=\\frac1m-\\frac1{m+1}.\\]</span> </p>"
+    },
+    {
+      "number": 86,
+      "content": "<p><strong>Dự án khám phá — Câu 1.</strong> </p><p> (a) Vẽ đường thẳng <span class=\"math inline\">\\(y=2t+1\\)</span> và dùng hình học tìm diện tích miền dưới đường thẳng này, trên trục <span class=\"math inline\">\\(t\\)</span>, giữa các đường thẳng đứng <span class=\"math inline\">\\(t=1\\)</span>, <span class=\"math inline\">\\(t=3\\)</span>.<br>(b) Với <span class=\"math inline\">\\(x&gt;1\\)</span>, gọi <span class=\"math inline\">\\(A(x)\\)</span> là diện tích miền dưới <span class=\"math inline\">\\(y=2t+1\\)</span> từ <span class=\"math inline\">\\(t=1\\)</span> đến <span class=\"math inline\">\\(t=x\\)</span>. Phác thảo miền và dùng hình học tìm biểu thức của <span class=\"math inline\">\\(A(x)\\)</span>.<br>(c) Lấy đạo hàm hàm diện tích <span class=\"math inline\">\\(A(x)\\)</span>. Bạn nhận thấy điều gì? </p>"
+    },
+    {
+      "number": 87,
+      "content": "<p><strong>Dự án khám phá — Câu 2.</strong> </p><p> (a) Với <span class=\"math inline\">\\(x\\ge-1\\)</span>, đặt <span class=\"math inline\">\\(A(x)=\\int_{-1}^x(1+t^2)\\,dt\\)</span>. <span class=\"math inline\">\\(A(x)\\)</span> biểu diễn diện tích một miền. Hãy phác thảo miền đó.<br>(b) Dùng kết quả Bài tập 5.2.48 để tìm biểu thức của <span class=\"math inline\">\\(A(x)\\)</span>.<br>(c) Tìm <span class=\"math inline\">\\(A'(x)\\)</span>. Bạn nhận thấy điều gì?<br>(d) Nếu <span class=\"math inline\">\\(x\\ge-1\\)</span> và <span class=\"math inline\">\\(h\\)</span> là số dương nhỏ thì <span class=\"math inline\">\\(A(x+h)-A(x)\\)</span> biểu diễn diện tích một miền. Mô tả và phác thảo miền đó.<br>(e) Vẽ một hình chữ nhật xấp xỉ miền ở (d). So sánh hai diện tích để chỉ ra <span class=\"math display\">\\[\\frac{A(x+h)-A(x)}h\\approx1+x^2.\\]</span> (f) Dùng phần (e) để giải thích trực giác kết quả phần (c). </p>"
+    },
+    {
+      "number": 88,
+      "content": "<p><strong>Dự án khám phá — Câu 3.</strong> </p><p> (a) Vẽ đồ thị <span class=\"math inline\">\\(f(x)=\\cos(x^2)\\)</span> trong cửa sổ quan sát <span class=\"math inline\">\\([0,2]\\times[-1.25,1.25]\\)</span>.<br>(b) Nếu định nghĩa hàm mới <span class=\"math inline\">\\(g(x)=\\int_0^x\\cos(t^2)\\,dt\\)</span>, thì <span class=\"math inline\">\\(g(x)\\)</span> là diện tích dưới đồ thị <span class=\"math inline\">\\(f\\)</span> từ 0 đến <span class=\"math inline\">\\(x\\)</span> [cho đến khi <span class=\"math inline\">\\(f(x)\\)</span> âm; khi đó <span class=\"math inline\">\\(g(x)\\)</span> là hiệu các diện tích]. Dùng phần (a) xác định giá trị <span class=\"math inline\">\\(x\\)</span> tại đó <span class=\"math inline\">\\(g(x)\\)</span> bắt đầu giảm. [Khác với tích phân ở Câu 2, không thể tính tích phân định nghĩa <span class=\"math inline\">\\(g\\)</span> để thu được một biểu thức tường minh của <span class=\"math inline\">\\(g(x)\\)</span>.]<br>(c) Dùng lệnh tích phân trên máy tính bỏ túi hoặc máy vi tính để ước lượng <span class=\"math display\">\\[g(0.2),g(0.4),g(0.6),\\ldots,g(1.8),g(2).\\]</span> Dùng các giá trị đó phác thảo đồ thị <span class=\"math inline\">\\(g\\)</span>.<br>(d) Dùng đồ thị <span class=\"math inline\">\\(g\\)</span> ở (c) để phác thảo đồ thị <span class=\"math inline\">\\(g'\\)</span>, dựa vào cách hiểu <span class=\"math inline\">\\(g'(x)\\)</span> là hệ số góc tiếp tuyến. Đồ thị <span class=\"math inline\">\\(g'\\)</span> so với đồ thị <span class=\"math inline\">\\(f\\)</span> như thế nào? </p>"
+    },
+    {
+      "number": 89,
+      "content": "<p><strong>Dự án khám phá — Câu 4.</strong> </p><p> Giả sử <span class=\"math inline\">\\(f\\)</span> liên tục trên <span class=\"math inline\">\\([a,b]\\)</span> và định nghĩa hàm mới <span class=\"math inline\">\\(g\\)</span> bởi <span class=\"math inline\">\\(g(x)=\\int_a^x f(t)\\,dt\\)</span>. Dựa vào kết quả ở các Câu 1–3, hãy dự đoán một biểu thức của <span class=\"math inline\">\\(g'(x)\\)</span>. </p>"
+    }
+  ]
+}

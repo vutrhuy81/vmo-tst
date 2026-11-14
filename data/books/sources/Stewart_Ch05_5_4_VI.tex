@@ -1,0 +1,410 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage{fontspec}\setmainfont{Latin Modern Roman}\setsansfont{DejaVu Sans}
+\usepackage{amsmath,amssymb,graphicx,geometry,enumitem,needspace,longtable,booktabs,fancyhdr,hyperref}
+\geometry{left=28mm,right=23mm,top=24mm,bottom=24mm}
+\hypersetup{unicode=true,colorlinks=true,linkcolor=black,urlcolor=blue,pdftitle={Giải tích §5.4 — Tích phân bất định và định lý về độ biến thiên thuần}}
+\setlength{\parindent}{1.2em}\setlength{\parskip}{4pt}\setlength{\headheight}{16pt}
+\pagestyle{fancy}\fancyhf{}\fancyhead[L]{\small Chương 5. Tích phân}\fancyhead[R]{\small §5.4}\fancyfoot[C]{\thepage}
+\newcommand{\fig}[3][.68]{\begin{center}\begin{minipage}{\linewidth}\centering\includegraphics[width=#1\linewidth]{assets/#2.png}\\{\small #3}\end{minipage}\end{center}}
+\newcommand{\ex}[1]{\par\medskip\noindent\textbf{Ví dụ #1.}\ }
+\newcommand{\sol}{\par\nopagebreak[4]\noindent\textit{Lời giải.}\ }
+\newcommand{\bt}[1]{\par\smallskip\Needspace{5\baselineskip}\noindent\textbf{#1.}\ }
+\newcommand{\group}[1]{\par\medskip\noindent\textbf{#1}\par\nopagebreak[4]}
+\newcommand{\gint}[1]{\left[\!\left[#1\right]\!\right]}
+\allowdisplaybreaks[2]
+\DeclareMathOperator{\sech}{sech}
+\DeclareMathOperator{\csch}{csch}
+\DeclareMathOperator{\arccot}{arccot}
+\begin{document}
+\begin{center}
+{\LARGE\bfseries 5.4 — Tích phân bất định và định lý về độ biến thiên thuần}\par
+\end{center}
+
+Ở §5.3, ta đã thấy Phần 2 của Định lý cơ bản của giải tích cung cấp một phương pháp rất hiệu quả để tính tích phân xác định của một hàm số, với giả thiết rằng ta tìm được một nguyên hàm của hàm số đó. Trong phần này, ta đưa ra một ký hiệu cho nguyên hàm, ôn lại các công thức nguyên hàm và sử dụng chúng để tính tích phân xác định. Ta cũng phát biểu lại Phần 2 của Định lý cơ bản theo một cách thuận tiện hơn cho việc áp dụng vào các bài toán khoa học và kỹ thuật.
+
+\subsection*{Tích phân bất định}
+Cả hai phần của Định lý cơ bản đều thiết lập mối liên hệ giữa nguyên hàm và tích phân xác định. Phần 1 khẳng định rằng nếu $f$ liên tục thì $\int_a^x f(t)\,dt$ là một nguyên hàm của $f$. Phần 2 khẳng định rằng có thể tính $\int_a^b f(x)\,dx$ bằng cách tính $F(b)-F(a)$, trong đó $F$ là một nguyên hàm của $f$.
+
+Ta cần một ký hiệu thuận tiện cho nguyên hàm để dễ thao tác. Do mối liên hệ giữa nguyên hàm và tích phân được nêu trong Định lý cơ bản, theo truyền thống, ký hiệu $\int f(x)\,dx$ được dùng cho một nguyên hàm của $f$ và được gọi là \textbf{tích phân bất định}. Như vậy,
+\[
+\int f(x)\,dx=F(x)\quad\text{có nghĩa là}\quad F'(x)=f(x).
+\]
+Chẳng hạn, ta có thể viết
+\[
+\int x^2\,dx=\frac{x^3}{3}+C
+\]
+vì
+\[
+\frac{d}{dx}\left(\frac{x^3}{3}+C\right)=x^2.
+\]
+Vì thế, ta có thể xem một tích phân bất định là biểu diễn của cả một họ hàm số (mỗi giá trị của hằng số $C$ tương ứng với một nguyên hàm).
+
+Cần phân biệt cẩn thận tích phân xác định và tích phân bất định. Tích phân xác định $\int_a^b f(x)\,dx$ là một \textit{số}, còn tích phân bất định $\int f(x)\,dx$ là một \textit{hàm số} (hoặc một họ hàm số). Mối liên hệ giữa chúng được cho bởi Phần 2 của Định lý cơ bản: nếu $f$ liên tục trên $[a,b]$ thì
+\[
+\int_a^b f(x)\,dx=\left[\int f(x)\,dx\right]_a^b.
+\]
+Hiệu quả của Định lý cơ bản phụ thuộc vào việc ta có sẵn các nguyên hàm. Do đó, dưới đây ta viết lại Bảng công thức tìm nguyên hàm ở §4.9, cùng một số công thức khác, bằng ký hiệu tích phân bất định. Mỗi công thức đều có thể được kiểm tra bằng cách lấy đạo hàm của hàm số ở vế phải để thu được hàm dưới dấu tích phân. Chẳng hạn,
+\[
+\int\sec^2x\,dx=\tan x+C
+\quad\text{vì}\quad \frac{d}{dx}(\tan x+C)=\sec^2x.
+\]
+
+\Needspace{24\baselineskip}
+\subsection*{1. Bảng tích phân bất định}
+\[
+\int cf(x)\,dx=c\int f(x)\,dx
+\]
+\[
+\int[f(x)+g(x)]\,dx=\int f(x)\,dx+\int g(x)\,dx
+\]
+\begin{center}
+\renewcommand{\arraystretch}{2.3}
+\begin{tabular}{p{.48\linewidth}p{.46\linewidth}}
+$\displaystyle\int k\,dx=kx+C$&\\
+$\displaystyle\int x^n\,dx=\frac{x^{n+1}}{n+1}+C\quad(n\ne-1)$&$\displaystyle\int\frac1x\,dx=\ln|x|+C$\\
+$\displaystyle\int e^x\,dx=e^x+C$&$\displaystyle\int b^x\,dx=\frac{b^x}{\ln b}+C$\\
+$\displaystyle\int\sin x\,dx=-\cos x+C$&$\displaystyle\int\cos x\,dx=\sin x+C$\\
+$\displaystyle\int\sec^2x\,dx=\tan x+C$&$\displaystyle\int\csc^2x\,dx=-\cot x+C$\\
+$\displaystyle\int\sec x\tan x\,dx=\sec x+C$&$\displaystyle\int\csc x\cot x\,dx=-\csc x+C$\\
+$\displaystyle\int\frac{dx}{x^2+1}=\arctan x+C$&$\displaystyle\int\frac{dx}{\sqrt{1-x^2}}=\arcsin x+C$\\
+$\displaystyle\int\sinh x\,dx=\cosh x+C$&$\displaystyle\int\cosh x\,dx=\sinh x+C$
+\end{tabular}
+\end{center}
+
+Nhắc lại Định lý 4.9.1: nguyên hàm tổng quát nhất trên một khoảng cho trước thu được bằng cách cộng một hằng số vào một nguyên hàm cụ thể. Ta chấp nhận quy ước rằng \textbf{khi cho một công thức tích phân bất định tổng quát, công thức đó chỉ có hiệu lực trên một khoảng}. Vì thế, ta viết
+\[
+\int\frac1{x^2}\,dx=-\frac1x+C
+\]
+với cách hiểu rằng công thức có hiệu lực trên khoảng $(0,\infty)$ hoặc trên khoảng $(-\infty,0)$. Điều này vẫn đúng mặc dù nguyên hàm tổng quát của hàm số $f(x)=1/x^2$, $x\ne0$, là
+\[
+F(x)=\begin{cases}-\dfrac1x+C_1&\text{nếu }x<0,\\[4pt]-\dfrac1x+C_2&\text{nếu }x>0.\end{cases}
+\]
+
+\Needspace{12\baselineskip}
+\ex{1} Tìm tích phân bất định tổng quát
+\[\int(10x^4-2\sec^2x)\,dx.\]
+\sol Sử dụng quy ước trên và Bảng 1, ta có
+\begin{align*}
+\int(10x^4-2\sec^2x)\,dx&=10\int x^4\,dx-2\int\sec^2x\,dx\\
+&=10\frac{x^5}{5}-2\tan x+C\\
+&=2x^5-2\tan x+C.
+\end{align*}
+Hãy kiểm tra kết quả bằng cách lấy đạo hàm.
+\fig[.42]{fig01}{Hình 1}
+Hình 1 biểu diễn tích phân bất định trong Ví dụ 1 với một số giá trị của $C$. Ở đây, $C$ là tung độ giao điểm của đồ thị với trục $y$.
+
+\ex{2} Tính $\displaystyle\int\frac{\cos\theta}{\sin^2\theta}\,d\theta$.
+\sol Tích phân bất định này chưa xuất hiện trực tiếp trong Bảng 1, nên ta sử dụng các đồng nhất thức lượng giác để viết lại hàm số trước khi lấy tích phân:
+\begin{align*}
+\int\frac{\cos\theta}{\sin^2\theta}\,d\theta
+&=\int\left(\frac1{\sin\theta}\right)\left(\frac{\cos\theta}{\sin\theta}\right)\,d\theta\\
+&=\int\csc\theta\cot\theta\,d\theta=-\csc\theta+C.
+\end{align*}
+
+\ex{3} Tính $\displaystyle\int_0^3(x^3-6x)\,dx$.
+\sol Theo Phần 2 của Định lý cơ bản và Bảng 1,
+\begin{align*}
+\int_0^3(x^3-6x)\,dx&=\left[\frac{x^4}{4}-6\frac{x^2}{2}\right]_0^3\\
+&=\left(\frac14\cdot3^4-3\cdot3^2\right)-\left(\frac14\cdot0^4-3\cdot0^2\right)\\
+&=\frac{81}{4}-27-0+0=-6.75.
+\end{align*}
+Hãy so sánh phép tính này với Ví dụ 5.2.3.
+
+\ex{4} Tính $\displaystyle\int_0^2\left(2x^3-6x+\frac3{x^2+1}\right)\,dx$ và giải thích kết quả theo diện tích.
+\sol Định lý cơ bản cho
+\begin{align*}
+\int_0^2\left(2x^3-6x+\frac3{x^2+1}\right)\,dx
+&=\left[2\frac{x^4}{4}-6\frac{x^2}{2}+3\arctan x\right]_0^2\\
+&=\left[\frac12x^4-3x^2+3\arctan x\right]_0^2\\
+&=\frac12(2^4)-3(2^2)+3\arctan2-0\\
+&=-4+3\arctan2.
+\end{align*}
+Đây là giá trị chính xác của tích phân. Nếu cần một giá trị gần đúng dạng thập phân, ta có thể dùng máy tính để tính gần đúng $\arctan2$. Khi đó,
+\[
+\int_0^2\left(2x^3-6x+\frac3{x^2+1}\right)\,dx\approx-0.67855.
+\]
+\fig[.40]{fig02}{Hình 2}
+Hình 2 biểu diễn đồ thị của hàm dưới dấu tích phân trong Ví dụ 4. Từ §5.2, ta biết rằng có thể giải thích giá trị của tích phân là một diện tích thuần: tổng diện tích các miền đánh dấu cộng trừ đi diện tích miền đánh dấu trừ.
+
+\ex{5} Tính $\displaystyle\int_1^9\frac{2t^2+t^2\sqrt t-1}{t^2}\,dt$.
+\sol Trước hết, ta thực hiện phép chia để viết hàm dưới dấu tích phân ở dạng đơn giản hơn:
+\begin{align*}
+\int_1^9\frac{2t^2+t^2\sqrt t-1}{t^2}\,dt
+&=\int_1^9(2+t^{1/2}-t^{-2})\,dt\\
+&=\left[2t+\frac{t^{3/2}}{3/2}-\frac{t^{-1}}{-1}\right]_1^9\\
+&=\left[2t+\frac23t^{3/2}+\frac1t\right]_1^9\\
+&=\left(2\cdot9+\frac23\cdot9^{3/2}+\frac19\right)
+-\left(2\cdot1+\frac23\cdot1^{3/2}+\frac11\right)\\
+&=18+18+\frac19-2-\frac23-1=32\frac49.
+\end{align*}
+
+\subsection*{Định lý về độ biến thiên thuần}
+Phần 2 của Định lý cơ bản khẳng định rằng nếu $f$ liên tục trên $[a,b]$ thì
+\[\int_a^b f(x)\,dx=F(b)-F(a),\]
+trong đó $F$ là một nguyên hàm bất kỳ của $f$. Điều này có nghĩa là $F'=f$, nên có thể viết lại đẳng thức trên thành
+\[\int_a^b F'(x)\,dx=F(b)-F(a).\]
+Ta biết $F'(x)$ biểu diễn tốc độ biến thiên của $y=F(x)$ theo $x$, còn $F(b)-F(a)$ là độ biến thiên của $y$ khi $x$ thay đổi từ $a$ đến $b$. [Chú ý rằng, chẳng hạn, $y$ có thể tăng, rồi giảm, rồi lại tăng. Mặc dù $y$ có thể biến thiên theo cả hai chiều, $F(b)-F(a)$ biểu diễn \textit{độ biến thiên thuần} của $y$.] Vì vậy, ta có thể phát biểu lại Phần 2 của Định lý cơ bản bằng lời như sau.
+
+\Needspace{6\baselineskip}
+\noindent\textbf{Định lý về độ biến thiên thuần.} Tích phân của một tốc độ biến thiên là độ biến thiên thuần:
+\[\boxed{\displaystyle\int_a^b F'(x)\,dx=F(b)-F(a).}\]
+
+Nguyên lý trong Định lý về độ biến thiên thuần áp dụng được cho mọi tốc độ biến thiên trong khoa học tự nhiên và khoa học xã hội mà ta đã xét ở §3.7. Những ứng dụng này cho thấy một phần sức mạnh của toán học nằm ở tính trừu tượng. Một ý tưởng trừu tượng duy nhất (ở đây là tích phân) có thể có nhiều cách diễn giải khác nhau. Sau đây là một số ví dụ về cách áp dụng định lý.
+
+\begin{itemize}[leftmargin=1.5em]
+\item Nếu $V(t)$ là thể tích nước trong một hồ chứa tại thời điểm $t$ thì đạo hàm $V'(t)$ là tốc độ nước chảy vào hồ tại thời điểm $t$. Do đó,
+\[\int_{t_1}^{t_2}V'(t)\,dt=V(t_2)-V(t_1)\]
+là độ biến thiên lượng nước trong hồ từ thời điểm $t_1$ đến thời điểm $t_2$.
+\item Nếu $[C](t)$ là nồng độ sản phẩm của một phản ứng hóa học tại thời điểm $t$ thì tốc độ phản ứng là đạo hàm $d[C]/dt$. Do đó,
+\[\int_{t_1}^{t_2}\frac{d[C]}{dt}\,dt=[C](t_2)-[C](t_1)\]
+là độ biến thiên nồng độ của $C$ từ thời điểm $t_1$ đến thời điểm $t_2$.
+\item Nếu khối lượng của thanh tính từ đầu bên trái đến điểm $x$ là $m(x)$ thì mật độ khối lượng dài là $\rho(x)=m'(x)$. Do đó,
+\[\int_a^b\rho(x)\,dx=m(b)-m(a)\]
+là khối lượng của đoạn thanh nằm giữa $x=a$ và $x=b$.
+\item Nếu tốc độ tăng trưởng của một quần thể là $dn/dt$ thì
+\[\int_{t_1}^{t_2}\frac{dn}{dt}\,dt=n(t_2)-n(t_1)\]
+là độ biến thiên thuần của số cá thể trong khoảng thời gian từ $t_1$ đến $t_2$. (Số cá thể tăng khi có sinh và giảm khi có chết. Độ biến thiên thuần tính đến cả sinh và chết.)
+\item Nếu $C(x)$ là chi phí sản xuất $x$ đơn vị hàng hóa thì chi phí biên là đạo hàm $C'(x)$. Do đó,
+\[\int_{x_1}^{x_2}C'(x)\,dx=C(x_2)-C(x_1)\]
+là mức tăng chi phí khi sản lượng tăng từ $x_1$ đơn vị lên $x_2$ đơn vị.
+\item Nếu một vật chuyển động trên đường thẳng với hàm vị trí $s(t)$ thì vận tốc của vật là $v(t)=s'(t)$, nên
+\begin{equation}\int_{t_1}^{t_2}v(t)\,dt=s(t_2)-s(t_1).\tag{2}\end{equation}
+Đây là độ biến thiên thuần của vị trí, hay \textbf{độ dời}, của vật trong khoảng thời gian từ $t_1$ đến $t_2$. Ở §5.1, ta đã dự đoán điều này đúng khi vật chuyển động theo chiều dương; nay ta đã chứng minh được rằng điều này luôn đúng.
+\item Nếu muốn tính \textbf{quãng đường} vật đi được trong một khoảng thời gian, ta phải xét cả những khoảng mà $v(t)\ge0$ (vật chuyển động sang phải) và những khoảng mà $v(t)\le0$ (vật chuyển động sang trái). Trong cả hai trường hợp, quãng đường được tính bằng cách lấy tích phân của $|v(t)|$, tức là tốc độ. Vì vậy,
+\begin{equation}\int_{t_1}^{t_2}|v(t)|\,dt=\text{tổng quãng đường đi được}.\tag{3}\end{equation}
+Hình 3 cho thấy cả độ dời và quãng đường đều có thể được diễn giải theo diện tích dưới đường cong vận tốc.
+\[\text{độ dời}=\int_{t_1}^{t_2}v(t)\,dt=A_1-A_2+A_3\]
+\[\text{quãng đường}=\int_{t_1}^{t_2}|v(t)|\,dt=A_1+A_2+A_3\]
+\item Gia tốc của vật là $a(t)=v'(t)$, nên
+\[\int_{t_1}^{t_2}a(t)\,dt=v(t_2)-v(t_1)\]
+là độ biến thiên vận tốc từ thời điểm $t_1$ đến thời điểm $t_2$.
+\end{itemize}
+\fig[.48]{fig03}{Hình 3}
+
+\Needspace{12\baselineskip}
+\ex{6} Một chất điểm chuyển động trên một đường thẳng sao cho vận tốc tại thời điểm $t$ là $v(t)=t^2-t-6$ (tính bằng mét trên giây).
+
+\noindent(a) Tìm độ dời của chất điểm trong khoảng thời gian $1\le t\le4$.\par
+\noindent(b) Tìm quãng đường đi được trong khoảng thời gian này.
+\sol (a) Theo Công thức (2), độ dời là
+\begin{align*}
+s(4)-s(1)&=\int_1^4v(t)\,dt=\int_1^4(t^2-t-6)\,dt\\
+&=\left[\frac{t^3}{3}-\frac{t^2}{2}-6t\right]_1^4=-\frac92.
+\end{align*}
+Điều này có nghĩa là chất điểm đã dịch chuyển $4.5$ m sang trái.
+
+(b) Chú ý rằng $v(t)=t^2-t-6=(t-3)(t+2)$, nên $v(t)\le0$ trên $[1,3]$ và $v(t)\ge0$ trên $[3,4]$. Vì vậy, theo Công thức (3), quãng đường đi được là
+\begin{align*}
+\int_1^4|v(t)|\,dt&=\int_1^3[-v(t)]\,dt+\int_3^4v(t)\,dt\\
+&=\int_1^3(-t^2+t+6)\,dt+\int_3^4(t^2-t-6)\,dt\\
+&=\left[-\frac{t^3}{3}+\frac{t^2}{2}+6t\right]_1^3
++\left[\frac{t^3}{3}-\frac{t^2}{2}-6t\right]_3^4\\
+&=\frac{61}{6}\approx10.17\ \text{m}.
+\end{align*}
+Để lấy tích phân giá trị tuyệt đối của $v(t)$, ta sử dụng Tính chất 5 của tích phân ở §5.2 để tách tích phân thành hai phần: một phần ứng với $v(t)\le0$ và phần còn lại ứng với $v(t)\ge0$.
+
+\Needspace{18\baselineskip}
+\ex{7} Hình 4 cho thấy công suất điện tiêu thụ tại thành phố San Francisco trong một ngày tháng Chín ($P$ tính bằng megawatt; $t$ tính bằng giờ kể từ nửa đêm). Ước lượng năng lượng điện tiêu thụ trong ngày đó.
+\fig[.65]{fig04}{Hình 4. Nguồn: Pacific Gas \& Electric}
+\sol Công suất là tốc độ biến thiên của năng lượng: $P(t)=E'(t)$. Vì vậy, theo Định lý về độ biến thiên thuần,
+\[\int_0^{24}P(t)\,dt=\int_0^{24}E'(t)\,dt=E(24)-E(0)\]
+là tổng năng lượng tiêu thụ trong ngày đó. Ta tính gần đúng tích phân bằng Quy tắc trung điểm với 12 khoảng con và $\Delta t=2$:
+\begin{align*}
+\int_0^{24}P(t)\,dt
+&\approx[P(1)+P(3)+P(5)+\cdots+P(21)+P(23)]\Delta t\\
+&\approx(440+400+420+620+790+840+850\\
+&\qquad+840+810+690+670+550)(2)\\
+&=15\,840.
+\end{align*}
+Năng lượng tiêu thụ xấp xỉ $15\,840$ megawatt-giờ.
+
+\subsection*{Chú ý về đơn vị}
+Làm thế nào ta biết đơn vị năng lượng cần dùng trong Ví dụ 7? Tích phân $\int_0^{24}P(t)\,dt$ được định nghĩa là giới hạn của các tổng gồm những số hạng dạng $P(t_i^*)\Delta t$. Vì $P(t_i^*)$ được tính bằng megawatt và $\Delta t$ tính bằng giờ, tích của chúng có đơn vị megawatt-giờ. Giới hạn cũng có đơn vị như vậy. Nói chung, đơn vị đo của $\int_a^b f(x)\,dx$ là tích của đơn vị đo $f(x)$ với đơn vị đo $x$.
+
+\Needspace{14\baselineskip}
+\section*{5.4 — Bài tập}
+\Needspace{10\baselineskip}
+\group{1–4} Kiểm tra công thức bằng cách lấy đạo hàm.
+\bt{1} $\displaystyle\int\ln x\,dx=x\ln x-x+C$.
+\bt{2} $\displaystyle\int\tan^2x\,dx=\tan x-x+C$.
+\bt{3} $\displaystyle\int\frac{dx}{x^2\sqrt{1+x^2}}=-\frac{\sqrt{1+x^2}}x+C$.
+\bt{4} $\displaystyle\int x\sqrt{a+bx}\,dx=\frac2{15b^2}(3bx-2a)(a+bx)^{3/2}+C$.
+
+\Needspace{10\baselineskip}
+\group{5–24} Tìm tích phân bất định tổng quát.
+\bt{5} $\displaystyle\int(3x^2+4x+1)\,dx$.
+\bt{6} $\displaystyle\int(5+2\sqrt x)\,dx$.
+\bt{7} $\displaystyle\int(x+\cos x)\,dx$.
+\bt{8} $\displaystyle\int\left(\sqrt[3]x+\frac1{\sqrt[3]x}\right)\,dx$.
+\bt{9} $\displaystyle\int(x^{1.3}+7x^{2.5})\,dx$.
+\bt{10} $\displaystyle\int\sqrt[4]{x^5}\,dx$.
+\bt{11} $\displaystyle\int\left(5+\frac23x^2+\frac34x^3\right)\,dx$.
+\bt{12} $\displaystyle\int\left(u^6-2u^5-u^3+\frac27\right)\,du$.
+\bt{13} $\displaystyle\int(u+4)(2u+1)\,du$.
+\bt{14} $\displaystyle\int\sqrt t(t^2+3t+2)\,dt$.
+\bt{15} $\displaystyle\int\frac{1+\sqrt x+x}{x}\,dx$.
+\bt{16} $\displaystyle\int\left(x^2+1+\frac1{x^2+1}\right)\,dx$.
+\bt{17} $\displaystyle\int\left(e^x+\frac1x\right)\,dx$.
+\bt{18} $\displaystyle\int(2+3^x)\,dx$.
+\bt{19} $\displaystyle\int(\sin x+\sinh x)\,dx$.
+\bt{20} $\displaystyle\int\left(\frac{1+r}{r}\right)^2\,dr$.
+\bt{21} $\displaystyle\int(2+\tan^2\theta)\,d\theta$.
+\bt{22} $\displaystyle\int\sec t(\sec t+\tan t)\,dt$.
+\bt{23} $\displaystyle\int3\csc^2t\,dt$.
+\bt{24} $\displaystyle\int\frac{\sin2x}{\sin x}\,dx$.
+
+\Needspace{10\baselineskip}
+\group{25–26} Tìm tích phân bất định tổng quát. Minh họa bằng cách vẽ đồ thị của một số hàm trong họ trên cùng một màn hình.
+\bt{25} $\displaystyle\int\left(\cos x+\frac12x\right)\,dx$.
+\bt{26} $\displaystyle\int(e^x-2x^2)\,dx$.
+
+\Needspace{10\baselineskip}
+\group{27–54} Tính tích phân xác định.
+\bt{27} $\displaystyle\int_{-2}^3(x^2-3)\,dx$.
+\bt{28} $\displaystyle\int_1^2(4x^3-3x^2+2x)\,dx$.
+\bt{29} $\displaystyle\int_1^4(8t^3-6t^{-2})\,dt$.
+\bt{30} $\displaystyle\int_0^8\left(\frac18+\frac12w+\frac13w^{1/3}\right)\,dw$.
+\bt{31} $\displaystyle\int_0^2(2x-3)(4x^2+1)\,dx$.
+\bt{32} $\displaystyle\int_1^2\left(\frac1{x^2}-\frac4{x^3}\right)\,dx$.
+\bt{33} $\displaystyle\int_1^3\frac{3x^2+4x+1}{x}\,dx$.
+\bt{34} $\displaystyle\int_{-1}^1t(1-t)^2\,dt$.
+\bt{35} $\displaystyle\int_1^4\frac{4+6u}{\sqrt u}\,du$.
+\bt{36} $\displaystyle\int_0^1\frac4{1+p^2}\,dp$.
+\bt{37} $\displaystyle\int_{\pi/6}^{\pi/3}4\sec^2y\,dy$.
+\bt{38} $\displaystyle\int_0^{\pi/2}(\sqrt t-3\cos t)\,dt$.
+\bt{39} $\displaystyle\int_0^1x(\sqrt[3]x+\sqrt[4]x)\,dx$.
+\bt{40} $\displaystyle\int_1^4\frac{\sqrt y-y}{y^2}\,dy$.
+\bt{41} $\displaystyle\int_1^2\left(\frac x2-\frac2x\right)\,dx$.
+\bt{42} $\displaystyle\int_0^1(5^x-5x)\,dx$.
+\bt{43} $\displaystyle\int_{-2}^2(\sinh x+\cosh x)\,dx$.
+\bt{44} $\displaystyle\int_0^{\pi/4}(3e^x-4\sec x\tan x)\,dx$.
+\bt{45} $\displaystyle\int_0^{\pi/4}\frac{1+\cos^2\theta}{\cos^2\theta}\,d\theta$.
+\bt{46} $\displaystyle\int_0^{\pi/3}\frac{\sin\theta+\sin\theta\tan^2\theta}{\sec^2\theta}\,d\theta$.
+\bt{47} $\displaystyle\int_3^4\sqrt{\frac3x}\,dx$.
+\bt{48} $\displaystyle\int_{-10}^{10}\frac{2e^x}{\sinh x+\cosh x}\,dx$.
+\bt{49} $\displaystyle\int_0^{\sqrt3/2}\frac{dr}{\sqrt{1-r^2}}$.
+\bt{50} $\displaystyle\int_{\pi/6}^{\pi/2}\csc t\cot t\,dt$.
+\bt{51} $\displaystyle\int_0^{1/\sqrt3}\frac{t^2-1}{t^4-1}\,dt$.
+\bt{52} $\displaystyle\int_0^2|2x-1|\,dx$.
+\bt{53} $\displaystyle\int_{-1}^2(x-2|x|)\,dx$.
+\bt{54} $\displaystyle\int_0^{3\pi/2}|\sin x|\,dx$.
+
+\bt{55} Dùng đồ thị để ước lượng các giao điểm của đường cong $y=1-2x-5x^4$ với trục $x$. Sau đó, sử dụng thông tin này để ước lượng diện tích miền nằm dưới đường cong và phía trên trục $x$.
+\bt{56} Làm lại Bài tập 55 với đường cong $y=(x^2+1)^{-1}-x^4$.
+\bt{57} Diện tích miền nằm bên phải trục $y$ và bên trái parabol $x=2y-y^2$ (miền tô màu trong hình) được cho bởi tích phân $\int_0^2(2y-y^2)\,dy$. (Nghiêng đầu theo chiều kim đồng hồ và xem miền này là miền nằm dưới đường cong $x=2y-y^2$ từ $y=0$ đến $y=2$.) Tìm diện tích miền đó.
+\fig[.38]{ex57}{Hình cho Bài tập 57}
+\Needspace{24\baselineskip}
+\bt{58} Biên của miền tô màu gồm trục $y$, đường thẳng $y=1$ và đường cong $y=\sqrt[4]x$. Tìm diện tích miền này bằng cách viết $x$ thành hàm của $y$ rồi lấy tích phân theo $y$ (như trong Bài tập 57).
+\fig[.36]{ex58}{Hình cho Bài tập 58}
+\bt{59} Nếu $w'(t)$ là tốc độ tăng trưởng của một đứa trẻ, tính bằng pound mỗi năm, thì $\int_5^{10}w'(t)\,dt$ biểu diễn điều gì?
+\bt{60} Cường độ dòng điện trong một dây dẫn được định nghĩa là đạo hàm của điện tích: $I(t)=Q'(t)$. (Xem Ví dụ 3.7.3.) Tích phân $\int_a^b I(t)\,dt$ biểu diễn điều gì?
+\bt{61} Nếu dầu rò rỉ khỏi một bồn với tốc độ $r(t)$ gallon mỗi phút tại thời điểm $t$ thì $\int_0^{120}r(t)\,dt$ biểu diễn điều gì?
+\bt{62} Một đàn ong mật ban đầu có 100 con và tăng với tốc độ $n'(t)$ con mỗi tuần. Biểu thức $100+\int_0^{15}n'(t)\,dt$ biểu diễn điều gì?
+\bt{63} Ở §4.7, ta đã định nghĩa hàm doanh thu biên $R'(x)$ là đạo hàm của hàm doanh thu $R(x)$, trong đó $x$ là số đơn vị bán ra. Tích phân $\int_{1000}^{5000}R'(x)\,dx$ biểu diễn điều gì?
+\bt{64} Nếu $f(x)$ là hệ số góc của một đường mòn tại vị trí cách điểm đầu đường mòn $x$ dặm thì $\int_3^5 f(x)\,dx$ biểu diễn điều gì?
+\bt{65} Nếu $h(t)$ là nhịp tim của một người, tính bằng nhịp mỗi phút, sau khi bắt đầu tập thể dục $t$ phút thì $\int_0^{30}h(t)\,dt$ biểu diễn điều gì?
+\bt{66} Nếu $x$ có đơn vị foot và $a(x)$ có đơn vị pound trên foot thì $da/dx$ có đơn vị gì? Tích phân $\int_2^8a(x)\,dx$ có đơn vị gì?
+\bt{67} Nếu $x$ được tính bằng mét và $f(x)$ được tính bằng newton thì tích phân $\int_0^{100}f(x)\,dx$ có đơn vị gì?
+\Needspace{28\baselineskip}
+\bt{68} Đồ thị cho biết vận tốc (m/s) của một xe điện tự hành chuyển động trên đường thẳng. Tại $t=0$, xe ở trạm sạc.
+
+\noindent(a) Xe cách trạm sạc bao xa tại $t=2$, $4$, $6$, $8$, $10$ và $12$?\par
+\noindent(b) Vào những thời điểm nào xe ở xa trạm sạc nhất?\par
+\noindent(c) Tổng quãng đường xe đi được là bao nhiêu?
+\fig[.53]{ex68}{Hình cho Bài tập 68}
+
+\Needspace{10\baselineskip}
+\group{69–70} Cho hàm vận tốc (m/s) của một chất điểm chuyển động trên đường thẳng. Tìm (a) độ dời và (b) quãng đường chất điểm đi được trong khoảng thời gian đã cho.
+\bt{69} $v(t)=3t-5$, $0\le t\le3$.
+\bt{70} $v(t)=t^2-2t-3$, $2\le t\le4$.
+
+\Needspace{10\baselineskip}
+\group{71–72} Cho hàm gia tốc (m/s$^2$) và vận tốc ban đầu của một chất điểm chuyển động trên đường thẳng. Tìm (a) vận tốc tại thời điểm $t$ và (b) quãng đường đi được trong khoảng thời gian đã cho.
+\bt{71} $a(t)=t+4$, $v(0)=5$, $0\le t\le10$.
+\bt{72} $a(t)=2t+3$, $v(0)=-4$, $0\le t\le3$.
+
+\bt{73} Mật độ khối lượng dài của một thanh dài 4 m được cho bởi $\rho(x)=9+2\sqrt x$, tính bằng kilôgam trên mét, trong đó $x$ tính bằng mét kể từ một đầu thanh. Tìm khối lượng toàn thanh.
+\bt{74} Nước chảy ra từ đáy một bồn chứa với tốc độ $r(t)=200-4t$ lít mỗi phút, trong đó $0\le t\le50$. Tìm lượng nước chảy ra khỏi bồn trong 10 phút đầu tiên.
+\Needspace{18\baselineskip}
+\bt{75} Vận tốc của một ô tô được đọc từ đồng hồ tốc độ cứ sau 10 giây và ghi trong bảng. Dùng Quy tắc trung điểm để ước lượng quãng đường ô tô đi được.
+\begin{center}
+\begin{tabular}{rrrr}\toprule
+$t$ (s)&$v$ (mi/h)&$t$ (s)&$v$ (mi/h)\\\midrule
+0&0&60&56\\10&38&70&53\\20&52&80&50\\30&58&90&47\\40&55&100&45\\50&51&&\\\bottomrule
+\end{tabular}
+\end{center}
+\Needspace{18\baselineskip}
+\bt{76} Giả sử một núi lửa đang phun trào và các số đo tốc độ $r(t)$ mà vật liệu rắn được phun vào khí quyển được cho trong bảng. Thời gian $t$ tính bằng giây và $r(t)$ có đơn vị tấn (tấn hệ mét) mỗi giây.
+\begin{center}\begin{tabular}{rrrrrrrr}\toprule
+$t$&0&1&2&3&4&5&6\\\midrule
+$r(t)$&2&10&24&36&46&54&60\\\bottomrule
+\end{tabular}\end{center}
+\noindent(a) Cho các ước lượng trên và dưới của tổng lượng vật liệu $Q(6)$ được phun ra sau sáu giây.\par
+\noindent(b) Dùng Quy tắc trung điểm để ước lượng $Q(6)$.
+\bt{77} Chi phí biên để sản xuất $x$ yard một loại vải là
+\[C'(x)=3-0.01x+0.000006x^2\]
+(đô la trên yard). Tìm mức tăng chi phí khi sản lượng tăng từ 2000 yard lên 4000 yard.
+\Needspace{21\baselineskip}
+\bt{78} Nước chảy vào và ra khỏi một bồn chứa. Hình vẽ cho đồ thị tốc độ biến thiên $r(t)$ của thể tích nước trong bồn, tính bằng lít mỗi ngày. Nếu lượng nước trong bồn tại thời điểm $t=0$ là $25\,000$ L, hãy dùng Quy tắc trung điểm để ước lượng lượng nước trong bồn sau bốn ngày.
+\fig[.48]{ex78}{Hình cho Bài tập 78}
+\bt{79} Hình vẽ cho đồ thị gia tốc $a(t)$ của một ô tô, tính bằng ft/s$^2$. Dùng Quy tắc trung điểm để ước lượng mức tăng vận tốc của ô tô trong khoảng thời gian sáu giây đó.
+\fig[.48]{ex79}{Hình cho Bài tập 79. Trục thời gian: $t$ (giây)}
+\Needspace{26\baselineskip}
+\bt{80} Hồ Lanier ở Georgia, Hoa Kỳ, là hồ chứa được tạo bởi đập Buford trên sông Chattahoochee. Bảng cho biết lưu lượng nước chảy vào, tính bằng foot khối mỗi giây, do Công binh Lục quân Hoa Kỳ đo vào lúc 7 giờ 30 sáng hằng ngày. Dùng Quy tắc trung điểm để ước lượng lượng nước chảy vào hồ Lanier từ 7 giờ 30 sáng ngày 18 tháng 7 năm 2013 đến 7 giờ 30 sáng ngày 26 tháng 7.
+\begin{center}\begin{tabular}{lr}\toprule
+Ngày&Lưu lượng chảy vào (ft$^3$/s)\\\midrule
+18 tháng 7&5275\\19 tháng 7&6401\\20 tháng 7&2554\\21 tháng 7&4249\\22 tháng 7&3016\\23 tháng 7&3821\\24 tháng 7&2462\\25 tháng 7&2628\\26 tháng 7&3003\\\bottomrule
+\end{tabular}\end{center}
+\bt{81} Một quần thể vi khuẩn có 4000 cá thể tại $t=0$ và tốc độ tăng trưởng là $1000\cdot2^t$ vi khuẩn mỗi giờ sau $t$ giờ. Sau một giờ, quần thể có bao nhiêu cá thể?
+\Needspace{24\baselineskip}
+\bt{82} Hình vẽ cho đồ thị lưu lượng dữ liệu trên một đường truyền T1 của một nhà cung cấp dịch vụ Internet từ nửa đêm đến 8 giờ sáng. $D$ là thông lượng dữ liệu, tính bằng megabit trên giây. Dùng Quy tắc trung điểm để ước lượng tổng lượng dữ liệu truyền đi trong khoảng thời gian đó.
+\fig[.50]{ex82}{Hình cho Bài tập 82. Trục thời gian: $t$ (giờ)}
+\Needspace{28\baselineskip}
+\bt{83} Hình vẽ cho đồ thị công suất điện tiêu thụ tại các bang New England (Connecticut, Maine, Massachusetts, New Hampshire, Rhode Island và Vermont) vào ngày 22 tháng 10 năm 2010 ($P$ tính bằng gigawatt và $t$ tính bằng giờ kể từ nửa đêm). Sử dụng tính chất công suất là tốc độ biến thiên của năng lượng để ước lượng năng lượng điện tiêu thụ trong ngày đó.
+\fig[.75]{ex83}{Hình cho Bài tập 83. Trục đứng: gigawatt; trục ngang: số giờ kể từ nửa đêm. Nguồn: Cơ quan Thông tin Năng lượng Hoa Kỳ.}
+\Needspace{26\baselineskip}
+\bt{84} Năm 1992, tàu con thoi \textit{Endeavour} được phóng trong sứ mệnh STS-49 để lắp một động cơ đẩy tại cận điểm mới cho một vệ tinh viễn thông Intelsat. Bảng cho biết số liệu vận tốc của tàu từ lúc rời bệ phóng đến khi tách các tên lửa đẩy nhiên liệu rắn.
+
+\noindent(a) Dùng máy tính đồ thị hoặc máy tính để mô hình hóa các số liệu này bằng một đa thức bậc ba.\par
+\noindent(b) Sử dụng mô hình ở câu (a) để ước lượng độ cao mà \textit{Endeavour} đạt được sau khi rời bệ phóng 125 giây.
+\begin{center}\begin{tabular}{p{.56\linewidth}rr}\toprule
+Sự kiện&Thời gian (s)&Vận tốc (ft/s)\\\midrule
+Phóng&0&0\\
+Bắt đầu động tác lăn&10&185\\
+Kết thúc động tác lăn&15&319\\
+Điều chỉnh lực đẩy đến 89\%&20&447\\
+Điều chỉnh lực đẩy đến 67\%&32&742\\
+Điều chỉnh lực đẩy đến 104\%&59&1325\\
+Áp suất động cực đại&62&1445\\
+Tách tên lửa đẩy nhiên liệu rắn&125&4151\\\bottomrule
+\end{tabular}\end{center}
+
+\clearpage
+\section*{Dự án viết — Newton, Leibniz và sự ra đời của giải tích}
+Đôi khi ta đọc thấy rằng những người phát minh ra giải tích là Sir Isaac Newton (1642–1727) và Gottfried Wilhelm Leibniz (1646–1716). Tuy nhiên, ta biết rằng các ý tưởng cơ bản của phép tính tích phân đã được những người Hy Lạp cổ đại như Eudoxus và Archimedes nghiên cứu từ 2500 năm trước; các phương pháp tìm tiếp tuyến đã được Pierre Fermat (1601–1665), Isaac Barrow (1630–1677) và những người khác tiên phong phát triển. Barrow — người giảng dạy tại Cambridge và có ảnh hưởng lớn đến Newton — là người đầu tiên hiểu mối quan hệ ngược nhau giữa phép tính đạo hàm và phép tính tích phân. Điều Newton và Leibniz đã làm là sử dụng mối quan hệ này, dưới dạng Định lý cơ bản của giải tích, để phát triển giải tích thành một ngành toán học có hệ thống. Chính theo nghĩa đó mà cả Newton lẫn Leibniz đều được ghi nhận là những người phát minh ra giải tích.
+
+Hãy tìm kiếm trên Internet để tìm hiểu thêm về đóng góp của hai nhà toán học này, đồng thời tham khảo một hay nhiều tài liệu được liệt kê dưới đây. Viết một bài luận về một trong ba chủ đề sau. Có thể đưa vào những chi tiết tiểu sử, nhưng trọng tâm của báo cáo phải là mô tả tương đối chi tiết các phương pháp và ký hiệu của họ. Đặc biệt, nên tham khảo một trong các tuyển tập tư liệu gốc, trong đó có các đoạn trích từ những công trình nguyên bản của Newton và Leibniz, được dịch từ tiếng Latin sang tiếng Anh.
+\begin{itemize}[leftmargin=1.5em]
+\item Vai trò của Newton trong sự phát triển của giải tích.
+\item Vai trò của Leibniz trong sự phát triển của giải tích.
+\item Cuộc tranh luận giữa những người theo Newton và Leibniz về quyền ưu tiên trong việc phát minh ra giải tích.
+\end{itemize}
+
+\subsection*{Tài liệu tham khảo}
+\begin{enumerate}[leftmargin=1.8em]
+\item Carl Boyer và Uta Merzbach, \textit{A History of Mathematics} (New York: Wiley, 1987), Chương 19.
+\item Carl Boyer, \textit{The History of the Calculus and Its Conceptual Development} (New York: Dover, 1959), Chương V.
+\item C. H. Edwards, \textit{The Historical Development of the Calculus} (New York: Springer-Verlag, 1979), Chương 8 và 9.
+\item Howard Eves, \textit{An Introduction to the History of Mathematics}, ấn bản thứ 6 (New York: Saunders, 1990), Chương 11.
+\item C. C. Gillispie (chủ biên), \textit{Dictionary of Scientific Biography} (New York: Scribner’s, 1974). Xem bài viết về Leibniz của Joseph Hofmann ở Tập VIII và bài viết về Newton của I. B. Cohen ở Tập X.
+\item Victor Katz, \textit{A History of Mathematics: An Introduction} (New York: HarperCollins, 1993), Chương 12.
+\item Morris Kline, \textit{Mathematical Thought from Ancient to Modern Times} (New York: Oxford University Press, 1972), Chương 17.
+\end{enumerate}
+\Needspace{14\baselineskip}
+\subsection*{Các tuyển tập tư liệu gốc}
+\begin{enumerate}[leftmargin=1.8em]
+\item John Fauvel và Jeremy Gray (chủ biên), \textit{The History of Mathematics: A Reader} (London: MacMillan Press, 1987), Chương 12 và 13.
+\item D. E. Smith (chủ biên), \textit{A Sourcebook in Mathematics} (New York: Dover, 1959), Chương V.
+\item D. J. Struik (chủ biên), \textit{A Sourcebook in Mathematics, 1200–1800} (Princeton, NJ: Princeton University Press, 1969), Chương V.
+\end{enumerate}
+\end{document}

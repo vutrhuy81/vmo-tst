@@ -1,0 +1,251 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage{fontspec}\setmainfont{Latin Modern Roman}\setsansfont{DejaVu Sans}
+\usepackage{amsmath,amssymb,graphicx,geometry,enumitem,needspace,longtable,booktabs,fancyhdr,hyperref}
+\geometry{left=28mm,right=23mm,top=24mm,bottom=24mm}
+\hypersetup{unicode=true,colorlinks=true,linkcolor=black,urlcolor=blue,pdftitle={Giải tích — Ôn tập Chương 5}}
+\setlength{\parindent}{1.2em}\setlength{\parskip}{4pt}\setlength{\headheight}{16pt}
+\pagestyle{fancy}\fancyhf{}\fancyhead[L]{\small Chương 5. Tích phân}\fancyhead[R]{\small Ôn tập}\fancyfoot[C]{\thepage}
+\newcommand{\fig}[3][.68]{\begin{center}\begin{minipage}{\linewidth}\centering\includegraphics[width=#1\linewidth]{assets/#2.png}\\{\small #3}\end{minipage}\end{center}}
+\newcommand{\ex}[1]{\par\medskip\noindent\textbf{Ví dụ #1.}\ }
+\newcommand{\sol}{\par\nopagebreak[4]\noindent\textit{Lời giải.}\ }
+\newcommand{\bt}[1]{\par\smallskip\Needspace{5\baselineskip}\noindent\textbf{#1.}\ }
+\newcommand{\group}[1]{\par\medskip\noindent\textbf{#1}\par\nopagebreak[4]}
+\newcommand{\gint}[1]{\left[\!\left[#1\right]\!\right]}
+\allowdisplaybreaks[2]
+\DeclareMathOperator{\sech}{sech}
+\DeclareMathOperator{\csch}{csch}
+\DeclareMathOperator{\arccot}{arccot}
+
+\newcommand{\cc}[1]{\bt{#1}}
+\newcommand{\tf}[1]{\bt{#1}}
+\begin{document}
+\begin{center}{\LARGE\bfseries Ôn tập Chương 5}\end{center}
+
+\section*{Kiểm tra khái niệm}
+\noindent Có thể tìm đáp án phần Kiểm tra khái niệm tại \texttt{StewartCalculus.com}.
+
+\Needspace{14\baselineskip}
+\cc{1} (a) Viết một biểu thức cho tổng Riemann của hàm số $f$. Giải thích ý nghĩa của các ký hiệu được sử dụng.
+\par\noindent(b) Nếu $f(x)\ge0$, tổng Riemann có ý nghĩa hình học gì? Minh họa bằng hình vẽ.
+\par\noindent(c) Nếu $f(x)$ nhận cả giá trị dương lẫn giá trị âm, tổng Riemann có ý nghĩa hình học gì? Minh họa bằng hình vẽ.
+\Needspace{14\baselineskip}
+\cc{2} (a) Viết định nghĩa tích phân xác định của một hàm liên tục từ $a$ đến $b$.
+\par\noindent(b) Tích phân $\int_a^bf(x)\,dx$ có ý nghĩa hình học gì nếu $f(x)\ge0$?
+\par\noindent(c) Tích phân $\int_a^bf(x)\,dx$ có ý nghĩa hình học gì nếu $f(x)$ nhận cả giá trị dương lẫn giá trị âm? Minh họa bằng hình vẽ.
+\cc{3} Phát biểu Quy tắc trung điểm.
+\cc{4} Phát biểu cả hai phần của Định lý cơ bản của giải tích.
+\Needspace{10\baselineskip}
+\cc{5} (a) Phát biểu Định lý về độ biến thiên thuần.
+\par\noindent(b) Nếu $r(t)$ là tốc độ nước chảy vào một hồ chứa thì $\int_{t_1}^{t_2}r(t)\,dt$ biểu diễn điều gì?
+\Needspace{14\baselineskip}
+\cc{6} Giả sử một chất điểm chuyển động qua lại trên một đường thẳng với vận tốc $v(t)$, tính bằng foot mỗi giây, và gia tốc $a(t)$.
+\par\noindent(a) Tích phân $\int_{60}^{120}v(t)\,dt$ có ý nghĩa gì?
+\par\noindent(b) Tích phân $\int_{60}^{120}|v(t)|\,dt$ có ý nghĩa gì?
+\par\noindent(c) Tích phân $\int_{60}^{120}a(t)\,dt$ có ý nghĩa gì?
+\Needspace{11\baselineskip}
+\cc{7} (a) Giải thích ý nghĩa của tích phân bất định $\int f(x)\,dx$.
+\par\noindent(b) Tích phân xác định $\int_a^bf(x)\,dx$ và tích phân bất định $\int f(x)\,dx$ có mối liên hệ gì?
+\cc{8} Giải thích chính xác ý nghĩa của phát biểu: ``Phép tính đạo hàm và phép tính tích phân là hai quá trình ngược nhau.''
+\cc{9} Phát biểu Quy tắc đổi biến. Trong thực hành, sử dụng quy tắc này như thế nào?
+
+\clearpage
+\section*{Câu hỏi đúng–sai}
+Xác định mỗi mệnh đề sau là đúng hay sai. Nếu đúng, hãy giải thích vì sao. Nếu sai, hãy giải thích vì sao hoặc đưa ra một ví dụ bác bỏ mệnh đề.
+
+\tf{1} Nếu $f$ và $g$ liên tục trên $[a,b]$ thì
+\[\int_a^b[f(x)+g(x)]\,dx=\int_a^bf(x)\,dx+\int_a^bg(x)\,dx.\]
+\tf{2} Nếu $f$ và $g$ liên tục trên $[a,b]$ thì
+\[\int_a^b[f(x)g(x)]\,dx=\left(\int_a^bf(x)\,dx\right)\left(\int_a^bg(x)\,dx\right).\]
+\tf{3} Nếu $f$ liên tục trên $[a,b]$ thì
+\[\int_a^b5f(x)\,dx=5\int_a^bf(x)\,dx.\]
+\tf{4} Nếu $f$ liên tục trên $[a,b]$ thì
+\[\int_a^bxf(x)\,dx=x\int_a^bf(x)\,dx.\]
+\tf{5} Nếu $f$ liên tục trên $[a,b]$ và $f(x)\ge0$ thì
+\[\int_a^b\sqrt{f(x)}\,dx=\sqrt{\int_a^bf(x)\,dx}.\]
+\tf{6} $\displaystyle\int_a^bf(x)\,dx=\int_a^bf(z)\,dz$.
+\tf{7} Nếu $f'$ liên tục trên $[1,3]$ thì $\int_1^3f'(v)\,dv=f(3)-f(1)$.
+\tf{8} Nếu $v(t)$ là vận tốc tại thời điểm $t$ của một chất điểm chuyển động trên đường thẳng thì $\int_a^bv(t)\,dt$ là quãng đường đi được trong khoảng thời gian $a\le t\le b$.
+\tf{9} $\displaystyle\int_a^bf'(x)[f(x)]^4\,dx=\frac15[f(x)]^5+C$.
+\tf{10} Nếu $f$ và $g$ khả vi, đồng thời $f(x)\ge g(x)$ với $a<x<b$, thì $f'(x)\ge g'(x)$ với $a<x<b$.
+\tf{11} Nếu $f$ và $g$ liên tục, đồng thời $f(x)\ge g(x)$ với $a\le x\le b$, thì
+\[\int_a^bf(x)\,dx\ge\int_a^bg(x)\,dx.\]
+\tf{12} $\displaystyle\int_{-5}^5(ax^2+bx+c)\,dx=2\int_0^5(ax^2+c)\,dx$.
+\tf{13} Mọi hàm liên tục đều có đạo hàm.
+\tf{14} Mọi hàm liên tục đều có nguyên hàm.
+\tf{15} $\displaystyle\int_0^3e^{x^2}\,dx=\int_0^5e^{x^2}\,dx+\int_5^3e^{x^2}\,dx$.
+\tf{16} Nếu $\int_0^1f(x)\,dx=0$ thì $f(x)=0$ với $0\le x\le1$.
+\tf{17} Nếu $f$ liên tục trên $[a,b]$ thì
+\[\frac{d}{dx}\left(\int_a^bf(x)\,dx\right)=f(x).\]
+\tf{18} Tích phân $\int_0^2(x-x^3)\,dx$ biểu diễn diện tích dưới đường cong $y=x-x^3$ từ 0 đến 2.
+\tf{19} $\displaystyle\int_{-2}^1\frac1{x^4}\,dx=-\frac38$.
+\tf{20} Nếu $f$ gián đoạn tại 0 thì $\int_{-1}^1f(x)\,dx$ không tồn tại.
+
+\clearpage
+\section*{Bài tập}
+\Needspace{25\baselineskip}
+\bt{1} Dùng đồ thị đã cho của $f$ để tìm tổng Riemann với sáu khoảng con. Chọn các điểm lấy mẫu là (a) đầu mút trái và (b) trung điểm. Trong mỗi trường hợp, vẽ hình và giải thích tổng Riemann biểu diễn điều gì.
+\fig[.43]{ex01}{Hình cho Bài tập 1}
+
+\Needspace{24\baselineskip}
+\bt{2} (a) Tính tổng Riemann của
+\[f(x)=x^2-x,\qquad0\le x\le2,\]
+với bốn khoảng con, lấy các điểm mẫu là đầu mút phải. Dùng hình vẽ để giải thích tổng Riemann biểu diễn điều gì.
+\par\noindent(b) Dùng định nghĩa tích phân xác định (với đầu mút phải) để tính giá trị của tích phân
+\[\int_0^2(x^2-x)\,dx.\]
+\noindent(c) Dùng Định lý cơ bản để kiểm tra kết quả câu (b).
+\par\noindent(d) Vẽ hình để giải thích ý nghĩa hình học của tích phân trong câu (b).
+\Needspace{10\baselineskip}
+\bt{3} Tính
+\[\int_0^1\left(x+\sqrt{1-x^2}\right)\,dx\]
+bằng cách giải thích tích phân theo diện tích.
+\Needspace{10\baselineskip}
+\bt{4} Biểu diễn
+\[\lim_{n\to\infty}\sum_{i=1}^n\sin x_i\,\Delta x\]
+thành một tích phân xác định trên đoạn $[0,\pi]$, rồi tính tích phân đó.
+\bt{5} Nếu $\int_0^6f(x)\,dx=10$ và $\int_0^4f(x)\,dx=7$, hãy tìm $\int_4^6f(x)\,dx$.
+\Needspace{13\baselineskip}
+\bt{6} (a) Viết $\int_1^5(x+2x^5)\,dx$ thành giới hạn của các tổng Riemann, lấy các điểm mẫu là đầu mút phải. Dùng một hệ thống đại số máy tính để tính tổng và tính giới hạn.
+\par\noindent(b) Dùng Định lý cơ bản để kiểm tra kết quả câu (a).
+
+\Needspace{24\baselineskip}
+\bt{7} Hình vẽ biểu diễn đồ thị của $f$, $f'$ và $\int_0^xf(t)\,dt$. Xác định từng đồ thị và giải thích lựa chọn.
+\fig[.43]{ex07}{Hình cho Bài tập 7}
+\Needspace{15\baselineskip}
+\bt{8} Tính:
+\[\text{(a)}\quad\int_0^1\frac{d}{dx}(e^{\arctan x})\,dx.\]
+\[\text{(b)}\quad\frac{d}{dx}\int_0^1e^{\arctan x}\,dx.\]
+\[\text{(c)}\quad\frac{d}{dx}\int_0^xe^{\arctan t}\,dt.\]
+\Needspace{19\baselineskip}
+\bt{9} Đồ thị của $f$ gồm ba đoạn thẳng như hình vẽ. Nếu $g(x)=\int_0^xf(t)\,dt$, hãy tìm $g(4)$ và $g'(4)$.
+\fig[.36]{ex09}{Hình cho Bài tập 9}
+\bt{10} Nếu $f$ là hàm số trong Bài tập 9, hãy tìm $g''(4)$.
+
+\Needspace{10\baselineskip}
+\group{11–42} Tính tích phân, nếu tồn tại.
+\bt{11} $\displaystyle\int_{-1}^0(x^2+5x)\,dx$.
+\bt{12} $\displaystyle\int_0^T(x^4-8x+7)\,dx$.
+\bt{13} $\displaystyle\int_0^1(1-x^9)\,dx$.
+\bt{14} $\displaystyle\int_0^1(1-x)^9\,dx$.
+\bt{15} $\displaystyle\int_1^9\frac{\sqrt u-2u^2}{u}\,du$.
+\bt{16} $\displaystyle\int_0^1(\sqrt[4]u+1)^2\,du$.
+\bt{17} $\displaystyle\int_0^1y(y^2+1)^5\,dy$.
+\bt{18} $\displaystyle\int_0^2y^2\sqrt{1+y^3}\,dy$.
+\bt{19} $\displaystyle\int_1^5\frac{dt}{(t-4)^2}$.
+\bt{20} $\displaystyle\int_0^1\sin(3\pi t)\,dt$.
+\bt{21} $\displaystyle\int_0^1v^2\cos(v^3)\,dv$.
+\bt{22} $\displaystyle\int_{-1}^1\frac{\sin x}{1+x^2}\,dx$.
+\bt{23} $\displaystyle\int_{-\pi/4}^{\pi/4}\frac{t^4\tan t}{2+\cos t}\,dt$.
+\bt{24} $\displaystyle\int_{-2}^{-1}\frac{z^2+1}{z}\,dz$.
+\bt{25} $\displaystyle\int\frac{x}{x^2+1}\,dx$.
+\bt{26} $\displaystyle\int\frac{dx}{x^2+1}$.
+\bt{27} $\displaystyle\int\frac{x+2}{\sqrt{x^2+4x}}\,dx$.
+\bt{28} $\displaystyle\int\frac{\csc^2x}{1+\cot x}\,dx$.
+\bt{29} $\displaystyle\int\sin\pi t\cos\pi t\,dt$.
+\bt{30} $\displaystyle\int\sin x\cos(\cos x)\,dx$.
+\bt{31} $\displaystyle\int\frac{e^{\sqrt x}}{\sqrt x}\,dx$.
+\bt{32} $\displaystyle\int\frac{\sin(\ln x)}x\,dx$.
+\bt{33} $\displaystyle\int\tan x\ln(\cos x)\,dx$.
+\bt{34} $\displaystyle\int\frac{x}{\sqrt{1-x^4}}\,dx$.
+\bt{35} $\displaystyle\int\frac{x^3}{1+x^4}\,dx$.
+\bt{36} $\displaystyle\int\sinh(1+4x)\,dx$.
+\bt{37} $\displaystyle\int\frac{\sec\theta\tan\theta}{1+\sec\theta}\,d\theta$.
+\bt{38} $\displaystyle\int_0^{\pi/4}(1+\tan t)^3\sec^2t\,dt$.
+\bt{39} $\displaystyle\int x(1-x)^{2/3}\,dx$.
+\bt{40} $\displaystyle\int\frac{x}{x-3}\,dx$.
+\bt{41} $\displaystyle\int_0^3|x^2-4|\,dx$.
+\bt{42} $\displaystyle\int_0^4|\sqrt x-1|\,dx$.
+
+\Needspace{12\baselineskip}
+\group{43–44} Tính tích phân bất định. Minh họa và kiểm tra tính hợp lý của kết quả bằng cách vẽ đồ thị của cả hàm số và nguyên hàm của nó (lấy $C=0$).
+\bt{43} $\displaystyle\int\frac{\cos x}{\sqrt{1+\sin x}}\,dx$.
+\bt{44} $\displaystyle\int\frac{x^3}{\sqrt{x^2+1}}\,dx$.
+\bt{45} Dùng đồ thị để ước lượng sơ bộ diện tích miền nằm dưới đường cong $y=x\sqrt x$, $0\le x\le4$. Sau đó, tìm diện tích chính xác.
+\bt{46} Vẽ đồ thị hàm số $f(x)=\cos^2x\sin x$ và dùng đồ thị để dự đoán giá trị của tích phân $\int_0^{2\pi}f(x)\,dx$. Sau đó, tính tích phân để kiểm tra dự đoán.
+\bt{47} Tìm diện tích dưới đồ thị $y=x^2+5$ và phía trên trục $x$, từ $x=0$ đến $x=4$.
+\bt{48} Tìm diện tích dưới đồ thị $y=\sin x$ và phía trên trục $x$, từ $x=0$ đến $x=\pi/2$.
+
+\Needspace{29\baselineskip}
+\group{49–50} Các miền $A$, $B$ và $C$ giới hạn bởi đồ thị của $f$ và trục $x$ có diện tích lần lượt là 3, 2 và 1. Tính tích phân.
+\fig[.67]{ex49_50}{Hình cho Bài tập 49–50}
+\bt{49} (a) $\displaystyle\int_1^5f(x)\,dx$.\par\noindent(b) $\displaystyle\int_1^5|f(x)|\,dx$.
+\bt{50} (a) $\displaystyle\int_1^4f(x)\,dx+\int_3^5f(x)\,dx$.\par\noindent(b) $\displaystyle\int_1^{3}2f(x)\,dx+\int_3^{5}6f(x)\,dx$.
+
+\Needspace{10\baselineskip}
+\group{51–56} Tìm đạo hàm của hàm số.
+\bt{51} $\displaystyle F(x)=\int_0^x\frac{t^2}{1+t^3}\,dt$.
+\bt{52} $\displaystyle F(x)=\int_x^1\sqrt{t+\sin t}\,dt$.
+\bt{53} $\displaystyle g(x)=\int_0^{x^4}\cos(t^2)\,dt$.
+\bt{54} $\displaystyle g(x)=\int_1^{\sin x}\frac{1-t^2}{1+t^4}\,dt$.
+\bt{55} $\displaystyle y=\int_{\sqrt x}^x\frac{e^t}t\,dt$.
+\bt{56} $\displaystyle y=\int_{2x}^{3x+1}\sin(t^4)\,dt$.
+
+\Needspace{10\baselineskip}
+\group{57–58} Dùng Tính chất 8 của tích phân để ước lượng giá trị tích phân.
+\bt{57} $\displaystyle\int_1^3\sqrt{x^2+3}\,dx$.
+\bt{58} $\displaystyle\int_2^4\frac1{x^3+2}\,dx$.
+
+\Needspace{10\baselineskip}
+\group{59–62} Dùng các tính chất của tích phân để kiểm tra bất đẳng thức.
+\bt{59} $\displaystyle\int_0^1x^2\cos x\,dx\le\frac13$.
+\bt{60} $\displaystyle\int_{\pi/4}^{\pi/2}\frac{\sin x}{x}\,dx\le\frac{\sqrt2}{2}$.
+\bt{61} $\displaystyle\int_0^1e^x\cos x\,dx\le e-1$.
+\bt{62} $\displaystyle\int_0^1x\arcsin x\,dx\le\frac\pi4$.
+\bt{63} Dùng Quy tắc trung điểm với $n=6$ để tính gần đúng $\int_0^3\sin(x^3)\,dx$. Làm tròn đến bốn chữ số thập phân.
+\bt{64} Một chất điểm chuyển động trên đường thẳng với hàm vận tốc $v(t)=t^2-t$, trong đó $v$ tính bằng mét mỗi giây. Tìm (a) độ dời và (b) quãng đường chất điểm đi được trong khoảng thời gian $[0,5]$.
+\bt{65} Gọi $r(t)$ là tốc độ tiêu thụ dầu của thế giới, trong đó $t$ tính bằng năm, bắt đầu tại $t=0$ vào ngày 1 tháng 1 năm 2000, và $r(t)$ tính bằng thùng mỗi năm. Tích phân $\int_{15}^{20}r(t)\,dt$ biểu diễn điều gì?
+\Needspace{20\baselineskip}
+\bt{66} Một máy đo tốc độ bằng radar được dùng để ghi lại tốc độ của một vận động viên chạy tại các thời điểm trong bảng. Dùng Quy tắc trung điểm để ước lượng quãng đường vận động viên chạy được trong 5 giây đó.
+\begin{center}\begin{tabular}{rrrr}\toprule
+$t$ (s)&$v$ (m/s)&$t$ (s)&$v$ (m/s)\\\midrule
+0&0&3.0&10.51\\
+0.5&4.67&3.5&10.67\\
+1.0&7.34&4.0&10.76\\
+1.5&8.86&4.5&10.81\\
+2.0&9.73&5.0&10.81\\
+2.5&10.22&&\\\bottomrule
+\end{tabular}\end{center}
+
+\Needspace{22\baselineskip}
+\bt{67} Một đàn ong mật tăng với tốc độ $r(t)$ con mỗi tuần, trong đó đồ thị của $r$ được cho trong hình. Dùng Quy tắc trung điểm với sáu khoảng con để ước lượng số ong tăng thêm trong 24 tuần đầu tiên.
+\fig[.68]{ex67}{Hình cho Bài tập 67. Trục ngang: $t$ (tuần).}
+\Needspace{15\baselineskip}
+\bt{68} Cho
+\[f(x)=\begin{cases}-x-1&\text{nếu }-3\le x\le0,\\[3pt]-\sqrt{1-x^2}&\text{nếu }0\le x\le1.\end{cases}\]
+Tính $\int_{-3}^1f(x)\,dx$ bằng cách giải thích tích phân như một hiệu các diện tích.
+\Needspace{10\baselineskip}
+\bt{69} Nếu $f$ liên tục và $\int_0^2f(x)\,dx=6$, hãy tính
+\[\int_0^{\pi/2}f(2\sin\theta)\cos\theta\,d\theta.\]
+\Needspace{26\baselineskip}
+\bt{70} Hàm Fresnel $S(x)=\int_0^x\sin(\frac12\pi t^2)\,dt$ đã được giới thiệu ở §5.3. Fresnel còn dùng hàm số
+\[C(x)=\int_0^x\cos\left(\frac12\pi t^2\right)\,dt\]
+trong lý thuyết nhiễu xạ sóng ánh sáng của ông.
+\par\noindent(a) $C$ đồng biến trên những khoảng nào?
+\par\noindent(b) Đồ thị của $C$ lõm lên trên những khoảng nào?
+\par\noindent(c) Dùng đồ thị để giải phương trình sau, chính xác đến hai chữ số thập phân:
+\[\int_0^x\cos\left(\frac12\pi t^2\right)\,dt=0.7.\]
+\noindent(d) Vẽ đồ thị của $C$ và $S$ trên cùng một màn hình. Hai đồ thị này có quan hệ như thế nào?
+
+\bt{71} Ước lượng giá trị của số $c$ sao cho diện tích dưới đường cong $y=\sinh(cx)$, từ $x=0$ đến $x=1$, bằng 1.
+\Needspace{20\baselineskip}
+\bt{72} Giả sử nhiệt độ ban đầu trong một thanh dài, mảnh đặt dọc trục $x$ là $C/(2a)$ nếu $|x|\le a$ và bằng 0 nếu $|x|>a$. Có thể chứng minh rằng nếu hệ số khuếch tán nhiệt của thanh là $k$ thì nhiệt độ của thanh tại điểm $x$ ở thời điểm $t$ là
+\[T(x,t)=\frac{C}{a\sqrt{4\pi kt}}\int_0^a e^{-(x-u)^2/(4kt)}\,du.\]
+Để tìm phân bố nhiệt độ do một điểm nóng ban đầu tập trung tại gốc tọa độ tạo ra, ta cần tính $\lim_{a\to0}T(x,t)$. Dùng quy tắc l’Hospital để tìm giới hạn này.
+\Needspace{13\baselineskip}
+\bt{73} Nếu $f$ là một hàm liên tục thỏa mãn
+\[\int_1^xf(t)\,dt=(x-1)e^{2x}+\int_1^xe^{-t}f(t)\,dt\]
+với mọi $x$, hãy tìm một công thức tường minh cho $f(x)$.
+\Needspace{10\baselineskip}
+\bt{74} Giả sử $h$ là một hàm số thỏa mãn $h(1)=-2$, $h'(1)=2$, $h''(1)=3$, $h(2)=6$, $h'(2)=5$, $h''(2)=13$ và $h''$ liên tục khắp nơi. Tính $\int_1^2h''(u)\,du$.
+\Needspace{11\baselineskip}
+\bt{75} Nếu $f'$ liên tục trên $[a,b]$, chứng minh rằng
+\[2\int_a^bf(x)f'(x)\,dx=[f(b)]^2-[f(a)]^2.\]
+\Needspace{10\baselineskip}
+\bt{76} Tìm
+\[\lim_{h\to0}\frac1h\int_2^{2+h}\sqrt{1+t^3}\,dt.\]
+\Needspace{11\baselineskip}
+\bt{77} Nếu $f$ liên tục trên $[0,1]$, chứng minh rằng
+\[\int_0^1f(x)\,dx=\int_0^1f(1-x)\,dx.\]
+\Needspace{11\baselineskip}
+\bt{78} Tính
+\[\lim_{n\to\infty}\frac1n\left[\left(\frac1n\right)^9+\left(\frac2n\right)^9+\left(\frac3n\right)^9+\cdots+\left(\frac nn\right)^9\right].\]
+\end{document}

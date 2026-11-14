@@ -1,0 +1,140 @@
+{
+  "exercises": [
+    {
+      "number": 1,
+      "content": "<p><strong>1.</strong> </p><p>(a) Đọc các giá trị từ đồ thị <span class=\"math inline\">\\(f\\)</span> đã cho, dùng năm hình chữ nhật để tìm một ước lượng dưới và một ước lượng trên cho diện tích dưới đồ thị từ <span class=\"math inline\">\\(x=0\\)</span> đến <span class=\"math inline\">\\(x=10\\)</span>. Trong mỗi trường hợp, phác thảo các hình chữ nhật được dùng.<br>(b) Tìm các ước lượng mới bằng mười hình chữ nhật trong mỗi trường hợp. <p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-5-1-bf26edcf/ex01.png\" alt=\"5-1 ex01\" loading=\"lazy\"><br><span>Hình cho Bài tập 1</span></p>"
+    },
+    {
+      "number": 2,
+      "content": "<p><strong>2.</strong> </p><p>(a) Dùng sáu hình chữ nhật để tìm từng loại ước lượng sau cho diện tích dưới đồ thị <span class=\"math inline\">\\(f\\)</span> từ <span class=\"math inline\">\\(x=0\\)</span> đến <span class=\"math inline\">\\(x=12\\)</span>:<br>(i) <span class=\"math inline\">\\(L_6\\)</span> (điểm lấy mẫu là đầu mút trái);<br>(ii) <span class=\"math inline\">\\(R_6\\)</span> (điểm lấy mẫu là đầu mút phải);<br>(iii) <span class=\"math inline\">\\(M_6\\)</span> (điểm lấy mẫu là trung điểm).<br>(b) <span class=\"math inline\">\\(L_6\\)</span> là ước lượng thiếu hay thừa so với diện tích thực?<br>(c) <span class=\"math inline\">\\(R_6\\)</span> là ước lượng thiếu hay thừa so với diện tích thực?<br>(d) Trong các số <span class=\"math inline\">\\(L_6,R_6,M_6\\)</span>, số nào cho ước lượng tốt nhất? Giải thích. <p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-5-1-bf26edcf/ex02.png\" alt=\"5-1 ex02\" loading=\"lazy\"><br><span>Hình cho Bài tập 2</span></p>"
+    },
+    {
+      "number": 3,
+      "content": "<p><strong>3.</strong> </p><p>(a) Ước lượng diện tích dưới đồ thị <span class=\"math inline\">\\(f(x)=1/x\\)</span> từ <span class=\"math inline\">\\(x=1\\)</span> đến <span class=\"math inline\">\\(x=2\\)</span> bằng bốn hình chữ nhật xấp xỉ, dùng đầu mút phải. Phác thảo đồ thị và các hình chữ nhật. Ước lượng của bạn là thiếu hay thừa?<br>(b) Lặp lại phần (a) với đầu mút trái.</p>"
+    },
+    {
+      "number": 4,
+      "content": "<p><strong>4.</strong> </p><p>(a) Ước lượng diện tích dưới đồ thị <span class=\"math inline\">\\(f(x)=\\sin x\\)</span> từ <span class=\"math inline\">\\(x=0\\)</span> đến <span class=\"math inline\">\\(x=\\pi/2\\)</span> bằng bốn hình chữ nhật xấp xỉ, dùng đầu mút phải. Phác thảo đồ thị và các hình chữ nhật. Ước lượng của bạn là thiếu hay thừa?<br>(b) Lặp lại phần (a) với đầu mút trái.</p>"
+    },
+    {
+      "number": 5,
+      "content": "<p><strong>5.</strong> </p><p>(a) Ước lượng diện tích dưới đồ thị <span class=\"math inline\">\\(f(x)=1+x^2\\)</span> từ <span class=\"math inline\">\\(x=-1\\)</span> đến <span class=\"math inline\">\\(x=2\\)</span> bằng ba hình chữ nhật, dùng đầu mút phải. Sau đó cải thiện ước lượng bằng sáu hình chữ nhật. Phác thảo đường cong và các hình chữ nhật xấp xỉ.<br>(b) Lặp lại phần (a) với đầu mút trái.<br>(c) Lặp lại phần (a) với trung điểm.<br>(d) Từ các hình phác thảo ở (a)–(c), ước lượng nào có vẻ chính xác nhất?</p>"
+    },
+    {
+      "number": 6,
+      "content": "<p><strong>6.</strong> </p><p>(a) Vẽ đồ thị hàm số <span class=\"math inline\">\\(f(x)=e^{x-x^2}\\)</span>, <span class=\"math inline\">\\(0\\le x\\le2\\)</span>.<br>(b) Ước lượng diện tích dưới đồ thị <span class=\"math inline\">\\(f\\)</span> bằng bốn hình chữ nhật xấp xỉ, chọn điểm lấy mẫu là (i) đầu mút phải và (ii) trung điểm. Trong mỗi trường hợp, phác thảo đường cong và các hình chữ nhật.<br>(c) Cải thiện các ước lượng ở (b) bằng tám hình chữ nhật.</p>"
+    },
+    {
+      "number": 7,
+      "content": "<p><strong>7.</strong> </p><p>Tính các tổng trên và tổng dưới của <span class=\"math inline\">\\(f(x)=6-x^2\\)</span>, <span class=\"math inline\">\\(-2\\le x\\le2\\)</span>, với <span class=\"math inline\">\\(n=2,4,8\\)</span>. Minh họa bằng các hình tương tự Hình 14.</p>"
+    },
+    {
+      "number": 8,
+      "content": "<p><strong>8.</strong> </p><p>Tính các tổng trên và tổng dưới của <span class=\"math display\">\\[f(x)=1+\\cos(x/2),\\qquad-\\pi\\le x\\le\\pi,\\]</span> với <span class=\"math inline\">\\(n=3,4,6\\)</span>. Minh họa bằng các hình tương tự Hình 14.</p>"
+    },
+    {
+      "number": 9,
+      "content": "<p><strong>9.</strong> </p><p>Tốc độ của một nữ vận động viên chạy tăng đều trong ba giây đầu của cuộc đua. Bảng cho tốc độ tại các thời điểm cách nhau nửa giây. Tìm các ước lượng dưới và trên cho quãng đường cô ấy đi được trong ba giây này. <table><tbody><tr><td>\\(t\\) (s)</td><td>0</td><td>0.5</td><td>1.0</td><td>1.5</td><td>2.0</td><td>2.5</td><td>3.0</td></tr><tr><td>\\(v\\) (ft/s)</td><td>0</td><td>6.2</td><td>10.8</td><td>14.9</td><td>18.1</td><td>19.4</td><td>20.2</td></tr></tbody></table>"
+    },
+    {
+      "number": 10,
+      "content": "<p><strong>10.</strong> </p><p>Bảng cho các số đọc đồng hồ tốc độ cách nhau 10 giây trong một phút của một xe đua tại trường đua Daytona International Speedway, Florida.<br>(a) Ước lượng quãng đường xe đi được trong thời gian này bằng vận tốc đầu mỗi khoảng thời gian.<br>(b) Đưa ra một ước lượng khác bằng vận tốc cuối mỗi khoảng.<br>(c) Các ước lượng ở (a), (b) có phải là ước lượng trên và dưới không? Giải thích. <table><tbody><tr><td>Thời gian (s)</td><td>Vận tốc (mi/h)</td></tr><tr><td>0</td><td>182.9</td></tr><tr><td>10</td><td>168.0</td></tr><tr><td>20</td><td>106.6</td></tr><tr><td>30</td><td>99.8</td></tr><tr><td>40</td><td>124.5</td></tr><tr><td>50</td><td>176.1</td></tr><tr><td>60</td><td>175.6</td></tr></tbody></table>"
+    },
+    {
+      "number": 11,
+      "content": "<p><strong>11.</strong> </p><p>Dầu rò rỉ từ một bồn với lưu lượng <span class=\"math inline\">\\(r(t)\\)</span> lít trên giờ. Lưu lượng giảm theo thời gian; bảng cho các giá trị cách nhau hai giờ. Tìm các ước lượng dưới và trên cho tổng lượng dầu đã rò rỉ. <table><tbody><tr><td>\\(t\\) (h)</td><td>0</td><td>2</td><td>4</td><td>6</td><td>8</td><td>10</td></tr><tr><td>\\(r(t)\\) (L/h)</td><td>8.7</td><td>7.6</td><td>6.8</td><td>6.2</td><td>5.7</td><td>5.3</td></tr></tbody></table>"
+    },
+    {
+      "number": 12,
+      "content": "<p><strong>12.</strong> </p><p>Khi ước lượng quãng đường từ dữ liệu vận tốc, đôi khi cần dùng các thời điểm <span class=\"math inline\">\\(t_0,t_1,t_2,t_3,\\ldots\\)</span> không cách đều nhau. Ta vẫn có thể ước lượng bằng các khoảng thời gian <span class=\"math inline\">\\(\\Delta t_i=t_i-t_{i-1}\\)</span>. Chẳng hạn, năm 1992, tàu con thoi <em>Endeavour</em> được phóng trong sứ mệnh STS-49 để lắp một động cơ đẩy tại cận điểm mới cho vệ tinh thông tin Intelsat. Bảng do NASA cung cấp cho dữ liệu vận tốc của tàu từ lúc rời bệ đến khi tách các tên lửa đẩy nhiên liệu rắn. Dùng dữ liệu để ước lượng độ cao của <em>Endeavour</em> so với bề mặt Trái Đất sau 62 giây kể từ lúc phóng. <table><tbody><tr><td>Sự kiện</td><td>Thời gian (s)</td><td>Vận tốc (ft/s)</td></tr><tr><td>Phóng</td><td>0</td><td>0</td></tr><tr><td>Bắt đầu thao tác xoay quanh trục dọc</td><td>10</td><td>185</td></tr><tr><td>Kết thúc thao tác xoay quanh trục dọc</td><td>15</td><td>319</td></tr><tr><td>Điều chỉnh lực đẩy về 89%</td><td>20</td><td>447</td></tr><tr><td>Điều chỉnh lực đẩy về 67%</td><td>32</td><td>742</td></tr><tr><td>Điều chỉnh lực đẩy lên 104%</td><td>59</td><td>1325</td></tr><tr><td>Áp suất động cực đại</td><td>62</td><td>1445</td></tr><tr><td>Tách tên lửa đẩy nhiên liệu rắn</td><td>125</td><td>4151</td></tr></tbody></table>"
+    },
+    {
+      "number": 13,
+      "content": "<p><strong>13.</strong> </p><p>Hình vẽ cho đồ thị vận tốc của một ô tô đang phanh. Dùng đồ thị để ước lượng quãng đường ô tô đi được trong thời gian phanh. <p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-5-1-bf26edcf/ex13.png\" alt=\"5-1 ex13\" loading=\"lazy\"><br><span>Hình cho Bài tập 13. Trục thời gian tính bằng giây.</span></p>"
+    },
+    {
+      "number": 14,
+      "content": "<p><strong>14.</strong> </p><p>Hình vẽ cho đồ thị vận tốc của một ô tô tăng tốc từ trạng thái nghỉ đến 120 km/h trong 30 giây. Ước lượng quãng đường ô tô đi được trong thời gian này. <p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-5-1-bf26edcf/ex14.png\" alt=\"5-1 ex14\" loading=\"lazy\"><br><span>Hình cho Bài tập 14. Trục thời gian tính bằng giây.</span></p>"
+    },
+    {
+      "number": 15,
+      "content": "<p><strong>15.</strong> </p><p>Ở một người mắc bệnh sởi, mức vi rút <span class=\"math inline\">\\(N\\)</span> (đo bằng số tế bào nhiễm trên mỗi mL huyết tương) đạt mật độ cực đại vào khoảng <span class=\"math inline\">\\(t=12\\)</span> ngày (khi phát ban xuất hiện), rồi giảm khá nhanh do đáp ứng miễn dịch. Diện tích dưới đồ thị <span class=\"math inline\">\\(N(t)\\)</span> từ <span class=\"math inline\">\\(t=0\\)</span> đến <span class=\"math inline\">\\(t=12\\)</span> (như hình) bằng tổng mức nhiễm cần thiết để xuất hiện triệu chứng (đo bằng mật độ tế bào nhiễm nhân thời gian). Hàm <span class=\"math inline\">\\(N\\)</span> được mô hình hóa bởi <span class=\"math display\">\\[f(t)=-t(t-21)(t+1).\\]</span> Dùng mô hình này với sáu khoảng con và các trung điểm của chúng để ước lượng tổng mức nhiễm cần thiết để xuất hiện triệu chứng sởi. <p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-5-1-bf26edcf/ex15.png\" alt=\"5-1 ex15\" loading=\"lazy\"><br><span>Hình cho Bài tập 15. Trục thời gian tính bằng ngày.</span></p><p><em>Nguồn:</em> J. M. Heffernan và cộng sự, “An In-Host Model of Acute Infection: Measles as a Case Study,” <em>Theoretical Population Biology</em> 73 (2006): 134–47.</p>"
+    },
+    {
+      "number": 16,
+      "content": "<p><strong>16.</strong> Dùng Định nghĩa 2 để tìm biểu thức diện tích dưới đồ thị f dưới dạng một giới hạn. Không tính giới hạn. </p><p><span class=\"math inline\">\\(f(x)=x^2e^x\\)</span>,   <span class=\"math inline\">\\(0\\le x\\le4\\)</span>.</p>"
+    },
+    {
+      "number": 17,
+      "content": "<p><strong>17.</strong> Dùng Định nghĩa 2 để tìm biểu thức diện tích dưới đồ thị f dưới dạng một giới hạn. Không tính giới hạn. </p><p><span class=\"math inline\">\\(f(x)=2+\\sin^2x\\)</span>,   <span class=\"math inline\">\\(0\\le x\\le\\pi\\)</span>.</p>"
+    },
+    {
+      "number": 18,
+      "content": "<p><strong>18.</strong> Dùng Định nghĩa 2 để tìm biểu thức diện tích dưới đồ thị f dưới dạng một giới hạn. Không tính giới hạn. </p><p><span class=\"math inline\">\\(f(x)=x+\\ln x\\)</span>,   <span class=\"math inline\">\\(3\\le x\\le8\\)</span>.</p>"
+    },
+    {
+      "number": 19,
+      "content": "<p><strong>19.</strong> Dùng Định nghĩa 2 để tìm biểu thức diện tích dưới đồ thị f dưới dạng một giới hạn. Không tính giới hạn. </p><p><span class=\"math inline\">\\(f(x)=x\\sqrt{x^3+8}\\)</span>,   <span class=\"math inline\">\\(1\\le x\\le5\\)</span>."
+    },
+    {
+      "number": 20,
+      "content": "<p><strong>20.</strong> Xác định một miền có diện tích bằng giới hạn đã cho. Không tính giới hạn. </p><p><span class=\"math inline\">\\(\\displaystyle\\lim_{n\\to\\infty}\\sum_{i=1}^n\\frac1n\\left(\\frac in\\right)^3\\)</span>.</p>"
+    },
+    {
+      "number": 21,
+      "content": "<p><strong>21.</strong> Xác định một miền có diện tích bằng giới hạn đã cho. Không tính giới hạn. </p><p><span class=\"math inline\">\\(\\displaystyle\\lim_{n\\to\\infty}\\sum_{i=1}^n\\frac2n\\,\\frac1{1+(2i/n)}\\)</span>.</p>"
+    },
+    {
+      "number": 22,
+      "content": "<p><strong>22.</strong> Xác định một miền có diện tích bằng giới hạn đã cho. Không tính giới hạn. </p><p><span class=\"math inline\">\\(\\displaystyle\\lim_{n\\to\\infty}\\sum_{i=1}^n\\frac3n\\sqrt{1+\\frac{3i}n}\\)</span>.</p>"
+    },
+    {
+      "number": 23,
+      "content": "<p><strong>23.</strong> Xác định một miền có diện tích bằng giới hạn đã cho. Không tính giới hạn. </p><p><span class=\"math inline\">\\(\\displaystyle\\lim_{n\\to\\infty}\\sum_{i=1}^n\\frac\\pi{4n}\\tan\\frac{i\\pi}{4n}\\)</span>.</p>"
+    },
+    {
+      "number": 24,
+      "content": "<p><strong>24.</strong> </p><p>(a) Dùng Định nghĩa 2 để biểu diễn diện tích dưới đường cong <span class=\"math inline\">\\(y=x^3\\)</span> từ 0 đến 1 dưới dạng một giới hạn.<br>(b) Công thức sau cho tổng lập phương của <span class=\"math inline\">\\(n\\)</span> số nguyên đầu tiên được chứng minh ở Phụ lục E. Dùng nó để tính giới hạn ở phần (a). <span class=\"math display\">\\[1^3+2^3+3^3+\\cdots+n^3=\\left[\\frac{n(n+1)}2\\right]^2.\\]</span></p>"
+    },
+    {
+      "number": 25,
+      "content": "<p><strong>25.</strong> </p><p>Gọi <span class=\"math inline\">\\(A\\)</span> là diện tích dưới đồ thị của một hàm số liên tục, đồng biến <span class=\"math inline\">\\(f\\)</span> từ <span class=\"math inline\">\\(a\\)</span> đến <span class=\"math inline\">\\(b\\)</span>; <span class=\"math inline\">\\(L_n,R_n\\)</span> lần lượt là các xấp xỉ của <span class=\"math inline\">\\(A\\)</span> bằng <span class=\"math inline\">\\(n\\)</span> đoạn con, dùng đầu mút trái và phải.<br>(a) <span class=\"math inline\">\\(A,L_n,R_n\\)</span> liên hệ với nhau như thế nào?<br>(b) Chứng minh <span class=\"math display\">\\[R_n-L_n=\\frac{b-a}n[f(b)-f(a)].\\]</span> Sau đó vẽ hình minh họa đẳng thức này bằng cách chỉ ra rằng <span class=\"math inline\">\\(n\\)</span> hình chữ nhật biểu diễn <span class=\"math inline\">\\(R_n-L_n\\)</span> có thể ghép lại thành một hình chữ nhật duy nhất, có diện tích bằng vế phải.<br>(c) Suy ra <span class=\"math display\">\\[R_n-A&lt;\\frac{b-a}n[f(b)-f(a)].\\]</span></p>"
+    },
+    {
+      "number": 26,
+      "content": "<p><strong>26.</strong> </p><p>Nếu <span class=\"math inline\">\\(A\\)</span> là diện tích dưới đường cong <span class=\"math inline\">\\(y=e^x\\)</span> từ 1 đến 3, dùng Bài tập 25 để tìm một giá trị <span class=\"math inline\">\\(n\\)</span> sao cho <span class=\"math inline\">\\(R_n-A&lt;0.0001\\)</span>."
+    },
+    {
+      "number": 27,
+      "content": "<p><strong>27.</strong> Tính tổng diện tích các hình chữ nhật xấp xỉ với các đoạn con bằng nhau, dùng đầu mút phải, cho n=10,30,50,100. Sau đó dự đoán diện tích chính xác. </p><p>Miền dưới <span class=\"math inline\">\\(y=x^4\\)</span> từ 0 đến 1.</p>"
+    },
+    {
+      "number": 28,
+      "content": "<p><strong>28.</strong> Tính tổng diện tích các hình chữ nhật xấp xỉ với các đoạn con bằng nhau, dùng đầu mút phải, cho n=10,30,50,100. Sau đó dự đoán diện tích chính xác. </p><p>Miền dưới <span class=\"math inline\">\\(y=\\cos x\\)</span> từ 0 đến <span class=\"math inline\">\\(\\pi/2\\)</span>."
+    },
+    {
+      "number": 29,
+      "content": "<p><strong>29.</strong> Dùng các tổng trái và tổng phải của các hình chữ nhật xấp xỉ.  Dùng tổng trái và tổng phải theo yêu cầu chung của nhóm Bài tập 29–30.</p><p>Cho <span class=\"math inline\">\\(f(x)=1/(x^2+1)\\)</span>, <span class=\"math inline\">\\(0\\le x\\le1\\)</span>.<br>(a) Tìm các tổng trái và phải với <span class=\"math inline\">\\(n=10,30,50\\)</span>.<br>(b) Minh họa bằng cách vẽ các hình chữ nhật ở (a).<br>(c) Chứng minh diện tích chính xác dưới đồ thị <span class=\"math inline\">\\(f\\)</span> nằm giữa 0.780 và 0.791.</p>"
+    },
+    {
+      "number": 30,
+      "content": "<p><strong>30.</strong> Dùng các tổng trái và tổng phải của các hình chữ nhật xấp xỉ.  Dùng tổng trái và tổng phải theo yêu cầu chung của nhóm Bài tập 29–30.</p><p>Cho <span class=\"math inline\">\\(f(x)=\\ln x\\)</span>, <span class=\"math inline\">\\(1\\le x\\le4\\)</span>.<br>(a) Tìm các tổng trái và phải với <span class=\"math inline\">\\(n=10,30,50\\)</span>.<br>(b) Minh họa bằng cách vẽ các hình chữ nhật ở (a).<br>(c) Chứng minh diện tích chính xác dưới đồ thị <span class=\"math inline\">\\(f\\)</span> nằm giữa 2.50 và 2.59.</p>"
+    },
+    {
+      "number": 31,
+      "content": "<p><strong>31.</strong> </p><p>(a) Biểu diễn diện tích dưới đường cong <span class=\"math inline\">\\(y=x^5\\)</span> từ 0 đến 2 dưới dạng một giới hạn.<br>(b) Dùng một hệ thống đại số máy tính để tìm tổng trong biểu thức ở (a).<br>(c) Tính giới hạn ở (a).</p>"
+    },
+    {
+      "number": 32,
+      "content": "<p><strong>32.</strong> </p><p>Tìm diện tích chính xác của miền dưới đồ thị <span class=\"math inline\">\\(y=e^{-x}\\)</span> từ 0 đến 2, bằng cách dùng một hệ thống đại số máy tính để tính tổng, rồi tính giới hạn trong Ví dụ 3(a). So sánh kết quả với ước lượng ở Ví dụ 3(b).</p>"
+    },
+    {
+      "number": 33,
+      "content": "<p><strong>33.</strong> </p><p>Tìm diện tích chính xác dưới đường cong cosin <span class=\"math inline\">\\(y=\\cos x\\)</span> từ <span class=\"math inline\">\\(x=0\\)</span> đến <span class=\"math inline\">\\(x=b\\)</span>, với <span class=\"math inline\">\\(0&lt;b&lt;\\pi/2\\)</span>. (Dùng một hệ thống đại số máy tính để tính cả tổng lẫn giới hạn.) Đặc biệt, diện tích bằng bao nhiêu nếu <span class=\"math inline\">\\(b=\\pi/2\\)</span>?</p>"
+    },
+    {
+      "number": 34,
+      "content": "<p><strong>34.</strong> </p><p>(a) Gọi <span class=\"math inline\">\\(A_n\\)</span> là diện tích của một đa giác có <span class=\"math inline\">\\(n\\)</span> cạnh bằng nhau nội tiếp đường tròn bán kính <span class=\"math inline\">\\(r\\)</span>. Chia đa giác thành <span class=\"math inline\">\\(n\\)</span> tam giác bằng nhau có góc ở tâm <span class=\"math inline\">\\(2\\pi/n\\)</span>, chứng minh <span class=\"math display\">\\[A_n=\\frac12nr^2\\sin\\frac{2\\pi}n.\\]</span> (b) Chứng minh <span class=\"math inline\">\\(\\displaystyle\\lim_{n\\to\\infty}A_n=\\pi r^2\\)</span>. [Gợi ý: Dùng Công thức 3.3.5.]</p>"
+    }
+  ]
+}
