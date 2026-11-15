@@ -2,19 +2,19 @@
   "exercises": [
     {
       "number": 1,
-      "content": "<p><strong>1.</strong></p>\n<p><em>Yêu cầu chung (1–4):</em> Một khối được tạo thành bằng cách quay miền tô màu quanh đường thẳng đã chỉ định.</p>\n<p>(a) Phác họa khối và một hình đĩa hoặc hình vành khăn điển hình.</p>\n<p>(b) Thiết lập một tích phân biểu diễn thể tích của khối.</p>\n<p>(c) Tính tích phân để tìm thể tích của khối.</p>\n<p>Quay quanh trục <span class=\"math inline\">\\(x\\)</span>.</p>\n<div class=\"center\">\n<p><strong>[Hình ex01 — chưa có tệp ảnh]</strong> Hình cho Bài tập 1</p>\n</div>\n"
+      "content": "<p><strong>1.</strong></p>\n<p><em>Yêu cầu chung (1–4):</em> Một khối được tạo thành bằng cách quay miền tô màu quanh đường thẳng đã chỉ định.</p>\n<p>(a) Phác họa khối và một hình đĩa hoặc hình vành khăn điển hình.</p>\n<p>(b) Thiết lập một tích phân biểu diễn thể tích của khối.</p>\n<p>(c) Tính tích phân để tìm thể tích của khối.</p>\n<p>Quay quanh trục <span class=\"math inline\">\\(x\\)</span>.</p>\n<div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-6-2-295a476f/ex01.png\" alt=\"image\" /><br />\nHình cho Bài tập 1</p>\n</div>\n"
     },
     {
       "number": 2,
-      "content": "<p><strong>2.</strong></p>\n<p><em>Yêu cầu chung (1–4):</em> Một khối được tạo thành bằng cách quay miền tô màu quanh đường thẳng đã chỉ định.</p>\n<p>(a) Phác họa khối và một hình đĩa hoặc hình vành khăn điển hình.</p>\n<p>(b) Thiết lập một tích phân biểu diễn thể tích của khối.</p>\n<p>(c) Tính tích phân để tìm thể tích của khối.</p>\n<p>Quay quanh trục <span class=\"math inline\">\\(x\\)</span>.</p>\n<div class=\"center\">\n<p><strong>[Hình ex02 — chưa có tệp ảnh]</strong> Hình cho Bài tập 2</p>\n</div>\n"
+      "content": "<p><strong>2.</strong></p>\n<p><em>Yêu cầu chung (1–4):</em> Một khối được tạo thành bằng cách quay miền tô màu quanh đường thẳng đã chỉ định.</p>\n<p>(a) Phác họa khối và một hình đĩa hoặc hình vành khăn điển hình.</p>\n<p>(b) Thiết lập một tích phân biểu diễn thể tích của khối.</p>\n<p>(c) Tính tích phân để tìm thể tích của khối.</p>\n<p>Quay quanh trục <span class=\"math inline\">\\(x\\)</span>.</p>\n<div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-6-2-295a476f/ex02.png\" alt=\"image\" /><br />\nHình cho Bài tập 2</p>\n</div>\n"
     },
     {
       "number": 3,
-      "content": "<p><strong>3.</strong></p>\n<p><em>Yêu cầu chung (1–4):</em> Một khối được tạo thành bằng cách quay miền tô màu quanh đường thẳng đã chỉ định.</p>\n<p>(a) Phác họa khối và một hình đĩa hoặc hình vành khăn điển hình.</p>\n<p>(b) Thiết lập một tích phân biểu diễn thể tích của khối.</p>\n<p>(c) Tính tích phân để tìm thể tích của khối.</p>\n<p>Quay quanh trục <span class=\"math inline\">\\(y\\)</span>.</p>\n<div class=\"center\">\n<p><strong>[Hình ex03 — chưa có tệp ảnh]</strong> Hình cho Bài tập 3</p>\n</div>\n"
+      "content": "<p><strong>3.</strong></p>\n<p><em>Yêu cầu chung (1–4):</em> Một khối được tạo thành bằng cách quay miền tô màu quanh đường thẳng đã chỉ định.</p>\n<p>(a) Phác họa khối và một hình đĩa hoặc hình vành khăn điển hình.</p>\n<p>(b) Thiết lập một tích phân biểu diễn thể tích của khối.</p>\n<p>(c) Tính tích phân để tìm thể tích của khối.</p>\n<p>Quay quanh trục <span class=\"math inline\">\\(y\\)</span>.</p>\n<div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-6-2-295a476f/ex03.png\" alt=\"image\" /><br />\nHình cho Bài tập 3</p>\n</div>\n"
     },
     {
       "number": 4,
-      "content": "<p><strong>4.</strong></p>\n<p><em>Yêu cầu chung (1–4):</em> Một khối được tạo thành bằng cách quay miền tô màu quanh đường thẳng đã chỉ định.</p>\n<p>(a) Phác họa khối và một hình đĩa hoặc hình vành khăn điển hình.</p>\n<p>(b) Thiết lập một tích phân biểu diễn thể tích của khối.</p>\n<p>(c) Tính tích phân để tìm thể tích của khối.</p>\n<p>Quay quanh trục <span class=\"math inline\">\\(y\\)</span>.</p>\n<div class=\"center\">\n<p><strong>[Hình ex04 — chưa có tệp ảnh]</strong> Hình cho Bài tập 4</p>\n</div>\n"
+      "content": "<p><strong>4.</strong></p>\n<p><em>Yêu cầu chung (1–4):</em> Một khối được tạo thành bằng cách quay miền tô màu quanh đường thẳng đã chỉ định.</p>\n<p>(a) Phác họa khối và một hình đĩa hoặc hình vành khăn điển hình.</p>\n<p>(b) Thiết lập một tích phân biểu diễn thể tích của khối.</p>\n<p>(c) Tính tích phân để tìm thể tích của khối.</p>\n<p>Quay quanh trục <span class=\"math inline\">\\(y\\)</span>.</p>\n<div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-6-2-295a476f/ex04.png\" alt=\"image\" /><br />\nHình cho Bài tập 4</p>\n</div>\n"
     },
     {
       "number": 5,
@@ -114,51 +114,51 @@
     },
     {
       "number": 29,
-      "content": "<p><strong>29.</strong></p>\n<p><em>Yêu cầu chung (29–40):</em> Dựa vào hình và tìm thể tích tạo thành khi quay miền đã cho quanh đường thẳng đã chỉ định.</p>\n<div class=\"center\">\n<p><strong>[Hình ex29 — chưa có tệp ảnh]</strong> Hình cho các Bài tập 29–40</p>\n</div>\n<p>Miền <span class=\"math inline\">\\(\\mathcal R_1\\)</span> quanh <span class=\"math inline\">\\(OA\\)</span>.</p>\n"
+      "content": "<p><strong>29.</strong></p>\n<p><em>Yêu cầu chung (29–40):</em> Dựa vào hình và tìm thể tích tạo thành khi quay miền đã cho quanh đường thẳng đã chỉ định.</p>\n<div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-6-2-295a476f/ex29.png\" alt=\"image\" /><br />\nHình cho các Bài tập 29–40</p>\n</div>\n<p>Miền <span class=\"math inline\">\\(\\mathcal R_1\\)</span> quanh <span class=\"math inline\">\\(OA\\)</span>.</p>\n"
     },
     {
       "number": 30,
-      "content": "<p><strong>30.</strong></p>\n<p><em>Yêu cầu chung (29–40):</em> Dựa vào hình và tìm thể tích tạo thành khi quay miền đã cho quanh đường thẳng đã chỉ định.</p>\n<div class=\"center\">\n<p><strong>[Hình ex29 — chưa có tệp ảnh]</strong> Hình cho các Bài tập 29–40</p>\n</div>\n<p>Miền <span class=\"math inline\">\\(\\mathcal R_1\\)</span> quanh <span class=\"math inline\">\\(OC\\)</span>.</p>\n"
+      "content": "<p><strong>30.</strong></p>\n<p><em>Yêu cầu chung (29–40):</em> Dựa vào hình và tìm thể tích tạo thành khi quay miền đã cho quanh đường thẳng đã chỉ định.</p>\n<div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-6-2-295a476f/ex29.png\" alt=\"image\" /><br />\nHình cho các Bài tập 29–40</p>\n</div>\n<p>Miền <span class=\"math inline\">\\(\\mathcal R_1\\)</span> quanh <span class=\"math inline\">\\(OC\\)</span>.</p>\n"
     },
     {
       "number": 31,
-      "content": "<p><strong>31.</strong></p>\n<p><em>Yêu cầu chung (29–40):</em> Dựa vào hình và tìm thể tích tạo thành khi quay miền đã cho quanh đường thẳng đã chỉ định.</p>\n<div class=\"center\">\n<p><strong>[Hình ex29 — chưa có tệp ảnh]</strong> Hình cho các Bài tập 29–40</p>\n</div>\n<p>Miền <span class=\"math inline\">\\(\\mathcal R_1\\)</span> quanh <span class=\"math inline\">\\(AB\\)</span>.</p>\n"
+      "content": "<p><strong>31.</strong></p>\n<p><em>Yêu cầu chung (29–40):</em> Dựa vào hình và tìm thể tích tạo thành khi quay miền đã cho quanh đường thẳng đã chỉ định.</p>\n<div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-6-2-295a476f/ex29.png\" alt=\"image\" /><br />\nHình cho các Bài tập 29–40</p>\n</div>\n<p>Miền <span class=\"math inline\">\\(\\mathcal R_1\\)</span> quanh <span class=\"math inline\">\\(AB\\)</span>.</p>\n"
     },
     {
       "number": 32,
-      "content": "<p><strong>32.</strong></p>\n<p><em>Yêu cầu chung (29–40):</em> Dựa vào hình và tìm thể tích tạo thành khi quay miền đã cho quanh đường thẳng đã chỉ định.</p>\n<div class=\"center\">\n<p><strong>[Hình ex29 — chưa có tệp ảnh]</strong> Hình cho các Bài tập 29–40</p>\n</div>\n<p>Miền <span class=\"math inline\">\\(\\mathcal R_1\\)</span> quanh <span class=\"math inline\">\\(BC\\)</span>.</p>\n"
+      "content": "<p><strong>32.</strong></p>\n<p><em>Yêu cầu chung (29–40):</em> Dựa vào hình và tìm thể tích tạo thành khi quay miền đã cho quanh đường thẳng đã chỉ định.</p>\n<div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-6-2-295a476f/ex29.png\" alt=\"image\" /><br />\nHình cho các Bài tập 29–40</p>\n</div>\n<p>Miền <span class=\"math inline\">\\(\\mathcal R_1\\)</span> quanh <span class=\"math inline\">\\(BC\\)</span>.</p>\n"
     },
     {
       "number": 33,
-      "content": "<p><strong>33.</strong></p>\n<p><em>Yêu cầu chung (29–40):</em> Dựa vào hình và tìm thể tích tạo thành khi quay miền đã cho quanh đường thẳng đã chỉ định.</p>\n<div class=\"center\">\n<p><strong>[Hình ex29 — chưa có tệp ảnh]</strong> Hình cho các Bài tập 29–40</p>\n</div>\n<p>Miền <span class=\"math inline\">\\(\\mathcal R_2\\)</span> quanh <span class=\"math inline\">\\(OA\\)</span>.</p>\n"
+      "content": "<p><strong>33.</strong></p>\n<p><em>Yêu cầu chung (29–40):</em> Dựa vào hình và tìm thể tích tạo thành khi quay miền đã cho quanh đường thẳng đã chỉ định.</p>\n<div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-6-2-295a476f/ex29.png\" alt=\"image\" /><br />\nHình cho các Bài tập 29–40</p>\n</div>\n<p>Miền <span class=\"math inline\">\\(\\mathcal R_2\\)</span> quanh <span class=\"math inline\">\\(OA\\)</span>.</p>\n"
     },
     {
       "number": 34,
-      "content": "<p><strong>34.</strong></p>\n<p><em>Yêu cầu chung (29–40):</em> Dựa vào hình và tìm thể tích tạo thành khi quay miền đã cho quanh đường thẳng đã chỉ định.</p>\n<div class=\"center\">\n<p><strong>[Hình ex29 — chưa có tệp ảnh]</strong> Hình cho các Bài tập 29–40</p>\n</div>\n<p>Miền <span class=\"math inline\">\\(\\mathcal R_2\\)</span> quanh <span class=\"math inline\">\\(OC\\)</span>.</p>\n"
+      "content": "<p><strong>34.</strong></p>\n<p><em>Yêu cầu chung (29–40):</em> Dựa vào hình và tìm thể tích tạo thành khi quay miền đã cho quanh đường thẳng đã chỉ định.</p>\n<div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-6-2-295a476f/ex29.png\" alt=\"image\" /><br />\nHình cho các Bài tập 29–40</p>\n</div>\n<p>Miền <span class=\"math inline\">\\(\\mathcal R_2\\)</span> quanh <span class=\"math inline\">\\(OC\\)</span>.</p>\n"
     },
     {
       "number": 35,
-      "content": "<p><strong>35.</strong></p>\n<p><em>Yêu cầu chung (29–40):</em> Dựa vào hình và tìm thể tích tạo thành khi quay miền đã cho quanh đường thẳng đã chỉ định.</p>\n<div class=\"center\">\n<p><strong>[Hình ex29 — chưa có tệp ảnh]</strong> Hình cho các Bài tập 29–40</p>\n</div>\n<p>Miền <span class=\"math inline\">\\(\\mathcal R_2\\)</span> quanh <span class=\"math inline\">\\(AB\\)</span>.</p>\n"
+      "content": "<p><strong>35.</strong></p>\n<p><em>Yêu cầu chung (29–40):</em> Dựa vào hình và tìm thể tích tạo thành khi quay miền đã cho quanh đường thẳng đã chỉ định.</p>\n<div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-6-2-295a476f/ex29.png\" alt=\"image\" /><br />\nHình cho các Bài tập 29–40</p>\n</div>\n<p>Miền <span class=\"math inline\">\\(\\mathcal R_2\\)</span> quanh <span class=\"math inline\">\\(AB\\)</span>.</p>\n"
     },
     {
       "number": 36,
-      "content": "<p><strong>36.</strong></p>\n<p><em>Yêu cầu chung (29–40):</em> Dựa vào hình và tìm thể tích tạo thành khi quay miền đã cho quanh đường thẳng đã chỉ định.</p>\n<div class=\"center\">\n<p><strong>[Hình ex29 — chưa có tệp ảnh]</strong> Hình cho các Bài tập 29–40</p>\n</div>\n<p>Miền <span class=\"math inline\">\\(\\mathcal R_2\\)</span> quanh <span class=\"math inline\">\\(BC\\)</span>.</p>\n"
+      "content": "<p><strong>36.</strong></p>\n<p><em>Yêu cầu chung (29–40):</em> Dựa vào hình và tìm thể tích tạo thành khi quay miền đã cho quanh đường thẳng đã chỉ định.</p>\n<div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-6-2-295a476f/ex29.png\" alt=\"image\" /><br />\nHình cho các Bài tập 29–40</p>\n</div>\n<p>Miền <span class=\"math inline\">\\(\\mathcal R_2\\)</span> quanh <span class=\"math inline\">\\(BC\\)</span>.</p>\n"
     },
     {
       "number": 37,
-      "content": "<p><strong>37.</strong></p>\n<p><em>Yêu cầu chung (29–40):</em> Dựa vào hình và tìm thể tích tạo thành khi quay miền đã cho quanh đường thẳng đã chỉ định.</p>\n<div class=\"center\">\n<p><strong>[Hình ex29 — chưa có tệp ảnh]</strong> Hình cho các Bài tập 29–40</p>\n</div>\n<p>Miền <span class=\"math inline\">\\(\\mathcal R_3\\)</span> quanh <span class=\"math inline\">\\(OA\\)</span>.</p>\n"
+      "content": "<p><strong>37.</strong></p>\n<p><em>Yêu cầu chung (29–40):</em> Dựa vào hình và tìm thể tích tạo thành khi quay miền đã cho quanh đường thẳng đã chỉ định.</p>\n<div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-6-2-295a476f/ex29.png\" alt=\"image\" /><br />\nHình cho các Bài tập 29–40</p>\n</div>\n<p>Miền <span class=\"math inline\">\\(\\mathcal R_3\\)</span> quanh <span class=\"math inline\">\\(OA\\)</span>.</p>\n"
     },
     {
       "number": 38,
-      "content": "<p><strong>38.</strong></p>\n<p><em>Yêu cầu chung (29–40):</em> Dựa vào hình và tìm thể tích tạo thành khi quay miền đã cho quanh đường thẳng đã chỉ định.</p>\n<div class=\"center\">\n<p><strong>[Hình ex29 — chưa có tệp ảnh]</strong> Hình cho các Bài tập 29–40</p>\n</div>\n<p>Miền <span class=\"math inline\">\\(\\mathcal R_3\\)</span> quanh <span class=\"math inline\">\\(OC\\)</span>.</p>\n"
+      "content": "<p><strong>38.</strong></p>\n<p><em>Yêu cầu chung (29–40):</em> Dựa vào hình và tìm thể tích tạo thành khi quay miền đã cho quanh đường thẳng đã chỉ định.</p>\n<div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-6-2-295a476f/ex29.png\" alt=\"image\" /><br />\nHình cho các Bài tập 29–40</p>\n</div>\n<p>Miền <span class=\"math inline\">\\(\\mathcal R_3\\)</span> quanh <span class=\"math inline\">\\(OC\\)</span>.</p>\n"
     },
     {
       "number": 39,
-      "content": "<p><strong>39.</strong></p>\n<p><em>Yêu cầu chung (29–40):</em> Dựa vào hình và tìm thể tích tạo thành khi quay miền đã cho quanh đường thẳng đã chỉ định.</p>\n<div class=\"center\">\n<p><strong>[Hình ex29 — chưa có tệp ảnh]</strong> Hình cho các Bài tập 29–40</p>\n</div>\n<p>Miền <span class=\"math inline\">\\(\\mathcal R_3\\)</span> quanh <span class=\"math inline\">\\(AB\\)</span>.</p>\n"
+      "content": "<p><strong>39.</strong></p>\n<p><em>Yêu cầu chung (29–40):</em> Dựa vào hình và tìm thể tích tạo thành khi quay miền đã cho quanh đường thẳng đã chỉ định.</p>\n<div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-6-2-295a476f/ex29.png\" alt=\"image\" /><br />\nHình cho các Bài tập 29–40</p>\n</div>\n<p>Miền <span class=\"math inline\">\\(\\mathcal R_3\\)</span> quanh <span class=\"math inline\">\\(AB\\)</span>.</p>\n"
     },
     {
       "number": 40,
-      "content": "<p><strong>40.</strong></p>\n<p><em>Yêu cầu chung (29–40):</em> Dựa vào hình và tìm thể tích tạo thành khi quay miền đã cho quanh đường thẳng đã chỉ định.</p>\n<div class=\"center\">\n<p><strong>[Hình ex29 — chưa có tệp ảnh]</strong> Hình cho các Bài tập 29–40</p>\n</div>\n<p>Miền <span class=\"math inline\">\\(\\mathcal R_3\\)</span> quanh <span class=\"math inline\">\\(BC\\)</span>.</p>\n"
+      "content": "<p><strong>40.</strong></p>\n<p><em>Yêu cầu chung (29–40):</em> Dựa vào hình và tìm thể tích tạo thành khi quay miền đã cho quanh đường thẳng đã chỉ định.</p>\n<div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-6-2-295a476f/ex29.png\" alt=\"image\" /><br />\nHình cho các Bài tập 29–40</p>\n</div>\n<p>Miền <span class=\"math inline\">\\(\\mathcal R_3\\)</span> quanh <span class=\"math inline\">\\(BC\\)</span>.</p>\n"
     },
     {
       "number": 41,
@@ -218,7 +218,7 @@
     },
     {
       "number": 55,
-      "content": "<p><strong>55.</strong></p>\n<p>Phép chụp cắt lớp vi tính (CAT) tạo ra các ảnh thiết diện cách đều nhau của một cơ quan trong cơ thể người, cung cấp những thông tin về cơ quan ấy mà nếu không thì chỉ có thể thu được bằng phẫu thuật. Giả sử ảnh chụp CAT của gan người cho các thiết diện cách nhau <span class=\"math inline\">\\(1.5\\)</span> cm. Gan dài <span class=\"math inline\">\\(15\\)</span> cm và diện tích các thiết diện, tính bằng centimét vuông, lần lượt là <span class=\"math inline\">\\(0\\)</span>, <span class=\"math inline\">\\(18\\)</span>, <span class=\"math inline\">\\(58\\)</span>, <span class=\"math inline\">\\(79\\)</span>, <span class=\"math inline\">\\(94\\)</span>, <span class=\"math inline\">\\(106\\)</span>, <span class=\"math inline\">\\(117\\)</span>, <span class=\"math inline\">\\(128\\)</span>, <span class=\"math inline\">\\(63\\)</span>, <span class=\"math inline\">\\(39\\)</span> và <span class=\"math inline\">\\(0\\)</span>. Dùng Quy tắc trung điểm để ước lượng thể tích của gan.</p>\n<div class=\"center\">\n<p><strong>[Hình ex55 — chưa có tệp ảnh]</strong> Hình cho Bài tập 55. Ảnh: Suttha Burawonk / Shutterstock.com.</p>\n</div>\n"
+      "content": "<p><strong>55.</strong></p>\n<p>Phép chụp cắt lớp vi tính (CAT) tạo ra các ảnh thiết diện cách đều nhau của một cơ quan trong cơ thể người, cung cấp những thông tin về cơ quan ấy mà nếu không thì chỉ có thể thu được bằng phẫu thuật. Giả sử ảnh chụp CAT của gan người cho các thiết diện cách nhau <span class=\"math inline\">\\(1.5\\)</span> cm. Gan dài <span class=\"math inline\">\\(15\\)</span> cm và diện tích các thiết diện, tính bằng centimét vuông, lần lượt là <span class=\"math inline\">\\(0\\)</span>, <span class=\"math inline\">\\(18\\)</span>, <span class=\"math inline\">\\(58\\)</span>, <span class=\"math inline\">\\(79\\)</span>, <span class=\"math inline\">\\(94\\)</span>, <span class=\"math inline\">\\(106\\)</span>, <span class=\"math inline\">\\(117\\)</span>, <span class=\"math inline\">\\(128\\)</span>, <span class=\"math inline\">\\(63\\)</span>, <span class=\"math inline\">\\(39\\)</span> và <span class=\"math inline\">\\(0\\)</span>. Dùng Quy tắc trung điểm để ước lượng thể tích của gan.</p>\n<div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-6-2-295a476f/ex55.png\" alt=\"image\" /><br />\nHình cho Bài tập 55. Ảnh: Suttha Burawonk / Shutterstock.com.</p>\n</div>\n"
     },
     {
       "number": 56,
@@ -226,7 +226,7 @@
     },
     {
       "number": 57,
-      "content": "<p><strong>57.</strong></p>\n<p>(a) Nếu quay miền trong hình quanh trục <span class=\"math inline\">\\(x\\)</span> để tạo một khối, hãy dùng Quy tắc trung điểm với <span class=\"math inline\">\\(n=4\\)</span> để ước lượng thể tích của khối.</p>\n<div class=\"center\">\n<p><strong>[Hình ex57 — chưa có tệp ảnh]</strong> Hình cho Bài tập 57</p>\n</div>\n<p>(b) Ước lượng thể tích nếu quay miền quanh trục <span class=\"math inline\">\\(y\\)</span>. Tiếp tục dùng Quy tắc trung điểm với <span class=\"math inline\">\\(n=4\\)</span>.</p>\n"
+      "content": "<p><strong>57.</strong></p>\n<p>(a) Nếu quay miền trong hình quanh trục <span class=\"math inline\">\\(x\\)</span> để tạo một khối, hãy dùng Quy tắc trung điểm với <span class=\"math inline\">\\(n=4\\)</span> để ước lượng thể tích của khối.</p>\n<div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-6-2-295a476f/ex57.png\" alt=\"image\" /><br />\nHình cho Bài tập 57</p>\n</div>\n<p>(b) Ước lượng thể tích nếu quay miền quanh trục <span class=\"math inline\">\\(y\\)</span>. Tiếp tục dùng Quy tắc trung điểm với <span class=\"math inline\">\\(n=4\\)</span>.</p>\n"
     },
     {
       "number": 58,
@@ -238,15 +238,15 @@
     },
     {
       "number": 60,
-      "content": "<p><strong>60.</strong></p>\n<p><em>Yêu cầu chung (59–74):</em> Tìm thể tích của khối <span class=\"math inline\">\\(S\\)</span> được mô tả.</p>\n<p>Khối nón cụt tròn xoay có chiều cao <span class=\"math inline\">\\(h\\)</span>, bán kính đáy dưới <span class=\"math inline\">\\(R\\)</span> và bán kính đáy trên <span class=\"math inline\">\\(r\\)</span>.</p>\n<div class=\"center\">\n<p><strong>[Hình ex60 — chưa có tệp ảnh]</strong> Hình cho Bài tập 60</p>\n</div>\n"
+      "content": "<p><strong>60.</strong></p>\n<p><em>Yêu cầu chung (59–74):</em> Tìm thể tích của khối <span class=\"math inline\">\\(S\\)</span> được mô tả.</p>\n<p>Khối nón cụt tròn xoay có chiều cao <span class=\"math inline\">\\(h\\)</span>, bán kính đáy dưới <span class=\"math inline\">\\(R\\)</span> và bán kính đáy trên <span class=\"math inline\">\\(r\\)</span>.</p>\n<div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-6-2-295a476f/ex60.png\" alt=\"image\" /><br />\nHình cho Bài tập 60</p>\n</div>\n"
     },
     {
       "number": 61,
-      "content": "<p><strong>61.</strong></p>\n<p><em>Yêu cầu chung (59–74):</em> Tìm thể tích của khối <span class=\"math inline\">\\(S\\)</span> được mô tả.</p>\n<p>Chỏm cầu của một khối cầu bán kính <span class=\"math inline\">\\(r\\)</span>, có chiều cao <span class=\"math inline\">\\(h\\)</span>.</p>\n<div class=\"center\">\n<p><strong>[Hình ex61 — chưa có tệp ảnh]</strong> Hình cho Bài tập 61</p>\n</div>\n"
+      "content": "<p><strong>61.</strong></p>\n<p><em>Yêu cầu chung (59–74):</em> Tìm thể tích của khối <span class=\"math inline\">\\(S\\)</span> được mô tả.</p>\n<p>Chỏm cầu của một khối cầu bán kính <span class=\"math inline\">\\(r\\)</span>, có chiều cao <span class=\"math inline\">\\(h\\)</span>.</p>\n<div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-6-2-295a476f/ex61.png\" alt=\"image\" /><br />\nHình cho Bài tập 61</p>\n</div>\n"
     },
     {
       "number": 62,
-      "content": "<p><strong>62.</strong></p>\n<p><em>Yêu cầu chung (59–74):</em> Tìm thể tích của khối <span class=\"math inline\">\\(S\\)</span> được mô tả.</p>\n<p>Khối chóp cụt có đáy dưới là hình vuông cạnh <span class=\"math inline\">\\(b\\)</span>, đáy trên là hình vuông cạnh <span class=\"math inline\">\\(a\\)</span> và chiều cao <span class=\"math inline\">\\(h\\)</span>.</p>\n<div class=\"center\">\n<p><strong>[Hình ex62 — chưa có tệp ảnh]</strong> Hình cho Bài tập 62</p>\n</div>\n<p>Điều gì xảy ra nếu <span class=\"math inline\">\\(a=b\\)</span>? Điều gì xảy ra nếu <span class=\"math inline\">\\(a=0\\)</span>?</p>\n"
+      "content": "<p><strong>62.</strong></p>\n<p><em>Yêu cầu chung (59–74):</em> Tìm thể tích của khối <span class=\"math inline\">\\(S\\)</span> được mô tả.</p>\n<p>Khối chóp cụt có đáy dưới là hình vuông cạnh <span class=\"math inline\">\\(b\\)</span>, đáy trên là hình vuông cạnh <span class=\"math inline\">\\(a\\)</span> và chiều cao <span class=\"math inline\">\\(h\\)</span>.</p>\n<div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-6-2-295a476f/ex62.png\" alt=\"image\" /><br />\nHình cho Bài tập 62</p>\n</div>\n<p>Điều gì xảy ra nếu <span class=\"math inline\">\\(a=b\\)</span>? Điều gì xảy ra nếu <span class=\"math inline\">\\(a=0\\)</span>?</p>\n"
     },
     {
       "number": 63,
@@ -254,7 +254,7 @@
     },
     {
       "number": 64,
-      "content": "<p><strong>64.</strong></p>\n<p><em>Yêu cầu chung (59–74):</em> Tìm thể tích của khối <span class=\"math inline\">\\(S\\)</span> được mô tả.</p>\n<p>Khối chóp có chiều cao <span class=\"math inline\">\\(h\\)</span> và đáy là tam giác đều cạnh <span class=\"math inline\">\\(a\\)</span> (một khối tứ diện).</p>\n<div class=\"center\">\n<p><strong>[Hình ex64 — chưa có tệp ảnh]</strong> Hình cho Bài tập 64</p>\n</div>\n"
+      "content": "<p><strong>64.</strong></p>\n<p><em>Yêu cầu chung (59–74):</em> Tìm thể tích của khối <span class=\"math inline\">\\(S\\)</span> được mô tả.</p>\n<p>Khối chóp có chiều cao <span class=\"math inline\">\\(h\\)</span> và đáy là tam giác đều cạnh <span class=\"math inline\">\\(a\\)</span> (một khối tứ diện).</p>\n<div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-6-2-295a476f/ex64.png\" alt=\"image\" /><br />\nHình cho Bài tập 64</p>\n</div>\n"
     },
     {
       "number": 65,
@@ -262,7 +262,7 @@
     },
     {
       "number": 66,
-      "content": "<p><strong>66.</strong></p>\n<p><em>Yêu cầu chung (59–74):</em> Tìm thể tích của khối <span class=\"math inline\">\\(S\\)</span> được mô tả.</p>\n<p>Đáy của <span class=\"math inline\">\\(S\\)</span> là hình tròn bán kính <span class=\"math inline\">\\(r\\)</span>. Các thiết diện song song, vuông góc với đáy, là hình vuông.</p>\n<div class=\"center\">\n<p><strong>[Hình ex66 — chưa có tệp ảnh]</strong> Hình cho Bài tập 66</p>\n</div>\n"
+      "content": "<p><strong>66.</strong></p>\n<p><em>Yêu cầu chung (59–74):</em> Tìm thể tích của khối <span class=\"math inline\">\\(S\\)</span> được mô tả.</p>\n<p>Đáy của <span class=\"math inline\">\\(S\\)</span> là hình tròn bán kính <span class=\"math inline\">\\(r\\)</span>. Các thiết diện song song, vuông góc với đáy, là hình vuông.</p>\n<div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-6-2-295a476f/ex66.png\" alt=\"image\" /><br />\nHình cho Bài tập 66</p>\n</div>\n"
     },
     {
       "number": 67,
@@ -286,19 +286,19 @@
     },
     {
       "number": 72,
-      "content": "<p><strong>72.</strong></p>\n<p><em>Yêu cầu chung (59–74):</em> Tìm thể tích của khối <span class=\"math inline\">\\(S\\)</span> được mô tả.</p>\n<p>Đáy của <span class=\"math inline\">\\(S\\)</span> là miền giới hạn bởi <span class=\"math inline\">\\(y=2-x^2\\)</span> và trục <span class=\"math inline\">\\(x\\)</span>. Các thiết diện vuông góc với trục <span class=\"math inline\">\\(y\\)</span> là một phần tư hình tròn.</p>\n<div class=\"center\">\n<p><strong>[Hình ex72 — chưa có tệp ảnh]</strong> Hình cho Bài tập 72</p>\n</div>\n"
+      "content": "<p><strong>72.</strong></p>\n<p><em>Yêu cầu chung (59–74):</em> Tìm thể tích của khối <span class=\"math inline\">\\(S\\)</span> được mô tả.</p>\n<p>Đáy của <span class=\"math inline\">\\(S\\)</span> là miền giới hạn bởi <span class=\"math inline\">\\(y=2-x^2\\)</span> và trục <span class=\"math inline\">\\(x\\)</span>. Các thiết diện vuông góc với trục <span class=\"math inline\">\\(y\\)</span> là một phần tư hình tròn.</p>\n<div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-6-2-295a476f/ex72.png\" alt=\"image\" /><br />\nHình cho Bài tập 72</p>\n</div>\n"
     },
     {
       "number": 73,
-      "content": "<p><strong>73.</strong></p>\n<p><em>Yêu cầu chung (59–74):</em> Tìm thể tích của khối <span class=\"math inline\">\\(S\\)</span> được mô tả.</p>\n<p>Khối <span class=\"math inline\">\\(S\\)</span> được giới hạn bởi các đường tròn vuông góc với trục <span class=\"math inline\">\\(x\\)</span>, cắt trục <span class=\"math inline\">\\(x\\)</span> và có tâm trên parabol <span class=\"math inline\">\\(y=\\frac12(1-x^2)\\)</span>, <span class=\"math inline\">\\(-1\\le x\\le1\\)</span>.</p>\n<div class=\"center\">\n<p><strong>[Hình ex73 — chưa có tệp ảnh]</strong> Hình cho Bài tập 73</p>\n</div>\n"
+      "content": "<p><strong>73.</strong></p>\n<p><em>Yêu cầu chung (59–74):</em> Tìm thể tích của khối <span class=\"math inline\">\\(S\\)</span> được mô tả.</p>\n<p>Khối <span class=\"math inline\">\\(S\\)</span> được giới hạn bởi các đường tròn vuông góc với trục <span class=\"math inline\">\\(x\\)</span>, cắt trục <span class=\"math inline\">\\(x\\)</span> và có tâm trên parabol <span class=\"math inline\">\\(y=\\frac12(1-x^2)\\)</span>, <span class=\"math inline\">\\(-1\\le x\\le1\\)</span>.</p>\n<div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-6-2-295a476f/ex73.png\" alt=\"image\" /><br />\nHình cho Bài tập 73</p>\n</div>\n"
     },
     {
       "number": 74,
-      "content": "<p><strong>74.</strong></p>\n<p><em>Yêu cầu chung (59–74):</em> Tìm thể tích của khối <span class=\"math inline\">\\(S\\)</span> được mô tả.</p>\n<p>Các thiết diện của khối <span class=\"math inline\">\\(S\\)</span> trong những mặt phẳng vuông góc với trục <span class=\"math inline\">\\(x\\)</span> là các hình tròn có đường kính kéo dài từ đường cong <span class=\"math inline\">\\(y=\\frac12\\sqrt{x}\\)</span> đến đường cong <span class=\"math inline\">\\(y=\\sqrt{x}\\)</span>, với <span class=\"math inline\">\\(0\\le x\\le4\\)</span>.</p>\n<div class=\"center\">\n<p><strong>[Hình ex74 — chưa có tệp ảnh]</strong> Hình cho Bài tập 74</p>\n</div>\n"
+      "content": "<p><strong>74.</strong></p>\n<p><em>Yêu cầu chung (59–74):</em> Tìm thể tích của khối <span class=\"math inline\">\\(S\\)</span> được mô tả.</p>\n<p>Các thiết diện của khối <span class=\"math inline\">\\(S\\)</span> trong những mặt phẳng vuông góc với trục <span class=\"math inline\">\\(x\\)</span> là các hình tròn có đường kính kéo dài từ đường cong <span class=\"math inline\">\\(y=\\frac12\\sqrt{x}\\)</span> đến đường cong <span class=\"math inline\">\\(y=\\sqrt{x}\\)</span>, với <span class=\"math inline\">\\(0\\le x\\le4\\)</span>.</p>\n<div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-6-2-295a476f/ex74.png\" alt=\"image\" /><br />\nHình cho Bài tập 74</p>\n</div>\n"
     },
     {
       "number": 75,
-      "content": "<p><strong>75.</strong></p>\n<p>(a) Thiết lập một tích phân biểu diễn thể tích của khối xuyến (khối có dạng bánh vòng trong hình) với các bán kính <span class=\"math inline\">\\(r\\)</span> và <span class=\"math inline\">\\(R\\)</span>.</p>\n<div class=\"center\">\n<p><strong>[Hình ex75 — chưa có tệp ảnh]</strong> Hình cho Bài tập 75</p>\n</div>\n<p>(b) Bằng cách diễn giải tích phân như một diện tích, hãy tìm thể tích khối xuyến.</p>\n"
+      "content": "<p><strong>75.</strong></p>\n<p>(a) Thiết lập một tích phân biểu diễn thể tích của khối xuyến (khối có dạng bánh vòng trong hình) với các bán kính <span class=\"math inline\">\\(r\\)</span> và <span class=\"math inline\">\\(R\\)</span>.</p>\n<div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-6-2-295a476f/ex75.png\" alt=\"image\" /><br />\nHình cho Bài tập 75</p>\n</div>\n<p>(b) Bằng cách diễn giải tích phân như một diện tích, hãy tìm thể tích khối xuyến.</p>\n"
     },
     {
       "number": 76,
@@ -310,15 +310,15 @@
     },
     {
       "number": 78,
-      "content": "<p><strong>78.</strong></p>\n<p><em>Yêu cầu chung (78–79):</em> Nguyên lý Cavalieri phát biểu rằng nếu một họ các mặt phẳng song song tạo ra những thiết diện có diện tích bằng nhau đối với hai khối <span class=\"math inline\">\\(S_1\\)</span> và <span class=\"math inline\">\\(S_2\\)</span>, thì thể tích của <span class=\"math inline\">\\(S_1\\)</span> và <span class=\"math inline\">\\(S_2\\)</span> bằng nhau.</p>\n<p>(a) Chứng minh Nguyên lý Cavalieri.</p>\n<p>(b) Dùng Nguyên lý Cavalieri để tìm thể tích khối trụ xiên trong hình.</p>\n<div class=\"center\">\n<p><strong>[Hình ex78 — chưa có tệp ảnh]</strong> Hình cho Bài tập 78</p>\n</div>\n"
+      "content": "<p><strong>78.</strong></p>\n<p><em>Yêu cầu chung (78–79):</em> Nguyên lý Cavalieri phát biểu rằng nếu một họ các mặt phẳng song song tạo ra những thiết diện có diện tích bằng nhau đối với hai khối <span class=\"math inline\">\\(S_1\\)</span> và <span class=\"math inline\">\\(S_2\\)</span>, thì thể tích của <span class=\"math inline\">\\(S_1\\)</span> và <span class=\"math inline\">\\(S_2\\)</span> bằng nhau.</p>\n<p>(a) Chứng minh Nguyên lý Cavalieri.</p>\n<p>(b) Dùng Nguyên lý Cavalieri để tìm thể tích khối trụ xiên trong hình.</p>\n<div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-6-2-295a476f/ex78.png\" alt=\"image\" /><br />\nHình cho Bài tập 78</p>\n</div>\n"
     },
     {
       "number": 79,
-      "content": "<p><strong>79.</strong></p>\n<p><em>Yêu cầu chung (78–79):</em> Nguyên lý Cavalieri phát biểu rằng nếu một họ các mặt phẳng song song tạo ra những thiết diện có diện tích bằng nhau đối với hai khối <span class=\"math inline\">\\(S_1\\)</span> và <span class=\"math inline\">\\(S_2\\)</span>, thì thể tích của <span class=\"math inline\">\\(S_1\\)</span> và <span class=\"math inline\">\\(S_2\\)</span> bằng nhau.</p>\n<p>Dùng Nguyên lý Cavalieri để chứng minh rằng thể tích của một khối bán cầu bán kính <span class=\"math inline\">\\(r\\)</span> bằng thể tích của một khối trụ bán kính <span class=\"math inline\">\\(r\\)</span>, chiều cao <span class=\"math inline\">\\(r\\)</span>, sau khi bỏ đi một khối nón, như trong hình.</p>\n<div class=\"center\">\n<p><strong>[Hình ex79 — chưa có tệp ảnh]</strong> Hình cho Bài tập 79</p>\n</div>\n"
+      "content": "<p><strong>79.</strong></p>\n<p><em>Yêu cầu chung (78–79):</em> Nguyên lý Cavalieri phát biểu rằng nếu một họ các mặt phẳng song song tạo ra những thiết diện có diện tích bằng nhau đối với hai khối <span class=\"math inline\">\\(S_1\\)</span> và <span class=\"math inline\">\\(S_2\\)</span>, thì thể tích của <span class=\"math inline\">\\(S_1\\)</span> và <span class=\"math inline\">\\(S_2\\)</span> bằng nhau.</p>\n<p>Dùng Nguyên lý Cavalieri để chứng minh rằng thể tích của một khối bán cầu bán kính <span class=\"math inline\">\\(r\\)</span> bằng thể tích của một khối trụ bán kính <span class=\"math inline\">\\(r\\)</span>, chiều cao <span class=\"math inline\">\\(r\\)</span>, sau khi bỏ đi một khối nón, như trong hình.</p>\n<div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-6-2-295a476f/ex79.png\" alt=\"image\" /><br />\nHình cho Bài tập 79</p>\n</div>\n"
     },
     {
       "number": 80,
-      "content": "<p><strong>80.</strong></p>\n<p>Tìm thể tích phần chung của hai khối trụ tròn, mỗi khối có bán kính <span class=\"math inline\">\\(r\\)</span>, nếu trục của chúng cắt nhau vuông góc.</p>\n<div class=\"center\">\n<p><strong>[Hình ex80 — chưa có tệp ảnh]</strong> Hình cho Bài tập 80</p>\n</div>\n"
+      "content": "<p><strong>80.</strong></p>\n<p>Tìm thể tích phần chung của hai khối trụ tròn, mỗi khối có bán kính <span class=\"math inline\">\\(r\\)</span>, nếu trục của chúng cắt nhau vuông góc.</p>\n<div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-6-2-295a476f/ex80.png\" alt=\"image\" /><br />\nHình cho Bài tập 80</p>\n</div>\n"
     },
     {
       "number": 81,
@@ -346,7 +346,7 @@
     },
     {
       "number": 87,
-      "content": "<p><strong>87.</strong></p>\n<p>Một <em>phép vị tự</em> của mặt phẳng với hệ số tỉ lệ <span class=\"math inline\">\\(c\\)</span> là phép biến đổi ánh xạ điểm <span class=\"math inline\">\\((x,y)\\)</span> thành điểm <span class=\"math inline\">\\((cx,cy)\\)</span>. Áp dụng phép vị tự cho một miền phẳng tạo ra một hình đồng dạng với miền đó. Một nhà sản xuất muốn chế tạo một chiếc bình đất nung dung tích 5 lít (<span class=\"math inline\">\\(5000\\)</span> <span class=\"math inline\">\\(\\mathrm{cm}^3\\)</span>), có hình dạng đồng dạng với khối thu được khi quay miền <span class=\"math inline\">\\(\\mathcal R_1\\)</span> trong hình quanh trục <span class=\"math inline\">\\(y\\)</span>.</p>\n<p>(a) Tìm thể tích <span class=\"math inline\">\\(V_1\\)</span> của chiếc bình thu được khi quay miền <span class=\"math inline\">\\(\\mathcal R_1\\)</span>.</p>\n<p>(b) Chứng minh rằng phép vị tự với hệ số tỉ lệ <span class=\"math inline\">\\(c\\)</span> biến miền <span class=\"math inline\">\\(\\mathcal R_1\\)</span> thành miền <span class=\"math inline\">\\(\\mathcal R_2\\)</span>.</p>\n<p>(c) Chứng minh rằng thể tích <span class=\"math inline\">\\(V_2\\)</span> của chiếc bình thu được khi quay miền <span class=\"math inline\">\\(\\mathcal R_2\\)</span> là <span class=\"math inline\">\\(c^3V_1\\)</span>.</p>\n<p>(d) Tìm hệ số tỉ lệ <span class=\"math inline\">\\(c\\)</span> để tạo ra chiếc bình dung tích 5 lít.</p>\n<div class=\"center\">\n<p><strong>[Hình ex87 — chưa có tệp ảnh]</strong> Hình cho Bài tập 87. Các trục tọa độ được tính bằng centimét.</p>\n</div>\n"
+      "content": "<p><strong>87.</strong></p>\n<p>Một <em>phép vị tự</em> của mặt phẳng với hệ số tỉ lệ <span class=\"math inline\">\\(c\\)</span> là phép biến đổi ánh xạ điểm <span class=\"math inline\">\\((x,y)\\)</span> thành điểm <span class=\"math inline\">\\((cx,cy)\\)</span>. Áp dụng phép vị tự cho một miền phẳng tạo ra một hình đồng dạng với miền đó. Một nhà sản xuất muốn chế tạo một chiếc bình đất nung dung tích 5 lít (<span class=\"math inline\">\\(5000\\)</span> <span class=\"math inline\">\\(\\mathrm{cm}^3\\)</span>), có hình dạng đồng dạng với khối thu được khi quay miền <span class=\"math inline\">\\(\\mathcal R_1\\)</span> trong hình quanh trục <span class=\"math inline\">\\(y\\)</span>.</p>\n<p>(a) Tìm thể tích <span class=\"math inline\">\\(V_1\\)</span> của chiếc bình thu được khi quay miền <span class=\"math inline\">\\(\\mathcal R_1\\)</span>.</p>\n<p>(b) Chứng minh rằng phép vị tự với hệ số tỉ lệ <span class=\"math inline\">\\(c\\)</span> biến miền <span class=\"math inline\">\\(\\mathcal R_1\\)</span> thành miền <span class=\"math inline\">\\(\\mathcal R_2\\)</span>.</p>\n<p>(c) Chứng minh rằng thể tích <span class=\"math inline\">\\(V_2\\)</span> của chiếc bình thu được khi quay miền <span class=\"math inline\">\\(\\mathcal R_2\\)</span> là <span class=\"math inline\">\\(c^3V_1\\)</span>.</p>\n<p>(d) Tìm hệ số tỉ lệ <span class=\"math inline\">\\(c\\)</span> để tạo ra chiếc bình dung tích 5 lít.</p>\n<div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-6-2-295a476f/ex87.png\" alt=\"image\" /><br />\nHình cho Bài tập 87. Các trục tọa độ được tính bằng centimét.</p>\n</div>\n"
     }
   ]
 }
