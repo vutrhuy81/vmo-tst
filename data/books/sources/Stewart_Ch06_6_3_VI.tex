@@ -1,0 +1,287 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage{fontspec}\setmainfont{Latin Modern Roman}\setsansfont{DejaVu Sans}
+\usepackage{amsmath,amssymb,graphicx,geometry,enumitem,needspace,longtable,booktabs,fancyhdr,hyperref}
+\geometry{left=28mm,right=23mm,top=24mm,bottom=24mm}
+\hypersetup{unicode=true,colorlinks=true,linkcolor=black,urlcolor=blue,pdftitle={Giải tích §6.3 — Thể tích bằng phương pháp vỏ trụ}}
+\setlength{\parindent}{1.2em}\setlength{\parskip}{4pt}\setlength{\headheight}{16pt}
+\pagestyle{fancy}\fancyhf{}\fancyhead[L]{\small Chương 6. Ứng dụng của tích phân}\fancyhead[R]{\small §6.3}\fancyfoot[C]{\thepage}
+\newcommand{\fig}[3][.68]{\begin{center}\begin{minipage}{\linewidth}\centering\includegraphics[width=#1\linewidth]{assets/#2.png}\\{\small #3}\end{minipage}\end{center}}
+\newcommand{\ex}[1]{\par\medskip\noindent\textbf{Ví dụ #1.}\ }
+\newcommand{\sol}{\par\nopagebreak[4]\noindent\textit{Lời giải.}\ }
+\newcommand{\bt}[1]{\par\smallskip\Needspace{5\baselineskip}\noindent\textbf{#1.}\ }
+\newcommand{\group}[1]{\par\Needspace{11\baselineskip}\medskip\noindent\textbf{#1}\par\nopagebreak[4]}
+\newcommand{\gint}[1]{\left[\!\left[#1\right]\!\right]}
+\allowdisplaybreaks[2]
+\DeclareMathOperator{\sech}{sech}
+\DeclareMathOperator{\csch}{csch}
+\DeclareMathOperator{\arccot}{arccot}
+
+\newcommand{\prj}[1]{\bt{#1}}
+\begin{document}
+\begin{center}{\LARGE\bfseries 6.3 — Thể tích bằng phương pháp vỏ trụ}\end{center}
+Một số bài toán thể tích rất khó giải bằng các phương pháp của mục trước. Chẳng hạn, xét bài toán tìm thể tích khối thu được khi quay quanh trục $y$ miền giới hạn bởi $y=2x^2-x^3$ và $y=0$. (Xem Hình 1.) Nếu cắt vuông góc với trục $y$, ta có một hình vành khăn. Nhưng để tính bán kính trong và bán kính ngoài của hình vành khăn, ta phải giải phương trình bậc ba $y=2x^2-x^3$ để biểu diễn $x$ theo $y$; điều đó không dễ.
+\fig[.43]{fig01}{Hình 1}
+\subsection*{Phương pháp vỏ trụ}
+Có một phương pháp, gọi là \textit{phương pháp vỏ trụ}, dễ sử dụng hơn trong những trường hợp như Hình 1. Hình 2 cho thấy một vỏ trụ có bán kính trong $r_1$, bán kính ngoài $r_2$ và chiều cao $h$. Thể tích $V$ của nó được tính bằng cách lấy thể tích $V_2$ của khối trụ ngoài trừ đi thể tích $V_1$ của khối trụ trong:
+\begin{align*}
+V&=V_2-V_1\\
+&=\pi r_2^2h-\pi r_1^2h=\pi(r_2^2-r_1^2)h\\
+&=\pi(r_2+r_1)(r_2-r_1)h\\
+&=2\pi\frac{r_2+r_1}{2}h(r_2-r_1).
+\end{align*}
+\fig[.36]{fig02}{Hình 2}
+Nếu đặt $\Delta r=r_2-r_1$ (bề dày vỏ) và $r=\frac12(r_2+r_1)$ (bán kính trung bình của vỏ), thì công thức thể tích vỏ trụ trở thành
+\begin{equation}\boxed{V=2\pi rh\,\Delta r}\tag{1}\end{equation}
+và có thể ghi nhớ dưới dạng
+\[V=[\text{chu vi}][\text{chiều cao}][\text{bề dày}].\]
+Bây giờ, gọi $S$ là khối thu được khi quay quanh trục $y$ miền giới hạn bởi $y=f(x)$ [trong đó $f(x)\ge0$], $y=0$, $x=a$ và $x=b$, với $b>a\ge0$. (Xem Hình 3.)
+\fig[.88]{fig03}{Hình 3}
+Ta chia khoảng $[a,b]$ thành $n$ khoảng con $[x_{i-1},x_i]$ có cùng bề rộng $\Delta x$, và gọi $\bar x_i$ là trung điểm khoảng con thứ $i$. Nếu quay hình chữ nhật có đáy $[x_{i-1},x_i]$ và chiều cao $f(\bar x_i)$ quanh trục $y$, ta được một vỏ trụ có bán kính trung bình $\bar x_i$, chiều cao $f(\bar x_i)$ và bề dày $\Delta x$. (Xem Hình 4.) Do đó, theo Công thức 1, thể tích của nó là
+\[V_i=(2\pi\bar x_i)[f(\bar x_i)]\Delta x.\]
+\fig[.96]{fig04}{Hình 4}
+Vì thế, một giá trị xấp xỉ cho thể tích $V$ của $S$ được cho bởi tổng thể tích của các vỏ trụ ấy:
+\[V\approx\sum_{i=1}^n V_i=\sum_{i=1}^n2\pi\bar x_i f(\bar x_i)\Delta x.\]
+Phép xấp xỉ này có vẻ ngày càng tốt hơn khi $n\to\infty$. Mặt khác, theo định nghĩa tích phân,
+\[\lim_{n\to\infty}\sum_{i=1}^n2\pi\bar x_i f(\bar x_i)\Delta x=\int_a^b2\pi x f(x)\,dx.\]
+Do đó, công thức sau có vẻ hợp lý:
+\Needspace{9\baselineskip}
+\subsection*{2. Công thức thể tích bằng vỏ trụ}
+Thể tích của khối trong Hình 3, thu được khi quay quanh trục $y$ miền nằm dưới đường cong $y=f(x)$ từ $a$ đến $b$, là
+\[\boxed{\displaystyle V=\int_a^b2\pi x f(x)\,dx,\qquad 0\le a<b.}\]
+Lập luận bằng vỏ trụ làm cho Công thức 2 có vẻ hợp lý, nhưng về sau ta sẽ có thể chứng minh công thức đó (xem Bài tập 7.1.81).
+
+Cách tốt nhất để ghi nhớ Công thức 2 là hình dung một vỏ trụ điển hình, được cắt ra rồi trải phẳng như trong Hình 5, có bán kính $x$, chu vi $2\pi x$, chiều cao $f(x)$ và bề dày $\Delta x$ hoặc $dx$:
+\[V=\int_a^b\underbrace{(2\pi x)}_{\text{chu vi}}\underbrace{[f(x)]}_{\text{chiều cao}}\underbrace{dx}_{\text{bề dày}}.\]
+\fig[.90]{fig05}{Hình 5}
+Kiểu lập luận này cũng hữu ích trong những trường hợp khác, chẳng hạn khi quay các miền quanh những đường thẳng không phải trục $y$.
+
+\Needspace{18\baselineskip}
+\ex{1} Tìm thể tích khối thu được khi quay quanh trục $y$ miền giới hạn bởi $y=2x^2-x^3$ và $y=0$.
+\sol Từ hình phác họa trong Hình 6, ta thấy một vỏ trụ điển hình có bán kính $x$, chu vi $2\pi x$ và chiều cao $f(x)=2x^2-x^3$. Vì vậy, theo phương pháp vỏ trụ, thể tích là
+\begin{align*}
+V&=\int_0^2(2\pi x)(2x^2-x^3)\,dx\\
+&=2\pi\int_0^2(2x^3-x^4)\,dx=2\pi\left[\frac12x^4-\frac15x^5\right]_0^2\\
+&=2\pi\left(8-\frac{32}{5}\right)=\frac{16\pi}{5}.
+\end{align*}
+Trong tích phân đầu tiên, các thừa số lần lượt biểu diễn chu vi, chiều cao và bề dày của vỏ trụ.
+\fig[.43]{fig06}{Hình 6}
+Có thể kiểm tra rằng phương pháp vỏ trụ cho cùng kết quả với phương pháp thiết diện.
+\fig[.49]{fig07}{Hình 7. Hình ảnh được tạo bằng máy tính của khối đã tính thể tích trong Ví dụ 1.}
+\paragraph{Chú ý.} So sánh lời giải Ví dụ 1 với nhận xét ở đầu mục này, ta thấy phương pháp vỏ trụ dễ hơn nhiều so với phương pháp hình vành khăn đối với bài toán này. Ta không cần tìm tọa độ điểm cực đại địa phương, cũng không phải giải phương trình của đường cong để tìm $x$ theo $y$. Tuy nhiên, ở những ví dụ khác, các phương pháp của mục trước có thể dễ hơn.
+
+\Needspace{18\baselineskip}
+\ex{2} Tìm thể tích khối thu được khi quay quanh trục $y$ miền nằm giữa $y=x$ và $y=x^2$.
+\sol Miền và một vỏ trụ điển hình được cho trong Hình 8. Ta thấy vỏ trụ có bán kính $x$, chu vi $2\pi x$ và chiều cao $x-x^2$. Do đó, thể tích là
+\begin{align*}
+V&=\int_0^1(2\pi x)(x-x^2)\,dx=2\pi\int_0^1(x^2-x^3)\,dx\\
+&=2\pi\left[\frac{x^3}{3}-\frac{x^4}{4}\right]_0^1=\frac\pi6.
+\end{align*}
+\fig[.44]{fig08}{Hình 8. Chiều cao vỏ trụ là $x-x^2$.}
+Như ví dụ sau cho thấy, phương pháp vỏ trụ cũng áp dụng tốt khi quay một miền quanh trục $x$. Ta chỉ cần vẽ hình để xác định bán kính và chiều cao của một vỏ trụ.
+
+\Needspace{18\baselineskip}
+\ex{3} Dùng vỏ trụ để tìm thể tích khối thu được khi quay quanh trục $x$ miền nằm dưới đường cong $y=\sqrt{x}$ từ 0 đến 1.
+\sol Bài toán này đã được giải bằng hình đĩa trong Ví dụ 6.2.2. Để dùng vỏ trụ, ta viết lại đường cong $y=\sqrt{x}$ (trong hình của ví dụ ấy) thành $x=y^2$ trong Hình 9. Khi quay quanh trục $x$, một vỏ trụ điển hình có bán kính $y$, chu vi $2\pi y$ và chiều cao $1-y^2$. Vì thế, thể tích là
+\begin{align*}
+V&=\int_0^1(2\pi y)(1-y^2)\,dy=2\pi\int_0^1(y-y^3)\,dy\\
+&=2\pi\left[\frac{y^2}{2}-\frac{y^4}{4}\right]_0^1=\frac\pi2.
+\end{align*}
+\fig[.43]{fig09}{Hình 9. Bán kính vỏ trụ là $y$; chiều cao vỏ trụ là $1-y^2$.}
+Trong bài toán này, phương pháp hình đĩa đơn giản hơn.
+
+\Needspace{18\baselineskip}
+\ex{4} Tìm thể tích khối thu được khi quay miền giới hạn bởi $y=x-x^2$ và $y=0$ quanh đường thẳng $x=2$.
+\sol Hình 10 cho thấy miền và một vỏ trụ được tạo thành khi quay quanh đường thẳng $x=2$. Vỏ trụ có bán kính $2-x$, chu vi $2\pi(2-x)$ và chiều cao $x-x^2$.
+\fig[.94]{fig10}{Hình 10}
+Thể tích của khối đã cho là
+\begin{align*}
+V&=\int_0^1 2\pi(2-x)(x-x^2)\,dx\\
+&=2\pi\int_0^1(x^3-3x^2+2x)\,dx\\
+&=2\pi\left[\frac{x^4}{4}-x^3+x^2\right]_0^1=\frac\pi2.
+\end{align*}
+
+\subsection*{Hình đĩa và hình vành khăn so với vỏ trụ}
+Khi tính thể tích một khối tròn xoay, làm thế nào để biết nên dùng hình đĩa (hoặc hình vành khăn) hay vỏ trụ? Cần cân nhắc một số điều: Miền có dễ mô tả hơn bằng các đường biên trên và dưới dạng $y=f(x)$, hay bằng các đường biên trái và phải dạng $x=g(y)$? Làm việc với biến nào dễ hơn? Cận tích phân đối với biến này có dễ tìm hơn đối với biến kia không? Miền có đòi hỏi hai tích phân riêng biệt khi dùng $x$ làm biến, nhưng chỉ một tích phân khi dùng $y$ không? Ta có tính được tích phân đã thiết lập với một trong hai cách chọn biến không?
+
+Nếu quyết định rằng một biến dễ dùng hơn biến kia, thì điều đó sẽ quyết định phương pháp phải dùng. Hãy vẽ một hình chữ nhật mẫu trong miền, tương ứng với một thiết diện của khối. Bề dày của hình chữ nhật, $\Delta x$ hoặc $\Delta y$, tương ứng với biến tích phân. Nếu hình dung hình chữ nhật quay, nó sẽ trở thành một hình đĩa (hình vành khăn) hoặc một vỏ trụ. Đôi khi cả hai phương pháp đều dùng được, như ví dụ tiếp theo.
+
+\Needspace{18\baselineskip}
+\ex{5} Hình 11 cho thấy miền trong góc phần tư thứ nhất, được giới hạn bởi $y=x^2$ và $y=2x$. Một khối được tạo ra bằng cách quay miền quanh đường thẳng $x=-1$. Tìm thể tích của khối bằng cách dùng (a) $x$ làm biến tích phân và (b) $y$ làm biến tích phân.
+\fig[.35]{fig11}{Hình 11}
+\sol Khối được cho trong Hình 12(a).
+
+(a) Để tính thể tích với $x$ làm biến tích phân, ta vẽ hình chữ nhật mẫu theo phương thẳng đứng, như Hình 12(b). Khi quay quanh đường thẳng $x=-1$, ta được các vỏ trụ, nên thể tích là
+\begin{align*}
+V&=\int_0^2 2\pi(x+1)(2x-x^2)\,dx=2\pi\int_0^2(x^2+2x-x^3)\,dx\\
+&=2\pi\left[\frac{x^3}{3}+x^2-\frac{x^4}{4}\right]_0^2=\frac{16\pi}{3}.
+\end{align*}
+(b) Để tính thể tích với $y$ làm biến tích phân, ta vẽ hình chữ nhật mẫu theo phương nằm ngang, như Hình 12(c). Khi quay quanh đường thẳng ấy, ta được các thiết diện hình vành khăn, nên thể tích là
+\begin{align*}
+V&=\int_0^4[\pi(\sqrt{y}+1)^2-\pi(\tfrac12y+1)^2]\,dy
+=\pi\int_0^4(2\sqrt{y}-\tfrac14y^2)\,dy\\
+&=\pi\left[\frac43y^{3/2}-\frac1{12}y^3\right]_0^4=\frac{16\pi}{3}.
+\end{align*}
+\fig[.96]{fig12}{Hình 12. (a) Khối tròn xoay. (b) Hình chữ nhật thẳng đứng tạo vỏ trụ. (c) Hình chữ nhật nằm ngang tạo hình vành khăn.}
+
+\clearpage
+\section*{6.3 — Bài tập}
+\par\noindent\begin{minipage}[t]{\linewidth}
+\bt{1} Gọi $S$ là khối thu được khi quay miền trong hình quanh trục $y$. Giải thích vì sao dùng phương pháp hình vành khăn để tìm thể tích $V$ của $S$ là bất tiện. Phác họa một vỏ trụ xấp xỉ điển hình. Chu vi và chiều cao của nó là bao nhiêu? Dùng vỏ trụ để tìm $V$.
+\fig[.56]{ex01}{Hình cho Bài tập 1}
+\end{minipage}\par
+\par\noindent\begin{minipage}[t]{\linewidth}
+\bt{2} Gọi $S$ là khối thu được khi quay miền trong hình quanh trục $y$. Phác họa một vỏ trụ điển hình và tìm chu vi, chiều cao của nó. Dùng vỏ trụ để tìm thể tích của $S$. Phương pháp này có thuận tiện hơn phương pháp hình vành khăn không?
+\fig[.49]{ex02}{Hình cho Bài tập 2}
+\end{minipage}\par
+\Needspace{26\baselineskip}
+\group{3–4}
+Một khối được tạo thành bằng cách quay miền tô màu quanh đường thẳng đã chỉ định.
+
+(a) Thiết lập một tích phân theo phương pháp vỏ trụ để biểu diễn thể tích của khối.
+
+(b) Tính tích phân để tìm thể tích của khối.
+\par\noindent\begin{minipage}[t]{\linewidth}
+\bt{3} Quay quanh trục $y$.
+\fig[.39]{ex03}{Hình cho Bài tập 3}
+\end{minipage}\par
+\par\noindent\begin{minipage}[t]{\linewidth}
+\bt{4} Quay quanh trục $x$.
+\fig[.39]{ex04}{Hình cho Bài tập 4}
+\end{minipage}\par
+\group{5–8}
+Thiết lập, nhưng không tính, một tích phân biểu diễn thể tích của khối thu được khi quay miền giới hạn bởi các đường cong đã cho quanh đường thẳng đã chỉ định.
+\bt{5} $y=\ln x$, $y=0$, $x=2$; quay quanh trục $y$.
+\bt{6} $y=x^3$, $y=8$, $x=0$; quay quanh trục $x$.
+\bt{7} $y=\sin^{-1}x$, $y=\pi/2$, $x=0$; quay quanh $y=3$.
+\bt{8} $y=4x-x^2$, $y=x$; quay quanh $x=7$.
+\group{9–14}
+Dùng phương pháp vỏ trụ để tìm thể tích tạo thành khi quay quanh trục $y$ miền giới hạn bởi các đường cong đã cho.
+\bt{9} $y=\sqrt{x}$, $y=0$, $x=4$.
+\bt{10} $y=x^3$, $y=0$, $x=1$, $x=2$.
+\bt{11} $y=1/x$, $y=0$, $x=1$, $x=4$.
+\bt{12} $y=e^{-x^2}$, $y=0$, $x=0$, $x=1$.
+\bt{13} $y=\sqrt{5+x^2}$, $y=0$, $x=0$, $x=2$.
+\bt{14} $y=4x-x^2$, $y=x$.
+\group{15–20}
+Dùng phương pháp vỏ trụ để tìm thể tích của khối thu được khi quay quanh trục $x$ miền giới hạn bởi các đường cong đã cho.
+\bt{15} $xy=1$, $x=0$, $y=1$, $y=3$.
+\bt{16} $y=\sqrt{x}$, $x=0$, $y=2$.
+\bt{17} $y=x^{3/2}$, $y=8$, $x=0$.
+\bt{18} $x=-3y^2+12y-9$, $x=0$.
+\bt{19} $x=1+(y-2)^2$, $x=2$.
+\bt{20} $x+y=4$, $x=y^2-4y+4$.
+\group{21–22}
+Miền giới hạn bởi các đường cong đã cho được quay quanh trục đã chỉ định. Tìm thể tích khối thu được bằng cách dùng (a) $x$ làm biến tích phân và (b) $y$ làm biến tích phân.
+\bt{21} $y=x^2$, $y=8\sqrt{x}$; quay quanh trục $y$.
+\bt{22} $y=x^3$, $y=4x^2$; quay quanh trục $x$.
+\Needspace{28\baselineskip}
+\group{23–24}
+Một khối được tạo thành bằng cách quay miền tô màu quanh đường thẳng đã chỉ định.
+
+(a) Phác họa khối và một vỏ trụ xấp xỉ điển hình.
+
+(b) Dùng phương pháp vỏ trụ để thiết lập một tích phân biểu diễn thể tích của khối.
+
+(c) Tính tích phân để tìm thể tích.
+\par\noindent\begin{minipage}[t]{\linewidth}
+\bt{23} Quay quanh $x=-2$.
+\fig[.39]{ex23}{Hình cho Bài tập 23}
+\end{minipage}\par
+\par\noindent\begin{minipage}[t]{\linewidth}
+\bt{24} Quay quanh $y=-1$.
+\fig[.39]{ex24}{Hình cho Bài tập 24}
+\end{minipage}\par
+\group{25–30}
+Dùng phương pháp vỏ trụ để tìm thể tích tạo thành khi quay miền giới hạn bởi các đường cong đã cho quanh trục đã chỉ định.
+\bt{25} $y=x^3$, $y=8$, $x=0$; quay quanh $x=3$.
+\bt{26} $y=4-2x$, $y=0$, $x=0$; quay quanh $x=-1$.
+\bt{27} $y=4x-x^2$, $y=3$; quay quanh $x=1$.
+\bt{28} $y=\sqrt{x}$, $x=2y$; quay quanh $x=5$.
+\bt{29} $x=2y^2$, $y\ge0$, $x=2$; quay quanh $y=2$.
+\bt{30} $x=2y^2$, $x=y^2+1$; quay quanh $y=-2$.
+\Needspace{13\baselineskip}
+\group{31–36}
+(a) Thiết lập một tích phân biểu diễn thể tích của khối thu được khi quay miền giới hạn bởi đường cong đã cho quanh trục đã chỉ định.
+
+(b) Dùng máy tính bỏ túi hoặc máy tính để tính tích phân chính xác đến năm chữ số thập phân.
+\bt{31} $y=xe^{-x}$, $y=0$, $x=2$; quay quanh trục $y$.
+\bt{32} $y=\tan x$, $y=0$, $x=\pi/4$; quay quanh $x=\pi/2$.
+\bt{33} $y=\cos^4x$, $y=-\cos^4x$, $-\pi/2\le x\le\pi/2$; quay quanh $x=\pi$.
+\bt{34} $y=x$, $y=2x/(1+x^3)$; quay quanh $x=-1$.
+\bt{35} $x=\sqrt{\sin y}$, $0\le y\le\pi$, $x=0$; quay quanh $y=4$.
+\bt{36} $x^2-y^2=7$, $x=4$; quay quanh $y=5$.
+\bt{37} Dùng Quy tắc trung điểm với $n=5$ để ước lượng thể tích thu được khi quay quanh trục $y$ miền nằm dưới đường cong $y=\sqrt{1+x^3}$, $0\le x\le1$.
+\par\noindent\begin{minipage}[t]{\linewidth}
+\bt{38} Nếu quay miền trong hình quanh trục $y$ để tạo một khối, hãy dùng Quy tắc trung điểm với $n=5$ để ước lượng thể tích của khối.
+\fig[.56]{ex38}{Hình cho Bài tập 38}
+\end{minipage}\par
+\group{39–42}
+Mỗi tích phân sau biểu diễn thể tích của một khối. Hãy mô tả khối ấy.
+\bt{39} $\displaystyle\int_0^3 2\pi x^5\,dx$.
+\bt{40} $\displaystyle\int_1^3 2\pi y\ln y\,dy$.
+\bt{41} $\displaystyle2\pi\int_1^4\frac{y+2}{y^2}\,dy$.
+\bt{42} $\displaystyle\int_0^1 2\pi(2-x)(3^x-2^x)\,dx$.
+\Needspace{13\baselineskip}
+\group{43–44}
+Dùng đồ thị để ước lượng hoành độ các giao điểm của các đường cong đã cho. Sau đó, dùng thông tin này và máy tính bỏ túi hoặc máy tính để ước lượng thể tích của khối thu được khi quay quanh trục $y$ miền giới hạn bởi các đường cong ấy.
+\bt{43} $y=x^2-2x$, $y=\dfrac{x}{x^2+1}$.
+\bt{44} $y=e^{\sin x}$, $y=x^2-4x+5$.
+\group{45–46}
+Dùng một hệ thống đại số máy tính để tìm thể tích chính xác của khối thu được khi quay miền giới hạn bởi các đường cong đã cho quanh đường thẳng đã chỉ định.
+\bt{45} $y=\sin^2x$, $y=\sin^4x$, $0\le x\le\pi$; quay quanh $x=\pi/2$.
+\bt{46} $y=x^3\sin x$, $y=0$, $0\le x\le\pi$; quay quanh $x=-1$.
+\Needspace{26\baselineskip}
+\group{47–52}
+Một khối được tạo thành bằng cách quay miền tô màu quanh đường thẳng đã chỉ định.
+
+(a) Thiết lập một tích phân bằng bất kỳ phương pháp nào để tìm thể tích của khối.
+
+(b) Tính tích phân để tìm thể tích của khối.
+\par\noindent\begin{minipage}[t]{\linewidth}
+\bt{47} Quay quanh trục $y$.
+\fig[.42]{ex47}{Hình cho Bài tập 47}
+\end{minipage}\par
+\par\noindent\begin{minipage}[t]{\linewidth}
+\bt{48} Quay quanh trục $x$.
+\fig[.42]{ex48}{Hình cho Bài tập 48}
+\end{minipage}\par
+\par\noindent\begin{minipage}[t]{\linewidth}
+\bt{49} Quay quanh trục $x$.
+\fig[.42]{ex49}{Hình cho Bài tập 49}
+\end{minipage}\par
+\par\noindent\begin{minipage}[t]{\linewidth}
+\bt{50} Quay quanh trục $y$.
+\fig[.42]{ex50}{Hình cho Bài tập 50}
+\end{minipage}\par
+\par\noindent\begin{minipage}[t]{\linewidth}
+\bt{51} Quay quanh đường thẳng $x=-2$.
+\fig[.42]{ex51}{Hình cho Bài tập 51}
+\end{minipage}\par
+\par\noindent\begin{minipage}[t]{\linewidth}
+\bt{52} Quay quanh đường thẳng $y=3$.
+\fig[.42]{ex52}{Hình cho Bài tập 52}
+\end{minipage}\par
+\group{53–59}
+Miền giới hạn bởi các đường cong đã cho được quay quanh trục đã chỉ định. Tìm thể tích khối thu được bằng bất kỳ phương pháp nào.
+\bt{53} $y=-x^2+6x-8$, $y=0$; quay quanh trục $y$.
+\bt{54} $y=-x^2+6x-8$, $y=0$; quay quanh trục $x$.
+\bt{55} $y^2-x^2=1$, $y=2$; quay quanh trục $x$.
+\bt{56} $y^2-x^2=1$, $y=2$; quay quanh trục $y$.
+\bt{57} $x^2+(y-1)^2=1$; quay quanh trục $y$.
+\bt{58} $x=(y-3)^2$, $x=4$; quay quanh $y=1$.
+\bt{59} $x=(y-1)^2$, $x-y=1$; quay quanh $x=-1$.
+\bt{60} Gọi $T$ là miền tam giác có các đỉnh $(0,0)$, $(1,0)$ và $(1,2)$; gọi $V$ là thể tích khối tạo thành khi quay $T$ quanh đường thẳng $x=a$, với $a>1$. Biểu diễn $a$ theo $V$.
+\group{61–63}
+Dùng vỏ trụ để tìm thể tích của khối.
+\bt{61} Khối cầu bán kính $r$.
+\bt{62} Khối xuyến trong Bài tập 6.2.75.
+\bt{63} Khối nón tròn xoay có chiều cao $h$ và bán kính đáy $r$.
+\par\noindent\begin{minipage}[t]{\linewidth}
+\bt{64} Giả sử ta làm các vòng giữ khăn ăn bằng cách khoan những lỗ có đường kính khác nhau xuyên qua hai quả cầu gỗ (cũng có đường kính khác nhau). Ta nhận thấy cả hai vòng giữ khăn đều có cùng chiều cao $h$, như trong hình.
+
+(a) Hãy dự đoán vòng nào chứa nhiều gỗ hơn.
+
+(b) Kiểm tra dự đoán của bạn: dùng vỏ trụ để tính thể tích vòng giữ khăn được tạo thành bằng cách khoan một lỗ bán kính $r$ xuyên qua tâm khối cầu bán kính $R$, và biểu diễn kết quả theo $h$.
+\fig[.65]{ex64}{Hình cho Bài tập 64}
+\end{minipage}\par
+\end{document}
