@@ -23,7 +23,7 @@ assert.equal(result.exerciseHeading,'6.2. Bài tập');
 assert.equal(result.section.content,data.content);
 const exercises=result.exercises;
 assert.deepEqual(exercises.map(e=>e.questionNumber),Array.from({length:87},(_,i)=>i+1));
-assert.equal(new Set(exercises.map(e=>e.contentKey)).size,74);
+assert.equal(new Set(exercises.map(e=>e.contentKey)).size,87);
 assert.ok(exercises.every(e=>e.allowSubmission&&e.allowAiEvaluation));
 assert.equal(data.sourceInfo.exampleCount,9);
 assert.ok(exercises[0].content.includes('Yêu cầu chung (1–4)'));
@@ -48,5 +48,5 @@ await window.openReferenceLinksManager(exercises[17].contentKey);assert.equal(wi
 const again=await readBooks(db,student,{bookId:book.id,sectionId:section.id});assert.deepEqual(again.exercises.map(e=>e.id),exercises.map(e=>e.id));
 const edited=rows.find(r=>String(r._id)===exercises[19].id);edited.content+='<p>Admin edit</p>';edited.version=2;edited.referenceLinks=[{url:'https://example.test/reference'}];
 const reread=await readBooks(db,student,{bookId:book.id,sectionId:section.id});assert.ok(reread.exercises[19].content.endsWith('<p>Admin edit</p>'));assert.equal(reread.exercises[19].referenceLinks.length,1);
-console.log('Stewart 6.2: 74 questions, 261 action buttons, figure placeholders and modal bindings passed.');
+console.log('Stewart 6.2: 87 questions, 261 action buttons, figure placeholders and modal bindings passed.');
 dom.window.close();
