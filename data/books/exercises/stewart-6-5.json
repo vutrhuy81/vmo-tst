@@ -1,0 +1,128 @@
+{
+  "exercises": [
+    {
+      "number": 1,
+      "content": "<p><strong>1.</strong></p>\n<p><em>Yêu cầu chung (1–8):</em> Tìm giá trị trung bình của hàm số trên khoảng đã cho.</p>\n<p><span class=\"math inline\">\\(f(x)=3x^2+8x\\)</span>, <span class=\"math inline\">\\([-1,2]\\)</span>.</p>\n"
+    },
+    {
+      "number": 2,
+      "content": "<p><strong>2.</strong></p>\n<p><em>Yêu cầu chung (1–8):</em> Tìm giá trị trung bình của hàm số trên khoảng đã cho.</p>\n<p><span class=\"math inline\">\\(f(x)=\\sqrt{x}\\)</span>, <span class=\"math inline\">\\([0,4]\\)</span>.</p>\n"
+    },
+    {
+      "number": 3,
+      "content": "<p><strong>3.</strong></p>\n<p><em>Yêu cầu chung (1–8):</em> Tìm giá trị trung bình của hàm số trên khoảng đã cho.</p>\n<p><span class=\"math inline\">\\(g(x)=3\\cos x\\)</span>, <span class=\"math inline\">\\([-\\pi/2,\\pi/2]\\)</span>.</p>\n"
+    },
+    {
+      "number": 4,
+      "content": "<p><strong>4.</strong></p>\n<p><em>Yêu cầu chung (1–8):</em> Tìm giá trị trung bình của hàm số trên khoảng đã cho.</p>\n<p><span class=\"math inline\">\\(f(z)=\\dfrac{e^{1/z}}{z^2}\\)</span>, <span class=\"math inline\">\\([1,4]\\)</span>.</p>\n"
+    },
+    {
+      "number": 5,
+      "content": "<p><strong>5.</strong></p>\n<p><em>Yêu cầu chung (1–8):</em> Tìm giá trị trung bình của hàm số trên khoảng đã cho.</p>\n<p><span class=\"math inline\">\\(g(t)=\\dfrac9{1+t^2}\\)</span>, <span class=\"math inline\">\\([0,2]\\)</span>.</p>\n"
+    },
+    {
+      "number": 6,
+      "content": "<p><strong>6.</strong></p>\n<p><em>Yêu cầu chung (1–8):</em> Tìm giá trị trung bình của hàm số trên khoảng đã cho.</p>\n<p><span class=\"math inline\">\\(f(x)=\\dfrac{x^2}{(x^3+3)^2}\\)</span>, <span class=\"math inline\">\\([-1,1]\\)</span>.</p>\n"
+    },
+    {
+      "number": 7,
+      "content": "<p><strong>7.</strong></p>\n<p><em>Yêu cầu chung (1–8):</em> Tìm giá trị trung bình của hàm số trên khoảng đã cho.</p>\n<p><span class=\"math inline\">\\(h(x)=\\cos^4x\\sin x\\)</span>, <span class=\"math inline\">\\([0,\\pi]\\)</span>.</p>\n"
+    },
+    {
+      "number": 8,
+      "content": "<p><strong>8.</strong></p>\n<p><em>Yêu cầu chung (1–8):</em> Tìm giá trị trung bình của hàm số trên khoảng đã cho.</p>\n<p><span class=\"math inline\">\\(h(u)=\\dfrac{\\ln u}{u}\\)</span>, <span class=\"math inline\">\\([1,5]\\)</span>.</p>\n"
+    },
+    {
+      "number": 9,
+      "content": "<p><strong>9.</strong></p>\n<p><em>Yêu cầu chung (9–12):</em> (a) Tìm giá trị trung bình <span class=\"math inline\">\\(f_{\\mathrm{avg}}\\)</span> của <span class=\"math inline\">\\(f\\)</span> trên khoảng đã cho.</p>\n<p>(b) Tìm <span class=\"math inline\">\\(c\\)</span> trong khoảng đã cho sao cho <span class=\"math inline\">\\(f_{\\mathrm{avg}}=f(c)\\)</span>.</p>\n<p>(c) Phác họa đồ thị của <span class=\"math inline\">\\(f\\)</span> và một hình chữ nhật có đáy là khoảng đã cho, với diện tích bằng diện tích miền nằm dưới đồ thị của <span class=\"math inline\">\\(f\\)</span>.</p>\n<p><span class=\"math inline\">\\(f(t)=1/t^2\\)</span>, <span class=\"math inline\">\\([1,3]\\)</span>.</p>\n"
+    },
+    {
+      "number": 10,
+      "content": "<p><strong>10.</strong></p>\n<p><em>Yêu cầu chung (9–12):</em> (a) Tìm giá trị trung bình <span class=\"math inline\">\\(f_{\\mathrm{avg}}\\)</span> của <span class=\"math inline\">\\(f\\)</span> trên khoảng đã cho.</p>\n<p>(b) Tìm <span class=\"math inline\">\\(c\\)</span> trong khoảng đã cho sao cho <span class=\"math inline\">\\(f_{\\mathrm{avg}}=f(c)\\)</span>.</p>\n<p>(c) Phác họa đồ thị của <span class=\"math inline\">\\(f\\)</span> và một hình chữ nhật có đáy là khoảng đã cho, với diện tích bằng diện tích miền nằm dưới đồ thị của <span class=\"math inline\">\\(f\\)</span>.</p>\n<p><span class=\"math inline\">\\(g(x)=(x+1)^3\\)</span>, <span class=\"math inline\">\\([0,2]\\)</span>.</p>\n"
+    },
+    {
+      "number": 11,
+      "content": "<p><strong>11.</strong></p>\n<p><em>Yêu cầu chung (9–12):</em> (a) Tìm giá trị trung bình <span class=\"math inline\">\\(f_{\\mathrm{avg}}\\)</span> của <span class=\"math inline\">\\(f\\)</span> trên khoảng đã cho.</p>\n<p>(b) Tìm <span class=\"math inline\">\\(c\\)</span> trong khoảng đã cho sao cho <span class=\"math inline\">\\(f_{\\mathrm{avg}}=f(c)\\)</span>.</p>\n<p>(c) Phác họa đồ thị của <span class=\"math inline\">\\(f\\)</span> và một hình chữ nhật có đáy là khoảng đã cho, với diện tích bằng diện tích miền nằm dưới đồ thị của <span class=\"math inline\">\\(f\\)</span>.</p>\n<p><span class=\"math inline\">\\(f(x)=2\\sin x-\\sin2x\\)</span>, <span class=\"math inline\">\\([0,\\pi]\\)</span>.</p>\n"
+    },
+    {
+      "number": 12,
+      "content": "<p><strong>12.</strong></p>\n<p><em>Yêu cầu chung (9–12):</em> (a) Tìm giá trị trung bình <span class=\"math inline\">\\(f_{\\mathrm{avg}}\\)</span> của <span class=\"math inline\">\\(f\\)</span> trên khoảng đã cho.</p>\n<p>(b) Tìm <span class=\"math inline\">\\(c\\)</span> trong khoảng đã cho sao cho <span class=\"math inline\">\\(f_{\\mathrm{avg}}=f(c)\\)</span>.</p>\n<p>(c) Phác họa đồ thị của <span class=\"math inline\">\\(f\\)</span> và một hình chữ nhật có đáy là khoảng đã cho, với diện tích bằng diện tích miền nằm dưới đồ thị của <span class=\"math inline\">\\(f\\)</span>.</p>\n<p><span class=\"math inline\">\\(f(x)=2xe^{-x^2}\\)</span>, <span class=\"math inline\">\\([0,2]\\)</span>.</p>\n"
+    },
+    {
+      "number": 13,
+      "content": "<p><strong>13.</strong></p>\n<p>Nếu <span class=\"math inline\">\\(f\\)</span> liên tục và <span class=\"math inline\">\\(\\int_1^3 f(x)\\,dx=8\\)</span>, hãy chứng minh rằng <span class=\"math inline\">\\(f\\)</span> nhận giá trị <span class=\"math inline\">\\(4\\)</span> ít nhất một lần trên khoảng <span class=\"math inline\">\\([1,3]\\)</span>.</p>\n"
+    },
+    {
+      "number": 14,
+      "content": "<p><strong>14.</strong></p>\n<p>Tìm các số <span class=\"math inline\">\\(b\\)</span> sao cho giá trị trung bình của <span class=\"math inline\">\\(f(x)=2+6x-3x^2\\)</span> trên khoảng <span class=\"math inline\">\\([0,b]\\)</span> bằng <span class=\"math inline\">\\(3\\)</span>.</p>\n"
+    },
+    {
+      "number": 15,
+      "content": "<p><strong>15.</strong></p>\n<p>Tìm giá trị trung bình của <span class=\"math inline\">\\(f\\)</span> trên <span class=\"math inline\">\\([0,8]\\)</span>.</p>\n<div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-6-5-d90e86f0/ex15.png\" alt=\"image\" /><br />\nHình cho Bài tập 15</p>\n</div>\n"
+    },
+    {
+      "number": 16,
+      "content": "<p><strong>16.</strong></p>\n<p>Hình vẽ cho đồ thị vận tốc của một ô tô đang tăng tốc.</p>\n<p>(a) Dùng Quy tắc trung điểm để ước lượng vận tốc trung bình của ô tô trong <span class=\"math inline\">\\(12\\)</span> giây đầu tiên.</p>\n<p>(b) Tại thời điểm nào vận tốc tức thời bằng vận tốc trung bình?</p>\n<div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-6-5-d90e86f0/ex16.png\" alt=\"image\" /><br />\nHình cho Bài tập 16. Trục đứng: <span class=\"math inline\">\\(v\\)</span> (km/h); trục ngang: <span class=\"math inline\">\\(t\\)</span> (giây).</p>\n</div>\n"
+    },
+    {
+      "number": 17,
+      "content": "<p><strong>17.</strong></p>\n<p>Ở một thành phố, nhiệt độ (tính bằng °F) sau 9 giờ sáng <span class=\"math inline\">\\(t\\)</span> giờ được mô hình hóa bởi hàm <span class=\"math display\">\\[T(t)=50+14\\sin\\frac{\\pi t}{12}.\\]</span> Tìm nhiệt độ trung bình trong khoảng thời gian từ 9 giờ sáng đến 9 giờ tối.</p>\n"
+    },
+    {
+      "number": 18,
+      "content": "<p><strong>18.</strong></p>\n<p>Hình vẽ cho đồ thị nhiệt độ của một thành phố ở Bờ Đông và một thành phố ở Bờ Tây trong khoảng <span class=\"math inline\">\\(24\\)</span> giờ, bắt đầu từ nửa đêm. Thành phố nào có nhiệt độ cao nhất trong ngày ấy? Tìm nhiệt độ trung bình của mỗi thành phố trong khoảng thời gian này bằng Quy tắc trung điểm với <span class=\"math inline\">\\(n=12\\)</span>. Diễn giải kết quả: xét chung cả ngày, thành phố nào “ấm hơn”?</p>\n<div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-6-5-d90e86f0/ex18.png\" alt=\"image\" /><br />\nHình cho Bài tập 18. East Coast: Bờ Đông; West Coast: Bờ Tây. Trục đứng: <span class=\"math inline\">\\(T\\)</span> (°F); trục ngang: <span class=\"math inline\">\\(t\\)</span> (giờ).</p>\n</div>\n"
+    },
+    {
+      "number": 19,
+      "content": "<p><strong>19.</strong></p>\n<p>Khối lượng riêng theo chiều dài của một thanh dài <span class=\"math inline\">\\(8\\)</span> m là <span class=\"math inline\">\\(12/\\sqrt{x+1}\\)</span> kg/m, trong đó <span class=\"math inline\">\\(x\\)</span> tính bằng mét từ một đầu thanh. Tìm khối lượng riêng theo chiều dài trung bình của thanh.</p>\n"
+    },
+    {
+      "number": 20,
+      "content": "<p><strong>20.</strong></p>\n<p>Vận tốc <span class=\"math inline\">\\(v\\)</span> của máu chảy trong một mạch máu có bán kính <span class=\"math inline\">\\(R\\)</span> và chiều dài <span class=\"math inline\">\\(l\\)</span>, tại khoảng cách <span class=\"math inline\">\\(r\\)</span> đến trục giữa, là <span class=\"math display\">\\[v(r)=\\frac{P}{4\\eta l}(R^2-r^2),\\]</span> trong đó <span class=\"math inline\">\\(P\\)</span> là hiệu áp suất giữa hai đầu mạch và <span class=\"math inline\">\\(\\eta\\)</span> là độ nhớt của máu (xem Ví dụ 3.7.7). Tìm vận tốc trung bình (theo <span class=\"math inline\">\\(r\\)</span>) trên khoảng <span class=\"math inline\">\\(0\\le r\\le R\\)</span>. So sánh vận tốc trung bình với vận tốc cực đại.</p>\n"
+    },
+    {
+      "number": 21,
+      "content": "<p><strong>21.</strong></p>\n<p>Trong Ví dụ 3.8.1, ta đã mô hình hóa dân số thế giới trong nửa sau thế kỷ XX bằng phương trình <span class=\"math inline\">\\(P(t)=2560e^{0.017185t}\\)</span>. Dùng phương trình này để ước lượng dân số trung bình của thế giới trong giai đoạn đó (1950–2000).</p>\n"
+    },
+    {
+      "number": 22,
+      "content": "<p><strong>22.</strong></p>\n<p>(a) Một tách cà phê có nhiệt độ <span class=\"math inline\">\\(95^\\circ\\mathrm C\\)</span> và mất <span class=\"math inline\">\\(30\\)</span> phút để nguội xuống <span class=\"math inline\">\\(61^\\circ\\mathrm C\\)</span> trong một căn phòng có nhiệt độ <span class=\"math inline\">\\(20^\\circ\\mathrm C\\)</span>. Dùng Định luật làm nguội Newton (§3.8) để chứng minh rằng nhiệt độ của cà phê sau <span class=\"math inline\">\\(t\\)</span> phút là <span class=\"math display\">\\[T(t)=20+75e^{-kt},\\]</span> trong đó <span class=\"math inline\">\\(k\\approx0.02\\)</span>.</p>\n<p>(b) Nhiệt độ trung bình của cà phê trong nửa giờ đầu là bao nhiêu?</p>\n"
+    },
+    {
+      "number": 23,
+      "content": "<p><strong>23.</strong></p>\n<p>Dùng kết quả của Bài tập 5.5.89 để tính thể tích trung bình của không khí hít vào trong phổi trong một chu kỳ hô hấp.</p>\n"
+    },
+    {
+      "number": 24,
+      "content": "<p><strong>24.</strong></p>\n<p>Nếu một vật rơi tự do từ trạng thái nghỉ, thì độ dịch chuyển của nó là <span class=\"math inline\">\\(s=\\frac12gt^2\\)</span>. Gọi vận tốc sau thời gian <span class=\"math inline\">\\(T\\)</span> là <span class=\"math inline\">\\(v_T\\)</span>. Chứng minh rằng nếu tính trung bình các vận tốc theo <span class=\"math inline\">\\(t\\)</span> thì ta được <span class=\"math inline\">\\(v_{\\mathrm{avg}}=\\frac12v_T\\)</span>, còn nếu tính trung bình các vận tốc theo <span class=\"math inline\">\\(s\\)</span> thì ta được <span class=\"math inline\">\\(v_{\\mathrm{avg}}=\\frac23v_T\\)</span>.</p>\n"
+    },
+    {
+      "number": 25,
+      "content": "<p><strong>25.</strong></p>\n<p>Dùng hình vẽ để chứng minh rằng nếu <span class=\"math inline\">\\(f\\)</span> lõm lên trên <span class=\"math inline\">\\([a,b]\\)</span>, thì <span class=\"math display\">\\[f_{\\mathrm{avg}}&gt;f\\left(\\frac{a+b}{2}\\right).\\]</span></p>\n<div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-6-5-d90e86f0/ex25.png\" alt=\"image\" /><br />\nHình cho Bài tập 25</p>\n</div>\n"
+    },
+    {
+      "number": 26,
+      "content": "<p><strong>26.</strong></p>\n<p><em>Yêu cầu chung (26–27):</em> Ký hiệu <span class=\"math inline\">\\(f_{\\mathrm{avg}}[a,b]\\)</span> là giá trị trung bình của <span class=\"math inline\">\\(f\\)</span> trên khoảng <span class=\"math inline\">\\([a,b]\\)</span>.</p>\n<p>Chứng minh rằng nếu <span class=\"math inline\">\\(a&lt;c&lt;b\\)</span>, thì <span class=\"math display\">\\[f_{\\mathrm{avg}}[a,b]=\\left(\\frac{c-a}{b-a}\\right)f_{\\mathrm{avg}}[a,c]+\\left(\\frac{b-c}{b-a}\\right)f_{\\mathrm{avg}}[c,b].\\]</span></p>\n"
+    },
+    {
+      "number": 27,
+      "content": "<p><strong>27.</strong></p>\n<p><em>Yêu cầu chung (26–27):</em> Ký hiệu <span class=\"math inline\">\\(f_{\\mathrm{avg}}[a,b]\\)</span> là giá trị trung bình của <span class=\"math inline\">\\(f\\)</span> trên khoảng <span class=\"math inline\">\\([a,b]\\)</span>.</p>\n<p>Chứng minh rằng nếu <span class=\"math inline\">\\(f\\)</span> liên tục, thì <span class=\"math inline\">\\(\\displaystyle\\lim_{t\\to a^+}f_{\\mathrm{avg}}[a,t]=f(a)\\)</span>.</p>\n"
+    },
+    {
+      "number": 28,
+      "content": "<p><strong>28.</strong></p>\n<p>Chứng minh Định lý giá trị trung bình cho tích phân bằng cách áp dụng Định lý giá trị trung bình cho đạo hàm (xem §4.2) cho hàm <span class=\"math inline\">\\(F(x)=\\int_a^x f(t)\\,dt\\)</span>.</p>\n"
+    },
+    {
+      "number": 29,
+      "content": "<p><strong>Dự án ứng dụng — Bài 1.</strong></p>\n<h1 class=\"unnumbered\" id=\"dự-án-ứng-dụng-giải-tích-và-bóng-chày\">Dự án ứng dụng — Giải tích và bóng chày</h1>\n<p>Trong dự án này, ta khảo sát ba trong số nhiều ứng dụng của giải tích vào bóng chày. Các tương tác vật lý trong môn thể thao này, đặc biệt là va chạm giữa bóng và gậy, khá phức tạp; những mô hình của chúng được bàn luận chi tiết trong cuốn sách của Robert Adair, <em>The Physics of Baseball</em>, ấn bản thứ ba (New York, 2002).</p>\n<div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-6-5-d90e86f0/baseball.png\" alt=\"image\" /><br />\nVị trí của gậy bóng chày nhìn từ trên xuống, được ghi lại sau mỗi <span class=\"math inline\">\\(1/50\\)</span> giây trong một cú vung gậy điển hình. Batter’s box: ô đứng của người đánh bóng. (Phỏng theo <em>The Physics of Baseball</em>.)</p>\n</div>\n<p>Có thể bạn sẽ ngạc nhiên khi biết rằng va chạm giữa bóng chày và gậy chỉ kéo dài khoảng một phần nghìn giây. Ở đây, ta tính lực trung bình tác dụng lên gậy trong va chạm ấy bằng cách trước hết tính độ biến thiên động lượng của bóng.</p>\n<p><em>Động lượng</em> <span class=\"math inline\">\\(p\\)</span> của một vật là tích của khối lượng <span class=\"math inline\">\\(m\\)</span> với vận tốc <span class=\"math inline\">\\(v\\)</span>, tức <span class=\"math inline\">\\(p=mv\\)</span>. Giả sử một vật chuyển động trên một đường thẳng chịu tác dụng của lực <span class=\"math inline\">\\(F=F(t)\\)</span> là một hàm liên tục theo thời gian.</p>\n<p>(a) Chứng minh rằng độ biến thiên động lượng trên khoảng thời gian <span class=\"math inline\">\\([t_0,t_1]\\)</span> bằng tích phân của <span class=\"math inline\">\\(F\\)</span> từ <span class=\"math inline\">\\(t_0\\)</span> đến <span class=\"math inline\">\\(t_1\\)</span>; nghĩa là, chứng minh <span class=\"math display\">\\[p(t_1)-p(t_0)=\\int_{t_0}^{t_1}F(t)\\,dt.\\]</span> Tích phân này được gọi là <em>xung lượng của lực</em> trên khoảng thời gian ấy.</p>\n<p>(b) Một cầu thủ ném một cú bóng nhanh với tốc độ <span class=\"math inline\">\\(90\\)</span> mi/h đến người đánh bóng. Người đánh đánh trả bóng theo đường thẳng trực tiếp về phía người ném. Bóng tiếp xúc với gậy trong <span class=\"math inline\">\\(0.001\\)</span> s và rời gậy với vận tốc có độ lớn <span class=\"math inline\">\\(110\\)</span> mi/h. Một quả bóng chày có trọng lượng <span class=\"math inline\">\\(5\\)</span> oz; trong hệ đơn vị thông dụng của Hoa Kỳ, khối lượng được đo bằng slug: <span class=\"math inline\">\\(m=w/g\\)</span>, với <span class=\"math inline\">\\(g=32\\ \\mathrm{ft/s^2}\\)</span>.</p>\n<p>(i) Tìm độ biến thiên động lượng của bóng.</p>\n<p>(ii) Tìm lực trung bình tác dụng lên gậy.</p>\n"
+    },
+    {
+      "number": 30,
+      "content": "<p><strong>Dự án ứng dụng — Bài 2.</strong></p>\n<p>Trong bài toán này, ta tính công cần để một cầu thủ ném một cú bóng nhanh <span class=\"math inline\">\\(90\\)</span> mi/h, bằng cách trước hết xét động năng.</p>\n<p><em>Động năng</em> <span class=\"math inline\">\\(K\\)</span> của một vật có khối lượng <span class=\"math inline\">\\(m\\)</span> và vận tốc <span class=\"math inline\">\\(v\\)</span> được cho bởi <span class=\"math inline\">\\(K=\\frac12mv^2\\)</span>. Giả sử một vật có khối lượng <span class=\"math inline\">\\(m\\)</span>, chuyển động trên một đường thẳng, chịu tác dụng của lực <span class=\"math inline\">\\(F=F(s)\\)</span> phụ thuộc vào vị trí <span class=\"math inline\">\\(s\\)</span>. Theo Định luật II Newton, <span class=\"math display\">\\[F(s)=ma=m\\frac{dv}{dt},\\]</span> trong đó <span class=\"math inline\">\\(a\\)</span> và <span class=\"math inline\">\\(v\\)</span> lần lượt là gia tốc và vận tốc của vật.</p>\n<p>(a) Chứng minh rằng công thực hiện khi dịch chuyển vật từ vị trí <span class=\"math inline\">\\(s_0\\)</span> đến vị trí <span class=\"math inline\">\\(s_1\\)</span> bằng độ biến thiên động năng của vật; nghĩa là, chứng minh <span class=\"math display\">\\[W=\\int_{s_0}^{s_1}F(s)\\,ds=\\frac12mv_1^2-\\frac12mv_0^2,\\]</span> trong đó <span class=\"math inline\">\\(v_0=v(s_0)\\)</span> và <span class=\"math inline\">\\(v_1=v(s_1)\\)</span> là vận tốc của vật tại các vị trí <span class=\"math inline\">\\(s_0\\)</span> và <span class=\"math inline\">\\(s_1\\)</span>. <em>Gợi ý:</em> Theo Quy tắc dây chuyền, <span class=\"math display\">\\[m\\frac{dv}{dt}=m\\frac{dv}{ds}\\frac{ds}{dt}=mv\\frac{dv}{ds}.\\]</span> (b) Cần thực hiện bao nhiêu foot-pound công để ném một quả bóng chày với tốc độ <span class=\"math inline\">\\(90\\)</span> mi/h?</p>\n"
+    },
+    {
+      "number": 31,
+      "content": "<p><strong>Dự án ứng dụng — Bài 3.</strong></p>\n<p>(a) Một cầu thủ phòng ngự ngoài sân đón bóng cách chốt nhà <span class=\"math inline\">\\(280\\)</span> ft và ném thẳng về phía người bắt bóng với vận tốc ban đầu <span class=\"math inline\">\\(100\\)</span> ft/s. Giả sử vận tốc <span class=\"math inline\">\\(v(t)\\)</span> của bóng sau <span class=\"math inline\">\\(t\\)</span> giây thỏa mãn phương trình vi phân <span class=\"math inline\">\\(dv/dt=-\\frac1{10}v\\)</span> do sức cản không khí. Bóng mất bao lâu để đến chốt nhà? (Bỏ qua mọi chuyển động theo phương thẳng đứng của bóng.)</p>\n<p>(b) Huấn luyện viên tự hỏi liệu bóng có đến chốt nhà sớm hơn nếu được chuyền tiếp qua một cầu thủ phòng ngự trong sân hay không. Cầu thủ chặn ngắn có thể đứng trên đoạn thẳng nối cầu thủ ngoài sân với chốt nhà, bắt bóng do cầu thủ ngoài sân ném, xoay người và ném bóng cho người bắt với vận tốc ban đầu <span class=\"math inline\">\\(105\\)</span> ft/s. Huấn luyện viên đo được thời gian chuyền tiếp của cầu thủ chặn ngắn (bắt bóng, xoay người, ném bóng) là nửa giây. Cầu thủ này nên đứng cách chốt nhà bao xa để tổng thời gian bóng đến chốt nhà là nhỏ nhất? Huấn luyện viên nên khuyến khích ném thẳng hay ném qua cầu thủ trung gian? Điều gì thay đổi nếu cầu thủ chặn ngắn có thể ném với tốc độ <span class=\"math inline\">\\(115\\)</span> ft/s?</p>\n<p>(c) Với vận tốc ném nào của cầu thủ chặn ngắn thì một cú ném qua trung gian mất thời gian bằng một cú ném thẳng?</p>\n"
+    }
+  ]
+}

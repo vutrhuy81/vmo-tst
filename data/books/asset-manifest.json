@@ -3860,5 +3860,45 @@
     "file": "stewart-6-4-237ec77a/fig04.png",
     "mime": "image/png",
     "sha256": "16daaea63309eb7b4cd41954fb712e9e5cb082ead1f3a82509feeb29949c7b06"
+  },
+  "stewart-6-5-d90e86f0/baseball.png": {
+    "file": "stewart-6-5-d90e86f0/baseball.png",
+    "mime": "image/png",
+    "sha256": "6e32c573bf6b2f404bf48218c3b229dd28069ef1a717ac7176b74580db3475ef"
+  },
+  "stewart-6-5-d90e86f0/ex15.png": {
+    "file": "stewart-6-5-d90e86f0/ex15.png",
+    "mime": "image/png",
+    "sha256": "a837d548df8ae9a1626cff70fb0da8d93382b1c42cc386ab49257d3e57b97e5a"
+  },
+  "stewart-6-5-d90e86f0/ex16.png": {
+    "file": "stewart-6-5-d90e86f0/ex16.png",
+    "mime": "image/png",
+    "sha256": "b7387c932206936ecf1ba8a40d7f231b56d99b27f44946479835428e1d761ece"
+  },
+  "stewart-6-5-d90e86f0/ex18.png": {
+    "file": "stewart-6-5-d90e86f0/ex18.png",
+    "mime": "image/png",
+    "sha256": "2b50c83942c481feefc6dc15cae4702e3ee799063f33dfbb60fe58a06908254b"
+  },
+  "stewart-6-5-d90e86f0/ex25.png": {
+    "file": "stewart-6-5-d90e86f0/ex25.png",
+    "mime": "image/png",
+    "sha256": "925d0053590cd1a8fe0cfcbaffc16539f029b64d16c88bcf68d02797f28feb1e"
+  },
+  "stewart-6-5-d90e86f0/fig01.png": {
+    "file": "stewart-6-5-d90e86f0/fig01.png",
+    "mime": "image/png",
+    "sha256": "22fe22472c01dc749da19265345db692591b4ccdc512c815df83c6612c887fc6"
+  },
+  "stewart-6-5-d90e86f0/fig02.png": {
+    "file": "stewart-6-5-d90e86f0/fig02.png",
+    "mime": "image/png",
+    "sha256": "ba8054d4ffde36dfab89f7c00cd3cef759de1be1dc48a2d7679633f7aea1326f"
+  },
+  "stewart-6-5-d90e86f0/fig03.png": {
+    "file": "stewart-6-5-d90e86f0/fig03.png",
+    "mime": "image/png",
+    "sha256": "737e826942f22e7e4020273d5ada6740c945d89118cab9c15fe6c56f07f83bb0"
   }
 }
