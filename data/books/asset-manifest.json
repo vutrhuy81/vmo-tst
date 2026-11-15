@@ -3900,5 +3900,20 @@
     "file": "stewart-6-5-d90e86f0/fig03.png",
     "mime": "image/png",
     "sha256": "737e826942f22e7e4020273d5ada6740c945d89118cab9c15fe6c56f07f83bb0"
+  },
+  "stewart-6-review-84e8716e/ex31.png": {
+    "file": "stewart-6-review-84e8716e/ex31.png",
+    "mime": "image/png",
+    "sha256": "850a69ff2ffdc0487c2e5018a935323b0b4d763774e9e122ecfd542a24b15c5b"
+  },
+  "stewart-6-review-84e8716e/movies.png": {
+    "file": "stewart-6-review-84e8716e/movies.png",
+    "mime": "image/png",
+    "sha256": "21bba5241e59238119f95e54e7cb83194d502940c409a418ea60d0480d725d73"
+  },
+  "stewart-6-review-84e8716e/tf_region.png": {
+    "file": "stewart-6-review-84e8716e/tf_region.png",
+    "mime": "image/png",
+    "sha256": "5efdf6644ae36cda662897f7d584895ae7a321f6e299b1de647ef60a3b08efa8"
   }
 }

@@ -1,0 +1,160 @@
+{
+  "exercises": [
+    {
+      "number": 1,
+      "content": "<p><strong>1.</strong></p>\n<p><em>Yêu cầu chung (1–6):</em> Tìm diện tích miền giới hạn bởi các đường cong đã cho.</p>\n<p><span class=\"math inline\">\\(y=x^2\\)</span>, <span class=\"math inline\">\\(y=8x-x^2\\)</span>.</p>\n"
+    },
+    {
+      "number": 2,
+      "content": "<p><strong>2.</strong></p>\n<p><em>Yêu cầu chung (1–6):</em> Tìm diện tích miền giới hạn bởi các đường cong đã cho.</p>\n<p><span class=\"math inline\">\\(y=\\sqrt{x}\\)</span>, <span class=\"math inline\">\\(y=-\\sqrt[3]{x}\\)</span>, <span class=\"math inline\">\\(y=x-2\\)</span>.</p>\n"
+    },
+    {
+      "number": 3,
+      "content": "<p><strong>3.</strong></p>\n<p><em>Yêu cầu chung (1–6):</em> Tìm diện tích miền giới hạn bởi các đường cong đã cho.</p>\n<p><span class=\"math inline\">\\(y=1-2x^2\\)</span>, <span class=\"math inline\">\\(y=|x|\\)</span>.</p>\n"
+    },
+    {
+      "number": 4,
+      "content": "<p><strong>4.</strong></p>\n<p><em>Yêu cầu chung (1–6):</em> Tìm diện tích miền giới hạn bởi các đường cong đã cho.</p>\n<p><span class=\"math inline\">\\(x+y=0\\)</span>, <span class=\"math inline\">\\(x=y^2+3y\\)</span>.</p>\n"
+    },
+    {
+      "number": 5,
+      "content": "<p><strong>5.</strong></p>\n<p><em>Yêu cầu chung (1–6):</em> Tìm diện tích miền giới hạn bởi các đường cong đã cho.</p>\n<p><span class=\"math inline\">\\(y=\\sin(\\pi x/2)\\)</span>, <span class=\"math inline\">\\(y=x^2-2x\\)</span>.</p>\n"
+    },
+    {
+      "number": 6,
+      "content": "<p><strong>6.</strong></p>\n<p><em>Yêu cầu chung (1–6):</em> Tìm diện tích miền giới hạn bởi các đường cong đã cho.</p>\n<p><span class=\"math inline\">\\(y=\\sqrt{x}\\)</span>, <span class=\"math inline\">\\(y=x^2\\)</span>, <span class=\"math inline\">\\(x=2\\)</span>.</p>\n"
+    },
+    {
+      "number": 7,
+      "content": "<p><strong>7.</strong></p>\n<p><em>Yêu cầu chung (7–11):</em> Tìm thể tích khối thu được khi quay miền giới hạn bởi các đường cong đã cho quanh trục đã chỉ định.</p>\n<p><span class=\"math inline\">\\(y=2x\\)</span>, <span class=\"math inline\">\\(y=x^2\\)</span>; quay quanh trục <span class=\"math inline\">\\(x\\)</span>.</p>\n"
+    },
+    {
+      "number": 8,
+      "content": "<p><strong>8.</strong></p>\n<p><em>Yêu cầu chung (7–11):</em> Tìm thể tích khối thu được khi quay miền giới hạn bởi các đường cong đã cho quanh trục đã chỉ định.</p>\n<p><span class=\"math inline\">\\(x=1+y^2\\)</span>, <span class=\"math inline\">\\(y=x-3\\)</span>; quay quanh trục <span class=\"math inline\">\\(y\\)</span>.</p>\n"
+    },
+    {
+      "number": 9,
+      "content": "<p><strong>9.</strong></p>\n<p><em>Yêu cầu chung (7–11):</em> Tìm thể tích khối thu được khi quay miền giới hạn bởi các đường cong đã cho quanh trục đã chỉ định.</p>\n<p><span class=\"math inline\">\\(x=0\\)</span>, <span class=\"math inline\">\\(x=9-y^2\\)</span>; quay quanh <span class=\"math inline\">\\(x=-1\\)</span>.</p>\n"
+    },
+    {
+      "number": 10,
+      "content": "<p><strong>10.</strong></p>\n<p><em>Yêu cầu chung (7–11):</em> Tìm thể tích khối thu được khi quay miền giới hạn bởi các đường cong đã cho quanh trục đã chỉ định.</p>\n<p><span class=\"math inline\">\\(y=x^2+1\\)</span>, <span class=\"math inline\">\\(y=9-x^2\\)</span>; quay quanh <span class=\"math inline\">\\(y=-1\\)</span>.</p>\n"
+    },
+    {
+      "number": 11,
+      "content": "<p><strong>11.</strong></p>\n<p><em>Yêu cầu chung (7–11):</em> Tìm thể tích khối thu được khi quay miền giới hạn bởi các đường cong đã cho quanh trục đã chỉ định.</p>\n<p><span class=\"math inline\">\\(x^2-y^2=a^2\\)</span>, <span class=\"math inline\">\\(x=a+h\\)</span> (với <span class=\"math inline\">\\(a&gt;0\\)</span>, <span class=\"math inline\">\\(h&gt;0\\)</span>); quay quanh trục <span class=\"math inline\">\\(y\\)</span>.</p>\n"
+    },
+    {
+      "number": 12,
+      "content": "<p><strong>12.</strong></p>\n<p><em>Yêu cầu chung (12–14):</em> Thiết lập, nhưng không tính, một tích phân biểu diễn thể tích khối thu được khi quay miền giới hạn bởi các đường cong đã cho quanh trục đã chỉ định.</p>\n<p><span class=\"math inline\">\\(y=\\tan x\\)</span>, <span class=\"math inline\">\\(y=x\\)</span>, <span class=\"math inline\">\\(x=\\pi/3\\)</span>; quay quanh trục <span class=\"math inline\">\\(y\\)</span>.</p>\n"
+    },
+    {
+      "number": 13,
+      "content": "<p><strong>13.</strong></p>\n<p><em>Yêu cầu chung (12–14):</em> Thiết lập, nhưng không tính, một tích phân biểu diễn thể tích khối thu được khi quay miền giới hạn bởi các đường cong đã cho quanh trục đã chỉ định.</p>\n<p><span class=\"math inline\">\\(y=\\cos^2x\\)</span>, <span class=\"math inline\">\\(|x|\\le\\pi/2\\)</span>, <span class=\"math inline\">\\(y=\\frac14\\)</span>; quay quanh <span class=\"math inline\">\\(x=\\pi/2\\)</span>.</p>\n"
+    },
+    {
+      "number": 14,
+      "content": "<p><strong>14.</strong></p>\n<p><em>Yêu cầu chung (12–14):</em> Thiết lập, nhưng không tính, một tích phân biểu diễn thể tích khối thu được khi quay miền giới hạn bởi các đường cong đã cho quanh trục đã chỉ định.</p>\n<p><span class=\"math inline\">\\(y=\\ln x\\)</span>, <span class=\"math inline\">\\(y=0\\)</span>, <span class=\"math inline\">\\(x=4\\)</span>; quay quanh <span class=\"math inline\">\\(x=-1\\)</span>.</p>\n"
+    },
+    {
+      "number": 15,
+      "content": "<p><strong>15.</strong></p>\n<p><em>Yêu cầu chung (15–16):</em> Miền giới hạn bởi các đường cong đã cho được quay quanh trục đã chỉ định. Tìm thể tích của khối bằng cách dùng (a) <span class=\"math inline\">\\(x\\)</span> làm biến tích phân và (b) <span class=\"math inline\">\\(y\\)</span> làm biến tích phân.</p>\n<p><span class=\"math inline\">\\(y=x^3\\)</span>, <span class=\"math inline\">\\(y=3x^2\\)</span>; quay quanh <span class=\"math inline\">\\(x=-1\\)</span>.</p>\n"
+    },
+    {
+      "number": 16,
+      "content": "<p><strong>16.</strong></p>\n<p><em>Yêu cầu chung (15–16):</em> Miền giới hạn bởi các đường cong đã cho được quay quanh trục đã chỉ định. Tìm thể tích của khối bằng cách dùng (a) <span class=\"math inline\">\\(x\\)</span> làm biến tích phân và (b) <span class=\"math inline\">\\(y\\)</span> làm biến tích phân.</p>\n<p><span class=\"math inline\">\\(y=\\sqrt{x}\\)</span>, <span class=\"math inline\">\\(y=x^2\\)</span>; quay quanh <span class=\"math inline\">\\(y=3\\)</span>.</p>\n"
+    },
+    {
+      "number": 17,
+      "content": "<p><strong>17.</strong></p>\n<p>Tìm thể tích các khối thu được khi quay miền giới hạn bởi <span class=\"math inline\">\\(y=x\\)</span> và <span class=\"math inline\">\\(y=x^2\\)</span> quanh các đường thẳng sau.</p>\n<p>(a) Trục <span class=\"math inline\">\\(x\\)</span>. (b) Trục <span class=\"math inline\">\\(y\\)</span>. (c) <span class=\"math inline\">\\(y=2\\)</span>.</p>\n"
+    },
+    {
+      "number": 18,
+      "content": "<p><strong>18.</strong></p>\n<p>Gọi <span class=\"math inline\">\\(\\mathcal R\\)</span> là miền trong góc phần tư thứ nhất, giới hạn bởi <span class=\"math inline\">\\(y=x^3\\)</span> và <span class=\"math inline\">\\(y=2x-x^2\\)</span>. Tính các đại lượng sau.</p>\n<p>(a) Diện tích của <span class=\"math inline\">\\(\\mathcal R\\)</span>.</p>\n<p>(b) Thể tích tạo thành khi quay <span class=\"math inline\">\\(\\mathcal R\\)</span> quanh trục <span class=\"math inline\">\\(x\\)</span>.</p>\n<p>(c) Thể tích tạo thành khi quay <span class=\"math inline\">\\(\\mathcal R\\)</span> quanh trục <span class=\"math inline\">\\(y\\)</span>.</p>\n"
+    },
+    {
+      "number": 19,
+      "content": "<p><strong>19.</strong></p>\n<p>Gọi <span class=\"math inline\">\\(\\mathcal R\\)</span> là miền giới hạn bởi <span class=\"math inline\">\\(y=\\tan(x^2)\\)</span>, <span class=\"math inline\">\\(x=1\\)</span> và <span class=\"math inline\">\\(y=0\\)</span>. Dùng Quy tắc trung điểm với <span class=\"math inline\">\\(n=4\\)</span> để ước lượng các đại lượng sau.</p>\n<p>(a) Diện tích của <span class=\"math inline\">\\(\\mathcal R\\)</span>.</p>\n<p>(b) Thể tích tạo thành khi quay <span class=\"math inline\">\\(\\mathcal R\\)</span> quanh trục <span class=\"math inline\">\\(x\\)</span>.</p>\n"
+    },
+    {
+      "number": 20,
+      "content": "<p><strong>20.</strong></p>\n<p>Gọi <span class=\"math inline\">\\(\\mathcal R\\)</span> là miền giới hạn bởi <span class=\"math inline\">\\(y=1-x^2\\)</span> và <span class=\"math inline\">\\(y=x^6-x+1\\)</span>. Ước lượng các đại lượng sau.</p>\n<p>(a) Hoành độ các giao điểm của hai đường cong.</p>\n<p>(b) Diện tích của <span class=\"math inline\">\\(\\mathcal R\\)</span>.</p>\n<p>(c) Thể tích tạo thành khi quay <span class=\"math inline\">\\(\\mathcal R\\)</span> quanh trục <span class=\"math inline\">\\(x\\)</span>.</p>\n<p>(d) Thể tích tạo thành khi quay <span class=\"math inline\">\\(\\mathcal R\\)</span> quanh trục <span class=\"math inline\">\\(y\\)</span>.</p>\n"
+    },
+    {
+      "number": 21,
+      "content": "<p><strong>21.</strong></p>\n<p><em>Yêu cầu chung (21–24):</em> Mỗi tích phân sau biểu diễn thể tích của một khối. Hãy mô tả khối đó.</p>\n<p><span class=\"math inline\">\\(\\displaystyle\\int_0^{\\pi/2}2\\pi x\\cos x\\,dx\\)</span>.</p>\n"
+    },
+    {
+      "number": 22,
+      "content": "<p><strong>22.</strong></p>\n<p><em>Yêu cầu chung (21–24):</em> Mỗi tích phân sau biểu diễn thể tích của một khối. Hãy mô tả khối đó.</p>\n<p><span class=\"math inline\">\\(\\displaystyle\\int_0^{\\pi/2}2\\pi\\cos^2x\\,dx\\)</span>.</p>\n"
+    },
+    {
+      "number": 23,
+      "content": "<p><strong>23.</strong></p>\n<p><em>Yêu cầu chung (21–24):</em> Mỗi tích phân sau biểu diễn thể tích của một khối. Hãy mô tả khối đó.</p>\n<p><span class=\"math inline\">\\(\\displaystyle\\int_0^\\pi\\pi(2-\\sin x)^2\\,dx\\)</span>.</p>\n"
+    },
+    {
+      "number": 24,
+      "content": "<p><strong>24.</strong></p>\n<p><em>Yêu cầu chung (21–24):</em> Mỗi tích phân sau biểu diễn thể tích của một khối. Hãy mô tả khối đó.</p>\n<p><span class=\"math inline\">\\(\\displaystyle\\int_0^4 2\\pi(6-y)(4y-y^2)\\,dy\\)</span>.</p>\n"
+    },
+    {
+      "number": 25,
+      "content": "<p><strong>25.</strong></p>\n<p>Đáy của một khối là hình tròn bán kính <span class=\"math inline\">\\(3\\)</span>. Tìm thể tích của khối nếu các thiết diện song song, vuông góc với đáy, là tam giác vuông cân có cạnh huyền nằm trong đáy.</p>\n"
+    },
+    {
+      "number": 26,
+      "content": "<p><strong>26.</strong></p>\n<p>Đáy của một khối là miền giới hạn bởi các parabol <span class=\"math inline\">\\(y=x^2\\)</span> và <span class=\"math inline\">\\(y=2-x^2\\)</span>. Tìm thể tích của khối nếu các thiết diện vuông góc với trục <span class=\"math inline\">\\(x\\)</span> là hình vuông có một cạnh nằm trong đáy.</p>\n"
+    },
+    {
+      "number": 27,
+      "content": "<p><strong>27.</strong></p>\n<p>Một đài tưởng niệm cao <span class=\"math inline\">\\(20\\)</span> m. Thiết diện nằm ngang ở khoảng cách <span class=\"math inline\">\\(x\\)</span> mét tính từ đỉnh là một tam giác đều có cạnh <span class=\"math inline\">\\(\\frac14x\\)</span> mét. Tìm thể tích đài tưởng niệm.</p>\n"
+    },
+    {
+      "number": 28,
+      "content": "<p><strong>28.</strong></p>\n<p>(a) Đáy của một khối là hình vuông có các đỉnh <span class=\"math inline\">\\((1,0)\\)</span>, <span class=\"math inline\">\\((0,1)\\)</span>, <span class=\"math inline\">\\((-1,0)\\)</span> và <span class=\"math inline\">\\((0,-1)\\)</span>. Mỗi thiết diện vuông góc với trục <span class=\"math inline\">\\(x\\)</span> là một nửa hình tròn. Tìm thể tích của khối.</p>\n<p>(b) Chứng minh rằng có thể tính thể tích khối ở câu (a) đơn giản hơn bằng cách trước hết cắt khối và sắp xếp lại để tạo thành một khối nón.</p>\n"
+    },
+    {
+      "number": 29,
+      "content": "<p><strong>29.</strong></p>\n<p>Cần một lực <span class=\"math inline\">\\(30\\)</span> N để giữ một lò xo được kéo từ chiều dài tự nhiên <span class=\"math inline\">\\(12\\)</span> cm đến chiều dài <span class=\"math inline\">\\(15\\)</span> cm. Cần thực hiện bao nhiêu công để kéo lò xo từ <span class=\"math inline\">\\(12\\)</span> cm đến <span class=\"math inline\">\\(20\\)</span> cm?</p>\n"
+    },
+    {
+      "number": 30,
+      "content": "<p><strong>30.</strong></p>\n<p>Một thang máy có trọng lượng <span class=\"math inline\">\\(1600\\)</span> lb được treo bằng một dây cáp dài <span class=\"math inline\">\\(200\\)</span> ft có trọng lượng <span class=\"math inline\">\\(10\\)</span> lb/ft. Cần bao nhiêu công để nâng thang máy từ tầng hầm lên tầng ba, một quãng đường <span class=\"math inline\">\\(30\\)</span> ft?</p>\n"
+    },
+    {
+      "number": 31,
+      "content": "<p><strong>31.</strong></p>\n<p>Một bể chứa đầy nước có dạng paraboloid tròn xoay như trong hình; nghĩa là hình dạng của nó được tạo ra bằng cách quay một parabol quanh một trục thẳng đứng.</p>\n<p>(a) Nếu bể cao <span class=\"math inline\">\\(4\\)</span> ft và bán kính miệng bể là <span class=\"math inline\">\\(4\\)</span> ft, hãy tìm công cần để bơm nước ra khỏi bể.</p>\n<p>(b) Sau khi đã thực hiện công <span class=\"math inline\">\\(4000\\)</span> ft-lb, độ sâu của nước còn lại trong bể là bao nhiêu?</p>\n<div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-6-review-84e8716e/ex31.png\" alt=\"image\" /><br />\nHình cho Bài tập 31</p>\n</div>\n"
+    },
+    {
+      "number": 32,
+      "content": "<p><strong>32.</strong></p>\n<p>Một bể thép có dạng khối trụ tròn đặt thẳng đứng, đường kính <span class=\"math inline\">\\(4\\)</span> m và cao <span class=\"math inline\">\\(5\\)</span> m. Hiện bể chứa dầu ăn đến độ cao <span class=\"math inline\">\\(3\\)</span> m; dầu có khối lượng riêng <span class=\"math inline\">\\(920\\ \\mathrm{kg/m^3}\\)</span>. Tính công cần để bơm dầu ra qua một vòi xả cao <span class=\"math inline\">\\(1\\)</span> m tại miệng bể.</p>\n"
+    },
+    {
+      "number": 33,
+      "content": "<p><strong>33.</strong></p>\n<p>Tìm giá trị trung bình của hàm số <span class=\"math inline\">\\(f(t)=\\sec^2t\\)</span> trên khoảng <span class=\"math inline\">\\([0,\\pi/4]\\)</span>.</p>\n"
+    },
+    {
+      "number": 34,
+      "content": "<p><strong>34.</strong></p>\n<p>(a) Tìm giá trị trung bình của hàm số <span class=\"math inline\">\\(f(x)=1/\\sqrt{x}\\)</span> trên khoảng <span class=\"math inline\">\\([1,4]\\)</span>.</p>\n<p>(b) Tìm giá trị <span class=\"math inline\">\\(c\\)</span> được bảo đảm bởi Định lý giá trị trung bình cho tích phân sao cho <span class=\"math inline\">\\(f_{\\mathrm{avg}}=f(c)\\)</span>.</p>\n<p>(c) Phác họa đồ thị của <span class=\"math inline\">\\(f\\)</span> trên <span class=\"math inline\">\\([1,4]\\)</span> và một hình chữ nhật có đáy <span class=\"math inline\">\\([1,4]\\)</span>, với diện tích bằng diện tích miền nằm dưới đồ thị của <span class=\"math inline\">\\(f\\)</span>.</p>\n"
+    },
+    {
+      "number": 35,
+      "content": "<p><strong>35.</strong></p>\n<p>Gọi <span class=\"math inline\">\\(\\mathcal R_1\\)</span> là miền giới hạn bởi <span class=\"math inline\">\\(y=x^2\\)</span>, <span class=\"math inline\">\\(y=0\\)</span> và <span class=\"math inline\">\\(x=b\\)</span>, với <span class=\"math inline\">\\(b&gt;0\\)</span>. Gọi <span class=\"math inline\">\\(\\mathcal R_2\\)</span> là miền giới hạn bởi <span class=\"math inline\">\\(y=x^2\\)</span>, <span class=\"math inline\">\\(x=0\\)</span> và <span class=\"math inline\">\\(y=b^2\\)</span>.</p>\n<p>(a) Có giá trị nào của <span class=\"math inline\">\\(b\\)</span> để <span class=\"math inline\">\\(\\mathcal R_1\\)</span> và <span class=\"math inline\">\\(\\mathcal R_2\\)</span> có cùng diện tích không?</p>\n<p>(b) Có giá trị nào của <span class=\"math inline\">\\(b\\)</span> để <span class=\"math inline\">\\(\\mathcal R_1\\)</span> quét nên cùng một thể tích khi quay quanh trục <span class=\"math inline\">\\(x\\)</span> và trục <span class=\"math inline\">\\(y\\)</span> không?</p>\n<p>(c) Có giá trị nào của <span class=\"math inline\">\\(b\\)</span> để <span class=\"math inline\">\\(\\mathcal R_1\\)</span> và <span class=\"math inline\">\\(\\mathcal R_2\\)</span> quét nên cùng một thể tích khi quay quanh trục <span class=\"math inline\">\\(x\\)</span> không?</p>\n<p>(d) Có giá trị nào của <span class=\"math inline\">\\(b\\)</span> để <span class=\"math inline\">\\(\\mathcal R_1\\)</span> và <span class=\"math inline\">\\(\\mathcal R_2\\)</span> quét nên cùng một thể tích khi quay quanh trục <span class=\"math inline\">\\(y\\)</span> không?</p>\n"
+    },
+    {
+      "number": 36,
+      "content": "<p><strong>Dự án ứng dụng — Bài 1.</strong></p>\n<h1 class=\"unnumbered\" id=\"dự-án-ứng-dụng-nên-ngồi-ở-đâu-trong-rạp-chiếu-phim\">Dự án ứng dụng — Nên ngồi ở đâu trong rạp chiếu phim?</h1>\n<p>Một rạp chiếu phim có màn ảnh đặt cách sàn <span class=\"math inline\">\\(10\\)</span> ft và cao <span class=\"math inline\">\\(25\\)</span> ft. Hàng ghế đầu tiên cách màn ảnh <span class=\"math inline\">\\(9\\)</span> ft, các hàng ghế cách nhau <span class=\"math inline\">\\(3\\)</span> ft. Sàn khu vực ghế ngồi nghiêng góc <span class=\"math inline\">\\(\\alpha=20^\\circ\\)</span> so với phương ngang, và khoảng cách từ đầu dốc đến chỗ ngồi của bạn, đo dọc theo sàn nghiêng, là <span class=\"math inline\">\\(x\\)</span>. Rạp có <span class=\"math inline\">\\(21\\)</span> hàng ghế, nên <span class=\"math inline\">\\(0\\le x\\le60\\)</span>. Giả sử bạn quyết định rằng vị trí tốt nhất là hàng ghế tại đó góc <span class=\"math inline\">\\(\\theta\\)</span> do màn ảnh chắn tại mắt bạn đạt cực đại. Cũng giả sử mắt bạn cao <span class=\"math inline\">\\(4\\)</span> ft so với sàn, như trong hình. (Trong Bài tập 4.7.84, ta đã xét một phiên bản đơn giản hơn của bài toán này, với sàn nằm ngang; dự án này xét tình huống phức tạp hơn và cần dùng công nghệ.)</p>\n<p>Chứng minh rằng <span class=\"math display\">\\[\\theta=\\arccos\\left(\\frac{a^2+b^2-625}{2ab}\\right),\\]</span> trong đó <span class=\"math display\">\\[a^2=(9+x\\cos\\alpha)^2+(31-x\\sin\\alpha)^2\\]</span> và <span class=\"math display\">\\[b^2=(9+x\\cos\\alpha)^2+(x\\sin\\alpha-6)^2.\\]</span></p>\n"
+    },
+    {
+      "number": 37,
+      "content": "<p><strong>Dự án ứng dụng — Bài 2.</strong></p>\n<h1 class=\"unnumbered\" id=\"dự-án-ứng-dụng-nên-ngồi-ở-đâu-trong-rạp-chiếu-phim\">Dự án ứng dụng — Nên ngồi ở đâu trong rạp chiếu phim?</h1>\n<p>Một rạp chiếu phim có màn ảnh đặt cách sàn <span class=\"math inline\">\\(10\\)</span> ft và cao <span class=\"math inline\">\\(25\\)</span> ft. Hàng ghế đầu tiên cách màn ảnh <span class=\"math inline\">\\(9\\)</span> ft, các hàng ghế cách nhau <span class=\"math inline\">\\(3\\)</span> ft. Sàn khu vực ghế ngồi nghiêng góc <span class=\"math inline\">\\(\\alpha=20^\\circ\\)</span> so với phương ngang, và khoảng cách từ đầu dốc đến chỗ ngồi của bạn, đo dọc theo sàn nghiêng, là <span class=\"math inline\">\\(x\\)</span>. Rạp có <span class=\"math inline\">\\(21\\)</span> hàng ghế, nên <span class=\"math inline\">\\(0\\le x\\le60\\)</span>. Giả sử bạn quyết định rằng vị trí tốt nhất là hàng ghế tại đó góc <span class=\"math inline\">\\(\\theta\\)</span> do màn ảnh chắn tại mắt bạn đạt cực đại. Cũng giả sử mắt bạn cao <span class=\"math inline\">\\(4\\)</span> ft so với sàn, như trong hình. (Trong Bài tập 4.7.84, ta đã xét một phiên bản đơn giản hơn của bài toán này, với sàn nằm ngang; dự án này xét tình huống phức tạp hơn và cần dùng công nghệ.)</p>\n<p>Dùng đồ thị của <span class=\"math inline\">\\(\\theta\\)</span> theo <span class=\"math inline\">\\(x\\)</span> để ước lượng giá trị <span class=\"math inline\">\\(x\\)</span> làm <span class=\"math inline\">\\(\\theta\\)</span> lớn nhất. Bạn nên ngồi ở hàng ghế nào? Góc nhìn <span class=\"math inline\">\\(\\theta\\)</span> tại hàng ghế đó bằng bao nhiêu?</p>\n"
+    },
+    {
+      "number": 38,
+      "content": "<p><strong>Dự án ứng dụng — Bài 3.</strong></p>\n<h1 class=\"unnumbered\" id=\"dự-án-ứng-dụng-nên-ngồi-ở-đâu-trong-rạp-chiếu-phim\">Dự án ứng dụng — Nên ngồi ở đâu trong rạp chiếu phim?</h1>\n<p>Một rạp chiếu phim có màn ảnh đặt cách sàn <span class=\"math inline\">\\(10\\)</span> ft và cao <span class=\"math inline\">\\(25\\)</span> ft. Hàng ghế đầu tiên cách màn ảnh <span class=\"math inline\">\\(9\\)</span> ft, các hàng ghế cách nhau <span class=\"math inline\">\\(3\\)</span> ft. Sàn khu vực ghế ngồi nghiêng góc <span class=\"math inline\">\\(\\alpha=20^\\circ\\)</span> so với phương ngang, và khoảng cách từ đầu dốc đến chỗ ngồi của bạn, đo dọc theo sàn nghiêng, là <span class=\"math inline\">\\(x\\)</span>. Rạp có <span class=\"math inline\">\\(21\\)</span> hàng ghế, nên <span class=\"math inline\">\\(0\\le x\\le60\\)</span>. Giả sử bạn quyết định rằng vị trí tốt nhất là hàng ghế tại đó góc <span class=\"math inline\">\\(\\theta\\)</span> do màn ảnh chắn tại mắt bạn đạt cực đại. Cũng giả sử mắt bạn cao <span class=\"math inline\">\\(4\\)</span> ft so với sàn, như trong hình. (Trong Bài tập 4.7.84, ta đã xét một phiên bản đơn giản hơn của bài toán này, với sàn nằm ngang; dự án này xét tình huống phức tạp hơn và cần dùng công nghệ.)</p>\n<p>Dùng một hệ thống đại số máy tính để tính đạo hàm của <span class=\"math inline\">\\(\\theta\\)</span> và tìm nghiệm gần đúng của phương trình <span class=\"math inline\">\\(d\\theta/dx=0\\)</span>. Giá trị này có xác nhận kết quả của bạn trong Bài toán 2 không?</p>\n"
+    },
+    {
+      "number": 39,
+      "content": "<p><strong>Dự án ứng dụng — Bài 4.</strong></p>\n<h1 class=\"unnumbered\" id=\"dự-án-ứng-dụng-nên-ngồi-ở-đâu-trong-rạp-chiếu-phim\">Dự án ứng dụng — Nên ngồi ở đâu trong rạp chiếu phim?</h1>\n<p>Một rạp chiếu phim có màn ảnh đặt cách sàn <span class=\"math inline\">\\(10\\)</span> ft và cao <span class=\"math inline\">\\(25\\)</span> ft. Hàng ghế đầu tiên cách màn ảnh <span class=\"math inline\">\\(9\\)</span> ft, các hàng ghế cách nhau <span class=\"math inline\">\\(3\\)</span> ft. Sàn khu vực ghế ngồi nghiêng góc <span class=\"math inline\">\\(\\alpha=20^\\circ\\)</span> so với phương ngang, và khoảng cách từ đầu dốc đến chỗ ngồi của bạn, đo dọc theo sàn nghiêng, là <span class=\"math inline\">\\(x\\)</span>. Rạp có <span class=\"math inline\">\\(21\\)</span> hàng ghế, nên <span class=\"math inline\">\\(0\\le x\\le60\\)</span>. Giả sử bạn quyết định rằng vị trí tốt nhất là hàng ghế tại đó góc <span class=\"math inline\">\\(\\theta\\)</span> do màn ảnh chắn tại mắt bạn đạt cực đại. Cũng giả sử mắt bạn cao <span class=\"math inline\">\\(4\\)</span> ft so với sàn, như trong hình. (Trong Bài tập 4.7.84, ta đã xét một phiên bản đơn giản hơn của bài toán này, với sàn nằm ngang; dự án này xét tình huống phức tạp hơn và cần dùng công nghệ.)</p>\n<p>Dùng đồ thị của <span class=\"math inline\">\\(\\theta\\)</span> để ước lượng giá trị trung bình của <span class=\"math inline\">\\(\\theta\\)</span> trên khoảng <span class=\"math inline\">\\(0\\le x\\le60\\)</span>. Sau đó dùng một hệ thống đại số máy tính để tính giá trị trung bình ấy. So sánh với giá trị lớn nhất và giá trị nhỏ nhất của <span class=\"math inline\">\\(\\theta\\)</span>.</p>\n"
+    }
+  ]
+}

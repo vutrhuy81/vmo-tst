@@ -1,0 +1,165 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage{fontspec}\setmainfont{Latin Modern Roman}\setsansfont{DejaVu Sans}
+\usepackage{amsmath,amssymb,graphicx,geometry,enumitem,needspace,longtable,booktabs,fancyhdr,hyperref}
+\geometry{left=28mm,right=23mm,top=24mm,bottom=24mm}
+\hypersetup{unicode=true,colorlinks=true,linkcolor=black,urlcolor=blue,pdftitle={Giải tích — Ôn tập Chương 6}}
+\setlength{\parindent}{1.2em}\setlength{\parskip}{4pt}\setlength{\headheight}{16pt}
+\pagestyle{fancy}\fancyhf{}\fancyhead[L]{\small Chương 6. Ứng dụng của tích phân}\fancyhead[R]{\small Ôn tập}\fancyfoot[C]{\thepage}
+\newcommand{\fig}[3][.68]{\begin{center}\begin{minipage}{\linewidth}\centering\includegraphics[width=#1\linewidth]{assets/#2.png}\\{\small #3}\end{minipage}\end{center}}
+\newcommand{\ex}[1]{\par\medskip\noindent\textbf{Ví dụ #1.}\ }
+\newcommand{\sol}{\par\nopagebreak[4]\noindent\textit{Lời giải.}\ }
+\newcommand{\bt}[1]{\par\smallskip\Needspace{5\baselineskip}\noindent\textbf{#1.}\ }
+\newcommand{\group}[1]{\par\Needspace{11\baselineskip}\medskip\noindent\textbf{#1}\par\nopagebreak[4]}
+\newcommand{\gint}[1]{\left[\!\left[#1\right]\!\right]}
+\allowdisplaybreaks[2]
+\DeclareMathOperator{\sech}{sech}
+\DeclareMathOperator{\csch}{csch}
+\DeclareMathOperator{\arccot}{arccot}
+
+\newcommand{\prj}[1]{\bt{#1}}
+
+\newcommand{\kn}[1]{\bt{#1}}
+\newcommand{\ds}[1]{\bt{#1}}
+\begin{document}
+\begin{center}{\LARGE\bfseries Dự án ứng dụng}\par\medskip{\Large\bfseries Nên ngồi ở đâu trong rạp chiếu phim?}\end{center}
+Một rạp chiếu phim có màn ảnh đặt cách sàn $10$ ft và cao $25$ ft. Hàng ghế đầu tiên cách màn ảnh $9$ ft, các hàng ghế cách nhau $3$ ft. Sàn khu vực ghế ngồi nghiêng góc $\alpha=20^\circ$ so với phương ngang, và khoảng cách từ đầu dốc đến chỗ ngồi của bạn, đo dọc theo sàn nghiêng, là $x$. Rạp có $21$ hàng ghế, nên $0\le x\le60$. Giả sử bạn quyết định rằng vị trí tốt nhất là hàng ghế tại đó góc $\theta$ do màn ảnh chắn tại mắt bạn đạt cực đại. Cũng giả sử mắt bạn cao $4$ ft so với sàn, như trong hình. (Trong Bài tập 4.7.84, ta đã xét một phiên bản đơn giản hơn của bài toán này, với sàn nằm ngang; dự án này xét tình huống phức tạp hơn và cần dùng công nghệ.)
+\fig[.51]{movies}{Hình cho dự án. $x$ được đo dọc theo sàn nghiêng; $\theta$ là góc nhìn màn ảnh.}
+\prj{1} Chứng minh rằng
+\[\theta=\arccos\left(\frac{a^2+b^2-625}{2ab}\right),\]
+trong đó
+\[a^2=(9+x\cos\alpha)^2+(31-x\sin\alpha)^2\]
+và
+\[b^2=(9+x\cos\alpha)^2+(x\sin\alpha-6)^2.\]
+\prj{2} Dùng đồ thị của $\theta$ theo $x$ để ước lượng giá trị $x$ làm $\theta$ lớn nhất. Bạn nên ngồi ở hàng ghế nào? Góc nhìn $\theta$ tại hàng ghế đó bằng bao nhiêu?
+\prj{3} Dùng một hệ thống đại số máy tính để tính đạo hàm của $\theta$ và tìm nghiệm gần đúng của phương trình $d\theta/dx=0$. Giá trị này có xác nhận kết quả của bạn trong Bài toán 2 không?
+\prj{4} Dùng đồ thị của $\theta$ để ước lượng giá trị trung bình của $\theta$ trên khoảng $0\le x\le60$. Sau đó dùng một hệ thống đại số máy tính để tính giá trị trung bình ấy. So sánh với giá trị lớn nhất và giá trị nhỏ nhất của $\theta$.
+
+\clearpage
+\begin{center}{\LARGE\bfseries Ôn tập Chương 6}\end{center}
+\section*{Kiểm tra khái niệm}
+Đáp án phần Kiểm tra khái niệm có tại \texttt{StewartCalculus.com}.
+\kn{1} (a) Vẽ hai đường cong điển hình $y=f(x)$ và $y=g(x)$, trong đó $f(x)\ge g(x)$ với $a\le x\le b$. Trình bày cách xấp xỉ diện tích giữa hai đường cong bằng một tổng Riemann, rồi phác họa các hình chữ nhật xấp xỉ tương ứng. Sau đó viết biểu thức cho diện tích chính xác.
+
+(b) Giải thích tình huống thay đổi như thế nào nếu các đường cong có phương trình $x=f(y)$ và $x=g(y)$, trong đó $f(y)\ge g(y)$ với $c\le y\le d$.
+\kn{2} Giả sử Sue chạy nhanh hơn Kathy trong suốt cuộc đua $1500$ m. Diện tích giữa hai đường cong vận tốc của họ trong phút đầu tiên của cuộc đua có ý nghĩa vật lý gì?
+\kn{3} (a) Giả sử $S$ là một khối có diện tích các thiết diện đã biết. Giải thích cách xấp xỉ thể tích của $S$ bằng một tổng Riemann. Sau đó viết biểu thức cho thể tích chính xác.
+
+(b) Nếu $S$ là một khối tròn xoay, bạn tìm diện tích thiết diện như thế nào?
+\kn{4} (a) Thể tích của một vỏ trụ là bao nhiêu?
+
+(b) Giải thích cách dùng vỏ trụ để tìm thể tích một khối tròn xoay.
+
+(c) Vì sao có thể muốn dùng phương pháp vỏ trụ thay cho phương pháp hình đĩa hoặc hình vành khăn?
+\kn{5} Giả sử bạn đẩy một cuốn sách trên một chiếc bàn dài $6$ m bằng cách tác dụng lực $f(x)$ tại mỗi điểm từ $x=0$ đến $x=6$. Tích phân $\int_0^6 f(x)\,dx$ biểu diễn điều gì? Nếu $f(x)$ đo bằng newton, thì tích phân có đơn vị gì?
+\kn{6} (a) Giá trị trung bình của một hàm số $f$ trên khoảng $[a,b]$ là gì?
+
+(b) Định lý giá trị trung bình cho tích phân phát biểu điều gì? Ý nghĩa hình học của định lý là gì?
+
+\clearpage
+\section*{Câu hỏi đúng–sai}
+Xác định mỗi nhận định sau là đúng hay sai. Nếu đúng, hãy giải thích vì sao. Nếu sai, hãy giải thích vì sao hoặc đưa ra một phản ví dụ bác bỏ nhận định.
+\ds{1} Diện tích giữa các đường cong $y=f(x)$ và $y=g(x)$, với $a\le x\le b$, là $A=\int_a^b[f(x)-g(x)]\,dx$.
+\ds{2} Một khối lập phương là một khối tròn xoay.
+\ds{3} Nếu miền giới hạn bởi các đường cong $y=\sqrt{x}$ và $y=x$ được quay quanh trục $x$, thì thể tích khối thu được là $V=\int_0^1\pi(\sqrt{x}-x)^2\,dx$.
+\Needspace{23\baselineskip}
+\group{4–9}
+Gọi $\mathcal R$ là miền trong hình.
+\fig[.44]{tf_region}{Hình cho các nhận định 4–9}
+\ds{4} Nếu quay $\mathcal R$ quanh trục $y$, thì thể tích khối thu được là $V=\int_a^b2\pi x f(x)\,dx$.
+\ds{5} Nếu quay $\mathcal R$ quanh trục $x$, thì thể tích khối thu được là $V=\int_a^b\pi[f(x)]^2\,dx$.
+\ds{6} Nếu quay $\mathcal R$ quanh trục $x$, thì các thiết diện thẳng đứng vuông góc với trục $x$ của khối thu được là hình đĩa.
+\ds{7} Nếu quay $\mathcal R$ quanh trục $y$, thì các thiết diện nằm ngang của khối thu được là các vỏ trụ.
+\ds{8} Thể tích khối thu được khi quay $\mathcal R$ quanh đường thẳng $x=-2$ bằng thể tích khối thu được khi quay $\mathcal R$ quanh trục $y$.
+\ds{9} Nếu $\mathcal R$ là đáy của một khối $S$ và các thiết diện của $S$ vuông góc với trục $x$ là hình vuông, thì thể tích của $S$ là $V=\int_a^b[f(x)]^2\,dx$.
+\ds{10} Một dây cáp treo thẳng đứng từ một tời đặt trên nóc một tòa nhà cao. Công cần để tời kéo lên một nửa phía trên của dây cáp bằng một nửa công cần để kéo lên toàn bộ dây cáp.
+\ds{11} Nếu $\int_2^5 f(x)\,dx=12$, thì giá trị trung bình của $f$ trên $[2,5]$ là $4$.
+
+\clearpage
+\section*{Bài tập}
+\group{1–6}
+Tìm diện tích miền giới hạn bởi các đường cong đã cho.
+\bt{1} $y=x^2$, $y=8x-x^2$.
+\bt{2} $y=\sqrt{x}$, $y=-\sqrt[3]{x}$, $y=x-2$.
+\bt{3} $y=1-2x^2$, $y=|x|$.
+\bt{4} $x+y=0$, $x=y^2+3y$.
+\bt{5} $y=\sin(\pi x/2)$, $y=x^2-2x$.
+\bt{6} $y=\sqrt{x}$, $y=x^2$, $x=2$.
+\group{7–11}
+Tìm thể tích khối thu được khi quay miền giới hạn bởi các đường cong đã cho quanh trục đã chỉ định.
+\bt{7} $y=2x$, $y=x^2$; quay quanh trục $x$.
+\bt{8} $x=1+y^2$, $y=x-3$; quay quanh trục $y$.
+\bt{9} $x=0$, $x=9-y^2$; quay quanh $x=-1$.
+\bt{10} $y=x^2+1$, $y=9-x^2$; quay quanh $y=-1$.
+\bt{11} $x^2-y^2=a^2$, $x=a+h$ (với $a>0$, $h>0$); quay quanh trục $y$.
+\group{12–14}
+Thiết lập, nhưng không tính, một tích phân biểu diễn thể tích khối thu được khi quay miền giới hạn bởi các đường cong đã cho quanh trục đã chỉ định.
+\bt{12} $y=\tan x$, $y=x$, $x=\pi/3$; quay quanh trục $y$.
+\bt{13} $y=\cos^2x$, $|x|\le\pi/2$, $y=\frac14$; quay quanh $x=\pi/2$.
+\bt{14} $y=\ln x$, $y=0$, $x=4$; quay quanh $x=-1$.
+\group{15–16}
+Miền giới hạn bởi các đường cong đã cho được quay quanh trục đã chỉ định. Tìm thể tích của khối bằng cách dùng (a) $x$ làm biến tích phân và (b) $y$ làm biến tích phân.
+\bt{15} $y=x^3$, $y=3x^2$; quay quanh $x=-1$.
+\bt{16} $y=\sqrt{x}$, $y=x^2$; quay quanh $y=3$.
+\bt{17} Tìm thể tích các khối thu được khi quay miền giới hạn bởi $y=x$ và $y=x^2$ quanh các đường thẳng sau.
+
+(a) Trục $x$. \qquad (b) Trục $y$. \qquad (c) $y=2$.
+\bt{18} Gọi $\mathcal R$ là miền trong góc phần tư thứ nhất, giới hạn bởi $y=x^3$ và $y=2x-x^2$. Tính các đại lượng sau.
+
+(a) Diện tích của $\mathcal R$.
+
+(b) Thể tích tạo thành khi quay $\mathcal R$ quanh trục $x$.
+
+(c) Thể tích tạo thành khi quay $\mathcal R$ quanh trục $y$.
+\bt{19} Gọi $\mathcal R$ là miền giới hạn bởi $y=\tan(x^2)$, $x=1$ và $y=0$. Dùng Quy tắc trung điểm với $n=4$ để ước lượng các đại lượng sau.
+
+(a) Diện tích của $\mathcal R$.
+
+(b) Thể tích tạo thành khi quay $\mathcal R$ quanh trục $x$.
+\bt{20} Gọi $\mathcal R$ là miền giới hạn bởi $y=1-x^2$ và $y=x^6-x+1$. Ước lượng các đại lượng sau.
+
+(a) Hoành độ các giao điểm của hai đường cong.
+
+(b) Diện tích của $\mathcal R$.
+
+(c) Thể tích tạo thành khi quay $\mathcal R$ quanh trục $x$.
+
+(d) Thể tích tạo thành khi quay $\mathcal R$ quanh trục $y$.
+\group{21–24}
+Mỗi tích phân sau biểu diễn thể tích của một khối. Hãy mô tả khối đó.
+\bt{21} $\displaystyle\int_0^{\pi/2}2\pi x\cos x\,dx$.
+\bt{22} $\displaystyle\int_0^{\pi/2}2\pi\cos^2x\,dx$.
+\bt{23} $\displaystyle\int_0^\pi\pi(2-\sin x)^2\,dx$.
+\bt{24} $\displaystyle\int_0^4 2\pi(6-y)(4y-y^2)\,dy$.
+\bt{25} Đáy của một khối là hình tròn bán kính $3$. Tìm thể tích của khối nếu các thiết diện song song, vuông góc với đáy, là tam giác vuông cân có cạnh huyền nằm trong đáy.
+\bt{26} Đáy của một khối là miền giới hạn bởi các parabol $y=x^2$ và $y=2-x^2$. Tìm thể tích của khối nếu các thiết diện vuông góc với trục $x$ là hình vuông có một cạnh nằm trong đáy.
+\bt{27} Một đài tưởng niệm cao $20$ m. Thiết diện nằm ngang ở khoảng cách $x$ mét tính từ đỉnh là một tam giác đều có cạnh $\frac14x$ mét. Tìm thể tích đài tưởng niệm.
+\bt{28} (a) Đáy của một khối là hình vuông có các đỉnh $(1,0)$, $(0,1)$, $(-1,0)$ và $(0,-1)$. Mỗi thiết diện vuông góc với trục $x$ là một nửa hình tròn. Tìm thể tích của khối.
+
+(b) Chứng minh rằng có thể tính thể tích khối ở câu (a) đơn giản hơn bằng cách trước hết cắt khối và sắp xếp lại để tạo thành một khối nón.
+\bt{29} Cần một lực $30$ N để giữ một lò xo được kéo từ chiều dài tự nhiên $12$ cm đến chiều dài $15$ cm. Cần thực hiện bao nhiêu công để kéo lò xo từ $12$ cm đến $20$ cm?
+\bt{30} Một thang máy có trọng lượng $1600$ lb được treo bằng một dây cáp dài $200$ ft có trọng lượng $10$ lb/ft. Cần bao nhiêu công để nâng thang máy từ tầng hầm lên tầng ba, một quãng đường $30$ ft?
+\par\noindent\begin{minipage}[t]{\linewidth}
+\bt{31} Một bể chứa đầy nước có dạng paraboloid tròn xoay như trong hình; nghĩa là hình dạng của nó được tạo ra bằng cách quay một parabol quanh một trục thẳng đứng.
+
+(a) Nếu bể cao $4$ ft và bán kính miệng bể là $4$ ft, hãy tìm công cần để bơm nước ra khỏi bể.
+
+(b) Sau khi đã thực hiện công $4000$ ft-lb, độ sâu của nước còn lại trong bể là bao nhiêu?
+\fig[.43]{ex31}{Hình cho Bài tập 31}
+\end{minipage}\par
+\bt{32} Một bể thép có dạng khối trụ tròn đặt thẳng đứng, đường kính $4$ m và cao $5$ m. Hiện bể chứa dầu ăn đến độ cao $3$ m; dầu có khối lượng riêng $920\ \mathrm{kg/m^3}$. Tính công cần để bơm dầu ra qua một vòi xả cao $1$ m tại miệng bể.
+\bt{33} Tìm giá trị trung bình của hàm số $f(t)=\sec^2t$ trên khoảng $[0,\pi/4]$.
+\bt{34} (a) Tìm giá trị trung bình của hàm số $f(x)=1/\sqrt{x}$ trên khoảng $[1,4]$.
+
+(b) Tìm giá trị $c$ được bảo đảm bởi Định lý giá trị trung bình cho tích phân sao cho $f_{\mathrm{avg}}=f(c)$.
+
+(c) Phác họa đồ thị của $f$ trên $[1,4]$ và một hình chữ nhật có đáy $[1,4]$, với diện tích bằng diện tích miền nằm dưới đồ thị của $f$.
+\bt{35} Gọi $\mathcal R_1$ là miền giới hạn bởi $y=x^2$, $y=0$ và $x=b$, với $b>0$. Gọi $\mathcal R_2$ là miền giới hạn bởi $y=x^2$, $x=0$ và $y=b^2$.
+
+(a) Có giá trị nào của $b$ để $\mathcal R_1$ và $\mathcal R_2$ có cùng diện tích không?
+
+(b) Có giá trị nào của $b$ để $\mathcal R_1$ quét nên cùng một thể tích khi quay quanh trục $x$ và trục $y$ không?
+
+(c) Có giá trị nào của $b$ để $\mathcal R_1$ và $\mathcal R_2$ quét nên cùng một thể tích khi quay quanh trục $x$ không?
+
+(d) Có giá trị nào của $b$ để $\mathcal R_1$ và $\mathcal R_2$ quét nên cùng một thể tích khi quay quanh trục $y$ không?
+\end{document}
