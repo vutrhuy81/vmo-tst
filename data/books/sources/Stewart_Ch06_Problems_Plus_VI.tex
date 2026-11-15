@@ -1,0 +1,115 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage{fontspec}\setmainfont{Latin Modern Roman}\setsansfont{DejaVu Sans}
+\usepackage{amsmath,amssymb,graphicx,geometry,enumitem,needspace,longtable,booktabs,fancyhdr,hyperref}
+\geometry{left=28mm,right=23mm,top=24mm,bottom=24mm}
+\hypersetup{unicode=true,colorlinks=true,linkcolor=black,urlcolor=blue,pdftitle={Giải tích — Bài toán nâng cao — Chương 6}}
+\setlength{\parindent}{1.2em}\setlength{\parskip}{4pt}\setlength{\headheight}{16pt}
+\pagestyle{fancy}\fancyhf{}\fancyhead[L]{\small Chương 6. Ứng dụng của tích phân}\fancyhead[R]{\small Problems Plus}\fancyfoot[C]{\thepage}
+\newcommand{\fig}[3][.68]{\begin{center}\begin{minipage}{\linewidth}\centering\includegraphics[width=#1\linewidth]{assets/#2.png}\\{\small #3}\end{minipage}\end{center}}
+\newcommand{\ex}[1]{\par\medskip\noindent\textbf{Ví dụ #1.}\ }
+\newcommand{\sol}{\par\nopagebreak[4]\noindent\textit{Lời giải.}\ }
+\newcommand{\bt}[1]{\par\smallskip\Needspace{5\baselineskip}\noindent\textbf{#1.}\ }
+\newcommand{\group}[1]{\par\Needspace{11\baselineskip}\medskip\noindent\textbf{#1}\par\nopagebreak[4]}
+\newcommand{\gint}[1]{\left[\!\left[#1\right]\!\right]}
+\allowdisplaybreaks[2]
+\DeclareMathOperator{\sech}{sech}
+\DeclareMathOperator{\csch}{csch}
+\DeclareMathOperator{\arccot}{arccot}
+
+\newcommand{\prj}[1]{\bt{#1}}
+
+\newcommand{\kn}[1]{\bt{#1}}
+\newcommand{\ds}[1]{\bt{#1}}
+\begin{document}
+\begin{center}{\Large\bfseries Bài toán nâng cao — Problems Plus, Chương 6}\end{center}
+
+\bt{1} Một khối được tạo thành bằng cách quay quanh trục $x$ miền nằm dưới đường cong $y=f(x)$, trong đó $f$ là một hàm dương và $x\ge0$. Thể tích tạo thành bởi phần đường cong từ $x=0$ đến $x=b$ bằng $b^2$ với mọi $b>0$. Tìm hàm $f$.
+
+\bt{2} Có một đường thẳng đi qua gốc tọa độ chia miền giới hạn bởi parabol $y=x-x^2$ và trục $x$ thành hai miền có diện tích bằng nhau. Hệ số góc của đường thẳng đó bằng bao nhiêu?
+
+\par\noindent\begin{minipage}[t]{\linewidth}
+\bt{3} Hình vẽ cho thấy một đường cong $C$ có tính chất: với mọi điểm $P$ trên đường cong ở giữa $y=2x^2$, các diện tích $A$ và $B$ bằng nhau. Tìm một phương trình của $C$.
+\fig[.29]{problem03}{Hình cho Bài toán 3.}
+
+\end{minipage}\par
+\bt{4} Một chiếc cốc hình trụ có bán kính $r$ và chiều cao $L$ được đổ đầy nước, rồi nghiêng đi cho đến khi lượng nước còn lại trong cốc vừa phủ kín đáy cốc.
+
+(a) Xác định một cách chia nước thành các lát cắt có thiết diện hình chữ nhật song song với nhau, rồi thiết lập một tích phân xác định biểu diễn thể tích nước trong cốc.
+
+(b) Xác định một cách chia nước thành các lát cắt song song có thiết diện là hình thang, rồi thiết lập một tích phân xác định biểu diễn thể tích nước.
+
+(c) Tìm thể tích nước trong cốc bằng cách tính một trong các tích phân ở phần (a) hoặc phần (b).
+
+(d) Tìm thể tích nước trong cốc bằng các lập luận thuần túy hình học.
+
+(e) Giả sử cốc được nghiêng cho đến khi nước vừa phủ kín một nửa đáy cốc. Có thể cắt nước theo hướng nào để được các thiết diện hình tam giác? Thiết diện hình chữ nhật? Thiết diện là các hình viên phân? Tìm thể tích nước trong cốc.
+\fig[.52]{problem04}{Hình cho Bài toán 4.}
+
+\bt{5} Nước trong một chiếc bát không đậy nắp bay hơi với tốc độ tỉ lệ với diện tích mặt thoáng của nước. (Điều này có nghĩa là tốc độ giảm thể tích tỉ lệ với diện tích mặt thoáng.) Chứng minh rằng độ sâu của nước giảm với tốc độ không đổi, bất kể hình dạng của bát.
+
+\bt{6} \textbf{Nguyên lý Archimedes} phát biểu rằng lực đẩy tác dụng lên một vật chìm một phần hoặc hoàn toàn trong chất lưu bằng trọng lượng của lượng chất lưu bị vật chiếm chỗ. Vì vậy, đối với một vật có khối lượng riêng $\rho_o$ nổi với một phần chìm trong chất lưu có khối lượng riêng $\rho_f$, lực đẩy được cho bởi
+\[F=\rho_f g\int_{-h}^{0}A(y)\,dy,\]
+trong đó $g$ là gia tốc trọng trường và $A(y)$ là diện tích một thiết diện điển hình của vật (xem hình). Trọng lượng của vật được cho bởi
+\[W=\rho_o g\int_{-h}^{L-h}A(y)\,dy.\]
+\fig[.35]{problem06}{Hình cho Bài toán 6.}
+(a) Chứng minh rằng tỉ lệ phần trăm thể tích của vật nằm trên mặt chất lỏng là
+\[100\,\frac{\rho_f-\rho_o}{\rho_f}.\]
+(b) Khối lượng riêng của băng là $917$ kg/m$^3$ và khối lượng riêng của nước biển là $1030$ kg/m$^3$. Có bao nhiêu phần trăm thể tích của một tảng băng trôi nằm trên mặt nước?
+
+(c) Một viên đá nổi trong một chiếc cốc chứa nước đầy đến miệng. Nước có tràn ra khi đá tan không?
+
+(d) Một quả cầu bán kính $0.4$ m, có trọng lượng không đáng kể, nổi trong một hồ nước ngọt lớn. Cần thực hiện công bằng bao nhiêu để nhấn chìm hoàn toàn quả cầu? Khối lượng riêng của nước là $1000$ kg/m$^3$.
+
+\bt{7} Một mặt cầu bán kính $1$ giao với một mặt cầu nhỏ hơn có bán kính $r$ sao cho giao tuyến của chúng là một đường tròn bán kính $r$. (Nói cách khác, chúng giao nhau theo một đường tròn lớn của mặt cầu nhỏ.) Tìm $r$ sao cho thể tích phần nằm bên trong mặt cầu nhỏ và bên ngoài mặt cầu lớn là lớn nhất.
+
+\par\noindent\begin{minipage}[t]{\linewidth}
+\bt{8} Một chiếc cốc giấy đựng nước, được đổ đầy nước, có dạng hình nón với chiều cao $h$ và nửa góc ở đỉnh $\theta$. (Xem hình.) Một quả cầu được đặt cẩn thận vào cốc, do đó chiếm chỗ một phần nước và làm nước tràn ra. Bán kính của quả cầu bằng bao nhiêu thì thể tích nước tràn ra khỏi cốc là lớn nhất?
+\fig[.20]{problem08}{Hình cho Bài toán 8.}
+
+\end{minipage}\par
+\bt{9} \textit{Clepsydra}, hay \textit{đồng hồ nước}, là một bình thủy tinh có một lỗ nhỏ ở đáy để nước có thể chảy ra. “Đồng hồ” được hiệu chuẩn để đo thời gian bằng cách đánh dấu trên bình các mức nước ứng với những thời điểm cách đều nhau. Cho $x=f(y)$ liên tục trên đoạn $[0,b]$ và giả sử bình được tạo thành bằng cách quay đồ thị của $f$ quanh trục $y$. Gọi $V$ là thể tích nước và $h$ là độ cao của mực nước tại thời điểm $t$. (Xem hình.)
+
+(a) Xác định $V$ theo $h$.
+
+(b) Chứng minh rằng
+\[\frac{dV}{dt}=\pi[f(h)]^2\frac{dh}{dt}.\]
+(c) Giả sử $A$ là diện tích lỗ ở đáy bình. Theo định luật Torricelli, tốc độ biến thiên thể tích nước được cho bởi
+\[\frac{dV}{dt}=kA\sqrt{h},\]
+trong đó $k$ là một hằng số âm. Xác định công thức của hàm $f$ sao cho $dh/dt$ là một hằng số $C$. Việc có $dh/dt=C$ mang lại lợi ích gì?
+\fig[.34]{problem09}{Hình cho Bài toán 9.}
+
+\Needspace{22\baselineskip}
+\bt{10} Một bình hình trụ bán kính $r$ và chiều cao $L$ chứa một phần chất lỏng có thể tích $V$. Nếu bình quay quanh trục đối xứng với tốc độ góc không đổi $\omega$, thì bình sẽ làm chất lỏng chuyển động quay quanh cùng trục đó. Sau một thời gian, chất lỏng sẽ quay với cùng tốc độ góc như bình. Mặt thoáng của chất lỏng sẽ có dạng lồi, như trong hình, bởi vì lực ly tâm tác dụng lên các phần tử chất lỏng tăng theo khoảng cách đến trục của bình. Có thể chứng minh rằng mặt thoáng của chất lỏng là một paraboloid tròn xoay tạo thành bằng cách quay parabol
+\[y=h+\frac{\omega^2x^2}{2g}\]
+quanh trục $y$, trong đó $g$ là gia tốc trọng trường.
+\fig[.33]{problem10}{Hình cho Bài toán 10.}
+(a) Xác định $h$ theo $\omega$.
+
+(b) Với tốc độ góc nào thì mặt thoáng của chất lỏng chạm đáy? Với tốc độ nào thì chất lỏng tràn qua miệng bình?
+
+(c) Giả sử bán kính của bình là $2$ ft, chiều cao là $7$ ft, và bình cùng chất lỏng đang quay với cùng một tốc độ góc không đổi. Mặt thoáng của chất lỏng thấp hơn miệng bình $5$ ft tại trục trung tâm và thấp hơn miệng bình $4$ ft tại vị trí cách trục trung tâm $1$ ft.
+
+\hspace*{1em}(i) Xác định tốc độ góc của bình và thể tích chất lỏng.
+
+\hspace*{1em}(ii) Tại thành bình, mực chất lỏng thấp hơn miệng bình bao nhiêu?
+
+\bt{11} Giả sử đồ thị của một đa thức bậc ba cắt parabol $y=x^2$ tại $x=0$, $x=a$ và $x=b$, trong đó $0<a<b$. Nếu hai miền giữa các đường cong có cùng diện tích, thì $b$ liên hệ với $a$ như thế nào?
+
+\par\noindent\begin{minipage}[t]{\linewidth}
+\bt{12} \textsf{[T]} Giả sử ta dự định làm một chiếc taco từ một bánh tortilla tròn có đường kính $8$ inch bằng cách uốn bánh sao cho có hình dạng như được quấn một phần quanh một hình trụ tròn. Ta sẽ cho thịt, phô mai và các nguyên liệu khác vào đầy đến mép bánh (nhưng không vượt quá mép). Bài toán của ta là quyết định cách uốn bánh tortilla để thể tích thức ăn mà nó chứa được là lớn nhất.
+
+(a) Ta bắt đầu bằng cách đặt một hình trụ tròn bán kính $r$ dọc theo một đường kính của bánh tortilla rồi gập bánh quanh hình trụ. Gọi $x$ là khoảng cách từ tâm bánh đến một điểm $P$ trên đường kính đó (xem hình). Chứng minh rằng diện tích thiết diện của chiếc taco đã được cho đầy thức ăn, trong mặt phẳng đi qua $P$ và vuông góc với trục hình trụ, là
+\[A(x)=r\sqrt{16-x^2}-\frac12r^2\sin\left(\frac{2}{r}\sqrt{16-x^2}\right),\]
+và viết một biểu thức cho thể tích của chiếc taco đã được cho đầy thức ăn.
+
+(b) Xác định (gần đúng) giá trị $r$ làm thể tích của chiếc taco lớn nhất. (Dùng phương pháp đồ thị.)
+\fig[.60]{problem12}{Hình cho Bài toán 12.}
+
+\end{minipage}\par
+\bt{13} Nếu tiếp tuyến tại một điểm $P$ trên đường cong $y=x^3$ cắt lại đường cong tại $Q$, gọi $A$ là diện tích miền giới hạn bởi đường cong và đoạn thẳng $PQ$. Gọi $B$ là diện tích miền được xác định theo cách tương tự, bắt đầu từ $Q$ thay cho $P$. Giữa $A$ và $B$ có mối liên hệ gì?
+
+\par\noindent\begin{minipage}[t]{\linewidth}
+\bt{14} Cho $P(a,a^2)$, $a>0$, là một điểm bất kỳ trên phần parabol $y=x^2$ nằm trong góc phần tư thứ nhất, và gọi $\mathcal R$ là miền giới hạn bởi parabol và đường pháp tuyến đi qua $P$. (Xem hình.) Chứng minh rằng diện tích của $\mathcal R$ nhỏ nhất khi $a=\frac12$. (Xem thêm Bài toán 11 trong phần Bài toán nâng cao — Problems Plus sau Chương 4.)
+\fig[.30]{problem14}{Hình cho Bài toán 14.}
+\end{minipage}\par
+\end{document}

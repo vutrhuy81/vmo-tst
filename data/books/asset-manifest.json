@@ -3915,5 +3915,45 @@
     "file": "stewart-6-review-84e8716e/tf_region.png",
     "mime": "image/png",
     "sha256": "5efdf6644ae36cda662897f7d584895ae7a321f6e299b1de647ef60a3b08efa8"
+  },
+  "stewart-6-plus-3225b73a/problem03.png": {
+    "file": "stewart-6-plus-3225b73a/problem03.png",
+    "mime": "image/png",
+    "sha256": "1a6a71cec36f7c6125e515f4ffb8a5c5168f82d9befa9f8fadd5315ad95e102d"
+  },
+  "stewart-6-plus-3225b73a/problem04.png": {
+    "file": "stewart-6-plus-3225b73a/problem04.png",
+    "mime": "image/png",
+    "sha256": "0be910b7947d37aa382c9768455561eeabdcca16e68424244e045e5103cd4c64"
+  },
+  "stewart-6-plus-3225b73a/problem06.png": {
+    "file": "stewart-6-plus-3225b73a/problem06.png",
+    "mime": "image/png",
+    "sha256": "8707df589728daa1bbb3873f9a2de784b46526e325dec1661f2f174f1073408f"
+  },
+  "stewart-6-plus-3225b73a/problem08.png": {
+    "file": "stewart-6-plus-3225b73a/problem08.png",
+    "mime": "image/png",
+    "sha256": "6dc5be11c1c9afe4ed0a42eb3e16cae590c1d9d1e5b17ac519558785e0ba2a17"
+  },
+  "stewart-6-plus-3225b73a/problem09.png": {
+    "file": "stewart-6-plus-3225b73a/problem09.png",
+    "mime": "image/png",
+    "sha256": "f199f8a2aa8a2f5f61064a995903ccd8d803ac203c301efcf9a59e372813c75b"
+  },
+  "stewart-6-plus-3225b73a/problem10.png": {
+    "file": "stewart-6-plus-3225b73a/problem10.png",
+    "mime": "image/png",
+    "sha256": "413a073f2294b891a17e64f5e2f0f68694b1325a398fdbc2f115b645f614c497"
+  },
+  "stewart-6-plus-3225b73a/problem12.png": {
+    "file": "stewart-6-plus-3225b73a/problem12.png",
+    "mime": "image/png",
+    "sha256": "1e91da2294cef9a4e2595782e8e10215bace55246022b132a6d5081d2326e4f0"
+  },
+  "stewart-6-plus-3225b73a/problem14.png": {
+    "file": "stewart-6-plus-3225b73a/problem14.png",
+    "mime": "image/png",
+    "sha256": "058c33f9af1bf6991411f11a5929effa48a4652dc47d61a79a01d605aac445f8"
   }
 }
