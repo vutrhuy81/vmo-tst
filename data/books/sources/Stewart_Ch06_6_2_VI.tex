@@ -1,0 +1,383 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage{fontspec}\setmainfont{Latin Modern Roman}\setsansfont{DejaVu Sans}
+\usepackage{amsmath,amssymb,graphicx,geometry,enumitem,needspace,longtable,booktabs,fancyhdr,hyperref}
+\geometry{left=28mm,right=23mm,top=24mm,bottom=24mm}
+\hypersetup{unicode=true,colorlinks=true,linkcolor=black,urlcolor=blue,pdftitle={Giải tích §6.2 — Thể tích}}
+\setlength{\parindent}{1.2em}\setlength{\parskip}{4pt}\setlength{\headheight}{16pt}
+\pagestyle{fancy}\fancyhf{}\fancyhead[L]{\small Chương 6. Ứng dụng của tích phân}\fancyhead[R]{\small §6.2}\fancyfoot[C]{\thepage}
+\newcommand{\fig}[3][.68]{\begin{center}\begin{minipage}{\linewidth}\centering\includegraphics[width=#1\linewidth]{assets/#2.png}\\{\small #3}\end{minipage}\end{center}}
+\newcommand{\ex}[1]{\par\medskip\noindent\textbf{Ví dụ #1.}\ }
+\newcommand{\sol}{\par\nopagebreak[4]\noindent\textit{Lời giải.}\ }
+\newcommand{\bt}[1]{\par\smallskip\Needspace{5\baselineskip}\noindent\textbf{#1.}\ }
+\newcommand{\group}[1]{\par\medskip\noindent\textbf{#1}\par\nopagebreak[4]}
+\newcommand{\gint}[1]{\left[\!\left[#1\right]\!\right]}
+\allowdisplaybreaks[2]
+\DeclareMathOperator{\sech}{sech}
+\DeclareMathOperator{\csch}{csch}
+\DeclareMathOperator{\arccot}{arccot}
+
+\newcommand{\prj}[1]{\bt{#1}}
+\begin{document}
+\begin{center}{\LARGE\bfseries 6.2 — Thể tích}\end{center}
+Khi tìm thể tích của một vật thể, ta gặp cùng một loại vấn đề như khi tìm diện tích. Ta có một ý niệm trực quan về ý nghĩa của thể tích, nhưng cần làm cho ý niệm ấy chính xác bằng phép tính tích phân để đưa ra một định nghĩa chính xác về thể tích.
+
+\subsection*{Định nghĩa thể tích}
+Ta bắt đầu với một loại vật thể đơn giản gọi là \textit{khối trụ} (chính xác hơn là \textit{khối trụ đứng}). Như Hình 1(a), một khối trụ được giới hạn bởi một miền phẳng $B_1$, gọi là \textit{đáy}, và một miền $B_2$ bằng nó nằm trong một mặt phẳng song song. Khối trụ gồm tất cả các điểm trên những đoạn thẳng vuông góc với đáy, nối $B_1$ với $B_2$. Nếu diện tích đáy là $A$ và chiều cao của khối trụ (khoảng cách từ $B_1$ đến $B_2$) là $h$, thì thể tích $V$ của khối trụ được định nghĩa là
+\[V=Ah.\]
+Đặc biệt, nếu đáy là một hình tròn bán kính $r$, thì khối trụ là một \textit{khối trụ tròn} có thể tích $V=\pi r^2h$ [xem Hình 1(b)]. Nếu đáy là hình chữ nhật có chiều dài $l$ và chiều rộng $w$, thì khối trụ là một \textit{khối hộp chữ nhật} (còn gọi là \textit{khối hộp song song chữ nhật}) có thể tích $V=lwh$ [xem Hình 1(c)].
+\fig[.92]{fig01}{Hình 1. (a) Khối trụ $V=Ah$. (b) Khối trụ tròn $V=\pi r^2h$. (c) Khối hộp chữ nhật $V=lwh$.}
+Với một vật thể $S$ không phải khối trụ, trước hết ta ``cắt'' $S$ thành các mảnh và xấp xỉ mỗi mảnh bằng một khối trụ. Ta ước lượng thể tích của $S$ bằng tổng thể tích các khối trụ ấy. Thể tích chính xác của $S$ được xác định bằng một quá trình lấy giới hạn, trong đó số mảnh tăng lên vô hạn.
+
+Ta bắt đầu bằng cách cắt $S$ bởi một mặt phẳng, thu được một miền phẳng gọi là \textit{thiết diện} của $S$. Gọi $A(x)$ là diện tích thiết diện của $S$ trong một mặt phẳng $P_x$ vuông góc với trục $x$ và đi qua điểm $x$, với $a\le x\le b$. (Xem Hình 2. Hãy hình dung ta dùng dao cắt $S$ tại $x$ và tính diện tích của lát cắt đó.) Diện tích thiết diện $A(x)$ này tăng hoặc giảm khi $x$ tăng từ $a$ đến $b$.
+\fig[.64]{fig02}{Hình 2}
+Ta chia $S$ thành $n$ ``lát'' có cùng bề dày $\Delta x$, bằng các mặt phẳng $P_{x_1},P_{x_2},\ldots,P_{x_n}$. (Hãy nghĩ đến việc cắt một ổ bánh mì thành lát.) Nếu chọn các điểm mẫu $x_i^*\in[x_{i-1},x_i]$, ta có thể xấp xỉ lát thứ $i$, ký hiệu $S_i$ (phần của $S$ nằm giữa hai mặt phẳng $P_{x_{i-1}}$ và $P_{x_i}$), bằng một khối trụ có diện tích đáy $A(x_i^*)$ và ``chiều cao'' $\Delta x$. (Xem Hình 3.)
+\fig[.96]{fig03}{Hình 3}
+Thể tích khối trụ này là $A(x_i^*)\Delta x$. Vì thế, thể tích lát $S_i$ theo ý niệm trực quan của ta được xấp xỉ bởi
+\[V(S_i)\approx A(x_i^*)\Delta x.\]
+Cộng thể tích của các lát, ta có một giá trị xấp xỉ cho thể tích toàn phần (tức là thể tích theo cách hiểu trực quan):
+\[V\approx\sum_{i=1}^n A(x_i^*)\Delta x.\]
+Phép xấp xỉ này có vẻ ngày càng tốt hơn khi $n\to\infty$. (Hãy hình dung các lát ngày càng mỏng.) Do đó, ta \textit{định nghĩa} thể tích là giới hạn của các tổng ấy khi $n\to\infty$. Mặt khác, giới hạn của các tổng Riemann chính là một tích phân xác định, nên ta có định nghĩa sau.
+
+\Needspace{9\baselineskip}
+\subsection*{Định nghĩa thể tích}
+Cho $S$ là một vật thể nằm giữa $x=a$ và $x=b$. Nếu diện tích thiết diện của $S$ trong mặt phẳng $P_x$, đi qua $x$ và vuông góc với trục $x$, là $A(x)$, trong đó $A$ là một hàm liên tục, thì \textit{thể tích} của $S$ là
+\[\boxed{\displaystyle V=\lim_{n\to\infty}\sum_{i=1}^n A(x_i^*)\Delta x=\int_a^b A(x)\,dx.}\]
+Có thể chứng minh rằng định nghĩa này không phụ thuộc vào cách đặt $S$ đối với trục $x$. Nói cách khác, dù cắt $S$ bằng các mặt phẳng song song theo hướng nào, ta vẫn thu được cùng một giá trị $V$.
+
+Khi dùng công thức thể tích $V=\int_a^b A(x)\,dx$, cần nhớ rằng $A(x)$ là diện tích của một thiết diện chuyển động, thu được bằng cách cắt qua $x$ theo phương vuông góc với trục $x$.
+
+Chú ý rằng với một khối trụ, diện tích thiết diện không đổi: $A(x)=A$ với mọi $x$. Do đó, theo định nghĩa, $V=\int_a^b A\,dx=A(b-a)$; kết quả này phù hợp với công thức $V=Ah$.
+
+\Needspace{18\baselineskip}
+\ex{1} Chứng minh rằng thể tích của một khối cầu bán kính $r$ là $V=\frac43\pi r^3$.
+\sol Nếu đặt khối cầu sao cho tâm của nó ở gốc tọa độ, thì mặt phẳng $P_x$ cắt khối cầu theo một hình tròn có bán kính (theo định lý Pythagore)
+\[y=\sqrt{r^2-x^2}.\]
+(Xem Hình 4.) Vì thế, diện tích thiết diện là
+\[A(x)=\pi y^2=\pi(r^2-x^2).\]
+\fig[.40]{fig04}{Hình 4}
+Dùng định nghĩa thể tích với $a=-r$ và $b=r$, ta có
+\begin{align*}
+V&=\int_{-r}^r A(x)\,dx=\int_{-r}^r\pi(r^2-x^2)\,dx\\
+&=2\pi\int_0^r(r^2-x^2)\,dx\qquad\text{(Hàm dưới dấu tích phân là hàm chẵn.)}\\
+&=2\pi\left[r^2x-\frac{x^3}{3}\right]_0^r
+=2\pi\left(r^3-\frac{r^3}{3}\right)=\frac43\pi r^3.
+\end{align*}
+Hình 5 minh họa định nghĩa thể tích khi vật thể là khối cầu có bán kính $r=1$. Theo Ví dụ 1, thể tích khối cầu là $\frac43\pi$, xấp xỉ $4.18879$. Ở đây, các lát là những khối trụ tròn, hay \textit{hình đĩa}, và ba phần của Hình 5 biểu diễn ý nghĩa hình học của các tổng Riemann
+\[\sum_{i=1}^n A(\bar x_i)\Delta x=\sum_{i=1}^n\pi(1-\bar x_i^{\,2})\Delta x\]
+khi $n=5$, $10$ và $20$, nếu chọn các điểm mẫu $x_i^*$ là trung điểm $\bar x_i$. Chú ý rằng khi số khối trụ xấp xỉ tăng lên, các tổng Riemann tương ứng tiến gần hơn đến thể tích thật.
+\fig[.96]{fig05}{Hình 5. Xấp xỉ thể tích khối cầu bán kính 1: (a) Dùng 5 đĩa, $V\approx4.2726$. (b) Dùng 10 đĩa, $V\approx4.2097$. (c) Dùng 20 đĩa, $V\approx4.1940$.}
+
+\subsection*{Thể tích của khối tròn xoay}
+Khi quay một miền quanh một đường thẳng, ta được một \textit{khối tròn xoay}. Trong ví dụ sau, ta thấy rằng với một khối như vậy, các thiết diện vuông góc với trục quay đều là hình tròn.
+
+\Needspace{18\baselineskip}
+\ex{2} Tìm thể tích khối thu được khi quay quanh trục $x$ miền nằm dưới đường cong $y=\sqrt{x}$ từ 0 đến 1. Minh họa định nghĩa thể tích bằng cách phác họa một khối trụ xấp xỉ điển hình.
+\sol Miền được cho trong Hình 6(a). Khi quay quanh trục $x$, ta được khối trong Hình 6(b). Cắt qua điểm $x$, ta có một hình đĩa bán kính $\sqrt{x}$. Diện tích thiết diện ấy là
+\[A(x)=\pi(\sqrt{x})^2=\pi x,\]
+trong đó $\sqrt{x}$ là bán kính. Thể tích của khối trụ xấp xỉ (một hình đĩa có bề dày $\Delta x$) là
+\[A(x)\Delta x=\pi x\Delta x.\]
+Khối nằm giữa $x=0$ và $x=1$, nên thể tích của nó là
+\[V=\int_0^1 A(x)\,dx=\int_0^1\pi x\,dx=\pi\left.\frac{x^2}{2}\right]_0^1=\frac\pi2.\]
+\fig[.88]{fig06}{Hình 6. (a) Miền phẳng. (b) Khối tròn xoay và đĩa xấp xỉ.}
+Kết quả ở Ví dụ 2 có hợp lý không? Để kiểm tra, hãy thay miền đã cho bằng hình vuông có đáy $[0,1]$ và chiều cao 1. Quay hình vuông này, ta được một khối trụ bán kính 1, chiều cao 1 và thể tích $\pi\cdot1^2\cdot1=\pi$. Ta đã tính được thể tích của khối đã cho bằng một nửa thể tích ấy. Điều này có vẻ hợp lý.
+
+\Needspace{19\baselineskip}
+\ex{3} Tìm thể tích khối thu được khi quay miền giới hạn bởi $y=x^3$, $y=8$ và $x=0$ quanh trục $y$.
+\sol Miền được cho trong Hình 7(a), còn khối thu được nằm trong Hình 7(b). Vì miền quay quanh trục $y$, ta nên cắt khối theo phương vuông góc với trục $y$ (thu được các thiết diện hình tròn), do đó lấy tích phân theo $y$. Cắt ở độ cao $y$, ta có hình đĩa tròn bán kính $x$, trong đó $x=\sqrt[3]{y}$. Vì thế, diện tích thiết diện ở độ cao $y$ là
+\[A(y)=\pi x^2=\pi(\sqrt[3]{y})^2=\pi y^{2/3}.\]
+Thể tích khối trụ xấp xỉ trong Hình 7(b) là
+\[A(y)\Delta y=\pi y^{2/3}\Delta y.\]
+Vì khối nằm giữa $y=0$ và $y=8$, thể tích của nó là
+\[V=\int_0^8 A(y)\,dy=\int_0^8\pi y^{2/3}\,dy=\pi\left[\frac35y^{5/3}\right]_0^8=\frac{96\pi}{5}.\]
+\fig[.77]{fig07}{Hình 7. (a) Miền phẳng. (b) Khối tròn xoay.}
+Trong những ví dụ tiếp theo, ta thấy một số khối tròn xoay có phần rỗng bao quanh trục quay.
+
+\Needspace{18\baselineskip}
+\ex{4} Miền $\mathcal R$ được giới hạn bởi hai đường cong $y=x$ và $y=x^2$ được quay quanh trục $x$. Tìm thể tích khối thu được.
+\sol Hai đường cong $y=x$ và $y=x^2$ cắt nhau tại $(0,0)$ và $(1,1)$. Miền giữa chúng, khối tròn xoay và một thiết diện vuông góc với trục $x$ được cho trong Hình 8. Thiết diện trong mặt phẳng $P_x$ có dạng \textit{hình vành khăn}, với bán kính trong $x^2$ và bán kính ngoài $x$ [xem Hình 8(c)]. Vì vậy, diện tích thiết diện được tính bằng cách lấy diện tích hình tròn ngoài trừ đi diện tích hình tròn trong:
+\[A(x)=\pi x^2-\pi(x^2)^2=\pi(x^2-x^4).\]
+Ở đây, $x$ là bán kính ngoài và $x^2$ là bán kính trong. Do đó,
+\begin{align*}
+V&=\int_0^1 A(x)\,dx=\int_0^1\pi(x^2-x^4)\,dx\\
+&=\pi\left[\frac{x^3}{3}-\frac{x^5}{5}\right]_0^1=\frac{2\pi}{15}.
+\end{align*}
+\fig[.91]{fig08}{Hình 8. (a) Miền $\mathcal R$. (b) Khối tròn xoay. (c) Thiết diện hình vành khăn.}
+Ví dụ tiếp theo cho thấy rằng khi quay một miền quanh một trục không phải trục tọa độ, ta phải xác định các bán kính thiết diện một cách cẩn thận.
+
+\Needspace{18\baselineskip}
+\ex{5} Tìm thể tích khối thu được khi quay miền trong Ví dụ 4 quanh đường thẳng $y=2$.
+\sol Khối và một thiết diện được cho trong Hình 9. Thiết diện vẫn là hình vành khăn, nhưng lần này bán kính trong là $2-x$, còn bán kính ngoài là $2-x^2$.
+\fig[.82]{fig09}{Hình 9}
+Diện tích thiết diện là
+\[A(x)=\pi(2-x^2)^2-\pi(2-x)^2,\]
+trong đó $2-x^2$ là bán kính ngoài, $2-x$ là bán kính trong. Thể tích của $S$ là
+\begin{align*}
+V&=\int_0^1 A(x)\,dx\\
+&=\pi\int_0^1[(2-x^2)^2-(2-x)^2]\,dx\\
+&=\pi\int_0^1(x^4-5x^2+4x)\,dx\\
+&=\pi\left[\frac{x^5}{5}-5\frac{x^3}{3}+4\frac{x^2}{2}\right]_0^1=\frac{8\pi}{15}.
+\end{align*}
+\paragraph{Chú ý.} Nói chung, ta tính thể tích khối tròn xoay bằng công thức định nghĩa cơ bản
+\[V=\int_a^b A(x)\,dx\qquad\text{hoặc}\qquad V=\int_c^d A(y)\,dy,\]
+và tìm diện tích thiết diện $A(x)$ (hoặc $A(y)$) theo một trong các cách sau:
+\begin{itemize}
+\item Nếu thiết diện là hình đĩa (như trong các Ví dụ 1–3), ta xác định bán kính hình đĩa (theo $x$ hoặc $y$), rồi dùng
+\[A=\pi(\text{bán kính})^2.\]
+\item Nếu thiết diện là hình vành khăn (như trong các Ví dụ 4 và 5), ta xác định bán kính trong $r_{\mathrm{in}}$ và bán kính ngoài $r_{\mathrm{out}}$ từ hình phác họa (như trong các Hình 8, 9 và 10), rồi lấy diện tích hình đĩa ngoài trừ đi diện tích hình đĩa trong:
+\[A=\pi(\text{bán kính ngoài})^2-\pi(\text{bán kính trong})^2.\]
+\end{itemize}
+\fig[.89]{fig10}{Hình 10. $r_{\mathrm{in}}$: bán kính trong; $r_{\mathrm{out}}$: bán kính ngoài.}
+Ví dụ tiếp theo minh họa thêm quy trình này.
+
+\Needspace{18\baselineskip}
+\ex{6} Tìm thể tích khối thu được khi quay miền trong Ví dụ 4 quanh đường thẳng $x=-1$.
+\sol Hình 11 cho thấy một thiết diện nằm ngang. Đó là hình vành khăn có bán kính trong $1+y$ và bán kính ngoài $1+\sqrt{y}$, nên diện tích thiết diện là
+\begin{align*}
+A(y)&=\pi(\text{bán kính ngoài})^2-\pi(\text{bán kính trong})^2\\
+&=\pi(1+\sqrt{y})^2-\pi(1+y)^2.
+\end{align*}
+Thể tích là
+\begin{align*}
+V&=\int_0^1 A(y)\,dy=\pi\int_0^1[(1+\sqrt{y})^2-(1+y)^2]\,dy\\
+&=\pi\int_0^1(2\sqrt{y}-y-y^2)\,dy\\
+&=\pi\left[\frac{4y^{3/2}}{3}-\frac{y^2}{2}-\frac{y^3}{3}\right]_0^1=\frac\pi2.
+\end{align*}
+\fig[.75]{fig11}{Hình 11}
+
+\subsection*{Tìm thể tích bằng diện tích thiết diện}
+Bây giờ ta tìm thể tích của các khối không phải khối tròn xoay, nhưng có diện tích thiết diện dễ tính.
+
+\Needspace{18\baselineskip}
+\ex{7} Hình 12 cho thấy một khối có đáy là hình tròn bán kính 1. Các thiết diện song song, vuông góc với đáy, là những tam giác đều. Tìm thể tích khối đó.
+\fig[.34]{fig12}{Hình 12. Hình ảnh khối trong Ví dụ 7 được tạo bằng máy tính.}
+\sol Chọn đường tròn là $x^2+y^2=1$. Khối, đáy của nó và một thiết diện điển hình cách gốc tọa độ một khoảng $x$ được cho trong Hình 13.
+\fig[.96]{fig13}{Hình 13. (a) Khối. (b) Đáy. (c) Một thiết diện.}
+Vì $B$ nằm trên đường tròn, ta có $y=\sqrt{1-x^2}$, nên đáy của tam giác $ABC$ là $|AB|=2y=2\sqrt{1-x^2}$. Vì tam giác đều, từ Hình 13(c) ta thấy chiều cao của nó là $\sqrt{3}\,y=\sqrt{3}\sqrt{1-x^2}$. Do đó, diện tích thiết diện là
+\[A(x)=\frac12\cdot2\sqrt{1-x^2}\cdot\sqrt{3}\sqrt{1-x^2}=\sqrt{3}(1-x^2),\]
+và thể tích của khối là
+\begin{align*}
+V&=\int_{-1}^1 A(x)\,dx=\int_{-1}^1\sqrt{3}(1-x^2)\,dx\\
+&=2\int_0^1\sqrt{3}(1-x^2)\,dx
+=2\sqrt{3}\left[x-\frac{x^3}{3}\right]_0^1=\frac{4\sqrt{3}}3.
+\end{align*}
+
+\Needspace{18\baselineskip}
+\ex{8} Tìm thể tích khối chóp có đáy là hình vuông cạnh $L$ và chiều cao $h$.
+\sol Đặt gốc tọa độ $O$ tại đỉnh khối chóp và trục $x$ dọc theo trục giữa của nó, như Hình 14. Mọi mặt phẳng $P_x$ đi qua $x$ và vuông góc với trục $x$ cắt khối chóp theo một hình vuông, giả sử có cạnh dài $s$. Từ các tam giác đồng dạng trong Hình 15, ta biểu diễn $s$ theo $x$ như sau:
+\[\frac{x}{h}=\frac{s/2}{L/2}=\frac{s}{L},\]
+suy ra $s=Lx/h$. [Một cách khác là nhận thấy đường thẳng $OP$ có hệ số góc $L/(2h)$, nên phương trình của nó là $y=Lx/(2h)$.] Vì vậy, diện tích thiết diện là
+\[A(x)=s^2=\frac{L^2}{h^2}x^2.\]
+\fig[.47]{fig14}{Hình 14}
+\fig[.47]{fig15}{Hình 15}
+Khối chóp nằm giữa $x=0$ và $x=h$, nên thể tích của nó là
+\begin{align*}
+V&=\int_0^h A(x)\,dx=\int_0^h\frac{L^2}{h^2}x^2\,dx\\
+&=\frac{L^2}{h^2}\left.\frac{x^3}{3}\right]_0^h=\frac{L^2h}{3}.
+\end{align*}
+\paragraph{Chú ý.} Trong Ví dụ 8, ta không nhất thiết phải đặt đỉnh khối chóp ở gốc tọa độ; ta làm như vậy chỉ để các phương trình đơn giản hơn. Nếu thay vào đó đặt tâm đáy ở gốc tọa độ và đỉnh trên nửa trục $y$ dương, như Hình 16, ta có thể kiểm tra rằng tích phân thu được là
+\[V=\int_0^h\frac{L^2}{h^2}(h-y)^2\,dy=\frac{L^2h}{3}.\]
+\fig[.27]{fig16}{Hình 16}
+
+\Needspace{18\baselineskip}
+\ex{9} Một khối nêm được cắt ra từ một khối trụ tròn bán kính 4 bởi hai mặt phẳng. Một mặt phẳng vuông góc với trục của khối trụ. Mặt phẳng còn lại cắt mặt phẳng thứ nhất theo một đường kính của khối trụ và tạo với nó góc $30^\circ$. Tìm thể tích khối nêm.
+\sol Nếu đặt trục $x$ dọc theo đường kính là giao tuyến của hai mặt phẳng, thì đáy của khối nêm là nửa hình tròn có phương trình $y=\sqrt{16-x^2}$, $-4\le x\le4$. Thiết diện vuông góc với trục $x$, cách gốc tọa độ một khoảng $x$, là tam giác $ABC$, như Hình 17, có đáy $y=\sqrt{16-x^2}$ và chiều cao $|BC|=y\tan30^\circ=\sqrt{16-x^2}/\sqrt{3}$. Do đó, diện tích thiết diện là
+\fig[.32]{fig17}{Hình 17}
+\begin{align*}
+A(x)&=\frac12\sqrt{16-x^2}\cdot\frac1{\sqrt{3}}\sqrt{16-x^2}\\
+&=\frac{16-x^2}{2\sqrt{3}},
+\end{align*}
+và thể tích là
+\begin{align*}
+V&=\int_{-4}^4 A(x)\,dx=\int_{-4}^4\frac{16-x^2}{2\sqrt{3}}\,dx\\
+&=\frac1{\sqrt{3}}\int_0^4(16-x^2)\,dx
+=\frac1{\sqrt{3}}\left[16x-\frac{x^3}{3}\right]_0^4=\frac{128}{3\sqrt{3}}.
+\end{align*}
+Xem Bài tập 77 để biết một phương pháp khác.
+
+\clearpage
+\section*{6.2 — Bài tập}
+\group{1–4}
+Một khối được tạo thành bằng cách quay miền tô màu quanh đường thẳng đã chỉ định.
+
+(a) Phác họa khối và một hình đĩa hoặc hình vành khăn điển hình.
+
+(b) Thiết lập một tích phân biểu diễn thể tích của khối.
+
+(c) Tính tích phân để tìm thể tích của khối.
+\bt{1} Quay quanh trục $x$.
+\fig[.40]{ex01}{Hình cho Bài tập 1}
+\bt{2} Quay quanh trục $x$.
+\fig[.40]{ex02}{Hình cho Bài tập 2}
+\Needspace{23\baselineskip}
+\bt{3} Quay quanh trục $y$.
+\fig[.40]{ex03}{Hình cho Bài tập 3}
+\bt{4} Quay quanh trục $y$.
+\fig[.40]{ex04}{Hình cho Bài tập 4}
+\group{5–10}
+Thiết lập, nhưng không tính, một tích phân biểu diễn thể tích của khối thu được khi quay miền giới hạn bởi các đường cong đã cho quanh đường thẳng đã chỉ định.
+\bt{5} $y=\ln x$, $y=0$, $x=3$; quay quanh trục $x$.
+\bt{6} $x=\sqrt{5-y}$, $y=0$, $x=0$; quay quanh trục $y$.
+\bt{7} $8y=x^2$, $y=\sqrt{x}$; quay quanh trục $y$.
+\bt{8} $y=(x-2)^2$, $y=x+10$; quay quanh trục $x$.
+\bt{9} $y=\sin x$, $y=0$, $0\le x\le\pi$; quay quanh $y=-2$.
+\bt{10} $y=\sqrt{x}$, $y=0$, $x=4$; quay quanh $x=6$.
+\Needspace{12\baselineskip}
+\group{11–28}
+Tìm thể tích của khối thu được khi quay miền giới hạn bởi các đường cong đã cho quanh đường thẳng đã chỉ định. Phác họa miền, khối và một hình đĩa hoặc hình vành khăn điển hình.
+\bt{11} $y=x+1$, $y=0$, $x=0$, $x=2$; quay quanh trục $x$.
+\bt{12} $y=1/x$, $y=0$, $x=1$, $x=4$; quay quanh trục $x$.
+\bt{13} $y=\sqrt{x-1}$, $y=0$, $x=5$; quay quanh trục $x$.
+\bt{14} $y=e^x$, $y=0$, $x=-1$, $x=1$; quay quanh trục $x$.
+\bt{15} $x=2\sqrt{y}$, $x=0$, $y=9$; quay quanh trục $y$.
+\bt{16} $2x=y^2$, $x=0$, $y=4$; quay quanh trục $y$.
+\bt{17} $y=x^2$, $y=2x$; quay quanh trục $y$.
+\bt{18} $y=6-x^2$, $y=2$; quay quanh trục $x$.
+\bt{19} $y=x^3$, $y=\sqrt{x}$; quay quanh trục $x$.
+\bt{20} $x=2-y^2$, $x=y^4$; quay quanh trục $y$.
+\bt{21} $y=x^2$, $x=y^2$; quay quanh $y=1$.
+\bt{22} $y=x^3$, $y=1$, $x=2$; quay quanh $y=-3$.
+\bt{23} $y=1+\sec x$, $y=3$; quay quanh $y=1$.
+\bt{24} $y=\sin x$, $y=\cos x$, $0\le x\le\pi/4$; quay quanh $y=-1$.
+\bt{25} $y=x^3$, $y=0$, $x=1$; quay quanh $x=2$.
+\bt{26} $xy=1$, $y=0$, $x=1$, $x=2$; quay quanh $x=-1$.
+\bt{27} $x=y^2$, $x=1-y^2$; quay quanh $x=3$.
+\bt{28} $y=x$, $y=0$, $x=2$, $x=4$; quay quanh $x=1$.
+\group{29–40}
+Dựa vào hình và tìm thể tích tạo thành khi quay miền đã cho quanh đường thẳng đã chỉ định.
+\fig[.49]{ex29}{Hình cho các Bài tập 29–40}
+\bt{29} Miền $\mathcal R_1$ quanh $OA$.
+\bt{30} Miền $\mathcal R_1$ quanh $OC$.
+\bt{31} Miền $\mathcal R_1$ quanh $AB$.
+\bt{32} Miền $\mathcal R_1$ quanh $BC$.
+\bt{33} Miền $\mathcal R_2$ quanh $OA$.
+\bt{34} Miền $\mathcal R_2$ quanh $OC$.
+\bt{35} Miền $\mathcal R_2$ quanh $AB$.
+\bt{36} Miền $\mathcal R_2$ quanh $BC$.
+\bt{37} Miền $\mathcal R_3$ quanh $OA$.
+\bt{38} Miền $\mathcal R_3$ quanh $OC$.
+\bt{39} Miền $\mathcal R_3$ quanh $AB$.
+\bt{40} Miền $\mathcal R_3$ quanh $BC$.
+\group{41–44}
+Thiết lập một tích phân biểu diễn thể tích của khối thu được khi quay miền giới hạn bởi các đường cong đã cho quanh đường thẳng đã chỉ định. Sau đó, dùng máy tính bỏ túi hoặc máy tính để tính tích phân chính xác đến năm chữ số thập phân.
+\bt{41} $y=e^{-x^2}$, $y=0$, $x=-1$, $x=1$.
+
+(a) Quay quanh trục $x$. \qquad (b) Quay quanh $y=-1$.
+\bt{42} $y=0$, $y=\cos^2x$, $-\pi/2\le x\le\pi/2$.
+
+(a) Quay quanh trục $x$. \qquad (b) Quay quanh $y=1$.
+\bt{43} $x^2+4y^2=4$.
+
+(a) Quay quanh $y=2$. \qquad (b) Quay quanh $x=2$.
+\bt{44} $y=x^2$, $x^2+y^2=1$, $y\ge0$.
+
+(a) Quay quanh trục $x$. \qquad (b) Quay quanh trục $y$.
+\group{45–46}
+Dùng đồ thị để tìm gần đúng hoành độ các giao điểm của các đường cong đã cho. Sau đó, dùng máy tính bỏ túi hoặc máy tính để tìm gần đúng thể tích của khối thu được khi quay quanh trục $x$ miền giới hạn bởi các đường cong ấy.
+\bt{45} $y=\ln(x^6+2)$, $y=\sqrt{3-x^3}$.
+\bt{46} $y=1+xe^{-x^3}$, $y=\arctan x^2$.
+\Needspace{12\baselineskip}
+\group{47–48}
+Dùng một hệ thống đại số máy tính để tìm thể tích chính xác của khối thu được khi quay miền giới hạn bởi các đường cong đã cho quanh đường thẳng đã chỉ định.
+\bt{47} $y=\sin^2x$, $y=0$, $0\le x\le\pi$; quay quanh $y=-1$.
+\bt{48} $y=x$, $y=xe^{1-x/2}$; quay quanh $y=3$.
+\group{49–54}
+Mỗi tích phân sau biểu diễn thể tích của một khối tròn xoay. Hãy mô tả khối ấy.
+\bt{49} $\displaystyle\pi\int_0^{\pi/2}\sin^2x\,dx$.
+\bt{50} $\displaystyle\pi\int_0^{\ln2}e^{2x}\,dx$.
+\bt{51} $\displaystyle\pi\int_0^1(x^4-x^6)\,dx$.
+\bt{52} $\displaystyle\pi\int_{-1}^1(1-y^2)^2\,dy$.
+\bt{53} $\displaystyle\pi\int_0^4 y\,dy$.
+\bt{54} $\displaystyle\pi\int_1^4[3^2-(3-\sqrt{x})^2]\,dx$.
+\bt{55} Phép chụp cắt lớp vi tính (CAT) tạo ra các ảnh thiết diện cách đều nhau của một cơ quan trong cơ thể người, cung cấp những thông tin về cơ quan ấy mà nếu không thì chỉ có thể thu được bằng phẫu thuật. Giả sử ảnh chụp CAT của gan người cho các thiết diện cách nhau $1.5$ cm. Gan dài $15$ cm và diện tích các thiết diện, tính bằng centimét vuông, lần lượt là $0$, $18$, $58$, $79$, $94$, $106$, $117$, $128$, $63$, $39$ và $0$. Dùng Quy tắc trung điểm để ước lượng thể tích của gan.
+\fig[.67]{ex55}{Hình cho Bài tập 55. Ảnh: Suttha Burawonk / Shutterstock.com.}
+\Needspace{14\baselineskip}
+\bt{56} Một khúc gỗ dài $10$ m được cắt tại các khoảng cách $1$ m. Diện tích thiết diện $A$ của nó (ở khoảng cách $x$ tính từ đầu khúc gỗ) được cho trong bảng. Dùng Quy tắc trung điểm với $n=5$ để ước lượng thể tích khúc gỗ.
+\begin{center}\begin{tabular}{rrrr}\toprule
+$x$ (m)&$A$ ($\mathrm{m}^2$)&$x$ (m)&$A$ ($\mathrm{m}^2$)\\\midrule
+0&0.68&6&0.53\\
+1&0.65&7&0.55\\
+2&0.64&8&0.52\\
+3&0.61&9&0.50\\
+4&0.58&10&0.48\\
+5&0.59&&\\\bottomrule
+\end{tabular}\end{center}
+\bt{57} (a) Nếu quay miền trong hình quanh trục $x$ để tạo một khối, hãy dùng Quy tắc trung điểm với $n=4$ để ước lượng thể tích của khối.
+\fig[.47]{ex57}{Hình cho Bài tập 57}
+(b) Ước lượng thể tích nếu quay miền quanh trục $y$. Tiếp tục dùng Quy tắc trung điểm với $n=4$.
+\bt{58} (a) Một mô hình hình dạng trứng chim được tạo ra bằng cách quay quanh trục $x$ miền nằm dưới đồ thị
+\[f(x)=(ax^3+bx^2+cx+d)\sqrt{1-x^2}.\]
+Dùng một hệ thống đại số máy tính để tìm thể tích của quả trứng như vậy.
+
+(b) Với chim lặn họng đỏ, $a=-0.06$, $b=0.04$, $c=0.1$ và $d=0.54$. Vẽ đồ thị $f$ và tìm thể tích quả trứng của loài chim này.
+\group{59–74}
+Tìm thể tích của khối $S$ được mô tả.
+\bt{59} Khối nón tròn xoay có chiều cao $h$ và bán kính đáy $r$.
+\bt{60} Khối nón cụt tròn xoay có chiều cao $h$, bán kính đáy dưới $R$ và bán kính đáy trên $r$.
+\fig[.34]{ex60}{Hình cho Bài tập 60}
+\bt{61} Chỏm cầu của một khối cầu bán kính $r$, có chiều cao $h$.
+\fig[.34]{ex61}{Hình cho Bài tập 61}
+\bt{62} Khối chóp cụt có đáy dưới là hình vuông cạnh $b$, đáy trên là hình vuông cạnh $a$ và chiều cao $h$.
+\fig[.35]{ex62}{Hình cho Bài tập 62}
+Điều gì xảy ra nếu $a=b$? Điều gì xảy ra nếu $a=0$?
+\bt{63} Khối chóp có chiều cao $h$ và đáy là hình chữ nhật kích thước $b$ và $2b$.
+\bt{64} Khối chóp có chiều cao $h$ và đáy là tam giác đều cạnh $a$ (một khối tứ diện).
+\fig[.30]{ex64}{Hình cho Bài tập 64}
+\bt{65} Khối tứ diện có ba mặt đôi một vuông góc và ba cạnh đôi một vuông góc có độ dài $3$ cm, $4$ cm và $5$ cm.
+\bt{66} Đáy của $S$ là hình tròn bán kính $r$. Các thiết diện song song, vuông góc với đáy, là hình vuông.
+\fig[.29]{ex66}{Hình cho Bài tập 66}
+\bt{67} Đáy của $S$ là miền elip có đường biên $9x^2+4y^2=36$. Các thiết diện vuông góc với trục $x$ là tam giác vuông cân có cạnh huyền nằm trong đáy.
+\bt{68} Đáy của $S$ là miền tam giác có các đỉnh $(0,0)$, $(1,0)$ và $(0,1)$. Các thiết diện vuông góc với trục $y$ là tam giác đều.
+\bt{69} Đáy của $S$ giống đáy trong Bài tập 68, nhưng các thiết diện vuông góc với trục $x$ là hình vuông.
+\bt{70} Đáy của $S$ là miền giới hạn bởi parabol $y=1-x^2$ và trục $x$. Các thiết diện vuông góc với trục $y$ là hình vuông.
+\bt{71} Đáy của $S$ giống đáy trong Bài tập 70, nhưng các thiết diện vuông góc với trục $x$ là tam giác cân có chiều cao bằng độ dài đáy.
+\bt{72} Đáy của $S$ là miền giới hạn bởi $y=2-x^2$ và trục $x$. Các thiết diện vuông góc với trục $y$ là một phần tư hình tròn.
+\fig[.46]{ex72}{Hình cho Bài tập 72}
+\bt{73} Khối $S$ được giới hạn bởi các đường tròn vuông góc với trục $x$, cắt trục $x$ và có tâm trên parabol $y=\frac12(1-x^2)$, $-1\le x\le1$.
+\fig[.77]{ex73}{Hình cho Bài tập 73}
+\bt{74} Các thiết diện của khối $S$ trong những mặt phẳng vuông góc với trục $x$ là các hình tròn có đường kính kéo dài từ đường cong $y=\frac12\sqrt{x}$ đến đường cong $y=\sqrt{x}$, với $0\le x\le4$.
+\fig[.54]{ex74}{Hình cho Bài tập 74}
+\bt{75} (a) Thiết lập một tích phân biểu diễn thể tích của khối xuyến (khối có dạng bánh vòng trong hình) với các bán kính $r$ và $R$.
+\fig[.47]{ex75}{Hình cho Bài tập 75}
+(b) Bằng cách diễn giải tích phân như một diện tích, hãy tìm thể tích khối xuyến.
+\bt{76} Đáy của khối $S$ là hình tròn bán kính $r$. Các thiết diện song song, vuông góc với đáy, là tam giác cân có chiều cao $h$ và cạnh không bằng hai cạnh kia nằm trong đáy.
+
+(a) Thiết lập một tích phân biểu diễn thể tích của $S$.
+
+(b) Bằng cách diễn giải tích phân như một diện tích, hãy tìm thể tích của $S$.
+\bt{77} Giải Ví dụ 9 bằng cách chọn các thiết diện song song với giao tuyến của hai mặt phẳng.
+\group{78–79. Nguyên lý Cavalieri}
+Nguyên lý Cavalieri phát biểu rằng nếu một họ các mặt phẳng song song tạo ra những thiết diện có diện tích bằng nhau đối với hai khối $S_1$ và $S_2$, thì thể tích của $S_1$ và $S_2$ bằng nhau.
+\bt{78} (a) Chứng minh Nguyên lý Cavalieri.
+
+(b) Dùng Nguyên lý Cavalieri để tìm thể tích khối trụ xiên trong hình.
+\fig[.42]{ex78}{Hình cho Bài tập 78}
+\bt{79} Dùng Nguyên lý Cavalieri để chứng minh rằng thể tích của một khối bán cầu bán kính $r$ bằng thể tích của một khối trụ bán kính $r$, chiều cao $r$, sau khi bỏ đi một khối nón, như trong hình.
+\fig[.80]{ex79}{Hình cho Bài tập 79}
+\Needspace{19\baselineskip}
+\bt{80} Tìm thể tích phần chung của hai khối trụ tròn, mỗi khối có bán kính $r$, nếu trục của chúng cắt nhau vuông góc.
+\fig[.76]{ex80}{Hình cho Bài tập 80}
+\bt{81} Tìm thể tích phần chung của hai khối cầu, mỗi khối có bán kính $r$, nếu tâm của mỗi khối cầu nằm trên mặt cầu của khối kia.
+\bt{82} Một chiếc bát có dạng nửa hình cầu đường kính $30$ cm. Một quả cầu nặng có đường kính $10$ cm được đặt vào bát, rồi đổ nước vào bát đến độ sâu $h$ centimét. Tìm thể tích nước trong bát.
+\bt{83} Một lỗ bán kính $r$ được khoan xuyên qua giữa một khối trụ bán kính $R>r$, theo phương vuông góc với trục khối trụ. Thiết lập, nhưng không tính, một tích phân biểu diễn thể tích phần bị khoan bỏ.
+\bt{84} Một lỗ bán kính $r$ được khoan xuyên qua tâm của một khối cầu bán kính $R>r$. Tìm thể tích phần còn lại của khối cầu.
+\bt{85} Một số người tiên phong của giải tích, như Kepler và Newton, đã được gợi hứng từ bài toán tìm thể tích các thùng rượu vang. (Năm 1615, Kepler xuất bản cuốn \textit{Stereometria doliorum}, trình bày các phương pháp tìm thể tích thùng.) Họ thường xấp xỉ hình dạng thành thùng bằng các parabol.
+
+(a) Một thùng có chiều cao $h$ và bán kính lớn nhất $R$ được tạo ra bằng cách quay quanh trục $x$ parabol
+\[y=R-cx^2,\qquad -h/2\le x\le h/2,\]
+trong đó $c$ là hằng số dương. Chứng minh rằng bán kính của mỗi đầu thùng là $r=R-d$, với $d=ch^2/4$.
+
+(b) Chứng minh rằng thể tích chứa trong thùng là
+\[V=\frac13\pi h\left(2R^2+r^2-\frac25d^2\right).\]
+\bt{86} Giả sử miền $\mathcal R$ có diện tích $A$ và nằm phía trên trục $x$. Khi quay $\mathcal R$ quanh trục $x$, nó quét nên một khối có thể tích $V_1$. Khi quay $\mathcal R$ quanh đường thẳng $y=-k$ (với $k$ là số dương), nó quét nên một khối có thể tích $V_2$. Biểu diễn $V_2$ theo $V_1$, $k$ và $A$.
+\Needspace{28\baselineskip}
+\bt{87} Một \textit{phép vị tự} của mặt phẳng với hệ số tỉ lệ $c$ là phép biến đổi ánh xạ điểm $(x,y)$ thành điểm $(cx,cy)$. Áp dụng phép vị tự cho một miền phẳng tạo ra một hình đồng dạng với miền đó. Một nhà sản xuất muốn chế tạo một chiếc bình đất nung dung tích 5 lít ($5000$ $\mathrm{cm}^3$), có hình dạng đồng dạng với khối thu được khi quay miền $\mathcal R_1$ trong hình quanh trục $y$.
+
+(a) Tìm thể tích $V_1$ của chiếc bình thu được khi quay miền $\mathcal R_1$.
+
+(b) Chứng minh rằng phép vị tự với hệ số tỉ lệ $c$ biến miền $\mathcal R_1$ thành miền $\mathcal R_2$.
+
+(c) Chứng minh rằng thể tích $V_2$ của chiếc bình thu được khi quay miền $\mathcal R_2$ là $c^3V_1$.
+
+(d) Tìm hệ số tỉ lệ $c$ để tạo ra chiếc bình dung tích 5 lít.
+\fig[.72]{ex87}{Hình cho Bài tập 87. Các trục tọa độ được tính bằng centimét.}
+\end{document}

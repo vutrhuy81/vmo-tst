@@ -1,0 +1,300 @@
+{
+  "exercises": [
+    {
+      "number": 1,
+      "content": "<p><strong>1.</strong></p>\n<p><em>Yêu cầu chung (1–4):</em> (a) Thiết lập một tích phân tính diện tích miền tô màu.</p>\n<p>(b) Tính tích phân để tìm diện tích.</p>\n<p>Miền tô màu trong hình.</p>\n<div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-6-1-0cc423d8/ex01.png\" alt=\"image\" /><br />\nHình cho Bài tập 1</p>\n</div>\n"
+    },
+    {
+      "number": 2,
+      "content": "<p><strong>2.</strong></p>\n<p><em>Yêu cầu chung (1–4):</em> (a) Thiết lập một tích phân tính diện tích miền tô màu.</p>\n<p>(b) Tính tích phân để tìm diện tích.</p>\n<p>Miền tô màu trong hình.</p>\n<div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-6-1-0cc423d8/ex02.png\" alt=\"image\" /><br />\nHình cho Bài tập 2</p>\n</div>\n"
+    },
+    {
+      "number": 3,
+      "content": "<p><strong>3.</strong></p>\n<p><em>Yêu cầu chung (1–4):</em> (a) Thiết lập một tích phân tính diện tích miền tô màu.</p>\n<p>(b) Tính tích phân để tìm diện tích.</p>\n<p>Miền tô màu trong hình.</p>\n<div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-6-1-0cc423d8/ex03.png\" alt=\"image\" /><br />\nHình cho Bài tập 3</p>\n</div>\n"
+    },
+    {
+      "number": 4,
+      "content": "<p><strong>4.</strong></p>\n<p><em>Yêu cầu chung (1–4):</em> (a) Thiết lập một tích phân tính diện tích miền tô màu.</p>\n<p>(b) Tính tích phân để tìm diện tích.</p>\n<p>Miền tô màu trong hình.</p>\n<div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-6-1-0cc423d8/ex04.png\" alt=\"image\" /><br />\nHình cho Bài tập 4</p>\n</div>\n"
+    },
+    {
+      "number": 5,
+      "content": "<p><strong>5.</strong></p>\n<p><em>Yêu cầu chung (5–6):</em> Tìm diện tích miền tô màu.</p>\n<p>Miền tô màu trong hình.</p>\n<div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-6-1-0cc423d8/ex05.png\" alt=\"image\" /><br />\nHình cho Bài tập 5</p>\n</div>\n"
+    },
+    {
+      "number": 6,
+      "content": "<p><strong>6.</strong></p>\n<p><em>Yêu cầu chung (5–6):</em> Tìm diện tích miền tô màu.</p>\n<p>Miền tô màu trong hình.</p>\n<div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-6-1-0cc423d8/ex06.png\" alt=\"image\" /><br />\nHình cho Bài tập 6</p>\n</div>\n"
+    },
+    {
+      "number": 7,
+      "content": "<p><strong>7.</strong></p>\n<p><em>Yêu cầu chung (7–10):</em> Thiết lập nhưng không tính tích phân biểu diễn diện tích miền giới hạn bởi các đường cong đã cho.</p>\n<p><span class=\"math inline\">\\(y=2^x\\)</span>, <span class=\"math inline\">\\(y=3^x\\)</span>, <span class=\"math inline\">\\(x=1\\)</span>.</p>\n"
+    },
+    {
+      "number": 8,
+      "content": "<p><strong>8.</strong></p>\n<p><em>Yêu cầu chung (7–10):</em> Thiết lập nhưng không tính tích phân biểu diễn diện tích miền giới hạn bởi các đường cong đã cho.</p>\n<p><span class=\"math inline\">\\(y=\\ln x\\)</span>, <span class=\"math inline\">\\(y=\\ln(x^2)\\)</span>, <span class=\"math inline\">\\(x=2\\)</span>.</p>\n"
+    },
+    {
+      "number": 9,
+      "content": "<p><strong>9.</strong></p>\n<p><em>Yêu cầu chung (7–10):</em> Thiết lập nhưng không tính tích phân biểu diễn diện tích miền giới hạn bởi các đường cong đã cho.</p>\n<p><span class=\"math inline\">\\(y=2-x\\)</span>, <span class=\"math inline\">\\(y=2x-x^2\\)</span>.</p>\n"
+    },
+    {
+      "number": 10,
+      "content": "<p><strong>10.</strong></p>\n<p><em>Yêu cầu chung (7–10):</em> Thiết lập nhưng không tính tích phân biểu diễn diện tích miền giới hạn bởi các đường cong đã cho.</p>\n<p><span class=\"math inline\">\\(x=y^4\\)</span>, <span class=\"math inline\">\\(x=2-y^2\\)</span>.</p>\n"
+    },
+    {
+      "number": 11,
+      "content": "<p><strong>11.</strong></p>\n<p><em>Yêu cầu chung (11–18):</em> Phác họa miền giới hạn bởi các đường cong đã cho. Quyết định lấy tích phân theo <span class=\"math inline\">\\(x\\)</span> hay <span class=\"math inline\">\\(y\\)</span>. Vẽ một hình chữ nhật xấp xỉ điển hình và ghi chiều cao, chiều rộng của nó. Sau đó, tìm diện tích miền.</p>\n<p><span class=\"math inline\">\\(y=x^2+2\\)</span>, <span class=\"math inline\">\\(y=-x-1\\)</span>, <span class=\"math inline\">\\(x=0\\)</span>, <span class=\"math inline\">\\(x=1\\)</span>.</p>\n"
+    },
+    {
+      "number": 12,
+      "content": "<p><strong>12.</strong></p>\n<p><em>Yêu cầu chung (11–18):</em> Phác họa miền giới hạn bởi các đường cong đã cho. Quyết định lấy tích phân theo <span class=\"math inline\">\\(x\\)</span> hay <span class=\"math inline\">\\(y\\)</span>. Vẽ một hình chữ nhật xấp xỉ điển hình và ghi chiều cao, chiều rộng của nó. Sau đó, tìm diện tích miền.</p>\n<p><span class=\"math inline\">\\(y=1+x^3\\)</span>, <span class=\"math inline\">\\(y=2-x\\)</span>, <span class=\"math inline\">\\(x=-1\\)</span>, <span class=\"math inline\">\\(x=0\\)</span>.</p>\n"
+    },
+    {
+      "number": 13,
+      "content": "<p><strong>13.</strong></p>\n<p><em>Yêu cầu chung (11–18):</em> Phác họa miền giới hạn bởi các đường cong đã cho. Quyết định lấy tích phân theo <span class=\"math inline\">\\(x\\)</span> hay <span class=\"math inline\">\\(y\\)</span>. Vẽ một hình chữ nhật xấp xỉ điển hình và ghi chiều cao, chiều rộng của nó. Sau đó, tìm diện tích miền.</p>\n<p><span class=\"math inline\">\\(y=1/x\\)</span>, <span class=\"math inline\">\\(y=1/x^2\\)</span>, <span class=\"math inline\">\\(x=2\\)</span>.</p>\n"
+    },
+    {
+      "number": 14,
+      "content": "<p><strong>14.</strong></p>\n<p><em>Yêu cầu chung (11–18):</em> Phác họa miền giới hạn bởi các đường cong đã cho. Quyết định lấy tích phân theo <span class=\"math inline\">\\(x\\)</span> hay <span class=\"math inline\">\\(y\\)</span>. Vẽ một hình chữ nhật xấp xỉ điển hình và ghi chiều cao, chiều rộng của nó. Sau đó, tìm diện tích miền.</p>\n<p><span class=\"math inline\">\\(y=\\cos x\\)</span>, <span class=\"math inline\">\\(y=e^x\\)</span>, <span class=\"math inline\">\\(x=\\pi/2\\)</span>.</p>\n"
+    },
+    {
+      "number": 15,
+      "content": "<p><strong>15.</strong></p>\n<p><em>Yêu cầu chung (11–18):</em> Phác họa miền giới hạn bởi các đường cong đã cho. Quyết định lấy tích phân theo <span class=\"math inline\">\\(x\\)</span> hay <span class=\"math inline\">\\(y\\)</span>. Vẽ một hình chữ nhật xấp xỉ điển hình và ghi chiều cao, chiều rộng của nó. Sau đó, tìm diện tích miền.</p>\n<p><span class=\"math inline\">\\(y=(x-2)^2\\)</span>, <span class=\"math inline\">\\(y=x\\)</span>.</p>\n"
+    },
+    {
+      "number": 16,
+      "content": "<p><strong>16.</strong></p>\n<p><em>Yêu cầu chung (11–18):</em> Phác họa miền giới hạn bởi các đường cong đã cho. Quyết định lấy tích phân theo <span class=\"math inline\">\\(x\\)</span> hay <span class=\"math inline\">\\(y\\)</span>. Vẽ một hình chữ nhật xấp xỉ điển hình và ghi chiều cao, chiều rộng của nó. Sau đó, tìm diện tích miền.</p>\n<p><span class=\"math inline\">\\(y=x^2-4x\\)</span>, <span class=\"math inline\">\\(y=2x\\)</span>.</p>\n"
+    },
+    {
+      "number": 17,
+      "content": "<p><strong>17.</strong></p>\n<p><em>Yêu cầu chung (11–18):</em> Phác họa miền giới hạn bởi các đường cong đã cho. Quyết định lấy tích phân theo <span class=\"math inline\">\\(x\\)</span> hay <span class=\"math inline\">\\(y\\)</span>. Vẽ một hình chữ nhật xấp xỉ điển hình và ghi chiều cao, chiều rộng của nó. Sau đó, tìm diện tích miền.</p>\n<p><span class=\"math inline\">\\(x=1-y^2\\)</span>, <span class=\"math inline\">\\(x=y^2-1\\)</span>.</p>\n"
+    },
+    {
+      "number": 18,
+      "content": "<p><strong>18.</strong></p>\n<p><em>Yêu cầu chung (11–18):</em> Phác họa miền giới hạn bởi các đường cong đã cho. Quyết định lấy tích phân theo <span class=\"math inline\">\\(x\\)</span> hay <span class=\"math inline\">\\(y\\)</span>. Vẽ một hình chữ nhật xấp xỉ điển hình và ghi chiều cao, chiều rộng của nó. Sau đó, tìm diện tích miền.</p>\n<p><span class=\"math inline\">\\(4x+y^2=12\\)</span>, <span class=\"math inline\">\\(x=y\\)</span>.</p>\n"
+    },
+    {
+      "number": 19,
+      "content": "<p><strong>19.</strong></p>\n<p><em>Yêu cầu chung (19–36):</em> Phác họa miền giới hạn bởi các đường cong đã cho và tìm diện tích miền.</p>\n<p><span class=\"math inline\">\\(y=12-x^2\\)</span>, <span class=\"math inline\">\\(y=x^2-6\\)</span>.</p>\n"
+    },
+    {
+      "number": 20,
+      "content": "<p><strong>20.</strong></p>\n<p><em>Yêu cầu chung (19–36):</em> Phác họa miền giới hạn bởi các đường cong đã cho và tìm diện tích miền.</p>\n<p><span class=\"math inline\">\\(y=x^2\\)</span>, <span class=\"math inline\">\\(y=4x-x^2\\)</span>.</p>\n"
+    },
+    {
+      "number": 21,
+      "content": "<p><strong>21.</strong></p>\n<p><em>Yêu cầu chung (19–36):</em> Phác họa miền giới hạn bởi các đường cong đã cho và tìm diện tích miền.</p>\n<p><span class=\"math inline\">\\(x=2y^2\\)</span>, <span class=\"math inline\">\\(x=4+y^2\\)</span>.</p>\n"
+    },
+    {
+      "number": 22,
+      "content": "<p><strong>22.</strong></p>\n<p><em>Yêu cầu chung (19–36):</em> Phác họa miền giới hạn bởi các đường cong đã cho và tìm diện tích miền.</p>\n<p><span class=\"math inline\">\\(y=\\sqrt{x-1}\\)</span>, <span class=\"math inline\">\\(x-y=1\\)</span>.</p>\n"
+    },
+    {
+      "number": 23,
+      "content": "<p><strong>23.</strong></p>\n<p><em>Yêu cầu chung (19–36):</em> Phác họa miền giới hạn bởi các đường cong đã cho và tìm diện tích miền.</p>\n<p><span class=\"math inline\">\\(y=\\sqrt[3]{2x}\\)</span>, <span class=\"math inline\">\\(y=\\frac12x\\)</span>.</p>\n"
+    },
+    {
+      "number": 24,
+      "content": "<p><strong>24.</strong></p>\n<p><em>Yêu cầu chung (19–36):</em> Phác họa miền giới hạn bởi các đường cong đã cho và tìm diện tích miền.</p>\n<p><span class=\"math inline\">\\(y=x^3\\)</span>, <span class=\"math inline\">\\(y=x\\)</span>.</p>\n"
+    },
+    {
+      "number": 25,
+      "content": "<p><strong>25.</strong></p>\n<p><em>Yêu cầu chung (19–36):</em> Phác họa miền giới hạn bởi các đường cong đã cho và tìm diện tích miền.</p>\n<p><span class=\"math inline\">\\(y=\\sqrt x\\)</span>, <span class=\"math inline\">\\(y=\\frac13x\\)</span>, <span class=\"math inline\">\\(0\\le x\\le16\\)</span>.</p>\n"
+    },
+    {
+      "number": 26,
+      "content": "<p><strong>26.</strong></p>\n<p><em>Yêu cầu chung (19–36):</em> Phác họa miền giới hạn bởi các đường cong đã cho và tìm diện tích miền.</p>\n<p><span class=\"math inline\">\\(y=\\cos x\\)</span>, <span class=\"math inline\">\\(y=2-\\cos x\\)</span>, <span class=\"math inline\">\\(0\\le x\\le2\\pi\\)</span>.</p>\n"
+    },
+    {
+      "number": 27,
+      "content": "<p><strong>27.</strong></p>\n<p><em>Yêu cầu chung (19–36):</em> Phác họa miền giới hạn bởi các đường cong đã cho và tìm diện tích miền.</p>\n<p><span class=\"math inline\">\\(y=\\cos x\\)</span>, <span class=\"math inline\">\\(y=\\sin2x\\)</span>, <span class=\"math inline\">\\(0\\le x\\le\\pi/2\\)</span>.</p>\n"
+    },
+    {
+      "number": 28,
+      "content": "<p><strong>28.</strong></p>\n<p><em>Yêu cầu chung (19–36):</em> Phác họa miền giới hạn bởi các đường cong đã cho và tìm diện tích miền.</p>\n<p><span class=\"math inline\">\\(y=\\cos x\\)</span>, <span class=\"math inline\">\\(y=1-\\cos x\\)</span>, <span class=\"math inline\">\\(0\\le x\\le\\pi\\)</span>.</p>\n"
+    },
+    {
+      "number": 29,
+      "content": "<p><strong>29.</strong></p>\n<p><em>Yêu cầu chung (19–36):</em> Phác họa miền giới hạn bởi các đường cong đã cho và tìm diện tích miền.</p>\n<p><span class=\"math inline\">\\(y=\\sec^2x\\)</span>, <span class=\"math inline\">\\(y=8\\cos x\\)</span>, <span class=\"math inline\">\\(-\\pi/3\\le x\\le\\pi/3\\)</span>.</p>\n"
+    },
+    {
+      "number": 30,
+      "content": "<p><strong>30.</strong></p>\n<p><em>Yêu cầu chung (19–36):</em> Phác họa miền giới hạn bởi các đường cong đã cho và tìm diện tích miền.</p>\n<p><span class=\"math inline\">\\(y=x^4-3x^2\\)</span>, <span class=\"math inline\">\\(y=x^2\\)</span>.</p>\n"
+    },
+    {
+      "number": 31,
+      "content": "<p><strong>31.</strong></p>\n<p><em>Yêu cầu chung (19–36):</em> Phác họa miền giới hạn bởi các đường cong đã cho và tìm diện tích miền.</p>\n<p><span class=\"math inline\">\\(y=x^4\\)</span>, <span class=\"math inline\">\\(y=2-|x|\\)</span>.</p>\n"
+    },
+    {
+      "number": 32,
+      "content": "<p><strong>32.</strong></p>\n<p><em>Yêu cầu chung (19–36):</em> Phác họa miền giới hạn bởi các đường cong đã cho và tìm diện tích miền.</p>\n<p><span class=\"math inline\">\\(y=x^2\\)</span>, <span class=\"math inline\">\\(y=32/(x^2+4)\\)</span>.</p>\n"
+    },
+    {
+      "number": 33,
+      "content": "<p><strong>33.</strong></p>\n<p><em>Yêu cầu chung (19–36):</em> Phác họa miền giới hạn bởi các đường cong đã cho và tìm diện tích miền.</p>\n<p><span class=\"math inline\">\\(y=\\sin(\\pi x/2)\\)</span>, <span class=\"math inline\">\\(y=x^3\\)</span>.</p>\n"
+    },
+    {
+      "number": 34,
+      "content": "<p><strong>34.</strong></p>\n<p><em>Yêu cầu chung (19–36):</em> Phác họa miền giới hạn bởi các đường cong đã cho và tìm diện tích miền.</p>\n<p><span class=\"math inline\">\\(y=4-2\\cosh x\\)</span>, <span class=\"math inline\">\\(y=\\frac12\\sinh x\\)</span>.</p>\n"
+    },
+    {
+      "number": 35,
+      "content": "<p><strong>35.</strong></p>\n<p><em>Yêu cầu chung (19–36):</em> Phác họa miền giới hạn bởi các đường cong đã cho và tìm diện tích miền.</p>\n<p><span class=\"math inline\">\\(y=1/x\\)</span>, <span class=\"math inline\">\\(y=x\\)</span>, <span class=\"math inline\">\\(y=\\frac14x\\)</span>, <span class=\"math inline\">\\(x&gt;0\\)</span>.</p>\n"
+    },
+    {
+      "number": 36,
+      "content": "<p><strong>36.</strong></p>\n<p><em>Yêu cầu chung (19–36):</em> Phác họa miền giới hạn bởi các đường cong đã cho và tìm diện tích miền.</p>\n<p><span class=\"math inline\">\\(y=\\frac14x^2\\)</span>, <span class=\"math inline\">\\(y=2x^2\\)</span>, <span class=\"math inline\">\\(x+y=3\\)</span>, <span class=\"math inline\">\\(x\\ge0\\)</span>.</p>\n"
+    },
+    {
+      "number": 37,
+      "content": "<p><strong>37.</strong></p>\n<p>Hình vẽ cho đồ thị của hai hàm số và diện tích các miền giữa hai đường cong.</p>\n<p>(a) Tổng diện tích giữa hai đường cong với <span class=\"math inline\">\\(0\\le x\\le5\\)</span> là bao nhiêu?</p>\n<p>(b) Giá trị của <span class=\"math inline\">\\(\\int_0^5[f(x)-g(x)]\\,dx\\)</span> là bao nhiêu?</p>\n<div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-6-1-0cc423d8/ex37.png\" alt=\"image\" /><br />\nHình cho Bài tập 37</p>\n</div>\n"
+    },
+    {
+      "number": 38,
+      "content": "<p><strong>38.</strong></p>\n<p><em>Yêu cầu chung (38–40):</em> Phác họa miền giới hạn bởi các đường cong đã cho và tìm diện tích miền.</p>\n<p><span class=\"math inline\">\\(y=x/\\sqrt{1+x^2}\\)</span>, <span class=\"math inline\">\\(y=x/\\sqrt{9-x^2}\\)</span>, <span class=\"math inline\">\\(x\\ge0\\)</span>.</p>\n"
+    },
+    {
+      "number": 39,
+      "content": "<p><strong>39.</strong></p>\n<p><em>Yêu cầu chung (38–40):</em> Phác họa miền giới hạn bởi các đường cong đã cho và tìm diện tích miền.</p>\n<p><span class=\"math inline\">\\(y=x/(1+x^2)\\)</span>, <span class=\"math inline\">\\(y=x^2/(1+x^3)\\)</span>.</p>\n"
+    },
+    {
+      "number": 40,
+      "content": "<p><strong>40.</strong></p>\n<p><em>Yêu cầu chung (38–40):</em> Phác họa miền giới hạn bởi các đường cong đã cho và tìm diện tích miền.</p>\n<p><span class=\"math inline\">\\(y=(\\ln x)/x\\)</span>, <span class=\"math inline\">\\(y=(\\ln x)^2/x\\)</span>.</p>\n"
+    },
+    {
+      "number": 41,
+      "content": "<p><strong>41.</strong></p>\n<p><em>Yêu cầu chung (41–42):</em> Dùng phép tính vi tích phân để tìm diện tích tam giác có các đỉnh đã cho.</p>\n<p><span class=\"math inline\">\\((0,0)\\)</span>, <span class=\"math inline\">\\((3,1)\\)</span>, <span class=\"math inline\">\\((1,2)\\)</span>.</p>\n"
+    },
+    {
+      "number": 42,
+      "content": "<p><strong>42.</strong></p>\n<p><em>Yêu cầu chung (41–42):</em> Dùng phép tính vi tích phân để tìm diện tích tam giác có các đỉnh đã cho.</p>\n<p><span class=\"math inline\">\\((2,0)\\)</span>, <span class=\"math inline\">\\((0,2)\\)</span>, <span class=\"math inline\">\\((-1,1)\\)</span>.</p>\n"
+    },
+    {
+      "number": 43,
+      "content": "<p><strong>43.</strong></p>\n<p><em>Yêu cầu chung (43–44):</em> Tính tích phân và giải thích nó như diện tích của một miền. Phác họa miền đó.</p>\n<p><span class=\"math inline\">\\(\\displaystyle\\int_0^{\\pi/2}|\\sin x-\\cos2x|\\,dx\\)</span>.</p>\n"
+    },
+    {
+      "number": 44,
+      "content": "<p><strong>44.</strong></p>\n<p><em>Yêu cầu chung (43–44):</em> Tính tích phân và giải thích nó như diện tích của một miền. Phác họa miền đó.</p>\n<p><span class=\"math inline\">\\(\\displaystyle\\int_{-1}^1|3^x-2^x|\\,dx\\)</span>.</p>\n"
+    },
+    {
+      "number": 45,
+      "content": "<p><strong>45.</strong></p>\n<p><em>Yêu cầu chung (45–48):</em> Dùng đồ thị để tìm gần đúng hoành độ các giao điểm của những đường cong đã cho. Sau đó, tìm gần đúng diện tích miền giới hạn bởi các đường cong.</p>\n<p><span class=\"math inline\">\\(y=x\\sin(x^2)\\)</span>, <span class=\"math inline\">\\(y=x^4\\)</span>, <span class=\"math inline\">\\(x\\ge0\\)</span>.</p>\n"
+    },
+    {
+      "number": 46,
+      "content": "<p><strong>46.</strong></p>\n<p><em>Yêu cầu chung (45–48):</em> Dùng đồ thị để tìm gần đúng hoành độ các giao điểm của những đường cong đã cho. Sau đó, tìm gần đúng diện tích miền giới hạn bởi các đường cong.</p>\n<p><span class=\"math inline\">\\(y=x/(x^2+1)^2\\)</span>, <span class=\"math inline\">\\(y=x^5-x\\)</span>, <span class=\"math inline\">\\(x\\ge0\\)</span>.</p>\n"
+    },
+    {
+      "number": 47,
+      "content": "<p><strong>47.</strong></p>\n<p><em>Yêu cầu chung (45–48):</em> Dùng đồ thị để tìm gần đúng hoành độ các giao điểm của những đường cong đã cho. Sau đó, tìm gần đúng diện tích miền giới hạn bởi các đường cong.</p>\n<p><span class=\"math inline\">\\(y=3x^2-2x\\)</span>, <span class=\"math inline\">\\(y=x^3-3x+4\\)</span>.</p>\n"
+    },
+    {
+      "number": 48,
+      "content": "<p><strong>48.</strong></p>\n<p><em>Yêu cầu chung (45–48):</em> Dùng đồ thị để tìm gần đúng hoành độ các giao điểm của những đường cong đã cho. Sau đó, tìm gần đúng diện tích miền giới hạn bởi các đường cong.</p>\n<p><span class=\"math inline\">\\(y=1.3^x\\)</span>, <span class=\"math inline\">\\(y=2\\sqrt x\\)</span>.</p>\n"
+    },
+    {
+      "number": 49,
+      "content": "<p><strong>49.</strong></p>\n<p><em>Yêu cầu chung (49–52):</em> Vẽ miền giữa các đường cong và tính diện tích chính xác đến năm chữ số thập phân.</p>\n<p><span class=\"math inline\">\\(y=2/(1+x^4)\\)</span>, <span class=\"math inline\">\\(y=x^2\\)</span>.</p>\n"
+    },
+    {
+      "number": 50,
+      "content": "<p><strong>50.</strong></p>\n<p><em>Yêu cầu chung (49–52):</em> Vẽ miền giữa các đường cong và tính diện tích chính xác đến năm chữ số thập phân.</p>\n<p><span class=\"math inline\">\\(y=e^{1-x^2}\\)</span>, <span class=\"math inline\">\\(y=x^4\\)</span>.</p>\n"
+    },
+    {
+      "number": 51,
+      "content": "<p><strong>51.</strong></p>\n<p><em>Yêu cầu chung (49–52):</em> Vẽ miền giữa các đường cong và tính diện tích chính xác đến năm chữ số thập phân.</p>\n<p><span class=\"math inline\">\\(y=\\tan^2x\\)</span>, <span class=\"math inline\">\\(y=\\sqrt x\\)</span>.</p>\n"
+    },
+    {
+      "number": 52,
+      "content": "<p><strong>52.</strong></p>\n<p><em>Yêu cầu chung (49–52):</em> Vẽ miền giữa các đường cong và tính diện tích chính xác đến năm chữ số thập phân.</p>\n<p><span class=\"math inline\">\\(y=\\cos x\\)</span>, <span class=\"math inline\">\\(y=x+2\\sin^4x\\)</span>.</p>\n"
+    },
+    {
+      "number": 53,
+      "content": "<p><strong>53.</strong></p>\n<p>Dùng một hệ thống đại số máy tính để tìm diện tích chính xác giới hạn bởi các đường cong <span class=\"math inline\">\\(y=x^5-6x^3+4x\\)</span> và <span class=\"math inline\">\\(y=x\\)</span>.</p>\n"
+    },
+    {
+      "number": 54,
+      "content": "<p><strong>54.</strong></p>\n<p>Phác họa miền trong mặt phẳng <span class=\"math inline\">\\(xy\\)</span> được xác định bởi các bất đẳng thức <span class=\"math inline\">\\(x-2y^2\\ge0\\)</span>, <span class=\"math inline\">\\(1-x-|y|\\ge0\\)</span> và tìm diện tích miền.</p>\n"
+    },
+    {
+      "number": 55,
+      "content": "<p><strong>55.</strong></p>\n<p>Hai xe đua do Chris và Kelly điều khiển ở cạnh nhau khi bắt đầu cuộc đua. Bảng cho vận tốc của mỗi xe (mi/h) trong mười giây đầu tiên. Dùng Quy tắc trung điểm để ước lượng Kelly đi xa hơn Chris bao nhiêu trong mười giây đầu.</p>\n<div class=\"center\">\n<table>\n<thead>\n<tr class=\"header\">\n<th style=\"text-align: right;\"><span class=\"math inline\">\\(t\\)</span></th>\n<th style=\"text-align: right;\"><span class=\"math inline\">\\(v_C\\)</span></th>\n<th style=\"text-align: right;\"><span class=\"math inline\">\\(v_K\\)</span></th>\n<th style=\"text-align: right;\"><span class=\"math inline\">\\(t\\)</span></th>\n<th style=\"text-align: right;\"><span class=\"math inline\">\\(v_C\\)</span></th>\n<th style=\"text-align: right;\"><span class=\"math inline\">\\(v_K\\)</span></th>\n</tr>\n</thead>\n<tbody>\n<tr class=\"odd\">\n<td style=\"text-align: right;\">0</td>\n<td style=\"text-align: right;\">0</td>\n<td style=\"text-align: right;\">0</td>\n<td style=\"text-align: right;\">6</td>\n<td style=\"text-align: right;\">69</td>\n<td style=\"text-align: right;\">80</td>\n</tr>\n<tr class=\"even\">\n<td style=\"text-align: right;\">1</td>\n<td style=\"text-align: right;\">20</td>\n<td style=\"text-align: right;\">22</td>\n<td style=\"text-align: right;\">7</td>\n<td style=\"text-align: right;\">75</td>\n<td style=\"text-align: right;\">86</td>\n</tr>\n<tr class=\"odd\">\n<td style=\"text-align: right;\">2</td>\n<td style=\"text-align: right;\">32</td>\n<td style=\"text-align: right;\">37</td>\n<td style=\"text-align: right;\">8</td>\n<td style=\"text-align: right;\">81</td>\n<td style=\"text-align: right;\">93</td>\n</tr>\n<tr class=\"even\">\n<td style=\"text-align: right;\">3</td>\n<td style=\"text-align: right;\">46</td>\n<td style=\"text-align: right;\">52</td>\n<td style=\"text-align: right;\">9</td>\n<td style=\"text-align: right;\">86</td>\n<td style=\"text-align: right;\">98</td>\n</tr>\n<tr class=\"odd\">\n<td style=\"text-align: right;\">4</td>\n<td style=\"text-align: right;\">54</td>\n<td style=\"text-align: right;\">61</td>\n<td style=\"text-align: right;\">10</td>\n<td style=\"text-align: right;\">90</td>\n<td style=\"text-align: right;\">102</td>\n</tr>\n<tr class=\"even\">\n<td style=\"text-align: right;\">5</td>\n<td style=\"text-align: right;\">62</td>\n<td style=\"text-align: right;\">71</td>\n<td style=\"text-align: right;\"></td>\n<td style=\"text-align: right;\"></td>\n<td style=\"text-align: right;\"></td>\n</tr>\n</tbody>\n</table>\n</div>\n"
+    },
+    {
+      "number": 56,
+      "content": "<p><strong>56.</strong></p>\n<p>Bề rộng (mét) của một bể bơi hình hạt đậu được đo cách nhau 2 m như trong hình. Dùng Quy tắc trung điểm để ước lượng diện tích bể bơi.</p>\n<div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-6-1-0cc423d8/ex56.png\" alt=\"image\" /><br />\nHình cho Bài tập 56</p>\n</div>\n"
+    },
+    {
+      "number": 57,
+      "content": "<p><strong>57.</strong></p>\n<p>Hình vẽ cho một mặt cắt ngang của cánh máy bay. Các số đo bề dày cánh, tính bằng xentimét, tại những vị trí cách nhau 20 cm lần lượt là 5.8, 20.3, 26.7, 29.0, 27.6, 27.3, 23.8, 20.5, 15.1, 8.7 và 2.8. Dùng Quy tắc trung điểm để ước lượng diện tích mặt cắt ngang của cánh.</p>\n<div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-6-1-0cc423d8/ex57.png\" alt=\"image\" /><br />\nHình cho Bài tập 57</p>\n</div>\n"
+    },
+    {
+      "number": 58,
+      "content": "<p><strong>58.</strong></p>\n<p>Nếu tốc độ sinh của một quần thể là <span class=\"math inline\">\\(b(t)=2200e^{0.024t}\\)</span> người mỗi năm và tốc độ tử là <span class=\"math inline\">\\(d(t)=1460e^{0.018t}\\)</span> người mỗi năm, hãy tìm diện tích giữa hai đường cong với <span class=\"math inline\">\\(0\\le t\\le10\\)</span>. Diện tích này biểu diễn điều gì?</p>\n"
+    },
+    {
+      "number": 59,
+      "content": "<p><strong>59.</strong></p>\n<p><strong>Dữ kiện Ví dụ 8.</strong> Hình 17 là một ví dụ về <em>đường cong bệnh sinh</em> của bệnh sởi. Nó cho thấy bệnh phát triển như thế nào ở một người chưa có miễn dịch sau khi virus sởi lan từ đường hô hấp vào máu.</p>\n<div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-6-1-0cc423d8/fig17.png\" alt=\"image\" /><br />\nHình 17. Đường cong bệnh sinh của bệnh sởi.</p>\n</div>\n<p>Trong hình, <span class=\"math inline\">\\(N\\)</span> là số tế bào nhiễm trên mỗi mL huyết tương, <span class=\"math inline\">\\(t\\)</span> tính bằng ngày. Các nhãn lần lượt chỉ thời điểm tác nhân gây bệnh vào huyết tương; bắt đầu có khả năng lây nhiễm (ngày 10–11); xuất hiện triệu chứng (ngày 12); hết khả năng lây nhiễm (ngày 17–18); tác nhân gây bệnh được loại bỏ (ngày 21).</p>\n<p><em>Nguồn:</em> J. M. Heffernan và cộng sự, “An In-Host Model of Acute Infection: Measles as a Case Study,” <em>Theoretical Population Biology</em> 73 (2008): 134–147.</p>\n<p>Bệnh nhân bắt đầu có khả năng lây cho người khác khi nồng độ tế bào nhiễm đủ lớn và tiếp tục có khả năng lây cho đến khi hệ miễn dịch ngăn được sự truyền nhiễm tiếp theo. Tuy nhiên, các triệu chứng chỉ xuất hiện khi “lượng nhiễm” đạt một ngưỡng nhất định. Lượng nhiễm cần để xuất hiện triệu chứng phụ thuộc vào cả nồng độ tế bào nhiễm lẫn thời gian, và tương ứng với diện tích dưới đường cong bệnh sinh cho đến khi xuất hiện triệu chứng. (Xem Bài tập 5.1.15.)</p>\n<p>(a) Đường cong bệnh sinh trong Hình 17 được mô hình hóa bởi <span class=\"math inline\">\\(f(t)=-t(t-21)(t+1)\\)</span>. Nếu khả năng lây nhiễm bắt đầu vào ngày <span class=\"math inline\">\\(t_1=10\\)</span> và kết thúc vào ngày <span class=\"math inline\">\\(t_2=18\\)</span>, các nồng độ tế bào nhiễm tương ứng là bao nhiêu?</p>\n<p>(b) <em>Mức độ lây nhiễm</em> của một người bệnh là diện tích giữa <span class=\"math inline\">\\(N=f(t)\\)</span> và đường thẳng qua hai điểm <span class=\"math inline\">\\(P_1(t_1,f(t_1))\\)</span>, <span class=\"math inline\">\\(P_2(t_2,f(t_2))\\)</span>, có đơn vị (tế bào/mL)<span class=\"math inline\">\\(\\cdot\\)</span>ngày. (Xem Hình 18.) Tính mức độ lây nhiễm của bệnh nhân này. <em>Lời giải.</em> (a) Khả năng lây nhiễm bắt đầu khi nồng độ đạt <span class=\"math inline\">\\(f(10)=1210\\)</span> tế bào/mL và kết thúc khi nồng độ giảm còn <span class=\"math inline\">\\(f(18)=1026\\)</span> tế bào/mL.</p>\n<p>(b) Đường thẳng qua <span class=\"math inline\">\\(P_1\\)</span> và <span class=\"math inline\">\\(P_2\\)</span> có hệ số góc <span class=\"math display\">\\[\\frac{1026-1210}{18-10}=-\\frac{184}{8}=-23\\]</span> và có phương trình <span class=\"math inline\">\\(N-1210=-23(t-10)\\)</span>, hay <span class=\"math inline\">\\(N=-23t+1440\\)</span>. Diện tích giữa <span class=\"math inline\">\\(f\\)</span> và đường thẳng này là <span class=\"math display\">\\[\\begin{aligned}\n\\int_{10}^{18}[f(t)-(-23t+1440)]\\,dt\n&amp;=\\int_{10}^{18}(-t^3+20t^2+21t+23t-1440)\\,dt\\\\\n&amp;=\\int_{10}^{18}(-t^3+20t^2+44t-1440)\\,dt\\\\\n&amp;=\\left[-\\frac{t^4}{4}+20\\frac{t^3}{3}+44\\frac{t^2}{2}-1440t\\right]_{10}^{18}\\\\\n&amp;=-6156-\\left(-8033\\frac13\\right)\\approx1877.\n\\end{aligned}\\]</span> Vậy mức độ lây nhiễm của bệnh nhân này khoảng 1877 (tế bào/mL)<span class=\"math inline\">\\(\\cdot\\)</span>ngày.</p>\n<div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-6-1-0cc423d8/fig18.png\" alt=\"image\" /><br />\nHình 18. Trục ngang: <span class=\"math inline\">\\(t\\)</span> (ngày).</p>\n</div>\n<p>Trong Ví dụ 8, ta đã mô hình hóa một đường cong bệnh sinh của bệnh sởi bằng hàm <span class=\"math inline\">\\(f\\)</span>. Một bệnh nhân nhiễm virus sởi nhưng đã có một phần miễn dịch với virus có đường cong bệnh sinh có thể được mô hình hóa, chẳng hạn, bởi <span class=\"math inline\">\\(g(t)=0.9f(t)\\)</span>.</p>\n<p>(a) Nếu khả năng lây nhiễm bắt đầu ở cùng ngưỡng nồng độ virus như trong Ví dụ 8, điều này xảy ra vào ngày nào?</p>\n<p>(b) Gọi <span class=\"math inline\">\\(P_3\\)</span> là điểm trên đồ thị <span class=\"math inline\">\\(g\\)</span> tại đó khả năng lây nhiễm bắt đầu. Người ta đã chỉ ra rằng khả năng lây nhiễm kết thúc tại một điểm <span class=\"math inline\">\\(P_4\\)</span> trên đồ thị <span class=\"math inline\">\\(g\\)</span> sao cho đường thẳng qua <span class=\"math inline\">\\(P_3,P_4\\)</span> có cùng hệ số góc với đường thẳng qua <span class=\"math inline\">\\(P_1,P_2\\)</span> trong Ví dụ 8(b). Khả năng lây nhiễm kết thúc vào ngày nào?</p>\n<p>(c) Tính mức độ lây nhiễm của bệnh nhân này.</p>\n"
+    },
+    {
+      "number": 60,
+      "content": "<p><strong>60.</strong></p>\n<p>Cường độ mưa, tính bằng inch mỗi giờ, tại hai địa điểm khác nhau sau khi bão bắt đầu <span class=\"math inline\">\\(t\\)</span> giờ được mô hình hóa bởi <span class=\"math inline\">\\(f(t)=0.73t^3-2t^2+t+0.6\\)</span> và <span class=\"math inline\">\\(g(t)=0.17t^2-0.5t+1.1\\)</span>. Tính diện tích giữa các đồ thị với <span class=\"math inline\">\\(0\\le t\\le2\\)</span> và giải thích kết quả trong bối cảnh này.</p>\n"
+    },
+    {
+      "number": 61,
+      "content": "<p><strong>61.</strong></p>\n<p>Hai ô tô A và B xuất phát cạnh nhau, tăng tốc từ trạng thái nghỉ. Hình vẽ cho đồ thị các hàm vận tốc của chúng.</p>\n<p>(a) Xe nào ở phía trước sau một phút? Giải thích.</p>\n<p>(b) Diện tích miền tô màu có ý nghĩa gì?</p>\n<p>(c) Xe nào ở phía trước sau hai phút? Giải thích.</p>\n<p>(d) Ước lượng thời điểm hai xe lại ở cạnh nhau.</p>\n<div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-6-1-0cc423d8/ex61.png\" alt=\"image\" /><br />\nHình cho Bài tập 61. Trục ngang: <span class=\"math inline\">\\(t\\)</span> (phút).</p>\n</div>\n"
+    },
+    {
+      "number": 62,
+      "content": "<p><strong>62.</strong></p>\n<p>Hình vẽ cho đồ thị hàm doanh thu biên <span class=\"math inline\">\\(R&#39;\\)</span> và hàm chi phí biên <span class=\"math inline\">\\(C&#39;\\)</span> của một nhà sản xuất. [Nhắc lại ở §4.7, <span class=\"math inline\">\\(R(x)\\)</span> và <span class=\"math inline\">\\(C(x)\\)</span> biểu diễn doanh thu và chi phí khi sản xuất <span class=\"math inline\">\\(x\\)</span> đơn vị. Giả sử <span class=\"math inline\">\\(R\\)</span> và <span class=\"math inline\">\\(C\\)</span> được tính bằng nghìn đô la.] Diện tích miền tô màu có ý nghĩa gì? Dùng Quy tắc trung điểm để ước lượng giá trị của đại lượng này.</p>\n<div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-6-1-0cc423d8/ex62.png\" alt=\"image\" /><br />\nHình cho Bài tập 62</p>\n</div>\n"
+    },
+    {
+      "number": 63,
+      "content": "<p><strong>63.</strong></p>\n<p>Đường cong có phương trình <span class=\"math inline\">\\(y^2=x^2(x+3)\\)</span> được gọi là đường bậc ba Tschirnhausen. Nếu vẽ đồ thị, ta sẽ thấy một phần của đường cong tạo thành một vòng kín. Tìm diện tích miền giới hạn bởi vòng kín đó.</p>\n"
+    },
+    {
+      "number": 64,
+      "content": "<p><strong>64.</strong></p>\n<p>Tìm diện tích miền giới hạn bởi parabol <span class=\"math inline\">\\(y=x^2\\)</span>, tiếp tuyến với parabol tại <span class=\"math inline\">\\((1,1)\\)</span> và trục <span class=\"math inline\">\\(x\\)</span>.</p>\n"
+    },
+    {
+      "number": 65,
+      "content": "<p><strong>65.</strong></p>\n<p>Tìm số <span class=\"math inline\">\\(b\\)</span> sao cho đường thẳng <span class=\"math inline\">\\(y=b\\)</span> chia miền giới hạn bởi các đường cong <span class=\"math inline\">\\(y=x^2\\)</span> và <span class=\"math inline\">\\(y=4\\)</span> thành hai miền có diện tích bằng nhau.</p>\n"
+    },
+    {
+      "number": 66,
+      "content": "<p><strong>66.</strong></p>\n<p>(a) Tìm số <span class=\"math inline\">\\(a\\)</span> sao cho đường thẳng <span class=\"math inline\">\\(x=a\\)</span> chia đôi diện tích dưới đường cong <span class=\"math inline\">\\(y=1/x^2\\)</span>, <span class=\"math inline\">\\(1\\le x\\le4\\)</span>.</p>\n<p>(b) Tìm số <span class=\"math inline\">\\(b\\)</span> sao cho đường thẳng <span class=\"math inline\">\\(y=b\\)</span> chia đôi diện tích ở câu (a).</p>\n"
+    },
+    {
+      "number": 67,
+      "content": "<p><strong>67.</strong></p>\n<p>Tìm các giá trị của <span class=\"math inline\">\\(c\\)</span> sao cho diện tích miền giới hạn bởi các parabol <span class=\"math inline\">\\(y=x^2-c^2\\)</span> và <span class=\"math inline\">\\(y=c^2-x^2\\)</span> bằng 576.</p>\n"
+    },
+    {
+      "number": 68,
+      "content": "<p><strong>68.</strong></p>\n<p>Giả sử <span class=\"math inline\">\\(0&lt;c&lt;\\pi/2\\)</span>. Với giá trị nào của <span class=\"math inline\">\\(c\\)</span>, diện tích miền giới hạn bởi các đường cong <span class=\"math inline\">\\(y=\\cos x\\)</span>, <span class=\"math inline\">\\(y=\\cos(x-c)\\)</span> và <span class=\"math inline\">\\(x=0\\)</span> bằng diện tích miền giới hạn bởi các đường cong <span class=\"math inline\">\\(y=\\cos(x-c)\\)</span>, <span class=\"math inline\">\\(x=\\pi\\)</span> và <span class=\"math inline\">\\(y=0\\)</span>?</p>\n"
+    },
+    {
+      "number": 69,
+      "content": "<p><strong>69.</strong></p>\n<p>Hình vẽ cho đường thẳng nằm ngang <span class=\"math inline\">\\(y=c\\)</span> cắt đường cong <span class=\"math inline\">\\(y=8x-27x^3\\)</span>. Tìm số <span class=\"math inline\">\\(c\\)</span> sao cho diện tích các miền tô màu bằng nhau.</p>\n<div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-6-1-0cc423d8/ex69.png\" alt=\"image\" /><br />\nHình cho Bài tập 69</p>\n</div>\n"
+    },
+    {
+      "number": 70,
+      "content": "<p><strong>70.</strong></p>\n<p>Với những giá trị nào của <span class=\"math inline\">\\(m\\)</span>, đường thẳng <span class=\"math inline\">\\(y=mx\\)</span> và đường cong <span class=\"math inline\">\\(y=x/\\sqrt{x^2+1}\\)</span> giới hạn một miền? Tìm diện tích miền đó.</p>\n"
+    },
+    {
+      "number": 71,
+      "content": "<p>Làm thế nào để đo lường sự phân bố thu nhập giữa các cư dân trong một quốc gia? Một thước đo như vậy là <em>chỉ số Gini</em>, được đặt theo tên nhà kinh tế học người Ý Corrado Gini, người đầu tiên đề xuất chỉ số này vào năm 1912.</p>\n<p>Trước hết, ta xếp tất cả các hộ gia đình trong một quốc gia theo thu nhập, rồi tính tỷ lệ phần trăm số hộ có tổng thu nhập bằng một tỷ lệ phần trăm cho trước của tổng thu nhập cả nước. Ta định nghĩa <em>đường cong Lorenz</em> <span class=\"math inline\">\\(y=L(x)\\)</span> trên <span class=\"math inline\">\\([0,1]\\)</span> bằng cách đặt điểm <span class=\"math inline\">\\((a/100,b/100)\\)</span> trên đường cong nếu <span class=\"math inline\">\\(a\\%\\)</span> số hộ có thu nhập thấp nhất nhận được <span class=\"math inline\">\\(b\\%\\)</span> tổng thu nhập. Chẳng hạn, trong Hình 1, điểm <span class=\"math inline\">\\((0.4,0.114)\\)</span> nằm trên đường cong Lorenz của Hoa Kỳ năm 2016 vì 40% dân số nghèo nhất chỉ nhận 11.4% tổng thu nhập. Tương tự, 80% dân số có thu nhập thấp nhất nhận 48.5% tổng thu nhập, nên điểm <span class=\"math inline\">\\((0.8,0.485)\\)</span> nằm trên đường cong Lorenz. (Đường cong Lorenz được đặt theo tên nhà kinh tế học người Mỹ Max Lorenz.)</p>\n<div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-6-1-0cc423d8/gini01.png\" alt=\"image\" /><br />\nHình 1 (dự án). Đường cong Lorenz của Hoa Kỳ năm 2016.</p>\n</div>\n<p>Hình 2 cho một số đường cong Lorenz điển hình. Tất cả đều đi qua <span class=\"math inline\">\\((0,0)\\)</span> và <span class=\"math inline\">\\((1,1)\\)</span>, đồng thời lõm lên. Trong trường hợp cực hạn <span class=\"math inline\">\\(L(x)=x\\)</span>, xã hội hoàn toàn bình đẳng: <span class=\"math inline\">\\(a\\%\\)</span> dân số nghèo nhất nhận <span class=\"math inline\">\\(a\\%\\)</span> tổng thu nhập, nên mọi người có thu nhập như nhau. Diện tích giữa đường cong Lorenz <span class=\"math inline\">\\(y=L(x)\\)</span> và đường thẳng <span class=\"math inline\">\\(y=x\\)</span> đo mức độ phân bố thu nhập khác với sự bình đẳng tuyệt đối. <em>Chỉ số Gini</em> (đôi khi được gọi là <em>hệ số Gini</em> hoặc <em>hệ số bất bình đẳng</em>) bằng diện tích giữa đường cong Lorenz và đường thẳng <span class=\"math inline\">\\(y=x\\)</span> (miền tô màu trong Hình 3) chia cho diện tích dưới <span class=\"math inline\">\\(y=x\\)</span>.</p>\n<div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-6-1-0cc423d8/gini02.png\" alt=\"image\" /><br />\nHình 2 (dự án). Trục đứng: tỷ phần thu nhập; trục ngang: tỷ phần dân số.</p>\n</div>\n<div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-6-1-0cc423d8/gini03.png\" alt=\"image\" /><br />\nHình 3 (dự án)</p>\n</div>\n<p><strong>Dự án Chỉ số Gini — Bài toán 1.</strong> (a) Chứng minh rằng chỉ số Gini <span class=\"math inline\">\\(G\\)</span> bằng hai lần diện tích giữa đường cong Lorenz và đường thẳng <span class=\"math inline\">\\(y=x\\)</span>, tức là <span class=\"math display\">\\[G=2\\int_0^1[x-L(x)]\\,dx.\\]</span> (b) <span class=\"math inline\">\\(G\\)</span> bằng bao nhiêu đối với một xã hội hoàn toàn bình đẳng (mọi người có cùng thu nhập)? <span class=\"math inline\">\\(G\\)</span> bằng bao nhiêu đối với một xã hội hoàn toàn chuyên chế (một người nhận toàn bộ thu nhập)?</p>\n"
+    },
+    {
+      "number": 72,
+      "content": "<p>Làm thế nào để đo lường sự phân bố thu nhập giữa các cư dân trong một quốc gia? Một thước đo như vậy là <em>chỉ số Gini</em>, được đặt theo tên nhà kinh tế học người Ý Corrado Gini, người đầu tiên đề xuất chỉ số này vào năm 1912.</p>\n<p>Trước hết, ta xếp tất cả các hộ gia đình trong một quốc gia theo thu nhập, rồi tính tỷ lệ phần trăm số hộ có tổng thu nhập bằng một tỷ lệ phần trăm cho trước của tổng thu nhập cả nước. Ta định nghĩa <em>đường cong Lorenz</em> <span class=\"math inline\">\\(y=L(x)\\)</span> trên <span class=\"math inline\">\\([0,1]\\)</span> bằng cách đặt điểm <span class=\"math inline\">\\((a/100,b/100)\\)</span> trên đường cong nếu <span class=\"math inline\">\\(a\\%\\)</span> số hộ có thu nhập thấp nhất nhận được <span class=\"math inline\">\\(b\\%\\)</span> tổng thu nhập. Chẳng hạn, trong Hình 1, điểm <span class=\"math inline\">\\((0.4,0.114)\\)</span> nằm trên đường cong Lorenz của Hoa Kỳ năm 2016 vì 40% dân số nghèo nhất chỉ nhận 11.4% tổng thu nhập. Tương tự, 80% dân số có thu nhập thấp nhất nhận 48.5% tổng thu nhập, nên điểm <span class=\"math inline\">\\((0.8,0.485)\\)</span> nằm trên đường cong Lorenz. (Đường cong Lorenz được đặt theo tên nhà kinh tế học người Mỹ Max Lorenz.)</p>\n<div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-6-1-0cc423d8/gini01.png\" alt=\"image\" /><br />\nHình 1 (dự án). Đường cong Lorenz của Hoa Kỳ năm 2016.</p>\n</div>\n<p>Hình 2 cho một số đường cong Lorenz điển hình. Tất cả đều đi qua <span class=\"math inline\">\\((0,0)\\)</span> và <span class=\"math inline\">\\((1,1)\\)</span>, đồng thời lõm lên. Trong trường hợp cực hạn <span class=\"math inline\">\\(L(x)=x\\)</span>, xã hội hoàn toàn bình đẳng: <span class=\"math inline\">\\(a\\%\\)</span> dân số nghèo nhất nhận <span class=\"math inline\">\\(a\\%\\)</span> tổng thu nhập, nên mọi người có thu nhập như nhau. Diện tích giữa đường cong Lorenz <span class=\"math inline\">\\(y=L(x)\\)</span> và đường thẳng <span class=\"math inline\">\\(y=x\\)</span> đo mức độ phân bố thu nhập khác với sự bình đẳng tuyệt đối. <em>Chỉ số Gini</em> (đôi khi được gọi là <em>hệ số Gini</em> hoặc <em>hệ số bất bình đẳng</em>) bằng diện tích giữa đường cong Lorenz và đường thẳng <span class=\"math inline\">\\(y=x\\)</span> (miền tô màu trong Hình 3) chia cho diện tích dưới <span class=\"math inline\">\\(y=x\\)</span>.</p>\n<div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-6-1-0cc423d8/gini02.png\" alt=\"image\" /><br />\nHình 2 (dự án). Trục đứng: tỷ phần thu nhập; trục ngang: tỷ phần dân số.</p>\n</div>\n<div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-6-1-0cc423d8/gini03.png\" alt=\"image\" /><br />\nHình 3 (dự án)</p>\n</div>\n<p><strong>Dự án Chỉ số Gini — Bài toán 2.</strong> Bảng sau (được lập từ số liệu do Cục Điều tra Dân số Hoa Kỳ cung cấp) cho các giá trị của hàm Lorenz đối với phân bố thu nhập ở Hoa Kỳ năm 2016.</p>\n<div class=\"center\">\n<table>\n<thead>\n<tr class=\"header\">\n<th style=\"text-align: right;\"><span class=\"math inline\">\\(x\\)</span></th>\n<th style=\"text-align: right;\">0.0</th>\n<th style=\"text-align: right;\">0.2</th>\n<th style=\"text-align: right;\">0.4</th>\n<th style=\"text-align: right;\">0.6</th>\n<th style=\"text-align: right;\">0.8</th>\n<th style=\"text-align: right;\">1.0</th>\n</tr>\n</thead>\n<tbody>\n<tr class=\"odd\">\n<td style=\"text-align: right;\"><span class=\"math inline\">\\(L(x)\\)</span></td>\n<td style=\"text-align: right;\">0.000</td>\n<td style=\"text-align: right;\">0.031</td>\n<td style=\"text-align: right;\">0.114</td>\n<td style=\"text-align: right;\">0.256</td>\n<td style=\"text-align: right;\">0.485</td>\n<td style=\"text-align: right;\">1.000</td>\n</tr>\n</tbody>\n</table>\n</div>\n<p>(a) Nhóm 20% dân số giàu nhất nhận bao nhiêu phần trăm tổng thu nhập Hoa Kỳ năm 2016?</p>\n<p>(b) Dùng máy tính để khớp một hàm bậc hai với số liệu trong bảng. Vẽ các điểm dữ liệu và hàm bậc hai. Mô hình bậc hai có phù hợp một cách hợp lý không?</p>\n<p>(c) Dùng mô hình bậc hai cho hàm Lorenz để ước lượng chỉ số Gini của Hoa Kỳ năm 2016.</p>\n"
+    },
+    {
+      "number": 73,
+      "content": "<p>Làm thế nào để đo lường sự phân bố thu nhập giữa các cư dân trong một quốc gia? Một thước đo như vậy là <em>chỉ số Gini</em>, được đặt theo tên nhà kinh tế học người Ý Corrado Gini, người đầu tiên đề xuất chỉ số này vào năm 1912.</p>\n<p>Trước hết, ta xếp tất cả các hộ gia đình trong một quốc gia theo thu nhập, rồi tính tỷ lệ phần trăm số hộ có tổng thu nhập bằng một tỷ lệ phần trăm cho trước của tổng thu nhập cả nước. Ta định nghĩa <em>đường cong Lorenz</em> <span class=\"math inline\">\\(y=L(x)\\)</span> trên <span class=\"math inline\">\\([0,1]\\)</span> bằng cách đặt điểm <span class=\"math inline\">\\((a/100,b/100)\\)</span> trên đường cong nếu <span class=\"math inline\">\\(a\\%\\)</span> số hộ có thu nhập thấp nhất nhận được <span class=\"math inline\">\\(b\\%\\)</span> tổng thu nhập. Chẳng hạn, trong Hình 1, điểm <span class=\"math inline\">\\((0.4,0.114)\\)</span> nằm trên đường cong Lorenz của Hoa Kỳ năm 2016 vì 40% dân số nghèo nhất chỉ nhận 11.4% tổng thu nhập. Tương tự, 80% dân số có thu nhập thấp nhất nhận 48.5% tổng thu nhập, nên điểm <span class=\"math inline\">\\((0.8,0.485)\\)</span> nằm trên đường cong Lorenz. (Đường cong Lorenz được đặt theo tên nhà kinh tế học người Mỹ Max Lorenz.)</p>\n<div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-6-1-0cc423d8/gini01.png\" alt=\"image\" /><br />\nHình 1 (dự án). Đường cong Lorenz của Hoa Kỳ năm 2016.</p>\n</div>\n<p>Hình 2 cho một số đường cong Lorenz điển hình. Tất cả đều đi qua <span class=\"math inline\">\\((0,0)\\)</span> và <span class=\"math inline\">\\((1,1)\\)</span>, đồng thời lõm lên. Trong trường hợp cực hạn <span class=\"math inline\">\\(L(x)=x\\)</span>, xã hội hoàn toàn bình đẳng: <span class=\"math inline\">\\(a\\%\\)</span> dân số nghèo nhất nhận <span class=\"math inline\">\\(a\\%\\)</span> tổng thu nhập, nên mọi người có thu nhập như nhau. Diện tích giữa đường cong Lorenz <span class=\"math inline\">\\(y=L(x)\\)</span> và đường thẳng <span class=\"math inline\">\\(y=x\\)</span> đo mức độ phân bố thu nhập khác với sự bình đẳng tuyệt đối. <em>Chỉ số Gini</em> (đôi khi được gọi là <em>hệ số Gini</em> hoặc <em>hệ số bất bình đẳng</em>) bằng diện tích giữa đường cong Lorenz và đường thẳng <span class=\"math inline\">\\(y=x\\)</span> (miền tô màu trong Hình 3) chia cho diện tích dưới <span class=\"math inline\">\\(y=x\\)</span>.</p>\n<div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-6-1-0cc423d8/gini02.png\" alt=\"image\" /><br />\nHình 2 (dự án). Trục đứng: tỷ phần thu nhập; trục ngang: tỷ phần dân số.</p>\n</div>\n<div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-6-1-0cc423d8/gini03.png\" alt=\"image\" /><br />\nHình 3 (dự án)</p>\n</div>\n<p><strong>Dữ kiện Bài toán 2.</strong> Bảng sau (được lập từ số liệu do Cục Điều tra Dân số Hoa Kỳ cung cấp) cho các giá trị của hàm Lorenz đối với phân bố thu nhập ở Hoa Kỳ năm 2016.</p>\n<div class=\"center\">\n<table>\n<thead>\n<tr class=\"header\">\n<th style=\"text-align: right;\"><span class=\"math inline\">\\(x\\)</span></th>\n<th style=\"text-align: right;\">0.0</th>\n<th style=\"text-align: right;\">0.2</th>\n<th style=\"text-align: right;\">0.4</th>\n<th style=\"text-align: right;\">0.6</th>\n<th style=\"text-align: right;\">0.8</th>\n<th style=\"text-align: right;\">1.0</th>\n</tr>\n</thead>\n<tbody>\n<tr class=\"odd\">\n<td style=\"text-align: right;\"><span class=\"math inline\">\\(L(x)\\)</span></td>\n<td style=\"text-align: right;\">0.000</td>\n<td style=\"text-align: right;\">0.031</td>\n<td style=\"text-align: right;\">0.114</td>\n<td style=\"text-align: right;\">0.256</td>\n<td style=\"text-align: right;\">0.485</td>\n<td style=\"text-align: right;\">1.000</td>\n</tr>\n</tbody>\n</table>\n</div>\n<p>(a) Nhóm 20% dân số giàu nhất nhận bao nhiêu phần trăm tổng thu nhập Hoa Kỳ năm 2016?</p>\n<p>(b) Dùng máy tính để khớp một hàm bậc hai với số liệu trong bảng. Vẽ các điểm dữ liệu và hàm bậc hai. Mô hình bậc hai có phù hợp một cách hợp lý không?</p>\n<p>(c) Dùng mô hình bậc hai cho hàm Lorenz để ước lượng chỉ số Gini của Hoa Kỳ năm 2016.</p>\n<p><strong>Dự án Chỉ số Gini — Bài toán 3.</strong> Bảng sau cho các giá trị của hàm Lorenz vào các năm 1980, 1990, 2000 và 2010. Dùng phương pháp của Bài toán 2 để ước lượng chỉ số Gini của Hoa Kỳ trong các năm này, rồi so sánh với kết quả Bài toán 2(c). Có nhận thấy một xu hướng nào không?</p>\n<div class=\"center\">\n<table>\n<thead>\n<tr class=\"header\">\n<th style=\"text-align: right;\"><span class=\"math inline\">\\(x\\)</span></th>\n<th style=\"text-align: right;\">0.0</th>\n<th style=\"text-align: right;\">0.2</th>\n<th style=\"text-align: right;\">0.4</th>\n<th style=\"text-align: right;\">0.6</th>\n<th style=\"text-align: right;\">0.8</th>\n<th style=\"text-align: right;\">1.0</th>\n</tr>\n</thead>\n<tbody>\n<tr class=\"odd\">\n<td style=\"text-align: right;\">1980</td>\n<td style=\"text-align: right;\">0.000</td>\n<td style=\"text-align: right;\">0.042</td>\n<td style=\"text-align: right;\">0.144</td>\n<td style=\"text-align: right;\">0.312</td>\n<td style=\"text-align: right;\">0.559</td>\n<td style=\"text-align: right;\">1.000</td>\n</tr>\n<tr class=\"even\">\n<td style=\"text-align: right;\">1990</td>\n<td style=\"text-align: right;\">0.000</td>\n<td style=\"text-align: right;\">0.038</td>\n<td style=\"text-align: right;\">0.134</td>\n<td style=\"text-align: right;\">0.293</td>\n<td style=\"text-align: right;\">0.533</td>\n<td style=\"text-align: right;\">1.000</td>\n</tr>\n<tr class=\"odd\">\n<td style=\"text-align: right;\">2000</td>\n<td style=\"text-align: right;\">0.000</td>\n<td style=\"text-align: right;\">0.036</td>\n<td style=\"text-align: right;\">0.125</td>\n<td style=\"text-align: right;\">0.273</td>\n<td style=\"text-align: right;\">0.503</td>\n<td style=\"text-align: right;\">1.000</td>\n</tr>\n<tr class=\"even\">\n<td style=\"text-align: right;\">2010</td>\n<td style=\"text-align: right;\">0.000</td>\n<td style=\"text-align: right;\">0.033</td>\n<td style=\"text-align: right;\">0.118</td>\n<td style=\"text-align: right;\">0.264</td>\n<td style=\"text-align: right;\">0.498</td>\n<td style=\"text-align: right;\">1.000</td>\n</tr>\n</tbody>\n</table>\n</div>\n"
+    },
+    {
+      "number": 74,
+      "content": "<p>Làm thế nào để đo lường sự phân bố thu nhập giữa các cư dân trong một quốc gia? Một thước đo như vậy là <em>chỉ số Gini</em>, được đặt theo tên nhà kinh tế học người Ý Corrado Gini, người đầu tiên đề xuất chỉ số này vào năm 1912.</p>\n<p>Trước hết, ta xếp tất cả các hộ gia đình trong một quốc gia theo thu nhập, rồi tính tỷ lệ phần trăm số hộ có tổng thu nhập bằng một tỷ lệ phần trăm cho trước của tổng thu nhập cả nước. Ta định nghĩa <em>đường cong Lorenz</em> <span class=\"math inline\">\\(y=L(x)\\)</span> trên <span class=\"math inline\">\\([0,1]\\)</span> bằng cách đặt điểm <span class=\"math inline\">\\((a/100,b/100)\\)</span> trên đường cong nếu <span class=\"math inline\">\\(a\\%\\)</span> số hộ có thu nhập thấp nhất nhận được <span class=\"math inline\">\\(b\\%\\)</span> tổng thu nhập. Chẳng hạn, trong Hình 1, điểm <span class=\"math inline\">\\((0.4,0.114)\\)</span> nằm trên đường cong Lorenz của Hoa Kỳ năm 2016 vì 40% dân số nghèo nhất chỉ nhận 11.4% tổng thu nhập. Tương tự, 80% dân số có thu nhập thấp nhất nhận 48.5% tổng thu nhập, nên điểm <span class=\"math inline\">\\((0.8,0.485)\\)</span> nằm trên đường cong Lorenz. (Đường cong Lorenz được đặt theo tên nhà kinh tế học người Mỹ Max Lorenz.)</p>\n<div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-6-1-0cc423d8/gini01.png\" alt=\"image\" /><br />\nHình 1 (dự án). Đường cong Lorenz của Hoa Kỳ năm 2016.</p>\n</div>\n<p>Hình 2 cho một số đường cong Lorenz điển hình. Tất cả đều đi qua <span class=\"math inline\">\\((0,0)\\)</span> và <span class=\"math inline\">\\((1,1)\\)</span>, đồng thời lõm lên. Trong trường hợp cực hạn <span class=\"math inline\">\\(L(x)=x\\)</span>, xã hội hoàn toàn bình đẳng: <span class=\"math inline\">\\(a\\%\\)</span> dân số nghèo nhất nhận <span class=\"math inline\">\\(a\\%\\)</span> tổng thu nhập, nên mọi người có thu nhập như nhau. Diện tích giữa đường cong Lorenz <span class=\"math inline\">\\(y=L(x)\\)</span> và đường thẳng <span class=\"math inline\">\\(y=x\\)</span> đo mức độ phân bố thu nhập khác với sự bình đẳng tuyệt đối. <em>Chỉ số Gini</em> (đôi khi được gọi là <em>hệ số Gini</em> hoặc <em>hệ số bất bình đẳng</em>) bằng diện tích giữa đường cong Lorenz và đường thẳng <span class=\"math inline\">\\(y=x\\)</span> (miền tô màu trong Hình 3) chia cho diện tích dưới <span class=\"math inline\">\\(y=x\\)</span>.</p>\n<div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-6-1-0cc423d8/gini02.png\" alt=\"image\" /><br />\nHình 2 (dự án). Trục đứng: tỷ phần thu nhập; trục ngang: tỷ phần dân số.</p>\n</div>\n<div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-6-1-0cc423d8/gini03.png\" alt=\"image\" /><br />\nHình 3 (dự án)</p>\n</div>\n<p><strong>Dữ kiện Bài toán 2.</strong> Bảng sau (được lập từ số liệu do Cục Điều tra Dân số Hoa Kỳ cung cấp) cho các giá trị của hàm Lorenz đối với phân bố thu nhập ở Hoa Kỳ năm 2016.</p>\n<div class=\"center\">\n<table>\n<thead>\n<tr class=\"header\">\n<th style=\"text-align: right;\"><span class=\"math inline\">\\(x\\)</span></th>\n<th style=\"text-align: right;\">0.0</th>\n<th style=\"text-align: right;\">0.2</th>\n<th style=\"text-align: right;\">0.4</th>\n<th style=\"text-align: right;\">0.6</th>\n<th style=\"text-align: right;\">0.8</th>\n<th style=\"text-align: right;\">1.0</th>\n</tr>\n</thead>\n<tbody>\n<tr class=\"odd\">\n<td style=\"text-align: right;\"><span class=\"math inline\">\\(L(x)\\)</span></td>\n<td style=\"text-align: right;\">0.000</td>\n<td style=\"text-align: right;\">0.031</td>\n<td style=\"text-align: right;\">0.114</td>\n<td style=\"text-align: right;\">0.256</td>\n<td style=\"text-align: right;\">0.485</td>\n<td style=\"text-align: right;\">1.000</td>\n</tr>\n</tbody>\n</table>\n</div>\n<p>(a) Nhóm 20% dân số giàu nhất nhận bao nhiêu phần trăm tổng thu nhập Hoa Kỳ năm 2016?</p>\n<p>(b) Dùng máy tính để khớp một hàm bậc hai với số liệu trong bảng. Vẽ các điểm dữ liệu và hàm bậc hai. Mô hình bậc hai có phù hợp một cách hợp lý không?</p>\n<p>(c) Dùng mô hình bậc hai cho hàm Lorenz để ước lượng chỉ số Gini của Hoa Kỳ năm 2016.</p>\n<p><strong>Dự án Chỉ số Gini — Bài toán 4.</strong> Mô hình lũy thừa thường khớp hàm Lorenz chính xác hơn mô hình bậc hai. Dùng máy tính để khớp một hàm lũy thừa (<span class=\"math inline\">\\(y=ax^k\\)</span>) với số liệu ở Bài toán 2, rồi dùng hàm đó để ước lượng chỉ số Gini của Hoa Kỳ năm 2016. So sánh với các kết quả ở câu (b), (c) của Bài toán 2.</p>\n"
+    }
+  ]
+}

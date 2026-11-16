@@ -1,0 +1,229 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage{fontspec}\setmainfont{Latin Modern Roman}\setsansfont{DejaVu Sans}
+\usepackage{amsmath,amssymb,graphicx,geometry,enumitem,needspace,longtable,booktabs,fancyhdr,hyperref}
+\geometry{left=28mm,right=23mm,top=24mm,bottom=24mm}
+\hypersetup{unicode=true,colorlinks=true,linkcolor=black,urlcolor=blue,pdftitle={Giải tích §6.4 — Công}}
+\setlength{\parindent}{1.2em}\setlength{\parskip}{4pt}\setlength{\headheight}{16pt}
+\pagestyle{fancy}\fancyhf{}\fancyhead[L]{\small Chương 6. Ứng dụng của tích phân}\fancyhead[R]{\small §6.4}\fancyfoot[C]{\thepage}
+\newcommand{\fig}[3][.68]{\begin{center}\begin{minipage}{\linewidth}\centering\includegraphics[width=#1\linewidth]{assets/#2.png}\\{\small #3}\end{minipage}\end{center}}
+\newcommand{\ex}[1]{\par\medskip\noindent\textbf{Ví dụ #1.}\ }
+\newcommand{\sol}{\par\nopagebreak[4]\noindent\textit{Lời giải.}\ }
+\newcommand{\bt}[1]{\par\smallskip\Needspace{5\baselineskip}\noindent\textbf{#1.}\ }
+\newcommand{\group}[1]{\par\Needspace{11\baselineskip}\medskip\noindent\textbf{#1}\par\nopagebreak[4]}
+\newcommand{\gint}[1]{\left[\!\left[#1\right]\!\right]}
+\allowdisplaybreaks[2]
+\DeclareMathOperator{\sech}{sech}
+\DeclareMathOperator{\csch}{csch}
+\DeclareMathOperator{\arccot}{arccot}
+
+\newcommand{\prj}[1]{\bt{#1}}
+\begin{document}
+\begin{center}{\LARGE\bfseries 6.4 — Công}\end{center}
+Trong ngôn ngữ hằng ngày, từ \textit{công} được dùng để chỉ tổng nỗ lực cần thiết nhằm thực hiện một nhiệm vụ. Trong vật lý, từ này có một ý nghĩa chuyên môn phụ thuộc vào khái niệm \textit{lực}. Một cách trực quan, ta có thể xem lực là sự đẩy hoặc kéo tác dụng lên một vật; chẳng hạn, lực đẩy ngang làm một cuốn sách trượt trên bàn, hoặc lực hút hướng xuống của trọng lực Trái Đất lên một quả bóng. Nói chung, nếu một vật chuyển động dọc theo một đường thẳng với hàm vị trí $s(t)$, thì lực $F$ tác dụng lên vật (theo cùng phương ấy) được cho bởi Định luật II Newton, bằng tích khối lượng $m$ và gia tốc $a$:
+\begin{equation}F=ma=m\frac{d^2s}{dt^2}.\tag{1}\end{equation}
+Trong hệ mét SI, khối lượng được đo bằng kilôgam (kg), độ dịch chuyển bằng mét (m), thời gian bằng giây (s) và lực bằng newton ($\mathrm N=\mathrm{kg}\cdot\mathrm m/\mathrm s^2$). Vì thế, lực 1 N tác dụng lên một khối lượng 1 kg tạo ra gia tốc $1\ \mathrm{m/s^2}$. Trong hệ đơn vị thông dụng của Hoa Kỳ, đơn vị cơ bản được chọn là đơn vị lực, tức pound.
+
+Trong trường hợp gia tốc không đổi, lực $F$ cũng không đổi, và \textit{công thực hiện} được định nghĩa là tích của lực $F$ với quãng đường $d$ mà vật dịch chuyển:
+\begin{equation}W=Fd,\qquad \text{công}=\text{lực}\times\text{quãng đường}.\tag{2}\end{equation}
+Nếu $F$ được đo bằng newton và $d$ bằng mét, thì đơn vị của $W$ là newton-mét, gọi là joule (J). Nếu $F$ được đo bằng pound và $d$ bằng foot, thì đơn vị của $W$ là foot-pound (ft-lb), xấp xỉ $1.36$ J.
+
+\Needspace{17\baselineskip}
+\ex{1} (a) Cần thực hiện bao nhiêu công để nhấc một cuốn sách khối lượng $1.2$ kg từ sàn lên mặt bàn cao $0.7$ m? Dùng gia tốc trọng trường $g=9.8\ \mathrm{m/s^2}$.
+
+(b) Cần thực hiện bao nhiêu công để nâng một vật có trọng lượng $20$ lb lên cao $6$ ft so với mặt đất?
+\sol (a) Lực tác dụng có độ lớn bằng trọng lực và ngược hướng với trọng lực, nên Phương trình 1 cho
+\[F=mg=(1.2)(9.8)=11.76\ \mathrm N.\]
+Theo Phương trình 2, công là
+\[W=Fd=(11.76\ \mathrm N)(0.7\ \mathrm m)\approx8.2\ \mathrm J.\]
+(b) Ở đây, lực đã được cho là $F=20$ lb, nên công thực hiện là
+\[W=Fd=(20\ \mathrm{lb})(6\ \mathrm{ft})=120\ \text{ft-lb}.\]
+Chú ý rằng trong câu (b), khác với câu (a), ta không cần nhân với $g$, vì đề bài đã cho \textit{trọng lượng} (là một lực), chứ không phải khối lượng của vật.
+
+Phương trình 2 định nghĩa công khi lực không đổi, nhưng nếu lực biến thiên thì sao? Giả sử vật chuyển động dọc theo trục $x$ theo chiều dương, từ $x=a$ đến $x=b$, và tại mỗi điểm $x$ giữa $a$ và $b$, lực $f(x)$ tác dụng lên vật, trong đó $f$ là hàm liên tục. Ta chia khoảng $[a,b]$ thành $n$ khoảng con có các đầu mút $x_0,x_1,\ldots,x_n$ và cùng bề rộng $\Delta x$. Chọn điểm mẫu $x_i^*$ trong khoảng con thứ $i$, $[x_{i-1},x_i]$. Khi đó, lực tại điểm ấy là $f(x_i^*)$. Nếu $n$ lớn thì $\Delta x$ nhỏ; vì $f$ liên tục, các giá trị của $f$ không thay đổi nhiều trên $[x_{i-1},x_i]$. Nói cách khác, $f$ gần như không đổi trên khoảng ấy, nên công $W_i$ thực hiện khi dịch chuyển chất điểm từ $x_{i-1}$ đến $x_i$ được xấp xỉ theo Phương trình 2:
+\[W_i\approx f(x_i^*)\Delta x.\]
+Do đó, ta có thể xấp xỉ tổng công bởi
+\begin{equation}W\approx\sum_{i=1}^n f(x_i^*)\Delta x.\tag{3}\end{equation}
+Phép xấp xỉ này có vẻ ngày càng tốt hơn khi $n$ tăng. Vì vậy, ta định nghĩa \textit{công thực hiện khi dịch chuyển vật từ $a$ đến $b$} là giới hạn của đại lượng ấy khi $n\to\infty$. Vì vế phải của (3) là một tổng Riemann, giới hạn của nó là một tích phân xác định, nên
+\begin{equation}\boxed{\displaystyle W=\lim_{n\to\infty}\sum_{i=1}^n f(x_i^*)\Delta x=\int_a^b f(x)\,dx.}\tag{4}\end{equation}
+
+\Needspace{13\baselineskip}
+\ex{2} Khi một chất điểm ở cách gốc tọa độ $x$ foot, một lực $x^2+2x$ pound tác dụng lên nó. Cần thực hiện bao nhiêu công để dịch chuyển chất điểm từ $x=1$ đến $x=3$?
+\sol
+\[W=\int_1^3(x^2+2x)\,dx=\left[\frac{x^3}{3}+x^2\right]_1^3=\frac{50}{3}.\]
+Công thực hiện là $16\frac23$ ft-lb.
+
+Trong ví dụ tiếp theo, ta dùng một định luật vật lý. \textit{Định luật Hooke} phát biểu rằng lực cần để giữ một lò xo giãn thêm $x$ đơn vị so với chiều dài tự nhiên tỉ lệ với $x$:
+\[f(x)=kx,\]
+trong đó $k$ là một hằng số dương gọi là \textit{độ cứng lò xo} (xem Hình 1). Định luật Hooke đúng khi $x$ không quá lớn.
+\fig[.37]{fig01}{Hình 1. Định luật Hooke. Lò xo trên mặt không ma sát: (a) Trạng thái tự nhiên. (b) Trạng thái bị kéo giãn.}
+
+\Needspace{17\baselineskip}
+\ex{3} Cần một lực $40$ N để giữ một lò xo được kéo từ chiều dài tự nhiên $10$ cm đến chiều dài $15$ cm. Cần thực hiện bao nhiêu công để kéo lò xo từ $15$ cm đến $18$ cm?
+\sol Theo Định luật Hooke, lực cần để giữ lò xo giãn thêm $x$ mét so với chiều dài tự nhiên là $f(x)=kx$. Khi kéo lò xo từ $10$ cm đến $15$ cm, độ giãn là $5\ \mathrm{cm}=0.05\ \mathrm m$. Điều này có nghĩa là $f(0.05)=40$, nên
+\[0.05k=40,\qquad k=\frac{40}{0.05}=800.\]
+Vì thế, $f(x)=800x$, và công thực hiện khi kéo lò xo từ $15$ cm đến $18$ cm là
+\begin{align*}
+W&=\int_{0.05}^{0.08}800x\,dx=800\left[\frac{x^2}{2}\right]_{0.05}^{0.08}\\
+&=400[(0.08)^2-(0.05)^2]=1.56\ \mathrm J.
+\end{align*}
+
+\Needspace{18\baselineskip}
+\ex{4} Một dây cáp có trọng lượng $200$ lb, dài $100$ ft, treo thẳng đứng từ nóc một tòa nhà cao.
+
+(a) Cần thực hiện bao nhiêu công để kéo dây cáp lên nóc tòa nhà?
+
+(b) Cần thực hiện bao nhiêu công để chỉ kéo lên $20$ ft dây cáp?
+\sol (a) Một phương pháp là dùng lập luận tương tự lập luận dẫn đến Định nghĩa 4. [Xem một phương pháp khác trong Bài tập 14(b).]
+
+Đặt gốc tọa độ tại nóc tòa nhà và trục $x$ hướng xuống dưới, như Hình 2. Chia dây cáp thành những đoạn nhỏ có độ dài $\Delta x$. Nếu $x_i^*$ là một điểm trong khoảng thứ $i$, thì mọi điểm trong khoảng ấy đều được nâng lên một khoảng gần bằng nhau, bằng $x_i^*$. Dây cáp có trọng lượng $2$ pound trên mỗi foot, nên trọng lượng của đoạn thứ $i$ là $(2\ \mathrm{lb/ft})(\Delta x\ \mathrm{ft})=2\Delta x$ lb. Vì vậy, công thực hiện trên đoạn thứ $i$, tính bằng foot-pound, là
+\[\underbrace{(2\Delta x)}_{\text{lực}}\cdot\underbrace{x_i^*}_{\text{quãng đường}}=2x_i^*\Delta x.\]
+\fig[.28]{fig02}{Hình 2}
+Ta được tổng công bằng cách cộng tất cả các giá trị xấp xỉ ấy, rồi cho số đoạn tăng lên vô hạn (do đó $\Delta x\to0$):
+\begin{align*}
+W&=\lim_{n\to\infty}\sum_{i=1}^n2x_i^*\Delta x=\int_0^{100}2x\,dx\\
+&=\left[x^2\right]_0^{100}=10\,000\ \text{ft-lb}.
+\end{align*}
+Nếu đặt gốc tọa độ ở đầu dưới của dây cáp và trục $x$ hướng lên trên, ta sẽ được
+\[W=\int_0^{100}2(100-x)\,dx,\]
+cho cùng kết quả.
+
+(b) Công cần để đưa $20$ ft dây cáp ở phía trên lên nóc tòa nhà được tính như câu (a):
+\[W_1=\int_0^{20}2x\,dx=\left[x^2\right]_0^{20}=400\ \text{ft-lb}.\]
+Mọi phần của $80$ ft dây cáp phía dưới đều dịch chuyển cùng một khoảng là $20$ ft, nên công thực hiện là
+\begin{align*}
+W_2&=\lim_{n\to\infty}\sum_{i=1}^n\bigl(\underbrace{20}_{\text{quãng đường}}\cdot\underbrace{2\Delta x}_{\text{lực}}\bigr)\\
+&=\int_{20}^{100}40\,dx=3200\ \text{ft-lb}.
+\end{align*}
+(Một cách khác là nhận thấy $80$ ft dây cáp phía dưới có trọng lượng $80\cdot2=160$ lb và dịch chuyển đều $20$ ft, nên công thực hiện là $160\cdot20=3200$ ft-lb.)
+
+Tổng công thực hiện là $W_1+W_2=400+3200=3600$ ft-lb.
+
+\Needspace{18\baselineskip}
+\ex{5} Một bể có dạng khối nón tròn xoay lật ngược, cao $10$ m và bán kính đáy $4$ m. Bể chứa nước đến độ cao $8$ m. Tìm công cần để bơm hết nước lên miệng bể. (Khối lượng riêng của nước là $1000\ \mathrm{kg/m^3}$.)
+\sol Ta đo độ sâu từ miệng bể bằng một trục tọa độ thẳng đứng như Hình 3. Nước nằm trong khoảng độ sâu từ $2$ m đến $10$ m, nên ta chia khoảng $[2,10]$ thành $n$ khoảng con có các đầu mút $x_0,x_1,\ldots,x_n$, rồi chọn $x_i^*$ trong khoảng con thứ $i$. Như vậy, nước được chia thành $n$ lớp. Lớp thứ $i$ được xấp xỉ bởi một khối trụ tròn có bán kính $r_i$ và chiều cao $\Delta x$. Từ các tam giác đồng dạng trong Hình 4, ta tính $r_i$ như sau:
+\[\frac{r_i}{10-x_i^*}=\frac4{10},\qquad r_i=\frac25(10-x_i^*).\]
+\fig[.43]{fig03}{Hình 3}
+\fig[.31]{fig04}{Hình 4}
+Do đó, thể tích lớp nước thứ $i$ được xấp xỉ bởi
+\[V_i\approx\pi r_i^2\Delta x=\frac{4\pi}{25}(10-x_i^*)^2\Delta x,\]
+và khối lượng của nó là
+\begin{align*}
+m_i&=\text{khối lượng riêng}\times\text{thể tích}\\
+&\approx1000\cdot\frac{4\pi}{25}(10-x_i^*)^2\Delta x
+=160\pi(10-x_i^*)^2\Delta x.
+\end{align*}
+Lực cần để nâng lớp nước này phải thắng trọng lực, nên
+\begin{align*}
+F_i&=m_ig\approx(9.8)160\pi(10-x_i^*)^2\Delta x\\
+&=1568\pi(10-x_i^*)^2\Delta x.
+\end{align*}
+Mỗi phần tử trong lớp nước phải đi lên một khoảng xấp xỉ $x_i^*$. Công $W_i$ để nâng lớp nước lên miệng bể xấp xỉ tích của lực $F_i$ và quãng đường $x_i^*$:
+\[W_i\approx F_ix_i^*\approx1568\pi x_i^*(10-x_i^*)^2\Delta x.\]
+Để tìm tổng công thực hiện khi bơm hết nước trong bể, ta cộng công của cả $n$ lớp, rồi lấy giới hạn khi $n\to\infty$:
+\begin{align*}
+W&=\lim_{n\to\infty}\sum_{i=1}^n1568\pi x_i^*(10-x_i^*)^2\Delta x\\
+&=\int_2^{10}1568\pi x(10-x)^2\,dx\\
+&=1568\pi\int_2^{10}(100x-20x^2+x^3)\,dx\\
+&=1568\pi\left[50x^2-\frac{20x^3}{3}+\frac{x^4}{4}\right]_2^{10}\\
+&=1568\pi\left(\frac{2048}{3}\right)\approx3.4\times10^6\ \mathrm J.
+\end{align*}
+
+\clearpage
+\section*{6.4 — Bài tập}
+\bt{1} Cần thực hiện bao nhiêu công khi một vận động viên cử tạ nâng $200$ kg từ độ cao $1.5$ m lên $2.0$ m so với mặt đất?
+\bt{2} Tính công thực hiện khi kéo một chiếc đại dương cầm có trọng lượng $1100$ lb từ mặt đất lên tầng ba, cao $35$ ft so với mặt đất.
+\bt{3} Một lực biến thiên $5x^{-2}$ pound dịch chuyển một vật dọc theo một đường thẳng khi vật ở cách gốc tọa độ $x$ foot. Tính công thực hiện khi dịch chuyển vật từ $x=1$ ft đến $x=10$ ft.
+\bt{4} Một lực biến thiên $4\sqrt{x}$ newton dịch chuyển một chất điểm dọc theo một đường thẳng khi chất điểm ở cách gốc tọa độ $x$ mét. Tính công thực hiện khi dịch chuyển chất điểm từ $x=4$ đến $x=16$.
+\par\noindent\begin{minipage}[t]{\linewidth}
+\bt{5} Hình vẽ là đồ thị của một hàm lực (tính bằng newton), tăng đến giá trị cực đại rồi giữ không đổi. Lực này thực hiện bao nhiêu công khi dịch chuyển một vật một quãng đường $8$ m?
+\fig[.54]{ex05}{Hình cho Bài tập 5}
+\end{minipage}\par
+\par\noindent\begin{minipage}[t]{\linewidth}
+\bt{6} Bảng sau cho các giá trị của một hàm lực $f(x)$, trong đó $x$ tính bằng mét và $f(x)$ tính bằng newton. Dùng Quy tắc trung điểm để ước lượng công của lực khi dịch chuyển một vật từ $x=4$ đến $x=20$.
+\begin{center}\begin{tabular}{r|rrrrrrrrr}\toprule
+$x$&4&6&8&10&12&14&16&18&20\\\midrule
+$f(x)$&5&5.8&7.0&8.8&9.6&8.2&6.7&5.2&4.1\\\bottomrule
+\end{tabular}\end{center}
+\end{minipage}\par
+\bt{7} Cần một lực $10$ lb để giữ một lò xo giãn thêm $4$ in. so với chiều dài tự nhiên. Cần thực hiện bao nhiêu công để kéo lò xo từ chiều dài tự nhiên đến khi giãn thêm $6$ in.?
+\bt{8} Một lò xo có chiều dài tự nhiên $40$ cm. Nếu cần lực $60$ N để giữ lò xo bị nén $10$ cm, thì công thực hiện trong quá trình nén này là bao nhiêu? Cần thực hiện bao nhiêu công để nén lò xo đến chiều dài $25$ cm?
+\bt{9} Giả sử cần công $2$ J để kéo một lò xo từ chiều dài tự nhiên $30$ cm đến chiều dài $42$ cm.
+
+(a) Cần bao nhiêu công để kéo lò xo từ $35$ cm đến $40$ cm?
+
+(b) Một lực $30$ N giữ lò xo giãn thêm bao nhiêu so với chiều dài tự nhiên?
+\bt{10} Nếu công cần để kéo một lò xo giãn thêm $1$ ft so với chiều dài tự nhiên là $12$ ft-lb, thì cần bao nhiêu công để kéo lò xo giãn thêm $9$ in. so với chiều dài tự nhiên?
+\bt{11} Một lò xo có chiều dài tự nhiên $20$ cm. So sánh công $W_1$ khi kéo lò xo từ $20$ cm đến $30$ cm với công $W_2$ khi kéo lò xo từ $30$ cm đến $40$ cm. $W_2$ và $W_1$ liên hệ như thế nào?
+\bt{12} Nếu cần công $6$ J để kéo một lò xo từ $10$ cm đến $12$ cm, và cần thêm $10$ J để kéo từ $12$ cm đến $14$ cm, thì chiều dài tự nhiên của lò xo là bao nhiêu?
+\group{13–22}
+Hãy chỉ ra cách xấp xỉ công cần thực hiện bằng một tổng Riemann. Sau đó biểu diễn công dưới dạng một tích phân và tính tích phân ấy.
+\bt{13} Một sợi dây nặng, dài $50$ ft, có trọng lượng $0.5$ lb/ft, treo qua mép một tòa nhà cao $120$ ft.
+
+(a) Cần bao nhiêu công để kéo dây lên nóc tòa nhà?
+
+(b) Cần bao nhiêu công để kéo một nửa sợi dây lên nóc tòa nhà?
+\bt{14} Một dây cáp dày, dài $60$ ft và có trọng lượng $180$ lb, treo từ một tời trên cần cẩu. Tính bằng hai cách khác nhau công thực hiện khi tời cuốn lên $25$ ft dây cáp.
+
+(a) Làm theo phương pháp của Ví dụ 4.
+
+(b) Viết một hàm biểu diễn trọng lượng phần dây cáp còn lại sau khi tời đã cuốn lên $x$ foot. Ước lượng công thực hiện khi tời kéo lên $\Delta x$ foot dây cáp.
+\bt{15} Một dây cáp có trọng lượng $2$ lb/ft được dùng để nâng $800$ lb than lên một giếng mỏ sâu $500$ ft. Tìm công thực hiện.
+\bt{16} Một sợi xích nằm trên mặt đất, dài $10$ m và có khối lượng $80$ kg. Cần bao nhiêu công để nâng một đầu xích lên độ cao $6$ m?
+\bt{17} Một sợi xích dài $10$ ft, có trọng lượng $25$ lb, treo từ trần nhà. Tìm công thực hiện khi nâng đầu dưới của xích lên trần nhà, ngang với đầu trên.
+\bt{18} Một tên lửa mô hình có khối lượng $0.4$ kg được nạp $0.75$ kg nhiên liệu tên lửa. Sau khi phóng, tên lửa bay lên với tốc độ không đổi $4$ m/s, còn nhiên liệu tiêu hao với tốc độ $0.15$ kg/s. Tìm công thực hiện để đẩy tên lửa lên độ cao $20$ m so với mặt đất.
+\bt{19} Một chiếc xô bị rò, có khối lượng $10$ kg, được nâng từ mặt đất lên độ cao $12$ m với tốc độ không đổi bằng một sợi dây có khối lượng trên một đơn vị chiều dài là $0.8$ kg/m. Ban đầu xô chứa $36$ kg nước, nhưng nước rò ra với tốc độ không đổi và vừa chảy hết khi xô đạt độ cao $12$ m. Cần thực hiện bao nhiêu công?
+\bt{20} Một bể bơi tròn có đường kính $24$ ft, thành cao $5$ ft và mực nước sâu $4$ ft. Cần bao nhiêu công để bơm toàn bộ nước ra ngoài qua thành bể? (Dùng trọng lượng của nước là $62.5\ \mathrm{lb/ft^3}$.)
+\bt{21} Một bể cá dài $2$ m, rộng $1$ m, sâu $1$ m chứa đầy nước. Tìm công cần để bơm một nửa lượng nước ra khỏi bể. (Dùng khối lượng riêng của nước là $1000\ \mathrm{kg/m^3}$.)
+\bt{22} Một bể nước hình cầu đường kính $24$ ft được đặt trên đỉnh một tháp cao $60$ ft. Bể được làm đầy bằng một ống dẫn gắn vào đáy khối cầu. Nếu dùng một máy bơm $1.5$ mã lực để đưa nước lên bể, thì mất bao lâu để làm đầy bể? (Một mã lực tương ứng với công $550$ ft-lb trong mỗi giây.)
+\Needspace{27\baselineskip}
+\group{23–26}
+Một bể chứa đầy nước. Tìm công cần để bơm nước ra khỏi vòi xả. Trong các Bài tập 25 và 26, dùng trọng lượng của nước là $62.5\ \mathrm{lb/ft^3}$.
+\par\noindent\begin{minipage}[t]{\linewidth}
+\bt{23} Bể trong hình.
+\fig[.42]{ex23}{Hình cho Bài tập 23}
+\end{minipage}\par
+\par\noindent\begin{minipage}[t]{\linewidth}
+\bt{24} Bể trong hình.
+\fig[.34]{ex24}{Hình cho Bài tập 24}
+\end{minipage}\par
+\par\noindent\begin{minipage}[t]{\linewidth}
+\bt{25} Bể dạng khối nón cụt trong hình.
+\fig[.42]{ex25}{Hình cho Bài tập 25. Khối nón cụt.}
+\end{minipage}\par
+\par\noindent\begin{minipage}[t]{\linewidth}
+\bt{26} Bể trong hình.
+\fig[.42]{ex26}{Hình cho Bài tập 26}
+\end{minipage}\par
+\bt{27} Giả sử máy bơm của bể trong Bài tập 23 bị hỏng sau khi đã thực hiện công $4.7\times10^5$ J. Độ sâu của nước còn lại trong bể là bao nhiêu?
+\bt{28} Giải Bài tập 24 nếu bể chứa dầu đến một nửa dung tích và dầu có khối lượng riêng $900\ \mathrm{kg/m^3}$.
+\par\noindent\begin{minipage}[t]{\linewidth}
+\bt{29} Khi khí giãn nở trong một xi lanh bán kính $r$, áp suất tại mỗi thời điểm là một hàm của thể tích: $P=P(V)$. Lực khí tác dụng lên pít-tông (xem hình) là tích của áp suất với diện tích: $F=\pi r^2P$. Chứng minh rằng công do khí thực hiện khi thể tích tăng từ $V_1$ đến $V_2$ là
+\[W=\int_{V_1}^{V_2}P\,dV.\]
+\fig[.43]{ex29}{Hình cho Bài tập 29. Đầu pít-tông.}
+\end{minipage}\par
+\bt{30} Trong một động cơ hơi nước, áp suất $P$ và thể tích $V$ của hơi thỏa mãn phương trình $PV^{1.4}=k$, trong đó $k$ là hằng số. (Điều này đúng với quá trình giãn nở đoạn nhiệt, tức giãn nở không có trao đổi nhiệt giữa xi lanh và môi trường xung quanh.) Dùng Bài tập 29 để tính công do động cơ thực hiện trong một chu trình, khi hơi bắt đầu ở áp suất $160\ \mathrm{lb/in^2}$ và thể tích $100\ \mathrm{in^3}$, rồi giãn nở đến thể tích $800\ \mathrm{in^3}$.
+\Needspace{24\baselineskip}
+\group{31–33. Định lý công–động năng}
+Động năng $\mathrm{KE}$ của một vật có khối lượng $m$, chuyển động với vận tốc $v$, được định nghĩa là $\mathrm{KE}=\frac12mv^2$. Nếu lực $f(x)$ tác dụng lên vật, làm vật chuyển động dọc theo trục $x$ từ $x_1$ đến $x_2$, thì Định lý công–động năng phát biểu rằng công tổng cộng thực hiện bằng độ biến thiên động năng:
+\[\frac12mv_2^2-\frac12mv_1^2,\]
+trong đó $v_1$ là vận tốc tại $x_1$ và $v_2$ là vận tốc tại $x_2$.
+\bt{31} Gọi $x=s(t)$ là hàm vị trí của vật tại thời điểm $t$, còn $v(t)$ và $a(t)$ lần lượt là các hàm vận tốc và gia tốc. Chứng minh Định lý công–động năng bằng cách trước hết dùng Quy tắc đổi biến cho tích phân xác định (5.5.6) để chỉ ra rằng
+\[W=\int_{x_1}^{x_2}f(x)\,dx=\int_{t_1}^{t_2}f(s(t))v(t)\,dt.\]
+Sau đó dùng Định luật II Newton (lực bằng khối lượng nhân gia tốc) và phép đổi biến $u=v(t)$ để tính tích phân.
+\bt{32} Cần bao nhiêu công (tính bằng ft-lb) để ném một quả bóng bowling có trọng lượng $12$ lb với tốc độ $20$ mi/h? (Chú ý: Chia trọng lượng tính bằng pound cho $32\ \mathrm{ft/s^2}$, là gia tốc trọng trường, để tìm khối lượng tính bằng slug.)
+\bt{33} Giả sử khi phóng một toa tàu lượn siêu tốc có khối lượng $800$ kg, một hệ thống đẩy điện từ tác dụng lên toa một lực $(5.7x^2+1.5x)$ newton tại vị trí cách điểm đầu đường ray $x$ mét. Dùng Bài tập 31 để tìm tốc độ của toa sau khi đi được $60$ m.
+\bt{34} Khi một chất điểm ở cách gốc tọa độ $x$ mét, một lực $\cos(\pi x/3)$ newton tác dụng lên nó. Cần bao nhiêu công để dịch chuyển chất điểm từ $x=1$ đến $x=2$? Diễn giải kết quả bằng cách xét công thực hiện từ $x=1$ đến $x=1.5$ và từ $x=1.5$ đến $x=2$.
+\bt{35} (a) Định luật vạn vật hấp dẫn Newton phát biểu rằng hai vật có khối lượng $m_1$ và $m_2$ hút nhau bằng lực
+\[F=G\frac{m_1m_2}{r^2},\]
+trong đó $r$ là khoảng cách giữa hai vật và $G$ là hằng số hấp dẫn. Nếu một trong hai vật được giữ cố định, hãy tìm công cần để dịch chuyển vật kia từ $r=a$ đến $r=b$.
+
+(b) Tính công cần để phóng thẳng đứng một vệ tinh khối lượng $1000$ kg lên độ cao $1000$ km. Có thể giả sử khối lượng Trái Đất là $5.98\times10^{24}$ kg và tập trung tại tâm. Lấy bán kính Trái Đất bằng $6.37\times10^6$ m và $G=6.67\times10^{-11}\ \mathrm{N\cdot m^2/kg^2}$.
+\par\noindent\begin{minipage}[t]{\linewidth}
+\bt{36} Đại kim tự tháp của vua Khufu được xây bằng đá vôi tại Ai Cập trong khoảng $20$ năm, từ năm $2580$ đến năm $2560$ trước Công nguyên. Đáy là hình vuông cạnh $756$ ft; chiều cao khi xây dựng là $481$ ft. (Đây là công trình nhân tạo cao nhất thế giới trong hơn $3800$ năm.) Trọng lượng riêng của đá vôi xấp xỉ $150\ \mathrm{lb/ft^3}$.
+
+(a) Ước lượng tổng công thực hiện khi xây kim tự tháp.
+
+(b) Nếu mỗi người lao động làm việc $10$ giờ một ngày, trong $20$ năm, mỗi năm $340$ ngày, và thực hiện công $200$ ft-lb/h để nâng các khối đá vôi vào vị trí, thì cần khoảng bao nhiêu người lao động để xây kim tự tháp?
+\fig[.64]{ex36}{Hình cho Bài tập 36. Ảnh: Vladimir Korostyshevskiy / Shutterstock.com.}
+\end{minipage}\par
+\end{document}

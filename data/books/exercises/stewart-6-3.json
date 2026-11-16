@@ -1,0 +1,260 @@
+{
+  "exercises": [
+    {
+      "number": 1,
+      "content": "<p><strong>1.</strong></p>\n<p>Gọi <span class=\"math inline\">\\(S\\)</span> là khối thu được khi quay miền trong hình quanh trục <span class=\"math inline\">\\(y\\)</span>. Giải thích vì sao dùng phương pháp hình vành khăn để tìm thể tích <span class=\"math inline\">\\(V\\)</span> của <span class=\"math inline\">\\(S\\)</span> là bất tiện. Phác họa một vỏ trụ xấp xỉ điển hình. Chu vi và chiều cao của nó là bao nhiêu? Dùng vỏ trụ để tìm <span class=\"math inline\">\\(V\\)</span>.</p>\n<div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-6-3-9aacc51d/ex01.png\" alt=\"image\" /><br />\nHình cho Bài tập 1</p>\n</div>\n"
+    },
+    {
+      "number": 2,
+      "content": "<p><strong>2.</strong></p>\n<p>Gọi <span class=\"math inline\">\\(S\\)</span> là khối thu được khi quay miền trong hình quanh trục <span class=\"math inline\">\\(y\\)</span>. Phác họa một vỏ trụ điển hình và tìm chu vi, chiều cao của nó. Dùng vỏ trụ để tìm thể tích của <span class=\"math inline\">\\(S\\)</span>. Phương pháp này có thuận tiện hơn phương pháp hình vành khăn không?</p>\n<div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-6-3-9aacc51d/ex02.png\" alt=\"image\" /><br />\nHình cho Bài tập 2</p>\n</div>\n"
+    },
+    {
+      "number": 3,
+      "content": "<p><strong>3.</strong></p>\n<p><em>Yêu cầu chung (3–4):</em> Một khối được tạo thành bằng cách quay miền tô màu quanh đường thẳng đã chỉ định.</p>\n<p>(a) Thiết lập một tích phân theo phương pháp vỏ trụ để biểu diễn thể tích của khối.</p>\n<p>(b) Tính tích phân để tìm thể tích của khối.</p>\n<p>Quay quanh trục <span class=\"math inline\">\\(y\\)</span>.</p>\n<div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-6-3-9aacc51d/ex03.png\" alt=\"image\" /><br />\nHình cho Bài tập 3</p>\n</div>\n"
+    },
+    {
+      "number": 4,
+      "content": "<p><strong>4.</strong></p>\n<p><em>Yêu cầu chung (3–4):</em> Một khối được tạo thành bằng cách quay miền tô màu quanh đường thẳng đã chỉ định.</p>\n<p>(a) Thiết lập một tích phân theo phương pháp vỏ trụ để biểu diễn thể tích của khối.</p>\n<p>(b) Tính tích phân để tìm thể tích của khối.</p>\n<p>Quay quanh trục <span class=\"math inline\">\\(x\\)</span>.</p>\n<div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-6-3-9aacc51d/ex04.png\" alt=\"image\" /><br />\nHình cho Bài tập 4</p>\n</div>\n"
+    },
+    {
+      "number": 5,
+      "content": "<p><strong>5.</strong></p>\n<p><em>Yêu cầu chung (5–8):</em> Thiết lập, nhưng không tính, một tích phân biểu diễn thể tích của khối thu được khi quay miền giới hạn bởi các đường cong đã cho quanh đường thẳng đã chỉ định.</p>\n<p><span class=\"math inline\">\\(y=\\ln x\\)</span>, <span class=\"math inline\">\\(y=0\\)</span>, <span class=\"math inline\">\\(x=2\\)</span>; quay quanh trục <span class=\"math inline\">\\(y\\)</span>.</p>\n"
+    },
+    {
+      "number": 6,
+      "content": "<p><strong>6.</strong></p>\n<p><em>Yêu cầu chung (5–8):</em> Thiết lập, nhưng không tính, một tích phân biểu diễn thể tích của khối thu được khi quay miền giới hạn bởi các đường cong đã cho quanh đường thẳng đã chỉ định.</p>\n<p><span class=\"math inline\">\\(y=x^3\\)</span>, <span class=\"math inline\">\\(y=8\\)</span>, <span class=\"math inline\">\\(x=0\\)</span>; quay quanh trục <span class=\"math inline\">\\(x\\)</span>.</p>\n"
+    },
+    {
+      "number": 7,
+      "content": "<p><strong>7.</strong></p>\n<p><em>Yêu cầu chung (5–8):</em> Thiết lập, nhưng không tính, một tích phân biểu diễn thể tích của khối thu được khi quay miền giới hạn bởi các đường cong đã cho quanh đường thẳng đã chỉ định.</p>\n<p><span class=\"math inline\">\\(y=\\sin^{-1}x\\)</span>, <span class=\"math inline\">\\(y=\\pi/2\\)</span>, <span class=\"math inline\">\\(x=0\\)</span>; quay quanh <span class=\"math inline\">\\(y=3\\)</span>.</p>\n"
+    },
+    {
+      "number": 8,
+      "content": "<p><strong>8.</strong></p>\n<p><em>Yêu cầu chung (5–8):</em> Thiết lập, nhưng không tính, một tích phân biểu diễn thể tích của khối thu được khi quay miền giới hạn bởi các đường cong đã cho quanh đường thẳng đã chỉ định.</p>\n<p><span class=\"math inline\">\\(y=4x-x^2\\)</span>, <span class=\"math inline\">\\(y=x\\)</span>; quay quanh <span class=\"math inline\">\\(x=7\\)</span>.</p>\n"
+    },
+    {
+      "number": 9,
+      "content": "<p><strong>9.</strong></p>\n<p><em>Yêu cầu chung (9–14):</em> Dùng phương pháp vỏ trụ để tìm thể tích tạo thành khi quay quanh trục <span class=\"math inline\">\\(y\\)</span> miền giới hạn bởi các đường cong đã cho.</p>\n<p><span class=\"math inline\">\\(y=\\sqrt{x}\\)</span>, <span class=\"math inline\">\\(y=0\\)</span>, <span class=\"math inline\">\\(x=4\\)</span>.</p>\n"
+    },
+    {
+      "number": 10,
+      "content": "<p><strong>10.</strong></p>\n<p><em>Yêu cầu chung (9–14):</em> Dùng phương pháp vỏ trụ để tìm thể tích tạo thành khi quay quanh trục <span class=\"math inline\">\\(y\\)</span> miền giới hạn bởi các đường cong đã cho.</p>\n<p><span class=\"math inline\">\\(y=x^3\\)</span>, <span class=\"math inline\">\\(y=0\\)</span>, <span class=\"math inline\">\\(x=1\\)</span>, <span class=\"math inline\">\\(x=2\\)</span>.</p>\n"
+    },
+    {
+      "number": 11,
+      "content": "<p><strong>11.</strong></p>\n<p><em>Yêu cầu chung (9–14):</em> Dùng phương pháp vỏ trụ để tìm thể tích tạo thành khi quay quanh trục <span class=\"math inline\">\\(y\\)</span> miền giới hạn bởi các đường cong đã cho.</p>\n<p><span class=\"math inline\">\\(y=1/x\\)</span>, <span class=\"math inline\">\\(y=0\\)</span>, <span class=\"math inline\">\\(x=1\\)</span>, <span class=\"math inline\">\\(x=4\\)</span>.</p>\n"
+    },
+    {
+      "number": 12,
+      "content": "<p><strong>12.</strong></p>\n<p><em>Yêu cầu chung (9–14):</em> Dùng phương pháp vỏ trụ để tìm thể tích tạo thành khi quay quanh trục <span class=\"math inline\">\\(y\\)</span> miền giới hạn bởi các đường cong đã cho.</p>\n<p><span class=\"math inline\">\\(y=e^{-x^2}\\)</span>, <span class=\"math inline\">\\(y=0\\)</span>, <span class=\"math inline\">\\(x=0\\)</span>, <span class=\"math inline\">\\(x=1\\)</span>.</p>\n"
+    },
+    {
+      "number": 13,
+      "content": "<p><strong>13.</strong></p>\n<p><em>Yêu cầu chung (9–14):</em> Dùng phương pháp vỏ trụ để tìm thể tích tạo thành khi quay quanh trục <span class=\"math inline\">\\(y\\)</span> miền giới hạn bởi các đường cong đã cho.</p>\n<p><span class=\"math inline\">\\(y=\\sqrt{5+x^2}\\)</span>, <span class=\"math inline\">\\(y=0\\)</span>, <span class=\"math inline\">\\(x=0\\)</span>, <span class=\"math inline\">\\(x=2\\)</span>.</p>\n"
+    },
+    {
+      "number": 14,
+      "content": "<p><strong>14.</strong></p>\n<p><em>Yêu cầu chung (9–14):</em> Dùng phương pháp vỏ trụ để tìm thể tích tạo thành khi quay quanh trục <span class=\"math inline\">\\(y\\)</span> miền giới hạn bởi các đường cong đã cho.</p>\n<p><span class=\"math inline\">\\(y=4x-x^2\\)</span>, <span class=\"math inline\">\\(y=x\\)</span>.</p>\n"
+    },
+    {
+      "number": 15,
+      "content": "<p><strong>15.</strong></p>\n<p><em>Yêu cầu chung (15–20):</em> Dùng phương pháp vỏ trụ để tìm thể tích của khối thu được khi quay quanh trục <span class=\"math inline\">\\(x\\)</span> miền giới hạn bởi các đường cong đã cho.</p>\n<p><span class=\"math inline\">\\(xy=1\\)</span>, <span class=\"math inline\">\\(x=0\\)</span>, <span class=\"math inline\">\\(y=1\\)</span>, <span class=\"math inline\">\\(y=3\\)</span>.</p>\n"
+    },
+    {
+      "number": 16,
+      "content": "<p><strong>16.</strong></p>\n<p><em>Yêu cầu chung (15–20):</em> Dùng phương pháp vỏ trụ để tìm thể tích của khối thu được khi quay quanh trục <span class=\"math inline\">\\(x\\)</span> miền giới hạn bởi các đường cong đã cho.</p>\n<p><span class=\"math inline\">\\(y=\\sqrt{x}\\)</span>, <span class=\"math inline\">\\(x=0\\)</span>, <span class=\"math inline\">\\(y=2\\)</span>.</p>\n"
+    },
+    {
+      "number": 17,
+      "content": "<p><strong>17.</strong></p>\n<p><em>Yêu cầu chung (15–20):</em> Dùng phương pháp vỏ trụ để tìm thể tích của khối thu được khi quay quanh trục <span class=\"math inline\">\\(x\\)</span> miền giới hạn bởi các đường cong đã cho.</p>\n<p><span class=\"math inline\">\\(y=x^{3/2}\\)</span>, <span class=\"math inline\">\\(y=8\\)</span>, <span class=\"math inline\">\\(x=0\\)</span>.</p>\n"
+    },
+    {
+      "number": 18,
+      "content": "<p><strong>18.</strong></p>\n<p><em>Yêu cầu chung (15–20):</em> Dùng phương pháp vỏ trụ để tìm thể tích của khối thu được khi quay quanh trục <span class=\"math inline\">\\(x\\)</span> miền giới hạn bởi các đường cong đã cho.</p>\n<p><span class=\"math inline\">\\(x=-3y^2+12y-9\\)</span>, <span class=\"math inline\">\\(x=0\\)</span>.</p>\n"
+    },
+    {
+      "number": 19,
+      "content": "<p><strong>19.</strong></p>\n<p><em>Yêu cầu chung (15–20):</em> Dùng phương pháp vỏ trụ để tìm thể tích của khối thu được khi quay quanh trục <span class=\"math inline\">\\(x\\)</span> miền giới hạn bởi các đường cong đã cho.</p>\n<p><span class=\"math inline\">\\(x=1+(y-2)^2\\)</span>, <span class=\"math inline\">\\(x=2\\)</span>.</p>\n"
+    },
+    {
+      "number": 20,
+      "content": "<p><strong>20.</strong></p>\n<p><em>Yêu cầu chung (15–20):</em> Dùng phương pháp vỏ trụ để tìm thể tích của khối thu được khi quay quanh trục <span class=\"math inline\">\\(x\\)</span> miền giới hạn bởi các đường cong đã cho.</p>\n<p><span class=\"math inline\">\\(x+y=4\\)</span>, <span class=\"math inline\">\\(x=y^2-4y+4\\)</span>.</p>\n"
+    },
+    {
+      "number": 21,
+      "content": "<p><strong>21.</strong></p>\n<p><em>Yêu cầu chung (21–22):</em> Miền giới hạn bởi các đường cong đã cho được quay quanh trục đã chỉ định. Tìm thể tích khối thu được bằng cách dùng (a) <span class=\"math inline\">\\(x\\)</span> làm biến tích phân và (b) <span class=\"math inline\">\\(y\\)</span> làm biến tích phân.</p>\n<p><span class=\"math inline\">\\(y=x^2\\)</span>, <span class=\"math inline\">\\(y=8\\sqrt{x}\\)</span>; quay quanh trục <span class=\"math inline\">\\(y\\)</span>.</p>\n"
+    },
+    {
+      "number": 22,
+      "content": "<p><strong>22.</strong></p>\n<p><em>Yêu cầu chung (21–22):</em> Miền giới hạn bởi các đường cong đã cho được quay quanh trục đã chỉ định. Tìm thể tích khối thu được bằng cách dùng (a) <span class=\"math inline\">\\(x\\)</span> làm biến tích phân và (b) <span class=\"math inline\">\\(y\\)</span> làm biến tích phân.</p>\n<p><span class=\"math inline\">\\(y=x^3\\)</span>, <span class=\"math inline\">\\(y=4x^2\\)</span>; quay quanh trục <span class=\"math inline\">\\(x\\)</span>.</p>\n"
+    },
+    {
+      "number": 23,
+      "content": "<p><strong>23.</strong></p>\n<p><em>Yêu cầu chung (23–24):</em> Một khối được tạo thành bằng cách quay miền tô màu quanh đường thẳng đã chỉ định.</p>\n<p>(a) Phác họa khối và một vỏ trụ xấp xỉ điển hình.</p>\n<p>(b) Dùng phương pháp vỏ trụ để thiết lập một tích phân biểu diễn thể tích của khối.</p>\n<p>(c) Tính tích phân để tìm thể tích.</p>\n<p>Quay quanh <span class=\"math inline\">\\(x=-2\\)</span>.</p>\n<div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-6-3-9aacc51d/ex23.png\" alt=\"image\" /><br />\nHình cho Bài tập 23</p>\n</div>\n"
+    },
+    {
+      "number": 24,
+      "content": "<p><strong>24.</strong></p>\n<p><em>Yêu cầu chung (23–24):</em> Một khối được tạo thành bằng cách quay miền tô màu quanh đường thẳng đã chỉ định.</p>\n<p>(a) Phác họa khối và một vỏ trụ xấp xỉ điển hình.</p>\n<p>(b) Dùng phương pháp vỏ trụ để thiết lập một tích phân biểu diễn thể tích của khối.</p>\n<p>(c) Tính tích phân để tìm thể tích.</p>\n<p>Quay quanh <span class=\"math inline\">\\(y=-1\\)</span>.</p>\n<div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-6-3-9aacc51d/ex24.png\" alt=\"image\" /><br />\nHình cho Bài tập 24</p>\n</div>\n"
+    },
+    {
+      "number": 25,
+      "content": "<p><strong>25.</strong></p>\n<p><em>Yêu cầu chung (25–30):</em> Dùng phương pháp vỏ trụ để tìm thể tích tạo thành khi quay miền giới hạn bởi các đường cong đã cho quanh trục đã chỉ định.</p>\n<p><span class=\"math inline\">\\(y=x^3\\)</span>, <span class=\"math inline\">\\(y=8\\)</span>, <span class=\"math inline\">\\(x=0\\)</span>; quay quanh <span class=\"math inline\">\\(x=3\\)</span>.</p>\n"
+    },
+    {
+      "number": 26,
+      "content": "<p><strong>26.</strong></p>\n<p><em>Yêu cầu chung (25–30):</em> Dùng phương pháp vỏ trụ để tìm thể tích tạo thành khi quay miền giới hạn bởi các đường cong đã cho quanh trục đã chỉ định.</p>\n<p><span class=\"math inline\">\\(y=4-2x\\)</span>, <span class=\"math inline\">\\(y=0\\)</span>, <span class=\"math inline\">\\(x=0\\)</span>; quay quanh <span class=\"math inline\">\\(x=-1\\)</span>.</p>\n"
+    },
+    {
+      "number": 27,
+      "content": "<p><strong>27.</strong></p>\n<p><em>Yêu cầu chung (25–30):</em> Dùng phương pháp vỏ trụ để tìm thể tích tạo thành khi quay miền giới hạn bởi các đường cong đã cho quanh trục đã chỉ định.</p>\n<p><span class=\"math inline\">\\(y=4x-x^2\\)</span>, <span class=\"math inline\">\\(y=3\\)</span>; quay quanh <span class=\"math inline\">\\(x=1\\)</span>.</p>\n"
+    },
+    {
+      "number": 28,
+      "content": "<p><strong>28.</strong></p>\n<p><em>Yêu cầu chung (25–30):</em> Dùng phương pháp vỏ trụ để tìm thể tích tạo thành khi quay miền giới hạn bởi các đường cong đã cho quanh trục đã chỉ định.</p>\n<p><span class=\"math inline\">\\(y=\\sqrt{x}\\)</span>, <span class=\"math inline\">\\(x=2y\\)</span>; quay quanh <span class=\"math inline\">\\(x=5\\)</span>.</p>\n"
+    },
+    {
+      "number": 29,
+      "content": "<p><strong>29.</strong></p>\n<p><em>Yêu cầu chung (25–30):</em> Dùng phương pháp vỏ trụ để tìm thể tích tạo thành khi quay miền giới hạn bởi các đường cong đã cho quanh trục đã chỉ định.</p>\n<p><span class=\"math inline\">\\(x=2y^2\\)</span>, <span class=\"math inline\">\\(y\\ge0\\)</span>, <span class=\"math inline\">\\(x=2\\)</span>; quay quanh <span class=\"math inline\">\\(y=2\\)</span>.</p>\n"
+    },
+    {
+      "number": 30,
+      "content": "<p><strong>30.</strong></p>\n<p><em>Yêu cầu chung (25–30):</em> Dùng phương pháp vỏ trụ để tìm thể tích tạo thành khi quay miền giới hạn bởi các đường cong đã cho quanh trục đã chỉ định.</p>\n<p><span class=\"math inline\">\\(x=2y^2\\)</span>, <span class=\"math inline\">\\(x=y^2+1\\)</span>; quay quanh <span class=\"math inline\">\\(y=-2\\)</span>.</p>\n"
+    },
+    {
+      "number": 31,
+      "content": "<p><strong>31.</strong></p>\n<p><em>Yêu cầu chung (31–36):</em> (a) Thiết lập một tích phân biểu diễn thể tích của khối thu được khi quay miền giới hạn bởi đường cong đã cho quanh trục đã chỉ định.</p>\n<p>(b) Dùng máy tính bỏ túi hoặc máy tính để tính tích phân chính xác đến năm chữ số thập phân.</p>\n<p><span class=\"math inline\">\\(y=xe^{-x}\\)</span>, <span class=\"math inline\">\\(y=0\\)</span>, <span class=\"math inline\">\\(x=2\\)</span>; quay quanh trục <span class=\"math inline\">\\(y\\)</span>.</p>\n"
+    },
+    {
+      "number": 32,
+      "content": "<p><strong>32.</strong></p>\n<p><em>Yêu cầu chung (31–36):</em> (a) Thiết lập một tích phân biểu diễn thể tích của khối thu được khi quay miền giới hạn bởi đường cong đã cho quanh trục đã chỉ định.</p>\n<p>(b) Dùng máy tính bỏ túi hoặc máy tính để tính tích phân chính xác đến năm chữ số thập phân.</p>\n<p><span class=\"math inline\">\\(y=\\tan x\\)</span>, <span class=\"math inline\">\\(y=0\\)</span>, <span class=\"math inline\">\\(x=\\pi/4\\)</span>; quay quanh <span class=\"math inline\">\\(x=\\pi/2\\)</span>.</p>\n"
+    },
+    {
+      "number": 33,
+      "content": "<p><strong>33.</strong></p>\n<p><em>Yêu cầu chung (31–36):</em> (a) Thiết lập một tích phân biểu diễn thể tích của khối thu được khi quay miền giới hạn bởi đường cong đã cho quanh trục đã chỉ định.</p>\n<p>(b) Dùng máy tính bỏ túi hoặc máy tính để tính tích phân chính xác đến năm chữ số thập phân.</p>\n<p><span class=\"math inline\">\\(y=\\cos^4x\\)</span>, <span class=\"math inline\">\\(y=-\\cos^4x\\)</span>, <span class=\"math inline\">\\(-\\pi/2\\le x\\le\\pi/2\\)</span>; quay quanh <span class=\"math inline\">\\(x=\\pi\\)</span>.</p>\n"
+    },
+    {
+      "number": 34,
+      "content": "<p><strong>34.</strong></p>\n<p><em>Yêu cầu chung (31–36):</em> (a) Thiết lập một tích phân biểu diễn thể tích của khối thu được khi quay miền giới hạn bởi đường cong đã cho quanh trục đã chỉ định.</p>\n<p>(b) Dùng máy tính bỏ túi hoặc máy tính để tính tích phân chính xác đến năm chữ số thập phân.</p>\n<p><span class=\"math inline\">\\(y=x\\)</span>, <span class=\"math inline\">\\(y=2x/(1+x^3)\\)</span>; quay quanh <span class=\"math inline\">\\(x=-1\\)</span>.</p>\n"
+    },
+    {
+      "number": 35,
+      "content": "<p><strong>35.</strong></p>\n<p><em>Yêu cầu chung (31–36):</em> (a) Thiết lập một tích phân biểu diễn thể tích của khối thu được khi quay miền giới hạn bởi đường cong đã cho quanh trục đã chỉ định.</p>\n<p>(b) Dùng máy tính bỏ túi hoặc máy tính để tính tích phân chính xác đến năm chữ số thập phân.</p>\n<p><span class=\"math inline\">\\(x=\\sqrt{\\sin y}\\)</span>, <span class=\"math inline\">\\(0\\le y\\le\\pi\\)</span>, <span class=\"math inline\">\\(x=0\\)</span>; quay quanh <span class=\"math inline\">\\(y=4\\)</span>.</p>\n"
+    },
+    {
+      "number": 36,
+      "content": "<p><strong>36.</strong></p>\n<p><em>Yêu cầu chung (31–36):</em> (a) Thiết lập một tích phân biểu diễn thể tích của khối thu được khi quay miền giới hạn bởi đường cong đã cho quanh trục đã chỉ định.</p>\n<p>(b) Dùng máy tính bỏ túi hoặc máy tính để tính tích phân chính xác đến năm chữ số thập phân.</p>\n<p><span class=\"math inline\">\\(x^2-y^2=7\\)</span>, <span class=\"math inline\">\\(x=4\\)</span>; quay quanh <span class=\"math inline\">\\(y=5\\)</span>.</p>\n"
+    },
+    {
+      "number": 37,
+      "content": "<p><strong>37.</strong></p>\n<p>Dùng Quy tắc trung điểm với <span class=\"math inline\">\\(n=5\\)</span> để ước lượng thể tích thu được khi quay quanh trục <span class=\"math inline\">\\(y\\)</span> miền nằm dưới đường cong <span class=\"math inline\">\\(y=\\sqrt{1+x^3}\\)</span>, <span class=\"math inline\">\\(0\\le x\\le1\\)</span>.</p>\n"
+    },
+    {
+      "number": 38,
+      "content": "<p><strong>38.</strong></p>\n<p>Nếu quay miền trong hình quanh trục <span class=\"math inline\">\\(y\\)</span> để tạo một khối, hãy dùng Quy tắc trung điểm với <span class=\"math inline\">\\(n=5\\)</span> để ước lượng thể tích của khối.</p>\n<div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-6-3-9aacc51d/ex38.png\" alt=\"image\" /><br />\nHình cho Bài tập 38</p>\n</div>\n"
+    },
+    {
+      "number": 39,
+      "content": "<p><strong>39.</strong></p>\n<p><em>Yêu cầu chung (39–42):</em> Mỗi tích phân sau biểu diễn thể tích của một khối. Hãy mô tả khối ấy.</p>\n<p><span class=\"math inline\">\\(\\displaystyle\\int_0^3 2\\pi x^5\\,dx\\)</span>.</p>\n"
+    },
+    {
+      "number": 40,
+      "content": "<p><strong>40.</strong></p>\n<p><em>Yêu cầu chung (39–42):</em> Mỗi tích phân sau biểu diễn thể tích của một khối. Hãy mô tả khối ấy.</p>\n<p><span class=\"math inline\">\\(\\displaystyle\\int_1^3 2\\pi y\\ln y\\,dy\\)</span>.</p>\n"
+    },
+    {
+      "number": 41,
+      "content": "<p><strong>41.</strong></p>\n<p><em>Yêu cầu chung (39–42):</em> Mỗi tích phân sau biểu diễn thể tích của một khối. Hãy mô tả khối ấy.</p>\n<p><span class=\"math inline\">\\(\\displaystyle2\\pi\\int_1^4\\frac{y+2}{y^2}\\,dy\\)</span>.</p>\n"
+    },
+    {
+      "number": 42,
+      "content": "<p><strong>42.</strong></p>\n<p><em>Yêu cầu chung (39–42):</em> Mỗi tích phân sau biểu diễn thể tích của một khối. Hãy mô tả khối ấy.</p>\n<p><span class=\"math inline\">\\(\\displaystyle\\int_0^1 2\\pi(2-x)(3^x-2^x)\\,dx\\)</span>.</p>\n"
+    },
+    {
+      "number": 43,
+      "content": "<p><strong>43.</strong></p>\n<p><em>Yêu cầu chung (43–44):</em> Dùng đồ thị để ước lượng hoành độ các giao điểm của các đường cong đã cho. Sau đó, dùng thông tin này và máy tính bỏ túi hoặc máy tính để ước lượng thể tích của khối thu được khi quay quanh trục <span class=\"math inline\">\\(y\\)</span> miền giới hạn bởi các đường cong ấy.</p>\n<p><span class=\"math inline\">\\(y=x^2-2x\\)</span>, <span class=\"math inline\">\\(y=\\dfrac{x}{x^2+1}\\)</span>.</p>\n"
+    },
+    {
+      "number": 44,
+      "content": "<p><strong>44.</strong></p>\n<p><em>Yêu cầu chung (43–44):</em> Dùng đồ thị để ước lượng hoành độ các giao điểm của các đường cong đã cho. Sau đó, dùng thông tin này và máy tính bỏ túi hoặc máy tính để ước lượng thể tích của khối thu được khi quay quanh trục <span class=\"math inline\">\\(y\\)</span> miền giới hạn bởi các đường cong ấy.</p>\n<p><span class=\"math inline\">\\(y=e^{\\sin x}\\)</span>, <span class=\"math inline\">\\(y=x^2-4x+5\\)</span>.</p>\n"
+    },
+    {
+      "number": 45,
+      "content": "<p><strong>45.</strong></p>\n<p><em>Yêu cầu chung (45–46):</em> Dùng một hệ thống đại số máy tính để tìm thể tích chính xác của khối thu được khi quay miền giới hạn bởi các đường cong đã cho quanh đường thẳng đã chỉ định.</p>\n<p><span class=\"math inline\">\\(y=\\sin^2x\\)</span>, <span class=\"math inline\">\\(y=\\sin^4x\\)</span>, <span class=\"math inline\">\\(0\\le x\\le\\pi\\)</span>; quay quanh <span class=\"math inline\">\\(x=\\pi/2\\)</span>.</p>\n"
+    },
+    {
+      "number": 46,
+      "content": "<p><strong>46.</strong></p>\n<p><em>Yêu cầu chung (45–46):</em> Dùng một hệ thống đại số máy tính để tìm thể tích chính xác của khối thu được khi quay miền giới hạn bởi các đường cong đã cho quanh đường thẳng đã chỉ định.</p>\n<p><span class=\"math inline\">\\(y=x^3\\sin x\\)</span>, <span class=\"math inline\">\\(y=0\\)</span>, <span class=\"math inline\">\\(0\\le x\\le\\pi\\)</span>; quay quanh <span class=\"math inline\">\\(x=-1\\)</span>.</p>\n"
+    },
+    {
+      "number": 47,
+      "content": "<p><strong>47.</strong></p>\n<p><em>Yêu cầu chung (47–52):</em> Một khối được tạo thành bằng cách quay miền tô màu quanh đường thẳng đã chỉ định.</p>\n<p>(a) Thiết lập một tích phân bằng bất kỳ phương pháp nào để tìm thể tích của khối.</p>\n<p>(b) Tính tích phân để tìm thể tích của khối.</p>\n<p>Quay quanh trục <span class=\"math inline\">\\(y\\)</span>.</p>\n<div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-6-3-9aacc51d/ex47.png\" alt=\"image\" /><br />\nHình cho Bài tập 47</p>\n</div>\n"
+    },
+    {
+      "number": 48,
+      "content": "<p><strong>48.</strong></p>\n<p><em>Yêu cầu chung (47–52):</em> Một khối được tạo thành bằng cách quay miền tô màu quanh đường thẳng đã chỉ định.</p>\n<p>(a) Thiết lập một tích phân bằng bất kỳ phương pháp nào để tìm thể tích của khối.</p>\n<p>(b) Tính tích phân để tìm thể tích của khối.</p>\n<p>Quay quanh trục <span class=\"math inline\">\\(x\\)</span>.</p>\n<div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-6-3-9aacc51d/ex48.png\" alt=\"image\" /><br />\nHình cho Bài tập 48</p>\n</div>\n"
+    },
+    {
+      "number": 49,
+      "content": "<p><strong>49.</strong></p>\n<p><em>Yêu cầu chung (47–52):</em> Một khối được tạo thành bằng cách quay miền tô màu quanh đường thẳng đã chỉ định.</p>\n<p>(a) Thiết lập một tích phân bằng bất kỳ phương pháp nào để tìm thể tích của khối.</p>\n<p>(b) Tính tích phân để tìm thể tích của khối.</p>\n<p>Quay quanh trục <span class=\"math inline\">\\(x\\)</span>.</p>\n<div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-6-3-9aacc51d/ex49.png\" alt=\"image\" /><br />\nHình cho Bài tập 49</p>\n</div>\n"
+    },
+    {
+      "number": 50,
+      "content": "<p><strong>50.</strong></p>\n<p><em>Yêu cầu chung (47–52):</em> Một khối được tạo thành bằng cách quay miền tô màu quanh đường thẳng đã chỉ định.</p>\n<p>(a) Thiết lập một tích phân bằng bất kỳ phương pháp nào để tìm thể tích của khối.</p>\n<p>(b) Tính tích phân để tìm thể tích của khối.</p>\n<p>Quay quanh trục <span class=\"math inline\">\\(y\\)</span>.</p>\n<div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-6-3-9aacc51d/ex50.png\" alt=\"image\" /><br />\nHình cho Bài tập 50</p>\n</div>\n"
+    },
+    {
+      "number": 51,
+      "content": "<p><strong>51.</strong></p>\n<p><em>Yêu cầu chung (47–52):</em> Một khối được tạo thành bằng cách quay miền tô màu quanh đường thẳng đã chỉ định.</p>\n<p>(a) Thiết lập một tích phân bằng bất kỳ phương pháp nào để tìm thể tích của khối.</p>\n<p>(b) Tính tích phân để tìm thể tích của khối.</p>\n<p>Quay quanh đường thẳng <span class=\"math inline\">\\(x=-2\\)</span>.</p>\n<div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-6-3-9aacc51d/ex51.png\" alt=\"image\" /><br />\nHình cho Bài tập 51</p>\n</div>\n"
+    },
+    {
+      "number": 52,
+      "content": "<p><strong>52.</strong></p>\n<p><em>Yêu cầu chung (47–52):</em> Một khối được tạo thành bằng cách quay miền tô màu quanh đường thẳng đã chỉ định.</p>\n<p>(a) Thiết lập một tích phân bằng bất kỳ phương pháp nào để tìm thể tích của khối.</p>\n<p>(b) Tính tích phân để tìm thể tích của khối.</p>\n<p>Quay quanh đường thẳng <span class=\"math inline\">\\(y=3\\)</span>.</p>\n<div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-6-3-9aacc51d/ex52.png\" alt=\"image\" /><br />\nHình cho Bài tập 52</p>\n</div>\n"
+    },
+    {
+      "number": 53,
+      "content": "<p><strong>53.</strong></p>\n<p><em>Yêu cầu chung (53–59):</em> Miền giới hạn bởi các đường cong đã cho được quay quanh trục đã chỉ định. Tìm thể tích khối thu được bằng bất kỳ phương pháp nào.</p>\n<p><span class=\"math inline\">\\(y=-x^2+6x-8\\)</span>, <span class=\"math inline\">\\(y=0\\)</span>; quay quanh trục <span class=\"math inline\">\\(y\\)</span>.</p>\n"
+    },
+    {
+      "number": 54,
+      "content": "<p><strong>54.</strong></p>\n<p><em>Yêu cầu chung (53–59):</em> Miền giới hạn bởi các đường cong đã cho được quay quanh trục đã chỉ định. Tìm thể tích khối thu được bằng bất kỳ phương pháp nào.</p>\n<p><span class=\"math inline\">\\(y=-x^2+6x-8\\)</span>, <span class=\"math inline\">\\(y=0\\)</span>; quay quanh trục <span class=\"math inline\">\\(x\\)</span>.</p>\n"
+    },
+    {
+      "number": 55,
+      "content": "<p><strong>55.</strong></p>\n<p><em>Yêu cầu chung (53–59):</em> Miền giới hạn bởi các đường cong đã cho được quay quanh trục đã chỉ định. Tìm thể tích khối thu được bằng bất kỳ phương pháp nào.</p>\n<p><span class=\"math inline\">\\(y^2-x^2=1\\)</span>, <span class=\"math inline\">\\(y=2\\)</span>; quay quanh trục <span class=\"math inline\">\\(x\\)</span>.</p>\n"
+    },
+    {
+      "number": 56,
+      "content": "<p><strong>56.</strong></p>\n<p><em>Yêu cầu chung (53–59):</em> Miền giới hạn bởi các đường cong đã cho được quay quanh trục đã chỉ định. Tìm thể tích khối thu được bằng bất kỳ phương pháp nào.</p>\n<p><span class=\"math inline\">\\(y^2-x^2=1\\)</span>, <span class=\"math inline\">\\(y=2\\)</span>; quay quanh trục <span class=\"math inline\">\\(y\\)</span>.</p>\n"
+    },
+    {
+      "number": 57,
+      "content": "<p><strong>57.</strong></p>\n<p><em>Yêu cầu chung (53–59):</em> Miền giới hạn bởi các đường cong đã cho được quay quanh trục đã chỉ định. Tìm thể tích khối thu được bằng bất kỳ phương pháp nào.</p>\n<p><span class=\"math inline\">\\(x^2+(y-1)^2=1\\)</span>; quay quanh trục <span class=\"math inline\">\\(y\\)</span>.</p>\n"
+    },
+    {
+      "number": 58,
+      "content": "<p><strong>58.</strong></p>\n<p><em>Yêu cầu chung (53–59):</em> Miền giới hạn bởi các đường cong đã cho được quay quanh trục đã chỉ định. Tìm thể tích khối thu được bằng bất kỳ phương pháp nào.</p>\n<p><span class=\"math inline\">\\(x=(y-3)^2\\)</span>, <span class=\"math inline\">\\(x=4\\)</span>; quay quanh <span class=\"math inline\">\\(y=1\\)</span>.</p>\n"
+    },
+    {
+      "number": 59,
+      "content": "<p><strong>59.</strong></p>\n<p><em>Yêu cầu chung (53–59):</em> Miền giới hạn bởi các đường cong đã cho được quay quanh trục đã chỉ định. Tìm thể tích khối thu được bằng bất kỳ phương pháp nào.</p>\n<p><span class=\"math inline\">\\(x=(y-1)^2\\)</span>, <span class=\"math inline\">\\(x-y=1\\)</span>; quay quanh <span class=\"math inline\">\\(x=-1\\)</span>.</p>\n"
+    },
+    {
+      "number": 60,
+      "content": "<p><strong>60.</strong></p>\n<p>Gọi <span class=\"math inline\">\\(T\\)</span> là miền tam giác có các đỉnh <span class=\"math inline\">\\((0,0)\\)</span>, <span class=\"math inline\">\\((1,0)\\)</span> và <span class=\"math inline\">\\((1,2)\\)</span>; gọi <span class=\"math inline\">\\(V\\)</span> là thể tích khối tạo thành khi quay <span class=\"math inline\">\\(T\\)</span> quanh đường thẳng <span class=\"math inline\">\\(x=a\\)</span>, với <span class=\"math inline\">\\(a&gt;1\\)</span>. Biểu diễn <span class=\"math inline\">\\(a\\)</span> theo <span class=\"math inline\">\\(V\\)</span>.</p>\n"
+    },
+    {
+      "number": 61,
+      "content": "<p><strong>61.</strong></p>\n<p><em>Yêu cầu chung (61–63):</em> Dùng vỏ trụ để tìm thể tích của khối.</p>\n<p>Khối cầu bán kính <span class=\"math inline\">\\(r\\)</span>.</p>\n"
+    },
+    {
+      "number": 62,
+      "content": "<p><strong>62.</strong></p>\n<p><em>Yêu cầu chung (61–63):</em> Dùng vỏ trụ để tìm thể tích của khối.</p>\n<p>Khối xuyến trong Bài tập 6.2.75.</p>\n"
+    },
+    {
+      "number": 63,
+      "content": "<p><strong>63.</strong></p>\n<p><em>Yêu cầu chung (61–63):</em> Dùng vỏ trụ để tìm thể tích của khối.</p>\n<p>Khối nón tròn xoay có chiều cao <span class=\"math inline\">\\(h\\)</span> và bán kính đáy <span class=\"math inline\">\\(r\\)</span>.</p>\n"
+    },
+    {
+      "number": 64,
+      "content": "<p><strong>64.</strong></p>\n<p>Giả sử ta làm các vòng giữ khăn ăn bằng cách khoan những lỗ có đường kính khác nhau xuyên qua hai quả cầu gỗ (cũng có đường kính khác nhau). Ta nhận thấy cả hai vòng giữ khăn đều có cùng chiều cao <span class=\"math inline\">\\(h\\)</span>, như trong hình.</p>\n<p>(a) Hãy dự đoán vòng nào chứa nhiều gỗ hơn.</p>\n<p>(b) Kiểm tra dự đoán của bạn: dùng vỏ trụ để tính thể tích vòng giữ khăn được tạo thành bằng cách khoan một lỗ bán kính <span class=\"math inline\">\\(r\\)</span> xuyên qua tâm khối cầu bán kính <span class=\"math inline\">\\(R\\)</span>, và biểu diễn kết quả theo <span class=\"math inline\">\\(h\\)</span>.</p>\n<div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-6-3-9aacc51d/ex64.png\" alt=\"image\" /><br />\nHình cho Bài tập 64</p>\n</div>\n"
+    }
+  ]
+}

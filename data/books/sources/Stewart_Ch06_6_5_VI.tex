@@ -1,0 +1,189 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage{fontspec}\setmainfont{Latin Modern Roman}\setsansfont{DejaVu Sans}
+\usepackage{amsmath,amssymb,graphicx,geometry,enumitem,needspace,longtable,booktabs,fancyhdr,hyperref}
+\geometry{left=28mm,right=23mm,top=24mm,bottom=24mm}
+\hypersetup{unicode=true,colorlinks=true,linkcolor=black,urlcolor=blue,pdftitle={Giải tích §6.5 — Giá trị trung bình của hàm số}}
+\setlength{\parindent}{1.2em}\setlength{\parskip}{4pt}\setlength{\headheight}{16pt}
+\pagestyle{fancy}\fancyhf{}\fancyhead[L]{\small Chương 6. Ứng dụng của tích phân}\fancyhead[R]{\small §6.5}\fancyfoot[C]{\thepage}
+\newcommand{\fig}[3][.68]{\begin{center}\begin{minipage}{\linewidth}\centering\includegraphics[width=#1\linewidth]{assets/#2.png}\\{\small #3}\end{minipage}\end{center}}
+\newcommand{\ex}[1]{\par\medskip\noindent\textbf{Ví dụ #1.}\ }
+\newcommand{\sol}{\par\nopagebreak[4]\noindent\textit{Lời giải.}\ }
+\newcommand{\bt}[1]{\par\smallskip\Needspace{5\baselineskip}\noindent\textbf{#1.}\ }
+\newcommand{\group}[1]{\par\Needspace{11\baselineskip}\medskip\noindent\textbf{#1}\par\nopagebreak[4]}
+\newcommand{\gint}[1]{\left[\!\left[#1\right]\!\right]}
+\allowdisplaybreaks[2]
+\DeclareMathOperator{\sech}{sech}
+\DeclareMathOperator{\csch}{csch}
+\DeclareMathOperator{\arccot}{arccot}
+
+\newcommand{\prj}[1]{\bt{#1}}
+\begin{document}
+\begin{center}{\LARGE\bfseries 6.5 — Giá trị trung bình của hàm số}\end{center}
+Ta dễ dàng tính giá trị trung bình của một số hữu hạn các số $y_1,y_2,\ldots,y_n$:
+\[y_{\mathrm{avg}}=\frac{y_1+y_2+\cdots+y_n}{n}.\]
+Nhưng làm thế nào để tính nhiệt độ trung bình trong một ngày nếu có thể có vô số số đo nhiệt độ? Hình 1 cho đồ thị của một hàm nhiệt độ $T(t)$, trong đó $t$ được đo bằng giờ và $T$ bằng °C, cùng một giá trị phỏng đoán cho nhiệt độ trung bình $T_{\mathrm{avg}}$.
+\fig[.44]{fig01}{Hình 1}
+Nói chung, ta hãy thử tính giá trị trung bình của hàm số $y=f(x)$, $a\le x\le b$. Trước hết, chia khoảng $[a,b]$ thành $n$ khoảng con bằng nhau, mỗi khoảng có độ dài $\Delta x=(b-a)/n$. Sau đó chọn các điểm $x_1^*,\ldots,x_n^*$ trong những khoảng con liên tiếp và tính trung bình của các số $f(x_1^*),\ldots,f(x_n^*)$:
+\[\frac{f(x_1^*)+\cdots+f(x_n^*)}{n}.\]
+(Chẳng hạn, nếu $f$ biểu diễn một hàm nhiệt độ và $n=24$, điều này có nghĩa là ta đo nhiệt độ mỗi giờ, rồi lấy trung bình các số đo.) Vì $\Delta x=(b-a)/n$, ta có thể viết $n=(b-a)/\Delta x$, và giá trị trung bình trở thành
+\begin{align*}
+\frac{f(x_1^*)+\cdots+f(x_n^*)}{\dfrac{b-a}{\Delta x}}
+&=\frac1{b-a}[f(x_1^*)+\cdots+f(x_n^*)]\Delta x\\
+&=\frac1{b-a}[f(x_1^*)\Delta x+\cdots+f(x_n^*)\Delta x]\\
+&=\frac1{b-a}\sum_{i=1}^n f(x_i^*)\Delta x.
+\end{align*}
+Nếu cho $n$ tăng, ta sẽ tính trung bình của một số lượng lớn các giá trị được lấy gần nhau. (Chẳng hạn, ta có thể lấy trung bình các số đo nhiệt độ ghi mỗi phút, hoặc thậm chí mỗi giây.) Theo định nghĩa tích phân xác định, giá trị giới hạn là
+\[\lim_{n\to\infty}\frac1{b-a}\sum_{i=1}^n f(x_i^*)\Delta x=\frac1{b-a}\int_a^b f(x)\,dx.\]
+Do đó, ta định nghĩa \textit{giá trị trung bình} của $f$ trên khoảng $[a,b]$ là
+\[\boxed{\displaystyle f_{\mathrm{avg}}=\frac1{b-a}\int_a^b f(x)\,dx.}\]
+Với một hàm dương, ta có thể hiểu định nghĩa này là
+\[\frac{\text{diện tích}}{\text{bề rộng}}=\text{chiều cao trung bình}.\]
+
+\Needspace{14\baselineskip}
+\ex{1} Tìm giá trị trung bình của hàm số $f(x)=1+x^2$ trên khoảng $[-1,2]$.
+\sol Với $a=-1$ và $b=2$, ta có
+\begin{align*}
+f_{\mathrm{avg}}&=\frac1{b-a}\int_a^b f(x)\,dx
+=\frac1{2-(-1)}\int_{-1}^2(1+x^2)\,dx\\
+&=\frac13\left[x+\frac{x^3}{3}\right]_{-1}^2=2.
+\end{align*}
+Nếu $T(t)$ là nhiệt độ tại thời điểm $t$, ta có thể tự hỏi liệu có một thời điểm cụ thể nào mà nhiệt độ bằng nhiệt độ trung bình hay không. Với hàm nhiệt độ được vẽ trong Hình 1, ta thấy có hai thời điểm như vậy: ngay trước buổi trưa và ngay trước nửa đêm. Nói chung, có tồn tại một số $c$ tại đó giá trị của hàm $f$ bằng đúng giá trị trung bình của hàm, tức $f(c)=f_{\mathrm{avg}}$, hay không? Định lý sau cho biết điều này đúng đối với các hàm liên tục.
+
+\Needspace{12\baselineskip}
+\subsection*{Định lý giá trị trung bình cho tích phân}
+Nếu $f$ liên tục trên $[a,b]$, thì tồn tại một số $c$ thuộc $[a,b]$ sao cho
+\[f(c)=f_{\mathrm{avg}}=\frac1{b-a}\int_a^b f(x)\,dx,\]
+tức là
+\[\int_a^b f(x)\,dx=f(c)(b-a).\]
+Định lý giá trị trung bình cho tích phân là một hệ quả của Định lý giá trị trung bình cho đạo hàm và Định lý cơ bản của giải tích. Chứng minh được phác thảo trong Bài tập 28.
+
+Ý nghĩa hình học của Định lý giá trị trung bình cho tích phân là: với một hàm dương $f$, tồn tại số $c$ sao cho hình chữ nhật có đáy $[a,b]$ và chiều cao $f(c)$ có cùng diện tích với miền nằm dưới đồ thị của $f$ từ $a$ đến $b$. (Xem Hình 2 và cách diễn giải trực quan hơn trong ghi chú sau.)
+\fig[.45]{fig02}{Hình 2}
+Ta luôn có thể cắt bỏ phần đỉnh của một ngọn núi hai chiều ở một độ cao thích hợp (chính là $f_{\mathrm{avg}}$), rồi dùng phần ấy lấp đầy các thung lũng để ngọn núi trở nên hoàn toàn bằng phẳng.
+
+\Needspace{17\baselineskip}
+\ex{2} Vì $f(x)=1+x^2$ liên tục trên khoảng $[-1,2]$, Định lý giá trị trung bình cho tích phân cho biết tồn tại một số $c$ trong $[-1,2]$ sao cho
+\[\int_{-1}^2(1+x^2)\,dx=f(c)[2-(-1)].\]
+Trong trường hợp cụ thể này, ta có thể tìm $c$ tường minh. Từ Ví dụ 1, ta biết $f_{\mathrm{avg}}=2$, nên giá trị $c$ thỏa mãn
+\[f(c)=f_{\mathrm{avg}}=2.\]
+Do đó,
+\[1+c^2=2,\qquad\text{suy ra}\qquad c^2=1.\]
+Vậy trong trường hợp này có hai số $c=\pm1$ thuộc khoảng $[-1,2]$ thỏa mãn kết luận của Định lý giá trị trung bình cho tích phân.
+
+Các Ví dụ 1 và 2 được minh họa trong Hình 3.
+\fig[.39]{fig03}{Hình 3}
+
+\Needspace{17\baselineskip}
+\ex{3} Chứng minh rằng vận tốc trung bình của một ô tô trên khoảng thời gian $[t_1,t_2]$ bằng giá trị trung bình của các vận tốc của nó trong chuyến đi.
+\sol Nếu $s(t)$ là độ dịch chuyển của ô tô tại thời điểm $t$, thì theo định nghĩa, vận tốc trung bình của ô tô trên khoảng thời gian ấy là
+\[\frac{\Delta s}{\Delta t}=\frac{s(t_2)-s(t_1)}{t_2-t_1}.\]
+Mặt khác, giá trị trung bình của hàm vận tốc trên khoảng đó là
+\begin{align*}
+v_{\mathrm{avg}}&=\frac1{t_2-t_1}\int_{t_1}^{t_2}v(t)\,dt
+=\frac1{t_2-t_1}\int_{t_1}^{t_2}s'(t)\,dt\\
+&=\frac1{t_2-t_1}[s(t_2)-s(t_1)]\qquad\text{(theo Định lý về độ biến thiên thuần)}\\
+&=\frac{s(t_2)-s(t_1)}{t_2-t_1}=\text{vận tốc trung bình}.
+\end{align*}
+
+\clearpage
+\section*{6.5 — Bài tập}
+\group{1–8}
+Tìm giá trị trung bình của hàm số trên khoảng đã cho.
+\bt{1} $f(x)=3x^2+8x$, $[-1,2]$.
+\bt{2} $f(x)=\sqrt{x}$, $[0,4]$.
+\bt{3} $g(x)=3\cos x$, $[-\pi/2,\pi/2]$.
+\bt{4} $f(z)=\dfrac{e^{1/z}}{z^2}$, $[1,4]$.
+\bt{5} $g(t)=\dfrac9{1+t^2}$, $[0,2]$.
+\bt{6} $f(x)=\dfrac{x^2}{(x^3+3)^2}$, $[-1,1]$.
+\bt{7} $h(x)=\cos^4x\sin x$, $[0,\pi]$.
+\bt{8} $h(u)=\dfrac{\ln u}{u}$, $[1,5]$.
+\Needspace{14\baselineskip}
+\group{9–12}
+(a) Tìm giá trị trung bình $f_{\mathrm{avg}}$ của $f$ trên khoảng đã cho.
+
+(b) Tìm $c$ trong khoảng đã cho sao cho $f_{\mathrm{avg}}=f(c)$.
+
+(c) Phác họa đồ thị của $f$ và một hình chữ nhật có đáy là khoảng đã cho, với diện tích bằng diện tích miền nằm dưới đồ thị của $f$.
+\bt{9} $f(t)=1/t^2$, $[1,3]$.
+\bt{10} $g(x)=(x+1)^3$, $[0,2]$.
+\bt{11} $f(x)=2\sin x-\sin2x$, $[0,\pi]$.
+\bt{12} $f(x)=2xe^{-x^2}$, $[0,2]$.
+\bt{13} Nếu $f$ liên tục và $\int_1^3 f(x)\,dx=8$, hãy chứng minh rằng $f$ nhận giá trị $4$ ít nhất một lần trên khoảng $[1,3]$.
+\bt{14} Tìm các số $b$ sao cho giá trị trung bình của $f(x)=2+6x-3x^2$ trên khoảng $[0,b]$ bằng $3$.
+\par\noindent\begin{minipage}[t]{\linewidth}
+\bt{15} Tìm giá trị trung bình của $f$ trên $[0,8]$.
+\fig[.48]{ex15}{Hình cho Bài tập 15}
+\end{minipage}\par
+\par\noindent\begin{minipage}[t]{\linewidth}
+\bt{16} Hình vẽ cho đồ thị vận tốc của một ô tô đang tăng tốc.
+
+(a) Dùng Quy tắc trung điểm để ước lượng vận tốc trung bình của ô tô trong $12$ giây đầu tiên.
+
+(b) Tại thời điểm nào vận tốc tức thời bằng vận tốc trung bình?
+\fig[.49]{ex16}{Hình cho Bài tập 16. Trục đứng: $v$ (km/h); trục ngang: $t$ (giây).}
+\end{minipage}\par
+\bt{17} Ở một thành phố, nhiệt độ (tính bằng °F) sau 9 giờ sáng $t$ giờ được mô hình hóa bởi hàm
+\[T(t)=50+14\sin\frac{\pi t}{12}.\]
+Tìm nhiệt độ trung bình trong khoảng thời gian từ 9 giờ sáng đến 9 giờ tối.
+\par\noindent\begin{minipage}[t]{\linewidth}
+\bt{18} Hình vẽ cho đồ thị nhiệt độ của một thành phố ở Bờ Đông và một thành phố ở Bờ Tây trong khoảng $24$ giờ, bắt đầu từ nửa đêm. Thành phố nào có nhiệt độ cao nhất trong ngày ấy? Tìm nhiệt độ trung bình của mỗi thành phố trong khoảng thời gian này bằng Quy tắc trung điểm với $n=12$. Diễn giải kết quả: xét chung cả ngày, thành phố nào ``ấm hơn''?
+\fig[.75]{ex18}{Hình cho Bài tập 18. East Coast: Bờ Đông; West Coast: Bờ Tây. Trục đứng: $T$ (°F); trục ngang: $t$ (giờ).}
+\end{minipage}\par
+\bt{19} Khối lượng riêng theo chiều dài của một thanh dài $8$ m là $12/\sqrt{x+1}$ kg/m, trong đó $x$ tính bằng mét từ một đầu thanh. Tìm khối lượng riêng theo chiều dài trung bình của thanh.
+\bt{20} Vận tốc $v$ của máu chảy trong một mạch máu có bán kính $R$ và chiều dài $l$, tại khoảng cách $r$ đến trục giữa, là
+\[v(r)=\frac{P}{4\eta l}(R^2-r^2),\]
+trong đó $P$ là hiệu áp suất giữa hai đầu mạch và $\eta$ là độ nhớt của máu (xem Ví dụ 3.7.7). Tìm vận tốc trung bình (theo $r$) trên khoảng $0\le r\le R$. So sánh vận tốc trung bình với vận tốc cực đại.
+\bt{21} Trong Ví dụ 3.8.1, ta đã mô hình hóa dân số thế giới trong nửa sau thế kỷ XX bằng phương trình $P(t)=2560e^{0.017185t}$. Dùng phương trình này để ước lượng dân số trung bình của thế giới trong giai đoạn đó (1950–2000).
+\bt{22} (a) Một tách cà phê có nhiệt độ $95^\circ\mathrm C$ và mất $30$ phút để nguội xuống $61^\circ\mathrm C$ trong một căn phòng có nhiệt độ $20^\circ\mathrm C$. Dùng Định luật làm nguội Newton (§3.8) để chứng minh rằng nhiệt độ của cà phê sau $t$ phút là
+\[T(t)=20+75e^{-kt},\]
+trong đó $k\approx0.02$.
+
+(b) Nhiệt độ trung bình của cà phê trong nửa giờ đầu là bao nhiêu?
+\bt{23} Dùng kết quả của Bài tập 5.5.89 để tính thể tích trung bình của không khí hít vào trong phổi trong một chu kỳ hô hấp.
+\bt{24} Nếu một vật rơi tự do từ trạng thái nghỉ, thì độ dịch chuyển của nó là $s=\frac12gt^2$. Gọi vận tốc sau thời gian $T$ là $v_T$. Chứng minh rằng nếu tính trung bình các vận tốc theo $t$ thì ta được $v_{\mathrm{avg}}=\frac12v_T$, còn nếu tính trung bình các vận tốc theo $s$ thì ta được $v_{\mathrm{avg}}=\frac23v_T$.
+\par\noindent\begin{minipage}[t]{\linewidth}
+\bt{25} Dùng hình vẽ để chứng minh rằng nếu $f$ lõm lên trên $[a,b]$, thì
+\[f_{\mathrm{avg}}>f\left(\frac{a+b}{2}\right).\]
+\fig[.42]{ex25}{Hình cho Bài tập 25}
+\end{minipage}\par
+\group{26–27}
+Ký hiệu $f_{\mathrm{avg}}[a,b]$ là giá trị trung bình của $f$ trên khoảng $[a,b]$.
+\bt{26} Chứng minh rằng nếu $a<c<b$, thì
+\[f_{\mathrm{avg}}[a,b]=\left(\frac{c-a}{b-a}\right)f_{\mathrm{avg}}[a,c]+\left(\frac{b-c}{b-a}\right)f_{\mathrm{avg}}[c,b].\]
+\bt{27} Chứng minh rằng nếu $f$ liên tục, thì $\displaystyle\lim_{t\to a^+}f_{\mathrm{avg}}[a,t]=f(a)$.
+\bt{28} Chứng minh Định lý giá trị trung bình cho tích phân bằng cách áp dụng Định lý giá trị trung bình cho đạo hàm (xem §4.2) cho hàm $F(x)=\int_a^x f(t)\,dt$.
+
+\clearpage
+\section*{Dự án ứng dụng — Giải tích và bóng chày}
+Trong dự án này, ta khảo sát ba trong số nhiều ứng dụng của giải tích vào bóng chày. Các tương tác vật lý trong môn thể thao này, đặc biệt là va chạm giữa bóng và gậy, khá phức tạp; những mô hình của chúng được bàn luận chi tiết trong cuốn sách của Robert Adair, \textit{The Physics of Baseball}, ấn bản thứ ba (New York, 2002).
+\fig[.42]{baseball}{Vị trí của gậy bóng chày nhìn từ trên xuống, được ghi lại sau mỗi $1/50$ giây trong một cú vung gậy điển hình. Batter’s box: ô đứng của người đánh bóng. (Phỏng theo \textit{The Physics of Baseball}.)}
+\prj{1} Có thể bạn sẽ ngạc nhiên khi biết rằng va chạm giữa bóng chày và gậy chỉ kéo dài khoảng một phần nghìn giây. Ở đây, ta tính lực trung bình tác dụng lên gậy trong va chạm ấy bằng cách trước hết tính độ biến thiên động lượng của bóng.
+
+\textit{Động lượng} $p$ của một vật là tích của khối lượng $m$ với vận tốc $v$, tức $p=mv$. Giả sử một vật chuyển động trên một đường thẳng chịu tác dụng của lực $F=F(t)$ là một hàm liên tục theo thời gian.
+
+(a) Chứng minh rằng độ biến thiên động lượng trên khoảng thời gian $[t_0,t_1]$ bằng tích phân của $F$ từ $t_0$ đến $t_1$; nghĩa là, chứng minh
+\[p(t_1)-p(t_0)=\int_{t_0}^{t_1}F(t)\,dt.\]
+Tích phân này được gọi là \textit{xung lượng của lực} trên khoảng thời gian ấy.
+
+(b) Một cầu thủ ném một cú bóng nhanh với tốc độ $90$ mi/h đến người đánh bóng. Người đánh đánh trả bóng theo đường thẳng trực tiếp về phía người ném. Bóng tiếp xúc với gậy trong $0.001$ s và rời gậy với vận tốc có độ lớn $110$ mi/h. Một quả bóng chày có trọng lượng $5$ oz; trong hệ đơn vị thông dụng của Hoa Kỳ, khối lượng được đo bằng slug: $m=w/g$, với $g=32\ \mathrm{ft/s^2}$.
+
+(i) Tìm độ biến thiên động lượng của bóng.
+
+(ii) Tìm lực trung bình tác dụng lên gậy.
+\prj{2} Trong bài toán này, ta tính công cần để một cầu thủ ném một cú bóng nhanh $90$ mi/h, bằng cách trước hết xét động năng.
+
+\textit{Động năng} $K$ của một vật có khối lượng $m$ và vận tốc $v$ được cho bởi $K=\frac12mv^2$. Giả sử một vật có khối lượng $m$, chuyển động trên một đường thẳng, chịu tác dụng của lực $F=F(s)$ phụ thuộc vào vị trí $s$. Theo Định luật II Newton,
+\[F(s)=ma=m\frac{dv}{dt},\]
+trong đó $a$ và $v$ lần lượt là gia tốc và vận tốc của vật.
+
+(a) Chứng minh rằng công thực hiện khi dịch chuyển vật từ vị trí $s_0$ đến vị trí $s_1$ bằng độ biến thiên động năng của vật; nghĩa là, chứng minh
+\[W=\int_{s_0}^{s_1}F(s)\,ds=\frac12mv_1^2-\frac12mv_0^2,\]
+trong đó $v_0=v(s_0)$ và $v_1=v(s_1)$ là vận tốc của vật tại các vị trí $s_0$ và $s_1$. \textit{Gợi ý:} Theo Quy tắc dây chuyền,
+\[m\frac{dv}{dt}=m\frac{dv}{ds}\frac{ds}{dt}=mv\frac{dv}{ds}.\]
+(b) Cần thực hiện bao nhiêu foot-pound công để ném một quả bóng chày với tốc độ $90$ mi/h?
+\prj{3} (a) Một cầu thủ phòng ngự ngoài sân đón bóng cách chốt nhà $280$ ft và ném thẳng về phía người bắt bóng với vận tốc ban đầu $100$ ft/s. Giả sử vận tốc $v(t)$ của bóng sau $t$ giây thỏa mãn phương trình vi phân $dv/dt=-\frac1{10}v$ do sức cản không khí. Bóng mất bao lâu để đến chốt nhà? (Bỏ qua mọi chuyển động theo phương thẳng đứng của bóng.)
+
+(b) Huấn luyện viên tự hỏi liệu bóng có đến chốt nhà sớm hơn nếu được chuyền tiếp qua một cầu thủ phòng ngự trong sân hay không. Cầu thủ chặn ngắn có thể đứng trên đoạn thẳng nối cầu thủ ngoài sân với chốt nhà, bắt bóng do cầu thủ ngoài sân ném, xoay người và ném bóng cho người bắt với vận tốc ban đầu $105$ ft/s. Huấn luyện viên đo được thời gian chuyền tiếp của cầu thủ chặn ngắn (bắt bóng, xoay người, ném bóng) là nửa giây. Cầu thủ này nên đứng cách chốt nhà bao xa để tổng thời gian bóng đến chốt nhà là nhỏ nhất? Huấn luyện viên nên khuyến khích ném thẳng hay ném qua cầu thủ trung gian? Điều gì thay đổi nếu cầu thủ chặn ngắn có thể ném với tốc độ $115$ ft/s?
+
+(c) Với vận tốc ném nào của cầu thủ chặn ngắn thì một cú ném qua trung gian mất thời gian bằng một cú ném thẳng?
+\end{document}

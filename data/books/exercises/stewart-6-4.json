@@ -1,0 +1,148 @@
+{
+  "exercises": [
+    {
+      "number": 1,
+      "content": "<p><strong>1.</strong></p>\n<p>Cần thực hiện bao nhiêu công khi một vận động viên cử tạ nâng <span class=\"math inline\">\\(200\\)</span> kg từ độ cao <span class=\"math inline\">\\(1.5\\)</span> m lên <span class=\"math inline\">\\(2.0\\)</span> m so với mặt đất?</p>\n"
+    },
+    {
+      "number": 2,
+      "content": "<p><strong>2.</strong></p>\n<p>Tính công thực hiện khi kéo một chiếc đại dương cầm có trọng lượng <span class=\"math inline\">\\(1100\\)</span> lb từ mặt đất lên tầng ba, cao <span class=\"math inline\">\\(35\\)</span> ft so với mặt đất.</p>\n"
+    },
+    {
+      "number": 3,
+      "content": "<p><strong>3.</strong></p>\n<p>Một lực biến thiên <span class=\"math inline\">\\(5x^{-2}\\)</span> pound dịch chuyển một vật dọc theo một đường thẳng khi vật ở cách gốc tọa độ <span class=\"math inline\">\\(x\\)</span> foot. Tính công thực hiện khi dịch chuyển vật từ <span class=\"math inline\">\\(x=1\\)</span> ft đến <span class=\"math inline\">\\(x=10\\)</span> ft.</p>\n"
+    },
+    {
+      "number": 4,
+      "content": "<p><strong>4.</strong></p>\n<p>Một lực biến thiên <span class=\"math inline\">\\(4\\sqrt{x}\\)</span> newton dịch chuyển một chất điểm dọc theo một đường thẳng khi chất điểm ở cách gốc tọa độ <span class=\"math inline\">\\(x\\)</span> mét. Tính công thực hiện khi dịch chuyển chất điểm từ <span class=\"math inline\">\\(x=4\\)</span> đến <span class=\"math inline\">\\(x=16\\)</span>.</p>\n"
+    },
+    {
+      "number": 5,
+      "content": "<p><strong>5.</strong></p>\n<p>Hình vẽ là đồ thị của một hàm lực (tính bằng newton), tăng đến giá trị cực đại rồi giữ không đổi. Lực này thực hiện bao nhiêu công khi dịch chuyển một vật một quãng đường <span class=\"math inline\">\\(8\\)</span> m?</p>\n<div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-6-4-237ec77a/ex05.png\" alt=\"image\" /><br />\nHình cho Bài tập 5</p>\n</div>\n"
+    },
+    {
+      "number": 6,
+      "content": "<p><strong>6.</strong></p>\n<p>Bảng sau cho các giá trị của một hàm lực <span class=\"math inline\">\\(f(x)\\)</span>, trong đó <span class=\"math inline\">\\(x\\)</span> tính bằng mét và <span class=\"math inline\">\\(f(x)\\)</span> tính bằng newton. Dùng Quy tắc trung điểm để ước lượng công của lực khi dịch chuyển một vật từ <span class=\"math inline\">\\(x=4\\)</span> đến <span class=\"math inline\">\\(x=20\\)</span>.</p>\n<div class=\"center\">\n<table>\n<thead>\n<tr class=\"header\">\n<th style=\"text-align: right;\"><span class=\"math inline\">\\(x\\)</span></th>\n<th style=\"text-align: right;\">4</th>\n<th style=\"text-align: right;\">6</th>\n<th style=\"text-align: right;\">8</th>\n<th style=\"text-align: right;\">10</th>\n<th style=\"text-align: right;\">12</th>\n<th style=\"text-align: right;\">14</th>\n<th style=\"text-align: right;\">16</th>\n<th style=\"text-align: right;\">18</th>\n<th style=\"text-align: right;\">20</th>\n</tr>\n</thead>\n<tbody>\n<tr class=\"odd\">\n<td style=\"text-align: right;\"><span class=\"math inline\">\\(f(x)\\)</span></td>\n<td style=\"text-align: right;\">5</td>\n<td style=\"text-align: right;\">5.8</td>\n<td style=\"text-align: right;\">7.0</td>\n<td style=\"text-align: right;\">8.8</td>\n<td style=\"text-align: right;\">9.6</td>\n<td style=\"text-align: right;\">8.2</td>\n<td style=\"text-align: right;\">6.7</td>\n<td style=\"text-align: right;\">5.2</td>\n<td style=\"text-align: right;\">4.1</td>\n</tr>\n</tbody>\n</table>\n</div>\n"
+    },
+    {
+      "number": 7,
+      "content": "<p><strong>7.</strong></p>\n<p>Cần một lực <span class=\"math inline\">\\(10\\)</span> lb để giữ một lò xo giãn thêm <span class=\"math inline\">\\(4\\)</span> in. so với chiều dài tự nhiên. Cần thực hiện bao nhiêu công để kéo lò xo từ chiều dài tự nhiên đến khi giãn thêm <span class=\"math inline\">\\(6\\)</span> in.?</p>\n"
+    },
+    {
+      "number": 8,
+      "content": "<p><strong>8.</strong></p>\n<p>Một lò xo có chiều dài tự nhiên <span class=\"math inline\">\\(40\\)</span> cm. Nếu cần lực <span class=\"math inline\">\\(60\\)</span> N để giữ lò xo bị nén <span class=\"math inline\">\\(10\\)</span> cm, thì công thực hiện trong quá trình nén này là bao nhiêu? Cần thực hiện bao nhiêu công để nén lò xo đến chiều dài <span class=\"math inline\">\\(25\\)</span> cm?</p>\n"
+    },
+    {
+      "number": 9,
+      "content": "<p><strong>9.</strong></p>\n<p>Giả sử cần công <span class=\"math inline\">\\(2\\)</span> J để kéo một lò xo từ chiều dài tự nhiên <span class=\"math inline\">\\(30\\)</span> cm đến chiều dài <span class=\"math inline\">\\(42\\)</span> cm.</p>\n<p>(a) Cần bao nhiêu công để kéo lò xo từ <span class=\"math inline\">\\(35\\)</span> cm đến <span class=\"math inline\">\\(40\\)</span> cm?</p>\n<p>(b) Một lực <span class=\"math inline\">\\(30\\)</span> N giữ lò xo giãn thêm bao nhiêu so với chiều dài tự nhiên?</p>\n"
+    },
+    {
+      "number": 10,
+      "content": "<p><strong>10.</strong></p>\n<p>Nếu công cần để kéo một lò xo giãn thêm <span class=\"math inline\">\\(1\\)</span> ft so với chiều dài tự nhiên là <span class=\"math inline\">\\(12\\)</span> ft-lb, thì cần bao nhiêu công để kéo lò xo giãn thêm <span class=\"math inline\">\\(9\\)</span> in. so với chiều dài tự nhiên?</p>\n"
+    },
+    {
+      "number": 11,
+      "content": "<p><strong>11.</strong></p>\n<p>Một lò xo có chiều dài tự nhiên <span class=\"math inline\">\\(20\\)</span> cm. So sánh công <span class=\"math inline\">\\(W_1\\)</span> khi kéo lò xo từ <span class=\"math inline\">\\(20\\)</span> cm đến <span class=\"math inline\">\\(30\\)</span> cm với công <span class=\"math inline\">\\(W_2\\)</span> khi kéo lò xo từ <span class=\"math inline\">\\(30\\)</span> cm đến <span class=\"math inline\">\\(40\\)</span> cm. <span class=\"math inline\">\\(W_2\\)</span> và <span class=\"math inline\">\\(W_1\\)</span> liên hệ như thế nào?</p>\n"
+    },
+    {
+      "number": 12,
+      "content": "<p><strong>12.</strong></p>\n<p>Nếu cần công <span class=\"math inline\">\\(6\\)</span> J để kéo một lò xo từ <span class=\"math inline\">\\(10\\)</span> cm đến <span class=\"math inline\">\\(12\\)</span> cm, và cần thêm <span class=\"math inline\">\\(10\\)</span> J để kéo từ <span class=\"math inline\">\\(12\\)</span> cm đến <span class=\"math inline\">\\(14\\)</span> cm, thì chiều dài tự nhiên của lò xo là bao nhiêu?</p>\n"
+    },
+    {
+      "number": 13,
+      "content": "<p><strong>13.</strong></p>\n<p><em>Yêu cầu chung (13–22):</em> Hãy chỉ ra cách xấp xỉ công cần thực hiện bằng một tổng Riemann. Sau đó biểu diễn công dưới dạng một tích phân và tính tích phân ấy.</p>\n<p>Một sợi dây nặng, dài <span class=\"math inline\">\\(50\\)</span> ft, có trọng lượng <span class=\"math inline\">\\(0.5\\)</span> lb/ft, treo qua mép một tòa nhà cao <span class=\"math inline\">\\(120\\)</span> ft.</p>\n<p>(a) Cần bao nhiêu công để kéo dây lên nóc tòa nhà?</p>\n<p>(b) Cần bao nhiêu công để kéo một nửa sợi dây lên nóc tòa nhà?</p>\n"
+    },
+    {
+      "number": 14,
+      "content": "<p><strong>14.</strong></p>\n<p><em>Yêu cầu chung (13–22):</em> Hãy chỉ ra cách xấp xỉ công cần thực hiện bằng một tổng Riemann. Sau đó biểu diễn công dưới dạng một tích phân và tính tích phân ấy.</p>\n<p>Một dây cáp dày, dài <span class=\"math inline\">\\(60\\)</span> ft và có trọng lượng <span class=\"math inline\">\\(180\\)</span> lb, treo từ một tời trên cần cẩu. Tính bằng hai cách khác nhau công thực hiện khi tời cuốn lên <span class=\"math inline\">\\(25\\)</span> ft dây cáp.</p>\n<p>(a) Làm theo phương pháp của Ví dụ 4.</p>\n<p>(b) Viết một hàm biểu diễn trọng lượng phần dây cáp còn lại sau khi tời đã cuốn lên <span class=\"math inline\">\\(x\\)</span> foot. Ước lượng công thực hiện khi tời kéo lên <span class=\"math inline\">\\(\\Delta x\\)</span> foot dây cáp.</p>\n"
+    },
+    {
+      "number": 15,
+      "content": "<p><strong>15.</strong></p>\n<p><em>Yêu cầu chung (13–22):</em> Hãy chỉ ra cách xấp xỉ công cần thực hiện bằng một tổng Riemann. Sau đó biểu diễn công dưới dạng một tích phân và tính tích phân ấy.</p>\n<p>Một dây cáp có trọng lượng <span class=\"math inline\">\\(2\\)</span> lb/ft được dùng để nâng <span class=\"math inline\">\\(800\\)</span> lb than lên một giếng mỏ sâu <span class=\"math inline\">\\(500\\)</span> ft. Tìm công thực hiện.</p>\n"
+    },
+    {
+      "number": 16,
+      "content": "<p><strong>16.</strong></p>\n<p><em>Yêu cầu chung (13–22):</em> Hãy chỉ ra cách xấp xỉ công cần thực hiện bằng một tổng Riemann. Sau đó biểu diễn công dưới dạng một tích phân và tính tích phân ấy.</p>\n<p>Một sợi xích nằm trên mặt đất, dài <span class=\"math inline\">\\(10\\)</span> m và có khối lượng <span class=\"math inline\">\\(80\\)</span> kg. Cần bao nhiêu công để nâng một đầu xích lên độ cao <span class=\"math inline\">\\(6\\)</span> m?</p>\n"
+    },
+    {
+      "number": 17,
+      "content": "<p><strong>17.</strong></p>\n<p><em>Yêu cầu chung (13–22):</em> Hãy chỉ ra cách xấp xỉ công cần thực hiện bằng một tổng Riemann. Sau đó biểu diễn công dưới dạng một tích phân và tính tích phân ấy.</p>\n<p>Một sợi xích dài <span class=\"math inline\">\\(10\\)</span> ft, có trọng lượng <span class=\"math inline\">\\(25\\)</span> lb, treo từ trần nhà. Tìm công thực hiện khi nâng đầu dưới của xích lên trần nhà, ngang với đầu trên.</p>\n"
+    },
+    {
+      "number": 18,
+      "content": "<p><strong>18.</strong></p>\n<p><em>Yêu cầu chung (13–22):</em> Hãy chỉ ra cách xấp xỉ công cần thực hiện bằng một tổng Riemann. Sau đó biểu diễn công dưới dạng một tích phân và tính tích phân ấy.</p>\n<p>Một tên lửa mô hình có khối lượng <span class=\"math inline\">\\(0.4\\)</span> kg được nạp <span class=\"math inline\">\\(0.75\\)</span> kg nhiên liệu tên lửa. Sau khi phóng, tên lửa bay lên với tốc độ không đổi <span class=\"math inline\">\\(4\\)</span> m/s, còn nhiên liệu tiêu hao với tốc độ <span class=\"math inline\">\\(0.15\\)</span> kg/s. Tìm công thực hiện để đẩy tên lửa lên độ cao <span class=\"math inline\">\\(20\\)</span> m so với mặt đất.</p>\n"
+    },
+    {
+      "number": 19,
+      "content": "<p><strong>19.</strong></p>\n<p><em>Yêu cầu chung (13–22):</em> Hãy chỉ ra cách xấp xỉ công cần thực hiện bằng một tổng Riemann. Sau đó biểu diễn công dưới dạng một tích phân và tính tích phân ấy.</p>\n<p>Một chiếc xô bị rò, có khối lượng <span class=\"math inline\">\\(10\\)</span> kg, được nâng từ mặt đất lên độ cao <span class=\"math inline\">\\(12\\)</span> m với tốc độ không đổi bằng một sợi dây có khối lượng trên một đơn vị chiều dài là <span class=\"math inline\">\\(0.8\\)</span> kg/m. Ban đầu xô chứa <span class=\"math inline\">\\(36\\)</span> kg nước, nhưng nước rò ra với tốc độ không đổi và vừa chảy hết khi xô đạt độ cao <span class=\"math inline\">\\(12\\)</span> m. Cần thực hiện bao nhiêu công?</p>\n"
+    },
+    {
+      "number": 20,
+      "content": "<p><strong>20.</strong></p>\n<p><em>Yêu cầu chung (13–22):</em> Hãy chỉ ra cách xấp xỉ công cần thực hiện bằng một tổng Riemann. Sau đó biểu diễn công dưới dạng một tích phân và tính tích phân ấy.</p>\n<p>Một bể bơi tròn có đường kính <span class=\"math inline\">\\(24\\)</span> ft, thành cao <span class=\"math inline\">\\(5\\)</span> ft và mực nước sâu <span class=\"math inline\">\\(4\\)</span> ft. Cần bao nhiêu công để bơm toàn bộ nước ra ngoài qua thành bể? (Dùng trọng lượng của nước là <span class=\"math inline\">\\(62.5\\ \\mathrm{lb/ft^3}\\)</span>.)</p>\n"
+    },
+    {
+      "number": 21,
+      "content": "<p><strong>21.</strong></p>\n<p><em>Yêu cầu chung (13–22):</em> Hãy chỉ ra cách xấp xỉ công cần thực hiện bằng một tổng Riemann. Sau đó biểu diễn công dưới dạng một tích phân và tính tích phân ấy.</p>\n<p>Một bể cá dài <span class=\"math inline\">\\(2\\)</span> m, rộng <span class=\"math inline\">\\(1\\)</span> m, sâu <span class=\"math inline\">\\(1\\)</span> m chứa đầy nước. Tìm công cần để bơm một nửa lượng nước ra khỏi bể. (Dùng khối lượng riêng của nước là <span class=\"math inline\">\\(1000\\ \\mathrm{kg/m^3}\\)</span>.)</p>\n"
+    },
+    {
+      "number": 22,
+      "content": "<p><strong>22.</strong></p>\n<p><em>Yêu cầu chung (13–22):</em> Hãy chỉ ra cách xấp xỉ công cần thực hiện bằng một tổng Riemann. Sau đó biểu diễn công dưới dạng một tích phân và tính tích phân ấy.</p>\n<p>Một bể nước hình cầu đường kính <span class=\"math inline\">\\(24\\)</span> ft được đặt trên đỉnh một tháp cao <span class=\"math inline\">\\(60\\)</span> ft. Bể được làm đầy bằng một ống dẫn gắn vào đáy khối cầu. Nếu dùng một máy bơm <span class=\"math inline\">\\(1.5\\)</span> mã lực để đưa nước lên bể, thì mất bao lâu để làm đầy bể? (Một mã lực tương ứng với công <span class=\"math inline\">\\(550\\)</span> ft-lb trong mỗi giây.)</p>\n"
+    },
+    {
+      "number": 23,
+      "content": "<p><strong>23.</strong></p>\n<p><em>Yêu cầu chung (23–26):</em> Một bể chứa đầy nước. Tìm công cần để bơm nước ra khỏi vòi xả. Trong các Bài tập 25 và 26, dùng trọng lượng của nước là <span class=\"math inline\">\\(62.5\\ \\mathrm{lb/ft^3}\\)</span>.</p>\n<p>Bể trong hình.</p>\n<div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-6-4-237ec77a/ex23.png\" alt=\"image\" /><br />\nHình cho Bài tập 23</p>\n</div>\n"
+    },
+    {
+      "number": 24,
+      "content": "<p><strong>24.</strong></p>\n<p><em>Yêu cầu chung (23–26):</em> Một bể chứa đầy nước. Tìm công cần để bơm nước ra khỏi vòi xả. Trong các Bài tập 25 và 26, dùng trọng lượng của nước là <span class=\"math inline\">\\(62.5\\ \\mathrm{lb/ft^3}\\)</span>.</p>\n<p>Bể trong hình.</p>\n<div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-6-4-237ec77a/ex24.png\" alt=\"image\" /><br />\nHình cho Bài tập 24</p>\n</div>\n"
+    },
+    {
+      "number": 25,
+      "content": "<p><strong>25.</strong></p>\n<p><em>Yêu cầu chung (23–26):</em> Một bể chứa đầy nước. Tìm công cần để bơm nước ra khỏi vòi xả. Trong các Bài tập 25 và 26, dùng trọng lượng của nước là <span class=\"math inline\">\\(62.5\\ \\mathrm{lb/ft^3}\\)</span>.</p>\n<p>Bể dạng khối nón cụt trong hình.</p>\n<div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-6-4-237ec77a/ex25.png\" alt=\"image\" /><br />\nHình cho Bài tập 25. Khối nón cụt.</p>\n</div>\n"
+    },
+    {
+      "number": 26,
+      "content": "<p><strong>26.</strong></p>\n<p><em>Yêu cầu chung (23–26):</em> Một bể chứa đầy nước. Tìm công cần để bơm nước ra khỏi vòi xả. Trong các Bài tập 25 và 26, dùng trọng lượng của nước là <span class=\"math inline\">\\(62.5\\ \\mathrm{lb/ft^3}\\)</span>.</p>\n<p>Bể trong hình.</p>\n<div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-6-4-237ec77a/ex26.png\" alt=\"image\" /><br />\nHình cho Bài tập 26</p>\n</div>\n"
+    },
+    {
+      "number": 27,
+      "content": "<p><strong>27.</strong></p>\n<p>Giả sử máy bơm của bể trong Bài tập 23 bị hỏng sau khi đã thực hiện công <span class=\"math inline\">\\(4.7\\times10^5\\)</span> J. Độ sâu của nước còn lại trong bể là bao nhiêu?</p>\n"
+    },
+    {
+      "number": 28,
+      "content": "<p><strong>28.</strong></p>\n<p>Giải Bài tập 24 nếu bể chứa dầu đến một nửa dung tích và dầu có khối lượng riêng <span class=\"math inline\">\\(900\\ \\mathrm{kg/m^3}\\)</span>.</p>\n"
+    },
+    {
+      "number": 29,
+      "content": "<p><strong>29.</strong></p>\n<p>Khi khí giãn nở trong một xi lanh bán kính <span class=\"math inline\">\\(r\\)</span>, áp suất tại mỗi thời điểm là một hàm của thể tích: <span class=\"math inline\">\\(P=P(V)\\)</span>. Lực khí tác dụng lên pít-tông (xem hình) là tích của áp suất với diện tích: <span class=\"math inline\">\\(F=\\pi r^2P\\)</span>. Chứng minh rằng công do khí thực hiện khi thể tích tăng từ <span class=\"math inline\">\\(V_1\\)</span> đến <span class=\"math inline\">\\(V_2\\)</span> là <span class=\"math display\">\\[W=\\int_{V_1}^{V_2}P\\,dV.\\]</span></p>\n<div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-6-4-237ec77a/ex29.png\" alt=\"image\" /><br />\nHình cho Bài tập 29. Đầu pít-tông.</p>\n</div>\n"
+    },
+    {
+      "number": 30,
+      "content": "<p><strong>30.</strong></p>\n<p>Trong một động cơ hơi nước, áp suất <span class=\"math inline\">\\(P\\)</span> và thể tích <span class=\"math inline\">\\(V\\)</span> của hơi thỏa mãn phương trình <span class=\"math inline\">\\(PV^{1.4}=k\\)</span>, trong đó <span class=\"math inline\">\\(k\\)</span> là hằng số. (Điều này đúng với quá trình giãn nở đoạn nhiệt, tức giãn nở không có trao đổi nhiệt giữa xi lanh và môi trường xung quanh.) Dùng Bài tập 29 để tính công do động cơ thực hiện trong một chu trình, khi hơi bắt đầu ở áp suất <span class=\"math inline\">\\(160\\ \\mathrm{lb/in^2}\\)</span> và thể tích <span class=\"math inline\">\\(100\\ \\mathrm{in^3}\\)</span>, rồi giãn nở đến thể tích <span class=\"math inline\">\\(800\\ \\mathrm{in^3}\\)</span>.</p>\n"
+    },
+    {
+      "number": 31,
+      "content": "<p><strong>31.</strong></p>\n<p><em>Yêu cầu chung (31–33):</em> Động năng <span class=\"math inline\">\\(\\mathrm{KE}\\)</span> của một vật có khối lượng <span class=\"math inline\">\\(m\\)</span>, chuyển động với vận tốc <span class=\"math inline\">\\(v\\)</span>, được định nghĩa là <span class=\"math inline\">\\(\\mathrm{KE}=\\frac12mv^2\\)</span>. Nếu lực <span class=\"math inline\">\\(f(x)\\)</span> tác dụng lên vật, làm vật chuyển động dọc theo trục <span class=\"math inline\">\\(x\\)</span> từ <span class=\"math inline\">\\(x_1\\)</span> đến <span class=\"math inline\">\\(x_2\\)</span>, thì Định lý công–động năng phát biểu rằng công tổng cộng thực hiện bằng độ biến thiên động năng: <span class=\"math display\">\\[\\frac12mv_2^2-\\frac12mv_1^2,\\]</span> trong đó <span class=\"math inline\">\\(v_1\\)</span> là vận tốc tại <span class=\"math inline\">\\(x_1\\)</span> và <span class=\"math inline\">\\(v_2\\)</span> là vận tốc tại <span class=\"math inline\">\\(x_2\\)</span>.</p>\n<p>Gọi <span class=\"math inline\">\\(x=s(t)\\)</span> là hàm vị trí của vật tại thời điểm <span class=\"math inline\">\\(t\\)</span>, còn <span class=\"math inline\">\\(v(t)\\)</span> và <span class=\"math inline\">\\(a(t)\\)</span> lần lượt là các hàm vận tốc và gia tốc. Chứng minh Định lý công–động năng bằng cách trước hết dùng Quy tắc đổi biến cho tích phân xác định (5.5.6) để chỉ ra rằng <span class=\"math display\">\\[W=\\int_{x_1}^{x_2}f(x)\\,dx=\\int_{t_1}^{t_2}f(s(t))v(t)\\,dt.\\]</span> Sau đó dùng Định luật II Newton (lực bằng khối lượng nhân gia tốc) và phép đổi biến <span class=\"math inline\">\\(u=v(t)\\)</span> để tính tích phân.</p>\n"
+    },
+    {
+      "number": 32,
+      "content": "<p><strong>32.</strong></p>\n<p><em>Yêu cầu chung (31–33):</em> Động năng <span class=\"math inline\">\\(\\mathrm{KE}\\)</span> của một vật có khối lượng <span class=\"math inline\">\\(m\\)</span>, chuyển động với vận tốc <span class=\"math inline\">\\(v\\)</span>, được định nghĩa là <span class=\"math inline\">\\(\\mathrm{KE}=\\frac12mv^2\\)</span>. Nếu lực <span class=\"math inline\">\\(f(x)\\)</span> tác dụng lên vật, làm vật chuyển động dọc theo trục <span class=\"math inline\">\\(x\\)</span> từ <span class=\"math inline\">\\(x_1\\)</span> đến <span class=\"math inline\">\\(x_2\\)</span>, thì Định lý công–động năng phát biểu rằng công tổng cộng thực hiện bằng độ biến thiên động năng: <span class=\"math display\">\\[\\frac12mv_2^2-\\frac12mv_1^2,\\]</span> trong đó <span class=\"math inline\">\\(v_1\\)</span> là vận tốc tại <span class=\"math inline\">\\(x_1\\)</span> và <span class=\"math inline\">\\(v_2\\)</span> là vận tốc tại <span class=\"math inline\">\\(x_2\\)</span>.</p>\n<p>Cần bao nhiêu công (tính bằng ft-lb) để ném một quả bóng bowling có trọng lượng <span class=\"math inline\">\\(12\\)</span> lb với tốc độ <span class=\"math inline\">\\(20\\)</span> mi/h? (Chú ý: Chia trọng lượng tính bằng pound cho <span class=\"math inline\">\\(32\\ \\mathrm{ft/s^2}\\)</span>, là gia tốc trọng trường, để tìm khối lượng tính bằng slug.)</p>\n"
+    },
+    {
+      "number": 33,
+      "content": "<p><strong>33.</strong></p>\n<p><em>Yêu cầu chung (31–33):</em> Động năng <span class=\"math inline\">\\(\\mathrm{KE}\\)</span> của một vật có khối lượng <span class=\"math inline\">\\(m\\)</span>, chuyển động với vận tốc <span class=\"math inline\">\\(v\\)</span>, được định nghĩa là <span class=\"math inline\">\\(\\mathrm{KE}=\\frac12mv^2\\)</span>. Nếu lực <span class=\"math inline\">\\(f(x)\\)</span> tác dụng lên vật, làm vật chuyển động dọc theo trục <span class=\"math inline\">\\(x\\)</span> từ <span class=\"math inline\">\\(x_1\\)</span> đến <span class=\"math inline\">\\(x_2\\)</span>, thì Định lý công–động năng phát biểu rằng công tổng cộng thực hiện bằng độ biến thiên động năng: <span class=\"math display\">\\[\\frac12mv_2^2-\\frac12mv_1^2,\\]</span> trong đó <span class=\"math inline\">\\(v_1\\)</span> là vận tốc tại <span class=\"math inline\">\\(x_1\\)</span> và <span class=\"math inline\">\\(v_2\\)</span> là vận tốc tại <span class=\"math inline\">\\(x_2\\)</span>.</p>\n<p>Giả sử khi phóng một toa tàu lượn siêu tốc có khối lượng <span class=\"math inline\">\\(800\\)</span> kg, một hệ thống đẩy điện từ tác dụng lên toa một lực <span class=\"math inline\">\\((5.7x^2+1.5x)\\)</span> newton tại vị trí cách điểm đầu đường ray <span class=\"math inline\">\\(x\\)</span> mét. Dùng Bài tập 31 để tìm tốc độ của toa sau khi đi được <span class=\"math inline\">\\(60\\)</span> m.</p>\n"
+    },
+    {
+      "number": 34,
+      "content": "<p><strong>34.</strong></p>\n<p>Khi một chất điểm ở cách gốc tọa độ <span class=\"math inline\">\\(x\\)</span> mét, một lực <span class=\"math inline\">\\(\\cos(\\pi x/3)\\)</span> newton tác dụng lên nó. Cần bao nhiêu công để dịch chuyển chất điểm từ <span class=\"math inline\">\\(x=1\\)</span> đến <span class=\"math inline\">\\(x=2\\)</span>? Diễn giải kết quả bằng cách xét công thực hiện từ <span class=\"math inline\">\\(x=1\\)</span> đến <span class=\"math inline\">\\(x=1.5\\)</span> và từ <span class=\"math inline\">\\(x=1.5\\)</span> đến <span class=\"math inline\">\\(x=2\\)</span>.</p>\n"
+    },
+    {
+      "number": 35,
+      "content": "<p><strong>35.</strong></p>\n<p>(a) Định luật vạn vật hấp dẫn Newton phát biểu rằng hai vật có khối lượng <span class=\"math inline\">\\(m_1\\)</span> và <span class=\"math inline\">\\(m_2\\)</span> hút nhau bằng lực <span class=\"math display\">\\[F=G\\frac{m_1m_2}{r^2},\\]</span> trong đó <span class=\"math inline\">\\(r\\)</span> là khoảng cách giữa hai vật và <span class=\"math inline\">\\(G\\)</span> là hằng số hấp dẫn. Nếu một trong hai vật được giữ cố định, hãy tìm công cần để dịch chuyển vật kia từ <span class=\"math inline\">\\(r=a\\)</span> đến <span class=\"math inline\">\\(r=b\\)</span>.</p>\n<p>(b) Tính công cần để phóng thẳng đứng một vệ tinh khối lượng <span class=\"math inline\">\\(1000\\)</span> kg lên độ cao <span class=\"math inline\">\\(1000\\)</span> km. Có thể giả sử khối lượng Trái Đất là <span class=\"math inline\">\\(5.98\\times10^{24}\\)</span> kg và tập trung tại tâm. Lấy bán kính Trái Đất bằng <span class=\"math inline\">\\(6.37\\times10^6\\)</span> m và <span class=\"math inline\">\\(G=6.67\\times10^{-11}\\ \\mathrm{N\\cdot m^2/kg^2}\\)</span>.</p>\n"
+    },
+    {
+      "number": 36,
+      "content": "<p><strong>36.</strong></p>\n<p>Đại kim tự tháp của vua Khufu được xây bằng đá vôi tại Ai Cập trong khoảng <span class=\"math inline\">\\(20\\)</span> năm, từ năm <span class=\"math inline\">\\(2580\\)</span> đến năm <span class=\"math inline\">\\(2560\\)</span> trước Công nguyên. Đáy là hình vuông cạnh <span class=\"math inline\">\\(756\\)</span> ft; chiều cao khi xây dựng là <span class=\"math inline\">\\(481\\)</span> ft. (Đây là công trình nhân tạo cao nhất thế giới trong hơn <span class=\"math inline\">\\(3800\\)</span> năm.) Trọng lượng riêng của đá vôi xấp xỉ <span class=\"math inline\">\\(150\\ \\mathrm{lb/ft^3}\\)</span>.</p>\n<p>(a) Ước lượng tổng công thực hiện khi xây kim tự tháp.</p>\n<p>(b) Nếu mỗi người lao động làm việc <span class=\"math inline\">\\(10\\)</span> giờ một ngày, trong <span class=\"math inline\">\\(20\\)</span> năm, mỗi năm <span class=\"math inline\">\\(340\\)</span> ngày, và thực hiện công <span class=\"math inline\">\\(200\\)</span> ft-lb/h để nâng các khối đá vôi vào vị trí, thì cần khoảng bao nhiêu người lao động để xây kim tự tháp?</p>\n<div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-6-4-237ec77a/ex36.png\" alt=\"image\" /><br />\nHình cho Bài tập 36. Ảnh: Vladimir Korostyshevskiy / Shutterstock.com.</p>\n</div>\n"
+    }
+  ]
+}
