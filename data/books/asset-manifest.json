@@ -3955,5 +3955,30 @@
     "file": "stewart-6-plus-3225b73a/problem14.png",
     "mime": "image/png",
     "sha256": "058c33f9af1bf6991411f11a5929effa48a4652dc47d61a79a01d605aac445f8"
+  },
+  "stewart-7-1-31ea22e4/chapter07.png": {
+    "file": "stewart-7-1-31ea22e4/chapter07.png",
+    "mime": "image/png",
+    "sha256": "3a1494f9bfc7b73a5f979328910804efad9b82b2cefd9e019fdba2881dfb7f0a"
+  },
+  "stewart-7-1-31ea22e4/exercise80.png": {
+    "file": "stewart-7-1-31ea22e4/exercise80.png",
+    "mime": "image/png",
+    "sha256": "bd6ba8fe22c9853bace5643f4501c1bb1c93df2710dba0a46aef7df44b62c40f"
+  },
+  "stewart-7-1-31ea22e4/exercise81.png": {
+    "file": "stewart-7-1-31ea22e4/exercise81.png",
+    "mime": "image/png",
+    "sha256": "dc528721e0c3d4174b953469dade1e0f9613509a1f05af8abdcd388e1d124a25"
+  },
+  "stewart-7-1-31ea22e4/figure01.png": {
+    "file": "stewart-7-1-31ea22e4/figure01.png",
+    "mime": "image/png",
+    "sha256": "6e6dae71840ce643d2cea20bafb070484c134fa2a300afea348cb1f3e9b9f2ed"
+  },
+  "stewart-7-1-31ea22e4/figure02.png": {
+    "file": "stewart-7-1-31ea22e4/figure02.png",
+    "mime": "image/png",
+    "sha256": "a03e924afe49de003a7ae91e91ce9d76b758339a63de12786beeaacf6e2eee28"
   }
 }

@@ -1,0 +1,328 @@
+{
+  "exercises": [
+    {
+      "number": 1,
+      "content": "<p><strong>1.</strong></p>\n<p><em>Yêu cầu chung (1–4):</em> Tính tích phân bằng phương pháp từng phần với cách chọn <span class=\"math inline\">\\(u\\)</span> và <span class=\"math inline\">\\(dv\\)</span> đã cho.</p>\n<p><span class=\"math inline\">\\(\\displaystyle\\int xe^{2x}\\,dx\\)</span>; <span class=\"math inline\">\\(u=x\\)</span>, <span class=\"math inline\">\\(dv=e^{2x}\\,dx\\)</span>.</p>\n"
+    },
+    {
+      "number": 2,
+      "content": "<p><strong>2.</strong></p>\n<p><em>Yêu cầu chung (1–4):</em> Tính tích phân bằng phương pháp từng phần với cách chọn <span class=\"math inline\">\\(u\\)</span> và <span class=\"math inline\">\\(dv\\)</span> đã cho.</p>\n<p><span class=\"math inline\">\\(\\displaystyle\\int\\sqrt{x}\\ln x\\,dx\\)</span>; <span class=\"math inline\">\\(u=\\ln x\\)</span>, <span class=\"math inline\">\\(dv=\\sqrt{x}\\,dx\\)</span>.</p>\n"
+    },
+    {
+      "number": 3,
+      "content": "<p><strong>3.</strong></p>\n<p><em>Yêu cầu chung (1–4):</em> Tính tích phân bằng phương pháp từng phần với cách chọn <span class=\"math inline\">\\(u\\)</span> và <span class=\"math inline\">\\(dv\\)</span> đã cho.</p>\n<p><span class=\"math inline\">\\(\\displaystyle\\int x\\cos4x\\,dx\\)</span>; <span class=\"math inline\">\\(u=x\\)</span>, <span class=\"math inline\">\\(dv=\\cos4x\\,dx\\)</span>.</p>\n"
+    },
+    {
+      "number": 4,
+      "content": "<p><strong>4.</strong></p>\n<p><em>Yêu cầu chung (1–4):</em> Tính tích phân bằng phương pháp từng phần với cách chọn <span class=\"math inline\">\\(u\\)</span> và <span class=\"math inline\">\\(dv\\)</span> đã cho.</p>\n<p><span class=\"math inline\">\\(\\displaystyle\\int\\sin^{-1}x\\,dx\\)</span>; <span class=\"math inline\">\\(u=\\sin^{-1}x\\)</span>, <span class=\"math inline\">\\(dv=dx\\)</span>.</p>\n"
+    },
+    {
+      "number": 5,
+      "content": "<p><strong>5.</strong></p>\n<p><em>Yêu cầu chung (5–42):</em> Tính tích phân.</p>\n<p><span class=\"math inline\">\\(\\displaystyle\\int te^{2t}\\,dt\\)</span>.</p>\n"
+    },
+    {
+      "number": 6,
+      "content": "<p><strong>6.</strong></p>\n<p><em>Yêu cầu chung (5–42):</em> Tính tích phân.</p>\n<p><span class=\"math inline\">\\(\\displaystyle\\int ye^{-y}\\,dy\\)</span>.</p>\n"
+    },
+    {
+      "number": 7,
+      "content": "<p><strong>7.</strong></p>\n<p><em>Yêu cầu chung (5–42):</em> Tính tích phân.</p>\n<p><span class=\"math inline\">\\(\\displaystyle\\int x\\sin10x\\,dx\\)</span>.</p>\n"
+    },
+    {
+      "number": 8,
+      "content": "<p><strong>8.</strong></p>\n<p><em>Yêu cầu chung (5–42):</em> Tính tích phân.</p>\n<p><span class=\"math inline\">\\(\\displaystyle\\int(\\pi-x)\\cos\\pi x\\,dx\\)</span>.</p>\n"
+    },
+    {
+      "number": 9,
+      "content": "<p><strong>9.</strong></p>\n<p><em>Yêu cầu chung (5–42):</em> Tính tích phân.</p>\n<p><span class=\"math inline\">\\(\\displaystyle\\int w\\ln w\\,dw\\)</span>.</p>\n"
+    },
+    {
+      "number": 10,
+      "content": "<p><strong>10.</strong></p>\n<p><em>Yêu cầu chung (5–42):</em> Tính tích phân.</p>\n<p><span class=\"math inline\">\\(\\displaystyle\\int\\frac{\\ln x}{x^2}\\,dx\\)</span>.</p>\n"
+    },
+    {
+      "number": 11,
+      "content": "<p><strong>11.</strong></p>\n<p><em>Yêu cầu chung (5–42):</em> Tính tích phân.</p>\n<p><span class=\"math inline\">\\(\\displaystyle\\int(x^2+2x)\\cos x\\,dx\\)</span>.</p>\n"
+    },
+    {
+      "number": 12,
+      "content": "<p><strong>12.</strong></p>\n<p><em>Yêu cầu chung (5–42):</em> Tính tích phân.</p>\n<p><span class=\"math inline\">\\(\\displaystyle\\int t^2\\sin\\beta t\\,dt\\)</span>.</p>\n"
+    },
+    {
+      "number": 13,
+      "content": "<p><strong>13.</strong></p>\n<p><em>Yêu cầu chung (5–42):</em> Tính tích phân.</p>\n<p><span class=\"math inline\">\\(\\displaystyle\\int\\cos^{-1}x\\,dx\\)</span>.</p>\n"
+    },
+    {
+      "number": 14,
+      "content": "<p><strong>14.</strong></p>\n<p><em>Yêu cầu chung (5–42):</em> Tính tích phân.</p>\n<p><span class=\"math inline\">\\(\\displaystyle\\int\\ln\\sqrt{x}\\,dx\\)</span>.</p>\n"
+    },
+    {
+      "number": 15,
+      "content": "<p><strong>15.</strong></p>\n<p><em>Yêu cầu chung (5–42):</em> Tính tích phân.</p>\n<p><span class=\"math inline\">\\(\\displaystyle\\int t^4\\ln t\\,dt\\)</span>.</p>\n"
+    },
+    {
+      "number": 16,
+      "content": "<p><strong>16.</strong></p>\n<p><em>Yêu cầu chung (5–42):</em> Tính tích phân.</p>\n<p><span class=\"math inline\">\\(\\displaystyle\\int\\tan^{-1}(2y)\\,dy\\)</span>.</p>\n"
+    },
+    {
+      "number": 17,
+      "content": "<p><strong>17.</strong></p>\n<p><em>Yêu cầu chung (5–42):</em> Tính tích phân.</p>\n<p><span class=\"math inline\">\\(\\displaystyle\\int t\\csc^2t\\,dt\\)</span>.</p>\n"
+    },
+    {
+      "number": 18,
+      "content": "<p><strong>18.</strong></p>\n<p><em>Yêu cầu chung (5–42):</em> Tính tích phân.</p>\n<p><span class=\"math inline\">\\(\\displaystyle\\int x\\cosh ax\\,dx\\)</span>.</p>\n"
+    },
+    {
+      "number": 19,
+      "content": "<p><strong>19.</strong></p>\n<p><em>Yêu cầu chung (5–42):</em> Tính tích phân.</p>\n<p><span class=\"math inline\">\\(\\displaystyle\\int(\\ln x)^2\\,dx\\)</span>.</p>\n"
+    },
+    {
+      "number": 20,
+      "content": "<p><strong>20.</strong></p>\n<p><em>Yêu cầu chung (5–42):</em> Tính tích phân.</p>\n<p><span class=\"math inline\">\\(\\displaystyle\\int\\frac{z}{10^z}\\,dz\\)</span>.</p>\n"
+    },
+    {
+      "number": 21,
+      "content": "<p><strong>21.</strong></p>\n<p><em>Yêu cầu chung (5–42):</em> Tính tích phân.</p>\n<p><span class=\"math inline\">\\(\\displaystyle\\int e^{3x}\\cos x\\,dx\\)</span>.</p>\n"
+    },
+    {
+      "number": 22,
+      "content": "<p><strong>22.</strong></p>\n<p><em>Yêu cầu chung (5–42):</em> Tính tích phân.</p>\n<p><span class=\"math inline\">\\(\\displaystyle\\int e^x\\sin\\pi x\\,dx\\)</span>.</p>\n"
+    },
+    {
+      "number": 23,
+      "content": "<p><strong>23.</strong></p>\n<p><em>Yêu cầu chung (5–42):</em> Tính tích phân.</p>\n<p><span class=\"math inline\">\\(\\displaystyle\\int e^{2\\theta}\\sin3\\theta\\,d\\theta\\)</span>.</p>\n"
+    },
+    {
+      "number": 24,
+      "content": "<p><strong>24.</strong></p>\n<p><em>Yêu cầu chung (5–42):</em> Tính tích phân.</p>\n<p><span class=\"math inline\">\\(\\displaystyle\\int e^{-\\theta}\\cos2\\theta\\,d\\theta\\)</span>.</p>\n"
+    },
+    {
+      "number": 25,
+      "content": "<p><strong>25.</strong></p>\n<p><em>Yêu cầu chung (5–42):</em> Tính tích phân.</p>\n<p><span class=\"math inline\">\\(\\displaystyle\\int z^3e^z\\,dz\\)</span>.</p>\n"
+    },
+    {
+      "number": 26,
+      "content": "<p><strong>26.</strong></p>\n<p><em>Yêu cầu chung (5–42):</em> Tính tích phân.</p>\n<p><span class=\"math inline\">\\(\\displaystyle\\int(\\arcsin x)^2\\,dx\\)</span>.</p>\n"
+    },
+    {
+      "number": 27,
+      "content": "<p><strong>27.</strong></p>\n<p><em>Yêu cầu chung (5–42):</em> Tính tích phân.</p>\n<p><span class=\"math inline\">\\(\\displaystyle\\int(1+x^2)e^{3x}\\,dx\\)</span>.</p>\n"
+    },
+    {
+      "number": 28,
+      "content": "<p><strong>28.</strong></p>\n<p><em>Yêu cầu chung (5–42):</em> Tính tích phân.</p>\n<p><span class=\"math inline\">\\(\\displaystyle\\int_0^{1/2}\\theta\\sin3\\pi\\theta\\,d\\theta\\)</span>.</p>\n"
+    },
+    {
+      "number": 29,
+      "content": "<p><strong>29.</strong></p>\n<p><em>Yêu cầu chung (5–42):</em> Tính tích phân.</p>\n<p><span class=\"math inline\">\\(\\displaystyle\\int_0^1 x3^x\\,dx\\)</span>.</p>\n"
+    },
+    {
+      "number": 30,
+      "content": "<p><strong>30.</strong></p>\n<p><em>Yêu cầu chung (5–42):</em> Tính tích phân.</p>\n<p><span class=\"math inline\">\\(\\displaystyle\\int_0^1\\frac{xe^x}{(1+x)^2}\\,dx\\)</span>.</p>\n"
+    },
+    {
+      "number": 31,
+      "content": "<p><strong>31.</strong></p>\n<p><em>Yêu cầu chung (5–42):</em> Tính tích phân.</p>\n<p><span class=\"math inline\">\\(\\displaystyle\\int_0^2 y\\sinh y\\,dy\\)</span>.</p>\n"
+    },
+    {
+      "number": 32,
+      "content": "<p><strong>32.</strong></p>\n<p><em>Yêu cầu chung (5–42):</em> Tính tích phân.</p>\n<p><span class=\"math inline\">\\(\\displaystyle\\int_1^2 w^2\\ln w\\,dw\\)</span>.</p>\n"
+    },
+    {
+      "number": 33,
+      "content": "<p><strong>33.</strong></p>\n<p><em>Yêu cầu chung (5–42):</em> Tính tích phân.</p>\n<p><span class=\"math inline\">\\(\\displaystyle\\int_1^5\\frac{\\ln R}{R^2}\\,dR\\)</span>.</p>\n"
+    },
+    {
+      "number": 34,
+      "content": "<p><strong>34.</strong></p>\n<p><em>Yêu cầu chung (5–42):</em> Tính tích phân.</p>\n<p><span class=\"math inline\">\\(\\displaystyle\\int_0^{2\\pi}t^2\\sin2t\\,dt\\)</span>.</p>\n"
+    },
+    {
+      "number": 35,
+      "content": "<p><strong>35.</strong></p>\n<p><em>Yêu cầu chung (5–42):</em> Tính tích phân.</p>\n<p><span class=\"math inline\">\\(\\displaystyle\\int_0^\\pi x\\sin x\\cos x\\,dx\\)</span>.</p>\n"
+    },
+    {
+      "number": 36,
+      "content": "<p><strong>36.</strong></p>\n<p><em>Yêu cầu chung (5–42):</em> Tính tích phân.</p>\n<p><span class=\"math inline\">\\(\\displaystyle\\int_1^{\\sqrt3}\\arctan(1/x)\\,dx\\)</span>.</p>\n"
+    },
+    {
+      "number": 37,
+      "content": "<p><strong>37.</strong></p>\n<p><em>Yêu cầu chung (5–42):</em> Tính tích phân.</p>\n<p><span class=\"math inline\">\\(\\displaystyle\\int_1^5\\frac{M}{e^M}\\,dM\\)</span>.</p>\n"
+    },
+    {
+      "number": 38,
+      "content": "<p><strong>38.</strong></p>\n<p><em>Yêu cầu chung (5–42):</em> Tính tích phân.</p>\n<p><span class=\"math inline\">\\(\\displaystyle\\int_1^2\\frac{(\\ln x)^2}{x^3}\\,dx\\)</span>.</p>\n"
+    },
+    {
+      "number": 39,
+      "content": "<p><strong>39.</strong></p>\n<p><em>Yêu cầu chung (5–42):</em> Tính tích phân.</p>\n<p><span class=\"math inline\">\\(\\displaystyle\\int_0^{\\pi/3}\\sin x\\ln(\\cos x)\\,dx\\)</span>.</p>\n"
+    },
+    {
+      "number": 40,
+      "content": "<p><strong>40.</strong></p>\n<p><em>Yêu cầu chung (5–42):</em> Tính tích phân.</p>\n<p><span class=\"math inline\">\\(\\displaystyle\\int_0^1\\frac{r^3}{\\sqrt{4+r^2}}\\,dr\\)</span>.</p>\n"
+    },
+    {
+      "number": 41,
+      "content": "<p><strong>41.</strong></p>\n<p><em>Yêu cầu chung (5–42):</em> Tính tích phân.</p>\n<p><span class=\"math inline\">\\(\\displaystyle\\int_0^\\pi\\cos x\\sinh x\\,dx\\)</span>.</p>\n"
+    },
+    {
+      "number": 42,
+      "content": "<p><strong>42.</strong></p>\n<p><em>Yêu cầu chung (5–42):</em> Tính tích phân.</p>\n<p><span class=\"math inline\">\\(\\displaystyle\\int_0^t e^s\\sin(t-s)\\,ds\\)</span>.</p>\n"
+    },
+    {
+      "number": 43,
+      "content": "<p><strong>43.</strong></p>\n<p><em>Yêu cầu chung (43–48):</em> Trước hết thực hiện một phép đổi biến, rồi dùng tích phân từng phần để tính tích phân.</p>\n<p><span class=\"math inline\">\\(\\displaystyle\\int e^{\\sqrt{x}}\\,dx\\)</span>.</p>\n"
+    },
+    {
+      "number": 44,
+      "content": "<p><strong>44.</strong></p>\n<p><em>Yêu cầu chung (43–48):</em> Trước hết thực hiện một phép đổi biến, rồi dùng tích phân từng phần để tính tích phân.</p>\n<p><span class=\"math inline\">\\(\\displaystyle\\int\\cos(\\ln x)\\,dx\\)</span>.</p>\n"
+    },
+    {
+      "number": 45,
+      "content": "<p><strong>45.</strong></p>\n<p><em>Yêu cầu chung (43–48):</em> Trước hết thực hiện một phép đổi biến, rồi dùng tích phân từng phần để tính tích phân.</p>\n<p><span class=\"math inline\">\\(\\displaystyle\\int_{\\sqrt{\\pi/2}}^{\\sqrt\\pi}\\theta^3\\cos(\\theta^2)\\,d\\theta\\)</span>.</p>\n"
+    },
+    {
+      "number": 46,
+      "content": "<p><strong>46.</strong></p>\n<p><em>Yêu cầu chung (43–48):</em> Trước hết thực hiện một phép đổi biến, rồi dùng tích phân từng phần để tính tích phân.</p>\n<p><span class=\"math inline\">\\(\\displaystyle\\int_0^\\pi e^{\\cos t}\\sin2t\\,dt\\)</span>.</p>\n"
+    },
+    {
+      "number": 47,
+      "content": "<p><strong>47.</strong></p>\n<p><em>Yêu cầu chung (43–48):</em> Trước hết thực hiện một phép đổi biến, rồi dùng tích phân từng phần để tính tích phân.</p>\n<p><span class=\"math inline\">\\(\\displaystyle\\int x\\ln(1+x)\\,dx\\)</span>.</p>\n"
+    },
+    {
+      "number": 48,
+      "content": "<p><strong>48.</strong></p>\n<p><em>Yêu cầu chung (43–48):</em> Trước hết thực hiện một phép đổi biến, rồi dùng tích phân từng phần để tính tích phân.</p>\n<p><span class=\"math inline\">\\(\\displaystyle\\int\\frac{\\arcsin(\\ln x)}x\\,dx\\)</span>.</p>\n"
+    },
+    {
+      "number": 49,
+      "content": "<p><strong>49.</strong></p>\n<p><em>Yêu cầu chung (49–52):</em> <span class=\"sans-serif\">[Đồ thị]</span> Tính tích phân bất định. Minh họa và kiểm tra tính hợp lý của kết quả bằng cách vẽ đồ thị của cả hàm số lẫn nguyên hàm của nó (lấy <span class=\"math inline\">\\(C=0\\)</span>).</p>\n<p><span class=\"math inline\">\\(\\displaystyle\\int xe^{-2x}\\,dx\\)</span>.</p>\n"
+    },
+    {
+      "number": 50,
+      "content": "<p><strong>50.</strong></p>\n<p><em>Yêu cầu chung (49–52):</em> <span class=\"sans-serif\">[Đồ thị]</span> Tính tích phân bất định. Minh họa và kiểm tra tính hợp lý của kết quả bằng cách vẽ đồ thị của cả hàm số lẫn nguyên hàm của nó (lấy <span class=\"math inline\">\\(C=0\\)</span>).</p>\n<p><span class=\"math inline\">\\(\\displaystyle\\int x^{3/2}\\ln x\\,dx\\)</span>.</p>\n"
+    },
+    {
+      "number": 51,
+      "content": "<p><strong>51.</strong></p>\n<p><em>Yêu cầu chung (49–52):</em> <span class=\"sans-serif\">[Đồ thị]</span> Tính tích phân bất định. Minh họa và kiểm tra tính hợp lý của kết quả bằng cách vẽ đồ thị của cả hàm số lẫn nguyên hàm của nó (lấy <span class=\"math inline\">\\(C=0\\)</span>).</p>\n<p><span class=\"math inline\">\\(\\displaystyle\\int x^3\\sqrt{1+x^2}\\,dx\\)</span>.</p>\n"
+    },
+    {
+      "number": 52,
+      "content": "<p><strong>52.</strong></p>\n<p><em>Yêu cầu chung (49–52):</em> <span class=\"sans-serif\">[Đồ thị]</span> Tính tích phân bất định. Minh họa và kiểm tra tính hợp lý của kết quả bằng cách vẽ đồ thị của cả hàm số lẫn nguyên hàm của nó (lấy <span class=\"math inline\">\\(C=0\\)</span>).</p>\n<p><span class=\"math inline\">\\(\\displaystyle\\int x^2\\sin2x\\,dx\\)</span>.</p>\n"
+    },
+    {
+      "number": 53,
+      "content": "<p><strong>53.</strong></p>\n<p>(a) Dùng công thức truy hồi trong Ví dụ 6 để chứng minh rằng <span class=\"math display\">\\[\\int\\sin^2x\\,dx=\\frac x2-\\frac{\\sin2x}{4}+C.\\]</span> (b) Dùng phần (a) và công thức truy hồi để tính <span class=\"math inline\">\\(\\int\\sin^4x\\,dx\\)</span>.</p>\n"
+    },
+    {
+      "number": 54,
+      "content": "<p><strong>54.</strong></p>\n<p>(a) Chứng minh công thức truy hồi <span class=\"math display\">\\[\\int\\cos^nx\\,dx=\\frac1n\\cos^{n-1}x\\sin x+\\frac{n-1}{n}\\int\\cos^{n-2}x\\,dx.\\]</span> (b) Dùng phần (a) để tính <span class=\"math inline\">\\(\\int\\cos^2x\\,dx\\)</span>.</p>\n<p>(c) Dùng các phần (a) và (b) để tính <span class=\"math inline\">\\(\\int\\cos^4x\\,dx\\)</span>.</p>\n"
+    },
+    {
+      "number": 55,
+      "content": "<p><strong>55.</strong></p>\n<p>(a) Dùng công thức truy hồi trong Ví dụ 6 để chứng minh rằng <span class=\"math display\">\\[\\int_0^{\\pi/2}\\sin^nx\\,dx=\\frac{n-1}{n}\\int_0^{\\pi/2}\\sin^{n-2}x\\,dx,\\]</span> trong đó <span class=\"math inline\">\\(n\\ge2\\)</span> là một số nguyên.</p>\n<p>(b) Dùng phần (a) để tính <span class=\"math inline\">\\(\\int_0^{\\pi/2}\\sin^3x\\,dx\\)</span> và <span class=\"math inline\">\\(\\int_0^{\\pi/2}\\sin^5x\\,dx\\)</span>.</p>\n<p>(c) Dùng phần (a) để chứng minh rằng, đối với các lũy thừa lẻ của sin, <span class=\"math display\">\\[\\int_0^{\\pi/2}\\sin^{2n+1}x\\,dx=\\frac{2\\cdot4\\cdot6\\cdots2n}{3\\cdot5\\cdot7\\cdots(2n+1)}.\\]</span></p>\n"
+    },
+    {
+      "number": 56,
+      "content": "<p><strong>56.</strong></p>\n<p>Chứng minh rằng, đối với các lũy thừa chẵn của sin, <span class=\"math display\">\\[\\int_0^{\\pi/2}\\sin^{2n}x\\,dx=\\frac{1\\cdot3\\cdot5\\cdots(2n-1)}{2\\cdot4\\cdot6\\cdots2n}\\,\\frac\\pi2.\\]</span></p>\n"
+    },
+    {
+      "number": 57,
+      "content": "<p><strong>57.</strong></p>\n<p><em>Yêu cầu chung (57–60):</em> Dùng tích phân từng phần để chứng minh công thức truy hồi.</p>\n<p><span class=\"math inline\">\\(\\displaystyle\\int(\\ln x)^n\\,dx=x(\\ln x)^n-n\\int(\\ln x)^{n-1}\\,dx\\)</span>.</p>\n"
+    },
+    {
+      "number": 58,
+      "content": "<p><strong>58.</strong></p>\n<p><em>Yêu cầu chung (57–60):</em> Dùng tích phân từng phần để chứng minh công thức truy hồi.</p>\n<p><span class=\"math inline\">\\(\\displaystyle\\int x^ne^x\\,dx=x^ne^x-n\\int x^{n-1}e^x\\,dx\\)</span>.</p>\n"
+    },
+    {
+      "number": 59,
+      "content": "<p><strong>59.</strong></p>\n<p><em>Yêu cầu chung (57–60):</em> Dùng tích phân từng phần để chứng minh công thức truy hồi.</p>\n<p><span class=\"math inline\">\\(\\displaystyle\\int\\tan^nx\\,dx=\\frac{\\tan^{n-1}x}{n-1}-\\int\\tan^{n-2}x\\,dx\\quad(n\\ne1)\\)</span>.</p>\n"
+    },
+    {
+      "number": 60,
+      "content": "<p><strong>60.</strong></p>\n<p><em>Yêu cầu chung (57–60):</em> Dùng tích phân từng phần để chứng minh công thức truy hồi.</p>\n<p><span class=\"math inline\">\\(\\displaystyle\\int\\sec^nx\\,dx=\\frac{\\tan x\\sec^{n-2}x}{n-1}+\\frac{n-2}{n-1}\\int\\sec^{n-2}x\\,dx\\quad(n\\ne1)\\)</span>.</p>\n"
+    },
+    {
+      "number": 61,
+      "content": "<p><strong>61.</strong></p>\n<p>Dùng Bài tập 57 để tìm <span class=\"math inline\">\\(\\int(\\ln x)^3\\,dx\\)</span>.</p>\n"
+    },
+    {
+      "number": 62,
+      "content": "<p><strong>62.</strong></p>\n<p>Dùng Bài tập 58 để tìm <span class=\"math inline\">\\(\\int x^4e^x\\,dx\\)</span>.</p>\n"
+    },
+    {
+      "number": 63,
+      "content": "<p><strong>63.</strong></p>\n<p><em>Yêu cầu chung (63–64):</em> Tìm diện tích miền giới hạn bởi các đường cong đã cho.</p>\n<p><span class=\"math inline\">\\(y=x^2\\ln x\\)</span>, <span class=\"math inline\">\\(y=4\\ln x\\)</span>.</p>\n"
+    },
+    {
+      "number": 64,
+      "content": "<p><strong>64.</strong></p>\n<p><em>Yêu cầu chung (63–64):</em> Tìm diện tích miền giới hạn bởi các đường cong đã cho.</p>\n<p><span class=\"math inline\">\\(y=x^2e^{-x}\\)</span>, <span class=\"math inline\">\\(y=xe^{-x}\\)</span>.</p>\n"
+    },
+    {
+      "number": 65,
+      "content": "<p><strong>65.</strong></p>\n<p><em>Yêu cầu chung (65–66):</em> <span class=\"sans-serif\">[Đồ thị]</span> Dùng đồ thị để tìm gần đúng hoành độ các giao điểm của những đường cong đã cho. Sau đó tìm gần đúng diện tích miền giới hạn bởi các đường cong.</p>\n<p><span class=\"math inline\">\\(y=\\arcsin\\left(\\frac12x\\right)\\)</span>, <span class=\"math inline\">\\(y=2-x^2\\)</span>.</p>\n"
+    },
+    {
+      "number": 66,
+      "content": "<p><strong>66.</strong></p>\n<p><em>Yêu cầu chung (65–66):</em> <span class=\"sans-serif\">[Đồ thị]</span> Dùng đồ thị để tìm gần đúng hoành độ các giao điểm của những đường cong đã cho. Sau đó tìm gần đúng diện tích miền giới hạn bởi các đường cong.</p>\n<p><span class=\"math inline\">\\(y=x\\ln(x+1)\\)</span>, <span class=\"math inline\">\\(y=3x-x^2\\)</span>.</p>\n"
+    },
+    {
+      "number": 67,
+      "content": "<p><strong>67.</strong></p>\n<p><em>Yêu cầu chung (67–70):</em> Dùng phương pháp vỏ trụ để tìm thể tích tạo thành bằng cách quay miền giới hạn bởi các đường cong quanh trục đã cho.</p>\n<p><span class=\"math inline\">\\(y=\\cos(\\pi x/2)\\)</span>, <span class=\"math inline\">\\(y=0\\)</span>, <span class=\"math inline\">\\(0\\le x\\le1\\)</span>; quanh trục <span class=\"math inline\">\\(y\\)</span>.</p>\n"
+    },
+    {
+      "number": 68,
+      "content": "<p><strong>68.</strong></p>\n<p><em>Yêu cầu chung (67–70):</em> Dùng phương pháp vỏ trụ để tìm thể tích tạo thành bằng cách quay miền giới hạn bởi các đường cong quanh trục đã cho.</p>\n<p><span class=\"math inline\">\\(y=e^x\\)</span>, <span class=\"math inline\">\\(y=e^{-x}\\)</span>, <span class=\"math inline\">\\(x=1\\)</span>; quanh trục <span class=\"math inline\">\\(y\\)</span>.</p>\n"
+    },
+    {
+      "number": 69,
+      "content": "<p><strong>69.</strong></p>\n<p><em>Yêu cầu chung (67–70):</em> Dùng phương pháp vỏ trụ để tìm thể tích tạo thành bằng cách quay miền giới hạn bởi các đường cong quanh trục đã cho.</p>\n<p><span class=\"math inline\">\\(y=e^{-x}\\)</span>, <span class=\"math inline\">\\(y=0\\)</span>, <span class=\"math inline\">\\(x=-1\\)</span>, <span class=\"math inline\">\\(x=0\\)</span>; quanh <span class=\"math inline\">\\(x=1\\)</span>.</p>\n"
+    },
+    {
+      "number": 70,
+      "content": "<p><strong>70.</strong></p>\n<p><em>Yêu cầu chung (67–70):</em> Dùng phương pháp vỏ trụ để tìm thể tích tạo thành bằng cách quay miền giới hạn bởi các đường cong quanh trục đã cho.</p>\n<p><span class=\"math inline\">\\(y=e^x\\)</span>, <span class=\"math inline\">\\(x=0\\)</span>, <span class=\"math inline\">\\(y=3\\)</span>; quanh trục <span class=\"math inline\">\\(x\\)</span>.</p>\n"
+    },
+    {
+      "number": 71,
+      "content": "<p><strong>71.</strong></p>\n<p>Tính thể tích tạo thành bằng cách quay miền giới hạn bởi các đường cong <span class=\"math inline\">\\(y=\\ln x\\)</span>, <span class=\"math inline\">\\(y=0\\)</span> và <span class=\"math inline\">\\(x=2\\)</span> quanh mỗi trục sau.</p>\n<p>(a) Trục <span class=\"math inline\">\\(y\\)</span>. (b) Trục <span class=\"math inline\">\\(x\\)</span>.</p>\n"
+    },
+    {
+      "number": 72,
+      "content": "<p><strong>72.</strong></p>\n<p>Tính giá trị trung bình của <span class=\"math inline\">\\(f(x)=x\\sec^2x\\)</span> trên đoạn <span class=\"math inline\">\\([0,\\pi/4]\\)</span>.</p>\n"
+    },
+    {
+      "number": 73,
+      "content": "<p><strong>73.</strong></p>\n<p>Hàm Fresnel <span class=\"math inline\">\\(S(x)=\\int_0^x\\sin\\left(\\frac12\\pi t^2\\right)\\,dt\\)</span> đã được thảo luận trong Ví dụ 5.3.3 và được sử dụng rộng rãi trong lý thuyết quang học. Tìm <span class=\"math inline\">\\(\\int S(x)\\,dx\\)</span>. [Kết quả sẽ chứa <span class=\"math inline\">\\(S(x)\\)</span>.]</p>\n"
+    },
+    {
+      "number": 74,
+      "content": "<p><strong>74.</strong></p>\n<p><strong>Phương trình tên lửa.</strong> Tên lửa tăng tốc bằng cách đốt nhiên liệu mang theo, vì vậy khối lượng của nó giảm theo thời gian. Giả sử khối lượng ban đầu của tên lửa lúc rời bệ phóng (kể cả nhiên liệu) là <span class=\"math inline\">\\(m\\)</span>, nhiên liệu được tiêu thụ với tốc độ <span class=\"math inline\">\\(r\\)</span>, và khí thải được phụt ra với vận tốc không đổi <span class=\"math inline\">\\(v_e\\)</span> (so với tên lửa). Một mô hình vận tốc của tên lửa tại thời điểm <span class=\"math inline\">\\(t\\)</span> được cho bởi phương trình <span class=\"math display\">\\[v(t)=-gt-v_e\\ln\\frac{m-rt}{m},\\]</span> trong đó <span class=\"math inline\">\\(g\\)</span> là gia tốc trọng trường và <span class=\"math inline\">\\(t\\)</span> không quá lớn. Nếu <span class=\"math inline\">\\(g=9.8\\)</span> m/s<span class=\"math inline\">\\(^2\\)</span>, <span class=\"math inline\">\\(m=30\\,000\\)</span> kg, <span class=\"math inline\">\\(r=160\\)</span> kg/s và <span class=\"math inline\">\\(v_e=3000\\)</span> m/s, hãy tìm độ cao của tên lửa (a) một phút sau khi rời bệ phóng và (b) sau khi đã tiêu thụ <span class=\"math inline\">\\(6000\\)</span> kg nhiên liệu.</p>\n"
+    },
+    {
+      "number": 75,
+      "content": "<p><strong>75.</strong></p>\n<p>Một chất điểm chuyển động trên một đường thẳng có vận tốc <span class=\"math inline\">\\(v(t)=t^2e^{-t}\\)</span> mét trên giây sau <span class=\"math inline\">\\(t\\)</span> giây. Chất điểm đi được quãng đường bao nhiêu trong <span class=\"math inline\">\\(t\\)</span> giây đầu tiên?</p>\n"
+    },
+    {
+      "number": 76,
+      "content": "<p><strong>76.</strong></p>\n<p>Nếu <span class=\"math inline\">\\(f(0)=g(0)=0\\)</span> và <span class=\"math inline\">\\(f&#39;&#39;\\)</span>, <span class=\"math inline\">\\(g&#39;&#39;\\)</span> liên tục, hãy chứng minh rằng <span class=\"math display\">\\[\\int_0^a f(x)g&#39;&#39;(x)\\,dx=f(a)g&#39;(a)-f&#39;(a)g(a)+\\int_0^a f&#39;&#39;(x)g(x)\\,dx.\\]</span></p>\n"
+    },
+    {
+      "number": 77,
+      "content": "<p><strong>77.</strong></p>\n<p>Giả sử <span class=\"math inline\">\\(f(1)=2\\)</span>, <span class=\"math inline\">\\(f(4)=7\\)</span>, <span class=\"math inline\">\\(f&#39;(1)=5\\)</span>, <span class=\"math inline\">\\(f&#39;(4)=3\\)</span> và <span class=\"math inline\">\\(f&#39;&#39;\\)</span> liên tục. Tìm giá trị của <span class=\"math inline\">\\(\\int_1^4 xf&#39;&#39;(x)\\,dx\\)</span>.</p>\n"
+    },
+    {
+      "number": 78,
+      "content": "<p><strong>78.</strong></p>\n<p>(a) Dùng tích phân từng phần để chứng minh rằng <span class=\"math display\">\\[\\int f(x)\\,dx=xf(x)-\\int xf&#39;(x)\\,dx.\\]</span> (b) Nếu <span class=\"math inline\">\\(f\\)</span> và <span class=\"math inline\">\\(g\\)</span> là các hàm ngược của nhau và <span class=\"math inline\">\\(f&#39;\\)</span> liên tục, hãy chứng minh rằng <span class=\"math display\">\\[\\int_a^b f(x)\\,dx=bf(b)-af(a)-\\int_{f(a)}^{f(b)}g(y)\\,dy.\\]</span> [Gợi ý: Dùng phần (a) và thực hiện phép đổi biến <span class=\"math inline\">\\(y=f(x)\\)</span>.]</p>\n<p>(c) Trong trường hợp <span class=\"math inline\">\\(f\\)</span> và <span class=\"math inline\">\\(g\\)</span> là các hàm dương và <span class=\"math inline\">\\(b&gt;a&gt;0\\)</span>, hãy vẽ một hình để đưa ra cách giải thích hình học cho phần (b).</p>\n<p>(d) Dùng phần (b) để tính <span class=\"math inline\">\\(\\int_1^e\\ln x\\,dx\\)</span>.</p>\n"
+    },
+    {
+      "number": 79,
+      "content": "<p><strong>79.</strong></p>\n<p>(a) Nhớ rằng công thức tích phân từng phần được suy ra từ quy tắc đạo hàm của tích. Dùng lập luận tương tự để suy ra công thức tích phân sau từ quy tắc đạo hàm của thương. <span class=\"math display\">\\[\\int\\frac{u}{v^2}\\,dv=-\\frac uv+\\int\\frac1v\\,du.\\]</span> (b) Dùng công thức ở phần (a) để tính <span class=\"math inline\">\\(\\int\\frac{\\ln x}{x^2}\\,dx\\)</span>.</p>\n"
+    },
+    {
+      "number": 80,
+      "content": "<p><strong>80.</strong></p>\n<p><strong>Công thức tích Wallis cho <span class=\"math inline\">\\(\\pi\\)</span>.</strong> Đặt <span class=\"math inline\">\\(I_n=\\int_0^{\\pi/2}\\sin^nx\\,dx\\)</span>.</p>\n<p>(a) Chứng minh rằng <span class=\"math inline\">\\(I_{2n+2}\\le I_{2n+1}\\le I_{2n}\\)</span>.</p>\n<p>(b) Dùng Bài tập 56 để chứng minh rằng <span class=\"math display\">\\[\\frac{I_{2n+2}}{I_{2n}}=\\frac{2n+1}{2n+2}.\\]</span> (c) Dùng các phần (a) và (b) để chứng minh rằng <span class=\"math display\">\\[\\frac{2n+1}{2n+2}\\le\\frac{I_{2n+1}}{I_{2n}}\\le1,\\]</span> và suy ra <span class=\"math inline\">\\(\\lim_{n\\to\\infty}I_{2n+1}/I_{2n}=1\\)</span>.</p>\n<p>(d) Dùng phần (c) cùng các Bài tập 55 và 56 để chứng minh rằng <span class=\"math display\">\\[\\lim_{n\\to\\infty}\\frac21\\cdot\\frac23\\cdot\\frac43\\cdot\\frac45\\cdot\\frac65\\cdot\\frac67\\cdots\\frac{2n}{2n-1}\\cdot\\frac{2n}{2n+1}=\\frac\\pi2.\\]</span> Công thức này thường được viết dưới dạng một tích vô hạn: <span class=\"math display\">\\[\\frac\\pi2=\\frac21\\cdot\\frac23\\cdot\\frac43\\cdot\\frac45\\cdot\\frac65\\cdot\\frac67\\cdots\\]</span> và được gọi là <em>tích Wallis</em>.</p>\n<p>(e) Ta dựng các hình chữ nhật như sau. Bắt đầu với một hình vuông có diện tích <span class=\"math inline\">\\(1\\)</span> rồi gắn các hình chữ nhật diện tích <span class=\"math inline\">\\(1\\)</span> luân phiên vào bên cạnh hoặc phía trên hình chữ nhật trước đó (xem hình). Tìm giới hạn của các tỉ số chiều rộng trên chiều cao của những hình chữ nhật này.</p>\n<div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-7-1-31ea22e4/exercise80.png\" alt=\"image\" /><br />\nHình cho Bài tập 80.</p>\n</div>\n"
+    },
+    {
+      "number": 81,
+      "content": "<p><strong>81.</strong></p>\n<p>Ta đã thu được Công thức 6.3.2, <span class=\"math inline\">\\(V=\\int_a^b2\\pi xf(x)\\,dx\\)</span>, bằng cách dùng vỏ trụ, nhưng bây giờ có thể dùng tích phân từng phần để chứng minh công thức ấy bằng phương pháp thiết diện ở Mục 6.2, ít nhất trong trường hợp <span class=\"math inline\">\\(f\\)</span> là đơn ánh và do đó có hàm ngược <span class=\"math inline\">\\(g\\)</span>. Dùng hình vẽ để chứng minh rằng <span class=\"math display\">\\[V=\\pi b^2d-\\pi a^2c-\\int_c^d\\pi[g(y)]^2\\,dy.\\]</span> Thực hiện phép đổi biến <span class=\"math inline\">\\(y=f(x)\\)</span> rồi dùng tích phân từng phần đối với tích phân thu được để chứng minh rằng <span class=\"math display\">\\[V=\\int_a^b2\\pi xf(x)\\,dx.\\]</span></p>\n<div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-7-1-31ea22e4/exercise81.png\" alt=\"image\" /><br />\nHình cho Bài tập 81.</p>\n</div>\n"
+    }
+  ]
+}
