@@ -1,0 +1,348 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage{fontspec}\setmainfont{Latin Modern Roman}\setsansfont{DejaVu Sans}
+\usepackage{amsmath,amssymb,graphicx,geometry,enumitem,needspace,longtable,booktabs,fancyhdr,hyperref}
+\geometry{left=28mm,right=23mm,top=24mm,bottom=24mm}
+\hypersetup{unicode=true,colorlinks=true,linkcolor=black,urlcolor=blue,pdftitle={Giải tích §7.2 — Tích phân lượng giác}}
+\setlength{\parindent}{1.2em}\setlength{\parskip}{4pt}\setlength{\headheight}{16pt}
+\pagestyle{fancy}\fancyhf{}\fancyhead[L]{\small Chương 7. Các phương pháp tính tích phân}\fancyhead[R]{\small §7.2}\fancyfoot[C]{\thepage}
+\newcommand{\fig}[3][.68]{\begin{center}\begin{minipage}{\linewidth}\centering\includegraphics[width=#1\linewidth]{assets/#2.png}\\{\small #3}\end{minipage}\end{center}}
+\newcommand{\ex}[1]{\par\medskip\noindent\textbf{Ví dụ #1.}\ }
+\newcommand{\sol}{\par\nopagebreak[4]\noindent\textit{Lời giải.}\ }
+\newcommand{\bt}[1]{\par\smallskip\Needspace{5\baselineskip}\noindent\textbf{#1.}\ }
+\newcommand{\group}[1]{\par\Needspace{11\baselineskip}\medskip\noindent\textbf{#1}\par\nopagebreak[4]}
+\newcommand{\gint}[1]{\left[\!\left[#1\right]\!\right]}
+\allowdisplaybreaks[2]
+\DeclareMathOperator{\sech}{sech}
+\DeclareMathOperator{\csch}{csch}
+\DeclareMathOperator{\arccot}{arccot}
+
+\newcommand{\prj}[1]{\bt{#1}}
+
+\newcommand{\kn}[1]{\bt{#1}}
+\newcommand{\ds}[1]{\bt{#1}}
+\setlength{\emergencystretch}{1em}
+\begin{document}
+\begin{center}{\LARGE\bfseries 7.2 — Tích phân lượng giác}\end{center}
+Trong mục này, ta sử dụng các đồng nhất thức lượng giác để tính tích phân của một số tổ hợp các hàm lượng giác.
+
+\section*{Tích phân của các lũy thừa của sin và cos}
+Ta bắt đầu bằng cách xét các tích phân trong đó hàm dưới dấu tích phân là một lũy thừa của sin, một lũy thừa của cos, hoặc một tích của chúng.
+
+\ex{1} Tính $\displaystyle\int\cos^3x\,dx$.
+\sol Chỉ đơn giản đặt $u=\cos x$ thì không có ích, vì khi đó $du=-\sin x\,dx$. Để tính tích phân của các lũy thừa của cos, ta cần thêm một thừa số $\sin x$. Tương tự, một lũy thừa của sin đòi hỏi thêm một thừa số $\cos x$. Vì vậy, ở đây ta có thể tách một thừa số cos và biến đổi thừa số $\cos^2x$ còn lại thành một biểu thức theo sin bằng đồng nhất thức $\sin^2x+\cos^2x=1$:
+\[\cos^3x=\cos^2x\cdot\cos x=(1-\sin^2x)\cos x.\]
+Khi đó ta có thể tính tích phân bằng phép đổi biến $u=\sin x$, nên $du=\cos x\,dx$, và
+\begin{align*}
+\int\cos^3x\,dx&=\int\cos^2x\cdot\cos x\,dx=\int(1-\sin^2x)\cos x\,dx\\
+&=\int(1-u^2)\,du=u-\frac13u^3+C\\
+&=\sin x-\frac13\sin^3x+C.
+\end{align*}
+Nói chung, ta cố gắng viết một hàm dưới dấu tích phân có chứa các lũy thừa của sin và cos dưới dạng chỉ có một thừa số sin (và phần còn lại của biểu thức được viết theo cos), hoặc chỉ có một thừa số cos (và phần còn lại của biểu thức được viết theo sin). Đồng nhất thức $\sin^2x+\cos^2x=1$ cho phép chuyển qua lại giữa các lũy thừa chẵn của sin và cos.
+
+\ex{2} Tìm $\displaystyle\int\sin^5x\cos^2x\,dx$.
+\sol Ta có thể thay $\cos^2x$ bằng $1-\sin^2x$, nhưng khi đó chỉ còn một biểu thức theo $\sin x$ mà không có thêm thừa số $\cos x$. Thay vào đó, ta tách một thừa số sin và viết lại thừa số $\sin^4x$ còn lại theo $\cos x$:
+\[\sin^5x\cos^2x=(\sin^2x)^2\cos^2x\sin x=(1-\cos^2x)^2\cos^2x\sin x.\]
+Đặt $u=\cos x$, ta có $du=-\sin x\,dx$, do đó
+\begin{align*}
+\int\sin^5x\cos^2x\,dx&=\int(\sin^2x)^2\cos^2x\sin x\,dx\\
+&=\int(1-\cos^2x)^2\cos^2x\sin x\,dx\\
+&=\int(1-u^2)^2u^2(-du)=-\int(u^2-2u^4+u^6)\,du\\
+&=-\left(\frac{u^3}{3}-2\frac{u^5}{5}+\frac{u^7}{7}\right)+C\\
+&=-\frac13\cos^3x+\frac25\cos^5x-\frac17\cos^7x+C.
+\end{align*}
+Hình 1 cho thấy đồ thị của hàm dưới dấu tích phân $\sin^5x\cos^2x$ trong Ví dụ 2 và tích phân bất định của nó (với $C=0$). Đồ thị nào ứng với hàm nào?
+\fig[.34]{figure01}{Hình 1.}
+
+Trong các ví dụ trên, một lũy thừa lẻ của sin hoặc cos cho phép tách một thừa số và biến đổi lũy thừa chẵn còn lại. Nếu hàm dưới dấu tích phân chứa các lũy thừa chẵn của cả sin và cos thì cách làm này không có tác dụng. Trong trường hợp đó, ta có thể sử dụng các công thức hạ bậc sau (xem các Phương trình 18b và 18a ở Phụ lục D):
+\[\sin^2x=\frac12(1-\cos2x),\qquad\cos^2x=\frac12(1+\cos2x).\]
+
+\ex{3} Tính $\displaystyle\int_0^\pi\sin^2x\,dx$.
+\sol Nếu viết $\sin^2x=1-\cos^2x$ thì tích phân cũng không đơn giản hơn. Tuy nhiên, dùng công thức hạ bậc cho $\sin^2x$, ta có
+\begin{align*}
+\int_0^\pi\sin^2x\,dx&=\frac12\int_0^\pi(1-\cos2x)\,dx\\
+&=\left[\frac12\left(x-\frac12\sin2x\right)\right]_0^\pi\\
+&=\frac12\left(\pi-\frac12\sin2\pi\right)-\frac12\left(0-\frac12\sin0\right)=\frac\pi2.
+\end{align*}
+Chú ý rằng khi lấy tích phân $\cos2x$, ta đã nhẩm thực hiện phép đổi biến $u=2x$. Một phương pháp khác để tính tích phân này đã được nêu trong Bài tập 7.1.53.
+
+\Needspace{12\baselineskip}
+Ví dụ 3 cho thấy diện tích của miền trong Hình 2 là $\pi/2$.
+\fig[.32]{figure02}{Hình 2.}
+
+\ex{4} Tìm $\displaystyle\int\sin^4x\,dx$.
+\sol Ta có thể tính tích phân này bằng công thức truy hồi của $\int\sin^nx\,dx$ (Phương trình 7.1.7) kết hợp với Ví dụ 3 (như trong Bài tập 7.1.53), nhưng một phương pháp tốt hơn là viết $\sin^4x=(\sin^2x)^2$ và dùng công thức hạ bậc:
+\begin{align*}
+\int\sin^4x\,dx&=\int(\sin^2x)^2\,dx\\
+&=\int\left[\frac12(1-\cos2x)\right]^2\,dx\\
+&=\frac14\int[1-2\cos2x+\cos^2(2x)]\,dx.
+\end{align*}
+Vì xuất hiện $\cos^2(2x)$, ta dùng công thức hạ bậc cho cos để viết
+\[\cos^2(2x)=\frac12[1+\cos(2\cdot2x)]=\frac12(1+\cos4x).\]
+Do đó
+\begin{align*}
+\int\sin^4x\,dx&=\frac14\int\left[1-2\cos2x+\frac12(1+\cos4x)\right]\,dx\\
+&=\frac14\int\left(\frac32-2\cos2x+\frac12\cos4x\right)\,dx\\
+&=\frac14\left(\frac32x-\sin2x+\frac18\sin4x\right)+C.
+\end{align*}
+Để tổng kết, dưới đây là các hướng dẫn khi tính tích phân có dạng $\int\sin^mx\cos^nx\,dx$, trong đó $m\ge0$ và $n\ge0$ là các số nguyên.
+
+\section*{Chiến lược tính tích phân của sin và cos}
+\[\int\sin^mx\cos^nx\,dx\]
+(a) Nếu số mũ của cos là lẻ ($n=2k+1$), giữ lại một thừa số cos và dùng $\cos^2x=1-\sin^2x$ để biểu diễn các thừa số còn lại theo sin:
+\begin{align*}
+\int\sin^mx\cos^{2k+1}x\,dx&=\int\sin^mx(\cos^2x)^k\cos x\,dx\\
+&=\int\sin^mx(1-\sin^2x)^k\cos x\,dx.
+\end{align*}
+Sau đó đặt $u=\sin x$. Xem Ví dụ 1.
+
+(b) Nếu số mũ của sin là lẻ ($m=2k+1$), giữ lại một thừa số sin và dùng $\sin^2x=1-\cos^2x$ để biểu diễn các thừa số còn lại theo cos:
+\begin{align*}
+\int\sin^{2k+1}x\cos^nx\,dx&=\int(\sin^2x)^k\cos^nx\sin x\,dx\\
+&=\int(1-\cos^2x)^k\cos^nx\sin x\,dx.
+\end{align*}
+Sau đó đặt $u=\cos x$. Xem Ví dụ 2.
+
+[Chú ý rằng nếu số mũ của cả sin và cos đều lẻ thì có thể dùng (a) hoặc (b).]
+
+(c) Nếu số mũ của cả sin và cos đều chẵn, dùng các công thức hạ bậc
+\[\sin^2x=\frac12(1-\cos2x),\qquad\cos^2x=\frac12(1+\cos2x).\]
+Xem các Ví dụ 3 và 4.
+
+Đôi khi cũng hữu ích khi dùng đồng nhất thức
+\[\sin x\cos x=\frac12\sin2x.\]
+
+\section*{Tích phân của các lũy thừa của sec và tan}
+Ta dùng lập luận tương tự để tính các tích phân dạng $\int\tan^mx\sec^nx\,dx$.\par
+Vì $(d/dx)\tan x=\sec^2x$, ta có thể tách một thừa số $\sec^2x$ và biến đổi lũy thừa chẵn còn lại của sec thành một biểu thức theo tan bằng đồng nhất thức $\sec^2x=1+\tan^2x$. 
+
+Hoặc, vì $(d/dx)\sec x=\sec x\tan x$, ta có thể tách một thừa số $\sec x\tan x$ và biến đổi lũy thừa chẵn còn lại của tan thành sec.
+
+\ex{5} Tính $\displaystyle\int\tan^6x\sec^4x\,dx$.
+\sol Nếu tách một thừa số $\sec^2x$, ta có thể biểu diễn thừa số $\sec^2x$ còn lại theo tan bằng đồng nhất thức $\sec^2x=1+\tan^2x$. Sau đó có thể tính tích phân bằng phép đổi biến $u=\tan x$, nên $du=\sec^2x\,dx$:
+\begin{align*}
+\int\tan^6x\sec^4x\,dx&=\int\tan^6x\sec^2x\sec^2x\,dx\\
+&=\int\tan^6x(1+\tan^2x)\sec^2x\,dx\\
+&=\int u^6(1+u^2)\,du=\int(u^6+u^8)\,du\\
+&=\frac{u^7}{7}+\frac{u^9}{9}+C=\frac17\tan^7x+\frac19\tan^9x+C.
+\end{align*}
+
+\ex{6} Tìm $\displaystyle\int\tan^5\theta\sec^7\theta\,d\theta$.
+\sol Nếu tách một thừa số $\sec^2\theta$ như trong ví dụ trước, ta còn lại một thừa số $\sec^5\theta$, không dễ chuyển sang tan. Tuy nhiên, nếu tách một thừa số $\sec\theta\tan\theta$, ta có thể biến đổi lũy thừa còn lại của tan thành một biểu thức chỉ chứa sec bằng đồng nhất thức $\tan^2\theta=\sec^2\theta-1$. Khi đó có thể tính tích phân bằng phép đổi biến $u=\sec\theta$, nên $du=\sec\theta\tan\theta\,d\theta$:
+\begin{align*}
+\int\tan^5\theta\sec^7\theta\,d\theta&=\int\tan^4\theta\sec^6\theta\sec\theta\tan\theta\,d\theta\\
+&=\int(\sec^2\theta-1)^2\sec^6\theta\sec\theta\tan\theta\,d\theta\\
+&=\int(u^2-1)^2u^6\,du\\
+&=\int(u^{10}-2u^8+u^6)\,du\\
+&=\frac{u^{11}}{11}-2\frac{u^9}{9}+\frac{u^7}{7}+C\\
+&=\frac1{11}\sec^{11}\theta-\frac29\sec^9\theta+\frac17\sec^7\theta+C.
+\end{align*}
+Các ví dụ trên minh họa những chiến lược tính tích phân dạng $\int\tan^mx\sec^nx\,dx$ trong hai trường hợp, được tổng kết dưới đây.
+
+\section*{Chiến lược tính tích phân của tích các lũy thừa của tan và sec}
+\[\int\tan^mx\sec^nx\,dx\]
+(a) Nếu số mũ của sec là chẵn ($n=2k$, $k\ge2$), giữ lại một thừa số $\sec^2x$ và dùng $\sec^2x=1+\tan^2x$ để biểu diễn các thừa số còn lại theo $\tan x$:
+\begin{align*}
+\int\tan^mx\sec^{2k}x\,dx&=\int\tan^mx(\sec^2x)^{k-1}\sec^2x\,dx\\
+&=\int\tan^mx(1+\tan^2x)^{k-1}\sec^2x\,dx.
+\end{align*}
+Sau đó đặt $u=\tan x$. Xem Ví dụ 5.
+
+(b) Nếu số mũ của tan là lẻ ($m=2k+1$), giữ lại một thừa số $\sec x\tan x$ và dùng $\tan^2x=\sec^2x-1$ để biểu diễn các thừa số còn lại theo $\sec x$:
+\begin{align*}
+\int\tan^{2k+1}x\sec^nx\,dx&=\int(\tan^2x)^k\sec^{n-1}x\sec x\tan x\,dx\\
+&=\int(\sec^2x-1)^k\sec^{n-1}x\sec x\tan x\,dx.
+\end{align*}
+Sau đó đặt $u=\sec x$. Xem Ví dụ 6.
+
+Đối với các trường hợp khác, hướng dẫn không rõ ràng như vậy. Ta có thể cần dùng các đồng nhất thức, tích phân từng phần và đôi khi một chút khéo léo. Đôi khi ta cần tính tích phân của $\tan x$ bằng công thức đã được thiết lập ở (5.5.5):
+\[\int\tan x\,dx=\ln|\sec x|+C.\]
+Ta cũng cần tích phân bất định của sec:
+\begin{equation}\int\sec x\,dx=\ln|\sec x+\tan x|+C.\tag{1}\end{equation}
+\textit{Ghi chú bên lề.} Công thức 1 được James Gregory tìm ra năm 1668. (Xem tiểu sử của ông ở Mục 3.4.) Gregory đã dùng công thức này để giải một bài toán trong việc lập các bảng hàng hải.
+
+Ta có thể kiểm tra Công thức 1 bằng cách lấy đạo hàm vế phải, hoặc như sau. Trước hết, nhân cả tử và mẫu với $\sec x+\tan x$:
+\begin{align*}
+\int\sec x\,dx&=\int\sec x\,\frac{\sec x+\tan x}{\sec x+\tan x}\,dx\\
+&=\int\frac{\sec^2x+\sec x\tan x}{\sec x+\tan x}\,dx.
+\end{align*}
+Nếu đặt $u=\sec x+\tan x$ thì $du=(\sec x\tan x+\sec^2x)\,dx$, nên tích phân trở thành $\int(1/u)\,du=\ln|u|+C$. Vậy ta có
+\[\int\sec x\,dx=\ln|\sec x+\tan x|+C.\]
+
+\ex{7} Tìm $\displaystyle\int\tan^3x\,dx$.
+\sol Ở đây chỉ xuất hiện $\tan x$, nên ta dùng $\tan^2x=\sec^2x-1$ để viết lại một thừa số $\tan^2x$ theo $\sec^2x$:
+\begin{align*}
+\int\tan^3x\,dx&=\int\tan x\tan^2x\,dx=\int\tan x(\sec^2x-1)\,dx\\
+&=\int\tan x\sec^2x\,dx-\int\tan x\,dx\\
+&=\frac12\tan^2x-\ln|\sec x|+C.
+\end{align*}
+Trong tích phân thứ nhất, ta đã nhẩm đặt $u=\tan x$, nên $du=\sec^2x\,dx$.
+
+Nếu một lũy thừa chẵn của tan xuất hiện cùng một lũy thừa lẻ của sec thì nên biểu diễn toàn bộ hàm dưới dấu tích phân theo $\sec x$. Các lũy thừa của $\sec x$ có thể đòi hỏi tích phân từng phần, như trong ví dụ sau.
+
+\ex{8} Tìm $\displaystyle\int\sec^3x\,dx$.
+\sol Ở đây ta lấy tích phân từng phần với
+\[u=\sec x,\qquad dv=\sec^2x\,dx,\]
+\[du=\sec x\tan x\,dx,\qquad v=\tan x.\]
+Khi đó
+\begin{align*}
+\int\sec^3x\,dx&=\sec x\tan x-\int\sec x\tan^2x\,dx\\
+&=\sec x\tan x-\int\sec x(\sec^2x-1)\,dx\\
+&=\sec x\tan x-\int\sec^3x\,dx+\int\sec x\,dx.
+\end{align*}
+Dùng Công thức 1 và giải để tìm tích phân cần tính, ta được
+\[\int\sec^3x\,dx=\frac12\big(\sec x\tan x+\ln|\sec x+\tan x|\big)+C.\]
+Những tích phân như trong ví dụ vừa rồi có vẻ rất đặc biệt, nhưng chúng thường xuyên xuất hiện trong các ứng dụng của tích phân, như ta sẽ thấy ở Chương 8.
+
+Cuối cùng, các tích phân dạng
+\[\int\cot^mx\csc^nx\,dx\]
+có thể được tính theo cách tương tự bằng đồng nhất thức $1+\cot^2x=\csc^2x$.
+
+\section*{Sử dụng các công thức biến đổi tích thành tổng}
+Các đồng nhất thức sau hữu ích trong việc tính một số tích phân lượng giác.
+
+\noindent\textbf{2.} Để tính các tích phân sau, dùng đồng nhất thức tương ứng:
+\[
+\text{(a)}\ \int\sin mx\cos nx\,dx,\quad
+\text{(b)}\ \int\sin mx\sin nx\,dx,\quad
+\text{(c)}\ \int\cos mx\cos nx\,dx.
+\]
+\begin{align*}
+\text{(a)}\quad\sin A\cos B&=\frac12[\sin(A-B)+\sin(A+B)],\\
+\text{(b)}\quad\sin A\sin B&=\frac12[\cos(A-B)-\cos(A+B)],\\
+\text{(c)}\quad\cos A\cos B&=\frac12[\cos(A-B)+\cos(A+B)].
+\end{align*}
+\textit{Ghi chú bên lề.} Các công thức biến đổi tích thành tổng này được thảo luận ở Phụ lục D.
+
+\ex{9} Tính $\displaystyle\int\sin4x\cos5x\,dx$.
+\sol Tích phân này có thể tính bằng phương pháp từng phần, nhưng dùng đồng nhất thức trong Phương trình 2(a) thì dễ hơn:
+\begin{align*}
+\int\sin4x\cos5x\,dx&=\int\frac12[\sin(-x)+\sin9x]\,dx\\
+&=\frac12\int(-\sin x+\sin9x)\,dx\\
+&=\frac12\left(\cos x-\frac19\cos9x\right)+C.
+\end{align*}
+
+\clearpage
+\section*{7.2 — Bài tập}
+\group{1–56} Tính tích phân.
+\bt{1} $\displaystyle\int\sin^3x\cos^2x\,dx$.
+\bt{2} $\displaystyle\int\cos^6y\sin^3y\,dy$.
+\bt{3} $\displaystyle\int_0^{\pi/2}\cos^9x\sin^5x\,dx$.
+\bt{4} $\displaystyle\int_0^{\pi/4}\sin^5x\,dx$.
+\bt{5} $\displaystyle\int\sin^5(2t)\cos^2(2t)\,dt$.
+\bt{6} $\displaystyle\int\cos^3(t/2)\sin^2(t/2)\,dt$.
+\bt{7} $\displaystyle\int_0^{\pi/2}\cos^2\theta\,d\theta$.
+\bt{8} $\displaystyle\int_0^{\pi/4}\sin^2(2\theta)\,d\theta$.
+\bt{9} $\displaystyle\int_0^\pi\cos^4(2t)\,dt$.
+\bt{10} $\displaystyle\int_0^\pi\sin^2t\cos^4t\,dt$.
+\bt{11} $\displaystyle\int_0^{\pi/2}\sin^2x\cos^2x\,dx$.
+\bt{12} $\displaystyle\int_0^{\pi/2}(2-\sin\theta)^2\,d\theta$.
+\bt{13} $\displaystyle\int\sqrt{\cos\theta}\sin^3\theta\,d\theta$.
+\bt{14} $\displaystyle\int(1+\sqrt[3]{\sin t})\cos^3t\,dt$.
+\bt{15} $\displaystyle\int\sin x\sec^5x\,dx$.
+\bt{16} $\displaystyle\int\csc^5\theta\cos^3\theta\,d\theta$.
+\bt{17} $\displaystyle\int\cot x\cos^2x\,dx$.
+\bt{18} $\displaystyle\int\tan^2x\cos^3x\,dx$.
+\bt{19} $\displaystyle\int\sin^2x\sin2x\,dx$.
+\bt{20} $\displaystyle\int\sin x\cos\left(\frac12x\right)\,dx$.
+\bt{21} $\displaystyle\int\tan x\sec^3x\,dx$.
+\bt{22} $\displaystyle\int\tan^2\theta\sec^4\theta\,d\theta$.
+\bt{23} $\displaystyle\int\tan^2x\,dx$.
+\bt{24} $\displaystyle\int(\tan^2x+\tan^4x)\,dx$.
+\bt{25} $\displaystyle\int\tan^4x\sec^6x\,dx$.
+\bt{26} $\displaystyle\int_0^{\pi/4}\sec^6\theta\tan^6\theta\,d\theta$.
+\bt{27} $\displaystyle\int\tan^3x\sec x\,dx$.
+\bt{28} $\displaystyle\int\tan^5x\sec^3x\,dx$.
+\bt{29} $\displaystyle\int\tan^3x\sec^6x\,dx$.
+\bt{30} $\displaystyle\int_0^{\pi/4}\tan^4t\,dt$.
+\bt{31} $\displaystyle\int\tan^5x\,dx$.
+\bt{32} $\displaystyle\int\tan^2x\sec x\,dx$.
+\bt{33} $\displaystyle\int\frac{1-\tan^2x}{\sec^2x}\,dx$.
+\bt{34} $\displaystyle\int\frac{\tan x\sec^2x}{\cos x}\,dx$.
+\bt{35} $\displaystyle\int_0^{\pi/4}\frac{\sin^3x}{\cos x}\,dx$.
+\bt{36} $\displaystyle\int\frac{\sin\theta+\tan\theta}{\cos^3\theta}\,d\theta$.
+\bt{37} $\displaystyle\int_{\pi/6}^{\pi/2}\cot^2x\,dx$.
+\bt{38} $\displaystyle\int_{\pi/4}^{\pi/2}\cot^3x\,dx$.
+\bt{39} $\displaystyle\int_{\pi/4}^{\pi/2}\cot^5\phi\csc^3\phi\,d\phi$.
+\bt{40} $\displaystyle\int_{\pi/4}^{\pi/2}\csc^4\theta\cot^4\theta\,d\theta$.
+\bt{41} $\displaystyle\int\csc x\,dx$.
+\bt{42} $\displaystyle\int_{\pi/6}^{\pi/3}\csc^3x\,dx$.
+\bt{43} $\displaystyle\int\sin8x\cos5x\,dx$.
+\bt{44} $\displaystyle\int\sin2\theta\sin6\theta\,d\theta$.
+\bt{45} $\displaystyle\int_0^{\pi/2}\cos5t\cos10t\,dt$.
+\bt{46} $\displaystyle\int t\cos^5(t^2)\,dt$.
+\bt{47} $\displaystyle\int\frac{\sin^2(1/t)}{t^2}\,dt$.
+\bt{48} $\displaystyle\int\sec^2y\cos^3(\tan y)\,dy$.
+\bt{49} $\displaystyle\int_0^{\pi/6}\sqrt{1+\cos2x}\,dx$.
+\bt{50} $\displaystyle\int_0^{\pi/4}\sqrt{1-\cos4\theta}\,d\theta$.
+\bt{51} $\displaystyle\int t\sin^2t\,dt$.
+\bt{52} $\displaystyle\int x\sec x\tan x\,dx$.
+\bt{53} $\displaystyle\int x\tan^2x\,dx$.
+\bt{54} $\displaystyle\int x\sin^3x\,dx$.
+\bt{55} $\displaystyle\int\frac{dx}{\cos x-1}$.
+\bt{56} $\displaystyle\int\frac1{\sec\theta+1}\,d\theta$.
+
+\group{57–60} \textsf{[Đồ thị]} Tính tích phân bất định. Minh họa và kiểm tra tính hợp lý của kết quả bằng cách vẽ đồ thị của cả hàm dưới dấu tích phân và nguyên hàm của nó (lấy $C=0$).
+\bt{57} $\displaystyle\int x\sin^2(x^2)\,dx$.
+\bt{58} $\displaystyle\int\sin^5x\cos^3x\,dx$.
+\bt{59} $\displaystyle\int\sin3x\sin6x\,dx$.
+\bt{60} $\displaystyle\int\sec^4\left(\frac12x\right)\,dx$.
+
+\bt{61} Nếu $\int_0^{\pi/4}\tan^6x\sec x\,dx=I$, hãy biểu diễn giá trị của $\int_0^{\pi/4}\tan^8x\sec x\,dx$ theo $I$.
+
+\bt{62} (a) Chứng minh công thức truy hồi
+\[\int\tan^{2n}x\,dx=\frac{\tan^{2n-1}x}{2n-1}-\int\tan^{2n-2}x\,dx.\]
+(b) Dùng công thức này để tìm $\int\tan^8x\,dx$.
+
+\bt{63} Tìm giá trị trung bình của hàm $f(x)=\sin^2x\cos^3x$ trên đoạn $[-\pi,\pi]$.
+
+\bt{64} Tính $\int\sin x\cos x\,dx$ bằng bốn phương pháp:
+
+(a) Phép đổi biến $u=\cos x$.
+
+(b) Phép đổi biến $u=\sin x$.
+
+(c) Đồng nhất thức $\sin2x=2\sin x\cos x$.
+
+(d) Tích phân từng phần.
+
+Giải thích vì sao các kết quả có dạng khác nhau.
+
+\group{65–66} Tìm diện tích miền giới hạn bởi các đường cong đã cho.
+\bt{65} $y=\sin^2x$, $y=\sin^3x$, $0\le x\le\pi$.
+\bt{66} $y=\tan x$, $y=\tan^2x$, $0\le x\le\pi/4$.
+
+\group{67–68} \textsf{[Đồ thị]} Dùng đồ thị của hàm dưới dấu tích phân để dự đoán giá trị tích phân. Sau đó dùng các phương pháp trong mục này để chứng minh dự đoán là đúng.
+\bt{67} $\displaystyle\int_0^{2\pi}\cos^3x\,dx$.
+\bt{68} $\displaystyle\int_0^2\sin2\pi x\cos5\pi x\,dx$.
+
+\group{69–72} Tìm thể tích thu được khi quay miền giới hạn bởi các đường cong quanh trục đã cho.
+\bt{69} $y=\sin x$, $y=0$, $\pi/2\le x\le\pi$; quanh trục $x$.
+\bt{70} $y=\sin^2x$, $y=0$, $0\le x\le\pi$; quanh trục $x$.
+\bt{71} $y=\sin x$, $y=\cos x$, $0\le x\le\pi/4$; quanh $y=1$.
+\bt{72} $y=\sec x$, $y=\cos x$, $0\le x\le\pi/3$; quanh $y=-1$.
+
+\bt{73} Một chất điểm chuyển động trên một đường thẳng với hàm vận tốc $v(t)=\sin\omega t\cos^2\omega t$. Tìm hàm vị trí $s=f(t)$ nếu $f(0)=0$.
+
+\bt{74} Điện sinh hoạt được cung cấp dưới dạng dòng điện xoay chiều có điện áp biến thiên từ $155$ V đến $-155$ V với tần số $60$ chu kỳ mỗi giây (Hz). Vì vậy, điện áp được cho bởi phương trình
+\[E(t)=155\sin(120\pi t),\]
+trong đó $t$ là thời gian tính bằng giây. Vôn kế chỉ điện áp hiệu dụng RMS (căn bậc hai của trung bình bình phương), tức là căn bậc hai của giá trị trung bình của $[E(t)]^2$ trong một chu kỳ.
+
+(a) Tính điện áp hiệu dụng của dòng điện sinh hoạt.
+
+(b) Nhiều bếp điện đòi hỏi điện áp hiệu dụng $220$ V. Tìm biên độ $A$ tương ứng cần có cho điện áp $E(t)=A\sin(120\pi t)$.
+
+\group{75–77} Chứng minh công thức, trong đó $m$ và $n$ là các số nguyên dương.
+\bt{75} $\displaystyle\int_{-\pi}^{\pi}\sin mx\cos nx\,dx=0$.
+\bt{76}
+\[\int_{-\pi}^{\pi}\sin mx\sin nx\,dx=\begin{cases}0&\text{nếu }m\ne n,\\\pi&\text{nếu }m=n.\end{cases}\]
+\bt{77}
+\[\int_{-\pi}^{\pi}\cos mx\cos nx\,dx=\begin{cases}0&\text{nếu }m\ne n,\\\pi&\text{nếu }m=n.\end{cases}\]
+
+\bt{78} Một \textit{chuỗi Fourier hữu hạn} được cho bởi tổng
+\begin{align*}
+f(x)&=\sum_{n=1}^N a_n\sin nx\\
+&=a_1\sin x+a_2\sin2x+\cdots+a_N\sin Nx.
+\end{align*}
+Dùng kết quả của Bài tập 76 để chứng minh rằng hệ số thứ $m$, $a_m$, được cho bởi công thức
+\[a_m=\frac1\pi\int_{-\pi}^{\pi}f(x)\sin mx\,dx.\]
+\end{document}

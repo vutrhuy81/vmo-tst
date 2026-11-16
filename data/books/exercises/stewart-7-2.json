@@ -1,0 +1,316 @@
+{
+  "exercises": [
+    {
+      "number": 1,
+      "content": "<p>Yêu cầu chung: Tính tích phân.</p><p><span class=\"math inline\">\\(\\displaystyle\\int\\sin^3x\\cos^2x\\,dx\\)</span>.</p>"
+    },
+    {
+      "number": 2,
+      "content": "<p>Yêu cầu chung: Tính tích phân.</p><p><span class=\"math inline\">\\(\\displaystyle\\int\\cos^6y\\sin^3y\\,dy\\)</span>.</p>"
+    },
+    {
+      "number": 3,
+      "content": "<p>Yêu cầu chung: Tính tích phân.</p><p><span class=\"math inline\">\\(\\displaystyle\\int_0^{\\pi/2}\\cos^9x\\sin^5x\\,dx\\)</span>.</p>"
+    },
+    {
+      "number": 4,
+      "content": "<p>Yêu cầu chung: Tính tích phân.</p><p><span class=\"math inline\">\\(\\displaystyle\\int_0^{\\pi/4}\\sin^5x\\,dx\\)</span>.</p>"
+    },
+    {
+      "number": 5,
+      "content": "<p>Yêu cầu chung: Tính tích phân.</p><p><span class=\"math inline\">\\(\\displaystyle\\int\\sin^5(2t)\\cos^2(2t)\\,dt\\)</span>.</p>"
+    },
+    {
+      "number": 6,
+      "content": "<p>Yêu cầu chung: Tính tích phân.</p><p><span class=\"math inline\">\\(\\displaystyle\\int\\cos^3(t/2)\\sin^2(t/2)\\,dt\\)</span>.</p>"
+    },
+    {
+      "number": 7,
+      "content": "<p>Yêu cầu chung: Tính tích phân.</p><p><span class=\"math inline\">\\(\\displaystyle\\int_0^{\\pi/2}\\cos^2\\theta\\,d\\theta\\)</span>.</p>"
+    },
+    {
+      "number": 8,
+      "content": "<p>Yêu cầu chung: Tính tích phân.</p><p><span class=\"math inline\">\\(\\displaystyle\\int_0^{\\pi/4}\\sin^2(2\\theta)\\,d\\theta\\)</span>.</p>"
+    },
+    {
+      "number": 9,
+      "content": "<p>Yêu cầu chung: Tính tích phân.</p><p><span class=\"math inline\">\\(\\displaystyle\\int_0^\\pi\\cos^4(2t)\\,dt\\)</span>.</p>"
+    },
+    {
+      "number": 10,
+      "content": "<p>Yêu cầu chung: Tính tích phân.</p><p><span class=\"math inline\">\\(\\displaystyle\\int_0^\\pi\\sin^2t\\cos^4t\\,dt\\)</span>.</p>"
+    },
+    {
+      "number": 11,
+      "content": "<p>Yêu cầu chung: Tính tích phân.</p><p><span class=\"math inline\">\\(\\displaystyle\\int_0^{\\pi/2}\\sin^2x\\cos^2x\\,dx\\)</span>.</p>"
+    },
+    {
+      "number": 12,
+      "content": "<p>Yêu cầu chung: Tính tích phân.</p><p><span class=\"math inline\">\\(\\displaystyle\\int_0^{\\pi/2}(2-\\sin\\theta)^2\\,d\\theta\\)</span>.</p>"
+    },
+    {
+      "number": 13,
+      "content": "<p>Yêu cầu chung: Tính tích phân.</p><p><span class=\"math inline\">\\(\\displaystyle\\int\\sqrt{\\cos\\theta}\\sin^3\\theta\\,d\\theta\\)</span>.</p>"
+    },
+    {
+      "number": 14,
+      "content": "<p>Yêu cầu chung: Tính tích phân.</p><p><span class=\"math inline\">\\(\\displaystyle\\int(1+\\sqrt[3]{\\sin t})\\cos^3t\\,dt\\)</span>.</p>"
+    },
+    {
+      "number": 15,
+      "content": "<p>Yêu cầu chung: Tính tích phân.</p><p><span class=\"math inline\">\\(\\displaystyle\\int\\sin x\\sec^5x\\,dx\\)</span>.</p>"
+    },
+    {
+      "number": 16,
+      "content": "<p>Yêu cầu chung: Tính tích phân.</p><p><span class=\"math inline\">\\(\\displaystyle\\int\\csc^5\\theta\\cos^3\\theta\\,d\\theta\\)</span>.</p>"
+    },
+    {
+      "number": 17,
+      "content": "<p>Yêu cầu chung: Tính tích phân.</p><p><span class=\"math inline\">\\(\\displaystyle\\int\\cot x\\cos^2x\\,dx\\)</span>.</p>"
+    },
+    {
+      "number": 18,
+      "content": "<p>Yêu cầu chung: Tính tích phân.</p><p><span class=\"math inline\">\\(\\displaystyle\\int\\tan^2x\\cos^3x\\,dx\\)</span>.</p>"
+    },
+    {
+      "number": 19,
+      "content": "<p>Yêu cầu chung: Tính tích phân.</p><p><span class=\"math inline\">\\(\\displaystyle\\int\\sin^2x\\sin2x\\,dx\\)</span>.</p>"
+    },
+    {
+      "number": 20,
+      "content": "<p>Yêu cầu chung: Tính tích phân.</p><p><span class=\"math inline\">\\(\\displaystyle\\int\\sin x\\cos\\left(\\frac12x\\right)\\,dx\\)</span>.</p>"
+    },
+    {
+      "number": 21,
+      "content": "<p>Yêu cầu chung: Tính tích phân.</p><p><span class=\"math inline\">\\(\\displaystyle\\int\\tan x\\sec^3x\\,dx\\)</span>.</p>"
+    },
+    {
+      "number": 22,
+      "content": "<p>Yêu cầu chung: Tính tích phân.</p><p><span class=\"math inline\">\\(\\displaystyle\\int\\tan^2\\theta\\sec^4\\theta\\,d\\theta\\)</span>.</p>"
+    },
+    {
+      "number": 23,
+      "content": "<p>Yêu cầu chung: Tính tích phân.</p><p><span class=\"math inline\">\\(\\displaystyle\\int\\tan^2x\\,dx\\)</span>.</p>"
+    },
+    {
+      "number": 24,
+      "content": "<p>Yêu cầu chung: Tính tích phân.</p><p><span class=\"math inline\">\\(\\displaystyle\\int(\\tan^2x+\\tan^4x)\\,dx\\)</span>.</p>"
+    },
+    {
+      "number": 25,
+      "content": "<p>Yêu cầu chung: Tính tích phân.</p><p><span class=\"math inline\">\\(\\displaystyle\\int\\tan^4x\\sec^6x\\,dx\\)</span>.</p>"
+    },
+    {
+      "number": 26,
+      "content": "<p>Yêu cầu chung: Tính tích phân.</p><p><span class=\"math inline\">\\(\\displaystyle\\int_0^{\\pi/4}\\sec^6\\theta\\tan^6\\theta\\,d\\theta\\)</span>.</p>"
+    },
+    {
+      "number": 27,
+      "content": "<p>Yêu cầu chung: Tính tích phân.</p><p><span class=\"math inline\">\\(\\displaystyle\\int\\tan^3x\\sec x\\,dx\\)</span>.</p>"
+    },
+    {
+      "number": 28,
+      "content": "<p>Yêu cầu chung: Tính tích phân.</p><p><span class=\"math inline\">\\(\\displaystyle\\int\\tan^5x\\sec^3x\\,dx\\)</span>.</p>"
+    },
+    {
+      "number": 29,
+      "content": "<p>Yêu cầu chung: Tính tích phân.</p><p><span class=\"math inline\">\\(\\displaystyle\\int\\tan^3x\\sec^6x\\,dx\\)</span>.</p>"
+    },
+    {
+      "number": 30,
+      "content": "<p>Yêu cầu chung: Tính tích phân.</p><p><span class=\"math inline\">\\(\\displaystyle\\int_0^{\\pi/4}\\tan^4t\\,dt\\)</span>.</p>"
+    },
+    {
+      "number": 31,
+      "content": "<p>Yêu cầu chung: Tính tích phân.</p><p><span class=\"math inline\">\\(\\displaystyle\\int\\tan^5x\\,dx\\)</span>.</p>"
+    },
+    {
+      "number": 32,
+      "content": "<p>Yêu cầu chung: Tính tích phân.</p><p><span class=\"math inline\">\\(\\displaystyle\\int\\tan^2x\\sec x\\,dx\\)</span>.</p>"
+    },
+    {
+      "number": 33,
+      "content": "<p>Yêu cầu chung: Tính tích phân.</p><p><span class=\"math inline\">\\(\\displaystyle\\int\\frac{1-\\tan^2x}{\\sec^2x}\\,dx\\)</span>.</p>"
+    },
+    {
+      "number": 34,
+      "content": "<p>Yêu cầu chung: Tính tích phân.</p><p><span class=\"math inline\">\\(\\displaystyle\\int\\frac{\\tan x\\sec^2x}{\\cos x}\\,dx\\)</span>.</p>"
+    },
+    {
+      "number": 35,
+      "content": "<p>Yêu cầu chung: Tính tích phân.</p><p><span class=\"math inline\">\\(\\displaystyle\\int_0^{\\pi/4}\\frac{\\sin^3x}{\\cos x}\\,dx\\)</span>.</p>"
+    },
+    {
+      "number": 36,
+      "content": "<p>Yêu cầu chung: Tính tích phân.</p><p><span class=\"math inline\">\\(\\displaystyle\\int\\frac{\\sin\\theta+\\tan\\theta}{\\cos^3\\theta}\\,d\\theta\\)</span>.</p>"
+    },
+    {
+      "number": 37,
+      "content": "<p>Yêu cầu chung: Tính tích phân.</p><p><span class=\"math inline\">\\(\\displaystyle\\int_{\\pi/6}^{\\pi/2}\\cot^2x\\,dx\\)</span>.</p>"
+    },
+    {
+      "number": 38,
+      "content": "<p>Yêu cầu chung: Tính tích phân.</p><p><span class=\"math inline\">\\(\\displaystyle\\int_{\\pi/4}^{\\pi/2}\\cot^3x\\,dx\\)</span>.</p>"
+    },
+    {
+      "number": 39,
+      "content": "<p>Yêu cầu chung: Tính tích phân.</p><p><span class=\"math inline\">\\(\\displaystyle\\int_{\\pi/4}^{\\pi/2}\\cot^5\\phi\\csc^3\\phi\\,d\\phi\\)</span>.</p>"
+    },
+    {
+      "number": 40,
+      "content": "<p>Yêu cầu chung: Tính tích phân.</p><p><span class=\"math inline\">\\(\\displaystyle\\int_{\\pi/4}^{\\pi/2}\\csc^4\\theta\\cot^4\\theta\\,d\\theta\\)</span>.</p>"
+    },
+    {
+      "number": 41,
+      "content": "<p>Yêu cầu chung: Tính tích phân.</p><p><span class=\"math inline\">\\(\\displaystyle\\int\\csc x\\,dx\\)</span>.</p>"
+    },
+    {
+      "number": 42,
+      "content": "<p>Yêu cầu chung: Tính tích phân.</p><p><span class=\"math inline\">\\(\\displaystyle\\int_{\\pi/6}^{\\pi/3}\\csc^3x\\,dx\\)</span>.</p>"
+    },
+    {
+      "number": 43,
+      "content": "<p>Yêu cầu chung: Tính tích phân.</p><p><span class=\"math inline\">\\(\\displaystyle\\int\\sin8x\\cos5x\\,dx\\)</span>.</p>"
+    },
+    {
+      "number": 44,
+      "content": "<p>Yêu cầu chung: Tính tích phân.</p><p><span class=\"math inline\">\\(\\displaystyle\\int\\sin2\\theta\\sin6\\theta\\,d\\theta\\)</span>.</p>"
+    },
+    {
+      "number": 45,
+      "content": "<p>Yêu cầu chung: Tính tích phân.</p><p><span class=\"math inline\">\\(\\displaystyle\\int_0^{\\pi/2}\\cos5t\\cos10t\\,dt\\)</span>.</p>"
+    },
+    {
+      "number": 46,
+      "content": "<p>Yêu cầu chung: Tính tích phân.</p><p><span class=\"math inline\">\\(\\displaystyle\\int t\\cos^5(t^2)\\,dt\\)</span>.</p>"
+    },
+    {
+      "number": 47,
+      "content": "<p>Yêu cầu chung: Tính tích phân.</p><p><span class=\"math inline\">\\(\\displaystyle\\int\\frac{\\sin^2(1/t)}{t^2}\\,dt\\)</span>.</p>"
+    },
+    {
+      "number": 48,
+      "content": "<p>Yêu cầu chung: Tính tích phân.</p><p><span class=\"math inline\">\\(\\displaystyle\\int\\sec^2y\\cos^3(\\tan y)\\,dy\\)</span>.</p>"
+    },
+    {
+      "number": 49,
+      "content": "<p>Yêu cầu chung: Tính tích phân.</p><p><span class=\"math inline\">\\(\\displaystyle\\int_0^{\\pi/6}\\sqrt{1+\\cos2x}\\,dx\\)</span>.</p>"
+    },
+    {
+      "number": 50,
+      "content": "<p>Yêu cầu chung: Tính tích phân.</p><p><span class=\"math inline\">\\(\\displaystyle\\int_0^{\\pi/4}\\sqrt{1-\\cos4\\theta}\\,d\\theta\\)</span>.</p>"
+    },
+    {
+      "number": 51,
+      "content": "<p>Yêu cầu chung: Tính tích phân.</p><p><span class=\"math inline\">\\(\\displaystyle\\int t\\sin^2t\\,dt\\)</span>.</p>"
+    },
+    {
+      "number": 52,
+      "content": "<p>Yêu cầu chung: Tính tích phân.</p><p><span class=\"math inline\">\\(\\displaystyle\\int x\\sec x\\tan x\\,dx\\)</span>.</p>"
+    },
+    {
+      "number": 53,
+      "content": "<p>Yêu cầu chung: Tính tích phân.</p><p><span class=\"math inline\">\\(\\displaystyle\\int x\\tan^2x\\,dx\\)</span>.</p>"
+    },
+    {
+      "number": 54,
+      "content": "<p>Yêu cầu chung: Tính tích phân.</p><p><span class=\"math inline\">\\(\\displaystyle\\int x\\sin^3x\\,dx\\)</span>.</p>"
+    },
+    {
+      "number": 55,
+      "content": "<p>Yêu cầu chung: Tính tích phân.</p><p><span class=\"math inline\">\\(\\displaystyle\\int\\frac{dx}{\\cos x-1}\\)</span>.</p>"
+    },
+    {
+      "number": 56,
+      "content": "<p>Yêu cầu chung: Tính tích phân.</p><p><span class=\"math inline\">\\(\\displaystyle\\int\\frac1{\\sec\\theta+1}\\,d\\theta\\)</span>.</p><p> <strong>[Đồ thị]</strong> Tính tích phân bất định. Minh họa và kiểm tra tính hợp lý của kết quả bằng cách vẽ đồ thị của cả hàm dưới dấu tích phân và nguyên hàm của nó (lấy <span class=\"math inline\">\\(C=0\\)</span>).</p>"
+    },
+    {
+      "number": 57,
+      "content": "<p>Yêu cầu chung: Dùng đồ thị kiểm tra nguyên hàm C=0.</p><p><span class=\"math inline\">\\(\\displaystyle\\int x\\sin^2(x^2)\\,dx\\)</span>.</p>"
+    },
+    {
+      "number": 58,
+      "content": "<p>Yêu cầu chung: Dùng đồ thị kiểm tra nguyên hàm C=0.</p><p><span class=\"math inline\">\\(\\displaystyle\\int\\sin^5x\\cos^3x\\,dx\\)</span>.</p>"
+    },
+    {
+      "number": 59,
+      "content": "<p>Yêu cầu chung: Dùng đồ thị kiểm tra nguyên hàm C=0.</p><p><span class=\"math inline\">\\(\\displaystyle\\int\\sin3x\\sin6x\\,dx\\)</span>.</p>"
+    },
+    {
+      "number": 60,
+      "content": "<p>Yêu cầu chung: Dùng đồ thị kiểm tra nguyên hàm C=0.</p><p><span class=\"math inline\">\\(\\displaystyle\\int\\sec^4\\left(\\frac12x\\right)\\,dx\\)</span>.</p>"
+    },
+    {
+      "number": 61,
+      "content": "<p>Nếu <span class=\"math inline\">\\(\\int_0^{\\pi/4}\\tan^6x\\sec x\\,dx=I\\)</span>, hãy biểu diễn giá trị của <span class=\"math inline\">\\(\\int_0^{\\pi/4}\\tan^8x\\sec x\\,dx\\)</span> theo <span class=\"math inline\">\\(I\\)</span>.</p>"
+    },
+    {
+      "number": 62,
+      "content": "<p>(a) Chứng minh công thức truy hồi <span class=\"math display\">\\[\\int\\tan^{2n}x\\,dx=\\frac{\\tan^{2n-1}x}{2n-1}-\\int\\tan^{2n-2}x\\,dx.\\]</span> (b) Dùng công thức này để tìm <span class=\"math inline\">\\(\\int\\tan^8x\\,dx\\)</span>.</p>"
+    },
+    {
+      "number": 63,
+      "content": "<p>Tìm giá trị trung bình của hàm <span class=\"math inline\">\\(f(x)=\\sin^2x\\cos^3x\\)</span> trên đoạn <span class=\"math inline\">\\([-\\pi,\\pi]\\)</span>.</p>"
+    },
+    {
+      "number": 64,
+      "content": "<p>Tính <span class=\"math inline\">\\(\\int\\sin x\\cos x\\,dx\\)</span> bằng bốn phương pháp:</p><p>(a) Phép đổi biến <span class=\"math inline\">\\(u=\\cos x\\)</span>.</p><p>(b) Phép đổi biến <span class=\"math inline\">\\(u=\\sin x\\)</span>.</p><p>(c) Đồng nhất thức <span class=\"math inline\">\\(\\sin2x=2\\sin x\\cos x\\)</span>.</p><p>(d) Tích phân từng phần.</p><p>Giải thích vì sao các kết quả có dạng khác nhau.</p><p> Tìm diện tích miền giới hạn bởi các đường cong đã cho.</p>"
+    },
+    {
+      "number": 65,
+      "content": "<p>Yêu cầu chung: Tìm diện tích.</p><p><span class=\"math inline\">\\(y=\\sin^2x\\)</span>, <span class=\"math inline\">\\(y=\\sin^3x\\)</span>, <span class=\"math inline\">\\(0\\le x\\le\\pi\\)</span>.</p>"
+    },
+    {
+      "number": 66,
+      "content": "<p>Yêu cầu chung: Tìm diện tích.</p><p><span class=\"math inline\">\\(y=\\tan x\\)</span>, <span class=\"math inline\">\\(y=\\tan^2x\\)</span>, <span class=\"math inline\">\\(0\\le x\\le\\pi/4\\)</span>.</p><p> <strong>[Đồ thị]</strong> Dùng đồ thị của hàm dưới dấu tích phân để dự đoán giá trị tích phân. Sau đó dùng các phương pháp trong mục này để chứng minh dự đoán là đúng.</p>"
+    },
+    {
+      "number": 67,
+      "content": "<p>Yêu cầu chung: Dự đoán bằng đồ thị và chứng minh.</p><p><span class=\"math inline\">\\(\\displaystyle\\int_0^{2\\pi}\\cos^3x\\,dx\\)</span>.</p>"
+    },
+    {
+      "number": 68,
+      "content": "<p>Yêu cầu chung: Dự đoán bằng đồ thị và chứng minh.</p><p><span class=\"math inline\">\\(\\displaystyle\\int_0^2\\sin2\\pi x\\cos5\\pi x\\,dx\\)</span>.</p><p> Tìm thể tích thu được khi quay miền giới hạn bởi các đường cong quanh trục đã cho.</p>"
+    },
+    {
+      "number": 69,
+      "content": "<p>Yêu cầu chung: Tính thể tích khối tròn xoay.</p><p><span class=\"math inline\">\\(y=\\sin x\\)</span>, <span class=\"math inline\">\\(y=0\\)</span>, <span class=\"math inline\">\\(\\pi/2\\le x\\le\\pi\\)</span>; quanh trục <span class=\"math inline\">\\(x\\)</span>.</p>"
+    },
+    {
+      "number": 70,
+      "content": "<p>Yêu cầu chung: Tính thể tích khối tròn xoay.</p><p><span class=\"math inline\">\\(y=\\sin^2x\\)</span>, <span class=\"math inline\">\\(y=0\\)</span>, <span class=\"math inline\">\\(0\\le x\\le\\pi\\)</span>; quanh trục <span class=\"math inline\">\\(x\\)</span>.</p>"
+    },
+    {
+      "number": 71,
+      "content": "<p>Yêu cầu chung: Tính thể tích khối tròn xoay.</p><p><span class=\"math inline\">\\(y=\\sin x\\)</span>, <span class=\"math inline\">\\(y=\\cos x\\)</span>, <span class=\"math inline\">\\(0\\le x\\le\\pi/4\\)</span>; quanh <span class=\"math inline\">\\(y=1\\)</span>.</p>"
+    },
+    {
+      "number": 72,
+      "content": "<p>Yêu cầu chung: Tính thể tích khối tròn xoay.</p><p><span class=\"math inline\">\\(y=\\sec x\\)</span>, <span class=\"math inline\">\\(y=\\cos x\\)</span>, <span class=\"math inline\">\\(0\\le x\\le\\pi/3\\)</span>; quanh <span class=\"math inline\">\\(y=-1\\)</span>.</p>"
+    },
+    {
+      "number": 73,
+      "content": "<p>Một chất điểm chuyển động trên một đường thẳng với hàm vận tốc <span class=\"math inline\">\\(v(t)=\\sin\\omega t\\cos^2\\omega t\\)</span>. Tìm hàm vị trí <span class=\"math inline\">\\(s=f(t)\\)</span> nếu <span class=\"math inline\">\\(f(0)=0\\)</span>.</p>"
+    },
+    {
+      "number": 74,
+      "content": "<p>Điện sinh hoạt được cung cấp dưới dạng dòng điện xoay chiều có điện áp biến thiên từ <span class=\"math inline\">\\(155\\)</span> V đến <span class=\"math inline\">\\(-155\\)</span> V với tần số <span class=\"math inline\">\\(60\\)</span> chu kỳ mỗi giây (Hz). Vì vậy, điện áp được cho bởi phương trình <span class=\"math display\">\\[E(t)=155\\sin(120\\pi t),\\]</span> trong đó <span class=\"math inline\">\\(t\\)</span> là thời gian tính bằng giây. Vôn kế chỉ điện áp hiệu dụng RMS (căn bậc hai của trung bình bình phương), tức là căn bậc hai của giá trị trung bình của <span class=\"math inline\">\\([E(t)]^2\\)</span> trong một chu kỳ.</p><p>(a) Tính điện áp hiệu dụng của dòng điện sinh hoạt.</p><p>(b) Nhiều bếp điện đòi hỏi điện áp hiệu dụng <span class=\"math inline\">\\(220\\)</span> V. Tìm biên độ <span class=\"math inline\">\\(A\\)</span> tương ứng cần có cho điện áp <span class=\"math inline\">\\(E(t)=A\\sin(120\\pi t)\\)</span>.</p><p> Chứng minh công thức, trong đó <span class=\"math inline\">\\(m\\)</span> và <span class=\"math inline\">\\(n\\)</span> là các số nguyên dương.</p>"
+    },
+    {
+      "number": 75,
+      "content": "<p>Yêu cầu chung: Chứng minh các công thức với m,n nguyên dương.</p><p><span class=\"math inline\">\\(\\displaystyle\\int_{-\\pi}^{\\pi}\\sin mx\\cos nx\\,dx=0\\)</span>.</p>"
+    },
+    {
+      "number": 76,
+      "content": "<p>Yêu cầu chung: Chứng minh các công thức với m,n nguyên dương.</p><p><span class=\"math display\">\\[\\int_{-\\pi}^{\\pi}\\sin mx\\sin nx\\,dx=\\begin{cases}0&\\text{nếu }m\\ne n,\\\\\\pi&\\text{nếu }m=n.\\end{cases}\\]</span></p>"
+    },
+    {
+      "number": 77,
+      "content": "<p>Yêu cầu chung: Chứng minh các công thức với m,n nguyên dương.</p><p><span class=\"math display\">\\[\\int_{-\\pi}^{\\pi}\\cos mx\\cos nx\\,dx=\\begin{cases}0&\\text{nếu }m\\ne n,\\\\\\pi&\\text{nếu }m=n.\\end{cases}\\]</span></p>"
+    },
+    {
+      "number": 78,
+      "content": "<p>Một <em>chuỗi Fourier hữu hạn</em> được cho bởi tổng <span class=\"math display\">\\[\\begin{align*}\nf(x)&=\\sum_{n=1}^N a_n\\sin nx\\\\\n&=a_1\\sin x+a_2\\sin2x+\\cdots+a_N\\sin Nx.\n\\end{align*}\\]</span> Dùng kết quả của Bài tập 76 để chứng minh rằng hệ số thứ <span class=\"math inline\">\\(m\\)</span>, <span class=\"math inline\">\\(a_m\\)</span>, được cho bởi công thức <span class=\"math display\">\\[a_m=\\frac1\\pi\\int_{-\\pi}^{\\pi}f(x)\\sin mx\\,dx.\\]</span></p>"
+    }
+  ]
+}

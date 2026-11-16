@@ -3980,5 +3980,15 @@
     "file": "stewart-7-1-31ea22e4/figure02.png",
     "mime": "image/png",
     "sha256": "a03e924afe49de003a7ae91e91ce9d76b758339a63de12786beeaacf6e2eee28"
+  },
+  "stewart-7-2-reconstructed/figure01.png": {
+    "file": "stewart-7-2-reconstructed/figure01.png",
+    "mime": "image/png",
+    "source": "reconstructed"
+  },
+  "stewart-7-2-reconstructed/figure02.png": {
+    "file": "stewart-7-2-reconstructed/figure02.png",
+    "mime": "image/png",
+    "source": "reconstructed"
   }
 }
