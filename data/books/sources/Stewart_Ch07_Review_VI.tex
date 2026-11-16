@@ -1,0 +1,259 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage{fontspec}\setmainfont{Latin Modern Roman}\setsansfont{DejaVu Sans}
+\usepackage{amsmath,amssymb,graphicx,geometry,enumitem,needspace,longtable,booktabs,fancyhdr,hyperref}
+\geometry{left=28mm,right=23mm,top=24mm,bottom=24mm}
+\hypersetup{unicode=true,colorlinks=true,linkcolor=black,urlcolor=blue,pdftitle={Giải tích — Ôn tập Chương 7}}
+\setlength{\parindent}{1.2em}\setlength{\parskip}{4pt}\setlength{\headheight}{16pt}
+\pagestyle{fancy}\fancyhf{}\fancyhead[L]{\small Chương 7. Các phương pháp tính tích phân}\fancyhead[R]{\small Ôn tập}\fancyfoot[C]{\thepage}
+\newcommand{\fig}[3][.68]{\begin{center}\begin{minipage}{\linewidth}\centering\includegraphics[width=#1\linewidth]{assets/#2.png}\\{\small #3}\end{minipage}\end{center}}
+\newcommand{\ex}[1]{\par\medskip\noindent\textbf{Ví dụ #1.}\ }
+\newcommand{\sol}{\par\nopagebreak[4]\noindent\textit{Lời giải.}\ }
+\newcommand{\bt}[1]{\par\smallskip\Needspace{5\baselineskip}\noindent\textbf{#1.}\ }
+\newcommand{\group}[1]{\par\Needspace{11\baselineskip}\medskip\noindent\textbf{#1}\par\nopagebreak[4]}
+\newcommand{\gint}[1]{\left[\!\left[#1\right]\!\right]}
+\allowdisplaybreaks[2]
+\DeclareMathOperator{\sech}{sech}
+\DeclareMathOperator{\csch}{csch}
+\DeclareMathOperator{\arccot}{arccot}
+
+\newcommand{\prj}[1]{\bt{#1}}
+
+\newcommand{\kn}[1]{\bt{#1}}
+\newcommand{\ds}[1]{\bt{#1}}
+\setlength{\emergencystretch}{1em}
+\widowpenalty=10000\clubpenalty=10000
+\begin{document}
+\begin{center}{\Large\bfseries Ôn tập Chương 7}\end{center}
+\section*{Kiểm tra khái niệm}
+\textit{Đáp án phần Kiểm tra khái niệm có tại StewartCalculus.com.}
+\kn{1} Phát biểu quy tắc tích phân từng phần. Trong thực hành, bạn sử dụng quy tắc này như thế nào?
+\kn{2} Bạn tính $\int\sin^m x\cos^n x\,dx$ như thế nào nếu $m$ lẻ? Nếu $n$ lẻ thì sao? Nếu cả $m$ và $n$ đều chẵn thì sao?
+\kn{3} Nếu biểu thức $\sqrt{a^2-x^2}$ xuất hiện trong một tích phân, bạn có thể thử phép thế nào? Nếu xuất hiện $\sqrt{a^2+x^2}$ thì sao? Nếu xuất hiện $\sqrt{x^2-a^2}$ thì sao?
+\kn{4} Dạng phân tích thành phân thức đơn giản của hàm hữu tỉ $P(x)/Q(x)$ là gì nếu bậc của $P$ nhỏ hơn bậc của $Q$ và $Q(x)$ chỉ có các nhân tử bậc nhất phân biệt? Nếu một nhân tử bậc nhất lặp lại thì sao? Nếu $Q(x)$ có một nhân tử bậc hai bất khả quy (không lặp) thì sao? Nếu nhân tử bậc hai đó lặp lại thì sao?
+\kn{5} Phát biểu các quy tắc tính gần đúng tích phân xác định $\int_a^b f(x)\,dx$ bằng quy tắc trung điểm, quy tắc hình thang và quy tắc Simpson. Bạn dự đoán quy tắc nào cho kết quả gần đúng tốt nhất? Bạn ước lượng sai số của mỗi quy tắc như thế nào?
+\kn{6} Định nghĩa các tích phân suy rộng sau.
+\[\text{(a)}\ \int_a^\infty f(x)\,dx\qquad \text{(b)}\ \int_{-\infty}^b f(x)\,dx\qquad \text{(c)}\ \int_{-\infty}^\infty f(x)\,dx.\]
+\kn{7} Định nghĩa tích phân suy rộng $\int_a^b f(x)\,dx$ trong từng trường hợp sau.
+
+(a) $f$ có gián đoạn vô cực tại $a$.
+
+(b) $f$ có gián đoạn vô cực tại $b$.
+
+(c) $f$ có gián đoạn vô cực tại $c$, với $a<c<b$.
+\kn{8} Phát biểu Định lý so sánh cho tích phân suy rộng.
+\section*{Câu hỏi đúng–sai}
+Xác định mỗi phát biểu sau là đúng hay sai. Nếu đúng, hãy giải thích vì sao. Nếu sai, hãy giải thích vì sao hoặc đưa ra một phản ví dụ.
+\ds{1} Có thể tính $\int\tan^{-1}x\,dx$ bằng phương pháp tích phân từng phần.
+\ds{2} Có thể tính $\int x^5e^x\,dx$ bằng cách áp dụng tích phân từng phần năm lần.
+\ds{3} Để tính $\int dx/\sqrt{25+x^2}$, một phép thế lượng giác thích hợp là $x=5\sin\theta$.
+\ds{4} Để tính $\int dx/\sqrt{9+e^{2x}}$, ta có thể dùng công thức ở mục 25 của Bảng tích phân để thu được $\ln(e^x+\sqrt{9+e^{2x}})+C$.
+\ds{5} $\dfrac{x(x^2+4)}{x^2-4}$ có thể viết dưới dạng $\dfrac A{x+2}+\dfrac B{x-2}$.
+\ds{6} $\dfrac{x^2+4}{x(x^2-4)}$ có thể viết dưới dạng $\dfrac Ax+\dfrac B{x+2}+\dfrac C{x-2}$.
+\ds{7} $\dfrac{x^2+4}{x^2(x-4)}$ có thể viết dưới dạng $\dfrac A{x^2}+\dfrac B{x-4}$.
+\ds{8} $\dfrac{x^2-4}{x(x^2+4)}$ có thể viết dưới dạng $\dfrac Ax+\dfrac B{x^2+4}$.
+\ds{9} $\displaystyle\int_0^4\frac{x}{x^2-1}\,dx=\frac12\ln15$.
+\ds{10} $\displaystyle\int_1^\infty\frac1{x^{\sqrt2}}\,dx$ hội tụ.
+\ds{11} Nếu $\int_{-\infty}^\infty f(x)\,dx$ hội tụ thì $\int_0^\infty f(x)\,dx$ hội tụ.
+\ds{12} Quy tắc trung điểm luôn chính xác hơn quy tắc hình thang.
+\ds{13} (a) Mọi hàm sơ cấp đều có đạo hàm là một hàm sơ cấp.
+
+(b) Mọi hàm sơ cấp đều có nguyên hàm là một hàm sơ cấp.
+\ds{14} Nếu $f$ liên tục trên $[0,\infty)$ và $\int_1^\infty f(x)\,dx$ hội tụ thì $\int_0^\infty f(x)\,dx$ hội tụ.
+\ds{15} Nếu $f$ là một hàm liên tục, giảm trên $[1,\infty)$ và $\lim_{x\to\infty}f(x)=0$ thì $\int_1^\infty f(x)\,dx$ hội tụ.
+\ds{16} Nếu $\int_a^\infty f(x)\,dx$ và $\int_a^\infty g(x)\,dx$ đều hội tụ thì $\int_a^\infty[f(x)+g(x)]\,dx$ hội tụ.
+\ds{17} Nếu $\int_a^\infty f(x)\,dx$ và $\int_a^\infty g(x)\,dx$ đều phân kỳ thì $\int_a^\infty[f(x)+g(x)]\,dx$ phân kỳ.
+\ds{18} Nếu $f(x)\le g(x)$ và $\int_0^\infty g(x)\,dx$ phân kỳ thì $\int_0^\infty f(x)\,dx$ cũng phân kỳ.
+\section*{Bài tập}
+\textit{Chú ý: Các bài tập Mục 7.5 cung cấp thêm bài luyện tập về các phương pháp tính tích phân.}
+\group{1–50} Tính tích phân.
+
+\bt{1} $\displaystyle \int_1^2\frac{(x+1)^2}{x}\,dx$.
+
+\bt{2} $\displaystyle \int_1^2\frac{x}{(x+1)^2}\,dx$.
+
+\bt{3} $\displaystyle \int\frac{e^{\sin x}}{\sec x}\,dx$.
+
+\bt{4} $\displaystyle \int_0^{\pi/6}t\sin2t\,dt$.
+
+\bt{5} $\displaystyle \int\frac{dt}{2t^2+3t+1}$.
+
+\bt{6} $\displaystyle \int_1^2x^5\ln x\,dx$.
+
+\bt{7} $\displaystyle \int_0^{\pi/2}\sin^3\theta\cos^2\theta\,d\theta$.
+
+\bt{8} $\displaystyle \int\frac{dx}{x^2\sqrt{16-x^2}}$.
+
+\bt{9} $\displaystyle \int\frac{\sin(\ln t)}t\,dt$.
+
+\bt{10} $\displaystyle \int_0^1\frac{\sqrt{\arctan x}}{1+x^2}\,dx$.
+
+\bt{11} $\displaystyle \int x(\ln x)^2\,dx$.
+
+\bt{12} $\displaystyle \int\sin x\cos x\ln(\cos x)\,dx$.
+
+\bt{13} $\displaystyle \int_1^2\frac{\sqrt{x^2-1}}x\,dx$.
+
+\bt{14} $\displaystyle \int\frac{e^{2x}}{1+e^{4x}}\,dx$.
+
+\bt{15} $\displaystyle \int e^{\sqrt[3]x}\,dx$.
+
+\bt{16} $\displaystyle \int\frac{x^2+2}{x+2}\,dx$.
+
+\bt{17} $\displaystyle \int x^2\tan^{-1}x\,dx$.
+
+\bt{18} $\displaystyle \int(x+2)^2(x+1)^{20}\,dx$.
+
+\bt{19} $\displaystyle \int\frac{x-1}{x^2+2x}\,dx$.
+
+\bt{20} $\displaystyle \int\frac{\sec^6\theta}{\tan^2\theta}\,d\theta$.
+
+\bt{21} $\displaystyle \int x\cosh x\,dx$.
+
+\bt{22} $\displaystyle \int\frac{x^2+8x-3}{x^3+3x^2}\,dx$.
+
+\bt{23} $\displaystyle \int\frac{dx}{\sqrt{x^2-4x}}$.
+
+\bt{24} $\displaystyle \int\frac{2^{\sqrt{x}}}{\sqrt{x}}\,dx$.
+
+\bt{25} $\displaystyle \int\frac{x+1}{9x^2+6x+5}\,dx$.
+
+\bt{26} $\displaystyle \int\tan^5\theta\sec^3\theta\,d\theta$.
+
+\bt{27} $\displaystyle \int_0^2\sqrt{x^2-2x+2}\,dx$.
+
+\bt{28} $\displaystyle \int\cos\sqrt{t}\,dt$.
+
+\bt{29} $\displaystyle \int\frac{dx}{x\sqrt{x^2+1}}$.
+
+\bt{30} $\displaystyle \int e^x\cos x\,dx$.
+
+\bt{31} $\displaystyle \int\frac{x\sin(\sqrt{1+x^2})}{\sqrt{1+x^2}}\,dx$.
+
+\bt{32} $\displaystyle \int\frac{dx}{x^{1/2}+x^{1/4}}$.
+
+\bt{33} $\displaystyle \int\frac{3x^3-x^2+6x-4}{(x^2+1)(x^2+2)}\,dx$.
+
+\bt{34} $\displaystyle \int x\sin x\cos x\,dx$.
+
+\bt{35} $\displaystyle \int_0^{\pi/2}\cos^3x\sin2x\,dx$.
+
+\bt{36} $\displaystyle \int\frac{\sqrt[3]x+1}{\sqrt[3]x-1}\,dx$.
+
+\bt{37} $\displaystyle \int_{-3}^3\frac{x}{1+|x|}\,dx$.
+
+\bt{38} $\displaystyle \int\frac{dx}{e^x\sqrt{1-e^{-2x}}}$.
+
+\bt{39} $\displaystyle \int_0^{\ln10}\frac{e^x\sqrt{e^x-1}}{e^x+8}\,dx$.
+
+\bt{40} $\displaystyle \int_0^{\pi/4}\frac{x\sin x}{\cos^3x}\,dx$.
+
+\bt{41} $\displaystyle \int\frac{x^2}{(4-x^2)^{3/2}}\,dx$.
+
+\bt{42} $\displaystyle \int(\arcsin x)^2\,dx$.
+
+\bt{43} $\displaystyle \int\frac{dx}{\sqrt{x}+x^{3/2}}$.
+
+\bt{44} $\displaystyle \int\frac{1-\tan\theta}{1+\tan\theta}\,d\theta$.
+
+\bt{45} $\displaystyle \int(\cos x+\sin x)^2\cos2x\,dx$.
+
+\bt{46} $\displaystyle \int x\cos^3(x^2)\sqrt{\sin(x^2)}\,dx$.
+
+\bt{47} $\displaystyle \int_0^{1/2}\frac{xe^{2x}}{(1+2x)^2}\,dx$.
+
+\bt{48} $\displaystyle \int_{\pi/4}^{\pi/3}\frac{\sqrt{\tan\theta}}{\sin2\theta}\,d\theta$.
+
+\bt{49} $\displaystyle \int\frac{dx}{\sqrt{e^x-4}}$.
+
+\bt{50} $\displaystyle \int x\sin(\sqrt{1+x^2})\,dx$.
+
+\group{51–60} Tính tích phân hoặc chứng tỏ tích phân phân kỳ.
+
+\bt{51} $\displaystyle \int_1^\infty\frac{dx}{(2x+1)^3}$.
+
+\bt{52} $\displaystyle \int_1^\infty\frac{\ln x}{x^4}\,dx$.
+
+\bt{53} $\displaystyle \int_2^\infty\frac{dx}{x\ln x}$.
+
+\bt{54} $\displaystyle \int_2^6\frac{y}{\sqrt{y-2}}\,dy$.
+
+\bt{55} $\displaystyle \int_0^4\frac{\ln x}{\sqrt{x}}\,dx$.
+
+\bt{56} $\displaystyle \int_0^1\frac{dx}{2-3x}$.
+
+\bt{57} $\displaystyle \int_0^1\frac{x-1}{\sqrt{x}}\,dx$.
+
+\bt{58} $\displaystyle \int_{-1}^1\frac{dx}{x^2-2x}$.
+
+\bt{59} $\displaystyle \int_{-\infty}^\infty\frac{dx}{4x^2+4x+5}$.
+
+\bt{60} $\displaystyle \int_1^\infty\frac{\tan^{-1}x}{x^2}\,dx$.
+
+\group{61–62} [Đồ thị] Tính tích phân bất định. Minh họa và kiểm tra tính hợp lý của kết quả bằng cách vẽ đồ thị của cả hàm số lẫn nguyên hàm của nó (lấy $C=0$).
+\bt{61} $\displaystyle\int\ln(x^2+2x+2)\,dx$.
+\bt{62} $\displaystyle\int\frac{x^3}{\sqrt{x^2+1}}\,dx$.
+\bt{63} [Đồ thị] Vẽ đồ thị hàm $f(x)=\cos^2x\sin^3x$ và dùng đồ thị để dự đoán giá trị của tích phân $\int_0^{2\pi}f(x)\,dx$. Sau đó tính tích phân để kiểm chứng dự đoán.
+\bt{64} [Công nghệ]
+
+(a) Bạn sẽ tính $\int x^5e^{-2x}\,dx$ bằng tay như thế nào? (Không thực hiện phép tính tích phân.)
+
+(b) Bạn sẽ tính $\int x^5e^{-2x}\,dx$ bằng bảng tích phân như thế nào? (Không thực hiện phép tính.)
+
+(c) Dùng máy tính để tính $\int x^5e^{-2x}\,dx$.
+
+(d) Vẽ đồ thị của hàm dưới dấu tích phân và tích phân bất định trên cùng một màn hình.
+\group{65–68} Dùng Bảng tích phân ở các trang tham khảo 6–10 để tính tích phân.
+\bt{65} $\displaystyle\int\sqrt{4x^2-4x-3}\,dx$.
+\bt{66} $\displaystyle\int\csc^5t\,dt$.
+\bt{67} $\displaystyle\int\cos x\sqrt{4+\sin^2x}\,dx$.
+\bt{68} $\displaystyle\int\frac{\cot x}{\sqrt{1+2\sin x}}\,dx$.
+\bt{69} Kiểm chứng Công thức 33 trong Bảng tích phân bằng (a) phép lấy đạo hàm và (b) một phép thế lượng giác.
+\bt{70} Kiểm chứng Công thức 62 trong Bảng tích phân.
+\bt{71} Có thể tìm được một số $n$ sao cho $\int_0^\infty x^n\,dx$ hội tụ hay không?
+\bt{72} Với những giá trị nào của $a$ thì $\int_0^\infty e^{ax}\cos x\,dx$ hội tụ? Tính tích phân với các giá trị $a$ đó.
+\group{73–74} Dùng (a) quy tắc hình thang, (b) quy tắc trung điểm và (c) quy tắc Simpson với $n=10$ để tính gần đúng tích phân đã cho. Làm tròn kết quả đến sáu chữ số thập phân.
+\bt{73} $\displaystyle\int_2^4\frac1{\ln x}\,dx$.
+\bt{74} $\displaystyle\int_1^4\sqrt{x}\cos x\,dx$.
+\bt{75} Ước lượng các sai số trong Bài 73, phần (a) và (b). Trong mỗi trường hợp, $n$ phải lớn đến mức nào để bảo đảm sai số nhỏ hơn $0.00001$?
+\bt{76} Dùng quy tắc Simpson với $n=6$ để ước lượng diện tích dưới đường cong $y=e^x/x$ từ $x=1$ đến $x=4$.
+\bt{77} Số chỉ tốc độ kế ($v$) của một ô tô được quan sát cách nhau 1 phút và ghi lại trong bảng. Dùng quy tắc Simpson để ước lượng quãng đường ô tô đã đi.
+\begin{center}\begin{tabular}{rrrr}\toprule
+$t$ (phút)&$v$ (mi/h)&$t$ (phút)&$v$ (mi/h)\\\midrule
+0&40&6&56\\1&42&7&57\\2&45&8&57\\3&49&9&55\\4&52&10&56\\5&54&&\\\bottomrule
+\end{tabular}\end{center}
+\bt{78} Một quần thể ong mật tăng với tốc độ $r(t)$ con ong mỗi tuần, trong đó đồ thị của $r$ được cho như hình. Dùng quy tắc Simpson với sáu khoảng con để ước lượng mức tăng số lượng ong trong 24 tuần đầu.
+\fig[.62]{ex78}{Bài 78. Tốc độ tăng quần thể ong; $t$ tính bằng tuần.}
+\bt{79} [Công nghệ]
+
+(a) Nếu $f(x)=\sin(\sin x)$, dùng hệ đại số máy tính để tính $f^{(4)}(x)$ rồi dùng đồ thị để tìm một chặn trên cho $|f^{(4)}(x)|$.
+
+(b) Dùng quy tắc Simpson với $n=10$ để tính gần đúng $\int_0^\pi f(x)\,dx$ và dùng phần (a) để ước lượng sai số.
+
+(c) $n$ phải lớn đến mức nào để bảo đảm độ lớn sai số khi dùng $S_n$ nhỏ hơn $0.00001$?
+\bt{80} Giả sử bạn được yêu cầu ước lượng thể tích của một quả bóng bầu dục. Bạn đo được quả bóng dài 28 cm. Dùng một sợi dây, bạn đo được chu vi tại chỗ rộng nhất là 53 cm. Chu vi tại vị trí cách mỗi đầu 7 cm là 45 cm. Dùng quy tắc Simpson để đưa ra ước lượng.
+\fig[.37]{ex80}{Bài 80. Quả bóng bầu dục dài 28 cm.}
+\bt{81} Dùng Định lý so sánh để xác định tích phân hội tụ hay phân kỳ.
+\[\text{(a)}\ \int_1^\infty\frac{2+\sin x}{\sqrt{x}}\,dx\qquad\text{(b)}\ \int_1^\infty\frac1{\sqrt{1+x^4}}\,dx.\]
+\bt{82} Tìm diện tích miền giới hạn bởi hyperbol $y^2-x^2=1$ và đường thẳng $y=3$.
+\bt{83} Tìm diện tích giới hạn bởi các đường cong $y=\cos x$ và $y=\cos^2x$ giữa $x=0$ và $x=\pi$.
+\bt{84} Tìm diện tích miền giới hạn bởi các đường cong $y=1/(2+\sqrt{x})$, $y=1/(2-\sqrt{x})$ và $x=1$.
+\bt{85} Miền dưới đường cong $y=\cos^2x$, $0\le x\le\pi/2$, được quay quanh trục $x$. Tìm thể tích khối tròn xoay thu được.
+\bt{86} Miền trong Bài 85 được quay quanh trục $y$. Tìm thể tích khối tròn xoay thu được.
+\bt{87} Nếu $f'$ liên tục trên $[0,\infty)$ và $\lim_{x\to\infty}f(x)=0$, chứng minh rằng
+\[\int_0^\infty f'(x)\,dx=-f(0).\]
+\bt{88} Ta có thể mở rộng định nghĩa giá trị trung bình của một hàm liên tục sang một khoảng vô hạn bằng cách định nghĩa giá trị trung bình của $f$ trên khoảng $[a,\infty)$ là
+\[f_{\mathrm{avg}}=\lim_{t\to\infty}\frac1{t-a}\int_a^t f(x)\,dx.\]
+(a) Tìm giá trị trung bình của $y=\tan^{-1}x$ trên khoảng $[0,\infty)$.
+
+(b) Nếu $f(x)\ge0$ và $\int_a^\infty f(x)\,dx$ phân kỳ, chứng minh rằng giá trị trung bình của $f$ trên khoảng $[a,\infty)$ là $\lim_{x\to\infty}f(x)$, nếu giới hạn này tồn tại.
+
+(c) Nếu $\int_a^\infty f(x)\,dx$ hội tụ thì giá trị trung bình của $f$ trên khoảng $[a,\infty)$ bằng bao nhiêu?
+
+(d) Tìm giá trị trung bình của $y=\sin x$ trên khoảng $[0,\infty)$.
+\bt{89} Dùng phép thế $u=1/x$ để chứng minh rằng
+\[\int_0^\infty\frac{\ln x}{1+x^2}\,dx=0.\]
+\bt{90} Độ lớn lực đẩy giữa hai điện tích điểm cùng dấu, một điện tích có độ lớn 1 và điện tích kia có độ lớn $q$, là
+\[F=\frac{q}{4\pi\varepsilon_0r^2},\]
+trong đó $r$ là khoảng cách giữa các điện tích và $\varepsilon_0$ là một hằng số. Điện thế $V$ tại điểm $P$ do điện tích $q$ gây ra được định nghĩa là công tiêu tốn để đưa một điện tích đơn vị từ vô cực đến $P$ dọc theo đường thẳng nối $q$ và $P$. Tìm công thức cho $V$.
+
+\end{document}

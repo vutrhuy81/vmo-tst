@@ -1,0 +1,584 @@
+{
+  "exercises": [
+    {
+      "number": 1,
+      "title": "Kiểm tra khái niệm — Câu 1",
+      "content": "<p><strong>Kiểm tra khái niệm — Câu 1.</strong> <em>Đáp án phần Kiểm tra khái niệm có tại StewartCalculus.com.</em> Phát biểu quy tắc tích phân từng phần. Trong thực hành, bạn sử dụng quy tắc này như thế nào?</p>\n"
+    },
+    {
+      "number": 2,
+      "title": "Kiểm tra khái niệm — Câu 2",
+      "content": "<p><strong>Kiểm tra khái niệm — Câu 2.</strong> <em>Đáp án phần Kiểm tra khái niệm có tại StewartCalculus.com.</em> Bạn tính <span class=\"math inline\">\\(\\int\\sin^m x\\cos^n x\\,dx\\)</span> như thế nào nếu <span class=\"math inline\">\\(m\\)</span> lẻ? Nếu <span class=\"math inline\">\\(n\\)</span> lẻ thì sao? Nếu cả <span class=\"math inline\">\\(m\\)</span> và <span class=\"math inline\">\\(n\\)</span> đều chẵn thì sao?</p>\n"
+    },
+    {
+      "number": 3,
+      "title": "Kiểm tra khái niệm — Câu 3",
+      "content": "<p><strong>Kiểm tra khái niệm — Câu 3.</strong> <em>Đáp án phần Kiểm tra khái niệm có tại StewartCalculus.com.</em> Nếu biểu thức <span class=\"math inline\">\\(\\sqrt{a^2-x^2}\\)</span> xuất hiện trong một tích phân, bạn có thể thử phép thế nào? Nếu xuất hiện <span class=\"math inline\">\\(\\sqrt{a^2+x^2}\\)</span> thì sao? Nếu xuất hiện <span class=\"math inline\">\\(\\sqrt{x^2-a^2}\\)</span> thì sao?</p>\n"
+    },
+    {
+      "number": 4,
+      "title": "Kiểm tra khái niệm — Câu 4",
+      "content": "<p><strong>Kiểm tra khái niệm — Câu 4.</strong> <em>Đáp án phần Kiểm tra khái niệm có tại StewartCalculus.com.</em> Dạng phân tích thành phân thức đơn giản của hàm hữu tỉ <span class=\"math inline\">\\(P(x)/Q(x)\\)</span> là gì nếu bậc của <span class=\"math inline\">\\(P\\)</span> nhỏ hơn bậc của <span class=\"math inline\">\\(Q\\)</span> và <span class=\"math inline\">\\(Q(x)\\)</span> chỉ có các nhân tử bậc nhất phân biệt? Nếu một nhân tử bậc nhất lặp lại thì sao? Nếu <span class=\"math inline\">\\(Q(x)\\)</span> có một nhân tử bậc hai bất khả quy (không lặp) thì sao? Nếu nhân tử bậc hai đó lặp lại thì sao?</p>\n"
+    },
+    {
+      "number": 5,
+      "title": "Kiểm tra khái niệm — Câu 5",
+      "content": "<p><strong>Kiểm tra khái niệm — Câu 5.</strong> <em>Đáp án phần Kiểm tra khái niệm có tại StewartCalculus.com.</em> Phát biểu các quy tắc tính gần đúng tích phân xác định <span class=\"math inline\">\\(\\int_a^b f(x)\\,dx\\)</span> bằng quy tắc trung điểm, quy tắc hình thang và quy tắc Simpson. Bạn dự đoán quy tắc nào cho kết quả gần đúng tốt nhất? Bạn ước lượng sai số của mỗi quy tắc như thế nào?</p>\n"
+    },
+    {
+      "number": 6,
+      "title": "Kiểm tra khái niệm — Câu 6",
+      "content": "<p><strong>Kiểm tra khái niệm — Câu 6.</strong> <em>Đáp án phần Kiểm tra khái niệm có tại StewartCalculus.com.</em> Định nghĩa các tích phân suy rộng sau. <span class=\"math display\">\\[\\text{(a)}\\ \\int_a^\\infty f(x)\\,dx\\qquad \\text{(b)}\\ \\int_{-\\infty}^b f(x)\\,dx\\qquad \\text{(c)}\\ \\int_{-\\infty}^\\infty f(x)\\,dx.\\]</span></p>\n"
+    },
+    {
+      "number": 7,
+      "title": "Kiểm tra khái niệm — Câu 7",
+      "content": "<p><strong>Kiểm tra khái niệm — Câu 7.</strong> <em>Đáp án phần Kiểm tra khái niệm có tại StewartCalculus.com.</em> Định nghĩa tích phân suy rộng <span class=\"math inline\">\\(\\int_a^b f(x)\\,dx\\)</span> trong từng trường hợp sau.</p>\n<p>(a) <span class=\"math inline\">\\(f\\)</span> có gián đoạn vô cực tại <span class=\"math inline\">\\(a\\)</span>.</p>\n<p>(b) <span class=\"math inline\">\\(f\\)</span> có gián đoạn vô cực tại <span class=\"math inline\">\\(b\\)</span>.</p>\n<p>(c) <span class=\"math inline\">\\(f\\)</span> có gián đoạn vô cực tại <span class=\"math inline\">\\(c\\)</span>, với <span class=\"math inline\">\\(a&lt;c&lt;b\\)</span>.</p>\n"
+    },
+    {
+      "number": 8,
+      "title": "Kiểm tra khái niệm — Câu 8",
+      "content": "<p><strong>Kiểm tra khái niệm — Câu 8.</strong> <em>Đáp án phần Kiểm tra khái niệm có tại StewartCalculus.com.</em> Phát biểu Định lý so sánh cho tích phân suy rộng.</p>\n"
+    },
+    {
+      "number": 9,
+      "title": "Đúng–sai — Câu 1",
+      "content": "<p><strong>Đúng–sai — Câu 1.</strong> Xác định mỗi phát biểu sau là đúng hay sai. Nếu đúng, hãy giải thích vì sao. Nếu sai, hãy giải thích vì sao hoặc đưa ra một phản ví dụ. Có thể tính <span class=\"math inline\">\\(\\int\\tan^{-1}x\\,dx\\)</span> bằng phương pháp tích phân từng phần.</p>\n"
+    },
+    {
+      "number": 10,
+      "title": "Đúng–sai — Câu 2",
+      "content": "<p><strong>Đúng–sai — Câu 2.</strong> Xác định mỗi phát biểu sau là đúng hay sai. Nếu đúng, hãy giải thích vì sao. Nếu sai, hãy giải thích vì sao hoặc đưa ra một phản ví dụ. Có thể tính <span class=\"math inline\">\\(\\int x^5e^x\\,dx\\)</span> bằng cách áp dụng tích phân từng phần năm lần.</p>\n"
+    },
+    {
+      "number": 11,
+      "title": "Đúng–sai — Câu 3",
+      "content": "<p><strong>Đúng–sai — Câu 3.</strong> Xác định mỗi phát biểu sau là đúng hay sai. Nếu đúng, hãy giải thích vì sao. Nếu sai, hãy giải thích vì sao hoặc đưa ra một phản ví dụ. Để tính <span class=\"math inline\">\\(\\int dx/\\sqrt{25+x^2}\\)</span>, một phép thế lượng giác thích hợp là <span class=\"math inline\">\\(x=5\\sin\\theta\\)</span>.</p>\n"
+    },
+    {
+      "number": 12,
+      "title": "Đúng–sai — Câu 4",
+      "content": "<p><strong>Đúng–sai — Câu 4.</strong> Xác định mỗi phát biểu sau là đúng hay sai. Nếu đúng, hãy giải thích vì sao. Nếu sai, hãy giải thích vì sao hoặc đưa ra một phản ví dụ. Để tính <span class=\"math inline\">\\(\\int dx/\\sqrt{9+e^{2x}}\\)</span>, ta có thể dùng công thức ở mục 25 của Bảng tích phân để thu được <span class=\"math inline\">\\(\\ln(e^x+\\sqrt{9+e^{2x}})+C\\)</span>.</p>\n"
+    },
+    {
+      "number": 13,
+      "title": "Đúng–sai — Câu 5",
+      "content": "<p><strong>Đúng–sai — Câu 5.</strong> Xác định mỗi phát biểu sau là đúng hay sai. Nếu đúng, hãy giải thích vì sao. Nếu sai, hãy giải thích vì sao hoặc đưa ra một phản ví dụ. <span class=\"math inline\">\\(\\dfrac{x(x^2+4)}{x^2-4}\\)</span> có thể viết dưới dạng <span class=\"math inline\">\\(\\dfrac A{x+2}+\\dfrac B{x-2}\\)</span>.</p>\n"
+    },
+    {
+      "number": 14,
+      "title": "Đúng–sai — Câu 6",
+      "content": "<p><strong>Đúng–sai — Câu 6.</strong> Xác định mỗi phát biểu sau là đúng hay sai. Nếu đúng, hãy giải thích vì sao. Nếu sai, hãy giải thích vì sao hoặc đưa ra một phản ví dụ. <span class=\"math inline\">\\(\\dfrac{x^2+4}{x(x^2-4)}\\)</span> có thể viết dưới dạng <span class=\"math inline\">\\(\\dfrac Ax+\\dfrac B{x+2}+\\dfrac C{x-2}\\)</span>.</p>\n"
+    },
+    {
+      "number": 15,
+      "title": "Đúng–sai — Câu 7",
+      "content": "<p><strong>Đúng–sai — Câu 7.</strong> Xác định mỗi phát biểu sau là đúng hay sai. Nếu đúng, hãy giải thích vì sao. Nếu sai, hãy giải thích vì sao hoặc đưa ra một phản ví dụ. <span class=\"math inline\">\\(\\dfrac{x^2+4}{x^2(x-4)}\\)</span> có thể viết dưới dạng <span class=\"math inline\">\\(\\dfrac A{x^2}+\\dfrac B{x-4}\\)</span>.</p>\n"
+    },
+    {
+      "number": 16,
+      "title": "Đúng–sai — Câu 8",
+      "content": "<p><strong>Đúng–sai — Câu 8.</strong> Xác định mỗi phát biểu sau là đúng hay sai. Nếu đúng, hãy giải thích vì sao. Nếu sai, hãy giải thích vì sao hoặc đưa ra một phản ví dụ. <span class=\"math inline\">\\(\\dfrac{x^2-4}{x(x^2+4)}\\)</span> có thể viết dưới dạng <span class=\"math inline\">\\(\\dfrac Ax+\\dfrac B{x^2+4}\\)</span>.</p>\n"
+    },
+    {
+      "number": 17,
+      "title": "Đúng–sai — Câu 9",
+      "content": "<p><strong>Đúng–sai — Câu 9.</strong> Xác định mỗi phát biểu sau là đúng hay sai. Nếu đúng, hãy giải thích vì sao. Nếu sai, hãy giải thích vì sao hoặc đưa ra một phản ví dụ. <span class=\"math inline\">\\(\\displaystyle\\int_0^4\\frac{x}{x^2-1}\\,dx=\\frac12\\ln15\\)</span>.</p>\n"
+    },
+    {
+      "number": 18,
+      "title": "Đúng–sai — Câu 10",
+      "content": "<p><strong>Đúng–sai — Câu 10.</strong> Xác định mỗi phát biểu sau là đúng hay sai. Nếu đúng, hãy giải thích vì sao. Nếu sai, hãy giải thích vì sao hoặc đưa ra một phản ví dụ. <span class=\"math inline\">\\(\\displaystyle\\int_1^\\infty\\frac1{x^{\\sqrt2}}\\,dx\\)</span> hội tụ.</p>\n"
+    },
+    {
+      "number": 19,
+      "title": "Đúng–sai — Câu 11",
+      "content": "<p><strong>Đúng–sai — Câu 11.</strong> Xác định mỗi phát biểu sau là đúng hay sai. Nếu đúng, hãy giải thích vì sao. Nếu sai, hãy giải thích vì sao hoặc đưa ra một phản ví dụ. Nếu <span class=\"math inline\">\\(\\int_{-\\infty}^\\infty f(x)\\,dx\\)</span> hội tụ thì <span class=\"math inline\">\\(\\int_0^\\infty f(x)\\,dx\\)</span> hội tụ.</p>\n"
+    },
+    {
+      "number": 20,
+      "title": "Đúng–sai — Câu 12",
+      "content": "<p><strong>Đúng–sai — Câu 12.</strong> Xác định mỗi phát biểu sau là đúng hay sai. Nếu đúng, hãy giải thích vì sao. Nếu sai, hãy giải thích vì sao hoặc đưa ra một phản ví dụ. Quy tắc trung điểm luôn chính xác hơn quy tắc hình thang.</p>\n"
+    },
+    {
+      "number": 21,
+      "title": "Đúng–sai — Câu 13",
+      "content": "<p><strong>Đúng–sai — Câu 13.</strong> Xác định mỗi phát biểu sau là đúng hay sai. Nếu đúng, hãy giải thích vì sao. Nếu sai, hãy giải thích vì sao hoặc đưa ra một phản ví dụ. (a) Mọi hàm sơ cấp đều có đạo hàm là một hàm sơ cấp.</p>\n<p>(b) Mọi hàm sơ cấp đều có nguyên hàm là một hàm sơ cấp.</p>\n"
+    },
+    {
+      "number": 22,
+      "title": "Đúng–sai — Câu 14",
+      "content": "<p><strong>Đúng–sai — Câu 14.</strong> Xác định mỗi phát biểu sau là đúng hay sai. Nếu đúng, hãy giải thích vì sao. Nếu sai, hãy giải thích vì sao hoặc đưa ra một phản ví dụ. Nếu <span class=\"math inline\">\\(f\\)</span> liên tục trên <span class=\"math inline\">\\([0,\\infty)\\)</span> và <span class=\"math inline\">\\(\\int_1^\\infty f(x)\\,dx\\)</span> hội tụ thì <span class=\"math inline\">\\(\\int_0^\\infty f(x)\\,dx\\)</span> hội tụ.</p>\n"
+    },
+    {
+      "number": 23,
+      "title": "Đúng–sai — Câu 15",
+      "content": "<p><strong>Đúng–sai — Câu 15.</strong> Xác định mỗi phát biểu sau là đúng hay sai. Nếu đúng, hãy giải thích vì sao. Nếu sai, hãy giải thích vì sao hoặc đưa ra một phản ví dụ. Nếu <span class=\"math inline\">\\(f\\)</span> là một hàm liên tục, giảm trên <span class=\"math inline\">\\([1,\\infty)\\)</span> và <span class=\"math inline\">\\(\\lim_{x\\to\\infty}f(x)=0\\)</span> thì <span class=\"math inline\">\\(\\int_1^\\infty f(x)\\,dx\\)</span> hội tụ.</p>\n"
+    },
+    {
+      "number": 24,
+      "title": "Đúng–sai — Câu 16",
+      "content": "<p><strong>Đúng–sai — Câu 16.</strong> Xác định mỗi phát biểu sau là đúng hay sai. Nếu đúng, hãy giải thích vì sao. Nếu sai, hãy giải thích vì sao hoặc đưa ra một phản ví dụ. Nếu <span class=\"math inline\">\\(\\int_a^\\infty f(x)\\,dx\\)</span> và <span class=\"math inline\">\\(\\int_a^\\infty g(x)\\,dx\\)</span> đều hội tụ thì <span class=\"math inline\">\\(\\int_a^\\infty[f(x)+g(x)]\\,dx\\)</span> hội tụ.</p>\n"
+    },
+    {
+      "number": 25,
+      "title": "Đúng–sai — Câu 17",
+      "content": "<p><strong>Đúng–sai — Câu 17.</strong> Xác định mỗi phát biểu sau là đúng hay sai. Nếu đúng, hãy giải thích vì sao. Nếu sai, hãy giải thích vì sao hoặc đưa ra một phản ví dụ. Nếu <span class=\"math inline\">\\(\\int_a^\\infty f(x)\\,dx\\)</span> và <span class=\"math inline\">\\(\\int_a^\\infty g(x)\\,dx\\)</span> đều phân kỳ thì <span class=\"math inline\">\\(\\int_a^\\infty[f(x)+g(x)]\\,dx\\)</span> phân kỳ.</p>\n"
+    },
+    {
+      "number": 26,
+      "title": "Đúng–sai — Câu 18",
+      "content": "<p><strong>Đúng–sai — Câu 18.</strong> Xác định mỗi phát biểu sau là đúng hay sai. Nếu đúng, hãy giải thích vì sao. Nếu sai, hãy giải thích vì sao hoặc đưa ra một phản ví dụ. Nếu <span class=\"math inline\">\\(f(x)\\le g(x)\\)</span> và <span class=\"math inline\">\\(\\int_0^\\infty g(x)\\,dx\\)</span> phân kỳ thì <span class=\"math inline\">\\(\\int_0^\\infty f(x)\\,dx\\)</span> cũng phân kỳ.</p>\n"
+    },
+    {
+      "number": 27,
+      "title": "Bài tập 1",
+      "content": "<p><strong>Bài tập 1.</strong> <em>Yêu cầu chung (1–50):</em> Tính tích phân.</p>\n<p><span class=\"math inline\">\\(\\displaystyle \\int_1^2\\frac{(x+1)^2}{x}\\,dx\\)</span>.</p>\n"
+    },
+    {
+      "number": 28,
+      "title": "Bài tập 2",
+      "content": "<p><strong>Bài tập 2.</strong> <em>Yêu cầu chung (1–50):</em> Tính tích phân.</p>\n<p><span class=\"math inline\">\\(\\displaystyle \\int_1^2\\frac{x}{(x+1)^2}\\,dx\\)</span>.</p>\n"
+    },
+    {
+      "number": 29,
+      "title": "Bài tập 3",
+      "content": "<p><strong>Bài tập 3.</strong> <em>Yêu cầu chung (1–50):</em> Tính tích phân.</p>\n<p><span class=\"math inline\">\\(\\displaystyle \\int\\frac{e^{\\sin x}}{\\sec x}\\,dx\\)</span>.</p>\n"
+    },
+    {
+      "number": 30,
+      "title": "Bài tập 4",
+      "content": "<p><strong>Bài tập 4.</strong> <em>Yêu cầu chung (1–50):</em> Tính tích phân.</p>\n<p><span class=\"math inline\">\\(\\displaystyle \\int_0^{\\pi/6}t\\sin2t\\,dt\\)</span>.</p>\n"
+    },
+    {
+      "number": 31,
+      "title": "Bài tập 5",
+      "content": "<p><strong>Bài tập 5.</strong> <em>Yêu cầu chung (1–50):</em> Tính tích phân.</p>\n<p><span class=\"math inline\">\\(\\displaystyle \\int\\frac{dt}{2t^2+3t+1}\\)</span>.</p>\n"
+    },
+    {
+      "number": 32,
+      "title": "Bài tập 6",
+      "content": "<p><strong>Bài tập 6.</strong> <em>Yêu cầu chung (1–50):</em> Tính tích phân.</p>\n<p><span class=\"math inline\">\\(\\displaystyle \\int_1^2x^5\\ln x\\,dx\\)</span>.</p>\n"
+    },
+    {
+      "number": 33,
+      "title": "Bài tập 7",
+      "content": "<p><strong>Bài tập 7.</strong> <em>Yêu cầu chung (1–50):</em> Tính tích phân.</p>\n<p><span class=\"math inline\">\\(\\displaystyle \\int_0^{\\pi/2}\\sin^3\\theta\\cos^2\\theta\\,d\\theta\\)</span>.</p>\n"
+    },
+    {
+      "number": 34,
+      "title": "Bài tập 8",
+      "content": "<p><strong>Bài tập 8.</strong> <em>Yêu cầu chung (1–50):</em> Tính tích phân.</p>\n<p><span class=\"math inline\">\\(\\displaystyle \\int\\frac{dx}{x^2\\sqrt{16-x^2}}\\)</span>.</p>\n"
+    },
+    {
+      "number": 35,
+      "title": "Bài tập 9",
+      "content": "<p><strong>Bài tập 9.</strong> <em>Yêu cầu chung (1–50):</em> Tính tích phân.</p>\n<p><span class=\"math inline\">\\(\\displaystyle \\int\\frac{\\sin(\\ln t)}t\\,dt\\)</span>.</p>\n"
+    },
+    {
+      "number": 36,
+      "title": "Bài tập 10",
+      "content": "<p><strong>Bài tập 10.</strong> <em>Yêu cầu chung (1–50):</em> Tính tích phân.</p>\n<p><span class=\"math inline\">\\(\\displaystyle \\int_0^1\\frac{\\sqrt{\\arctan x}}{1+x^2}\\,dx\\)</span>.</p>\n"
+    },
+    {
+      "number": 37,
+      "title": "Bài tập 11",
+      "content": "<p><strong>Bài tập 11.</strong> <em>Yêu cầu chung (1–50):</em> Tính tích phân.</p>\n<p><span class=\"math inline\">\\(\\displaystyle \\int x(\\ln x)^2\\,dx\\)</span>.</p>\n"
+    },
+    {
+      "number": 38,
+      "title": "Bài tập 12",
+      "content": "<p><strong>Bài tập 12.</strong> <em>Yêu cầu chung (1–50):</em> Tính tích phân.</p>\n<p><span class=\"math inline\">\\(\\displaystyle \\int\\sin x\\cos x\\ln(\\cos x)\\,dx\\)</span>.</p>\n"
+    },
+    {
+      "number": 39,
+      "title": "Bài tập 13",
+      "content": "<p><strong>Bài tập 13.</strong> <em>Yêu cầu chung (1–50):</em> Tính tích phân.</p>\n<p><span class=\"math inline\">\\(\\displaystyle \\int_1^2\\frac{\\sqrt{x^2-1}}x\\,dx\\)</span>.</p>\n"
+    },
+    {
+      "number": 40,
+      "title": "Bài tập 14",
+      "content": "<p><strong>Bài tập 14.</strong> <em>Yêu cầu chung (1–50):</em> Tính tích phân.</p>\n<p><span class=\"math inline\">\\(\\displaystyle \\int\\frac{e^{2x}}{1+e^{4x}}\\,dx\\)</span>.</p>\n"
+    },
+    {
+      "number": 41,
+      "title": "Bài tập 15",
+      "content": "<p><strong>Bài tập 15.</strong> <em>Yêu cầu chung (1–50):</em> Tính tích phân.</p>\n<p><span class=\"math inline\">\\(\\displaystyle \\int e^{\\sqrt[3]x}\\,dx\\)</span>.</p>\n"
+    },
+    {
+      "number": 42,
+      "title": "Bài tập 16",
+      "content": "<p><strong>Bài tập 16.</strong> <em>Yêu cầu chung (1–50):</em> Tính tích phân.</p>\n<p><span class=\"math inline\">\\(\\displaystyle \\int\\frac{x^2+2}{x+2}\\,dx\\)</span>.</p>\n"
+    },
+    {
+      "number": 43,
+      "title": "Bài tập 17",
+      "content": "<p><strong>Bài tập 17.</strong> <em>Yêu cầu chung (1–50):</em> Tính tích phân.</p>\n<p><span class=\"math inline\">\\(\\displaystyle \\int x^2\\tan^{-1}x\\,dx\\)</span>.</p>\n"
+    },
+    {
+      "number": 44,
+      "title": "Bài tập 18",
+      "content": "<p><strong>Bài tập 18.</strong> <em>Yêu cầu chung (1–50):</em> Tính tích phân.</p>\n<p><span class=\"math inline\">\\(\\displaystyle \\int(x+2)^2(x+1)^{20}\\,dx\\)</span>.</p>\n"
+    },
+    {
+      "number": 45,
+      "title": "Bài tập 19",
+      "content": "<p><strong>Bài tập 19.</strong> <em>Yêu cầu chung (1–50):</em> Tính tích phân.</p>\n<p><span class=\"math inline\">\\(\\displaystyle \\int\\frac{x-1}{x^2+2x}\\,dx\\)</span>.</p>\n"
+    },
+    {
+      "number": 46,
+      "title": "Bài tập 20",
+      "content": "<p><strong>Bài tập 20.</strong> <em>Yêu cầu chung (1–50):</em> Tính tích phân.</p>\n<p><span class=\"math inline\">\\(\\displaystyle \\int\\frac{\\sec^6\\theta}{\\tan^2\\theta}\\,d\\theta\\)</span>.</p>\n"
+    },
+    {
+      "number": 47,
+      "title": "Bài tập 21",
+      "content": "<p><strong>Bài tập 21.</strong> <em>Yêu cầu chung (1–50):</em> Tính tích phân.</p>\n<p><span class=\"math inline\">\\(\\displaystyle \\int x\\cosh x\\,dx\\)</span>.</p>\n"
+    },
+    {
+      "number": 48,
+      "title": "Bài tập 22",
+      "content": "<p><strong>Bài tập 22.</strong> <em>Yêu cầu chung (1–50):</em> Tính tích phân.</p>\n<p><span class=\"math inline\">\\(\\displaystyle \\int\\frac{x^2+8x-3}{x^3+3x^2}\\,dx\\)</span>.</p>\n"
+    },
+    {
+      "number": 49,
+      "title": "Bài tập 23",
+      "content": "<p><strong>Bài tập 23.</strong> <em>Yêu cầu chung (1–50):</em> Tính tích phân.</p>\n<p><span class=\"math inline\">\\(\\displaystyle \\int\\frac{dx}{\\sqrt{x^2-4x}}\\)</span>.</p>\n"
+    },
+    {
+      "number": 50,
+      "title": "Bài tập 24",
+      "content": "<p><strong>Bài tập 24.</strong> <em>Yêu cầu chung (1–50):</em> Tính tích phân.</p>\n<p><span class=\"math inline\">\\(\\displaystyle \\int\\frac{2^{\\sqrt{x}}}{\\sqrt{x}}\\,dx\\)</span>.</p>\n"
+    },
+    {
+      "number": 51,
+      "title": "Bài tập 25",
+      "content": "<p><strong>Bài tập 25.</strong> <em>Yêu cầu chung (1–50):</em> Tính tích phân.</p>\n<p><span class=\"math inline\">\\(\\displaystyle \\int\\frac{x+1}{9x^2+6x+5}\\,dx\\)</span>.</p>\n"
+    },
+    {
+      "number": 52,
+      "title": "Bài tập 26",
+      "content": "<p><strong>Bài tập 26.</strong> <em>Yêu cầu chung (1–50):</em> Tính tích phân.</p>\n<p><span class=\"math inline\">\\(\\displaystyle \\int\\tan^5\\theta\\sec^3\\theta\\,d\\theta\\)</span>.</p>\n"
+    },
+    {
+      "number": 53,
+      "title": "Bài tập 27",
+      "content": "<p><strong>Bài tập 27.</strong> <em>Yêu cầu chung (1–50):</em> Tính tích phân.</p>\n<p><span class=\"math inline\">\\(\\displaystyle \\int_0^2\\sqrt{x^2-2x+2}\\,dx\\)</span>.</p>\n"
+    },
+    {
+      "number": 54,
+      "title": "Bài tập 28",
+      "content": "<p><strong>Bài tập 28.</strong> <em>Yêu cầu chung (1–50):</em> Tính tích phân.</p>\n<p><span class=\"math inline\">\\(\\displaystyle \\int\\cos\\sqrt{t}\\,dt\\)</span>.</p>\n"
+    },
+    {
+      "number": 55,
+      "title": "Bài tập 29",
+      "content": "<p><strong>Bài tập 29.</strong> <em>Yêu cầu chung (1–50):</em> Tính tích phân.</p>\n<p><span class=\"math inline\">\\(\\displaystyle \\int\\frac{dx}{x\\sqrt{x^2+1}}\\)</span>.</p>\n"
+    },
+    {
+      "number": 56,
+      "title": "Bài tập 30",
+      "content": "<p><strong>Bài tập 30.</strong> <em>Yêu cầu chung (1–50):</em> Tính tích phân.</p>\n<p><span class=\"math inline\">\\(\\displaystyle \\int e^x\\cos x\\,dx\\)</span>.</p>\n"
+    },
+    {
+      "number": 57,
+      "title": "Bài tập 31",
+      "content": "<p><strong>Bài tập 31.</strong> <em>Yêu cầu chung (1–50):</em> Tính tích phân.</p>\n<p><span class=\"math inline\">\\(\\displaystyle \\int\\frac{x\\sin(\\sqrt{1+x^2})}{\\sqrt{1+x^2}}\\,dx\\)</span>.</p>\n"
+    },
+    {
+      "number": 58,
+      "title": "Bài tập 32",
+      "content": "<p><strong>Bài tập 32.</strong> <em>Yêu cầu chung (1–50):</em> Tính tích phân.</p>\n<p><span class=\"math inline\">\\(\\displaystyle \\int\\frac{dx}{x^{1/2}+x^{1/4}}\\)</span>.</p>\n"
+    },
+    {
+      "number": 59,
+      "title": "Bài tập 33",
+      "content": "<p><strong>Bài tập 33.</strong> <em>Yêu cầu chung (1–50):</em> Tính tích phân.</p>\n<p><span class=\"math inline\">\\(\\displaystyle \\int\\frac{3x^3-x^2+6x-4}{(x^2+1)(x^2+2)}\\,dx\\)</span>.</p>\n"
+    },
+    {
+      "number": 60,
+      "title": "Bài tập 34",
+      "content": "<p><strong>Bài tập 34.</strong> <em>Yêu cầu chung (1–50):</em> Tính tích phân.</p>\n<p><span class=\"math inline\">\\(\\displaystyle \\int x\\sin x\\cos x\\,dx\\)</span>.</p>\n"
+    },
+    {
+      "number": 61,
+      "title": "Bài tập 35",
+      "content": "<p><strong>Bài tập 35.</strong> <em>Yêu cầu chung (1–50):</em> Tính tích phân.</p>\n<p><span class=\"math inline\">\\(\\displaystyle \\int_0^{\\pi/2}\\cos^3x\\sin2x\\,dx\\)</span>.</p>\n"
+    },
+    {
+      "number": 62,
+      "title": "Bài tập 36",
+      "content": "<p><strong>Bài tập 36.</strong> <em>Yêu cầu chung (1–50):</em> Tính tích phân.</p>\n<p><span class=\"math inline\">\\(\\displaystyle \\int\\frac{\\sqrt[3]x+1}{\\sqrt[3]x-1}\\,dx\\)</span>.</p>\n"
+    },
+    {
+      "number": 63,
+      "title": "Bài tập 37",
+      "content": "<p><strong>Bài tập 37.</strong> <em>Yêu cầu chung (1–50):</em> Tính tích phân.</p>\n<p><span class=\"math inline\">\\(\\displaystyle \\int_{-3}^3\\frac{x}{1+|x|}\\,dx\\)</span>.</p>\n"
+    },
+    {
+      "number": 64,
+      "title": "Bài tập 38",
+      "content": "<p><strong>Bài tập 38.</strong> <em>Yêu cầu chung (1–50):</em> Tính tích phân.</p>\n<p><span class=\"math inline\">\\(\\displaystyle \\int\\frac{dx}{e^x\\sqrt{1-e^{-2x}}}\\)</span>.</p>\n"
+    },
+    {
+      "number": 65,
+      "title": "Bài tập 39",
+      "content": "<p><strong>Bài tập 39.</strong> <em>Yêu cầu chung (1–50):</em> Tính tích phân.</p>\n<p><span class=\"math inline\">\\(\\displaystyle \\int_0^{\\ln10}\\frac{e^x\\sqrt{e^x-1}}{e^x+8}\\,dx\\)</span>.</p>\n"
+    },
+    {
+      "number": 66,
+      "title": "Bài tập 40",
+      "content": "<p><strong>Bài tập 40.</strong> <em>Yêu cầu chung (1–50):</em> Tính tích phân.</p>\n<p><span class=\"math inline\">\\(\\displaystyle \\int_0^{\\pi/4}\\frac{x\\sin x}{\\cos^3x}\\,dx\\)</span>.</p>\n"
+    },
+    {
+      "number": 67,
+      "title": "Bài tập 41",
+      "content": "<p><strong>Bài tập 41.</strong> <em>Yêu cầu chung (1–50):</em> Tính tích phân.</p>\n<p><span class=\"math inline\">\\(\\displaystyle \\int\\frac{x^2}{(4-x^2)^{3/2}}\\,dx\\)</span>.</p>\n"
+    },
+    {
+      "number": 68,
+      "title": "Bài tập 42",
+      "content": "<p><strong>Bài tập 42.</strong> <em>Yêu cầu chung (1–50):</em> Tính tích phân.</p>\n<p><span class=\"math inline\">\\(\\displaystyle \\int(\\arcsin x)^2\\,dx\\)</span>.</p>\n"
+    },
+    {
+      "number": 69,
+      "title": "Bài tập 43",
+      "content": "<p><strong>Bài tập 43.</strong> <em>Yêu cầu chung (1–50):</em> Tính tích phân.</p>\n<p><span class=\"math inline\">\\(\\displaystyle \\int\\frac{dx}{\\sqrt{x}+x^{3/2}}\\)</span>.</p>\n"
+    },
+    {
+      "number": 70,
+      "title": "Bài tập 44",
+      "content": "<p><strong>Bài tập 44.</strong> <em>Yêu cầu chung (1–50):</em> Tính tích phân.</p>\n<p><span class=\"math inline\">\\(\\displaystyle \\int\\frac{1-\\tan\\theta}{1+\\tan\\theta}\\,d\\theta\\)</span>.</p>\n"
+    },
+    {
+      "number": 71,
+      "title": "Bài tập 45",
+      "content": "<p><strong>Bài tập 45.</strong> <em>Yêu cầu chung (1–50):</em> Tính tích phân.</p>\n<p><span class=\"math inline\">\\(\\displaystyle \\int(\\cos x+\\sin x)^2\\cos2x\\,dx\\)</span>.</p>\n"
+    },
+    {
+      "number": 72,
+      "title": "Bài tập 46",
+      "content": "<p><strong>Bài tập 46.</strong> <em>Yêu cầu chung (1–50):</em> Tính tích phân.</p>\n<p><span class=\"math inline\">\\(\\displaystyle \\int x\\cos^3(x^2)\\sqrt{\\sin(x^2)}\\,dx\\)</span>.</p>\n"
+    },
+    {
+      "number": 73,
+      "title": "Bài tập 47",
+      "content": "<p><strong>Bài tập 47.</strong> <em>Yêu cầu chung (1–50):</em> Tính tích phân.</p>\n<p><span class=\"math inline\">\\(\\displaystyle \\int_0^{1/2}\\frac{xe^{2x}}{(1+2x)^2}\\,dx\\)</span>.</p>\n"
+    },
+    {
+      "number": 74,
+      "title": "Bài tập 48",
+      "content": "<p><strong>Bài tập 48.</strong> <em>Yêu cầu chung (1–50):</em> Tính tích phân.</p>\n<p><span class=\"math inline\">\\(\\displaystyle \\int_{\\pi/4}^{\\pi/3}\\frac{\\sqrt{\\tan\\theta}}{\\sin2\\theta}\\,d\\theta\\)</span>.</p>\n"
+    },
+    {
+      "number": 75,
+      "title": "Bài tập 49",
+      "content": "<p><strong>Bài tập 49.</strong> <em>Yêu cầu chung (1–50):</em> Tính tích phân.</p>\n<p><span class=\"math inline\">\\(\\displaystyle \\int\\frac{dx}{\\sqrt{e^x-4}}\\)</span>.</p>\n"
+    },
+    {
+      "number": 76,
+      "title": "Bài tập 50",
+      "content": "<p><strong>Bài tập 50.</strong> <em>Yêu cầu chung (1–50):</em> Tính tích phân.</p>\n<p><span class=\"math inline\">\\(\\displaystyle \\int x\\sin(\\sqrt{1+x^2})\\,dx\\)</span>.</p>\n"
+    },
+    {
+      "number": 77,
+      "title": "Bài tập 51",
+      "content": "<p><strong>Bài tập 51.</strong> <em>Yêu cầu chung (51–60):</em> Tính tích phân hoặc chứng tỏ tích phân phân kỳ.</p>\n<p><span class=\"math inline\">\\(\\displaystyle \\int_1^\\infty\\frac{dx}{(2x+1)^3}\\)</span>.</p>\n"
+    },
+    {
+      "number": 78,
+      "title": "Bài tập 52",
+      "content": "<p><strong>Bài tập 52.</strong> <em>Yêu cầu chung (51–60):</em> Tính tích phân hoặc chứng tỏ tích phân phân kỳ.</p>\n<p><span class=\"math inline\">\\(\\displaystyle \\int_1^\\infty\\frac{\\ln x}{x^4}\\,dx\\)</span>.</p>\n"
+    },
+    {
+      "number": 79,
+      "title": "Bài tập 53",
+      "content": "<p><strong>Bài tập 53.</strong> <em>Yêu cầu chung (51–60):</em> Tính tích phân hoặc chứng tỏ tích phân phân kỳ.</p>\n<p><span class=\"math inline\">\\(\\displaystyle \\int_2^\\infty\\frac{dx}{x\\ln x}\\)</span>.</p>\n"
+    },
+    {
+      "number": 80,
+      "title": "Bài tập 54",
+      "content": "<p><strong>Bài tập 54.</strong> <em>Yêu cầu chung (51–60):</em> Tính tích phân hoặc chứng tỏ tích phân phân kỳ.</p>\n<p><span class=\"math inline\">\\(\\displaystyle \\int_2^6\\frac{y}{\\sqrt{y-2}}\\,dy\\)</span>.</p>\n"
+    },
+    {
+      "number": 81,
+      "title": "Bài tập 55",
+      "content": "<p><strong>Bài tập 55.</strong> <em>Yêu cầu chung (51–60):</em> Tính tích phân hoặc chứng tỏ tích phân phân kỳ.</p>\n<p><span class=\"math inline\">\\(\\displaystyle \\int_0^4\\frac{\\ln x}{\\sqrt{x}}\\,dx\\)</span>.</p>\n"
+    },
+    {
+      "number": 82,
+      "title": "Bài tập 56",
+      "content": "<p><strong>Bài tập 56.</strong> <em>Yêu cầu chung (51–60):</em> Tính tích phân hoặc chứng tỏ tích phân phân kỳ.</p>\n<p><span class=\"math inline\">\\(\\displaystyle \\int_0^1\\frac{dx}{2-3x}\\)</span>.</p>\n"
+    },
+    {
+      "number": 83,
+      "title": "Bài tập 57",
+      "content": "<p><strong>Bài tập 57.</strong> <em>Yêu cầu chung (51–60):</em> Tính tích phân hoặc chứng tỏ tích phân phân kỳ.</p>\n<p><span class=\"math inline\">\\(\\displaystyle \\int_0^1\\frac{x-1}{\\sqrt{x}}\\,dx\\)</span>.</p>\n"
+    },
+    {
+      "number": 84,
+      "title": "Bài tập 58",
+      "content": "<p><strong>Bài tập 58.</strong> <em>Yêu cầu chung (51–60):</em> Tính tích phân hoặc chứng tỏ tích phân phân kỳ.</p>\n<p><span class=\"math inline\">\\(\\displaystyle \\int_{-1}^1\\frac{dx}{x^2-2x}\\)</span>.</p>\n"
+    },
+    {
+      "number": 85,
+      "title": "Bài tập 59",
+      "content": "<p><strong>Bài tập 59.</strong> <em>Yêu cầu chung (51–60):</em> Tính tích phân hoặc chứng tỏ tích phân phân kỳ.</p>\n<p><span class=\"math inline\">\\(\\displaystyle \\int_{-\\infty}^\\infty\\frac{dx}{4x^2+4x+5}\\)</span>.</p>\n"
+    },
+    {
+      "number": 86,
+      "title": "Bài tập 60",
+      "content": "<p><strong>Bài tập 60.</strong> <em>Yêu cầu chung (51–60):</em> Tính tích phân hoặc chứng tỏ tích phân phân kỳ.</p>\n<p><span class=\"math inline\">\\(\\displaystyle \\int_1^\\infty\\frac{\\tan^{-1}x}{x^2}\\,dx\\)</span>.</p>\n"
+    },
+    {
+      "number": 87,
+      "title": "Bài tập 61",
+      "content": "<p><strong>Bài tập 61.</strong> <em>Yêu cầu chung (61–62):</em> [Đồ thị] Tính tích phân bất định. Minh họa và kiểm tra tính hợp lý của kết quả bằng cách vẽ đồ thị của cả hàm số lẫn nguyên hàm của nó (lấy <span class=\"math inline\">\\(C=0\\)</span>).</p>\n<p><span class=\"math inline\">\\(\\displaystyle\\int\\ln(x^2+2x+2)\\,dx\\)</span>.</p>\n"
+    },
+    {
+      "number": 88,
+      "title": "Bài tập 62",
+      "content": "<p><strong>Bài tập 62.</strong> <em>Yêu cầu chung (61–62):</em> [Đồ thị] Tính tích phân bất định. Minh họa và kiểm tra tính hợp lý của kết quả bằng cách vẽ đồ thị của cả hàm số lẫn nguyên hàm của nó (lấy <span class=\"math inline\">\\(C=0\\)</span>).</p>\n<p><span class=\"math inline\">\\(\\displaystyle\\int\\frac{x^3}{\\sqrt{x^2+1}}\\,dx\\)</span>.</p>\n"
+    },
+    {
+      "number": 89,
+      "title": "Bài tập 63",
+      "content": "<p><strong>Bài tập 63.</strong> [Đồ thị] Vẽ đồ thị hàm <span class=\"math inline\">\\(f(x)=\\cos^2x\\sin^3x\\)</span> và dùng đồ thị để dự đoán giá trị của tích phân <span class=\"math inline\">\\(\\int_0^{2\\pi}f(x)\\,dx\\)</span>. Sau đó tính tích phân để kiểm chứng dự đoán.</p>\n"
+    },
+    {
+      "number": 90,
+      "title": "Bài tập 64",
+      "content": "<p><strong>Bài tập 64.</strong> [Công nghệ]</p>\n<p>(a) Bạn sẽ tính <span class=\"math inline\">\\(\\int x^5e^{-2x}\\,dx\\)</span> bằng tay như thế nào? (Không thực hiện phép tính tích phân.)</p>\n<p>(b) Bạn sẽ tính <span class=\"math inline\">\\(\\int x^5e^{-2x}\\,dx\\)</span> bằng bảng tích phân như thế nào? (Không thực hiện phép tính.)</p>\n<p>(c) Dùng máy tính để tính <span class=\"math inline\">\\(\\int x^5e^{-2x}\\,dx\\)</span>.</p>\n<p>(d) Vẽ đồ thị của hàm dưới dấu tích phân và tích phân bất định trên cùng một màn hình.</p>\n"
+    },
+    {
+      "number": 91,
+      "title": "Bài tập 65",
+      "content": "<p><strong>Bài tập 65.</strong> <em>Yêu cầu chung (65–68):</em> Dùng Bảng tích phân ở các trang tham khảo 6–10 để tính tích phân.</p>\n<p><span class=\"math inline\">\\(\\displaystyle\\int\\sqrt{4x^2-4x-3}\\,dx\\)</span>.</p>\n"
+    },
+    {
+      "number": 92,
+      "title": "Bài tập 66",
+      "content": "<p><strong>Bài tập 66.</strong> <em>Yêu cầu chung (65–68):</em> Dùng Bảng tích phân ở các trang tham khảo 6–10 để tính tích phân.</p>\n<p><span class=\"math inline\">\\(\\displaystyle\\int\\csc^5t\\,dt\\)</span>.</p>\n"
+    },
+    {
+      "number": 93,
+      "title": "Bài tập 67",
+      "content": "<p><strong>Bài tập 67.</strong> <em>Yêu cầu chung (65–68):</em> Dùng Bảng tích phân ở các trang tham khảo 6–10 để tính tích phân.</p>\n<p><span class=\"math inline\">\\(\\displaystyle\\int\\cos x\\sqrt{4+\\sin^2x}\\,dx\\)</span>.</p>\n"
+    },
+    {
+      "number": 94,
+      "title": "Bài tập 68",
+      "content": "<p><strong>Bài tập 68.</strong> <em>Yêu cầu chung (65–68):</em> Dùng Bảng tích phân ở các trang tham khảo 6–10 để tính tích phân.</p>\n<p><span class=\"math inline\">\\(\\displaystyle\\int\\frac{\\cot x}{\\sqrt{1+2\\sin x}}\\,dx\\)</span>.</p>\n"
+    },
+    {
+      "number": 95,
+      "title": "Bài tập 69",
+      "content": "<p><strong>Bài tập 69.</strong> Kiểm chứng Công thức 33 trong Bảng tích phân bằng (a) phép lấy đạo hàm và (b) một phép thế lượng giác.</p>\n"
+    },
+    {
+      "number": 96,
+      "title": "Bài tập 70",
+      "content": "<p><strong>Bài tập 70.</strong> Kiểm chứng Công thức 62 trong Bảng tích phân.</p>\n"
+    },
+    {
+      "number": 97,
+      "title": "Bài tập 71",
+      "content": "<p><strong>Bài tập 71.</strong> Có thể tìm được một số <span class=\"math inline\">\\(n\\)</span> sao cho <span class=\"math inline\">\\(\\int_0^\\infty x^n\\,dx\\)</span> hội tụ hay không?</p>\n"
+    },
+    {
+      "number": 98,
+      "title": "Bài tập 72",
+      "content": "<p><strong>Bài tập 72.</strong> Với những giá trị nào của <span class=\"math inline\">\\(a\\)</span> thì <span class=\"math inline\">\\(\\int_0^\\infty e^{ax}\\cos x\\,dx\\)</span> hội tụ? Tính tích phân với các giá trị <span class=\"math inline\">\\(a\\)</span> đó.</p>\n"
+    },
+    {
+      "number": 99,
+      "title": "Bài tập 73",
+      "content": "<p><strong>Bài tập 73.</strong> <em>Yêu cầu chung (73–74):</em> Dùng (a) quy tắc hình thang, (b) quy tắc trung điểm và (c) quy tắc Simpson với <span class=\"math inline\">\\(n=10\\)</span> để tính gần đúng tích phân đã cho. Làm tròn kết quả đến sáu chữ số thập phân.</p>\n<p><span class=\"math inline\">\\(\\displaystyle\\int_2^4\\frac1{\\ln x}\\,dx\\)</span>.</p>\n"
+    },
+    {
+      "number": 100,
+      "title": "Bài tập 74",
+      "content": "<p><strong>Bài tập 74.</strong> <em>Yêu cầu chung (73–74):</em> Dùng (a) quy tắc hình thang, (b) quy tắc trung điểm và (c) quy tắc Simpson với <span class=\"math inline\">\\(n=10\\)</span> để tính gần đúng tích phân đã cho. Làm tròn kết quả đến sáu chữ số thập phân.</p>\n<p><span class=\"math inline\">\\(\\displaystyle\\int_1^4\\sqrt{x}\\cos x\\,dx\\)</span>.</p>\n"
+    },
+    {
+      "number": 101,
+      "title": "Bài tập 75",
+      "content": "<p><strong>Bài tập 75.</strong> <em>Dữ kiện Bài 73:</em> <span class=\"math inline\">\\(\\displaystyle\\int_2^4\\frac1{\\ln x}\\,dx\\)</span>.</p>\n<p>Ước lượng các sai số trong Bài 73, phần (a) và (b). Trong mỗi trường hợp, <span class=\"math inline\">\\(n\\)</span> phải lớn đến mức nào để bảo đảm sai số nhỏ hơn <span class=\"math inline\">\\(0.00001\\)</span>?</p>\n"
+    },
+    {
+      "number": 102,
+      "title": "Bài tập 76",
+      "content": "<p><strong>Bài tập 76.</strong> Dùng quy tắc Simpson với <span class=\"math inline\">\\(n=6\\)</span> để ước lượng diện tích dưới đường cong <span class=\"math inline\">\\(y=e^x/x\\)</span> từ <span class=\"math inline\">\\(x=1\\)</span> đến <span class=\"math inline\">\\(x=4\\)</span>.</p>\n"
+    },
+    {
+      "number": 103,
+      "title": "Bài tập 77",
+      "content": "<p><strong>Bài tập 77.</strong> Số chỉ tốc độ kế (<span class=\"math inline\">\\(v\\)</span>) của một ô tô được quan sát cách nhau 1 phút và ghi lại trong bảng. Dùng quy tắc Simpson để ước lượng quãng đường ô tô đã đi.</p>\n<div class=\"center\">\n<table>\n<thead>\n<tr class=\"header\">\n<th style=\"text-align: right;\"><span class=\"math inline\">\\(t\\)</span> (phút)</th>\n<th style=\"text-align: right;\"><span class=\"math inline\">\\(v\\)</span> (mi/h)</th>\n<th style=\"text-align: right;\"><span class=\"math inline\">\\(t\\)</span> (phút)</th>\n<th style=\"text-align: right;\"><span class=\"math inline\">\\(v\\)</span> (mi/h)</th>\n</tr>\n</thead>\n<tbody>\n<tr class=\"odd\">\n<td style=\"text-align: right;\">0</td>\n<td style=\"text-align: right;\">40</td>\n<td style=\"text-align: right;\">6</td>\n<td style=\"text-align: right;\">56</td>\n</tr>\n<tr class=\"even\">\n<td style=\"text-align: right;\">1</td>\n<td style=\"text-align: right;\">42</td>\n<td style=\"text-align: right;\">7</td>\n<td style=\"text-align: right;\">57</td>\n</tr>\n<tr class=\"odd\">\n<td style=\"text-align: right;\">2</td>\n<td style=\"text-align: right;\">45</td>\n<td style=\"text-align: right;\">8</td>\n<td style=\"text-align: right;\">57</td>\n</tr>\n<tr class=\"even\">\n<td style=\"text-align: right;\">3</td>\n<td style=\"text-align: right;\">49</td>\n<td style=\"text-align: right;\">9</td>\n<td style=\"text-align: right;\">55</td>\n</tr>\n<tr class=\"odd\">\n<td style=\"text-align: right;\">4</td>\n<td style=\"text-align: right;\">52</td>\n<td style=\"text-align: right;\">10</td>\n<td style=\"text-align: right;\">56</td>\n</tr>\n<tr class=\"even\">\n<td style=\"text-align: right;\">5</td>\n<td style=\"text-align: right;\">54</td>\n<td style=\"text-align: right;\"></td>\n<td style=\"text-align: right;\"></td>\n</tr>\n</tbody>\n</table>\n</div>\n"
+    },
+    {
+      "number": 104,
+      "title": "Bài tập 78",
+      "content": "<p><strong>Bài tập 78.</strong> Một quần thể ong mật tăng với tốc độ <span class=\"math inline\">\\(r(t)\\)</span> con ong mỗi tuần, trong đó đồ thị của <span class=\"math inline\">\\(r\\)</span> được cho như hình. Dùng quy tắc Simpson với sáu khoảng con để ước lượng mức tăng số lượng ong trong 24 tuần đầu.</p>\n<div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-7-review-9369fe1d/ex78.png\" alt=\"image\" /><br />\nBài 78. Tốc độ tăng quần thể ong; <span class=\"math inline\">\\(t\\)</span> tính bằng tuần.</p>\n</div>\n"
+    },
+    {
+      "number": 105,
+      "title": "Bài tập 79",
+      "content": "<p><strong>Bài tập 79.</strong> [Công nghệ]</p>\n<p>(a) Nếu <span class=\"math inline\">\\(f(x)=\\sin(\\sin x)\\)</span>, dùng hệ đại số máy tính để tính <span class=\"math inline\">\\(f^{(4)}(x)\\)</span> rồi dùng đồ thị để tìm một chặn trên cho <span class=\"math inline\">\\(|f^{(4)}(x)|\\)</span>.</p>\n<p>(b) Dùng quy tắc Simpson với <span class=\"math inline\">\\(n=10\\)</span> để tính gần đúng <span class=\"math inline\">\\(\\int_0^\\pi f(x)\\,dx\\)</span> và dùng phần (a) để ước lượng sai số.</p>\n<p>(c) <span class=\"math inline\">\\(n\\)</span> phải lớn đến mức nào để bảo đảm độ lớn sai số khi dùng <span class=\"math inline\">\\(S_n\\)</span> nhỏ hơn <span class=\"math inline\">\\(0.00001\\)</span>?</p>\n"
+    },
+    {
+      "number": 106,
+      "title": "Bài tập 80",
+      "content": "<p><strong>Bài tập 80.</strong> Giả sử bạn được yêu cầu ước lượng thể tích của một quả bóng bầu dục. Bạn đo được quả bóng dài 28 cm. Dùng một sợi dây, bạn đo được chu vi tại chỗ rộng nhất là 53 cm. Chu vi tại vị trí cách mỗi đầu 7 cm là 45 cm. Dùng quy tắc Simpson để đưa ra ước lượng.</p>\n<div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-7-review-9369fe1d/ex80.png\" alt=\"image\" /><br />\nBài 80. Quả bóng bầu dục dài 28 cm.</p>\n</div>\n"
+    },
+    {
+      "number": 107,
+      "title": "Bài tập 81",
+      "content": "<p><strong>Bài tập 81.</strong> Dùng Định lý so sánh để xác định tích phân hội tụ hay phân kỳ. <span class=\"math display\">\\[\\text{(a)}\\ \\int_1^\\infty\\frac{2+\\sin x}{\\sqrt{x}}\\,dx\\qquad\\text{(b)}\\ \\int_1^\\infty\\frac1{\\sqrt{1+x^4}}\\,dx.\\]</span></p>\n"
+    },
+    {
+      "number": 108,
+      "title": "Bài tập 82",
+      "content": "<p><strong>Bài tập 82.</strong> Tìm diện tích miền giới hạn bởi hyperbol <span class=\"math inline\">\\(y^2-x^2=1\\)</span> và đường thẳng <span class=\"math inline\">\\(y=3\\)</span>.</p>\n"
+    },
+    {
+      "number": 109,
+      "title": "Bài tập 83",
+      "content": "<p><strong>Bài tập 83.</strong> Tìm diện tích giới hạn bởi các đường cong <span class=\"math inline\">\\(y=\\cos x\\)</span> và <span class=\"math inline\">\\(y=\\cos^2x\\)</span> giữa <span class=\"math inline\">\\(x=0\\)</span> và <span class=\"math inline\">\\(x=\\pi\\)</span>.</p>\n"
+    },
+    {
+      "number": 110,
+      "title": "Bài tập 84",
+      "content": "<p><strong>Bài tập 84.</strong> Tìm diện tích miền giới hạn bởi các đường cong <span class=\"math inline\">\\(y=1/(2+\\sqrt{x})\\)</span>, <span class=\"math inline\">\\(y=1/(2-\\sqrt{x})\\)</span> và <span class=\"math inline\">\\(x=1\\)</span>.</p>\n"
+    },
+    {
+      "number": 111,
+      "title": "Bài tập 85",
+      "content": "<p><strong>Bài tập 85.</strong> Miền dưới đường cong <span class=\"math inline\">\\(y=\\cos^2x\\)</span>, <span class=\"math inline\">\\(0\\le x\\le\\pi/2\\)</span>, được quay quanh trục <span class=\"math inline\">\\(x\\)</span>. Tìm thể tích khối tròn xoay thu được.</p>\n"
+    },
+    {
+      "number": 112,
+      "title": "Bài tập 86",
+      "content": "<p><strong>Bài tập 86.</strong> <em>Dữ kiện Bài 85:</em> Miền dưới đường cong <span class=\"math inline\">\\(y=\\cos^2x\\)</span>, <span class=\"math inline\">\\(0\\le x\\le\\pi/2\\)</span>, được quay quanh trục <span class=\"math inline\">\\(x\\)</span>. Tìm thể tích khối tròn xoay thu được.</p>\n<p>Miền trong Bài 85 được quay quanh trục <span class=\"math inline\">\\(y\\)</span>. Tìm thể tích khối tròn xoay thu được.</p>\n"
+    },
+    {
+      "number": 113,
+      "title": "Bài tập 87",
+      "content": "<p><strong>Bài tập 87.</strong> Nếu <span class=\"math inline\">\\(f&#39;\\)</span> liên tục trên <span class=\"math inline\">\\([0,\\infty)\\)</span> và <span class=\"math inline\">\\(\\lim_{x\\to\\infty}f(x)=0\\)</span>, chứng minh rằng <span class=\"math display\">\\[\\int_0^\\infty f&#39;(x)\\,dx=-f(0).\\]</span></p>\n"
+    },
+    {
+      "number": 114,
+      "title": "Bài tập 88",
+      "content": "<p><strong>Bài tập 88.</strong> Ta có thể mở rộng định nghĩa giá trị trung bình của một hàm liên tục sang một khoảng vô hạn bằng cách định nghĩa giá trị trung bình của <span class=\"math inline\">\\(f\\)</span> trên khoảng <span class=\"math inline\">\\([a,\\infty)\\)</span> là <span class=\"math display\">\\[f_{\\mathrm{avg}}=\\lim_{t\\to\\infty}\\frac1{t-a}\\int_a^t f(x)\\,dx.\\]</span> (a) Tìm giá trị trung bình của <span class=\"math inline\">\\(y=\\tan^{-1}x\\)</span> trên khoảng <span class=\"math inline\">\\([0,\\infty)\\)</span>.</p>\n<p>(b) Nếu <span class=\"math inline\">\\(f(x)\\ge0\\)</span> và <span class=\"math inline\">\\(\\int_a^\\infty f(x)\\,dx\\)</span> phân kỳ, chứng minh rằng giá trị trung bình của <span class=\"math inline\">\\(f\\)</span> trên khoảng <span class=\"math inline\">\\([a,\\infty)\\)</span> là <span class=\"math inline\">\\(\\lim_{x\\to\\infty}f(x)\\)</span>, nếu giới hạn này tồn tại.</p>\n<p>(c) Nếu <span class=\"math inline\">\\(\\int_a^\\infty f(x)\\,dx\\)</span> hội tụ thì giá trị trung bình của <span class=\"math inline\">\\(f\\)</span> trên khoảng <span class=\"math inline\">\\([a,\\infty)\\)</span> bằng bao nhiêu?</p>\n<p>(d) Tìm giá trị trung bình của <span class=\"math inline\">\\(y=\\sin x\\)</span> trên khoảng <span class=\"math inline\">\\([0,\\infty)\\)</span>.</p>\n"
+    },
+    {
+      "number": 115,
+      "title": "Bài tập 89",
+      "content": "<p><strong>Bài tập 89.</strong> Dùng phép thế <span class=\"math inline\">\\(u=1/x\\)</span> để chứng minh rằng <span class=\"math display\">\\[\\int_0^\\infty\\frac{\\ln x}{1+x^2}\\,dx=0.\\]</span></p>\n"
+    },
+    {
+      "number": 116,
+      "title": "Bài tập 90",
+      "content": "<p><strong>Bài tập 90.</strong> Độ lớn lực đẩy giữa hai điện tích điểm cùng dấu, một điện tích có độ lớn 1 và điện tích kia có độ lớn <span class=\"math inline\">\\(q\\)</span>, là <span class=\"math display\">\\[F=\\frac{q}{4\\pi\\varepsilon_0r^2},\\]</span> trong đó <span class=\"math inline\">\\(r\\)</span> là khoảng cách giữa các điện tích và <span class=\"math inline\">\\(\\varepsilon_0\\)</span> là một hằng số. Điện thế <span class=\"math inline\">\\(V\\)</span> tại điểm <span class=\"math inline\">\\(P\\)</span> do điện tích <span class=\"math inline\">\\(q\\)</span> gây ra được định nghĩa là công tiêu tốn để đưa một điện tích đơn vị từ vô cực đến <span class=\"math inline\">\\(P\\)</span> dọc theo đường thẳng nối <span class=\"math inline\">\\(q\\)</span> và <span class=\"math inline\">\\(P\\)</span>. Tìm công thức cho <span class=\"math inline\">\\(V\\)</span>.</p>\n"
+    }
+  ]
+}

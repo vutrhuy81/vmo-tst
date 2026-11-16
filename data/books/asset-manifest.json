@@ -4220,5 +4220,15 @@
     "file": "stewart-7-8-2bcba2dc/fig13.png",
     "mime": "image/png",
     "sha256": "2d5f6555fd48fc904d5f2648b3e33ee06c829f4d4e0a3cb806c9108b71cf3219"
+  },
+  "stewart-7-review-9369fe1d/ex78.png": {
+    "file": "stewart-7-review-9369fe1d/ex78.png",
+    "mime": "image/png",
+    "sha256": "f948fa409e4ae13240a286fc98d6cb3ba9e4d177ef5b3accc316a9b56c767fd9"
+  },
+  "stewart-7-review-9369fe1d/ex80.png": {
+    "file": "stewart-7-review-9369fe1d/ex80.png",
+    "mime": "image/png",
+    "sha256": "73dc68cb15ee3bed0949a6fcf95a1f3e0cc8c2de368d1cbe43441303dfb777b2"
   }
 }
