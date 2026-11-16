@@ -3981,14 +3981,14 @@
     "mime": "image/png",
     "sha256": "a03e924afe49de003a7ae91e91ce9d76b758339a63de12786beeaacf6e2eee28"
   },
-  "stewart-7-2-reconstructed/figure01.png": {
-    "file": "stewart-7-2-reconstructed/figure01.png",
+  "stewart-7-2-029ec6ba/figure01.png": {
+    "file": "stewart-7-2-029ec6ba/figure01.png",
     "mime": "image/png",
-    "source": "reconstructed"
+    "sha256": "4e5f191b054e5bf316bcbec81fee2108aafdda1fae1e429f3505fa63fb3238c3"
   },
-  "stewart-7-2-reconstructed/figure02.png": {
-    "file": "stewart-7-2-reconstructed/figure02.png",
+  "stewart-7-2-029ec6ba/figure02.png": {
+    "file": "stewart-7-2-029ec6ba/figure02.png",
     "mime": "image/png",
-    "source": "reconstructed"
+    "sha256": "3e9cb2b63561b37e2823448577e9736fe423edc65a33fa8b299a517287de2d93"
   }
 }
