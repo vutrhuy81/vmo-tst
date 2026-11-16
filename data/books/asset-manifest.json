@@ -4035,5 +4035,15 @@
     "file": "stewart-7-3-6485b25a/figure05.png",
     "mime": "image/png",
     "sha256": "6beb0440ca5f96b530c435b06bb069f5e48f0d0bfda7201fe6921bf0d89795bc"
+  },
+  "stewart-7-4-68a31300/exercise71.png": {
+    "file": "stewart-7-4-68a31300/exercise71.png",
+    "mime": "image/png",
+    "sha256": "2fa70bfbb1889ff08ceea98b3ce6632ab58c09add11ecfe383a186a4dedff45b"
+  },
+  "stewart-7-4-68a31300/polynomial_division.png": {
+    "file": "stewart-7-4-68a31300/polynomial_division.png",
+    "mime": "image/png",
+    "sha256": "da27d7e37f61d63d76ce655f039b728a437ab8d2234f41d0a7e598f83ab0f75d"
   }
 }

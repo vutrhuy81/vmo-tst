@@ -1,0 +1,316 @@
+{
+  "exercises": [
+    {
+      "number": 1,
+      "content": "<p><strong>1.</strong></p>\n<p><em>Yêu cầu chung (1–6):</em> Viết dạng phân tích thành phân thức đơn giản của hàm (như trong Ví dụ 7). Không xác định các giá trị số của hệ số.</p>\n<p>(a) <span class=\"math inline\">\\(\\displaystyle\\frac1{(x-3)(x+5)}\\)</span>. (b) <span class=\"math inline\">\\(\\displaystyle\\frac{2x+5}{(x-2)^2(x^2+2)}\\)</span>.</p>\n"
+    },
+    {
+      "number": 2,
+      "content": "<p><strong>2.</strong></p>\n<p><em>Yêu cầu chung (1–6):</em> Viết dạng phân tích thành phân thức đơn giản của hàm (như trong Ví dụ 7). Không xác định các giá trị số của hệ số.</p>\n<p>(a) <span class=\"math inline\">\\(\\displaystyle\\frac{x-6}{x^2+x-6}\\)</span>. (b) <span class=\"math inline\">\\(\\displaystyle\\frac1{x^2+x^4}\\)</span>.</p>\n"
+    },
+    {
+      "number": 3,
+      "content": "<p><strong>3.</strong></p>\n<p><em>Yêu cầu chung (1–6):</em> Viết dạng phân tích thành phân thức đơn giản của hàm (như trong Ví dụ 7). Không xác định các giá trị số của hệ số.</p>\n<p>(a) <span class=\"math inline\">\\(\\displaystyle\\frac{x^2+4}{x^3-3x^2+2x}\\)</span>. (b) <span class=\"math inline\">\\(\\displaystyle\\frac{x^3+x}{x(2x-1)^2(x^2+3)^2}\\)</span>.</p>\n"
+    },
+    {
+      "number": 4,
+      "content": "<p><strong>4.</strong></p>\n<p><em>Yêu cầu chung (1–6):</em> Viết dạng phân tích thành phân thức đơn giản của hàm (như trong Ví dụ 7). Không xác định các giá trị số của hệ số.</p>\n<p>(a) <span class=\"math inline\">\\(\\displaystyle\\frac5{x^4-1}\\)</span>. (b) <span class=\"math inline\">\\(\\displaystyle\\frac{x^4+x+1}{(x^3-1)(x^2-1)}\\)</span>.</p>\n"
+    },
+    {
+      "number": 5,
+      "content": "<p><strong>5.</strong></p>\n<p><em>Yêu cầu chung (1–6):</em> Viết dạng phân tích thành phân thức đơn giản của hàm (như trong Ví dụ 7). Không xác định các giá trị số của hệ số.</p>\n<p>(a) <span class=\"math inline\">\\(\\displaystyle\\frac{x^5+1}{(x^2-x)(x^4+2x^2+1)}\\)</span>. (b) <span class=\"math inline\">\\(\\displaystyle\\frac{x^2}{x^2+x-6}\\)</span>.</p>\n"
+    },
+    {
+      "number": 6,
+      "content": "<p><strong>6.</strong></p>\n<p><em>Yêu cầu chung (1–6):</em> Viết dạng phân tích thành phân thức đơn giản của hàm (như trong Ví dụ 7). Không xác định các giá trị số của hệ số.</p>\n<p>(a) <span class=\"math inline\">\\(\\displaystyle\\frac{x^6}{x^2-4}\\)</span>. (b) <span class=\"math inline\">\\(\\displaystyle\\frac{x^4}{(x^2-x+1)(x^2+2)^2}\\)</span>.</p>\n"
+    },
+    {
+      "number": 7,
+      "content": "<p><strong>7.</strong></p>\n<p><em>Yêu cầu chung (7–40):</em> Tính tích phân.</p>\n<p><span class=\"math inline\">\\(\\displaystyle\\int\\frac5{(x-1)(x+4)}\\,dx\\)</span>.</p>\n"
+    },
+    {
+      "number": 8,
+      "content": "<p><strong>8.</strong></p>\n<p><em>Yêu cầu chung (7–40):</em> Tính tích phân.</p>\n<p><span class=\"math inline\">\\(\\displaystyle\\int\\frac{x-12}{x^2-4x}\\,dx\\)</span>.</p>\n"
+    },
+    {
+      "number": 9,
+      "content": "<p><strong>9.</strong></p>\n<p><em>Yêu cầu chung (7–40):</em> Tính tích phân.</p>\n<p><span class=\"math inline\">\\(\\displaystyle\\int\\frac{5x+1}{(2x+1)(x-1)}\\,dx\\)</span>.</p>\n"
+    },
+    {
+      "number": 10,
+      "content": "<p><strong>10.</strong></p>\n<p><em>Yêu cầu chung (7–40):</em> Tính tích phân.</p>\n<p><span class=\"math inline\">\\(\\displaystyle\\int\\frac{y}{(y+4)(2y-1)}\\,dy\\)</span>.</p>\n"
+    },
+    {
+      "number": 11,
+      "content": "<p><strong>11.</strong></p>\n<p><em>Yêu cầu chung (7–40):</em> Tính tích phân.</p>\n<p><span class=\"math inline\">\\(\\displaystyle\\int_0^1\\frac2{2x^2+3x+1}\\,dx\\)</span>.</p>\n"
+    },
+    {
+      "number": 12,
+      "content": "<p><strong>12.</strong></p>\n<p><em>Yêu cầu chung (7–40):</em> Tính tích phân.</p>\n<p><span class=\"math inline\">\\(\\displaystyle\\int_0^1\\frac{x-4}{x^2-5x+6}\\,dx\\)</span>.</p>\n"
+    },
+    {
+      "number": 13,
+      "content": "<p><strong>13.</strong></p>\n<p><em>Yêu cầu chung (7–40):</em> Tính tích phân.</p>\n<p><span class=\"math inline\">\\(\\displaystyle\\int\\frac1{x(x-a)}\\,dx\\)</span>.</p>\n"
+    },
+    {
+      "number": 14,
+      "content": "<p><strong>14.</strong></p>\n<p><em>Yêu cầu chung (7–40):</em> Tính tích phân.</p>\n<p><span class=\"math inline\">\\(\\displaystyle\\int\\frac1{(x+a)(x+b)}\\,dx\\)</span>.</p>\n"
+    },
+    {
+      "number": 15,
+      "content": "<p><strong>15.</strong></p>\n<p><em>Yêu cầu chung (7–40):</em> Tính tích phân.</p>\n<p><span class=\"math inline\">\\(\\displaystyle\\int\\frac{x^2}{x-1}\\,dx\\)</span>.</p>\n"
+    },
+    {
+      "number": 16,
+      "content": "<p><strong>16.</strong></p>\n<p><em>Yêu cầu chung (7–40):</em> Tính tích phân.</p>\n<p><span class=\"math inline\">\\(\\displaystyle\\int\\frac{3t-2}{t+1}\\,dt\\)</span>.</p>\n"
+    },
+    {
+      "number": 17,
+      "content": "<p><strong>17.</strong></p>\n<p><em>Yêu cầu chung (7–40):</em> Tính tích phân.</p>\n<p><span class=\"math inline\">\\(\\displaystyle\\int_1^2\\frac{4y^2-7y-12}{y(y+2)(y-3)}\\,dy\\)</span>.</p>\n"
+    },
+    {
+      "number": 18,
+      "content": "<p><strong>18.</strong></p>\n<p><em>Yêu cầu chung (7–40):</em> Tính tích phân.</p>\n<p><span class=\"math inline\">\\(\\displaystyle\\int_1^2\\frac{3x^2+6x+2}{x^2+3x+2}\\,dx\\)</span>.</p>\n"
+    },
+    {
+      "number": 19,
+      "content": "<p><strong>19.</strong></p>\n<p><em>Yêu cầu chung (7–40):</em> Tính tích phân.</p>\n<p><span class=\"math inline\">\\(\\displaystyle\\int_0^1\\frac{x^2+x+1}{(x+1)^2(x+2)}\\,dx\\)</span>.</p>\n"
+    },
+    {
+      "number": 20,
+      "content": "<p><strong>20.</strong></p>\n<p><em>Yêu cầu chung (7–40):</em> Tính tích phân.</p>\n<p><span class=\"math inline\">\\(\\displaystyle\\int_2^3\\frac{x(3-5x)}{(3x-1)(x-1)^2}\\,dx\\)</span>.</p>\n"
+    },
+    {
+      "number": 21,
+      "content": "<p><strong>21.</strong></p>\n<p><em>Yêu cầu chung (7–40):</em> Tính tích phân.</p>\n<p><span class=\"math inline\">\\(\\displaystyle\\int\\frac{dt}{(t^2-1)^2}\\)</span>.</p>\n"
+    },
+    {
+      "number": 22,
+      "content": "<p><strong>22.</strong></p>\n<p><em>Yêu cầu chung (7–40):</em> Tính tích phân.</p>\n<p><span class=\"math inline\">\\(\\displaystyle\\int\\frac{3x^2+12x-20}{x^4-8x^2+16}\\,dx\\)</span>.</p>\n"
+    },
+    {
+      "number": 23,
+      "content": "<p><strong>23.</strong></p>\n<p><em>Yêu cầu chung (7–40):</em> Tính tích phân.</p>\n<p><span class=\"math inline\">\\(\\displaystyle\\int\\frac{10}{(x-1)(x^2+9)}\\,dx\\)</span>.</p>\n"
+    },
+    {
+      "number": 24,
+      "content": "<p><strong>24.</strong></p>\n<p><em>Yêu cầu chung (7–40):</em> Tính tích phân.</p>\n<p><span class=\"math inline\">\\(\\displaystyle\\int\\frac{3x^2-x+8}{x^3+4x}\\,dx\\)</span>.</p>\n"
+    },
+    {
+      "number": 25,
+      "content": "<p><strong>25.</strong></p>\n<p><em>Yêu cầu chung (7–40):</em> Tính tích phân.</p>\n<p><span class=\"math inline\">\\(\\displaystyle\\int_{-1}^0\\frac{x^3-4x+1}{x^2-3x+2}\\,dx\\)</span>.</p>\n"
+    },
+    {
+      "number": 26,
+      "content": "<p><strong>26.</strong></p>\n<p><em>Yêu cầu chung (7–40):</em> Tính tích phân.</p>\n<p><span class=\"math inline\">\\(\\displaystyle\\int_1^2\\frac{x^3+4x^2+x-1}{x^3+x^2}\\,dx\\)</span>.</p>\n"
+    },
+    {
+      "number": 27,
+      "content": "<p><strong>27.</strong></p>\n<p><em>Yêu cầu chung (7–40):</em> Tính tích phân.</p>\n<p><span class=\"math inline\">\\(\\displaystyle\\int\\frac{4x}{x^3+x^2+x+1}\\,dx\\)</span>.</p>\n"
+    },
+    {
+      "number": 28,
+      "content": "<p><strong>28.</strong></p>\n<p><em>Yêu cầu chung (7–40):</em> Tính tích phân.</p>\n<p><span class=\"math inline\">\\(\\displaystyle\\int\\frac{x^2+x+1}{(x^2+1)^2}\\,dx\\)</span>.</p>\n"
+    },
+    {
+      "number": 29,
+      "content": "<p><strong>29.</strong></p>\n<p><em>Yêu cầu chung (7–40):</em> Tính tích phân.</p>\n<p><span class=\"math inline\">\\(\\displaystyle\\int\\frac{x^3+4x+3}{x^4+5x^2+4}\\,dx\\)</span>.</p>\n"
+    },
+    {
+      "number": 30,
+      "content": "<p><strong>30.</strong></p>\n<p><em>Yêu cầu chung (7–40):</em> Tính tích phân.</p>\n<p><span class=\"math inline\">\\(\\displaystyle\\int\\frac{x^3+6x-2}{x^4+6x^2}\\,dx\\)</span>.</p>\n"
+    },
+    {
+      "number": 31,
+      "content": "<p><strong>31.</strong></p>\n<p><em>Yêu cầu chung (7–40):</em> Tính tích phân.</p>\n<p><span class=\"math inline\">\\(\\displaystyle\\int\\frac{x+4}{x^2+2x+5}\\,dx\\)</span>.</p>\n"
+    },
+    {
+      "number": 32,
+      "content": "<p><strong>32.</strong></p>\n<p><em>Yêu cầu chung (7–40):</em> Tính tích phân.</p>\n<p><span class=\"math inline\">\\(\\displaystyle\\int_0^1\\frac{x}{x^2+4x+13}\\,dx\\)</span>.</p>\n"
+    },
+    {
+      "number": 33,
+      "content": "<p><strong>33.</strong></p>\n<p><em>Yêu cầu chung (7–40):</em> Tính tích phân.</p>\n<p><span class=\"math inline\">\\(\\displaystyle\\int\\frac1{x^3-1}\\,dx\\)</span>.</p>\n"
+    },
+    {
+      "number": 34,
+      "content": "<p><strong>34.</strong></p>\n<p><em>Yêu cầu chung (7–40):</em> Tính tích phân.</p>\n<p><span class=\"math inline\">\\(\\displaystyle\\int\\frac{x^3-2x^2+2x-5}{x^4+4x^2+3}\\,dx\\)</span>.</p>\n"
+    },
+    {
+      "number": 35,
+      "content": "<p><strong>35.</strong></p>\n<p><em>Yêu cầu chung (7–40):</em> Tính tích phân.</p>\n<p><span class=\"math inline\">\\(\\displaystyle\\int_0^1\\frac{x^3+2x}{x^4+4x^2+3}\\,dx\\)</span>.</p>\n"
+    },
+    {
+      "number": 36,
+      "content": "<p><strong>36.</strong></p>\n<p><em>Yêu cầu chung (7–40):</em> Tính tích phân.</p>\n<p><span class=\"math inline\">\\(\\displaystyle\\int\\frac{x^5+x-1}{x^3+1}\\,dx\\)</span>.</p>\n"
+    },
+    {
+      "number": 37,
+      "content": "<p><strong>37.</strong></p>\n<p><em>Yêu cầu chung (7–40):</em> Tính tích phân.</p>\n<p><span class=\"math inline\">\\(\\displaystyle\\int\\frac{5x^4+7x^2+x+2}{x(x^2+1)^2}\\,dx\\)</span>.</p>\n"
+    },
+    {
+      "number": 38,
+      "content": "<p><strong>38.</strong></p>\n<p><em>Yêu cầu chung (7–40):</em> Tính tích phân.</p>\n<p><span class=\"math inline\">\\(\\displaystyle\\int\\frac{x^4+3x^2+1}{x^5+5x^3+5x}\\,dx\\)</span>.</p>\n"
+    },
+    {
+      "number": 39,
+      "content": "<p><strong>39.</strong></p>\n<p><em>Yêu cầu chung (7–40):</em> Tính tích phân.</p>\n<p><span class=\"math inline\">\\(\\displaystyle\\int\\frac{x^2-3x+7}{(x^2-4x+6)^2}\\,dx\\)</span>.</p>\n"
+    },
+    {
+      "number": 40,
+      "content": "<p><strong>40.</strong></p>\n<p><em>Yêu cầu chung (7–40):</em> Tính tích phân.</p>\n<p><span class=\"math inline\">\\(\\displaystyle\\int\\frac{x^3+2x^2+3x-2}{(x^2+2x+2)^2}\\,dx\\)</span>.</p>\n"
+    },
+    {
+      "number": 41,
+      "content": "<p><strong>41.</strong></p>\n<p><em>Yêu cầu chung (41–56):</em> Thực hiện một phép đổi biến để biểu diễn hàm dưới dấu tích phân thành một hàm hữu tỉ, rồi tính tích phân.</p>\n<p><span class=\"math inline\">\\(\\displaystyle\\int\\frac{dx}{x\\sqrt{x-1}}\\)</span>.</p>\n"
+    },
+    {
+      "number": 42,
+      "content": "<p><strong>42.</strong></p>\n<p><em>Yêu cầu chung (41–56):</em> Thực hiện một phép đổi biến để biểu diễn hàm dưới dấu tích phân thành một hàm hữu tỉ, rồi tính tích phân.</p>\n<p><span class=\"math inline\">\\(\\displaystyle\\int\\frac{dx}{2\\sqrt{x+3}+x}\\)</span>.</p>\n"
+    },
+    {
+      "number": 43,
+      "content": "<p><strong>43.</strong></p>\n<p><em>Yêu cầu chung (41–56):</em> Thực hiện một phép đổi biến để biểu diễn hàm dưới dấu tích phân thành một hàm hữu tỉ, rồi tính tích phân.</p>\n<p><span class=\"math inline\">\\(\\displaystyle\\int\\frac{dx}{x^2+x\\sqrt{x}}\\)</span>.</p>\n"
+    },
+    {
+      "number": 44,
+      "content": "<p><strong>44.</strong></p>\n<p><em>Yêu cầu chung (41–56):</em> Thực hiện một phép đổi biến để biểu diễn hàm dưới dấu tích phân thành một hàm hữu tỉ, rồi tính tích phân.</p>\n<p><span class=\"math inline\">\\(\\displaystyle\\int_0^1\\frac1{1+\\sqrt[3]x}\\,dx\\)</span>.</p>\n"
+    },
+    {
+      "number": 45,
+      "content": "<p><strong>45.</strong></p>\n<p><em>Yêu cầu chung (41–56):</em> Thực hiện một phép đổi biến để biểu diễn hàm dưới dấu tích phân thành một hàm hữu tỉ, rồi tính tích phân.</p>\n<p><span class=\"math inline\">\\(\\displaystyle\\int\\frac{x^3}{\\sqrt[3]{x^2+1}}\\,dx\\)</span>.</p>\n"
+    },
+    {
+      "number": 46,
+      "content": "<p><strong>46.</strong></p>\n<p><em>Yêu cầu chung (41–56):</em> Thực hiện một phép đổi biến để biểu diễn hàm dưới dấu tích phân thành một hàm hữu tỉ, rồi tính tích phân.</p>\n<p><span class=\"math inline\">\\(\\displaystyle\\int\\frac{dx}{(1+\\sqrt{x})^2}\\)</span>.</p>\n"
+    },
+    {
+      "number": 47,
+      "content": "<p><strong>47.</strong></p>\n<p><em>Yêu cầu chung (41–56):</em> Thực hiện một phép đổi biến để biểu diễn hàm dưới dấu tích phân thành một hàm hữu tỉ, rồi tính tích phân.</p>\n<p><span class=\"math inline\">\\(\\displaystyle\\int\\frac1{\\sqrt{x}-\\sqrt[3]x}\\,dx\\)</span>. [Gợi ý: Đặt <span class=\"math inline\">\\(u=\\sqrt[6]x\\)</span>.]</p>\n"
+    },
+    {
+      "number": 48,
+      "content": "<p><strong>48.</strong></p>\n<p><em>Yêu cầu chung (41–56):</em> Thực hiện một phép đổi biến để biểu diễn hàm dưới dấu tích phân thành một hàm hữu tỉ, rồi tính tích phân.</p>\n<p><span class=\"math inline\">\\(\\displaystyle\\int\\frac1{x-x^{1/5}}\\,dx\\)</span>.</p>\n"
+    },
+    {
+      "number": 49,
+      "content": "<p><strong>49.</strong></p>\n<p><em>Yêu cầu chung (41–56):</em> Thực hiện một phép đổi biến để biểu diễn hàm dưới dấu tích phân thành một hàm hữu tỉ, rồi tính tích phân.</p>\n<p><span class=\"math inline\">\\(\\displaystyle\\int\\frac1{x-3\\sqrt{x}+2}\\,dx\\)</span>.</p>\n"
+    },
+    {
+      "number": 50,
+      "content": "<p><strong>50.</strong></p>\n<p><em>Yêu cầu chung (41–56):</em> Thực hiện một phép đổi biến để biểu diễn hàm dưới dấu tích phân thành một hàm hữu tỉ, rồi tính tích phân.</p>\n<p><span class=\"math inline\">\\(\\displaystyle\\int\\frac{\\sqrt{1+\\sqrt{x}}}x\\,dx\\)</span>.</p>\n"
+    },
+    {
+      "number": 51,
+      "content": "<p><strong>51.</strong></p>\n<p><em>Yêu cầu chung (41–56):</em> Thực hiện một phép đổi biến để biểu diễn hàm dưới dấu tích phân thành một hàm hữu tỉ, rồi tính tích phân.</p>\n<p><span class=\"math inline\">\\(\\displaystyle\\int\\frac{e^{2x}}{e^{2x}+3e^x+2}\\,dx\\)</span>.</p>\n"
+    },
+    {
+      "number": 52,
+      "content": "<p><strong>52.</strong></p>\n<p><em>Yêu cầu chung (41–56):</em> Thực hiện một phép đổi biến để biểu diễn hàm dưới dấu tích phân thành một hàm hữu tỉ, rồi tính tích phân.</p>\n<p><span class=\"math inline\">\\(\\displaystyle\\int\\frac{\\sin x}{\\cos^2x-3\\cos x}\\,dx\\)</span>.</p>\n"
+    },
+    {
+      "number": 53,
+      "content": "<p><strong>53.</strong></p>\n<p><em>Yêu cầu chung (41–56):</em> Thực hiện một phép đổi biến để biểu diễn hàm dưới dấu tích phân thành một hàm hữu tỉ, rồi tính tích phân.</p>\n<p><span class=\"math inline\">\\(\\displaystyle\\int\\frac{\\sec^2t}{\\tan^2t+3\\tan t+2}\\,dt\\)</span>.</p>\n"
+    },
+    {
+      "number": 54,
+      "content": "<p><strong>54.</strong></p>\n<p><em>Yêu cầu chung (41–56):</em> Thực hiện một phép đổi biến để biểu diễn hàm dưới dấu tích phân thành một hàm hữu tỉ, rồi tính tích phân.</p>\n<p><span class=\"math inline\">\\(\\displaystyle\\int\\frac{e^x}{(e^x-2)(e^{2x}+1)}\\,dx\\)</span>.</p>\n"
+    },
+    {
+      "number": 55,
+      "content": "<p><strong>55.</strong></p>\n<p><em>Yêu cầu chung (41–56):</em> Thực hiện một phép đổi biến để biểu diễn hàm dưới dấu tích phân thành một hàm hữu tỉ, rồi tính tích phân.</p>\n<p><span class=\"math inline\">\\(\\displaystyle\\int\\frac{dx}{1+e^x}\\)</span>.</p>\n"
+    },
+    {
+      "number": 56,
+      "content": "<p><strong>56.</strong></p>\n<p><em>Yêu cầu chung (41–56):</em> Thực hiện một phép đổi biến để biểu diễn hàm dưới dấu tích phân thành một hàm hữu tỉ, rồi tính tích phân.</p>\n<p><span class=\"math inline\">\\(\\displaystyle\\int\\frac{\\cosh t}{\\sinh^2t+\\sinh^4t}\\,dt\\)</span>.</p>\n"
+    },
+    {
+      "number": 57,
+      "content": "<p><strong>57.</strong></p>\n<p><em>Yêu cầu chung (57–58):</em> Dùng tích phân từng phần kết hợp với các kỹ thuật trong mục này để tính tích phân.</p>\n<p><span class=\"math inline\">\\(\\displaystyle\\int\\ln(x^2-x+2)\\,dx\\)</span>.</p>\n"
+    },
+    {
+      "number": 58,
+      "content": "<p><strong>58.</strong></p>\n<p><em>Yêu cầu chung (57–58):</em> Dùng tích phân từng phần kết hợp với các kỹ thuật trong mục này để tính tích phân.</p>\n<p><span class=\"math inline\">\\(\\displaystyle\\int x\\tan^{-1}x\\,dx\\)</span>.</p>\n"
+    },
+    {
+      "number": 59,
+      "content": "<p><strong>59.</strong></p>\n<p><span class=\"sans-serif\">[Đồ thị]</span> Dùng đồ thị của <span class=\"math inline\">\\(f(x)=1/(x^2-2x-3)\\)</span> để xác định <span class=\"math inline\">\\(\\int_0^2 f(x)\\,dx\\)</span> dương hay âm. Dùng đồ thị để ước lượng sơ bộ giá trị tích phân rồi dùng phân thức đơn giản để tìm giá trị chính xác.</p>\n"
+    },
+    {
+      "number": 60,
+      "content": "<p><strong>60.</strong></p>\n<p>Tính <span class=\"math display\">\\[\\int\\frac1{x^2+k}\\,dx\\]</span> bằng cách xét các trường hợp khác nhau của hằng số <span class=\"math inline\">\\(k\\)</span>.</p>\n"
+    },
+    {
+      "number": 61,
+      "content": "<p><strong>61.</strong></p>\n<p><em>Yêu cầu chung (61–62):</em> Tính tích phân bằng cách hoàn thành bình phương và dùng Công thức 6.</p>\n<p><em>Công thức 6:</em> <span class=\"math inline\">\\(\\int dx/(x^2-a^2)=\\frac{1}{2a}\\ln\\left|\\frac{x-a}{x+a}\\right|+C\\)</span>, <span class=\"math inline\">\\(a\\ne0\\)</span>.</p>\n<p><span class=\"math inline\">\\(\\displaystyle\\int\\frac{dx}{x^2-2x}\\)</span>.</p>\n"
+    },
+    {
+      "number": 62,
+      "content": "<p><strong>62.</strong></p>\n<p><em>Yêu cầu chung (61–62):</em> Tính tích phân bằng cách hoàn thành bình phương và dùng Công thức 6.</p>\n<p><em>Công thức 6:</em> <span class=\"math inline\">\\(\\int dx/(x^2-a^2)=\\frac{1}{2a}\\ln\\left|\\frac{x-a}{x+a}\\right|+C\\)</span>, <span class=\"math inline\">\\(a\\ne0\\)</span>.</p>\n<p><span class=\"math inline\">\\(\\displaystyle\\int\\frac{2x+1}{4x^2+12x-7}\\,dx\\)</span>.</p>\n"
+    },
+    {
+      "number": 63,
+      "content": "<p><strong>63.</strong></p>\n<p><strong>Phép thế Weierstrass.</strong> Nhà toán học Đức Karl Weierstrass (1815–1897) nhận thấy phép thế <span class=\"math inline\">\\(t=\\tan(x/2)\\)</span> biến một hàm hữu tỉ bất kỳ của <span class=\"math inline\">\\(\\sin x\\)</span> và <span class=\"math inline\">\\(\\cos x\\)</span> thành một hàm hữu tỉ thông thường của <span class=\"math inline\">\\(t\\)</span>.</p>\n<p>(a) Nếu <span class=\"math inline\">\\(t=\\tan(x/2)\\)</span>, <span class=\"math inline\">\\(-\\pi&lt;x&lt;\\pi\\)</span>, hãy phác họa một tam giác vuông hoặc dùng các đồng nhất thức lượng giác để chứng minh rằng <span class=\"math display\">\\[\\cos\\frac x2=\\frac1{\\sqrt{1+t^2}},\\qquad\\sin\\frac x2=\\frac t{\\sqrt{1+t^2}}.\\]</span> (b) Chứng minh rằng <span class=\"math display\">\\[\\cos x=\\frac{1-t^2}{1+t^2},\\qquad\\sin x=\\frac{2t}{1+t^2}.\\]</span> (c) Chứng minh rằng <span class=\"math inline\">\\(dx=\\dfrac2{1+t^2}\\,dt\\)</span>.</p>\n"
+    },
+    {
+      "number": 64,
+      "content": "<p><strong>64.</strong></p>\n<p><em>Yêu cầu chung (64–67):</em> Dùng phép thế trong Bài tập 63 để biến đổi hàm dưới dấu tích phân thành một hàm hữu tỉ của <span class=\"math inline\">\\(t\\)</span>, rồi tính tích phân.</p>\n<p><em>Dữ kiện Bài tập 63:</em> <span class=\"math inline\">\\(t=\\tan(x/2)\\)</span>, <span class=\"math inline\">\\(\\cos x=(1-t^2)/(1+t^2)\\)</span>, <span class=\"math inline\">\\(\\sin x=2t/(1+t^2)\\)</span>, <span class=\"math inline\">\\(dx=2\\,dt/(1+t^2)\\)</span>.</p>\n<p><span class=\"math inline\">\\(\\displaystyle\\int\\frac{dx}{1-\\cos x}\\)</span>.</p>\n"
+    },
+    {
+      "number": 65,
+      "content": "<p><strong>65.</strong></p>\n<p><em>Yêu cầu chung (64–67):</em> Dùng phép thế trong Bài tập 63 để biến đổi hàm dưới dấu tích phân thành một hàm hữu tỉ của <span class=\"math inline\">\\(t\\)</span>, rồi tính tích phân.</p>\n<p><em>Dữ kiện Bài tập 63:</em> <span class=\"math inline\">\\(t=\\tan(x/2)\\)</span>, <span class=\"math inline\">\\(\\cos x=(1-t^2)/(1+t^2)\\)</span>, <span class=\"math inline\">\\(\\sin x=2t/(1+t^2)\\)</span>, <span class=\"math inline\">\\(dx=2\\,dt/(1+t^2)\\)</span>.</p>\n<p><span class=\"math inline\">\\(\\displaystyle\\int\\frac1{3\\sin x-4\\cos x}\\,dx\\)</span>.</p>\n"
+    },
+    {
+      "number": 66,
+      "content": "<p><strong>66.</strong></p>\n<p><em>Yêu cầu chung (64–67):</em> Dùng phép thế trong Bài tập 63 để biến đổi hàm dưới dấu tích phân thành một hàm hữu tỉ của <span class=\"math inline\">\\(t\\)</span>, rồi tính tích phân.</p>\n<p><em>Dữ kiện Bài tập 63:</em> <span class=\"math inline\">\\(t=\\tan(x/2)\\)</span>, <span class=\"math inline\">\\(\\cos x=(1-t^2)/(1+t^2)\\)</span>, <span class=\"math inline\">\\(\\sin x=2t/(1+t^2)\\)</span>, <span class=\"math inline\">\\(dx=2\\,dt/(1+t^2)\\)</span>.</p>\n<p><span class=\"math inline\">\\(\\displaystyle\\int_{\\pi/3}^{\\pi/2}\\frac1{1+\\sin x-\\cos x}\\,dx\\)</span>.</p>\n"
+    },
+    {
+      "number": 67,
+      "content": "<p><strong>67.</strong></p>\n<p><em>Yêu cầu chung (64–67):</em> Dùng phép thế trong Bài tập 63 để biến đổi hàm dưới dấu tích phân thành một hàm hữu tỉ của <span class=\"math inline\">\\(t\\)</span>, rồi tính tích phân.</p>\n<p><em>Dữ kiện Bài tập 63:</em> <span class=\"math inline\">\\(t=\\tan(x/2)\\)</span>, <span class=\"math inline\">\\(\\cos x=(1-t^2)/(1+t^2)\\)</span>, <span class=\"math inline\">\\(\\sin x=2t/(1+t^2)\\)</span>, <span class=\"math inline\">\\(dx=2\\,dt/(1+t^2)\\)</span>.</p>\n<p><span class=\"math inline\">\\(\\displaystyle\\int_0^{\\pi/2}\\frac{\\sin2x}{2+\\cos x}\\,dx\\)</span>.</p>\n"
+    },
+    {
+      "number": 68,
+      "content": "<p><strong>68.</strong></p>\n<p><em>Yêu cầu chung (68–69):</em> Tìm diện tích miền nằm dưới đường cong đã cho từ <span class=\"math inline\">\\(1\\)</span> đến <span class=\"math inline\">\\(2\\)</span>.</p>\n<p><span class=\"math inline\">\\(y=\\dfrac1{x^3+x}\\)</span>.</p>\n"
+    },
+    {
+      "number": 69,
+      "content": "<p><strong>69.</strong></p>\n<p><em>Yêu cầu chung (68–69):</em> Tìm diện tích miền nằm dưới đường cong đã cho từ <span class=\"math inline\">\\(1\\)</span> đến <span class=\"math inline\">\\(2\\)</span>.</p>\n<p><span class=\"math inline\">\\(y=\\dfrac{x^2+1}{3x-x^2}\\)</span>.</p>\n"
+    },
+    {
+      "number": 70,
+      "content": "<p><strong>70.</strong></p>\n<p>Tìm thể tích khối thu được nếu miền nằm dưới đường cong <span class=\"math display\">\\[y=\\frac1{x^2+3x+2}\\]</span> từ <span class=\"math inline\">\\(x=0\\)</span> đến <span class=\"math inline\">\\(x=1\\)</span> được quay quanh (a) trục <span class=\"math inline\">\\(x\\)</span> và (b) trục <span class=\"math inline\">\\(y\\)</span>.</p>\n"
+    },
+    {
+      "number": 71,
+      "content": "<p><strong>71.</strong></p>\n<p>Một phương pháp làm chậm sự tăng trưởng của quần thể côn trùng mà không dùng thuốc trừ sâu là đưa vào quần thể một số con đực bất thụ; chúng giao phối với con cái có khả năng sinh sản nhưng không tạo ra con non. (Ảnh cho thấy một con ruồi vít, loài đầu tiên được loại trừ hiệu quả khỏi một vùng bằng phương pháp này.) Gọi <span class=\"math inline\">\\(P\\)</span> là số côn trùng cái trong quần thể và <span class=\"math inline\">\\(S\\)</span> là số con đực bất thụ được đưa vào mỗi thế hệ. Gọi <span class=\"math inline\">\\(r\\)</span> là số con cái do mỗi con cái sinh ra, với điều kiện con đực được chọn để giao phối không bất thụ. Khi đó số lượng con cái liên hệ với thời gian <span class=\"math inline\">\\(t\\)</span> bởi <span class=\"math display\">\\[t=\\int\\frac{P+S}{P[(r-1)P-S]}\\,dP.\\]</span> Giả sử một quần thể côn trùng có <span class=\"math inline\">\\(10\\,000\\)</span> con cái tăng trưởng với tốc độ <span class=\"math inline\">\\(r=1.1\\)</span> và ban đầu được bổ sung <span class=\"math inline\">\\(900\\)</span> con đực bất thụ. Tính tích phân để đưa ra một phương trình liên hệ số lượng con cái với thời gian. (Chú ý rằng không thể giải phương trình thu được để biểu diễn tường minh <span class=\"math inline\">\\(P\\)</span>.)</p>\n<div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-7-4-68a31300/exercise71.png\" alt=\"image\" /><br />\nRuồi vít (screw-worm fly). Ảnh: USDA.</p>\n</div>\n"
+    },
+    {
+      "number": 72,
+      "content": "<p><strong>72.</strong></p>\n<p>Phân tích <span class=\"math inline\">\\(x^4+1\\)</span> thành hiệu hai bình phương bằng cách trước hết cộng rồi trừ cùng một đại lượng. Dùng kết quả phân tích này để tính <span class=\"math inline\">\\(\\int1/(x^4+1)\\,dx\\)</span>.</p>\n"
+    },
+    {
+      "number": 73,
+      "content": "<p><strong>73.</strong></p>\n<p><span class=\"sans-serif\">[CAS]</span> (a) Dùng một hệ thống đại số máy tính để tìm phân tích thành phân thức đơn giản của hàm <span class=\"math display\">\\[f(x)=\\frac{4x^3-27x^2+5x-32}{30x^5-13x^4+50x^3-286x^2-299x-70}.\\]</span> (b) Dùng phần (a) để tìm <span class=\"math inline\">\\(\\int f(x)\\,dx\\)</span> (bằng tay) và so sánh với kết quả dùng hệ thống đại số máy tính để lấy tích phân trực tiếp của <span class=\"math inline\">\\(f\\)</span>. Nhận xét về bất kỳ sự khác biệt nào.</p>\n"
+    },
+    {
+      "number": 74,
+      "content": "<p><strong>74.</strong></p>\n<p><span class=\"sans-serif\">[CAS]</span> (a) Dùng một hệ thống đại số máy tính để tìm phân tích thành phân thức đơn giản của hàm <span class=\"math display\">\\[f(x)=\\frac{12x^5-7x^3-13x^2+8}{100x^6-80x^5+116x^4-80x^3+41x^2-20x+4}.\\]</span> (b) Dùng phần (a) để tìm <span class=\"math inline\">\\(\\int f(x)\\,dx\\)</span> rồi vẽ đồ thị của <span class=\"math inline\">\\(f\\)</span> và tích phân bất định của nó trên cùng một màn hình.</p>\n<p>(c) Dùng đồ thị của <span class=\"math inline\">\\(f\\)</span> để khám phá những đặc điểm chính của đồ thị <span class=\"math inline\">\\(\\int f(x)\\,dx\\)</span>.</p>\n"
+    },
+    {
+      "number": 75,
+      "content": "<p><strong>75.</strong></p>\n<p>Giả sử <span class=\"math inline\">\\(F,G,Q\\)</span> là các đa thức và <span class=\"math display\">\\[\\frac{F(x)}{Q(x)}=\\frac{G(x)}{Q(x)}\\]</span> với mọi <span class=\"math inline\">\\(x\\)</span> trừ những điểm tại đó <span class=\"math inline\">\\(Q(x)=0\\)</span>. Chứng minh rằng <span class=\"math inline\">\\(F(x)=G(x)\\)</span> với mọi <span class=\"math inline\">\\(x\\)</span>. [Gợi ý: Dùng tính liên tục.]</p>\n"
+    },
+    {
+      "number": 76,
+      "content": "<p><strong>76.</strong></p>\n<p>(a) Dùng tích phân từng phần để chứng minh rằng, với mọi số nguyên dương <span class=\"math inline\">\\(n\\)</span>, <span class=\"math display\">\\[\\begin{aligned}\n\\int\\frac{dx}{(x^2+a^2)^n}={}&amp;\\frac{x}{2a^2(n-1)(x^2+a^2)^{n-1}}\\\\\n&amp;+\\frac{2n-3}{2a^2(n-1)}\\int\\frac{dx}{(x^2+a^2)^{n-1}}.\n\\end{aligned}\\]</span> (b) Dùng phần (a) để tính <span class=\"math display\">\\[\\int\\frac{dx}{(x^2+1)^2}\\qquad\\text{và}\\qquad\\int\\frac{dx}{(x^2+1)^3}.\\]</span></p>\n"
+    },
+    {
+      "number": 77,
+      "content": "<p><strong>77.</strong></p>\n<p>Nếu <span class=\"math inline\">\\(a\\ne0\\)</span> và <span class=\"math inline\">\\(n\\)</span> là một số nguyên dương, tìm phân tích thành phân thức đơn giản của <span class=\"math inline\">\\(f(x)=1/[x^n(x-a)]\\)</span>. [Gợi ý: Trước hết tìm hệ số của <span class=\"math inline\">\\(1/(x-a)\\)</span>. Sau đó trừ đi số hạng thu được và đơn giản hóa phần còn lại.]</p>\n"
+    },
+    {
+      "number": 78,
+      "content": "<p><strong>78.</strong></p>\n<p>Nếu <span class=\"math inline\">\\(f\\)</span> là một hàm bậc hai sao cho <span class=\"math inline\">\\(f(0)=1\\)</span> và <span class=\"math display\">\\[\\int\\frac{f(x)}{x^2(x+1)^3}\\,dx\\]</span> là một hàm hữu tỉ, tìm giá trị của <span class=\"math inline\">\\(f&#39;(0)\\)</span>.</p>\n"
+    }
+  ]
+}
