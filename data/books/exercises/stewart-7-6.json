@@ -1,0 +1,212 @@
+{
+  "exercises": [
+    {
+      "number": 1,
+      "content": "<p><strong>1.</strong></p>\n<p><em>Yêu cầu chung (1–6):</em> Dùng công thức ở mục được chỉ định trong Bảng tích phân ở các Trang tham khảo 6–10 để tính tích phân.</p>\n<p><span class=\"math inline\">\\(\\displaystyle \\int_0^{\\pi/2}\\cos5x\\cos2x\\,dx\\)</span>; mục 80.</p>\n"
+    },
+    {
+      "number": 2,
+      "content": "<p><strong>2.</strong></p>\n<p><em>Yêu cầu chung (1–6):</em> Dùng công thức ở mục được chỉ định trong Bảng tích phân ở các Trang tham khảo 6–10 để tính tích phân.</p>\n<p><span class=\"math inline\">\\(\\displaystyle \\int_0^1\\sqrt{x-x^2}\\,dx\\)</span>; mục 113.</p>\n"
+    },
+    {
+      "number": 3,
+      "content": "<p><strong>3.</strong></p>\n<p><em>Yêu cầu chung (1–6):</em> Dùng công thức ở mục được chỉ định trong Bảng tích phân ở các Trang tham khảo 6–10 để tính tích phân.</p>\n<p><span class=\"math inline\">\\(\\displaystyle \\int x\\arcsin(x^2)\\,dx\\)</span>; mục 87.</p>\n"
+    },
+    {
+      "number": 4,
+      "content": "<p><strong>4.</strong></p>\n<p><em>Yêu cầu chung (1–6):</em> Dùng công thức ở mục được chỉ định trong Bảng tích phân ở các Trang tham khảo 6–10 để tính tích phân.</p>\n<p><span class=\"math inline\">\\(\\displaystyle \\int\\frac{\\tan\\theta}{\\sqrt{2+\\cos\\theta}}\\,d\\theta\\)</span>; mục 57.</p>\n"
+    },
+    {
+      "number": 5,
+      "content": "<p><strong>5.</strong></p>\n<p><em>Yêu cầu chung (1–6):</em> Dùng công thức ở mục được chỉ định trong Bảng tích phân ở các Trang tham khảo 6–10 để tính tích phân.</p>\n<p><span class=\"math inline\">\\(\\displaystyle \\int\\frac{y^5}{\\sqrt{4+y^4}}\\,dy\\)</span>; mục 26.</p>\n"
+    },
+    {
+      "number": 6,
+      "content": "<p><strong>6.</strong></p>\n<p><em>Yêu cầu chung (1–6):</em> Dùng công thức ở mục được chỉ định trong Bảng tích phân ở các Trang tham khảo 6–10 để tính tích phân.</p>\n<p><span class=\"math inline\">\\(\\displaystyle \\int\\frac{\\sqrt{t^6-5}}t\\,dt\\)</span>; mục 41.</p>\n"
+    },
+    {
+      "number": 7,
+      "content": "<p><strong>7.</strong></p>\n<p><em>Yêu cầu chung (7–34):</em> Dùng Bảng tích phân ở các Trang tham khảo để tính tích phân.</p>\n<p><span class=\"math inline\">\\(\\displaystyle \\int_0^{\\pi/8}\\arctan2x\\,dx\\)</span></p>\n"
+    },
+    {
+      "number": 8,
+      "content": "<p><strong>8.</strong></p>\n<p><em>Yêu cầu chung (7–34):</em> Dùng Bảng tích phân ở các Trang tham khảo để tính tích phân.</p>\n<p><span class=\"math inline\">\\(\\displaystyle \\int_0^2 x^2\\sqrt{4-x^2}\\,dx\\)</span></p>\n"
+    },
+    {
+      "number": 9,
+      "content": "<p><strong>9.</strong></p>\n<p><em>Yêu cầu chung (7–34):</em> Dùng Bảng tích phân ở các Trang tham khảo để tính tích phân.</p>\n<p><span class=\"math inline\">\\(\\displaystyle \\int\\frac{\\cos x}{\\sin^2x-9}\\,dx\\)</span></p>\n"
+    },
+    {
+      "number": 10,
+      "content": "<p><strong>10.</strong></p>\n<p><em>Yêu cầu chung (7–34):</em> Dùng Bảng tích phân ở các Trang tham khảo để tính tích phân.</p>\n<p><span class=\"math inline\">\\(\\displaystyle \\int\\frac{e^x}{4-e^{2x}}\\,dx\\)</span></p>\n"
+    },
+    {
+      "number": 11,
+      "content": "<p><strong>11.</strong></p>\n<p><em>Yêu cầu chung (7–34):</em> Dùng Bảng tích phân ở các Trang tham khảo để tính tích phân.</p>\n<p><span class=\"math inline\">\\(\\displaystyle \\int\\frac{\\sqrt{9x^2+4}}{x^2}\\,dx\\)</span></p>\n"
+    },
+    {
+      "number": 12,
+      "content": "<p><strong>12.</strong></p>\n<p><em>Yêu cầu chung (7–34):</em> Dùng Bảng tích phân ở các Trang tham khảo để tính tích phân.</p>\n<p><span class=\"math inline\">\\(\\displaystyle \\int\\frac{\\sqrt{2y^2-3}}{y^2}\\,dy\\)</span></p>\n"
+    },
+    {
+      "number": 13,
+      "content": "<p><strong>13.</strong></p>\n<p><em>Yêu cầu chung (7–34):</em> Dùng Bảng tích phân ở các Trang tham khảo để tính tích phân.</p>\n<p><span class=\"math inline\">\\(\\displaystyle \\int_0^\\pi\\cos^6\\theta\\,d\\theta\\)</span></p>\n"
+    },
+    {
+      "number": 14,
+      "content": "<p><strong>14.</strong></p>\n<p><em>Yêu cầu chung (7–34):</em> Dùng Bảng tích phân ở các Trang tham khảo để tính tích phân.</p>\n<p><span class=\"math inline\">\\(\\displaystyle \\int x\\sqrt{2+x^4}\\,dx\\)</span></p>\n"
+    },
+    {
+      "number": 15,
+      "content": "<p><strong>15.</strong></p>\n<p><em>Yêu cầu chung (7–34):</em> Dùng Bảng tích phân ở các Trang tham khảo để tính tích phân.</p>\n<p><span class=\"math inline\">\\(\\displaystyle \\int\\frac{\\arctan\\sqrt{x}}{\\sqrt{x}}\\,dx\\)</span></p>\n"
+    },
+    {
+      "number": 16,
+      "content": "<p><strong>16.</strong></p>\n<p><em>Yêu cầu chung (7–34):</em> Dùng Bảng tích phân ở các Trang tham khảo để tính tích phân.</p>\n<p><span class=\"math inline\">\\(\\displaystyle \\int_0^\\pi x^3\\sin x\\,dx\\)</span></p>\n"
+    },
+    {
+      "number": 17,
+      "content": "<p><strong>17.</strong></p>\n<p><em>Yêu cầu chung (7–34):</em> Dùng Bảng tích phân ở các Trang tham khảo để tính tích phân.</p>\n<p><span class=\"math inline\">\\(\\displaystyle \\int\\frac{\\coth(1/y)}{y^2}\\,dy\\)</span></p>\n"
+    },
+    {
+      "number": 18,
+      "content": "<p><strong>18.</strong></p>\n<p><em>Yêu cầu chung (7–34):</em> Dùng Bảng tích phân ở các Trang tham khảo để tính tích phân.</p>\n<p><span class=\"math inline\">\\(\\displaystyle \\int\\frac{e^{3t}}{\\sqrt{e^{2t}-1}}\\,dt\\)</span></p>\n"
+    },
+    {
+      "number": 19,
+      "content": "<p><strong>19.</strong></p>\n<p><em>Yêu cầu chung (7–34):</em> Dùng Bảng tích phân ở các Trang tham khảo để tính tích phân.</p>\n<p><span class=\"math inline\">\\(\\displaystyle \\int y\\sqrt{6+4y-4y^2}\\,dy\\)</span></p>\n"
+    },
+    {
+      "number": 20,
+      "content": "<p><strong>20.</strong></p>\n<p><em>Yêu cầu chung (7–34):</em> Dùng Bảng tích phân ở các Trang tham khảo để tính tích phân.</p>\n<p><span class=\"math inline\">\\(\\displaystyle \\int\\frac{dx}{2x^3-3x^2}\\)</span></p>\n"
+    },
+    {
+      "number": 21,
+      "content": "<p><strong>21.</strong></p>\n<p><em>Yêu cầu chung (7–34):</em> Dùng Bảng tích phân ở các Trang tham khảo để tính tích phân.</p>\n<p><span class=\"math inline\">\\(\\displaystyle \\int\\sin^2x\\cos x\\ln(\\sin x)\\,dx\\)</span></p>\n"
+    },
+    {
+      "number": 22,
+      "content": "<p><strong>22.</strong></p>\n<p><em>Yêu cầu chung (7–34):</em> Dùng Bảng tích phân ở các Trang tham khảo để tính tích phân.</p>\n<p><span class=\"math inline\">\\(\\displaystyle \\int\\frac{\\sin2\\theta}{\\sqrt{5-\\sin\\theta}}\\,d\\theta\\)</span></p>\n"
+    },
+    {
+      "number": 23,
+      "content": "<p><strong>23.</strong></p>\n<p><em>Yêu cầu chung (7–34):</em> Dùng Bảng tích phân ở các Trang tham khảo để tính tích phân.</p>\n<p><span class=\"math inline\">\\(\\displaystyle \\int\\frac{\\sin2\\theta}{\\sqrt{\\cos^4\\theta+4}}\\,d\\theta\\)</span></p>\n"
+    },
+    {
+      "number": 24,
+      "content": "<p><strong>24.</strong></p>\n<p><em>Yêu cầu chung (7–34):</em> Dùng Bảng tích phân ở các Trang tham khảo để tính tích phân.</p>\n<p><span class=\"math inline\">\\(\\displaystyle \\int_0^2 x^3\\sqrt{4x^2-x^4}\\,dx\\)</span></p>\n"
+    },
+    {
+      "number": 25,
+      "content": "<p><strong>25.</strong></p>\n<p><em>Yêu cầu chung (7–34):</em> Dùng Bảng tích phân ở các Trang tham khảo để tính tích phân.</p>\n<p><span class=\"math inline\">\\(\\displaystyle \\int x^3e^{2x}\\,dx\\)</span></p>\n"
+    },
+    {
+      "number": 26,
+      "content": "<p><strong>26.</strong></p>\n<p><em>Yêu cầu chung (7–34):</em> Dùng Bảng tích phân ở các Trang tham khảo để tính tích phân.</p>\n<p><span class=\"math inline\">\\(\\displaystyle \\int x^3\\arcsin(x^2)\\,dx\\)</span></p>\n"
+    },
+    {
+      "number": 27,
+      "content": "<p><strong>27.</strong></p>\n<p><em>Yêu cầu chung (7–34):</em> Dùng Bảng tích phân ở các Trang tham khảo để tính tích phân.</p>\n<p><span class=\"math inline\">\\(\\displaystyle \\int\\cos^5y\\,dy\\)</span></p>\n"
+    },
+    {
+      "number": 28,
+      "content": "<p><strong>28.</strong></p>\n<p><em>Yêu cầu chung (7–34):</em> Dùng Bảng tích phân ở các Trang tham khảo để tính tích phân.</p>\n<p><span class=\"math inline\">\\(\\displaystyle \\int\\frac{\\sqrt{(\\ln x)^2-9}}{x\\ln x}\\,dx\\)</span></p>\n"
+    },
+    {
+      "number": 29,
+      "content": "<p><strong>29.</strong></p>\n<p><em>Yêu cầu chung (7–34):</em> Dùng Bảng tích phân ở các Trang tham khảo để tính tích phân.</p>\n<p><span class=\"math inline\">\\(\\displaystyle \\int\\frac{\\cos^{-1}(x^{-2})}{x^3}\\,dx\\)</span></p>\n"
+    },
+    {
+      "number": 30,
+      "content": "<p><strong>30.</strong></p>\n<p><em>Yêu cầu chung (7–34):</em> Dùng Bảng tích phân ở các Trang tham khảo để tính tích phân.</p>\n<p><span class=\"math inline\">\\(\\displaystyle \\int\\frac{dx}{\\sqrt{1-e^{2x}}}\\)</span></p>\n"
+    },
+    {
+      "number": 31,
+      "content": "<p><strong>31.</strong></p>\n<p><em>Yêu cầu chung (7–34):</em> Dùng Bảng tích phân ở các Trang tham khảo để tính tích phân.</p>\n<p><span class=\"math inline\">\\(\\displaystyle \\int\\sqrt{e^{2x}-1}\\,dx\\)</span></p>\n"
+    },
+    {
+      "number": 32,
+      "content": "<p><strong>32.</strong></p>\n<p><em>Yêu cầu chung (7–34):</em> Dùng Bảng tích phân ở các Trang tham khảo để tính tích phân.</p>\n<p><span class=\"math inline\">\\(\\displaystyle \\int\\sin2\\theta\\arctan(\\sin\\theta)\\,d\\theta\\)</span></p>\n"
+    },
+    {
+      "number": 33,
+      "content": "<p><strong>33.</strong></p>\n<p><em>Yêu cầu chung (7–34):</em> Dùng Bảng tích phân ở các Trang tham khảo để tính tích phân.</p>\n<p><span class=\"math inline\">\\(\\displaystyle \\int\\frac{x^4}{\\sqrt{x^{10}-2}}\\,dx\\)</span></p>\n"
+    },
+    {
+      "number": 34,
+      "content": "<p><strong>34.</strong></p>\n<p><em>Yêu cầu chung (7–34):</em> Dùng Bảng tích phân ở các Trang tham khảo để tính tích phân.</p>\n<p><span class=\"math inline\">\\(\\displaystyle \\int\\frac{\\sec^2\\theta\\tan^2\\theta}{\\sqrt{9-\\tan^2\\theta}}\\,d\\theta\\)</span></p>\n"
+    },
+    {
+      "number": 35,
+      "content": "<p><strong>35.</strong></p>\n<p>Miền dưới đường cong <span class=\"math inline\">\\(y=\\sin^2x\\)</span> từ <span class=\"math inline\">\\(0\\)</span> đến <span class=\"math inline\">\\(\\pi\\)</span> được quay quanh trục <span class=\"math inline\">\\(x\\)</span>. Tìm thể tích của khối tròn xoay thu được.</p>\n"
+    },
+    {
+      "number": 36,
+      "content": "<p><strong>36.</strong></p>\n<p>Tìm thể tích của khối tròn xoay thu được khi quay miền dưới đường cong <span class=\"math inline\">\\(y=\\arcsin x\\)</span>, <span class=\"math inline\">\\(x\\ge0\\)</span>, quanh trục <span class=\"math inline\">\\(y\\)</span>.</p>\n"
+    },
+    {
+      "number": 37,
+      "content": "<p><strong>37.</strong></p>\n<p>Kiểm chứng Công thức 53 trong Bảng tích phân: (a) bằng cách lấy đạo hàm và (b) bằng phép đổi biến <span class=\"math inline\">\\(t=a+bu\\)</span>.</p>\n"
+    },
+    {
+      "number": 38,
+      "content": "<p><strong>38.</strong></p>\n<p>Kiểm chứng Công thức 31: (a) bằng cách lấy đạo hàm và (b) bằng phép thế <span class=\"math inline\">\\(u=a\\sin\\theta\\)</span>.</p>\n"
+    },
+    {
+      "number": 39,
+      "content": "<p><strong>39.</strong></p>\n<p><em>Yêu cầu chung (39–46):</em> Dùng máy tính để tính tích phân. So sánh kết quả với kết quả thu được khi dùng bảng tích phân. Nếu các kết quả không giống nhau, hãy chứng tỏ chúng tương đương.</p>\n<p><span class=\"math inline\">\\(\\displaystyle \\int\\sec^4x\\,dx\\)</span></p>\n"
+    },
+    {
+      "number": 40,
+      "content": "<p><strong>40.</strong></p>\n<p><em>Yêu cầu chung (39–46):</em> Dùng máy tính để tính tích phân. So sánh kết quả với kết quả thu được khi dùng bảng tích phân. Nếu các kết quả không giống nhau, hãy chứng tỏ chúng tương đương.</p>\n<p><span class=\"math inline\">\\(\\displaystyle \\int\\csc^5x\\,dx\\)</span></p>\n"
+    },
+    {
+      "number": 41,
+      "content": "<p><strong>41.</strong></p>\n<p><em>Yêu cầu chung (39–46):</em> Dùng máy tính để tính tích phân. So sánh kết quả với kết quả thu được khi dùng bảng tích phân. Nếu các kết quả không giống nhau, hãy chứng tỏ chúng tương đương.</p>\n<p><span class=\"math inline\">\\(\\displaystyle \\int x^2\\sqrt{x^2+4}\\,dx\\)</span></p>\n"
+    },
+    {
+      "number": 42,
+      "content": "<p><strong>42.</strong></p>\n<p><em>Yêu cầu chung (39–46):</em> Dùng máy tính để tính tích phân. So sánh kết quả với kết quả thu được khi dùng bảng tích phân. Nếu các kết quả không giống nhau, hãy chứng tỏ chúng tương đương.</p>\n<p><span class=\"math inline\">\\(\\displaystyle \\int\\frac{dx}{e^x(3e^x+2)}\\)</span></p>\n"
+    },
+    {
+      "number": 43,
+      "content": "<p><strong>43.</strong></p>\n<p><em>Yêu cầu chung (39–46):</em> Dùng máy tính để tính tích phân. So sánh kết quả với kết quả thu được khi dùng bảng tích phân. Nếu các kết quả không giống nhau, hãy chứng tỏ chúng tương đương.</p>\n<p><span class=\"math inline\">\\(\\displaystyle \\int\\cos^4x\\,dx\\)</span></p>\n"
+    },
+    {
+      "number": 44,
+      "content": "<p><strong>44.</strong></p>\n<p><em>Yêu cầu chung (39–46):</em> Dùng máy tính để tính tích phân. So sánh kết quả với kết quả thu được khi dùng bảng tích phân. Nếu các kết quả không giống nhau, hãy chứng tỏ chúng tương đương.</p>\n<p><span class=\"math inline\">\\(\\displaystyle \\int x^2\\sqrt{1-x^2}\\,dx\\)</span></p>\n"
+    },
+    {
+      "number": 45,
+      "content": "<p><strong>45.</strong></p>\n<p><em>Yêu cầu chung (39–46):</em> Dùng máy tính để tính tích phân. So sánh kết quả với kết quả thu được khi dùng bảng tích phân. Nếu các kết quả không giống nhau, hãy chứng tỏ chúng tương đương.</p>\n<p><span class=\"math inline\">\\(\\displaystyle \\int\\tan^5x\\,dx\\)</span></p>\n"
+    },
+    {
+      "number": 46,
+      "content": "<p><strong>46.</strong></p>\n<p><em>Yêu cầu chung (39–46):</em> Dùng máy tính để tính tích phân. So sánh kết quả với kết quả thu được khi dùng bảng tích phân. Nếu các kết quả không giống nhau, hãy chứng tỏ chúng tương đương.</p>\n<p><span class=\"math inline\">\\(\\displaystyle \\int\\frac1{\\sqrt{1+\\sqrt[3]{x}}}\\,dx\\)</span></p>\n"
+    },
+    {
+      "number": 47,
+      "content": "<p><strong>47.</strong></p>\n<p>[Công nghệ]</p>\n<p>(a) Dùng bảng tích phân để tính <span class=\"math inline\">\\(F(x)=\\int f(x)\\,dx\\)</span>, trong đó <span class=\"math display\">\\[f(x)=\\frac1{x\\sqrt{1-x^2}}.\\]</span> Tập xác định của <span class=\"math inline\">\\(f\\)</span> và <span class=\"math inline\">\\(F\\)</span> là gì?</p>\n<p>(b) Dùng phần mềm toán học để tính <span class=\"math inline\">\\(F(x)\\)</span>. Tập xác định của hàm <span class=\"math inline\">\\(F\\)</span> mà phần mềm tạo ra là gì? Có sự khác biệt nào giữa tập xác định này và tập xác định của hàm <span class=\"math inline\">\\(F\\)</span> tìm được ở phần (a) hay không?</p>\n"
+    },
+    {
+      "number": 48,
+      "content": "<p><strong>48.</strong></p>\n<p>[Công nghệ] Đôi khi máy móc cần có sự trợ giúp của con người. Hãy thử dùng máy tính để tính <span class=\"math display\">\\[\\int(1+\\ln x)\\sqrt{1+(x\\ln x)^2}\\,dx.\\]</span> Nếu máy không trả về kết quả, hãy thực hiện một phép đổi biến đưa tích phân về dạng mà máy có thể tính được.</p>\n"
+    },
+    {
+      "number": 49,
+      "content": "<p><strong>Dự án khám phá — Quy luật trong các tích phân — Câu 1.</strong> [Công nghệ] Trong dự án này, phần mềm toán học được dùng để khảo sát tích phân bất định của các họ hàm số. Bằng cách quan sát các quy luật xuất hiện trong tích phân của một số phần tử trong họ, trước tiên ta sẽ dự đoán, rồi chứng minh một công thức tổng quát cho tích phân của bất kỳ phần tử nào trong họ đó.</p>\n<p>(a) Dùng máy tính để tính các tích phân sau. <span class=\"math display\">\\[\\text{(i)}\\quad\\int\\frac1{(x+2)(x+3)}\\,dx\\]</span> <span class=\"math display\">\\[\\text{(ii)}\\quad\\int\\frac1{(x+1)(x+5)}\\,dx\\]</span> <span class=\"math display\">\\[\\text{(iii)}\\quad\\int\\frac1{(x+2)(x-5)}\\,dx\\]</span> <span class=\"math display\">\\[\\text{(iv)}\\quad\\int\\frac1{(x+2)^2}\\,dx\\]</span> (b) Dựa vào quy luật trong các kết quả ở phần (a), hãy dự đoán giá trị của tích phân <span class=\"math display\">\\[\\int\\frac1{(x+a)(x+b)}\\,dx\\]</span> khi <span class=\"math inline\">\\(a\\ne b\\)</span>. Điều gì xảy ra khi <span class=\"math inline\">\\(a=b\\)</span>?</p>\n<p>(c) Kiểm tra dự đoán bằng cách dùng phần mềm tính tích phân ở phần (b). Sau đó, chứng minh dự đoán bằng phương pháp phân tích thành phân thức đơn giản.</p>\n"
+    },
+    {
+      "number": 50,
+      "content": "<p><strong>Dự án khám phá — Quy luật trong các tích phân — Câu 2.</strong> [Công nghệ] Trong dự án này, phần mềm toán học được dùng để khảo sát tích phân bất định của các họ hàm số. Bằng cách quan sát các quy luật xuất hiện trong tích phân của một số phần tử trong họ, trước tiên ta sẽ dự đoán, rồi chứng minh một công thức tổng quát cho tích phân của bất kỳ phần tử nào trong họ đó.</p>\n<p>(a) Dùng máy tính để tính các tích phân sau. <span class=\"math display\">\\[\\text{(i)}\\quad\\int\\sin x\\cos2x\\,dx\\]</span> <span class=\"math display\">\\[\\text{(ii)}\\quad\\int\\sin3x\\cos7x\\,dx\\]</span> <span class=\"math display\">\\[\\text{(iii)}\\quad\\int\\sin8x\\cos3x\\,dx\\]</span> (b) Dựa vào quy luật trong các kết quả ở phần (a), hãy dự đoán giá trị của tích phân <span class=\"math display\">\\[\\int\\sin ax\\cos bx\\,dx.\\]</span> (c) Kiểm tra dự đoán bằng máy tính. Sau đó, chứng minh bằng các phương pháp của Mục 7.2. Công thức đúng với những giá trị nào của <span class=\"math inline\">\\(a\\)</span> và <span class=\"math inline\">\\(b\\)</span>?</p>\n"
+    },
+    {
+      "number": 51,
+      "content": "<p><strong>Dự án khám phá — Quy luật trong các tích phân — Câu 3.</strong> [Công nghệ] Trong dự án này, phần mềm toán học được dùng để khảo sát tích phân bất định của các họ hàm số. Bằng cách quan sát các quy luật xuất hiện trong tích phân của một số phần tử trong họ, trước tiên ta sẽ dự đoán, rồi chứng minh một công thức tổng quát cho tích phân của bất kỳ phần tử nào trong họ đó.</p>\n<p>(a) Dùng máy tính để tính các tích phân sau. <span class=\"math display\">\\[\\text{(i)}\\quad\\int\\ln x\\,dx\\]</span> <span class=\"math display\">\\[\\text{(ii)}\\quad\\int x\\ln x\\,dx\\]</span> <span class=\"math display\">\\[\\text{(iii)}\\quad\\int x^2\\ln x\\,dx\\]</span> <span class=\"math display\">\\[\\text{(iv)}\\quad\\int x^3\\ln x\\,dx\\]</span> <span class=\"math display\">\\[\\text{(v)}\\quad\\int x^7\\ln x\\,dx\\]</span> (b) Dựa vào quy luật trong các kết quả ở phần (a), hãy dự đoán giá trị của <span class=\"math display\">\\[\\int x^n\\ln x\\,dx.\\]</span> (c) Dùng tích phân từng phần để chứng minh dự đoán ở phần (b). Công thức đúng với những giá trị nào của <span class=\"math inline\">\\(n\\)</span>?</p>\n"
+    },
+    {
+      "number": 52,
+      "content": "<p><strong>Dự án khám phá — Quy luật trong các tích phân — Câu 4.</strong> [Công nghệ] Trong dự án này, phần mềm toán học được dùng để khảo sát tích phân bất định của các họ hàm số. Bằng cách quan sát các quy luật xuất hiện trong tích phân của một số phần tử trong họ, trước tiên ta sẽ dự đoán, rồi chứng minh một công thức tổng quát cho tích phân của bất kỳ phần tử nào trong họ đó.</p>\n<p>(a) Dùng máy tính để tính các tích phân sau. <span class=\"math display\">\\[\\text{(i)}\\quad\\int xe^x\\,dx\\]</span> <span class=\"math display\">\\[\\text{(ii)}\\quad\\int x^2e^x\\,dx\\]</span> <span class=\"math display\">\\[\\text{(iii)}\\quad\\int x^3e^x\\,dx\\]</span> <span class=\"math display\">\\[\\text{(iv)}\\quad\\int x^4e^x\\,dx\\]</span> <span class=\"math display\">\\[\\text{(v)}\\quad\\int x^5e^x\\,dx\\]</span> (b) Dựa vào quy luật trong các kết quả ở phần (a), hãy dự đoán giá trị của <span class=\"math inline\">\\(\\int x^6e^x\\,dx\\)</span>. Sau đó, dùng máy tính để kiểm tra dự đoán.</p>\n<p>(c) Dựa vào các quy luật ở phần (a) và (b), hãy đưa ra dự đoán về giá trị của tích phân <span class=\"math display\">\\[\\int x^ne^x\\,dx\\]</span> khi <span class=\"math inline\">\\(n\\)</span> là một số nguyên dương.</p>\n<p>(d) Dùng quy nạp toán học để chứng minh dự đoán ở phần (c).</p>\n"
+    }
+  ]
+}

@@ -1,0 +1,277 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage{fontspec}\setmainfont{Latin Modern Roman}\setsansfont{DejaVu Sans}
+\usepackage{amsmath,amssymb,graphicx,geometry,enumitem,needspace,longtable,booktabs,fancyhdr,hyperref}
+\geometry{left=28mm,right=23mm,top=24mm,bottom=24mm}
+\hypersetup{unicode=true,colorlinks=true,linkcolor=black,urlcolor=blue,pdftitle={Giải tích §7.6 — Tính tích phân bằng bảng và công nghệ}}
+\setlength{\parindent}{1.2em}\setlength{\parskip}{4pt}\setlength{\headheight}{16pt}
+\pagestyle{fancy}\fancyhf{}\fancyhead[L]{\small Chương 7. Các phương pháp tính tích phân}\fancyhead[R]{\small §7.6}\fancyfoot[C]{\thepage}
+\newcommand{\fig}[3][.68]{\begin{center}\begin{minipage}{\linewidth}\centering\includegraphics[width=#1\linewidth]{assets/#2.png}\\{\small #3}\end{minipage}\end{center}}
+\newcommand{\ex}[1]{\par\medskip\noindent\textbf{Ví dụ #1.}\ }
+\newcommand{\sol}{\par\nopagebreak[4]\noindent\textit{Lời giải.}\ }
+\newcommand{\bt}[1]{\par\smallskip\Needspace{5\baselineskip}\noindent\textbf{#1.}\ }
+\newcommand{\group}[1]{\par\Needspace{11\baselineskip}\medskip\noindent\textbf{#1}\par\nopagebreak[4]}
+\newcommand{\gint}[1]{\left[\!\left[#1\right]\!\right]}
+\allowdisplaybreaks[2]
+\DeclareMathOperator{\sech}{sech}
+\DeclareMathOperator{\csch}{csch}
+\DeclareMathOperator{\arccot}{arccot}
+
+\newcommand{\prj}[1]{\bt{#1}}
+
+\newcommand{\kn}[1]{\bt{#1}}
+\newcommand{\ds}[1]{\bt{#1}}
+\setlength{\emergencystretch}{1em}
+\begin{document}
+\begin{center}{\Large\bfseries 7.6 — Tính tích phân bằng bảng và công nghệ}\end{center}
+Trong mục này, ta mô tả cách dùng bảng và phần mềm toán học để tính tích phân của các hàm có nguyên hàm sơ cấp. Tuy nhiên, cần nhớ rằng ngay cả phần mềm máy tính mạnh nhất cũng không thể tìm được công thức tường minh cho nguyên hàm của các hàm như $e^{x^2}$ hoặc những hàm khác đã nêu ở cuối Mục 7.5.
+
+\section*{Bảng tích phân}
+Bảng tích phân bất định rất hữu ích khi ta gặp một tích phân khó tính bằng tay. Trong một số trường hợp, kết quả thu được có dạng đơn giản hơn kết quả do máy tính đưa ra. Một bảng tương đối ngắn gồm 120 tích phân, được phân loại theo dạng, nằm ở các Trang tham khảo 6–10 ở cuối sách. Những bảng đầy đủ hơn, gồm hàng trăm hoặc hàng nghìn mục, có trong các ấn phẩm riêng hoặc trên Internet. Khi dùng các bảng này, hãy nhớ rằng tích phân thường không xuất hiện đúng dạng đã liệt kê. Thông thường, cần dùng Quy tắc đổi biến hoặc biến đổi đại số để đưa tích phân cho trước về một trong những dạng trong bảng.
+
+\ex{1} Miền giới hạn bởi các đường $y=\arctan x$, $y=0$ và $x=1$ được quay quanh trục $y$. Tìm thể tích của khối tròn xoay thu được.
+\sol Dùng phương pháp vỏ trụ, ta thấy thể tích là
+\[V=\int_0^1 2\pi x\arctan x\,dx.\]
+Trong phần \textit{Các dạng lượng giác ngược} của Bảng tích phân, ta tìm được Công thức 92:
+\[\int u\tan^{-1}u\,du=\frac{u^2+1}{2}\tan^{-1}u-\frac u2+C.\]
+Do đó, thể tích là
+\begin{align*}
+V&=2\pi\int_0^1 x\tan^{-1}x\,dx
+=2\pi\left[\frac{x^2+1}{2}\tan^{-1}x-\frac x2\right]_0^1\\
+&=\pi\bigl[(x^2+1)\tan^{-1}x-x\bigr]_0^1
+=\pi(2\tan^{-1}1-1)\\
+&=\pi[2(\pi/4)-1]=\frac12\pi^2-\pi.
+\end{align*}
+\textit{Ghi chú.} Bảng tích phân nằm ở các Trang tham khảo 6–10 ở cuối sách.
+
+\ex{2} Dùng Bảng tích phân để tìm $\displaystyle\int\frac{x^2}{\sqrt{5-4x^2}}\,dx$.
+\sol Xem phần \textit{Các dạng chứa $\sqrt{a^2-u^2}$} của bảng, ta thấy mục gần nhất là Công thức 34:
+\[\int\frac{u^2}{\sqrt{a^2-u^2}}\,du
+=-\frac u2\sqrt{a^2-u^2}+\frac{a^2}{2}\sin^{-1}\left(\frac ua\right)+C.\]
+Dạng này chưa hoàn toàn giống tích phân đang xét, nhưng ta có thể dùng nó nếu trước hết đặt $u=2x$:
+\[\int\frac{x^2}{\sqrt{5-4x^2}}\,dx
+=\int\frac{(u/2)^2}{\sqrt{5-u^2}}\,\frac{du}{2}
+=\frac18\int\frac{u^2}{\sqrt{5-u^2}}\,du.\]
+\textit{Ghi nhớ.} Khi đặt $u=2x$ (nên $x=u/2$), ta cũng phải thay $du=2\,dx$ (nên $dx=du/2$).
+
+Sau đó, dùng Công thức 34 với $a^2=5$ (nên $a=\sqrt5$):
+\begin{align*}
+\int\frac{x^2}{\sqrt{5-4x^2}}\,dx
+&=\frac18\int\frac{u^2}{\sqrt{5-u^2}}\,du\\
+&=\frac18\left(-\frac u2\sqrt{5-u^2}+\frac52\sin^{-1}\frac{u}{\sqrt5}\right)+C\\
+&=-\frac x8\sqrt{5-4x^2}+\frac5{16}\sin^{-1}\left(\frac{2x}{\sqrt5}\right)+C.
+\end{align*}
+
+\ex{3} Dùng Bảng tích phân để tính $\displaystyle\int x^3\sin x\,dx$.
+\sol Xem phần \textit{Các dạng lượng giác}, ta thấy không có mục nào chứa tường minh thừa số $u^3$. Tuy nhiên, có thể dùng công thức truy hồi ở mục 84 với $n=3$:
+\[\int x^3\sin x\,dx=-x^3\cos x+3\int x^2\cos x\,dx.\]
+Bây giờ cần tính $\int x^2\cos x\,dx$. Ta có thể dùng công thức truy hồi ở mục 85 với $n=2$, rồi dùng Công thức 82:
+\begin{align*}
+\int x^2\cos x\,dx&=x^2\sin x-2\int x\sin x\,dx\\
+&=x^2\sin x-2(\sin x-x\cos x)+K.
+\end{align*}
+\textit{Công thức 85 trong bảng:}
+\[\int u^n\cos u\,du=u^n\sin u-n\int u^{n-1}\sin u\,du.\]
+Kết hợp các kết quả trên, ta được
+\[\int x^3\sin x\,dx=-x^3\cos x+3x^2\sin x+6x\cos x-6\sin x+C,\]
+trong đó $C=3K$.
+
+\ex{4} Dùng Bảng tích phân để tìm $\displaystyle\int x\sqrt{x^2+2x+4}\,dx$.
+\sol Vì bảng cho các dạng chứa $\sqrt{a^2+x^2}$, $\sqrt{a^2-x^2}$ và $\sqrt{x^2-a^2}$, nhưng không có dạng chứa $\sqrt{ax^2+bx+c}$, trước hết ta hoàn thành bình phương:
+\[x^2+2x+4=(x+1)^2+3.\]
+Nếu đặt $u=x+1$ (nên $x=u-1$), hàm dưới dấu tích phân sẽ chứa dạng $\sqrt{a^2+u^2}$:
+\begin{align*}
+\int x\sqrt{x^2+2x+4}\,dx
+&=\int(u-1)\sqrt{u^2+3}\,du\\
+&=\int u\sqrt{u^2+3}\,du-\int\sqrt{u^2+3}\,du.
+\end{align*}
+Tích phân thứ nhất được tính bằng phép đổi biến $t=u^2+3$:
+\[\int u\sqrt{u^2+3}\,du
+=\frac12\int\sqrt t\,dt
+=\frac12\cdot\frac23t^{3/2}
+=\frac13(u^2+3)^{3/2}.\]
+Đối với tích phân thứ hai, ta dùng Công thức 21 với $a=\sqrt3$:
+\[\int\sqrt{u^2+3}\,du
+=\frac u2\sqrt{u^2+3}+\frac32\ln\bigl(u+\sqrt{u^2+3}\bigr).\]
+\textit{Công thức 21 trong bảng:}
+\[\int\sqrt{a^2+u^2}\,du
+=\frac u2\sqrt{a^2+u^2}+\frac{a^2}{2}\ln\bigl(u+\sqrt{a^2+u^2}\bigr)+C.\]
+Vì vậy,
+\begin{align*}
+\int x\sqrt{x^2+2x+4}\,dx
+&=\frac13(x^2+2x+4)^{3/2}-\frac{x+1}{2}\sqrt{x^2+2x+4}\\
+&\quad-\frac32\ln\bigl(x+1+\sqrt{x^2+2x+4}\bigr)+C.
+\end{align*}
+
+\section*{Tính tích phân bằng công nghệ}
+Ta đã thấy việc dùng bảng đòi hỏi phải đối chiếu dạng của hàm dưới dấu tích phân cho trước với các dạng trong bảng. Máy tính đặc biệt giỏi nhận dạng các dạng thức. Cũng như ta kết hợp phép đổi biến với bảng, một hệ thống đại số máy tính (CAS), hoặc phần mềm toán học có khả năng tương tự, có thể thực hiện các phép đổi biến để đưa tích phân cho trước về một dạng có trong các công thức được lưu trữ. Vì vậy, không có gì đáng ngạc nhiên khi có những phần mềm rất mạnh về tính tích phân. Điều đó không có nghĩa là kỹ năng tính tích phân bằng tay đã lỗi thời. Ta sẽ thấy đôi khi tính bằng tay cho một tích phân bất định có dạng thuận tiện hơn kết quả của máy.
+
+Trước hết, hãy xem điều gì xảy ra khi yêu cầu máy tính lấy tích phân của hàm tương đối đơn giản $y=1/(3x-2)$. Đặt $u=3x-2$, một phép tính dễ dàng bằng tay cho
+\[\int\frac1{3x-2}\,dx=\frac13\ln|3x-2|+C,\]
+trong khi một số phần mềm trả về kết quả
+\[\frac13\ln(3x-2).\]
+Điều đầu tiên cần chú ý là thiếu hằng số tích phân. Nói cách khác, ta được cho một nguyên hàm cụ thể, không phải dạng tổng quát nhất. Do đó, khi dùng kết quả tích phân của máy, có thể phải thêm một hằng số. Thứ hai, kết quả của máy không có dấu giá trị tuyệt đối. Điều này phù hợp nếu bài toán chỉ xét những giá trị $x>\tfrac23$. Nhưng nếu quan tâm đến các giá trị khác của $x$, ta cần thêm ký hiệu giá trị tuyệt đối.
+
+Trong ví dụ tiếp theo, ta xét lại tích phân ở Ví dụ 4, nhưng lần này dùng công nghệ để tìm kết quả.
+
+\ex{5} Dùng máy tính để tìm $\displaystyle\int x\sqrt{x^2+2x+4}\,dx$.
+\sol Các phần mềm khác nhau có thể đưa ra những dạng kết quả khác nhau. Một hệ thống đại số máy tính cho
+\begin{align*}
+&\frac13(x^2+2x+4)^{3/2}-\frac14(2x+2)\sqrt{x^2+2x+4}\\
+&\qquad-\frac32\operatorname{arcsinh}\left(\frac{\sqrt3}{3}(1+x)\right).
+\end{align*}
+Kết quả này trông khác kết quả ở Ví dụ 4, nhưng tương đương vì có thể viết lại số hạng thứ ba bằng đồng nhất thức
+\[\operatorname{arcsinh}x=\ln\bigl(x+\sqrt{x^2+1}\bigr).\]
+\textit{Ghi chú.} Đây là phương trình 3.11.3.
+
+Do đó,
+\begin{align*}
+\operatorname{arcsinh}\left(\frac{\sqrt3}{3}(1+x)\right)
+&=\ln\left[\frac{\sqrt3}{3}(1+x)+\sqrt{\frac13(1+x)^2+1}\right]\\
+&=\ln\left\{\frac1{\sqrt3}\left[1+x+\sqrt{(1+x)^2+3}\right]\right\}\\
+&=\ln\frac1{\sqrt3}+\ln\bigl(x+1+\sqrt{x^2+2x+4}\bigr).
+\end{align*}
+Số hạng bổ sung $-\tfrac32\ln(1/\sqrt3)$ có thể được gộp vào hằng số tích phân.
+
+Một phần mềm khác cho kết quả
+\[\left(\frac56+\frac x6+\frac{x^2}{3}\right)\sqrt{x^2+2x+4}
+-\frac32\sinh^{-1}\left(\frac{1+x}{\sqrt3}\right).\]
+Ở đây, hai số hạng đầu của kết quả ở Ví dụ 4 đã được gộp thành một số hạng bằng cách đặt nhân tử chung.
+
+\ex{6} Dùng máy tính để tính $\displaystyle\int x(x^2+5)^8\,dx$.
+\sol Máy tính có thể cho kết quả
+\begin{align*}
+&\frac1{18}x^{18}+\frac52x^{16}+50x^{14}+\frac{1750}{3}x^{12}+4375x^{10}\\
+&\qquad+21875x^8+\frac{218750}{3}x^6+156250x^4+\frac{390625}{2}x^2.
+\end{align*}
+Hẳn phần mềm đã khai triển $(x^2+5)^8$ bằng Định lý nhị thức rồi lấy tích phân từng số hạng.
+
+Nếu tính bằng tay bằng phép đổi biến $u=x^2+5$, ta được
+\[\int x(x^2+5)^8\,dx=\frac1{18}(x^2+5)^9+C.\]
+Đối với phần lớn mục đích sử dụng, đây là dạng kết quả thuận tiện hơn.
+
+\ex{7} Dùng máy tính để tìm $\displaystyle\int\sin^5x\cos^2x\,dx$.
+\sol Trong Ví dụ 7.2.2, ta đã tìm được
+\begin{equation}
+\int\sin^5x\cos^2x\,dx
+=-\frac13\cos^3x+\frac25\cos^5x-\frac17\cos^7x+C.\tag{1}
+\end{equation}
+Tùy phần mềm sử dụng, ta có thể nhận được kết quả
+\[-\frac17\sin^4x\cos^3x-\frac4{35}\sin^2x\cos^3x-\frac8{105}\cos^3x\]
+hoặc
+\[-\frac5{64}\cos x-\frac1{192}\cos3x+\frac3{320}\cos5x-\frac1{448}\cos7x.\]
+Ta dự đoán có những đồng nhất thức lượng giác cho thấy ba kết quả này tương đương. Thực ra, có thể dùng chính phần mềm để rút gọn kết quả ban đầu bằng các đồng nhất thức lượng giác, đưa về cùng dạng như kết quả trong Phương trình 1.
+
+\section*{7.6 — Bài tập}
+\group{1–6}
+Dùng công thức ở mục được chỉ định trong Bảng tích phân ở các Trang tham khảo 6–10 để tính tích phân.
+\bt{1} $\displaystyle \int_0^{\pi/2}\cos5x\cos2x\,dx$; mục 80.
+\bt{2} $\displaystyle \int_0^1\sqrt{x-x^2}\,dx$; mục 113.
+\bt{3} $\displaystyle \int x\arcsin(x^2)\,dx$; mục 87.
+\bt{4} $\displaystyle \int\frac{\tan\theta}{\sqrt{2+\cos\theta}}\,d\theta$; mục 57.
+\bt{5} $\displaystyle \int\frac{y^5}{\sqrt{4+y^4}}\,dy$; mục 26.
+\bt{6} $\displaystyle \int\frac{\sqrt{t^6-5}}t\,dt$; mục 41.
+\group{7–34}
+Dùng Bảng tích phân ở các Trang tham khảo để tính tích phân.
+\bt{7} $\displaystyle \int_0^{\pi/8}\arctan2x\,dx$
+\bt{8} $\displaystyle \int_0^2 x^2\sqrt{4-x^2}\,dx$
+\bt{9} $\displaystyle \int\frac{\cos x}{\sin^2x-9}\,dx$
+\bt{10} $\displaystyle \int\frac{e^x}{4-e^{2x}}\,dx$
+\bt{11} $\displaystyle \int\frac{\sqrt{9x^2+4}}{x^2}\,dx$
+\bt{12} $\displaystyle \int\frac{\sqrt{2y^2-3}}{y^2}\,dy$
+\bt{13} $\displaystyle \int_0^\pi\cos^6\theta\,d\theta$
+\bt{14} $\displaystyle \int x\sqrt{2+x^4}\,dx$
+\bt{15} $\displaystyle \int\frac{\arctan\sqrt{x}}{\sqrt{x}}\,dx$
+\bt{16} $\displaystyle \int_0^\pi x^3\sin x\,dx$
+\bt{17} $\displaystyle \int\frac{\coth(1/y)}{y^2}\,dy$
+\bt{18} $\displaystyle \int\frac{e^{3t}}{\sqrt{e^{2t}-1}}\,dt$
+\bt{19} $\displaystyle \int y\sqrt{6+4y-4y^2}\,dy$
+\bt{20} $\displaystyle \int\frac{dx}{2x^3-3x^2}$
+\bt{21} $\displaystyle \int\sin^2x\cos x\ln(\sin x)\,dx$
+\bt{22} $\displaystyle \int\frac{\sin2\theta}{\sqrt{5-\sin\theta}}\,d\theta$
+\bt{23} $\displaystyle \int\frac{\sin2\theta}{\sqrt{\cos^4\theta+4}}\,d\theta$
+\bt{24} $\displaystyle \int_0^2 x^3\sqrt{4x^2-x^4}\,dx$
+\bt{25} $\displaystyle \int x^3e^{2x}\,dx$
+\bt{26} $\displaystyle \int x^3\arcsin(x^2)\,dx$
+\bt{27} $\displaystyle \int\cos^5y\,dy$
+\bt{28} $\displaystyle \int\frac{\sqrt{(\ln x)^2-9}}{x\ln x}\,dx$
+\bt{29} $\displaystyle \int\frac{\cos^{-1}(x^{-2})}{x^3}\,dx$
+\bt{30} $\displaystyle \int\frac{dx}{\sqrt{1-e^{2x}}}$
+\bt{31} $\displaystyle \int\sqrt{e^{2x}-1}\,dx$
+\bt{32} $\displaystyle \int\sin2\theta\arctan(\sin\theta)\,d\theta$
+\bt{33} $\displaystyle \int\frac{x^4}{\sqrt{x^{10}-2}}\,dx$
+\bt{34} $\displaystyle \int\frac{\sec^2\theta\tan^2\theta}{\sqrt{9-\tan^2\theta}}\,d\theta$
+
+\bt{35} Miền dưới đường cong $y=\sin^2x$ từ $0$ đến $\pi$ được quay quanh trục $x$. Tìm thể tích của khối tròn xoay thu được.
+\bt{36} Tìm thể tích của khối tròn xoay thu được khi quay miền dưới đường cong $y=\arcsin x$, $x\ge0$, quanh trục $y$.
+\bt{37} Kiểm chứng Công thức 53 trong Bảng tích phân: (a) bằng cách lấy đạo hàm và (b) bằng phép đổi biến $t=a+bu$.
+\bt{38} Kiểm chứng Công thức 31: (a) bằng cách lấy đạo hàm và (b) bằng phép thế $u=a\sin\theta$.
+\group{39–46 — [Công nghệ]}
+Dùng máy tính để tính tích phân. So sánh kết quả với kết quả thu được khi dùng bảng tích phân. Nếu các kết quả không giống nhau, hãy chứng tỏ chúng tương đương.
+\bt{39} $\displaystyle \int\sec^4x\,dx$
+\bt{40} $\displaystyle \int\csc^5x\,dx$
+\bt{41} $\displaystyle \int x^2\sqrt{x^2+4}\,dx$
+\bt{42} $\displaystyle \int\frac{dx}{e^x(3e^x+2)}$
+\bt{43} $\displaystyle \int\cos^4x\,dx$
+\bt{44} $\displaystyle \int x^2\sqrt{1-x^2}\,dx$
+\bt{45} $\displaystyle \int\tan^5x\,dx$
+\bt{46} $\displaystyle \int\frac1{\sqrt{1+\sqrt[3]{x}}}\,dx$
+
+\bt{47} [Công nghệ]
+
+(a) Dùng bảng tích phân để tính $F(x)=\int f(x)\,dx$, trong đó
+\[f(x)=\frac1{x\sqrt{1-x^2}}.\]
+Tập xác định của $f$ và $F$ là gì?
+
+(b) Dùng phần mềm toán học để tính $F(x)$. Tập xác định của hàm $F$ mà phần mềm tạo ra là gì? Có sự khác biệt nào giữa tập xác định này và tập xác định của hàm $F$ tìm được ở phần (a) hay không?
+
+\bt{48} [Công nghệ] Đôi khi máy móc cần có sự trợ giúp của con người. Hãy thử dùng máy tính để tính
+\[\int(1+\ln x)\sqrt{1+(x\ln x)^2}\,dx.\]
+Nếu máy không trả về kết quả, hãy thực hiện một phép đổi biến đưa tích phân về dạng mà máy có thể tính được.
+
+\clearpage
+\section*{Dự án khám phá — Quy luật trong các tích phân}
+[Công nghệ] Trong dự án này, phần mềm toán học được dùng để khảo sát tích phân bất định của các họ hàm số. Bằng cách quan sát các quy luật xuất hiện trong tích phân của một số phần tử trong họ, trước tiên ta sẽ dự đoán, rồi chứng minh một công thức tổng quát cho tích phân của bất kỳ phần tử nào trong họ đó.
+
+\prj{1} (a) Dùng máy tính để tính các tích phân sau.
+\[\text{(i)}\quad\int\frac1{(x+2)(x+3)}\,dx\]
+\[\text{(ii)}\quad\int\frac1{(x+1)(x+5)}\,dx\]
+\[\text{(iii)}\quad\int\frac1{(x+2)(x-5)}\,dx\]
+\[\text{(iv)}\quad\int\frac1{(x+2)^2}\,dx\]
+(b) Dựa vào quy luật trong các kết quả ở phần (a), hãy dự đoán giá trị của tích phân
+\[\int\frac1{(x+a)(x+b)}\,dx\]
+khi $a\ne b$. Điều gì xảy ra khi $a=b$?
+
+(c) Kiểm tra dự đoán bằng cách dùng phần mềm tính tích phân ở phần (b). Sau đó, chứng minh dự đoán bằng phương pháp phân tích thành phân thức đơn giản.
+
+\prj{2} (a) Dùng máy tính để tính các tích phân sau.
+\[\text{(i)}\quad\int\sin x\cos2x\,dx\]
+\[\text{(ii)}\quad\int\sin3x\cos7x\,dx\]
+\[\text{(iii)}\quad\int\sin8x\cos3x\,dx\]
+(b) Dựa vào quy luật trong các kết quả ở phần (a), hãy dự đoán giá trị của tích phân
+\[\int\sin ax\cos bx\,dx.\]
+(c) Kiểm tra dự đoán bằng máy tính. Sau đó, chứng minh bằng các phương pháp của Mục 7.2. Công thức đúng với những giá trị nào của $a$ và $b$?
+
+\prj{3} (a) Dùng máy tính để tính các tích phân sau.
+\[\text{(i)}\quad\int\ln x\,dx\]
+\[\text{(ii)}\quad\int x\ln x\,dx\]
+\[\text{(iii)}\quad\int x^2\ln x\,dx\]
+\[\text{(iv)}\quad\int x^3\ln x\,dx\]
+\[\text{(v)}\quad\int x^7\ln x\,dx\]
+(b) Dựa vào quy luật trong các kết quả ở phần (a), hãy dự đoán giá trị của
+\[\int x^n\ln x\,dx.\]
+(c) Dùng tích phân từng phần để chứng minh dự đoán ở phần (b). Công thức đúng với những giá trị nào của $n$?
+
+\prj{4} (a) Dùng máy tính để tính các tích phân sau.
+\[\text{(i)}\quad\int xe^x\,dx\]
+\[\text{(ii)}\quad\int x^2e^x\,dx\]
+\[\text{(iii)}\quad\int x^3e^x\,dx\]
+\[\text{(iv)}\quad\int x^4e^x\,dx\]
+\[\text{(v)}\quad\int x^5e^x\,dx\]
+(b) Dựa vào quy luật trong các kết quả ở phần (a), hãy dự đoán giá trị của $\int x^6e^x\,dx$. Sau đó, dùng máy tính để kiểm tra dự đoán.
+
+(c) Dựa vào các quy luật ở phần (a) và (b), hãy đưa ra dự đoán về giá trị của tích phân
+\[\int x^ne^x\,dx\]
+khi $n$ là một số nguyên dương.
+
+(d) Dùng quy nạp toán học để chứng minh dự đoán ở phần (c).
+\end{document}
