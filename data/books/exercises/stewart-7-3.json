@@ -1,0 +1,204 @@
+{
+  "exercises": [
+    {
+      "number": 1,
+      "content": "<p><strong>1.</strong></p>\n<p><em>Yêu cầu chung (1–4):</em> (a) Xác định một phép thế lượng giác thích hợp. (b) Áp dụng phép thế để biến đổi tích phân thành một tích phân lượng giác. Không tính tích phân.</p>\n<p><span class=\"math inline\">\\(\\displaystyle\\int\\frac{x^3}{\\sqrt{1+x^2}}\\,dx\\)</span>.</p>\n"
+    },
+    {
+      "number": 2,
+      "content": "<p><strong>2.</strong></p>\n<p><em>Yêu cầu chung (1–4):</em> (a) Xác định một phép thế lượng giác thích hợp. (b) Áp dụng phép thế để biến đổi tích phân thành một tích phân lượng giác. Không tính tích phân.</p>\n<p><span class=\"math inline\">\\(\\displaystyle\\int\\frac{x^3}{\\sqrt{9-x^2}}\\,dx\\)</span>.</p>\n"
+    },
+    {
+      "number": 3,
+      "content": "<p><strong>3.</strong></p>\n<p><em>Yêu cầu chung (1–4):</em> (a) Xác định một phép thế lượng giác thích hợp. (b) Áp dụng phép thế để biến đổi tích phân thành một tích phân lượng giác. Không tính tích phân.</p>\n<p><span class=\"math inline\">\\(\\displaystyle\\int\\frac{x^2}{\\sqrt{x^2-2}}\\,dx\\)</span>.</p>\n"
+    },
+    {
+      "number": 4,
+      "content": "<p><strong>4.</strong></p>\n<p><em>Yêu cầu chung (1–4):</em> (a) Xác định một phép thế lượng giác thích hợp. (b) Áp dụng phép thế để biến đổi tích phân thành một tích phân lượng giác. Không tính tích phân.</p>\n<p><span class=\"math inline\">\\(\\displaystyle\\int\\frac{x^3}{(9-4x^2)^{3/2}}\\,dx\\)</span>.</p>\n"
+    },
+    {
+      "number": 5,
+      "content": "<p><strong>5.</strong></p>\n<p><em>Yêu cầu chung (5–8):</em> Tính tích phân bằng phép thế lượng giác đã cho. Phác họa và ghi các kích thước, góc của tam giác vuông tương ứng.</p>\n<p><span class=\"math inline\">\\(\\displaystyle\\int\\frac{x^3}{\\sqrt{1-x^2}}\\,dx\\)</span>; <span class=\"math inline\">\\(x=\\sin\\theta\\)</span>.</p>\n"
+    },
+    {
+      "number": 6,
+      "content": "<p><strong>6.</strong></p>\n<p><em>Yêu cầu chung (5–8):</em> Tính tích phân bằng phép thế lượng giác đã cho. Phác họa và ghi các kích thước, góc của tam giác vuông tương ứng.</p>\n<p><span class=\"math inline\">\\(\\displaystyle\\int\\frac{x^3}{\\sqrt{9+x^2}}\\,dx\\)</span>; <span class=\"math inline\">\\(x=3\\tan\\theta\\)</span>.</p>\n"
+    },
+    {
+      "number": 7,
+      "content": "<p><strong>7.</strong></p>\n<p><em>Yêu cầu chung (5–8):</em> Tính tích phân bằng phép thế lượng giác đã cho. Phác họa và ghi các kích thước, góc của tam giác vuông tương ứng.</p>\n<p><span class=\"math inline\">\\(\\displaystyle\\int\\frac{\\sqrt{4x^2-25}}x\\,dx\\)</span>; <span class=\"math inline\">\\(x=\\frac52\\sec\\theta\\)</span>.</p>\n"
+    },
+    {
+      "number": 8,
+      "content": "<p><strong>8.</strong></p>\n<p><em>Yêu cầu chung (5–8):</em> Tính tích phân bằng phép thế lượng giác đã cho. Phác họa và ghi các kích thước, góc của tam giác vuông tương ứng.</p>\n<p><span class=\"math inline\">\\(\\displaystyle\\int\\frac{\\sqrt{2-x^2}}{x^2}\\,dx\\)</span>; <span class=\"math inline\">\\(x=\\sqrt2\\sin\\theta\\)</span>.</p>\n"
+    },
+    {
+      "number": 9,
+      "content": "<p><strong>9.</strong></p>\n<p><em>Yêu cầu chung (9–36):</em> Tính tích phân.</p>\n<p><span class=\"math inline\">\\(\\displaystyle\\int x^3\\sqrt{16+x^2}\\,dx\\)</span>.</p>\n"
+    },
+    {
+      "number": 10,
+      "content": "<p><strong>10.</strong></p>\n<p><em>Yêu cầu chung (9–36):</em> Tính tích phân.</p>\n<p><span class=\"math inline\">\\(\\displaystyle\\int\\frac{x^2}{\\sqrt{9-x^2}}\\,dx\\)</span>.</p>\n"
+    },
+    {
+      "number": 11,
+      "content": "<p><strong>11.</strong></p>\n<p><em>Yêu cầu chung (9–36):</em> Tính tích phân.</p>\n<p><span class=\"math inline\">\\(\\displaystyle\\int\\frac{\\sqrt{x^2-1}}{x^4}\\,dx\\)</span>.</p>\n"
+    },
+    {
+      "number": 12,
+      "content": "<p><strong>12.</strong></p>\n<p><em>Yêu cầu chung (9–36):</em> Tính tích phân.</p>\n<p><span class=\"math inline\">\\(\\displaystyle\\int_0^3\\frac{x}{\\sqrt{36-x^2}}\\,dx\\)</span>.</p>\n"
+    },
+    {
+      "number": 13,
+      "content": "<p><strong>13.</strong></p>\n<p><em>Yêu cầu chung (9–36):</em> Tính tích phân.</p>\n<p><span class=\"math inline\">\\(\\displaystyle\\int_0^a\\frac{dx}{(a^2+x^2)^{3/2}}\\)</span>, <span class=\"math inline\">\\(a&gt;0\\)</span>.</p>\n"
+    },
+    {
+      "number": 14,
+      "content": "<p><strong>14.</strong></p>\n<p><em>Yêu cầu chung (9–36):</em> Tính tích phân.</p>\n<p><span class=\"math inline\">\\(\\displaystyle\\int\\frac{dt}{t^2\\sqrt{t^2-16}}\\)</span>.</p>\n"
+    },
+    {
+      "number": 15,
+      "content": "<p><strong>15.</strong></p>\n<p><em>Yêu cầu chung (9–36):</em> Tính tích phân.</p>\n<p><span class=\"math inline\">\\(\\displaystyle\\int_2^3\\frac{dx}{(x^2-1)^{3/2}}\\)</span>.</p>\n"
+    },
+    {
+      "number": 16,
+      "content": "<p><strong>16.</strong></p>\n<p><em>Yêu cầu chung (9–36):</em> Tính tích phân.</p>\n<p><span class=\"math inline\">\\(\\displaystyle\\int_0^{2/3}\\sqrt{4-9x^2}\\,dx\\)</span>.</p>\n"
+    },
+    {
+      "number": 17,
+      "content": "<p><strong>17.</strong></p>\n<p><em>Yêu cầu chung (9–36):</em> Tính tích phân.</p>\n<p><span class=\"math inline\">\\(\\displaystyle\\int_0^{1/2}x\\sqrt{1-4x^2}\\,dx\\)</span>.</p>\n"
+    },
+    {
+      "number": 18,
+      "content": "<p><strong>18.</strong></p>\n<p><em>Yêu cầu chung (9–36):</em> Tính tích phân.</p>\n<p><span class=\"math inline\">\\(\\displaystyle\\int_0^2\\frac{dt}{\\sqrt{4+t^2}}\\)</span>.</p>\n"
+    },
+    {
+      "number": 19,
+      "content": "<p><strong>19.</strong></p>\n<p><em>Yêu cầu chung (9–36):</em> Tính tích phân.</p>\n<p><span class=\"math inline\">\\(\\displaystyle\\int\\frac{\\sqrt{x^2-9}}{x^3}\\,dx\\)</span>.</p>\n"
+    },
+    {
+      "number": 20,
+      "content": "<p><strong>20.</strong></p>\n<p><em>Yêu cầu chung (9–36):</em> Tính tích phân.</p>\n<p><span class=\"math inline\">\\(\\displaystyle\\int_0^1\\frac{dx}{(x^2+1)^2}\\)</span>.</p>\n"
+    },
+    {
+      "number": 21,
+      "content": "<p><strong>21.</strong></p>\n<p><em>Yêu cầu chung (9–36):</em> Tính tích phân.</p>\n<p><span class=\"math inline\">\\(\\displaystyle\\int_0^a x^2\\sqrt{a^2-x^2}\\,dx\\)</span>.</p>\n"
+    },
+    {
+      "number": 22,
+      "content": "<p><strong>22.</strong></p>\n<p><em>Yêu cầu chung (9–36):</em> Tính tích phân.</p>\n<p><span class=\"math inline\">\\(\\displaystyle\\int_{1/4}^{\\sqrt3/4}\\sqrt{1-4x^2}\\,dx\\)</span>.</p>\n"
+    },
+    {
+      "number": 23,
+      "content": "<p><strong>23.</strong></p>\n<p><em>Yêu cầu chung (9–36):</em> Tính tích phân.</p>\n<p><span class=\"math inline\">\\(\\displaystyle\\int\\frac{x}{\\sqrt{x^2-7}}\\,dx\\)</span>.</p>\n"
+    },
+    {
+      "number": 24,
+      "content": "<p><strong>24.</strong></p>\n<p><em>Yêu cầu chung (9–36):</em> Tính tích phân.</p>\n<p><span class=\"math inline\">\\(\\displaystyle\\int\\frac{x}{\\sqrt{1+x^2}}\\,dx\\)</span>.</p>\n"
+    },
+    {
+      "number": 25,
+      "content": "<p><strong>25.</strong></p>\n<p><em>Yêu cầu chung (9–36):</em> Tính tích phân.</p>\n<p><span class=\"math inline\">\\(\\displaystyle\\int\\frac{\\sqrt{1+x^2}}x\\,dx\\)</span>.</p>\n"
+    },
+    {
+      "number": 26,
+      "content": "<p><strong>26.</strong></p>\n<p><em>Yêu cầu chung (9–36):</em> Tính tích phân.</p>\n<p><span class=\"math inline\">\\(\\displaystyle\\int_0^{0.3}\\frac{x}{(9-25x^2)^{3/2}}\\,dx\\)</span>.</p>\n"
+    },
+    {
+      "number": 27,
+      "content": "<p><strong>27.</strong></p>\n<p><em>Yêu cầu chung (9–36):</em> Tính tích phân.</p>\n<p><span class=\"math inline\">\\(\\displaystyle\\int_0^{0.6}\\frac{x^2}{\\sqrt{9-25x^2}}\\,dx\\)</span>.</p>\n"
+    },
+    {
+      "number": 28,
+      "content": "<p><strong>28.</strong></p>\n<p><em>Yêu cầu chung (9–36):</em> Tính tích phân.</p>\n<p><span class=\"math inline\">\\(\\displaystyle\\int_0^1\\sqrt{x^2+1}\\,dx\\)</span>.</p>\n"
+    },
+    {
+      "number": 29,
+      "content": "<p><strong>29.</strong></p>\n<p><em>Yêu cầu chung (9–36):</em> Tính tích phân.</p>\n<p><span class=\"math inline\">\\(\\displaystyle\\int\\frac{dx}{\\sqrt{x^2+2x+5}}\\)</span>.</p>\n"
+    },
+    {
+      "number": 30,
+      "content": "<p><strong>30.</strong></p>\n<p><em>Yêu cầu chung (9–36):</em> Tính tích phân.</p>\n<p><span class=\"math inline\">\\(\\displaystyle\\int_0^1\\sqrt{x-x^2}\\,dx\\)</span>.</p>\n"
+    },
+    {
+      "number": 31,
+      "content": "<p><strong>31.</strong></p>\n<p><em>Yêu cầu chung (9–36):</em> Tính tích phân.</p>\n<p><span class=\"math inline\">\\(\\displaystyle\\int x^2\\sqrt{3+2x-x^2}\\,dx\\)</span>.</p>\n"
+    },
+    {
+      "number": 32,
+      "content": "<p><strong>32.</strong></p>\n<p><em>Yêu cầu chung (9–36):</em> Tính tích phân.</p>\n<p><span class=\"math inline\">\\(\\displaystyle\\int\\frac{x^2}{(3+4x-4x^2)^{3/2}}\\,dx\\)</span>.</p>\n"
+    },
+    {
+      "number": 33,
+      "content": "<p><strong>33.</strong></p>\n<p><em>Yêu cầu chung (9–36):</em> Tính tích phân.</p>\n<p><span class=\"math inline\">\\(\\displaystyle\\int\\sqrt{x^2+2x}\\,dx\\)</span>.</p>\n"
+    },
+    {
+      "number": 34,
+      "content": "<p><strong>34.</strong></p>\n<p><em>Yêu cầu chung (9–36):</em> Tính tích phân.</p>\n<p><span class=\"math inline\">\\(\\displaystyle\\int\\frac{x^2+1}{(x^2-2x+2)^2}\\,dx\\)</span>.</p>\n"
+    },
+    {
+      "number": 35,
+      "content": "<p><strong>35.</strong></p>\n<p><em>Yêu cầu chung (9–36):</em> Tính tích phân.</p>\n<p><span class=\"math inline\">\\(\\displaystyle\\int x\\sqrt{1-x^4}\\,dx\\)</span>.</p>\n"
+    },
+    {
+      "number": 36,
+      "content": "<p><strong>36.</strong></p>\n<p><em>Yêu cầu chung (9–36):</em> Tính tích phân.</p>\n<p><span class=\"math inline\">\\(\\displaystyle\\int_0^{\\pi/2}\\frac{\\cos t}{\\sqrt{1+\\sin^2t}}\\,dt\\)</span>.</p>\n"
+    },
+    {
+      "number": 37,
+      "content": "<p><strong>37.</strong></p>\n<p>(a) Dùng phép thế lượng giác để chứng minh rằng <span class=\"math display\">\\[\\int\\frac{dx}{\\sqrt{x^2+a^2}}=\\ln\\left(x+\\sqrt{x^2+a^2}\\right)+C.\\]</span> (b) Dùng phép thế hyperbolic <span class=\"math inline\">\\(x=a\\sinh t\\)</span> để chứng minh rằng <span class=\"math display\">\\[\\int\\frac{dx}{\\sqrt{x^2+a^2}}=\\sinh^{-1}\\!\\left(\\frac xa\\right)+C.\\]</span> Hai công thức này liên hệ với nhau qua Công thức 3.11.3.</p>\n"
+    },
+    {
+      "number": 38,
+      "content": "<p><strong>38.</strong></p>\n<p>Tính <span class=\"math display\">\\[\\int\\frac{x^2}{(x^2+a^2)^{3/2}}\\,dx\\]</span> (a) bằng phép thế lượng giác;</p>\n<p>(b) bằng phép thế hyperbolic <span class=\"math inline\">\\(x=a\\sinh t\\)</span>.</p>\n"
+    },
+    {
+      "number": 39,
+      "content": "<p><strong>39.</strong></p>\n<p>Tìm giá trị trung bình của <span class=\"math inline\">\\(f(x)=\\sqrt{x^2-1}/x\\)</span>, <span class=\"math inline\">\\(1\\le x\\le7\\)</span>.</p>\n"
+    },
+    {
+      "number": 40,
+      "content": "<p><strong>40.</strong></p>\n<p>Tìm diện tích miền giới hạn bởi hyperbol <span class=\"math inline\">\\(9x^2-4y^2=36\\)</span> và đường thẳng <span class=\"math inline\">\\(x=3\\)</span>.</p>\n"
+    },
+    {
+      "number": 41,
+      "content": "<p><strong>41.</strong></p>\n<p>Chứng minh công thức <span class=\"math inline\">\\(A=\\frac12r^2\\theta\\)</span> cho diện tích hình quạt của một đường tròn có bán kính <span class=\"math inline\">\\(r\\)</span> và góc ở tâm <span class=\"math inline\">\\(\\theta\\)</span>. [Gợi ý: Giả sử <span class=\"math inline\">\\(0&lt;\\theta&lt;\\pi/2\\)</span> và đặt tâm đường tròn tại gốc tọa độ, nên đường tròn có phương trình <span class=\"math inline\">\\(x^2+y^2=r^2\\)</span>. Khi đó <span class=\"math inline\">\\(A\\)</span> bằng tổng diện tích tam giác <span class=\"math inline\">\\(POQ\\)</span> và diện tích miền <span class=\"math inline\">\\(PQR\\)</span> trong hình.]</p>\n<div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-7-3-6485b25a/exercise41.png\" alt=\"image\" /><br />\nHình cho Bài tập 41.</p>\n</div>\n"
+    },
+    {
+      "number": 42,
+      "content": "<p><strong>42.</strong></p>\n<p><span class=\"sans-serif\">[Đồ thị]</span> Tính tích phân <span class=\"math display\">\\[\\int\\frac{dx}{x^4\\sqrt{x^2-2}}.\\]</span> Vẽ đồ thị của hàm dưới dấu tích phân và tích phân bất định của nó trên cùng một màn hình rồi kiểm tra tính hợp lý của kết quả.</p>\n"
+    },
+    {
+      "number": 43,
+      "content": "<p><strong>43.</strong></p>\n<p>Tìm thể tích khối thu được bằng cách quay quanh trục <span class=\"math inline\">\\(x\\)</span> miền giới hạn bởi các đường cong <span class=\"math inline\">\\(y=9/(x^2+9)\\)</span>, <span class=\"math inline\">\\(y=0\\)</span>, <span class=\"math inline\">\\(x=0\\)</span> và <span class=\"math inline\">\\(x=3\\)</span>.</p>\n"
+    },
+    {
+      "number": 44,
+      "content": "<p><strong>44.</strong></p>\n<p>Tìm thể tích khối thu được bằng cách quay quanh đường thẳng <span class=\"math inline\">\\(x=1\\)</span> miền nằm dưới đường cong <span class=\"math inline\">\\(y=x\\sqrt{1-x^2}\\)</span>, <span class=\"math inline\">\\(0\\le x\\le1\\)</span>.</p>\n"
+    },
+    {
+      "number": 45,
+      "content": "<p><strong>45.</strong></p>\n<p>(a) Dùng phép thế lượng giác để kiểm chứng rằng <span class=\"math display\">\\[\\int_0^x\\sqrt{a^2-t^2}\\,dt=\\frac12a^2\\sin^{-1}(x/a)+\\frac12x\\sqrt{a^2-x^2}.\\]</span> (b) Dùng hình vẽ để đưa ra cách diễn giải lượng giác cho cả hai số hạng ở vế phải của phương trình trong phần (a).</p>\n<div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-7-3-6485b25a/exercise45.png\" alt=\"image\" /><br />\nHình cho Bài tập 45.</p>\n</div>\n"
+    },
+    {
+      "number": 46,
+      "content": "<p><strong>46.</strong></p>\n<p>Parabol <span class=\"math inline\">\\(y=\\frac12x^2\\)</span> chia hình tròn <span class=\"math inline\">\\(x^2+y^2\\le8\\)</span> thành hai phần. Tìm diện tích của mỗi phần.</p>\n"
+    },
+    {
+      "number": 47,
+      "content": "<p><strong>47.</strong></p>\n<p>Một khối xuyến được tạo thành bằng cách quay đường tròn <span class=\"math inline\">\\(x^2+(y-R)^2=r^2\\)</span> quanh trục <span class=\"math inline\">\\(x\\)</span>. Tìm thể tích bên trong khối xuyến.</p>\n"
+    },
+    {
+      "number": 48,
+      "content": "<p><strong>48.</strong></p>\n<p>Một thanh tích điện dài <span class=\"math inline\">\\(L\\)</span> tạo ra tại điểm <span class=\"math inline\">\\(P(a,b)\\)</span> một điện trường được cho bởi <span class=\"math display\">\\[E(P)=\\int_{-a}^{L-a}\\frac{\\lambda b}{4\\pi\\varepsilon_0(x^2+b^2)^{3/2}}\\,dx,\\]</span> trong đó <span class=\"math inline\">\\(\\lambda\\)</span> là mật độ điện tích trên một đơn vị chiều dài của thanh và <span class=\"math inline\">\\(\\varepsilon_0\\)</span> là điện thẩm của chân không (xem hình). Tính tích phân để xác định một biểu thức cho điện trường <span class=\"math inline\">\\(E(P)\\)</span>.</p>\n<div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-7-3-6485b25a/exercise48.png\" alt=\"image\" /><br />\nHình cho Bài tập 48.</p>\n</div>\n"
+    },
+    {
+      "number": 49,
+      "content": "<p><strong>49.</strong></p>\n<p>Tìm diện tích miền hình lưỡi liềm (gọi là <em>lune</em>) giới hạn bởi các cung tròn có bán kính <span class=\"math inline\">\\(r\\)</span> và <span class=\"math inline\">\\(R\\)</span>. (Xem hình.)</p>\n<div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-7-3-6485b25a/exercise49.png\" alt=\"image\" /><br />\nHình cho Bài tập 49.</p>\n</div>\n"
+    },
+    {
+      "number": 50,
+      "content": "<p><strong>50.</strong></p>\n<p>Một bể chứa nước có dạng hình trụ với đường kính <span class=\"math inline\">\\(10\\)</span> ft. Bể được đặt sao cho các thiết diện tròn thẳng đứng. Nếu độ sâu của nước là <span class=\"math inline\">\\(7\\)</span> ft thì bao nhiêu phần trăm tổng dung tích đang được sử dụng?</p>\n"
+    }
+  ]
+}
