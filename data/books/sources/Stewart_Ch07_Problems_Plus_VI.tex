@@ -1,0 +1,109 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage{fontspec}\setmainfont{Latin Modern Roman}\setsansfont{DejaVu Sans}
+\usepackage{amsmath,amssymb,graphicx,geometry,enumitem,needspace,longtable,booktabs,fancyhdr,hyperref}
+\geometry{left=28mm,right=23mm,top=24mm,bottom=24mm}
+\hypersetup{unicode=true,colorlinks=true,linkcolor=black,urlcolor=blue,pdftitle={Giải tích — Bài toán nâng cao Chương 7}}
+\setlength{\parindent}{1.2em}\setlength{\parskip}{4pt}\setlength{\headheight}{16pt}
+\pagestyle{fancy}\fancyhf{}\fancyhead[L]{\small Chương 7. Các phương pháp tính tích phân}\fancyhead[R]{\small Bài toán nâng cao}\fancyfoot[C]{\thepage}
+\newcommand{\fig}[3][.68]{\begin{center}\begin{minipage}{\linewidth}\centering\includegraphics[width=#1\linewidth]{assets/#2.png}\\{\small #3}\end{minipage}\end{center}}
+\newcommand{\ex}[1]{\par\medskip\noindent\textbf{Ví dụ #1.}\ }
+\newcommand{\sol}{\par\nopagebreak[4]\noindent\textit{Lời giải.}\ }
+\newcommand{\bt}[1]{\par\smallskip\Needspace{5\baselineskip}\noindent\textbf{#1.}\ }
+\newcommand{\group}[1]{\par\Needspace{11\baselineskip}\medskip\noindent\textbf{#1}\par\nopagebreak[4]}
+\newcommand{\gint}[1]{\left[\!\left[#1\right]\!\right]}
+\allowdisplaybreaks[2]
+\DeclareMathOperator{\sech}{sech}
+\DeclareMathOperator{\csch}{csch}
+\DeclareMathOperator{\arccot}{arccot}
+
+\newcommand{\prj}[1]{\bt{#1}}
+
+\newcommand{\kn}[1]{\bt{#1}}
+\newcommand{\ds}[1]{\bt{#1}}
+\setlength{\emergencystretch}{1em}
+\widowpenalty=10000\clubpenalty=10000
+\begin{document}
+\begin{center}{\Large\bfseries Bài toán nâng cao — Problems Plus}\\Chương 7. Các phương pháp tính tích phân\end{center}
+\textit{Hãy che phần lời giải của ví dụ và tự thử giải trước.}
+
+\textit{Bạn có thể muốn ôn lại Các nguyên tắc giải toán ở phần sau Chương 1.}
+\section*{Ví dụ}
+(a) Chứng minh rằng nếu $f$ là một hàm liên tục thì
+\[\int_0^a f(x)\,dx=\int_0^a f(a-x)\,dx.\]
+(b) Dùng phần (a) để chứng minh rằng
+\[\int_0^{\pi/2}\frac{\sin^n x}{\sin^n x+\cos^n x}\,dx=\frac\pi4\]
+với mọi số dương $n$.
+\subsection*{Lời giải}
+(a) Thoạt nhìn, đẳng thức đã cho có thể khiến ta bối rối. Làm thế nào để liên hệ vế trái với vế phải? Thường có thể tạo ra mối liên hệ nhờ một trong các nguyên tắc giải toán: \textit{đưa thêm một yếu tố phụ}. Ở đây, yếu tố phụ là một biến mới. Ta thường nghĩ đến việc đưa vào một biến mới khi dùng quy tắc đổi biến để tính tích phân của một hàm cụ thể. Nhưng kỹ thuật đó vẫn hữu ích trong tình huống hiện tại, khi ta có một hàm tổng quát $f$.
+
+Khi đã nghĩ đến việc đổi biến, dạng của vế phải gợi ý phép thế $u=a-x$. Khi đó $du=-dx$. Khi $x=0$ thì $u=a$; khi $x=a$ thì $u=0$. Vì vậy,
+\[\int_0^a f(a-x)\,dx=-\int_a^0 f(u)\,du=\int_0^a f(u)\,du.\]
+Nhưng tích phân ở vế phải chỉ là một cách viết khác của $\int_0^a f(x)\,dx$. Do đó, đẳng thức đã cho được chứng minh.
+
+(b) Gọi tích phân đã cho là $I$ và áp dụng phần (a) với $a=\pi/2$, ta được
+\[\begin{aligned}
+I&=\int_0^{\pi/2}\frac{\sin^n x}{\sin^n x+\cos^n x}\,dx\\
+&=\int_0^{\pi/2}\frac{\sin^n(\pi/2-x)}{\sin^n(\pi/2-x)+\cos^n(\pi/2-x)}\,dx.
+\end{aligned}\]
+Các đồng nhất thức lượng giác quen thuộc cho biết $\sin(\pi/2-x)=\cos x$ và $\cos(\pi/2-x)=\sin x$, nên
+\[I=\int_0^{\pi/2}\frac{\cos^n x}{\cos^n x+\sin^n x}\,dx.\]
+Chú ý rằng hai biểu thức của $I$ rất giống nhau. Thực ra, các hàm dưới dấu tích phân có cùng mẫu số. Điều này gợi ý cộng hai biểu thức. Khi đó,
+\[2I=\int_0^{\pi/2}\frac{\sin^n x+\cos^n x}{\sin^n x+\cos^n x}\,dx=\int_0^{\pi/2}1\,dx=\frac\pi2.\]
+Vậy $I=\pi/4$.
+
+Các đồ thị do máy tính tạo ra ở Hình 1 cho thấy có cơ sở để tin rằng mọi tích phân trong ví dụ đều có cùng giá trị. Đồ thị của mỗi hàm dưới dấu tích phân được ghi bằng giá trị tương ứng của $n$.
+\fig[.42]{fig01}{Hình 1. Các hàm dưới dấu tích phân ứng với $n=1,2,3,4$.}
+\section*{Bài toán}
+\bt{1} [Đồ thị] Ba sinh viên toán gọi một chiếc pizza đường kính 14 inch. Thay vì cắt theo cách truyền thống, họ quyết định cắt bằng các đường song song như hình. Là sinh viên chuyên ngành toán, họ có thể xác định vị trí cắt sao cho mỗi người nhận được một phần pizza bằng nhau. Các đường cắt nằm ở đâu?
+\fig[.34]{ex01}{Bài 1. Pizza đường kính 14 inch và hai đường cắt song song.}
+\bt{2} Tính tích phân
+\[\int\frac1{x^7-x}\,dx.\]
+Cách tiếp cận trực tiếp là bắt đầu bằng phân tích thành phân thức đơn giản, nhưng cách đó sẽ rất nặng nề. Hãy thử một phép đổi biến.
+\bt{3} Tính $\displaystyle\int_0^1\left(\sqrt[3]{1-x^7}-\sqrt[7]{1-x^3}\right)\,dx$.
+\bt{4} Giả sử $f$ là một hàm liên tục và tăng trên $[0,1]$, thỏa mãn $f(0)=0$ và $f(1)=1$. Chứng minh rằng
+\[\int_0^1[f(x)+f^{-1}(x)]\,dx=1.\]
+\bt{5} Nếu $f$ là hàm chẵn, $r>0$ và $a>0$, chứng minh rằng
+\[\int_{-r}^r\frac{f(x)}{1+a^x}\,dx=\int_0^r f(x)\,dx.\]
+\textit{Gợi ý:} $\displaystyle\frac1{1+u}+\frac1{1+u^{-1}}=1$.
+\bt{6} Tâm của hai hình tròn bán kính 1 cách nhau một đơn vị. Tìm diện tích hợp của hai hình tròn.
+\bt{7} Một hình elip được cắt bỏ khỏi một hình tròn bán kính $a$. Trục lớn của elip trùng với một đường kính của hình tròn và trục nhỏ có độ dài $2b$. Chứng minh rằng diện tích phần còn lại của hình tròn bằng diện tích một hình elip có các bán trục $a$ và $a-b$.
+\bt{8} Một người ban đầu đứng tại điểm $O$ đi dọc theo cầu tàu và kéo một chiếc thuyền chèo bằng sợi dây dài $L$. Người đó luôn giữ dây thẳng và căng. Quỹ đạo của thuyền là một đường cong gọi là \textit{đường tractrix}, có tính chất là sợi dây luôn tiếp xúc với đường cong (xem hình).
+\fig[.45]{ex08}{Bài 8. Thuyền được kéo dọc theo cầu tàu (pier) bằng sợi dây dài $L$.}
+(a) Chứng minh rằng nếu quỹ đạo của thuyền là đồ thị hàm $y=f(x)$ thì
+\[f'(x)=\frac{dy}{dx}=-\frac{\sqrt{L^2-x^2}}x.\]
+(b) Xác định hàm $y=f(x)$.
+\bt{9} Hàm $f$ được định nghĩa bởi $f(x)=\int_0^\pi\cos t\cos(x-t)\,dt$, $0\le x\le2\pi$. Tìm giá trị nhỏ nhất của $f$.
+\bt{10} Nếu $n$ là một số nguyên dương, chứng minh rằng $\displaystyle\int_0^1(\ln x)^n\,dx=(-1)^n n!$.
+\bt{11} Chứng minh rằng
+\[\int_0^1(1-x^2)^n\,dx=\frac{2^{2n}(n!)^2}{(2n+1)!}.\]
+\textit{Gợi ý:} Trước hết, chứng minh rằng nếu $I_n$ ký hiệu tích phân này thì
+\[I_{k+1}=\frac{2k+2}{2k+3}I_k.\]
+\bt{12} [Đồ thị] Giả sử $f$ là một hàm dương và $f'$ liên tục.
+
+(a) Đồ thị $y=f(x)\sin nx$ liên hệ như thế nào với đồ thị $y=f(x)$? Điều gì xảy ra khi $n\to\infty$?
+
+(b) Dựa trên các đồ thị của hàm dưới dấu tích phân, hãy dự đoán giá trị của giới hạn
+\[\lim_{n\to\infty}\int_0^1 f(x)\sin nx\,dx.\]
+(c) Dùng tích phân từng phần để kiểm chứng dự đoán ở phần (b). [Dùng tính chất: vì $f'$ liên tục nên tồn tại một hằng số $M$ sao cho $|f'(x)|\le M$ với $0\le x\le1$.]
+\bt{13} Nếu $0<a<b$, tìm
+\[\lim_{t\to0}\left\{\int_0^1[bx+a(1-x)]^t\,dx\right\}^{1/t}.\]
+\bt{14} [Đồ thị] Vẽ đồ thị $f(x)=\sin(e^x)$ và dùng đồ thị để ước lượng giá trị $t$ sao cho $\int_t^{t+1}f(x)\,dx$ đạt giá trị lớn nhất. Sau đó tìm giá trị chính xác của $t$ làm cho tích phân này đạt giá trị lớn nhất.
+\bt{15} Tính $\displaystyle\int_{-1}^\infty\left(\frac{x^4}{1+x^6}\right)^2\,dx$.
+\bt{16} Tính $\displaystyle\int\sqrt{\tan x}\,dx$.
+\bt{17} Đường tròn bán kính 1 trong hình tiếp xúc với đường cong $y=|2x|$ tại hai điểm. Tìm diện tích miền nằm giữa hai đường cong.
+\fig[.34]{ex17}{Bài 17. Đường tròn bán kính 1 tiếp xúc với $y=|2x|$.}
+\bt{18} Một tên lửa được phóng thẳng đứng lên trên, đốt nhiên liệu với tốc độ không đổi $b$ kilôgam mỗi giây. Gọi $v=v(t)$ là vận tốc của tên lửa tại thời điểm $t$ và giả sử vận tốc $u$ của khí phụt ra là không đổi. Gọi $M=M(t)$ là khối lượng của tên lửa tại thời điểm $t$; lưu ý rằng $M$ giảm khi nhiên liệu cháy. Nếu bỏ qua sức cản không khí, theo Định luật II Newton ta có
+\[F=M\frac{dv}{dt}-ub,\]
+trong đó lực $F=-Mg$. Do đó,
+\[M\frac{dv}{dt}-ub=-Mg.\tag{1}\]
+Gọi $M_1$ là khối lượng tên lửa không có nhiên liệu, $M_2$ là khối lượng nhiên liệu ban đầu và $M_0=M_1+M_2$. Khi đó, cho đến lúc nhiên liệu cạn tại thời điểm $t=M_2/b$, khối lượng là $M=M_0-bt$.
+
+(a) Thay $M=M_0-bt$ vào Phương trình 1 và giải phương trình thu được để tìm $v$. Dùng điều kiện ban đầu $v(0)=0$ để xác định hằng số.
+
+(b) Xác định vận tốc tên lửa tại thời điểm $t=M_2/b$. Vận tốc này được gọi là \textit{vận tốc khi cháy hết nhiên liệu}.
+
+(c) Xác định độ cao tên lửa $y=y(t)$ tại thời điểm cháy hết nhiên liệu.
+
+(d) Tìm độ cao tên lửa tại thời điểm $t$ bất kỳ.
+
+\end{document}

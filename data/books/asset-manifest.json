@@ -4230,5 +4230,25 @@
     "file": "stewart-7-review-9369fe1d/ex80.png",
     "mime": "image/png",
     "sha256": "73dc68cb15ee3bed0949a6fcf95a1f3e0cc8c2de368d1cbe43441303dfb777b2"
+  },
+  "stewart-7-plus-b5f57bc4/ex01.png": {
+    "file": "stewart-7-plus-b5f57bc4/ex01.png",
+    "mime": "image/png",
+    "sha256": "6d76c37392cddf5f3ceb20262b7017392c962e3b449aaf8d7d71db8a8b067f7c"
+  },
+  "stewart-7-plus-b5f57bc4/ex08.png": {
+    "file": "stewart-7-plus-b5f57bc4/ex08.png",
+    "mime": "image/png",
+    "sha256": "5accff22bdca9fa5b5e2d5efca935a45801beae4d71caa91769a2ed69353704a"
+  },
+  "stewart-7-plus-b5f57bc4/ex17.png": {
+    "file": "stewart-7-plus-b5f57bc4/ex17.png",
+    "mime": "image/png",
+    "sha256": "e1eb057070dd22b6c0631fab9642dc78302ac6ddab96daba138a09dd6bb09dc1"
+  },
+  "stewart-7-plus-b5f57bc4/fig01.png": {
+    "file": "stewart-7-plus-b5f57bc4/fig01.png",
+    "mime": "image/png",
+    "sha256": "2fb00dca8b52644de3c6ee1ac72423dab9287596b41c74c8c0121090fca83e69"
   }
 }
