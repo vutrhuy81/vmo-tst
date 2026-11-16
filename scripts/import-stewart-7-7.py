@@ -78,7 +78,7 @@ for path,value in [('data/books/imports/stewart-7-7.json',entry),('data/books/ex
     (root/path).write_text(json.dumps(value,ensure_ascii=False,indent=2)+'\n')
 (root/'data/books/sources'/source.name).write_bytes(source.read_bytes())
 target=root/'books.js'
-target.write_text(target.read_text().replace('stewart-7-4-68a31300)', 'stewart-7-2-029ec6ba|'+key+')'))
+target.write_text(target.read_text().replace('stewart-7-4-68a31300)', 'stewart-7-4-68a31300|'+key+')'))
 target=root/'lib/books.js'
 target.write_text(target.read_text().replace("'7-5','7-6'].map", "'7-5','7-6','7-7'].map"))
 print(key,len(records),'exercises',len(names),'images')
