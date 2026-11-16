@@ -4045,5 +4045,115 @@
     "file": "stewart-7-4-68a31300/polynomial_division.png",
     "mime": "image/png",
     "sha256": "da27d7e37f61d63d76ce655f039b728a437ab8d2234f41d0a7e598f83ab0f75d"
+  },
+  "stewart-7-7-dcc10ac4/exercise01.png": {
+    "file": "stewart-7-7-dcc10ac4/exercise01.png",
+    "mime": "image/png",
+    "sha256": "80eb75bd2d60eae2436f94233ab422ce4151336ef74d204d796782d1fda81ead"
+  },
+  "stewart-7-7-dcc10ac4/exercise02.png": {
+    "file": "stewart-7-7-dcc10ac4/exercise02.png",
+    "mime": "image/png",
+    "sha256": "dc2f5caacc4bcbfd0c460a674f1225f34230bcb1c3e823ca3aa162579ca93aa4"
+  },
+  "stewart-7-7-dcc10ac4/exercise29.png": {
+    "file": "stewart-7-7-dcc10ac4/exercise29.png",
+    "mime": "image/png",
+    "sha256": "e613bd9f0a5dec5e736de05ad61429d2e48de32cb55b4009501d48a29a519dbd"
+  },
+  "stewart-7-7-dcc10ac4/exercise30.png": {
+    "file": "stewart-7-7-dcc10ac4/exercise30.png",
+    "mime": "image/png",
+    "sha256": "88a38afa0e860695390f119ff9e831acdd8936cf64fa98222a8a4790bd069774"
+  },
+  "stewart-7-7-dcc10ac4/exercise33.png": {
+    "file": "stewart-7-7-dcc10ac4/exercise33.png",
+    "mime": "image/png",
+    "sha256": "90228c721e054d0ea484321f54ed69377fd1aa2a5ab01c8a47217e0d98baf695"
+  },
+  "stewart-7-7-dcc10ac4/exercise35.png": {
+    "file": "stewart-7-7-dcc10ac4/exercise35.png",
+    "mime": "image/png",
+    "sha256": "c9b0d2d443a73cd8af3e766cffbf611f91b5cdc95f182802e01b922ad35425f6"
+  },
+  "stewart-7-7-dcc10ac4/exercise36.png": {
+    "file": "stewart-7-7-dcc10ac4/exercise36.png",
+    "mime": "image/png",
+    "sha256": "5eabc9c32632b5bab32ae91977ce46cd67893b9a7c464e237365211a1cd9b010"
+  },
+  "stewart-7-7-dcc10ac4/exercise38.png": {
+    "file": "stewart-7-7-dcc10ac4/exercise38.png",
+    "mime": "image/png",
+    "sha256": "519d700004afd316b21a775625cb856acd02b4bab4e6e1034674b6e19d47ef70"
+  },
+  "stewart-7-7-dcc10ac4/exercise39.png": {
+    "file": "stewart-7-7-dcc10ac4/exercise39.png",
+    "mime": "image/png",
+    "sha256": "95bd6c205ebd323e5a79e4d0e536e31d66d6f51c1425bf732c5cb2cf79fb3f3a"
+  },
+  "stewart-7-7-dcc10ac4/exercise42.png": {
+    "file": "stewart-7-7-dcc10ac4/exercise42.png",
+    "mime": "image/png",
+    "sha256": "97c1f3c26e78778a3a13659683fafa04deeff171c8f274e290f8214aedec12e8"
+  },
+  "stewart-7-7-dcc10ac4/fig02.png": {
+    "file": "stewart-7-7-dcc10ac4/fig02.png",
+    "mime": "image/png",
+    "sha256": "180c6b36d5691f3a27b28b8fb3409bc0bc3c19282833414193ab0e98e1bbab40"
+  },
+  "stewart-7-7-dcc10ac4/fig03.png": {
+    "file": "stewart-7-7-dcc10ac4/fig03.png",
+    "mime": "image/png",
+    "sha256": "e3a8c2717cd0d561dfae8cb7abe9b764d33c80935abaad9332355f524966dc4a"
+  },
+  "stewart-7-7-dcc10ac4/fig04.png": {
+    "file": "stewart-7-7-dcc10ac4/fig04.png",
+    "mime": "image/png",
+    "sha256": "213012f9a7095e010e0dd6ffadc722cc46b80bb8008aaf31063baaf26edfd180"
+  },
+  "stewart-7-7-dcc10ac4/fig05.png": {
+    "file": "stewart-7-7-dcc10ac4/fig05.png",
+    "mime": "image/png",
+    "sha256": "467c3008c28957bb04fa04884cad15ee87e05893f3c682403b304f7a6dd0c26d"
+  },
+  "stewart-7-7-dcc10ac4/fig06.png": {
+    "file": "stewart-7-7-dcc10ac4/fig06.png",
+    "mime": "image/png",
+    "sha256": "661afc2bca73cffdc0c77b6021e8269524684c808f6deabea7b706a4e69dc231"
+  },
+  "stewart-7-7-dcc10ac4/fig07.png": {
+    "file": "stewart-7-7-dcc10ac4/fig07.png",
+    "mime": "image/png",
+    "sha256": "2695fd89bfc6f310ac99ab59339f372e640b62a3b29b6a72b947da101872b216"
+  },
+  "stewart-7-7-dcc10ac4/fig08.png": {
+    "file": "stewart-7-7-dcc10ac4/fig08.png",
+    "mime": "image/png",
+    "sha256": "f8d80161d2f8109dd38ab26a58dfc105847e185864ad110b15243385ac480846"
+  },
+  "stewart-7-7-dcc10ac4/fig09.png": {
+    "file": "stewart-7-7-dcc10ac4/fig09.png",
+    "mime": "image/png",
+    "sha256": "778999d6d6dbbc7a63c1eea3216ba37adeaaa584f5c0cd24d63cdd62fe7d9d6a"
+  },
+  "stewart-7-7-dcc10ac4/fig10.png": {
+    "file": "stewart-7-7-dcc10ac4/fig10.png",
+    "mime": "image/png",
+    "sha256": "9326b17ea00bd027a17afd3bc5de6d71f25f41bb06880654ad084d56523693e9"
+  },
+  "stewart-7-7-dcc10ac4/fig11.png": {
+    "file": "stewart-7-7-dcc10ac4/fig11.png",
+    "mime": "image/png",
+    "sha256": "d93ee9c7e6266da2a70b99ff87c7c82f75f39eb260df09291831284a15f0e8e3"
+  },
+  "stewart-7-7-dcc10ac4/fig1a.png": {
+    "file": "stewart-7-7-dcc10ac4/fig1a.png",
+    "mime": "image/png",
+    "sha256": "26c1be0b5753bc4deaf3c70fc4278cad290956171b656b0af3571b32a1d34822"
+  },
+  "stewart-7-7-dcc10ac4/fig1b.png": {
+    "file": "stewart-7-7-dcc10ac4/fig1b.png",
+    "mime": "image/png",
+    "sha256": "565fde626de0134e86c72d52972257a82a9187076730acc488df95afd11a7042"
   }
 }
