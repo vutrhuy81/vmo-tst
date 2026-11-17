@@ -1,0 +1,380 @@
+{
+  "exercises": [
+    {
+      "number": 1,
+      "content": "<p><strong>1.</strong></p>\n<p>Giải thích vì sao mỗi tích phân sau là suy rộng. <span class=\"math display\">\\[\\text{(a)}\\quad\\int_1^4\\frac{dx}{x-3}\\qquad\n\\text{(b)}\\quad\\int_3^\\infty\\frac{dx}{x^2-4}\\]</span> <span class=\"math display\">\\[\\text{(c)}\\quad\\int_0^1\\tan\\pi x\\,dx\\qquad\n\\text{(d)}\\quad\\int_{-\\infty}^{-1}\\frac{e^x}x\\,dx\\]</span></p>\n"
+    },
+    {
+      "number": 2,
+      "content": "<p><strong>2.</strong></p>\n<p>Những tích phân nào sau đây là suy rộng? Vì sao? <span class=\"math display\">\\[\\text{(a)}\\quad\\int_0^\\pi\\sec x\\,dx\\qquad\n\\text{(b)}\\quad\\int_0^4\\frac{dx}{x-5}\\]</span> <span class=\"math display\">\\[\\text{(c)}\\quad\\int_{-1}^3\\frac{dx}{x+x^3}\\qquad\n\\text{(d)}\\quad\\int_1^\\infty\\frac{dx}{x+x^3}\\]</span></p>\n"
+    },
+    {
+      "number": 3,
+      "content": "<p><strong>3.</strong></p>\n<p>Tìm diện tích dưới đường cong <span class=\"math inline\">\\(y=1/x^3\\)</span> từ <span class=\"math inline\">\\(x=1\\)</span> đến <span class=\"math inline\">\\(x=t\\)</span>, rồi tính với <span class=\"math inline\">\\(t=10,100,1000\\)</span>. Sau đó tìm toàn bộ diện tích dưới đường cong này với <span class=\"math inline\">\\(x\\ge1\\)</span>.</p>\n"
+    },
+    {
+      "number": 4,
+      "content": "<p><strong>4.</strong></p>\n<p>[Đồ thị]</p>\n<p>(a) Vẽ đồ thị <span class=\"math inline\">\\(f(x)=1/x^{1.1}\\)</span> và <span class=\"math inline\">\\(g(x)=1/x^{0.9}\\)</span> trong cả hai cửa sổ <span class=\"math inline\">\\([0,10]\\times[0,1]\\)</span> và <span class=\"math inline\">\\([0,100]\\times[0,1]\\)</span>.</p>\n<p>(b) Tìm diện tích dưới các đồ thị <span class=\"math inline\">\\(f\\)</span> và <span class=\"math inline\">\\(g\\)</span> từ <span class=\"math inline\">\\(x=1\\)</span> đến <span class=\"math inline\">\\(x=t\\)</span>, rồi tính với <span class=\"math inline\">\\(t=10,100,10^4,10^6,10^{10},10^{20}\\)</span>.</p>\n<p>(c) Tìm toàn bộ diện tích dưới mỗi đường cong với <span class=\"math inline\">\\(x\\ge1\\)</span>, nếu tồn tại.</p>\n"
+    },
+    {
+      "number": 5,
+      "content": "<p><strong>5.</strong></p>\n<p><em>Yêu cầu chung (5–48):</em> Xác định tích phân hội tụ hay phân kỳ. Tính các tích phân hội tụ.</p>\n<p><span class=\"math inline\">\\(\\displaystyle \\int_1^\\infty2x^{-3}\\,dx\\)</span>.</p>\n"
+    },
+    {
+      "number": 6,
+      "content": "<p><strong>6.</strong></p>\n<p><em>Yêu cầu chung (5–48):</em> Xác định tích phân hội tụ hay phân kỳ. Tính các tích phân hội tụ.</p>\n<p><span class=\"math inline\">\\(\\displaystyle \\int_{-\\infty}^{-1}\\frac1{\\sqrt[3]{x}}\\,dx\\)</span>.</p>\n"
+    },
+    {
+      "number": 7,
+      "content": "<p><strong>7.</strong></p>\n<p><em>Yêu cầu chung (5–48):</em> Xác định tích phân hội tụ hay phân kỳ. Tính các tích phân hội tụ.</p>\n<p><span class=\"math inline\">\\(\\displaystyle \\int_0^\\infty e^{-2x}\\,dx\\)</span>.</p>\n"
+    },
+    {
+      "number": 8,
+      "content": "<p><strong>8.</strong></p>\n<p><em>Yêu cầu chung (5–48):</em> Xác định tích phân hội tụ hay phân kỳ. Tính các tích phân hội tụ.</p>\n<p><span class=\"math inline\">\\(\\displaystyle \\int_1^\\infty\\left(\\frac13\\right)^x\\,dx\\)</span>.</p>\n"
+    },
+    {
+      "number": 9,
+      "content": "<p><strong>9.</strong></p>\n<p><em>Yêu cầu chung (5–48):</em> Xác định tích phân hội tụ hay phân kỳ. Tính các tích phân hội tụ.</p>\n<p><span class=\"math inline\">\\(\\displaystyle \\int_{-2}^\\infty\\frac1{x+4}\\,dx\\)</span>.</p>\n"
+    },
+    {
+      "number": 10,
+      "content": "<p><strong>10.</strong></p>\n<p><em>Yêu cầu chung (5–48):</em> Xác định tích phân hội tụ hay phân kỳ. Tính các tích phân hội tụ.</p>\n<p><span class=\"math inline\">\\(\\displaystyle \\int_1^\\infty\\frac1{x^2+4}\\,dx\\)</span>.</p>\n"
+    },
+    {
+      "number": 11,
+      "content": "<p><strong>11.</strong></p>\n<p><em>Yêu cầu chung (5–48):</em> Xác định tích phân hội tụ hay phân kỳ. Tính các tích phân hội tụ.</p>\n<p><span class=\"math inline\">\\(\\displaystyle \\int_3^\\infty\\frac1{(x-2)^{3/2}}\\,dx\\)</span>.</p>\n"
+    },
+    {
+      "number": 12,
+      "content": "<p><strong>12.</strong></p>\n<p><em>Yêu cầu chung (5–48):</em> Xác định tích phân hội tụ hay phân kỳ. Tính các tích phân hội tụ.</p>\n<p><span class=\"math inline\">\\(\\displaystyle \\int_0^\\infty\\frac1{\\sqrt[4]{1+x}}\\,dx\\)</span>.</p>\n"
+    },
+    {
+      "number": 13,
+      "content": "<p><strong>13.</strong></p>\n<p><em>Yêu cầu chung (5–48):</em> Xác định tích phân hội tụ hay phân kỳ. Tính các tích phân hội tụ.</p>\n<p><span class=\"math inline\">\\(\\displaystyle \\int_{-\\infty}^0\\frac{x}{(x^2+1)^3}\\,dx\\)</span>.</p>\n"
+    },
+    {
+      "number": 14,
+      "content": "<p><strong>14.</strong></p>\n<p><em>Yêu cầu chung (5–48):</em> Xác định tích phân hội tụ hay phân kỳ. Tính các tích phân hội tụ.</p>\n<p><span class=\"math inline\">\\(\\displaystyle \\int_{-\\infty}^{-3}\\frac{x}{4-x^2}\\,dx\\)</span>.</p>\n"
+    },
+    {
+      "number": 15,
+      "content": "<p><strong>15.</strong></p>\n<p><em>Yêu cầu chung (5–48):</em> Xác định tích phân hội tụ hay phân kỳ. Tính các tích phân hội tụ.</p>\n<p><span class=\"math inline\">\\(\\displaystyle \\int_1^\\infty\\frac{x^2+x+1}{x^4}\\,dx\\)</span>.</p>\n"
+    },
+    {
+      "number": 16,
+      "content": "<p><strong>16.</strong></p>\n<p><em>Yêu cầu chung (5–48):</em> Xác định tích phân hội tụ hay phân kỳ. Tính các tích phân hội tụ.</p>\n<p><span class=\"math inline\">\\(\\displaystyle \\int_2^\\infty\\frac{x}{\\sqrt{x^2-1}}\\,dx\\)</span>.</p>\n"
+    },
+    {
+      "number": 17,
+      "content": "<p><strong>17.</strong></p>\n<p><em>Yêu cầu chung (5–48):</em> Xác định tích phân hội tụ hay phân kỳ. Tính các tích phân hội tụ.</p>\n<p><span class=\"math inline\">\\(\\displaystyle \\int_0^\\infty\\frac{e^x}{(1+e^x)^2}\\,dx\\)</span>.</p>\n"
+    },
+    {
+      "number": 18,
+      "content": "<p><strong>18.</strong></p>\n<p><em>Yêu cầu chung (5–48):</em> Xác định tích phân hội tụ hay phân kỳ. Tính các tích phân hội tụ.</p>\n<p><span class=\"math inline\">\\(\\displaystyle \\int_{-\\infty}^{-1}\\frac{x^2+x}{x^3}\\,dx\\)</span>.</p>\n"
+    },
+    {
+      "number": 19,
+      "content": "<p><strong>19.</strong></p>\n<p><em>Yêu cầu chung (5–48):</em> Xác định tích phân hội tụ hay phân kỳ. Tính các tích phân hội tụ.</p>\n<p><span class=\"math inline\">\\(\\displaystyle \\int_{-\\infty}^\\infty xe^{-x^2}\\,dx\\)</span>.</p>\n"
+    },
+    {
+      "number": 20,
+      "content": "<p><strong>20.</strong></p>\n<p><em>Yêu cầu chung (5–48):</em> Xác định tích phân hội tụ hay phân kỳ. Tính các tích phân hội tụ.</p>\n<p><span class=\"math inline\">\\(\\displaystyle \\int_{-\\infty}^\\infty\\frac{x}{x^2+1}\\,dx\\)</span>.</p>\n"
+    },
+    {
+      "number": 21,
+      "content": "<p><strong>21.</strong></p>\n<p><em>Yêu cầu chung (5–48):</em> Xác định tích phân hội tụ hay phân kỳ. Tính các tích phân hội tụ.</p>\n<p><span class=\"math inline\">\\(\\displaystyle \\int_{-\\infty}^\\infty\\cos2t\\,dt\\)</span>.</p>\n"
+    },
+    {
+      "number": 22,
+      "content": "<p><strong>22.</strong></p>\n<p><em>Yêu cầu chung (5–48):</em> Xác định tích phân hội tụ hay phân kỳ. Tính các tích phân hội tụ.</p>\n<p><span class=\"math inline\">\\(\\displaystyle \\int_1^\\infty\\frac{e^{-1/x}}{x^2}\\,dx\\)</span>.</p>\n"
+    },
+    {
+      "number": 23,
+      "content": "<p><strong>23.</strong></p>\n<p><em>Yêu cầu chung (5–48):</em> Xác định tích phân hội tụ hay phân kỳ. Tính các tích phân hội tụ.</p>\n<p><span class=\"math inline\">\\(\\displaystyle \\int_0^\\infty\\sin^2\\alpha\\,d\\alpha\\)</span>.</p>\n"
+    },
+    {
+      "number": 24,
+      "content": "<p><strong>24.</strong></p>\n<p><em>Yêu cầu chung (5–48):</em> Xác định tích phân hội tụ hay phân kỳ. Tính các tích phân hội tụ.</p>\n<p><span class=\"math inline\">\\(\\displaystyle \\int_0^\\infty\\sin\\theta\\,e^{\\cos\\theta}\\,d\\theta\\)</span>.</p>\n"
+    },
+    {
+      "number": 25,
+      "content": "<p><strong>25.</strong></p>\n<p><em>Yêu cầu chung (5–48):</em> Xác định tích phân hội tụ hay phân kỳ. Tính các tích phân hội tụ.</p>\n<p><span class=\"math inline\">\\(\\displaystyle \\int_1^\\infty\\frac1{x^2+x}\\,dx\\)</span>.</p>\n"
+    },
+    {
+      "number": 26,
+      "content": "<p><strong>26.</strong></p>\n<p><em>Yêu cầu chung (5–48):</em> Xác định tích phân hội tụ hay phân kỳ. Tính các tích phân hội tụ.</p>\n<p><span class=\"math inline\">\\(\\displaystyle \\int_2^\\infty\\frac{dv}{v^2+2v-3}\\)</span>.</p>\n"
+    },
+    {
+      "number": 27,
+      "content": "<p><strong>27.</strong></p>\n<p><em>Yêu cầu chung (5–48):</em> Xác định tích phân hội tụ hay phân kỳ. Tính các tích phân hội tụ.</p>\n<p><span class=\"math inline\">\\(\\displaystyle \\int_{-\\infty}^0 ze^{2z}\\,dz\\)</span>.</p>\n"
+    },
+    {
+      "number": 28,
+      "content": "<p><strong>28.</strong></p>\n<p><em>Yêu cầu chung (5–48):</em> Xác định tích phân hội tụ hay phân kỳ. Tính các tích phân hội tụ.</p>\n<p><span class=\"math inline\">\\(\\displaystyle \\int_2^\\infty ye^{-3y}\\,dy\\)</span>.</p>\n"
+    },
+    {
+      "number": 29,
+      "content": "<p><strong>29.</strong></p>\n<p><em>Yêu cầu chung (5–48):</em> Xác định tích phân hội tụ hay phân kỳ. Tính các tích phân hội tụ.</p>\n<p><span class=\"math inline\">\\(\\displaystyle \\int_1^\\infty\\frac{\\ln x}x\\,dx\\)</span>.</p>\n"
+    },
+    {
+      "number": 30,
+      "content": "<p><strong>30.</strong></p>\n<p><em>Yêu cầu chung (5–48):</em> Xác định tích phân hội tụ hay phân kỳ. Tính các tích phân hội tụ.</p>\n<p><span class=\"math inline\">\\(\\displaystyle \\int_1^\\infty\\frac{\\ln x}{x^2}\\,dx\\)</span>.</p>\n"
+    },
+    {
+      "number": 31,
+      "content": "<p><strong>31.</strong></p>\n<p><em>Yêu cầu chung (5–48):</em> Xác định tích phân hội tụ hay phân kỳ. Tính các tích phân hội tụ.</p>\n<p><span class=\"math inline\">\\(\\displaystyle \\int_{-\\infty}^0\\frac{z}{z^4+4}\\,dz\\)</span>.</p>\n"
+    },
+    {
+      "number": 32,
+      "content": "<p><strong>32.</strong></p>\n<p><em>Yêu cầu chung (5–48):</em> Xác định tích phân hội tụ hay phân kỳ. Tính các tích phân hội tụ.</p>\n<p><span class=\"math inline\">\\(\\displaystyle \\int_e^\\infty\\frac1{x(\\ln x)^2}\\,dx\\)</span>.</p>\n"
+    },
+    {
+      "number": 33,
+      "content": "<p><strong>33.</strong></p>\n<p><em>Yêu cầu chung (5–48):</em> Xác định tích phân hội tụ hay phân kỳ. Tính các tích phân hội tụ.</p>\n<p><span class=\"math inline\">\\(\\displaystyle \\int_0^\\infty e^{-\\sqrt y}\\,dy\\)</span>.</p>\n"
+    },
+    {
+      "number": 34,
+      "content": "<p><strong>34.</strong></p>\n<p><em>Yêu cầu chung (5–48):</em> Xác định tích phân hội tụ hay phân kỳ. Tính các tích phân hội tụ.</p>\n<p><span class=\"math inline\">\\(\\displaystyle \\int_1^\\infty\\frac{dx}{\\sqrt{x}+x\\sqrt{x}}\\)</span>.</p>\n"
+    },
+    {
+      "number": 35,
+      "content": "<p><strong>35.</strong></p>\n<p><em>Yêu cầu chung (5–48):</em> Xác định tích phân hội tụ hay phân kỳ. Tính các tích phân hội tụ.</p>\n<p><span class=\"math inline\">\\(\\displaystyle \\int_0^1\\frac1x\\,dx\\)</span>.</p>\n"
+    },
+    {
+      "number": 36,
+      "content": "<p><strong>36.</strong></p>\n<p><em>Yêu cầu chung (5–48):</em> Xác định tích phân hội tụ hay phân kỳ. Tính các tích phân hội tụ.</p>\n<p><span class=\"math inline\">\\(\\displaystyle \\int_0^5\\frac1{\\sqrt[3]{5-x}}\\,dx\\)</span>.</p>\n"
+    },
+    {
+      "number": 37,
+      "content": "<p><strong>37.</strong></p>\n<p><em>Yêu cầu chung (5–48):</em> Xác định tích phân hội tụ hay phân kỳ. Tính các tích phân hội tụ.</p>\n<p><span class=\"math inline\">\\(\\displaystyle \\int_{-2}^{14}\\frac{dx}{\\sqrt[4]{x+2}}\\)</span>.</p>\n"
+    },
+    {
+      "number": 38,
+      "content": "<p><strong>38.</strong></p>\n<p><em>Yêu cầu chung (5–48):</em> Xác định tích phân hội tụ hay phân kỳ. Tính các tích phân hội tụ.</p>\n<p><span class=\"math inline\">\\(\\displaystyle \\int_{-1}^2\\frac{x}{(x+1)^2}\\,dx\\)</span>.</p>\n"
+    },
+    {
+      "number": 39,
+      "content": "<p><strong>39.</strong></p>\n<p><em>Yêu cầu chung (5–48):</em> Xác định tích phân hội tụ hay phân kỳ. Tính các tích phân hội tụ.</p>\n<p><span class=\"math inline\">\\(\\displaystyle \\int_{-2}^3\\frac1{x^4}\\,dx\\)</span>.</p>\n"
+    },
+    {
+      "number": 40,
+      "content": "<p><strong>40.</strong></p>\n<p><em>Yêu cầu chung (5–48):</em> Xác định tích phân hội tụ hay phân kỳ. Tính các tích phân hội tụ.</p>\n<p><span class=\"math inline\">\\(\\displaystyle \\int_0^1\\frac{dx}{\\sqrt{1-x^2}}\\)</span>.</p>\n"
+    },
+    {
+      "number": 41,
+      "content": "<p><strong>41.</strong></p>\n<p><em>Yêu cầu chung (5–48):</em> Xác định tích phân hội tụ hay phân kỳ. Tính các tích phân hội tụ.</p>\n<p><span class=\"math inline\">\\(\\displaystyle \\int_0^9\\frac1{\\sqrt[3]{x}-1}\\,dx\\)</span>.</p>\n"
+    },
+    {
+      "number": 42,
+      "content": "<p><strong>42.</strong></p>\n<p><em>Yêu cầu chung (5–48):</em> Xác định tích phân hội tụ hay phân kỳ. Tính các tích phân hội tụ.</p>\n<p><span class=\"math inline\">\\(\\displaystyle \\int_0^5\\frac w{w-2}\\,dw\\)</span>.</p>\n"
+    },
+    {
+      "number": 43,
+      "content": "<p><strong>43.</strong></p>\n<p><em>Yêu cầu chung (5–48):</em> Xác định tích phân hội tụ hay phân kỳ. Tính các tích phân hội tụ.</p>\n<p><span class=\"math inline\">\\(\\displaystyle \\int_0^{\\pi/2}\\tan^2\\theta\\,d\\theta\\)</span>.</p>\n"
+    },
+    {
+      "number": 44,
+      "content": "<p><strong>44.</strong></p>\n<p><em>Yêu cầu chung (5–48):</em> Xác định tích phân hội tụ hay phân kỳ. Tính các tích phân hội tụ.</p>\n<p><span class=\"math inline\">\\(\\displaystyle \\int_0^4\\frac{dx}{x^2-x-2}\\)</span>.</p>\n"
+    },
+    {
+      "number": 45,
+      "content": "<p><strong>45.</strong></p>\n<p><em>Yêu cầu chung (5–48):</em> Xác định tích phân hội tụ hay phân kỳ. Tính các tích phân hội tụ.</p>\n<p><span class=\"math inline\">\\(\\displaystyle \\int_0^1 r\\ln r\\,dr\\)</span>.</p>\n"
+    },
+    {
+      "number": 46,
+      "content": "<p><strong>46.</strong></p>\n<p><em>Yêu cầu chung (5–48):</em> Xác định tích phân hội tụ hay phân kỳ. Tính các tích phân hội tụ.</p>\n<p><span class=\"math inline\">\\(\\displaystyle \\int_0^{\\pi/2}\\frac{\\cos\\theta}{\\sqrt{\\sin\\theta}}\\,d\\theta\\)</span>.</p>\n"
+    },
+    {
+      "number": 47,
+      "content": "<p><strong>47.</strong></p>\n<p><em>Yêu cầu chung (5–48):</em> Xác định tích phân hội tụ hay phân kỳ. Tính các tích phân hội tụ.</p>\n<p><span class=\"math inline\">\\(\\displaystyle \\int_{-1}^0\\frac{e^{1/x}}{x^3}\\,dx\\)</span>.</p>\n"
+    },
+    {
+      "number": 48,
+      "content": "<p><strong>48.</strong></p>\n<p><em>Yêu cầu chung (5–48):</em> Xác định tích phân hội tụ hay phân kỳ. Tính các tích phân hội tụ.</p>\n<p><span class=\"math inline\">\\(\\displaystyle \\int_0^1\\frac{e^{1/x}}{x^3}\\,dx\\)</span>.</p>\n"
+    },
+    {
+      "number": 49,
+      "content": "<p><strong>49.</strong></p>\n<p><em>Yêu cầu chung (49–54):</em> Phác họa miền và tìm diện tích (nếu diện tích hữu hạn).</p>\n<p><span class=\"math inline\">\\(S=\\{(x,y)\\mid x\\ge1,\\ 0\\le y\\le e^{-x}\\}\\)</span>.</p>\n"
+    },
+    {
+      "number": 50,
+      "content": "<p><strong>50.</strong></p>\n<p><em>Yêu cầu chung (49–54):</em> Phác họa miền và tìm diện tích (nếu diện tích hữu hạn).</p>\n<p><span class=\"math inline\">\\(S=\\{(x,y)\\mid x\\le0,\\ 0\\le y\\le e^x\\}\\)</span>.</p>\n"
+    },
+    {
+      "number": 51,
+      "content": "<p><strong>51.</strong></p>\n<p><em>Yêu cầu chung (49–54):</em> Phác họa miền và tìm diện tích (nếu diện tích hữu hạn).</p>\n<p>[Đồ thị] <span class=\"math inline\">\\(S=\\{(x,y)\\mid x\\ge1,\\ 0\\le y\\le1/(x^3+x)\\}\\)</span>.</p>\n"
+    },
+    {
+      "number": 52,
+      "content": "<p><strong>52.</strong></p>\n<p><em>Yêu cầu chung (49–54):</em> Phác họa miền và tìm diện tích (nếu diện tích hữu hạn).</p>\n<p>[Đồ thị] <span class=\"math inline\">\\(S=\\{(x,y)\\mid x\\ge0,\\ 0\\le y\\le xe^{-x}\\}\\)</span>.</p>\n"
+    },
+    {
+      "number": 53,
+      "content": "<p><strong>53.</strong></p>\n<p><em>Yêu cầu chung (49–54):</em> Phác họa miền và tìm diện tích (nếu diện tích hữu hạn).</p>\n<p>[Đồ thị] <span class=\"math inline\">\\(S=\\{(x,y)\\mid 0\\le x&lt;\\pi/2,\\ 0\\le y\\le\\sec^2x\\}\\)</span>.</p>\n"
+    },
+    {
+      "number": 54,
+      "content": "<p><strong>54.</strong></p>\n<p><em>Yêu cầu chung (49–54):</em> Phác họa miền và tìm diện tích (nếu diện tích hữu hạn).</p>\n<p>[Đồ thị] <span class=\"math inline\">\\(S=\\{(x,y)\\mid -2&lt;x\\le0,\\ 0\\le y\\le1/\\sqrt{x+2}\\}\\)</span>.</p>\n"
+    },
+    {
+      "number": 55,
+      "content": "<p><strong>55.</strong></p>\n<p>[Đồ thị]</p>\n<p>(a) Với <span class=\"math inline\">\\(g(x)=(\\sin^2x)/x^2\\)</span>, dùng máy tính cầm tay hoặc máy tính để lập bảng giá trị gần đúng của <span class=\"math inline\">\\(\\int_1^t g(x)\\,dx\\)</span> với <span class=\"math inline\">\\(t=2,5,10,100,1000,10\\,000\\)</span>. Có vẻ <span class=\"math inline\">\\(\\int_1^\\infty g(x)\\,dx\\)</span> hội tụ hay không?</p>\n<p>(b) Dùng Định lý so sánh với <span class=\"math inline\">\\(f(x)=1/x^2\\)</span> để chứng tỏ <span class=\"math inline\">\\(\\int_1^\\infty g(x)\\,dx\\)</span> hội tụ.</p>\n<p>(c) Minh họa phần (b) bằng cách vẽ <span class=\"math inline\">\\(f\\)</span> và <span class=\"math inline\">\\(g\\)</span> trên cùng màn hình với <span class=\"math inline\">\\(1\\le x\\le10\\)</span>. Dùng đồ thị giải thích trực quan vì sao <span class=\"math inline\">\\(\\int_1^\\infty g(x)\\,dx\\)</span> hội tụ.</p>\n"
+    },
+    {
+      "number": 56,
+      "content": "<p><strong>56.</strong></p>\n<p>[Đồ thị]</p>\n<p>(a) Với <span class=\"math inline\">\\(g(x)=1/(\\sqrt{x}-1)\\)</span>, dùng máy tính cầm tay hoặc máy tính để lập bảng giá trị gần đúng của <span class=\"math inline\">\\(\\int_2^t g(x)\\,dx\\)</span> với <span class=\"math inline\">\\(t=5,10,100,1000,10\\,000\\)</span>. Có vẻ <span class=\"math inline\">\\(\\int_2^\\infty g(x)\\,dx\\)</span> hội tụ hay phân kỳ?</p>\n<p>(b) Dùng Định lý so sánh với <span class=\"math inline\">\\(f(x)=1/\\sqrt{x}\\)</span> để chứng tỏ <span class=\"math inline\">\\(\\int_2^\\infty g(x)\\,dx\\)</span> phân kỳ.</p>\n<p>(c) Minh họa phần (b) bằng cách vẽ <span class=\"math inline\">\\(f\\)</span> và <span class=\"math inline\">\\(g\\)</span> trên cùng màn hình với <span class=\"math inline\">\\(2\\le x\\le20\\)</span>. Dùng đồ thị giải thích trực quan vì sao <span class=\"math inline\">\\(\\int_2^\\infty g(x)\\,dx\\)</span> phân kỳ.</p>\n"
+    },
+    {
+      "number": 57,
+      "content": "<p><strong>57.</strong></p>\n<p><em>Yêu cầu chung (57–64):</em> Dùng Định lý so sánh để xác định tích phân hội tụ hay phân kỳ.</p>\n<p><span class=\"math inline\">\\(\\displaystyle \\int_0^\\infty\\frac{x}{x^3+1}\\,dx\\)</span>.</p>\n"
+    },
+    {
+      "number": 58,
+      "content": "<p><strong>58.</strong></p>\n<p><em>Yêu cầu chung (57–64):</em> Dùng Định lý so sánh để xác định tích phân hội tụ hay phân kỳ.</p>\n<p><span class=\"math inline\">\\(\\displaystyle \\int_1^\\infty\\frac{1+\\sin^2x}{\\sqrt{x}}\\,dx\\)</span>.</p>\n"
+    },
+    {
+      "number": 59,
+      "content": "<p><strong>59.</strong></p>\n<p><em>Yêu cầu chung (57–64):</em> Dùng Định lý so sánh để xác định tích phân hội tụ hay phân kỳ.</p>\n<p><span class=\"math inline\">\\(\\displaystyle \\int_2^\\infty\\frac1{x-\\ln x}\\,dx\\)</span>.</p>\n"
+    },
+    {
+      "number": 60,
+      "content": "<p><strong>60.</strong></p>\n<p><em>Yêu cầu chung (57–64):</em> Dùng Định lý so sánh để xác định tích phân hội tụ hay phân kỳ.</p>\n<p><span class=\"math inline\">\\(\\displaystyle \\int_0^\\infty\\frac{\\arctan x}{2+e^x}\\,dx\\)</span>.</p>\n"
+    },
+    {
+      "number": 61,
+      "content": "<p><strong>61.</strong></p>\n<p><em>Yêu cầu chung (57–64):</em> Dùng Định lý so sánh để xác định tích phân hội tụ hay phân kỳ.</p>\n<p><span class=\"math inline\">\\(\\displaystyle \\int_1^\\infty\\frac{x+1}{\\sqrt{x^4-x}}\\,dx\\)</span>.</p>\n"
+    },
+    {
+      "number": 62,
+      "content": "<p><strong>62.</strong></p>\n<p><em>Yêu cầu chung (57–64):</em> Dùng Định lý so sánh để xác định tích phân hội tụ hay phân kỳ.</p>\n<p><span class=\"math inline\">\\(\\displaystyle \\int_1^\\infty\\frac{2+\\cos x}{\\sqrt{x^4+x^2}}\\,dx\\)</span>.</p>\n"
+    },
+    {
+      "number": 63,
+      "content": "<p><strong>63.</strong></p>\n<p><em>Yêu cầu chung (57–64):</em> Dùng Định lý so sánh để xác định tích phân hội tụ hay phân kỳ.</p>\n<p><span class=\"math inline\">\\(\\displaystyle \\int_0^1\\frac{\\sec^2x}{x\\sqrt{x}}\\,dx\\)</span>.</p>\n"
+    },
+    {
+      "number": 64,
+      "content": "<p><strong>64.</strong></p>\n<p><em>Yêu cầu chung (57–64):</em> Dùng Định lý so sánh để xác định tích phân hội tụ hay phân kỳ.</p>\n<p><span class=\"math inline\">\\(\\displaystyle \\int_0^\\pi\\frac{\\sin^2x}{\\sqrt{x}}\\,dx\\)</span>.</p>\n"
+    },
+    {
+      "number": 65,
+      "content": "<p><strong>65.</strong></p>\n<p><em>Yêu cầu chung (65–68):</em> Tích phân <span class=\"math inline\">\\(\\int_a^\\infty f(x)\\,dx\\)</span> là suy rộng vì khoảng <span class=\"math inline\">\\([a,\\infty)\\)</span> vô hạn. Nếu <span class=\"math inline\">\\(f\\)</span> có gián đoạn vô cực tại <span class=\"math inline\">\\(a\\)</span>, tích phân còn suy rộng vì một lý do thứ hai. Trong trường hợp này, ta tính bằng cách biểu diễn thành tổng một tích phân suy rộng loại 2 và một tích phân suy rộng loại 1: <span class=\"math display\">\\[\\int_a^\\infty f(x)\\,dx=\\int_a^c f(x)\\,dx+\\int_c^\\infty f(x)\\,dx,\\qquad c&gt;a.\\]</span> Tính tích phân đã cho nếu nó hội tụ.</p>\n<p><span class=\"math inline\">\\(\\displaystyle \\int_0^\\infty\\frac1{x^2}\\,dx\\)</span>.</p>\n"
+    },
+    {
+      "number": 66,
+      "content": "<p><strong>66.</strong></p>\n<p><em>Yêu cầu chung (65–68):</em> Tích phân <span class=\"math inline\">\\(\\int_a^\\infty f(x)\\,dx\\)</span> là suy rộng vì khoảng <span class=\"math inline\">\\([a,\\infty)\\)</span> vô hạn. Nếu <span class=\"math inline\">\\(f\\)</span> có gián đoạn vô cực tại <span class=\"math inline\">\\(a\\)</span>, tích phân còn suy rộng vì một lý do thứ hai. Trong trường hợp này, ta tính bằng cách biểu diễn thành tổng một tích phân suy rộng loại 2 và một tích phân suy rộng loại 1: <span class=\"math display\">\\[\\int_a^\\infty f(x)\\,dx=\\int_a^c f(x)\\,dx+\\int_c^\\infty f(x)\\,dx,\\qquad c&gt;a.\\]</span> Tính tích phân đã cho nếu nó hội tụ.</p>\n<p><span class=\"math inline\">\\(\\displaystyle \\int_0^\\infty\\frac1{\\sqrt{x}}\\,dx\\)</span>.</p>\n"
+    },
+    {
+      "number": 67,
+      "content": "<p><strong>67.</strong></p>\n<p><em>Yêu cầu chung (65–68):</em> Tích phân <span class=\"math inline\">\\(\\int_a^\\infty f(x)\\,dx\\)</span> là suy rộng vì khoảng <span class=\"math inline\">\\([a,\\infty)\\)</span> vô hạn. Nếu <span class=\"math inline\">\\(f\\)</span> có gián đoạn vô cực tại <span class=\"math inline\">\\(a\\)</span>, tích phân còn suy rộng vì một lý do thứ hai. Trong trường hợp này, ta tính bằng cách biểu diễn thành tổng một tích phân suy rộng loại 2 và một tích phân suy rộng loại 1: <span class=\"math display\">\\[\\int_a^\\infty f(x)\\,dx=\\int_a^c f(x)\\,dx+\\int_c^\\infty f(x)\\,dx,\\qquad c&gt;a.\\]</span> Tính tích phân đã cho nếu nó hội tụ.</p>\n<p><span class=\"math inline\">\\(\\displaystyle \\int_0^\\infty\\frac1{\\sqrt{x}(1+x)}\\,dx\\)</span>.</p>\n"
+    },
+    {
+      "number": 68,
+      "content": "<p><strong>68.</strong></p>\n<p><em>Yêu cầu chung (65–68):</em> Tích phân <span class=\"math inline\">\\(\\int_a^\\infty f(x)\\,dx\\)</span> là suy rộng vì khoảng <span class=\"math inline\">\\([a,\\infty)\\)</span> vô hạn. Nếu <span class=\"math inline\">\\(f\\)</span> có gián đoạn vô cực tại <span class=\"math inline\">\\(a\\)</span>, tích phân còn suy rộng vì một lý do thứ hai. Trong trường hợp này, ta tính bằng cách biểu diễn thành tổng một tích phân suy rộng loại 2 và một tích phân suy rộng loại 1: <span class=\"math display\">\\[\\int_a^\\infty f(x)\\,dx=\\int_a^c f(x)\\,dx+\\int_c^\\infty f(x)\\,dx,\\qquad c&gt;a.\\]</span> Tính tích phân đã cho nếu nó hội tụ.</p>\n<p><span class=\"math inline\">\\(\\displaystyle \\int_2^\\infty\\frac1{x\\sqrt{x^2-4}}\\,dx\\)</span>.</p>\n"
+    },
+    {
+      "number": 69,
+      "content": "<p><strong>69.</strong></p>\n<p><em>Yêu cầu chung (69–71):</em> Tìm các giá trị <span class=\"math inline\">\\(p\\)</span> để tích phân hội tụ, rồi tính tích phân với những giá trị <span class=\"math inline\">\\(p\\)</span> đó.</p>\n<p><span class=\"math inline\">\\(\\displaystyle\\int_0^1\\frac1{x^p}\\,dx\\)</span>.</p>\n"
+    },
+    {
+      "number": 70,
+      "content": "<p><strong>70.</strong></p>\n<p><em>Yêu cầu chung (69–71):</em> Tìm các giá trị <span class=\"math inline\">\\(p\\)</span> để tích phân hội tụ, rồi tính tích phân với những giá trị <span class=\"math inline\">\\(p\\)</span> đó.</p>\n<p><span class=\"math inline\">\\(\\displaystyle\\int_e^\\infty\\frac1{x(\\ln x)^p}\\,dx\\)</span>.</p>\n"
+    },
+    {
+      "number": 71,
+      "content": "<p><strong>71.</strong></p>\n<p><em>Yêu cầu chung (69–71):</em> Tìm các giá trị <span class=\"math inline\">\\(p\\)</span> để tích phân hội tụ, rồi tính tích phân với những giá trị <span class=\"math inline\">\\(p\\)</span> đó.</p>\n<p><span class=\"math inline\">\\(\\displaystyle\\int_0^1x^p\\ln x\\,dx\\)</span>.</p>\n"
+    },
+    {
+      "number": 72,
+      "content": "<p><strong>72.</strong></p>\n<p>(a) Tính <span class=\"math inline\">\\(\\int_0^\\infty x^ne^{-x}\\,dx\\)</span> với <span class=\"math inline\">\\(n=0,1,2,3\\)</span>.</p>\n<p>(b) Dự đoán giá trị <span class=\"math inline\">\\(\\int_0^\\infty x^ne^{-x}\\,dx\\)</span> khi <span class=\"math inline\">\\(n\\)</span> là một số nguyên dương bất kỳ.</p>\n<p>(c) Chứng minh dự đoán bằng quy nạp toán học.</p>\n"
+    },
+    {
+      "number": 73,
+      "content": "<p><strong>73.</strong></p>\n<p><em>Giá trị chính Cauchy</em> của tích phân <span class=\"math inline\">\\(\\int_{-\\infty}^\\infty f(x)\\,dx\\)</span> được định nghĩa bởi <span class=\"math display\">\\[\\operatorname{PV}\\int_{-\\infty}^\\infty f(x)\\,dx\n=\\lim_{t\\to\\infty}\\int_{-t}^t f(x)\\,dx.\\]</span> Chứng tỏ <span class=\"math inline\">\\(\\int_{-\\infty}^\\infty x\\,dx\\)</span> phân kỳ, nhưng giá trị chính Cauchy của tích phân này bằng 0.</p>\n"
+    },
+    {
+      "number": 74,
+      "content": "<p><strong>74.</strong></p>\n<p>Tốc độ trung bình của các phân tử trong một khí lý tưởng là <span class=\"math display\">\\[\\bar v=\\frac4{\\sqrt\\pi}\\left(\\frac M{2RT}\\right)^{3/2}\n\\int_0^\\infty v^3e^{-Mv^2/(2RT)}\\,dv,\\]</span> trong đó <span class=\"math inline\">\\(M\\)</span> là khối lượng phân tử của khí, <span class=\"math inline\">\\(R\\)</span> là hằng số khí, <span class=\"math inline\">\\(T\\)</span> là nhiệt độ khí và <span class=\"math inline\">\\(v\\)</span> là tốc độ phân tử. Chứng minh rằng <span class=\"math display\">\\[\\bar v=\\sqrt{\\frac{8RT}{\\pi M}}.\\]</span></p>\n"
+    },
+    {
+      "number": 75,
+      "content": "<p><strong>75.</strong></p>\n<p>Theo Ví dụ 1, miền <span class=\"math display\">\\[\\mathcal R=\\{(x,y)\\mid x\\ge1,\\ 0\\le y\\le1/x\\}\\]</span> có diện tích vô hạn. Chứng tỏ khi quay <span class=\"math inline\">\\(\\mathcal R\\)</span> quanh trục <span class=\"math inline\">\\(x\\)</span>, ta thu được một khối có thể tích hữu hạn (gọi là <em>kèn Gabriel</em>).</p>\n"
+    },
+    {
+      "number": 76,
+      "content": "<p><strong>76.</strong></p>\n<p>Dùng thông tin và dữ liệu trong Bài 6.4.35 để tìm công cần thiết nhằm đưa một tàu vũ trụ khối lượng 1000 kg ra khỏi trường hấp dẫn của Trái Đất.</p>\n<p><strong>Dữ kiện Bài 6.4.35 được tham chiếu:</strong></p><p><strong>35.</strong></p>\n<p>(a) Định luật vạn vật hấp dẫn Newton phát biểu rằng hai vật có khối lượng <span class=\"math inline\">\\(m_1\\)</span> và <span class=\"math inline\">\\(m_2\\)</span> hút nhau bằng lực <span class=\"math display\">\\[F=G\\frac{m_1m_2}{r^2},\\]</span> trong đó <span class=\"math inline\">\\(r\\)</span> là khoảng cách giữa hai vật và <span class=\"math inline\">\\(G\\)</span> là hằng số hấp dẫn. Nếu một trong hai vật được giữ cố định, hãy tìm công cần để dịch chuyển vật kia từ <span class=\"math inline\">\\(r=a\\)</span> đến <span class=\"math inline\">\\(r=b\\)</span>.</p>\n<p>(b) Tính công cần để phóng thẳng đứng một vệ tinh khối lượng <span class=\"math inline\">\\(1000\\)</span> kg lên độ cao <span class=\"math inline\">\\(1000\\)</span> km. Có thể giả sử khối lượng Trái Đất là <span class=\"math inline\">\\(5.98\\times10^{24}\\)</span> kg và tập trung tại tâm. Lấy bán kính Trái Đất bằng <span class=\"math inline\">\\(6.37\\times10^6\\)</span> m và <span class=\"math inline\">\\(G=6.67\\times10^{-11}\\ \\mathrm{N\\cdot m^2/kg^2}\\)</span>.</p>\n"
+    },
+    {
+      "number": 77,
+      "content": "<p><strong>77.</strong></p>\n<p>Tìm vận tốc thoát <span class=\"math inline\">\\(v_0\\)</span> cần thiết để đưa một tên lửa khối lượng <span class=\"math inline\">\\(m\\)</span> ra khỏi trường hấp dẫn của hành tinh có khối lượng <span class=\"math inline\">\\(M\\)</span> và bán kính <span class=\"math inline\">\\(R\\)</span>. Dùng Định luật vạn vật hấp dẫn Newton (xem Bài 6.4.35) và việc động năng ban đầu <span class=\"math inline\">\\(\\tfrac12mv_0^2\\)</span> cung cấp công cần thiết.</p>\n<p><strong>Dữ kiện Bài 6.4.35 được tham chiếu:</strong></p><p><strong>35.</strong></p>\n<p>(a) Định luật vạn vật hấp dẫn Newton phát biểu rằng hai vật có khối lượng <span class=\"math inline\">\\(m_1\\)</span> và <span class=\"math inline\">\\(m_2\\)</span> hút nhau bằng lực <span class=\"math display\">\\[F=G\\frac{m_1m_2}{r^2},\\]</span> trong đó <span class=\"math inline\">\\(r\\)</span> là khoảng cách giữa hai vật và <span class=\"math inline\">\\(G\\)</span> là hằng số hấp dẫn. Nếu một trong hai vật được giữ cố định, hãy tìm công cần để dịch chuyển vật kia từ <span class=\"math inline\">\\(r=a\\)</span> đến <span class=\"math inline\">\\(r=b\\)</span>.</p>\n<p>(b) Tính công cần để phóng thẳng đứng một vệ tinh khối lượng <span class=\"math inline\">\\(1000\\)</span> kg lên độ cao <span class=\"math inline\">\\(1000\\)</span> km. Có thể giả sử khối lượng Trái Đất là <span class=\"math inline\">\\(5.98\\times10^{24}\\)</span> kg và tập trung tại tâm. Lấy bán kính Trái Đất bằng <span class=\"math inline\">\\(6.37\\times10^6\\)</span> m và <span class=\"math inline\">\\(G=6.67\\times10^{-11}\\ \\mathrm{N\\cdot m^2/kg^2}\\)</span>.</p>\n"
+    },
+    {
+      "number": 78,
+      "content": "<p><strong>78.</strong></p>\n<p>Các nhà thiên văn dùng một kỹ thuật gọi là <em>phép lập thể sao</em> để xác định mật độ sao trong một cụm sao từ mật độ quan sát được (hai chiều), có thể phân tích từ một bức ảnh. Giả sử trong cụm sao hình cầu bán kính <span class=\"math inline\">\\(R\\)</span>, mật độ sao chỉ phụ thuộc khoảng cách <span class=\"math inline\">\\(r\\)</span> đến tâm cụm. Nếu mật độ sao biểu kiến là <span class=\"math inline\">\\(y(s)\\)</span>, trong đó <span class=\"math inline\">\\(s\\)</span> là khoảng cách phẳng quan sát được đến tâm cụm, và <span class=\"math inline\">\\(x(r)\\)</span> là mật độ thực, có thể chứng minh rằng <span class=\"math display\">\\[y(s)=\\int_s^R\\frac{2r}{\\sqrt{r^2-s^2}}\\,x(r)\\,dr.\\]</span> Nếu mật độ sao thực trong một cụm là <span class=\"math inline\">\\(x(r)=\\tfrac12(R-r)^2\\)</span>, hãy tìm mật độ biểu kiến <span class=\"math inline\">\\(y(s)\\)</span>.</p>\n"
+    },
+    {
+      "number": 79,
+      "content": "<p><strong>79.</strong></p>\n<p>Một nhà sản xuất bóng đèn muốn sản xuất bóng có tuổi thọ khoảng 700 giờ, nhưng một số bóng hỏng sớm hơn những bóng khác. Gọi <span class=\"math inline\">\\(F(t)\\)</span> là tỷ lệ bóng đèn của hãng bị hỏng trước <span class=\"math inline\">\\(t\\)</span> giờ, nên <span class=\"math inline\">\\(F(t)\\)</span> luôn nằm giữa 0 và 1.</p>\n<p>(a) Phác họa hình dạng mà bạn cho rằng đồ thị <span class=\"math inline\">\\(F\\)</span> có thể có.</p>\n<p>(b) Đạo hàm <span class=\"math inline\">\\(r(t)=F&#39;(t)\\)</span> có ý nghĩa gì?</p>\n<p>(c) Giá trị <span class=\"math inline\">\\(\\int_0^\\infty r(t)\\,dt\\)</span> bằng bao nhiêu? Vì sao?</p>\n"
+    },
+    {
+      "number": 80,
+      "content": "<p><strong>80.</strong></p>\n<p>Như đã thấy ở Mục 3.8, một chất phóng xạ suy giảm theo hàm mũ: khối lượng tại thời điểm <span class=\"math inline\">\\(t\\)</span> là <span class=\"math inline\">\\(m(t)=m(0)e^{kt}\\)</span>, với <span class=\"math inline\">\\(m(0)\\)</span> là khối lượng ban đầu và <span class=\"math inline\">\\(k\\)</span> là hằng số âm. Thời gian sống trung bình <span class=\"math inline\">\\(M\\)</span> của một nguyên tử trong chất đó là <span class=\"math display\">\\[M=-k\\int_0^\\infty te^{kt}\\,dt.\\]</span> Với đồng vị carbon phóng xạ <sup>14</sup>C dùng trong định tuổi bằng carbon phóng xạ, <span class=\"math inline\">\\(k=-0.000121\\)</span>. Tìm thời gian sống trung bình của một nguyên tử <sup>14</sup>C.</p>\n"
+    },
+    {
+      "number": 81,
+      "content": "<p><strong>81.</strong></p>\n<p>Trong một nghiên cứu về sự lan truyền việc sử dụng ma túy bất hợp pháp từ một người sử dụng tích cực đến một quần thể <span class=\"math inline\">\\(N\\)</span> người sử dụng, các tác giả mô hình hóa số người sử dụng mới kỳ vọng bằng phương trình <span class=\"math display\">\\[\\gamma=\\int_0^\\infty\\frac{cN(1-e^{-kt})}{k}\\,e^{-\\lambda t}\\,dt,\\]</span> trong đó <span class=\"math inline\">\\(c\\)</span>, <span class=\"math inline\">\\(k\\)</span>, <span class=\"math inline\">\\(\\lambda\\)</span> là các hằng số dương. Tính tích phân này để biểu diễn <span class=\"math inline\">\\(\\gamma\\)</span> theo <span class=\"math inline\">\\(c,N,k,\\lambda\\)</span>.</p>\n<p><em>Nguồn:</em> F. Hoppensteadt và cộng sự, “Threshold Analysis of a Drug Use Epidemic Model”, <em>Mathematical Biosciences</em> 53 (1981): 79–87.</p>\n"
+    },
+    {
+      "number": 82,
+      "content": "<p><strong>82.</strong></p>\n<p>Điều trị thẩm tách loại bỏ urê và các chất thải khác khỏi máu bằng cách đưa một phần dòng máu ra ngoài cơ thể qua máy thẩm tách. Tốc độ loại urê khỏi máu (mg/phút) thường được mô tả tốt bởi <span class=\"math display\">\\[u(t)=\\frac rV C_0e^{-rt/V},\\]</span> trong đó <span class=\"math inline\">\\(r\\)</span> là lưu lượng máu qua máy thẩm tách (mL/phút), <span class=\"math inline\">\\(V\\)</span> là thể tích máu của bệnh nhân (mL) và <span class=\"math inline\">\\(C_0\\)</span> là lượng urê trong máu (mg) tại <span class=\"math inline\">\\(t=0\\)</span>. Tính <span class=\"math inline\">\\(\\int_0^\\infty u(t)\\,dt\\)</span> và diễn giải kết quả.</p>\n"
+    },
+    {
+      "number": 83,
+      "content": "<p><strong>83.</strong></p>\n<p>Xác định số <span class=\"math inline\">\\(a\\)</span> phải lớn đến mức nào để <span class=\"math display\">\\[\\int_a^\\infty\\frac1{x^2+1}\\,dx&lt;0.001.\\]</span></p>\n"
+    },
+    {
+      "number": 84,
+      "content": "<p><strong>84.</strong></p>\n<p>Ước lượng giá trị số của <span class=\"math inline\">\\(\\int_0^\\infty e^{-x^2}\\,dx\\)</span> bằng cách viết nó thành tổng <span class=\"math inline\">\\(\\int_0^4e^{-x^2}\\,dx\\)</span> và <span class=\"math inline\">\\(\\int_4^\\infty e^{-x^2}\\,dx\\)</span>. Tính gần đúng tích phân thứ nhất bằng Quy tắc Simpson với <span class=\"math inline\">\\(n=8\\)</span> và chứng tỏ tích phân thứ hai nhỏ hơn <span class=\"math inline\">\\(\\int_4^\\infty e^{-4x}\\,dx\\)</span>, mà tích phân này nhỏ hơn <span class=\"math inline\">\\(0.0000001\\)</span>.</p>\n"
+    },
+    {
+      "number": 85,
+      "content": "<p><strong>85.</strong></p>\n<p><em>Yêu cầu chung (85–87):</em> Nếu <span class=\"math inline\">\\(f(t)\\)</span> liên tục với <span class=\"math inline\">\\(t\\ge0\\)</span>, <em>biến đổi Laplace</em> của <span class=\"math inline\">\\(f\\)</span> là hàm <span class=\"math inline\">\\(F\\)</span> được định nghĩa bởi <span class=\"math display\">\\[F(s)=\\int_0^\\infty f(t)e^{-st}\\,dt,\\]</span> và tập xác định của <span class=\"math inline\">\\(F\\)</span> gồm tất cả các số <span class=\"math inline\">\\(s\\)</span> để tích phân hội tụ.</p>\n<p>Tìm biến đổi Laplace của mỗi hàm sau. <span class=\"math display\">\\[\\text{(a)}\\quad f(t)=1\\qquad\\text{(b)}\\quad f(t)=e^t\\qquad\\text{(c)}\\quad f(t)=t\\]</span></p>\n"
+    },
+    {
+      "number": 86,
+      "content": "<p><strong>86.</strong></p>\n<p><em>Yêu cầu chung (85–87):</em> Nếu <span class=\"math inline\">\\(f(t)\\)</span> liên tục với <span class=\"math inline\">\\(t\\ge0\\)</span>, <em>biến đổi Laplace</em> của <span class=\"math inline\">\\(f\\)</span> là hàm <span class=\"math inline\">\\(F\\)</span> được định nghĩa bởi <span class=\"math display\">\\[F(s)=\\int_0^\\infty f(t)e^{-st}\\,dt,\\]</span> và tập xác định của <span class=\"math inline\">\\(F\\)</span> gồm tất cả các số <span class=\"math inline\">\\(s\\)</span> để tích phân hội tụ.</p>\n<p>Chứng tỏ nếu <span class=\"math inline\">\\(0\\le f(t)\\le Me^{at}\\)</span> với <span class=\"math inline\">\\(t\\ge0\\)</span>, trong đó <span class=\"math inline\">\\(M,a\\)</span> là các hằng số, thì biến đổi Laplace <span class=\"math inline\">\\(F(s)\\)</span> tồn tại khi <span class=\"math inline\">\\(s&gt;a\\)</span>.</p>\n"
+    },
+    {
+      "number": 87,
+      "content": "<p><strong>87.</strong></p>\n<p><em>Yêu cầu chung (85–87):</em> Nếu <span class=\"math inline\">\\(f(t)\\)</span> liên tục với <span class=\"math inline\">\\(t\\ge0\\)</span>, <em>biến đổi Laplace</em> của <span class=\"math inline\">\\(f\\)</span> là hàm <span class=\"math inline\">\\(F\\)</span> được định nghĩa bởi <span class=\"math display\">\\[F(s)=\\int_0^\\infty f(t)e^{-st}\\,dt,\\]</span> và tập xác định của <span class=\"math inline\">\\(F\\)</span> gồm tất cả các số <span class=\"math inline\">\\(s\\)</span> để tích phân hội tụ.</p>\n<p>Giả sử <span class=\"math inline\">\\(0\\le f(t)\\le Me^{at}\\)</span> và <span class=\"math inline\">\\(0\\le f&#39;(t)\\le Ke^{at}\\)</span> với <span class=\"math inline\">\\(t\\ge0\\)</span>, trong đó <span class=\"math inline\">\\(f&#39;\\)</span> liên tục. Nếu biến đổi Laplace của <span class=\"math inline\">\\(f(t)\\)</span> là <span class=\"math inline\">\\(F(s)\\)</span> và biến đổi Laplace của <span class=\"math inline\">\\(f&#39;(t)\\)</span> là <span class=\"math inline\">\\(G(s)\\)</span>, chứng minh rằng <span class=\"math display\">\\[G(s)=sF(s)-f(0),\\qquad s&gt;a.\\]</span></p>\n"
+    },
+    {
+      "number": 88,
+      "content": "<p><strong>88.</strong></p>\n<p>Nếu <span class=\"math inline\">\\(\\int_{-\\infty}^\\infty f(x)\\,dx\\)</span> hội tụ và <span class=\"math inline\">\\(a,b\\)</span> là các số thực, chứng minh rằng <span class=\"math display\">\\[\\int_{-\\infty}^a f(x)\\,dx+\\int_a^\\infty f(x)\\,dx\n=\\int_{-\\infty}^b f(x)\\,dx+\\int_b^\\infty f(x)\\,dx.\\]</span></p>\n"
+    },
+    {
+      "number": 89,
+      "content": "<p><strong>89.</strong></p>\n<p>Chứng minh rằng <span class=\"math inline\">\\(\\displaystyle\\int_0^\\infty x^2e^{-x^2}\\,dx=\\frac12\\int_0^\\infty e^{-x^2}\\,dx\\)</span>.</p>\n"
+    },
+    {
+      "number": 90,
+      "content": "<p><strong>90.</strong></p>\n<p>Bằng cách diễn giải các tích phân thành diện tích, chứng minh rằng <span class=\"math display\">\\[\\int_0^\\infty e^{-x^2}\\,dx=\\int_0^1\\sqrt{-\\ln y}\\,dy.\\]</span></p>\n"
+    },
+    {
+      "number": 91,
+      "content": "<p><strong>91.</strong></p>\n<p>Tìm giá trị của hằng số <span class=\"math inline\">\\(C\\)</span> để tích phân <span class=\"math display\">\\[\\int_0^\\infty\\left(\\frac1{\\sqrt{x^2+4}}-\\frac C{x+2}\\right)\\,dx\\]</span> hội tụ. Tính tích phân với giá trị <span class=\"math inline\">\\(C\\)</span> đó.</p>\n"
+    },
+    {
+      "number": 92,
+      "content": "<p><strong>92.</strong></p>\n<p>Tìm giá trị của hằng số <span class=\"math inline\">\\(C\\)</span> để tích phân <span class=\"math display\">\\[\\int_0^\\infty\\left(\\frac{x}{x^2+1}-\\frac C{3x+1}\\right)\\,dx\\]</span> hội tụ. Tính tích phân với giá trị <span class=\"math inline\">\\(C\\)</span> đó.</p>\n"
+    },
+    {
+      "number": 93,
+      "content": "<p><strong>93.</strong></p>\n<p>Giả sử <span class=\"math inline\">\\(f\\)</span> liên tục trên <span class=\"math inline\">\\([0,\\infty)\\)</span> và <span class=\"math inline\">\\(\\lim_{x\\to\\infty}f(x)=1\\)</span>. Tích phân <span class=\"math inline\">\\(\\int_0^\\infty f(x)\\,dx\\)</span> có thể hội tụ hay không?</p>\n"
+    },
+    {
+      "number": 94,
+      "content": "<p><strong>94.</strong></p>\n<p>Chứng tỏ nếu <span class=\"math inline\">\\(a&gt;-1\\)</span> và <span class=\"math inline\">\\(b&gt;a+1\\)</span> thì tích phân sau hội tụ: <span class=\"math display\">\\[\\int_0^\\infty\\frac{x^a}{1+x^b}\\,dx.\\]</span></p>\n"
+    }
+  ]
+}

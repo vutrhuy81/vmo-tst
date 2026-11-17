@@ -1,0 +1,514 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage{fontspec}\setmainfont{Latin Modern Roman}\setsansfont{DejaVu Sans}
+\usepackage{amsmath,amssymb,graphicx,geometry,enumitem,needspace,longtable,booktabs,fancyhdr,hyperref}
+\geometry{left=28mm,right=23mm,top=24mm,bottom=24mm}
+\hypersetup{unicode=true,colorlinks=true,linkcolor=black,urlcolor=blue,pdftitle={Giải tích §7.7 — Tính gần đúng tích phân}}
+\setlength{\parindent}{1.2em}\setlength{\parskip}{4pt}\setlength{\headheight}{16pt}
+\pagestyle{fancy}\fancyhf{}\fancyhead[L]{\small Chương 7. Các phương pháp tính tích phân}\fancyhead[R]{\small §7.7}\fancyfoot[C]{\thepage}
+\newcommand{\fig}[3][.68]{\begin{center}\begin{minipage}{\linewidth}\centering\includegraphics[width=#1\linewidth]{assets/#2.png}\\{\small #3}\end{minipage}\end{center}}
+\newcommand{\ex}[1]{\par\medskip\noindent\textbf{Ví dụ #1.}\ }
+\newcommand{\sol}{\par\nopagebreak[4]\noindent\textit{Lời giải.}\ }
+\newcommand{\bt}[1]{\par\smallskip\Needspace{5\baselineskip}\noindent\textbf{#1.}\ }
+\newcommand{\group}[1]{\par\Needspace{11\baselineskip}\medskip\noindent\textbf{#1}\par\nopagebreak[4]}
+\newcommand{\gint}[1]{\left[\!\left[#1\right]\!\right]}
+\allowdisplaybreaks[2]
+\DeclareMathOperator{\sech}{sech}
+\DeclareMathOperator{\csch}{csch}
+\DeclareMathOperator{\arccot}{arccot}
+
+\newcommand{\prj}[1]{\bt{#1}}
+
+\newcommand{\kn}[1]{\bt{#1}}
+\newcommand{\ds}[1]{\bt{#1}}
+\setlength{\emergencystretch}{1em}
+\widowpenalty=10000\clubpenalty=10000
+\begin{document}
+\begin{center}{\Large\bfseries 7.7 — Tính gần đúng tích phân}\end{center}
+Có hai tình huống không thể tìm được giá trị chính xác của một tích phân xác định.
+
+Tình huống thứ nhất xuất phát từ việc muốn tính $\int_a^b f(x)\,dx$ bằng Định lý cơ bản của giải tích thì cần biết một nguyên hàm của $f$. Tuy nhiên, đôi khi việc tìm nguyên hàm là khó, thậm chí không thể thực hiện được (xem Mục 7.5). Chẳng hạn, không thể tính chính xác các tích phân sau:
+\[\int_0^1 e^{x^2}\,dx\qquad\int_{-1}^1\sqrt{1+x^3}\,dx.\]
+Tình huống thứ hai xảy ra khi hàm số được xác định từ một thí nghiệm khoa học thông qua số đọc của thiết bị hoặc dữ liệu thu thập được. Có thể không có công thức cho hàm số đó (xem Ví dụ 5).
+
+Trong cả hai trường hợp, ta cần tìm giá trị gần đúng của tích phân xác định. Ta đã biết một phương pháp như vậy. Nhớ rằng tích phân xác định được định nghĩa là giới hạn của các tổng Riemann, nên có thể dùng bất kỳ tổng Riemann nào để xấp xỉ tích phân: nếu chia $[a,b]$ thành $n$ khoảng con có cùng độ dài $\Delta x=(b-a)/n$, ta có
+\[\int_a^b f(x)\,dx\approx\sum_{i=1}^n f(x_i^*)\,\Delta x,\]
+trong đó $x_i^*$ là một điểm bất kỳ trong khoảng con thứ $i$, $[x_{i-1},x_i]$. Nếu chọn $x_i^*$ là đầu mút trái của khoảng thì $x_i^*=x_{i-1}$ và ta có
+\begin{equation}\int_a^b f(x)\,dx\approx L_n=\sum_{i=1}^n f(x_{i-1})\,\Delta x.\tag{1}\end{equation}
+Nếu $f(x)\ge0$, tích phân biểu diễn một diện tích và Phương trình 1 biểu diễn phép xấp xỉ diện tích đó bằng các hình chữ nhật trong Hình 1(a). Nếu chọn $x_i^*$ là đầu mút phải thì $x_i^*=x_i$ và ta có
+\begin{equation}\int_a^b f(x)\,dx\approx R_n=\sum_{i=1}^n f(x_i)\,\Delta x.\tag{2}\end{equation}
+[Xem Hình 1(b).] Các xấp xỉ $L_n$ và $R_n$ được định nghĩa bởi Phương trình 1 và 2 lần lượt được gọi là \textbf{xấp xỉ đầu mút trái} và \textbf{xấp xỉ đầu mút phải}.
+\fig[.42]{fig1a}{Hình 1(a). Xấp xỉ đầu mút trái.}
+\fig[.42]{fig1b}{Hình 1(b). Xấp xỉ đầu mút phải.}
+
+\section*{Quy tắc trung điểm và quy tắc hình thang}
+Trong Mục 5.2, ta đã xét trường hợp chọn $x_i^*$ trong tổng Riemann là trung điểm $\bar x_i$ của khoảng con $[x_{i-1},x_i]$. Hình 2 minh họa xấp xỉ trung điểm $M_n$ cho diện tích trong Hình 1. Có vẻ $M_n$ là xấp xỉ tốt hơn cả $L_n$ và $R_n$.
+\fig[.42]{fig02}{Hình 2. Xấp xỉ trung điểm.}
+\subsection*{Quy tắc trung điểm}
+\[\int_a^b f(x)\,dx\approx M_n=\Delta x\,[f(\bar x_1)+f(\bar x_2)+\cdots+f(\bar x_n)],\]
+trong đó $\Delta x=(b-a)/n$ và
+\[\bar x_i=\frac12(x_{i-1}+x_i)=\text{trung điểm của }[x_{i-1},x_i].\]
+Một xấp xỉ khác, gọi là \textit{Quy tắc hình thang}, được suy ra bằng cách lấy trung bình các xấp xỉ trong Phương trình 1 và 2:
+\begin{align*}
+\int_a^b f(x)\,dx
+&\approx\frac12\left[\sum_{i=1}^n f(x_{i-1})\Delta x+\sum_{i=1}^n f(x_i)\Delta x\right]\\
+&=\frac{\Delta x}{2}\left[\sum_{i=1}^n\bigl(f(x_{i-1})+f(x_i)\bigr)\right]\\
+&=\frac{\Delta x}{2}\bigl[(f(x_0)+f(x_1))+(f(x_1)+f(x_2))\\
+&\qquad\qquad+\cdots+(f(x_{n-1})+f(x_n))\bigr]\\
+&=\frac{\Delta x}{2}[f(x_0)+2f(x_1)+2f(x_2)+\cdots+2f(x_{n-1})+f(x_n)].
+\end{align*}
+\subsection*{Quy tắc hình thang}
+\[\int_a^b f(x)\,dx\approx T_n
+=\frac{\Delta x}{2}[f(x_0)+2f(x_1)+2f(x_2)+\cdots+2f(x_{n-1})+f(x_n)],\]
+trong đó $\Delta x=(b-a)/n$ và $x_i=a+i\Delta x$.
+
+Lý do của tên gọi Quy tắc hình thang được thể hiện trong Hình 3, minh họa trường hợp $f(x)\ge0$ và $n=4$. Diện tích hình thang nằm phía trên khoảng con thứ $i$ là
+\[\Delta x\left(\frac{f(x_{i-1})+f(x_i)}2\right)
+=\frac{\Delta x}{2}[f(x_{i-1})+f(x_i)],\]
+và nếu cộng diện tích tất cả các hình thang này, ta được vế phải của Quy tắc hình thang.
+\fig[.42]{fig03}{Hình 3. Xấp xỉ hình thang.}
+
+\ex{1} Dùng (a) Quy tắc hình thang và (b) Quy tắc trung điểm với $n=5$ để tính gần đúng tích phân $\int_1^2(1/x)\,dx$.
+\sol (a) Với $n=5$, $a=1$ và $b=2$, ta có $\Delta x=(2-1)/5=0.2$, nên Quy tắc hình thang cho
+\begin{align*}
+\int_1^2\frac1x\,dx&\approx T_5\\
+&=\frac{0.2}{2}[f(1)+2f(1.2)+2f(1.4)+2f(1.6)+2f(1.8)+f(2)]\\
+&=0.1\left(\frac11+\frac2{1.2}+\frac2{1.4}+\frac2{1.6}+\frac2{1.8}+\frac12\right)\\
+&\approx0.695635.
+\end{align*}
+Phép xấp xỉ này được minh họa trong Hình 4.
+\fig[.4]{fig04}{Hình 4. Quy tắc hình thang với $n=5$.}
+(b) Trung điểm của năm khoảng con là $1.1$, $1.3$, $1.5$, $1.7$ và $1.9$, nên Quy tắc trung điểm cho
+\begin{align*}
+\int_1^2\frac1x\,dx&\approx\Delta x[f(1.1)+f(1.3)+f(1.5)+f(1.7)+f(1.9)]\\
+&=\frac15\left(\frac1{1.1}+\frac1{1.3}+\frac1{1.5}+\frac1{1.7}+\frac1{1.9}\right)\\
+&\approx0.691908.
+\end{align*}
+Phép xấp xỉ này được minh họa trong Hình 5.
+\fig[.4]{fig05}{Hình 5. Quy tắc trung điểm với $n=5$.}
+
+\section*{Chặn sai số của quy tắc trung điểm và hình thang}
+Trong Ví dụ 1, ta cố ý chọn một tích phân có thể tính tường minh để xem Quy tắc hình thang và Quy tắc trung điểm chính xác đến mức nào. Theo Định lý cơ bản của giải tích,
+\[\int_1^2\frac1x\,dx=\ln x\big|_1^2=\ln2=0.693147\ldots\]
+Sai số khi dùng một xấp xỉ được định nghĩa là lượng cần cộng vào giá trị gần đúng để thu được giá trị chính xác:
+\[\int_a^b f(x)\,dx=\text{giá trị gần đúng}+\text{sai số}.\]
+Từ các giá trị trong Ví dụ 1, ta thấy sai số của các xấp xỉ hình thang và trung điểm với $n=5$ là
+\[E_T\approx-0.002488\qquad\text{và}\qquad E_M\approx0.001239.\]
+Tổng quát, ta có
+\[E_T=\int_a^b f(x)\,dx-T_n\qquad\text{và}\qquad
+E_M=\int_a^b f(x)\,dx-M_n.\]
+Các bảng sau trình bày kết quả tính toán tương tự Ví dụ 1, nhưng với $n=5,10,20$, đồng thời xét cả xấp xỉ đầu mút trái và phải, bên cạnh Quy tắc hình thang và Quy tắc trung điểm.
+
+\textit{Các giá trị gần đúng của $\int_1^2(1/x)\,dx$:}
+\begin{center}\begin{tabular}{r r r r r}\toprule
+$n$&$L_n$&$R_n$&$T_n$&$M_n$\\\midrule
+5&0.745635&0.645635&0.695635&0.691908\\
+10&0.718771&0.668771&0.693771&0.692835\\
+20&0.705803&0.680803&0.693303&0.693069\\\bottomrule
+\end{tabular}\end{center}
+\textit{Các sai số tương ứng:}
+\begin{center}\begin{tabular}{r r r r r}\toprule
+$n$&$E_L$&$E_R$&$E_T$&$E_M$\\\midrule
+5&$-0.052488$&0.047512&$-0.002488$&0.001239\\
+10&$-0.025624$&0.024376&$-0.000624$&0.000312\\
+20&$-0.012656$&0.012344&$-0.000156$&0.000078\\\bottomrule
+\end{tabular}\end{center}
+Từ các bảng này, ta có thể đưa ra một số nhận xét:
+\begin{enumerate}
+\item Với mọi phương pháp, khi tăng $n$, ta nhận được xấp xỉ chính xác hơn. (Nhưng giá trị $n$ rất lớn dẫn đến quá nhiều phép tính số học, nên phải lưu ý sai số làm tròn tích lũy.)
+\item Sai số của xấp xỉ đầu mút trái và phải trái dấu nhau và dường như giảm khoảng 2 lần khi tăng $n$ gấp đôi.
+\item Quy tắc hình thang và Quy tắc trung điểm chính xác hơn nhiều so với các xấp xỉ đầu mút.
+\item Sai số của Quy tắc hình thang và Quy tắc trung điểm trái dấu nhau và dường như giảm khoảng 4 lần khi tăng $n$ gấp đôi.
+\item Độ lớn sai số của Quy tắc trung điểm bằng khoảng một nửa độ lớn sai số của Quy tắc hình thang.
+\end{enumerate}
+\textit{Ghi chú.} Các nhận xét này đúng trong phần lớn trường hợp.
+
+Hình 6 cho thấy vì sao ta thường có thể kỳ vọng Quy tắc trung điểm chính xác hơn Quy tắc hình thang. Diện tích một hình chữ nhật điển hình trong Quy tắc trung điểm bằng diện tích hình thang $ABCD$, có cạnh trên tiếp xúc với đồ thị tại $P$. Diện tích hình thang này gần diện tích dưới đồ thị hơn diện tích hình thang $AQRD$ dùng trong Quy tắc hình thang. [Sai số trung điểm (tô đỏ) nhỏ hơn sai số hình thang (tô xanh).]
+\fig[.3]{fig06}{Hình 6. So sánh sai số trung điểm và hình thang.}
+Các nhận xét trên được xác nhận bởi những ước lượng sai số sau, được chứng minh trong các sách về giải tích số. Chú ý rằng Nhận xét 4 tương ứng với $n^2$ ở mỗi mẫu số, vì $(2n)^2=4n^2$. Việc các ước lượng phụ thuộc vào độ lớn đạo hàm cấp hai không có gì bất ngờ nếu xem Hình 6, vì $f''(x)$ đo mức độ cong của đồ thị. [Nhớ rằng $f''(x)$ đo tốc độ thay đổi hệ số góc của $y=f(x)$.]
+
+\subsection*{3. Chặn sai số}
+Giả sử $|f''(x)|\le K$ với $a\le x\le b$. Nếu $E_T$ và $E_M$ là sai số của Quy tắc hình thang và Quy tắc trung điểm thì
+\begin{equation}
+|E_T|\le\frac{K(b-a)^3}{12n^2}\qquad\text{và}\qquad
+|E_M|\le\frac{K(b-a)^3}{24n^2}.\tag{3}
+\end{equation}
+Hãy áp dụng ước lượng sai số này cho xấp xỉ hình thang trong Ví dụ 1. Nếu $f(x)=1/x$ thì $f'(x)=-1/x^2$ và $f''(x)=2/x^3$. Vì $1\le x\le2$, ta có $1/x\le1$, nên
+\[|f''(x)|=\left|\frac2{x^3}\right|\le\frac2{1^3}=2.\]
+Vì vậy, lấy $K=2$, $a=1$, $b=2$ và $n=5$ trong ước lượng sai số (3), ta thấy
+\[|E_T|\le\frac{2(2-1)^3}{12(5)^2}=\frac1{150}\approx0.006667.\]
+\textit{Ghi chú.} Có thể chọn $K$ là bất kỳ số nào lớn hơn tất cả các giá trị $|f''(x)|$, nhưng $K$ càng nhỏ thì chặn sai số càng tốt.
+
+So sánh ước lượng sai số $0.006667$ này với sai số thực tế khoảng $0.002488$, ta thấy sai số thực tế có thể nhỏ hơn đáng kể so với chặn trên do (3) cho.
+
+\ex{2} Cần chọn $n$ lớn đến mức nào để bảo đảm các xấp xỉ hình thang và trung điểm của $\int_1^2(1/x)\,dx$ có sai số nhỏ hơn $0.0001$?
+\sol Trong phép tính trước, ta đã thấy $|f''(x)|\le2$ với $1\le x\le2$, nên có thể lấy $K=2$, $a=1$ và $b=2$ trong (3). Độ chính xác trong phạm vi $0.0001$ có nghĩa là độ lớn sai số phải nhỏ hơn $0.0001$. Vì vậy, chọn $n$ sao cho
+\[\frac{2(1)^3}{12n^2}<0.0001.\]
+Giải bất đẳng thức theo $n$, ta được
+\[n^2>\frac2{12(0.0001)},\qquad n>\frac1{\sqrt{0.0006}}\approx40.8.\]
+Do đó, $n=41$ bảo đảm độ chính xác mong muốn.
+
+\textit{Ghi chú.} Có thể một giá trị $n$ nhỏ hơn cũng đủ, nhưng 41 là giá trị nhỏ nhất mà công thức chặn sai số có thể bảo đảm độ chính xác trong phạm vi $0.0001$.
+
+Để đạt cùng độ chính xác bằng Quy tắc trung điểm, chọn $n$ sao cho
+\[\frac{2(1)^3}{24n^2}<0.0001,\qquad n>\frac1{\sqrt{0.0012}}\approx29.\]
+
+\ex{3} (a) Dùng Quy tắc trung điểm với $n=10$ để tính gần đúng $\int_0^1e^{x^2}\,dx$.
+
+(b) Cho một chặn trên của sai số trong phép xấp xỉ này.
+\sol (a) Vì $a=0$, $b=1$ và $n=10$, Quy tắc trung điểm cho
+\begin{align*}
+\int_0^1e^{x^2}\,dx&\approx\Delta x[f(0.05)+f(0.15)+\cdots+f(0.85)+f(0.95)]\\
+&=0.1[e^{0.0025}+e^{0.0225}+e^{0.0625}+e^{0.1225}+e^{0.2025}+e^{0.3025}\\
+&\qquad+e^{0.4225}+e^{0.5625}+e^{0.7225}+e^{0.9025}]\\
+&\approx1.460393.
+\end{align*}
+Hình 7 minh họa phép xấp xỉ này.
+\fig[.35]{fig07}{Hình 7. Xấp xỉ trung điểm trong Ví dụ 3.}
+(b) Vì $f(x)=e^{x^2}$, ta có $f'(x)=2xe^{x^2}$ và $f''(x)=(2+4x^2)e^{x^2}$. Đồng thời, do $0\le x\le1$, ta có $x^2\le1$, nên
+\[0\le f''(x)=(2+4x^2)e^{x^2}\le6e.\]
+Lấy $K=6e$, $a=0$, $b=1$ và $n=10$ trong (3), ta thấy một chặn trên của sai số là
+\[\frac{6e(1)^3}{24(10)^2}=\frac e{400}\approx0.007.\]
+\textit{Ghi chú.} Các ước lượng sai số cho chặn trên của sai số. Đây là những tình huống xấu nhất về mặt lý thuyết. Sai số thực tế trong trường hợp này vào khoảng $0.0023$.
+\section*{Quy tắc Simpson}
+Một quy tắc tính gần đúng tích phân khác được suy ra bằng cách dùng các parabol thay cho các đoạn thẳng để xấp xỉ đường cong. Như trước, chia $[a,b]$ thành $n$ khoảng con có cùng độ dài $h=\Delta x=(b-a)/n$, nhưng lần này giả sử $n$ là số chẵn. Trên mỗi cặp khoảng liên tiếp, ta xấp xỉ đường cong $y=f(x)\ge0$ bằng một parabol như Hình 8. Nếu $y_i=f(x_i)$ thì $P_i(x_i,y_i)$ là điểm trên đường cong nằm phía trên $x_i$. Một parabol điển hình đi qua ba điểm liên tiếp $P_i$, $P_{i+1}$ và $P_{i+2}$.
+\fig[.9]{fig08}{Hình 8. Xấp xỉ bằng các cung parabol.}
+Để đơn giản hóa phép tính, trước hết xét trường hợp $x_0=-h$, $x_1=0$ và $x_2=h$. (Xem Hình 9.) Phương trình parabol qua $P_0$, $P_1$ và $P_2$ có dạng $y=Ax^2+Bx+C$, nên diện tích dưới parabol từ $x=-h$ đến $x=h$ là
+\begin{align*}
+\int_{-h}^h(Ax^2+Bx+C)\,dx
+&=2\int_0^h(Ax^2+C)\,dx=2\left[A\frac{x^3}{3}+Cx\right]_0^h\\
+&=2\left(A\frac{h^3}{3}+Ch\right)=\frac h3(2Ah^2+6C).
+\end{align*}
+\fig[.45]{fig09}{Hình 9. Parabol qua ba điểm cách đều.}
+\textit{Ghi chú.} Ở đây ta dùng Định lý 5.5.7. Chú ý rằng $Ax^2+C$ là hàm chẵn, còn $Bx$ là hàm lẻ.
+
+Vì parabol đi qua $P_0(-h,y_0)$, $P_1(0,y_1)$ và $P_2(h,y_2)$ nên
+\begin{align*}
+y_0&=A(-h)^2+B(-h)+C=Ah^2-Bh+C,\\
+y_1&=C,\\
+y_2&=Ah^2+Bh+C.
+\end{align*}
+Do đó $y_0+4y_1+y_2=2Ah^2+6C$. Vậy có thể viết lại diện tích dưới parabol là
+\[\frac h3(y_0+4y_1+y_2).\]
+Tịnh tiến ngang parabol không làm thay đổi diện tích dưới nó. Điều này có nghĩa là diện tích dưới parabol qua $P_0$, $P_1$, $P_2$ từ $x=x_0$ đến $x=x_2$ trong Hình 8 vẫn bằng
+\[\frac h3(y_0+4y_1+y_2).\]
+Tương tự, diện tích dưới parabol qua $P_2$, $P_3$, $P_4$ từ $x=x_2$ đến $x=x_4$ là
+\[\frac h3(y_2+4y_3+y_4).\]
+Nếu tính diện tích dưới tất cả các parabol theo cách này rồi cộng các kết quả, ta được
+\begin{align*}
+\int_a^b f(x)\,dx&\approx\frac h3(y_0+4y_1+y_2)+\frac h3(y_2+4y_3+y_4)\\
+&\qquad+\cdots+\frac h3(y_{n-2}+4y_{n-1}+y_n)\\
+&=\frac h3(y_0+4y_1+2y_2+4y_3+2y_4+\cdots+2y_{n-2}+4y_{n-1}+y_n).
+\end{align*}
+Mặc dù được suy ra cho trường hợp $f(x)\ge0$, đây vẫn là một xấp xỉ hợp lý cho mọi hàm liên tục $f$ và được gọi là \textit{Quy tắc Simpson}, theo tên nhà toán học Anh Thomas Simpson (1710–1761). Chú ý quy luật của các hệ số: $1,4,2,4,2,4,2,\ldots,4,2,4,1$.
+
+\textit{Thomas Simpson.} Thomas Simpson vốn là thợ dệt, tự học toán và sau đó trở thành một trong những nhà toán học Anh xuất sắc nhất thế kỷ XVIII. Quy tắc mà ta gọi là Quy tắc Simpson thực ra đã được Cavalieri và Gregory biết đến từ thế kỷ XVII, nhưng Simpson đã phổ biến nó trong cuốn \textit{Mathematical Dissertations} (1743).
+
+\subsection*{Quy tắc Simpson}
+\begin{align*}
+\int_a^b f(x)\,dx&\approx S_n\\
+&=\frac{\Delta x}{3}[f(x_0)+4f(x_1)+2f(x_2)+4f(x_3)+\cdots\\
+&\qquad\qquad+2f(x_{n-2})+4f(x_{n-1})+f(x_n)],
+\end{align*}
+trong đó $n$ chẵn và $\Delta x=(b-a)/n$.
+
+\ex{4} Dùng Quy tắc Simpson với $n=10$ để tính gần đúng $\int_1^2(1/x)\,dx$.
+\sol Đặt $f(x)=1/x$, $n=10$ và $\Delta x=0.1$ trong Quy tắc Simpson, ta được
+\begin{align*}
+\int_1^2\frac1x\,dx&\approx S_{10}\\
+&=\frac{\Delta x}{3}[f(1)+4f(1.1)+2f(1.2)+4f(1.3)+\cdots\\
+&\qquad\qquad+2f(1.8)+4f(1.9)+f(2)]\\
+&=\frac{0.1}{3}\left(\frac11+\frac4{1.1}+\frac2{1.2}+\frac4{1.3}+\frac2{1.4}+\frac4{1.5}\right.\\
+&\qquad\qquad\left.+\frac2{1.6}+\frac4{1.7}+\frac2{1.8}+\frac4{1.9}+\frac12\right)\\
+&\approx0.693150.
+\end{align*}
+Chú ý rằng trong Ví dụ 4, Quy tắc Simpson cho xấp xỉ $S_{10}\approx0.693150$ gần giá trị thật của tích phân $\ln2\approx0.693147\ldots$ hơn nhiều so với Quy tắc hình thang ($T_{10}\approx0.693771$) hoặc Quy tắc trung điểm ($M_{10}\approx0.692835$). Thực ra (xem Bài tập 50), các xấp xỉ Simpson là trung bình có trọng số của các xấp xỉ hình thang và trung điểm:
+\[S_{2n}=\frac13T_n+\frac23M_n.\]
+(Nhớ rằng $E_T$ và $E_M$ thường trái dấu nhau, và $|E_M|$ bằng khoảng một nửa $|E_T|$.)
+
+Trong nhiều ứng dụng của giải tích, ta cần tính tích phân ngay cả khi không biết công thức tường minh của $y$ theo $x$. Hàm số có thể được cho bằng đồ thị hoặc bảng giá trị của dữ liệu thu thập được. Nếu có cơ sở cho rằng các giá trị không thay đổi quá nhanh, vẫn có thể dùng Quy tắc Simpson (hoặc Quy tắc trung điểm hay hình thang) để tìm giá trị gần đúng của $\int_a^b y\,dx$, tích phân của $y$ theo $x$.
+
+\ex{5} Hình 10 biểu diễn lưu lượng dữ liệu trên tuyến kết nối từ Hoa Kỳ đến SWITCH, mạng học thuật và nghiên cứu Thụy Sĩ, trong một ngày trọn vẹn. $D(t)$ là thông lượng dữ liệu, đo bằng megabit trên giây (Mb/s). Dùng Quy tắc Simpson để ước lượng tổng lượng dữ liệu được truyền trên tuyến từ nửa đêm đến trưa hôm đó.
+\fig[.75]{fig10}{Hình 10. Thông lượng dữ liệu; $t$ tính bằng giờ.}
+\sol Để các đơn vị nhất quán, vì $D(t)$ đo bằng megabit trên giây, ta đổi đơn vị của $t$ từ giờ sang giây. Gọi $A(t)$ là lượng dữ liệu (megabit) đã truyền tính đến thời điểm $t$, với $t$ tính bằng giây; khi đó $A'(t)=D(t)$. Theo Định lý về độ biến thiên thuần (xem Mục 5.4), tổng lượng dữ liệu truyền đến trưa (khi $t=12\times60^2=43\,200$) là
+\[A(43\,200)=\int_0^{43\,200}D(t)\,dt.\]
+Ta ước lượng các giá trị $D(t)$ cách nhau một giờ từ đồ thị và lập bảng.
+\begin{center}\begin{tabular}{r r r r r r}\toprule
+$t$ (giờ)&$t$ (giây)&$D(t)$&$t$ (giờ)&$t$ (giây)&$D(t)$\\\midrule
+0&0&3.2&7&25\,200&1.3\\
+1&3\,600&2.7&8&28\,800&2.8\\
+2&7\,200&1.9&9&32\,400&5.7\\
+3&10\,800&1.7&10&36\,000&7.1\\
+4&14\,400&1.3&11&39\,600&7.7\\
+5&18\,000&1.0&12&43\,200&7.9\\
+6&21\,600&1.1&&&\\\bottomrule
+\end{tabular}\end{center}
+Sau đó dùng Quy tắc Simpson với $n=12$ và $\Delta t=3600$ để ước lượng tích phân:
+\begin{align*}
+\int_0^{43\,200}D(t)\,dt
+&\approx\frac{\Delta t}{3}[D(0)+4D(3600)+2D(7200)+\cdots\\
+&\qquad\qquad+4D(39\,600)+D(43\,200)]\\
+&\approx\frac{3600}{3}[3.2+4(2.7)+2(1.9)+4(1.7)+2(1.3)+4(1.0)\\
+&\qquad+2(1.1)+4(1.3)+2(2.8)+4(5.7)+2(7.1)+4(7.7)+7.9]\\
+&=143\,880.
+\end{align*}
+\textit{Chú thích bản dịch.} Ở vế trái dòng tính gần đúng này, nguồn in $A(t)$; theo định nghĩa và các giá trị dùng ở vế phải, hàm dưới dấu tích phân phải là $D(t)$ như đã viết ở đây.
+
+Vậy tổng lượng dữ liệu truyền từ nửa đêm đến trưa vào khoảng $144\,000$ megabit, hay 144 gigabit (18 gigabyte).
+
+\section*{Chặn sai số của quy tắc Simpson}
+Bảng thứ nhất sau đây so sánh Quy tắc Simpson với Quy tắc trung điểm đối với $\int_1^2(1/x)\,dx$, có giá trị khoảng $0.69314718$. Bảng thứ hai cho thấy sai số $E_S$ của Quy tắc Simpson giảm khoảng 16 lần khi tăng $n$ gấp đôi. (Bài tập 27 và 28 yêu cầu kiểm tra điều này với hai tích phân khác.) Điều đó phù hợp với sự xuất hiện của $n^4$ ở mẫu số trong ước lượng sai số sau. Ước lượng này tương tự các ước lượng ở (3) cho Quy tắc hình thang và trung điểm, nhưng dùng đạo hàm cấp bốn của $f$.
+\begin{center}\begin{tabular}{r r r}\toprule
+$n$&$M_n$&$S_n$\\\midrule
+4&0.69121989&0.69315453\\
+8&0.69266055&0.69314765\\
+16&0.69302521&0.69314721\\\bottomrule
+\end{tabular}\end{center}
+\begin{center}\begin{tabular}{r r r}\toprule
+$n$&$E_M$&$E_S$\\\midrule
+4&0.00192729&$-0.00000735$\\
+8&0.00048663&$-0.00000047$\\
+16&0.00012197&$-0.00000003$\\\bottomrule
+\end{tabular}\end{center}
+\subsection*{4. Chặn sai số của quy tắc Simpson}
+Giả sử $|f^{(4)}(x)|\le K$ với $a\le x\le b$. Nếu $E_S$ là sai số khi dùng Quy tắc Simpson thì
+\begin{equation}|E_S|\le\frac{K(b-a)^5}{180n^4}.\tag{4}\end{equation}
+
+\ex{6} Cần chọn $n$ lớn đến mức nào để bảo đảm xấp xỉ Simpson của $\int_1^2(1/x)\,dx$ có sai số nhỏ hơn $0.0001$?
+\sol Nếu $f(x)=1/x$ thì $f^{(4)}(x)=24/x^5$. Vì $x\ge1$, ta có $1/x\le1$, nên
+\[|f^{(4)}(x)|=\left|\frac{24}{x^5}\right|\le24.\]
+Vậy có thể lấy $K=24$ trong (4). Để sai số nhỏ hơn $0.0001$, cần chọn $n$ sao cho
+\[\frac{24(1)^5}{180n^4}<0.0001.\]
+Suy ra
+\[n^4>\frac{24}{180(0.0001)},\qquad n>\frac1{\sqrt[4]{0.00075}}\approx6.04.\]
+Do đó, $n=8$ ($n$ phải chẵn) cho độ chính xác mong muốn. (So sánh với Ví dụ 2, ở đó ta được $n=41$ cho Quy tắc hình thang và $n=29$ cho Quy tắc trung điểm.)
+
+\textit{Tính tích phân số thích nghi.} Nhiều máy tính cầm tay và phần mềm có thuật toán tích hợp để tính gần đúng tích phân xác định. Một số thuật toán dùng Quy tắc Simpson; các thuật toán khác dùng những kỹ thuật tinh vi hơn, chẳng hạn tích phân số thích nghi. Nghĩa là nếu hàm số dao động mạnh hơn nhiều trên một phần của khoảng so với những phần khác, phần đó sẽ được chia thành nhiều khoảng con hơn. Chiến lược này giảm số phép tính cần thực hiện để đạt độ chính xác đã định.
+
+\ex{7} (a) Dùng Quy tắc Simpson với $n=10$ để tính gần đúng $\int_0^1e^{x^2}\,dx$.
+
+(b) Ước lượng sai số trong phép xấp xỉ này.
+\sol (a) Nếu $n=10$ thì $\Delta x=0.1$, và Quy tắc Simpson cho
+\begin{align*}
+\int_0^1e^{x^2}\,dx&\approx\frac{\Delta x}{3}[f(0)+4f(0.1)+2f(0.2)+\cdots\\
+&\qquad\qquad+2f(0.8)+4f(0.9)+f(1)]\\
+&=\frac{0.1}{3}[e^0+4e^{0.01}+2e^{0.04}+4e^{0.09}+2e^{0.16}\\
+&\qquad+4e^{0.25}+2e^{0.36}+4e^{0.49}+2e^{0.64}+4e^{0.81}+e^1]\\
+&\approx1.462681.
+\end{align*}
+(b) Đạo hàm cấp bốn của $f(x)=e^{x^2}$ là
+\[f^{(4)}(x)=(12+48x^2+16x^4)e^{x^2}.\]
+Do $0\le x\le1$, ta có
+\[0\le f^{(4)}(x)\le(12+48+16)e^1=76e.\]
+Vậy đặt $K=76e$, $a=0$, $b=1$ và $n=10$ trong (4), ta thấy sai số có độ lớn không vượt quá
+\[\frac{76e(1)^5}{180(10)^4}\approx0.000115.\]
+(So sánh với Ví dụ 3.) Do đó, chính xác đến ba chữ số sau dấu thập phân,
+\[\int_0^1e^{x^2}\,dx\approx1.463.\]
+Hình 11 minh họa phép tính trong Ví dụ 7. Chú ý rằng các cung parabol gần đồ thị $y=e^{x^2}$ đến mức hầu như không thể phân biệt được.
+\fig[.35]{fig11}{Hình 11. Xấp xỉ Simpson trong Ví dụ 7.}
+\section*{7.7 — Bài tập}
+Trong các bài tập này, làm tròn kết quả đến sáu chữ số sau dấu thập phân, trừ khi có chỉ dẫn khác.
+
+\par\noindent\begin{minipage}[t]{\linewidth}
+\bt{1} Cho $I=\int_0^4 f(x)\,dx$, trong đó $f$ có đồ thị như hình.
+
+(a) Dùng đồ thị để tìm $L_2$, $R_2$ và $M_2$.
+
+(b) Các giá trị này nhỏ hơn hay lớn hơn $I$?
+
+(c) Dùng đồ thị để tìm $T_2$. Giá trị này so với $I$ như thế nào?
+
+(d) Với mọi $n$, sắp xếp $L_n$, $R_n$, $M_n$, $T_n$ và $I$ theo thứ tự tăng dần.
+\fig[.43]{exercise01}{Đồ thị dùng cho Bài 1.}
+
+\end{minipage}\par
+\par\noindent\begin{minipage}[t]{\linewidth}
+\bt{2} Các xấp xỉ đầu mút trái, đầu mút phải, hình thang và trung điểm được dùng để ước lượng $\int_0^2 f(x)\,dx$, trong đó $f$ có đồ thị như hình. Các giá trị gần đúng là $0.7811$, $0.8675$, $0.8632$ và $0.9540$, với cùng số khoảng con trong mỗi trường hợp.
+
+(a) Mỗi giá trị được tạo bởi quy tắc nào?
+
+(b) Giá trị thật của $\int_0^2 f(x)\,dx$ nằm giữa hai xấp xỉ nào?
+\fig[.48]{exercise02}{Đồ thị dùng cho Bài 2.}
+
+\end{minipage}\par
+\bt{3} [Đồ thị] Ước lượng $\int_0^1\cos(x^2)\,dx$ bằng (a) Quy tắc hình thang và (b) Quy tắc trung điểm, mỗi quy tắc với $n=4$. Từ đồ thị của hàm dưới dấu tích phân, xác định các kết quả nhỏ hơn hay lớn hơn giá trị thật. Có thể kết luận gì về giá trị thật của tích phân?
+
+\bt{4} [Đồ thị] Vẽ đồ thị $f(x)=\sin(\tfrac12x^2)$ trong cửa sổ $[0,1]\times[0,0.5]$ và đặt $I=\int_0^1 f(x)\,dx$.
+
+(a) Dùng đồ thị để xác định $L_2$, $R_2$, $M_2$, $T_2$ nhỏ hơn hay lớn hơn $I$.
+
+(b) Với mọi $n$, sắp xếp $L_n$, $R_n$, $M_n$, $T_n$ và $I$ theo thứ tự tăng dần.
+
+(c) Tính $L_5$, $R_5$, $M_5$, $T_5$. Từ đồ thị, theo bạn giá trị nào xấp xỉ $I$ tốt nhất?
+
+\group{5–6}
+Dùng (a) Quy tắc trung điểm và (b) Quy tắc Simpson để tính gần đúng tích phân với giá trị $n$ đã cho. So sánh kết quả với giá trị chính xác để xác định sai số của từng phép xấp xỉ.
+\bt{5} $\displaystyle\int_0^\pi x\sin x\,dx,\quad n=6$.
+\bt{6} $\displaystyle\int_0^2\frac{x}{\sqrt{1+x^2}}\,dx,\quad n=8$.
+
+\group{7–18}
+Dùng (a) Quy tắc hình thang, (b) Quy tắc trung điểm và (c) Quy tắc Simpson để tính gần đúng tích phân với giá trị $n$ đã cho.
+\bt{7} $\displaystyle\int_0^1\sqrt{1+x^3}\,dx,\quad n=4$.
+\bt{8} $\displaystyle\int_1^4\sin\sqrt{x}\,dx,\quad n=6$.
+\bt{9} $\displaystyle\int_0^1\sqrt{e^x-1}\,dx,\quad n=10$.
+\bt{10} $\displaystyle\int_0^2\sqrt[3]{1-x^2}\,dx,\quad n=10$.
+\bt{11} $\displaystyle\int_{-1}^2 e^{x+\cos x}\,dx,\quad n=6$.
+\bt{12} $\displaystyle\int_1^3 e^{1/x}\,dx,\quad n=8$.
+\bt{13} $\displaystyle\int_0^4\sqrt y\cos y\,dy,\quad n=8$.
+\bt{14} $\displaystyle\int_2^3\frac1{\ln t}\,dt,\quad n=10$.
+\bt{15} $\displaystyle\int_0^1\frac{x^2}{1+x^4}\,dx,\quad n=10$.
+\bt{16} $\displaystyle\int_1^3\frac{\sin t}{t}\,dt,\quad n=4$.
+\bt{17} $\displaystyle\int_0^4\ln(1+e^x)\,dx,\quad n=8$.
+\bt{18} $\displaystyle\int_0^1\sqrt{x+x^3}\,dx,\quad n=10$.
+
+\bt{19} (a) Tìm các xấp xỉ $T_8$ và $M_8$ của $\int_0^1\cos(x^2)\,dx$.
+
+(b) Ước lượng sai số của các xấp xỉ ở phần (a).
+
+(c) Cần chọn $n$ lớn đến mức nào để các xấp xỉ $T_n$ và $M_n$ của tích phân ở phần (a) có sai số nhỏ hơn $0.0001$?
+
+\bt{20} (a) Tìm các xấp xỉ $T_{10}$ và $M_{10}$ của $\int_1^2 e^{1/x}\,dx$.
+
+(b) Ước lượng sai số của các xấp xỉ ở phần (a).
+
+(c) Cần chọn $n$ lớn đến mức nào để các xấp xỉ $T_n$ và $M_n$ của tích phân ở phần (a) có sai số nhỏ hơn $0.0001$?
+
+\bt{21} (a) Tìm các xấp xỉ $T_{10}$, $M_{10}$, $S_{10}$ của $\int_0^\pi\sin x\,dx$ và các sai số tương ứng $E_T$, $E_M$, $E_S$.
+
+(b) So sánh sai số thực tế ở phần (a) với các ước lượng sai số do (3) và (4) cho.
+
+(c) Cần chọn $n$ lớn đến mức nào để các xấp xỉ $T_n$, $M_n$, $S_n$ của tích phân ở phần (a) có sai số nhỏ hơn $0.00001$?
+
+\bt{22} Cần chọn $n$ lớn đến mức nào để bảo đảm xấp xỉ Simpson của $\int_0^1e^{x^2}\,dx$ có sai số nhỏ hơn $0.00001$?
+
+\bt{23} [Công nghệ] Khó khăn của việc ước lượng sai số là thường rất khó tính đạo hàm cấp bốn và tìm bằng tay một chặn trên tốt $K$ của $|f^{(4)}(x)|$. Nhưng phần mềm toán học có thể tính và vẽ đồ thị $f^{(4)}$ dễ dàng, nên ta có thể tìm $K$ từ đồ thị do máy tạo ra. Bài này xét các xấp xỉ của $I=\int_0^{2\pi}f(x)\,dx$, với $f(x)=e^{\cos x}$. Ở các phần (b), (d), (g), làm tròn kết quả đến 10 chữ số sau dấu thập phân.
+
+(a) Dùng đồ thị để tìm một chặn trên tốt của $|f''(x)|$.
+
+(b) Dùng $M_{10}$ để tính gần đúng $I$.
+
+(c) Dùng phần (a) để ước lượng sai số ở phần (b).
+
+(d) Dùng máy tính cầm tay hoặc máy tính để tính gần đúng $I$.
+
+(e) Sai số thực tế so với ước lượng sai số ở phần (c) như thế nào?
+
+(f) Dùng đồ thị để tìm một chặn trên tốt của $|f^{(4)}(x)|$.
+
+(g) Dùng $S_{10}$ để tính gần đúng $I$.
+
+(h) Dùng phần (f) để ước lượng sai số ở phần (g).
+
+(i) Sai số thực tế so với ước lượng sai số ở phần (h) như thế nào?
+
+(j) Cần chọn $n$ lớn đến mức nào để bảo đảm độ lớn sai số khi dùng $S_n$ nhỏ hơn $0.0001$?
+
+\bt{24} [Công nghệ] Làm lại Bài 23 cho tích phân $I=\int_{-1}^1\sqrt{4-x^3}\,dx$.
+
+\group{25–26}
+Tìm các xấp xỉ $L_n$, $R_n$, $T_n$, $M_n$ với $n=5,10,20$. Sau đó tính các sai số tương ứng $E_L$, $E_R$, $E_T$, $E_M$. (Có thể dùng lệnh tính tổng trong một hệ thống đại số máy tính.) Có thể đưa ra những nhận xét nào? Đặc biệt, các sai số thay đổi thế nào khi tăng $n$ gấp đôi?
+\bt{25} $\displaystyle\int_0^1xe^x\,dx$.
+\bt{26} $\displaystyle\int_1^2\frac1{x^2}\,dx$.
+
+\group{27–28}
+Tìm các xấp xỉ $T_n$, $M_n$, $S_n$ với $n=6$ và $n=12$. Sau đó tính các sai số tương ứng $E_T$, $E_M$, $E_S$. (Có thể dùng lệnh tính tổng trong một hệ thống đại số máy tính.) Có thể đưa ra những nhận xét nào? Đặc biệt, các sai số thay đổi thế nào khi tăng $n$ gấp đôi?
+\bt{27} $\displaystyle\int_0^2x^4\,dx$.
+\bt{28} $\displaystyle\int_1^4\frac1{\sqrt{x}}\,dx$.
+
+\par\noindent\begin{minipage}[t]{\linewidth}
+\bt{29} Ước lượng diện tích dưới đồ thị trong hình bằng (a) Quy tắc hình thang, (b) Quy tắc trung điểm và (c) Quy tắc Simpson, mỗi quy tắc với $n=6$.
+\fig[.62]{exercise29}{Đồ thị dùng cho Bài 29.}
+
+\end{minipage}\par
+\par\noindent\begin{minipage}[t]{\linewidth}
+\bt{30} Bề rộng (mét) của một bể bơi hình hạt đậu được đo tại các vị trí cách nhau 2 mét như hình. Dùng Quy tắc Simpson với $n=8$ để ước lượng diện tích bể bơi.
+\fig[.58]{exercise30}{Hình dùng cho Bài 30; các số đo tính bằng mét.}
+
+\end{minipage}\par
+\bt{31} (a) Dùng Quy tắc trung điểm và dữ liệu sau để ước lượng $\int_1^5 f(x)\,dx$.
+\begin{center}\begin{tabular}{r r r r}\toprule
+$x$&$f(x)$&$x$&$f(x)$\\\midrule
+1.0&2.4&3.5&4.0\\1.5&2.9&4.0&4.1\\2.0&3.3&4.5&3.9\\2.5&3.6&5.0&3.5\\3.0&3.8&&\\\bottomrule
+\end{tabular}\end{center}
+(b) Nếu biết $-2\le f''(x)\le3$ với mọi $x$, hãy ước lượng sai số của phép xấp xỉ ở phần (a).
+
+\bt{32} (a) Cho bảng giá trị của hàm $g$ sau đây. Dùng Quy tắc Simpson để ước lượng $\int_0^{1.6}g(x)\,dx$.
+\begin{center}\begin{tabular}{r r r r}\toprule
+$x$&$g(x)$&$x$&$g(x)$\\\midrule
+0.0&12.1&1.0&12.2\\0.2&11.6&1.2&12.6\\0.4&11.3&1.4&13.0\\0.6&11.1&1.6&13.2\\0.8&11.7&&\\\bottomrule
+\end{tabular}\end{center}
+(b) Nếu $-5\le g^{(4)}(x)\le2$ với $0\le x\le1.6$, hãy ước lượng sai số của phép xấp xỉ ở phần (a).
+
+\par\noindent\begin{minipage}[t]{\linewidth}
+\bt{33} Đồ thị biểu diễn nhiệt độ tại Boston trong một ngày hè. Dùng Quy tắc Simpson với $n=12$ để ước lượng nhiệt độ trung bình trong ngày đó.
+\fig[.82]{exercise33}{Đồ thị dùng cho Bài 33; nhiệt độ tính bằng °F; noon là 12 giờ trưa.}
+
+\end{minipage}\par
+\bt{34} Một súng đo tốc độ bằng radar được dùng để ghi tốc độ của vận động viên chạy trong 5 giây đầu của cuộc đua (xem bảng). Dùng Quy tắc Simpson để ước lượng quãng đường vận động viên chạy được trong 5 giây đó.
+\begin{center}\begin{tabular}{r r r r}\toprule
+$t$ (s)&$v$ (m/s)&$t$ (s)&$v$ (m/s)\\\midrule
+0&0&3.0&10.51\\0.5&4.67&3.5&10.67\\1.0&7.34&4.0&10.76\\1.5&8.86&4.5&10.81\\2.0&9.73&5.0&10.81\\2.5&10.22&&\\\bottomrule
+\end{tabular}\end{center}
+
+\par\noindent\begin{minipage}[t]{\linewidth}
+\bt{35} Đồ thị gia tốc $a(t)$ của một ô tô, đo bằng ft/s², được cho trong hình. Dùng Quy tắc Simpson để ước lượng độ tăng vận tốc của ô tô trong khoảng thời gian 6 giây.
+\fig[.48]{exercise35}{Đồ thị dùng cho Bài 35; $t$ tính bằng giây.}
+
+\end{minipage}\par
+\par\noindent\begin{minipage}[t]{\linewidth}
+\bt{36} Nước rò khỏi bồn với lưu lượng $r(t)$ lít mỗi giờ; đồ thị $r$ được cho trong hình. Dùng Quy tắc Simpson để ước lượng tổng lượng nước rò ra trong 6 giờ đầu.
+\fig[.48]{exercise36}{Đồ thị dùng cho Bài 36.}
+
+\end{minipage}\par
+\bt{37} Bảng do San Diego Gas and Electric cung cấp cho biết công suất tiêu thụ $P$ (megawatt) ở hạt San Diego từ nửa đêm đến 6 giờ sáng trong một ngày tháng Mười hai. Dùng Quy tắc Simpson để ước lượng năng lượng tiêu thụ trong khoảng thời gian đó. (Dùng việc công suất là đạo hàm của năng lượng.)
+\begin{center}\begin{tabular}{r r r r}\toprule
+$t$&$P$&$t$&$P$\\\midrule
+0:00&1814&3:30&1611\\0:30&1735&4:00&1621\\1:00&1686&4:30&1666\\1:30&1646&5:00&1745\\2:00&1637&5:30&1886\\2:30&1609&6:00&2052\\3:00&1604&&\\\bottomrule
+\end{tabular}\end{center}
+
+\par\noindent\begin{minipage}[t]{\linewidth}
+\bt{38} Hình biểu diễn lưu lượng trên đường truyền dữ liệu T1 của một nhà cung cấp dịch vụ Internet từ nửa đêm đến 8 giờ sáng, trong đó $D$ là thông lượng dữ liệu (megabit trên giây). Dùng Quy tắc Simpson để ước lượng tổng lượng dữ liệu truyền trong khoảng thời gian đó.
+\fig[.5]{exercise38}{Đồ thị dùng cho Bài 38; $t$ tính bằng giờ.}
+
+\end{minipage}\par
+\par\noindent\begin{minipage}[t]{\linewidth}
+\bt{39} Dùng Quy tắc Simpson với $n=8$ để ước lượng thể tích khối tròn xoay thu được khi quay miền trong hình quanh (a) trục $x$ và (b) trục $y$.
+\fig[.62]{exercise39}{Miền dùng cho Bài 39.}
+
+\end{minipage}\par
+\bt{40} Bảng cho các giá trị của hàm lực $f(x)$, trong đó $x$ đo bằng mét và $f(x)$ bằng newton. Dùng Quy tắc Simpson để ước lượng công do lực thực hiện khi dịch chuyển một vật một quãng đường 18 m.
+\begin{center}\begin{tabular}{r r r r r r r r}\toprule
+$x$&0&3&6&9&12&15&18\\\midrule
+$f(x)$&9.8&9.1&8.5&8.0&7.7&7.5&7.4\\\bottomrule
+\end{tabular}\end{center}
+
+\bt{41} Miền giới hạn bởi đường cong $y=1/(1+e^{-x})$, các trục $x$, $y$ và đường thẳng $x=10$ được quay quanh trục $x$. Dùng Quy tắc Simpson với $n=10$ để ước lượng thể tích khối tròn xoay thu được.
+
+\par\noindent\begin{minipage}[t]{\linewidth}
+\bt{42} Hình biểu diễn con lắc có chiều dài $L$, tạo góc cực đại $\theta_0$ với phương thẳng đứng. Dùng Định luật II Newton có thể chỉ ra rằng chu kỳ $T$ (thời gian một dao động toàn phần) là
+\[T=4\sqrt{\frac Lg}\int_0^{\pi/2}\frac{dx}{\sqrt{1-k^2\sin^2x}},\]
+trong đó $k=\sin(\tfrac12\theta_0)$ và $g$ là gia tốc trọng trường. Nếu $L=1$ m và $\theta_0=42^\circ$, hãy dùng Quy tắc Simpson với $n=10$ để tìm chu kỳ.
+\fig[.32]{exercise42}{Con lắc trong Bài 42.}
+
+\end{minipage}\par
+\bt{43} Cường độ ánh sáng có bước sóng $\lambda$, truyền qua một cách tử nhiễu xạ gồm $N$ khe theo góc $\theta$, được cho bởi $I(\theta)=(N^2\sin^2k)/k^2$, với $k=(\pi Nd\sin\theta)/\lambda$ và $d$ là khoảng cách giữa hai khe liền kề. Một laser heli–neon có bước sóng $\lambda=632.8\times10^{-9}$ m phát một chùm sáng hẹp, $-10^{-6}<\theta<10^{-6}$, qua cách tử có $10\,000$ khe cách nhau $10^{-4}$ m. Dùng Quy tắc trung điểm với $n=10$ để ước lượng tổng cường độ ánh sáng $\int_{-10^{-6}}^{10^{-6}}I(\theta)\,d\theta$ đi ra khỏi cách tử.
+
+\bt{44} Dùng Quy tắc hình thang với $n=10$ để tính gần đúng $\int_0^{20}\cos(\pi x)\,dx$. So sánh kết quả với giá trị chính xác. Có thể giải thích sự khác biệt hay không?
+
+\bt{45} Phác họa đồ thị một hàm liên tục trên $[0,2]$ sao cho Quy tắc hình thang với $n=2$ chính xác hơn Quy tắc trung điểm.
+
+\bt{46} Phác họa đồ thị một hàm liên tục trên $[0,2]$ sao cho xấp xỉ đầu mút phải với $n=2$ chính xác hơn Quy tắc Simpson.
+
+\bt{47} Nếu $f$ là hàm dương và $f''(x)<0$ với $a\le x\le b$, chứng minh rằng
+\[T_n<\int_a^b f(x)\,dx<M_n.\]
+
+\bt{48} \textbf{Khi nào quy tắc Simpson cho kết quả chính xác?}
+
+(a) Chứng minh rằng nếu $f$ là đa thức bậc không quá 3 thì Quy tắc Simpson cho giá trị chính xác của $\int_a^b f(x)\,dx$.
+
+(b) Tìm xấp xỉ $S_4$ của $\int_0^8(x^3-6x^2+4x)\,dx$ và kiểm tra rằng $S_4$ là giá trị chính xác của tích phân.
+
+(c) Dùng chặn sai số (4) để giải thích vì sao khẳng định ở phần (a) phải đúng.
+
+\bt{49} Chứng minh rằng $\tfrac12(T_n+M_n)=T_{2n}$.
+\bt{50} Chứng minh rằng $\tfrac13T_n+\tfrac23M_n=S_{2n}$.
+\end{document}

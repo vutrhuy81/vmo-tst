@@ -1,0 +1,384 @@
+{
+  "exercises": [
+    {
+      "number": 1,
+      "content": "<p><strong>1.</strong></p>\n<p><em>Yêu cầu chung (1–8):</em> Mỗi bài cho ba tích phân trông tương tự nhau nhưng có thể cần các phương pháp tính tích phân khác nhau. Tính các tích phân.</p>\n<p><span class=\"math display\">\\[\\text{(a)}\\quad\\int\\frac{x}{1+x^2}\\,dx\\qquad\\text{(b)}\\quad\\int\\frac1{1+x^2}\\,dx\\]</span> <span class=\"math display\">\\[\\text{(c)}\\quad\\int\\frac1{1-x^2}\\,dx\\]</span></p>\n"
+    },
+    {
+      "number": 2,
+      "content": "<p><strong>2.</strong></p>\n<p><em>Yêu cầu chung (1–8):</em> Mỗi bài cho ba tích phân trông tương tự nhau nhưng có thể cần các phương pháp tính tích phân khác nhau. Tính các tích phân.</p>\n<p><span class=\"math display\">\\[\\text{(a)}\\quad\\int x\\sqrt{x^2-1}\\,dx\\qquad\\text{(b)}\\quad\\int\\frac1{x\\sqrt{x^2-1}}\\,dx\\]</span> <span class=\"math display\">\\[\\text{(c)}\\quad\\int\\frac{\\sqrt{x^2-1}}{x}\\,dx\\]</span></p>\n"
+    },
+    {
+      "number": 3,
+      "content": "<p><strong>3.</strong></p>\n<p><em>Yêu cầu chung (1–8):</em> Mỗi bài cho ba tích phân trông tương tự nhau nhưng có thể cần các phương pháp tính tích phân khác nhau. Tính các tích phân.</p>\n<p><span class=\"math display\">\\[\\text{(a)}\\quad\\int\\frac{\\ln x}{x}\\,dx\\qquad\\text{(b)}\\quad\\int\\ln(2x)\\,dx\\]</span> <span class=\"math display\">\\[\\text{(c)}\\quad\\int x\\ln x\\,dx\\]</span></p>\n"
+    },
+    {
+      "number": 4,
+      "content": "<p><strong>4.</strong></p>\n<p><em>Yêu cầu chung (1–8):</em> Mỗi bài cho ba tích phân trông tương tự nhau nhưng có thể cần các phương pháp tính tích phân khác nhau. Tính các tích phân.</p>\n<p><span class=\"math display\">\\[\\text{(a)}\\quad\\int\\sin^2x\\,dx\\qquad\\text{(b)}\\quad\\int\\sin^3x\\,dx\\]</span> <span class=\"math display\">\\[\\text{(c)}\\quad\\int\\sin2x\\,dx\\]</span></p>\n"
+    },
+    {
+      "number": 5,
+      "content": "<p><strong>5.</strong></p>\n<p><em>Yêu cầu chung (1–8):</em> Mỗi bài cho ba tích phân trông tương tự nhau nhưng có thể cần các phương pháp tính tích phân khác nhau. Tính các tích phân.</p>\n<p><span class=\"math display\">\\[\\text{(a)}\\quad\\int\\frac1{x^2-4x+3}\\,dx\\qquad\\text{(b)}\\quad\\int\\frac1{x^2-4x+4}\\,dx\\]</span> <span class=\"math display\">\\[\\text{(c)}\\quad\\int\\frac1{x^2-4x+5}\\,dx\\]</span></p>\n"
+    },
+    {
+      "number": 6,
+      "content": "<p><strong>6.</strong></p>\n<p><em>Yêu cầu chung (1–8):</em> Mỗi bài cho ba tích phân trông tương tự nhau nhưng có thể cần các phương pháp tính tích phân khác nhau. Tính các tích phân.</p>\n<p><span class=\"math display\">\\[\\text{(a)}\\quad\\int x\\cos x^2\\,dx\\qquad\\text{(b)}\\quad\\int x\\cos^2x\\,dx\\]</span> <span class=\"math display\">\\[\\text{(c)}\\quad\\int x^2\\cos x\\,dx\\]</span></p>\n"
+    },
+    {
+      "number": 7,
+      "content": "<p><strong>7.</strong></p>\n<p><em>Yêu cầu chung (1–8):</em> Mỗi bài cho ba tích phân trông tương tự nhau nhưng có thể cần các phương pháp tính tích phân khác nhau. Tính các tích phân.</p>\n<p><span class=\"math display\">\\[\\text{(a)}\\quad\\int x^2e^{x^3}\\,dx\\qquad\\text{(b)}\\quad\\int x^2e^x\\,dx\\]</span> <span class=\"math display\">\\[\\text{(c)}\\quad\\int x^3e^{x^2}\\,dx\\]</span></p>\n"
+    },
+    {
+      "number": 8,
+      "content": "<p><strong>8.</strong></p>\n<p><em>Yêu cầu chung (1–8):</em> Mỗi bài cho ba tích phân trông tương tự nhau nhưng có thể cần các phương pháp tính tích phân khác nhau. Tính các tích phân.</p>\n<p><span class=\"math display\">\\[\\text{(a)}\\quad\\int e^x\\sqrt{e^x-1}\\,dx\\qquad\\text{(b)}\\quad\\int\\frac{e^x}{\\sqrt{1-e^{2x}}}\\,dx\\]</span> <span class=\"math display\">\\[\\text{(c)}\\quad\\int\\frac1{\\sqrt{e^x-1}}\\,dx\\]</span></p>\n"
+    },
+    {
+      "number": 9,
+      "content": "<p><strong>9.</strong></p>\n<p><em>Yêu cầu chung (9–93):</em> Tính tích phân.</p>\n<p><span class=\"math inline\">\\(\\displaystyle \\int\\frac{\\cos x}{1-\\sin x}\\,dx\\)</span></p>\n"
+    },
+    {
+      "number": 10,
+      "content": "<p><strong>10.</strong></p>\n<p><em>Yêu cầu chung (9–93):</em> Tính tích phân.</p>\n<p><span class=\"math inline\">\\(\\displaystyle \\int_0^1(3x+1)^{\\sqrt2}\\,dx\\)</span></p>\n"
+    },
+    {
+      "number": 11,
+      "content": "<p><strong>11.</strong></p>\n<p><em>Yêu cầu chung (9–93):</em> Tính tích phân.</p>\n<p><span class=\"math inline\">\\(\\displaystyle \\int_1^4\\sqrt y\\ln y\\,dy\\)</span></p>\n"
+    },
+    {
+      "number": 12,
+      "content": "<p><strong>12.</strong></p>\n<p><em>Yêu cầu chung (9–93):</em> Tính tích phân.</p>\n<p><span class=\"math inline\">\\(\\displaystyle \\int\\frac{e^{\\arcsin x}}{\\sqrt{1-x^2}}\\,dx\\)</span></p>\n"
+    },
+    {
+      "number": 13,
+      "content": "<p><strong>13.</strong></p>\n<p><em>Yêu cầu chung (9–93):</em> Tính tích phân.</p>\n<p><span class=\"math inline\">\\(\\displaystyle \\int\\frac{\\ln(\\ln y)}y\\,dy\\)</span></p>\n"
+    },
+    {
+      "number": 14,
+      "content": "<p><strong>14.</strong></p>\n<p><em>Yêu cầu chung (9–93):</em> Tính tích phân.</p>\n<p><span class=\"math inline\">\\(\\displaystyle \\int_0^1\\frac{x}{(2x+1)^3}\\,dx\\)</span></p>\n"
+    },
+    {
+      "number": 15,
+      "content": "<p><strong>15.</strong></p>\n<p><em>Yêu cầu chung (9–93):</em> Tính tích phân.</p>\n<p><span class=\"math inline\">\\(\\displaystyle \\int\\frac{x}{x^4+9}\\,dx\\)</span></p>\n"
+    },
+    {
+      "number": 16,
+      "content": "<p><strong>16.</strong></p>\n<p><em>Yêu cầu chung (9–93):</em> Tính tích phân.</p>\n<p><span class=\"math inline\">\\(\\displaystyle \\int t\\sin t\\cos t\\,dt\\)</span></p>\n"
+    },
+    {
+      "number": 17,
+      "content": "<p><strong>17.</strong></p>\n<p><em>Yêu cầu chung (9–93):</em> Tính tích phân.</p>\n<p><span class=\"math inline\">\\(\\displaystyle \\int_2^4\\frac{x+2}{x^2+3x-4}\\,dx\\)</span></p>\n"
+    },
+    {
+      "number": 18,
+      "content": "<p><strong>18.</strong></p>\n<p><em>Yêu cầu chung (9–93):</em> Tính tích phân.</p>\n<p><span class=\"math inline\">\\(\\displaystyle \\int\\frac{\\cos(1/x)}{x^3}\\,dx\\)</span></p>\n"
+    },
+    {
+      "number": 19,
+      "content": "<p><strong>19.</strong></p>\n<p><em>Yêu cầu chung (9–93):</em> Tính tích phân.</p>\n<p><span class=\"math inline\">\\(\\displaystyle \\int\\frac1{x^3\\sqrt{x^2-1}}\\,dx\\)</span></p>\n"
+    },
+    {
+      "number": 20,
+      "content": "<p><strong>20.</strong></p>\n<p><em>Yêu cầu chung (9–93):</em> Tính tích phân.</p>\n<p><span class=\"math inline\">\\(\\displaystyle \\int\\frac{2x-3}{x^3+3x}\\,dx\\)</span></p>\n"
+    },
+    {
+      "number": 21,
+      "content": "<p><strong>21.</strong></p>\n<p><em>Yêu cầu chung (9–93):</em> Tính tích phân.</p>\n<p><span class=\"math inline\">\\(\\displaystyle \\int\\frac{\\cos^3x}{\\csc x}\\,dx\\)</span></p>\n"
+    },
+    {
+      "number": 22,
+      "content": "<p><strong>22.</strong></p>\n<p><em>Yêu cầu chung (9–93):</em> Tính tích phân.</p>\n<p><span class=\"math inline\">\\(\\displaystyle \\int\\ln(1+x^2)\\,dx\\)</span></p>\n"
+    },
+    {
+      "number": 23,
+      "content": "<p><strong>23.</strong></p>\n<p><em>Yêu cầu chung (9–93):</em> Tính tích phân.</p>\n<p><span class=\"math inline\">\\(\\displaystyle \\int x\\sec x\\tan x\\,dx\\)</span></p>\n"
+    },
+    {
+      "number": 24,
+      "content": "<p><strong>24.</strong></p>\n<p><em>Yêu cầu chung (9–93):</em> Tính tích phân.</p>\n<p><span class=\"math inline\">\\(\\displaystyle \\int_0^{\\sqrt2/2}\\frac{x^2}{\\sqrt{1-x^2}}\\,dx\\)</span></p>\n"
+    },
+    {
+      "number": 25,
+      "content": "<p><strong>25.</strong></p>\n<p><em>Yêu cầu chung (9–93):</em> Tính tích phân.</p>\n<p><span class=\"math inline\">\\(\\displaystyle \\int_0^\\pi t\\cos^2t\\,dt\\)</span></p>\n"
+    },
+    {
+      "number": 26,
+      "content": "<p><strong>26.</strong></p>\n<p><em>Yêu cầu chung (9–93):</em> Tính tích phân.</p>\n<p><span class=\"math inline\">\\(\\displaystyle \\int_1^4\\frac{e^{\\sqrt t}}{\\sqrt t}\\,dt\\)</span></p>\n"
+    },
+    {
+      "number": 27,
+      "content": "<p><strong>27.</strong></p>\n<p><em>Yêu cầu chung (9–93):</em> Tính tích phân.</p>\n<p><span class=\"math inline\">\\(\\displaystyle \\int e^{x+e^x}\\,dx\\)</span></p>\n"
+    },
+    {
+      "number": 28,
+      "content": "<p><strong>28.</strong></p>\n<p><em>Yêu cầu chung (9–93):</em> Tính tích phân.</p>\n<p><span class=\"math inline\">\\(\\displaystyle \\int\\frac{e^x}{1+e^{2a}}\\,dx\\)</span></p>\n"
+    },
+    {
+      "number": 29,
+      "content": "<p><strong>29.</strong></p>\n<p><em>Yêu cầu chung (9–93):</em> Tính tích phân.</p>\n<p><span class=\"math inline\">\\(\\displaystyle \\int\\arctan\\sqrt{x}\\,dx\\)</span></p>\n"
+    },
+    {
+      "number": 30,
+      "content": "<p><strong>30.</strong></p>\n<p><em>Yêu cầu chung (9–93):</em> Tính tích phân.</p>\n<p><span class=\"math inline\">\\(\\displaystyle \\int\\frac{\\ln x}{x\\sqrt{1+(\\ln x)^2}}\\,dx\\)</span></p>\n"
+    },
+    {
+      "number": 31,
+      "content": "<p><strong>31.</strong></p>\n<p><em>Yêu cầu chung (9–93):</em> Tính tích phân.</p>\n<p><span class=\"math inline\">\\(\\displaystyle \\int_0^1(1+\\sqrt{x})^8\\,dx\\)</span></p>\n"
+    },
+    {
+      "number": 32,
+      "content": "<p><strong>32.</strong></p>\n<p><em>Yêu cầu chung (9–93):</em> Tính tích phân.</p>\n<p><span class=\"math inline\">\\(\\displaystyle \\int(1+\\tan x)^2\\sec x\\,dx\\)</span></p>\n"
+    },
+    {
+      "number": 33,
+      "content": "<p><strong>33.</strong></p>\n<p><em>Yêu cầu chung (9–93):</em> Tính tích phân.</p>\n<p><span class=\"math inline\">\\(\\displaystyle \\int_0^1\\frac{1+12t}{1+3t}\\,dt\\)</span></p>\n"
+    },
+    {
+      "number": 34,
+      "content": "<p><strong>34.</strong></p>\n<p><em>Yêu cầu chung (9–93):</em> Tính tích phân.</p>\n<p><span class=\"math inline\">\\(\\displaystyle \\int_0^1\\frac{3x^2+1}{x^3+x^2+x+1}\\,dx\\)</span></p>\n"
+    },
+    {
+      "number": 35,
+      "content": "<p><strong>35.</strong></p>\n<p><em>Yêu cầu chung (9–93):</em> Tính tích phân.</p>\n<p><span class=\"math inline\">\\(\\displaystyle \\int\\frac{dx}{1+e^x}\\)</span></p>\n"
+    },
+    {
+      "number": 36,
+      "content": "<p><strong>36.</strong></p>\n<p><em>Yêu cầu chung (9–93):</em> Tính tích phân.</p>\n<p><span class=\"math inline\">\\(\\displaystyle \\int\\sin\\sqrt{at}\\,dt\\)</span></p>\n"
+    },
+    {
+      "number": 37,
+      "content": "<p><strong>37.</strong></p>\n<p><em>Yêu cầu chung (9–93):</em> Tính tích phân.</p>\n<p><span class=\"math inline\">\\(\\displaystyle \\int\\ln\\bigl(x+\\sqrt{x^2-1}\\bigr)\\,dx\\)</span></p>\n"
+    },
+    {
+      "number": 38,
+      "content": "<p><strong>38.</strong></p>\n<p><em>Yêu cầu chung (9–93):</em> Tính tích phân.</p>\n<p><span class=\"math inline\">\\(\\displaystyle \\int_{-1}^2|e^x-1|\\,dx\\)</span></p>\n"
+    },
+    {
+      "number": 39,
+      "content": "<p><strong>39.</strong></p>\n<p><em>Yêu cầu chung (9–93):</em> Tính tích phân.</p>\n<p><span class=\"math inline\">\\(\\displaystyle \\int\\sqrt{\\frac{1+x}{1-x}}\\,dx\\)</span></p>\n"
+    },
+    {
+      "number": 40,
+      "content": "<p><strong>40.</strong></p>\n<p><em>Yêu cầu chung (9–93):</em> Tính tích phân.</p>\n<p><span class=\"math inline\">\\(\\displaystyle \\int_1^3\\frac{e^{3/x}}{x^2}\\,dx\\)</span></p>\n"
+    },
+    {
+      "number": 41,
+      "content": "<p><strong>41.</strong></p>\n<p><em>Yêu cầu chung (9–93):</em> Tính tích phân.</p>\n<p><span class=\"math inline\">\\(\\displaystyle \\int\\sqrt{3-2x-x^2}\\,dx\\)</span></p>\n"
+    },
+    {
+      "number": 42,
+      "content": "<p><strong>42.</strong></p>\n<p><em>Yêu cầu chung (9–93):</em> Tính tích phân.</p>\n<p><span class=\"math inline\">\\(\\displaystyle \\int_{\\pi/4}^{\\pi/2}\\frac{1+4\\cot x}{4-\\cot x}\\,dx\\)</span></p>\n"
+    },
+    {
+      "number": 43,
+      "content": "<p><strong>43.</strong></p>\n<p><em>Yêu cầu chung (9–93):</em> Tính tích phân.</p>\n<p><span class=\"math inline\">\\(\\displaystyle \\int_{-\\pi/2}^{\\pi/2}\\frac{x}{1+\\cos^2x}\\,dx\\)</span></p>\n"
+    },
+    {
+      "number": 44,
+      "content": "<p><strong>44.</strong></p>\n<p><em>Yêu cầu chung (9–93):</em> Tính tích phân.</p>\n<p><span class=\"math inline\">\\(\\displaystyle \\int\\frac{1+\\sin x}{1+\\cos x}\\,dx\\)</span></p>\n"
+    },
+    {
+      "number": 45,
+      "content": "<p><strong>45.</strong></p>\n<p><em>Yêu cầu chung (9–93):</em> Tính tích phân.</p>\n<p><span class=\"math inline\">\\(\\displaystyle \\int_0^{\\pi/4}\\tan^3\\theta\\sec^2\\theta\\,d\\theta\\)</span></p>\n"
+    },
+    {
+      "number": 46,
+      "content": "<p><strong>46.</strong></p>\n<p><em>Yêu cầu chung (9–93):</em> Tính tích phân.</p>\n<p><span class=\"math inline\">\\(\\displaystyle \\int_{\\pi/6}^{\\pi/3}\\frac{\\sin\\theta\\cot\\theta}{\\sec\\theta}\\,d\\theta\\)</span></p>\n"
+    },
+    {
+      "number": 47,
+      "content": "<p><strong>47.</strong></p>\n<p><em>Yêu cầu chung (9–93):</em> Tính tích phân.</p>\n<p><span class=\"math inline\">\\(\\displaystyle \\int\\frac{\\sec\\theta\\tan\\theta}{\\sec^2\\theta-\\sec\\theta}\\,d\\theta\\)</span></p>\n"
+    },
+    {
+      "number": 48,
+      "content": "<p><strong>48.</strong></p>\n<p><em>Yêu cầu chung (9–93):</em> Tính tích phân.</p>\n<p><span class=\"math inline\">\\(\\displaystyle \\int_0^\\pi\\sin6x\\cos3x\\,dx\\)</span></p>\n"
+    },
+    {
+      "number": 49,
+      "content": "<p><strong>49.</strong></p>\n<p><em>Yêu cầu chung (9–93):</em> Tính tích phân.</p>\n<p><span class=\"math inline\">\\(\\displaystyle \\int\\theta\\tan^2\\theta\\,d\\theta\\)</span></p>\n"
+    },
+    {
+      "number": 50,
+      "content": "<p><strong>50.</strong></p>\n<p><em>Yêu cầu chung (9–93):</em> Tính tích phân.</p>\n<p><span class=\"math inline\">\\(\\displaystyle \\int\\frac1{x\\sqrt{x-1}}\\,dx\\)</span></p>\n"
+    },
+    {
+      "number": 51,
+      "content": "<p><strong>51.</strong></p>\n<p><em>Yêu cầu chung (9–93):</em> Tính tích phân.</p>\n<p><span class=\"math inline\">\\(\\displaystyle \\int\\frac{\\sqrt{x}}{1+x^3}\\,dx\\)</span></p>\n"
+    },
+    {
+      "number": 52,
+      "content": "<p><strong>52.</strong></p>\n<p><em>Yêu cầu chung (9–93):</em> Tính tích phân.</p>\n<p><span class=\"math inline\">\\(\\displaystyle \\int\\sqrt{1+e^x}\\,dx\\)</span></p>\n"
+    },
+    {
+      "number": 53,
+      "content": "<p><strong>53.</strong></p>\n<p><em>Yêu cầu chung (9–93):</em> Tính tích phân.</p>\n<p><span class=\"math inline\">\\(\\displaystyle \\int\\frac{x}{1+\\sqrt{x}}\\,dx\\)</span></p>\n"
+    },
+    {
+      "number": 54,
+      "content": "<p><strong>54.</strong></p>\n<p><em>Yêu cầu chung (9–93):</em> Tính tích phân.</p>\n<p><span class=\"math inline\">\\(\\displaystyle \\int\\frac{(x-1)e^x}{x^2}\\,dx\\)</span></p>\n"
+    },
+    {
+      "number": 55,
+      "content": "<p><strong>55.</strong></p>\n<p><em>Yêu cầu chung (9–93):</em> Tính tích phân.</p>\n<p><span class=\"math inline\">\\(\\displaystyle \\int x^3(x-1)^{-4}\\,dx\\)</span></p>\n"
+    },
+    {
+      "number": 56,
+      "content": "<p><strong>56.</strong></p>\n<p><em>Yêu cầu chung (9–93):</em> Tính tích phân.</p>\n<p><span class=\"math inline\">\\(\\displaystyle \\int_0^1 x\\sqrt{2-\\sqrt{1-x^2}}\\,dx\\)</span></p>\n"
+    },
+    {
+      "number": 57,
+      "content": "<p><strong>57.</strong></p>\n<p><em>Yêu cầu chung (9–93):</em> Tính tích phân.</p>\n<p><span class=\"math inline\">\\(\\displaystyle \\int\\frac1{x\\sqrt{4x+1}}\\,dx\\)</span></p>\n"
+    },
+    {
+      "number": 58,
+      "content": "<p><strong>58.</strong></p>\n<p><em>Yêu cầu chung (9–93):</em> Tính tích phân.</p>\n<p><span class=\"math inline\">\\(\\displaystyle \\int\\frac1{x^2\\sqrt{4x+1}}\\,dx\\)</span></p>\n"
+    },
+    {
+      "number": 59,
+      "content": "<p><strong>59.</strong></p>\n<p><em>Yêu cầu chung (9–93):</em> Tính tích phân.</p>\n<p><span class=\"math inline\">\\(\\displaystyle \\int\\frac1{x\\sqrt{4x^2+1}}\\,dx\\)</span></p>\n"
+    },
+    {
+      "number": 60,
+      "content": "<p><strong>60.</strong></p>\n<p><em>Yêu cầu chung (9–93):</em> Tính tích phân.</p>\n<p><span class=\"math inline\">\\(\\displaystyle \\int\\frac{dx}{x(x^4+1)}\\)</span></p>\n"
+    },
+    {
+      "number": 61,
+      "content": "<p><strong>61.</strong></p>\n<p><em>Yêu cầu chung (9–93):</em> Tính tích phân.</p>\n<p><span class=\"math inline\">\\(\\displaystyle \\int x^2\\sinh mx\\,dx\\)</span></p>\n"
+    },
+    {
+      "number": 62,
+      "content": "<p><strong>62.</strong></p>\n<p><em>Yêu cầu chung (9–93):</em> Tính tích phân.</p>\n<p><span class=\"math inline\">\\(\\displaystyle \\int(x+\\sin x)^2\\,dx\\)</span></p>\n"
+    },
+    {
+      "number": 63,
+      "content": "<p><strong>63.</strong></p>\n<p><em>Yêu cầu chung (9–93):</em> Tính tích phân.</p>\n<p><span class=\"math inline\">\\(\\displaystyle \\int\\frac{dx}{x+x\\sqrt{x}}\\)</span></p>\n"
+    },
+    {
+      "number": 64,
+      "content": "<p><strong>64.</strong></p>\n<p><em>Yêu cầu chung (9–93):</em> Tính tích phân.</p>\n<p><span class=\"math inline\">\\(\\displaystyle \\int\\frac{dx}{\\sqrt{x}+x\\sqrt{x}}\\)</span></p>\n"
+    },
+    {
+      "number": 65,
+      "content": "<p><strong>65.</strong></p>\n<p><em>Yêu cầu chung (9–93):</em> Tính tích phân.</p>\n<p><span class=\"math inline\">\\(\\displaystyle \\int x\\sqrt[3]{x+c}\\,dx\\)</span></p>\n"
+    },
+    {
+      "number": 66,
+      "content": "<p><strong>66.</strong></p>\n<p><em>Yêu cầu chung (9–93):</em> Tính tích phân.</p>\n<p><span class=\"math inline\">\\(\\displaystyle \\int\\frac{x\\ln x}{\\sqrt{x^2-1}}\\,dx\\)</span></p>\n"
+    },
+    {
+      "number": 67,
+      "content": "<p><strong>67.</strong></p>\n<p><em>Yêu cầu chung (9–93):</em> Tính tích phân.</p>\n<p><span class=\"math inline\">\\(\\displaystyle \\int\\frac{dx}{x^4-16}\\)</span></p>\n"
+    },
+    {
+      "number": 68,
+      "content": "<p><strong>68.</strong></p>\n<p><em>Yêu cầu chung (9–93):</em> Tính tích phân.</p>\n<p><span class=\"math inline\">\\(\\displaystyle \\int\\frac{dx}{x^2\\sqrt{4x^2-1}}\\)</span></p>\n"
+    },
+    {
+      "number": 69,
+      "content": "<p><strong>69.</strong></p>\n<p><em>Yêu cầu chung (9–93):</em> Tính tích phân.</p>\n<p><span class=\"math inline\">\\(\\displaystyle \\int\\frac{d\\theta}{1+\\cos\\theta}\\)</span></p>\n"
+    },
+    {
+      "number": 70,
+      "content": "<p><strong>70.</strong></p>\n<p><em>Yêu cầu chung (9–93):</em> Tính tích phân.</p>\n<p><span class=\"math inline\">\\(\\displaystyle \\int\\frac{d\\theta}{1+\\cos^2\\theta}\\)</span></p>\n"
+    },
+    {
+      "number": 71,
+      "content": "<p><strong>71.</strong></p>\n<p><em>Yêu cầu chung (9–93):</em> Tính tích phân.</p>\n<p><span class=\"math inline\">\\(\\displaystyle \\int\\sqrt{x}\\,e^{\\sqrt{x}}\\,dx\\)</span></p>\n"
+    },
+    {
+      "number": 72,
+      "content": "<p><strong>72.</strong></p>\n<p><em>Yêu cầu chung (9–93):</em> Tính tích phân.</p>\n<p><span class=\"math inline\">\\(\\displaystyle \\int\\frac1{\\sqrt{\\sqrt{x}+1}}\\,dx\\)</span></p>\n"
+    },
+    {
+      "number": 73,
+      "content": "<p><strong>73.</strong></p>\n<p><em>Yêu cầu chung (9–93):</em> Tính tích phân.</p>\n<p><span class=\"math inline\">\\(\\displaystyle \\int\\frac{\\sin2x}{1+\\cos^4x}\\,dx\\)</span></p>\n"
+    },
+    {
+      "number": 74,
+      "content": "<p><strong>74.</strong></p>\n<p><em>Yêu cầu chung (9–93):</em> Tính tích phân.</p>\n<p><span class=\"math inline\">\\(\\displaystyle \\int_{\\pi/4}^{\\pi/3}\\frac{\\ln(\\tan x)}{\\sin x\\cos x}\\,dx\\)</span></p>\n"
+    },
+    {
+      "number": 75,
+      "content": "<p><strong>75.</strong></p>\n<p><em>Yêu cầu chung (9–93):</em> Tính tích phân.</p>\n<p><span class=\"math inline\">\\(\\displaystyle \\int\\frac1{\\sqrt{x+1}+\\sqrt{x}}\\,dx\\)</span></p>\n"
+    },
+    {
+      "number": 76,
+      "content": "<p><strong>76.</strong></p>\n<p><em>Yêu cầu chung (9–93):</em> Tính tích phân.</p>\n<p><span class=\"math inline\">\\(\\displaystyle \\int\\frac{x^2}{x^6+3x^3+2}\\,dx\\)</span></p>\n"
+    },
+    {
+      "number": 77,
+      "content": "<p><strong>77.</strong></p>\n<p><em>Yêu cầu chung (9–93):</em> Tính tích phân.</p>\n<p><span class=\"math inline\">\\(\\displaystyle \\int_1^{\\sqrt3}\\frac{\\sqrt{1+x^2}}{x^2}\\,dx\\)</span></p>\n"
+    },
+    {
+      "number": 78,
+      "content": "<p><strong>78.</strong></p>\n<p><em>Yêu cầu chung (9–93):</em> Tính tích phân.</p>\n<p><span class=\"math inline\">\\(\\displaystyle \\int\\frac1{1+2e^x-e^{-x}}\\,dx\\)</span></p>\n"
+    },
+    {
+      "number": 79,
+      "content": "<p><strong>79.</strong></p>\n<p><em>Yêu cầu chung (9–93):</em> Tính tích phân.</p>\n<p><span class=\"math inline\">\\(\\displaystyle \\int\\frac{e^{2x}}{1+e^x}\\,dx\\)</span></p>\n"
+    },
+    {
+      "number": 80,
+      "content": "<p><strong>80.</strong></p>\n<p><em>Yêu cầu chung (9–93):</em> Tính tích phân.</p>\n<p><span class=\"math inline\">\\(\\displaystyle \\int\\frac{\\ln(x+1)}{x^2}\\,dx\\)</span></p>\n"
+    },
+    {
+      "number": 81,
+      "content": "<p><strong>81.</strong></p>\n<p><em>Yêu cầu chung (9–93):</em> Tính tích phân.</p>\n<p><span class=\"math inline\">\\(\\displaystyle \\int\\frac{x+\\arcsin x}{\\sqrt{1-x^2}}\\,dx\\)</span></p>\n"
+    },
+    {
+      "number": 82,
+      "content": "<p><strong>82.</strong></p>\n<p><em>Yêu cầu chung (9–93):</em> Tính tích phân.</p>\n<p><span class=\"math inline\">\\(\\displaystyle \\int\\frac{4^x+10^x}{2^x}\\,dx\\)</span></p>\n"
+    },
+    {
+      "number": 83,
+      "content": "<p><strong>83.</strong></p>\n<p><em>Yêu cầu chung (9–93):</em> Tính tích phân.</p>\n<p><span class=\"math inline\">\\(\\displaystyle \\int\\frac{dx}{x\\ln x-x}\\)</span></p>\n"
+    },
+    {
+      "number": 84,
+      "content": "<p><strong>84.</strong></p>\n<p><em>Yêu cầu chung (9–93):</em> Tính tích phân.</p>\n<p><span class=\"math inline\">\\(\\displaystyle \\int\\frac{x^2}{\\sqrt{x^2+1}}\\,dx\\)</span></p>\n"
+    },
+    {
+      "number": 85,
+      "content": "<p><strong>85.</strong></p>\n<p><em>Yêu cầu chung (9–93):</em> Tính tích phân.</p>\n<p><span class=\"math inline\">\\(\\displaystyle \\int\\frac{xe^x}{\\sqrt{1+e^x}}\\,dx\\)</span></p>\n"
+    },
+    {
+      "number": 86,
+      "content": "<p><strong>86.</strong></p>\n<p><em>Yêu cầu chung (9–93):</em> Tính tích phân.</p>\n<p><span class=\"math inline\">\\(\\displaystyle \\int\\frac{1+\\sin x}{1-\\sin x}\\,dx\\)</span></p>\n"
+    },
+    {
+      "number": 87,
+      "content": "<p><strong>87.</strong></p>\n<p><em>Yêu cầu chung (9–93):</em> Tính tích phân.</p>\n<p><span class=\"math inline\">\\(\\displaystyle \\int x\\sin^2x\\cos x\\,dx\\)</span></p>\n"
+    },
+    {
+      "number": 88,
+      "content": "<p><strong>88.</strong></p>\n<p><em>Yêu cầu chung (9–93):</em> Tính tích phân.</p>\n<p><span class=\"math inline\">\\(\\displaystyle \\int\\frac{\\sec x\\cos2x}{\\sin x+\\sec x}\\,dx\\)</span></p>\n"
+    },
+    {
+      "number": 89,
+      "content": "<p><strong>89.</strong></p>\n<p><em>Yêu cầu chung (9–93):</em> Tính tích phân.</p>\n<p><span class=\"math inline\">\\(\\displaystyle \\int\\sqrt{1-\\sin x}\\,dx\\)</span></p>\n"
+    },
+    {
+      "number": 90,
+      "content": "<p><strong>90.</strong></p>\n<p><em>Yêu cầu chung (9–93):</em> Tính tích phân.</p>\n<p><span class=\"math inline\">\\(\\displaystyle \\int\\frac{\\sin x\\cos x}{\\sin^4x+\\cos^4x}\\,dx\\)</span></p>\n"
+    },
+    {
+      "number": 91,
+      "content": "<p><strong>91.</strong></p>\n<p><em>Yêu cầu chung (9–93):</em> Tính tích phân.</p>\n<p><span class=\"math inline\">\\(\\displaystyle \\int_1^3\\left(\\sqrt{\\frac{9-x}{x}}-\\sqrt{\\frac{x}{9-x}}\\right)\\,dx\\)</span></p>\n"
+    },
+    {
+      "number": 92,
+      "content": "<p><strong>92.</strong></p>\n<p><em>Yêu cầu chung (9–93):</em> Tính tích phân.</p>\n<p><span class=\"math inline\">\\(\\displaystyle \\int\\frac1{(\\sin x+\\cos x)^2}\\,dx\\)</span></p>\n"
+    },
+    {
+      "number": 93,
+      "content": "<p><strong>93.</strong></p>\n<p><em>Yêu cầu chung (9–93):</em> Tính tích phân.</p>\n<p><span class=\"math inline\">\\(\\displaystyle \\int_0^{\\pi/6}\\sqrt{1+\\sin2\\theta}\\,d\\theta\\)</span></p>\n"
+    },
+    {
+      "number": 94,
+      "content": "<p><strong>94.</strong></p>\n<p>Theo Phần 1 của Định lý cơ bản của giải tích, ta biết rằng <span class=\"math inline\">\\(F(x)=\\int_0^x e^{e^t}\\,dt\\)</span> là hàm liên tục, mặc dù không phải là hàm sơ cấp. Các hàm <span class=\"math display\">\\[\\int\\frac{e^x}{x}\\,dx\\qquad\\text{và}\\qquad\\int\\frac1{\\ln x}\\,dx\\]</span> cũng không sơ cấp, nhưng có thể biểu diễn theo <span class=\"math inline\">\\(F\\)</span>. Tính các tích phân sau theo <span class=\"math inline\">\\(F\\)</span>. <span class=\"math display\">\\[\\text{(a)}\\quad\\int_1^2\\frac{e^x}{x}\\,dx\\qquad\\text{(b)}\\quad\\int_2^3\\frac1{\\ln x}\\,dx\\]</span></p>\n"
+    },
+    {
+      "number": 95,
+      "content": "<p><strong>95.</strong></p>\n<p>Các hàm <span class=\"math inline\">\\(y=e^{x^2}\\)</span> và <span class=\"math inline\">\\(y=x^2e^{x^2}\\)</span> không có nguyên hàm sơ cấp, nhưng <span class=\"math inline\">\\(y=(2x^2+1)e^{x^2}\\)</span> thì có. Tính <span class=\"math inline\">\\(\\displaystyle\\int(2x^2+1)e^{x^2}\\,dx\\)</span>.</p>\n"
+    }
+  ]
+}

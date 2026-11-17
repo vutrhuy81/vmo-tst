@@ -1,0 +1,310 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage{fontspec}\setmainfont{Latin Modern Roman}\setsansfont{DejaVu Sans}
+\usepackage{amsmath,amssymb,graphicx,geometry,enumitem,needspace,longtable,booktabs,fancyhdr,hyperref}
+\geometry{left=28mm,right=23mm,top=24mm,bottom=24mm}
+\hypersetup{unicode=true,colorlinks=true,linkcolor=black,urlcolor=blue,pdftitle={Giải tích §7.5 — Chiến lược tính tích phân}}
+\setlength{\parindent}{1.2em}\setlength{\parskip}{4pt}\setlength{\headheight}{16pt}
+\pagestyle{fancy}\fancyhf{}\fancyhead[L]{\small Chương 7. Các phương pháp tính tích phân}\fancyhead[R]{\small §7.5}\fancyfoot[C]{\thepage}
+\newcommand{\fig}[3][.68]{\begin{center}\begin{minipage}{\linewidth}\centering\includegraphics[width=#1\linewidth]{assets/#2.png}\\{\small #3}\end{minipage}\end{center}}
+\newcommand{\ex}[1]{\par\medskip\noindent\textbf{Ví dụ #1.}\ }
+\newcommand{\sol}{\par\nopagebreak[4]\noindent\textit{Lời giải.}\ }
+\newcommand{\bt}[1]{\par\smallskip\Needspace{5\baselineskip}\noindent\textbf{#1.}\ }
+\newcommand{\group}[1]{\par\Needspace{11\baselineskip}\medskip\noindent\textbf{#1}\par\nopagebreak[4]}
+\newcommand{\gint}[1]{\left[\!\left[#1\right]\!\right]}
+\allowdisplaybreaks[2]
+\DeclareMathOperator{\sech}{sech}
+\DeclareMathOperator{\csch}{csch}
+\DeclareMathOperator{\arccot}{arccot}
+
+\newcommand{\prj}[1]{\bt{#1}}
+
+\newcommand{\kn}[1]{\bt{#1}}
+\newcommand{\ds}[1]{\bt{#1}}
+\setlength{\emergencystretch}{1em}
+\begin{document}
+\begin{center}{\Large\bfseries 7.5 — Chiến lược tính tích phân}\end{center}
+Như ta đã thấy, tính tích phân khó hơn tính đạo hàm. Khi tìm đạo hàm của một hàm số, ta thấy rõ cần áp dụng công thức đạo hàm nào. Nhưng khi tính tích phân của một hàm số cho trước, có thể chưa rõ nên dùng phương pháp nào.
+
+\section*{Hướng dẫn tính tích phân}
+Cho đến đây, từng mục đã áp dụng một phương pháp riêng. Chẳng hạn, ta thường dùng phép đổi biến trong Bài tập 5.5, tích phân từng phần trong Bài tập 7.1 và phân thức đơn giản trong Bài tập 7.4. Tuy nhiên, trong mục này, ta đưa ra một tập hợp các tích phân thuộc nhiều dạng, được sắp xếp không theo thứ tự; khó khăn chủ yếu là nhận ra cần dùng phương pháp hay công thức nào. Không có quy tắc cứng nhắc nào cho biết phương pháp nào áp dụng được trong một tình huống nhất định, nhưng ta sẽ đưa ra một số hướng dẫn tổng quát có thể hữu ích.
+
+Điều kiện tiên quyết để áp dụng một chiến lược là nắm được các công thức tích phân cơ bản. Bảng sau tập hợp những tích phân trong danh sách trước đây cùng một số công thức bổ sung đã học trong chương này.
+
+\subsection*{Bảng công thức tích phân}
+Các hằng số tích phân được lược bỏ.
+\begin{longtable}{@{}r p{.85\linewidth}@{}}
+1. & $\displaystyle\int x^n\,dx=\frac{x^{n+1}}{n+1}\quad(n\ne-1)$\\[9pt]
+2. & $\displaystyle\int\frac1x\,dx=\ln|x|$\\[9pt]
+3. & $\displaystyle\int e^x\,dx=e^x$\\[9pt]
+4. & $\displaystyle\int b^x\,dx=\frac{b^x}{\ln b}$\\[9pt]
+5. & $\displaystyle\int\sin x\,dx=-\cos x$\\[9pt]
+6. & $\displaystyle\int\cos x\,dx=\sin x$\\[9pt]
+7. & $\displaystyle\int\sec^2x\,dx=\tan x$\\[9pt]
+8. & $\displaystyle\int\csc^2x\,dx=-\cot x$\\[9pt]
+9. & $\displaystyle\int\sec x\tan x\,dx=\sec x$\\[9pt]
+10. & $\displaystyle\int\csc x\cot x\,dx=-\csc x$\\[9pt]
+11. & $\displaystyle\int\sec x\,dx=\ln|\sec x+\tan x|$\\[9pt]
+12. & $\displaystyle\int\csc x\,dx=\ln|\csc x-\cot x|$\\[9pt]
+13. & $\displaystyle\int\tan x\,dx=\ln|\sec x|$\\[9pt]
+14. & $\displaystyle\int\cot x\,dx=\ln|\sin x|$\\[9pt]
+15. & $\displaystyle\int\sinh x\,dx=\cosh x$\\[9pt]
+16. & $\displaystyle\int\cosh x\,dx=\sinh x$\\[9pt]
+17. & $\displaystyle\int\frac{dx}{x^2+a^2}=\frac1a\tan^{-1}\left(\frac xa\right)$\\[9pt]
+18. & $\displaystyle\int\frac{dx}{\sqrt{a^2-x^2}}=\sin^{-1}\left(\frac xa\right),\quad a>0$\\[9pt]
+*19. & $\displaystyle\int\frac{dx}{x^2-a^2}=\frac1{2a}\ln\left|\frac{x-a}{x+a}\right|$\\[9pt]
+*20. & $\displaystyle\int\frac{dx}{\sqrt{x^2\pm a^2}}=\ln\left|x+\sqrt{x^2\pm a^2}\right|$\\
+\end{longtable}
+Phần lớn các công thức này cần được ghi nhớ. Biết tất cả các công thức đều hữu ích, nhưng không nhất thiết phải ghi nhớ những công thức đánh dấu sao vì có thể dễ dàng suy ra chúng. Có thể tránh dùng Công thức 19 bằng cách phân tích thành phân thức đơn giản, và có thể dùng phép thế lượng giác thay cho Công thức 20.
+
+Khi đã nắm được các công thức tích phân cơ bản này, nếu chưa thấy ngay cách giải quyết một tích phân cho trước, ta có thể thử chiến lược bốn bước sau.
+
+\subsection*{1. Rút gọn hàm dưới dấu tích phân nếu có thể}
+Đôi khi các biến đổi đại số hoặc đồng nhất thức lượng giác sẽ rút gọn hàm dưới dấu tích phân và làm cho phương pháp tính tích phân trở nên rõ ràng. Sau đây là một số ví dụ:
+\[\int\sqrt{x}\,(1+\sqrt{x})\,dx=\int(\sqrt{x}+x)\,dx\]
+\begin{align*}
+\int\frac{\tan\theta}{\sec^2\theta}\,d\theta
+&=\int\frac{\sin\theta}{\cos\theta}\cos^2\theta\,d\theta\\
+&=\int\sin\theta\cos\theta\,d\theta
+=\frac12\int\sin2\theta\,d\theta
+\end{align*}
+\begin{align*}
+\int(\sin x+\cos x)^2\,dx
+&=\int(\sin^2x+2\sin x\cos x+\cos^2x)\,dx\\
+&=\int(1+2\sin x\cos x)\,dx
+\end{align*}
+
+\subsection*{2. Tìm một phép đổi biến hiển nhiên}
+Thử tìm trong hàm dưới dấu tích phân một hàm $u=g(x)$ mà vi phân $du=g'(x)\,dx$ của nó cũng xuất hiện, sai khác nhiều nhất một thừa số hằng. Chẳng hạn, trong tích phân
+\[\int\frac{x}{x^2-1}\,dx\]
+ta nhận thấy rằng nếu $u=x^2-1$ thì $du=2x\,dx$. Do đó, ta dùng phép đổi biến $u=x^2-1$ thay cho phương pháp phân tích thành phân thức đơn giản.
+
+\subsection*{3. Phân loại hàm dưới dấu tích phân theo dạng của nó}
+Nếu Bước 1 và Bước 2 chưa dẫn đến lời giải, ta xem xét dạng của hàm dưới dấu tích phân $f(x)$.
+\begin{enumerate}[label=(\alph*),leftmargin=2em]
+\item \textit{Các hàm lượng giác.} Nếu $f(x)$ là tích các lũy thừa của $\sin x$ và $\cos x$, của $\tan x$ và $\sec x$, hoặc của $\cot x$ và $\csc x$, ta dùng các phép đổi biến được đề nghị trong Mục 7.2.
+\item \textit{Các hàm hữu tỉ.} Nếu $f$ là một hàm hữu tỉ, ta dùng quy trình trong Mục 7.4 liên quan đến phân thức đơn giản.
+\item \textit{Tích phân từng phần.} Nếu $f(x)$ là tích của một lũy thừa của $x$ (hoặc một đa thức) và một hàm siêu việt (chẳng hạn hàm lượng giác, hàm mũ hoặc hàm logarit), ta thử tích phân từng phần, chọn $u$ và $dv$ theo hướng dẫn trong Mục 7.1. Xem các hàm trong Bài tập 7.1, ta thấy phần lớn chúng thuộc dạng vừa mô tả.
+\item \textit{Các căn thức.} Khi xuất hiện một số căn thức nhất định, ta nên dùng những dạng phép thế sau.
+\begin{enumerate}[label=(\roman*),leftmargin=2em]
+\item Nếu xuất hiện $\sqrt{x^2+a^2}$, $\sqrt{x^2-a^2}$ hoặc $\sqrt{a^2-x^2}$, ta dùng phép thế lượng giác theo bảng trong Mục 7.3.
+\item Nếu xuất hiện $\sqrt[n]{ax+b}$, ta dùng phép thế hữu tỉ hóa $u=\sqrt[n]{ax+b}$. Tổng quát hơn, đôi khi cách này cũng có tác dụng đối với $\sqrt[n]{g(x)}$.
+\end{enumerate}
+\end{enumerate}
+
+\subsection*{4. Thử lại}
+Nếu ba bước đầu chưa cho kết quả, hãy nhớ rằng về cơ bản chỉ có hai phương pháp tính tích phân: đổi biến và từng phần.
+\begin{enumerate}[label=(\alph*),leftmargin=2em]
+\item \textit{Thử đổi biến.} Ngay cả khi không thấy phép đổi biến hiển nhiên nào (Bước 2), một ý tưởng bất chợt hoặc sự khéo léo (thậm chí sự bế tắc) cũng có thể gợi ra một phép đổi biến thích hợp.
+\item \textit{Thử tích phân từng phần.} Mặc dù tích phân từng phần thường được dùng cho các tích có dạng mô tả ở Bước 3(c), đôi khi nó cũng hiệu quả đối với một hàm đơn lẻ. Xem lại Mục 7.1, ta thấy phương pháp này có tác dụng với $\tan^{-1}x$, $\sin^{-1}x$ và $\ln x$; đây đều là các hàm ngược.
+\item \textit{Biến đổi hàm dưới dấu tích phân.} Các biến đổi đại số (có thể là hữu tỉ hóa mẫu số hoặc dùng đồng nhất thức lượng giác) có thể giúp đưa tích phân về một dạng dễ hơn. Những biến đổi này có thể sâu hơn so với Bước 1 và đòi hỏi sự khéo léo. Sau đây là một ví dụ:
+\begin{align*}
+\int\frac{dx}{1-\cos x}
+&=\int\frac1{1-\cos x}\cdot\frac{1+\cos x}{1+\cos x}\,dx\\
+&=\int\frac{1+\cos x}{1-\cos^2x}\,dx
+=\int\frac{1+\cos x}{\sin^2x}\,dx\\
+&=\int\left(\csc^2x+\frac{\cos x}{\sin^2x}\right)\,dx
+\end{align*}
+\item \textit{Liên hệ bài toán với những bài toán trước.} Khi đã tích lũy kinh nghiệm tính tích phân, ta có thể áp dụng cho một tích phân cho trước phương pháp tương tự phương pháp từng dùng cho một tích phân trước đó. Thậm chí có thể biểu diễn tích phân đang xét theo một tích phân đã biết. Chẳng hạn, $\int\tan^2x\sec x\,dx$ là một tích phân khó, nhưng dùng đồng nhất thức $\tan^2x=\sec^2x-1$, ta có thể viết
+\[\int\tan^2x\sec x\,dx=\int\sec^3x\,dx-\int\sec x\,dx\]
+và nếu đã tính $\int\sec^3x\,dx$ (xem Ví dụ 7.2.8), ta có thể dùng kết quả đó trong bài toán hiện tại.
+\item \textit{Dùng nhiều phương pháp.} Đôi khi phải dùng hai hoặc ba phương pháp để tính một tích phân. Quá trình tính có thể gồm nhiều phép đổi biến liên tiếp thuộc các dạng khác nhau, hoặc kết hợp tích phân từng phần với một hay nhiều phép đổi biến.
+\end{enumerate}
+
+Trong các ví dụ sau, ta chỉ nêu hướng giải mà không tính đầy đủ tích phân.
+
+\ex{1} $\displaystyle\int\frac{\tan^3x}{\cos^3x}\,dx$
+
+Ở Bước 1, ta viết lại tích phân:
+\[\int\frac{\tan^3x}{\cos^3x}\,dx=\int\tan^3x\sec^3x\,dx\]
+Tích phân hiện có dạng $\int\tan^mx\sec^nx\,dx$ với $m$ lẻ, vì vậy ta có thể dùng hướng dẫn trong Mục 7.2.
+
+Một cách khác, nếu ở Bước 1 ta viết
+\[\int\frac{\tan^3x}{\cos^3x}\,dx
+=\int\frac{\sin^3x}{\cos^3x}\,\frac1{\cos^3x}\,dx
+=\int\frac{\sin^3x}{\cos^6x}\,dx\]
+thì có thể tiếp tục như sau bằng phép đổi biến $u=\cos x$:
+\begin{align*}
+\int\frac{\sin^3x}{\cos^6x}\,dx
+&=\int\frac{1-\cos^2x}{\cos^6x}\,\sin x\,dx
+=\int\frac{1-u^2}{u^6}\,(-du)\\
+&=\int\frac{u^2-1}{u^6}\,du
+=\int(u^{-4}-u^{-6})\,du
+\end{align*}
+
+\ex{2} $\displaystyle\int\sin\sqrt{x}\,dx$
+
+Theo (ii) ở Bước 3(d), ta đặt $u=\sqrt{x}$. Khi đó $x=u^2$, nên $dx=2u\,du$ và
+\[\int\sin\sqrt{x}\,dx=2\int u\sin u\,du\]
+Hàm dưới dấu tích phân lúc này là tích của $u$ và hàm lượng giác $\sin u$, nên có thể tính bằng tích phân từng phần.
+
+\ex{3} $\displaystyle\int\frac{x^5+1}{x^3-3x^2-10x}\,dx$
+
+Không thấy phép rút gọn đại số hoặc phép đổi biến hiển nhiên nào, vì vậy Bước 1 và Bước 2 không áp dụng được ở đây. Hàm dưới dấu tích phân là hàm hữu tỉ, nên ta áp dụng quy trình trong Mục 7.4, nhớ rằng bước đầu tiên là thực hiện phép chia.
+
+\ex{4} $\displaystyle\int\frac{dx}{x\sqrt{\ln x}}$
+
+Ở đây chỉ cần Bước 2. Ta đặt $u=\ln x$ vì vi phân của nó là $du=dx/x$, xuất hiện trong tích phân.
+
+\ex{5} $\displaystyle\int\sqrt{\frac{1-x}{1+x}}\,dx$
+
+Mặc dù phép thế hữu tỉ hóa
+\[u=\sqrt{\frac{1-x}{1+x}}\]
+có tác dụng ở đây [(ii) ở Bước 3(d)], nó dẫn đến một hàm hữu tỉ rất phức tạp. Cách dễ hơn là thực hiện một số biến đổi đại số [theo Bước 1 hoặc Bước 4(c)]. Nhân tử số và mẫu số với $\sqrt{1-x}$, ta được
+\begin{align*}
+\int\sqrt{\frac{1-x}{1+x}}\,dx
+&=\int\frac{1-x}{\sqrt{1-x^2}}\,dx\\
+&=\int\frac1{\sqrt{1-x^2}}\,dx-\int\frac{x}{\sqrt{1-x^2}}\,dx\\
+&=\sin^{-1}x+\sqrt{1-x^2}+C
+\end{align*}
+
+\section*{Có thể tính tích phân của mọi hàm liên tục hay không}
+Một câu hỏi được đặt ra: liệu chiến lược tính tích phân của ta có cho phép tìm tích phân của mọi hàm liên tục hay không? Chẳng hạn, có thể dùng nó để tính $\int e^{x^2}\,dx$ hay không? Câu trả lời là không, ít nhất nếu chỉ dùng những hàm mà ta đã biết.
+
+Các hàm đã xét trong cuốn sách này được gọi là \textbf{các hàm sơ cấp}. Đó là các đa thức, hàm hữu tỉ, hàm lũy thừa ($x^n$), hàm mũ ($b^x$), hàm logarit, hàm lượng giác và lượng giác ngược, hàm hyperbolic và hyperbolic ngược, cùng tất cả các hàm có thể thu được từ chúng qua năm phép toán: cộng, trừ, nhân, chia và hợp hàm. Chẳng hạn, hàm sau là một hàm sơ cấp:
+\[f(x)=\sqrt{\frac{x^2-1}{x^3+2x-1}}+\ln(\cosh x)-xe^{\sin2x}\]
+
+Nếu $f$ là một hàm sơ cấp thì $f'$ là hàm sơ cấp, nhưng $\int f(x)\,dx$ không nhất thiết là hàm sơ cấp. Xét $f(x)=e^{x^2}$. Vì $f$ liên tục nên tích phân của nó tồn tại; nếu định nghĩa hàm $F$ bởi
+\[F(x)=\int_0^x e^{t^2}\,dt\]
+thì theo Phần 1 của Định lý cơ bản của giải tích, ta biết rằng
+\[F'(x)=e^{x^2}\]
+Như vậy, $f(x)=e^{x^2}$ có một nguyên hàm $F$, nhưng người ta đã chứng minh rằng $F$ không phải là hàm sơ cấp. Điều này có nghĩa là dù cố gắng đến đâu, ta cũng không bao giờ tính được $\int e^{x^2}\,dx$ bằng những hàm đã biết. (Tuy nhiên, trong Chương 11, ta sẽ thấy cách biểu diễn $\int e^{x^2}\,dx$ dưới dạng một chuỗi vô hạn.) Điều tương tự cũng đúng với các tích phân sau:
+\[\int\frac{e^x}{x}\,dx\qquad\int\sin(x^2)\,dx\qquad\int\cos(e^x)\,dx\]
+\[\int\sqrt{x^3+1}\,dx\qquad\int\frac1{\ln x}\,dx\qquad\int\frac{\sin x}{x}\,dx\]
+Thực ra, phần lớn các hàm sơ cấp không có nguyên hàm sơ cấp. Tuy vậy, có thể yên tâm rằng các tích phân trong những bài tập sau đều là hàm sơ cấp.
+\section*{7.5 — Bài tập}
+\group{1–8}
+Mỗi bài cho ba tích phân trông tương tự nhau nhưng có thể cần các phương pháp tính tích phân khác nhau. Tính các tích phân.
+\par\noindent\begin{minipage}[t]{\linewidth}
+\bt{1}
+\[\text{(a)}\quad\int\frac{x}{1+x^2}\,dx\qquad\text{(b)}\quad\int\frac1{1+x^2}\,dx\]
+\[\text{(c)}\quad\int\frac1{1-x^2}\,dx\]
+\end{minipage}\par
+\par\noindent\begin{minipage}[t]{\linewidth}
+\bt{2}
+\[\text{(a)}\quad\int x\sqrt{x^2-1}\,dx\qquad\text{(b)}\quad\int\frac1{x\sqrt{x^2-1}}\,dx\]
+\[\text{(c)}\quad\int\frac{\sqrt{x^2-1}}{x}\,dx\]
+\end{minipage}\par
+\par\noindent\begin{minipage}[t]{\linewidth}
+\bt{3}
+\[\text{(a)}\quad\int\frac{\ln x}{x}\,dx\qquad\text{(b)}\quad\int\ln(2x)\,dx\]
+\[\text{(c)}\quad\int x\ln x\,dx\]
+\end{minipage}\par
+\par\noindent\begin{minipage}[t]{\linewidth}
+\bt{4}
+\[\text{(a)}\quad\int\sin^2x\,dx\qquad\text{(b)}\quad\int\sin^3x\,dx\]
+\[\text{(c)}\quad\int\sin2x\,dx\]
+\end{minipage}\par
+\par\noindent\begin{minipage}[t]{\linewidth}
+\bt{5}
+\[\text{(a)}\quad\int\frac1{x^2-4x+3}\,dx\qquad\text{(b)}\quad\int\frac1{x^2-4x+4}\,dx\]
+\[\text{(c)}\quad\int\frac1{x^2-4x+5}\,dx\]
+\end{minipage}\par
+\par\noindent\begin{minipage}[t]{\linewidth}
+\bt{6}
+\[\text{(a)}\quad\int x\cos x^2\,dx\qquad\text{(b)}\quad\int x\cos^2x\,dx\]
+\[\text{(c)}\quad\int x^2\cos x\,dx\]
+\end{minipage}\par
+\par\noindent\begin{minipage}[t]{\linewidth}
+\bt{7}
+\[\text{(a)}\quad\int x^2e^{x^3}\,dx\qquad\text{(b)}\quad\int x^2e^x\,dx\]
+\[\text{(c)}\quad\int x^3e^{x^2}\,dx\]
+\end{minipage}\par
+\par\noindent\begin{minipage}[t]{\linewidth}
+\bt{8}
+\[\text{(a)}\quad\int e^x\sqrt{e^x-1}\,dx\qquad\text{(b)}\quad\int\frac{e^x}{\sqrt{1-e^{2x}}}\,dx\]
+\[\text{(c)}\quad\int\frac1{\sqrt{e^x-1}}\,dx\]
+\end{minipage}\par
+\group{9–93}
+Tính tích phân.
+\bt{9} $\displaystyle \int\frac{\cos x}{1-\sin x}\,dx$
+\bt{10} $\displaystyle \int_0^1(3x+1)^{\sqrt2}\,dx$
+\bt{11} $\displaystyle \int_1^4\sqrt y\ln y\,dy$
+\bt{12} $\displaystyle \int\frac{e^{\arcsin x}}{\sqrt{1-x^2}}\,dx$
+\bt{13} $\displaystyle \int\frac{\ln(\ln y)}y\,dy$
+\bt{14} $\displaystyle \int_0^1\frac{x}{(2x+1)^3}\,dx$
+\bt{15} $\displaystyle \int\frac{x}{x^4+9}\,dx$
+\bt{16} $\displaystyle \int t\sin t\cos t\,dt$
+\bt{17} $\displaystyle \int_2^4\frac{x+2}{x^2+3x-4}\,dx$
+\bt{18} $\displaystyle \int\frac{\cos(1/x)}{x^3}\,dx$
+\bt{19} $\displaystyle \int\frac1{x^3\sqrt{x^2-1}}\,dx$
+\bt{20} $\displaystyle \int\frac{2x-3}{x^3+3x}\,dx$
+\bt{21} $\displaystyle \int\frac{\cos^3x}{\csc x}\,dx$
+\bt{22} $\displaystyle \int\ln(1+x^2)\,dx$
+\bt{23} $\displaystyle \int x\sec x\tan x\,dx$
+\bt{24} $\displaystyle \int_0^{\sqrt2/2}\frac{x^2}{\sqrt{1-x^2}}\,dx$
+\bt{25} $\displaystyle \int_0^\pi t\cos^2t\,dt$
+\bt{26} $\displaystyle \int_1^4\frac{e^{\sqrt t}}{\sqrt t}\,dt$
+\bt{27} $\displaystyle \int e^{x+e^x}\,dx$
+\bt{28} $\displaystyle \int\frac{e^x}{1+e^{2a}}\,dx$
+\bt{29} $\displaystyle \int\arctan\sqrt{x}\,dx$
+\bt{30} $\displaystyle \int\frac{\ln x}{x\sqrt{1+(\ln x)^2}}\,dx$
+\bt{31} $\displaystyle \int_0^1(1+\sqrt{x})^8\,dx$
+\bt{32} $\displaystyle \int(1+\tan x)^2\sec x\,dx$
+\bt{33} $\displaystyle \int_0^1\frac{1+12t}{1+3t}\,dt$
+\bt{34} $\displaystyle \int_0^1\frac{3x^2+1}{x^3+x^2+x+1}\,dx$
+\bt{35} $\displaystyle \int\frac{dx}{1+e^x}$
+\bt{36} $\displaystyle \int\sin\sqrt{at}\,dt$
+\bt{37} $\displaystyle \int\ln\bigl(x+\sqrt{x^2-1}\bigr)\,dx$
+\bt{38} $\displaystyle \int_{-1}^2|e^x-1|\,dx$
+\bt{39} $\displaystyle \int\sqrt{\frac{1+x}{1-x}}\,dx$
+\bt{40} $\displaystyle \int_1^3\frac{e^{3/x}}{x^2}\,dx$
+\bt{41} $\displaystyle \int\sqrt{3-2x-x^2}\,dx$
+\bt{42} $\displaystyle \int_{\pi/4}^{\pi/2}\frac{1+4\cot x}{4-\cot x}\,dx$
+\bt{43} $\displaystyle \int_{-\pi/2}^{\pi/2}\frac{x}{1+\cos^2x}\,dx$
+\bt{44} $\displaystyle \int\frac{1+\sin x}{1+\cos x}\,dx$
+\bt{45} $\displaystyle \int_0^{\pi/4}\tan^3\theta\sec^2\theta\,d\theta$
+\bt{46} $\displaystyle \int_{\pi/6}^{\pi/3}\frac{\sin\theta\cot\theta}{\sec\theta}\,d\theta$
+\bt{47} $\displaystyle \int\frac{\sec\theta\tan\theta}{\sec^2\theta-\sec\theta}\,d\theta$
+\bt{48} $\displaystyle \int_0^\pi\sin6x\cos3x\,dx$
+\bt{49} $\displaystyle \int\theta\tan^2\theta\,d\theta$
+\bt{50} $\displaystyle \int\frac1{x\sqrt{x-1}}\,dx$
+\bt{51} $\displaystyle \int\frac{\sqrt{x}}{1+x^3}\,dx$
+\bt{52} $\displaystyle \int\sqrt{1+e^x}\,dx$
+\bt{53} $\displaystyle \int\frac{x}{1+\sqrt{x}}\,dx$
+\bt{54} $\displaystyle \int\frac{(x-1)e^x}{x^2}\,dx$
+\bt{55} $\displaystyle \int x^3(x-1)^{-4}\,dx$
+\bt{56} $\displaystyle \int_0^1 x\sqrt{2-\sqrt{1-x^2}}\,dx$
+\bt{57} $\displaystyle \int\frac1{x\sqrt{4x+1}}\,dx$
+\bt{58} $\displaystyle \int\frac1{x^2\sqrt{4x+1}}\,dx$
+\bt{59} $\displaystyle \int\frac1{x\sqrt{4x^2+1}}\,dx$
+\bt{60} $\displaystyle \int\frac{dx}{x(x^4+1)}$
+\bt{61} $\displaystyle \int x^2\sinh mx\,dx$
+\bt{62} $\displaystyle \int(x+\sin x)^2\,dx$
+\bt{63} $\displaystyle \int\frac{dx}{x+x\sqrt{x}}$
+\bt{64} $\displaystyle \int\frac{dx}{\sqrt{x}+x\sqrt{x}}$
+\bt{65} $\displaystyle \int x\sqrt[3]{x+c}\,dx$
+\bt{66} $\displaystyle \int\frac{x\ln x}{\sqrt{x^2-1}}\,dx$
+\bt{67} $\displaystyle \int\frac{dx}{x^4-16}$
+\bt{68} $\displaystyle \int\frac{dx}{x^2\sqrt{4x^2-1}}$
+\bt{69} $\displaystyle \int\frac{d\theta}{1+\cos\theta}$
+\bt{70} $\displaystyle \int\frac{d\theta}{1+\cos^2\theta}$
+\bt{71} $\displaystyle \int\sqrt{x}\,e^{\sqrt{x}}\,dx$
+\bt{72} $\displaystyle \int\frac1{\sqrt{\sqrt{x}+1}}\,dx$
+\bt{73} $\displaystyle \int\frac{\sin2x}{1+\cos^4x}\,dx$
+\bt{74} $\displaystyle \int_{\pi/4}^{\pi/3}\frac{\ln(\tan x)}{\sin x\cos x}\,dx$
+\bt{75} $\displaystyle \int\frac1{\sqrt{x+1}+\sqrt{x}}\,dx$
+\bt{76} $\displaystyle \int\frac{x^2}{x^6+3x^3+2}\,dx$
+\bt{77} $\displaystyle \int_1^{\sqrt3}\frac{\sqrt{1+x^2}}{x^2}\,dx$
+\bt{78} $\displaystyle \int\frac1{1+2e^x-e^{-x}}\,dx$
+\bt{79} $\displaystyle \int\frac{e^{2x}}{1+e^x}\,dx$
+\bt{80} $\displaystyle \int\frac{\ln(x+1)}{x^2}\,dx$
+\bt{81} $\displaystyle \int\frac{x+\arcsin x}{\sqrt{1-x^2}}\,dx$
+\bt{82} $\displaystyle \int\frac{4^x+10^x}{2^x}\,dx$
+\bt{83} $\displaystyle \int\frac{dx}{x\ln x-x}$
+\bt{84} $\displaystyle \int\frac{x^2}{\sqrt{x^2+1}}\,dx$
+\bt{85} $\displaystyle \int\frac{xe^x}{\sqrt{1+e^x}}\,dx$
+\bt{86} $\displaystyle \int\frac{1+\sin x}{1-\sin x}\,dx$
+\bt{87} $\displaystyle \int x\sin^2x\cos x\,dx$
+\bt{88} $\displaystyle \int\frac{\sec x\cos2x}{\sin x+\sec x}\,dx$
+\bt{89} $\displaystyle \int\sqrt{1-\sin x}\,dx$
+\bt{90} $\displaystyle \int\frac{\sin x\cos x}{\sin^4x+\cos^4x}\,dx$
+\bt{91} $\displaystyle \int_1^3\left(\sqrt{\frac{9-x}{x}}-\sqrt{\frac{x}{9-x}}\right)\,dx$
+\bt{92} $\displaystyle \int\frac1{(\sin x+\cos x)^2}\,dx$
+\bt{93} $\displaystyle \int_0^{\pi/6}\sqrt{1+\sin2\theta}\,d\theta$
+
+\bt{94} Theo Phần 1 của Định lý cơ bản của giải tích, ta biết rằng $F(x)=\int_0^x e^{e^t}\,dt$ là hàm liên tục, mặc dù không phải là hàm sơ cấp. Các hàm
+\[\int\frac{e^x}{x}\,dx\qquad\text{và}\qquad\int\frac1{\ln x}\,dx\]
+cũng không sơ cấp, nhưng có thể biểu diễn theo $F$. Tính các tích phân sau theo $F$.
+\[\text{(a)}\quad\int_1^2\frac{e^x}{x}\,dx\qquad\text{(b)}\quad\int_2^3\frac1{\ln x}\,dx\]
+\bt{95} Các hàm $y=e^{x^2}$ và $y=x^2e^{x^2}$ không có nguyên hàm sơ cấp, nhưng $y=(2x^2+1)e^{x^2}$ thì có. Tính $\displaystyle\int(2x^2+1)e^{x^2}\,dx$.
+\end{document}

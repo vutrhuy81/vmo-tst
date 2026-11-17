@@ -1,0 +1,17 @@
+{
+  "bookKey": "stewart-9",
+  "sectionKey": "7-review",
+  "title": "Ôn tập",
+  "contentFormat": "html-latex",
+  "content": "<div class=\"center\">\n<p><strong>Ôn tập Chương 7</strong></p>\n</div>\n<p><em>Chú ý: Các bài tập Mục 7.5 cung cấp thêm bài luyện tập về các phương pháp tính tích phân.</em></p>\n<p>Ôn tập gồm 8 câu kiểm tra khái niệm, 18 câu đúng–sai và 90 bài tập. Mỗi câu được trình bày riêng bên dưới.</p>\n<h1>Bài tập</h1>\n",
+  "sourceInfo": {
+    "filename": "Stewart_Ch07_Review_VI.tex",
+    "sha256": "9369fe1d747e6a61f535e792877682ff3c5780fe5a18fdae5d663237485b809d",
+    "assetCount": 2,
+    "conceptCheckCount": 8,
+    "trueFalseCount": 18,
+    "lastExercise": 90,
+    "interactiveQuestionCount": 116,
+    "note": "Toàn bộ nội dung TeX; hai ảnh PNG nguyên bản từ gói có TeX khớp từng byte; giữ hướng dẫn và dữ kiện tham chiếu."
+  }
+}

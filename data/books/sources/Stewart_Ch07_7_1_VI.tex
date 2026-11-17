@@ -1,0 +1,355 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage{fontspec}\setmainfont{Latin Modern Roman}\setsansfont{DejaVu Sans}
+\usepackage{amsmath,amssymb,graphicx,geometry,enumitem,needspace,longtable,booktabs,fancyhdr,hyperref}
+\geometry{left=28mm,right=23mm,top=24mm,bottom=24mm}
+\hypersetup{unicode=true,colorlinks=true,linkcolor=black,urlcolor=blue,pdftitle={Giải tích §7.1 — Phương pháp tích phân từng phần}}
+\setlength{\parindent}{1.2em}\setlength{\parskip}{4pt}\setlength{\headheight}{16pt}
+\pagestyle{fancy}\fancyhf{}\fancyhead[L]{\small Chương 7. Các phương pháp tính tích phân}\fancyhead[R]{\small §7.1}\fancyfoot[C]{\thepage}
+\newcommand{\fig}[3][.68]{\begin{center}\begin{minipage}{\linewidth}\centering\includegraphics[width=#1\linewidth]{assets/#2.png}\\{\small #3}\end{minipage}\end{center}}
+\newcommand{\ex}[1]{\par\medskip\noindent\textbf{Ví dụ #1.}\ }
+\newcommand{\sol}{\par\nopagebreak[4]\noindent\textit{Lời giải.}\ }
+\newcommand{\bt}[1]{\par\smallskip\Needspace{5\baselineskip}\noindent\textbf{#1.}\ }
+\newcommand{\group}[1]{\par\Needspace{11\baselineskip}\medskip\noindent\textbf{#1}\par\nopagebreak[4]}
+\newcommand{\gint}[1]{\left[\!\left[#1\right]\!\right]}
+\allowdisplaybreaks[2]
+\DeclareMathOperator{\sech}{sech}
+\DeclareMathOperator{\csch}{csch}
+\DeclareMathOperator{\arccot}{arccot}
+
+\newcommand{\prj}[1]{\bt{#1}}
+
+\newcommand{\kn}[1]{\bt{#1}}
+\newcommand{\ds}[1]{\bt{#1}}
+\begin{document}
+\begin{center}{\LARGE\bfseries Chương 7 — Các phương pháp tính tích phân}\end{center}
+\fig[.90]{chapter07}{Các nguyên lý vật lý chi phối chuyển động của tên lửa mô hình cũng áp dụng cho các tên lửa đưa tàu vũ trụ lên quỹ đạo quanh Trái Đất. Trong Bài tập 7.1.74, bạn sẽ dùng một tích phân để tính lượng nhiên liệu cần thiết để đưa tên lửa lên một độ cao xác định so với mặt đất.}
+{\small Ben Cooper / Science Faction / Getty Images; ảnh nhỏ: Rasvan ILIESCU / Alamy Stock Photo.}
+
+Nhờ Định lý cơ bản của giải tích, ta có thể tính tích phân của một hàm số nếu biết một nguyên hàm, tức là một tích phân bất định. Dưới đây là phần tổng hợp những tích phân quan trọng nhất mà ta đã học.
+\begin{align*}
+\int k\,dx&=kx+C, &\int x^n\,dx&=\frac{x^{n+1}}{n+1}+C\quad(n\ne-1),\\
+\int\frac1x\,dx&=\ln|x|+C, &\int e^x\,dx&=e^x+C,\\
+\int b^x\,dx&=\frac{b^x}{\ln b}+C, &\int\sin x\,dx&=-\cos x+C,\\
+\int\cos x\,dx&=\sin x+C, &\int\sec^2x\,dx&=\tan x+C,\\
+\int\csc^2x\,dx&=-\cot x+C, &\int\sec x\tan x\,dx&=\sec x+C,\\
+\int\csc x\cot x\,dx&=-\csc x+C, &\int\tan x\,dx&=\ln|\sec x|+C,\\
+\int\cot x\,dx&=\ln|\sin x|+C, &\int\frac{dx}{x^2+a^2}&=\frac1a\tan^{-1}\!\left(\frac xa\right)+C,\\
+\int\frac{dx}{\sqrt{a^2-x^2}}&=\sin^{-1}\!\left(\frac xa\right)+C\quad(a>0),\\
+\int\sinh x\,dx&=\cosh x+C, &\int\cosh x\,dx&=\sinh x+C.
+\end{align*}
+Trong chương này, ta phát triển các phương pháp sử dụng những công thức tích phân cơ bản này để tìm tích phân bất định của các hàm phức tạp hơn. Ta đã học phương pháp tính tích phân quan trọng nhất, quy tắc đổi biến, ở Mục 5.5. Phương pháp tổng quát còn lại, tích phân từng phần, được trình bày ở Mục 7.1. Sau đó, ta học những phương pháp dành riêng cho một số lớp hàm, chẳng hạn các hàm lượng giác và các hàm hữu tỉ.
+
+Tính tích phân không trực tiếp như tính đạo hàm; không có quy tắc nào bảo đảm tuyệt đối rằng ta tìm được tích phân bất định của một hàm số. Vì vậy, ta sẽ thảo luận một chiến lược tính tích phân ở Mục 7.5.
+
+\Needspace{18\baselineskip}
+\begin{center}{\LARGE\bfseries 7.1 — Phương pháp tích phân từng phần}\end{center}
+Mỗi quy tắc tính đạo hàm đều có một quy tắc tính tích phân tương ứng. Chẳng hạn, quy tắc đổi biến trong tính tích phân tương ứng với quy tắc dây chuyền trong tính đạo hàm. Quy tắc tính tích phân tương ứng với quy tắc đạo hàm của tích được gọi là \textit{phương pháp tích phân từng phần}.
+
+\section*{Tích phân từng phần: tích phân bất định}
+Quy tắc đạo hàm của tích phát biểu rằng nếu $f$ và $g$ là các hàm khả vi thì
+\[\frac{d}{dx}[f(x)g(x)]=f(x)g'(x)+g(x)f'(x).\]
+Theo ký hiệu tích phân bất định, phương trình này trở thành
+\[\int[f(x)g'(x)+g(x)f'(x)]\,dx=f(x)g(x),\]
+hay
+\[\int f(x)g'(x)\,dx+\int g(x)f'(x)\,dx=f(x)g(x).\]
+Sắp xếp lại phương trình, ta được
+\begin{equation}\int f(x)g'(x)\,dx=f(x)g(x)-\int g(x)f'(x)\,dx.\tag{1}\end{equation}
+Công thức 1 được gọi là \textbf{công thức tích phân từng phần}. Công thức này có lẽ dễ nhớ hơn khi dùng ký hiệu sau. Đặt $u=f(x)$ và $v=g(x)$. Khi đó các vi phân là $du=f'(x)\,dx$ và $dv=g'(x)\,dx$; do đó, theo quy tắc đổi biến, công thức tích phân từng phần trở thành
+\begin{equation}\int u\,dv=uv-\int v\,du.\tag{2}\end{equation}
+
+\ex{1} Tìm $\displaystyle\int x\sin x\,dx$.
+\sol \textbf{Dùng Công thức 1.} Giả sử ta chọn $f(x)=x$ và $g'(x)=\sin x$. Khi đó $f'(x)=1$ và $g(x)=-\cos x$. (Đối với $g$, ta có thể chọn bất kỳ nguyên hàm nào của $g'$.) Vì vậy, dùng Công thức 1, ta có
+\begin{align*}
+\int x\sin x\,dx&=f(x)g(x)-\int g(x)f'(x)\,dx\\
+&=x(-\cos x)-\int(-\cos x)\,dx\\
+&=-x\cos x+\int\cos x\,dx\\
+&=-x\cos x+\sin x+C.
+\end{align*}
+Nên kiểm tra kết quả bằng cách lấy đạo hàm. Nếu làm như vậy, ta được $x\sin x$, đúng như mong đợi.
+
+\sol \textbf{Dùng Công thức 2.} Đặt
+\[u=x,\qquad dv=\sin x\,dx.\]
+Khi đó
+\[du=dx,\qquad v=-\cos x,\]
+và vì thế
+\begin{align*}
+\int x\sin x\,dx&=\int\underbrace{x}_{u}\,\underbrace{\sin x\,dx}_{dv}
+=\underbrace{x}_{u}\,\underbrace{(-\cos x)}_{v}-\int\underbrace{(-\cos x)}_{v}\,\underbrace{dx}_{du}\\
+&=-x\cos x+\int\cos x\,dx\\
+&=-x\cos x+\sin x+C.
+\end{align*}
+\textit{Gợi ý bên lề.} Mẫu trình bày sau rất hữu ích:
+\[u=\square,\qquad dv=\square,\qquad du=\square,\qquad v=\square.\]
+
+\textbf{Chú ý.} Mục đích của việc dùng tích phân từng phần là thu được một tích phân đơn giản hơn tích phân ban đầu. Chẳng hạn, trong Ví dụ 1, ta bắt đầu với $\int x\sin x\,dx$ và biểu diễn nó theo tích phân đơn giản hơn $\int\cos x\,dx$. Nếu thay vào đó ta chọn $u=\sin x$ và $dv=x\,dx$ thì $du=\cos x\,dx$ và $v=x^2/2$, nên tích phân từng phần cho
+\[\int x\sin x\,dx=(\sin x)\frac{x^2}{2}-\frac12\int x^2\cos x\,dx.\]
+Mặc dù đẳng thức này đúng, $\int x^2\cos x\,dx$ khó tính hơn tích phân ban đầu. Nói chung, khi chọn $u$ và $dv$, ta thường cố gắng chọn $u=f(x)$ là một hàm trở nên đơn giản hơn khi lấy đạo hàm (hoặc ít nhất không phức tạp hơn), miễn là $dv=g'(x)\,dx$ có thể dễ dàng lấy tích phân để được $v$.
+
+\ex{2} Tính $\displaystyle\int\ln x\,dx$.
+\sol Ở đây ta không có nhiều cách chọn $u$ và $dv$. Đặt
+\[u=\ln x,\qquad dv=dx.\]
+Khi đó
+\[du=\frac1x\,dx,\qquad v=x.\]
+Lấy tích phân từng phần, ta được
+\begin{align*}
+\int\ln x\,dx&=x\ln x-\int x\cdot\frac1x\,dx\\
+&=x\ln x-\int dx\\
+&=x\ln x-x+C.
+\end{align*}
+\textit{Ghi chú bên lề.} Theo thông lệ, ta viết $\int1\,dx$ thành $\int dx$. Hãy kiểm tra kết quả bằng cách lấy đạo hàm.
+
+Tích phân từng phần có hiệu quả trong ví dụ này vì đạo hàm của hàm $f(x)=\ln x$ đơn giản hơn $f$.
+
+\ex{3} Tìm $\displaystyle\int t^2e^t\,dt$.
+\sol Chú ý rằng $e^t$ không thay đổi khi lấy đạo hàm hoặc lấy tích phân, trong khi $t^2$ trở nên đơn giản hơn khi lấy đạo hàm, nên ta chọn
+\[u=t^2,\qquad dv=e^t\,dt.\]
+Khi đó
+\[du=2t\,dt,\qquad v=e^t.\]
+Tích phân từng phần cho
+\begin{equation}\int t^2e^t\,dt=t^2e^t-2\int te^t\,dt.\tag{3}\end{equation}
+Tích phân thu được, $\int te^t\,dt$, đơn giản hơn tích phân ban đầu nhưng vẫn chưa hiển nhiên. Vì vậy, ta dùng tích phân từng phần lần thứ hai, lần này với $u=t$ và $dv=e^t\,dt$. Khi đó $du=dt$, $v=e^t$ và
+\begin{align*}
+\int te^t\,dt&=te^t-\int e^t\,dt\\
+&=te^t-e^t+C.
+\end{align*}
+Thay vào Phương trình 3, ta được
+\begin{align*}
+\int t^2e^t\,dt&=t^2e^t-2\int te^t\,dt\\
+&=t^2e^t-2(te^t-e^t+C)\\
+&=t^2e^t-2te^t+2e^t+C_1,\qquad C_1=-2C.
+\end{align*}
+
+\ex{4} Tính $\displaystyle\int e^x\sin x\,dx$.
+\sol Cả $e^x$ lẫn $\sin x$ đều không trở nên đơn giản hơn khi lấy đạo hàm, nên ta thử chọn $u=e^x$ và $dv=\sin x\,dx$. (Trong ví dụ này, chọn $u=\sin x$, $dv=e^x\,dx$ cũng có tác dụng.) Khi đó $du=e^x\,dx$ và $v=-\cos x$, nên tích phân từng phần cho
+\begin{equation}\int e^x\sin x\,dx=-e^x\cos x+\int e^x\cos x\,dx.\tag{4}\end{equation}
+\textit{Ghi chú bên lề.} Một phương pháp dễ hơn, dùng số phức, được nêu trong Bài tập 50 ở Phụ lục H.
+
+Tích phân thu được, $\int e^x\cos x\,dx$, không đơn giản hơn tích phân ban đầu, nhưng ít nhất cũng không khó hơn. Vì việc lấy tích phân từng phần hai lần đã thành công trong ví dụ trước, ta tiếp tục lấy tích phân từng phần một lần nữa. Điều quan trọng là ta lại chọn $u=e^x$, nên $dv=\cos x\,dx$. Khi đó $du=e^x\,dx$, $v=\sin x$ và
+\begin{equation}\int e^x\cos x\,dx=e^x\sin x-\int e^x\sin x\,dx.\tag{5}\end{equation}
+Thoạt nhìn, dường như ta chưa đạt được gì vì lại đi đến $\int e^x\sin x\,dx$, chính là tích phân ban đầu. Tuy nhiên, nếu thay biểu thức của $\int e^x\cos x\,dx$ từ Phương trình 5 vào Phương trình 4, ta được
+\[\int e^x\sin x\,dx=-e^x\cos x+e^x\sin x-\int e^x\sin x\,dx.\]
+Có thể xem đây là một phương trình cần giải để tìm tích phân chưa biết. Cộng $\int e^x\sin x\,dx$ vào hai vế, ta được
+\[2\int e^x\sin x\,dx=-e^x\cos x+e^x\sin x.\]
+Chia cho $2$ và thêm hằng số tích phân, ta có
+\[\int e^x\sin x\,dx=\frac12e^x(\sin x-\cos x)+C.\]
+Hình 1 minh họa Ví dụ 4 bằng các đồ thị của $f(x)=e^x\sin x$ và $F(x)=\frac12e^x(\sin x-\cos x)$. Để kiểm tra trực quan, chú ý rằng $f(x)=0$ khi $F$ đạt cực đại hoặc cực tiểu.
+\fig[.30]{figure01}{Hình 1.}
+
+\section*{Tích phân từng phần: tích phân xác định}
+Nếu kết hợp công thức tích phân từng phần với Phần 2 của Định lý cơ bản của giải tích, ta có thể tính tích phân xác định bằng phương pháp từng phần. Tính hai vế của Công thức 1 từ $a$ đến $b$, giả sử $f'$ và $g'$ liên tục, rồi dùng Định lý cơ bản, ta được
+\begin{equation}\int_a^b f(x)g'(x)\,dx=\big[f(x)g(x)\big]_a^b-\int_a^b g(x)f'(x)\,dx.\tag{6}\end{equation}
+
+\ex{5} Tính $\displaystyle\int_0^1\tan^{-1}x\,dx$.
+\sol Đặt
+\[u=\tan^{-1}x,\qquad dv=dx.\]
+Khi đó
+\[du=\frac{dx}{1+x^2},\qquad v=x.\]
+Vì vậy, Công thức 6 cho
+\begin{align*}
+\int_0^1\tan^{-1}x\,dx&=\big[x\tan^{-1}x\big]_0^1-\int_0^1\frac{x}{1+x^2}\,dx\\
+&=1\cdot\tan^{-1}1-0\cdot\tan^{-1}0-\int_0^1\frac{x}{1+x^2}\,dx\\
+&=\frac\pi4-\int_0^1\frac{x}{1+x^2}\,dx.
+\end{align*}
+Để tính tích phân này, ta dùng phép đổi biến $t=1+x^2$ (vì $u$ đã có ý nghĩa khác trong ví dụ này). Khi đó $dt=2x\,dx$, nên $x\,dx=\frac12dt$. Khi $x=0$ thì $t=1$; khi $x=1$ thì $t=2$; do đó
+\begin{align*}
+\int_0^1\frac{x}{1+x^2}\,dx&=\frac12\int_1^2\frac{dt}{t}=\frac12\big[\ln|t|\big]_1^2\\
+&=\frac12(\ln2-\ln1)=\frac12\ln2.
+\end{align*}
+Vậy
+\[\int_0^1\tan^{-1}x\,dx=\frac\pi4-\int_0^1\frac{x}{1+x^2}\,dx=\frac\pi4-\frac{\ln2}{2}.\]
+Vì $\tan^{-1}x\ge0$ khi $x\ge0$, tích phân trong Ví dụ 5 có thể được hiểu là diện tích miền trong Hình 2.
+\fig[.34]{figure02}{Hình 2.}
+
+\section*{Công thức truy hồi}
+Các ví dụ trước cho thấy tích phân từng phần thường cho phép biểu diễn một tích phân theo một tích phân đơn giản hơn. Nếu hàm dưới dấu tích phân chứa một lũy thừa của một hàm số, đôi khi ta có thể dùng tích phân từng phần để hạ số mũ. Bằng cách này, ta có thể tìm được một \textit{công thức truy hồi}, như trong ví dụ tiếp theo.
+
+\Needspace{11\baselineskip}
+\ex{6} Chứng minh công thức truy hồi
+\begin{equation}\int\sin^n x\,dx=-\frac1n\cos x\sin^{n-1}x+\frac{n-1}{n}\int\sin^{n-2}x\,dx,\tag{7}\end{equation}
+trong đó $n\ge2$ là một số nguyên.
+
+\textit{Ghi chú bên lề.} Phương trình 7 được gọi là công thức truy hồi vì số mũ $n$ đã được hạ xuống $n-1$ và $n-2$.
+\sol Đặt
+\[u=\sin^{n-1}x,\qquad dv=\sin x\,dx.\]
+Khi đó
+\[du=(n-1)\sin^{n-2}x\cos x\,dx,\qquad v=-\cos x,\]
+và tích phân từng phần cho
+\[\int\sin^n x\,dx=-\cos x\sin^{n-1}x+(n-1)\int\sin^{n-2}x\cos^2x\,dx.\]
+Vì $\cos^2x=1-\sin^2x$, ta có
+\begin{align*}
+\int\sin^n x\,dx={}&-\cos x\sin^{n-1}x+(n-1)\int\sin^{n-2}x\,dx\\
+&-(n-1)\int\sin^n x\,dx.
+\end{align*}
+Như trong Ví dụ 4, ta giải phương trình này để tìm tích phân cần tính bằng cách chuyển số hạng cuối ở vế phải sang vế trái. Do đó, ta có
+\[n\int\sin^n x\,dx=-\cos x\sin^{n-1}x+(n-1)\int\sin^{n-2}x\,dx,\]
+hay
+\[\int\sin^n x\,dx=-\frac1n\cos x\sin^{n-1}x+\frac{n-1}{n}\int\sin^{n-2}x\,dx.\]
+Công thức truy hồi (7) hữu ích vì khi áp dụng lặp lại, cuối cùng ta có thể biểu diễn $\int\sin^n x\,dx$ theo $\int\sin x\,dx$ (nếu $n$ lẻ) hoặc $\int(\sin x)^0\,dx=\int dx$ (nếu $n$ chẵn).
+
+\clearpage
+\section*{7.1 — Bài tập}
+\group{1–4} Tính tích phân bằng phương pháp từng phần với cách chọn $u$ và $dv$ đã cho.
+\bt{1} $\displaystyle\int xe^{2x}\,dx$; $u=x$, $dv=e^{2x}\,dx$.
+\bt{2} $\displaystyle\int\sqrt{x}\ln x\,dx$; $u=\ln x$, $dv=\sqrt{x}\,dx$.
+\bt{3} $\displaystyle\int x\cos4x\,dx$; $u=x$, $dv=\cos4x\,dx$.
+\bt{4} $\displaystyle\int\sin^{-1}x\,dx$; $u=\sin^{-1}x$, $dv=dx$.
+
+\group{5–42} Tính tích phân.
+\bt{5} $\displaystyle\int te^{2t}\,dt$.
+\bt{6} $\displaystyle\int ye^{-y}\,dy$.
+\bt{7} $\displaystyle\int x\sin10x\,dx$.
+\bt{8} $\displaystyle\int(\pi-x)\cos\pi x\,dx$.
+\bt{9} $\displaystyle\int w\ln w\,dw$.
+\bt{10} $\displaystyle\int\frac{\ln x}{x^2}\,dx$.
+\bt{11} $\displaystyle\int(x^2+2x)\cos x\,dx$.
+\bt{12} $\displaystyle\int t^2\sin\beta t\,dt$.
+\bt{13} $\displaystyle\int\cos^{-1}x\,dx$.
+\bt{14} $\displaystyle\int\ln\sqrt{x}\,dx$.
+\bt{15} $\displaystyle\int t^4\ln t\,dt$.
+\bt{16} $\displaystyle\int\tan^{-1}(2y)\,dy$.
+\bt{17} $\displaystyle\int t\csc^2t\,dt$.
+\bt{18} $\displaystyle\int x\cosh ax\,dx$.
+\bt{19} $\displaystyle\int(\ln x)^2\,dx$.
+\bt{20} $\displaystyle\int\frac{z}{10^z}\,dz$.
+\bt{21} $\displaystyle\int e^{3x}\cos x\,dx$.
+\bt{22} $\displaystyle\int e^x\sin\pi x\,dx$.
+\bt{23} $\displaystyle\int e^{2\theta}\sin3\theta\,d\theta$.
+\bt{24} $\displaystyle\int e^{-\theta}\cos2\theta\,d\theta$.
+\bt{25} $\displaystyle\int z^3e^z\,dz$.
+\bt{26} $\displaystyle\int(\arcsin x)^2\,dx$.
+\bt{27} $\displaystyle\int(1+x^2)e^{3x}\,dx$.
+\bt{28} $\displaystyle\int_0^{1/2}\theta\sin3\pi\theta\,d\theta$.
+\bt{29} $\displaystyle\int_0^1 x3^x\,dx$.
+\bt{30} $\displaystyle\int_0^1\frac{xe^x}{(1+x)^2}\,dx$.
+\bt{31} $\displaystyle\int_0^2 y\sinh y\,dy$.
+\bt{32} $\displaystyle\int_1^2 w^2\ln w\,dw$.
+\bt{33} $\displaystyle\int_1^5\frac{\ln R}{R^2}\,dR$.
+\bt{34} $\displaystyle\int_0^{2\pi}t^2\sin2t\,dt$.
+\bt{35} $\displaystyle\int_0^\pi x\sin x\cos x\,dx$.
+\bt{36} $\displaystyle\int_1^{\sqrt3}\arctan(1/x)\,dx$.
+\bt{37} $\displaystyle\int_1^5\frac{M}{e^M}\,dM$.
+\bt{38} $\displaystyle\int_1^2\frac{(\ln x)^2}{x^3}\,dx$.
+\bt{39} $\displaystyle\int_0^{\pi/3}\sin x\ln(\cos x)\,dx$.
+\bt{40} $\displaystyle\int_0^1\frac{r^3}{\sqrt{4+r^2}}\,dr$.
+\bt{41} $\displaystyle\int_0^\pi\cos x\sinh x\,dx$.
+\bt{42} $\displaystyle\int_0^t e^s\sin(t-s)\,ds$.
+
+\group{43–48} Trước hết thực hiện một phép đổi biến, rồi dùng tích phân từng phần để tính tích phân.
+\bt{43} $\displaystyle\int e^{\sqrt{x}}\,dx$.
+\bt{44} $\displaystyle\int\cos(\ln x)\,dx$.
+\bt{45} $\displaystyle\int_{\sqrt{\pi/2}}^{\sqrt\pi}\theta^3\cos(\theta^2)\,d\theta$.
+\bt{46} $\displaystyle\int_0^\pi e^{\cos t}\sin2t\,dt$.
+\bt{47} $\displaystyle\int x\ln(1+x)\,dx$.
+\bt{48} $\displaystyle\int\frac{\arcsin(\ln x)}x\,dx$.
+
+\group{49–52} \textsf{[Đồ thị]} Tính tích phân bất định. Minh họa và kiểm tra tính hợp lý của kết quả bằng cách vẽ đồ thị của cả hàm số lẫn nguyên hàm của nó (lấy $C=0$).
+\bt{49} $\displaystyle\int xe^{-2x}\,dx$.
+\bt{50} $\displaystyle\int x^{3/2}\ln x\,dx$.
+\bt{51} $\displaystyle\int x^3\sqrt{1+x^2}\,dx$.
+\bt{52} $\displaystyle\int x^2\sin2x\,dx$.
+
+\bt{53} (a) Dùng công thức truy hồi trong Ví dụ 6 để chứng minh rằng
+\[\int\sin^2x\,dx=\frac x2-\frac{\sin2x}{4}+C.\]
+(b) Dùng phần (a) và công thức truy hồi để tính $\int\sin^4x\,dx$.
+
+\bt{54} (a) Chứng minh công thức truy hồi
+\[\int\cos^nx\,dx=\frac1n\cos^{n-1}x\sin x+\frac{n-1}{n}\int\cos^{n-2}x\,dx.\]
+(b) Dùng phần (a) để tính $\int\cos^2x\,dx$.
+
+(c) Dùng các phần (a) và (b) để tính $\int\cos^4x\,dx$.
+
+\bt{55} (a) Dùng công thức truy hồi trong Ví dụ 6 để chứng minh rằng
+\[\int_0^{\pi/2}\sin^nx\,dx=\frac{n-1}{n}\int_0^{\pi/2}\sin^{n-2}x\,dx,\]
+trong đó $n\ge2$ là một số nguyên.
+
+(b) Dùng phần (a) để tính $\int_0^{\pi/2}\sin^3x\,dx$ và $\int_0^{\pi/2}\sin^5x\,dx$.
+
+(c) Dùng phần (a) để chứng minh rằng, đối với các lũy thừa lẻ của sin,
+\[\int_0^{\pi/2}\sin^{2n+1}x\,dx=\frac{2\cdot4\cdot6\cdots2n}{3\cdot5\cdot7\cdots(2n+1)}.\]
+
+\bt{56} Chứng minh rằng, đối với các lũy thừa chẵn của sin,
+\[\int_0^{\pi/2}\sin^{2n}x\,dx=\frac{1\cdot3\cdot5\cdots(2n-1)}{2\cdot4\cdot6\cdots2n}\,\frac\pi2.\]
+
+\group{57–60} Dùng tích phân từng phần để chứng minh công thức truy hồi.
+\bt{57} $\displaystyle\int(\ln x)^n\,dx=x(\ln x)^n-n\int(\ln x)^{n-1}\,dx$.
+\bt{58} $\displaystyle\int x^ne^x\,dx=x^ne^x-n\int x^{n-1}e^x\,dx$.
+\bt{59} $\displaystyle\int\tan^nx\,dx=\frac{\tan^{n-1}x}{n-1}-\int\tan^{n-2}x\,dx\quad(n\ne1)$.
+\bt{60} $\displaystyle\int\sec^nx\,dx=\frac{\tan x\sec^{n-2}x}{n-1}+\frac{n-2}{n-1}\int\sec^{n-2}x\,dx\quad(n\ne1)$.
+
+\bt{61} Dùng Bài tập 57 để tìm $\int(\ln x)^3\,dx$.
+\bt{62} Dùng Bài tập 58 để tìm $\int x^4e^x\,dx$.
+
+\group{63–64} Tìm diện tích miền giới hạn bởi các đường cong đã cho.
+\bt{63} $y=x^2\ln x$, $y=4\ln x$.
+\bt{64} $y=x^2e^{-x}$, $y=xe^{-x}$.
+
+\group{65–66} \textsf{[Đồ thị]} Dùng đồ thị để tìm gần đúng hoành độ các giao điểm của những đường cong đã cho. Sau đó tìm gần đúng diện tích miền giới hạn bởi các đường cong.
+\bt{65} $y=\arcsin\left(\frac12x\right)$, $y=2-x^2$.
+\bt{66} $y=x\ln(x+1)$, $y=3x-x^2$.
+
+\group{67–70} Dùng phương pháp vỏ trụ để tìm thể tích tạo thành bằng cách quay miền giới hạn bởi các đường cong quanh trục đã cho.
+\bt{67} $y=\cos(\pi x/2)$, $y=0$, $0\le x\le1$; quanh trục $y$.
+\bt{68} $y=e^x$, $y=e^{-x}$, $x=1$; quanh trục $y$.
+\bt{69} $y=e^{-x}$, $y=0$, $x=-1$, $x=0$; quanh $x=1$.
+\bt{70} $y=e^x$, $x=0$, $y=3$; quanh trục $x$.
+
+\bt{71} Tính thể tích tạo thành bằng cách quay miền giới hạn bởi các đường cong $y=\ln x$, $y=0$ và $x=2$ quanh mỗi trục sau.
+
+(a) Trục $y$. \qquad (b) Trục $x$.
+
+\bt{72} Tính giá trị trung bình của $f(x)=x\sec^2x$ trên đoạn $[0,\pi/4]$.
+
+\bt{73} Hàm Fresnel $S(x)=\int_0^x\sin\left(\frac12\pi t^2\right)\,dt$ đã được thảo luận trong Ví dụ 5.3.3 và được sử dụng rộng rãi trong lý thuyết quang học. Tìm $\int S(x)\,dx$. [Kết quả sẽ chứa $S(x)$.]
+
+\bt{74} \textbf{Phương trình tên lửa.} Tên lửa tăng tốc bằng cách đốt nhiên liệu mang theo, vì vậy khối lượng của nó giảm theo thời gian. Giả sử khối lượng ban đầu của tên lửa lúc rời bệ phóng (kể cả nhiên liệu) là $m$, nhiên liệu được tiêu thụ với tốc độ $r$, và khí thải được phụt ra với vận tốc không đổi $v_e$ (so với tên lửa). Một mô hình vận tốc của tên lửa tại thời điểm $t$ được cho bởi phương trình
+\[v(t)=-gt-v_e\ln\frac{m-rt}{m},\]
+trong đó $g$ là gia tốc trọng trường và $t$ không quá lớn. Nếu $g=9.8$ m/s$^2$, $m=30\,000$ kg, $r=160$ kg/s và $v_e=3000$ m/s, hãy tìm độ cao của tên lửa (a) một phút sau khi rời bệ phóng và (b) sau khi đã tiêu thụ $6000$ kg nhiên liệu.
+
+\bt{75} Một chất điểm chuyển động trên một đường thẳng có vận tốc $v(t)=t^2e^{-t}$ mét trên giây sau $t$ giây. Chất điểm đi được quãng đường bao nhiêu trong $t$ giây đầu tiên?
+
+\bt{76} Nếu $f(0)=g(0)=0$ và $f''$, $g''$ liên tục, hãy chứng minh rằng
+\[\int_0^a f(x)g''(x)\,dx=f(a)g'(a)-f'(a)g(a)+\int_0^a f''(x)g(x)\,dx.\]
+
+\bt{77} Giả sử $f(1)=2$, $f(4)=7$, $f'(1)=5$, $f'(4)=3$ và $f''$ liên tục. Tìm giá trị của $\int_1^4 xf''(x)\,dx$.
+
+\bt{78} (a) Dùng tích phân từng phần để chứng minh rằng
+\[\int f(x)\,dx=xf(x)-\int xf'(x)\,dx.\]
+(b) Nếu $f$ và $g$ là các hàm ngược của nhau và $f'$ liên tục, hãy chứng minh rằng
+\[\int_a^b f(x)\,dx=bf(b)-af(a)-\int_{f(a)}^{f(b)}g(y)\,dy.\]
+[Gợi ý: Dùng phần (a) và thực hiện phép đổi biến $y=f(x)$.]
+
+(c) Trong trường hợp $f$ và $g$ là các hàm dương và $b>a>0$, hãy vẽ một hình để đưa ra cách giải thích hình học cho phần (b).
+
+(d) Dùng phần (b) để tính $\int_1^e\ln x\,dx$.
+
+\bt{79} (a) Nhớ rằng công thức tích phân từng phần được suy ra từ quy tắc đạo hàm của tích. Dùng lập luận tương tự để suy ra công thức tích phân sau từ quy tắc đạo hàm của thương.
+\[\int\frac{u}{v^2}\,dv=-\frac uv+\int\frac1v\,du.\]
+(b) Dùng công thức ở phần (a) để tính $\int\frac{\ln x}{x^2}\,dx$.
+
+\bt{80} \textbf{Công thức tích Wallis cho $\pi$.} Đặt $I_n=\int_0^{\pi/2}\sin^nx\,dx$.
+
+(a) Chứng minh rằng $I_{2n+2}\le I_{2n+1}\le I_{2n}$.
+
+(b) Dùng Bài tập 56 để chứng minh rằng
+\[\frac{I_{2n+2}}{I_{2n}}=\frac{2n+1}{2n+2}.\]
+(c) Dùng các phần (a) và (b) để chứng minh rằng
+\[\frac{2n+1}{2n+2}\le\frac{I_{2n+1}}{I_{2n}}\le1,\]
+và suy ra $\lim_{n\to\infty}I_{2n+1}/I_{2n}=1$.
+
+(d) Dùng phần (c) cùng các Bài tập 55 và 56 để chứng minh rằng
+\[\lim_{n\to\infty}\frac21\cdot\frac23\cdot\frac43\cdot\frac45\cdot\frac65\cdot\frac67\cdots\frac{2n}{2n-1}\cdot\frac{2n}{2n+1}=\frac\pi2.\]
+Công thức này thường được viết dưới dạng một tích vô hạn:
+\[\frac\pi2=\frac21\cdot\frac23\cdot\frac43\cdot\frac45\cdot\frac65\cdot\frac67\cdots\]
+và được gọi là \textit{tích Wallis}.
+
+(e) Ta dựng các hình chữ nhật như sau. Bắt đầu với một hình vuông có diện tích $1$ rồi gắn các hình chữ nhật diện tích $1$ luân phiên vào bên cạnh hoặc phía trên hình chữ nhật trước đó (xem hình). Tìm giới hạn của các tỉ số chiều rộng trên chiều cao của những hình chữ nhật này.
+\fig[.52]{exercise80}{Hình cho Bài tập 80.}
+
+\par\noindent\begin{minipage}[t]{\linewidth}
+\bt{81} Ta đã thu được Công thức 6.3.2, $V=\int_a^b2\pi xf(x)\,dx$, bằng cách dùng vỏ trụ, nhưng bây giờ có thể dùng tích phân từng phần để chứng minh công thức ấy bằng phương pháp thiết diện ở Mục 6.2, ít nhất trong trường hợp $f$ là đơn ánh và do đó có hàm ngược $g$. Dùng hình vẽ để chứng minh rằng
+\[V=\pi b^2d-\pi a^2c-\int_c^d\pi[g(y)]^2\,dy.\]
+Thực hiện phép đổi biến $y=f(x)$ rồi dùng tích phân từng phần đối với tích phân thu được để chứng minh rằng
+\[V=\int_a^b2\pi xf(x)\,dx.\]
+\fig[.36]{exercise81}{Hình cho Bài tập 81.}
+\end{minipage}\par
+\end{document}

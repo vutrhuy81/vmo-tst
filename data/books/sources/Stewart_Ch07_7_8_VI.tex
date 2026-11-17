@@ -1,0 +1,469 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage{fontspec}\setmainfont{Latin Modern Roman}\setsansfont{DejaVu Sans}
+\usepackage{amsmath,amssymb,graphicx,geometry,enumitem,needspace,longtable,booktabs,fancyhdr,hyperref}
+\geometry{left=28mm,right=23mm,top=24mm,bottom=24mm}
+\hypersetup{unicode=true,colorlinks=true,linkcolor=black,urlcolor=blue,pdftitle={Giải tích §7.8 — Tích phân suy rộng}}
+\setlength{\parindent}{1.2em}\setlength{\parskip}{4pt}\setlength{\headheight}{16pt}
+\pagestyle{fancy}\fancyhf{}\fancyhead[L]{\small Chương 7. Các phương pháp tính tích phân}\fancyhead[R]{\small §7.8}\fancyfoot[C]{\thepage}
+\newcommand{\fig}[3][.68]{\begin{center}\begin{minipage}{\linewidth}\centering\includegraphics[width=#1\linewidth]{assets/#2.png}\\{\small #3}\end{minipage}\end{center}}
+\newcommand{\ex}[1]{\par\medskip\noindent\textbf{Ví dụ #1.}\ }
+\newcommand{\sol}{\par\nopagebreak[4]\noindent\textit{Lời giải.}\ }
+\newcommand{\bt}[1]{\par\smallskip\Needspace{5\baselineskip}\noindent\textbf{#1.}\ }
+\newcommand{\group}[1]{\par\Needspace{11\baselineskip}\medskip\noindent\textbf{#1}\par\nopagebreak[4]}
+\newcommand{\gint}[1]{\left[\!\left[#1\right]\!\right]}
+\allowdisplaybreaks[2]
+\DeclareMathOperator{\sech}{sech}
+\DeclareMathOperator{\csch}{csch}
+\DeclareMathOperator{\arccot}{arccot}
+
+\newcommand{\prj}[1]{\bt{#1}}
+
+\newcommand{\kn}[1]{\bt{#1}}
+\newcommand{\ds}[1]{\bt{#1}}
+\setlength{\emergencystretch}{1em}
+\widowpenalty=10000\clubpenalty=10000
+\begin{document}
+\begin{center}{\Large\bfseries 7.8 — Tích phân suy rộng}\end{center}
+Khi định nghĩa tích phân xác định $\int_a^b f(x)\,dx$, ta xét một hàm $f$ xác định trên khoảng hữu hạn $[a,b]$ và giả sử $f$ không có gián đoạn vô cực (xem Mục 5.2). Trong mục này, ta mở rộng khái niệm tích phân xác định cho trường hợp khoảng lấy tích phân là vô hạn và trường hợp $f$ có gián đoạn vô cực trong $[a,b]$. Trong cả hai trường hợp, tích phân được gọi là \textit{tích phân suy rộng}. Một ứng dụng quan trọng của ý tưởng này, các phân phối xác suất, sẽ được nghiên cứu trong Mục 8.5.
+
+\section*{Loại 1 — Khoảng vô hạn}
+Xét miền không bị chặn $S$ nằm dưới đường cong $y=1/x^2$, phía trên trục $x$ và bên phải đường thẳng $x=1$. Có thể cho rằng vì $S$ trải dài vô hạn nên diện tích của nó phải vô hạn, nhưng hãy xem kỹ hơn. Diện tích phần của $S$ nằm bên trái đường thẳng $x=t$ (miền tô màu trong Hình 1) là
+\[A(t)=\int_1^t\frac1{x^2}\,dx=\left[-\frac1x\right]_1^t=1-\frac1t.\]
+\fig[.46]{fig01}{Hình 1. Diện tích miền tô màu bằng $1-1/t$.}
+Chú ý rằng $A(t)<1$ bất kể chọn $t$ lớn đến đâu. Đồng thời,
+\[\lim_{t\to\infty}A(t)=\lim_{t\to\infty}\left(1-\frac1t\right)=1.\]
+Diện tích miền tô màu tiến đến 1 khi $t\to\infty$ (xem Hình 2), nên ta nói diện tích miền vô hạn $S$ bằng 1 và viết
+\[\int_1^\infty\frac1{x^2}\,dx=\lim_{t\to\infty}\int_1^t\frac1{x^2}\,dx=1.\]
+\fig[1]{fig02}{Hình 2. Các diện tích lần lượt bằng $1/2$, $2/3$, $4/5$ và 1.}
+Dựa vào ví dụ này, ta định nghĩa tích phân của $f$ (không nhất thiết là hàm dương) trên một khoảng vô hạn là giới hạn của các tích phân trên những khoảng hữu hạn.
+
+\subsection*{1. Định nghĩa tích phân suy rộng loại 1}
+(a) Nếu $\int_a^t f(x)\,dx$ tồn tại với mọi số $t\ge a$ thì
+\[\int_a^\infty f(x)\,dx=\lim_{t\to\infty}\int_a^t f(x)\,dx,\]
+với điều kiện giới hạn này tồn tại và hữu hạn.
+
+(b) Nếu $\int_t^b f(x)\,dx$ tồn tại với mọi số $t\le b$ thì
+\[\int_{-\infty}^b f(x)\,dx=\lim_{t\to-\infty}\int_t^b f(x)\,dx,\]
+với điều kiện giới hạn này tồn tại và hữu hạn.
+
+Các tích phân suy rộng $\int_a^\infty f(x)\,dx$ và $\int_{-\infty}^b f(x)\,dx$ được gọi là \textbf{hội tụ} nếu giới hạn tương ứng tồn tại, và \textbf{phân kỳ} nếu giới hạn không tồn tại.
+
+(c) Nếu cả $\int_a^\infty f(x)\,dx$ và $\int_{-\infty}^a f(x)\,dx$ đều hội tụ thì định nghĩa
+\[\int_{-\infty}^\infty f(x)\,dx
+=\int_{-\infty}^a f(x)\,dx+\int_a^\infty f(x)\,dx.\]
+Ở phần (c), có thể dùng bất kỳ số thực $a$ nào (xem Bài tập 88).
+
+Mỗi tích phân suy rộng trong Định nghĩa 1 có thể được hiểu là một diện tích nếu $f$ là hàm dương. Chẳng hạn, trong trường hợp (a), nếu $f(x)\ge0$ và $\int_a^\infty f(x)\,dx$ hội tụ thì ta định nghĩa diện tích của miền $S=\{(x,y)\mid x\ge a,\ 0\le y\le f(x)\}$ trong Hình 3 là
+\[A(S)=\int_a^\infty f(x)\,dx.\]
+Điều này phù hợp vì $\int_a^\infty f(x)\,dx$ là giới hạn khi $t\to\infty$ của diện tích dưới đồ thị $f$ từ $a$ đến $t$.
+\fig[.9]{fig03}{Hình 3. Miền $S$ dưới đồ thị $y=f(x)$.}
+
+\ex{1} Xác định tích phân $\int_1^\infty(1/x)\,dx$ hội tụ hay phân kỳ.
+\sol Theo phần (a) của Định nghĩa 1,
+\begin{align*}
+\int_1^\infty\frac1x\,dx&=\lim_{t\to\infty}\int_1^t\frac1x\,dx
+=\lim_{t\to\infty}\bigl[\ln|x|\bigr]_1^t\\
+&=\lim_{t\to\infty}(\ln t-\ln1)=\lim_{t\to\infty}\ln t=\infty.
+\end{align*}
+Giới hạn không tồn tại dưới dạng một số hữu hạn, nên tích phân suy rộng $\int_1^\infty(1/x)\,dx$ phân kỳ.
+
+Hãy so sánh kết quả của Ví dụ 1 với ví dụ ở đầu mục này:
+\[\int_1^\infty\frac1{x^2}\,dx\ \text{hội tụ},\qquad
+\int_1^\infty\frac1x\,dx\ \text{phân kỳ}.\]
+Về hình học, điều này nói rằng mặc dù các đường cong $y=1/x^2$ và $y=1/x$ trông rất giống nhau với $x>0$, miền dưới $y=1/x^2$ ở bên phải $x=1$ (miền tô màu trong Hình 4) có diện tích hữu hạn, còn miền tương ứng dưới $y=1/x$ (Hình 5) có diện tích vô hạn. Cả $1/x^2$ và $1/x$ đều tiến đến 0 khi $x\to\infty$, nhưng $1/x^2$ tiến đến 0 nhanh hơn $1/x$. Các giá trị $1/x$ không giảm đủ nhanh để tích phân có giá trị hữu hạn.
+\fig[.44]{fig04}{Hình 4. Diện tích hữu hạn; $\int_1^\infty(1/x^2)\,dx$ hội tụ.}
+\fig[.44]{fig05}{Hình 5. Diện tích vô hạn; $\int_1^\infty(1/x)\,dx$ phân kỳ.}
+
+\ex{2} Tính $\displaystyle\int_{-\infty}^0 xe^x\,dx$.
+\sol Dùng phần (b) của Định nghĩa 1,
+\[\int_{-\infty}^0 xe^x\,dx=\lim_{t\to-\infty}\int_t^0 xe^x\,dx.\]
+Tích phân từng phần với $u=x$, $dv=e^x\,dx$, nên $du=dx$, $v=e^x$:
+\begin{align*}
+\int_t^0 xe^x\,dx&=[xe^x]_t^0-\int_t^0 e^x\,dx\\
+&=-te^t-1+e^t.
+\end{align*}
+Ta biết $e^t\to0$ khi $t\to-\infty$; theo quy tắc l’Hospital,
+\begin{align*}
+\lim_{t\to-\infty}te^t&=\lim_{t\to-\infty}\frac t{e^{-t}}
+=\lim_{t\to-\infty}\frac1{-e^{-t}}\\
+&=\lim_{t\to-\infty}(-e^t)=0.
+\end{align*}
+Vì vậy,
+\begin{align*}
+\int_{-\infty}^0 xe^x\,dx&=\lim_{t\to-\infty}(-te^t-1+e^t)\\
+&=-0-1+0=-1.
+\end{align*}
+
+\ex{3} Tính $\displaystyle\int_{-\infty}^\infty\frac1{1+x^2}\,dx$.
+\sol Chọn $a=0$ trong Định nghĩa 1(c) là thuận tiện:
+\[\int_{-\infty}^\infty\frac1{1+x^2}\,dx
+=\int_{-\infty}^0\frac1{1+x^2}\,dx+\int_0^\infty\frac1{1+x^2}\,dx.\]
+Bây giờ phải tính riêng từng tích phân ở vế phải:
+\begin{align*}
+\int_0^\infty\frac1{1+x^2}\,dx
+&=\lim_{t\to\infty}\int_0^t\frac{dx}{1+x^2}
+=\lim_{t\to\infty}[\tan^{-1}x]_0^t\\
+&=\lim_{t\to\infty}(\tan^{-1}t-\tan^{-1}0)
+=\lim_{t\to\infty}\tan^{-1}t=\frac\pi2.
+\end{align*}
+\begin{align*}
+\int_{-\infty}^0\frac1{1+x^2}\,dx
+&=\lim_{t\to-\infty}\int_t^0\frac{dx}{1+x^2}
+=\lim_{t\to-\infty}[\tan^{-1}x]_t^0\\
+&=\lim_{t\to-\infty}(\tan^{-1}0-\tan^{-1}t)
+=0-\left(-\frac\pi2\right)=\frac\pi2.
+\end{align*}
+Vì cả hai tích phân đều hội tụ, tích phân đã cho hội tụ và
+\[\int_{-\infty}^\infty\frac1{1+x^2}\,dx=\frac\pi2+\frac\pi2=\pi.\]
+Do $1/(1+x^2)>0$, có thể hiểu tích phân suy rộng này là diện tích của miền vô hạn nằm dưới $y=1/(1+x^2)$ và phía trên trục $x$ (Hình 6).
+\fig[.5]{fig06}{Hình 6. Diện tích miền tô màu bằng $\pi$.}
+
+\ex{4} Tích phân $\displaystyle\int_1^\infty\frac1{x^p}\,dx$ hội tụ với những giá trị nào của $p$?
+\sol Theo Ví dụ 1, tích phân phân kỳ khi $p=1$, nên giả sử $p\ne1$. Khi đó
+\begin{align*}
+\int_1^\infty\frac1{x^p}\,dx
+&=\lim_{t\to\infty}\int_1^t x^{-p}\,dx
+=\lim_{t\to\infty}\left[\frac{x^{-p+1}}{-p+1}\right]_{x=1}^{x=t}\\
+&=\lim_{t\to\infty}\frac1{1-p}\left[\frac1{t^{p-1}}-1\right].
+\end{align*}
+Nếu $p>1$ thì $p-1>0$, nên khi $t\to\infty$, $t^{p-1}\to\infty$ và $1/t^{p-1}\to0$. Do đó
+\[\int_1^\infty\frac1{x^p}\,dx=\frac1{p-1}\qquad\text{nếu }p>1,\]
+và tích phân hội tụ.
+
+Nếu $p<1$ thì $p-1<0$, nên
+\[\frac1{t^{p-1}}=t^{1-p}\to\infty\qquad\text{khi }t\to\infty,\]
+và tích phân phân kỳ.
+
+Ta tóm tắt kết quả của Ví dụ 4 để sử dụng về sau:
+\begin{equation}\int_1^\infty\frac1{x^p}\,dx
+\quad\text{hội tụ nếu }p>1\text{ và phân kỳ nếu }p\le1.\tag{2}\end{equation}
+\section*{Loại 2 — Hàm dưới dấu tích phân gián đoạn}
+Giả sử $f$ là một hàm dương, liên tục trên khoảng hữu hạn $[a,b)$, nhưng có tiệm cận đứng tại $b$. Gọi $S$ là miền không bị chặn nằm dưới đồ thị $f$, phía trên trục $x$, giữa $a$ và $b$. (Với tích phân loại 1, miền trải dài vô hạn theo phương ngang; ở đây miền vô hạn theo phương thẳng đứng.) Diện tích phần của $S$ nằm giữa $a$ và $t$ (miền tô màu trong Hình 7) là
+\[A(t)=\int_a^t f(x)\,dx.\]
+\fig[.46]{fig07}{Hình 7. Miền có tiệm cận đứng $x=b$.}
+Nếu $A(t)$ tiến đến một số xác định $A$ khi $t\to b^-$ thì ta nói diện tích miền $S$ là $A$ và viết
+\[\int_a^b f(x)\,dx=\lim_{t\to b^-}\int_a^t f(x)\,dx.\]
+Ta dùng đẳng thức này để định nghĩa tích phân suy rộng loại 2 ngay cả khi $f$ không phải hàm dương, bất kể dạng gián đoạn của $f$ tại $b$.
+
+\subsection*{3. Định nghĩa tích phân suy rộng loại 2}
+(a) Nếu $f$ liên tục trên $[a,b)$ và gián đoạn tại $b$ thì
+\[\int_a^b f(x)\,dx=\lim_{t\to b^-}\int_a^t f(x)\,dx,\]
+nếu giới hạn này tồn tại và hữu hạn.
+
+(b) Nếu $f$ liên tục trên $(a,b]$ và gián đoạn tại $a$ thì
+\[\int_a^b f(x)\,dx=\lim_{t\to a^+}\int_t^b f(x)\,dx,\]
+nếu giới hạn này tồn tại và hữu hạn.
+
+Tích phân suy rộng $\int_a^b f(x)\,dx$ được gọi là \textbf{hội tụ} nếu giới hạn tương ứng tồn tại, và \textbf{phân kỳ} nếu giới hạn không tồn tại.
+
+(c) Nếu $f$ gián đoạn tại $c$, với $a<c<b$, và cả $\int_a^c f(x)\,dx$ và $\int_c^b f(x)\,dx$ đều hội tụ thì định nghĩa
+\[\int_a^b f(x)\,dx=\int_a^c f(x)\,dx+\int_c^b f(x)\,dx.\]
+Phần (b) và (c) của Định nghĩa 3 được minh họa ở Hình 8 và 9 cho trường hợp $f(x)\ge0$ và $f$ có các tiệm cận đứng lần lượt tại $a$ và $c$.
+\fig[.42]{fig08}{Hình 8. Gián đoạn tại đầu mút trái.}
+\fig[.42]{fig09}{Hình 9. Gián đoạn tại một điểm bên trong khoảng.}
+
+\Needspace{12\baselineskip}
+\ex{5} Tìm $\displaystyle\int_2^5\frac1{\sqrt{x-2}}\,dx$.
+\sol Trước hết, tích phân đã cho là suy rộng vì $f(x)=1/\sqrt{x-2}$ có tiệm cận đứng $x=2$. Do gián đoạn vô cực xảy ra tại đầu mút trái của $[2,5]$, ta dùng phần (b) của Định nghĩa 3:
+\begin{align*}
+\int_2^5\frac{dx}{\sqrt{x-2}}
+&=\lim_{t\to2^+}\int_t^5\frac{dx}{\sqrt{x-2}}
+=\lim_{t\to2^+}\bigl[2\sqrt{x-2}\bigr]_t^5\\
+&=\lim_{t\to2^+}2\bigl(\sqrt3-\sqrt{t-2}\bigr)=2\sqrt3.
+\end{align*}
+Vậy tích phân suy rộng này hội tụ. Vì hàm dưới dấu tích phân dương, có thể hiểu giá trị tích phân là diện tích miền tô màu trong Hình 10.
+\fig[.48]{fig10}{Hình 10. Diện tích miền tô màu bằng $2\sqrt3$.}
+
+\ex{6} Xác định $\displaystyle\int_0^{\pi/2}\sec x\,dx$ hội tụ hay phân kỳ.
+\sol Tích phân đã cho là suy rộng vì $\lim_{x\to(\pi/2)^-}\sec x=\infty$. Dùng phần (a) của Định nghĩa 3 và Công thức 14 trong Bảng tích phân, ta có
+\begin{align*}
+\int_0^{\pi/2}\sec x\,dx
+&=\lim_{t\to(\pi/2)^-}\int_0^t\sec x\,dx\\
+&=\lim_{t\to(\pi/2)^-}\bigl[\ln|\sec x+\tan x|\bigr]_0^t\\
+&=\lim_{t\to(\pi/2)^-}[\ln(\sec t+\tan t)-\ln1]=\infty,
+\end{align*}
+vì $\sec t\to\infty$ và $\tan t\to\infty$ khi $t\to(\pi/2)^-$. Do đó tích phân suy rộng đã cho phân kỳ.
+
+\ex{7} Tính $\displaystyle\int_0^3\frac{dx}{x-1}$ nếu có thể.
+\sol Đường thẳng $x=1$ là tiệm cận đứng của hàm dưới dấu tích phân. Vì nó nằm bên trong khoảng $[0,3]$, phải dùng phần (c) của Định nghĩa 3 với $c=1$:
+\[\int_0^3\frac{dx}{x-1}=\int_0^1\frac{dx}{x-1}+\int_1^3\frac{dx}{x-1},\]
+trong đó
+\begin{align*}
+\int_0^1\frac{dx}{x-1}
+&=\lim_{t\to1^-}\int_0^t\frac{dx}{x-1}
+=\lim_{t\to1^-}\bigl[\ln|x-1|\bigr]_0^t\\
+&=\lim_{t\to1^-}\bigl(\ln|t-1|-\ln|-1|\bigr)
+=\lim_{t\to1^-}\ln(1-t)=-\infty,
+\end{align*}
+vì $1-t\to0^+$ khi $t\to1^-$. Vậy $\int_0^1 dx/(x-1)$ phân kỳ. Điều này suy ra $\int_0^3 dx/(x-1)$ phân kỳ. [Không cần tính $\int_1^3 dx/(x-1)$.]
+
+\textbf{Lưu ý.} Nếu không nhận ra tiệm cận $x=1$ trong Ví dụ 7 và nhầm tích phân này với một tích phân thông thường, ta có thể tính sai $\int_0^3 dx/(x-1)$ thành
+\[\bigl[\ln|x-1|\bigr]_0^3=\ln2-\ln1=\ln2.\]
+Điều này sai vì tích phân là suy rộng và phải được tính thông qua các giới hạn.
+
+Từ đây, mỗi khi gặp ký hiệu $\int_a^b f(x)\,dx$, phải xem xét hàm $f$ trên $[a,b]$ để xác định đó là tích phân xác định thông thường hay tích phân suy rộng.
+
+\ex{8} Tính $\displaystyle\int_0^1\ln x\,dx$.
+\sol Hàm $f(x)=\ln x$ có tiệm cận đứng tại 0 vì $\lim_{x\to0^+}\ln x=-\infty$. Do đó tích phân đã cho là suy rộng và
+\[\int_0^1\ln x\,dx=\lim_{t\to0^+}\int_t^1\ln x\,dx.\]
+Tích phân từng phần với $u=\ln x$, $dv=dx$, $du=dx/x$, $v=x$:
+\begin{align*}
+\int_t^1\ln x\,dx&=[x\ln x]_t^1-\int_t^1 dx\\
+&=1\ln1-t\ln t-(1-t)=-t\ln t-1+t.
+\end{align*}
+Để tìm giới hạn của số hạng đầu, dùng quy tắc l’Hospital:
+\[\lim_{t\to0^+}t\ln t=\lim_{t\to0^+}\frac{\ln t}{1/t}
+=\lim_{t\to0^+}\frac{1/t}{-1/t^2}=\lim_{t\to0^+}(-t)=0.\]
+Vì vậy,
+\[\int_0^1\ln x\,dx=\lim_{t\to0^+}(-t\ln t-1+t)=-0-1+0=-1.\]
+Hình 11 cho cách diễn giải hình học của kết quả này. Diện tích miền tô màu nằm phía trên $y=\ln x$ và phía dưới trục $x$ bằng 1.
+\fig[.34]{fig11}{Hình 11. Diện tích miền tô màu bằng 1.}
+
+\section*{Tiêu chuẩn so sánh cho tích phân suy rộng}
+Đôi khi không thể tìm được giá trị chính xác của một tích phân suy rộng, nhưng vẫn cần biết nó hội tụ hay phân kỳ. Trong những trường hợp đó, định lý sau rất hữu ích. Mặc dù được phát biểu cho tích phân loại 1, một định lý tương tự cũng đúng cho tích phân loại 2.
+
+\subsection*{Định lý so sánh}
+Giả sử $f$ và $g$ là các hàm liên tục, thỏa mãn $f(x)\ge g(x)\ge0$ với $x\ge a$.
+
+(a) Nếu $\int_a^\infty f(x)\,dx$ hội tụ thì $\int_a^\infty g(x)\,dx$ hội tụ.
+
+(b) Nếu $\int_a^\infty g(x)\,dx$ phân kỳ thì $\int_a^\infty f(x)\,dx$ phân kỳ.
+
+Ta không trình bày chứng minh Định lý so sánh, nhưng Hình 12 cho thấy định lý có cơ sở trực quan. Nếu diện tích dưới đường cong trên $y=f(x)$ hữu hạn thì diện tích dưới đường cong dưới $y=g(x)$ cũng hữu hạn. Nếu diện tích dưới $y=g(x)$ vô hạn thì diện tích dưới $y=f(x)$ cũng vô hạn. [Chú ý rằng chiều ngược lại không nhất thiết đúng: nếu $\int_a^\infty g(x)\,dx$ hội tụ thì $\int_a^\infty f(x)\,dx$ có thể hội tụ hoặc không; nếu $\int_a^\infty f(x)\,dx$ phân kỳ thì $\int_a^\infty g(x)\,dx$ có thể phân kỳ hoặc không.]
+\fig[.45]{fig12}{Hình 12. So sánh hai miền diện tích.}
+
+\ex{9} Chứng tỏ $\displaystyle\int_0^\infty e^{-x^2}\,dx$ hội tụ.
+\sol Không thể tính trực tiếp tích phân này vì nguyên hàm của $e^{-x^2}$ không phải là hàm sơ cấp (như đã giải thích trong Mục 7.5). Ta viết
+\[\int_0^\infty e^{-x^2}\,dx=\int_0^1e^{-x^2}\,dx+\int_1^\infty e^{-x^2}\,dx,\]
+và chú ý rằng tích phân thứ nhất ở vế phải là tích phân xác định thông thường, có giá trị hữu hạn. Đối với tích phân thứ hai, dùng việc khi $x\ge1$ thì $x^2\ge x$, nên $-x^2\le-x$ và do đó $e^{-x^2}\le e^{-x}$ (Hình 13). Tích phân của $e^{-x}$ dễ tính:
+\[\int_1^\infty e^{-x}\,dx=\lim_{t\to\infty}\int_1^t e^{-x}\,dx
+=\lim_{t\to\infty}(e^{-1}-e^{-t})=e^{-1}.\]
+Vậy lấy $f(x)=e^{-x}$, $g(x)=e^{-x^2}$ trong Định lý so sánh, ta thấy $\int_1^\infty e^{-x^2}\,dx$ hội tụ. Suy ra $\int_0^\infty e^{-x^2}\,dx$ cũng hội tụ.
+\fig[.48]{fig13}{Hình 13. $e^{-x^2}\le e^{-x}$ khi $x\ge1$.}
+Trong Ví dụ 9, ta chứng tỏ $\int_0^\infty e^{-x^2}\,dx$ hội tụ mà không tính giá trị của nó. Bài tập 84 gợi ý cách chứng tỏ giá trị này xấp xỉ $0.8862$. Trong lý thuyết xác suất, cần biết giá trị chính xác của tích phân suy rộng này, như sẽ thấy ở Mục 8.5; bằng các phương pháp giải tích nhiều biến, có thể chứng minh giá trị chính xác là $\sqrt\pi/2$. Bảng 1 minh họa định nghĩa tích phân suy rộng hội tụ bằng cách cho thấy các giá trị $\int_0^t e^{-x^2}\,dx$ (do máy tính tạo ra) tiến đến $\sqrt\pi/2$ khi $t$ lớn. Thực ra chúng hội tụ rất nhanh vì $e^{-x^2}\to0$ rất nhanh khi $x\to\infty$.
+
+\textbf{Bảng 1}
+\begin{center}\begin{tabular}{r r}\toprule
+$t$&$\displaystyle\int_0^t e^{-x^2}\,dx$\\\midrule
+1&0.7468241328\\2&0.8820813908\\3&0.8862073483\\4&0.8862269118\\5&0.8862269255\\6&0.8862269255\\\bottomrule
+\end{tabular}\end{center}
+
+\ex{10} Tích phân $\displaystyle\int_1^\infty\frac{1+e^{-x}}x\,dx$ phân kỳ theo Định lý so sánh, vì
+\[\frac{1+e^{-x}}x>\frac1x\]
+và $\int_1^\infty(1/x)\,dx$ phân kỳ theo Ví dụ 1 [hoặc theo (2) với $p=1$].
+
+Bảng 2 minh họa sự phân kỳ của tích phân trong Ví dụ 10. Có vẻ các giá trị không tiến đến bất kỳ số cố định nào.
+
+\textbf{Bảng 2}
+\begin{center}\begin{tabular}{r r}\toprule
+$t$&$\displaystyle\int_1^t\frac{1+e^{-x}}x\,dx$\\\midrule
+2&0.8636306042\\5&1.8276735512\\10&2.5219648704\\100&4.8245541204\\1000&7.1271392134\\10000&9.4297243064\\\bottomrule
+\end{tabular}\end{center}
+\section*{7.8 — Bài tập}
+\bt{1} Giải thích vì sao mỗi tích phân sau là suy rộng.
+\[\text{(a)}\quad\int_1^4\frac{dx}{x-3}\qquad
+\text{(b)}\quad\int_3^\infty\frac{dx}{x^2-4}\]
+\[\text{(c)}\quad\int_0^1\tan\pi x\,dx\qquad
+\text{(d)}\quad\int_{-\infty}^{-1}\frac{e^x}x\,dx\]
+\bt{2} Những tích phân nào sau đây là suy rộng? Vì sao?
+\[\text{(a)}\quad\int_0^\pi\sec x\,dx\qquad
+\text{(b)}\quad\int_0^4\frac{dx}{x-5}\]
+\[\text{(c)}\quad\int_{-1}^3\frac{dx}{x+x^3}\qquad
+\text{(d)}\quad\int_1^\infty\frac{dx}{x+x^3}\]
+\bt{3} Tìm diện tích dưới đường cong $y=1/x^3$ từ $x=1$ đến $x=t$, rồi tính với $t=10,100,1000$. Sau đó tìm toàn bộ diện tích dưới đường cong này với $x\ge1$.
+
+\bt{4} [Đồ thị]
+
+(a) Vẽ đồ thị $f(x)=1/x^{1.1}$ và $g(x)=1/x^{0.9}$ trong cả hai cửa sổ $[0,10]\times[0,1]$ và $[0,100]\times[0,1]$.
+
+(b) Tìm diện tích dưới các đồ thị $f$ và $g$ từ $x=1$ đến $x=t$, rồi tính với $t=10,100,10^4,10^6,10^{10},10^{20}$.
+
+(c) Tìm toàn bộ diện tích dưới mỗi đường cong với $x\ge1$, nếu tồn tại.
+
+\group{5–48}
+Xác định tích phân hội tụ hay phân kỳ. Tính các tích phân hội tụ.
+\bt{5} $\displaystyle \int_1^\infty2x^{-3}\,dx$.
+\bt{6} $\displaystyle \int_{-\infty}^{-1}\frac1{\sqrt[3]{x}}\,dx$.
+\bt{7} $\displaystyle \int_0^\infty e^{-2x}\,dx$.
+\bt{8} $\displaystyle \int_1^\infty\left(\frac13\right)^x\,dx$.
+\bt{9} $\displaystyle \int_{-2}^\infty\frac1{x+4}\,dx$.
+\bt{10} $\displaystyle \int_1^\infty\frac1{x^2+4}\,dx$.
+\bt{11} $\displaystyle \int_3^\infty\frac1{(x-2)^{3/2}}\,dx$.
+\bt{12} $\displaystyle \int_0^\infty\frac1{\sqrt[4]{1+x}}\,dx$.
+\bt{13} $\displaystyle \int_{-\infty}^0\frac{x}{(x^2+1)^3}\,dx$.
+\bt{14} $\displaystyle \int_{-\infty}^{-3}\frac{x}{4-x^2}\,dx$.
+\bt{15} $\displaystyle \int_1^\infty\frac{x^2+x+1}{x^4}\,dx$.
+\bt{16} $\displaystyle \int_2^\infty\frac{x}{\sqrt{x^2-1}}\,dx$.
+\bt{17} $\displaystyle \int_0^\infty\frac{e^x}{(1+e^x)^2}\,dx$.
+\bt{18} $\displaystyle \int_{-\infty}^{-1}\frac{x^2+x}{x^3}\,dx$.
+\bt{19} $\displaystyle \int_{-\infty}^\infty xe^{-x^2}\,dx$.
+\bt{20} $\displaystyle \int_{-\infty}^\infty\frac{x}{x^2+1}\,dx$.
+\bt{21} $\displaystyle \int_{-\infty}^\infty\cos2t\,dt$.
+\bt{22} $\displaystyle \int_1^\infty\frac{e^{-1/x}}{x^2}\,dx$.
+\bt{23} $\displaystyle \int_0^\infty\sin^2\alpha\,d\alpha$.
+\bt{24} $\displaystyle \int_0^\infty\sin\theta\,e^{\cos\theta}\,d\theta$.
+\bt{25} $\displaystyle \int_1^\infty\frac1{x^2+x}\,dx$.
+\bt{26} $\displaystyle \int_2^\infty\frac{dv}{v^2+2v-3}$.
+\bt{27} $\displaystyle \int_{-\infty}^0 ze^{2z}\,dz$.
+\bt{28} $\displaystyle \int_2^\infty ye^{-3y}\,dy$.
+\bt{29} $\displaystyle \int_1^\infty\frac{\ln x}x\,dx$.
+\bt{30} $\displaystyle \int_1^\infty\frac{\ln x}{x^2}\,dx$.
+\bt{31} $\displaystyle \int_{-\infty}^0\frac{z}{z^4+4}\,dz$.
+\bt{32} $\displaystyle \int_e^\infty\frac1{x(\ln x)^2}\,dx$.
+\bt{33} $\displaystyle \int_0^\infty e^{-\sqrt y}\,dy$.
+\bt{34} $\displaystyle \int_1^\infty\frac{dx}{\sqrt{x}+x\sqrt{x}}$.
+\bt{35} $\displaystyle \int_0^1\frac1x\,dx$.
+\bt{36} $\displaystyle \int_0^5\frac1{\sqrt[3]{5-x}}\,dx$.
+\bt{37} $\displaystyle \int_{-2}^{14}\frac{dx}{\sqrt[4]{x+2}}$.
+\bt{38} $\displaystyle \int_{-1}^2\frac{x}{(x+1)^2}\,dx$.
+\bt{39} $\displaystyle \int_{-2}^3\frac1{x^4}\,dx$.
+\bt{40} $\displaystyle \int_0^1\frac{dx}{\sqrt{1-x^2}}$.
+\bt{41} $\displaystyle \int_0^9\frac1{\sqrt[3]{x}-1}\,dx$.
+\bt{42} $\displaystyle \int_0^5\frac w{w-2}\,dw$.
+\bt{43} $\displaystyle \int_0^{\pi/2}\tan^2\theta\,d\theta$.
+\bt{44} $\displaystyle \int_0^4\frac{dx}{x^2-x-2}$.
+\bt{45} $\displaystyle \int_0^1 r\ln r\,dr$.
+\bt{46} $\displaystyle \int_0^{\pi/2}\frac{\cos\theta}{\sqrt{\sin\theta}}\,d\theta$.
+\bt{47} $\displaystyle \int_{-1}^0\frac{e^{1/x}}{x^3}\,dx$.
+\bt{48} $\displaystyle \int_0^1\frac{e^{1/x}}{x^3}\,dx$.
+\group{49–54}
+Phác họa miền và tìm diện tích (nếu diện tích hữu hạn).
+\bt{49} $S=\{(x,y)\mid x\ge1,\ 0\le y\le e^{-x}\}$.
+\bt{50} $S=\{(x,y)\mid x\le0,\ 0\le y\le e^x\}$.
+\bt{51} [Đồ thị] $S=\{(x,y)\mid x\ge1,\ 0\le y\le1/(x^3+x)\}$.
+\bt{52} [Đồ thị] $S=\{(x,y)\mid x\ge0,\ 0\le y\le xe^{-x}\}$.
+\bt{53} [Đồ thị] $S=\{(x,y)\mid 0\le x<\pi/2,\ 0\le y\le\sec^2x\}$.
+\bt{54} [Đồ thị] $S=\{(x,y)\mid -2<x\le0,\ 0\le y\le1/\sqrt{x+2}\}$.
+
+\bt{55} [Đồ thị]
+
+(a) Với $g(x)=(\sin^2x)/x^2$, dùng máy tính cầm tay hoặc máy tính để lập bảng giá trị gần đúng của $\int_1^t g(x)\,dx$ với $t=2,5,10,100,1000,10\,000$. Có vẻ $\int_1^\infty g(x)\,dx$ hội tụ hay không?
+
+(b) Dùng Định lý so sánh với $f(x)=1/x^2$ để chứng tỏ $\int_1^\infty g(x)\,dx$ hội tụ.
+
+(c) Minh họa phần (b) bằng cách vẽ $f$ và $g$ trên cùng màn hình với $1\le x\le10$. Dùng đồ thị giải thích trực quan vì sao $\int_1^\infty g(x)\,dx$ hội tụ.
+
+\bt{56} [Đồ thị]
+
+(a) Với $g(x)=1/(\sqrt{x}-1)$, dùng máy tính cầm tay hoặc máy tính để lập bảng giá trị gần đúng của $\int_2^t g(x)\,dx$ với $t=5,10,100,1000,10\,000$. Có vẻ $\int_2^\infty g(x)\,dx$ hội tụ hay phân kỳ?
+
+(b) Dùng Định lý so sánh với $f(x)=1/\sqrt{x}$ để chứng tỏ $\int_2^\infty g(x)\,dx$ phân kỳ.
+
+(c) Minh họa phần (b) bằng cách vẽ $f$ và $g$ trên cùng màn hình với $2\le x\le20$. Dùng đồ thị giải thích trực quan vì sao $\int_2^\infty g(x)\,dx$ phân kỳ.
+
+\group{57–64}
+Dùng Định lý so sánh để xác định tích phân hội tụ hay phân kỳ.
+\bt{57} $\displaystyle \int_0^\infty\frac{x}{x^3+1}\,dx$.
+\bt{58} $\displaystyle \int_1^\infty\frac{1+\sin^2x}{\sqrt{x}}\,dx$.
+\bt{59} $\displaystyle \int_2^\infty\frac1{x-\ln x}\,dx$.
+\bt{60} $\displaystyle \int_0^\infty\frac{\arctan x}{2+e^x}\,dx$.
+\bt{61} $\displaystyle \int_1^\infty\frac{x+1}{\sqrt{x^4-x}}\,dx$.
+\bt{62} $\displaystyle \int_1^\infty\frac{2+\cos x}{\sqrt{x^4+x^2}}\,dx$.
+\bt{63} $\displaystyle \int_0^1\frac{\sec^2x}{x\sqrt{x}}\,dx$.
+\bt{64} $\displaystyle \int_0^\pi\frac{\sin^2x}{\sqrt{x}}\,dx$.
+
+\group{65–68 — Tích phân suy rộng vừa thuộc loại 1 vừa thuộc loại 2}
+Tích phân $\int_a^\infty f(x)\,dx$ là suy rộng vì khoảng $[a,\infty)$ vô hạn. Nếu $f$ có gián đoạn vô cực tại $a$, tích phân còn suy rộng vì một lý do thứ hai. Trong trường hợp này, ta tính bằng cách biểu diễn thành tổng một tích phân suy rộng loại 2 và một tích phân suy rộng loại 1:
+\[\int_a^\infty f(x)\,dx=\int_a^c f(x)\,dx+\int_c^\infty f(x)\,dx,\qquad c>a.\]
+Tính tích phân đã cho nếu nó hội tụ.
+\bt{65} $\displaystyle \int_0^\infty\frac1{x^2}\,dx$.
+\bt{66} $\displaystyle \int_0^\infty\frac1{\sqrt{x}}\,dx$.
+\bt{67} $\displaystyle \int_0^\infty\frac1{\sqrt{x}(1+x)}\,dx$.
+\bt{68} $\displaystyle \int_2^\infty\frac1{x\sqrt{x^2-4}}\,dx$.
+\group{69–71}
+Tìm các giá trị $p$ để tích phân hội tụ, rồi tính tích phân với những giá trị $p$ đó.
+\bt{69} $\displaystyle\int_0^1\frac1{x^p}\,dx$.
+\bt{70} $\displaystyle\int_e^\infty\frac1{x(\ln x)^p}\,dx$.
+\bt{71} $\displaystyle\int_0^1x^p\ln x\,dx$.
+
+\bt{72} (a) Tính $\int_0^\infty x^ne^{-x}\,dx$ với $n=0,1,2,3$.
+
+(b) Dự đoán giá trị $\int_0^\infty x^ne^{-x}\,dx$ khi $n$ là một số nguyên dương bất kỳ.
+
+(c) Chứng minh dự đoán bằng quy nạp toán học.
+
+\bt{73} \textit{Giá trị chính Cauchy} của tích phân $\int_{-\infty}^\infty f(x)\,dx$ được định nghĩa bởi
+\[\operatorname{PV}\int_{-\infty}^\infty f(x)\,dx
+=\lim_{t\to\infty}\int_{-t}^t f(x)\,dx.\]
+Chứng tỏ $\int_{-\infty}^\infty x\,dx$ phân kỳ, nhưng giá trị chính Cauchy của tích phân này bằng 0.
+
+\bt{74} Tốc độ trung bình của các phân tử trong một khí lý tưởng là
+\[\bar v=\frac4{\sqrt\pi}\left(\frac M{2RT}\right)^{3/2}
+\int_0^\infty v^3e^{-Mv^2/(2RT)}\,dv,\]
+trong đó $M$ là khối lượng phân tử của khí, $R$ là hằng số khí, $T$ là nhiệt độ khí và $v$ là tốc độ phân tử. Chứng minh rằng
+\[\bar v=\sqrt{\frac{8RT}{\pi M}}.\]
+
+\bt{75} Theo Ví dụ 1, miền
+\[\mathcal R=\{(x,y)\mid x\ge1,\ 0\le y\le1/x\}\]
+có diện tích vô hạn. Chứng tỏ khi quay $\mathcal R$ quanh trục $x$, ta thu được một khối có thể tích hữu hạn (gọi là \textit{kèn Gabriel}).
+
+\bt{76} Dùng thông tin và dữ liệu trong Bài 6.4.35 để tìm công cần thiết nhằm đưa một tàu vũ trụ khối lượng 1000 kg ra khỏi trường hấp dẫn của Trái Đất.
+
+\bt{77} Tìm vận tốc thoát $v_0$ cần thiết để đưa một tên lửa khối lượng $m$ ra khỏi trường hấp dẫn của hành tinh có khối lượng $M$ và bán kính $R$. Dùng Định luật vạn vật hấp dẫn Newton (xem Bài 6.4.35) và việc động năng ban đầu $\tfrac12mv_0^2$ cung cấp công cần thiết.
+
+\bt{78} Các nhà thiên văn dùng một kỹ thuật gọi là \textit{phép lập thể sao} để xác định mật độ sao trong một cụm sao từ mật độ quan sát được (hai chiều), có thể phân tích từ một bức ảnh. Giả sử trong cụm sao hình cầu bán kính $R$, mật độ sao chỉ phụ thuộc khoảng cách $r$ đến tâm cụm. Nếu mật độ sao biểu kiến là $y(s)$, trong đó $s$ là khoảng cách phẳng quan sát được đến tâm cụm, và $x(r)$ là mật độ thực, có thể chứng minh rằng
+\[y(s)=\int_s^R\frac{2r}{\sqrt{r^2-s^2}}\,x(r)\,dr.\]
+Nếu mật độ sao thực trong một cụm là $x(r)=\tfrac12(R-r)^2$, hãy tìm mật độ biểu kiến $y(s)$.
+
+\bt{79} Một nhà sản xuất bóng đèn muốn sản xuất bóng có tuổi thọ khoảng 700 giờ, nhưng một số bóng hỏng sớm hơn những bóng khác. Gọi $F(t)$ là tỷ lệ bóng đèn của hãng bị hỏng trước $t$ giờ, nên $F(t)$ luôn nằm giữa 0 và 1.
+
+(a) Phác họa hình dạng mà bạn cho rằng đồ thị $F$ có thể có.
+
+(b) Đạo hàm $r(t)=F'(t)$ có ý nghĩa gì?
+
+(c) Giá trị $\int_0^\infty r(t)\,dt$ bằng bao nhiêu? Vì sao?
+
+\bt{80} Như đã thấy ở Mục 3.8, một chất phóng xạ suy giảm theo hàm mũ: khối lượng tại thời điểm $t$ là $m(t)=m(0)e^{kt}$, với $m(0)$ là khối lượng ban đầu và $k$ là hằng số âm. Thời gian sống trung bình $M$ của một nguyên tử trong chất đó là
+\[M=-k\int_0^\infty te^{kt}\,dt.\]
+Với đồng vị carbon phóng xạ \textsuperscript{14}C dùng trong định tuổi bằng carbon phóng xạ, $k=-0.000121$. Tìm thời gian sống trung bình của một nguyên tử \textsuperscript{14}C.
+
+\bt{81} Trong một nghiên cứu về sự lan truyền việc sử dụng ma túy bất hợp pháp từ một người sử dụng tích cực đến một quần thể $N$ người sử dụng, các tác giả mô hình hóa số người sử dụng mới kỳ vọng bằng phương trình
+\[\gamma=\int_0^\infty\frac{cN(1-e^{-kt})}{k}\,e^{-\lambda t}\,dt,\]
+trong đó $c$, $k$, $\lambda$ là các hằng số dương. Tính tích phân này để biểu diễn $\gamma$ theo $c,N,k,\lambda$.
+
+\textit{Nguồn:} F. Hoppensteadt và cộng sự, “Threshold Analysis of a Drug Use Epidemic Model”, \textit{Mathematical Biosciences} 53 (1981): 79–87.
+
+\bt{82} Điều trị thẩm tách loại bỏ urê và các chất thải khác khỏi máu bằng cách đưa một phần dòng máu ra ngoài cơ thể qua máy thẩm tách. Tốc độ loại urê khỏi máu (mg/phút) thường được mô tả tốt bởi
+\[u(t)=\frac rV C_0e^{-rt/V},\]
+trong đó $r$ là lưu lượng máu qua máy thẩm tách (mL/phút), $V$ là thể tích máu của bệnh nhân (mL) và $C_0$ là lượng urê trong máu (mg) tại $t=0$. Tính $\int_0^\infty u(t)\,dt$ và diễn giải kết quả.
+
+\bt{83} Xác định số $a$ phải lớn đến mức nào để
+\[\int_a^\infty\frac1{x^2+1}\,dx<0.001.\]
+
+\bt{84} Ước lượng giá trị số của $\int_0^\infty e^{-x^2}\,dx$ bằng cách viết nó thành tổng $\int_0^4e^{-x^2}\,dx$ và $\int_4^\infty e^{-x^2}\,dx$. Tính gần đúng tích phân thứ nhất bằng Quy tắc Simpson với $n=8$ và chứng tỏ tích phân thứ hai nhỏ hơn $\int_4^\infty e^{-4x}\,dx$, mà tích phân này nhỏ hơn $0.0000001$.
+
+\group{85–87 — Biến đổi Laplace}
+Nếu $f(t)$ liên tục với $t\ge0$, \textit{biến đổi Laplace} của $f$ là hàm $F$ được định nghĩa bởi
+\[F(s)=\int_0^\infty f(t)e^{-st}\,dt,\]
+và tập xác định của $F$ gồm tất cả các số $s$ để tích phân hội tụ.
+
+\bt{85} Tìm biến đổi Laplace của mỗi hàm sau.
+\[\text{(a)}\quad f(t)=1\qquad\text{(b)}\quad f(t)=e^t\qquad\text{(c)}\quad f(t)=t\]
+
+\bt{86} Chứng tỏ nếu $0\le f(t)\le Me^{at}$ với $t\ge0$, trong đó $M,a$ là các hằng số, thì biến đổi Laplace $F(s)$ tồn tại khi $s>a$.
+
+\bt{87} Giả sử $0\le f(t)\le Me^{at}$ và $0\le f'(t)\le Ke^{at}$ với $t\ge0$, trong đó $f'$ liên tục. Nếu biến đổi Laplace của $f(t)$ là $F(s)$ và biến đổi Laplace của $f'(t)$ là $G(s)$, chứng minh rằng
+\[G(s)=sF(s)-f(0),\qquad s>a.\]
+
+\bt{88} Nếu $\int_{-\infty}^\infty f(x)\,dx$ hội tụ và $a,b$ là các số thực, chứng minh rằng
+\[\int_{-\infty}^a f(x)\,dx+\int_a^\infty f(x)\,dx
+=\int_{-\infty}^b f(x)\,dx+\int_b^\infty f(x)\,dx.\]
+
+\bt{89} Chứng minh rằng $\displaystyle\int_0^\infty x^2e^{-x^2}\,dx=\frac12\int_0^\infty e^{-x^2}\,dx$.
+
+\bt{90} Bằng cách diễn giải các tích phân thành diện tích, chứng minh rằng
+\[\int_0^\infty e^{-x^2}\,dx=\int_0^1\sqrt{-\ln y}\,dy.\]
+
+\bt{91} Tìm giá trị của hằng số $C$ để tích phân
+\[\int_0^\infty\left(\frac1{\sqrt{x^2+4}}-\frac C{x+2}\right)\,dx\]
+hội tụ. Tính tích phân với giá trị $C$ đó.
+
+\bt{92} Tìm giá trị của hằng số $C$ để tích phân
+\[\int_0^\infty\left(\frac{x}{x^2+1}-\frac C{3x+1}\right)\,dx\]
+hội tụ. Tính tích phân với giá trị $C$ đó.
+
+\bt{93} Giả sử $f$ liên tục trên $[0,\infty)$ và $\lim_{x\to\infty}f(x)=1$. Tích phân $\int_0^\infty f(x)\,dx$ có thể hội tụ hay không?
+
+\bt{94} Chứng tỏ nếu $a>-1$ và $b>a+1$ thì tích phân sau hội tụ:
+\[\int_0^\infty\frac{x^a}{1+x^b}\,dx.\]
+\end{document}

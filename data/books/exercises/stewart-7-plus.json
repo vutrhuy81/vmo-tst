@@ -1,0 +1,76 @@
+{
+  "exercises": [
+    {
+      "number": 1,
+      "content": "<p><strong>1.</strong></p>\n<p>[Đồ thị] Ba sinh viên toán gọi một chiếc pizza đường kính 14 inch. Thay vì cắt theo cách truyền thống, họ quyết định cắt bằng các đường song song như hình. Là sinh viên chuyên ngành toán, họ có thể xác định vị trí cắt sao cho mỗi người nhận được một phần pizza bằng nhau. Các đường cắt nằm ở đâu?</p>\n<div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-7-plus-b5f57bc4/ex01.png\" alt=\"image\" /><br />\nBài 1. Pizza đường kính 14 inch và hai đường cắt song song.</p>\n</div>\n"
+    },
+    {
+      "number": 2,
+      "content": "<p><strong>2.</strong></p>\n<p>Tính tích phân <span class=\"math display\">\\[\\int\\frac1{x^7-x}\\,dx.\\]</span> Cách tiếp cận trực tiếp là bắt đầu bằng phân tích thành phân thức đơn giản, nhưng cách đó sẽ rất nặng nề. Hãy thử một phép đổi biến.</p>\n"
+    },
+    {
+      "number": 3,
+      "content": "<p><strong>3.</strong></p>\n<p>Tính <span class=\"math inline\">\\(\\displaystyle\\int_0^1\\left(\\sqrt[3]{1-x^7}-\\sqrt[7]{1-x^3}\\right)\\,dx\\)</span>.</p>\n"
+    },
+    {
+      "number": 4,
+      "content": "<p><strong>4.</strong></p>\n<p>Giả sử <span class=\"math inline\">\\(f\\)</span> là một hàm liên tục và tăng trên <span class=\"math inline\">\\([0,1]\\)</span>, thỏa mãn <span class=\"math inline\">\\(f(0)=0\\)</span> và <span class=\"math inline\">\\(f(1)=1\\)</span>. Chứng minh rằng <span class=\"math display\">\\[\\int_0^1[f(x)+f^{-1}(x)]\\,dx=1.\\]</span></p>\n"
+    },
+    {
+      "number": 5,
+      "content": "<p><strong>5.</strong></p>\n<p>Nếu <span class=\"math inline\">\\(f\\)</span> là hàm chẵn, <span class=\"math inline\">\\(r&gt;0\\)</span> và <span class=\"math inline\">\\(a&gt;0\\)</span>, chứng minh rằng <span class=\"math display\">\\[\\int_{-r}^r\\frac{f(x)}{1+a^x}\\,dx=\\int_0^r f(x)\\,dx.\\]</span> <em>Gợi ý:</em> <span class=\"math inline\">\\(\\displaystyle\\frac1{1+u}+\\frac1{1+u^{-1}}=1\\)</span>.</p>\n"
+    },
+    {
+      "number": 6,
+      "content": "<p><strong>6.</strong></p>\n<p>Tâm của hai hình tròn bán kính 1 cách nhau một đơn vị. Tìm diện tích hợp của hai hình tròn.</p>\n"
+    },
+    {
+      "number": 7,
+      "content": "<p><strong>7.</strong></p>\n<p>Một hình elip được cắt bỏ khỏi một hình tròn bán kính <span class=\"math inline\">\\(a\\)</span>. Trục lớn của elip trùng với một đường kính của hình tròn và trục nhỏ có độ dài <span class=\"math inline\">\\(2b\\)</span>. Chứng minh rằng diện tích phần còn lại của hình tròn bằng diện tích một hình elip có các bán trục <span class=\"math inline\">\\(a\\)</span> và <span class=\"math inline\">\\(a-b\\)</span>.</p>\n"
+    },
+    {
+      "number": 8,
+      "content": "<p><strong>8.</strong></p>\n<p>Một người ban đầu đứng tại điểm <span class=\"math inline\">\\(O\\)</span> đi dọc theo cầu tàu và kéo một chiếc thuyền chèo bằng sợi dây dài <span class=\"math inline\">\\(L\\)</span>. Người đó luôn giữ dây thẳng và căng. Quỹ đạo của thuyền là một đường cong gọi là <em>đường tractrix</em>, có tính chất là sợi dây luôn tiếp xúc với đường cong (xem hình).</p>\n<div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-7-plus-b5f57bc4/ex08.png\" alt=\"image\" /><br />\nBài 8. Thuyền được kéo dọc theo cầu tàu (pier) bằng sợi dây dài <span class=\"math inline\">\\(L\\)</span>.</p>\n</div>\n<p>(a) Chứng minh rằng nếu quỹ đạo của thuyền là đồ thị hàm <span class=\"math inline\">\\(y=f(x)\\)</span> thì <span class=\"math display\">\\[f&#39;(x)=\\frac{dy}{dx}=-\\frac{\\sqrt{L^2-x^2}}x.\\]</span> (b) Xác định hàm <span class=\"math inline\">\\(y=f(x)\\)</span>.</p>\n"
+    },
+    {
+      "number": 9,
+      "content": "<p><strong>9.</strong></p>\n<p>Hàm <span class=\"math inline\">\\(f\\)</span> được định nghĩa bởi <span class=\"math inline\">\\(f(x)=\\int_0^\\pi\\cos t\\cos(x-t)\\,dt\\)</span>, <span class=\"math inline\">\\(0\\le x\\le2\\pi\\)</span>. Tìm giá trị nhỏ nhất của <span class=\"math inline\">\\(f\\)</span>.</p>\n"
+    },
+    {
+      "number": 10,
+      "content": "<p><strong>10.</strong></p>\n<p>Nếu <span class=\"math inline\">\\(n\\)</span> là một số nguyên dương, chứng minh rằng <span class=\"math inline\">\\(\\displaystyle\\int_0^1(\\ln x)^n\\,dx=(-1)^n n!\\)</span>.</p>\n"
+    },
+    {
+      "number": 11,
+      "content": "<p><strong>11.</strong></p>\n<p>Chứng minh rằng <span class=\"math display\">\\[\\int_0^1(1-x^2)^n\\,dx=\\frac{2^{2n}(n!)^2}{(2n+1)!}.\\]</span> <em>Gợi ý:</em> Trước hết, chứng minh rằng nếu <span class=\"math inline\">\\(I_n\\)</span> ký hiệu tích phân này thì <span class=\"math display\">\\[I_{k+1}=\\frac{2k+2}{2k+3}I_k.\\]</span></p>\n"
+    },
+    {
+      "number": 12,
+      "content": "<p><strong>12.</strong></p>\n<p>[Đồ thị] Giả sử <span class=\"math inline\">\\(f\\)</span> là một hàm dương và <span class=\"math inline\">\\(f&#39;\\)</span> liên tục.</p>\n<p>(a) Đồ thị <span class=\"math inline\">\\(y=f(x)\\sin nx\\)</span> liên hệ như thế nào với đồ thị <span class=\"math inline\">\\(y=f(x)\\)</span>? Điều gì xảy ra khi <span class=\"math inline\">\\(n\\to\\infty\\)</span>?</p>\n<p>(b) Dựa trên các đồ thị của hàm dưới dấu tích phân, hãy dự đoán giá trị của giới hạn <span class=\"math display\">\\[\\lim_{n\\to\\infty}\\int_0^1 f(x)\\sin nx\\,dx.\\]</span> (c) Dùng tích phân từng phần để kiểm chứng dự đoán ở phần (b). [Dùng tính chất: vì <span class=\"math inline\">\\(f&#39;\\)</span> liên tục nên tồn tại một hằng số <span class=\"math inline\">\\(M\\)</span> sao cho <span class=\"math inline\">\\(|f&#39;(x)|\\le M\\)</span> với <span class=\"math inline\">\\(0\\le x\\le1\\)</span>.]</p>\n"
+    },
+    {
+      "number": 13,
+      "content": "<p><strong>13.</strong></p>\n<p>Nếu <span class=\"math inline\">\\(0&lt;a&lt;b\\)</span>, tìm <span class=\"math display\">\\[\\lim_{t\\to0}\\left\\{\\int_0^1[bx+a(1-x)]^t\\,dx\\right\\}^{1/t}.\\]</span></p>\n"
+    },
+    {
+      "number": 14,
+      "content": "<p><strong>14.</strong></p>\n<p>[Đồ thị] Vẽ đồ thị <span class=\"math inline\">\\(f(x)=\\sin(e^x)\\)</span> và dùng đồ thị để ước lượng giá trị <span class=\"math inline\">\\(t\\)</span> sao cho <span class=\"math inline\">\\(\\int_t^{t+1}f(x)\\,dx\\)</span> đạt giá trị lớn nhất. Sau đó tìm giá trị chính xác của <span class=\"math inline\">\\(t\\)</span> làm cho tích phân này đạt giá trị lớn nhất.</p>\n"
+    },
+    {
+      "number": 15,
+      "content": "<p><strong>15.</strong></p>\n<p>Tính <span class=\"math inline\">\\(\\displaystyle\\int_{-1}^\\infty\\left(\\frac{x^4}{1+x^6}\\right)^2\\,dx\\)</span>.</p>\n"
+    },
+    {
+      "number": 16,
+      "content": "<p><strong>16.</strong></p>\n<p>Tính <span class=\"math inline\">\\(\\displaystyle\\int\\sqrt{\\tan x}\\,dx\\)</span>.</p>\n"
+    },
+    {
+      "number": 17,
+      "content": "<p><strong>17.</strong></p>\n<p>Đường tròn bán kính 1 trong hình tiếp xúc với đường cong <span class=\"math inline\">\\(y=|2x|\\)</span> tại hai điểm. Tìm diện tích miền nằm giữa hai đường cong.</p>\n<div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-7-plus-b5f57bc4/ex17.png\" alt=\"image\" /><br />\nBài 17. Đường tròn bán kính 1 tiếp xúc với <span class=\"math inline\">\\(y=|2x|\\)</span>.</p>\n</div>\n"
+    },
+    {
+      "number": 18,
+      "content": "<p><strong>18.</strong></p>\n<p>Một tên lửa được phóng thẳng đứng lên trên, đốt nhiên liệu với tốc độ không đổi <span class=\"math inline\">\\(b\\)</span> kilôgam mỗi giây. Gọi <span class=\"math inline\">\\(v=v(t)\\)</span> là vận tốc của tên lửa tại thời điểm <span class=\"math inline\">\\(t\\)</span> và giả sử vận tốc <span class=\"math inline\">\\(u\\)</span> của khí phụt ra là không đổi. Gọi <span class=\"math inline\">\\(M=M(t)\\)</span> là khối lượng của tên lửa tại thời điểm <span class=\"math inline\">\\(t\\)</span>; lưu ý rằng <span class=\"math inline\">\\(M\\)</span> giảm khi nhiên liệu cháy. Nếu bỏ qua sức cản không khí, theo Định luật II Newton ta có <span class=\"math display\">\\[F=M\\frac{dv}{dt}-ub,\\]</span> trong đó lực <span class=\"math inline\">\\(F=-Mg\\)</span>. Do đó, <span class=\"math display\">\\[M\\frac{dv}{dt}-ub=-Mg.\\tag{1}\\]</span> Gọi <span class=\"math inline\">\\(M_1\\)</span> là khối lượng tên lửa không có nhiên liệu, <span class=\"math inline\">\\(M_2\\)</span> là khối lượng nhiên liệu ban đầu và <span class=\"math inline\">\\(M_0=M_1+M_2\\)</span>. Khi đó, cho đến lúc nhiên liệu cạn tại thời điểm <span class=\"math inline\">\\(t=M_2/b\\)</span>, khối lượng là <span class=\"math inline\">\\(M=M_0-bt\\)</span>.</p>\n<p>(a) Thay <span class=\"math inline\">\\(M=M_0-bt\\)</span> vào Phương trình 1 và giải phương trình thu được để tìm <span class=\"math inline\">\\(v\\)</span>. Dùng điều kiện ban đầu <span class=\"math inline\">\\(v(0)=0\\)</span> để xác định hằng số.</p>\n<p>(b) Xác định vận tốc tên lửa tại thời điểm <span class=\"math inline\">\\(t=M_2/b\\)</span>. Vận tốc này được gọi là <em>vận tốc khi cháy hết nhiên liệu</em>.</p>\n<p>(c) Xác định độ cao tên lửa <span class=\"math inline\">\\(y=y(t)\\)</span> tại thời điểm cháy hết nhiên liệu.</p>\n<p>(d) Tìm độ cao tên lửa tại thời điểm <span class=\"math inline\">\\(t\\)</span> bất kỳ.</p>\n"
+    }
+  ]
+}

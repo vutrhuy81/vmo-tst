@@ -1,0 +1,393 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage{fontspec}\setmainfont{Latin Modern Roman}\setsansfont{DejaVu Sans}
+\usepackage{amsmath,amssymb,graphicx,geometry,enumitem,needspace,longtable,booktabs,fancyhdr,hyperref}
+\geometry{left=28mm,right=23mm,top=24mm,bottom=24mm}
+\hypersetup{unicode=true,colorlinks=true,linkcolor=black,urlcolor=blue,pdftitle={Giải tích §7.4 — Tích phân hàm hữu tỉ bằng phân tích thành phân thức đơn giản}}
+\setlength{\parindent}{1.2em}\setlength{\parskip}{4pt}\setlength{\headheight}{16pt}
+\pagestyle{fancy}\fancyhf{}\fancyhead[L]{\small Chương 7. Các phương pháp tính tích phân}\fancyhead[R]{\small §7.4}\fancyfoot[C]{\thepage}
+\newcommand{\fig}[3][.68]{\begin{center}\begin{minipage}{\linewidth}\centering\includegraphics[width=#1\linewidth]{assets/#2.png}\\{\small #3}\end{minipage}\end{center}}
+\newcommand{\ex}[1]{\par\medskip\noindent\textbf{Ví dụ #1.}\ }
+\newcommand{\sol}{\par\nopagebreak[4]\noindent\textit{Lời giải.}\ }
+\newcommand{\bt}[1]{\par\smallskip\Needspace{5\baselineskip}\noindent\textbf{#1.}\ }
+\newcommand{\group}[1]{\par\Needspace{11\baselineskip}\medskip\noindent\textbf{#1}\par\nopagebreak[4]}
+\newcommand{\gint}[1]{\left[\!\left[#1\right]\!\right]}
+\allowdisplaybreaks[2]
+\DeclareMathOperator{\sech}{sech}
+\DeclareMathOperator{\csch}{csch}
+\DeclareMathOperator{\arccot}{arccot}
+
+\newcommand{\prj}[1]{\bt{#1}}
+
+\newcommand{\kn}[1]{\bt{#1}}
+\newcommand{\ds}[1]{\bt{#1}}
+\setlength{\emergencystretch}{1em}
+\begin{document}
+\begin{center}{\Large\bfseries 7.4 — Tích phân hàm hữu tỉ bằng phân tích thành phân thức đơn giản}\end{center}
+Trong mục này, ta chỉ ra cách tính tích phân của một hàm hữu tỉ bất kỳ (một tỉ số của các đa thức) bằng cách biểu diễn nó thành tổng của những phân thức đơn giản hơn, gọi là \textit{các phân thức đơn giản}, mà ta đã biết cách lấy tích phân. Để minh họa phương pháp, chú ý rằng khi quy đồng mẫu số các phân thức $2/(x-1)$ và $1/(x+2)$, ta được
+\[\frac2{x-1}-\frac1{x+2}=\frac{2(x+2)-(x-1)}{(x-1)(x+2)}=\frac{x+5}{x^2+x-2}.\]
+Nếu bây giờ đảo ngược quá trình, ta thấy cách lấy tích phân của hàm ở vế phải:
+\begin{align*}
+\int\frac{x+5}{x^2+x-2}\,dx&=\int\left(\frac2{x-1}-\frac1{x+2}\right)\,dx\\
+&=2\ln|x-1|-\ln|x+2|+C.
+\end{align*}
+
+\section*{Phương pháp phân tích thành phân thức đơn giản}
+Để thấy phương pháp này hoạt động như thế nào trong trường hợp tổng quát, xét một hàm hữu tỉ
+\[f(x)=\frac{P(x)}{Q(x)},\]
+trong đó $P$ và $Q$ là các đa thức. Có thể biểu diễn $f$ thành tổng các phân thức đơn giản hơn với điều kiện bậc của $P$ nhỏ hơn bậc của $Q$. Một hàm hữu tỉ như vậy được gọi là \textit{hữu tỉ thực sự}. Nhớ rằng nếu
+\[P(x)=a_nx^n+a_{n-1}x^{n-1}+\cdots+a_1x+a_0,\]
+trong đó $a_n\ne0$, thì bậc của $P$ là $n$ và ta viết $\deg(P)=n$.
+
+Nếu $f$ là \textit{hữu tỉ không thực sự}, tức là $\deg(P)\ge\deg(Q)$, trước hết ta phải chia $P$ cho $Q$ (bằng phép chia đa thức) cho đến khi thu được số dư $R(x)$ sao cho $\deg(R)<\deg(Q)$. Kết quả là
+\begin{equation}f(x)=\frac{P(x)}{Q(x)}=S(x)+\frac{R(x)}{Q(x)},\tag{1}\end{equation}
+trong đó $S$ và $R$ cũng là các đa thức.
+
+Như ví dụ sau minh họa, đôi khi chỉ cần thực hiện bước sơ bộ này.
+
+\ex{1} Tìm $\displaystyle\int\frac{x^3+x}{x-1}\,dx$.
+\sol Vì bậc của tử số lớn hơn bậc của mẫu số, trước hết ta thực hiện phép chia đa thức. Nhờ đó, ta viết được
+\begin{align*}
+\int\frac{x^3+x}{x-1}\,dx&=\int\left(x^2+x+2+\frac2{x-1}\right)\,dx\\
+&=\frac{x^3}{3}+\frac{x^2}{2}+2x+2\ln|x-1|+C.
+\end{align*}
+\fig[.20]{polynomial_division}{Phép chia đa thức trong Ví dụ 1.}
+
+Nếu mẫu số $Q(x)$ trong Phương trình 1 phân tích được thành nhân tử, bước tiếp theo là phân tích $Q(x)$ triệt để nhất có thể. Có thể chứng minh rằng mọi đa thức $Q$ đều phân tích được thành tích của các nhân tử bậc nhất (dạng $ax+b$) và các nhân tử bậc hai bất khả quy (dạng $ax^2+bx+c$, trong đó $b^2-4ac<0$). Chẳng hạn, nếu $Q(x)=x^4-16$ thì ta có thể phân tích
+\[Q(x)=(x^2-4)(x^2+4)=(x-2)(x+2)(x^2+4).\]
+Bước thứ ba là biểu diễn hàm hữu tỉ thực sự $R(x)/Q(x)$ (trong Phương trình 1) thành tổng các \textbf{phân thức đơn giản} có dạng
+\[\frac{A}{(ax+b)^i}\qquad\text{hoặc}\qquad\frac{Ax+B}{(ax^2+bx+c)^j}.\]
+Một định lý trong đại số bảo đảm rằng luôn có thể thực hiện điều này. Ta sẽ giải thích chi tiết bốn trường hợp có thể xảy ra.
+
+\section*{Trường hợp I: các nhân tử bậc nhất phân biệt}
+\textbf{Mẫu số $Q(x)$ là tích của các nhân tử bậc nhất phân biệt.} Điều này có nghĩa là ta có thể viết
+\[Q(x)=(a_1x+b_1)(a_2x+b_2)\cdots(a_kx+b_k),\]
+trong đó không nhân tử nào lặp lại (và không nhân tử nào là một bội hằng số của nhân tử khác). Khi đó, định lý phân tích thành phân thức đơn giản khẳng định rằng tồn tại các hằng số $A_1,A_2,\ldots,A_k$ sao cho
+\begin{equation}\frac{R(x)}{Q(x)}=\frac{A_1}{a_1x+b_1}+\frac{A_2}{a_2x+b_2}+\cdots+\frac{A_k}{a_kx+b_k}.\tag{2}\end{equation}
+Các hằng số này có thể được xác định như trong ví dụ sau.
+
+\ex{2} Tính $\displaystyle\int\frac{x^2+2x-1}{2x^3+3x^2-2x}\,dx$.
+\sol Vì bậc của tử số nhỏ hơn bậc của mẫu số, ta không cần chia đa thức. Ta phân tích mẫu số như sau:
+\[2x^3+3x^2-2x=x(2x^2+3x-2)=x(2x-1)(x+2).\]
+Vì mẫu số có ba nhân tử bậc nhất phân biệt, dạng phân tích thành phân thức đơn giản của hàm dưới dấu tích phân là
+\begin{equation}\frac{x^2+2x-1}{x(2x-1)(x+2)}=\frac Ax+\frac B{2x-1}+\frac C{x+2}.\tag{3}\end{equation}
+\textit{Ghi chú bên lề.} Một phương pháp khác để tìm $A,B,C$ được trình bày trong chú ý sau ví dụ này.
+
+Để xác định các giá trị của $A,B,C$, nhân hai vế với mẫu số chung nhỏ nhất $x(2x-1)(x+2)$, ta được
+\begin{equation}x^2+2x-1=A(2x-1)(x+2)+Bx(x+2)+Cx(2x-1).\tag{4}\end{equation}
+Khai triển vế phải của Phương trình 4 rồi viết dưới dạng đa thức quen thuộc, ta có
+\begin{equation}x^2+2x-1=(2A+B+2C)x^2+(3A+2B-C)x-2A.\tag{5}\end{equation}
+Các đa thức ở hai vế của Phương trình 5 đồng nhất, nên hệ số của các số hạng tương ứng phải bằng nhau. Hệ số của $x^2$ ở vế phải, $2A+B+2C$, phải bằng hệ số của $x^2$ ở vế trái, tức là $1$. Tương tự, các hệ số của $x$ bằng nhau và các số hạng tự do bằng nhau, cho hệ phương trình sau đối với $A,B,C$:
+\begin{align*}
+2A+B+2C&=1,\\
+3A+2B-C&=2,\\
+-2A&=-1.
+\end{align*}
+Giải hệ, ta được $A=\frac12$, $B=\frac15$, $C=-\frac1{10}$, do đó
+\begin{align*}
+\int\frac{x^2+2x-1}{2x^3+3x^2-2x}\,dx
+&=\int\left(\frac1{2x}+\frac15\frac1{2x-1}-\frac1{10}\frac1{x+2}\right)\,dx\\
+&=\frac12\ln|x|+\frac1{10}\ln|2x-1|-\frac1{10}\ln|x+2|+K.
+\end{align*}
+Khi tính tích phân của số hạng ở giữa, ta đã nhẩm đặt $u=2x-1$, suy ra $du=2\,dx$ và $dx=\frac12du$.
+
+\textit{Ghi chú bên lề.} Có thể kiểm tra kết quả bằng cách quy đồng mẫu số các số hạng rồi cộng lại.
+
+\textbf{Chú ý.} Ta có thể dùng một phương pháp khác để tìm các hệ số $A,B,C$ trong Ví dụ 2. Phương trình 4 là một đồng nhất thức: nó đúng với mọi giá trị của $x$. Ta chọn những giá trị $x$ làm đơn giản phương trình. Nếu đặt $x=0$ trong Phương trình 4 thì số hạng thứ hai và thứ ba ở vế phải bằng $0$, và phương trình trở thành $-2A=-1$, tức là $A=\frac12$. Tương tự, $x=\frac12$ cho $5B/4=1/4$ và $x=-2$ cho $10C=-1$, nên $B=\frac15$ và $C=-\frac1{10}$. (Bạn có thể thắc mắc tại sao Phương trình 3 không đúng tại $x=0,\frac12,-2$ mà ta lại thay được các giá trị ấy vào Phương trình 4. Thực ra, Phương trình 4 đúng với mọi $x$, kể cả $x=0,\frac12,-2$. Xem Bài tập 75 để biết lý do.)
+
+\ex{3} Tìm $\displaystyle\int\frac{dx}{x^2-a^2}$, trong đó $a\ne0$.
+\sol Phương pháp phân tích thành phân thức đơn giản cho
+\[\frac1{x^2-a^2}=\frac1{(x-a)(x+a)}=\frac A{x-a}+\frac B{x+a},\]
+và vì thế
+\[A(x+a)+B(x-a)=1.\]
+Dùng phương pháp trong ví dụ trước, đặt $x=a$ trong phương trình này, ta được $A(2a)=1$, nên $A=1/(2a)$. Nếu đặt $x=-a$ thì $B(-2a)=1$, nên $B=-1/(2a)$. Vậy
+\begin{align*}
+\int\frac{dx}{x^2-a^2}&=\frac1{2a}\int\left(\frac1{x-a}-\frac1{x+a}\right)\,dx\\
+&=\frac1{2a}\big(\ln|x-a|-\ln|x+a|\big)+C.
+\end{align*}
+Vì $\ln x-\ln y=\ln(x/y)$, ta có thể viết tích phân dưới dạng
+\begin{equation}\int\frac{dx}{x^2-a^2}=\frac1{2a}\ln\left|\frac{x-a}{x+a}\right|+C.\tag{6}\end{equation}
+(Xem các Bài tập 61–62 để biết những cách sử dụng Công thức 6.)
+
+\section*{Trường hợp II: có nhân tử bậc nhất lặp}
+\textbf{$Q(x)$ là tích của các nhân tử bậc nhất, trong đó một số nhân tử lặp lại.} Giả sử nhân tử bậc nhất đầu tiên $(a_1x+b_1)$ lặp $r$ lần; tức là $(a_1x+b_1)^r$ xuất hiện trong phân tích $Q(x)$. Khi đó, thay vì một số hạng duy nhất $A_1/(a_1x+b_1)$ trong Phương trình 2, ta dùng
+\begin{equation}\frac{A_1}{a_1x+b_1}+\frac{A_2}{(a_1x+b_1)^2}+\cdots+\frac{A_r}{(a_1x+b_1)^r}.\tag{7}\end{equation}
+Để minh họa, ta có thể viết
+\[\frac{x^3-x+1}{x^2(x-1)^3}=\frac Ax+\frac B{x^2}+\frac C{x-1}+\frac D{(x-1)^2}+\frac E{(x-1)^3},\]
+nhưng ta sẽ trình bày chi tiết một ví dụ đơn giản hơn.
+
+\ex{4} Tìm $\displaystyle\int\frac{x^4-2x^2+4x+1}{x^3-x^2-x+1}\,dx$.
+\sol Bước đầu tiên là chia đa thức. Kết quả là
+\[\frac{x^4-2x^2+4x+1}{x^3-x^2-x+1}=x+1+\frac{4x}{x^3-x^2-x+1}.\]
+Bước thứ hai là phân tích mẫu số $Q(x)=x^3-x^2-x+1$. Vì $Q(1)=0$, ta biết $x-1$ là một nhân tử và thu được
+\begin{align*}
+x^3-x^2-x+1&=(x-1)(x^2-1)=(x-1)(x-1)(x+1)\\
+&=(x-1)^2(x+1).
+\end{align*}
+Vì nhân tử bậc nhất $x-1$ xuất hiện hai lần, dạng phân tích thành phân thức đơn giản là
+\[\frac{4x}{(x-1)^2(x+1)}=\frac A{x-1}+\frac B{(x-1)^2}+\frac C{x+1}.\]
+Nhân với mẫu số chung nhỏ nhất $(x-1)^2(x+1)$, ta được
+\begin{align*}
+4x&=A(x-1)(x+1)+B(x+1)+C(x-1)^2\tag{8}\\
+&=(A+C)x^2+(B-2C)x+(-A+B+C).
+\end{align*}
+Bây giờ ta đồng nhất các hệ số:
+\[A+C=0,\qquad B-2C=4,\qquad -A+B+C=0.\]
+Giải hệ, ta được $A=1$, $B=2$, $C=-1$, nên
+\begin{align*}
+\int\frac{x^4-2x^2+4x+1}{x^3-x^2-x+1}\,dx
+&=\int\left[x+1+\frac1{x-1}+\frac2{(x-1)^2}-\frac1{x+1}\right]\,dx\\
+&=\frac{x^2}{2}+x+\ln|x-1|-\frac2{x-1}-\ln|x+1|+K\\
+&=\frac{x^2}{2}+x-\frac2{x-1}+\ln\left|\frac{x-1}{x+1}\right|+K.
+\end{align*}
+\textbf{Chú ý.} Ta cũng có thể xác định $A,B,C$ trong Ví dụ 4 theo phương pháp nêu sau Ví dụ 2. Đặt $x=1$ trong Phương trình 8 cho $4=2B$, nên $B=2$; tương tự, đặt $x=-1$ cho $-4=4C$, nên $C=-1$. Không có giá trị $x$ nào làm đồng thời số hạng thứ hai và thứ ba ở vế phải của Phương trình 8 bằng $0$, nên ta không thể tìm $A$ dễ dàng như vậy. Nhưng ta có thể chọn một giá trị thứ ba của $x$ vẫn cho một hệ thức hữu ích giữa $A,B,C$. Chẳng hạn, nếu chọn $x=0$ thì $0=-A+B+C$, suy ra $A=1$.
+
+\section*{Trường hợp III: nhân tử bậc hai bất khả quy không lặp}
+\textbf{$Q(x)$ chứa các nhân tử bậc hai bất khả quy, không nhân tử nào lặp lại.} Nếu $Q(x)$ có nhân tử $ax^2+bx+c$, trong đó $b^2-4ac<0$, thì ngoài các phân thức đơn giản trong Phương trình 2 và 7, biểu thức của $R(x)/Q(x)$ còn có một số hạng dạng
+\begin{equation}\frac{Ax+B}{ax^2+bx+c},\tag{9}\end{equation}
+trong đó $A,B$ là các hằng số cần xác định. Chẳng hạn, hàm $f(x)=x/[(x-2)(x^2+1)(x^2+4)]$ có dạng phân tích thành phân thức đơn giản
+\[\frac{x}{(x-2)(x^2+1)(x^2+4)}=\frac A{x-2}+\frac{Bx+C}{x^2+1}+\frac{Dx+E}{x^2+4}.\]
+Số hạng ở (9) có thể được lấy tích phân bằng cách hoàn thành bình phương (nếu cần) và dùng công thức
+\begin{equation}\int\frac{dx}{x^2+a^2}=\frac1a\tan^{-1}\!\left(\frac xa\right)+C.\tag{10}\end{equation}
+
+\ex{5} Tính $\displaystyle\int\frac{2x^2-x+4}{x^3+4x}\,dx$.
+\sol Vì $x^3+4x=x(x^2+4)$ không thể phân tích thêm, ta viết
+\[\frac{2x^2-x+4}{x(x^2+4)}=\frac Ax+\frac{Bx+C}{x^2+4}.\]
+Nhân với $x(x^2+4)$, ta có
+\begin{align*}
+2x^2-x+4&=A(x^2+4)+(Bx+C)x\\
+&=(A+B)x^2+Cx+4A.
+\end{align*}
+Đồng nhất các hệ số, ta được
+\[A+B=2,\qquad C=-1,\qquad4A=4.\]
+Vì vậy $A=1$, $B=1$, $C=-1$, nên
+\[\int\frac{2x^2-x+4}{x^3+4x}\,dx=\int\left(\frac1x+\frac{x-1}{x^2+4}\right)\,dx.\]
+Để lấy tích phân số hạng thứ hai, ta tách nó thành hai phần:
+\[\int\frac{x-1}{x^2+4}\,dx=\int\frac{x}{x^2+4}\,dx-\int\frac1{x^2+4}\,dx.\]
+Trong tích phân thứ nhất, ta đặt $u=x^2+4$, nên $du=2x\,dx$. Tích phân thứ hai được tính bằng Công thức 10 với $a=2$:
+\begin{align*}
+\int\frac{2x^2-x+4}{x(x^2+4)}\,dx
+&=\int\frac1x\,dx+\int\frac{x}{x^2+4}\,dx-\int\frac1{x^2+4}\,dx\\
+&=\ln|x|+\frac12\ln(x^2+4)-\frac12\tan^{-1}(x/2)+K.
+\end{align*}
+
+\ex{6} Tính $\displaystyle\int\frac{4x^2-3x+2}{4x^2-4x+3}\,dx$.
+\sol Vì bậc của tử số \textit{không nhỏ hơn} bậc của mẫu số, trước hết ta chia và thu được
+\[\frac{4x^2-3x+2}{4x^2-4x+3}=1+\frac{x-1}{4x^2-4x+3}.\]
+Chú ý rằng tam thức bậc hai $4x^2-4x+3$ bất khả quy vì biệt thức của nó là $b^2-4ac=-32<0$. Điều này có nghĩa là nó không thể phân tích được, nên ta không cần dùng kỹ thuật phân tích thành phân thức đơn giản.
+
+Để tính tích phân của hàm đã cho, ta hoàn thành bình phương ở mẫu số:
+\[4x^2-4x+3=(2x-1)^2+2.\]
+Điều này gợi ý phép đổi biến $u=2x-1$. Khi đó $du=2\,dx$ và $x=\frac12(u+1)$, nên
+\begin{align*}
+\int\frac{4x^2-3x+2}{4x^2-4x+3}\,dx
+&=\int\left(1+\frac{x-1}{4x^2-4x+3}\right)\,dx\\
+&=x+\frac12\int\frac{\frac12(u+1)-1}{u^2+2}\,du\\
+&=x+\frac14\int\frac{u-1}{u^2+2}\,du\\
+&=x+\frac14\int\frac{u}{u^2+2}\,du-\frac14\int\frac1{u^2+2}\,du\\
+&=x+\frac18\ln(u^2+2)-\frac14\frac1{\sqrt2}\tan^{-1}\!\left(\frac u{\sqrt2}\right)+C\\
+&=x+\frac18\ln(4x^2-4x+3)-\frac1{4\sqrt2}\tan^{-1}\!\left(\frac{2x-1}{\sqrt2}\right)+C.
+\end{align*}
+\textbf{Chú ý.} Ví dụ 6 minh họa quy trình tổng quát để lấy tích phân một phân thức đơn giản dạng
+\[\frac{Ax+B}{ax^2+bx+c},\qquad b^2-4ac<0.\]
+Ta hoàn thành bình phương ở mẫu số rồi thực hiện phép đổi biến đưa tích phân về dạng
+\[\int\frac{Cu+D}{u^2+a^2}\,du=C\int\frac{u}{u^2+a^2}\,du+D\int\frac1{u^2+a^2}\,du.\]
+Khi đó tích phân thứ nhất là một logarit, còn tích phân thứ hai được biểu diễn theo $\tan^{-1}$.
+
+\section*{Trường hợp IV: nhân tử bậc hai bất khả quy lặp}
+\textbf{$Q(x)$ chứa một nhân tử bậc hai bất khả quy lặp lại.} Nếu $Q(x)$ có nhân tử $(ax^2+bx+c)^r$, trong đó $b^2-4ac<0$, thì thay vì một phân thức đơn giản duy nhất (9), tổng
+\begin{equation}\frac{A_1x+B_1}{ax^2+bx+c}+\frac{A_2x+B_2}{(ax^2+bx+c)^2}+\cdots+\frac{A_rx+B_r}{(ax^2+bx+c)^r}\tag{11}\end{equation}
+xuất hiện trong phân tích thành phân thức đơn giản của $R(x)/Q(x)$. Mỗi số hạng trong (11) có thể lấy tích phân bằng phép đổi biến hoặc bằng cách trước hết hoàn thành bình phương, nếu cần.
+
+\ex{7} Viết dạng phân tích thành phân thức đơn giản của hàm
+\[\frac{x^3+x^2+1}{x(x-1)(x^2+x+1)(x^2+1)^3}.\]
+\sol
+\begin{align*}
+\frac{x^3+x^2+1}{x(x-1)(x^2+x+1)(x^2+1)^3}
+={}&\frac Ax+\frac B{x-1}+\frac{Cx+D}{x^2+x+1}\\
+&+\frac{Ex+F}{x^2+1}+\frac{Gx+H}{(x^2+1)^2}+\frac{Ix+J}{(x^2+1)^3}.
+\end{align*}
+\textit{Ghi chú bên lề.} Tính các giá trị số của các hệ số trong Ví dụ 7 bằng tay sẽ cực kỳ dài dòng. Tuy nhiên, phần lớn các hệ thống đại số máy tính có thể tìm rất nhanh:
+\[A=-1,\quad B=\frac18,\quad C=D=-1,\quad E=\frac{15}8,\quad F=-\frac18,\]
+\[G=H=\frac34,\quad I=-\frac12,\quad J=\frac12.\]
+
+\ex{8} Tính $\displaystyle\int\frac{1-x+2x^2-x^3}{x(x^2+1)^2}\,dx$.
+\sol Dạng phân tích thành phân thức đơn giản là
+\[\frac{1-x+2x^2-x^3}{x(x^2+1)^2}=\frac Ax+\frac{Bx+C}{x^2+1}+\frac{Dx+E}{(x^2+1)^2}.\]
+Nhân với $x(x^2+1)^2$, ta có
+\begin{align*}
+-x^3+2x^2-x+1={}&A(x^2+1)^2+(Bx+C)x(x^2+1)+(Dx+E)x\\
+={}&A(x^4+2x^2+1)+B(x^4+x^2)+C(x^3+x)+Dx^2+Ex\\
+={}&(A+B)x^4+Cx^3+(2A+B+D)x^2+(C+E)x+A.
+\end{align*}
+Đồng nhất các hệ số, ta được hệ
+\[A+B=0,\quad C=-1,\quad2A+B+D=2,\quad C+E=-1,\quad A=1,\]
+có nghiệm $A=1$, $B=-1$, $C=-1$, $D=1$, $E=0$. Do đó
+\begin{align*}
+\int\frac{1-x+2x^2-x^3}{x(x^2+1)^2}\,dx
+&=\int\left(\frac1x-\frac{x+1}{x^2+1}+\frac{x}{(x^2+1)^2}\right)\,dx\\
+&=\int\frac{dx}{x}-\int\frac{x\,dx}{x^2+1}-\int\frac{dx}{x^2+1}+\int\frac{x\,dx}{(x^2+1)^2}\\
+&=\ln|x|-\frac12\ln(x^2+1)-\tan^{-1}x-\frac1{2(x^2+1)}+K.
+\end{align*}
+\textit{Ghi chú bên lề.} Trong số hạng thứ hai và thứ tư, ta đã nhẩm thực hiện phép đổi biến $u=x^2+1$.
+
+\textbf{Chú ý.} Ví dụ 8 được giải khá thuận lợi vì hệ số $E$ bằng $0$. Nói chung, ta có thể gặp một số hạng dạng $1/(x^2+1)^2$. Một cách lấy tích phân số hạng như vậy là đặt $x=\tan\theta$. Một phương pháp khác là dùng công thức trong Bài tập 76.
+
+Đôi khi có thể tránh phân tích thành phân thức đơn giản khi lấy tích phân một hàm hữu tỉ. Chẳng hạn, mặc dù tích phân
+\[\int\frac{x^2+1}{x(x^2+3)}\,dx\]
+có thể được tính bằng phương pháp của Trường hợp III, sẽ dễ hơn nhiều nếu nhận thấy rằng với $u=x(x^2+3)=x^3+3x$ thì $du=(3x^2+3)\,dx$, nên
+\[\int\frac{x^2+1}{x(x^2+3)}\,dx=\frac13\ln|x^3+3x|+C.\]
+
+\section*{Các phép thế hữu tỉ hóa}
+Một số hàm không hữu tỉ có thể được biến đổi thành hàm hữu tỉ bằng các phép thế thích hợp. Đặc biệt, khi một hàm dưới dấu tích phân chứa biểu thức dạng $\sqrt[n]{g(x)}$, phép thế $u=\sqrt[n]{g(x)}$ có thể có hiệu quả. Các trường hợp khác xuất hiện trong bài tập.
+
+\ex{9} Tính $\displaystyle\int\frac{\sqrt{x+4}}x\,dx$.
+\sol Đặt $u=\sqrt{x+4}$. Khi đó $u^2=x+4$, nên $x=u^2-4$ và $dx=2u\,du$. Do đó
+\begin{align*}
+\int\frac{\sqrt{x+4}}x\,dx&=\int\frac{u}{u^2-4}\,2u\,du
+=2\int\frac{u^2}{u^2-4}\,du\\
+&=2\int\left(1+\frac4{u^2-4}\right)\,du.
+\end{align*}
+Ta có thể tính tích phân này bằng cách phân tích $u^2-4=(u-2)(u+2)$ rồi dùng phân thức đơn giản, hoặc dùng Công thức 6 với $a=2$:
+\begin{align*}
+\int\frac{\sqrt{x+4}}x\,dx&=2\int du+8\int\frac{du}{u^2-4}\\
+&=2u+8\cdot\frac1{2\cdot2}\ln\left|\frac{u-2}{u+2}\right|+C\\
+&=2\sqrt{x+4}+2\ln\left|\frac{\sqrt{x+4}-2}{\sqrt{x+4}+2}\right|+C.
+\end{align*}
+\section*{7.4 — Bài tập}
+\group{1–6} Viết dạng phân tích thành phân thức đơn giản của hàm (như trong Ví dụ 7). Không xác định các giá trị số của hệ số.
+\bt{1} (a) $\displaystyle\frac1{(x-3)(x+5)}$. \qquad (b) $\displaystyle\frac{2x+5}{(x-2)^2(x^2+2)}$.
+\bt{2} (a) $\displaystyle\frac{x-6}{x^2+x-6}$. \qquad (b) $\displaystyle\frac1{x^2+x^4}$.
+\bt{3} (a) $\displaystyle\frac{x^2+4}{x^3-3x^2+2x}$. \qquad (b) $\displaystyle\frac{x^3+x}{x(2x-1)^2(x^2+3)^2}$.
+\bt{4} (a) $\displaystyle\frac5{x^4-1}$. \qquad (b) $\displaystyle\frac{x^4+x+1}{(x^3-1)(x^2-1)}$.
+\bt{5} (a) $\displaystyle\frac{x^5+1}{(x^2-x)(x^4+2x^2+1)}$. \qquad (b) $\displaystyle\frac{x^2}{x^2+x-6}$.
+\bt{6} (a) $\displaystyle\frac{x^6}{x^2-4}$. \qquad (b) $\displaystyle\frac{x^4}{(x^2-x+1)(x^2+2)^2}$.
+
+\group{7–40} Tính tích phân.
+\bt{7} $\displaystyle\int\frac5{(x-1)(x+4)}\,dx$.
+\bt{8} $\displaystyle\int\frac{x-12}{x^2-4x}\,dx$.
+\bt{9} $\displaystyle\int\frac{5x+1}{(2x+1)(x-1)}\,dx$.
+\bt{10} $\displaystyle\int\frac{y}{(y+4)(2y-1)}\,dy$.
+\bt{11} $\displaystyle\int_0^1\frac2{2x^2+3x+1}\,dx$.
+\bt{12} $\displaystyle\int_0^1\frac{x-4}{x^2-5x+6}\,dx$.
+\bt{13} $\displaystyle\int\frac1{x(x-a)}\,dx$.
+\bt{14} $\displaystyle\int\frac1{(x+a)(x+b)}\,dx$.
+\bt{15} $\displaystyle\int\frac{x^2}{x-1}\,dx$.
+\bt{16} $\displaystyle\int\frac{3t-2}{t+1}\,dt$.
+\bt{17} $\displaystyle\int_1^2\frac{4y^2-7y-12}{y(y+2)(y-3)}\,dy$.
+\bt{18} $\displaystyle\int_1^2\frac{3x^2+6x+2}{x^2+3x+2}\,dx$.
+\bt{19} $\displaystyle\int_0^1\frac{x^2+x+1}{(x+1)^2(x+2)}\,dx$.
+\bt{20} $\displaystyle\int_2^3\frac{x(3-5x)}{(3x-1)(x-1)^2}\,dx$.
+\bt{21} $\displaystyle\int\frac{dt}{(t^2-1)^2}$.
+\bt{22} $\displaystyle\int\frac{3x^2+12x-20}{x^4-8x^2+16}\,dx$.
+\bt{23} $\displaystyle\int\frac{10}{(x-1)(x^2+9)}\,dx$.
+\bt{24} $\displaystyle\int\frac{3x^2-x+8}{x^3+4x}\,dx$.
+\bt{25} $\displaystyle\int_{-1}^0\frac{x^3-4x+1}{x^2-3x+2}\,dx$.
+\bt{26} $\displaystyle\int_1^2\frac{x^3+4x^2+x-1}{x^3+x^2}\,dx$.
+\bt{27} $\displaystyle\int\frac{4x}{x^3+x^2+x+1}\,dx$.
+\bt{28} $\displaystyle\int\frac{x^2+x+1}{(x^2+1)^2}\,dx$.
+\bt{29} $\displaystyle\int\frac{x^3+4x+3}{x^4+5x^2+4}\,dx$.
+\bt{30} $\displaystyle\int\frac{x^3+6x-2}{x^4+6x^2}\,dx$.
+\bt{31} $\displaystyle\int\frac{x+4}{x^2+2x+5}\,dx$.
+\bt{32} $\displaystyle\int_0^1\frac{x}{x^2+4x+13}\,dx$.
+\bt{33} $\displaystyle\int\frac1{x^3-1}\,dx$.
+\bt{34} $\displaystyle\int\frac{x^3-2x^2+2x-5}{x^4+4x^2+3}\,dx$.
+\bt{35} $\displaystyle\int_0^1\frac{x^3+2x}{x^4+4x^2+3}\,dx$.
+\bt{36} $\displaystyle\int\frac{x^5+x-1}{x^3+1}\,dx$.
+\bt{37} $\displaystyle\int\frac{5x^4+7x^2+x+2}{x(x^2+1)^2}\,dx$.
+\bt{38} $\displaystyle\int\frac{x^4+3x^2+1}{x^5+5x^3+5x}\,dx$.
+\bt{39} $\displaystyle\int\frac{x^2-3x+7}{(x^2-4x+6)^2}\,dx$.
+\bt{40} $\displaystyle\int\frac{x^3+2x^2+3x-2}{(x^2+2x+2)^2}\,dx$.
+
+\group{41–56} Thực hiện một phép đổi biến để biểu diễn hàm dưới dấu tích phân thành một hàm hữu tỉ, rồi tính tích phân.
+\bt{41} $\displaystyle\int\frac{dx}{x\sqrt{x-1}}$.
+\bt{42} $\displaystyle\int\frac{dx}{2\sqrt{x+3}+x}$.
+\bt{43} $\displaystyle\int\frac{dx}{x^2+x\sqrt{x}}$.
+\bt{44} $\displaystyle\int_0^1\frac1{1+\sqrt[3]x}\,dx$.
+\bt{45} $\displaystyle\int\frac{x^3}{\sqrt[3]{x^2+1}}\,dx$.
+\bt{46} $\displaystyle\int\frac{dx}{(1+\sqrt{x})^2}$.
+\bt{47} $\displaystyle\int\frac1{\sqrt{x}-\sqrt[3]x}\,dx$. [Gợi ý: Đặt $u=\sqrt[6]x$.]
+\bt{48} $\displaystyle\int\frac1{x-x^{1/5}}\,dx$.
+\bt{49} $\displaystyle\int\frac1{x-3\sqrt{x}+2}\,dx$.
+\bt{50} $\displaystyle\int\frac{\sqrt{1+\sqrt{x}}}x\,dx$.
+\bt{51} $\displaystyle\int\frac{e^{2x}}{e^{2x}+3e^x+2}\,dx$.
+\bt{52} $\displaystyle\int\frac{\sin x}{\cos^2x-3\cos x}\,dx$.
+\bt{53} $\displaystyle\int\frac{\sec^2t}{\tan^2t+3\tan t+2}\,dt$.
+\bt{54} $\displaystyle\int\frac{e^x}{(e^x-2)(e^{2x}+1)}\,dx$.
+\bt{55} $\displaystyle\int\frac{dx}{1+e^x}$.
+\bt{56} $\displaystyle\int\frac{\cosh t}{\sinh^2t+\sinh^4t}\,dt$.
+
+\group{57–58} Dùng tích phân từng phần kết hợp với các kỹ thuật trong mục này để tính tích phân.
+\bt{57} $\displaystyle\int\ln(x^2-x+2)\,dx$.
+\bt{58} $\displaystyle\int x\tan^{-1}x\,dx$.
+
+\bt{59} \textsf{[Đồ thị]} Dùng đồ thị của $f(x)=1/(x^2-2x-3)$ để xác định $\int_0^2 f(x)\,dx$ dương hay âm. Dùng đồ thị để ước lượng sơ bộ giá trị tích phân rồi dùng phân thức đơn giản để tìm giá trị chính xác.
+
+\bt{60} Tính
+\[\int\frac1{x^2+k}\,dx\]
+bằng cách xét các trường hợp khác nhau của hằng số $k$.
+
+\group{61–62} Tính tích phân bằng cách hoàn thành bình phương và dùng Công thức 6.
+\bt{61} $\displaystyle\int\frac{dx}{x^2-2x}$.
+\bt{62} $\displaystyle\int\frac{2x+1}{4x^2+12x-7}\,dx$.
+
+\par\noindent\begin{minipage}[t]{\linewidth}
+\bt{63} \textbf{Phép thế Weierstrass.} Nhà toán học Đức Karl Weierstrass (1815–1897) nhận thấy phép thế $t=\tan(x/2)$ biến một hàm hữu tỉ bất kỳ của $\sin x$ và $\cos x$ thành một hàm hữu tỉ thông thường của $t$.
+
+(a) Nếu $t=\tan(x/2)$, $-\pi<x<\pi$, hãy phác họa một tam giác vuông hoặc dùng các đồng nhất thức lượng giác để chứng minh rằng
+\[\cos\frac x2=\frac1{\sqrt{1+t^2}},\qquad\sin\frac x2=\frac t{\sqrt{1+t^2}}.\]
+(b) Chứng minh rằng
+\[\cos x=\frac{1-t^2}{1+t^2},\qquad\sin x=\frac{2t}{1+t^2}.\]
+(c) Chứng minh rằng $dx=\dfrac2{1+t^2}\,dt$.
+
+\end{minipage}\par
+\group{64–67} Dùng phép thế trong Bài tập 63 để biến đổi hàm dưới dấu tích phân thành một hàm hữu tỉ của $t$, rồi tính tích phân.
+\bt{64} $\displaystyle\int\frac{dx}{1-\cos x}$.
+\bt{65} $\displaystyle\int\frac1{3\sin x-4\cos x}\,dx$.
+\bt{66} $\displaystyle\int_{\pi/3}^{\pi/2}\frac1{1+\sin x-\cos x}\,dx$.
+\bt{67} $\displaystyle\int_0^{\pi/2}\frac{\sin2x}{2+\cos x}\,dx$.
+
+\group{68–69} Tìm diện tích miền nằm dưới đường cong đã cho từ $1$ đến $2$.
+\bt{68} $y=\dfrac1{x^3+x}$.
+\bt{69} $y=\dfrac{x^2+1}{3x-x^2}$.
+
+\bt{70} Tìm thể tích khối thu được nếu miền nằm dưới đường cong
+\[y=\frac1{x^2+3x+2}\]
+từ $x=0$ đến $x=1$ được quay quanh (a) trục $x$ và (b) trục $y$.
+
+\par\noindent\begin{minipage}[t]{\linewidth}
+\bt{71} Một phương pháp làm chậm sự tăng trưởng của quần thể côn trùng mà không dùng thuốc trừ sâu là đưa vào quần thể một số con đực bất thụ; chúng giao phối với con cái có khả năng sinh sản nhưng không tạo ra con non. (Ảnh cho thấy một con ruồi vít, loài đầu tiên được loại trừ hiệu quả khỏi một vùng bằng phương pháp này.) Gọi $P$ là số côn trùng cái trong quần thể và $S$ là số con đực bất thụ được đưa vào mỗi thế hệ. Gọi $r$ là số con cái do mỗi con cái sinh ra, với điều kiện con đực được chọn để giao phối không bất thụ. Khi đó số lượng con cái liên hệ với thời gian $t$ bởi
+\[t=\int\frac{P+S}{P[(r-1)P-S]}\,dP.\]
+Giả sử một quần thể côn trùng có $10\,000$ con cái tăng trưởng với tốc độ $r=1.1$ và ban đầu được bổ sung $900$ con đực bất thụ. Tính tích phân để đưa ra một phương trình liên hệ số lượng con cái với thời gian. (Chú ý rằng không thể giải phương trình thu được để biểu diễn tường minh $P$.)
+\fig[.48]{exercise71}{Ruồi vít (screw-worm fly). Ảnh: USDA.}
+
+\end{minipage}\par
+\bt{72} Phân tích $x^4+1$ thành hiệu hai bình phương bằng cách trước hết cộng rồi trừ cùng một đại lượng. Dùng kết quả phân tích này để tính $\int1/(x^4+1)\,dx$.
+
+\bt{73} \textsf{[CAS]} (a) Dùng một hệ thống đại số máy tính để tìm phân tích thành phân thức đơn giản của hàm
+\[f(x)=\frac{4x^3-27x^2+5x-32}{30x^5-13x^4+50x^3-286x^2-299x-70}.\]
+(b) Dùng phần (a) để tìm $\int f(x)\,dx$ (bằng tay) và so sánh với kết quả dùng hệ thống đại số máy tính để lấy tích phân trực tiếp của $f$. Nhận xét về bất kỳ sự khác biệt nào.
+
+\bt{74} \textsf{[CAS]} (a) Dùng một hệ thống đại số máy tính để tìm phân tích thành phân thức đơn giản của hàm
+\[f(x)=\frac{12x^5-7x^3-13x^2+8}{100x^6-80x^5+116x^4-80x^3+41x^2-20x+4}.\]
+(b) Dùng phần (a) để tìm $\int f(x)\,dx$ rồi vẽ đồ thị của $f$ và tích phân bất định của nó trên cùng một màn hình.
+
+(c) Dùng đồ thị của $f$ để khám phá những đặc điểm chính của đồ thị $\int f(x)\,dx$.
+
+\bt{75} Giả sử $F,G,Q$ là các đa thức và
+\[\frac{F(x)}{Q(x)}=\frac{G(x)}{Q(x)}\]
+với mọi $x$ trừ những điểm tại đó $Q(x)=0$. Chứng minh rằng $F(x)=G(x)$ với mọi $x$. [Gợi ý: Dùng tính liên tục.]
+
+\bt{76} (a) Dùng tích phân từng phần để chứng minh rằng, với mọi số nguyên dương $n$,
+\begin{align*}
+\int\frac{dx}{(x^2+a^2)^n}={}&\frac{x}{2a^2(n-1)(x^2+a^2)^{n-1}}\\
+&+\frac{2n-3}{2a^2(n-1)}\int\frac{dx}{(x^2+a^2)^{n-1}}.
+\end{align*}
+(b) Dùng phần (a) để tính
+\[\int\frac{dx}{(x^2+1)^2}\qquad\text{và}\qquad\int\frac{dx}{(x^2+1)^3}.\]
+
+\bt{77} Nếu $a\ne0$ và $n$ là một số nguyên dương, tìm phân tích thành phân thức đơn giản của $f(x)=1/[x^n(x-a)]$. [Gợi ý: Trước hết tìm hệ số của $1/(x-a)$. Sau đó trừ đi số hạng thu được và đơn giản hóa phần còn lại.]
+
+\bt{78} Nếu $f$ là một hàm bậc hai sao cho $f(0)=1$ và
+\[\int\frac{f(x)}{x^2(x+1)^3}\,dx\]
+là một hàm hữu tỉ, tìm giá trị của $f'(0)$.
+\end{document}
