@@ -1,0 +1,74 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage{fontspec}\setmainfont{Latin Modern Roman}\setsansfont{DejaVu Sans}
+\usepackage{amsmath,amssymb,graphicx,geometry,enumitem,needspace,longtable,booktabs,fancyhdr,hyperref}
+\geometry{left=28mm,right=23mm,top=24mm,bottom=24mm}
+\hypersetup{unicode=true,colorlinks=true,linkcolor=black,urlcolor=blue,pdftitle={Giải tích — Bài toán nâng cao Chương 8}}
+\setlength{\parindent}{1.2em}\setlength{\parskip}{4pt}\setlength{\headheight}{16pt}
+\pagestyle{fancy}\fancyhf{}\fancyhead[L]{\small Chương 8. Các ứng dụng khác của tích phân}\fancyhead[R]{\small Problems Plus}\fancyfoot[C]{\thepage}
+\newcommand{\fig}[3][.68]{\begin{center}\begin{minipage}{\linewidth}\centering\includegraphics[width=#1\linewidth]{assets/#2.png}\\{\small #3}\end{minipage}\end{center}}
+\newcommand{\ex}[1]{\par\medskip\noindent\textbf{Ví dụ #1.}\ }
+\newcommand{\sol}{\par\nopagebreak[4]\noindent\textit{Lời giải.}\ }
+\newcommand{\bt}[1]{\par\smallskip\Needspace{5\baselineskip}\noindent\textbf{#1.}\ }
+\newcommand{\group}[1]{\par\Needspace{11\baselineskip}\medskip\noindent\textbf{#1}\par\nopagebreak[4]}
+\newcommand{\gint}[1]{\left[\!\left[#1\right]\!\right]}
+\allowdisplaybreaks[2]
+\DeclareMathOperator{\sech}{sech}
+\DeclareMathOperator{\csch}{csch}
+\DeclareMathOperator{\arccot}{arccot}
+
+\newcommand{\prj}[1]{\bt{#1}}
+
+\newcommand{\kn}[1]{\bt{#1}}
+\newcommand{\ds}[1]{\bt{#1}}
+\setlength{\emergencystretch}{1em}
+\widowpenalty=10000\clubpenalty=10000
+\begin{document}
+\section*{Bài toán nâng cao — Problems Plus, Chương 8}
+\bt{1} Tìm diện tích miền
+\[S=\{(x,y)\mid x\ge0,\ y\le1,\ x^2+y^2\le4y\}.\]
+\bt{2} Tìm trọng tâm hình học của miền được bao bởi vòng kín của đường cong $y^2=x^3-x^4$.
+\bt{3} Nếu một khối cầu bán kính $r$ bị cắt bởi mặt phẳng cách tâm khối cầu một khoảng $d$, thì khối cầu được chia thành hai phần gọi là các chỏm cầu một đáy (xem hình thứ nhất). Các phần mặt cầu tương ứng được gọi là các đới cầu một đáy.
+
+(a) Xác định diện tích hai đới cầu được chỉ ra trong hình thứ nhất.
+
+(b) Xác định gần đúng diện tích Bắc Băng Dương, giả sử nó có dạng gần tròn, tâm tại Bắc Cực và “chu vi” nằm trên vĩ tuyến $75^\circ$ Bắc. Dùng $r=3960\,\mathrm{mi}$ làm bán kính Trái Đất.
+
+(c) Một khối cầu bán kính $r$ được nội tiếp trong hình trụ tròn đứng bán kính $r$. Hai mặt phẳng vuông góc với trục tâm hình trụ, cách nhau $h$, cắt trên mặt cầu một đới cầu hai đáy (xem hình thứ hai). Chứng minh diện tích đới cầu bằng diện tích phần mặt trụ nằm giữa hai mặt phẳng đó.
+
+(d) Đới nóng là miền trên bề mặt Trái Đất nằm giữa chí tuyến Bắc, ở vĩ độ $23.45^\circ$ Bắc, và chí tuyến Nam, ở vĩ độ $23.45^\circ$ Nam. Diện tích đới nóng là bao nhiêu?
+\fig[.43]{ex03a}{Bài 3. Hình thứ nhất: mặt phẳng cắt khối cầu, cách tâm một khoảng $d$.}
+\fig[.43]{ex03b}{Bài 3. Hình thứ hai: đới cầu hai đáy và phần mặt trụ tương ứng.}
+\bt{4} (a) Chứng minh một người quan sát ở độ cao $H$ phía trên cực Bắc của khối cầu bán kính $r$ có thể nhìn thấy một phần mặt cầu có diện tích
+\[\frac{2\pi r^2H}{r+H}.\]
+(b) Hai khối cầu bán kính $r,R$ được đặt sao cho khoảng cách giữa hai tâm là $d$, với $d>r+R$. Nên đặt một nguồn sáng ở đâu trên đường thẳng nối hai tâm để chiếu sáng tổng diện tích lớn nhất?
+\bt{5} Giả sử khối lượng riêng của nước biển, $\rho=\rho(z)$, thay đổi theo độ sâu $z$ dưới mặt nước.
+
+(a) Chứng minh áp suất thủy tĩnh tuân theo phương trình vi phân
+\[\frac{dP}{dz}=\rho(z)g,\]
+trong đó $g$ là gia tốc trọng trường. Gọi $P_0,\rho_0$ là áp suất và khối lượng riêng tại $z=0$. Biểu diễn áp suất ở độ sâu $z$ dưới dạng tích phân.
+
+(b) Giả sử khối lượng riêng của nước biển ở độ sâu $z$ là $\rho=\rho_0e^{z/H}$, trong đó $H$ là hằng số dương. Tìm tổng lực, biểu diễn dưới dạng tích phân, tác dụng lên một cửa sổ tròn thẳng đứng bán kính $r$, có tâm nằm ở độ sâu $L>r$ dưới mặt nước.
+\bt{6} Hình vẽ cho một nửa đường tròn bán kính 1, đường kính nằm ngang $PQ$, cùng các tiếp tuyến tại $P,Q$. Nên đặt đường thẳng nằm ngang ở độ cao nào phía trên đường kính để diện tích tô màu nhỏ nhất?
+\fig[.42]{ex06}{Hình cho Bài 6.}
+\bt{7} Gọi $P$ là một khối chóp có đáy vuông cạnh $2b$, và $S$ là một khối cầu có tâm nằm trên đáy của $P$, tiếp xúc với cả tám cạnh của $P$. Tìm chiều cao của $P$. Sau đó tìm thể tích phần giao của $S$ và $P$.
+\bt{8} Xét một tấm kim loại phẳng được đặt thẳng đứng dưới nước, mép trên cách mặt nước $2\,\mathrm m$. Xác định hình dạng của tấm sao cho khi chia tấm thành một số tùy ý các dải ngang có cùng chiều cao, lực thủy tĩnh tác dụng lên mỗi dải đều bằng nhau.
+\bt{9} Một đĩa đồng chất bán kính $1\,\mathrm m$ được cắt bằng một đường thẳng sao cho khối tâm của mảnh nhỏ hơn nằm tại trung điểm một bán kính. Đường cắt nên cách tâm đĩa bao nhiêu? Cho kết quả chính xác đến hai chữ số thập phân.
+\bt{10} Một tam giác diện tích $30\,\mathrm{cm^2}$ được cắt bỏ từ một góc của hình vuông cạnh $10\,\mathrm{cm}$ như hình. Nếu trọng tâm hình học của miền còn lại cách cạnh phải của hình vuông $4\,\mathrm{cm}$, thì nó cách cạnh đáy bao nhiêu?
+\fig[.29]{ex10}{Bài 10.}
+\bt{11} Trong một bài toán nổi tiếng thế kỷ XVIII, gọi là \textbf{bài toán kim Buffon}, một chiếc kim dài $h$ được thả lên một mặt phẳng, chẳng hạn mặt bàn, trên đó đã kẻ các đường thẳng song song cách nhau $L$ đơn vị, với $L\ge h$. Bài toán là xác định xác suất kim nằm cắt một trong các đường đó sau khi dừng lại. Giả sử các đường chạy theo hướng Đông–Tây, song song với trục $x$ của một hệ tọa độ vuông góc như hình. Gọi $y$ là khoảng cách từ đầu “phía Nam” của kim đến đường thẳng gần nhất ở phía Bắc. (Nếu đầu phía Nam nằm trên một đường thẳng, đặt $y=0$. Nếu kim nằm theo hướng Đông–Tây, xem đầu phía Tây là đầu phía Nam.) Gọi $\theta$ là góc kim tạo với tia hướng Đông xuất phát từ đầu phía Nam. Khi đó $0\le y\le L$ và $0\le\theta\le\pi$.
+
+Chú ý kim chỉ cắt một trong các đường thẳng khi $y<h\sin\theta$. Tập tất cả các khả năng của kim có thể được đồng nhất với miền hình chữ nhật $0\le y\le L$, $0\le\theta\le\pi$; tỉ lệ số lần kim cắt một đường thẳng bằng
+\[\frac{\text{diện tích dưới }y=h\sin\theta}{\text{diện tích hình chữ nhật}}.\]
+Tỉ số này là xác suất kim cắt một đường thẳng. Tìm xác suất đó nếu $h=L$. Nếu $h=\tfrac12L$ thì sao?
+\fig[.48]{ex11a}{Hình cho Bài 11. Hình thứ nhất: Vị trí và góc của kim đối với các đường song song.}
+\fig[.48]{ex11b}{Hình cho Bài 11. Hình thứ hai: Miền các khả năng trong mặt phẳng $(\theta,y)$.}
+\bt{12} Nếu chiếc kim ở Bài 11 có độ dài $h>L$, nó có thể cắt nhiều hơn một đường thẳng.
+
+(a) Nếu $L=4$, tìm xác suất một chiếc kim dài 7 cắt ít nhất một đường thẳng. [Gợi ý: Làm như Bài 11. Định nghĩa $y$ như trước; khi đó tập tất cả các khả năng của kim có thể đồng nhất với cùng miền hình chữ nhật $0\le y\le L$, $0\le\theta\le\pi$. Phần nào của hình chữ nhật tương ứng với việc kim cắt một đường thẳng?]
+
+(b) Nếu $L=4$, tìm xác suất một chiếc kim dài 7 cắt hai đường thẳng.
+
+(c) Nếu $2L<h\le3L$, tìm công thức tổng quát cho xác suất kim cắt ba đường thẳng.
+\bt{13} Tìm trọng tâm hình học của miền được bao bởi elip $x^2+(x+y+1)^2=1$.
+
+\end{document}

@@ -4700,5 +4700,35 @@
     "file": "stewart-8-review-283af565/ex14.png",
     "mime": "image/png",
     "sha256": "c99a331e677ec07e9dde83e31d045f728b8fab4608e1bcfa00eada6e7f023003"
+  },
+  "stewart-8-plus-686e14af/ex03a.png": {
+    "file": "stewart-8-plus-686e14af/ex03a.png",
+    "mime": "image/png",
+    "sha256": "5b1d843a9e53bc4465be8a924d846749751adc183fad692edd797de38de776a6"
+  },
+  "stewart-8-plus-686e14af/ex03b.png": {
+    "file": "stewart-8-plus-686e14af/ex03b.png",
+    "mime": "image/png",
+    "sha256": "24de786a5ae1d7fb42cb0893da96ca41bf88491c82f379bf3ce98f517c90fc9d"
+  },
+  "stewart-8-plus-686e14af/ex06.png": {
+    "file": "stewart-8-plus-686e14af/ex06.png",
+    "mime": "image/png",
+    "sha256": "02b519bca4d5505518a27cb539741ae92f786f3992e1760e03721dd742e4b48e"
+  },
+  "stewart-8-plus-686e14af/ex10.png": {
+    "file": "stewart-8-plus-686e14af/ex10.png",
+    "mime": "image/png",
+    "sha256": "6cf43fd1c9d9d3a4cee81e46ba5be133930938f688ca60564fdba49ce6f108fc"
+  },
+  "stewart-8-plus-686e14af/ex11a.png": {
+    "file": "stewart-8-plus-686e14af/ex11a.png",
+    "mime": "image/png",
+    "sha256": "06df4fe6b176eaa6a5885127ee00928a4f5b6418fffb2ab65f08571a6c721483"
+  },
+  "stewart-8-plus-686e14af/ex11b.png": {
+    "file": "stewart-8-plus-686e14af/ex11b.png",
+    "mime": "image/png",
+    "sha256": "77448766f5917d6532c8b19a655f7c4ebe86bf69a558277f87b3d6e3d40368c5"
   }
 }
