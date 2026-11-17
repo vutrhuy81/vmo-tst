@@ -1,0 +1,218 @@
+{
+  "exercises": [
+    {
+      "number": 1,
+      "content": "<p><strong>1.</strong></p>\n<p><em>Yêu cầu chung (1–4):</em> Đường cong đã cho được quay quanh trục <span class=\"math inline\">\\(x\\)</span>. Lập, nhưng không tính, một tích phân biểu diễn diện tích mặt thu được bằng cách lấy tích phân (a) theo <span class=\"math inline\">\\(x\\)</span> và (b) theo <span class=\"math inline\">\\(y\\)</span>.</p>\n<p><span class=\"math inline\">\\(y=\\sqrt[3]x,\\quad1\\le x\\le8\\)</span>.</p>\n"
+    },
+    {
+      "number": 2,
+      "content": "<p><strong>2.</strong></p>\n<p><em>Yêu cầu chung (1–4):</em> Đường cong đã cho được quay quanh trục <span class=\"math inline\">\\(x\\)</span>. Lập, nhưng không tính, một tích phân biểu diễn diện tích mặt thu được bằng cách lấy tích phân (a) theo <span class=\"math inline\">\\(x\\)</span> và (b) theo <span class=\"math inline\">\\(y\\)</span>.</p>\n<p><span class=\"math inline\">\\(x^2=e^y,\\quad1\\le x\\le e\\)</span>.</p>\n"
+    },
+    {
+      "number": 3,
+      "content": "<p><strong>3.</strong></p>\n<p><em>Yêu cầu chung (1–4):</em> Đường cong đã cho được quay quanh trục <span class=\"math inline\">\\(x\\)</span>. Lập, nhưng không tính, một tích phân biểu diễn diện tích mặt thu được bằng cách lấy tích phân (a) theo <span class=\"math inline\">\\(x\\)</span> và (b) theo <span class=\"math inline\">\\(y\\)</span>.</p>\n<p><span class=\"math inline\">\\(x=\\ln(2y+1),\\quad0\\le y\\le1\\)</span>.</p>\n"
+    },
+    {
+      "number": 4,
+      "content": "<p><strong>4.</strong></p>\n<p><em>Yêu cầu chung (1–4):</em> Đường cong đã cho được quay quanh trục <span class=\"math inline\">\\(x\\)</span>. Lập, nhưng không tính, một tích phân biểu diễn diện tích mặt thu được bằng cách lấy tích phân (a) theo <span class=\"math inline\">\\(x\\)</span> và (b) theo <span class=\"math inline\">\\(y\\)</span>.</p>\n<p><span class=\"math inline\">\\(y=\\tan^{-1}x,\\quad0\\le x\\le1\\)</span>.</p>\n"
+    },
+    {
+      "number": 5,
+      "content": "<p><strong>5.</strong></p>\n<p><em>Yêu cầu chung (5–8):</em> Đường cong đã cho được quay quanh trục <span class=\"math inline\">\\(y\\)</span>. Lập, nhưng không tính, một tích phân biểu diễn diện tích mặt thu được bằng cách lấy tích phân (a) theo <span class=\"math inline\">\\(x\\)</span> và (b) theo <span class=\"math inline\">\\(y\\)</span>.</p>\n<p><span class=\"math inline\">\\(xy=4,\\quad1\\le x\\le8\\)</span>.</p>\n"
+    },
+    {
+      "number": 6,
+      "content": "<p><strong>6.</strong></p>\n<p><em>Yêu cầu chung (5–8):</em> Đường cong đã cho được quay quanh trục <span class=\"math inline\">\\(y\\)</span>. Lập, nhưng không tính, một tích phân biểu diễn diện tích mặt thu được bằng cách lấy tích phân (a) theo <span class=\"math inline\">\\(x\\)</span> và (b) theo <span class=\"math inline\">\\(y\\)</span>.</p>\n<p><span class=\"math inline\">\\(y=(x+1)^4,\\quad0\\le x\\le2\\)</span>.</p>\n"
+    },
+    {
+      "number": 7,
+      "content": "<p><strong>7.</strong></p>\n<p><em>Yêu cầu chung (5–8):</em> Đường cong đã cho được quay quanh trục <span class=\"math inline\">\\(y\\)</span>. Lập, nhưng không tính, một tích phân biểu diễn diện tích mặt thu được bằng cách lấy tích phân (a) theo <span class=\"math inline\">\\(x\\)</span> và (b) theo <span class=\"math inline\">\\(y\\)</span>.</p>\n<p><span class=\"math inline\">\\(y=1+\\sin x,\\quad0\\le x\\le\\pi/2\\)</span>.</p>\n"
+    },
+    {
+      "number": 8,
+      "content": "<p><strong>8.</strong></p>\n<p><em>Yêu cầu chung (5–8):</em> Đường cong đã cho được quay quanh trục <span class=\"math inline\">\\(y\\)</span>. Lập, nhưng không tính, một tích phân biểu diễn diện tích mặt thu được bằng cách lấy tích phân (a) theo <span class=\"math inline\">\\(x\\)</span> và (b) theo <span class=\"math inline\">\\(y\\)</span>.</p>\n<p><span class=\"math inline\">\\(x=e^{2y},\\quad0\\le y\\le2\\)</span>.</p>\n"
+    },
+    {
+      "number": 9,
+      "content": "<p><strong>9.</strong></p>\n<p><em>Yêu cầu chung (9–16):</em> Tìm diện tích chính xác của mặt tạo thành khi quay đường cong quanh trục <span class=\"math inline\">\\(x\\)</span>.</p>\n<p><span class=\"math inline\">\\(y=x^3,\\quad0\\le x\\le2\\)</span>.</p>\n"
+    },
+    {
+      "number": 10,
+      "content": "<p><strong>10.</strong></p>\n<p><em>Yêu cầu chung (9–16):</em> Tìm diện tích chính xác của mặt tạo thành khi quay đường cong quanh trục <span class=\"math inline\">\\(x\\)</span>.</p>\n<p><span class=\"math inline\">\\(y=\\sqrt{5-x},\\quad3\\le x\\le5\\)</span>.</p>\n"
+    },
+    {
+      "number": 11,
+      "content": "<p><strong>11.</strong></p>\n<p><em>Yêu cầu chung (9–16):</em> Tìm diện tích chính xác của mặt tạo thành khi quay đường cong quanh trục <span class=\"math inline\">\\(x\\)</span>.</p>\n<p><span class=\"math inline\">\\(y^2=x+1,\\quad0\\le x\\le3\\)</span>.</p>\n"
+    },
+    {
+      "number": 12,
+      "content": "<p><strong>12.</strong></p>\n<p><em>Yêu cầu chung (9–16):</em> Tìm diện tích chính xác của mặt tạo thành khi quay đường cong quanh trục <span class=\"math inline\">\\(x\\)</span>.</p>\n<p><span class=\"math inline\">\\(y=\\sqrt{1+e^x},\\quad0\\le x\\le1\\)</span>.</p>\n"
+    },
+    {
+      "number": 13,
+      "content": "<p><strong>13.</strong></p>\n<p><em>Yêu cầu chung (9–16):</em> Tìm diện tích chính xác của mặt tạo thành khi quay đường cong quanh trục <span class=\"math inline\">\\(x\\)</span>.</p>\n<p><span class=\"math inline\">\\(y=\\cos(\\tfrac12x),\\quad0\\le x\\le\\pi\\)</span>.</p>\n"
+    },
+    {
+      "number": 14,
+      "content": "<p><strong>14.</strong></p>\n<p><em>Yêu cầu chung (9–16):</em> Tìm diện tích chính xác của mặt tạo thành khi quay đường cong quanh trục <span class=\"math inline\">\\(x\\)</span>.</p>\n<p><span class=\"math inline\">\\(y=\\frac{x^3}6+\\frac1{2x},\\quad\\frac12\\le x\\le1\\)</span>.</p>\n"
+    },
+    {
+      "number": 15,
+      "content": "<p><strong>15.</strong></p>\n<p><em>Yêu cầu chung (9–16):</em> Tìm diện tích chính xác của mặt tạo thành khi quay đường cong quanh trục <span class=\"math inline\">\\(x\\)</span>.</p>\n<p><span class=\"math inline\">\\(x=\\frac13(y^2+2)^{3/2},\\quad1\\le y\\le2\\)</span>.</p>\n"
+    },
+    {
+      "number": 16,
+      "content": "<p><strong>16.</strong></p>\n<p><em>Yêu cầu chung (9–16):</em> Tìm diện tích chính xác của mặt tạo thành khi quay đường cong quanh trục <span class=\"math inline\">\\(x\\)</span>.</p>\n<p><span class=\"math inline\">\\(x=1+2y^2,\\quad1\\le y\\le2\\)</span>.</p>\n"
+    },
+    {
+      "number": 17,
+      "content": "<p><strong>17.</strong></p>\n<p><em>Yêu cầu chung (17–20):</em> Đường cong đã cho được quay quanh trục <span class=\"math inline\">\\(y\\)</span>. Tìm diện tích mặt thu được.</p>\n<p><span class=\"math inline\">\\(y=\\frac13x^{3/2},\\quad0\\le x\\le12\\)</span>.</p>\n"
+    },
+    {
+      "number": 18,
+      "content": "<p><strong>18.</strong></p>\n<p><em>Yêu cầu chung (17–20):</em> Đường cong đã cho được quay quanh trục <span class=\"math inline\">\\(y\\)</span>. Tìm diện tích mặt thu được.</p>\n<p><span class=\"math inline\">\\(x^{2/3}+y^{2/3}=1,\\quad0\\le y\\le1\\)</span>.</p>\n"
+    },
+    {
+      "number": 19,
+      "content": "<p><strong>19.</strong></p>\n<p><em>Yêu cầu chung (17–20):</em> Đường cong đã cho được quay quanh trục <span class=\"math inline\">\\(y\\)</span>. Tìm diện tích mặt thu được.</p>\n<p><span class=\"math inline\">\\(x=\\sqrt{a^2-y^2},\\quad0\\le y\\le a/2\\)</span>.</p>\n"
+    },
+    {
+      "number": 20,
+      "content": "<p><strong>20.</strong></p>\n<p><em>Yêu cầu chung (17–20):</em> Đường cong đã cho được quay quanh trục <span class=\"math inline\">\\(y\\)</span>. Tìm diện tích mặt thu được.</p>\n<p><span class=\"math inline\">\\(y=\\frac14x^2-\\frac12\\ln x,\\quad1\\le x\\le2\\)</span>.</p>\n"
+    },
+    {
+      "number": 21,
+      "content": "<p><strong>21.</strong></p>\n<p><em>Yêu cầu chung (21–26):</em> [Công nghệ] Lập một tích phân biểu diễn diện tích mặt tạo thành khi quay đường cong đã cho quanh trục được chỉ định. Sau đó tính số tích phân chính xác đến bốn chữ số thập phân.</p>\n<p><span class=\"math inline\">\\(y=e^{-x^2},\\quad-1\\le x\\le1\\)</span>; trục <span class=\"math inline\">\\(x\\)</span>.</p>\n"
+    },
+    {
+      "number": 22,
+      "content": "<p><strong>22.</strong></p>\n<p><em>Yêu cầu chung (21–26):</em> [Công nghệ] Lập một tích phân biểu diễn diện tích mặt tạo thành khi quay đường cong đã cho quanh trục được chỉ định. Sau đó tính số tích phân chính xác đến bốn chữ số thập phân.</p>\n<p><span class=\"math inline\">\\(xy=y^2-1,\\quad1\\le y\\le3\\)</span>; trục <span class=\"math inline\">\\(x\\)</span>.</p>\n"
+    },
+    {
+      "number": 23,
+      "content": "<p><strong>23.</strong></p>\n<p><em>Yêu cầu chung (21–26):</em> [Công nghệ] Lập một tích phân biểu diễn diện tích mặt tạo thành khi quay đường cong đã cho quanh trục được chỉ định. Sau đó tính số tích phân chính xác đến bốn chữ số thập phân.</p>\n<p><span class=\"math inline\">\\(x=y+y^3,\\quad0\\le y\\le1\\)</span>; trục <span class=\"math inline\">\\(y\\)</span>.</p>\n"
+    },
+    {
+      "number": 24,
+      "content": "<p><strong>24.</strong></p>\n<p><em>Yêu cầu chung (21–26):</em> [Công nghệ] Lập một tích phân biểu diễn diện tích mặt tạo thành khi quay đường cong đã cho quanh trục được chỉ định. Sau đó tính số tích phân chính xác đến bốn chữ số thập phân.</p>\n<p><span class=\"math inline\">\\(y=x+\\sin x,\\quad0\\le x\\le2\\pi/3\\)</span>; trục <span class=\"math inline\">\\(y\\)</span>.</p>\n"
+    },
+    {
+      "number": 25,
+      "content": "<p><strong>25.</strong></p>\n<p><em>Yêu cầu chung (21–26):</em> [Công nghệ] Lập một tích phân biểu diễn diện tích mặt tạo thành khi quay đường cong đã cho quanh trục được chỉ định. Sau đó tính số tích phân chính xác đến bốn chữ số thập phân.</p>\n<p><span class=\"math inline\">\\(\\ln y=x-y^2,\\quad1\\le y\\le4\\)</span>; trục <span class=\"math inline\">\\(x\\)</span>.</p>\n"
+    },
+    {
+      "number": 26,
+      "content": "<p><strong>26.</strong></p>\n<p><em>Yêu cầu chung (21–26):</em> [Công nghệ] Lập một tích phân biểu diễn diện tích mặt tạo thành khi quay đường cong đã cho quanh trục được chỉ định. Sau đó tính số tích phân chính xác đến bốn chữ số thập phân.</p>\n<p><span class=\"math inline\">\\(x=\\cos^2y,\\quad0\\le y\\le\\pi/2\\)</span>; trục <span class=\"math inline\">\\(y\\)</span>.</p>\n"
+    },
+    {
+      "number": 27,
+      "content": "<p><strong>27.</strong></p>\n<p><em>Yêu cầu chung (27–28):</em> [Công nghệ] Tìm diện tích chính xác của mặt tạo thành khi quay đường cong đã cho quanh trục <span class=\"math inline\">\\(x\\)</span>.</p>\n<p><span class=\"math inline\">\\(y=1/x\\)</span>, <span class=\"math inline\">\\(1\\le x\\le2\\)</span>.</p>\n"
+    },
+    {
+      "number": 28,
+      "content": "<p><strong>28.</strong></p>\n<p><em>Yêu cầu chung (27–28):</em> [Công nghệ] Tìm diện tích chính xác của mặt tạo thành khi quay đường cong đã cho quanh trục <span class=\"math inline\">\\(x\\)</span>.</p>\n<p><span class=\"math inline\">\\(y=\\sqrt{x^2+1}\\)</span>, <span class=\"math inline\">\\(0\\le x\\le3\\)</span>.</p>\n"
+    },
+    {
+      "number": 29,
+      "content": "<p><strong>29.</strong></p>\n<p><em>Yêu cầu chung (29–30):</em> [Công nghệ] Dùng máy tính để tìm diện tích chính xác của mặt tạo thành khi quay đường cong đã cho quanh trục <span class=\"math inline\">\\(y\\)</span>. Nếu phần mềm gặp khó khăn khi tính tích phân, hãy biểu diễn diện tích mặt bằng một tích phân theo biến còn lại.</p>\n<p><span class=\"math inline\">\\(y=x^3\\)</span>, <span class=\"math inline\">\\(0\\le y\\le1\\)</span>.</p>\n"
+    },
+    {
+      "number": 30,
+      "content": "<p><strong>30.</strong></p>\n<p><em>Yêu cầu chung (29–30):</em> [Công nghệ] Dùng máy tính để tìm diện tích chính xác của mặt tạo thành khi quay đường cong đã cho quanh trục <span class=\"math inline\">\\(y\\)</span>. Nếu phần mềm gặp khó khăn khi tính tích phân, hãy biểu diễn diện tích mặt bằng một tích phân theo biến còn lại.</p>\n<p><span class=\"math inline\">\\(y=\\ln(x+1)\\)</span>, <span class=\"math inline\">\\(0\\le x\\le1\\)</span>.</p>\n"
+    },
+    {
+      "number": 31,
+      "content": "<p><strong>31.</strong></p>\n<p><em>Yêu cầu chung (31–32):</em> Dùng quy tắc Simpson với <span class=\"math inline\">\\(n=10\\)</span> để tính gần đúng diện tích mặt tạo thành khi quay đường cong đã cho quanh trục <span class=\"math inline\">\\(x\\)</span>. So sánh kết quả với giá trị tích phân tính bằng máy tính cầm tay hoặc máy tính.</p>\n<p><span class=\"math inline\">\\(y=\\frac15x^5\\)</span>, <span class=\"math inline\">\\(0\\le x\\le5\\)</span>.</p>\n"
+    },
+    {
+      "number": 32,
+      "content": "<p><strong>32.</strong></p>\n<p><em>Yêu cầu chung (31–32):</em> Dùng quy tắc Simpson với <span class=\"math inline\">\\(n=10\\)</span> để tính gần đúng diện tích mặt tạo thành khi quay đường cong đã cho quanh trục <span class=\"math inline\">\\(x\\)</span>. So sánh kết quả với giá trị tích phân tính bằng máy tính cầm tay hoặc máy tính.</p>\n<p><span class=\"math inline\">\\(y=x\\ln x\\)</span>, <span class=\"math inline\">\\(1\\le x\\le2\\)</span>.</p>\n"
+    },
+    {
+      "number": 33,
+      "content": "<p><strong>33.</strong></p>\n<p><strong>Kèn Gabriel.</strong> Mặt tạo thành khi quay đường cong <span class=\"math inline\">\\(y=1/x\\)</span>, <span class=\"math inline\">\\(x\\ge1\\)</span>, quanh trục <span class=\"math inline\">\\(x\\)</span> được gọi là <em>kèn Gabriel</em>. Chứng minh diện tích mặt là vô hạn (mặc dù thể tích được bao kín là hữu hạn; xem Bài tập 7.8.75).</p>\n<div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-8-2-47f88c07/ex33.png\" alt=\"image\" /><br />\nBài 33. Kèn Gabriel.</p>\n</div>\n"
+    },
+    {
+      "number": 34,
+      "content": "<p><strong>34.</strong></p>\n<p>Nếu đường cong vô hạn <span class=\"math inline\">\\(y=e^{-x}\\)</span>, <span class=\"math inline\">\\(x\\ge0\\)</span>, được quay quanh trục <span class=\"math inline\">\\(x\\)</span>, hãy tìm diện tích mặt thu được.</p>\n"
+    },
+    {
+      "number": 35,
+      "content": "<p><strong>35.</strong></p>\n<p>(a) Nếu <span class=\"math inline\">\\(a&gt;0\\)</span>, tìm diện tích mặt tạo thành khi quay vòng kín của đường cong <span class=\"math inline\">\\(3ay^2=x(a-x)^2\\)</span> quanh trục <span class=\"math inline\">\\(x\\)</span>.</p>\n<p>(b) Tìm diện tích mặt nếu vòng kín được quay quanh trục <span class=\"math inline\">\\(y\\)</span>.</p>\n<div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-8-2-47f88c07/ex35.png\" alt=\"image\" /><br />\nBài 35. Vòng kín của đường cong <span class=\"math inline\">\\(3ay^2=x(a-x)^2\\)</span>.</p>\n</div>\n"
+    },
+    {
+      "number": 36,
+      "content": "<p><strong>36.</strong></p>\n<p>Một nhóm kỹ sư đang xây dựng một chảo anten vệ tinh dạng parabol, có hình dạng tạo thành khi quay đường cong <span class=\"math inline\">\\(y=ax^2\\)</span> quanh trục <span class=\"math inline\">\\(y\\)</span>. Nếu chảo có đường kính 10 ft và độ sâu lớn nhất 2 ft, hãy tìm <span class=\"math inline\">\\(a\\)</span> và diện tích mặt chảo.</p>\n<div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-8-2-47f88c07/ex36.png\" alt=\"image\" /><br />\nBài 36. Chảo anten vệ tinh. Ảnh: Dabarti CGI / Shutterstock.com.</p>\n</div>\n"
+    },
+    {
+      "number": 37,
+      "content": "<p><strong>37.</strong></p>\n<p>(a) Elip <span class=\"math display\">\\[\\frac{x^2}{a^2}+\\frac{y^2}{b^2}=1,\\qquad a&gt;b,\\]</span> được quay quanh trục <span class=\"math inline\">\\(x\\)</span> để tạo thành một mặt gọi là <em>mặt ellipsoid</em>, hay <em>mặt cầu kéo dài</em>. Tìm diện tích mặt ellipsoid này.</p>\n<p>(b) Nếu elip ở phần (a) được quay quanh trục nhỏ của nó (trục <span class=\"math inline\">\\(y\\)</span>), mặt ellipsoid thu được gọi là <em>mặt cầu dẹt</em>. Tìm diện tích mặt ellipsoid này.</p>\n"
+    },
+    {
+      "number": 38,
+      "content": "<p><strong>38.</strong></p>\n<p>Tìm diện tích mặt xuyến trong Bài tập 6.2.75.</p>\n"
+    },
+    {
+      "number": 39,
+      "content": "<p><strong>39.</strong></p>\n<p>(a) Nếu đường cong <span class=\"math inline\">\\(y=f(x)\\)</span>, <span class=\"math inline\">\\(a\\le x\\le b\\)</span>, được quay quanh đường thẳng ngang <span class=\"math inline\">\\(y=c\\)</span>, trong đó <span class=\"math inline\">\\(f(x)\\le c\\)</span>, hãy tìm công thức diện tích mặt thu được.</p>\n<p>(b) [Công nghệ] Lập một tích phân để tìm diện tích mặt tạo thành khi quay đường cong <span class=\"math inline\">\\(y=\\sqrt{x}\\)</span>, <span class=\"math inline\">\\(0\\le x\\le4\\)</span>, quanh đường thẳng <span class=\"math inline\">\\(y=4\\)</span>. Sau đó tính số tích phân chính xác đến bốn chữ số thập phân.</p>\n"
+    },
+    {
+      "number": 40,
+      "content": "<p><strong>40.</strong></p>\n<p>[Công nghệ] Lập một tích phân biểu diễn diện tích mặt tạo thành khi quay đường cong <span class=\"math inline\">\\(y=x^3\\)</span>, <span class=\"math inline\">\\(1\\le x\\le2\\)</span>, quanh đường thẳng đã cho. Sau đó tính số tích phân chính xác đến hai chữ số thập phân.</p>\n<p>(a) <span class=\"math inline\">\\(x=-1\\)</span>;(b) <span class=\"math inline\">\\(x=4\\)</span>;</p>\n<p>(c) <span class=\"math inline\">\\(y=\\frac12\\)</span>;(d) <span class=\"math inline\">\\(y=10\\)</span>.</p>\n"
+    },
+    {
+      "number": 41,
+      "content": "<p><strong>41.</strong></p>\n<p>Tìm diện tích mặt tạo thành khi quay đường tròn <span class=\"math inline\">\\(x^2+y^2=r^2\\)</span> quanh đường thẳng <span class=\"math inline\">\\(y=r\\)</span>.</p>\n"
+    },
+    {
+      "number": 42,
+      "content": "<p><strong>42.</strong></p>\n<p><em>Yêu cầu chung (42–43):</em> Một <em>đới cầu</em> là phần mặt cầu nằm giữa hai mặt phẳng song song.</p>\n<p>Chứng minh diện tích đới cầu là <span class=\"math inline\">\\(S=2\\pi Rh\\)</span>, trong đó <span class=\"math inline\">\\(R\\)</span> là bán kính mặt cầu và <span class=\"math inline\">\\(h\\)</span> là khoảng cách giữa hai mặt phẳng. (Chú ý rằng <span class=\"math inline\">\\(S\\)</span> chỉ phụ thuộc vào khoảng cách giữa hai mặt phẳng, không phụ thuộc vị trí của chúng, miễn là cả hai đều cắt mặt cầu.)</p>\n"
+    },
+    {
+      "number": 43,
+      "content": "<p><strong>43.</strong></p>\n<p><em>Yêu cầu chung (42–43):</em> Một <em>đới cầu</em> là phần mặt cầu nằm giữa hai mặt phẳng song song.</p>\n<p>Chứng minh diện tích một dải mặt trụ có bán kính <span class=\"math inline\">\\(R\\)</span>, chiều cao <span class=\"math inline\">\\(h\\)</span>, bằng diện tích đới cầu trong Bài 42.</p>\n"
+    },
+    {
+      "number": 44,
+      "content": "<p><strong>44.</strong></p>\n<p>Gọi <span class=\"math inline\">\\(L\\)</span> là độ dài đường cong <span class=\"math inline\">\\(y=f(x)\\)</span>, <span class=\"math inline\">\\(a\\le x\\le b\\)</span>, trong đó <span class=\"math inline\">\\(f\\)</span> dương và có đạo hàm liên tục. Gọi <span class=\"math inline\">\\(S_f\\)</span> là diện tích mặt tạo thành khi quay đường cong quanh trục <span class=\"math inline\">\\(x\\)</span>. Nếu <span class=\"math inline\">\\(c\\)</span> là một hằng số dương, đặt <span class=\"math inline\">\\(g(x)=f(x)+c\\)</span> và gọi <span class=\"math inline\">\\(S_g\\)</span> là diện tích mặt tương ứng tạo thành từ đường cong <span class=\"math inline\">\\(y=g(x)\\)</span>, <span class=\"math inline\">\\(a\\le x\\le b\\)</span>. Biểu diễn <span class=\"math inline\">\\(S_g\\)</span> theo <span class=\"math inline\">\\(S_f\\)</span> và <span class=\"math inline\">\\(L\\)</span>.</p>\n"
+    },
+    {
+      "number": 45,
+      "content": "<p><strong>45.</strong></p>\n<p>Chứng minh rằng nếu quay đường cong <span class=\"math inline\">\\(y=e^{x/2}+e^{-x/2}\\)</span> quanh trục <span class=\"math inline\">\\(x\\)</span>, diện tích mặt thu được có cùng giá trị với thể tích được bao kín trên bất kỳ khoảng <span class=\"math inline\">\\(a\\le x\\le b\\)</span> nào.</p>\n"
+    },
+    {
+      "number": 46,
+      "content": "<p><strong>46.</strong></p>\n<p>Công thức 4 chỉ đúng khi <span class=\"math inline\">\\(f(x)\\ge0\\)</span>. Chứng minh rằng khi <span class=\"math inline\">\\(f(x)\\)</span> không nhất thiết dương, công thức diện tích mặt trở thành <span class=\"math display\">\\[S=\\int_a^b2\\pi|f(x)|\\sqrt{1+[f&#39;(x)]^2}\\,dx.\\]</span></p>\n"
+    },
+    {
+      "number": 47,
+      "title": "Dự án khám phá — Quay quanh một đường thẳng nghiêng — Bài 1",
+      "content": "<p><strong>Dự án khám phá — Quay quanh một đường thẳng nghiêng — Bài 1.</strong> Ta biết cách tìm thể tích khối tròn xoay tạo thành khi quay một miền quanh một đường thẳng ngang hoặc đứng (xem Mục 6.2). Ta cũng biết cách tìm diện tích mặt tròn xoay khi quay một đường cong quanh một đường thẳng ngang hoặc đứng (xem Mục 8.2). Nhưng nếu quay quanh một đường thẳng nghiêng, tức là không ngang cũng không đứng, thì sao? Trong dự án này, bạn được yêu cầu khám phá các công thức cho thể tích khối tròn xoay và diện tích mặt tròn xoay khi trục quay là một đường thẳng nghiêng.</p>\n<p>Gọi <span class=\"math inline\">\\(C\\)</span> là cung đường cong <span class=\"math inline\">\\(y=f(x)\\)</span> giữa các điểm <span class=\"math inline\">\\(P(p,f(p))\\)</span> và <span class=\"math inline\">\\(Q(q,f(q))\\)</span>, và gọi <span class=\"math inline\">\\(\\mathcal R\\)</span> là miền giới hạn bởi <span class=\"math inline\">\\(C\\)</span>, đường thẳng <span class=\"math inline\">\\(y=mx+b\\)</span> (nằm hoàn toàn phía dưới <span class=\"math inline\">\\(C\\)</span>), và các đường vuông góc với đường thẳng đó đi qua <span class=\"math inline\">\\(P,Q\\)</span>.</p>\n<div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-8-2-47f88c07/proj01.png\" alt=\"image\" /><br />\nMiền <span class=\"math inline\">\\(\\mathcal R\\)</span> và trục quay nghiêng <span class=\"math inline\">\\(y=mx+b\\)</span>.</p>\n</div>\n<p>Chứng minh diện tích <span class=\"math inline\">\\(\\mathcal R\\)</span> là <span class=\"math display\">\\[\\frac1{1+m^2}\\int_p^q[f(x)-mx-b][1+mf&#39;(x)]\\,dx.\\]</span> [Gợi ý: Có thể kiểm chứng công thức bằng cách trừ các diện tích, nhưng trong toàn bộ dự án sẽ hữu ích hơn nếu suy ra công thức bằng cách trước hết xấp xỉ diện tích bằng các hình chữ nhật vuông góc với đường thẳng, như hình sau. Dùng hình để biểu diễn <span class=\"math inline\">\\(\\Delta u\\)</span> theo <span class=\"math inline\">\\(\\Delta x\\)</span>.]</p>\n<div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-8-2-47f88c07/proj02.png\" alt=\"image\" /><br />\nHình hỗ trợ Bài 1. Đường đen là tiếp tuyến với <span class=\"math inline\">\\(C\\)</span> tại <span class=\"math inline\">\\((x_i,f(x_i))\\)</span>; các góc và độ dài dùng để liên hệ <span class=\"math inline\">\\(\\Delta u\\)</span> với <span class=\"math inline\">\\(\\Delta x\\)</span>.</p>\n</div>\n"
+    },
+    {
+      "number": 48,
+      "title": "Dự án khám phá — Quay quanh một đường thẳng nghiêng — Bài 2",
+      "content": "<p><strong>Dự án khám phá — Quay quanh một đường thẳng nghiêng — Bài 2.</strong> Ta biết cách tìm thể tích khối tròn xoay tạo thành khi quay một miền quanh một đường thẳng ngang hoặc đứng (xem Mục 6.2). Ta cũng biết cách tìm diện tích mặt tròn xoay khi quay một đường cong quanh một đường thẳng ngang hoặc đứng (xem Mục 8.2). Nhưng nếu quay quanh một đường thẳng nghiêng, tức là không ngang cũng không đứng, thì sao? Trong dự án này, bạn được yêu cầu khám phá các công thức cho thể tích khối tròn xoay và diện tích mặt tròn xoay khi trục quay là một đường thẳng nghiêng.</p>\n<p>Gọi <span class=\"math inline\">\\(C\\)</span> là cung đường cong <span class=\"math inline\">\\(y=f(x)\\)</span> giữa các điểm <span class=\"math inline\">\\(P(p,f(p))\\)</span> và <span class=\"math inline\">\\(Q(q,f(q))\\)</span>, và gọi <span class=\"math inline\">\\(\\mathcal R\\)</span> là miền giới hạn bởi <span class=\"math inline\">\\(C\\)</span>, đường thẳng <span class=\"math inline\">\\(y=mx+b\\)</span> (nằm hoàn toàn phía dưới <span class=\"math inline\">\\(C\\)</span>), và các đường vuông góc với đường thẳng đó đi qua <span class=\"math inline\">\\(P,Q\\)</span>.</p>\n<div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-8-2-47f88c07/proj01.png\" alt=\"image\" /><br />\nMiền <span class=\"math inline\">\\(\\mathcal R\\)</span> và trục quay nghiêng <span class=\"math inline\">\\(y=mx+b\\)</span>.</p>\n</div>\n<p>Tìm diện tích miền được biểu diễn trong hình sau.</p>\n<div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-8-2-47f88c07/proj03.png\" alt=\"image\" /><br />\nBài 2. Miền giữa <span class=\"math inline\">\\(y=x+\\sin x\\)</span>, <span class=\"math inline\">\\(y=x-2\\)</span> và các đoạn vuông góc với đường thẳng.</p>\n</div>\n"
+    },
+    {
+      "number": 49,
+      "title": "Dự án khám phá — Quay quanh một đường thẳng nghiêng — Bài 3",
+      "content": "<p><strong>Dự án khám phá — Quay quanh một đường thẳng nghiêng — Bài 3.</strong> Ta biết cách tìm thể tích khối tròn xoay tạo thành khi quay một miền quanh một đường thẳng ngang hoặc đứng (xem Mục 6.2). Ta cũng biết cách tìm diện tích mặt tròn xoay khi quay một đường cong quanh một đường thẳng ngang hoặc đứng (xem Mục 8.2). Nhưng nếu quay quanh một đường thẳng nghiêng, tức là không ngang cũng không đứng, thì sao? Trong dự án này, bạn được yêu cầu khám phá các công thức cho thể tích khối tròn xoay và diện tích mặt tròn xoay khi trục quay là một đường thẳng nghiêng.</p>\n<p>Gọi <span class=\"math inline\">\\(C\\)</span> là cung đường cong <span class=\"math inline\">\\(y=f(x)\\)</span> giữa các điểm <span class=\"math inline\">\\(P(p,f(p))\\)</span> và <span class=\"math inline\">\\(Q(q,f(q))\\)</span>, và gọi <span class=\"math inline\">\\(\\mathcal R\\)</span> là miền giới hạn bởi <span class=\"math inline\">\\(C\\)</span>, đường thẳng <span class=\"math inline\">\\(y=mx+b\\)</span> (nằm hoàn toàn phía dưới <span class=\"math inline\">\\(C\\)</span>), và các đường vuông góc với đường thẳng đó đi qua <span class=\"math inline\">\\(P,Q\\)</span>.</p>\n<div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-8-2-47f88c07/proj01.png\" alt=\"image\" /><br />\nMiền <span class=\"math inline\">\\(\\mathcal R\\)</span> và trục quay nghiêng <span class=\"math inline\">\\(y=mx+b\\)</span>.</p>\n</div>\n<p><em>Công thức Bài 1:</em> Chứng minh diện tích <span class=\"math inline\">\\(\\mathcal R\\)</span> là <span class=\"math display\">\\[\\frac1{1+m^2}\\int_p^q[f(x)-mx-b][1+mf&#39;(x)]\\,dx.\\]</span> [Gợi ý: Có thể kiểm chứng công thức bằng cách trừ các diện tích, nhưng trong toàn bộ dự án sẽ hữu ích hơn nếu suy ra công thức bằng cách trước hết xấp xỉ diện tích bằng các hình chữ nhật vuông góc với đường thẳng, như hình sau. Dùng hình để biểu diễn <span class=\"math inline\">\\(\\Delta u\\)</span> theo <span class=\"math inline\">\\(\\Delta x\\)</span>.]</p>\n<div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-8-2-47f88c07/proj02.png\" alt=\"image\" /><br />\nHình hỗ trợ Bài 1. Đường đen là tiếp tuyến với <span class=\"math inline\">\\(C\\)</span> tại <span class=\"math inline\">\\((x_i,f(x_i))\\)</span>; các góc và độ dài dùng để liên hệ <span class=\"math inline\">\\(\\Delta u\\)</span> với <span class=\"math inline\">\\(\\Delta x\\)</span>.</p>\n</div>\n<p>Tìm một công thức (tương tự công thức ở Bài 1) cho thể tích khối tạo thành khi quay <span class=\"math inline\">\\(\\mathcal R\\)</span> quanh đường thẳng <span class=\"math inline\">\\(y=mx+b\\)</span>.</p>\n"
+    },
+    {
+      "number": 50,
+      "title": "Dự án khám phá — Quay quanh một đường thẳng nghiêng — Bài 4",
+      "content": "<p><strong>Dự án khám phá — Quay quanh một đường thẳng nghiêng — Bài 4.</strong> Ta biết cách tìm thể tích khối tròn xoay tạo thành khi quay một miền quanh một đường thẳng ngang hoặc đứng (xem Mục 6.2). Ta cũng biết cách tìm diện tích mặt tròn xoay khi quay một đường cong quanh một đường thẳng ngang hoặc đứng (xem Mục 8.2). Nhưng nếu quay quanh một đường thẳng nghiêng, tức là không ngang cũng không đứng, thì sao? Trong dự án này, bạn được yêu cầu khám phá các công thức cho thể tích khối tròn xoay và diện tích mặt tròn xoay khi trục quay là một đường thẳng nghiêng.</p>\n<p>Gọi <span class=\"math inline\">\\(C\\)</span> là cung đường cong <span class=\"math inline\">\\(y=f(x)\\)</span> giữa các điểm <span class=\"math inline\">\\(P(p,f(p))\\)</span> và <span class=\"math inline\">\\(Q(q,f(q))\\)</span>, và gọi <span class=\"math inline\">\\(\\mathcal R\\)</span> là miền giới hạn bởi <span class=\"math inline\">\\(C\\)</span>, đường thẳng <span class=\"math inline\">\\(y=mx+b\\)</span> (nằm hoàn toàn phía dưới <span class=\"math inline\">\\(C\\)</span>), và các đường vuông góc với đường thẳng đó đi qua <span class=\"math inline\">\\(P,Q\\)</span>.</p>\n<div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-8-2-47f88c07/proj01.png\" alt=\"image\" /><br />\nMiền <span class=\"math inline\">\\(\\mathcal R\\)</span> và trục quay nghiêng <span class=\"math inline\">\\(y=mx+b\\)</span>.</p>\n</div>\n<p><em>Công thức Bài 1:</em> Chứng minh diện tích <span class=\"math inline\">\\(\\mathcal R\\)</span> là <span class=\"math display\">\\[\\frac1{1+m^2}\\int_p^q[f(x)-mx-b][1+mf&#39;(x)]\\,dx.\\]</span> [Gợi ý: Có thể kiểm chứng công thức bằng cách trừ các diện tích, nhưng trong toàn bộ dự án sẽ hữu ích hơn nếu suy ra công thức bằng cách trước hết xấp xỉ diện tích bằng các hình chữ nhật vuông góc với đường thẳng, như hình sau. Dùng hình để biểu diễn <span class=\"math inline\">\\(\\Delta u\\)</span> theo <span class=\"math inline\">\\(\\Delta x\\)</span>.]</p>\n<div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-8-2-47f88c07/proj02.png\" alt=\"image\" /><br />\nHình hỗ trợ Bài 1. Đường đen là tiếp tuyến với <span class=\"math inline\">\\(C\\)</span> tại <span class=\"math inline\">\\((x_i,f(x_i))\\)</span>; các góc và độ dài dùng để liên hệ <span class=\"math inline\">\\(\\Delta u\\)</span> với <span class=\"math inline\">\\(\\Delta x\\)</span>.</p>\n</div>\n<p><em>Dữ kiện Bài 2:</em> Tìm diện tích miền được biểu diễn trong hình sau.</p>\n<div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-8-2-47f88c07/proj03.png\" alt=\"image\" /><br />\nBài 2. Miền giữa <span class=\"math inline\">\\(y=x+\\sin x\\)</span>, <span class=\"math inline\">\\(y=x-2\\)</span> và các đoạn vuông góc với đường thẳng.</p>\n</div>\n<p>Tìm thể tích khối tạo thành khi quay miền của Bài 2 quanh đường thẳng <span class=\"math inline\">\\(y=x-2\\)</span>.</p>\n"
+    },
+    {
+      "number": 51,
+      "title": "Dự án khám phá — Quay quanh một đường thẳng nghiêng — Bài 5",
+      "content": "<p><strong>Dự án khám phá — Quay quanh một đường thẳng nghiêng — Bài 5.</strong> Ta biết cách tìm thể tích khối tròn xoay tạo thành khi quay một miền quanh một đường thẳng ngang hoặc đứng (xem Mục 6.2). Ta cũng biết cách tìm diện tích mặt tròn xoay khi quay một đường cong quanh một đường thẳng ngang hoặc đứng (xem Mục 8.2). Nhưng nếu quay quanh một đường thẳng nghiêng, tức là không ngang cũng không đứng, thì sao? Trong dự án này, bạn được yêu cầu khám phá các công thức cho thể tích khối tròn xoay và diện tích mặt tròn xoay khi trục quay là một đường thẳng nghiêng.</p>\n<p>Gọi <span class=\"math inline\">\\(C\\)</span> là cung đường cong <span class=\"math inline\">\\(y=f(x)\\)</span> giữa các điểm <span class=\"math inline\">\\(P(p,f(p))\\)</span> và <span class=\"math inline\">\\(Q(q,f(q))\\)</span>, và gọi <span class=\"math inline\">\\(\\mathcal R\\)</span> là miền giới hạn bởi <span class=\"math inline\">\\(C\\)</span>, đường thẳng <span class=\"math inline\">\\(y=mx+b\\)</span> (nằm hoàn toàn phía dưới <span class=\"math inline\">\\(C\\)</span>), và các đường vuông góc với đường thẳng đó đi qua <span class=\"math inline\">\\(P,Q\\)</span>.</p>\n<div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-8-2-47f88c07/proj01.png\" alt=\"image\" /><br />\nMiền <span class=\"math inline\">\\(\\mathcal R\\)</span> và trục quay nghiêng <span class=\"math inline\">\\(y=mx+b\\)</span>.</p>\n</div>\n<p>Tìm một công thức cho diện tích mặt tạo thành khi quay <span class=\"math inline\">\\(C\\)</span> quanh đường thẳng <span class=\"math inline\">\\(y=mx+b\\)</span>.</p>\n"
+    },
+    {
+      "number": 52,
+      "title": "Dự án khám phá — Quay quanh một đường thẳng nghiêng — Bài 6",
+      "content": "<p><strong>Dự án khám phá — Quay quanh một đường thẳng nghiêng — Bài 6.</strong> Ta biết cách tìm thể tích khối tròn xoay tạo thành khi quay một miền quanh một đường thẳng ngang hoặc đứng (xem Mục 6.2). Ta cũng biết cách tìm diện tích mặt tròn xoay khi quay một đường cong quanh một đường thẳng ngang hoặc đứng (xem Mục 8.2). Nhưng nếu quay quanh một đường thẳng nghiêng, tức là không ngang cũng không đứng, thì sao? Trong dự án này, bạn được yêu cầu khám phá các công thức cho thể tích khối tròn xoay và diện tích mặt tròn xoay khi trục quay là một đường thẳng nghiêng.</p>\n<p>Gọi <span class=\"math inline\">\\(C\\)</span> là cung đường cong <span class=\"math inline\">\\(y=f(x)\\)</span> giữa các điểm <span class=\"math inline\">\\(P(p,f(p))\\)</span> và <span class=\"math inline\">\\(Q(q,f(q))\\)</span>, và gọi <span class=\"math inline\">\\(\\mathcal R\\)</span> là miền giới hạn bởi <span class=\"math inline\">\\(C\\)</span>, đường thẳng <span class=\"math inline\">\\(y=mx+b\\)</span> (nằm hoàn toàn phía dưới <span class=\"math inline\">\\(C\\)</span>), và các đường vuông góc với đường thẳng đó đi qua <span class=\"math inline\">\\(P,Q\\)</span>.</p>\n<div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-8-2-47f88c07/proj01.png\" alt=\"image\" /><br />\nMiền <span class=\"math inline\">\\(\\mathcal R\\)</span> và trục quay nghiêng <span class=\"math inline\">\\(y=mx+b\\)</span>.</p>\n</div>\n<p>[Công nghệ] Dùng máy tính để tìm diện tích chính xác của mặt tạo thành khi quay đường cong <span class=\"math inline\">\\(y=\\sqrt{x}\\)</span>, <span class=\"math inline\">\\(0\\le x\\le4\\)</span>, quanh đường thẳng <span class=\"math inline\">\\(y=\\frac12x\\)</span>. Sau đó tính gần đúng kết quả đến ba chữ số thập phân.</p>\n"
+    }
+  ]
+}

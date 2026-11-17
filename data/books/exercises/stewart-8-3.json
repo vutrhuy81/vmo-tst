@@ -1,0 +1,228 @@
+{
+  "exercises": [
+    {
+      "number": 1,
+      "content": "<p><strong>1.</strong></p>\n<p>Một bể cá dài <span class=\"math inline\">\\(5\\,\\mathrm{ft}\\)</span>, rộng <span class=\"math inline\">\\(2\\,\\mathrm{ft}\\)</span> và sâu <span class=\"math inline\">\\(3\\,\\mathrm{ft}\\)</span> chứa đầy nước. Tìm (a) áp suất thủy tĩnh lên đáy bể, (b) lực thủy tĩnh lên đáy bể và (c) lực thủy tĩnh lên một mặt đầu của bể.</p>\n"
+    },
+    {
+      "number": 2,
+      "content": "<p><strong>2.</strong></p>\n<p>Một bồn dài <span class=\"math inline\">\\(8\\,\\mathrm m\\)</span>, rộng <span class=\"math inline\">\\(4\\,\\mathrm m\\)</span>, cao <span class=\"math inline\">\\(2\\,\\mathrm m\\)</span>, chứa dầu hỏa có khối lượng riêng <span class=\"math inline\">\\(820\\,\\mathrm{kg/m^3}\\)</span> đến độ sâu <span class=\"math inline\">\\(1.5\\,\\mathrm m\\)</span>. Tìm (a) áp suất thủy tĩnh lên đáy bồn, (b) lực thủy tĩnh lên đáy bồn và (c) lực thủy tĩnh lên một mặt đầu của bồn.</p>\n"
+    },
+    {
+      "number": 3,
+      "content": "<p><strong>3.</strong></p>\n<p><em>Yêu cầu chung (3–11):</em> Một tấm thẳng đứng được nhúng ngập hoàn toàn hoặc một phần trong nước, có hình dạng và kích thước như hình. Giải thích cách xấp xỉ lực thủy tĩnh lên một phía của tấm bằng tổng Riemann. Sau đó biểu diễn lực bằng một tích phân và tính tích phân đó.</p>\n<p>Tấm hình chữ nhật.</p>\n<div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-8-3-83d0d8ae/ex03.png\" alt=\"image\" /><br />\nBài 3.</p>\n</div>\n"
+    },
+    {
+      "number": 4,
+      "content": "<p><strong>4.</strong></p>\n<p><em>Yêu cầu chung (3–11):</em> Một tấm thẳng đứng được nhúng ngập hoàn toàn hoặc một phần trong nước, có hình dạng và kích thước như hình. Giải thích cách xấp xỉ lực thủy tĩnh lên một phía của tấm bằng tổng Riemann. Sau đó biểu diễn lực bằng một tích phân và tính tích phân đó.</p>\n<p>Tấm tam giác vuông.</p>\n<div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-8-3-83d0d8ae/ex04.png\" alt=\"image\" /><br />\nBài 4.</p>\n</div>\n"
+    },
+    {
+      "number": 5,
+      "content": "<p><strong>5.</strong></p>\n<p><em>Yêu cầu chung (3–11):</em> Một tấm thẳng đứng được nhúng ngập hoàn toàn hoặc một phần trong nước, có hình dạng và kích thước như hình. Giải thích cách xấp xỉ lực thủy tĩnh lên một phía của tấm bằng tổng Riemann. Sau đó biểu diễn lực bằng một tích phân và tính tích phân đó.</p>\n<p>Tấm hình tròn.</p>\n<div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-8-3-83d0d8ae/ex05.png\" alt=\"image\" /><br />\nBài 5.</p>\n</div>\n"
+    },
+    {
+      "number": 6,
+      "content": "<p><strong>6.</strong></p>\n<p><em>Yêu cầu chung (3–11):</em> Một tấm thẳng đứng được nhúng ngập hoàn toàn hoặc một phần trong nước, có hình dạng và kích thước như hình. Giải thích cách xấp xỉ lực thủy tĩnh lên một phía của tấm bằng tổng Riemann. Sau đó biểu diễn lực bằng một tích phân và tính tích phân đó.</p>\n<p>Tấm nửa hình tròn, ngập một phần.</p>\n<div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-8-3-83d0d8ae/ex06.png\" alt=\"image\" /><br />\nBài 6.</p>\n</div>\n"
+    },
+    {
+      "number": 7,
+      "content": "<p><strong>7.</strong></p>\n<p><em>Yêu cầu chung (3–11):</em> Một tấm thẳng đứng được nhúng ngập hoàn toàn hoặc một phần trong nước, có hình dạng và kích thước như hình. Giải thích cách xấp xỉ lực thủy tĩnh lên một phía của tấm bằng tổng Riemann. Sau đó biểu diễn lực bằng một tích phân và tính tích phân đó.</p>\n<p>Tấm tam giác có đỉnh ở mặt nước.</p>\n<div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-8-3-83d0d8ae/ex07.png\" alt=\"image\" /><br />\nBài 7.</p>\n</div>\n"
+    },
+    {
+      "number": 8,
+      "content": "<p><strong>8.</strong></p>\n<p><em>Yêu cầu chung (3–11):</em> Một tấm thẳng đứng được nhúng ngập hoàn toàn hoặc một phần trong nước, có hình dạng và kích thước như hình. Giải thích cách xấp xỉ lực thủy tĩnh lên một phía của tấm bằng tổng Riemann. Sau đó biểu diễn lực bằng một tích phân và tính tích phân đó.</p>\n<p>Tấm tam giác có một cạnh nằm ngang.</p>\n<div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-8-3-83d0d8ae/ex08.png\" alt=\"image\" /><br />\nBài 8.</p>\n</div>\n"
+    },
+    {
+      "number": 9,
+      "content": "<p><strong>9.</strong></p>\n<p><em>Yêu cầu chung (3–11):</em> Một tấm thẳng đứng được nhúng ngập hoàn toàn hoặc một phần trong nước, có hình dạng và kích thước như hình. Giải thích cách xấp xỉ lực thủy tĩnh lên một phía của tấm bằng tổng Riemann. Sau đó biểu diễn lực bằng một tích phân và tính tích phân đó.</p>\n<p>Tấm hình thang, ngập một phần.</p>\n<div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-8-3-83d0d8ae/ex09.png\" alt=\"image\" /><br />\nBài 9.</p>\n</div>\n"
+    },
+    {
+      "number": 10,
+      "content": "<p><strong>10.</strong></p>\n<p><em>Yêu cầu chung (3–11):</em> Một tấm thẳng đứng được nhúng ngập hoàn toàn hoặc một phần trong nước, có hình dạng và kích thước như hình. Giải thích cách xấp xỉ lực thủy tĩnh lên một phía của tấm bằng tổng Riemann. Sau đó biểu diễn lực bằng một tích phân và tính tích phân đó.</p>\n<p>Tấm hình vuông, một đỉnh ở mặt nước.</p>\n<div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-8-3-83d0d8ae/ex10.png\" alt=\"image\" /><br />\nBài 10.</p>\n</div>\n"
+    },
+    {
+      "number": 11,
+      "content": "<p><strong>11.</strong></p>\n<p><em>Yêu cầu chung (3–11):</em> Một tấm thẳng đứng được nhúng ngập hoàn toàn hoặc một phần trong nước, có hình dạng và kích thước như hình. Giải thích cách xấp xỉ lực thủy tĩnh lên một phía của tấm bằng tổng Riemann. Sau đó biểu diễn lực bằng một tích phân và tính tích phân đó.</p>\n<p>Tấm hình thang, cạnh trên ở mặt nước.</p>\n<div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-8-3-83d0d8ae/ex11.png\" alt=\"image\" /><br />\nBài 11.</p>\n</div>\n"
+    },
+    {
+      "number": 12,
+      "content": "<p><strong>12.</strong></p>\n<p>Một đập thẳng đứng có cửa nửa hình tròn như hình. Tìm lực thủy tĩnh tác dụng lên cửa.</p>\n<div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-8-3-83d0d8ae/ex12.png\" alt=\"image\" /><br />\nBài 12. Water level: mặt nước.</p>\n</div>\n"
+    },
+    {
+      "number": 13,
+      "content": "<p><strong>13.</strong></p>\n<p>Một xe bồn vận chuyển xăng trong bồn hình trụ nằm ngang có đường kính <span class=\"math inline\">\\(8\\,\\mathrm{ft}\\)</span>, dài <span class=\"math inline\">\\(40\\,\\mathrm{ft}\\)</span>. Nếu bồn chứa đầy xăng có trọng lượng riêng <span class=\"math inline\">\\(47\\,\\mathrm{lb/ft^3}\\)</span>, tính lực tác dụng lên một mặt đầu của bồn.</p>\n<div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-8-3-83d0d8ae/ex13.png\" alt=\"image\" /><br />\nBài 13. Ảnh: Rihardzz / Shutterstock.com.</p>\n</div>\n"
+    },
+    {
+      "number": 14,
+      "content": "<p><strong>14.</strong></p>\n<p>Một máng có tiết diện hình thang như hình, chứa dầu thực vật có khối lượng riêng <span class=\"math inline\">\\(925\\,\\mathrm{kg/m^3}\\)</span>.</p>\n<p>(a) Tìm lực thủy tĩnh lên một mặt đầu của máng khi máng chứa đầy dầu.</p>\n<p>(b) Tính lực lên một mặt đầu nếu dầu trong máng sâu <span class=\"math inline\">\\(1.2\\,\\mathrm m\\)</span>.</p>\n<div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-8-3-83d0d8ae/ex14.png\" alt=\"image\" /><br />\nBài 14.</p>\n</div>\n"
+    },
+    {
+      "number": 15,
+      "content": "<p><strong>15.</strong></p>\n<p>Một khối lập phương cạnh <span class=\"math inline\">\\(20\\,\\mathrm{cm}\\)</span> nằm ở đáy một bể cá có nước sâu một mét. Tìm lực thủy tĩnh lên (a) mặt trên của khối lập phương và (b) một mặt bên của nó.</p>\n"
+    },
+    {
+      "number": 16,
+      "content": "<p><strong>16.</strong></p>\n<p>Một đập nghiêng góc <span class=\"math inline\">\\(30^\\circ\\)</span> so với phương thẳng đứng, có dạng hình thang cân rộng <span class=\"math inline\">\\(100\\,\\mathrm{ft}\\)</span> ở đỉnh, <span class=\"math inline\">\\(50\\,\\mathrm{ft}\\)</span> ở đáy và chiều cao nghiêng <span class=\"math inline\">\\(70\\,\\mathrm{ft}\\)</span>. Tìm lực thủy tĩnh lên đập khi nước lên đến đỉnh đập.</p>\n"
+    },
+    {
+      "number": 17,
+      "content": "<p><strong>17.</strong></p>\n<p>Một bể bơi rộng <span class=\"math inline\">\\(20\\,\\mathrm{ft}\\)</span>, dài <span class=\"math inline\">\\(40\\,\\mathrm{ft}\\)</span>, có đáy là một mặt phẳng nghiêng; đầu nông sâu <span class=\"math inline\">\\(3\\,\\mathrm{ft}\\)</span> và đầu sâu sâu <span class=\"math inline\">\\(9\\,\\mathrm{ft}\\)</span>. Nếu bể đầy nước, tìm lực thủy tĩnh lên (a) từng mặt trong bốn mặt bên và (b) đáy bể.</p>\n"
+    },
+    {
+      "number": 18,
+      "content": "<p><strong>18.</strong></p>\n<p>Giả sử một tấm được nhúng thẳng đứng trong chất lưu có khối lượng riêng <span class=\"math inline\">\\(\\rho\\)</span>, và độ rộng tấm ở độ sâu <span class=\"math inline\">\\(x\\)</span> mét dưới mặt chất lưu là <span class=\"math inline\">\\(w(x)\\)</span>. Nếu mép trên ở độ sâu <span class=\"math inline\">\\(a\\)</span>, mép dưới ở độ sâu <span class=\"math inline\">\\(b\\)</span>, chứng minh lực thủy tĩnh lên một phía của tấm là <span class=\"math display\">\\[F=\\int_a^b\\rho gxw(x)\\,dx.\\]</span></p>\n"
+    },
+    {
+      "number": 19,
+      "content": "<p><strong>19.</strong></p>\n<p><em>Dữ kiện Bài 18:</em> Giả sử một tấm được nhúng thẳng đứng trong chất lưu có khối lượng riêng <span class=\"math inline\">\\(\\rho\\)</span>, và độ rộng tấm ở độ sâu <span class=\"math inline\">\\(x\\)</span> mét dưới mặt chất lưu là <span class=\"math inline\">\\(w(x)\\)</span>. Nếu mép trên ở độ sâu <span class=\"math inline\">\\(a\\)</span>, mép dưới ở độ sâu <span class=\"math inline\">\\(b\\)</span>, chứng minh lực thủy tĩnh lên một phía của tấm là <span class=\"math display\">\\[F=\\int_a^b\\rho gxw(x)\\,dx.\\]</span></p>\n<p>Một tấm kim loại được phát hiện nằm ngập thẳng đứng trong nước biển có trọng lượng riêng <span class=\"math inline\">\\(64\\,\\mathrm{lb/ft^3}\\)</span>. Độ rộng của tấm được đo ở các độ sâu sau. Dùng công thức trong Bài 18 và quy tắc Simpson để ước lượng lực nước tác dụng lên tấm.</p>\n<div class=\"center\">\n<table>\n<tbody>\n<tr class=\"odd\">\n<td style=\"text-align: left;\">Độ sâu (ft)</td>\n<td style=\"text-align: right;\">7.0</td>\n<td style=\"text-align: right;\">7.4</td>\n<td style=\"text-align: right;\">7.8</td>\n<td style=\"text-align: right;\">8.2</td>\n<td style=\"text-align: right;\">8.6</td>\n<td style=\"text-align: right;\">9.0</td>\n<td style=\"text-align: right;\">9.4</td>\n</tr>\n<tr class=\"even\">\n<td style=\"text-align: left;\">Độ rộng tấm (ft)</td>\n<td style=\"text-align: right;\">1.2</td>\n<td style=\"text-align: right;\">1.8</td>\n<td style=\"text-align: right;\">2.9</td>\n<td style=\"text-align: right;\">3.8</td>\n<td style=\"text-align: right;\">3.6</td>\n<td style=\"text-align: right;\">4.2</td>\n<td style=\"text-align: right;\">4.4</td>\n</tr>\n</tbody>\n</table>\n</div>\n"
+    },
+    {
+      "number": 20,
+      "content": "<p><strong>20.</strong></p>\n<p><em>Dữ kiện Bài 18:</em> Giả sử một tấm được nhúng thẳng đứng trong chất lưu có khối lượng riêng <span class=\"math inline\">\\(\\rho\\)</span>, và độ rộng tấm ở độ sâu <span class=\"math inline\">\\(x\\)</span> mét dưới mặt chất lưu là <span class=\"math inline\">\\(w(x)\\)</span>. Nếu mép trên ở độ sâu <span class=\"math inline\">\\(a\\)</span>, mép dưới ở độ sâu <span class=\"math inline\">\\(b\\)</span>, chứng minh lực thủy tĩnh lên một phía của tấm là <span class=\"math display\">\\[F=\\int_a^b\\rho gxw(x)\\,dx.\\]</span></p>\n<p><em>Dữ kiện Bài 10:</em> Tấm hình vuông, một đỉnh ở mặt nước.</p>\n<div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-8-3-83d0d8ae/ex10.png\" alt=\"image\" /><br />\nBài 10.</p>\n</div>\n<p>(a) Dùng công thức trong Bài 18 để chứng minh <span class=\"math display\">\\[F=(\\rho g\\bar x)A,\\]</span> trong đó <span class=\"math inline\">\\(\\bar x\\)</span> là hoành độ trọng tâm hình học của tấm, <span class=\"math inline\">\\(A\\)</span> là diện tích của tấm. Phương trình này cho thấy lực thủy tĩnh tác dụng lên một miền phẳng thẳng đứng bằng lực khi miền nằm ngang ở độ sâu của trọng tâm hình học của nó.</p>\n<p>(b) Dùng kết quả phần (a) để đưa ra một lời giải khác cho Bài 10.</p>\n"
+    },
+    {
+      "number": 21,
+      "content": "<p><strong>21.</strong></p>\n<p><em>Yêu cầu chung (21–22):</em> Các chất điểm có khối lượng <span class=\"math inline\">\\(m_i\\)</span> nằm trên trục <span class=\"math inline\">\\(x\\)</span> như hình. Tìm mômen <span class=\"math inline\">\\(M\\)</span> của hệ đối với gốc tọa độ và khối tâm <span class=\"math inline\">\\(\\bar x\\)</span>.</p>\n<p>Hệ hai chất điểm.</p>\n<div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-8-3-83d0d8ae/ex21.png\" alt=\"image\" /><br />\nBài 21.</p>\n</div>\n"
+    },
+    {
+      "number": 22,
+      "content": "<p><strong>22.</strong></p>\n<p><em>Yêu cầu chung (21–22):</em> Các chất điểm có khối lượng <span class=\"math inline\">\\(m_i\\)</span> nằm trên trục <span class=\"math inline\">\\(x\\)</span> như hình. Tìm mômen <span class=\"math inline\">\\(M\\)</span> của hệ đối với gốc tọa độ và khối tâm <span class=\"math inline\">\\(\\bar x\\)</span>.</p>\n<p>Hệ ba chất điểm.</p>\n<div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-8-3-83d0d8ae/ex22.png\" alt=\"image\" /><br />\nBài 22.</p>\n</div>\n"
+    },
+    {
+      "number": 23,
+      "content": "<p><strong>23.</strong></p>\n<p><em>Yêu cầu chung (23–24):</em> Các khối lượng <span class=\"math inline\">\\(m_i\\)</span> nằm tại các điểm <span class=\"math inline\">\\(P_i\\)</span>. Tìm các mômen <span class=\"math inline\">\\(M_x,M_y\\)</span> và khối tâm của hệ.</p>\n<p><span class=\"math inline\">\\(m_1=5\\)</span>, <span class=\"math inline\">\\(m_2=8\\)</span>, <span class=\"math inline\">\\(m_3=7\\)</span>; <span class=\"math display\">\\[P_1(3,1),\\quad P_2(0,4),\\quad P_3(-5,-2).\\]</span></p>\n"
+    },
+    {
+      "number": 24,
+      "content": "<p><strong>24.</strong></p>\n<p><em>Yêu cầu chung (23–24):</em> Các khối lượng <span class=\"math inline\">\\(m_i\\)</span> nằm tại các điểm <span class=\"math inline\">\\(P_i\\)</span>. Tìm các mômen <span class=\"math inline\">\\(M_x,M_y\\)</span> và khối tâm của hệ.</p>\n<p><span class=\"math inline\">\\(m_1=4\\)</span>, <span class=\"math inline\">\\(m_2=3\\)</span>, <span class=\"math inline\">\\(m_3=6\\)</span>, <span class=\"math inline\">\\(m_4=3\\)</span>; <span class=\"math display\">\\[P_1(6,1),\\quad P_2(3,-1),\\quad P_3(-2,2),\\quad P_4(-2,-5).\\]</span></p>\n"
+    },
+    {
+      "number": 25,
+      "content": "<p><strong>25.</strong></p>\n<p><em>Yêu cầu chung (25–28):</em> Ước lượng bằng quan sát vị trí trọng tâm hình học của miền được cho. Sau đó tìm tọa độ chính xác của trọng tâm hình học.</p>\n<p>Miền tam giác.</p>\n<div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-8-3-83d0d8ae/ex25.png\" alt=\"image\" /><br />\nBài 25.</p>\n</div>\n"
+    },
+    {
+      "number": 26,
+      "content": "<p><strong>26.</strong></p>\n<p><em>Yêu cầu chung (25–28):</em> Ước lượng bằng quan sát vị trí trọng tâm hình học của miền được cho. Sau đó tìm tọa độ chính xác của trọng tâm hình học.</p>\n<p>Miền dưới đồ thị hàm mũ.</p>\n<div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-8-3-83d0d8ae/ex26.png\" alt=\"image\" /><br />\nBài 26.</p>\n</div>\n"
+    },
+    {
+      "number": 27,
+      "content": "<p><strong>27.</strong></p>\n<p><em>Yêu cầu chung (25–28):</em> Ước lượng bằng quan sát vị trí trọng tâm hình học của miền được cho. Sau đó tìm tọa độ chính xác của trọng tâm hình học.</p>\n<p>Miền dưới đồ thị parabol.</p>\n<div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-8-3-83d0d8ae/ex27.png\" alt=\"image\" /><br />\nBài 27.</p>\n</div>\n"
+    },
+    {
+      "number": 28,
+      "content": "<p><strong>28.</strong></p>\n<p><em>Yêu cầu chung (25–28):</em> Ước lượng bằng quan sát vị trí trọng tâm hình học của miền được cho. Sau đó tìm tọa độ chính xác của trọng tâm hình học.</p>\n<p>Miền dưới đồ thị <span class=\"math inline\">\\(y=1/x\\)</span>.</p>\n<div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-8-3-83d0d8ae/ex28.png\" alt=\"image\" /><br />\nBài 28.</p>\n</div>\n"
+    },
+    {
+      "number": 29,
+      "content": "<p><strong>29.</strong></p>\n<p><em>Yêu cầu chung (29–33):</em> Tìm trọng tâm hình học của miền giới hạn bởi các đường cong đã cho.</p>\n<p><span class=\"math inline\">\\(y=x^2\\)</span>, <span class=\"math inline\">\\(x=y^2\\)</span>.</p>\n"
+    },
+    {
+      "number": 30,
+      "content": "<p><strong>30.</strong></p>\n<p><em>Yêu cầu chung (29–33):</em> Tìm trọng tâm hình học của miền giới hạn bởi các đường cong đã cho.</p>\n<p><span class=\"math inline\">\\(y=2-x^2\\)</span>, <span class=\"math inline\">\\(y=x\\)</span>.</p>\n"
+    },
+    {
+      "number": 31,
+      "content": "<p><strong>31.</strong></p>\n<p><em>Yêu cầu chung (29–33):</em> Tìm trọng tâm hình học của miền giới hạn bởi các đường cong đã cho.</p>\n<p><span class=\"math inline\">\\(y=\\sin2x\\)</span>, <span class=\"math inline\">\\(y=\\sin x\\)</span>, <span class=\"math inline\">\\(0\\le x\\le\\pi/3\\)</span>.</p>\n"
+    },
+    {
+      "number": 32,
+      "content": "<p><strong>32.</strong></p>\n<p><em>Yêu cầu chung (29–33):</em> Tìm trọng tâm hình học của miền giới hạn bởi các đường cong đã cho.</p>\n<p><span class=\"math inline\">\\(y=x^3\\)</span>, <span class=\"math inline\">\\(x+y=2\\)</span>, <span class=\"math inline\">\\(y=0\\)</span>.</p>\n"
+    },
+    {
+      "number": 33,
+      "content": "<p><strong>33.</strong></p>\n<p><em>Yêu cầu chung (29–33):</em> Tìm trọng tâm hình học của miền giới hạn bởi các đường cong đã cho.</p>\n<p><span class=\"math inline\">\\(x+y=2\\)</span>, <span class=\"math inline\">\\(x=y^2\\)</span>.</p>\n"
+    },
+    {
+      "number": 34,
+      "content": "<p><strong>34.</strong></p>\n<p><em>Yêu cầu chung (34–35):</em> Tính các mômen <span class=\"math inline\">\\(M_x,M_y\\)</span> và khối tâm của tấm mỏng có khối lượng riêng và hình dạng đã cho.</p>\n<p><span class=\"math inline\">\\(\\rho=4\\)</span>.</p>\n<div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-8-3-83d0d8ae/ex34.png\" alt=\"image\" /><br />\nBài 34.</p>\n</div>\n"
+    },
+    {
+      "number": 35,
+      "content": "<p><strong>35.</strong></p>\n<p><em>Yêu cầu chung (34–35):</em> Tính các mômen <span class=\"math inline\">\\(M_x,M_y\\)</span> và khối tâm của tấm mỏng có khối lượng riêng và hình dạng đã cho.</p>\n<p><span class=\"math inline\">\\(\\rho=6\\)</span>.</p>\n<div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-8-3-83d0d8ae/ex35.png\" alt=\"image\" /><br />\nBài 35.</p>\n</div>\n"
+    },
+    {
+      "number": 36,
+      "content": "<p><strong>36.</strong></p>\n<p>Dùng quy tắc Simpson để ước lượng trọng tâm hình học của miền được cho.</p>\n<div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-8-3-83d0d8ae/ex36.png\" alt=\"image\" /><br />\nBài 36.</p>\n</div>\n"
+    },
+    {
+      "number": 37,
+      "content": "<p><strong>37.</strong></p>\n<p>Tìm trọng tâm hình học của miền giới hạn bởi <span class=\"math inline\">\\(y=x^3-x\\)</span> và <span class=\"math inline\">\\(y=x^2-1\\)</span>. Phác họa miền và đánh dấu trọng tâm hình học để xem kết quả có hợp lý không.</p>\n"
+    },
+    {
+      "number": 38,
+      "content": "<p><strong>38.</strong></p>\n<p>[Công nghệ] Dùng đồ thị tìm gần đúng các hoành độ giao điểm của <span class=\"math inline\">\\(y=e^x\\)</span> và <span class=\"math inline\">\\(y=2-x^2\\)</span>. Sau đó tìm gần đúng trọng tâm hình học của miền giới hạn bởi hai đường cong đó.</p>\n"
+    },
+    {
+      "number": 39,
+      "content": "<p><strong>39.</strong></p>\n<p>Chứng minh trọng tâm hình học của một tam giác bất kỳ nằm tại giao điểm các đường trung tuyến. [Gợi ý: Đặt các trục sao cho ba đỉnh là <span class=\"math inline\">\\((a,0)\\)</span>, <span class=\"math inline\">\\((0,b)\\)</span> và <span class=\"math inline\">\\((c,0)\\)</span>. Nhớ rằng trung tuyến là đoạn nối một đỉnh với trung điểm cạnh đối diện. Cũng nhớ rằng các trung tuyến cắt nhau tại điểm cách mỗi đỉnh một khoảng bằng hai phần ba đoạn từ đỉnh đến cạnh đối diện, đo dọc trung tuyến.]</p>\n"
+    },
+    {
+      "number": 40,
+      "content": "<p><strong>40.</strong></p>\n<p><em>Yêu cầu chung (40–41):</em> Tìm trọng tâm hình học của miền đã cho bằng cách xác định trọng tâm các hình chữ nhật và tam giác (theo Bài 39), rồi dùng tính cộng của mômen, thay vì lấy tích phân.</p>\n<p><em>Dữ kiện Bài 39:</em> Chứng minh trọng tâm hình học của một tam giác bất kỳ nằm tại giao điểm các đường trung tuyến. [Gợi ý: Đặt các trục sao cho ba đỉnh là <span class=\"math inline\">\\((a,0)\\)</span>, <span class=\"math inline\">\\((0,b)\\)</span> và <span class=\"math inline\">\\((c,0)\\)</span>. Nhớ rằng trung tuyến là đoạn nối một đỉnh với trung điểm cạnh đối diện. Cũng nhớ rằng các trung tuyến cắt nhau tại điểm cách mỗi đỉnh một khoảng bằng hai phần ba đoạn từ đỉnh đến cạnh đối diện, đo dọc trung tuyến.]</p>\n<p>Miền ghép từ hình chữ nhật và tam giác.</p>\n<div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-8-3-83d0d8ae/ex40.png\" alt=\"image\" /><br />\nBài 40.</p>\n</div>\n"
+    },
+    {
+      "number": 41,
+      "content": "<p><strong>41.</strong></p>\n<p><em>Yêu cầu chung (40–41):</em> Tìm trọng tâm hình học của miền đã cho bằng cách xác định trọng tâm các hình chữ nhật và tam giác (theo Bài 39), rồi dùng tính cộng của mômen, thay vì lấy tích phân.</p>\n<p><em>Dữ kiện Bài 39:</em> Chứng minh trọng tâm hình học của một tam giác bất kỳ nằm tại giao điểm các đường trung tuyến. [Gợi ý: Đặt các trục sao cho ba đỉnh là <span class=\"math inline\">\\((a,0)\\)</span>, <span class=\"math inline\">\\((0,b)\\)</span> và <span class=\"math inline\">\\((c,0)\\)</span>. Nhớ rằng trung tuyến là đoạn nối một đỉnh với trung điểm cạnh đối diện. Cũng nhớ rằng các trung tuyến cắt nhau tại điểm cách mỗi đỉnh một khoảng bằng hai phần ba đoạn từ đỉnh đến cạnh đối diện, đo dọc trung tuyến.]</p>\n<p>Miền ghép đối xứng.</p>\n<div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-8-3-83d0d8ae/ex41.png\" alt=\"image\" /><br />\nBài 41.</p>\n</div>\n"
+    },
+    {
+      "number": 42,
+      "content": "<p><strong>42.</strong></p>\n<p>Một hình chữ nhật <span class=\"math inline\">\\(\\mathcal R\\)</span> có các cạnh <span class=\"math inline\">\\(a,b\\)</span> được chia thành hai phần <span class=\"math inline\">\\(\\mathcal R_1,\\mathcal R_2\\)</span> bởi một cung parabol có đỉnh tại một góc của <span class=\"math inline\">\\(\\mathcal R\\)</span> và đi qua góc đối diện. Tìm trọng tâm hình học của cả <span class=\"math inline\">\\(\\mathcal R_1\\)</span> và <span class=\"math inline\">\\(\\mathcal R_2\\)</span>.</p>\n<div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-8-3-83d0d8ae/ex42.png\" alt=\"image\" /><br />\nBài 42.</p>\n</div>\n"
+    },
+    {
+      "number": 43,
+      "content": "<p><strong>43.</strong></p>\n<p>Nếu <span class=\"math inline\">\\(\\bar x\\)</span> là hoành độ trọng tâm hình học của miền nằm dưới đồ thị hàm liên tục <span class=\"math inline\">\\(f\\)</span>, với <span class=\"math inline\">\\(a\\le x\\le b\\)</span>, chứng minh <span class=\"math display\">\\[\\int_a^b(cx+d)f(x)\\,dx=(c\\bar x+d)\\int_a^bf(x)\\,dx.\\]</span></p>\n"
+    },
+    {
+      "number": 44,
+      "content": "<p><strong>44.</strong></p>\n<p><em>Yêu cầu chung (44–46):</em> Dùng định lý Pappus tìm thể tích khối đã cho.</p>\n<p>Khối cầu bán kính <span class=\"math inline\">\\(r\\)</span>. (Dùng Ví dụ 4.)</p>\n"
+    },
+    {
+      "number": 45,
+      "content": "<p><strong>45.</strong></p>\n<p><em>Yêu cầu chung (44–46):</em> Dùng định lý Pappus tìm thể tích khối đã cho.</p>\n<p>Khối nón có chiều cao <span class=\"math inline\">\\(h\\)</span> và bán kính đáy <span class=\"math inline\">\\(r\\)</span>.</p>\n"
+    },
+    {
+      "number": 46,
+      "content": "<p><strong>46.</strong></p>\n<p><em>Yêu cầu chung (44–46):</em> Dùng định lý Pappus tìm thể tích khối đã cho.</p>\n<p>Khối thu được khi quay tam giác có các đỉnh <span class=\"math inline\">\\((2,3)\\)</span>, <span class=\"math inline\">\\((2,5)\\)</span> và <span class=\"math inline\">\\((5,4)\\)</span> quanh trục <span class=\"math inline\">\\(x\\)</span>.</p>\n<div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-8-3-83d0d8ae/ex46.png\" alt=\"image\" /><br />\nBài 46.</p>\n</div>\n"
+    },
+    {
+      "number": 47,
+      "content": "<p><strong>47.</strong></p>\n<p><strong>Trọng tâm hình học của đường cong.</strong> Có thể tìm trọng tâm hình học của một đường cong bằng quá trình tương tự quá trình tìm trọng tâm miền. Nếu <span class=\"math inline\">\\(C\\)</span> là đường cong có độ dài <span class=\"math inline\">\\(L\\)</span>, thì trọng tâm hình học là <span class=\"math inline\">\\((\\bar x,\\bar y)\\)</span>, trong đó <span class=\"math display\">\\[\\bar x=\\frac1L\\int x\\,ds,\\qquad\\bar y=\\frac1L\\int y\\,ds.\\]</span> Ở đây cần gán các cận tích phân thích hợp, còn <span class=\"math inline\">\\(ds\\)</span> được định nghĩa như trong các Mục 8.1 và 8.2. (Trọng tâm thường không nằm trên chính đường cong. Nếu đường cong được làm bằng dây và đặt trên một tấm ván không trọng lượng, trọng tâm sẽ là điểm cân bằng trên tấm ván.) Tìm trọng tâm hình học của một phần tư đường tròn <span class=\"math inline\">\\(y=\\sqrt{16-x^2}\\)</span>, <span class=\"math inline\">\\(0\\le x\\le4\\)</span>.</p>\n"
+    },
+    {
+      "number": 48,
+      "content": "<p><strong>48.</strong></p>\n<p><em>Yêu cầu chung (48–49):</em> Định lý Pappus thứ hai có cùng tinh thần với định lý Pappus đã xét trong mục này, nhưng dành cho diện tích mặt thay vì thể tích: cho <span class=\"math inline\">\\(C\\)</span> là một đường cong nằm hoàn toàn về một phía của đường thẳng <span class=\"math inline\">\\(l\\)</span> trong mặt phẳng. Nếu quay <span class=\"math inline\">\\(C\\)</span> quanh <span class=\"math inline\">\\(l\\)</span>, thì diện tích mặt thu được bằng tích độ dài cung của <span class=\"math inline\">\\(C\\)</span> với quãng đường mà trọng tâm hình học của <span class=\"math inline\">\\(C\\)</span> đi được (xem Bài 47).</p>\n<p><em>Dữ kiện Bài 47:</em> <strong>Trọng tâm hình học của đường cong.</strong> Có thể tìm trọng tâm hình học của một đường cong bằng quá trình tương tự quá trình tìm trọng tâm miền. Nếu <span class=\"math inline\">\\(C\\)</span> là đường cong có độ dài <span class=\"math inline\">\\(L\\)</span>, thì trọng tâm hình học là <span class=\"math inline\">\\((\\bar x,\\bar y)\\)</span>, trong đó <span class=\"math display\">\\[\\bar x=\\frac1L\\int x\\,ds,\\qquad\\bar y=\\frac1L\\int y\\,ds.\\]</span> Ở đây cần gán các cận tích phân thích hợp, còn <span class=\"math inline\">\\(ds\\)</span> được định nghĩa như trong các Mục 8.1 và 8.2. (Trọng tâm thường không nằm trên chính đường cong. Nếu đường cong được làm bằng dây và đặt trên một tấm ván không trọng lượng, trọng tâm sẽ là điểm cân bằng trên tấm ván.) Tìm trọng tâm hình học của một phần tư đường tròn <span class=\"math inline\">\\(y=\\sqrt{16-x^2}\\)</span>, <span class=\"math inline\">\\(0\\le x\\le4\\)</span>.</p>\n<p>(a) Chứng minh định lý Pappus thứ hai khi <span class=\"math inline\">\\(C\\)</span> được cho bởi <span class=\"math inline\">\\(y=f(x)\\)</span>, <span class=\"math inline\">\\(f(x)\\ge0\\)</span>, và quay <span class=\"math inline\">\\(C\\)</span> quanh trục <span class=\"math inline\">\\(x\\)</span>.</p>\n<p>(b) Dùng định lý Pappus thứ hai tính diện tích mặt bán cầu thu được khi quay đường cong trong Bài 47 quanh trục <span class=\"math inline\">\\(x\\)</span>. Kết quả có phù hợp với công thức hình học không?</p>\n"
+    },
+    {
+      "number": 49,
+      "content": "<p><strong>49.</strong></p>\n<p><em>Yêu cầu chung (48–49):</em> Định lý Pappus thứ hai có cùng tinh thần với định lý Pappus đã xét trong mục này, nhưng dành cho diện tích mặt thay vì thể tích: cho <span class=\"math inline\">\\(C\\)</span> là một đường cong nằm hoàn toàn về một phía của đường thẳng <span class=\"math inline\">\\(l\\)</span> trong mặt phẳng. Nếu quay <span class=\"math inline\">\\(C\\)</span> quanh <span class=\"math inline\">\\(l\\)</span>, thì diện tích mặt thu được bằng tích độ dài cung của <span class=\"math inline\">\\(C\\)</span> với quãng đường mà trọng tâm hình học của <span class=\"math inline\">\\(C\\)</span> đi được (xem Bài 47).</p>\n<p><em>Dữ kiện Ví dụ 7:</em> Khối xuyến tạo bởi hình tròn bán kính <span class=\"math inline\">\\(r\\)</span> quay quanh đường thẳng cách tâm <span class=\"math inline\">\\(R&gt;r\\)</span>.Dùng định lý Pappus thứ hai tìm diện tích mặt xuyến trong Ví dụ 7.</p>\n"
+    },
+    {
+      "number": 50,
+      "content": "<p><strong>50.</strong></p>\n<p>Gọi <span class=\"math inline\">\\(\\mathcal R\\)</span> là miền nằm giữa các đường cong <span class=\"math display\">\\[y=x^m,\\qquad y=x^n,\\qquad0\\le x\\le1,\\]</span> trong đó <span class=\"math inline\">\\(m,n\\)</span> là các số nguyên thỏa mãn <span class=\"math inline\">\\(0\\le n&lt;m\\)</span>.</p>\n<p>(a) Phác họa miền <span class=\"math inline\">\\(\\mathcal R\\)</span>.</p>\n<p>(b) Tìm tọa độ trọng tâm hình học của <span class=\"math inline\">\\(\\mathcal R\\)</span>.</p>\n<p>(c) Thử tìm các giá trị <span class=\"math inline\">\\(m,n\\)</span> sao cho trọng tâm hình học nằm ngoài <span class=\"math inline\">\\(\\mathcal R\\)</span>.</p>\n"
+    },
+    {
+      "number": 51,
+      "content": "<p><strong>51.</strong></p>\n<p><em>Công thức 9:</em> <span class=\"math inline\">\\(\\bar x=\\frac1A\\int_a^b x[f(x)-g(x)]\\,dx\\)</span>, <span class=\"math inline\">\\(\\bar y=\\frac1A\\int_a^b\\frac12([f(x)]^2-[g(x)]^2)\\,dx\\)</span>, với <span class=\"math inline\">\\(A=\\int_a^b[f(x)-g(x)]\\,dx\\)</span>, <span class=\"math inline\">\\(f(x)\\ge g(x)\\)</span>.Chứng minh các Công thức 9.</p>\n"
+    },
+    {
+      "number": 52,
+      "title": "Dự án khám phá — Những chiếc tách cà phê bổ sung nhau — Bài 1",
+      "content": "<p><strong>Dự án khám phá — Những chiếc tách cà phê bổ sung nhau — Bài 1.</strong> Giả sử bạn được chọn giữa hai chiếc tách cà phê như hình, một chiếc có thành cong ra ngoài và chiếc kia có thành cong vào trong; bạn nhận thấy chúng cao bằng nhau và có hình dạng khớp khít với nhau. Bạn muốn biết chiếc nào chứa được nhiều cà phê hơn. Dĩ nhiên có thể đổ đầy nước vào một chiếc rồi rót sang chiếc kia, nhưng vì đang học giải tích, bạn quyết định dùng một cách tiếp cận toán học hơn. Bỏ qua quai tách, bạn thấy cả hai tách đều là mặt tròn xoay, nên có thể xem lượng cà phê là thể tích một khối tròn xoay.</p>\n<div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-8-3-83d0d8ae/project.png\" alt=\"image\" /><br />\nDự án. Tách A (Cup A), tách B (Cup B) và các miền <span class=\"math inline\">\\(A_1,A_2\\)</span>.</p>\n</div>\n<p>Giả sử các tách cao <span class=\"math inline\">\\(h\\)</span>, tách A được tạo thành khi quay đường cong <span class=\"math inline\">\\(x=f(y)\\)</span> quanh trục <span class=\"math inline\">\\(y\\)</span>, còn tách B được tạo thành khi quay cùng đường cong quanh đường thẳng <span class=\"math inline\">\\(x=k\\)</span>. Tìm giá trị <span class=\"math inline\">\\(k\\)</span> để hai tách chứa được lượng cà phê bằng nhau.</p>\n"
+    },
+    {
+      "number": 53,
+      "title": "Dự án khám phá — Những chiếc tách cà phê bổ sung nhau — Bài 2",
+      "content": "<p><strong>Dự án khám phá — Những chiếc tách cà phê bổ sung nhau — Bài 2.</strong> Giả sử bạn được chọn giữa hai chiếc tách cà phê như hình, một chiếc có thành cong ra ngoài và chiếc kia có thành cong vào trong; bạn nhận thấy chúng cao bằng nhau và có hình dạng khớp khít với nhau. Bạn muốn biết chiếc nào chứa được nhiều cà phê hơn. Dĩ nhiên có thể đổ đầy nước vào một chiếc rồi rót sang chiếc kia, nhưng vì đang học giải tích, bạn quyết định dùng một cách tiếp cận toán học hơn. Bỏ qua quai tách, bạn thấy cả hai tách đều là mặt tròn xoay, nên có thể xem lượng cà phê là thể tích một khối tròn xoay.</p>\n<div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-8-3-83d0d8ae/project.png\" alt=\"image\" /><br />\nDự án. Tách A (Cup A), tách B (Cup B) và các miền <span class=\"math inline\">\\(A_1,A_2\\)</span>.</p>\n</div>\n<p><em>Dữ kiện Bài 1:</em> Giả sử các tách cao <span class=\"math inline\">\\(h\\)</span>, tách A được tạo thành khi quay đường cong <span class=\"math inline\">\\(x=f(y)\\)</span> quanh trục <span class=\"math inline\">\\(y\\)</span>, còn tách B được tạo thành khi quay cùng đường cong quanh đường thẳng <span class=\"math inline\">\\(x=k\\)</span>. Tìm giá trị <span class=\"math inline\">\\(k\\)</span> để hai tách chứa được lượng cà phê bằng nhau. Kết quả Bài 1 cho biết điều gì về các diện tích <span class=\"math inline\">\\(A_1,A_2\\)</span> trong hình?</p>\n"
+    },
+    {
+      "number": 54,
+      "title": "Dự án khám phá — Những chiếc tách cà phê bổ sung nhau — Bài 3",
+      "content": "<p><strong>Dự án khám phá — Những chiếc tách cà phê bổ sung nhau — Bài 3.</strong> Giả sử bạn được chọn giữa hai chiếc tách cà phê như hình, một chiếc có thành cong ra ngoài và chiếc kia có thành cong vào trong; bạn nhận thấy chúng cao bằng nhau và có hình dạng khớp khít với nhau. Bạn muốn biết chiếc nào chứa được nhiều cà phê hơn. Dĩ nhiên có thể đổ đầy nước vào một chiếc rồi rót sang chiếc kia, nhưng vì đang học giải tích, bạn quyết định dùng một cách tiếp cận toán học hơn. Bỏ qua quai tách, bạn thấy cả hai tách đều là mặt tròn xoay, nên có thể xem lượng cà phê là thể tích một khối tròn xoay.</p>\n<div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-8-3-83d0d8ae/project.png\" alt=\"image\" /><br />\nDự án. Tách A (Cup A), tách B (Cup B) và các miền <span class=\"math inline\">\\(A_1,A_2\\)</span>.</p>\n</div>\n<p><em>Dữ kiện Bài 1:</em> Giả sử các tách cao <span class=\"math inline\">\\(h\\)</span>, tách A được tạo thành khi quay đường cong <span class=\"math inline\">\\(x=f(y)\\)</span> quanh trục <span class=\"math inline\">\\(y\\)</span>, còn tách B được tạo thành khi quay cùng đường cong quanh đường thẳng <span class=\"math inline\">\\(x=k\\)</span>. Tìm giá trị <span class=\"math inline\">\\(k\\)</span> để hai tách chứa được lượng cà phê bằng nhau. <em>Yêu cầu Bài 2:</em> Kết quả Bài 1 cho biết điều gì về các diện tích <span class=\"math inline\">\\(A_1,A_2\\)</span> trong hình? Dùng định lý Pappus để giải thích kết quả các Bài 1 và 2.</p>\n"
+    },
+    {
+      "number": 55,
+      "title": "Dự án khám phá — Những chiếc tách cà phê bổ sung nhau — Bài 4",
+      "content": "<p><strong>Dự án khám phá — Những chiếc tách cà phê bổ sung nhau — Bài 4.</strong> Giả sử bạn được chọn giữa hai chiếc tách cà phê như hình, một chiếc có thành cong ra ngoài và chiếc kia có thành cong vào trong; bạn nhận thấy chúng cao bằng nhau và có hình dạng khớp khít với nhau. Bạn muốn biết chiếc nào chứa được nhiều cà phê hơn. Dĩ nhiên có thể đổ đầy nước vào một chiếc rồi rót sang chiếc kia, nhưng vì đang học giải tích, bạn quyết định dùng một cách tiếp cận toán học hơn. Bỏ qua quai tách, bạn thấy cả hai tách đều là mặt tròn xoay, nên có thể xem lượng cà phê là thể tích một khối tròn xoay.</p>\n<div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-8-3-83d0d8ae/project.png\" alt=\"image\" /><br />\nDự án. Tách A (Cup A), tách B (Cup B) và các miền <span class=\"math inline\">\\(A_1,A_2\\)</span>.</p>\n</div>\n<p>Dựa trên số đo và quan sát của bạn, đề xuất một giá trị <span class=\"math inline\">\\(h\\)</span> và một phương trình <span class=\"math inline\">\\(x=f(y)\\)</span>, rồi tính lượng cà phê mỗi tách chứa được.</p>\n"
+    }
+  ]
+}

@@ -1,0 +1,314 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage{fontspec}\setmainfont{Latin Modern Roman}\setsansfont{DejaVu Sans}
+\usepackage{amsmath,amssymb,graphicx,geometry,enumitem,needspace,longtable,booktabs,fancyhdr,hyperref}
+\geometry{left=28mm,right=23mm,top=24mm,bottom=24mm}
+\hypersetup{unicode=true,colorlinks=true,linkcolor=black,urlcolor=blue,pdftitle={Giải tích §8.3 — Ứng dụng trong vật lý và kỹ thuật}}
+\setlength{\parindent}{1.2em}\setlength{\parskip}{4pt}\setlength{\headheight}{16pt}
+\pagestyle{fancy}\fancyhf{}\fancyhead[L]{\small Chương 8. Các ứng dụng khác của tích phân}\fancyhead[R]{\small §8.3}\fancyfoot[C]{\thepage}
+\newcommand{\fig}[3][.68]{\begin{center}\begin{minipage}{\linewidth}\centering\includegraphics[width=#1\linewidth]{assets/#2.png}\\{\small #3}\end{minipage}\end{center}}
+\newcommand{\ex}[1]{\par\medskip\noindent\textbf{Ví dụ #1.}\ }
+\newcommand{\sol}{\par\nopagebreak[4]\noindent\textit{Lời giải.}\ }
+\newcommand{\bt}[1]{\par\smallskip\Needspace{5\baselineskip}\noindent\textbf{#1.}\ }
+\newcommand{\group}[1]{\par\Needspace{11\baselineskip}\medskip\noindent\textbf{#1}\par\nopagebreak[4]}
+\newcommand{\gint}[1]{\left[\!\left[#1\right]\!\right]}
+\allowdisplaybreaks[2]
+\DeclareMathOperator{\sech}{sech}
+\DeclareMathOperator{\csch}{csch}
+\DeclareMathOperator{\arccot}{arccot}
+
+\newcommand{\prj}[1]{\bt{#1}}
+
+\newcommand{\kn}[1]{\bt{#1}}
+\newcommand{\ds}[1]{\bt{#1}}
+\setlength{\emergencystretch}{1em}
+\widowpenalty=10000\clubpenalty=10000
+\begin{document}
+\section*{8.3 — Ứng dụng trong vật lý và kỹ thuật}
+Trong số nhiều ứng dụng của phép tính tích phân trong vật lý và kỹ thuật, ở đây ta xét hai ứng dụng: lực do áp suất nước và khối tâm. Cũng như các ứng dụng trước về hình học (diện tích, thể tích, độ dài) và công, chiến lược của ta là chia đại lượng vật lý thành nhiều phần nhỏ, xấp xỉ từng phần, cộng các kết quả để được một tổng Riemann, lấy giới hạn, rồi tính tích phân thu được.
+\subsection*{Áp suất và lực thủy tĩnh}
+Những người lặn biển sâu biết rõ áp suất nước tăng khi họ lặn sâu hơn. Nguyên nhân là trọng lượng của lượng nước phía trên tăng lên.
+
+Nói chung, giả sử một tấm mỏng nằm ngang có diện tích $A$ mét vuông được nhúng trong chất lưu có khối lượng riêng $\rho$ kilôgam trên mét khối, ở độ sâu $d$ mét dưới mặt chất lưu như Hình 1. Chất lưu ngay phía trên tấm (hãy hình dung một cột chất lỏng) có thể tích $V=Ad$, nên khối lượng là $m=\rho V=\rho Ad$. Vì vậy, lực chất lưu tác dụng lên tấm là
+\[F=mg=\rho gAd,\]
+trong đó $g$ là gia tốc trọng trường. Áp suất $P$ trên tấm được định nghĩa là lực trên một đơn vị diện tích:
+\[P=\frac FA=\rho gd.\]
+\fig[.4]{fig01}{Hình 1. Tấm có diện tích $A$, ở độ sâu $d$ dưới mặt chất lưu.}
+Đơn vị áp suất trong hệ SI là newton trên mét vuông, gọi là pascal (viết tắt: $1\,\mathrm{N/m^2}=1\,\mathrm{Pa}$). Vì đây là đơn vị nhỏ, kilopascal (kPa) thường được sử dụng. Chẳng hạn, do khối lượng riêng của nước là $\rho=1000\,\mathrm{kg/m^3}$, áp suất ở đáy một bể bơi sâu $2\,\mathrm m$ là
+\[P=\rho gd=1000\,\mathrm{kg/m^3}\times9.8\,\mathrm{m/s^2}\times2\,\mathrm m\]
+\[P=19\,600\,\mathrm{Pa}=19.6\,\mathrm{kPa}.\]
+Khi dùng hệ đơn vị thông dụng Hoa Kỳ, ta viết $P=\rho gd=\delta d$, trong đó $\delta=\rho g$ là trọng lượng riêng (phân biệt với $\rho$, là khối lượng riêng). Chẳng hạn, trọng lượng riêng của nước là $\delta=62.5\,\mathrm{lb/ft^3}$, nên áp suất ở đáy một bể bơi sâu $8\,\mathrm{ft}$ là $P=\delta d=62.5\,\mathrm{lb/ft^3}\times8\,\mathrm{ft}=500\,\mathrm{lb/ft^2}$.
+
+\textit{Chú ý.} Áp suất chất lưu tác dụng lên một vật ngập trong nó thay đổi theo độ sâu, nhưng không phụ thuộc thể tích chất lưu. Một con cá bơi ở độ sâu $2\,\mathrm{ft}$ dưới mặt nước chịu cùng áp suất nước dù ở trong một bể nhỏ hay một hồ rất lớn.
+
+Một nguyên lý quan trọng về áp suất chất lưu, đã được thực nghiệm xác nhận, là: \textit{tại mỗi điểm trong chất lỏng, áp suất như nhau theo mọi hướng}. (Người lặn cảm nhận cùng áp suất lên mũi và hai tai.) Do đó, áp suất theo bất kỳ hướng nào tại độ sâu $d$ trong chất lưu có khối lượng riêng $\rho$ là
+\[P=\rho gd=\delta d.\tag{1}\]
+Điều này giúp xác định lực thủy tĩnh (lực do chất lưu đứng yên tác dụng) lên một tấm thẳng đứng, một bức tường hoặc đập. Bài toán không đơn giản vì áp suất không cố định mà tăng theo độ sâu.
+
+\ex{1} Một đập có dạng hình thang như Hình 2, cao $20\,\mathrm m$, rộng $50\,\mathrm m$ ở đỉnh và $30\,\mathrm m$ ở đáy. Tìm lực do áp suất thủy tĩnh tác dụng lên đập nếu mặt nước thấp hơn đỉnh đập $4\,\mathrm m$.
+\fig[.4]{fig02}{Hình 2. Đập hình thang.}
+\sol Trước hết, gắn một hệ tọa độ với đập. Có thể chọn trục $x$ thẳng đứng, gốc ở mặt nước và chiều dương hướng xuống như Hình 3(a). Nước sâu $16\,\mathrm m$, nên chia $[0,16]$ thành $n$ khoảng con cùng độ dài, có các đầu mút $x_i$, và chọn $x_i^*\in[x_{i-1},x_i]$. Dải ngang thứ $i$ của đập được xấp xỉ bằng hình chữ nhật cao $\Delta x$, rộng $w_i$; từ các tam giác đồng dạng trong Hình 3(b),
+\[\frac a{16-x_i^*}=\frac{10}{20},\qquad a=\frac{16-x_i^*}{2}=8-\frac{x_i^*}{2}.\]
+Do đó,
+\[w_i=2(15+a)=2(15+8-\tfrac12x_i^*)=46-x_i^*.\]
+\fig[.4]{fig03}{Hình 3. (a) Hệ tọa độ và dải ngang; (b) các tam giác đồng dạng.}
+Nếu $A_i$ là diện tích dải thứ $i$ thì $A_i\approx w_i\Delta x=(46-x_i^*)\Delta x$. Khi $\Delta x$ nhỏ, áp suất $P_i$ trên dải gần như không đổi; từ Phương trình 1,
+\[P_i\approx1000gx_i^*.\]
+Lực thủy tĩnh $F_i$ tác dụng lên dải là tích áp suất với diện tích:
+\[F_i=P_iA_i\approx1000gx_i^*(46-x_i^*)\Delta x.\]
+Cộng các lực này rồi lấy giới hạn khi $n\to\infty$, ta được lực thủy tĩnh tổng cộng lên đập:
+\[F=\lim_{n\to\infty}\sum_{i=1}^n1000gx_i^*(46-x_i^*)\Delta x=\int_{0}^{16}1000gx(46-x)\,dx\]
+\[F=1000(9.8)\int_{0}^{16}(46x-x^2)\,dx=9800\left[23x^2-\frac{x^3}{3}\right]_{0}^{16}\approx4.43\times10^7\,\mathrm N.\]
+Trong Ví dụ 1 cũng có thể dùng hệ tọa độ thông thường, đặt gốc ở chính giữa đáy đập. Cạnh phải có phương trình $y=2x-30$, nên dải ngang tại $y_i^*$ có độ rộng $2x_i^*=y_i^*+30$. Độ sâu là $16-y_i^*$, do đó lực lên đập là
+\[F=1000(9.8)\int_{0}^{16}(y+30)(16-y)\,dy\approx4.43\times10^7\,\mathrm N.\]
+
+\ex{2} Tìm lực thủy tĩnh lên một mặt đầu của một thùng hình trụ bán kính $3\,\mathrm{ft}$ được nhúng trong nước sâu $10\,\mathrm{ft}$.
+\fig[.43]{fig04}{Hình 4. Mặt đầu tròn của thùng và một dải ngang.}
+\sol Chọn các trục như Hình 4, đặt gốc tại tâm mặt đầu của thùng. Khi đó đường tròn có phương trình đơn giản $x^2+y^2=9$. Như Ví dụ 1, chia miền tròn thành các dải ngang có cùng độ rộng. Từ phương trình đường tròn, chiều dài hình chữ nhật xấp xỉ dải thứ $i$ là $2\sqrt{9-(y_i^*)^2}$ và diện tích dải xấp xỉ bằng
+\[A_i=2\sqrt{9-(y_i^*)^2}\,\Delta y.\]
+Vì trọng lượng riêng của nước là $\delta=62.5\,\mathrm{lb/ft^3}$, áp suất lên dải này, theo Phương trình 1, xấp xỉ bằng $\delta d_i=62.5(7-y_i^*)$. Lực (áp suất nhân diện tích) lên dải xấp xỉ bằng
+\[\delta d_iA_i=62.5(7-y_i^*)\,2\sqrt{9-(y_i^*)^2}\,\Delta y.\]
+Cộng lực lên các dải rồi lấy giới hạn, ta được lực tổng cộng:
+\[F=\lim_{n\to\infty}\sum_{i=1}^n62.5(7-y_i^*)\,2\sqrt{9-(y_i^*)^2}\,\Delta y\]
+\[F=125\int_{-3}^{3}(7-y)\sqrt{9-y^2}\,dy\]
+\[F=125\cdot7\int_{-3}^{3}\sqrt{9-y^2}\,dy-125\int_{-3}^{3}y\sqrt{9-y^2}\,dy.\]
+Tích phân thứ hai bằng 0 vì hàm dưới dấu tích phân là hàm lẻ (xem Định lý 5.5.7). Tích phân thứ nhất có thể tính bằng phép thế lượng giác $y=3\sin\theta$, nhưng đơn giản hơn là nhận ra nó bằng diện tích nửa hình tròn bán kính 3. Vì vậy,
+\[F=875\int_{-3}^{3}\sqrt{9-y^2}\,dy=875\cdot\tfrac12\pi(3)^2=\frac{7875\pi}{2}\approx12\,370\,\mathrm{lb}.\]
+
+\subsection*{Mômen và khối tâm}
+Mục tiêu của ta là tìm điểm $P$ mà trên đó một tấm mỏng có hình dạng bất kỳ cân bằng theo phương ngang như Hình 5. Điểm này được gọi là \textbf{khối tâm} (hay trọng tâm) của tấm.
+\fig[.43]{fig05}{Hình 5. Tấm cân bằng tại $P$.}
+Trước hết xét tình huống đơn giản hơn trong Hình 6: hai vật có khối lượng $m_1,m_2$ gắn vào một thanh có khối lượng không đáng kể, ở hai phía của điểm tựa, cách điểm tựa các khoảng $d_1,d_2$. Thanh cân bằng nếu
+\[m_1d_1=m_2d_2.\tag{2}\]
+Đây là một quy luật thực nghiệm do Archimedes phát hiện, gọi là định luật đòn bẩy. (Hãy nghĩ đến một người nhẹ cân cân bằng với người nặng hơn trên bập bênh bằng cách ngồi xa tâm hơn.)
+\fig[.43]{fig06}{Hình 6. Hai khối lượng trên thanh; fulcrum: điểm tựa.}
+Bây giờ giả sử thanh nằm trên trục $x$, với $m_1$ tại $x_1$, $m_2$ tại $x_2$ và khối tâm tại $\bar x$. So sánh Hình 6 và 7, ta thấy $d_1=\bar x-x_1$, $d_2=x_2-\bar x$, nên Phương trình 2 cho
+\[m_1(\bar x-x_1)=m_2(x_2-\bar x),\]
+\[m_1\bar x+m_2\bar x=m_1x_1+m_2x_2,\]
+do đó
+\[\bar x=\frac{m_1x_1+m_2x_2}{m_1+m_2}.\tag{3}\]
+\fig[.82]{fig07}{Hình 7. Các vị trí $x_1,x_2$ và khối tâm $\bar x$.}
+Các số $m_1x_1,m_2x_2$ được gọi là \textbf{mômen} của các khối lượng $m_1,m_2$ đối với gốc tọa độ. Phương trình 3 nói rằng khối tâm $\bar x$ được tìm bằng cách cộng các mômen rồi chia cho tổng khối lượng $m=m_1+m_2$.
+
+Nói chung, nếu một hệ có $n$ chất điểm khối lượng $m_1,m_2,\ldots,m_n$ tại các điểm $x_1,x_2,\ldots,x_n$ trên trục $x$, lập luận tương tự cho thấy khối tâm của hệ là
+\[\bar x=\frac{\sum_{i=1}^nm_ix_i}{\sum_{i=1}^nm_i}=\frac{\sum_{i=1}^nm_ix_i}{m},\tag{4}\]
+trong đó $m=\sum m_i$ là tổng khối lượng của hệ; tổng các mômen riêng lẻ
+\[M=\sum_{i=1}^nm_ix_i\]
+được gọi là \textbf{mômen của hệ đối với gốc tọa độ}. Có thể viết Phương trình 4 thành $m\bar x=M$: nếu xem toàn bộ khối lượng tập trung tại khối tâm $\bar x$, mômen vẫn bằng mômen của hệ.
+
+Bây giờ xét hệ $n$ chất điểm khối lượng $m_1,m_2,\ldots,m_n$ đặt tại $(x_1,y_1)$, $(x_2,y_2)$, $\ldots$, $(x_n,y_n)$ trong mặt phẳng $xy$ như Hình 8. Tương tự trường hợp một chiều, ta định nghĩa \textbf{mômen của hệ đối với trục $y$} là
+\[M_y=\sum_{i=1}^nm_ix_i,\tag{5}\]
+và \textbf{mômen của hệ đối với trục $x$} là
+\[M_x=\sum_{i=1}^nm_iy_i.\tag{6}\]
+\fig[.4]{fig08}{Hình 8. Hệ chất điểm trong mặt phẳng.}
+Khi đó $M_y$ đo xu hướng quay của hệ quanh trục $y$, còn $M_x$ đo xu hướng quay quanh trục $x$.
+
+Như trường hợp một chiều, tọa độ $(\bar x,\bar y)$ của khối tâm được cho bởi
+\[\bar x=\frac{M_y}{m},\qquad\bar y=\frac{M_x}{m},\tag{7}\]
+trong đó $m=\sum m_i$ là tổng khối lượng. Vì $m\bar x=M_y$ và $m\bar y=M_x$, khối tâm $(\bar x,\bar y)$ là điểm mà một chất điểm khối lượng $m$ đặt tại đó có cùng các mômen như hệ.
+
+\ex{3} Tìm các mômen và khối tâm của hệ các vật có khối lượng lần lượt là 3, 4 và 8 tại các điểm $(-1,1)$, $(2,-1)$ và $(3,2)$.
+\sol Dùng các Phương trình 5 và 6 để tính mômen:
+\[M_y=3(-1)+4(2)+8(3)=29,\]
+\[M_x=3(1)+4(-1)+8(2)=15.\]
+Vì $m=3+4+8=15$, từ các Phương trình 7,
+\[\bar x=\frac{M_y}{m}=\frac{29}{15},\qquad\bar y=\frac{M_x}{m}=\frac{15}{15}=1.\]
+Vậy khối tâm là $(1\tfrac{14}{15},1)$ (xem Hình 9).
+\fig[.43]{fig09}{Hình 9. Các khối lượng và khối tâm (center of mass).}
+Tiếp theo, xét một tấm phẳng mỏng có khối lượng riêng đồng đều $\rho$, chiếm miền $\mathcal R$ của mặt phẳng. Ta muốn xác định khối tâm của tấm, còn gọi là \textbf{trọng tâm hình học} của $\mathcal R$. Ta dùng các nguyên lý vật lý sau: \textbf{nguyên lý đối xứng} nói rằng nếu $\mathcal R$ đối xứng qua đường thẳng $l$ thì trọng tâm hình học của $\mathcal R$ nằm trên $l$. (Nếu phản xạ $\mathcal R$ qua $l$, miền không đổi nên trọng tâm cũng không đổi. Nhưng chỉ các điểm trên $l$ mới bất động.) Do đó trọng tâm hình học của một hình chữ nhật là tâm của nó. Mômen được xác định sao cho nếu toàn bộ khối lượng của một miền tập trung tại khối tâm thì các mômen không đổi. Ngoài ra, mômen của hợp hai miền không chồng lấn bằng tổng mômen của từng miền.
+
+\textit{Chú ý.} Trọng tâm hình học của miền $\mathcal R$ chỉ do hình dạng của miền quyết định. Nếu một tấm có khối lượng riêng đồng đều chiếm $\mathcal R$, khối tâm của tấm trùng với trọng tâm hình học của $\mathcal R$. Nếu khối lượng riêng không đồng đều thì hai loại tâm này khác nhau. Tình huống đó được xét ở Mục 15.4.
+
+Giả sử $\mathcal R$ có dạng Hình 10(a): nằm giữa $x=a$ và $x=b$, phía trên trục $x$ và phía dưới đồ thị hàm liên tục $f$. Chia $[a,b]$ thành $n$ khoảng con có các đầu mút $x_0,x_1,\ldots,x_n$, cùng độ rộng $\Delta x$. Chọn điểm lấy mẫu $x_i^*$ là trung điểm $\bar x_i$ của khoảng con thứ $i$, tức $\bar x_i=(x_{i-1}+x_i)/2$. Ta được miền xấp xỉ bằng các hình chữ nhật như Hình 10(b). Trọng tâm hình học của hình chữ nhật xấp xỉ $R_i$ là tâm $C_i(\bar x_i,\tfrac12f(\bar x_i))$. Diện tích của nó là $f(\bar x_i)\Delta x$, nên khối lượng bằng khối lượng riêng nhân diện tích:
+\[\rho f(\bar x_i)\Delta x.\]
+\fig[.43]{fig10a}{Hình 10(a). Miền $\mathcal R$ nằm dưới đồ thị $f$.}
+\fig[.43]{fig10b}{Hình 10(b). Xấp xỉ miền bằng các hình chữ nhật tại trung điểm.}
+Mômen của $R_i$ đối với trục $y$ là tích khối lượng với khoảng cách từ $C_i$ đến trục $y$, tức $\bar x_i$. Vì vậy,
+\[M_y(R_i)=[\rho f(\bar x_i)\Delta x]\bar x_i=\rho\bar x_i f(\bar x_i)\Delta x.\]
+Cộng các mômen, ta được mômen của miền đa giác xấp xỉ $\mathcal R$; lấy giới hạn khi $n\to\infty$, ta được mômen của chính miền $\mathcal R$ đối với trục $y$:
+\[M_y=\lim_{n\to\infty}\sum_{i=1}^n\rho\bar x_i f(\bar x_i)\Delta x=\rho\int_a^bxf(x)\,dx.\]
+Tương tự, tính mômen của $R_i$ đối với trục $x$ bằng cách nhân khối lượng với khoảng cách từ $C_i$ đến trục $x$:
+\[M_x(R_i)=[\rho f(\bar x_i)\Delta x]\tfrac12f(\bar x_i)=\rho\tfrac12[f(\bar x_i)]^2\Delta x.\]
+Cộng các mômen rồi lấy giới hạn, ta được mômen của $\mathcal R$ đối với trục $x$:
+\[M_x=\lim_{n\to\infty}\sum_{i=1}^n\rho\cdot\tfrac12[f(\bar x_i)]^2\Delta x=\rho\int_a^b\tfrac12[f(x)]^2\,dx.\]
+Cũng như hệ chất điểm, khối tâm $(\bar x,\bar y)$ của tấm được định nghĩa sao cho $m\bar x=M_y$ và $m\bar y=M_x$. Khối lượng của tấm bằng khối lượng riêng nhân diện tích:
+\[m=\rho A=\rho\int_a^bf(x)\,dx.\]
+Do đó,
+\[\bar x=\frac{M_y}{m}=\frac{\rho\int_a^bxf(x)\,dx}{\rho\int_a^bf(x)\,dx}=\frac{\int_a^bxf(x)\,dx}{\int_a^bf(x)\,dx},\]
+\[\bar y=\frac{M_x}{m}=\frac{\rho\int_a^b\tfrac12[f(x)]^2\,dx}{\rho\int_a^bf(x)\,dx}=\frac{\int_a^b\tfrac12[f(x)]^2\,dx}{\int_a^bf(x)\,dx}.\]
+Chú ý các thừa số $\rho$ đã triệt tiêu. Khi khối lượng riêng không đổi, vị trí khối tâm không phụ thuộc giá trị khối lượng riêng.
+
+Tóm lại, khối tâm của tấm (hay trọng tâm hình học của $\mathcal R$) có diện tích $A$ nằm tại $(\bar x,\bar y)$, với
+\[\bar x=\frac1A\int_a^bxf(x)\,dx,\qquad\bar y=\frac1A\int_a^b\tfrac12[f(x)]^2\,dx.\tag{8}\]
+\ex{4} Tìm khối tâm của một tấm nửa hình tròn bán kính $r$, có khối lượng riêng đồng đều.
+\fig[.4]{fig11}{Hình 11. Tấm nửa hình tròn và khối tâm.}
+\sol Để dùng (8), đặt nửa hình tròn như Hình 11, với $f(x)=\sqrt{r^2-x^2}$, $a=-r$, $b=r$. Không cần dùng công thức để tính $\bar x$: theo nguyên lý đối xứng, khối tâm nằm trên trục $y$, nên $\bar x=0$. Diện tích nửa hình tròn là $A=\tfrac12\pi r^2$, do đó
+\[\bar y=\frac1A\int_{-r}^{r}\tfrac12[f(x)]^2\,dx=\frac1{\tfrac12\pi r^2}\cdot\tfrac12\int_{-r}^{r}(\sqrt{r^2-x^2})^2\,dx\]
+\[\bar y=\frac2{\pi r^2}\int_{0}^{r}(r^2-x^2)\,dx\qquad\text{(vì hàm dưới dấu tích phân chẵn)}\]
+\[\bar y=\frac2{\pi r^2}\left[r^2x-\frac{x^3}{3}\right]_{0}^{r}=\frac2{\pi r^2}\frac{2r^3}{3}=\frac{4r}{3\pi}.\]
+Khối tâm nằm tại $(0,4r/(3\pi))$.
+
+\ex{5} Tìm trọng tâm hình học của miền trong góc phần tư thứ nhất, giới hạn bởi $y=\cos x$, $y=0$ và $x=0$.
+\sol Diện tích của miền là
+\[A=\int_{0}^{\pi/2}\cos x\,dx=\left[\sin x\right]_{0}^{\pi/2}=1.\]
+Vì vậy, các Công thức 8 cho
+\[\bar x=\frac1A\int_{0}^{\pi/2}xf(x)\,dx=\int_{0}^{\pi/2}x\cos x\,dx\]
+\[\bar x=\left[x\sin x\right]_{0}^{\pi/2}-\int_{0}^{\pi/2}\sin x\,dx=\frac\pi2-1\qquad\text{(tích phân từng phần)},\]
+\[\bar y=\frac1A\int_{0}^{\pi/2}\tfrac12[f(x)]^2\,dx=\tfrac12\int_{0}^{\pi/2}\cos^2x\,dx\]
+\[\bar y=\tfrac14\int_{0}^{\pi/2}(1+\cos2x)\,dx=\tfrac14\left[x+\tfrac12\sin2x\right]_{0}^{\pi/2}=\frac\pi8.\]
+Trọng tâm hình học là $(\tfrac\pi2-1,\tfrac\pi8)\approx(0.57,0.39)$, được biểu diễn trong Hình 12.
+\fig[.43]{fig12}{Hình 12. Trọng tâm hình học của miền dưới đồ thị $y=\cos x$.}
+Nếu miền $\mathcal R$ nằm giữa $y=f(x)$ và $y=g(x)$, với $f(x)\ge g(x)$, như Hình 13, một lập luận tương tự lập luận dẫn đến các Công thức 8 cho thấy trọng tâm hình học của $\mathcal R$ là $(\bar x,\bar y)$, trong đó
+\[\bar x=\frac1A\int_a^bx[f(x)-g(x)]\,dx,\qquad\bar y=\frac1A\int_a^b\tfrac12\{[f(x)]^2-[g(x)]^2\}\,dx.\tag{9}\]
+(Xem Bài tập 51.)
+\fig[.43]{fig13}{Hình 13. Miền nằm giữa hai đồ thị và một hình chữ nhật xấp xỉ.}
+\ex{6} Tìm trọng tâm hình học của miền giới hạn bởi đường thẳng $y=x$ và parabol $y=x^2$.
+\fig[.36]{fig14}{Hình 14. Miền giữa đường thẳng và parabol.}
+\sol Miền được phác họa trong Hình 14. Chọn $f(x)=x$, $g(x)=x^2$, $a=0$, $b=1$ trong các Công thức 9. Trước hết, diện tích miền là
+\[A=\int_{0}^{1}(x-x^2)\,dx=\left[\frac{x^2}2-\frac{x^3}3\right]_{0}^{1}=\frac16.\]
+Do đó,
+\[\bar x=\frac1A\int_{0}^{1}x[f(x)-g(x)]\,dx=\frac1{1/6}\int_{0}^{1}x(x-x^2)\,dx\]
+\[\bar x=6\int_{0}^{1}(x^2-x^3)\,dx=6\left[\frac{x^3}3-\frac{x^4}4\right]_{0}^{1}=\frac12,\]
+\[\bar y=\frac1A\int_{0}^{1}\tfrac12\{[f(x)]^2-[g(x)]^2\}\,dx=\frac1{1/6}\int_{0}^{1}\tfrac12(x^2-x^4)\,dx\]
+\[\bar y=3\left[\frac{x^3}3-\frac{x^5}5\right]_{0}^{1}=\frac25.\]
+Trọng tâm hình học là $(\tfrac12,\tfrac25)$.
+\subsection*{Định lý Pappus}
+Ta kết thúc mục này bằng một mối liên hệ đáng chú ý giữa trọng tâm hình học và thể tích khối tròn xoay.
+
+\textbf{Định lý Pappus.} Cho $\mathcal R$ là một miền phẳng nằm hoàn toàn về một phía của đường thẳng $l$ trong mặt phẳng. Nếu quay $\mathcal R$ quanh $l$ thì thể tích khối thu được bằng tích diện tích $A$ của $\mathcal R$ với quãng đường $d$ mà trọng tâm hình học của $\mathcal R$ đi được.
+
+\textit{Ghi chú.} Định lý mang tên nhà toán học Hy Lạp Pappus ở Alexandria, sống vào thế kỷ IV sau Công nguyên.
+
+\textit{Chứng minh.} Ta chứng minh trường hợp riêng khi miền nằm giữa $y=f(x)$ và $y=g(x)$ như Hình 13, còn $l$ là trục $y$. Dùng phương pháp vỏ trụ (xem Mục 6.3), ta có
+\[V=\int_a^b2\pi x[f(x)-g(x)]\,dx=2\pi\int_a^bx[f(x)-g(x)]\,dx\]
+\[V=2\pi(\bar xA)=(2\pi\bar x)A=Ad\qquad\text{(theo các Công thức 9)},\]
+trong đó $d=2\pi\bar x$ là quãng đường trọng tâm hình học đi được trong một vòng quay quanh trục $y$.
+
+\ex{7} Một khối xuyến được tạo thành khi quay một hình tròn bán kính $r$ quanh một đường thẳng trong mặt phẳng hình tròn, cách tâm một khoảng $R>r$ (xem Hình 15). Tìm thể tích khối xuyến.
+\fig[.43]{fig15}{Hình 15. Khối xuyến có các bán kính $r$ và $R$.}
+\sol Hình tròn có diện tích $A=\pi r^2$. Theo nguyên lý đối xứng, trọng tâm hình học là tâm hình tròn, nên quãng đường tâm đi được trong một vòng quay là $d=2\pi R$. Vì vậy, theo định lý Pappus, thể tích khối xuyến là
+\[V=Ad=(2\pi R)(\pi r^2)=2\pi^2r^2R.\]
+Nên so sánh phương pháp trong Ví dụ 7 với phương pháp ở Bài tập 6.2.75.
+
+\section*{8.3 — Bài tập}
+\bt{1} Một bể cá dài $5\,\mathrm{ft}$, rộng $2\,\mathrm{ft}$ và sâu $3\,\mathrm{ft}$ chứa đầy nước. Tìm (a) áp suất thủy tĩnh lên đáy bể, (b) lực thủy tĩnh lên đáy bể và (c) lực thủy tĩnh lên một mặt đầu của bể.
+\bt{2} Một bồn dài $8\,\mathrm m$, rộng $4\,\mathrm m$, cao $2\,\mathrm m$, chứa dầu hỏa có khối lượng riêng $820\,\mathrm{kg/m^3}$ đến độ sâu $1.5\,\mathrm m$. Tìm (a) áp suất thủy tĩnh lên đáy bồn, (b) lực thủy tĩnh lên đáy bồn và (c) lực thủy tĩnh lên một mặt đầu của bồn.
+\group{3–11} Một tấm thẳng đứng được nhúng ngập hoàn toàn hoặc một phần trong nước, có hình dạng và kích thước như hình. Giải thích cách xấp xỉ lực thủy tĩnh lên một phía của tấm bằng tổng Riemann. Sau đó biểu diễn lực bằng một tích phân và tính tích phân đó.
+\bt{3} Tấm hình chữ nhật.
+\fig[.31]{ex03}{Bài 3.}
+\bt{4} Tấm tam giác vuông.
+\fig[.31]{ex04}{Bài 4.}
+\bt{5} Tấm hình tròn.
+\fig[.31]{ex05}{Bài 5.}
+\bt{6} Tấm nửa hình tròn, ngập một phần.
+\fig[.31]{ex06}{Bài 6.}
+\bt{7} Tấm tam giác có đỉnh ở mặt nước.
+\fig[.31]{ex07}{Bài 7.}
+\bt{8} Tấm tam giác có một cạnh nằm ngang.
+\fig[.31]{ex08}{Bài 8.}
+\bt{9} Tấm hình thang, ngập một phần.
+\fig[.31]{ex09}{Bài 9.}
+\bt{10} Tấm hình vuông, một đỉnh ở mặt nước.
+\fig[.31]{ex10}{Bài 10.}
+\bt{11} Tấm hình thang, cạnh trên ở mặt nước.
+\fig[.33]{ex11}{Bài 11.}
+\bt{12} Một đập thẳng đứng có cửa nửa hình tròn như hình. Tìm lực thủy tĩnh tác dụng lên cửa.
+\fig[.37]{ex12}{Bài 12. Water level: mặt nước.}
+\bt{13} Một xe bồn vận chuyển xăng trong bồn hình trụ nằm ngang có đường kính $8\,\mathrm{ft}$, dài $40\,\mathrm{ft}$. Nếu bồn chứa đầy xăng có trọng lượng riêng $47\,\mathrm{lb/ft^3}$, tính lực tác dụng lên một mặt đầu của bồn.
+\fig[.65]{ex13}{Bài 13. Ảnh: Rihardzz / Shutterstock.com.}
+\bt{14} Một máng có tiết diện hình thang như hình, chứa dầu thực vật có khối lượng riêng $925\,\mathrm{kg/m^3}$.
+
+(a) Tìm lực thủy tĩnh lên một mặt đầu của máng khi máng chứa đầy dầu.
+
+(b) Tính lực lên một mặt đầu nếu dầu trong máng sâu $1.2\,\mathrm m$.
+\fig[.36]{ex14}{Bài 14.}
+\bt{15} Một khối lập phương cạnh $20\,\mathrm{cm}$ nằm ở đáy một bể cá có nước sâu một mét. Tìm lực thủy tĩnh lên (a) mặt trên của khối lập phương và (b) một mặt bên của nó.
+\bt{16} Một đập nghiêng góc $30^\circ$ so với phương thẳng đứng, có dạng hình thang cân rộng $100\,\mathrm{ft}$ ở đỉnh, $50\,\mathrm{ft}$ ở đáy và chiều cao nghiêng $70\,\mathrm{ft}$. Tìm lực thủy tĩnh lên đập khi nước lên đến đỉnh đập.
+\bt{17} Một bể bơi rộng $20\,\mathrm{ft}$, dài $40\,\mathrm{ft}$, có đáy là một mặt phẳng nghiêng; đầu nông sâu $3\,\mathrm{ft}$ và đầu sâu sâu $9\,\mathrm{ft}$. Nếu bể đầy nước, tìm lực thủy tĩnh lên (a) từng mặt trong bốn mặt bên và (b) đáy bể.
+\bt{18} Giả sử một tấm được nhúng thẳng đứng trong chất lưu có khối lượng riêng $\rho$, và độ rộng tấm ở độ sâu $x$ mét dưới mặt chất lưu là $w(x)$. Nếu mép trên ở độ sâu $a$, mép dưới ở độ sâu $b$, chứng minh lực thủy tĩnh lên một phía của tấm là
+\[F=\int_a^b\rho gxw(x)\,dx.\]
+\bt{19} Một tấm kim loại được phát hiện nằm ngập thẳng đứng trong nước biển có trọng lượng riêng $64\,\mathrm{lb/ft^3}$. Độ rộng của tấm được đo ở các độ sâu sau. Dùng công thức trong Bài 18 và quy tắc Simpson để ước lượng lực nước tác dụng lên tấm.
+\begin{center}\begin{tabular}{lrrrrrrr}\toprule
+Độ sâu (ft)&7.0&7.4&7.8&8.2&8.6&9.0&9.4\\
+Độ rộng tấm (ft)&1.2&1.8&2.9&3.8&3.6&4.2&4.4\\\bottomrule
+\end{tabular}\end{center}
+\bt{20} (a) Dùng công thức trong Bài 18 để chứng minh
+\[F=(\rho g\bar x)A,\]
+trong đó $\bar x$ là hoành độ trọng tâm hình học của tấm, $A$ là diện tích của tấm. Phương trình này cho thấy lực thủy tĩnh tác dụng lên một miền phẳng thẳng đứng bằng lực khi miền nằm ngang ở độ sâu của trọng tâm hình học của nó.
+
+(b) Dùng kết quả phần (a) để đưa ra một lời giải khác cho Bài 10.
+\group{21–22} Các chất điểm có khối lượng $m_i$ nằm trên trục $x$ như hình. Tìm mômen $M$ của hệ đối với gốc tọa độ và khối tâm $\bar x$.
+\bt{21} Hệ hai chất điểm.
+\fig[.52]{ex21}{Bài 21.}
+\bt{22} Hệ ba chất điểm.
+\fig[.65]{ex22}{Bài 22.}
+\group{23–24} Các khối lượng $m_i$ nằm tại các điểm $P_i$. Tìm các mômen $M_x,M_y$ và khối tâm của hệ.
+\bt{23} $m_1=5$, $m_2=8$, $m_3=7$;
+\[P_1(3,1),\quad P_2(0,4),\quad P_3(-5,-2).\]
+\bt{24} $m_1=4$, $m_2=3$, $m_3=6$, $m_4=3$;
+\[P_1(6,1),\quad P_2(3,-1),\quad P_3(-2,2),\quad P_4(-2,-5).\]
+\group{25–28} Ước lượng bằng quan sát vị trí trọng tâm hình học của miền được cho. Sau đó tìm tọa độ chính xác của trọng tâm hình học.
+\bt{25} Miền tam giác.
+\fig[.33]{ex25}{Bài 25.}
+\bt{26} Miền dưới đồ thị hàm mũ.
+\fig[.33]{ex26}{Bài 26.}
+\bt{27} Miền dưới đồ thị parabol.
+\fig[.31]{ex27}{Bài 27.}
+\bt{28} Miền dưới đồ thị $y=1/x$.
+\fig[.31]{ex28}{Bài 28.}
+\group{29–33} Tìm trọng tâm hình học của miền giới hạn bởi các đường cong đã cho.
+\bt{29} $y=x^2$, $x=y^2$.
+\bt{30} $y=2-x^2$, $y=x$.
+\bt{31} $y=\sin2x$, $y=\sin x$, $0\le x\le\pi/3$.
+\bt{32} $y=x^3$, $x+y=2$, $y=0$.
+\bt{33} $x+y=2$, $x=y^2$.
+\group{34–35} Tính các mômen $M_x,M_y$ và khối tâm của tấm mỏng có khối lượng riêng và hình dạng đã cho.
+\bt{34} $\rho=4$.
+\fig[.3]{ex34}{Bài 34.}
+\bt{35} $\rho=6$.
+\fig[.3]{ex35}{Bài 35.}
+\bt{36} Dùng quy tắc Simpson để ước lượng trọng tâm hình học của miền được cho.
+\fig[.52]{ex36}{Bài 36.}
+\bt{37} Tìm trọng tâm hình học của miền giới hạn bởi $y=x^3-x$ và $y=x^2-1$. Phác họa miền và đánh dấu trọng tâm hình học để xem kết quả có hợp lý không.
+\bt{38} [Công nghệ] Dùng đồ thị tìm gần đúng các hoành độ giao điểm của $y=e^x$ và $y=2-x^2$. Sau đó tìm gần đúng trọng tâm hình học của miền giới hạn bởi hai đường cong đó.
+\bt{39} Chứng minh trọng tâm hình học của một tam giác bất kỳ nằm tại giao điểm các đường trung tuyến. [Gợi ý: Đặt các trục sao cho ba đỉnh là $(a,0)$, $(0,b)$ và $(c,0)$. Nhớ rằng trung tuyến là đoạn nối một đỉnh với trung điểm cạnh đối diện. Cũng nhớ rằng các trung tuyến cắt nhau tại điểm cách mỗi đỉnh một khoảng bằng hai phần ba đoạn từ đỉnh đến cạnh đối diện, đo dọc trung tuyến.]
+\group{40–41} Tìm trọng tâm hình học của miền đã cho bằng cách xác định trọng tâm các hình chữ nhật và tam giác (theo Bài 39), rồi dùng tính cộng của mômen, thay vì lấy tích phân.
+\bt{40} Miền ghép từ hình chữ nhật và tam giác.
+\fig[.37]{ex40}{Bài 40.}
+\bt{41} Miền ghép đối xứng.
+\fig[.4]{ex41}{Bài 41.}
+\bt{42} Một hình chữ nhật $\mathcal R$ có các cạnh $a,b$ được chia thành hai phần $\mathcal R_1,\mathcal R_2$ bởi một cung parabol có đỉnh tại một góc của $\mathcal R$ và đi qua góc đối diện. Tìm trọng tâm hình học của cả $\mathcal R_1$ và $\mathcal R_2$.
+\fig[.4]{ex42}{Bài 42.}
+\bt{43} Nếu $\bar x$ là hoành độ trọng tâm hình học của miền nằm dưới đồ thị hàm liên tục $f$, với $a\le x\le b$, chứng minh
+\[\int_a^b(cx+d)f(x)\,dx=(c\bar x+d)\int_a^bf(x)\,dx.\]
+\group{44–46} Dùng định lý Pappus tìm thể tích khối đã cho.
+\bt{44} Khối cầu bán kính $r$. (Dùng Ví dụ 4.)
+\bt{45} Khối nón có chiều cao $h$ và bán kính đáy $r$.
+\bt{46} Khối thu được khi quay tam giác có các đỉnh $(2,3)$, $(2,5)$ và $(5,4)$ quanh trục $x$.
+\fig[.4]{ex46}{Bài 46.}
+\bt{47} \textbf{Trọng tâm hình học của đường cong.} Có thể tìm trọng tâm hình học của một đường cong bằng quá trình tương tự quá trình tìm trọng tâm miền. Nếu $C$ là đường cong có độ dài $L$, thì trọng tâm hình học là $(\bar x,\bar y)$, trong đó
+\[\bar x=\frac1L\int x\,ds,\qquad\bar y=\frac1L\int y\,ds.\]
+Ở đây cần gán các cận tích phân thích hợp, còn $ds$ được định nghĩa như trong các Mục 8.1 và 8.2. (Trọng tâm thường không nằm trên chính đường cong. Nếu đường cong được làm bằng dây và đặt trên một tấm ván không trọng lượng, trọng tâm sẽ là điểm cân bằng trên tấm ván.) Tìm trọng tâm hình học của một phần tư đường tròn $y=\sqrt{16-x^2}$, $0\le x\le4$.
+\group{48–49 — Định lý Pappus thứ hai} Định lý Pappus thứ hai có cùng tinh thần với định lý Pappus đã xét trong mục này, nhưng dành cho diện tích mặt thay vì thể tích: cho $C$ là một đường cong nằm hoàn toàn về một phía của đường thẳng $l$ trong mặt phẳng. Nếu quay $C$ quanh $l$, thì diện tích mặt thu được bằng tích độ dài cung của $C$ với quãng đường mà trọng tâm hình học của $C$ đi được (xem Bài 47).
+\bt{48} (a) Chứng minh định lý Pappus thứ hai khi $C$ được cho bởi $y=f(x)$, $f(x)\ge0$, và quay $C$ quanh trục $x$.
+
+(b) Dùng định lý Pappus thứ hai tính diện tích mặt bán cầu thu được khi quay đường cong trong Bài 47 quanh trục $x$. Kết quả có phù hợp với công thức hình học không?
+\bt{49} Dùng định lý Pappus thứ hai tìm diện tích mặt xuyến trong Ví dụ 7.
+\bt{50} Gọi $\mathcal R$ là miền nằm giữa các đường cong
+\[y=x^m,\qquad y=x^n,\qquad0\le x\le1,\]
+trong đó $m,n$ là các số nguyên thỏa mãn $0\le n<m$.
+
+(a) Phác họa miền $\mathcal R$.
+
+(b) Tìm tọa độ trọng tâm hình học của $\mathcal R$.
+
+(c) Thử tìm các giá trị $m,n$ sao cho trọng tâm hình học nằm ngoài $\mathcal R$.
+\bt{51} Chứng minh các Công thức 9.
+\section*{Dự án khám phá — Những chiếc tách cà phê bổ sung nhau}
+Giả sử bạn được chọn giữa hai chiếc tách cà phê như hình, một chiếc có thành cong ra ngoài và chiếc kia có thành cong vào trong; bạn nhận thấy chúng cao bằng nhau và có hình dạng khớp khít với nhau. Bạn muốn biết chiếc nào chứa được nhiều cà phê hơn. Dĩ nhiên có thể đổ đầy nước vào một chiếc rồi rót sang chiếc kia, nhưng vì đang học giải tích, bạn quyết định dùng một cách tiếp cận toán học hơn. Bỏ qua quai tách, bạn thấy cả hai tách đều là mặt tròn xoay, nên có thể xem lượng cà phê là thể tích một khối tròn xoay.
+\fig[.95]{project}{Dự án. Tách A (Cup A), tách B (Cup B) và các miền $A_1,A_2$.}
+\prj{1} Giả sử các tách cao $h$, tách A được tạo thành khi quay đường cong $x=f(y)$ quanh trục $y$, còn tách B được tạo thành khi quay cùng đường cong quanh đường thẳng $x=k$. Tìm giá trị $k$ để hai tách chứa được lượng cà phê bằng nhau.
+\prj{2} Kết quả Bài 1 cho biết điều gì về các diện tích $A_1,A_2$ trong hình?
+\prj{3} Dùng định lý Pappus để giải thích kết quả các Bài 1 và 2.
+\prj{4} Dựa trên số đo và quan sát của bạn, đề xuất một giá trị $h$ và một phương trình $x=f(y)$, rồi tính lượng cà phê mỗi tách chứa được.
+
+\end{document}

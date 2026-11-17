@@ -1,0 +1,266 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage{fontspec}\setmainfont{Latin Modern Roman}\setsansfont{DejaVu Sans}
+\usepackage{amsmath,amssymb,graphicx,geometry,enumitem,needspace,longtable,booktabs,fancyhdr,hyperref}
+\geometry{left=28mm,right=23mm,top=24mm,bottom=24mm}
+\hypersetup{unicode=true,colorlinks=true,linkcolor=black,urlcolor=blue,pdftitle={Giải tích — Chương 8, Mục 8.1}}
+\setlength{\parindent}{1.2em}\setlength{\parskip}{4pt}\setlength{\headheight}{16pt}
+\pagestyle{fancy}\fancyhf{}\fancyhead[L]{\small Chương 8. Các ứng dụng khác của tích phân}\fancyhead[R]{\small §8.1}\fancyfoot[C]{\thepage}
+\newcommand{\fig}[3][.68]{\begin{center}\begin{minipage}{\linewidth}\centering\includegraphics[width=#1\linewidth]{assets/#2.png}\\{\small #3}\end{minipage}\end{center}}
+\newcommand{\ex}[1]{\par\medskip\noindent\textbf{Ví dụ #1.}\ }
+\newcommand{\sol}{\par\nopagebreak[4]\noindent\textit{Lời giải.}\ }
+\newcommand{\bt}[1]{\par\smallskip\Needspace{5\baselineskip}\noindent\textbf{#1.}\ }
+\newcommand{\group}[1]{\par\Needspace{11\baselineskip}\medskip\noindent\textbf{#1}\par\nopagebreak[4]}
+\newcommand{\gint}[1]{\left[\!\left[#1\right]\!\right]}
+\allowdisplaybreaks[2]
+\DeclareMathOperator{\sech}{sech}
+\DeclareMathOperator{\csch}{csch}
+\DeclareMathOperator{\arccot}{arccot}
+
+\newcommand{\prj}[1]{\bt{#1}}
+
+\newcommand{\kn}[1]{\bt{#1}}
+\newcommand{\ds}[1]{\bt{#1}}
+\setlength{\emergencystretch}{1em}
+\widowpenalty=10000\clubpenalty=10000
+\begin{document}
+\section*{Chương 8 — Các ứng dụng khác của tích phân}
+\fig[1]{chapter}{Gateway Arch tại St. Louis, Missouri. Ảnh: iStock.com / gnagel.}
+Gateway Arch tại St. Louis, Missouri, cao 630 feet và được hoàn thành năm 1965. Kiến trúc sư Eero Saarinen thiết kế vòm này bằng một phương trình có chứa hàm cosin hyperbolic. Bài tập 8.1.50 yêu cầu tính độ dài đường cong mà ông đã sử dụng.
+
+Trong Chương 6, ta đã xét một số ứng dụng của tích phân: diện tích, thể tích, công và giá trị trung bình. Ở đây, ta khảo sát thêm một số trong nhiều ứng dụng hình học khác của tích phân — độ dài đường cong, diện tích mặt — cũng như các ứng dụng vào vật lý, kỹ thuật, sinh học, kinh tế học và thống kê. Chẳng hạn, ta sẽ nghiên cứu trọng tâm của một tấm phẳng, lực do áp suất nước tác dụng lên đập, dòng máu từ tim người và thời gian chờ trung bình trong một cuộc gọi điện thoại hỗ trợ khách hàng.
+\section*{8.1 — Độ dài cung}
+Độ dài của một đường cong có nghĩa là gì? Ta có thể nghĩ đến việc đặt một sợi dây dọc theo đường cong ở Hình 1 rồi đo sợi dây bằng thước. Nhưng với một đường cong phức tạp, cách đó khó đạt độ chính xác cao. Ta cần một định nghĩa chính xác cho độ dài một cung của đường cong, theo cùng tinh thần như các định nghĩa đã xây dựng cho khái niệm diện tích và thể tích.
+\fig[.32]{fig01}{Hình 1. Một đường cong cần xác định độ dài.}
+\subsection*{Độ dài cung của đường cong}
+Nếu một đường cong là một đa giác, ta dễ dàng tìm được độ dài của nó: chỉ cần cộng độ dài các đoạn thẳng tạo thành đa giác. (Có thể dùng công thức khoảng cách để tính khoảng cách giữa hai đầu mút của mỗi đoạn.) Ta sẽ định nghĩa độ dài của một đường cong tổng quát bằng cách trước hết xấp xỉ nó bởi một đường gấp khúc (một đường gồm các đoạn thẳng nối tiếp nhau), rồi lấy giới hạn khi số đoạn của đường gấp khúc tăng lên. Quá trình này quen thuộc trong trường hợp đường tròn: chu vi đường tròn là giới hạn độ dài của các đa giác nội tiếp (xem Hình 2).
+\fig[.43]{fig02}{Hình 2. Các đa giác nội tiếp xấp xỉ đường tròn.}
+Giả sử đường cong $C$ được xác định bởi phương trình $y=f(x)$, trong đó $f$ liên tục và $a\le x\le b$. Ta có một xấp xỉ bằng đường gấp khúc cho $C$ bằng cách chia khoảng $[a,b]$ thành $n$ khoảng con có các đầu mút $x_0,x_1,\ldots,x_n$ và cùng độ rộng $\Delta x$. Nếu $y_i=f(x_i)$ thì điểm $P_i(x_i,y_i)$ nằm trên $C$, và đường gấp khúc có các đỉnh $P_0,P_1,\ldots,P_n$, minh họa ở Hình 3, là một xấp xỉ cho $C$.
+\fig[.62]{fig03}{Hình 3. Xấp xỉ đường cong $C$ bằng một đường gấp khúc.}
+\Needspace{11\baselineskip}
+Độ dài $L$ của $C$ xấp xỉ độ dài đường gấp khúc này, và xấp xỉ càng tốt khi $n$ tăng. (Xem Hình 4: cung giữa $P_{i-1}$ và $P_i$ được phóng to, và các xấp xỉ ứng với những giá trị $\Delta x$ nhỏ dần được biểu diễn.) Vì vậy, ta định nghĩa độ dài $L$ của đường cong $C$ có phương trình $y=f(x)$, $a\le x\le b$, là giới hạn độ dài của các đường gấp khúc xấp xỉ này (nếu giới hạn tồn tại):
+\[L=\lim_{n\to\infty}\sum_{i=1}^n|P_{i-1}P_i|.\tag{1}\]
+Trong đó $|P_{i-1}P_i|$ là khoảng cách giữa hai điểm $P_{i-1}$ và $P_i$.
+\fig[.38]{fig04}{Hình 4. Các xấp xỉ tốt dần khi chia nhỏ cung.}
+Chú ý rằng quy trình định nghĩa độ dài cung rất giống quy trình đã dùng để định nghĩa diện tích và thể tích: chia đường cong thành nhiều phần nhỏ; tìm độ dài gần đúng của các phần nhỏ rồi cộng lại; cuối cùng lấy giới hạn khi $n\to\infty$.
+
+Định nghĩa độ dài cung ở Phương trình 1 không thuận tiện cho tính toán, nhưng ta có thể suy ra một công thức tích phân cho $L$ khi $f$ có đạo hàm liên tục. [Hàm $f$ như vậy được gọi là \textit{trơn}, vì một thay đổi nhỏ của $x$ tạo ra một thay đổi nhỏ của $f'(x)$.]
+
+Đặt $\Delta y_i=y_i-y_{i-1}$, khi đó
+\[|P_{i-1}P_i|=\sqrt{(x_i-x_{i-1})^2+(y_i-y_{i-1})^2}=\sqrt{(\Delta x)^2+(\Delta y_i)^2}.\]
+Áp dụng Định lý giá trị trung bình cho $f$ trên $[x_{i-1},x_i]$, tồn tại một số $x_i^*$ giữa $x_{i-1}$ và $x_i$ sao cho
+\[f(x_i)-f(x_{i-1})=f'(x_i^*)(x_i-x_{i-1}),\]
+tức là $\Delta y_i=f'(x_i^*)\Delta x$. Do đó,
+\[|P_{i-1}P_i|=\sqrt{(\Delta x)^2+[f'(x_i^*)\Delta x]^2}\]
+\[=\sqrt{1+[f'(x_i^*)]^2}\sqrt{(\Delta x)^2}=\sqrt{1+[f'(x_i^*)]^2}\,\Delta x\qquad(\Delta x>0).\]
+Vì vậy, theo Định nghĩa 1,
+\[L=\lim_{n\to\infty}\sum_{i=1}^n|P_{i-1}P_i|=\lim_{n\to\infty}\sum_{i=1}^n\sqrt{1+[f'(x_i^*)]^2}\,\Delta x.\]
+Theo định nghĩa tích phân xác định, ta nhận ra biểu thức này bằng
+\[\int_a^b\sqrt{1+[f'(x)]^2}\,dx.\]
+Tích phân này tồn tại vì hàm $g(x)=\sqrt{1+[f'(x)]^2}$ liên tục. Như vậy, ta đã chứng minh định lý sau.
+\subsection*{2. Công thức độ dài cung}
+Nếu $f'$ liên tục trên $[a,b]$ thì độ dài đường cong $y=f(x)$, $a\le x\le b$, là
+\[L=\int_a^b\sqrt{1+[f'(x)]^2}\,dx.\tag{2}\]
+Dùng ký hiệu Leibniz cho đạo hàm, ta có thể viết công thức độ dài cung dưới dạng
+\[L=\int_a^b\sqrt{1+\left(\frac{dy}{dx}\right)^2}\,dx.\tag{3}\]
+\ex{1} Tìm độ dài cung của parabol bán lập phương $y^2=x^3$ giữa hai điểm $(1,1)$ và $(4,8)$ (xem Hình 5).
+\fig[.38]{fig05}{Hình 5. Cung của đường cong $y^2=x^3$.}
+\sol Với nửa trên của đường cong, ta có $y=x^{3/2}$ và $dy/dx=\frac32x^{1/2}$, nên công thức độ dài cung cho
+\[L=\int_1^4\sqrt{1+\left(\frac{dy}{dx}\right)^2}\,dx=\int_1^4\sqrt{1+\frac94x}\,dx.\]
+Đổi biến $u=1+\frac94x$, khi đó $du=\frac94dx$. Khi $x=1$ thì $u=13/4$; khi $x=4$ thì $u=10$. Do đó,
+\[L=\frac49\int_{13/4}^{10}\sqrt{u}\,du=\frac49\left[\frac23u^{3/2}\right]_{13/4}^{10}\]
+\[=\frac8{27}\left[10^{3/2}-\left(\frac{13}4\right)^{3/2}\right]=\frac1{27}(80\sqrt{10}-13\sqrt{13}).\]
+Để kiểm tra kết quả Ví dụ 1, từ Hình 5 ta thấy độ dài cung phải lớn hơn một chút so với khoảng cách từ $(1,1)$ đến $(4,8)$, là $\sqrt{58}\approx7.615773$. Theo tính toán,
+\[L=\frac1{27}(80\sqrt{10}-13\sqrt{13})\approx7.633705.\]
+Đúng như dự đoán, giá trị này lớn hơn một chút so với độ dài đoạn thẳng.
+
+Nếu đường cong có phương trình $x=g(y)$, $c\le y\le d$, và $g'(y)$ liên tục thì đổi vai trò $x$ và $y$ trong Công thức 2 hoặc Phương trình 3, ta được
+\[L=\int_c^d\sqrt{1+[g'(y)]^2}\,dy=\int_c^d\sqrt{1+\left(\frac{dx}{dy}\right)^2}\,dy.\tag{4}\]
+\ex{2} Tìm độ dài cung parabol $y^2=x$ từ $(0,0)$ đến $(1,1)$.
+\sol Vì $x=y^2$ nên $dx/dy=2y$, và Công thức 4 cho
+\[L=\int_0^1\sqrt{1+\left(\frac{dx}{dy}\right)^2}\,dy=\int_0^1\sqrt{1+4y^2}\,dy.\]
+Dùng phép thế lượng giác $y=\frac12\tan\theta$, ta có $dy=\frac12\sec^2\theta\,d\theta$ và $\sqrt{1+4y^2}=\sqrt{1+\tan^2\theta}=\sec\theta$. Khi $y=0$ thì $\tan\theta=0$, nên $\theta=0$; khi $y=1$ thì $\tan\theta=2$, đặt $\theta=\tan^{-1}2=\alpha$. Khi đó,
+\[L=\int_0^\alpha\sec\theta\cdot\frac12\sec^2\theta\,d\theta=\frac12\int_0^\alpha\sec^3\theta\,d\theta\]
+\[=\frac12\cdot\frac12[\sec\theta\tan\theta+\ln|\sec\theta+\tan\theta|]_0^\alpha\]
+\[=\frac14(\sec\alpha\tan\alpha+\ln|\sec\alpha+\tan\alpha|)\qquad\text{(theo Ví dụ 7.2.8).}\]
+(Ta cũng có thể dùng công thức ở mục 21 của Bảng tích phân.) Vì $\tan\alpha=2$ nên $\sec^2\alpha=1+\tan^2\alpha=5$, do đó $\sec\alpha=\sqrt5$ và
+\[L=\frac{\sqrt5}2+\frac{\ln(\sqrt5+2)}4.\]
+\fig[.38]{fig06}{Hình 6. Cung parabol và các đường gấp khúc xấp xỉ.}
+Hình 6 biểu diễn cung parabol có độ dài được tính trong Ví dụ 2, cùng các đường gấp khúc xấp xỉ lần lượt gồm $n=1$ và $n=2$ đoạn thẳng. Với $n=1$, độ dài gần đúng là $L_1=\sqrt2$, đường chéo của một hình vuông. Bảng sau cho các xấp xỉ $L_n$ khi chia $[0,1]$ thành $n$ khoảng con bằng nhau.
+\begin{center}\begin{tabular}{rr}\toprule $n$&$L_n$\\\midrule 1&1.414\\2&1.445\\4&1.464\\8&1.472\\16&1.476\\32&1.478\\64&1.479\\\bottomrule\end{tabular}\end{center}
+Mỗi lần tăng gấp đôi số cạnh của đường gấp khúc xấp xỉ, ta tiến gần hơn đến độ dài chính xác,
+\[L=\frac{\sqrt5}2+\frac{\ln(\sqrt5+2)}4\approx1.478943.\]
+Do dấu căn bậc hai trong các Công thức 2 và 4, việc tính độ dài cung thường dẫn đến tích phân rất khó, hoặc thậm chí không thể tính được dưới dạng tường minh. Vì thế, đôi khi ta phải chấp nhận tìm một giá trị gần đúng cho độ dài đường cong, như ví dụ sau.
+\ex{3} (a) Lập tích phân biểu diễn độ dài cung hyperbol $xy=1$ từ $(1,1)$ đến $(2,\frac12)$.
+
+(b) Dùng quy tắc Simpson với $n=10$ để ước lượng độ dài cung.
+\sol (a) Ta có $y=1/x$, $dy/dx=-1/x^2$, nên độ dài cung là
+\[L=\int_1^2\sqrt{1+\left(\frac{dy}{dx}\right)^2}\,dx=\int_1^2\sqrt{1+\frac1{x^4}}\,dx.\]
+(b) Dùng quy tắc Simpson (xem Mục 7.7) với $a=1$, $b=2$, $n=10$, $\Delta x=0.1$ và $f(x)=\sqrt{1+1/x^4}$, ta có
+\[L=\int_1^2\sqrt{1+\frac1{x^4}}\,dx\]
+\[\approx\frac{\Delta x}3[f(1)+4f(1.1)+2f(1.2)+4f(1.3)+\cdots+2f(1.8)+4f(1.9)+f(2)]\]
+\[\approx1.1321.\]
+Dùng máy tính để tính số tích phân xác định, ta được $1.1320904$. Như vậy, xấp xỉ bằng quy tắc Simpson chính xác đến bốn chữ số thập phân.
+\subsection*{Hàm độ dài cung}
+Sẽ hữu ích nếu có một hàm đo độ dài cung của đường cong từ một điểm xuất phát cụ thể đến bất kỳ điểm nào khác trên đường cong. Vì vậy, nếu đường cong trơn $C$ có phương trình $y=f(x)$, $a\le x\le b$, gọi $s(x)$ là khoảng cách dọc theo $C$ từ điểm đầu $P_0(a,f(a))$ đến $Q(x,f(x))$. Khi đó $s$ là một hàm, gọi là \textit{hàm độ dài cung}, và theo Công thức 2,
+\[s(x)=\int_a^x\sqrt{1+[f'(t)]^2}\,dt.\tag{5}\]
+(Ta thay biến tích phân bằng $t$ để $x$ không mang hai ý nghĩa.) Dùng Phần 1 của Định lý cơ bản của giải tích để lấy đạo hàm Phương trình 5 (vì hàm dưới dấu tích phân liên tục), ta được
+\[\frac{ds}{dx}=\sqrt{1+[f'(x)]^2}=\sqrt{1+\left(\frac{dy}{dx}\right)^2}.\tag{6}\]
+Phương trình 6 cho thấy tốc độ biến thiên của $s$ theo $x$ luôn ít nhất bằng 1, và bằng 1 khi $f'(x)$, hệ số góc của đường cong, bằng 0. Vi phân độ dài cung là
+\[ds=\sqrt{1+\left(\frac{dy}{dx}\right)^2}\,dx,\tag{7}\]
+và đôi khi phương trình này được viết dưới dạng đối xứng
+\[(ds)^2=(dx)^2+(dy)^2.\tag{8}\]
+\fig[.44]{fig07}{Hình 7. Diễn giải hình học của Phương trình 8.}
+Diễn giải hình học của Phương trình 8 được biểu diễn ở Hình 7. Có thể dùng hình này để ghi nhớ cả hai Công thức 3 và 4. Nếu viết $L=\int ds$, thì từ Phương trình 8, ta có thể giải để được (7), từ đó được (3); hoặc giải để được
+\[ds=\sqrt{1+\left(\frac{dx}{dy}\right)^2}\,dy,\tag{9}\]
+từ đó được (4).
+\ex{4} Tìm hàm độ dài cung của đường cong $y=x^2-\frac18\ln x$, lấy $P_0(1,1)$ làm điểm xuất phát.
+\sol Nếu $f(x)=x^2-\frac18\ln x$ thì
+\[f'(x)=2x-\frac1{8x},\]
+\[1+[f'(x)]^2=1+\left(2x-\frac1{8x}\right)^2=1+4x^2-\frac12+\frac1{64x^2}\]
+\[=4x^2+\frac12+\frac1{64x^2}=\left(2x+\frac1{8x}\right)^2,\]
+\[\sqrt{1+[f'(x)]^2}=2x+\frac1{8x}\qquad(x>0).\]
+Vì vậy, hàm độ dài cung là
+\[s(x)=\int_1^x\sqrt{1+[f'(t)]^2}\,dt=\int_1^x\left(2t+\frac1{8t}\right)\,dt\]
+\[=\left[t^2+\frac18\ln t\right]_1^x=x^2+\frac18\ln x-1.\]
+Chẳng hạn, độ dài cung dọc theo đường cong từ $(1,1)$ đến $(3,f(3))$ là
+\[s(3)=3^2+\frac18\ln3-1=8+\frac{\ln3}8\approx8.1373.\]
+\fig[.38]{fig08}{Hình 8. Diễn giải hàm độ dài cung trong Ví dụ 4.}
+
+\section*{8.1 — Bài tập}
+\bt{1} Dùng công thức độ dài cung (3) để tìm độ dài đường cong $y=3-2x$, $-1\le x\le3$. Kiểm tra kết quả bằng cách nhận xét rằng đường cong là một đoạn thẳng và tính độ dài bằng công thức khoảng cách.
+\fig[.32]{ex01}{Bài 1. Đoạn thẳng $y=3-2x$.}
+\bt{2} Dùng công thức độ dài cung để tìm độ dài đường cong $y=\sqrt{4-x^2}$, $0\le x\le2$. Kiểm tra kết quả bằng cách nhận xét rằng đường cong là một phần của đường tròn.
+\fig[.32]{ex02}{Bài 2. Cung tròn $y=\sqrt{4-x^2}$.}
+\group{3–8} Lập một tích phân biểu diễn độ dài đường cong, nhưng không tính tích phân.
+
+\bt{3} $y=x^3,\quad0\le x\le2$.
+
+\bt{4} $y=e^x,\quad1\le x\le3$.
+
+\bt{5} $y=x-\ln x,\quad1\le x\le4$.
+
+\bt{6} $x=y^2+y,\quad0\le y\le3$.
+
+\bt{7} $x=\sin y,\quad0\le y\le\pi/2$.
+
+\bt{8} $y^2=\ln x,\quad-1\le y\le1$.
+
+\group{9–24} Tìm độ dài chính xác của đường cong.
+
+\bt{9} $y=\frac23x^{3/2},\quad0\le x\le2$.
+
+\bt{10} $y=(x+4)^{3/2},\quad0\le x\le4$.
+
+\bt{11} $y=\frac23(1+x^2)^{3/2},\quad0\le x\le1$.
+
+\bt{12} $36y^2=(x^2-4)^3,\quad2\le x\le3,\quad y\ge0$.
+
+\bt{13} $y=\frac{x^3}3+\frac1{4x},\quad1\le x\le2$.
+
+\bt{14} $x=\frac{y^4}8+\frac1{4y^2},\quad1\le y\le2$.
+
+\bt{15} $y=\frac12\ln(\sin2x),\quad\pi/8\le x\le\pi/6$.
+
+\bt{16} $y=\ln(\cos x),\quad0\le x\le\pi/3$.
+
+\bt{17} $y=\ln(\sec x),\quad0\le x\le\pi/4$.
+
+\bt{18} $x=e^y+\frac14e^{-y},\quad0\le y\le1$.
+
+\bt{19} $x=\frac13\sqrt{y}(y-3),\quad1\le y\le9$.
+
+\bt{20} $y=3+\frac12\cosh2x,\quad0\le x\le1$.
+
+\bt{21} $y=\frac14x^2-\frac12\ln x,\quad1\le x\le2$.
+
+\bt{22} $y=\sqrt{x-x^2}+\sin^{-1}(\sqrt{x})$.
+
+\bt{23} $y=\ln(1-x^2),\quad0\le x\le\frac12$.
+
+\bt{24} $y=1-e^{-x},\quad0\le x\le2$.
+
+\group{25–26} Tìm độ dài cung của đường cong từ điểm $P$ đến điểm $Q$.
+\bt{25} $y=\frac12x^2$, $P(-1,\frac12)$, $Q(1,\frac12)$.
+\bt{26} $x^2=(y-4)^3$, $P(1,5)$, $Q(8,8)$.
+\group{27–32} [Công nghệ] Vẽ đồ thị đường cong và ước lượng trực quan độ dài của nó. Sau đó tính độ dài chính xác đến bốn chữ số thập phân.
+
+\bt{27} $y=x^2+x^3,\quad1\le x\le2$.
+
+\bt{28} $y=x+\cos x,\quad0\le x\le\pi/2$.
+
+\bt{29} $y=\sqrt[3]x,\quad1\le x\le4$.
+
+\bt{30} $y=x\tan x,\quad0\le x\le1$.
+
+\bt{31} $y=xe^{-x},\quad1\le x\le2$.
+
+\bt{32} $y=\ln(x^2+4),\quad-2\le x\le2$.
+
+\group{33–34} Dùng quy tắc Simpson với $n=10$ để ước lượng độ dài cung của đường cong. So sánh kết quả với giá trị tích phân tính bằng máy tính cầm tay hoặc máy tính.
+\bt{33} $y=x\sin x$, $0\le x\le2\pi$.
+\bt{34} $y=e^{-x^2}$, $0\le x\le2$.
+\bt{35} [Đồ thị; Công nghệ]
+
+(a) Vẽ đồ thị $y=x\sqrt[3]{4-x}$, $0\le x\le4$.
+
+(b) Tính độ dài các đường gấp khúc xấp xỉ gồm $n=1,2,4$ đoạn. (Chia khoảng thành các khoảng con bằng nhau.) Minh họa bằng cách phác họa đường cong và các đường gấp khúc này (như Hình 6).
+
+(c) Lập một tích phân biểu diễn độ dài đường cong.
+
+(d) Tính độ dài đường cong đến bốn chữ số thập phân. So sánh với các xấp xỉ ở phần (b).
+\bt{36} [Đồ thị] Làm lại Bài 35 cho đường cong $y=x+\sin x$, $0\le x\le2\pi$.
+\bt{37} [Công nghệ] Dùng máy tính hoặc bảng tích phân để tìm độ dài chính xác của cung đường cong $y=e^x$ nằm giữa hai điểm $(0,1)$ và $(2,e^2)$.
+\bt{38} [Công nghệ] Dùng máy tính hoặc bảng tích phân để tìm độ dài chính xác của cung đường cong $y=x^{4/3}$ nằm giữa hai điểm $(0,0)$ và $(1,1)$. Nếu phần mềm gặp khó khăn khi tính tích phân, hãy thực hiện một phép đổi biến để chuyển tích phân thành dạng mà phần mềm có thể tính được.
+\bt{39} Tìm độ dài đường astroid $x^{2/3}+y^{2/3}=1$.
+\fig[.37]{ex39}{Bài 39. Đường astroid $x^{2/3}+y^{2/3}=1$.}
+\bt{40} (a) Phác họa đường cong $y^3=x^2$.
+
+(b) Dùng các Công thức 3 và 4 để lập hai tích phân biểu diễn độ dài cung từ $(0,0)$ đến $(1,1)$. Nhận xét rằng một trong hai là tích phân suy rộng và tính cả hai tích phân.
+
+(c) Tìm độ dài cung của đường cong này từ $(-1,1)$ đến $(8,4)$.
+\bt{41} Tìm hàm độ dài cung của đường cong $y=2x^{3/2}$ với điểm xuất phát $P_0(1,2)$.
+\bt{42} (a) Tìm hàm độ dài cung của đường cong $y=\ln(\sin x)$, $0<x<\pi$, với điểm xuất phát $(\pi/2,0)$.
+
+(b) [Đồ thị] Vẽ cả đường cong lẫn hàm độ dài cung trên cùng một màn hình. Vì sao hàm độ dài cung âm khi $x$ nhỏ hơn $\pi/2$?
+\bt{43} Tìm hàm độ dài cung của đường cong $y=\sin^{-1}x+\sqrt{1-x^2}$ với điểm xuất phát $(0,1)$.
+\bt{44} Hàm độ dài cung của một đường cong $y=f(x)$, trong đó $f$ là hàm tăng, là $s(x)=\int_0^x\sqrt{3t+5}\,dt$.
+
+(a) Nếu đồ thị $f$ cắt trục $y$ tại tung độ 2, hãy tìm một phương trình của $f$.
+
+(b) Điểm nào trên đồ thị $f$ cách giao điểm với trục $y$ một đoạn dài 3 đơn vị dọc theo đường cong? Làm tròn kết quả đến 3 chữ số thập phân.
+\bt{45} Một con diều hâu đang bay với tốc độ 15 m/s ở độ cao 180 m vô tình làm rơi con mồi. Quỹ đạo parabol của con mồi rơi được mô tả bởi phương trình
+\[y=180-\frac{x^2}{45}\]
+cho đến khi chạm đất, trong đó $y$ là độ cao so với mặt đất và $x$ là quãng đường theo phương ngang, tính bằng mét. Tính quãng đường con mồi đi được từ lúc rơi đến khi chạm đất. Cho kết quả chính xác đến một phần mười mét.
+\bt{46} Một luồng gió đều thổi một chiếc diều về chính tây. Độ cao của diều so với mặt đất, từ vị trí ngang $x=0$ đến $x=80$ ft, được cho bởi $y=150-\frac1{40}(x-50)^2$. Tìm quãng đường diều đã đi.
+\bt{47} [Công nghệ] Một nhà sản xuất tấm lợp kim loại dạng sóng muốn tạo các tấm rộng 28 inch và cao 2 inch bằng cách gia công các tấm kim loại phẳng như hình. Mặt cắt của tấm lợp có dạng sóng sin. Kiểm chứng rằng đường sin có phương trình $y=\sin(\pi x/7)$ và tìm chiều rộng $w$ của tấm kim loại phẳng cần dùng để tạo một tấm lợp rộng 28 inch. (Tính số tích phân chính xác đến bốn chữ số có nghĩa.)
+\fig[.74]{ex47}{Bài 47. Tấm kim loại phẳng rộng $w$ và tấm lợp dạng sóng rộng 28 inch, cao 2 inch.}
+\group{48–50 — Đường dây xích} Một sợi xích (hoặc dây cáp) có mật độ đồng đều, được treo giữa hai điểm như hình, có hình dạng một đường cong gọi là \textit{đường dây xích}, với phương trình $y=a\cosh(x/a)$. (Xem Dự án khám phá sau Mục 12.2.)
+\fig[.4]{catenary}{Đường dây xích $y=a\cosh(x/a)$.}
+\bt{48} (a) Tìm độ dài cung của đường dây xích $y=a\cosh(x/a)$ trên khoảng $[c,d]$.
+
+(b) Chứng minh rằng trên bất kỳ khoảng $[c,d]$ nào, tỉ số giữa diện tích dưới đường dây xích và độ dài cung của nó bằng $a$.
+\bt{49} Hình vẽ biểu diễn một dây điện thoại treo giữa hai cột tại $x=-25$ và $x=25$. Dây có dạng đường dây xích được mô tả bởi phương trình
+\[y=c+a\cosh\frac xa.\]
+Nếu chiều dài dây giữa hai cột là 51 ft và điểm thấp nhất của dây phải cách mặt đất 20 ft, thì phải gắn dây ở độ cao bao nhiêu trên mỗi cột?
+\fig[.46]{ex49}{Bài 49. Dây điện thoại treo giữa hai cột.}
+\bt{50} [Công nghệ] Nhà vật lý và kiến trúc sư người Anh Robert Hooke (1635–1703) là người đầu tiên nhận xét rằng hình dạng lý tưởng của một vòm tự đứng là một đường dây xích lật ngược. Hooke nhận xét: “Dây xích treo thế nào, vòm đứng thế ấy.” Gateway Arch tại St. Louis dựa trên hình dạng đường dây xích; đường cong trung tâm của vòm được mô hình hóa bởi phương trình
+\[y=211.49-20.96\cosh(0.03291765x),\]
+trong đó $x,y$ tính bằng mét và $|x|\le91.20$. Lập một tích phân biểu diễn độ dài vòm và tính số tích phân để ước lượng độ dài chính xác đến mét gần nhất.
+\bt{51} Với hàm $f(x)=\frac14e^x+e^{-x}$, chứng minh rằng độ dài cung trên bất kỳ khoảng nào có cùng giá trị với diện tích dưới đường cong.
+\bt{52} [Đồ thị] Các đường cong có phương trình $x^n+y^n=1$, $n=4,6,8,\ldots$, được gọi là \textit{các đường tròn béo}. Vẽ đồ thị với $n=2,4,6,8,10$ để thấy lý do. Lập một tích phân biểu diễn độ dài $L_{2k}$ của đường tròn béo với $n=2k$. Không tính tích phân, hãy nêu giá trị $\lim_{k\to\infty}L_{2k}$.
+\bt{53} Tìm độ dài đường cong
+\[y=\int_1^x\sqrt{t^3-1}\,dt,\qquad1\le x\le4.\]
+\section*{Dự án khám phá — Cuộc thi độ dài cung}
+Các đường cong trong hình đều là đồ thị của các hàm liên tục $f$ có những tính chất sau.
+
+1. $f(0)=0$ và $f(1)=0$.
+
+2. $f(x)\ge0$ với $0\le x\le1$.
+
+3. Diện tích dưới đồ thị $f$ từ 0 đến 1 bằng 1.
+
+Tuy nhiên, độ dài $L$ của các đường cong này đều khác nhau.
+\fig[1]{project}{Các đường cong lần lượt có độ dài $L\approx3.249$, $2.919$, $3.152$ và $3.213$.}
+Hãy tìm công thức cho hai hàm thỏa mãn các điều kiện 1, 2, 3 đã cho. (Đồ thị của bạn có thể tương tự những hình đã cho hoặc rất khác.) Sau đó tính độ dài cung của mỗi đồ thị. Bài dự thi thắng cuộc sẽ là bài có độ dài cung nhỏ nhất.
+
+\end{document}

@@ -1,0 +1,258 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage{fontspec}\setmainfont{Latin Modern Roman}\setsansfont{DejaVu Sans}
+\usepackage{amsmath,amssymb,graphicx,geometry,enumitem,needspace,longtable,booktabs,fancyhdr,hyperref}
+\geometry{left=28mm,right=23mm,top=24mm,bottom=24mm}
+\hypersetup{unicode=true,colorlinks=true,linkcolor=black,urlcolor=blue,pdftitle={Giải tích §8.5 — Xác suất}}
+\setlength{\parindent}{1.2em}\setlength{\parskip}{4pt}\setlength{\headheight}{16pt}
+\pagestyle{fancy}\fancyhf{}\fancyhead[L]{\small Chương 8. Các ứng dụng khác của tích phân}\fancyhead[R]{\small §8.5}\fancyfoot[C]{\thepage}
+\newcommand{\fig}[3][.68]{\begin{center}\begin{minipage}{\linewidth}\centering\includegraphics[width=#1\linewidth]{assets/#2.png}\\{\small #3}\end{minipage}\end{center}}
+\newcommand{\ex}[1]{\par\medskip\noindent\textbf{Ví dụ #1.}\ }
+\newcommand{\sol}{\par\nopagebreak[4]\noindent\textit{Lời giải.}\ }
+\newcommand{\bt}[1]{\par\smallskip\Needspace{5\baselineskip}\noindent\textbf{#1.}\ }
+\newcommand{\group}[1]{\par\Needspace{11\baselineskip}\medskip\noindent\textbf{#1}\par\nopagebreak[4]}
+\newcommand{\gint}[1]{\left[\!\left[#1\right]\!\right]}
+\allowdisplaybreaks[2]
+\DeclareMathOperator{\sech}{sech}
+\DeclareMathOperator{\csch}{csch}
+\DeclareMathOperator{\arccot}{arccot}
+
+\newcommand{\prj}[1]{\bt{#1}}
+
+\newcommand{\kn}[1]{\bt{#1}}
+\newcommand{\ds}[1]{\bt{#1}}
+\setlength{\emergencystretch}{1em}
+\widowpenalty=10000\clubpenalty=10000
+\begin{document}
+\section*{8.5 — Xác suất}
+\subsection*{Hàm mật độ xác suất}
+Giải tích có vai trò trong việc phân tích hành vi ngẫu nhiên. Giả sử ta xét mức cholesterol của một người được chọn ngẫu nhiên từ một nhóm tuổi, chiều cao của một phụ nữ trưởng thành được chọn ngẫu nhiên, hoặc tuổi thọ của một pin được chọn ngẫu nhiên thuộc một loại nhất định. Những đại lượng như vậy được gọi là \textbf{biến ngẫu nhiên liên tục}, vì giá trị của chúng thực sự trải trên một khoảng số thực, dù có thể chỉ được đo hoặc ghi lại đến số nguyên gần nhất. Ta có thể muốn biết xác suất mức cholesterol trong máu lớn hơn 250, xác suất chiều cao của một phụ nữ trưởng thành nằm giữa 60 và 70 inch, hoặc xác suất pin sắp mua dùng được từ 100 đến 200 giờ. Nếu $X$ biểu diễn tuổi thọ của loại pin đó, ta ký hiệu xác suất cuối cùng là
+\[P(100\le X\le200).\]
+Theo cách hiểu xác suất dựa trên tần suất, đây là tỉ lệ về lâu dài của tất cả các pin thuộc loại đã xét có tuổi thọ từ 100 đến 200 giờ. Vì biểu diễn một tỉ lệ, xác suất đương nhiên nằm giữa 0 và 1.
+
+Mỗi biến ngẫu nhiên liên tục $X$ có một \textbf{hàm mật độ xác suất} $f$. Điều này có nghĩa là xác suất $X$ nằm giữa $a$ và $b$ được tìm bằng cách lấy tích phân $f$ từ $a$ đến $b$:
+\[P(a\le X\le b)=\int_a^bf(x)\,dx.\tag{1}\]
+\textit{Chú ý.} Khi làm việc với hàm mật độ xác suất, ta luôn dùng các khoảng giá trị. Chẳng hạn, ta không dùng hàm mật độ để tìm xác suất $X$ bằng $a$.
+
+Ví dụ, Hình 1 cho đồ thị một mô hình hàm mật độ xác suất $f$ của biến ngẫu nhiên $X$ là chiều cao, tính bằng inch, của một phụ nữ trưởng thành tại Hoa Kỳ, theo dữ liệu của Khảo sát Sức khỏe Quốc gia. Xác suất chiều cao của một phụ nữ chọn ngẫu nhiên từ quần thể này nằm giữa 60 và 70 inch bằng diện tích dưới đồ thị $f$ từ 60 đến 70.
+\fig[.65]{fig01}{Hình 1. Hàm mật độ xác suất của chiều cao phụ nữ trưởng thành. Diện tích tô màu bằng xác suất chiều cao nằm giữa 60 và 70 inch.}
+Nói chung, hàm mật độ xác suất $f$ của biến ngẫu nhiên $X$ thỏa mãn $f(x)\ge0$ với mọi $x$. Vì xác suất được đo trên thang từ 0 đến 1, ta có
+\[\int_{-\infty}^{\infty}f(x)\,dx=1.\tag{2}\]
+\ex{1} Cho $f(x)=0.006x(10-x)$ khi $0\le x\le10$ và $f(x)=0$ với mọi giá trị $x$ khác.
+
+(a) Kiểm tra $f$ là một hàm mật độ xác suất.
+
+(b) Tìm $P(4\le X\le8)$.
+\sol (a) Với $0\le x\le10$, ta có $0.006x(10-x)\ge0$, nên $f(x)\ge0$ với mọi $x$. Cũng cần kiểm tra Phương trình 2:
+\[\int_{-\infty}^{\infty}f(x)\,dx=\int_{0}^{10}0.006x(10-x)\,dx=0.006\int_{0}^{10}(10x-x^2)\,dx\]
+\[=0.006\left[5x^2-\frac13x^3\right]_{0}^{10}=0.006\left(500-\frac{1000}{3}\right)=1.\]
+Vì vậy $f$ là một hàm mật độ xác suất.
+
+(b) Xác suất $X$ nằm giữa 4 và 8 là
+\[P(4\le X\le8)=\int_{4}^{8}f(x)\,dx=0.006\int_{4}^{8}(10x-x^2)\,dx\]
+\[=0.006\left[5x^2-\frac13x^3\right]_{4}^{8}=0.544.\]
+\ex{2} Các hiện tượng như thời gian chờ đợi và thời gian đến khi thiết bị hỏng thường được mô hình hóa bằng các hàm mật độ xác suất giảm theo hàm mũ. Tìm dạng chính xác của một hàm như vậy.
+\sol Hãy xem biến ngẫu nhiên là thời gian bạn phải chờ trước khi nhân viên dịch vụ khách hàng trả lời điện thoại. Vì thế, thay cho $x$, ta dùng $t$ biểu diễn thời gian, tính bằng phút. Nếu $f$ là hàm mật độ xác suất và bạn gọi lúc $t=0$, thì theo Định nghĩa 1, $\int_{0}^{2}f(t)\,dt$ là xác suất nhân viên trả lời trong hai phút đầu, còn $\int_{4}^{5}f(t)\,dt$ là xác suất cuộc gọi được trả lời trong phút thứ năm.
+
+Rõ ràng $f(t)=0$ khi $t<0$, vì nhân viên không thể trả lời trước khi bạn gọi. Với $t\ge0$, ta được yêu cầu dùng một hàm giảm theo hàm mũ, tức hàm dạng $f(t)=Ae^{-ct}$, với $A,c$ là các hằng số dương. Do đó,
+\[f(t)=\begin{cases}0&\text{khi }t<0,\\Ae^{-ct}&\text{khi }t\ge0.\end{cases}\]
+Dùng Phương trình 2 để xác định $A$:
+\[1=\int_{-\infty}^{\infty}f(t)\,dt=\int_{-\infty}^{0}f(t)\,dt+\int_{0}^{\infty}f(t)\,dt\]
+\[1=\int_{0}^{\infty}Ae^{-ct}\,dt=\lim_{x\to\infty}\int_{0}^{x}Ae^{-ct}\,dt\]
+\[1=\lim_{x\to\infty}\left[-\frac Ac e^{-ct}\right]_{0}^{x}=\lim_{x\to\infty}\frac Ac(1-e^{-cx})=\frac Ac.\]
+Vì vậy $A/c=1$, suy ra $A=c$. Do đó mọi \textbf{hàm mật độ mũ} đều có dạng
+\[f(t)=\begin{cases}0&\text{khi }t<0,\\ce^{-ct}&\text{khi }t\ge0.\end{cases}\]
+Một đồ thị điển hình được cho trong Hình 2.
+\fig[.44]{fig02}{Hình 2. Một hàm mật độ mũ.}
+\subsection*{Giá trị trung bình}
+Giả sử bạn đang chờ một công ty trả lời điện thoại và muốn biết, trung bình, phải chờ bao lâu. Gọi $f(t)$ là hàm mật độ tương ứng, $t$ tính bằng phút, và xét một mẫu gồm $N$ người đã gọi cho công ty. Rất có thể không ai phải chờ quá một giờ, nên ta giới hạn sự chú ý vào $0\le t\le60$. Chia khoảng này thành $n$ khoảng con dài $\Delta t$, có các đầu mút $0,t_1,t_2,\ldots,t_n=60$. (Có thể hình dung $\Delta t$ là một phút, nửa phút, 10 giây, hoặc thậm chí một giây.) Xác suất cuộc gọi được trả lời trong thời gian từ $t_{i-1}$ đến $t_i$ là diện tích dưới $y=f(t)$ từ $t_{i-1}$ đến $t_i$, xấp xỉ bằng $f(\bar t_i)\Delta t$. Đây là diện tích hình chữ nhật xấp xỉ trong Hình 3, với $\bar t_i$ là trung điểm khoảng con.
+\fig[.42]{fig03}{Hình 3. Xấp xỉ xác suất bằng diện tích hình chữ nhật tại trung điểm $\bar t_i$.}
+Vì tỉ lệ về lâu dài của các cuộc gọi được trả lời trong khoảng này là $f(\bar t_i)\Delta t$, trong mẫu $N$ người gọi, số cuộc gọi được trả lời trong khoảng đó dự kiến xấp xỉ $Nf(\bar t_i)\Delta t$, và mỗi người chờ khoảng $\bar t_i$. Vì vậy tổng thời gian họ chờ xấp xỉ tích $\bar t_i[Nf(\bar t_i)\Delta t]$. Cộng trên mọi khoảng con, ta được tổng thời gian chờ gần đúng của tất cả mọi người:
+\[\sum_{i=1}^nN\bar t_i f(\bar t_i)\Delta t.\]
+Chia cho số người gọi $N$, ta được thời gian chờ trung bình gần đúng:
+\[\sum_{i=1}^n\bar t_i f(\bar t_i)\Delta t.\]
+Đây là tổng Riemann của $tf(t)$. Khi khoảng thời gian thu nhỏ, tức $\Delta t\to0$ và $n\to\infty$, tổng Riemann tiến tới
+\[\int_{0}^{60}tf(t)\,dt.\]
+Tích phân này được gọi là thời gian chờ trung bình.
+
+Nói chung, \textbf{giá trị trung bình}, hay \textbf{kỳ vọng}, của một hàm mật độ xác suất $f$ được định nghĩa là
+\[\mu=\int_{-\infty}^{\infty}xf(x)\,dx.\]
+Có thể hiểu kỳ vọng là giá trị trung bình về lâu dài của biến ngẫu nhiên $X$, cũng là một đại lượng đo vị trí trung tâm của hàm mật độ xác suất. Theo truyền thống, kỳ vọng được ký hiệu bằng chữ Hy Lạp $\mu$ (mu).
+
+Biểu thức kỳ vọng giống một tích phân đã gặp. Nếu $\mathcal R$ là miền dưới đồ thị $f$, từ Công thức 8.3.8, hoành độ trọng tâm hình học của $\mathcal R$ là
+\[\bar x=\frac{\int_{-\infty}^{\infty}xf(x)\,dx}{\int_{-\infty}^{\infty}f(x)\,dx}=\int_{-\infty}^{\infty}xf(x)\,dx=\mu,\]
+do Phương trình 2. Vì vậy một tấm mỏng có dạng $\mathcal R$ cân bằng tại một điểm trên đường thẳng đứng $x=\mu$ (xem Hình 4).
+\fig[.44]{fig04}{Hình 4. Miền $\mathcal R$ cân bằng tại một điểm trên đường thẳng $x=\mu$.}
+\ex{3} Tìm kỳ vọng của phân phối mũ trong Ví dụ 2:
+\[f(t)=\begin{cases}0&\text{khi }t<0,\\ce^{-ct}&\text{khi }t\ge0.\end{cases}\]
+\sol Theo định nghĩa kỳ vọng,
+\[\mu=\int_{-\infty}^{\infty}tf(t)\,dt=\int_{0}^{\infty}tce^{-ct}\,dt.\]
+Để tính tích phân này, dùng tích phân từng phần với $u=t$, $dv=ce^{-ct}\,dt$, nên $du=dt$, $v=-e^{-ct}$:
+\[\int_{0}^{\infty}tce^{-ct}\,dt=\lim_{x\to\infty}\int_{0}^{x}tce^{-ct}\,dt\]
+\[=\lim_{x\to\infty}\left(\left[-te^{-ct}\right]_{0}^{x}+\int_{0}^{x}e^{-ct}\,dt\right)\]
+\[=\lim_{x\to\infty}\left(-xe^{-cx}+\frac1c-\frac{e^{-cx}}c\right)=\frac1c.\]
+Giới hạn của số hạng thứ nhất bằng 0 theo quy tắc l’Hospital.
+
+Kỳ vọng là $\mu=1/c$, nên có thể viết lại hàm mật độ xác suất thành
+\[f(t)=\begin{cases}0&\text{khi }t<0,\\\mu^{-1}e^{-t/\mu}&\text{khi }t\ge0.\end{cases}\]
+\ex{4} Giả sử thời gian chờ trung bình để cuộc gọi của khách hàng được nhân viên dịch vụ trả lời là năm phút.
+
+(a) Tìm xác suất một cuộc gọi được trả lời trong phút đầu, giả sử phân phối mũ là mô hình thích hợp.
+
+(b) Tìm xác suất khách hàng phải chờ quá năm phút trước khi cuộc gọi được trả lời.
+\sol (a) Kỳ vọng của phân phối mũ là $\mu=5$ phút; từ kết quả Ví dụ 3, hàm mật độ xác suất là
+\[f(t)=\begin{cases}0&\text{khi }t<0,\\0.2e^{-t/5}&\text{khi }t\ge0,\end{cases}\]
+trong đó $t$ tính bằng phút. Vì vậy xác suất cuộc gọi được trả lời trong phút đầu là
+\[P(0\le T\le1)=\int_{0}^{1}f(t)\,dt=\int_{0}^{1}0.2e^{-t/5}\,dt\]
+\[=\left[0.2(-5)e^{-t/5}\right]_{0}^{1}=1-e^{-1/5}\approx0.1813.\]
+Vậy khoảng $18\%$ cuộc gọi được trả lời trong phút đầu.
+
+(b) Xác suất khách hàng phải chờ quá năm phút là
+\[P(T>5)=\int_{5}^{\infty}f(t)\,dt=\int_{5}^{\infty}0.2e^{-t/5}\,dt\]
+\[=\lim_{x\to\infty}\int_{5}^{x}0.2e^{-t/5}\,dt=\lim_{x\to\infty}(e^{-1}-e^{-x/5})\]
+\[=\frac1e-0\approx0.368.\]
+Khoảng $37\%$ khách hàng phải chờ quá năm phút trước khi cuộc gọi được trả lời.
+
+Chú ý kết quả Ví dụ 4(b): dù thời gian chờ trung bình là 5 phút, chỉ $37\%$ người gọi phải chờ quá 5 phút. Nguyên nhân là một số người phải chờ lâu hơn rất nhiều, có thể 10 hoặc 15 phút, làm giá trị trung bình tăng lên.
+
+Một đại lượng khác đo vị trí trung tâm của hàm mật độ xác suất là \textbf{trung vị}: số $m$ sao cho một nửa số người có thời gian chờ nhỏ hơn $m$, nửa còn lại chờ lâu hơn $m$. Nói chung, trung vị của hàm mật độ xác suất là số $m$ thỏa mãn
+\[\int_m^{\infty}f(x)\,dx=\frac12.\]
+Điều này có nghĩa một nửa diện tích dưới đồ thị $f$ nằm bên phải $m$. Trong Bài tập 9, bạn được yêu cầu chứng minh trung vị thời gian chờ của công ty trong Ví dụ 4 xấp xỉ 3.5 phút.
+\subsection*{Phân phối chuẩn}
+Nhiều hiện tượng ngẫu nhiên quan trọng, như điểm kiểm tra năng lực, chiều cao và cân nặng của các cá nhân thuộc một quần thể đồng nhất, lượng mưa hằng năm tại một địa điểm, được mô hình hóa bằng \textbf{phân phối chuẩn}. Nghĩa là hàm mật độ xác suất của biến ngẫu nhiên $X$ thuộc họ hàm
+\[f(x)=\frac1{\sigma\sqrt{2\pi}}e^{-(x-\mu)^2/(2\sigma^2)}.\tag{3}\]
+Có thể kiểm tra kỳ vọng của hàm này là $\mu$. Hằng số dương $\sigma$ gọi là \textbf{độ lệch chuẩn}; nó đo mức độ phân tán của các giá trị $X$. Từ các đồ thị hình chuông trong Hình 5, ta thấy khi $\sigma$ nhỏ, các giá trị $X$ tập trung quanh kỳ vọng, còn khi $\sigma$ lớn, chúng phân tán hơn. Các nhà thống kê có phương pháp dùng tập dữ liệu để ước lượng $\mu,\sigma$. Độ lệch chuẩn được ký hiệu bằng chữ Hy Lạp viết thường $\sigma$ (sigma).
+\fig[.55]{fig05}{Hình 5. Các phân phối chuẩn có cùng kỳ vọng, với $\sigma=1/2$, $1$ và $2$.}
+Thừa số $1/(\sigma\sqrt{2\pi})$ cần thiết để $f$ là một hàm mật độ xác suất. Thật vậy, bằng phương pháp giải tích nhiều biến có thể kiểm tra (xem Bài tập 15.3.48) rằng
+\[\int_{-\infty}^{\infty}\frac1{\sigma\sqrt{2\pi}}e^{-(x-\mu)^2/(2\sigma^2)}\,dx=1.\]
+\ex{5} Điểm chỉ số thông minh (IQ) có phân phối chuẩn với kỳ vọng 100 và độ lệch chuẩn 15. Hình 6 cho hàm mật độ xác suất tương ứng.
+
+(a) Bao nhiêu phần trăm dân số có điểm IQ từ 85 đến 115?
+
+(b) Bao nhiêu phần trăm dân số có IQ trên 140?
+\fig[.44]{fig06}{Hình 6. Hàm mật độ xác suất của điểm IQ trong Ví dụ 5.}
+\sol (a) Vì điểm IQ có phân phối chuẩn, dùng hàm mật độ xác suất trong Phương trình 3 với $\mu=100$, $\sigma=15$:
+\[P(85\le X\le115)=\int_{85}^{115}\frac1{15\sqrt{2\pi}}e^{-(x-100)^2/(2\cdot15^2)}\,dx.\]
+Nhớ lại ở Mục 7.5, hàm $y=e^{-x^2}$ không có nguyên hàm sơ cấp, nên không thể tính tích phân này một cách chính xác bằng nguyên hàm sơ cấp. Tuy nhiên, ta có thể dùng chức năng tích phân số của máy tính cầm tay hoặc máy tính, hoặc quy tắc trung điểm hay Simpson, để ước lượng. Kết quả là
+\[P(85\le X\le115)\approx0.68.\]
+Vậy khoảng $68\%$ dân số có IQ từ 85 đến 115, tức cách kỳ vọng không quá một độ lệch chuẩn.
+
+(b) Xác suất IQ của một người chọn ngẫu nhiên lớn hơn 140 là
+\[P(X>140)=\int_{140}^{\infty}\frac1{15\sqrt{2\pi}}e^{-(x-100)^2/450}\,dx.\]
+Để tránh tích phân suy rộng, có thể xấp xỉ bằng tích phân từ 140 đến 200. (Có thể tin rằng người có IQ trên 200 cực kỳ hiếm.) Khi đó,
+\[P(X>140)\approx\int_{140}^{200}\frac1{15\sqrt{2\pi}}e^{-(x-100)^2/450}\,dx\approx0.0038.\]
+Vì vậy khoảng $0.4\%$ dân số có điểm IQ trên 140.
+
+\section*{8.5 — Bài tập}
+\bt{1} Gọi $f(x)$ là hàm mật độ xác suất của tuổi thọ loại lốp ô tô chất lượng cao nhất của một nhà sản xuất, với $x$ tính bằng dặm. Giải thích ý nghĩa từng tích phân.
+
+(a) $\displaystyle\int_{30\,000}^{40\,000}f(x)\,dx$.
+
+(b) $\displaystyle\int_{25\,000}^{\infty}f(x)\,dx$.
+\bt{2} Gọi $f(t)$ là hàm mật độ xác suất của thời gian bạn lái xe đến trường, với $t$ tính bằng phút. Biểu diễn các xác suất sau dưới dạng tích phân.
+
+(a) Xác suất bạn lái xe đến trường trong chưa đầy 15 phút.
+
+(b) Xác suất bạn mất hơn nửa giờ để đến trường.
+\bt{3} Cho $f(x)=30x^2(1-x)^2$ khi $0\le x\le1$ và $f(x)=0$ với mọi giá trị $x$ khác.
+
+(a) Kiểm tra $f$ là một hàm mật độ xác suất.
+
+(b) Tìm $P(X\le\tfrac13)$.
+\bt{4} Hàm mật độ
+\[f(x)=\frac{e^{3-x}}{(1+e^{3-x})^2}\]
+là một ví dụ về phân phối logistic.
+
+(a) Kiểm tra $f$ là một hàm mật độ xác suất.
+
+(b) Tìm $P(3\le X\le4)$.
+
+(c) [Công nghệ] Vẽ đồ thị $f$. Kỳ vọng có vẻ bằng bao nhiêu? Trung vị thì sao?
+\bt{5} Cho $f(x)=c/(1+x^2)$.
+
+(a) Với giá trị nào của $c$ thì $f$ là một hàm mật độ xác suất?
+
+(b) Với giá trị $c$ đó, tìm $P(-1<X<1)$.
+\bt{6} Cho $f(x)=k(3x-x^2)$ nếu $0\le x\le3$, và $f(x)=0$ nếu $x<0$ hoặc $x>3$.
+
+(a) Với giá trị nào của $k$ thì $f$ là một hàm mật độ xác suất?
+
+(b) Với giá trị $k$ đó, tìm $P(X>1)$.
+
+(c) Tìm kỳ vọng.
+\bt{7} Một vòng quay trong trò chơi bàn cờ chỉ ngẫu nhiên một số thực từ 0 đến 10. Vòng quay công bằng theo nghĩa xác suất chỉ một số thuộc một khoảng cho trước bằng xác suất chỉ một số thuộc bất kỳ khoảng nào khác có cùng độ dài.
+
+(a) Giải thích tại sao hàm
+\[f(x)=\begin{cases}0.1&\text{nếu }0\le x\le10,\\0&\text{nếu }x<0\text{ hoặc }x>10\end{cases}\]
+là hàm mật độ xác suất của các giá trị do vòng quay chỉ ra.
+
+(b) Trực giác cho bạn dự đoán kỳ vọng bằng bao nhiêu? Kiểm tra dự đoán bằng cách tính một tích phân.
+\bt{8} (a) Giải thích tại sao hàm có đồ thị đã cho là một hàm mật độ xác suất.
+
+(b) Dùng đồ thị tìm các xác suất: (i) $P(X<3)$; (ii) $P(3\le X\le8)$.
+
+(c) Tính kỳ vọng.
+\fig[.65]{ex08}{Bài 8.}
+\bt{9} Chứng minh trung vị thời gian chờ một cuộc gọi đến công ty trong Ví dụ 4 xấp xỉ 3.5 phút.
+\bt{10} (a) Một loại bóng đèn được ghi nhãn có tuổi thọ trung bình 1000 giờ. Có thể mô hình hóa xác suất hỏng của các bóng đèn này bằng hàm mật độ mũ có kỳ vọng $\mu=1000$. Dùng mô hình tìm xác suất một bóng đèn: (i) hỏng trong 200 giờ đầu; (ii) sáng được hơn 800 giờ.
+
+(b) Trung vị tuổi thọ của các bóng đèn này là bao nhiêu?
+\bt{11} Một nhà bán lẻ trực tuyến xác định thời gian trung bình để giao dịch thẻ tín dụng được phê duyệt điện tử là 1.6 giây.
+
+(a) Dùng hàm mật độ mũ tìm xác suất khách hàng chờ chưa đến một giây để được phê duyệt thẻ tín dụng.
+
+(b) Tìm xác suất khách hàng chờ hơn 3 giây.
+
+(c) Thời gian phê duyệt tối thiểu trong nhóm $5\%$ giao dịch chậm nhất là bao nhiêu?
+\bt{12} Thời gian từ khi nhiễm bệnh đến khi xuất hiện triệu chứng viêm họng do liên cầu là một biến ngẫu nhiên có hàm mật độ xác suất được xấp xỉ bởi $f(t)=\frac1{15\,676}t^2e^{-0.05t}$ nếu $0\le t\le150$, và $f(t)=0$ trong các trường hợp khác; $t$ tính bằng giờ.
+
+(a) Xác suất một bệnh nhân nhiễm bệnh xuất hiện triệu chứng trong 48 giờ đầu là bao nhiêu?
+
+(b) Xác suất một bệnh nhân nhiễm bệnh chỉ xuất hiện triệu chứng sau 36 giờ là bao nhiêu?
+
+\textit{Nguồn:} Phỏng theo P. Sartwell, “The Distribution of Incubation Periods of Infectious Disease”, \textit{American Journal of Epidemiology} 141 (1995): 386–94.
+\bt{13} Giấc ngủ REM là giai đoạn giấc ngủ có hoạt động mơ mạnh nhất. Trong một nghiên cứu, lượng giấc ngủ REM trong bốn giờ ngủ đầu được mô tả bởi biến ngẫu nhiên $T$ có hàm mật độ xác suất
+\[f(t)=\begin{cases}\frac1{1600}t&\text{nếu }0\le t\le40,\\\frac1{20}-\frac1{1600}t&\text{nếu }40<t\le80,\\0&\text{trong các trường hợp khác},\end{cases}\]
+trong đó $t$ tính bằng phút.
+
+(a) Xác suất lượng giấc ngủ REM nằm giữa 30 và 60 phút là bao nhiêu?
+
+(b) Tìm lượng giấc ngủ REM trung bình.
+\bt{14} Theo Khảo sát Sức khỏe Quốc gia, chiều cao nam giới trưởng thành ở Hoa Kỳ có phân phối chuẩn với kỳ vọng 69.0 inch và độ lệch chuẩn 2.8 inch.
+
+(a) Xác suất một nam giới trưởng thành được chọn ngẫu nhiên có chiều cao từ 65 đến 73 inch là bao nhiêu?
+
+(b) Bao nhiêu phần trăm nam giới trưởng thành cao hơn 6 feet?
+\bt{15} “Dự án Rác thải” tại Đại học Arizona báo cáo rằng lượng giấy các hộ gia đình thải bỏ mỗi tuần có phân phối chuẩn với kỳ vọng $9.4\,\mathrm{lb}$ và độ lệch chuẩn $4.2\,\mathrm{lb}$. Bao nhiêu phần trăm hộ gia đình thải bỏ ít nhất $10\,\mathrm{lb}$ giấy mỗi tuần?
+\bt{16} Các hộp được ghi nhãn chứa $500\,\mathrm g$ ngũ cốc. Máy đóng hộp tạo ra khối lượng có phân phối chuẩn với độ lệch chuẩn $12\,\mathrm g$.
+
+(a) Nếu khối lượng mục tiêu là $500\,\mathrm g$, xác suất máy tạo ra một hộp chứa dưới $480\,\mathrm g$ ngũ cốc là bao nhiêu?
+
+(b) Giả sử một quy định yêu cầu không quá $5\%$ số hộp ngũ cốc của nhà sản xuất được chứa ít hơn khối lượng ghi nhãn $500\,\mathrm g$. Nhà sản xuất nên đặt máy ở khối lượng mục tiêu nào?
+\bt{17} Tốc độ xe trên đường cao tốc có giới hạn tốc độ $100\,\mathrm{km/h}$ tuân theo phân phối chuẩn với kỳ vọng $112\,\mathrm{km/h}$ và độ lệch chuẩn $8\,\mathrm{km/h}$.
+
+(a) Xác suất một xe được chọn ngẫu nhiên đang chạy với tốc độ hợp lệ là bao nhiêu?
+
+(b) Nếu cảnh sát được chỉ thị xử phạt người lái xe chạy từ $125\,\mathrm{km/h}$ trở lên, bao nhiêu phần trăm người lái xe thuộc diện bị xử phạt?
+\bt{18} Chứng minh hàm mật độ xác suất của một biến ngẫu nhiên có phân phối chuẩn có các điểm uốn tại $x=\mu\pm\sigma$.
+\bt{19} Với một phân phối chuẩn bất kỳ, tìm xác suất biến ngẫu nhiên cách kỳ vọng không quá hai độ lệch chuẩn.
+\bt{20} Độ lệch chuẩn của một biến ngẫu nhiên có hàm mật độ xác suất $f$ và kỳ vọng $\mu$ được định nghĩa bởi
+\[\sigma=\left[\int_{-\infty}^{\infty}(x-\mu)^2f(x)\,dx\right]^{1/2}.\]
+Tìm độ lệch chuẩn của một hàm mật độ mũ có kỳ vọng $\mu$.
+\begingroup\small\bt{21} Nguyên tử hydro gồm một proton trong hạt nhân và một electron chuyển động quanh hạt nhân. Trong lý thuyết lượng tử về cấu trúc nguyên tử, người ta giả sử electron không chuyển động trên một quỹ đạo xác định rõ. Thay vào đó, nó ở một trạng thái gọi là orbital, có thể hình dung như một “đám mây” điện tích âm bao quanh hạt nhân. Ở trạng thái năng lượng thấp nhất, gọi là trạng thái cơ bản hay orbital $1s$, đám mây được giả sử có dạng hình cầu tâm tại hạt nhân. Hình cầu này được mô tả thông qua hàm mật độ xác suất
+\[p(r)=\frac4{a_0^3}r^2e^{-2r/a_0},\qquad r\ge0,\]
+trong đó $a_0$ là bán kính Bohr, $a_0\approx5.59\times10^{-11}\,\mathrm m$. Tích phân
+\[P(r)=\int_{0}^{r}\frac4{a_0^3}s^2e^{-2s/a_0}\,ds\]
+cho xác suất tìm thấy electron bên trong hình cầu bán kính $r$ mét, tâm tại hạt nhân.
+
+(a) Kiểm tra $p(r)$ là một hàm mật độ xác suất.
+
+(b) Tìm $\lim_{r\to\infty}p(r)$. Với giá trị $r$ nào thì $p(r)$ đạt giá trị lớn nhất?
+
+(c) [Công nghệ] Vẽ đồ thị hàm mật độ.
+
+(d) Tìm xác suất electron nằm trong hình cầu bán kính $4a_0$ tâm tại hạt nhân.
+
+(e) Tính khoảng cách trung bình của electron đến hạt nhân ở trạng thái cơ bản của nguyên tử hydro.
+
+\endgroup
+\end{document}

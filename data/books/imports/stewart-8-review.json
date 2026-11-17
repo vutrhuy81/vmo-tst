@@ -1,0 +1,17 @@
+{
+  "bookKey": "stewart-9",
+  "sectionKey": "8-review",
+  "title": "Ôn tập",
+  "contentFormat": "html-latex",
+  "content": "<h1 class=\"unnumbered\" id=\"ôn-tập-chương-8-các-ứng-dụng-khác-của-tích-phân\">Ôn tập Chương 8 — Các ứng dụng khác của tích phân</h1>\n<p>Ôn tập gồm 10 câu kiểm tra khái niệm, 8 câu đúng–sai và 23 bài tập. Mỗi câu được trình bày riêng bên dưới.</p>\n<h1>Bài tập</h1>\n",
+  "sourceInfo": {
+    "filename": "Stewart_Ch08_Review_VI.tex",
+    "sha256": "283af565f217862fc714ca44740073e2a9365e3cc7fe57804a21de190283aa95",
+    "assetCount": 3,
+    "conceptCheckCount": 10,
+    "trueFalseCount": 8,
+    "lastExercise": 23,
+    "interactiveQuestionCount": 41,
+    "note": "Toàn bộ nội dung TeX; 3 ảnh PNG nguyên bản từ gói có TeX khớp từng byte."
+  }
+}

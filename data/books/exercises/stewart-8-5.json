@@ -1,0 +1,88 @@
+{
+  "exercises": [
+    {
+      "number": 1,
+      "content": "<p><strong>1.</strong></p>\n<p>Gọi <span class=\"math inline\">\\(f(x)\\)</span> là hàm mật độ xác suất của tuổi thọ loại lốp ô tô chất lượng cao nhất của một nhà sản xuất, với <span class=\"math inline\">\\(x\\)</span> tính bằng dặm. Giải thích ý nghĩa từng tích phân.</p>\n<p>(a) <span class=\"math inline\">\\(\\displaystyle\\int_{30\\,000}^{40\\,000}f(x)\\,dx\\)</span>.</p>\n<p>(b) <span class=\"math inline\">\\(\\displaystyle\\int_{25\\,000}^{\\infty}f(x)\\,dx\\)</span>.</p>\n"
+    },
+    {
+      "number": 2,
+      "content": "<p><strong>2.</strong></p>\n<p>Gọi <span class=\"math inline\">\\(f(t)\\)</span> là hàm mật độ xác suất của thời gian bạn lái xe đến trường, với <span class=\"math inline\">\\(t\\)</span> tính bằng phút. Biểu diễn các xác suất sau dưới dạng tích phân.</p>\n<p>(a) Xác suất bạn lái xe đến trường trong chưa đầy 15 phút.</p>\n<p>(b) Xác suất bạn mất hơn nửa giờ để đến trường.</p>\n"
+    },
+    {
+      "number": 3,
+      "content": "<p><strong>3.</strong></p>\n<p>Cho <span class=\"math inline\">\\(f(x)=30x^2(1-x)^2\\)</span> khi <span class=\"math inline\">\\(0\\le x\\le1\\)</span> và <span class=\"math inline\">\\(f(x)=0\\)</span> với mọi giá trị <span class=\"math inline\">\\(x\\)</span> khác.</p>\n<p>(a) Kiểm tra <span class=\"math inline\">\\(f\\)</span> là một hàm mật độ xác suất.</p>\n<p>(b) Tìm <span class=\"math inline\">\\(P(X\\le\\tfrac13)\\)</span>.</p>\n"
+    },
+    {
+      "number": 4,
+      "content": "<p><strong>4.</strong></p>\n<p>Hàm mật độ <span class=\"math display\">\\[f(x)=\\frac{e^{3-x}}{(1+e^{3-x})^2}\\]</span> là một ví dụ về phân phối logistic.</p>\n<p>(a) Kiểm tra <span class=\"math inline\">\\(f\\)</span> là một hàm mật độ xác suất.</p>\n<p>(b) Tìm <span class=\"math inline\">\\(P(3\\le X\\le4)\\)</span>.</p>\n<p>(c) [Công nghệ] Vẽ đồ thị <span class=\"math inline\">\\(f\\)</span>. Kỳ vọng có vẻ bằng bao nhiêu? Trung vị thì sao?</p>\n"
+    },
+    {
+      "number": 5,
+      "content": "<p><strong>5.</strong></p>\n<p>Cho <span class=\"math inline\">\\(f(x)=c/(1+x^2)\\)</span>.</p>\n<p>(a) Với giá trị nào của <span class=\"math inline\">\\(c\\)</span> thì <span class=\"math inline\">\\(f\\)</span> là một hàm mật độ xác suất?</p>\n<p>(b) Với giá trị <span class=\"math inline\">\\(c\\)</span> đó, tìm <span class=\"math inline\">\\(P(-1&lt;X&lt;1)\\)</span>.</p>\n"
+    },
+    {
+      "number": 6,
+      "content": "<p><strong>6.</strong></p>\n<p>Cho <span class=\"math inline\">\\(f(x)=k(3x-x^2)\\)</span> nếu <span class=\"math inline\">\\(0\\le x\\le3\\)</span>, và <span class=\"math inline\">\\(f(x)=0\\)</span> nếu <span class=\"math inline\">\\(x&lt;0\\)</span> hoặc <span class=\"math inline\">\\(x&gt;3\\)</span>.</p>\n<p>(a) Với giá trị nào của <span class=\"math inline\">\\(k\\)</span> thì <span class=\"math inline\">\\(f\\)</span> là một hàm mật độ xác suất?</p>\n<p>(b) Với giá trị <span class=\"math inline\">\\(k\\)</span> đó, tìm <span class=\"math inline\">\\(P(X&gt;1)\\)</span>.</p>\n<p>(c) Tìm kỳ vọng.</p>\n"
+    },
+    {
+      "number": 7,
+      "content": "<p><strong>7.</strong></p>\n<p>Một vòng quay trong trò chơi bàn cờ chỉ ngẫu nhiên một số thực từ 0 đến 10. Vòng quay công bằng theo nghĩa xác suất chỉ một số thuộc một khoảng cho trước bằng xác suất chỉ một số thuộc bất kỳ khoảng nào khác có cùng độ dài.</p>\n<p>(a) Giải thích tại sao hàm <span class=\"math display\">\\[f(x)=\\begin{cases}0.1&amp;\\text{nếu }0\\le x\\le10,\\\\0&amp;\\text{nếu }x&lt;0\\text{ hoặc }x&gt;10\\end{cases}\\]</span> là hàm mật độ xác suất của các giá trị do vòng quay chỉ ra.</p>\n<p>(b) Trực giác cho bạn dự đoán kỳ vọng bằng bao nhiêu? Kiểm tra dự đoán bằng cách tính một tích phân.</p>\n"
+    },
+    {
+      "number": 8,
+      "content": "<p><strong>8.</strong></p>\n<p>(a) Giải thích tại sao hàm có đồ thị đã cho là một hàm mật độ xác suất.</p>\n<p>(b) Dùng đồ thị tìm các xác suất: (i) <span class=\"math inline\">\\(P(X&lt;3)\\)</span>; (ii) <span class=\"math inline\">\\(P(3\\le X\\le8)\\)</span>.</p>\n<p>(c) Tính kỳ vọng.</p>\n<div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-8-5-e68da953/ex08.png\" alt=\"image\" /><br />\nBài 8.</p>\n</div>\n"
+    },
+    {
+      "number": 9,
+      "content": "<p><strong>9.</strong></p>\n<p><em>Dữ kiện Ví dụ 4:</em> Thời gian chờ có phân phối mũ với kỳ vọng <span class=\"math inline\">\\(\\mu=5\\)</span> phút, mật độ <span class=\"math inline\">\\(f(t)=0.2e^{-t/5}\\)</span> khi <span class=\"math inline\">\\(t\\ge0\\)</span> và <span class=\"math inline\">\\(f(t)=0\\)</span> khi <span class=\"math inline\">\\(t&lt;0\\)</span>.Chứng minh trung vị thời gian chờ một cuộc gọi đến công ty trong Ví dụ 4 xấp xỉ 3.5 phút.</p>\n"
+    },
+    {
+      "number": 10,
+      "content": "<p><strong>10.</strong></p>\n<p>(a) Một loại bóng đèn được ghi nhãn có tuổi thọ trung bình 1000 giờ. Có thể mô hình hóa xác suất hỏng của các bóng đèn này bằng hàm mật độ mũ có kỳ vọng <span class=\"math inline\">\\(\\mu=1000\\)</span>. Dùng mô hình tìm xác suất một bóng đèn: (i) hỏng trong 200 giờ đầu; (ii) sáng được hơn 800 giờ.</p>\n<p>(b) Trung vị tuổi thọ của các bóng đèn này là bao nhiêu?</p>\n"
+    },
+    {
+      "number": 11,
+      "content": "<p><strong>11.</strong></p>\n<p>Một nhà bán lẻ trực tuyến xác định thời gian trung bình để giao dịch thẻ tín dụng được phê duyệt điện tử là 1.6 giây.</p>\n<p>(a) Dùng hàm mật độ mũ tìm xác suất khách hàng chờ chưa đến một giây để được phê duyệt thẻ tín dụng.</p>\n<p>(b) Tìm xác suất khách hàng chờ hơn 3 giây.</p>\n<p>(c) Thời gian phê duyệt tối thiểu trong nhóm <span class=\"math inline\">\\(5\\%\\)</span> giao dịch chậm nhất là bao nhiêu?</p>\n"
+    },
+    {
+      "number": 12,
+      "content": "<p><strong>12.</strong></p>\n<p>Thời gian từ khi nhiễm bệnh đến khi xuất hiện triệu chứng viêm họng do liên cầu là một biến ngẫu nhiên có hàm mật độ xác suất được xấp xỉ bởi <span class=\"math inline\">\\(f(t)=\\frac1{15\\,676}t^2e^{-0.05t}\\)</span> nếu <span class=\"math inline\">\\(0\\le t\\le150\\)</span>, và <span class=\"math inline\">\\(f(t)=0\\)</span> trong các trường hợp khác; <span class=\"math inline\">\\(t\\)</span> tính bằng giờ.</p>\n<p>(a) Xác suất một bệnh nhân nhiễm bệnh xuất hiện triệu chứng trong 48 giờ đầu là bao nhiêu?</p>\n<p>(b) Xác suất một bệnh nhân nhiễm bệnh chỉ xuất hiện triệu chứng sau 36 giờ là bao nhiêu?</p>\n<p><em>Nguồn:</em> Phỏng theo P. Sartwell, “The Distribution of Incubation Periods of Infectious Disease”, <em>American Journal of Epidemiology</em> 141 (1995): 386–94.</p>\n"
+    },
+    {
+      "number": 13,
+      "content": "<p><strong>13.</strong></p>\n<p>Giấc ngủ REM là giai đoạn giấc ngủ có hoạt động mơ mạnh nhất. Trong một nghiên cứu, lượng giấc ngủ REM trong bốn giờ ngủ đầu được mô tả bởi biến ngẫu nhiên <span class=\"math inline\">\\(T\\)</span> có hàm mật độ xác suất <span class=\"math display\">\\[f(t)=\\begin{cases}\\frac1{1600}t&amp;\\text{nếu }0\\le t\\le40,\\\\\\frac1{20}-\\frac1{1600}t&amp;\\text{nếu }40&lt;t\\le80,\\\\0&amp;\\text{trong các trường hợp khác},\\end{cases}\\]</span> trong đó <span class=\"math inline\">\\(t\\)</span> tính bằng phút.</p>\n<p>(a) Xác suất lượng giấc ngủ REM nằm giữa 30 và 60 phút là bao nhiêu?</p>\n<p>(b) Tìm lượng giấc ngủ REM trung bình.</p>\n"
+    },
+    {
+      "number": 14,
+      "content": "<p><strong>14.</strong></p>\n<p>Theo Khảo sát Sức khỏe Quốc gia, chiều cao nam giới trưởng thành ở Hoa Kỳ có phân phối chuẩn với kỳ vọng 69.0 inch và độ lệch chuẩn 2.8 inch.</p>\n<p>(a) Xác suất một nam giới trưởng thành được chọn ngẫu nhiên có chiều cao từ 65 đến 73 inch là bao nhiêu?</p>\n<p>(b) Bao nhiêu phần trăm nam giới trưởng thành cao hơn 6 feet?</p>\n"
+    },
+    {
+      "number": 15,
+      "content": "<p><strong>15.</strong></p>\n<p>“Dự án Rác thải” tại Đại học Arizona báo cáo rằng lượng giấy các hộ gia đình thải bỏ mỗi tuần có phân phối chuẩn với kỳ vọng <span class=\"math inline\">\\(9.4\\,\\mathrm{lb}\\)</span> và độ lệch chuẩn <span class=\"math inline\">\\(4.2\\,\\mathrm{lb}\\)</span>. Bao nhiêu phần trăm hộ gia đình thải bỏ ít nhất <span class=\"math inline\">\\(10\\,\\mathrm{lb}\\)</span> giấy mỗi tuần?</p>\n"
+    },
+    {
+      "number": 16,
+      "content": "<p><strong>16.</strong></p>\n<p>Các hộp được ghi nhãn chứa <span class=\"math inline\">\\(500\\,\\mathrm g\\)</span> ngũ cốc. Máy đóng hộp tạo ra khối lượng có phân phối chuẩn với độ lệch chuẩn <span class=\"math inline\">\\(12\\,\\mathrm g\\)</span>.</p>\n<p>(a) Nếu khối lượng mục tiêu là <span class=\"math inline\">\\(500\\,\\mathrm g\\)</span>, xác suất máy tạo ra một hộp chứa dưới <span class=\"math inline\">\\(480\\,\\mathrm g\\)</span> ngũ cốc là bao nhiêu?</p>\n<p>(b) Giả sử một quy định yêu cầu không quá <span class=\"math inline\">\\(5\\%\\)</span> số hộp ngũ cốc của nhà sản xuất được chứa ít hơn khối lượng ghi nhãn <span class=\"math inline\">\\(500\\,\\mathrm g\\)</span>. Nhà sản xuất nên đặt máy ở khối lượng mục tiêu nào?</p>\n"
+    },
+    {
+      "number": 17,
+      "content": "<p><strong>17.</strong></p>\n<p>Tốc độ xe trên đường cao tốc có giới hạn tốc độ <span class=\"math inline\">\\(100\\,\\mathrm{km/h}\\)</span> tuân theo phân phối chuẩn với kỳ vọng <span class=\"math inline\">\\(112\\,\\mathrm{km/h}\\)</span> và độ lệch chuẩn <span class=\"math inline\">\\(8\\,\\mathrm{km/h}\\)</span>.</p>\n<p>(a) Xác suất một xe được chọn ngẫu nhiên đang chạy với tốc độ hợp lệ là bao nhiêu?</p>\n<p>(b) Nếu cảnh sát được chỉ thị xử phạt người lái xe chạy từ <span class=\"math inline\">\\(125\\,\\mathrm{km/h}\\)</span> trở lên, bao nhiêu phần trăm người lái xe thuộc diện bị xử phạt?</p>\n"
+    },
+    {
+      "number": 18,
+      "content": "<p><strong>18.</strong></p>\n<p>Chứng minh hàm mật độ xác suất của một biến ngẫu nhiên có phân phối chuẩn có các điểm uốn tại <span class=\"math inline\">\\(x=\\mu\\pm\\sigma\\)</span>.</p>\n"
+    },
+    {
+      "number": 19,
+      "content": "<p><strong>19.</strong></p>\n<p>Với một phân phối chuẩn bất kỳ, tìm xác suất biến ngẫu nhiên cách kỳ vọng không quá hai độ lệch chuẩn.</p>\n"
+    },
+    {
+      "number": 20,
+      "content": "<p><strong>20.</strong></p>\n<p>Độ lệch chuẩn của một biến ngẫu nhiên có hàm mật độ xác suất <span class=\"math inline\">\\(f\\)</span> và kỳ vọng <span class=\"math inline\">\\(\\mu\\)</span> được định nghĩa bởi <span class=\"math display\">\\[\\sigma=\\left[\\int_{-\\infty}^{\\infty}(x-\\mu)^2f(x)\\,dx\\right]^{1/2}.\\]</span> Tìm độ lệch chuẩn của một hàm mật độ mũ có kỳ vọng <span class=\"math inline\">\\(\\mu\\)</span>.</p>\n"
+    },
+    {
+      "number": 21,
+      "content": "<p><strong>21.</strong></p>\n<p>Nguyên tử hydro gồm một proton trong hạt nhân và một electron chuyển động quanh hạt nhân. Trong lý thuyết lượng tử về cấu trúc nguyên tử, người ta giả sử electron không chuyển động trên một quỹ đạo xác định rõ. Thay vào đó, nó ở một trạng thái gọi là orbital, có thể hình dung như một “đám mây” điện tích âm bao quanh hạt nhân. Ở trạng thái năng lượng thấp nhất, gọi là trạng thái cơ bản hay orbital <span class=\"math inline\">\\(1s\\)</span>, đám mây được giả sử có dạng hình cầu tâm tại hạt nhân. Hình cầu này được mô tả thông qua hàm mật độ xác suất <span class=\"math display\">\\[p(r)=\\frac4{a_0^3}r^2e^{-2r/a_0},\\qquad r\\ge0,\\]</span> trong đó <span class=\"math inline\">\\(a_0\\)</span> là bán kính Bohr, <span class=\"math inline\">\\(a_0\\approx5.59\\times10^{-11}\\,\\mathrm m\\)</span>. Tích phân <span class=\"math display\">\\[P(r)=\\int_{0}^{r}\\frac4{a_0^3}s^2e^{-2s/a_0}\\,ds\\]</span> cho xác suất tìm thấy electron bên trong hình cầu bán kính <span class=\"math inline\">\\(r\\)</span> mét, tâm tại hạt nhân.</p>\n<p>(a) Kiểm tra <span class=\"math inline\">\\(p(r)\\)</span> là một hàm mật độ xác suất.</p>\n<p>(b) Tìm <span class=\"math inline\">\\(\\lim_{r\\to\\infty}p(r)\\)</span>. Với giá trị <span class=\"math inline\">\\(r\\)</span> nào thì <span class=\"math inline\">\\(p(r)\\)</span> đạt giá trị lớn nhất?</p>\n<p>(c) [Công nghệ] Vẽ đồ thị hàm mật độ.</p>\n<p>(d) Tìm xác suất electron nằm trong hình cầu bán kính <span class=\"math inline\">\\(4a_0\\)</span> tâm tại hạt nhân.</p>\n<p>(e) Tính khoảng cách trung bình của electron đến hạt nhân ở trạng thái cơ bản của nguyên tử hydro.</p>\n"
+    }
+  ]
+}
