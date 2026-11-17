@@ -1,0 +1,104 @@
+{
+  "exercises": [
+    {
+      "number": 1,
+      "content": "<p><strong>1.</strong></p>\n<p>Hàm chi phí biên <span class=\"math inline\">\\(C&#39;(x)\\)</span> được định nghĩa là đạo hàm của hàm chi phí (xem các Mục 3.7 và 4.7). Chi phí biên khi sản xuất <span class=\"math inline\">\\(x\\)</span> gallon nước cam là <span class=\"math display\">\\[C&#39;(x)=0.82-0.00003x+0.000000003x^2,\\]</span> tính bằng đô la trên gallon. Chi phí khởi động cố định là <span class=\"math inline\">\\(C(0)=18\\,000\\)</span> đô la. Dùng định lý về độ biến thiên thuần tìm chi phí sản xuất 4000 gallon nước cam đầu tiên.</p>\n"
+    },
+    {
+      "number": 2,
+      "content": "<p><strong>2.</strong></p>\n<p>Một công ty ước tính doanh thu biên, tính bằng đô la trên đơn vị, khi bán <span class=\"math inline\">\\(x\\)</span> đơn vị sản phẩm là <span class=\"math inline\">\\(48-0.0012x\\)</span>. Giả sử ước tính chính xác, tìm mức tăng doanh thu khi lượng bán tăng từ 5000 lên <span class=\"math inline\">\\(10\\,000\\)</span> đơn vị.</p>\n"
+    },
+    {
+      "number": 3,
+      "content": "<p><strong>3.</strong></p>\n<p>Một công ty khai khoáng ước tính chi phí biên để khai thác <span class=\"math inline\">\\(x\\)</span> tấn quặng đồng từ một mỏ là <span class=\"math inline\">\\(0.6+0.008x\\)</span>, tính bằng nghìn đô la trên tấn. Chi phí khởi động là <span class=\"math inline\">\\(100\\,000\\)</span> đô la. Chi phí khai thác 50 tấn đầu tiên là bao nhiêu? Còn 50 tấn tiếp theo?</p>\n"
+    },
+    {
+      "number": 4,
+      "content": "<p><strong>4.</strong></p>\n<p>Hàm cầu đối với một gói du lịch là <span class=\"math inline\">\\(p(x)=2000-46\\sqrt{x}\\)</span>. Tìm thặng dư tiêu dùng khi lượng bán là 400 gói. Minh họa bằng cách vẽ đường cầu và xác định thặng dư tiêu dùng dưới dạng một diện tích.</p>\n"
+    },
+    {
+      "number": 5,
+      "content": "<p><strong>5.</strong></p>\n<p>Hàm cầu đối với lò vi sóng của một nhà sản xuất là <span class=\"math inline\">\\(p(x)=870e^{-0.03x}\\)</span>, trong đó <span class=\"math inline\">\\(x\\)</span> tính theo nghìn chiếc. Tính thặng dư tiêu dùng khi lượng bán là <span class=\"math inline\">\\(45\\,000\\)</span> chiếc.</p>\n"
+    },
+    {
+      "number": 6,
+      "content": "<p><strong>6.</strong></p>\n<p>Nếu đường cầu được mô hình hóa bởi <span class=\"math inline\">\\(p=6-(x/3500)\\)</span>, tìm thặng dư tiêu dùng khi giá bán là <span class=\"math inline\">\\(2.80\\)</span> đô la.</p>\n"
+    },
+    {
+      "number": 7,
+      "content": "<p><strong>7.</strong></p>\n<p>Một công ty tổ chức hòa nhạc bán trung bình 210 áo phông tại các buổi biểu diễn với giá 18 đô la mỗi áo. Công ty ước tính cứ giảm giá một đô la thì bán thêm được 30 áo. Tìm hàm cầu đối với áo phông và tính thặng dư tiêu dùng nếu áo được bán với giá 15 đô la mỗi chiếc.</p>\n"
+    },
+    {
+      "number": 8,
+      "content": "<p><strong>8.</strong></p>\n<p>[Công nghệ] Một công ty mô hình hóa đường cầu của sản phẩm, tính bằng đô la, bằng phương trình <span class=\"math display\">\\[p=\\frac{800\\,000e^{-x/5000}}{x+20\\,000}.\\]</span> Dùng đồ thị ước lượng lượng bán khi giá là 16 đô la. Sau đó tìm gần đúng thặng dư tiêu dùng ứng với lượng bán này.</p>\n"
+    },
+    {
+      "number": 9,
+      "content": "<p><strong>9.</strong></p>\n<p><em>Yêu cầu chung (9–11):</em> Hàm cung <span class=\"math inline\">\\(p_S(x)\\)</span> của một hàng hóa cho mối liên hệ giữa giá bán và số đơn vị mà các nhà sản xuất sẽ sản xuất ở giá đó. Giá cao hơn khiến các nhà sản xuất làm ra nhiều đơn vị hơn, nên <span class=\"math inline\">\\(p_S\\)</span> là hàm tăng theo <span class=\"math inline\">\\(x\\)</span>. Gọi <span class=\"math inline\">\\(X\\)</span> là lượng hàng đang được sản xuất, <span class=\"math inline\">\\(P=p_S(X)\\)</span> là giá hiện tại. Một số nhà sản xuất sẵn lòng sản xuất và bán hàng hóa ở giá thấp hơn, nên họ đang nhận được nhiều hơn mức giá tối thiểu của mình. Phần chênh lệch đó được gọi là <strong>thặng dư sản xuất</strong>. Lập luận tương tự thặng dư tiêu dùng cho thấy thặng dư này được cho bởi <span class=\"math display\">\\[\\int_{0}^{X}[P-p_S(x)]\\,dx.\\]</span></p>\n<p>Tính thặng dư sản xuất đối với hàm cung <span class=\"math inline\">\\(p_S(x)=3+0.01x^2\\)</span> tại lượng bán <span class=\"math inline\">\\(X=10\\)</span>. Minh họa bằng cách vẽ đường cung và xác định thặng dư sản xuất dưới dạng một diện tích.</p>\n"
+    },
+    {
+      "number": 10,
+      "content": "<p><strong>10.</strong></p>\n<p><em>Yêu cầu chung (9–11):</em> Hàm cung <span class=\"math inline\">\\(p_S(x)\\)</span> của một hàng hóa cho mối liên hệ giữa giá bán và số đơn vị mà các nhà sản xuất sẽ sản xuất ở giá đó. Giá cao hơn khiến các nhà sản xuất làm ra nhiều đơn vị hơn, nên <span class=\"math inline\">\\(p_S\\)</span> là hàm tăng theo <span class=\"math inline\">\\(x\\)</span>. Gọi <span class=\"math inline\">\\(X\\)</span> là lượng hàng đang được sản xuất, <span class=\"math inline\">\\(P=p_S(X)\\)</span> là giá hiện tại. Một số nhà sản xuất sẵn lòng sản xuất và bán hàng hóa ở giá thấp hơn, nên họ đang nhận được nhiều hơn mức giá tối thiểu của mình. Phần chênh lệch đó được gọi là <strong>thặng dư sản xuất</strong>. Lập luận tương tự thặng dư tiêu dùng cho thấy thặng dư này được cho bởi <span class=\"math display\">\\[\\int_{0}^{X}[P-p_S(x)]\\,dx.\\]</span></p>\n<p>Nếu đường cung được mô hình hóa bởi <span class=\"math inline\">\\(p=125+0.002x^2\\)</span>, tìm thặng dư sản xuất khi giá bán là 625 đô la.</p>\n"
+    },
+    {
+      "number": 11,
+      "content": "<p><strong>11.</strong></p>\n<p><em>Yêu cầu chung (9–11):</em> Hàm cung <span class=\"math inline\">\\(p_S(x)\\)</span> của một hàng hóa cho mối liên hệ giữa giá bán và số đơn vị mà các nhà sản xuất sẽ sản xuất ở giá đó. Giá cao hơn khiến các nhà sản xuất làm ra nhiều đơn vị hơn, nên <span class=\"math inline\">\\(p_S\\)</span> là hàm tăng theo <span class=\"math inline\">\\(x\\)</span>. Gọi <span class=\"math inline\">\\(X\\)</span> là lượng hàng đang được sản xuất, <span class=\"math inline\">\\(P=p_S(X)\\)</span> là giá hiện tại. Một số nhà sản xuất sẵn lòng sản xuất và bán hàng hóa ở giá thấp hơn, nên họ đang nhận được nhiều hơn mức giá tối thiểu của mình. Phần chênh lệch đó được gọi là <strong>thặng dư sản xuất</strong>. Lập luận tương tự thặng dư tiêu dùng cho thấy thặng dư này được cho bởi <span class=\"math display\">\\[\\int_{0}^{X}[P-p_S(x)]\\,dx.\\]</span></p>\n<p>[Công nghệ] Một nhà sản xuất ước tính đường cung của sản phẩm, tính bằng đô la, là <span class=\"math display\">\\[p=\\sqrt{30+0.01xe^{0.001x}}.\\]</span> Tìm gần đúng thặng dư sản xuất khi giá bán là 30 đô la.</p>\n"
+    },
+    {
+      "number": 12,
+      "content": "<p><strong>12.</strong></p>\n<p><strong>Cân bằng thị trường.</strong> Trong một thị trường cạnh tranh hoàn toàn, giá hàng hóa tự nhiên được điều chỉnh về mức mà lượng cầu của người tiêu dùng bằng lượng cung của nhà sản xuất; khi đó thị trường được gọi là ở trạng thái cân bằng. Các giá trị này là tọa độ giao điểm của đường cung và đường cầu.</p>\n<p>(a) Với đường cầu <span class=\"math inline\">\\(p=50-\\frac1{20}x\\)</span> và đường cung <span class=\"math inline\">\\(p=20+\\frac1{10}x\\)</span>, thị trường hàng hóa cân bằng ở lượng hàng và mức giá nào?</p>\n<p>(b) Tìm thặng dư tiêu dùng và thặng dư sản xuất khi thị trường cân bằng. Minh họa bằng cách phác họa đường cung, đường cầu và xác định các thặng dư dưới dạng diện tích.</p>\n"
+    },
+    {
+      "number": 13,
+      "content": "<p><strong>13.</strong></p>\n<p><em>Yêu cầu chung (13–14):</em> Tổng của thặng dư tiêu dùng và thặng dư sản xuất được gọi là <strong>tổng thặng dư</strong>; đây là một chỉ số mà các nhà kinh tế dùng để đánh giá tình trạng kinh tế của một xã hội. Tổng thặng dư đạt giá trị lớn nhất khi thị trường hàng hóa ở trạng thái cân bằng.</p>\n<p>(a) Hàm cầu đối với dàn âm thanh ô tô của một công ty điện tử là <span class=\"math inline\">\\(p(x)=228.4-18x\\)</span> và hàm cung là <span class=\"math inline\">\\(p_S(x)=27x+57.4\\)</span>, trong đó <span class=\"math inline\">\\(x\\)</span> tính theo nghìn bộ. Thị trường cân bằng ở lượng hàng nào?</p>\n<p>(b) Tính tổng thặng dư lớn nhất đối với các dàn âm thanh này.</p>\n"
+    },
+    {
+      "number": 14,
+      "content": "<p><strong>14.</strong></p>\n<p><em>Yêu cầu chung (13–14):</em> Tổng của thặng dư tiêu dùng và thặng dư sản xuất được gọi là <strong>tổng thặng dư</strong>; đây là một chỉ số mà các nhà kinh tế dùng để đánh giá tình trạng kinh tế của một xã hội. Tổng thặng dư đạt giá trị lớn nhất khi thị trường hàng hóa ở trạng thái cân bằng.</p>\n<p>Một công ty máy ảnh ước tính hàm cầu đối với mẫu máy ảnh kỹ thuật số mới là <span class=\"math inline\">\\(p(x)=312e^{-0.14x}\\)</span> và hàm cung là <span class=\"math inline\">\\(p_S(x)=26e^{0.2x}\\)</span>, trong đó <span class=\"math inline\">\\(x\\)</span> tính theo nghìn chiếc. Tính tổng thặng dư lớn nhất.</p>\n"
+    },
+    {
+      "number": 15,
+      "content": "<p><strong>15.</strong></p>\n<p>Nếu lượng vốn của một công ty tại thời điểm <span class=\"math inline\">\\(t\\)</span> là <span class=\"math inline\">\\(f(t)\\)</span> thì đạo hàm <span class=\"math inline\">\\(f&#39;(t)\\)</span> được gọi là dòng đầu tư thuần. Giả sử dòng đầu tư thuần là <span class=\"math inline\">\\(\\sqrt t\\)</span> triệu đô la mỗi năm, với <span class=\"math inline\">\\(t\\)</span> tính bằng năm. Tìm mức tăng vốn (sự hình thành vốn) từ năm thứ tư đến năm thứ tám.</p>\n"
+    },
+    {
+      "number": 16,
+      "content": "<p><strong>16.</strong></p>\n<p>Nếu doanh thu chảy vào một công ty với tốc độ <span class=\"math inline\">\\(f(t)=9000\\sqrt{1+2t}\\)</span>, trong đó <span class=\"math inline\">\\(t\\)</span> tính bằng năm, <span class=\"math inline\">\\(f(t)\\)</span> tính bằng đô la mỗi năm, tìm tổng doanh thu nhận được trong bốn năm đầu.</p>\n"
+    },
+    {
+      "number": 17,
+      "content": "<p><strong>17.</strong></p>\n<p><strong>Giá trị tương lai của thu nhập.</strong> Nếu thu nhập được nhận liên tục với tốc độ <span class=\"math inline\">\\(f(t)\\)</span> đô la mỗi năm và được đầu tư ở lãi suất cố định <span class=\"math inline\">\\(r\\)</span>, ghép lãi liên tục, trong thời hạn <span class=\"math inline\">\\(T\\)</span> năm thì giá trị tương lai của thu nhập là <span class=\"math display\">\\[\\int_{0}^{T}f(t)e^{r(T-t)}\\,dt.\\]</span> Tính giá trị tương lai sau 6 năm của thu nhập được nhận với tốc độ <span class=\"math inline\">\\(f(t)=8000e^{0.04t}\\)</span> đô la mỗi năm, đem đầu tư với lãi suất <span class=\"math inline\">\\(6.2\\%\\)</span>.</p>\n"
+    },
+    {
+      "number": 18,
+      "content": "<p><strong>18.</strong></p>\n<p><em>Dữ kiện Bài 17:</em> <strong>Giá trị tương lai của thu nhập.</strong> Nếu thu nhập được nhận liên tục với tốc độ <span class=\"math inline\">\\(f(t)\\)</span> đô la mỗi năm và được đầu tư ở lãi suất cố định <span class=\"math inline\">\\(r\\)</span>, ghép lãi liên tục, trong thời hạn <span class=\"math inline\">\\(T\\)</span> năm thì giá trị tương lai của thu nhập là <span class=\"math display\">\\[\\int_{0}^{T}f(t)e^{r(T-t)}\\,dt.\\]</span> Tính giá trị tương lai sau 6 năm của thu nhập được nhận với tốc độ <span class=\"math inline\">\\(f(t)=8000e^{0.04t}\\)</span> đô la mỗi năm, đem đầu tư với lãi suất <span class=\"math inline\">\\(6.2\\%\\)</span>.</p>\n<p><strong>Giá trị hiện tại của thu nhập.</strong> Giá trị hiện tại của một dòng thu nhập là số tiền cần đầu tư ngay bây giờ để đạt cùng giá trị tương lai như mô tả ở Bài 17, được cho bởi <span class=\"math display\">\\[\\int_{0}^{T}f(t)e^{-rt}\\,dt.\\]</span> Tìm giá trị hiện tại của dòng thu nhập trong Bài 17.</p>\n"
+    },
+    {
+      "number": 19,
+      "content": "<p><strong>19.</strong></p>\n<p><strong>Định luật Pareto về thu nhập</strong> phát biểu rằng số người có thu nhập từ <span class=\"math inline\">\\(x=a\\)</span> đến <span class=\"math inline\">\\(x=b\\)</span> là <span class=\"math inline\">\\(N=\\int_a^bAx^{-k}\\,dx\\)</span>, trong đó <span class=\"math inline\">\\(A,k\\)</span> là các hằng số thỏa mãn <span class=\"math inline\">\\(A&gt;0\\)</span>, <span class=\"math inline\">\\(k&gt;1\\)</span>. Thu nhập trung bình của những người này là <span class=\"math display\">\\[\\bar x=\\frac1N\\int_a^bAx^{1-k}\\,dx.\\]</span> Tính <span class=\"math inline\">\\(\\bar x\\)</span>.</p>\n"
+    },
+    {
+      "number": 20,
+      "content": "<p><strong>20.</strong></p>\n<p>Một mùa hè nóng ẩm khiến quần thể muỗi bùng phát tại một khu nghỉ dưỡng ven hồ. Số muỗi tăng với tốc độ ước tính <span class=\"math inline\">\\(2200+10e^{0.8t}\\)</span> con mỗi tuần, trong đó <span class=\"math inline\">\\(t\\)</span> tính bằng tuần. Quần thể muỗi tăng thêm bao nhiêu từ tuần thứ năm đến tuần thứ chín của mùa hè?</p>\n"
+    },
+    {
+      "number": 21,
+      "content": "<p><strong>21.</strong></p>\n<p>Dùng định luật Poiseuille tính lưu lượng trong một động mạch nhỏ của người, với <span class=\"math inline\">\\(\\eta=0.027\\)</span>, <span class=\"math inline\">\\(R=0.008\\,\\mathrm{cm}\\)</span>, <span class=\"math inline\">\\(l=2\\,\\mathrm{cm}\\)</span> và <span class=\"math inline\">\\(P=4000\\,\\mathrm{dyn/cm^2}\\)</span>.</p>\n"
+    },
+    {
+      "number": 22,
+      "content": "<p><strong>22.</strong></p>\n<p>Huyết áp cao là hệ quả của sự co hẹp động mạch. Để duy trì lưu lượng bình thường, tim phải bơm mạnh hơn, làm huyết áp tăng. Dùng định luật Poiseuille chứng minh rằng nếu <span class=\"math inline\">\\(R_0,P_0\\)</span> là các giá trị bình thường của bán kính và áp suất trong một động mạch, còn <span class=\"math inline\">\\(R,P\\)</span> là các giá trị khi co hẹp, thì để lưu lượng không đổi, <span class=\"math inline\">\\(P,R\\)</span> liên hệ bởi <span class=\"math display\">\\[\\frac P{P_0}=\\left(\\frac{R_0}R\\right)^4.\\]</span> Suy ra rằng nếu bán kính động mạch giảm còn ba phần tư giá trị trước đó thì áp suất tăng hơn ba lần.</p>\n"
+    },
+    {
+      "number": 23,
+      "content": "<p><strong>23.</strong></p>\n<p>Một phương pháp pha loãng chất chỉ thị màu đo cung lượng tim bằng <span class=\"math inline\">\\(6\\,\\mathrm{mg}\\)</span> chất chỉ thị. Nồng độ chất chỉ thị, tính bằng <span class=\"math inline\">\\(\\mathrm{mg/L}\\)</span>, được mô hình hóa bởi <span class=\"math inline\">\\(c(t)=20te^{-0.6t}\\)</span>, <span class=\"math inline\">\\(0\\le t\\le10\\)</span>, trong đó <span class=\"math inline\">\\(t\\)</span> tính bằng giây. Tìm cung lượng tim.</p>\n"
+    },
+    {
+      "number": 24,
+      "content": "<p><strong>24.</strong></p>\n<p>Sau khi tiêm <span class=\"math inline\">\\(5.5\\,\\mathrm{mg}\\)</span> chất chỉ thị màu, các số đo nồng độ, tính bằng <span class=\"math inline\">\\(\\mathrm{mg/L}\\)</span>, cách nhau hai giây được cho trong bảng. Dùng quy tắc Simpson ước lượng cung lượng tim.</p>\n<div class=\"center\">\n<table>\n<thead>\n<tr class=\"header\">\n<th style=\"text-align: right;\"><span class=\"math inline\">\\(t\\)</span></th>\n<th style=\"text-align: right;\"><span class=\"math inline\">\\(c(t)\\)</span></th>\n<th style=\"text-align: right;\"><span class=\"math inline\">\\(t\\)</span></th>\n<th style=\"text-align: right;\"><span class=\"math inline\">\\(c(t)\\)</span></th>\n</tr>\n</thead>\n<tbody>\n<tr class=\"odd\">\n<td style=\"text-align: right;\">0</td>\n<td style=\"text-align: right;\">0.0</td>\n<td style=\"text-align: right;\">10</td>\n<td style=\"text-align: right;\">4.3</td>\n</tr>\n<tr class=\"even\">\n<td style=\"text-align: right;\">2</td>\n<td style=\"text-align: right;\">4.1</td>\n<td style=\"text-align: right;\">12</td>\n<td style=\"text-align: right;\">2.5</td>\n</tr>\n<tr class=\"odd\">\n<td style=\"text-align: right;\">4</td>\n<td style=\"text-align: right;\">8.9</td>\n<td style=\"text-align: right;\">14</td>\n<td style=\"text-align: right;\">1.2</td>\n</tr>\n<tr class=\"even\">\n<td style=\"text-align: right;\">6</td>\n<td style=\"text-align: right;\">8.5</td>\n<td style=\"text-align: right;\">16</td>\n<td style=\"text-align: right;\">0.2</td>\n</tr>\n<tr class=\"odd\">\n<td style=\"text-align: right;\">8</td>\n<td style=\"text-align: right;\">6.7</td>\n<td style=\"text-align: right;\"></td>\n<td style=\"text-align: right;\"></td>\n</tr>\n</tbody>\n</table>\n</div>\n"
+    },
+    {
+      "number": 25,
+      "content": "<p><strong>25.</strong></p>\n<p>Đồ thị hàm nồng độ <span class=\"math inline\">\\(c(t)\\)</span> sau khi tiêm <span class=\"math inline\">\\(7\\,\\mathrm{mg}\\)</span> chất chỉ thị màu vào một tâm nhĩ được cho trong hình. Dùng quy tắc Simpson ước lượng cung lượng tim.</p>\n<div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-8-4-62f26efd/ex25.png\" alt=\"image\" /><br />\nBài 25. Trục thời gian <span class=\"math inline\">\\(t\\)</span> tính bằng giây (seconds), nồng độ tính bằng <span class=\"math inline\">\\(\\mathrm{mg/L}\\)</span>.</p>\n</div>\n"
+    }
+  ]
+}
