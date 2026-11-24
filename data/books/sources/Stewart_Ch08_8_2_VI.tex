@@ -1,0 +1,236 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage{fontspec}\setmainfont{Latin Modern Roman}\setsansfont{DejaVu Sans}
+\usepackage{amsmath,amssymb,graphicx,geometry,enumitem,needspace,longtable,booktabs,fancyhdr,hyperref}
+\geometry{left=28mm,right=23mm,top=24mm,bottom=24mm}
+\hypersetup{unicode=true,colorlinks=true,linkcolor=black,urlcolor=blue,pdftitle={Giải tích — Mục 8.2}}
+\setlength{\parindent}{1.2em}\setlength{\parskip}{4pt}\setlength{\headheight}{16pt}
+\pagestyle{fancy}\fancyhf{}\fancyhead[L]{\small Chương 8. Các ứng dụng khác của tích phân}\fancyhead[R]{\small §8.2}\fancyfoot[C]{\thepage}
+\newcommand{\fig}[3][.68]{\begin{center}\begin{minipage}{\linewidth}\centering\includegraphics[width=#1\linewidth]{assets/#2.png}\\{\small #3}\end{minipage}\end{center}}
+\newcommand{\ex}[1]{\par\medskip\noindent\textbf{Ví dụ #1.}\ }
+\newcommand{\sol}{\par\nopagebreak[4]\noindent\textit{Lời giải.}\ }
+\newcommand{\bt}[1]{\par\smallskip\Needspace{5\baselineskip}\noindent\textbf{#1.}\ }
+\newcommand{\group}[1]{\par\Needspace{11\baselineskip}\medskip\noindent\textbf{#1}\par\nopagebreak[4]}
+\newcommand{\gint}[1]{\left[\!\left[#1\right]\!\right]}
+\allowdisplaybreaks[2]
+\DeclareMathOperator{\sech}{sech}
+\DeclareMathOperator{\csch}{csch}
+\DeclareMathOperator{\arccot}{arccot}
+
+\newcommand{\prj}[1]{\bt{#1}}
+
+\newcommand{\kn}[1]{\bt{#1}}
+\newcommand{\ds}[1]{\bt{#1}}
+\setlength{\emergencystretch}{1em}
+\widowpenalty=10000\clubpenalty=10000
+\begin{document}
+\section*{8.2 — Diện tích mặt tròn xoay}
+Một mặt tròn xoay được tạo thành khi quay một đường cong quanh một đường thẳng. Mặt như vậy là mặt bên của một khối tròn xoay thuộc loại đã xét trong các Mục 6.2 và 6.3.
+
+Ta muốn định nghĩa diện tích mặt tròn xoay sao cho phù hợp với trực giác. Nếu diện tích mặt là $A$, ta có thể hình dung rằng sơn mặt đó cần lượng sơn bằng lượng sơn dùng cho một miền phẳng có diện tích $A$.
+
+Trước hết, xét một số mặt đơn giản. Diện tích xung quanh của hình trụ tròn bán kính $r$, chiều cao $h$, được lấy là $A=2\pi rh$, vì ta có thể hình dung cắt hình trụ rồi trải phẳng (như Hình 1) để được hình chữ nhật kích thước $2\pi r$ và $h$.
+\fig[.4]{fig01}{Hình 1. Cắt và trải phẳng mặt trụ; chu vi đáy bằng $2\pi r$.}
+Tương tự, ta có thể lấy một hình nón tròn có bán kính đáy $r$ và đường sinh $l$, cắt dọc theo đường nét đứt ở Hình 2, rồi trải phẳng thành một hình quạt tròn bán kính $l$, góc ở tâm $\theta=2\pi r/l$. Nói chung, diện tích hình quạt tròn bán kính $l$, góc $\theta$, là $\frac12l^2\theta$ (xem Bài tập 7.3.41), nên trong trường hợp này,
+\[A=\frac12l^2\theta=\frac12l^2\left(\frac{2\pi r}l\right)=\pi rl.\]
+Vì vậy, ta định nghĩa diện tích xung quanh hình nón là $A=\pi rl$.
+\fig[.78]{fig02}{Hình 2. Mặt nón được cắt theo đường sinh rồi trải thành hình quạt tròn.}
+Với các mặt tròn xoay phức tạp hơn thì sao? Theo chiến lược đã dùng với độ dài cung, ta có thể xấp xỉ đường cong ban đầu bằng một đường gấp khúc. Khi quay đường gấp khúc này quanh một trục, ta được một mặt đơn giản hơn có diện tích xấp xỉ diện tích mặt thực. Lấy giới hạn, ta có thể xác định diện tích chính xác.
+
+Mặt xấp xỉ gồm nhiều dải, mỗi dải được tạo thành khi quay một đoạn thẳng quanh một trục. Để tìm diện tích, có thể xem mỗi dải là một phần của mặt nón tròn, như Hình 3. Diện tích dải (hay mặt bên hình nón cụt) có đường sinh $l$, bán kính trên và dưới $r_1,r_2$, được tìm bằng cách trừ diện tích hai mặt nón:
+\[A=\pi r_2(l_1+l)-\pi r_1l_1=\pi[(r_2-r_1)l_1+r_2l].\tag{1}\]
+\fig[.38]{fig03}{Hình 3. Dải mặt nón cụt với các bán kính $r_1,r_2$ và đường sinh $l$.}
+Từ các tam giác đồng dạng,
+\[\frac{l_1}{r_1}=\frac{l_1+l}{r_2},\]
+suy ra $r_2l_1=r_1l_1+r_1l$, hay $(r_2-r_1)l_1=r_1l$. Thay vào Phương trình 1, ta được $A=\pi(r_1l+r_2l)$, tức là
+\[A=2\pi rl,\tag{2}\]
+trong đó $r=\frac12(r_1+r_2)$ là bán kính trung bình của dải.
+
+Bây giờ áp dụng Công thức 2 vào chiến lược trên. Xét mặt ở Hình 4, tạo thành khi quay đường cong $y=f(x)$, $a\le x\le b$, quanh trục $x$, trong đó $f$ dương và có đạo hàm liên tục. Để định nghĩa diện tích, chia $[a,b]$ thành $n$ khoảng con có các đầu mút $x_0,x_1,\ldots,x_n$ và cùng độ rộng $\Delta x$, như khi xác định độ dài cung. Nếu $y_i=f(x_i)$ thì $P_i(x_i,y_i)$ nằm trên đường cong. Phần mặt giữa $x_{i-1}$ và $x_i$ được xấp xỉ bằng cách quay đoạn thẳng $P_{i-1}P_i$ quanh trục $x$. Kết quả là một dải có đường sinh $l=|P_{i-1}P_i|$ và bán kính trung bình $r=\frac12(y_{i-1}+y_i)$, nên theo Công thức 2, diện tích của nó là
+\[2\pi\frac{y_{i-1}+y_i}2|P_{i-1}P_i|.\]
+\fig[.48]{fig04a}{Hình 4(a). Mặt tròn xoay.}
+\fig[.48]{fig04b}{Hình 4(b). Dải xấp xỉ.}
+Như trong chứng minh Định lý 8.1.2, tồn tại $x_i^*$ giữa $x_{i-1}$ và $x_i$ sao cho
+\[|P_{i-1}P_i|=\sqrt{1+[f'(x_i^*)]^2}\,\Delta x.\]
+Khi $\Delta x$ nhỏ, ta có $y_i=f(x_i)\approx f(x_i^*)$ và $y_{i-1}=f(x_{i-1})\approx f(x_i^*)$ vì $f$ liên tục. Do đó,
+\[2\pi\frac{y_{i-1}+y_i}2|P_{i-1}P_i|\approx2\pi f(x_i^*)\sqrt{1+[f'(x_i^*)]^2}\,\Delta x,\]
+nên một xấp xỉ cho diện tích toàn bộ mặt tròn xoay là
+\[\sum_{i=1}^n2\pi f(x_i^*)\sqrt{1+[f'(x_i^*)]^2}\,\Delta x.\tag{3}\]
+Xấp xỉ này có vẻ tốt hơn khi $n\to\infty$. Nhận ra (3) là tổng Riemann của hàm $g(x)=2\pi f(x)\sqrt{1+[f'(x)]^2}$, ta có
+\[\lim_{n\to\infty}\sum_{i=1}^n2\pi f(x_i^*)\sqrt{1+[f'(x_i^*)]^2}\,\Delta x
+=\int_a^b2\pi f(x)\sqrt{1+[f'(x)]^2}\,dx.\]
+Vì vậy, khi $f$ dương và có đạo hàm liên tục, ta định nghĩa diện tích mặt tạo thành khi quay đường cong $y=f(x)$, $a\le x\le b$, quanh trục $x$ là
+\[S=\int_a^b2\pi f(x)\sqrt{1+[f'(x)]^2}\,dx.\tag{4}\]
+Dùng ký hiệu Leibniz, công thức trở thành
+\[S=\int_a^b2\pi y\sqrt{1+\left(\frac{dy}{dx}\right)^2}\,dx.\tag{5}\]
+Nếu đường cong được mô tả bởi $x=g(y)$, $c\le y\le d$, thì công thức diện tích mặt là
+\[S=\int_c^d2\pi y\sqrt{1+\left(\frac{dx}{dy}\right)^2}\,dy.\tag{6}\]
+Cả hai Công thức 5 và 6 có thể viết gọn bằng ký hiệu, dùng vi phân độ dài cung ở Mục 8.1:
+\[S=\int2\pi y\,ds.\tag{7}\]
+Với phép quay quanh trục $y$, một quy trình tương tự cho công thức ký hiệu
+\[S=\int2\pi x\,ds,\tag{8}\]
+trong đó, như trước (xem các Phương trình 8.1.7 và 8.1.9), có thể dùng
+\[ds=\sqrt{1+\left(\frac{dy}{dx}\right)^2}\,dx\qquad\text{hoặc}\qquad ds=\sqrt{1+\left(\frac{dx}{dy}\right)^2}\,dy.\]
+\textbf{Chú ý.} Có thể nhớ các Công thức 7 và 8 bằng cách nghĩ đến thừa số dưới dấu tích phân là chu vi đường tròn mà điểm $(x,y)$ trên đường cong vạch ra khi quay lần lượt quanh trục $x$ hoặc trục $y$ (xem Hình 5).
+\fig[1]{fig05}{Hình 5. Quay quanh trục $x$: bán kính $y$, chu vi $2\pi y$; quay quanh trục $y$: bán kính $x$, chu vi $2\pi x$.}
+Khi quay quanh trục $x$, $S=\int2\pi y\,ds$; khi quay quanh trục $y$, $S=\int2\pi x\,ds$. Trong mỗi công thức, tọa độ $y$ hoặc $x$ đóng vai trò bán kính, còn $2\pi y$ hoặc $2\pi x$ là chu vi.
+\ex{1} Đường cong $y=\sqrt{4-x^2}$, $-1\le x\le1$, là một cung của đường tròn $x^2+y^2=4$. Tìm diện tích mặt tạo thành khi quay cung này quanh trục $x$. (Mặt đó là một phần của mặt cầu bán kính 2; xem Hình 6.)
+\fig[.36]{fig06}{Hình 6. Phần mặt cầu có diện tích được tính trong Ví dụ 1.}
+\sol Ta có
+\[\frac{dy}{dx}=\frac12(4-x^2)^{-1/2}(-2x)=\frac{-x}{\sqrt{4-x^2}}.\]
+Dùng Công thức 7 với $ds=\sqrt{1+(dy/dx)^2}\,dx$ (hay tương đương, Công thức 5), diện tích mặt là
+\[S=\int_{-1}^{1}2\pi y\sqrt{1+\left(\frac{dy}{dx}\right)^2}\,dx\]
+\[=2\pi\int_{-1}^1\sqrt{4-x^2}\sqrt{1+\frac{x^2}{4-x^2}}\,dx\]
+\[=2\pi\int_{-1}^1\sqrt{4-x^2}\sqrt{\frac{4-x^2+x^2}{4-x^2}}\,dx\]
+\[=2\pi\int_{-1}^1\sqrt{4-x^2}\frac2{\sqrt{4-x^2}}\,dx=4\pi\int_{-1}^{1}1\,dx=4\pi(2)=8\pi.\]
+\ex{2} Phần đường cong $x=\frac23y^{3/2}$ giữa $y=0$ và $y=3$ được quay quanh trục $x$ (xem Hình 7). Tìm diện tích mặt thu được.
+\fig[.38]{fig07}{Hình 7. Mặt tròn xoay có diện tích được tính trong Ví dụ 2.}
+\sol Vì $x$ được cho theo $y$, chọn $y$ làm biến tích phân là tự nhiên. Theo Công thức 7 với $ds=\sqrt{1+(dx/dy)^2}\,dy$ (hoặc Công thức 6),
+\[S=\int_0^{3}2\pi y\sqrt{1+\left(\frac{dx}{dy}\right)^2}\,dy=2\pi\int_0^3 y\sqrt{1+(y^{1/2})^2}\,dy\]
+\[=2\pi\int_0^3y\sqrt{1+y}\,dy.\]
+Đổi biến $u=1+y$, $du=dy$, nhớ đổi các cận tích phân, ta được
+\[S=2\pi\int_1^4(u-1)\sqrt{u}\,du=2\pi\int_1^4(u^{3/2}-u^{1/2})\,du\]
+\[=2\pi\left[\frac25u^{5/2}-\frac23u^{3/2}\right]_1^4=\frac{232}{15}\pi.\]
+\ex{3} Cung parabol $y=x^2$ từ $(1,1)$ đến $(2,4)$ được quay quanh trục $y$. Tìm diện tích mặt thu được.
+\fig[.4]{fig08}{Hình 8. Mặt tròn xoay có diện tích được tính trong Ví dụ 3.}
+\textit{Lời giải 1.} Xem $y$ là hàm của $x$, ta có $y=x^2$ và $dy/dx=2x$. Công thức 8 với $ds=\sqrt{1+(dy/dx)^2}\,dx$ cho
+\[S=\int2\pi x\,ds=\int_1^{2}2\pi x\sqrt{1+\left(\frac{dy}{dx}\right)^2}\,dx=2\pi\int_1^2x\sqrt{1+4x^2}\,dx.\]
+Đổi biến $u=1+4x^2$, ta có $du=8x\,dx$. Nhớ đổi cận, ta được
+\[S=2\pi\int_5^{17}\sqrt{u}\cdot\frac18\,du=\frac\pi4\int_5^{17}u^{1/2}\,du\]
+\[=\frac\pi4\left[\frac23u^{3/2}\right]_5^{17}=\frac\pi6(17\sqrt{17}-5\sqrt5).\]
+\textit{Lời giải 2.} Xem $x$ là hàm của $y$, ta có $x=\sqrt{y}$ và $dx/dy=1/(2\sqrt{y})$. Theo Công thức 8 với $ds=\sqrt{1+(dx/dy)^2}\,dy$,
+\[S=\int2\pi x\,ds=\int_1^{4}2\pi x\sqrt{1+\left(\frac{dx}{dy}\right)^2}\,dy\]
+\[=2\pi\int_1^4\sqrt{y}\sqrt{1+\frac1{4y}}\,dy=2\pi\int_1^4\sqrt{y+\frac14}\,dy\]
+\[=2\pi\int_1^4\sqrt{\frac14(4y+1)}\,dy=\pi\int_1^4\sqrt{4y+1}\,dy\]
+\[=\frac\pi4\int_5^{17}\sqrt{u}\,du\qquad(u=1+4y)\]
+\[=\frac\pi6(17\sqrt{17}-5\sqrt5)\qquad\text{(như trong Lời giải 1).}\]
+Để kiểm tra kết quả Ví dụ 3, từ Hình 8 ta thấy diện tích mặt phải gần với diện tích xung quanh hình trụ có cùng chiều cao và bán kính nằm giữa bán kính trên và dưới của mặt: $2\pi(1.5)(3)\approx28.27$. Ta đã tính được diện tích mặt là
+\[\frac\pi6(17\sqrt{17}-5\sqrt5)\approx30.85,\]
+có vẻ hợp lý. Mặt khác, diện tích mặt phải lớn hơn một chút so với diện tích mặt bên hình nón cụt có cùng mép trên và dưới. Theo Phương trình 2, diện tích đó bằng $2\pi(1.5)\sqrt{10}\approx29.80$.
+\ex{4} Lập một tích phân biểu diễn diện tích mặt tạo thành khi quay đường cong $y=e^x$, $0\le x\le1$, quanh trục $x$. Sau đó tính số tích phân chính xác đến ba chữ số thập phân.
+\sol Dùng $y=e^x$, $dy/dx=e^x$ và Công thức 7 với $ds=\sqrt{1+(dy/dx)^2}\,dx$ (hoặc Công thức 5), ta có
+\[S=\int_0^{1}2\pi y\sqrt{1+\left(\frac{dy}{dx}\right)^2}\,dx=2\pi\int_0^1e^x\sqrt{1+e^{2x}}\,dx.\]
+Dùng máy tính cầm tay hoặc máy tính, ta được
+\[2\pi\int_0^1e^x\sqrt{1+e^{2x}}\,dx\approx22.943.\]
+\textit{Cách khác:} Dùng Công thức 7 với $x=\ln y$ và $ds=\sqrt{1+(dx/dy)^2}\,dy$ (hay tương đương, Công thức 6).
+
+\section*{8.2 — Bài tập}
+
+\group{1–4} Đường cong đã cho được quay quanh trục $x$. Lập, nhưng không tính, một tích phân biểu diễn diện tích mặt thu được bằng cách lấy tích phân (a) theo $x$ và (b) theo $y$.
+
+\bt{1} $y=\sqrt[3]x,\quad1\le x\le8$.
+
+\bt{2} $x^2=e^y,\quad1\le x\le e$.
+
+\bt{3} $x=\ln(2y+1),\quad0\le y\le1$.
+
+\bt{4} $y=\tan^{-1}x,\quad0\le x\le1$.
+
+\group{5–8} Đường cong đã cho được quay quanh trục $y$. Lập, nhưng không tính, một tích phân biểu diễn diện tích mặt thu được bằng cách lấy tích phân (a) theo $x$ và (b) theo $y$.
+
+\bt{5} $xy=4,\quad1\le x\le8$.
+
+\bt{6} $y=(x+1)^4,\quad0\le x\le2$.
+
+\bt{7} $y=1+\sin x,\quad0\le x\le\pi/2$.
+
+\bt{8} $x=e^{2y},\quad0\le y\le2$.
+
+\group{9–16} Tìm diện tích chính xác của mặt tạo thành khi quay đường cong quanh trục $x$.
+
+\bt{9} $y=x^3,\quad0\le x\le2$.
+
+\bt{10} $y=\sqrt{5-x},\quad3\le x\le5$.
+
+\bt{11} $y^2=x+1,\quad0\le x\le3$.
+
+\bt{12} $y=\sqrt{1+e^x},\quad0\le x\le1$.
+
+\bt{13} $y=\cos(\tfrac12x),\quad0\le x\le\pi$.
+
+\bt{14} $y=\frac{x^3}6+\frac1{2x},\quad\frac12\le x\le1$.
+
+\bt{15} $x=\frac13(y^2+2)^{3/2},\quad1\le y\le2$.
+
+\bt{16} $x=1+2y^2,\quad1\le y\le2$.
+
+\group{17–20} Đường cong đã cho được quay quanh trục $y$. Tìm diện tích mặt thu được.
+
+\bt{17} $y=\frac13x^{3/2},\quad0\le x\le12$.
+
+\bt{18} $x^{2/3}+y^{2/3}=1,\quad0\le y\le1$.
+
+\bt{19} $x=\sqrt{a^2-y^2},\quad0\le y\le a/2$.
+
+\bt{20} $y=\frac14x^2-\frac12\ln x,\quad1\le x\le2$.
+
+\group{21–26} [Công nghệ] Lập một tích phân biểu diễn diện tích mặt tạo thành khi quay đường cong đã cho quanh trục được chỉ định. Sau đó tính số tích phân chính xác đến bốn chữ số thập phân.
+
+\bt{21} $y=e^{-x^2},\quad-1\le x\le1$; trục $x$.
+
+\bt{22} $xy=y^2-1,\quad1\le y\le3$; trục $x$.
+
+\bt{23} $x=y+y^3,\quad0\le y\le1$; trục $y$.
+
+\bt{24} $y=x+\sin x,\quad0\le x\le2\pi/3$; trục $y$.
+
+\bt{25} $\ln y=x-y^2,\quad1\le y\le4$; trục $x$.
+
+\bt{26} $x=\cos^2y,\quad0\le y\le\pi/2$; trục $y$.
+
+\group{27–28} [Công nghệ] Tìm diện tích chính xác của mặt tạo thành khi quay đường cong đã cho quanh trục $x$.
+\bt{27} $y=1/x$, $1\le x\le2$.
+\bt{28} $y=\sqrt{x^2+1}$, $0\le x\le3$.
+\group{29–30} [Công nghệ] Dùng máy tính để tìm diện tích chính xác của mặt tạo thành khi quay đường cong đã cho quanh trục $y$. Nếu phần mềm gặp khó khăn khi tính tích phân, hãy biểu diễn diện tích mặt bằng một tích phân theo biến còn lại.
+\bt{29} $y=x^3$, $0\le y\le1$.
+\bt{30} $y=\ln(x+1)$, $0\le x\le1$.
+\group{31–32} Dùng quy tắc Simpson với $n=10$ để tính gần đúng diện tích mặt tạo thành khi quay đường cong đã cho quanh trục $x$. So sánh kết quả với giá trị tích phân tính bằng máy tính cầm tay hoặc máy tính.
+\bt{31} $y=\frac15x^5$, $0\le x\le5$.
+\bt{32} $y=x\ln x$, $1\le x\le2$.
+\bt{33} \textbf{Kèn Gabriel.} Mặt tạo thành khi quay đường cong $y=1/x$, $x\ge1$, quanh trục $x$ được gọi là \textit{kèn Gabriel}. Chứng minh diện tích mặt là vô hạn (mặc dù thể tích được bao kín là hữu hạn; xem Bài tập 7.8.75).
+\fig[.56]{ex33}{Bài 33. Kèn Gabriel.}
+\bt{34} Nếu đường cong vô hạn $y=e^{-x}$, $x\ge0$, được quay quanh trục $x$, hãy tìm diện tích mặt thu được.
+\bt{35} (a) Nếu $a>0$, tìm diện tích mặt tạo thành khi quay vòng kín của đường cong $3ay^2=x(a-x)^2$ quanh trục $x$.
+
+(b) Tìm diện tích mặt nếu vòng kín được quay quanh trục $y$.
+\fig[.38]{ex35}{Bài 35. Vòng kín của đường cong $3ay^2=x(a-x)^2$.}
+\bt{36} Một nhóm kỹ sư đang xây dựng một chảo anten vệ tinh dạng parabol, có hình dạng tạo thành khi quay đường cong $y=ax^2$ quanh trục $y$. Nếu chảo có đường kính 10 ft và độ sâu lớn nhất 2 ft, hãy tìm $a$ và diện tích mặt chảo.
+\fig[.57]{ex36}{Bài 36. Chảo anten vệ tinh. Ảnh: Dabarti CGI / Shutterstock.com.}
+\bt{37} (a) Elip
+\[\frac{x^2}{a^2}+\frac{y^2}{b^2}=1,\qquad a>b,\]
+được quay quanh trục $x$ để tạo thành một mặt gọi là \textit{mặt ellipsoid}, hay \textit{mặt cầu kéo dài}. Tìm diện tích mặt ellipsoid này.
+
+(b) Nếu elip ở phần (a) được quay quanh trục nhỏ của nó (trục $y$), mặt ellipsoid thu được gọi là \textit{mặt cầu dẹt}. Tìm diện tích mặt ellipsoid này.
+\bt{38} Tìm diện tích mặt xuyến trong Bài tập 6.2.75.
+\bt{39} (a) Nếu đường cong $y=f(x)$, $a\le x\le b$, được quay quanh đường thẳng ngang $y=c$, trong đó $f(x)\le c$, hãy tìm công thức diện tích mặt thu được.
+
+(b) [Công nghệ] Lập một tích phân để tìm diện tích mặt tạo thành khi quay đường cong $y=\sqrt{x}$, $0\le x\le4$, quanh đường thẳng $y=4$. Sau đó tính số tích phân chính xác đến bốn chữ số thập phân.
+\bt{40} [Công nghệ] Lập một tích phân biểu diễn diện tích mặt tạo thành khi quay đường cong $y=x^3$, $1\le x\le2$, quanh đường thẳng đã cho. Sau đó tính số tích phân chính xác đến hai chữ số thập phân.
+
+(a) $x=-1$;\qquad (b) $x=4$;
+
+(c) $y=\frac12$;\qquad (d) $y=10$.
+\bt{41} Tìm diện tích mặt tạo thành khi quay đường tròn $x^2+y^2=r^2$ quanh đường thẳng $y=r$.
+\group{42–43 — Đới cầu} Một \textit{đới cầu} là phần mặt cầu nằm giữa hai mặt phẳng song song.
+\bt{42} Chứng minh diện tích đới cầu là $S=2\pi Rh$, trong đó $R$ là bán kính mặt cầu và $h$ là khoảng cách giữa hai mặt phẳng. (Chú ý rằng $S$ chỉ phụ thuộc vào khoảng cách giữa hai mặt phẳng, không phụ thuộc vị trí của chúng, miễn là cả hai đều cắt mặt cầu.)
+\bt{43} Chứng minh diện tích một dải mặt trụ có bán kính $R$, chiều cao $h$, bằng diện tích đới cầu trong Bài 42.
+\bt{44} Gọi $L$ là độ dài đường cong $y=f(x)$, $a\le x\le b$, trong đó $f$ dương và có đạo hàm liên tục. Gọi $S_f$ là diện tích mặt tạo thành khi quay đường cong quanh trục $x$. Nếu $c$ là một hằng số dương, đặt $g(x)=f(x)+c$ và gọi $S_g$ là diện tích mặt tương ứng tạo thành từ đường cong $y=g(x)$, $a\le x\le b$. Biểu diễn $S_g$ theo $S_f$ và $L$.
+\bt{45} Chứng minh rằng nếu quay đường cong $y=e^{x/2}+e^{-x/2}$ quanh trục $x$, diện tích mặt thu được có cùng giá trị với thể tích được bao kín trên bất kỳ khoảng $a\le x\le b$ nào.
+\bt{46} Công thức 4 chỉ đúng khi $f(x)\ge0$. Chứng minh rằng khi $f(x)$ không nhất thiết dương, công thức diện tích mặt trở thành
+\[S=\int_a^b2\pi|f(x)|\sqrt{1+[f'(x)]^2}\,dx.\]
+\section*{Dự án khám phá — Quay quanh một đường thẳng nghiêng}
+Ta biết cách tìm thể tích khối tròn xoay tạo thành khi quay một miền quanh một đường thẳng ngang hoặc đứng (xem Mục 6.2). Ta cũng biết cách tìm diện tích mặt tròn xoay khi quay một đường cong quanh một đường thẳng ngang hoặc đứng (xem Mục 8.2). Nhưng nếu quay quanh một đường thẳng nghiêng, tức là không ngang cũng không đứng, thì sao? Trong dự án này, bạn được yêu cầu khám phá các công thức cho thể tích khối tròn xoay và diện tích mặt tròn xoay khi trục quay là một đường thẳng nghiêng.
+
+Gọi $C$ là cung đường cong $y=f(x)$ giữa các điểm $P(p,f(p))$ và $Q(q,f(q))$, và gọi $\mathcal R$ là miền giới hạn bởi $C$, đường thẳng $y=mx+b$ (nằm hoàn toàn phía dưới $C$), và các đường vuông góc với đường thẳng đó đi qua $P,Q$.
+\fig[.68]{proj01}{Miền $\mathcal R$ và trục quay nghiêng $y=mx+b$.}
+\prj{1} Chứng minh diện tích $\mathcal R$ là
+\[\frac1{1+m^2}\int_p^q[f(x)-mx-b][1+mf'(x)]\,dx.\]
+[Gợi ý: Có thể kiểm chứng công thức bằng cách trừ các diện tích, nhưng trong toàn bộ dự án sẽ hữu ích hơn nếu suy ra công thức bằng cách trước hết xấp xỉ diện tích bằng các hình chữ nhật vuông góc với đường thẳng, như hình sau. Dùng hình để biểu diễn $\Delta u$ theo $\Delta x$.]
+\fig[.68]{proj02}{Hình hỗ trợ Bài 1. Đường đen là tiếp tuyến với $C$ tại $(x_i,f(x_i))$; các góc và độ dài dùng để liên hệ $\Delta u$ với $\Delta x$.}
+\prj{2} Tìm diện tích miền được biểu diễn trong hình sau.
+\fig[.43]{proj03}{Bài 2. Miền giữa $y=x+\sin x$, $y=x-2$ và các đoạn vuông góc với đường thẳng.}
+\prj{3} Tìm một công thức (tương tự công thức ở Bài 1) cho thể tích khối tạo thành khi quay $\mathcal R$ quanh đường thẳng $y=mx+b$.
+\prj{4} Tìm thể tích khối tạo thành khi quay miền của Bài 2 quanh đường thẳng $y=x-2$.
+\prj{5} Tìm một công thức cho diện tích mặt tạo thành khi quay $C$ quanh đường thẳng $y=mx+b$.
+\prj{6} [Công nghệ] Dùng máy tính để tìm diện tích chính xác của mặt tạo thành khi quay đường cong $y=\sqrt{x}$, $0\le x\le4$, quanh đường thẳng $y=\frac12x$. Sau đó tính gần đúng kết quả đến ba chữ số thập phân.
+
+\end{document}

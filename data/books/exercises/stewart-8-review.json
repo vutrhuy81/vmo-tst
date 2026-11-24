@@ -1,0 +1,209 @@
+{
+  "exercises": [
+    {
+      "number": 1,
+      "title": "Kiểm tra khái niệm — Câu 1",
+      "content": "<p><strong>Kiểm tra khái niệm — Câu 1.</strong> <em>Ghi chú của sách:</em> Đáp án phần Kiểm tra khái niệm có tại StewartCalculus.com. (a) Độ dài một đường cong được định nghĩa như thế nào?</p>\n<p>(b) Viết biểu thức tính độ dài đường cong trơn <span class=\"math inline\">\\(y=f(x)\\)</span>, <span class=\"math inline\">\\(a\\le x\\le b\\)</span>.</p>\n<p>(c) Nếu <span class=\"math inline\">\\(x\\)</span> được cho dưới dạng hàm của <span class=\"math inline\">\\(y\\)</span> thì sao?</p>\n"
+    },
+    {
+      "number": 2,
+      "title": "Kiểm tra khái niệm — Câu 2",
+      "content": "<p><strong>Kiểm tra khái niệm — Câu 2.</strong> <em>Ghi chú của sách:</em> Đáp án phần Kiểm tra khái niệm có tại StewartCalculus.com. (a) Viết biểu thức tính diện tích mặt thu được khi quay đường cong <span class=\"math inline\">\\(y=f(x)\\)</span>, <span class=\"math inline\">\\(a\\le x\\le b\\)</span>, quanh trục <span class=\"math inline\">\\(x\\)</span>.</p>\n<p>(b) Nếu <span class=\"math inline\">\\(x\\)</span> được cho dưới dạng hàm của <span class=\"math inline\">\\(y\\)</span> thì sao?</p>\n<p>(c) Nếu quay đường cong quanh trục <span class=\"math inline\">\\(y\\)</span> thì sao?</p>\n"
+    },
+    {
+      "number": 3,
+      "title": "Kiểm tra khái niệm — Câu 3",
+      "content": "<p><strong>Kiểm tra khái niệm — Câu 3.</strong> <em>Ghi chú của sách:</em> Đáp án phần Kiểm tra khái niệm có tại StewartCalculus.com. Mô tả cách tìm lực thủy tĩnh tác dụng lên một bức tường thẳng đứng ngập trong chất lưu.</p>\n"
+    },
+    {
+      "number": 4,
+      "title": "Kiểm tra khái niệm — Câu 4",
+      "content": "<p><strong>Kiểm tra khái niệm — Câu 4.</strong> <em>Ghi chú của sách:</em> Đáp án phần Kiểm tra khái niệm có tại StewartCalculus.com. (a) Khối tâm của một tấm mỏng có ý nghĩa vật lý gì?</p>\n<p>(b) Nếu tấm nằm giữa <span class=\"math inline\">\\(y=f(x)\\)</span> và <span class=\"math inline\">\\(y=0\\)</span>, với <span class=\"math inline\">\\(a\\le x\\le b\\)</span>, hãy viết các biểu thức cho tọa độ khối tâm.</p>\n"
+    },
+    {
+      "number": 5,
+      "title": "Kiểm tra khái niệm — Câu 5",
+      "content": "<p><strong>Kiểm tra khái niệm — Câu 5.</strong> <em>Ghi chú của sách:</em> Đáp án phần Kiểm tra khái niệm có tại StewartCalculus.com. Định lý Pappus phát biểu điều gì?</p>\n"
+    },
+    {
+      "number": 6,
+      "title": "Kiểm tra khái niệm — Câu 6",
+      "content": "<p><strong>Kiểm tra khái niệm — Câu 6.</strong> <em>Ghi chú của sách:</em> Đáp án phần Kiểm tra khái niệm có tại StewartCalculus.com. Với hàm cầu <span class=\"math inline\">\\(p(x)\\)</span>, giải thích ý nghĩa của thặng dư tiêu dùng khi lượng hàng hiện có là <span class=\"math inline\">\\(X\\)</span> và giá bán hiện tại là <span class=\"math inline\">\\(P\\)</span>. Minh họa bằng một hình phác họa.</p>\n"
+    },
+    {
+      "number": 7,
+      "title": "Kiểm tra khái niệm — Câu 7",
+      "content": "<p><strong>Kiểm tra khái niệm — Câu 7.</strong> <em>Ghi chú của sách:</em> Đáp án phần Kiểm tra khái niệm có tại StewartCalculus.com. (a) Cung lượng tim là gì?</p>\n<p>(b) Giải thích cách đo cung lượng tim bằng phương pháp pha loãng chất chỉ thị màu.</p>\n"
+    },
+    {
+      "number": 8,
+      "title": "Kiểm tra khái niệm — Câu 8",
+      "content": "<p><strong>Kiểm tra khái niệm — Câu 8.</strong> <em>Ghi chú của sách:</em> Đáp án phần Kiểm tra khái niệm có tại StewartCalculus.com. Hàm mật độ xác suất là gì? Một hàm như vậy có những tính chất nào?</p>\n"
+    },
+    {
+      "number": 9,
+      "title": "Kiểm tra khái niệm — Câu 9",
+      "content": "<p><strong>Kiểm tra khái niệm — Câu 9.</strong> <em>Ghi chú của sách:</em> Đáp án phần Kiểm tra khái niệm có tại StewartCalculus.com. Giả sử <span class=\"math inline\">\\(f(x)\\)</span> là hàm mật độ xác suất của cân nặng một nữ sinh viên đại học, với <span class=\"math inline\">\\(x\\)</span> tính bằng pound.</p>\n<p>(a) Tích phân <span class=\"math inline\">\\(\\displaystyle\\int_{0}^{130}f(x)\\,dx\\)</span> có ý nghĩa gì?</p>\n<p>(b) Viết biểu thức cho kỳ vọng của hàm mật độ này.</p>\n<p>(c) Có thể tìm trung vị của hàm mật độ này bằng cách nào?</p>\n"
+    },
+    {
+      "number": 10,
+      "title": "Kiểm tra khái niệm — Câu 10",
+      "content": "<p><strong>Kiểm tra khái niệm — Câu 10.</strong> <em>Ghi chú của sách:</em> Đáp án phần Kiểm tra khái niệm có tại StewartCalculus.com. Phân phối chuẩn là gì? Độ lệch chuẩn có ý nghĩa gì?</p>\n"
+    },
+    {
+      "number": 11,
+      "title": "Đúng–sai — Câu 1",
+      "content": "<p><strong>Đúng–sai — Câu 1.</strong> Xác định mỗi khẳng định sau là đúng hay sai. Nếu đúng, giải thích vì sao. Nếu sai, giải thích hoặc đưa ra một phản ví dụ bác bỏ khẳng định. Độ dài cung của các đường cong <span class=\"math inline\">\\(y=f(x)\\)</span> và <span class=\"math inline\">\\(y=f(x)+c\\)</span>, với <span class=\"math inline\">\\(a\\le x\\le b\\)</span>, bằng nhau.</p>\n"
+    },
+    {
+      "number": 12,
+      "title": "Đúng–sai — Câu 2",
+      "content": "<p><strong>Đúng–sai — Câu 2.</strong> Xác định mỗi khẳng định sau là đúng hay sai. Nếu đúng, giải thích vì sao. Nếu sai, giải thích hoặc đưa ra một phản ví dụ bác bỏ khẳng định. Nếu đường cong <span class=\"math inline\">\\(y=f(x)\\)</span>, <span class=\"math inline\">\\(a\\le x\\le b\\)</span>, nằm phía trên trục <span class=\"math inline\">\\(x\\)</span> và <span class=\"math inline\">\\(c&gt;0\\)</span>, thì diện tích các mặt thu được khi quay <span class=\"math inline\">\\(y=f(x)\\)</span> và <span class=\"math inline\">\\(y=f(x)+c\\)</span> quanh trục <span class=\"math inline\">\\(x\\)</span> bằng nhau.</p>\n"
+    },
+    {
+      "number": 13,
+      "title": "Đúng–sai — Câu 3",
+      "content": "<p><strong>Đúng–sai — Câu 3.</strong> Xác định mỗi khẳng định sau là đúng hay sai. Nếu đúng, giải thích vì sao. Nếu sai, giải thích hoặc đưa ra một phản ví dụ bác bỏ khẳng định. Nếu <span class=\"math inline\">\\(f(x)\\le g(x)\\)</span> với <span class=\"math inline\">\\(a\\le x\\le b\\)</span>, thì độ dài cung của <span class=\"math inline\">\\(y=f(x)\\)</span> trên <span class=\"math inline\">\\(a\\le x\\le b\\)</span> nhỏ hơn hoặc bằng độ dài cung của <span class=\"math inline\">\\(y=g(x)\\)</span> trên khoảng đó.</p>\n"
+    },
+    {
+      "number": 14,
+      "title": "Đúng–sai — Câu 4",
+      "content": "<p><strong>Đúng–sai — Câu 4.</strong> Xác định mỗi khẳng định sau là đúng hay sai. Nếu đúng, giải thích vì sao. Nếu sai, giải thích hoặc đưa ra một phản ví dụ bác bỏ khẳng định. Độ dài đường cong <span class=\"math inline\">\\(y=x^3\\)</span>, <span class=\"math inline\">\\(0\\le x\\le1\\)</span>, là <span class=\"math display\">\\[L=\\int_{0}^{1}\\sqrt{1+x^6}\\,dx.\\]</span></p>\n"
+    },
+    {
+      "number": 15,
+      "title": "Đúng–sai — Câu 5",
+      "content": "<p><strong>Đúng–sai — Câu 5.</strong> Xác định mỗi khẳng định sau là đúng hay sai. Nếu đúng, giải thích vì sao. Nếu sai, giải thích hoặc đưa ra một phản ví dụ bác bỏ khẳng định. Nếu <span class=\"math inline\">\\(f\\)</span> liên tục, <span class=\"math inline\">\\(f(0)=0\\)</span> và <span class=\"math inline\">\\(f(3)=4\\)</span>, thì độ dài cung của đường cong <span class=\"math inline\">\\(y=f(x)\\)</span> trên <span class=\"math inline\">\\(0\\le x\\le3\\)</span> ít nhất bằng 5.</p>\n"
+    },
+    {
+      "number": 16,
+      "title": "Đúng–sai — Câu 6",
+      "content": "<p><strong>Đúng–sai — Câu 6.</strong> Xác định mỗi khẳng định sau là đúng hay sai. Nếu đúng, giải thích vì sao. Nếu sai, giải thích hoặc đưa ra một phản ví dụ bác bỏ khẳng định. Khối tâm của một tấm phẳng mỏng có khối lượng riêng đồng đều <span class=\"math inline\">\\(\\rho\\)</span> chỉ phụ thuộc hình dạng tấm, không phụ thuộc <span class=\"math inline\">\\(\\rho\\)</span>.</p>\n"
+    },
+    {
+      "number": 17,
+      "title": "Đúng–sai — Câu 7",
+      "content": "<p><strong>Đúng–sai — Câu 7.</strong> Xác định mỗi khẳng định sau là đúng hay sai. Nếu đúng, giải thích vì sao. Nếu sai, giải thích hoặc đưa ra một phản ví dụ bác bỏ khẳng định. Áp suất thủy tĩnh lên một đập chỉ phụ thuộc mực nước tại đập, không phụ thuộc kích thước hồ chứa do đập tạo ra.</p>\n"
+    },
+    {
+      "number": 18,
+      "title": "Đúng–sai — Câu 8",
+      "content": "<p><strong>Đúng–sai — Câu 8.</strong> Xác định mỗi khẳng định sau là đúng hay sai. Nếu đúng, giải thích vì sao. Nếu sai, giải thích hoặc đưa ra một phản ví dụ bác bỏ khẳng định. Nếu <span class=\"math inline\">\\(f\\)</span> là một hàm mật độ xác suất thì <span class=\"math display\">\\[\\int_{-\\infty}^{\\infty}f(x)\\,dx=1.\\]</span></p>\n"
+    },
+    {
+      "number": 19,
+      "title": "Bài tập 1",
+      "content": "<p><strong>Bài tập 1.</strong> <em>Yêu cầu chung (1–3):</em> Tìm độ dài đường cong.</p>\n<p><span class=\"math inline\">\\(y=4(x-1)^{3/2}\\)</span>, <span class=\"math inline\">\\(1\\le x\\le4\\)</span>.</p>\n"
+    },
+    {
+      "number": 20,
+      "title": "Bài tập 2",
+      "content": "<p><strong>Bài tập 2.</strong> <em>Yêu cầu chung (1–3):</em> Tìm độ dài đường cong.</p>\n<p><span class=\"math inline\">\\(y=2\\ln(\\sin\\tfrac12x)\\)</span>, <span class=\"math inline\">\\(\\pi/3\\le x\\le\\pi\\)</span>.</p>\n"
+    },
+    {
+      "number": 21,
+      "title": "Bài tập 3",
+      "content": "<p><strong>Bài tập 3.</strong> <em>Yêu cầu chung (1–3):</em> Tìm độ dài đường cong.</p>\n<p><span class=\"math inline\">\\(12x=4y^3+3y^{-1}\\)</span>, <span class=\"math inline\">\\(1\\le y\\le3\\)</span>.</p>\n"
+    },
+    {
+      "number": 22,
+      "title": "Bài tập 4",
+      "content": "<p><strong>Bài tập 4.</strong> (a) Tìm độ dài đường cong <span class=\"math display\">\\[y=\\frac{x^4}{16}+\\frac1{2x^2},\\qquad1\\le x\\le2.\\]</span> (b) Tìm diện tích mặt thu được khi quay đường cong ở phần (a) quanh trục <span class=\"math inline\">\\(y\\)</span>.</p>\n"
+    },
+    {
+      "number": 23,
+      "title": "Bài tập 5",
+      "content": "<p><strong>Bài tập 5.</strong> [Công nghệ] Gọi <span class=\"math inline\">\\(C\\)</span> là cung của đường cong <span class=\"math inline\">\\(y=2/(x+1)\\)</span> từ <span class=\"math inline\">\\((0,2)\\)</span> đến <span class=\"math inline\">\\((3,\\tfrac12)\\)</span>. Tìm giá trị gần đúng của mỗi đại lượng sau, chính xác đến bốn chữ số thập phân.</p>\n<p>(a) Độ dài <span class=\"math inline\">\\(C\\)</span>.</p>\n<p>(b) Diện tích mặt thu được khi quay <span class=\"math inline\">\\(C\\)</span> quanh trục <span class=\"math inline\">\\(x\\)</span>.</p>\n<p>(c) Diện tích mặt thu được khi quay <span class=\"math inline\">\\(C\\)</span> quanh trục <span class=\"math inline\">\\(y\\)</span>.</p>\n"
+    },
+    {
+      "number": 24,
+      "title": "Bài tập 6",
+      "content": "<p><strong>Bài tập 6.</strong> (a) Đường cong <span class=\"math inline\">\\(y=x^2\\)</span>, <span class=\"math inline\">\\(0\\le x\\le1\\)</span>, được quay quanh trục <span class=\"math inline\">\\(y\\)</span>. Tìm diện tích mặt thu được.</p>\n<p>(b) Tìm diện tích mặt thu được khi quay đường cong ở phần (a) quanh trục <span class=\"math inline\">\\(x\\)</span>.</p>\n"
+    },
+    {
+      "number": 25,
+      "title": "Bài tập 7",
+      "content": "<p><strong>Bài tập 7.</strong> Dùng quy tắc Simpson với <span class=\"math inline\">\\(n=10\\)</span> để ước lượng độ dài đường hình sin <span class=\"math inline\">\\(y=\\sin x\\)</span>, <span class=\"math inline\">\\(0\\le x\\le\\pi\\)</span>. Làm tròn kết quả đến bốn chữ số thập phân.</p>\n"
+    },
+    {
+      "number": 26,
+      "title": "Bài tập 8",
+      "content": "<p><strong>Bài tập 8.</strong> <em>Dữ kiện Bài 7:</em> Dùng quy tắc Simpson với <span class=\"math inline\">\\(n=10\\)</span> để ước lượng độ dài đường hình sin <span class=\"math inline\">\\(y=\\sin x\\)</span>, <span class=\"math inline\">\\(0\\le x\\le\\pi\\)</span>. Làm tròn kết quả đến bốn chữ số thập phân.</p>\n<p>(a) Lập, nhưng không tính, một tích phân cho diện tích mặt thu được khi quay đường hình sin ở Bài 7 quanh trục <span class=\"math inline\">\\(x\\)</span>.</p>\n<p>(b) [Công nghệ] Tính tích phân đó chính xác đến bốn chữ số thập phân.</p>\n"
+    },
+    {
+      "number": 27,
+      "title": "Bài tập 9",
+      "content": "<p><strong>Bài tập 9.</strong> Tìm độ dài đường cong <span class=\"math display\">\\[y=\\int_{1}^{x}\\sqrt{\\sqrt t-1}\\,dt,\\qquad1\\le x\\le16.\\]</span></p>\n"
+    },
+    {
+      "number": 28,
+      "title": "Bài tập 10",
+      "content": "<p><strong>Bài tập 10.</strong> <em>Dữ kiện Bài 9:</em> Tìm độ dài đường cong <span class=\"math display\">\\[y=\\int_{1}^{x}\\sqrt{\\sqrt t-1}\\,dt,\\qquad1\\le x\\le16.\\]</span></p>\n<p>Tìm diện tích mặt thu được khi quay đường cong trong Bài 9 quanh trục <span class=\"math inline\">\\(y\\)</span>.</p>\n"
+    },
+    {
+      "number": 29,
+      "title": "Bài tập 11",
+      "content": "<p><strong>Bài tập 11.</strong> Một cửa chắn của kênh tưới có dạng hình thang, rộng <span class=\"math inline\">\\(3\\,\\mathrm{ft}\\)</span> ở đáy, <span class=\"math inline\">\\(5\\,\\mathrm{ft}\\)</span> ở đỉnh và cao <span class=\"math inline\">\\(2\\,\\mathrm{ft}\\)</span>. Cửa được đặt thẳng đứng trong kênh sao cho nước vừa phủ kín cửa. Tìm lực thủy tĩnh lên một phía của cửa.</p>\n"
+    },
+    {
+      "number": 30,
+      "title": "Bài tập 12",
+      "content": "<p><strong>Bài tập 12.</strong> Một máng chứa đầy nước, các mặt đầu thẳng đứng có dạng miền parabol trong hình. Tìm lực thủy tĩnh lên một mặt đầu của máng.</p>\n<div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-8-review-283af565/ex12.png\" alt=\"image\" /><br />\nBài 12. Mặt đầu hình parabol rộng <span class=\"math inline\">\\(8\\,\\mathrm{ft}\\)</span>, sâu <span class=\"math inline\">\\(4\\,\\mathrm{ft}\\)</span>.</p>\n</div>\n"
+    },
+    {
+      "number": 31,
+      "title": "Bài tập 13",
+      "content": "<p><strong>Bài tập 13.</strong> <em>Yêu cầu chung (13–14):</em> Tìm trọng tâm hình học của miền đã cho.</p>\n<p>Miền tam giác trong hình.</p>\n<div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-8-review-283af565/ex13.png\" alt=\"image\" /><br />\nBài 13.</p>\n</div>\n"
+    },
+    {
+      "number": 32,
+      "title": "Bài tập 14",
+      "content": "<p><strong>Bài tập 14.</strong> <em>Yêu cầu chung (13–14):</em> Tìm trọng tâm hình học của miền đã cho.</p>\n<p>Miền giới hạn bởi đoạn thẳng và cung tròn trong hình.</p>\n<div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-8-review-283af565/ex14.png\" alt=\"image\" /><br />\nBài 14.</p>\n</div>\n"
+    },
+    {
+      "number": 33,
+      "title": "Bài tập 15",
+      "content": "<p><strong>Bài tập 15.</strong> <em>Yêu cầu chung (15–16):</em> Tìm trọng tâm hình học của miền giới hạn bởi các đường cong đã cho.</p>\n<p><span class=\"math inline\">\\(y=\\tfrac12x\\)</span>, <span class=\"math inline\">\\(y=\\sqrt x\\)</span>.</p>\n"
+    },
+    {
+      "number": 34,
+      "title": "Bài tập 16",
+      "content": "<p><strong>Bài tập 16.</strong> <em>Yêu cầu chung (15–16):</em> Tìm trọng tâm hình học của miền giới hạn bởi các đường cong đã cho.</p>\n<p><span class=\"math inline\">\\(y=\\sin x\\)</span>, <span class=\"math inline\">\\(y=0\\)</span>, <span class=\"math inline\">\\(x=\\pi/4\\)</span>, <span class=\"math inline\">\\(x=3\\pi/4\\)</span>.</p>\n"
+    },
+    {
+      "number": 35,
+      "title": "Bài tập 17",
+      "content": "<p><strong>Bài tập 17.</strong> Tìm thể tích khối thu được khi quay hình tròn bán kính 1, tâm <span class=\"math inline\">\\((1,0)\\)</span>, quanh trục <span class=\"math inline\">\\(y\\)</span>.</p>\n"
+    },
+    {
+      "number": 36,
+      "title": "Bài tập 18",
+      "content": "<p><strong>Bài tập 18.</strong> Dùng định lý Pappus và thể tích khối cầu bán kính <span class=\"math inline\">\\(r\\)</span> bằng <span class=\"math inline\">\\(\\tfrac43\\pi r^3\\)</span> để tìm trọng tâm hình học của miền nửa hình tròn giới hạn bởi <span class=\"math inline\">\\(y=\\sqrt{r^2-x^2}\\)</span> và trục <span class=\"math inline\">\\(x\\)</span>.</p>\n"
+    },
+    {
+      "number": 37,
+      "title": "Bài tập 19",
+      "content": "<p><strong>Bài tập 19.</strong> Hàm cầu của một hàng hóa là <span class=\"math display\">\\[p=2000-0.1x-0.01x^2.\\]</span> Tìm thặng dư tiêu dùng khi lượng bán là 100.</p>\n"
+    },
+    {
+      "number": 38,
+      "title": "Bài tập 20",
+      "content": "<p><strong>Bài tập 20.</strong> Sau khi tiêm <span class=\"math inline\">\\(6\\,\\mathrm{mg}\\)</span> chất chỉ thị màu vào một tâm nhĩ, các số đo nồng độ cách nhau hai giây được cho trong bảng. Dùng quy tắc Simpson ước lượng cung lượng tim.</p>\n<div class=\"center\">\n<table>\n<thead>\n<tr class=\"header\">\n<th style=\"text-align: right;\"><span class=\"math inline\">\\(t\\)</span></th>\n<th style=\"text-align: right;\"><span class=\"math inline\">\\(c(t)\\)</span></th>\n<th style=\"text-align: right;\"><span class=\"math inline\">\\(t\\)</span></th>\n<th style=\"text-align: right;\"><span class=\"math inline\">\\(c(t)\\)</span></th>\n</tr>\n</thead>\n<tbody>\n<tr class=\"odd\">\n<td style=\"text-align: right;\">0</td>\n<td style=\"text-align: right;\">0</td>\n<td style=\"text-align: right;\">14</td>\n<td style=\"text-align: right;\">4.7</td>\n</tr>\n<tr class=\"even\">\n<td style=\"text-align: right;\">2</td>\n<td style=\"text-align: right;\">1.9</td>\n<td style=\"text-align: right;\">16</td>\n<td style=\"text-align: right;\">3.3</td>\n</tr>\n<tr class=\"odd\">\n<td style=\"text-align: right;\">4</td>\n<td style=\"text-align: right;\">3.3</td>\n<td style=\"text-align: right;\">18</td>\n<td style=\"text-align: right;\">2.1</td>\n</tr>\n<tr class=\"even\">\n<td style=\"text-align: right;\">6</td>\n<td style=\"text-align: right;\">5.1</td>\n<td style=\"text-align: right;\">20</td>\n<td style=\"text-align: right;\">1.1</td>\n</tr>\n<tr class=\"odd\">\n<td style=\"text-align: right;\">8</td>\n<td style=\"text-align: right;\">7.6</td>\n<td style=\"text-align: right;\">22</td>\n<td style=\"text-align: right;\">0.5</td>\n</tr>\n<tr class=\"even\">\n<td style=\"text-align: right;\">10</td>\n<td style=\"text-align: right;\">7.1</td>\n<td style=\"text-align: right;\">24</td>\n<td style=\"text-align: right;\">0</td>\n</tr>\n<tr class=\"odd\">\n<td style=\"text-align: right;\">12</td>\n<td style=\"text-align: right;\">5.8</td>\n<td style=\"text-align: right;\"></td>\n<td style=\"text-align: right;\"></td>\n</tr>\n</tbody>\n</table>\n</div>\n"
+    },
+    {
+      "number": 39,
+      "title": "Bài tập 21",
+      "content": "<p><strong>Bài tập 21.</strong> (a) Giải thích tại sao hàm <span class=\"math display\">\\[f(x)=\\begin{cases}\\frac\\pi{20}\\sin\\frac{\\pi x}{10}&amp;\\text{nếu }0\\le x\\le10,\\\\0&amp;\\text{nếu }x&lt;0\\text{ hoặc }x&gt;10\\end{cases}\\]</span> là một hàm mật độ xác suất.</p>\n<p>(b) Tìm <span class=\"math inline\">\\(P(X&lt;4)\\)</span>.</p>\n<p>(c) Tính kỳ vọng. Giá trị có đúng như bạn dự đoán không?</p>\n"
+    },
+    {
+      "number": 40,
+      "title": "Bài tập 22",
+      "content": "<p><strong>Bài tập 22.</strong> Thời gian mang thai ở người có phân phối chuẩn với kỳ vọng 268 ngày và độ lệch chuẩn 15 ngày. Bao nhiêu phần trăm thai kỳ kéo dài từ 250 đến 280 ngày?</p>\n"
+    },
+    {
+      "number": 41,
+      "title": "Bài tập 23",
+      "content": "<p><strong>Bài tập 23.</strong> Thời gian chờ xếp hàng tại một ngân hàng được mô hình hóa bằng hàm mật độ mũ có kỳ vọng 8 phút.</p>\n<p>(a) Xác suất khách hàng được phục vụ trong 3 phút đầu là bao nhiêu?</p>\n<p>(b) Xác suất khách hàng phải chờ hơn 10 phút là bao nhiêu?</p>\n<p>(c) Trung vị thời gian chờ là bao nhiêu?</p>\n"
+    }
+  ]
+}

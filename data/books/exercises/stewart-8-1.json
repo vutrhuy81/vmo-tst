@@ -1,0 +1,221 @@
+{
+  "exercises": [
+    {
+      "number": 1,
+      "content": "<p><strong>1.</strong></p>\n<p>Dùng công thức độ dài cung (3) để tìm độ dài đường cong <span class=\"math inline\">\\(y=3-2x\\)</span>, <span class=\"math inline\">\\(-1\\le x\\le3\\)</span>. Kiểm tra kết quả bằng cách nhận xét rằng đường cong là một đoạn thẳng và tính độ dài bằng công thức khoảng cách.</p>\n<div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-8-1-7d2efba8/ex01.png\" alt=\"image\" /><br />\nBài 1. Đoạn thẳng <span class=\"math inline\">\\(y=3-2x\\)</span>.</p>\n</div>\n"
+    },
+    {
+      "number": 2,
+      "content": "<p><strong>2.</strong></p>\n<p>Dùng công thức độ dài cung để tìm độ dài đường cong <span class=\"math inline\">\\(y=\\sqrt{4-x^2}\\)</span>, <span class=\"math inline\">\\(0\\le x\\le2\\)</span>. Kiểm tra kết quả bằng cách nhận xét rằng đường cong là một phần của đường tròn.</p>\n<div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-8-1-7d2efba8/ex02.png\" alt=\"image\" /><br />\nBài 2. Cung tròn <span class=\"math inline\">\\(y=\\sqrt{4-x^2}\\)</span>.</p>\n</div>\n"
+    },
+    {
+      "number": 3,
+      "content": "<p><strong>3.</strong></p>\n<p><em>Yêu cầu chung (3–8):</em> Lập một tích phân biểu diễn độ dài đường cong, nhưng không tính tích phân.</p>\n<p><span class=\"math inline\">\\(y=x^3,\\quad0\\le x\\le2\\)</span>.</p>\n"
+    },
+    {
+      "number": 4,
+      "content": "<p><strong>4.</strong></p>\n<p><em>Yêu cầu chung (3–8):</em> Lập một tích phân biểu diễn độ dài đường cong, nhưng không tính tích phân.</p>\n<p><span class=\"math inline\">\\(y=e^x,\\quad1\\le x\\le3\\)</span>.</p>\n"
+    },
+    {
+      "number": 5,
+      "content": "<p><strong>5.</strong></p>\n<p><em>Yêu cầu chung (3–8):</em> Lập một tích phân biểu diễn độ dài đường cong, nhưng không tính tích phân.</p>\n<p><span class=\"math inline\">\\(y=x-\\ln x,\\quad1\\le x\\le4\\)</span>.</p>\n"
+    },
+    {
+      "number": 6,
+      "content": "<p><strong>6.</strong></p>\n<p><em>Yêu cầu chung (3–8):</em> Lập một tích phân biểu diễn độ dài đường cong, nhưng không tính tích phân.</p>\n<p><span class=\"math inline\">\\(x=y^2+y,\\quad0\\le y\\le3\\)</span>.</p>\n"
+    },
+    {
+      "number": 7,
+      "content": "<p><strong>7.</strong></p>\n<p><em>Yêu cầu chung (3–8):</em> Lập một tích phân biểu diễn độ dài đường cong, nhưng không tính tích phân.</p>\n<p><span class=\"math inline\">\\(x=\\sin y,\\quad0\\le y\\le\\pi/2\\)</span>.</p>\n"
+    },
+    {
+      "number": 8,
+      "content": "<p><strong>8.</strong></p>\n<p><em>Yêu cầu chung (3–8):</em> Lập một tích phân biểu diễn độ dài đường cong, nhưng không tính tích phân.</p>\n<p><span class=\"math inline\">\\(y^2=\\ln x,\\quad-1\\le y\\le1\\)</span>.</p>\n"
+    },
+    {
+      "number": 9,
+      "content": "<p><strong>9.</strong></p>\n<p><em>Yêu cầu chung (9–24):</em> Tìm độ dài chính xác của đường cong.</p>\n<p><span class=\"math inline\">\\(y=\\frac23x^{3/2},\\quad0\\le x\\le2\\)</span>.</p>\n"
+    },
+    {
+      "number": 10,
+      "content": "<p><strong>10.</strong></p>\n<p><em>Yêu cầu chung (9–24):</em> Tìm độ dài chính xác của đường cong.</p>\n<p><span class=\"math inline\">\\(y=(x+4)^{3/2},\\quad0\\le x\\le4\\)</span>.</p>\n"
+    },
+    {
+      "number": 11,
+      "content": "<p><strong>11.</strong></p>\n<p><em>Yêu cầu chung (9–24):</em> Tìm độ dài chính xác của đường cong.</p>\n<p><span class=\"math inline\">\\(y=\\frac23(1+x^2)^{3/2},\\quad0\\le x\\le1\\)</span>.</p>\n"
+    },
+    {
+      "number": 12,
+      "content": "<p><strong>12.</strong></p>\n<p><em>Yêu cầu chung (9–24):</em> Tìm độ dài chính xác của đường cong.</p>\n<p><span class=\"math inline\">\\(36y^2=(x^2-4)^3,\\quad2\\le x\\le3,\\quad y\\ge0\\)</span>.</p>\n"
+    },
+    {
+      "number": 13,
+      "content": "<p><strong>13.</strong></p>\n<p><em>Yêu cầu chung (9–24):</em> Tìm độ dài chính xác của đường cong.</p>\n<p><span class=\"math inline\">\\(y=\\frac{x^3}3+\\frac1{4x},\\quad1\\le x\\le2\\)</span>.</p>\n"
+    },
+    {
+      "number": 14,
+      "content": "<p><strong>14.</strong></p>\n<p><em>Yêu cầu chung (9–24):</em> Tìm độ dài chính xác của đường cong.</p>\n<p><span class=\"math inline\">\\(x=\\frac{y^4}8+\\frac1{4y^2},\\quad1\\le y\\le2\\)</span>.</p>\n"
+    },
+    {
+      "number": 15,
+      "content": "<p><strong>15.</strong></p>\n<p><em>Yêu cầu chung (9–24):</em> Tìm độ dài chính xác của đường cong.</p>\n<p><span class=\"math inline\">\\(y=\\frac12\\ln(\\sin2x),\\quad\\pi/8\\le x\\le\\pi/6\\)</span>.</p>\n"
+    },
+    {
+      "number": 16,
+      "content": "<p><strong>16.</strong></p>\n<p><em>Yêu cầu chung (9–24):</em> Tìm độ dài chính xác của đường cong.</p>\n<p><span class=\"math inline\">\\(y=\\ln(\\cos x),\\quad0\\le x\\le\\pi/3\\)</span>.</p>\n"
+    },
+    {
+      "number": 17,
+      "content": "<p><strong>17.</strong></p>\n<p><em>Yêu cầu chung (9–24):</em> Tìm độ dài chính xác của đường cong.</p>\n<p><span class=\"math inline\">\\(y=\\ln(\\sec x),\\quad0\\le x\\le\\pi/4\\)</span>.</p>\n"
+    },
+    {
+      "number": 18,
+      "content": "<p><strong>18.</strong></p>\n<p><em>Yêu cầu chung (9–24):</em> Tìm độ dài chính xác của đường cong.</p>\n<p><span class=\"math inline\">\\(x=e^y+\\frac14e^{-y},\\quad0\\le y\\le1\\)</span>.</p>\n"
+    },
+    {
+      "number": 19,
+      "content": "<p><strong>19.</strong></p>\n<p><em>Yêu cầu chung (9–24):</em> Tìm độ dài chính xác của đường cong.</p>\n<p><span class=\"math inline\">\\(x=\\frac13\\sqrt{y}(y-3),\\quad1\\le y\\le9\\)</span>.</p>\n"
+    },
+    {
+      "number": 20,
+      "content": "<p><strong>20.</strong></p>\n<p><em>Yêu cầu chung (9–24):</em> Tìm độ dài chính xác của đường cong.</p>\n<p><span class=\"math inline\">\\(y=3+\\frac12\\cosh2x,\\quad0\\le x\\le1\\)</span>.</p>\n"
+    },
+    {
+      "number": 21,
+      "content": "<p><strong>21.</strong></p>\n<p><em>Yêu cầu chung (9–24):</em> Tìm độ dài chính xác của đường cong.</p>\n<p><span class=\"math inline\">\\(y=\\frac14x^2-\\frac12\\ln x,\\quad1\\le x\\le2\\)</span>.</p>\n"
+    },
+    {
+      "number": 22,
+      "content": "<p><strong>22.</strong></p>\n<p><em>Yêu cầu chung (9–24):</em> Tìm độ dài chính xác của đường cong.</p>\n<p><span class=\"math inline\">\\(y=\\sqrt{x-x^2}+\\sin^{-1}(\\sqrt{x})\\)</span>.</p>\n"
+    },
+    {
+      "number": 23,
+      "content": "<p><strong>23.</strong></p>\n<p><em>Yêu cầu chung (9–24):</em> Tìm độ dài chính xác của đường cong.</p>\n<p><span class=\"math inline\">\\(y=\\ln(1-x^2),\\quad0\\le x\\le\\frac12\\)</span>.</p>\n"
+    },
+    {
+      "number": 24,
+      "content": "<p><strong>24.</strong></p>\n<p><em>Yêu cầu chung (9–24):</em> Tìm độ dài chính xác của đường cong.</p>\n<p><span class=\"math inline\">\\(y=1-e^{-x},\\quad0\\le x\\le2\\)</span>.</p>\n"
+    },
+    {
+      "number": 25,
+      "content": "<p><strong>25.</strong></p>\n<p><em>Yêu cầu chung (25–26):</em> Tìm độ dài cung của đường cong từ điểm <span class=\"math inline\">\\(P\\)</span> đến điểm <span class=\"math inline\">\\(Q\\)</span>.</p>\n<p><span class=\"math inline\">\\(y=\\frac12x^2\\)</span>, <span class=\"math inline\">\\(P(-1,\\frac12)\\)</span>, <span class=\"math inline\">\\(Q(1,\\frac12)\\)</span>.</p>\n"
+    },
+    {
+      "number": 26,
+      "content": "<p><strong>26.</strong></p>\n<p><em>Yêu cầu chung (25–26):</em> Tìm độ dài cung của đường cong từ điểm <span class=\"math inline\">\\(P\\)</span> đến điểm <span class=\"math inline\">\\(Q\\)</span>.</p>\n<p><span class=\"math inline\">\\(x^2=(y-4)^3\\)</span>, <span class=\"math inline\">\\(P(1,5)\\)</span>, <span class=\"math inline\">\\(Q(8,8)\\)</span>.</p>\n"
+    },
+    {
+      "number": 27,
+      "content": "<p><strong>27.</strong></p>\n<p><em>Yêu cầu chung (27–32):</em> [Công nghệ] Vẽ đồ thị đường cong và ước lượng trực quan độ dài của nó. Sau đó tính độ dài chính xác đến bốn chữ số thập phân.</p>\n<p><span class=\"math inline\">\\(y=x^2+x^3,\\quad1\\le x\\le2\\)</span>.</p>\n"
+    },
+    {
+      "number": 28,
+      "content": "<p><strong>28.</strong></p>\n<p><em>Yêu cầu chung (27–32):</em> [Công nghệ] Vẽ đồ thị đường cong và ước lượng trực quan độ dài của nó. Sau đó tính độ dài chính xác đến bốn chữ số thập phân.</p>\n<p><span class=\"math inline\">\\(y=x+\\cos x,\\quad0\\le x\\le\\pi/2\\)</span>.</p>\n"
+    },
+    {
+      "number": 29,
+      "content": "<p><strong>29.</strong></p>\n<p><em>Yêu cầu chung (27–32):</em> [Công nghệ] Vẽ đồ thị đường cong và ước lượng trực quan độ dài của nó. Sau đó tính độ dài chính xác đến bốn chữ số thập phân.</p>\n<p><span class=\"math inline\">\\(y=\\sqrt[3]x,\\quad1\\le x\\le4\\)</span>.</p>\n"
+    },
+    {
+      "number": 30,
+      "content": "<p><strong>30.</strong></p>\n<p><em>Yêu cầu chung (27–32):</em> [Công nghệ] Vẽ đồ thị đường cong và ước lượng trực quan độ dài của nó. Sau đó tính độ dài chính xác đến bốn chữ số thập phân.</p>\n<p><span class=\"math inline\">\\(y=x\\tan x,\\quad0\\le x\\le1\\)</span>.</p>\n"
+    },
+    {
+      "number": 31,
+      "content": "<p><strong>31.</strong></p>\n<p><em>Yêu cầu chung (27–32):</em> [Công nghệ] Vẽ đồ thị đường cong và ước lượng trực quan độ dài của nó. Sau đó tính độ dài chính xác đến bốn chữ số thập phân.</p>\n<p><span class=\"math inline\">\\(y=xe^{-x},\\quad1\\le x\\le2\\)</span>.</p>\n"
+    },
+    {
+      "number": 32,
+      "content": "<p><strong>32.</strong></p>\n<p><em>Yêu cầu chung (27–32):</em> [Công nghệ] Vẽ đồ thị đường cong và ước lượng trực quan độ dài của nó. Sau đó tính độ dài chính xác đến bốn chữ số thập phân.</p>\n<p><span class=\"math inline\">\\(y=\\ln(x^2+4),\\quad-2\\le x\\le2\\)</span>.</p>\n"
+    },
+    {
+      "number": 33,
+      "content": "<p><strong>33.</strong></p>\n<p><em>Yêu cầu chung (33–34):</em> Dùng quy tắc Simpson với <span class=\"math inline\">\\(n=10\\)</span> để ước lượng độ dài cung của đường cong. So sánh kết quả với giá trị tích phân tính bằng máy tính cầm tay hoặc máy tính.</p>\n<p><span class=\"math inline\">\\(y=x\\sin x\\)</span>, <span class=\"math inline\">\\(0\\le x\\le2\\pi\\)</span>.</p>\n"
+    },
+    {
+      "number": 34,
+      "content": "<p><strong>34.</strong></p>\n<p><em>Yêu cầu chung (33–34):</em> Dùng quy tắc Simpson với <span class=\"math inline\">\\(n=10\\)</span> để ước lượng độ dài cung của đường cong. So sánh kết quả với giá trị tích phân tính bằng máy tính cầm tay hoặc máy tính.</p>\n<p><span class=\"math inline\">\\(y=e^{-x^2}\\)</span>, <span class=\"math inline\">\\(0\\le x\\le2\\)</span>.</p>\n"
+    },
+    {
+      "number": 35,
+      "content": "<p><strong>35.</strong></p>\n<p>[Đồ thị; Công nghệ]</p>\n<p>(a) Vẽ đồ thị <span class=\"math inline\">\\(y=x\\sqrt[3]{4-x}\\)</span>, <span class=\"math inline\">\\(0\\le x\\le4\\)</span>.</p>\n<p>(b) Tính độ dài các đường gấp khúc xấp xỉ gồm <span class=\"math inline\">\\(n=1,2,4\\)</span> đoạn. (Chia khoảng thành các khoảng con bằng nhau.) Minh họa bằng cách phác họa đường cong và các đường gấp khúc này (như Hình 6).</p>\n<p>(c) Lập một tích phân biểu diễn độ dài đường cong.</p>\n<p>(d) Tính độ dài đường cong đến bốn chữ số thập phân. So sánh với các xấp xỉ ở phần (b).</p>\n"
+    },
+    {
+      "number": 36,
+      "content": "<p><strong>36.</strong></p>\n<p><em>Yêu cầu Bài 35 (thay đường cong bằng dữ kiện Bài 36):</em> [Đồ thị; Công nghệ]</p>\n<p>(a) Vẽ đồ thị <span class=\"math inline\">\\(y=x\\sqrt[3]{4-x}\\)</span>, <span class=\"math inline\">\\(0\\le x\\le4\\)</span>.</p>\n<p>(b) Tính độ dài các đường gấp khúc xấp xỉ gồm <span class=\"math inline\">\\(n=1,2,4\\)</span> đoạn. (Chia khoảng thành các khoảng con bằng nhau.) Minh họa bằng cách phác họa đường cong và các đường gấp khúc này (như Hình 6).</p>\n<p>(c) Lập một tích phân biểu diễn độ dài đường cong.</p>\n<p>(d) Tính độ dài đường cong đến bốn chữ số thập phân. So sánh với các xấp xỉ ở phần (b).</p>\n<p>[Đồ thị] Làm lại Bài 35 cho đường cong <span class=\"math inline\">\\(y=x+\\sin x\\)</span>, <span class=\"math inline\">\\(0\\le x\\le2\\pi\\)</span>.</p>\n"
+    },
+    {
+      "number": 37,
+      "content": "<p><strong>37.</strong></p>\n<p>[Công nghệ] Dùng máy tính hoặc bảng tích phân để tìm độ dài chính xác của cung đường cong <span class=\"math inline\">\\(y=e^x\\)</span> nằm giữa hai điểm <span class=\"math inline\">\\((0,1)\\)</span> và <span class=\"math inline\">\\((2,e^2)\\)</span>.</p>\n"
+    },
+    {
+      "number": 38,
+      "content": "<p><strong>38.</strong></p>\n<p>[Công nghệ] Dùng máy tính hoặc bảng tích phân để tìm độ dài chính xác của cung đường cong <span class=\"math inline\">\\(y=x^{4/3}\\)</span> nằm giữa hai điểm <span class=\"math inline\">\\((0,0)\\)</span> và <span class=\"math inline\">\\((1,1)\\)</span>. Nếu phần mềm gặp khó khăn khi tính tích phân, hãy thực hiện một phép đổi biến để chuyển tích phân thành dạng mà phần mềm có thể tính được.</p>\n"
+    },
+    {
+      "number": 39,
+      "content": "<p><strong>39.</strong></p>\n<p>Tìm độ dài đường astroid <span class=\"math inline\">\\(x^{2/3}+y^{2/3}=1\\)</span>.</p>\n<div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-8-1-7d2efba8/ex39.png\" alt=\"image\" /><br />\nBài 39. Đường astroid <span class=\"math inline\">\\(x^{2/3}+y^{2/3}=1\\)</span>.</p>\n</div>\n"
+    },
+    {
+      "number": 40,
+      "content": "<p><strong>40.</strong></p>\n<p>(a) Phác họa đường cong <span class=\"math inline\">\\(y^3=x^2\\)</span>.</p>\n<p>(b) Dùng các Công thức 3 và 4 để lập hai tích phân biểu diễn độ dài cung từ <span class=\"math inline\">\\((0,0)\\)</span> đến <span class=\"math inline\">\\((1,1)\\)</span>. Nhận xét rằng một trong hai là tích phân suy rộng và tính cả hai tích phân.</p>\n<p>(c) Tìm độ dài cung của đường cong này từ <span class=\"math inline\">\\((-1,1)\\)</span> đến <span class=\"math inline\">\\((8,4)\\)</span>.</p>\n"
+    },
+    {
+      "number": 41,
+      "content": "<p><strong>41.</strong></p>\n<p>Tìm hàm độ dài cung của đường cong <span class=\"math inline\">\\(y=2x^{3/2}\\)</span> với điểm xuất phát <span class=\"math inline\">\\(P_0(1,2)\\)</span>.</p>\n"
+    },
+    {
+      "number": 42,
+      "content": "<p><strong>42.</strong></p>\n<p>(a) Tìm hàm độ dài cung của đường cong <span class=\"math inline\">\\(y=\\ln(\\sin x)\\)</span>, <span class=\"math inline\">\\(0&lt;x&lt;\\pi\\)</span>, với điểm xuất phát <span class=\"math inline\">\\((\\pi/2,0)\\)</span>.</p>\n<p>(b) [Đồ thị] Vẽ cả đường cong lẫn hàm độ dài cung trên cùng một màn hình. Vì sao hàm độ dài cung âm khi <span class=\"math inline\">\\(x\\)</span> nhỏ hơn <span class=\"math inline\">\\(\\pi/2\\)</span>?</p>\n"
+    },
+    {
+      "number": 43,
+      "content": "<p><strong>43.</strong></p>\n<p>Tìm hàm độ dài cung của đường cong <span class=\"math inline\">\\(y=\\sin^{-1}x+\\sqrt{1-x^2}\\)</span> với điểm xuất phát <span class=\"math inline\">\\((0,1)\\)</span>.</p>\n"
+    },
+    {
+      "number": 44,
+      "content": "<p><strong>44.</strong></p>\n<p>Hàm độ dài cung của một đường cong <span class=\"math inline\">\\(y=f(x)\\)</span>, trong đó <span class=\"math inline\">\\(f\\)</span> là hàm tăng, là <span class=\"math inline\">\\(s(x)=\\int_0^x\\sqrt{3t+5}\\,dt\\)</span>.</p>\n<p>(a) Nếu đồ thị <span class=\"math inline\">\\(f\\)</span> cắt trục <span class=\"math inline\">\\(y\\)</span> tại tung độ 2, hãy tìm một phương trình của <span class=\"math inline\">\\(f\\)</span>.</p>\n<p>(b) Điểm nào trên đồ thị <span class=\"math inline\">\\(f\\)</span> cách giao điểm với trục <span class=\"math inline\">\\(y\\)</span> một đoạn dài 3 đơn vị dọc theo đường cong? Làm tròn kết quả đến 3 chữ số thập phân.</p>\n"
+    },
+    {
+      "number": 45,
+      "content": "<p><strong>45.</strong></p>\n<p>Một con diều hâu đang bay với tốc độ 15 m/s ở độ cao 180 m vô tình làm rơi con mồi. Quỹ đạo parabol của con mồi rơi được mô tả bởi phương trình <span class=\"math display\">\\[y=180-\\frac{x^2}{45}\\]</span> cho đến khi chạm đất, trong đó <span class=\"math inline\">\\(y\\)</span> là độ cao so với mặt đất và <span class=\"math inline\">\\(x\\)</span> là quãng đường theo phương ngang, tính bằng mét. Tính quãng đường con mồi đi được từ lúc rơi đến khi chạm đất. Cho kết quả chính xác đến một phần mười mét.</p>\n"
+    },
+    {
+      "number": 46,
+      "content": "<p><strong>46.</strong></p>\n<p>Một luồng gió đều thổi một chiếc diều về chính tây. Độ cao của diều so với mặt đất, từ vị trí ngang <span class=\"math inline\">\\(x=0\\)</span> đến <span class=\"math inline\">\\(x=80\\)</span> ft, được cho bởi <span class=\"math inline\">\\(y=150-\\frac1{40}(x-50)^2\\)</span>. Tìm quãng đường diều đã đi.</p>\n"
+    },
+    {
+      "number": 47,
+      "content": "<p><strong>47.</strong></p>\n<p>[Công nghệ] Một nhà sản xuất tấm lợp kim loại dạng sóng muốn tạo các tấm rộng 28 inch và cao 2 inch bằng cách gia công các tấm kim loại phẳng như hình. Mặt cắt của tấm lợp có dạng sóng sin. Kiểm chứng rằng đường sin có phương trình <span class=\"math inline\">\\(y=\\sin(\\pi x/7)\\)</span> và tìm chiều rộng <span class=\"math inline\">\\(w\\)</span> của tấm kim loại phẳng cần dùng để tạo một tấm lợp rộng 28 inch. (Tính số tích phân chính xác đến bốn chữ số có nghĩa.)</p>\n<div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-8-1-7d2efba8/ex47.png\" alt=\"image\" /><br />\nBài 47. Tấm kim loại phẳng rộng <span class=\"math inline\">\\(w\\)</span> và tấm lợp dạng sóng rộng 28 inch, cao 2 inch.</p>\n</div>\n"
+    },
+    {
+      "number": 48,
+      "content": "<p><strong>48.</strong></p>\n<p><em>Yêu cầu chung (48–50):</em> Một sợi xích (hoặc dây cáp) có mật độ đồng đều, được treo giữa hai điểm như hình, có hình dạng một đường cong gọi là <em>đường dây xích</em>, với phương trình <span class=\"math inline\">\\(y=a\\cosh(x/a)\\)</span>. (Xem Dự án khám phá sau Mục 12.2.)</p>\n<div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-8-1-7d2efba8/catenary.png\" alt=\"image\" /><br />\nĐường dây xích <span class=\"math inline\">\\(y=a\\cosh(x/a)\\)</span>.</p>\n</div>\n<p>(a) Tìm độ dài cung của đường dây xích <span class=\"math inline\">\\(y=a\\cosh(x/a)\\)</span> trên khoảng <span class=\"math inline\">\\([c,d]\\)</span>.</p>\n<p>(b) Chứng minh rằng trên bất kỳ khoảng <span class=\"math inline\">\\([c,d]\\)</span> nào, tỉ số giữa diện tích dưới đường dây xích và độ dài cung của nó bằng <span class=\"math inline\">\\(a\\)</span>.</p>\n"
+    },
+    {
+      "number": 49,
+      "content": "<p><strong>49.</strong></p>\n<p><em>Yêu cầu chung (48–50):</em> Một sợi xích (hoặc dây cáp) có mật độ đồng đều, được treo giữa hai điểm như hình, có hình dạng một đường cong gọi là <em>đường dây xích</em>, với phương trình <span class=\"math inline\">\\(y=a\\cosh(x/a)\\)</span>. (Xem Dự án khám phá sau Mục 12.2.)</p>\n<div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-8-1-7d2efba8/catenary.png\" alt=\"image\" /><br />\nĐường dây xích <span class=\"math inline\">\\(y=a\\cosh(x/a)\\)</span>.</p>\n</div>\n<p>Hình vẽ biểu diễn một dây điện thoại treo giữa hai cột tại <span class=\"math inline\">\\(x=-25\\)</span> và <span class=\"math inline\">\\(x=25\\)</span>. Dây có dạng đường dây xích được mô tả bởi phương trình <span class=\"math display\">\\[y=c+a\\cosh\\frac xa.\\]</span> Nếu chiều dài dây giữa hai cột là 51 ft và điểm thấp nhất của dây phải cách mặt đất 20 ft, thì phải gắn dây ở độ cao bao nhiêu trên mỗi cột?</p>\n<div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-8-1-7d2efba8/ex49.png\" alt=\"image\" /><br />\nBài 49. Dây điện thoại treo giữa hai cột.</p>\n</div>\n"
+    },
+    {
+      "number": 50,
+      "content": "<p><strong>50.</strong></p>\n<p><em>Yêu cầu chung (48–50):</em> Một sợi xích (hoặc dây cáp) có mật độ đồng đều, được treo giữa hai điểm như hình, có hình dạng một đường cong gọi là <em>đường dây xích</em>, với phương trình <span class=\"math inline\">\\(y=a\\cosh(x/a)\\)</span>. (Xem Dự án khám phá sau Mục 12.2.)</p>\n<div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-8-1-7d2efba8/catenary.png\" alt=\"image\" /><br />\nĐường dây xích <span class=\"math inline\">\\(y=a\\cosh(x/a)\\)</span>.</p>\n</div>\n<p>[Công nghệ] Nhà vật lý và kiến trúc sư người Anh Robert Hooke (1635–1703) là người đầu tiên nhận xét rằng hình dạng lý tưởng của một vòm tự đứng là một đường dây xích lật ngược. Hooke nhận xét: “Dây xích treo thế nào, vòm đứng thế ấy.” Gateway Arch tại St. Louis dựa trên hình dạng đường dây xích; đường cong trung tâm của vòm được mô hình hóa bởi phương trình <span class=\"math display\">\\[y=211.49-20.96\\cosh(0.03291765x),\\]</span> trong đó <span class=\"math inline\">\\(x,y\\)</span> tính bằng mét và <span class=\"math inline\">\\(|x|\\le91.20\\)</span>. Lập một tích phân biểu diễn độ dài vòm và tính số tích phân để ước lượng độ dài chính xác đến mét gần nhất.</p>\n"
+    },
+    {
+      "number": 51,
+      "content": "<p><strong>51.</strong></p>\n<p>Với hàm <span class=\"math inline\">\\(f(x)=\\frac14e^x+e^{-x}\\)</span>, chứng minh rằng độ dài cung trên bất kỳ khoảng nào có cùng giá trị với diện tích dưới đường cong.</p>\n"
+    },
+    {
+      "number": 52,
+      "content": "<p><strong>52.</strong></p>\n<p>[Đồ thị] Các đường cong có phương trình <span class=\"math inline\">\\(x^n+y^n=1\\)</span>, <span class=\"math inline\">\\(n=4,6,8,\\ldots\\)</span>, được gọi là <em>các đường tròn béo</em>. Vẽ đồ thị với <span class=\"math inline\">\\(n=2,4,6,8,10\\)</span> để thấy lý do. Lập một tích phân biểu diễn độ dài <span class=\"math inline\">\\(L_{2k}\\)</span> của đường tròn béo với <span class=\"math inline\">\\(n=2k\\)</span>. Không tính tích phân, hãy nêu giá trị <span class=\"math inline\">\\(\\lim_{k\\to\\infty}L_{2k}\\)</span>.</p>\n"
+    },
+    {
+      "number": 53,
+      "content": "<p><strong>53.</strong></p>\n<p>Tìm độ dài đường cong <span class=\"math display\">\\[y=\\int_1^x\\sqrt{t^3-1}\\,dt,\\qquad1\\le x\\le4.\\]</span></p>\n"
+    },
+    {
+      "number": 54,
+      "title": "Dự án khám phá — Cuộc thi độ dài cung",
+      "content": "<p><strong>Dự án khám phá — Cuộc thi độ dài cung</strong> Các đường cong trong hình đều là đồ thị của các hàm liên tục <span class=\"math inline\">\\(f\\)</span> có những tính chất sau.</p>\n<p>1. <span class=\"math inline\">\\(f(0)=0\\)</span> và <span class=\"math inline\">\\(f(1)=0\\)</span>.</p>\n<p>2. <span class=\"math inline\">\\(f(x)\\ge0\\)</span> với <span class=\"math inline\">\\(0\\le x\\le1\\)</span>.</p>\n<p>3. Diện tích dưới đồ thị <span class=\"math inline\">\\(f\\)</span> từ 0 đến 1 bằng 1.</p>\n<p>Tuy nhiên, độ dài <span class=\"math inline\">\\(L\\)</span> của các đường cong này đều khác nhau.</p>\n<div class=\"center\">\n<p><img src=\"/api/data?resource=book_asset&amp;asset=stewart-8-1-7d2efba8/project.png\" alt=\"image\" /><br />\nCác đường cong lần lượt có độ dài <span class=\"math inline\">\\(L\\approx3.249\\)</span>, <span class=\"math inline\">\\(2.919\\)</span>, <span class=\"math inline\">\\(3.152\\)</span> và <span class=\"math inline\">\\(3.213\\)</span>.</p>\n</div>\n<p>Hãy tìm công thức cho hai hàm thỏa mãn các điều kiện 1, 2, 3 đã cho. (Đồ thị của bạn có thể tương tự những hình đã cho hoặc rất khác.) Sau đó tính độ dài cung của mỗi đồ thị. Bài dự thi thắng cuộc sẽ là bài có độ dài cung nhỏ nhất.</p>\n"
+    }
+  ]
+}

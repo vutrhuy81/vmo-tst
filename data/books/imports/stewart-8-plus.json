@@ -1,0 +1,15 @@
+{
+  "bookKey": "stewart-9",
+  "sectionKey": "8-plus",
+  "title": "Bài tập nâng cao",
+  "contentFormat": "html-latex",
+  "content": "\n<h1>Bài toán</h1>\n",
+  "sourceInfo": {
+    "filename": "Stewart_Ch08_Problems_Plus_VI.tex",
+    "sha256": "686e14afa3164781bdb145acd263827e42f276f8ddb47fcb21750da7bd65b993",
+    "assetCount": 6,
+    "exampleCount": 0,
+    "lastExercise": 13,
+    "note": "Nội dung từ TeX đính kèm; sáu ảnh PNG nguyên bản từ gói TeX khớp từng byte."
+  }
+}

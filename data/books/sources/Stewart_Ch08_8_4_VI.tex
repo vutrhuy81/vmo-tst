@@ -1,0 +1,159 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage{fontspec}\setmainfont{Latin Modern Roman}\setsansfont{DejaVu Sans}
+\usepackage{amsmath,amssymb,graphicx,geometry,enumitem,needspace,longtable,booktabs,fancyhdr,hyperref}
+\geometry{left=28mm,right=23mm,top=24mm,bottom=24mm}
+\hypersetup{unicode=true,colorlinks=true,linkcolor=black,urlcolor=blue,pdftitle={Giải tích §8.4 — Ứng dụng trong kinh tế học và sinh học}}
+\setlength{\parindent}{1.2em}\setlength{\parskip}{4pt}\setlength{\headheight}{16pt}
+\pagestyle{fancy}\fancyhf{}\fancyhead[L]{\small Chương 8. Các ứng dụng khác của tích phân}\fancyhead[R]{\small §8.4}\fancyfoot[C]{\thepage}
+\newcommand{\fig}[3][.68]{\begin{center}\begin{minipage}{\linewidth}\centering\includegraphics[width=#1\linewidth]{assets/#2.png}\\{\small #3}\end{minipage}\end{center}}
+\newcommand{\ex}[1]{\par\medskip\noindent\textbf{Ví dụ #1.}\ }
+\newcommand{\sol}{\par\nopagebreak[4]\noindent\textit{Lời giải.}\ }
+\newcommand{\bt}[1]{\par\smallskip\Needspace{5\baselineskip}\noindent\textbf{#1.}\ }
+\newcommand{\group}[1]{\par\Needspace{11\baselineskip}\medskip\noindent\textbf{#1}\par\nopagebreak[4]}
+\newcommand{\gint}[1]{\left[\!\left[#1\right]\!\right]}
+\allowdisplaybreaks[2]
+\DeclareMathOperator{\sech}{sech}
+\DeclareMathOperator{\csch}{csch}
+\DeclareMathOperator{\arccot}{arccot}
+
+\newcommand{\prj}[1]{\bt{#1}}
+
+\newcommand{\kn}[1]{\bt{#1}}
+\newcommand{\ds}[1]{\bt{#1}}
+\setlength{\emergencystretch}{1em}
+\widowpenalty=10000\clubpenalty=10000
+\begin{document}
+\section*{8.4 — Ứng dụng trong kinh tế học và sinh học}
+Trong mục này, ta xét một số ứng dụng của tích phân trong kinh tế học (thặng dư tiêu dùng) và sinh học (dòng máu, cung lượng tim). Các ứng dụng khác được trình bày trong phần bài tập.
+\subsection*{Thặng dư tiêu dùng}
+Nhớ lại ở Mục 4.7, hàm cầu $p(x)$ là mức giá mà một công ty có thể áp dụng để bán $x$ đơn vị hàng hóa. Thông thường, muốn bán được nhiều hơn thì phải hạ giá, nên hàm cầu là một hàm giảm. Đồ thị của một hàm cầu điển hình, gọi là đường cầu, được cho trong Hình 1. Nếu $X$ là lượng hàng hiện có thể bán được thì $P=p(X)$ là giá bán hiện tại.
+\fig[.44]{fig01}{Hình 1. Một đường cầu điển hình.}
+Ở một mức giá nhất định, một số người mua sẵn lòng trả nhiều hơn; họ được lợi vì không phải trả mức cao hơn đó. Chênh lệch giữa số tiền người tiêu dùng sẵn lòng trả và số tiền thực tế họ trả để mua một hàng hóa được gọi là \textbf{thặng dư tiêu dùng}. Bằng cách xác định tổng thặng dư tiêu dùng của tất cả người mua một hàng hóa, các nhà kinh tế có thể đánh giá lợi ích tổng thể mà một thị trường đem lại cho xã hội.
+
+Để xác định tổng thặng dư tiêu dùng, xét đường cầu và chia $[0,X]$ thành $n$ khoảng con, mỗi khoảng dài $\Delta x=X/n$; chọn $x_i^*=x_i$ là đầu mút phải của khoảng con thứ $i$, như Hình 2. Theo đường cầu, người mua sẽ mua $x_{i-1}$ đơn vị ở mức giá $p(x_{i-1})$ đô la một đơn vị. Muốn tăng lượng bán lên $x_i$ đơn vị, cần hạ giá xuống $p(x_i)$ đô la. Khi đó sẽ bán thêm $\Delta x$ đơn vị, nhưng không hơn. Nói chung, những người sẵn lòng trả $p(x_i)$ đô la đánh giá cao sản phẩm; họ sẵn lòng trả đúng giá trị mà sản phẩm có đối với họ. Vì thế, khi chỉ trả $P$ đô la, họ tiết kiệm được
+\[\text{(tiền tiết kiệm mỗi đơn vị)}\times\text{(số đơn vị)}=[p(x_i)-P]\Delta x.\]
+\fig[.44]{fig02}{Hình 2. Các hình chữ nhật biểu diễn tiền tiết kiệm của từng nhóm người mua.}
+Xét các nhóm người mua tương tự cho từng khoảng con và cộng số tiền tiết kiệm, ta được tổng
+\[\sum_{i=1}^n[p(x_i)-P]\Delta x.\]
+(Tổng này bằng tổng diện tích các hình chữ nhật trong Hình 2.) Khi $n\to\infty$, tổng Riemann tiến tới tích phân
+\[\int_{0}^{X}[p(x)-P]\,dx,\tag{1}\]
+cho tổng thặng dư tiêu dùng của hàng hóa. Đây là số tiền người tiêu dùng tiết kiệm được khi mua hàng ở giá $P$, ứng với lượng cầu $X$. Hình 3 cho cách hiểu hình học: thặng dư tiêu dùng là diện tích dưới đường cầu và phía trên đường thẳng $p=P$.
+\fig[.44]{fig03}{Hình 3. Miền tô màu biểu diễn thặng dư tiêu dùng (consumer surplus).}
+\ex{1} Hàm cầu của một sản phẩm, tính bằng đô la, là
+\[p=1200-0.2x-0.0001x^2.\]
+Tìm thặng dư tiêu dùng khi lượng bán là 500.
+\sol Vì số sản phẩm bán được là $X=500$, mức giá tương ứng là
+\[P=1200-(0.2)(500)-(0.0001)(500)^2=1075.\]
+Vì vậy, theo Định nghĩa 1, tổng thặng dư tiêu dùng là
+\[\int_{0}^{500}[p(x)-P]\,dx=\int_{0}^{500}(1200-0.2x-0.0001x^2-1075)\,dx\]
+\[=\int_{0}^{500}(125-0.2x-0.0001x^2)\,dx\]
+\[=\left[125x-0.1x^2-(0.0001)\frac{x^3}{3}\right]_{0}^{500}\]
+\[=(125)(500)-(0.1)(500)^2-\frac{(0.0001)(500)^3}{3}=33\,333.33\text{ đô la}.\]
+\subsection*{Dòng máu}
+Trong Ví dụ 3.7.7, ta đã xét định luật dòng chảy tầng:
+\[v(r)=\frac P{4\eta l}(R^2-r^2),\]
+cho vận tốc $v$ của máu chảy dọc một mạch máu bán kính $R$, dài $l$, tại vị trí cách trục tâm một khoảng $r$; ở đây $P$ là chênh lệch áp suất giữa hai đầu mạch và $\eta$ là độ nhớt của máu. Để tính tốc độ dòng máu, hay \textbf{lưu lượng} (thể tích trên một đơn vị thời gian), xét các bán kính nhỏ hơn, cách đều nhau $r_1,r_2,\ldots$. Diện tích gần đúng của vành khăn có bán kính trong $r_{i-1}$, bán kính ngoài $r_i$ là
+\[2\pi r_i\Delta r,\qquad\Delta r=r_i-r_{i-1}.\]
+\fig[.36]{fig04}{Hình 4. Vành khăn có độ dày $\Delta r$.}
+(Xem Hình 4.) Nếu $\Delta r$ nhỏ thì vận tốc gần như không đổi trên vành khăn, có thể xấp xỉ bằng $v(r_i)$. Vì vậy, thể tích máu đi qua vành khăn trong một đơn vị thời gian xấp xỉ bằng
+\[(2\pi r_i\Delta r)v(r_i)=2\pi r_iv(r_i)\Delta r,\]
+và tổng thể tích máu qua một tiết diện trong một đơn vị thời gian xấp xỉ bằng
+\[\sum_{i=1}^n2\pi r_iv(r_i)\Delta r.\]
+Hình 5 minh họa phép xấp xỉ này. Chú ý vận tốc, và do đó thể tích trên một đơn vị thời gian, tăng khi tiến về tâm mạch máu. Xấp xỉ tốt hơn khi $n$ tăng. Lấy giới hạn, ta được lưu lượng chính xác, tức thể tích máu đi qua một tiết diện trong một đơn vị thời gian:
+\fig[.43]{fig05}{Hình 5. Minh họa phép xấp xỉ lưu lượng qua các vành khăn.}
+\[F=\lim_{n\to\infty}\sum_{i=1}^n2\pi r_iv(r_i)\Delta r=\int_{0}^{R}2\pi rv(r)\,dr\]
+\[F=\int_{0}^{R}2\pi r\frac P{4\eta l}(R^2-r^2)\,dr\]
+\[F=\frac{\pi P}{2\eta l}\int_{0}^{R}(R^2r-r^3)\,dr=\frac{\pi P}{2\eta l}\left[R^2\frac{r^2}2-\frac{r^4}4\right]_{r=0}^{r=R}\]
+\[F=\frac{\pi P}{2\eta l}\left[\frac{R^4}2-\frac{R^4}4\right]=\frac{\pi PR^4}{8\eta l}.\]
+Phương trình thu được,
+\[F=\frac{\pi PR^4}{8\eta l},\tag{2}\]
+được gọi là \textbf{định luật Poiseuille}; nó cho thấy lưu lượng tỉ lệ với lũy thừa bậc bốn của bán kính mạch máu.
+\subsection*{Cung lượng tim}
+Hình 6 biểu diễn hệ tim mạch của người. Máu từ cơ thể trở về qua các tĩnh mạch, đi vào tâm nhĩ phải rồi được bơm đến phổi qua các động mạch phổi để được cung cấp ôxy. Sau đó máu trở về tâm nhĩ trái qua các tĩnh mạch phổi, rồi đi qua động mạch chủ đến các phần còn lại của cơ thể. \textbf{Cung lượng tim} là thể tích máu tim bơm trong một đơn vị thời gian, tức lưu lượng máu đi vào động mạch chủ.
+\fig[.47]{fig06}{Hình 6. Hệ tim mạch: aorta — động mạch chủ; vein — tĩnh mạch; right/left atrium — tâm nhĩ phải/trái; pulmonary arteries — động mạch phổi; pulmonary veins — tĩnh mạch phổi.}
+\textbf{Phương pháp pha loãng chất chỉ thị màu} được dùng để đo cung lượng tim. Chất chỉ thị được tiêm vào tâm nhĩ phải, đi qua tim vào động mạch chủ. Một đầu dò đặt trong động mạch chủ đo nồng độ chất chỉ thị rời tim tại các thời điểm cách đều nhau trong khoảng $[0,T]$, cho đến khi chất chỉ thị đã đi hết qua vị trí đo. Gọi $c(t)$ là nồng độ chất chỉ thị tại thời điểm $t$. Chia $[0,T]$ thành các khoảng con cùng độ dài $\Delta t$; lượng chất chỉ thị đi qua điểm đo trong khoảng từ $t=t_{i-1}$ đến $t=t_i$ xấp xỉ bằng
+\[\text{(nồng độ)}\times\text{(thể tích)}=c(t_i)(F\Delta t),\]
+trong đó $F$ là lưu lượng cần xác định. Vì vậy, tổng lượng chất chỉ thị xấp xỉ bằng
+\[\sum_{i=1}^nc(t_i)F\Delta t=F\sum_{i=1}^nc(t_i)\Delta t.\]
+Cho $n\to\infty$, ta tìm được lượng chất chỉ thị:
+\[A=F\int_{0}^{T}c(t)\,dt.\]
+Do đó cung lượng tim được cho bởi
+\[F=\frac A{\int_{0}^{T}c(t)\,dt},\tag{3}\]
+trong đó lượng chất chỉ thị $A$ đã biết, còn tích phân có thể được xấp xỉ từ các số đo nồng độ.
+\ex{2} Một liều $5\,\mathrm{mg}$ chất chỉ thị màu (gọi là một bolus, tức liều tiêm nhanh) được tiêm vào tâm nhĩ phải của một bệnh nhân. Nồng độ chất chỉ thị, tính bằng miligam trên lít, được đo trong động mạch chủ cách mỗi giây như bảng sau. Ước lượng cung lượng tim.
+\begin{center}\begin{tabular}{rrrr}\toprule
+$t$&$c(t)$&$t$&$c(t)$\\\midrule
+0&0&6&6.1\\
+1&0.4&7&4.0\\
+2&2.8&8&2.3\\
+3&6.5&9&1.1\\
+4&9.8&10&0\\
+5&8.9&&\\\bottomrule
+\end{tabular}\end{center}
+\sol Ở đây $A=5$, $\Delta t=1$, $T=10$. Dùng quy tắc Simpson để xấp xỉ tích phân của nồng độ:
+\[\int_{0}^{10}c(t)\,dt\approx\frac13[0+4(0.4)+2(2.8)+4(6.5)+2(9.8)+4(8.9)\]
+\[\hspace{2em}+2(6.1)+4(4.0)+2(2.3)+4(1.1)+0]\approx41.87.\]
+Vì vậy, Công thức 3 cho cung lượng tim là
+\[F=\frac A{\int_{0}^{10}c(t)\,dt}\approx\frac5{41.87}\approx0.12\,\mathrm{L/s}=7.2\,\mathrm{L/min}.\]
+
+\section*{8.4 — Bài tập}
+\bt{1} Hàm chi phí biên $C'(x)$ được định nghĩa là đạo hàm của hàm chi phí (xem các Mục 3.7 và 4.7). Chi phí biên khi sản xuất $x$ gallon nước cam là
+\[C'(x)=0.82-0.00003x+0.000000003x^2,\]
+tính bằng đô la trên gallon. Chi phí khởi động cố định là $C(0)=18\,000$ đô la. Dùng định lý về độ biến thiên thuần tìm chi phí sản xuất 4000 gallon nước cam đầu tiên.
+\bt{2} Một công ty ước tính doanh thu biên, tính bằng đô la trên đơn vị, khi bán $x$ đơn vị sản phẩm là $48-0.0012x$. Giả sử ước tính chính xác, tìm mức tăng doanh thu khi lượng bán tăng từ 5000 lên $10\,000$ đơn vị.
+\bt{3} Một công ty khai khoáng ước tính chi phí biên để khai thác $x$ tấn quặng đồng từ một mỏ là $0.6+0.008x$, tính bằng nghìn đô la trên tấn. Chi phí khởi động là $100\,000$ đô la. Chi phí khai thác 50 tấn đầu tiên là bao nhiêu? Còn 50 tấn tiếp theo?
+\bt{4} Hàm cầu đối với một gói du lịch là $p(x)=2000-46\sqrt{x}$. Tìm thặng dư tiêu dùng khi lượng bán là 400 gói. Minh họa bằng cách vẽ đường cầu và xác định thặng dư tiêu dùng dưới dạng một diện tích.
+\bt{5} Hàm cầu đối với lò vi sóng của một nhà sản xuất là $p(x)=870e^{-0.03x}$, trong đó $x$ tính theo nghìn chiếc. Tính thặng dư tiêu dùng khi lượng bán là $45\,000$ chiếc.
+\bt{6} Nếu đường cầu được mô hình hóa bởi $p=6-(x/3500)$, tìm thặng dư tiêu dùng khi giá bán là $2.80$ đô la.
+\bt{7} Một công ty tổ chức hòa nhạc bán trung bình 210 áo phông tại các buổi biểu diễn với giá 18 đô la mỗi áo. Công ty ước tính cứ giảm giá một đô la thì bán thêm được 30 áo. Tìm hàm cầu đối với áo phông và tính thặng dư tiêu dùng nếu áo được bán với giá 15 đô la mỗi chiếc.
+\bt{8} [Công nghệ] Một công ty mô hình hóa đường cầu của sản phẩm, tính bằng đô la, bằng phương trình
+\[p=\frac{800\,000e^{-x/5000}}{x+20\,000}.\]
+Dùng đồ thị ước lượng lượng bán khi giá là 16 đô la. Sau đó tìm gần đúng thặng dư tiêu dùng ứng với lượng bán này.
+\group{9–11 — Thặng dư sản xuất} Hàm cung $p_S(x)$ của một hàng hóa cho mối liên hệ giữa giá bán và số đơn vị mà các nhà sản xuất sẽ sản xuất ở giá đó. Giá cao hơn khiến các nhà sản xuất làm ra nhiều đơn vị hơn, nên $p_S$ là hàm tăng theo $x$. Gọi $X$ là lượng hàng đang được sản xuất, $P=p_S(X)$ là giá hiện tại. Một số nhà sản xuất sẵn lòng sản xuất và bán hàng hóa ở giá thấp hơn, nên họ đang nhận được nhiều hơn mức giá tối thiểu của mình. Phần chênh lệch đó được gọi là \textbf{thặng dư sản xuất}. Lập luận tương tự thặng dư tiêu dùng cho thấy thặng dư này được cho bởi
+\[\int_{0}^{X}[P-p_S(x)]\,dx.\]
+\bt{9} Tính thặng dư sản xuất đối với hàm cung $p_S(x)=3+0.01x^2$ tại lượng bán $X=10$. Minh họa bằng cách vẽ đường cung và xác định thặng dư sản xuất dưới dạng một diện tích.
+\bt{10} Nếu đường cung được mô hình hóa bởi $p=125+0.002x^2$, tìm thặng dư sản xuất khi giá bán là 625 đô la.
+\bt{11} [Công nghệ] Một nhà sản xuất ước tính đường cung của sản phẩm, tính bằng đô la, là
+\[p=\sqrt{30+0.01xe^{0.001x}}.\]
+Tìm gần đúng thặng dư sản xuất khi giá bán là 30 đô la.
+\bt{12} \textbf{Cân bằng thị trường.} Trong một thị trường cạnh tranh hoàn toàn, giá hàng hóa tự nhiên được điều chỉnh về mức mà lượng cầu của người tiêu dùng bằng lượng cung của nhà sản xuất; khi đó thị trường được gọi là ở trạng thái cân bằng. Các giá trị này là tọa độ giao điểm của đường cung và đường cầu.
+
+(a) Với đường cầu $p=50-\frac1{20}x$ và đường cung $p=20+\frac1{10}x$, thị trường hàng hóa cân bằng ở lượng hàng và mức giá nào?
+
+(b) Tìm thặng dư tiêu dùng và thặng dư sản xuất khi thị trường cân bằng. Minh họa bằng cách phác họa đường cung, đường cầu và xác định các thặng dư dưới dạng diện tích.
+\group{13–14 — Tổng thặng dư} Tổng của thặng dư tiêu dùng và thặng dư sản xuất được gọi là \textbf{tổng thặng dư}; đây là một chỉ số mà các nhà kinh tế dùng để đánh giá tình trạng kinh tế của một xã hội. Tổng thặng dư đạt giá trị lớn nhất khi thị trường hàng hóa ở trạng thái cân bằng.
+\bt{13} (a) Hàm cầu đối với dàn âm thanh ô tô của một công ty điện tử là $p(x)=228.4-18x$ và hàm cung là $p_S(x)=27x+57.4$, trong đó $x$ tính theo nghìn bộ. Thị trường cân bằng ở lượng hàng nào?
+
+(b) Tính tổng thặng dư lớn nhất đối với các dàn âm thanh này.
+\bt{14} Một công ty máy ảnh ước tính hàm cầu đối với mẫu máy ảnh kỹ thuật số mới là $p(x)=312e^{-0.14x}$ và hàm cung là $p_S(x)=26e^{0.2x}$, trong đó $x$ tính theo nghìn chiếc. Tính tổng thặng dư lớn nhất.
+\bt{15} Nếu lượng vốn của một công ty tại thời điểm $t$ là $f(t)$ thì đạo hàm $f'(t)$ được gọi là dòng đầu tư thuần. Giả sử dòng đầu tư thuần là $\sqrt t$ triệu đô la mỗi năm, với $t$ tính bằng năm. Tìm mức tăng vốn (sự hình thành vốn) từ năm thứ tư đến năm thứ tám.
+\bt{16} Nếu doanh thu chảy vào một công ty với tốc độ $f(t)=9000\sqrt{1+2t}$, trong đó $t$ tính bằng năm, $f(t)$ tính bằng đô la mỗi năm, tìm tổng doanh thu nhận được trong bốn năm đầu.
+\bt{17} \textbf{Giá trị tương lai của thu nhập.} Nếu thu nhập được nhận liên tục với tốc độ $f(t)$ đô la mỗi năm và được đầu tư ở lãi suất cố định $r$, ghép lãi liên tục, trong thời hạn $T$ năm thì giá trị tương lai của thu nhập là
+\[\int_{0}^{T}f(t)e^{r(T-t)}\,dt.\]
+Tính giá trị tương lai sau 6 năm của thu nhập được nhận với tốc độ $f(t)=8000e^{0.04t}$ đô la mỗi năm, đem đầu tư với lãi suất $6.2\%$.
+\bt{18} \textbf{Giá trị hiện tại của thu nhập.} Giá trị hiện tại của một dòng thu nhập là số tiền cần đầu tư ngay bây giờ để đạt cùng giá trị tương lai như mô tả ở Bài 17, được cho bởi
+\[\int_{0}^{T}f(t)e^{-rt}\,dt.\]
+Tìm giá trị hiện tại của dòng thu nhập trong Bài 17.
+\Needspace{10\baselineskip}
+\bt{19} \textbf{Định luật Pareto về thu nhập} phát biểu rằng số người có thu nhập từ $x=a$ đến $x=b$ là $N=\int_a^bAx^{-k}\,dx$, trong đó $A,k$ là các hằng số thỏa mãn $A>0$, $k>1$. Thu nhập trung bình của những người này là
+\[\bar x=\frac1N\int_a^bAx^{1-k}\,dx.\]
+Tính $\bar x$.
+\bt{20} Một mùa hè nóng ẩm khiến quần thể muỗi bùng phát tại một khu nghỉ dưỡng ven hồ. Số muỗi tăng với tốc độ ước tính $2200+10e^{0.8t}$ con mỗi tuần, trong đó $t$ tính bằng tuần. Quần thể muỗi tăng thêm bao nhiêu từ tuần thứ năm đến tuần thứ chín của mùa hè?
+\bt{21} Dùng định luật Poiseuille tính lưu lượng trong một động mạch nhỏ của người, với $\eta=0.027$, $R=0.008\,\mathrm{cm}$, $l=2\,\mathrm{cm}$ và $P=4000\,\mathrm{dyn/cm^2}$.
+\bt{22} Huyết áp cao là hệ quả của sự co hẹp động mạch. Để duy trì lưu lượng bình thường, tim phải bơm mạnh hơn, làm huyết áp tăng. Dùng định luật Poiseuille chứng minh rằng nếu $R_0,P_0$ là các giá trị bình thường của bán kính và áp suất trong một động mạch, còn $R,P$ là các giá trị khi co hẹp, thì để lưu lượng không đổi, $P,R$ liên hệ bởi
+\[\frac P{P_0}=\left(\frac{R_0}R\right)^4.\]
+Suy ra rằng nếu bán kính động mạch giảm còn ba phần tư giá trị trước đó thì áp suất tăng hơn ba lần.
+\bt{23} Một phương pháp pha loãng chất chỉ thị màu đo cung lượng tim bằng $6\,\mathrm{mg}$ chất chỉ thị. Nồng độ chất chỉ thị, tính bằng $\mathrm{mg/L}$, được mô hình hóa bởi $c(t)=20te^{-0.6t}$, $0\le t\le10$, trong đó $t$ tính bằng giây. Tìm cung lượng tim.
+\bt{24} Sau khi tiêm $5.5\,\mathrm{mg}$ chất chỉ thị màu, các số đo nồng độ, tính bằng $\mathrm{mg/L}$, cách nhau hai giây được cho trong bảng. Dùng quy tắc Simpson ước lượng cung lượng tim.
+\begin{center}\begin{tabular}{rrrr}\toprule
+$t$&$c(t)$&$t$&$c(t)$\\\midrule
+0&0.0&10&4.3\\
+2&4.1&12&2.5\\
+4&8.9&14&1.2\\
+6&8.5&16&0.2\\
+8&6.7&&\\\bottomrule
+\end{tabular}\end{center}
+\bt{25} Đồ thị hàm nồng độ $c(t)$ sau khi tiêm $7\,\mathrm{mg}$ chất chỉ thị màu vào một tâm nhĩ được cho trong hình. Dùng quy tắc Simpson ước lượng cung lượng tim.
+\fig[.65]{ex25}{Bài 25. Trục thời gian $t$ tính bằng giây (seconds), nồng độ tính bằng $\mathrm{mg/L}$.}
+
+\end{document}

@@ -1,0 +1,137 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage{fontspec}\setmainfont{Latin Modern Roman}\setsansfont{DejaVu Sans}
+\usepackage{amsmath,amssymb,graphicx,geometry,enumitem,needspace,longtable,booktabs,fancyhdr,hyperref}
+\geometry{left=28mm,right=23mm,top=24mm,bottom=24mm}
+\hypersetup{unicode=true,colorlinks=true,linkcolor=black,urlcolor=blue,pdftitle={Giải tích — Ôn tập Chương 8}}
+\setlength{\parindent}{1.2em}\setlength{\parskip}{4pt}\setlength{\headheight}{16pt}
+\pagestyle{fancy}\fancyhf{}\fancyhead[L]{\small Chương 8. Các ứng dụng khác của tích phân}\fancyhead[R]{\small Ôn tập}\fancyfoot[C]{\thepage}
+\newcommand{\fig}[3][.68]{\begin{center}\begin{minipage}{\linewidth}\centering\includegraphics[width=#1\linewidth]{assets/#2.png}\\{\small #3}\end{minipage}\end{center}}
+\newcommand{\ex}[1]{\par\medskip\noindent\textbf{Ví dụ #1.}\ }
+\newcommand{\sol}{\par\nopagebreak[4]\noindent\textit{Lời giải.}\ }
+\newcommand{\bt}[1]{\par\smallskip\Needspace{5\baselineskip}\noindent\textbf{#1.}\ }
+\newcommand{\group}[1]{\par\Needspace{11\baselineskip}\medskip\noindent\textbf{#1}\par\nopagebreak[4]}
+\newcommand{\gint}[1]{\left[\!\left[#1\right]\!\right]}
+\allowdisplaybreaks[2]
+\DeclareMathOperator{\sech}{sech}
+\DeclareMathOperator{\csch}{csch}
+\DeclareMathOperator{\arccot}{arccot}
+
+\newcommand{\prj}[1]{\bt{#1}}
+
+\newcommand{\kn}[1]{\bt{#1}}
+\newcommand{\ds}[1]{\bt{#1}}
+\setlength{\emergencystretch}{1em}
+\widowpenalty=10000\clubpenalty=10000
+\begin{document}
+\section*{Ôn tập Chương 8 — Các ứng dụng khác của tích phân}
+\subsection*{Kiểm tra khái niệm}
+\textit{Ghi chú của sách:} Đáp án phần Kiểm tra khái niệm có tại StewartCalculus.com.
+\kn{1} (a) Độ dài một đường cong được định nghĩa như thế nào?
+
+(b) Viết biểu thức tính độ dài đường cong trơn $y=f(x)$, $a\le x\le b$.
+
+(c) Nếu $x$ được cho dưới dạng hàm của $y$ thì sao?
+\kn{2} (a) Viết biểu thức tính diện tích mặt thu được khi quay đường cong $y=f(x)$, $a\le x\le b$, quanh trục $x$.
+
+(b) Nếu $x$ được cho dưới dạng hàm của $y$ thì sao?
+
+(c) Nếu quay đường cong quanh trục $y$ thì sao?
+\kn{3} Mô tả cách tìm lực thủy tĩnh tác dụng lên một bức tường thẳng đứng ngập trong chất lưu.
+\kn{4} (a) Khối tâm của một tấm mỏng có ý nghĩa vật lý gì?
+
+(b) Nếu tấm nằm giữa $y=f(x)$ và $y=0$, với $a\le x\le b$, hãy viết các biểu thức cho tọa độ khối tâm.
+\kn{5} Định lý Pappus phát biểu điều gì?
+\kn{6} Với hàm cầu $p(x)$, giải thích ý nghĩa của thặng dư tiêu dùng khi lượng hàng hiện có là $X$ và giá bán hiện tại là $P$. Minh họa bằng một hình phác họa.
+\kn{7} (a) Cung lượng tim là gì?
+
+(b) Giải thích cách đo cung lượng tim bằng phương pháp pha loãng chất chỉ thị màu.
+\kn{8} Hàm mật độ xác suất là gì? Một hàm như vậy có những tính chất nào?
+\kn{9} Giả sử $f(x)$ là hàm mật độ xác suất của cân nặng một nữ sinh viên đại học, với $x$ tính bằng pound.
+
+(a) Tích phân $\displaystyle\int_{0}^{130}f(x)\,dx$ có ý nghĩa gì?
+
+(b) Viết biểu thức cho kỳ vọng của hàm mật độ này.
+
+(c) Có thể tìm trung vị của hàm mật độ này bằng cách nào?
+\kn{10} Phân phối chuẩn là gì? Độ lệch chuẩn có ý nghĩa gì?
+\subsection*{Trắc nghiệm đúng–sai}
+Xác định mỗi khẳng định sau là đúng hay sai. Nếu đúng, giải thích vì sao. Nếu sai, giải thích hoặc đưa ra một phản ví dụ bác bỏ khẳng định.
+\ds{1} Độ dài cung của các đường cong $y=f(x)$ và $y=f(x)+c$, với $a\le x\le b$, bằng nhau.
+\ds{2} Nếu đường cong $y=f(x)$, $a\le x\le b$, nằm phía trên trục $x$ và $c>0$, thì diện tích các mặt thu được khi quay $y=f(x)$ và $y=f(x)+c$ quanh trục $x$ bằng nhau.
+\ds{3} Nếu $f(x)\le g(x)$ với $a\le x\le b$, thì độ dài cung của $y=f(x)$ trên $a\le x\le b$ nhỏ hơn hoặc bằng độ dài cung của $y=g(x)$ trên khoảng đó.
+\ds{4} Độ dài đường cong $y=x^3$, $0\le x\le1$, là
+\[L=\int_{0}^{1}\sqrt{1+x^6}\,dx.\]
+\ds{5} Nếu $f$ liên tục, $f(0)=0$ và $f(3)=4$, thì độ dài cung của đường cong $y=f(x)$ trên $0\le x\le3$ ít nhất bằng 5.
+\ds{6} Khối tâm của một tấm phẳng mỏng có khối lượng riêng đồng đều $\rho$ chỉ phụ thuộc hình dạng tấm, không phụ thuộc $\rho$.
+\ds{7} Áp suất thủy tĩnh lên một đập chỉ phụ thuộc mực nước tại đập, không phụ thuộc kích thước hồ chứa do đập tạo ra.
+\ds{8} Nếu $f$ là một hàm mật độ xác suất thì
+\[\int_{-\infty}^{\infty}f(x)\,dx=1.\]
+\subsection*{Bài tập}
+\group{1–3} Tìm độ dài đường cong.
+\bt{1} $y=4(x-1)^{3/2}$, $1\le x\le4$.
+\bt{2} $y=2\ln(\sin\tfrac12x)$, $\pi/3\le x\le\pi$.
+\bt{3} $12x=4y^3+3y^{-1}$, $1\le y\le3$.
+\bt{4} (a) Tìm độ dài đường cong
+\[y=\frac{x^4}{16}+\frac1{2x^2},\qquad1\le x\le2.\]
+(b) Tìm diện tích mặt thu được khi quay đường cong ở phần (a) quanh trục $y$.
+\bt{5} [Công nghệ] Gọi $C$ là cung của đường cong $y=2/(x+1)$ từ $(0,2)$ đến $(3,\tfrac12)$. Tìm giá trị gần đúng của mỗi đại lượng sau, chính xác đến bốn chữ số thập phân.
+
+(a) Độ dài $C$.
+
+(b) Diện tích mặt thu được khi quay $C$ quanh trục $x$.
+
+(c) Diện tích mặt thu được khi quay $C$ quanh trục $y$.
+\bt{6} (a) Đường cong $y=x^2$, $0\le x\le1$, được quay quanh trục $y$. Tìm diện tích mặt thu được.
+
+(b) Tìm diện tích mặt thu được khi quay đường cong ở phần (a) quanh trục $x$.
+\bt{7} Dùng quy tắc Simpson với $n=10$ để ước lượng độ dài đường hình sin $y=\sin x$, $0\le x\le\pi$. Làm tròn kết quả đến bốn chữ số thập phân.
+\bt{8} (a) Lập, nhưng không tính, một tích phân cho diện tích mặt thu được khi quay đường hình sin ở Bài 7 quanh trục $x$.
+
+(b) [Công nghệ] Tính tích phân đó chính xác đến bốn chữ số thập phân.
+\bt{9} Tìm độ dài đường cong
+\[y=\int_{1}^{x}\sqrt{\sqrt t-1}\,dt,\qquad1\le x\le16.\]
+\bt{10} Tìm diện tích mặt thu được khi quay đường cong trong Bài 9 quanh trục $y$.
+\bt{11} Một cửa chắn của kênh tưới có dạng hình thang, rộng $3\,\mathrm{ft}$ ở đáy, $5\,\mathrm{ft}$ ở đỉnh và cao $2\,\mathrm{ft}$. Cửa được đặt thẳng đứng trong kênh sao cho nước vừa phủ kín cửa. Tìm lực thủy tĩnh lên một phía của cửa.
+\bt{12} Một máng chứa đầy nước, các mặt đầu thẳng đứng có dạng miền parabol trong hình. Tìm lực thủy tĩnh lên một mặt đầu của máng.
+\fig[.4]{ex12}{Bài 12. Mặt đầu hình parabol rộng $8\,\mathrm{ft}$, sâu $4\,\mathrm{ft}$.}
+\group{13–14} Tìm trọng tâm hình học của miền đã cho.
+\bt{13} Miền tam giác trong hình.
+\fig[.37]{ex13}{Bài 13.}
+\bt{14} Miền giới hạn bởi đoạn thẳng và cung tròn trong hình.
+\fig[.34]{ex14}{Bài 14.}
+\group{15–16} Tìm trọng tâm hình học của miền giới hạn bởi các đường cong đã cho.
+\bt{15} $y=\tfrac12x$, $y=\sqrt x$.
+\bt{16} $y=\sin x$, $y=0$, $x=\pi/4$, $x=3\pi/4$.
+\bt{17} Tìm thể tích khối thu được khi quay hình tròn bán kính 1, tâm $(1,0)$, quanh trục $y$.
+\bt{18} Dùng định lý Pappus và thể tích khối cầu bán kính $r$ bằng $\tfrac43\pi r^3$ để tìm trọng tâm hình học của miền nửa hình tròn giới hạn bởi $y=\sqrt{r^2-x^2}$ và trục $x$.
+\bt{19} Hàm cầu của một hàng hóa là
+\[p=2000-0.1x-0.01x^2.\]
+Tìm thặng dư tiêu dùng khi lượng bán là 100.
+\bt{20} Sau khi tiêm $6\,\mathrm{mg}$ chất chỉ thị màu vào một tâm nhĩ, các số đo nồng độ cách nhau hai giây được cho trong bảng. Dùng quy tắc Simpson ước lượng cung lượng tim.
+\begin{center}\begin{tabular}{rrrr}\toprule
+$t$&$c(t)$&$t$&$c(t)$\\\midrule
+0&0&14&4.7\\
+2&1.9&16&3.3\\
+4&3.3&18&2.1\\
+6&5.1&20&1.1\\
+8&7.6&22&0.5\\
+10&7.1&24&0\\
+12&5.8&&\\\bottomrule
+\end{tabular}\end{center}
+\bt{21} (a) Giải thích tại sao hàm
+\[f(x)=\begin{cases}\frac\pi{20}\sin\frac{\pi x}{10}&\text{nếu }0\le x\le10,\\0&\text{nếu }x<0\text{ hoặc }x>10\end{cases}\]
+là một hàm mật độ xác suất.
+
+(b) Tìm $P(X<4)$.
+
+(c) Tính kỳ vọng. Giá trị có đúng như bạn dự đoán không?
+\bt{22} Thời gian mang thai ở người có phân phối chuẩn với kỳ vọng 268 ngày và độ lệch chuẩn 15 ngày. Bao nhiêu phần trăm thai kỳ kéo dài từ 250 đến 280 ngày?
+\bt{23} Thời gian chờ xếp hàng tại một ngân hàng được mô hình hóa bằng hàm mật độ mũ có kỳ vọng 8 phút.
+
+(a) Xác suất khách hàng được phục vụ trong 3 phút đầu là bao nhiêu?
+
+(b) Xác suất khách hàng phải chờ hơn 10 phút là bao nhiêu?
+
+(c) Trung vị thời gian chờ là bao nhiêu?
+
+\end{document}
